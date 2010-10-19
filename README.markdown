@@ -1,14 +1,17 @@
-Elastica: ElasticSearch PHP Client
+Elastica: elasticsearch PHP Client
 ========================
+
+# ATTENTION: THIS CLIENT IS STILL IN ALPHA STAGE AND UNDER HEAVY DEVELOPMENT => Parameters etc. can and will change
+
 PHP client for the distributed search engine [elasticsearch](http://www.elasticsearch.com/) which is 
 based on [Lucene](http://lucene.apache.org/java/docs/index.html) and can be an alternative to [solr](http://lucene.apache.org/solr/).
 
 This client is similar to [nervetattoo elasticsearch PHP client](http://github.com/nervetattoo/elasticsearch) (also a lot of ideas are borrowed from the client),
 but the naming is consistent with [Zend Framework](http://framework.zend.com/)
-and other projects frameworks. This makes it easy to use the client in combination with Zend Framework.
+and other PHP frameworks. This makes it easy to use the client in combination with Zend Framework.
 
-With this client I try to model the elasticsearch API in an object oriented way which also makes it possible to extend the client and add new types of Queries
-or transport layers.
+With this client I try to model the elasticsearch REST API in an object oriented way which also makes it possible to extend the client and add new types of queries,
+filters, facets, transport layers and more.
 
 The client uses the [REST API](http://www.elasticsearch.com/docs/elasticsearch/rest_api/) from elasticsearch and tries to
  provide a simple way of accessing the elasticsearch functionality.
@@ -22,10 +25,10 @@ Lots of basic examples can also be found in the test classes.
 
 	// Creates a new index 'xodoa' and a type 'user' inside this index
 	$client = new Elastica_Client();    
-	$index = new Elastica_Index($client, 'xodoa');
+	$index = $client->getIndex('xodoa');
 	$index->create(array(), true);
 
-	$type = new Elastica_Type($index, 'user');
+	$type = $index->getType('user');
 
 
 	// Adds 1 document to the index
@@ -59,6 +62,8 @@ Compatibility
 -------------
 At the moment the client should be backward compatible to PHP 5.2. That's the reason why 
 the client was not directly built with namespaces and other nice PHP 5.3 features.
+
+In general the client works with elasticsearch version 0.11.0 and 0.12.0. Bulk upload only works with version 0.12.0
 
 File indexing
 -------------
