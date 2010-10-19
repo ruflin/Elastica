@@ -1,7 +1,6 @@
 Elastica: elasticsearch PHP Client
-========================
+==================================
 
-# ATTENTION: THIS CLIENT IS STILL IN ALPHA STAGE AND UNDER HEAVY DEVELOPMENT => Parameters etc. can and will change
 
 PHP client for the distributed search engine [elasticsearch](http://www.elasticsearch.com/) which is 
 based on [Lucene](http://lucene.apache.org/java/docs/index.html) and can be an alternative to [solr](http://lucene.apache.org/solr/).
@@ -17,6 +16,8 @@ The client uses the [REST API](http://www.elasticsearch.com/docs/elasticsearch/r
  provide a simple way of accessing the elasticsearch functionality.
 Arguments are passed as arrays which are automatically encoded to JSON which makes it possible to also use not implemented features of the request methods.
 
+
+## ATTENTION: THIS CLIENT IS STILL IN ALPHA STAGE AND UNDER HEAVY DEVELOPMENT
 
 Examples
 --------
@@ -67,6 +68,9 @@ In general the client works with elasticsearch version 0.11.0 and 0.12.0. Bulk u
 
 File indexing
 -------------
+File upload is supported but the mapper attachement plugin has to be installed
+
+	./bin/plugin install mapper-attachments
 
 Credits
 -------
