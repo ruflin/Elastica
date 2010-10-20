@@ -24,6 +24,10 @@ class Elastica_Result
 		return $this->_hit['_type'];
 	}
 	
+	public function getIndex() {
+		return $this->_hit['_index'];
+	}
+	
 	public function getScore() {
 		return $this->_hit['_score'];		
 	}
@@ -38,66 +42,3 @@ class Elastica_Result
 		return array_key_exists($key, $source) ? $source[$key] : null; 
 	}
 }
-
-/**
-	[hits] => Array
-						   (
-							   [0] => Array
-								   (
-									   [_index] => user
-									   [_type] => user
-									   [_id] => 2
-									   [_score] => 2.3862944
-									   [_source] => Array
-										   (
-											   [id] => 2
-											   [email] => jenny693@hotmail.com
-											   [username] => jenny69
-											   [sex] => 1
-											   [match_sex] => 2
-											   [match_age_start] => 20
-											   [match_age_end] => 40
-											   [headline] => Looking for fun
-											   [country_id] => US
-											   [state_id] => US06
-											   [city_id] => 0
-											   [zip] => 94111
-											   [has_photo] => y
-											   [on_the_site_for_] => 
-											   [rating] => 3.8651
-											   [rating_count] => 481
-										   )
-
-								   )
-
-							   [1] => Array
-								   (
-									   [_index] => user
-									   [_type] => user
-									   [_id] => 22
-									   [_score] => 2.3862944
-									   [_source] => Array
-										   (
-											   [id] => 2
-											   [email] => jenny693@hotmail.com
-											   [username] => jenny69
-											   [sex] => 1
-											   [match_sex] => 2
-											   [match_age_start] => 20
-											   [match_age_end] => 40
-											   [headline] => Looking for fun
-											   [country_id] => US
-											   [state_id] => US06
-											   [city_id] => 0
-											   [zip] => 94111
-											   [has_photo] => y
-											   [on_the_site_for_] => 
-											   [rating] => 3.8651
-											   [rating_count] => 481
-										   )
-
-								   )
-
-						   )
-
-*/

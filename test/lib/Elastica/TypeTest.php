@@ -35,11 +35,12 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
     	);
     	$type->addDocuments($docs);
     	
-    	sleep(1);
+		// Needs some time to update index
+    	sleep(2);
     	
     	$resultSet = $type->search('rolf');
 
-		$this->assertEquals(1, $resultSet->count();
+		$this->assertEquals(1, $resultSet->count());
 
     }
     

@@ -24,13 +24,13 @@ class Elastica_Query_BoolTest extends PHPUnit_Framework_TestCase
     	$type->addDocument($doc);
     	
     	// Needs some time to write to index
-    	sleep(1);
+    	sleep(2);
     	
     	$boolQuery = new Elastica_Query_Bool();
     	$termQuery1 = new Elastica_Query_Term(array('test' => '2'));
     	$boolQuery->addMust($termQuery1);
     	$resultSet = $type->search($boolQuery);
-        
+
         $this->assertEquals(2, $resultSet->count());
 
     	$termQuery2 = new Elastica_Query_Term(array('test' => '5'));

@@ -22,7 +22,7 @@ class Elastica_Query_QueryStringTest extends PHPUnit_Framework_TestCase
     	$queryString = new Elastica_Query_QueryString('test*');
     	
     	// Needs some time to write to index
-    	sleep(1);
+    	sleep(2);
     	$query = new Elastica_Query();
     	$query->addQuery($queryString);
     	

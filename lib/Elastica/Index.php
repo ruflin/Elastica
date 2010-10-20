@@ -30,6 +30,10 @@ class Elastica_Index
 	 */
 	public function __construct(Elastica_Client $client, $indexName) {
 		$this->_client = $client;
+		
+		if (!is_string($indexName)) {
+			throw new Elastica_Exception('Indexname should be of type string');
+		}
 		$this->_indexName = $indexName;
 	}
 	
