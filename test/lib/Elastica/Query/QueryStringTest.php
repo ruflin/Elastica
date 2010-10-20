@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-class ElasticSearch_Query_QueryStringTest extends PHPUnit_Framework_TestCase
+class Elastica_Query_QueryStringTest extends PHPUnit_Framework_TestCase
 {
     public function setUp() {     
     }
@@ -10,20 +10,20 @@ class ElasticSearch_Query_QueryStringTest extends PHPUnit_Framework_TestCase
     }
     
     public function testSearch() {
-    	$client = new ElasticSearch_Client();    
-    	$index = new ElasticSearch_Index($client, 'test');
+    	$client = new Elastica_Client();    
+    	$index = new Elastica_Index($client, 'test');
     	$index->create(array(), true);
     	
-    	$type = new ElasticSearch_Type($index, 'helloworld');
+    	$type = new Elastica_Type($index, 'helloworld');
 
-    	$doc = new ElasticSearch_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
+    	$doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
     	$type->addDocument($doc);
     	
-    	$queryString = new ElasticSearch_Query_QueryString('test*');
+    	$queryString = new Elastica_Query_QueryString('test*');
     	
     	// Needs some time to write to index
     	sleep(1);
-    	$query = new ElasticSearch_Query();
+    	$query = new Elastica_Query();
     	$query->addQuery($queryString);
     	
     	$resultSet = $type->search($query);

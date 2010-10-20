@@ -3,7 +3,7 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class ElasticSearch_IndexTest extends PHPUnit_Framework_TestCase
+class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 {
     public function setUp() {
         
@@ -13,13 +13,13 @@ class ElasticSearch_IndexTest extends PHPUnit_Framework_TestCase
     }
     
     public function testTest() {
-    	/*$client = new ElasticSearch_Client();
+    	/*$client = new Elastica_Client();
     	    
     	$index = $client->getIndex('aaa');
     	$index->delete();
     	$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 1)));
     	
-    	$doc = new ElasticSearch_Document('user', 1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
+    	$doc = new Elastica_Document('user', 1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
     	
     	$index->addDocument($doc);
     	$index->optimize();
@@ -53,19 +53,19 @@ class ElasticSearch_IndexTest extends PHPUnit_Framework_TestCase
     	    ),
     	);
         	   
-        $client = new ElasticSearch_Client();
-        $index = new ElasticSearch_Index($client, 'content');
-        $type = new ElasticSearch_Type($index, 'content');
+        $client = new Elastica_Client();
+        $index = new Elastica_Index($client, 'content');
+        $type = new Elastica_Type($index, 'content');
         
         $index->create($indexParams, true);
         $type->setMapping($indexMapping);
 
-        $doc1 = new ElasticSearch_Document(1);
+        $doc1 = new Elastica_Document(1);
         $doc1->addFile('file', BASE_PATH . '/data/test.pdf');
         $doc1->add('text', 'basel world');
         $type->addDocument($doc1);
         
-        $doc2 = new ElasticSearch_Document(2);
+        $doc2 = new Elastica_Document(2);
         $doc2->add('text', 'running in basel');
         $type->addDocument($doc2);
         
@@ -95,19 +95,19 @@ class ElasticSearch_IndexTest extends PHPUnit_Framework_TestCase
     	    ),
     	);
         	   
-        $client = new ElasticSearch_Client();
-        $index = new ElasticSearch_Index($client, 'content');
-        $type = new ElasticSearch_Type($index, 'content');
+        $client = new Elastica_Client();
+        $index = new Elastica_Index($client, 'content');
+        $type = new Elastica_Type($index, 'content');
         
         $index->create($indexParams, true);
         $type->setMapping($indexMapping);
 
-        $doc1 = new ElasticSearch_Document(1);
+        $doc1 = new Elastica_Document(1);
         $doc1->addFile('file', BASE_PATH . '/data/test.docx');
         $doc1->add('text', 'basel world');
         $type->addDocument($doc1);
         
-        $doc2 = new ElasticSearch_Document(2);
+        $doc2 = new Elastica_Document(2);
         $doc2->add('text', 'running in basel');
         $type->addDocument($doc2);
         
