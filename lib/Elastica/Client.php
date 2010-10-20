@@ -139,7 +139,7 @@ class Elastica_Client
 	 * @return Elastica_Response Response object
 	 */
 	public function optimizeAll($args = array()) {
-		return $this->request('_optimize', Elastica_Request::PUT, $args);
+		return $this->request('_optimize', Elastica_Request::POST, $args);
 	}
 	
 	/**

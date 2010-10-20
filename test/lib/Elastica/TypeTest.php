@@ -37,7 +37,9 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
     	
     	sleep(1);
     	
-    	print_r($type->search('rolf'));
+    	$resultSet = $type->search('rolf');
+
+		$this->assertEquals(1, $resultSet->count();
 
     }
     
