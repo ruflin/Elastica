@@ -34,8 +34,8 @@ class Elastica_Query
 		$this->_filters = $filter->toArray();
 	}
 	
-	public function setFrom() {
-		$this->_form = 0;
+	public function setFrom($from) {
+		$this->_from = $from;
 	}
 	
 	/**
@@ -64,7 +64,7 @@ class Elastica_Query
 	 * @param int $limit OPTIONAL Maximal number of results for query (default = 10)
 	 */
 	public function setSize($limit = 10) {
-		$this->setLimit();
+		$this->setLimit($limit);
 	}
 	
 	/**
@@ -130,7 +130,11 @@ class Elastica_Query
 		$query = $this->_rawArguments;
 
 		$query['query'] = $this->_queries;
-		$query['size'] = $this->_limit;
+		
+		if (!empty($this->_limit)) {
+			$query['size'] = $this->_limit;
+		}
+		
 		$query['from'] = $this->_from;
 		
 		if (!empty($this->_sortArgs)) {

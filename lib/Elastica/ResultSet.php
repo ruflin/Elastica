@@ -23,6 +23,7 @@ class Elastica_ResultSet implements Iterator
 	protected function _init(Elastica_Response $response) {
 		$this->_response = $response;
 		$result = $response->getResponse();
+		$this->_totalHits = $result['hits']['total'];
 		
 		if (isset($result['hits']['hits'])) {
 			foreach ($result['hits']['hits'] as $hit) {
@@ -33,6 +34,10 @@ class Elastica_ResultSet implements Iterator
 	
 	public function getResults() {
 		return $this->_results;
+	}
+	
+	public function getTotalHits() {
+		return intval($this->_totalHits);
 	}
 	
 	public function getResponse() {

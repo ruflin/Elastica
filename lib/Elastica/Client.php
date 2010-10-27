@@ -185,7 +185,7 @@ class Elastica_Client
 		
 		// Checks if error exists
 		$errorNumber = curl_errno($conn);
-		
+
 		$response = new Elastica_Response($response);
 		
 		if (defined('DEBUG') && DEBUG) { 
