@@ -29,6 +29,7 @@ abstract class Elastica_Type_Abstract
 	protected $_type = null;
 	protected $_mapping = array();
 	protected $_indexParams = array();
+	protected $_source = true;
 	
 	/**
 	 * Creates index object with client connection
@@ -58,7 +59,7 @@ abstract class Elastica_Type_Abstract
 	 */
 	public function create($recreate = false) {
 		$this->getIndex()->create($this->_indexParams, $recreate);
-		$this->getType()->setMapping($this->_mapping);
+		$this->getType()->setMapping($this->_mapping, $this->_source);
 	}
 		
 	/**
@@ -98,7 +99,11 @@ abstract class Elastica_Type_Abstract
 	 * @return string Converted date string
 	 */
 	public function convertDate($date) {
-		$datetime = strtotime($date);
+		if (is_int($date)) {
+			$timestamp = $date;
+		} else {
+			$timestamp = strtotime($date);
+		}
 		$string =  date('Y-m-d\TH:i:s\Z', $timestamp);
 		return $string;
 	}

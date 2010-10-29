@@ -95,6 +95,10 @@ class Elastica_Index
 		// TODO: doesn't seem to work?
 		$this->request('_optimize', Elastica_Request::POST, $args);
 	}
+	
+	public function refresh($args = array()) {
+		$this->request('_refresh', Elastica_Request::POST, $args);
+	}		
 
 	/**
 	 * Creates a new index with the given arguments

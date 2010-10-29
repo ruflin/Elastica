@@ -86,6 +86,8 @@ class Elastica_Client
 	 * 
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 * @param array $docs Array of Elastica_Document
+	 * @return Elastica_Response Response object
+	 * @throws Elastica_Exception If docs is empty
 	 */
 	public function addDocuments(array $docs) {
 		
@@ -114,6 +116,45 @@ class Elastica_Client
 			$queryString .= json_encode($docArray) . PHP_EOL;
 		}
 		
+		return $this->request($path, Elastica_Request::PUT, $queryString);
+	}
+	
+	public function deleteDocuments(array $docs) {
+		// TODO: similar to delete ids but with type and index inside files
+		throw new Elastica_Exception('not implemented yet');
+	}
+	
+	
+	/**
+	 * Deletes documents with the given ids, index, type from the index
+	 * 
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
+	 * @param array $ids Document ids
+	 * @param string $index Index name
+	 * @param string $type Type of documents
+	 * @return Elastica_Response Response object
+	 * @throws Elastica_Exception If ids is empty
+	 */
+	public function deleteIds(array $ids, $index, $type) {
+		if (empty($ids)) {
+			throw new Elastica_Exception('Array has to consist of at least one id');
+		}
+		$path = '_bulk';
+		
+		$queryString = '';
+		foreach($ids as $id) {
+			$baseArray = array(
+				'delete' => array(
+					'_index' => $index,
+					'_type' => $type,
+					'_id' => $id,
+				)
+			);
+		
+			// Always newline needed
+			$queryString .= json_encode($baseArray) . PHP_EOL;
+		}
+
 		return $this->request($path, Elastica_Request::PUT, $queryString);
 	}
 	
@@ -173,7 +214,7 @@ class Elastica_Client
 			} else {
 				$content = $data;
 			}			
-			
+
 			// Escaping of / not necessary. Causes problems in base64 encoding of files
 			$content = str_replace('\/', '/', $content);
 			curl_setopt($conn, CURLOPT_POSTFIELDS, $content);

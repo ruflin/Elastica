@@ -79,7 +79,8 @@ class Elastica_Type
 	public function getCount() {
 		$path = '_count';
 		// TODO: test
-		return $this->request($path, Elastica_Request::GET, array('matchAll' => array()));
+		$response = $this->request($path, Elastica_Request::GET, array('matchAll' => array()))->getResponse();
+		return (int) $response['count'];
 	}
 
 
@@ -88,10 +89,11 @@ class Elastica_Type
 	 * 
 	 * @param array $properties Property array with all mappings
 	 */
-	public function setMapping(array $properties) {
+	public function setMapping(array $properties, $source = true) {
 		$path = '_mapping';
 		
-		$data = array($this->getType() => array('properties' => $properties));
+		$data = array($this->getType() => array('properties' => $properties, '_source' => array('enabled' => $source)));
+
 		return $this->request($path, Elastica_Request::PUT, $data);
 	}
 	
