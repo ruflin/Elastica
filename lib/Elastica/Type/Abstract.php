@@ -37,8 +37,10 @@ abstract class Elastica_Type_Abstract
 	 * Reads index and type name from protected vars _indexName and _typeName.
 	 * Has to be set in child class
 	 */
-	public function __construct() {
-		$this->_client = new Elastica_Client();
+	public function __construct(Elastica_Client $client = null) {
+		if (!$client) {
+			$client = new Elastica_Client();
+		}
 		
 		if (empty($this->_indexName)) {
 			throw new Elastica_Elastica_Exception('Index name has to be set');
@@ -48,6 +50,7 @@ abstract class Elastica_Type_Abstract
 			throw new Elastica_Elastica_Exception('Type name has to be set');
 		}
 		
+		$this->_client = $client;
 		$this->_index = new Elastica_Index($this->_client, $this->_indexName);
 		$this->_type = new Elastica_Type($this->_index, $this->_typeName);
 	}

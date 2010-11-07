@@ -96,8 +96,14 @@ class Elastica_Index
 		$this->request('_optimize', Elastica_Request::POST, $args);
 	}
 	
-	public function refresh($args = array()) {
-		$this->request('_refresh', Elastica_Request::POST, $args);
+	/**
+	 * Refreshs the index
+	 * 
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/refresh/
+	 * @return Elastica_Response Response object
+	 */
+	public function refresh() {
+		return $this->request('_refresh', Elastica_Request::POST, array());
 	}		
 
 	/**

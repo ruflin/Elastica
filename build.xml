@@ -39,35 +39,35 @@
 	<!-- Generate jdepend.xml and software metrics charts -->
 	<target name="pdepend">
 		<exec executable="pdepend">
-			<arg line="--jdepend-xml=${basedir}/build/logs/jdepend.xml ./lib" />
+			<arg line="--jdepend-xml=${basedir}/build/logs/jdepend.xml ${basedir}/lib" />
 		</exec>
 	</target>
 
 	<!-- Generate pmd.xml -->
 	<target name="phpmd">
 		<exec executable="phpmd">
-			<arg line="./lib xml codesize,unusedcode --reportfile ${basedir}/build/logs/pmd.xml" />
+			<arg line="${basedir}/lib xml codesize,unusedcode --reportfile ${basedir}/build/logs/pmd.xml" />
 		</exec>
 	</target>
 
 	<!-- Generate pmd-cpd.xml -->
 	<target name="phpcpd">
 		<exec executable="phpcpd">
-			<arg line="--log-pmd ${basedir}/build/logs/pmd-cpd.xml ./lib" />
+			<arg line="--log-pmd ${basedir}/build/logs/pmd-cpd.xml ${basedir}/lib" />
 		</exec>
 	</target>
 
 	<!-- Generate checkstyle.xml -->
 	<target name="phpcs">
 		<exec executable="phpcs" output="/dev/null">
-			<arg line="--report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml --standard=./test/CodeSniffer/Standards/Xodoa ./lib" />
+			<arg line="--report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml --standard=${basedir}/test/CodeSniffer/Standards/Xodoa ${basedir}/lib" />
 		</exec>
 	</target>
 
 	<!-- Generate API documentation -->
 	<target name="phpdoc">
 		<exec executable="phpdoc">
-			<arg line="-d ./lib -t ${basedir}/build/api" />
+			<arg line="-d ${basedir}/lib -t ${basedir}/build/api" />
 		</exec>
 	</target>
 
