@@ -39,7 +39,7 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
 		}
 		
 		$varName = '_' . $type;
-		$this->_must[] = $args;
+		$this->{$varName}[] = $args;
 	}
 	
 	public function toArray() {

@@ -21,7 +21,7 @@ class Elastica_Query
 	protected $_limit = 10;
 	protected $_sortArgs = array();
 	protected $_explain = false;
-	protected $_fileds = array();
+	protected $_fields = array();
 	protected $_scriptFields = array();
 	protected $_queries = array();
 	protected $_filters = array();

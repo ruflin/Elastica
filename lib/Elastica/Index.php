@@ -127,11 +127,29 @@ class Elastica_Index
 	
 	public function search($query) {
 		// TODO: implement
+		if ($query instanceof Elastica_Query) {
+			$query = $query->toArray();
+		} else if ($query instanceof Elastica_Query_Abstract) {
+			// Converts query object
+			$queryObject = new Elastica_Query();
+			$queryObject->addQuery($query);
+			$query = $queryObject->toArray();
+		} else if (is_string($query)) {
+			// Assumes is string query
+			$queryObject = new Elastica_Query();
+			$queryObject->addQuery(new Elastica_Query_QueryString($query));
+			$query = $queryObject->toArray();			
+		} else {
+			// TODO: Implement queries without
+			throw new Elastica_Exception('Not implemented yet');
+		}
+
 		$path = '_search';
 
 		$response = $this->request($path, Elastica_Request::GET, $query);
 		return new Elastica_ResultSet($response);
 	}
+
 		
 	/**
 	 * Returns the index name
