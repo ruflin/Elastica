@@ -10,9 +10,9 @@
  */
 class Elastica_Query_Fuzzy extends Elastica_Query_Abstract
 {
-	protected $fields = array();
+	protected $_fields = array();
 	
-	public function addField($fieldName, array $args) {
+	public function addField($fieldName, array $args) {
 		$this->_fields[$fieldName] = $args;
 	}
 	
