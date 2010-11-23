@@ -11,6 +11,7 @@
 class Elastica_Query_QueryString extends Elastica_Query_Abstract
 {
 	protected $_queryString = '';
+	protected $_defaultOperator = '';
 	
 	public function __construct($queryString) {
 		$this->setQueryString($queryString);
@@ -24,8 +25,17 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 		$this->_queryString = $queryString;
 	}
 	
+	public function setDefaultOperator($operator)
+	{
+		$this->_defaultOperator = $operator;
+	}
+	
 	public function toArray() {		   
 		$args['query'] = $this->_queryString;
+		
+		if(!empty($this->_defaultOperator))
+			$args['default_operator'] = $this->_defaultOperator;
+			
 		return array('query_string' => $args);
 	}
 	
