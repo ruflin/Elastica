@@ -34,7 +34,9 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 		$args['query'] = $this->_queryString;
 		
 		if(!empty($this->_defaultOperator))
+		{
 			$args['default_operator'] = $this->_defaultOperator;
+		}
 			
 		return array('query_string' => $args);
 	}
