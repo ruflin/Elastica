@@ -9,7 +9,9 @@
  */
 class Elastica_Filter_GoeBoundingBox extends Elastica_Filter_Abstract
 {
-	public function toArray();
+	public function toArray()
+	{
+	}
 }
 
 
