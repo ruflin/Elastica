@@ -23,11 +23,41 @@ class Elastica_Query
 	protected $_explain = false;
 	protected $_fields = array();
 	protected $_scriptFields = array();
-	protected $_queries = array();
+	protected $_query = array();
 	protected $_filters = array();
 	
+	/**
+	 * Creates a query object
+	 * 
+	 * @param array|Elastica_Query_Abstract $query OPTIONAL Query object (default = null)
+	 */
+	public function __construct($query = null) {
+		if (is_array($query)) {
+			$this->setRawQuery($query);
+		} else if ($query instanceof Elastica_Query_Abstract) {
+			$this->setQuery($query);
+		}
+	}
+	
+	/**
+	 * Adds query as raw array
+	 * 
+	 * @param array $query Query array
+	 */
+	public function setRawQuery(array $query) {
+		$this->_query = $query;
+	}
+	
+	public function setQuery(Elastica_Query_Abstract $query) {
+		$this->_query = $query->toArray();
+	}
+	
+	/**
+	 * @deprecated Use setQuery
+	 */
 	public function addQuery(Elastica_Query_Abstract $query) {
-		$this->_queries = $query->toArray();
+		trigger_error('addQuery is deprecated. Use setQuery instead');
+		$this->setQuery($query);
 	}
 	
 	public function addFilter(Elastica_Filter $filter) {
@@ -129,7 +159,7 @@ class Elastica_Query
 		
 		$query = $this->_rawArguments;
 
-		$query['query'] = $this->_queries;
+		$query['query'] = $this->_query;
 		
 		if (!empty($this->_limit)) {
 			$query['size'] = $this->_limit;

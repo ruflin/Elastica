@@ -135,13 +135,11 @@ class Elastica_Type
 			$query = $query->toArray();
 		} else if ($query instanceof Elastica_Query_Abstract) {
 			// Converts query object
-			$queryObject = new Elastica_Query();
-			$queryObject->addQuery($query);
+			$queryObject = new Elastica_Query($query);
 			$query = $queryObject->toArray();
 		} else if (is_string($query)) {
 			// Assumes is string query
-			$queryObject = new Elastica_Query();
-			$queryObject->addQuery(new Elastica_Query_QueryString($query));
+			$queryObject = new Elastica_Query(new Elastica_Query_QueryString($query));
 			$query = $queryObject->toArray();			
 		} else {
 			// TODO: Implement queries without
