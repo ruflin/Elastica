@@ -49,7 +49,7 @@ Lots of basic examples can also be found in the test classes.
 	$type->addDocuments($docs);
 
 	// Index needs a moment to be updated
-	sleep(1);
+	$index->refresh();
 
 	$resultSet = $type->search('rolf');
 

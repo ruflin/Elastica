@@ -23,8 +23,8 @@ class Elastica_Query_BoolTest extends PHPUnit_Framework_TestCase
     	$doc = new Elastica_Document(3, array('id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth', 'test' => array('2', '3', '7')));
     	$type->addDocument($doc);
     	
-    	// Needs some time to write to index
-    	sleep(2);
+    	// Refresh index
+    	$index->refresh();
     	
     	$boolQuery = new Elastica_Query_Bool();
     	$termQuery1 = new Elastica_Query_Term(array('test' => '2'));

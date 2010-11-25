@@ -40,7 +40,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
     }
     
     public function testAddPDFFile() {
-		return true;
+		$this->markTestIncomplete();
         $indexMapping = array(
         	'file' => array('type' => 'attachment'),
     		'text' => array('type' => 'string', 'store' => 'no'),
@@ -82,7 +82,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
     }
     
     public function testAddWordxFile() {
-        return true;
+        $this->markTestIncomplete();
         $indexMapping = array(
         	'file' => array('type' => 'attachment'),
     		'text' => array('type' => 'string', 'store' => 'no'),

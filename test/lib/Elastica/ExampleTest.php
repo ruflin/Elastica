@@ -37,8 +37,8 @@ class Elastica_ExampleTest extends PHPUnit_Framework_TestCase
 		);
 		$type->addDocuments($docs);
 
-		// Index needs a moment to be updated
-		sleep(1);
+		// Refresh index
+    	$index->refresh();
 
 		$resultSet = $type->search('rolf');
     }

@@ -34,13 +34,16 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
     		array('username' => 'rolf', 'test' => array('2', '3', '7'))
     	);
     	$type->addDocuments($docs);
-    	
-		// Needs some time to update index
-    	sleep(2);
+    	$index->refresh();
     	
     	$resultSet = $type->search('rolf');
-
 		$this->assertEquals(1, $resultSet->count());
+		
+		// Test if source is returned
+		$result = $resultSet->current();
+		$this->assertEquals(3, $result->getId());
+		$data = $result->getData();
+		$this->assertEquals('rolf', $data['user']['username']);
 
     }
 
@@ -75,13 +78,17 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
     	);
     	$type->addDocuments($docs);
     	
-		// Needs some time to update index
-    	sleep(2);
+		// To update index
+    	$index->refresh();
     	
     	$resultSet = $type->search('rolf');
-		print_r($resultSet);
 
 		$this->assertEquals(1, $resultSet->count());
+		
+		// Tests if no source is in response except id
+		$result = $resultSet->current();
+		$this->assertEquals(3, $result->getId());
+		$this->assertEmpty($result->getData());		
 	}
     
     public function testSearchDefault() {

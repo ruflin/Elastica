@@ -20,6 +20,11 @@ class Elastica_Result
 		return $this->_hit['_id'];
 	}
 	
+	/**
+	 * Returns results type
+	 * 
+	 * @return string Result type
+	 */
 	public function getType() {
 		return $this->_hit['_type'];
 	}
@@ -32,9 +37,19 @@ class Elastica_Result
 		return $this->_hit['_score'];		
 	}
 	
+	/**
+	 * Returns result data
+	 * 
+	 * @return array Result data array
+	 */
 	public function getData() {
 		$hit = $this->_hit;
-		return $this->_hit['_source'];
+		
+		if (isset($this->_hit['_source'])) {
+			return $this->_hit['_source'];
+		} else {
+			return array();
+		}
 	}
 	
 	public function __get($key) {

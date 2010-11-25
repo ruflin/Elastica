@@ -26,8 +26,8 @@ class Elastica_ResultTest extends PHPUnit_Framework_TestCase
     	$doc1 = new Elastica_Document($docId, array('username' => 'hans'));
     	$type->addDocument($doc1);
     	
-		// Needs some time to update index
-    	sleep(2);
+		// Refreshes index
+    	$index->refresh();
     	
     	$resultSet = $type->search('hans');
 

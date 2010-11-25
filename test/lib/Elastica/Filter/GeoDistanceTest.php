@@ -44,7 +44,7 @@ class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
 
 
     	$index->optimize();
-		sleep(1);
+    	$index->refresh();
 		
 		// Only one point should be in radius
 		$query = new Elastica_Query();

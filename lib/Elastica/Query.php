@@ -43,13 +43,22 @@ class Elastica_Query
 	 * Adds query as raw array
 	 * 
 	 * @param array $query Query array
+	 * @return Elastica_Query Query object
 	 */
 	public function setRawQuery(array $query) {
 		$this->_query = $query;
+		return $this;
 	}
 	
+	/**
+	 * Sets the query
+	 * 
+	 * @param Elastica_Query_Abstract $query Query object
+	 * @return Elastica_Query Query object
+	 */
 	public function setQuery(Elastica_Query_Abstract $query) {
 		$this->_query = $query->toArray();
+		return $this;
 	}
 	
 	/**
@@ -62,48 +71,84 @@ class Elastica_Query
 	
 	public function addFilter(Elastica_Filter $filter) {
 		$this->_filters = $filter->toArray();
+		return $this;
 	}
+	
 	
 	public function setFrom($from) {
 		$this->_from = $from;
+		return $this;
 	}
 	
 	/**
 	 * Sets sort arguments for the query
+	 * Replaces existing values
 	 * 
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/sort/
 	 * @param array $sortArgs Sorting arguments
+	 * @return Elastica_Query Query object
 	 */
 	public function setSort(array $sortArgs) {
 		$this->_sortArgs = $sortArgs;
+		return $this;
 	}
 	
+	/**
+	 * Adds a sort param to the query
+	 * 
+	 * @todo Test
+	 * @param mixed $sort Sort parameter
+	 * @return Elastica_Query Query object
+	 */
+	public function addSort($sort) {
+		$this->_sortArgs[] = $sort;
+		return $this;
+	}
+
 	/**
 	 * Sets highlight arguments for the query
 	 * 
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/highlighting/
-	 * @param array $highlightArgs
+	 * @param array $highlightArgs Set all highlight arguments
+	 * @return Elastica_Query Query object
 	 */
 	public function setHighlight(array $highlightArgs) {
 		$this->_highlightArgs = $highlightArgs;
+		return $this;
+	}
+	
+	/**
+	 * Adds a highlight argument
+	 * 
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/highlighting/
+	 * @param mixed $highlightArg Add highlight argument
+	 * @return Elastica_Query Query object
+	 */
+	public function addHighlight($highlight) {
+		$this->_highlightArgs[] = $highlight;
+		return $this;
 	}
 	
 	/**
 	 * Alias for setLimit
 	 * 
 	 * @param int $limit OPTIONAL Maximal number of results for query (default = 10)
+	 * @return Elastica_Query Query object
 	 */
 	public function setSize($limit = 10) {
-		$this->setLimit($limit);
+		return $this->setLimit($limit);
+		return $this;
 	}
 	
 	/**
 	 * Sets maximum number of results for this query
 	 * 
 	 * @param int $limit OPTIONAL Maximal number of results for query (default = 10)
+	 * @return Elastica_Query Query object
 	 */
 	public function setLimit($limit = 10) {
 		$this->_limit = $limit;
+		return $this;
 	}
 	
 	/**
@@ -114,6 +159,7 @@ class Elastica_Query
 	 */
 	public function setExplain($explain = true) {
 		$this->_explain = $explain;
+		return $this;
 	}
 	
 	/**
@@ -124,6 +170,7 @@ class Elastica_Query
 	 */
 	public function setFields(array $fields) {
 		$this->_fields = $fields;
+		return $this;
 	}
 	
 	/**
@@ -134,6 +181,7 @@ class Elastica_Query
 	 */
 	public function setScriptFields(array $scriptFields) {
 		$this->_scriptFields = $scriptFields;
+		return $this;
 	}
 	
 	/**
@@ -146,6 +194,7 @@ class Elastica_Query
 	 */
 	public function setRawArguments(array $args) {
 		$this->_rawArgumens = $args;
+		return $this;
 	}
 	
 	/**
@@ -153,6 +202,7 @@ class Elastica_Query
 	 */
 	public function setFacets(array $args) {
 		throw new Elastica_Exception('not implemented yet');
+		return $this;
 	}
 	
 	public function toArray() {
