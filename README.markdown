@@ -17,7 +17,6 @@ The client uses the [REST API](http://www.elasticsearch.com/docs/elasticsearch/r
 Arguments are passed as arrays which are automatically encoded to JSON which makes it possible to also use not implemented features of the request methods.
 
 
-## ATTENTION: THIS CLIENT IS STILL IN ALPHA STAGE AND UNDER HEAVY DEVELOPMENT
 
 Examples
 --------
