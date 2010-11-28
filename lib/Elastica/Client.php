@@ -159,6 +159,39 @@ class Elastica_Client
 	}
 	
 	/**
+	 * Bukl operation
+	 * 
+	 * Every entry in the params array has to exactly on array
+	 * of the bulk operation. An example param array would be:
+	 * 
+	 * array(
+	 * 		array('index' => array('_index' => 'test', '_type' => 'user', '_id' => '1')),
+	 * 		array('user' => array('name' => 'hans')),
+	 * 		array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '2'))
+	 * );
+	 * 
+	 * @todo Test
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
+	 * @param array $params Parameter array
+	 * @return Elastica_Response Reponse object
+	 */
+	public function bulk(array $params) {
+		if (empty($params)) {
+			throw new Elastica_Exception('Array has to consist of at least one param');
+		}
+
+		$path = '_bulk';
+		
+		$queryString = '';
+		foreach($params as $index => $baseArray) {		
+			// Always newline needed
+			$queryString .= json_encode($baseArray) . PHP_EOL;
+		}
+
+		return $this->request($path, Elastica_Request::PUT, $queryString);
+	}
+	
+	/**
 	 * Makes calls to the elasticsearch server based on this index
 	 * 
 	 * It's possible to make any REST query directly over this method

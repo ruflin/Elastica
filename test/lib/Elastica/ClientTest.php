@@ -29,6 +29,19 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(Elastica_Client::DEFAULT_PORT, $client->getPort());
 	}
 	
+	public function testBulk() {
+		$client = new Elastica_Client();
+		
+		$params = array(
+			array('index' => array('_index' => 'test', '_type' => 'user', '_id' => '1')),
+			array('user' => array('name' => 'hans')),
+			array('index' => array('_index' => 'test', '_type' => 'user', '_id' => '2')),
+			array('user' => array('name' => 'peter')),
+		);
+	
+		$client->bulk($params);
+	}
+	
 	public function testOptimizeAll() {
 		$client = new Elastica_Client();
 		$response = $client->optimizeAll();

@@ -28,6 +28,7 @@ class Elastica_ResultTest extends PHPUnit_Framework_TestCase
     	
 		// Refreshes index
     	$index->refresh();
+		sleep(2);
     	
     	$resultSet = $type->search('hans');
 
