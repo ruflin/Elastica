@@ -24,10 +24,10 @@ class Elastica_Filter_Terms extends Elastica_Filter_Abstract
 	 * Adds a term to the term query
 	 * 
 	 * @param string $key Key to query
-	 * @param string|array $value Values(s) for the query. Boost can be set with array
+	 * @param array $value Values(s) for the query. Boost can be set with array
 	 */
-	public function addTerm($key, $value) {
-		$this->_terms = array($key => $value);
+	public function addTerm($key, array $value) {
+		$this->_terms = array($key => array_values($value));
 	}
 	
 	public function toArray() {
