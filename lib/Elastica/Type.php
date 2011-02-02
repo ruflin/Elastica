@@ -1,11 +1,11 @@
 <?php
 /**
  * Elastica type object
- * 
+ *
  * elasticsearch has for every types as a substructure. This object
  * represents a type inside a context
  * The hirarchie is as following: client -> index -> type -> document
- * 
+ *
  * Search over different indices and types is not supported yet {@link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/indices_types/}
  *
  * @category Xodoa
@@ -19,7 +19,7 @@ class Elastica_Type
 	 * @var Elastica_Index Index object
 	 */
 	protected $_index = null;
-	
+
 	/**
 	 * @var string Object type
 	 */
@@ -27,7 +27,7 @@ class Elastica_Type
 
 	/**
 	 * Creates a new type object inside the given index
-	 * 
+	 *
 	 * @param Elastica_Index $index Index Object
 	 * @param string $type Type name
 	 */
@@ -38,18 +38,18 @@ class Elastica_Type
 
 	/**
 	 * Adds the given document to the search index
-	 * 
+	 *
 	 * @param Elastica_Document $doc Document with data
-	 * @return Elastica_Response 
+	 * @return Elastica_Response
 	 */
 	public function addDocument(Elastica_Document $doc) {
 		$path = $doc->getId();
 		return $this->request($path, Elastica_Request::PUT, $doc->getData());
 	}
-	
+
 	/**
 	 * Uses _bulk to send documents to the server
-	 * 
+	 *
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 * @param array $docs Array of Elastica_Document
 	 */
@@ -58,13 +58,13 @@ class Elastica_Type
 		foreach($docs as $doc) {
 			$doc->setType($this->getType());
 		}
-	   
+
 		return $this->getIndex()->addDocuments($docs);
 	}
-	
+
 	/**
 	 * Returns the type name
-	 * 
+	 *
 	 * @return string Type
 	 */
 	public function getType() {
@@ -86,35 +86,35 @@ class Elastica_Type
 
 	/**
 	 * Sets value type mapping for this type
-	 * 
+	 *
 	 * @param array $properties Property array with all mappings
 	 */
 	public function setMapping(array $properties, $source = true) {
 		$path = '_mapping';
-		
+
 		$data = array($this->getType() => array('properties' => $properties, '_source' => array('enabled' => $source)));
 
 		return $this->request($path, Elastica_Request::PUT, $data);
 	}
-	
+
 	/**
 	 * Returns current mapping for the given type
-	 * 
+	 *
 	 * @return array Current mapping
 	 */
 	public function getMapping() {
 		$path = '_mapping';
-		
+
 		$response = $this->request($path, Elastica_Request::GET);
-		return $response->getResponse();  
+		return $response->getResponse();
 	}
-	
+
 	/**
 	 * Example code
-	 * 
+	 *
 	 * TODO: Improve sample code
 	 * {
-	 *	 "from" : 0, 
+	 *	 "from" : 0,
 	 *	 "size" : 10,
 	 *	 "sort" : {
 	 *		  "postDate" : {"reverse" : true},
@@ -125,12 +125,12 @@ class Elastica_Type
 	 *		  "term" : { "user" : "kimchy" }
 	 *	  }
 	 * }
-	 * 
+	 *
 	 * @param array|Elastica_Query Array with all querie data inside or a Elastica_Query object
 	 * @return Elastica_ResultSet ResultSet with all results inside
 	 */
 	public function search($query) {
-		
+
 		if ($query instanceof Elastica_Query) {
 			$query = $query->toArray();
 		} else if ($query instanceof Elastica_Query_Abstract) {
@@ -140,12 +140,12 @@ class Elastica_Type
 		} else if (is_string($query)) {
 			// Assumes is string query
 			$queryObject = new Elastica_Query(new Elastica_Query_QueryString($query));
-			$query = $queryObject->toArray();			
+			$query = $queryObject->toArray();
 		} else {
 			// TODO: Implement queries without
-			throw new Elastica_Exception('Not implemented yet');
+			throw new Elastica_Exception_NotImplemented();
 		}
-		
+
 		$path = '_search';
 
 		$response = $this->request($path, Elastica_Request::GET, $query);
@@ -160,23 +160,23 @@ class Elastica_Type
 	public function getIndex() {
 		return $this->_index;
 	}
-	
+
 	/**
 	 * Deletes entries in the db based on a query
-	 * 
+	 *
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/delete_by_query/
 	 * @param Elastica_Query $query
 	 */
 	public function deleteByQuery(Elastica_Query $query) {
 		// TODO: To be implemented, can also be implemented on index and client level (see docs)
-		throw new Elastica_Exception('Not implemented yet');
+		throw new Elastica_Exception_NotImplemented();
 	}
-	
+
 	/**
 	 * More like this query based on the given object
-	 * 
+	 *
 	 * The id in the given object has to be set
-	 * 
+	 *
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/more_like_this/
 	 * @param EalsticSearch_Document $doc Document to query for similar objects
 	 * @param array $args OPTIONAL Additional arguments for the query
@@ -186,10 +186,10 @@ class Elastica_Type
 		$path = $doc->getId() . '/_mlt';
 		return $this->request($path, Elastica_Request::GET, $args);
 	}
-	
+
 	/**
 	 * Makes calls to the elasticsearch server based on this type
-	 * 
+	 *
 	 * @param string $path Path to call
 	 * @param string $method Rest method to use (GET, POST, DELETE, PUT)
 	 * @param array $data OPTIONAL Arguments as array

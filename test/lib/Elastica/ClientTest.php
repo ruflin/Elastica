@@ -54,7 +54,7 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 		try {
 			$client->addDocuments(array());
 			$this->fail('Should throw exception');
-		} catch(Elastica_Exception $e) {
+		} catch(Elastica_Exception_Invalid $e) {
 			$this->assertTrue(true);
 		}
 	}

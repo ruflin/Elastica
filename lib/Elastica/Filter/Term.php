@@ -10,29 +10,29 @@
  */
 class Elastica_Filter_Term extends Elastica_Filter_Abstract
 {
-	protected $_terms = array();
-	
-	public function __construct(array $terms = array()) {
-		$this->setTerms($terms);
+	protected $_term = array();
+
+	public function __construct(array $term = array()) {
+		$this->setTerm($term);
 	}
-	
-	public function setTerms(array $terms) {
-		$this->_terms = $terms;
+
+	public function setTerm(array $term) {
+		$this->_term = $term;
 	}
-	
+
 	/**
 	 * Adds a term to the term query
-	 * 
+	 *
 	 * @param string $key Key to query
 	 * @param string|array $value Values(s) for the query. Boost can be set with array
 	 */
 	public function addTerm($key, $value) {
-		$this->_terms = array($key => $value);
+		$this->_term = array($key => $value);
 	}
-	
+
 	public function toArray() {
-		$args = $this->_terms;
-		
+		$args = $this->_term;
+
 		return array('term' => $args);
 	}
 }
