@@ -108,12 +108,7 @@ class Elastica_Client
 
 			// Always newline needed
 			$queryString .= json_encode($baseArray) . PHP_EOL;
-
-			$docArray = array(
-				$doc->getType() => $doc->getData()
-			);
-
-			$queryString .= json_encode($docArray) . PHP_EOL;
+			$queryString .= json_encode($doc->getData()) . PHP_EOL;
 		}
 
 		return $this->request($path, Elastica_Request::PUT, $queryString);
