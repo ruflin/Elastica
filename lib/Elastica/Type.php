@@ -168,6 +168,9 @@ class Elastica_Type
 	 * @param int|string $id 
 	 */
 	public function deleteById($id) {
+		if (empty($id) || !trim($id)) {
+			throw new InvalidArgumentException();
+		}
 		$response = $this->request($id, Elastica_Request::DELETE);
 	}
 

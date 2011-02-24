@@ -123,5 +123,18 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
 		// rolf should no longer be there
 		$resultSet = $type->search('rolf');
 		$this->assertEquals(0, $resultSet->count());
+		
+		// it should not be possible to delete the entire type with this method
+		try { $type->deleteById(' '); } catch (Exception $e) { /* ignore */ }
+		try { $type->deleteById(null); } catch (Exception $e) { /* ignore */ }
+		try { $type->deleteById(array()); } catch (Exception $e) { /* ignore */ }
+		try { $type->deleteById('*'); } catch (Exception $e) { /* ignore */ }
+		try { $type->deleteById('*:*'); } catch (Exception $e) { /* ignore */ }
+		try { $type->deleteById('!'); } catch (Exception $e) { /* ignore */ }
+		$index->refresh();
+		
+		// rolf should no longer be there
+		$resultSet = $type->search('john');
+		$this->assertEquals(1, $resultSet->count());
 	}
 }
