@@ -43,8 +43,7 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
 		$result = $resultSet->current();
 		$this->assertEquals(3, $result->getId());
 		$data = $result->getData();
-		$this->assertEquals('rolf', $data['user']['username']);
-
+		$this->assertEquals('rolf', $data['username']);
     }
 
 	public function testNoSource() {
@@ -94,4 +93,35 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
     public function testSearchDefault() {
         
     }
+
+	public function testDeleteDocument() {
+		// Creates a new index 'xodoa' and a type 'user' inside this index
+		$client = new Elastica_Client();    
+		$index = new Elastica_Index($client, 'xodoa');
+		$index->create(array(), true);
+		$type = new Elastica_Type($index, 'user');
+		
+		// Adds hans, john and rolf to the index
+		$docs = array(
+			new Elastica_Document(1, array('username' => 'hans', 'test' => array('2', '3', '5'))),
+			new Elastica_Document(2, array('username' => 'john', 'test' => array('1', '3', '6'))),
+			new Elastica_Document(3, array('username' => 'rolf', 'test' => array('2', '3', '7'))),
+		);
+		$type->addDocuments($docs);
+		$index->refresh();
+		
+		// sanity check for rolf
+		$resultSet = $type->search('rolf');
+		$this->assertEquals(1, $resultSet->count());
+		$data = $resultSet->current()->getData();
+		$this->assertEquals('rolf', $data['username']);
+		
+		// delete rolf
+		$type->deleteById(3);
+		$index->refresh();
+		
+		// rolf should no longer be there
+		$resultSet = $type->search('rolf');
+		$this->assertEquals(0, $resultSet->count());
+	}
 }

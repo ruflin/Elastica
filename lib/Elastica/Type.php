@@ -162,9 +162,19 @@ class Elastica_Type
 	}
 
 	/**
+	 * Delete an entry by its unique identifier
+	 *
+	 * @link http://www.elasticsearch.org/guide/reference/api/delete.html
+	 * @param int|string $id 
+	 */
+	public function deleteById($id) {
+		$response = $this->request($id, Elastica_Request::DELETE);
+	}
+
+	/**
 	 * Deletes entries in the db based on a query
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/delete_by_query/
+	 * @link http://www.elasticsearch.org/guide/reference/api/delete-by-query.html
 	 * @param Elastica_Query $query
 	 */
 	public function deleteByQuery(Elastica_Query $query) {
