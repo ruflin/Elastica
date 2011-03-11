@@ -166,6 +166,55 @@ class Elastica_Index
 	public function getClient() {
 		return $this->_client;
 	}
+	
+	
+	/**
+	 * Adds an alias to the current index
+	 *
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
+	 * @param string $name Alias name
+	 * @return Elastica_Response Response
+	 */
+	public function addAlias($name) {
+		$path = '_aliases';
+
+		$data = array(
+			'actions' => array(
+				array(
+					'add' => array(
+						'index' => $this->getIndexName(),
+						'alias' => $name
+					)
+				)
+			)
+		);
+
+		return $this->getClient()->request($path, Elastica_Request::POST, $data);
+	}
+
+	/**
+	 * Removes an alias pointing to the current index
+	 *
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
+	 * @param string $name Alias name
+	 * @return Elastica_Response Response
+	 */
+	public function removeAlias($name) {
+		$path = '_aliases';
+
+		$data = array(
+			'actions' => array(
+				array(
+					'remove' => array(
+						'index' => $this->getIndexName(),
+						'alias' => $name
+					)
+				)
+			)
+		);
+
+		return $this->getClient()->request($path, Elastica_Request::POST, $data);
+	}
 
 	/**
 	 * Makes calls to the elasticsearch server based on this index

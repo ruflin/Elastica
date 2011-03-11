@@ -122,4 +122,45 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
         $resultSet = $type->search('ruflin');
         $this->assertEquals(0, $resultSet->count());
     }
+
+	public function testAddRemoveAlias() {
+		$client = new Elastica_Client();
+		
+		$indexName1 = 'test1';
+		$indexName2 = 'test2';
+		$typeName = 'test';
+
+		$index = $client->getIndex($indexName1);
+		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 1)), true);
+
+		$doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin'));
+
+		$type = $index->getType($typeName);
+		$type->addDocument($doc);
+		$index->refresh();
+
+        $resultSet = $type->search('ruflin');
+
+		$this->assertEquals(1, $resultSet->count());
+		
+		$response = $index->addAlias($indexName2)->getResponse();
+		$this->assertTrue($response['ok']);
+		
+		
+		$index2 = $client->getIndex($indexName2);
+		$type2 = $index2->getType($typeName);
+		
+		$resultSet2 = $type2->search('ruflin');
+		$this->assertEquals(1, $resultSet2->count());
+
+		$response = $index->removeAlias($indexName2)->getResponse();
+		$this->assertTrue($response['ok']);
+		
+		try {
+			$client->getIndex($indexName2)->getType($typeName)->search('ruflin');	
+			$this->fail('Should throw no index exception');
+		} catch (Elastica_Exception_Response $e) {
+			$this->assertTrue(true);
+		}
+	}
 }

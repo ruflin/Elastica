@@ -8,19 +8,5 @@
  */
 class Elastica_Admin
 {
-	/**
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/aliases/
-	 * @param array $args Args
-	 */
-	public function addAliases(array $args) {
-		throw new Elastica_Exception_NotImplemented();
-	}
 
-	/**
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/aliases/
-	 * @param array $args Args
-	 */
-	public function removeAliases(array $args) {
-		throw new Elastica_Exception_NotImplemented();
-	}
 }

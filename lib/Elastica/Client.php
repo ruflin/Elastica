@@ -271,7 +271,7 @@ class Elastica_Client
 
         if (!empty($this->_headers)) {
             $headers = array();
-            while(list($header, $headerValue) = each($this->_headers)) {
+            while (list($header, $headerValue) = each($this->_headers)) {
                 array_push($headers, $header . ': ' . $headerValue);
             }
 
