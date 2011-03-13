@@ -161,7 +161,7 @@ class Elastica_Client
 	 * @return Elastica_Status Status object
 	 */
 	public function getStatus() {
-		return new Elastica_Status($client);
+		return new Elastica_Status($this);
 	}
 
 

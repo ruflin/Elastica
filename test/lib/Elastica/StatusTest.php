@@ -82,6 +82,11 @@ class Elastica_StatusTest extends PHPUnit_Framework_TestCase
 		$index1->create(array(), true);
 
 		$status = new Elastica_Status($client);
+
+		foreach($status->getIndicesWithAlias($aliasName) as $tmpIndex) {
+			$tmpIndex->removeAlias($aliasName);
+		}
+
 		$this->assertFalse($status->aliasExists($aliasName));
 
 		$index1->addAlias($aliasName);

@@ -9,7 +9,7 @@ class Elastica_Status_IndexTest extends PHPUnit_Framework_TestCase
 
 	public function testGetAliases() {
 		$indexName = 'test';
-		$aliasName = 'test2';
+		$aliasName = 'test-alias';
 
 		$client = new Elastica_Client();
 		$index = $client->getIndex($indexName);
@@ -32,7 +32,7 @@ class Elastica_Status_IndexTest extends PHPUnit_Framework_TestCase
 
 	public function testHasAlias() {
 		$indexName = 'test';
-		$aliasName = 'test2';
+		$aliasName = 'test-alias';
 
 		$client = new Elastica_Client();
 		$index = $client->getIndex($indexName);

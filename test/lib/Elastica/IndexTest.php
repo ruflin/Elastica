@@ -127,7 +127,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 		$client = new Elastica_Client();
 
 		$indexName1 = 'test1';
-		$indexName2 = 'test2';
+		$aliasName = 'test-alias';
 		$typeName = 'test';
 
 		$index = $client->getIndex($indexName1);
@@ -143,21 +143,21 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals(1, $resultSet->count());
 
-		$response = $index->addAlias($indexName2)->getResponse();
-		$this->assertTrue($response['ok']);
+		$data = $index->addAlias($aliasName, true)->getData();
+		$this->assertTrue($data['ok']);
 
 
-		$index2 = $client->getIndex($indexName2);
+		$index2 = $client->getIndex($aliasName);
 		$type2 = $index2->getType($typeName);
 
 		$resultSet2 = $type2->search('ruflin');
 		$this->assertEquals(1, $resultSet2->count());
 
-		$response = $index->removeAlias($indexName2)->getResponse();
+		$response = $index->removeAlias($aliasName)->getData();
 		$this->assertTrue($response['ok']);
 
 		try {
-			$client->getIndex($indexName2)->getType($typeName)->search('ruflin');
+			$client->getIndex($aliasName)->getType($typeName)->search('ruflin');
 			$this->fail('Should throw no index exception');
 		} catch (Elastica_Exception_Response $e) {
 			$this->assertTrue(true);
