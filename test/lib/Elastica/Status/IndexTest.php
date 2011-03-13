@@ -31,7 +31,7 @@ class Elastica_Status_IndexTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testHasAlias() {
-				$indexName = 'test';
+		$indexName = 'test';
 		$aliasName = 'test2';
 
 		$client = new Elastica_Client();

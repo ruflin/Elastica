@@ -74,7 +74,7 @@ class Elastica_Index
 	/**
 	 * Deletes the index
 	 *
-	 * @return <type>
+	 * @return Elastica_Response Response object
 	 */
 	public function delete() {
 		$response = $this->request('', Elastica_Request::DELETE);
@@ -183,10 +183,19 @@ class Elastica_Index
 	 *
 	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
 	 * @param string $name Alias name
+	 * @param bool $replace OPTIONAL If set, an existing alias will be replaced
 	 * @return Elastica_Response Response
 	 */
-	public function addAlias($name) {
+	public function addAlias($name, $replace = false) {
 		$path = '_aliases';
+
+		if ($replace) {
+			$status = new Elastica_Status($this->getClient());
+
+			foreach ($status->getIndicesWithAlias($name) as $index) {
+				$index->removeAlias($name);
+			}
+		}
 
 		$data = array(
 			'actions' => array(

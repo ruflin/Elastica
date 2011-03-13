@@ -51,4 +51,41 @@ class Elastica_StatusTest extends PHPUnit_Framework_TestCase
 			$this->assertInternalType('string', $name);
 		}
 	}
+
+	public function testIndexExists() {
+		$indexName = 'test';
+		$aliasName = 'test-alias';
+
+		$client = new Elastica_Client();
+		$index = $client->getIndex($indexName);
+
+		try {
+			// Make sure index is deleted first
+			$index->delete();
+		} catch(Elastica_Exception_Response $e) { }
+
+		$status = new Elastica_Status($client);
+		$this->assertFalse($status->indexExists($indexName));
+		$index->create();
+
+		$status->refresh();
+		$this->assertTrue($status->indexExists($indexName));
+	}
+
+	public function testAliasExists() {
+		$indexName = 'test';
+		$aliasName = 'test-alias';
+
+		$client = new Elastica_Client();
+		$index1 = $client->getIndex($indexName);
+
+		$index1->create(array(), true);
+
+		$status = new Elastica_Status($client);
+		$this->assertFalse($status->aliasExists($aliasName));
+
+		$index1->addAlias($aliasName);
+		$status->refresh();
+		$this->assertTrue($status->aliasExists($aliasName));
+	}
 }

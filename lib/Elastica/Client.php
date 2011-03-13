@@ -155,6 +155,15 @@ class Elastica_Client
 		throw new Elastica_Exception('not implemented yet');
 	}
 
+	/**
+	 * Returns the status object for all indices
+	 *
+	 * @return Elastica_Status Status object
+	 */
+	public function getStatus() {
+		return new Elastica_Status($client);
+	}
+
 
 	/**
 	 * Deletes documents with the given ids, index, type from the index
@@ -238,7 +247,7 @@ class Elastica_Client
 	}
 
 	/**
-	 * Optimizes all search indexes
+	 * Optimizes all search indices
 	 *
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/
 	 * @return Elastica_Response Response object

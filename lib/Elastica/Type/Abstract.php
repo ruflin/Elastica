@@ -1,6 +1,6 @@
 <?php
 /**
- * Abstract helper class to implement search indexes based on models.
+ * Abstract helper class to implement search indices based on models.
  *
  * This abstract model should help creating search index and a subtype
  * with some easy config entries that are overloaded.

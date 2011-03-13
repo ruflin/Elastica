@@ -39,6 +39,15 @@ class Elastica_Status_Index
 	}
 
 	/**
+	 * Returns the client object
+	 *
+	 * @return Elastica_Client Client object
+	 */
+	public function getIndex() {
+		return new Elastica_Index($this->_client, $this->getName());
+	}
+
+	/**
 	 * Returns response object
 	 *
 	 * @return Elastica_Response Response object

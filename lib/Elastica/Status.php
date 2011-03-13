@@ -26,10 +26,20 @@ class Elastica_Status
 		$this->refresh();
 	}
 
+	/**
+	 * Returns status data
+	 *
+	 * @return array Status data
+	 */
 	public function getData() {
 		return $this->_data;
 	}
 
+	/**
+	 * Returns status objects of all indices
+	 *
+	 * @return array List of Elastica_Client_Index objects
+	 */
 	public function getIndexStatuses() {
 		$statuses = array();
 		foreach ($this->getIndexNames() as $name) {
@@ -38,6 +48,11 @@ class Elastica_Status
 		return $statuses;
 	}
 
+	/**
+	 * Returns a list of the existing index names
+	 *
+	 * @return array Index names list
+	 */
 	public function getIndexNames() {
 		$names = array();
 		foreach($this->_data['indices'] as $name => $data) {
@@ -46,6 +61,45 @@ class Elastica_Status
 		return $names;
 	}
 
+	/**
+	 * Checks if the given index exists
+	 *
+	 * @param string $name Index name to check
+	 * @return bool True if index exists
+	 */
+	public function indexExists($name) {
+		return in_array($name, $this->getIndexNames());
+	}
+
+	/**
+	 * Checks if the given alias exists
+	 *
+	 * @param string $name Alias name
+	 * @return bool True if alias exists
+	 */
+	public function aliasExists($name) {
+		foreach ($this->getIndexStatuses() as $status) {
+			if ($status->hasAlias($name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Returns an array with all indices that the given alias name points to
+	 *
+	 * @return array List of Elastica_Index
+	 */
+	public function getIndicesWithAlias($name) {
+		$indices = array();
+		foreach ($this->getIndexStatuses() as $status) {
+			if ($status->hasAlias($name)) {
+				$indices[] = $status->getIndex();
+			}
+		}
+		return $indices;
+	}
 	/**
 	 * Returns response object
 	 *
