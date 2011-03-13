@@ -8,5 +8,4 @@
  */
 class Elastica_Admin
 {
-
 }

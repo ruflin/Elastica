@@ -79,7 +79,7 @@ class Elastica_Type
 	public function getCount() {
 		$path = '_count';
 		// TODO: test
-		$response = $this->request($path, Elastica_Request::GET, array('matchAll' => array()))->getResponse();
+		$response = $this->request($path, Elastica_Request::GET, array('matchAll' => array()))->getData();
 		return (int) $response['count'];
 	}
 
@@ -106,7 +106,7 @@ class Elastica_Type
 		$path = '_mapping';
 
 		$response = $this->request($path, Elastica_Request::GET);
-		return $response->getResponse();
+		return $response->getData();
 	}
 
 	/**
@@ -165,7 +165,7 @@ class Elastica_Type
 	 * Delete an entry by its unique identifier
 	 *
 	 * @link http://www.elasticsearch.org/guide/reference/api/delete.html
-	 * @param int|string $id 
+	 * @param int|string $id
 	 */
 	public function deleteById($id) {
 		if (empty($id) || !trim($id)) {

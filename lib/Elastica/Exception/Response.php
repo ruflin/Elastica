@@ -15,6 +15,11 @@ class Elastica_Exception_Response extends Elastica_Exception_Abstract {
 		parent::__construct($response->getError());
 	}
 
+	/**
+	 * Returns reponsce object
+	 *
+	 * @return Elastica_Response Response object
+	 */
 	public function getResponse() {
 		return $this->_response;
 	}

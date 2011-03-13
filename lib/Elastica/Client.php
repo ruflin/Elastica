@@ -38,10 +38,10 @@ class Elastica_Client
 	 */
 	protected $_port = self::DEFAULT_PORT;
 
-    /**
-     * HTTP Headers
-     */
-    protected $_headers = array();
+	/**
+	 * HTTP Headers
+	 */
+	protected $_headers = array();
 
 	/**
 	 * Creates a new Elastica client
@@ -57,11 +57,11 @@ class Elastica_Client
 	/**
 	 * Returns the index for the given connection
 	 *
-	 * @param string $indexName Index name to create connection to
+	 * @param string $name Index name to create connection to
 	 * @return Elastica_Index Index for the given name
 	 */
-	public function getIndex($indexName) {
-		return new Elastica_Index($this, $indexName);
+	public function getIndex($name) {
+		return new Elastica_Index($this, $name);
 	}
 
 	/**
@@ -82,37 +82,37 @@ class Elastica_Client
 		return intval($this->_port);
 	}
 
-    /**
-     * Adds a HTTP Header
-     *
-     * @param string $header The HTTP Header
-     * @param string $headerValue The HTTP Header Value
-     * @throws Elastica_Exception_Invalid If $header or $headerValue is not a string
-     */
-    public function addHeader($header, $headerValue) {
-        if (is_string($header) && is_string($headerValue)) {
-            $this->_headers[$header] = $headerValue;
-        } else {
-            throw new Elastica_Exception_Invalid('Header must be a string');
-        }
-    }
+	/**
+	 * Adds a HTTP Header
+	 *
+	 * @param string $header The HTTP Header
+	 * @param string $headerValue The HTTP Header Value
+	 * @throws Elastica_Exception_Invalid If $header or $headerValue is not a string
+	 */
+	public function addHeader($header, $headerValue) {
+		if (is_string($header) && is_string($headerValue)) {
+			$this->_headers[$header] = $headerValue;
+		} else {
+			throw new Elastica_Exception_Invalid('Header must be a string');
+		}
+	}
 
-    /**
-     * Remove a HTTP Header
-     *
-     * @param string $header The HTTP Header to remove
-     * @throws Elastica_Exception_Invalid IF $header is not a string
-     */
-    public function removeHeader($header) {
-        if (is_string($header)) {
-            if (array_key_exists($header, $this->_headers)) {
-                unset($this->_headers[$header]);
-            }
-        } else {
-            throw new Elastica_Exception_Invalid('Header must be a string');
-        }
-    }
-                
+	/**
+	 * Remove a HTTP Header
+	 *
+	 * @param string $header The HTTP Header to remove
+	 * @throws Elastica_Exception_Invalid IF $header is not a string
+	 */
+	public function removeHeader($header) {
+		if (is_string($header)) {
+			if (array_key_exists($header, $this->_headers)) {
+				unset($this->_headers[$header]);
+			}
+		} else {
+			throw new Elastica_Exception_Invalid('Header must be a string');
+		}
+	}
+
 	/**
 	 * Uses _bulk to send documents to the server
 	 *
@@ -269,14 +269,14 @@ class Elastica_Client
 		curl_setopt($conn, CURLOPT_RETURNTRANSFER, 1) ;
 		curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $request->getMethod());
 
-        if (!empty($this->_headers)) {
-            $headers = array();
-            while (list($header, $headerValue) = each($this->_headers)) {
-                array_push($headers, $header . ': ' . $headerValue);
-            }
+		if (!empty($this->_headers)) {
+			$headers = array();
+			while (list($header, $headerValue) = each($this->_headers)) {
+				array_push($headers, $header . ': ' . $headerValue);
+			}
 
-            curl_setopt($conn, CURLOPT_HTTPHEADER, $headers);
-        }
+			curl_setopt($conn, CURLOPT_HTTPHEADER, $headers);
+		}
 
 		// TODO: REFACTOR
 		$data = $request->getData();

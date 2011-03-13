@@ -14,7 +14,7 @@ class Elastica_Index
 	/**
 	 * @var string Index name
 	 */
-	protected $_indexName = '';
+	protected $_name = '';
 
 	/**
 	 * @var Elastica_Client Client object
@@ -26,15 +26,15 @@ class Elastica_Index
 	 *
 	 * All the communication to and from an index goes of this object
 	 *
-	 * @param string $indexName Index name
+	 * @param string $name Index name
 	 */
-	public function __construct(Elastica_Client $client, $indexName) {
+	public function __construct(Elastica_Client $client, $name) {
 		$this->_client = $client;
 
-		if (!is_string($indexName)) {
-			throw new Elastica_Exception_Invalid('Indexname should be of type string');
+		if (!is_string($name)) {
+			throw new Elastica_Exception_Invalid('Index name should be of type string');
 		}
-		$this->_indexName = $indexName;
+		$this->_name = $name;
 	}
 
 	/**
@@ -54,7 +54,7 @@ class Elastica_Index
 	 * @return array Index status
 	 */
 	public function getStatus() {
-		return $this->request('_status', Elastica_Request::GET);
+		return new Elastica_Status_Index($this->getName(), $this->_client);
 	}
 
 	/**
@@ -65,7 +65,7 @@ class Elastica_Index
 	 */
 	public function addDocuments(array $docs) {
 		foreach ($docs as $doc) {
-			$doc->setIndex($this->getIndexName());
+			$doc->setIndex($this->getName());
 		}
 
 		return $this->getClient()->addDocuments($docs);
@@ -152,10 +152,20 @@ class Elastica_Index
 	/**
 	 * Returns the index name
 	 *
+	 * @deprecated Use getName
 	 * @return string Index name
 	 */
 	public function getIndexName() {
-		return $this->_indexName;
+		return $this->getName();
+	}
+
+	/**
+	 * Returns the index name
+	 *
+	 * @return string Index name
+	 */
+	public function getName() {
+		return $this->_name;
 	}
 
 	/**
@@ -166,8 +176,8 @@ class Elastica_Index
 	public function getClient() {
 		return $this->_client;
 	}
-	
-	
+
+
 	/**
 	 * Adds an alias to the current index
 	 *
@@ -182,7 +192,7 @@ class Elastica_Index
 			'actions' => array(
 				array(
 					'add' => array(
-						'index' => $this->getIndexName(),
+						'index' => $this->getName(),
 						'alias' => $name
 					)
 				)
@@ -206,7 +216,7 @@ class Elastica_Index
 			'actions' => array(
 				array(
 					'remove' => array(
-						'index' => $this->getIndexName(),
+						'index' => $this->getName(),
 						'alias' => $name
 					)
 				)
@@ -225,7 +235,7 @@ class Elastica_Index
 	 * @return Elastica_Response Response object
 	 */
 	public function request($path, $method, $data = array()) {
-		$path = $this->getIndexName() . '/' . $path;
+		$path = $this->getName() . '/' . $path;
 		return $this->getClient()->request($path, $method, $data);
 	}
 }

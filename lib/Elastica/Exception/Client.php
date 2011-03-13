@@ -11,24 +11,24 @@ class Elastica_Exception_Client extends Elastica_Exception_Abstract {
 	protected $_error = 0;
 	protected $_request = null;
 	protected $_response = null;
-	
+
 	public function __construct($error, Elastica_Request $request = null, Elastica_Response $response = null) {
 		$this->_error = $error;
 		$this->_request = $request;
 		$this->_response = $response;
-		
+
 		$message = $this->getErrorMessage($this->getError());
 		parent::__construct($message);
 	}
-	
+
 	/**
 	 * Returns the error message corresponding to the error code
 	 * cUrl error code reference can be found here {@link http://curl.haxx.se/libcurl/c/libcurl-errors.html}
-	 * 
+	 *
 	 * @return string Error message
 	 */
 	public function getErrorMessage($error) {
-		
+
 		switch ($error) {
 			case CURLE_UNSUPPORTED_PROTOCOL:
 				$error = "Unsupported protocol";
@@ -55,18 +55,28 @@ class Elastica_Exception_Client extends Elastica_Exception_Abstract {
 				$error = "Unknown error:" . $error;
 				break;
 		}
-		
+
 		return $error;
 	}
-	
+
 	public function getError() {
 		return $this->_error;
 	}
-	
+
+	/**
+	 * Returns request object
+	 *
+	 * @return Elastica_Request Request object
+	 */
 	public function getRequest() {
 		return $this->_request;
 	}
-	
+
+	/**
+	 * Returns response object
+	 *
+	 * @return Elastica_Response Response object
+	 */
 	public function getResponse() {
 		return $this->_response;
 	}
