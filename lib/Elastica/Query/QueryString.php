@@ -12,6 +12,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 {
 	protected $_queryString = '';
 	protected $_defaultOperator = '';
+	protected $_defaultField = '';
 
 	/**
 	 * Creates query string object. Calls setQuery with argument
@@ -51,6 +52,19 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Sets the default field
+	 * 
+	 * If no field is set, _all is chosen
+	 * 
+	 * @param string $field Field
+	 * @return Elastica_Query_QueryString Current object
+	 */
+	public function setDefaultField($field) {
+		$this->_defaultField = $field;
+		return $this;
+	}
+
+	/**
 	 * Converts the query string object to an array
 	 * 
 	 * @return array Query string array
@@ -60,6 +74,10 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 
 		if(!empty($this->_defaultOperator)) {
 			$args['default_operator'] = $this->_defaultOperator;
+		}
+
+		if(!empty($this->_defaultField)) {
+			$args['default_field'] = $this->_defaultField;
 		}
 
 		return array('query_string' => $args);
