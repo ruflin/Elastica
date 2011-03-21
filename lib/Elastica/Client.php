@@ -164,6 +164,14 @@ class Elastica_Client
 		return new Elastica_Status($this);
 	}
 
+	/**
+	 * Returns the current cluster
+	 *
+	 * @return Elastica_Cluster Cluster object
+	 */
+	public function getCluster() {
+		return new Elastica_Cluster($this);
+	}
 
 	/**
 	 * Deletes documents with the given ids, index, type from the index

@@ -24,7 +24,9 @@ class Elastica_Query_QueryStringTest extends PHPUnit_Framework_TestCase
 		// Refresh index
 		$index->refresh();
 
-		sleep(2);
+		sleep(5);
+
+		$index->refresh();
 
 		$resultSet = $type->search($queryString);
 

@@ -15,9 +15,8 @@ class Elastica_Status_Index
 
 	protected $_name = '';
 
-	public function __construct($name, Elastica_Client $client) {
-		$this->_name = $name;
-		$this->_client = $client;
+	public function __construct(Elastica_Index $index) {
+		$this->_index = $index;
 		$this->refresh();
 	}
 
@@ -26,7 +25,7 @@ class Elastica_Status_Index
 	}
 
 	public function getName() {
-		return $this->_name;
+		return $this->getIndex()->getName();
 	}
 
 	public function getAliases() {
@@ -39,12 +38,12 @@ class Elastica_Status_Index
 	}
 
 	/**
-	 * Returns the client object
+	 * Returns the index object
 	 *
-	 * @return Elastica_Client Client object
+	 * @return Elastica_Index Index object
 	 */
 	public function getIndex() {
-		return new Elastica_Index($this->_client, $this->getName());
+		return $this->_index;
 	}
 
 	/**
@@ -63,7 +62,7 @@ class Elastica_Status_Index
 	 */
 	public function refresh() {
 		$path = $this->getName()  . '/_status';
-		$this->_response = $this->_client->request($path, Elastica_Request::GET);
+		$this->_response = $this->getIndex()->getClient()->request($path, Elastica_Request::GET);
 		$this->_data = $this->getResponse()->getData();
 	}
 }

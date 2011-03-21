@@ -54,7 +54,7 @@ class Elastica_Index
 	 * @return array Index status
 	 */
 	public function getStatus() {
-		return new Elastica_Status_Index($this->getName(), $this->_client);
+		return new Elastica_Status_Index($this);
 	}
 
 	/**

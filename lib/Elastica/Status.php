@@ -43,7 +43,8 @@ class Elastica_Status
 	public function getIndexStatuses() {
 		$statuses = array();
 		foreach ($this->getIndexNames() as $name) {
-			$statuses[] = new Elastica_Status_Index($name, $this->_client);
+			$index = new Elastica_Index($this->_client, $name);
+			$statuses[] = new Elastica_Status_Index($index);
 		}
 		return $statuses;
 	}
