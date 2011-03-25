@@ -51,8 +51,23 @@ class Elastica_Index_Settings
 
 		$data = array('number_of_replicas' => $replicas);
 
-		return $this->request($data);
+		return $this->request($data, Elastica_Request::PUT);
 	}
+
+	/**
+	 * Sets the number of shards
+	 *
+	 * @param int $shards Number of shards
+	 * @return Elastica_Response Response object
+	 */
+	public function setNumberOfShards($shards) {
+		$shards = (int) $shards;
+
+		$data = array('number_of_shards' => $shards);
+
+		return $this->request($data, Elastica_Request::PUT);
+	}
+
 
 	/**
 	 * Sets the index refresh interval in seconds
@@ -63,7 +78,7 @@ class Elastica_Index_Settings
 	public function setRefreshInterval($seconds) {
 		$seconds = (int) $seconds;
 		$data = array('refresh_interval' => $seconds . 's');
-		return $this->request($data);
+		return $this->request($data, Elastica_Request::PUT);
 	}
 
 	/**
@@ -90,11 +105,10 @@ class Elastica_Index_Settings
 	 *
 	 * @return Elastica_Response Response object
 	 */
-	public function request(array $data = array()) {
+	public function request(array $data = array(), $method = Elastica_Request::GET) {
 		$path = '_settings';
 
 		$data = array('index' => $data);
-		$this->_response = $this->getIndex()->request($path, Elastica_Request::GET);
-		return $this->getResponse();
+		return $this->getIndex()->request($path, $method, $data);
 	}
 }
