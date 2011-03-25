@@ -50,6 +50,19 @@ class Elastica_Result
 		}
 	}
 	
+	/**
+	 * Returns result data
+	 * 
+	 * @return array Result data array
+	 */
+	public function getHighlights() {
+		if (isset($this->_hit['highlight'])) {
+			return $this->_hit['highlight'];
+		} else {
+			return array();
+		}
+	}
+	
 	public function __get($key) {
 		$source = $this->getData();
 		return array_key_exists($key, $source) ? $source[$key] : null; 
