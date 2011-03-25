@@ -38,11 +38,31 @@ class Elastica_Result
 	}
 	
 	/**
+	 * Returns the raw hit array
+	 * 
+	 * @return array Hit array
+	 */
+	public function getHit() {
+		return $this->_hit;
+	}
+	
+	/**
 	 * Returns result data
+	 * 
+	 * Alias for getSource
 	 * 
 	 * @return array Result data array
 	 */
 	public function getData() {
+		return $this->getSource();
+	}
+	
+	/**
+	 * Returns the result source
+	 * 
+	 * @return array Source data array
+	 */
+	public function getSource() {
 		if (isset($this->_hit['_source'])) {
 			return $this->_hit['_source'];
 		} else {
