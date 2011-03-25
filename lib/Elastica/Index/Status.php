@@ -7,7 +7,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Status_Index
+class Elastica_Index_Status
 {
 	protected $_response = null;
 
@@ -28,9 +28,34 @@ class Elastica_Status_Index
 		return $this->getIndex()->getName();
 	}
 
-	public function getAliases() {
+	/**
+	 * Returns the entry in the data array based on the params.
+	 * Various params possible.
+	 *
+	 * @return mixed Data array entry or null if not found
+	 */
+	public function get() {
+
 		$data = $this->getData();
-		return $data['indices'][$this->getName()]['aliases'];
+		$data = $data['indices'][$this->getName()];
+
+		foreach (func_get_args() as $arg) {
+			if (isset($data[$arg])) {
+				$data = $data[$arg];
+			} else {
+				return null;
+			}
+		}
+
+		return $data;
+	}
+
+	public function getAliases() {
+		return $this->get('aliases');
+	}
+
+	public function getSettings() {
+		return $this->get('settings');
 	}
 
 	public function hasAlias($name) {
@@ -56,13 +81,11 @@ class Elastica_Status_Index
 	}
 
 	/**
-	 * Reloads all status data
-	 *
-	 * @return Elastica_Response Response object
+	 * Reloads all status data of this object
 	 */
 	public function refresh() {
-		$path = $this->getName()  . '/_status';
-		$this->_response = $this->getIndex()->getClient()->request($path, Elastica_Request::GET);
+		$path = '_status';
+		$this->_response = $this->getIndex()->request($path, Elastica_Request::GET);
 		$this->_data = $this->getResponse()->getData();
 	}
 }

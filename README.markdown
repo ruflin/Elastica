@@ -16,7 +16,9 @@ The client uses the [REST API](http://www.elasticsearch.com/docs/elasticsearch/r
  provide a simple way of accessing the elasticsearch functionality.
 Arguments are passed as arrays which are automatically encoded to JSON which makes it possible to also use not implemented features of the request methods.
 
-
+Changes
+-------
+For changes in the API please check the file [changes.txt](https://github.com/ruflin/Elastica/blob/master/changes.txt)
 
 Examples
 --------
@@ -52,8 +54,6 @@ Lots of basic examples can also be found in the test classes.
 
 	$resultSet = $type->search('rolf');
 
-
-The client is still under heavy development. Feedback is appreciated.
 
 The basic object structure is as following:
 Client -> Index -> Type -> Document

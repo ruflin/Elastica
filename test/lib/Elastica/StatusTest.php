@@ -31,7 +31,7 @@ class Elastica_StatusTest extends PHPUnit_Framework_TestCase
 		$this->assertInternalType('array', $statuses);
 
 		foreach($statuses as $indexStatus) {
-			$this->assertInstanceOf('Elastica_Status_Index', $indexStatus);
+			$this->assertInstanceOf('Elastica_Index_Status', $indexStatus);
 		}
 	}
 

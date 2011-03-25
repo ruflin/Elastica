@@ -54,7 +54,16 @@ class Elastica_Index
 	 * @return array Index status
 	 */
 	public function getStatus() {
-		return new Elastica_Status_Index($this);
+		return new Elastica_Index_Status($this);
+	}
+
+	/**
+	 * Returns the index settings object
+	 *
+	 * @return Elastica_Index_Settings Settings object
+	 */
+	public function getSettings() {
+		return new Elastica_Index_Settings($this);
 	}
 
 	/**
@@ -233,6 +242,18 @@ class Elastica_Index
 		);
 
 		return $this->getClient()->request($path, Elastica_Request::POST, $data);
+	}
+
+	/**
+	 * Can be used to change settings during runtime. One example is to use
+	 * if for bulk updating {@link http://www.elasticsearch.org/blog/2011/03/23/update-settings.html}
+	 *
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
+	 * @param array $data Data array
+	 * @return Elastica_Response Response object
+	 */
+	public function setSettings(array $data) {
+		return $this->request('_settings', Elastica_Request::PUT, $data);
 	}
 
 	/**

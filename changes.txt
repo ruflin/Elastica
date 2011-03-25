@@ -1,5 +1,9 @@
 CHANGES
 
+2011-03-24
+- Renaming of Elastica_Status_Index to Elastica_Index_Status => API Change!
+- IndexSettings added for improved bulk updating http://www.elasticsearch.org/blog/2011/03/23/update-settings.html
+
 2011-03-21
 - Node object added
 - Node_Info and Node_Stats added

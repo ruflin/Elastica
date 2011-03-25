@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-class Elastica_Status_IndexTest extends PHPUnit_Framework_TestCase
+class Elastica_Index_StatusTest extends PHPUnit_Framework_TestCase
 {
 	public function setUp() { }
 
@@ -15,7 +15,7 @@ class Elastica_Status_IndexTest extends PHPUnit_Framework_TestCase
 		$index = $client->getIndex($indexName);
 		$index->create(array(), true);
 
-		$status = new Elastica_Status_Index($index);
+		$status = new Elastica_Index_Status($index);
 
 		$aliases = $status->getAliases();
 
@@ -38,7 +38,7 @@ class Elastica_Status_IndexTest extends PHPUnit_Framework_TestCase
 		$index = $client->getIndex($indexName);
 		$index->create(array(), true);
 
-		$status = new Elastica_Status_Index($index);
+		$status = new Elastica_Index_Status($index);
 
 		$this->assertFalse($status->hasAlias($aliasName));
 
@@ -46,5 +46,18 @@ class Elastica_Status_IndexTest extends PHPUnit_Framework_TestCase
 		$status->refresh();
 
 		$this->assertTrue($status->hasAlias($aliasName));
+	}
+
+	public function testGetSettings() {
+		$indexName = 'test';
+
+		$client = new Elastica_Client();
+		$index = $client->getIndex($indexName);
+		$index->create(array(), true);
+		$status = $index->getStatus();
+
+		$settings = $status->getSettings();
+		$this->assertInternalType('array', $settings);
+		$this->assertTrue(isset($settings['index.number_of_shards']));
 	}
 }
