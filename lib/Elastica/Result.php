@@ -43,8 +43,6 @@ class Elastica_Result
 	 * @return array Result data array
 	 */
 	public function getData() {
-		$hit = $this->_hit;
-		
 		if (isset($this->_hit['_source'])) {
 			return $this->_hit['_source'];
 		} else {
