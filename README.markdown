@@ -16,6 +16,12 @@ The client uses the [REST API](http://www.elasticsearch.com/docs/elasticsearch/r
  provide a simple way of accessing the elasticsearch functionality.
 Arguments are passed as arrays which are automatically encoded to JSON which makes it possible to also use not implemented features of the request methods.
 
+Support / Bug Reports
+---------------------
+For all support questions please use the [Elastica google group](https://groups.google.com/group/elastica-php-client).
+
+For But reports and issues please use the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
+
 Changes
 -------
 For changes in the API please check the file [changes.txt](https://github.com/ruflin/Elastica/blob/master/changes.txt)
