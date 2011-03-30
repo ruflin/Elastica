@@ -1,4 +1,8 @@
 CHANGES
+
+2011-03-31
+- Deprecated code removed
+
 2011-03-30
 - Filtered query introduced
 - setRawArguments in Elastica_Query is now setParam

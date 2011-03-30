@@ -32,13 +32,6 @@ class Elastica_Response {
 		return false;
 	}
 
-	/**
-	 * @deprecated Use getData
-	 */
-	public function getResponse() {
-		return $this->getData();
-	}
-
 	public function getData() {
 
 		$response = $this->_responseString;
