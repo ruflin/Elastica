@@ -28,7 +28,7 @@ class Elastica_Query_Wildcard extends Elastica_Query_Abstract
 	 */
 	public function toArray() {		 
 		return array('wildcard' => array(
-			$key => array(
+			$this->_key => array(
 				'value' => $this->_value,
 				'boost' => $this->_boost)
 			)
