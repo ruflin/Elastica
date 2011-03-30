@@ -28,7 +28,9 @@ class Elastica_Index_Settings
 	 * @return array|string|null Settings data
 	 */
 	public function get($setting = '') {
-		$settings = $this->_index->getStatus()->getSettings();
+
+		$data = $this->request()->getData();
+		$settings = $data[$this->_index->getName()]['settings'];
 
 		if (!empty($setting)) {
 			if (isset($settings[$setting])) {
@@ -70,14 +72,16 @@ class Elastica_Index_Settings
 
 
 	/**
-	 * Sets the index refresh interval in seconds
+	 * Sets the index refresh interval
 	 *
-	 * @param int $seconds Number of seconds
+	 * Value can be for example 3s for 3 seconds or
+	 * 5m for 5 minutes. -1 refreshing is disabled.
+	 *
+	 * @param int $interval Number of seconds
 	 * @return Elastica_Response Response object
 	 */
-	public function setRefreshInterval($seconds) {
-		$seconds = (int) $seconds;
-		$data = array('refresh_interval' => $seconds . 's');
+	public function setRefreshInterval($interval) {
+		$data = array('refresh_interval' => $interval);
 		return $this->request($data, Elastica_Request::PUT);
 	}
 
