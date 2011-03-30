@@ -10,7 +10,6 @@
  */
 class Elastica_Index
 {
-
 	/**
 	 * @var string Index name
 	 */
@@ -157,6 +156,25 @@ class Elastica_Index
 		return new Elastica_ResultSet($response);
 	}
 
+	/**
+	 * Opens an index
+	 *
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html
+	 * @return Elastica_Response Response object
+	 */
+	public function open() {
+		$this->request('_open', Elastica_Request::POST);
+	}
+
+	/**
+	 * Closes the index
+	 *
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html
+	 * @return Elastica_Response Response object
+	 */
+	public function close() {
+		return $this->request('_close', Elastica_Request::POST);
+	}
 
 	/**
 	 * Returns the index name

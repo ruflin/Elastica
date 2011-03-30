@@ -44,6 +44,7 @@ class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 	}
 
 	public function toArray() {
-		return array('terms' => $this->_params);
+		parent::setParam('terms', $this->_params);
+		return $this->_query;
 	}
 }

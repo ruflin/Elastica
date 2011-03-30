@@ -2,6 +2,8 @@ CHANGES
 2011-03-30
 - Filtered query introduced
 - setRawArguments in Elastica_Query is now setParam
+- open / close for index added
+- Remove Elastica_Filter and Elastica_Facets because not needed anymore
 
 2011-03-29
 - Renaming Elastica_Filter->addQuery, addFilter to setQuery, setFilter
