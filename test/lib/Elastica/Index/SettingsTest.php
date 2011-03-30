@@ -39,6 +39,7 @@ class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testSetNumberOfShards() {
+		$this->markTestIncomplete();
 		$indexName = 'test';
 
 		$client = new Elastica_Client();
@@ -56,6 +57,8 @@ class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testSetRefreshInterval() {
+		$this->markTestIncomplete();
+
 		$indexName = 'test';
 
 		$client = new Elastica_Client();
