@@ -39,7 +39,6 @@ class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testSetNumberOfShards() {
-		$this->markTestIncomplete();
 		$indexName = 'test';
 
 		$client = new Elastica_Client();
@@ -57,17 +56,21 @@ class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testSetRefreshInterval() {
-		$this->markTestIncomplete();
-
 		$indexName = 'test';
 
 		$client = new Elastica_Client();
 		$index = $client->getIndex($indexName);
 		$index->create(array(), true);
+
+
 		$settings = $index->getSettings();
 
-		$settings->setRefreshInterval(2);
+		$settings->setRefreshInterval('2s');
 		$index->refresh();
-		print_r($settings->get());
+		$this->assertEquals('2s', $settings->get('index.refresh_interval'));
+
+		$settings->setRefreshInterval('5s');
+		$index->refresh();
+		$this->assertEquals('5s', $settings->get('index.refresh_interval'));
 	}
 }

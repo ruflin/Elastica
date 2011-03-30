@@ -33,4 +33,11 @@ class Elastica_ClusterTest extends PHPUnit_Framework_TestCase
 
 		$this->assertGreaterThan(0, count($nodes));
 	}
+
+	public function testGetState() {
+		$client = new Elastica_Client();
+		$cluster = $client->getCluster();
+		$state = $cluster->getState();
+		$this->assertInternalType('array', $state);
+	}
 }

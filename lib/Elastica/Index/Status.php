@@ -51,11 +51,17 @@ class Elastica_Index_Status
 	}
 
 	public function getAliases() {
-		return $this->get('aliases');
+		// TODO Update as soon as new API is implmented
+		$cluster = new Elastica_Cluster($this->_index->getClient());
+		$state = $cluster->getState();
+		return $state['metadata']['indices'][$this->_index->getName()]['aliases'];
 	}
 
 	public function getSettings() {
-		return $this->get('settings');
+		// TODO Update as soon as new API is implmented
+		$cluster = new Elastica_Cluster($this->_index->getClient());
+		$state = $cluster->getState();
+		return $state['metadata']['indices'][$this->_index->getName()]['settings'];
 	}
 
 	public function hasAlias($name) {
