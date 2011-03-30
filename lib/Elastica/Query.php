@@ -11,20 +11,7 @@
  */
 class Elastica_Query
 {
-	const TERM = 'term';
-	const RANGE = 'range';
-	const WILDCARD = 'wildcard';
-	const QUERY_STRING = 'query_string';
-
-	protected $_rawArguments = array();
-	protected $_from = 0;
-	protected $_limit = 10;
-	protected $_sortArgs = array();
-	protected $_explain = false;
-	protected $_fields = array();
-	protected $_scriptFields = array();
 	protected $_query = array();
-	protected $_filters = array();
 
 	/**
 	 * Creates a query object
@@ -40,7 +27,7 @@ class Elastica_Query
 	}
 
 	/**
-	 * Adds query as raw array
+	 * Sets query as raw array. Will overwrite all already set arguments
 	 *
 	 * @param array $query Query array
 	 * @return Elastica_Query Query object
@@ -51,14 +38,24 @@ class Elastica_Query
 	}
 
 	/**
+	 * Sets a single param for the query
+	 *
+	 * @param string $key Key to set
+	 * @param mixed $value Value
+	 */
+	public function setParam($key, $value) {
+		$this->_query[$key] = $value;
+		return $this;
+	}
+
+	/**
 	 * Sets the query
 	 *
 	 * @param Elastica_Query_Abstract $query Query object
 	 * @return Elastica_Query Query object
 	 */
 	public function setQuery(Elastica_Query_Abstract $query) {
-		$this->_query = $query->toArray();
-		return $this;
+		return $this->setParam('query', $query->toArray());
 	}
 
 	/**
@@ -69,15 +66,16 @@ class Elastica_Query
 		$this->setQuery($query);
 	}
 
-	public function addFilter(Elastica_Filter $filter) {
-		$this->_filters = $filter->toArray();
-		return $this;
+	/**
+	 * @param Elastica_Filter $filter Filter object
+	 * @return Elastica_Query Current object
+	 */
+	public function setFilter(Elastica_Filter_Abstract $filter) {
+		return $this->setParam('filter', $filter->toArray());
 	}
 
-
 	public function setFrom($from) {
-		$this->_from = $from;
-		return $this;
+		return $this->setParam('from', $from);
 	}
 
 	/**
@@ -89,8 +87,7 @@ class Elastica_Query
 	 * @return Elastica_Query Query object
 	 */
 	public function setSort(array $sortArgs) {
-		$this->_sortArgs = $sortArgs;
-		return $this;
+		return $this->setParam('sort', $sortArgs);
 	}
 
 	/**
@@ -101,7 +98,7 @@ class Elastica_Query
 	 * @return Elastica_Query Query object
 	 */
 	public function addSort($sort) {
-		$this->_sortArgs[] = $sort;
+		$this->_query['sort'][] = $sort;
 		return $this;
 	}
 
@@ -113,8 +110,7 @@ class Elastica_Query
 	 * @return Elastica_Query Query object
 	 */
 	public function setHighlight(array $highlightArgs) {
-		$this->_highlightArgs = $highlightArgs;
-		return $this;
+		return $this->setParam('highlight', $highlightArgs);
 	}
 
 	/**
@@ -125,7 +121,7 @@ class Elastica_Query
 	 * @return Elastica_Query Query object
 	 */
 	public function addHighlight($highlight) {
-		$this->_highlightArgs[] = $highlight;
+		$this->_query['highligth'][] = $highlight;
 		return $this;
 	}
 
@@ -137,7 +133,6 @@ class Elastica_Query
 	 */
 	public function setSize($limit = 10) {
 		return $this->setLimit($limit);
-		return $this;
 	}
 
 	/**
@@ -147,8 +142,7 @@ class Elastica_Query
 	 * @return Elastica_Query Query object
 	 */
 	public function setLimit($limit = 10) {
-		$this->_limit = $limit;
-		return $this;
+		return $this->setParam('limit', $limit);
 	}
 
 	/**
@@ -158,8 +152,7 @@ class Elastica_Query
 	 * @param bool $explain OPTIONAL Enabled or disable explain (default = true)
 	 */
 	public function setExplain($explain = true) {
-		$this->_explain = $explain;
-		return $this;
+		return $this->setParam('explain', $explain);
 	}
 
 	/**
@@ -169,8 +162,7 @@ class Elastica_Query
 	 * @param array $fields Fields to be returne
 	 */
 	public function setFields(array $fields) {
-		$this->_fields = $fields;
-		return $this;
+		return $this->setParam('fields', $fields);
 	}
 
 	/**
@@ -180,68 +172,27 @@ class Elastica_Query
 	 * @param array $scriptFields Script fields
 	 */
 	public function setScriptFields(array $scriptFields) {
-		$this->_scriptFields = $scriptFields;
-		return $this;
-	}
-
-	/**
-	 * Allows to set raw arguments that can't be set over the
-	 * provided method. Field name has also to be set in given array.
-	 * Values set here are overrided by values set
-	 * over the specific methods
-	 *
-	 * @param array $args Argument array
-	 */
-	public function setRawArguments(array $args) {
-		$this->_rawArgumens = $args;
-		return $this;
+		return $this->setParam('script_field', $scriptFields);
 	}
 
 	/**
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/facets
 	 */
-	public function setFacets(array $args) {
-		throw new Elastica_Exception('not implemented yet');
+	public function setFacets(Elastica_Facets $facets) {
+		return $this->setParam('facets', $facets->toArray());
+	}
+
+	public function addFacet(Elastica_Facet_Abstract $facet) {
+		$this->_query['facets'][$facet->getName()] = $facet->toArray();
 		return $this;
 	}
 
 	public function toArray() {
 
-		$query = $this->_rawArguments;
-
-		$query['query'] = $this->_query;
-
-		if (!empty($this->_limit)) {
-			$query['size'] = $this->_limit;
+		if (!isset($this->_query['query'])) {
+			$this->setQuery(new Elastica_Query_MatchAll());
 		}
 
-		$query['from'] = $this->_from;
-
-		if (!empty($this->_sortArgs)) {
-			$query['sort'] = $this->_sortArgs;
-		}
-
-		if (!empty($this->_highlightArgs)) {
-			$query['highlight'] = $this->_highlightArgs;
-		}
-
-		if ($this->_explain) {
-			$query['explain'] = $this->_explain;
-		}
-
-		if (!empty($this->_fields)) {
-			$query['fields'] = $this->_fields;
-		}
-
-		if (!empty($this->_scriptFields)) {
-			$query['script_fields'] = $this->_scriptFields;
-		}
-
-		if (!empty($this->_filters)) {
-			// TODO: should query really be overwritten?
-			$query['query'] = $this->_filters;
-		}
-
-		return $query;
+		return $this->_query;
 	}
 }

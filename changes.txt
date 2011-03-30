@@ -1,4 +1,13 @@
 CHANGES
+2011-03-30
+- Filtered query introduced
+- setRawArguments in Elastica_Query is now setParam
+
+2011-03-29
+- Renaming Elastica_Filter->addQuery, addFilter to setQuery, setFilter
+- Add parts of Facets API
+- Add facet Terms
+- Renaming Elastica_Query->addFilter to setFilter
 
 2011-03-24
 - Renaming of Elastica_Status_Index to Elastica_Index_Status => API Change!

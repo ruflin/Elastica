@@ -36,6 +36,11 @@ class Elastica_ResultSet implements Iterator
 		return $this->_results;
 	}
 
+	public function getFacets() {
+		$data = $this->_response->getData();
+		return $data['facets'];
+	}
+
 	public function getTotalHits() {
 		return intval($this->_totalHits);
 	}

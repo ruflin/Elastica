@@ -6,7 +6,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-abstract class Elastica_Query_Abstract 
+abstract class Elastica_Query_Abstract
 {
 	abstract public function toArray();
 }
