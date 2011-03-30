@@ -10,6 +10,7 @@ abstract class Elastica_Facet_Abstract
 {
 	protected $_global = false;
 	protected $_name = '';
+	protected $_query = array();
 
 	public function __construct($name) {
 		$this->setName($name);
@@ -28,7 +29,17 @@ abstract class Elastica_Facet_Abstract
 	}
 
 	public function setFilter(Elastica_Filter_Abstract $filter) {
+		return $this->setParam('facet_filter', $filter->toArray());
 	}
 
-	abstract function toArray();
+	public function setParam($key, $value) {
+		$this->_query[$key] = $value;
+		return $this;
+	}
+
+	public function setGlobal($global = true) {
+		$this->_query['global'] = (bool) $global;
+	}
+
+	abstract public function toArray();
 }

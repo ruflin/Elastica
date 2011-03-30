@@ -14,7 +14,6 @@
  */
 class Elastica_Type
 {
-
 	/**
 	 * @var Elastica_Index Index object
 	 */

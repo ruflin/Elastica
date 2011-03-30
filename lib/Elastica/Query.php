@@ -67,7 +67,7 @@ class Elastica_Query
 	}
 
 	/**
-	 * @param Elastica_Filter $filter Filter object
+	 * @param Elastica_Filter_Abstract $filter Filter object
 	 * @return Elastica_Query Current object
 	 */
 	public function setFilter(Elastica_Filter_Abstract $filter) {
