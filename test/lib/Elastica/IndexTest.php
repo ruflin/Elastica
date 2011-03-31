@@ -82,7 +82,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testAddWordxFile() {
-		$this->markTestIncomplete();
+		//$this->markTestIncomplete();
 		$indexMapping = array(
 			'file' => array('type' => 'attachment'),
 			'text' => array('type' => 'string', 'store' => 'no'),

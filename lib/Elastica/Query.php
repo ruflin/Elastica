@@ -59,14 +59,6 @@ class Elastica_Query
 	}
 
 	/**
-	 * @deprecated Use setQuery
-	 */
-	public function addQuery(Elastica_Query_Abstract $query) {
-		trigger_error('addQuery is deprecated. Use setQuery instead');
-		$this->setQuery($query);
-	}
-
-	/**
 	 * @param Elastica_Filter_Abstract $filter Filter object
 	 * @return Elastica_Query Current object
 	 */
@@ -74,6 +66,12 @@ class Elastica_Query
 		return $this->setParam('filter', $filter->toArray());
 	}
 
+	/**
+	 * Sets the start from which the search results should be returned
+	 *
+	 * @param int $from
+	 * @return Elastica_Query Query object
+	 */
 	public function setFrom($from) {
 		return $this->setParam('from', $from);
 	}
@@ -186,19 +184,39 @@ class Elastica_Query
 	}
 
 	/**
+	 * Sets all facets for this query object. Replaces existing facets
+	 *
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/facets
+	 * @param array $facets List of facet objects
+	 * @return Elastica_Query Query object
 	 */
-	public function setFacets(Elastica_Facets $facets) {
-		return $this->setParam('facets', $facets->toArray());
+	public function setFacets(array $facets) {
+		$this->_query['facets'] = array();
+		foreach ($facets as $facet) {
+			$this->addFacet($facet);
+		}
+		return $this;
 	}
 
+	/**
+	 * Adds a Facet to the query
+	 *
+	 * @param Elastica_Facet_Abstract $facet Facet object
+	 * @return Elastica_Query Query object
+	 */
 	public function addFacet(Elastica_Facet_Abstract $facet) {
 		$this->_query['facets'][$facet->getName()] = $facet->toArray();
 		return $this;
 	}
 
+	/**
+	 * Converts all query params to an array
+	 *
+	 * @return array Query array
+	 */
 	public function toArray() {
 
+		// If no query is set, all query is chosen by default
 		if (!isset($this->_query['query'])) {
 			$this->setQuery(new Elastica_Query_MatchAll());
 		}

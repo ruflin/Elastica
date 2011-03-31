@@ -179,16 +179,6 @@ class Elastica_Index
 	/**
 	 * Returns the index name
 	 *
-	 * @deprecated Use getName
-	 * @return string Index name
-	 */
-	public function getIndexName() {
-		return $this->getName();
-	}
-
-	/**
-	 * Returns the index name
-	 *
 	 * @return string Index name
 	 */
 	public function getName() {
