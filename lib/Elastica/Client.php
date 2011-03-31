@@ -131,7 +131,7 @@ class Elastica_Client
 			throw new Elastica_Exception_Invalid('Array has to consist of at least one element');
 		}
 		$params = array();
-		
+
 		foreach($docs as $doc) {
 			$action = array(
 				'index' => array(
@@ -141,11 +141,10 @@ class Elastica_Client
 				)
 			);
 
-			if($doc->getVersion() > 0)
-			{
+			if($doc->getVersion() > 0) {
 				$action['index']['_version'] = $doc->getVersion();
 			}
-			
+
 			$params[] = $action;
 			$params[] = $doc->getData();
 		}
@@ -189,7 +188,7 @@ class Elastica_Client
 		if (empty($ids)) {
 			throw new Elastica_Exception('Array has to consist of at least one id');
 		}
-		
+
 		$params = array();
 		foreach($ids as $id) {
 			$action = array(
@@ -199,7 +198,7 @@ class Elastica_Client
 					'_id' => $id,
 				)
 			);
-			
+
 			$params[] = $action;
 		}
 
@@ -235,17 +234,17 @@ class Elastica_Client
 			// Always newline needed
 			$queryString .= json_encode($baseArray) . PHP_EOL;
 		}
-		
+
 		$response = $this->request($path, Elastica_Request::PUT, $queryString);
 		$data = $response->getData();
-		
+
 		foreach($data['items'] as $item) {
 			$params = reset($item);
 			if(isset($params['error'])) {
 				throw new Elastica_Exception_BulkResponse($response);
 			}
 		}
-		
+
 		return $response;
 	}
 

@@ -2,6 +2,7 @@ CHANGES
 
 2011-03-31
 - Deprecated code removed
+- Break backward compatibility to 0.15.1 (versions introduced by wlp1979)
 
 2011-03-30
 - Filtered query introduced
