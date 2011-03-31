@@ -11,13 +11,13 @@
 class Elastica_Filter_Or extends Elastica_Filter_Abstract
 {
 
-	protected $_queries = array();
+	protected $_filters = array();
 
-	public function addQuery(Elastica_Query_Abstract $query) {
-		$this->_queries[] = $query->toArray();
+	public function addFilter(Elastica_Filter_Abstract $filter) {
+		$this->_filters[] = $filter->toArray();
 	}
 
 	public function toArray() {
-		return array('or' => $this->_queries);
+		return array('or' => $this->_filters);
 	}
 }
