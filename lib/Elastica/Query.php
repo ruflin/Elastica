@@ -140,7 +140,7 @@ class Elastica_Query
 	 * @return Elastica_Query Query object
 	 */
 	public function setLimit($limit = 10) {
-		return $this->setParam('limit', $limit);
+		return $this->setParam('size', $limit);
 	}
 
 	/**
