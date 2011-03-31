@@ -11,7 +11,7 @@ class Elastica_Cluster
 {
 	protected $_client = null;
 
-	public function __construct($client) {
+	public function __construct(Elastica_Client $client) {
 		$this->_client = $client;
 		$this->refresh();
 	}
