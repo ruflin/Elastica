@@ -3,16 +3,19 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
 {
-	public function setUp() { }
+	public function setUp() {
+	}
 
 	public function tearDown() { }
 
 	public function testGet() {
-		$indexName = 'test';
+		$indexName = 'elastica-test';
 
 		$client = new Elastica_Client();
 		$index = $client->getIndex($indexName);
 		$index->create(array(), true);
+		$index->refresh();
+
 		$settings = $index->getSettings();
 
 		$this->assertInternalType('array', $settings->get());
