@@ -43,6 +43,11 @@ class Elastica_Type
 	 */
 	public function addDocument(Elastica_Document $doc) {
 		$path = $doc->getId();
+		if($doc->getVersion() > 0)
+		{
+			$path .= '?version=' . $doc->getVersion();
+		}
+		
 		return $this->request($path, Elastica_Request::PUT, $doc->getData());
 	}
 
