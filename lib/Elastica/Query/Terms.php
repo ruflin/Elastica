@@ -11,6 +11,7 @@
 class Elastica_Query_Terms extends Elastica_Query_Abstract
 {
 	protected $_terms = array();
+	protected $_minimumMatch = '';
 
 	public function __construct(array $terms = array()) {
 		$this->setTerms($terms);
@@ -26,14 +27,27 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
 	 * @param string $key Key to query
 	 * @param string|array $value Values(s) for the query. Boost can be set with array
 	 */
-	public function addTerm($key, $value) {
-		$this->_terms[] = array($key => $value);
+	public function addTerm($key, array $value) {
+		$this->_terms = array($key => array_values($value));
 	}
-
-	public function setMinimumMatch() {
+	
+	/**
+	 * Sets the minimum matching values
+	 *
+	 * @param int $minimum Minimum value
+	 */
+	public function setMinimumMatch($minimum) {
+		$this->_minimumMatch = $minimum;
+		return $this;
 	}
 
 	public function toArray() {
-		throw new Elastica_Exception_NotImplemented();
+		$args = $this->_terms;
+		
+		if(!empty($this->_minimumMatch)) {
+			$args['minimum_match'] = $this->_minimumMatch;
+		}
+		
+		return array('terms' => $args);
 	}
 }

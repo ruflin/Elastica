@@ -121,7 +121,7 @@ class Elastica_Query
 	 * @return Elastica_Query Query object
 	 */
 	public function addHighlight($highlight) {
-		$this->_query['highligth'][] = $highlight;
+		$this->_query['highlight'][] = $highlight;
 		return $this;
 	}
 
@@ -153,6 +153,16 @@ class Elastica_Query
 	 */
 	public function setExplain($explain = true) {
 		return $this->setParam('explain', $explain);
+	}
+
+	/**
+	 * Enables version on the query
+	 *
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/version/
+	 * @param bool $version OPTIONAL Enabled or disable version (default = true)
+	 */
+	public function setVersion($version = true) {
+		return $this->setParam('version', $version);
 	}
 
 	/**
@@ -192,7 +202,7 @@ class Elastica_Query
 		if (!isset($this->_query['query'])) {
 			$this->setQuery(new Elastica_Query_MatchAll());
 		}
-
+		
 		return $this->_query;
 	}
 }

@@ -47,6 +47,15 @@ class Elastica_Result
 	}
 	
 	/**
+	 * Returns the version information from the hit
+	 * 
+	 * @return string|int Document version
+	 */
+	public function getVersion() {
+		return $this->_hit['_version'];		
+	}
+	
+	/**
 	 * Returns result data
 	 * 
 	 * Alias for getSource

@@ -130,11 +130,10 @@ class Elastica_Client
 		if (empty($docs)) {
 			throw new Elastica_Exception_Invalid('Array has to consist of at least one element');
 		}
-		$path = '_bulk';
-
-		$queryString = '';
+		$params = array();
+		
 		foreach($docs as $doc) {
-			$baseArray = array(
+			$action = array(
 				'index' => array(
 					'_index' => $doc->getIndex(),
 					'_type' => $doc->getType(),
@@ -142,12 +141,15 @@ class Elastica_Client
 				)
 			);
 
-			// Always newline needed
-			$queryString .= json_encode($baseArray) . PHP_EOL;
-			$queryString .= json_encode($doc->getData()) . PHP_EOL;
+			if($doc->getVersion() > 0)
+			{
+				$action['index']['_version'] = $doc->getVersion();
+			}
+			
+			$params[] = $action;
+			$params[] = $doc->getData();
 		}
-
-		return $this->request($path, Elastica_Request::PUT, $queryString);
+		return $this->bulk($params);
 	}
 
 	public function deleteDocuments(array $docs) {
@@ -187,27 +189,25 @@ class Elastica_Client
 		if (empty($ids)) {
 			throw new Elastica_Exception('Array has to consist of at least one id');
 		}
-		$path = '_bulk';
-
-		$queryString = '';
+		
+		$params = array();
 		foreach($ids as $id) {
-			$baseArray = array(
+			$action = array(
 				'delete' => array(
 					'_index' => $index,
 					'_type' => $type,
 					'_id' => $id,
 				)
 			);
-
-			// Always newline needed
-			$queryString .= json_encode($baseArray) . PHP_EOL;
+			
+			$params[] = $action;
 		}
 
-		return $this->request($path, Elastica_Request::PUT, $queryString);
+		return $this->bulk($params);
 	}
 
 	/**
-	 * Bukl operation
+	 * Bulk operation
 	 *
 	 * Every entry in the params array has to exactly on array
 	 * of the bulk operation. An example param array would be:
@@ -235,8 +235,18 @@ class Elastica_Client
 			// Always newline needed
 			$queryString .= json_encode($baseArray) . PHP_EOL;
 		}
-
-		return $this->request($path, Elastica_Request::PUT, $queryString);
+		
+		$response = $this->request($path, Elastica_Request::PUT, $queryString);
+		$data = $response->getData();
+		
+		foreach($data['items'] as $item) {
+			$params = reset($item);
+			if(isset($params['error'])) {
+				throw new Elastica_Exception_BulkResponse($response);
+			}
+		}
+		
+		return $response;
 	}
 
 	/**

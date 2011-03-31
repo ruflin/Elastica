@@ -20,6 +20,8 @@ class Elastica_Document {
 
 	protected $_type = '';
 	protected $_index = '';
+	
+	protected $_version = '';
 
 	/**
 	 * Creates a new document
@@ -143,5 +145,26 @@ class Elastica_Document {
 			throw new Elastica_Exception_Invalid('Index not set');
 		}
 		return $index;
+	}
+
+	/**
+	 * Sets the version of a document for use with optimistic concurrency control
+	 *
+	 * @link http://www.elasticsearch.org/blog/2011/02/08/versioning.html
+	 * @param int $version Document version
+	 */
+	public function setVersion($version) {
+		if($version !== '') {
+			$this->_version = (int) $version;
+		}
+	}
+
+	/**
+	 * Returns document version
+	 *
+	 * @return string|int Document version
+	 */
+	public function getVersion() {
+		return $this->_version;
 	}
 }
