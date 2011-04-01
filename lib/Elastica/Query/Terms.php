@@ -2,7 +2,7 @@
 /**
  * Terms query
  *
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/terms_query/
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/terms-query.html
  * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
@@ -12,15 +12,16 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
 {
 	protected $_terms = array();
 	protected $_params = array();
+	protected $_key = '';
 
 	public function __construct($key = '', array $terms = array()) {
 		$this->setTerms($key, $terms);
 	}
 
 	/**
-	 * Adds a term to the term query
+	 * Sets key and terms for the query
 	 *
-	 * @param string $key Key to query
+	 * @param string $key Terms key
 	 * @param array $terms Terms for the query.
 	 */
 	public function setTerms($key, array $terms) {
@@ -49,6 +50,9 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
 	}
 
 	public function toArray() {
+		if (empty($this->_key)) {
+			throw new Elastica_Exception_Invalid('Terms key has to be set');
+		}
 		$this->_params[$this->_key] = $this->_terms;
 		return array('terms' => $this->_params);
 	}
