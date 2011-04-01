@@ -1,4 +1,6 @@
 CHANGES
+2011-04-01
+- Renaming of functions in Elastica_Query_Terms and Ela-stica_Query_Filter to fit new naming convention. setTerms, addTerm have different API now!
 
 2011-03-31
 - Deprecated code removed

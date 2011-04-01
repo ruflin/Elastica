@@ -1,8 +1,8 @@
 <?php
 /**
- * Term query
+ * Terms filter
  *
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/term_query/
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/terms-filter.html
  * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
@@ -11,28 +11,40 @@
 class Elastica_Filter_Terms extends Elastica_Filter_Abstract
 {
 	protected $_terms = array();
-	
-	public function __construct(array $terms = array()) {
-		$this->setTerms($terms);
+	protected $_params = array();
+	protected $_key = '';
+
+	public function __construct($key = '', array $terms = array()) {
+		$this->setTerms($key, $terms);
 	}
-	
-	public function setTerms(array $terms) {
-		$this->_terms = $terms;
-	}
-	
+
 	/**
-	 * Adds a term to the term query
-	 * 
-	 * @param string $key Key to query
-	 * @param array $value Values(s) for the query. Boost can be set with array
+	 * Sets key and terms for the filter
+	 *
+	 * @param string $key Terms key
+	 * @param array $terms Terms for the query.
 	 */
-	public function addTerm($key, array $value) {
-		$this->_terms = array($key => array_values($value));
+	public function setTerms($key, array $terms) {
+		$this->_key = $key;
+		$this->_terms = array_values($terms);
+		return $this;
 	}
-	
+
+	public function addTerm($term) {
+		$this->_terms[] = $term;
+		return $this;
+	}
+
+	public function setParam($key, $value) {
+		$this->_params[$key] = $value;
+		return $this;
+	}
+
 	public function toArray() {
-		$args = $this->_terms;
-		
-		return array('terms' => $args);
+		if (empty($this->_key)) {
+			throw new Elastica_Exception_Invalid('Terms key has to be set');
+		}
+		$this->_params[$this->_key] = $this->_terms;
+		return array('terms' => $this->_params);
 	}
 }
