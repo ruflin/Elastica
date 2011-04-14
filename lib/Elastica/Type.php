@@ -43,8 +43,7 @@ class Elastica_Type implements Elastica_Searchable
 	 */
 	public function addDocument(Elastica_Document $doc) {
 		$path = $doc->getId();
-		if($doc->getVersion() > 0)
-		{
+		if($doc->getVersion() > 0) {
 			$path .= '?version=' . $doc->getVersion();
 		}
 
@@ -117,25 +116,10 @@ class Elastica_Type implements Elastica_Searchable
 	 * {@inheritDoc}
 	 */
 	public function search($query) {
-
-		if ($query instanceof Elastica_Query) {
-			$query = $query->toArray();
-		} else if ($query instanceof Elastica_Query_Abstract) {
-			// Converts query object
-			$queryObject = new Elastica_Query($query);
-			$query = $queryObject->toArray();
-		} else if (is_string($query)) {
-			// Assumes is string query
-			$queryObject = new Elastica_Query(new Elastica_Query_QueryString($query));
-			$query = $queryObject->toArray();
-		} else {
-			// TODO: Implement queries without
-			throw new Elastica_Exception_NotImplemented();
-		}
-
+		$query = Elastica_Query::create($query);
 		$path = '_search';
 
-		$response = $this->request($path, Elastica_Request::GET, $query);
+		$response = $this->request($path, Elastica_Request::GET, $query->toArray());
 		return new Elastica_ResultSet($response);
 	}
 
