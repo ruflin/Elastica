@@ -18,7 +18,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-abstract class Elastica_Type_Abstract
+abstract class Elastica_Type_Abstract implements Elastica_Searchable
 {
 	const MAX_DOCS_PER_REQUEST = 1000;
 
@@ -66,10 +66,7 @@ abstract class Elastica_Type_Abstract
 	}
 
 	/**
-	 * Searchs in the current index
-	 *
-	 * @param $query array|Elastica_Query Query params
-	 * @return Elastica_ResultSet Result set
+	 * {@inheritDoc}
 	 */
 	public function search($query) {
 		return $this->getType()->search($query);

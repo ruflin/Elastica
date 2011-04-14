@@ -8,7 +8,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Index
+class Elastica_Index implements Elastica_Searchable
 {
 	/**
 	 * @var string Index name
@@ -133,6 +133,9 @@ class Elastica_Index
 		return $this->request('', Elastica_Request::PUT, $args);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function search($query) {
 		// TODO: implement
 		if ($query instanceof Elastica_Query) {
