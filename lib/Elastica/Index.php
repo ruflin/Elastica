@@ -137,25 +137,10 @@ class Elastica_Index implements Elastica_Searchable
 	 * {@inheritDoc}
 	 */
 	public function search($query) {
-		// TODO: implement
-		if ($query instanceof Elastica_Query) {
-			$query = $query->toArray();
-		} else if ($query instanceof Elastica_Query_Abstract) {
-			// Converts query object
-			$queryObject = new Elastica_Query($query);
-			$query = $queryObject->toArray();
-		} else if (is_string($query)) {
-			// Assumes is string query
-			$queryObject = new Elastica_Query(new Elastica_Query_QueryString($query));
-			$query = $queryObject->toArray();
-		} else {
-			// TODO: Implement queries without
-			throw new Elastica_Exception_NotImplemented();
-		}
-
+		$query = Elastica_Query::create($query);
 		$path = '_search';
 
-		$response = $this->request($path, Elastica_Request::GET, $query);
+		$response = $this->request($path, Elastica_Request::GET, $query->toArray());
 		return new Elastica_ResultSet($response);
 	}
 

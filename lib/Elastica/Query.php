@@ -27,6 +27,26 @@ class Elastica_Query
 	}
 
 	/**
+	 * Transforms a string or an array to a query object
+	 *
+	 * @param mixed $query
+	 * @return Elastica_Query
+	 **/
+	public static function create($query) {
+		if ($query instanceof Elastica_Query_Abstract) {
+			// Converts query object
+			return new self($query);
+		} else if (is_string($query)) {
+			// Assumes is string query
+			return new self(new Elastica_Query_QueryString($query));
+		} else if (empty($query)) {
+			return new self();
+		}
+		// TODO: Implement queries without
+		throw new Elastica_Exception_NotImplemented();
+	}
+
+	/**
 	 * Sets query as raw array. Will overwrite all already set arguments
 	 *
 	 * @param array $query Query array
@@ -220,7 +240,7 @@ class Elastica_Query
 		if (!isset($this->_query['query'])) {
 			$this->setQuery(new Elastica_Query_MatchAll());
 		}
-		
+
 		return $this->_query;
 	}
 }
