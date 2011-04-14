@@ -12,7 +12,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Type
+class Elastica_Type implements Elastica_SearchableInterface
 {
 	/**
 	 * @var Elastica_Index Index object
@@ -47,7 +47,7 @@ class Elastica_Type
 		{
 			$path .= '?version=' . $doc->getVersion();
 		}
-		
+
 		return $this->request($path, Elastica_Request::PUT, $doc->getData());
 	}
 
