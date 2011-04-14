@@ -7,7 +7,7 @@
  * @package Elastica
  * @author Thibault Duplessis <thibault.duplessis@gmail.com>
  */
-interface Elastica_SearchableInterface
+interface Elastica_Searchable
 {
 	/**
 	 * Searches results for a query

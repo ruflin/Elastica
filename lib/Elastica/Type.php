@@ -12,7 +12,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Type implements Elastica_SearchableInterface
+class Elastica_Type implements Elastica_Searchable
 {
 	/**
 	 * @var Elastica_Index Index object
@@ -113,25 +113,8 @@ class Elastica_Type implements Elastica_SearchableInterface
 		return $response->getData();
 	}
 
-	/**
-	 * Example code
-	 *
-	 * TODO: Improve sample code
-	 * {
-	 *	 "from" : 0,
-	 *	 "size" : 10,
-	 *	 "sort" : {
-	 *		  "postDate" : {"reverse" : true},
-	 *		  "user" : { },
-	 *		  "_score" : { }
-	 *	  },
-	 *	  "query" : {
-	 *		  "term" : { "user" : "kimchy" }
-	 *	  }
-	 * }
-	 *
-	 * @param array|Elastica_Query Array with all querie data inside or a Elastica_Query object
-	 * @return Elastica_ResultSet ResultSet with all results inside
+    /**
+     * {@inheritDoc}
 	 */
 	public function search($query) {
 
