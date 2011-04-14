@@ -66,7 +66,7 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
 	}
 
 	/**
-     * {@inheritDoc}
+	 * {@inheritDoc}
 	 */
 	public function search($query) {
 		return $this->getType()->search($query);
