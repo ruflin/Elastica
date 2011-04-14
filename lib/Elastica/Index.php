@@ -8,7 +8,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Index
+class Elastica_Index implements Elastica_SearchableInterface
 {
 	/**
 	 * @var string Index name

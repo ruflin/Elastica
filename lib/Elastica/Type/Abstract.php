@@ -18,7 +18,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-abstract class Elastica_Type_Abstract
+abstract class Elastica_Type_Abstract implements Elastica_SearchableInterface
 {
 	const MAX_DOCS_PER_REQUEST = 1000;
 
