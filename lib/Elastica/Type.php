@@ -75,19 +75,6 @@ class Elastica_Type implements Elastica_Searchable
 	}
 
 	/**
-	 * Returns the number of items in this type
-	 *
-	 * @return int Number of items
-	 */
-	public function getCount() {
-		$path = '_count';
-		// TODO: test
-		$data = $this->request($path, Elastica_Request::GET, array('matchAll' => array()))->getData();
-		return (int) $response['count'];
-	}
-
-
-	/**
 	 * Sets value type mapping for this type
 	 *
 	 * @param array $properties Property array with all mappings
