@@ -145,6 +145,17 @@ class Elastica_Index implements Elastica_Searchable
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	public function count($query) {
+		$query = Elastica_Query::create($query);
+		$path = '_count';
+
+		$response = $this->request($path, Elastica_Request::GET, $query->getQuery())->getData();
+		return (int) $response['count'];
+	}
+
+	/**
 	 * Opens an index
 	 *
 	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html
