@@ -29,5 +29,5 @@ interface Elastica_Searchable
 	 * @param array|Elastica_Query Array with all querie data inside or a Elastica_Query object
 	 * @return Elastica_ResultSet ResultSet with all results inside
 	 */
-    function search($query);
+	function search($query);
 }

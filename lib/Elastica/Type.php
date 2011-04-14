@@ -113,8 +113,8 @@ class Elastica_Type implements Elastica_Searchable
 		return $response->getData();
 	}
 
-    /**
-     * {@inheritDoc}
+	/**
+	 * {@inheritDoc}
 	 */
 	public function search($query) {
 

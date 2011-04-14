@@ -10,7 +10,7 @@
  */
 class Elastica_Query_Field extends Elastica_Query_Abstract
 {
-    public function toArray() {      
-        return array('field' => $args);
-    }
+	public function toArray() {
+		return array('field' => $args);
+	}
 }
