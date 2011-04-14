@@ -79,6 +79,15 @@ class Elastica_Query
 	}
 
 	/**
+	 * Gets the query array
+	 *
+	 * @return array
+	 **/
+	public function getQuery() {
+		return $this->_query['query'];
+	}
+
+	/**
 	 * @param Elastica_Filter_Abstract $filter Filter object
 	 * @return Elastica_Query Current object
 	 */

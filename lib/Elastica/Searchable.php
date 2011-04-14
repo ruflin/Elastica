@@ -26,8 +26,16 @@ interface Elastica_Searchable
 	 *	  }
 	 * }
 	 *
-	 * @param array|Elastica_Query Array with all querie data inside or a Elastica_Query object
+	 * @param array|Elastica_Query Array with all query data inside or a Elastica_Query object
 	 * @return Elastica_ResultSet ResultSet with all results inside
 	 */
 	function search($query);
+
+	/**
+	 * Counts results for a query
+	 *
+	 * @param array|Elastica_Query Array with all query data inside or a Elastica_Query object
+	 * @return int number of documents matching the query
+	 */
+	function count($query);
 }
