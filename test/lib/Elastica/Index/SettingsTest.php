@@ -9,13 +9,12 @@ class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
 	public function tearDown() { }
 
 	public function testGet() {
-		$indexName = 'elastica-test';
+		$indexName = 'elasticatest';
 
 		$client = new Elastica_Client();
 		$index = $client->getIndex($indexName);
 		$index->create(array(), true);
 		$index->refresh();
-
 		$settings = $index->getSettings();
 
 		$this->assertInternalType('array', $settings->get());
