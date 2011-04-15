@@ -33,15 +33,17 @@ class Elastica_Query
 	 * @return Elastica_Query
 	 **/
 	public static function create($query) {
-		if ($query instanceof Elastica_Query_Abstract) {
-			// Converts query object
-			return new self($query);
-		} else if (is_string($query)) {
-			// Assumes is string query
-			return new self(new Elastica_Query_QueryString($query));
-		} else if (empty($query)) {
-			return new self();
+		switch (true) {
+			case $query instanceof Elastica_Query:
+				return $query;
+			case $query instanceof Elastica_Query_Abstract:
+				return new self($query);
+			case is_string($query):
+				return new self(new Elastica_Query_QueryString($query));
+			case empty($query):
+				return new self();
 		}
+
 		// TODO: Implement queries without
 		throw new Elastica_Exception_NotImplemented();
 	}

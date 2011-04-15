@@ -119,7 +119,7 @@ class Elastica_Type implements Elastica_Searchable
 		$path = '_count';
 
 		$data = $this->request($path, Elastica_Request::GET, $query->getQuery())->getData();
-		return (int) $response['count'];
+		return (int) $data['count'];
 	}
 
 	/**
