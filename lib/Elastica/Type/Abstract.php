@@ -36,6 +36,8 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
 	 *
 	 * Reads index and type name from protected vars _indexName and _typeName.
 	 * Has to be set in child class
+	 *
+	 * @param Elastica_Client $client OPTIONAL Client object
 	 */
 	public function __construct(Elastica_Client $client = null) {
 		if (!$client) {
