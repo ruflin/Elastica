@@ -15,11 +15,21 @@ class Elastica_ResultSet implements Iterator
 	protected $_position = 0;
 	protected $_response = null;
 
+	/**
+	 * Constructs ResultSet object
+	 *
+	 * @param Elastica_Response $response Response object
+	 */
 	public function __construct(Elastica_Response $response) {
 		$this->rewind();
 		$this->_init($response);
 	}
 
+	/**
+	 * Loads all data into the results object (initalisation)
+	 *
+	 * @param Elastica_Response $response Response object
+	 */
 	protected function _init(Elastica_Response $response) {
 		$this->_response = $response;
 		$result = $response->getData();
@@ -32,17 +42,32 @@ class Elastica_ResultSet implements Iterator
 		}
 	}
 
+	/**
+	 * Returns all results
+	 *
+	 * @return array Results
+	 */
 	public function getResults() {
 		return $this->_results;
 	}
 
+	/**
+	 * Returns all facets results
+	 *
+	 * @return array Facet results
+	 */
 	public function getFacets() {
 		$data = $this->_response->getData();
 		return $data['facets'];
 	}
 
+	/**
+	 * Returns the total number of found hits
+	 *
+	 * @return int Total hits
+	 */
 	public function getTotalHits() {
-		return intval($this->_totalHits);
+		return (int) $this->_totalHits;
 	}
 
 	/**

@@ -2,10 +2,10 @@
 /**
  * Elastica general status
  *
- * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
 class Elastica_Status
 {
@@ -21,6 +21,11 @@ class Elastica_Status
 
 	protected $_client = null;
 
+	/**
+	 * Constructs Status object
+	 *
+	 * @param Elastica_Client $client Client object
+	 */
 	public function __construct(Elastica_Client $client) {
 		$this->_client = $client;
 		$this->refresh();
@@ -90,6 +95,7 @@ class Elastica_Status
 	/**
 	 * Returns an array with all indices that the given alias name points to
 	 *
+	 * @param string $name Alias name
 	 * @return array List of Elastica_Index
 	 */
 	public function getIndicesWithAlias($name) {

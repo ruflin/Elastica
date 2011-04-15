@@ -53,8 +53,8 @@ class Elastica_Type implements Elastica_Searchable
 	/**
 	 * Uses _bulk to send documents to the server
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 * @param array $docs Array of Elastica_Document
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 */
 	public function addDocuments(array $docs) {
 
@@ -78,6 +78,7 @@ class Elastica_Type implements Elastica_Searchable
 	 * Sets value type mapping for this type
 	 *
 	 * @param array $properties Property array with all mappings
+	 * @param bool $source OPTIONAL If source should be stored or not (default = true)
 	 */
 	public function setMapping(array $properties, $source = true) {
 		$path = '_mapping';
@@ -133,8 +134,8 @@ class Elastica_Type implements Elastica_Searchable
 	/**
 	 * Delete an entry by its unique identifier
 	 *
+	 * @param int|string $id Document id
 	 * @link http://www.elasticsearch.org/guide/reference/api/delete.html
-	 * @param int|string $id
 	 */
 	public function deleteById($id) {
 		if (empty($id) || !trim($id)) {
@@ -146,8 +147,8 @@ class Elastica_Type implements Elastica_Searchable
 	/**
 	 * Deletes entries in the db based on a query
 	 *
+	 * @param Elastica_Query $query Query object
 	 * @link http://www.elasticsearch.org/guide/reference/api/delete-by-query.html
-	 * @param Elastica_Query $query
 	 */
 	public function deleteByQuery(Elastica_Query $query) {
 		// TODO: To be implemented, can also be implemented on index and client level (see docs)
@@ -159,9 +160,9 @@ class Elastica_Type implements Elastica_Searchable
 	 *
 	 * The id in the given object has to be set
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/more_like_this/
 	 * @param EalsticSearch_Document $doc Document to query for similar objects
 	 * @param array $args OPTIONAL Additional arguments for the query
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/more_like_this/
 	 */
 	public function moreLikeThis(Elastica_Document $doc, $args = array()) {
 		// TODO: Not tested yet

@@ -26,7 +26,7 @@ interface Elastica_Searchable
 	 *	  }
 	 * }
 	 *
-	 * @param array|Elastica_Query Array with all query data inside or a Elastica_Query object
+	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
 	 * @return Elastica_ResultSet ResultSet with all results inside
 	 */
 	public function search($query);
@@ -34,7 +34,7 @@ interface Elastica_Searchable
 	/**
 	 * Counts results for a query
 	 *
-	 * @param array|Elastica_Query Array with all query data inside or a Elastica_Query object
+	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
 	 * @return int number of documents matching the query
 	 */
 	public function count($query);
