@@ -5,6 +5,7 @@
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  */
 class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 {
