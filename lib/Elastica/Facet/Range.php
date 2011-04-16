@@ -39,11 +39,11 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
 	/**
 	 * Sets the fields by their separate key and value fields.
 	 * 
-	 * @param string $key_field
-	 * @param string $value_field
+	 * @param string $keyField
+	 * @param string $valueField
 	 * @return Elastica_Facet_Range
 	 */
-	public function setKeyValueField($key_field, $value_field) {
+	public function setKeyValueField($keyField, $valueField) {
 		/**
 		 * Only one of the types can be defined, reset the others.
 		 */
@@ -52,8 +52,8 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
 		/**
 		 * Set the key field and value field.
 		 */
-		return $this->setParam('key_field', $key_field)
-		            ->setParam('value_field', $value_field);
+		return $this->setParam('key_field', $keyField)
+		            ->setParam('value_field', $valueField);
 	}
 	
 	/**
