@@ -120,10 +120,10 @@ class Elastica_Client
 	 * set inside the document, because for bulk settings documents,
 	 * documents can belong to any type and index
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 * @param array $docs Array of Elastica_Document
 	 * @return Elastica_Response Response object
 	 * @throws Elastica_Exception_Invalid If docs is empty
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 */
 	public function addDocuments(array $docs) {
 
@@ -151,6 +151,12 @@ class Elastica_Client
 		return $this->bulk($params);
 	}
 
+	/**
+	 * Bulk deletes documents (not implemented yet)
+	 *
+	 * @param array $docs Docs
+	 * @throws Elastica_Exception
+	 */
 	public function deleteDocuments(array $docs) {
 		// TODO: similar to delete ids but with type and index inside files
 		throw new Elastica_Exception('not implemented yet');
@@ -177,12 +183,12 @@ class Elastica_Client
 	/**
 	 * Deletes documents with the given ids, index, type from the index
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 * @param array $ids Document ids
 	 * @param string $index Index name
 	 * @param string $type Type of documents
 	 * @return Elastica_Response Response object
 	 * @throws Elastica_Exception If ids is empty
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 */
 	public function deleteIds(array $ids, $index, $type) {
 		if (empty($ids)) {
@@ -217,10 +223,10 @@ class Elastica_Client
 	 * 		array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '2'))
 	 * );
 	 *
-	 * @todo Test
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 * @param array $params Parameter array
 	 * @return Elastica_Response Reponse object
+	 * @todo Test
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 */
 	public function bulk(array $params) {
 		if (empty($params)) {
@@ -266,8 +272,9 @@ class Elastica_Client
 	/**
 	 * Optimizes all search indices
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/
+	 * @param array $args OPTIONAL Optional arguments
 	 * @return Elastica_Response Response object
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/
 	 */
 	public function optimizeAll($args = array()) {
 		return $this->request('_optimize', Elastica_Request::POST, $args);
@@ -278,9 +285,7 @@ class Elastica_Client
 	 *
 	 * All calls that are made to the server are down over this function
 	 *
-	 * @param string $path Path to call
-	 * @param string $method Rest method to use (GET, POST, DELETE, PUT)
-	 * @param array $data OPTIONAL Arguments as array
+	 * @param Elastica_Request $request Request object
 	 * @return Elastica_Response Response object
 	 */
 	protected function _callService(Elastica_Request $request) {

@@ -1,4 +1,8 @@
 CHANGES
+2011-04-14
+- Elastica_Type getCount replace by count()
+- Count has now optional query parametere
+
 2011-04-01
 - Renaming of functions in Elastica_Query_Terms and Ela-stica_Query_Filter to fit new naming convention. setTerms, addTerm have different API now!
 
