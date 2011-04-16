@@ -17,7 +17,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 
 		$index = $client->getIndex('aaa');
 		$index->delete();
-		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 1)));
+		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)));
 
 		$doc = new Elastica_Document('user', 1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
 
@@ -49,7 +49,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 		$indexParams = array(
 			'index' => array(
 				'number_of_shards' => 1,
-				'number_of_replicas' => 1
+				'number_of_replicas' => 0
 			),
 		);
 
@@ -91,7 +91,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 		$indexParams = array(
 			'index' => array(
 				'number_of_shards' => 1,
-				'number_of_replicas' => 1
+				'number_of_replicas' => 0
 			),
 		);
 
@@ -131,7 +131,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 		$typeName = 'test';
 
 		$index = $client->getIndex($indexName1);
-		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 1)), true);
+		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
 		$doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin'));
 

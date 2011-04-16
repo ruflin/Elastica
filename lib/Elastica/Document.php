@@ -20,7 +20,7 @@ class Elastica_Document {
 
 	protected $_type = '';
 	protected $_index = '';
-	
+
 	protected $_version = '';
 
 	/**
@@ -28,6 +28,8 @@ class Elastica_Document {
 	 *
 	 * @param int OPTIONAL $id Id is create if empty
 	 * @param array $data OPTIONAL Data array
+	 * @param string $type OPTIONAL Type name
+	 * @param string $index OPTIONAL Index name
 	 */
 	public function __construct($id = '', array $data = array(), $type = '', $index = '') {
 		$this->_id = $id;
@@ -68,6 +70,7 @@ class Elastica_Document {
 	 *
 	 * @param string $key Key to add the file to
 	 * @param string $filepath Path to add the file
+	 * @param string $mimeType OPTIONAL Header mime type
 	 */
 	public function addFile($key, $filepath, $mimeType = '') {
 		$value = base64_encode(file_get_contents($filepath));
