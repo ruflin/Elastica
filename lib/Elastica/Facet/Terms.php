@@ -1,11 +1,12 @@
 <?php
 /**
- * Terms facet
+ * Implements the terms facet.
  *
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
+ * @link http://www.elasticsearch.org/guide/reference/api/search/facets/terms-facet.html
  */
 class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 {
@@ -83,7 +84,7 @@ class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 	}
 
 	/**
-	 * Sets a general parameter for this Facet by key and value.
+	 * Sets a general parameter for this facet by key and value.
 	 *
 	 * @param string $key Key to set
 	 * @param mixed $value Value
