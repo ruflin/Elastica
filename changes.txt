@@ -1,4 +1,7 @@
 CHANGES
+2011-04-17
+- Elastica_Filter_Exists added
+
 2011-04-14
 - Elastica_Type getCount replace by count()
 - Count has now optional query parametere
