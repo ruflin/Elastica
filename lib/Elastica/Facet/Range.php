@@ -6,7 +6,6 @@
  * @package Elastica
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/range-facet.html
- * @todo Implement the script based key and value.
  */
 class Elastica_Facet_Range extends Elastica_Facet_Abstract
 {
@@ -37,6 +36,17 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
 	public function setKeyValueFields($keyField, $valueField) {
 		return $this->setParam('key_field', $keyField)
 					->setParam('value_field', $valueField);
+	}
+	
+	/**
+	 * Sets the key and value for this facet by script.
+	 * 
+	 * @param string $keyScript Script to check whether it falls into the range.
+	 * @param string $valueScript Script to use for statistical calculations.
+	 */
+	public function setKeyValueScripts($keyScript, $valueScript) {
+		return $this->setParam('key_script', $keyScript)
+					->setParam('value_script', $valueScript);
 	}
 	
 	/**
@@ -105,15 +115,28 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
 	 */
 	public function toArray() {
 		/**
-		 * Check the facet for validity:
-		 *  - only the field param OR the key_field should be set.
+		 * Check the facet for validity.
+		 * There are three ways to set the key and value field for the range:
+		 *  - a single field for both key and value; or
+		 *  - separate fields for key and value; or
+		 *  - separate scripts for key and value. 
 		 */
-		if (!isset($this->_params['field']) && !isset($this->_params['key_field'])) {
-			throw new Elastica_Exception_Invalid('Neither field nor key_field is set.');
+		$field_types_set = 0;
+		if (isset($this->_params['field'])) {
+			$field_types_set++;
+		}
+		if (isset($this->_params['key_field'])) {
+			$field_types_set++;
+		}
+		if (isset($this->_params['key_script'])) {
+			$field_types_set++;
 		}
 		
-		if (isset($this->_params['field']) && $this->_params['key_field']) {
-			throw new Elastica_Exception_Invalid('Either field or key_field and key_value should be set.');
+		if ($field_types_set === 0) {
+			throw new Elastica_Exception_Invalid('Neither field, key_field nor key_script is set.');
+		}
+		else if ($field_types_set > 1) {
+			throw new Elastica_Exception_Invalid('Either field, key_field and key_value or key_script and value_script should be set.');
 		}
 		
 		/**
