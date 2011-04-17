@@ -22,7 +22,8 @@ abstract class Elastica_Facet_Abstract
 	protected $_query = array();
 
 	/**
-	 * Constructs an Facet object.
+	 * Constructs a Facet object.
+	 * 
 	 * @param string $name The name of the facet.
 	 */
 	public function __construct($name) {
@@ -32,7 +33,8 @@ abstract class Elastica_Facet_Abstract
 	/**
 	 * Sets the name of the facet. It is automatically set by
 	 * the constructor.
-	 * @param string $name
+	 * 
+	 * @param string $name The name of the facet.
 	 * @throws Elastica_Exception_Invalid
 	 * @return Elastica_Facet_Abstract
 	 */
@@ -46,6 +48,7 @@ abstract class Elastica_Facet_Abstract
 
 	/**
 	 * Gets the name of the facet.
+	 * 
 	 * @return string
 	 */
 	public function getName() {
@@ -54,7 +57,8 @@ abstract class Elastica_Facet_Abstract
 
 	/**
 	 * Sets a filter for this facet.
-	 * @param Elastica_Filter_Abstract $filter
+	 * 
+	 * @param Elastica_Filter_Abstract $filter A filter to apply on the facet.
 	 * @return Elastica_Facet_Abstract
 	 */
 	public function setFilter(Elastica_Filter_Abstract $filter) {
@@ -63,8 +67,9 @@ abstract class Elastica_Facet_Abstract
 
 	/**
 	 * Sets a param for the facet.
-	 * @param string $key
-	 * @param mixed $value
+	 * 
+	 * @param string $key The key of the param to set.
+	 * @param mixed $value The value of the param.
 	 * @return Elastica_Facet_Abstract
 	 */
 	public function setParam($key, $value) {
@@ -76,7 +81,8 @@ abstract class Elastica_Facet_Abstract
 	 * Sets the flag to either run the facet globally or bound to the
 	 * current search query. When not set, it defaults to the 
 	 * ElasticSearch default value.
-	 * @param bool $global
+	 * 
+	 * @param bool $global Flag to either run the facet globally.
 	 */
 	public function setGlobal($global = true) {
 		$this->_query['global'] = (bool) $global;
@@ -86,6 +92,7 @@ abstract class Elastica_Facet_Abstract
 	 * Abstract definition of all specs of the facet. It needs to be 
 	 * overridden by the implementation in order to set the facet-type
 	 * specific parameters.
+	 * 
 	 * @return array
 	 */
 	abstract public function toArray();
