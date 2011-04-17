@@ -100,6 +100,7 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
 	 * facet definition of the parent.
 	 * 
 	 * @see Elastica_Facet_Abstract::toArray()
+	 * @throws Elastica_Exception_Invalid When the right fields haven't been set.
 	 * @return array
 	 */
 	public function toArray() {
