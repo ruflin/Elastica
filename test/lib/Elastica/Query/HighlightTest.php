@@ -20,26 +20,28 @@ class Elastica_Query_HighlightTest extends PHPUnit_Framework_TestCase
 		$doc = new Elastica_Document(2, array('id' => 2, 'email' => 'test@test.com', 'username' => 'peter', 'test' => array('2', '3', '5')));
 		$type->addDocument($doc);
 
-        $queryString = new Elastica_Query_QueryString('test*');
-        $query = new Elastica_Query($queryString);
-        $query->setHighlight(array(
-            'pre_tags' => array('<em class="highlight">'),
-            'post_tags' => array('</em>'),
-            'fields' => array(
-                'email' => array(
-                    'fragment_size' => 200,
-                    'number_of_fragments' => 1,
-                ),
-            ),
-        ));
+		$queryString = new Elastica_Query_QueryString('test*');
+		$query = new Elastica_Query($queryString);
+		$query->setHighlight(array(
+			'pre_tags' => array('<em class="highlight">'),
+			'post_tags' => array('</em>'),
+			'fields' => array(
+				'email' => array(
+					'fragment_size' => 200,
+					'number_of_fragments' => 1,
+				),
+			),
+		));
+
+
 
 		$index->refresh();
 
 		$resultSet = $type->search($query);
-        foreach ($resultSet as $result) {
-            $highlight = $result->getHighlights();
-            $this->assertEquals($highlight, array("email"=> array(0=>'<em class="highlight">test@test.com</em>')));
-        }
+		foreach ($resultSet as $result) {
+			$highlight = $result->getHighlights();
+			$this->assertEquals(array('email' => array(0 => '<em class="highlight">test@test.com</em>')), $highlight);
+		}
 		$this->assertEquals(2, $resultSet->count());
 
 	}
