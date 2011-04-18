@@ -134,9 +134,9 @@ class Elastica_Query
 	/**
 	 * Sets highlight arguments for the query
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/highlighting/
 	 * @param array $highlightArgs Set all highlight arguments
 	 * @return Elastica_Query Query object
+	 * @link http://www.elasticsearch.org/guide/reference/api/search/highlighting.html
 	 */
 	public function setHighlight(array $highlightArgs) {
 		return $this->setParam('highlight', $highlightArgs);
