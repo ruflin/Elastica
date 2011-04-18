@@ -26,7 +26,7 @@ class Elastica_Query_HighlightTest extends PHPUnit_Framework_TestCase
             'pre_tags' => array('<em class="highlight">'),
             'post_tags' => array('</em>'),
             'fields' => array(
-                '_all' => array(
+                'email' => array(
                     'fragment_size' => 200,
                     'number_of_fragments' => 1,
                 ),
@@ -37,7 +37,8 @@ class Elastica_Query_HighlightTest extends PHPUnit_Framework_TestCase
 
 		$resultSet = $type->search($query);
         foreach ($resultSet as $result) {
-            print_r($result->getHighlights());
+            $highlight = $result->getHighlights();
+            $this->assertEquals($highlight, array("email"=> array(0=>'<em class="highlight">test@test.com</em>')));
         }
 		$this->assertEquals(2, $resultSet->count());
 
