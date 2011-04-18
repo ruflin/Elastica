@@ -28,7 +28,7 @@ class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 	/**
 	 * Sets the field for the terms.
 	 * 
-	 * @param string $field
+	 * @param string $field The field name for the terms.
 	 * @return Elastica_Facet_Terms
 	 */
 	public function setField($field) {
@@ -38,7 +38,7 @@ class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 	/**
 	 * Sets multiple fields for the terms.
 	 * 
-	 * @param array $fields
+	 * @param array $fields Numerical array with the fields for the terms.
 	 * @return Elastica_Facet_Terms
 	 */
 	public function setFields(array $fields) {
@@ -49,7 +49,7 @@ class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 	 * Sets the flag to return all available terms. When they
 	 * don't have a hit, they have a count of zero.
 	 * 
-	 * @param bool $allTerms
+	 * @param bool $allTerms Flag to fetch all terms.
 	 * @return Elastica_Facet_Terms
 	 */
 	public function setAllTerms($allTerms) {
@@ -61,7 +61,7 @@ class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 	 * Sets the ordering type for this facet. ElasticSearch
 	 * internal default is count.
 	 * 
-	 * @param string $type
+	 * @param string $type The order type to set use for sorting of the terms.
 	 * @throws Elastica_Exception_Invalid When an invalid order type was set.
 	 * @return Elastica_Facet_Terms
 	 */
@@ -76,7 +76,7 @@ class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 	/**
 	 * Set an array with terms which are omitted in the search.
 	 * 
-	 * @param array $exclude
+	 * @param array $exclude Numerical array which includes all terms which needs to be ignored.
 	 * @return Elastica_Facet_Terms
 	 */
 	public function setExclude(array $exclude) {
@@ -98,7 +98,7 @@ class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 	/**
 	 * Sets the amount of terms to be returned.
 	 * 
-	 * @param int $size
+	 * @param int $size The amount of terms to be returned.
 	 * @return Elastica_Facet_Terms
 	 */
 	public function setSize($size) {
