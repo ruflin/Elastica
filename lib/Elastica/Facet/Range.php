@@ -121,21 +121,21 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
 		 *  - separate fields for key and value; or
 		 *  - separate scripts for key and value. 
 		 */
-		$field_types_set = 0;
+		$fieldTypesSet = 0;
 		if (isset($this->_params['field'])) {
-			$field_types_set++;
+			$fieldTypesSet++;
 		}
 		if (isset($this->_params['key_field'])) {
-			$field_types_set++;
+			$fieldTypesSet++;
 		}
 		if (isset($this->_params['key_script'])) {
-			$field_types_set++;
+			$fieldTypesSet++;
 		}
 		
-		if ($field_types_set === 0) {
+		if ($fieldTypesSet === 0) {
 			throw new Elastica_Exception_Invalid('Neither field, key_field nor key_script is set.');
 		}
-		else if ($field_types_set > 1) {
+		else if ($fieldTypesSet > 1) {
 			throw new Elastica_Exception_Invalid('Either field, key_field and key_value or key_script and value_script should be set.');
 		}
 		
