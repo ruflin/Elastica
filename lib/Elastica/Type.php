@@ -74,7 +74,7 @@ class Elastica_Type implements Elastica_Searchable
 	public function getDocument($id) {
 		$path = $id;
 
-		$result = $this->request($path, Elastica_Request::GET);
+		$result = $this->request($path, Elastica_Request::GET)->getData();
 
 		$document = new Elastica_Document($id, $result['_source'], $this->getType(),  $this->getIndex());
 		$document->setVersion($result['_version']);
