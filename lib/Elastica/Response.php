@@ -60,7 +60,7 @@ class Elastica_Response {
 	/**
 	 * Gets the transfer information if in DEBUG mode.
 	 * 
-	 * @return array
+	 * @return array Information about the curl request.
 	 */
 	public function getTransferInfo() {
 		return $this->_transferInfo;
