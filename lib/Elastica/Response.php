@@ -58,7 +58,7 @@ class Elastica_Response {
 	}
 
 	public function getTransferInfo() {
-		return $this->_transferInfo();
+		return $this->_transferInfo;
 	}
 
 	public function setTransferInfo(array $transferInfo) {
