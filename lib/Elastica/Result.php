@@ -108,6 +108,19 @@ class Elastica_Result
 	}
 
 	/**
+	 * Returns explanation on how its score was computed.
+	 *
+	 * @return array explanations
+	 */
+	public function getExplanation() {
+		if (isset($this->_hit['_explanation'])) {
+			return $this->_hit['_explanation'];
+		} else {
+			return array();
+		}
+	}
+
+	/**
 	 * Magic function to directly access keys inside the result
 	 *
 	 * Returns null if key does not exist
