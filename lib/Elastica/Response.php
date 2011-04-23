@@ -57,10 +57,21 @@ class Elastica_Response {
 		return $response;
 	}
 
+	/**
+	 * Gets the transfer information if in DEBUG mode.
+	 * 
+	 * @return array
+	 */
 	public function getTransferInfo() {
 		return $this->_transferInfo;
 	}
 
+	/**
+	 * Sets the transfer info of the curl request. This function is called
+	 * from the Elastica_Client::_callService only in debug mode.
+	 * 
+	 * @param array $transferInfo The curl transfer information.
+	 */
 	public function setTransferInfo(array $transferInfo) {
 		$this->_transferInfo = $transferInfo;
 	}
