@@ -8,5 +8,12 @@
  */
 abstract class Elastica_Query_Abstract
 {
+	/**
+	 * Converts a query to an array
+	 *
+	 * All query objects have to implement this function
+	 *
+	 * @return array Query array
+	 */
 	abstract public function toArray();
 }

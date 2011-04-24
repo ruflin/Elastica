@@ -107,11 +107,11 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
 	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
 	{
 		$find = array(
-		T_COMMENT,
-		T_DOC_COMMENT,
-		T_CLASS,
-		T_FUNCTION,
-		T_OPEN_TAG,
+			T_COMMENT,
+			T_DOC_COMMENT,
+			T_CLASS,
+			T_FUNCTION,
+			T_OPEN_TAG,
 		);
 
 		$commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1));
@@ -218,11 +218,11 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
 			$newlineCount += $newlineBetween;
 		}
 
-		// Exactly one blank line before tags.
+		// Exactly one blank line before tags or no line -> can be used for getters
 		$params = $this->_commentParser->getTagOrders();
 		if (count($params) > 1) {
 			$newlineSpan = $comment->getNewlineAfter();
-			if ($newlineSpan !== 2) {
+			if ($newlineSpan !== 2 && $newlineSpan !== 0) {
 				$error = 'There must be exactly one blank line before the tags in function comment';
 				if ($long !== '') {
 					$newlineCount += (substr_count($long, $phpcsFile->eolChar) - $newlineSpan + 1);
@@ -375,8 +375,8 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
 				}
 
 				if ($paramComment === '') {
-					$error = 'Missing comment for param "'.$paramName.'" at position '.$pos;
-					$this->_currentFile->addError($error, $errorPos);
+					//$error = 'Missing comment for param "'.$paramName.'" at position '.$pos;
+					//$this->_currentFile->addError($error, $errorPos);
 				}
 
 				$previousParam = $param;

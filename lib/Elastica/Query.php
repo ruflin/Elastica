@@ -4,10 +4,10 @@
  *
  * Creates different types of queries
  *
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/
  */
 class Elastica_Query
 {
@@ -111,9 +111,9 @@ class Elastica_Query
 	 * Sets sort arguments for the query
 	 * Replaces existing values
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/sort/
 	 * @param array $sortArgs Sorting arguments
 	 * @return Elastica_Query Query object
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/sort/
 	 */
 	public function setSort(array $sortArgs) {
 		return $this->setParam('sort', $sortArgs);
@@ -122,11 +122,11 @@ class Elastica_Query
 	/**
 	 * Adds a sort param to the query
 	 *
-	 * @todo Test
 	 * @param mixed $sort Sort parameter
 	 * @return Elastica_Query Query object
 	 */
 	public function addSort($sort) {
+		// TODO: test
 		$this->_query['sort'][] = $sort;
 		return $this;
 	}
@@ -145,9 +145,9 @@ class Elastica_Query
 	/**
 	 * Adds a highlight argument
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/highlighting/
-	 * @param mixed $highlightArg Add highlight argument
+	 * @param mixed $highlight Add highlight argument
 	 * @return Elastica_Query Query object
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/highlighting/
 	 */
 	public function addHighlight($highlight) {
 		$this->_query['highlight'][] = $highlight;
@@ -177,8 +177,9 @@ class Elastica_Query
 	/**
 	 * Enables explain on the query
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/explain/
 	 * @param bool $explain OPTIONAL Enabled or disable explain (default = true)
+	 * @return Elastica_Query Current object
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/explain/
 	 */
 	public function setExplain($explain = true) {
 		return $this->setParam('explain', $explain);
@@ -187,8 +188,9 @@ class Elastica_Query
 	/**
 	 * Enables version on the query
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/version/
 	 * @param bool $version OPTIONAL Enabled or disable version (default = true)
+	 * @return Elastica_Query Current object
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/version/
 	 */
 	public function setVersion($version = true) {
 		return $this->setParam('version', $version);
@@ -197,8 +199,9 @@ class Elastica_Query
 	/**
 	 * Sets the fields to be returned by the search
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/fields/
 	 * @param array $fields Fields to be returne
+	 * @return Elastica_Query Current object
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/fields/
 	 */
 	public function setFields(array $fields) {
 		return $this->setParam('fields', $fields);
@@ -207,8 +210,9 @@ class Elastica_Query
 	/**
 	 * Set script fields
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/script_fields/
 	 * @param array $scriptFields Script fields
+	 * @return Elastica_Query Current object
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/script_fields/
 	 */
 	public function setScriptFields(array $scriptFields) {
 		return $this->setParam('script_field', $scriptFields);
@@ -217,9 +221,9 @@ class Elastica_Query
 	/**
 	 * Sets all facets for this query object. Replaces existing facets
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/facets
 	 * @param array $facets List of facet objects
 	 * @return Elastica_Query Query object
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/facets
 	 */
 	public function setFacets(array $facets) {
 		$this->_query['facets'] = array();

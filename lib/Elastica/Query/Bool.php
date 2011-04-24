@@ -2,11 +2,11 @@
 /**
  * Bool query
  *
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/bool_query/
  * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/bool_query/
  */
 class Elastica_Query_Bool extends Elastica_Query_Abstract
 {
@@ -17,18 +17,43 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
 	protected $_should = array();
 	protected $_mustNot = array();
 
+	/**
+	 * Add should part to query
+	 *
+	 * @param Elastica_Query_Abstract|array $args Should query
+	 * @return Elastica_Query_Bool Current object
+	 */
 	public function addShould($args) {
-		$this->_addQuery('should', $args);
+		return $this->_addQuery('should', $args);
 	}
 
+	/**
+	 * Add must part to query
+	 *
+	 * @param Elastica_Query_Abstract|array $args Must query
+	 * @return Elastica_Query_Bool Current object
+	 */
 	public function addMust($args) {
-		$this->_addQuery('must', $args);
+		return $this->_addQuery('must', $args);
 	}
 
+	/**
+	 * Add must not part to query
+	 *
+	 * @param Elastica_Query_Abstract|array $args Must not query
+	 * @return Elastica_Query_Bool Current object
+	 */
 	public function addMustNot($args) {
-		$this->_addQuery('mustNot', $args);
+		return $this->_addQuery('mustNot', $args);
 	}
 
+	/**
+	 * Adds a query to the current object
+	 *
+	 * @param string $type Query type
+	 * @param Elastica_Query_Abstract|array $args Query
+	 * @throws Elastica_Exception_Invalid If not valid query
+	 */
 	public function _addQuery($type, $args) {
 		if ($args instanceof Elastica_Query_Abstract) {
 			$args = $args->toArray();
@@ -40,8 +65,15 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
 
 		$varName = '_' . $type;
 		$this->{$varName}[] = $args;
+		return $this;
 	}
 
+	/**
+	 * Converts query to an array
+	 *
+	 * @return array Data array
+	 * @see Elastica_Query_Abstract::toArray()
+	 */
 	public function toArray() {
 		$args = array();
 
@@ -63,12 +95,26 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
 		return array('bool' => $args);
 	}
 
+	/**
+	 * Sets boost value of this query
+	 *
+	 * @param float $boost Boost value
+	 * @return Elastica_Query_Bool Current object
+	 */
 	public function setBoost($boost) {
 		$this->_boost = $boost;
+		return $this;
 	}
 
+	/**
+	 * Set the minimum number of of should match
+	 *
+	 * @param int $minimumNumberShouldMatch Should match minimum
+	 * @return Elastica_Query_Bool Current object
+	 */
 	public function setMinimumNumberShouldMatch($minimumNumberShouldMatch) {
-		$this->_minimumNumberShouldMatch = intval($minimumNumberShouldMatch);
+		$this->_minimumNumberShouldMatch = (int) $minimumNumberShouldMatch;
+		return $this;
 	}
 
 }

@@ -2,11 +2,11 @@
 /**
  * Terms query
  *
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/terms-query.html
  * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/terms-query.html
  */
 class Elastica_Query_Terms extends Elastica_Query_Abstract
 {
@@ -14,6 +14,10 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
 	protected $_params = array();
 	protected $_key = '';
 
+	/**
+	 * @param string $key OPTIONAL Terms key
+	 * @param array $terms OPTIONLA Terms list
+	 */
 	public function __construct($key = '', array $terms = array()) {
 		$this->setTerms($key, $terms);
 	}
@@ -30,11 +34,24 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
 		return $this;
 	}
 
+	/**
+	 * Adds a single term to the list
+	 *
+	 * @param string $term Term
+	 */
 	public function addTerm($term) {
 		$this->_terms[] = $term;
 		return $this;
 	}
 
+	/**
+	 * Sets a general parameter for the terms query array
+	 *
+	 * This can be used to set not supported params
+	 *
+	 * @param string $key Key to set
+	 * @param mixed $value Value to key
+	 */
 	public function setParam($key, $value) {
 		$this->_params[$key] = $value;
 		return $this;
@@ -49,6 +66,12 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
 		return $this->setParam('minimum_match', (int) $minimium);
 	}
 
+	/**
+	 * Converts the terms object to an array
+	 *
+	 * @return array Query array
+	 * @see Elastica_Query_Abstract::toArray()
+	 */
 	public function toArray() {
 		if (empty($this->_key)) {
 			throw new Elastica_Exception_Invalid('Terms key has to be set');

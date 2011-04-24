@@ -107,6 +107,7 @@ class Elastica_Status
 		}
 		return $indices;
 	}
+
 	/**
 	 * Returns response object
 	 *
@@ -116,10 +117,16 @@ class Elastica_Status
 		return $this->_response;
 	}
 
+	/**
+	 * @return array Shards info
+	 */
 	public function getShards() {
 		return $this->_data['shards'];
 	}
 
+	/**
+	 * Refresh status object
+	 */
 	public function refresh() {
 		$path = '_status';
 		$this->_response = $this->_client->request($path, Elastica_Request::GET);
