@@ -2,11 +2,11 @@
 /**
  * Term query
  *
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/term_query/
  * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/term_query/
  */
 class Elastica_Query_Term extends Elastica_Query_Abstract
 {

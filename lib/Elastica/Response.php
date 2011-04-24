@@ -1,7 +1,13 @@
 <?php
-
-// Stores query time, and result array -> is given to resultset, returned by ...
-
+/**
+ * Elastica Response object
+ *
+ * Stores query time, and result array -> is given to resultset, returned by ...
+ *
+ * @category Xodoa
+ * @package Elastica
+ * @author Nicolas Ruflin <spam@ruflin.com>
+ */
 class Elastica_Response {
 
 	protected $_queryTime = null;
@@ -9,10 +15,16 @@ class Elastica_Response {
 	protected $_error = false;
 	protected $_transferInfo = array();
 
+	/**
+	 * @param string $responseString Response string (json)
+	 */
 	public function __construct($responseString) {
 		$this->_responseString = $responseString;
 	}
 
+	/**
+	 * @return string Error message
+	 */
 	public function getError() {
 		$message = '';
 		$response = $this->getData();
@@ -23,6 +35,9 @@ class Elastica_Response {
 		return $message;
 	}
 
+	/**
+	 * @return bool True if response has error
+	 */
 	public function hasError() {
 		$response = $this->getData();
 
@@ -32,6 +47,9 @@ class Elastica_Response {
 		return false;
 	}
 
+	/**
+	 * @return array Response data array
+	 */
 	public function getData() {
 
 		$response = $this->_responseString;
@@ -57,12 +75,22 @@ class Elastica_Response {
 		return $response;
 	}
 
+	/**
+	 * @return array Transfer info
+	 */
 	public function getTransferInfo() {
-		return $this->_transferInfo();
+		return $this->_transferInfo;
 	}
 
+	/**
+	 * Sets the transfer info
+	 *
+	 * @param array $transferInfo Transfer info
+	 * @return Elastica_Response Current object
+	 */
 	public function setTransferInfo(array $transferInfo) {
 		$this->_transferInfo = $transferInfo;
+		return $this;
 	}
 
 	/**
@@ -74,7 +102,14 @@ class Elastica_Response {
 		return $this->_queryTime;
 	}
 
+	/**
+	 * Sets the query time
+	 *
+	 * @param float $queryTime Query time
+	 * @return Elastica_Response Current object
+	 */
 	public function setQueryTime($queryTime) {
-		return $this->_queryTime = $queryTime;
+		$this->_queryTime = $queryTime;
+		return $this;
 	}
 }

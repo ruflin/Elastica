@@ -15,12 +15,15 @@ class Elastica_Result
 	/**
 	 * Constructs a single results object
 	 *
-	 * @param array $hit
+	 * @param array $hit Hit data
 	 */
 	public function __construct(array $hit) {
 		$this->_hit = $hit;
 	}
 
+	/**
+	 * @return int Hit id
+	 */
 	public function getId() {
 		return $this->_hit['_id'];
 	}
