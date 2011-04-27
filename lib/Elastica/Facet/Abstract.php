@@ -19,7 +19,7 @@ abstract class Elastica_Facet_Abstract
 	 * Holds all facet parameters.
 	 * @var array
 	 */
-	protected $_query = array();
+	protected $_facet = array();
 
 	/**
 	 * Constructs a Facet object.
@@ -62,19 +62,7 @@ abstract class Elastica_Facet_Abstract
 	 * @return Elastica_Facet_Abstract
 	 */
 	public function setFilter(Elastica_Filter_Abstract $filter) {
-		return $this->setParam('facet_filter', $filter->toArray());
-	}
-
-	/**
-	 * Sets a param for the facet.
-	 * 
-	 * @param string $key The key of the param to set.
-	 * @param mixed $value The value of the param.
-	 * @return Elastica_Facet_Abstract
-	 */
-	public function setParam($key, $value) {
-		$this->_query[$key] = $value;
-		return $this;
+		return $this->_setFacetParam('facet_filter', $filter->toArray());
 	}
 
 	/**
@@ -83,17 +71,33 @@ abstract class Elastica_Facet_Abstract
 	 * ElasticSearch default value.
 	 * 
 	 * @param bool $global Flag to either run the facet globally.
+	 * @return Elastica_Facet_Abstract
 	 */
 	public function setGlobal($global = true) {
-		$this->_query['global'] = (bool) $global;
+		return $this->_setFacetParam('global', (bool) $global);
 	}
 
 	/**
-	 * Abstract definition of all specs of the facet. It needs to be 
-	 * overridden by the implementation in order to set the facet-type
-	 * specific parameters.
+	 * Basic definition of all specs of the facet. Each implementation
+	 * should override this function in order to set it's specific
+	 * settings.
 	 * 
 	 * @return array
 	 */
-	abstract public function toArray();
+	public function toArray() {
+		return $this->_facet;
+	}
+	
+	/**
+	 * Sets a param for the facet. Each facet implementation needs to take
+	 * care of handling their own params.
+	 * 
+	 * @param string $key The key of the param to set.
+	 * @param mixed $value The value of the param.
+	 * @return Elastica_Facet_Abstract
+	 */
+	protected function _setFacetParam($key, $value) {
+		$this->_facet[$key] = $value;
+		return $this;
+	}
 }

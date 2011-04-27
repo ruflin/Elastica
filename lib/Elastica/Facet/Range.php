@@ -142,7 +142,7 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
 		/**
 		 * Set the range in the abstract as param.
 		 */
-		parent::setParam('range', $this->_params);
-		return $this->_query;
+		$this->_setFacetParam('range', $this->_params);
+		return parent::toArray();
 	}
 }
