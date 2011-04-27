@@ -5,8 +5,7 @@ Elastica: elasticsearch PHP Client
 PHP client for the distributed search engine [elasticsearch](http://www.elasticsearch.com/) which is 
 based on [Lucene](http://lucene.apache.org/java/docs/index.html) and can be an alternative to [solr](http://lucene.apache.org/solr/).
 
-This client is similar to [nervetattoo elasticsearch PHP client](http://github.com/nervetattoo/elasticsearch) (also a lot of ideas are borrowed from the client),
-but the naming is consistent with [Zend Framework](http://framework.zend.com/)
+The client naming and structure is consistent with [Zend Framework](http://framework.zend.com/)
 and other PHP frameworks. This makes it easy to use the client in combination with Zend Framework.
 
 With this client I try to model the elasticsearch REST API in an object oriented way which also makes it possible to extend the client and add new types of queries,
@@ -48,17 +47,17 @@ Lots of basic examples can also be found in the test classes.
 	// Adds a list of documents with _bulk upload to the index
 	$docs = array();
 	$docs[] = new Elastica_Document(2, 
-		array('username' => 'john', 'test' => array('1', '3', '6'))
+		array('username' => 'nicolas', 'test' => array('1', '3', '6'))
 	);
 	$docs[] = new Elastica_Document(3, 
-		array('username' => 'rolf', 'test' => array('2', '3', '7'))
+		array('username' => 'ruflin', 'test' => array('2', '3', '7'))
 	);
 	$type->addDocuments($docs);
 
 	// Index needs a moment to be updated
 	$index->refresh();
 
-	$resultSet = $type->search('rolf');
+	$resultSet = $type->search('ruflin');
 
 
 The basic object structure is as following:
@@ -79,5 +78,4 @@ File upload is supported but the mapper attachement plugin has to be installed
 
 Credits
 -------
-The basic ideas for this client are from nervetattoo (Raymond Julin) who already created a client for elasticsearch in PHP that can be found here:
-http://github.com/nervetattoo/elasticsearch
+To all users that gave feedback and committed code [https://github.com/ruflin/Elastica/network/members](https://github.com/ruflin/Elastica/network/members).
