@@ -64,7 +64,7 @@ class Elastica_Type implements Elastica_Searchable
 
 		return $this->getIndex()->addDocuments($docs);
 	}
-	
+
 	/**
 	 * Get the document from search index
 	 *
@@ -80,8 +80,8 @@ class Elastica_Type implements Elastica_Searchable
 		$document->setVersion($result['_version']);
 		return $document;
 	}
-	
-	
+
+
 	/**
 	 * Returns the type name
 	 *
@@ -97,12 +97,11 @@ class Elastica_Type implements Elastica_Searchable
 	 * @param array $properties Property array with all mappings
 	 * @param bool $source OPTIONAL If source should be stored or not (default = true)
 	 */
-	public function setMapping(array $properties, $source = true) {
-		$path = '_mapping';
+	public function setMapping($mapping) {
 
-		$data = array($this->getType() => array('properties' => $properties, '_source' => array('enabled' => $source)));
-
-		return $this->request($path, Elastica_Request::PUT, $data);
+		$mapping = Elastica_Type_Mapping::create($mapping);
+		$mapping->setType($this);
+		return $mapping->send();
 	}
 
 	/**
