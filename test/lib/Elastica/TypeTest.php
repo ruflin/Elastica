@@ -53,12 +53,12 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
 		$index->create(array(), true);
 
 		$type = new Elastica_Type($index, 'user');
-		$type->setMapping(
-			array(
+		$mapping = new Elastica_Type_Mapping($type, array(
 				'id' => array('type' => 'integer', 'store' => 'yes'),
 				'username' => array('type' => 'string', 'store' => 'no'),
-			), false
-		);
+			));
+		$mapping->setSource(array('enabled' => false));
+		$type->setMapping($mapping);
 
 
 		// Adds 1 document to the index

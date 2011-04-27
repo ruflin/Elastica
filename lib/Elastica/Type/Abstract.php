@@ -64,7 +64,12 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
 	 */
 	public function create($recreate = false) {
 		$this->getIndex()->create($this->_indexParams, $recreate);
-		$this->getType()->setMapping($this->_mapping, $this->_source);
+
+		$mapping = new Elastica_Type_Mapping($this->getType());
+		$mapping->setProperties($this->_mapping);
+		$mapping->setSource(array('enabled' => $this->_source));
+		$mapping->send();
+		//$this->getType()->setMapping($this->_mapping, $this->_source);
 	}
 
 	/**

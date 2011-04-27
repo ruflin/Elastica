@@ -159,7 +159,7 @@ class Elastica_Client
 	 */
 	public function deleteDocuments(array $docs) {
 		// TODO: similar to delete ids but with type and index inside files
-		throw new Elastica_Exception('not implemented yet');
+		throw new Elastica_Exception_NotImplemented('not implemented yet');
 	}
 
 	/**
@@ -192,7 +192,7 @@ class Elastica_Client
 	 */
 	public function deleteIds(array $ids, $index, $type) {
 		if (empty($ids)) {
-			throw new Elastica_Exception('Array has to consist of at least one id');
+			throw new Elastica_Exception_Invalid('Array has to consist of at least one id');
 		}
 
 		$params = array();
@@ -230,7 +230,7 @@ class Elastica_Client
 	 */
 	public function bulk(array $params) {
 		if (empty($params)) {
-			throw new Elastica_Exception('Array has to consist of at least one param');
+			throw new Elastica_Exception_Invalid('Array has to consist of at least one param');
 		}
 
 		$path = '_bulk';

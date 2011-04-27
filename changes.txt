@@ -1,4 +1,8 @@
 CHANGES
+2011-04-27
+- Refactoring of Elastica_Type::setMapping. No source parameter anymore.
+- Elastica_Type_Mapping object introduced to set more fine grained mapping
+
 2011-04-17
 - Elastica_Filter_Exists added
 
