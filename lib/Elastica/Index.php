@@ -25,6 +25,7 @@ class Elastica_Index implements Elastica_Searchable
 	 *
 	 * All the communication to and from an index goes of this object
 	 *
+	 * @param Elastica_Client $client Client object
 	 * @param string $name Index name
 	 */
 	public function __construct(Elastica_Client $client, $name) {
@@ -68,8 +69,8 @@ class Elastica_Index implements Elastica_Searchable
 	/**
 	 * Uses _bulk to send documents to the server
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 * @param array $docs Array of Elastica_Document
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 */
 	public function addDocuments(array $docs) {
 		foreach ($docs as $doc) {
@@ -95,9 +96,9 @@ class Elastica_Index implements Elastica_Searchable
 	 *
 	 * Detailed arguments can be found here in the link
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/
 	 * @param array $args OPTIONAL Additional arguments
 	 * @return array Server response
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/
 	 */
 	public function optimize($args = array()) {
 		// TODO: doesn't seem to work?
@@ -107,8 +108,8 @@ class Elastica_Index implements Elastica_Searchable
 	/**
 	 * Refreshs the index
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/refresh/
 	 * @return Elastica_Response Response object
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/refresh/
 	 */
 	public function refresh() {
 		return $this->request('_refresh', Elastica_Request::POST, array());
@@ -117,10 +118,10 @@ class Elastica_Index implements Elastica_Searchable
 	/**
 	 * Creates a new index with the given arguments
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/
 	 * @param array $args OPTIONAL Arguments to use
 	 * @param bool $recreate OPTIONAL Deletes index first if already exists (default = false)
 	 * @return array Server response
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/
 	 */
 	public function create(array $args = array(), $recreate = false) {
 		if ($recreate) {
@@ -158,8 +159,8 @@ class Elastica_Index implements Elastica_Searchable
 	/**
 	 * Opens an index
 	 *
-	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html
 	 * @return Elastica_Response Response object
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html
 	 */
 	public function open() {
 		$this->request('_open', Elastica_Request::POST);
@@ -168,8 +169,8 @@ class Elastica_Index implements Elastica_Searchable
 	/**
 	 * Closes the index
 	 *
-	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html
 	 * @return Elastica_Response Response object
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html
 	 */
 	public function close() {
 		return $this->request('_close', Elastica_Request::POST);
@@ -197,10 +198,10 @@ class Elastica_Index implements Elastica_Searchable
 	/**
 	 * Adds an alias to the current index
 	 *
-	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
 	 * @param string $name Alias name
 	 * @param bool $replace OPTIONAL If set, an existing alias will be replaced
 	 * @return Elastica_Response Response
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
 	 */
 	public function addAlias($name, $replace = false) {
 		$path = '_aliases';
@@ -230,9 +231,9 @@ class Elastica_Index implements Elastica_Searchable
 	/**
 	 * Removes an alias pointing to the current index
 	 *
-	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
 	 * @param string $name Alias name
 	 * @return Elastica_Response Response
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
 	 */
 	public function removeAlias($name) {
 		$path = '_aliases';
@@ -255,9 +256,9 @@ class Elastica_Index implements Elastica_Searchable
 	 * Can be used to change settings during runtime. One example is to use
 	 * if for bulk updating {@link http://www.elasticsearch.org/blog/2011/03/23/update-settings.html}
 	 *
-	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
 	 * @param array $data Data array
 	 * @return Elastica_Response Response object
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
 	 */
 	public function setSettings(array $data) {
 		return $this->request('_settings', Elastica_Request::PUT, $data);

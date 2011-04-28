@@ -22,10 +22,28 @@ class Elastica_Result
 	}
 
 	/**
+	 * Returns a param from the result hit array
+	 *
+	 * This function can be used to retriev all data for which not a specific
+	 * function exists.
+	 * If the param does not exists and empty array is retured
+	 *
+	 * @param string $name Param name
+	 * @return array Result data
+	 */
+	public function getParam($name) {
+		if (isset($this->_hit[$name])) {
+			return $this->_hit[$name];
+		} else {
+			return array();
+		}
+	}
+
+	/**
 	 * @return int Hit id
 	 */
 	public function getId() {
-		return $this->_hit['_id'];
+		return $this->getParam('_id');
 	}
 
 	/**
@@ -34,7 +52,16 @@ class Elastica_Result
 	 * @return string Result type
 	 */
 	public function getType() {
-		return $this->_hit['_type'];
+		return $this->getParam('_type');
+	}
+
+	/**
+	 * Returns list of fields
+	 *
+	 * @return array Fields list
+	 */
+	public function getFields() {
+		return $this->getParam('_fields');
 	}
 
 	/**
@@ -43,7 +70,7 @@ class Elastica_Result
 	 * @return string Index name
 	 */
 	public function getIndex() {
-		return $this->_hit['_index'];
+		return $this->getParam('_index');
 	}
 
 	/**
@@ -52,7 +79,7 @@ class Elastica_Result
 	 * @return float Results score
 	 */
 	public function getScore() {
-		return $this->_hit['_score'];
+		return $this->getParam('_score');
 	}
 
 	/**
@@ -70,7 +97,7 @@ class Elastica_Result
 	 * @return string|int Document version
 	 */
 	public function getVersion() {
-		return $this->_hit['_version'];
+		return $this->getParam('_version');
 	}
 
 	/**
@@ -90,11 +117,7 @@ class Elastica_Result
 	 * @return array Source data array
 	 */
 	public function getSource() {
-		if (isset($this->_hit['_source'])) {
-			return $this->_hit['_source'];
-		} else {
-			return array();
-		}
+		return $this->getParam('_source');
 	}
 
 	/**
@@ -103,11 +126,7 @@ class Elastica_Result
 	 * @return array Result data array
 	 */
 	public function getHighlights() {
-		if (isset($this->_hit['highlight'])) {
-			return $this->_hit['highlight'];
-		} else {
-			return array();
-		}
+		return $this->getParam('highlight');
 	}
 
 	/**
@@ -116,11 +135,7 @@ class Elastica_Result
 	 * @return array explanations
 	 */
 	public function getExplanation() {
-		if (isset($this->_hit['_explanation'])) {
-			return $this->_hit['_explanation'];
-		} else {
-			return array();
-		}
+		return $this->getParam('_explanation');
 	}
 
 	/**

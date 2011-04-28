@@ -1,4 +1,8 @@
 CHANGES
+
+2011-04-29
+- Added getParam to Elastica_Result that more values can be retrieved from the hit array
+
 2011-04-28
 - Release of version 0.16.0.0 (see new version naming structure in README)
 

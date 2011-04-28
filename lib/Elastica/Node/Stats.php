@@ -2,10 +2,10 @@
 /**
  * Elastica cluster node object
  *
- * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
 class Elastica_Node_Stats
 {
@@ -15,11 +15,22 @@ class Elastica_Node_Stats
 
 	protected $_node = null;
 
+	/**
+	 * @param Elastica_Node $node Elastica node object
+	 */
 	public function __construct(Elastica_Node $node) {
 		$this->_node = $node;
 		$this->refresh();
 	}
 
+	/**
+	 * Returns all node stats as array based on the arguments
+	 *
+	 * Several arguments can be use
+	 * get('index', 'test', 'example')
+	 *
+	 * @return array Node stats for the given field or null if not found
+	 */
 	public function get() {
 
 		$data = $this->getData();
@@ -35,10 +46,18 @@ class Elastica_Node_Stats
 		return $data;
 	}
 
+	/**
+	 * Returns all stats data
+	 *
+	 * @return array Data array
+	 */
 	public function getData() {
 		return $this->_data;
 	}
 
+	/**
+	 * @return Elastica_Node Node object
+	 */
 	public function getNode() {
 		return $this->_node;
 	}

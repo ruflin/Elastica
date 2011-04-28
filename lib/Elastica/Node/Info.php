@@ -2,10 +2,10 @@
 /**
  * Elastica cluster node object
  *
- * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
 class Elastica_Node_Info
 {
@@ -15,6 +15,9 @@ class Elastica_Node_Info
 
 	protected $_node = null;
 
+	/**
+	 * @param Elastica_Node $node Node object
+	 */
 	public function __construct(Elastica_Node $node) {
 		$this->_node = $node;
 		$this->refresh();
@@ -22,7 +25,7 @@ class Elastica_Node_Info
 
 	/**
 	 * Returns the entry in the data array based on the params.
-	 * Various params possible.
+	 * Several params possible.
 	 *
 	 * Example 1: get('os', 'mem', 'total') returns total memory of the system the
 	 * node is running on
@@ -45,14 +48,18 @@ class Elastica_Node_Info
 		return $data;
 	}
 
+	/**
+	 * Return all info data
+	 *
+	 * @return array Data array
+	 */
 	public function getData() {
 		return $this->_data;
 	}
 
-	public function getName() {
-		return $this->_name;
-	}
-
+	/**
+	 * @return Elastica_Node Node object
+	 */
 	public function getNode() {
 		return $this->_node;
 	}

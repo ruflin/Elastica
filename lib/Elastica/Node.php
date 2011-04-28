@@ -2,10 +2,10 @@
 /**
  * Elastica cluster node object
  *
- * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
 class Elastica_Node
 {
@@ -27,6 +27,9 @@ class Elastica_Node
 		$this->refresh();
 	}
 
+	/**
+	 * @return string Node name
+	 */
 	public function getName() {
 		return $this->_name;
 	}
@@ -53,6 +56,9 @@ class Elastica_Node
 		return $this->_stats;
 	}
 
+	/**
+	 * @return Elastica_Node_Info Node info object
+	 */
 	public function getInfo() {
 		if (!$this->_info) {
 			$this->_info = new Elastica_Node_Info($this);
@@ -61,6 +67,11 @@ class Elastica_Node
 		return $this->_info;
 	}
 
+	/**
+	 * Refreshs all node information
+	 *
+	 * This should be called after upating a node to refresh all information
+	 */
 	public function refresh() {
 		$this->_stats = null;
 		$this->_info = null;

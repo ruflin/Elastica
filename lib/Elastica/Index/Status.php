@@ -2,10 +2,10 @@
 /**
  * Elastica index status object
  *
- * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
 class Elastica_Index_Status
 {
@@ -15,17 +15,21 @@ class Elastica_Index_Status
 
 	protected $_name = '';
 
+	/**
+	 * @param Elastica_Index $index Index object
+	 */
 	public function __construct(Elastica_Index $index) {
 		$this->_index = $index;
 		$this->refresh();
 	}
 
+	/**
+	 * Returns all status info
+	 *
+	 * @return array Status info
+	 */
 	public function getData() {
 		return $this->_data;
-	}
-
-	public function getName() {
-		return $this->getIndex()->getName();
 	}
 
 	/**
@@ -37,7 +41,7 @@ class Elastica_Index_Status
 	public function get() {
 
 		$data = $this->getData();
-		$data = $data['indices'][$this->getName()];
+		$data = $data['indices'][$this->getIndex()->getName()];
 
 		foreach (func_get_args() as $arg) {
 			if (isset($data[$arg])) {
@@ -50,6 +54,11 @@ class Elastica_Index_Status
 		return $data;
 	}
 
+	/**
+	 * Returns all index aliases
+	 *
+	 * @return array Aliases
+	 */
 	public function getAliases() {
 		// TODO Update as soon as new API is implmented
 		$cluster = new Elastica_Cluster($this->_index->getClient());
@@ -57,6 +66,11 @@ class Elastica_Index_Status
 		return $state['metadata']['indices'][$this->_index->getName()]['aliases'];
 	}
 
+	/**
+	 * Returns all index settings
+	 *
+	 * @return array Index settings
+	 */
 	public function getSettings() {
 		// TODO Update as soon as new API is implmented
 		$cluster = new Elastica_Cluster($this->_index->getClient());
@@ -64,6 +78,11 @@ class Elastica_Index_Status
 		return $state['metadata']['indices'][$this->_index->getName()]['settings'];
 	}
 
+	/**
+	 * Checks if the index has the given alias
+	 *
+	 * @param string $name Alias name
+	 */
 	public function hasAlias($name) {
 		return in_array($name, $this->getAliases());
 	}

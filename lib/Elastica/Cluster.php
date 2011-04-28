@@ -42,8 +42,8 @@ class Elastica_Cluster
 	/**
 	 * Returns the full state of the cluster
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/state
 	 * @return array State array
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/state
 	 */
 	public function getState() {
 		return $this->_data;
@@ -92,6 +92,7 @@ class Elastica_Cluster
 	}
 
 	/**
+	 * @param array $args OPTIONAL
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/health/
 	 */
 	public function getHealth($args = array()) {
@@ -99,6 +100,7 @@ class Elastica_Cluster
 	}
 
 	/**
+	 * @param array $args OPTIONAL
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/nodes_restart/
 	 */
 	public function restart(array $args) {
@@ -107,6 +109,7 @@ class Elastica_Cluster
 	}
 
 	/**
+	 * @param array $args OPTIONAL
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/nodes_shutdown/
 	 */
 	public function shutdown(array $args) {

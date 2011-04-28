@@ -2,10 +2,10 @@
 /**
  * Elastica index settings object
  *
- * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
  */
 class Elastica_Index_Settings
 {
@@ -15,6 +15,9 @@ class Elastica_Index_Settings
 
 	protected $_name = '';
 
+	/**
+	 * @param Elastica_Index $index Index object
+	 */
 	public function __construct(Elastica_Index $index) {
 		$this->_index = $index;
 	}
@@ -107,6 +110,8 @@ class Elastica_Index_Settings
 	 * - index.merge.policy
 	 * - index.auto_expand_replicas
 	 *
+	 * @param array $data OPTIONAL Data array
+	 * @param string $method OPTIONAL Transfer method (default = Elastica_Request::GET)
 	 * @return Elastica_Response Response object
 	 */
 	public function request(array $data = array(), $method = Elastica_Request::GET) {

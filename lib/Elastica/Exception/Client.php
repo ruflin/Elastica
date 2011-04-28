@@ -12,6 +12,11 @@ class Elastica_Exception_Client extends Elastica_Exception_Abstract {
 	protected $_request = null;
 	protected $_response = null;
 
+	/**
+	 * @param string $error Error
+	 * @param Elastica_Request $request
+	 * @param Elastica_Response $response
+	 */
 	public function __construct($error, Elastica_Request $request = null, Elastica_Response $response = null) {
 		$this->_error = $error;
 		$this->_request = $request;
@@ -25,6 +30,7 @@ class Elastica_Exception_Client extends Elastica_Exception_Abstract {
 	 * Returns the error message corresponding to the error code
 	 * cUrl error code reference can be found here {@link http://curl.haxx.se/libcurl/c/libcurl-errors.html}
 	 *
+	 * @param string $error Error code
 	 * @return string Error message
 	 */
 	public function getErrorMessage($error) {
@@ -59,6 +65,9 @@ class Elastica_Exception_Client extends Elastica_Exception_Abstract {
 		return $error;
 	}
 
+	/**
+	 * @return string Error code / message
+	 */
 	public function getError() {
 		return $this->_error;
 	}
