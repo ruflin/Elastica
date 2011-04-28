@@ -1,4 +1,7 @@
 CHANGES
+2011-04-28
+- Release of version 0.16.0.0 (see new version naming structure in README)
+
 2011-04-27
 - Refactoring of Elastica_Type::setMapping. No source parameter anymore.
 - Elastica_Type_Mapping object introduced to set more fine grained mapping
