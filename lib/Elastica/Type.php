@@ -94,7 +94,7 @@ class Elastica_Type implements Elastica_Searchable
 	/**
 	 * Sets value type mapping for this type
 	 *
-	 * @param array $properties Property array with all mappings
+	 * @param Elastica_Type_Mapping|array $mapping Elastica_Type_Mapping object or property array with all mappings
 	 * @param bool $source OPTIONAL If source should be stored or not (default = true)
 	 */
 	public function setMapping($mapping) {

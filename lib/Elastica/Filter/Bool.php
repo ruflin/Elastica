@@ -2,11 +2,11 @@
 /**
  * Bool Filter
  *
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/bool_query/
  * @uses Elastica_Filter_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/bool_query/
  */
 class Elastica_Filter_Bool extends Elastica_Filter_Abstract
 {
@@ -16,19 +16,44 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract
 	protected $_should = array();
 	protected $_mustNot = array();
 
+	/**
+	 * Adds should filter
+	 *
+	 * @param array|Elastica_Filter_Abstract $args Filter data
+	 * @return Elastica_Filter_Bool Current object
+	 */
 	public function addShould($args) {
-		$this->_addFilter('should', $args);
+		return $this->_addFilter('should', $args);
 	}
 
+	/**
+	 * Adds must filter
+	 *
+	 * @param array|Elastica_Filter_Abstract $args Filter data
+	 * @return Elastica_Filter_Bool Current object
+	 */
 	public function addMust($args) {
-		$this->_addFilter('must', $args);
+		return $this->_addFilter('must', $args);
 	}
 
+	/**
+	 * Adds mustNot filter
+	 *
+	 * @param array|Elastica_Filter_Abstract $args Filter data
+	 * @return Elastica_Filter_Bool Current object
+	 */
 	public function addMustNot($args) {
-		$this->_addFilter('mustNot', $args);
+		return $this->_addFilter('mustNot', $args);
 	}
 
-	public function _addFilter($type, $args) {
+	/**
+	 * Adds general filter based on type
+	 *
+	 * @param string $type Filter type
+	 * @param array|Elastica_Filter_Abstract $args Filter data
+	 * @return Elastica_Filter_Bool Current object
+	 */
+	protected function _addFilter($type, $args) {
 		if ($args instanceof Elastica_Filter_Abstract) {
 			$args = $args->toArray();
 		}
@@ -39,8 +64,15 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract
 
 		$varName = '_' . $type;
 		$this->{$varName}[] = $args;
+		return $this;
 	}
 
+	/**
+	 * Converts bool filter to array
+	 *
+	 * @see Elastica_Filter_Abstract::toArray()
+	 * @return array Filter array
+	 */
 	public function toArray() {
 		$args = array();
 
@@ -60,12 +92,26 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract
 		return array('bool' => $args);
 	}
 
+	/**
+	 * Sets the boost value for this filter
+	 *
+	 * @param float $boost Boost
+	 * @return Elastica_Filter_Bool Current object
+	 */
 	public function setBoost($boost) {
 		$this->_boost = $boost;
+		return $this;
 	}
 
+	/**
+	 * Sets the minimum number that should filter have to match
+	 *
+	 * @param int $minimumNumberShouldMatch Number of matches
+	 * @return Elastica_Filter_Bool Current object
+	 */
 	public function setMinimumNumberShouldMatch($minimumNumberShouldMatch) {
 		$this->_minimumNumberShouldMatch = intval($minimumNumberShouldMatch);
+		return $this;
 	}
 
 }

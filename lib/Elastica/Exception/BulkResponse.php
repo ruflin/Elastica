@@ -9,6 +9,9 @@ class Elastica_Exception_BulkResponse extends Elastica_Exception_Abstract {
 
 	protected $_response = null;
 
+	/**
+	 * @param Elastica_Response $response
+	 */
 	public function __construct(Elastica_Response $response) {
 		$this->_response = $response;
 		parent::__construct('Error in one or more bulk request actions');

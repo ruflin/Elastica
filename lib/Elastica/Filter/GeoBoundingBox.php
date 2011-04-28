@@ -2,15 +2,21 @@
 /**
  * Geo bounding box filter
  *
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/geo_bounding_box_filter/
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/geo_bounding_box_filter/
  */
 class Elastica_Filter_GoeBoundingBox extends Elastica_Filter_Abstract
 {
-	public function toArray()
-	{
+	/**
+	 * Returns filter ojbect as array
+	 * @see Elastica_Filter_Abstract::toArray()
+	 * @return array Filter array
+	 */
+	public function toArray() {
+		// TODO: implement
+		return array();
 	}
 }
 

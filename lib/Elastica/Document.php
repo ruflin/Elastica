@@ -26,7 +26,7 @@ class Elastica_Document {
 	/**
 	 * Creates a new document
 	 *
-	 * @param int OPTIONAL $id Id is create if empty
+	 * @param int $id OPTIONAL $id Id is create if empty
 	 * @param array $data OPTIONAL Data array
 	 * @param string $type OPTIONAL Type name
 	 * @param string $index OPTIONAL Index name
@@ -91,10 +91,10 @@ class Elastica_Document {
 	 *
 	 * Geohashes re not yet supported
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/mapping/geo_point/
 	 * @param string $key Field key
 	 * @param float $latitude Latitud value
 	 * @param float $longitude Longitude value
+	 * @link http://www.elasticsearch.com/docs/elasticsearch/mapping/geo_point/
 	 */
 	public function addGeoPoint($key, $latitude, $longitude) {
 
@@ -124,10 +124,21 @@ class Elastica_Document {
 		return $this->_data;
 	}
 
+	/**
+	 * Sets the document type name
+	 *
+	 * @param string $type Type name
+	 * @return Elastica_Document Current object
+	 */
 	public function setType($type) {
 		$this->_type = $type;
+		return $this;
 	}
 
+	/**
+	 * @return string Document type name
+	 * @throws Elastica_Exception_Invalid
+	 */
 	public function getType() {
 		$type = $this->_type;
 
@@ -137,10 +148,21 @@ class Elastica_Document {
 		return $type;
 	}
 
+	/**
+	 * Sets the document index name
+	 *
+	 * @param string $index Index name
+	 * @return Elastica_Document Current object
+	 */
 	public function setIndex($index) {
 		$this->_index = $index;
+		return $this;
 	}
 
+	/**
+	 * @return string Index name
+	 * @throws Elastica_Exception_Invalid
+	 */
 	public function getIndex() {
 		$index = $this->_index;
 
@@ -153,13 +175,15 @@ class Elastica_Document {
 	/**
 	 * Sets the version of a document for use with optimistic concurrency control
 	 *
-	 * @link http://www.elasticsearch.org/blog/2011/02/08/versioning.html
 	 * @param int $version Document version
+	 * @return Elastica_Document Current object
+	 * @link http://www.elasticsearch.org/blog/2011/02/08/versioning.html
 	 */
 	public function setVersion($version) {
 		if($version !== '') {
 			$this->_version = (int) $version;
 		}
+		return $this;
 	}
 
 	/**
