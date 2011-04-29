@@ -40,6 +40,10 @@ class Elastica_Query
 				return $query;
 			case $query instanceof Elastica_Query_Abstract:
 				return new self($query);
+			case $query instanceof Elastica_Filter_Abstract:
+				$newQuery = new Elastica_Query();
+				$newQuery->setFilter($query);
+				return $newQuery;
 			case empty($query):
 				return new self(new Elastica_Query_MatchAll());
 			case is_string($query):
