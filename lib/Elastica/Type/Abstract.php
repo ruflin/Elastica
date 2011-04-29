@@ -81,7 +81,7 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
 	/**
 	 * {@inheritDoc}
 	 */
-	public function count($query) {
+	public function count($query = '') {
 		return $this->getType()->count($query);
 	}
 

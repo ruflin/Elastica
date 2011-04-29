@@ -130,7 +130,7 @@ class Elastica_Type implements Elastica_Searchable
 	/**
 	 * {@inheritDoc}
 	 */
-	public function count($query) {
+	public function count($query = '') {
 		$query = Elastica_Query::create($query);
 		$path = '_count';
 
