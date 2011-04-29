@@ -83,19 +83,18 @@ class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
 		$index = $client->getIndex($indexName);
 		$index->create(array(), true);
 
-
 		$settings = $index->getSettings();
 
-		$settings->setRefreshInterval('2s');
-		$index->refresh();
-		$this->assertEquals('2s', $settings->get('index.refresh_interval'));
+		$this->assertEquals(Elastica_Index_Settings::DEFAULT_REFRESH_INTERVAL, $settings->getRefreshInterval());
 
-		$settings->setRefreshInterval('5s');
+		$interval = '2s';
+		$settings->setRefreshInterval($interval);
 		$index->refresh();
-		$this->assertEquals('5s', $settings->get('index.refresh_interval'));
+		$this->assertEquals($interval, $settings->getRefreshInterval());
+		$this->assertEquals($interval, $settings->get('index.refresh_interval'));
 	}
 
-	public function testSetMergePolicyFactor() {
+	public function testSetMergePolicyMergeFactor() {
 		$indexName = 'test';
 
 		$client = new Elastica_Client();
@@ -104,13 +103,31 @@ class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
 
 		$settings = $index->getSettings();
 
-		$settings->setMergePolicyFactor(10);
+		$settings->setMergePolicyMergeFactor(10);
 		$index->refresh();
 
 		$this->assertEquals(10, $settings->get('index.merge.policy.merge_factor'));
 
-		$settings->setMergePolicyFactor(50);
+		$settings->setMergePolicyMergeFactor(50);
 		$index->refresh();
 		$this->assertEquals(50, $settings->get('index.merge.policy.merge_factor'));
+	}
+
+	public function testGetMergePolicyMergeFactor() {
+		$indexName = 'test';
+
+		$client = new Elastica_Client();
+		$index = $client->getIndex($indexName);
+		$index->create(array(), true);
+
+		$settings = $index->getSettings();
+
+		$this->assertEquals(Elastica_Index_Settings::DEFAULT_MERGE_POLICY_MERGE_FACTOR, $settings->getMergePolicyMergeFactor());
+
+		$interval = '20';
+		$settings->setMergePolicyMergeFactor($interval);
+		$index->refresh();
+		$this->assertEquals($interval, $settings->getMergePolicyMergeFactor());
+		$this->assertEquals($interval, $settings->get('index.merge.policy.merge_factor'));
 	}
 }
