@@ -40,10 +40,22 @@ class Elastica_Result
 	}
 
 	/**
-	 * @return int Hit id
+	 * Returns the hit id.
+	 *
+	 * The id is not stored anymore by default in the index since
+	 * elasticsearch 0.16.0 {@link https://github.com/elasticsearch/elasticsearch/issues/868}
+	 *
+	 * @return string Hit id
+	 * @throws Elastica_Exception_Invalid If id is not set
 	 */
 	public function getId() {
-		return $this->getParam('_id');
+		$id = $this->getParam('_id');
+
+		if (empty($id)) {
+			throw new Elastica_Exception_Invalid('No hit id. _id is not stored by default anymore since 0.16.0');
+		}
+
+		return $id;
 	}
 
 	/**
