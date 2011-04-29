@@ -55,8 +55,7 @@ class Elastica_Index_Settings
 		$replicas = (int) $replicas;
 
 		$data = array('number_of_replicas' => $replicas);
-
-		return $this->request($data, Elastica_Request::PUT);
+		return $this->set($data);
 	}
 
 	/**
@@ -69,8 +68,7 @@ class Elastica_Index_Settings
 		$shards = (int) $shards;
 
 		$data = array('number_of_shards' => $shards);
-
-		return $this->request($data, Elastica_Request::PUT);
+		return $this->set($data);
 	}
 
 
@@ -84,7 +82,26 @@ class Elastica_Index_Settings
 	 * @return Elastica_Response Response object
 	 */
 	public function setRefreshInterval($interval) {
-		$data = array('refresh_interval' => $interval);
+		return $this->set(array('refresh_interval' => $interval));
+	}
+
+	/**
+	 * Sets the merge policy factor
+	 *
+	 * @param int $factor Merge factor
+	 * @return Elastica_Response Response object
+	 */
+	public function setMergePolicyFactor($factor) {
+		return $this->set(array('merge.policy.merge_factor' => $factor));
+	}
+
+	/**
+	 * Can be used to set/update settings
+	 *
+	 * @param array $data Arguments
+	 * @return Elastica_Response Response object
+	 */
+	public function set(array $data) {
 		return $this->request($data, Elastica_Request::PUT);
 	}
 
