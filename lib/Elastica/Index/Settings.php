@@ -15,6 +15,9 @@ class Elastica_Index_Settings
 
 	protected $_name = '';
 
+	const DEFAULT_REFRESH_INTERVAL = '1s';
+	const DEFAULT_MERGE_POLICY_MERGE_FACTOR = 10;
+
 	/**
 	 * @param Elastica_Index $index Index object
 	 */
@@ -86,13 +89,47 @@ class Elastica_Index_Settings
 	}
 
 	/**
+	 * Returns the refresh interval
+	 *
+	 * If no interval is set, the default interval is returned
+	 *
+	 * @return string Refresh interval
+	 */
+	public function getRefreshInterval() {
+		$interval = $this->get('index.refresh_interval');
+
+		if (empty($interval)) {
+			$interval = self::DEFAULT_REFRESH_INTERVAL;
+		}
+
+		return $interval;
+	}
+
+	/**
 	 * Sets the merge policy factor
 	 *
 	 * @param int $factor Merge factor
 	 * @return Elastica_Response Response object
 	 */
-	public function setMergePolicyFactor($factor) {
+	public function setMergePolicyMergeFactor($factor) {
 		return $this->set(array('merge.policy.merge_factor' => $factor));
+	}
+
+	/**
+	 * Returns the merge policy merge factor
+	 *
+	 * If no factor is set, the default factor is returned (see consts)
+	 *
+	 * @return int Merge factor
+	 */
+	public function getMergePolicyMergeFactor() {
+		$factor = $this->get('index.merge.policy.merge_factor');
+
+		if (empty($factor)) {
+			$factor = self::DEFAULT_MERGE_POLICY_MERGE_FACTOR;
+		}
+
+		return $factor;
 	}
 
 	/**
