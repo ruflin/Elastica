@@ -10,14 +10,14 @@ class Elastica_Query_QueryStringTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testSearch() {
-		return;
+
 		$client = new Elastica_Client();
 		$index = new Elastica_Index($client, 'test');
 		$index->create(array(), true);
 
 		$type = new Elastica_Type($index, 'helloworld');
 
-		$doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
+		$doc = new Elastica_Document(1, array('email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
 		$type->addDocument($doc);
 
 		$queryString = new Elastica_Query_QueryString('test*');
