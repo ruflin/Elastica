@@ -21,7 +21,10 @@ class Elastica_Type_Mapping
 		if ($type) {
 			$this->setType($type);
 		}
-		$this->setProperties($properties);
+
+		if (!empty($properties)) {
+			$this->setProperties($properties);
+		}
 	}
 
 	/**
@@ -66,6 +69,18 @@ class Elastica_Type_Mapping
 	 */
 	public function setSource(array $source) {
 		return $this->setParam('_source', $source);
+	}
+
+	/**
+	 * Disables the source in the index
+	 *
+	 * Param can be set to true to enable again
+	 *
+	 * @param bool $enabled OPTIONAL (default = false)
+	 * @return Elastica_Type_Mapping Current object
+	 */
+	public function disableSource($enabled = false) {
+		return $this->setSource(array('enabled' => $enabled));
 	}
 
 	/**
