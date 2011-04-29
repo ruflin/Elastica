@@ -31,9 +31,8 @@ class Elastica_Filter_IdsTest extends PHPUnit_Framework_TestCase
 		$ids = array(1, 7, 13);
 
 		// Only one point should be in radius
-		$query = new Elastica_Query();
 		$idsFilter = new Elastica_Filter_Ids($type, $ids);
-		$query->setFilter($idsFilter);
+		$query = Elastica_Query::create($idsFilter);
 
 		$result = $type->search($query);
 
