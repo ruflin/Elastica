@@ -29,6 +29,8 @@ class Elastica_Query
 	/**
 	 * Transforms a string or an array to a query object
 	 *
+	 * If query is empty,
+	 *
 	 * @param mixed $query
 	 * @return Elastica_Query
 	 **/
@@ -38,10 +40,11 @@ class Elastica_Query
 				return $query;
 			case $query instanceof Elastica_Query_Abstract:
 				return new self($query);
+			case empty($query):
+				return new self(new Elastica_Query_MatchAll());
 			case is_string($query):
 				return new self(new Elastica_Query_QueryString($query));
-			case empty($query):
-				return new self();
+
 		}
 
 		// TODO: Implement queries without
