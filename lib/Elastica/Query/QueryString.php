@@ -82,24 +82,4 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 
 		return array('query_string' => $args);
 	}
-
-	/**
-	 * Escapes the following characters (because part of the query language)
-	 * + - && || ! ( ) { } [ ] ^ " ~ * ? : \
-	 *
-	 * @param string $term Query term to escape
-	 * @return string Escaped query term
-	 * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters
-	 */
-	public static function escapeTerm($term) {
-
-		// \ escaping has to be first, otherwise escaped later once again
-		$chars = array('\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':');
-
-		foreach ($chars as $char) {
-			$term = str_replace($char, '\\' . $char, $term);
-		}
-
-		return $term;
-	}
 }
