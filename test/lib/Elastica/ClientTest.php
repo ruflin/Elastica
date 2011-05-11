@@ -13,7 +13,7 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 	public function testConstruct() {
 		$host = 'ruflin.com';
 		$port = 9300;
-		$client = new Elastica_Client($host, $port);
+		$client = new Elastica_Client(array('host' => $host, 'port' => $port));
 
 		$this->assertEquals($host, $client->getHost());
 		$this->assertEquals($port, $client->getPort());

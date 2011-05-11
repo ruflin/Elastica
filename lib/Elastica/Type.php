@@ -117,7 +117,9 @@ class Elastica_Type implements Elastica_Searchable
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+	 * @return Elastica_ResultSet ResultSet with all results inside
+	 * @see Elastica_Searchable::search
 	 */
 	public function search($query) {
 		$query = Elastica_Query::create($query);
@@ -128,7 +130,9 @@ class Elastica_Type implements Elastica_Searchable
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+	 * @return int number of documents matching the query
+	 * @see Elastica_Searchable::count
 	 */
 	public function count($query = '') {
 		$query = Elastica_Query::create($query);
