@@ -1,8 +1,14 @@
 CHANGES
+2011-05-11
+- Refactor client constructor. Elastica_Client::__construct(array $config) now takes a config array instead of host and port
+
+2011-05-08
+- Elastica_Query_QueryString::escapeTerm move to Elastica_Util::escapeTerm
 
 2011-04-29
 - Added getParam to Elastica_Result that more values can be retrieved from the hit array
 - Elastica_Filter_Ids added http://www.elasticsearch.org/guide/reference/query-dsl/ids-filter.html
+- getMergePolicyMergeFactor and getRefreshInterval to Elastica_Type_Settings added. If no value is set, default values are returned
 
 2011-04-28
 - Release of version 0.16.0.0 (see new version naming structure in README)
