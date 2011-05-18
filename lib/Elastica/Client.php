@@ -25,33 +25,67 @@ class Elastica_Client
 	const TIMEOUT = 300;
 
 	/**
-	 * Client host
+	 * Config with defaults
 	 *
-	 * @var string Host
+	 * @var array
 	 */
-	protected $_host = self::DEFAULT_HOST;
-
-	/**
-	 * Client port
-	 *
-	 * @var int Port
-	 */
-	protected $_port = self::DEFAULT_PORT;
-
-	/**
-	 * HTTP Headers
-	 */
-	protected $_headers = array();
+	protected $_config = array(
+		'host' => self::DEFAULT_HOST,
+		'port' => self::DEFAULT_PORT,
+		'timeout' => self::TIMEOUT,
+		'headers' => array(),
+	);
 
 	/**
 	 * Creates a new Elastica client
 	 *
-	 * @param string $host OPTIONAL Server host (default = self::DEFAULT_HOST)
-	 * @param int $port OPTIONAL Port to connect (default = self::DEFAULT_PORT)
+	 * @param array $config OPTIONAL Additional config options
 	 */
-	public function __construct($host = self::DEFAULT_HOST, $port = self::DEFAULT_PORT) {
-		$this->_host = $host;
-		$this->_port = $port;
+	public function __construct(array $config = array()) {
+		$this->setConfig($config);
+	}
+
+	/**
+	 * Sets specific config values (updates and keeps default values)
+	 *
+	 * @param array $config Params
+	 */
+	public function setConfig($config) {
+		foreach ($config as $key => $value) {
+			$this->_config[$key] = $value;
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Returns a specific config key or the whole
+	 * config array if not set
+	 *
+	 * @param string $key Config key
+	 * @return array|string Config value
+	 */
+	public function getConfig($key = '') {
+		if (empty($key)) {
+			return $this->_config;
+		}
+
+		if (isset($this->_config[$key])) {
+			return $this->_config[$key];
+		}
+
+		return $this->_config;
+	}
+
+	/**
+	 * Sets / overwrites a specific config value
+	 *
+	 * @param string $key Key to set
+	 * @param mixed $value Value
+	 * @return Elastica_Client Client object
+	 */
+	public function setConfigValue($key, $value) {
+		return $this->setConfig(array($key => $value));
 	}
 
 	/**
@@ -70,7 +104,7 @@ class Elastica_Client
 	 * @return string Host
 	 */
 	public function getHost() {
-		return $this->_host;
+		return $this->getConfig('host');
 	}
 
 	/**
@@ -79,7 +113,7 @@ class Elastica_Client
 	 * @return int Connection port
 	 */
 	public function getPort() {
-		return intval($this->_port);
+		return (int) $this->getConfig('port');
 	}
 
 	/**
@@ -91,7 +125,7 @@ class Elastica_Client
 	 */
 	public function addHeader($header, $headerValue) {
 		if (is_string($header) && is_string($headerValue)) {
-			$this->_headers[$header] = $headerValue;
+			$this->_config['headers'][$header] = $headerValue;
 		} else {
 			throw new Elastica_Exception_Invalid('Header must be a string');
 		}
@@ -105,8 +139,8 @@ class Elastica_Client
 	 */
 	public function removeHeader($header) {
 		if (is_string($header)) {
-			if (array_key_exists($header, $this->_headers)) {
-				unset($this->_headers[$header]);
+			if (array_key_exists($header, $this->_config['headers'])) {
+				unset($this->_config['headers'][$header]);
 			}
 		} else {
 			throw new Elastica_Exception_Invalid('Header must be a string');
@@ -295,14 +329,14 @@ class Elastica_Client
 		$baseUri .= $request->getPath();
 
 		curl_setopt($conn, CURLOPT_URL, $baseUri);
-		curl_setopt($conn, CURLOPT_TIMEOUT, self::TIMEOUT);
+		curl_setopt($conn, CURLOPT_TIMEOUT, $this->getConfig('timeout'));
 		curl_setopt($conn, CURLOPT_PORT, $this->getPort());
 		curl_setopt($conn, CURLOPT_RETURNTRANSFER, 1) ;
 		curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $request->getMethod());
 
-		if (!empty($this->_headers)) {
+		if (!empty($this->_config['headers'])) {
 			$headers = array();
-			while (list($header, $headerValue) = each($this->_headers)) {
+			while (list($header, $headerValue) = each($this->_config['headers'])) {
 				array_push($headers, $header . ': ' . $headerValue);
 			}
 

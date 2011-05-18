@@ -72,14 +72,18 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+	 * @return Elastica_ResultSet ResultSet with all results inside
+	 * @see Elastica_Searchable::search
 	 */
 	public function search($query) {
 		return $this->getType()->search($query);
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+	 * @return int number of documents matching the query
+	 * @see Elastica_Searchable::count
 	 */
 	public function count($query = '') {
 		return $this->getType()->count($query);
