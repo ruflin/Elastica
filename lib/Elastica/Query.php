@@ -265,4 +265,18 @@ class Elastica_Query
 
 		return $this->_query;
 	}
+
+	/**
+	 * Allows filtering of documents based on a minimum score
+	 *
+	 * @param int|double $minScore Minimum score to filter documents by
+	 * @return Elastica_Query Query object
+	 */
+	public function setMinScore($minScore) {
+		if (is_numeric($minScore)) {
+			return $this->setParam('min_score', $minScore);
+		} else {
+			return $this;
+		}
+	}
 }
