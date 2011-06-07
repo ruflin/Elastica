@@ -152,7 +152,7 @@ class Elastica_Type implements Elastica_Searchable
 	}
 
 	/**
-	 * Delete an entry by its unique identifier
+	 * Deletes an entry by its unique identifier
 	 *
 	 * @param int|string $id Document id
 	 * @link http://www.elasticsearch.org/guide/reference/api/delete.html
@@ -161,7 +161,7 @@ class Elastica_Type implements Elastica_Searchable
 		if (empty($id) || !trim($id)) {
 			throw new InvalidArgumentException();
 		}
-		$response = $this->request($id, Elastica_Request::DELETE);
+		$this->request($id, Elastica_Request::DELETE);
 	}
 
 	/**
