@@ -15,7 +15,7 @@ class Elastica_Query_QueryStringTest extends PHPUnit_Framework_TestCase
 		$index = new Elastica_Index($client, 'test');
 		$index->create(array(), true);
 		$index->getSettings()->setNumberOfReplicas(0);
-		$index->getSettings()->setNumberOfShards(1);
+		//$index->getSettings()->setNumberOfShards(1);
 
 		$type = new Elastica_Type($index, 'helloworld');
 

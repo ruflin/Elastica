@@ -1,4 +1,7 @@
 CHANGES
+2011-06-07
+- Elastica_Index::setNumberOfShards removed as not supported after creating index
+
 2011-05-11
 - Refactor client constructor. Elastica_Client::__construct(array $config) now takes a config array instead of host and port
 

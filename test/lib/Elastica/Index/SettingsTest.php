@@ -40,23 +40,6 @@ class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(3, $settings->get('index.number_of_replicas'));
 	}
 
-	public function testSetNumberOfShards() {
-		$indexName = 'test';
-
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
-		$settings = $index->getSettings();
-
-		$settings->setNumberOfShards(2);
-		$index->refresh();
-		$this->assertEquals(2, $settings->get('index.number_of_shards'));
-
-		$settings->setNumberOfShards(3);
-		$index->refresh();
-		$this->assertEquals(3, $settings->get('index.number_of_shards'));
-	}
-
 	public function testSetRefreshInterval() {
 		$indexName = 'test';
 
