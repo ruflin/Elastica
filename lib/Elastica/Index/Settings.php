@@ -62,20 +62,6 @@ class Elastica_Index_Settings
 	}
 
 	/**
-	 * Sets the number of shards
-	 *
-	 * @param int $shards Number of shards
-	 * @return Elastica_Response Response object
-	 */
-	public function setNumberOfShards($shards) {
-		$shards = (int) $shards;
-
-		$data = array('number_of_shards' => $shards);
-		return $this->set($data);
-	}
-
-
-	/**
 	 * Sets the index refresh interval
 	 *
 	 * Value can be for example 3s for 3 seconds or
