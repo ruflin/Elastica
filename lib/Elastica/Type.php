@@ -155,13 +155,14 @@ class Elastica_Type implements Elastica_Searchable
 	 * Deletes an entry by its unique identifier
 	 *
 	 * @param int|string $id Document id
+	 * @return Elastica_Response Response object
 	 * @link http://www.elasticsearch.org/guide/reference/api/delete.html
 	 */
 	public function deleteById($id) {
 		if (empty($id) || !trim($id)) {
 			throw new InvalidArgumentException();
 		}
-		$this->request($id, Elastica_Request::DELETE);
+		return $this->request($id, Elastica_Request::DELETE);
 	}
 
 	/**
