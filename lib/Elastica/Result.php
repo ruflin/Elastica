@@ -63,7 +63,7 @@ class Elastica_Result
 	 * @return array Fields list
 	 */
 	public function getFields() {
-		return $this->getParam('_fields');
+		return $this->getParam('fields');
 	}
 
 	/**
@@ -105,12 +105,16 @@ class Elastica_Result
 	/**
 	 * Returns result data
 	 *
-	 * Alias for getSource
+	 * Checks for partial result data with getFields, falls back to getSource
 	 *
 	 * @return array Result data array
 	 */
 	public function getData() {
-		return $this->getSource();
+		if (isset($this->_hit['fields']) && !isset($this->_hit['_source'])) {
+			return $this->getFields();
+		} else {
+			return $this->getSource();
+		}
 	}
 
 	/**

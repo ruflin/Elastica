@@ -14,7 +14,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	protected $_defaultOperator = '';
 	protected $_defaultField = '';
 	protected $_useDisMax = null;
-	protected $_fields = null;
+	protected $_fields = array();
 
 	/**
 	 * Creates query string object. Calls setQuery with argument
@@ -100,12 +100,12 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 			$args['default_field'] = $this->_defaultField;
 		}
 
-		if(is_array($this->_fields)) {
-			$args['fields'] = $this->_fields;
-		}
-
 		if(! is_null($this->_useDisMax)) {
 			$args['use_dis_max'] = $this->_useDisMax;
+		}
+
+		if(!empty($this->_fields)) {
+			$args['fields'] = $this->_fields;
 		}
 
 		return array('query_string' => $args);
