@@ -13,6 +13,8 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	protected $_queryString = '';
 	protected $_defaultOperator = '';
 	protected $_defaultField = '';
+	protected $_useDisMax = null;
+	protected $_fields = null;
 
 	/**
 	 * Creates query string object. Calls setQuery with argument
@@ -21,6 +23,24 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	 */
 	public function __construct($queryString = '') {
 		$this->setQueryString($queryString);
+	}
+
+	/**
+	 * Whether to use bool or dis_max quueries to internally combine results for multi field search.
+	 * @param bool $value
+	 * Determines whether to use
+	 */
+	public function setUseDisMax($value) {
+		$this->_useDisMax = ($value == true);
+	}
+
+	/**
+	 * @param array $fields fields to search within
+	 * @return Elastica_Query_QueryString Current object
+	 */
+	public function setFields(array $fields) {
+		$this->_fields = $fields;
+		return $this;
 	}
 
 	/**
@@ -78,6 +98,14 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 
 		if(!empty($this->_defaultField)) {
 			$args['default_field'] = $this->_defaultField;
+		}
+
+		if(is_array($this->_fields)) {
+			$args['fields'] = $this->_fields;
+		}
+
+		if(! is_null($this->_useDisMax)) {
+			$args['use_dis_max'] = $this->_useDisMax;
 		}
 
 		return array('query_string' => $args);
