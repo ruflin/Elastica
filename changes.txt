@@ -1,4 +1,7 @@
 CHANGES
+2011-06-16
+- Support for multiple index, type queries and _all queries added through Elastica_Search object
+
 2011-06-07
 - Elastica_Index::setNumberOfShards removed as not supported after creating index
 
