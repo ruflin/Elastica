@@ -243,4 +243,12 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 		$response = $index1->clearCache();
 		$this->assertFalse($response->hasError());
 	}
+
+	public function testFlush() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('test1');
+
+		$response = $index->flush();
+		$this->assertFalse($response->hasError());
+	}
 }
