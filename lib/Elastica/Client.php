@@ -42,7 +42,8 @@ class Elastica_Client
 		'transport' => self::DEFAULT_TRANSPORT,
 		'timeout' => self::TIMEOUT,
 		'headers' => array(),
-		'servers' => array()
+		'servers' => array(),
+		'roundRobin' => false,
 	);
 
 	/**

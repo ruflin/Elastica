@@ -20,7 +20,6 @@ class Elastica_ExampleTest extends PHPUnit_Framework_TestCase
 
 		$type = $index->getType('user');
 
-
 		// Adds 1 document to the index
 		$doc1 = new Elastica_Document(1,
 			array('username' => 'hans', 'test' => array('2', '3', '5'))
