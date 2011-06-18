@@ -273,7 +273,7 @@ class Elastica_Index implements Elastica_Searchable
 	}
 
 	/**
-	 * Flushs the complet index
+	 * Flushs the index to storage
 	 *
 	 * @return Elastica_Response Reponse object
 	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html

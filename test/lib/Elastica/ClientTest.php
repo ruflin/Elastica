@@ -24,9 +24,11 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals(Elastica_Client::DEFAULT_HOST, 'localhost');
 		$this->assertEquals(Elastica_Client::DEFAULT_PORT, 9200);
+		$this->assertEquals(Elastica_Client::DEFAULT_TRANSPORT, 'Http');
 
 		$this->assertEquals(Elastica_Client::DEFAULT_HOST, $client->getHost());
 		$this->assertEquals(Elastica_Client::DEFAULT_PORT, $client->getPort());
+		$this->assertEquals(Elastica_Client::DEFAULT_TRANSPORT, $client->getTransport());
 	}
 
 	public function testBulk() {

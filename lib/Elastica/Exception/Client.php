@@ -14,7 +14,7 @@ class Elastica_Exception_Client extends Elastica_Exception_Abstract {
 
 	/**
 	 * @param string $error Error
-	 * @param Elastica_Request $request
+	 * @param Elastica_Transport_Abstract $request
 	 * @param Elastica_Response $response
 	 */
 	public function __construct($error, Elastica_Request $request = null, Elastica_Response $response = null) {
@@ -75,7 +75,7 @@ class Elastica_Exception_Client extends Elastica_Exception_Abstract {
 	/**
 	 * Returns request object
 	 *
-	 * @return Elastica_Request Request object
+	 * @return Elastica_Transport_Abstract Request object
 	 */
 	public function getRequest() {
 		return $this->_request;
