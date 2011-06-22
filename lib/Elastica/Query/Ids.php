@@ -5,7 +5,7 @@
  * @uses Elastica_Filter_Abstract
  * @category Xodoa
  * @package Elastica
- * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
+ * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>, Tim Rupp
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/ids-filter.html
  */
 class Elastica_Query_Ids extends Elastica_Query_Abstract
