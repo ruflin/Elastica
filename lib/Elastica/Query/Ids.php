@@ -1,8 +1,8 @@
 <?php
 /**
- * Ids Filter
+ * Ids Query
  *
- * @uses Elastica_Filter_Abstract
+ * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>, Tim Rupp
@@ -27,7 +27,7 @@ class Elastica_Query_Ids extends Elastica_Query_Abstract
 	 * Adds one more filter to the and filter
 	 *
 	 * @param string $id Adds id to filter
-	 * @return Elastica_Filter_Ids Current object
+	 * @return Elastica_Query_Ids Current object
 	 */
 	public function addId($id) {
 		$this->_params['values'][] = $id;
@@ -54,7 +54,7 @@ class Elastica_Query_Ids extends Elastica_Query_Abstract
 
 	/**
 	 * @param string|Elastica_Type $type Type name or object
-	 * @return Elastica_Filter_Ids Current object
+	 * @return Elastica_Query_Ids Current object
 	 */
 	public function setType($type) {
 		if ($type instanceof Elastica_Type) {
@@ -72,7 +72,7 @@ class Elastica_Query_Ids extends Elastica_Query_Abstract
 	 * Sets the ids to filter
 	 *
 	 * @param array $ids List of ids
-	 * @return Elastica_Filter_Ids Current object
+	 * @return Elastica_Query_Ids Current object
 	 */
 	public function setIds(array $ids) {
 		$this->_params['values'] = $ids;
@@ -82,8 +82,8 @@ class Elastica_Query_Ids extends Elastica_Query_Abstract
 	/**
 	 * Converts filter to array
 	 *
-	 * @see Elastica_Filter_Abstract::toArray()
-	 * @return array Filter array
+	 * @see Elastica_Query_Abstract::toArray()
+	 * @return array Query array
 	 */
 	public function toArray() {
 		return array('ids' => $this->_params);
