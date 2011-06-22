@@ -1,4 +1,7 @@
 CHANGES
+2011-06-19
+- Add support for multiple servers to Elastica_Client (issue #39)
+
 2011-06-16
 - Support for multiple index, type queries and _all queries added through Elastica_Search object
 - Elastica_Index::clearCache added to clean cache
