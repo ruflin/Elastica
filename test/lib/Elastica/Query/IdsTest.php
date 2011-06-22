@@ -3,24 +3,33 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Query_IdsTest extends PHPUnit_Framework_TestCase
 {
+	protected $_index;
 	protected $_type;
 
 	public function setUp() {
 		$client = new Elastica_Client();
 		$index = $client->getIndex('test');
 		$index->create(array(), true);
-		$type = $index->getType('helloworld');
+
+		$type1 = $index->getType('helloworld1');
+		$type2 = $index->getType('helloworld2');
 
 		$doc = new Elastica_Document(1, array('name' => 'hello world'));
-		$type->addDocument($doc);
+		$type1->addDocument($doc);
+
 		$doc = new Elastica_Document(2, array('name' => 'nicolas ruflin'));
-		$type->addDocument($doc);
+		$type1->addDocument($doc);
+
 		$doc = new Elastica_Document(3, array('name' => 'ruflin'));
-		$type->addDocument($doc);
+		$type1->addDocument($doc);
+
+		$doc = new Elastica_Document(4, array('name' => 'hello world again'));
+		$type2->addDocument($doc);
 
 		$index->refresh();
 
-		$this->_type = $type;
+		$this->_type = $type1;
+		$this->_index = $index;
 	}
 
 	public function tearDown() {
@@ -56,5 +65,40 @@ class Elastica_Query_IdsTest extends PHPUnit_Framework_TestCase
 		$resultSet = $this->_type->search($query);
 
 		$this->assertEquals(3, $resultSet->count());
+	}
+
+	public function testSetTypeSearchSingle() {
+		$query = new Elastica_Query_Ids();
+
+		$query->setIds(array('1', '2'));
+		$query->setType('helloworld1');
+
+		$resultSet = $this->_index->search($query);
+
+		$this->assertEquals(2, $resultSet->count());
+	}
+
+	public function testSetTypeSearchSingleDocInOtherType() {
+		$query = new Elastica_Query_Ids();
+
+		// Doc 4 is in the second type...
+		$query->setIds(array('1', '4'));
+		$query->setType('helloworld1');
+
+		$resultSet = $this->_index->search($query);
+
+		// ...therefore only 1 result should be returned
+		$this->assertEquals(1, $resultSet->count());
+	}
+
+	public function testSetTypeSearchArray() {
+		$query = new Elastica_Query_Ids();
+
+		$query->setIds(array('1', '4'));
+		$query->setType(array('helloworld1', 'helloworld2'));
+
+		$resultSet = $this->_index->search($query);
+
+		$this->assertEquals(2, $resultSet->count());
 	}
 }

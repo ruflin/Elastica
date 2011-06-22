@@ -1,100 +1,91 @@
 <?php
 /**
- * Term query
+ * Ids Filter
  *
- * @uses Elastica_Query_Abstract
+ * @uses Elastica_Filter_Abstract
  * @category Xodoa
  * @package Elastica
- * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/query_dsl/ids-query.html
+ * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/ids-filter.html
  */
 class Elastica_Query_Ids extends Elastica_Query_Abstract
 {
-	protected $_ids = array();
-	protected $_type = array();
+	protected $_params = array();
 
 	/**
-	 * Constructs the Ids query object
+	 * Creates filter object
 	 *
-	 * @param array $term OPTIONAL Calls setIds with the given $ids array
+	 * @param string|Elastica_Type $type Type to filter on
+	 * @param array $ids List of ids
 	 */
-	public function __construct(array $ids = array()) {
+	public function __construct($type = null, array $ids = array()) {
+		$this->setType($type);
 		$this->setIds($ids);
 	}
 
 	/**
-	 * Set ids can be used instead of addIds if some more special
-	 * values for an ID have to be set.
+	 * Adds one more filter to the and filter
 	 *
-	 * @param array|string $id Id array|string
-	 * @return Elastica_Query_Ids Current object
-	 */
-	public function setIds($id) {
-		if (is_array($id)) {
-			$this->_ids = $id;
-		} else if (is_numeric($id)) {
-			// Includes IDs of 0
-			$this->_ids = array($id);
-		} else if (!empty($id)) {
-			// Excludes empty strings, but not 0
-			$this->_ids = array($id);
-		}
-
-		return $this;
-	}
-
-	/**
-	 * Sets an optional type to search for IDs in
-	 *
-	 * @param array|string $type Type array|string
-	 */
-	public function setType($type) {
-		if (is_array($type)) {
-			$this->_type = $type;
-		} else if (is_numeric($type)) {
-			// Includes Types of 0
-			$this->_type = array($type);
-		} else if (!empty($type)) {
-			// Excludes empty strings, but not 0
-			$this->_type = array($type);
-		}
-	}
-
-	/**
-	 * Adds an id to the ids query
-	 *
-	 * @param string|array $value Values(s) for the query. Boost can be set with array
-	 * @return Elastica_Query_Term Current object
+	 * @param string $id Adds id to filter
+	 * @return Elastica_Filter_Ids Current object
 	 */
 	public function addId($id) {
-		if (is_array($id)) {
-			$this->_ids = array_merge($this->_ids, $id);
-		} else {
-			$this->_ids[] = $id;
-		}
-
+		$this->_params['values'][] = $id;
 		return $this;
 	}
 
 	/**
-	 * Converts the ids query to an array
+	 * Adds one more type to query
 	 *
-	 * @return array Array ids query
+	 * @param string $type Adds type to query
+	 * @return Elastica_Query_Ids Current object
+	 */
+	public function addType($type) {
+		if ($type instanceof Elastica_Type) {
+			$type = $type->getType();
+		} else if (empty($type) && !is_numeric($type)) {
+			// A type can be 0, but cannot be empty
+			return $this;
+		}
+
+		$this->_params['type'][] = $type;
+		return $this;
+	}
+
+	/**
+	 * @param string|Elastica_Type $type Type name or object
+	 * @return Elastica_Filter_Ids Current object
+	 */
+	public function setType($type) {
+		if ($type instanceof Elastica_Type) {
+			$type = $type->getType();
+		} else if (empty($type) && !is_numeric($type)) {
+			// A type can be 0, but cannot be empty
+			return $this;
+		}
+
+		$this->_params['type'] = $type;
+		return $this;
+	}
+
+	/**
+	 * Sets the ids to filter
+	 *
+	 * @param array $ids List of ids
+	 * @return Elastica_Filter_Ids Current object
+	 */
+	public function setIds(array $ids) {
+		$this->_params['values'] = $ids;
+		return $this;
+	}
+
+	/**
+	 * Converts filter to array
+	 *
+	 * @see Elastica_Filter_Abstract::toArray()
+	 * @return array Filter array
 	 */
 	public function toArray() {
-		$ids = array_unique($this->_ids);
-		$type = array_unique($this->_type);
-
-		$result = array('ids' => array());
-
-		if (!empty($type)) {
-			$result['ids']['type'] = $type;
-		}
-
-		if (!empty($ids)) {
-			$result['ids']['values'] = $ids;
-		}
-
-		return $result;
+		return array('ids' => $this->_params);
 	}
 }
