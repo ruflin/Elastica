@@ -1,6 +1,6 @@
 <?php
 /**
- * Type query
+ * Type filter
  *
  * @uses Elastica_Query_Abstract
  * @category Xodoa
