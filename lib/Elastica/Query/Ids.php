@@ -71,11 +71,16 @@ class Elastica_Query_Ids extends Elastica_Query_Abstract
 	/**
 	 * Sets the ids to filter
 	 *
-	 * @param array $ids List of ids
+	 * @param array|string $ids List of ids
 	 * @return Elastica_Query_Ids Current object
 	 */
-	public function setIds(array $ids) {
-		$this->_params['values'] = $ids;
+	public function setIds($ids) {
+		if (is_array($ids)) {
+			$this->_params['values'] = $ids;
+		} else {
+			$this->_params['values'] = array($ids);
+		}
+
 		return $this;
 	}
 
@@ -89,3 +94,5 @@ class Elastica_Query_Ids extends Elastica_Query_Abstract
 		return array('ids' => $this->_params);
 	}
 }
+
+?>
