@@ -40,6 +40,15 @@ class Elastica_Query_IdsTest extends PHPUnit_Framework_TestCase
 
 	public function testSetIdsSearchSingle() {
 		$query = new Elastica_Query_Ids();
+		$query->setIds('1');
+
+		$resultSet = $this->_type->search($query);
+
+		$this->assertEquals(1, $resultSet->count());
+	}
+
+	public function testSetIdsSearchArray() {
+		$query = new Elastica_Query_Ids();
 		$query->setIds(array('1', '2'));
 
 		$resultSet = $this->_type->search($query);
@@ -47,7 +56,7 @@ class Elastica_Query_IdsTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(2, $resultSet->count());
 	}
 
-	public function testSetIdsSearchArray() {
+	public function testAddIdsSearchSingle() {
 		$query = new Elastica_Query_Ids();
 		$query->addId('3');
 
@@ -67,7 +76,18 @@ class Elastica_Query_IdsTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(3, $resultSet->count());
 	}
 
-	public function testSetTypeSearchSingle() {
+	public function testSetTypeSingleSearchSingle() {
+		$query = new Elastica_Query_Ids();
+
+		$query->setIds('1');
+		$query->setType('helloworld1');
+
+		$resultSet = $this->_index->search($query);
+
+		$this->assertEquals(1, $resultSet->count());
+	}
+
+	public function testSetTypeSingleSearchArray() {
 		$query = new Elastica_Query_Ids();
 
 		$query->setIds(array('1', '2'));
@@ -78,7 +98,20 @@ class Elastica_Query_IdsTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(2, $resultSet->count());
 	}
 
-	public function testSetTypeSearchSingleDocInOtherType() {
+	public function testSetTypeSingleSearchSingleDocInOtherType() {
+		$query = new Elastica_Query_Ids();
+
+		// Doc 4 is in the second type...
+		$query->setIds('4');
+		$query->setType('helloworld1');
+
+		$resultSet = $this->_index->search($query);
+
+		// ...therefore 0 results should be returned
+		$this->assertEquals(0, $resultSet->count());
+	}
+
+	public function testSetTypeSingleSearchArrayDocInOtherType() {
 		$query = new Elastica_Query_Ids();
 
 		// Doc 4 is in the second type...
@@ -91,7 +124,7 @@ class Elastica_Query_IdsTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(1, $resultSet->count());
 	}
 
-	public function testSetTypeSearchArray() {
+	public function testSetTypeArraySearchArray() {
 		$query = new Elastica_Query_Ids();
 
 		$query->setIds(array('1', '4'));
@@ -101,4 +134,17 @@ class Elastica_Query_IdsTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals(2, $resultSet->count());
 	}
+
+	public function testSetTypeArraySearchSingle() {
+		$query = new Elastica_Query_Ids();
+
+		$query->setIds('4');
+		$query->setType(array('helloworld1', 'helloworld2'));
+
+		$resultSet = $this->_index->search($query);
+
+		$this->assertEquals(1, $resultSet->count());
+	}
 }
+
+?>
