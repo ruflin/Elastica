@@ -13,17 +13,25 @@ class Elastica_Request {
 	const GET = 'GET';
 	const DELETE = 'DELETE';
 
+	protected $_client;
 	protected $_path;
-	// TODO: set default method?
 	protected $_method;
 	protected $_data;
+
+	/**
+	 * Internal id of last used server. This is used for round robin
+	 *
+	 * @var int Last server id
+	 */
+	protected static $_serverId = null;
 
 	/**
 	 * @param string $path Request path
 	 * @param string $method Request method (use const's)
 	 * @param array $data Data array
 	 */
-	public function __construct($path, $method, $data = array()) {
+	public function __construct(Elastica_Client $client, $path, $method, $data = array()) {
+		$this->_client = $client;
 		$this->_path = $path;
 		$this->_method = $method;
 		$this->_data = $data;
@@ -80,5 +88,63 @@ class Elastica_Request {
 	 */
 	public function getPath() {
 		return $this->_path;
+	}
+
+	public function getClient() {
+		return $this->_client;
+	}
+
+	/**
+	 * Returns a specific config key or the whole
+	 * config array if not set
+	 *
+	 * @param string $key Config key
+	 * @return array|string Config value
+	 */
+	public function getConfig($key = '') {
+		return $this->getClient()->getConfig($key);
+	}
+
+	/**
+	 * Returns an instance of the transport type
+	 *
+	 * @return Elastica_Transport_Abstract Transport object
+	 * @throws Elastica_Exception_Invalid If invalid transport type
+	 */
+	public function getTransport() {
+		$className = 'Elastica_Transport_' . $this->_client->getConfig('transport');
+		if (!class_exists($className)) {
+			throw new Elastica_Exception_Invalid('Invalid transport');
+		}
+
+		return new $className($this);
+	}
+
+	/**
+	 * Sends request to server
+	 *
+	 * @return Elastica_Response Response object
+	 */
+	public function send() {
+		$transport = $this->getTransport();
+
+		$servers = $this->getClient()->getConfig('servers');
+
+		if (empty($servers)) {
+			$response = $transport->exec($this->getClient()->getHost(), $this->getClient()->getPort());
+		} else {
+			// Set server id for first request (round robin by default)
+			if (is_null(self::$_serverId)) {
+				self::$_serverId = rand(0, count($servers) - 1);
+			} else {
+				self::$_serverId = (self::$_serverId + 1) % count($servers);
+			}
+
+			$server = $servers[self::$_serverId];
+
+			$response = $transport->exec($server['host'], $server['port']);
+		}
+
+		return $response;
 	}
 }

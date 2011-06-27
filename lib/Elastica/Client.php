@@ -19,6 +19,13 @@ class Elastica_Client
 	const DEFAULT_HOST = 'localhost';
 
 	/**
+	 * Default transport
+	 *
+	 * @var string
+	 */
+	const DEFAULT_TRANSPORT = 'Http';
+
+	/**
 	 * Number of seconds after a timeout occurs for every request
 	 * If using indexing of file large value necessary.
 	 */
@@ -32,8 +39,11 @@ class Elastica_Client
 	protected $_config = array(
 		'host' => self::DEFAULT_HOST,
 		'port' => self::DEFAULT_PORT,
+		'transport' => self::DEFAULT_TRANSPORT,
 		'timeout' => self::TIMEOUT,
 		'headers' => array(),
+		'servers' => array(),
+		'roundRobin' => false,
 	);
 
 	/**
@@ -114,6 +124,15 @@ class Elastica_Client
 	 */
 	public function getPort() {
 		return (int) $this->getConfig('port');
+	}
+
+	/**
+	 * Returns transport type to user
+	 *
+	 * @return string Transport type
+	 */
+	public function getTransport() {
+		return $this->getConfig('transport');
 	}
 
 	/**
@@ -278,10 +297,12 @@ class Elastica_Client
 		$response = $this->request($path, Elastica_Request::PUT, $queryString);
 		$data = $response->getData();
 
-		foreach($data['items'] as $item) {
-			$params = reset($item);
-			if(isset($params['error'])) {
-				throw new Elastica_Exception_BulkResponse($response);
+		if (isset($data['itesm'])) {
+			foreach($data['items'] as $item) {
+				$params = reset($item);
+				if(isset($params['error'])) {
+					throw new Elastica_Exception_BulkResponse($response);
+				}
 			}
 		}
 
@@ -299,8 +320,8 @@ class Elastica_Client
 	 * @return Elastica_Response Response object
 	 */
 	public function request($path, $method, $data = array()) {
-		$request = new Elastica_Request($path, $method, $data);
-		return $this->_callService($request);
+		$request = new Elastica_Request($this, $path, $method, $data);
+		return $request->send();
 	}
 
 	/**
@@ -312,74 +333,5 @@ class Elastica_Client
 	 */
 	public function optimizeAll($args = array()) {
 		return $this->request('_optimize', Elastica_Request::POST, $args);
-	}
-
-	/**
-	 * Makes calls to the elasticsearch server
-	 *
-	 * All calls that are made to the server are down over this function
-	 *
-	 * @param Elastica_Request $request Request object
-	 * @return Elastica_Response Response object
-	 */
-	protected function _callService(Elastica_Request $request) {
-		$conn = curl_init();
-		$baseUri = 'http://' . $this->getHost() . ':' . $this->getPort() . '/';
-
-		$baseUri .= $request->getPath();
-
-		curl_setopt($conn, CURLOPT_URL, $baseUri);
-		curl_setopt($conn, CURLOPT_TIMEOUT, $this->getConfig('timeout'));
-		curl_setopt($conn, CURLOPT_PORT, $this->getPort());
-		curl_setopt($conn, CURLOPT_RETURNTRANSFER, 1) ;
-		curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $request->getMethod());
-
-		if (!empty($this->_config['headers'])) {
-			$headers = array();
-			while (list($header, $headerValue) = each($this->_config['headers'])) {
-				array_push($headers, $header . ': ' . $headerValue);
-			}
-
-			curl_setopt($conn, CURLOPT_HTTPHEADER, $headers);
-		}
-
-		// TODO: REFACTOR
-		$data = $request->getData();
-
-		if (!empty($data)) {
-			if (is_array($data)) {
-				$content = json_encode($data);
-			} else {
-				$content = $data;
-			}
-
-			// Escaping of / not necessary. Causes problems in base64 encoding of files
-			$content = str_replace('\/', '/', $content);
-			curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
-		}
-
-		$start = microtime(true);
-		$response = curl_exec($conn);
-		$end = microtime(true);
-
-		// Checks if error exists
-		$errorNumber = curl_errno($conn);
-
-		$response = new Elastica_Response($response);
-
-		if (defined('DEBUG') && DEBUG) {
-			$response->setQueryTime($end - $start);
-			$response->setTransferInfo(curl_getinfo($conn));
-		}
-
-		if ($response->hasError()) {
-			throw new Elastica_Exception_Response($response);
-		}
-
-		if ($errorNumber > 0) {
-			throw new Elastica_Exception_Client($errorNumber, $request, $response);
-		}
-
-		return $response;
 	}
 }

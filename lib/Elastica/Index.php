@@ -261,6 +261,30 @@ class Elastica_Index implements Elastica_Searchable
 	}
 
 	/**
+	 * Clears the cache of an index
+	 *
+	 * @return Elastica_Response Reponse object
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache.html
+	 */
+	public function clearCache() {
+		$path = '_cache/clear';
+		// TODO: add additional cache clean arguments
+		return $this->request($path, Elastica_Request::POST);
+	}
+
+	/**
+	 * Flushs the index to storage
+	 *
+	 * @return Elastica_Response Reponse object
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html
+	 */
+	public function flush() {
+		$path = '_flush';
+		// TODO: Add option for refresh
+		return $this->request($path, Elastica_Request::POST);
+	}
+
+	/**
 	 * Can be used to change settings during runtime. One example is to use
 	 * if for bulk updating {@link http://www.elasticsearch.org/blog/2011/03/23/update-settings.html}
 	 *

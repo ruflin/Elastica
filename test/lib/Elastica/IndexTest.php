@@ -235,4 +235,20 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 		$this->assertFalse($index1->getStatus()->hasAlias($aliasName));
 		$this->assertTrue($index2->getStatus()->hasAlias($aliasName));
 	}
+
+	public function testClearCache() {
+		$client = new Elastica_Client();
+		$index1 = $client->getIndex('test1');
+
+		$response = $index1->clearCache();
+		$this->assertFalse($response->hasError());
+	}
+
+	public function testFlush() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('test1');
+
+		$response = $index->flush();
+		$this->assertFalse($response->hasError());
+	}
 }

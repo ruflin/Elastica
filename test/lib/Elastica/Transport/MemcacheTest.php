@@ -1,10 +1,8 @@
 <?php
-require_once dirname(__FILE__) . '/../../bootstrap.php';
+require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-/**
- * Tests the example code
- */
-class Elastica_ExampleTest extends PHPUnit_Framework_TestCase
+
+class Elastica_Transport_MemcacheTest extends PHPUnit_Framework_TestCase
 {
 	public function setUp() {
 	}
@@ -12,13 +10,26 @@ class Elastica_ExampleTest extends PHPUnit_Framework_TestCase
 	public function tearDown() {
 	}
 
+	public function testConstruct() {
+		$host = 'localhost';
+		$port = 11211;
+		$client = new Elastica_Client(array('host' => $host, 'port' => $port, 'transport' => 'Memcache'));
+
+		$this->assertEquals($host, $client->getHost());
+		$this->assertEquals($port, $client->getPort());
+	}
+
 	public function testExample() {
 		// Creates a new index 'xodoa' and a type 'user' inside this index
-		$client = new Elastica_Client();
-		$index = $client->getIndex('xodoa');
+		$host = 'localhost';
+		$port = 11211;
+		$client = new Elastica_Client(array('host' => $host, 'port' => $port, 'transport' => 'Memcache'));
+
+		$index = $client->getIndex('test1');
 		$index->create(array(), true);
 
 		$type = $index->getType('user');
+
 
 		// Adds 1 document to the index
 		$doc1 = new Elastica_Document(1,

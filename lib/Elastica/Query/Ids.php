@@ -1,14 +1,14 @@
 <?php
 /**
- * Ids Filter
+ * Ids Query
  *
- * @uses Elastica_Filter_Abstract
+ * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
- * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/ids-filter.html
+ * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>, Tim Rupp
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/ids-query.html
  */
-class Elastica_Filter_Ids extends Elastica_Filter_Abstract
+class Elastica_Query_Ids extends Elastica_Query_Abstract
 {
 	protected $_params = array();
 
@@ -27,7 +27,7 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
 	 * Adds one more filter to the and filter
 	 *
 	 * @param string $id Adds id to filter
-	 * @return Elastica_Filter_Ids Current object
+	 * @return Elastica_Query_Ids Current object
 	 */
 	public function addId($id) {
 		$this->_params['values'][] = $id;
@@ -38,7 +38,7 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
 	 * Adds one more type to query
 	 *
 	 * @param string $type Adds type to query
-	 * @return Elastica_Filter_Ids Current object
+	 * @return Elastica_Query_Ids Current object
 	 */
 	public function addType($type) {
 		if ($type instanceof Elastica_Type) {
@@ -54,7 +54,7 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
 
 	/**
 	 * @param string|Elastica_Type $type Type name or object
-	 * @return Elastica_Filter_Ids Current object
+	 * @return Elastica_Query_Ids Current object
 	 */
 	public function setType($type) {
 		if ($type instanceof Elastica_Type) {
@@ -72,7 +72,7 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
 	 * Sets the ids to filter
 	 *
 	 * @param array|string $ids List of ids
-	 * @return Elastica_Filter_Ids Current object
+	 * @return Elastica_Query_Ids Current object
 	 */
 	public function setIds($ids) {
 		if (is_array($ids)) {
@@ -87,10 +87,12 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
 	/**
 	 * Converts filter to array
 	 *
-	 * @see Elastica_Filter_Abstract::toArray()
-	 * @return array Filter array
+	 * @see Elastica_Query_Abstract::toArray()
+	 * @return array Query array
 	 */
 	public function toArray() {
 		return array('ids' => $this->_params);
 	}
 }
+
+?>
