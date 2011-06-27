@@ -134,7 +134,7 @@ class Elastica_Status
 	}
 
  
-    /**
+	 /**
 	 * Refresh serverStatus object
 	 */
 	public function getServerStatus() {
