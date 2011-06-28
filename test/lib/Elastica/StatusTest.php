@@ -93,4 +93,24 @@ class Elastica_StatusTest extends PHPUnit_Framework_TestCase
 		$status->refresh();
 		$this->assertTrue($status->aliasExists($aliasName));
 	}
+
+    public function testServerStatus() {
+
+        $client = new Elastica_Client();
+        $status = $client->getStatus();
+        $serverStatus = $status->getServerStatus();
+
+        $this->assertTrue( !empty($serverStatus) );
+        $this->assertTrue('array' == gettype($serverStatus));
+        $this->assertArrayHasKey('ok', $serverStatus);
+        $this->assertTrue($serverStatus['ok']);
+        $this->assertArrayHasKey('version', $serverStatus);
+
+        $versionInfo = $serverStatus['version'];
+        $this->assertArrayHasKey('number', $versionInfo);
+        $this->assertArrayHasKey('date', $versionInfo);
+
+    }
+
+
 }
