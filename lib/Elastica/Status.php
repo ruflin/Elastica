@@ -139,8 +139,8 @@ class Elastica_Status
 	 */
 	public function getServerStatus() {
 		$path = '';
-		$_response = $this->_client->request($path, Elastica_Request::GET);
-		return  $_response->getData();
+		$response = $this->_client->request($path, Elastica_Request::GET);
+		return  $response->getData();
 	}
 
 }
