@@ -47,7 +47,7 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
      * @return Elastica_Query_FuzzyLikeThis This current object
      */
     public function setMinSimilarity($value) {
-        $value = (int)$value;
+        $value = (float)$value;
         $this->_minSimilarity = $value;
         return $this;
     }
@@ -57,7 +57,30 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
      * @return void
      */
     public function setBoost($value) {
-        $this->_boost = $value;
+        $this->_boost = (float)$value;
+        return $this;
+    }
+
+
+    /**
+     * Set Prefix Length
+     *
+     * @param $value
+     * @return Elastica_Query_FuzzyLikeThis
+     */
+    public function setPrefixLength($value) {
+        $this->_prefixLength = (int)$value;
+        return $this;
+    }
+
+    /**
+     * Set max_query_terms
+     * 
+     * @param $value
+     * @return Elastica_Query_FuzzyLikeThis
+     */
+    public function setMaxQueryTerms($value) {
+        $this->_maxQueryTerms = (int)$value;
         return $this;
     }
 
@@ -82,6 +105,9 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
         }
 
         $args['min_similarity'] = ($this->_minSimilarity > 0) ? $this->_minSimilarity : 0;
+
+        $args['prefix_length']   = $this->_prefixLength;
+        $args['max_query_terms'] = $this->_maxQueryTerms;
 
 		return array('fuzzy_like_this' => $args);
 	}

@@ -29,6 +29,7 @@ class Elastica_Query_FuzzyLikeThisTest extends PHPUnit_Framework_TestCase
         $fltQuery->setLikeText("gmail");
         $fltQuery->addFields(array("email","content"));
         $fltQuery->setMinSimilarity(0.3);
+        $fltQuery->setMaxQueryTerms(3);
 		$resultSet = $type->search($fltQuery);
 
 		$this->assertEquals(1, $resultSet->count());
