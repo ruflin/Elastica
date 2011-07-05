@@ -48,6 +48,7 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
      */
     public function setMinSimilarity($value) {
         $value = (int)$value;
+        $this->_minSimilarity = $value;
         return $this;
     }
 
@@ -61,7 +62,7 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
     }
 
 	/**
-	 * Converts fuzzy query to array
+	 * Converts fuzzy like this query to array
 	 *
 	 * @return array Query array
 	 * @see Elastica_Query_Abstract::toArray()
