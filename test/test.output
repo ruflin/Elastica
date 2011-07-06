@@ -1,0 +1,175 @@
+PHPUnit 3.5.5 by Sebastian Bergmann.
+
+..E....EEEEE....FF..................E...............IE...... 60 / 86
+................EEEE....F.
+
+Time: 01:14, Memory: 12.50Mb
+
+There were 12 errors:
+
+1) Elastica_Transport_MemcacheTest::testExample
+RuntimeException: PHP Fatal error:  elasticsearch_autoload(): Failed opening required 'Memcache.php' (include_path='/usr/bin:.:/usr/share/php:/usr/share/pear:/home/rmartinez/macbook-sites/Elastica_juneym/lib:/home/rmartinez/macbook-sites/Elastica_juneym/lib') in /home/rmartinez/macbook-sites/Elastica_juneym/test/bootstrap.php on line 8
+PHP Stack trace:
+PHP   1. {main}() -:0
+PHP   2. __phpunit_run_isolated_test() -:121
+PHP   3. PHPUnit_Framework_TestCase->run() -:22
+PHP   4. PHPUnit_Framework_TestResult->run() /usr/share/php/PHPUnit/Framework/TestCase.php:575
+PHP   5. PHPUnit_Framework_TestCase->runBare() /usr/share/php/PHPUnit/Framework/TestResult.php:629
+PHP   6. PHPUnit_Framework_TestCase->runTest() /usr/share/php/PHPUnit/Framework/TestCase.php:627
+PHP   7. ReflectionMethod->invokeArgs() /usr/share/php/PHPUnit/Framework/TestCase.php:737
+PHP   8. Elastica_Transport_MemcacheTest->testExample() /home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Transport/MemcacheTest.php:0
+PHP   9. Elastica_Index->create() /home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Transport/MemcacheTest.php:29
+PHP  10. Elastica_Index->delete() /home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:129
+PHP  11. Elastica_Index->request() /home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:89
+PHP  12. Elastica_Client->request() /home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:309
+PHP  13. Elastica_Request->send() /home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Client.php:324
+PHP  14. Elastica_Transport_Memcache->exec() /home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Request.php:134
+PHP  15. elasticsearch_autoload() /home/rmartinez/macbook-sites/Elastica_juneym/test/bootstrap.php:0
+
+
+2) Elastica_Filter_IdsTest::testSetIdsSearchSingle
+Elastica_Exception_Response: SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[HzkdrnTJScOKgqAOt2ESqA][test][0]: SearchParseException[[test][0]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["1"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][1]: SearchParseException[[test][1]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["1"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][2]: SearchParseException[[test][2]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["1"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][3]: SearchParseException[[test][3]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["1"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][4]: SearchParseException[[test][4]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["1"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }]
+
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Transport/Http.php:73
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Request.php:134
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Client.php:324
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:309
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:208
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:132
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Filter/IdsTest.php:52
+
+3) Elastica_Filter_IdsTest::testSetIdsSearchArray
+Elastica_Exception_Response: SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[HzkdrnTJScOKgqAOt2ESqA][test][0]: SearchParseException[[test][0]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":[1,7,13]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][1]: SearchParseException[[test][1]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":[1,7,13]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][2]: SearchParseException[[test][2]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":[1,7,13]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][3]: SearchParseException[[test][3]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":[1,7,13]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][4]: SearchParseException[[test][4]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":[1,7,13]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }]
+
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Transport/Http.php:73
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Request.php:134
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Client.php:324
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:309
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:208
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:132
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Filter/IdsTest.php:62
+
+4) Elastica_Filter_IdsTest::testAddIdsSearchSingle
+Elastica_Exception_Response: SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[HzkdrnTJScOKgqAOt2ESqA][test][0]: SearchParseException[[test][0]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["39"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][1]: SearchParseException[[test][1]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["39"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][2]: SearchParseException[[test][2]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["39"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][3]: SearchParseException[[test][3]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["39"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][4]: SearchParseException[[test][4]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["39"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }]
+
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Transport/Http.php:73
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Request.php:134
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Client.php:324
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:309
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:208
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:132
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Filter/IdsTest.php:72
+
+5) Elastica_Filter_IdsTest::testAddIdsSearchSingleNotInType
+Elastica_Exception_Response: SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[HzkdrnTJScOKgqAOt2ESqA][test][0]: SearchParseException[[test][0]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["39",104]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][1]: SearchParseException[[test][1]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["39",104]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][2]: SearchParseException[[test][2]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["39",104]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][3]: SearchParseException[[test][3]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["39",104]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][4]: SearchParseException[[test][4]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":["39",104]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }]
+
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Transport/Http.php:73
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Request.php:134
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Client.php:324
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:309
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:208
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:132
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Filter/IdsTest.php:85
+
+6) Elastica_Filter_IdsTest::testComboIdsSearchArray
+Elastica_Exception_Response: SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[HzkdrnTJScOKgqAOt2ESqA][test][0]: SearchParseException[[test][0]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":[1,7,13,"39"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][1]: SearchParseException[[test][1]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":[1,7,13,"39"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][2]: SearchParseException[[test][2]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":[1,7,13,"39"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][3]: SearchParseException[[test][3]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":[1,7,13,"39"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][4]: SearchParseException[[test][4]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"filter":{"ids":{"values":[1,7,13,"39"]}},"query":{"match_all":{}}}]]]; nested: QueryParsingException[[test] [ids] filter, no type provided]; }]
+
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Transport/Http.php:73
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Request.php:134
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Client.php:324
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:309
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:208
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:132
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Filter/IdsTest.php:96
+
+7) Elastica_UtilTest::testEscapeTerm with data set #3 ('\\+-&&||!(){}[]^"~*?:', '\\\\\\+\\-\\&&\\||\\!\\(\\)\\{\\}\\[\\]\\^\\"\\~\\*\\?\\:')
+RuntimeException: PHP Notice:  unserialize(): Error at offset 85 of 87 bytes in - on line 16
+PHP Stack trace:
+PHP   1. {main}() -:0
+PHP   2. __phpunit_run_isolated_test() -:129
+PHP   3. unserialize() -:16
+PHP Catchable fatal error:  Argument 2 passed to PHPUnit_Framework_TestCase::__construct() must be an array, boolean given, called in - on line 16 and defined in /usr/share/php/PHPUnit/Framework/TestCase.php on line 275
+PHP Stack trace:
+PHP   1. {main}() -:0
+PHP   2. __phpunit_run_isolated_test() -:129
+PHP   3. PHPUnit_Framework_TestCase->__construct() -:16
+
+
+8) Elastica_IndexTest::testAddWordxFile
+Elastica_Exception_Response: MapperParsingException[No handler for type [attachment] declared on field [file]]
+
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Transport/Http.php:73
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Request.php:134
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Client.php:324
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:309
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:208
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type/Mapping.php:134
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:108
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/IndexTest.php:103
+
+9) Elastica_Query_IdsTest::testSetIdsSearchSingle
+Elastica_Exception_Response: SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[HzkdrnTJScOKgqAOt2ESqA][test][0]: SearchParseException[[test][0]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][1]: SearchParseException[[test][1]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][2]: SearchParseException[[test][2]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][3]: SearchParseException[[test][3]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][4]: SearchParseException[[test][4]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }]
+
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Transport/Http.php:73
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Request.php:134
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Client.php:324
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:309
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:208
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:132
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Query/IdsTest.php:45
+
+10) Elastica_Query_IdsTest::testSetIdsSearchArray
+Elastica_Exception_Response: SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[HzkdrnTJScOKgqAOt2ESqA][test][0]: SearchParseException[[test][0]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1","2"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][1]: SearchParseException[[test][1]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1","2"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][2]: SearchParseException[[test][2]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1","2"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][3]: SearchParseException[[test][3]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1","2"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][4]: SearchParseException[[test][4]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1","2"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }]
+
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Transport/Http.php:73
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Request.php:134
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Client.php:324
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:309
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:208
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:132
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Query/IdsTest.php:54
+
+11) Elastica_Query_IdsTest::testAddIdsSearchSingle
+Elastica_Exception_Response: SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[HzkdrnTJScOKgqAOt2ESqA][test][0]: SearchParseException[[test][0]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["3"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][1]: SearchParseException[[test][1]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["3"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][2]: SearchParseException[[test][2]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["3"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][3]: SearchParseException[[test][3]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["3"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][4]: SearchParseException[[test][4]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["3"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }]
+
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Transport/Http.php:73
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Request.php:134
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Client.php:324
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:309
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:208
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:132
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Query/IdsTest.php:63
+
+12) Elastica_Query_IdsTest::testComboIdsSearchArray
+Elastica_Exception_Response: SearchPhaseExecutionException[Failed to execute phase [query], total failure; shardFailures {[HzkdrnTJScOKgqAOt2ESqA][test][0]: SearchParseException[[test][0]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1","2","3"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][1]: SearchParseException[[test][1]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1","2","3"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][2]: SearchParseException[[test][2]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1","2","3"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][3]: SearchParseException[[test][3]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1","2","3"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }{[HzkdrnTJScOKgqAOt2ESqA][test][4]: SearchParseException[[test][4]: from[-1],size[-1]: Parse Failure [Failed to parse source [{"query":{"ids":{"values":["1","2","3"]}}}]]]; nested: QueryParsingException[[test] [ids] query, no type provided]; }]
+
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Transport/Http.php:73
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Request.php:134
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Client.php:324
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Index.php:309
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:208
+/home/rmartinez/macbook-sites/Elastica_juneym/lib/Elastica/Type.php:132
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Query/IdsTest.php:74
+
+--
+
+
+There were 3 failures:
+
+1) Elastica_Filter_IdsTest::testSetTypeArraySearchArray
+Failed asserting that <integer:2> matches expected <integer:4>.
+
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Filter/IdsTest.php:159
+
+2) Elastica_Filter_IdsTest::testSetTypeArraySearchSingle
+Failed asserting that <integer:1> matches expected <integer:2>.
+
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Filter/IdsTest.php:170
+
+3) Elastica_Query_IdsTest::testSetTypeArraySearchArray
+Failed asserting that <integer:1> matches expected <integer:2>.
+
+/home/rmartinez/macbook-sites/Elastica_juneym/test/lib/Elastica/Query/IdsTest.php:135
+
+FAILURES!
+Tests: 86, Assertions: 184, Failures: 3, Errors: 12, Incomplete: 1.
