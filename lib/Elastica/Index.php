@@ -138,12 +138,17 @@ class Elastica_Index implements Elastica_Searchable
 	 * Searchs in this index
 	 *
 	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+	 * @param array $params Array with optional params as to passed to Elastica_Query object
 	 * @return Elastica_ResultSet ResultSet with all results inside
 	 * @see Elastica_Searchable::search
 	 */
-	public function search($query) {
+	public function search($query, $params = array()) {
 		$query = Elastica_Query::create($query);
 		$path = '_search';
+
+		foreach($params as $param => $value) {
+			$query->setParam($param, $value);
+        } 
 
 		$response = $this->request($path, Elastica_Request::GET, $query->toArray());
 		return new Elastica_ResultSet($response);
