@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Elastica_Index</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Elastica_Index</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../Elastica/Elastica_Searchable.html">Elastica_Searchable</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Elastica index object</p>
+<p class="description"><p>Handles reads, deletes and configurations of an index</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Nicolas Ruflin &lt;<a href="mailto:spam@ruflin.com">spam@ruflin.com</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_Index.php.html">/Index.php</a> (line <span class="field">11</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																<div class="var-title">
+					<span class="var-type"><a href="../Elastica/Elastica_Client.html">Elastica_Client</a></span>
+					<a href="#$_client" title="details" class="var-name">$_client</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$_name" title="details" class="var-name">$_name</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																												
+												<div class="method-definition">
+											<span class="method-result">Elastica_Index</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type"><a href="../Elastica/Elastica_Client.html">Elastica_Client</a></span>&nbsp;<span class="var-name">$client</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+										<a href="#addAlias" title="details" class="method-name">addAlias</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$replace</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addDocuments" title="details" class="method-name">addDocuments</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$docs</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+										<a href="#clearCache" title="details" class="method-name">clearCache</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+										<a href="#close" title="details" class="method-name">close</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#count" title="details" class="method-name">count</a>
+											([<span class="var-type">string|array|<a href="../Elastica/Elastica_Query.html">Elastica_Query</a></span>&nbsp;<span class="var-name">$query</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#create" title="details" class="method-name">create</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">array()</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$recreate</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+										<a href="#delete" title="details" class="method-name">delete</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+										<a href="#flush" title="details" class="method-name">flush</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Client.html">Elastica_Client</a></span>
+										<a href="#getClient" title="details" class="method-name">getClient</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getName" title="details" class="method-name">getName</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Index_Settings.html">Elastica_Index_Settings</a></span>
+										<a href="#getSettings" title="details" class="method-name">getSettings</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getStatus" title="details" class="method-name">getStatus</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Type.html">Elastica_Type</a></span>
+										<a href="#getType" title="details" class="method-name">getType</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+										<a href="#open" title="details" class="method-name">open</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#optimize" title="details" class="method-name">optimize</a>
+											([<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+										<a href="#refresh" title="details" class="method-name">refresh</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+										<a href="#removeAlias" title="details" class="method-name">removeAlias</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+										<a href="#request" title="details" class="method-name">request</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_ResultSet.html">Elastica_ResultSet</a></span>
+										<a href="#search" title="details" class="method-name">search</a>
+											(<span class="var-type">string|array|<a href="../Elastica/Elastica_Query.html">Elastica_Query</a></span>&nbsp;<span class="var-name">$query</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+										<a href="#setSettings" title="details" class="method-name">setSettings</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$data</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$_client" id="$_client"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type"><a href="../Elastica/Elastica_Client.html">Elastica_Client</a></span>
+			<span class="var-name">$_client</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">21</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> Client object</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_name" id="$_name"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_name</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number">16</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> Index name</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">31</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a new index object</p>
+<p class="description"><p>All the communication to and from an index goes of this object</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Elastica_Index</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type"><a href="../Elastica/Elastica_Client.html">Elastica_Client</a></span>&nbsp;<span class="var-name">$client</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../Elastica/Elastica_Client.html">Elastica_Client</a></span>
+				<span class="var-name">$client</span><span class="var-description">: Client object</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Index name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddAlias" id="addAlias"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addAlias</span> (line <span class="line-number">214</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds an alias to the current index</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Response</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html">http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+		<span class="method-name">
+			addAlias
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$replace</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Alias name</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$replace</span><span class="var-description">: OPTIONAL If set, an existing alias will be replaced</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddDocuments" id="addDocuments"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addDocuments</span> (line <span class="line-number">75</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Uses _bulk to send documents to the server</p>
+	<ul class="tags">
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addDocuments
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$docs</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$docs</span><span class="var-description">: Array of Elastica_Document</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodclearCache" id="clearCache"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">clearCache</span> (line <span class="line-number">269</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Clears the cache of an index</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Reponse object</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache.html">http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache.html</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+		<span class="method-name">
+			clearCache
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodclose" id="close"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">close</span> (line <span class="line-number">183</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Closes the index</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Response object</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html">http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+		<span class="method-name">
+			close
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodcount" id="count"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">count</span> (line <span class="line-number">159</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Counts results of query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> number of documents matching the query</li>
+				<li><span class="field">see:</span> Elastica_Searchable::count</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			count
+		</span>
+					([<span class="var-type">string|array|<a href="../Elastica/Elastica_Query.html">Elastica_Query</a></span>&nbsp;<span class="var-name">$query</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string|array|<a href="../Elastica/Elastica_Query.html">Elastica_Query</a></span>
+				<span class="var-name">$query</span><span class="var-description">: Array with all query data inside or a Elastica_Query object</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../Elastica/Elastica_Searchable.html#methodcount">Elastica_Searchable::count()</a></dt>
+						<dd>Counts results for a query</dd>
+					</dl>
+			
+	</div>
+<a name="methodcreate" id="create"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">create</span> (line <span class="line-number">126</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a new index with the given arguments</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Server response</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			create
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">array()</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$recreate</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: OPTIONAL Arguments to use</span>			</li>
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$recreate</span><span class="var-description">: OPTIONAL Deletes index first if already exists (default = false)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddelete" id="delete"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">delete</span> (line <span class="line-number">88</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Deletes the index</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Response object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+		<span class="method-name">
+			delete
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodflush" id="flush"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">flush</span> (line <span class="line-number">281</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Flushs the index to storage</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Reponse object</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html">http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+		<span class="method-name">
+			flush
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetClient" id="getClient"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getClient</span> (line <span class="line-number">201</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns index client</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Index client object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Client.html">Elastica_Client</a></span>
+		<span class="method-name">
+			getClient
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetName" id="getName"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getName</span> (line <span class="line-number">192</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the index name</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Index name</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getName
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetSettings" id="getSettings"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSettings</span> (line <span class="line-number">65</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the index settings object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Settings object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Index_Settings.html">Elastica_Index_Settings</a></span>
+		<span class="method-name">
+			getSettings
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetStatus" id="getStatus"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getStatus</span> (line <span class="line-number">56</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the current status of the index</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Index status</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/status/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/status/</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getStatus
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetType" id="getType"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getType</span> (line <span class="line-number">46</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a type object for the current index with the given name</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Type object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Type.html">Elastica_Type</a></span>
+		<span class="method-name">
+			getType
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: Type name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodopen" id="open"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">open</span> (line <span class="line-number">173</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Opens an index</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Response object</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html">http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+		<span class="method-name">
+			open
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodoptimize" id="optimize"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">optimize</span> (line <span class="line-number">103</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Optimizes search index</p>
+<p class="description"><p>Detailed arguments can be found here in the link</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Server response</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			optimize
+		</span>
+					([<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: OPTIONAL Additional arguments</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodrefresh" id="refresh"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">refresh</span> (line <span class="line-number">114</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Refreshs the index</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Response object</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/refresh/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/refresh/</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+		<span class="method-name">
+			refresh
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodremoveAlias" id="removeAlias"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">removeAlias</span> (line <span class="line-number">246</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Removes an alias pointing to the current index</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Response</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html">http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+		<span class="method-name">
+			removeAlias
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Alias name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodrequest" id="request"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">request</span> (line <span class="line-number">307</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Makes calls to the elasticsearch server based on this index</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Response object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+		<span class="method-name">
+			request
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$data</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Path to call</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Rest method to use (GET, POST, DELETE, PUT)</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$data</span><span class="var-description">: OPTIONAL Arguments as array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsearch" id="search"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">search</span> (line <span class="line-number">144</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Searchs in this index</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> ResultSet with all results inside</li>
+				<li><span class="field">see:</span> Elastica_Searchable::search</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_ResultSet.html">Elastica_ResultSet</a></span>
+		<span class="method-name">
+			search
+		</span>
+					(<span class="var-type">string|array|<a href="../Elastica/Elastica_Query.html">Elastica_Query</a></span>&nbsp;<span class="var-name">$query</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string|array|<a href="../Elastica/Elastica_Query.html">Elastica_Query</a></span>
+				<span class="var-name">$query</span><span class="var-description">: Array with all query data inside or a Elastica_Query object</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../Elastica/Elastica_Searchable.html#methodsearch">Elastica_Searchable::search()</a></dt>
+						<dd>Searches results for a query</dd>
+					</dl>
+			
+	</div>
+<a name="methodsetSettings" id="setSettings"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setSettings</span> (line <span class="line-number">295</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Can be used to change settings during runtime. One example is to use  if for bulk updating <a href="http://www.elasticsearch.org/blog/2011/03/23/update-settings.html">http://www.elasticsearch.org/blog/2011/03/23/update-settings.html</a></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Response object</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html">http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+		<span class="method-name">
+			setSettings
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$data</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$data</span><span class="var-description">: Data array</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 15 Jul 2011 05:09:45 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
