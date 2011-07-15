@@ -26,6 +26,7 @@ class Elastica_Request {
 	protected static $_serverId = null;
 
 	/**
+	 * @param Elastica_Client $client
 	 * @param string $path Request path
 	 * @param string $method Request method (use const's)
 	 * @param array $data Data array
@@ -90,6 +91,9 @@ class Elastica_Request {
 		return $this->_path;
 	}
 
+	/**
+	 * @return Elastica_Client
+	 */
 	public function getClient() {
 		return $this->_client;
 	}

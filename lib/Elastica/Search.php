@@ -45,6 +45,13 @@ class Elastica_Search
 		return $this;
 	}
 
+	/**
+	 * Adds a type to the current search
+	 *
+	 * @param Elastica_Type|string $type Type name or object
+	 * @return Elastica_Search Search object
+	 * @throws Elastica_Exception_Invalid
+	 */
 	public function addType($type) {
 		if ($type instanceof Elastica_Type) {
 			$type = $type->getName();
@@ -73,17 +80,29 @@ class Elastica_Search
 		return $this->_indices;
 	}
 
+	/**
+	 * @return string[] List of types
+	 */
 	public function getTypes() {
 		return $this->_types;
 	}
 
+	/**
+	 * Creates new search object
+	 *
+	 * @param Elastica_Searchable $searchObject
+	 */
 	public static function create(Elastica_Searchable $searchObject) {
 		// Set index
 		// set type
 		// set client
 	}
 
-
+	/**
+	 * Combines indices and types to the search request path
+	 *
+	 * @return string Search path
+	 */
 	public function getPath() {
 
 		$indices = $this->getIndices();
@@ -106,6 +125,12 @@ class Elastica_Search
 		return $path . '/_search';
 	}
 
+	/**
+	 * Search in the set indices, types
+	 *
+	 * @param mixed $query
+	 * @return Elastica_ResultSet
+	 */
 	public function search($query) {
 		$query = Elastica_Query::create($query);
 		$path = $this->getPath();

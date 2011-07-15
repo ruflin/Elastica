@@ -21,7 +21,6 @@ class Elastica_Facet_DateHistogram extends Elastica_Facet_Histogram
 	}
 
 	/**
-	 *
 	 * Creates the full facet definition, which includes the basic
 	 * facet definition of the parent.
 	 *
@@ -34,6 +33,6 @@ class Elastica_Facet_DateHistogram extends Elastica_Facet_Histogram
 		 * Set the range in the abstract as param.
 		 */
 		$this->_setFacetParam('date_histogram', $this->_params);
-		return $this->_facet;;
+		return $this->_facet;
 	}
 }

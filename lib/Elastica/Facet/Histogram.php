@@ -37,15 +37,16 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
 	}
 
 
-/**
-	* Set the fields for key_field and value_field
-	* @param $keyField
-	* @param $valueField
-	* @return Elastica_Facet_Range
-	*/
-public function setKeyValueFields($keyField, $valueField) {
-	   return $this->setParam('key_field', $keyField)->setParam('value_field', $valueField);
-}
+	/**
+	 * Set the fields for key_field and value_field
+	 *
+	 * @param string $keyField Key field
+	 * @param string $valueField Value field
+	 * @return Elastica_Facet_Range
+	 */
+	public function setKeyValueFields($keyField, $valueField) {
+		return $this->setParam('key_field', $keyField)->setParam('value_field', $valueField);
+	}
 
 	/**
 	 * Sets the key and value for this facet by script.
@@ -61,8 +62,8 @@ public function setKeyValueFields($keyField, $valueField) {
 	/**
 	 * Set the "params" essential to the a script
 	 *
-	 * @param Array $params   associative array (key/value pair)
-	 * @return void
+	 * @param array $params Associative array (key/value pair)
+	 * @return Elastica_Facet_Histogram Facet object
 	 */
 	public function setScriptParams(Array $params) {
 		return $this->setParam('params', $params);
@@ -73,12 +74,14 @@ public function setKeyValueFields($keyField, $valueField) {
 	 * Gets a general parameter for this facet by key.
 	 *
 	 * @param string $key The key of the param to fetch.
-	 * @return mixed
+	 * @return mixed Key value or null
 	 */
 	public function getParam($key) {
 		if (isset($this->_params[$key])) {
 			return $this->_params[$key];
 		}
+		// TODO: check if should throw exception
+		return null;
 	}
 
 	/**
@@ -94,7 +97,6 @@ public function setKeyValueFields($keyField, $valueField) {
 	}
 
 	/**
-	 *
 	 * Creates the full facet definition, which includes the basic
 	 * facet definition of the parent.
 	 *

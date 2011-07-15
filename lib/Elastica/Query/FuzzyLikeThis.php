@@ -53,11 +53,11 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
 	}
 
 	/**
-	 * @param $value
-	 * @return void
+	 * @param float $value Boost value
+	 * @return Elastica_Query_FuzzyLikeThis Query object
 	 */
 	public function setBoost($value) {
-		$this->_boost = (float)$value;
+		$this->_boost = (float) $value;
 		return $this;
 	}
 
@@ -65,18 +65,18 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
 	/**
 	 * Set Prefix Length
 	 *
-	 * @param $value
+	 * @param int $value Prefix length
 	 * @return Elastica_Query_FuzzyLikeThis
 	 */
 	public function setPrefixLength($value) {
-		$this->_prefixLength = (int)$value;
+		$this->_prefixLength = (int) $value;
 		return $this;
 	}
 
 	/**
 	 * Set max_query_terms
 	 *
-	 * @param $value
+	 * @param int $value Max query terms value
 	 * @return Elastica_Query_FuzzyLikeThis
 	 */
 	public function setMaxQueryTerms($value) {

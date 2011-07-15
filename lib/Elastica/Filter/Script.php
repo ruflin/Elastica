@@ -16,26 +16,45 @@ class Elastica_Filter_Script extends Elastica_Filter_Abstract {
 	 */
 	protected $_query = null;
 
+	/**
+	 * @param array|Elastica_Query_Abstract $query OPTIONAL Query object
+	 */
 	public function __construct($query = null) {
 		if (!is_null($query)) {
 			$this->setQuery($query);
 		}
 	}
 
+	/**
+	 * Sets query object
+	 *
+	 * @param array|Elastica_Query_Abstract $query
+	 * @return Elastica_Filter_Script
+	 * @throws Elastica_Exception_Invalid Invalid argument type
+	 */
 	public function setQuery($query) {
-		if (!$query instanceof Elastica_Query_Abstract && ! is_array($query)) {
-			throw new InvalidArgumentException('expected an array or instance of Elastica_Query_Abstract');
+		// TODO: check if should be renamed to setScript?
+		if (!$query instanceof Elastica_Query_Abstract && !is_array($query)) {
+			throw new Elastica_Exception_Invalid('expected an array or instance of Elastica_Query_Abstract');
 		}
-		$this->_query = $query;
+
+		if ($query instanceof Elastica_Query_Abstract) {
+			$this->_query = $query->toArray();
+		} else {
+			$this->_query = $query;
+		}
+
 		return $this;
 	}
 
+	/**
+	 * @return array Script filter
+	 * @see Elastica_Filter_Abstract::toArray()
+	 */
 	public function toArray() {
 		return array(
 			'script' => (
-				$this->_query instanceof Elastica_Query_Abstract
-				? $this->_query->toArray()
-				: $this->_query
+				$this->_query
 			),
 		);
 	}

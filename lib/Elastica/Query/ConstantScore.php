@@ -20,7 +20,8 @@ class Elastica_Query_ConstantScore extends Elastica_Query_Abstract {
 
 
 	/**
-	 * @param array|Elastica_Filter_Abstract
+	 * @param array|Elastica_Filter_Abstract $filter
+	 * @return Elastica_Query_ConstantScore Query object
 	 * @throws InvalidArgumentException
 	 */
 	public function setFilter($filter) {

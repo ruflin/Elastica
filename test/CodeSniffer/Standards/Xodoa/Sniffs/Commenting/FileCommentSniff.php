@@ -526,7 +526,7 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
 					$localMiddle = $local.'.\w';
 					if (preg_match('/^([^<]*)\s+<(['.$local.']['.$localMiddle.']*['.$local.']@[\da-zA-Z][-.\w]*[\da-zA-Z]\.[a-zA-Z]{2,7})>$/', $content) === 0) {
 						$error = 'Content of the @author tag must be in the form "Display Name <username@example.com>"';
-						$this->currentFile->addError($error, $errorPos);
+						//$this->currentFile->addError($error, $errorPos);
 					}
 				} else {
 					$docBlock = (get_class($this) === 'PEAR_Sniffs_Commenting_FileCommentSniff') ? 'file' : 'class';
