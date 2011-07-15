@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Elastica" default="build" basedir=".">
 
+	<property name="source" value="${basedir}/lib"/>
+	
 	<target name="clean">
 		<!--    Clean    up    -->
 		<delete dir="build"/>
@@ -11,24 +13,18 @@
 		<mkdir dir="${basedir}/build/logs"/>
 		<mkdir dir="${basedir}/build/pdepend"/>
 	</target>
-
-	<target name="update">
-		<exec executable="svn">
-			<arg line="up" />
-		</exec>
-	</target>
 	
 	<target name="phpunit" depends="clean">
-		<exec executable="phpunit" dir="${basedir}/test" failonerror="off">
-			<arg line=" --log-junit '${basedir}/build/logs/phpunit.xml' --coverage-clover '${basedir}/build/logs/clover.xml' --coverage-html '${basedir}/build/coverage'" />
-		</exec>
+		<exec executable="phpunit" dir="${basedir}/test" failonerror="off" />
 	</target>
 
 	<!-- Run pdepend, phpmd, phpcpd, and phpcs in parallel -->
 	<target name="parallelTasks">
-		<parallel>
-			<antcall target="pdepend"/>
-			<antcall target="phpmd"/>
+		<parallel threadCount="2">
+			<sequential>
+				<antcall target="pdepend"/>
+				<antcall target="phpmd"/>
+			</sequential>
 			<antcall target="phpcpd"/>
 			<antcall target="phpcs"/>
 			<antcall target="phpdoc"/>
@@ -39,42 +35,57 @@
 	<!-- Generate jdepend.xml and software metrics charts -->
 	<target name="pdepend">
 		<exec executable="pdepend">
-			<arg line="--jdepend-xml=${basedir}/build/logs/jdepend.xml ${basedir}/lib" />
+			<arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
+			<arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
+			<arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+			<arg path="${source}" />
 		</exec>
 	</target>
 
 	<!-- Generate pmd.xml -->
 	<target name="phpmd">
 		<exec executable="phpmd">
-			<arg line="${basedir}/lib xml codesize,unusedcode --reportfile ${basedir}/build/logs/pmd.xml" />
+			<arg path="${source}" />
+			<arg value="xml" />
+			<arg value="codesize,unusedcode,naming,design" />
+			<arg value="--reportfile" />
+			<arg value="${basedir}/build/logs/pmd.xml" />
 		</exec>
 	</target>
 
 	<!-- Generate pmd-cpd.xml -->
 	<target name="phpcpd">
 		<exec executable="phpcpd">
-			<arg line="--log-pmd ${basedir}/build/logs/pmd-cpd.xml ${basedir}/lib" />
+			<arg line="--log-pmd ${basedir}/build/logs/pmd-cpd.xml ${source}" />
 		</exec>
 	</target>
-
+	
 	<!-- Generate checkstyle.xml -->
 	<target name="phpcs">
 		<exec executable="phpcs" output="/dev/null">
-			<arg line="--report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml --standard=${basedir}/test/CodeSniffer/Standards/Xodoa ${basedir}/lib" />
+			<arg line="--report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml --standard=${basedir}/test/CodeSniffer/Standards/Xodoa ${source}" />
+		</exec>
+	</target>
+	
+	<target name="phploc" description="Generate phploc.csv">
+		<exec executable="phploc">
+		<arg value="--log-csv" />
+		<arg value="${basedir}/build/logs/phploc.csv" />
+		<arg path="${source}" />
 		</exec>
 	</target>
 
 	<!-- Generate API documentation -->
 	<target name="phpdoc">
 		<exec executable="phpdoc">
-			<arg line="-d ${basedir}/lib -t ${basedir}/build/api" />
+			<arg line="--directory ${source} --target ${basedir}/build/api" />
 		</exec>
 	</target>
 
 	<target name="phpcb">
 		<exec executable="phpcb">
 			<arg line="--log ${basedir}/build/logs
-					--source ${basedir}/lib
+					--source ${source}
 					--output ${basedir}/build/code-browser" />
 		</exec>
 	</target>
