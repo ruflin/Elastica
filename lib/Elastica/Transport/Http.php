@@ -13,6 +13,8 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 	 *
 	 * All calls that are made to the server are done through this function
 	 *
+	 *@param string $host Host name
+	 * @param int $port Port number
 	 * @return Elastica_Response Response object
 	 */
 	public function exec($host, $port) {

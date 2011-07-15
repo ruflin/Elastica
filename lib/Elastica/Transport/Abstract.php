@@ -16,9 +16,7 @@ abstract class Elastica_Transport_Abstract {
 
 
 	/**
-	 * @param string $path Request path
-	 * @param string $method Request method (use const's)
-	 * @param array $data Data array
+	 * @param Elastica_Request $request Request object
 	 */
 	public function __construct(Elastica_Request $request) {
 		$this->_request = $request;

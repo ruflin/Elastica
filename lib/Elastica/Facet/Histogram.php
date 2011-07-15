@@ -11,14 +11,14 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
 {
 	/**
 	 * Holds the parameters of the range facet.
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $_params = array();
-	
+
 	/**
 	 * Sets the field for histogram
-	 * 
+	 *
 	 * @param string $field The name of the field for the historgram
 	 * @return Elastica_Facet_Histogram
 	 */
@@ -26,30 +26,30 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
 		return $this->setParam('field', $field);
 	}
 
-    /**
-     * Set the value for interval
-     *
-     * @param string $interval
-     * @return Elastica_Facet_Range
-     */
-    public function setInterval($interval) {
-        return $this->setParam('interval', $interval);
-    }
+	/**
+	 * Set the value for interval
+	 *
+	 * @param string $interval
+	 * @return Elastica_Facet_Range
+	 */
+	public function setInterval($interval) {
+		return $this->setParam('interval', $interval);
+	}
 
 
-   /**
-    * Set the fields for key_field and value_field
-    * @param $keyField
-    * @param $valueField
-    * @return Elastica_Facet_Range
-    */
-   public function setKeyValueFields($keyField, $valueField) {
-       return $this->setParam('key_field', $keyField)->setParam('value_field', $valueField);
-   }
+/**
+	* Set the fields for key_field and value_field
+	* @param $keyField
+	* @param $valueField
+	* @return Elastica_Facet_Range
+	*/
+public function setKeyValueFields($keyField, $valueField) {
+	   return $this->setParam('key_field', $keyField)->setParam('value_field', $valueField);
+}
 
 	/**
 	 * Sets the key and value for this facet by script.
-	 * 
+	 *
 	 * @param string $keyScript Script to check whether it falls into the range.
 	 * @param string $valueScript Script to use for statistical calculations.
 	 */
@@ -58,20 +58,20 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
 					->setParam('value_script', $valueScript);
 	}
 
-    /**
-     * Set the "params" essential to the a script
-     *
-     * @param Array $params   associative array (key/value pair)
-     * @return void
-     */
-    public function setScriptParams(Array $params) {
-        return $this->setParam('params', $params);
-    }
-	
+	/**
+	 * Set the "params" essential to the a script
+	 *
+	 * @param Array $params   associative array (key/value pair)
+	 * @return void
+	 */
+	public function setScriptParams(Array $params) {
+		return $this->setParam('params', $params);
+	}
+
 
 	/**
 	 * Gets a general parameter for this facet by key.
-	 * 
+	 *
 	 * @param string $key The key of the param to fetch.
 	 * @return mixed
 	 */
@@ -95,7 +95,7 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
 
 	/**
 	 *
-     * Creates the full facet definition, which includes the basic
+	 * Creates the full facet definition, which includes the basic
 	 * facet definition of the parent.
 	 *
 	 * @see Elastica_Facet_Abstract::toArray()

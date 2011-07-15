@@ -81,7 +81,9 @@ class Elastica_Type implements Elastica_Searchable
 		return $document;
 	}
 
-
+	/**
+	 * @return string Type name
+	 */
 	public function getName() {
 		return $this->getType();
 	}

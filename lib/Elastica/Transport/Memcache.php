@@ -11,6 +11,8 @@ class Elastica_Transport_Memcache extends Elastica_Transport_Abstract {
 	/**
 	 * Makes calls to the elasticsearch server
 	 *
+	 * @param string $host Host name
+	 * @param int $port Port number
 	 * @return Elastica_Response Response object
 	 */
 	public function exec($host, $port) {

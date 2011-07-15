@@ -9,7 +9,6 @@
  */
 class Elastica_Status
 {
-
 	/**
 	 * Contains all status infos
 	 *
@@ -133,8 +132,8 @@ class Elastica_Status
 		$this->_data = $this->getResponse()->getData();
 	}
 
- 
-	 /**
+
+	/**
 	 * Refresh serverStatus object
 	 */
 	public function getServerStatus() {
