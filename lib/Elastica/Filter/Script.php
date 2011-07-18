@@ -1,14 +1,15 @@
 <?php
 
 /**
- * Query filter
+ * Script filter
  *
- * @uses Elastica_Filter_Query
+ * @uses Elastica_Filter_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/script-filter.html
  */
-class Elastica_Filter_Query extends Elastica_Filter_Abstract {
+class Elastica_Filter_Script extends Elastica_Filter_Abstract {
 
 	/**
 	 * @var array|Elastica_Query_Abstract
@@ -16,7 +17,7 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract {
 	protected $_query = null;
 
 	/**
-	 * @param array|Elastica_Query_Abstract $query
+	 * @param array|Elastica_Query_Abstract $query OPTIONAL Query object
 	 */
 	public function __construct($query = null) {
 		if (!is_null($query)) {
@@ -25,12 +26,15 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract {
 	}
 
 	/**
+	 * Sets query object
+	 *
 	 * @param array|Elastica_Query_Abstract $query
-	 * @return Elastca_Filter_Query Query object
-	 * @throws Elastica_Exception_Invalid Invalid param
+	 * @return Elastica_Filter_Script
+	 * @throws Elastica_Exception_Invalid Invalid argument type
 	 */
 	public function setQuery($query) {
-		if (!$query instanceof Elastica_Query_Abstract && ! is_array($query)) {
+		// TODO: check if should be renamed to setScript?
+		if (!$query instanceof Elastica_Query_Abstract && !is_array($query)) {
 			throw new Elastica_Exception_Invalid('expected an array or instance of Elastica_Query_Abstract');
 		}
 
@@ -44,12 +48,12 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract {
 	}
 
 	/**
-	 * @return array Query filter
+	 * @return array Script filter
 	 * @see Elastica_Filter_Abstract::toArray()
 	 */
 	public function toArray() {
 		return array(
-			'query' => (
+			'script' => (
 				$this->_query
 			),
 		);

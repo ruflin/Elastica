@@ -1,4 +1,9 @@
 CHANGES
+2011-07-15
+- Facet/DateHistogram and Facet/Historgram added
+- Documentation pages added unter http://ruflin.github.com/Elastica
+- Release tag v0.16.4.0 added
+
 2011-06-19
 - Add support for multiple servers to Elastica_Client (issue #39)
 
