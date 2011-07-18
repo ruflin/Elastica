@@ -7,7 +7,37 @@ class Elastica_Query_QueryStringTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function tearDown() {
+    }
+
+
+	public function testSearchMultipleFields() {
+		$str = md5(rand());
+		$query = new Elastica_Query_QueryString($str);
+
+		$expected = array(
+			'query' => $str
+		);
+
+		$this->assertEquals(array('query_string' => $expected), $query->toArray());
+
+		$fields = array();
+		$max = rand() % 10 + 1;
+		for($i = 0; $i <  $max; $i++) {
+			$fields[] = md5(rand());
+		}
+
+		$query->setFields($fields);
+		$expected['fields'] = $fields;
+		$this->assertEquals(array('query_string' => $expected), $query->toArray());
+
+		foreach(array(false, true) as $val) {
+			$query->setUseDisMax($val);
+			$expected['use_dis_max'] = $val;
+
+			$this->assertEquals(array('query_string' => $expected), $query->toArray());
+		}
 	}
+
 
 	public function testSearch() {
 
