@@ -1,4 +1,6 @@
 CHANGES
+2011-07-19
+- Release tag v0.17.0.0 added. Elastica is compatible with elasticsearch 0.17.0
 
 2011-07-18
 - ResultSet::hasFacets added
