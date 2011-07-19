@@ -1,4 +1,9 @@
 CHANGES
+
+2011-07-18
+- ResultSet::hasFacets added
+- QueryString useDisMax added
+
 2011-07-15
 - Facet/DateHistogram and Facet/Historgram added
 - Documentation pages added unter http://ruflin.github.com/Elastica
