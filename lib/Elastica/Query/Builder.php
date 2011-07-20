@@ -57,7 +57,14 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 */
 	public function toArray()
 	{
-		return json_decode($this->__toString(), true);
+		$array = json_decode($this->__toString(), true);
+
+		if (is_null($array))
+		{
+			throw new Elastica_Exception_Invalid('The query produced is invalid');
+		}
+
+		return $array;
 	}
 
 	/**
