@@ -297,7 +297,7 @@ class Elastica_Client
 		$response = $this->request($path, Elastica_Request::PUT, $queryString);
 		$data = $response->getData();
 
-		if (isset($data['itesm'])) {
+		if (isset($data['items'])) {
 			foreach($data['items'] as $item) {
 				$params = reset($item);
 				if(isset($params['error'])) {
