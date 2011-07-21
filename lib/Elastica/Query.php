@@ -9,7 +9,7 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/
  */
-class Elastica_Query
+class Elastica_Query extends Elastica_Query_Abstract
 {
 	protected $_query = array();
 
