@@ -198,6 +198,10 @@ class Elastica_Client
 				$action['index']['_version'] = $doc->getVersion();
 			}
 
+			if($doc->getParent()) {
+				$action['index']['_parent'] = $doc->getParent();
+			}
+
 			$params[] = $action;
 			$params[] = $doc->getData();
 		}
