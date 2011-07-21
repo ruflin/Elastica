@@ -24,6 +24,11 @@ class Elastica_Document {
 	protected $_version = '';
 
 	/**
+	 * @var string|int Parent document id
+	 */
+	protected $_parent = '';
+
+	/**
 	 * Creates a new document
 	 *
 	 * @param int $id OPTIONAL $id Id is create if empty
@@ -193,5 +198,26 @@ class Elastica_Document {
 	 */
 	public function getVersion() {
 		return $this->_version;
+	}
+
+	/**
+	 * Sets parent document id
+	 *
+	 * @param string|int $parent Parent document id
+	 * @return Elastica_Document Current object
+	 * @link http://www.elasticsearch.org/guide/reference/mapping/parent-field.html
+	 */
+	public function setParent($parent) {
+		$this->_parent = $parent;
+		return $this;
+	}
+
+	/**
+	 * Returns the parent document id
+	 *
+	 * @return string|int Parent document id
+	 */
+	public function getParent() {
+		return $this->_parent;
 	}
 }

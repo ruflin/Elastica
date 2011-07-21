@@ -42,9 +42,18 @@ class Elastica_Type implements Elastica_Searchable
 	 * @return Elastica_Response
 	 */
 	public function addDocument(Elastica_Document $doc) {
+
 		$path = $doc->getId();
+
+		$query = array();
 		if($doc->getVersion() > 0) {
-			$path .= '?version=' . $doc->getVersion();
+			$query['version'] = $doc->getVersion();
+		}
+		if($doc->getParent()) {
+		    $query['parent'] = $doc->getParent();
+		}
+		if (count($query) > 0) {
+		    $path .= '?' . http_build_query($query);
 		}
 
 		return $this->request($path, Elastica_Request::PUT, $doc->getData());
