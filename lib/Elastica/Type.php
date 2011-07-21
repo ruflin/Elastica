@@ -50,10 +50,10 @@ class Elastica_Type implements Elastica_Searchable
 			$query['version'] = $doc->getVersion();
 		}
 		if($doc->getParent()) {
-		    $query['parent'] = $doc->getParent();
+			$query['parent'] = $doc->getParent();
 		}
 		if (count($query) > 0) {
-		    $path .= '?' . http_build_query($query);
+			$path .= '?' . http_build_query($query);
 		}
 
 		return $this->request($path, Elastica_Request::PUT, $doc->getData());

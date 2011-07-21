@@ -129,7 +129,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function bool()
+	public function bool()
 	{
 		return $this->fieldOpen('bool');
 	}
@@ -141,7 +141,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function boolClose()
+	public function boolClose()
 	{
 		return $this->fieldClose();
 	}
@@ -180,7 +180,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function constantScore()
+	public function constantScore()
 	{
 		return $this->fieldOpen('constant_score');
 	}
@@ -192,7 +192,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function constantScoreClose()
+	public function constantScoreClose()
 	{
 		return $this->fieldClose();
 	}
@@ -235,7 +235,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function disMax()
+	public function disMax()
 	{
 		return $this->fieldOpen('dis_max');
 	}
@@ -247,7 +247,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function disMaxClose()
+	public function disMaxClose()
 	{
 		return $this->fieldClose();
 	}
@@ -411,7 +411,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function filteredQuery()
+	public function filteredQuery()
 	{
 		return $this->fieldOpen('filtered');
 	}
@@ -423,7 +423,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function filteredQueryClose()
+	public function filteredQueryClose()
 	{
 		return $this->fieldClose();
 	}
@@ -543,7 +543,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function matchAll($boost = null)
+	public function matchAll($boost = null)
 	{
 		$this->fieldOpen('match_all');
 
@@ -572,7 +572,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function must()
+	public function must()
 	{
 		return $this->fieldOpen('must');
 	}
@@ -584,7 +584,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function mustClose()
+	public function mustClose()
 	{
 		return $this->fieldClose();
 	}
@@ -597,7 +597,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function mustNot()
+	public function mustNot()
 	{
 		return $this->fieldOpen('must_not');
 	}
@@ -609,7 +609,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function mustNotClose()
+	public function mustNotClose()
 	{
 		return $this->fieldClose();
 	}
@@ -645,7 +645,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function prefix()
+	public function prefix()
 	{
 		return $this->fieldOpen('prefix');
 	}
@@ -657,7 +657,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function prefixClose()
+	public function prefixClose()
 	{
 		return $this->fieldClose();
 	}
@@ -712,7 +712,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function queryString()
+	public function queryString()
 	{
 		return $this->fieldOpen('query_string');
 	}
@@ -724,7 +724,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function queryStringClose()
+	public function queryStringClose()
 	{
 		return $this->fieldClose();
 	}
@@ -759,7 +759,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function should()
+	public function should()
 	{
 		return $this->fieldOpen('should');
 	}
@@ -771,7 +771,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function shouldClose()
+	public function shouldClose()
 	{
 		return $this->fieldClose();
 	}
@@ -849,7 +849,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function termClose()
+	public function termClose()
 	{
 		return $this->fieldClose();
 	}
@@ -891,7 +891,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function wildcard()
+	public function wildcard()
 	{
 		return $this->fieldOpen('wildcard');
 	}
@@ -903,7 +903,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 *
 	 * @return Elastica_Query_Builder
 	 */
-    public function wildcardClose()
+	public function wildcardClose()
 	{
 		return $this->fieldClose();
 	}
