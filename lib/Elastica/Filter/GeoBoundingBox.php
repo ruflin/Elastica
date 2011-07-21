@@ -1,40 +1,56 @@
 <?php
+
 /**
  * Geo bounding box filter
  *
+ * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
- * @author Nicolas Ruflin <spam@ruflin.com>
+ * @author Fabian Vogler <fabian@equivalence.ch>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/geo_bounding_box_filter/
  */
-class Elastica_Filter_GoeBoundingBox extends Elastica_Filter_Abstract
+class Elastica_Filter_GeoBoundingBox extends Elastica_Filter_Abstract
 {
+	protected $_key;
+	protected $_topLeftLatitude;
+	protected $_topLeftLongitude;
+	protected $_bottomRightLatitude;
+	protected $_bottomRightLongitude;
+
 	/**
-	 * Returns filter ojbect as array
+	 * @param string $key Key
+	 * @param string $latitude Latitude
+	 * @param string $longitude Longitude
+	 * @param string $distance Distance
+	 */
+	public function __construct($key, $topLeftLatitude, $topLeftLongitude, $bottomRightLatitude, $bottomRightLongitude) {
+		$this->_key = $key;
+		$this->_topLeftLatitude = $topLeftLatitude;
+		$this->_topLeftLongitude = $topLeftLongitude;
+		$this->_bottomRightLatitude = $bottomRightLatitude;
+		$this->_bottomRightLongitude = $bottomRightLongitude;
+	}
+
+	/**
+	 * Converts filter to array
+	 *
 	 * @see Elastica_Filter_Abstract::toArray()
-	 * @return array Filter array
+	 * @return Elastica_Filter_GeoDistance Current object
 	 */
 	public function toArray() {
-		// TODO: implement
-		return array();
+		return array(
+			'geo_bounding_box' => array(
+				$this->_key => array(
+					'top_left' => array(
+						'lat' => $this->_topLeftLatitude,
+						'lon' => $this->_topLeftLongitude
+					),
+					'bottom_right' => array(
+						'lat' => $this->_bottomRightLatitude,
+						'lon' => $this->_bottomRightLongitude
+					)
+				),
+			)
+		);
 	}
 }
-
-
-/**
-	"filter" : {
-		"geo_bounding_box" : {
-			"pin.location" : {
-				"top_left" : {
-					"lat" : 40.73,
-					"lon" : -74.1
-				},
-				"bottom_right" : {
-					"lat" : 40.717,
-					"lon" : -73.99
-				}
-			}
-		}
-	}
-}
-*/
