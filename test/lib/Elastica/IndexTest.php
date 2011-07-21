@@ -39,6 +39,45 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 
 	}
 
+	public function testParent() {
+
+		$client = new Elastica_Client();
+		$index = new Elastica_Index($client, 'parentchild');
+		$index->create(array(), true);
+
+		$typeBlog = new Elastica_Type($index, 'blog');
+
+		$typeComment = new Elastica_Type($index, 'comment');
+
+		$mapping = new Elastica_Type_Mapping();
+		$mapping->setParam('_parent', array('type' => 'blog'));
+		$typeComment->setMapping($mapping);
+
+		$entry1 = new Elastica_Document(1);
+		$entry1->add('title', 'Hello world');
+		$typeBlog->addDocument($entry1);
+
+		$entry2 = new Elastica_Document(2);
+		$entry2->add('title', 'Foo bar');
+		$typeBlog->addDocument($entry2);
+
+		$entry3 = new Elastica_Document(3);
+		$entry3->add('title', 'Till dawn');
+		$typeBlog->addDocument($entry3);
+
+		$comment = new Elastica_Document(1);
+		$comment->add('author', 'Max');
+		$comment->setParent(2); // Entry Foo bar
+		$typeComment->addDocument($comment);
+
+		$index->optimize();
+
+		$query = new Elastica_Query_HasChild('Max', 'comment');
+		$resultSet = $typeBlog->search($query);
+		$this->assertEquals(1, $resultSet->count());
+		$this->assertEquals(array('title' => 'Foo bar'), $resultSet->current()->getData());
+	}
+
 	public function testAddPDFFile() {
 		$this->markTestIncomplete();
 		$indexMapping = array(
