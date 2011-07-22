@@ -12,31 +12,36 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 	public function tearDown() {
 	}
 
-	public function testTest() {
-		/*$client = new Elastica_Client();
+	public function testMapping() {
+		$client = new Elastica_Client();
 
-		$index = $client->getIndex('aaa');
-		$index->delete();
-		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)));
+		$index = $client->getIndex('test');
+		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
-		$doc = new Elastica_Document('user', 1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
+		$doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
 
-		$index->addDocument($doc);
-		$index->optimize();
+		$type = $index->getType('test');
 
-
-		$index->setMapping('user',
-			array(
+		$mapping = array(
 				'id' => array('type' => 'integer', 'store' => 'yes'),
 				'email' => array('type' => 'string', 'store' => 'no'),
 				'username' => array('type' => 'string', 'store' => 'no'),
-			)
-		);
+				'test' => array('type' => 'integer', 'store' => 'no'),
+			);
+		$type->setMapping($mapping);
 
-		print_r($index->getMapping('user'));*/
+		$type->addDocument($doc);
+		$index->optimize();
 
-		//print_r($index->search('user', array('query' => 'hanswurst')));
+		$storedMapping = $type->getMapping('test');
 
+		$this->assertEquals($storedMapping['test']['properties']['id']['type'], 'integer');
+		$this->assertEquals($storedMapping['test']['properties']['id']['store'], 'yes');
+		$this->assertEquals($storedMapping['test']['properties']['email']['type'], 'string');
+		$this->assertEquals($storedMapping['test']['properties']['username']['type'], 'string');
+		$this->assertEquals($storedMapping['test']['properties']['test']['type'], 'integer');
+
+		$result = $type->search('hanswurst');
 	}
 
 	public function testParent() {
@@ -79,9 +84,9 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testAddPDFFile() {
-		$this->markTestIncomplete();
+		$this->markTestIncomplete('Result is not 100% as expected :-(');
 		$indexMapping = array(
-			'file' => array('type' => 'attachment'),
+			'file' => array('type' => 'attachment', 'store' => 'no'),
 			'text' => array('type' => 'string', 'store' => 'no'),
 		);
 
@@ -93,8 +98,8 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 		);
 
 		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'content');
-		$type = new Elastica_Type($index, 'content');
+		$index = new Elastica_Index($client, 'test');
+		$type = new Elastica_Type($index, 'test');
 
 		$index->create($indexParams, true);
 		$type->setMapping($indexMapping);
@@ -121,7 +126,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testAddWordxFile() {
-		//$this->markTestIncomplete();
+
 		$indexMapping = array(
 			'file' => array('type' => 'attachment'),
 			'text' => array('type' => 'string', 'store' => 'no'),

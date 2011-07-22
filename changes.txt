@@ -1,4 +1,16 @@
 CHANGES
+
+2011-07-22
+- Elastica_Index_Settings::getMergePolicyMergeFactor and set removed because of enhanced merge policy implementation in ES 0.17.0 https://github.com/elasticsearch/elasticsearch/issues/998
+- Release tav v0.17.1.0 added
+
+2011-07-21
+- Elastica_Query_HasChild and _parent feature added by fabian
+- Elastica_Filter_GeoBoundingBox added by fabian
+
+2011-07-20
+- Elastica_Query_Builder added by chrisdegrim
+
 2011-07-19
 - Release tag v0.17.0.0 added. Elastica is compatible with elasticsearch 0.17.0
 
