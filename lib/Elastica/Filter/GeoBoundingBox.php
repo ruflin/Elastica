@@ -19,9 +19,10 @@ class Elastica_Filter_GeoBoundingBox extends Elastica_Filter_Abstract
 
 	/**
 	 * @param string $key Key
-	 * @param string $latitude Latitude
-	 * @param string $longitude Longitude
-	 * @param string $distance Distance
+	 * @param string $topLeftLatitude
+	 * @param string $topLeftLongitude
+	 * @param string $bottomRightLatitude
+	 * @param string $bottomRightLongitude
 	 */
 	public function __construct($key, $topLeftLatitude, $topLeftLongitude, $bottomRightLatitude, $bottomRightLongitude) {
 		$this->_key = $key;
