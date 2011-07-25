@@ -1,0 +1,13 @@
+Source: libelastica-php5
+Section: unknown
+Priority: extra
+Maintainer: Maciej Wiercinski <maciej@wiercinski.net>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.8.4
+Homepage: https://github.com/ruflin/Elastica
+
+Package: libelastica-php5
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: PHP client for Elasticsearch
+ PHP client for Elasticsearch
