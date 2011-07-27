@@ -164,6 +164,18 @@ class Elastica_Index implements Elastica_Searchable
 		return (int) $data['count'];
 	}
 
+	public function query() {
+		return new Elastica_Factory_Query();
+	}
+
+	public function filter() {
+		return new Elastica_Factory_Filter();
+	}
+
+	public function facet() {
+		return new Elastica_Factory_Facet();
+	}
+
 	/**
 	 * Opens an index
 	 *
