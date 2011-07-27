@@ -59,13 +59,8 @@ class Elastica_Util
 	 */
 	public static function replaceBooleanWords($term) {
 
-		$result = $term;
-
 		$replacementMap = array('AND'=>'&&', 'OR'=>'||', 'NOT'=>'!');
-
-		foreach ($replacementMap as $booleanWord => $replacement) {
-			$result = str_replace($booleanWord, $replacement, $result);
-		}
+		$result = strtr($term, $replacementMap);
 
 		return $result;
 	}
