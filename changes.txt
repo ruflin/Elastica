@@ -1,4 +1,6 @@
 CHANGES
+2011-07-30
+- Readd merge_factor to settings. Now working as expected. Index has to be closed first.
 
 2011-07-29
 - Release tag v0.17.2.0 added. Elastica is compatible with elasticsearch 0.17.2

@@ -2,10 +2,15 @@
 /**
  * Elastica index settings object
  *
+ * All settings listed in the update settings API (http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html)
+ * can be changed on a running indice. To make changes like the merge policy (http://www.elasticsearch.org/guide/reference/index-modules/merge.html)
+ * the index has to be closed first and reopened after the call
+ *
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
+ * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
  */
 class Elastica_Index_Settings
 {
@@ -88,6 +93,35 @@ class Elastica_Index_Settings
 		}
 
 		return $interval;
+	}
+
+	/**
+	 * Sets the specific merge policies
+	 *
+	 * To have this changes made the index has to be closed and reopened
+	 *
+	 * @param string $key Merge policy key (for ex. expunge_deletes_allowed)
+	 * @param string $value
+	 * @return Elastica_Response
+	 * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
+	 */
+	public function setMergePolicy($key, $value) {
+		$this->getIndex()->close();
+		$response = $this->set(array('merge.policy.' . $key => $value));
+		$this->getIndex()->open();
+		return $response;
+	}
+
+	/**
+	 * Returns the specific merge policy value
+	 *
+	 *
+	 * @param string Merge policy key (for ex. expunge_deletes_allowed)
+	 * @return string Refresh interval
+	 * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
+	 */
+	public function getMergePolicy($key) {
+		return $this->get('index.merge.policy.' . $key);
 	}
 
 	/**
