@@ -9,7 +9,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_ResultSet implements Iterator
+class Elastica_ResultSet implements Iterator, Countable
 {
 	protected $_results = array();
 	protected $_position = 0;
