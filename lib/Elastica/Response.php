@@ -14,6 +14,7 @@ class Elastica_Response {
 	protected $_responseString = '';
 	protected $_error = false;
 	protected $_transferInfo = array();
+    protected $_response = array();
 
 	/**
 	 * @param string $responseString Response string (json)
@@ -52,27 +53,30 @@ class Elastica_Response {
 	 */
 	public function getData() {
 
-		$response = $this->_responseString;
-		if ($response === false) {
-			$this->_error = true;
-		} else {
+        if ($this->_response == null) {
+            $response = $this->_responseString;
+            if ($response === false) {
+                $this->_error = true;
+            } else {
 
-			$tempResponse = json_decode($response, true);
-			// If error is returned, json_decod makes empty string of string
-			if (!empty($tempResponse)) {
-				$response = $tempResponse;
-			}
-		}
+                $tempResponse = json_decode($response, true);
+                // If error is returned, json_decod makes empty string of string
+                if (!empty($tempResponse)) {
+                    $response = $tempResponse;
+                }
+            }
 
-		if (empty($response)) {
-			$response = array();
-		}
+            if (empty($response)) {
+                $response = array();
+            }
 
-		if (is_string($response)) {
-			$response = array('message' => $response);
-		}
+            if (is_string($response)) {
+                $response = array('message' => $response);
+            }
 
-		return $response;
+            $this->_response = $response;
+         } 
+		return $this->_response;
 	}
 
 	/**
@@ -115,4 +119,25 @@ class Elastica_Response {
 		$this->_queryTime = $queryTime;
 		return $this;
 	}
+
+
+    /**
+     * @return int
+     */
+    public function getEngineTime() {
+        $data = $this->getData();
+        return  (is_array($data) && isset($data['took']))  ? $data['took']  : null;
+    }
+
+
+    /**
+     * Get the _shard statistics for the response
+     * 
+     * @return void
+     */
+    public function getShardsStatistics() {
+       $data = $this->getData();
+        return (isset($data['_shards']) ? $data['_shards'] : null);
+    }
+
 }
