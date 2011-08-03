@@ -10,6 +10,14 @@ class Elastica_ResponseTest extends PHPUnit_Framework_TestCase
 	public function tearDown() {
 	}
 
+    public function testClassHierarchy() {
+
+        $facet = new Elastica_Facet_DateHistogram('dateHist1');
+        $this->assertInstanceOf('Elastica_Facet_Histogram', $facet);
+        $this->assertInstanceOf('Elastica_Facet_Abstract', $facet);
+        unset($facet);
+    }
+
 	public function testResponse() {
 
 		$client = new Elastica_Client();
