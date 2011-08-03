@@ -76,4 +76,39 @@ class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($interval, $settings->getRefreshInterval());
 		$this->assertEquals($interval, $settings->get('index.refresh_interval'));
 	}
+
+	public function testSetMergePolicy() {
+		$indexName = 'test';
+
+		$client = new Elastica_Client();
+		$index = $client->getIndex($indexName);
+		$index->create(array(), true);
+
+		$settings = $index->getSettings();
+
+		$settings->setMergePolicy('expunge_deletes_allowed', 15);
+		$this->assertEquals(15, $settings->getMergePolicy('expunge_deletes_allowed'));
+
+		$settings->setMergePolicy('expunge_deletes_allowed', 10);
+		$this->assertEquals(10, $settings->getMergePolicy('expunge_deletes_allowed'));
+	}
+
+	public function testSetMergeFactor() {
+		$indexName = 'test';
+
+		$client = new Elastica_Client();
+		$index = $client->getIndex($indexName);
+		$index->create(array(), true);
+
+		$settings = $index->getSettings();
+
+		$response = $settings->setMergePolicy('merge_factor', 15);
+		$this->assertEquals(15, $settings->getMergePolicy('merge_factor'));
+		$this->assertInstanceOf('Elastica_Response', $response);
+		$data = $response->getData();
+		$this->assertTrue($data['ok']);
+
+		$settings->setMergePolicy('merge_factor', 10);
+		$this->assertEquals(10, $settings->getMergePolicy('merge_factor'));
+	}
 }
