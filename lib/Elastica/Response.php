@@ -14,7 +14,7 @@ class Elastica_Response {
 	protected $_responseString = '';
 	protected $_error = false;
 	protected $_transferInfo = array();
-    protected $_response = array();
+    protected $_response = null;
 
 	/**
 	 * @param string $responseString Response string (json)
@@ -126,7 +126,12 @@ class Elastica_Response {
      */
     public function getEngineTime() {
         $data = $this->getData();
-        return  (is_array($data) && isset($data['took']))  ? $data['took']  : null;
+
+        if (!isset($data['took'])) {
+             throw new Elastica_Exception_ExpectedFieldNotFound("Unable to find the field [took]from the response");
+        }
+
+        return  $data['took'];
     }
 
 
@@ -137,7 +142,12 @@ class Elastica_Response {
      */
     public function getShardsStatistics() {
        $data = $this->getData();
-        return (isset($data['_shards']) ? $data['_shards'] : null);
+
+        if (!isset($data['_shards'])) {
+            throw new Elastica_Exception_ExpectedFieldNotFound("Unable to find the field [_shards] from the response");
+        }
+
+        return $data['_shards'];
     }
 
 }
