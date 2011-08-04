@@ -59,6 +59,8 @@ class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
 		$geoFilter = new Elastica_Filter_GeoDistance('point', 30, 40, '40000km');
 		$query = new Elastica_Query(new Elastica_Query_MatchAll());
 		$query->setFilter($geoFilter);
+		$index->refresh();
+
 		$this->assertEquals(2, $type->search($query)->count());
 	}
 }
