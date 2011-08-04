@@ -32,10 +32,12 @@ class Elastica_Index_Settings
 	/**
 	 * Returns the current settings of the index
 	 *
-	 * If param is set, only specified setting is return
+	 * If param is set, only specified setting is return.
+	 * 'index.' is added in front of $setting.
 	 *
 	 * @param string $setting OPTIONAL Setting name to return
 	 * @return array|string|null Settings data
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
 	 */
 	public function get($setting = '') {
 
@@ -43,8 +45,8 @@ class Elastica_Index_Settings
 		$settings = $data[$this->_index->getName()]['settings'];
 
 		if (!empty($setting)) {
-			if (isset($settings[$setting])) {
-				return $settings[$setting];
+			if (isset($settings['index.' . $setting])) {
+				return $settings['index.' . $setting];
 			} else {
 				return null;
 			}
@@ -86,7 +88,7 @@ class Elastica_Index_Settings
 	 * @return string Refresh interval
 	 */
 	public function getRefreshInterval() {
-		$interval = $this->get('index.refresh_interval');
+		$interval = $this->get('refresh_interval');
 
 		if (empty($interval)) {
 			$interval = self::DEFAULT_REFRESH_INTERVAL;
@@ -94,6 +96,28 @@ class Elastica_Index_Settings
 
 		return $interval;
 	}
+
+	/**
+	 * @return string Merge policy type
+	 */
+	public function getMergePolicyType() {
+		return $this->get('merge.policy.type');
+	}
+
+	/**
+	 * Sets merge policy
+	 *
+	 * @param string $type Merge policy type
+	 * @return Elastica_Response Response object
+	 * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
+	 */
+	public function setMergePolicyType($type) {
+		$this->getIndex()->close();
+		$response = $this->set(array('merge.policy.type' => $type));
+		$this->getIndex()->open();
+		return $response;
+	}
+
 
 	/**
 	 * Sets the specific merge policies
@@ -115,13 +139,12 @@ class Elastica_Index_Settings
 	/**
 	 * Returns the specific merge policy value
 	 *
-	 *
-	 * @param string Merge policy key (for ex. expunge_deletes_allowed)
+	 * @param string $key Merge policy key (for ex. expunge_deletes_allowed)
 	 * @return string Refresh interval
 	 * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
 	 */
 	public function getMergePolicy($key) {
-		return $this->get('index.merge.policy.' . $key);
+		return $this->get('merge.policy.' . $key);
 	}
 
 	/**

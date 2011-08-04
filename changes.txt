@@ -1,4 +1,9 @@
 CHANGES
+
+2011-08-04
+- Release v0.17.3.0 added
+- Elastica_Index_Settings::set/get response updated. get('...') does not require 'index.' in front anymore
+
 2011-07-30
 - Readd merge_factor to settings. Now working as expected. Index has to be closed first.
 
