@@ -52,6 +52,16 @@ class Elastica_ResultSet implements Iterator, Countable
 	}
 
 	/**
+	 * Returns whether facets exist
+	 *
+	 * @return boolean Facet existence
+	 */
+	public function hasFacets() {
+		$data = $this->_response->getData();
+		return isset($data['facets']);
+	}
+
+	/**
 	 * Returns all facets results
 	 *
 	 * @return array Facet results
