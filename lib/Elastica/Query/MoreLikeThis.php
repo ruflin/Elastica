@@ -26,7 +26,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
     protected $_minDocFreq = 5;
     protected $_maxDocFreq = null;
     protected $_minWordLen = 0;
-    protected $_maxWordLen = 0;
+    protected $_maxWordLen = null;
     protected $_boostTerms = 1;
 	protected $_boost = 1.0;
 
@@ -45,7 +45,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	 * Adds field to flt query
 	 *
 	 * @param array $fields Field names
-	 * @return Elastica_Query_FuzzyLikeThis Current object
+	 * @return Elastica_Query_MoreLikeThis Current object
 	 */
 	public function addFields(Array $fields) {
 		$this->_fields = $fields;
@@ -56,7 +56,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	 * Set the "like_text" value
 	 *
 	 * @param string $text
-	 * @return Elastica_Query_FuzzyLikeThis This current object
+	 * @return Elastica_Query_MoreLikeThis This current object
 	 */
 	public function setLikeText($text) {
 		$text = trim($text);
@@ -66,7 +66,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 
 	/**
 	 * @param float $value Boost value
-	 * @return Elastica_Query_FuzzyLikeThis Query object
+	 * @return Elastica_Query_MoreLikeThis Query object
 	 */
 	public function setBoost($value) {
 		$this->_boost = (float) $value;
@@ -77,7 +77,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	 * Set max_query_terms
 	 *
 	 * @param int $value Max query terms value
-	 * @return Elastica_Query_FuzzyLikeThis
+	 * @return Elastica_Query_MoreLikeThis
 	 */
 	public function setMaxQueryTerms($value) {
 		$this->_maxQueryTerms = (int)$value;
@@ -119,7 +119,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
      */
     public function setMinDocFrequency( $value ) {
         $value = (int)$value;
-        $value = ($value < 0) ?  1 : $value;
+        $value = ($value < 0) ?  5 : $value;
 
         $this->_minDocFreq = $value;
         return $this;
@@ -131,7 +131,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
      */
     public function setMaxDocFrequency($value) {
         $value = (int)$value;
-        $value = ($value < 0) ?  1 : $value;
+        $value = ($value < 0) ?  null : $value;
 
         $this->_maxDocFreq = $value;
         return $this;
@@ -144,7 +144,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
      */
     public function setMinWordLength( $value ) {
         $value = (int)$value;
-        $value = ($value < 0) ?  1 : $value;
+        $value = ($value <= 0) ?  0 : $value;
 
         $this->_minWordLen = $value;
         return $this;
@@ -156,7 +156,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
      */
     public function setMaxWordLength($value) {
         $value = (int)$value;
-        $value = ($value < 0) ?  1 : $value;
+        $value = ($value < 0) ?  null : $value;
 
         $this->_maxWordLen = $value;
         return $this;
@@ -167,7 +167,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
      *
      * @param int $value;
      * @link http://www.elasticsearch.org/guide/reference/query-dsl/mlt-query.html
-     * @return void
+     * @return Elastica_Query_MoreLikeThis
      */
     public function setBoostTerms($value) {
         $value = (int)$value;
@@ -179,7 +179,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 
     /**
      * @param string $value
-     * @return void
+     * @return Elastica_Query_MoreLikeThis
      */
     public function setAnalyzer( $value ) {
         $value = trim($value);
@@ -192,7 +192,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 
 
     /**
-     * @param array $words
+     * @param Array $words
      * @return Elastica_Query_MoreLikeThis
      */
     public function setStopWords(Array $words) {
@@ -201,9 +201,9 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
     }
 
 	/**
-	 * Converts fuzzy like this query to array
+	 * Converts more_like_this  query to array
 	 *
-	 * @return array Query array
+	 * @return Array Query array
 	 * @see Elastica_Query_Abstract::toArray()
 	 */
 	public function toArray() {
@@ -234,9 +234,15 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
         }
 
         $args['min_doc_freq'] = $this->_minDocFreq;
-        $args['max_doc_freq'] = $this->_maxDocFreq;
+
+        if ($this->_maxDocFreq == null) {
+            $args['max_doc_freq'] = $this->_maxDocFreq;
+        }
+
         $args['min_word_len'] = $this->_minWordLen;
-        $args['max_word_len'] = $this->_maxWordLen;
+        if ($this->_maxWordLen == null) {
+            $args['max_word_len'] = $this->_maxWordLen;
+        }
         $args['boost_terms']  = $this->_boostTerms;
 
 		return array('mlt' => $args);
