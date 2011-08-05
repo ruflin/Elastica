@@ -235,12 +235,12 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 
         $args['min_doc_freq'] = $this->_minDocFreq;
 
-        if ($this->_maxDocFreq == null) {
+        if ($this->_maxDocFreq != null) {
             $args['max_doc_freq'] = $this->_maxDocFreq;
         }
 
         $args['min_word_len'] = $this->_minWordLen;
-        if ($this->_maxWordLen == null) {
+        if ($this->_maxWordLen != null) {
             $args['max_word_len'] = $this->_maxWordLen;
         }
         $args['boost_terms']  = $this->_boostTerms;
