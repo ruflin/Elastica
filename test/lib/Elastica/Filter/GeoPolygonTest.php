@@ -46,10 +46,10 @@ class Elastica_Filter_GeoPolygonTest extends PHPUnit_Framework_TestCase
 		$index->optimize();
 		$index->refresh();
 
-		// Only one point should be in radius
+		// Only one point should be in polygon
 		$query = new Elastica_Query();
-    $points = array(array(16, 16), array(20, 20));
-		$geoFilter = new Elastica_Filter_GeoPolygon('point', $points);
+		$points = array(array(16, 16), array(16, 40), array(40, 40), array(40, 16), array(16, 16));
+		$geoFilter = new Elastica_Filter_GeoPolygon('point', compact('points'));
 
 		$query = new Elastica_Query(new Elastica_Query_MatchAll());
 		$query->setFilter($geoFilter);
@@ -57,8 +57,8 @@ class Elastica_Filter_GeoPolygonTest extends PHPUnit_Framework_TestCase
 
 		// Both points should be inside
 		$query = new Elastica_Query(); 
-    $points = array(array(16, 16), array(40, 40));
-		$geoFilter = new Elastica_Filter_GeoPolygon('point', $points);
+		$points = array(array(16, 16), array(16, 40), array(40, 40), array(40, 16), array(16, 16));
+		$geoFilter = new Elastica_Filter_GeoPolygon('point', compact('points'));
 		$query = new Elastica_Query(new Elastica_Query_MatchAll());
 		$query->setFilter($geoFilter);
 		$index->refresh();
