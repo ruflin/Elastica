@@ -59,10 +59,34 @@ class Elastica_Util
 	 * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators
 	 */
 	public static function replaceBooleanWords($term) {
-
 		$replacementMap = array('AND'=>'&&', 'OR'=>'||', 'NOT'=>'!');
 		$result = strtr($term, $replacementMap);
 
 		return $result;
+	}
+
+	/**
+	 * Converts a snake_case string to CamelCase
+	 *
+	 * For example: hello_world to HelloWorld
+	 *
+	 * @param string $string snake_case string
+	 * @return string CamelCase string
+	 */
+	public static function toCamelCase($string) {
+		return preg_replace('/_([a-z])/e', 'strtoupper("$1")', ucfirst($string));
+	}
+
+	/**
+	 * Converts a CamelCase string to snake_case
+	 *
+	 * For Example HelloWorld to hello_world
+	 *
+	 * @param string $string CamelCase String to Convert
+	 * @return string SnakeCase string
+	 */
+	public static function toSnakeCase($string) {
+		$string = preg_replace('/([A-Z])/e', 'strtolower("_$1")', $string);
+		return substr($string, 1);
 	}
 }
