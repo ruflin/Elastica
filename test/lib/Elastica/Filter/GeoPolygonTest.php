@@ -3,7 +3,7 @@
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 
-class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
+class Elastica_Filter_GeoPolygonTest extends PHPUnit_Framework_TestCase
 {
 	public function setUp() {
 	}
@@ -46,17 +46,19 @@ class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
 		$index->optimize();
 		$index->refresh();
 
-		// Only one point should be in radius
+		// Only one point should be in polygon
 		$query = new Elastica_Query();
-		$geoFilter = new Elastica_Filter_GeoDistance('point', 30, 40, '1km');
+		$points = array(array(16, 16), array(16, 40), array(40, 40), array(40, 16), array(16, 16));
+		$geoFilter = new Elastica_Filter_GeoPolygon('point', compact('points'));
 
 		$query = new Elastica_Query(new Elastica_Query_MatchAll());
 		$query->setFilter($geoFilter);
 		$this->assertEquals(1, $type->search($query)->count());
 
 		// Both points should be inside
-		$query = new Elastica_Query();
-		$geoFilter = new Elastica_Filter_GeoDistance('point', 30, 40, '40000km');
+		$query = new Elastica_Query(); 
+		$points = array(array(16, 16), array(16, 40), array(40, 40), array(40, 16), array(16, 16));
+		$geoFilter = new Elastica_Filter_GeoPolygon('point', compact('points'));
 		$query = new Elastica_Query(new Elastica_Query_MatchAll());
 		$query->setFilter($geoFilter);
 		$index->refresh();

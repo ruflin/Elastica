@@ -100,20 +100,14 @@ class Elastica_Cluster
 	}
 
 	/**
-	 * @param array $args OPTIONAL
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/nodes_restart/
+	 * Shuts down the complete cluster
+	 *
+	 * @param string $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
+	 * @return Elastica_Response
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown.html
 	 */
-	public function restart(array $args) {
-		throw new Exception('not implemented yet');
-
-	}
-
-	/**
-	 * @param array $args OPTIONAL
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/nodes_shutdown/
-	 */
-	public function shutdown(array $args) {
-		throw new Exception('not implemented yet');
-
+	public function shutdown($delay = '1s') {
+		$path = '_shutdown?delay=' . $delay;
+		return $this->_client->request($path, Elastica_Request::POST);
 	}
 }
