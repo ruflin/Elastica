@@ -61,4 +61,11 @@ class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
 		$query->setFilter($geoFilter);
 		$this->assertEquals(2, $type->search($query)->count());
 	}
+	
+	public function testSetLatitude()
+	{
+		$geoDistance = new Elastica_Filter_GeoDistance('point', 38.89859, -77.035971, '10mi');
+		$returnValue = $geoDistance->setLatitude(38.89859);
+		$this->assertInstanceOf('Elastica_Filter_GeoDistance', $returnValue);
+	}
 }
