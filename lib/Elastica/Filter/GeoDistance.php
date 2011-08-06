@@ -61,6 +61,7 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
 	 */
 	public function setLongitude($longitude) {
 		$this->_longitude = $longitude;
+		return $this;
 	}
 
 	/**
