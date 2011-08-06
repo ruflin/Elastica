@@ -17,9 +17,11 @@ class Elastica_Filter_Range extends Elastica_Filter_Abstract
 	 *
 	 * @param string $fieldName Field name
 	 * @param array $args Field arguments
+	 * @return Elastica_Filter_Range
 	 */
 	public function addField($fieldName, array $args) {
 		$this->_fields[$fieldName] = $args;
+		return $this;
 	}
 
 	/**

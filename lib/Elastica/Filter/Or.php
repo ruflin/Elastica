@@ -20,6 +20,7 @@ class Elastica_Filter_Or extends Elastica_Filter_Abstract
 	 */
 	public function addFilter(Elastica_Filter_Abstract $filter) {
 		$this->_filters[] = $filter->toArray();
+		return $this;
 	}
 
 	/**

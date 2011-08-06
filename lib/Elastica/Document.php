@@ -57,9 +57,11 @@ class Elastica_Document {
 	 *
 	 * @param string $key Document entry key
 	 * @param mixed $value Document entry value
+	 * @return Elastica_Document
 	 */
 	public function add($key, $value) {
 		$this->_data[$key] = $value;
+		return $this;
 	}
 
 	/**
@@ -76,6 +78,7 @@ class Elastica_Document {
 	 * @param string $key Key to add the file to
 	 * @param string $filepath Path to add the file
 	 * @param string $mimeType OPTIONAL Header mime type
+	 * @return Elastica_Document
 	 */
 	public function addFile($key, $filepath, $mimeType = '') {
 		$value = base64_encode(file_get_contents($filepath));
@@ -89,6 +92,7 @@ class Elastica_Document {
 		}
 
 		$this->add($key, $value);
+		return $this;
 	}
 
 	/**
@@ -100,6 +104,7 @@ class Elastica_Document {
 	 * @param float $latitude Latitud value
 	 * @param float $longitude Longitude value
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/mapping/geo_point/
+	 * @return Elastica_Document
 	 */
 	public function addGeoPoint($key, $latitude, $longitude) {
 
@@ -109,15 +114,18 @@ class Elastica_Document {
 		);
 
 		$this->add($key, $value);
+		return $this;
 	}
 
 	/**
 	 * Overwrites the curent document data with the given data
 	 *
 	 * @param array $data Data array
+	 * @return Elastica_Document
 	 */
 	public function setData(array $data) {
 		$this->_data = $data;
+		return $this;
 	}
 
 	/**
