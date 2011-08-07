@@ -20,7 +20,7 @@
 	</testsuites>
 	<filter>
 		<whitelist>
-	    	<directory suffix=".php">./lib/</directory>
+	    	<directory suffix=".php">../lib/</directory>
 		</whitelist>
 	</filter>
 	<logging>
