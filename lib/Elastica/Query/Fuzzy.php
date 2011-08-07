@@ -10,8 +10,6 @@
  */
 class Elastica_Query_Fuzzy extends Elastica_Query_Abstract
 {
-	protected $_fields = array();
-
 	/**
 	 * Adds field to fuzzy query
 	 *
@@ -20,18 +18,6 @@ class Elastica_Query_Fuzzy extends Elastica_Query_Abstract
 	 * @return Elastica_Query_Fuzzy Current object
 	 */
 	public function addField($fieldName, array $args) {
-		$this->_fields[$fieldName] = $args;
-		return $this;
-	}
-
-	/**
-	 * Converts fuzzy query to array
-	 *
-	 * @return array Query array
-	 * @see Elastica_Query_Abstract::toArray()
-	 */
-	public function toArray() {
-		$args = $this->_fields;
-		return array('fuzzy' => $args);
+		return $this->setParam($fieldName, $args);
 	}
 }
