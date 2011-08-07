@@ -19,9 +19,9 @@ class Elastica_Query_MoreLikeThisTest extends PHPUnit_Framework_TestCase
 
 		$type = new Elastica_Type($index, 'helloworldmlt');
 		$mapping = new Elastica_Type_Mapping($type , array(
-			   'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
-			   'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
-		  ));
+			'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
+			'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
+		));
 
 		$mapping->setSource(array('enabled' => false));
 		$type->setMapping($mapping);
@@ -37,14 +37,14 @@ class Elastica_Query_MoreLikeThisTest extends PHPUnit_Framework_TestCase
 		$index->refresh();
 
 		$mltQuery = new Elastica_Query_MoreLikeThis();
-		$mltQuery->setLikeText("fake gmail sample");
-		$mltQuery->addFields(array("email","content"));
+		$mltQuery->setLikeText('fake gmail sample');
+		$mltQuery->setFields(array('email','content'));
 		$mltQuery->setMaxQueryTerms(1);
 		$mltQuery->setMinDocFrequency(1);
 		$mltQuery->setMinTermFrequency(1);
 
 		$query = new Elastica_Query();
-		$query->setFields(array("email", "content"));
+		$query->setFields(array('email', 'content'));
 		$query->setQuery($mltQuery);
 
 		$resultSet = $type->search($query);

@@ -11,239 +11,119 @@
 class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 {
 	/**
-	 * @var array
-	 */
-	protected $_fields = array();
-
-	/**
-	 * @var string
-	 */
-	protected $_likeText   = null;
-
-	protected $_percTermsToMatch = 0.3;
-	protected $_minTermFreq = 2;
-	protected $_maxQueryTerms = 25;
-	protected $_minDocFreq = 5;
-	protected $_maxDocFreq = null;
-	protected $_minWordLen = 0;
-	protected $_maxWordLen = null;
-	protected $_boostTerms = 1;
-	protected $_boost = 1.0;
-
-	/**
-	 * @var string
-	 */
-	protected $_analyzer = null;
-
-	/**
-	 * @var array
-	 */
-	protected $_stopWords = null;
-
-
-	/**
-	 * Adds field to flt query
+	 * Adds field to mlt query
 	 *
 	 * @param array $fields Field names
 	 * @return Elastica_Query_MoreLikeThis Current object
 	 */
-	public function addFields(Array $fields) {
-		$this->_fields = $fields;
-		return $this;
+	public function setFields(array $fields) {
+		return $this->setParam('mlt_fields', $fields);
 	}
 
 	/**
 	 * Set the "like_text" value
 	 *
-	 * @param string $text
+	 * @param string $likeText
 	 * @return Elastica_Query_MoreLikeThis This current object
 	 */
-	public function setLikeText($text) {
-		$text = trim($text);
-		$this->_likeText = $text;
-		return $this;
+	public function setLikeText($likeText) {
+		$likeText = trim($likeText);
+		return $this->setParam('like_text', $likeText);
 	}
 
 	/**
-	 * @param float $value Boost value
+	 * @param float $boost Boost value
 	 * @return Elastica_Query_MoreLikeThis Query object
 	 */
-	public function setBoost($value) {
-		$this->_boost = (float) $value;
-		return $this;
+	public function setBoost($boost) {
+		return $this->setParam('boost', (float) $boost);
 	}
 
 	/**
 	 * Set max_query_terms
 	 *
-	 * @param int $value Max query terms value
+	 * @param int $maxQueryTerms Max query terms value
 	 * @return Elastica_Query_MoreLikeThis
 	 */
-	public function setMaxQueryTerms($value) {
-		$this->_maxQueryTerms = (int)$value;
-		return $this;
+	public function setMaxQueryTerms($maxQueryTerms) {
+		return $this->setParam('max_query_terms', (int) $maxQueryTerms);
 	}
 
 
 	/**
-	 * @param float $perc percentage
+	 * @param float $percentTermsToMatch Percentage
 	 * @return Elastica_Query_MoreLikeThis
 	 */
-	public function setPercentTermsToMatch( $perc ) {
-		$perc= (float) $perc;
-
-		$this->_percTermsToMatch = $perc;
-
-		return $this;
+	public function setPercentTermsToMatch($percentTermsToMatch) {
+		return $this->setParam('percent_terms_to_match', (float) $percentTermsToMatch);
 	}
 
 	/**
-	 * @param int $value
+	 * @param int $minTermFreq
 	 * @return Elastica_Query_MoreLikeThis
 	 */
-	public function setMinTermFrequency( $value ) {
-		$value = (int)$value;
-		if ($value < 0) {
-			$value = 0;
-		}
-
-		$this->_minTermFreq = $value;
-
-		return $this;
+	public function setMinTermFrequency($minTermFreq) {
+		return $this->setParam('min_term_freq', (int) $minTermFreq);
 	}
 
 
 	/**
-	 * @param int $value
+	 * @param int $minDocFreq
 	 * @return Elastica_Query_MoreLikeThis
 	 */
-	public function setMinDocFrequency( $value ) {
-		$value = (int)$value;
-		$value = ($value < 0) ?  5 : $value;
-
-		$this->_minDocFreq = $value;
-		return $this;
+	public function setMinDocFrequency($minDocFreq) {
+		return $this->setParam('min_doc_freq', (int) $minDocFreq);
 	}
 
 	/**
-	 * @param int $value
+	 * @param int $maxDocFreq
 	 * @return Elastica_Query_MoreLikeThis
 	 */
-	public function setMaxDocFrequency($value) {
-		$value = (int)$value;
-		$value = ($value < 0) ?  null : $value;
-
-		$this->_maxDocFreq = $value;
-		return $this;
+	public function setMaxDocFrequency($maxDocFreq) {
+		return $this->setParam('max_doc_freq', (int) $maxDocFreq);
 	}
 
 
 	/**
-	 * @param int $value
+	 * @param int $minWordLength
 	 * @return Elastica_Query_MoreLikeThis
 	 */
-	public function setMinWordLength( $value ) {
-		$value = (int)$value;
-		$value = ($value <= 0) ?  0 : $value;
-
-		$this->_minWordLen = $value;
-		return $this;
+	public function setMinWordLength($minWordLength) {
+		return $this->setParam('min_word_length', (int) $minWordLength);
 	}
 
 	/**
-	 * @param int $value
+	 * @param int $maxWordLength
 	 * @return Elastica_Query_MoreLikeThis
 	 */
-	public function setMaxWordLength($value) {
-		$value = (int)$value;
-		$value = ($value < 0) ?  null : $value;
-
-		$this->_maxWordLen = $value;
-		return $this;
+	public function setMaxWordLength($maxWordLength) {
+		return $this->setParam('max_word_length', (int) $maxWordLength);
 	}
 
-
 	/**
-	 * @param int $value
+	 * @param bool $boostTerms
 	 * @return Elastica_Query_MoreLikeThis
 	 * @link http://www.elasticsearch.org/guide/reference/query-dsl/mlt-query.html
 	 */
-	public function setBoostTerms($value) {
-		$value = (int) $value;
-		$value = ($value < 0) ? 1 : $value;
-		$this->_boostTerms = $value;
-		return $this;
+	public function setBoostTerms($boostTerms) {
+		return $this->setParam('boost_terms', $boostTerms?1:0);
 	}
 
-
 	/**
-	 * @param string $value
+	 * @param string $analyzer
 	 * @return Elastica_Query_MoreLikeThis
 	 */
-	public function setAnalyzer( $value ) {
-		$value = trim($value);
-		if (!empty($value)) {
-			$this->_analyzer = $value;
-		}
-
-		return $this;
+	public function setAnalyzer($analyzer) {
+		$analyzer = trim($analyzer);
+		return $this->setParam('analyzer', $analyzer);
 	}
 
 
 	/**
-	 * @param Array $words
+	 * @param array $stopWords
 	 * @return Elastica_Query_MoreLikeThis
 	 */
-	public function setStopWords(Array $words) {
-		$this->_stopWords = $words;
-		return $this;
-	}
-
-	/**
-	 * Converts more_like_this  query to array
-	 *
-	 * @return Array Query array
-	 * @see Elastica_Query_Abstract::toArray()
-	 */
-	public function toArray() {
-
-		if (!empty($this->_fields)) {
-			$args['mlt_fields'] = $this->_fields;
-		}
-
-		if (!empty($this->_boost)) {
-			$args['boost'] = $this->_boost;
-		}
-
-		if (!empty($this->_likeText)) {
-			$args['like_text'] = $this->_likeText;
-		}
-
-		$args['max_query_terms'] = $this->_maxQueryTerms;
-
-		$args['percent_terms_to_match']   = $this->_percTermsToMatch;
-		$args['min_term_freq'] = $this->_minTermFreq;
-
-		if (!empty($this->_stopWords)) {
-			$args['stop_words'] = $this->_stopWords;
-		}
-
-		if (!empty($this->_analyzer)) {
-			$args['analyzer'] = $this->_analyzer;
-		}
-
-		$args['min_doc_freq'] = $this->_minDocFreq;
-
-		if ($this->_maxDocFreq != null) {
-			$args['max_doc_freq'] = $this->_maxDocFreq;
-		}
-
-		$args['min_word_len'] = $this->_minWordLen;
-		if ($this->_maxWordLen != null) {
-			$args['max_word_len'] = $this->_maxWordLen;
-		}
-		$args['boost_terms']  = $this->_boostTerms;
-
-		return array('mlt' => $args);
+	public function setStopWords(array $stopWords) {
+		return $this->setParam('stop_words', $stopWords);
 	}
 }
