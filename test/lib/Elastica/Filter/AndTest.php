@@ -29,6 +29,5 @@ class Elastica_Filter_AndTest extends PHPUnit_Framework_TestCase
 		);
 
 		$this->assertEquals($expectedArray, $and->toArray());
-
 	}
 }
