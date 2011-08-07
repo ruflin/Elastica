@@ -6,14 +6,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-abstract class Elastica_Query_Abstract
+abstract class Elastica_Query_Abstract extends Elastica_Param
 {
-	/**
-	 * Converts a query to an array
-	 *
-	 * All query objects have to implement this function
-	 *
-	 * @return array Query array
-	 */
-	abstract public function toArray();
+
 }
