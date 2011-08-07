@@ -9,6 +9,40 @@ class Elastica_Query_BoolTest extends PHPUnit_Framework_TestCase
 	public function tearDown() {
 	}
 
+	public function testToArray() {
+		$query = new Elastica_Query_Bool();
+
+		$idsQuery1 = new Elastica_Query_Ids();
+		$idsQuery1->setIds(1);
+
+		$idsQuery2 = new Elastica_Query_Ids();
+		$idsQuery2->setIds(2);
+
+		$idsQuery3 = new Elastica_Query_Ids();
+		$idsQuery3->setIds(3);
+
+		$boost = 1.2;
+		$minMatch = 2;
+
+		$query->setBoost($boost);
+		$query->setMinimumNumberShouldMatch($minMatch);
+		$query->addMust($idsQuery1);
+		$query->addMustNot($idsQuery2);
+		$query->addShould($idsQuery3->toArray());
+
+		$expectedArray = array(
+			'bool' => array(
+				'must' => array($idsQuery1->toArray()),
+				'should' => array($idsQuery3->toArray()),
+				'minimum_number_should_match' => $minMatch,
+				'must_not' => array($idsQuery2->toArray()),
+				'boost' => $boost,
+			)
+		);
+
+		$this->assertEquals($expectedArray, $query->toArray());
+	}
+
 	public function testSearch() {
 		$client = new Elastica_Client();
 		$index = new Elastica_Index($client, 'test');
