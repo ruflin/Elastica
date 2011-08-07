@@ -11,11 +11,6 @@
 class Elastica_Filter_Exists extends Elastica_Filter_Abstract
 {
 	/**
-	 * @var string
-	 */
-	protected $_field;
-
-	/**
 	 * @param string $field
 	 */
 	public function __construct($field) {
@@ -24,21 +19,9 @@ class Elastica_Filter_Exists extends Elastica_Filter_Abstract
 
 	/**
 	 * @param string $field
+	 * @return Elastica_Filter_Exists
 	 */
 	public function setField($field) {
-		$this->_field = $field;
-		return $this;
-	}
-
-	/**
-	 * Converst filter to array
-	 *
-	 * @see Elastica_Filter_Abstract::toArray()
-	 * @return array Filter array
-	 */
-	public function toArray() {
-		$args = array('field' => $this->_field);
-
-		return array('exists' => $args);
+		return $this->setParam('field', $field);
 	}
 }

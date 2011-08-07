@@ -1,37 +1,37 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../bootstrap.php';
+require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-class Elastica_Filter_AbstractTest extends PHPUnit_Framework_TestCase
+class Elastica_ParamTest extends PHPUnit_Framework_TestCase
 {
 	/**
 	 * Tests if filter name is set correct and instance is created
 	 */
 	public function testInstance() {
-		$className = 'Elastica_Filter_AbstractFilter';
-		$filter = $this->getMockForAbstractClass('Elastica_Filter_Abstract', array(), $className);
+		$className = 'Elastica_ParamAbstract';
+		$filter = $this->getMockForAbstractClass('Elastica_Param', array(), $className);
 
-		$this->assertInstanceOf('Elastica_Filter_Abstract', $filter);
-		$this->assertEquals(array('abstract_filter' => array()), $filter->toArray());
+		$this->assertInstanceOf('Elastica_Param', $filter);
+		$this->assertEquals(array('param_abstract' => array()), $filter->toArray());
 	}
 
 	public function testToArrayEmpty() {
-		$filter = $this->getMockForAbstractClass('Elastica_Filter_Abstract');
-		$this->assertInstanceOf('Elastica_Filter_Abstract', $filter);
+		$filter = $this->getMockForAbstractClass('Elastica_Param');
+		$this->assertInstanceOf('Elastica_Param', $filter);
 		$this->assertEquals(array($this->_getFilterName($filter) => array()), $filter->toArray());
 	}
 
 	public function testSetParams() {
-		$filter = $this->getMockForAbstractClass('Elastica_Filter_Abstract');
+		$filter = $this->getMockForAbstractClass('Elastica_Param');
 		$params = array('hello' => 'word', 'nicolas' => 'ruflin');
 		$filter->setParams($params);
 
-		$this->assertInstanceOf('Elastica_Filter_Abstract', $filter);
+		$this->assertInstanceOf('Elastica_Param', $filter);
 		$this->assertEquals(array($this->_getFilterName($filter) => $params), $filter->toArray());
 	}
 
 	public function testSetGetParam() {
-		$filter = $this->getMockForAbstractClass('Elastica_Filter_Abstract');
+		$filter = $this->getMockForAbstractClass('Elastica_Param');
 
 		$key = 'name';
 		$value = 'nicolas ruflin';
@@ -44,7 +44,7 @@ class Elastica_Filter_AbstractTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testAddParam() {
-		$filter = $this->getMockForAbstractClass('Elastica_Filter_Abstract');
+		$filter = $this->getMockForAbstractClass('Elastica_Param');
 
 		$key = 'name';
 		$value = 'nicolas ruflin';
@@ -56,7 +56,7 @@ class Elastica_Filter_AbstractTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testAddParam2() {
-		$filter = $this->getMockForAbstractClass('Elastica_Filter_Abstract');
+		$filter = $this->getMockForAbstractClass('Elastica_Param');
 
 		$key = 'name';
 		$value1 = 'nicolas';
@@ -70,7 +70,7 @@ class Elastica_Filter_AbstractTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testGetParamInvalid() {
-		$filter = $this->getMockForAbstractClass('Elastica_Filter_Abstract');
+		$filter = $this->getMockForAbstractClass('Elastica_Param');
 
 		try {
 			$filter->getParam('notest');

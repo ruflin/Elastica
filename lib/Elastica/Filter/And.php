@@ -10,7 +10,6 @@
  */
 class Elastica_Filter_And extends Elastica_Filter_Abstract
 {
-
 	protected $_filters = array();
 
 	/**
