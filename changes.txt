@@ -1,5 +1,8 @@
 CHANGES
 
+2011-08-08
+- Elastica_Query_Text added
+
 2011-08-07
 - Elastica_Query_MoreLikeThis added by @juneym. Still work under progress
 - Refactoring Queries and Filters to use Elastica_Param. Adding tests

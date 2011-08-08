@@ -9,71 +9,71 @@ class Elastica_ParamTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testInstance() {
 		$className = 'Elastica_ParamAbstract';
-		$filter = $this->getMockForAbstractClass('Elastica_Param', array(), $className);
+		$param = $this->getMock('Elastica_Param', null, array(), $className);
 
-		$this->assertInstanceOf('Elastica_Param', $filter);
-		$this->assertEquals(array('param_abstract' => array()), $filter->toArray());
+		$this->assertInstanceOf('Elastica_Param', $param);
+		$this->assertEquals(array('param_abstract' => array()), $param->toArray());
 	}
 
 	public function testToArrayEmpty() {
-		$filter = $this->getMockForAbstractClass('Elastica_Param');
-		$this->assertInstanceOf('Elastica_Param', $filter);
-		$this->assertEquals(array($this->_getFilterName($filter) => array()), $filter->toArray());
+		$param = new Elastica_Param();
+		$this->assertInstanceOf('Elastica_Param', $param);
+		$this->assertEquals(array($this->_getFilterName($param) => array()), $param->toArray());
 	}
 
 	public function testSetParams() {
-		$filter = $this->getMockForAbstractClass('Elastica_Param');
+		$param = new Elastica_Param();
 		$params = array('hello' => 'word', 'nicolas' => 'ruflin');
-		$filter->setParams($params);
+		$param->setParams($params);
 
-		$this->assertInstanceOf('Elastica_Param', $filter);
-		$this->assertEquals(array($this->_getFilterName($filter) => $params), $filter->toArray());
+		$this->assertInstanceOf('Elastica_Param', $param);
+		$this->assertEquals(array($this->_getFilterName($param) => $params), $param->toArray());
 	}
 
 	public function testSetGetParam() {
-		$filter = $this->getMockForAbstractClass('Elastica_Param');
+		$param = new Elastica_Param();
 
 		$key = 'name';
 		$value = 'nicolas ruflin';
 
 		$params = array($key => $value);
-		$filter->setParam($key, $value);
+		$param->setParam($key, $value);
 
-		$this->assertEquals($params, $filter->getParams());
-		$this->assertEquals($value, $filter->getParam($key));
+		$this->assertEquals($params, $param->getParams());
+		$this->assertEquals($value, $param->getParam($key));
 	}
 
 	public function testAddParam() {
-		$filter = $this->getMockForAbstractClass('Elastica_Param');
+		$param = new Elastica_Param();
 
 		$key = 'name';
 		$value = 'nicolas ruflin';
 
-		$filter->addParam($key, $value);
+		$param->addParam($key, $value);
 
-		$this->assertEquals(array($key => array($value)), $filter->getParams());
-		$this->assertEquals(array($value), $filter->getParam($key));
+		$this->assertEquals(array($key => array($value)), $param->getParams());
+		$this->assertEquals(array($value), $param->getParam($key));
 	}
 
 	public function testAddParam2() {
-		$filter = $this->getMockForAbstractClass('Elastica_Param');
+		$param = new Elastica_Param();
 
 		$key = 'name';
 		$value1 = 'nicolas';
 		$value2 = 'ruflin';
 
-		$filter->addParam($key, $value1);
-		$filter->addParam($key, $value2);
+		$param->addParam($key, $value1);
+		$param->addParam($key, $value2);
 
-		$this->assertEquals(array($key => array($value1, $value2)), $filter->getParams());
-		$this->assertEquals(array($value1, $value2), $filter->getParam($key));
+		$this->assertEquals(array($key => array($value1, $value2)), $param->getParams());
+		$this->assertEquals(array($value1, $value2), $param->getParam($key));
 	}
 
 	public function testGetParamInvalid() {
-		$filter = $this->getMockForAbstractClass('Elastica_Param');
+		$param = new Elastica_Param();
 
 		try {
-			$filter->getParam('notest');
+			$param->getParam('notest');
 			$this->fail('Should throw exception');
 		} catch(Elastica_Exception_Invalid $e) {
 			$this->assertTrue(true);
