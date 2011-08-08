@@ -1,6 +1,6 @@
 <?php
 /**
- * Abstract class to handle params
+ * Class to handle params
  *
  * This function can be used to handle params for queries, filter, facets
  *
@@ -8,7 +8,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-abstract class Elastica_Param
+class Elastica_Param
 {
 	/**
 	 * Params
