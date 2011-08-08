@@ -33,8 +33,8 @@ class Elastica_Filter_GeoBoundingBox extends Elastica_Filter_Abstract
 		}
 
 		$this->setParam($key, array(
-			'top_left' => $this->_coordinates[0],
-			'bottom_right' => $this->_coordinates[1]
+			'top_left' => $coordinates[0],
+			'bottom_right' => $coordinates[1]
 		));
 
 		return $this;
