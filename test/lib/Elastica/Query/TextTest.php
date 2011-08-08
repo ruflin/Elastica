@@ -14,15 +14,17 @@ class Elastica_Query_WildcardTest extends PHPUnit_Framework_TestCase
 		$type = 'text_phrase';
 		$analyzer = 'myanalyzer';
 		$maxExpansions = 12;
+		$field = 'test';
 
-		$query = new Elastica_Query_Text($queryText);
-		$query->setType($type);
-		$query->setMessageParam('analyzer', $analyzer);
-		$query->setMaxExpansions($maxExpansions);
+		$query = new Elastica_Query_Text();
+		$query->setFieldQuery($field, $queryText);
+		$query->setFieldType($field, $type);
+		$query->setFieldParam($field, 'analyzer', $analyzer);
+		$query->setFieldMaxExpansions($field, $maxExpansions);
 
 		$expectedArray = array(
 			'text' => array(
-				'message' => array(
+				$field => array(
 					'query' => $queryText,
 					'type' => $type,
 					'analyzer' => $analyzer,

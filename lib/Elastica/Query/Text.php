@@ -10,16 +10,6 @@
  */
 class Elastica_Query_Text extends Elastica_Query_Abstract
 {
-	protected $_message = null;
-
-	/**
-	 * @param string $query Query string
-	 */
-	public function __construct($query) {
-		$this->_message = new Elastica_Param();
-		$this->setQuery($query);
-	}
-
 	/**
 	 * Sets a param for the message array
 	 *
@@ -27,42 +17,53 @@ class Elastica_Query_Text extends Elastica_Query_Abstract
 	 * @param mixed $value
 	 * @return Elastica_Query_Text
 	 */
-	public function setMessageParam($key, $value) {
-		$this->_message->setParam($key, $value);
+	public function setField($field, $values) {
+		return $this->setParam($field, $values);
+	}
+
+	/**
+	 * Sets a param for the given field
+	 *
+	 * @param string $field
+	 * @param string $key
+	 * @param string $value
+	 * @return Elastica_Query_Text
+	 */
+	public function setFieldParam($field, $key, $value) {
+		if (!isset($this->_params[$field])) {
+			$this->_params[$field] = array();
+		}
+
+		$this->_params[$field][$key] = $value;
 		return $this;
 	}
 
 	/**
 	 * Sets the query string
 	 *
+	 * @param string $field
 	 * @param string $query
 	 * @return Elastica_Query_Text
 	 */
-	public function setQuery($query) {
-		return $this->setMessageParam('query', $query);
+	public function setFieldQuery($field, $query) {
+		return $this->setFieldParam($field, 'query', $query);
 	}
 
 	/**
+	 * @param string $field
 	 * @param string $type Text query type
 	 * @return Elastica_Query_Text
 	 */
-	public function setType($type) {
-		return $this->setMessageParam('type', $type);
+	public function setFieldType($field, $type) {
+		return $this->setFieldParam($field, 'type', $type);
 	}
 
 	/**
+	 * @param string $field
 	 * @param int $maxExpansions
 	 * @return Elastica_Query_Text
 	 */
-	public function setMaxExpansions($maxExpansions) {
-		return $this->setMessageParam('max_expansions', $maxExpansions);
-	}
-
-	/**
-	 * @see Elastica_Param::toArray()
-	 */
-	public function toArray() {
-		$this->setParams(array('message' => $this->_message->getParams()));
-		return parent::toArray();
+	public function setFieldMaxExpansions($field, $maxExpansions) {
+		return $this->setFieldParam($field, 'max_expansions', $maxExpansions);
 	}
 }
