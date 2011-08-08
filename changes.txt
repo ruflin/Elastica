@@ -2,6 +2,7 @@ CHANGES
 
 2011-08-08
 - Elastica_Query_Text added
+- Params (constructor) of Elastica_Filter_GeoBoundingBox changed (array instead of single params)
 
 2011-08-07
 - Elastica_Query_MoreLikeThis added by @juneym. Still work under progress
