@@ -1,5 +1,8 @@
 CHANGES
 
+2011-08-09
+- Automatic creation of id for documents added. This was more a bug
+
 2011-08-08
 - Elastica_Query_Text added
 - Params (constructor) of Elastica_Filter_GeoBoundingBox changed (array instead of single params)
