@@ -147,4 +147,3 @@ class Elastica_Query_IdsTest extends PHPUnit_Framework_TestCase
 	}
 }
 
-?>

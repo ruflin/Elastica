@@ -10,8 +10,6 @@
  */
 class Elastica_Filter_Ids extends Elastica_Filter_Abstract
 {
-	protected $_params = array();
-
 	/**
 	 * Creates filter object
 	 *
@@ -30,8 +28,7 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
 	 * @return Elastica_Filter_Ids Current object
 	 */
 	public function addId($id) {
-		$this->_params['values'][] = $id;
-		return $this;
+		return $this->addParam('values', $id);
 	}
 
 	/**
@@ -44,12 +41,12 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
 		if ($type instanceof Elastica_Type) {
 			$type = $type->getType();
 		} else if (empty($type) && !is_numeric($type)) {
+			// TODO: Shouldn't this throw an exception?
 			// A type can be 0, but cannot be empty
 			return $this;
 		}
 
-		$this->_params['type'][] = $type;
-		return $this;
+		return $this->addParam('type', $type);
 	}
 
 	/**
@@ -60,12 +57,12 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
 		if ($type instanceof Elastica_Type) {
 			$type = $type->getType();
 		} else if (empty($type) && !is_numeric($type)) {
+			// TODO: Shouldn't this throw an exception or let handling of invalid params to ES?
 			// A type can be 0, but cannot be empty
 			return $this;
 		}
 
-		$this->_params['type'] = $type;
-		return $this;
+		return  $this->setParam('type', $type);
 	}
 
 	/**
@@ -75,22 +72,10 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
 	 * @return Elastica_Filter_Ids Current object
 	 */
 	public function setIds($ids) {
-		if (is_array($ids)) {
-			$this->_params['values'] = $ids;
-		} else {
-			$this->_params['values'] = array($ids);
+		if (!is_array($ids)) {
+			$ids = array($ids);
 		}
 
-		return $this;
-	}
-
-	/**
-	 * Converts filter to array
-	 *
-	 * @see Elastica_Filter_Abstract::toArray()
-	 * @return array Filter array
-	 */
-	public function toArray() {
-		return array('ids' => $this->_params);
+		return $this->setParam('values', $ids);
 	}
 }

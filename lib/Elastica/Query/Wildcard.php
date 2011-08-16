@@ -10,33 +10,24 @@
  */
 class Elastica_Query_Wildcard extends Elastica_Query_Abstract
 {
-	protected $_key;
-	protected $_value;
-	protected $_boost;
 
 	/**
 	 * @param string $key Wildcard key
 	 * @param string $value Wildcard value
 	 * @param float $boost OPTIONAL Boost value (default = 1)
 	 */
-	public function __construct($key, $value, $boost = 1) {
-		$this->_key = $key;
-		$this->_value = $value;
-		$this->_boost = $boost;
+	public function __construct($key, $value, $boost = 1.0) {
+		$this->setValue($key, $value, $boost);
 	}
 
-
 	/**
-	 * Returns query in form of an array
+	 * Sets the query expression for a key with its boost value
 	 *
-	 * @return array Query as array
+	 * @param string $key
+	 * @param string $value
+	 * @param float $boost
 	 */
-	public function toArray() {
-		return array('wildcard' => array(
-			$this->_key => array(
-				'value' => $this->_value,
-				'boost' => $this->_boost)
-			)
-		);
+	public function setValue($key, $value, $boost = 1.0) {
+		$this->setParam($key, array('value' => $value, 'boost' => $boost));
 	}
 }

@@ -2,7 +2,7 @@
 <project name="Elastica" default="build" basedir=".">
 
 	<property name="source" value="${basedir}/lib"/>
-	
+
 	<target name="clean">
 		<!--    Clean    up    -->
 		<delete dir="build"/>
@@ -13,7 +13,7 @@
 		<mkdir dir="${basedir}/build/logs"/>
 		<mkdir dir="${basedir}/build/pdepend"/>
 	</target>
-	
+
 	<target name="phpunit" depends="clean">
 		<exec executable="phpunit" dir="${basedir}/test" failonerror="off" />
 	</target>
@@ -59,14 +59,14 @@
 			<arg line="--log-pmd ${basedir}/build/logs/pmd-cpd.xml ${source}" />
 		</exec>
 	</target>
-	
+
 	<!-- Generate checkstyle.xml -->
 	<target name="phpcs">
 		<exec executable="phpcs" output="/dev/null">
 			<arg line="--report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml --standard=${basedir}/test/CodeSniffer/Standards/Xodoa ${source}" />
 		</exec>
 	</target>
-	
+
 	<target name="phploc" description="Generate phploc.csv">
 		<exec executable="phploc">
 		<arg value="--log-csv" />
@@ -89,6 +89,67 @@
 					--output ${basedir}/build/code-browser" />
 		</exec>
 	</target>
-	
+
 	<target name="build" depends="clean,parallelTasks,phpunit"/>
+
+	<!-- Checkstyle with human output -->
+	<target name="codesniffer">
+		<exec executable="phpcs">
+			<arg line="--standard=${basedir}/test/CodeSniffer/Standards/Xodoa ${source}" />
+		</exec>
+	</target>
+
+	<!-- Setups test environment -->
+	<target name="setup" description="setups php libs for">
+		<exec executable="pear">
+			<arg line="channel-discover pear.pdepend.org" />
+		</exec>
+		<exec executable="pear">
+			<arg line="channel-discover pear.phpmd.org" />
+		</exec>
+		<exec executable="pear">
+			<arg line="channel-discover pear.phpunit.de" />
+		</exec>
+		<exec executable="pear">
+			<arg line="channel-discover components.ez.no" />
+		</exec>
+		<exec executable="pear">
+			<arg line="channel-discover pear.symfony-project.com" />
+		</exec>
+
+		<exec executable="pear">
+			<arg line="install pdepend/PHP_Depend" />
+		</exec>
+		<exec executable="pear">
+			<arg line="install phpmd/PHP_PMD" />
+		</exec>
+		<exec executable="pear">
+			<arg line="install phpunit/phpcpd" />
+		</exec>
+		<exec executable="pear">
+			<arg line="install phpunit/phploc" />
+		</exec>
+		<exec executable="pear">
+			<arg line="install PHPDocumentor" />
+		</exec>
+		<exec executable="pear">
+			<arg line="install PHP_CodeSniffer" />
+		</exec>
+		<exec executable="pear">
+			<arg line="install --alldeps phpunit/PHP_CodeBrowser" />
+		</exec>
+		<exec executable="pear">
+			<arg line="install --alldeps phpunit/PHPUnit" />
+		</exec>
+	</target>
+
+	<target name="gource" description="Visualize repos with gource">
+		<exec executable="gource">
+			<arg line="--log-format git" />
+			<arg line="--seconds-per-day 0.1" />
+			<arg line="--title 'Elastica (https://github.com/ruflin/Elastica)'" />
+			<arg line="--user-scale 1" />
+			<arg line="--max-user-speed 50" />
+		</exec>
+	</target>
 </project>

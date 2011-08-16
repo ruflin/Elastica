@@ -14,6 +14,7 @@ class Elastica_Response {
 	protected $_responseString = '';
 	protected $_error = false;
 	protected $_transferInfo = array();
+	protected $_response = null;
 
 	/**
 	 * @param string $responseString Response string (json)
@@ -52,32 +53,35 @@ class Elastica_Response {
 	 */
 	public function getData() {
 
-		$response = $this->_responseString;
-		if ($response === false) {
-			$this->_error = true;
-		} else {
+		if ($this->_response == null) {
+			$response = $this->_responseString;
+			if ($response === false) {
+				$this->_error = true;
+			} else {
 
-			$tempResponse = json_decode($response, true);
-			// If error is returned, json_decod makes empty string of string
-			if (!empty($tempResponse)) {
-				$response = $tempResponse;
+				$tempResponse = json_decode($response, true);
+				// If error is returned, json_decod makes empty string of string
+				if (!empty($tempResponse)) {
+					$response = $tempResponse;
+				}
 			}
-		}
 
-		if (empty($response)) {
-			$response = array();
-		}
+			if (empty($response)) {
+				$response = array();
+			}
 
-		if (is_string($response)) {
-			$response = array('message' => $response);
-		}
+			if (is_string($response)) {
+				$response = array('message' => $response);
+			}
 
-		return $response;
+			$this->_response = $response;
+		}
+		return $this->_response;
 	}
 
 	/**
 	 * Gets the transfer information if in DEBUG mode.
-	 * 
+	 *
 	 * @return array Information about the curl request.
 	 */
 	public function getTransferInfo() {
@@ -87,7 +91,7 @@ class Elastica_Response {
 	/**
 	 * Sets the transfer info of the curl request. This function is called
 	 * from the Elastica_Client::_callService only in debug mode.
-	 * 
+	 *
 	 * @param array $transferInfo The curl transfer information.
 	 * @return Elastica_Response Current object
 	 */
@@ -115,4 +119,35 @@ class Elastica_Response {
 		$this->_queryTime = $queryTime;
 		return $this;
 	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getEngineTime() {
+		$data = $this->getData();
+
+		if (!isset($data['took'])) {
+			throw new Elastica_Exception_ExpectedFieldNotFound("Unable to find the field [took]from the response");
+		}
+
+		return  $data['took'];
+	}
+
+
+	/**
+	 * Get the _shard statistics for the response
+	 *
+	 * @return void
+	 */
+	public function getShardsStatistics() {
+		$data = $this->getData();
+
+		if (!isset($data['_shards'])) {
+			throw new Elastica_Exception_ExpectedFieldNotFound("Unable to find the field [_shards] from the response");
+		}
+
+		return $data['_shards'];
+	}
+
 }

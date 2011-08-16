@@ -2,10 +2,15 @@
 /**
  * Elastica index settings object
  *
+ * All settings listed in the update settings API (http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html)
+ * can be changed on a running indice. To make changes like the merge policy (http://www.elasticsearch.org/guide/reference/index-modules/merge.html)
+ * the index has to be closed first and reopened after the call
+ *
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
+ * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
  */
 class Elastica_Index_Settings
 {
@@ -27,10 +32,12 @@ class Elastica_Index_Settings
 	/**
 	 * Returns the current settings of the index
 	 *
-	 * If param is set, only specified setting is return
+	 * If param is set, only specified setting is return.
+	 * 'index.' is added in front of $setting.
 	 *
 	 * @param string $setting OPTIONAL Setting name to return
 	 * @return array|string|null Settings data
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
 	 */
 	public function get($setting = '') {
 
@@ -38,8 +45,8 @@ class Elastica_Index_Settings
 		$settings = $data[$this->_index->getName()]['settings'];
 
 		if (!empty($setting)) {
-			if (isset($settings[$setting])) {
-				return $settings[$setting];
+			if (isset($settings['index.' . $setting])) {
+				return $settings['index.' . $setting];
 			} else {
 				return null;
 			}
@@ -81,13 +88,63 @@ class Elastica_Index_Settings
 	 * @return string Refresh interval
 	 */
 	public function getRefreshInterval() {
-		$interval = $this->get('index.refresh_interval');
+		$interval = $this->get('refresh_interval');
 
 		if (empty($interval)) {
 			$interval = self::DEFAULT_REFRESH_INTERVAL;
 		}
 
 		return $interval;
+	}
+
+	/**
+	 * @return string Merge policy type
+	 */
+	public function getMergePolicyType() {
+		return $this->get('merge.policy.type');
+	}
+
+	/**
+	 * Sets merge policy
+	 *
+	 * @param string $type Merge policy type
+	 * @return Elastica_Response Response object
+	 * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
+	 */
+	public function setMergePolicyType($type) {
+		$this->getIndex()->close();
+		$response = $this->set(array('merge.policy.type' => $type));
+		$this->getIndex()->open();
+		return $response;
+	}
+
+
+	/**
+	 * Sets the specific merge policies
+	 *
+	 * To have this changes made the index has to be closed and reopened
+	 *
+	 * @param string $key Merge policy key (for ex. expunge_deletes_allowed)
+	 * @param string $value
+	 * @return Elastica_Response
+	 * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
+	 */
+	public function setMergePolicy($key, $value) {
+		$this->getIndex()->close();
+		$response = $this->set(array('merge.policy.' . $key => $value));
+		$this->getIndex()->open();
+		return $response;
+	}
+
+	/**
+	 * Returns the specific merge policy value
+	 *
+	 * @param string $key Merge policy key (for ex. expunge_deletes_allowed)
+	 * @return string Refresh interval
+	 * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
+	 */
+	public function getMergePolicy($key) {
+		return $this->get('merge.policy.' . $key);
 	}
 
 	/**

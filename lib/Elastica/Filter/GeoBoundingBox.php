@@ -11,47 +11,32 @@
  */
 class Elastica_Filter_GeoBoundingBox extends Elastica_Filter_Abstract
 {
-	protected $_key;
-	protected $_topLeftLatitude;
-	protected $_topLeftLongitude;
-	protected $_bottomRightLatitude;
-	protected $_bottomRightLongitude;
 
 	/**
 	 * @param string $key Key
-	 * @param string $topLeftLatitude
-	 * @param string $topLeftLongitude
-	 * @param string $bottomRightLatitude
-	 * @param string $bottomRightLongitude
+	 * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
 	 */
-	public function __construct($key, $topLeftLatitude, $topLeftLongitude, $bottomRightLatitude, $bottomRightLongitude) {
-		$this->_key = $key;
-		$this->_topLeftLatitude = $topLeftLatitude;
-		$this->_topLeftLongitude = $topLeftLongitude;
-		$this->_bottomRightLatitude = $bottomRightLatitude;
-		$this->_bottomRightLongitude = $bottomRightLongitude;
+	public function __construct($key, $coordinates) {
+		$this->addCoordinates($key, $coordinates);
 	}
 
 	/**
-	 * Converts filter to array
-	 *
-	 * @see Elastica_Filter_Abstract::toArray()
-	 * @return Elastica_Filter_GeoDistance Current object
+	 * @param string $key Key
+	 * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
+	 * @throws Elastica_Exception_Invalid If $coordinates doesn't have two elements
+	 * @return Elastica_Filter_GeoBoundingBox Current object
 	 */
-	public function toArray() {
-		return array(
-			'geo_bounding_box' => array(
-				$this->_key => array(
-					'top_left' => array(
-						'lat' => $this->_topLeftLatitude,
-						'lon' => $this->_topLeftLongitude
-					),
-					'bottom_right' => array(
-						'lat' => $this->_bottomRightLatitude,
-						'lon' => $this->_bottomRightLongitude
-					)
-				),
-			)
-		);
+	public function addCoordinates($key, $coordinates) {
+
+		if (!isset($coordinates[0]) || !isset($coordinates[1])) {
+			throw new Elastica_Exception_Invalid('expected $coordinates to be an array with two elements');
+		}
+
+		$this->setParam($key, array(
+			'top_left' => $coordinates[0],
+			'bottom_right' => $coordinates[1]
+		));
+
+		return $this;
 	}
 }

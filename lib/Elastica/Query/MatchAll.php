@@ -10,12 +10,9 @@
 class Elastica_Query_MatchAll extends Elastica_Query_Abstract
 {
 	/**
-	 * Converts match all query to array
-	 *
-	 * @return array Query array
-	 * @see Elastica_Query_Abstract::toArray()
+	 * Creates match all query
 	 */
-	public function toArray() {
-		return array('match_all' => new stdClass());
+	public function __construct() {
+		$this->_params = new stdClass();
 	}
 }

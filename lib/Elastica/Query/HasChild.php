@@ -12,19 +12,24 @@
 class Elastica_Query_HasChild extends Elastica_Query_Abstract
 {
 	/**
-	 * @var Elastica_Query
-	 */
-	protected $_query;
-
-	protected $_type = null;
-
-	/**
 	 * @param string|Elastica_Query $query Query string or a Elastica_Query object
 	 * @param string $type Parent document type
 	 */
 	public function __construct($query, $type = null) {
-		$this->_query = Elastica_Query::create($query);
+		$this->setQuery($query);
 		$this->setType($type);
+	}
+
+	/**
+	 * Sets query object
+	 *
+	 * @param string|Elastica_Query|Elastica_Query_Abstract $query
+	 * @return Elastica_Query_HasChild
+	 */
+	public function setQuery($query) {
+		$query = Elastica_Query::create($query);
+		$data = $query->toArray();
+		return $this->setParam('query', $data['query']);
 	}
 
 	/**
@@ -34,24 +39,6 @@ class Elastica_Query_HasChild extends Elastica_Query_Abstract
 	 * @return Elastica_Query_HasChild Current object
 	 */
 	public function setType($type) {
-		$this->_type = $type;
-		return $this;
-	}
-
-	/**
-	 * Converts has_child query to array
-	 *
-	 * @return array Query array
-	 * @see Elastica_Query_Abstract::toArray()
-	 */
-	public function toArray() {
-
-		$args = $this->_query->toArray();
-
-		if ($this->_type) {
-			$args['type'] = $this->_type;
-		}
-
-		return array('has_child' => $args);
+		return $this->setParam('type', $type);
 	}
 }

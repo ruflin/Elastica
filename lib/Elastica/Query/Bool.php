@@ -10,13 +10,6 @@
  */
 class Elastica_Query_Bool extends Elastica_Query_Abstract
 {
-	protected $_boost = 1.0;
-	protected $_minimumNumberShouldMatch = 1;
-
-	protected $_must = array();
-	protected $_should = array();
-	protected $_mustNot = array();
-
 	/**
 	 * Add should part to query
 	 *
@@ -44,7 +37,7 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
 	 * @return Elastica_Query_Bool Current object
 	 */
 	public function addMustNot($args) {
-		return $this->_addQuery('mustNot', $args);
+		return $this->_addQuery('must_not', $args);
 	}
 
 	/**
@@ -63,36 +56,7 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
 			throw new Elastica_Exception_Invalid('Invalid parameter. Has to be array or instance of Elastica_Query');
 		}
 
-		$varName = '_' . $type;
-		$this->{$varName}[] = $args;
-		return $this;
-	}
-
-	/**
-	 * Converts query to an array
-	 *
-	 * @return array Data array
-	 * @see Elastica_Query_Abstract::toArray()
-	 */
-	public function toArray() {
-		$args = array();
-
-		if (!empty($this->_must)) {
-			$args['must'] = $this->_must;
-		}
-
-		if (!empty($this->_should)) {
-			$args['should'] = $this->_should;
-			$args['minimum_number_should_match'] = $this->_minimumNumberShouldMatch;
-		}
-
-		if (!empty($this->_mustNot)) {
-			$args['must_not'] = $this->_mustNot;
-		}
-
-		$args['boost'] = $this->_boost;
-
-		return array('bool' => $args);
+		return $this->addParam($type, $args);
 	}
 
 	/**
@@ -102,8 +66,7 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
 	 * @return Elastica_Query_Bool Current object
 	 */
 	public function setBoost($boost) {
-		$this->_boost = $boost;
-		return $this;
+		return $this->setParam('boost', $boost);
 	}
 
 	/**
@@ -113,8 +76,7 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
 	 * @return Elastica_Query_Bool Current object
 	 */
 	public function setMinimumNumberShouldMatch($minimumNumberShouldMatch) {
-		$this->_minimumNumberShouldMatch = (int) $minimumNumberShouldMatch;
-		return $this;
+		return $this->setParam('minimum_number_should_match', $minimumNumberShouldMatch);
 	}
 
 }

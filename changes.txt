@@ -1,5 +1,36 @@
 CHANGES
 
+2011-08-15
+- Refactoring HTTP connection to keep alive connection -> speed improvement during using the same client
+- Release v0.17.6.0 added
+
+2011-08-09
+- Automatic creation of id for documents added. This was more a bug
+- Release v0.17.4.0 added
+
+2011-08-08
+- Elastica_Query_Text added
+- Params (constructor) of Elastica_Filter_GeoBoundingBox changed (array instead of single params)
+
+2011-08-07
+- Elastica_Query_MoreLikeThis added by @juneym. Still work under progress
+- Refactoring Queries and Filters to use Elastica_Param. Adding tests
+
+2011-08-05
+- Elastica_Filter_Abstract enhanced for more general usage (set/get/addParam(s)) added
+
+2011-08-04
+- Release v0.17.3.0 added
+- Elastica_Index_Settings::set/get response updated. get('...') does not require 'index.' in front anymore
+- Nodes and Cluster shutdown added
+- Elastica_Node::getIp() and getPort() added
+
+2011-07-30
+- Readd merge_factor to settings. Now working as expected. Index has to be closed first.
+
+2011-07-29
+- Release tag v0.17.2.0 added. Elastica is compatible with elasticsearch 0.17.2
+
 2011-07-22
 - Elastica_Index_Settings::getMergePolicyMergeFactor and set removed because of enhanced merge policy implementation in ES 0.17.0 https://github.com/elasticsearch/elasticsearch/issues/998
 - Release tav v0.17.1.0 added

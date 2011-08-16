@@ -10,8 +10,6 @@
  */
 class Elastica_Query_Range extends Elastica_Query_Abstract
 {
-	protected $_fields = array();
-
 	/**
 	 * Adds a range field to the query
 	 *
@@ -20,18 +18,7 @@ class Elastica_Query_Range extends Elastica_Query_Abstract
 	 * @return Elastica_Query_Range Current object
 	 */
 	public function addField($fieldName, array $args) {
-		$this->_fields[$fieldName] = $args;
-		return $this;
-	}
+		return $this->setParam($fieldName, $args);
 
-	/**
-	 * Converst the range query to an array
-	 *
-	 * @return array Query array
-	 * @see Elastica_Query_Abstract::toArray()
-	 */
-	public function toArray() {
-		$args = $this->_fields;
-		return array('range' => $args);
 	}
 }

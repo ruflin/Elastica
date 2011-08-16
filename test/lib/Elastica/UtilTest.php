@@ -29,4 +29,20 @@ class Elastica_UtilTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals(Elastica_Util::escapeTerm($before), $after);
 	}
+
+	public function testToCamelCase() {
+		$string = 'hello_world';
+		$this->assertEquals('HelloWorld', Elastica_Util::toCamelCase($string));
+
+		$string = 'how_are_you_today';
+		$this->assertEquals('HowAreYouToday', Elastica_Util::toCamelCase($string));
+	}
+
+	public function testToSnakeCase() {
+		$string = 'HelloWorld';
+		$this->assertEquals('hello_world', Elastica_Util::toSnakeCase($string));
+
+		$string = 'HowAreYouToday';
+		$this->assertEquals('how_are_you_today', Elastica_Util::toSnakeCase($string));
+	}
 }

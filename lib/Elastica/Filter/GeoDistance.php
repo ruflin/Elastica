@@ -5,7 +5,7 @@
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/geo_distance_filter/
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-filter.html
  */
 class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
 {
@@ -61,6 +61,7 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
 	 */
 	public function setLongitude($longitude) {
 		$this->_longitude = $longitude;
+		return $this;
 	}
 
 	/**

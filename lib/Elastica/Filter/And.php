@@ -10,9 +10,6 @@
  */
 class Elastica_Filter_And extends Elastica_Filter_Abstract
 {
-
-	protected $_filters = array();
-
 	/**
 	 * Adds one more filter to the and filter
 	 *
@@ -20,17 +17,7 @@ class Elastica_Filter_And extends Elastica_Filter_Abstract
 	 * @return Elastica_Filter_And Current object
 	 */
 	public function addFilter(Elastica_Filter_Abstract $filter) {
-		$this->_filters[] = $filter->toArray();
+		$this->_params[] = $filter->toArray();
 		return $this;
-	}
-
-	/**
-	 * Converts filter to array
-	 *
-	 * @see Elastica_Filter_Abstract::toArray()
-	 * @return array Filter array
-	 */
-	public function toArray() {
-		return array('and' => $this->_filters);
 	}
 }

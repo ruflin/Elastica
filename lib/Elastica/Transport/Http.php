@@ -9,6 +9,11 @@
 class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 
 	/**
+	 * @var resource Curl resource to reuse
+	 */
+	protected static $_connection = null;
+
+	/**
 	 * Makes calls to the elasticsearch server
 	 *
 	 * All calls that are made to the server are done through this function
@@ -18,7 +23,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 	 * @return Elastica_Response Response object
 	 */
 	public function exec($host, $port) {
-		$conn = curl_init();
+		$conn = $this->_getConnection();
 
 		$request = $this->getRequest();
 
@@ -31,6 +36,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 		curl_setopt($conn, CURLOPT_PORT, $port);
 		curl_setopt($conn, CURLOPT_RETURNTRANSFER, 1) ;
 		curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $request->getMethod());
+		curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
 
 		$headersConfig = $request->getConfig('headers');
 		if (!empty($headersConfig)) {
@@ -80,5 +86,16 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 		}
 
 		return $response;
+	}
+
+	/**
+	 * @return resource Connection resource
+	 */
+	protected function _getConnection() {
+		if (!self::$_connection) {
+			self::$_connection = curl_init();
+		}
+
+		return self::$_connection;
 	}
 }

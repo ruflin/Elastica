@@ -96,5 +96,3 @@ class Elastica_Query_Ids extends Elastica_Query_Abstract
 		return array('ids' => $this->_params);
 	}
 }
-
-?>

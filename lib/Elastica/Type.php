@@ -56,7 +56,14 @@ class Elastica_Type implements Elastica_Searchable
 			$path .= '?' . http_build_query($query);
 		}
 
-		return $this->request($path, Elastica_Request::PUT, $doc->getData());
+		$type = Elastica_Request::PUT;
+
+		// If id is empty, POST has to be used to automatically create id
+		if (empty($path)) {
+			$type = Elastica_Request::POST;
+		}
+
+		return $this->request($path, $type, $doc->getData());
 	}
 
 	/**

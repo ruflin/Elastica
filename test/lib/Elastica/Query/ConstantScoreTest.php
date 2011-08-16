@@ -56,15 +56,32 @@ class Elastica_Query_ConstantScoreTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testSimple($filter, $expected) {
 
-
-
 		$query = new Elastica_Query_ConstantScore();
 		$query->setFilter($filter);
 		if(is_string($expected)) {
 			$expected = json_decode($expected, true);
 		}
 		$this->assertEquals($expected, $query->toArray());
+	}
 
+	public function testToArray() {
+		$query = new Elastica_Query_ConstantScore();
+
+		$boost = 1.2;
+		$filter = new Elastica_Filter_Ids();
+		$filter->setIds(array(1));
+
+		$query->setFilter($filter);
+		$query->setBoost($boost);
+
+		$expectedArray = array(
+			'constant_score' => array(
+				'filter' => $filter->toArray(),
+				'boost' => $boost
+			)
+		);
+
+		$this->assertEquals($expectedArray, $query->toArray());
 	}
 
 }

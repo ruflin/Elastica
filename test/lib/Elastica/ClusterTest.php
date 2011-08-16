@@ -40,4 +40,21 @@ class Elastica_ClusterTest extends PHPUnit_Framework_TestCase
 		$state = $cluster->getState();
 		$this->assertInternalType('array', $state);
 	}
+
+	public function testShutdown() {
+		$this->markTestSkipped('This test shuts down the cluster which means the following tests would not work');
+		$client = new Elastica_Client();
+		$cluster = $client->getCluster();
+
+		$cluster->shutdown('2s');
+
+		sleep(5);
+
+		try {
+			$client->getStatus();
+			$this->fail('Should throw exception because cluster is shut down');
+		} catch(Elastica_Exception_Client $e) {
+			$this->assertTrue(true);
+		}
+	}
 }
