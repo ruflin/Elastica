@@ -47,4 +47,21 @@ class Elastica_QueryTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals('2011-07-18 00:00:00', $queryArray['query']['filtered']['filter']['range']['due']['gte']);
 	}
+
+	public function testRawQuery() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('test');
+		$index->create(array(), true);
+		$type = $index->getType('test');
+
+		$textQuery = new Elastica_Query_Text();
+		$textQuery->setField('title', 'test');
+
+		$query1 = Elastica_Query::create($textQuery);
+
+		$query2 = new Elastica_Query();
+		$query2->setRawQuery(array('query' => array('text' => array('title' => 'test'))));
+
+		$this->assertEquals($query1->toArray(), $query2->toArray());
+	}
 }

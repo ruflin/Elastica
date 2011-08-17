@@ -17,6 +17,8 @@ class Elastica_Param
 	 */
 	protected $_params = array();
 
+	protected $_rawParams = array();
+
 	/**
 	 * Converts the params to an array. A default implementation exist to create
 	 * the an array out of the class name (last part of the class name)
@@ -29,7 +31,18 @@ class Elastica_Param
 		$classNameParts = explode('_', get_class($this));
 		$partClassName = Elastica_Util::toSnakeCase(array_pop($classNameParts));
 
-		return array($partClassName => $this->getParams());
+
+		$data = array($partClassName => $this->getParams());
+
+		if (!empty($this->_rawParams)) {
+			$data = array_merge($data, $this->_rawParams);
+		}
+
+		return $data;
+	}
+
+	protected function _setRawParam($key, $value) {
+		$this->_rawParams[$key] = $value;
 	}
 
 	/**

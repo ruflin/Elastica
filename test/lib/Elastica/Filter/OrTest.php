@@ -18,4 +18,5 @@ class Elastica_Filter_OrTest extends PHPUnit_Framework_TestCase
 		$returnValue = $orFilter->addFilter($filter);
 		$this->assertInstanceOf('Elastica_Filter_Or', $returnValue);
 	}
+
 }

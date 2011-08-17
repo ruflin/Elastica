@@ -8,4 +8,8 @@
  */
 abstract class Elastica_Filter_Abstract extends Elastica_Param
 {
+
+	public function setCached() {
+		$this->_setRawParam('_cache', true);
+	}
 }

@@ -17,7 +17,7 @@ Support / Bug Reports
 ---------------------
 For all support questions please use the [Elastica google group](https://groups.google.com/group/elastica-php-client).
 
-For But reports and issues please use the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
+For bug reports and issues please use the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
 
 Changes
 -------
