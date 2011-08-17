@@ -16,7 +16,7 @@ class Elastica_Query_ConstantScore extends Elastica_Query_Abstract
 	 * @param null|Elastica_Filter_Abstract|array $filter
 	 */
 	public function __construct($filter = null) {
-		if(is_array($filter) || $filter instanceof Elastica_Filter_Abstract) {
+		if(!is_null($filter)) {
 			$this->setFilter($filter);
 		}
 	}

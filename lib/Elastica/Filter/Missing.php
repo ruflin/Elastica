@@ -12,7 +12,7 @@ class Elastica_Filter_Missing extends Elastica_Filter_Abstract
 	/**
 	 * @param string|null $field
 	 */
-	public function __construct($field = null) {
+	public function __construct($field = '') {
 		if(strlen($field)) {
 			$this->setField($field);
 		} 
@@ -22,7 +22,7 @@ class Elastica_Filter_Missing extends Elastica_Filter_Abstract
 	 * @param string $field
 	 */
 	public function setField($field) {
-		$this->setParam('field', (string) $field); 
+		return $this->setParam('field', (string) $field); 
 	} 
 }
 
