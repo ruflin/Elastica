@@ -63,7 +63,7 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
 	 * @param int $minimum Minimum value
 	 */
 	public function setMinimumMatch($minimum) {
-		return $this->setParam('minimum_match', (int) $minimium);
+		return $this->setParam('minimum_match', (int) $minimum);
 	}
 
 	/**
