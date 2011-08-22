@@ -49,10 +49,6 @@ class Elastica_QueryTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testRawQuery() {
-		$client = new Elastica_Client();
-		$index = $client->getIndex('test');
-		$index->create(array(), true);
-		$type = $index->getType('test');
 
 		$textQuery = new Elastica_Query_Text();
 		$textQuery->setField('title', 'test');
@@ -63,5 +59,50 @@ class Elastica_QueryTest extends PHPUnit_Framework_TestCase
 		$query2->setRawQuery(array('query' => array('text' => array('title' => 'test'))));
 
 		$this->assertEquals($query1->toArray(), $query2->toArray());
+	}
+
+	public function testSetSort() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('test');
+		$index->create(array(), true);
+		$type = $index->getType('test');
+
+		$doc = new Elastica_Document(1, array('name' => 'hello world'));
+		$type->addDocument($doc);
+		$doc = new Elastica_Document(2, array('firstname' => 'guschti', 'lastname' => 'ruflin'));
+		$type->addDocument($doc);
+		$doc = new Elastica_Document(3, array('firstname' => 'nicolas', 'lastname' => 'ruflin'));
+		$type->addDocument($doc);
+
+
+		$queryTerm = new Elastica_Query_Term();
+		$queryTerm->addTerm('lastname', 'ruflin');
+
+		$index->refresh();
+
+		$query = Elastica_Query::create($queryTerm);
+
+		// ASC order
+		$query->setSort(array(array('firstname' => array('order' => 'asc'))));
+		$resultSet = $type->search($query);
+		$this->assertEquals(2, $resultSet->count());
+
+		$first = $resultSet->current()->getData();
+		$second = $resultSet->next()->getData();
+
+		$this->assertEquals('guschti', $first['firstname']);
+		$this->assertEquals('nicolas', $second['firstname']);
+
+
+		// DESC order
+		$query->setSort(array('firstname' => array('order' => 'desc')));
+		$resultSet = $type->search($query);
+		$this->assertEquals(2, $resultSet->count());
+
+		$first = $resultSet->current()->getData();
+		$second = $resultSet->next()->getData();
+
+		$this->assertEquals('nicolas', $first['firstname']);
+		$this->assertEquals('guschti', $second['firstname']);
 	}
 }

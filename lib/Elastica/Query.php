@@ -120,7 +120,7 @@ class Elastica_Query
 	 *
 	 * @param array $sortArgs Sorting arguments
 	 * @return Elastica_Query Query object
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/sort/
+	 * @link http://www.elasticsearch.org/guide/reference/api/search/sort.html
 	 */
 	public function setSort(array $sortArgs) {
 		return $this->setParam('sort', $sortArgs);
