@@ -9,9 +9,9 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/
  */
-class Elastica_Query
+class Elastica_Query extends Elastica_Param
 {
-	protected $_query = array();
+	protected $_params = array();
 
 	/**
 	 * Creates a query object
@@ -62,18 +62,7 @@ class Elastica_Query
 	 * @return Elastica_Query Query object
 	 */
 	public function setRawQuery(array $query) {
-		$this->_query = $query;
-		return $this;
-	}
-
-	/**
-	 * Sets a single param for the query
-	 *
-	 * @param string $key Key to set
-	 * @param mixed $value Value
-	 */
-	public function setParam($key, $value) {
-		$this->_query[$key] = $value;
+		$this->_params = $query;
 		return $this;
 	}
 
@@ -93,7 +82,7 @@ class Elastica_Query
 	 * @return array
 	 **/
 	public function getQuery() {
-		return $this->_query['query'];
+		return $this->getParam('query');
 	}
 
 	/**
@@ -133,9 +122,7 @@ class Elastica_Query
 	 * @return Elastica_Query Query object
 	 */
 	public function addSort($sort) {
-		// TODO: test
-		$this->_query['sort'][] = $sort;
-		return $this;
+		return $this->addParam('sort', $sort);
 	}
 
 	/**
@@ -157,8 +144,7 @@ class Elastica_Query
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/highlighting/
 	 */
 	public function addHighlight($highlight) {
-		$this->_query['highlight'][] = $highlight;
-		return $this;
+		return $this->addParam('highlight', $highlight);
 	}
 
 	/**
@@ -233,7 +219,7 @@ class Elastica_Query
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/facets
 	 */
 	public function setFacets(array $facets) {
-		$this->_query['facets'] = array();
+		$this->_params['facets'] = array();
 		foreach ($facets as $facet) {
 			$this->addFacet($facet);
 		}
@@ -247,7 +233,7 @@ class Elastica_Query
 	 * @return Elastica_Query Query object
 	 */
 	public function addFacet(Elastica_Facet_Abstract $facet) {
-		$this->_query['facets'][$facet->getName()] = $facet->toArray();
+		$this->_params['facets'][$facet->getName()] = $facet->toArray();
 		return $this;
 	}
 
@@ -259,11 +245,11 @@ class Elastica_Query
 	public function toArray() {
 
 		// If no query is set, all query is chosen by default
-		if (!isset($this->_query['query'])) {
+		if (!isset($this->_params['query'])) {
 			$this->setQuery(new Elastica_Query_MatchAll());
 		}
 
-		return $this->_query;
+		return $this->_params;
 	}
 
 	/**
@@ -273,10 +259,10 @@ class Elastica_Query
 	 * @return Elastica_Query Query object
 	 */
 	public function setMinScore($minScore) {
-		if (is_numeric($minScore)) {
-			return $this->setParam('min_score', $minScore);
-		} else {
-			return $this;
+		if (!is_numeric($minScore)) {
+			throw new Elastica_Exception_Invalid('has to be numeric param');
 		}
+
+		return $this->setParam('min_score', $minScore);
 	}
 }

@@ -105,4 +105,54 @@ class Elastica_QueryTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('nicolas', $first['firstname']);
 		$this->assertEquals('guschti', $second['firstname']);
 	}
+
+	public function testAddSort() {
+		$query = new Elastica_Query();
+		$sortParam = array('firstanem' => array('order' => 'asc'));
+		$query->addSort($sortParam);
+
+		$this->assertEquals($query->getParam('sort'), array($sortParam));
+	}
+
+	public function testSetRawQuery() {
+		$query = new Elastica_Query();
+
+		$params = array('query' => 'test');
+		$query->setRawQuery($params);
+
+		$this->assertEquals($params, $query->toArray());
+	}
+
+	public function testSetFields() {
+		$query = new Elastica_Query();
+
+		$params = array('query' => 'test');
+
+		$query->setFields(array('firstname', 'lastname'));
+
+
+		$data = $query->toArray();
+
+		$this->assertContains('firstname', $data['fields']);
+		$this->assertContains('lastname', $data['fields']);
+		$this->assertEquals(2, count($data['fields']));
+	}
+
+	public function testGetQuery() {
+		$query = new Elastica_Query();
+
+		try {
+			$query->getQuery();
+			$this->fail('should throw exception because query does not exist');
+		} catch(Elastica_Exception_Invalid $e) {
+			$this->assertTrue(true);
+		}
+
+
+		$termQuery = new Elastica_Query_Term();
+		$termQuery->addTerm('text', 'value');
+		$query->setQuery($termQuery);
+
+		$this->assertEquals($termQuery->toArray(), $query->getQuery());
+	}
 }

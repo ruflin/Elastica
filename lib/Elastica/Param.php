@@ -41,8 +41,16 @@ class Elastica_Param
 		return $data;
 	}
 
+	/**
+	 * Sets params not inside params array
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 * @return Elastica_Param
+	 */
 	protected function _setRawParam($key, $value) {
 		$this->_rawParams[$key] = $value;
+		return $this;
 	}
 
 	/**
