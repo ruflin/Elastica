@@ -10,11 +10,6 @@
  */
 class Elastica_Query_QueryString extends Elastica_Query_Abstract
 {
-	protected $_queryString = '';
-	protected $_defaultOperator = '';
-	protected $_defaultField = '';
-	protected $_fields = array();
-	protected $_useDisMax = null;
 
 	/**
 	 * Creates query string object. Calls setQuery with argument
@@ -36,8 +31,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 			throw new Elastica_Exception_Invalid('Parameter has to be a string');
 		}
 
-		$this->_queryString = $queryString;
-		return $this;
+		return $this->setParam('query', $queryString);
 	}
 
 	/**
@@ -49,8 +43,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	 * @return Elastica_Query_QueryString Current object
 	 */
 	public function setDefaultOperator($operator) {
-		$this->_defaultOperator = $operator;
-		return $this;
+		return $this->setParam('default_operator', $operator);
 	}
 
 	/**
@@ -62,17 +55,16 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	 * @return Elastica_Query_QueryString Current object
 	 */
 	public function setDefaultField($field) {
-		$this->_defaultField = $field;
-		return $this;
+		return $this->setParam('default_field', $field);
 	}
 
 	/**
 	 * Whether to use bool or dis_max quueries to internally combine results for multi field search.
-	 * @param bool $value
-	 * Determines whether to use
+	 *
+	 * @param bool $value Determines whether to use
 	 */
 	public function setUseDisMax($value) {
-		$this->_useDisMax = ($value == true);
+		return $this->setParam('use_dis_max', (bool) $value);
 	}
 
 	/**
@@ -83,39 +75,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	 * @param array $fields Fields
 	 * @return Elastica_Query_QueryString Current object
 	 */
-	public function setFields($fields) {
-		if (!is_array($fields)) {
-			throw new Elastica_Exception_Invalid('Parameter has to be an array');
-		}
-
-		$this->_fields = $fields;
-		return $this;
-	}
-
-	/**
-	 * Converts the query string object to an array
-	 *
-	 * @return array Query string array
-	 */
-	public function toArray() {
-		$args['query'] = $this->_queryString;
-
-		if(!empty($this->_defaultOperator)) {
-			$args['default_operator'] = $this->_defaultOperator;
-		}
-
-		if(!empty($this->_defaultField)) {
-			$args['default_field'] = $this->_defaultField;
-		}
-
-		if(!empty($this->_fields)) {
-			$args['fields'] = $this->_fields;
-		}
-
-		if(! is_null($this->_useDisMax)) {
-			$args['use_dis_max'] = $this->_useDisMax;
-		}
-
-		return array('query_string' => $args);
+	public function setFields(array $fields) {
+		return $this->setParam('fields', $fields);
 	}
 }

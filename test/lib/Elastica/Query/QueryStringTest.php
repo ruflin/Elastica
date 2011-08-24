@@ -7,7 +7,7 @@ class Elastica_Query_QueryStringTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function tearDown() {
-    }
+	}
 
 
 	public function testSearchMultipleFields() {
@@ -59,5 +59,36 @@ class Elastica_Query_QueryStringTest extends PHPUnit_Framework_TestCase
 		$resultSet = $type->search($queryString);
 
 		$this->assertEquals(1, $resultSet->count());
+	}
+
+	public function testSetDefaultOperator() {
+
+		$operator = 'AND';
+		$query = new Elastica_Query_QueryString('test');
+		$query->setDefaultOperator($operator);
+
+		$data = $query->toArray();
+
+		$this->assertEquals($data['query_string']['default_operator'], $operator);
+	}
+
+	public function testSetDefaultField() {
+		$default = 'field1';
+		$query = new Elastica_Query_QueryString('test');
+		$query->setDefaultField($default);
+
+		$data = $query->toArray();
+
+		$this->assertEquals($data['query_string']['default_field'], $default);
+	}
+
+	public function testSetQueryStringInvalid() {
+		$query = new Elastica_Query_QueryString();
+		try {
+			$query->setQueryString(array());
+			$this->fail('should throw exception because no string');
+		} catch (Elastica_Exception_Invalid $e) {
+			$this->assertTrue(true);
+		}
 	}
 }
