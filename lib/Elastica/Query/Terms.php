@@ -45,19 +45,6 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
 	}
 
 	/**
-	 * Sets a general parameter for the terms query array
-	 *
-	 * This can be used to set not supported params
-	 *
-	 * @param string $key Key to set
-	 * @param mixed $value Value to key
-	 */
-	public function setParam($key, $value) {
-		$this->_params[$key] = $value;
-		return $this;
-	}
-
-	/**
 	 * Sets the minimum matching values
 	 *
 	 * @param int $minimum Minimum value
@@ -76,7 +63,7 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
 		if (empty($this->_key)) {
 			throw new Elastica_Exception_Invalid('Terms key has to be set');
 		}
-		$this->_params[$this->_key] = $this->_terms;
-		return array('terms' => $this->_params);
+		$this->setParam($this->_key, $this->_terms);
+		return parent::toArray();
 	}
 }
