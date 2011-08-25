@@ -130,6 +130,7 @@ class Elastica_Request {
 	 * @return Elastica_Response Response object
 	 */
 	public function send() {
+		
 		$transport = $this->getTransport();
 
 		$servers = $this->getClient()->getConfig('servers');

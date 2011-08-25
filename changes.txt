@@ -1,5 +1,8 @@
 CHANGES
 
+2011-08-25
+- Https transport layer added
+
 2011-08-22
 - Typo in Terms query fixed (issue #74)
 
