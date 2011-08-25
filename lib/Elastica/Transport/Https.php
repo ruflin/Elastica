@@ -15,6 +15,8 @@ class Elastica_Transport_Https extends Elastica_Transport_Http {
 	
 	/**
 	 * Overloads setupCurl to set SSL params
+	 * 
+	 * @param resource $connection Curl connection resource
 	 */
 	protected function _setupCurl($connection) {
 		parent::_setupCurl($connection);
