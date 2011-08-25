@@ -31,7 +31,7 @@ class Elastica_Filter_Range extends Elastica_Filter_Abstract
 	 * @return array Filter array
 	 */
 	public function toArray() {
-		$args = $this->_fields;
-		return array('range' => $args);
+		$this->setParams($this->_fields);
+		return parent::toArray();
 	}
 }

@@ -11,11 +11,6 @@
 class Elastica_Filter_Query extends Elastica_Filter_Abstract {
 
 	/**
-	 * @var array|Elastica_Query_Abstract
-	 */
-	protected $_query = null;
-
-	/**
 	 * @param array|Elastica_Query_Abstract $query
 	 */
 	public function __construct($query = null) {
@@ -35,23 +30,9 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract {
 		}
 
 		if ($query instanceof Elastica_Query_Abstract) {
-			$this->_query = $query->toArray();
-		} else {
-			$this->_query = $query;
+			$query = $query->toArray();
 		}
 
-		return $this;
-	}
-
-	/**
-	 * @return array Query filter
-	 * @see Elastica_Filter_Abstract::toArray()
-	 */
-	public function toArray() {
-		return array(
-			'query' => (
-				$this->_query
-			),
-		);
+		return $this->setParams($query);
 	}
 }
