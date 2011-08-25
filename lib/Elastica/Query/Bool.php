@@ -47,7 +47,7 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
 	 * @param Elastica_Query_Abstract|array $args Query
 	 * @throws Elastica_Exception_Invalid If not valid query
 	 */
-	public function _addQuery($type, $args) {
+	protected function _addQuery($type, $args) {
 		if ($args instanceof Elastica_Query_Abstract) {
 			$args = $args->toArray();
 		}
@@ -78,5 +78,4 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
 	public function setMinimumNumberShouldMatch($minimumNumberShouldMatch) {
 		return $this->setParam('minimum_number_should_match', $minimumNumberShouldMatch);
 	}
-
 }

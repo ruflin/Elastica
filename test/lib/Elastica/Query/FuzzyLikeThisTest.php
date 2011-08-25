@@ -41,4 +41,60 @@ class Elastica_Query_FuzzyLikeThisTest extends PHPUnit_Framework_TestCase
 		$resultSet = $type->search($fltQuery);
 		$this->assertEquals(1, $resultSet->count());
 	}
+	
+	public function testSetPrefixLength() {
+		$query = new Elastica_Query_FuzzyLikeThis();
+		
+		$length = 3;
+		$query->setPrefixLength($length);
+		
+		$data = $query->toArray();
+		
+		$this->assertEquals($length, $data['fuzzy_like_this']['prefix_length']);
+	}
+	
+	public function testAddFields() {
+		$query = new Elastica_Query_FuzzyLikeThis();
+		
+		$fields = array('test1', 'test2');
+		$query->addFields($fields);
+		
+		$data = $query->toArray();
+		
+		$this->assertEquals($fields, $data['fuzzy_like_this']['fields']);
+	}
+	
+	public function testSetLikeText() {
+		$query = new Elastica_Query_FuzzyLikeThis();
+		
+		$text = ' hello world';
+		$query->setLikeText($text);
+		
+		$data = $query->toArray();
+		
+		$this->assertEquals(trim($text), $data['fuzzy_like_this']['like_text']);
+	}
+	
+	public function testSetMinSimilarity() {
+		$query = new Elastica_Query_FuzzyLikeThis();
+		
+		$similarity = 2;
+		$query->setMinSimilarity($similarity);
+		
+		$data = $query->toArray();
+		
+		$this->assertEquals($similarity, $data['fuzzy_like_this']['min_similarity']);
+	}
+	
+	
+	public function testSetBoost() {
+		$query = new Elastica_Query_FuzzyLikeThis();
+		
+		$boost = 2.2;
+		$query->setBoost($boost);
+		
+		$data = $query->toArray();
+		
+		$this->assertEquals($boost, $data['fuzzy_like_this']['boost']);
+	}
 }

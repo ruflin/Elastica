@@ -23,7 +23,7 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
 	 * @param array $fields Field names
 	 * @return Elastica_Query_FuzzyLikeThis Current object
 	 */
-	public function addFields(Array $fields) {
+	public function addFields(array $fields) {
 		$this->_fields = $fields;
 		return $this;
 	}
@@ -47,7 +47,7 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
 	 * @return Elastica_Query_FuzzyLikeThis This current object
 	 */
 	public function setMinSimilarity($value) {
-		$value = (float)$value;
+		$value = (float) $value;
 		$this->_minSimilarity = $value;
 		return $this;
 	}
@@ -80,7 +80,7 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
 	 * @return Elastica_Query_FuzzyLikeThis
 	 */
 	public function setMaxQueryTerms($value) {
-		$this->_maxQueryTerms = (int)$value;
+		$this->_maxQueryTerms = (int) $value;
 		return $this;
 	}
 
