@@ -90,4 +90,70 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 			$this->assertTrue(true);
 		}
 	}
+
+	/**
+	* Test deleteIds method using string parameters
+	*
+	* This test ensures that the deleteIds method of
+	* the Elastica_Client can properly accept and use
+	* an $index parameter and $type parameter that are
+	* strings
+	*/
+	public function testDeleteIdsIdxStringTypeString() {
+
+	}
+
+	/**
+	* Test deleteIds method using string parameter for $index
+	* and object parameter for $type
+	*
+	* This test ensures that the deleteIds method of
+	* the Elastica_Client can properly accept and use
+	* an $index parameter that is a string and a $type
+	* parameter that is of type Elastica_Type
+	*/
+	public function testDeleteIdsIdxStringTypeObject() {
+
+	}
+
+	/**
+	* Test deleteIds method using object parameter for $index
+	* and string parameter for $type
+	*
+	* This test ensures that the deleteIds method of
+	* the Elastica_Client can properly accept and use
+	* an $index parameter that is  of type Elasitca_Index
+	* and a $type parameter that is a string
+	*/
+	public function testDeleteIdsIdxObjectTypeString() {
+
+	}
+
+	/**
+	* Test deleteIds method using object parameter for $index
+	* and object parameter for $type
+	*
+	* This test ensures that the deleteIds method of
+	* the Elastica_Client can properly accept and use
+	* an $index parameter that is an object and a $type
+	* parameter that is of type Elastica_Type
+	*/
+	public function testDeleteIdsIdxObjectTypeObject() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('test1');
+		$index->create(array(), true);
+
+		$type = $index->getType('user');
+
+		// Adds 1 document to the index
+		$doc1 = new Elastica_Document(1,
+			array('username' => 'hans', 'test' => array('2', '3', '5'))
+		);
+		$type->addDocument($doc1);
+
+		// Refresh index
+		$index->refresh();
+
+		$resultSet = $type->search('rolf');
+	}
 }
