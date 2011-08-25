@@ -106,7 +106,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	 * @link http://www.elasticsearch.org/guide/reference/query-dsl/mlt-query.html
 	 */
 	public function setBoostTerms($boostTerms) {
-		return $this->setParam('boost_terms', $boostTerms?1:0);
+		return $this->setParam('boost_terms', (bool) $boostTerms);
 	}
 
 	/**
@@ -117,7 +117,6 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 		$analyzer = trim($analyzer);
 		return $this->setParam('analyzer', $analyzer);
 	}
-
 
 	/**
 	 * @param array $stopWords

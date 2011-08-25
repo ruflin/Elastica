@@ -51,4 +51,112 @@ class Elastica_Query_MoreLikeThisTest extends PHPUnit_Framework_TestCase
 		$resultSet->getResponse()->getData();
 		$this->assertEquals(2, $resultSet->count());
 	}
+	
+	public function testSetFields() {
+		$query = new Elastica_Query_MoreLikeThis();
+		
+		$fields = array('firstname', 'lastname');
+		$query->setFields($fields);
+		
+		$data = $query->toArray();
+		$this->assertEquals($fields, $data['more_like_this']['mlt_fields']);		
+	}
+	
+	public function testSetLikeText() {
+		$query = new Elastica_Query_MoreLikeThis();
+		$query->setLikeText(' hello world');
+		
+		$data = $query->toArray();
+		$this->assertEquals('hello world', $data['more_like_this']['like_text']);
+	}
+	
+	public function testSetBoost() {
+		$query = new Elastica_Query_MoreLikeThis();
+		
+		$boost = 1.3;
+		$query->setBoost($boost);
+		
+		$this->assertEquals($boost, $query->getParam('boost'));
+	}
+	
+	public function testSetMaxQueryTerms() {
+		$query = new Elastica_Query_MoreLikeThis();
+		
+		$max = 3;
+		$query->setMaxQueryTerms($max);
+		
+		$this->assertEquals($max, $query->getParam('max_query_terms'));
+	}
+	
+	public function testSetPercentTermsToMatch() {
+		$query = new Elastica_Query_MoreLikeThis();
+		
+		$match = 0.8;
+		$query->setPercentTermsToMatch($match);
+		
+		$this->assertEquals($match, $query->getParam('percent_terms_to_match'));
+	}
+	
+	public function testSetMinDocFrequency() {
+		$query = new Elastica_Query_MoreLikeThis();
+		
+		$freq = 2;
+		$query->setMinDocFrequency($freq);
+		
+		$this->assertEquals($freq, $query->getParam('min_doc_freq'));
+	}
+	
+	public function testSetMaxDocFrequency() {
+		$query = new Elastica_Query_MoreLikeThis();
+		
+		$freq = 2;
+		$query->setMaxDocFrequency($freq);
+		
+		$this->assertEquals($freq, $query->getParam('max_doc_freq'));
+	}
+	
+	public function testSetMinWordLength() {
+		$query = new Elastica_Query_MoreLikeThis();
+		
+		$length = 4;
+		$query->setMinWordLength($length);
+		
+		$this->assertEquals($length, $query->getParam('min_word_length'));
+	}
+	
+	public function testSetMaxWordLength() {
+		$query = new Elastica_Query_MoreLikeThis();
+		
+		$length = 5;
+		$query->setMaxWordLength($length);
+		
+		$this->assertEquals($length, $query->getParam('max_word_length'));
+	}
+	
+	public function testSetBoostTerms() {
+		$query = new Elastica_Query_MoreLikeThis();
+		
+		$boost = false;
+		$query->setBoostTerms($boost);
+		
+		$this->assertEquals($boost, $query->getParam('boost_terms'));
+	}
+	
+	public function testSetAnalyzer() {
+		$query = new Elastica_Query_MoreLikeThis();
+		
+		$analyzer = 'UpperCase';
+		$query->setAnalyzer($analyzer);
+		
+		$this->assertEquals($analyzer, $query->getParam('analyzer'));
+	}
+	
+	public function testSetStopWords() {
+		$query = new Elastica_Query_MoreLikeThis();
+
+		$stopWords = array('no', 'yes', 'test');
+		$query->setStopWords($stopWords);
+
+		$this->assertEquals($stopWords, $query->getParam('stop_words'));
+	}		
 }
