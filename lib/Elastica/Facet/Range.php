@@ -8,14 +8,7 @@
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/range-facet.html
  */
 class Elastica_Facet_Range extends Elastica_Facet_Abstract
-{
-	/**
-	 * Holds the parameters of the range facet.
-	 * 
-	 * @var array
-	 */
-	protected $_params = array();
-	
+{	
 	/**
 	 * Sets the field for the range.
 	 * 
@@ -82,30 +75,6 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
 	}
 	
 	/**
-	 * Gets a general parameter for this facet by key.
-	 * 
-	 * @param string $key The key of the param to fetch.
-	 * @return mixed
-	 */
-	public function getParam($key) {
-		if (isset($this->_params[$key])) {
-			return $this->_params[$key];
-		}
-	}
-
-	/**
-	 * Sets a general parameter for this facet by key and value.
-	 *
-	 * @param string $key Key to set
-	 * @param mixed $value Value
-	 * @return Elastica_Facet_Range
-	 */
-	public function setParam($key, $value) {
-		$this->_params[$key] = $value;
-		return $this;
-	}
-	
-	/**
 	 * Creates the full facet definition, which includes the basic
 	 * facet definition of the parent.
 	 * 
@@ -134,8 +103,7 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
 		
 		if ($fieldTypesSet === 0) {
 			throw new Elastica_Exception_Invalid('Neither field, key_field nor key_script is set.');
-		}
-		else if ($fieldTypesSet > 1) {
+		} else if ($fieldTypesSet > 1) {
 			throw new Elastica_Exception_Invalid('Either field, key_field and key_value or key_script and value_script should be set.');
 		}
 		

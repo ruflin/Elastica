@@ -7,7 +7,7 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  */
-abstract class Elastica_Facet_Abstract
+abstract class Elastica_Facet_Abstract extends Elastica_Param
 {
 	/**
 	 * Holds the name of the facet.

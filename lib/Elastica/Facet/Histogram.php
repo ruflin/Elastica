@@ -10,13 +10,6 @@
 class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
 {
 	/**
-	 * Holds the parameters of the range facet.
-	 *
-	 * @var array
-	 */
-	protected $_params = array();
-
-	/**
 	 * Sets the field for histogram
 	 *
 	 * @param string $field The name of the field for the historgram
@@ -67,33 +60,6 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
 	 */
 	public function setScriptParams(Array $params) {
 		return $this->setParam('params', $params);
-	}
-
-
-	/**
-	 * Gets a general parameter for this facet by key.
-	 *
-	 * @param string $key The key of the param to fetch.
-	 * @return mixed Key value or null
-	 */
-	public function getParam($key) {
-		if (isset($this->_params[$key])) {
-			return $this->_params[$key];
-		}
-		// TODO: check if should throw exception
-		return null;
-	}
-
-	/**
-	 * Sets a general parameter for this facet by key and value.
-	 *
-	 * @param string $key Key to set
-	 * @param mixed $value Value
-	 * @return Elastica_Facet_Range
-	 */
-	public function setParam($key, $value) {
-		$this->_params[$key] = $value;
-		return $this;
 	}
 
 	/**
