@@ -98,9 +98,59 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 	* the Elastica_Client can properly accept and use
 	* an $index parameter and $type parameter that are
 	* strings
+	*
+	* This test is a bit more verbose than just sending the
+	* values to deleteIds and checking for exceptions or
+	* warnings.
+	*
+	* It will add a document, search for it, then delete it
+	* using the parameter types we are interested in, and then
+	* re-search to verify that they have been deleted
 	*/
 	public function testDeleteIdsIdxStringTypeString() {
+		$client = new Elastica_Client();
+		$data = array('username' => 'hans');
+		$userSearch = 'username:hans';
 
+		$index = $client->getIndex('test1');
+
+		// Create the index, deleting it first if it already exists
+		$index->create(array(), true);
+		$type = $index->getType('user');
+
+		// Adds 1 document to the index
+		$doc = new Elastica_Document(null, $data);
+		$result = $type->addDocument($doc);
+
+		// Refresh index
+		$index->refresh();
+
+		$resultData = $result->getData();
+		$ids = array($resultData['_id']);
+
+		// Check to make sure the document is in the index
+		$resultSet = $type->search($userSearch);
+		$totalHits = $resultSet->getTotalHits();
+		$this->assertEquals(1, $totalHits);
+
+		// And verify that the variables we are doing to send to
+		// deleteIds are the type we are testing for
+		$idxString = $index->getName();
+		$typeString = $type->getName();
+		$this->assertEquals(true, is_string($idxString));
+		$this->assertEquals(true, is_string($typeString));
+
+		// Using the existing $index and $type variables which
+		// are Elastica_Index and Elastica_Type objects respectively
+		$resp = $client->deleteIds($ids, $index, $type);
+
+		// Refresh the index to clear out deleted ID information
+		$index->refresh();
+
+		// Research the index to verify that the items have been deleted
+		$resultSet = $type->search($userSearch);
+		$totalHits = $resultSet->getTotalHits();
+		$this->assertEquals(0, $totalHits);
 	}
 
 	/**
@@ -111,9 +161,58 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 	* the Elastica_Client can properly accept and use
 	* an $index parameter that is a string and a $type
 	* parameter that is of type Elastica_Type
+	*
+	* This test is a bit more verbose than just sending the
+	* values to deleteIds and checking for exceptions or
+	* warnings.
+	*
+	* It will add a document, search for it, then delete it
+	* using the parameter types we are interested in, and then
+	* re-search to verify that they have been deleted
 	*/
 	public function testDeleteIdsIdxStringTypeObject() {
+		$client = new Elastica_Client();
+		$data = array('username' => 'hans');
+		$userSearch = 'username:hans';
 
+		$index = $client->getIndex('test1');
+
+		// Create the index, deleting it first if it already exists
+		$index->create(array(), true);
+		$type = $index->getType('user');
+
+		// Adds 1 document to the index
+		$doc = new Elastica_Document(null, $data);
+		$result = $type->addDocument($doc);
+
+		// Refresh index
+		$index->refresh();
+
+		$resultData = $result->getData();
+		$ids = array($resultData['_id']);
+
+		// Check to make sure the document is in the index
+		$resultSet = $type->search($userSearch);
+		$totalHits = $resultSet->getTotalHits();
+		$this->assertEquals(1, $totalHits);
+
+		// And verify that the variables we are doing to send to
+		// deleteIds are the type we are testing for
+		$idxString = $index->getName();
+		$this->assertEquals(true, is_string($idxString));
+		$this->assertEquals(true, ($type instanceof Elastica_Type));
+
+		// Using the existing $index and $type variables which
+		// are Elastica_Index and Elastica_Type objects respectively
+		$resp = $client->deleteIds($ids, $index, $type);
+
+		// Refresh the index to clear out deleted ID information
+		$index->refresh();
+
+		// Research the index to verify that the items have been deleted
+		$resultSet = $type->search($userSearch);
+		$totalHits = $resultSet->getTotalHits();
+		$this->assertEquals(0, $totalHits);
 	}
 
 	/**
@@ -124,9 +223,58 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 	* the Elastica_Client can properly accept and use
 	* an $index parameter that is  of type Elasitca_Index
 	* and a $type parameter that is a string
+	*
+	* This test is a bit more verbose than just sending the
+	* values to deleteIds and checking for exceptions or
+	* warnings.
+	*
+	* It will add a document, search for it, then delete it
+	* using the parameter types we are interested in, and then
+	* re-search to verify that they have been deleted
 	*/
 	public function testDeleteIdsIdxObjectTypeString() {
+		$client = new Elastica_Client();
+		$data = array('username' => 'hans');
+		$userSearch = 'username:hans';
 
+		$index = $client->getIndex('test1');
+
+		// Create the index, deleting it first if it already exists
+		$index->create(array(), true);
+		$type = $index->getType('user');
+
+		// Adds 1 document to the index
+		$doc = new Elastica_Document(null, $data);
+		$result = $type->addDocument($doc);
+
+		// Refresh index
+		$index->refresh();
+
+		$resultData = $result->getData();
+		$ids = array($resultData['_id']);
+
+		// Check to make sure the document is in the index
+		$resultSet = $type->search($userSearch);
+		$totalHits = $resultSet->getTotalHits();
+		$this->assertEquals(1, $totalHits);
+
+		// And verify that the variables we are doing to send to
+		// deleteIds are the type we are testing for
+		$typeString = $type->getName();
+		$this->assertEquals(true, ($index instanceof Elastica_Index));
+		$this->assertEquals(true, is_string($typeString));
+
+		// Using the existing $index and $type variables which
+		// are Elastica_Index and Elastica_Type objects respectively
+		$resp = $client->deleteIds($ids, $index, $type);
+
+		// Refresh the index to clear out deleted ID information
+		$index->refresh();
+
+		// Research the index to verify that the items have been deleted
+		$resultSet = $type->search($userSearch);
+		$totalHits = $resultSet->getTotalHits();
+		$this->assertEquals(0, $totalHits);
 	}
 
 	/**
@@ -137,23 +285,56 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 	* the Elastica_Client can properly accept and use
 	* an $index parameter that is an object and a $type
 	* parameter that is of type Elastica_Type
+	*
+	* This test is a bit more verbose than just sending the
+	* values to deleteIds and checking for exceptions or
+	* warnings.
+	*
+	* It will add a document, search for it, then delete it
+	* using the parameter types we are interested in, and then
+	* re-search to verify that they have been deleted
 	*/
 	public function testDeleteIdsIdxObjectTypeObject() {
 		$client = new Elastica_Client();
-		$index = $client->getIndex('test1');
-		$index->create(array(), true);
+		$data = array('username' => 'hans');
+		$userSearch = 'username:hans';
 
+		$index = $client->getIndex('test1');
+
+		// Create the index, deleting it first if it already exists
+		$index->create(array(), true);
 		$type = $index->getType('user');
 
 		// Adds 1 document to the index
-		$doc1 = new Elastica_Document(1,
-			array('username' => 'hans', 'test' => array('2', '3', '5'))
-		);
-		$type->addDocument($doc1);
+		$doc = new Elastica_Document(null, $data);
+		$result = $type->addDocument($doc);
 
 		// Refresh index
 		$index->refresh();
 
-		$resultSet = $type->search('rolf');
+		$resultData = $result->getData();
+		$ids = array($resultData['_id']);
+
+		// Check to make sure the document is in the index
+		$resultSet = $type->search($userSearch);
+		$totalHits = $resultSet->getTotalHits();
+		$this->assertEquals(1, $totalHits);
+
+		// And verify that the variables we are doing to send to
+		// deleteIds are the type we are testing for
+		$this->assertEquals(true, ($index instanceof Elastica_Index));
+		$this->assertEquals(true, ($type instanceof Elastica_Type));
+
+		// Using the existing $index and $type variables which
+		// are Elastica_Index and Elastica_Type objects respectively
+		$resp = $client->deleteIds($ids, $index, $type);
+
+		// Refresh the index to clear out deleted ID information
+		$index->refresh();
+
+		// Research the index to verify that the items have been deleted
+		$resultSet = $type->search($userSearch);
+		$totalHits = $resultSet->getTotalHits();
+		$this->assertEquals(0, $totalHits);
 	}
 }
