@@ -12,7 +12,7 @@ class Elastica_Facet_TermsTest extends PHPUnit_Framework_TestCase
 
 	}
 
-	public function testTest() {
+	public function testQuery() {
 
 		$client = new Elastica_Client();
 		$index = $client->getIndex('test');
@@ -40,5 +40,5 @@ class Elastica_Facet_TermsTest extends PHPUnit_Framework_TestCase
 		$facets = $response->getFacets();
 
 		$this->assertEquals(3, count($facets['test']['terms']));
-	}
+	}	
 }

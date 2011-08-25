@@ -30,6 +30,7 @@ class Elastica_Filter_Or extends Elastica_Filter_Abstract
 	 * @return array Or array
 	 */
 	public function toArray() {
-		return array('or' => $this->_filters);
+		$this->setParams($this->_filters);
+		return parent::toArray();
 	}
 }

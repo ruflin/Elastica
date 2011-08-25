@@ -46,8 +46,7 @@ class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 	 * @return Elastica_Facet_Terms
 	 */
 	public function setAllTerms($allTerms) {
-		$allTerms = (bool) $allTerms;
-		return $this->setParam('all_terms', $allTerms);
+		return $this->setParam('all_terms', (bool) $allTerms);
 	}
 
 	/**
@@ -59,11 +58,10 @@ class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 	 * @return Elastica_Facet_Terms
 	 */
 	public function setOrder($type) {
-		if (in_array($type, $this->_orderTypes)) {
-			return $this->setParam('order', $type);
+		if (!in_array($type, $this->_orderTypes)) {
+			throw new Elastica_Exception_Invalid('Invalid order type: ' . $type);
 		}
-
-		throw new Elastica_Exception_Invalid('Invalid order type: ' . $type);
+		return $this->setParam('order', $type);
 	}
 
 	/**
@@ -83,8 +81,7 @@ class Elastica_Facet_Terms extends Elastica_Facet_Abstract
 	 * @return Elastica_Facet_Terms
 	 */
 	public function setSize($size) {
-		$size = (int) $size;
-		return $this->setParam('size', $size);
+		return $this->setParam('size', (int) $size);
 	}
 
 	/**
