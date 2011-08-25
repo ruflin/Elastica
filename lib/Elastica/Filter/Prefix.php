@@ -62,6 +62,7 @@ class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
 	 * @return array data array
 	 */
 	public function toArray() {
-		return array('prefix' => array($this->_field => $this->_prefix));
+		$this->setParam($this->_field, $this->_prefix);
+		return parent::toArray();
 	}
 }
