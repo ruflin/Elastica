@@ -252,6 +252,14 @@ class Elastica_Client
 			throw new Elastica_Exception_Invalid('Array has to consist of at least one id');
 		}
 
+		if ($index instanceof Elastica_Index) {
+			$index = $index->getName();
+		}
+
+		if ($type instanceof Elastica_Type) {
+			$type = $type->getName();
+		}
+
 		$params = array();
 		foreach($ids as $id) {
 			$action = array(
