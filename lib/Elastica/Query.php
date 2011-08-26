@@ -208,7 +208,7 @@ class Elastica_Query extends Elastica_Param
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/script_fields/
 	 */
 	public function setScriptFields(array $scriptFields) {
-		return $this->setParam('script_field', $scriptFields);
+		return $this->setParam('script_fields', $scriptFields);
 	}
 
 	/**
