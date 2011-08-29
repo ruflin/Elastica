@@ -161,7 +161,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	 * @param float $boost
 	 * @return Elastica_Query_QueryString Current object
 	 */
-	public function setBoost($boost = 0) {
+	public function setBoost($boost = 1.0) {
 		return $this->setParam('boost', (float) $boost);
 	}
 	
