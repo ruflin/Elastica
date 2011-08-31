@@ -126,7 +126,6 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testAddWordxFile() {
-
 		$indexMapping = array(
 			'file' => array('type' => 'attachment'),
 			'text' => array('type' => 'string', 'store' => 'no'),
@@ -309,7 +308,16 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 
 		try {
 			$index->delete();
-		} catch (Elastica_Exception_Response: $error) {
+
+			/**
+			* This should never be reached due to the above
+			* command throwing an exception which will take
+			* us to the exception handler below and hopefully
+			* succeed with the assertion check of the reponse
+			* object
+			*/
+			$this->assertTrue(false);
+		} catch (Elastica_Exception_Response $error) {
 			$response = $error->getResponse();
 			$this->assertTrue($response->hasError());
 		}
