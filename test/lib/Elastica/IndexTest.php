@@ -308,7 +308,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 
 		try {
 			$index->delete();
-			$this->fail('This should never be reached because the above code will throw an exception');
+			$this->fail('This should never be reached. Deleting an unknown index will throw an exception');
 		} catch (Elastica_Exception_Response $error) {
 			$response = $error->getResponse();
 			$this->assertTrue($response->hasError());
