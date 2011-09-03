@@ -43,7 +43,7 @@ class Elastica_Response {
 		$response = $this->getData();
 
 		if (isset($response['error'])) {
-			return $response['error'];
+			return true;
 		}
 		return false;
 	}

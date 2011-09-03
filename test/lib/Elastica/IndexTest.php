@@ -126,7 +126,6 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testAddWordxFile() {
-
 		$indexMapping = array(
 			'file' => array('type' => 'attachment'),
 			'text' => array('type' => 'string', 'store' => 'no'),
@@ -294,5 +293,25 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 
 		$response = $index->flush();
 		$this->assertFalse($response->hasError());
+	}
+
+	/**
+	* Test $index->delete() return value for unknown index
+	*
+	* Tests if deleting an index that does not exist in Elasticsearch,
+	* correctly returns a boolean true from the hasError() method of
+	* the Elastica_Response object
+	*/
+	public function testDeleteMissingIndexHasError() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('index_does_not_exist');
+
+		try {
+			$index->delete();
+			$this->fail('This should never be reached. Deleting an unknown index will throw an exception');
+		} catch (Elastica_Exception_Response $error) {
+			$response = $error->getResponse();
+			$this->assertTrue($response->hasError());
+		}
 	}
 }
