@@ -11,10 +11,6 @@
 class Elastica_Query_QueryString extends Elastica_Query_Abstract
 {
 	protected $_queryString = '';
-	protected $_defaultOperator = '';
-	protected $_defaultField = '';
-	protected $_fields = array();
-	protected $_useDisMax = null;
 
 	/**
 	 * Creates query string object. Calls setQuery with argument
@@ -41,6 +37,14 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * @param string $analyzer analyzer to use.
+	 * @return Elastica_Query_QueryString current object
+	 */
+	public function setAnalyzer($analyzer) {
+		return $this->setParam('analyzer', $analyzer);
+	}
+
+	/**
 	 * Sets the default operator AND or OR
 	 *
 	 * If no operator is set, OR is chosen
@@ -49,8 +53,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	 * @return Elastica_Query_QueryString Current object
 	 */
 	public function setDefaultOperator($operator) {
-		$this->_defaultOperator = $operator;
-		return $this;
+		return $this->setParam('default_operator', $operator);
 	}
 
 	/**
@@ -62,8 +65,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	 * @return Elastica_Query_QueryString Current object
 	 */
 	public function setDefaultField($field) {
-		$this->_defaultField = $field;
-		return $this;
+		return $this->setParam('default_field', $field);
 	}
 
 	/**
@@ -72,7 +74,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	 * Determines whether to use
 	 */
 	public function setUseDisMax($value) {
-		$this->_useDisMax = ($value == true);
+		return $this->setParam('use_dis_max', ($value == true));
 	}
 
 	/**
@@ -87,9 +89,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 		if (!is_array($fields)) {
 			throw new Elastica_Exception_Invalid('Parameter has to be an array');
 		}
-
-		$this->_fields = $fields;
-		return $this;
+		return $this->setParam('fields', $fields);
 	}
 
 	/**
@@ -98,24 +98,9 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	 * @return array Query string array
 	 */
 	public function toArray() {
-		$args['query'] = $this->_queryString;
-
-		if(!empty($this->_defaultOperator)) {
-			$args['default_operator'] = $this->_defaultOperator;
-		}
-
-		if(!empty($this->_defaultField)) {
-			$args['default_field'] = $this->_defaultField;
-		}
-
-		if(!empty($this->_fields)) {
-			$args['fields'] = $this->_fields;
-		}
-
-		if(! is_null($this->_useDisMax)) {
-			$args['use_dis_max'] = $this->_useDisMax;
-		}
-
-		return array('query_string' => $args);
+		return array(
+			'query_string' => array_merge(array('query' => $this->_queryString), $this->getParams()),
+		);
 	}
 }
+
