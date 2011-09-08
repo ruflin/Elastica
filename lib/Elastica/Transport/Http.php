@@ -60,6 +60,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 
 		if (!empty($data)) {
 			if (is_array($data)) {
+			//var_dump($data);
 				$content = json_encode($data);
 			} else {
 				$content = $data;
