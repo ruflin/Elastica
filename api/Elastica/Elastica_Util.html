@@ -25,9 +25,10 @@
 	<ul class="tags">
 				<li><span class="field">author:</span> Nicolas Ruflin &lt;<a href="mailto:spam@ruflin.com">spam@ruflin.com</a>&gt;</li>
 				<li><span class="field">author:</span> Thibault Duplessis &lt;<a href="mailto:thibault.duplessis@gmail.com">thibault.duplessis@gmail.com</a>&gt;</li>
+				<li><span class="field">author:</span> Oleg Zinchenko &lt;<a href="mailto:olegz@default-value.com">olegz@default-value.com</a>&gt;</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Util.php.html">/Util.php</a> (line <span class="field">10</span>)
+			Located in <a class="field" href="_Util.php.html">/Util.php</a> (line <span class="field">11</span>)
 		</p>
 		
 				
@@ -53,8 +54,28 @@
 										<a href="#escapeTerm" title="details" class="method-name">escapeTerm</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$term</span>)
 									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#replaceBooleanWords" title="details" class="method-name">replaceBooleanWords</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$term</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#replaceBooleanWordsAndEscapeTerm" title="details" class="method-name">replaceBooleanWordsAndEscapeTerm</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$term</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#toCamelCase" title="details" class="method-name">toCamelCase</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#toSnakeCase" title="details" class="method-name">toSnakeCase</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
+									</div>
 								
-												</div>
+																																												</div>
 		</div>
 	</div>		
 
@@ -73,7 +94,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method escapeTerm</span> (line <span class="line-number">20</span>)
+		<span class="method-title">static method escapeTerm</span> (line <span class="line-number">40</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -101,6 +122,135 @@
 		
 			
 	</div>
+<a name="methodreplaceBooleanWords" id="replaceBooleanWords"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method replaceBooleanWords</span> (line <span class="line-number">61</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Replace the following reserved words (because part of the query language)  AND OR NOT</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Replaced query term</li>
+				<li><span class="field">link:</span> <a href="http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators">http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">string</span>
+		<span class="method-name">
+			replaceBooleanWords
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$term</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$term</span><span class="var-description">: Query term to replace</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodreplaceBooleanWordsAndEscapeTerm" id="replaceBooleanWordsAndEscapeTerm"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method replaceBooleanWordsAndEscapeTerm</span> (line <span class="line-number">23</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Replace the following reserved words: AND OR NOT  and  escapes the following terms: + - &amp;&amp; || ! ( ) { } [ ] ^ &quot; ~ * ? : \</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Replaced and escaped query term</li>
+				<li><span class="field">link:</span> <a href="http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators">http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators</a></li>
+				<li><span class="field">link:</span> <a href="http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters">http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">string</span>
+		<span class="method-name">
+			replaceBooleanWordsAndEscapeTerm
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$term</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$term</span><span class="var-description">: Query term to replare and escape</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtoCamelCase" id="toCamelCase"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method toCamelCase</span> (line <span class="line-number">76</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Converts a snake_case string to CamelCase</p>
+<p class="description"><p>For example: hello_world to HelloWorld</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> CamelCase string</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">string</span>
+		<span class="method-name">
+			toCamelCase
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$string</span><span class="var-description">: snake_case string</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtoSnakeCase" id="toSnakeCase"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method toSnakeCase</span> (line <span class="line-number">88</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Converts a CamelCase string to snake_case</p>
+<p class="description"><p>For Example HelloWorld to hello_world</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> SnakeCase string</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">string</span>
+		<span class="method-name">
+			toSnakeCase
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$string</span><span class="var-description">: CamelCase String to Convert</span>			</li>
+				</ul>
+		
+			
+	</div>
 
 						
 		</div>
@@ -108,7 +258,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 15 Jul 2011 05:09:47 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 05 Sep 2011 12:23:06 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

@@ -25,12 +25,14 @@
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Elastica index settings object</p>
+<p class="description"><p>All settings listed in the update settings API (http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html)  can be changed on a running indice. To make changes like the merge policy (http://www.elasticsearch.org/guide/reference/index-modules/merge.html)  the index has to be closed first and reopened after the call</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Nicolas Ruflin &lt;<a href="mailto:spam@ruflin.com">spam@ruflin.com</a>&gt;</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/index-modules/merge.html">http://www.elasticsearch.org/guide/reference/index-modules/merge.html</a></li>
 				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html">http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Index---Settings.php.html">/Index/Settings.php</a> (line <span class="field">10</span>)
+			Located in <a class="field" href="_Index---Settings.php.html">/Index/Settings.php</a> (line <span class="field">15</span>)
 		</p>
 		
 				
@@ -55,11 +57,6 @@
 					</div>
 		<div class="info-box-body">
 			<div class="const-summary">
-								<div class="const-title">
-					<img src="../media/images/Constant.png" alt=" " />
-					<a href="#DEFAULT_MERGE_POLICY_MERGE_FACTOR" title="details" class="const-name">DEFAULT_MERGE_POLICY_MERGE_FACTOR</a> = 					<span class="var-type"> 10</span>
-
-				</div>
 								<div class="const-title">
 					<img src="../media/images/Constant.png" alt=" " />
 					<a href="#DEFAULT_REFRESH_INTERVAL" title="details" class="const-name">DEFAULT_REFRESH_INTERVAL</a> = 					<span class="var-type"> '1s'</span>
@@ -113,7 +110,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																				
+																																																																																																				
 												<div class="method-definition">
 											<span class="method-result">Elastica_Index_Settings</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -130,8 +127,13 @@
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">int</span>
-										<a href="#getMergePolicyMergeFactor" title="details" class="method-name">getMergePolicyMergeFactor</a>
+											<span class="method-result">string</span>
+										<a href="#getMergePolicy" title="details" class="method-name">getMergePolicy</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getMergePolicyType" title="details" class="method-name">getMergePolicyType</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -151,8 +153,13 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
-										<a href="#setMergePolicyMergeFactor" title="details" class="method-name">setMergePolicyMergeFactor</a>
-											(<span class="var-type">int</span>&nbsp;<span class="var-name">$factor</span>)
+										<a href="#setMergePolicy" title="details" class="method-name">setMergePolicy</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+										<a href="#setMergePolicyType" title="details" class="method-name">setMergePolicyType</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
@@ -184,13 +191,13 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$_data" id="$_data"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$_data</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">14</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">19</span>)
 		</span>
 	</div>
 
@@ -205,13 +212,13 @@
 
 </div>
 <a name="var$_name" id="$_name"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$_name</span>
-			 = <span class="var-default"> ''</span>			(line <span class="line-number">16</span>)
+			 = <span class="var-default"> ''</span>			(line <span class="line-number">21</span>)
 		</span>
 	</div>
 
@@ -226,13 +233,13 @@
 
 </div>
 <a name="var$_response" id="$_response"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$_response</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">12</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">17</span>)
 		</span>
 	</div>
 
@@ -265,10 +272,10 @@
 			<A NAME='method_detail'></A>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">24</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">28</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -293,17 +300,18 @@
 			
 	</div>
 <a name="methodget" id="get"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">get</span> (line <span class="line-number">36</span>)
+		<span class="method-title">get</span> (line <span class="line-number">42</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Returns the current settings of the index</p>
-<p class="description"><p>If param is set, only specified setting is return</p></p>
+<p class="description"><p>If param is set, only specified setting is return.  'index.' is added in front of $setting.</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> Settings data</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html">http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -324,10 +332,10 @@
 			
 	</div>
 <a name="methodgetIndex" id="getIndex"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getIndex</span> (line <span class="line-number">136</span>)
+		<span class="method-title">getIndex</span> (line <span class="line-number">165</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -348,25 +356,54 @@
 		
 			
 	</div>
-<a name="methodgetMergePolicyMergeFactor" id="getMergePolicyMergeFactor"><!-- --></a>
-<div class="oddrow">
+<a name="methodgetMergePolicy" id="getMergePolicy"><!-- --></a>
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getMergePolicyMergeFactor</span> (line <span class="line-number">111</span>)
+		<span class="method-title">getMergePolicy</span> (line <span class="line-number">146</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns the merge policy merge factor</p>
-<p class="description"><p>If no factor is set, the default factor is returned (see consts)</p></p>
+<p class="short-description">Returns the specific merge policy value</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> Merge factor</li>
+				<li><span class="field">return:</span> Refresh interval</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/index-modules/merge.html">http://www.elasticsearch.org/guide/reference/index-modules/merge.html</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">int</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
-			getMergePolicyMergeFactor
+			getMergePolicy
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$key</span><span class="var-description">: Merge policy key (for ex. expunge_deletes_allowed)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetMergePolicyType" id="getMergePolicyType"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getMergePolicyType</span> (line <span class="line-number">103</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">return:</span> Merge policy type</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getMergePolicyType
 		</span>
 				()
 			</div>
@@ -378,7 +415,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getRefreshInterval</span> (line <span class="line-number">84</span>)
+		<span class="method-title">getRefreshInterval</span> (line <span class="line-number">90</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -404,7 +441,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">request</span> (line <span class="line-number">157</span>)
+		<span class="method-title">request</span> (line <span class="line-number">186</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -438,7 +475,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">set</span> (line <span class="line-number">127</span>)
+		<span class="method-title">set</span> (line <span class="line-number">156</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -464,41 +501,76 @@
 		
 			
 	</div>
-<a name="methodsetMergePolicyMergeFactor" id="setMergePolicyMergeFactor"><!-- --></a>
+<a name="methodsetMergePolicy" id="setMergePolicy"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">setMergePolicyMergeFactor</span> (line <span class="line-number">100</span>)
+		<span class="method-title">setMergePolicy</span> (line <span class="line-number">132</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Sets the merge policy factor</p>
+<p class="short-description">Sets the specific merge policies</p>
+<p class="description"><p>To have this changes made the index has to be closed and reopened</p></p>
 	<ul class="tags">
-				<li><span class="field">return:</span> Response object</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/index-modules/merge.html">http://www.elasticsearch.org/guide/reference/index-modules/merge.html</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
 		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
 		<span class="method-name">
-			setMergePolicyMergeFactor
+			setMergePolicy
 		</span>
-					(<span class="var-type">int</span>&nbsp;<span class="var-name">$factor</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$factor</span><span class="var-description">: Merge factor</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$key</span><span class="var-description">: Merge policy key (for ex. expunge_deletes_allowed)</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetMergePolicyType" id="setMergePolicyType"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setMergePolicyType</span> (line <span class="line-number">114</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets merge policy</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Response object</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/index-modules/merge.html">http://www.elasticsearch.org/guide/reference/index-modules/merge.html</a></li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
+		<span class="method-name">
+			setMergePolicyType
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: Merge policy type</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodsetNumberOfReplicas" id="setNumberOfReplicas"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">setNumberOfReplicas</span> (line <span class="line-number">57</span>)
+		<span class="method-title">setNumberOfReplicas</span> (line <span class="line-number">63</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -525,10 +597,10 @@
 			
 	</div>
 <a name="methodsetRefreshInterval" id="setRefreshInterval"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">setRefreshInterval</span> (line <span class="line-number">73</span>)
+		<span class="method-title">setRefreshInterval</span> (line <span class="line-number">79</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -573,23 +645,7 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="constDEFAULT_MERGE_POLICY_MERGE_FACTOR" id="DEFAULT_MERGE_POLICY_MERGE_FACTOR"><!-- --></A>
-<div class="evenrow">
-
-	<div class="const-header">
-		<img src="../media/images/Variable.png" />
-		<span class="const-title">
-			<span class="const-name">DEFAULT_MERGE_POLICY_MERGE_FACTOR</span>
-			 = <span class="const-default"> 10</span>
-			(line <span class="line-number">19</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	
-	
-</div>
-<a name="constDEFAULT_REFRESH_INTERVAL" id="DEFAULT_REFRESH_INTERVAL"><!-- --></A>
+			<a name="constDEFAULT_REFRESH_INTERVAL" id="DEFAULT_REFRESH_INTERVAL"><!-- --></A>
 <div class="oddrow">
 
 	<div class="const-header">
@@ -597,7 +653,7 @@
 		<span class="const-title">
 			<span class="const-name">DEFAULT_REFRESH_INTERVAL</span>
 			 = <span class="const-default"> '1s'</span>
-			(line <span class="line-number">18</span>)
+			(line <span class="line-number">23</span>)
 		</span>
 	</div>
 
@@ -610,7 +666,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 15 Jul 2011 05:09:46 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 05 Sep 2011 12:23:05 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

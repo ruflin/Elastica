@@ -33,9 +33,11 @@
 		</p>
 		
 				
-		<pre><a href="../Elastica/Elastica_Query_Abstract.html">Elastica_Query_Abstract</a>
+		<pre><a href="../Elastica/Elastica_Param.html">Elastica_Param</a>
    |
-   --Elastica_Query_FuzzyLikeThis</pre>
+   --<a href="../Elastica/Elastica_Query_Abstract.html">Elastica_Query_Abstract</a>
+      |
+      --Elastica_Query_FuzzyLikeThis</pre>
 	
 			</div>
 </div>
@@ -101,9 +103,9 @@
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$fields</span>)
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../Elastica/Elastica_Query_FuzzyLikeThis.html">Elastica_Query_FuzzyLikeThis</a></span>
 										<a href="#setBoost" title="details" class="method-name">setBoost</a>
-											(<span class="var-type">$value</span>&nbsp;<span class="var-name">$value</span>)
+											(<span class="var-type">float</span>&nbsp;<span class="var-name">$value</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result"><a href="../Elastica/Elastica_Query_FuzzyLikeThis.html">Elastica_Query_FuzzyLikeThis</a></span>
@@ -113,7 +115,7 @@
 																<div class="method-definition">
 											<span class="method-result"><a href="../Elastica/Elastica_Query_FuzzyLikeThis.html">Elastica_Query_FuzzyLikeThis</a></span>
 										<a href="#setMaxQueryTerms" title="details" class="method-name">setMaxQueryTerms</a>
-											(<span class="var-type">$value</span>&nbsp;<span class="var-name">$value</span>)
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$value</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result"><a href="../Elastica/Elastica_Query_FuzzyLikeThis.html">Elastica_Query_FuzzyLikeThis</a></span>
@@ -123,7 +125,7 @@
 																<div class="method-definition">
 											<span class="method-result"><a href="../Elastica/Elastica_Query_FuzzyLikeThis.html">Elastica_Query_FuzzyLikeThis</a></span>
 										<a href="#setPrefixLength" title="details" class="method-name">setPrefixLength</a>
-											(<span class="var-type">$value</span>&nbsp;<span class="var-name">$value</span>)
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$value</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">array</span>
@@ -273,7 +275,18 @@
 		
 
 </div>
-						
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../Elastica/Elastica_Param.html">Elastica_Param</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../Elastica/Elastica_Param.html#var$_params">Elastica_Param::$_params</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Elastica/Elastica_Param.html#var$_rawParams">Elastica_Param::$_rawParams</a></span><br>
+							</span>
+											</blockquote> 
+										
 		</div>
 	</div>
 	
@@ -328,21 +341,22 @@
 	
 	<!-- ========== Info from phpDoc block ========= -->
 	<ul class="tags">
+				<li><span class="field">return:</span> Query object</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../Elastica/Elastica_Query_FuzzyLikeThis.html">Elastica_Query_FuzzyLikeThis</a></span>
 		<span class="method-name">
 			setBoost
 		</span>
-					(<span class="var-type">$value</span>&nbsp;<span class="var-name">$value</span>)
+					(<span class="var-type">float</span>&nbsp;<span class="var-name">$value</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">$value</span>
-				<span class="var-name">$value</span>			</li>
+				<span class="var-type">float</span>
+				<span class="var-name">$value</span><span class="var-description">: Boost value</span>			</li>
 				</ul>
 		
 			
@@ -395,13 +409,13 @@
 		<span class="method-name">
 			setMaxQueryTerms
 		</span>
-					(<span class="var-type">$value</span>&nbsp;<span class="var-name">$value</span>)
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$value</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">$value</span>
-				<span class="var-name">$value</span>			</li>
+				<span class="var-type">int</span>
+				<span class="var-name">$value</span><span class="var-description">: Max query terms value</span>			</li>
 				</ul>
 		
 			
@@ -454,13 +468,13 @@
 		<span class="method-name">
 			setPrefixLength
 		</span>
-					(<span class="var-type">$value</span>&nbsp;<span class="var-name">$value</span>)
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$value</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">$value</span>
-				<span class="var-name">$value</span>			</li>
+				<span class="var-type">int</span>
+				<span class="var-name">$value</span><span class="var-description">: Prefix length</span>			</li>
 				</ul>
 		
 			
@@ -476,7 +490,7 @@
 <p class="short-description">Converts fuzzy like this query to array</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> Query array</li>
-				<li><span class="field">see:</span> <a href="../Elastica/Elastica_Query_Abstract.html#methodtoArray">Elastica_Query_Abstract::toArray()</a></li>
+				<li><span class="field">see:</span> Elastica_Query_Abstract::toArray()</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -492,17 +506,23 @@
 			<hr class="separator" />
 		<div class="notes">Redefinition of:</div>
 		<dl>
-			<dt><a href="../Elastica/Elastica_Query_Abstract.html#methodtoArray">Elastica_Query_Abstract::toArray()</a></dt>
-						<dd>Converts a query to an array</dd>
+			<dt><a href="../Elastica/Elastica_Param.html#methodtoArray">Elastica_Param::toArray()</a></dt>
+						<dd>Converts the params to an array. A default implementation exist to create  the an array out of the class name (last part of the class name)  and the params</dd>
 					</dl>
 			
 	</div>
 							<h4>Inherited Methods</h4>
 				<a name='inherited_methods'><!-- --></a>	
 									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../Elastica/Elastica_Query_Abstract.html">Elastica_Query_Abstract</a></span></p>
+					<p>Inherited From <span class="classname"><a href="../Elastica/Elastica_Param.html">Elastica_Param</a></span></p>
 					<blockquote>
-													<span class="method-name"><a href="../Elastica/Elastica_Query_Abstract.html#methodtoArray">Elastica_Query_Abstract::toArray()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodaddParam">Elastica_Param::addParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodgetParam">Elastica_Param::getParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodgetParams">Elastica_Param::getParams()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodsetParam">Elastica_Param::setParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodsetParams">Elastica_Param::setParams()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodtoArray">Elastica_Param::toArray()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#method_setRawParam">Elastica_Param::_setRawParam()</a></span><br>
 											</blockquote>
 										
 		</div>
@@ -510,7 +530,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 15 Jul 2011 05:09:44 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 05 Sep 2011 12:23:02 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
