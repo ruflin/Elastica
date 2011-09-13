@@ -24,7 +24,7 @@
                 <p class="implements">
             Implements interfaces:
             <ul>
-                <li>Iterator (internal interface)</li>            </ul>
+                <li>Iterator (internal interface)</li><li>Countable (internal interface)</li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Elastica result set</p>
@@ -84,7 +84,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																				
+																																																																																																												
 												<div class="method-definition">
 											<span class="method-result">Elastica_ResultSet</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -118,6 +118,11 @@
 																<div class="method-definition">
 											<span class="method-result">int</span>
 										<a href="#getTotalHits" title="details" class="method-name">getTotalHits</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#hasFacets" title="details" class="method-name">hasFacets</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -274,7 +279,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">count</span> (line <span class="line-number">87</span>)
+		<span class="method-title">count</span> (line <span class="line-number">97</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -293,13 +298,18 @@
 			</div>
 	
 		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt>Countable::count</dt>
+					</dl>
 			
 	</div>
 <a name="methodcurrent" id="current"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">current</span> (line <span class="line-number">97</span>)
+		<span class="method-title">current</span> (line <span class="line-number">107</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -329,7 +339,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getFacets</span> (line <span class="line-number">59</span>)
+		<span class="method-title">getFacets</span> (line <span class="line-number">69</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -354,7 +364,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getResponse</span> (line <span class="line-number">78</span>)
+		<span class="method-title">getResponse</span> (line <span class="line-number">88</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -404,7 +414,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTotalHits</span> (line <span class="line-number">69</span>)
+		<span class="method-title">getTotalHits</span> (line <span class="line-number">79</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -425,11 +435,36 @@
 		
 			
 	</div>
-<a name="methodkey" id="key"><!-- --></a>
+<a name="methodhasFacets" id="hasFacets"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">key</span> (line <span class="line-number">118</span>)
+		<span class="method-title">hasFacets</span> (line <span class="line-number">59</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns whether facets exist</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Facet existence</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			hasFacets
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodkey" id="key"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">key</span> (line <span class="line-number">128</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -456,10 +491,10 @@
 			
 	</div>
 <a name="methodnext" id="next"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">next</span> (line <span class="line-number">108</span>)
+		<span class="method-title">next</span> (line <span class="line-number">118</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -485,10 +520,10 @@
 			
 	</div>
 <a name="methodrewind" id="rewind"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">rewind</span> (line <span class="line-number">134</span>)
+		<span class="method-title">rewind</span> (line <span class="line-number">144</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -514,10 +549,10 @@
 			
 	</div>
 <a name="methodvalid" id="valid"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">valid</span> (line <span class="line-number">127</span>)
+		<span class="method-title">valid</span> (line <span class="line-number">137</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -544,7 +579,7 @@
 			
 	</div>
 <a name="method_init" id="_init"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">_init</span> (line <span class="line-number">33</span>)
@@ -578,7 +613,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 15 Jul 2011 05:09:46 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 05 Sep 2011 12:23:05 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

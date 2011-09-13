@@ -1,0 +1,2287 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Elastica_Query_Builder</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Elastica_Query_Builder</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Query Builder.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Chris Gedrim &lt;<a href="mailto:chris@gedr.im">chris@gedr.im</a>&gt;</li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.com/">http://www.elasticsearch.com/</a></li>
+				<li><span class="field">uses:</span> <a href="../Elastica/Elastica_Query_Abstract.html">Elastica_Query_Abstract</a></li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_Query---Builder.php.html">/Query/Builder.php</a> (line <span class="field">11</span>)
+		</p>
+		
+				
+		<pre><a href="../Elastica/Elastica_Param.html">Elastica_Param</a>
+   |
+   --<a href="../Elastica/Elastica_Query_Abstract.html">Elastica_Query_Abstract</a>
+      |
+      --Elastica_Query_Builder</pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																				<div class="method-definition">
+					static 						<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#factory" title="details" class="method-name">factory</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span> = <span class="var-default">null</span>])
+									</div>
+																																																																																																																																																																																																																																																																																																																																																																																																								
+												<div class="method-definition">
+											<span class="method-result">Elastica_Query_Builder</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#allowLeadingWildcard" title="details" class="method-name">allowLeadingWildcard</a>
+											([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#analyzer" title="details" class="method-name">analyzer</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$analyzer</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#analyzeWildcard" title="details" class="method-name">analyzeWildcard</a>
+											([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#autoGeneratePhraseQueries" title="details" class="method-name">autoGeneratePhraseQueries</a>
+											([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#bool" title="details" class="method-name">bool</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#boolClose" title="details" class="method-name">boolClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#boost" title="details" class="method-name">boost</a>
+											([<span class="var-type">float</span>&nbsp;<span class="var-name">$boost</span> = <span class="var-default">1.0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#close" title="details" class="method-name">close</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#constantScore" title="details" class="method-name">constantScore</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#constantScoreClose" title="details" class="method-name">constantScoreClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#defaultField" title="details" class="method-name">defaultField</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$field</span> = <span class="var-default">'_all'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#defaultOperator" title="details" class="method-name">defaultOperator</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$operator</span> = <span class="var-default">'OR'</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#disMax" title="details" class="method-name">disMax</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#disMaxClose" title="details" class="method-name">disMaxClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#enablePositionIncrements" title="details" class="method-name">enablePositionIncrements</a>
+											([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#explain" title="details" class="method-name">explain</a>
+											([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#facets" title="details" class="method-name">facets</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#facetsClose" title="details" class="method-name">facetsClose</a>
+										()
+									</div>
+																								<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#field" title="details" class="method-name">field</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#fieldClose" title="details" class="method-name">fieldClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#fieldOpen" title="details" class="method-name">fieldOpen</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#fields" title="details" class="method-name">fields</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$fields</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#filter" title="details" class="method-name">filter</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#filterClose" title="details" class="method-name">filterClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#filteredQuery" title="details" class="method-name">filteredQuery</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#filteredQueryClose" title="details" class="method-name">filteredQueryClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#from" title="details" class="method-name">from</a>
+											([<span class="var-type">integer</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#fuzzyMinSim" title="details" class="method-name">fuzzyMinSim</a>
+											([<span class="var-type">float</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">0.5</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#fuzzyPrefixLength" title="details" class="method-name">fuzzyPrefixLength</a>
+											([<span class="var-type">integer</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#gt" title="details" class="method-name">gt</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#gte" title="details" class="method-name">gte</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#lowercaseExpandedTerms" title="details" class="method-name">lowercaseExpandedTerms</a>
+											([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#lt" title="details" class="method-name">lt</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#lte" title="details" class="method-name">lte</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#matchAll" title="details" class="method-name">matchAll</a>
+											([<span class="var-type">float</span>&nbsp;<span class="var-name">$boost</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#minimumShouldMatch" title="details" class="method-name">minimumShouldMatch</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$minimum</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#must" title="details" class="method-name">must</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#mustClose" title="details" class="method-name">mustClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#mustNot" title="details" class="method-name">mustNot</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#mustNotClose" title="details" class="method-name">mustNotClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#open" title="details" class="method-name">open</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#phraseSlop" title="details" class="method-name">phraseSlop</a>
+											([<span class="var-type">integer</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#prefix" title="details" class="method-name">prefix</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#prefixClose" title="details" class="method-name">prefixClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#queries" title="details" class="method-name">queries</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$queries</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#query" title="details" class="method-name">query</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#queryClose" title="details" class="method-name">queryClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#queryString" title="details" class="method-name">queryString</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#queryStringClose" title="details" class="method-name">queryStringClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#range" title="details" class="method-name">range</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#rangeClose" title="details" class="method-name">rangeClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#should" title="details" class="method-name">should</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#shouldClose" title="details" class="method-name">shouldClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#size" title="details" class="method-name">size</a>
+											([<span class="var-type">integer</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">10</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#sort" title="details" class="method-name">sort</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#sortClose" title="details" class="method-name">sortClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#sortField" title="details" class="method-name">sortField</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$reverse</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#term" title="details" class="method-name">term</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#termClose" title="details" class="method-name">termClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#textPhrase" title="details" class="method-name">textPhrase</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#textPhraseClose" title="details" class="method-name">textPhraseClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#tieBreaker" title="details" class="method-name">tieBreaker</a>
+											(<span class="var-type">float</span>&nbsp;<span class="var-name">$multiplier</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#toArray" title="details" class="method-name">toArray</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#wildcard" title="details" class="method-name">wildcard</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+										<a href="#wildcardClose" title="details" class="method-name">wildcardClose</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#__toString" title="details" class="method-name">__toString</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../Elastica/Elastica_Param.html">Elastica_Param</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../Elastica/Elastica_Param.html#var$_params">Elastica_Param::$_params</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Elastica/Elastica_Param.html#var$_rawParams">Elastica_Param::$_rawParams</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-vars">Vars</a>
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodfactory" id="factory"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method factory</span> (line <span class="line-number">27</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Factory method.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			factory
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$string</span><span class="var-description">: JSON encoded string to use as query.</span>			</li>
+				</ul>
+		
+			
+	</div>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">37</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Elastica_Query_Builder</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$string</span><span class="var-description">: JSON encoded string to use as query.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodallowLeadingWildcard" id="allowLeadingWildcard"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">allowLeadingWildcard</span> (line <span class="line-number">77</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Allow widcards (*, ?) as the first character in a query.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			allowLeadingWildcard
+		</span>
+					([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bool</span><span class="var-description">: Defaults to true.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodanalyzer" id="analyzer"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">analyzer</span> (line <span class="line-number">101</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the analyzer name used to analyze the query string.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			analyzer
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$analyzer</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$analyzer</span><span class="var-description">: Analyzer to use.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodanalyzeWildcard" id="analyzeWildcard"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">analyzeWildcard</span> (line <span class="line-number">89</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Enable best effort analysis of wildcard terms.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			analyzeWildcard
+		</span>
+					([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bool</span><span class="var-description">: Defaults to true.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodautoGeneratePhraseQueries" id="autoGeneratePhraseQueries"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">autoGeneratePhraseQueries</span> (line <span class="line-number">113</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Auitogenerate phrase queries.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			autoGeneratePhraseQueries
+		</span>
+					([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bool</span><span class="var-description">: Defaults to true.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodbool" id="bool"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">bool</span> (line <span class="line-number">132</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Bool Query.</p>
+<p class="description"><p>A query that matches documents matching boolean combinations of other queries.</p><p>The bool query maps to Lucene BooleanQuery.</p><p>It is built using one or more boolean clauses, each clause with a typed  occurrence.</p><p>The occurrence types are: must, should, must_not.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			bool
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodboolClose" id="boolClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">boolClose</span> (line <span class="line-number">144</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'bool' block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			boolClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodboost" id="boost"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">boost</span> (line <span class="line-number">156</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the boost value of the query.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			boost
+		</span>
+					([<span class="var-type">float</span>&nbsp;<span class="var-name">$boost</span> = <span class="var-default">1.0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">float</span>
+				<span class="var-name">$boost</span><span class="var-description">: Defaults to 1.0.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodclose" id="close"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">close</span> (line <span class="line-number">166</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a previously opened brace.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			close
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodconstantScore" id="constantScore"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">constantScore</span> (line <span class="line-number">183</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constant Score Query.</p>
+<p class="description"><p>A query that wraps a filter or another query and simply returns a constant  score equal to the query boost for every document in the filter.</p><p>Maps to Lucene ConstantScoreQuery.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			constantScore
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodconstantScoreClose" id="constantScoreClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">constantScoreClose</span> (line <span class="line-number">195</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'constant_score' block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			constantScoreClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methoddefaultField" id="defaultField"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">defaultField</span> (line <span class="line-number">207</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The default field for query terms if no prefix field is specified.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			defaultField
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$field</span> = <span class="var-default">'_all'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$field</span><span class="var-description">: Defaults to _all.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddefaultOperator" id="defaultOperator"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">defaultOperator</span> (line <span class="line-number">223</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The default operator used if no explicit operator is specified.</p>
+<p class="description"><p>For example, with a default operator of OR, the query &quot;capital of Hungary&quot;  is translated to &quot;capital OR of OR Hungary&quot;, and with default operator of  AND, the same query is translated to &quot;capital AND of AND Hungary&quot;.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			defaultOperator
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$operator</span> = <span class="var-default">'OR'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$operator</span><span class="var-description">: Defaults to OR.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddisMax" id="disMax"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">disMax</span> (line <span class="line-number">238</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Dis Max Query.</p>
+<p class="description"><p>A query that generates the union of documents produced by its subqueries,  and that scores each document with the maximum score for that document as  produced by any subquery, plus a tie breaking increment for any additional  matching subqueries.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			disMax
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methoddisMaxClose" id="disMaxClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">disMaxClose</span> (line <span class="line-number">250</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'dis_max' block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			disMaxClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodenablePositionIncrements" id="enablePositionIncrements"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">enablePositionIncrements</span> (line <span class="line-number">262</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Enable position increments in result queries.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			enablePositionIncrements
+		</span>
+					([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bool</span><span class="var-description">: Defaults to true.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexplain" id="explain"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">explain</span> (line <span class="line-number">274</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Enables explanation for each hit on how its score was computed.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			explain
+		</span>
+					([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$value</span><span class="var-description">: Turn on / off explain.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfacets" id="facets"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">facets</span> (line <span class="line-number">292</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Open 'facets' block.</p>
+<p class="description"><p>Facets provide aggregated data based on a search query.</p><p>In the simple case, a facet can return facet counts for various facet  values for a specific field.</p><p>ElasticSearch supports more advanced facet implementations, such as  statistical or date histogram facets.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			facets
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodfacetsClose" id="facetsClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">facetsClose</span> (line <span class="line-number">304</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a facets block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			facetsClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodfield" id="field"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">field</span> (line <span class="line-number">317</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a specific field / value entry.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			field
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Field to add.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Value to set.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfieldClose" id="fieldClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">fieldClose</span> (line <span class="line-number">348</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a field block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.  Passed parameters will be ignored, however they can be useful in source for  seeing which field is being closed.</p><p>Elastica_Query_Builder::factory()      -&gt;query()      -&gt;range()      -&gt;fieldOpen('created')      -&gt;gte('2011-07-18 00:00:00')      -&gt;lt('2011-07-19 00:00:00')      -&gt;fieldClose('created')      -&gt;rangeClose()      -&gt;queryClose();</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			fieldClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodfieldOpen" id="fieldOpen"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">fieldOpen</span> (line <span class="line-number">360</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Open a node for the specified name.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			fieldOpen
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Field name.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfields" id="fields"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">fields</span> (line <span class="line-number">375</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Explicitly define fields to return.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			fields
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$fields</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$fields</span><span class="var-description">: Array of fields to return.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfilter" id="filter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">filter</span> (line <span class="line-number">394</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Open a 'filter' block.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			filter
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodfilterClose" id="filterClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">filterClose</span> (line <span class="line-number">404</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a filter block.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			filterClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodfilteredQuery" id="filteredQuery"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">filteredQuery</span> (line <span class="line-number">414</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Query.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			filteredQuery
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodfilteredQueryClose" id="filteredQueryClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">filteredQueryClose</span> (line <span class="line-number">426</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'filtered_query' block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			filteredQueryClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodfrom" id="from"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">from</span> (line <span class="line-number">438</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the from parameter (offset).</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			from
+		</span>
+					([<span class="var-type">integer</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$value</span><span class="var-description">: Result number to start from.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfuzzyMinSim" id="fuzzyMinSim"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">fuzzyMinSim</span> (line <span class="line-number">450</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the minimum similarity for fuzzy queries.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			fuzzyMinSim
+		</span>
+					([<span class="var-type">float</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">0.5</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">float</span>
+				<span class="var-name">$value</span><span class="var-description">: Defaults to 0.5.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfuzzyPrefixLength" id="fuzzyPrefixLength"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">fuzzyPrefixLength</span> (line <span class="line-number">462</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the prefix length for fuzzy queries.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			fuzzyPrefixLength
+		</span>
+					([<span class="var-type">integer</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$value</span><span class="var-description">: Defaults to 0.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgt" id="gt"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">gt</span> (line <span class="line-number">476</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a greater than (gt) clause.</p>
+<p class="description"><p>Used in range blocks.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			gt
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Value to be gt.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgte" id="gte"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">gte</span> (line <span class="line-number">490</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a greater than or equal to (lt) clause.</p>
+<p class="description"><p>Used in range blocks.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			gte
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Value to be gte to.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlowercaseExpandedTerms" id="lowercaseExpandedTerms"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">lowercaseExpandedTerms</span> (line <span class="line-number">502</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Automatically lower-case terms of wildcard, prefix, fuzzy, and range queries.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			lowercaseExpandedTerms
+		</span>
+					([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bool</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bool</span><span class="var-description">: Defaults to true.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlt" id="lt"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">lt</span> (line <span class="line-number">516</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a less than (lt) clause.</p>
+<p class="description"><p>Used in range blocks.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			lt
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Value to be lt.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlte" id="lte"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">lte</span> (line <span class="line-number">530</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a less than or equal to (lte) clause.</p>
+<p class="description"><p>Used in range blocks.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			lte
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Value to be lte to.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodmatchAll" id="matchAll"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">matchAll</span> (line <span class="line-number">546</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Match All Query.</p>
+<p class="description"><p>A query that matches all documents.</p><p>Maps to Lucene MatchAllDocsQuery.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			matchAll
+		</span>
+					([<span class="var-type">float</span>&nbsp;<span class="var-name">$boost</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">float</span>
+				<span class="var-name">$boost</span><span class="var-description">: Boost to use.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodminimumShouldMatch" id="minimumShouldMatch"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">minimumShouldMatch</span> (line <span class="line-number">565</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The minimum number of should clauses to match.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			minimumShouldMatch
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$minimum</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$minimum</span><span class="var-description">: Minimum number that should match.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodmust" id="must"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">must</span> (line <span class="line-number">575</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The clause (query) must appear in matching documents.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			must
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodmustClose" id="mustClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">mustClose</span> (line <span class="line-number">587</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'must' block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			mustClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodmustNot" id="mustNot"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">mustNot</span> (line <span class="line-number">600</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The clause (query) must not appear in the matching documents.</p>
+<p class="description"><p>Note that it is not possible to search on documents that only consists of  a must_not clauses.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			mustNot
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodmustNotClose" id="mustNotClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">mustNotClose</span> (line <span class="line-number">612</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'must_not' block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			mustNotClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodopen" id="open"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">open</span> (line <span class="line-number">622</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add an opening brace.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			open
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodphraseSlop" id="phraseSlop"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">phraseSlop</span> (line <span class="line-number">638</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the default slop for phrases.</p>
+<p class="description"><p>If zero, then exact phrase matches are required.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			phraseSlop
+		</span>
+					([<span class="var-type">integer</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$value</span><span class="var-description">: Defaults to 0.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodprefix" id="prefix"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">prefix</span> (line <span class="line-number">648</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Query.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			prefix
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodprefixClose" id="prefixClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">prefixClose</span> (line <span class="line-number">660</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'prefix' block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			prefixClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodqueries" id="queries"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">queries</span> (line <span class="line-number">672</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Queries to run within a dis_max query.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			queries
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$queries</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$queries</span><span class="var-description">: Array of queries.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodquery" id="query"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">query</span> (line <span class="line-number">691</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Open a query block.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			query
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodqueryClose" id="queryClose"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">queryClose</span> (line <span class="line-number">703</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a query block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			queryClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodqueryString" id="queryString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">queryString</span> (line <span class="line-number">715</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Query String Query.</p>
+<p class="description"><p>A query that uses a query parser in order to parse its content</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			queryString
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodqueryStringClose" id="queryStringClose"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">queryStringClose</span> (line <span class="line-number">727</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'query_string' block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			queryStringClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodrange" id="range"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">range</span> (line <span class="line-number">737</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Open a range block.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			range
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodrangeClose" id="rangeClose"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">rangeClose</span> (line <span class="line-number">749</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a range block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			rangeClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodshould" id="should"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">should</span> (line <span class="line-number">762</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The clause (query) should appear in the matching document.</p>
+<p class="description"><p>A boolean query with no must clauses, one or more should clauses must  match a document.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			should
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodshouldClose" id="shouldClose"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">shouldClose</span> (line <span class="line-number">774</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'should' block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			shouldClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsize" id="size"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">size</span> (line <span class="line-number">786</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the size parameter (number of records to return).</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			size
+		</span>
+					([<span class="var-type">integer</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">10</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$value</span><span class="var-description">: Number of records to return.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsort" id="sort"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">sort</span> (line <span class="line-number">796</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Allows to add one or more sort on specific fields.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			sort
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsortClose" id="sortClose"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">sortClose</span> (line <span class="line-number">808</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a sort block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			sortClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsortField" id="sortField"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">sortField</span> (line <span class="line-number">821</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add a field to sort on.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			sortField
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$reverse</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Field to sort.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$reverse</span><span class="var-description">: Reverse direction.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodterm" id="term"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">term</span> (line <span class="line-number">840</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Term Query.</p>
+<p class="description"><p>Matches documents that have fields that contain a term (not analyzed).</p><p>The term query maps to Lucene TermQuery.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			term
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtermClose" id="termClose"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">termClose</span> (line <span class="line-number">852</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'term' block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			termClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtextPhrase" id="textPhrase"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">textPhrase</span> (line <span class="line-number">862</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Open a 'text_phrase' block.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			textPhrase
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtextPhraseClose" id="textPhraseClose"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">textPhraseClose</span> (line <span class="line-number">872</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'text_phrase' block.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			textPhraseClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtieBreaker" id="tieBreaker"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">tieBreaker</span> (line <span class="line-number">884</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">When using dis_max, the disjunction max tie breaker.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			tieBreaker
+		</span>
+					(<span class="var-type">float</span>&nbsp;<span class="var-name">$multiplier</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">float</span>
+				<span class="var-name">$multiplier</span><span class="var-description">: Multiplier to use.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtoArray" id="toArray"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">toArray</span> (line <span class="line-number">58</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			toArray
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../Elastica/Elastica_Param.html#methodtoArray">Elastica_Param::toArray()</a></dt>
+						<dd>Converts the params to an array. A default implementation exist to create  the an array out of the class name (last part of the class name)  and the params</dd>
+					</dl>
+			
+	</div>
+<a name="methodwildcard" id="wildcard"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">wildcard</span> (line <span class="line-number">894</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Query.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			wildcard
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodwildcardClose" id="wildcardClose"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">wildcardClose</span> (line <span class="line-number">906</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close a 'wildcard' block.</p>
+<p class="description"><p>Alias of close() for ease of reading in source.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Elastica/Elastica_Query_Builder.html">Elastica_Query_Builder</a></span>
+		<span class="method-name">
+			wildcardClose
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method__toString" id="__toString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">__toString</span> (line <span class="line-number">50</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Output the query string.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			__toString
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../Elastica/Elastica_Param.html">Elastica_Param</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodaddParam">Elastica_Param::addParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodgetParam">Elastica_Param::getParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodgetParams">Elastica_Param::getParams()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodsetParam">Elastica_Param::setParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodsetParams">Elastica_Param::setParams()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodtoArray">Elastica_Param::toArray()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#method_setRawParam">Elastica_Param::_setRawParam()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon, 05 Sep 2011 12:23:01 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
