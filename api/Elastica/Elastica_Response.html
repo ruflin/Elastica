@@ -51,13 +51,17 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																<div class="var-title">
+																																																								<div class="var-title">
 					<span class="var-type">mixed</span>
 					<a href="#$_error" title="details" class="var-name">$_error</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
 					<a href="#$_queryTime" title="details" class="var-name">$_queryTime</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_response" title="details" class="var-name">$_response</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
@@ -83,7 +87,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																				
+																																																																																				
 												<div class="method-definition">
 											<span class="method-result">Elastica_Response</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -95,6 +99,11 @@
 										()
 									</div>
 																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#getEngineTime" title="details" class="method-name">getEngineTime</a>
+										()
+									</div>
+																<div class="method-definition">
 											<span class="method-result">string</span>
 										<a href="#getError" title="details" class="method-name">getError</a>
 										()
@@ -102,6 +111,11 @@
 																<div class="method-definition">
 											<span class="method-result">float</span>
 										<a href="#getQueryTime" title="details" class="method-name">getQueryTime</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getShardsStatistics" title="details" class="method-name">getShardsStatistics</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -142,7 +156,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$_error" id="$_error"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -163,13 +177,34 @@
 
 </div>
 <a name="var$_queryTime" id="$_queryTime"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$_queryTime</span>
 			 = <span class="var-default"> null</span>			(line <span class="line-number">13</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_response" id="$_response"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_response</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">17</span>)
 		</span>
 	</div>
 
@@ -245,7 +280,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">21</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">22</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -273,7 +308,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getData</span> (line <span class="line-number">53</span>)
+		<span class="method-title">getData</span> (line <span class="line-number">54</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -293,11 +328,34 @@
 		
 			
 	</div>
-<a name="methodgetError" id="getError"><!-- --></a>
+<a name="methodgetEngineTime" id="getEngineTime"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getError</span> (line <span class="line-number">28</span>)
+		<span class="method-title">getEngineTime</span> (line <span class="line-number">127</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			getEngineTime
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetError" id="getError"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getError</span> (line <span class="line-number">29</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -318,10 +376,10 @@
 			
 	</div>
 <a name="methodgetQueryTime" id="getQueryTime"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getQueryTime</span> (line <span class="line-number">104</span>)
+		<span class="method-title">getQueryTime</span> (line <span class="line-number">108</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -342,11 +400,35 @@
 		
 			
 	</div>
+<a name="methodgetShardsStatistics" id="getShardsStatistics"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getShardsStatistics</span> (line <span class="line-number">143</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the _shard statistics for the response</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getShardsStatistics
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
 <a name="methodgetTransferInfo" id="getTransferInfo"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTransferInfo</span> (line <span class="line-number">83</span>)
+		<span class="method-title">getTransferInfo</span> (line <span class="line-number">87</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -371,7 +453,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">hasError</span> (line <span class="line-number">41</span>)
+		<span class="method-title">hasError</span> (line <span class="line-number">42</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -395,7 +477,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">setQueryTime</span> (line <span class="line-number">114</span>)
+		<span class="method-title">setQueryTime</span> (line <span class="line-number">118</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -425,7 +507,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">setTransferInfo</span> (line <span class="line-number">94</span>)
+		<span class="method-title">setTransferInfo</span> (line <span class="line-number">98</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -457,7 +539,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 15 Jul 2011 05:09:46 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 05 Sep 2011 12:23:04 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

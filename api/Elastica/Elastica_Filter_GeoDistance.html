@@ -25,16 +25,18 @@
 <p class="short-description">Geo distance filter</p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Nicolas Ruflin &lt;<a href="mailto:spam@ruflin.com">spam@ruflin.com</a>&gt;</li>
-				<li><span class="field">link:</span> <a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/geo_distance_filter/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/geo_distance_filter/</a></li>
+				<li><span class="field">link:</span> <a href="http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-filter.html">http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-filter.html</a></li>
 			</ul>
 		<p class="notes">
 			Located in <a class="field" href="_Filter---GeoDistance.php.html">/Filter/GeoDistance.php</a> (line <span class="field">10</span>)
 		</p>
 		
 				
-		<pre><a href="../Elastica/Elastica_Filter_Abstract.html">Elastica_Filter_Abstract</a>
+		<pre><a href="../Elastica/Elastica_Param.html">Elastica_Param</a>
    |
-   --Elastica_Filter_GeoDistance</pre>
+   --<a href="../Elastica/Elastica_Filter_Abstract.html">Elastica_Filter_Abstract</a>
+      |
+      --Elastica_Filter_GeoDistance</pre>
 	
 			</div>
 </div>
@@ -129,7 +131,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$_distance" id="$_distance"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -150,7 +152,7 @@
 
 </div>
 <a name="var$_key" id="$_key"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -171,7 +173,7 @@
 
 </div>
 <a name="var$_latitude" id="$_latitude"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -192,7 +194,7 @@
 
 </div>
 <a name="var$_longitude" id="$_longitude"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -212,7 +214,18 @@
 		
 
 </div>
-						
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../Elastica/Elastica_Param.html">Elastica_Param</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../Elastica/Elastica_Param.html#var$_params">Elastica_Param::$_params</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Elastica/Elastica_Param.html#var$_rawParams">Elastica_Param::$_rawParams</a></span><br>
+							</span>
+											</blockquote> 
+										
 		</div>
 	</div>
 	
@@ -229,7 +242,7 @@
 			<A NAME='method_detail'></A>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">Constructor __construct</span> (line <span class="line-number">25</span>)
@@ -267,7 +280,7 @@
 			
 	</div>
 <a name="methodsetDistance" id="setDistance"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">setDistance</span> (line <span class="line-number">38</span>)
@@ -297,7 +310,7 @@
 			
 	</div>
 <a name="methodsetLatitude" id="setLatitude"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">setLatitude</span> (line <span class="line-number">50</span>)
@@ -327,7 +340,7 @@
 			
 	</div>
 <a name="methodsetLongitude" id="setLongitude"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">setLongitude</span> (line <span class="line-number">62</span>)
@@ -357,17 +370,17 @@
 			
 	</div>
 <a name="methodtoArray" id="toArray"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">toArray</span> (line <span class="line-number">72</span>)
+		<span class="method-title">toArray</span> (line <span class="line-number">73</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Convers filter o array</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> Current object</li>
-				<li><span class="field">see:</span> <a href="../Elastica/Elastica_Filter_Abstract.html#methodtoArray">Elastica_Filter_Abstract::toArray()</a></li>
+				<li><span class="field">see:</span> Elastica_Filter_Abstract::toArray()</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -383,8 +396,8 @@
 			<hr class="separator" />
 		<div class="notes">Redefinition of:</div>
 		<dl>
-			<dt><a href="../Elastica/Elastica_Filter_Abstract.html#methodtoArray">Elastica_Filter_Abstract::toArray()</a></dt>
-						<dd>Converts filter to array.</dd>
+			<dt><a href="../Elastica/Elastica_Param.html#methodtoArray">Elastica_Param::toArray()</a></dt>
+						<dd>Converts the params to an array. A default implementation exist to create  the an array out of the class name (last part of the class name)  and the params</dd>
 					</dl>
 			
 	</div>
@@ -393,7 +406,18 @@
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../Elastica/Elastica_Filter_Abstract.html">Elastica_Filter_Abstract</a></span></p>
 					<blockquote>
-													<span class="method-name"><a href="../Elastica/Elastica_Filter_Abstract.html#methodtoArray">Elastica_Filter_Abstract::toArray()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Filter_Abstract.html#methodsetCached">Elastica_Filter_Abstract::setCached()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../Elastica/Elastica_Param.html">Elastica_Param</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodaddParam">Elastica_Param::addParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodgetParam">Elastica_Param::getParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodgetParams">Elastica_Param::getParams()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodsetParam">Elastica_Param::setParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodsetParams">Elastica_Param::setParams()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodtoArray">Elastica_Param::toArray()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#method_setRawParam">Elastica_Param::_setRawParam()</a></span><br>
 											</blockquote>
 										
 		</div>
@@ -401,7 +425,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 15 Jul 2011 05:09:44 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 05 Sep 2011 12:23:02 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

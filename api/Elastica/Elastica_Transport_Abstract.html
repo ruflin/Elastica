@@ -55,15 +55,15 @@
 					<th class="class-table-header">Description</th>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../Elastica/Elastica_Transport_Http.html">Elastica_Transport_Http</a></td>
-					<td>
-											Elastica Http Transport object
-										</td>
-				</tr>
-								<tr>
 					<td style="padding-right: 2em"><a href="../Elastica/Elastica_Transport_Memcache.html">Elastica_Transport_Memcache</a></td>
 					<td>
 											Elastica Memcache Transport object
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../Elastica/Elastica_Transport_Http.html">Elastica_Transport_Http</a></td>
+					<td>
+											Elastica Http Transport object
 										</td>
 				</tr>
 							</table>
@@ -121,7 +121,7 @@
 												<div class="method-definition">
 											<span class="method-result">Elastica_Transport_Abstract</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type"><a href="../Elastica/Elastica_Request.html">Elastica_Request</a></span>&nbsp;<span class="var-name">$request</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
+											(<span class="var-type"><a href="../Elastica/Elastica_Request.html">Elastica_Request</a></span>&nbsp;<span class="var-name">$request</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result"><a href="../Elastica/Elastica_Response.html">Elastica_Response</a></span>
@@ -256,7 +256,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">23</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">21</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -269,22 +269,13 @@
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type"><a href="../Elastica/Elastica_Request.html">Elastica_Request</a></span>&nbsp;<span class="var-name">$request</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
+					(<span class="var-type"><a href="../Elastica/Elastica_Request.html">Elastica_Request</a></span>&nbsp;<span class="var-name">$request</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$path</span><span class="var-description">: Request path</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$method</span><span class="var-description">: Request method (use const's)</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$data</span><span class="var-description">: Data array</span>			</li>
-					<li>
 				<span class="var-type"><a href="../Elastica/Elastica_Request.html">Elastica_Request</a></span>
-				<span class="var-name">$request</span>			</li>
+				<span class="var-name">$request</span><span class="var-description">: Request object</span>			</li>
 				</ul>
 		
 			
@@ -293,7 +284,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">exec</span> (line <span class="line-number">43</span>)
+		<span class="method-title">exec</span> (line <span class="line-number">41</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -326,11 +317,11 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../Elastica/Elastica_Transport_Http.html#methodexec">Elastica_Transport_Http::exec()</a>
+				<a href="../Elastica/Elastica_Transport_Memcache.html#methodexec">Elastica_Transport_Memcache::exec()</a>
 								: Makes calls to the elasticsearch server
 							</li>
 					<li>
-				<a href="../Elastica/Elastica_Transport_Memcache.html#methodexec">Elastica_Transport_Memcache::exec()</a>
+				<a href="../Elastica/Elastica_Transport_Http.html#methodexec">Elastica_Transport_Http::exec()</a>
 								: Makes calls to the elasticsearch server
 							</li>
 				</ul>
@@ -339,7 +330,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getRequest</span> (line <span class="line-number">32</span>)
+		<span class="method-title">getRequest</span> (line <span class="line-number">30</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -366,7 +357,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 15 Jul 2011 05:09:43 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 05 Sep 2011 12:23:00 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

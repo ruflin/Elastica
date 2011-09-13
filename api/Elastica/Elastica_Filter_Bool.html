@@ -33,9 +33,11 @@
 		</p>
 		
 				
-		<pre><a href="../Elastica/Elastica_Filter_Abstract.html">Elastica_Filter_Abstract</a>
+		<pre><a href="../Elastica/Elastica_Param.html">Elastica_Param</a>
    |
-   --Elastica_Filter_Bool</pre>
+   --<a href="../Elastica/Elastica_Filter_Abstract.html">Elastica_Filter_Abstract</a>
+      |
+      --Elastica_Filter_Bool</pre>
 	
 			</div>
 </div>
@@ -140,7 +142,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$_minimumNumberShouldMatch" id="$_minimumNumberShouldMatch"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -161,7 +163,7 @@
 
 </div>
 <a name="var$_must" id="$_must"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -182,7 +184,7 @@
 
 </div>
 <a name="var$_mustNot" id="$_mustNot"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -203,7 +205,7 @@
 
 </div>
 <a name="var$_should" id="$_should"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -223,7 +225,18 @@
 		
 
 </div>
-						
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../Elastica/Elastica_Param.html">Elastica_Param</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../Elastica/Elastica_Param.html#var$_params">Elastica_Param::$_params</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../Elastica/Elastica_Param.html#var$_rawParams">Elastica_Param::$_rawParams</a></span><br>
+							</span>
+											</blockquote> 
+										
 		</div>
 	</div>
 	
@@ -240,7 +253,7 @@
 			<A NAME='method_detail'></A>
 
 <a name="methodaddMust" id="addMust"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">addMust</span> (line <span class="line-number">35</span>)
@@ -270,7 +283,7 @@
 			
 	</div>
 <a name="methodaddMustNot" id="addMustNot"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">addMustNot</span> (line <span class="line-number">45</span>)
@@ -300,7 +313,7 @@
 			
 	</div>
 <a name="methodaddShould" id="addShould"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">addShould</span> (line <span class="line-number">25</span>)
@@ -330,7 +343,7 @@
 			
 	</div>
 <a name="methodsetBoost" id="setBoost"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">setBoost</span> (line <span class="line-number">101</span>)
@@ -360,7 +373,7 @@
 			
 	</div>
 <a name="methodsetMinimumNumberShouldMatch" id="setMinimumNumberShouldMatch"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">setMinimumNumberShouldMatch</span> (line <span class="line-number">112</span>)
@@ -390,7 +403,7 @@
 			
 	</div>
 <a name="methodtoArray" id="toArray"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">toArray</span> (line <span class="line-number">76</span>)
@@ -400,7 +413,7 @@
 <p class="short-description">Converts bool filter to array</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> Filter array</li>
-				<li><span class="field">see:</span> <a href="../Elastica/Elastica_Filter_Abstract.html#methodtoArray">Elastica_Filter_Abstract::toArray()</a></li>
+				<li><span class="field">see:</span> Elastica_Filter_Abstract::toArray()</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -416,13 +429,13 @@
 			<hr class="separator" />
 		<div class="notes">Redefinition of:</div>
 		<dl>
-			<dt><a href="../Elastica/Elastica_Filter_Abstract.html#methodtoArray">Elastica_Filter_Abstract::toArray()</a></dt>
-						<dd>Converts filter to array.</dd>
+			<dt><a href="../Elastica/Elastica_Param.html#methodtoArray">Elastica_Param::toArray()</a></dt>
+						<dd>Converts the params to an array. A default implementation exist to create  the an array out of the class name (last part of the class name)  and the params</dd>
 					</dl>
 			
 	</div>
 <a name="method_addFilter" id="_addFilter"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">_addFilter</span> (line <span class="line-number">56</span>)
@@ -459,7 +472,18 @@
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../Elastica/Elastica_Filter_Abstract.html">Elastica_Filter_Abstract</a></span></p>
 					<blockquote>
-													<span class="method-name"><a href="../Elastica/Elastica_Filter_Abstract.html#methodtoArray">Elastica_Filter_Abstract::toArray()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Filter_Abstract.html#methodsetCached">Elastica_Filter_Abstract::setCached()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../Elastica/Elastica_Param.html">Elastica_Param</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodaddParam">Elastica_Param::addParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodgetParam">Elastica_Param::getParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodgetParams">Elastica_Param::getParams()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodsetParam">Elastica_Param::setParam()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodsetParams">Elastica_Param::setParams()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#methodtoArray">Elastica_Param::toArray()</a></span><br>
+													<span class="method-name"><a href="../Elastica/Elastica_Param.html#method_setRawParam">Elastica_Param::_setRawParam()</a></span><br>
 											</blockquote>
 										
 		</div>
@@ -467,7 +491,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 15 Jul 2011 05:09:43 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 05 Sep 2011 12:23:00 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

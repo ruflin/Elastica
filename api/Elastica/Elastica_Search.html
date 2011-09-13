@@ -95,9 +95,9 @@
 											(<span class="var-type"><a href="../Elastica/Elastica_Index.html">Elastica_Index</a>|string</span>&nbsp;<span class="var-name">$index</span>)
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../Elastica/Elastica_Search.html">Elastica_Search</a></span>
 										<a href="#addType" title="details" class="method-name">addType</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$type</span>)
+											(<span class="var-type"><a href="../Elastica/Elastica_Type.html">Elastica_Type</a>|string</span>&nbsp;<span class="var-name">$type</span>)
 									</div>
 																								<div class="method-definition">
 											<span class="method-result"><a href="../Elastica/Elastica_Client.html">Elastica_Client</a></span>
@@ -110,19 +110,19 @@
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">string</span>
 										<a href="#getPath" title="details" class="method-name">getPath</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">string[]</span>
 										<a href="#getTypes" title="details" class="method-name">getTypes</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../Elastica/Elastica_ResultSet.html">Elastica_ResultSet</a></span>
 										<a href="#search" title="details" class="method-name">search</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$query</span>)
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$query</span>)
 									</div>
 								</div>
 		</div>
@@ -142,7 +142,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$_client" id="$_client"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -163,7 +163,7 @@
 
 </div>
 <a name="var$_indices" id="$_indices"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -184,7 +184,7 @@
 
 </div>
 <a name="var$_types" id="$_types"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -220,13 +220,14 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodcreate" id="create"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method create</span> (line <span class="line-number">80</span>)
+		<span class="method-title">static method create</span> (line <span class="line-number">95</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates new search object</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -250,7 +251,7 @@
 	</div>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">Constructor __construct</span> (line <span class="line-number">24</span>)
@@ -279,7 +280,7 @@
 			
 	</div>
 <a name="methodaddIndex" id="addIndex"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">addIndex</span> (line <span class="line-number">34</span>)
@@ -309,38 +310,41 @@
 			
 	</div>
 <a name="methodaddType" id="addType"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">addType</span> (line <span class="line-number">48</span>)
+		<span class="method-title">addType</span> (line <span class="line-number">55</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a type to the current search</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> Search object</li>
+				<li><span class="field">throws:</span> Elastica_Exception_Invalid</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../Elastica/Elastica_Search.html">Elastica_Search</a></span>
 		<span class="method-name">
 			addType
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$type</span>)
+					(<span class="var-type"><a href="../Elastica/Elastica_Type.html">Elastica_Type</a>|string</span>&nbsp;<span class="var-name">$type</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$type</span>			</li>
+				<span class="var-type"><a href="../Elastica/Elastica_Type.html">Elastica_Type</a>|string</span>
+				<span class="var-name">$type</span><span class="var-description">: Type name or object</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodgetClient" id="getClient"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getClient</span> (line <span class="line-number">65</span>)
+		<span class="method-title">getClient</span> (line <span class="line-number">72</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -361,10 +365,10 @@
 			
 	</div>
 <a name="methodgetIndices" id="getIndices"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getIndices</span> (line <span class="line-number">72</span>)
+		<span class="method-title">getIndices</span> (line <span class="line-number">79</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -385,19 +389,21 @@
 			
 	</div>
 <a name="methodgetPath" id="getPath"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getPath</span> (line <span class="line-number">87</span>)
+		<span class="method-title">getPath</span> (line <span class="line-number">106</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Combines indices and types to the search request path</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> Search path</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
 			getPath
 		</span>
@@ -408,19 +414,20 @@
 			
 	</div>
 <a name="methodgetTypes" id="getTypes"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTypes</span> (line <span class="line-number">76</span>)
+		<span class="method-title">getTypes</span> (line <span class="line-number">86</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 	<ul class="tags">
+				<li><span class="field">return:</span> List of types</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">string[]</span>
 		<span class="method-name">
 			getTypes
 		</span>
@@ -431,28 +438,29 @@
 			
 	</div>
 <a name="methodsearch" id="search"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">search</span> (line <span class="line-number">109</span>)
+		<span class="method-title">search</span> (line <span class="line-number">134</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Search in the set indices, types</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../Elastica/Elastica_ResultSet.html">Elastica_ResultSet</a></span>
 		<span class="method-name">
 			search
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$query</span>)
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$query</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
+				<span class="var-type">mixed</span>
 				<span class="var-name">$query</span>			</li>
 				</ul>
 		
@@ -464,7 +472,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 15 Jul 2011 05:09:46 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Mon, 05 Sep 2011 12:23:05 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
