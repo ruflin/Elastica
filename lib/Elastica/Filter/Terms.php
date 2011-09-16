@@ -48,20 +48,6 @@ class Elastica_Filter_Terms extends Elastica_Filter_Abstract
 	}
 
 	/**
-	 * Sets a param
-	 *
-	 * This function can be used to set any kind of parameter
-	 *
-	 * @param string $key Key to set
-	 * @param array|mixed $value Values for key to set
-	 * @return Elastica_Filter_Abstract Filter object
-	 */
-	public function setParam($key, $value) {
-		$this->_params[$key] = $value;
-		return $this;
-	}
-
-	/**
 	 * Convers object to an arrray
 	 *
 	 * @see Elastica_Filter_Abstract::toArray()
