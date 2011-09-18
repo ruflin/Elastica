@@ -92,6 +92,10 @@ class Elastica_Type implements Elastica_Searchable
 
 		$result = $this->request($path, Elastica_Request::GET)->getData();
 
+		if (empty($result['exists'])) {
+			throw new Elastica_Exception_NotFound('id ' . $id . ' not found');
+		}
+
 		$document = new Elastica_Document($id, $result['_source'], $this->getType(),  $this->getIndex());
 		$document->setVersion($result['_version']);
 		return $document;

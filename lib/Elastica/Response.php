@@ -128,7 +128,7 @@ class Elastica_Response {
 		$data = $this->getData();
 
 		if (!isset($data['took'])) {
-			throw new Elastica_Exception_ExpectedFieldNotFound("Unable to find the field [took]from the response");
+			throw new Elastica_Exception_NotFound("Unable to find the field [took]from the response");
 		}
 
 		return  $data['took'];
@@ -144,7 +144,7 @@ class Elastica_Response {
 		$data = $this->getData();
 
 		if (!isset($data['_shards'])) {
-			throw new Elastica_Exception_ExpectedFieldNotFound("Unable to find the field [_shards] from the response");
+			throw new Elastica_Exception_NotFound("Unable to find the field [_shards] from the response");
 		}
 
 		return $data['_shards'];

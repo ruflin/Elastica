@@ -137,4 +137,23 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
 		$resultSet = $type->search('john');
 		$this->assertEquals(1, $resultSet->count());
 	}
+
+	public function testGetDocumentNotExist() {
+		// Creates a new index 'xodoa' and a type 'user' inside this index
+		$client = new Elastica_Client();
+		$index = new Elastica_Index($client, 'test');
+		$index->create(array(), true);
+		$type = new Elastica_Type($index, 'test');
+		$type->addDocument(new Elastica_Document(1, array('name' => 'ruflin')));
+		$index->refresh();
+
+		$type->getDocument(1);
+
+		try {
+			$type->getDocument(2);
+			$this->fail('Should throw exceptoin as doc does not exist');
+		} catch (Elastica_Exception_NotFound $e) {
+			$this->assertTrue(true);
+		}
+	}
 }

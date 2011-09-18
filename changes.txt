@@ -1,5 +1,8 @@
 CHANGES
 
+2011-09-18
+- Elastica_Exception_ExpectedFieldNotFound renamed to Elastica_Exception_NotFound
+
 2011-08-25
 - Https transport layer added
 
