@@ -10,6 +10,7 @@
  */
 class Elastica_Query_QueryString extends Elastica_Query_Abstract
 {
+	protected $_queryString = '';
 
 	/**
 	 * Creates query string object. Calls setQuery with argument
@@ -36,7 +37,9 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	}
 
 	/**
-	 * Sets a new query string for the object
+	 * Sets the default operator AND or OR
+	 *
+	 * If no operator is set, OR is chosen
 	 *
 	 * @deprecated
 	 * @param string $queryString Query string
@@ -198,6 +201,9 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	 * @return Elastica_Query_QueryString Current object
 	 */
 	public function setFields(array $fields) {
+		if (!is_array($fields)) {
+			throw new Elastica_Exception_Invalid('Parameter has to be an array');
+		}
 		return $this->setParam('fields', $fields);
 	}
 	
@@ -222,4 +228,11 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	public function setTieBraker($tieBreaker = 0) {
 		return $this->setParam('tie_breaker', (int) $tieBreaker);
 	}
+
+	public function toArray() {
+		return array(
+			'query_string' => array_merge(array('query' => $this->_queryString), $this->getParams()),
+		);
+	}
 }
+
