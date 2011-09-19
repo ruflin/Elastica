@@ -68,7 +68,7 @@ class Elastica_ResultSet implements Iterator, Countable
 	 */
 	public function getFacets() {
 		$data = $this->_response->getData();
-		return $data['facets'];
+		return isset($data['facets']) ? $data['facets'] : array();
 	}
 
 	/**
