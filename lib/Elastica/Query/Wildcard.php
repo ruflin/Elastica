@@ -12,12 +12,14 @@ class Elastica_Query_Wildcard extends Elastica_Query_Abstract
 {
 
 	/**
-	 * @param string $key Wildcard key
-	 * @param string $value Wildcard value
+	 * @param string $key OPTIONAL Wildcard key
+	 * @param string $value OPTIONAL Wildcard value
 	 * @param float $boost OPTIONAL Boost value (default = 1)
 	 */
-	public function __construct($key, $value, $boost = 1.0) {
-		$this->setValue($key, $value, $boost);
+	public function __construct($key = '', $value = null, $boost = 1.0) {
+		if (!empty($key)) {
+			$this->setValue($key, $value, $boost);
+		}
 	}
 
 	/**

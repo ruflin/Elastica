@@ -9,6 +9,11 @@ class Elastica_Query_WildcardTest extends PHPUnit_Framework_TestCase
 	public function tearDown() {
 	}
 
+	public function testConstructEmpty() {
+		$wildcard = new Elastica_Query_Wildcard();
+		$this->assertEmpty($wildcard->getParams());
+	}
+
 	public function testToArray() {
 		$key = 'name';
 		$value = 'Ru*lin';
