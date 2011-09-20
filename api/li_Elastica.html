@@ -31,8 +31,8 @@
 					   										   						<dd><a href='Elastica/Elastica_Exception_Abstract.html' target='right'>Elastica_Exception_Abstract</a></dd>
 					   										   						<dd><a href='Elastica/Elastica_Exception_BulkResponse.html' target='right'>Elastica_Exception_BulkResponse</a></dd>
 					   										   						<dd><a href='Elastica/Elastica_Exception_Client.html' target='right'>Elastica_Exception_Client</a></dd>
-					   										   						<dd><a href='Elastica/Elastica_Exception_ExpectedFieldNotFound.html' target='right'>Elastica_Exception_ExpectedFieldNotFound</a></dd>
 					   										   						<dd><a href='Elastica/Elastica_Exception_Invalid.html' target='right'>Elastica_Exception_Invalid</a></dd>
+					   										   						<dd><a href='Elastica/Elastica_Exception_NotFound.html' target='right'>Elastica_Exception_NotFound</a></dd>
 					   										   						<dd><a href='Elastica/Elastica_Exception_NotImplemented.html' target='right'>Elastica_Exception_NotImplemented</a></dd>
 					   										   						<dd><a href='Elastica/Elastica_Exception_Response.html' target='right'>Elastica_Exception_Response</a></dd>
 					   										   						<dd><a href='Elastica/Elastica_Facet_Abstract.html' target='right'>Elastica_Facet_Abstract</a></dd>
@@ -100,12 +100,12 @@
 					   										   						<dd><a href='Elastica/Elastica_Type_Mapping.html' target='right'>Elastica_Type_Mapping</a></dd>
 					   										   						<dd><a href='Elastica/Elastica_Util.html' target='right'>Elastica_Util</a></dd>
 					   																						<dt class="folder-title">Files</dt>
-											<dd><a href='Elastica/_Exception---Abstract.php.html' target='right'>Abstract.php</a></dd>
-											<dd><a href='Elastica/_Filter---Abstract.php.html' target='right'>Abstract.php</a></dd>
-											<dd><a href='Elastica/_Query---Abstract.php.html' target='right'>Abstract.php</a></dd>
 											<dd><a href='Elastica/_Facet---Abstract.php.html' target='right'>Abstract.php</a></dd>
-											<dd><a href='Elastica/_Type---Abstract.php.html' target='right'>Abstract.php</a></dd>
+											<dd><a href='Elastica/_Query---Abstract.php.html' target='right'>Abstract.php</a></dd>
+											<dd><a href='Elastica/_Exception---Abstract.php.html' target='right'>Abstract.php</a></dd>
 											<dd><a href='Elastica/_Transport---Abstract.php.html' target='right'>Abstract.php</a></dd>
+											<dd><a href='Elastica/_Filter---Abstract.php.html' target='right'>Abstract.php</a></dd>
+											<dd><a href='Elastica/_Type---Abstract.php.html' target='right'>Abstract.php</a></dd>
 											<dd><a href='Elastica/_Filter---And.php.html' target='right'>And.php</a></dd>
 											<dd><a href='Elastica/_Query---Array.php.html' target='right'>Array.php</a></dd>
 											<dd><a href='Elastica/_Query---Bool.php.html' target='right'>Bool.php</a></dd>
@@ -119,7 +119,6 @@
 											<dd><a href='Elastica/_Facet---DateHistogram.php.html' target='right'>DateHistogram.php</a></dd>
 											<dd><a href='Elastica/_Document.php.html' target='right'>Document.php</a></dd>
 											<dd><a href='Elastica/_Filter---Exists.php.html' target='right'>Exists.php</a></dd>
-											<dd><a href='Elastica/_Exception---ExpectedFieldNotFound.php.html' target='right'>ExpectedFieldNotFound.php</a></dd>
 											<dd><a href='Elastica/_Query---Field.php.html' target='right'>Field.php</a></dd>
 											<dd><a href='Elastica/_Query---Filtered.php.html' target='right'>Filtered.php</a></dd>
 											<dd><a href='Elastica/_Query---Fuzzy.php.html' target='right'>Fuzzy.php</a></dd>
@@ -127,13 +126,13 @@
 											<dd><a href='Elastica/_Filter---GeoBoundingBox.php.html' target='right'>GeoBoundingBox.php</a></dd>
 											<dd><a href='Elastica/_Filter---GeoDistance.php.html' target='right'>GeoDistance.php</a></dd>
 											<dd><a href='Elastica/_Filter---GeoPolygon.php.html' target='right'>GeoPolygon.php</a></dd>
-											<dd><a href='Elastica/_Filter---HasChild.php.html' target='right'>HasChild.php</a></dd>
 											<dd><a href='Elastica/_Query---HasChild.php.html' target='right'>HasChild.php</a></dd>
+											<dd><a href='Elastica/_Filter---HasChild.php.html' target='right'>HasChild.php</a></dd>
 											<dd><a href='Elastica/_Facet---Histogram.php.html' target='right'>Histogram.php</a></dd>
 											<dd><a href='Elastica/_Transport---Http.php.html' target='right'>Http.php</a></dd>
 											<dd><a href='Elastica/_Transport---Https.php.html' target='right'>Https.php</a></dd>
-											<dd><a href='Elastica/_Filter---Ids.php.html' target='right'>Ids.php</a></dd>
 											<dd><a href='Elastica/_Query---Ids.php.html' target='right'>Ids.php</a></dd>
+											<dd><a href='Elastica/_Filter---Ids.php.html' target='right'>Ids.php</a></dd>
 											<dd><a href='Elastica/_Index.php.html' target='right'>Index.php</a></dd>
 											<dd><a href='Elastica/_Node---Info.php.html' target='right'>Info.php</a></dd>
 											<dd><a href='Elastica/_Exception---Invalid.php.html' target='right'>Invalid.php</a></dd>
@@ -144,16 +143,17 @@
 											<dd><a href='Elastica/_Query---MoreLikeThis.php.html' target='right'>MoreLikeThis.php</a></dd>
 											<dd><a href='Elastica/_Node.php.html' target='right'>Node.php</a></dd>
 											<dd><a href='Elastica/_Filter---Not.php.html' target='right'>Not.php</a></dd>
+											<dd><a href='Elastica/_Exception---NotFound.php.html' target='right'>NotFound.php</a></dd>
 											<dd><a href='Elastica/_Exception---NotImplemented.php.html' target='right'>NotImplemented.php</a></dd>
 											<dd><a href='Elastica/_Filter---Or.php.html' target='right'>Or.php</a></dd>
 											<dd><a href='Elastica/_Param.php.html' target='right'>Param.php</a></dd>
 											<dd><a href='Elastica/_Filter---Prefix.php.html' target='right'>Prefix.php</a></dd>
-											<dd><a href='Elastica/_Query.php.html' target='right'>Query.php</a></dd>
 											<dd><a href='Elastica/_Filter---Query.php.html' target='right'>Query.php</a></dd>
+											<dd><a href='Elastica/_Query.php.html' target='right'>Query.php</a></dd>
 											<dd><a href='Elastica/_Query---QueryString.php.html' target='right'>QueryString.php</a></dd>
+											<dd><a href='Elastica/_Query---Range.php.html' target='right'>Range.php</a></dd>
 											<dd><a href='Elastica/_Filter---Range.php.html' target='right'>Range.php</a></dd>
 											<dd><a href='Elastica/_Facet---Range.php.html' target='right'>Range.php</a></dd>
-											<dd><a href='Elastica/_Query---Range.php.html' target='right'>Range.php</a></dd>
 											<dd><a href='Elastica/_Request.php.html' target='right'>Request.php</a></dd>
 											<dd><a href='Elastica/_Exception---Response.php.html' target='right'>Response.php</a></dd>
 											<dd><a href='Elastica/_Response.php.html' target='right'>Response.php</a></dd>
@@ -166,11 +166,11 @@
 											<dd><a href='Elastica/_Node---Stats.php.html' target='right'>Stats.php</a></dd>
 											<dd><a href='Elastica/_Index---Status.php.html' target='right'>Status.php</a></dd>
 											<dd><a href='Elastica/_Status.php.html' target='right'>Status.php</a></dd>
-											<dd><a href='Elastica/_Filter---Term.php.html' target='right'>Term.php</a></dd>
 											<dd><a href='Elastica/_Query---Term.php.html' target='right'>Term.php</a></dd>
+											<dd><a href='Elastica/_Filter---Term.php.html' target='right'>Term.php</a></dd>
+											<dd><a href='Elastica/_Filter---Terms.php.html' target='right'>Terms.php</a></dd>
 											<dd><a href='Elastica/_Query---Terms.php.html' target='right'>Terms.php</a></dd>
 											<dd><a href='Elastica/_Facet---Terms.php.html' target='right'>Terms.php</a></dd>
-											<dd><a href='Elastica/_Filter---Terms.php.html' target='right'>Terms.php</a></dd>
 											<dd><a href='Elastica/_Query---Text.php.html' target='right'>Text.php</a></dd>
 											<dd><a href='Elastica/_Type.php.html' target='right'>Type.php</a></dd>
 											<dd><a href='Elastica/_Util.php.html' target='right'>Util.php</a></dd>
