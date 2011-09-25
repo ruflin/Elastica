@@ -99,7 +99,7 @@ class Elastica_Util
 	 * @return string Converted date string
 	 */
 	public static function convertDate($date) {
-		return Elastica_Util::convertDate($data);
+
 		if (is_int($date)) {
 			$timestamp = $date;
 		} else {
