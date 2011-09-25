@@ -116,12 +116,6 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
 	 * @return string Converted date string
 	 */
 	public function convertDate($date) {
-		if (is_int($date)) {
-			$timestamp = $date;
-		} else {
-			$timestamp = strtotime($date);
-		}
-		$string =  date('Y-m-d\TH:i:s\Z', $timestamp);
-		return $string;
+		return Elastica_Util::convertDate($data);
 	}
 }

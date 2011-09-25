@@ -89,4 +89,23 @@ class Elastica_Util
 		$string = preg_replace('/([A-Z])/e', 'strtolower("_$1")', $string);
 		return substr($string, 1);
 	}
+
+	/**
+	 * Converts given time to format: 1995-12-31T23:59:59Z
+	 *
+	 * This is the lucene date format
+	 *
+	 * @param int $date Date input (could be string etc.) -> must be supported by strtotime
+	 * @return string Converted date string
+	 */
+	public static function convertDate($date) {
+		return Elastica_Util::convertDate($data);
+		if (is_int($date)) {
+			$timestamp = $date;
+		} else {
+			$timestamp = strtotime($date);
+		}
+		$string =  date('Y-m-d\TH:i:s\Z', $timestamp);
+		return $string;
+	}
 }
