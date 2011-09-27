@@ -9,7 +9,7 @@ and other PHP frameworks. This makes it easy to use the client in combination wi
 
 With this client I try to model the elasticsearch REST API in an object oriented way which also makes it possible to extend the client and add new types of queries,
 filters, facets, transport layers and more.
-The client uses the [REST API](http://www.elasticsearch.com/docs/elasticsearch/rest_api/) from elasticsearch and tries to
+The client uses the [REST API](http://www.elasticsearch.org/guide/reference/api/) from elasticsearch and tries to
  provide a simple way of accessing the elasticsearch functionality.
 Arguments are passed as arrays which are automatically encoded to JSON which makes it possible to also use not implemented features of the request methods.
 
