@@ -35,4 +35,36 @@ class Elastica_Query_TextTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expectedArray, $query->toArray());
 	}
+
+	public function testTextPhrase() {
+
+		$client = new Elastica_Client();
+		$index = $client->getIndex('test');
+		$index->create(array(), true);
+		$type = $index->getType('test');
+
+		$doc = new Elastica_Document(1, array('name' => 'Basel-Stadt'));
+		$type->addDocument($doc);
+		$doc = new Elastica_Document(2, array('name' => 'New York'));
+		$type->addDocument($doc);
+		$doc = new Elastica_Document(3, array('name' => 'New Hampshire'));
+		$type->addDocument($doc);
+		$doc = new Elastica_Document(4, array('name' => 'Basel Land'));
+		$type->addDocument($doc);
+
+
+		$index->refresh();
+
+		$type = 'text_phrase';
+		$field = 'name';
+
+		$query = new Elastica_Query_Text();
+		$query->setFieldQuery($field, 'Basel New');
+		$query->setField('operator', 'OR');
+		$query->setFieldType($field, $type);
+
+		$resultSet = $index->search($query);
+
+		$this->assertEquals(4, $resultSet->count());
+	}
 }

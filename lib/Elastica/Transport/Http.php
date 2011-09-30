@@ -42,7 +42,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 		curl_setopt($conn, CURLOPT_RETURNTRANSFER, 1) ;
 		curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $request->getMethod());
 		curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
-		
+
 		$this->_setupCurl($conn);
 
 		$headersConfig = $request->getConfig('headers');
@@ -67,8 +67,11 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 
 			// Escaping of / not necessary. Causes problems in base64 encoding of files
 			$content = str_replace('\/', '/', $content);
+
 			curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
 		}
+
+
 
 		$start = microtime(true);
 		$responseString = curl_exec($conn);
@@ -94,10 +97,10 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 
 		return $response;
 	}
-	
+
 	/**
 	 * Called to add additional curl params
-	 * 
+	 *
 	 * @param resource $connection Curl connection
 	 */
 	protected function _setupCurl($connection) {

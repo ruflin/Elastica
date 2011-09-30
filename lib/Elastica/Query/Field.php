@@ -57,12 +57,7 @@ class Elastica_Query_Field extends Elastica_Query_Abstract
 	 * @see Elastica_Query_Abstract::toArray()
 	 */
 	public function toArray() {
-		return array(
-			'field' => array(
-				$this->_field => array(
-					'query' => $this->_queryString
-				)
-			)
-		);
+		$this->setParam($this->_field, array('query' => $this->_queryString));
+		return parent::toArray();
 	}
 }
