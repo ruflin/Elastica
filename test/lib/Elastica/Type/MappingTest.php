@@ -49,6 +49,11 @@ class Elastica_Query_MappingTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($firstname, $fields['firstname']);
 		$this->assertArrayNotHasKey('lastname', $fields);
 		$this->assertEquals(1, count($fields));
+
+		$index->flush();
+		$document = $type->getDocument(1);
+
+		$this->assertEmpty($document->getData());
 	}
 
 	public function testNestedMapping() {
