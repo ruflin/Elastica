@@ -34,7 +34,7 @@ class Elastica_Query_WildcardTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testSearchWithAnalyzer() {
-				$client = new Elastica_Client();
+		$client = new Elastica_Client();
 		$index = $client->getIndex('test');
 
 		$indexParams = array(
