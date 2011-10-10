@@ -116,6 +116,6 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
 	 * @return string Converted date string
 	 */
 	public function convertDate($date) {
-		return Elastica_Util::convertDate($data);
+		return Elastica_Util::convertDate($date);
 	}
 }
