@@ -1,0 +1,948 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
+
+      function filterElements()
+      {
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
+        });
+      });
+
+      
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">Elastica/Facet/Range.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
+              Show:
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
+</div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CElastica_Facet_Range">\Elastica_Facet_Range</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
+</div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><div id="file-description">
+<p xmlns:dbx="http://docblox-project.org/xsl/functions" class="short-description">Implements the range facet.</p>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="long-description">
+</div>
+</div>
+<dl class="file-info">
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Author</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">
+<a href="mailto:jasper@vanwanrooy.net">Jasper van Wanrooy</a>
+         
+    </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Category</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">Xodoa
+         
+    </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Link</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">
+<a href="http://www.elasticsearch.org/guide/reference/api/search/facets/range-facet.html">http://www.elasticsearch.org/guide/reference/api/search/facets/range-facet.html</a>
+         
+    </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Package</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">Elastica
+         
+    </dd>
+</dl>
+<a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\Elastica_Facet_Range" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\Elastica_Facet_Range<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
+<small class="package"><b>Package: </b>Elastica</small><p class="short-description">Implements the range facet.</p>
+<div class="long-description"><p>This function can be used to handle params for queries, filter, facets</p>
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd>
+<a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract">\Elastica_Facet_Abstract</a>
+            &lt;
+            <a href="db_Elastica_Param.html#%5CElastica_Param" style="color: gray; font-size: 0.8em
+                ">\Elastica_Param</a>
+</dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:jasper@vanwanrooy.net">Jasper van Wanrooy</a>
+         
+    </dd>
+<dt>Category</dt>
+<dd>Xodoa
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://www.elasticsearch.org/guide/reference/api/search/facets/range-facet.html">http://www.elasticsearch.org/guide/reference/api/search/facets/range-facet.html</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Elastica_Facet_Range::$_facet" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">array
+                 <span class="highlight">$_facet</span>= 'array()'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Holds all facet parameters.</p><small>Inherited from:
+                        <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract::%24_facet">\Elastica_Facet_Abstract::$_facet</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract::%24_facet">\Elastica_Facet_Abstract::$_facet</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::$_name" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
+                 <span class="highlight">$_name</span>= ''''
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Holds the name of the facet.</p><small>Inherited from:
+                        <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract::%24_name">\Elastica_Facet_Abstract::$_name</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract::%24_name">\Elastica_Facet_Abstract::$_name</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::$_params" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">array
+                 <span class="highlight">$_params</span>= 'array()'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Params</p><small>Inherited from:
+                        <a href="db_Elastica_Param.html#%5CElastica_Param::%24_params">\Elastica_Param::$_params</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_Elastica_Param.html#%5CElastica_Param::%24_params">\Elastica_Param::$_params</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::$_rawParams" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$_rawParams</span>= 'array()'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_Elastica_Param.html#%5CElastica_Param::%24_rawParams">\Elastica_Param::$_rawParams</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd></dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_Elastica_Param.html#%5CElastica_Param::%24_rawParams">\Elastica_Param::$_rawParams</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Elastica_Facet_Range::__construct()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+          string $name
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Constructs a Facet object.</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract::__construct()">\Elastica_Facet_Abstract::__construct()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The name of the facet.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::_setFacetParam()" class="anchor"></a><div class="method protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">_setFacetParam</span><span class="nb-faded-text">(
+          string $key, mixed $value
+          )
+        </span>
+        :
+          <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract">\Elastica_Facet_Abstract</a></code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Sets a param for the facet. Each facet implementation needs to take
+care of handling their own params.</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract::_setFacetParam()">\Elastica_Facet_Abstract::_setFacetParam()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>The key of the param to set.</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>mixed</td>
+<td><em><p>The value of the param.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract">\Elastica_Facet_Abstract</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::_setRawParam()" class="anchor"></a><div class="method protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">_setRawParam</span><span class="nb-faded-text">(
+          string $key, mixed $value
+          )
+        </span>
+        :
+          <a href="db_Elastica_Param.html#%5CElastica_Param">\Elastica_Param</a></code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Sets params not inside params array</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Param.html#%5CElastica_Param::_setRawParam()">\Elastica_Param::_setRawParam()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>mixed</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Param.html#%5CElastica_Param">\Elastica_Param</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::addParam()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">addParam</span><span class="nb-faded-text">(
+          string $key, mixed $value
+          )
+        </span>
+        :
+          <a href="db_Elastica_Param.html#%5CElastica_Param">\Elastica_Param</a></code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Adds a param to the list</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Param.html#%5CElastica_Param::addParam()">\Elastica_Param::addParam()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>This function can be used to add an array of params</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>Param key</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>mixed</td>
+<td><em><p>Value to set</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Param.html#%5CElastica_Param">\Elastica_Param</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::addRange()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">addRange</span><span class="nb-faded-text">(
+          mixed $from
+              =
+              null, mixed $to
+              =
+              null
+          )
+        </span>
+        :
+          <a href="db_Elastica_Facet_Range.html#%5CElastica_Facet_Range">\Elastica_Facet_Range</a></code><div class="description"><p class="short_description">Adds a range to the range facet.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$from</th>
+<td>mixed</td>
+<td><em><p>The from for the range.</p></em></td>
+</tr>
+<tr>
+<th>$to</th>
+<td>mixed</td>
+<td><em><p>The to for the range.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Facet_Range.html#%5CElastica_Facet_Range">\Elastica_Facet_Range</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::getName()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getName</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Gets the name of the facet.</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract::getName()">\Elastica_Facet_Abstract::getName()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::getParam()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getParam</span><span class="nb-faded-text">(
+          string $key
+          )
+        </span>
+        :
+          mixed</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns a specific param</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Param.html#%5CElastica_Param::getParam()">\Elastica_Param::getParam()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>Key to return</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Key value</td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Exception_Invalid.html#%5CElastica_Exception_Invalid">\Elastica_Exception_Invalid</a></td>
+<td><em>If requested key is not set</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::getParams()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getParams</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns the params array</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Param.html#%5CElastica_Param::getParams()">\Elastica_Param::getParams()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>Params</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::setField()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setField</span><span class="nb-faded-text">(
+          string $field
+          )
+        </span>
+        :
+          <a href="db_Elastica_Facet_Range.html#%5CElastica_Facet_Range">\Elastica_Facet_Range</a></code><div class="description"><p class="short_description">Sets the field for the range.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td>string</td>
+<td><em><p>The name of the field for range.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Facet_Range.html#%5CElastica_Facet_Range">\Elastica_Facet_Range</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::setFilter()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setFilter</span><span class="nb-faded-text">(
+          <a href="db_Elastica_Filter_Abstract.html#%5CElastica_Filter_Abstract">\Elastica_Filter_Abstract</a> $filter
+          )
+        </span>
+        :
+          <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract">\Elastica_Facet_Abstract</a></code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Sets a filter for this facet.</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract::setFilter()">\Elastica_Facet_Abstract::setFilter()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$filter</th>
+<td><a href="db_Elastica_Filter_Abstract.html#%5CElastica_Filter_Abstract">\Elastica_Filter_Abstract</a></td>
+<td><em><p>A filter to apply on the facet.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract">\Elastica_Facet_Abstract</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::setGlobal()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setGlobal</span><span class="nb-faded-text">(
+          bool $global
+              =
+              true
+          )
+        </span>
+        :
+          <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract">\Elastica_Facet_Abstract</a></code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Sets the flag to either run the facet globally or bound to the
+current search query. When not set, it defaults to the
+ElasticSearch default value.</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract::setGlobal()">\Elastica_Facet_Abstract::setGlobal()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$global</th>
+<td>bool</td>
+<td><em><p>Flag to either run the facet globally.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract">\Elastica_Facet_Abstract</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::setKeyValueFields()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setKeyValueFields</span><span class="nb-faded-text">(
+          string $keyField, string $valueField
+          )
+        </span>
+        :
+          <a href="db_Elastica_Facet_Range.html#%5CElastica_Facet_Range">\Elastica_Facet_Range</a></code><div class="description"><p class="short_description">Sets the fields by their separate key and value fields.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$keyField</th>
+<td>string</td>
+<td><em><p>The key_field param for the range.</p></em></td>
+</tr>
+<tr>
+<th>$valueField</th>
+<td>string</td>
+<td><em><p>The key_value param for the range.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Facet_Range.html#%5CElastica_Facet_Range">\Elastica_Facet_Range</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::setKeyValueScripts()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setKeyValueScripts</span><span class="nb-faded-text">(
+          string $keyScript, string $valueScript
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the key and value for this facet by script.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$keyScript</th>
+<td>string</td>
+<td><em><p>Script to check whether it falls into the range.</p></em></td>
+</tr>
+<tr>
+<th>$valueScript</th>
+<td>string</td>
+<td><em><p>Script to use for statistical calculations.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::setName()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setName</span><span class="nb-faded-text">(
+          string $name
+          )
+        </span>
+        :
+          <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract">\Elastica_Facet_Abstract</a></code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Sets the name of the facet. It is automatically set by
+the constructor.</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract::setName()">\Elastica_Facet_Abstract::setName()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The name of the facet.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract">\Elastica_Facet_Abstract</a></td>
+<td></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Exception_Invalid.html#%5CElastica_Exception_Invalid">\Elastica_Exception_Invalid</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::setParam()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setParam</span><span class="nb-faded-text">(
+          string $key, mixed $value
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Sets (overwrites) the value at the given key</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Param.html#%5CElastica_Param::setParam()">\Elastica_Param::setParam()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>Key to set</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td>mixed</td>
+<td><em><p>Key Value</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::setParams()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setParams</span><span class="nb-faded-text">(
+          array $params
+          )
+        </span>
+        :
+          <a href="db_Elastica_Param.html#%5CElastica_Param">\Elastica_Param</a></code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Sets (overwrites) all params of this object</p>
+<small>Inherited from:
+                    <a href="db_Elastica_Param.html#%5CElastica_Param::setParams()">\Elastica_Param::setParams()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$params</th>
+<td>array</td>
+<td><em><p>Parameter list</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Param.html#%5CElastica_Param">\Elastica_Param</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::setRanges()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setRanges</span><span class="nb-faded-text">(
+          array $ranges
+          )
+        </span>
+        :
+          <a href="db_Elastica_Facet_Range.html#%5CElastica_Facet_Range">\Elastica_Facet_Range</a></code><div class="description"><p class="short_description">Sets the ranges for the facet all at once. Sample ranges:
+array (
+    array('to' => 50),
+    array('from' => 20, 'to' 70),
+    array('from' => 70, 'to' => 120),
+    array('from' => 150)
+)</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ranges</th>
+<td>array</td>
+<td><em><p>Numerical array with range definitions.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Facet_Range.html#%5CElastica_Facet_Range">\Elastica_Facet_Range</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Facet_Range::toArray()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">toArray</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Creates the full facet definition, which includes the basic
+facet definition of the parent.</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Exception_Invalid.html#%5CElastica_Exception_Invalid">\Elastica_Exception_Invalid</a></td>
+<td><em>When the right fields haven't been set.</em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_Elastica_Facet_Abstract.html#%5CElastica_Facet_Abstract::toArray()">\Elastica_Facet_Abstract::toArray()</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.15.1</a>.
+    </small></body></html>
