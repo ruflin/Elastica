@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <docblox>
   <parser>
-    <target>api</target>
+    <target>./build/api</target>
   </parser>
   <transformer>
-    <target>api</target>
+    <target>./build/api</target>
   </transformer>
   <files>
     <directory>./lib</directory>

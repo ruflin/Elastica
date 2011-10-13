@@ -84,7 +84,7 @@ To create an updated API just run the following in the root in the master branch
 
 	docblox run
 
-Then move the created folder api to the gh-pages branch and push.
+Then move the created folder 'build/api' to the gh-pages branch and push.
 
 Credits
 -------
