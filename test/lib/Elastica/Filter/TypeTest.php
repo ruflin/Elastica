@@ -18,7 +18,7 @@ class Elastica_Filter_TypeTest extends PHPUnit_Framework_TestCase
 	}
 	
 	public function testToArray() {
-		$typeFilter = new Elastica_Filter_type('type_name');
+		$typeFilter = new Elastica_Filter_Type('type_name');
 		
 		$expectedArray = array(
 			'type' => array('value' => 'type_name')

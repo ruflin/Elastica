@@ -1,5 +1,15 @@
 CHANGES
 
+2011-10-20
+- Release v0.17.9.0
+- Elastica_Filter_Type added
+
+2011-10-19
+- Elastica_Query_CustomFilterScore added
+
+2011-10-15
+- API Documentation changed to DocBlox
+
 2011-10-10
 - Bug fixing
 - Release v0.17.8.0 added
