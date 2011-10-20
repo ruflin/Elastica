@@ -27,6 +27,11 @@ class Elastica_Document {
 	 * @var string|int Parent document id
 	 */
 	protected $_parent = '';
+	
+	/**
+	 * @var string Optype
+	 */
+	protected $_optype = '';
 
 	/**
 	 * Creates a new document
