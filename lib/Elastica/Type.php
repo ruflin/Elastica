@@ -52,6 +52,9 @@ class Elastica_Type implements Elastica_Searchable
 		if($doc->getParent()) {
 			$query['parent'] = $doc->getParent();
 		}
+		if($doc->getOpType()) {
+			$query['op_type'] = $doc->getOpType();
+		}
 		if (count($query) > 0) {
 			$path .= '?' . http_build_query($query);
 		}

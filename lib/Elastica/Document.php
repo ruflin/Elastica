@@ -228,4 +228,22 @@ class Elastica_Document {
 	public function getParent() {
 		return $this->_parent;
 	}
+
+    /**
+     * Set operation type
+     *
+     * @param string $optype Only accept create
+	 * @return Elastica_Document Current object
+     */
+    public function setOpType($optype) {
+        $this->_optype = $optype;
+        return $this;
+    }
+
+    /**
+     * Get operation type
+     */
+    public function getOpType() {
+        return $this->_optype;
+    }
 }
