@@ -1,5 +1,9 @@
 CHANGES
 
+2011-10-28
+- Rename Elastica_Query_CustomScore::addParam to ::addCSParam
+- Release v0.18.1.0
+
 2011-10-20
 - Release v0.17.9.0
 - Elastica_Filter_Type added

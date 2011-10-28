@@ -108,8 +108,6 @@ class Elastica_StatusTest extends PHPUnit_Framework_TestCase
 
         $versionInfo = $serverStatus['version'];
         $this->assertArrayHasKey('number', $versionInfo);
-        $this->assertArrayHasKey('date', $versionInfo);
-
     }
 
 

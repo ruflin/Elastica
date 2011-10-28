@@ -43,11 +43,13 @@ class Elastica_Query_CustomScore extends Elastica_Query_Abstract
 
 	/**
 	 * Add a param
+	 * 
+	 * This function is called addCSParam to not overwrite the Elastica_Param functionality
 	 *
 	 * @param array $param key value
 	 * @return Elastica_Query_CustomScore
 	 */
-	public function addParam(array $param) {
+	public function addCSParam(array $param) {
 		$this->addParam('params', $param);
 		return $this;
 	}
