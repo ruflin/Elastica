@@ -1,6 +1,7 @@
 CHANGES
 
 2011-10-28
+- Refactored Elastica_Query_CustomScore::addCSParam to ::addParams
 - Rename Elastica_Query_CustomScore::addParam to ::addCSParam
 - Release v0.18.1.0
 

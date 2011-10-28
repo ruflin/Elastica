@@ -13,15 +13,6 @@ class Elastica_Query_CustomScore extends Elastica_Query_Abstract
 {
 
 	/**
-	 * @param null|Elastica_Filter_Abstract|array $filter
-	 */
-	public function __construct($filter = null) {
-		if(!is_null($filter)) {
-			$this->setFilter($filter);
-		}
-	}
-
-	/**
 	 * Sets query object
 	 *
 	 * @param string|Elastica_Query|Elastica_Query_Abstract $query
@@ -42,15 +33,13 @@ class Elastica_Query_CustomScore extends Elastica_Query_Abstract
 	}
 
 	/**
-	 * Add a param
-	 * 
-	 * This function is called addCSParam to not overwrite the Elastica_Param functionality
+	 * Add params
 	 *
-	 * @param array $param key value
+	 * @param array $params
 	 * @return Elastica_Query_CustomScore
 	 */
-	public function addCSParam(array $param) {
-		$this->addParam('params', $param);
+	public function addParams(array $params) {
+		$this->setParam('params', $params);
 		return $this;
 	}
 }
