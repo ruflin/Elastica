@@ -186,23 +186,24 @@ class Elastica_Client
 		$params = array();
 
 		foreach($docs as $doc) {
-			$action = array(
-				'index' => array(
-					'_index' => $doc->getIndex(),
-					'_type' => $doc->getType(),
-					'_id' => $doc->getId()
-				)
+			
+			$indexInfo = array(
+				'_index' => $doc->getIndex(),
+				'_type' => $doc->getType(),
+				'_id' => $doc->getId()
 			);
-
-			if($doc->getVersion() > 0) {
-				$action['index']['_version'] = $doc->getVersion();
+			
+			$version = $doc->getVersion();
+			if (!empty($version)) {
+				$indexInfo['_version'] = $version;
+			}
+			
+			$parent = $doc->getParent();
+			if (!empty($parent)) {
+				$indexInfo['_parent'] = $parent;
 			}
 
-			if($doc->getParent()) {
-				$action['index']['_parent'] = $doc->getParent();
-			}
-
-			$params[] = $action;
+			$params[] = array('index' => $indexInfo);
 			$params[] = $doc->getData();
 		}
 		return $this->bulk($params);

@@ -234,21 +234,46 @@ class Elastica_Document {
 		return $this->_parent;
 	}
 
-    /**
-     * Set operation type
-     *
-     * @param string $optype Only accept create
+	/**
+	 * Set operation type
+	 *
+	 * @param string $optype Only accept create
 	 * @return Elastica_Document Current object
-     */
-    public function setOpType($optype) {
-        $this->_optype = $optype;
-        return $this;
-    }
+	 */
+	public function setOpType($optype) {
+		$this->_optype = $optype;
+		return $this;
+	}
 
-    /**
-     * Get operation type
-     */
-    public function getOpType() {
-        return $this->_optype;
-    }
+	/**
+	 * Get operation type
+	 */
+	public function getOpType() {
+		return $this->_optype;
+	}
+	
+	/**
+	 * Returns the document as an array
+	 * @return array
+	 */
+	public function toArray() {
+		$index = array(
+			'_index' => $this->getIndex(),
+			'_type' => $this->getType(),
+			'_id' => $this->getId()
+		);
+		
+		$version = $this->getVersion();
+		if (!empty($version)) {
+			$index['_version'] = $version;
+		}
+		
+		$parent = $this->getParent();
+		if (!empty($parent)) {
+			$index['_parent'] = $parent;
+		}
+		
+		$params[] = $action;
+		$params[] = $doc->getData();
+	}
 }

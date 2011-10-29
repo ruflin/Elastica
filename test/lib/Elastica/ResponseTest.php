@@ -50,6 +50,7 @@ class Elastica_ResponseTest extends PHPUnit_Framework_TestCase
 
         $engineTime = $resultSet->getResponse()->getEngineTime();
         $shardsStats = $resultSet->getResponse()->getShardsStatistics();
+
         $this->assertTrue($engineTime != '');
         $this->assertTrue(is_array($shardsStats));
         $this->assertArrayHasKey('total', $shardsStats);
