@@ -134,6 +134,16 @@ class Elastica_Document {
 	}
 
 	/**
+	 * Sets lifetime of document
+	 * 
+	 * @param string $ttl
+	 * @return Elastica_Document
+	 */
+	public function setTTL($ttl) {
+		return $this->add('_ttl', $ttl);
+	}
+	
+	/**
 	 * Returns the document data
 	 *
 	 * @return array Document data

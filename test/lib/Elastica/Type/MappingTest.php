@@ -55,6 +55,21 @@ class Elastica_Query_MappingTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEmpty($document->getData());
 	}
+	
+	public function testEnableTTL() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('test');
+		
+		$index->create(array(), true);
+		$type = $index->getType('test');
+		
+		$mapping = new Elastica_Type_Mapping($type, array());
+		
+		$mapping->enableTTL();
+		
+		$data = $mapping->toArray();
+		$this->assertTrue($data[$type->getName()]['_ttl']['enabled']);
+	}
 
 	public function testNestedMapping() {
 		$client = new Elastica_Client();
