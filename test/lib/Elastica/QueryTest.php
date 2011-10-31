@@ -108,7 +108,7 @@ class Elastica_QueryTest extends PHPUnit_Framework_TestCase
 
 	public function testAddSort() {
 		$query = new Elastica_Query();
-		$sortParam = array('firstanem' => array('order' => 'asc'));
+		$sortParam = array('firstname' => array('order' => 'asc'));
 		$query->addSort($sortParam);
 
 		$this->assertEquals($query->getParam('sort'), array($sortParam));
