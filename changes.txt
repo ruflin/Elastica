@@ -1,5 +1,8 @@
 CHANGES
 
+2011-11-05
+- Elastica_Query_Nested added
+
 2011-10-29
 - TTL for document and mapping added
 
