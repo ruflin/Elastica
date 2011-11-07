@@ -1,5 +1,8 @@
 CHANGES
 
+2011-11-07
+- Elastica_Index_Stats added
+
 2011-11-05
 - Elastica_Query_Nested added
 

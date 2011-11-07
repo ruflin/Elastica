@@ -50,11 +50,17 @@ class Elastica_Index implements Elastica_Searchable
 	/**
 	 * Returns the current status of the index
 	 *
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/status/
-	 * @return array Index status
+	 * @return Elastica_Index_Status Index status
 	 */
 	public function getStatus() {
 		return new Elastica_Index_Status($this);
+	}
+	
+	/**
+	 * @return ELastica_Index_Stats
+	 */
+	public function getStats() {
+		return new Elastica_Index_Stats($this);
 	}
 
 	/**
