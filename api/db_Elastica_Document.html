@@ -176,6 +176,21 @@
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Elastica_Document::$_optype" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
+                 <span class="highlight">$_optype</span>= ''''
+                </code><div class="description">
+<p class="short-description"></p>Optype</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Elastica_Document::$_parent" class="anchor"></a><div class="property protected">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string|int
                  <span class="highlight">$_parent</span>= ''''
@@ -492,6 +507,17 @@ can be found here: {@link http://tika.apache.org/0.7/formats.html}</p>
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Elastica_Document::getOpType()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getOpType</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Get operation type</p></div>
+<div class="code-tabs"><div class="long-description">
+</div></div>
+<div class="clear"></div>
+</div>
 <a id="\Elastica_Document::getParent()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getParent</span><span class="nb-faded-text">(
           
@@ -641,6 +667,41 @@ can be found here: {@link http://tika.apache.org/0.7/formats.html}</p>
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Elastica_Document::setOpType()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setOpType</span><span class="nb-faded-text">(
+          string $optype
+          )
+        </span>
+        :
+          <a href="db_Elastica_Document.html#%5CElastica_Document">\Elastica_Document</a></code><div class="description"><p class="short_description">Set operation type</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$optype</th>
+<td>string</td>
+<td><em><p>Only accept create</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Document.html#%5CElastica_Document">\Elastica_Document</a></td>
+<td>Current object</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Elastica_Document::setParent()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setParent</span><span class="nb-faded-text">(
           string|int $parent
@@ -680,6 +741,41 @@ can be found here: {@link http://tika.apache.org/0.7/formats.html}</p>
          
     </dd>
 </dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Document::setTTL()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setTTL</span><span class="nb-faded-text">(
+          string $ttl
+          )
+        </span>
+        :
+          <a href="db_Elastica_Document.html#%5CElastica_Document">\Elastica_Document</a></code><div class="description"><p class="short_description">Sets lifetime of document</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ttl</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Document.html#%5CElastica_Document">\Elastica_Document</a></td>
+<td></td>
+</tr>
+</table>
 </div>
 <div class="clear"></div>
 </div>
@@ -757,6 +853,29 @@ can be found here: {@link http://tika.apache.org/0.7/formats.html}</p>
          
     </dd>
 </dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Document::toArray()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">toArray</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Returns the document as an array</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
 </div>
 <div class="clear"></div>
 </div>
