@@ -140,7 +140,7 @@
       </method>
     </class>
   </file>
-  <file path="Elastica/Type.php" hash="44ca8f66e86cb1c82ef19fa1eb3f0032" package="Elastica">
+  <file path="Elastica/Type.php" hash="cc01bf8d26ce95fd50614e5c58498a03" package="Elastica">
     <docblock>
       <description>Elastica type object</description>
       <long-description>&lt;p&gt;elasticsearch has for every types as a substructure. This object
@@ -154,15 +154,15 @@ The hirarchie is as following: client -&gt; index -&gt; type -&gt; document&lt;/
       <tag line="2" name="author" description="Nicolas Ruflin &lt;spam@ruflin.com&gt;"/>
     </docblock>
     <markers>
-      <todo line="202">To be implemented, can also be implemented on index and client level (see docs)</todo>
-      <todo line="216">Not tested yet</todo>
+      <todo line="208">To be implemented, can also be implemented on index and client level (see docs)</todo>
+      <todo line="222">Not tested yet</todo>
     </markers>
     <parse_markers>
       <critical line="17">No short description for property $_index</critical>
       <critical line="22">No short description for property $_type</critical>
-      <critical line="105">No short description for method getName</critical>
-      <critical line="146">No short description for method search</critical>
-      <critical line="159">No short description for method count</critical>
+      <critical line="111">No short description for method getName</critical>
+      <critical line="152">No short description for method search</critical>
+      <critical line="165">No short description for method count</critical>
     </parse_markers>
     <class final="false" abstract="false" line="15" namespace="default" package="Elastica">
       <name>Elastica_Type</name>
@@ -248,243 +248,243 @@ The hirarchie is as following: client -&gt; index -&gt; type -&gt; document&lt;/
           <type>Elastica_Document</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="75" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="81" package="Default">
         <name>addDocuments</name>
         <docblock>
           <description>Uses _bulk to send documents to the server</description>
           <long-description>
 </long-description>
-          <tag line="69" name="param" description="Array of Elastica_Document" type="array" variable="$docs">
+          <tag line="75" name="param" description="Array of Elastica_Document" type="array" variable="$docs">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="69" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/"/>
+          <tag line="75" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/"/>
         </docblock>
-        <argument line="75">
+        <argument line="81">
           <name>$docs</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="90" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="96" package="Default">
         <name>getDocument</name>
         <docblock>
           <description>Get the document from search index</description>
           <long-description>
 </long-description>
-          <tag line="84" name="param" description="Document id" type="string" variable="$id">
+          <tag line="90" name="param" description="Document id" type="string" variable="$id">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="84" name="return" description="" type="\Elastica_Document">
+          <tag line="90" name="return" description="" type="\Elastica_Document">
             <type by_reference="false">\Elastica_Document</type>
           </tag>
         </docblock>
-        <argument line="90">
+        <argument line="96">
           <name>$id</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="108" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="114" package="Default">
         <name>getName</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag line="105" name="return" description="Type name" type="string">
+          <tag line="111" name="return" description="Type name" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="117" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="123" package="Default">
         <name>getType</name>
         <docblock>
           <description>Returns the type name</description>
           <long-description>
 </long-description>
-          <tag line="112" name="return" description="Type" type="string">
+          <tag line="118" name="return" description="Type" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="127" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="133" package="Default">
         <name>setMapping</name>
         <docblock>
           <description>Sets value type mapping for this type</description>
           <long-description>
 </long-description>
-          <tag line="121" name="param" description="Elastica_Type_Mapping object or property array with all mappings" type="\Elastica_Type_Mapping|array" variable="$mapping">
+          <tag line="127" name="param" description="Elastica_Type_Mapping object or property array with all mappings" type="\Elastica_Type_Mapping|array" variable="$mapping">
             <type by_reference="false">\Elastica_Type_Mapping</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="121" name="param" description="OPTIONAL If source should be stored or not (default = true)" type="bool" variable="$source">
+          <tag line="127" name="param" description="OPTIONAL If source should be stored or not (default = true)" type="bool" variable="$source">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="127">
+        <argument line="133">
           <name>$mapping</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="139" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="145" package="Default">
         <name>getMapping</name>
         <docblock>
           <description>Returns current mapping for the given type</description>
           <long-description>
 </long-description>
-          <tag line="134" name="return" description="Current mapping" type="array">
+          <tag line="140" name="return" description="Current mapping" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="151" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="157" package="Default">
         <name>search</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag line="146" name="param" description="Array with all query data inside or a Elastica_Query object" type="string|array|\Elastica_Query" variable="$query">
+          <tag line="152" name="param" description="Array with all query data inside or a Elastica_Query object" type="string|array|\Elastica_Query" variable="$query">
             <type by_reference="false">string</type>
             <type by_reference="false">array</type>
             <type by_reference="false">\Elastica_Query</type>
           </tag>
-          <tag line="146" name="return" description="ResultSet with all results inside" type="\Elastica_ResultSet">
+          <tag line="152" name="return" description="ResultSet with all results inside" type="\Elastica_ResultSet">
             <type by_reference="false">\Elastica_ResultSet</type>
           </tag>
-          <tag line="146" name="see" description="\Elastica_Searchable::search" refers="\Elastica_Searchable::search"/>
+          <tag line="152" name="see" description="\Elastica_Searchable::search" refers="\Elastica_Searchable::search"/>
         </docblock>
-        <argument line="151">
+        <argument line="157">
           <name>$query</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="164" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="170" package="Default">
         <name>count</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag line="159" name="param" description="Array with all query data inside or a Elastica_Query object" type="string|array|\Elastica_Query" variable="$query">
+          <tag line="165" name="param" description="Array with all query data inside or a Elastica_Query object" type="string|array|\Elastica_Query" variable="$query">
             <type by_reference="false">string</type>
             <type by_reference="false">array</type>
             <type by_reference="false">\Elastica_Query</type>
           </tag>
-          <tag line="159" name="return" description="number of documents matching the query" type="int">
+          <tag line="165" name="return" description="number of documents matching the query" type="int">
             <type by_reference="false">int</type>
           </tag>
-          <tag line="159" name="see" description="\Elastica_Searchable::count" refers="\Elastica_Searchable::count"/>
+          <tag line="165" name="see" description="\Elastica_Searchable::count" refers="\Elastica_Searchable::count"/>
         </docblock>
-        <argument line="164">
+        <argument line="170">
           <name>$query</name>
           <default>''</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="177" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="183" package="Default">
         <name>getIndex</name>
         <docblock>
           <description>Returns index client</description>
           <long-description>
 </long-description>
-          <tag line="172" name="return" description="Index object" type="\Elastica_Index">
+          <tag line="178" name="return" description="Index object" type="\Elastica_Index">
             <type by_reference="false">\Elastica_Index</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="188" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="194" package="Default">
         <name>deleteById</name>
         <docblock>
           <description>Deletes an entry by its unique identifier</description>
           <long-description>
 </long-description>
-          <tag line="181" name="param" description="Document id" type="int|string" variable="$id">
+          <tag line="187" name="param" description="Document id" type="int|string" variable="$id">
             <type by_reference="false">int</type>
             <type by_reference="false">string</type>
           </tag>
-          <tag line="181" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="187" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="181" name="link" description="http://www.elasticsearch.org/guide/reference/api/delete.html" link="http://www.elasticsearch.org/guide/reference/api/delete.html"/>
+          <tag line="187" name="link" description="http://www.elasticsearch.org/guide/reference/api/delete.html" link="http://www.elasticsearch.org/guide/reference/api/delete.html"/>
         </docblock>
-        <argument line="188">
+        <argument line="194">
           <name>$id</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="201" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="207" package="Default">
         <name>deleteByQuery</name>
         <docblock>
           <description>Deletes entries in the db based on a query</description>
           <long-description>
 </long-description>
-          <tag line="195" name="param" description="Query object" type="\Elastica_Query" variable="$query">
+          <tag line="201" name="param" description="Query object" type="\Elastica_Query" variable="$query">
             <type by_reference="false">\Elastica_Query</type>
           </tag>
-          <tag line="195" name="link" description="http://www.elasticsearch.org/guide/reference/api/delete-by-query.html" link="http://www.elasticsearch.org/guide/reference/api/delete-by-query.html"/>
+          <tag line="201" name="link" description="http://www.elasticsearch.org/guide/reference/api/delete-by-query.html" link="http://www.elasticsearch.org/guide/reference/api/delete-by-query.html"/>
         </docblock>
-        <argument line="201">
+        <argument line="207">
           <name>$query</name>
           <default/>
           <type>Elastica_Query</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="215" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="221" package="Default">
         <name>moreLikeThis</name>
         <docblock>
           <description>More like this query based on the given object</description>
           <long-description>&lt;p&gt;The id in the given object has to be set&lt;/p&gt;
 </long-description>
-          <tag line="206" name="param" description="Document to query for similar objects" type="\EalsticSearch_Document" variable="$doc">
+          <tag line="212" name="param" description="Document to query for similar objects" type="\EalsticSearch_Document" variable="$doc">
             <type by_reference="false">\EalsticSearch_Document</type>
           </tag>
-          <tag line="206" name="param" description="OPTIONAL Additional arguments for the query" type="array" variable="$args">
+          <tag line="212" name="param" description="OPTIONAL Additional arguments for the query" type="array" variable="$args">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="206" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/more_like_this/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/more_like_this/"/>
+          <tag line="212" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/more_like_this/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/more_like_this/"/>
         </docblock>
-        <argument line="215">
+        <argument line="221">
           <name>$doc</name>
           <default/>
           <type>Elastica_Document</type>
         </argument>
-        <argument line="215">
+        <argument line="221">
           <name>$args</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="229" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="235" package="Default">
         <name>request</name>
         <docblock>
           <description>Makes calls to the elasticsearch server based on this type</description>
           <long-description>
 </long-description>
-          <tag line="221" name="param" description="Path to call" type="string" variable="$path">
+          <tag line="227" name="param" description="Path to call" type="string" variable="$path">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="221" name="param" description="Rest method to use (GET, POST, DELETE, PUT)" type="string" variable="$method">
+          <tag line="227" name="param" description="Rest method to use (GET, POST, DELETE, PUT)" type="string" variable="$method">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="221" name="param" description="OPTIONAL Arguments as array" type="array" variable="$data">
+          <tag line="227" name="param" description="OPTIONAL Arguments as array" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="221" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="227" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
         </docblock>
-        <argument line="229">
+        <argument line="235">
           <name>$path</name>
           <default/>
           <type/>
         </argument>
-        <argument line="229">
+        <argument line="235">
           <name>$method</name>
           <default/>
           <type/>
         </argument>
-        <argument line="229">
+        <argument line="235">
           <name>$data</name>
           <default>array()</default>
           <type/>
@@ -492,7 +492,7 @@ The hirarchie is as following: client -&gt; index -&gt; type -&gt; document&lt;/
       </method>
     </class>
   </file>
-  <file path="Elastica/Client.php" hash="abed205231012487c18db5a4319e6c96" package="Elastica">
+  <file path="Elastica/Client.php" hash="b35fdceb03c97cc1575b254189e6577d" package="Elastica">
     <docblock>
       <description>Client to connect the the elasticsearch server</description>
       <long-description>
@@ -502,7 +502,7 @@ The hirarchie is as following: client -&gt; index -&gt; type -&gt; document&lt;/
       <tag line="2" name="author" description="Nicolas Ruflin &lt;spam@ruflin.com&gt;"/>
     </docblock>
     <markers>
-      <todo line="218">similar to delete ids but with type and index inside files</todo>
+      <todo line="219">similar to delete ids but with type and index inside files</todo>
     </markers>
     <class final="false" abstract="false" line="9" namespace="default" package="Elastica">
       <name>Elastica_Client</name>
@@ -772,87 +772,87 @@ documents can belong to any type and index&lt;/p&gt;
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="217" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="218" package="Default">
         <name>deleteDocuments</name>
         <docblock>
           <description>Bulk deletes documents (not implemented yet)</description>
           <long-description>
 </long-description>
-          <tag line="211" name="param" description="Docs" type="array" variable="$docs">
+          <tag line="212" name="param" description="Docs" type="array" variable="$docs">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="211" name="throws" description="" type="\Elastica_Exception">
+          <tag line="212" name="throws" description="" type="\Elastica_Exception">
             <type by_reference="false">\Elastica_Exception</type>
           </tag>
         </docblock>
-        <argument line="217">
+        <argument line="218">
           <name>$docs</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="227" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="228" package="Default">
         <name>getStatus</name>
         <docblock>
           <description>Returns the status object for all indices</description>
           <long-description>
 </long-description>
-          <tag line="222" name="return" description="Status object" type="\Elastica_Status">
+          <tag line="223" name="return" description="Status object" type="\Elastica_Status">
             <type by_reference="false">\Elastica_Status</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="236" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="237" package="Default">
         <name>getCluster</name>
         <docblock>
           <description>Returns the current cluster</description>
           <long-description>
 </long-description>
-          <tag line="231" name="return" description="Cluster object" type="\Elastica_Cluster">
+          <tag line="232" name="return" description="Cluster object" type="\Elastica_Cluster">
             <type by_reference="false">\Elastica_Cluster</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="250" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="251" package="Default">
         <name>deleteIds</name>
         <docblock>
           <description>Deletes documents with the given ids, index, type from the index</description>
           <long-description>
 </long-description>
-          <tag line="240" name="param" description="Document ids" type="array" variable="$ids">
+          <tag line="241" name="param" description="Document ids" type="array" variable="$ids">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="240" name="param" description="Index name" type="string" variable="$index">
+          <tag line="241" name="param" description="Index name" type="string" variable="$index">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="240" name="param" description="Type of documents" type="string" variable="$type">
+          <tag line="241" name="param" description="Type of documents" type="string" variable="$type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="240" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="241" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="240" name="throws" description="If ids is empty" type="\Elastica_Exception">
+          <tag line="241" name="throws" description="If ids is empty" type="\Elastica_Exception">
             <type by_reference="false">\Elastica_Exception</type>
           </tag>
-          <tag line="240" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/"/>
+          <tag line="241" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/"/>
         </docblock>
-        <argument line="250">
+        <argument line="251">
           <name>$ids</name>
           <default/>
           <type>array</type>
         </argument>
-        <argument line="250">
+        <argument line="251">
           <name>$index</name>
           <default/>
           <type/>
         </argument>
-        <argument line="250">
+        <argument line="251">
           <name>$type</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="296" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="297" package="Default">
         <name>bulk</name>
         <docblock>
           <description>Bulk operation</description>
@@ -865,71 +865,71 @@ of the bulk operation. An example param array would be:&lt;/p&gt;
         array('delete' =&gt; array('_index' =&gt; 'test', '_type' =&gt; 'user', '_id' =&gt; '2'))
 );&lt;/p&gt;
 </long-description>
-          <tag line="279" name="param" description="Parameter array" type="array" variable="$params">
+          <tag line="280" name="param" description="Parameter array" type="array" variable="$params">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="279" name="return" description="Reponse object" type="\Elastica_Response">
+          <tag line="280" name="return" description="Reponse object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="279" name="todo" description="Test"/>
-          <tag line="279" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/"/>
+          <tag line="280" name="todo" description="Test"/>
+          <tag line="280" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/"/>
         </docblock>
-        <argument line="296">
+        <argument line="297">
           <name>$params</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="334" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="335" package="Default">
         <name>request</name>
         <docblock>
           <description>Makes calls to the elasticsearch server based on this index</description>
           <long-description>&lt;p&gt;It's possible to make any REST query directly over this method&lt;/p&gt;
 </long-description>
-          <tag line="324" name="param" description="Path to call" type="string" variable="$path">
+          <tag line="325" name="param" description="Path to call" type="string" variable="$path">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="324" name="param" description="Rest method to use (GET, POST, DELETE, PUT)" type="string" variable="$method">
+          <tag line="325" name="param" description="Rest method to use (GET, POST, DELETE, PUT)" type="string" variable="$method">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="324" name="param" description="OPTIONAL Arguments as array" type="array" variable="$data">
+          <tag line="325" name="param" description="OPTIONAL Arguments as array" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="324" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="325" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
         </docblock>
-        <argument line="334">
+        <argument line="335">
           <name>$path</name>
           <default/>
           <type/>
         </argument>
-        <argument line="334">
+        <argument line="335">
           <name>$method</name>
           <default/>
           <type/>
         </argument>
-        <argument line="334">
+        <argument line="335">
           <name>$data</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="346" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="347" package="Default">
         <name>optimizeAll</name>
         <docblock>
           <description>Optimizes all search indices</description>
           <long-description>
 </long-description>
-          <tag line="339" name="param" description="OPTIONAL Optional arguments" type="array" variable="$args">
+          <tag line="340" name="param" description="OPTIONAL Optional arguments" type="array" variable="$args">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="339" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="340" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="339" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/"/>
+          <tag line="340" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/"/>
         </docblock>
-        <argument line="346">
+        <argument line="347">
           <name>$args</name>
           <default>array()</default>
           <type/>
@@ -1921,6 +1921,117 @@ from the Elastica_Client::_callService only in debug mode.</description>
           <tag line="138" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Elastica/Index/Stats.php" hash="d44bb62df53ae45c46b171f5dcdb4702" package="Elastica">
+    <docblock>
+      <description>Elastica index stats object</description>
+      <long-description>
+</long-description>
+      <tag line="2" name="category" description="Xodoa"/>
+      <tag line="2" name="package" description="Elastica"/>
+      <tag line="2" name="author" description="Nicolas Ruflin &lt;spam@ruflin.com&gt;"/>
+      <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-stats.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-stats.html"/>
+    </docblock>
+    <parse_markers>
+      <error line="12">No DocBlock was found for Property $_response</error>
+      <error line="14">No DocBlock was found for Property $_data</error>
+      <error line="16">No DocBlock was found for Property $_name</error>
+      <critical line="18">No short description for method __construct</critical>
+    </parse_markers>
+    <class final="false" abstract="false" line="10" namespace="default" package="Elastica">
+      <name>Elastica_Index_Stats</name>
+      <extends/>
+      <full_name>\Elastica_Index_Stats</full_name>
+      <docblock>
+        <description>Elastica index stats object</description>
+        <long-description>
+</long-description>
+        <tag line="2" name="category" description="Xodoa"/>
+        <tag line="2" name="package" description="Elastica"/>
+        <tag line="2" name="author" description="Nicolas Ruflin &lt;spam@ruflin.com&gt;"/>
+        <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-stats.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-stats.html"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="12" package="Default">
+        <name>$_response</name>
+        <default>null</default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="14" package="Default">
+        <name>$_data</name>
+        <default>array()</default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="16" package="Default">
+        <name>$_name</name>
+        <default>''</default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="21" package="Default">
+        <name>__construct</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag line="18" name="param" description="Index object" type="\Elastica_Index" variable="$index">
+            <type by_reference="false">\Elastica_Index</type>
+          </tag>
+        </docblock>
+        <argument line="21">
+          <name>$index</name>
+          <default/>
+          <type>Elastica_Index</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="31" package="Default">
+        <name>getData</name>
+        <docblock>
+          <description>Returns the raw stats info</description>
+          <long-description>
+</long-description>
+          <tag line="26" name="return" description="Stats info" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="41" package="Default">
+        <name>get</name>
+        <docblock>
+          <description>Returns the entry in the data array based on the params.</description>
+          <long-description>&lt;p&gt;Various params possible.&lt;/p&gt;
+</long-description>
+          <tag line="35" name="return" description="Data array entry or null if not found" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="61" package="Default">
+        <name>getIndex</name>
+        <docblock>
+          <description>Returns the index object</description>
+          <long-description>
+</long-description>
+          <tag line="56" name="return" description="Index object" type="\Elastica_Index">
+            <type by_reference="false">\Elastica_Index</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="70" package="Default">
+        <name>getResponse</name>
+        <docblock>
+          <description>Returns response object</description>
+          <long-description>
+</long-description>
+          <tag line="65" name="return" description="Response object" type="\Elastica_Response">
+            <type by_reference="false">\Elastica_Response</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="77" package="Default">
+        <name>refresh</name>
+        <docblock>
+          <description>Reloads all status data of this object</description>
+          <long-description>
+</long-description>
         </docblock>
       </method>
     </class>
@@ -3013,7 +3124,7 @@ Result set implents iterator&lt;/p&gt;
       </method>
     </class>
   </file>
-  <file path="Elastica/Index.php" hash="7bc3fda8cd67494096aae43b121f484a" package="Elastica">
+  <file path="Elastica/Index.php" hash="e531caf07f58d1d20fb18c84c061eed2" package="Elastica">
     <docblock>
       <description>Elastica index object</description>
       <long-description>&lt;p&gt;Handles reads, deletes and configurations of an index&lt;/p&gt;
@@ -3023,13 +3134,14 @@ Result set implents iterator&lt;/p&gt;
       <tag line="2" name="author" description="Nicolas Ruflin &lt;spam@ruflin.com&gt;"/>
     </docblock>
     <markers>
-      <todo line="104">doesn't seem to work?</todo>
-      <todo line="271">add additional cache clean arguments</todo>
-      <todo line="283">Add option for refresh</todo>
+      <todo line="110">doesn't seem to work?</todo>
+      <todo line="277">add additional cache clean arguments</todo>
+      <todo line="289">Add option for refresh</todo>
     </markers>
     <parse_markers>
       <critical line="13">No short description for property $_name</critical>
       <critical line="18">No short description for property $_client</critical>
+      <critical line="59">No short description for method getStats</critical>
     </parse_markers>
     <class final="false" abstract="false" line="11" namespace="default" package="Elastica">
       <name>Elastica_Index</name>
@@ -3111,330 +3223,340 @@ Result set implents iterator&lt;/p&gt;
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="56" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="55" package="Default">
         <name>getStatus</name>
         <docblock>
           <description>Returns the current status of the index</description>
           <long-description>
 </long-description>
-          <tag line="50" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/status/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/status/"/>
-          <tag line="50" name="return" description="Index status" type="array">
-            <type by_reference="false">array</type>
+          <tag line="50" name="return" description="Index status" type="\Elastica_Index_Status">
+            <type by_reference="false">\Elastica_Index_Status</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="65" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="62" package="Default">
+        <name>getStats</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag line="59" name="return" description="" type="\ELastica_Index_Stats">
+            <type by_reference="false">\ELastica_Index_Stats</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="71" package="Default">
         <name>getSettings</name>
         <docblock>
           <description>Returns the index settings object</description>
           <long-description>
 </long-description>
-          <tag line="60" name="return" description="Settings object" type="\Elastica_Index_Settings">
+          <tag line="66" name="return" description="Settings object" type="\Elastica_Index_Settings">
             <type by_reference="false">\Elastica_Index_Settings</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="75" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="81" package="Default">
         <name>addDocuments</name>
         <docblock>
           <description>Uses _bulk to send documents to the server</description>
           <long-description>
 </long-description>
-          <tag line="69" name="param" description="Array of Elastica_Document" type="array" variable="$docs">
+          <tag line="75" name="param" description="Array of Elastica_Document" type="array" variable="$docs">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="69" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/"/>
+          <tag line="75" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/"/>
         </docblock>
-        <argument line="75">
+        <argument line="81">
           <name>$docs</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="88" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="94" package="Default">
         <name>delete</name>
         <docblock>
           <description>Deletes the index</description>
           <long-description>
 </long-description>
-          <tag line="83" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="89" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="103" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="109" package="Default">
         <name>optimize</name>
         <docblock>
           <description>Optimizes search index</description>
           <long-description>&lt;p&gt;Detailed arguments can be found here in the link&lt;/p&gt;
 </long-description>
-          <tag line="94" name="param" description="OPTIONAL Additional arguments" type="array" variable="$args">
+          <tag line="100" name="param" description="OPTIONAL Additional arguments" type="array" variable="$args">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="94" name="return" description="Server response" type="array">
+          <tag line="100" name="return" description="Server response" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="94" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/"/>
+          <tag line="100" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/"/>
         </docblock>
-        <argument line="103">
+        <argument line="109">
           <name>$args</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="114" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="120" package="Default">
         <name>refresh</name>
         <docblock>
           <description>Refreshs the index</description>
           <long-description>
 </long-description>
-          <tag line="108" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="114" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="108" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/refresh/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/refresh/"/>
+          <tag line="114" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/refresh/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/refresh/"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="126" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="132" package="Default">
         <name>create</name>
         <docblock>
           <description>Creates a new index with the given arguments</description>
           <long-description>
 </long-description>
-          <tag line="118" name="param" description="OPTIONAL Arguments to use" type="array" variable="$args">
+          <tag line="124" name="param" description="OPTIONAL Arguments to use" type="array" variable="$args">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="118" name="param" description="OPTIONAL Deletes index first if already exists (default = false)" type="bool" variable="$recreate">
+          <tag line="124" name="param" description="OPTIONAL Deletes index first if already exists (default = false)" type="bool" variable="$recreate">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="118" name="return" description="Server response" type="array">
+          <tag line="124" name="return" description="Server response" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="118" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/"/>
+          <tag line="124" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/" link="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/"/>
         </docblock>
-        <argument line="126">
+        <argument line="132">
           <name>$args</name>
           <default>array()</default>
           <type>array</type>
         </argument>
-        <argument line="126">
+        <argument line="132">
           <name>$recreate</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="144" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="150" package="Default">
         <name>search</name>
         <docblock>
           <description>Searchs in this index</description>
           <long-description>
 </long-description>
-          <tag line="137" name="param" description="Array with all query data inside or a Elastica_Query object" type="string|array|\Elastica_Query" variable="$query">
+          <tag line="143" name="param" description="Array with all query data inside or a Elastica_Query object" type="string|array|\Elastica_Query" variable="$query">
             <type by_reference="false">string</type>
             <type by_reference="false">array</type>
             <type by_reference="false">\Elastica_Query</type>
           </tag>
-          <tag line="137" name="return" description="ResultSet with all results inside" type="\Elastica_ResultSet">
+          <tag line="143" name="return" description="ResultSet with all results inside" type="\Elastica_ResultSet">
             <type by_reference="false">\Elastica_ResultSet</type>
           </tag>
-          <tag line="137" name="see" description="\Elastica_Searchable::search" refers="\Elastica_Searchable::search"/>
+          <tag line="143" name="see" description="\Elastica_Searchable::search" refers="\Elastica_Searchable::search"/>
         </docblock>
-        <argument line="144">
+        <argument line="150">
           <name>$query</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="159" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="165" package="Default">
         <name>count</name>
         <docblock>
           <description>Counts results of query</description>
           <long-description>
 </long-description>
-          <tag line="152" name="param" description="Array with all query data inside or a Elastica_Query object" type="string|array|\Elastica_Query" variable="$query">
+          <tag line="158" name="param" description="Array with all query data inside or a Elastica_Query object" type="string|array|\Elastica_Query" variable="$query">
             <type by_reference="false">string</type>
             <type by_reference="false">array</type>
             <type by_reference="false">\Elastica_Query</type>
           </tag>
-          <tag line="152" name="return" description="number of documents matching the query" type="int">
+          <tag line="158" name="return" description="number of documents matching the query" type="int">
             <type by_reference="false">int</type>
           </tag>
-          <tag line="152" name="see" description="\Elastica_Searchable::count" refers="\Elastica_Searchable::count"/>
+          <tag line="158" name="see" description="\Elastica_Searchable::count" refers="\Elastica_Searchable::count"/>
         </docblock>
-        <argument line="159">
+        <argument line="165">
           <name>$query</name>
           <default>''</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="173" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="179" package="Default">
         <name>open</name>
         <docblock>
           <description>Opens an index</description>
           <long-description>
 </long-description>
-          <tag line="167" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="173" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="167" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html"/>
+          <tag line="173" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="183" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="189" package="Default">
         <name>close</name>
         <docblock>
           <description>Closes the index</description>
           <long-description>
 </long-description>
-          <tag line="177" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="183" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="177" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html"/>
+          <tag line="183" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close.html"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="192" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="198" package="Default">
         <name>getName</name>
         <docblock>
           <description>Returns the index name</description>
           <long-description>
 </long-description>
-          <tag line="187" name="return" description="Index name" type="string">
+          <tag line="193" name="return" description="Index name" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="201" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="207" package="Default">
         <name>getClient</name>
         <docblock>
           <description>Returns index client</description>
           <long-description>
 </long-description>
-          <tag line="196" name="return" description="Index client object" type="\Elastica_Client">
+          <tag line="202" name="return" description="Index client object" type="\Elastica_Client">
             <type by_reference="false">\Elastica_Client</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="214" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="220" package="Default">
         <name>addAlias</name>
         <docblock>
           <description>Adds an alias to the current index</description>
           <long-description>
 </long-description>
-          <tag line="206" name="param" description="Alias name" type="string" variable="$name">
+          <tag line="212" name="param" description="Alias name" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="206" name="param" description="OPTIONAL If set, an existing alias will be replaced" type="bool" variable="$replace">
+          <tag line="212" name="param" description="OPTIONAL If set, an existing alias will be replaced" type="bool" variable="$replace">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="206" name="return" description="Response" type="\Elastica_Response">
+          <tag line="212" name="return" description="Response" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="206" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html"/>
+          <tag line="212" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html"/>
         </docblock>
-        <argument line="214">
+        <argument line="220">
           <name>$name</name>
           <default/>
           <type/>
         </argument>
-        <argument line="214">
+        <argument line="220">
           <name>$replace</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="246" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="252" package="Default">
         <name>removeAlias</name>
         <docblock>
           <description>Removes an alias pointing to the current index</description>
           <long-description>
 </long-description>
-          <tag line="239" name="param" description="Alias name" type="string" variable="$name">
+          <tag line="245" name="param" description="Alias name" type="string" variable="$name">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="239" name="return" description="Response" type="\Elastica_Response">
+          <tag line="245" name="return" description="Response" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="239" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html"/>
+          <tag line="245" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html"/>
         </docblock>
-        <argument line="246">
+        <argument line="252">
           <name>$name</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="269" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="275" package="Default">
         <name>clearCache</name>
         <docblock>
           <description>Clears the cache of an index</description>
           <long-description>
 </long-description>
-          <tag line="263" name="return" description="Reponse object" type="\Elastica_Response">
+          <tag line="269" name="return" description="Reponse object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="263" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache.html"/>
+          <tag line="269" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache.html"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="281" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="287" package="Default">
         <name>flush</name>
         <docblock>
           <description>Flushs the index to storage</description>
           <long-description>
 </long-description>
-          <tag line="275" name="return" description="Reponse object" type="\Elastica_Response">
+          <tag line="281" name="return" description="Reponse object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="275" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html"/>
+          <tag line="281" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="295" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="301" package="Default">
         <name>setSettings</name>
         <docblock>
           <description>Can be used to change settings during runtime. One example is to use
 if for bulk updating {@link http://www.elasticsearch.org/blog/2011/03/23/update-settings.html}</description>
           <long-description>
 </long-description>
-          <tag line="287" name="param" description="Data array" type="array" variable="$data">
+          <tag line="293" name="param" description="Data array" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="287" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="293" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
-          <tag line="287" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html"/>
+          <tag line="293" name="link" description="http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html" link="http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html"/>
         </docblock>
-        <argument line="295">
+        <argument line="301">
           <name>$data</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="307" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="313" package="Default">
         <name>request</name>
         <docblock>
           <description>Makes calls to the elasticsearch server based on this index</description>
           <long-description>
 </long-description>
-          <tag line="299" name="param" description="Path to call" type="string" variable="$path">
+          <tag line="305" name="param" description="Path to call" type="string" variable="$path">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="299" name="param" description="Rest method to use (GET, POST, DELETE, PUT)" type="string" variable="$method">
+          <tag line="305" name="param" description="Rest method to use (GET, POST, DELETE, PUT)" type="string" variable="$method">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="299" name="param" description="OPTIONAL Arguments as array" type="array" variable="$data">
+          <tag line="305" name="param" description="OPTIONAL Arguments as array" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="299" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="305" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
         </docblock>
-        <argument line="307">
+        <argument line="313">
           <name>$path</name>
           <default/>
           <type/>
         </argument>
-        <argument line="307">
+        <argument line="313">
           <name>$method</name>
           <default/>
           <type/>
         </argument>
-        <argument line="307">
+        <argument line="313">
           <name>$data</name>
           <default>array()</default>
           <type/>
@@ -3442,7 +3564,7 @@ if for bulk updating {@link http://www.elasticsearch.org/blog/2011/03/23/update-
       </method>
     </class>
   </file>
-  <file path="Elastica/Type/Mapping.php" hash="9df90c0a1dd515b15f5d18e06cdca1e1" package="Elastica">
+  <file path="Elastica/Type/Mapping.php" hash="5a4f92f4ddf48ab29169c8fa0f804d84" package="Elastica">
     <docblock>
       <description>Elastica Mapping object</description>
       <long-description>
@@ -3456,6 +3578,7 @@ if for bulk updating {@link http://www.elasticsearch.org/blog/2011/03/23/update-
       <error line="12">No DocBlock was found for Property $_mapping</error>
       <error line="14">No DocBlock was found for Property $_type</error>
       <critical line="16">No short description for method __construct</critical>
+      <critical line="112">No short description for method setTTL</critical>
     </parse_markers>
     <class final="false" abstract="false" line="10" namespace="default" package="Elastica">
       <name>Elastica_Type_Mapping</name>
@@ -3631,46 +3754,84 @@ properties&lt;/p&gt;
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="117" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="116" package="Default">
+        <name>setTTL</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag line="112" name="param" description="TTL Params (enabled, default, ...)" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="112" name="return" description="" type="\Elastica_Type_Mapping">
+            <type by_reference="false">\Elastica_Type_Mapping</type>
+          </tag>
+        </docblock>
+        <argument line="116">
+          <name>$params</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="127" package="Default">
+        <name>enableTTL</name>
+        <docblock>
+          <description>Enables TTL for all documens in this type</description>
+          <long-description>
+</long-description>
+          <tag line="121" name="param" description="OPTIONAL (default = true)" type="bool" variable="$enabled">
+            <type by_reference="false">bool</type>
+          </tag>
+          <tag line="121" name="return" description="" type="\Elastica_Type_Mapping">
+            <type by_reference="false">\Elastica_Type_Mapping</type>
+          </tag>
+        </docblock>
+        <argument line="127">
+          <name>$enabled</name>
+          <default>true</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="136" package="Default">
         <name>toArray</name>
         <docblock>
           <description>Converts the mapping to an array</description>
           <long-description>
 </long-description>
-          <tag line="112" name="return" description="Mapping as array" type="array">
+          <tag line="131" name="return" description="Mapping as array" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="132" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="151" package="Default">
         <name>send</name>
         <docblock>
           <description>Submits the mapping and sends it to the server</description>
           <long-description>
 </long-description>
-          <tag line="127" name="return" description="Response object" type="\Elastica_Response">
+          <tag line="146" name="return" description="Response object" type="\Elastica_Response">
             <type by_reference="false">\Elastica_Response</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" line="144" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" line="163" package="Default">
         <name>create</name>
         <docblock>
           <description>Creates a mapping object</description>
           <long-description>
 </long-description>
-          <tag line="137" name="param" description="Mapping object or properties array" type="array|\Elastica_Type_Mapping" variable="$mapping">
+          <tag line="156" name="param" description="Mapping object or properties array" type="array|\Elastica_Type_Mapping" variable="$mapping">
             <type by_reference="false">array</type>
             <type by_reference="false">\Elastica_Type_Mapping</type>
           </tag>
-          <tag line="137" name="return" description="Mapping object" type="\Elastica_Type_Mapping">
+          <tag line="156" name="return" description="Mapping object" type="\Elastica_Type_Mapping">
             <type by_reference="false">\Elastica_Type_Mapping</type>
           </tag>
-          <tag line="137" name="throws" description="If invalid type" type="\Elastica_Exception_Invalid">
+          <tag line="156" name="throws" description="If invalid type" type="\Elastica_Exception_Invalid">
             <type by_reference="false">\Elastica_Exception_Invalid</type>
           </tag>
         </docblock>
-        <argument line="144">
+        <argument line="163">
           <name>$mapping</name>
           <default/>
           <type/>
@@ -4823,7 +4984,7 @@ If the param does not exists and empty array is retured&lt;/p&gt;
       </method>
     </class>
   </file>
-  <file path="Elastica/Document.php" hash="59b3d1135704042f29c9c40da7d0d376" package="Elastica">
+  <file path="Elastica/Document.php" hash="32c8038ec247c3153ccc6cf485cedb00" package="Elastica">
     <docblock>
       <description>Single document stored in elastic search</description>
       <long-description>
@@ -4839,8 +5000,9 @@ If the param does not exists and empty array is retured&lt;/p&gt;
       <error line="22">No DocBlock was found for Property $_index</error>
       <error line="24">No DocBlock was found for Property $_version</error>
       <critical line="26">No short description for property $_parent</critical>
-      <critical line="151">No short description for method getType</critical>
-      <critical line="175">No short description for method getIndex</critical>
+      <critical line="31">No short description for property $_optype</critical>
+      <critical line="166">No short description for method getType</critical>
+      <critical line="190">No short description for method getIndex</critical>
     </parse_markers>
     <class final="false" abstract="false" line="9" namespace="default" package="Elastica">
       <name>Elastica_Document</name>
@@ -4904,86 +5066,98 @@ If the param does not exists and empty array is retured&lt;/p&gt;
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" line="39" package="Default">
+      <property final="false" static="false" visibility="protected" line="34" package="Default">
+        <name>$_optype</name>
+        <default>''</default>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag line="31" name="var" description="Optype" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="44" package="Default">
         <name>__construct</name>
         <docblock>
           <description>Creates a new document</description>
           <long-description>
 </long-description>
-          <tag line="31" name="param" description="OPTIONAL $id Id is create if empty" type="int" variable="$id">
+          <tag line="36" name="param" description="OPTIONAL $id Id is create if empty" type="int" variable="$id">
             <type by_reference="false">int</type>
           </tag>
-          <tag line="31" name="param" description="OPTIONAL Data array" type="array" variable="$data">
+          <tag line="36" name="param" description="OPTIONAL Data array" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="31" name="param" description="OPTIONAL Type name" type="string" variable="$type">
+          <tag line="36" name="param" description="OPTIONAL Type name" type="string" variable="$type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="31" name="param" description="OPTIONAL Index name" type="string" variable="$index">
+          <tag line="36" name="param" description="OPTIONAL Index name" type="string" variable="$index">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="39">
+        <argument line="44">
           <name>$id</name>
           <default>''</default>
           <type/>
         </argument>
-        <argument line="39">
+        <argument line="44">
           <name>$data</name>
           <default>array()</default>
           <type>array</type>
         </argument>
-        <argument line="39">
+        <argument line="44">
           <name>$type</name>
           <default>''</default>
           <type/>
         </argument>
-        <argument line="39">
+        <argument line="44">
           <name>$index</name>
           <default>''</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="51" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="56" package="Default">
         <name>getId</name>
         <docblock>
           <description>Returns document id</description>
           <long-description>
 </long-description>
-          <tag line="46" name="return" description="Document id" type="string|int">
+          <tag line="51" name="return" description="Document id" type="string|int">
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="62" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="67" package="Default">
         <name>add</name>
         <docblock>
           <description>Adds the given key/value pair to the document</description>
           <long-description>
 </long-description>
-          <tag line="55" name="param" description="Document entry key" type="string" variable="$key">
+          <tag line="60" name="param" description="Document entry key" type="string" variable="$key">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="55" name="param" description="Document entry value" type="mixed" variable="$value">
+          <tag line="60" name="param" description="Document entry value" type="mixed" variable="$value">
             <type by_reference="false">mixed</type>
           </tag>
-          <tag line="55" name="return" description="" type="\Elastica_Document">
+          <tag line="60" name="return" description="" type="\Elastica_Document">
             <type by_reference="false">\Elastica_Document</type>
           </tag>
         </docblock>
-        <argument line="62">
+        <argument line="67">
           <name>$key</name>
           <default/>
           <type/>
         </argument>
-        <argument line="62">
+        <argument line="67">
           <name>$value</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="83" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="88" package="Default">
         <name>addFile</name>
         <docblock>
           <description>Adds a file to the index</description>
@@ -4996,229 +5170,286 @@ elasticsearch directory:&lt;/p&gt;
 &lt;p&gt;This installs the tika file analysis plugin. More infos about supported formats
 can be found here: {@link http://tika.apache.org/0.7/formats.html}&lt;/p&gt;
 </long-description>
-          <tag line="67" name="param" description="Key to add the file to" type="string" variable="$key">
+          <tag line="72" name="param" description="Key to add the file to" type="string" variable="$key">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="67" name="param" description="Path to add the file" type="string" variable="$filepath">
+          <tag line="72" name="param" description="Path to add the file" type="string" variable="$filepath">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="67" name="param" description="OPTIONAL Header mime type" type="string" variable="$mimeType">
+          <tag line="72" name="param" description="OPTIONAL Header mime type" type="string" variable="$mimeType">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="67" name="return" description="" type="\Elastica_Document">
+          <tag line="72" name="return" description="" type="\Elastica_Document">
             <type by_reference="false">\Elastica_Document</type>
           </tag>
         </docblock>
-        <argument line="83">
+        <argument line="88">
           <name>$key</name>
           <default/>
           <type/>
         </argument>
-        <argument line="83">
+        <argument line="88">
           <name>$filepath</name>
           <default/>
           <type/>
         </argument>
-        <argument line="83">
+        <argument line="88">
           <name>$mimeType</name>
           <default>''</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="109" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="114" package="Default">
         <name>addGeoPoint</name>
         <docblock>
           <description>Adds a geopoint to the document</description>
           <long-description>&lt;p&gt;Geohashes re not yet supported&lt;/p&gt;
 </long-description>
-          <tag line="98" name="param" description="Field key" type="string" variable="$key">
+          <tag line="103" name="param" description="Field key" type="string" variable="$key">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="98" name="param" description="Latitud value" type="float" variable="$latitude">
+          <tag line="103" name="param" description="Latitud value" type="float" variable="$latitude">
             <type by_reference="false">float</type>
           </tag>
-          <tag line="98" name="param" description="Longitude value" type="float" variable="$longitude">
+          <tag line="103" name="param" description="Longitude value" type="float" variable="$longitude">
             <type by_reference="false">float</type>
           </tag>
-          <tag line="98" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/mapping/geo_point/" link="http://www.elasticsearch.com/docs/elasticsearch/mapping/geo_point/"/>
-          <tag line="98" name="return" description="" type="\Elastica_Document">
+          <tag line="103" name="link" description="http://www.elasticsearch.com/docs/elasticsearch/mapping/geo_point/" link="http://www.elasticsearch.com/docs/elasticsearch/mapping/geo_point/"/>
+          <tag line="103" name="return" description="" type="\Elastica_Document">
             <type by_reference="false">\Elastica_Document</type>
           </tag>
         </docblock>
-        <argument line="109">
+        <argument line="114">
           <name>$key</name>
           <default/>
           <type/>
         </argument>
-        <argument line="109">
+        <argument line="114">
           <name>$latitude</name>
           <default/>
           <type/>
         </argument>
-        <argument line="109">
+        <argument line="114">
           <name>$longitude</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="126" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="131" package="Default">
         <name>setData</name>
         <docblock>
           <description>Overwrites the curent document data with the given data</description>
           <long-description>
 </long-description>
-          <tag line="120" name="param" description="Data array" type="array" variable="$data">
+          <tag line="125" name="param" description="Data array" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="120" name="return" description="" type="\Elastica_Document">
+          <tag line="125" name="return" description="" type="\Elastica_Document">
             <type by_reference="false">\Elastica_Document</type>
           </tag>
         </docblock>
-        <argument line="126">
+        <argument line="131">
           <name>$data</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="136" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="142" package="Default">
+        <name>setTTL</name>
+        <docblock>
+          <description>Sets lifetime of document</description>
+          <long-description>
+</long-description>
+          <tag line="136" name="param" description="" type="string" variable="$ttl">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="136" name="return" description="" type="\Elastica_Document">
+            <type by_reference="false">\Elastica_Document</type>
+          </tag>
+        </docblock>
+        <argument line="142">
+          <name>$ttl</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="151" package="Default">
         <name>getData</name>
         <docblock>
           <description>Returns the document data</description>
           <long-description>
 </long-description>
-          <tag line="131" name="return" description="Document data" type="array">
+          <tag line="146" name="return" description="Document data" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="146" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="161" package="Default">
         <name>setType</name>
         <docblock>
           <description>Sets the document type name</description>
           <long-description>
 </long-description>
-          <tag line="140" name="param" description="Type name" type="string" variable="$type">
+          <tag line="155" name="param" description="Type name" type="string" variable="$type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="140" name="return" description="Current object" type="\Elastica_Document">
+          <tag line="155" name="return" description="Current object" type="\Elastica_Document">
             <type by_reference="false">\Elastica_Document</type>
           </tag>
         </docblock>
-        <argument line="146">
+        <argument line="161">
           <name>$type</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="155" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="170" package="Default">
         <name>getType</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag line="151" name="return" description="Document type name" type="string">
+          <tag line="166" name="return" description="Document type name" type="string">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="151" name="throws" description="" type="\Elastica_Exception_Invalid">
+          <tag line="166" name="throws" description="" type="\Elastica_Exception_Invalid">
             <type by_reference="false">\Elastica_Exception_Invalid</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="170" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="185" package="Default">
         <name>setIndex</name>
         <docblock>
           <description>Sets the document index name</description>
           <long-description>
 </long-description>
-          <tag line="164" name="param" description="Index name" type="string" variable="$index">
+          <tag line="179" name="param" description="Index name" type="string" variable="$index">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="164" name="return" description="Current object" type="\Elastica_Document">
+          <tag line="179" name="return" description="Current object" type="\Elastica_Document">
             <type by_reference="false">\Elastica_Document</type>
           </tag>
         </docblock>
-        <argument line="170">
+        <argument line="185">
           <name>$index</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="179" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="194" package="Default">
         <name>getIndex</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag line="175" name="return" description="Index name" type="string">
+          <tag line="190" name="return" description="Index name" type="string">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="175" name="throws" description="" type="\Elastica_Exception_Invalid">
+          <tag line="190" name="throws" description="" type="\Elastica_Exception_Invalid">
             <type by_reference="false">\Elastica_Exception_Invalid</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="195" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="210" package="Default">
         <name>setVersion</name>
         <docblock>
           <description>Sets the version of a document for use with optimistic concurrency control</description>
           <long-description>
 </long-description>
-          <tag line="188" name="param" description="Document version" type="int" variable="$version">
+          <tag line="203" name="param" description="Document version" type="int" variable="$version">
             <type by_reference="false">int</type>
           </tag>
-          <tag line="188" name="return" description="Current object" type="\Elastica_Document">
+          <tag line="203" name="return" description="Current object" type="\Elastica_Document">
             <type by_reference="false">\Elastica_Document</type>
           </tag>
-          <tag line="188" name="link" description="http://www.elasticsearch.org/blog/2011/02/08/versioning.html" link="http://www.elasticsearch.org/blog/2011/02/08/versioning.html"/>
+          <tag line="203" name="link" description="http://www.elasticsearch.org/blog/2011/02/08/versioning.html" link="http://www.elasticsearch.org/blog/2011/02/08/versioning.html"/>
         </docblock>
-        <argument line="195">
+        <argument line="210">
           <name>$version</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="207" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="222" package="Default">
         <name>getVersion</name>
         <docblock>
           <description>Returns document version</description>
           <long-description>
 </long-description>
-          <tag line="202" name="return" description="Document version" type="string|int">
+          <tag line="217" name="return" description="Document version" type="string|int">
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="218" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="233" package="Default">
         <name>setParent</name>
         <docblock>
           <description>Sets parent document id</description>
           <long-description>
 </long-description>
-          <tag line="211" name="param" description="Parent document id" type="string|int" variable="$parent">
+          <tag line="226" name="param" description="Parent document id" type="string|int" variable="$parent">
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
           </tag>
-          <tag line="211" name="return" description="Current object" type="\Elastica_Document">
+          <tag line="226" name="return" description="Current object" type="\Elastica_Document">
             <type by_reference="false">\Elastica_Document</type>
           </tag>
-          <tag line="211" name="link" description="http://www.elasticsearch.org/guide/reference/mapping/parent-field.html" link="http://www.elasticsearch.org/guide/reference/mapping/parent-field.html"/>
+          <tag line="226" name="link" description="http://www.elasticsearch.org/guide/reference/mapping/parent-field.html" link="http://www.elasticsearch.org/guide/reference/mapping/parent-field.html"/>
         </docblock>
-        <argument line="218">
+        <argument line="233">
           <name>$parent</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="228" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="243" package="Default">
         <name>getParent</name>
         <docblock>
           <description>Returns the parent document id</description>
           <long-description>
 </long-description>
-          <tag line="223" name="return" description="Parent document id" type="string|int">
+          <tag line="238" name="return" description="Parent document id" type="string|int">
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="253" package="Default">
+        <name>setOpType</name>
+        <docblock>
+          <description>Set operation type</description>
+          <long-description>
+</long-description>
+          <tag line="247" name="param" description="Only accept create" type="string" variable="$optype">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="247" name="return" description="Current object" type="\Elastica_Document">
+            <type by_reference="false">\Elastica_Document</type>
+          </tag>
+        </docblock>
+        <argument line="253">
+          <name>$optype</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="261" package="Default">
+        <name>getOpType</name>
+        <docblock>
+          <description>Get operation type</description>
+          <long-description>
+</long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="269" package="Default">
+        <name>toArray</name>
+        <docblock>
+          <description>Returns the document as an array</description>
+          <long-description>
+</long-description>
+          <tag line="265" name="return" description="" type="array">
+            <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
@@ -6541,6 +6772,91 @@ cUrl error code reference can be found here {@link http://curl.haxx.se/libcurl/c
       </docblock>
     </class>
   </file>
+  <file path="Elastica/Filter/Type.php" hash="2872c90997c0943b1a4a156daf1f7299" package="Elastica">
+    <docblock>
+      <description>Type Filter</description>
+      <long-description>
+</long-description>
+      <tag line="2" name="uses" description="\Elastica_Filter_Abstract" refers="\Elastica_Filter_Abstract"/>
+      <tag line="2" name="category" description="Xodoa"/>
+      <tag line="2" name="package" description="Elastica"/>
+      <tag line="2" name="author" description="James Wilson &lt;jwilson556@gmail.com&gt;"/>
+      <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/type-filter.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/type-filter.html"/>
+    </docblock>
+    <parse_markers>
+      <error line="13">No DocBlock was found for Property $_type</error>
+      <critical line="15">No short description for method __construct</critical>
+    </parse_markers>
+    <class final="false" abstract="false" line="11" namespace="default" package="Elastica">
+      <name>Elastica_Filter_Type</name>
+      <extends>\Elastica_Filter_Abstract</extends>
+      <full_name>\Elastica_Filter_Type</full_name>
+      <docblock>
+        <description>Type Filter</description>
+        <long-description>
+</long-description>
+        <tag line="2" name="uses" description="\Elastica_Filter_Abstract" refers="\Elastica_Filter_Abstract"/>
+        <tag line="2" name="category" description="Xodoa"/>
+        <tag line="2" name="package" description="Elastica"/>
+        <tag line="2" name="author" description="James Wilson &lt;jwilson556@gmail.com&gt;"/>
+        <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/type-filter.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/type-filter.html"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="13" package="Default">
+        <name>$_type</name>
+        <default/>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" line="19" package="Default">
+        <name>__construct</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag line="15" name="param" description="Type name" type="string" variable="$typeName">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="15" name="return" description="" type="\Elastica_Filter_Type">
+            <type by_reference="false">\Elastica_Filter_Type</type>
+          </tag>
+        </docblock>
+        <argument line="19">
+          <name>$typeName</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="31" package="Default">
+        <name>setType</name>
+        <docblock>
+          <description>Ads a field with arguments to the range query</description>
+          <long-description>
+</long-description>
+          <tag line="25" name="param" description="Type name" type="string" variable="$typeName">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="25" name="return" description="current object" type="\Elastica_Filter_Type">
+            <type by_reference="false">\Elastica_Filter_Type</type>
+          </tag>
+        </docblock>
+        <argument line="31">
+          <name>$typeName</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="42" package="Default">
+        <name>toArray</name>
+        <docblock>
+          <description>Convert object to array</description>
+          <long-description>
+</long-description>
+          <tag line="36" name="see" description="\Elastica_Filter_Abstract::toArray()" refers="\Elastica_Filter_Abstract::toArray()"/>
+          <tag line="36" name="return" description="Filter array" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+  </file>
   <file path="Elastica/Filter/HasChild.php" hash="a2cd24695f242f2ab6cbd33e520b0051" package="Elastica">
     <docblock>
       <description>Returns parent documents having child docs matching the query</description>
@@ -6981,22 +7297,22 @@ cUrl error code reference can be found here {@link http://curl.haxx.se/libcurl/c
       </method>
     </class>
   </file>
-  <file path="Elastica/Filter/Missing.php" hash="f11026a5c42ac335f38728b96a9925dd" package="Elastica">
+  <file path="Elastica/Filter/Missing.php" hash="b9a1da81966f3878f5abcb665625dd27" package="Elastica">
     <docblock>
       <description>Missing Filter</description>
       <long-description>
 </long-description>
-      <tag line="2" name="uses" description="\Elastica_Filter_Abstract" refers="\Elastica_Filter_Abstract"/>
-      <tag line="2" name="category" description="Xodoa"/>
-      <tag line="2" name="package" description="Elastica"/>
-      <tag line="2" name="author" description="Maciej Wiercinski &lt;maciej@wiercinski.net&gt;"/>
-      <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html"/>
+      <tag line="3" name="uses" description="\Elastica_Filter_Abstract" refers="\Elastica_Filter_Abstract"/>
+      <tag line="3" name="category" description="Xodoa"/>
+      <tag line="3" name="package" description="Elastica"/>
+      <tag line="3" name="author" description="Maciej Wiercinski &lt;maciej@wiercinski.net&gt;"/>
+      <tag line="3" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html"/>
     </docblock>
     <parse_markers>
-      <critical line="13">No short description for method __construct</critical>
-      <critical line="22">No short description for method setField</critical>
+      <critical line="14">No short description for method __construct</critical>
+      <critical line="23">No short description for method setField</critical>
     </parse_markers>
-    <class final="false" abstract="false" line="11" namespace="default" package="Elastica">
+    <class final="false" abstract="false" line="12" namespace="default" package="Elastica">
       <name>Elastica_Filter_Missing</name>
       <extends>\Elastica_Filter_Abstract</extends>
       <full_name>\Elastica_Filter_Missing</full_name>
@@ -7004,39 +7320,39 @@ cUrl error code reference can be found here {@link http://curl.haxx.se/libcurl/c
         <description>Missing Filter</description>
         <long-description>
 </long-description>
-        <tag line="2" name="uses" description="\Elastica_Filter_Abstract" refers="\Elastica_Filter_Abstract"/>
-        <tag line="2" name="category" description="Xodoa"/>
-        <tag line="2" name="package" description="Elastica"/>
-        <tag line="2" name="author" description="Maciej Wiercinski &lt;maciej@wiercinski.net&gt;"/>
-        <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html"/>
+        <tag line="3" name="uses" description="\Elastica_Filter_Abstract" refers="\Elastica_Filter_Abstract"/>
+        <tag line="3" name="category" description="Xodoa"/>
+        <tag line="3" name="package" description="Elastica"/>
+        <tag line="3" name="author" description="Maciej Wiercinski &lt;maciej@wiercinski.net&gt;"/>
+        <tag line="3" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" line="16" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="17" package="Default">
         <name>__construct</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag line="13" name="param" description="OPTIONAL" type="string" variable="$field">
+          <tag line="14" name="param" description="OPTIONAL" type="string" variable="$field">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="16">
+        <argument line="17">
           <name>$field</name>
           <default>''</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" line="25" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" line="26" package="Default">
         <name>setField</name>
         <docblock>
           <description/>
           <long-description>
 </long-description>
-          <tag line="22" name="param" description="" type="string" variable="$field">
+          <tag line="23" name="param" description="" type="string" variable="$field">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="25">
+        <argument line="26">
           <name>$field</name>
           <default/>
           <type/>
@@ -10266,6 +10582,101 @@ match a document.&lt;/p&gt;
       </method>
     </class>
   </file>
+  <file path="Elastica/Query/TopChildren.php" hash="9aff75247647d6d54c08a4c7851a91c8" package="Elastica">
+    <docblock>
+      <description>Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.</description>
+      <long-description>
+</long-description>
+      <tag line="3" name="uses" description="\Elastica_Query_Abstract" refers="\Elastica_Query_Abstract"/>
+      <tag line="3" name="category" description="Xodoa"/>
+      <tag line="3" name="package" description="Elastica"/>
+      <tag line="3" name="author" description="Wu Yang &lt;darkyoung@gmail.com&gt;"/>
+      <tag line="3" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html"/>
+    </docblock>
+    <parse_markers>
+      <critical line="14">No short description for method __construct</critical>
+    </parse_markers>
+    <class final="false" abstract="false" line="12" namespace="default" package="Elastica">
+      <name>Elastica_Query_TopChildren</name>
+      <extends>\Elastica_Query_Abstract</extends>
+      <full_name>\Elastica_Query_TopChildren</full_name>
+      <docblock>
+        <description>Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.</description>
+        <long-description>
+</long-description>
+        <tag line="3" name="uses" description="\Elastica_Query_Abstract" refers="\Elastica_Query_Abstract"/>
+        <tag line="3" name="category" description="Xodoa"/>
+        <tag line="3" name="package" description="Elastica"/>
+        <tag line="3" name="author" description="Wu Yang &lt;darkyoung@gmail.com&gt;"/>
+        <tag line="3" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="18" package="Default">
+        <name>__construct</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag line="14" name="param" description="Query string or a Elastica_Query object" type="string|\Elastica_Query" variable="$query">
+            <type by_reference="false">string</type>
+            <type by_reference="false">\Elastica_Query</type>
+          </tag>
+          <tag line="14" name="param" description="Parent document type" type="string" variable="$type">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="18">
+          <name>$query</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="18">
+          <name>$type</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="29" package="Default">
+        <name>setQuery</name>
+        <docblock>
+          <description>Sets query object</description>
+          <long-description>
+</long-description>
+          <tag line="23" name="param" description="" type="string|\Elastica_Query|\Elastica_Query_Abstract" variable="$query">
+            <type by_reference="false">string</type>
+            <type by_reference="false">\Elastica_Query</type>
+            <type by_reference="false">\Elastica_Query_Abstract</type>
+          </tag>
+          <tag line="23" name="return" description="" type="\Elastica_Query_TopChildren">
+            <type by_reference="false">\Elastica_Query_TopChildren</type>
+          </tag>
+        </docblock>
+        <argument line="29">
+          <name>$query</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="41" package="Default">
+        <name>setType</name>
+        <docblock>
+          <description>Set type of the parent document</description>
+          <long-description>
+</long-description>
+          <tag line="35" name="param" description="Parent document type" type="string" variable="$type">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="35" name="return" description="Current object" type="\Elastica_Query_TopChildren">
+            <type by_reference="false">\Elastica_Query_TopChildren</type>
+          </tag>
+        </docblock>
+        <argument line="41">
+          <name>$type</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
   <file path="Elastica/Query/Text.php" hash="7d118f24852ff882994904622bc85896" package="Elastica">
     <docblock>
       <description>Text query</description>
@@ -11126,6 +11537,95 @@ If not set, defaults to zero.&lt;/p&gt;
       </method>
     </class>
   </file>
+  <file path="Elastica/Query/CustomScore.php" hash="0302a7fb1f15c2e0621a951a41294db3" package="Elastica">
+    <docblock>
+      <description>Custom score query</description>
+      <long-description>
+</long-description>
+      <tag line="3" name="uses" description="\Elastica_Query_Abstract" refers="\Elastica_Query_Abstract"/>
+      <tag line="3" name="category" description="Xodoa"/>
+      <tag line="3" name="package" description="Elastica"/>
+      <tag line="3" name="author" description="Wu Yang &lt;darkyoung@gmail.com&gt;"/>
+      <tag line="3" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/custom-score-query.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/custom-score-query.html"/>
+    </docblock>
+    <parse_markers>
+      <critical line="27">No short description for method setScript</critical>
+    </parse_markers>
+    <class final="false" abstract="false" line="12" namespace="default" package="Elastica">
+      <name>Elastica_Query_CustomScore</name>
+      <extends>\Elastica_Query_Abstract</extends>
+      <full_name>\Elastica_Query_CustomScore</full_name>
+      <docblock>
+        <description>Custom score query</description>
+        <long-description>
+</long-description>
+        <tag line="3" name="uses" description="\Elastica_Query_Abstract" refers="\Elastica_Query_Abstract"/>
+        <tag line="3" name="category" description="Xodoa"/>
+        <tag line="3" name="package" description="Elastica"/>
+        <tag line="3" name="author" description="Wu Yang &lt;darkyoung@gmail.com&gt;"/>
+        <tag line="3" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/custom-score-query.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/custom-score-query.html"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="21" package="Default">
+        <name>setQuery</name>
+        <docblock>
+          <description>Sets query object</description>
+          <long-description>
+</long-description>
+          <tag line="15" name="param" description="" type="string|\Elastica_Query|\Elastica_Query_Abstract" variable="$query">
+            <type by_reference="false">string</type>
+            <type by_reference="false">\Elastica_Query</type>
+            <type by_reference="false">\Elastica_Query_Abstract</type>
+          </tag>
+          <tag line="15" name="return" description="" type="\Elastica_Query_CustomScore">
+            <type by_reference="false">\Elastica_Query_CustomScore</type>
+          </tag>
+        </docblock>
+        <argument line="21">
+          <name>$query</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="31" package="Default">
+        <name>setScript</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag line="27" name="param" description="" type="string" variable="$script">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="27" name="return" description="" type="\Elastica_Query_CustomScore">
+            <type by_reference="false">\Elastica_Query_CustomScore</type>
+          </tag>
+        </docblock>
+        <argument line="31">
+          <name>$script</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="41" package="Default">
+        <name>addParams</name>
+        <docblock>
+          <description>Add params</description>
+          <long-description>
+</long-description>
+          <tag line="35" name="param" description="" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="35" name="return" description="" type="\Elastica_Query_CustomScore">
+            <type by_reference="false">\Elastica_Query_CustomScore</type>
+          </tag>
+        </docblock>
+        <argument line="41">
+          <name>$params</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+    </class>
+  </file>
   <file path="Elastica/Query/MoreLikeThis.php" hash="97aa404bd45c4533b8a01e3068226008" package="Elastica">
     <docblock>
       <description>More Like This query</description>
@@ -11596,6 +12096,166 @@ If not set, defaults to zero.&lt;/p&gt;
           </tag>
           <tag line="87" name="see" description="\Elastica_Query_Abstract::toArray()" refers="\Elastica_Query_Abstract::toArray()"/>
         </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Elastica/Query/CustomFiltersScore.php" hash="a7b98a171a0fc0a970306f4639002157" package="Elastica">
+    <docblock>
+      <description>Custom filtered score query. Needs a query and array of filters, with boosts</description>
+      <long-description>
+</long-description>
+      <tag line="2" name="uses" description="\Elastica_Query_Abstract" refers="\Elastica_Query_Abstract"/>
+      <tag line="2" name="category" description="Xodoa"/>
+      <tag line="2" name="package" description="Elastica"/>
+      <tag line="2" name="author" description="James Wilson &lt;jwilson556@gmail.com&gt;"/>
+      <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/custom-filters-score-query.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/custom-filters-score-query.html"/>
+    </docblock>
+    <class final="false" abstract="false" line="11" namespace="default" package="Elastica">
+      <name>Elastica_Query_CustomFiltersScore</name>
+      <extends>\Elastica_Query_Abstract</extends>
+      <full_name>\Elastica_Query_CustomFiltersScore</full_name>
+      <docblock>
+        <description>Custom filtered score query. Needs a query and array of filters, with boosts</description>
+        <long-description>
+</long-description>
+        <tag line="2" name="uses" description="\Elastica_Query_Abstract" refers="\Elastica_Query_Abstract"/>
+        <tag line="2" name="category" description="Xodoa"/>
+        <tag line="2" name="package" description="Elastica"/>
+        <tag line="2" name="author" description="James Wilson &lt;jwilson556@gmail.com&gt;"/>
+        <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/custom-filters-score-query.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/custom-filters-score-query.html"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="19" package="Default">
+        <name>setQuery</name>
+        <docblock>
+          <description>Sets a query</description>
+          <long-description>
+</long-description>
+          <tag line="13" name="param" description="Query object" type="\Elastica_Query_Abstract" variable="$query">
+            <type by_reference="false">\Elastica_Query_Abstract</type>
+          </tag>
+          <tag line="13" name="return" description="Current object" type="\Elastica_Query_CustomFiltersScore">
+            <type by_reference="false">\Elastica_Query_CustomFiltersScore</type>
+          </tag>
+        </docblock>
+        <argument line="19">
+          <name>$query</name>
+          <default/>
+          <type>Elastica_Query_Abstract</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="31" package="Default">
+        <name>addFilter</name>
+        <docblock>
+          <description>Add a filter with boost</description>
+          <long-description>
+</long-description>
+          <tag line="24" name="param" description="Filter object" type="\Elastica_Filter_Abstract" variable="$filter">
+            <type by_reference="false">\Elastica_Filter_Abstract</type>
+          </tag>
+          <tag line="24" name="param" description="Boost for the filter" type="float" variable="$boost">
+            <type by_reference="false">float</type>
+          </tag>
+          <tag line="24" name="return" description="Current object" type="\Elastica_Query_CustomFiltersScore">
+            <type by_reference="false">\Elastica_Query_CustomFiltersScore</type>
+          </tag>
+        </docblock>
+        <argument line="31">
+          <name>$filter</name>
+          <default/>
+          <type>Elastica_Filter_Abstract</type>
+        </argument>
+        <argument line="31">
+          <name>$boost</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <file path="Elastica/Query/Nested.php" hash="99d513a33fcbe2db21c1a35661ceba4e" package="Elastica">
+    <docblock>
+      <description>Nested query</description>
+      <long-description>
+</long-description>
+      <tag line="2" name="uses" description="\Elastica_Query_Abstract" refers="\Elastica_Query_Abstract"/>
+      <tag line="2" name="category" description="Xodoa"/>
+      <tag line="2" name="package" description="Elastica"/>
+      <tag line="2" name="author" description="Nicolas Ruflin &lt;spam@ruflin.com&gt;"/>
+      <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/nested-query.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/nested-query.html"/>
+    </docblock>
+    <parse_markers>
+      <critical line="33">No short description for method setScoreMode</critical>
+    </parse_markers>
+    <class final="false" abstract="false" line="11" namespace="default" package="Elastica">
+      <name>Elastica_Query_Nested</name>
+      <extends>\Elastica_Query_Abstract</extends>
+      <full_name>\Elastica_Query_Nested</full_name>
+      <docblock>
+        <description>Nested query</description>
+        <long-description>
+</long-description>
+        <tag line="2" name="uses" description="\Elastica_Query_Abstract" refers="\Elastica_Query_Abstract"/>
+        <tag line="2" name="category" description="Xodoa"/>
+        <tag line="2" name="package" description="Elastica"/>
+        <tag line="2" name="author" description="Nicolas Ruflin &lt;spam@ruflin.com&gt;"/>
+        <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/query-dsl/nested-query.html" link="http://www.elasticsearch.org/guide/reference/query-dsl/nested-query.html"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" line="19" package="Default">
+        <name>setPath</name>
+        <docblock>
+          <description>Adds field to mlt query</description>
+          <long-description>
+</long-description>
+          <tag line="13" name="param" description="Nested object path" type="string" variable="$path">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="13" name="return" description="" type="\Elastica_Query_Nested">
+            <type by_reference="false">\Elastica_Query_Nested</type>
+          </tag>
+        </docblock>
+        <argument line="19">
+          <name>$path</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="29" package="Default">
+        <name>setQuery</name>
+        <docblock>
+          <description>Sets nested query</description>
+          <long-description>
+</long-description>
+          <tag line="23" name="param" description="" type="\Elastica_Query_Abstract" variable="$query">
+            <type by_reference="false">\Elastica_Query_Abstract</type>
+          </tag>
+          <tag line="23" name="return" description="" type="\Elastica_Query_Nested">
+            <type by_reference="false">\Elastica_Query_Nested</type>
+          </tag>
+        </docblock>
+        <argument line="29">
+          <name>$query</name>
+          <default/>
+          <type>Elastica_Query_Abstract</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" line="37" package="Default">
+        <name>setScoreMode</name>
+        <docblock>
+          <description/>
+          <long-description>
+</long-description>
+          <tag line="33" name="param" description="Options: avg, total, max and none." type="string" variable="$scoreMode">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="33" name="return" description="" type="\Elastica_Query_Nested">
+            <type by_reference="false">\Elastica_Query_Nested</type>
+          </tag>
+        </docblock>
+        <argument line="37">
+          <name>$scoreMode</name>
+          <default/>
+          <type/>
+        </argument>
       </method>
     </class>
   </file>

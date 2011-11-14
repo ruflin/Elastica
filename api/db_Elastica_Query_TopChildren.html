@@ -77,7 +77,7 @@
       });
 
       
-    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">Elastica/Query/Abstract.php</h1>
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">Elastica/Query/TopChildren.php</h1>
 <div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
 <div id="file-nav-options">
               Show:
@@ -87,7 +87,7 @@
 <ul id="file-nav"><li>
 <a href="#classes"><img src="images/icons/class.png" height="14">
                           Classes
-                      </a><ul><li><a href="#%5CElastica_Query_Abstract">\Elastica_Query_Abstract</a></li></ul>
+                      </a><ul><li><a href="#%5CElastica_Query_TopChildren">\Elastica_Query_TopChildren</a></li></ul>
 </li></ul>
 <div style="clear: left;"></div>
 </div>
@@ -96,350 +96,72 @@
           </div>
 </div>
 <a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><div id="file-description">
-<p xmlns:dbx="http://docblox-project.org/xsl/functions" class="short-description">Abstract query object. Should be extended by all query types.</p>
+<p xmlns:dbx="http://docblox-project.org/xsl/functions" class="short-description">Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.</p>
 <div xmlns:dbx="http://docblox-project.org/xsl/functions" class="long-description">
 </div>
 </div>
 <dl class="file-info">
 <dt xmlns:dbx="http://docblox-project.org/xsl/functions">Author</dt>
 <dd xmlns:dbx="http://docblox-project.org/xsl/functions">
-<a href="mailto:spam@ruflin.com">Nicolas Ruflin</a>
+<a href="mailto:darkyoung@gmail.com">Wu Yang</a>
          
     </dd>
 <dt xmlns:dbx="http://docblox-project.org/xsl/functions">Category</dt>
 <dd xmlns:dbx="http://docblox-project.org/xsl/functions">Xodoa
          
     </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Link</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">
+<a href="http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html">http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html</a>
+         
+    </dd>
 <dt xmlns:dbx="http://docblox-project.org/xsl/functions">Package</dt>
 <dd xmlns:dbx="http://docblox-project.org/xsl/functions">Elastica
          
     </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Uses</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">
+<a href="db_Elastica_Query_Abstract.html#%5CElastica_Query_Abstract">\Elastica_Query_Abstract</a>
+         
+    </dd>
 </dl>
-<a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\Elastica_Query_Abstract" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\Elastica_Query_Abstract<div class="to-top"><a href="#top">jump to top</a></div>
+<a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\Elastica_Query_TopChildren" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\Elastica_Query_TopChildren<div class="to-top"><a href="#top">jump to top</a></div>
 </h2>
 <div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
-<small class="package"><b>Package: </b>Elastica</small><p class="short-description">Abstract query object. Should be extended by all query types.</p>
+<small class="package"><b>Package: </b>Elastica</small><p class="short-description">Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.</p>
 <div class="long-description"><p>This function can be used to handle params for queries, filter, facets</p>
 </div>
 <dl class="class-info">
 <dt>Parent(s)</dt>
-<dd><a href="db_Elastica_Param.html#%5CElastica_Param">\Elastica_Param</a></dd>
-<dt>Children</dt>
-<dd><a href="db_Elastica_Query_HasChild.html#%5CElastica_Query_HasChild">\Elastica_Query_HasChild</a></dd>
-<dd><a href="db_Elastica_Query_Filtered.html#%5CElastica_Query_Filtered">\Elastica_Query_Filtered</a></dd>
-<dd><a href="db_Elastica_Query_Terms.html#%5CElastica_Query_Terms">\Elastica_Query_Terms</a></dd>
-<dd><a href="db_Elastica_Query_ConstantScore.html#%5CElastica_Query_ConstantScore">\Elastica_Query_ConstantScore</a></dd>
-<dd><a href="db_Elastica_Query_Wildcard.html#%5CElastica_Query_Wildcard">\Elastica_Query_Wildcard</a></dd>
-<dd><a href="db_Elastica_Query_Ids.html#%5CElastica_Query_Ids">\Elastica_Query_Ids</a></dd>
-<dd><a href="db_Elastica_Query_Array.html#%5CElastica_Query_Array">\Elastica_Query_Array</a></dd>
-<dd><a href="db_Elastica_Query_Term.html#%5CElastica_Query_Term">\Elastica_Query_Term</a></dd>
-<dd><a href="db_Elastica_Query_Builder.html#%5CElastica_Query_Builder">\Elastica_Query_Builder</a></dd>
-<dd><a href="db_Elastica_Query_Fuzzy.html#%5CElastica_Query_Fuzzy">\Elastica_Query_Fuzzy</a></dd>
-<dd><a href="db_Elastica_Query_TopChildren.html#%5CElastica_Query_TopChildren">\Elastica_Query_TopChildren</a></dd>
-<dd><a href="db_Elastica_Query_Text.html#%5CElastica_Query_Text">\Elastica_Query_Text</a></dd>
-<dd><a href="db_Elastica_Query_QueryString.html#%5CElastica_Query_QueryString">\Elastica_Query_QueryString</a></dd>
-<dd><a href="db_Elastica_Query_Bool.html#%5CElastica_Query_Bool">\Elastica_Query_Bool</a></dd>
-<dd><a href="db_Elastica_Query_MatchAll.html#%5CElastica_Query_MatchAll">\Elastica_Query_MatchAll</a></dd>
-<dd><a href="db_Elastica_Query_Field.html#%5CElastica_Query_Field">\Elastica_Query_Field</a></dd>
-<dd><a href="db_Elastica_Query_CustomScore.html#%5CElastica_Query_CustomScore">\Elastica_Query_CustomScore</a></dd>
-<dd><a href="db_Elastica_Query_MoreLikeThis.html#%5CElastica_Query_MoreLikeThis">\Elastica_Query_MoreLikeThis</a></dd>
-<dd><a href="db_Elastica_Query_FuzzyLikeThis.html#%5CElastica_Query_FuzzyLikeThis">\Elastica_Query_FuzzyLikeThis</a></dd>
-<dd><a href="db_Elastica_Query_CustomFiltersScore.html#%5CElastica_Query_CustomFiltersScore">\Elastica_Query_CustomFiltersScore</a></dd>
-<dd><a href="db_Elastica_Query_Nested.html#%5CElastica_Query_Nested">\Elastica_Query_Nested</a></dd>
-<dd><a href="db_Elastica_Query_Range.html#%5CElastica_Query_Range">\Elastica_Query_Range</a></dd>
+<dd>
+<a href="db_Elastica_Query_Abstract.html#%5CElastica_Query_Abstract">\Elastica_Query_Abstract</a>
+            &lt;
+            <a href="db_Elastica_Param.html#%5CElastica_Param" style="color: gray; font-size: 0.8em
+                ">\Elastica_Param</a>
+</dd>
 <dt>Author</dt>
 <dd>
-<a href="mailto:spam@ruflin.com">Nicolas Ruflin</a>
+<a href="mailto:darkyoung@gmail.com">Wu Yang</a>
          
     </dd>
 <dt>Category</dt>
 <dd>Xodoa
          
     </dd>
-<dt>Used_by</dt>
+<dt>Link</dt>
 <dd>
-<a href="db_Elastica_Filter_Terms.html#%5CElastica_Filter_Terms">Elastica_Filter_Terms</a>
+<a href="http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html">http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html</a>
          
     </dd>
-<dt>Used_by</dt>
+<dt>Uses</dt>
 <dd>
-<a href="db_Elastica_Filter_Terms.html#%5CElastica_Filter_Terms">\Elastica_Filter_Terms</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Filter_GeoBoundingBox.html#%5CElastica_Filter_GeoBoundingBox">Elastica_Filter_GeoBoundingBox</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Filter_GeoBoundingBox.html#%5CElastica_Filter_GeoBoundingBox">\Elastica_Filter_GeoBoundingBox</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Filter_Term.html#%5CElastica_Filter_Term">Elastica_Filter_Term</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Filter_Term.html#%5CElastica_Filter_Term">\Elastica_Filter_Term</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Filter_GeoPolygon.html#%5CElastica_Filter_GeoPolygon">Elastica_Filter_GeoPolygon</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Filter_GeoPolygon.html#%5CElastica_Filter_GeoPolygon">\Elastica_Filter_GeoPolygon</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Filter_Exists.html#%5CElastica_Filter_Exists">Elastica_Filter_Exists</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Filter_Exists.html#%5CElastica_Filter_Exists">\Elastica_Filter_Exists</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Filter_Prefix.html#%5CElastica_Filter_Prefix">Elastica_Filter_Prefix</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Filter_Prefix.html#%5CElastica_Filter_Prefix">\Elastica_Filter_Prefix</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_HasChild.html#%5CElastica_Query_HasChild">Elastica_Query_HasChild</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_HasChild.html#%5CElastica_Query_HasChild">\Elastica_Query_HasChild</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Filtered.html#%5CElastica_Query_Filtered">Elastica_Query_Filtered</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Filtered.html#%5CElastica_Query_Filtered">\Elastica_Query_Filtered</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Terms.html#%5CElastica_Query_Terms">Elastica_Query_Terms</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Terms.html#%5CElastica_Query_Terms">\Elastica_Query_Terms</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_ConstantScore.html#%5CElastica_Query_ConstantScore">Elastica_Query_ConstantScore</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_ConstantScore.html#%5CElastica_Query_ConstantScore">\Elastica_Query_ConstantScore</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Wildcard.html#%5CElastica_Query_Wildcard">Elastica_Query_Wildcard</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Wildcard.html#%5CElastica_Query_Wildcard">\Elastica_Query_Wildcard</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Ids.html#%5CElastica_Query_Ids">Elastica_Query_Ids</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Ids.html#%5CElastica_Query_Ids">\Elastica_Query_Ids</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Array.html#%5CElastica_Query_Array">Elastica_Query_Array</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Array.html#%5CElastica_Query_Array">\Elastica_Query_Array</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Term.html#%5CElastica_Query_Term">Elastica_Query_Term</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Term.html#%5CElastica_Query_Term">\Elastica_Query_Term</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Builder.html#%5CElastica_Query_Builder">Elastica_Query_Builder</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Builder.html#%5CElastica_Query_Builder">\Elastica_Query_Builder</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Fuzzy.html#%5CElastica_Query_Fuzzy">Elastica_Query_Fuzzy</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Fuzzy.html#%5CElastica_Query_Fuzzy">\Elastica_Query_Fuzzy</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_TopChildren.html#%5CElastica_Query_TopChildren">Elastica_Query_TopChildren</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_TopChildren.html#%5CElastica_Query_TopChildren">\Elastica_Query_TopChildren</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Text.html#%5CElastica_Query_Text">Elastica_Query_Text</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Text.html#%5CElastica_Query_Text">\Elastica_Query_Text</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_QueryString.html#%5CElastica_Query_QueryString">Elastica_Query_QueryString</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_QueryString.html#%5CElastica_Query_QueryString">\Elastica_Query_QueryString</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Bool.html#%5CElastica_Query_Bool">Elastica_Query_Bool</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Bool.html#%5CElastica_Query_Bool">\Elastica_Query_Bool</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_MatchAll.html#%5CElastica_Query_MatchAll">Elastica_Query_MatchAll</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_MatchAll.html#%5CElastica_Query_MatchAll">\Elastica_Query_MatchAll</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Field.html#%5CElastica_Query_Field">Elastica_Query_Field</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Field.html#%5CElastica_Query_Field">\Elastica_Query_Field</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_CustomScore.html#%5CElastica_Query_CustomScore">Elastica_Query_CustomScore</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_CustomScore.html#%5CElastica_Query_CustomScore">\Elastica_Query_CustomScore</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_MoreLikeThis.html#%5CElastica_Query_MoreLikeThis">Elastica_Query_MoreLikeThis</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_MoreLikeThis.html#%5CElastica_Query_MoreLikeThis">\Elastica_Query_MoreLikeThis</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_FuzzyLikeThis.html#%5CElastica_Query_FuzzyLikeThis">Elastica_Query_FuzzyLikeThis</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_FuzzyLikeThis.html#%5CElastica_Query_FuzzyLikeThis">\Elastica_Query_FuzzyLikeThis</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_CustomFiltersScore.html#%5CElastica_Query_CustomFiltersScore">Elastica_Query_CustomFiltersScore</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_CustomFiltersScore.html#%5CElastica_Query_CustomFiltersScore">\Elastica_Query_CustomFiltersScore</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Nested.html#%5CElastica_Query_Nested">Elastica_Query_Nested</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Nested.html#%5CElastica_Query_Nested">\Elastica_Query_Nested</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Range.html#%5CElastica_Query_Range">Elastica_Query_Range</a>
-         
-    </dd>
-<dt>Used_by</dt>
-<dd>
-<a href="db_Elastica_Query_Range.html#%5CElastica_Query_Range">\Elastica_Query_Range</a>
+<a href="db_Elastica_Query_Abstract.html#%5CElastica_Query_Abstract">\Elastica_Query_Abstract</a>
          
     </dd>
 </dl>
 <h3>Properties</h3>
 <div>
-<a id="\Elastica_Query_Abstract::$_params" class="anchor"></a><div class="property protected inherited_from ">
+<a id="\Elastica_Query_TopChildren::$_params" class="anchor"></a><div class="property protected inherited_from ">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">array
                  <span class="highlight">$_params</span>= 'array()'
                 </code><div class="description">
@@ -461,7 +183,7 @@
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Elastica_Query_Abstract::$_rawParams" class="anchor"></a><div class="property protected inherited_from ">
+<a id="\Elastica_Query_TopChildren::$_rawParams" class="anchor"></a><div class="property protected inherited_from ">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
                  <span class="highlight">$_rawParams</span>= 'array()'
                 </code><div class="description">
@@ -484,7 +206,40 @@
 </div>
 <h3>Methods</h3>
 <div>
-<a id="\Elastica_Query_Abstract::_setRawParam()" class="anchor"></a><div class="method protected inherited_from ">
+<a id="\Elastica_Query_TopChildren::__construct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+          string|<a href="db_Elastica_Query.html#%5CElastica_Query">\Elastica_Query</a> $query, string $type
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string|<a href="db_Elastica_Query.html#%5CElastica_Query">\Elastica_Query</a>
+</td>
+<td><em><p>Query string or a Elastica_Query object</p></em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>Parent document type</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Query_TopChildren::_setRawParam()" class="anchor"></a><div class="method protected inherited_from ">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">_setRawParam</span><span class="nb-faded-text">(
           string $key, mixed $value
           )
@@ -528,7 +283,7 @@
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Elastica_Query_Abstract::addParam()" class="anchor"></a><div class="method public inherited_from ">
+<a id="\Elastica_Query_TopChildren::addParam()" class="anchor"></a><div class="method public inherited_from ">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">addParam</span><span class="nb-faded-text">(
           string $key, mixed $value
           )
@@ -572,7 +327,7 @@
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Elastica_Query_Abstract::getParam()" class="anchor"></a><div class="method public inherited_from ">
+<a id="\Elastica_Query_TopChildren::getParam()" class="anchor"></a><div class="method public inherited_from ">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getParam</span><span class="nb-faded-text">(
           string $key
           )
@@ -621,7 +376,7 @@
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Elastica_Query_Abstract::getParams()" class="anchor"></a><div class="method public inherited_from ">
+<a id="\Elastica_Query_TopChildren::getParams()" class="anchor"></a><div class="method public inherited_from ">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getParams</span><span class="nb-faded-text">(
           
           )
@@ -648,7 +403,7 @@
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Elastica_Query_Abstract::setParam()" class="anchor"></a><div class="method public inherited_from ">
+<a id="\Elastica_Query_TopChildren::setParam()" class="anchor"></a><div class="method public inherited_from ">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setParam</span><span class="nb-faded-text">(
           string $key, mixed $value
           )
@@ -682,7 +437,7 @@
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Elastica_Query_Abstract::setParams()" class="anchor"></a><div class="method public inherited_from ">
+<a id="\Elastica_Query_TopChildren::setParams()" class="anchor"></a><div class="method public inherited_from ">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setParams</span><span class="nb-faded-text">(
           array $params
           )
@@ -721,7 +476,78 @@
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Elastica_Query_Abstract::toArray()" class="anchor"></a><div class="method public inherited_from ">
+<a id="\Elastica_Query_TopChildren::setQuery()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setQuery</span><span class="nb-faded-text">(
+          string|<a href="db_Elastica_Query.html#%5CElastica_Query">\Elastica_Query</a>|<a href="db_Elastica_Query_Abstract.html#%5CElastica_Query_Abstract">\Elastica_Query_Abstract</a> $query
+          )
+        </span>
+        :
+          <a href="db_Elastica_Query_TopChildren.html#%5CElastica_Query_TopChildren">\Elastica_Query_TopChildren</a></code><div class="description"><p class="short_description">Sets query object</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$query</th>
+<td>string|<a href="db_Elastica_Query.html#%5CElastica_Query">\Elastica_Query</a>|<a href="db_Elastica_Query_Abstract.html#%5CElastica_Query_Abstract">\Elastica_Query_Abstract</a>
+</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Query_TopChildren.html#%5CElastica_Query_TopChildren">\Elastica_Query_TopChildren</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Query_TopChildren::setType()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setType</span><span class="nb-faded-text">(
+          string $type
+          )
+        </span>
+        :
+          <a href="db_Elastica_Query_TopChildren.html#%5CElastica_Query_TopChildren">\Elastica_Query_TopChildren</a></code><div class="description"><p class="short_description">Set type of the parent document</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$type</th>
+<td>string</td>
+<td><em><p>Parent document type</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Elastica_Query_TopChildren.html#%5CElastica_Query_TopChildren">\Elastica_Query_TopChildren</a></td>
+<td>Current object</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Elastica_Query_TopChildren::toArray()" class="anchor"></a><div class="method public inherited_from ">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">toArray</span><span class="nb-faded-text">(
           
           )
