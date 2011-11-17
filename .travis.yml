@@ -1,8 +1,5 @@
 language: php
 
-before_script:
-  - wget https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.18.4.tar.gz
-  - tar -xzf elasticsearch-0.18.4.tar.gz
-  - elasticsearch-0.18.4/bin/elasticsearch &
+before_script: ./test/bin/run_elasticsearch.sh
 
 script: phpunit -c test/
