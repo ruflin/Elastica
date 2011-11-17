@@ -1,6 +1,7 @@
 CHANGES
 
 2011-11-17
+- Release v0.18.4.0
 - Support for Travis CI added: http://travis-ci.org/ruflin/Elastica
 
 2011-11-07
