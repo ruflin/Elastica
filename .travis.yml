@@ -3,6 +3,6 @@ language: php
 before_script:
   - wget https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.18.4.tar.gz
   - tar -xzf elasticsearch-0.18.4.tar.gz
-  - elasticsearch-0.18.4/bin/elasticsearch -f
+  - elasticsearch-0.18.4/bin/elasticsearch
 
 script: phpunit -c test/
