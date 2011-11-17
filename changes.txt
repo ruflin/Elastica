@@ -1,5 +1,8 @@
 CHANGES
 
+2011-11-17
+- Support for Travis CI added: http://travis-ci.org/ruflin/Elastica
+
 2011-11-07
 - Elastica_Index_Stats added
 

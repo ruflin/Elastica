@@ -1,4 +1,4 @@
-Elastica: elasticsearch PHP Client
+Elastica: elasticsearch PHP Client [![Build Status](https://secure.travis-ci.org/ruflin/Elastica.png)](http://travis-ci.org/ruflin/Elastica)
 ==================================
 
 

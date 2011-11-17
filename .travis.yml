@@ -1,0 +1,7 @@
+language: php
+
+before_script:
+  - ./test/bin/install_php_memcache.sh
+  - ./test/bin/run_elasticsearch.sh
+
+script: phpunit -c test/
