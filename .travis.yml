@@ -1,5 +1,7 @@
 language: php
 
-before_script: ./test/bin/run_elasticsearch.sh
+before_script:
+  - sudo apt-get install php5-memcache
+  - ./test/bin/run_elasticsearch.sh
 
 script: phpunit -c test/
