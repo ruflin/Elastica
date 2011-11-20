@@ -1,6 +1,7 @@
 CHANGES
 
 2011-11-20
+- Release v0.18.4.1
 - Elastica_Log added for logging. Has to be passed as client config to enable
 - Elastica blogging introduced: http://ruflin.com/en/elastica
 
