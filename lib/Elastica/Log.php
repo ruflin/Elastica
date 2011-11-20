@@ -8,13 +8,30 @@
  */
 class Elastica_Log
 {
-	protected $_log = '';
+	/**
+	 * Log path or true if enabled
+	 * 
+	 * @var string|bool
+	 */
+	protected $_log = false;
+	
+	/**
+	 * @var string Last logged message
+	 */
 	protected $_lastMessage = '';
 	
+	/**
+	 * Inits log object. Checks if logging is enabled for the given client
+	 * 
+	 * @param Elastica_Client $client
+	 */
 	public function __construct(Elastica_Client $client) {
-		$this->_log = $client->getConfig('log');
+		$this->setLog($client->getConfig('log'));
 	}
 	
+	/**
+	 * @param string|Elastica_Request $message
+	 */
 	public function log($message) {
 		if ($message instanceof Elastica_Request) {
 			$message = $this->_convertRequest($message);
@@ -31,6 +48,21 @@ class Elastica_Log
 		}
 	}
 	
+	/**
+	 * @param bool|string $log Enables log or sets log path
+	 * @return Elastica_Log
+	 */
+	public function setLog($log) {
+		$this->_log = $log;
+		return $this;
+	}
+	
+	/**
+	 * Converts a request to a log message
+	 * 
+	 * @param Elastica_Request $request
+	 * @return string Request log message
+	 */
 	protected function _convertRequest(Elastica_Request $request) {
 		$message = 'curl -X' . strtoupper($request->getMethod()) . ' ';
 		$message .= 'http://' . $request->getClient()->getHost() . ':' . $request->getClient()->getPort() . '/';
@@ -39,6 +71,9 @@ class Elastica_Log
 		return $message;
 	}
 	
+	/**
+	 * @return string Last logged message
+	 */
 	public function getLastMessage() {
 		return $this->_lastMessage;
 	}

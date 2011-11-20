@@ -3,7 +3,7 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class Elastica_IndexTest extends PHPUnit_Framework_TestCase
+class Elastica_LogTest extends PHPUnit_Framework_TestCase
 {
 	public function setUp() {
 
