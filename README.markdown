@@ -29,6 +29,7 @@ The version numbers are consistent with elasticsearch. The version number 0.16.0
 
 Examples
 --------
+Several Elastica examples can be found on my blog in the [Elastica Category](http://ruflin.com/en/elastica)
 
 Lots of basic examples can also be found in the test classes.
 
