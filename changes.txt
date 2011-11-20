@@ -1,5 +1,8 @@
 CHANGES
 
+2011-11-20
+- Elastica_Log added for logging. Has to be passed as client config to enable
+
 2011-11-17
 - Release v0.18.4.0
 - Support for Travis CI added: http://travis-ci.org/ruflin/Elastica

@@ -41,4 +41,14 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 	
 		$this->assertEquals($message, $log->getLastMessage());
 	}
+	
+	public function testGetLastMessage2() {
+		$client = new Elastica_Client(array('log' => true));
+		$log = new Elastica_Log($client);
+		$message = 'hello world';
+	
+		$log->log($message);
+	
+		$this->assertEquals($message, $log->getLastMessage());
+	}
 }
