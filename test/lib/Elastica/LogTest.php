@@ -12,10 +12,15 @@ class Elastica_LogTest extends PHPUnit_Framework_TestCase
 	public function tearDown() {
 	}
 
-	public function testSetLogConfig() {
+	public function testSetLogConfigPath() {
 		$logPath = '/tmp/php.log';
 		$client = new Elastica_Client(array('log' => $logPath));
 		$this->assertEquals($logPath, $client->getConfig('log'));
+	}
+	
+	public function testSetLogConfigEnable() {
+		$client = new Elastica_Client(array('log' => true));
+		$this->assertTrue($client->getConfig('log'));
 	}
 	
 	public function testEmptyLogConfig() {
@@ -45,9 +50,16 @@ class Elastica_LogTest extends PHPUnit_Framework_TestCase
 	public function testGetLastMessage2() {
 		$client = new Elastica_Client(array('log' => true));
 		$log = new Elastica_Log($client);
+		
+		// Set log path temp path as otherwise test fails with output
+		$errorLog = ini_get('error_log');
+		ini_set('error_log', '/tmp/php.log');
+		
 		$message = 'hello world';
 	
 		$log->log($message);
+		
+		ini_set('error_log', $errorLog);
 	
 		$this->assertEquals($message, $log->getLastMessage());
 	}
