@@ -44,6 +44,7 @@ class Elastica_Client
 		'headers' => array(),
 		'servers' => array(),
 		'roundRobin' => false,
+		'log' => '',
 	);
 
 	/**
