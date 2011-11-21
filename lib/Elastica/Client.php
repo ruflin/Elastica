@@ -61,7 +61,7 @@ class Elastica_Client
 	 *
 	 * @param array $config Params
 	 */
-	public function setConfig($config) {
+	public function setConfig(array $config) {
 		foreach ($config as $key => $value) {
 			$this->_config[$key] = $value;
 		}
