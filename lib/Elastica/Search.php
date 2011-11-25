@@ -45,6 +45,21 @@ class Elastica_Search
 		return $this;
 	}
 
+    /**
+     * Add array of indexes at once
+     *
+     * @param array $indexes
+     * @return Elastica_Search
+     */
+    public function addIndexes(array $indexes = array())
+    {
+        foreach ($indexes as $index) {
+            $this->addIndex($index);
+        }
+
+        return $this;
+    }
+
 	/**
 	 * Adds a type to the current search
 	 *
@@ -65,6 +80,21 @@ class Elastica_Search
 
 		return $this;
 	}
+
+    /**
+     * Add array of types
+     *
+     * @param array $types
+     * @return Elastica_Search
+     */
+    public function addTypes(array $types = array())
+    {
+        foreach ($types as $type) {
+            $this->addType($type);
+        }
+
+        return $this;
+    }
 
 	/**
 	 * @return Elastica_Client Client object
