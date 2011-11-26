@@ -49,6 +49,20 @@ class Elastica_SearchTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(in_array('test3', $indices));
 	}
 
+    public function testAddIndices()
+    {
+        $client = new Elastica_Client();
+		$search = new Elastica_Search($client);
+
+        $indices = array();
+        $indices[] = $client->getIndex('test1');
+        $indices[] = $client->getIndex('test2');
+
+        $search->addIndices($indices);
+
+        $this->assertEquals(2, count($search->getIndices()));
+    }
+
 	public function testAddType() {
 		$client = new Elastica_Client();
 		$search = new Elastica_Search($client);
@@ -81,6 +95,23 @@ class Elastica_SearchTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(3, count($types));
 		$this->assertTrue(in_array('test3', $types));
 	}
+
+    public function testAddTypes()
+    {
+        $client = new Elastica_Client();
+		$search = new Elastica_Search($client);
+
+		$index = $client->getIndex('test1');
+		$index->create(array(), true);
+
+        $types = array();
+        $types[] = $index->getType('type1');
+        $types[] = $index->getType('type2');
+
+        $search->addTypes($types);
+
+        $this->assertEquals(2, count($search->getTypes()));
+    }
 
 	public function testAddTypeInvalid() {
 		$client = new Elastica_Client();
