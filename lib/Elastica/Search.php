@@ -46,14 +46,14 @@ class Elastica_Search
 	}
 
     /**
-     * Add array of indexes at once
+     * Add array of indices at once
      *
      * @param array $indexes
      * @return Elastica_Search
      */
-    public function addIndexes(array $indexes = array())
+    public function addIndices(array $indices = array())
     {
-        foreach ($indexes as $index) {
+        foreach ($indices as $index) {
             $this->addIndex($index);
         }
 

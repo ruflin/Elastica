@@ -49,16 +49,16 @@ class Elastica_SearchTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(in_array('test3', $indices));
 	}
 
-    public function testAddIndexes()
+    public function testAddIndices()
     {
         $client = new Elastica_Client();
 		$search = new Elastica_Search($client);
 
-        $indexes = array();
-        $indexes[] = $client->getIndex('test1');
-        $indexes[] = $client->getIndex('test2');
+        $indices = array();
+        $indices[] = $client->getIndex('test1');
+        $indices[] = $client->getIndex('test2');
 
-        $search->addIndexes($indexes);
+        $search->addIndices($indices);
 
         $this->assertEquals(2, count($search->getIndices()));
     }
