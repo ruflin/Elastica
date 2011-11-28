@@ -1,5 +1,11 @@
 CHANGES
 
+2011-11-28
+- Elastica_Filter_Nested added
+
+2011-11-26
+- Elastica_Search::addIndices(), Elastica_Search::addTypes() added
+
 2011-11-20
 - Release v0.18.4.1
 - Elastica_Log added for logging. Has to be passed as client config to enable
