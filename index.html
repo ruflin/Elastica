@@ -1,73 +1,303 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8'>
+	<meta charset='utf-8'>
 
-  <title>ruflin/Elastica @ GitHub</title>
+	<title>Elastica @ GitHub</title>
 
-  <style type="text/css">
-  </style>
-	<script type="text/javascript">
-
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-2317870-19']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
-	</script>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-  <a href="http://github.com/ruflin/Elastica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+	<a href="http://github.com/ruflin/Elastica"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/30f550e0d38ceb6ef5b81500c64d970b7fb0f028/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" /></a>
+	<header>
+		<div class="container">
+			<h1>Elastica</h1>
+			<span>A PHP client for elasticsearch.</span>
+		</div>
+	</header>
+	<div class="content">
+		<div class="container">
+			<p>
+				<em><a href="http://github.com/ruflin/Elastica" title="Elastica">Elastica</a></em> is a PHP client for the <em><a href="http://elasticsearch.org">elasticsearch</a></em> search engine/database. <em>Elasticsearch</em> is an Open Source (Apache 2), Distributed, RESTful, Search Engine built on top of Apache Lucene.
+			</p>
+			<p>
+				<em>Elastica</em> is open source, and you can download or clone the source code from <a href="http://github.com/ruflin/Elastica">ruflin/Elastica</a>.
+			</p>
+			<p>
+				These instructions give you an overview of how to use <em>Elastica</em>. You can find the complete <strong>API</strong> <a href="api/index.html">here</a>. It is build directly from source.
+			</p>
 
-  <div id="container">
-	<h1>Elastica Documentation</h1>
-	<p>The goal of this pages is to add some documentation for the <a href="http://github.com/ruflin/Elastica">Elastica</a> client.</p>
-	
+			<h2 id="section-installation">Installation</h2>
+				<h3 id="section-download">Download</h3>
+					<p>
+						You can download this project in either <a href="http://github.com/ruflin/Elastica/zipball/master">zip</a> or <a href="http://github.com/ruflin/Elastica/tarball/master">tar</a> formats.
+					</p>
+					<p>
+						The prefered way is to clone <em>Elastica</em> with <a href="http://git-scm.com">Git</a> by running:
+						<pre class="prettyprint">$ git clone git://github.com/ruflin/Elastica</pre>
+					</p>
+				<h3 id="section-include">Include in your project</h3>
+					<p>
+						To use Elastica in your project you have to include it. Best way to do this is to use PHP <a href="http://www.php.net/manual/en/language.oop5.autoload.php">autoload</a>. This function is automatically called in case you are trying to use a class/interface which hasn't been defined yet.
+					</p>
+					<p>
+						So let's assume you installed Elastica to <code>/var/www/Elastica</code>. When you make an instance of <code>Elastica_Client</code>, the function will check if there is a file with that class in <code>/var/www/Elastica/Client</code> and load it.
+					<p>
+					<pre class="prettyprint">
+function __autoload_elastica ($class) {
+    $path = str_replace('_', '/', $class);
+
+    if (file_exists('/var/www/' . $pfad . '.php')) {
+        require_once('/var/www/' . $pfad . '.php');
+    }
+}
+spl_autoload_register('__autoload_elastica');</pre>
+					<p>
+						Now you are ready to use elasticsearch in your PHP project! Hurray!
+					</p>
+				<h3 id="section-connect">Connect to elasticsearch</h3>
+						<p>
+							You need at least one instance, also called node, of elasticsearch running and be able to connect to it. Luckily it's easy and you can follow this guide to <a href="http://www.elasticsearch.org/tutorials/2010/07/01/setting-up-elasticsearch.html">set up elasticsearch</a>.
+						</p>
+						<p>
+							To start an instance of your installed elasticsearch you just need to run the following command in the elasticsearch folder:
+						</p>
+						<pre>$ ./bin/elasticsearch -f</pre>
+						<p>
+							You can start multiple nodes by running the command multiple times. As you will see, the first node will be started on port 9200. If you start another node it will listen on port 9201 and so on. Elasticsearch automatically discovers the other nodes and creates a cluster.
+						</p>
+						<h4 id="section-connect-single">Running a single node</h4>
+							<p>
+								When your single elasticsearch node is running on <code>localhost:9200</code>, which is the default, you can simply connect:
+							</p>
+							<pre class="prettyprint">$elascticaClient = new Elastica_Client();</pre>
+							<p>
+								In case that your node is running on another server or a different port, you can pass these information as an array:
+							</p>
+							<pre class="prettyprint">
+$elascticaClient = new Elastica_Client(array(
+        'host' => 'mydomain.org',
+        'port' => 12345
+));</pre>
+						<h4 id="section-connect-cluster">Running a cluster</h4>
+							<p>
+								Elasticsearch was built with the cloud / multiple distributed servers in mind. It is quite easy to start a elasticsearch cluster simply by starting multiple instances of elasticsearch on one server or on multiple servers. To start multiple instances of elasticsearch on your local machine, just run the command to start an instance in the elasticsearch folder twice.
+							</p>
+							<p>
+								One of the goals of the distributed search index is availability. If one server goes down, search results should still be served. But if the client connects to only the server that just went down, no results are returned anymore. Because of this, <code>Elastica_Client</code> supports multiple servers which are accessed in a round robin algorithm. This is the only and also most basic option at the moment. So if we start a node on port 9200 and port 9201 above, we pass the following arguments to <code>Elastica_Client</code> to access both servers:
+							</p>
+							<pre class="prettyprint">
+$elascticaClient = new Elastica_Client(array(
+    'servers' => array(
+        array('host' => 'localhost', 'port' => 9200)
+        array('host' => 'localhost', 'port' => 9201)
+    )
+));</pre>
+							<p>
+								This client implementation also allows to distribute the load on multiple nodes. As far as I know, Elasticsearch already does this quite well on its own. But it helps if more than one node can answer http requests. Therefore, the method above is really useful if you use more than one elasticsearch node in a cluster to send your request to all servers.
+							</p>
+				
+			<h2 id="section-storing">Storing and indexing documents</h2>
+				<p>
+					To add data to the index you can just drop some documents in and it will be indexed directly. But in most cases you want to specify how your data is indexed. There are a lot of possibilities in elasticsearch to do so. You can decide how each field is mapped and how your data is analyzed to provide the full text search.
+				</p>
+				<p>
+					For more information and all the possibilities elasticsearch provides, take a look at the <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/">Analysis</a> and the <a href="http://www.elasticsearch.org/guide/reference/mapping/">Mapping</a> reference.
+				</p>
+				<p>
+					The documents in elasticsearch are organized in indexes. Each index contains one or more types which contains the documents. So to put our data in elasticsearch, we first have to define how the index and the type will look like.
+				</p>
+				<h3 id="section-analysis">Define Analysis</h3>
+					<p>
+						In elasticsearch, when you create an index, you define the number of shards and number of replicas. A shard is a part of your data and a replica is like an backup of that data. So when you have one node, all the shards and all the replicas will be on that node. When you have more nodes, your data will be balanced to these nodes. How it is balanced depends on your configuration. More on this topic can be found <a href="http://www.elasticsearch.org/videos/2010/02/08/es-distributed-diagram.html"> here</a>.
+
+					</p>
+					<p>
+						Data in elasticsearch is analyzed at two different times. Once, when you index a document it's analyzed and this information is put in the index. The other time is when do a search. Elasticsearch analyzes the search query and looks up the gained information in the index. To see all possible analyzers and filter check out the <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/">Analysis</a> reference.
+					</p>
+					<p>
+						Let's create an index called twitter! So in the <code>indexAnalyzer</code> we define how the data will be analyzed when it's indexed and then we define how elasticsearch will analyze the search query in the <code>searchAnalyzer</code>. In this example we'll also use a custom snowball filter for the data.
+					</p>
+<pre class="prettyprint">
+// Load index
+$elascticaIndex = $elascticaClient->getIndex('twitter');
+
+// Create the index new
+$elascticaIndex->create(array(
+    'number_of_shards' => 4,
+    'number_of_replicas' => 1,
+    'analysis' => array(
+        'analyzer' => array(
+            'indexAnalyzer' => array(
+                'type' => 'custom',
+                'tokenizer' => 'standard',
+                'filter' => array('lowercase', 'mySnowball')
+            ),
+            'searchAnalyzer' => array(
+                'type' => 'custom',
+                'tokenizer' => 'standard',
+                'filter' => array('standard', 'lowercase', 'mySnowball')
+            )
+        ),
+        'filter' => array(
+            'mySnowball' => array(
+                'type' => 'snowball',
+                'language' => 'German'
+            )
+        )
+    )
+), true);</pre>
+				<h3 id="section-mapping">Define Mapping</h3>
+					<p>
+						The Mapping defines what kind of data is in which field. If no mapping is defined, elasticsearch will guess the kind of the data and map it. To see all possibilities, check out the <a href="http://www.elasticsearch.org/guide/reference/mapping/">Mapping</a> reference.
+					</p>
+					<p>
+						In our example, we will create an type called tweet which is in our index twitter. So first we create that type and afterwards we define the mapping. Note that it is possible to boost data in elasticsearch. You can either boost a specific field or you can boost a complete document. To boost a document, we'll use the field <code>_boost</code>. If we boost a field it's defined just like the kind of the field.
+					</p>
+<pre class="prettyprint">
+// Load type
+$elascticaType = $elascticaIndex->getType('tweet');
+
+// Define mapping
+$mapping = new Elastica_Type_Mapping();
+$mapping->setType($elascticaType);
+$mapping->setParam('index_analyzer', 'indexAnalyzer');
+$mapping->setParam('search_analyzer', 'searchAnalyzer');
+
+// Define boost field
+$mapping->setParam('_boost', array('name' => '_boost', 'null_value' => 1.0));
+
+// Set mapping
+$mapping->setProperties(array(
+    'id'      => array('type' => 'integer', 'include_in_all' => FALSE), 
+    'user'    => array(
+        'type' => 'object',
+        'properties' => array(
+            'name'      => array('type' => 'string', 'include_in_all' => TRUE), 
+            'fullName'  => array('type' => 'string', 'include_in_all' => TRUE)
+        ),
+    ),
+    'msg'     => array('type' => 'string', 'include_in_all' => TRUE), 
+    'tstamp'  => array('type' => 'date', 'include_in_all' => FALSE), 
+    'location'=> array('type' => 'geo_point', 'include_in_all' => FALSE),
+    '_boost'  => array('type' => 'float', 'include_in_all' => FALSE)
+));</pre>
+				<h3 id="section-add">Add documents</h3>
+					<p>
+						Now that we have our index ready for the data, we just need to go ahead an put some data in there!
+					</p>
+					<p>
+						First we put together our document. In our example it's a tweet. This tweet is going to be a <code>Elastica_Document</code> which is then added to our type tweet in the index twitter.
+					</p>
+<pre class="prettyprint">
+// The Id of the document
+$id = 1;
+
+// Create a document
+$tweet = array(
+    'id'      => $id, 
+    'user'    => array(
+        'name'      => 'mewantcookie', 
+        'fullName'  => 'Cookie Monster'
+    ),
+    'msg'     => 'Me wish there were expression for cookies like there is for apples. "A cookie a day make the doctor diagnose you with diabetes" not catchy.', 
+    'tstamp'  => '1238081389', 
+    'location'=> '41.12,-71.34',
+    '_boost'  => 1.0
+);
+
+$tweetDocument = Elastica_Document($id, $tweet)
+
+$elasticaType->addDocument($tweetDocument);</pre>
+					<p>
+						Now the index contains a document. But that's not enough! Add more documents to the index, so a search makes sense!
+					</p>
+
+			<h2 id="section-credits">Credits</h2>
+				<p>
+					Credits go to <a href="https://github.com/ruflin/Elastica/network/members">all users that gave feedback and committed code</a>.
+				</p>
+
+
+
+
+
+
+				
+
+<!--
+As you will see, the first node will be started on port 9200, the second instance on port 9201. Elasticsearch automatically discovers the other node and creates a cluster. Elastica can be used to retrieve all node and cluster information. In the following example first the cluster object is retrieved (Elastica_Cluster) from the client and then the cluster state is read out. Then all cluster nodes (Elastica_Node) are retrieved and the name of every node is printed out. Every cluster has at least one node and every node has a specific name.
+$client = new Elastica_Client();
+
+// Retrieve a Elastica_Cluster object
+$cluster = $client->getCluster();
+
+// Returns the cluster state
+$state = $cluster->getState();
+
+// Gets all cluster notes
+$nodes = $cluster->getNodes();
+
+foreach ($nodes as $node) {
+    echo $node->getName();
+}
+
+
+
+
+
+<hr>
 	<p>To edit the documentation to have to do the following:
-		<pre>$ git clone git://github.com/ruflin/Elastica
+<pre class="prettyprint">$ git clone git://github.com/ruflin/Elastica
 $ cd Elastica
 $ git fetch origin
-$ git checkout -b gh-pages origin/gh-pages
-		</pre>
-		Then you can start creating your changes.
+$ git checkout -b gh-pages origin/gh-pages</pre>
+	Then you can start creating your changes.
 	</p>
 
-	<h2>API</h2>
-	<p>The API documentation of the current Elastica master can be found <a href="api/index.html">here</a>. The API is automatically created from the source code</p>
+<h2>API</h2>
+<p>The API documentation of the current Elastica master can be found <a href="api/index.html">here</a>. The API is automatically created from the source code</p>
+
+<p>
+You can download this project in either
+<a href="http://github.com/ruflin/Elastica/zipball/master">zip</a> or
+<a href="http://github.com/ruflin/Elastica/tarball/master">tar</a> formats.
+</p>
+
+<div class="download">
+	<a href="http://github.com/ruflin/Elastica/zipball/master">
+	<img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
+	<a href="http://github.com/ruflin/Elastica/tarball/master">
+	<img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+</div>
+
+<p>
+	You can also clone the project with <a href="http://git-scm.com">Git</a> by running:
+	<pre class="prettyprint">$ git clone git://github.com/ruflin/Elastica</pre>
+</p>
+
+<div class="footer">
+get the source code on GitHub : <a href="http://github.com/ruflin/Elastica">ruflin/Elastica</a>
+</div>
+-->
 
 
+		</div>
+	</div>
+	<script type="text/javascript" src="prettify.js"></script>
+	<script type="text/javascript">
+		prettyPrint();
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/ruflin/Elastica/zipball/master">zip</a> or
-      <a href="http://github.com/ruflin/Elastica/tarball/master">tar</a> formats.
-    </p>
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-2317870-19']);
+		_gaq.push(['_trackPageview']);
 
-    <div class="download">
-      <a href="http://github.com/ruflin/Elastica/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/ruflin/Elastica/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
-
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/ruflin/Elastica</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/ruflin/Elastica">ruflin/Elastica</a>
-    </div>
-
-  </div>
-
-  
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 </body>
 </html>
