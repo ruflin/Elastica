@@ -38,8 +38,7 @@ img {
  * Custom
  */
 body {
-	background-color: #fff;
-	background: url(http://subtlepatterns.com/patterns/small-crackle-bright.png) fixed;
+	background: #f3f3f3 url('pattern.png') fixed;
 	margin: 0;
 	font-family: "Ubuntu", sans-serif;
 	font-size: 100%;
