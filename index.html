@@ -182,7 +182,10 @@ $mapping->setProperties(array(
     'tstamp'  => array('type' => 'date', 'include_in_all' => FALSE), 
     'location'=> array('type' => 'geo_point', 'include_in_all' => FALSE),
     '_boost'  => array('type' => 'float', 'include_in_all' => FALSE)
-));</pre>
+));
+
+// Send mapping to type
+$mapping->send();</pre>
 				<h3 id="section-add">Add documents</h3>
 					<p>
 						Now that we have our index ready for the data, we just need to go ahead an put some data in there!
@@ -206,10 +209,13 @@ $tweet = array(
     'location'=> '41.12,-71.34',
     '_boost'  => 1.0
 );
+$tweetDocument = Elastica_Document($id, $tweet);
 
-$tweetDocument = Elastica_Document($id, $tweet)
+// Add tweet to type
+$elasticaType->addDocument($tweetDocument);
 
-$elasticaType->addDocument($tweetDocument);</pre>
+// Refresh Index
+$elasticType->getIndex()->refresh();</pre>
 					<p>
 						Now the index contains a document. But that's not enough! Add more documents to the index, so a search makes sense!
 					</p>
