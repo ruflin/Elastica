@@ -62,7 +62,7 @@ class Elastica_QueryTest extends Elastica_Test
 	}
 
 	public function testSetSort() {
-		$index = $this->createIndex();
+		$index = $this->_createIndex();
 		$type = $index->getType('test');
 
 		$doc = new Elastica_Document(1, array('name' => 'hello world'));

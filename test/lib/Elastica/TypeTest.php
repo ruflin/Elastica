@@ -11,7 +11,7 @@ class Elastica_TypeTest extends Elastica_Test
 	}
 
 	public function testTest() {
-		$index = $this->createIndex();
+		$index = $this->_createIndex();
 
 		$type = new Elastica_Type($index, 'user');
 
@@ -44,7 +44,7 @@ class Elastica_TypeTest extends Elastica_Test
 	}
 
 	public function testNoSource() {
-		$index = $this->createIndex();
+		$index = $this->_createIndex();
 
 		$type = new Elastica_Type($index, 'user');
 		$mapping = new Elastica_Type_Mapping($type, array(
@@ -85,7 +85,7 @@ class Elastica_TypeTest extends Elastica_Test
 	}
 
 	public function testDeleteDocument() {
-		$index = $this->createIndex();
+		$index = $this->_createIndex();
 		$type = new Elastica_Type($index, 'user');
 
 		// Adds hans, john and rolf to the index
@@ -126,7 +126,7 @@ class Elastica_TypeTest extends Elastica_Test
 	}
 
 	public function testGetDocumentNotExist() {
-		$index = $this->createIndex();
+		$index = $this->_createIndex();
 		$type = new Elastica_Type($index, 'test');
 		$type->addDocument(new Elastica_Document(1, array('name' => 'ruflin')));
 		$index->refresh();

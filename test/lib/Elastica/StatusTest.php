@@ -11,13 +11,13 @@ class Elastica_StatusTest extends Elastica_Test
 	}
 
 	public function testGetResponse() {
-		$index = $this->createIndex();
+		$index = $this->_createIndex();
 		$status = new Elastica_Status($index->getClient());
 		$this->assertInstanceOf('Elastica_Response', $status->getResponse());
 	}
 
 	public function testGetIndexStatuses() {
-		$index = $this->createIndex();
+		$index = $this->_createIndex();
 
 		$status = new Elastica_Status($index->getClient());
 		$statuses = $status->getIndexStatuses();
@@ -34,7 +34,7 @@ class Elastica_StatusTest extends Elastica_Test
 		$client = new Elastica_Client();
 		$index = $client->getIndex($indexName);
 		$index->create(array(), true);
-		$index = $this->createIndex();
+		$index = $this->_createIndex();
 
 		$status = new Elastica_Status($index->getClient());
 		$names = $status->getIndexNames();
@@ -71,7 +71,7 @@ class Elastica_StatusTest extends Elastica_Test
 		$indexName = 'test';
 		$aliasName = 'elastica_test-alias';
 
-		$index1 = $this->createIndex();
+		$index1 = $this->_createIndex();
 
 		$status = new Elastica_Status($index1->getClient());
 

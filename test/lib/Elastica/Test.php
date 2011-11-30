@@ -7,13 +7,17 @@ class Elastica_Test extends PHPUnit_Framework_TestCase
 
 	}
 	
+	protected function _getClient() {
+		return new Elastica_Client();
+	}
+	
 	/**
 	 * @param string $name Index name
 	 * @return Elastica_Index
 	 */
-	public function createIndex($name = 'test') {
+	public function _createIndex($name = 'test') {
 		
-		$client = new Elastica_Client();
+		$client = $this->_getClient();
 		$index = $client->getIndex('elastica_' . $name);
 		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 		return $index;

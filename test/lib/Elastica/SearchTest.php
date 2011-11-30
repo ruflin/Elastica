@@ -22,8 +22,8 @@ class Elastica_SearchTest extends Elastica_Test
 		$client = new Elastica_Client();
 		$search = new Elastica_Search($client);
 
-		$index1 = $this->createIndex('test1');
-		$index2 = $this->createIndex('test2');
+		$index1 = $this->_createIndex('test1');
+		$index2 = $this->_createIndex('test2');
 		
 		$search->addIndex($index1);
 		$indices = $search->getIndices();
@@ -64,7 +64,7 @@ class Elastica_SearchTest extends Elastica_Test
 		$client = new Elastica_Client();
 		$search = new Elastica_Search($client);
 
-		$index = $this->createIndex();
+		$index = $this->_createIndex();
 
 		$type1 = $index->getType('type1');
 		$type2 = $index->getType('type2');
@@ -97,7 +97,7 @@ class Elastica_SearchTest extends Elastica_Test
         $client = new Elastica_Client();
 		$search = new Elastica_Search($client);
 
-		$index = $this->createIndex();
+		$index = $this->_createIndex();
 
         $types = array();
         $types[] = $index->getType('type1');
@@ -137,8 +137,8 @@ class Elastica_SearchTest extends Elastica_Test
 		$search1 = new Elastica_Search($client);
 		$search2 = new Elastica_Search($client);
 
-		$index1 = $this->createIndex('test1');
-		$index2 = $this->createIndex('test2');
+		$index1 = $this->_createIndex('test1');
+		$index2 = $this->_createIndex('test2');
 		
 
 		$type1 = $index1->getType('type1');
@@ -173,8 +173,8 @@ class Elastica_SearchTest extends Elastica_Test
 		$search1 = new Elastica_Search($client);
 
 		
-		$index1 = $this->createIndex('test1');
-		$index2 = $this->createIndex('test2');
+		$index1 = $this->_createIndex('test1');
+		$index2 = $this->_createIndex('test2');
 
 		$type1 = $index1->getType('hello1');
 

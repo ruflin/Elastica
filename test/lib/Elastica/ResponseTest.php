@@ -20,7 +20,7 @@ class Elastica_ResponseTest extends Elastica_Test
 
 	public function testResponse() {
 
-		$index = $this->createIndex();
+		$index = $this->_createIndex();
 		$type = $index->getType('helloworld');
 
         $mapping = new Elastica_Type_Mapping($type, array(

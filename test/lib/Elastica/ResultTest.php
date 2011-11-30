@@ -2,7 +2,7 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class Elastica_ResultTest extends PHPUnit_Framework_TestCase
+class Elastica_ResultTest extends Elastica_Test
 {
 	public function setUp() {
 	}
@@ -12,12 +12,9 @@ class Elastica_ResultTest extends PHPUnit_Framework_TestCase
 
 	public function testGetters() {
 		// Creates a new index 'xodoa' and a type 'user' inside this index
-		$indexName = 'xodoa';
 		$typeName = 'user';
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
+		$index = $this->_createIndex();
 		$type = $index->getType($typeName);
 
 
@@ -28,7 +25,6 @@ class Elastica_ResultTest extends PHPUnit_Framework_TestCase
 
 		// Refreshes index
 		$index->refresh();
-		sleep(2);
 
 		$resultSet = $type->search('hans');
 
@@ -37,7 +33,7 @@ class Elastica_ResultTest extends PHPUnit_Framework_TestCase
 		$result = $resultSet->current();
 
 		$this->assertInstanceOf('Elastica_Result', $result);
-		$this->assertEquals($indexName, $result->getIndex());
+		$this->assertEquals($index->getName(), $result->getIndex());
 		$this->assertEquals($typeName, $result->getType());
 		$this->assertEquals($docId, $result->getId());
 		$this->assertGreaterThan(0, $result->getScore());
@@ -66,7 +62,6 @@ class Elastica_ResultTest extends PHPUnit_Framework_TestCase
 
 		// Refreshes index
 		$index->refresh();
-		sleep(2);
 
 		$resultSet = $type->search('hans');
 

@@ -122,7 +122,7 @@ class Elastica_Response {
 
 
 	/**
-	 * @return int
+	 * @return int Time request took
 	 */
 	public function getEngineTime() {
 		$data = $this->getData();
@@ -131,7 +131,7 @@ class Elastica_Response {
 			throw new Elastica_Exception_NotFound("Unable to find the field [took]from the response");
 		}
 
-		return  $data['took'];
+		return $data['took'];
 	}
 
 
