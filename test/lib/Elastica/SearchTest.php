@@ -2,7 +2,7 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class Elastica_SearchTest extends PHPUnit_Framework_TestCase
+class Elastica_SearchTest extends Elastica_Test
 {
 	public function setUp() {
 	}
@@ -22,12 +22,9 @@ class Elastica_SearchTest extends PHPUnit_Framework_TestCase
 		$client = new Elastica_Client();
 		$search = new Elastica_Search($client);
 
-		$index1 = $client->getIndex('test1');
-		$index1->create(array(), true);
-
-		$index2 = $client->getIndex('test2');
-		$index2->create(array(), true);
-
+		$index1 = $this->createIndex('test1');
+		$index2 = $this->createIndex('test2');
+		
 		$search->addIndex($index1);
 		$indices = $search->getIndices();
 
@@ -55,8 +52,8 @@ class Elastica_SearchTest extends PHPUnit_Framework_TestCase
 		$search = new Elastica_Search($client);
 
         $indices = array();
-        $indices[] = $client->getIndex('test1');
-        $indices[] = $client->getIndex('test2');
+        $indices[] = $client->getIndex('elastica_test1');
+        $indices[] = $client->getIndex('elastica_test2');
 
         $search->addIndices($indices);
 
@@ -67,8 +64,7 @@ class Elastica_SearchTest extends PHPUnit_Framework_TestCase
 		$client = new Elastica_Client();
 		$search = new Elastica_Search($client);
 
-		$index = $client->getIndex('test1');
-		$index->create(array(), true);
+		$index = $this->createIndex();
 
 		$type1 = $index->getType('type1');
 		$type2 = $index->getType('type2');
@@ -101,8 +97,7 @@ class Elastica_SearchTest extends PHPUnit_Framework_TestCase
         $client = new Elastica_Client();
 		$search = new Elastica_Search($client);
 
-		$index = $client->getIndex('test1');
-		$index->create(array(), true);
+		$index = $this->createIndex();
 
         $types = array();
         $types[] = $index->getType('type1');
@@ -142,11 +137,9 @@ class Elastica_SearchTest extends PHPUnit_Framework_TestCase
 		$search1 = new Elastica_Search($client);
 		$search2 = new Elastica_Search($client);
 
-		$index1 = $client->getIndex('test1');
-		$index1->create(array(), true);
-
-		$index2 = $client->getIndex('test2');
-		$index2->create(array(), true);
+		$index1 = $this->createIndex('test1');
+		$index2 = $this->createIndex('test2');
+		
 
 		$type1 = $index1->getType('type1');
 		$type2 = $index1->getType('type2');
@@ -179,11 +172,9 @@ class Elastica_SearchTest extends PHPUnit_Framework_TestCase
 		$client = new Elastica_Client();
 		$search1 = new Elastica_Search($client);
 
-		$index1 = $client->getIndex('test1');
-		$index1->create(array(), true);
-
-		$index2 = $client->getIndex('test2');
-		$index2->create(array(), true);
+		
+		$index1 = $this->createIndex('test1');
+		$index2 = $this->createIndex('test2');
 
 		$type1 = $index1->getType('hello1');
 
