@@ -120,7 +120,6 @@ class Elastica_Response {
 		return $this;
 	}
 
-
 	/**
 	 * @return int Time request took
 	 */
@@ -134,11 +133,10 @@ class Elastica_Response {
 		return $data['took'];
 	}
 
-
 	/**
 	 * Get the _shard statistics for the response
 	 *
-	 * @return void
+	 * @return array
 	 */
 	public function getShardsStatistics() {
 		$data = $this->getData();
