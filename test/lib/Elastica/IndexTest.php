@@ -3,31 +3,20 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class Elastica_IndexTest extends PHPUnit_Framework_TestCase
+class Elastica_IndexTest extends Elastica_Test
 {
-	public function setUp() {
-
-	}
-
-	public function tearDown() {
-	}
-
 	public function testMapping() {
-		$client = new Elastica_Client();
-
-		$index = $client->getIndex('test');
-		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
-
+		$index = $this->_createIndex();
 		$doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
 
 		$type = $index->getType('test');
 
 		$mapping = array(
-				'id' => array('type' => 'integer', 'store' => 'yes'),
-				'email' => array('type' => 'string', 'store' => 'no'),
-				'username' => array('type' => 'string', 'store' => 'no'),
-				'test' => array('type' => 'integer', 'store' => 'no'),
-			);
+			'id' => array('type' => 'integer', 'store' => 'yes'),
+			'email' => array('type' => 'string', 'store' => 'no'),
+			'username' => array('type' => 'string', 'store' => 'no'),
+			'test' => array('type' => 'integer', 'store' => 'no'),
+		);
 		$type->setMapping($mapping);
 
 		$type->addDocument($doc);
@@ -45,11 +34,9 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testParent() {
-
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'parentchild');
-		$index->create(array(), true);
-
+		
+		$index = $this->_createIndex();
+		
 		$typeBlog = new Elastica_Type($index, 'blog');
 
 		$typeComment = new Elastica_Type($index, 'comment');
@@ -97,8 +84,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 			),
 		);
 
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'test');
+		$index = $this->_createIndex();
 		$type = new Elastica_Type($index, 'test');
 
 		$index->create($indexParams, true);
@@ -138,8 +124,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 			),
 		);
 
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'content');
+		$index = $this->_createIndex();
 		$type = new Elastica_Type($index, 'content');
 
 		$index->create($indexParams, true);
@@ -188,7 +173,6 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 
 		$data = $index->addAlias($aliasName, true)->getData();
 		$this->assertTrue($data['ok']);
-
 
 		$index2 = $client->getIndex($aliasName);
 		$type2 = $index2->getType($typeName);
