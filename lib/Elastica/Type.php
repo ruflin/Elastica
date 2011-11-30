@@ -96,7 +96,11 @@ class Elastica_Type implements Elastica_Searchable
 	public function getDocument($id) {
 		$path = $id;
 
-		$result = $this->request($path, Elastica_Request::GET)->getData();
+		try {
+			$result = $this->request($path, Elastica_Request::GET)->getData();
+		} catch(Elastica_Exception_Response $e) {
+			throw new Elastica_Exception_NotFound('doc id ' . $id . ' not found');
+		}
 
 		if (empty($result['exists'])) {
 			throw new Elastica_Exception_NotFound('doc id ' . $id . ' not found');
