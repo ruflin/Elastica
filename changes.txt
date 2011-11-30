@@ -1,5 +1,8 @@
 CHANGES
 
+2011-11-30
+- Release v0.18.5.0
+
 2011-11-28
 - Elastica_Filter_Nested added
 
