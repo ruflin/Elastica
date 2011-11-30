@@ -2,7 +2,7 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class Elastica_QueryTest extends PHPUnit_Framework_TestCase
+class Elastica_QueryTest extends Elastica_Test
 {
 	public function setUp() {
 	}
@@ -62,9 +62,7 @@ class Elastica_QueryTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testSetSort() {
-		$client = new Elastica_Client();
-		$index = $client->getIndex('test');
-		$index->create(array(), true);
+		$index = $this->createIndex();
 		$type = $index->getType('test');
 
 		$doc = new Elastica_Document(1, array('name' => 'hello world'));
