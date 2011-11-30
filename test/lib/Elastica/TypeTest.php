@@ -2,7 +2,7 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class Elastica_TypeTest extends PHPUnit_Framework_TestCase
+class Elastica_TypeTest extends Elastica_Test
 {
 	public function setUp() {
 	}
@@ -11,10 +11,7 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testTest() {
-		// Creates a new index 'xodoa' and a type 'user' inside this index
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'xodoa');
-		$index->create(array(), true);
+		$index = $this->createIndex();
 
 		$type = new Elastica_Type($index, 'user');
 
@@ -47,10 +44,7 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testNoSource() {
-		// Creates a new index 'xodoa' and a type 'user' inside this index
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'xodoa');
-		$index->create(array(), true);
+		$index = $this->createIndex();
 
 		$type = new Elastica_Type($index, 'user');
 		$mapping = new Elastica_Type_Mapping($type, array(
@@ -90,15 +84,8 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
 		$this->assertEmpty($result->getData());
 	}
 
-	public function testSearchDefault() {
-
-	}
-
 	public function testDeleteDocument() {
-		// Creates a new index 'xodoa' and a type 'user' inside this index
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'xodoa');
-		$index->create(array(), true);
+		$index = $this->createIndex();
 		$type = new Elastica_Type($index, 'user');
 
 		// Adds hans, john and rolf to the index
@@ -139,10 +126,7 @@ class Elastica_TypeTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testGetDocumentNotExist() {
-		// Creates a new index 'xodoa' and a type 'user' inside this index
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'test');
-		$index->create(array(), true);
+		$index = $this->createIndex();
 		$type = new Elastica_Type($index, 'test');
 		$type->addDocument(new Elastica_Document(1, array('name' => 'ruflin')));
 		$index->refresh();
