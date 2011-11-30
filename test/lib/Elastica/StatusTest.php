@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-class Elastica_StatusTest extends PHPUnit_Framework_TestCase
+class Elastica_StatusTest extends Elastica_Test
 {
 	public function setUp() {
 
@@ -11,21 +11,15 @@ class Elastica_StatusTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testGetResponse() {
-		$client = new Elastica_Client();
-		$client->getIndex('test');
-
-		$status = new Elastica_Status($client);
-
+		$index = $this->createIndex();
+		$status = new Elastica_Status($index->getClient());
 		$this->assertInstanceOf('Elastica_Response', $status->getResponse());
 	}
 
 	public function testGetIndexStatuses() {
-		$indexName = 'test';
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
+		$index = $this->createIndex();
 
-		$status = new Elastica_Status($client);
+		$status = new Elastica_Status($index->getClient());
 		$statuses = $status->getIndexStatuses();
 
 		$this->assertInternalType('array', $statuses);
@@ -40,12 +34,13 @@ class Elastica_StatusTest extends PHPUnit_Framework_TestCase
 		$client = new Elastica_Client();
 		$index = $client->getIndex($indexName);
 		$index->create(array(), true);
+		$index = $this->createIndex();
 
-		$status = new Elastica_Status($client);
+		$status = new Elastica_Status($index->getClient());
 		$names = $status->getIndexNames();
 
 		$this->assertInternalType('array', $names);
-		$this->assertTrue(in_array($indexName, $names));
+		$this->assertTrue(in_array($index->getName(), $names));
 
 		foreach($names as $name) {
 			$this->assertInternalType('string', $name);
@@ -53,8 +48,8 @@ class Elastica_StatusTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testIndexExists() {
-		$indexName = 'test';
-		$aliasName = 'test-alias';
+		$indexName = 'elastica_test';
+		$aliasName = 'elastica_test-alias';
 
 		$client = new Elastica_Client();
 		$index = $client->getIndex($indexName);
@@ -74,14 +69,11 @@ class Elastica_StatusTest extends PHPUnit_Framework_TestCase
 
 	public function testAliasExists() {
 		$indexName = 'test';
-		$aliasName = 'test-alias';
+		$aliasName = 'elastica_test-alias';
 
-		$client = new Elastica_Client();
-		$index1 = $client->getIndex($indexName);
+		$index1 = $this->createIndex();
 
-		$index1->create(array(), true);
-
-		$status = new Elastica_Status($client);
+		$status = new Elastica_Status($index1->getClient());
 
 		foreach($status->getIndicesWithAlias($aliasName) as $tmpIndex) {
 			$tmpIndex->removeAlias($aliasName);
@@ -100,7 +92,7 @@ class Elastica_StatusTest extends PHPUnit_Framework_TestCase
         $status = $client->getStatus();
         $serverStatus = $status->getServerStatus();
 
-        $this->assertTrue( !empty($serverStatus) );
+        $this->assertTrue(!empty($serverStatus) );
         $this->assertTrue('array' == gettype($serverStatus));
         $this->assertArrayHasKey('ok', $serverStatus);
         $this->assertTrue($serverStatus['ok']);
