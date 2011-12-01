@@ -159,10 +159,14 @@ class Elastica_Search
 	 * Search in the set indices, types
 	 *
 	 * @param mixed $query
+	 * @param int $limit OPTIONAL
 	 * @return Elastica_ResultSet
 	 */
-	public function search($query) {
+	public function search($query, $limit = 0) {
 		$query = Elastica_Query::create($query);
+		if ($limit) {
+			$query->setLimit($limit);
+		}
 		$path = $this->getPath();
 
 		$response = $this->getClient()->request($path, Elastica_Request::GET, $query->toArray());

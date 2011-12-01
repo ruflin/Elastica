@@ -1,5 +1,9 @@
 CHANGES
 
+2011-12-01
+- Elastica_Filter_Term::addTerm renamed to setTerm, Elastica_Filter_Term::setTerm renamed to setRawTerm
+- Elastica_Query_Term::addTerm renamed to setTerm, Elastica_Query_Term::setTerm renamed to setRawTerm
+
 2011-11-30
 - Release v0.18.5.0
 

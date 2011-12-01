@@ -74,7 +74,7 @@ class Elastica_QueryTest extends Elastica_Test
 
 
 		$queryTerm = new Elastica_Query_Term();
-		$queryTerm->addTerm('lastname', 'ruflin');
+		$queryTerm->setTerm('lastname', 'ruflin');
 
 		$index->refresh();
 
@@ -148,7 +148,7 @@ class Elastica_QueryTest extends Elastica_Test
 
 
 		$termQuery = new Elastica_Query_Term();
-		$termQuery->addTerm('text', 'value');
+		$termQuery->setTerm('text', 'value');
 		$query->setQuery($termQuery);
 
 		$this->assertEquals($termQuery->toArray(), $query->getQuery());

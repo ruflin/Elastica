@@ -120,6 +120,7 @@ class Elastica_Query extends Elastica_Param
 	 *
 	 * @param mixed $sort Sort parameter
 	 * @return Elastica_Query Query object
+	 * @link http://www.elasticsearch.org/guide/reference/api/search/sort.html
 	 */
 	public function addSort($sort) {
 		return $this->addParam('sort', $sort);
