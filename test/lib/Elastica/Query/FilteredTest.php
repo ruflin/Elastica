@@ -35,8 +35,6 @@ class Elastica_Query_FilteredTest extends PHPUnit_Framework_TestCase
 		$resultSet = $type->search($queryString);
 		$this->assertEquals(2, $resultSet->count());
 
-		error_log(print_r($query1->toArray(), true));
-		error_log(print_r($filter1->toArray(), true));
 		$resultSet = $type->search($query1);
 		$this->assertEquals(1, $resultSet->count());
 
