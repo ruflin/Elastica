@@ -71,7 +71,7 @@ class Elastica_IndexTest extends Elastica_Test
 	}
 
 	public function testAddPDFFile() {
-		$this->markTestIncomplete('Result is not 100% as expected :-(');
+
 		$indexMapping = array(
 			'file' => array('type' => 'attachment', 'store' => 'no'),
 			'text' => array('type' => 'string', 'store' => 'no'),
@@ -107,7 +107,12 @@ class Elastica_IndexTest extends Elastica_Test
 		$resultSet = $type->search('basel');
 		$this->assertEquals(2, $resultSet->count());
 
+		// Author is ruflin
 		$resultSet = $type->search('ruflin');
+		$this->assertEquals(1, $resultSet->count());
+		
+		// String does not exist in file
+		$resultSet = $type->search('guschti');
 		$this->assertEquals(0, $resultSet->count());
 	}
 
