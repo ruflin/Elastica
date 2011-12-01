@@ -243,8 +243,8 @@ class Elastica_Client
 	 * Deletes documents with the given ids, index, type from the index
 	 *
 	 * @param array $ids Document ids
-	 * @param string $index Index name
-	 * @param string $type Type of documents
+	 * @param string|Elastica_Index $index Index name
+	 * @param string|Elastica_Type $type Type of documents
 	 * @return Elastica_Response Response object
 	 * @throws Elastica_Exception If ids is empty
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/

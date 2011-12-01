@@ -49,10 +49,9 @@ class Elastica_ResponseTest extends Elastica_Test
         $engineTime = $resultSet->getResponse()->getEngineTime();
         $shardsStats = $resultSet->getResponse()->getShardsStatistics();
 
-        $this->assertTrue($engineTime != '');
+        $this->assertInternalType('int', $engineTime);
         $this->assertTrue(is_array($shardsStats));
         $this->assertArrayHasKey('total', $shardsStats);
         $this->assertArrayHasKey('successful', $shardsStats);
-
 	}
 }

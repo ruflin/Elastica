@@ -25,7 +25,7 @@ class Elastica_Transport_MemcacheTest extends PHPUnit_Framework_TestCase
 		$port = 11211;
 		$client = new Elastica_Client(array('host' => $host, 'port' => $port, 'transport' => 'Memcache'));
 
-		$index = $client->getIndex('test1');
+		$index = $client->getIndex('elastica_test1');
 		$index->create(array(), true);
 
 		$type = $index->getType('user');
@@ -49,7 +49,7 @@ class Elastica_Transport_MemcacheTest extends PHPUnit_Framework_TestCase
 
 		// Refresh index
 		$index->refresh();
-		$this->markTestIncomplete('Does not work yet');
+		$this->markTestSkipped('Memcache implementation is not finished yet');
 		$resultSet = $type->search('rolf');
 	}
 }

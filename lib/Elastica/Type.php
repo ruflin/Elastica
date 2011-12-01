@@ -201,6 +201,16 @@ class Elastica_Type implements Elastica_Searchable
 		}
 		return $this->request($id, Elastica_Request::DELETE);
 	}
+	
+	/**
+	 * Deletes the given list of ids from this type
+	 * 
+	 * @param array $ids
+	 * @return Elastica_Response Response object
+	 */
+	public function deleteIds(array $ids) {
+		return $this->getIndex()->getClient()->deleteIds($ids, $this->getIndex(), $this);
+	}
 
 	/**
 	 * Deletes entries in the db based on a query

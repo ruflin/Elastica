@@ -4,7 +4,7 @@ require_once dirname(__FILE__) . '/../../bootstrap.php';
 /**
  * Tests the example code
  */
-class Elastica_ExampleTest extends PHPUnit_Framework_TestCase
+class Elastica_ExampleTest extends Elastica_Test
 {
 	public function setUp() {
 	}
@@ -15,7 +15,7 @@ class Elastica_ExampleTest extends PHPUnit_Framework_TestCase
 	public function testExample() {
 		// Creates a new index 'xodoa' and a type 'user' inside this index
 		$client = new Elastica_Client();
-		$index = $client->getIndex('xodoa');
+		$index = $client->getIndex('elastica_test');
 		$index->create(array(), true);
 
 		$type = $index->getType('user');
