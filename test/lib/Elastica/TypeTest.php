@@ -10,7 +10,7 @@ class Elastica_TypeTest extends Elastica_Test
 	public function tearDown() {
 	}
 
-	public function testTest() {
+	public function testSearch() {
 		$index = $this->_createIndex();
 
 		$type = new Elastica_Type($index, 'user');

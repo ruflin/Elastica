@@ -155,6 +155,51 @@ class Elastica_IndexTest extends Elastica_Test
 		$resultSet = $type->search('ruflin');
 		$this->assertEquals(0, $resultSet->count());
 	}
+	
+	public function testExcludeFileSource() {
+		
+		$indexMapping = array(
+			'file' => array('type' => 'attachment', 'store' => 'yes'),
+			'text' => array('type' => 'string', 'store' => 'yes'),
+			'title' => array('type' => 'string', 'store' => 'yes'),
+		);
+		
+		$indexParams = array(
+			'index' => array(
+				'number_of_shards' => 1,
+				'number_of_replicas' => 0
+			),
+		);
+		
+		$index = $this->_createIndex();
+		$type = new Elastica_Type($index, 'content');
+		
+		$mapping = Elastica_Type_Mapping::create($indexMapping);
+		$mapping->setSource(array('excludes' => array('file')));
+		
+		$mapping->setType($type);
+				
+		$index->create($indexParams, true);
+		$type->setMapping($mapping);
+		
+		$docId = 1;
+		$text = 'Basel World';
+		$title = 'No Title';
+		
+		$doc1 = new Elastica_Document($docId);
+		$doc1->addFile('file', BASE_PATH . '/data/test.docx');
+		$doc1->add('text', $text);
+		$doc1->add('title', $title);
+		$type->addDocument($doc1);
+		
+		// Optimization necessary, as otherwise source still in realtime get
+		$index->optimize();
+
+		$data = $type->getDocument($docId)->getData();
+		$this->assertEquals($data['title'], $title);
+		$this->assertEquals($data['text'], $text);
+		$this->assertFalse(isset($data['file']));		
+	}
 
 	public function testAddRemoveAlias() {
 		$client = new Elastica_Client();
