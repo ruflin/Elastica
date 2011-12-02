@@ -1,6 +1,8 @@
 Elastica: elasticsearch PHP Client
 ==================================
 
+[![Build Status](https://secure.travis-ci.org/ruflin/Elastica.png?branch=master)](http://travis-ci.org/ruflin/Elastica)
+
 Documentation
 ---------------------
 Check out the [Elastica documentation](http://ruflin.github.com/Elastica/) to find out how Elstica works. If you have questions, don't hestitate to ask them in the [Elastica google group](https://groups.google.com/group/elastica-php-client). Issues should go to the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
