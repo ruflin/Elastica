@@ -20,19 +20,19 @@ class Elastica_Type implements Elastica_Searchable
 	protected $_index = null;
 
 	/**
-	 * @var string Object type
+	 * @var string Type name
 	 */
-	protected $_type = '';
+	protected $_name = '';
 
 	/**
 	 * Creates a new type object inside the given index
 	 *
 	 * @param Elastica_Index $index Index Object
-	 * @param string $type Type name
+	 * @param string $name Type name
 	 */
-	public function __construct(Elastica_Index $index, $type) {
+	public function __construct(Elastica_Index $index, $name) {
 		$this->_index = $index;
-		$this->_type = $type;
+		$this->_name = $name;
 	}
 
 	/**
@@ -75,13 +75,13 @@ class Elastica_Type implements Elastica_Searchable
 	/**
 	 * Uses _bulk to send documents to the server
 	 *
-	 * @param array $docs Array of Elastica_Document
+	 * @param Elastica_Document[] $docs Array of Elastica_Document
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
 	 */
 	public function addDocuments(array $docs) {
 
 		foreach($docs as $doc) {
-			$doc->setType($this->getType());
+			$doc->setType($this->getName());
 		}
 
 		return $this->getIndex()->addDocuments($docs);
@@ -107,27 +107,28 @@ class Elastica_Type implements Elastica_Searchable
 		}
 
 		$data = isset($result['_source'])?$result['_source']:array();
-		$document = new Elastica_Document($id, $data, $this->getType(),  $this->getIndex());
+		$document = new Elastica_Document($id, $data, $this->getName(),  $this->getIndex());
 		$document->setVersion($result['_version']);
 		return $document;
-	}
-
-	/**
-	 * @return string Type name
-	 */
-	public function getName() {
-		return $this->getType();
 	}
 
 	/**
 	 * Returns the type name
 	 *
 	 * @return string Type
+	 * @deprecated Use getName instead
 	 */
 	public function getType() {
-		return $this->_type;
+		return $this->getName();
 	}
 
+	/**
+	 * @return string Type name
+	 */
+	public function getName() {
+		return $this->_name;
+	}
+	
 	/**
 	 * Sets value type mapping for this type
 	 *
@@ -251,7 +252,7 @@ class Elastica_Type implements Elastica_Searchable
 	 * @return Elastica_Response Response object
 	 */
 	public function request($path, $method, $data = array()) {
-		$path = $this->getType() . '/' . $path;
+		$path = $this->getName() . '/' . $path;
 		return $this->getIndex()->request($path, $method, $data);
 	}
 }
