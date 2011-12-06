@@ -1,5 +1,8 @@
 CHANGES
 
+2011-12-06
+- Elastica_Percolator added. See tests for more details
+
 2011-12-02
 - Rename Elastica_Type::getType() to Elastica_Type::getName(), getType() is now deprecated
 
