@@ -58,6 +58,11 @@ class Elastica_Type implements Elastica_Searchable
 		if ($doc->getOpType()) {
 			$query['op_type'] = $doc->getOpType();
 		}
+        
+        if ($doc->getPercolate()) {
+            $query['percolate'] = $doc->getPercolate();
+        }
+        
 		if (count($query) > 0) {
 			$path .= '?' . http_build_query($query);
 		}
