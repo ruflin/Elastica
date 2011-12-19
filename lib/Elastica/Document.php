@@ -34,6 +34,11 @@ class Elastica_Document {
 	protected $_optype = '';
 
 	/**
+     * @var string Percolate
+     */
+    protected $_percolate = '';
+
+	/**
 	 * Creates a new document
 	 *
 	 * @param int $id OPTIONAL $id Id is create if empty
@@ -261,6 +266,28 @@ class Elastica_Document {
 	public function getOpType() {
 		return $this->_optype;
 	}
+	
+	/**
+     * Set percolate query param
+     * 
+     * @param string $value percolator filter
+     * @return Elastica_Document 
+     */
+    public function setPercolate($value='*')
+    {
+        $this->_percolate = $value;
+        return $this;
+    }
+    
+    /**
+     * Get percolate parameter
+     * 
+     * @return string
+     */
+    public function getPercolate()
+    {
+        return $this->_percolate;
+    }
 	
 	/**
 	 * Returns the document as an array
