@@ -9,11 +9,10 @@
  * Search over different indices and types is not supported yet {@link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/indices_types/}
  *
  * @category Xodoa
- * @package Elastica
- * @author Nicolas Ruflin <spam@ruflin.com>
+ * @package  Elastica
+ * @author   Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Type implements Elastica_Searchable
-{
+class Elastica_Type implements Elastica_Searchable {
 	/**
 	 * @var Elastica_Index Index object
 	 */
@@ -28,7 +27,7 @@ class Elastica_Type implements Elastica_Searchable
 	 * Creates a new type object inside the given index
 	 *
 	 * @param Elastica_Index $index Index Object
-	 * @param string $name Type name
+	 * @param string         $name  Type name
 	 */
 	public function __construct(Elastica_Index $index, $name) {
 		$this->_index = $index;
@@ -46,23 +45,23 @@ class Elastica_Type implements Elastica_Searchable
 		$path = $doc->getId();
 
 		$query = array();
-		
+
 		if ($doc->getVersion() > 0) {
 			$query['version'] = $doc->getVersion();
 		}
-		
+
 		if ($doc->getParent()) {
 			$query['parent'] = $doc->getParent();
 		}
-		
+
 		if ($doc->getOpType()) {
 			$query['op_type'] = $doc->getOpType();
 		}
-        
-        if ($doc->getPercolate()) {
-            $query['percolate'] = $doc->getPercolate();
-        }
-        
+
+		if ($doc->getPercolate()) {
+			$query['percolate'] = $doc->getPercolate();
+		}
+
 		if (count($query) > 0) {
 			$path .= '?' . http_build_query($query);
 		}
@@ -85,7 +84,7 @@ class Elastica_Type implements Elastica_Searchable
 	 */
 	public function addDocuments(array $docs) {
 
-		foreach($docs as $doc) {
+		foreach ($docs as $doc) {
 			$doc->setType($this->getName());
 		}
 
@@ -103,7 +102,7 @@ class Elastica_Type implements Elastica_Searchable
 
 		try {
 			$result = $this->request($path, Elastica_Request::GET)->getData();
-		} catch(Elastica_Exception_Response $e) {
+		} catch (Elastica_Exception_Response $e) {
 			throw new Elastica_Exception_NotFound('doc id ' . $id . ' not found');
 		}
 
@@ -111,8 +110,8 @@ class Elastica_Type implements Elastica_Searchable
 			throw new Elastica_Exception_NotFound('doc id ' . $id . ' not found');
 		}
 
-		$data = isset($result['_source'])?$result['_source']:array();
-		$document = new Elastica_Document($id, $data, $this->getName(),  $this->getIndex());
+		$data = isset($result['_source']) ? $result['_source'] : array();
+		$document = new Elastica_Document($id, $data, $this->getName(), $this->getIndex());
 		$document->setVersion($result['_version']);
 		return $document;
 	}
@@ -133,12 +132,12 @@ class Elastica_Type implements Elastica_Searchable
 	public function getName() {
 		return $this->_name;
 	}
-	
+
 	/**
 	 * Sets value type mapping for this type
 	 *
 	 * @param Elastica_Type_Mapping|array $mapping Elastica_Type_Mapping object or property array with all mappings
-	 * @param bool $source OPTIONAL If source should be stored or not (default = true)
+	 * @param bool                        $source  OPTIONAL If source should be stored or not (default = true)
 	 */
 	public function setMapping($mapping) {
 
@@ -161,7 +160,7 @@ class Elastica_Type implements Elastica_Searchable
 
 	/**
 	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
-	 * @param int $limit OPTIONAL
+	 * @param int                         $limit OPTIONAL
 	 * @return Elastica_ResultSet ResultSet with all results inside
 	 * @see Elastica_Searchable::search
 	 */
@@ -211,10 +210,10 @@ class Elastica_Type implements Elastica_Searchable
 		}
 		return $this->request($id, Elastica_Request::DELETE);
 	}
-	
+
 	/**
 	 * Deletes the given list of ids from this type
-	 * 
+	 *
 	 * @param array $ids
 	 * @return Elastica_Response Response object
 	 */
@@ -238,8 +237,8 @@ class Elastica_Type implements Elastica_Searchable
 	 *
 	 * The id in the given object has to be set
 	 *
-	 * @param EalsticSearch_Document $doc Document to query for similar objects
-	 * @param array $args OPTIONAL Additional arguments for the query
+	 * @param EalsticSearch_Document $doc  Document to query for similar objects
+	 * @param array                  $args OPTIONAL Additional arguments for the query
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/more_like_this/
 	 */
 	public function moreLikeThis(Elastica_Document $doc, $args = array()) {
@@ -251,9 +250,9 @@ class Elastica_Type implements Elastica_Searchable
 	/**
 	 * Makes calls to the elasticsearch server based on this type
 	 *
-	 * @param string $path Path to call
+	 * @param string $path   Path to call
 	 * @param string $method Rest method to use (GET, POST, DELETE, PUT)
-	 * @param array $data OPTIONAL Arguments as array
+	 * @param array  $data   OPTIONAL Arguments as array
 	 * @return Elastica_Response Response object
 	 */
 	public function request($path, $method, $data = array()) {

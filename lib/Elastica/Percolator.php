@@ -13,7 +13,10 @@ class Elastica_Percolator
 	 * @var Elastica_Index
 	 */
 	protected $_index = null;
-	
+
+	/**
+	 * @param Elastica_Index $index
+	 */
 	public function __construct(Elastica_Index $index) {
 		$this->_index = $index;
 	}
