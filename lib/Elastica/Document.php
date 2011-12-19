@@ -101,6 +101,15 @@ class Elastica_Document {
 	}
 
 	/**
+	 * @param string $key Document key
+	 * @param string $content Raw file content
+	 * @return Elastica_Document
+	 */
+	public function addFileContent($key, $content) {
+		return $this->add($key, base64_encode($content));
+	}
+
+	/**
 	 * Adds a geopoint to the document
 	 *
 	 * Geohashes re not yet supported

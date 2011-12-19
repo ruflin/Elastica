@@ -115,6 +115,52 @@ class Elastica_IndexTest extends Elastica_Test
 		$resultSet = $type->search('guschti');
 		$this->assertEquals(0, $resultSet->count());
 	}
+	
+	public function testAddPDFFileContent() {
+	
+		$indexMapping = array(
+			'file' => array('type' => 'attachment', 'store' => 'no'),
+			'text' => array('type' => 'string', 'store' => 'no'),
+		);
+	
+		$indexParams = array(
+			'index' => array(
+				'number_of_shards' => 1,
+				'number_of_replicas' => 0
+			),
+		);
+	
+		$index = $this->_createIndex();
+		$type = new Elastica_Type($index, 'test');
+	
+		$index->create($indexParams, true);
+		$type->setMapping($indexMapping);
+		
+		$doc1 = new Elastica_Document(1);
+		$doc1->addFileContent('file', file_get_contents(BASE_PATH . '/data/test.pdf'));
+		$doc1->add('text', 'basel world');
+		$type->addDocument($doc1);
+	
+		$doc2 = new Elastica_Document(2);
+		$doc2->add('text', 'running in basel');
+		$type->addDocument($doc2);
+	
+		$index->optimize();
+	
+		$resultSet = $type->search('xodoa');
+		$this->assertEquals(1, $resultSet->count());
+	
+		$resultSet = $type->search('basel');
+		$this->assertEquals(2, $resultSet->count());
+	
+		// Author is ruflin
+		$resultSet = $type->search('ruflin');
+		$this->assertEquals(1, $resultSet->count());
+	
+		// String does not exist in file
+		$resultSet = $type->search('guschti');
+		$this->assertEquals(0, $resultSet->count());
+	}
 
 	public function testAddWordxFile() {
 		$indexMapping = array(

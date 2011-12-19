@@ -71,8 +71,6 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 			curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
 		}
 
-
-
 		$start = microtime(true);
 		$responseString = curl_exec($conn);
 		$end = microtime(true);

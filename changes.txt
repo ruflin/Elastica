@@ -1,5 +1,8 @@
 CHANGES
 
+2011-12-19
+- Percolator for Type and Documents added
+
 2011-12-06
 - Elastica_Percolator added. See tests for more details
 
