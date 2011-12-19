@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-class Elastica_Query_MappingTest extends PHPUnit_Framework_TestCase
+class Elastica_Query_MappingTest extends Elastica_Test
 {
 	public function setUp() {
 	}
@@ -55,18 +55,18 @@ class Elastica_Query_MappingTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEmpty($document->getData());
 	}
-	
+
 	public function testEnableTTL() {
 		$client = new Elastica_Client();
 		$index = $client->getIndex('test');
-		
+
 		$index->create(array(), true);
 		$type = $index->getType('test');
-		
+
 		$mapping = new Elastica_Type_Mapping($type, array());
-		
+
 		$mapping->enableTTL();
-		
+
 		$data = $mapping->toArray();
 		$this->assertTrue($data[$type->getName()]['_ttl']['enabled']);
 	}
@@ -112,6 +112,29 @@ class Elastica_Query_MappingTest extends PHPUnit_Framework_TestCase
 		$index->refresh();
 		$resultSet = $type->search('ruflin');
 		print_r($resultSet);
+	}
+
+	public function testParentMapping() {
+		$index = $this->_createIndex();
+		$parenttype = new Elastica_Type($index, 'parenttype');
+		$parentmapping = new Elastica_Type_Mapping($parenttype,
+			array(
+				'name' => array('type' => 'string', 'store' => 'yes')
+			)
+		);
+
+		$parenttype->setMapping($parentmapping);
+
+
+		$childtype = new Elastica_Type($index, 'childtype');
+		$childmapping = new Elastica_Type_Mapping($childtype,
+			array(
+				'name' => array('type' => 'string', 'store' => 'yes'),
+			)
+		);
+		$childmapping->setParam('_parent', array('type' => 'parenttype'));
+
+		$childtype->setMapping($childmapping);
 	}
 }
 
