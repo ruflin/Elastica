@@ -49,6 +49,16 @@ class Elastica_Response {
 	}
 
 	/**
+	 * Checks if the query returned ok
+	 *
+	 * @return bool True if ok
+	 */
+	public function isOk() {
+		$data = $this->getData();
+		return (isset($data['ok']) && $data['ok']);
+	}
+
+	/**
 	 * @return array Response data array
 	 */
 	public function getData() {

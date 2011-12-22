@@ -34,12 +34,17 @@ class Elastica_PercolatorTest extends Elastica_Test
 		
 		$query = new Elastica_Query_Term(array('name' => 'ruflin'));
 		$response = $percolator->registerQuery($percolatorName, $query);
+
+		$this->assertTrue($response->isOk());
+		$this->assertFalse($response->hasError());
 		
 		$doc1 = new Elastica_Document();
 		$doc1->add('name', 'ruflin');
 
 		$doc2 = new Elastica_Document();
 		$doc2->add('name', 'nicolas');
+
+		$index->refresh();
 		
 		$matches1 = $percolator->matchDoc($doc1);
 		
