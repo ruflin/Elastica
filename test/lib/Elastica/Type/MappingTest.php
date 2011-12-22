@@ -136,6 +136,41 @@ class Elastica_Query_MappingTest extends Elastica_Test
 
 		$childtype->setMapping($childmapping);
 	}
+
+	public function testMappingExample() {
+
+		$index = $this->_createIndex();
+		$type = $index->getType('notes');
+
+		$mapping = new Elastica_Type_Mapping($type,
+			array(
+				'note' => array(
+					'store' => 'yes', 'properties' => array(
+						'titulo'  => array('type' => 'string', 'store' => 'no', 'include_in_all' => TRUE, 'boost' => 1.0),
+						'contenido' => array('type' => 'string', 'store' => 'no', 'include_in_all' => TRUE, 'boost' => 1.0)
+					)
+				)
+			)
+		);
+
+		$type->setMapping($mapping);
+
+		$doc = new Elastica_Document(1, array(
+				'note' => array(
+					array(
+						'titulo'        => 'nota1',
+						'contenido'        => 'contenido1'
+					),
+					array(
+						'titulo'        => 'nota2',
+						'contenido'        => 'contenido2'
+					)
+				)
+			)
+		);
+
+		$type->addDocument($doc);
+	}
 }
 
 
