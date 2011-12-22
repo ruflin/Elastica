@@ -37,7 +37,7 @@ class Elastica_PercolatorTest extends Elastica_Test
 
 		$this->assertTrue($response->isOk());
 		$this->assertFalse($response->hasError());
-		
+
 		$doc1 = new Elastica_Document();
 		$doc1->add('name', 'ruflin');
 
