@@ -140,4 +140,31 @@ class Elastica_TypeTest extends Elastica_Test
 			$this->assertTrue(true);
 		}
 	}
+
+	public function testDeleteByQuery() {
+		$index = $this->_createIndex();
+		$type = new Elastica_Type($index, 'test');
+		$type->addDocument(new Elastica_Document(1, array('name' => 'ruflin nicolas')));
+		$type->addDocument(new Elastica_Document(2, array('name' => 'ruflin')));
+		$index->refresh();
+
+		$response = $index->search('ruflin*');
+		$this->assertEquals(2, $response->count());
+
+		$response = $index->search('nicolas');
+		$this->assertEquals(1, $response->count());
+
+		// Delete first document
+		$response = $type->deleteByQuery('nicolas');
+		$this->assertTrue($response->isOk());
+
+		$index->refresh();
+
+		// Makes sure, document is deleted
+		$response = $index->search('ruflin*');
+		$this->assertEquals(1, $response->count());
+
+		$response = $index->search('nicolas');
+		$this->assertEquals(0, $response->count());
+	}
 }

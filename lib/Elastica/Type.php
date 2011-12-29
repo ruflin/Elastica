@@ -224,12 +224,12 @@ class Elastica_Type implements Elastica_Searchable {
 	/**
 	 * Deletes entries in the db based on a query
 	 *
-	 * @param Elastica_Query $query Query object
+	 * @param Elastica_Query|string $query Query object
 	 * @link http://www.elasticsearch.org/guide/reference/api/delete-by-query.html
 	 */
-	public function deleteByQuery(Elastica_Query $query) {
-		// TODO: To be implemented, can also be implemented on index and client level (see docs)
-		throw new Elastica_Exception_NotImplemented();
+	public function deleteByQuery($query) {
+		$query = Elastica_Query::create($query);
+		return $this->request('_query', Elastica_Request::DELETE, $query->getQuery());
 	}
 
 	/**
