@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-class Elastica_ParamTest extends PHPUnit_Framework_TestCase
+class Elastica_ParamTest extends Elastica_Test
 {
 	/**
 	 * Tests if filter name is set correct and instance is created

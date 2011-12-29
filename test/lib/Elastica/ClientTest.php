@@ -2,13 +2,8 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class Elastica_ClientTest extends PHPUnit_Framework_TestCase
+class Elastica_ClientTest extends Elastica_Test
 {
-	public function setUp() {
-	}
-
-	public function tearDown() {
-	}
 
 	public function testConstruct() {
 		$host = 'ruflin.com';
@@ -34,7 +29,7 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 	public function testServersArray() {
 		// Creates a new index 'xodoa' and a type 'user' inside this index
 		$client = new Elastica_Client(array('servers' => array(array('host' => 'localhost', 'port' => 9200))));
-		$index = $client->getIndex('test1');
+		$index = $client->getIndex('elastica_test1');
 		$index->create(array(), true);
 
 		$type = $index->getType('user');
@@ -67,7 +62,7 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 			array('host' => 'localhost', 'port' => 9200),
 			array('host' => 'localhost', 'port' => 9200),
 		)));
-		$index = $client->getIndex('test1');
+		$index = $client->getIndex('elastica_test1');
 		$index->create(array(), true);
 	
 		$type = $index->getType('user');
@@ -141,11 +136,10 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 	* re-search to verify that they have been deleted
 	*/
 	public function testDeleteIdsIdxStringTypeString() {
-		$client = new Elastica_Client();
 		$data = array('username' => 'hans');
 		$userSearch = 'username:hans';
 
-		$index = $client->getIndex('test1');
+		$index = $this->_createIndex();
 
 		// Create the index, deleting it first if it already exists
 		$index->create(array(), true);
@@ -175,7 +169,7 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 
 		// Using the existing $index and $type variables which
 		// are Elastica_Index and Elastica_Type objects respectively
-		$resp = $client->deleteIds($ids, $index, $type);
+		$resp = $index->getClient()->deleteIds($ids, $index, $type);
 
 		// Refresh the index to clear out deleted ID information
 		$index->refresh();
@@ -204,11 +198,10 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 	* re-search to verify that they have been deleted
 	*/
 	public function testDeleteIdsIdxStringTypeObject() {
-		$client = new Elastica_Client();
 		$data = array('username' => 'hans');
 		$userSearch = 'username:hans';
 
-		$index = $client->getIndex('test1');
+		$index = $this->_createIndex();
 
 		// Create the index, deleting it first if it already exists
 		$index->create(array(), true);
@@ -237,7 +230,7 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 
 		// Using the existing $index and $type variables which
 		// are Elastica_Index and Elastica_Type objects respectively
-		$resp = $client->deleteIds($ids, $index, $type);
+		$resp = $index->getClient()->deleteIds($ids, $index, $type);
 
 		// Refresh the index to clear out deleted ID information
 		$index->refresh();
@@ -266,11 +259,10 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 	* re-search to verify that they have been deleted
 	*/
 	public function testDeleteIdsIdxObjectTypeString() {
-		$client = new Elastica_Client();
 		$data = array('username' => 'hans');
 		$userSearch = 'username:hans';
 
-		$index = $client->getIndex('test1');
+		$index = $this->_createIndex();
 
 		// Create the index, deleting it first if it already exists
 		$index->create(array(), true);
@@ -299,7 +291,7 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 
 		// Using the existing $index and $type variables which
 		// are Elastica_Index and Elastica_Type objects respectively
-		$resp = $client->deleteIds($ids, $index, $type);
+		$resp = $index->getClient()->deleteIds($ids, $index, $type);
 
 		// Refresh the index to clear out deleted ID information
 		$index->refresh();
@@ -328,11 +320,10 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 	* re-search to verify that they have been deleted
 	*/
 	public function testDeleteIdsIdxObjectTypeObject() {
-		$client = new Elastica_Client();
 		$data = array('username' => 'hans');
 		$userSearch = 'username:hans';
 
-		$index = $client->getIndex('test1');
+		$index = $this->_createIndex();
 
 		// Create the index, deleting it first if it already exists
 		$index->create(array(), true);
@@ -360,7 +351,7 @@ class Elastica_ClientTest extends PHPUnit_Framework_TestCase
 
 		// Using the existing $index and $type variables which
 		// are Elastica_Index and Elastica_Type objects respectively
-		$resp = $client->deleteIds($ids, $index, $type);
+		$resp = $index->getClient()->deleteIds($ids, $index, $type);
 
 		// Refresh the index to clear out deleted ID information
 		$index->refresh();

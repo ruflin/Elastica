@@ -3,7 +3,7 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class Elastica_LogTest extends PHPUnit_Framework_TestCase
+class Elastica_LogTest extends Elastica_Test
 {
 	public function setUp() {
 
@@ -53,7 +53,7 @@ class Elastica_LogTest extends PHPUnit_Framework_TestCase
 		
 		// Set log path temp path as otherwise test fails with output
 		$errorLog = ini_get('error_log');
-		ini_set('error_log', '/tmp/php.log');
+		ini_set('error_log', sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'php.log');
 		
 		$message = 'hello world';
 	

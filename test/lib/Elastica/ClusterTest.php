@@ -2,13 +2,8 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class Elastica_ClusterTest extends PHPUnit_Framework_TestCase
+class Elastica_ClusterTest extends Elastica_Test
 {
-	public function setUp() {
-	}
-
-	public function tearDown() {
-	}
 
 	public function testGetNodeNames() {
 		$client = new Elastica_Client();

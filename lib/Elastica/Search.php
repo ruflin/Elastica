@@ -3,11 +3,10 @@
  * Elastica search object
  *
  * @category Xodoa
- * @package Elastica
- * @author Nicolas Ruflin <spam@ruflin.com>
+ * @package  Elastica
+ * @author   Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Search
-{
+class Elastica_Search {
 	protected $_indices = array();
 	protected $_types = array();
 
@@ -46,6 +45,20 @@ class Elastica_Search
 	}
 
 	/**
+	 * Add array of indices at once
+	 *
+	 * @param array $indices
+	 * @return Elastica_Search
+	 */
+	public function addIndices(array $indices = array()) {
+		foreach ($indices as $index) {
+			$this->addIndex($index);
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Adds a type to the current search
 	 *
 	 * @param Elastica_Type|string $type Type name or object
@@ -62,6 +75,20 @@ class Elastica_Search
 		}
 
 		$this->_types[] = $type;
+
+		return $this;
+	}
+
+	/**
+	 * Add array of types
+	 *
+	 * @param array $types
+	 * @return Elastica_Search
+	 */
+	public function addTypes(array $types = array()) {
+		foreach ($types as $type) {
+			$this->addType($type);
+		}
 
 		return $this;
 	}
@@ -129,10 +156,14 @@ class Elastica_Search
 	 * Search in the set indices, types
 	 *
 	 * @param mixed $query
+	 * @param int   $limit OPTIONAL
 	 * @return Elastica_ResultSet
 	 */
-	public function search($query) {
+	public function search($query, $limit = 0) {
 		$query = Elastica_Query::create($query);
+		if ($limit) {
+			$query->setLimit($limit);
+		}
 		$path = $this->getPath();
 
 		$response = $this->getClient()->request($path, Elastica_Request::GET, $query->toArray());

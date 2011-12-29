@@ -2,7 +2,7 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class Elastica_ResponseTest extends PHPUnit_Framework_TestCase
+class Elastica_ResponseTest extends Elastica_Test
 {
 	public function setUp() {
 	}
@@ -20,9 +20,7 @@ class Elastica_ResponseTest extends PHPUnit_Framework_TestCase
 
 	public function testResponse() {
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex('test');
-		$index->create(array(), true);
+		$index = $this->_createIndex();
 		$type = $index->getType('helloworld');
 
         $mapping = new Elastica_Type_Mapping($type, array(
@@ -51,10 +49,9 @@ class Elastica_ResponseTest extends PHPUnit_Framework_TestCase
         $engineTime = $resultSet->getResponse()->getEngineTime();
         $shardsStats = $resultSet->getResponse()->getShardsStatistics();
 
-        $this->assertTrue($engineTime != '');
+        $this->assertInternalType('int', $engineTime);
         $this->assertTrue(is_array($shardsStats));
         $this->assertArrayHasKey('total', $shardsStats);
         $this->assertArrayHasKey('successful', $shardsStats);
-
 	}
 }

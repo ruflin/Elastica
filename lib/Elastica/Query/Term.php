@@ -10,15 +10,13 @@
  */
 class Elastica_Query_Term extends Elastica_Query_Abstract
 {
-	protected $_term = array();
-
 	/**
 	 * Constructs the Term query object
 	 *
 	 * @param array $term OPTIONAL Calls setTerm with the given $term array
 	 */
 	public function __construct(array $term = array()) {
-		$this->setTerm($term);
+		$this->setRawTerm($term);
 	}
 
 	/**
@@ -28,9 +26,8 @@ class Elastica_Query_Term extends Elastica_Query_Abstract
 	 * @param array $term Term array
 	 * @return Elastica_Query_Term Current object
 	 */
-	public function setTerm(array $term) {
-		$this->_term = $term;
-		return $this;
+	public function setRawTerm(array $term) {
+		return $this->setParams($term);
 	}
 
 	/**
@@ -41,19 +38,7 @@ class Elastica_Query_Term extends Elastica_Query_Abstract
 	 * @param float $boost OPTIONAL Boost value (default = 1.0)
 	 * @return Elastica_Query_Term Current object
 	 */
-	public function addTerm($key, $value, $boost = 1.0) {
-		// TODO: Why is return $this->setTerm(array($key => array('value' => $value, 'boost' => $boost)));
-		// 		not working? Tested with filer
-		return $this->setTerm(array($key => $value));
-	}
-
-	/**
-	 * Converts the term query to an array
-	 *
-	 * @return array Array term query
-	 */
-	public function toArray() {
-		$args = $this->_term;
-		return array('term' => $args);
+	public function setTerm($key, $value, $boost = 1.0) {
+		return $this->setRawTerm(array($key => array('value' => $value, 'boost' => $boost)));
 	}
 }

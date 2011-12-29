@@ -49,6 +49,16 @@ class Elastica_Response {
 	}
 
 	/**
+	 * Checks if the query returned ok
+	 *
+	 * @return bool True if ok
+	 */
+	public function isOk() {
+		$data = $this->getData();
+		return (isset($data['ok']) && $data['ok']);
+	}
+
+	/**
 	 * @return array Response data array
 	 */
 	public function getData() {
@@ -120,9 +130,8 @@ class Elastica_Response {
 		return $this;
 	}
 
-
 	/**
-	 * @return int
+	 * @return int Time request took
 	 */
 	public function getEngineTime() {
 		$data = $this->getData();
@@ -131,14 +140,13 @@ class Elastica_Response {
 			throw new Elastica_Exception_NotFound("Unable to find the field [took]from the response");
 		}
 
-		return  $data['took'];
+		return $data['took'];
 	}
-
 
 	/**
 	 * Get the _shard statistics for the response
 	 *
-	 * @return void
+	 * @return array
 	 */
 	public function getShardsStatistics() {
 		$data = $this->getData();

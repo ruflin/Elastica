@@ -1,5 +1,33 @@
 CHANGES
 
+2011-12-29
+- Elastica_Type::deleteByQuery implemented
+
+2011-12-20
+- Release v0.18.6.0
+
+2011-12-19
+- Percolator for Type and Documents added
+
+2011-12-06
+- Elastica_Percolator added. See tests for more details
+
+2011-12-02
+- Rename Elastica_Type::getType() to Elastica_Type::getName(), getType() is now deprecated
+
+2011-12-01
+- Elastica_Filter_Term::addTerm renamed to setTerm, Elastica_Filter_Term::setTerm renamed to setRawTerm
+- Elastica_Query_Term::addTerm renamed to setTerm, Elastica_Query_Term::setTerm renamed to setRawTerm
+
+2011-11-30
+- Release v0.18.5.0
+
+2011-11-28
+- Elastica_Filter_Nested added
+
+2011-11-26
+- Elastica_Search::addIndices(), Elastica_Search::addTypes() added
+
 2011-11-20
 - Release v0.18.4.1
 - Elastica_Log added for logging. Has to be passed as client config to enable

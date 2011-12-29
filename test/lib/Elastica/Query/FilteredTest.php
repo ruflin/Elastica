@@ -23,10 +23,10 @@ class Elastica_Query_FilteredTest extends PHPUnit_Framework_TestCase
 		$queryString = new Elastica_Query_QueryString('test*');
 
 		$filter1 = new Elastica_Filter_Term();
-		$filter1->addTerm('username', 'peter');
+		$filter1->setTerm('username', 'peter');
 
 		$filter2 = new Elastica_Filter_Term();
-		$filter2->addTerm('username', 'qwerqwer');
+		$filter2->setTerm('username', 'qwerqwer');
 
 		$query1 = new Elastica_Query_Filtered($queryString, $filter1);
 		$query2 = new Elastica_Query_Filtered($queryString, $filter2);

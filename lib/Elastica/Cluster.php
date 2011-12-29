@@ -43,7 +43,7 @@ class Elastica_Cluster
 	 * Returns the full state of the cluster
 	 *
 	 * @return array State array
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/state
+	 * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-state.html
 	 */
 	public function getState() {
 		return $this->_data;

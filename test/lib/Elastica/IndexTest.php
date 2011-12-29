@@ -3,31 +3,20 @@
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 
-class Elastica_IndexTest extends PHPUnit_Framework_TestCase
+class Elastica_IndexTest extends Elastica_Test
 {
-	public function setUp() {
-
-	}
-
-	public function tearDown() {
-	}
-
 	public function testMapping() {
-		$client = new Elastica_Client();
-
-		$index = $client->getIndex('test');
-		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
-
+		$index = $this->_createIndex();
 		$doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
 
 		$type = $index->getType('test');
 
 		$mapping = array(
-				'id' => array('type' => 'integer', 'store' => 'yes'),
-				'email' => array('type' => 'string', 'store' => 'no'),
-				'username' => array('type' => 'string', 'store' => 'no'),
-				'test' => array('type' => 'integer', 'store' => 'no'),
-			);
+			'id' => array('type' => 'integer', 'store' => 'yes'),
+			'email' => array('type' => 'string', 'store' => 'no'),
+			'username' => array('type' => 'string', 'store' => 'no'),
+			'test' => array('type' => 'integer', 'store' => 'no'),
+		);
 		$type->setMapping($mapping);
 
 		$type->addDocument($doc);
@@ -45,11 +34,9 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testParent() {
-
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'parentchild');
-		$index->create(array(), true);
-
+		
+		$index = $this->_createIndex();
+		
 		$typeBlog = new Elastica_Type($index, 'blog');
 
 		$typeComment = new Elastica_Type($index, 'comment');
@@ -84,7 +71,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 	}
 
 	public function testAddPDFFile() {
-		$this->markTestIncomplete('Result is not 100% as expected :-(');
+
 		$indexMapping = array(
 			'file' => array('type' => 'attachment', 'store' => 'no'),
 			'text' => array('type' => 'string', 'store' => 'no'),
@@ -97,8 +84,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 			),
 		);
 
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'test');
+		$index = $this->_createIndex();
 		$type = new Elastica_Type($index, 'test');
 
 		$index->create($indexParams, true);
@@ -121,7 +107,58 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 		$resultSet = $type->search('basel');
 		$this->assertEquals(2, $resultSet->count());
 
+		// Author is ruflin
 		$resultSet = $type->search('ruflin');
+		$this->assertEquals(1, $resultSet->count());
+		
+		// String does not exist in file
+		$resultSet = $type->search('guschti');
+		$this->assertEquals(0, $resultSet->count());
+	}
+	
+	public function testAddPDFFileContent() {
+	
+		$indexMapping = array(
+			'file' => array('type' => 'attachment', 'store' => 'no'),
+			'text' => array('type' => 'string', 'store' => 'no'),
+		);
+	
+		$indexParams = array(
+			'index' => array(
+				'number_of_shards' => 1,
+				'number_of_replicas' => 0
+			),
+		);
+	
+		$index = $this->_createIndex();
+		$type = new Elastica_Type($index, 'test');
+	
+		$index->create($indexParams, true);
+		$type->setMapping($indexMapping);
+		
+		$doc1 = new Elastica_Document(1);
+		$doc1->addFileContent('file', file_get_contents(BASE_PATH . '/data/test.pdf'));
+		$doc1->add('text', 'basel world');
+		$type->addDocument($doc1);
+	
+		$doc2 = new Elastica_Document(2);
+		$doc2->add('text', 'running in basel');
+		$type->addDocument($doc2);
+	
+		$index->optimize();
+	
+		$resultSet = $type->search('xodoa');
+		$this->assertEquals(1, $resultSet->count());
+	
+		$resultSet = $type->search('basel');
+		$this->assertEquals(2, $resultSet->count());
+	
+		// Author is ruflin
+		$resultSet = $type->search('ruflin');
+		$this->assertEquals(1, $resultSet->count());
+	
+		// String does not exist in file
+		$resultSet = $type->search('guschti');
 		$this->assertEquals(0, $resultSet->count());
 	}
 
@@ -138,8 +175,7 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 			),
 		);
 
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'content');
+		$index = $this->_createIndex();
 		$type = new Elastica_Type($index, 'content');
 
 		$index->create($indexParams, true);
@@ -165,6 +201,51 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 		$resultSet = $type->search('ruflin');
 		$this->assertEquals(0, $resultSet->count());
 	}
+	
+	public function testExcludeFileSource() {
+		
+		$indexMapping = array(
+			'file' => array('type' => 'attachment', 'store' => 'yes'),
+			'text' => array('type' => 'string', 'store' => 'yes'),
+			'title' => array('type' => 'string', 'store' => 'yes'),
+		);
+		
+		$indexParams = array(
+			'index' => array(
+				'number_of_shards' => 1,
+				'number_of_replicas' => 0
+			),
+		);
+		
+		$index = $this->_createIndex();
+		$type = new Elastica_Type($index, 'content');
+		
+		$mapping = Elastica_Type_Mapping::create($indexMapping);
+		$mapping->setSource(array('excludes' => array('file')));
+		
+		$mapping->setType($type);
+				
+		$index->create($indexParams, true);
+		$type->setMapping($mapping);
+		
+		$docId = 1;
+		$text = 'Basel World';
+		$title = 'No Title';
+		
+		$doc1 = new Elastica_Document($docId);
+		$doc1->addFile('file', BASE_PATH . '/data/test.docx');
+		$doc1->add('text', $text);
+		$doc1->add('title', $title);
+		$type->addDocument($doc1);
+		
+		// Optimization necessary, as otherwise source still in realtime get
+		$index->optimize();
+
+		$data = $type->getDocument($docId)->getData();
+		$this->assertEquals($data['title'], $title);
+		$this->assertEquals($data['text'], $text);
+		$this->assertFalse(isset($data['file']));		
+	}
 
 	public function testAddRemoveAlias() {
 		$client = new Elastica_Client();
@@ -188,7 +269,6 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 
 		$data = $index->addAlias($aliasName, true)->getData();
 		$this->assertTrue($data['ok']);
-
 
 		$index2 = $client->getIndex($aliasName);
 		$type2 = $index2->getType($typeName);
@@ -277,6 +357,24 @@ class Elastica_IndexTest extends PHPUnit_Framework_TestCase
 		$index2->addAlias($aliasName, true);
 		$this->assertFalse($index1->getStatus()->hasAlias($aliasName));
 		$this->assertTrue($index2->getStatus()->hasAlias($aliasName));
+	}
+	
+	public function testAddDocumentVersion() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('test');
+		$index->create(array(), true);
+		$type = new Elastica_Type($index, 'test');
+
+		$doc1 = new Elastica_Document(1);
+		$doc1->add('title', 'Hello world');
+		
+		$return = $type->addDocument($doc1);
+		$data = $return->getData();
+		$this->assertEquals(1, $data['_version']);
+				
+		$return = $type->addDocument($doc1);
+		$data = $return->getData();
+		$this->assertEquals(2, $data['_version']);
 	}
 
 	public function testClearCache() {

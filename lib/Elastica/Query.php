@@ -120,6 +120,7 @@ class Elastica_Query extends Elastica_Param
 	 *
 	 * @param mixed $sort Sort parameter
 	 * @return Elastica_Query Query object
+	 * @link http://www.elasticsearch.org/guide/reference/api/search/sort.html
 	 */
 	public function addSort($sort) {
 		return $this->addParam('sort', $sort);
@@ -159,6 +160,8 @@ class Elastica_Query extends Elastica_Param
 
 	/**
 	 * Sets maximum number of results for this query
+	 *
+	 * Setting the limit to 0, means no limit
 	 *
 	 * @param int $limit OPTIONAL Maximal number of results for query (default = 10)
 	 * @return Elastica_Query Query object

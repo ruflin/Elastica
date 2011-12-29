@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-class Elastica_NodeTest extends PHPUnit_Framework_TestCase
+class Elastica_NodeTest extends Elastica_Test
 {
 	public function setUp() { }
 
