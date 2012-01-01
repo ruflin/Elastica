@@ -36,7 +36,7 @@ class Elastica_Log
 		if ($message instanceof Elastica_Request) {
 			$message = $this->_convertRequest($message);
 		}
-		
+
 		if ($this->_log) {
 			$this->_lastMessage = $message;
 			

@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
+class Elastica_Index_SettingsTest extends Elastica_Test
 {
 	public function setUp() {
 	}
@@ -130,6 +130,42 @@ class Elastica_Index_SettingsTest extends PHPUnit_Framework_TestCase
 		$this->assertInstanceOf('Elastica_Response', $response);
 		$data = $response->getData();
 		$this->assertTrue($data['ok']);
+	}
 
+	public function testSetReadOnly() {
+
+		$client = new Elastica_Client();
+		$index = new Elastica_Index($client, 'elastica_test');
+		$index->getSettings()->setReadOnly(false);
+
+		$index = $this->_createIndex();
+
+		// Add document to normal index
+		$doc = new Elastica_Document(null, array('hello' => 'world'));
+		$type = $index->getType('test');
+		$type->addDocument($doc);
+		$this->assertFalse((bool) $index->getSettings()->get('blocks.read_only'));
+
+		// Try to add doc to read only index
+		$index->getSettings()->setReadOnly(true);
+		$this->assertTrue((bool) $index->getSettings()->get('blocks.read_only'));
+
+		try {
+			$type->addDocument($doc);
+			$this->fail('Should throw exception because of read only');
+		} catch(Elastica_Exception_Response $e) {
+			$message = $e->getMessage();
+			$this->assertContains('ClusterBlockException', $message);
+			$this->assertContains('index read-only', $message);
+		}
+
+		// Remove read only, add document
+		$response = $index->getSettings()->setReadOnly(false);
+		$this->assertTrue($response->isOk());
+
+		$type->addDocument($doc);
+		$index->refresh();
+
+		$this->assertEquals(2, $type->count());
 	}
 }

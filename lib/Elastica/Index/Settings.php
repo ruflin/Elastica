@@ -68,6 +68,16 @@ class Elastica_Index_Settings
 	}
 
 	/**
+	 * Sets the index to read only
+	 *
+	 * @param bool $readOnly (default = true)
+	 * @return Elastica_Response
+	 */
+	public function setReadOnly($readOnly = true) {
+		return $this->set(array('blocks.read_only' => $readOnly));
+	}
+
+	/**
 	 * Sets the index refresh interval
 	 *
 	 * Value can be for example 3s for 3 seconds or

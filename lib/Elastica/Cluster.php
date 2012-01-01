@@ -100,6 +100,13 @@ class Elastica_Cluster
 	}
 
 	/**
+	 * @return Elastica_Cluster_Settings
+	 */
+	public function getSettings() {
+		return new Elastica_Cluster_Settings($this->getClient());
+	}
+
+	/**
 	 * Shuts down the complete cluster
 	 *
 	 * @param string $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
