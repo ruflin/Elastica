@@ -1,5 +1,8 @@
 CHANGES
 
+2012-01-04
+- Elastica_Index::exists() and Elastica_Cluster::getIndexNames() added
+
 2012-01-01
 - Elastica_Cluster_Settings added
 - Read only feature for cluster and index added. This feature is elasticsearch >0.19.0 only. ES 0.19.0 release is not out yet

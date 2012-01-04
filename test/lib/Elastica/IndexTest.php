@@ -393,6 +393,16 @@ class Elastica_IndexTest extends Elastica_Test
 		$this->assertFalse($response->hasError());
 	}
 
+	public function testExists() {
+		$index = $this->_createIndex();
+
+		$this->assertTrue($index->exists());
+
+		$index->delete();
+
+		$this->assertFalse($index->exists());
+	}
+
 	/**
 	* Test $index->delete() return value for unknown index
 	*

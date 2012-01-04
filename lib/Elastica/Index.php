@@ -141,6 +141,16 @@ class Elastica_Index implements Elastica_Searchable
 	}
 
 	/**
+	 * Checks if the given index is already created
+	 *
+	 * @return bool True if index exists
+	 */
+	public function exists() {
+		$cluster = new Elastica_Cluster($this->getClient());
+		return in_array($this->getName(), $cluster->getIndexNames());
+	}
+
+	/**
 	 * Searchs in this index
 	 *
 	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object

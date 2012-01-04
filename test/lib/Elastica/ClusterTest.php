@@ -52,4 +52,25 @@ class Elastica_ClusterTest extends Elastica_Test
 			$this->assertTrue(true);
 		}
 	}
+
+	public function testGetIndexNames() {
+		$client = new Elastica_Client();
+		$cluster = $client->getCluster();
+
+		$indexName = 'elastica_test999';
+		$index = $this->_createIndex($indexName);
+		$index->delete();
+		$cluster->refresh();
+
+		// Checks that index does not exist
+		$indexNames = $cluster->getIndexNames();
+		$this->assertNotContains($index->getName(), $indexNames);
+
+		$index = $this->_createIndex($indexName);
+		$cluster->refresh();
+
+		// Now index should exist
+		$indexNames = $cluster->getIndexNames();
+		$this->assertContains($index->getname(), $indexNames);
+	}
 }

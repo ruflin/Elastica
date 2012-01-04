@@ -40,6 +40,19 @@ class Elastica_Cluster
 	}
 
 	/**
+	 * @return array List of index names
+	 */
+	public function getIndexNames() {
+		$metaData = $this->_data['metadata']['indices'];
+
+		$indices = array();
+		foreach ($metaData as $key => $value) {
+			$indices[] = $key;
+		}
+		return $indices;
+	}
+
+	/**
 	 * Returns the full state of the cluster
 	 *
 	 * @return array State array
