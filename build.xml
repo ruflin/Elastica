@@ -2,34 +2,55 @@
 <project name="Elastica" default="build" basedir=".">
 
 	<property name="source" value="${basedir}/lib"/>
+	
+	<target name="parallelTasks">
+		<parallel threadCount="2">
+			<sequential>
+				<antcall target="pdepend"/>
+				<antcall target="phpmd-ci"/>
+			</sequential>
+			<antcall target="phpcpd"/>
+			<antcall target="phpcs-ci"/>
+			<antcall target="docblox"/>
+			<antcall target="phpcb"/>
+		</parallel>
+	</target>
+	
+	<target name="clean" description="Cleanup build artifacts">
+		<delete dir="${basedir}/build/api"/>
+		<delete dir="${basedir}/build/code-browser"/>
+		<delete dir="${basedir}/build/coverage"/>
+		<delete dir="${basedir}/build/logs"/>
+		<delete dir="${basedir}/build/pdepend"/>
+		<delete file="${basedir}/cache.properties"/>
+	</target>
 
-	<target name="clean">
-		<!--    Clean    up    -->
-		<delete dir="build"/>
-		<!-- Create build directories -->
+	<target name="prepare" depends="clean" description="Prepare for build">
 		<mkdir dir="${basedir}/build/api"/>
 		<mkdir dir="${basedir}/build/code-browser"/>
 		<mkdir dir="${basedir}/build/coverage"/>
 		<mkdir dir="${basedir}/build/logs"/>
 		<mkdir dir="${basedir}/build/pdepend"/>
 	</target>
+	
+	<target name="lint">
+		<apply executable="php" failonerror="true">
+			<arg value="-l"/>
 
-	<target name="phpunit" depends="clean">
-		<exec executable="phpunit" dir="${basedir}/test" failonerror="off" />
+			<fileset dir="${source}">
+				<include name="**/*.php"/>
+				<modified/>
+			</fileset>
+
+			<fileset dir="${basedir}/test">
+				<include name="**/*.php"/>
+				<modified/>
+			</fileset>
+		</apply>
 	</target>
-
-	<!-- Run pdepend, phpmd, phpcpd, and phpcs in parallel -->
-	<target name="parallelTasks">
-		<parallel threadCount="2">
-			<sequential>
-				<antcall target="pdepend"/>
-				<antcall target="phpmd"/>
-			</sequential>
-			<antcall target="phpcpd"/>
-			<antcall target="phpcs"/>
-			<antcall target="docblox"/>
-			<antcall target="phpcb"/>
-		</parallel>
+	
+	<target name="phpunit" depends="prepare">
+		<exec executable="phpunit" dir="${basedir}/test" failonerror="off" />
 	</target>
 
 	<!-- Generate jdepend.xml and software metrics charts -->
@@ -42,8 +63,7 @@
 		</exec>
 	</target>
 
-	<!-- Generate pmd.xml -->
-	<target name="phpmd">
+	<target name="phpmd-ci">
 		<exec executable="phpmd">
 			<arg path="${source}" />
 			<arg value="xml" />
@@ -61,7 +81,7 @@
 	</target>
 
 	<!-- Generate checkstyle.xml -->
-	<target name="phpcs">
+	<target name="phpcs-ci">
 		<exec executable="phpcs" output="/dev/null">
 			<arg line="--report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml --standard=${basedir}/test/CodeSniffer/Standards/Xodoa ${source}" />
 		</exec>
@@ -90,12 +110,21 @@
 		</exec>
 	</target>
 
-	<target name="build" depends="clean,parallelTasks,phpunit"/>
+	<target name="build" depends="prepare,lint,parallelTasks,phpunit"/>
 
 	<!-- Checkstyle with human output -->
-	<target name="codesniffer">
+	<target name="phpcs">
 		<exec executable="phpcs">
 			<arg line="--standard=${basedir}/test/CodeSniffer/Standards/Xodoa ${source}" />
+		</exec>
+	</target>
+	
+	<target name="phpmd" description="Perform phpmd with human readable output">
+		<exec executable="phpmd">
+			<arg path="${source}"/>
+			<arg value="text"/>
+			<arg value="codesize,unusedcode,naming,design" />
+			<arg value="${basedir}/build/phpmd.xml"/>
 		</exec>
 	</target>
 

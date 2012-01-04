@@ -1,5 +1,9 @@
 CHANGES
 
+2012-01-01
+- Elastica_Cluster_Settings added
+- Read only feature for cluster and index added. This feature is elasticsearch >0.19.0 only. ES 0.19.0 release is not out yet
+
 2011-12-29
 - Elastica_Type::deleteByQuery implemented
 
