@@ -58,7 +58,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 		// TODO: REFACTOR
 		$data = $request->getData();
 
-		if (!empty($data)) {
+		if (isset($data)) {
 			if (is_array($data)) {
 				$content = json_encode($data);
 			} else {
