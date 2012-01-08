@@ -34,9 +34,8 @@ abstract class Elastica_Transport_Abstract {
 	/**
 	 * Executes the transport request
 	 *
-	 * @param string $host Hostname
-	 * @param int $port Port number
+	 * @param array $params Hostname, port, path, ...
 	 * @return Elastica_Response Response object
 	 */
-	abstract public function exec($host, $port);
+	abstract public function exec(array $params);
 }

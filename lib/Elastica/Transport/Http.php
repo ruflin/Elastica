@@ -27,18 +27,28 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 	 * @param int $port Port number
 	 * @return Elastica_Response Response object
 	 */
-	public function exec($host, $port) {
+	public function exec(array $params) {
 		$conn = $this->_getConnection();
 
 		$request = $this->getRequest();
 
-		$baseUri = $this->_scheme . '://' . $host . ':' . $port . '/';
+		// If url is set, url is taken. Otherwise port, host and path
+		if (!empty($params['url'])) {
+			$baseUri = $params['url'];
+		} else {
+			if (!isset($params['host']) || !isset($params['port'])) {
+				throw new Elastica_Exception_Invalid('host and port have to be set');
+			}
+
+			$path = isset($params['path']) ? $params['path'] : '';
+
+			$baseUri = $this->_scheme . '://' . $params['host'] . ':' . $params['port'] . '/' . $path;
+		}
 
 		$baseUri .= $request->getPath();
 
 		curl_setopt($conn, CURLOPT_URL, $baseUri);
 		curl_setopt($conn, CURLOPT_TIMEOUT, $request->getConfig('timeout'));
-		curl_setopt($conn, CURLOPT_PORT, $port);
 		curl_setopt($conn, CURLOPT_RETURNTRANSFER, 1) ;
 		curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $request->getMethod());
 		curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
