@@ -135,20 +135,21 @@ class Elastica_Request {
 
 		$servers = $this->getClient()->getConfig('servers');
 		
-		/*$dir = sys_get_temp_dir();
+		/*
+
+		// Integration of temp file
+		$dir = sys_get_temp_dir();
 		$name = 'elasticaServers.json';
 		$file = $dir . DIRECTORY_SEPARATOR . $name;
-		
-		error_log($file);
 
 		if (!file_exists($file)) {
 			file_put_contents($file, 'hh');
 			error_log(print_r($this->getClient()->getCluster(), true));
-		}*/
-		
+		}
+
+		*/
 		
 		if (empty($servers)) {
-				error_log(print_r($this->getClient()->getConfig('url'), true));
 			$params = array(
 				'url' => $this->getClient()->getConfig('url'),
 				'host' => $this->getClient()->getHost(),

@@ -45,6 +45,7 @@ class Elastica_Client
 		'timeout' => self::TIMEOUT,
 		'headers' => array(),
 		'servers' => array(),
+		'curl' => array(),
 		'roundRobin' => false,
 		'log' => false,
 	);

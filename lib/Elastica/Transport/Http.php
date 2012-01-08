@@ -112,6 +112,9 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 	 * @param resource $connection Curl connection
 	 */
 	protected function _setupCurl($connection) {
+		foreach ($this->_request->getClient()->getConfig('curl') as $key => $param) {
+			curl_setopt($connection, $key, $param);
+		}
 	}
 
 	/**

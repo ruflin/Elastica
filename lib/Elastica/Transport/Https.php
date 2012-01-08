@@ -20,6 +20,5 @@ class Elastica_Transport_Https extends Elastica_Transport_Http {
 	 */
 	protected function _setupCurl($connection) {
 		parent::_setupCurl($connection);
-		curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, false);
 	}
 }
