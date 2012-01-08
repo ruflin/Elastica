@@ -1,5 +1,9 @@
 CHANGES
 
+2012-01-08
+- Allow to set curl params over client config #106 #107
+- Add the possiblity to add path or url in config for a request #120
+
 2012-01-04
 - Elastica_Index::exists() and Elastica_Cluster::getIndexNames() added
 
