@@ -35,7 +35,7 @@
 	
 	<target name="lint">
 		<apply executable="php" failonerror="true">
-			<arg value="-l"/>
+			<arg value="-lf"/>
 
 			<fileset dir="${source}">
 				<include name="**/*.php"/>

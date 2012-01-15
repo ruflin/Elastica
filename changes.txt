@@ -1,5 +1,8 @@
 CHANGES
 
+2012-01-15
+- Vagrantfile for vagrant environment with elasticsearch added. Run: vagrant up
+
 2012-01-08
 - Allow to set curl params over client config #106 #107
 - Add the possiblity to add path or url in config for a request #120
