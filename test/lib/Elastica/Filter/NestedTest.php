@@ -91,7 +91,7 @@ class Elastica_Filter_NestedTest extends Elastica_Test
         $s = new Elastica_Search($c);
         $i = $c->getIndex('elastica_test_filter_nested');
         $s->addIndex($i);
-        $r = $s->search($q);
+        $r = $s->search($f);
 
         $this->assertEquals(1, $r->getTotalHits());
 
@@ -106,7 +106,7 @@ class Elastica_Filter_NestedTest extends Elastica_Test
         $s = new Elastica_Search($c);
         $i = $c->getIndex('elastica_test_filter_nested');
         $s->addIndex($i);
-        $r = $s->search($q);
+        $r = $s->search($f);
         $this->assertEquals(2, $r->getTotalHits());
     }
 }
