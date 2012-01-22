@@ -76,6 +76,18 @@ abstract class Elastica_Facet_Abstract extends Elastica_Param
 	public function setGlobal($global = true) {
 		return $this->_setFacetParam('global', (bool) $global);
 	}
+	
+	/**
+	 * Sets the field name of a nested field to apply the query on.
+	 * Allow to apply facets on the global query instead of applying
+	 * it on a scope.
+	 * 
+	 * @param string $field Field name of nested element
+	 * @return Elastica_Facet_Abstract
+	 */
+	public function setNested($field) {
+		return $this->_setFacetParam('nested', (string) $field);
+	}
 
 	/**
 	 * Basic definition of all specs of the facet. Each implementation
