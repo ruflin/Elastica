@@ -1,5 +1,8 @@
 CHANGES
 
+2012-01-23
+- Packagist added http://packagist.org/
+
 2012-01-15
 - Vagrantfile for vagrant environment with elasticsearch added. Run: vagrant up
 
