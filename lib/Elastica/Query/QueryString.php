@@ -103,7 +103,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 	 * @return Elastica_Query_QueryString Current object
 	 */
 	public function setLowercaseExpandedTerms($lowercase = true) {
-		return $this->setParam('lowercase_expanced_terms', (bool) $lowercase);
+		return $this->setParam('lowercase_expanded_terms', (bool) $lowercase);
 	}
 
 	/**
