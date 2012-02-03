@@ -14,7 +14,7 @@ class Elastica_ResultSet implements Iterator, Countable
 	protected $_results = array();
 	protected $_position = 0;
 	protected $_response = null;
-
+	protected $_took = 0;
 	/**
 	 * Constructs ResultSet object
 	 *
@@ -34,7 +34,7 @@ class Elastica_ResultSet implements Iterator, Countable
 		$this->_response = $response;
 		$result = $response->getData();
 		$this->_totalHits = $result['hits']['total'];
-
+		$this->_took = isset($result['took']) ? $result['took'] : 0;
 		if (isset($result['hits']['hits'])) {
 			foreach ($result['hits']['hits'] as $hit) {
 				$this->_results[] = new Elastica_Result($hit);
@@ -80,6 +80,15 @@ class Elastica_ResultSet implements Iterator, Countable
 		return (int) $this->_totalHits;
 	}
 
+	/**
+     	* Returns the total number of ms for this search to complete
+     	*
+     	* @return int Total time
+     	*/
+    	public function getTotalTime() {
+        	return (int) $this->_totalHits;
+    	}
+    	
 	/**
 	 * Returns response object
 	 *
