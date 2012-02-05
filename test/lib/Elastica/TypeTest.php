@@ -167,4 +167,31 @@ class Elastica_TypeTest extends Elastica_Test
 		$response = $index->search('nicolas');
 		$this->assertEquals(0, $response->count());
 	}
+
+    /**
+     * Test to see if search Default Limit works
+     */
+    public function testLimitDefaultType()
+    {
+        $client = new Elastica_Client();
+        $index = $client->getIndex('zero');
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+
+        $doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $type = $index->getType('zeroType');
+        $type->addDocument($doc);
+        $index->refresh();
+
+        // Zero results  (default)
+        $resultSet = $type->search('farrelley');
+        $this->assertEquals(0, $resultSet->count());
+
+        // limit = 1
+        $resultSet = $type->search('farrelley', 1);
+        $this->assertEquals(1, $resultSet->count());
+
+        // limit is null default on set limit
+        $resultSet = $type->search('farrelley', null);
+        $this->assertEquals(1, $resultSet->count());
+    }
 }

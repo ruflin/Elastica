@@ -422,4 +422,31 @@ class Elastica_IndexTest extends Elastica_Test
 			$this->assertTrue($response->hasError());
 		}
 	}
+
+    /**
+     * Test to see if search Default Limit works
+     */
+    public function testLimitDefaultIndex()
+    {
+        $client = new Elastica_Client();
+        $index = $client->getIndex('zero');
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+
+        $doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $type = $index->getType('zeroType');
+        $type->addDocument($doc);
+        $index->refresh();
+
+        // Zero results  (default)
+        $resultSet = $index->search('farrelley');
+        $this->assertEquals(0, $resultSet->count());
+
+        // limit = 1
+        $resultSet = $index->search('farrelley', 1);
+        $this->assertEquals(1, $resultSet->count());
+
+        // limit is null default on set limit
+        $resultSet = $index->search('farrelley', null);
+        $this->assertEquals(1, $resultSet->count());
+    }
 }

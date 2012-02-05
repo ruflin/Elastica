@@ -152,21 +152,21 @@ class Elastica_Search {
 		return $path . '/_search';
 	}
 
-	/**
-	 * Search in the set indices, types
-	 *
-	 * @param mixed $query
-	 * @param int   $limit OPTIONAL
-	 * @return Elastica_ResultSet
-	 */
-	public function search($query, $limit = 0) {
-		$query = Elastica_Query::create($query);
-		if ($limit) {
-			$query->setLimit($limit);
-		}
-		$path = $this->getPath();
+    /**
+     * Search in the set indices, types
+     *
+     * @param mixed $query
+     * @param int   $limit OPTIONAL
+     * @return Elastica_ResultSet
+     */
+    public function search($query, $limit = 0) {
+        $query = Elastica_Query::create($query);
+        if (!is_null($limit)) {
+            $query->setLimit($limit);
+        }
+        $path = $this->getPath();
 
-		$response = $this->getClient()->request($path, Elastica_Request::GET, $query->toArray());
-		return new Elastica_ResultSet($response);
-	}
+        $response = $this->getClient()->request($path, Elastica_Request::GET, $query->toArray());
+        return new Elastica_ResultSet($response);
+    }
 }

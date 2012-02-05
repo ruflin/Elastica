@@ -139,7 +139,6 @@ class Elastica_SearchTest extends Elastica_Test
 
 		$index1 = $this->_createIndex('test1');
 		$index2 = $this->_createIndex('test2');
-		
 
 		$type1 = $index1->getType('type1');
 		$type2 = $index1->getType('type2');
@@ -196,4 +195,35 @@ class Elastica_SearchTest extends Elastica_Test
 		$result = $search1->search(array());
 		$this->assertFalse($result->getResponse()->hasError());
 	}
+
+    /**
+     * Default Limit tests for Elastica_Search
+     */
+    public function testLimitDefaultSearch()
+    {
+        $client = new Elastica_Client();
+        $search = new Elastica_Search($client);
+
+        $index = $client->getIndex('zero');
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+
+        $doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $type = $index->getType('zeroType');
+        $type->addDocument($doc);
+        $index->refresh();
+
+        $search->addIndex($index)->addType($type);
+
+        // Zero results  (default)
+        $resultSet = $search->search('farrelley');
+        $this->assertEquals(0, $resultSet->count());
+
+        // limit = 1
+        $resultSet = $search->search('farrelley', 1);
+        $this->assertEquals(1, $resultSet->count());
+
+        // limit is null default on set limit
+        $resultSet = $search->search('farrelley', null);
+        $this->assertEquals(1, $resultSet->count());
+    }
 }
