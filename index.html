@@ -48,8 +48,8 @@
 function __autoload_elastica ($class) {
     $path = str_replace('_', '/', $class);
 
-    if (file_exists('/var/www/' . $pfad . '.php')) {
-        require_once('/var/www/' . $pfad . '.php');
+    if (file_exists('/var/www/' . $path . '.php')) {
+        require_once('/var/www/' . $path . '.php');
     }
 }
 spl_autoload_register('__autoload_elastica');</pre>
@@ -71,12 +71,12 @@ spl_autoload_register('__autoload_elastica');</pre>
 							<p>
 								When your single elasticsearch node is running on <code>localhost:9200</code>, which is the default, you can simply connect:
 							</p>
-							<pre class="prettyprint">$elascticaClient = new Elastica_Client();</pre>
+							<pre class="prettyprint">$elasticaClient = new Elastica_Client();</pre>
 							<p>
 								In case that your node is running on another server or a different port, you can pass these information as an array:
 							</p>
 							<pre class="prettyprint">
-$elascticaClient = new Elastica_Client(array(
+$elasticaClient = new Elastica_Client(array(
         'host' => 'mydomain.org',
         'port' => 12345
 ));</pre>
@@ -88,7 +88,7 @@ $elascticaClient = new Elastica_Client(array(
 								One of the goals of the distributed search index is availability. If one server goes down, search results should still be served. But if the client connects to only the server that just went down, no results are returned anymore. Because of this, <code>Elastica_Client</code> supports multiple servers which are accessed in a round robin algorithm. This is the only and also most basic option at the moment. So if we start a node on port 9200 and port 9201 above, we pass the following arguments to <code>Elastica_Client</code> to access both servers:
 							</p>
 							<pre class="prettyprint">
-$elascticaClient = new Elastica_Client(array(
+$elasticaClient = new Elastica_Client(array(
     'servers' => array(
         array('host' => 'localhost', 'port' => 9200)
         array('host' => 'localhost', 'port' => 9201)
@@ -121,10 +121,10 @@ $elascticaClient = new Elastica_Client(array(
 					</p>
 <pre class="prettyprint">
 // Load index
-$elascticaIndex = $elascticaClient->getIndex('twitter');
+$elasticaIndex = $elasticaClient->getIndex('twitter');
 
 // Create the index new
-$elascticaIndex->create(array(
+$elasticaIndex->create(array(
     'number_of_shards' => 4,
     'number_of_replicas' => 1,
     'analysis' => array(
@@ -157,11 +157,11 @@ $elascticaIndex->create(array(
 					</p>
 <pre class="prettyprint">
 // Load type
-$elascticaType = $elascticaIndex->getType('tweet');
+$elasticaType = $elasticaIndex->getType('tweet');
 
 // Define mapping
 $mapping = new Elastica_Type_Mapping();
-$mapping->setType($elascticaType);
+$mapping->setType($elasticaType);
 $mapping->setParam('index_analyzer', 'indexAnalyzer');
 $mapping->setParam('search_analyzer', 'searchAnalyzer');
 
