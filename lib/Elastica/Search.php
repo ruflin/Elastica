@@ -159,7 +159,7 @@ class Elastica_Search {
      * @param int   $limit OPTIONAL
      * @return Elastica_ResultSet
      */
-    public function search($query, $limit = 0) {
+    public function search($query, $limit = null) {
         $query = Elastica_Query::create($query);
         if (!is_null($limit)) {
             $query->setLimit($limit);

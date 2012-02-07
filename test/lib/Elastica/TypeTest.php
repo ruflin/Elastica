@@ -177,21 +177,29 @@ class Elastica_TypeTest extends Elastica_Test
         $index = $client->getIndex('zero');
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
-        $doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs = array();
+        $docs[] = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+
         $type = $index->getType('zeroType');
-        $type->addDocument($doc);
+        $type->addDocuments($docs);
         $index->refresh();
 
-        // Zero results  (default)
+        // default results  (limit default is 10)
         $resultSet = $type->search('farrelley');
-        $this->assertEquals(0, $resultSet->count());
+        $this->assertEquals(10, $resultSet->count());
 
         // limit = 1
         $resultSet = $type->search('farrelley', 1);
-        $this->assertEquals(1, $resultSet->count());
-
-        // limit is null default on set limit
-        $resultSet = $type->search('farrelley', null);
         $this->assertEquals(1, $resultSet->count());
     }
 }

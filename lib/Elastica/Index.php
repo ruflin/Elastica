@@ -158,7 +158,7 @@ class Elastica_Index implements Elastica_Searchable
      * @return Elastica_ResultSet ResultSet with all results inside
      * @see Elastica_Searchable::search
      */
-    public function search($query, $limit = 0) {
+    public function search($query, $limit = null) {
         $query = Elastica_Query::create($query);
 
         if (!is_null($limit)) {
