@@ -86,7 +86,7 @@ class Elastica_ResultSet implements Iterator, Countable
      	* @return int Total time
      	*/
     	public function getTotalTime() {
-        	return (int) $this->_totalHits;
+        	return (int) $this->_took;
     	}
     	
 	/**
