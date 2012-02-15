@@ -33,7 +33,9 @@ class Elastica_Log
 	 * @param string|Elastica_Request $message
 	 */
 	public function log($message) {
-		if (!$this->_log) return;
+		if (!$this->_log) {
+			return;
+		}
 			
 		if ($message instanceof Elastica_Request) {
 			$message = $this->_convertRequest($message);
