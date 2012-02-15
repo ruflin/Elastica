@@ -33,19 +33,20 @@ class Elastica_Log
 	 * @param string|Elastica_Request $message
 	 */
 	public function log($message) {
+		if (!$this->_log) return;
+			
 		if ($message instanceof Elastica_Request) {
 			$message = $this->_convertRequest($message);
 		}
 
-		if ($this->_log) {
-			$this->_lastMessage = $message;
-			
-			if (is_string($this->_log)) {
-				error_log($message . PHP_EOL, 3, $this->_log);
-			} else {
-				error_log($message);
-			}
+		$this->_lastMessage = $message;
+		
+		if (is_string($this->_log)) {
+			error_log($message . PHP_EOL, 3, $this->_log);
+		} else {
+			error_log($message);
 		}
+		
 	}
 	
 	/**
