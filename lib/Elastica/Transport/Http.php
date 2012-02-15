@@ -103,6 +103,8 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 			throw new Elastica_Exception_Client($errorNumber, $request, $response);
 		}
 
+		curl_close($conn);
+		
 		return $response;
 	}
 
@@ -121,10 +123,8 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 	 * @return resource Connection resource
 	 */
 	protected function _getConnection() {
-		if (!self::$_connection) {
-			self::$_connection = curl_init();
-		}
-
+		self::$_connection = curl_init();
+		
 		return self::$_connection;
 	}
 }
