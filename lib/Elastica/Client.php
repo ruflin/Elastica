@@ -206,6 +206,11 @@ class Elastica_Client
 			if (!empty($parent)) {
 				$indexInfo['_parent'] = $parent;
 			}
+						
+			$percolate = $doc->getPercolate();
+			if (!empty($percolate)) {
+				$indexInfo['percolate'] = $percolate;
+			}
 
 			$params[] = array('index' => $indexInfo);
 			$params[] = $doc->getData();
