@@ -49,7 +49,6 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 
 		curl_setopt($conn, CURLOPT_URL, $baseUri);
 		curl_setopt($conn, CURLOPT_TIMEOUT, $request->getConfig('timeout'));
-		curl_setopt($conn, CURLOPT_RETURNTRANSFER, 1) ;
 		curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $request->getMethod());
 		curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
 
@@ -82,7 +81,12 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 		}
 
 		$start = microtime(true);
-		$responseString = curl_exec($conn);
+		
+		// cURL opt returntransfer leaks memory, therefore OB instead.
+		ob_start();
+		curl_exec($conn);
+		$responseString = ob_get_clean();
+		
 		$end = microtime(true);
 
 		// Checks if error exists
@@ -102,7 +106,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 		if ($errorNumber > 0) {
 			throw new Elastica_Exception_Client($errorNumber, $request, $response);
 		}
-
+		
 		return $response;
 	}
 
@@ -121,10 +125,9 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 	 * @return resource Connection resource
 	 */
 	protected function _getConnection() {
-		if (!self::$_connection) {
+		if (!self::$_connection){
 			self::$_connection = curl_init();
 		}
-
 		return self::$_connection;
 	}
 }
