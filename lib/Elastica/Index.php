@@ -150,25 +150,25 @@ class Elastica_Index implements Elastica_Searchable
 		return in_array($this->getName(), $cluster->getIndexNames());
 	}
 
-	/**
-	 * Searchs in this index
-	 *
-	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
-	 * @param int $limit OPTIONAL
-	 * @return Elastica_ResultSet ResultSet with all results inside
-	 * @see Elastica_Searchable::search
-	 */
-	public function search($query, $limit = 0) {
-		$query = Elastica_Query::create($query);
-		
-		if ($limit) {
-			$query->setLimit($limit);
-		}
-		$path = '_search';
+    /**
+     * Searchs in this index
+     *
+     * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+     * @param int $limit OPTIONAL
+     * @return Elastica_ResultSet ResultSet with all results inside
+     * @see Elastica_Searchable::search
+     */
+    public function search($query, $limit = null) {
+        $query = Elastica_Query::create($query);
 
-		$response = $this->request($path, Elastica_Request::GET, $query->toArray());
-		return new Elastica_ResultSet($response);
-	}
+        if (!is_null($limit)) {
+            $query->setLimit($limit);
+        }
+        $path = '_search';
+
+        $response = $this->request($path, Elastica_Request::GET, $query->toArray());
+        return new Elastica_ResultSet($response);
+    }
 
 	/**
 	 * Counts results of query
