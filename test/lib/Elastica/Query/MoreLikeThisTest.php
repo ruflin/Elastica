@@ -59,7 +59,7 @@ class Elastica_Query_MoreLikeThisTest extends PHPUnit_Framework_TestCase
 		$query->setFields($fields);
 		
 		$data = $query->toArray();
-		$this->assertEquals($fields, $data['more_like_this']['mlt_fields']);		
+		$this->assertEquals($fields, $data['more_like_this']['fields']);
 	}
 	
 	public function testSetLikeText() {

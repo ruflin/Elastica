@@ -1,5 +1,9 @@
 CHANGES
 
+2012-02-21
+- Allow percolate queries in bulk requests
+- Fix memory leak in curl requests
+
 2012-01-23
 - Packagist added http://packagist.org/
 

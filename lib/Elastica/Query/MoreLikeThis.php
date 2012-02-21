@@ -17,7 +17,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	 * @return Elastica_Query_MoreLikeThis Current object
 	 */
 	public function setFields(array $fields) {
-		return $this->setParam('mlt_fields', $fields);
+		return $this->setParam('fields', $fields);
 	}
 
 	/**

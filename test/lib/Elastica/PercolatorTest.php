@@ -5,11 +5,11 @@ require_once dirname(__FILE__) . '/../../bootstrap.php';
 class Elastica_PercolatorTest extends Elastica_Test
 {
 	public function testConstruct() {
-		$index = $this->_createIndex();
-		$percolator = new Elastica_Percolator($index);
-		
 		$percolatorName = 'percotest';
-		
+
+		$index = $this->_createIndex($percolatorName);
+		$percolator = new Elastica_Percolator($index);
+
 		$query = new Elastica_Query_Term(array('field1' => 'value1'));
 		$response = $percolator->registerQuery($percolatorName, $query);
 		
