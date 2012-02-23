@@ -55,13 +55,25 @@ class Elastica_Index implements Elastica_Searchable
 	public function getStatus() {
 		return new Elastica_Index_Status($this);
 	}
-	
+
 	/**
 	 * @return ELastica_Index_Stats
 	 */
 	public function getStats() {
 		return new Elastica_Index_Stats($this);
 	}
+
+    /**
+     * Gets all the type mappings for an index.
+     *
+     * @return array
+     */
+    public function getMapping() {
+        $path = '_mapping';
+
+        $response = $this->request($path, Elastica_Request::GET);
+        return $response->getData();
+    }
 
 	/**
 	 * Returns the index settings object
