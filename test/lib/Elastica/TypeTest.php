@@ -202,4 +202,25 @@ class Elastica_TypeTest extends Elastica_Test
         $resultSet = $type->search('farrelley', 1);
         $this->assertEquals(1, $resultSet->count());
     }
+
+
+
+
+    /**
+     * Test Delete of index type.  After delete will check for type mapping.
+     * Looks for exception to be thrown.
+     *
+     * @expectedException Elastica_Exception_Response
+     */
+    public function testDeleteType()
+    {
+        $index = $this->_createIndex();
+        $type = new Elastica_Type($index, 'test');
+        $type->addDocument(new Elastica_Document(1, array('name' => 'ruflin nicolas')));
+        $type->addDocument(new Elastica_Document(2, array('name' => 'ruflin')));
+        $index->refresh();
+
+        $type->delete();
+        $type->getMapping();
+    }
 }
