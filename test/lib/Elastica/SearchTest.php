@@ -139,7 +139,6 @@ class Elastica_SearchTest extends Elastica_Test
 
 		$index1 = $this->_createIndex('test1');
 		$index2 = $this->_createIndex('test2');
-		
 
 		$type1 = $index1->getType('type1');
 		$type2 = $index1->getType('type2');
@@ -196,4 +195,42 @@ class Elastica_SearchTest extends Elastica_Test
 		$result = $search1->search(array());
 		$this->assertFalse($result->getResponse()->hasError());
 	}
+
+    /**
+     * Default Limit tests for Elastica_Search
+     */
+    public function testLimitDefaultSearch()
+    {
+        $client = new Elastica_Client();
+        $search = new Elastica_Search($client);
+
+        $index = $client->getIndex('zero');
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+
+        $docs = array();
+        $docs[] = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $type = $index->getType('zeroType');
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $search->addIndex($index)->addType($type);
+
+        // default limit results  (default limit is 10)
+        $resultSet = $search->search('farrelley');
+        $this->assertEquals(10, $resultSet->count());
+
+        // limit = 1
+        $resultSet = $search->search('farrelley', 1);
+        $this->assertEquals(1, $resultSet->count());
+    }
 }
