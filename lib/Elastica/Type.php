@@ -232,6 +232,17 @@ class Elastica_Type implements Elastica_Searchable {
 		return $this->request('_query', Elastica_Request::DELETE, $query->getQuery());
 	}
 
+    /**
+     * Deletes the index type.
+     *
+     * @return Elastica_Response
+     */
+    public function delete() {
+        $response = $this->request('', Elastica_Request::DELETE);
+
+        return $response;
+    }
+
 	/**
 	 * More like this query based on the given object
 	 *
