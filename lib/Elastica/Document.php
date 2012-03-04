@@ -80,7 +80,7 @@ class Elastica_Document {
 	 * To use this feature you have to call the following command in the
 	 * elasticsearch directory:
 	 * <code>
-	 * ./bin/plugin install mapper-attachments
+	 * ./bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/1.2.0
 	 * </code>
 	 * This installs the tika file analysis plugin. More infos about supported formats
 	 * can be found here: {@link http://tika.apache.org/0.7/formats.html}
