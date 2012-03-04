@@ -1,5 +1,8 @@
 CHANGES
 
+2012-03-04
+- Node info call update. The receive os info and more, param is needed. By default, only basics are returned
+
 2012-02-21
 - Allow percolate queries in bulk requests
 - Fix memory leak in curl requests

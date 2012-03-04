@@ -17,10 +17,11 @@ class Elastica_Node_Info
 
 	/**
 	 * @param Elastica_Node $node Node object
+	 * @param array $params List of params to return. Can be: settings, os, process, jvm, thread_pool, network, transport, http
 	 */
-	public function __construct(Elastica_Node $node) {
+	public function __construct(Elastica_Node $node, array $params = array()) {
 		$this->_node = $node;
-		$this->refresh();
+		$this->refresh($params);
 	}
 
 	/**
@@ -100,10 +101,19 @@ class Elastica_Node_Info
 	/**
 	 * Reloads all nodes information. Has to be called if informations changed
 	 *
+	 * @param array $params Params to return (default none). Possible options: settings, os, process, jvm, thread_pool, network, transport, http
 	 * @return Elastica_Response Response object
 	 */
-	public function refresh() {
+	public function refresh(array $params = array()) {
 		$path = '_cluster/nodes/' . $this->getNode()->getName();
+
+		if (!empty($params)) {
+			$path .= '?';
+			foreach ($params as $param) {
+				$path .= $param . '=true&';
+			}
+		}
+
 		$this->_response = $this->getNode()->getClient()->request($path, Elastica_Request::GET);
 		$data = $this->getResponse()->getData();
 		$this->_data = reset($data['nodes']);

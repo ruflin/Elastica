@@ -105,13 +105,13 @@ class Elastica_Query_MappingTest extends Elastica_Test
 			),
 		));
 
-		print_r($type->getMapping());
-		exit();
+		//print_r($type->getMapping());
+		//exit();
 		$type->addDocument($doc);
 
 		$index->refresh();
 		$resultSet = $type->search('ruflin');
-		print_r($resultSet);
+		//print_r($resultSet);
 	}
 
 	public function testParentMapping() {
