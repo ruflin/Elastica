@@ -2,7 +2,7 @@
 
 wget https://github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.19.0.tar.gz
 tar -xzf elasticsearch-0.19.0.tar.gz
-sed 's/# index.number_of_shards: 1/index.number_of_shards: 1/' elasticsearch-0.19.0/config/elasticsearch.yml > elasticsearch-0.19.0/config/elasticsearch.yml
+sed 's/# index.number_of_shards: 1/index.number_of_shards: 2/' elasticsearch-0.19.0/config/elasticsearch.yml > elasticsearch-0.19.0/config/elasticsearch.yml
 sed 's/# index.number_of_replicas: 0/index.number_of_replicas: 0/' elasticsearch-0.19.0/config/elasticsearch.yml > elasticsearch-0.19.0/config/elasticsearch.yml
 sed 's/# discovery.zen.ping.multicast.enabled: false/discovery.zen.ping.multicast.enabled: false/' elasticsearch-0.19.0/config/elasticsearch.yml > elasticsearch-0.19.0/config/elasticsearch.yml
 elasticsearch-0.19.0/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/1.2.0
