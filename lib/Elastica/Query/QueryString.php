@@ -228,6 +228,16 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
 		return $this->setParam('tie_breaker', (int) $tieBreaker);
 	}
 
+    /**
+     * Set a re-write condition. See https://github.com/elasticsearch/elasticsearch/issues/1186 for additional information
+     *
+     * @param string $rewrite
+     * @return Elastica_Param
+     */
+    public function setRewrite($rewrite = "") {
+    		return $this->setParam('rewrite', $rewrite);
+    }
+
 	/**
 	 * Converts query to array
 	 *
