@@ -82,6 +82,16 @@ class Elastica_Query_QueryStringTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($data['query_string']['default_field'], $default);
 	}
 
+    public function testSetRewrite() {
+    		$rewrite = 'scoring_boolean';
+    		$query = new Elastica_Query_QueryString('test');
+    		$query->setRewrite($rewrite);
+
+    		$data = $query->toArray();
+
+    		$this->assertEquals($data['query_string']['rewrite'], $rewrite);
+    }
+
 	public function testSetQueryStringInvalid() {
 		$query = new Elastica_Query_QueryString();
 		try {
