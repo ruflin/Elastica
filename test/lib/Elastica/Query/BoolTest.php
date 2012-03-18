@@ -43,6 +43,26 @@ class Elastica_Query_BoolTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expectedArray, $query->toArray());
 	}
 
+	/**
+	 * Test to resolve the following issue
+	 *
+	 * https://groups.google.com/forum/?fromgroups#!topic/elastica-php-client/zK_W_hClfvU
+	 */
+	public function testToArrayStructure() {
+		$boolQuery = new Elastica_Query_Bool();
+
+		$term1 = new Elastica_Query_Term();
+		$term1->setParam('interests', 84);
+
+		$term2 = new Elastica_Query_Term();
+		$term2->setParam('interests', 92);
+
+		$boolQuery->addShould($term1)->addShould($term2);
+
+		$jsonString = '{"bool":{"should":[{"term":{"interests":84}},{"term":{"interests":92}}]}}';
+		$this->assertEquals($jsonString, json_encode($boolQuery->toArray()));
+	}
+
 	public function testSearch() {
 		$client = new Elastica_Client();
 		$index = new Elastica_Index($client, 'test');
