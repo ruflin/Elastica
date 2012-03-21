@@ -141,15 +141,25 @@ class Elastica_Index implements Elastica_Searchable
 	 * @return array Server response
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/
 	 */
-	public function create(array $args = array(), $recreate = false) {
+	public function create(array $args = array(), $recreate = false, $routing = null) {
 		if ($recreate) {
 			try {
 				$this->delete();
 			} catch(Elastica_Exception_Response $e) {
 				// Table can't be deleted, because doesn't exist
 			}
+            
 		}
-		return $this->request('', Elastica_Request::PUT, $args);
+        /**
+         * comulinux 20/03/2012
+         * Added routing to path
+         */
+        $path = '';
+        if (!empty($_routing)) {
+          $path .= '?_routing=' . $_routing;
+        }
+        /*****************************************/
+        return $this->request($path, Elastica_Request::PUT, $args); 
 	}
 
 	/**
