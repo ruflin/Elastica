@@ -24,9 +24,9 @@ class Elastica_Result
 	/**
 	 * Returns a param from the result hit array
 	 *
-	 * This function can be used to retriev all data for which not a specific
-	 * function exists.
-	 * If the param does not exists and empty array is retured
+	 * This function can be used to retrieve all data for which a specific
+	 * function doesn't exist.
+	 * If the param does not exist, an empty array is retured
 	 *
 	 * @param string $name Param name
 	 * @return array Result data
@@ -40,7 +40,7 @@ class Elastica_Result
 	}
 
 	/**
-	 * Returns the hit id.
+	 * Returns the hit id
 	 *
 	 * @return string Hit id
 	 */
@@ -49,7 +49,7 @@ class Elastica_Result
 	}
 
 	/**
-	 * Returns results type
+	 * Returns the type of the result
 	 *
 	 * @return string Result type
 	 */
@@ -78,7 +78,7 @@ class Elastica_Result
 	/**
 	 * Returns the score of the result
 	 *
-	 * @return float Results score
+	 * @return float Result score
 	 */
 	public function getScore() {
 		return $this->getParam('_score');
