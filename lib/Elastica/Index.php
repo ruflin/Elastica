@@ -133,35 +133,47 @@ class Elastica_Index implements Elastica_Searchable
 		return $this->request('_refresh', Elastica_Request::POST, array());
 	}
 
-	/**
+/**
 	 * Creates a new index with the given arguments
 	 *
 	 * @param array $args OPTIONAL Arguments to use
-	 * @param bool $recreate OPTIONAL Deletes index first if already exists (default = false)
+	 * @param bool|array $options OPTIONAL 
+	 * 			bool=> Deletes index first if already exists (default = false). 
+	 * 			array => Associative array of options (option=>value)  
 	 * @return array Server response
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/
 	 */
-	public function create(array $args = array(), $recreate = false, $routing = null) {
-		if ($recreate) {
-			try {
-				$this->delete();
-			} catch(Elastica_Exception_Response $e) {
-				// Table can't be deleted, because doesn't exist
+	public function create(array $args = array(), $options = null) {//recreate = false, $routing = null) {
+		$path = '';
+		if (is_bool($options)) {
+			if ($options) {
+				try {
+					$this -> delete();
+				} catch(Elastica_Exception_Response $e) {
+					// Table can't be deleted, because doesn't exist
+				}
 			}
-            
-		}
-        /**
-         * comulinux 20/03/2012
-         * Added routing to path
-         */
-        $path = '';
-        if (!empty($_routing)) {
-          $path .= '?_routing=' . $_routing;
-        }
-        /*****************************************/
-        return $this->request($path, Elastica_Request::PUT, $args); 
-	}
+		} else if (is_array($options)) {
+			foreach ($options as $key => $value) {
+				switch ($key) {
+					case 'recreate' :
+						try {
+							$this -> delete();
+						} catch(Elastica_Exception_Response $e) {
+							// Table can't be deleted, because doesn't exist
+						}
+						break;
 
+					case 'routing' :
+						if (!empty($value)) {
+							$path .= '?_routing=' . $value;
+						}
+						break;
+				}
+			}
+		}
+		return $this -> request($path, Elastica_Request::PUT, $args);
+	}
 	/**
 	 * Checks if the given index is already created
 	 *
