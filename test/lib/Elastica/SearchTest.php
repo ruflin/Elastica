@@ -233,4 +233,53 @@ class Elastica_SearchTest extends Elastica_Test
         $resultSet = $search->search('farrelley', 1);
         $this->assertEquals(1, $resultSet->count());
     }
+
+
+    public function testArrayConfigSearch(){
+        $client = new Elastica_Client();
+        $search = new Elastica_Search($client);
+
+        $index = $client->getIndex('zero');
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+
+        $docs = array();
+        $docs[] = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        $docs[] = new Elastica_Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        $docs[] = new Elastica_Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        $docs[] = new Elastica_Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        $docs[] = new Elastica_Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        $docs[] = new Elastica_Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        $docs[] = new Elastica_Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        $docs[] = new Elastica_Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        $docs[] = new Elastica_Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        $docs[] = new Elastica_Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        $docs[] = new Elastica_Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        $type = $index->getType('zeroType');
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $search->addIndex($index)->addType($type);
+        //Backward compatibility, integer => limit
+        // default limit results  (default limit is 10)
+        $resultSet = $search->search('test');
+        $this->assertEquals(10, $resultSet->count());
+        // limit = 1
+        $resultSet = $search->search('test', 1);
+        $this->assertEquals(1, $resultSet->count());
+        //Array with limit
+        $resultSet = $search->search('test',array('limit'=>1));
+        $this->assertEquals(1, $resultSet->count());
+        //Array with routing
+        $resultSet = $search->search('test',array('routing'=>'r1,r2'));
+        //$this->assertEquals('zero/zeroType/_search?routing=r1,r2',$search->getPath());
+        //Array with limit and routing
+        $resultSet = $search->search('test',array('limit'=>1,'routing'=>'r1,r2'));
+        $this->assertTrue($resultSet->count()==1);// && routing condition
+        //Invalid option
+        try{
+            $resultSet = $search->search('test',array('invalid_option'=>'invalid_option_value'));
+        }catch(Exception $ex){
+             $this->assertTrue($ex instanceof Elastica_Exception_Invalid);
+        }
+    }
 }
