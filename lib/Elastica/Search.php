@@ -181,6 +181,9 @@ class Elastica_Search {
 							$path .= '?routing=' . $value;
 						}
 						break;
+                    default:
+                        throw new Elastica_Exception_Invalid('Invalid option '.$key);
+                    break;
 				}
 			}
 			

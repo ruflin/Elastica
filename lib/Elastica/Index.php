@@ -169,6 +169,10 @@ class Elastica_Index implements Elastica_Searchable
 							$path .= '?_routing=' . $value;
 						}
 						break;
+                        
+                    default:
+                        throw new Elastica_Exception_Invalid('Invalid option '.$key);
+                    break;
 				}
 			}
 		}
