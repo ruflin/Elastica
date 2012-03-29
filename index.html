@@ -215,7 +215,7 @@ $tweetDocument = Elastica_Document($id, $tweet);
 $elasticaType->addDocument($tweetDocument);
 
 // Refresh Index
-$elasticType->getIndex()->refresh();</pre>
+$elasticaType->getIndex()->refresh();</pre>
 					<p>
 						Now the index contains a document. But that's not enough! Add more documents to the index, so a search makes sense!
 					</p>
