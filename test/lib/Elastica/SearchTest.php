@@ -267,14 +267,14 @@ class Elastica_SearchTest extends Elastica_Test
         $resultSet = $search->search('test', 1);
         $this->assertEquals(1, $resultSet->count());
         //Array with limit
-        $resultSet = $search->search('test',array('limit'=>1));
-        $this->assertEquals(1, $resultSet->count());
+        $resultSet = $search->search('test',array('limit'=>2));
+        $this->assertEquals(2, $resultSet->count());
         //Array with routing
         $resultSet = $search->search('test',array('routing'=>'r1,r2'));
-        //$this->assertEquals('zero/zeroType/_search?routing=r1,r2',$search->getPath());
+        $this->assertEquals(10, $resultSet->count());
         //Array with limit and routing
-        $resultSet = $search->search('test',array('limit'=>1,'routing'=>'r1,r2'));
-        $this->assertTrue($resultSet->count()==1);// && routing condition
+        $resultSet = $search->search('test',array('limit'=>5,'routing'=>'r1,r2'));
+        $this->assertEquals(5,$resultSet->count());// && routing condition
         //Invalid option
         try{
             $resultSet = $search->search('test',array('invalid_option'=>'invalid_option_value'));

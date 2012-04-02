@@ -143,7 +143,7 @@ class Elastica_Index implements Elastica_Searchable
 	 * @return array Server response
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/
 	 */
-	public function create(array $args = array(), $options = null) {//recreate = false, $routing = null) {
+	public function create(array $args = array(), $options = null) {
 		$path = '';
 		if (is_bool($options)) {
 			if ($options) {
