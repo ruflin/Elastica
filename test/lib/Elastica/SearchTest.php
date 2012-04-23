@@ -236,6 +236,7 @@ class Elastica_SearchTest extends Elastica_Test
 
 
     public function testArrayConfigSearch(){
+        ini_set('display_errors',1);
         $client = new Elastica_Client();
         $search = new Elastica_Search($client);
 
@@ -263,21 +264,39 @@ class Elastica_SearchTest extends Elastica_Test
         // default limit results  (default limit is 10)
         $resultSet = $search->search('test');
         $this->assertEquals(10, $resultSet->count());
+        
         // limit = 1
         $resultSet = $search->search('test', 1);
         $this->assertEquals(1, $resultSet->count());
+        
         //Array with limit
         $resultSet = $search->search('test',array('limit'=>2));
         $this->assertEquals(2, $resultSet->count());
+        
         //Array with routing
         $resultSet = $search->search('test',array('routing'=>'r1,r2'));
         $this->assertEquals(10, $resultSet->count());
+        
         //Array with limit and routing
         $resultSet = $search->search('test',array('limit'=>5,'routing'=>'r1,r2'));
-        $this->assertEquals(5,$resultSet->count());// && routing condition
+        $this->assertEquals(5,$resultSet->count());
+        
+        //Search types
+        $resultSet = $search->search('test',array('limit'=>5,'search_type'=>'count'));
+        $this->assertTrue(($resultSet->count()===0) && $resultSet->getTotalHits()===11);
+        
         //Invalid option
         try{
             $resultSet = $search->search('test',array('invalid_option'=>'invalid_option_value'));
+            $this->fail('Should throw Elastica_Exception_Invalid');
+        }catch(Exception $ex){
+             $this->assertTrue($ex instanceof Elastica_Exception_Invalid);
+        }
+        
+        //Invalid value
+        try{
+            $resultSet = $search->search('test',array('routing'=>null));
+            $this->fail('Should throw Elastica_Exception_Invalid');
         }catch(Exception $ex){
              $this->assertTrue($ex instanceof Elastica_Exception_Invalid);
         }

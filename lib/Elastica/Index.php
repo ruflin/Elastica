@@ -155,25 +155,28 @@ class Elastica_Index implements Elastica_Searchable
 			}
 		} else if (is_array($options)) {
 			foreach ($options as $key => $value) {
-				switch ($key) {
-					case 'recreate' :
-						try {
-							$this -> delete();
-						} catch(Elastica_Exception_Response $e) {
-							// Table can't be deleted, because doesn't exist
-						}
-						break;
-
-					case 'routing' :
-						if (!empty($value)) {
-							$path .= '?_routing=' . $value;
-						}
-						break;
-                        
-                    default:
-                        throw new Elastica_Exception_Invalid('Invalid option '.$key);
-                    break;
-				}
+                if (empty($value)){
+                    throw new Elastica_Exception_Invalid('Invalid value '.$value.' for option '.$key);
+                }else{
+                    $path_separator = (strpos($path, '?'))?'&':'?';
+                    switch ($key) {
+                        case 'recreate' :
+                            try {
+                              $this -> delete();
+                            } catch(Elastica_Exception_Response $e) {
+                              // Table can't be deleted, because doesn't exist
+                            }
+                        break;
+                        case 'routing' :
+                            if (!empty($value)) {
+                                $path .= $path_separator.'routing=' . $value;
+                            }
+                            break;
+                        default:
+                            throw new Elastica_Exception_Invalid('Invalid option '.$key);
+                        break;
+                    }
+                }
 			}
 		}
 		return $this -> request($path, Elastica_Request::PUT, $args);
