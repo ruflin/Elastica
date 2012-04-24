@@ -233,4 +233,64 @@ class Elastica_SearchTest extends Elastica_Test
         $resultSet = $search->search('farrelley', 1);
         $this->assertEquals(1, $resultSet->count());
     }
+
+
+    public function testArrayConfigSearch(){
+        $client = new Elastica_Client();
+        $search = new Elastica_Search($client);
+
+        $index = $client->getIndex('zero');
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+
+        $docs = array();
+        for ($i=0; $i < 11; $i++){
+            $docs[] = new Elastica_Document($i, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        }
+        
+        $type = $index->getType('zeroType');
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $search->addIndex($index)->addType($type);
+        //Backward compatibility, integer => limit
+        // default limit results  (default limit is 10)
+        $resultSet = $search->search('test');
+        $this->assertEquals(10, $resultSet->count());
+        
+        // limit = 1
+        $resultSet = $search->search('test', 1);
+        $this->assertEquals(1, $resultSet->count());
+        
+        //Array with limit
+        $resultSet = $search->search('test',array('limit'=>2));
+        $this->assertEquals(2, $resultSet->count());
+        
+        //Array with routing
+        $resultSet = $search->search('test',array('routing'=>'r1,r2'));
+        $this->assertEquals(10, $resultSet->count());
+        
+        //Array with limit and routing
+        $resultSet = $search->search('test',array('limit'=>5,'routing'=>'r1,r2'));
+        $this->assertEquals(5,$resultSet->count());
+        
+        //Search types
+        $resultSet = $search->search('test',array('limit'=>5,'search_type'=>'count'));
+        $this->assertTrue(($resultSet->count()===0) && $resultSet->getTotalHits()===11);
+        
+        //Invalid option
+        try{
+            $resultSet = $search->search('test',array('invalid_option'=>'invalid_option_value'));
+            $this->fail('Should throw Elastica_Exception_Invalid');
+        }catch(Exception $ex){
+             $this->assertTrue($ex instanceof Elastica_Exception_Invalid);
+        }
+        
+        //Invalid value
+        try{
+            $resultSet = $search->search('test',array('routing'=>null));
+            $this->fail('Should throw Elastica_Exception_Invalid');
+        }catch(Exception $ex){
+             $this->assertTrue($ex instanceof Elastica_Exception_Invalid);
+        }
+    }
 }
