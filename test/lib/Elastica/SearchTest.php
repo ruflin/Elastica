@@ -236,7 +236,6 @@ class Elastica_SearchTest extends Elastica_Test
 
 
     public function testArrayConfigSearch(){
-        ini_set('display_errors',1);
         $client = new Elastica_Client();
         $search = new Elastica_Search($client);
 
@@ -244,17 +243,10 @@ class Elastica_SearchTest extends Elastica_Test
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
         $docs = array();
-        $docs[] = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
-        $docs[] = new Elastica_Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
-        $docs[] = new Elastica_Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
-        $docs[] = new Elastica_Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
-        $docs[] = new Elastica_Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
-        $docs[] = new Elastica_Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
-        $docs[] = new Elastica_Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
-        $docs[] = new Elastica_Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
-        $docs[] = new Elastica_Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
-        $docs[] = new Elastica_Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
-        $docs[] = new Elastica_Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        for ($i=0; $i < 11; $i++){
+            $docs[] = new Elastica_Document($i, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+        }
+        
         $type = $index->getType('zeroType');
         $type->addDocuments($docs);
         $index->refresh();
