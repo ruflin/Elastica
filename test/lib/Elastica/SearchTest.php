@@ -275,7 +275,7 @@ class Elastica_SearchTest extends Elastica_Test
         
         //Search types
         $resultSet = $search->search('test',array('limit'=>5,'search_type'=>'count'));
-        $this->assertTrue(($resultSet->count()===0) && $resultSet->getTotalHits()===11);
+        $this->assertTrue(($resultSet->count()===0) && $resultSet->getTotalHits()===$i);
         
         //Invalid option
         try{
