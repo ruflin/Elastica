@@ -152,21 +152,55 @@ class Elastica_Search {
 		return $path . '/_search';
 	}
 
-    /**
-     * Search in the set indices, types
-     *
-     * @param mixed $query
-     * @param int   $limit OPTIONAL
-     * @return Elastica_ResultSet
-     */
-    public function search($query, $limit = null) {
-        $query = Elastica_Query::create($query);
-        if (!is_null($limit)) {
-            $query->setLimit($limit);
-        }
-        $path = $this->getPath();
+	/**
+	 * Search in the set indices, types
+	 *
+	 * @param mixed $query
+	 * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
+	 * @return Elastica_ResultSet
+	 */
 
-        $response = $this->getClient()->request($path, Elastica_Request::GET, $query->toArray());
-        return new Elastica_ResultSet($response);
-    }
+	public function search($query, $options = null) {
+			
+		$query = Elastica_Query::create($query);
+		$path = $this -> getPath();
+		
+		if (is_int($options)) {
+			
+			$query -> setLimit($options);
+			
+		} else if (is_array($options)) {
+			
+			foreach ($options as $key => $value) {
+			    if (empty($value)){
+                    throw new Elastica_Exception_Invalid('Invalid value '.$value.' for option '.$key);
+                }else{
+    			    $path_separator = (strpos($path, '?'))?'&':'?';
+    				switch ($key) {
+    					case 'limit' :
+    						$query -> setLimit($value);
+    						break;
+    					case 'routing' :
+    						if (!empty($value)) {
+    							$path .= $path_separator.'routing=' . $value;
+    						}
+    						break;
+                        case 'search_type':
+                            if (!empty($value)) {
+                                $path .= $path_separator.'search_type=' . $value;
+                            }
+                            break;
+                        default:
+                            throw new Elastica_Exception_Invalid('Invalid option '.$key);
+                        break;
+    				}
+                }
+			}
+			
+		}
+		
+		$response = $this -> getClient() -> request($path, Elastica_Request::GET, $query -> toArray());
+		
+		return new Elastica_ResultSet($response);
+	}
 }

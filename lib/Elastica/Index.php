@@ -133,25 +133,54 @@ class Elastica_Index implements Elastica_Searchable
 		return $this->request('_refresh', Elastica_Request::POST, array());
 	}
 
-	/**
+/**
 	 * Creates a new index with the given arguments
 	 *
 	 * @param array $args OPTIONAL Arguments to use
-	 * @param bool $recreate OPTIONAL Deletes index first if already exists (default = false)
+	 * @param bool|array $options OPTIONAL 
+	 * 			bool=> Deletes index first if already exists (default = false). 
+	 * 			array => Associative array of options (option=>value)  
 	 * @return array Server response
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/
 	 */
-	public function create(array $args = array(), $recreate = false) {
-		if ($recreate) {
-			try {
-				$this->delete();
-			} catch(Elastica_Exception_Response $e) {
-				// Table can't be deleted, because doesn't exist
+	public function create(array $args = array(), $options = null) {
+		$path = '';
+		if (is_bool($options)) {
+			if ($options) {
+				try {
+					$this -> delete();
+				} catch(Elastica_Exception_Response $e) {
+					// Table can't be deleted, because doesn't exist
+				}
+			}
+		} else if (is_array($options)) {
+			foreach ($options as $key => $value) {
+                if (empty($value)){
+                    throw new Elastica_Exception_Invalid('Invalid value '.$value.' for option '.$key);
+                }else{
+                    $path_separator = (strpos($path, '?'))?'&':'?';
+                    switch ($key) {
+                        case 'recreate' :
+                            try {
+                              $this -> delete();
+                            } catch(Elastica_Exception_Response $e) {
+                              // Table can't be deleted, because doesn't exist
+                            }
+                        break;
+                        case 'routing' :
+                            if (!empty($value)) {
+                                $path .= $path_separator.'routing=' . $value;
+                            }
+                            break;
+                        default:
+                            throw new Elastica_Exception_Invalid('Invalid option '.$key);
+                        break;
+                    }
+                }
 			}
 		}
-		return $this->request('', Elastica_Request::PUT, $args);
+		return $this -> request($path, Elastica_Request::PUT, $args);
 	}
-
 	/**
 	 * Checks if the given index is already created
 	 *
