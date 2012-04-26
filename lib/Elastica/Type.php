@@ -258,11 +258,7 @@ class Elastica_Type implements Elastica_Searchable {
 
 		// mlt API needs args as http get params
 		if (!empty($args)) {
-			$argsStrings = array();
-			foreach ($args as $key => $value) {
-				$argsStrings[] = $key . '=' . $value;
-			}
-			$path .= '?' . implode('&', $argsStrings);
+			$path .= '?' . http_build_query($args);
 		}
 
 		$response = $this->request($path, Elastica_Request::GET);
