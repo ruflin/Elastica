@@ -70,7 +70,12 @@ class Elastica_Log
 		$message = 'curl -X' . strtoupper($request->getMethod()) . ' ';
 		$message .= 'http://' . $request->getClient()->getHost() . ':' . $request->getClient()->getPort() . '/';
 		$message .= $request->getPath();
-		$message .= ' -d \'' . json_encode($request->getData()) . '\'';
+
+		$data = $request->getData();
+		if (!empty($data)) {
+			$message .= ' -d \'' . json_encode($data) . '\'';
+		}
+		
 		return $message;
 	}
 	

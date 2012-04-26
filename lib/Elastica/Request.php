@@ -131,6 +131,9 @@ class Elastica_Request {
 	 */
 	public function send() {
 		
+		$log = new Elastica_Log($this->getClient());
+		$log->log($this);
+
 		$transport = $this->getTransport();
 
 		$servers = $this->getClient()->getConfig('servers');
@@ -171,9 +174,6 @@ class Elastica_Request {
 			$response = $transport->exec($server);
 		}
 		
-		$log = new Elastica_Log($this->getClient());
-		$log->log($this);
-
 		return $response;
 	}
 }
