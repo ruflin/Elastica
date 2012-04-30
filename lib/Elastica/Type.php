@@ -248,14 +248,22 @@ class Elastica_Type implements Elastica_Searchable {
 	 *
 	 * The id in the given object has to be set
 	 *
-	 * @param EalsticSearch_Document $doc  Document to query for similar objects
+	 * @param ElasticSearch_Document $doc  Document to query for similar objects
 	 * @param array                  $args OPTIONAL Additional arguments for the query
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/more_like_this/
+	 * @return Elastica_ResultSet          ResultSet with all results inside
+	 * @link http://www.elasticsearch.org/guide/reference/api/more-like-this.html
 	 */
 	public function moreLikeThis(Elastica_Document $doc, $args = array()) {
-		// TODO: Not tested yet
 		$path = $doc->getId() . '/_mlt';
-		return $this->request($path, Elastica_Request::GET, $args);
+
+		// mlt API needs args as http get params
+		if (!empty($args)) {
+			$path .= '?' . http_build_query($args);
+		}
+
+		$response = $this->request($path, Elastica_Request::GET);
+
+		return new Elastica_ResultSet($response);
 	}
 
 	/**
