@@ -48,6 +48,12 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 
 		$baseUri .= $request->getPath();
 
+		$query = $request->getQuery();
+
+		if (!empty($query)) {
+			$baseUri .= '?' . http_build_query($query);
+		}
+
 		curl_setopt($conn, CURLOPT_URL, $baseUri);
 		curl_setopt($conn, CURLOPT_TIMEOUT, $request->getConfig('timeout'));
 		curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $request->getMethod());

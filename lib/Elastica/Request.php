@@ -17,6 +17,7 @@ class Elastica_Request {
 	protected $_path;
 	protected $_method;
 	protected $_data;
+	protected $_query;
 
 	/**
 	 * Internal id of last used server. This is used for round robin
@@ -29,13 +30,15 @@ class Elastica_Request {
 	 * @param Elastica_Client $client
 	 * @param string $path Request path
 	 * @param string $method Request method (use const's)
-	 * @param array $data Data array
+	 * @param array $data OPTIONAL Data array
+	 * @param array $query OPTIONLA Query params
 	 */
-	public function __construct(Elastica_Client $client, $path, $method, $data = array()) {
+	public function __construct(Elastica_Client $client, $path, $method, $data = array(), array $query = array()) {
 		$this->_client = $client;
 		$this->_path = $path;
 		$this->_method = $method;
 		$this->_data = $data;
+		$this->_query = $query;
 	}
 
 	/**
@@ -89,6 +92,13 @@ class Elastica_Request {
 	 */
 	public function getPath() {
 		return $this->_path;
+	}
+
+	/**
+	 * @return array Query params
+	 */
+	public function getQuery() {
+		return $this->_query;
 	}
 
 	/**
