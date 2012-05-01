@@ -1,6 +1,7 @@
 CHANGES
 
 2012-05-01
+- Release v0.19.3.0
 - MoreLikeThis Query in Elastica_Document
 - Add query param for request (allows GET params)
 
