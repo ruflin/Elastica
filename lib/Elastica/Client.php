@@ -42,6 +42,7 @@ class Elastica_Client
 		'path' => '',
 		'url' => null,
 		'transport' => self::DEFAULT_TRANSPORT,
+		'persistent' => true,
 		'timeout' => self::TIMEOUT,
 		'headers' => array(),
 		'servers' => array(),

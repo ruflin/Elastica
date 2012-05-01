@@ -28,9 +28,10 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 	 * @return Elastica_Response Response object
 	 */
 	public function exec(array $params) {
-		$conn = $this->_getConnection();
 
 		$request = $this->getRequest();
+
+		$conn = $this->_getConnection($request->getConfig('persistent'));
 
 		// If url is set, url is taken. Otherwise port, host and path
 		if (!empty($params['url'])) {
@@ -122,10 +123,11 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 	}
 
 	/**
+	 * @param bool $persistent False if not persistent connection
 	 * @return resource Connection resource
 	 */
-	protected function _getConnection() {
-		if (!self::$_connection){
+	protected function _getConnection($persistent = true) {
+		if (!$persistent || !self::$_connection){
 			self::$_connection = curl_init();
 		}
 		return self::$_connection;

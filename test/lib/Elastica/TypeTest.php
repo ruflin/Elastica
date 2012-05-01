@@ -227,9 +227,11 @@ class Elastica_TypeTest extends Elastica_Test
     }
 
 	public function testMoreLikeThisApi() {
-		$this->markTestIncomplete('Normally this test should work but it returns an SearchPhaseExecutionException, because of executing the moreLikeThis directly after the adding of the documents. Doing a moreLikeThis on an existing index works.');
 
-		$index = $this->_createIndex();
+		$client = new Elastica_Client(array('persistent' => false));
+		$index = $client->getIndex('elastica_test');
+		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+
 		$type = new Elastica_Type($index, 'mlt_test');
 		$type->addDocument(new Elastica_Document(1, array('name' => 'bruce wayne batman')));
 		$type->addDocument(new Elastica_Document(2, array('name' => 'bruce wayne')));
