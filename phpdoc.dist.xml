@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<docblox>
+	<title>Elastica</title>
+	<parser>
+		<target>./build/api</target>
+	</parser>
+	<transformer>
+		<target>./build/api</target>
+	</transformer>
+	<files>
+		<directory>./lib</directory>
+	</files>
+</docblox>
