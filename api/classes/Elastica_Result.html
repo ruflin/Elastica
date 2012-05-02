@@ -1,0 +1,284 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica » \Elastica_Result</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Constructs a single results object"><span class="description">Constructs a single results object</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#__get" title="__get :: Magic function to directly access keys inside the result"><span class="description">Magic function to directly access keys inside the result</span><pre>__get()</pre></a></li>
+<li class="method public "><a href="#getData" title="getData :: Returns result data"><span class="description">Returns result data</span><pre>getData()</pre></a></li>
+<li class="method public "><a href="#getExplanation" title="getExplanation :: Returns explanation on how its score was computed."><span class="description">Returns explanation on how its score was computed.</span><pre>getExplanation()</pre></a></li>
+<li class="method public "><a href="#getFields" title="getFields :: Returns list of fields"><span class="description">Returns list of fields</span><pre>getFields()</pre></a></li>
+<li class="method public "><a href="#getHighlights" title="getHighlights :: Returns result data"><span class="description">Returns result data</span><pre>getHighlights()</pre></a></li>
+<li class="method public "><a href="#getHit" title="getHit :: Returns the raw hit array"><span class="description">Returns the raw hit array</span><pre>getHit()</pre></a></li>
+<li class="method public "><a href="#getId" title="getId :: Returns the hit id"><span class="description">Returns the hit id</span><pre>getId()</pre></a></li>
+<li class="method public "><a href="#getIndex" title="getIndex :: Returns the index name of the result"><span class="description">Returns the index name of the result</span><pre>getIndex()</pre></a></li>
+<li class="method public "><a href="#getParam" title="getParam :: Returns a param from the result hit array"><span class="description">Returns a param from the result hit array</span><pre>getParam()</pre></a></li>
+<li class="method public "><a href="#getScore" title="getScore :: Returns the score of the result"><span class="description">Returns the score of the result</span><pre>getScore()</pre></a></li>
+<li class="method public "><a href="#getSource" title="getSource :: Returns the result source"><span class="description">Returns the result source</span><pre>getSource()</pre></a></li>
+<li class="method public "><a href="#getType" title="getType :: Returns the type of the result"><span class="description">Returns the type of the result</span><pre>getType()</pre></a></li>
+<li class="method public "><a href="#getVersion" title="getVersion :: Returns the version information from the hit"><span class="description">Returns the version information from the hit</span><pre>getVersion()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24_hit" title="$_hit :: "><span class="description">$_hit</span><pre>$_hit</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CElastica_Result" id="\Elastica_Result"></a><div href="../classes/Elastica_Result.html" class="element class">
+<p class="short_description">Elastica result item</p>
+<div class="details">
+<p class="long_description"><p>Stores all information from a result</p></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Xodoa</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/Elastica.html">Elastica</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:spam@ruflin.com">Nicolas Ruflin</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Constructs a single results object</h2>
+<pre>__construct(array $hit) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hit</h4>
+<code>array</code><p>Hit data</p></div>
+</div></div>
+</div>
+<a name="__get" id="__get"></a><div class="element clickable method public __get" data-toggle="collapse" data-target=".__get .collapse">
+<h2>Magic function to directly access keys inside the result</h2>
+<pre>__get(string $key) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>Returns null if key does not exist</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>Key name</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>Key value</div>
+</div></div>
+</div>
+<a name="getData" id="getData"></a><div class="element clickable method public getData" data-toggle="collapse" data-target=".getData .collapse">
+<h2>Returns result data</h2>
+<pre>getData() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>Checks for partial result data with getFields, falls back to getSource</p></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Result data array</div>
+</div></div>
+</div>
+<a name="getExplanation" id="getExplanation"></a><div class="element clickable method public getExplanation" data-toggle="collapse" data-target=".getExplanation .collapse">
+<h2>Returns explanation on how its score was computed.</h2>
+<pre>getExplanation() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>explanations</div>
+</div></div>
+</div>
+<a name="getFields" id="getFields"></a><div class="element clickable method public getFields" data-toggle="collapse" data-target=".getFields .collapse">
+<h2>Returns list of fields</h2>
+<pre>getFields() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Fields list</div>
+</div></div>
+</div>
+<a name="getHighlights" id="getHighlights"></a><div class="element clickable method public getHighlights" data-toggle="collapse" data-target=".getHighlights .collapse">
+<h2>Returns result data</h2>
+<pre>getHighlights() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Result data array</div>
+</div></div>
+</div>
+<a name="getHit" id="getHit"></a><div class="element clickable method public getHit" data-toggle="collapse" data-target=".getHit .collapse">
+<h2>Returns the raw hit array</h2>
+<pre>getHit() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Hit array</div>
+</div></div>
+</div>
+<a name="getId" id="getId"></a><div class="element clickable method public getId" data-toggle="collapse" data-target=".getId .collapse">
+<h2>Returns the hit id</h2>
+<pre>getId() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Hit id</div>
+</div></div>
+</div>
+<a name="getIndex" id="getIndex"></a><div class="element clickable method public getIndex" data-toggle="collapse" data-target=".getIndex .collapse">
+<h2>Returns the index name of the result</h2>
+<pre>getIndex() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Index name</div>
+</div></div>
+</div>
+<a name="getParam" id="getParam"></a><div class="element clickable method public getParam" data-toggle="collapse" data-target=".getParam .collapse">
+<h2>Returns a param from the result hit array</h2>
+<pre>getParam(string $name) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>This function can be used to retrieve all data for which a specific
+function doesn't exist.
+If the param does not exist, an empty array is retured</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Param name</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Result data</div>
+</div></div>
+</div>
+<a name="getScore" id="getScore"></a><div class="element clickable method public getScore" data-toggle="collapse" data-target=".getScore .collapse">
+<h2>Returns the score of the result</h2>
+<pre>getScore() : float</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>float</code>Result score</div>
+</div></div>
+</div>
+<a name="getSource" id="getSource"></a><div class="element clickable method public getSource" data-toggle="collapse" data-target=".getSource .collapse">
+<h2>Returns the result source</h2>
+<pre>getSource() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Source data array</div>
+</div></div>
+</div>
+<a name="getType" id="getType"></a><div class="element clickable method public getType" data-toggle="collapse" data-target=".getType .collapse">
+<h2>Returns the type of the result</h2>
+<pre>getType() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Result type</div>
+</div></div>
+</div>
+<a name="getVersion" id="getVersion"></a><div class="element clickable method public getVersion" data-toggle="collapse" data-target=".getVersion .collapse">
+<h2>Returns the version information from the hit</h2>
+<pre>getVersion() : string | int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>int</code>Document version</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_hit" id="$_hit"> </a><div class="element clickable property protected $_hit" data-toggle="collapse" data-target=".$_hit .collapse">
+<h2>$_hit</h2>
+<pre>$_hit </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+</div>
+</body>
+</html>

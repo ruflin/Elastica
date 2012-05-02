@@ -1,0 +1,381 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica » \Elastica_Filter_Range</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#addField" title="addField :: Ads a field with arguments to the range query"><span class="description">Ads a field with arguments to the range query</span><pre>addField()</pre></a></li>
+<li class="method public inherited"><a href="#addParam" title="addParam :: Adds a param to the list"><span class="description">Adds a param to the list</span><pre>addParam()</pre></a></li>
+<li class="method public inherited"><a href="#getParam" title="getParam :: Returns a specific param"><span class="description">Returns a specific param</span><pre>getParam()</pre></a></li>
+<li class="method public inherited"><a href="#getParams" title="getParams :: Returns the params array"><span class="description">Returns the params array</span><pre>getParams()</pre></a></li>
+<li class="method public inherited"><a href="#setCached" title="setCached :: Sets the filter cache to true."><span class="description">Sets the filter cache to true.</span><pre>setCached()</pre></a></li>
+<li class="method public inherited"><a href="#setParam" title="setParam :: Sets (overwrites) the value at the given key"><span class="description">Sets (overwrites) the value at the given key</span><pre>setParam()</pre></a></li>
+<li class="method public inherited"><a href="#setParams" title="setParams :: Sets (overwrites) all params of this object"><span class="description">Sets (overwrites) all params of this object</span><pre>setParams()</pre></a></li>
+<li class="method public "><a href="#toArray" title="toArray :: Convers object to array"><span class="description">Convers object to array</span><pre>toArray()</pre></a></li>
+<li class="nav-header protected">» Protected</li>
+<li class="method protected inherited"><a href="#_setRawParam" title="_setRawParam :: Sets params not inside params array"><span class="description">Sets params not inside params array</span><pre>_setRawParam()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24_fields" title="$_fields :: "><span class="description">$_fields</span><pre>$_fields</pre></a></li>
+<li class="property protected inherited"><a href="#%24_params" title="$_params :: Params"><span class="description">Params</span><pre>$_params</pre></a></li>
+<li class="property protected inherited"><a href="#%24_rawParams" title="$_rawParams :: "><span class="description">$_rawParams</span><pre>$_rawParams</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CElastica_Filter_Range" id="\Elastica_Filter_Range"></a><div href="../classes/Elastica_Filter_Range.html" class="element class">
+<p class="short_description">Range Filter</p>
+<div class="details">
+<p class="long_description"><p>This function can be used to handle params for queries, filter, facets</p></p>
+<table class="table table-bordered">
+<tr>
+<th>uses</th>
+<td>\Elastica_Filter_Abstract</td>
+</tr>
+<tr>
+<th>category</th>
+<td>Xodoa</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/Elastica.html">Elastica</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:spam@ruflin.com">Nicolas Ruflin</a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.org/guide/reference/query-dsl/range-filter.html">http://www.elasticsearch.org/guide/reference/query-dsl/range-filter.html</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct(string $fieldName, array $args) : <a href="../classes/Elastica_Filter_Range.html">\Elastica_Filter_Range</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$fieldName</h4>
+<code>string</code><p>Field name</p></div>
+<div class="subelement argument">
+<h4>$args</h4>
+<code>array</code><p>Field arguments</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Filter_Range.html">\Elastica_Filter_Range</a></code></div>
+</div></div>
+</div>
+<a name="addField" id="addField"></a><div class="element clickable method public addField" data-toggle="collapse" data-target=".addField .collapse">
+<h2>Ads a field with arguments to the range query</h2>
+<pre>addField(string $fieldName, array $args) : <a href="../classes/Elastica_Filter_Range.html">\Elastica_Filter_Range</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$fieldName</h4>
+<code>string</code><p>Field name</p></div>
+<div class="subelement argument">
+<h4>$args</h4>
+<code>array</code><p>Field arguments</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Filter_Range.html">\Elastica_Filter_Range</a></code></div>
+</div></div>
+</div>
+<a name="addParam" id="addParam"></a><div class="element clickable method public addParam" data-toggle="collapse" data-target=".addParam .collapse">
+<h2>Adds a param to the list</h2>
+<pre>addParam(string $key, mixed $value) : <a href="../classes/Elastica_Param.html">\Elastica_Param</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>This function can be used to add an array of params</p></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::addParam()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Filter_Abstract::addParam()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>Param key</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Value to set</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Param.html">\Elastica_Param</a></code></div>
+</div></div>
+</div>
+<a name="getParam" id="getParam"></a><div class="element clickable method public getParam" data-toggle="collapse" data-target=".getParam .collapse">
+<h2>Returns a specific param</h2>
+<pre>getParam(string $key) : mixed</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::getParam()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Filter_Abstract::getParam()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>Key to return</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/Elastica_Exception_Invalid.html">\Elastica_Exception_Invalid</a></code></th>
+<td>If requested key is not set</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>Key value</div>
+</div></div>
+</div>
+<a name="getParams" id="getParams"></a><div class="element clickable method public getParams" data-toggle="collapse" data-target=".getParams .collapse">
+<h2>Returns the params array</h2>
+<pre>getParams() : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::getParams()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Filter_Abstract::getParams()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Params</div>
+</div></div>
+</div>
+<a name="setCached" id="setCached"></a><div class="element clickable method public setCached" data-toggle="collapse" data-target=".setCached .collapse">
+<h2>Sets the filter cache to true.</h2>
+<pre>setCached() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>This is still experimental</p></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Elastica_Filter_Abstract::setCached()</td>
+</tr></table>
+</div></div>
+</div>
+<a name="setParam" id="setParam"></a><div class="element clickable method public setParam" data-toggle="collapse" data-target=".setParam .collapse">
+<h2>Sets (overwrites) the value at the given key</h2>
+<pre>setParam(string $key, mixed $value) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::setParam()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Filter_Abstract::setParam()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>Key to set</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Key Value</p></div>
+</div></div>
+</div>
+<a name="setParams" id="setParams"></a><div class="element clickable method public setParams" data-toggle="collapse" data-target=".setParams .collapse">
+<h2>Sets (overwrites) all params of this object</h2>
+<pre>setParams(array $params) : <a href="../classes/Elastica_Param.html">\Elastica_Param</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::setParams()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Filter_Abstract::setParams()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Parameter list</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Param.html">\Elastica_Param</a></code></div>
+</div></div>
+</div>
+<a name="toArray" id="toArray"></a><div class="element clickable method public toArray" data-toggle="collapse" data-target=".toArray .collapse">
+<h2>Convers object to array</h2>
+<pre>toArray() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\Elastica_Filter_Abstract::toArray()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Filter array</div>
+</div></div>
+</div>
+<a name="_setRawParam" id="_setRawParam"></a><div class="element clickable method protected _setRawParam" data-toggle="collapse" data-target="._setRawParam .collapse">
+<h2>Sets params not inside params array</h2>
+<pre>_setRawParam(string $key, mixed $value) : <a href="../classes/Elastica_Param.html">\Elastica_Param</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::_setRawParam()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Filter_Abstract::_setRawParam()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Param.html">\Elastica_Param</a></code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_fields" id="$_fields"> </a><div class="element clickable property protected $_fields" data-toggle="collapse" data-target=".$_fields .collapse">
+<h2>$_fields</h2>
+<pre>$_fields </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_params" id="$_params"> </a><div class="element clickable property protected $_params" data-toggle="collapse" data-target=".$_params .collapse">
+<h2>Params</h2>
+<pre>$_params : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::$$_params</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Filter_Abstract::$$_params</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a name="%24_rawParams" id="$_rawParams"> </a><div class="element clickable property protected $_rawParams" data-toggle="collapse" data-target=".$_rawParams .collapse">
+<h2>$_rawParams</h2>
+<pre>$_rawParams </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::$$_rawParams</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Filter_Abstract::$$_rawParams</td>
+</tr>
+</table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:42+02:00.<br></footer></div>
+</div>
+</body>
+</html>

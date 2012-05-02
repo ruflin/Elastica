@@ -1,0 +1,415 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica » \Elastica_Type</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates a new type object inside the given index"><span class="description">Creates a new type object inside the given index</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#addDocument" title="addDocument :: Adds the given document to the search index"><span class="description">Adds the given document to the search index</span><pre>addDocument()</pre></a></li>
+<li class="method public "><a href="#addDocuments" title="addDocuments :: Uses _bulk to send documents to the server"><span class="description">Uses _bulk to send documents to the server</span><pre>addDocuments()</pre></a></li>
+<li class="method public "><a href="#count" title="count :: Counts results for a query"><span class="description">Counts results for a query</span><pre>count()</pre></a></li>
+<li class="method public "><a href="#delete" title="delete :: Deletes the index type."><span class="description">Deletes the index type.</span><pre>delete()</pre></a></li>
+<li class="method public "><a href="#deleteById" title="deleteById :: Deletes an entry by its unique identifier"><span class="description">Deletes an entry by its unique identifier</span><pre>deleteById()</pre></a></li>
+<li class="method public "><a href="#deleteByQuery" title="deleteByQuery :: Deletes entries in the db based on a query"><span class="description">Deletes entries in the db based on a query</span><pre>deleteByQuery()</pre></a></li>
+<li class="method public "><a href="#deleteIds" title="deleteIds :: Deletes the given list of ids from this type"><span class="description">Deletes the given list of ids from this type</span><pre>deleteIds()</pre></a></li>
+<li class="method public "><a href="#getDocument" title="getDocument :: Get the document from search index"><span class="description">Get the document from search index</span><pre>getDocument()</pre></a></li>
+<li class="method public "><a href="#getIndex" title="getIndex :: Returns index client"><span class="description">Returns index client</span><pre>getIndex()</pre></a></li>
+<li class="method public "><a href="#getMapping" title="getMapping :: Returns current mapping for the given type"><span class="description">Returns current mapping for the given type</span><pre>getMapping()</pre></a></li>
+<li class="method public "><a href="#getName" title="getName :: "><span class="description">getName()
+        </span><pre>getName()</pre></a></li>
+<li class="method public "><a href="#getType" title="getType :: Returns the type name"><span class="description">Returns the type name</span><pre>getType()</pre></a></li>
+<li class="method public "><a href="#moreLikeThis" title="moreLikeThis :: More like this query based on the given object"><span class="description">More like this query based on the given object</span><pre>moreLikeThis()</pre></a></li>
+<li class="method public "><a href="#request" title="request :: Makes calls to the elasticsearch server based on this type"><span class="description">Makes calls to the elasticsearch server based on this type</span><pre>request()</pre></a></li>
+<li class="method public "><a href="#search" title="search :: Searches results for a query"><span class="description">Searches results for a query</span><pre>search()</pre></a></li>
+<li class="method public "><a href="#setMapping" title="setMapping :: Sets value type mapping for this type"><span class="description">Sets value type mapping for this type</span><pre>setMapping()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24_index" title="$_index :: "><span class="description">Index object</span><pre>$_index</pre></a></li>
+<li class="property protected "><a href="#%24_name" title="$_name :: "><span class="description">Type name</span><pre>$_name</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CElastica_Type" id="\Elastica_Type"></a><div href="../classes/Elastica_Type.html" class="element class">
+<p class="short_description">Elastica type object</p>
+<div class="details">
+<p class="long_description"><p>elasticsearch has for every types as a substructure. This object
+represents a type inside a context
+The hirarchie is as following: client -> index -> type -> document</p>
+
+<p>Search over different indices and types is not supported yet <a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/indices_types/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/indices_types/</a></p></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Xodoa</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/Elastica.html">Elastica</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:spam@ruflin.com">Nicolas Ruflin</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates a new type object inside the given index</h2>
+<pre>__construct(Elastica_Index $index, string $name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$index</h4>
+<code><a href="../classes/Elastica_Index.html">\Elastica_Index</a></code><p>Index Object</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Type name</p></div>
+</div></div>
+</div>
+<a name="addDocument" id="addDocument"></a><div class="element clickable method public addDocument" data-toggle="collapse" data-target=".addDocument .collapse">
+<h2>Adds the given document to the search index</h2>
+<pre>addDocument(Elastica_Document $doc) : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$doc</h4>
+<code><a href="../classes/Elastica_Document.html">\Elastica_Document</a></code><p>Document with data</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code></div>
+</div></div>
+</div>
+<a name="addDocuments" id="addDocuments"></a><div class="element clickable method public addDocuments" data-toggle="collapse" data-target=".addDocuments .collapse">
+<h2>Uses _bulk to send documents to the server</h2>
+<pre>addDocuments(array $docs) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$docs</h4>
+<code><a href="Elastica.Document.html#%5CElastica_Document">\Elastica_Document[]</a></code><p>Array of Elastica_Document</p></div>
+</div></div>
+</div>
+<a name="count" id="count"></a><div class="element clickable method public count" data-toggle="collapse" data-target=".count .collapse">
+<h2>Counts results for a query</h2>
+<pre>count(string | array | <a href="../classes/Elastica_Query.html">\Elastica_Query</a> $query) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>If no query is set, matchall query is created</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\Elastica_Searchable::count</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>stringarray<a href="../classes/Elastica_Query.html">\Elastica_Query</a></code><p>Array with all query data inside or a Elastica_Query object</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>number of documents matching the query</div>
+</div></div>
+</div>
+<a name="delete" id="delete"></a><div class="element clickable method public delete" data-toggle="collapse" data-target=".delete .collapse">
+<h2>Deletes the index type.</h2>
+<pre>delete() : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code></div>
+</div></div>
+</div>
+<a name="deleteById" id="deleteById"></a><div class="element clickable method public deleteById" data-toggle="collapse" data-target=".deleteById .collapse">
+<h2>Deletes an entry by its unique identifier</h2>
+<pre>deleteById(int | string $id) : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.org/guide/reference/api/delete.html">http://www.elasticsearch.org/guide/reference/api/delete.html</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>intstring</code><p>Document id</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code>Response object</div>
+</div></div>
+</div>
+<a name="deleteByQuery" id="deleteByQuery"></a><div class="element clickable method public deleteByQuery" data-toggle="collapse" data-target=".deleteByQuery .collapse">
+<h2>Deletes entries in the db based on a query</h2>
+<pre>deleteByQuery(<a href="../classes/Elastica_Query.html">\Elastica_Query</a> | string $query) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.org/guide/reference/api/delete-by-query.html">http://www.elasticsearch.org/guide/reference/api/delete-by-query.html</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query</h4>
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a>string</code><p>Query object</p></div>
+</div></div>
+</div>
+<a name="deleteIds" id="deleteIds"></a><div class="element clickable method public deleteIds" data-toggle="collapse" data-target=".deleteIds .collapse">
+<h2>Deletes the given list of ids from this type</h2>
+<pre>deleteIds(array $ids) : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$ids</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code>Response object</div>
+</div></div>
+</div>
+<a name="getDocument" id="getDocument"></a><div class="element clickable method public getDocument" data-toggle="collapse" data-target=".getDocument .collapse">
+<h2>Get the document from search index</h2>
+<pre>getDocument(string $id) : <a href="../classes/Elastica_Document.html">\Elastica_Document</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>string</code><p>Document id</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Document.html">\Elastica_Document</a></code></div>
+</div></div>
+</div>
+<a name="getIndex" id="getIndex"></a><div class="element clickable method public getIndex" data-toggle="collapse" data-target=".getIndex .collapse">
+<h2>Returns index client</h2>
+<pre>getIndex() : <a href="../classes/Elastica_Index.html">\Elastica_Index</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Index.html">\Elastica_Index</a></code>Index object</div>
+</div></div>
+</div>
+<a name="getMapping" id="getMapping"></a><div class="element clickable method public getMapping" data-toggle="collapse" data-target=".getMapping .collapse">
+<h2>Returns current mapping for the given type</h2>
+<pre>getMapping() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Current mapping</div>
+</div></div>
+</div>
+<a name="getName" id="getName"></a><div class="element clickable method public getName" data-toggle="collapse" data-target=".getName .collapse">
+<h2>getName()
+        </h2>
+<pre>getName() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Type name</div>
+</div></div>
+</div>
+<a name="getType" id="getType"></a><div class="element clickable method public getType" data-toggle="collapse" data-target=".getType .collapse">
+<h2>Returns the type name</h2>
+<pre>getType() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td>Use getName instead</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Type</div>
+</div></div>
+</div>
+<a name="moreLikeThis" id="moreLikeThis"></a><div class="element clickable method public moreLikeThis" data-toggle="collapse" data-target=".moreLikeThis .collapse">
+<h2>More like this query based on the given object</h2>
+<pre>moreLikeThis(Elastica_Document $doc, array $args) : <a href="../classes/Elastica_ResultSet.html">\Elastica_ResultSet</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>The id in the given object has to be set</p></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.org/guide/reference/api/more-like-this.html">http://www.elasticsearch.org/guide/reference/api/more-like-this.html</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$doc</h4>
+<code>\ElasticSearch_Document</code><p>Document to query for similar objects</p></div>
+<div class="subelement argument">
+<h4>$args</h4>
+<code>array</code><p>OPTIONAL Additional arguments for the query</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_ResultSet.html">\Elastica_ResultSet</a></code>ResultSet with all results inside</div>
+</div></div>
+</div>
+<a name="request" id="request"></a><div class="element clickable method public request" data-toggle="collapse" data-target=".request .collapse">
+<h2>Makes calls to the elasticsearch server based on this type</h2>
+<pre>request(string $path, string $method, array $data, array $query) : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>Path to call</p></div>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code><p>Rest method to use (GET, POST, DELETE, PUT)</p>
+</div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code><p>OPTIONAL Arguments as array</p></div>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>array</code><p>OPTIONAL Query params</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code>Response object</div>
+</div></div>
+</div>
+<a name="search" id="search"></a><div class="element clickable method public search" data-toggle="collapse" data-target=".search .collapse">
+<h2>Searches results for a query</h2>
+<pre>search(string | array | <a href="../classes/Elastica_Query.html">\Elastica_Query</a> $query, int $limit) : <a href="../classes/Elastica_ResultSet.html">\Elastica_ResultSet</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>TODO: Improve sample code
+{
+ "from" : 0,
+ "size" : 10,
+ "sort" : {
+      "postDate" : {"reverse" : true},
+      "user" : { },
+      "_score" : { }
+  },
+  "query" : {
+      "term" : { "user" : "kimchy" }
+  }
+}</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\Elastica_Searchable::search</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>stringarray<a href="../classes/Elastica_Query.html">\Elastica_Query</a></code><p>Array with all query data inside or a Elastica_Query object</p></div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>OPTIONAL</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_ResultSet.html">\Elastica_ResultSet</a></code>ResultSet with all results inside</div>
+</div></div>
+</div>
+<a name="setMapping" id="setMapping"></a><div class="element clickable method public setMapping" data-toggle="collapse" data-target=".setMapping .collapse">
+<h2>Sets value type mapping for this type</h2>
+<pre>setMapping(<a href="../classes/Elastica_Type_Mapping.html">\Elastica_Type_Mapping</a> | array $mapping) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$mapping</h4>
+<code><a href="../classes/Elastica_Type_Mapping.html">\Elastica_Type_Mapping</a>array</code><p>Elastica_Type_Mapping object or property array with all mappings</p></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_index" id="$_index"> </a><div class="element clickable property protected $_index" data-toggle="collapse" data-target=".$_index .collapse">
+<h2>Index object</h2>
+<pre>$_index : <a href="../classes/Elastica_Index.html">\Elastica_Index</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_name" id="$_name"> </a><div class="element clickable property protected $_name" data-toggle="collapse" data-target=".$_name .collapse">
+<h2>Type name</h2>
+<pre>$_name : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+</div>
+</body>
+</html>
