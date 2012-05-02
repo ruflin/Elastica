@@ -1,0 +1,363 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica » \Elastica_Request</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#getClient" title="getClient :: "><span class="description">getClient()
+        </span><pre>getClient()</pre></a></li>
+<li class="method public "><a href="#getConfig" title="getConfig :: Returns a specific config key or the whole
+config array if not set"><span class="description">Returns a specific config key or the whole
+config array if not set</span><pre>getConfig()</pre></a></li>
+<li class="method public "><a href="#getData" title="getData :: "><span class="description">getData()
+        </span><pre>getData()</pre></a></li>
+<li class="method public "><a href="#getMethod" title="getMethod :: "><span class="description">getMethod()
+        </span><pre>getMethod()</pre></a></li>
+<li class="method public "><a href="#getPath" title="getPath :: "><span class="description">getPath()
+        </span><pre>getPath()</pre></a></li>
+<li class="method public "><a href="#getQuery" title="getQuery :: "><span class="description">getQuery()
+        </span><pre>getQuery()</pre></a></li>
+<li class="method public "><a href="#getTransport" title="getTransport :: Returns an instance of the transport type"><span class="description">Returns an instance of the transport type</span><pre>getTransport()</pre></a></li>
+<li class="method public "><a href="#send" title="send :: Sends request to server"><span class="description">Sends request to server</span><pre>send()</pre></a></li>
+<li class="method public "><a href="#setData" title="setData :: Sets the request data"><span class="description">Sets the request data</span><pre>setData()</pre></a></li>
+<li class="method public "><a href="#setMethod" title="setMethod :: Sets the request method. Use one of the for consts"><span class="description">Sets the request method. Use one of the for consts</span><pre>setMethod()</pre></a></li>
+<li class="method public "><a href="#setPath" title="setPath :: Sets the request path"><span class="description">Sets the request path</span><pre>setPath()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24_client" title="$_client :: "><span class="description">$_client</span><pre>$_client</pre></a></li>
+<li class="property protected "><a href="#%24_data" title="$_data :: "><span class="description">$_data</span><pre>$_data</pre></a></li>
+<li class="property protected "><a href="#%24_method" title="$_method :: "><span class="description">$_method</span><pre>$_method</pre></a></li>
+<li class="property protected "><a href="#%24_path" title="$_path :: "><span class="description">$_path</span><pre>$_path</pre></a></li>
+<li class="property protected "><a href="#%24_query" title="$_query :: "><span class="description">$_query</span><pre>$_query</pre></a></li>
+<li class="property protected "><a href="#%24_serverId" title="$_serverId :: Internal id of last used server. This is used for round robin"><span class="description">Internal id of last used server. This is used for round robin</span><pre>$_serverId</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants</li>
+<li class="constant  "><a href="#DELETE" title="DELETE :: "><span class="description">DELETE</span><pre>DELETE</pre></a></li>
+<li class="constant  "><a href="#GET" title="GET :: "><span class="description">GET</span><pre>GET</pre></a></li>
+<li class="constant  "><a href="#POST" title="POST :: "><span class="description">POST</span><pre>POST</pre></a></li>
+<li class="constant  "><a href="#PUT" title="PUT :: "><span class="description">PUT</span><pre>PUT</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CElastica_Request" id="\Elastica_Request"></a><div href="../classes/Elastica_Request.html" class="element class">
+<p class="short_description">Elastica Request object</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Xodoa</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/Elastica.html">Elastica</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:spam@ruflin.com">Nicolas Ruflin</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct(Elastica_Client $client, string $path, string $method, array $data, array $query) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$client</h4>
+<code><a href="../classes/Elastica_Client.html">\Elastica_Client</a></code>
+</div>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>Request path</p></div>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code><p>Request method (use const's)</p>
+</div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code><p>OPTIONAL Data array</p></div>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>array</code><p>OPTIONLA Query params</p></div>
+</div></div>
+</div>
+<a name="getClient" id="getClient"></a><div class="element clickable method public getClient" data-toggle="collapse" data-target=".getClient .collapse">
+<h2>getClient()
+        </h2>
+<pre>getClient() : <a href="../classes/Elastica_Client.html">\Elastica_Client</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Client.html">\Elastica_Client</a></code></div>
+</div></div>
+</div>
+<a name="getConfig" id="getConfig"></a><div class="element clickable method public getConfig" data-toggle="collapse" data-target=".getConfig .collapse">
+<h2>Returns a specific config key or the whole
+config array if not set</h2>
+<pre>getConfig(string $key) : array | string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>Config key</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>string</code>Config value</div>
+</div></div>
+</div>
+<a name="getData" id="getData"></a><div class="element clickable method public getData" data-toggle="collapse" data-target=".getData .collapse">
+<h2>getData()
+        </h2>
+<pre>getData() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Request data</div>
+</div></div>
+</div>
+<a name="getMethod" id="getMethod"></a><div class="element clickable method public getMethod" data-toggle="collapse" data-target=".getMethod .collapse">
+<h2>getMethod()
+        </h2>
+<pre>getMethod() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Request method</div>
+</div></div>
+</div>
+<a name="getPath" id="getPath"></a><div class="element clickable method public getPath" data-toggle="collapse" data-target=".getPath .collapse">
+<h2>getPath()
+        </h2>
+<pre>getPath() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Request path</div>
+</div></div>
+</div>
+<a name="getQuery" id="getQuery"></a><div class="element clickable method public getQuery" data-toggle="collapse" data-target=".getQuery .collapse">
+<h2>getQuery()
+        </h2>
+<pre>getQuery() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Query params</div>
+</div></div>
+</div>
+<a name="getTransport" id="getTransport"></a><div class="element clickable method public getTransport" data-toggle="collapse" data-target=".getTransport .collapse">
+<h2>Returns an instance of the transport type</h2>
+<pre>getTransport() : <a href="../classes/Elastica_Transport_Abstract.html">\Elastica_Transport_Abstract</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/Elastica_Exception_Invalid.html">\Elastica_Exception_Invalid</a></code></th>
+<td>If invalid transport type</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Transport_Abstract.html">\Elastica_Transport_Abstract</a></code>Transport object</div>
+</div></div>
+</div>
+<a name="send" id="send"></a><div class="element clickable method public send" data-toggle="collapse" data-target=".send .collapse">
+<h2>Sends request to server</h2>
+<pre>send() : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code>Response object</div>
+</div></div>
+</div>
+<a name="setData" id="setData"></a><div class="element clickable method public setData" data-toggle="collapse" data-target=".setData .collapse">
+<h2>Sets the request data</h2>
+<pre>setData(array $data) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code><p>Request data</p></div>
+</div></div>
+</div>
+<a name="setMethod" id="setMethod"></a><div class="element clickable method public setMethod" data-toggle="collapse" data-target=".setMethod .collapse">
+<h2>Sets the request method. Use one of the for consts</h2>
+<pre>setMethod(string $method) : <a href="../classes/Elastica_Request.html">\Elastica_Request</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code><p>Request method</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Request.html">\Elastica_Request</a></code>Current object</div>
+</div></div>
+</div>
+<a name="setPath" id="setPath"></a><div class="element clickable method public setPath" data-toggle="collapse" data-target=".setPath .collapse">
+<h2>Sets the request path</h2>
+<pre>setPath(string $path) : <a href="../classes/Elastica_Request.html">\Elastica_Request</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>Request path</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Request.html">\Elastica_Request</a></code>Current object</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_client" id="$_client"> </a><div class="element clickable property protected $_client" data-toggle="collapse" data-target=".$_client .collapse">
+<h2>$_client</h2>
+<pre>$_client </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_data" id="$_data"> </a><div class="element clickable property protected $_data" data-toggle="collapse" data-target=".$_data .collapse">
+<h2>$_data</h2>
+<pre>$_data </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_method" id="$_method"> </a><div class="element clickable property protected $_method" data-toggle="collapse" data-target=".$_method .collapse">
+<h2>$_method</h2>
+<pre>$_method </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_path" id="$_path"> </a><div class="element clickable property protected $_path" data-toggle="collapse" data-target=".$_path .collapse">
+<h2>$_path</h2>
+<pre>$_path </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_query" id="$_query"> </a><div class="element clickable property protected $_query" data-toggle="collapse" data-target=".$_query .collapse">
+<h2>$_query</h2>
+<pre>$_query </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_serverId" id="$_serverId"> </a><div class="element clickable property protected $_serverId" data-toggle="collapse" data-target=".$_serverId .collapse">
+<h2>Internal id of last used server. This is used for round robin</h2>
+<pre>$_serverId : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a name="DELETE" id="DELETE"> </a><div class="element clickable constant  DELETE" data-toggle="collapse" data-target=".DELETE .collapse">
+<h2>DELETE</h2>
+<pre>DELETE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="GET" id="GET"> </a><div class="element clickable constant  GET" data-toggle="collapse" data-target=".GET .collapse">
+<h2>GET</h2>
+<pre>GET </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="POST" id="POST"> </a><div class="element clickable constant  POST" data-toggle="collapse" data-target=".POST .collapse">
+<h2>POST</h2>
+<pre>POST </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="PUT" id="PUT"> </a><div class="element clickable constant  PUT" data-toggle="collapse" data-target=".PUT .collapse">
+<h2>PUT</h2>
+<pre>PUT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+</div>
+</body>
+</html>

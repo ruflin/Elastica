@@ -1,0 +1,260 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica » \Elastica_Status</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Constructs Status object"><span class="description">Constructs Status object</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#aliasExists" title="aliasExists :: Checks if the given alias exists"><span class="description">Checks if the given alias exists</span><pre>aliasExists()</pre></a></li>
+<li class="method public "><a href="#getData" title="getData :: Returns status data"><span class="description">Returns status data</span><pre>getData()</pre></a></li>
+<li class="method public "><a href="#getIndexNames" title="getIndexNames :: Returns a list of the existing index names"><span class="description">Returns a list of the existing index names</span><pre>getIndexNames()</pre></a></li>
+<li class="method public "><a href="#getIndexStatuses" title="getIndexStatuses :: Returns status objects of all indices"><span class="description">Returns status objects of all indices</span><pre>getIndexStatuses()</pre></a></li>
+<li class="method public "><a href="#getIndicesWithAlias" title="getIndicesWithAlias :: Returns an array with all indices that the given alias name points to"><span class="description">Returns an array with all indices that the given alias name points to</span><pre>getIndicesWithAlias()</pre></a></li>
+<li class="method public "><a href="#getResponse" title="getResponse :: Returns response object"><span class="description">Returns response object</span><pre>getResponse()</pre></a></li>
+<li class="method public "><a href="#getServerStatus" title="getServerStatus :: Refresh serverStatus object"><span class="description">Refresh serverStatus object</span><pre>getServerStatus()</pre></a></li>
+<li class="method public "><a href="#getShards" title="getShards :: "><span class="description">getShards()
+        </span><pre>getShards()</pre></a></li>
+<li class="method public "><a href="#indexExists" title="indexExists :: Checks if the given index exists"><span class="description">Checks if the given index exists</span><pre>indexExists()</pre></a></li>
+<li class="method public "><a href="#refresh" title="refresh :: Refresh status object"><span class="description">Refresh status object</span><pre>refresh()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24_client" title="$_client :: "><span class="description">$_client</span><pre>$_client</pre></a></li>
+<li class="property protected "><a href="#%24_data" title="$_data :: "><span class="description">$_data</span><pre>$_data</pre></a></li>
+<li class="property protected "><a href="#%24_response" title="$_response :: Contains all status infos"><span class="description">Contains all status infos</span><pre>$_response</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CElastica_Status" id="\Elastica_Status"></a><div href="../classes/Elastica_Status.html" class="element class">
+<p class="short_description">Elastica general status</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Xodoa</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/Elastica.html">Elastica</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:spam@ruflin.com">Nicolas Ruflin</a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html">http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Constructs Status object</h2>
+<pre>__construct(Elastica_Client $client) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$client</h4>
+<code><a href="../classes/Elastica_Client.html">\Elastica_Client</a></code><p>Client object</p></div>
+</div></div>
+</div>
+<a name="aliasExists" id="aliasExists"></a><div class="element clickable method public aliasExists" data-toggle="collapse" data-target=".aliasExists .collapse">
+<h2>Checks if the given alias exists</h2>
+<pre>aliasExists(string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Alias name</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>True if alias exists</div>
+</div></div>
+</div>
+<a name="getData" id="getData"></a><div class="element clickable method public getData" data-toggle="collapse" data-target=".getData .collapse">
+<h2>Returns status data</h2>
+<pre>getData() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Status data</div>
+</div></div>
+</div>
+<a name="getIndexNames" id="getIndexNames"></a><div class="element clickable method public getIndexNames" data-toggle="collapse" data-target=".getIndexNames .collapse">
+<h2>Returns a list of the existing index names</h2>
+<pre>getIndexNames() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Index names list</div>
+</div></div>
+</div>
+<a name="getIndexStatuses" id="getIndexStatuses"></a><div class="element clickable method public getIndexStatuses" data-toggle="collapse" data-target=".getIndexStatuses .collapse">
+<h2>Returns status objects of all indices</h2>
+<pre>getIndexStatuses() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>List of Elastica_Client_Index objects</div>
+</div></div>
+</div>
+<a name="getIndicesWithAlias" id="getIndicesWithAlias"></a><div class="element clickable method public getIndicesWithAlias" data-toggle="collapse" data-target=".getIndicesWithAlias .collapse">
+<h2>Returns an array with all indices that the given alias name points to</h2>
+<pre>getIndicesWithAlias(string $name) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Alias name</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>List of Elastica_Index</div>
+</div></div>
+</div>
+<a name="getResponse" id="getResponse"></a><div class="element clickable method public getResponse" data-toggle="collapse" data-target=".getResponse .collapse">
+<h2>Returns response object</h2>
+<pre>getResponse() : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code>Response object</div>
+</div></div>
+</div>
+<a name="getServerStatus" id="getServerStatus"></a><div class="element clickable method public getServerStatus" data-toggle="collapse" data-target=".getServerStatus .collapse">
+<h2>Refresh serverStatus object</h2>
+<pre>getServerStatus() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="getShards" id="getShards"></a><div class="element clickable method public getShards" data-toggle="collapse" data-target=".getShards .collapse">
+<h2>getShards()
+        </h2>
+<pre>getShards() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Shards info</div>
+</div></div>
+</div>
+<a name="indexExists" id="indexExists"></a><div class="element clickable method public indexExists" data-toggle="collapse" data-target=".indexExists .collapse">
+<h2>Checks if the given index exists</h2>
+<pre>indexExists(string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Index name to check</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>True if index exists</div>
+</div></div>
+</div>
+<a name="refresh" id="refresh"></a><div class="element clickable method public refresh" data-toggle="collapse" data-target=".refresh .collapse">
+<h2>Refresh status object</h2>
+<pre>refresh() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_client" id="$_client"> </a><div class="element clickable property protected $_client" data-toggle="collapse" data-target=".$_client .collapse">
+<h2>$_client</h2>
+<pre>$_client </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_data" id="$_data"> </a><div class="element clickable property protected $_data" data-toggle="collapse" data-target=".$_data .collapse">
+<h2>$_data</h2>
+<pre>$_data </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_response" id="$_response"> </a><div class="element clickable property protected $_response" data-toggle="collapse" data-target=".$_response .collapse">
+<h2>Contains all status infos</h2>
+<pre>$_response : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+</div>
+</body>
+</html>

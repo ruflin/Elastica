@@ -1,0 +1,299 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica » \Elastica_Type_Abstract</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates index object with client connection"><span class="description">Creates index object with client connection</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#convertDate" title="convertDate :: Converts given time to format: 1995-12-31T23:59:59Z"><span class="description">Converts given time to format: 1995-12-31T23:59:59Z</span><pre>convertDate()</pre></a></li>
+<li class="method public "><a href="#count" title="count :: Counts results for a query"><span class="description">Counts results for a query</span><pre>count()</pre></a></li>
+<li class="method public "><a href="#create" title="create :: Creates the index and sets the mapping for this type"><span class="description">Creates the index and sets the mapping for this type</span><pre>create()</pre></a></li>
+<li class="method public "><a href="#getIndex" title="getIndex :: Returns the search index"><span class="description">Returns the search index</span><pre>getIndex()</pre></a></li>
+<li class="method public "><a href="#getType" title="getType :: Returns type object"><span class="description">Returns type object</span><pre>getType()</pre></a></li>
+<li class="method public "><a href="#search" title="search :: Searches results for a query"><span class="description">Searches results for a query</span><pre>search()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24_client" title="$_client :: "><span class="description">$_client</span><pre>$_client</pre></a></li>
+<li class="property protected "><a href="#%24_index" title="$_index :: "><span class="description">$_index</span><pre>$_index</pre></a></li>
+<li class="property protected "><a href="#%24_indexName" title="$_indexName :: "><span class="description">$_indexName</span><pre>$_indexName</pre></a></li>
+<li class="property protected "><a href="#%24_indexParams" title="$_indexParams :: "><span class="description">$_indexParams</span><pre>$_indexParams</pre></a></li>
+<li class="property protected "><a href="#%24_mapping" title="$_mapping :: "><span class="description">$_mapping</span><pre>$_mapping</pre></a></li>
+<li class="property protected "><a href="#%24_source" title="$_source :: "><span class="description">$_source</span><pre>$_source</pre></a></li>
+<li class="property protected "><a href="#%24_type" title="$_type :: "><span class="description">$_type</span><pre>$_type</pre></a></li>
+<li class="property protected "><a href="#%24_typeName" title="$_typeName :: "><span class="description">$_typeName</span><pre>$_typeName</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants</li>
+<li class="constant  "><a href="#MAX_DOCS_PER_REQUEST" title="MAX_DOCS_PER_REQUEST :: "><span class="description">MAX_DOCS_PER_REQUEST</span><pre>MAX_DOCS_PER_REQUEST</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CElastica_Type_Abstract" id="\Elastica_Type_Abstract"></a><div href="../classes/Elastica_Type_Abstract.html" class="element class">
+<p class="short_description">Abstract helper class to implement search indices based on models.</p>
+<div class="details">
+<p class="long_description"><p>This abstract model should help creating search index and a subtype
+with some easy config entries that are overloaded.</p>
+
+<p>The following variables have to be set:
+- $_indexName
+- $_typeName</p>
+
+<p>The following variables can be set for additional configuration
+- $_mapping: Value type mapping for the given type
+- $_indexParams: Parameters for the index</p></p>
+<table class="table table-bordered">
+<tr>
+<th>todo</th>
+<td>Add some settings examples to code</td>
+</tr>
+<tr>
+<th>category</th>
+<td>Xodoa</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/Elastica.html">Elastica</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:spam@ruflin.com">Nicolas Ruflin</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates index object with client connection</h2>
+<pre>__construct(Elastica_Client $client) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>Reads index and type name from protected vars _indexName and _typeName.
+Has to be set in child class</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$client</h4>
+<code><a href="../classes/Elastica_Client.html">\Elastica_Client</a></code><p>OPTIONAL Client object</p></div>
+</div></div>
+</div>
+<a name="convertDate" id="convertDate"></a><div class="element clickable method public convertDate" data-toggle="collapse" data-target=".convertDate .collapse">
+<h2>Converts given time to format: 1995-12-31T23:59:59Z</h2>
+<pre>convertDate(int $date) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>This is the lucene date format</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$date</h4>
+<code>int</code><p>Date input (could be string etc.) -> must be supported by strtotime</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Converted date string</div>
+</div></div>
+</div>
+<a name="count" id="count"></a><div class="element clickable method public count" data-toggle="collapse" data-target=".count .collapse">
+<h2>Counts results for a query</h2>
+<pre>count(string | array | <a href="../classes/Elastica_Query.html">\Elastica_Query</a> $query) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>If no query is set, matchall query is created</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\Elastica_Searchable::count</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>stringarray<a href="../classes/Elastica_Query.html">\Elastica_Query</a></code><p>Array with all query data inside or a Elastica_Query object</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>number of documents matching the query</div>
+</div></div>
+</div>
+<a name="create" id="create"></a><div class="element clickable method public create" data-toggle="collapse" data-target=".create .collapse">
+<h2>Creates the index and sets the mapping for this type</h2>
+<pre>create(bool $recreate) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$recreate</h4>
+<code>bool</code><p>OPTIONAL Recreates the index if true (default = false)</p>
+</div>
+</div></div>
+</div>
+<a name="getIndex" id="getIndex"></a><div class="element clickable method public getIndex" data-toggle="collapse" data-target=".getIndex .collapse">
+<h2>Returns the search index</h2>
+<pre>getIndex() : <a href="../classes/Elastica_Index.html">\Elastica_Index</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Index.html">\Elastica_Index</a></code>Index object</div>
+</div></div>
+</div>
+<a name="getType" id="getType"></a><div class="element clickable method public getType" data-toggle="collapse" data-target=".getType .collapse">
+<h2>Returns type object</h2>
+<pre>getType() : <a href="../classes/Elastica_Type.html">\Elastica_Type</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Type.html">\Elastica_Type</a></code>Type object</div>
+</div></div>
+</div>
+<a name="search" id="search"></a><div class="element clickable method public search" data-toggle="collapse" data-target=".search .collapse">
+<h2>Searches results for a query</h2>
+<pre>search(string | array | <a href="../classes/Elastica_Query.html">\Elastica_Query</a> $query) : <a href="../classes/Elastica_ResultSet.html">\Elastica_ResultSet</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>TODO: Improve sample code
+{
+ "from" : 0,
+ "size" : 10,
+ "sort" : {
+      "postDate" : {"reverse" : true},
+      "user" : { },
+      "_score" : { }
+  },
+  "query" : {
+      "term" : { "user" : "kimchy" }
+  }
+}</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\Elastica_Searchable::search</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>stringarray<a href="../classes/Elastica_Query.html">\Elastica_Query</a></code><p>Array with all query data inside or a Elastica_Query object</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_ResultSet.html">\Elastica_ResultSet</a></code>ResultSet with all results inside</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_client" id="$_client"> </a><div class="element clickable property protected $_client" data-toggle="collapse" data-target=".$_client .collapse">
+<h2>$_client</h2>
+<pre>$_client </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_index" id="$_index"> </a><div class="element clickable property protected $_index" data-toggle="collapse" data-target=".$_index .collapse">
+<h2>$_index</h2>
+<pre>$_index </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_indexName" id="$_indexName"> </a><div class="element clickable property protected $_indexName" data-toggle="collapse" data-target=".$_indexName .collapse">
+<h2>$_indexName</h2>
+<pre>$_indexName </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_indexParams" id="$_indexParams"> </a><div class="element clickable property protected $_indexParams" data-toggle="collapse" data-target=".$_indexParams .collapse">
+<h2>$_indexParams</h2>
+<pre>$_indexParams </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_mapping" id="$_mapping"> </a><div class="element clickable property protected $_mapping" data-toggle="collapse" data-target=".$_mapping .collapse">
+<h2>$_mapping</h2>
+<pre>$_mapping </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_source" id="$_source"> </a><div class="element clickable property protected $_source" data-toggle="collapse" data-target=".$_source .collapse">
+<h2>$_source</h2>
+<pre>$_source </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_type" id="$_type"> </a><div class="element clickable property protected $_type" data-toggle="collapse" data-target=".$_type .collapse">
+<h2>$_type</h2>
+<pre>$_type </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_typeName" id="$_typeName"> </a><div class="element clickable property protected $_typeName" data-toggle="collapse" data-target=".$_typeName .collapse">
+<h2>$_typeName</h2>
+<pre>$_typeName </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a name="MAX_DOCS_PER_REQUEST" id="MAX_DOCS_PER_REQUEST"> </a><div class="element clickable constant  MAX_DOCS_PER_REQUEST" data-toggle="collapse" data-target=".MAX_DOCS_PER_REQUEST .collapse">
+<h2>MAX_DOCS_PER_REQUEST</h2>
+<pre>MAX_DOCS_PER_REQUEST </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+</div>
+</body>
+</html>

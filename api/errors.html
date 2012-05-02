@@ -1,0 +1,2121 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="css/template.css" rel="stylesheet" media="all">
+<script src="js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="js/bootstrap.js" type="text/javascript"></script><script src="js/template.js" type="text/javascript"></script><script src="js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="img/favicon.ico">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4"><ul class="side-nav nav nav-list">
+<li class="nav-header">Filter type</li>
+<li><div class="btn-group type-filter" data-toggle="buttons-checkbox">
+<button class="btn critical">Critical</button><button class="btn error">Error</button><button class="btn notice">Notice</button>
+</div></li>
+<li class="nav-header">Navigation</li>
+<li><a href="#Elastica/Cluster/Settings.php"><i class="icon-file"></i>Elastica/Cluster/Settings.php</a></li>
+<li><a href="#Elastica/Node.php"><i class="icon-file"></i>Elastica/Node.php</a></li>
+<li><a href="#Elastica/Type.php"><i class="icon-file"></i>Elastica/Type.php</a></li>
+<li><a href="#Elastica/Node/Stats.php"><i class="icon-file"></i>Elastica/Node/Stats.php</a></li>
+<li><a href="#Elastica/Node/Info.php"><i class="icon-file"></i>Elastica/Node/Info.php</a></li>
+<li><a href="#Elastica/Percolator.php"><i class="icon-file"></i>Elastica/Percolator.php</a></li>
+<li><a href="#Elastica/Transport/Abstract.php"><i class="icon-file"></i>Elastica/Transport/Abstract.php</a></li>
+<li><a href="#Elastica/Transport/Https.php"><i class="icon-file"></i>Elastica/Transport/Https.php</a></li>
+<li><a href="#Elastica/Transport/Memcache.php"><i class="icon-file"></i>Elastica/Transport/Memcache.php</a></li>
+<li><a href="#Elastica/Transport/Http.php"><i class="icon-file"></i>Elastica/Transport/Http.php</a></li>
+<li><a href="#Elastica/Response.php"><i class="icon-file"></i>Elastica/Response.php</a></li>
+<li><a href="#Elastica/Index/Stats.php"><i class="icon-file"></i>Elastica/Index/Stats.php</a></li>
+<li><a href="#Elastica/Index/Settings.php"><i class="icon-file"></i>Elastica/Index/Settings.php</a></li>
+<li><a href="#Elastica/Index/Status.php"><i class="icon-file"></i>Elastica/Index/Status.php</a></li>
+<li><a href="#Elastica/Request.php"><i class="icon-file"></i>Elastica/Request.php</a></li>
+<li><a href="#Elastica/Search.php"><i class="icon-file"></i>Elastica/Search.php</a></li>
+<li><a href="#Elastica/ResultSet.php"><i class="icon-file"></i>Elastica/ResultSet.php</a></li>
+<li><a href="#Elastica/Index.php"><i class="icon-file"></i>Elastica/Index.php</a></li>
+<li><a href="#Elastica/Log.php"><i class="icon-file"></i>Elastica/Log.php</a></li>
+<li><a href="#Elastica/Type/Mapping.php"><i class="icon-file"></i>Elastica/Type/Mapping.php</a></li>
+<li><a href="#Elastica/Type/Abstract.php"><i class="icon-file"></i>Elastica/Type/Abstract.php</a></li>
+<li><a href="#Elastica/Facet/Histogram.php"><i class="icon-file"></i>Elastica/Facet/Histogram.php</a></li>
+<li><a href="#Elastica/Result.php"><i class="icon-file"></i>Elastica/Result.php</a></li>
+<li><a href="#Elastica/Document.php"><i class="icon-file"></i>Elastica/Document.php</a></li>
+<li><a href="#Elastica/Query.php"><i class="icon-file"></i>Elastica/Query.php</a></li>
+<li><a href="#Elastica/Status.php"><i class="icon-file"></i>Elastica/Status.php</a></li>
+<li><a href="#Elastica/Cluster.php"><i class="icon-file"></i>Elastica/Cluster.php</a></li>
+<li><a href="#Elastica/Param.php"><i class="icon-file"></i>Elastica/Param.php</a></li>
+<li><a href="#Elastica/Exception/Client.php"><i class="icon-file"></i>Elastica/Exception/Client.php</a></li>
+<li><a href="#Elastica/Exception/BulkResponse.php"><i class="icon-file"></i>Elastica/Exception/BulkResponse.php</a></li>
+<li><a href="#Elastica/Exception/Response.php"><i class="icon-file"></i>Elastica/Exception/Response.php</a></li>
+<li><a href="#Elastica/Filter/Type.php"><i class="icon-file"></i>Elastica/Filter/Type.php</a></li>
+<li><a href="#Elastica/Filter/HasChild.php"><i class="icon-file"></i>Elastica/Filter/HasChild.php</a></li>
+<li><a href="#Elastica/Filter/Terms.php"><i class="icon-file"></i>Elastica/Filter/Terms.php</a></li>
+<li><a href="#Elastica/Filter/GeoBoundingBox.php"><i class="icon-file"></i>Elastica/Filter/GeoBoundingBox.php</a></li>
+<li><a href="#Elastica/Filter/Ids.php"><i class="icon-file"></i>Elastica/Filter/Ids.php</a></li>
+<li><a href="#Elastica/Filter/Missing.php"><i class="icon-file"></i>Elastica/Filter/Missing.php</a></li>
+<li><a href="#Elastica/Filter/Term.php"><i class="icon-file"></i>Elastica/Filter/Term.php</a></li>
+<li><a href="#Elastica/Filter/Or.php"><i class="icon-file"></i>Elastica/Filter/Or.php</a></li>
+<li><a href="#Elastica/Filter/Not.php"><i class="icon-file"></i>Elastica/Filter/Not.php</a></li>
+<li><a href="#Elastica/Filter/Bool.php"><i class="icon-file"></i>Elastica/Filter/Bool.php</a></li>
+<li><a href="#Elastica/Filter/GeoDistance.php"><i class="icon-file"></i>Elastica/Filter/GeoDistance.php</a></li>
+<li><a href="#Elastica/Filter/GeoPolygon.php"><i class="icon-file"></i>Elastica/Filter/GeoPolygon.php</a></li>
+<li><a href="#Elastica/Filter/Query.php"><i class="icon-file"></i>Elastica/Filter/Query.php</a></li>
+<li><a href="#Elastica/Filter/Script.php"><i class="icon-file"></i>Elastica/Filter/Script.php</a></li>
+<li><a href="#Elastica/Filter/Exists.php"><i class="icon-file"></i>Elastica/Filter/Exists.php</a></li>
+<li><a href="#Elastica/Filter/Nested.php"><i class="icon-file"></i>Elastica/Filter/Nested.php</a></li>
+<li><a href="#Elastica/Filter/Range.php"><i class="icon-file"></i>Elastica/Filter/Range.php</a></li>
+<li><a href="#Elastica/Query/HasChild.php"><i class="icon-file"></i>Elastica/Query/HasChild.php</a></li>
+<li><a href="#Elastica/Query/Filtered.php"><i class="icon-file"></i>Elastica/Query/Filtered.php</a></li>
+<li><a href="#Elastica/Query/Terms.php"><i class="icon-file"></i>Elastica/Query/Terms.php</a></li>
+<li><a href="#Elastica/Query/ConstantScore.php"><i class="icon-file"></i>Elastica/Query/ConstantScore.php</a></li>
+<li><a href="#Elastica/Query/Wildcard.php"><i class="icon-file"></i>Elastica/Query/Wildcard.php</a></li>
+<li><a href="#Elastica/Query/Ids.php"><i class="icon-file"></i>Elastica/Query/Ids.php</a></li>
+<li><a href="#Elastica/Query/Array.php"><i class="icon-file"></i>Elastica/Query/Array.php</a></li>
+<li><a href="#Elastica/Query/TopChildren.php"><i class="icon-file"></i>Elastica/Query/TopChildren.php</a></li>
+<li><a href="#Elastica/Query/Text.php"><i class="icon-file"></i>Elastica/Query/Text.php</a></li>
+<li><a href="#Elastica/Query/QueryString.php"><i class="icon-file"></i>Elastica/Query/QueryString.php</a></li>
+<li><a href="#Elastica/Query/Field.php"><i class="icon-file"></i>Elastica/Query/Field.php</a></li>
+<li><a href="#Elastica/Query/CustomScore.php"><i class="icon-file"></i>Elastica/Query/CustomScore.php</a></li>
+<li><a href="#Elastica/Query/MoreLikeThis.php"><i class="icon-file"></i>Elastica/Query/MoreLikeThis.php</a></li>
+<li><a href="#Elastica/Query/FuzzyLikeThis.php"><i class="icon-file"></i>Elastica/Query/FuzzyLikeThis.php</a></li>
+<li><a href="#Elastica/Query/Nested.php"><i class="icon-file"></i>Elastica/Query/Nested.php</a></li>
+</ul></div>
+<div class="span8">
+<ul class="breadcrumb">
+<li>
+<a href=""><i class="icon-remove-sign"></i></a><span class="divider">\</span>
+</li>
+<li>Compilation Errors</li>
+</ul>
+<div class="package-contents">
+<a name="Elastica/Cluster/Settings.php" id="Elastica/Cluster/Settings.php"></a><h3>
+<i class="icon-file"></i>Elastica/Cluster/Settings.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>11</td>
+<td>No DocBlock was found for property $_client</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>22</td>
+<td>No short description for method get()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>129</td>
+<td>No short description for method set()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>137</td>
+<td>No short description for method getClient()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Node.php" id="Elastica/Node.php"></a><h3>
+<i class="icon-file"></i>Elastica/Node.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>12</td>
+<td>No DocBlock was found for property $_name</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_stats</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $_info</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>30</td>
+<td>No short description for method getName()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>59</td>
+<td>No short description for method getInfo()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Type.php" id="Elastica/Type.php"></a><h3>
+<i class="icon-file"></i>Elastica/Type.php<small style="float: right;padding-right: 10px;">8</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>16</td>
+<td>No short description for property $_index</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>21</td>
+<td>No short description for property $_name</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>75</td>
+<td>The type hint of the argument is incorrect for the type definition of the @param tag with argument $docs in addDocuments()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>125</td>
+<td>No short description for method getName()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>132</td>
+<td>Parameter $source could not be found in setMapping()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>157</td>
+<td>No short description for method search()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>174</td>
+<td>No short description for method count()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>242</td>
+<td>The type hint of the argument is incorrect for the type definition of the @param tag with argument $doc in moreLikeThis()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Node/Stats.php" id="Elastica/Node/Stats.php"></a><h3>
+<i class="icon-file"></i>Elastica/Node/Stats.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>12</td>
+<td>No DocBlock was found for property $_response</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_data</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $_node</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>58</td>
+<td>No short description for method getNode()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Node/Info.php" id="Elastica/Node/Info.php"></a><h3>
+<i class="icon-file"></i>Elastica/Node/Info.php<small style="float: right;padding-right: 10px;">7</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>12</td>
+<td>No DocBlock was found for property $_response</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_data</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $_node</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>52</td>
+<td>No short description for method getPort()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>64</td>
+<td>No short description for method getIp()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>85</td>
+<td>No short description for method getNode()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Percolator.php" id="Elastica/Percolator.php"></a><h3>
+<i class="icon-file"></i>Elastica/Percolator.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>12</td>
+<td>No short description for property $_index</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>54</td>
+<td>No short description for method getIndex()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Transport/Abstract.php" id="Elastica/Transport/Abstract.php"></a><h3>
+<i class="icon-file"></i>Elastica/Transport/Abstract.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>11</td>
+<td>No DocBlock was found for property $_path</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_method</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_data</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $_config</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No short description for method __construct()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Transport/Https.php" id="Elastica/Transport/Https.php"></a><h3>
+<i class="icon-file"></i>Elastica/Transport/Https.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="critical">
+<td>critical</td>
+<td>11</td>
+<td>No short description for property $_scheme</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Transport/Memcache.php" id="Elastica/Transport/Memcache.php"></a><h3>
+<i class="icon-file"></i>Elastica/Transport/Memcache.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>11</td>
+<td>Name of argument $params does not match with the DocBlock's name $host in exec()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>11</td>
+<td>The type hint of the argument is incorrect for the type definition of the @param tag with argument $params in exec()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>11</td>
+<td>Parameter $host could not be found in exec()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>11</td>
+<td>Parameter $port could not be found in exec()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Transport/Http.php" id="Elastica/Transport/Http.php"></a><h3>
+<i class="icon-file"></i>Elastica/Transport/Http.php<small style="float: right;padding-right: 10px;">7</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>11</td>
+<td>No short description for property $_scheme</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>16</td>
+<td>No short description for property $_connection</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>21</td>
+<td>Name of argument $params does not match with the DocBlock's name $host in exec()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>21</td>
+<td>The type hint of the argument is incorrect for the type definition of the @param tag with argument $params in exec()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>21</td>
+<td>Parameter $host could not be found in exec()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>21</td>
+<td>Parameter $port could not be found in exec()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>131</td>
+<td>No short description for method _getConnection()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Response.php" id="Elastica/Response.php"></a><h3>
+<i class="icon-file"></i>Elastica/Response.php<small style="float: right;padding-right: 10px;">10</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_queryTime</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_responseString</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $_error</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $_transferInfo</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $_response</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>26</td>
+<td>No short description for method getError()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>39</td>
+<td>No short description for method hasError()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>61</td>
+<td>No short description for method getData()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>133</td>
+<td>No short description for method getEngineTime()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Index/Stats.php" id="Elastica/Index/Stats.php"></a><h3>
+<i class="icon-file"></i>Elastica/Index/Stats.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>12</td>
+<td>No DocBlock was found for property $_response</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_data</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $_name</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No short description for method __construct()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Index/Settings.php" id="Elastica/Index/Settings.php"></a><h3>
+<i class="icon-file"></i>Elastica/Index/Settings.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $_response</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No DocBlock was found for property $_data</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>21</td>
+<td>No DocBlock was found for property $_name</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>25</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>110</td>
+<td>No short description for method getMergePolicyType()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Index/Status.php" id="Elastica/Index/Status.php"></a><h3>
+<i class="icon-file"></i>Elastica/Index/Status.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>12</td>
+<td>No DocBlock was found for property $_response</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_data</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $_name</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No short description for method __construct()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Request.php" id="Elastica/Request.php"></a><h3>
+<i class="icon-file"></i>Elastica/Request.php<small style="float: right;padding-right: 10px;">11</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $_client</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $_path</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No DocBlock was found for property $_method</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No DocBlock was found for property $_data</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>20</td>
+<td>No DocBlock was found for property $_query</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>29</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>55</td>
+<td>No short description for method getMethod()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>72</td>
+<td>No short description for method getData()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>90</td>
+<td>No short description for method getPath()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>97</td>
+<td>No short description for method getQuery()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>104</td>
+<td>No short description for method getClient()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Search.php" id="Elastica/Search.php"></a><h3>
+<i class="icon-file"></i>Elastica/Search.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>10</td>
+<td>No DocBlock was found for property $_indices</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>11</td>
+<td>No DocBlock was found for property $_types</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>13</td>
+<td>No short description for property $_client</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>96</td>
+<td>No short description for method getClient()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>103</td>
+<td>No short description for method getIndices()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>110</td>
+<td>No short description for method getTypes()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/ResultSet.php" id="Elastica/ResultSet.php"></a><h3>
+<i class="icon-file"></i>Elastica/ResultSet.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_results</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $_position</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $_response</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Index.php" id="Elastica/Index.php"></a><h3>
+<i class="icon-file"></i>Elastica/Index.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>13</td>
+<td>No short description for property $_name</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>18</td>
+<td>No short description for property $_client</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>59</td>
+<td>No short description for method getStats()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Log.php" id="Elastica/Log.php"></a><h3>
+<i class="icon-file"></i>Elastica/Log.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>18</td>
+<td>No short description for property $_lastMessage</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>32</td>
+<td>No short description for method log()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>54</td>
+<td>No short description for method setLog()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>82</td>
+<td>No short description for method getLastMessage()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Type/Mapping.php" id="Elastica/Type/Mapping.php"></a><h3>
+<i class="icon-file"></i>Elastica/Type/Mapping.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>12</td>
+<td>No DocBlock was found for property $_mapping</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_type</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>112</td>
+<td>No short description for method setTTL()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Type/Abstract.php" id="Elastica/Type/Abstract.php"></a><h3>
+<i class="icon-file"></i>Elastica/Type/Abstract.php<small style="float: right;padding-right: 10px;">10</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>25</td>
+<td>No DocBlock was found for property $_indexName</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>26</td>
+<td>No DocBlock was found for property $_typeName</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>27</td>
+<td>No DocBlock was found for property $_client</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>28</td>
+<td>No DocBlock was found for property $_index</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>29</td>
+<td>No DocBlock was found for property $_type</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>30</td>
+<td>No DocBlock was found for property $_mapping</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>31</td>
+<td>No DocBlock was found for property $_indexParams</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>32</td>
+<td>No DocBlock was found for property $_source</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>74</td>
+<td>No short description for method search()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>83</td>
+<td>No short description for method count()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Facet/Histogram.php" id="Elastica/Facet/Histogram.php"></a><h3>
+<i class="icon-file"></i>Elastica/Facet/Histogram.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>55</td>
+<td>The type hint of the argument is incorrect for the type definition of the @param tag with argument $params in setScriptParams()</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Result.php" id="Elastica/Result.php"></a><h3>
+<i class="icon-file"></i>Elastica/Result.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_hit</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Document.php" id="Elastica/Document.php"></a><h3>
+<i class="icon-file"></i>Elastica/Document.php<small style="float: right;padding-right: 10px;">11</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>11</td>
+<td>No short description for property $_id</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>16</td>
+<td>No short description for property $_data</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>21</td>
+<td>No DocBlock was found for property $_type</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>22</td>
+<td>No DocBlock was found for property $_index</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>24</td>
+<td>No DocBlock was found for property $_version</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>26</td>
+<td>No short description for property $_parent</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>31</td>
+<td>No short description for property $_optype</td>
+</tr>
+<tr class="critical">
+<td>critical</td>
+<td>36</td>
+<td>No short description for property $_percolate</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>104</td>
+<td>No short description for method addFileContent()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>173</td>
+<td>No short description for method getType()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>197</td>
+<td>No short description for method getIndex()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query.php" id="Elastica/Query.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_params</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>88</td>
+<td>No short description for method setFilter()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Status.php" id="Elastica/Status.php"></a><h3>
+<i class="icon-file"></i>Elastica/Status.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No DocBlock was found for property $_data</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>21</td>
+<td>No DocBlock was found for property $_client</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>119</td>
+<td>No short description for method getShards()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Cluster.php" id="Elastica/Cluster.php"></a><h3>
+<i class="icon-file"></i>Elastica/Cluster.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>12</td>
+<td>No DocBlock was found for property $_client</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>42</td>
+<td>No short description for method getIndexNames()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>107</td>
+<td>No short description for method getHealth()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>115</td>
+<td>No short description for method getSettings()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Param.php" id="Elastica/Param.php"></a><h3>
+<i class="icon-file"></i>Elastica/Param.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>20</td>
+<td>No DocBlock was found for property $_rawParams</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Exception/Client.php" id="Elastica/Exception/Client.php"></a><h3>
+<i class="icon-file"></i>Elastica/Exception/Client.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>11</td>
+<td>No DocBlock was found for property $_error</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>12</td>
+<td>No DocBlock was found for property $_request</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_response</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>The type hint of the argument is incorrect for the type definition of the @param tag with argument $request in __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>68</td>
+<td>No short description for method getError()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Exception/BulkResponse.php" id="Elastica/Exception/BulkResponse.php"></a><h3>
+<i class="icon-file"></i>Elastica/Exception/BulkResponse.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>10</td>
+<td>No DocBlock was found for property $_response</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>12</td>
+<td>No short description for method __construct()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Exception/Response.php" id="Elastica/Exception/Response.php"></a><h3>
+<i class="icon-file"></i>Elastica/Exception/Response.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>11</td>
+<td>No DocBlock was found for property $_response</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No short description for method __construct()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Filter/Type.php" id="Elastica/Filter/Type.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Type.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_type</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No short description for method __construct()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/HasChild.php" id="Elastica/Filter/HasChild.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/HasChild.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No short description for method __construct()</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/Terms.php" id="Elastica/Filter/Terms.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Terms.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_terms</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_params</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $_key</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/GeoBoundingBox.php" id="Elastica/Filter/GeoBoundingBox.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/GeoBoundingBox.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>23</td>
+<td>No short description for method addCoordinates()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/Ids.php" id="Elastica/Filter/Ids.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Ids.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>52</td>
+<td>No short description for method setType()</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/Missing.php" id="Elastica/Filter/Missing.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Missing.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>23</td>
+<td>No short description for method setField()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/Term.php" id="Elastica/Filter/Term.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Term.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No short description for method __construct()</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Filter/Or.php" id="Elastica/Filter/Or.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Or.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_filters</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/Not.php" id="Elastica/Filter/Not.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Not.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>22</td>
+<td>No short description for method setFilter()</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Filter/Bool.php" id="Elastica/Filter/Bool.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Bool.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_minimumNumberShouldMatch</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $_must</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $_should</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $_mustNot</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/GeoDistance.php" id="Elastica/Filter/GeoDistance.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/GeoDistance.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>12</td>
+<td>No DocBlock was found for property $_key</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_distance</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_latitude</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $_longitude</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/GeoPolygon.php" id="Elastica/Filter/GeoPolygon.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/GeoPolygon.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_key</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $_points</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No short description for method __construct()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/Query.php" id="Elastica/Filter/Query.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Query.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>22</td>
+<td>No short description for method setQuery()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/Script.php" id="Elastica/Filter/Script.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Script.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="critical">
+<td>critical</td>
+<td>14</td>
+<td>No short description for property $_query</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>19</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>50</td>
+<td>No short description for method toArray()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/Exists.php" id="Elastica/Filter/Exists.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Exists.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>20</td>
+<td>No short description for method setField()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Filter/Nested.php" id="Elastica/Filter/Nested.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Nested.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>23</td>
+<td>Name of argument $query does not match with the DocBlock's name $filter in setQuery()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>23</td>
+<td>Parameter $filter could not be found in setQuery()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>33</td>
+<td>No short description for method setScoreMode()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Filter/Range.php" id="Elastica/Filter/Range.php"></a><h3>
+<i class="icon-file"></i>Elastica/Filter/Range.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_fields</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No short description for method __construct()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/HasChild.php" id="Elastica/Query/HasChild.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/HasChild.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No short description for method __construct()</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/Filtered.php" id="Elastica/Query/Filtered.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/Filtered.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_query</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_filter</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/Terms.php" id="Elastica/Query/Terms.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/Terms.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_terms</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_params</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $_key</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No short description for method __construct()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/ConstantScore.php" id="Elastica/Query/ConstantScore.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/ConstantScore.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No short description for method __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>24</td>
+<td>No short description for method setFilter()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>35</td>
+<td>No short description for method setBoost()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/Wildcard.php" id="Elastica/Query/Wildcard.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/Wildcard.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No short description for method __construct()</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/Ids.php" id="Elastica/Query/Ids.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/Ids.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $_params</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>57</td>
+<td>No short description for method setType()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/Array.php" id="Elastica/Query/Array.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/Array.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_query</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Query/TopChildren.php" id="Elastica/Query/TopChildren.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/TopChildren.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No short description for method __construct()</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/Text.php" id="Elastica/Query/Text.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/Text.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>52</td>
+<td>No short description for method setFieldType()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>61</td>
+<td>No short description for method setFieldMaxExpansions()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/QueryString.php" id="Elastica/Query/QueryString.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/QueryString.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_queryString</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Query/Field.php" id="Elastica/Query/Field.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/Field.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_field</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_queryString</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/CustomScore.php" id="Elastica/Query/CustomScore.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/CustomScore.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>27</td>
+<td>No short description for method setScript()</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/MoreLikeThis.php" id="Elastica/Query/MoreLikeThis.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/MoreLikeThis.php<small style="float: right;padding-right: 10px;">10</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>34</td>
+<td>No short description for method setBoost()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>53</td>
+<td>No short description for method setPercentTermsToMatch()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>61</td>
+<td>No short description for method setMinTermFrequency()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>70</td>
+<td>No short description for method setMinDocFrequency()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>78</td>
+<td>No short description for method setMaxDocFrequency()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>87</td>
+<td>No short description for method setMinWordLength()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>95</td>
+<td>No short description for method setMaxWordLength()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>103</td>
+<td>No short description for method setBoostTerms()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>112</td>
+<td>No short description for method setAnalyzer()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>121</td>
+<td>No short description for method setStopWords()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="Elastica/Query/FuzzyLikeThis.php" id="Elastica/Query/FuzzyLikeThis.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/FuzzyLikeThis.php<small style="float: right;padding-right: 10px;">7</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $_fields</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $_likeText</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>15</td>
+<td>No DocBlock was found for property $_maxQueryTerms</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>No DocBlock was found for property $_minSimilarity</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>17</td>
+<td>No DocBlock was found for property $_prefixLength</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>18</td>
+<td>No DocBlock was found for property $_boost</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>55</td>
+<td>No short description for method setBoost()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+<div class="package-contents">
+<a name="Elastica/Query/Nested.php" id="Elastica/Query/Nested.php"></a><h3>
+<i class="icon-file"></i>Elastica/Query/Nested.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>33</td>
+<td>No short description for method setScoreMode()</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents"></div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:42+02:00.<br></footer></div>
+</div>
+</body>
+</html>
