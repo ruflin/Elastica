@@ -1,0 +1,474 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica » \Elastica_Client</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates a new Elastica client"><span class="description">Creates a new Elastica client</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#addDocuments" title="addDocuments :: Uses _bulk to send documents to the server"><span class="description">Uses _bulk to send documents to the server</span><pre>addDocuments()</pre></a></li>
+<li class="method public "><a href="#addHeader" title="addHeader :: Adds a HTTP Header"><span class="description">Adds a HTTP Header</span><pre>addHeader()</pre></a></li>
+<li class="method public "><a href="#bulk" title="bulk :: Bulk operation"><span class="description">Bulk operation</span><pre>bulk()</pre></a></li>
+<li class="method public "><a href="#deleteDocuments" title="deleteDocuments :: Bulk deletes documents (not implemented yet)"><span class="description">Bulk deletes documents (not implemented yet)</span><pre>deleteDocuments()</pre></a></li>
+<li class="method public "><a href="#deleteIds" title="deleteIds :: Deletes documents with the given ids, index, type from the index"><span class="description">Deletes documents with the given ids, index, type from the index</span><pre>deleteIds()</pre></a></li>
+<li class="method public "><a href="#getCluster" title="getCluster :: Returns the current cluster"><span class="description">Returns the current cluster</span><pre>getCluster()</pre></a></li>
+<li class="method public "><a href="#getConfig" title="getConfig :: Returns a specific config key or the whole
+config array if not set"><span class="description">Returns a specific config key or the whole
+config array if not set</span><pre>getConfig()</pre></a></li>
+<li class="method public "><a href="#getHost" title="getHost :: Returns host the client connects to"><span class="description">Returns host the client connects to</span><pre>getHost()</pre></a></li>
+<li class="method public "><a href="#getIndex" title="getIndex :: Returns the index for the given connection"><span class="description">Returns the index for the given connection</span><pre>getIndex()</pre></a></li>
+<li class="method public "><a href="#getPort" title="getPort :: Returns connection port of this client"><span class="description">Returns connection port of this client</span><pre>getPort()</pre></a></li>
+<li class="method public "><a href="#getStatus" title="getStatus :: Returns the status object for all indices"><span class="description">Returns the status object for all indices</span><pre>getStatus()</pre></a></li>
+<li class="method public "><a href="#getTransport" title="getTransport :: Returns transport type to user"><span class="description">Returns transport type to user</span><pre>getTransport()</pre></a></li>
+<li class="method public "><a href="#optimizeAll" title="optimizeAll :: Optimizes all search indices"><span class="description">Optimizes all search indices</span><pre>optimizeAll()</pre></a></li>
+<li class="method public "><a href="#removeHeader" title="removeHeader :: Remove a HTTP Header"><span class="description">Remove a HTTP Header</span><pre>removeHeader()</pre></a></li>
+<li class="method public "><a href="#request" title="request :: Makes calls to the elasticsearch server based on this index"><span class="description">Makes calls to the elasticsearch server based on this index</span><pre>request()</pre></a></li>
+<li class="method public "><a href="#setConfig" title="setConfig :: Sets specific config values (updates and keeps default values)"><span class="description">Sets specific config values (updates and keeps default values)</span><pre>setConfig()</pre></a></li>
+<li class="method public "><a href="#setConfigValue" title="setConfigValue :: Sets / overwrites a specific config value"><span class="description">Sets / overwrites a specific config value</span><pre>setConfigValue()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24_config" title="$_config :: Config with defaults"><span class="description">Config with defaults</span><pre>$_config</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants</li>
+<li class="constant  "><a href="#DEFAULT_HOST" title="DEFAULT_HOST :: Default host"><span class="description">Default host</span><pre>DEFAULT_HOST</pre></a></li>
+<li class="constant  "><a href="#DEFAULT_PORT" title="DEFAULT_PORT :: Default elastic search port"><span class="description">Default elastic search port</span><pre>DEFAULT_PORT</pre></a></li>
+<li class="constant  "><a href="#DEFAULT_TRANSPORT" title="DEFAULT_TRANSPORT :: Default transport"><span class="description">Default transport</span><pre>DEFAULT_TRANSPORT</pre></a></li>
+<li class="constant  "><a href="#TIMEOUT" title="TIMEOUT :: Number of seconds after a timeout occurs for every request
+If using indexing of file large value necessary."><span class="description">Number of seconds after a timeout occurs for every request
+If using indexing of file large value necessary.</span><pre>TIMEOUT</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CElastica_Client" id="\Elastica_Client"></a><div href="../classes/Elastica_Client.html" class="element class">
+<p class="short_description">Client to connect the the elasticsearch server</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Xodoa</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/Elastica.html">Elastica</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:spam@ruflin.com">Nicolas Ruflin</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates a new Elastica client</h2>
+<pre>__construct(array $config) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$config</h4>
+<code>array</code><p>OPTIONAL Additional config options</p></div>
+</div></div>
+</div>
+<a name="addDocuments" id="addDocuments"></a><div class="element clickable method public addDocuments" data-toggle="collapse" data-target=".addDocuments .collapse">
+<h2>Uses _bulk to send documents to the server</h2>
+<pre>addDocuments(array $docs) : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>Array of Elastica_Document as input. Index and type has to be
+set inside the document, because for bulk settings documents,
+documents can belong to any type and index</p></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$docs</h4>
+<code>array</code><p>Array of Elastica_Document</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/Elastica_Exception_Invalid.html">\Elastica_Exception_Invalid</a></code></th>
+<td>If docs is empty</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code>Response object</div>
+</div></div>
+</div>
+<a name="addHeader" id="addHeader"></a><div class="element clickable method public addHeader" data-toggle="collapse" data-target=".addHeader .collapse">
+<h2>Adds a HTTP Header</h2>
+<pre>addHeader(string $header, string $headerValue) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$header</h4>
+<code>string</code><p>The HTTP Header</p></div>
+<div class="subelement argument">
+<h4>$headerValue</h4>
+<code>string</code><p>The HTTP Header Value</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/Elastica_Exception_Invalid.html">\Elastica_Exception_Invalid</a></code></th>
+<td>If $header or $headerValue is not a string</td>
+</tr></table>
+</div></div>
+</div>
+<a name="bulk" id="bulk"></a><div class="element clickable method public bulk" data-toggle="collapse" data-target=".bulk .collapse">
+<h2>Bulk operation</h2>
+<pre>bulk(array $params) : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>Every entry in the params array has to exactly on array
+of the bulk operation. An example param array would be:</p>
+
+<p>array(
+        array('index' => array('_index' => 'test', '_type' => 'user', '_id' => '1')),
+        array('user' => array('name' => 'hans')),
+        array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '2'))
+);</p></p>
+<table class="table table-bordered">
+<tr>
+<th>todo</th>
+<td>Test</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/</a></td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Parameter array</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code>Reponse object</div>
+</div></div>
+</div>
+<a name="deleteDocuments" id="deleteDocuments"></a><div class="element clickable method public deleteDocuments" data-toggle="collapse" data-target=".deleteDocuments .collapse">
+<h2>Bulk deletes documents (not implemented yet)</h2>
+<pre>deleteDocuments(array $docs) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$docs</h4>
+<code>array</code><p>Docs</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code>\Elastica_Exception</code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a name="deleteIds" id="deleteIds"></a><div class="element clickable method public deleteIds" data-toggle="collapse" data-target=".deleteIds .collapse">
+<h2>Deletes documents with the given ids, index, type from the index</h2>
+<pre>deleteIds(array $ids, string | <a href="../classes/Elastica_Index.html">\Elastica_Index</a> $index, string | <a href="../classes/Elastica_Type.html">\Elastica_Type</a> $type) : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$ids</h4>
+<code>array</code><p>Document ids</p></div>
+<div class="subelement argument">
+<h4>$index</h4>
+<code>string<a href="../classes/Elastica_Index.html">\Elastica_Index</a></code><p>Index name</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string<a href="../classes/Elastica_Type.html">\Elastica_Type</a></code><p>Type of documents</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code>\Elastica_Exception</code></th>
+<td>If ids is empty</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code>Response object</div>
+</div></div>
+</div>
+<a name="getCluster" id="getCluster"></a><div class="element clickable method public getCluster" data-toggle="collapse" data-target=".getCluster .collapse">
+<h2>Returns the current cluster</h2>
+<pre>getCluster() : <a href="../classes/Elastica_Cluster.html">\Elastica_Cluster</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Cluster.html">\Elastica_Cluster</a></code>Cluster object</div>
+</div></div>
+</div>
+<a name="getConfig" id="getConfig"></a><div class="element clickable method public getConfig" data-toggle="collapse" data-target=".getConfig .collapse">
+<h2>Returns a specific config key or the whole
+config array if not set</h2>
+<pre>getConfig(string $key) : array | string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>Config key</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>string</code>Config value</div>
+</div></div>
+</div>
+<a name="getHost" id="getHost"></a><div class="element clickable method public getHost" data-toggle="collapse" data-target=".getHost .collapse">
+<h2>Returns host the client connects to</h2>
+<pre>getHost() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Host</div>
+</div></div>
+</div>
+<a name="getIndex" id="getIndex"></a><div class="element clickable method public getIndex" data-toggle="collapse" data-target=".getIndex .collapse">
+<h2>Returns the index for the given connection</h2>
+<pre>getIndex(string $name) : <a href="../classes/Elastica_Index.html">\Elastica_Index</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Index name to create connection to</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Index.html">\Elastica_Index</a></code>Index for the given name</div>
+</div></div>
+</div>
+<a name="getPort" id="getPort"></a><div class="element clickable method public getPort" data-toggle="collapse" data-target=".getPort .collapse">
+<h2>Returns connection port of this client</h2>
+<pre>getPort() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>Connection port</div>
+</div></div>
+</div>
+<a name="getStatus" id="getStatus"></a><div class="element clickable method public getStatus" data-toggle="collapse" data-target=".getStatus .collapse">
+<h2>Returns the status object for all indices</h2>
+<pre>getStatus() : <a href="../classes/Elastica_Status.html">\Elastica_Status</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Status.html">\Elastica_Status</a></code>Status object</div>
+</div></div>
+</div>
+<a name="getTransport" id="getTransport"></a><div class="element clickable method public getTransport" data-toggle="collapse" data-target=".getTransport .collapse">
+<h2>Returns transport type to user</h2>
+<pre>getTransport() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Transport type</div>
+</div></div>
+</div>
+<a name="optimizeAll" id="optimizeAll"></a><div class="element clickable method public optimizeAll" data-toggle="collapse" data-target=".optimizeAll .collapse">
+<h2>Optimizes all search indices</h2>
+<pre>optimizeAll(array $args) : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$args</h4>
+<code>array</code><p>OPTIONAL Optional arguments</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code>Response object</div>
+</div></div>
+</div>
+<a name="removeHeader" id="removeHeader"></a><div class="element clickable method public removeHeader" data-toggle="collapse" data-target=".removeHeader .collapse">
+<h2>Remove a HTTP Header</h2>
+<pre>removeHeader(string $header) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$header</h4>
+<code>string</code><p>The HTTP Header to remove</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/Elastica_Exception_Invalid.html">\Elastica_Exception_Invalid</a></code></th>
+<td>IF $header is not a string</td>
+</tr></table>
+</div></div>
+</div>
+<a name="request" id="request"></a><div class="element clickable method public request" data-toggle="collapse" data-target=".request .collapse">
+<h2>Makes calls to the elasticsearch server based on this index</h2>
+<pre>request(string $path, string $method, array $data, array $query) : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>It's possible to make any REST query directly over this method</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>Path to call</p></div>
+<div class="subelement argument">
+<h4>$method</h4>
+<code>string</code><p>Rest method to use (GET, POST, DELETE, PUT)</p>
+</div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code><p>OPTIONAL Arguments as array</p></div>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>array</code><p>OPTIONAL Query params</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code>Response object</div>
+</div></div>
+</div>
+<a name="setConfig" id="setConfig"></a><div class="element clickable method public setConfig" data-toggle="collapse" data-target=".setConfig .collapse">
+<h2>Sets specific config values (updates and keeps default values)</h2>
+<pre>setConfig(array $config) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$config</h4>
+<code>array</code><p>Params</p></div>
+</div></div>
+</div>
+<a name="setConfigValue" id="setConfigValue"></a><div class="element clickable method public setConfigValue" data-toggle="collapse" data-target=".setConfigValue .collapse">
+<h2>Sets / overwrites a specific config value</h2>
+<pre>setConfigValue(string $key, mixed $value) : <a href="../classes/Elastica_Client.html">\Elastica_Client</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>Key to set</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Value</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Client.html">\Elastica_Client</a></code>Client object</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_config" id="$_config"> </a><div class="element clickable property protected $_config" data-toggle="collapse" data-target=".$_config .collapse">
+<h2>Config with defaults</h2>
+<pre>$_config : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a name="DEFAULT_HOST" id="DEFAULT_HOST"> </a><div class="element clickable constant  DEFAULT_HOST" data-toggle="collapse" data-target=".DEFAULT_HOST .collapse">
+<h2>Default host</h2>
+<pre>DEFAULT_HOST </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="DEFAULT_PORT" id="DEFAULT_PORT"> </a><div class="element clickable constant  DEFAULT_PORT" data-toggle="collapse" data-target=".DEFAULT_PORT .collapse">
+<h2>Default elastic search port</h2>
+<pre>DEFAULT_PORT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="DEFAULT_TRANSPORT" id="DEFAULT_TRANSPORT"> </a><div class="element clickable constant  DEFAULT_TRANSPORT" data-toggle="collapse" data-target=".DEFAULT_TRANSPORT .collapse">
+<h2>Default transport</h2>
+<pre>DEFAULT_TRANSPORT : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="TIMEOUT" id="TIMEOUT"> </a><div class="element clickable constant  TIMEOUT" data-toggle="collapse" data-target=".TIMEOUT .collapse">
+<h2>Number of seconds after a timeout occurs for every request
+If using indexing of file large value necessary.</h2>
+<pre>TIMEOUT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,778 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica » Elastica</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/Elastica.html" title="Elastica"><i class="icon-folder-open"></i>Elastica</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-interface"></i> Interfaces</li>
+<li><a href="#Elastica_Searchable" title="Elastica searchable interface">Elastica_Searchable</a></li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#Elastica_Cluster_Settings" title="Cluster settings">Elastica_Cluster_Settings</a></li>
+<li><a href="#Elastica_Node" title="Elastica cluster node object">Elastica_Node</a></li>
+<li><a href="#Elastica_Type" title="Elastica type object">Elastica_Type</a></li>
+<li><a href="#Elastica_Client" title="Client to connect the the elasticsearch server">Elastica_Client</a></li>
+<li><a href="#Elastica_Node_Stats" title="Elastica cluster node object">Elastica_Node_Stats</a></li>
+<li><a href="#Elastica_Node_Info" title="Elastica cluster node object">Elastica_Node_Info</a></li>
+<li><a href="#Elastica_Percolator" title="Percolator class">Elastica_Percolator</a></li>
+<li><a href="#Elastica_Util" title="Elastica tools">Elastica_Util</a></li>
+<li><a href="#Elastica_Transport_Abstract" title="Elastica Abstract Transport object">Elastica_Transport_Abstract</a></li>
+<li><a href="#Elastica_Transport_Https" title="Elastica Http Transport object">Elastica_Transport_Https</a></li>
+<li><a href="#Elastica_Transport_Memcache" title="Elastica Memcache Transport object">Elastica_Transport_Memcache</a></li>
+<li><a href="#Elastica_Transport_Http" title="Elastica Http Transport object">Elastica_Transport_Http</a></li>
+<li><a href="#Elastica_Response" title="Elastica Response object">Elastica_Response</a></li>
+<li><a href="#Elastica_Index_Stats" title="Elastica index stats object">Elastica_Index_Stats</a></li>
+<li><a href="#Elastica_Index_Settings" title="Elastica index settings object">Elastica_Index_Settings</a></li>
+<li><a href="#Elastica_Index_Status" title="Elastica index status object">Elastica_Index_Status</a></li>
+<li><a href="#Elastica_Request" title="Elastica Request object">Elastica_Request</a></li>
+<li><a href="#Elastica_Search" title="Elastica search object">Elastica_Search</a></li>
+<li><a href="#Elastica_ResultSet" title="Elastica result set">Elastica_ResultSet</a></li>
+<li><a href="#Elastica_Index" title="Elastica index object">Elastica_Index</a></li>
+<li><a href="#Elastica_Log" title="Elastica log object">Elastica_Log</a></li>
+<li><a href="#Elastica_Type_Mapping" title="Elastica Mapping object">Elastica_Type_Mapping</a></li>
+<li><a href="#Elastica_Type_Abstract" title="Abstract helper class to implement search indices based on models.">Elastica_Type_Abstract</a></li>
+<li><a href="#Elastica_Facet_Terms" title="Implements the terms facet.">Elastica_Facet_Terms</a></li>
+<li><a href="#Elastica_Facet_Abstract" title="Abstract facet object. Should be extended by all facet types">Elastica_Facet_Abstract</a></li>
+<li><a href="#Elastica_Facet_Histogram" title="Implements the Histogram facet.">Elastica_Facet_Histogram</a></li>
+<li><a href="#Elastica_Facet_GeoDistance" title="Implements the Geo Distance facet.">Elastica_Facet_GeoDistance</a></li>
+<li><a href="#Elastica_Facet_Range" title="Implements the range facet.">Elastica_Facet_Range</a></li>
+<li><a href="#Elastica_Facet_DateHistogram" title="Implements the Date Histogram facet.">Elastica_Facet_DateHistogram</a></li>
+<li><a href="#Elastica_Result" title="Elastica result item">Elastica_Result</a></li>
+<li><a href="#Elastica_Document" title="Single document stored in elastic search">Elastica_Document</a></li>
+<li><a href="#Elastica_Query" title="Elastica query object">Elastica_Query</a></li>
+<li><a href="#Elastica_Status" title="Elastica general status">Elastica_Status</a></li>
+<li><a href="#Elastica_Cluster" title="Cluster informations for elasticsearch">Elastica_Cluster</a></li>
+<li><a href="#Elastica_Param" title="Class to handle params">Elastica_Param</a></li>
+<li><a href="#Elastica_Exception_Client" title="Client exception">Elastica_Exception_Client</a></li>
+<li><a href="#Elastica_Exception_Invalid" title="Invalid exception">Elastica_Exception_Invalid</a></li>
+<li><a href="#Elastica_Exception_BulkResponse" title="Bulk Response exception">Elastica_Exception_BulkResponse</a></li>
+<li><a href="#Elastica_Exception_Response" title="Response exception">Elastica_Exception_Response</a></li>
+<li><a href="#Elastica_Exception_NotImplemented" title="Not implemented exception">Elastica_Exception_NotImplemented</a></li>
+<li><a href="#Elastica_Exception_Abstract" title="Abstract general Elastica exception object">Elastica_Exception_Abstract</a></li>
+<li><a href="#Elastica_Exception_NotFound" title="Not found exception">Elastica_Exception_NotFound</a></li>
+<li><a href="#Elastica_Filter_Type" title="Type Filter">Elastica_Filter_Type</a></li>
+<li><a href="#Elastica_Filter_HasChild" title="Returns parent documents having child docs matching the query">Elastica_Filter_HasChild</a></li>
+<li><a href="#Elastica_Filter_Terms" title="Terms filter">Elastica_Filter_Terms</a></li>
+<li><a href="#Elastica_Filter_GeoBoundingBox" title="Geo bounding box filter">Elastica_Filter_GeoBoundingBox</a></li>
+<li><a href="#Elastica_Filter_Ids" title="Ids Filter">Elastica_Filter_Ids</a></li>
+<li><a href="#Elastica_Filter_Missing" title="Missing Filter">Elastica_Filter_Missing</a></li>
+<li><a href="#Elastica_Filter_Term" title="Term query">Elastica_Filter_Term</a></li>
+<li><a href="#Elastica_Filter_Abstract" title="Abstract filter object. Should be extended by all filter types">Elastica_Filter_Abstract</a></li>
+<li><a href="#Elastica_Filter_Or" title="Or Filter">Elastica_Filter_Or</a></li>
+<li><a href="#Elastica_Filter_Not" title="Not Filter">Elastica_Filter_Not</a></li>
+<li><a href="#Elastica_Filter_And" title="And Filter">Elastica_Filter_And</a></li>
+<li><a href="#Elastica_Filter_Bool" title="Bool Filter">Elastica_Filter_Bool</a></li>
+<li><a href="#Elastica_Filter_GeoDistance" title="Geo distance filter">Elastica_Filter_GeoDistance</a></li>
+<li><a href="#Elastica_Filter_GeoPolygon" title="Geo polygon filter">Elastica_Filter_GeoPolygon</a></li>
+<li><a href="#Elastica_Filter_Query" title="Query filter">Elastica_Filter_Query</a></li>
+<li><a href="#Elastica_Filter_Script" title="Script filter">Elastica_Filter_Script</a></li>
+<li><a href="#Elastica_Filter_Exists" title="Exists query">Elastica_Filter_Exists</a></li>
+<li><a href="#Elastica_Filter_Nested" title="Nested filter">Elastica_Filter_Nested</a></li>
+<li><a href="#Elastica_Filter_Prefix" title="Prefix filter">Elastica_Filter_Prefix</a></li>
+<li><a href="#Elastica_Filter_Range" title="Range Filter">Elastica_Filter_Range</a></li>
+<li><a href="#Elastica_Query_HasChild" title="Returns parent documents having child docs matching the query">Elastica_Query_HasChild</a></li>
+<li><a href="#Elastica_Query_Filtered" title="Filtered query. Needs a query and a filter">Elastica_Query_Filtered</a></li>
+<li><a href="#Elastica_Query_Terms" title="Terms query">Elastica_Query_Terms</a></li>
+<li><a href="#Elastica_Query_ConstantScore" title="Constant score query">Elastica_Query_ConstantScore</a></li>
+<li><a href="#Elastica_Query_Wildcard" title="Wildcard query">Elastica_Query_Wildcard</a></li>
+<li><a href="#Elastica_Query_Ids" title="Ids Query">Elastica_Query_Ids</a></li>
+<li><a href="#Elastica_Query_Array" title="Array query
+Pure php array query. Can be used to create any not existing type of query.">Elastica_Query_Array</a></li>
+<li><a href="#Elastica_Query_Term" title="Term query">Elastica_Query_Term</a></li>
+<li><a href="#Elastica_Query_Builder" title="Query Builder.">Elastica_Query_Builder</a></li>
+<li><a href="#Elastica_Query_Abstract" title="Abstract query object. Should be extended by all query types.">Elastica_Query_Abstract</a></li>
+<li><a href="#Elastica_Query_Fuzzy" title="Fuzzy query">Elastica_Query_Fuzzy</a></li>
+<li><a href="#Elastica_Query_TopChildren" title="Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.">Elastica_Query_TopChildren</a></li>
+<li><a href="#Elastica_Query_Text" title="Text query">Elastica_Query_Text</a></li>
+<li><a href="#Elastica_Query_QueryString" title="QueryString query">Elastica_Query_QueryString</a></li>
+<li><a href="#Elastica_Query_Bool" title="Bool query">Elastica_Query_Bool</a></li>
+<li><a href="#Elastica_Query_MatchAll" title="Match all query. Returns all results">Elastica_Query_MatchAll</a></li>
+<li><a href="#Elastica_Query_Field" title="Field query">Elastica_Query_Field</a></li>
+<li><a href="#Elastica_Query_CustomScore" title="Custom score query">Elastica_Query_CustomScore</a></li>
+<li><a href="#Elastica_Query_MoreLikeThis" title="More Like This query">Elastica_Query_MoreLikeThis</a></li>
+<li><a href="#Elastica_Query_FuzzyLikeThis" title="Fuzzy Like This query">Elastica_Query_FuzzyLikeThis</a></li>
+<li><a href="#Elastica_Query_CustomFiltersScore" title="Custom filtered score query. Needs a query and array of filters, with boosts">Elastica_Query_CustomFiltersScore</a></li>
+<li><a href="#Elastica_Query_Nested" title="Nested query">Elastica_Query_Nested</a></li>
+<li><a href="#Elastica_Query_Range" title="Range query">Elastica_Query_Range</a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span>
+</li>
+<li class="active"><a href="../packages/Elastica.html">Elastica</a></li>
+</ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="Elastica_Searchable" id="Elastica_Searchable"></a><div class="element ajax clickable interface" href="../classes/Elastica_Searchable.html">
+<h1>Elastica_Searchable<a href="../classes/Elastica_Searchable.html">¶</a>
+</h1>
+<p class="short_description">Elastica searchable interface</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Searchable.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Client" id="Elastica_Client"></a><div class="element ajax clickable class" href="../classes/Elastica_Client.html">
+<h1>Elastica_Client<a href="../classes/Elastica_Client.html">¶</a>
+</h1>
+<p class="short_description">Client to connect the the elasticsearch server</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Client.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Cluster" id="Elastica_Cluster"></a><div class="element ajax clickable class" href="../classes/Elastica_Cluster.html">
+<h1>Elastica_Cluster<a href="../classes/Elastica_Cluster.html">¶</a>
+</h1>
+<p class="short_description">Cluster informations for elasticsearch</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Cluster.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Cluster_Settings" id="Elastica_Cluster_Settings"></a><div class="element ajax clickable class" href="../classes/Elastica_Cluster_Settings.html">
+<h1>Elastica_Cluster_Settings<a href="../classes/Elastica_Cluster_Settings.html">¶</a>
+</h1>
+<p class="short_description">Cluster settings</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Cluster_Settings.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Document" id="Elastica_Document"></a><div class="element ajax clickable class" href="../classes/Elastica_Document.html">
+<h1>Elastica_Document<a href="../classes/Elastica_Document.html">¶</a>
+</h1>
+<p class="short_description">Single document stored in elastic search</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Document.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Exception_Abstract" id="Elastica_Exception_Abstract"></a><div class="element ajax clickable class" href="../classes/Elastica_Exception_Abstract.html">
+<h1>Elastica_Exception_Abstract<a href="../classes/Elastica_Exception_Abstract.html">¶</a>
+</h1>
+<p class="short_description">Abstract general Elastica exception object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Exception_Abstract.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Exception_BulkResponse" id="Elastica_Exception_BulkResponse"></a><div class="element ajax clickable class" href="../classes/Elastica_Exception_BulkResponse.html">
+<h1>Elastica_Exception_BulkResponse<a href="../classes/Elastica_Exception_BulkResponse.html">¶</a>
+</h1>
+<p class="short_description">Bulk Response exception</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Exception_BulkResponse.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Exception_Client" id="Elastica_Exception_Client"></a><div class="element ajax clickable class" href="../classes/Elastica_Exception_Client.html">
+<h1>Elastica_Exception_Client<a href="../classes/Elastica_Exception_Client.html">¶</a>
+</h1>
+<p class="short_description">Client exception</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Exception_Client.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Exception_Invalid" id="Elastica_Exception_Invalid"></a><div class="element ajax clickable class" href="../classes/Elastica_Exception_Invalid.html">
+<h1>Elastica_Exception_Invalid<a href="../classes/Elastica_Exception_Invalid.html">¶</a>
+</h1>
+<p class="short_description">Invalid exception</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Exception_Invalid.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Exception_NotFound" id="Elastica_Exception_NotFound"></a><div class="element ajax clickable class" href="../classes/Elastica_Exception_NotFound.html">
+<h1>Elastica_Exception_NotFound<a href="../classes/Elastica_Exception_NotFound.html">¶</a>
+</h1>
+<p class="short_description">Not found exception</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Exception_NotFound.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Exception_NotImplemented" id="Elastica_Exception_NotImplemented"></a><div class="element ajax clickable class" href="../classes/Elastica_Exception_NotImplemented.html">
+<h1>Elastica_Exception_NotImplemented<a href="../classes/Elastica_Exception_NotImplemented.html">¶</a>
+</h1>
+<p class="short_description">Not implemented exception</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Exception_NotImplemented.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Exception_Response" id="Elastica_Exception_Response"></a><div class="element ajax clickable class" href="../classes/Elastica_Exception_Response.html">
+<h1>Elastica_Exception_Response<a href="../classes/Elastica_Exception_Response.html">¶</a>
+</h1>
+<p class="short_description">Response exception</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Exception_Response.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Facet_Abstract" id="Elastica_Facet_Abstract"></a><div class="element ajax clickable class" href="../classes/Elastica_Facet_Abstract.html">
+<h1>Elastica_Facet_Abstract<a href="../classes/Elastica_Facet_Abstract.html">¶</a>
+</h1>
+<p class="short_description">Abstract facet object. Should be extended by all facet types</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Facet_Abstract.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Facet_DateHistogram" id="Elastica_Facet_DateHistogram"></a><div class="element ajax clickable class" href="../classes/Elastica_Facet_DateHistogram.html">
+<h1>Elastica_Facet_DateHistogram<a href="../classes/Elastica_Facet_DateHistogram.html">¶</a>
+</h1>
+<p class="short_description">Implements the Date Histogram facet.</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Facet_DateHistogram.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Facet_GeoDistance" id="Elastica_Facet_GeoDistance"></a><div class="element ajax clickable class" href="../classes/Elastica_Facet_GeoDistance.html">
+<h1>Elastica_Facet_GeoDistance<a href="../classes/Elastica_Facet_GeoDistance.html">¶</a>
+</h1>
+<p class="short_description">Implements the Geo Distance facet.</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Facet_GeoDistance.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Facet_Histogram" id="Elastica_Facet_Histogram"></a><div class="element ajax clickable class" href="../classes/Elastica_Facet_Histogram.html">
+<h1>Elastica_Facet_Histogram<a href="../classes/Elastica_Facet_Histogram.html">¶</a>
+</h1>
+<p class="short_description">Implements the Histogram facet.</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Facet_Histogram.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Facet_Range" id="Elastica_Facet_Range"></a><div class="element ajax clickable class" href="../classes/Elastica_Facet_Range.html">
+<h1>Elastica_Facet_Range<a href="../classes/Elastica_Facet_Range.html">¶</a>
+</h1>
+<p class="short_description">Implements the range facet.</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Facet_Range.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Facet_Terms" id="Elastica_Facet_Terms"></a><div class="element ajax clickable class" href="../classes/Elastica_Facet_Terms.html">
+<h1>Elastica_Facet_Terms<a href="../classes/Elastica_Facet_Terms.html">¶</a>
+</h1>
+<p class="short_description">Implements the terms facet.</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Facet_Terms.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Abstract" id="Elastica_Filter_Abstract"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Abstract.html">
+<h1>Elastica_Filter_Abstract<a href="../classes/Elastica_Filter_Abstract.html">¶</a>
+</h1>
+<p class="short_description">Abstract filter object. Should be extended by all filter types</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Abstract.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_And" id="Elastica_Filter_And"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_And.html">
+<h1>Elastica_Filter_And<a href="../classes/Elastica_Filter_And.html">¶</a>
+</h1>
+<p class="short_description">And Filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_And.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Bool" id="Elastica_Filter_Bool"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Bool.html">
+<h1>Elastica_Filter_Bool<a href="../classes/Elastica_Filter_Bool.html">¶</a>
+</h1>
+<p class="short_description">Bool Filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Bool.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Exists" id="Elastica_Filter_Exists"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Exists.html">
+<h1>Elastica_Filter_Exists<a href="../classes/Elastica_Filter_Exists.html">¶</a>
+</h1>
+<p class="short_description">Exists query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Exists.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_GeoBoundingBox" id="Elastica_Filter_GeoBoundingBox"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_GeoBoundingBox.html">
+<h1>Elastica_Filter_GeoBoundingBox<a href="../classes/Elastica_Filter_GeoBoundingBox.html">¶</a>
+</h1>
+<p class="short_description">Geo bounding box filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_GeoBoundingBox.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_GeoDistance" id="Elastica_Filter_GeoDistance"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_GeoDistance.html">
+<h1>Elastica_Filter_GeoDistance<a href="../classes/Elastica_Filter_GeoDistance.html">¶</a>
+</h1>
+<p class="short_description">Geo distance filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_GeoDistance.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_GeoPolygon" id="Elastica_Filter_GeoPolygon"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_GeoPolygon.html">
+<h1>Elastica_Filter_GeoPolygon<a href="../classes/Elastica_Filter_GeoPolygon.html">¶</a>
+</h1>
+<p class="short_description">Geo polygon filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_GeoPolygon.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_HasChild" id="Elastica_Filter_HasChild"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_HasChild.html">
+<h1>Elastica_Filter_HasChild<a href="../classes/Elastica_Filter_HasChild.html">¶</a>
+</h1>
+<p class="short_description">Returns parent documents having child docs matching the query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_HasChild.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Ids" id="Elastica_Filter_Ids"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Ids.html">
+<h1>Elastica_Filter_Ids<a href="../classes/Elastica_Filter_Ids.html">¶</a>
+</h1>
+<p class="short_description">Ids Filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Ids.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Missing" id="Elastica_Filter_Missing"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Missing.html">
+<h1>Elastica_Filter_Missing<a href="../classes/Elastica_Filter_Missing.html">¶</a>
+</h1>
+<p class="short_description">Missing Filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Missing.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Nested" id="Elastica_Filter_Nested"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Nested.html">
+<h1>Elastica_Filter_Nested<a href="../classes/Elastica_Filter_Nested.html">¶</a>
+</h1>
+<p class="short_description">Nested filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Nested.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Not" id="Elastica_Filter_Not"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Not.html">
+<h1>Elastica_Filter_Not<a href="../classes/Elastica_Filter_Not.html">¶</a>
+</h1>
+<p class="short_description">Not Filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Not.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Or" id="Elastica_Filter_Or"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Or.html">
+<h1>Elastica_Filter_Or<a href="../classes/Elastica_Filter_Or.html">¶</a>
+</h1>
+<p class="short_description">Or Filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Or.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Prefix" id="Elastica_Filter_Prefix"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Prefix.html">
+<h1>Elastica_Filter_Prefix<a href="../classes/Elastica_Filter_Prefix.html">¶</a>
+</h1>
+<p class="short_description">Prefix filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Prefix.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Query" id="Elastica_Filter_Query"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Query.html">
+<h1>Elastica_Filter_Query<a href="../classes/Elastica_Filter_Query.html">¶</a>
+</h1>
+<p class="short_description">Query filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Query.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Range" id="Elastica_Filter_Range"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Range.html">
+<h1>Elastica_Filter_Range<a href="../classes/Elastica_Filter_Range.html">¶</a>
+</h1>
+<p class="short_description">Range Filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Range.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Script" id="Elastica_Filter_Script"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Script.html">
+<h1>Elastica_Filter_Script<a href="../classes/Elastica_Filter_Script.html">¶</a>
+</h1>
+<p class="short_description">Script filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Script.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Term" id="Elastica_Filter_Term"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Term.html">
+<h1>Elastica_Filter_Term<a href="../classes/Elastica_Filter_Term.html">¶</a>
+</h1>
+<p class="short_description">Term query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Term.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Terms" id="Elastica_Filter_Terms"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Terms.html">
+<h1>Elastica_Filter_Terms<a href="../classes/Elastica_Filter_Terms.html">¶</a>
+</h1>
+<p class="short_description">Terms filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Terms.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Filter_Type" id="Elastica_Filter_Type"></a><div class="element ajax clickable class" href="../classes/Elastica_Filter_Type.html">
+<h1>Elastica_Filter_Type<a href="../classes/Elastica_Filter_Type.html">¶</a>
+</h1>
+<p class="short_description">Type Filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Filter_Type.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Index" id="Elastica_Index"></a><div class="element ajax clickable class" href="../classes/Elastica_Index.html">
+<h1>Elastica_Index<a href="../classes/Elastica_Index.html">¶</a>
+</h1>
+<p class="short_description">Elastica index object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Index.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Index_Settings" id="Elastica_Index_Settings"></a><div class="element ajax clickable class" href="../classes/Elastica_Index_Settings.html">
+<h1>Elastica_Index_Settings<a href="../classes/Elastica_Index_Settings.html">¶</a>
+</h1>
+<p class="short_description">Elastica index settings object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Index_Settings.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Index_Stats" id="Elastica_Index_Stats"></a><div class="element ajax clickable class" href="../classes/Elastica_Index_Stats.html">
+<h1>Elastica_Index_Stats<a href="../classes/Elastica_Index_Stats.html">¶</a>
+</h1>
+<p class="short_description">Elastica index stats object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Index_Stats.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Index_Status" id="Elastica_Index_Status"></a><div class="element ajax clickable class" href="../classes/Elastica_Index_Status.html">
+<h1>Elastica_Index_Status<a href="../classes/Elastica_Index_Status.html">¶</a>
+</h1>
+<p class="short_description">Elastica index status object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Index_Status.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Log" id="Elastica_Log"></a><div class="element ajax clickable class" href="../classes/Elastica_Log.html">
+<h1>Elastica_Log<a href="../classes/Elastica_Log.html">¶</a>
+</h1>
+<p class="short_description">Elastica log object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Log.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Node" id="Elastica_Node"></a><div class="element ajax clickable class" href="../classes/Elastica_Node.html">
+<h1>Elastica_Node<a href="../classes/Elastica_Node.html">¶</a>
+</h1>
+<p class="short_description">Elastica cluster node object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Node.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Node_Info" id="Elastica_Node_Info"></a><div class="element ajax clickable class" href="../classes/Elastica_Node_Info.html">
+<h1>Elastica_Node_Info<a href="../classes/Elastica_Node_Info.html">¶</a>
+</h1>
+<p class="short_description">Elastica cluster node object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Node_Info.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Node_Stats" id="Elastica_Node_Stats"></a><div class="element ajax clickable class" href="../classes/Elastica_Node_Stats.html">
+<h1>Elastica_Node_Stats<a href="../classes/Elastica_Node_Stats.html">¶</a>
+</h1>
+<p class="short_description">Elastica cluster node object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Node_Stats.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Param" id="Elastica_Param"></a><div class="element ajax clickable class" href="../classes/Elastica_Param.html">
+<h1>Elastica_Param<a href="../classes/Elastica_Param.html">¶</a>
+</h1>
+<p class="short_description">Class to handle params</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Param.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Percolator" id="Elastica_Percolator"></a><div class="element ajax clickable class" href="../classes/Elastica_Percolator.html">
+<h1>Elastica_Percolator<a href="../classes/Elastica_Percolator.html">¶</a>
+</h1>
+<p class="short_description">Percolator class</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Percolator.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query" id="Elastica_Query"></a><div class="element ajax clickable class" href="../classes/Elastica_Query.html">
+<h1>Elastica_Query<a href="../classes/Elastica_Query.html">¶</a>
+</h1>
+<p class="short_description">Elastica query object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Abstract" id="Elastica_Query_Abstract"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Abstract.html">
+<h1>Elastica_Query_Abstract<a href="../classes/Elastica_Query_Abstract.html">¶</a>
+</h1>
+<p class="short_description">Abstract query object. Should be extended by all query types.</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Abstract.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Array" id="Elastica_Query_Array"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Array.html">
+<h1>Elastica_Query_Array<a href="../classes/Elastica_Query_Array.html">¶</a>
+</h1>
+<p class="short_description">Array query
+Pure php array query. Can be used to create any not existing type of query.</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Array.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Bool" id="Elastica_Query_Bool"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Bool.html">
+<h1>Elastica_Query_Bool<a href="../classes/Elastica_Query_Bool.html">¶</a>
+</h1>
+<p class="short_description">Bool query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Bool.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Builder" id="Elastica_Query_Builder"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Builder.html">
+<h1>Elastica_Query_Builder<a href="../classes/Elastica_Query_Builder.html">¶</a>
+</h1>
+<p class="short_description">Query Builder.</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Builder.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_ConstantScore" id="Elastica_Query_ConstantScore"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_ConstantScore.html">
+<h1>Elastica_Query_ConstantScore<a href="../classes/Elastica_Query_ConstantScore.html">¶</a>
+</h1>
+<p class="short_description">Constant score query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_ConstantScore.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_CustomFiltersScore" id="Elastica_Query_CustomFiltersScore"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_CustomFiltersScore.html">
+<h1>Elastica_Query_CustomFiltersScore<a href="../classes/Elastica_Query_CustomFiltersScore.html">¶</a>
+</h1>
+<p class="short_description">Custom filtered score query. Needs a query and array of filters, with boosts</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_CustomFiltersScore.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_CustomScore" id="Elastica_Query_CustomScore"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_CustomScore.html">
+<h1>Elastica_Query_CustomScore<a href="../classes/Elastica_Query_CustomScore.html">¶</a>
+</h1>
+<p class="short_description">Custom score query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_CustomScore.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Field" id="Elastica_Query_Field"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Field.html">
+<h1>Elastica_Query_Field<a href="../classes/Elastica_Query_Field.html">¶</a>
+</h1>
+<p class="short_description">Field query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Field.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Filtered" id="Elastica_Query_Filtered"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Filtered.html">
+<h1>Elastica_Query_Filtered<a href="../classes/Elastica_Query_Filtered.html">¶</a>
+</h1>
+<p class="short_description">Filtered query. Needs a query and a filter</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Filtered.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Fuzzy" id="Elastica_Query_Fuzzy"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Fuzzy.html">
+<h1>Elastica_Query_Fuzzy<a href="../classes/Elastica_Query_Fuzzy.html">¶</a>
+</h1>
+<p class="short_description">Fuzzy query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Fuzzy.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_FuzzyLikeThis" id="Elastica_Query_FuzzyLikeThis"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_FuzzyLikeThis.html">
+<h1>Elastica_Query_FuzzyLikeThis<a href="../classes/Elastica_Query_FuzzyLikeThis.html">¶</a>
+</h1>
+<p class="short_description">Fuzzy Like This query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_FuzzyLikeThis.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_HasChild" id="Elastica_Query_HasChild"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_HasChild.html">
+<h1>Elastica_Query_HasChild<a href="../classes/Elastica_Query_HasChild.html">¶</a>
+</h1>
+<p class="short_description">Returns parent documents having child docs matching the query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_HasChild.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Ids" id="Elastica_Query_Ids"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Ids.html">
+<h1>Elastica_Query_Ids<a href="../classes/Elastica_Query_Ids.html">¶</a>
+</h1>
+<p class="short_description">Ids Query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Ids.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_MatchAll" id="Elastica_Query_MatchAll"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_MatchAll.html">
+<h1>Elastica_Query_MatchAll<a href="../classes/Elastica_Query_MatchAll.html">¶</a>
+</h1>
+<p class="short_description">Match all query. Returns all results</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_MatchAll.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_MoreLikeThis" id="Elastica_Query_MoreLikeThis"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_MoreLikeThis.html">
+<h1>Elastica_Query_MoreLikeThis<a href="../classes/Elastica_Query_MoreLikeThis.html">¶</a>
+</h1>
+<p class="short_description">More Like This query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_MoreLikeThis.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Nested" id="Elastica_Query_Nested"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Nested.html">
+<h1>Elastica_Query_Nested<a href="../classes/Elastica_Query_Nested.html">¶</a>
+</h1>
+<p class="short_description">Nested query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Nested.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_QueryString" id="Elastica_Query_QueryString"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_QueryString.html">
+<h1>Elastica_Query_QueryString<a href="../classes/Elastica_Query_QueryString.html">¶</a>
+</h1>
+<p class="short_description">QueryString query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_QueryString.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Range" id="Elastica_Query_Range"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Range.html">
+<h1>Elastica_Query_Range<a href="../classes/Elastica_Query_Range.html">¶</a>
+</h1>
+<p class="short_description">Range query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Range.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Term" id="Elastica_Query_Term"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Term.html">
+<h1>Elastica_Query_Term<a href="../classes/Elastica_Query_Term.html">¶</a>
+</h1>
+<p class="short_description">Term query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Term.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Terms" id="Elastica_Query_Terms"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Terms.html">
+<h1>Elastica_Query_Terms<a href="../classes/Elastica_Query_Terms.html">¶</a>
+</h1>
+<p class="short_description">Terms query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Terms.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Text" id="Elastica_Query_Text"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Text.html">
+<h1>Elastica_Query_Text<a href="../classes/Elastica_Query_Text.html">¶</a>
+</h1>
+<p class="short_description">Text query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Text.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_TopChildren" id="Elastica_Query_TopChildren"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_TopChildren.html">
+<h1>Elastica_Query_TopChildren<a href="../classes/Elastica_Query_TopChildren.html">¶</a>
+</h1>
+<p class="short_description">Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_TopChildren.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Query_Wildcard" id="Elastica_Query_Wildcard"></a><div class="element ajax clickable class" href="../classes/Elastica_Query_Wildcard.html">
+<h1>Elastica_Query_Wildcard<a href="../classes/Elastica_Query_Wildcard.html">¶</a>
+</h1>
+<p class="short_description">Wildcard query</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Query_Wildcard.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Request" id="Elastica_Request"></a><div class="element ajax clickable class" href="../classes/Elastica_Request.html">
+<h1>Elastica_Request<a href="../classes/Elastica_Request.html">¶</a>
+</h1>
+<p class="short_description">Elastica Request object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Request.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Response" id="Elastica_Response"></a><div class="element ajax clickable class" href="../classes/Elastica_Response.html">
+<h1>Elastica_Response<a href="../classes/Elastica_Response.html">¶</a>
+</h1>
+<p class="short_description">Elastica Response object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Response.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Result" id="Elastica_Result"></a><div class="element ajax clickable class" href="../classes/Elastica_Result.html">
+<h1>Elastica_Result<a href="../classes/Elastica_Result.html">¶</a>
+</h1>
+<p class="short_description">Elastica result item</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Result.html" class="more">« More »</a>
+</div>
+<a name="Elastica_ResultSet" id="Elastica_ResultSet"></a><div class="element ajax clickable class" href="../classes/Elastica_ResultSet.html">
+<h1>Elastica_ResultSet<a href="../classes/Elastica_ResultSet.html">¶</a>
+</h1>
+<p class="short_description">Elastica result set</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_ResultSet.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Search" id="Elastica_Search"></a><div class="element ajax clickable class" href="../classes/Elastica_Search.html">
+<h1>Elastica_Search<a href="../classes/Elastica_Search.html">¶</a>
+</h1>
+<p class="short_description">Elastica search object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Search.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Status" id="Elastica_Status"></a><div class="element ajax clickable class" href="../classes/Elastica_Status.html">
+<h1>Elastica_Status<a href="../classes/Elastica_Status.html">¶</a>
+</h1>
+<p class="short_description">Elastica general status</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Status.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Transport_Abstract" id="Elastica_Transport_Abstract"></a><div class="element ajax clickable class" href="../classes/Elastica_Transport_Abstract.html">
+<h1>Elastica_Transport_Abstract<a href="../classes/Elastica_Transport_Abstract.html">¶</a>
+</h1>
+<p class="short_description">Elastica Abstract Transport object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Transport_Abstract.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Transport_Http" id="Elastica_Transport_Http"></a><div class="element ajax clickable class" href="../classes/Elastica_Transport_Http.html">
+<h1>Elastica_Transport_Http<a href="../classes/Elastica_Transport_Http.html">¶</a>
+</h1>
+<p class="short_description">Elastica Http Transport object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Transport_Http.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Transport_Https" id="Elastica_Transport_Https"></a><div class="element ajax clickable class" href="../classes/Elastica_Transport_Https.html">
+<h1>Elastica_Transport_Https<a href="../classes/Elastica_Transport_Https.html">¶</a>
+</h1>
+<p class="short_description">Elastica Http Transport object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Transport_Https.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Transport_Memcache" id="Elastica_Transport_Memcache"></a><div class="element ajax clickable class" href="../classes/Elastica_Transport_Memcache.html">
+<h1>Elastica_Transport_Memcache<a href="../classes/Elastica_Transport_Memcache.html">¶</a>
+</h1>
+<p class="short_description">Elastica Memcache Transport object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Transport_Memcache.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Type" id="Elastica_Type"></a><div class="element ajax clickable class" href="../classes/Elastica_Type.html">
+<h1>Elastica_Type<a href="../classes/Elastica_Type.html">¶</a>
+</h1>
+<p class="short_description">Elastica type object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Type.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Type_Abstract" id="Elastica_Type_Abstract"></a><div class="element ajax clickable class" href="../classes/Elastica_Type_Abstract.html">
+<h1>Elastica_Type_Abstract<a href="../classes/Elastica_Type_Abstract.html">¶</a>
+</h1>
+<p class="short_description">Abstract helper class to implement search indices based on models.</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Type_Abstract.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Type_Mapping" id="Elastica_Type_Mapping"></a><div class="element ajax clickable class" href="../classes/Elastica_Type_Mapping.html">
+<h1>Elastica_Type_Mapping<a href="../classes/Elastica_Type_Mapping.html">¶</a>
+</h1>
+<p class="short_description">Elastica Mapping object</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Type_Mapping.html" class="more">« More »</a>
+</div>
+<a name="Elastica_Util" id="Elastica_Util"></a><div class="element ajax clickable class" href="../classes/Elastica_Util.html">
+<h1>Elastica_Util<a href="../classes/Elastica_Util.html">¶</a>
+</h1>
+<p class="short_description">Elastica tools</p>
+<div class="details collapse"></div>
+<a href="../classes/Elastica_Util.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+</div>
+</body>
+</html>

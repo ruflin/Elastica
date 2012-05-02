@@ -1,0 +1,228 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica » \Elastica_Util</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#convertDate" title="convertDate :: Converts given time to format: 1995-12-31T23:59:59Z"><span class="description">Converts given time to format: 1995-12-31T23:59:59Z</span><pre>convertDate()</pre></a></li>
+<li class="method public "><a href="#escapeTerm" title='escapeTerm :: Escapes the following terms (because part of the query language)
++ - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \'><span class="description">Escapes the following terms (because part of the query language)
++ - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \</span><pre>escapeTerm()</pre></a></li>
+<li class="method public "><a href="#replaceBooleanWords" title="replaceBooleanWords :: Replace the following reserved words (because part of the query language)
+AND OR NOT"><span class="description">Replace the following reserved words (because part of the query language)
+AND OR NOT</span><pre>replaceBooleanWords()</pre></a></li>
+<li class="method public "><a href="#replaceBooleanWordsAndEscapeTerm" title='replaceBooleanWordsAndEscapeTerm :: Replace the following reserved words: AND OR NOT
+and
+escapes the following terms: + - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \'><span class="description">Replace the following reserved words: AND OR NOT
+and
+escapes the following terms: + - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \</span><pre>replaceBooleanWordsAndEscapeTerm()</pre></a></li>
+<li class="method public "><a href="#toCamelCase" title="toCamelCase :: Converts a snake_case string to CamelCase"><span class="description">Converts a snake_case string to CamelCase</span><pre>toCamelCase()</pre></a></li>
+<li class="method public "><a href="#toSnakeCase" title="toSnakeCase :: Converts a CamelCase string to snake_case"><span class="description">Converts a CamelCase string to snake_case</span><pre>toSnakeCase()</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CElastica_Util" id="\Elastica_Util"></a><div href="../classes/Elastica_Util.html" class="element class">
+<p class="short_description">Elastica tools</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Xodoa</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/Elastica.html">Elastica</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:spam@ruflin.com">Nicolas Ruflin</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:thibault.duplessis@gmail.com">Thibault Duplessis</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:olegz@default-value.com">Oleg Zinchenko</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="convertDate" id="convertDate"></a><div class="element clickable method public convertDate" data-toggle="collapse" data-target=".convertDate .collapse">
+<h2>Converts given time to format: 1995-12-31T23:59:59Z</h2>
+<pre>convertDate(int $date) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>This is the lucene date format</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$date</h4>
+<code>int</code><p>Date input (could be string etc.) -> must be supported by strtotime</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Converted date string</div>
+</div></div>
+</div>
+<a name="escapeTerm" id="escapeTerm"></a><div class="element clickable method public escapeTerm" data-toggle="collapse" data-target=".escapeTerm .collapse">
+<h2>Escapes the following terms (because part of the query language)
++ - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \</h2>
+<pre>escapeTerm(string $term) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters">http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$term</h4>
+<code>string</code><p>Query term to escape</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Escaped query term</div>
+</div></div>
+</div>
+<a name="replaceBooleanWords" id="replaceBooleanWords"></a><div class="element clickable method public replaceBooleanWords" data-toggle="collapse" data-target=".replaceBooleanWords .collapse">
+<h2>Replace the following reserved words (because part of the query language)
+AND OR NOT</h2>
+<pre>replaceBooleanWords(string $term) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators">http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$term</h4>
+<code>string</code><p>Query term to replace</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Replaced query term</div>
+</div></div>
+</div>
+<a name="replaceBooleanWordsAndEscapeTerm" id="replaceBooleanWordsAndEscapeTerm"></a><div class="element clickable method public replaceBooleanWordsAndEscapeTerm" data-toggle="collapse" data-target=".replaceBooleanWordsAndEscapeTerm .collapse">
+<h2>Replace the following reserved words: AND OR NOT
+and
+escapes the following terms: + - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \</h2>
+<pre>replaceBooleanWordsAndEscapeTerm(string $term) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>link</th>
+<td><a href="http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators">http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators</a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters">http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters</a></td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$term</h4>
+<code>string</code><p>Query term to replare and escape</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Replaced and escaped query term</div>
+</div></div>
+</div>
+<a name="toCamelCase" id="toCamelCase"></a><div class="element clickable method public toCamelCase" data-toggle="collapse" data-target=".toCamelCase .collapse">
+<h2>Converts a snake_case string to CamelCase</h2>
+<pre>toCamelCase(string $string) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>For example: hello_world to HelloWorld</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code><p>snake_case string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>CamelCase string</div>
+</div></div>
+</div>
+<a name="toSnakeCase" id="toSnakeCase"></a><div class="element clickable method public toSnakeCase" data-toggle="collapse" data-target=".toSnakeCase .collapse">
+<h2>Converts a CamelCase string to snake_case</h2>
+<pre>toSnakeCase(string $string) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>For Example HelloWorld to hello_world</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code><p>CamelCase String to Convert</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>SnakeCase string</div>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+</div>
+</body>
+</html>

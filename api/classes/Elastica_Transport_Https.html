@@ -1,0 +1,298 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica » \Elastica_Transport_Https</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public inherited"><a href="#__construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public inherited"><a href="#exec" title="exec :: Makes calls to the elasticsearch server"><span class="description">Makes calls to the elasticsearch server</span><pre>exec()</pre></a></li>
+<li class="method public inherited"><a href="#getRequest" title="getRequest :: Returns the request object"><span class="description">Returns the request object</span><pre>getRequest()</pre></a></li>
+<li class="nav-header protected">» Protected</li>
+<li class="method protected inherited"><a href="#_getConnection" title="_getConnection :: "><span class="description">_getConnection()
+        </span><pre>_getConnection()</pre></a></li>
+<li class="method protected "><a href="#_setupCurl" title="_setupCurl :: Overloads setupCurl to set SSL params"><span class="description">Overloads setupCurl to set SSL params</span><pre>_setupCurl()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected inherited"><a href="#%24_config" title="$_config :: "><span class="description">$_config</span><pre>$_config</pre></a></li>
+<li class="property protected inherited"><a href="#%24_connection" title="$_connection :: "><span class="description">Curl resource to reuse</span><pre>$_connection</pre></a></li>
+<li class="property protected inherited"><a href="#%24_data" title="$_data :: "><span class="description">$_data</span><pre>$_data</pre></a></li>
+<li class="property protected inherited"><a href="#%24_method" title="$_method :: "><span class="description">$_method</span><pre>$_method</pre></a></li>
+<li class="property protected inherited"><a href="#%24_path" title="$_path :: "><span class="description">$_path</span><pre>$_path</pre></a></li>
+<li class="property protected "><a href="#%24_scheme" title="$_scheme :: "><span class="description">https scheme</span><pre>$_scheme</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CElastica_Transport_Https" id="\Elastica_Transport_Https"></a><div href="../classes/Elastica_Transport_Https.html" class="element class">
+<p class="short_description">Elastica Http Transport object</p>
+<div class="details">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Xodoa</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/Elastica.html">Elastica</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:spam@ruflin.com">Nicolas Ruflin</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct(Elastica_Request $request) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Abstract::__construct()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Http::__construct()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$request</h4>
+<code><a href="../classes/Elastica_Request.html">\Elastica_Request</a></code><p>Request object</p></div>
+</div></div>
+</div>
+<a name="exec" id="exec"></a><div class="element clickable method public exec" data-toggle="collapse" data-target=".exec .collapse">
+<h2>Makes calls to the elasticsearch server</h2>
+<pre>exec(array $params) : <a href="../classes/Elastica_Response.html">\Elastica_Response</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>All calls that are made to the server are done through this function</p></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Http::exec()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$params</h4>
+<code></code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Response.html">\Elastica_Response</a></code>Response object</div>
+</div></div>
+</div>
+<a name="getRequest" id="getRequest"></a><div class="element clickable method public getRequest" data-toggle="collapse" data-target=".getRequest .collapse">
+<h2>Returns the request object</h2>
+<pre>getRequest() : <a href="../classes/Elastica_Request.html">\Elastica_Request</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Abstract::getRequest()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Http::getRequest()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Request.html">\Elastica_Request</a></code>Request object</div>
+</div></div>
+</div>
+<a name="_getConnection" id="_getConnection"></a><div class="element clickable method protected _getConnection" data-toggle="collapse" data-target="._getConnection .collapse">
+<h2>_getConnection()
+        </h2>
+<pre>_getConnection(bool $persistent) : resource</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Http::_getConnection()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$persistent</h4>
+<code>bool</code><p>False if not persistent connection</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>resource</code>Connection resource</div>
+</div></div>
+</div>
+<a name="_setupCurl" id="_setupCurl"></a><div class="element clickable method protected _setupCurl" data-toggle="collapse" data-target="._setupCurl .collapse">
+<h2>Overloads setupCurl to set SSL params</h2>
+<pre>_setupCurl(resource $connection) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$connection</h4>
+<code>resource</code><p>Curl connection resource</p></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_config" id="$_config"> </a><div class="element clickable property protected $_config" data-toggle="collapse" data-target=".$_config .collapse">
+<h2>$_config</h2>
+<pre>$_config </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Abstract::$$_config</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Http::$$_config</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a name="%24_connection" id="$_connection"> </a><div class="element clickable property protected $_connection" data-toggle="collapse" data-target=".$_connection .collapse">
+<h2>Curl resource to reuse</h2>
+<pre>$_connection : resource</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Http::$$_connection</td>
+</tr></table>
+</div></div>
+</div>
+<a name="%24_data" id="$_data"> </a><div class="element clickable property protected $_data" data-toggle="collapse" data-target=".$_data .collapse">
+<h2>$_data</h2>
+<pre>$_data </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Abstract::$$_data</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Http::$$_data</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a name="%24_method" id="$_method"> </a><div class="element clickable property protected $_method" data-toggle="collapse" data-target=".$_method .collapse">
+<h2>$_method</h2>
+<pre>$_method </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Abstract::$$_method</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Http::$$_method</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a name="%24_path" id="$_path"> </a><div class="element clickable property protected $_path" data-toggle="collapse" data-target=".$_path .collapse">
+<h2>$_path</h2>
+<pre>$_path </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Abstract::$$_path</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Elastica_Transport_Http::$$_path</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a name="%24_scheme" id="$_scheme"> </a><div class="element clickable property protected $_scheme" data-toggle="collapse" data-target=".$_scheme .collapse">
+<h2>https scheme</h2>
+<pre>$_scheme : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+</div>
+</body>
+</html>

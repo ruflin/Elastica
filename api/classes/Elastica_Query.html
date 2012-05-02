@@ -1,0 +1,620 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>Elastica » \Elastica_Query</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">Elastica</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Elastica.html"><i class="icon-folder-open"></i> Elastica</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">222</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">16</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">2</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods</li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates a query object"><span class="description">Creates a query object</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#addFacet" title="addFacet :: Adds a Facet to the query"><span class="description">Adds a Facet to the query</span><pre>addFacet()</pre></a></li>
+<li class="method public "><a href="#addHighlight" title="addHighlight :: Adds a highlight argument"><span class="description">Adds a highlight argument</span><pre>addHighlight()</pre></a></li>
+<li class="method public inherited"><a href="#addParam" title="addParam :: Adds a param to the list"><span class="description">Adds a param to the list</span><pre>addParam()</pre></a></li>
+<li class="method public "><a href="#addSort" title="addSort :: Adds a sort param to the query"><span class="description">Adds a sort param to the query</span><pre>addSort()</pre></a></li>
+<li class="method public "><a href="#create" title="create :: Transforms a string or an array to a query object"><span class="description">Transforms a string or an array to a query object</span><pre>create()</pre></a></li>
+<li class="method public inherited"><a href="#getParam" title="getParam :: Returns a specific param"><span class="description">Returns a specific param</span><pre>getParam()</pre></a></li>
+<li class="method public inherited"><a href="#getParams" title="getParams :: Returns the params array"><span class="description">Returns the params array</span><pre>getParams()</pre></a></li>
+<li class="method public "><a href="#getQuery" title="getQuery :: Gets the query array"><span class="description">Gets the query array</span><pre>getQuery()</pre></a></li>
+<li class="method public "><a href="#setExplain" title="setExplain :: Enables explain on the query"><span class="description">Enables explain on the query</span><pre>setExplain()</pre></a></li>
+<li class="method public "><a href="#setFacets" title="setFacets :: Sets all facets for this query object. Replaces existing facets"><span class="description">Sets all facets for this query object. Replaces existing facets</span><pre>setFacets()</pre></a></li>
+<li class="method public "><a href="#setFields" title="setFields :: Sets the fields to be returned by the search"><span class="description">Sets the fields to be returned by the search</span><pre>setFields()</pre></a></li>
+<li class="method public "><a href="#setFilter" title="setFilter :: "><span class="description">setFilter()
+        </span><pre>setFilter()</pre></a></li>
+<li class="method public "><a href="#setFrom" title="setFrom :: Sets the start from which the search results should be returned"><span class="description">Sets the start from which the search results should be returned</span><pre>setFrom()</pre></a></li>
+<li class="method public "><a href="#setHighlight" title="setHighlight :: Sets highlight arguments for the query"><span class="description">Sets highlight arguments for the query</span><pre>setHighlight()</pre></a></li>
+<li class="method public "><a href="#setLimit" title="setLimit :: Sets maximum number of results for this query"><span class="description">Sets maximum number of results for this query</span><pre>setLimit()</pre></a></li>
+<li class="method public "><a href="#setMinScore" title="setMinScore :: Allows filtering of documents based on a minimum score"><span class="description">Allows filtering of documents based on a minimum score</span><pre>setMinScore()</pre></a></li>
+<li class="method public inherited"><a href="#setParam" title="setParam :: Sets (overwrites) the value at the given key"><span class="description">Sets (overwrites) the value at the given key</span><pre>setParam()</pre></a></li>
+<li class="method public inherited"><a href="#setParams" title="setParams :: Sets (overwrites) all params of this object"><span class="description">Sets (overwrites) all params of this object</span><pre>setParams()</pre></a></li>
+<li class="method public "><a href="#setQuery" title="setQuery :: Sets the query"><span class="description">Sets the query</span><pre>setQuery()</pre></a></li>
+<li class="method public "><a href="#setRawQuery" title="setRawQuery :: Sets query as raw array. Will overwrite all already set arguments"><span class="description">Sets query as raw array. Will overwrite all already set arguments</span><pre>setRawQuery()</pre></a></li>
+<li class="method public "><a href="#setScriptFields" title="setScriptFields :: Set script fields"><span class="description">Set script fields</span><pre>setScriptFields()</pre></a></li>
+<li class="method public "><a href="#setSize" title="setSize :: Alias for setLimit"><span class="description">Alias for setLimit</span><pre>setSize()</pre></a></li>
+<li class="method public "><a href="#setSort" title="setSort :: Sets sort arguments for the query
+Replaces existing values"><span class="description">Sets sort arguments for the query
+Replaces existing values</span><pre>setSort()</pre></a></li>
+<li class="method public "><a href="#setVersion" title="setVersion :: Enables version on the query"><span class="description">Enables version on the query</span><pre>setVersion()</pre></a></li>
+<li class="method public "><a href="#toArray" title="toArray :: Converts all query params to an array"><span class="description">Converts all query params to an array</span><pre>toArray()</pre></a></li>
+<li class="nav-header protected">» Protected</li>
+<li class="method protected inherited"><a href="#_setRawParam" title="_setRawParam :: Sets params not inside params array"><span class="description">Sets params not inside params array</span><pre>_setRawParam()</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties</li>
+<li class="nav-header protected">» Protected</li>
+<li class="property protected "><a href="#%24_params" title="$_params :: Params"><span class="description">Params</span><pre>$_params</pre></a></li>
+<li class="property protected inherited"><a href="#%24_rawParams" title="$_rawParams :: "><span class="description">$_rawParams</span><pre>$_rawParams</pre></a></li>
+</ul>
+</div>
+<div class="span8">
+<a name="%5CElastica_Query" id="\Elastica_Query"></a><div href="../classes/Elastica_Query.html" class="element class">
+<p class="short_description">Elastica query object</p>
+<div class="details">
+<p class="long_description"><p>Creates different types of queries</p></p>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Xodoa</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="..//packages/Elastica.html">Elastica</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:spam@ruflin.com">Nicolas Ruflin</a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
+<h2>Creates a query object</h2>
+<pre>__construct(array | <a href="../classes/Elastica_Query_Abstract.html">\Elastica_Query_Abstract</a> $query) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>array<a href="../classes/Elastica_Query_Abstract.html">\Elastica_Query_Abstract</a></code><p>OPTIONAL Query object (default = null)</p>
+</div>
+</div></div>
+</div>
+<a name="addFacet" id="addFacet"></a><div class="element clickable method public addFacet" data-toggle="collapse" data-target=".addFacet .collapse">
+<h2>Adds a Facet to the query</h2>
+<pre>addFacet(Elastica_Facet_Abstract $facet) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$facet</h4>
+<code><a href="../classes/Elastica_Facet_Abstract.html">\Elastica_Facet_Abstract</a></code><p>Facet object</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="addHighlight" id="addHighlight"></a><div class="element clickable method public addHighlight" data-toggle="collapse" data-target=".addHighlight .collapse">
+<h2>Adds a highlight argument</h2>
+<pre>addHighlight(mixed $highlight) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/highlighting/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/highlighting/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$highlight</h4>
+<code>mixed</code><p>Add highlight argument</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="addParam" id="addParam"></a><div class="element clickable method public addParam" data-toggle="collapse" data-target=".addParam .collapse">
+<h2>Adds a param to the list</h2>
+<pre>addParam(string $key, mixed $value) : <a href="../classes/Elastica_Param.html">\Elastica_Param</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>This function can be used to add an array of params</p></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::addParam()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>Param key</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Value to set</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Param.html">\Elastica_Param</a></code></div>
+</div></div>
+</div>
+<a name="addSort" id="addSort"></a><div class="element clickable method public addSort" data-toggle="collapse" data-target=".addSort .collapse">
+<h2>Adds a sort param to the query</h2>
+<pre>addSort(mixed $sort) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.org/guide/reference/api/search/sort.html">http://www.elasticsearch.org/guide/reference/api/search/sort.html</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sort</h4>
+<code>mixed</code><p>Sort parameter</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="create" id="create"></a><div class="element clickable method public create" data-toggle="collapse" data-target=".create .collapse">
+<h2>Transforms a string or an array to a query object</h2>
+<pre>create(mixed $query) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>If query is empty,</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code></div>
+</div></div>
+</div>
+<a name="getParam" id="getParam"></a><div class="element clickable method public getParam" data-toggle="collapse" data-target=".getParam .collapse">
+<h2>Returns a specific param</h2>
+<pre>getParam(string $key) : mixed</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::getParam()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>Key to return</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/Elastica_Exception_Invalid.html">\Elastica_Exception_Invalid</a></code></th>
+<td>If requested key is not set</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>Key value</div>
+</div></div>
+</div>
+<a name="getParams" id="getParams"></a><div class="element clickable method public getParams" data-toggle="collapse" data-target=".getParams .collapse">
+<h2>Returns the params array</h2>
+<pre>getParams() : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::getParams()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Params</div>
+</div></div>
+</div>
+<a name="getQuery" id="getQuery"></a><div class="element clickable method public getQuery" data-toggle="collapse" data-target=".getQuery .collapse">
+<h2>Gets the query array</h2>
+<pre>getQuery() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a name="setExplain" id="setExplain"></a><div class="element clickable method public setExplain" data-toggle="collapse" data-target=".setExplain .collapse">
+<h2>Enables explain on the query</h2>
+<pre>setExplain(bool $explain) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/explain/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/explain/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$explain</h4>
+<code>bool</code><p>OPTIONAL Enabled or disable explain (default = true)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Current object</div>
+</div></div>
+</div>
+<a name="setFacets" id="setFacets"></a><div class="element clickable method public setFacets" data-toggle="collapse" data-target=".setFacets .collapse">
+<h2>Sets all facets for this query object. Replaces existing facets</h2>
+<pre>setFacets(array $facets) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/facets">http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/facets</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$facets</h4>
+<code>array</code><p>List of facet objects</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="setFields" id="setFields"></a><div class="element clickable method public setFields" data-toggle="collapse" data-target=".setFields .collapse">
+<h2>Sets the fields to be returned by the search</h2>
+<pre>setFields(array $fields) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/fields/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/fields/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$fields</h4>
+<code>array</code><p>Fields to be returne</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Current object</div>
+</div></div>
+</div>
+<a name="setFilter" id="setFilter"></a><div class="element clickable method public setFilter" data-toggle="collapse" data-target=".setFilter .collapse">
+<h2>setFilter()
+        </h2>
+<pre>setFilter(Elastica_Filter_Abstract $filter) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filter</h4>
+<code><a href="../classes/Elastica_Filter_Abstract.html">\Elastica_Filter_Abstract</a></code><p>Filter object</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Current object</div>
+</div></div>
+</div>
+<a name="setFrom" id="setFrom"></a><div class="element clickable method public setFrom" data-toggle="collapse" data-target=".setFrom .collapse">
+<h2>Sets the start from which the search results should be returned</h2>
+<pre>setFrom(int $from) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$from</h4>
+<code>int</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="setHighlight" id="setHighlight"></a><div class="element clickable method public setHighlight" data-toggle="collapse" data-target=".setHighlight .collapse">
+<h2>Sets highlight arguments for the query</h2>
+<pre>setHighlight(array $highlightArgs) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.org/guide/reference/api/search/highlighting.html">http://www.elasticsearch.org/guide/reference/api/search/highlighting.html</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$highlightArgs</h4>
+<code>array</code><p>Set all highlight arguments</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="setLimit" id="setLimit"></a><div class="element clickable method public setLimit" data-toggle="collapse" data-target=".setLimit .collapse">
+<h2>Sets maximum number of results for this query</h2>
+<pre>setLimit(int $limit) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"><p>Setting the limit to 0, means no limit</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>OPTIONAL Maximal number of results for query (default = 10)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="setMinScore" id="setMinScore"></a><div class="element clickable method public setMinScore" data-toggle="collapse" data-target=".setMinScore .collapse">
+<h2>Allows filtering of documents based on a minimum score</h2>
+<pre>setMinScore(int | double $minScore) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$minScore</h4>
+<code>intdouble</code><p>Minimum score to filter documents by</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="setParam" id="setParam"></a><div class="element clickable method public setParam" data-toggle="collapse" data-target=".setParam .collapse">
+<h2>Sets (overwrites) the value at the given key</h2>
+<pre>setParam(string $key, mixed $value) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::setParam()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>Key to set</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Key Value</p></div>
+</div></div>
+</div>
+<a name="setParams" id="setParams"></a><div class="element clickable method public setParams" data-toggle="collapse" data-target=".setParams .collapse">
+<h2>Sets (overwrites) all params of this object</h2>
+<pre>setParams(array $params) : <a href="../classes/Elastica_Param.html">\Elastica_Param</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::setParams()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Parameter list</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Param.html">\Elastica_Param</a></code></div>
+</div></div>
+</div>
+<a name="setQuery" id="setQuery"></a><div class="element clickable method public setQuery" data-toggle="collapse" data-target=".setQuery .collapse">
+<h2>Sets the query</h2>
+<pre>setQuery(Elastica_Query_Abstract $query) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query</h4>
+<code><a href="../classes/Elastica_Query_Abstract.html">\Elastica_Query_Abstract</a></code><p>Query object</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="setRawQuery" id="setRawQuery"></a><div class="element clickable method public setRawQuery" data-toggle="collapse" data-target=".setRawQuery .collapse">
+<h2>Sets query as raw array. Will overwrite all already set arguments</h2>
+<pre>setRawQuery(array $query) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>array</code><p>Query array</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="setScriptFields" id="setScriptFields"></a><div class="element clickable method public setScriptFields" data-toggle="collapse" data-target=".setScriptFields .collapse">
+<h2>Set script fields</h2>
+<pre>setScriptFields(array $scriptFields) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/script_fields/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/script_fields/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$scriptFields</h4>
+<code>array</code><p>Script fields</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Current object</div>
+</div></div>
+</div>
+<a name="setSize" id="setSize"></a><div class="element clickable method public setSize" data-toggle="collapse" data-target=".setSize .collapse">
+<h2>Alias for setLimit</h2>
+<pre>setSize(int $limit) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>OPTIONAL Maximal number of results for query (default = 10)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="setSort" id="setSort"></a><div class="element clickable method public setSort" data-toggle="collapse" data-target=".setSort .collapse">
+<h2>Sets sort arguments for the query
+Replaces existing values</h2>
+<pre>setSort(array $sortArgs) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.org/guide/reference/api/search/sort.html">http://www.elasticsearch.org/guide/reference/api/search/sort.html</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$sortArgs</h4>
+<code>array</code><p>Sorting arguments</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Query object</div>
+</div></div>
+</div>
+<a name="setVersion" id="setVersion"></a><div class="element clickable method public setVersion" data-toggle="collapse" data-target=".setVersion .collapse">
+<h2>Enables version on the query</h2>
+<pre>setVersion(bool $version) : <a href="../classes/Elastica_Query.html">\Elastica_Query</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>link</th>
+<td><a href="http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/version/">http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/version/</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$version</h4>
+<code>bool</code><p>OPTIONAL Enabled or disable version (default = true)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Elastica_Query.html">\Elastica_Query</a></code>Current object</div>
+</div></div>
+</div>
+<a name="toArray" id="toArray"></a><div class="element clickable method public toArray" data-toggle="collapse" data-target=".toArray .collapse">
+<h2>Converts all query params to an array</h2>
+<pre>toArray() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Query array</div>
+</div></div>
+</div>
+<a name="_setRawParam" id="_setRawParam"></a><div class="element clickable method protected _setRawParam" data-toggle="collapse" data-target="._setRawParam .collapse">
+<h2>Sets params not inside params array</h2>
+<pre>_setRawParam(string $key, mixed $value) : <a href="../classes/Elastica_Param.html">\Elastica_Param</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::_setRawParam()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Elastica_Param.html">\Elastica_Param</a></code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a name="%24_params" id="$_params"> </a><div class="element clickable property protected $_params" data-toggle="collapse" data-target=".$_params .collapse">
+<h2>Params</h2>
+<pre>$_params : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
+<a name="%24_rawParams" id="$_rawParams"> </a><div class="element clickable property protected $_rawParams" data-toggle="collapse" data-target=".$_rawParams .collapse">
+<h2>$_rawParams</h2>
+<pre>$_rawParams </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Elastica_Param::$$_rawParams</td>
+</tr></table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
+            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+</div>
+</body>
+</html>
