@@ -49,6 +49,7 @@ class Elastica_Client
 		'curl' => array(),
 		'roundRobin' => false,
 		'log' => false,
+		'retryOnConflict' => 0,
 	);
 
 	/**

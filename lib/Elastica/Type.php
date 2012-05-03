@@ -72,6 +72,27 @@ class Elastica_Type implements Elastica_Searchable {
 		return $this->request($path, $type, $doc->getData(), $query);
 	}
 
+
+	/**
+	 * Update document, using update script. Requires elasticsearch >= 0.19.0
+	 *
+	 * @link http://www.elasticsearch.org/guide/reference/api/update.html
+	 * @param Elastica_UpdateScript $update
+	 * @return Elastica_Response
+	 */
+	public function updateDocument(Elastica_UpdateScript $update) {
+		$path = $update->getId() . '/_update';
+
+		$query = $update->prepareQuery();
+		if (!isset($query['retry_on_conflict'])) {
+			$retryOnConflict = $this->getIndex()->getClient()->getConfig("retryOnConflict");
+			$query['retry_on_conflict'] = $retryOnConflict;
+		}
+
+		return $this->request($path, Elastica_Request::POST, $update->prepareData(), $query);
+	}
+
+
 	/**
 	 * Uses _bulk to send documents to the server
 	 *
