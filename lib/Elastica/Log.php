@@ -69,7 +69,14 @@ class Elastica_Log
 	protected function _convertRequest(Elastica_Request $request) {
 		$message = 'curl -X' . strtoupper($request->getMethod()) . ' ';
 		$message .= '\'http://' . $request->getClient()->getHost() . ':' . $request->getClient()->getPort() . '/';
-		$message .= $request->getPath() .'\'';
+		$message .= $request->getPath();
+
+		$query = $request->getQuery();
+		if (!empty($query)) {
+			$message .= '?' . http_build_query($query);
+		}
+
+		$message .= '\'';
 
 		$data = $request->getData();
 		if (!empty($data)) {
