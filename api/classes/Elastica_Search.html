@@ -31,7 +31,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">222</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">16</span>
@@ -63,20 +63,17 @@
 <li class="method public "><a href="#addType" title="addType :: Adds a type to the current search"><span class="description">Adds a type to the current search</span><pre>addType()</pre></a></li>
 <li class="method public "><a href="#addTypes" title="addTypes :: Add array of types"><span class="description">Add array of types</span><pre>addTypes()</pre></a></li>
 <li class="method public "><a href="#create" title="create :: Creates new search object"><span class="description">Creates new search object</span><pre>create()</pre></a></li>
-<li class="method public "><a href="#getClient" title="getClient :: "><span class="description">getClient()
-        </span><pre>getClient()</pre></a></li>
-<li class="method public "><a href="#getIndices" title="getIndices :: "><span class="description">getIndices()
-        </span><pre>getIndices()</pre></a></li>
+<li class="method public "><a href="#getClient" title="getClient :: Return client object"><span class="description">Return client object</span><pre>getClient()</pre></a></li>
+<li class="method public "><a href="#getIndices" title="getIndices :: Return array of indices"><span class="description">Return array of indices</span><pre>getIndices()</pre></a></li>
 <li class="method public "><a href="#getPath" title="getPath :: Combines indices and types to the search request path"><span class="description">Combines indices and types to the search request path</span><pre>getPath()</pre></a></li>
-<li class="method public "><a href="#getTypes" title="getTypes :: "><span class="description">getTypes()
-        </span><pre>getTypes()</pre></a></li>
+<li class="method public "><a href="#getTypes" title="getTypes :: Return array of types"><span class="description">Return array of types</span><pre>getTypes()</pre></a></li>
 <li class="method public "><a href="#search" title="search :: Search in the set indices, types"><span class="description">Search in the set indices, types</span><pre>search()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
 <li class="nav-header protected">» Protected</li>
-<li class="property protected "><a href="#%24_client" title="$_client :: "><span class="description">$_client</span><pre>$_client</pre></a></li>
-<li class="property protected "><a href="#%24_indices" title="$_indices :: "><span class="description">$_indices</span><pre>$_indices</pre></a></li>
-<li class="property protected "><a href="#%24_types" title="$_types :: "><span class="description">$_types</span><pre>$_types</pre></a></li>
+<li class="property protected "><a href="#%24_client" title="$_client :: Client object"><span class="description">Client object</span><pre>$_client</pre></a></li>
+<li class="property protected "><a href="#%24_indices" title="$_indices :: Array of indices"><span class="description">Array of indices</span><pre>$_indices</pre></a></li>
+<li class="property protected "><a href="#%24_types" title="$_types :: Array of types"><span class="description">Array of types</span><pre>$_types</pre></a></li>
 </ul>
 </div>
 <div class="span8">
@@ -191,8 +188,7 @@
 </div></div>
 </div>
 <a name="getClient" id="getClient"></a><div class="element clickable method public getClient" data-toggle="collapse" data-target=".getClient .collapse">
-<h2>getClient()
-        </h2>
+<h2>Return client object</h2>
 <pre>getClient() : <a href="../classes/Elastica_Client.html">\Elastica_Client</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8">
@@ -203,15 +199,14 @@
 </div></div>
 </div>
 <a name="getIndices" id="getIndices"></a><div class="element clickable method public getIndices" data-toggle="collapse" data-target=".getIndices .collapse">
-<h2>getIndices()
-        </h2>
-<pre>getIndices() : \string[]</pre>
+<h2>Return array of indices</h2>
+<pre>getIndices() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>\string[]</code>List of index names</div>
+<code>array</code>List of index names</div>
 </div></div>
 </div>
 <a name="getPath" id="getPath"></a><div class="element clickable method public getPath" data-toggle="collapse" data-target=".getPath .collapse">
@@ -226,15 +221,14 @@
 </div></div>
 </div>
 <a name="getTypes" id="getTypes"></a><div class="element clickable method public getTypes" data-toggle="collapse" data-target=".getTypes .collapse">
-<h2>getTypes()
-        </h2>
-<pre>getTypes() : \string[]</pre>
+<h2>Return array of types</h2>
+<pre>getTypes() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>\string[]</code>List of types</div>
+<code>array</code>List of types</div>
 </div></div>
 </div>
 <a name="search" id="search"></a><div class="element clickable method public search" data-toggle="collapse" data-target=".search .collapse">
@@ -259,20 +253,20 @@
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a name="%24_client" id="$_client"> </a><div class="element clickable property protected $_client" data-toggle="collapse" data-target=".$_client .collapse">
-<h2>$_client</h2>
+<h2>Client object</h2>
 <pre>$_client : <a href="../classes/Elastica_Client.html">\Elastica_Client</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
 <a name="%24_indices" id="$_indices"> </a><div class="element clickable property protected $_indices" data-toggle="collapse" data-target=".$_indices .collapse">
-<h2>$_indices</h2>
-<pre>$_indices </pre>
+<h2>Array of indices</h2>
+<pre>$_indices : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
 <a name="%24_types" id="$_types"> </a><div class="element clickable property protected $_types" data-toggle="collapse" data-target=".$_types .collapse">
-<h2>$_types</h2>
-<pre>$_types </pre>
+<h2>Array of types</h2>
+<pre>$_types : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
@@ -283,7 +277,7 @@
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
-            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+            generated on 2012-05-03T15:03:16+02:00.<br></footer></div>
 </div>
 </body>
 </html>

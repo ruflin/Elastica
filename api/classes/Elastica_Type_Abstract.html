@@ -31,7 +31,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">222</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">16</span>
@@ -59,22 +59,22 @@
 <i class="icon-custom icon-method"></i> Methods</li>
 <li class="method public "><a href="#__construct" title="__construct :: Creates index object with client connection"><span class="description">Creates index object with client connection</span><pre>__construct()</pre></a></li>
 <li class="method public "><a href="#convertDate" title="convertDate :: Converts given time to format: 1995-12-31T23:59:59Z"><span class="description">Converts given time to format: 1995-12-31T23:59:59Z</span><pre>convertDate()</pre></a></li>
-<li class="method public "><a href="#count" title="count :: Counts results for a query"><span class="description">Counts results for a query</span><pre>count()</pre></a></li>
+<li class="method public "><a href="#count" title="count :: Count docs in the type based on query"><span class="description">Count docs in the type based on query</span><pre>count()</pre></a></li>
 <li class="method public "><a href="#create" title="create :: Creates the index and sets the mapping for this type"><span class="description">Creates the index and sets the mapping for this type</span><pre>create()</pre></a></li>
 <li class="method public "><a href="#getIndex" title="getIndex :: Returns the search index"><span class="description">Returns the search index</span><pre>getIndex()</pre></a></li>
 <li class="method public "><a href="#getType" title="getType :: Returns type object"><span class="description">Returns type object</span><pre>getType()</pre></a></li>
-<li class="method public "><a href="#search" title="search :: Searches results for a query"><span class="description">Searches results for a query</span><pre>search()</pre></a></li>
+<li class="method public "><a href="#search" title="search :: Search on the type"><span class="description">Search on the type</span><pre>search()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
 <li class="nav-header protected">» Protected</li>
-<li class="property protected "><a href="#%24_client" title="$_client :: "><span class="description">$_client</span><pre>$_client</pre></a></li>
-<li class="property protected "><a href="#%24_index" title="$_index :: "><span class="description">$_index</span><pre>$_index</pre></a></li>
-<li class="property protected "><a href="#%24_indexName" title="$_indexName :: "><span class="description">$_indexName</span><pre>$_indexName</pre></a></li>
-<li class="property protected "><a href="#%24_indexParams" title="$_indexParams :: "><span class="description">$_indexParams</span><pre>$_indexParams</pre></a></li>
-<li class="property protected "><a href="#%24_mapping" title="$_mapping :: "><span class="description">$_mapping</span><pre>$_mapping</pre></a></li>
-<li class="property protected "><a href="#%24_source" title="$_source :: "><span class="description">$_source</span><pre>$_source</pre></a></li>
-<li class="property protected "><a href="#%24_type" title="$_type :: "><span class="description">$_type</span><pre>$_type</pre></a></li>
-<li class="property protected "><a href="#%24_typeName" title="$_typeName :: "><span class="description">$_typeName</span><pre>$_typeName</pre></a></li>
+<li class="property protected "><a href="#%24_client" title="$_client :: Client"><span class="description">Client</span><pre>$_client</pre></a></li>
+<li class="property protected "><a href="#%24_index" title="$_index :: Index"><span class="description">Index</span><pre>$_index</pre></a></li>
+<li class="property protected "><a href="#%24_indexName" title="$_indexName :: Index name"><span class="description">Index name</span><pre>$_indexName</pre></a></li>
+<li class="property protected "><a href="#%24_indexParams" title="$_indexParams :: Index params"><span class="description">Index params</span><pre>$_indexParams</pre></a></li>
+<li class="property protected "><a href="#%24_mapping" title="$_mapping :: Mapping"><span class="description">Mapping</span><pre>$_mapping</pre></a></li>
+<li class="property protected "><a href="#%24_source" title="$_source :: Source"><span class="description">Source</span><pre>$_source</pre></a></li>
+<li class="property protected "><a href="#%24_type" title="$_type :: Type"><span class="description">Type</span><pre>$_type</pre></a></li>
+<li class="property protected "><a href="#%24_typeName" title="$_typeName :: Index name"><span class="description">Index name</span><pre>$_typeName</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-constant"></i> Constants</li>
 <li class="constant  "><a href="#MAX_DOCS_PER_REQUEST" title="MAX_DOCS_PER_REQUEST :: "><span class="description">MAX_DOCS_PER_REQUEST</span><pre>MAX_DOCS_PER_REQUEST</pre></a></li>
@@ -144,7 +144,7 @@ Has to be set in child class</p></p>
 </div></div>
 </div>
 <a name="count" id="count"></a><div class="element clickable method public count" data-toggle="collapse" data-target=".count .collapse">
-<h2>Counts results for a query</h2>
+<h2>Count docs in the type based on query</h2>
 <pre>count(string | array | <a href="../classes/Elastica_Query.html">\Elastica_Query</a> $query) : int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8">
@@ -198,7 +198,7 @@ Has to be set in child class</p></p>
 </div></div>
 </div>
 <a name="search" id="search"></a><div class="element clickable method public search" data-toggle="collapse" data-target=".search .collapse">
-<h2>Searches results for a query</h2>
+<h2>Search on the type</h2>
 <pre>search(string | array | <a href="../classes/Elastica_Query.html">\Elastica_Query</a> $query) : <a href="../classes/Elastica_ResultSet.html">\Elastica_ResultSet</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8">
@@ -231,50 +231,50 @@ Has to be set in child class</p></p>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a name="%24_client" id="$_client"> </a><div class="element clickable property protected $_client" data-toggle="collapse" data-target=".$_client .collapse">
-<h2>$_client</h2>
-<pre>$_client </pre>
+<h2>Client</h2>
+<pre>$_client : <a href="../classes/Elastica_Client.html">\Elastica_Client</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
 <a name="%24_index" id="$_index"> </a><div class="element clickable property protected $_index" data-toggle="collapse" data-target=".$_index .collapse">
-<h2>$_index</h2>
-<pre>$_index </pre>
+<h2>Index</h2>
+<pre>$_index : <a href="../classes/Elastica_Index.html">\Elastica_Index</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
 <a name="%24_indexName" id="$_indexName"> </a><div class="element clickable property protected $_indexName" data-toggle="collapse" data-target=".$_indexName .collapse">
-<h2>$_indexName</h2>
-<pre>$_indexName </pre>
+<h2>Index name</h2>
+<pre>$_indexName : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
 <a name="%24_indexParams" id="$_indexParams"> </a><div class="element clickable property protected $_indexParams" data-toggle="collapse" data-target=".$_indexParams .collapse">
-<h2>$_indexParams</h2>
-<pre>$_indexParams </pre>
+<h2>Index params</h2>
+<pre>$_indexParams : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
 <a name="%24_mapping" id="$_mapping"> </a><div class="element clickable property protected $_mapping" data-toggle="collapse" data-target=".$_mapping .collapse">
-<h2>$_mapping</h2>
-<pre>$_mapping </pre>
+<h2>Mapping</h2>
+<pre>$_mapping : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
 <a name="%24_source" id="$_source"> </a><div class="element clickable property protected $_source" data-toggle="collapse" data-target=".$_source .collapse">
-<h2>$_source</h2>
-<pre>$_source </pre>
+<h2>Source</h2>
+<pre>$_source : boolean</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
 <a name="%24_type" id="$_type"> </a><div class="element clickable property protected $_type" data-toggle="collapse" data-target=".$_type .collapse">
-<h2>$_type</h2>
-<pre>$_type </pre>
+<h2>Type</h2>
+<pre>$_type : <a href="../classes/Elastica_Type.html">\Elastica_Type</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
 <a name="%24_typeName" id="$_typeName"> </a><div class="element clickable property protected $_typeName" data-toggle="collapse" data-target=".$_typeName .collapse">
-<h2>$_typeName</h2>
-<pre>$_typeName </pre>
+<h2>Index name</h2>
+<pre>$_typeName : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
@@ -293,7 +293,7 @@ Has to be set in child class</p></p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
-            generated on 2012-05-02T16:46:41+02:00.<br></footer></div>
+            generated on 2012-05-03T15:03:17+02:00.<br></footer></div>
 </div>
 </body>
 </html>
