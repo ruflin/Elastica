@@ -7,8 +7,7 @@
  * @author Raul Martinez Jr  <juneym@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/histogram-facet.html
  */
-class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
-{
+class Elastica_Facet_Histogram extends Elastica_Facet_Abstract {
 	/**
 	 * Sets the field for histogram
 	 *
@@ -58,7 +57,7 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
 	 * @param array $params Associative array (key/value pair)
 	 * @return Elastica_Facet_Histogram Facet object
 	 */
-	public function setScriptParams(Array $params) {
+	public function setScriptParams(array $params) {
 		return $this->setParam('params', $params);
 	}
 

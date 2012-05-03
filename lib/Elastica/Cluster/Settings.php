@@ -8,6 +8,11 @@
  * @link     http://www.elasticsearch.org/guide/reference/api/admin-cluster-update-settings.html
  */
 class Elastica_Cluster_Settings {
+	/**
+	 * Client
+	 * 
+	 * @var Elastica_Client Client object
+	 */
 	protected $_client = null;
 
 	/**
@@ -20,6 +25,8 @@ class Elastica_Cluster_Settings {
 	}
 
 	/**
+	 * Returns settings data
+	 * 
 	 * @return array Settings data (persistent and transient)
 	 */
 	public function get() {
@@ -127,6 +134,8 @@ class Elastica_Cluster_Settings {
 	}
 
 	/**
+	 * Set settings for cluster
+	 * 
 	 * @param array $settings Raw settings (including persistent or transient)
 	 * @return Elastica_Response
 	 */
@@ -135,6 +144,8 @@ class Elastica_Cluster_Settings {
 	}
 
 	/**
+	 * Get the client
+	 * 
 	 * @return Elastica_Client
 	 */
 	public function getClient() {

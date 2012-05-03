@@ -7,12 +7,26 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
-class Elastica_Node
-{
+class Elastica_Node {
+	/**
+	 * Node name
+	 * 
+	 * @var string Node name
+	 */
 	protected $_name = '';
 
+	/**
+	 * Node stats
+	 * 
+	 * @var Elastica_Node_Stats Node Stats
+	 */
 	protected $_stats = null;
 
+	/**
+	 * Node info
+	 * 
+	 * @var Elastica_Node_Info Node info
+	 */
 	protected $_info = null;
 
 	/**
@@ -28,6 +42,8 @@ class Elastica_Node
 	}
 
 	/**
+	 * Get the name of the node
+	 * 
 	 * @return string Node name
 	 */
 	public function getName() {
@@ -57,6 +73,8 @@ class Elastica_Node
 	}
 
 	/**
+	 * Return info object of the current node
+	 * 
 	 * @return Elastica_Node_Info Node info object
 	 */
 	public function getInfo() {

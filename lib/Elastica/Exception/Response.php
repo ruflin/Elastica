@@ -7,10 +7,16 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Elastica_Exception_Response extends Elastica_Exception_Abstract {
-
+	/**
+	 * Response
+	 * 
+	 * @var Elastica_Response Response object
+	 */
 	protected $_response = null;
 
 	/**
+	 * Construct Exception
+	 * 
 	 * @param Elastica_Response $response
 	 */
 	public function __construct(Elastica_Response $response) {

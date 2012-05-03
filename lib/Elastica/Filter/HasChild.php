@@ -9,9 +9,10 @@
  * @author Fabian Vogler <fabian@equivalence.ch>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/has-child-filter.html
  */
-class Elastica_Filter_HasChild extends Elastica_Filter_Abstract
-{
+class Elastica_Filter_HasChild extends Elastica_Filter_Abstract {
 	/**
+	 * Construct HasChild filter
+	 * 
 	 * @param string|Elastica_Query $query Query string or a Elastica_Query object
 	 * @param string $type Parent document type
 	 */

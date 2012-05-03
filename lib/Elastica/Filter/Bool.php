@@ -8,12 +8,33 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/bool_query/
  */
-class Elastica_Filter_Bool extends Elastica_Filter_Abstract
-{
+class Elastica_Filter_Bool extends Elastica_Filter_Abstract {
+	/**
+	 * minimum number of matches
+	 * 
+	 * @var int minimum number of matches
+	 */
 	protected $_minimumNumberShouldMatch = 1;
 
+	/**
+	 * Must
+	 * 
+	 * @var array
+	 */
 	protected $_must = array();
+
+	/**
+	 * Should
+	 * 
+	 * @var array
+	 */
 	protected $_should = array();
+
+	/**
+	 * Must not
+	 * 
+	 * @var array
+	 */
 	protected $_mustNot = array();
 
 	/**

@@ -8,8 +8,7 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/text-query.html
  */
-class Elastica_Query_Text extends Elastica_Query_Abstract
-{
+class Elastica_Query_Text extends Elastica_Query_Abstract {
 	/**
 	 * Sets a param for the message array
 	 *
@@ -50,6 +49,8 @@ class Elastica_Query_Text extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set field type
+	 * 
 	 * @param string $field
 	 * @param string $type Text query type
 	 * @return Elastica_Query_Text
@@ -59,6 +60,8 @@ class Elastica_Query_Text extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set field max expansions
+	 * 
 	 * @param string $field
 	 * @param int $maxExpansions
 	 * @return Elastica_Query_Text

@@ -8,10 +8,26 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/terms-filter.html
  */
-class Elastica_Filter_Terms extends Elastica_Filter_Abstract
-{
+class Elastica_Filter_Terms extends Elastica_Filter_Abstract {
+	/**
+	 * Terms
+	 * 
+	 * @var array Terms
+	 */
 	protected $_terms = array();
+
+	/**
+	 * Params
+	 * 
+	 * @var array Params
+	 */
 	protected $_params = array();
+
+	/**
+	 * Terms key
+	 * 
+	 * @var string Terms key
+	 */
 	protected $_key = '';
 
 	/**

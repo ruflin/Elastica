@@ -10,8 +10,12 @@
  * @author Tim Rupp
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/ids-query.html
  */
-class Elastica_Query_Ids extends Elastica_Query_Abstract
-{
+class Elastica_Query_Ids extends Elastica_Query_Abstract {
+	/**
+	 * Params
+	 * 
+	 * @var array Params
+	 */
 	protected $_params = array();
 
 	/**
@@ -55,6 +59,8 @@ class Elastica_Query_Ids extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set type
+	 * 
 	 * @param string|Elastica_Type $type Type name or object
 	 * @return Elastica_Query_Ids Current object
 	 */

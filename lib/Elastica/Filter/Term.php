@@ -8,9 +8,10 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/term_query/
  */
-class Elastica_Filter_Term extends Elastica_Filter_Abstract
-{
+class Elastica_Filter_Term extends Elastica_Filter_Abstract {
 	/**
+	 * Construct term filter
+	 * 
 	 * @param array $term Term array
 	 */
 	public function __construct(array $term = array()) {

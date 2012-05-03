@@ -16,6 +16,8 @@ class Elastica_Log
 	protected $_log = false;
 	
 	/**
+	 * Last logged message
+	 * 
 	 * @var string Last logged message
 	 */
 	protected $_lastMessage = '';
@@ -30,6 +32,8 @@ class Elastica_Log
 	}
 	
 	/**
+	 * Log a message
+	 * 
 	 * @param string|Elastica_Request $message
 	 */
 	public function log($message) {
@@ -52,6 +56,8 @@ class Elastica_Log
 	}
 	
 	/**
+	 * Enable/disable log or set log path
+	 * 
 	 * @param bool|string $log Enables log or sets log path
 	 * @return Elastica_Log
 	 */
@@ -87,6 +93,8 @@ class Elastica_Log
 	}
 	
 	/**
+	 * Return last logged message
+	 * 
 	 * @return string Last logged message
 	 */
 	public function getLastMessage() {

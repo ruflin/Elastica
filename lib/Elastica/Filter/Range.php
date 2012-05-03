@@ -8,11 +8,17 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/range-filter.html
  */
-class Elastica_Filter_Range extends Elastica_Filter_Abstract
-{
+class Elastica_Filter_Range extends Elastica_Filter_Abstract {
+	/**
+	 * Fields
+	 * 
+	 * @var array Fields
+	 */
 	protected $_fields = array();
 
 	/**
+	 * Construct range filter
+	 * 
 	 * @param string $fieldName Field name
 	 * @param array $args Field arguments
 	 * @return Elastica_Filter_Range

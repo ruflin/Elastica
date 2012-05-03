@@ -9,12 +9,24 @@
  * @author Michael Maclean <mgdm@php.net>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/geo_bounding_box_filter/
  */
-class Elastica_Filter_GeoPolygon extends Elastica_Filter_Abstract
-{
-	protected $_key;
-	protected $_points;
+class Elastica_Filter_GeoPolygon extends Elastica_Filter_Abstract {
+	/**
+	 * Key
+	 * 
+	 * @var string Key
+	 */
+	protected $_key = '';
 
 	/**
+	 * Points making up polygon
+	 * 
+	 * @var array Points making up polygon
+	 */
+	protected $_points = array();
+
+	/**
+	 * Construct polygon filter
+	 * 
 	 * @param string $key Key
 	 * @param array $points Points making up polygon
 	 */
