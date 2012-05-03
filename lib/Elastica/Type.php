@@ -244,15 +244,18 @@ class Elastica_Type implements Elastica_Searchable {
 	 *
 	 * The id in the given object has to be set
 	 *
-	 * @param ElasticSearch_Document $doc  Document to query for similar objects
-	 * @param array                  $args OPTIONAL Additional arguments for the query
-	 * @return Elastica_ResultSet          ResultSet with all results inside
+	 * @param Elastica_Document      $doc  Document to query for similar objects
+	 * @param array                  $params OPTIONAL Additional arguments for the query
+	 * @param Elastica_Query         $query OPTIONAL Query to filter the moreLikeThis results
+	 * @return Elastica_ResultSet    ResultSet with all results inside
 	 * @link http://www.elasticsearch.org/guide/reference/api/more-like-this.html
 	 */
-	public function moreLikeThis(Elastica_Document $doc, $args = array()) {
+	public function moreLikeThis(Elastica_Document $doc, $params = array(), $query = array()) {
 		$path = $doc->getId() . '/_mlt';
 
-		$response = $this->request($path, Elastica_Request::GET, array(), $args);
+		$query = Elastica_Query::create($query);
+
+		$response = $this->request($path, Elastica_Request::GET, $query->toArray(), $params);
 
 		return new Elastica_ResultSet($response);
 	}
