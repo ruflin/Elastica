@@ -257,7 +257,6 @@ class Elastica_TypeTest extends Elastica_Test
 		$update->setRefresh(true);
 		$type->updateDocument($update);
 		$updatedDoc = $type->getDocument($id)->getData();
-		error_log(print_r($updatedDoc, 1), 3, '/tmp/results');
 		$this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
 
 	}

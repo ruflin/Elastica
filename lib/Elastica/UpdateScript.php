@@ -77,9 +77,9 @@ class Elastica_UpdateScript {
 	/**
 	 * @param string $id
 	 * @param string $script
-	 * @param array $data
+	 * @param array $params
 	 */
-	function __construct($id, $script, array $params = array()) {
+	public function __construct($id, $script, array $params = array()) {
 		$this->_id = $id;
 		$this->_script = $script;
 		$this->_data = $params;
