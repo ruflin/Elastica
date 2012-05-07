@@ -102,7 +102,7 @@ class Elastica_ResultSet implements Iterator, Countable
 	/**
 	 * Returns the current object of the set
 	 *
-	 * @return mixed|bool Set object or false if not valid (no more entries)
+	 * @return Elastica_Result|bool Set object or false if not valid (no more entries)
 	 */
 	public function current() {
 		if ($this->valid()) {
