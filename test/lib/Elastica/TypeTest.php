@@ -233,13 +233,13 @@ class Elastica_TypeTest extends Elastica_Test
 		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
 		$type = new Elastica_Type($index, 'mlt_test');
-		$type->addDocument(new Elastica_Document(1, array('visible' => TRUE, 'name' => 'bruce wayne batman')));
-		$type->addDocument(new Elastica_Document(2, array('visible' => TRUE, 'name' => 'bruce wayne')));
-		$type->addDocument(new Elastica_Document(3, array('visible' => FALSE, 'name' => 'bruce wayne')));
-		$type->addDocument(new Elastica_Document(4, array('visible' => TRUE, 'name' => 'batman')));
-		$type->addDocument(new Elastica_Document(5, array('visible' => FALSE, 'name' => 'batman')));
-		$type->addDocument(new Elastica_Document(6, array('visible' => TRUE, 'name' => 'superman')));
-		$type->addDocument(new Elastica_Document(7, array('visible' => TRUE, 'name' => 'spiderman')));
+		$type->addDocument(new Elastica_Document(1, array('visible' => true, 'name' => 'bruce wayne batman')));
+		$type->addDocument(new Elastica_Document(2, array('visible' => true, 'name' => 'bruce wayne')));
+		$type->addDocument(new Elastica_Document(3, array('visible' => false, 'name' => 'bruce wayne')));
+		$type->addDocument(new Elastica_Document(4, array('visible' => true, 'name' => 'batman')));
+		$type->addDocument(new Elastica_Document(5, array('visible' => false, 'name' => 'batman')));
+		$type->addDocument(new Elastica_Document(6, array('visible' => true, 'name' => 'superman')));
+		$type->addDocument(new Elastica_Document(7, array('visible' => true, 'name' => 'spiderman')));
 
 		$index->refresh();
 
@@ -252,7 +252,7 @@ class Elastica_TypeTest extends Elastica_Test
 		// Return just the visible similar
 		$query 				= new Elastica_Query();
 		$filterTerm 		= new Elastica_Filter_Term();
-		$filterTerm->setTerm('visible', TRUE);
+		$filterTerm->setTerm('visible', true);
 		$query->setFilter($filterTerm);
 
 		$resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'), $query);
