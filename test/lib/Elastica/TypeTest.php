@@ -225,4 +225,24 @@ class Elastica_TypeTest extends Elastica_Test
 
         $this->fail('Mapping for type[test] in [elastica_test] still exists');
     }
+
+	public function testMoreLikeThisApi() {
+
+		$client = new Elastica_Client(array('persistent' => false));
+		$index = $client->getIndex('elastica_test');
+		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+
+		$type = new Elastica_Type($index, 'mlt_test');
+		$type->addDocument(new Elastica_Document(1, array('name' => 'bruce wayne batman')));
+		$type->addDocument(new Elastica_Document(2, array('name' => 'bruce wayne')));
+		$type->addDocument(new Elastica_Document(3, array('name' => 'batman')));
+		$type->addDocument(new Elastica_Document(4, array('name' => 'superman')));
+		$type->addDocument(new Elastica_Document(5, array('name' => 'spiderman')));
+		$index->refresh();
+
+		$document = $type->getDocument(1);
+
+		$resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'));
+		$this->assertEquals(2, $resultSet->count());
+	}
 }

@@ -398,10 +398,11 @@ class Elastica_Index implements Elastica_Searchable
 	 * @param string $path Path to call
 	 * @param string $method Rest method to use (GET, POST, DELETE, PUT)
 	 * @param array $data OPTIONAL Arguments as array
+	 * @param array $query OPTIONAL Query params
 	 * @return Elastica_Response Response object
 	 */
-	public function request($path, $method, $data = array()) {
+	public function request($path, $method, $data = array(), array $query = array()) {
 		$path = $this->getName() . '/' . $path;
-		return $this->getClient()->request($path, $method, $data);
+		return $this->getClient()->request($path, $method, $data, $query);
 	}
 }

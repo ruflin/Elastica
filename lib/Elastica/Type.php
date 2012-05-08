@@ -62,10 +62,6 @@ class Elastica_Type implements Elastica_Searchable {
 			$query['percolate'] = $doc->getPercolate();
 		}
 
-		if (count($query) > 0) {
-			$path .= '?' . http_build_query($query);
-		}
-
 		$type = Elastica_Request::PUT;
 
 		// If id is empty, POST has to be used to automatically create id
@@ -73,7 +69,7 @@ class Elastica_Type implements Elastica_Searchable {
 			$type = Elastica_Request::POST;
 		}
 
-		return $this->request($path, $type, $doc->getData());
+		return $this->request($path, $type, $doc->getData(), $query);
 	}
 
 	/**
@@ -248,14 +244,17 @@ class Elastica_Type implements Elastica_Searchable {
 	 *
 	 * The id in the given object has to be set
 	 *
-	 * @param EalsticSearch_Document $doc  Document to query for similar objects
+	 * @param ElasticSearch_Document $doc  Document to query for similar objects
 	 * @param array                  $args OPTIONAL Additional arguments for the query
-	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/more_like_this/
+	 * @return Elastica_ResultSet          ResultSet with all results inside
+	 * @link http://www.elasticsearch.org/guide/reference/api/more-like-this.html
 	 */
 	public function moreLikeThis(Elastica_Document $doc, $args = array()) {
-		// TODO: Not tested yet
 		$path = $doc->getId() . '/_mlt';
-		return $this->request($path, Elastica_Request::GET, $args);
+
+		$response = $this->request($path, Elastica_Request::GET, array(), $args);
+
+		return new Elastica_ResultSet($response);
 	}
 
 	/**
@@ -264,10 +263,11 @@ class Elastica_Type implements Elastica_Searchable {
 	 * @param string $path   Path to call
 	 * @param string $method Rest method to use (GET, POST, DELETE, PUT)
 	 * @param array  $data   OPTIONAL Arguments as array
+	 * @param array $query OPTIONAL Query params
 	 * @return Elastica_Response Response object
 	 */
-	public function request($path, $method, $data = array()) {
+	public function request($path, $method, $data = array(), array $query = array()) {
 		$path = $this->getName() . '/' . $path;
-		return $this->getIndex()->request($path, $method, $data);
+		return $this->getIndex()->request($path, $method, $data, $query);
 	}
 }

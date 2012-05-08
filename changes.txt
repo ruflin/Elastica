@@ -1,5 +1,10 @@
 CHANGES
 
+2012-05-01
+- Release v0.19.3.0
+- MoreLikeThis Query in Elastica_Document
+- Add query param for request (allows GET params)
+
 2012-03-04
 - Node info call update. The receive os info and more, param is needed. By default, only basics are returned
 - Release v0.19.0.0 which is compatible with ES 0.19.0 http://www.elasticsearch.org/blog/2012/03/01/0.19.0-released.html

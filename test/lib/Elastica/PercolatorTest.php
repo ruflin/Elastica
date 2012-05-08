@@ -27,7 +27,11 @@ class Elastica_PercolatorTest extends Elastica_Test
 	}
 	
 	public function testMatchDoc() {
-		$index = $this->_createIndex();
+
+		$client = new Elastica_Client(array('persistent' => false));
+		$index = $client->getIndex('elastica_test');
+		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+
 		$percolator = new Elastica_Percolator($index);
 		
 		$percolatorName = 'percotest';

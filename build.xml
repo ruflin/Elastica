@@ -11,7 +11,7 @@
 			</sequential>
 			<antcall target="phpcpd"/>
 			<antcall target="phpcs-ci"/>
-			<antcall target="docblox"/>
+			<antcall target="phpdoc"/>
 			<antcall target="phpcb"/>
 		</parallel>
 	</target>
@@ -96,8 +96,8 @@
 	</target>
 
 	<!-- Generate API documentation -->
-	<target name="docblox">
-		<exec executable="docblox">
+	<target name="phpdoc">
+		<exec executable="phpdoc">
 			<arg line="run" />
 		</exec>
 	</target>
@@ -149,7 +149,7 @@
 			<arg line="channel-discover pear.michelf.com" />
 		</exec>
 		<exec executable="pear">
-			<arg line="channel-discover pear.docblox-project.org" />
+			<arg line="channel-discover pear.phpdoc.org" />
 		</exec>
 
 		<exec executable="pear">
@@ -165,7 +165,7 @@
 			<arg line="install phpunit/phploc" />
 		</exec>
 		<exec executable="pear">
-			<arg line="install --alldeps channel://pear.docblox-project.org/DocBlox-0.15.1" />
+			<arg line="install channel://pear.phpdoc.org/phpDocumentor-2.0.0a2" />
 		</exec>
 		<exec executable="pear">
 			<arg line="install PHP_CodeSniffer" />
