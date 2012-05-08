@@ -499,7 +499,6 @@ class Elastica_IndexTest extends Elastica_Test
     public function testCreateArray(){
         $client = new Elastica_Client();
         $indexName = 'test';
-        $aliasName = 'test-aliase';
         
         //Testing recreate (backward compatibility)
         $index = $client->getIndex($indexName);
@@ -534,5 +533,29 @@ class Elastica_IndexTest extends Elastica_Test
         }catch(Exception $ex){
              $this->assertTrue($ex instanceof Elastica_Exception_Invalid);
         }
+    }
+
+
+    public function testCreateAliasArray(){
+        $options = array('log' => true);
+        $client = new Elastica_Client($options);
+        $indexName = 'test';
+        $aliasName = 'test-aliase';        
+        
+        //Creating the index
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
+        $status = new Elastica_Status($client);
+        $this->assertTrue($status->indexExists($indexName));
+
+        //Creating the alias
+        $opts = array('replace'=>true, 
+                      'index_routing' => '1', 
+                      'search_routing' => '1,2', 
+                      'filter' => '{ "term" : { "user" : "comulinux" } }');
+                      
+        $index->addAlias($aliasName,$opts);
+        $status = new Elastica_Status($client);
+        $this->assertTrue($status->aliasExists($aliasName));
     }
 }
