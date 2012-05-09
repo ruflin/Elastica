@@ -286,34 +286,37 @@ class Elastica_Index implements Elastica_Searchable
             }
         }else if(is_array($options)){
             foreach ($options as $key => $value){
-                switch ($key) {
-                    case 'replace':
-                        $status = new Elastica_Status($this->getClient());
-                        foreach ($status->getIndicesWithAlias($name) as $index) {
-                            $index->removeAlias($name);
-                        }
-                        break;
-                        
-                    case 'filter':
-                            if (is_a($value, 'Elastica_Query')){
-                                $add['filter'] = $value->getQuery();
-                            }else{
-                                $add['filter'] = $value;
+                if (!empty($value)){
+                    switch ($key) {
+                        case 'replace':
+                            $status = new Elastica_Status($this->getClient());
+                            foreach ($status->getIndicesWithAlias($name) as $index) {
+                                $index->removeAlias($name);
                             }
-                        break;
+                            break;
+                            
+                        case 'filter':
+                                if (is_a($value, 'Elastica_Query'))
+                                   throw new Elastica_Exception_NotImplemented('Apply a query object to an alias is not implemented yet.');
+                                else
+                                   $add['filter'] = $value;
+                            break;
+                            
+                        case 'index_routing':
+                                $add['index_routing'] = $value;
+                            break;
                         
-                    case 'index_routing':
-                            $add['index_routing'] = $value;
-                        break;
-                    
-                    case 'search_routing':
-                            $add['search_routing'] = $value;
-                        break;
-                    
-                    default:
-                            throw new Elastica_Exception_Invalid('Invalid option '.$key);
-                        break;
-                }
+                        case 'search_routing':
+                                $add['search_routing'] = $value;
+                            break;
+                        
+                        default:
+                                throw new Elastica_Exception_Invalid('Invalid option '.$key);
+                            break;
+                    }
+               }else{
+                   throw new Elastica_Exception_Invalid('Error setting '.$key.' to null1');
+               }
             }
         }
         /***********************************************/

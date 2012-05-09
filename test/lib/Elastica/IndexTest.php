@@ -537,7 +537,7 @@ class Elastica_IndexTest extends Elastica_Test
 
 
     public function testCreateAliasArray(){
-        $options = array('log' => true);
+        $options = array();
         $client = new Elastica_Client($options);
         $indexName = 'test';
         $aliasName = 'test-aliase';        
@@ -553,9 +553,25 @@ class Elastica_IndexTest extends Elastica_Test
                       'index_routing' => '1', 
                       'search_routing' => '1,2', 
                       'filter' => '{ "term" : { "user" : "comulinux" } }');
-                      
         $index->addAlias($aliasName,$opts);
         $status = new Elastica_Status($client);
         $this->assertTrue($status->aliasExists($aliasName));
+        
+        
+        //Creating the alias with Elastica_Query object for filtering
+        try{
+            $queryString = '{"query" : { "term" : { "user" : "comulinux" } } }';
+            $query = Elastica_Query::create($queryString);
+            $opts = array('replace'=>true, 
+                          'index_routing' => '1', 
+                          'search_routing' => '1,2', 
+                          'filter' => $query);
+            $index->addAlias($aliasName,$opts);
+            $status = new Elastica_Status($client);
+            $this->assertTrue($status->aliasExists($aliasName));
+            $this->fail('Should throw Elastica_Exception_NotImplemented');
+        }catch(Exception $ex){
+            $this->assertTrue($ex instanceof Elastica_Exception_NotImplemented);
+        }
     }
 }
