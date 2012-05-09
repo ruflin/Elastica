@@ -285,6 +285,7 @@ class Elastica_Index implements Elastica_Searchable
                 $index->removeAlias($name);
             }
         }else if(is_array($options)){
+            
             foreach ($options as $key => $value){
                 if (!empty($value)){
                     switch ($key) {
