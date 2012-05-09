@@ -319,7 +319,6 @@ class Elastica_Index implements Elastica_Searchable
                }
             }
         }
-        /***********************************************/
 
         $data = array(
             'actions' => array(
