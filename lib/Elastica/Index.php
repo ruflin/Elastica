@@ -274,18 +274,20 @@ class Elastica_Index implements Elastica_Searchable
 	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
 	 */
     
-    public function addAlias($name, $options = null) {
+    public function addAlias($name, $options = null, $replace = false) {
         $path = '_aliases';
         
         $add = array('index' => $this->getName(),
                      'alias' => $name);
-        if(is_bool($options) && $options){ //backward compatibility
+        
+        if($replace){
             $status = new Elastica_Status($this->getClient());
             foreach ($status->getIndicesWithAlias($name) as $index) {
                 $index->removeAlias($name);
             }
-        }else if(is_array($options)){
-            
+        }
+        
+        if(is_array($options)){
             foreach ($options as $key => $value){
                 if (!empty($value)){
                     switch ($key) {
@@ -298,7 +300,7 @@ class Elastica_Index implements Elastica_Searchable
                             
                         case 'filter':
                                 if (is_a($value, 'Elastica_Query'))
-                                   throw new Elastica_Exception_NotImplemented('Apply a query object to an alias is not implemented yet.');
+                                   $add['filter'] = $value->toArray();
                                 else
                                    $add['filter'] = $value;
                             break;
@@ -316,7 +318,7 @@ class Elastica_Index implements Elastica_Searchable
                             break;
                     }
                }else{
-                   throw new Elastica_Exception_Invalid('Error setting '.$key.' to null1');
+                   throw new Elastica_Exception_Invalid('Error setting '.$key.' to null');
                }
             }
         }
