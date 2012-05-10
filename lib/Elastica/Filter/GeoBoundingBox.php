@@ -9,10 +9,10 @@
  * @author Fabian Vogler <fabian@equivalence.ch>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/geo_bounding_box_filter/
  */
-class Elastica_Filter_GeoBoundingBox extends Elastica_Filter_Abstract
-{
-
+class Elastica_Filter_GeoBoundingBox extends Elastica_Filter_Abstract {
 	/**
+	 * Construct GeoBoundingBox filter
+	 * 
 	 * @param string $key Key
 	 * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
 	 */
@@ -21,6 +21,8 @@ class Elastica_Filter_GeoBoundingBox extends Elastica_Filter_Abstract
 	}
 
 	/**
+	 * Add coordinates
+	 * 
 	 * @param string $key Key
 	 * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
 	 * @throws Elastica_Exception_Invalid If $coordinates doesn't have two elements

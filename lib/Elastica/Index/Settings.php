@@ -12,17 +12,33 @@
  * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
  * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
  */
-class Elastica_Index_Settings
-{
+class Elastica_Index_Settings {
+	/**
+	 * Response
+	 * 
+	 * @var Elastica_Response Response object
+	 */
 	protected $_response = null;
 
+	/**
+	 * Stats info
+	 * 
+	 * @var array Stats info
+	 */
 	protected $_data = array();
 
-	protected $_name = '';
+	/**
+	 * Index
+	 * 
+	 * @var Elastica_Index Index object
+	 */
+	protected $_index = null;
 
 	const DEFAULT_REFRESH_INTERVAL = '1s';
 
 	/**
+	 * Construct
+	 * 
 	 * @param Elastica_Index $index Index object
 	 */
 	public function __construct(Elastica_Index $index) {
@@ -108,6 +124,8 @@ class Elastica_Index_Settings
 	}
 
 	/**
+	 * Return merge policy
+	 * 
 	 * @return string Merge policy type
 	 */
 	public function getMergePolicyType() {

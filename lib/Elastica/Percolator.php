@@ -7,14 +7,17 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/percolate.html
  */
-class Elastica_Percolator
-{
+class Elastica_Percolator {
 	/**
+	 * Index object
+	 * 
 	 * @var Elastica_Index
 	 */
 	protected $_index = null;
 
 	/**
+	 * Construct new perlocator
+	 * 
 	 * @param Elastica_Index $index
 	 */
 	public function __construct(Elastica_Index $index) {
@@ -52,6 +55,8 @@ class Elastica_Percolator
 	}
 	
 	/**
+	 * Return index object
+	 * 
 	 * @return Elastica_Index
 	 */
 	public function getIndex() {

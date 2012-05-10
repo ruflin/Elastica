@@ -9,14 +9,44 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Elastica_Response {
-
+	/**
+	 * Query time
+	 * 
+	 * @var float Query time
+	 */
 	protected $_queryTime = null;
+
+	/**
+	 * Response string (json)
+	 * 
+	 * @var string Response
+	 */
 	protected $_responseString = '';
+
+	/**
+	 * Error
+	 * 
+	 * @var boolean Error
+	 */
 	protected $_error = false;
+
+	/**
+	 * Transfer info
+	 * 
+	 * @var array transfer info
+	 */
 	protected $_transferInfo = array();
+
+	/**
+	 * Response
+	 * 
+	 * @var Elastica_Response Response object
+	 */
 	protected $_response = null;
 
 	/**
+	 * Construct
+	 * 
 	 * @param string $responseString Response string (json)
 	 */
 	public function __construct($responseString) {
@@ -24,6 +54,8 @@ class Elastica_Response {
 	}
 
 	/**
+	 * Error message
+	 * 
 	 * @return string Error message
 	 */
 	public function getError() {
@@ -37,6 +69,8 @@ class Elastica_Response {
 	}
 
 	/**
+	 * True if response has error
+	 * 
 	 * @return bool True if response has error
 	 */
 	public function hasError() {
@@ -59,6 +93,8 @@ class Elastica_Response {
 	}
 
 	/**
+	 * Response data array
+	 * 
 	 * @return array Response data array
 	 */
 	public function getData() {
@@ -131,6 +167,8 @@ class Elastica_Response {
 	}
 
 	/**
+	 * Time request took
+	 * 
 	 * @return int Time request took
 	 */
 	public function getEngineTime() {

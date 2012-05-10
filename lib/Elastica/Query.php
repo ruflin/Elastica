@@ -9,8 +9,12 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/
  */
-class Elastica_Query extends Elastica_Param
-{
+class Elastica_Query extends Elastica_Param {
+	/**
+	 * Params
+	 * 
+	 * @var array Params
+	 */
 	protected $_params = array();
 
 	/**
@@ -86,6 +90,8 @@ class Elastica_Query extends Elastica_Param
 	}
 
 	/**
+	 * Set Filter
+	 * 
 	 * @param Elastica_Filter_Abstract $filter Filter object
 	 * @return Elastica_Query Current object
 	 */

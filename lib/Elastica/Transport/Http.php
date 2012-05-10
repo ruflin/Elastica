@@ -9,11 +9,15 @@
 class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 
 	/**
+	 * Http scheme
+	 * 
 	 * @var string Http scheme
 	 */
 	protected $_scheme = 'http';
 
 	/**
+	 * Curl resource to reuse
+	 * 
 	 * @var resource Curl resource to reuse
 	 */
 	protected static $_connection = null;
@@ -23,8 +27,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 	 *
 	 * All calls that are made to the server are done through this function
 	 *
-	 * @param string $host Host name
-	 * @param int $port Port number
+	 * @param array $params Host, Port, ...
 	 * @return Elastica_Response Response object
 	 */
 	public function exec(array $params) {
@@ -129,6 +132,8 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract {
 	}
 
 	/**
+	 * Return Curl ressource
+	 * 
 	 * @param bool $persistent False if not persistent connection
 	 * @return resource Connection resource
 	 */

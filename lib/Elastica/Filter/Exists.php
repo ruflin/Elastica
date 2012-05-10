@@ -8,9 +8,10 @@
  * @author Oleg Cherniy <oleg.cherniy@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/exists-filter.html
  */
-class Elastica_Filter_Exists extends Elastica_Filter_Abstract
-{
+class Elastica_Filter_Exists extends Elastica_Filter_Abstract {
 	/**
+	 * Construct exists filter
+	 * 
 	 * @param string $field
 	 */
 	public function __construct($field) {
@@ -18,6 +19,8 @@ class Elastica_Filter_Exists extends Elastica_Filter_Abstract
 	}
 
 	/**
+	 * Set field
+	 * 
 	 * @param string $field
 	 * @return Elastica_Filter_Exists
 	 */

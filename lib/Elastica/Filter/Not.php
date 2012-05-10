@@ -8,8 +8,7 @@
  * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/not-filter.html
  */
-class Elastica_Filter_Not extends Elastica_Filter_Abstract
-{
+class Elastica_Filter_Not extends Elastica_Filter_Abstract {
 	/**
 	 * Creates Not filter query
 	 *
@@ -20,6 +19,8 @@ class Elastica_Filter_Not extends Elastica_Filter_Abstract
 	}
 
 	/**
+	 * Set filter
+	 * 
 	 * @param Elastica_Filter_Abstract $filter
 	 * @return Elastica_Filter_Not
 	 */
