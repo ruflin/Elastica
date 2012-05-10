@@ -7,10 +7,23 @@
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
 class Elastica_Search {
+	/**
+	 * Array of indices
+	 * 
+	 * @var array
+	 */
 	protected $_indices = array();
+
+	/**
+	 * Array of types
+	 * 
+	 * @var array
+	 */
 	protected $_types = array();
 
 	/**
+	 * Client object
+	 * 
 	 * @var Elastica_Client
 	 */
 	protected $_client;
@@ -94,6 +107,8 @@ class Elastica_Search {
 	}
 
 	/**
+	 * Return client object
+	 * 
 	 * @return Elastica_Client Client object
 	 */
 	public function getClient() {
@@ -101,14 +116,18 @@ class Elastica_Search {
 	}
 
 	/**
-	 * @return string[] List of index names
+	 * Return array of indices
+	 * 
+	 * @return array List of index names
 	 */
 	public function getIndices() {
 		return $this->_indices;
 	}
 
 	/**
-	 * @return string[] List of types
+	 * Return array of types
+	 * 
+	 * @return array List of types
 	 */
 	public function getTypes() {
 		return $this->_types;

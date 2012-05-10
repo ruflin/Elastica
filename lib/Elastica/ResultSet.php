@@ -9,10 +9,26 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_ResultSet implements Iterator, Countable
-{
+class Elastica_ResultSet implements Iterator, Countable {
+	/**
+	 * Results
+	 * 
+	 * @var array Results
+	 */
 	protected $_results = array();
+
+	/**
+	 * Current position
+	 * 
+	 * @var int Current position
+	 */
 	protected $_position = 0;
+
+	/**
+	 * Response
+	 * 
+	 * @var Elastica_Response Response object
+	 */
 	protected $_response = null;
 	protected $_took = 0;
 	/**

@@ -9,9 +9,10 @@
  * @author Fabian Vogler <fabian@equivalence.ch>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/has-child-query.html
  */
-class Elastica_Query_HasChild extends Elastica_Query_Abstract
-{
+class Elastica_Query_HasChild extends Elastica_Query_Abstract {
 	/**
+	 * Construct HasChild Query
+	 * 
 	 * @param string|Elastica_Query $query Query string or a Elastica_Query object
 	 * @param string $type Parent document type
 	 */

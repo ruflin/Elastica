@@ -8,8 +8,7 @@
  * @author Raul Martinez, Jr <juneym@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/mlt-query.html
  */
-class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
-{
+class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract {
 	/**
 	 * Adds field to mlt query
 	 *
@@ -32,6 +31,8 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set boost
+	 * 
 	 * @param float $boost Boost value
 	 * @return Elastica_Query_MoreLikeThis Query object
 	 */
@@ -51,6 +52,8 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 
 
 	/**
+	 * Set percent terms to match
+	 * 
 	 * @param float $percentTermsToMatch Percentage
 	 * @return Elastica_Query_MoreLikeThis
 	 */
@@ -59,6 +62,8 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set min term frequency
+	 * 
 	 * @param int $minTermFreq
 	 * @return Elastica_Query_MoreLikeThis
 	 */
@@ -68,6 +73,8 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 
 
 	/**
+	 * set min document frequency
+	 * 
 	 * @param int $minDocFreq
 	 * @return Elastica_Query_MoreLikeThis
 	 */
@@ -76,6 +83,8 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * set max document frequency
+	 * 
 	 * @param int $maxDocFreq
 	 * @return Elastica_Query_MoreLikeThis
 	 */
@@ -85,6 +94,8 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 
 
 	/**
+	 * Set min word length
+	 * 
 	 * @param int $minWordLength
 	 * @return Elastica_Query_MoreLikeThis
 	 */
@@ -93,6 +104,8 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set max word length
+	 * 
 	 * @param int $maxWordLength
 	 * @return Elastica_Query_MoreLikeThis
 	 */
@@ -101,6 +114,8 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set boost terms
+	 * 
 	 * @param bool $boostTerms
 	 * @return Elastica_Query_MoreLikeThis
 	 * @link http://www.elasticsearch.org/guide/reference/query-dsl/mlt-query.html
@@ -110,6 +125,8 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set analyzer
+	 * 
 	 * @param string $analyzer
 	 * @return Elastica_Query_MoreLikeThis
 	 */
@@ -119,6 +136,8 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set stopwords
+	 * 
 	 * @param array $stopWords
 	 * @return Elastica_Query_MoreLikeThis
 	 */

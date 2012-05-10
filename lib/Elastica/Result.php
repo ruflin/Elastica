@@ -8,9 +8,13 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Result
-{
-	protected $_hit;
+class Elastica_Result {
+	/**
+	 * Hit array
+	 * 
+	 * @var array Hit array
+	 */
+	protected $_hit = array();
 
 	/**
 	 * Constructs a single results object

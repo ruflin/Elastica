@@ -8,8 +8,12 @@
  * @author Nicolas Ruflin <spam@ruflin.com>, Jasper van Wanrooy <jasper@vanwanrooy.net>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/query-string-query.html
  */
-class Elastica_Query_QueryString extends Elastica_Query_Abstract
-{
+class Elastica_Query_QueryString extends Elastica_Query_Abstract {
+	/**
+	 * Query string
+	 * 
+	 * @var string Query string
+	 */
 	protected $_queryString = '';
 
 	/**

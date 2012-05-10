@@ -8,10 +8,10 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/wildcard_query
  */
-class Elastica_Query_Wildcard extends Elastica_Query_Abstract
-{
-
+class Elastica_Query_Wildcard extends Elastica_Query_Abstract {
 	/**
+	 * Construct wildcard query
+	 * 
 	 * @param string $key OPTIONAL Wildcard key
 	 * @param string $value OPTIONAL Wildcard value
 	 * @param float $boost OPTIONAL Boost value (default = 1)

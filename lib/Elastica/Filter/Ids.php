@@ -8,8 +8,7 @@
  * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/ids-filter.html
  */
-class Elastica_Filter_Ids extends Elastica_Filter_Abstract
-{
+class Elastica_Filter_Ids extends Elastica_Filter_Abstract {
 	/**
 	 * Creates filter object
 	 *
@@ -50,6 +49,8 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
 	}
 
 	/**
+	 * Set type
+	 * 
 	 * @param string|Elastica_Type $type Type name or object
 	 * @return Elastica_Filter_Ids Current object
 	 */

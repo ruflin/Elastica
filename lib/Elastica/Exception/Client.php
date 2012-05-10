@@ -7,14 +7,32 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Elastica_Exception_Client extends Elastica_Exception_Abstract {
-
+	/**
+	 * Error code / message
+	 * 
+	 * @var string Error code / message
+	 */
 	protected $_error = 0;
+
+	/**
+	 * Request
+	 * 
+	 * @var Elastica_Request Request object
+	 */
 	protected $_request = null;
+
+	/**
+	 * Response
+	 * 
+	 * @var Elastica_Response Response object
+	 */
 	protected $_response = null;
 
 	/**
+	 * Construct Exception
+	 * 
 	 * @param string $error Error
-	 * @param Elastica_Transport_Abstract $request
+	 * @param Elastica_Request $request
 	 * @param Elastica_Response $response
 	 */
 	public function __construct($error, Elastica_Request $request = null, Elastica_Response $response = null) {
@@ -66,6 +84,8 @@ class Elastica_Exception_Client extends Elastica_Exception_Abstract {
 	}
 
 	/**
+	 * Return Error code / message
+	 * 
 	 * @return string Error code / message
 	 */
 	public function getError() {

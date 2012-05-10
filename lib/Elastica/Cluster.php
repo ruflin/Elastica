@@ -7,8 +7,12 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster
  */
-class Elastica_Cluster
-{
+class Elastica_Cluster {
+	/**
+	 * Client
+	 * 
+	 * @var Elastica_Client Client object
+	 */
 	protected $_client = null;
 
 	/**
@@ -40,6 +44,8 @@ class Elastica_Cluster
 	}
 
 	/**
+	 * Return list of index names
+	 * 
 	 * @return array List of index names
 	 */
 	public function getIndexNames() {
@@ -105,6 +111,8 @@ class Elastica_Cluster
 	}
 
 	/**
+	 * Return Cluster health
+	 * 
 	 * @param array $args OPTIONAL
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/health/
 	 */
@@ -113,6 +121,8 @@ class Elastica_Cluster
 	}
 
 	/**
+	 * Return Cluster settings
+	 * 
 	 * @return Elastica_Cluster_Settings
 	 */
 	public function getSettings() {

@@ -8,13 +8,47 @@
  * @author Raul Martinez, Jr <juneym@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/flt-query.html
  */
-class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
-{
+class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract {
+	/**
+	 * Field names
+	 * 
+	 * @var array Field names
+	 */
 	protected $_fields = array();
-	protected $_likeText   = null;
+
+	/**
+	 * Like text
+	 * 
+	 * @var string Like text
+	 */
+	protected $_likeText   = '';
+	
+	/**
+	 * Max query terms value
+	 * 
+	 * @var int Max query terms value
+	 */
 	protected $_maxQueryTerms = 25;
+	
+	/**
+	 * minimum similarity
+	 * 
+	 * @var int minimum similarity
+	 */
 	protected $_minSimilarity = 0.5;
+	
+	/**
+	 * Prefix Length
+	 * 
+	 * @var int Prefix Length
+	 */
 	protected $_prefixLength = 0;
+	
+	/**
+	 * Boost
+	 * 
+	 * @var float Boost
+	 */
 	protected $_boost = 1.0;
 
 	/**
@@ -53,6 +87,8 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set boost
+	 * 
 	 * @param float $value Boost value
 	 * @return Elastica_Query_FuzzyLikeThis Query object
 	 */

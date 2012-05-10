@@ -8,11 +8,17 @@
  * @author James Wilson <jwilson556@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/type-filter.html
  */
-class Elastica_Filter_Type extends Elastica_Filter_Abstract
-{
-	protected $_type;
+class Elastica_Filter_Type extends Elastica_Filter_Abstract {
+	/**
+	 * Type
+	 * 
+	 * @var Elastica_Type Type object
+	 */
+	protected $_type = null;
 
 	/**
+	 * Construct Type Filter
+	 * 
 	 * @param string $typeName Type name
 	 * @return Elastica_Filter_Type
 	 */

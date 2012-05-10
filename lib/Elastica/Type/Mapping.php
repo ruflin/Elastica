@@ -7,13 +7,24 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/mapping/
  */
-class Elastica_Type_Mapping
-{
+class Elastica_Type_Mapping {
+	/**
+	 * Mapping
+	 * 
+	 * @var array Mapping
+	 */
 	protected $_mapping = array();
 
+	/**
+	 * Type
+	 * 
+	 * @var Elastica_Type Type object
+	 */
 	protected $_type = null;
 
 	/**
+	 * Construct Mapping
+	 * 
 	 * @param Elastica_Type $type OPTIONAL Type object
 	 * @param array $properties OPTIONAL Properties
 	 */
@@ -110,6 +121,8 @@ class Elastica_Type_Mapping
 	}
 	
 	/**
+	 * Set TTL
+	 * 
 	 * @param array $params TTL Params (enabled, default, ...)
 	 * @return Elastica_Type_Mapping
 	 */
