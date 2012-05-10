@@ -247,13 +247,13 @@ class Elastica_TypeTest extends Elastica_Test
 	}
 
 	public function testUpdateDocument() {
-		$client = new Elastica_Client(array('log' => '/tmp/results'));
+		$client = new Elastica_Client();
 		$index = $client->getIndex('elastica_test');
 		$type = $index->getType('update_type');
 		$id = 1;
 		$type->addDocument(new Elastica_Document($id, array('name' => 'bruce wayne batman')));
 		$newName = 'batman';
-		$update = new Elastica_UpdateScript($id, "ctx._source.name = name", array('name' => $newName));
+		$update = new Elastica_UpdateDocument($id, "ctx._source.name = name", array('name' => $newName));
 		$update->setRefresh(true);
 		$type->updateDocument($update);
 		$updatedDoc = $type->getDocument($id)->getData();

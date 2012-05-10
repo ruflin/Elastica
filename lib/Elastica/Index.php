@@ -99,6 +99,19 @@ class Elastica_Index implements Elastica_Searchable
 	}
 
 	/**
+	 * Update document, using update script. Requires elasticsearch >= 0.19.0
+	 * @see Elastica_Client::updateDocument()
+	 * @param Elastica_UpdateDocument $doc
+	 * @return Elastica_Response
+	 * @throws Elastica_Exception_Invalid if doc doesn't contain id, index or type
+	 * @link http://www.elasticsearch.org/guide/reference/api/update.html
+	 */
+	public function updateDocument(Elastica_UpdateDocument $doc) {
+		$doc->setIndex($this->getName());
+		return $this->getClient()->updateDocument($doc);
+	}
+
+	/**
 	 * Deletes the index
 	 *
 	 * @return Elastica_Response Response object

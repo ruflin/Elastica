@@ -10,7 +10,7 @@
  * @package Elastica
  * @author Alex Vasilenko <aa.vasilenko@gmail.com>
  */
-class Elastica_UpdateScript {
+class Elastica_UpdateDocument {
 
 	/**
 	 * @var string
@@ -75,14 +75,26 @@ class Elastica_UpdateScript {
 	private $_retryOnConflict;
 
 	/**
+	 * @var string
+	 */
+	private $_type;
+
+	/**
+	 * @var string
+	 */
+	private $_index;
+
+	/**
 	 * @param string $id
 	 * @param string $script
 	 * @param array $params
 	 */
-	public function __construct($id, $script, array $params = array()) {
+	public function __construct($id, $script, array $params = array(), $type = '', $index = '') {
 		$this->_id = $id;
 		$this->_script = $script;
 		$this->_data = $params;
+		$this->_type = $type;
+		$this->_index = $index;
 	}
 
 	/**
@@ -169,6 +181,7 @@ class Elastica_UpdateScript {
 	 */
 	public function setConsistency($consistency) {
 		$this->_consistency = $consistency;
+		return $this;
 	}
 
 	/**
@@ -183,6 +196,7 @@ class Elastica_UpdateScript {
 	 */
 	public function setParent($parent) {
 		$this->_parent = $parent;
+		return $this;
 	}
 
 	/**
@@ -197,6 +211,7 @@ class Elastica_UpdateScript {
 	 */
 	public function setPercolate($percolate) {
 		$this->_percolate = $percolate;
+		return $this;
 	}
 
 	/**
@@ -211,6 +226,7 @@ class Elastica_UpdateScript {
 	 */
 	public function setRefresh($refresh) {
 		$this->_refresh = $refresh;
+		return $this;
 	}
 
 	/**
@@ -225,6 +241,7 @@ class Elastica_UpdateScript {
 	 */
 	public function setReplication($replication) {
 		$this->_replication = $replication;
+		return $this;
 	}
 
 	/**
@@ -239,6 +256,7 @@ class Elastica_UpdateScript {
 	 */
 	public function setRouting($routing) {
 		$this->_routing = $routing;
+		return $this;
 	}
 
 	/**
@@ -253,6 +271,7 @@ class Elastica_UpdateScript {
 	 */
 	public function setTimeout($timeout) {
 		$this->_timeout = $timeout;
+		return $this;
 	}
 
 	/**
@@ -267,6 +286,7 @@ class Elastica_UpdateScript {
 	 */
 	public function setRetryOnConflict($retryOnConflict) {
 		$this->_retryOnConflict = $retryOnConflict;
+		return $this;
 	}
 
 	/**
@@ -274,5 +294,35 @@ class Elastica_UpdateScript {
 	 */
 	public function getRetryOnConflict() {
 		return $this->_retryOnConflict;
+	}
+
+	/**
+	 * @param string $index
+	 */
+	public function setIndex($index) {
+		$this->_index = $index;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getIndex() {
+		return $this->_index;
+	}
+
+	/**
+	 * @param string $type
+	 */
+	public function setType($type) {
+		$this->_type = $type;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getType() {
+		return $this->_type;
 	}
 }

@@ -221,6 +221,35 @@ class Elastica_Client
 	}
 
 	/**
+	 * Update document, using update script. Requires elasticsearch >= 0.19.0
+	 * @param Elastica_UpdateDocument $doc
+	 * @return Elastica_Response
+	 * @throws Elastica_Exception_Invalid if doc doesn't contain id, index or type
+	 * @link http://www.elasticsearch.org/guide/reference/api/update.html
+	 */
+	public function updateDocument(Elastica_UpdateDocument $doc) {
+		if (!$doc->getId()) {
+			throw new Elastica_Exception_Invalid("Doc should contain id");
+		}
+		if (!$doc->getIndex()) {
+			throw new Elastica_Exception_Invalid("Doc should contain index");
+		}
+		if (!$doc->getType()) {
+			throw new Elastica_Exception_Invalid("Doc should contain index type");
+		}
+
+		$path =  $doc->getIndex() . '/' . $doc->getType() . '/' . $doc->getId() . '/_update';
+
+		$query = $doc->prepareQuery();
+		if (!isset($query['retry_on_conflict'])) {
+			$retryOnConflict = $this->getConfig("retryOnConflict");
+			$query['retry_on_conflict'] = $retryOnConflict;
+		}
+
+		return $this->request($path, Elastica_Request::POST, $doc->prepareData(), $query);
+	}
+
+	/**
 	 * Bulk deletes documents (not implemented yet)
 	 *
 	 * @param array $docs Docs
