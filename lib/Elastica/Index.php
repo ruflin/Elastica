@@ -274,16 +274,26 @@ class Elastica_Index implements Elastica_Searchable
 	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
 	 */
     
-    public function addAlias($name, $options = null, $replace = false) {
+    public function addAlias($name, $options = null, $extra_params = null) {
         $path = '_aliases';
         
         $add = array('index' => $this->getName(),
                      'alias' => $name);
         
-        if($replace){
-            $status = new Elastica_Status($this->getClient());
-            foreach ($status->getIndicesWithAlias($name) as $index) {
-                $index->removeAlias($name);
+        if(is_array($extra_params)){
+            foreach($extra_params as $key => $value){
+                switch($key){
+                    case 'recreate':
+                        $status = new Elastica_Status($this->getClient());
+                        foreach ($status->getIndicesWithAlias($name) as $index) {
+                            $index->removeAlias($name);
+                        }                    
+                    break;
+                    
+                    default:
+                        throw new Elastica_Exception_Invalid('Invalid param '.$key);
+                        break;
+                }
             }
         }
         
