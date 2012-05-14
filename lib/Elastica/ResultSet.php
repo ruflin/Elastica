@@ -97,14 +97,14 @@ class Elastica_ResultSet implements Iterator, Countable {
 	}
 
 	/**
-     	* Returns the total number of ms for this search to complete
-     	*
-     	* @return int Total time
-     	*/
-    	public function getTotalTime() {
-        	return (int) $this->_totalHits;
-    	}
-    	
+	* Returns the total number of ms for this search to complete
+	*
+	* @return int Total time
+	*/
+	public function getTotalTime() {
+		return (int) $this->_took;
+	}
+
 	/**
 	 * Returns response object
 	 *
