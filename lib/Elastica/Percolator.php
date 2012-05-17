@@ -42,7 +42,7 @@ class Elastica_Percolator {
 	 * @param string $name query name
 	 * @return Elastica_Response
 	 */
-	public function removeQuery($name) {
+	public function unregisterQuery($name) {
 		$path = '_percolator/' . $this->_index->getName() . '/' . $name; 
 		return $this->_index->getClient()->request($path, Elastica_Request::DELETE);
 	}
