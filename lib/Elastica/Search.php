@@ -190,30 +190,33 @@ class Elastica_Search {
 			
 		} else if (is_array($options)) {
 			
-			foreach ($options as $key => $value) {
-			    if (empty($value)){
-                    throw new Elastica_Exception_Invalid('Invalid value '.$value.' for option '.$key);
-                }else{
-    			    $path_separator = (strpos($path, '?'))?'&':'?';
-    				switch ($key) {
-    					case 'limit' :
-    						$query -> setLimit($value);
-    						break;
-    					case 'routing' :
-    						if (!empty($value)) {
-    							$path .= $path_separator.'routing=' . $value;
-    						}
-    						break;
-                        case 'search_type':
-                            if (!empty($value)) {
-                                $path .= $path_separator.'search_type=' . $value;
-                            }
-                            break;
-                        default:
-                            throw new Elastica_Exception_Invalid('Invalid option '.$key);
-                        break;
-    				}
-                }
+		foreach ($options as $key => $value) {
+			if (empty($value)){
+				throw new Elastica_Exception_Invalid('Invalid value '.$value.' for option '.$key);
+			} else {
+				$path_separator = (strpos($path, '?')) ? '&' : '?';
+				switch ($key) {
+					case 'limit' :
+						$query -> setLimit($value);
+						break;
+					case 'from' :
+						$query -> setFrom($value);
+						break;
+					case 'routing' :
+						if (!empty($value)) {
+							$path .= $path_separator.'routing=' . $value;
+						}
+						break;
+					case 'search_type':
+						if (!empty($value)) {
+							$path .= $path_separator.'search_type=' . $value;
+						}
+						break;
+					default:
+						throw new Elastica_Exception_Invalid('Invalid option '.$key);
+						break;
+					}
+				}
 			}
 			
 		}
