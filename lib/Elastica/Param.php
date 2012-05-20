@@ -8,8 +8,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Param
-{
+class Elastica_Param {
 	/**
 	 * Params
 	 *
@@ -17,6 +16,11 @@ class Elastica_Param
 	 */
 	protected $_params = array();
 
+	/**
+	 * Raw Params
+	 *
+	 * @var array
+	 */
 	protected $_rawParams = array();
 
 	/**

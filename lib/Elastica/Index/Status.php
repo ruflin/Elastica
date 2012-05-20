@@ -7,15 +7,31 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
-class Elastica_Index_Status
-{
+class Elastica_Index_Status {
+	/**
+	 * Response
+	 * 
+	 * @var Elastica_Response Response object
+	 */
 	protected $_response = null;
 
+	/**
+	 * Stats info
+	 * 
+	 * @var array Stats info
+	 */
 	protected $_data = array();
 
-	protected $_name = '';
+	/**
+	 * Index
+	 * 
+	 * @var Elastica_Index Index object
+	 */
+	protected $_index = null;
 
 	/**
+	 * Construct
+	 * 
 	 * @param Elastica_Index $index Index object
 	 */
 	public function __construct(Elastica_Index $index) {

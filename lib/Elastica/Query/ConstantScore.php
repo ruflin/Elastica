@@ -9,10 +9,11 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/constant-score-query.html
  */
-class Elastica_Query_ConstantScore extends Elastica_Query_Abstract
-{
+class Elastica_Query_ConstantScore extends Elastica_Query_Abstract {
 
 	/**
+	 * Construct constant score query
+	 * 
 	 * @param null|Elastica_Filter_Abstract|array $filter
 	 */
 	public function __construct($filter = null) {
@@ -22,6 +23,8 @@ class Elastica_Query_ConstantScore extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set filter
+	 * 
 	 * @param array|Elastica_Filter_Abstract $filter
 	 * @return Elastica_Query_ConstantScore Query object
 	 */
@@ -33,6 +36,8 @@ class Elastica_Query_ConstantScore extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set boost
+	 * 
 	 * @param float $boost
 	 * @return Elastica_Query_ConstantScore
 	 */

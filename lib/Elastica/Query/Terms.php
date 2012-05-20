@@ -8,15 +8,33 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/terms-query.html
  */
-class Elastica_Query_Terms extends Elastica_Query_Abstract
-{
+class Elastica_Query_Terms extends Elastica_Query_Abstract {
+	/**
+	 * Terms
+	 * 
+	 * @var array Terms
+	 */
 	protected $_terms = array();
+
+	/**
+	 * Params
+	 * 
+	 * @var array Params
+	 */
 	protected $_params = array();
+
+	/**
+	 * Terms key
+	 * 
+	 * @var string Terms key
+	 */
 	protected $_key = '';
 
 	/**
+	 * Construct terms query
+	 * 
 	 * @param string $key OPTIONAL Terms key
-	 * @param array $terms OPTIONLA Terms list
+	 * @param array $terms OPTIONAL Terms list
 	 */
 	public function __construct($key = '', array $terms = array()) {
 		$this->setTerms($key, $terms);

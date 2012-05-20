@@ -7,8 +7,7 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
-class Elastica_Status
-{
+class Elastica_Status {
 	/**
 	 * Contains all status infos
 	 *
@@ -16,8 +15,18 @@ class Elastica_Status
 	 */
 	protected $_response = null;
 
+	/**
+	 * Data
+	 *
+	 * @var array Data
+	 */
 	protected $_data = array();
 
+	/**
+	 * Client object
+	 *
+	 * @var Elastica_Client Client object
+	 */
 	protected $_client = null;
 
 	/**
@@ -117,6 +126,8 @@ class Elastica_Status
 	}
 
 	/**
+	 * Return shards info
+	 * 
 	 * @return array Shards info
 	 */
 	public function getShards() {

@@ -13,10 +13,39 @@ class Elastica_Request {
 	const GET = 'GET';
 	const DELETE = 'DELETE';
 
+	/**
+	 * Client
+	 * 
+	 * @var Elastica_Client Client object
+	 */
 	protected $_client;
+
+	/**
+	 * Request path
+	 * 
+	 * @var string Request path
+	 */
 	protected $_path;
+
+	/**
+	 * Request method (use const's)
+	 * 
+	 * @var string Request method (use const's)
+	 */
 	protected $_method;
+
+	/**
+	 * Data array
+	 * 
+	 * @var array Data array
+	 */
 	protected $_data;
+
+	/**
+	 * Query params
+	 * 
+	 * @var array Query params
+	 */
 	protected $_query;
 
 	/**
@@ -27,6 +56,8 @@ class Elastica_Request {
 	protected static $_serverId = null;
 
 	/**
+	 * Construct
+	 * 
 	 * @param Elastica_Client $client
 	 * @param string $path Request path
 	 * @param string $method Request method (use const's)
@@ -53,6 +84,8 @@ class Elastica_Request {
 	}
 
 	/**
+	 * Get request method
+	 * 
 	 * @return string Request method
 	 */
 	public function getMethod() {
@@ -70,6 +103,8 @@ class Elastica_Request {
 	}
 
 	/**
+	 * Return request data
+	 * 
 	 * @return array Request data
 	 */
 	public function getData() {
@@ -88,6 +123,8 @@ class Elastica_Request {
 	}
 
 	/**
+	 * Return request path
+	 * 
 	 * @return string Request path
 	 */
 	public function getPath() {
@@ -95,6 +132,8 @@ class Elastica_Request {
 	}
 
 	/**
+	 * Return query params
+	 * 
 	 * @return array Query params
 	 */
 	public function getQuery() {
@@ -102,6 +141,8 @@ class Elastica_Request {
 	}
 
 	/**
+	 * Return Client Object
+	 * 
 	 * @return Elastica_Client
 	 */
 	public function getClient() {

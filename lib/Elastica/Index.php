@@ -11,11 +11,15 @@
 class Elastica_Index implements Elastica_Searchable
 {
 	/**
+	 * Index name
+	 * 
 	 * @var string Index name
 	 */
 	protected $_name = '';
 
 	/**
+	 * Client object
+	 * 
 	 * @var Elastica_Client Client object
 	 */
 	protected $_client = null;
@@ -57,6 +61,8 @@ class Elastica_Index implements Elastica_Searchable
 	}
 
 	/**
+	 * Return Index Stats
+	 * 
 	 * @return ELastica_Index_Stats
 	 */
 	public function getStats() {

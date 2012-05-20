@@ -9,9 +9,10 @@
  * @author Wu Yang <darkyoung@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html
  */
-class Elastica_Query_TopChildren extends Elastica_Query_Abstract
-{
+class Elastica_Query_TopChildren extends Elastica_Query_Abstract {
 	/**
+	 * Construct topChildren query
+	 * 
 	 * @param string|Elastica_Query $query Query string or a Elastica_Query object
 	 * @param string $type Parent document type
 	 */

@@ -8,9 +8,19 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/fuzzy_query/
  */
-class Elastica_Query_Filtered extends Elastica_Query_Abstract
-{
+class Elastica_Query_Filtered extends Elastica_Query_Abstract {
+	/**
+	 * Query
+	 * 
+	 * @var Elastica_Query_Abstract Query object
+	 */
 	protected $_query = null;
+
+	/**
+	 * Filter
+	 * 
+	 * @var Elastica_Filter_Abstract Filter object
+	 */
 	protected $_filter = null;
 
 	/**

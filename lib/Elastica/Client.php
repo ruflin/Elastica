@@ -6,8 +6,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Client
-{
+class Elastica_Client {
 	/**
 	 * Default elastic search port
 	 */

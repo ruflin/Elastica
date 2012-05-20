@@ -9,8 +9,9 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Elastica_Filter_Query extends Elastica_Filter_Abstract {
-
 	/**
+	 * Construct query filter
+	 * 
 	 * @param array|Elastica_Query_Abstract $query
 	 */
 	public function __construct($query = null) {
@@ -20,6 +21,8 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract {
 	}
 
 	/**
+	 * Set query
+	 * 
 	 * @param array|Elastica_Query_Abstract $query
 	 * @return Elastca_Filter_Query Query object
 	 * @throws Elastica_Exception_Invalid Invalid param

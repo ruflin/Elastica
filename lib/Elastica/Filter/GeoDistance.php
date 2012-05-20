@@ -7,12 +7,34 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-filter.html
  */
-class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
-{
-	protected $_key;
-	protected $_distance;
-	protected $_latitude;
-	protected $_longitude;
+class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
+	/**
+	 * Key
+	 * 
+	 * @var string Key
+	 */
+	protected $_key = '';
+
+	/**
+	 * Distance
+	 * 
+	 * @var string Distance
+	 */
+	protected $_distance = '';
+
+	/**
+	 * Latitude
+	 * 
+	 * @var string Latitude
+	 */
+	protected $_latitude = '';
+
+	/**
+	 * Longitude
+	 * 
+	 * @var string Longitude
+	 */
+	protected $_longitude = '';
 
 	/**
 	 * Create GeoDistance object

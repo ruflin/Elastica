@@ -9,12 +9,28 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_ResultSet implements Iterator, Countable
-{
+class Elastica_ResultSet implements Iterator, Countable {
+	/**
+	 * Results
+	 * 
+	 * @var array Results
+	 */
 	protected $_results = array();
-	protected $_position = 0;
-	protected $_response = null;
 
+	/**
+	 * Current position
+	 * 
+	 * @var int Current position
+	 */
+	protected $_position = 0;
+
+	/**
+	 * Response
+	 * 
+	 * @var Elastica_Response Response object
+	 */
+	protected $_response = null;
+	protected $_took = 0;
 	/**
 	 * Constructs ResultSet object
 	 *
@@ -34,7 +50,7 @@ class Elastica_ResultSet implements Iterator, Countable
 		$this->_response = $response;
 		$result = $response->getData();
 		$this->_totalHits = $result['hits']['total'];
-
+		$this->_took = isset($result['took']) ? $result['took'] : 0;
 		if (isset($result['hits']['hits'])) {
 			foreach ($result['hits']['hits'] as $hit) {
 				$this->_results[] = new Elastica_Result($hit);
@@ -81,6 +97,15 @@ class Elastica_ResultSet implements Iterator, Countable
 	}
 
 	/**
+	* Returns the total number of ms for this search to complete
+	*
+	* @return int Total time
+	*/
+	public function getTotalTime() {
+		return (int) $this->_took;
+	}
+
+	/**
 	 * Returns response object
 	 *
 	 * @return Elastica_Response Response object
@@ -102,7 +127,7 @@ class Elastica_ResultSet implements Iterator, Countable
 	/**
 	 * Returns the current object of the set
 	 *
-	 * @return mixed|bool Set object or false if not valid (no more entries)
+	 * @return Elastica_Result|bool Set object or false if not valid (no more entries)
 	 */
 	public function current() {
 		if ($this->valid()) {

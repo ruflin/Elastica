@@ -8,8 +8,7 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/nested-filter.html
  */
-class Elastica_Filter_Nested extends Elastica_Filter_Abstract
-{
+class Elastica_Filter_Nested extends Elastica_Filter_Abstract {
 	/**
 	 * Adds field to mlt filter
 	 *
@@ -23,7 +22,7 @@ class Elastica_Filter_Nested extends Elastica_Filter_Abstract
 	/**
 	 * Sets nested query
 	 *
-	 * @param Elastica_Query_Abstract $filter
+	 * @param Elastica_Query_Abstract $query
 	 * @return Elastica_Filter_Nested
 	 */
 	public function setQuery(Elastica_Query_Abstract $query) {
@@ -31,6 +30,8 @@ class Elastica_Filter_Nested extends Elastica_Filter_Abstract
 	}
 
 	/**
+	 * Set score mode
+	 * 
 	 * @param string $scoreMode Options: avg, total, max and none.
 	 * @return Elastica_Filter_Nested
 	 */

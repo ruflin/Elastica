@@ -8,8 +8,12 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Query_Array extends Elastica_Query_Abstract
-{
+class Elastica_Query_Array extends Elastica_Query_Abstract {
+	/**
+	 * Query
+	 * 
+	 * @var array Query
+	 */
 	protected $_query = array();
 
 	/**

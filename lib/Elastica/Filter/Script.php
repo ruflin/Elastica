@@ -10,13 +10,16 @@
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/script-filter.html
  */
 class Elastica_Filter_Script extends Elastica_Filter_Abstract {
-
 	/**
+	 * Query object
+	 * 
 	 * @var array|Elastica_Query_Abstract
 	 */
 	protected $_query = null;
 
 	/**
+	 * Construct script filter
+	 * 
 	 * @param array|Elastica_Query_Abstract $query OPTIONAL Query object
 	 */
 	public function __construct($query = null) {
@@ -48,6 +51,8 @@ class Elastica_Filter_Script extends Elastica_Filter_Abstract {
 	}
 
 	/**
+	 * ToArray
+	 * 
 	 * @return array Script filter
 	 * @see Elastica_Filter_Abstract::toArray()
 	 */

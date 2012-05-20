@@ -9,9 +9,10 @@
  * @author Maciej Wiercinski <maciej@wiercinski.net>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html  
  */
-class Elastica_Filter_Missing extends Elastica_Filter_Abstract
-{
+class Elastica_Filter_Missing extends Elastica_Filter_Abstract {
 	/**
+	 * Construct missing filter
+	 * 
 	 * @param string $field OPTIONAL
 	 */
 	public function __construct($field = '') {
@@ -21,6 +22,8 @@ class Elastica_Filter_Missing extends Elastica_Filter_Abstract
 	}
 
 	/**
+	 * Set field
+	 * 
 	 * @param string $field
 	 */
 	public function setField($field) {

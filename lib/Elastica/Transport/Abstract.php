@@ -7,15 +7,40 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 abstract class Elastica_Transport_Abstract {
-
+	/**
+	 * Path
+	 * 
+	 * @var string path
+	 */
 	protected $_path;
-	// TODO: set default method?
+	
+
+	/**
+	 * Method
+	 * 
+	 * @var string method
+	 * @todo set default method?
+	 */
 	protected $_method;
+
+	/**
+	 * Data
+	 * 
+	 * @var array Data
+	 */
 	protected $_data;
+
+	/**
+	 * Config
+	 * 
+	 * @var array config
+	 */
 	protected $_config;
 
 
 	/**
+	 * Construc transport
+	 * 
 	 * @param Elastica_Request $request Request object
 	 */
 	public function __construct(Elastica_Request $request) {

@@ -9,31 +9,57 @@
 class Elastica_Document {
 
 	/**
+	 * Document id
+	 * 
 	 * @var string|int	Document id
 	 */
 	protected $_id = '';
 
 	/**
+	 * Document data
+	 * 
 	 * @var array Document data
 	 */
 	protected $_data = array();
 
+	/**
+	 * Document type name
+	 * 
+	 * @var string Document type name
+	 */
 	protected $_type = '';
+
+	/**
+	 * Document index name
+	 * 
+	 * @var string Document index name
+	 */
 	protected $_index = '';
 
+	/**
+	 * Document version
+	 * 
+	 * @var string Document version
+	 */
 	protected $_version = '';
 
 	/**
+	 * Parent document id
+	 * 
 	 * @var string|int Parent document id
 	 */
 	protected $_parent = '';
 
 	/**
+	 * Optype
+	 * 
 	 * @var string Optype
 	 */
 	protected $_optype = '';
 
 	/**
+	 * Percolate
+	 * 
 	 * @var string Percolate
 	 */
 	protected $_percolate = '';
@@ -102,6 +128,8 @@ class Elastica_Document {
 	}
 
 	/**
+	 * Add file content
+	 * 
 	 * @param string $key     Document key
 	 * @param string $content Raw file content
 	 * @return Elastica_Document
@@ -171,6 +199,8 @@ class Elastica_Document {
 	}
 
 	/**
+	 * Return document type name
+	 * 
 	 * @return string Document type name
 	 * @throws Elastica_Exception_Invalid
 	 */
@@ -195,6 +225,8 @@ class Elastica_Document {
 	}
 
 	/**
+	 * Get the document index name
+	 * 
 	 * @return string Index name
 	 * @throws Elastica_Exception_Invalid
 	 */

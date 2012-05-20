@@ -8,8 +8,7 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/nested-query.html
  */
-class Elastica_Query_Nested extends Elastica_Query_Abstract
-{
+class Elastica_Query_Nested extends Elastica_Query_Abstract {
 	/**
 	 * Adds field to mlt query
 	 *
@@ -31,6 +30,8 @@ class Elastica_Query_Nested extends Elastica_Query_Abstract
 	}
 	
 	/**
+	 * Set score method
+	 * 
 	 * @param string $scoreMode Options: avg, total, max and none.
 	 * @return Elastica_Query_Nested
 	 */

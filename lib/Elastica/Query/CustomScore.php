@@ -9,9 +9,7 @@
  * @author Wu Yang <darkyoung@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/custom-score-query.html
  */
-class Elastica_Query_CustomScore extends Elastica_Query_Abstract
-{
-
+class Elastica_Query_CustomScore extends Elastica_Query_Abstract {
 	/**
 	 * Sets query object
 	 *
@@ -25,6 +23,8 @@ class Elastica_Query_CustomScore extends Elastica_Query_Abstract
 	}
 
 	/**
+	 * Set script
+	 * 
 	 * @param string $script
 	 * @return Elastica_Query_CustomScore
 	 */
