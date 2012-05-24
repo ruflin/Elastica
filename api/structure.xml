@@ -1543,7 +1543,7 @@ Example 2: get('os', 'mem') returns an array with all mem infos</p>]]></long-des
       </method>
     </class>
   </file>
-  <file path="Elastica/Percolator.php" hash="f4b4f0a207286f0e94129347165e4fa8" package="Elastica">
+  <file path="Elastica/Percolator.php" hash="002e01b5fbcd901a9ee7784f24a04d0c" package="Elastica">
     <docblock line="2">
       <description><![CDATA[Percolator class]]></description>
       <long-description><![CDATA[]]></long-description>
@@ -1605,8 +1605,8 @@ Example 2: get('os', 'mem') returns an array with all mem infos</p>]]></long-des
             <type by_reference="false">\Elastica_Query</type>
             <type by_reference="false">\Elastica_Query_Abstract</type>
           </tag>
-          <tag line="27" name="return" description="" type="\Elastica_Resonse">
-            <type by_reference="false">\Elastica_Resonse</type>
+          <tag line="27" name="return" description="" type="\Elastica_Response">
+            <type by_reference="false">\Elastica_Response</type>
           </tag>
         </docblock>
         <argument line="34">
@@ -1620,42 +1620,61 @@ Example 2: get('os', 'mem') returns an array with all mem infos</p>]]></long-des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="47" package="">
-        <name>matchDoc</name>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="45" package="">
+        <name>unregisterQuery</name>
         <type>function</type>
         <docblock line="40">
+          <description><![CDATA[Removes a percolator query]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="40" name="param" description="query name" type="string" variable="$name">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="40" name="return" description="" type="\Elastica_Response">
+            <type by_reference="false">\Elastica_Response</type>
+          </tag>
+        </docblock>
+        <argument line="45">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="57" package="">
+        <name>matchDoc</name>
+        <type>function</type>
+        <docblock line="50">
           <description><![CDATA[Match a document to percolator queries]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="40" name="param" description="" type="\Elastica_Document" variable="$doc">
+          <tag line="50" name="param" description="" type="\Elastica_Document" variable="$doc">
             <type by_reference="false">\Elastica_Document</type>
           </tag>
-          <tag line="40" name="param" description="Not implemented yet" type="string|\Elastica_Query|\Elastica_Query_Abstract" variable="$query">
+          <tag line="50" name="param" description="Not implemented yet" type="string|\Elastica_Query|\Elastica_Query_Abstract" variable="$query">
             <type by_reference="false">string</type>
             <type by_reference="false">\Elastica_Query</type>
             <type by_reference="false">\Elastica_Query_Abstract</type>
           </tag>
-          <tag line="40" name="return" description="" type="\Elastica_Resonse">
-            <type by_reference="false">\Elastica_Resonse</type>
+          <tag line="50" name="return" description="" type="\Elastica_Response">
+            <type by_reference="false">\Elastica_Response</type>
           </tag>
         </docblock>
-        <argument line="47">
+        <argument line="57">
           <name>$doc</name>
           <default><![CDATA[]]></default>
           <type>Elastica_Document</type>
         </argument>
-        <argument line="47">
+        <argument line="57">
           <name>$query</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="62" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="72" package="">
         <name>getIndex</name>
         <type>function</type>
-        <docblock line="57">
+        <docblock line="67">
           <description><![CDATA[Return index object]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="57" name="return" description="" type="\Elastica_Index">
+          <tag line="67" name="return" description="" type="\Elastica_Index">
             <type by_reference="false">\Elastica_Index</type>
           </tag>
         </docblock>
@@ -3556,7 +3575,7 @@ config array if not set]]></description>
       </method>
     </class>
   </file>
-  <file path="Elastica/ResultSet.php" hash="6e3dbcbe75865b9ae3baded355ae0250" package="Elastica">
+  <file path="Elastica/ResultSet.php" hash="987f339b065a95692f7a8b869b03a460" package="Elastica">
     <docblock line="2">
       <description><![CDATA[Elastica result set]]></description>
       <long-description><![CDATA[<p>List of all hits that are returned for a search on elasticsearch
@@ -3565,6 +3584,9 @@ Result set implents iterator</p>]]></long-description>
       <tag line="2" name="package" description="Elastica"/>
       <tag line="2" name="author" description="Nicolas Ruflin &lt;spam@ruflin.com&gt;"/>
     </docblock>
+    <parse_markers>
+      <error line="33" code="50018">No DocBlock was found for property $_took</error>
+    </parse_markers>
     <class final="false" abstract="false" namespace="default" line="12" package="Elastica">
       <name>Elastica_ResultSet</name>
       <full_name>\Elastica_ResultSet</full_name>
@@ -3611,6 +3633,10 @@ Result set implents iterator</p>]]></long-description>
             <type by_reference="false">\Elastica_Response</type>
           </tag>
         </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="33" package="Default">
+        <name>$_took</name>
+        <default><![CDATA[0]]></default>
       </property>
       <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="39" package="">
         <name>__construct</name>
@@ -3689,73 +3715,84 @@ Result set implents iterator</p>]]></long-description>
         </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="104" package="">
-        <name>getResponse</name>
+        <name>getTotalTime</name>
         <type>function</type>
         <docblock line="99">
-          <description><![CDATA[Returns response object]]></description>
+          <description><![CDATA[Returns the total number of ms for this search to complete]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="99" name="return" description="Response object" type="\Elastica_Response">
-            <type by_reference="false">\Elastica_Response</type>
+          <tag line="99" name="return" description="Total time" type="int">
+            <type by_reference="false">int</type>
           </tag>
         </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="113" package="">
-        <name>count</name>
+        <name>getResponse</name>
         <type>function</type>
         <docblock line="108">
+          <description><![CDATA[Returns response object]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="108" name="return" description="Response object" type="\Elastica_Response">
+            <type by_reference="false">\Elastica_Response</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="122" package="">
+        <name>count</name>
+        <type>function</type>
+        <docblock line="117">
           <description><![CDATA[Returns size of current set]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="108" name="return" description="Size of set" type="int">
+          <tag line="117" name="return" description="Size of set" type="int">
             <type by_reference="false">int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="123" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="132" package="">
         <name>current</name>
         <type>function</type>
-        <docblock line="118">
+        <docblock line="127">
           <description><![CDATA[Returns the current object of the set]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="118" name="return" description="Set object or false if not valid (no more entries)" type="mixed|bool">
-            <type by_reference="false">mixed</type>
+          <tag line="127" name="return" description="Set object or false if not valid (no more entries)" type="\Elastica_Result|bool">
+            <type by_reference="false">\Elastica_Result</type>
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="134" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="143" package="">
         <name>next</name>
         <type>function</type>
-        <docblock line="131">
+        <docblock line="140">
           <description><![CDATA[Sets pointer (current) to the next item of the set]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="144" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="153" package="">
         <name>key</name>
         <type>function</type>
-        <docblock line="139">
+        <docblock line="148">
           <description><![CDATA[Returns the position of the current entry]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="139" name="return" description="Current position" type="int">
+          <tag line="148" name="return" description="Current position" type="int">
             <type by_reference="false">int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="153" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="162" package="">
         <name>valid</name>
         <type>function</type>
-        <docblock line="148">
+        <docblock line="157">
           <description><![CDATA[Check if an object exists at the current position]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="148" name="return" description="True if object exists" type="bool">
+          <tag line="157" name="return" description="True if object exists" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="160" package="">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="169" package="">
         <name>rewind</name>
         <type>function</type>
-        <docblock line="157">
+        <docblock line="166">
           <description><![CDATA[Resets position to 0, restarts iterator]]></description>
           <long-description><![CDATA[]]></long-description>
         </docblock>
@@ -5477,6 +5514,99 @@ facet definition of the parent.]]></description>
             <type by_reference="false">\Elastica_Exception_Invalid</type>
           </tag>
           <tag line="45" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+  </file>
+  <file path="Elastica/Facet/Statistical.php" hash="11a73539b5239103cc395be5b61b1aa5" package="Elastica">
+    <docblock line="2">
+      <description><![CDATA[Implements the statistical facet.]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="category" description="Xodoa"/>
+      <tag line="2" name="package" description="Elastica"/>
+      <tag line="2" name="author" description="Robert Katzki &lt;robert@katzki.de&gt;"/>
+      <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/api/search/facets/statistical-facet.html" link="http://www.elasticsearch.org/guide/reference/api/search/facets/statistical-facet.html"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="default" line="10" package="Elastica">
+      <name>Elastica_Facet_Statistical</name>
+      <full_name>\Elastica_Facet_Statistical</full_name>
+      <extends>\Elastica_Facet_Abstract</extends>
+      <docblock line="2">
+        <description><![CDATA[Implements the statistical facet.]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="2" name="category" description="Xodoa"/>
+        <tag line="2" name="package" description="Elastica"/>
+        <tag line="2" name="author" description="Robert Katzki &lt;robert@katzki.de&gt;"/>
+        <tag line="2" name="link" description="http://www.elasticsearch.org/guide/reference/api/search/facets/statistical-facet.html" link="http://www.elasticsearch.org/guide/reference/api/search/facets/statistical-facet.html"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="17" package="">
+        <name>setField</name>
+        <type>function</type>
+        <docblock line="11">
+          <description><![CDATA[Sets the field for the statistical query.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="11" name="param" description="The field name for the statistical query." type="string" variable="$field">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="11" name="return" description="" type="\Elastica_Facet_Statistical">
+            <type by_reference="false">\Elastica_Facet_Statistical</type>
+          </tag>
+        </docblock>
+        <argument line="17">
+          <name>$field</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="27" package="">
+        <name>setFields</name>
+        <type>function</type>
+        <docblock line="21">
+          <description><![CDATA[Sets multiple fields for the statistical query.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="21" name="param" description="Numerical array with the fields for the statistical query." type="array" variable="$fields">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="21" name="return" description="" type="\Elastica_Facet_Statistical">
+            <type by_reference="false">\Elastica_Facet_Statistical</type>
+          </tag>
+        </docblock>
+        <argument line="27">
+          <name>$fields</name>
+          <default><![CDATA[]]></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="37" package="">
+        <name>setScript</name>
+        <type>function</type>
+        <docblock line="31">
+          <description><![CDATA[Sets a script to calculate statistical information]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="31" name="param" description="The script to do calculations on the statistical values" type="string" variable="$script">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="31" name="return" description="" type="\Elastica_Facet_Statistical">
+            <type by_reference="false">\Elastica_Facet_Statistical</type>
+          </tag>
+        </docblock>
+        <argument line="37">
+          <name>$script</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="default" line="48" package="">
+        <name>toArray</name>
+        <type>function</type>
+        <docblock line="41">
+          <description><![CDATA[Creates the full facet definition, which includes the basic
+facet definition of the parent.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="41" name="see" description="\Elastica_Facet_Abstract::toArray()" refers="\Elastica_Facet_Abstract::toArray()"/>
+          <tag line="41" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>

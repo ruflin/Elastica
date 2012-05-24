@@ -31,7 +31,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">0</span></a></li>
+                <span class="label label-info">1</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">16</span>
@@ -64,6 +64,7 @@
 <li class="method public "><a href="#getResponse" title="getResponse :: Returns response object"><span class="description">Returns response object</span><pre>getResponse()</pre></a></li>
 <li class="method public "><a href="#getResults" title="getResults :: Returns all results"><span class="description">Returns all results</span><pre>getResults()</pre></a></li>
 <li class="method public "><a href="#getTotalHits" title="getTotalHits :: Returns the total number of found hits"><span class="description">Returns the total number of found hits</span><pre>getTotalHits()</pre></a></li>
+<li class="method public "><a href="#getTotalTime" title="getTotalTime :: Returns the total number of ms for this search to complete"><span class="description">Returns the total number of ms for this search to complete</span><pre>getTotalTime()</pre></a></li>
 <li class="method public "><a href="#hasFacets" title="hasFacets :: Returns whether facets exist"><span class="description">Returns whether facets exist</span><pre>hasFacets()</pre></a></li>
 <li class="method public "><a href="#key" title="key :: Returns the position of the current entry"><span class="description">Returns the position of the current entry</span><pre>key()</pre></a></li>
 <li class="method public "><a href="#next" title="next :: Sets pointer (current) to the next item of the set"><span class="description">Sets pointer (current) to the next item of the set</span><pre>next()</pre></a></li>
@@ -77,6 +78,7 @@
 <li class="property protected "><a href="#%24_position" title="$_position :: Current position"><span class="description">Current position</span><pre>$_position</pre></a></li>
 <li class="property protected "><a href="#%24_response" title="$_response :: Response"><span class="description">Response</span><pre>$_response</pre></a></li>
 <li class="property protected "><a href="#%24_results" title="$_results :: Results"><span class="description">Results</span><pre>$_results</pre></a></li>
+<li class="property protected "><a href="#%24_took" title="$_took :: "><span class="description">$_took</span><pre>$_took</pre></a></li>
 </ul>
 </div>
 <div class="span8">
@@ -126,13 +128,13 @@ Result set implents iterator</p></p>
 </div>
 <a name="current" id="current"></a><div class="element clickable method public current" data-toggle="collapse" data-target=".current .collapse">
 <h2>Returns the current object of the set</h2>
-<pre>current() : mixed | bool</pre>
+<pre>current() : <a href="../classes/Elastica_Result.html">\Elastica_Result</a> | bool</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8">
 <p class="long_description"></p>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>mixed</code><code>bool</code>Set object or false if not valid (no more entries)</div>
+<code><a href="../classes/Elastica_Result.html">\Elastica_Result</a></code><code>bool</code>Set object or false if not valid (no more entries)</div>
 </div></div>
 </div>
 <a name="getFacets" id="getFacets"></a><div class="element clickable method public getFacets" data-toggle="collapse" data-target=".getFacets .collapse">
@@ -177,6 +179,17 @@ Result set implents iterator</p></p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>int</code>Total hits</div>
+</div></div>
+</div>
+<a name="getTotalTime" id="getTotalTime"></a><div class="element clickable method public getTotalTime" data-toggle="collapse" data-target=".getTotalTime .collapse">
+<h2>Returns the total number of ms for this search to complete</h2>
+<pre>getTotalTime() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>Total time</div>
 </div></div>
 </div>
 <a name="hasFacets" id="hasFacets"></a><div class="element clickable method public hasFacets" data-toggle="collapse" data-target=".hasFacets .collapse">
@@ -256,6 +269,12 @@ Result set implents iterator</p></p>
 <div class="labels"></div>
 <div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
 </div>
+<a name="%24_took" id="$_took"> </a><div class="element clickable property protected $_took" data-toggle="collapse" data-target=".$_took .collapse">
+<h2>$_took</h2>
+<pre>$_took </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="span8"><p class="long_description"></p></div></div>
+</div>
 </div>
 </div>
 </div>
@@ -263,7 +282,7 @@ Result set implents iterator</p></p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a2</a> and<br>
-            generated on 2012-05-03T15:03:16+02:00.<br></footer></div>
+            generated on 2012-05-24T16:30:25+02:00.<br></footer></div>
 </div>
 </body>
 </html>
