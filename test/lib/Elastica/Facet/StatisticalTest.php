@@ -71,4 +71,8 @@ class Elastica_Facet_StatisticalTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(10, $facets['stats']['min']);
 		$this->assertEquals(90, $facets['stats']['max']);
 	}
+
+	public function testStatisticalWithSetScript() {
+		$this->markTestIncomplete('Test for setting the script value');
+	}
 }
