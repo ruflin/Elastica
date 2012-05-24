@@ -168,4 +168,68 @@ class Elastica_Index_SettingsTest extends Elastica_Test
 
 		$this->assertEquals(2, $type->count());
 	}
+
+	public function testGetSetBlockRead() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('elastica-test');
+		$index->create();
+		$index->refresh();
+		$settings = $index->getSettings();
+
+		$this->assertFalse($settings->getBlockRead());
+
+		$settings->setBlockRead(true);
+		$this->assertTrue($settings->getBlockRead());
+
+		$settings->setBlockRead(false);
+		$this->assertFalse($settings->getBlockRead());
+
+		$settings->setBlockRead();
+		$this->assertTrue($settings->getBlockRead());
+
+		$index->delete();
+	}
+
+	public function testGetSetBlockWrite() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('elastica-test');
+		$index->create();
+		$index->refresh();
+		$settings = $index->getSettings();
+
+		$this->assertFalse($settings->getBlockWrite());
+
+		$settings->setBlockWrite(true);
+		$this->assertTrue($settings->getBlockWrite());
+
+		$settings->setBlockWrite(false);
+		$this->assertFalse($settings->getBlockWrite());
+
+		$settings->setBlockWrite();
+		$this->assertTrue($settings->getBlockWrite());
+
+		$index->delete();
+	}
+
+	public function testGetSetBlockMetadata() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('elastica-test');
+		$index->create();
+		$index->refresh();
+		$settings = $index->getSettings();
+
+		$this->assertFalse($settings->getBlockMetadata());
+
+		$settings->setBlockMetadata(true);
+		$this->assertTrue($settings->getBlockMetadata());
+
+		$settings->setBlockMetadata(false);
+		$this->assertFalse($settings->getBlockMetadata());
+
+		$settings->setBlockMetadata();
+		$this->assertTrue($settings->getBlockMetadata());
+
+		$settings->setBlockMetadata(false);	// Cannot delete index otherwise
+		$index->delete();
+	}
 }
