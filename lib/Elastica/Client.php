@@ -221,31 +221,36 @@ class Elastica_Client {
 
 	/**
 	 * Update document, using update script. Requires elasticsearch >= 0.19.0
-	 * @param Elastica_UpdateDocument $doc
-	 * @return Elastica_Response
-	 * @throws Elastica_Exception_Invalid if doc doesn't contain id, index or type
 	 * @link http://www.elasticsearch.org/guide/reference/api/update.html
+	 * @param int $id document id
+	 * @param Elastica_Script $script script to use for update
+	 * @param string $index index to update
+	 * @param string $type type of index to update
+	 * @param array $options array of query params to use for query. For possible options check es api
+	 * @return Elastica_Response
 	 */
-	public function updateDocument(Elastica_UpdateDocument $doc) {
-		if (!$doc->getId()) {
-			throw new Elastica_Exception_Invalid("Doc should contain id");
-		}
-		if (!$doc->getIndex()) {
-			throw new Elastica_Exception_Invalid("Doc should contain index");
-		}
-		if (!$doc->getType()) {
-			throw new Elastica_Exception_Invalid("Doc should contain index type");
+	public function updateDocument($id, Elastica_Script $script, $index, $type, array $options = array()) {
+		$path =  $index . '/' . $type . '/' . $id . '/_update';
+		if ($options != null) {
+			$path .= '?' . http_build_query($options);
 		}
 
-		$path =  $doc->getIndex() . '/' . $doc->getType() . '/' . $doc->getId() . '/_update';
-
-		$query = $doc->prepareQuery();
-		if (!isset($query['retry_on_conflict'])) {
+		if (!isset($options['retry_on_conflict'])) {
 			$retryOnConflict = $this->getConfig("retryOnConflict");
-			$query['retry_on_conflict'] = $retryOnConflict;
+			$options['retry_on_conflict'] = $retryOnConflict;
 		}
 
-		return $this->request($path, Elastica_Request::POST, $doc->prepareData(), $query);
+		$data = array(
+			'script' => $script->getScript(),
+		);
+		if ($script->getLang() != null) {
+			$data['lang'] = $script->getLang();
+		}
+		if ($script->getParams() != null) {
+			$data['params'] = $script->getParams();
+		}
+
+		return $this->request($path, Elastica_Request::POST, $data, $options ?: array());
 	}
 
 	/**
