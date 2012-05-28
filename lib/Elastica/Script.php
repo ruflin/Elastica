@@ -1,8 +1,11 @@
 <?php
 /**
- * User: avasilenko
- * Date: 20.05.12
- * Time: 18:26
+ * Script objects, containing script internals
+ *
+ * @link http://www.elasticsearch.org/guide/reference/modules/scripting.html
+ * @category Xodoa
+ * @package Elastica
+ * @author avasilenko <aa.vasilenko@gmail.com>
  */
 class Elastica_Script {
 	/**
