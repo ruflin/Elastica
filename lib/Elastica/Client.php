@@ -48,6 +48,7 @@ class Elastica_Client {
 		'curl' => array(),
 		'roundRobin' => false,
 		'log' => false,
+		'retryOnConflict' => 0,
 	);
 
 	/**
@@ -216,6 +217,36 @@ class Elastica_Client {
 			$params[] = $doc->getData();
 		}
 		return $this->bulk($params);
+	}
+
+	/**
+	 * Update document, using update script. Requires elasticsearch >= 0.19.0
+	 * @link http://www.elasticsearch.org/guide/reference/api/update.html
+	 * @param int $id document id
+	 * @param Elastica_Script $script script to use for update
+	 * @param string $index index to update
+	 * @param string $type type of index to update
+	 * @param array $options array of query params to use for query. For possible options check es api
+	 * @return Elastica_Response
+	 */
+	public function updateDocument($id, Elastica_Script $script, $index, $type, array $options = array()) {
+		$path =  $index . '/' . $type . '/' . $id . '/_update';
+		if (!isset($options['retry_on_conflict'])) {
+			$retryOnConflict = $this->getConfig("retryOnConflict");
+			$options['retry_on_conflict'] = $retryOnConflict;
+		}
+
+		$data = array(
+			'script' => $script->getScript(),
+		);
+		if ($script->getLang() != null) {
+			$data['lang'] = $script->getLang();
+		}
+		if ($script->getParams() != null) {
+			$data['params'] = $script->getParams();
+		}
+
+		return $this->request($path, Elastica_Request::POST, $data, $options);
 	}
 
 	/**

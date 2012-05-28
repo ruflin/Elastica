@@ -258,4 +258,17 @@ class Elastica_TypeTest extends Elastica_Test
 		$resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'), $query);
 		$this->assertEquals(2, $resultSet->count());
 	}
+
+	public function testUpdateDocument() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('elastica_test');
+		$type = $index->getType('update_type');
+		$id = 1;
+		$type->addDocument(new Elastica_Document($id, array('name' => 'bruce wayne batman')));
+		$newName = 'batman';
+		$update = new Elastica_Script("ctx._source.name = name", array('name' => $newName));
+		$type->updateDocument($id, $update, array('refresh' => true));
+		$updatedDoc = $type->getDocument($id)->getData();
+		$this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
+	}
 }
