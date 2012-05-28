@@ -231,10 +231,6 @@ class Elastica_Client {
 	 */
 	public function updateDocument($id, Elastica_Script $script, $index, $type, array $options = array()) {
 		$path =  $index . '/' . $type . '/' . $id . '/_update';
-		if ($options != null) {
-			$path .= '?' . http_build_query($options);
-		}
-
 		if (!isset($options['retry_on_conflict'])) {
 			$retryOnConflict = $this->getConfig("retryOnConflict");
 			$options['retry_on_conflict'] = $retryOnConflict;
@@ -250,7 +246,7 @@ class Elastica_Client {
 			$data['params'] = $script->getParams();
 		}
 
-		return $this->request($path, Elastica_Request::POST, $data, $options ?: array());
+		return $this->request($path, Elastica_Request::POST, $data, $options);
 	}
 
 	/**
