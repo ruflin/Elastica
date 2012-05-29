@@ -309,10 +309,10 @@ class Elastica_Index implements Elastica_Searchable
                             break;
                             
                         case 'filter':
-                                if (is_string($value)){
-                                   $add['filter'] = $value; 
+                                if (is_a($value,'Elastica_Query_Abstract')){
+                                   $add['filter'] = $value->toArray(); 
                                 }else{
-                                   $add['filter'] = $value->toArray();
+                                   $add['filter'] = $value;
                                 }
                             break;
                             
