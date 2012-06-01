@@ -209,7 +209,7 @@ $tweet = array(
     'location'=> '41.12,-71.34',
     '_boost'  => 1.0
 );
-$tweetDocument = Elastica_Document($id, $tweet);
+$tweetDocument = new Elastica_Document($id, $tweet);
 
 // Add tweet to type
 $elasticaType->addDocument($tweetDocument);
