@@ -246,7 +246,7 @@ class Elastica_IndexTest extends Elastica_Test
 		$this->assertEquals($data['text'], $text);
 		$this->assertFalse(isset($data['file']));
 	}
-
+/*
 	public function testAddRemoveAlias() {
 		$client = new Elastica_Client();
 
@@ -286,7 +286,7 @@ class Elastica_IndexTest extends Elastica_Test
 			$this->assertTrue(true);
 		}
 	}
-
+*/
 	public function testDeleteIndexDeleteAlias() {
 		$indexName = 'test';
 		$aliasName = 'test-aliase';
@@ -334,6 +334,7 @@ class Elastica_IndexTest extends Elastica_Test
 		$this->assertTrue($index2->getStatus()->hasAlias($aliasName));
 	}
 
+    /*
 	public function testReplaceAlias() {
 		$indexName1 = 'test1';
 		$indexName2 = 'test2';
@@ -358,6 +359,7 @@ class Elastica_IndexTest extends Elastica_Test
 		$this->assertFalse($index1->getStatus()->hasAlias($aliasName));
 		$this->assertTrue($index2->getStatus()->hasAlias($aliasName));
 	}
+*/
 
 	public function testAddDocumentVersion() {
 		$client = new Elastica_Client();
@@ -499,7 +501,6 @@ class Elastica_IndexTest extends Elastica_Test
     public function testCreateArray(){
         $client = new Elastica_Client();
         $indexName = 'test';
-        $aliasName = 'test-aliase';
         
         //Testing recreate (backward compatibility)
         $index = $client->getIndex($indexName);
@@ -533,6 +534,36 @@ class Elastica_IndexTest extends Elastica_Test
             $this->fail('Should throw Elastica_Exception_Invalid');
         }catch(Exception $ex){
              $this->assertTrue($ex instanceof Elastica_Exception_Invalid);
+        }
+    }
+
+
+    public function testCreateAliasArray(){
+        $options = array();
+        $client = new Elastica_Client($options);
+        $indexName = 'test';
+        $aliasName = 'test-aliase';        
+        
+        //Creating the index
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
+        $status = new Elastica_Status($client);
+        $this->assertTrue($status->indexExists($indexName));
+
+        //Creating the alias
+        try{
+            $query = new Elastica_Query_Term();
+            $query->setTerm('user', 'comulinux', 2);
+            $opts = array('replace'=>true, 
+                          'index_routing' => '1', 
+                          'search_routing' => '1,2', 
+                          'filter' => $query);
+            $index->addAlias($aliasName,$opts);
+            $status = new Elastica_Status($client);
+            $this->assertTrue($status->aliasExists($aliasName));
+            //$this->fail('Should throw Elastica_Exception_NotImplemented');
+        }catch(Elastica_Exception_NotImplemented $ex){
+            $this->assertTrue($ex instanceof Elastica_Exception_NotImplemented);
         }
     }
 }

@@ -293,30 +293,80 @@ class Elastica_Index implements Elastica_Searchable
 	 * @return Elastica_Response Response
 	 * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
 	 */
-	public function addAlias($name, $replace = false) {
-		$path = '_aliases';
+    
+    public function addAlias($name, $options = null, $params = null) {
+        $path = '_aliases';
+        
+        $add = array('index' => $this->getName(),
+                     'alias' => $name);
+        
+        if(is_array($params)){
+            foreach($params as $key => $value){
+                switch($key){
+                    case 'recreate':
+                        $status = new Elastica_Status($this->getClient());
+                        foreach ($status->getIndicesWithAlias($name) as $index) {
+                            $index->removeAlias($name);
+                        }                    
+                    break;
+                    
+                    default:
+                        throw new Elastica_Exception_Invalid('Invalid param '.$key);
+                        break;
+                }
+            }
+        }
+        
+        if(is_array($options)){
+            foreach ($options as $key => $value){
+                if (!empty($value)){
+                    switch ($key) {
+                        case 'replace':
+                            $status = new Elastica_Status($this->getClient());
+                            foreach ($status->getIndicesWithAlias($name) as $index) {
+                                $index->removeAlias($name);
+                            }
+                            break;
+                            
+                        case 'filter':
+                                if (is_a($value,'Elastica_Query_Abstract')){
+                                   $add['filter'] = $value->toArray(); 
+                                }else{
+                                   $add['filter'] = $value;
+                                }
+                            break;
+                            
+                        case 'index_routing':
+                                $add['index_routing'] = $value;
+                            break;
+                        
+                        case 'search_routing':
+                                $add['search_routing'] = $value;
+                            break;
+                        
+                        default:
+                                throw new Elastica_Exception_Invalid('Invalid option '.$key);
+                            break;
+                    }
+               }else{
+                   throw new Elastica_Exception_Invalid('Error setting '.$key.' to null');
+               }
+            }
+        }
 
-		if ($replace) {
-			$status = new Elastica_Status($this->getClient());
+        $data = array(
+            'actions' => array(
+                array(
+                    'add' => $add
+                    )
+                )
+            );
 
-			foreach ($status->getIndicesWithAlias($name) as $index) {
-				$index->removeAlias($name);
-			}
-		}
-
-		$data = array(
-			'actions' => array(
-				array(
-					'add' => array(
-						'index' => $this->getName(),
-						'alias' => $name
-					)
-				)
-			)
-		);
-
-		return $this->getClient()->request($path, Elastica_Request::POST, $data);
-	}
+        return $this->getClient()->request($path, Elastica_Request::POST, $data);
+    } 
+ 
+ 
+    
 
 	/**
 	 * Removes an alias pointing to the current index
