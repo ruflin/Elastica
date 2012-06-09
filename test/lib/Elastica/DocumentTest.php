@@ -39,4 +39,16 @@ class Elastica_DocumentTest extends Elastica_Test
 		$returnValue = $doc->setData(array('data'));
 		$this->assertInstanceOf('Elastica_Document', $returnValue);
 	}
+
+	public function testToArray() {
+		$id = 17;
+		$data = array('hello' => 'world');
+		$type = 'testtype';
+		$index = 'textindex';
+
+		$doc = new Elastica_Document($id, $data, $type, $index);
+
+		$result = array('_index' => $index, '_type' => $type, '_id' => $id, '_source' => $data);
+		$this->assertEquals($result, $doc->toArray());
+	}
 }

@@ -27,14 +27,14 @@ class Elastica_Document {
 	 * 
 	 * @var string Document type name
 	 */
-	protected $_type = '';
+	protected $_type = null;
 
 	/**
 	 * Document index name
 	 * 
 	 * @var string Document index name
 	 */
-	protected $_index = '';
+	protected $_index = null;
 
 	/**
 	 * Document version
@@ -207,7 +207,7 @@ class Elastica_Document {
 	public function getType() {
 		$type = $this->_type;
 
-		if (empty($type)) {
+		if (is_null($type)) {
 			throw new Elastica_Exception_Invalid('Type not set');
 		}
 		return $type;
@@ -233,7 +233,7 @@ class Elastica_Document {
 	public function getIndex() {
 		$index = $this->_index;
 
-		if (empty($index)) {
+		if (is_null($index)) {
 			throw new Elastica_Exception_Invalid('Index not set');
 		}
 		return $index;
@@ -326,19 +326,31 @@ class Elastica_Document {
 	 * @return array
 	 */
 	public function toArray() {
-		$index = array('_index' => $this->getIndex(), '_type' => $this->getType(), '_id' => $this->getId());
+		$doc = array();
+
+		if (!is_null($this->_index)) {
+			$doc['_index'] = $this->_index;
+		}
+
+		if (!is_null($this->_type)) {
+			$doc['_type'] = $this->_type;
+		}
+
+		if (!is_null($this->_index)) {
+			$doc['_id'] = $this->getId();
+		}
 
 		$version = $this->getVersion();
 		if (!empty($version)) {
-			$index['_version'] = $version;
+			$doc['_version'] = $version;
 		}
 
 		$parent = $this->getParent();
 		if (!is_null($parent)) {
-			$index['_parent'] = $parent;
+			$doc['_parent'] = $parent;
 		}
 
-		$params[] = $action;
-		$params[] = $doc->getData();
+		$doc['_source'] = $this->getData();
+		return $doc;
 	}
 }
