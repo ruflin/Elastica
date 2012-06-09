@@ -204,7 +204,7 @@ class Elastica_Client {
 			}
 			
 			$parent = $doc->getParent();
-			if (!empty($parent)) {
+			if (!is_null($parent)) {
 				$indexInfo['_parent'] = $parent;
 			}
 						

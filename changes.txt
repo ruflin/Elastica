@@ -1,5 +1,8 @@
 CHANGES
 
+2012-06-09
+- Change $_parent to null to also support 0 for an id
+
 2012-05-01
 - Release v0.19.3.0
 - MoreLikeThis Query in Elastica_Document

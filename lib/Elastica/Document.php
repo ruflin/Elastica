@@ -48,7 +48,7 @@ class Elastica_Document {
 	 * 
 	 * @var string|int Parent document id
 	 */
-	protected $_parent = '';
+	protected $_parent = null;
 
 	/**
 	 * Optype
@@ -334,7 +334,7 @@ class Elastica_Document {
 		}
 
 		$parent = $this->getParent();
-		if (!empty($parent)) {
+		if (!is_null($parent)) {
 			$index['_parent'] = $parent;
 		}
 
