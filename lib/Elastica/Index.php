@@ -160,6 +160,7 @@ class Elastica_Index implements Elastica_Searchable
 	 * @param bool|array $options OPTIONAL 
 	 * 			bool=> Deletes index first if already exists (default = false). 
 	 * 			array => Associative array of options (option=>value)  
+	 * @throws IndexAlreadyExistsException Thrown when the index already exists and the 'recreate' option isnt explicitly set to true. So either create() or create(array(), false) will throw when the index already exists.
 	 * @return array Server response
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/
 	 */
