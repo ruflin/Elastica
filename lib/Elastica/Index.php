@@ -232,22 +232,20 @@ class Elastica_Index implements Elastica_Searchable
 		} else if (is_array($options)) {
 
 			foreach ($options as $key => $value) {
-				if (empty($value) && $value !== 0){
-          			throw new Elastica_Exception_Invalid('Invalid value '.$value.' for option '.$key);
-          		}else{
-    				switch ($key) {
-    					case 'limit' :
-    					case 'size' :
-    						$query->setLimit($value);
-    						break;
-    					case 'from' :
-    						$query->setFrom($value);
-    						break;
-              			default:
-                			throw new Elastica_Exception_Invalid('Invalid option '.$key);
-              			break;
-    				}
-          		}
+
+				switch ($key) {
+					case 'limit' :
+					case 'size' :
+						$query->setLimit($value);
+						break;
+					case 'from' :
+						$query->setFrom($value);
+						break;
+          			default:
+            			throw new Elastica_Exception_Invalid('Invalid option '.$key);
+          			break;
+				}
+
 			}
 
 		}
