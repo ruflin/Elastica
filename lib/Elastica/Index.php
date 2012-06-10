@@ -12,14 +12,14 @@ class Elastica_Index implements Elastica_Searchable
 {
 	/**
 	 * Index name
-	 * 
+	 *
 	 * @var string Index name
 	 */
 	protected $_name = '';
 
 	/**
 	 * Client object
-	 * 
+	 *
 	 * @var Elastica_Client Client object
 	 */
 	protected $_client = null;
@@ -62,7 +62,7 @@ class Elastica_Index implements Elastica_Searchable
 
 	/**
 	 * Return Index Stats
-	 * 
+	 *
 	 * @return ELastica_Index_Stats
 	 */
 	public function getStats() {
@@ -143,9 +143,9 @@ class Elastica_Index implements Elastica_Searchable
 	 * Creates a new index with the given arguments
 	 *
 	 * @param array $args OPTIONAL Arguments to use
-	 * @param bool|array $options OPTIONAL 
-	 * 			bool=> Deletes index first if already exists (default = false). 
-	 * 			array => Associative array of options (option=>value)  
+	 * @param bool|array $options OPTIONAL
+	 * 			bool=> Deletes index first if already exists (default = false).
+	 * 			array => Associative array of options (option=>value)
 	 * @return array Server response
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/
 	 */
@@ -202,15 +202,21 @@ class Elastica_Index implements Elastica_Searchable
      *
      * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
      * @param int $limit OPTIONAL
+     * @param init $from OPTIONAL
      * @return Elastica_ResultSet ResultSet with all results inside
      * @see Elastica_Searchable::search
      */
-    public function search($query, $limit = null) {
+    public function search($query, $limit = null, $from = null) {
         $query = Elastica_Query::create($query);
 
         if (!is_null($limit)) {
             $query->setLimit($limit);
         }
+
+        if (!is_null($from)) {
+        		$query->setFrom($from);
+        }
+
         $path = '_search';
 
         $response = $this->request($path, Elastica_Request::GET, $query->toArray());
