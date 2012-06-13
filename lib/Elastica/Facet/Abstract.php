@@ -88,6 +88,16 @@ abstract class Elastica_Facet_Abstract extends Elastica_Param
 	}
 
 	/**
+	 * Sets the scope
+	 *
+	 * @param string $scope Scope
+	 * @return Elastica_Facet_Abstract
+	 */
+	public function setScope($scope) {
+		return $this->_setFacetParam('scope', $scope);
+	}
+
+	/**
 	 * Basic definition of all specs of the facet. Each implementation
 	 * should override this function in order to set it's specific
 	 * settings.
