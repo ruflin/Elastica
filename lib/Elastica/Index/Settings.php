@@ -94,6 +94,54 @@ class Elastica_Index_Settings {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function getBlocksRead() {
+		return (bool) $this->get('blocks.read');
+	}
+
+	/**
+	 * @param bool $state OPTIONAL (default = true)
+	 * @return Elastica_Response
+	 */
+	public function setBlocksRead($state = true) {
+		$state = $state ? 1 : 0;
+		return $this->set(array('blocks.read' => $state));
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getBlocksWrite() {
+		return (bool) $this->get('blocks.write');
+	}
+
+	/**
+	 * @param bool $state OPTIONAL (default = true)
+	 * @return Elastica_Response
+	 */
+	public function setBlocksWrite($state = true) {
+		$state = $state ? 1 : 0;
+		return $this->set(array('blocks.write' => (int) $state));
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getBlocksMetadata() {
+		return (bool) $this->get('blocks.metadata');
+	}
+
+	/**
+	 * @param bool $state OPTIONAL (default = true)
+	 * @return Elastica_Response
+	 */
+	public function setBlocksMetadata($state = true) {
+		$state = $state ? 1 : 0;
+		return $this->set(array('blocks.metadata' => (int) $state));
+	}
+
+	/**
 	 * Sets the index refresh interval
 	 *
 	 * Value can be for example 3s for 3 seconds or
