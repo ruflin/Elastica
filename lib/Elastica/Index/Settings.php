@@ -96,7 +96,7 @@ class Elastica_Index_Settings {
 	/**
 	 * @return bool
 	 */
-	public function getBlockRead() {
+	public function getBlocksRead() {
 		return (bool) $this->get('blocks.read');
 	}
 
@@ -104,7 +104,7 @@ class Elastica_Index_Settings {
 	 * @param bool $state OPTIONAL (default = true)
 	 * @return Elastica_Response
 	 */
-	public function setBlockRead($state = true) {
+	public function setBlocksRead($state = true) {
 		$state = $state ? 1 : 0;
 		return $this->set(array('blocks.read' => $state));
 	}
@@ -112,7 +112,7 @@ class Elastica_Index_Settings {
 	/**
 	 * @return bool
 	 */
-	public function getBlockWrite() {
+	public function getBlocksWrite() {
 		return (bool) $this->get('blocks.write');
 	}
 
@@ -120,7 +120,7 @@ class Elastica_Index_Settings {
 	 * @param bool $state OPTIONAL (default = true)
 	 * @return Elastica_Response
 	 */
-	public function setBlockWrite($state = true) {
+	public function setBlocksWrite($state = true) {
 		$state = $state ? 1 : 0;
 		return $this->set(array('blocks.write' => (int) $state));
 	}
@@ -128,7 +128,7 @@ class Elastica_Index_Settings {
 	/**
 	 * @return bool
 	 */
-	public function getBlockMetadata() {
+	public function getBlocksMetadata() {
 		return (bool) $this->get('blocks.metadata');
 	}
 
@@ -136,7 +136,7 @@ class Elastica_Index_Settings {
 	 * @param bool $state OPTIONAL (default = true)
 	 * @return Elastica_Response
 	 */
-	public function setBlockMetadata($state = true) {
+	public function setBlocksMetadata($state = true) {
 		$state = $state ? 1 : 0;
 		return $this->set(array('blocks.metadata' => (int) $state));
 	}
