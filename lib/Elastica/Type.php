@@ -178,9 +178,9 @@ class Elastica_Type implements Elastica_Searchable {
 	 */
 	public function count($query = '') {
 		$query = Elastica_Query::create($query);
-		$path = '_search?search_type=count';
+		$path = '_search';
 
-		$response = $this->request($path, Elastica_Request::GET, $query->toArray());
+		$response = $this->request($path, Elastica_Request::GET, $query->toArray(), array('search_type' => 'count'));
 		$resultSet = new Elastica_ResultSet($response);
 
 		return $resultSet->getTotalHits();
