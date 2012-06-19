@@ -12,14 +12,14 @@ class Elastica_Index implements Elastica_Searchable
 {
 	/**
 	 * Index name
-	 * 
+	 *
 	 * @var string Index name
 	 */
 	protected $_name = '';
 
 	/**
 	 * Client object
-	 * 
+	 *
 	 * @var Elastica_Client Client object
 	 */
 	protected $_client = null;
@@ -62,7 +62,7 @@ class Elastica_Index implements Elastica_Searchable
 
 	/**
 	 * Return Index Stats
-	 * 
+	 *
 	 * @return ELastica_Index_Stats
 	 */
 	public function getStats() {
@@ -153,13 +153,13 @@ class Elastica_Index implements Elastica_Searchable
 		return $this->request('_refresh', Elastica_Request::POST, array());
 	}
 
-/**
+	/**
 	 * Creates a new index with the given arguments
 	 *
 	 * @param array $args OPTIONAL Arguments to use
-	 * @param bool|array $options OPTIONAL 
-	 * 			bool=> Deletes index first if already exists (default = false). 
-	 * 			array => Associative array of options (option=>value)  
+	 * @param bool|array $options OPTIONAL
+	 * 			bool=> Deletes index first if already exists (default = false).
+	 * 			array => Associative array of options (option=>value)
 	 * @return array Server response
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/
 	 */
@@ -201,6 +201,7 @@ class Elastica_Index implements Elastica_Searchable
 		}
 		return $this -> request($path, Elastica_Request::PUT, $args);
 	}
+
 	/**
 	 * Checks if the given index is already created
 	 *
@@ -211,25 +212,47 @@ class Elastica_Index implements Elastica_Searchable
 		return in_array($this->getName(), $cluster->getIndexNames());
 	}
 
-    /**
-     * Searchs in this index
-     *
-     * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
-     * @param int $limit OPTIONAL
-     * @return Elastica_ResultSet ResultSet with all results inside
-     * @see Elastica_Searchable::search
-     */
-    public function search($query, $limit = null) {
-        $query = Elastica_Query::create($query);
+	/**
+	 * Searchs in this index
+	 *
+	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+	 * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
+	 * @return Elastica_ResultSet ResultSet with all results inside
+	 * @see Elastica_Searchable::search
+	 */
+	public function search($query, $options = null) {
 
-        if (!is_null($limit)) {
-            $query->setLimit($limit);
-        }
-        $path = '_search';
+		$query = Elastica_Query::create($query);
+		$path = '_search';
 
-        $response = $this->request($path, Elastica_Request::GET, $query->toArray());
-        return new Elastica_ResultSet($response);
-    }
+		if (is_int($options)) {
+
+			$query->setLimit($options);
+
+		} else if (is_array($options)) {
+
+			foreach ($options as $key => $value) {
+
+				switch ($key) {
+					case 'limit' :
+					case 'size' :
+						$query->setLimit($value);
+						break;
+					case 'from' :
+						$query->setFrom($value);
+						break;
+          			default:
+            			throw new Elastica_Exception_Invalid('Invalid option '.$key);
+          			break;
+				}
+
+			}
+
+		}
+
+		$response = $this->request($path, Elastica_Request::GET, $query->toArray());
+		return new Elastica_ResultSet($response);
+	}
 
 	/**
 	 * Counts results of query
