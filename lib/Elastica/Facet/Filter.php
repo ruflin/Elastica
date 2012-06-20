@@ -7,8 +7,8 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/filter-facet.html
  */
-
 class Elastica_Facet_Filter extends Elastica_Facet_Abstract {
+
 	/**
 	 * Set the filter for the facet.
 	 *

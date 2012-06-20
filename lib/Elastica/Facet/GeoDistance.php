@@ -7,7 +7,6 @@
  * @author Gerard A. Matthew  <gerard.matthew@gmail.com>
  * @linkhttp://www.elasticsearch.org/guide/reference/api/search/facets/geo-distance-facet.html
  */
-
 class Elastica_Facet_GeoDistance extends Elastica_Facet_Abstract {
 	
 	/**
@@ -20,7 +19,7 @@ class Elastica_Facet_GeoDistance extends Elastica_Facet_Abstract {
 	 * array('from' => 150)
 	 * )
 	 *
-	 * @param array $ranges	Numerical array with range definitions.
+	 * @param array $ranges Numerical array with range definitions.
 	 * @return Elastica_Facet_GeoDistance
 	 */
 	public function setRanges(array $ranges) {

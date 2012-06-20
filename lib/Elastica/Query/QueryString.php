@@ -2,16 +2,17 @@
 /**
  * QueryString query
  *
- * @uses Elastica_Query_Abstract
+ * @uses     Elastica_Query_Abstract
  * @category Xodoa
- * @package Elastica
- * @author Nicolas Ruflin <spam@ruflin.com>, Jasper van Wanrooy <jasper@vanwanrooy.net>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/query-string-query.html
+ * @package  Elastica
+ * @author   Nicolas Ruflin <spam@ruflin.com>, Jasper van Wanrooy <jasper@vanwanrooy.net>
+ * @link     http://www.elasticsearch.org/guide/reference/query-dsl/query-string-query.html
  */
 class Elastica_Query_QueryString extends Elastica_Query_Abstract {
+
 	/**
 	 * Query string
-	 * 
+	 *
 	 * @var string Query string
 	 */
 	protected $_queryString = '';
@@ -232,15 +233,15 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract {
 		return $this->setParam('tie_breaker', (int) $tieBreaker);
 	}
 
-    /**
-     * Set a re-write condition. See https://github.com/elasticsearch/elasticsearch/issues/1186 for additional information
-     *
-     * @param string $rewrite
-     * @return Elastica_Param
-     */
-    public function setRewrite($rewrite = "") {
-    		return $this->setParam('rewrite', $rewrite);
-    }
+	/**
+	 * Set a re-write condition. See https://github.com/elasticsearch/elasticsearch/issues/1186 for additional information
+	 *
+	 * @param string $rewrite
+	 * @return Elastica_Param
+	 */
+	public function setRewrite($rewrite = "") {
+		return $this->setParam('rewrite', $rewrite);
+	}
 
 	/**
 	 * Converts query to array
@@ -249,9 +250,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract {
 	 * @return array Query array
 	 */
 	public function toArray() {
-		return array(
-			'query_string' => array_merge(array('query' => $this->_queryString), $this->getParams()),
-		);
+		return array('query_string' => array_merge(array('query' => $this->_queryString), $this->getParams()),);
 	}
 }
 

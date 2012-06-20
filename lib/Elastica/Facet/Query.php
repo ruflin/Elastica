@@ -7,8 +7,8 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/query-facet.html
  */
-
 class Elastica_Facet_Query extends Elastica_Facet_Abstract {
+
 	/**
 	 * Set the query for the facet.
 	 *

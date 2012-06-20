@@ -15,14 +15,14 @@
 class Elastica_Type implements Elastica_Searchable {
 	/**
 	 * Index
-	 * 
+	 *
 	 * @var Elastica_Index Index object
 	 */
 	protected $_index = null;
 
 	/**
 	 * Type name
-	 * 
+	 *
 	 * @var string Type name
 	 */
 	protected $_name = '';
@@ -76,21 +76,19 @@ class Elastica_Type implements Elastica_Searchable {
 		return $this->request($path, $type, $doc->getData(), $query);
 	}
 
-
 	/**
 	 * Update document, using update script. Requires elasticsearch >= 0.19.0
 	 *
-	 * @see Elastica_Client::updateDocument()
-	 * @link http://www.elasticsearch.org/guide/reference/api/update.html
-	 * @param string $id document id
-	 * @param Elastica_Script $script script to use for update
-	 * @param array $options options for query
+	 * @param string $id Document id
+	 * @param Elastica_Script $script  script to use for update
+	 * @param array           $options options for query
 	 * @return Elastica_Response
+	 * @see  Elastica_Client::updateDocument()
+	 * @link http://www.elasticsearch.org/guide/reference/api/update.html
 	 */
 	public function updateDocument($id, Elastica_Script $script, array $options = array()) {
 		return $this->getIndex()->updateDocument($id, $script, $this->getName(), $options);
 	}
-
 
 	/**
 	 * Uses _bulk to send documents to the server
@@ -144,7 +142,7 @@ class Elastica_Type implements Elastica_Searchable {
 
 	/**
 	 * Returns the type name
-	 * 
+	 *
 	 * @return string Type name
 	 */
 	public function getName() {
@@ -175,28 +173,28 @@ class Elastica_Type implements Elastica_Searchable {
 		return $response->getData();
 	}
 
-    /**
-     * Do a search on this type
-     * 
-     * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
-     * @param int                         $limit OPTIONAL
-     * @return Elastica_ResultSet ResultSet with all results inside
-     * @see Elastica_Searchable::search
-     */
-    public function search($query, $limit = null) {
-        $query = Elastica_Query::create($query);
-        if (!is_null($limit)) {
-            $query->setLimit($limit);
-        }
-        $path = '_search';
+	/**
+	 * Do a search on this type
+	 *
+	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+	 * @param int                         $limit OPTIONAL
+	 * @return Elastica_ResultSet ResultSet with all results inside
+	 * @see Elastica_Searchable::search
+	 */
+	public function search($query, $limit = null) {
+		$query = Elastica_Query::create($query);
+		if (!is_null($limit)) {
+			$query->setLimit($limit);
+		}
+		$path = '_search';
 
-        $response = $this->request($path, Elastica_Request::GET, $query->toArray());
-        return new Elastica_ResultSet($response);
-    }
+		$response = $this->request($path, Elastica_Request::GET, $query->toArray());
+		return new Elastica_ResultSet($response);
+	}
 
 	/**
 	 * Count docs by query
-	 * 
+	 *
 	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
 	 * @return int number of documents matching the query
 	 * @see Elastica_Searchable::count
@@ -253,25 +251,25 @@ class Elastica_Type implements Elastica_Searchable {
 		return $this->request('_query', Elastica_Request::DELETE, $query->getQuery());
 	}
 
-    /**
-     * Deletes the index type.
-     *
-     * @return Elastica_Response
-     */
-    public function delete() {
-        $response = $this->request('', Elastica_Request::DELETE);
+	/**
+	 * Deletes the index type.
+	 *
+	 * @return Elastica_Response
+	 */
+	public function delete() {
+		$response = $this->request('', Elastica_Request::DELETE);
 
-        return $response;
-    }
+		return $response;
+	}
 
 	/**
 	 * More like this query based on the given object
 	 *
 	 * The id in the given object has to be set
 	 *
-	 * @param Elastica_Document      $doc  Document to query for similar objects
+	 * @param Elastica_Document $doc Document to query for similar objects
 	 * @param array                  $params OPTIONAL Additional arguments for the query
-	 * @param Elastica_Query         $query OPTIONAL Query to filter the moreLikeThis results
+	 * @param Elastica_Query         $query  OPTIONAL Query to filter the moreLikeThis results
 	 * @return Elastica_ResultSet    ResultSet with all results inside
 	 * @link http://www.elasticsearch.org/guide/reference/api/more-like-this.html
 	 */
@@ -291,7 +289,7 @@ class Elastica_Type implements Elastica_Searchable {
 	 * @param string $path   Path to call
 	 * @param string $method Rest method to use (GET, POST, DELETE, PUT)
 	 * @param array  $data   OPTIONAL Arguments as array
-	 * @param array $query OPTIONAL Query params
+	 * @param array  $query  OPTIONAL Query params
 	 * @return Elastica_Response Response object
 	 */
 	public function request($path, $method, $data = array(), array $query = array()) {

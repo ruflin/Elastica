@@ -87,7 +87,7 @@ class Elastica_Util
 	 */
 	public static function toSnakeCase($string) {
 		$string = preg_replace('/([A-Z])/', '_$1', $string);
-        	return strtolower(substr($string,1));
+		return strtolower(substr($string,1));
 	}
 
 	/**
