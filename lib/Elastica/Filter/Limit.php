@@ -26,6 +26,6 @@ class Elastica_Filter_Limit extends Elastica_Filter_Abstract {
 	 * @return Elastica_Filter_Limit
 	 */
 	public function setLimit($limit) {
-		return $this->setParam('value', $limit);
+		return $this->setParam('value', (int)$limit);
 	}
 }
