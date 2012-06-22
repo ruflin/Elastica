@@ -103,7 +103,6 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract {
 
 		if (!empty($this->_should)) {
 			$args['should'] = $this->_should;
-			$args['minimum_number_should_match'] = $this->_minimumNumberShouldMatch;
 		}
 
 		if (!empty($this->_mustNot)) {
