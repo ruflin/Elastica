@@ -80,6 +80,18 @@ class Elastica_ParamTest extends Elastica_Test
 		}
 	}
 
+	public function testHasParam() {
+		$param = new Elastica_Param();
+
+		$key = 'name';
+		$value = 'nicolas ruflin';
+
+		$this->assertFalse($param->hasParam($key));
+
+		$param->setParam($key, $value);
+		$this->assertTrue($param->hasParam($key));
+	}
+
 	protected function _getFilterName($filter) {
 		// Picks the last part of the class name and makes it snake_case
 		$classNameParts = explode('_', get_class($filter));
