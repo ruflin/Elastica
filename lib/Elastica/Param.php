@@ -114,6 +114,16 @@ class Elastica_Param {
 	}
 
 	/**
+	 * Test if a param is set
+	 * 
+	 * @param string $key Key to test
+	 * @return boolean True if the param is set, false otherwise
+	 */
+	public function hasParam($key) {
+		return isset($this->_params[$key]);
+	}
+
+	/**
 	 * Returns the params array
 	 *
 	 * @return array Params
