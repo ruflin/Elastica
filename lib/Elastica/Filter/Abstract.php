@@ -16,7 +16,7 @@ abstract class Elastica_Filter_Abstract extends Elastica_Param
 	 * @return Elastica_Filter_Abstract
 	 */
 	public function setCached($cached = true) {
-		return $this->_setRawParam('_cache', (bool)$cached);
+		return $this->setParam('_cache', (bool)$cached);
 	}
 	
 	/**
@@ -32,6 +32,6 @@ abstract class Elastica_Filter_Abstract extends Elastica_Param
 			throw new Elastica_Exception_Invalid('Invalid parameter. Has to be a non empty string');
 		}
 		
-		return $this->_setRawParam('_cache_key', (string)$cacheKey);
+		return $this->setParam('_cache_key', (string)$cacheKey);
 	}
 }

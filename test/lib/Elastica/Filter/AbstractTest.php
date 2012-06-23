@@ -8,11 +8,11 @@ class Elastica_Filter_AbstractTest extends PHPUnit_Framework_TestCase {
 		$stubFilter = $this->getStub();
 		
 		$stubFilter->setCached(true);
-		$arrayFilter = $stubFilter->toArray();
+		$arrayFilter = current($stubFilter->toArray());
 		$this->assertTrue($arrayFilter['_cache']);
 		
 		$stubFilter->setCached(false);
-		$arrayFilter = $stubFilter->toArray();
+		$arrayFilter = current($stubFilter->toArray());
 		$this->assertFalse($arrayFilter['_cache']);
 	}
 	
@@ -20,7 +20,7 @@ class Elastica_Filter_AbstractTest extends PHPUnit_Framework_TestCase {
 		$stubFilter = $this->getStub();
 		
 		$stubFilter->setCached();
-		$arrayFilter = $stubFilter->toArray();
+		$arrayFilter = current($stubFilter->toArray());
 		$this->assertTrue($arrayFilter['_cache']);
 	}
 	
@@ -30,7 +30,7 @@ class Elastica_Filter_AbstractTest extends PHPUnit_Framework_TestCase {
 		$cacheKey = 'myCacheKey';
 		
 		$stubFilter->setCacheKey($cacheKey);
-		$arrayFilter = $stubFilter->toArray();
+		$arrayFilter = current($stubFilter->toArray());
 		$this->assertEquals($cacheKey, $arrayFilter['_cache_key']);
 	}
 	
