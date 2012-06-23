@@ -31,7 +31,7 @@ class Elastica_Filter_AndTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($expectedArray, $and->toArray());
 	}
 
-
+	/*
 	public function testSetCache() {
 
 		$client = new Elastica_Client();
@@ -67,4 +67,5 @@ class Elastica_Filter_AndTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals(1, $resultSet->count());
 	}
+	*/
 }
