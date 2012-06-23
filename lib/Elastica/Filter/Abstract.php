@@ -13,6 +13,7 @@ abstract class Elastica_Filter_Abstract extends Elastica_Param
 	 * Sets the filter cache
 	 * 
 	 * @param boolean $cached Cached
+	 * @return Elastica_Filter_Abstract
 	 */
 	public function setCached($cached = true) {
 		return $this->_setRawParam('_cache', (bool)$cached);
@@ -22,6 +23,7 @@ abstract class Elastica_Filter_Abstract extends Elastica_Param
 	 * Sets the filter cache key
 	 * 
 	 * @param string $cacheKey Cache key
+	 * @return Elastica_Filter_Abstract
 	 */
 	public function setCacheKey($cacheKey) {
 		$cacheKey = (string)$cacheKey;
