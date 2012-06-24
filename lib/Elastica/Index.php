@@ -224,38 +224,9 @@ class Elastica_Index implements Elastica_Searchable {
 	 */
 	public function search($query, $options = null) {
 
-		$query = Elastica_Query::create($query);
-		$path = '_search';
-
-		if (is_int($options)) {
-
-			$query->setLimit($options);
-
-		} else {
-			if (is_array($options)) {
-
-				foreach ($options as $key => $value) {
-
-					switch ($key) {
-						case 'limit' :
-						case 'size' :
-							$query->setLimit($value);
-							break;
-						case 'from' :
-							$query->setFrom($value);
-							break;
-						default:
-							throw new Elastica_Exception_Invalid('Invalid option ' . $key);
-							break;
-					}
-
-				}
-
-			}
-		}
-
-		$response = $this->request($path, Elastica_Request::GET, $query->toArray());
-		return new Elastica_ResultSet($response);
+		$search = new Elastica_Search($this->getClient());
+		$search->addIndex($this);
+		return $search->search($query, $options);
 	}
 
 	/**
