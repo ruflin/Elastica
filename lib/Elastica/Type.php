@@ -177,19 +177,16 @@ class Elastica_Type implements Elastica_Searchable {
 	 * Do a search on this type
 	 *
 	 * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
-	 * @param int                         $limit OPTIONAL
+	 * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
 	 * @return Elastica_ResultSet ResultSet with all results inside
 	 * @see Elastica_Searchable::search
 	 */
-	public function search($query, $limit = null) {
-		$query = Elastica_Query::create($query);
-		if (!is_null($limit)) {
-			$query->setLimit($limit);
-		}
-		$path = '_search';
+	public function search($query, $options = null) {
 
-		$response = $this->request($path, Elastica_Request::GET, $query->toArray());
-		return new Elastica_ResultSet($response);
+		$search = new Elastica_Search($this->getIndex()->getClient());
+		$search->addIndex($this->getIndex());
+		$search->addType($this);
+		return $search->search($query, $options);
 	}
 
 	/**

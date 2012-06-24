@@ -218,7 +218,7 @@ class Elastica_Index implements Elastica_Searchable {
 	 * Searchs in this index
 	 *
 	 * @param string|array|Elastica_Query $query   Array with all query data inside or a Elastica_Query object
-	 * @param int|array                   $options OPTIONAL Limit or associative array of options (option=>value)
+	 * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
 	 * @return Elastica_ResultSet ResultSet with all results inside
 	 * @see Elastica_Searchable::search
 	 */
