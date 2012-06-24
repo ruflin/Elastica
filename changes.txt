@@ -1,5 +1,19 @@
 CHANGES
 
+2012-06-24
+- Simplify Elastica_Type::search and Elastica_Index::search by using Elastica_Search
+- Implement Elastica_Filter_Abstract::setCache and Elastica_Filter_Abstract::setCacheKey
+- Add Elastica_Param::hasParam
+- Remove unsupported use of minimum number should match for Boolean Filter
+
+2012-06-22
+- Add Elastica_Filter_Limit
+- Add getters+setters for Index Setting blocks 'read', 'write' and 'metadata'
+- Add Elastica_Filter_MatchAll
+
+2012-06-20
+- Facet scope added
+
 2012-06-09
 - Change $_parent to null to also support 0 for an id
 - Fix Elasitca_Document->toArray()
