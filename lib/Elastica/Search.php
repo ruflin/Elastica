@@ -139,6 +139,7 @@ class Elastica_Search {
 	 * @param Elastica_Searchable $searchObject
 	 */
 	public static function create(Elastica_Searchable $searchObject) {
+		throw new Elastica_Exception_NotImplemented();
 		// Set index
 		// set type
 		// set client

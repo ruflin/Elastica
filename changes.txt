@@ -5,6 +5,7 @@ CHANGES
 - Implement Elastica_Filter_Abstract::setCache and Elastica_Filter_Abstract::setCacheKey
 - Add Elastica_Param::hasParam
 - Remove unsupported use of minimum number should match for Boolean Filter
+- Remove old style path creation through params in Elastica_Index::create and Elastica_Search::search
 
 2012-06-22
 - Add Elastica_Filter_Limit
