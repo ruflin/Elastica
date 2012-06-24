@@ -182,41 +182,32 @@ class Elastica_Search {
 
 		$query = Elastica_Query::create($query);
 		$path = $this->getPath();
+		$params = array();
 
 		if (is_int($options)) {
 			$query->setLimit($options);
 		} else {
 			if (is_array($options)) {
 				foreach ($options as $key => $value) {
-					if (empty($value)) {
-						throw new Elastica_Exception_Invalid('Invalid value ' . $value . ' for option ' . $key);
-					} else {
-						$path_separator = (strpos($path, '?')) ? '&' : '?';
-						switch ($key) {
-							case 'limit' :
-								$query->setLimit($value);
-								break;
-							case 'routing' :
-								if (!empty($value)) {
-									$path .= $path_separator . 'routing=' . $value;
-								}
-								break;
-							case 'search_type':
-								if (!empty($value)) {
-									$path .= $path_separator . 'search_type=' . $value;
-								}
-								break;
-							default:
-								throw new Elastica_Exception_Invalid('Invalid option ' . $key);
-								break;
-						}
+					switch ($key) {
+						case 'limit' :
+							$query->setLimit($value);
+							break;
+						case 'routing' :
+							$params = array('routing' => $value);
+							break;
+						case 'search_type':
+							$params = array('search_type' => $value);
+							break;
+						default:
+							throw new Elastica_Exception_Invalid('Invalid option ' . $key);
+							break;
 					}
 				}
-
 			}
 		}
 
-		$response = $this->getClient()->request($path, Elastica_Request::GET, $query->toArray());
+		$response = $this->getClient()->request($path, Elastica_Request::GET, $query->toArray(), $params);
 
 		return new Elastica_ResultSet($response);
 	}

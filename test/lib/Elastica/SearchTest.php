@@ -277,13 +277,5 @@ class Elastica_SearchTest extends Elastica_Test {
 		} catch (Exception $ex) {
 			$this->assertTrue($ex instanceof Elastica_Exception_Invalid);
 		}
-
-		//Invalid value
-		try {
-			$resultSet = $search->search('test', array('routing' => null));
-			$this->fail('Should throw Elastica_Exception_Invalid');
-		} catch (Exception $ex) {
-			$this->assertTrue($ex instanceof Elastica_Exception_Invalid);
-		}
 	}
 }

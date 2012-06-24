@@ -2,21 +2,15 @@
 
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
-class Elastica_IndexTest extends Elastica_Test
-{
+class Elastica_IndexTest extends Elastica_Test {
 	public function testMapping() {
 		$index = $this->_createIndex();
 		$doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
 
 		$type = $index->getType('test');
 
-		$mapping = array(
-			'id' => array('type' => 'integer', 'store' => 'yes'),
-			'email' => array('type' => 'string', 'store' => 'no'),
-			'username' => array('type' => 'string', 'store' => 'no'),
-			'test' => array('type' => 'integer', 'store' => 'no'),
-		);
+		$mapping = array('id' => array('type' => 'integer', 'store' => 'yes'), 'email' => array('type' => 'string', 'store' => 'no'),
+			'username' => array('type' => 'string', 'store' => 'no'), 'test' => array('type' => 'integer', 'store' => 'no'),);
 		$type->setMapping($mapping);
 
 		$type->addDocument($doc);
@@ -72,17 +66,9 @@ class Elastica_IndexTest extends Elastica_Test
 
 	public function testAddPDFFile() {
 
-		$indexMapping = array(
-			'file' => array('type' => 'attachment', 'store' => 'no'),
-			'text' => array('type' => 'string', 'store' => 'no'),
-		);
+		$indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'),);
 
-		$indexParams = array(
-			'index' => array(
-				'number_of_shards' => 1,
-				'number_of_replicas' => 0
-			),
-		);
+		$indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
 
 		$index = $this->_createIndex();
 		$type = new Elastica_Type($index, 'test');
@@ -118,17 +104,9 @@ class Elastica_IndexTest extends Elastica_Test
 
 	public function testAddPDFFileContent() {
 
-		$indexMapping = array(
-			'file' => array('type' => 'attachment', 'store' => 'no'),
-			'text' => array('type' => 'string', 'store' => 'no'),
-		);
+		$indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'),);
 
-		$indexParams = array(
-			'index' => array(
-				'number_of_shards' => 1,
-				'number_of_replicas' => 0
-			),
-		);
+		$indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
 
 		$index = $this->_createIndex();
 		$type = new Elastica_Type($index, 'test');
@@ -163,17 +141,9 @@ class Elastica_IndexTest extends Elastica_Test
 	}
 
 	public function testAddWordxFile() {
-		$indexMapping = array(
-			'file' => array('type' => 'attachment'),
-			'text' => array('type' => 'string', 'store' => 'no'),
-		);
+		$indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => 'no'),);
 
-		$indexParams = array(
-			'index' => array(
-				'number_of_shards' => 1,
-				'number_of_replicas' => 0
-			),
-		);
+		$indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
 
 		$index = $this->_createIndex();
 		$type = new Elastica_Type($index, 'content');
@@ -204,18 +174,10 @@ class Elastica_IndexTest extends Elastica_Test
 
 	public function testExcludeFileSource() {
 
-		$indexMapping = array(
-			'file' => array('type' => 'attachment', 'store' => 'yes'),
-			'text' => array('type' => 'string', 'store' => 'yes'),
-			'title' => array('type' => 'string', 'store' => 'yes'),
-		);
+		$indexMapping = array('file' => array('type' => 'attachment', 'store' => 'yes'), 'text' => array('type' => 'string', 'store' => 'yes'),
+			'title' => array('type' => 'string', 'store' => 'yes'),);
 
-		$indexParams = array(
-			'index' => array(
-				'number_of_shards' => 1,
-				'number_of_replicas' => 0
-			),
-		);
+		$indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
 
 		$index = $this->_createIndex();
 		$type = new Elastica_Type($index, 'content');
@@ -404,12 +366,12 @@ class Elastica_IndexTest extends Elastica_Test
 	}
 
 	/**
-	* Test $index->delete() return value for unknown index
-	*
-	* Tests if deleting an index that does not exist in Elasticsearch,
-	* correctly returns a boolean true from the hasError() method of
-	* the Elastica_Response object
-	*/
+	 * Test $index->delete() return value for unknown index
+	 *
+	 * Tests if deleting an index that does not exist in Elasticsearch,
+	 * correctly returns a boolean true from the hasError() method of
+	 * the Elastica_Response object
+	 */
 	public function testDeleteMissingIndexHasError() {
 		$client = new Elastica_Client();
 		$index = $client->getIndex('index_does_not_exist');
@@ -423,116 +385,97 @@ class Elastica_IndexTest extends Elastica_Test
 		}
 	}
 
-    /**
-     * Tests to see if the test type mapping exists when calling $index->getMapping()
-     */
-    public function testIndexGetMapping()
-    {
-        $index = $this->_createIndex();
-        $type = $index->getType('test');
+	/**
+	 * Tests to see if the test type mapping exists when calling $index->getMapping()
+	 */
+	public function testIndexGetMapping() {
+		$index = $this->_createIndex();
+		$type = $index->getType('test');
 
-        $mapping = array(
-            'id' => array('type' => 'integer', 'store' => 'yes'),
-            'email' => array('type' => 'string', 'store' => 'no'),
-            'username' => array('type' => 'string', 'store' => 'no'),
-            'test' => array('type' => 'integer', 'store' => 'no'),
-        );
+		$mapping = array('id' => array('type' => 'integer', 'store' => 'yes'), 'email' => array('type' => 'string', 'store' => 'no'),
+			'username' => array('type' => 'string', 'store' => 'no'), 'test' => array('type' => 'integer', 'store' => 'no'),);
 
-        $type->setMapping($mapping);
-        $indexMappings = $index->getMapping();
+		$type->setMapping($mapping);
+		$indexMappings = $index->getMapping();
 
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['type'], 'integer');
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['store'], 'yes');
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['email']['type'], 'string');
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['username']['type'], 'string');
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['test']['type'], 'integer');
-    }
+		$this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['type'], 'integer');
+		$this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['store'], 'yes');
+		$this->assertEquals($indexMappings['elastica_test']['test']['properties']['email']['type'], 'string');
+		$this->assertEquals($indexMappings['elastica_test']['test']['properties']['username']['type'], 'string');
+		$this->assertEquals($indexMappings['elastica_test']['test']['properties']['test']['type'], 'integer');
+	}
 
-    /**
-     * Tests to see if the index is empty when there are no types set.
-     */
-    public function testEmptyIndexGetMapping()
-    {
-        $index = $this->_createIndex();
-        $indexMappings = $index->getMapping();
+	/**
+	 * Tests to see if the index is empty when there are no types set.
+	 */
+	public function testEmptyIndexGetMapping() {
+		$index = $this->_createIndex();
+		$indexMappings = $index->getMapping();
 
-        $this->assertTrue(empty($indexMappings['elastica_test']));
-    }
+		$this->assertTrue(empty($indexMappings['elastica_test']));
+	}
 
-    /**
-     * Test to see if search Default Limit works
-     */
-    public function testLimitDefaultIndex()
-    {
-        $client = new Elastica_Client();
-        $index = $client->getIndex('zero');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+	/**
+	 * Test to see if search Default Limit works
+	 */
+	public function testLimitDefaultIndex() {
+		$client = new Elastica_Client();
+		$index = $client->getIndex('zero');
+		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
-        $docs = array();
+		$docs = array();
 
-        $docs[] = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+		$docs[] = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+		$docs[] = new Elastica_Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+		$docs[] = new Elastica_Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+		$docs[] = new Elastica_Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+		$docs[] = new Elastica_Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+		$docs[] = new Elastica_Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+		$docs[] = new Elastica_Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+		$docs[] = new Elastica_Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+		$docs[] = new Elastica_Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+		$docs[] = new Elastica_Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+		$docs[] = new Elastica_Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
 
-        $type = $index->getType('zeroType');
-        $type->addDocuments($docs);
-        $index->refresh();
+		$type = $index->getType('zeroType');
+		$type->addDocuments($docs);
+		$index->refresh();
 
-        // default limit results  (default limit is 10)
-        $resultSet = $index->search('farrelley');
-        $this->assertEquals(10, $resultSet->count());
+		// default limit results  (default limit is 10)
+		$resultSet = $index->search('farrelley');
+		$this->assertEquals(10, $resultSet->count());
 
-        // limit = 1
-        $resultSet = $index->search('farrelley', 1);
-        $this->assertEquals(1, $resultSet->count());
-    }
+		// limit = 1
+		$resultSet = $index->search('farrelley', 1);
+		$this->assertEquals(1, $resultSet->count());
+	}
 
+	public function testCreateArray() {
+		$client = new Elastica_Client();
+		$indexName = 'test';
+		$aliasName = 'test-aliase';
 
-    public function testCreateArray(){
-        $client = new Elastica_Client();
-        $indexName = 'test';
-        $aliasName = 'test-aliase';
-        
-        //Testing recreate (backward compatibility)
-        $index = $client->getIndex($indexName);
-        $index->create(array(), true);
-        $status = new Elastica_Status($client);
-        $this->assertTrue($status->indexExists($indexName));
-        
-        //Testing create index with array options
-        $opts = array('recreate'=>true,'routing'=>'r1,r2');
-        $index->create(array(),$opts);
-        $status = new Elastica_Status($client);
-        $this->assertTrue($status->indexExists($indexName));
-        
-        //Testing invalid options
-        try{
-            $opts = array('recreate'=>true,'routing'=>'r1,r2','testing_invalid_option'=>true);
-            $index->create(array(),$opts);
-            $status = new Elastica_Status($client);
-            $this->assertTrue($status->indexExists($indexName));
-            $this->fail('Should throw Elastica_Exception_Invalid');
-        }catch(Exception $ex){
-             $this->assertTrue($ex instanceof Elastica_Exception_Invalid);
-        }
-        
-        //Invalid value
-        try{
-            $opts = array('recreate'=>true,'routing'=>null);
-            $index->create(array(),$opts);
-            $status = new Elastica_Status($client);
-            $this->assertTrue($status->indexExists($indexName));
-            $this->fail('Should throw Elastica_Exception_Invalid');
-        }catch(Exception $ex){
-             $this->assertTrue($ex instanceof Elastica_Exception_Invalid);
-        }
-    }
+		//Testing recreate (backward compatibility)
+		$index = $client->getIndex($indexName);
+		$index->create(array(), true);
+		$status = new Elastica_Status($client);
+		$this->assertTrue($status->indexExists($indexName));
+
+		//Testing create index with array options
+		$opts = array('recreate' => true, 'routing' => 'r1,r2');
+		$index->create(array(), $opts);
+		$status = new Elastica_Status($client);
+		$this->assertTrue($status->indexExists($indexName));
+
+		//Testing invalid options
+		try {
+			$opts = array('recreate' => true, 'routing' => 'r1,r2', 'testing_invalid_option' => true);
+			$index->create(array(), $opts);
+			$status = new Elastica_Status($client);
+			$this->assertTrue($status->indexExists($indexName));
+			$this->fail('Should throw Elastica_Exception_Invalid');
+		} catch (Exception $ex) {
+			$this->assertTrue($ex instanceof Elastica_Exception_Invalid);
+		}
+	}
 }
