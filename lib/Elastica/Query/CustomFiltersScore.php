@@ -29,8 +29,21 @@ class Elastica_Query_CustomFiltersScore extends Elastica_Query_Abstract
 	 * @return Elastica_Query_CustomFiltersScore Current object
 	 */
 	public function addFilter(Elastica_Filter_Abstract $filter, $boost) {
-		$filter_param = array('filter' => $filter->toArray(), 'boost' => $boost);
-		$this->addParam('filters', $filter_param);
+		$filterParam = array('filter' => $filter->toArray(), 'boost' => $boost);
+		$this->addParam('filters', $filterParam);
+		return $this;
+	}
+
+	/**
+	 * Add a filter with a script to calculate the score
+	 *
+	 * @param Elastica_Filter_Abstract $filter Filter object
+	 * @param Elastica_Script $script Script for calculating the score
+	 * @return Elastica_Query_CustomFiltersScore Current object
+	 */
+	public function addFilterScript(Elastica_Filter_Abstract $filter, Elastica_Script $script) {
+		$filterParam = array('filter' => $filter->toArray(), 'script' => $script->getScript());
+		$this->addParam('filters', $filterParam);
 		return $this;
 	}
 }
