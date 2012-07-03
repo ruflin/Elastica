@@ -31,7 +31,7 @@ class Elastica_Param {
 	 * @return array Filter array
 	 */
 	public function toArray() {
-		$data = array($this->getName() => $this->getParams());
+		$data = array($this->_getName() => $this->getParams());
 
 		if (!empty($this->_rawParams)) {
 			$data = array_merge($data, $this->_rawParams);
@@ -47,7 +47,7 @@ class Elastica_Param {
 	 * 
 	 * @return string name
 	 */
-	protected function getName() {
+	protected function _getName() {
 		$classNameParts = explode('_', get_class($this));
 		$name = Elastica_Util::toSnakeCase(array_pop($classNameParts));
 		
