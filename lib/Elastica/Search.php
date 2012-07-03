@@ -194,6 +194,9 @@ class Elastica_Search {
 						case 'limit' :
 							$query->setLimit($value);
 							break;
+						case 'from' :
+              $params = array('from' => $value);
+              break;
 						case 'routing' :
 							$params = array('routing' => $value);
 							break;
