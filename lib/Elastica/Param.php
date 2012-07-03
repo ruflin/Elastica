@@ -31,18 +31,27 @@ class Elastica_Param {
 	 * @return array Filter array
 	 */
 	public function toArray() {
-		// Picks the last part of the class name and makes it snake_case
-		$classNameParts = explode('_', get_class($this));
-		$partClassName = Elastica_Util::toSnakeCase(array_pop($classNameParts));
-
-
-		$data = array($partClassName => $this->getParams());
+		$data = array($this->_getName() => $this->getParams());
 
 		if (!empty($this->_rawParams)) {
 			$data = array_merge($data, $this->_rawParams);
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Param's name
+	 * Picks the last part of the class name and makes it snake_case
+	 * You can override this method if you want to change the name
+	 * 
+	 * @return string name
+	 */
+	protected function _getName() {
+		$classNameParts = explode('_', get_class($this));
+		$name = Elastica_Util::toSnakeCase(array_pop($classNameParts));
+		
+		return $name;
 	}
 
 	/**
