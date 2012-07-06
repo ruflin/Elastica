@@ -316,12 +316,15 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 	 */
 	public function field($name, $value)
 	{
-		if (is_bool($value))
-		{
-			$value = var_export($value, true);
+		if (is_bool($value)) {
+			$value = '"'. var_export($value, true) . '"';
+		} else if (is_array($value)) {
+			$value = '['.implode(',', $value).']';
+		} else {
+			$value = '"'.$value.'"';
 		}
 
-		$this->_string .= '"'.$name.'":"'.$value.'",';
+		$this->_string .= '"'.$name.'":'.$value.',';
 
 		return $this;
 	}
