@@ -10,6 +10,12 @@
  */
 class Elastica_Filter_Query extends Elastica_Filter_Abstract {
 	/**
+	 * Query
+	 * @var array
+	 */
+	protected $_query;
+	
+	/**
 	 * Construct query filter
 	 * 
 	 * @param array|Elastica_Query_Abstract $query
@@ -31,11 +37,44 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract {
 		if (!$query instanceof Elastica_Query_Abstract && ! is_array($query)) {
 			throw new Elastica_Exception_Invalid('expected an array or instance of Elastica_Query_Abstract');
 		}
-
+		
 		if ($query instanceof Elastica_Query_Abstract) {
 			$query = $query->toArray();
 		}
-
-		return $this->setParams($query);
+		
+		$this->_query = $query;
+		
+		return $this;
+	}
+	
+	/**
+	 * @see Elastica_Param::_getName()
+	 */
+	protected function _getName() {
+		if(empty($this->_params)) {
+			return parent::_getName();
+		} else {
+			return 'fquery';
+		}
+	}
+	
+	/**
+	 * @see Elastica_Param::toArray()
+	 */
+	public function toArray() {
+		$data = parent::toArray();
+		
+		$name = $this->_getName();
+		$filterData = $data[$name];
+		
+		if(empty($filterData)) {
+			$filterData = $this->_query;
+		} else {
+			$filterData['query'] = $this->_query;
+		}
+		
+		$data[$name] = $filterData;
+		
+		return $data;
 	}
 }
