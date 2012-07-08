@@ -19,15 +19,21 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	 * Create GeoDistance object
 	 *
 	 * @param string $key Key
-	 * @param float $latitude Latitude
-	 * @param float $longitude Longitude
+	 * @param array|string $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
 	 * @param string $distance Distance
 	 */
-	public function __construct($key, $latitude, $longitude, $distance) {
-		$this->setParam($key, array(
-			'lat' => (float)$latitude,
-			'lon' => (float)$longitude
-		));
+	public function __construct($key, $location, $distance) {
+		// Fix old constructor. Remove it when the old constructor is not supported anymore
+		if(func_num_args() === 4) {
+			$key = func_get_arg(0);
+			$location = array(
+				'lat' => func_get_arg(1),
+				'lon' => func_get_arg(2)
+			);
+			$distance = func_get_arg(3);
+		}
+		
+		$this->setParam($key, $location);
 		$this->setParam('distance', $distance);
 	}
 	
