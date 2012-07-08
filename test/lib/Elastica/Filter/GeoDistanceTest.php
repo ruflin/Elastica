@@ -64,6 +64,29 @@ class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(2, $type->search($query)->count());
 	}
 	
+	public function testConstruct() {
+		$key = 'location';
+		$latitude = 48.86;
+		$longitude = 2.35;
+		$distance = '10km';
+		
+		$filter = new Elastica_Filter_GeoDistance($key, $latitude, $longitude, $distance);
+		
+		$expected = array(
+			'geo_distance' => array(
+				$key => array(
+					'lat' => $latitude,
+					'lon' => $longitude
+				),
+				'distance' => $distance
+			)
+		);
+		
+		$data = $filter->toArray();
+		
+		$this->assertEquals($expected, $data);
+	}
+	
 	public function testSetDistanceType() {
 		$filter = new Elastica_Filter_GeoDistance('location', 48.86, 2.35, '10km');
 		$distanceType = Elastica_Filter_GeoDistance::DISTANCE_TYPE_ARC;
