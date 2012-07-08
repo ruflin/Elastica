@@ -73,4 +73,14 @@ class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
 		
 		$this->assertEquals($distanceType, $data['geo_distance']['distance_type']);
 	}
+	
+	public function testSetOptimizeBbox() {
+		$filter = new Elastica_Filter_GeoDistance('location', 48.86, 2.35, '10km');
+		$optimizeBbox = Elastica_Filter_GeoDistance::OPTIMIZE_BBOX_MEMORY;
+		$filter->setOptimizeBbox($optimizeBbox);
+		
+		$data = $filter->toArray();
+		
+		$this->assertEquals($optimizeBbox, $data['geo_distance']['optimize_bbox']);
+	}
 }

@@ -11,6 +11,10 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	const DISTANCE_TYPE_ARC = 'arc';
 	const DISTANCE_TYPE_PLANE = 'plane';
 	
+	const OPTIMIZE_BBOX_MEMORY = 'memory';
+	const OPTIMIZE_BBOX_INDEXED = 'indexed';
+	const OPTIMIZE_BBOX_NONE = 'none';
+	
 	/**
 	 * Create GeoDistance object
 	 *
@@ -29,5 +33,9 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	
 	public function setDistanceType($distanceType) {
 		$this->setParam('distance_type', $distanceType);
+	}
+	
+	public function setOptimizeBbox($optimizeBbox) {
+		$this->setParam('optimize_bbox', $optimizeBbox);
 	}
 }
