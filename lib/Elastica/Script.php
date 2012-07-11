@@ -11,6 +11,10 @@ class Elastica_Script {
 	/**
 	 * @var string
 	 */
+	private $_name;
+	/**
+	 * @var string
+	 */
 	private $_script;
 	/**
 	 * @var string
@@ -26,10 +30,11 @@ class Elastica_Script {
 	 * @param array|null $params
 	 * @param string|null $lang
 	 */
-	public function __construct($script, array $params = null, $lang = null) {
+	public function __construct($name, $script, array $params = null, $lang = null) {
+		$this->_name   = $name;
 		$this->_script = $script;
 		$this->_params = $params;
-		$this->_lang = $lang;
+		$this->_lang   = $lang;
 	}
 
 	/**
@@ -44,6 +49,20 @@ class Elastica_Script {
 	 */
 	public function getLang() {
 		return $this->_lang;
+	}
+
+	/**
+	 * @param string $name
+	 */
+	public function setName($name) {
+		$this->_name = $name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName() {
+		return $this->_name;
 	}
 
 	/**
@@ -72,5 +91,18 @@ class Elastica_Script {
 	 */
 	public function getScript() {
 		return $this->_script;
+	}
+
+	public function toArray() {
+		$array = array(
+			'script' => $this->_script,
+		);
+		if ($this->_params) {
+			$array['params'] = $this->_params;
+		}
+		if ($this->_lang) {
+			$array['lang'] = $this->_lang;
+		}
+		return $array;
 	}
 }
