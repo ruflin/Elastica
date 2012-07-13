@@ -572,6 +572,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 
 	/**
 	 * @see minimumNumberShouldMatch()
+     * @deprecated
 	 */
 	public function minimumShouldMatch($minimum)
 	{
@@ -919,6 +920,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
 
 	/**
 	 * @see tieBreakerMultiplier
+     * @deprecated
 	 */
 	public function tieBreaker($multiplier)
 	{
