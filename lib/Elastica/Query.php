@@ -218,8 +218,12 @@ class Elastica_Query extends Elastica_Param {
 	 */
 	public function setScriptFields(array $scriptFields) {
 		$this->_params['script_fields'] = array();
-		foreach ($scriptFields as $script) {
-			$this->addScriptField($script);
+		foreach ($scriptFields as $name => $script) {
+			if (is_int($name)) {
+				// script0, script1, etc.
+				$name = "script" . $name;
+			}
+			$this->addScriptField($name, $script);
 		}
 		return $this;
 	}
@@ -230,8 +234,8 @@ class Elastica_Query extends Elastica_Param {
 	 * @param Elastica_Script $script Script object
 	 * @return Elastica_Query Query object
 	 */
-	public function addScriptField(Elastica_Script $script) {
-		$this->_params['script_fields'][$script->getName()] = $script->toArray();
+	public function addScriptField($name, Elastica_Script $script) {
+		$this->_params['script_fields'][$name] = $script->toArray();
 		return $this;
 	}
 

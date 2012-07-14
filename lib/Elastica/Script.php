@@ -11,10 +11,6 @@ class Elastica_Script {
 	/**
 	 * @var string
 	 */
-	private $_name;
-	/**
-	 * @var string
-	 */
 	private $_script;
 	/**
 	 * @var string
@@ -30,8 +26,7 @@ class Elastica_Script {
 	 * @param array|null $params
 	 * @param string|null $lang
 	 */
-	public function __construct($name, $script, array $params = null, $lang = null) {
-		$this->_name   = $name;
+	public function __construct($script, array $params = null, $lang = null) {
 		$this->_script = $script;
 		$this->_params = $params;
 		$this->_lang   = $lang;
@@ -49,20 +44,6 @@ class Elastica_Script {
 	 */
 	public function getLang() {
 		return $this->_lang;
-	}
-
-	/**
-	 * @param string $name
-	 */
-	public function setName($name) {
-		$this->_name = $name;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return $this->_name;
 	}
 
 	/**
