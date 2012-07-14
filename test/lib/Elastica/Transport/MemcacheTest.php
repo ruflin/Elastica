@@ -5,6 +5,9 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 class Elastica_Transport_MemcacheTest extends PHPUnit_Framework_TestCase
 {
 	public function setUp() {
+        if (!extension_loaded('Memcache')) {
+            $this->markTestSkipped('pecl/memcache must be installed to run this test case');
+        }
 	}
 
 	public function tearDown() {
