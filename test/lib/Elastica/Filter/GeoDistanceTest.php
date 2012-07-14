@@ -64,7 +64,7 @@ class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(2, $type->search($query)->count());
 	}
 	
-	public function testConstruct() {
+	public function testConstructLatlon() {
 		$key = 'location';
 		$location = array(
 			'lat' => 48.86,
@@ -83,6 +83,25 @@ class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
 		
 		$data = $filter->toArray();
 		
+		$this->assertEquals($expected, $data);
+	}
+	
+	public function testConstructGeohash() {
+		$key = 'location';
+		$location = 'u09tvqx';
+		$distance = '10km';
+	
+		$filter = new Elastica_Filter_GeoDistance($key, $location, $distance);
+	
+		$expected = array(
+			'geo_distance' => array(
+				$key => $location,
+				'distance' => $distance
+			)
+		);
+	
+		$data = $filter->toArray();
+	
 		$this->assertEquals($expected, $data);
 	}
 	
