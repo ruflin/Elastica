@@ -195,10 +195,10 @@ class Elastica_Search {
 							$query->setLimit($value);
 							break;
 						case 'routing' :
-							$params = array('routing' => $value);
+							$params['routing'] = $value;
 							break;
 						case 'search_type':
-							$params = array('search_type' => $value);
+							$params['search_type'] = $value;
 							break;
 						default:
 							throw new Elastica_Exception_Invalid('Invalid option ' . $key);
