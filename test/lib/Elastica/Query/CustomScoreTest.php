@@ -2,15 +2,18 @@
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 
-class Elastica_Query_CustomScoreTest extends PHPUnit_Framework_TestCase{
+class Elastica_Query_CustomScoreTest extends PHPUnit_Framework_TestCase
+{
+    public function setUp()
+    {
+    }
 
-	public function setUp() {
-	}
+    public function tearDown()
+    {
+    }
 
-	public function tearDown() {
-	}
-
-    public function testCustomScoreQuery(){
+    public function testCustomScoreQuery()
+    {
         $query = new Elastica_Query();
 
         $customscore_query = new Elastica_Query_CustomScore();

@@ -3,25 +3,27 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Query_RangeTest extends PHPUnit_Framework_TestCase
 {
-	public function setUp() {
-	}
+    public function setUp()
+    {
+    }
 
-	public function tearDown() {
-	}
+    public function tearDown()
+    {
+    }
 
-	public function testToArray() {
+    public function testToArray()
+    {
+        $range = new Elastica_Query_Range();
 
-		$range = new Elastica_Query_Range();
+        $field = array('from' => 20, 'to' => 40);
+        $range->addField('age', $field);
 
-		$field = array('from' => 20, 'to' => 40);
-		$range->addField('age', $field);
+        $expectedArray = array(
+            'range' => array(
+                'age' => $field,
+            )
+        );
 
-		$expectedArray = array(
-			'range' => array(
-				'age' => $field,
-			)
-		);
-
-		$this->assertEquals($expectedArray, $range->toArray());
-	}
+        $this->assertEquals($expectedArray, $range->toArray());
+    }
 }

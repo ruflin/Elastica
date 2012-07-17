@@ -2,7 +2,7 @@
 <project name="Elastica" default="build" basedir=".">
 
 	<property name="source" value="${basedir}/lib"/>
-	
+
 	<target name="parallelTasks">
 		<parallel threadCount="2">
 			<sequential>
@@ -15,7 +15,7 @@
 			<antcall target="phpcb"/>
 		</parallel>
 	</target>
-	
+
 	<target name="clean" description="Cleanup build artifacts">
 		<delete dir="${basedir}/build/api"/>
 		<delete dir="${basedir}/build/code-browser"/>
@@ -32,7 +32,7 @@
 		<mkdir dir="${basedir}/build/logs"/>
 		<mkdir dir="${basedir}/build/pdepend"/>
 	</target>
-	
+
 	<target name="lint">
 		<apply executable="php" failonerror="true">
 			<arg value="-lf"/>
@@ -48,7 +48,7 @@
 			</fileset>
 		</apply>
 	</target>
-	
+
 	<target name="phpunit" depends="prepare">
 		<exec executable="phpunit" dir="${basedir}/test" failonerror="off" />
 	</target>
@@ -118,7 +118,7 @@
 			<arg line="--standard=${basedir}/test/CodeSniffer/Standards/Xodoa ${source}" />
 		</exec>
 	</target>
-	
+
 	<target name="phpmd" description="Perform phpmd with human readable output">
 		<exec executable="phpmd">
 			<arg path="${source}"/>
