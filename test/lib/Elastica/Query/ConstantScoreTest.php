@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Query_ConstantScoreTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -11,7 +10,6 @@ class Elastica_Query_ConstantScoreTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
     }
-
 
     public function dataProviderSampleQueries()
     {
@@ -61,7 +59,7 @@ class Elastica_Query_ConstantScoreTest extends PHPUnit_Framework_TestCase
     {
         $query = new Elastica_Query_ConstantScore();
         $query->setFilter($filter);
-        if(is_string($expected)) {
+        if (is_string($expected)) {
             $expected = json_decode($expected, true);
         }
         $this->assertEquals($expected, $query->toArray());
@@ -113,4 +111,3 @@ class Elastica_Query_ConstantScoreTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expectedArray, $query->toArray());
     }
 }
-

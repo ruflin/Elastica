@@ -183,4 +183,3 @@ class Elastica_Filter_IdsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, $resultSet->count());
     }
 }
-

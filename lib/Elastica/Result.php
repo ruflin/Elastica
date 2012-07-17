@@ -34,8 +34,8 @@ class Elastica_Result
      * function doesn't exist.
      * If the param does not exist, an empty array is retured
      *
-     * @param string $name Param name
-     * @return array Result data
+     * @param  string $name Param name
+     * @return array  Result data
      */
     public function getParam($name)
     {
@@ -167,12 +167,13 @@ class Elastica_Result
      *
      * Returns null if key does not exist
      *
-     * @param string $key Key name
-     * @return mixed Key value
+     * @param  string $key Key name
+     * @return mixed  Key value
      */
     public function __get($key)
     {
         $source = $this->getData();
+
         return array_key_exists($key, $source) ? $source[$key] : null;
     }
 }

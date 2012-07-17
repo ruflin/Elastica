@@ -41,8 +41,8 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract
     /**
      * Adds should filter
      *
-     * @param array|Elastica_Filter_Abstract $args Filter data
-     * @return Elastica_Filter_Bool Current object
+     * @param  array|Elastica_Filter_Abstract $args Filter data
+     * @return Elastica_Filter_Bool           Current object
      */
     public function addShould($args)
     {
@@ -52,8 +52,8 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract
     /**
      * Adds must filter
      *
-     * @param array|Elastica_Filter_Abstract $args Filter data
-     * @return Elastica_Filter_Bool Current object
+     * @param  array|Elastica_Filter_Abstract $args Filter data
+     * @return Elastica_Filter_Bool           Current object
      */
     public function addMust($args)
     {
@@ -63,8 +63,8 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract
     /**
      * Adds mustNot filter
      *
-     * @param array|Elastica_Filter_Abstract $args Filter data
-     * @return Elastica_Filter_Bool Current object
+     * @param  array|Elastica_Filter_Abstract $args Filter data
+     * @return Elastica_Filter_Bool           Current object
      */
     public function addMustNot($args)
     {
@@ -74,9 +74,9 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract
     /**
      * Adds general filter based on type
      *
-     * @param string $type Filter type
-     * @param array|Elastica_Filter_Abstract $args Filter data
-     * @return Elastica_Filter_Bool Current object
+     * @param  string                         $type Filter type
+     * @param  array|Elastica_Filter_Abstract $args Filter data
+     * @return Elastica_Filter_Bool           Current object
      */
     protected function _addFilter($type, $args)
     {
@@ -90,6 +90,7 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract
 
         $varName = '_' . $type;
         $this->{$varName}[] = $args;
+
         return $this;
     }
 
@@ -121,24 +122,26 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract
     /**
      * Sets the boost value for this filter
      *
-     * @param float $boost Boost
+     * @param  float                $boost Boost
      * @return Elastica_Filter_Bool Current object
      */
     public function setBoost($boost)
     {
         $this->_boost = $boost;
+
         return $this;
     }
 
     /**
      * Sets the minimum number that should filter have to match
      *
-     * @param int $minimumNumberShouldMatch Number of matches
+     * @param  int                  $minimumNumberShouldMatch Number of matches
      * @return Elastica_Filter_Bool Current object
      */
     public function setMinimumNumberShouldMatch($minimumNumberShouldMatch)
     {
         $this->_minimumNumberShouldMatch = intval($minimumNumberShouldMatch);
+
         return $this;
     }
 

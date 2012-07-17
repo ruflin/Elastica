@@ -31,9 +31,9 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract
     /**
      * Set query
      *
-     * @param array|Elastica_Query_Abstract $query
-     * @return Elastca_Filter_Query Query object
-     * @throws Elastica_Exception_Invalid Invalid param
+     * @param  array|Elastica_Query_Abstract $query
+     * @return Elastca_Filter_Query          Query object
+     * @throws Elastica_Exception_Invalid    Invalid param
      */
     public function setQuery($query)
     {
@@ -55,7 +55,7 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract
      */
     protected function _getName()
     {
-        if(empty($this->_params)) {
+        if (empty($this->_params)) {
             return parent::_getName();
         } else {
             return 'fquery';
@@ -72,7 +72,7 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract
         $name = $this->_getName();
         $filterData = $data[$name];
 
-        if(empty($filterData)) {
+        if (empty($filterData)) {
             $filterData = $this->_query;
         } else {
             $filterData['query'] = $this->_query;

@@ -59,7 +59,6 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
      */
     protected $_currentFile = null;
 
-
     /**
      * Returns an array of tokens this test wants to listen for.
      *
@@ -70,7 +69,6 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         return array(T_OPEN_TAG);
 
     }//end register()
-
 
     /**
      * Processes this test, when one of its tokens is encountered.
@@ -108,6 +106,7 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
             return;
         } elseif ($tokens[$commentStart]['code'] === T_COMMENT) {
             $phpcsFile->addError('You must use "/**" style comments for a file comment', ($stackPtr + 1));
+
             return;
         } elseif ($commentStart === false || $tokens[$commentStart]['code'] !== T_DOC_COMMENT) {
             // Ignore..
@@ -149,6 +148,7 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
             } catch (PHP_CodeSniffer_CommentParser_ParserException $e) {
                 $line = ($e->getLineWithinComment() + $commentStart);
                 $phpcsFile->addError($e->getMessage(), $line);
+
                 return;
             }
 
@@ -156,6 +156,7 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
             if (is_null($comment) === true) {
                 $error = 'File doc comment is empty';
                 $phpcsFile->addError($error, $commentStart);
+
                 return;
             }
 
@@ -199,13 +200,11 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
                 }
             }
 
-
             // Check each tag.
             $this->processTags($commentStart, $commentEnd);
         }//end if
 
     }//end process()
-
 
     /**
      * Processes each required or optional tag.
@@ -383,10 +382,7 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
             }
         }//end foreach
 
-
-
     }//end processTags()
-
 
     /**
      * Get the indentation information of each tag.
@@ -411,7 +407,6 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         return 0;
 
     }//end getIndentation()
-
 
     /**
      * Process the category tag.
@@ -449,7 +444,6 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
 
     }//end processCategory()
 
-
     /**
      * Process the package tag.
      *
@@ -474,7 +468,6 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
 
     }//end processPackage()
 
-
     /**
      * Process the subpackage tag.
      *
@@ -498,7 +491,6 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         }
 
     }//end processSubpackage()
-
 
     /**
      * Process the author tag(s) that this header comment has.
@@ -537,7 +529,6 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         }
 
     }//end processAuthors()
-
 
     /**
      * Process the copyright tags.
@@ -580,7 +571,6 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
 
     }//end processCopyrights()
 
-
     /**
      * Process the license tag.
      *
@@ -601,7 +591,6 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         }
 
     }//end processLicense()
-
 
     /**
      * Process the version tag.
@@ -626,6 +615,5 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         }
 
     }//end processVersion()
-
 
 }//end class

@@ -12,7 +12,7 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
     /**
      * Sets the field for the range.
      *
-     * @param string $field The name of the field for range.
+     * @param  string               $field The name of the field for range.
      * @return Elastica_Facet_Range
      */
     public function setField($field)
@@ -23,8 +23,8 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
     /**
      * Sets the fields by their separate key and value fields.
      *
-     * @param string $keyField The key_field param for the range.
-     * @param string $valueField The key_value param for the range.
+     * @param  string               $keyField   The key_field param for the range.
+     * @param  string               $valueField The key_value param for the range.
      * @return Elastica_Facet_Range
      */
     public function setKeyValueFields($keyField, $valueField)
@@ -36,7 +36,7 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
     /**
      * Sets the key and value for this facet by script.
      *
-     * @param string $keyScript Script to check whether it falls into the range.
+     * @param string $keyScript   Script to check whether it falls into the range.
      * @param string $valueScript Script to use for statistical calculations.
      */
     public function setKeyValueScripts($keyScript, $valueScript)
@@ -54,7 +54,7 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
      *     array('from' => 150)
      * )
      *
-     * @param array $ranges Numerical array with range definitions.
+     * @param  array                $ranges Numerical array with range definitions.
      * @return Elastica_Facet_Range
      */
     public function setRanges(array $ranges)
@@ -65,8 +65,8 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
     /**
      * Adds a range to the range facet.
      *
-     * @param mixed $from The from for the range.
-     * @param mixed $to The to for the range.
+     * @param  mixed                $from The from for the range.
+     * @param  mixed                $to   The to for the range.
      * @return Elastica_Facet_Range
      */
     public function addRange($from = null, $to = null)
@@ -76,6 +76,7 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
         }
 
         $this->_params['ranges'][] = array('from' => $from, 'to' => $to);
+
         return $this;
     }
 
@@ -117,6 +118,7 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
          * Set the range in the abstract as param.
          */
         $this->_setFacetParam('range', $this->_params);
+
         return parent::toArray();
     }
 }

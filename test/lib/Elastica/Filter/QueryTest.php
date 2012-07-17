@@ -39,4 +39,3 @@ class Elastica_Filter_QueryTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $filter->toArray());
     }
 }
-

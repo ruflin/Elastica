@@ -2,7 +2,6 @@
 
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Filter_AndTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -48,7 +47,6 @@ class Elastica_Filter_AndTest extends PHPUnit_Framework_TestCase
         $doc = new Elastica_Document(3, array('name' => 'ruflin'));
         $type->addDocument($doc);
 
-
         $and = new Elastica_Filter_And();
 
         $idsFilter1 = new Elastica_Filter_Ids();
@@ -62,8 +60,6 @@ class Elastica_Filter_AndTest extends PHPUnit_Framework_TestCase
 
         $index->refresh();
         $and->setCached(true);
-
-
 
         $resultSet = $type->search($and);
 

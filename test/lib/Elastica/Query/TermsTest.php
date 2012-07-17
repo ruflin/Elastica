@@ -25,7 +25,6 @@ class Elastica_Query_TermsTest extends PHPUnit_Framework_TestCase
         $doc = new Elastica_Document(3, array('name' => 'ruflin'));
         $type->addDocument($doc);
 
-
         $query = new Elastica_Query_Terms();
         $query->setTerms('name', array('nicolas', 'hello'));
 

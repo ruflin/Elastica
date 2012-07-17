@@ -30,12 +30,13 @@ class Elastica_Query_Array extends Elastica_Query_Abstract
     /**
      * Sets new query array
      *
-     * @param array $query Query array
+     * @param  array                $query Query array
      * @return Elastica_Query_Array Current object
      */
     public function setQuery(array $query)
     {
         $this->_query = $query;
+
         return $this;
     }
 

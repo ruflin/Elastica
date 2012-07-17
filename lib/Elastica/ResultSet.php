@@ -79,6 +79,7 @@ class Elastica_ResultSet implements Iterator, Countable
     public function hasFacets()
     {
         $data = $this->_response->getData();
+
         return isset($data['facets']);
     }
 
@@ -90,6 +91,7 @@ class Elastica_ResultSet implements Iterator, Countable
     public function getFacets()
     {
         $data = $this->_response->getData();
+
         return isset($data['facets']) ? $data['facets'] : array();
     }
 
@@ -133,7 +135,6 @@ class Elastica_ResultSet implements Iterator, Countable
         return sizeof($this->_results);
     }
 
-
     /**
      * Returns the current object of the set
      *
@@ -154,6 +155,7 @@ class Elastica_ResultSet implements Iterator, Countable
     public function next()
     {
         $this->_position++;
+
         return $this->current();
     }
 

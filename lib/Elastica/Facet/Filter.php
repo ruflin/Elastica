@@ -12,7 +12,7 @@ class Elastica_Facet_Filter extends Elastica_Facet_Abstract
     /**
      * Set the filter for the facet.
      *
-     * @param Elastica_Filter_Abstract $filter
+     * @param  Elastica_Filter_Abstract $filter
      * @return Elastica_Facet_Filter
      */
     public function setFilter(Elastica_Filter_Abstract $filter)

@@ -11,7 +11,7 @@ class Elastica_Transport_Memcache extends Elastica_Transport_Abstract
     /**
      * Makes calls to the elasticsearch server
      *
-     * @param array $params Host, Port, ...
+     * @param  array             $params Host, Port, ...
      * @return Elastica_Response Response object
      */
     public function exec(array $params)
@@ -41,7 +41,7 @@ class Elastica_Transport_Memcache extends Elastica_Transport_Abstract
 
         $responseString = '';
 
-        switch($function) {
+        switch ($function) {
             case 'post':
             case 'put':
                 $memcache->set($request->getPath(), $content);
@@ -56,7 +56,6 @@ class Elastica_Transport_Memcache extends Elastica_Transport_Abstract
                 throw new Elastica_Exception_Invalid('Method ' . $function . ' is not supported in memcache transport');
 
         }
-
 
         $response = new Elastica_Response($responseString);
 

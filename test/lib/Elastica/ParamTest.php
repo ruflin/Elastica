@@ -82,7 +82,7 @@ class Elastica_ParamTest extends Elastica_Test
         try {
             $param->getParam('notest');
             $this->fail('Should throw exception');
-        } catch(Elastica_Exception_Invalid $e) {
+        } catch (Elastica_Exception_Invalid $e) {
             $this->assertTrue(true);
         }
     }
@@ -104,6 +104,7 @@ class Elastica_ParamTest extends Elastica_Test
     {
         // Picks the last part of the class name and makes it snake_case
         $classNameParts = explode('_', get_class($filter));
+
         return Elastica_Util::toSnakeCase(array_pop($classNameParts));
     }
 }

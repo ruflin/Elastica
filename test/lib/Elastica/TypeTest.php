@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
 class Elastica_TypeTest extends Elastica_Test
 {
     public function setUp()
@@ -17,7 +16,6 @@ class Elastica_TypeTest extends Elastica_Test
         $index = $this->_createIndex();
 
         $type = new Elastica_Type($index, 'user');
-
 
         // Adds 1 document to the index
         $doc1 = new Elastica_Document(1,
@@ -57,7 +55,6 @@ class Elastica_TypeTest extends Elastica_Test
             ));
         $mapping->setSource(array('enabled' => false));
         $type->setMapping($mapping);
-
 
         // Adds 1 document to the index
         $doc1 = new Elastica_Document(1,
@@ -226,6 +223,7 @@ class Elastica_TypeTest extends Elastica_Test
             $type->getMapping();
         } catch (Elastica_Exception_Response $expected) {
             $this->assertEquals("TypeMissingException[[elastica_test] type[test] missing]", $expected->getMessage());
+
             return;
         }
 

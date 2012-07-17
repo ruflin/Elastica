@@ -12,7 +12,7 @@ class Elastica_Facet_Query extends Elastica_Facet_Abstract
     /**
      * Set the query for the facet.
      *
-     * @param Elastica_Query_Abstract $query
+     * @param  Elastica_Query_Abstract $query
      * @return Elastica_Facet_Query
      */
     public function setQuery(Elastica_Query_Abstract $query)

@@ -19,7 +19,7 @@ class Elastica_Facet_GeoDistance extends Elastica_Facet_Abstract
      * array('from' => 150)
      * )
      *
-     * @param array $ranges Numerical array with range definitions.
+     * @param  array                      $ranges Numerical array with range definitions.
      * @return Elastica_Facet_GeoDistance
      */
     public function setRanges(array $ranges)
@@ -30,9 +30,9 @@ class Elastica_Facet_GeoDistance extends Elastica_Facet_Abstract
     /**
      * Set the relative GeoPoint for the facet.
      *
-     * @param string $typeField index type and field e.g foo.bar
-     * @param float $latitude
-     * @param float $longitude
+     * @param  string                     $typeField index type and field e.g foo.bar
+     * @param  float                      $latitude
+     * @param  float                      $longitude
      * @return Elastica_Facet_GeoDistance
      */
     public function setGeoPoint($typeField, $latitude, $longitude)
@@ -57,6 +57,7 @@ class Elastica_Facet_GeoDistance extends Elastica_Facet_Abstract
          * Set the geo_distance in the abstract as param.
          */
         $this->_setFacetParam ( 'geo_distance', $this->_params );
+
         return parent::toArray ();
     }
 }

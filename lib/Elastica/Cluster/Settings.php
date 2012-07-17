@@ -41,7 +41,7 @@ class Elastica_Cluster_Settings
      *
      * If param is set, only specified setting is return.
      *
-     * @param string $setting OPTIONAL Setting name to return
+     * @param  string            $setting OPTIONAL Setting name to return
      * @return array|string|null Settings data
      */
     public function getPersistent($setting = '')
@@ -56,6 +56,7 @@ class Elastica_Cluster_Settings
                 return null;
             }
         }
+
         return $settings;
     }
 
@@ -64,7 +65,7 @@ class Elastica_Cluster_Settings
      *
      * If param is set, only specified setting is return.
      *
-     * @param string $setting OPTIONAL Setting name to return
+     * @param  string            $setting OPTIONAL Setting name to return
      * @return array|string|null Settings data
      */
     public function getTransient($setting = '')
@@ -79,14 +80,15 @@ class Elastica_Cluster_Settings
                 return null;
             }
         }
+
         return $settings;
     }
 
     /**
      * Sets persistent setting
      *
-     * @param string $key
-     * @param string $value
+     * @param  string            $key
+     * @param  string            $value
      * @return Elastica_Response
      */
     public function setPersistent($key, $value)
@@ -103,8 +105,8 @@ class Elastica_Cluster_Settings
     /**
      * Sets transient settings
      *
-     * @param string $key
-     * @param string $value
+     * @param  string            $key
+     * @param  string            $value
      * @return Elastica_Response
      */
     public function setTransient($key, $value)
@@ -123,8 +125,8 @@ class Elastica_Cluster_Settings
      *
      * Second param can be used to set it persistent
      *
-     * @param bool $readOnly
-     * @param bool $persistent
+     * @param  bool              $readOnly
+     * @param  bool              $persistent
      * @return Elastica_Response $response
      */
     public function setReadOnly($readOnly = true, $persistent = false)
@@ -136,13 +138,14 @@ class Elastica_Cluster_Settings
         } else {
             $response = $this->setTransient($key, $readOnly);
         }
+
         return $response;
     }
 
     /**
      * Set settings for cluster
      *
-     * @param array $settings Raw settings (including persistent or transient)
+     * @param  array             $settings Raw settings (including persistent or transient)
      * @return Elastica_Response
      */
     public function set(array $settings)
@@ -163,13 +166,14 @@ class Elastica_Cluster_Settings
     /**
      * Sends settings request
      *
-     * @param array  $data   OPTIONAL Data array
-     * @param string $method OPTIONAL Transfer method (default = Elastica_Request::GET)
+     * @param  array             $data   OPTIONAL Data array
+     * @param  string            $method OPTIONAL Transfer method (default = Elastica_Request::GET)
      * @return Elastica_Response Response object
      */
     public function request(array $data = array(), $method = Elastica_Request::GET)
     {
         $path = '_cluster/settings';
+
         return $this->getClient()->request($path, $method, $data);
     }
 }

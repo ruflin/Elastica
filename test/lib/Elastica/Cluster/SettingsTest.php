@@ -54,7 +54,7 @@ class Elastica_Cluster_SettingsTest extends Elastica_Test
         try {
             $index1->getType('test')->addDocument($doc);
             $this->fail('should throw read only exception');
-        } catch(Elastica_Exception_Response $e) {
+        } catch (Elastica_Exception_Response $e) {
             $message = $e->getMessage();
             $this->assertContains('ClusterBlockException', $message);
             $this->assertContains('cluster read-only', $message);
@@ -63,7 +63,7 @@ class Elastica_Cluster_SettingsTest extends Elastica_Test
         try {
             $index2->getType('test')->addDocument($doc);
             $this->fail('should throw read only exception');
-        } catch(Elastica_Exception_Response $e) {
+        } catch (Elastica_Exception_Response $e) {
             $message = $e->getMessage();
             $this->assertContains('ClusterBlockException', $message);
             $this->assertContains('cluster read-only', $message);
@@ -73,7 +73,6 @@ class Elastica_Cluster_SettingsTest extends Elastica_Test
         $this->assertFalse($response->hasError());
         $setting = $settings->getTransient('cluster.blocks.read_only');
         $this->assertEquals('false', $setting);
-
 
         // Check that adding documents works again
         $index1->getType('test')->addDocument($doc);

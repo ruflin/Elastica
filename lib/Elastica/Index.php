@@ -45,7 +45,7 @@ class Elastica_Index implements Elastica_Searchable
     /**
      * Returns a type object for the current index with the given name
      *
-     * @param string $type Type name
+     * @param  string        $type Type name
      * @return Elastica_Type Type object
      */
     public function getType($type)
@@ -83,6 +83,7 @@ class Elastica_Index implements Elastica_Searchable
         $path = '_mapping';
 
         $response = $this->request($path, Elastica_Request::GET);
+
         return $response->getData();
     }
 
@@ -114,10 +115,10 @@ class Elastica_Index implements Elastica_Searchable
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
-     * @param string          $id      document id
-     * @param Elastica_Script $script  script to use for update
-     * @param string          $type    index type
-     * @param array           $options options for query
+     * @param  string            $id      document id
+     * @param  Elastica_Script   $script  script to use for update
+     * @param  string            $type    index type
+     * @param  array             $options options for query
      * @return Elastica_Response
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
      * @see  Elastica_Client::updateDocument()
@@ -144,7 +145,7 @@ class Elastica_Index implements Elastica_Searchable
      *
      * Detailed arguments can be found here in the link
      *
-     * @param array $args OPTIONAL Additional arguments
+     * @param  array $args OPTIONAL Additional arguments
      * @return array Server response
      * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/
      */
@@ -209,6 +210,7 @@ class Elastica_Index implements Elastica_Searchable
                 }
             }
         }
+
         return $this->request($path, Elastica_Request::PUT, $args, $query);
     }
 
@@ -220,29 +222,31 @@ class Elastica_Index implements Elastica_Searchable
     public function exists()
     {
         $cluster = new Elastica_Cluster($this->getClient());
+
         return in_array($this->getName(), $cluster->getIndexNames());
     }
 
     /**
      * Searchs in this index
      *
-     * @param string|array|Elastica_Query $query   Array with all query data inside or a Elastica_Query object
-     * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
-     * @return Elastica_ResultSet ResultSet with all results inside
+     * @param  string|array|Elastica_Query $query   Array with all query data inside or a Elastica_Query object
+     * @param  int|array                   $options OPTIONAL Limit or associative array of options (option=>value)
+     * @return Elastica_ResultSet          ResultSet with all results inside
      * @see Elastica_Searchable::search
      */
     public function search($query, $options = null)
     {
         $search = new Elastica_Search($this->getClient());
         $search->addIndex($this);
+
         return $search->search($query, $options);
     }
 
     /**
      * Counts results of query
      *
-     * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
-     * @return int number of documents matching the query
+     * @param  string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+     * @return int                         number of documents matching the query
      * @see Elastica_Searchable::count
      */
     public function count($query = '')
@@ -301,8 +305,8 @@ class Elastica_Index implements Elastica_Searchable
     /**
      * Adds an alias to the current index
      *
-     * @param string $name    Alias name
-     * @param bool   $replace OPTIONAL If set, an existing alias will be replaced
+     * @param  string            $name    Alias name
+     * @param  bool              $replace OPTIONAL If set, an existing alias will be replaced
      * @return Elastica_Response Response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
      */
@@ -326,7 +330,7 @@ class Elastica_Index implements Elastica_Searchable
     /**
      * Removes an alias pointing to the current index
      *
-     * @param string $name Alias name
+     * @param  string            $name Alias name
      * @return Elastica_Response Response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
      */
@@ -369,7 +373,7 @@ class Elastica_Index implements Elastica_Searchable
      * Can be used to change settings during runtime. One example is to use
      * if for bulk updating {@link http://www.elasticsearch.org/blog/2011/03/23/update-settings.html}
      *
-     * @param array $data Data array
+     * @param  array             $data Data array
      * @return Elastica_Response Response object
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
      */
@@ -381,15 +385,16 @@ class Elastica_Index implements Elastica_Searchable
     /**
      * Makes calls to the elasticsearch server based on this index
      *
-     * @param string $path   Path to call
-     * @param string $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param array  $data   OPTIONAL Arguments as array
-     * @param array  $query  OPTIONAL Query params
+     * @param  string            $path   Path to call
+     * @param  string            $method Rest method to use (GET, POST, DELETE, PUT)
+     * @param  array             $data   OPTIONAL Arguments as array
+     * @param  array             $query  OPTIONAL Query params
      * @return Elastica_Response Response object
      */
     public function request($path, $method, $data = array(), array $query = array())
     {
         $path = $this->getName() . '/' . $path;
+
         return $this->getClient()->request($path, $method, $data, $query);
     }
 }

@@ -2,7 +2,6 @@
 
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
 class Elastica_LogTest extends Elastica_Test
 {
     public function setUp()

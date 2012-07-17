@@ -55,75 +55,80 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
     /**
      * Adds field to flt query
      *
-     * @param array $fields Field names
+     * @param  array                        $fields Field names
      * @return Elastica_Query_FuzzyLikeThis Current object
      */
     public function addFields(array $fields)
     {
         $this->_fields = $fields;
+
         return $this;
     }
 
     /**
      * Set the "like_text" value
      *
-     * @param string $text
+     * @param  string                       $text
      * @return Elastica_Query_FuzzyLikeThis This current object
      */
     public function setLikeText($text)
     {
         $text = trim($text);
         $this->_likeText = $text;
+
         return $this;
     }
 
     /**
      * Set the minimum similarity
      *
-     * @param int $value
+     * @param  int                          $value
      * @return Elastica_Query_FuzzyLikeThis This current object
      */
     public function setMinSimilarity($value)
     {
         $value = (float) $value;
         $this->_minSimilarity = $value;
+
         return $this;
     }
 
     /**
      * Set boost
      *
-     * @param float $value Boost value
+     * @param  float                        $value Boost value
      * @return Elastica_Query_FuzzyLikeThis Query object
      */
     public function setBoost($value)
     {
         $this->_boost = (float) $value;
+
         return $this;
     }
-
 
     /**
      * Set Prefix Length
      *
-     * @param int $value Prefix length
+     * @param  int                          $value Prefix length
      * @return Elastica_Query_FuzzyLikeThis
      */
     public function setPrefixLength($value)
     {
         $this->_prefixLength = (int) $value;
+
         return $this;
     }
 
     /**
      * Set max_query_terms
      *
-     * @param int $value Max query terms value
+     * @param  int                          $value Max query terms value
      * @return Elastica_Query_FuzzyLikeThis
      */
     public function setMaxQueryTerms($value)
     {
         $this->_maxQueryTerms = (int) $value;
+
         return $this;
     }
 

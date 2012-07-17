@@ -27,7 +27,7 @@ class Elastica_Query_Field extends Elastica_Query_Abstract
     /**
      * Creates field query object. Calls setField and setQuery with argument
      *
-     * @param string $field OPTIONAL field for object
+     * @param string $field       OPTIONAL field for object
      * @param string $queryString OPTIONAL Query string for object
      */
     public function __construct($field = '', $queryString = '')
@@ -39,19 +39,20 @@ class Elastica_Query_Field extends Elastica_Query_Abstract
     /**
      * Sets the field
      *
-     * @param string $field Field
+     * @param  string               $field Field
      * @return Elastica_Query_Field Current object
      */
     public function setField($field)
     {
         $this->_field = $field;
+
         return $this;
     }
 
     /**
      * Sets a new query string for the object
      *
-     * @param string $queryString Query string
+     * @param  string               $queryString Query string
      * @return Elastica_Query_Field Current object
      */
     public function setQueryString($queryString)
@@ -61,6 +62,7 @@ class Elastica_Query_Field extends Elastica_Query_Abstract
         }
 
         $this->_queryString = $queryString;
+
         return $this;
     }
 
@@ -73,6 +75,7 @@ class Elastica_Query_Field extends Elastica_Query_Abstract
     public function toArray()
     {
         $this->setParam($this->_field, array('query' => $this->_queryString));
+
         return parent::toArray();
     }
 }

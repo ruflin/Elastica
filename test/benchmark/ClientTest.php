@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__FILE__) . '/../bootstrap.php';
 
-
 class ClientTest extends PHPUnit_Framework_TestCase
 {
 

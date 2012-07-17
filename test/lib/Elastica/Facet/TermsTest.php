@@ -2,7 +2,6 @@
 
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Facet_TermsTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -26,7 +25,6 @@ class Elastica_Facet_TermsTest extends PHPUnit_Framework_TestCase
         $type->addDocument($doc);
         $doc = new Elastica_Document(2, array('name' => 'nicolas helloworld'));
         $type->addDocument($doc);
-
 
         $facet = new Elastica_Facet_Terms('test');
         $facet->setField('name');

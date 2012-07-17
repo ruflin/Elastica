@@ -59,10 +59,10 @@ class Elastica_Request
      * Construct
      *
      * @param Elastica_Client $client
-     * @param string $path Request path
-     * @param string $method Request method (use const's)
-     * @param array $data OPTIONAL Data array
-     * @param array $query OPTIONLA Query params
+     * @param string          $path   Request path
+     * @param string          $method Request method (use const's)
+     * @param array           $data   OPTIONAL Data array
+     * @param array           $query  OPTIONLA Query params
      */
     public function __construct(Elastica_Client $client, $path, $method, $data = array(), array $query = array())
     {
@@ -76,12 +76,13 @@ class Elastica_Request
     /**
      * Sets the request method. Use one of the for consts
      *
-     * @param string $method Request method
+     * @param  string           $method Request method
      * @return Elastica_Request Current object
      */
     public function setMethod($method)
     {
         $this->_method = $method;
+
         return $this;
     }
 
@@ -103,6 +104,7 @@ class Elastica_Request
     public function setData($data)
     {
         $this->_data = $data;
+
         return $this;
     }
 
@@ -119,12 +121,13 @@ class Elastica_Request
     /**
      * Sets the request path
      *
-     * @param string $path Request path
+     * @param  string           $path Request path
      * @return Elastica_Request Current object
      */
     public function setPath($path)
     {
         $this->_path = $path;
+
         return $this;
     }
 
@@ -162,7 +165,7 @@ class Elastica_Request
      * Returns a specific config key or the whole
      * config array if not set
      *
-     * @param string $key Config key
+     * @param  string       $key Config key
      * @return array|string Config value
      */
     public function getConfig($key = '')
@@ -174,7 +177,7 @@ class Elastica_Request
      * Returns an instance of the transport type
      *
      * @return Elastica_Transport_Abstract Transport object
-     * @throws Elastica_Exception_Invalid If invalid transport type
+     * @throws Elastica_Exception_Invalid  If invalid transport type
      */
     public function getTransport()
     {

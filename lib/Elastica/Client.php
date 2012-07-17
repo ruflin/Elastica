@@ -80,7 +80,7 @@ class Elastica_Client
      * Returns a specific config key or the whole
      * config array if not set
      *
-     * @param string $key Config key
+     * @param  string       $key Config key
      * @return array|string Config value
      */
     public function getConfig($key = '')
@@ -99,8 +99,8 @@ class Elastica_Client
     /**
      * Sets / overwrites a specific config value
      *
-     * @param string $key Key to set
-     * @param mixed $value Value
+     * @param  string          $key   Key to set
+     * @param  mixed           $value Value
      * @return Elastica_Client Client object
      */
     public function setConfigValue($key, $value)
@@ -111,7 +111,7 @@ class Elastica_Client
     /**
      * Returns the index for the given connection
      *
-     * @param string $name Index name to create connection to
+     * @param  string         $name Index name to create connection to
      * @return Elastica_Index Index for the given name
      */
     public function getIndex($name)
@@ -152,8 +152,8 @@ class Elastica_Client
     /**
      * Adds a HTTP Header
      *
-     * @param string $header The HTTP Header
-     * @param string $headerValue The HTTP Header Value
+     * @param  string                     $header      The HTTP Header
+     * @param  string                     $headerValue The HTTP Header Value
      * @throws Elastica_Exception_Invalid If $header or $headerValue is not a string
      */
     public function addHeader($header, $headerValue)
@@ -168,7 +168,7 @@ class Elastica_Client
     /**
      * Remove a HTTP Header
      *
-     * @param string $header The HTTP Header to remove
+     * @param  string                     $header The HTTP Header to remove
      * @throws Elastica_Exception_Invalid IF $header is not a string
      */
     public function removeHeader($header)
@@ -189,8 +189,8 @@ class Elastica_Client
      * set inside the document, because for bulk settings documents,
      * documents can belong to any type and index
      *
-     * @param array $docs Array of Elastica_Document
-     * @return Elastica_Response Response object
+     * @param  array                      $docs Array of Elastica_Document
+     * @return Elastica_Response          Response object
      * @throws Elastica_Exception_Invalid If docs is empty
      * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
      */
@@ -201,7 +201,7 @@ class Elastica_Client
         }
         $params = array();
 
-        foreach($docs as $doc) {
+        foreach ($docs as $doc) {
 
             $indexInfo = array(
                 '_index' => $doc->getIndex(),
@@ -227,17 +227,18 @@ class Elastica_Client
             $params[] = array('index' => $indexInfo);
             $params[] = $doc->getData();
         }
+
         return $this->bulk($params);
     }
 
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
-     * @param int $id document id
-     * @param Elastica_Script $script script to use for update
-     * @param string $index index to update
-     * @param string $type type of index to update
-     * @param array $options array of query params to use for query. For possible options check es api
+     * @param  int               $id      document id
+     * @param  Elastica_Script   $script  script to use for update
+     * @param  string            $index   index to update
+     * @param  string            $type    type of index to update
+     * @param  array             $options array of query params to use for query. For possible options check es api
      * @return Elastica_Response
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
      */
@@ -265,7 +266,7 @@ class Elastica_Client
     /**
      * Bulk deletes documents (not implemented yet)
      *
-     * @param array $docs Docs
+     * @param  array              $docs Docs
      * @throws Elastica_Exception
      */
     public function deleteDocuments(array $docs)
@@ -297,11 +298,11 @@ class Elastica_Client
     /**
      * Deletes documents with the given ids, index, type from the index
      *
-     * @param array $ids Document ids
-     * @param string|Elastica_Index $index Index name
-     * @param string|Elastica_Type $type Type of documents
-     * @return Elastica_Response Response object
-     * @throws Elastica_Exception If ids is empty
+     * @param  array                 $ids   Document ids
+     * @param  string|Elastica_Index $index Index name
+     * @param  string|Elastica_Type  $type  Type of documents
+     * @return Elastica_Response     Response object
+     * @throws Elastica_Exception    If ids is empty
      * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
      */
     public function deleteIds(array $ids, $index, $type)
@@ -319,7 +320,7 @@ class Elastica_Client
         }
 
         $params = array();
-        foreach($ids as $id) {
+        foreach ($ids as $id) {
             $action = array(
                 'delete' => array(
                     '_index' => $index,
@@ -346,7 +347,7 @@ class Elastica_Client
      * 		array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '2'))
      * );
      *
-     * @param array $params Parameter array
+     * @param  array             $params Parameter array
      * @return Elastica_Response Reponse object
      * @todo Test
      * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
@@ -360,7 +361,7 @@ class Elastica_Client
         $path = '_bulk';
 
         $queryString = '';
-        foreach($params as $index => $baseArray) {
+        foreach ($params as $index => $baseArray) {
             // Always newline needed
             $queryString .= json_encode($baseArray) . PHP_EOL;
         }
@@ -369,9 +370,9 @@ class Elastica_Client
         $data = $response->getData();
 
         if (isset($data['items'])) {
-            foreach($data['items'] as $item) {
+            foreach ($data['items'] as $item) {
                 $params = reset($item);
-                if(isset($params['error'])) {
+                if (isset($params['error'])) {
                     throw new Elastica_Exception_BulkResponse($response);
                 }
             }
@@ -385,22 +386,23 @@ class Elastica_Client
      *
      * It's possible to make any REST query directly over this method
      *
-     * @param string $path Path to call
-     * @param string $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param array $data OPTIONAL Arguments as array
-     * @param array $query OPTIONAL Query params
+     * @param  string            $path   Path to call
+     * @param  string            $method Rest method to use (GET, POST, DELETE, PUT)
+     * @param  array             $data   OPTIONAL Arguments as array
+     * @param  array             $query  OPTIONAL Query params
      * @return Elastica_Response Response object
      */
     public function request($path, $method, $data = array(), array $query = array())
     {
         $request = new Elastica_Request($this, $path, $method, $data, $query);
+
         return $request->send();
     }
 
     /**
      * Optimizes all search indices
      *
-     * @param array $args OPTIONAL Optional arguments
+     * @param  array             $args OPTIONAL Optional arguments
      * @return Elastica_Response Response object
      * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/
      */

@@ -2,7 +2,6 @@
 
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Filter_OrTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -33,7 +32,6 @@ class Elastica_Filter_OrTest extends PHPUnit_Framework_TestCase
 
         $orFilter->addFilter($filter1);
         $orFilter->addFilter($filter2);
-
 
         $expectedArray = array(
             'or' => array(

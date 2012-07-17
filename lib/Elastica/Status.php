@@ -63,6 +63,7 @@ class Elastica_Status
             $index = new Elastica_Index($this->_client, $name);
             $statuses[] = new Elastica_Index_Status($index);
         }
+
         return $statuses;
     }
 
@@ -74,17 +75,18 @@ class Elastica_Status
     public function getIndexNames()
     {
         $names = array();
-        foreach($this->_data['indices'] as $name => $data) {
+        foreach ($this->_data['indices'] as $name => $data) {
             $names[] = $name;
         }
+
         return $names;
     }
 
     /**
      * Checks if the given index exists
      *
-     * @param string $name Index name to check
-     * @return bool True if index exists
+     * @param  string $name Index name to check
+     * @return bool   True if index exists
      */
     public function indexExists($name)
     {
@@ -94,8 +96,8 @@ class Elastica_Status
     /**
      * Checks if the given alias exists
      *
-     * @param string $name Alias name
-     * @return bool True if alias exists
+     * @param  string $name Alias name
+     * @return bool   True if alias exists
      */
     public function aliasExists($name)
     {
@@ -104,14 +106,15 @@ class Elastica_Status
                 return true;
             }
         }
+
         return false;
     }
 
     /**
      * Returns an array with all indices that the given alias name points to
      *
-     * @param string $name Alias name
-     * @return array List of Elastica_Index
+     * @param  string $name Alias name
+     * @return array  List of Elastica_Index
      */
     public function getIndicesWithAlias($name)
     {
@@ -121,6 +124,7 @@ class Elastica_Status
                 $indices[] = $status->getIndex();
             }
         }
+
         return $indices;
     }
 
@@ -154,7 +158,6 @@ class Elastica_Status
         $this->_data = $this->getResponse()->getData();
     }
 
-
     /**
      * Refresh serverStatus object
      */
@@ -162,6 +165,7 @@ class Elastica_Status
     {
         $path = '';
         $response = $this->_client->request($path, Elastica_Request::GET);
+
         return  $response->getData();
     }
 

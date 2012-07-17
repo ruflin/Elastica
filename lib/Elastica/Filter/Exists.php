@@ -23,7 +23,7 @@ class Elastica_Filter_Exists extends Elastica_Filter_Abstract
     /**
      * Set field
      *
-     * @param string $field
+     * @param  string                 $field
      * @return Elastica_Filter_Exists
      */
     public function setField($field)

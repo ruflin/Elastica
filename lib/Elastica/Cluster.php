@@ -60,6 +60,7 @@ class Elastica_Cluster
         foreach ($metaData as $key => $value) {
             $indices[] = $key;
         }
+
         return $indices;
     }
 
@@ -82,6 +83,7 @@ class Elastica_Cluster
     public function getNodeNames()
     {
         $data = $this->getState();
+
         return array_keys($data['routing_nodes']['nodes']);
     }
 
@@ -96,6 +98,7 @@ class Elastica_Cluster
         foreach ($this->getNodeNames() as $name) {
             $nodes[] = new Elastica_Node($name, $this->getClient());
         }
+
         return $nodes;
     }
 
@@ -144,13 +147,14 @@ class Elastica_Cluster
     /**
      * Shuts down the complete cluster
      *
-     * @param string $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
+     * @param  string            $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
      * @return Elastica_Response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown.html
      */
     public function shutdown($delay = '1s')
     {
         $path = '_shutdown?delay=' . $delay;
+
         return $this->_client->request($path, Elastica_Request::POST);
     }
 }

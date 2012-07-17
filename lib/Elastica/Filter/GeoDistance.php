@@ -40,10 +40,10 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
     /**
      * Create GeoDistance object
      *
-     * @param string $key Key
-     * @param string $latitude Latitude
+     * @param string $key       Key
+     * @param string $latitude  Latitude
      * @param string $longitude Longitude
-     * @param string $distance Distance
+     * @param string $distance  Distance
      */
     public function __construct($key, $latitude, $longitude, $distance)
     {
@@ -56,38 +56,40 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
     /**
      * Sets the distance to search for
      *
-     * @param string $distance Distance
+     * @param  string                      $distance Distance
      * @return Elastica_Filter_GeoDistance Current object
      */
     public function setDistance($distance)
     {
         // TODO: validate distance?
         $this->_distance = $distance;
+
         return $this;
     }
 
     /**
      * Sets the laititude
      *
-     * @param string $latitude Latitude
+     * @param  string                      $latitude Latitude
      * @return Elastica_Filter_GeoDistance Current object
      */
     public function setLatitude($latitude)
     {
         $this->_latitude = $latitude;
+
         return $this;
     }
-
 
     /**
      * Sets the longitude
      *
-     * @param string $longitude Longitude
+     * @param  string                      $longitude Longitude
      * @return Elastica_Filter_GeoDistance Current object
      */
     public function setLongitude($longitude)
     {
         $this->_longitude = $longitude;
+
         return $this;
     }
 

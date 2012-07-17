@@ -33,5 +33,3 @@ class Elastica_Filter_Missing extends Elastica_Filter_Abstract
         return $this->setParam('field', (string) $field);
     }
 }
-
-

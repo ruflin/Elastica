@@ -53,7 +53,7 @@ class Elastica_Index_Settings
      * If param is set, only specified setting is return.
      * 'index.' is added in front of $setting.
      *
-     * @param string $setting OPTIONAL Setting name to return
+     * @param  string            $setting OPTIONAL Setting name to return
      * @return array|string|null Settings data
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
      */
@@ -69,13 +69,14 @@ class Elastica_Index_Settings
                 return null;
             }
         }
+
         return $settings;
     }
 
     /**
      * Sets the number of replicas
      *
-     * @param int $replicas Number of replicas
+     * @param  int               $replicas Number of replicas
      * @return Elastica_Response Response object
      */
     public function setNumberOfReplicas($replicas)
@@ -83,13 +84,14 @@ class Elastica_Index_Settings
         $replicas = (int) $replicas;
 
         $data = array('number_of_replicas' => $replicas);
+
         return $this->set($data);
     }
 
     /**
      * Sets the index to read only
      *
-     * @param bool $readOnly (default = true)
+     * @param  bool              $readOnly (default = true)
      * @return Elastica_Response
      */
     public function setReadOnly($readOnly = true)
@@ -106,12 +108,13 @@ class Elastica_Index_Settings
     }
 
     /**
-     * @param bool $state OPTIONAL (default = true)
+     * @param  bool              $state OPTIONAL (default = true)
      * @return Elastica_Response
      */
     public function setBlocksRead($state = true)
     {
         $state = $state ? 1 : 0;
+
         return $this->set(array('blocks.read' => $state));
     }
 
@@ -124,12 +127,13 @@ class Elastica_Index_Settings
     }
 
     /**
-     * @param bool $state OPTIONAL (default = true)
+     * @param  bool              $state OPTIONAL (default = true)
      * @return Elastica_Response
      */
     public function setBlocksWrite($state = true)
     {
         $state = $state ? 1 : 0;
+
         return $this->set(array('blocks.write' => (int) $state));
     }
 
@@ -142,12 +146,13 @@ class Elastica_Index_Settings
     }
 
     /**
-     * @param bool $state OPTIONAL (default = true)
+     * @param  bool              $state OPTIONAL (default = true)
      * @return Elastica_Response
      */
     public function setBlocksMetadata($state = true)
     {
         $state = $state ? 1 : 0;
+
         return $this->set(array('blocks.metadata' => (int) $state));
     }
 
@@ -157,7 +162,7 @@ class Elastica_Index_Settings
      * Value can be for example 3s for 3 seconds or
      * 5m for 5 minutes. -1 refreshing is disabled.
      *
-     * @param int $interval Number of seconds
+     * @param  int               $interval Number of seconds
      * @return Elastica_Response Response object
      */
     public function setRefreshInterval($interval)
@@ -196,7 +201,7 @@ class Elastica_Index_Settings
     /**
      * Sets merge policy
      *
-     * @param string $type Merge policy type
+     * @param  string            $type Merge policy type
      * @return Elastica_Response Response object
      * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
      */
@@ -205,17 +210,17 @@ class Elastica_Index_Settings
         $this->getIndex()->close();
         $response = $this->set(array('merge.policy.type' => $type));
         $this->getIndex()->open();
+
         return $response;
     }
-
 
     /**
      * Sets the specific merge policies
      *
      * To have this changes made the index has to be closed and reopened
      *
-     * @param string $key Merge policy key (for ex. expunge_deletes_allowed)
-     * @param string $value
+     * @param  string            $key   Merge policy key (for ex. expunge_deletes_allowed)
+     * @param  string            $value
      * @return Elastica_Response
      * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
      */
@@ -224,13 +229,14 @@ class Elastica_Index_Settings
         $this->getIndex()->close();
         $response = $this->set(array('merge.policy.' . $key => $value));
         $this->getIndex()->open();
+
         return $response;
     }
 
     /**
      * Returns the specific merge policy value
      *
-     * @param string $key Merge policy key (for ex. expunge_deletes_allowed)
+     * @param  string $key Merge policy key (for ex. expunge_deletes_allowed)
      * @return string Refresh interval
      * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
      */
@@ -242,7 +248,7 @@ class Elastica_Index_Settings
     /**
      * Can be used to set/update settings
      *
-     * @param array $data Arguments
+     * @param  array             $data Arguments
      * @return Elastica_Response Response object
      */
     public function set(array $data)
@@ -273,8 +279,8 @@ class Elastica_Index_Settings
      * - index.merge.policy
      * - index.auto_expand_replicas
      *
-     * @param array $data OPTIONAL Data array
-     * @param string $method OPTIONAL Transfer method (default = Elastica_Request::GET)
+     * @param  array             $data   OPTIONAL Data array
+     * @param  string            $method OPTIONAL Transfer method (default = Elastica_Request::GET)
      * @return Elastica_Response Response object
      */
     public function request(array $data = array(), $method = Elastica_Request::GET)
@@ -282,6 +288,7 @@ class Elastica_Index_Settings
         $path = '_settings';
 
         $data = array('index' => $data);
+
         return $this->getIndex()->request($path, $method, $data);
     }
 }

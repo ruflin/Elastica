@@ -15,7 +15,7 @@ class Elastica_Util
      * and
      * escapes the following terms: + - && || ! ( ) { } [ ] ^ " ~ * ? : \
      *
-     * @param string $term Query term to replare and escape
+     * @param  string $term Query term to replare and escape
      * @return string Replaced and escaped query term
      * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators
      * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters
@@ -33,7 +33,7 @@ class Elastica_Util
      * Escapes the following terms (because part of the query language)
      * + - && || ! ( ) { } [ ] ^ " ~ * ? : \
      *
-     * @param string $term Query term to escape
+     * @param  string $term Query term to escape
      * @return string Escaped query term
      * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters
      */
@@ -54,7 +54,7 @@ class Elastica_Util
      * Replace the following reserved words (because part of the query language)
      * AND OR NOT
      *
-     * @param string $term Query term to replace
+     * @param  string $term Query term to replace
      * @return string Replaced query term
      * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators
      */
@@ -71,7 +71,7 @@ class Elastica_Util
      *
      * For example: hello_world to HelloWorld
      *
-     * @param string $string snake_case string
+     * @param  string $string snake_case string
      * @return string CamelCase string
      */
     public static function toCamelCase($string)
@@ -84,12 +84,13 @@ class Elastica_Util
      *
      * For Example HelloWorld to hello_world
      *
-     * @param string $string CamelCase String to Convert
+     * @param  string $string CamelCase String to Convert
      * @return string SnakeCase string
      */
     public static function toSnakeCase($string)
     {
         $string = preg_replace('/([A-Z])/', '_$1', $string);
+
         return strtolower(substr($string,1));
     }
 
@@ -98,7 +99,7 @@ class Elastica_Util
      *
      * This is the lucene date format
      *
-     * @param int $date Date input (could be string etc.) -> must be supported by strtotime
+     * @param  int    $date Date input (could be string etc.) -> must be supported by strtotime
      * @return string Converted date string
      */
     public static function convertDate($date)
@@ -109,6 +110,7 @@ class Elastica_Util
             $timestamp = strtotime($date);
         }
         $string =  date('Y-m-d\TH:i:s\Z', $timestamp);
+
         return $string;
     }
 }

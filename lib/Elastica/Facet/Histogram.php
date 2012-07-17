@@ -12,7 +12,7 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
     /**
      * Sets the field for histogram
      *
-     * @param string $field The name of the field for the historgram
+     * @param  string                   $field The name of the field for the historgram
      * @return Elastica_Facet_Histogram
      */
     public function setField($field)
@@ -23,7 +23,7 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
     /**
      * Set the value for interval
      *
-     * @param string $interval
+     * @param  string               $interval
      * @return Elastica_Facet_Range
      */
     public function setInterval($interval)
@@ -31,12 +31,11 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
         return $this->setParam('interval', $interval);
     }
 
-
     /**
      * Set the fields for key_field and value_field
      *
-     * @param string $keyField Key field
-     * @param string $valueField Value field
+     * @param  string               $keyField   Key field
+     * @param  string               $valueField Value field
      * @return Elastica_Facet_Range
      */
     public function setKeyValueFields($keyField, $valueField)
@@ -47,7 +46,7 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
     /**
      * Sets the key and value for this facet by script.
      *
-     * @param string $keyScript Script to check whether it falls into the range.
+     * @param string $keyScript   Script to check whether it falls into the range.
      * @param string $valueScript Script to use for statistical calculations.
      */
     public function setKeyValueScripts($keyScript, $valueScript)
@@ -59,7 +58,7 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
     /**
      * Set the "params" essential to the a script
      *
-     * @param array $params Associative array (key/value pair)
+     * @param  array                    $params Associative array (key/value pair)
      * @return Elastica_Facet_Histogram Facet object
      */
     public function setScriptParams(array $params)
@@ -81,6 +80,7 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
          * Set the range in the abstract as param.
          */
         $this->_setFacetParam('histogram', $this->_params);
+
         return parent::toArray();
     }
 }

@@ -27,7 +27,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
      *
      * All calls that are made to the server are done through this function
      *
-     * @param array $params Host, Port, ...
+     * @param  array             $params Host, Port, ...
      * @return Elastica_Response Response object
      */
     public function exec(array $params)
@@ -135,14 +135,15 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
     /**
      * Return Curl ressource
      *
-     * @param bool $persistent False if not persistent connection
+     * @param  bool     $persistent False if not persistent connection
      * @return resource Connection resource
      */
     protected function _getConnection($persistent = true)
     {
-        if (!$persistent || !self::$_connection){
+        if (!$persistent || !self::$_connection) {
             self::$_connection = curl_init();
         }
+
         return self::$_connection;
     }
 }

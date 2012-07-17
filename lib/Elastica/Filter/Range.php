@@ -20,8 +20,8 @@ class Elastica_Filter_Range extends Elastica_Filter_Abstract
     /**
      * Construct range filter
      *
-     * @param string $fieldName Field name
-     * @param array $args Field arguments
+     * @param  string                $fieldName Field name
+     * @param  array                 $args      Field arguments
      * @return Elastica_Filter_Range
      */
     public function __construct($fieldName = false, array $args = array())
@@ -34,13 +34,14 @@ class Elastica_Filter_Range extends Elastica_Filter_Abstract
     /**
      * Ads a field with arguments to the range query
      *
-     * @param string $fieldName Field name
-     * @param array $args Field arguments
+     * @param  string                $fieldName Field name
+     * @param  array                 $args      Field arguments
      * @return Elastica_Filter_Range
      */
     public function addField($fieldName, array $args)
     {
         $this->_fields[$fieldName] = $args;
+
         return $this;
     }
 
@@ -53,6 +54,7 @@ class Elastica_Filter_Range extends Elastica_Filter_Abstract
     public function toArray()
     {
         $this->setParams($this->_fields);
+
         return parent::toArray();
     }
 }

@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
 class Elastica_QueryTest extends Elastica_Test
 {
     public function setUp()
@@ -11,7 +10,6 @@ class Elastica_QueryTest extends Elastica_Test
     public function tearDown()
     {
     }
-
 
     public function testStringConversion()
     {
@@ -76,7 +74,6 @@ class Elastica_QueryTest extends Elastica_Test
         $doc = new Elastica_Document(3, array('firstname' => 'nicolas', 'lastname' => 'ruflin'));
         $type->addDocument($doc);
 
-
         $queryTerm = new Elastica_Query_Term();
         $queryTerm->setTerm('lastname', 'ruflin');
 
@@ -94,7 +91,6 @@ class Elastica_QueryTest extends Elastica_Test
 
         $this->assertEquals('guschti', $first['firstname']);
         $this->assertEquals('nicolas', $second['firstname']);
-
 
         // DESC order
         $query->setSort(array('firstname' => array('order' => 'desc')));
@@ -135,7 +131,6 @@ class Elastica_QueryTest extends Elastica_Test
 
         $query->setFields(array('firstname', 'lastname'));
 
-
         $data = $query->toArray();
 
         $this->assertContains('firstname', $data['fields']);
@@ -150,10 +145,9 @@ class Elastica_QueryTest extends Elastica_Test
         try {
             $query->getQuery();
             $this->fail('should throw exception because query does not exist');
-        } catch(Elastica_Exception_Invalid $e) {
+        } catch (Elastica_Exception_Invalid $e) {
             $this->assertTrue(true);
         }
-
 
         $termQuery = new Elastica_Query_Term();
         $termQuery->setTerm('text', 'value');

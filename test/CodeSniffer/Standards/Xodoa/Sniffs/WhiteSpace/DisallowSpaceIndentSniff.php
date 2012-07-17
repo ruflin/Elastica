@@ -31,7 +31,6 @@
 class Xodoa_Sniffs_WhiteSpace_DisallowSpaceIndentSniff implements PHP_CodeSniffer_Sniff
 {
 
-
     /**
      * Returns an array of tokens this test wants to listen for.
      *
@@ -42,7 +41,6 @@ class Xodoa_Sniffs_WhiteSpace_DisallowSpaceIndentSniff implements PHP_CodeSniffe
         return array(T_WHITESPACE);
 
     }//end register()
-
 
     /**
      * Processes this test, when one of its tokens is encountered.
@@ -69,6 +67,5 @@ class Xodoa_Sniffs_WhiteSpace_DisallowSpaceIndentSniff implements PHP_CodeSniffe
         }
 
     }//end process()
-
 
 }//end class

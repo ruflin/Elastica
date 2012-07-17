@@ -45,14 +45,14 @@ class Elastica_Exception_BulkResponse extends Elastica_Exception_Abstract
         $data = $this->_response->getData();
         $errors = array();
 
-        foreach($data['items'] as $item) {
+        foreach ($data['items'] as $item) {
             $meta = reset($item);
             $action = key($item);
-            if(isset($meta['error'])) {
+            if (isset($meta['error'])) {
                 $error = array(
                     'action' => $action,
                 );
-                foreach($meta as $key => $value) {
+                foreach ($meta as $key => $value) {
                     $key = ltrim($key, '_');
                     $error[$key] = $value;
                 }

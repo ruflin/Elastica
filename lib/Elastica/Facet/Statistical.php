@@ -12,7 +12,7 @@ class Elastica_Facet_Statistical extends Elastica_Facet_Abstract
     /**
      * Sets the field for the statistical query.
      *
-     * @param string $field The field name for the statistical query.
+     * @param  string                     $field The field name for the statistical query.
      * @return Elastica_Facet_Statistical
      */
     public function setField($field)
@@ -23,7 +23,7 @@ class Elastica_Facet_Statistical extends Elastica_Facet_Abstract
     /**
      * Sets multiple fields for the statistical query.
      *
-     * @param array $fields Numerical array with the fields for the statistical query.
+     * @param  array                      $fields Numerical array with the fields for the statistical query.
      * @return Elastica_Facet_Statistical
      */
     public function setFields(array $fields)
@@ -34,7 +34,7 @@ class Elastica_Facet_Statistical extends Elastica_Facet_Abstract
     /**
      * Sets a script to calculate statistical information
      *
-     * @param string $script The script to do calculations on the statistical values
+     * @param  string                     $script The script to do calculations on the statistical values
      * @return Elastica_Facet_Statistical
      */
     public function setScript($script)
@@ -52,6 +52,7 @@ class Elastica_Facet_Statistical extends Elastica_Facet_Abstract
     public function toArray()
     {
         $this->_setFacetParam('statistical', $this->_params);
+
         return parent::toArray();
     }
 }

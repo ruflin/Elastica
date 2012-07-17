@@ -27,7 +27,7 @@ class Elastica_StatusTest extends Elastica_Test
 
         $this->assertInternalType('array', $statuses);
 
-        foreach($statuses as $indexStatus) {
+        foreach ($statuses as $indexStatus) {
             $this->assertInstanceOf('Elastica_Index_Status', $indexStatus);
         }
     }
@@ -46,7 +46,7 @@ class Elastica_StatusTest extends Elastica_Test
         $this->assertInternalType('array', $names);
         $this->assertTrue(in_array($index->getName(), $names));
 
-        foreach($names as $name) {
+        foreach ($names as $name) {
             $this->assertInternalType('string', $name);
         }
     }
@@ -62,7 +62,7 @@ class Elastica_StatusTest extends Elastica_Test
         try {
             // Make sure index is deleted first
             $index->delete();
-        } catch(Elastica_Exception_Response $e) { }
+        } catch (Elastica_Exception_Response $e) { }
 
         $status = new Elastica_Status($client);
         $this->assertFalse($status->indexExists($indexName));
@@ -81,7 +81,7 @@ class Elastica_StatusTest extends Elastica_Test
 
         $status = new Elastica_Status($index1->getClient());
 
-        foreach($status->getIndicesWithAlias($aliasName) as $tmpIndex) {
+        foreach ($status->getIndicesWithAlias($aliasName) as $tmpIndex) {
             $tmpIndex->removeAlias($aliasName);
         }
 
@@ -107,6 +107,5 @@ class Elastica_StatusTest extends Elastica_Test
         $versionInfo = $serverStatus['version'];
         $this->assertArrayHasKey('number', $versionInfo);
     }
-
 
 }

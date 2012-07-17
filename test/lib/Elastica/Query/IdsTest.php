@@ -158,4 +158,3 @@ class Elastica_Query_IdsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $resultSet->count());
     }
 }
-

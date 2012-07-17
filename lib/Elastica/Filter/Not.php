@@ -23,7 +23,7 @@ class Elastica_Filter_Not extends Elastica_Filter_Abstract
     /**
      * Set filter
      *
-     * @param Elastica_Filter_Abstract $filter
+     * @param  Elastica_Filter_Abstract $filter
      * @return Elastica_Filter_Not
      */
     public function setFilter(Elastica_Filter_Abstract $filter)

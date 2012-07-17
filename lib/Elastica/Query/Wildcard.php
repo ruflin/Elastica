@@ -13,9 +13,9 @@ class Elastica_Query_Wildcard extends Elastica_Query_Abstract
     /**
      * Construct wildcard query
      *
-     * @param string $key OPTIONAL Wildcard key
+     * @param string $key   OPTIONAL Wildcard key
      * @param string $value OPTIONAL Wildcard value
-     * @param float $boost OPTIONAL Boost value (default = 1)
+     * @param float  $boost OPTIONAL Boost value (default = 1)
      */
     public function __construct($key = '', $value = null, $boost = 1.0)
     {
@@ -29,7 +29,7 @@ class Elastica_Query_Wildcard extends Elastica_Query_Abstract
      *
      * @param string $key
      * @param string $value
-     * @param float $boost
+     * @param float  $boost
      */
     public function setValue($key, $value, $boost = 1.0)
     {

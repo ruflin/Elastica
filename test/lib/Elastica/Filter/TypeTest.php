@@ -2,7 +2,6 @@
 
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Filter_TypeTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()

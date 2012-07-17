@@ -43,7 +43,7 @@ class Elastica_Type implements Elastica_Searchable
     /**
      * Adds the given document to the search index
      *
-     * @param Elastica_Document $doc Document with data
+     * @param  Elastica_Document $doc Document with data
      * @return Elastica_Response
      */
     public function addDocument(Elastica_Document $doc)
@@ -81,9 +81,9 @@ class Elastica_Type implements Elastica_Searchable
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
-     * @param string $id Document id
-     * @param Elastica_Script $script  script to use for update
-     * @param array           $options options for query
+     * @param  string            $id      Document id
+     * @param  Elastica_Script   $script  script to use for update
+     * @param  array             $options options for query
      * @return Elastica_Response
      * @see  Elastica_Client::updateDocument()
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
@@ -111,7 +111,7 @@ class Elastica_Type implements Elastica_Searchable
     /**
      * Get the document from search index
      *
-     * @param string $id Document id
+     * @param  string            $id Document id
      * @return Elastica_Document
      */
     public function getDocument($id)
@@ -131,6 +131,7 @@ class Elastica_Type implements Elastica_Searchable
         $data = isset($result['_source']) ? $result['_source'] : array();
         $document = new Elastica_Document($id, $data, $this->getName(), $this->getIndex());
         $document->setVersion($result['_version']);
+
         return $document;
     }
 
@@ -164,6 +165,7 @@ class Elastica_Type implements Elastica_Searchable
     {
         $mapping = Elastica_Type_Mapping::create($mapping);
         $mapping->setType($this);
+
         return $mapping->send();
     }
 
@@ -177,15 +179,16 @@ class Elastica_Type implements Elastica_Searchable
         $path = '_mapping';
 
         $response = $this->request($path, Elastica_Request::GET);
+
         return $response->getData();
     }
 
     /**
      * Do a search on this type
      *
-     * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
-     * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
-     * @return Elastica_ResultSet ResultSet with all results inside
+     * @param  string|array|Elastica_Query $query   Array with all query data inside or a Elastica_Query object
+     * @param  int|array                   $options OPTIONAL Limit or associative array of options (option=>value)
+     * @return Elastica_ResultSet          ResultSet with all results inside
      * @see Elastica_Searchable::search
      */
     public function search($query, $options = null)
@@ -193,14 +196,15 @@ class Elastica_Type implements Elastica_Searchable
         $search = new Elastica_Search($this->getIndex()->getClient());
         $search->addIndex($this->getIndex());
         $search->addType($this);
+
         return $search->search($query, $options);
     }
 
     /**
      * Count docs by query
      *
-     * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
-     * @return int number of documents matching the query
+     * @param  string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+     * @return int                         number of documents matching the query
      * @see Elastica_Searchable::count
      */
     public function count($query = '')
@@ -227,7 +231,7 @@ class Elastica_Type implements Elastica_Searchable
     /**
      * Deletes an entry by its unique identifier
      *
-     * @param int|string $id Document id
+     * @param  int|string        $id Document id
      * @return Elastica_Response Response object
      * @link http://www.elasticsearch.org/guide/reference/api/delete.html
      */
@@ -236,13 +240,14 @@ class Elastica_Type implements Elastica_Searchable
         if (empty($id) || !trim($id)) {
             throw new InvalidArgumentException();
         }
+
         return $this->request($id, Elastica_Request::DELETE);
     }
 
     /**
      * Deletes the given list of ids from this type
      *
-     * @param array $ids
+     * @param  array             $ids
      * @return Elastica_Response Response object
      */
     public function deleteIds(array $ids)
@@ -259,6 +264,7 @@ class Elastica_Type implements Elastica_Searchable
     public function deleteByQuery($query)
     {
         $query = Elastica_Query::create($query);
+
         return $this->request('_query', Elastica_Request::DELETE, $query->getQuery());
     }
 
@@ -279,10 +285,10 @@ class Elastica_Type implements Elastica_Searchable
      *
      * The id in the given object has to be set
      *
-     * @param Elastica_Document $doc Document to query for similar objects
-     * @param array                  $params OPTIONAL Additional arguments for the query
-     * @param Elastica_Query         $query  OPTIONAL Query to filter the moreLikeThis results
-     * @return Elastica_ResultSet    ResultSet with all results inside
+     * @param  Elastica_Document  $doc    Document to query for similar objects
+     * @param  array              $params OPTIONAL Additional arguments for the query
+     * @param  Elastica_Query     $query  OPTIONAL Query to filter the moreLikeThis results
+     * @return Elastica_ResultSet ResultSet with all results inside
      * @link http://www.elasticsearch.org/guide/reference/api/more-like-this.html
      */
     public function moreLikeThis(Elastica_Document $doc, $params = array(), $query = array())
@@ -299,15 +305,16 @@ class Elastica_Type implements Elastica_Searchable
     /**
      * Makes calls to the elasticsearch server based on this type
      *
-     * @param string $path   Path to call
-     * @param string $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param array  $data   OPTIONAL Arguments as array
-     * @param array  $query  OPTIONAL Query params
+     * @param  string            $path   Path to call
+     * @param  string            $method Rest method to use (GET, POST, DELETE, PUT)
+     * @param  array             $data   OPTIONAL Arguments as array
+     * @param  array             $query  OPTIONAL Query params
      * @return Elastica_Response Response object
      */
     public function request($path, $method, $data = array(), array $query = array())
     {
         $path = $this->getName() . '/' . $path;
+
         return $this->getIndex()->request($path, $method, $data, $query);
     }
 }

@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
 class Elastica_ResultTest extends Elastica_Test
 {
     public function setUp()
@@ -19,7 +18,6 @@ class Elastica_ResultTest extends Elastica_Test
 
         $index = $this->_createIndex();
         $type = $index->getType($typeName);
-
 
         // Adds 1 document to the index
         $docId = 3;
@@ -57,7 +55,6 @@ class Elastica_ResultTest extends Elastica_Test
         $mapping = new Elastica_Type_Mapping($type);
         $mapping->disableSource();
         $mapping->send();
-
 
         // Adds 1 document to the index
         $docId = 3;

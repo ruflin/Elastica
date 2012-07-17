@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
 class Elastica_ClientTest extends Elastica_Test
 {
 
@@ -121,7 +120,7 @@ class Elastica_ClientTest extends Elastica_Test
         try {
             $client->addDocuments(array());
             $this->fail('Should throw exception');
-        } catch(Elastica_Exception_Invalid $e) {
+        } catch (Elastica_Exception_Invalid $e) {
             $this->assertTrue(true);
         }
     }

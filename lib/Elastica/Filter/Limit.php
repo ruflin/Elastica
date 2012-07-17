@@ -13,7 +13,7 @@ class Elastica_Filter_Limit extends Elastica_Filter_Abstract
     /**
      * Construct limit filter
      *
-     * @param int $limit Limit
+     * @param  int                   $limit Limit
      * @return Elastica_Filter_Limit
      */
     public function __construct($limit)
@@ -24,11 +24,11 @@ class Elastica_Filter_Limit extends Elastica_Filter_Abstract
     /**
      * Set the limit
      *
-     * @param int $limit Limit
+     * @param  int                   $limit Limit
      * @return Elastica_Filter_Limit
      */
     public function setLimit($limit)
     {
-        return $this->setParam('value', (int)$limit);
+        return $this->setParam('value', (int) $limit);
     }
 }

@@ -47,7 +47,6 @@ class Xodoa_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Sniff
      */
     protected $_nonIndentingScopes = array();
 
-
     /**
      * Returns an array of tokens this test wants to listen for.
      *
@@ -58,7 +57,6 @@ class Xodoa_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Sniff
         return PHP_CodeSniffer_Tokens::$scopeOpeners;
 
     }//end register()
-
 
     /**
      * Processes this test, when one of its tokens is encountered.
@@ -242,7 +240,6 @@ class Xodoa_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Sniff
 
     }//end process()
 
-
     /**
      * Calculates the expected indent of a token.
      *
@@ -272,6 +269,5 @@ class Xodoa_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Sniff
         return ((count($conditionStack) * $this->_indent) + 1);
 
     }//end calculateExpectedIndent()
-
 
 }//end class

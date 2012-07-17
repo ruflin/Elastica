@@ -27,7 +27,7 @@ class Elastica_Query_Filtered extends Elastica_Query_Abstract
     /**
      * Constructs a filtered query
      *
-     * @param Elastica_Query_Abstract $query Query object
+     * @param Elastica_Query_Abstract  $query  Query object
      * @param Elastica_Filter_Abstract $filter Filter object
      */
     public function __construct(Elastica_Query_Abstract $query, Elastica_Filter_Abstract $filter)
@@ -39,24 +39,26 @@ class Elastica_Query_Filtered extends Elastica_Query_Abstract
     /**
      * Sets a query
      *
-     * @param Elastica_Query_Abstract $query Query object
+     * @param  Elastica_Query_Abstract $query Query object
      * @return Elastica_Query_Filtered Current object
      */
     public function setQuery(Elastica_Query_Abstract $query)
     {
         $this->_query = $query;
+
         return $this;
     }
 
     /**
      * Sets the filter
      *
-     * @param Elastica_Filter_Abstract $filter Filter object
-     * @return Elastica_Query_Filtered Current object
+     * @param  Elastica_Filter_Abstract $filter Filter object
+     * @return Elastica_Query_Filtered  Current object
      */
     public function setFilter(Elastica_Filter_Abstract $filter)
     {
         $this->_filter = $filter;
+
         return $this;
     }
 

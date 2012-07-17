@@ -30,7 +30,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
     /**
      * Sets a new query string for the object
      *
-     * @param string $query Query string
+     * @param  string                     $query Query string
      * @return Elastica_Query_QueryString Current object
      */
     public function setQuery($query = '')
@@ -47,7 +47,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If no operator is set, OR is chosen
      *
-     * @param string $queryString Query string
+     * @param  string                     $queryString Query string
      * @return Elastica_Query_QueryString Current object
      * @deprecated Please use setQuery instead
      */
@@ -61,7 +61,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If no field is set, _all is chosen
      *
-     * @param string $field Field
+     * @param  string                     $field Field
      * @return Elastica_Query_QueryString Current object
      */
     public function setDefaultField($field)
@@ -74,7 +74,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If no operator is set, OR is chosen
      *
-     * @param string $operator Operator
+     * @param  string                     $operator Operator
      * @return Elastica_Query_QueryString Current object
      */
     public function setDefaultOperator($operator)
@@ -85,7 +85,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
     /**
      * Sets the analyzer to analyze the query with.
      *
-     * @param string $analyzer Analyser to use
+     * @param  string                     $analyzer Analyser to use
      * @return Elastica_Query_QueryString Current object
      */
     public function setAnalyzer($analyzer)
@@ -98,7 +98,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If not set, defaults to true.
      *
-     * @param bool $allow
+     * @param  bool                       $allow
      * @return Elastica_Query_QueryString Current object
      */
     public function setAllowLeadingWildcard($allow = true)
@@ -111,7 +111,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If not set, defaults to true.
      *
-     * @param bool $lowercase
+     * @param  bool                       $lowercase
      * @return Elastica_Query_QueryString Current object
      */
     public function setLowercaseExpandedTerms($lowercase = true)
@@ -124,7 +124,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If not set, defaults to true.
      *
-     * @param bool $enabled
+     * @param  bool                       $enabled
      * @return Elastica_Query_QueryString Current object
      */
     public function setEnablePositionIncrements($enabled = true)
@@ -137,7 +137,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If not set, defaults to 0.
      *
-     * @param int $length
+     * @param  int                        $length
      * @return Elastica_Query_QueryString Current object
      */
     public function setFuzzyPrefixLength($length = 0)
@@ -150,7 +150,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If not set, defaults to 0.5
      *
-     * @param float $minSim
+     * @param  float                      $minSim
      * @return Elastica_Query_QueryString Current object
      */
     public function setFuzzyMinSim($minSim = 0.5)
@@ -164,7 +164,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      * If zero, exact phrases are required.
      * If not set, defaults to zero.
      *
-     * @param int $phraseSlop
+     * @param  int                        $phraseSlop
      * @return Elastica_Query_QueryString Current object
      */
     public function setPhraseSlop($phraseSlop = 0)
@@ -177,7 +177,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If not set, defaults to 1.0.
      *
-     * @param float $boost
+     * @param  float                      $boost
      * @return Elastica_Query_QueryString Current object
      */
     public function setBoost($boost = 1.0)
@@ -190,7 +190,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If not set, defaults to false
      *
-     * @param bool $analyze
+     * @param  bool                       $analyze
      * @return Elastica_Query_QueryString Current object
      */
     public function setAnalyzeWildcard($analyze = true)
@@ -203,7 +203,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If not set, defaults to false.
      *
-     * @param bool $autoGenerate
+     * @param  bool                       $autoGenerate
      * @return Elastica_Query_QueryString Current object
      */
     public function setAutoGeneratePhraseQueries($autoGenerate = true)
@@ -216,7 +216,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If no fields are set, _all is chosen
      *
-     * @param array $fields Fields
+     * @param  array                      $fields Fields
      * @return Elastica_Query_QueryString Current object
      */
     public function setFields(array $fields)
@@ -224,13 +224,14 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
         if (!is_array($fields)) {
             throw new Elastica_Exception_Invalid('Parameter has to be an array');
         }
+
         return $this->setParam('fields', $fields);
     }
 
     /**
      * Whether to use bool or dis_max quueries to internally combine results for multi field search.
      *
-     * @param bool $value Determines whether to use
+     * @param  bool                       $value Determines whether to use
      * @return Elastica_Query_QueryString Current object
      */
     public function setUseDisMax($value = true)
@@ -243,7 +244,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * If not set, defaults to 0.
      *
-     * @param int $tieBreaker
+     * @param  int                        $tieBreaker
      * @return Elastica_Query_QueryString Current object
      */
     public function setTieBraker($tieBreaker = 0)
@@ -254,7 +255,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
     /**
      * Set a re-write condition. See https://github.com/elasticsearch/elasticsearch/issues/1186 for additional information
      *
-     * @param string $rewrite
+     * @param  string         $rewrite
      * @return Elastica_Param
      */
     public function setRewrite($rewrite = "")
@@ -273,4 +274,3 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
         return array('query_string' => array_merge(array('query' => $this->_queryString), $this->getParams()),);
     }
 }
-

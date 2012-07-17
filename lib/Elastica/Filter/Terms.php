@@ -34,8 +34,8 @@ class Elastica_Filter_Terms extends Elastica_Filter_Abstract
     /**
      * Creates terms filter
      *
-     * @param string $key Terms key
-     * @param array $terms Terms values
+     * @param string $key   Terms key
+     * @param array  $terms Terms values
      */
     public function __construct($key = '', array $terms = array())
     {
@@ -45,25 +45,27 @@ class Elastica_Filter_Terms extends Elastica_Filter_Abstract
     /**
      * Sets key and terms for the filter
      *
-     * @param string $key Terms key
-     * @param array $terms Terms for the query.
+     * @param string $key   Terms key
+     * @param array  $terms Terms for the query.
      */
     public function setTerms($key, array $terms)
     {
         $this->_key = $key;
         $this->_terms = array_values($terms);
+
         return $this;
     }
 
     /**
      * Adds an additional term to the query
      *
-     * @param string $term Filter term
+     * @param  string                   $term Filter term
      * @return Elastica_Filter_Abstract Filter object
      */
     public function addTerm($term)
     {
         $this->_terms[] = $term;
+
         return $this;
     }
 
@@ -79,6 +81,7 @@ class Elastica_Filter_Terms extends Elastica_Filter_Abstract
             throw new Elastica_Exception_Invalid('Terms key has to be set');
         }
         $this->_params[$this->_key] = $this->_terms;
+
         return array('terms' => $this->_params);
     }
 }

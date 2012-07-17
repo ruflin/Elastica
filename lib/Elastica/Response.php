@@ -68,6 +68,7 @@ class Elastica_Response
         if (isset($response['error'])) {
             $message = $response['error'];
         }
+
         return $message;
     }
 
@@ -83,6 +84,7 @@ class Elastica_Response
         if (isset($response['error'])) {
             return true;
         }
+
         return false;
     }
 
@@ -94,6 +96,7 @@ class Elastica_Response
     public function isOk()
     {
         $data = $this->getData();
+
         return (isset($data['ok']) && $data['ok']);
     }
 
@@ -127,6 +130,7 @@ class Elastica_Response
 
             $this->_response = $response;
         }
+
         return $this->_response;
     }
 
@@ -144,12 +148,13 @@ class Elastica_Response
      * Sets the transfer info of the curl request. This function is called
      * from the Elastica_Client::_callService only in debug mode.
      *
-     * @param array $transferInfo The curl transfer information.
+     * @param  array             $transferInfo The curl transfer information.
      * @return Elastica_Response Current object
      */
     public function setTransferInfo(array $transferInfo)
     {
         $this->_transferInfo = $transferInfo;
+
         return $this;
     }
 
@@ -166,12 +171,13 @@ class Elastica_Response
     /**
      * Sets the query time
      *
-     * @param float $queryTime Query time
+     * @param  float             $queryTime Query time
      * @return Elastica_Response Current object
      */
     public function setQueryTime($queryTime)
     {
         $this->_queryTime = $queryTime;
+
         return $this;
     }
 

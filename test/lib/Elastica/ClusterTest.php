@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
 class Elastica_ClusterTest extends Elastica_Test
 {
 
@@ -24,7 +23,7 @@ class Elastica_ClusterTest extends Elastica_Test
 
         $nodes = $cluster->getNodes();
 
-        foreach($nodes as $node) {
+        foreach ($nodes as $node) {
             $this->assertInstanceOf('Elastica_Node', $node);
         }
 
@@ -52,7 +51,7 @@ class Elastica_ClusterTest extends Elastica_Test
         try {
             $client->getStatus();
             $this->fail('Should throw exception because cluster is shut down');
-        } catch(Elastica_Exception_Client $e) {
+        } catch (Elastica_Exception_Client $e) {
             $this->assertTrue(true);
         }
     }

@@ -60,7 +60,6 @@ class Xodoa_Sniffs_Commenting_ClassCommentSniff extends Xodoa_Sniffs_Commenting_
 
     }//end register()
 
-
     /**
      * Processes this test, when one of its tokens is encountered.
      *
@@ -86,9 +85,11 @@ class Xodoa_Sniffs_Commenting_ClassCommentSniff extends Xodoa_Sniffs_Commenting_
 
         if ($commentEnd !== false && $tokens[$commentEnd]['code'] === T_COMMENT) {
             $phpcsFile->addError('You must use "/**" style comments for a class comment', $stackPtr);
+
             return;
         } elseif ($commentEnd === false || $tokens[$commentEnd]['code'] !== T_DOC_COMMENT) {
             $phpcsFile->addError('Missing class doc comment', $stackPtr);
+
             return;
         }
 
@@ -111,6 +112,7 @@ class Xodoa_Sniffs_Commenting_ClassCommentSniff extends Xodoa_Sniffs_Commenting_
                             // Blank line between the class and the doc block.
                             // The doc block is most likely a file comment.
                             $phpcsFile->addError('Missing class doc comment', ($stackPtr + 1));
+
                             return;
                         }
                     }//end if
@@ -127,6 +129,7 @@ class Xodoa_Sniffs_Commenting_ClassCommentSniff extends Xodoa_Sniffs_Commenting_
         } catch (PHP_CodeSniffer_CommentParser_ParserException $e) {
             $line = ($e->getLineWithinComment() + $commentStart);
             $phpcsFile->addError($e->getMessage(), $line);
+
             return;
         }
 
@@ -134,6 +137,7 @@ class Xodoa_Sniffs_Commenting_ClassCommentSniff extends Xodoa_Sniffs_Commenting_
         if (is_null($comment) === true) {
             $error = 'Class doc comment is empty';
             $phpcsFile->addError($error, $commentStart);
+
             return;
         }
 
@@ -182,7 +186,6 @@ class Xodoa_Sniffs_Commenting_ClassCommentSniff extends Xodoa_Sniffs_Commenting_
 
     }//end process()
 
-
     /**
      * Process the version tag.
      *
@@ -206,6 +209,5 @@ class Xodoa_Sniffs_Commenting_ClassCommentSniff extends Xodoa_Sniffs_Commenting_
         }
 
     }//end processVersion()
-
 
 }//end class

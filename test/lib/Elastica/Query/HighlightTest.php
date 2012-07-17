@@ -38,8 +38,6 @@ class Elastica_Query_HighlightTest extends PHPUnit_Framework_TestCase
             ),
         ));
 
-
-
         $index->refresh();
 
         $resultSet = $type->search($query);

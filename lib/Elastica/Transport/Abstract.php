@@ -15,7 +15,6 @@ abstract class Elastica_Transport_Abstract
      */
     protected $_path;
 
-
     /**
      * Method
      *
@@ -37,7 +36,6 @@ abstract class Elastica_Transport_Abstract
      * @var array config
      */
     protected $_config;
-
 
     /**
      * Construc transport
@@ -62,7 +60,7 @@ abstract class Elastica_Transport_Abstract
     /**
      * Executes the transport request
      *
-     * @param array $params Hostname, port, path, ...
+     * @param  array             $params Hostname, port, path, ...
      * @return Elastica_Response Response object
      */
     abstract public function exec(array $params);

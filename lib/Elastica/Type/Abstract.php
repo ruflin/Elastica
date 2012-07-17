@@ -123,8 +123,8 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
     /**
      * Search on the type
      *
-     * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
-     * @return Elastica_ResultSet ResultSet with all results inside
+     * @param  string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+     * @return Elastica_ResultSet          ResultSet with all results inside
      * @see Elastica_Searchable::search
      */
     public function search($query)
@@ -135,8 +135,8 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
     /**
      * Count docs in the type based on query
      *
-     * @param string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
-     * @return int number of documents matching the query
+     * @param  string|array|Elastica_Query $query Array with all query data inside or a Elastica_Query object
+     * @return int                         number of documents matching the query
      * @see Elastica_Searchable::count
      */
     public function count($query = '')
@@ -169,7 +169,7 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
      *
      * This is the lucene date format
      *
-     * @param int $date Date input (could be string etc.) -> must be supported by strtotime
+     * @param  int    $date Date input (could be string etc.) -> must be supported by strtotime
      * @return string Converted date string
      */
     public function convertDate($date)

@@ -2,7 +2,6 @@
 
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Filter_GeoPolygonTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -23,7 +22,6 @@ class Elastica_Filter_GeoPolygonTest extends PHPUnit_Framework_TestCase
 
         // Set mapping
         $type->setMapping(array('point' => array('type' => 'geo_point')));
-
 
         // Add doc 1
         $doc1 = new Elastica_Document(1,

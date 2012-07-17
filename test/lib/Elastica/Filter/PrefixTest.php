@@ -67,7 +67,6 @@ class Elastica_Filter_PrefixTest extends PHPUnit_Framework_TestCase
 
         $index->refresh();
 
-
         $query = new Elastica_Filter_Prefix('name', 'Ba');
         $resultSet = $index->search($query);
         $this->assertEquals(3, $resultSet->count());
@@ -84,7 +83,6 @@ class Elastica_Filter_PrefixTest extends PHPUnit_Framework_TestCase
         $query = new Elastica_Filter_Prefix('name', 'Baden B');
         $resultSet = $index->search($query);
         $this->assertEquals(1, $resultSet->count());
-
 
         $query = new Elastica_Filter_Prefix('name', 'Baden Bas');
         $resultSet = $index->search($query);
@@ -130,7 +128,6 @@ class Elastica_Filter_PrefixTest extends PHPUnit_Framework_TestCase
 
         $index->refresh();
 
-
         $query = new Elastica_Filter_Prefix('name', 'ba');
         $resultSet = $index->search($query);
         $this->assertEquals(3, $resultSet->count());
@@ -147,7 +144,6 @@ class Elastica_Filter_PrefixTest extends PHPUnit_Framework_TestCase
         $query = new Elastica_Filter_Prefix('name', 'baden b');
         $resultSet = $index->search($query);
         $this->assertEquals(1, $resultSet->count());
-
 
         $query = new Elastica_Filter_Prefix('name', 'baden bas');
         $resultSet = $index->search($query);

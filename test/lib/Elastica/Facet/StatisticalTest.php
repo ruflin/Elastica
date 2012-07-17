@@ -2,7 +2,6 @@
 
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Facet_StatisticalTest extends Elastica_Test
 {
     public function setUp()
@@ -26,7 +25,6 @@ class Elastica_Facet_StatisticalTest extends Elastica_Test
         $type->addDocument($doc);
         $doc = new Elastica_Document(2, array('price' => 45));
         $type->addDocument($doc);
-
 
         $facet = new Elastica_Facet_Statistical('stats');
         $facet->setField('price');

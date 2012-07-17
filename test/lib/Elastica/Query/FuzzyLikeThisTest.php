@@ -28,7 +28,6 @@ class Elastica_Query_FuzzyLikeThisTest extends PHPUnit_Framework_TestCase
         $mapping->setSource(array('enabled' => false));
         $type->setMapping($mapping);
 
-
         $doc = new Elastica_Document(1000, array('email' => 'testemail@gmail.com', 'content' => 'This is a sample post. Hello World Fuzzy Like This!'));
         $type->addDocument($doc);
 
@@ -91,7 +90,6 @@ class Elastica_Query_FuzzyLikeThisTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($similarity, $data['fuzzy_like_this']['min_similarity']);
     }
-
 
     public function testSetBoost()
     {

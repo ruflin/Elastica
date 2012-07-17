@@ -13,7 +13,7 @@ class Elastica_Query_Nested extends Elastica_Query_Abstract
     /**
      * Adds field to mlt query
      *
-     * @param string $path Nested object path
+     * @param  string                $path Nested object path
      * @return Elastica_Query_Nested
      */
     public function setPath($path)
@@ -24,7 +24,7 @@ class Elastica_Query_Nested extends Elastica_Query_Abstract
     /**
      * Sets nested query
      *
-     * @param Elastica_Query_Abstract $query
+     * @param  Elastica_Query_Abstract $query
      * @return Elastica_Query_Nested
      */
     public function setQuery(Elastica_Query_Abstract $query)
@@ -35,7 +35,7 @@ class Elastica_Query_Nested extends Elastica_Query_Abstract
     /**
      * Set score method
      *
-     * @param string $scoreMode Options: avg, total, max and none.
+     * @param  string                $scoreMode Options: avg, total, max and none.
      * @return Elastica_Query_Nested
      */
     public function setScoreMode($scoreMode)

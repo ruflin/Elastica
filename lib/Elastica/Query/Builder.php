@@ -36,7 +36,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
      */
     public function __construct($string = null)
     {
-        if ( ! $string == null) {
+        if (! $string == null) {
             $this->_string .= substr($string, 1, -1);
         }
     }

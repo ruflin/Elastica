@@ -28,8 +28,8 @@ class Elastica_Filter_GeoPolygon extends Elastica_Filter_Abstract
     /**
      * Construct polygon filter
      *
-     * @param string $key Key
-     * @param array $points Points making up polygon
+     * @param string $key    Key
+     * @param array  $points Points making up polygon
      */
     public function __construct($key, array $points)
     {

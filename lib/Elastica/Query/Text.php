@@ -13,8 +13,8 @@ class Elastica_Query_Text extends Elastica_Query_Abstract
     /**
      * Sets a param for the message array
      *
-     * @param string $field
-     * @param mixed $values
+     * @param  string              $field
+     * @param  mixed               $values
      * @return Elastica_Query_Text
      */
     public function setField($field, $values)
@@ -25,9 +25,9 @@ class Elastica_Query_Text extends Elastica_Query_Abstract
     /**
      * Sets a param for the given field
      *
-     * @param string $field
-     * @param string $key
-     * @param string $value
+     * @param  string              $field
+     * @param  string              $key
+     * @param  string              $value
      * @return Elastica_Query_Text
      */
     public function setFieldParam($field, $key, $value)
@@ -37,14 +37,15 @@ class Elastica_Query_Text extends Elastica_Query_Abstract
         }
 
         $this->_params[$field][$key] = $value;
+
         return $this;
     }
 
     /**
      * Sets the query string
      *
-     * @param string $field
-     * @param string $query
+     * @param  string              $field
+     * @param  string              $query
      * @return Elastica_Query_Text
      */
     public function setFieldQuery($field, $query)
@@ -55,8 +56,8 @@ class Elastica_Query_Text extends Elastica_Query_Abstract
     /**
      * Set field type
      *
-     * @param string $field
-     * @param string $type Text query type
+     * @param  string              $field
+     * @param  string              $type  Text query type
      * @return Elastica_Query_Text
      */
     public function setFieldType($field, $type)
@@ -67,8 +68,8 @@ class Elastica_Query_Text extends Elastica_Query_Abstract
     /**
      * Set field max expansions
      *
-     * @param string $field
-     * @param int $maxExpansions
+     * @param  string              $field
+     * @param  int                 $maxExpansions
      * @return Elastica_Query_Text
      */
     public function setFieldMaxExpansions($field, $maxExpansions)

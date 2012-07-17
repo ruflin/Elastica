@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Transport_MemcacheTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -36,7 +35,6 @@ class Elastica_Transport_MemcacheTest extends PHPUnit_Framework_TestCase
         $index->create(array(), true);
 
         $type = $index->getType('user');
-
 
         // Adds 1 document to the index
         $doc1 = new Elastica_Document(1,

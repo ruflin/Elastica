@@ -33,9 +33,9 @@ class Elastica_Filter_Script extends Elastica_Filter_Abstract
     /**
      * Sets query object
      *
-     * @param array|Elastica_Query_Abstract $query
+     * @param  array|Elastica_Query_Abstract $query
      * @return Elastica_Filter_Script
-     * @throws Elastica_Exception_Invalid Invalid argument type
+     * @throws Elastica_Exception_Invalid    Invalid argument type
      */
     public function setQuery($query)
     {

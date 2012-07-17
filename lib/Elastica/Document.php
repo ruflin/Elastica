@@ -93,13 +93,14 @@ class Elastica_Document
     /**
      * Adds the given key/value pair to the document
      *
-     * @param string $key   Document entry key
-     * @param mixed  $value Document entry value
+     * @param  string            $key   Document entry key
+     * @param  mixed             $value Document entry value
      * @return Elastica_Document
      */
     public function add($key, $value)
     {
         $this->_data[$key] = $value;
+
         return $this;
     }
 
@@ -114,9 +115,9 @@ class Elastica_Document
      * This installs the tika file analysis plugin. More infos about supported formats
      * can be found here: {@link http://tika.apache.org/0.7/formats.html}
      *
-     * @param string $key      Key to add the file to
-     * @param string $filepath Path to add the file
-     * @param string $mimeType OPTIONAL Header mime type
+     * @param  string            $key      Key to add the file to
+     * @param  string            $filepath Path to add the file
+     * @param  string            $mimeType OPTIONAL Header mime type
      * @return Elastica_Document
      */
     public function addFile($key, $filepath, $mimeType = '')
@@ -128,14 +129,15 @@ class Elastica_Document
         }
 
         $this->add($key, $value);
+
         return $this;
     }
 
     /**
      * Add file content
      *
-     * @param string $key     Document key
-     * @param string $content Raw file content
+     * @param  string            $key     Document key
+     * @param  string            $content Raw file content
      * @return Elastica_Document
      */
     public function addFileContent($key, $content)
@@ -159,25 +161,27 @@ class Elastica_Document
         $value = array('lat' => $latitude, 'lon' => $longitude,);
 
         $this->add($key, $value);
+
         return $this;
     }
 
     /**
      * Overwrites the curent document data with the given data
      *
-     * @param array $data Data array
+     * @param  array             $data Data array
      * @return Elastica_Document
      */
     public function setData(array $data)
     {
         $this->_data = $data;
+
         return $this;
     }
 
     /**
      * Sets lifetime of document
      *
-     * @param string $ttl
+     * @param  string            $ttl
      * @return Elastica_Document
      */
     public function setTtl($ttl)
@@ -198,19 +202,20 @@ class Elastica_Document
     /**
      * Sets the document type name
      *
-     * @param string $type Type name
+     * @param  string            $type Type name
      * @return Elastica_Document Current object
      */
     public function setType($type)
     {
         $this->_type = $type;
+
         return $this;
     }
 
     /**
      * Return document type name
      *
-     * @return string Document type name
+     * @return string                     Document type name
      * @throws Elastica_Exception_Invalid
      */
     public function getType()
@@ -220,25 +225,27 @@ class Elastica_Document
         if (is_null($type)) {
             throw new Elastica_Exception_Invalid('Type not set');
         }
+
         return $type;
     }
 
     /**
      * Sets the document index name
      *
-     * @param string $index Index name
+     * @param  string            $index Index name
      * @return Elastica_Document Current object
      */
     public function setIndex($index)
     {
         $this->_index = $index;
+
         return $this;
     }
 
     /**
      * Get the document index name
      *
-     * @return string Index name
+     * @return string                     Index name
      * @throws Elastica_Exception_Invalid
      */
     public function getIndex()
@@ -248,13 +255,14 @@ class Elastica_Document
         if (is_null($index)) {
             throw new Elastica_Exception_Invalid('Index not set');
         }
+
         return $index;
     }
 
     /**
      * Sets the version of a document for use with optimistic concurrency control
      *
-     * @param int $version Document version
+     * @param  int               $version Document version
      * @return Elastica_Document Current object
      * @link http://www.elasticsearch.org/blog/2011/02/08/versioning.html
      */
@@ -263,6 +271,7 @@ class Elastica_Document
         if ($version !== '') {
             $this->_version = (int) $version;
         }
+
         return $this;
     }
 
@@ -279,13 +288,14 @@ class Elastica_Document
     /**
      * Sets parent document id
      *
-     * @param string|int $parent Parent document id
+     * @param  string|int        $parent Parent document id
      * @return Elastica_Document Current object
      * @link http://www.elasticsearch.org/guide/reference/mapping/parent-field.html
      */
     public function setParent($parent)
     {
         $this->_parent = $parent;
+
         return $this;
     }
 
@@ -302,12 +312,13 @@ class Elastica_Document
     /**
      * Set operation type
      *
-     * @param string $optype Only accept create
+     * @param  string            $optype Only accept create
      * @return Elastica_Document Current object
      */
     public function setOpType($optype)
     {
         $this->_optype = $optype;
+
         return $this;
     }
 
@@ -322,12 +333,13 @@ class Elastica_Document
     /**
      * Set percolate query param
      *
-     * @param string $value percolator filter
+     * @param  string            $value percolator filter
      * @return Elastica_Document
      */
     public function setPercolate($value = '*')
     {
         $this->_percolate = $value;
+
         return $this;
     }
 
@@ -372,6 +384,7 @@ class Elastica_Document
         }
 
         $doc['_source'] = $this->getData();
+
         return $doc;
     }
 }

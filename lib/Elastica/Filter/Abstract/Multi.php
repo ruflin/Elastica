@@ -18,7 +18,7 @@ abstract class Elastica_Filter_Abstract_Multi extends Elastica_Filter_Abstract
     /**
      * Add filter
      *
-     * @param Elastica_Filter_Abstract $filter
+     * @param  Elastica_Filter_Abstract       $filter
      * @return Elastica_Filter_Abstract_Multi
      */
     public function addFilter(Elastica_Filter_Abstract $filter)
@@ -31,14 +31,14 @@ abstract class Elastica_Filter_Abstract_Multi extends Elastica_Filter_Abstract
     /**
      * Set filters
      *
-     * @param array $filters
+     * @param  array                          $filters
      * @return Elastica_Filter_Abstract_Multi
      */
     public function setFilters(array $filters)
     {
         $this->_filters = array();
 
-        foreach($filters as $filter) {
+        foreach ($filters as $filter) {
             $this->addFilter($filter);
         }
 
@@ -54,7 +54,7 @@ abstract class Elastica_Filter_Abstract_Multi extends Elastica_Filter_Abstract
         $name = $this->_getName();
         $filterData = $data[$name];
 
-        if(empty($filterData)) {
+        if (empty($filterData)) {
             $filterData = $this->_filters;
         } else {
             $filterData['filters'] = $this->_filters;

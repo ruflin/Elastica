@@ -83,6 +83,7 @@ class Elastica_Index_Status
         // TODO Update as soon as new API is implmented
         $cluster = new Elastica_Cluster($this->_index->getClient());
         $state = $cluster->getState();
+
         return $state['metadata']['indices'][$this->_index->getName()]['aliases'];
     }
 
@@ -96,6 +97,7 @@ class Elastica_Index_Status
         // TODO Update as soon as new API is implmented
         $cluster = new Elastica_Cluster($this->_index->getClient());
         $state = $cluster->getState();
+
         return $state['metadata']['indices'][$this->_index->getName()]['settings'];
     }
 

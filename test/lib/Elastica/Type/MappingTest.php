@@ -131,7 +131,6 @@ class Elastica_Query_MappingTest extends Elastica_Test
 
         $parenttype->setMapping($parentmapping);
 
-
         $childtype = new Elastica_Type($index, 'childtype');
         $childmapping = new Elastica_Type_Mapping($childtype,
             array(
@@ -152,8 +151,8 @@ class Elastica_Query_MappingTest extends Elastica_Test
             array(
                 'note' => array(
                     'store' => 'yes', 'properties' => array(
-                        'titulo'  => array('type' => 'string', 'store' => 'no', 'include_in_all' => TRUE, 'boost' => 1.0),
-                        'contenido' => array('type' => 'string', 'store' => 'no', 'include_in_all' => TRUE, 'boost' => 1.0)
+                        'titulo'  => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0),
+                        'contenido' => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0)
                     )
                 )
             )
@@ -178,6 +177,3 @@ class Elastica_Query_MappingTest extends Elastica_Test
         $type->addDocument($doc);
     }
 }
-
-
-

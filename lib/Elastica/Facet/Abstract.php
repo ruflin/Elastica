@@ -35,7 +35,7 @@ abstract class Elastica_Facet_Abstract extends Elastica_Param
      * Sets the name of the facet. It is automatically set by
      * the constructor.
      *
-     * @param string $name The name of the facet.
+     * @param  string                     $name The name of the facet.
      * @throws Elastica_Exception_Invalid
      * @return Elastica_Facet_Abstract
      */
@@ -45,6 +45,7 @@ abstract class Elastica_Facet_Abstract extends Elastica_Param
             throw new Elastica_Exception_Invalid('Facet name has to be set');
         }
         $this->_name = $name;
+
         return $this;
     }
 
@@ -61,7 +62,7 @@ abstract class Elastica_Facet_Abstract extends Elastica_Param
     /**
      * Sets a filter for this facet.
      *
-     * @param Elastica_Filter_Abstract $filter A filter to apply on the facet.
+     * @param  Elastica_Filter_Abstract $filter A filter to apply on the facet.
      * @return Elastica_Facet_Abstract
      */
     public function setFilter(Elastica_Filter_Abstract $filter)
@@ -74,7 +75,7 @@ abstract class Elastica_Facet_Abstract extends Elastica_Param
      * current search query. When not set, it defaults to the
      * ElasticSearch default value.
      *
-     * @param bool $global Flag to either run the facet globally.
+     * @param  bool                    $global Flag to either run the facet globally.
      * @return Elastica_Facet_Abstract
      */
     public function setGlobal($global = true)
@@ -85,7 +86,7 @@ abstract class Elastica_Facet_Abstract extends Elastica_Param
     /**
      * Sets the path to the nested document
      *
-     * @param string $nestedPath Nested path
+     * @param  string                  $nestedPath Nested path
      * @return Elastica_Facet_Abstract
      */
     public function setNested($nestedPath)
@@ -96,7 +97,7 @@ abstract class Elastica_Facet_Abstract extends Elastica_Param
     /**
      * Sets the scope
      *
-     * @param string $scope Scope
+     * @param  string                  $scope Scope
      * @return Elastica_Facet_Abstract
      */
     public function setScope($scope)
@@ -120,13 +121,14 @@ abstract class Elastica_Facet_Abstract extends Elastica_Param
      * Sets a param for the facet. Each facet implementation needs to take
      * care of handling their own params.
      *
-     * @param string $key The key of the param to set.
-     * @param mixed $value The value of the param.
+     * @param  string                  $key   The key of the param to set.
+     * @param  mixed                   $value The value of the param.
      * @return Elastica_Facet_Abstract
      */
     protected function _setFacetParam($key, $value)
     {
         $this->_facet[$key] = $value;
+
         return $this;
     }
 }

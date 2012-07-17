@@ -14,7 +14,7 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
      * Creates filter object
      *
      * @param string|Elastica_Type $type Type to filter on
-     * @param array $ids List of ids
+     * @param array                $ids  List of ids
      */
     public function __construct($type = null, array $ids = array())
     {
@@ -25,7 +25,7 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
     /**
      * Adds one more filter to the and filter
      *
-     * @param string $id Adds id to filter
+     * @param  string              $id Adds id to filter
      * @return Elastica_Filter_Ids Current object
      */
     public function addId($id)
@@ -36,7 +36,7 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
     /**
      * Adds one more type to query
      *
-     * @param string $type Adds type to query
+     * @param  string              $type Adds type to query
      * @return Elastica_Filter_Ids Current object
      */
     public function addType($type)
@@ -55,8 +55,8 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
     /**
      * Set type
      *
-     * @param string|Elastica_Type $type Type name or object
-     * @return Elastica_Filter_Ids Current object
+     * @param  string|Elastica_Type $type Type name or object
+     * @return Elastica_Filter_Ids  Current object
      */
     public function setType($type)
     {
@@ -74,7 +74,7 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
     /**
      * Sets the ids to filter
      *
-     * @param array|string $ids List of ids
+     * @param  array|string        $ids List of ids
      * @return Elastica_Filter_Ids Current object
      */
     public function setIds($ids)

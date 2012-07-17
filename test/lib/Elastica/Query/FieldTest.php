@@ -27,7 +27,6 @@ class Elastica_Query_FieldTest extends PHPUnit_Framework_TestCase
         $doc = new Elastica_Document(4, array('name' => 'Baden Baden'));
         $type->addDocument($doc);
 
-
         $index->refresh();
 
         $type = 'text_phrase';

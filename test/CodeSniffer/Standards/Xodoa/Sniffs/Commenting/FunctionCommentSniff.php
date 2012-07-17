@@ -82,7 +82,6 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
      */
     protected $_currentFile = null;
 
-
     /**
      * Returns an array of tokens this test wants to listen for.
      *
@@ -93,7 +92,6 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
         return array(T_FUNCTION);
 
     }//end register()
-
 
     /**
      * Processes this test, when one of its tokens is encountered.
@@ -130,9 +128,11 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
         if ($code === T_COMMENT) {
             $error = 'You must use "/**" style comments for a function comment';
             $phpcsFile->addError($error, $stackPtr);
+
             return;
         } elseif ($code !== T_DOC_COMMENT) {
             $phpcsFile->addError('Missing function doc comment', $stackPtr);
+
             return;
         }
 
@@ -146,6 +146,7 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
         $prevToken = $phpcsFile->findPrevious($ignore, ($stackPtr - 1), null, true);
         if ($prevToken !== $commentEnd) {
             $phpcsFile->addError('Missing function doc comment', $stackPtr);
+
             return;
         }
 
@@ -166,6 +167,7 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
             // Is this the first open tag?
             if ($stackPtr === 0 || $phpcsFile->findPrevious(T_OPEN_TAG, ($prevToken - 1)) === false) {
                 $phpcsFile->addError('Missing function doc comment', $stackPtr);
+
                 return;
             }
         }
@@ -179,6 +181,7 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
         } catch (PHP_CodeSniffer_CommentParser_ParserException $e) {
             $line = ($e->getLineWithinComment() + $commentStart);
             $phpcsFile->addError($e->getMessage(), $line);
+
             return;
         }
 
@@ -186,6 +189,7 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
         if (is_null($comment) === true) {
             $error = 'Function doc comment is empty';
             $phpcsFile->addError($error, $commentStart);
+
             return;
         }
 
@@ -235,7 +239,6 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
 
     }//end process()
 
-
     /**
      * Process any throw tags that this function comment has.
      *
@@ -263,7 +266,6 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
 
     }//end processThrows()
 
-
     /**
      * Process the return comment of this function comment.
      *
@@ -276,7 +278,6 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
     {
 
     }//end processReturn()
-
 
     /**
      * Process the function parameter comments.
@@ -294,7 +295,6 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
         $foundParams = array();
 
         if (empty($params) === false) {
-
 
             // Parameters must appear immediately after the comment.
             if ($params[0]->getOrder() !== 2) {
@@ -338,7 +338,6 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
                 $pos = $param->getPosition();
 
                 $paramName = ($param->getVarName() !== '') ? $param->getVarName() : '[ UNKNOWN ]';
-
 
                 // Make sure the names of the parameter comment matches the
                 // actual parameter.
@@ -414,6 +413,5 @@ class Xodoa_Sniffs_Commenting_FunctionCommentSniff implements PHP_CodeSniffer_Sn
         }
 
     }//end processParams()
-
 
 }//end class

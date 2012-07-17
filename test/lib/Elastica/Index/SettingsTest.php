@@ -51,7 +51,6 @@ class Elastica_Index_SettingsTest extends Elastica_Test
         $index = $client->getIndex($indexName);
         $index->create(array(), true);
 
-
         $settings = $index->getSettings();
 
         $settings->setRefreshInterval('2s');
@@ -161,7 +160,7 @@ class Elastica_Index_SettingsTest extends Elastica_Test
         try {
             $type->addDocument($doc);
             $this->fail('Should throw exception because of read only');
-        } catch(Elastica_Exception_Response $e) {
+        } catch (Elastica_Exception_Response $e) {
             $message = $e->getMessage();
             $this->assertContains('ClusterBlockException', $message);
             $this->assertContains('index read-only', $message);

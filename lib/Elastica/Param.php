@@ -60,37 +60,40 @@ class Elastica_Param
     /**
      * Sets params not inside params array
      *
-     * @param string $key
-     * @param mixed $value
+     * @param  string         $key
+     * @param  mixed          $value
      * @return Elastica_Param
      */
     protected function _setRawParam($key, $value)
     {
         $this->_rawParams[$key] = $value;
+
         return $this;
     }
 
     /**
      * Sets (overwrites) the value at the given key
      *
-     * @param string $key Key to set
-     * @param mixed $value Key Value
+     * @param string $key   Key to set
+     * @param mixed  $value Key Value
      */
     public function setParam($key, $value)
     {
         $this->_params[$key] = $value;
+
         return $this;
     }
 
     /**
      * Sets (overwrites) all params of this object
      *
-     * @param array $params Parameter list
+     * @param  array          $params Parameter list
      * @return Elastica_Param
      */
     public function setParams(array $params)
     {
         $this->_params = $params;
+
         return $this;
     }
 
@@ -99,8 +102,8 @@ class Elastica_Param
      *
      * This function can be used to add an array of params
      *
-     * @param string $key Param key
-     * @param mixed $value Value to set
+     * @param  string         $key   Param key
+     * @param  mixed          $value Value to set
      * @return Elastica_Param
      */
     public function addParam($key, $value)
@@ -117,8 +120,8 @@ class Elastica_Param
     /**
      * Returns a specific param
      *
-     * @param string $key Key to return
-     * @return mixed Key value
+     * @param  string                     $key Key to return
+     * @return mixed                      Key value
      * @throws Elastica_Exception_Invalid If requested key is not set
      */
     public function getParam($key)
@@ -133,7 +136,7 @@ class Elastica_Param
     /**
      * Test if a param is set
      *
-     * @param string $key Key to test
+     * @param  string  $key Key to test
      * @return boolean True if the param is set, false otherwise
      */
     public function hasParam($key)

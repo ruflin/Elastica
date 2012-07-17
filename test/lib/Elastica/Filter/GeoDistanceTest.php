@@ -2,7 +2,6 @@
 
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -24,7 +23,6 @@ class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
         // Set mapping
         $type->setMapping(array('point' => array('type' => 'geo_point')));
 
-
         // Add doc 1
         $doc1 = new Elastica_Document(1,
             array(
@@ -44,7 +42,6 @@ class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
 
         $doc2->addGeoPoint('point', 30, 40);
         $type->addDocument($doc2);
-
 
         $index->optimize();
         $index->refresh();

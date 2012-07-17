@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
 class Elastica_PercolatorTest extends Elastica_Test
 {
     public function testConstruct()

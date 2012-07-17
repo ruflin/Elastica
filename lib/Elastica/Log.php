@@ -60,20 +60,21 @@ class Elastica_Log
     /**
      * Enable/disable log or set log path
      *
-     * @param bool|string $log Enables log or sets log path
+     * @param  bool|string  $log Enables log or sets log path
      * @return Elastica_Log
      */
     public function setLog($log)
     {
         $this->_log = $log;
+
         return $this;
     }
 
     /**
      * Converts a request to a log message
      *
-     * @param Elastica_Request $request
-     * @return string Request log message
+     * @param  Elastica_Request $request
+     * @return string           Request log message
      */
     protected function _convertRequest(Elastica_Request $request)
     {

@@ -18,7 +18,7 @@ class Elastica_Query_ConstantScore extends Elastica_Query_Abstract
      */
     public function __construct($filter = null)
     {
-        if(!is_null($filter)) {
+        if (!is_null($filter)) {
             $this->setFilter($filter);
         }
     }
@@ -26,21 +26,22 @@ class Elastica_Query_ConstantScore extends Elastica_Query_Abstract
     /**
      * Set filter
      *
-     * @param array|Elastica_Filter_Abstract $filter
-     * @return Elastica_Query_ConstantScore Query object
+     * @param  array|Elastica_Filter_Abstract $filter
+     * @return Elastica_Query_ConstantScore   Query object
      */
     public function setFilter($filter)
     {
         if ($filter instanceof Elastica_Filter_Abstract) {
             $filter = $filter->toArray();
         }
+
         return $this->setParam('filter', $filter);
     }
 
     /**
      * Set boost
      *
-     * @param float $boost
+     * @param  float                        $boost
      * @return Elastica_Query_ConstantScore
      */
     public function setBoost($boost)
@@ -48,4 +49,3 @@ class Elastica_Query_ConstantScore extends Elastica_Query_Abstract
         return $this->setParam('boost', $boost);
     }
 }
-

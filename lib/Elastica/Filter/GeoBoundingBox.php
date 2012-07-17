@@ -14,8 +14,8 @@ class Elastica_Filter_GeoBoundingBox extends Elastica_Filter_Abstract
     /**
      * Construct GeoBoundingBox filter
      *
-     * @param string $key Key
-     * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
+     * @param string $key         Key
+     * @param array  $coordinates Array with top left coordinate as first and bottom right coordinate as second element
      */
     public function __construct($key, array $coordinates)
     {
@@ -25,9 +25,9 @@ class Elastica_Filter_GeoBoundingBox extends Elastica_Filter_Abstract
     /**
      * Add coordinates
      *
-     * @param string $key Key
-     * @param array $coordinates Array with top left coordinate as first and bottom right coordinate as second element
-     * @throws Elastica_Exception_Invalid If $coordinates doesn't have two elements
+     * @param  string                         $key         Key
+     * @param  array                          $coordinates Array with top left coordinate as first and bottom right coordinate as second element
+     * @throws Elastica_Exception_Invalid     If $coordinates doesn't have two elements
      * @return Elastica_Filter_GeoBoundingBox Current object
      */
     public function addCoordinates($key, array $coordinates)

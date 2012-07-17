@@ -76,13 +76,11 @@ class Elastica_Query_WildcardTest extends PHPUnit_Framework_TestCase
 
         $index->refresh();
 
-
         $query = new Elastica_Query_Wildcard();
         $query->setValue('name', 'ba*');
         $resultSet = $index->search($query);
 
         $this->assertEquals(3, $resultSet->count());
-
 
         $query = new Elastica_Query_Wildcard();
         $query->setValue('name', 'baden*');
@@ -90,13 +88,11 @@ class Elastica_Query_WildcardTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(2, $resultSet->count());
 
-
         $query = new Elastica_Query_Wildcard();
         $query->setValue('name', 'baden b*');
         $resultSet = $index->search($query);
 
         $this->assertEquals(1, $resultSet->count());
-
 
         $query = new Elastica_Query_Wildcard();
         $query->setValue('name', 'baden bas*');

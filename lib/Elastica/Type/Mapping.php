@@ -26,8 +26,8 @@ class Elastica_Type_Mapping
     /**
      * Construct Mapping
      *
-     * @param Elastica_Type $type OPTIONAL Type object
-     * @param array $properties OPTIONAL Properties
+     * @param Elastica_Type $type       OPTIONAL Type object
+     * @param array         $properties OPTIONAL Properties
      */
     public function __construct(Elastica_Type $type = null, array $properties = array())
     {
@@ -43,19 +43,20 @@ class Elastica_Type_Mapping
     /**
      * Sets the mapping type
      * Enter description here ...
-     * @param Elastica_Type $type Type object
+     * @param  Elastica_Type         $type Type object
      * @return Elastica_Type_Mapping Current object
      */
     public function setType(Elastica_Type $type)
     {
         $this->_type = $type;
+
         return $this;
     }
 
     /**
      * Sets the mapping properites
      *
-     * @param array $properties Prpoerties
+     * @param  array                 $properties Prpoerties
      * @return Elastica_Type_Mapping Mapping object
      */
     public function setProperties(array $properties)
@@ -79,7 +80,7 @@ class Elastica_Type_Mapping
      * To disable source, argument is
      * array('enabled' => false)
      *
-     * @param array $source Source array
+     * @param  array                 $source Source array
      * @return Elastica_Type_Mapping Current object
      * @link http://www.elasticsearch.org/guide/reference/mapping/source-field.html
      */
@@ -93,7 +94,7 @@ class Elastica_Type_Mapping
      *
      * Param can be set to true to enable again
      *
-     * @param bool $enabled OPTIONAL (default = false)
+     * @param  bool                  $enabled OPTIONAL (default = false)
      * @return Elastica_Type_Mapping Current object
      */
     public function disableSource($enabled = false)
@@ -118,20 +119,21 @@ class Elastica_Type_Mapping
      * _size
      * properties
      *
-     * @param string $key Key name
-     * @param mixed $value Key value
+     * @param  string                $key   Key name
+     * @param  mixed                 $value Key value
      * @return Elastica_Type_Mapping Current object
      */
     public function setParam($key, $value)
     {
         $this->_mapping[$key] = $value;
+
         return $this;
     }
 
     /**
      * Set TTL
      *
-     * @param array $params TTL Params (enabled, default, ...)
+     * @param  array                 $params TTL Params (enabled, default, ...)
      * @return Elastica_Type_Mapping
      */
     public function setTtl(array $params)
@@ -143,7 +145,7 @@ class Elastica_Type_Mapping
     /**
      * Enables TTL for all documens in this type
      *
-     * @param bool $enabled OPTIONAL (default = true)
+     * @param  bool                  $enabled OPTIONAL (default = true)
      * @return Elastica_Type_Mapping
      */
     public function enableTtl($enabled = true)
@@ -175,15 +177,16 @@ class Elastica_Type_Mapping
     public function send()
     {
         $path = '_mapping';
+
         return $this->getType()->request($path, Elastica_Request::PUT, $this->toArray());
     }
 
     /**
      * Creates a mapping object
      *
-     * @param array|Elastica_Type_Mapping $mapping Mapping object or properties array
-     * @return Elastica_Type_Mapping Mapping object
-     * @throws Elastica_Exception_Invalid If invalid type
+     * @param  array|Elastica_Type_Mapping $mapping Mapping object or properties array
+     * @return Elastica_Type_Mapping       Mapping object
+     * @throws Elastica_Exception_Invalid  If invalid type
      */
     public static function create($mapping)
     {

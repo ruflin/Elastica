@@ -27,7 +27,7 @@ class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
     /**
      * Creates prefix filter
      *
-     * @param string $field Field name
+     * @param string $field  Field name
      * @param string $prefix Prefix string
      */
     public function __construct($field = '', $prefix = '')
@@ -44,6 +44,7 @@ class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
     public function setField($field)
     {
         $this->_field = $field;
+
         return $this;
     }
 
@@ -55,6 +56,7 @@ class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
     public function setPrefix($prefix)
     {
         $this->_prefix = $prefix;
+
         return $this;
     }
 
@@ -67,6 +69,7 @@ class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
     public function toArray()
     {
         $this->setParam($this->_field, $this->_prefix);
+
         return parent::toArray();
     }
 }
