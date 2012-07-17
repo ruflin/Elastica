@@ -56,7 +56,7 @@ class Elastica_Query_MappingTest extends Elastica_Test
 		$this->assertEmpty($document->getData());
 	}
 
-	public function testEnableTTL() {
+	public function testEnableTtl() {
 		$client = new Elastica_Client();
 		$index = $client->getIndex('test');
 
@@ -65,7 +65,7 @@ class Elastica_Query_MappingTest extends Elastica_Test
 
 		$mapping = new Elastica_Type_Mapping($type, array());
 
-		$mapping->enableTTL();
+		$mapping->enableTtl();
 
 		$data = $mapping->toArray();
 		$this->assertTrue($data[$type->getName()]['_ttl']['enabled']);
