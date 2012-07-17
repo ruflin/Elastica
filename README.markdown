@@ -32,3 +32,7 @@ File indexing
 File upload is supported but the mapper attachement plugin has to be installed
 
 	./bin/plugin install mapper-attachments
+
+Contributing
+------------
+Help is very welcomed code contributions must be done in respect of [PSR1](https://github.com/pmjones/fig-standards/blob/psr-1-style-guide/proposed/PSR-1-basic.md).

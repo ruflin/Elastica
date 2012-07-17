@@ -64,7 +64,7 @@ class Elastica_IndexTest extends Elastica_Test {
 		$this->assertEquals(array('title' => 'Foo bar'), $resultSet->current()->getData());
 	}
 
-	public function testAddPDFFile() {
+	public function testAddPdfFile() {
 
 		$indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'),);
 
@@ -102,7 +102,7 @@ class Elastica_IndexTest extends Elastica_Test {
 		$this->assertEquals(0, $resultSet->count());
 	}
 
-	public function testAddPDFFileContent() {
+	public function testAddPdfFileContent() {
 
 		$indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'),);
 
