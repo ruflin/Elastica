@@ -126,7 +126,7 @@ class Elastica_Type_Mapping {
 	 * @param array $params TTL Params (enabled, default, ...)
 	 * @return Elastica_Type_Mapping
 	 */
-	public function setTTL(array $params) {
+	public function setTtl(array $params) {
 		return $this->setParam('_ttl', $params);
 		
 	}
@@ -137,7 +137,7 @@ class Elastica_Type_Mapping {
 	 * @param bool $enabled OPTIONAL (default = true)
 	 * @return Elastica_Type_Mapping
 	 */
-	public function enableTTL($enabled = true) {
+	public function enableTtl($enabled = true) {
 		return $this->setTTL(array('enabled' => $enabled));
 	}
 

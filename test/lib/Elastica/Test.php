@@ -15,7 +15,7 @@ class Elastica_Test extends PHPUnit_Framework_TestCase
 	 * @param string $name Index name
 	 * @return Elastica_Index
 	 */
-	public function _createIndex($name = 'test') {
+	protected function _createIndex($name = 'test') {
 		
 		$client = $this->_getClient();
 		$index = $client->getIndex('elastica_' . $name);
