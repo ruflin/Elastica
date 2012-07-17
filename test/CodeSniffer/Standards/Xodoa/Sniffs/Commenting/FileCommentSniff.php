@@ -615,5 +615,4 @@ class Xodoa_Sniffs_Commenting_FileCommentSniff implements PHP_CodeSniffer_Sniff
         }
 
     }//end processVersion()
-
-}//end class
+}

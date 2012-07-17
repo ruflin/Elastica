@@ -106,12 +106,42 @@ class Elastica_TypeTest extends Elastica_Test
         $this->assertEquals(0, $resultSet->count());
 
         // it should not be possible to delete the entire type with this method
-        try { $type->deleteById(' '); } catch (Exception $e) { /* ignore */ }
-        try { $type->deleteById(null); } catch (Exception $e) { /* ignore */ }
-        try { $type->deleteById(array()); } catch (Exception $e) { /* ignore */ }
-        try { $type->deleteById('*'); } catch (Exception $e) { /* ignore */ }
-        try { $type->deleteById('*:*'); } catch (Exception $e) { /* ignore */ }
-        try { $type->deleteById('!'); } catch (Exception $e) { /* ignore */ }
+        try {
+            $type->deleteById(' ');
+        } catch (Exception $e) {
+            /* ignore */
+        }
+
+        try {
+            $type->deleteById(null);
+        } catch (Exception $e) {
+            /* ignore */
+        }
+
+        try {
+            $type->deleteById(array());
+        } catch (Exception $e) {
+            /* ignore */
+        }
+
+        try {
+            $type->deleteById('*');
+        } catch (Exception $e) {
+            /* ignore */
+        }
+
+        try {
+            $type->deleteById('*:*');
+        } catch (Exception $e) {
+            /* ignore */
+        }
+
+        try {
+            $type->deleteById('!');
+        } catch (Exception $e) {
+            /* ignore */
+        }
+
         $index->refresh();
 
         // rolf should no longer be there

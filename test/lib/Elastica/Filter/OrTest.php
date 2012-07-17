@@ -34,5 +34,4 @@ class Elastica_Filter_OrTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expectedArray, $orFilter->toArray());
     }
-
 }

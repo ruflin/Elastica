@@ -212,5 +212,4 @@ class Elastica_Response
 
         return $data['_shards'];
     }
-
 }

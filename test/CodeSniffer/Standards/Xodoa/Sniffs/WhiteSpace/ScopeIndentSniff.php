@@ -269,5 +269,4 @@ class Xodoa_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Sniff
         return ((count($conditionStack) * $this->_indent) + 1);
 
     }//end calculateExpectedIndent()
-
-}//end class
+}

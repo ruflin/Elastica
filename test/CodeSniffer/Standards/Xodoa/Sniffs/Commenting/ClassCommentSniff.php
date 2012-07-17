@@ -209,5 +209,4 @@ class Xodoa_Sniffs_Commenting_ClassCommentSniff extends Xodoa_Sniffs_Commenting_
         }
 
     }//end processVersion()
-
-}//end class
+}

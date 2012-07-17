@@ -54,7 +54,8 @@ class Elastica_StatusTest extends Elastica_Test
         try {
             // Make sure index is deleted first
             $index->delete();
-        } catch (Elastica_Exception_Response $e) { }
+        } catch (Elastica_Exception_Response $e) {
+        }
 
         $status = new Elastica_Status($client);
         $this->assertFalse($status->indexExists($indexName));
@@ -99,5 +100,4 @@ class Elastica_StatusTest extends Elastica_Test
         $versionInfo = $serverStatus['version'];
         $this->assertArrayHasKey('number', $versionInfo);
     }
-
 }

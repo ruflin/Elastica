@@ -67,5 +67,4 @@ class Xodoa_Sniffs_WhiteSpace_DisallowSpaceIndentSniff implements PHP_CodeSniffe
         }
 
     }//end process()
-
-}//end class
+}

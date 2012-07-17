@@ -168,5 +168,4 @@ class Elastica_Status
 
         return  $response->getData();
     }
-
 }

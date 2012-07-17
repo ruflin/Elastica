@@ -44,7 +44,5 @@ class PHP_CodeSniffer_Standards_Xodoa_XodoaCodingStandard extends PHP_CodeSniffe
             'Zend/Sniffs/Files/ClosingTagSniff.php',
             'Zend/Sniffs/NamingConventions/ValidVariableNameSniff.php',
         );
-
     }
-
 }

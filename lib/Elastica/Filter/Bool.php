@@ -144,5 +144,4 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract
 
         return $this;
     }
-
 }
