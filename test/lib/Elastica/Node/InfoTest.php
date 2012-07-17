@@ -4,10 +4,6 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Node_InfoTest extends Elastica_Test
 {
-    public function setUp() { }
-
-    public function tearDown() { }
-
     public function testGet()
     {
         $client = new Elastica_Client();

@@ -4,14 +4,6 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Filter_ExistsTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testToArray()
     {
         $field = 'test';

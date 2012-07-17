@@ -3,14 +3,6 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Query_BoolTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testToArray()
     {
         $query = new Elastica_Query_Bool();

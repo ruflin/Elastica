@@ -4,14 +4,6 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Facet_FilterTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testFilter()
     {
         $client = new Elastica_Client();

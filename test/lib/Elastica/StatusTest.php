@@ -3,14 +3,6 @@ require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 class Elastica_StatusTest extends Elastica_Test
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testGetResponse()
     {
         $index = $this->_createIndex();

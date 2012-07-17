@@ -4,14 +4,6 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Filter_GeoDistanceTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testGeoPoint()
     {
         $client = new Elastica_Client();

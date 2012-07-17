@@ -3,14 +3,6 @@ require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 class Elastica_ResultTest extends Elastica_Test
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testGetters()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index

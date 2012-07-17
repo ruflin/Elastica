@@ -3,14 +3,6 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Query_NestedTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testSetQuery()
     {
         $nested = new Elastica_Query_Nested();

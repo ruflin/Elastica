@@ -3,9 +3,6 @@ require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 class Elastica_NodeTest extends Elastica_Test
 {
-    public function setUp() { }
-
-    public function tearDown() { }
 
     public function testCreateNode()
     {

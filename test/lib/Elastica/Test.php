@@ -3,10 +3,6 @@ require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 class Elastica_Test extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-
     protected function _getClient()
     {
         return new Elastica_Client();

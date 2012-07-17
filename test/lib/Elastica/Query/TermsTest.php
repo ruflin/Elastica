@@ -3,14 +3,6 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Query_TermsTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testFilteredSearch()
     {
         $client = new Elastica_Client();

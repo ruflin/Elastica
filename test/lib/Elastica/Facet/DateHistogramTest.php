@@ -4,14 +4,6 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Facet_DateHistogramTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testClassHierarchy()
     {
         $facet = new Elastica_Facet_DateHistogram('dateHist1');

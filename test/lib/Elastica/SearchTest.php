@@ -3,14 +3,6 @@ require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 class Elastica_SearchTest extends Elastica_Test
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testConstruct()
     {
         $client = new Elastica_Client();

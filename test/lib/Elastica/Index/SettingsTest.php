@@ -3,12 +3,6 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Index_SettingsTest extends Elastica_Test
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown() { }
-
     public function testGet()
     {
         $indexName = 'elasticatest';

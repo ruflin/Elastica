@@ -4,14 +4,6 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Facet_StatisticalTest extends Elastica_Test
 {
-    public function setUp()
-    {
-    }
-
-    public function tearDown()
-    {
-    }
-
     public function testStatisticalWithSetField()
     {
         $client = new Elastica_Client();

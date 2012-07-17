@@ -3,6 +3,7 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Transport_MemcacheTest extends PHPUnit_Framework_TestCase
 {
+<<<<<<< HEAD
     public function setUp()
     {
         if (!extension_loaded('Memcache')) {
@@ -14,6 +15,8 @@ class Elastica_Transport_MemcacheTest extends PHPUnit_Framework_TestCase
     {
     }
 
+=======
+>>>>>>> removed useless setUp tearDown
     public function testConstruct()
     {
         $host = 'localhost';
