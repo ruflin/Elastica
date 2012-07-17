@@ -37,11 +37,16 @@ class Elastica_ScriptFieldsTest extends Elastica_Test {
 	public function testSetScriptFields() {
 		$query = new Elastica_Query;
 		$script = new Elastica_Script('1 + 2');
+
 		$scriptFields = new Elastica_ScriptFields(array(
 			'test' => $script
 		));
 		$query->setScriptFields($scriptFields);
+		$this->assertEquals($query->getParam('script_fields'), $scriptFields->toArray());
 
+		$query->setScriptFields(array(
+			'test' => $script
+		));
 		$this->assertEquals($query->getParam('script_fields'), $scriptFields->toArray());
 	}
 
