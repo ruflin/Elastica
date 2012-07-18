@@ -53,6 +53,29 @@ body {
 header {
 	border-bottom: 0.1em solid #bfbfbf;
 }
+.toc {
+	padding: 1em 8%;
+	background: #fff;
+	background: rgba(255,255,255,.4);
+	border: 1px solid rgba(0,0,0,.2);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.1);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.1);
+	box-shadow: 0 1px 2px rgba(0,0,0,.1);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.toc > ul {
+	font-size: 1.1em;
+	list-style: circle;
+}
+.toc li ul {
+	font-size: 0.85em;
+	margin-left: 5%;
+}
+.toc li ul li:before {
+	content: '-';
+}
 .content {
 	background: #fff;
 	background: rgba(255,255,255,.4);
