@@ -27,7 +27,7 @@ class Elastica_Facet_TermsStats extends Elastica_Facet_Abstract {
 		return $this->setParam('value_script', $valueScript);
 	}
 
-        /**
+    /**
   	 * Sets a field to compute basic statistical results on
   	 *
   	 * @param string $valueField The field to compute statistical values for
