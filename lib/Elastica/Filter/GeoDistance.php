@@ -59,6 +59,8 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	 * @param string $key Key
 	 * @param array|string $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
 	 * @param string $distance Distance
+	 * 
+	 * @throws Elastica_Exception_Invalid
 	 */
 	public function __construct($key, $location, $distance) {
 		// Fix old constructor. Remove it when the old constructor is not supported anymore
@@ -194,6 +196,8 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	
 	/**
 	 * @see Elastica_Param::toArray()
+	 * 
+	 * @throws Elastica_Exception_Invalid
 	 */
 	public function toArray() {
 		$data = parent::toArray();
