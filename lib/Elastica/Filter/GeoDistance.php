@@ -98,6 +98,8 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	 * Convert old constructor signature to the new one
 	 * Remove it when the old constructor is not supported
 	 * 
+	 * @deprecated
+	 * 
 	 * @param array $args old arguments
 	 * 
 	 * @return array new arguments
