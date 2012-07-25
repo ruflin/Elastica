@@ -63,12 +63,7 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	public function __construct($key, $location, $distance) {
 		// Fix old constructor. Remove it when the old constructor is not supported anymore
 		if(func_num_args() === 4) {
-			$key = func_get_arg(0);
-			$location = array(
-				'lat' => func_get_arg(1),
-				'lon' => func_get_arg(2)
-			);
-			$distance = func_get_arg(3);
+			extract($this->_oldConstruct(func_get_args()));
 		}
 		
 		// Key
@@ -97,6 +92,25 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 		
 		//Distance
 		$this->setDistance($distance);
+	}
+	
+	/**
+	 * Convert old constructor signature to the new one
+	 * Remove it when the old constructor is not supported
+	 * 
+	 * @param array $args old arguments
+	 * 
+	 * @return array new arguments
+	 */
+	private function _oldConstruct(array $args) {
+		return array(
+			'key' => $args[0],
+			'location' => array(
+				'lat' => $args[1],
+				'lon' => $args[2]
+			),
+			'distance' => $args[3]
+		);
 	}
 	
 	/**
