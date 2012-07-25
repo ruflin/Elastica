@@ -29,7 +29,7 @@ class Elastica_Script {
 	public function __construct($script, array $params = null, $lang = null) {
 		$this->_script = $script;
 		$this->_params = $params;
-		$this->_lang = $lang;
+		$this->_lang   = $lang;
 	}
 
 	/**
@@ -72,5 +72,18 @@ class Elastica_Script {
 	 */
 	public function getScript() {
 		return $this->_script;
+	}
+
+	public function toArray() {
+		$array = array(
+			'script' => $this->_script,
+		);
+		if ($this->_params) {
+			$array['params'] = $this->_params;
+		}
+		if ($this->_lang) {
+			$array['lang'] = $this->_lang;
+		}
+		return $array;
 	}
 }

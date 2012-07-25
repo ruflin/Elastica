@@ -212,12 +212,26 @@ class Elastica_Query extends Elastica_Param {
 	/**
 	 * Set script fields
 	 *
-	 * @param array $scriptFields Script fields
+	 * @param array|Elastica_ScriptFields $scriptFields Script fields
 	 * @return Elastica_Query Current object
 	 * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/script_fields/
 	 */
-	public function setScriptFields(array $scriptFields) {
-		return $this->setParam('script_fields', $scriptFields);
+	public function setScriptFields($scriptFields) {
+		if (is_array($scriptFields)) {
+			$scriptFields = new Elastica_ScriptFields($scriptFields);
+		}
+		return $this->setParam('script_fields', $scriptFields->toArray());
+	}
+
+	/**
+	 * Adds a Script to the query
+	 *
+	 * @param Elastica_Script $script Script object
+	 * @return Elastica_Query Query object
+	 */
+	public function addScriptField($name, Elastica_Script $script) {
+		$this->_params['script_fields'][$name] = $script->toArray();
+		return $this;
 	}
 
 	/**

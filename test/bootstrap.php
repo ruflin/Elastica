@@ -9,11 +9,11 @@ set_include_path(
 	BASE_PATH . '/lib'
 );
 
-function elastica_autoload($class) {
+function elasticaAutoload($class) {
 	if (substr($class, 0, 9) == 'Elastica_') {
 		$file = str_replace('_', '/', $class) . '.php';
 		require_once $file;
 	}
 }
 
-spl_autoload_register('elastica_autoload');
+spl_autoload_register('elasticaAutoload');

@@ -1,5 +1,12 @@
 CHANGES
 
+2012-07-17
+- Changed naming for several methods to camelCase
+- Enforced PSR1 code style, as per https://github.com/pmjones/fig-standards/blob/psr-1-style-guide/proposed/PSR-1-basic.md
+- Added Elastica_Script::toArray
+- Added Elastica_ScriptFields
+- Elastica_Query::setScriptFields now takes Elastica_ScriptFields or associative array as argument, the old implementation was bogus.
+
 2012-06-24
 - Simplify Elastica_Type::search and Elastica_Index::search by using Elastica_Search
 - Implement Elastica_Filter_Abstract::setCache and Elastica_Filter_Abstract::setCacheKey

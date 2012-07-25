@@ -42,7 +42,7 @@ class Elastica_Filter_Abstract_MultiTest extends PHPUnit_Framework_TestCase {
 		$stub->addFilter($filter);
 		
 		$expected = array(
-			$stub->_getName() => array(
+			$stub->getName() => array(
 				$filter->toArray()
 			)
 		);
@@ -59,7 +59,7 @@ class Elastica_Filter_Abstract_MultiTest extends PHPUnit_Framework_TestCase {
 		$stub->addFilter($filter);
 		
 		$expected = array(
-			$stub->_getName() => array(
+			$stub->getName() => array(
 				'_cache' => true,
 				'filters' => array(
 					$filter->toArray()
@@ -80,7 +80,7 @@ abstract class Elastica_Filter_Abstract_MultiDebug extends Elastica_Filter_Abstr
 		return $this->_filters;
 	}
 	
-	public function _getName() {
+	public function getName() {
 		return parent::_getName();
 	}
 }
