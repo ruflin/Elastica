@@ -35,4 +35,8 @@ File upload is supported but the mapper attachement plugin has to be installed
 
 Contributing
 ------------
-Help is very welcomed code contributions must be done in respect of [PSR1](https://github.com/pmjones/fig-standards/blob/psr-1-style-guide/proposed/PSR-1-basic.md).
+Help is very welcomed, but code contributions must be done in respect of [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md).
+
+To facilitate this, you can use [php-cs-fixer](https://github.com/fabpot/PHP-CS-Fixer) by running `php-cs-fixer fix --level=all /path/to/project`.
+
+`--level=all` is used even though it is not part of a standard simply because we like the code to be consistent.
