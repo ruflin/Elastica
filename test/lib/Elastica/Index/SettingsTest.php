@@ -3,233 +3,237 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Index_SettingsTest extends Elastica_Test
 {
-	public function setUp() {
-	}
+    public function testGet()
+    {
+        $indexName = 'elasticatest';
 
-	public function tearDown() { }
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
+        $index->refresh();
+        $settings = $index->getSettings();
 
-	public function testGet() {
-		$indexName = 'elasticatest';
+        $this->assertInternalType('array', $settings->get());
+        $this->assertNotNull($settings->get('number_of_replicas'));
+        $this->assertNotNull($settings->get('number_of_shards'));
+        $this->assertNull($settings->get('kjqwerjlqwer'));
+    }
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
-		$index->refresh();
-		$settings = $index->getSettings();
+    public function testSetNumberOfReplicas()
+    {
+        $indexName = 'test';
 
-		$this->assertInternalType('array', $settings->get());
-		$this->assertNotNull($settings->get('number_of_replicas'));
-		$this->assertNotNull($settings->get('number_of_shards'));
-		$this->assertNull($settings->get('kjqwerjlqwer'));
-	}
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
+        $settings = $index->getSettings();
 
-	public function testSetNumberOfReplicas() {
-		$indexName = 'test';
+        $settings->setNumberOfReplicas(2);
+        $index->refresh();
+        $this->assertEquals(2, $settings->get('number_of_replicas'));
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
-		$settings = $index->getSettings();
+        $settings->setNumberOfReplicas(3);
+        $index->refresh();
+        $this->assertEquals(3, $settings->get('number_of_replicas'));
+    }
 
-		$settings->setNumberOfReplicas(2);
-		$index->refresh();
-		$this->assertEquals(2, $settings->get('number_of_replicas'));
+    public function testSetRefreshInterval()
+    {
+        $indexName = 'test';
 
-		$settings->setNumberOfReplicas(3);
-		$index->refresh();
-		$this->assertEquals(3, $settings->get('number_of_replicas'));
-	}
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
 
-	public function testSetRefreshInterval() {
-		$indexName = 'test';
+        $settings = $index->getSettings();
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
+        $settings->setRefreshInterval('2s');
+        $index->refresh();
+        $this->assertEquals('2s', $settings->get('refresh_interval'));
 
+        $settings->setRefreshInterval('5s');
+        $index->refresh();
+        $this->assertEquals('5s', $settings->get('refresh_interval'));
+    }
 
-		$settings = $index->getSettings();
+    public function testGetRefreshInterval()
+    {
+        $indexName = 'test';
 
-		$settings->setRefreshInterval('2s');
-		$index->refresh();
-		$this->assertEquals('2s', $settings->get('refresh_interval'));
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
 
-		$settings->setRefreshInterval('5s');
-		$index->refresh();
-		$this->assertEquals('5s', $settings->get('refresh_interval'));
-	}
+        $settings = $index->getSettings();
 
-	public function testGetRefreshInterval() {
-		$indexName = 'test';
+        $this->assertEquals(Elastica_Index_Settings::DEFAULT_REFRESH_INTERVAL, $settings->getRefreshInterval());
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
+        $interval = '2s';
+        $settings->setRefreshInterval($interval);
+        $index->refresh();
+        $this->assertEquals($interval, $settings->getRefreshInterval());
+        $this->assertEquals($interval, $settings->get('refresh_interval'));
+    }
 
-		$settings = $index->getSettings();
+    public function testSetMergePolicy()
+    {
+        $indexName = 'test';
 
-		$this->assertEquals(Elastica_Index_Settings::DEFAULT_REFRESH_INTERVAL, $settings->getRefreshInterval());
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
 
-		$interval = '2s';
-		$settings->setRefreshInterval($interval);
-		$index->refresh();
-		$this->assertEquals($interval, $settings->getRefreshInterval());
-		$this->assertEquals($interval, $settings->get('refresh_interval'));
-	}
+        $settings = $index->getSettings();
 
-	public function testSetMergePolicy() {
-		$indexName = 'test';
+        $settings->setMergePolicy('expunge_deletes_allowed', 15);
+        $this->assertEquals(15, $settings->getMergePolicy('expunge_deletes_allowed'));
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
+        $settings->setMergePolicy('expunge_deletes_allowed', 10);
+        $this->assertEquals(10, $settings->getMergePolicy('expunge_deletes_allowed'));
+    }
 
-		$settings = $index->getSettings();
+    public function testSetMergeFactor()
+    {
+        $indexName = 'test';
 
-		$settings->setMergePolicy('expunge_deletes_allowed', 15);
-		$this->assertEquals(15, $settings->getMergePolicy('expunge_deletes_allowed'));
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
 
-		$settings->setMergePolicy('expunge_deletes_allowed', 10);
-		$this->assertEquals(10, $settings->getMergePolicy('expunge_deletes_allowed'));
-	}
+        $settings = $index->getSettings();
 
-	public function testSetMergeFactor() {
-		$indexName = 'test';
+        $response = $settings->setMergePolicy('merge_factor', 15);
+        $this->assertEquals(15, $settings->getMergePolicy('merge_factor'));
+        $this->assertInstanceOf('Elastica_Response', $response);
+        $data = $response->getData();
+        $this->assertTrue($data['ok']);
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
+        $settings->setMergePolicy('merge_factor', 10);
+        $this->assertEquals(10, $settings->getMergePolicy('merge_factor'));
+    }
 
-		$settings = $index->getSettings();
+    public function testSetMergePolicyType()
+    {
+        $indexName = 'test';
 
-		$response = $settings->setMergePolicy('merge_factor', 15);
-		$this->assertEquals(15, $settings->getMergePolicy('merge_factor'));
-		$this->assertInstanceOf('Elastica_Response', $response);
-		$data = $response->getData();
-		$this->assertTrue($data['ok']);
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
 
-		$settings->setMergePolicy('merge_factor', 10);
-		$this->assertEquals(10, $settings->getMergePolicy('merge_factor'));
-	}
+        $settings = $index->getSettings();
 
-	public function testSetMergePolicyType() {
-		$indexName = 'test';
+        //$response = $settings->setMergePolicyType('LogByteSizeMergePolicyProvider');
+        $response = $settings->setMergePolicyType('log_byte_size');
+        $this->assertEquals('log_byte_size', $settings->getMergePolicyType());
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
+        $response = $settings->setMergePolicy('merge_factor', 15);
+        $this->assertEquals(15, $settings->getMergePolicy('merge_factor'));
+        $this->assertInstanceOf('Elastica_Response', $response);
+        $data = $response->getData();
+        $this->assertTrue($data['ok']);
+    }
 
-		$settings = $index->getSettings();
+    public function testSetReadOnly()
+    {
+        $client = new Elastica_Client();
+        $index = new Elastica_Index($client, 'elastica_test');
+        $index->getSettings()->setReadOnly(false);
 
-		//$response = $settings->setMergePolicyType('LogByteSizeMergePolicyProvider');
-		$response = $settings->setMergePolicyType('log_byte_size');
-		$this->assertEquals('log_byte_size', $settings->getMergePolicyType());
+        $index = $this->_createIndex();
 
-		$response = $settings->setMergePolicy('merge_factor', 15);
-		$this->assertEquals(15, $settings->getMergePolicy('merge_factor'));
-		$this->assertInstanceOf('Elastica_Response', $response);
-		$data = $response->getData();
-		$this->assertTrue($data['ok']);
-	}
+        // Add document to normal index
+        $doc = new Elastica_Document(null, array('hello' => 'world'));
+        $type = $index->getType('test');
+        $type->addDocument($doc);
+        $this->assertFalse((bool) $index->getSettings()->get('blocks.read_only'));
 
-	public function testSetReadOnly() {
+        // Try to add doc to read only index
+        $index->getSettings()->setReadOnly(true);
+        $this->assertTrue((bool) $index->getSettings()->get('blocks.read_only'));
 
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'elastica_test');
-		$index->getSettings()->setReadOnly(false);
+        try {
+            $type->addDocument($doc);
+            $this->fail('Should throw exception because of read only');
+        } catch (Elastica_Exception_Response $e) {
+            $message = $e->getMessage();
+            $this->assertContains('ClusterBlockException', $message);
+            $this->assertContains('index read-only', $message);
+        }
 
-		$index = $this->_createIndex();
+        // Remove read only, add document
+        $response = $index->getSettings()->setReadOnly(false);
+        $this->assertTrue($response->isOk());
 
-		// Add document to normal index
-		$doc = new Elastica_Document(null, array('hello' => 'world'));
-		$type = $index->getType('test');
-		$type->addDocument($doc);
-		$this->assertFalse((bool) $index->getSettings()->get('blocks.read_only'));
+        $type->addDocument($doc);
+        $index->refresh();
 
-		// Try to add doc to read only index
-		$index->getSettings()->setReadOnly(true);
-		$this->assertTrue((bool) $index->getSettings()->get('blocks.read_only'));
+        $this->assertEquals(2, $type->count());
+    }
 
-		try {
-			$type->addDocument($doc);
-			$this->fail('Should throw exception because of read only');
-		} catch(Elastica_Exception_Response $e) {
-			$message = $e->getMessage();
-			$this->assertContains('ClusterBlockException', $message);
-			$this->assertContains('index read-only', $message);
-		}
+    public function testGetSetBlocksRead()
+    {
+        $client = new Elastica_Client();
+        $index = $client->getIndex('elastica-test');
+        $index->create();
+        $index->refresh();
+        $settings = $index->getSettings();
 
-		// Remove read only, add document
-		$response = $index->getSettings()->setReadOnly(false);
-		$this->assertTrue($response->isOk());
+        $this->assertFalse($settings->getBlocksRead());
 
-		$type->addDocument($doc);
-		$index->refresh();
+        $settings->setBlocksRead(true);
+        $this->assertTrue($settings->getBlocksRead());
 
-		$this->assertEquals(2, $type->count());
-	}
+        $settings->setBlocksRead(false);
+        $this->assertFalse($settings->getBlocksRead());
 
-	public function testGetSetBlocksRead() {
-		$client = new Elastica_Client();
-		$index = $client->getIndex('elastica-test');
-		$index->create();
-		$index->refresh();
-		$settings = $index->getSettings();
+        $settings->setBlocksRead();
+        $this->assertTrue($settings->getBlocksRead());
 
-		$this->assertFalse($settings->getBlocksRead());
+        $index->delete();
+    }
 
-		$settings->setBlocksRead(true);
-		$this->assertTrue($settings->getBlocksRead());
+    public function testGetSetBlocksWrite()
+    {
+        $client = new Elastica_Client();
+        $index = $client->getIndex('elastica-test');
+        $index->create();
+        $index->refresh();
+        $settings = $index->getSettings();
 
-		$settings->setBlocksRead(false);
-		$this->assertFalse($settings->getBlocksRead());
+        $this->assertFalse($settings->getBlocksWrite());
 
-		$settings->setBlocksRead();
-		$this->assertTrue($settings->getBlocksRead());
+        $settings->setBlocksWrite(true);
+        $this->assertTrue($settings->getBlocksWrite());
 
-		$index->delete();
-	}
+        $settings->setBlocksWrite(false);
+        $this->assertFalse($settings->getBlocksWrite());
 
-	public function testGetSetBlocksWrite() {
-		$client = new Elastica_Client();
-		$index = $client->getIndex('elastica-test');
-		$index->create();
-		$index->refresh();
-		$settings = $index->getSettings();
+        $settings->setBlocksWrite();
+        $this->assertTrue($settings->getBlocksWrite());
 
-		$this->assertFalse($settings->getBlocksWrite());
+        $index->delete();
+    }
 
-		$settings->setBlocksWrite(true);
-		$this->assertTrue($settings->getBlocksWrite());
+    public function testGetSetBlocksMetadata()
+    {
+        $client = new Elastica_Client();
+        $index = $client->getIndex('elastica-test');
+        $index->create();
+        $index->refresh();
+        $settings = $index->getSettings();
 
-		$settings->setBlocksWrite(false);
-		$this->assertFalse($settings->getBlocksWrite());
+        $this->assertFalse($settings->getBlocksMetadata());
 
-		$settings->setBlocksWrite();
-		$this->assertTrue($settings->getBlocksWrite());
+        $settings->setBlocksMetadata(true);
+        $this->assertTrue($settings->getBlocksMetadata());
 
-		$index->delete();
-	}
+        $settings->setBlocksMetadata(false);
+        $this->assertFalse($settings->getBlocksMetadata());
 
-	public function testGetSetBlocksMetadata() {
-		$client = new Elastica_Client();
-		$index = $client->getIndex('elastica-test');
-		$index->create();
-		$index->refresh();
-		$settings = $index->getSettings();
+        $settings->setBlocksMetadata();
+        $this->assertTrue($settings->getBlocksMetadata());
 
-		$this->assertFalse($settings->getBlocksMetadata());
-
-		$settings->setBlocksMetadata(true);
-		$this->assertTrue($settings->getBlocksMetadata());
-
-		$settings->setBlocksMetadata(false);
-		$this->assertFalse($settings->getBlocksMetadata());
-
-		$settings->setBlocksMetadata();
-		$this->assertTrue($settings->getBlocksMetadata());
-
-		$settings->setBlocksMetadata(false);	// Cannot delete index otherwise
-		$index->delete();
-	}
+        $settings->setBlocksMetadata(false);	// Cannot delete index otherwise
+        $index->delete();
+    }
 }

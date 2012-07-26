@@ -13,7 +13,7 @@ class Elastica_Facet_TermsStats extends Elastica_Facet_Abstract
     /**
      * Sets the key field for the query.
      *
-     * @param string $keyField The key field name for the query.
+     * @param  string                    $keyField The key field name for the query.
      * @return Elastica_Facet_TermsStats
      */
     public function setKeyField( $keyField )
@@ -24,7 +24,7 @@ class Elastica_Facet_TermsStats extends Elastica_Facet_Abstract
     /**
      * Sets a script to calculate statistical information on a per term basis
      *
-     * @param string $valueScript The script to do calculations on the statistical values
+     * @param  string                    $valueScript The script to do calculations on the statistical values
      * @return Elastica_Facet_TermsStats
      */
     public function setValueScript( $valueScript )
@@ -35,7 +35,7 @@ class Elastica_Facet_TermsStats extends Elastica_Facet_Abstract
     /**
      * Sets a field to compute basic statistical results on
      *
-     * @param string $valueField The field to compute statistical values for
+     * @param  string                    $valueField The field to compute statistical values for
      * @return Elastica_Facet_TermsStats
      */
     public function setValueField( $valueField )
@@ -53,6 +53,7 @@ class Elastica_Facet_TermsStats extends Elastica_Facet_Abstract
     public function toArray()
     {
         $this->_setFacetParam( 'terms_stats', $this->_params );
+
         return parent::toArray();
     }
 

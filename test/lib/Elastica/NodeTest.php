@@ -3,63 +3,63 @@ require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 class Elastica_NodeTest extends Elastica_Test
 {
-	public function setUp() { }
 
-	public function tearDown() { }
+    public function testCreateNode()
+    {
+        $client = new Elastica_Client();
+        $names = $client->getCluster()->getNodeNames();
+        $name = reset($names);
 
-	public function testCreateNode() {
+        $node = new Elastica_Node($name, $client);
+        $this->assertInstanceOf('Elastica_Node', $node);
+    }
 
-		$client = new Elastica_Client();
-		$names = $client->getCluster()->getNodeNames();
-		$name = reset($names);
+    public function testGetInfo()
+    {
+        $client = new Elastica_Client();
+        $names = $client->getCluster()->getNodeNames();
+        $name = reset($names);
 
-		$node = new Elastica_Node($name, $client);
-		$this->assertInstanceOf('Elastica_Node', $node);
-	}
+        $node = new Elastica_Node($name, $client);
 
-	public function testGetInfo() {
-		$client = new Elastica_Client();
-		$names = $client->getCluster()->getNodeNames();
-		$name = reset($names);
+        $info = $node->getInfo();
 
-		$node = new Elastica_Node($name, $client);
+        $this->assertInstanceOf('Elastica_Node_Info', $info);
+    }
 
-		$info = $node->getInfo();
+    public function testGetStats()
+    {
+        $client = new Elastica_Client();
+        $names = $client->getCluster()->getNodeNames();
+        $name = reset($names);
 
-		$this->assertInstanceOf('Elastica_Node_Info', $info);
-	}
+        $node = new Elastica_Node($name, $client);
 
-	public function testGetStats() {
-		$client = new Elastica_Client();
-		$names = $client->getCluster()->getNodeNames();
-		$name = reset($names);
+        $stats = $node->getStats();
 
-		$node = new Elastica_Node($name, $client);
+        $this->assertInstanceOf('Elastica_Node_Stats', $stats);
+    }
 
-		$stats = $node->getStats();
+    public function testShutdown()
+    {
+        $client = new Elastica_Client();
+        $nodes = $client->getCluster()->getNodes();
 
-		$this->assertInstanceOf('Elastica_Node_Stats', $stats);
-	}
+        $count = count($nodes);
+        if ($count < 2) {
+            $this->markTestSkipped('At least two nodes have to be running, because 1 node is shutdown');
+        }
 
-	public function testShutdown() {
-		$client = new Elastica_Client();
-		$nodes = $client->getCluster()->getNodes();
+        // Stores node info for later
+        $info = $nodes[1]->getInfo();
+        $nodes[0]->shutdown('2s');
 
-		$count = count($nodes);
-		if ($count < 2) {
-			$this->markTestSkipped('At least two nodes have to be running, because 1 node is shutdown');
-		}
+        sleep(5);
 
-		// Stores node info for later
-		$info = $nodes[1]->getInfo();
-		$nodes[0]->shutdown('2s');
+        $client = new Elastica_Client(array('host' => $info->getIp(), 'port' => $info->getPort()));
+        $names = $client->getCluster()->getNodeNames();
 
-		sleep(5);
-
-		$client = new Elastica_Client(array('host' => $info->getIp(), 'port' => $info->getPort()));
-		$names = $client->getCluster()->getNodeNames();
-
-		// One node less ...
-		$this->assertEquals($count - 1, count($names));
-	}
+        // One node less ...
+        $this->assertEquals($count - 1, count($names));
+    }
 }

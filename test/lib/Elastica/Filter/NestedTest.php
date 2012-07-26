@@ -2,32 +2,32 @@
 
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Filter_NestedTest extends Elastica_Test
 {
-    public function setUp() {
+    public function setUp()
+    {
         $client = new Elastica_Client();
         $index = $client->getIndex('elastica_test_filter_nested');
-		$index->create(array(), true);
+        $index->create(array(), true);
         $type = $index->getType('user');
         $mapping = new Elastica_Type_Mapping();
         $mapping->setProperties(
-			array(
-				'firstname' => array('type' => 'string', 'store' => 'yes'),
-				// default is store => no expected
+            array(
+                'firstname' => array('type' => 'string', 'store' => 'yes'),
+                // default is store => no expected
                 'lastname' => array('type' => 'string'),
                 'hobbies' => array(
                     'type' => 'nested',
                     'include_in_parent' => true,
                     'properties' => array('hobby' => array('type' => 'string'))
                 )
-			)
-		);
+            )
+        );
         $type->setMapping($mapping);
 
-		// Adds a list of documents with _bulk upload to the index
-		$docs = array();
-		$docs[] = new Elastica_Document(1,
+        // Adds a list of documents with _bulk upload to the index
+        $docs = array();
+        $docs[] = new Elastica_Document(1,
             array(
                 'firstname' => 'Nicolas',
                 'lastname' => 'Ruflin',
@@ -35,8 +35,8 @@ class Elastica_Filter_NestedTest extends Elastica_Test
                     array('hobby' => 'opensource')
                 )
             )
-		);
-		$docs[] = new Elastica_Document(2,
+        );
+        $docs[] = new Elastica_Document(2,
             array(
                 'firstname' => 'Nicolas',
                 'lastname' => 'Ippolito',
@@ -45,20 +45,22 @@ class Elastica_Filter_NestedTest extends Elastica_Test
                     array('hobby' => 'guitar'),
                 )
             )
-		);
+        );
         $response = $type->addDocuments($docs);
 
-		// Refresh index
-		$index->refresh();
-	}
+        // Refresh index
+        $index->refresh();
+    }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         $client = new Elastica_Client();
         $index = $client->getIndex('elastica_test_filter_nested');
         $index->delete();
-	}
+    }
 
-	public function testToArray() {
+    public function testToArray()
+    {
         $f = new Elastica_Filter_Nested();
         $this->assertEquals(array('nested' => array()), $f->toArray());
         $q = new Elastica_Query_Terms();

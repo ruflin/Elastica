@@ -8,5 +8,4 @@
  */
 abstract class Elastica_Query_Abstract extends Elastica_Param
 {
-
 }
