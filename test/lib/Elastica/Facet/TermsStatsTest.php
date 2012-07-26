@@ -36,7 +36,6 @@ class Elastica_Facet_TermsTest extends PHPUnit_Framework_TestCase
         $doc   = new Elastica_Document( 6, array( 'name' => 'mike', 'paid' => 15 ) );
         $type->addDocument( $doc );
 
-
         $facet = new Elastica_Facet_TermsStats( 'test' );
         $facet->setKeyField( 'name' );
         $facet->setValueField( 'paid' );
@@ -51,14 +50,11 @@ class Elastica_Facet_TermsTest extends PHPUnit_Framework_TestCase
         $facets   = $response->getFacets();
 
         $this->assertEquals( 2, count( $facets[ 'test' ][ 'terms' ] ) );
-        foreach( $facets[ 'test' ][ 'terms' ] as $facet )
-        {
-            if( $facet[ 'term' ] === 'tom' )
-            {
+        foreach ($facets[ 'test' ][ 'terms' ] as $facet) {
+            if ($facet[ 'term' ] === 'tom') {
                 $this->assertEquals( 14, $facet[ 'total' ] );
             }
-            if( $facet[ 'term' ] === 'mike' )
-            {
+            if ($facet[ 'term' ] === 'mike') {
                 $this->assertEquals( 29, $facet[ 'total' ] );
             }
         }
