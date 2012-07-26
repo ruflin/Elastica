@@ -59,7 +59,6 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	 * @param string $key Key
 	 * @param array|string $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
 	 * @param string $distance Distance
-	 * 
 	 * @throws Elastica_Exception_Invalid
 	 */
 	public function __construct($key, $location, $distance) {
@@ -101,9 +100,7 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	 * Remove it when the old constructor is not supported
 	 * 
 	 * @deprecated
-	 * 
 	 * @param array $args old arguments
-	 * 
 	 * @return array new arguments
 	 */
 	private function _oldConstruct(array $args) {
@@ -119,7 +116,6 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	
 	/**
 	 * @param string $key
-	 * 
 	 * @return Elastica_Filter_GeoDistance current filter
 	 */
 	public function setKey($key) {
@@ -129,7 +125,6 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	
 	/**
 	 * @param float $latitude
-	 * 
 	 * @return Elastica_Filter_GeoDistance current filter
 	 */
 	public function setLatitude($latitude) {
@@ -140,7 +135,6 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	
 	/**
 	 * @param float $longitude
-	 * 
 	 * @return Elastica_Filter_GeoDistance current filter
 	 */
 	public function setLongitude($longitude) {
@@ -151,7 +145,6 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	
 	/**
 	 * @param string $geohash
-	 * 
 	 * @return Elastica_Filter_GeoDistance current filter
 	 */
 	public function setGeohash($geohash) {
@@ -162,7 +155,6 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	
 	/**
 	 * @param string $distance
-	 * 
 	 * @return Elastica_Filter_GeoDistance current filter
 	 */
 	public function setDistance($distance) {
@@ -174,7 +166,6 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	 * See DISTANCE_TYPE_* constants
 	 * 
 	 * @param string $distanceType
-	 * 
 	 * @return Elastica_Filter_GeoDistance current filter
 	 */
 	public function setDistanceType($distanceType) {
@@ -186,7 +177,6 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	 * See OPTIMIZE_BBOX_* constants
 	 * 
 	 * @param string $optimizeBbox
-	 * 
 	 * @return Elastica_Filter_GeoDistance current filter
 	 */
 	public function setOptimizeBbox($optimizeBbox) {
@@ -196,7 +186,6 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract {
 	
 	/**
 	 * @see Elastica_Param::toArray()
-	 * 
 	 * @throws Elastica_Exception_Invalid
 	 */
 	public function toArray() {
