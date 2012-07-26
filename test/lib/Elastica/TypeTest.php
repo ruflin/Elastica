@@ -1,172 +1,198 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
 class Elastica_TypeTest extends Elastica_Test
 {
-	public function setUp() {
-	}
+    public function testSearch()
+    {
+        $index = $this->_createIndex();
 
-	public function tearDown() {
-	}
+        $type = new Elastica_Type($index, 'user');
 
-	public function testSearch() {
-		$index = $this->_createIndex();
+        // Adds 1 document to the index
+        $doc1 = new Elastica_Document(1,
+            array('username' => 'hans', 'test' => array('2', '3', '5'))
+        );
+        $type->addDocument($doc1);
 
-		$type = new Elastica_Type($index, 'user');
+        // Adds a list of documents with _bulk upload to the index
+        $docs = array();
+        $docs[] = new Elastica_Document(2,
+            array('username' => 'john', 'test' => array('1', '3', '6'))
+        );
+        $docs[] = new Elastica_Document(3,
+            array('username' => 'rolf', 'test' => array('2', '3', '7'))
+        );
+        $type->addDocuments($docs);
+        $index->refresh();
 
+        $resultSet = $type->search('rolf');
+        $this->assertEquals(1, $resultSet->count());
 
-		// Adds 1 document to the index
-		$doc1 = new Elastica_Document(1,
-			array('username' => 'hans', 'test' => array('2', '3', '5'))
-		);
-		$type->addDocument($doc1);
+        // Test if source is returned
+        $result = $resultSet->current();
+        $this->assertEquals(3, $result->getId());
+        $data = $result->getData();
+        $this->assertEquals('rolf', $data['username']);
+    }
 
-		// Adds a list of documents with _bulk upload to the index
-		$docs = array();
-		$docs[] = new Elastica_Document(2,
-			array('username' => 'john', 'test' => array('1', '3', '6'))
-		);
-		$docs[] = new Elastica_Document(3,
-			array('username' => 'rolf', 'test' => array('2', '3', '7'))
-		);
-		$type->addDocuments($docs);
-		$index->refresh();
+    public function testNoSource()
+    {
+        $index = $this->_createIndex();
 
-		$resultSet = $type->search('rolf');
-		$this->assertEquals(1, $resultSet->count());
+        $type = new Elastica_Type($index, 'user');
+        $mapping = new Elastica_Type_Mapping($type, array(
+                'id' => array('type' => 'integer', 'store' => 'yes'),
+                'username' => array('type' => 'string', 'store' => 'no'),
+            ));
+        $mapping->setSource(array('enabled' => false));
+        $type->setMapping($mapping);
 
-		// Test if source is returned
-		$result = $resultSet->current();
-		$this->assertEquals(3, $result->getId());
-		$data = $result->getData();
-		$this->assertEquals('rolf', $data['username']);
-	}
+        // Adds 1 document to the index
+        $doc1 = new Elastica_Document(1,
+            array('username' => 'hans', 'test' => array('2', '3', '5'))
+        );
+        $type->addDocument($doc1);
 
-	public function testNoSource() {
-		$index = $this->_createIndex();
+        // Adds a list of documents with _bulk upload to the index
+        $docs = array();
+        $docs[] = new Elastica_Document(2,
+            array('username' => 'john', 'test' => array('1', '3', '6'))
+        );
+        $docs[] = new Elastica_Document(3,
+            array('username' => 'rolf', 'test' => array('2', '3', '7'))
+        );
+        $type->addDocuments($docs);
 
-		$type = new Elastica_Type($index, 'user');
-		$mapping = new Elastica_Type_Mapping($type, array(
-				'id' => array('type' => 'integer', 'store' => 'yes'),
-				'username' => array('type' => 'string', 'store' => 'no'),
-			));
-		$mapping->setSource(array('enabled' => false));
-		$type->setMapping($mapping);
+        // To update index
+        $index->refresh();
 
+        $resultSet = $type->search('rolf');
 
-		// Adds 1 document to the index
-		$doc1 = new Elastica_Document(1,
-			array('username' => 'hans', 'test' => array('2', '3', '5'))
-		);
-		$type->addDocument($doc1);
+        $this->assertEquals(1, $resultSet->count());
 
-		// Adds a list of documents with _bulk upload to the index
-		$docs = array();
-		$docs[] = new Elastica_Document(2,
-			array('username' => 'john', 'test' => array('1', '3', '6'))
-		);
-		$docs[] = new Elastica_Document(3,
-			array('username' => 'rolf', 'test' => array('2', '3', '7'))
-		);
-		$type->addDocuments($docs);
+        // Tests if no source is in response except id
+        $result = $resultSet->current();
+        $this->assertEquals(3, $result->getId());
+        $this->assertEmpty($result->getData());
+    }
 
-		// To update index
-		$index->refresh();
+    public function testDeleteDocument()
+    {
+        $index = $this->_createIndex();
+        $type = new Elastica_Type($index, 'user');
 
-		$resultSet = $type->search('rolf');
+        // Adds hans, john and rolf to the index
+        $docs = array(
+            new Elastica_Document(1, array('username' => 'hans', 'test' => array('2', '3', '5'))),
+            new Elastica_Document(2, array('username' => 'john', 'test' => array('1', '3', '6'))),
+            new Elastica_Document(3, array('username' => 'rolf', 'test' => array('2', '3', '7'))),
+        );
+        $type->addDocuments($docs);
+        $index->refresh();
 
-		$this->assertEquals(1, $resultSet->count());
+        // sanity check for rolf
+        $resultSet = $type->search('rolf');
+        $this->assertEquals(1, $resultSet->count());
+        $data = $resultSet->current()->getData();
+        $this->assertEquals('rolf', $data['username']);
 
-		// Tests if no source is in response except id
-		$result = $resultSet->current();
-		$this->assertEquals(3, $result->getId());
-		$this->assertEmpty($result->getData());
-	}
+        // delete rolf
+        $type->deleteById(3);
+        $index->refresh();
 
-	public function testDeleteDocument() {
-		$index = $this->_createIndex();
-		$type = new Elastica_Type($index, 'user');
+        // rolf should no longer be there
+        $resultSet = $type->search('rolf');
+        $this->assertEquals(0, $resultSet->count());
 
-		// Adds hans, john and rolf to the index
-		$docs = array(
-			new Elastica_Document(1, array('username' => 'hans', 'test' => array('2', '3', '5'))),
-			new Elastica_Document(2, array('username' => 'john', 'test' => array('1', '3', '6'))),
-			new Elastica_Document(3, array('username' => 'rolf', 'test' => array('2', '3', '7'))),
-		);
-		$type->addDocuments($docs);
-		$index->refresh();
+        // it should not be possible to delete the entire type with this method
+        try {
+            $type->deleteById(' ');
+        } catch (Exception $e) {
+            /* ignore */
+        }
 
-		// sanity check for rolf
-		$resultSet = $type->search('rolf');
-		$this->assertEquals(1, $resultSet->count());
-		$data = $resultSet->current()->getData();
-		$this->assertEquals('rolf', $data['username']);
+        try {
+            $type->deleteById(null);
+        } catch (Exception $e) {
+            /* ignore */
+        }
 
-		// delete rolf
-		$type->deleteById(3);
-		$index->refresh();
+        try {
+            $type->deleteById(array());
+        } catch (Exception $e) {
+            /* ignore */
+        }
 
-		// rolf should no longer be there
-		$resultSet = $type->search('rolf');
-		$this->assertEquals(0, $resultSet->count());
+        try {
+            $type->deleteById('*');
+        } catch (Exception $e) {
+            /* ignore */
+        }
 
-		// it should not be possible to delete the entire type with this method
-		try { $type->deleteById(' '); } catch (Exception $e) { /* ignore */ }
-		try { $type->deleteById(null); } catch (Exception $e) { /* ignore */ }
-		try { $type->deleteById(array()); } catch (Exception $e) { /* ignore */ }
-		try { $type->deleteById('*'); } catch (Exception $e) { /* ignore */ }
-		try { $type->deleteById('*:*'); } catch (Exception $e) { /* ignore */ }
-		try { $type->deleteById('!'); } catch (Exception $e) { /* ignore */ }
-		$index->refresh();
+        try {
+            $type->deleteById('*:*');
+        } catch (Exception $e) {
+            /* ignore */
+        }
 
-		// rolf should no longer be there
-		$resultSet = $type->search('john');
-		$this->assertEquals(1, $resultSet->count());
-	}
+        try {
+            $type->deleteById('!');
+        } catch (Exception $e) {
+            /* ignore */
+        }
 
-	public function testGetDocumentNotExist() {
-		$index = $this->_createIndex();
-		$type = new Elastica_Type($index, 'test');
-		$type->addDocument(new Elastica_Document(1, array('name' => 'ruflin')));
-		$index->refresh();
+        $index->refresh();
 
-		$type->getDocument(1);
+        // rolf should no longer be there
+        $resultSet = $type->search('john');
+        $this->assertEquals(1, $resultSet->count());
+    }
 
-		try {
-			$type->getDocument(2);
-			$this->fail('Should throw exceptoin as doc does not exist');
-		} catch (Elastica_Exception_NotFound $e) {
-			$this->assertTrue(true);
-		}
-	}
+    public function testGetDocumentNotExist()
+    {
+        $index = $this->_createIndex();
+        $type = new Elastica_Type($index, 'test');
+        $type->addDocument(new Elastica_Document(1, array('name' => 'ruflin')));
+        $index->refresh();
 
-	public function testDeleteByQuery() {
-		$index = $this->_createIndex();
-		$type = new Elastica_Type($index, 'test');
-		$type->addDocument(new Elastica_Document(1, array('name' => 'ruflin nicolas')));
-		$type->addDocument(new Elastica_Document(2, array('name' => 'ruflin')));
-		$index->refresh();
+        $type->getDocument(1);
 
-		$response = $index->search('ruflin*');
-		$this->assertEquals(2, $response->count());
+        try {
+            $type->getDocument(2);
+            $this->fail('Should throw exceptoin as doc does not exist');
+        } catch (Elastica_Exception_NotFound $e) {
+            $this->assertTrue(true);
+        }
+    }
 
-		$response = $index->search('nicolas');
-		$this->assertEquals(1, $response->count());
+    public function testDeleteByQuery()
+    {
+        $index = $this->_createIndex();
+        $type = new Elastica_Type($index, 'test');
+        $type->addDocument(new Elastica_Document(1, array('name' => 'ruflin nicolas')));
+        $type->addDocument(new Elastica_Document(2, array('name' => 'ruflin')));
+        $index->refresh();
 
-		// Delete first document
-		$response = $type->deleteByQuery('nicolas');
-		$this->assertTrue($response->isOk());
+        $response = $index->search('ruflin*');
+        $this->assertEquals(2, $response->count());
 
-		$index->refresh();
+        $response = $index->search('nicolas');
+        $this->assertEquals(1, $response->count());
 
-		// Makes sure, document is deleted
-		$response = $index->search('ruflin*');
-		$this->assertEquals(1, $response->count());
+        // Delete first document
+        $response = $type->deleteByQuery('nicolas');
+        $this->assertTrue($response->isOk());
 
-		$response = $index->search('nicolas');
-		$this->assertEquals(0, $response->count());
-	}
+        $index->refresh();
+
+        // Makes sure, document is deleted
+        $response = $index->search('ruflin*');
+        $this->assertEquals(1, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(0, $response->count());
+    }
 
     /**
      * Test to see if search Default Limit works
@@ -217,58 +243,59 @@ class Elastica_TypeTest extends Elastica_Test
         $type->delete();
         try {
             $type->getMapping();
-        }
-        catch (Elastica_Exception_Response $expected) {
+        } catch (Elastica_Exception_Response $expected) {
             $this->assertEquals("TypeMissingException[[elastica_test] type[test] missing]", $expected->getMessage());
+
             return;
         }
 
         $this->fail('Mapping for type[test] in [elastica_test] still exists');
     }
 
-	public function testMoreLikeThisApi() {
+    public function testMoreLikeThisApi()
+    {
+        $client = new Elastica_Client(array('persistent' => false));
+        $index = $client->getIndex('elastica_test');
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
-		$client = new Elastica_Client(array('persistent' => false));
-		$index = $client->getIndex('elastica_test');
-		$index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+        $type = new Elastica_Type($index, 'mlt_test');
+        $type->addDocument(new Elastica_Document(1, array('visible' => true, 'name' => 'bruce wayne batman')));
+        $type->addDocument(new Elastica_Document(2, array('visible' => true, 'name' => 'bruce wayne')));
+        $type->addDocument(new Elastica_Document(3, array('visible' => false, 'name' => 'bruce wayne')));
+        $type->addDocument(new Elastica_Document(4, array('visible' => true, 'name' => 'batman')));
+        $type->addDocument(new Elastica_Document(5, array('visible' => false, 'name' => 'batman')));
+        $type->addDocument(new Elastica_Document(6, array('visible' => true, 'name' => 'superman')));
+        $type->addDocument(new Elastica_Document(7, array('visible' => true, 'name' => 'spiderman')));
 
-		$type = new Elastica_Type($index, 'mlt_test');
-		$type->addDocument(new Elastica_Document(1, array('visible' => true, 'name' => 'bruce wayne batman')));
-		$type->addDocument(new Elastica_Document(2, array('visible' => true, 'name' => 'bruce wayne')));
-		$type->addDocument(new Elastica_Document(3, array('visible' => false, 'name' => 'bruce wayne')));
-		$type->addDocument(new Elastica_Document(4, array('visible' => true, 'name' => 'batman')));
-		$type->addDocument(new Elastica_Document(5, array('visible' => false, 'name' => 'batman')));
-		$type->addDocument(new Elastica_Document(6, array('visible' => true, 'name' => 'superman')));
-		$type->addDocument(new Elastica_Document(7, array('visible' => true, 'name' => 'spiderman')));
+        $index->refresh();
 
-		$index->refresh();
+        $document = $type->getDocument(1);
 
-		$document = $type->getDocument(1);
+        // Return all similar
+        $resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'));
+        $this->assertEquals(4, $resultSet->count());
 
-		// Return all similar
-		$resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'));
-		$this->assertEquals(4, $resultSet->count());
+        // Return just the visible similar
+        $query 				= new Elastica_Query();
+        $filterTerm 		= new Elastica_Filter_Term();
+        $filterTerm->setTerm('visible', true);
+        $query->setFilter($filterTerm);
 
-		// Return just the visible similar
-		$query 				= new Elastica_Query();
-		$filterTerm 		= new Elastica_Filter_Term();
-		$filterTerm->setTerm('visible', true);
-		$query->setFilter($filterTerm);
+        $resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'), $query);
+        $this->assertEquals(2, $resultSet->count());
+    }
 
-		$resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'), $query);
-		$this->assertEquals(2, $resultSet->count());
-	}
-
-	public function testUpdateDocument() {
-		$client = new Elastica_Client();
-		$index = $client->getIndex('elastica_test');
-		$type = $index->getType('update_type');
-		$id = 1;
-		$type->addDocument(new Elastica_Document($id, array('name' => 'bruce wayne batman')));
-		$newName = 'batman';
-		$update = new Elastica_Script("ctx._source.name = name", array('name' => $newName));
-		$type->updateDocument($id, $update, array('refresh' => true));
-		$updatedDoc = $type->getDocument($id)->getData();
-		$this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
-	}
+    public function testUpdateDocument()
+    {
+        $client = new Elastica_Client();
+        $index = $client->getIndex('elastica_test');
+        $type = $index->getType('update_type');
+        $id = 1;
+        $type->addDocument(new Elastica_Document($id, array('name' => 'bruce wayne batman')));
+        $newName = 'batman';
+        $update = new Elastica_Script("ctx._source.name = name", array('name' => $newName));
+        $type->updateDocument($id, $update, array('refresh' => true));
+        $updatedDoc = $type->getDocument($id)->getData();
+        $this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
+    }
 }

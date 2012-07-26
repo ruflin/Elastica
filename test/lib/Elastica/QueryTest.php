@@ -1,156 +1,150 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
 class Elastica_QueryTest extends Elastica_Test
 {
-	public function setUp() {
-	}
+    public function testStringConversion()
+    {
+        $queryString = '{
+            "query" : {
+                "filtered" : {
+                "filter" : {
+                    "range" : {
+                    "due" : {
+                        "gte" : "2011-07-18 00:00:00",
+                        "lt" : "2011-07-25 00:00:00"
+                    }
+                    }
+                },
+                "query" : {
+                    "text_phrase" : {
+                    "title" : "Call back request"
+                    }
+                }
+                }
+            },
+            "sort" : {
+                "due" : {
+                "reverse" : true
+                }
+            },
+            "fields" : [
+                "created", "assigned_to"
+            ]
+            }';
 
-	public function tearDown() {
-	}
+        $query = new Elastica_Query_Builder($queryString);
+        $queryArray = $query->toArray();
 
+        $this->assertInternalType('array', $queryArray);
 
-	public function testStringConversion() {
-		$queryString = '{
-			"query" : {
-				"filtered" : {
-				"filter" : {
-					"range" : {
-					"due" : {
-						"gte" : "2011-07-18 00:00:00",
-						"lt" : "2011-07-25 00:00:00"
-					}
-					}
-				},
-				"query" : {
-					"text_phrase" : {
-					"title" : "Call back request"
-					}
-				}
-				}
-			},
-			"sort" : {
-				"due" : {
-				"reverse" : true
-				}
-			},
-			"fields" : [
-				"created", "assigned_to"
-			]
-			}';
+        $this->assertEquals('2011-07-18 00:00:00', $queryArray['query']['filtered']['filter']['range']['due']['gte']);
+    }
 
-		$query = new Elastica_Query_Builder($queryString);
-		$queryArray = $query->toArray();
+    public function testRawQuery()
+    {
+        $textQuery = new Elastica_Query_Text();
+        $textQuery->setField('title', 'test');
 
-		$this->assertInternalType('array', $queryArray);
+        $query1 = Elastica_Query::create($textQuery);
 
-		$this->assertEquals('2011-07-18 00:00:00', $queryArray['query']['filtered']['filter']['range']['due']['gte']);
-	}
+        $query2 = new Elastica_Query();
+        $query2->setRawQuery(array('query' => array('text' => array('title' => 'test'))));
 
-	public function testRawQuery() {
+        $this->assertEquals($query1->toArray(), $query2->toArray());
+    }
 
-		$textQuery = new Elastica_Query_Text();
-		$textQuery->setField('title', 'test');
+    public function testSetSort()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
 
-		$query1 = Elastica_Query::create($textQuery);
+        $doc = new Elastica_Document(1, array('name' => 'hello world'));
+        $type->addDocument($doc);
+        $doc = new Elastica_Document(2, array('firstname' => 'guschti', 'lastname' => 'ruflin'));
+        $type->addDocument($doc);
+        $doc = new Elastica_Document(3, array('firstname' => 'nicolas', 'lastname' => 'ruflin'));
+        $type->addDocument($doc);
 
-		$query2 = new Elastica_Query();
-		$query2->setRawQuery(array('query' => array('text' => array('title' => 'test'))));
+        $queryTerm = new Elastica_Query_Term();
+        $queryTerm->setTerm('lastname', 'ruflin');
 
-		$this->assertEquals($query1->toArray(), $query2->toArray());
-	}
+        $index->refresh();
 
-	public function testSetSort() {
-		$index = $this->_createIndex();
-		$type = $index->getType('test');
+        $query = Elastica_Query::create($queryTerm);
 
-		$doc = new Elastica_Document(1, array('name' => 'hello world'));
-		$type->addDocument($doc);
-		$doc = new Elastica_Document(2, array('firstname' => 'guschti', 'lastname' => 'ruflin'));
-		$type->addDocument($doc);
-		$doc = new Elastica_Document(3, array('firstname' => 'nicolas', 'lastname' => 'ruflin'));
-		$type->addDocument($doc);
+        // ASC order
+        $query->setSort(array(array('firstname' => array('order' => 'asc'))));
+        $resultSet = $type->search($query);
+        $this->assertEquals(2, $resultSet->count());
 
+        $first = $resultSet->current()->getData();
+        $second = $resultSet->next()->getData();
 
-		$queryTerm = new Elastica_Query_Term();
-		$queryTerm->setTerm('lastname', 'ruflin');
+        $this->assertEquals('guschti', $first['firstname']);
+        $this->assertEquals('nicolas', $second['firstname']);
 
-		$index->refresh();
+        // DESC order
+        $query->setSort(array('firstname' => array('order' => 'desc')));
+        $resultSet = $type->search($query);
+        $this->assertEquals(2, $resultSet->count());
 
-		$query = Elastica_Query::create($queryTerm);
+        $first = $resultSet->current()->getData();
+        $second = $resultSet->next()->getData();
 
-		// ASC order
-		$query->setSort(array(array('firstname' => array('order' => 'asc'))));
-		$resultSet = $type->search($query);
-		$this->assertEquals(2, $resultSet->count());
+        $this->assertEquals('nicolas', $first['firstname']);
+        $this->assertEquals('guschti', $second['firstname']);
+    }
 
-		$first = $resultSet->current()->getData();
-		$second = $resultSet->next()->getData();
+    public function testAddSort()
+    {
+        $query = new Elastica_Query();
+        $sortParam = array('firstname' => array('order' => 'asc'));
+        $query->addSort($sortParam);
 
-		$this->assertEquals('guschti', $first['firstname']);
-		$this->assertEquals('nicolas', $second['firstname']);
+        $this->assertEquals($query->getParam('sort'), array($sortParam));
+    }
 
+    public function testSetRawQuery()
+    {
+        $query = new Elastica_Query();
 
-		// DESC order
-		$query->setSort(array('firstname' => array('order' => 'desc')));
-		$resultSet = $type->search($query);
-		$this->assertEquals(2, $resultSet->count());
+        $params = array('query' => 'test');
+        $query->setRawQuery($params);
 
-		$first = $resultSet->current()->getData();
-		$second = $resultSet->next()->getData();
+        $this->assertEquals($params, $query->toArray());
+    }
 
-		$this->assertEquals('nicolas', $first['firstname']);
-		$this->assertEquals('guschti', $second['firstname']);
-	}
+    public function testSetFields()
+    {
+        $query = new Elastica_Query();
 
-	public function testAddSort() {
-		$query = new Elastica_Query();
-		$sortParam = array('firstname' => array('order' => 'asc'));
-		$query->addSort($sortParam);
+        $params = array('query' => 'test');
 
-		$this->assertEquals($query->getParam('sort'), array($sortParam));
-	}
+        $query->setFields(array('firstname', 'lastname'));
 
-	public function testSetRawQuery() {
-		$query = new Elastica_Query();
+        $data = $query->toArray();
 
-		$params = array('query' => 'test');
-		$query->setRawQuery($params);
+        $this->assertContains('firstname', $data['fields']);
+        $this->assertContains('lastname', $data['fields']);
+        $this->assertEquals(2, count($data['fields']));
+    }
 
-		$this->assertEquals($params, $query->toArray());
-	}
+    public function testGetQuery()
+    {
+        $query = new Elastica_Query();
 
-	public function testSetFields() {
-		$query = new Elastica_Query();
+        try {
+            $query->getQuery();
+            $this->fail('should throw exception because query does not exist');
+        } catch (Elastica_Exception_Invalid $e) {
+            $this->assertTrue(true);
+        }
 
-		$params = array('query' => 'test');
+        $termQuery = new Elastica_Query_Term();
+        $termQuery->setTerm('text', 'value');
+        $query->setQuery($termQuery);
 
-		$query->setFields(array('firstname', 'lastname'));
-
-
-		$data = $query->toArray();
-
-		$this->assertContains('firstname', $data['fields']);
-		$this->assertContains('lastname', $data['fields']);
-		$this->assertEquals(2, count($data['fields']));
-	}
-
-	public function testGetQuery() {
-		$query = new Elastica_Query();
-
-		try {
-			$query->getQuery();
-			$this->fail('should throw exception because query does not exist');
-		} catch(Elastica_Exception_Invalid $e) {
-			$this->assertTrue(true);
-		}
-
-
-		$termQuery = new Elastica_Query_Term();
-		$termQuery->setTerm('text', 'value');
-		$query->setQuery($termQuery);
-
-		$this->assertEquals($termQuery->toArray(), $query->getQuery());
-	}
+        $this->assertEquals($termQuery->toArray(), $query->getQuery());
+    }
 }

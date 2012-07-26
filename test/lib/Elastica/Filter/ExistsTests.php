@@ -2,32 +2,27 @@
 
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Filter_ExistsTest extends PHPUnit_Framework_TestCase
 {
-	public function setUp() {
-	}
+    public function testToArray()
+    {
+        $field = 'test';
+        $filter = new Elastica_Filter_Exists($field);
 
-	public function tearDown() {
-	}
+        $expectedArray = array('exists' => array('field' => $field));
+        $this->assertEquals($expectedArray, $filter->toArray());
+    }
 
-	public function testToArray() {
-		$field = 'test';
-		$filter = new Elastica_Filter_Exists($field);
+    public function testSetField()
+    {
+        $field = 'test';
+        $filter = new Elastica_Filter_Exists($field);
 
-		$expectedArray = array('exists' => array('field' => $field));
-		$this->assertEquals($expectedArray, $filter->toArray());
-	}
+        $this->assertEquals($field, $filter->getParam('field'));
 
-	public function testSetField() {
-		$field = 'test';
-		$filter = new Elastica_Filter_Exists($field);
+        $newField = 'hello world';
+        $this->assertInstanceOf('Elastica_Filter_Exists', $filter->setField($newField));
 
-		$this->assertEquals($field, $filter->getParam('field'));
-
-		$newField = 'hello world';
-		$this->assertInstanceOf('Elastica_Filter_Exists', $filter->setField($newField));
-
-		$this->assertEquals($newField, $filter->getParam('field'));
-	}
+        $this->assertEquals($newField, $filter->getParam('field'));
+    }
 }

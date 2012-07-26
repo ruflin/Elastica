@@ -10,15 +10,16 @@
  */
 class Elastica_Query_Range extends Elastica_Query_Abstract
 {
-	/**
-	 * Adds a range field to the query
-	 *
-	 * @param string $fieldName Field name
-	 * @param array $args Field arguments
-	 * @return Elastica_Query_Range Current object
-	 */
-	public function addField($fieldName, array $args) {
-		return $this->setParam($fieldName, $args);
+    /**
+     * Adds a range field to the query
+     *
+     * @param  string               $fieldName Field name
+     * @param  array                $args      Field arguments
+     * @return Elastica_Query_Range Current object
+     */
+    public function addField($fieldName, array $args)
+    {
+        return $this->setParam($fieldName, $args);
 
-	}
+    }
 }

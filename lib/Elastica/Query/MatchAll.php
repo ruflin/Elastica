@@ -9,10 +9,11 @@
  */
 class Elastica_Query_MatchAll extends Elastica_Query_Abstract
 {
-	/**
-	 * Creates match all query
-	 */
-	public function __construct() {
-		$this->_params = new stdClass();
-	}
+    /**
+     * Creates match all query
+     */
+    public function __construct()
+    {
+        $this->_params = new stdClass();
+    }
 }

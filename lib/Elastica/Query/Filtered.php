@@ -8,64 +8,71 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/fuzzy_query/
  */
-class Elastica_Query_Filtered extends Elastica_Query_Abstract {
-	/**
-	 * Query
-	 * 
-	 * @var Elastica_Query_Abstract Query object
-	 */
-	protected $_query = null;
+class Elastica_Query_Filtered extends Elastica_Query_Abstract
+{
+    /**
+     * Query
+     *
+     * @var Elastica_Query_Abstract Query object
+     */
+    protected $_query = null;
 
-	/**
-	 * Filter
-	 * 
-	 * @var Elastica_Filter_Abstract Filter object
-	 */
-	protected $_filter = null;
+    /**
+     * Filter
+     *
+     * @var Elastica_Filter_Abstract Filter object
+     */
+    protected $_filter = null;
 
-	/**
-	 * Constructs a filtered query
-	 *
-	 * @param Elastica_Query_Abstract $query Query object
-	 * @param Elastica_Filter_Abstract $filter Filter object
-	 */
-	public function __construct(Elastica_Query_Abstract $query, Elastica_Filter_Abstract $filter) {
-		$this->setQuery($query);
-		$this->setFilter($filter);
-	}
+    /**
+     * Constructs a filtered query
+     *
+     * @param Elastica_Query_Abstract  $query  Query object
+     * @param Elastica_Filter_Abstract $filter Filter object
+     */
+    public function __construct(Elastica_Query_Abstract $query, Elastica_Filter_Abstract $filter)
+    {
+        $this->setQuery($query);
+        $this->setFilter($filter);
+    }
 
-	/**
-	 * Sets a query
-	 *
-	 * @param Elastica_Query_Abstract $query Query object
-	 * @return Elastica_Query_Filtered Current object
-	 */
-	public function setQuery(Elastica_Query_Abstract $query) {
-		$this->_query = $query;
-		return $this;
-	}
+    /**
+     * Sets a query
+     *
+     * @param  Elastica_Query_Abstract $query Query object
+     * @return Elastica_Query_Filtered Current object
+     */
+    public function setQuery(Elastica_Query_Abstract $query)
+    {
+        $this->_query = $query;
 
-	/**
-	 * Sets the filter
-	 *
-	 * @param Elastica_Filter_Abstract $filter Filter object
-	 * @return Elastica_Query_Filtered Current object
-	 */
-	public function setFilter(Elastica_Filter_Abstract $filter) {
-		$this->_filter = $filter;
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Converts query to array
-	 *
-	 * @return array Query array
-	 * @see Elastica_Query_Abstract::toArray()
-	 */
-	public function toArray() {
-		return array('filtered' => array(
-			'query' => $this->_query->toArray(),
-			'filter' => $this->_filter->toArray()
-		));
-	}
+    /**
+     * Sets the filter
+     *
+     * @param  Elastica_Filter_Abstract $filter Filter object
+     * @return Elastica_Query_Filtered  Current object
+     */
+    public function setFilter(Elastica_Filter_Abstract $filter)
+    {
+        $this->_filter = $filter;
+
+        return $this;
+    }
+
+    /**
+     * Converts query to array
+     *
+     * @return array Query array
+     * @see Elastica_Query_Abstract::toArray()
+     */
+    public function toArray()
+    {
+        return array('filtered' => array(
+            'query' => $this->_query->toArray(),
+            'filter' => $this->_filter->toArray()
+        ));
+    }
 }

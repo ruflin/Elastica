@@ -8,136 +8,149 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Param {
-	/**
-	 * Params
-	 *
-	 * @var array
-	 */
-	protected $_params = array();
+class Elastica_Param
+{
+    /**
+     * Params
+     *
+     * @var array
+     */
+    protected $_params = array();
 
-	/**
-	 * Raw Params
-	 *
-	 * @var array
-	 */
-	protected $_rawParams = array();
+    /**
+     * Raw Params
+     *
+     * @var array
+     */
+    protected $_rawParams = array();
 
-	/**
-	 * Converts the params to an array. A default implementation exist to create
-	 * the an array out of the class name (last part of the class name)
-	 * and the params
-	 *
-	 * @return array Filter array
-	 */
-	public function toArray() {
-		$data = array($this->_getName() => $this->getParams());
+    /**
+     * Converts the params to an array. A default implementation exist to create
+     * the an array out of the class name (last part of the class name)
+     * and the params
+     *
+     * @return array Filter array
+     */
+    public function toArray()
+    {
+        $data = array($this->_getName() => $this->getParams());
 
-		if (!empty($this->_rawParams)) {
-			$data = array_merge($data, $this->_rawParams);
-		}
+        if (!empty($this->_rawParams)) {
+            $data = array_merge($data, $this->_rawParams);
+        }
 
-		return $data;
-	}
+        return $data;
+    }
 
-	/**
-	 * Param's name
-	 * Picks the last part of the class name and makes it snake_case
-	 * You can override this method if you want to change the name
-	 * 
-	 * @return string name
-	 */
-	protected function _getName() {
-		$classNameParts = explode('_', get_class($this));
-		$name = Elastica_Util::toSnakeCase(array_pop($classNameParts));
-		
-		return $name;
-	}
+    /**
+     * Param's name
+     * Picks the last part of the class name and makes it snake_case
+     * You can override this method if you want to change the name
+     *
+     * @return string name
+     */
+    protected function _getName()
+    {
+        $classNameParts = explode('_', get_class($this));
+        $name = Elastica_Util::toSnakeCase(array_pop($classNameParts));
 
-	/**
-	 * Sets params not inside params array
-	 *
-	 * @param string $key
-	 * @param mixed $value
-	 * @return Elastica_Param
-	 */
-	protected function _setRawParam($key, $value) {
-		$this->_rawParams[$key] = $value;
-		return $this;
-	}
+        return $name;
+    }
 
-	/**
-	 * Sets (overwrites) the value at the given key
-	 *
-	 * @param string $key Key to set
-	 * @param mixed $value Key Value
-	 */
-	public function setParam($key, $value) {
-		$this->_params[$key] = $value;
-		return $this;
-	}
+    /**
+     * Sets params not inside params array
+     *
+     * @param  string         $key
+     * @param  mixed          $value
+     * @return Elastica_Param
+     */
+    protected function _setRawParam($key, $value)
+    {
+        $this->_rawParams[$key] = $value;
 
-	/**
-	 * Sets (overwrites) all params of this object
-	 *
-	 * @param array $params Parameter list
-	 * @return Elastica_Param
-	 */
-	public function setParams(array $params) {
-		$this->_params = $params;
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Adds a param to the list
-	 *
-	 * This function can be used to add an array of params
-	 *
-	 * @param string $key Param key
-	 * @param mixed $value Value to set
-	 * @return Elastica_Param
-	 */
-	public function addParam($key, $value) {
-		if (!isset($this->_params[$key])) {
-			$this->_params[$key] = array();
-		}
+    /**
+     * Sets (overwrites) the value at the given key
+     *
+     * @param string $key   Key to set
+     * @param mixed  $value Key Value
+     */
+    public function setParam($key, $value)
+    {
+        $this->_params[$key] = $value;
 
-		$this->_params[$key][] = $value;
+        return $this;
+    }
 
-		return $this;
-	}
+    /**
+     * Sets (overwrites) all params of this object
+     *
+     * @param  array          $params Parameter list
+     * @return Elastica_Param
+     */
+    public function setParams(array $params)
+    {
+        $this->_params = $params;
 
-	/**
-	 * Returns a specific param
-	 *
-	 * @param string $key Key to return
-	 * @return mixed Key value
-	 * @throws Elastica_Exception_Invalid If requested key is not set
-	 */
-	public function getParam($key) {
-		if (!isset($this->_params[$key])) {
-			throw new Elastica_Exception_Invalid('Param ' . $key . ' does not exist');
-		}
+        return $this;
+    }
 
-		return $this->_params[$key];
-	}
+    /**
+     * Adds a param to the list
+     *
+     * This function can be used to add an array of params
+     *
+     * @param  string         $key   Param key
+     * @param  mixed          $value Value to set
+     * @return Elastica_Param
+     */
+    public function addParam($key, $value)
+    {
+        if (!isset($this->_params[$key])) {
+            $this->_params[$key] = array();
+        }
 
-	/**
-	 * Test if a param is set
-	 * 
-	 * @param string $key Key to test
-	 * @return boolean True if the param is set, false otherwise
-	 */
-	public function hasParam($key) {
-		return isset($this->_params[$key]);
-	}
+        $this->_params[$key][] = $value;
 
-	/**
-	 * Returns the params array
-	 *
-	 * @return array Params
-	 */
-	public function getParams() {
-		return $this->_params;
-	}
+        return $this;
+    }
+
+    /**
+     * Returns a specific param
+     *
+     * @param  string                     $key Key to return
+     * @return mixed                      Key value
+     * @throws Elastica_Exception_Invalid If requested key is not set
+     */
+    public function getParam($key)
+    {
+        if (!isset($this->_params[$key])) {
+            throw new Elastica_Exception_Invalid('Param ' . $key . ' does not exist');
+        }
+
+        return $this->_params[$key];
+    }
+
+    /**
+     * Test if a param is set
+     *
+     * @param  string  $key Key to test
+     * @return boolean True if the param is set, false otherwise
+     */
+    public function hasParam($key)
+    {
+        return isset($this->_params[$key]);
+    }
+
+    /**
+     * Returns the params array
+     *
+     * @return array Params
+     */
+    public function getParams()
+    {
+        return $this->_params;
+    }
 }

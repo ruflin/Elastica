@@ -2,26 +2,20 @@
 
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-
 class Elastica_Filter_NotTest extends PHPUnit_Framework_TestCase
 {
-	public function setUp() {
-	}
+    public function testToArray()
+    {
+        $idsFilter = new Elastica_Filter_Ids();
+        $idsFilter->setIds(12);
+        $filter = new Elastica_Filter_Not($idsFilter);
 
-	public function tearDown() {
-	}
+        $expectedArray = array(
+            'not' => array(
+                'filter' => $idsFilter->toArray()
+            )
+        );
 
-	public function testToArray() {
-		$idsFilter = new Elastica_Filter_Ids();
-		$idsFilter->setIds(12);
-		$filter = new Elastica_Filter_Not($idsFilter);
-
-		$expectedArray = array(
-			'not' => array(
-				'filter' => $idsFilter->toArray()
-			)
-		);
-
-		$this->assertEquals($expectedArray, $filter->toArray());
-	}
+        $this->assertEquals($expectedArray, $filter->toArray());
+    }
 }

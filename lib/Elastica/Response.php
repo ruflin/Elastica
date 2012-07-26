@@ -8,192 +8,208 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Response {
-	/**
-	 * Query time
-	 * 
-	 * @var float Query time
-	 */
-	protected $_queryTime = null;
+class Elastica_Response
+{
+    /**
+     * Query time
+     *
+     * @var float Query time
+     */
+    protected $_queryTime = null;
 
-	/**
-	 * Response string (json)
-	 * 
-	 * @var string Response
-	 */
-	protected $_responseString = '';
+    /**
+     * Response string (json)
+     *
+     * @var string Response
+     */
+    protected $_responseString = '';
 
-	/**
-	 * Error
-	 * 
-	 * @var boolean Error
-	 */
-	protected $_error = false;
+    /**
+     * Error
+     *
+     * @var boolean Error
+     */
+    protected $_error = false;
 
-	/**
-	 * Transfer info
-	 * 
-	 * @var array transfer info
-	 */
-	protected $_transferInfo = array();
+    /**
+     * Transfer info
+     *
+     * @var array transfer info
+     */
+    protected $_transferInfo = array();
 
-	/**
-	 * Response
-	 * 
-	 * @var Elastica_Response Response object
-	 */
-	protected $_response = null;
+    /**
+     * Response
+     *
+     * @var Elastica_Response Response object
+     */
+    protected $_response = null;
 
-	/**
-	 * Construct
-	 * 
-	 * @param string $responseString Response string (json)
-	 */
-	public function __construct($responseString) {
-		$this->_responseString = $responseString;
-	}
+    /**
+     * Construct
+     *
+     * @param string $responseString Response string (json)
+     */
+    public function __construct($responseString)
+    {
+        $this->_responseString = $responseString;
+    }
 
-	/**
-	 * Error message
-	 * 
-	 * @return string Error message
-	 */
-	public function getError() {
-		$message = '';
-		$response = $this->getData();
+    /**
+     * Error message
+     *
+     * @return string Error message
+     */
+    public function getError()
+    {
+        $message = '';
+        $response = $this->getData();
 
-		if (isset($response['error'])) {
-			$message = $response['error'];
-		}
-		return $message;
-	}
+        if (isset($response['error'])) {
+            $message = $response['error'];
+        }
 
-	/**
-	 * True if response has error
-	 * 
-	 * @return bool True if response has error
-	 */
-	public function hasError() {
-		$response = $this->getData();
+        return $message;
+    }
 
-		if (isset($response['error'])) {
-			return true;
-		}
-		return false;
-	}
+    /**
+     * True if response has error
+     *
+     * @return bool True if response has error
+     */
+    public function hasError()
+    {
+        $response = $this->getData();
 
-	/**
-	 * Checks if the query returned ok
-	 *
-	 * @return bool True if ok
-	 */
-	public function isOk() {
-		$data = $this->getData();
-		return (isset($data['ok']) && $data['ok']);
-	}
+        if (isset($response['error'])) {
+            return true;
+        }
 
-	/**
-	 * Response data array
-	 * 
-	 * @return array Response data array
-	 */
-	public function getData() {
+        return false;
+    }
 
-		if ($this->_response == null) {
-			$response = $this->_responseString;
-			if ($response === false) {
-				$this->_error = true;
-			} else {
+    /**
+     * Checks if the query returned ok
+     *
+     * @return bool True if ok
+     */
+    public function isOk()
+    {
+        $data = $this->getData();
 
-				$tempResponse = json_decode($response, true);
-				// If error is returned, json_decod makes empty string of string
-				if (!empty($tempResponse)) {
-					$response = $tempResponse;
-				}
-			}
+        return (isset($data['ok']) && $data['ok']);
+    }
 
-			if (empty($response)) {
-				$response = array();
-			}
+    /**
+     * Response data array
+     *
+     * @return array Response data array
+     */
+    public function getData()
+    {
+        if ($this->_response == null) {
+            $response = $this->_responseString;
+            if ($response === false) {
+                $this->_error = true;
+            } else {
 
-			if (is_string($response)) {
-				$response = array('message' => $response);
-			}
+                $tempResponse = json_decode($response, true);
+                // If error is returned, json_decod makes empty string of string
+                if (!empty($tempResponse)) {
+                    $response = $tempResponse;
+                }
+            }
 
-			$this->_response = $response;
-		}
-		return $this->_response;
-	}
+            if (empty($response)) {
+                $response = array();
+            }
 
-	/**
-	 * Gets the transfer information if in DEBUG mode.
-	 *
-	 * @return array Information about the curl request.
-	 */
-	public function getTransferInfo() {
-		return $this->_transferInfo;
-	}
+            if (is_string($response)) {
+                $response = array('message' => $response);
+            }
 
-	/**
-	 * Sets the transfer info of the curl request. This function is called
-	 * from the Elastica_Client::_callService only in debug mode.
-	 *
-	 * @param array $transferInfo The curl transfer information.
-	 * @return Elastica_Response Current object
-	 */
-	public function setTransferInfo(array $transferInfo) {
-		$this->_transferInfo = $transferInfo;
-		return $this;
-	}
+            $this->_response = $response;
+        }
 
-	/**
-	 * This is only available if DEBUG constant is set to true
-	 *
-	 * @return float Query time
-	 */
-	public function getQueryTime() {
-		return $this->_queryTime;
-	}
+        return $this->_response;
+    }
 
-	/**
-	 * Sets the query time
-	 *
-	 * @param float $queryTime Query time
-	 * @return Elastica_Response Current object
-	 */
-	public function setQueryTime($queryTime) {
-		$this->_queryTime = $queryTime;
-		return $this;
-	}
+    /**
+     * Gets the transfer information if in DEBUG mode.
+     *
+     * @return array Information about the curl request.
+     */
+    public function getTransferInfo()
+    {
+        return $this->_transferInfo;
+    }
 
-	/**
-	 * Time request took
-	 * 
-	 * @return int Time request took
-	 */
-	public function getEngineTime() {
-		$data = $this->getData();
+    /**
+     * Sets the transfer info of the curl request. This function is called
+     * from the Elastica_Client::_callService only in debug mode.
+     *
+     * @param  array             $transferInfo The curl transfer information.
+     * @return Elastica_Response Current object
+     */
+    public function setTransferInfo(array $transferInfo)
+    {
+        $this->_transferInfo = $transferInfo;
 
-		if (!isset($data['took'])) {
-			throw new Elastica_Exception_NotFound("Unable to find the field [took]from the response");
-		}
+        return $this;
+    }
 
-		return $data['took'];
-	}
+    /**
+     * This is only available if DEBUG constant is set to true
+     *
+     * @return float Query time
+     */
+    public function getQueryTime()
+    {
+        return $this->_queryTime;
+    }
 
-	/**
-	 * Get the _shard statistics for the response
-	 *
-	 * @return array
-	 */
-	public function getShardsStatistics() {
-		$data = $this->getData();
+    /**
+     * Sets the query time
+     *
+     * @param  float             $queryTime Query time
+     * @return Elastica_Response Current object
+     */
+    public function setQueryTime($queryTime)
+    {
+        $this->_queryTime = $queryTime;
 
-		if (!isset($data['_shards'])) {
-			throw new Elastica_Exception_NotFound("Unable to find the field [_shards] from the response");
-		}
+        return $this;
+    }
 
-		return $data['_shards'];
-	}
+    /**
+     * Time request took
+     *
+     * @return int Time request took
+     */
+    public function getEngineTime()
+    {
+        $data = $this->getData();
 
+        if (!isset($data['took'])) {
+            throw new Elastica_Exception_NotFound("Unable to find the field [took]from the response");
+        }
+
+        return $data['took'];
+    }
+
+    /**
+     * Get the _shard statistics for the response
+     *
+     * @return array
+     */
+    public function getShardsStatistics()
+    {
+        $data = $this->getData();
+
+        if (!isset($data['_shards'])) {
+            throw new Elastica_Exception_NotFound("Unable to find the field [_shards] from the response");
+        }
+
+        return $data['_shards'];
+    }
 }
