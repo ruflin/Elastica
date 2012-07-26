@@ -2,7 +2,7 @@
 
 require_once dirname( __FILE__ ) . '/../../../bootstrap.php';
 
-class Elastica_Facet_TermsTest extends PHPUnit_Framework_TestCase
+class Elastica_Facet_TermsStatsTest extends PHPUnit_Framework_TestCase
 {
 
     public function setUp()
