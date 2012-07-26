@@ -3,106 +3,103 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Query_BoolTest extends PHPUnit_Framework_TestCase
 {
-	public function setUp() {
-	}
+    public function testToArray()
+    {
+        $query = new Elastica_Query_Bool();
 
-	public function tearDown() {
-	}
+        $idsQuery1 = new Elastica_Query_Ids();
+        $idsQuery1->setIds(1);
 
-	public function testToArray() {
-		$query = new Elastica_Query_Bool();
+        $idsQuery2 = new Elastica_Query_Ids();
+        $idsQuery2->setIds(2);
 
-		$idsQuery1 = new Elastica_Query_Ids();
-		$idsQuery1->setIds(1);
+        $idsQuery3 = new Elastica_Query_Ids();
+        $idsQuery3->setIds(3);
 
-		$idsQuery2 = new Elastica_Query_Ids();
-		$idsQuery2->setIds(2);
+        $boost = 1.2;
+        $minMatch = 2;
 
-		$idsQuery3 = new Elastica_Query_Ids();
-		$idsQuery3->setIds(3);
+        $query->setBoost($boost);
+        $query->setMinimumNumberShouldMatch($minMatch);
+        $query->addMust($idsQuery1);
+        $query->addMustNot($idsQuery2);
+        $query->addShould($idsQuery3->toArray());
 
-		$boost = 1.2;
-		$minMatch = 2;
+        $expectedArray = array(
+            'bool' => array(
+                'must' => array($idsQuery1->toArray()),
+                'should' => array($idsQuery3->toArray()),
+                'minimum_number_should_match' => $minMatch,
+                'must_not' => array($idsQuery2->toArray()),
+                'boost' => $boost,
+            )
+        );
 
-		$query->setBoost($boost);
-		$query->setMinimumNumberShouldMatch($minMatch);
-		$query->addMust($idsQuery1);
-		$query->addMustNot($idsQuery2);
-		$query->addShould($idsQuery3->toArray());
+        $this->assertEquals($expectedArray, $query->toArray());
+    }
 
-		$expectedArray = array(
-			'bool' => array(
-				'must' => array($idsQuery1->toArray()),
-				'should' => array($idsQuery3->toArray()),
-				'minimum_number_should_match' => $minMatch,
-				'must_not' => array($idsQuery2->toArray()),
-				'boost' => $boost,
-			)
-		);
+    /**
+     * Test to resolve the following issue
+     *
+     * https://groups.google.com/forum/?fromgroups#!topic/elastica-php-client/zK_W_hClfvU
+     */
+    public function testToArrayStructure()
+    {
+        $boolQuery = new Elastica_Query_Bool();
 
-		$this->assertEquals($expectedArray, $query->toArray());
-	}
+        $term1 = new Elastica_Query_Term();
+        $term1->setParam('interests', 84);
 
-	/**
-	 * Test to resolve the following issue
-	 *
-	 * https://groups.google.com/forum/?fromgroups#!topic/elastica-php-client/zK_W_hClfvU
-	 */
-	public function testToArrayStructure() {
-		$boolQuery = new Elastica_Query_Bool();
+        $term2 = new Elastica_Query_Term();
+        $term2->setParam('interests', 92);
 
-		$term1 = new Elastica_Query_Term();
-		$term1->setParam('interests', 84);
+        $boolQuery->addShould($term1)->addShould($term2);
 
-		$term2 = new Elastica_Query_Term();
-		$term2->setParam('interests', 92);
+        $jsonString = '{"bool":{"should":[{"term":{"interests":84}},{"term":{"interests":92}}]}}';
+        $this->assertEquals($jsonString, json_encode($boolQuery->toArray()));
+    }
 
-		$boolQuery->addShould($term1)->addShould($term2);
+    public function testSearch()
+    {
+        $client = new Elastica_Client();
+        $index = new Elastica_Index($client, 'test');
+        $index->create(array(), true);
 
-		$jsonString = '{"bool":{"should":[{"term":{"interests":84}},{"term":{"interests":92}}]}}';
-		$this->assertEquals($jsonString, json_encode($boolQuery->toArray()));
-	}
+        $type = new Elastica_Type($index, 'helloworld');
 
-	public function testSearch() {
-		$client = new Elastica_Client();
-		$index = new Elastica_Index($client, 'test');
-		$index->create(array(), true);
+        $doc = new Elastica_Document(1, array('id' => 1, 'email' => 'hans@test.com', 'username' => 'hans', 'test' => array('2', '3', '5')));
+        $type->addDocument($doc);
+        $doc = new Elastica_Document(2, array('id' => 2, 'email' => 'emil@test.com', 'username' => 'emil', 'test' => array('1', '3', '6')));
+        $type->addDocument($doc);
+        $doc = new Elastica_Document(3, array('id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth', 'test' => array('2', '3', '7')));
+        $type->addDocument($doc);
 
-		$type = new Elastica_Type($index, 'helloworld');
+        // Refresh index
+        $index->refresh();
 
-		$doc = new Elastica_Document(1, array('id' => 1, 'email' => 'hans@test.com', 'username' => 'hans', 'test' => array('2', '3', '5')));
-		$type->addDocument($doc);
-		$doc = new Elastica_Document(2, array('id' => 2, 'email' => 'emil@test.com', 'username' => 'emil', 'test' => array('1', '3', '6')));
-		$type->addDocument($doc);
-		$doc = new Elastica_Document(3, array('id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth', 'test' => array('2', '3', '7')));
-		$type->addDocument($doc);
+        $boolQuery = new Elastica_Query_Bool();
+        $termQuery1 = new Elastica_Query_Term(array('test' => '2'));
+        $boolQuery->addMust($termQuery1);
+        $resultSet = $type->search($boolQuery);
 
-		// Refresh index
-		$index->refresh();
+        $this->assertEquals(2, $resultSet->count());
 
-		$boolQuery = new Elastica_Query_Bool();
-		$termQuery1 = new Elastica_Query_Term(array('test' => '2'));
-		$boolQuery->addMust($termQuery1);
-		$resultSet = $type->search($boolQuery);
+        $termQuery2 = new Elastica_Query_Term(array('test' => '5'));
+        $boolQuery->addMust($termQuery2);
+        $resultSet = $type->search($boolQuery);
 
-		$this->assertEquals(2, $resultSet->count());
+        $this->assertEquals(1, $resultSet->count());
 
-		$termQuery2 = new Elastica_Query_Term(array('test' => '5'));
-		$boolQuery->addMust($termQuery2);
-		$resultSet = $type->search($boolQuery);
+        $termQuery3 = new Elastica_Query_Term(array('username' => 'hans'));
+        $boolQuery->addMust($termQuery3);
+        $resultSet = $type->search($boolQuery);
 
-		$this->assertEquals(1, $resultSet->count());
+        $this->assertEquals(1, $resultSet->count());
 
-		$termQuery3 = new Elastica_Query_Term(array('username' => 'hans'));
-		$boolQuery->addMust($termQuery3);
-		$resultSet = $type->search($boolQuery);
+        $termQuery4 = new Elastica_Query_Term(array('username' => 'emil'));
+        $boolQuery->addMust($termQuery4);
+        $resultSet = $type->search($boolQuery);
 
-		$this->assertEquals(1, $resultSet->count());
-
-		$termQuery4 = new Elastica_Query_Term(array('username' => 'emil'));
-		$boolQuery->addMust($termQuery4);
-		$resultSet = $type->search($boolQuery);
-
-		$this->assertEquals(0, $resultSet->count());
-	}
+        $this->assertEquals(0, $resultSet->count());
+    }
 }

@@ -3,175 +3,169 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Query_MappingTest extends Elastica_Test
 {
-	public function setUp() {
-	}
+    public function testMappingStoreFields()
+    {
+        $client = new Elastica_Client();
+        $index = $client->getIndex('test');
 
-	public function tearDown() {
-	}
+        $index->create(array(), true);
+        $type = $index->getType('test');
 
-	public function testMappingStoreFields() {
-		$client = new Elastica_Client();
-		$index = $client->getIndex('test');
+        $mapping = new Elastica_Type_Mapping($type,
+            array(
+                'firstname' => array('type' => 'string', 'store' => 'yes'),
+                // default is store => no expected
+                'lastname' => array('type' => 'string'),
+            )
+        );
+        $mapping->disableSource();
 
-		$index->create(array(), true);
-		$type = $index->getType('test');
+        $type->setMapping($mapping);
 
-		$mapping = new Elastica_Type_Mapping($type,
-			array(
-				'firstname' => array('type' => 'string', 'store' => 'yes'),
-				// default is store => no expected
-				'lastname' => array('type' => 'string'),
-			)
-		);
-		$mapping->disableSource();
+        $firstname = 'Nicolas';
+        $doc = new Elastica_Document(1,
+            array(
+                'firstname' => $firstname,
+                'lastname' => 'Ruflin'
+            )
+        );
 
-		$type->setMapping($mapping);
+        $type->addDocument($doc);
 
-		$firstname = 'Nicolas';
-		$doc = new Elastica_Document(1,
-			array(
-				'firstname' => $firstname,
-				'lastname' => 'Ruflin'
-			)
-		);
+        $index->refresh();
+        $queryString = new Elastica_Query_QueryString('ruflin');
+        $query = Elastica_Query::create($queryString);
+        $query->setFields(array('*'));
 
-		$type->addDocument($doc);
+        $resultSet = $type->search($query);
+        $result = $resultSet->current();
+        $fields = $result->getFields();
 
-		$index->refresh();
-		$queryString = new Elastica_Query_QueryString('ruflin');
-		$query = Elastica_Query::create($queryString);
-		$query->setFields(array('*'));
+        $this->assertEquals($firstname, $fields['firstname']);
+        $this->assertArrayNotHasKey('lastname', $fields);
+        $this->assertEquals(1, count($fields));
 
-		$resultSet = $type->search($query);
-		$result = $resultSet->current();
-		$fields = $result->getFields();
+        $index->flush();
+        $document = $type->getDocument(1);
 
-		$this->assertEquals($firstname, $fields['firstname']);
-		$this->assertArrayNotHasKey('lastname', $fields);
-		$this->assertEquals(1, count($fields));
+        $this->assertEmpty($document->getData());
+    }
 
-		$index->flush();
-		$document = $type->getDocument(1);
+    public function testEnableTtl()
+    {
+        $client = new Elastica_Client();
+        $index = $client->getIndex('test');
 
-		$this->assertEmpty($document->getData());
-	}
+        $index->create(array(), true);
+        $type = $index->getType('test');
 
-	public function testEnableTtl() {
-		$client = new Elastica_Client();
-		$index = $client->getIndex('test');
+        $mapping = new Elastica_Type_Mapping($type, array());
 
-		$index->create(array(), true);
-		$type = $index->getType('test');
+        $mapping->enableTtl();
 
-		$mapping = new Elastica_Type_Mapping($type, array());
+        $data = $mapping->toArray();
+        $this->assertTrue($data[$type->getName()]['_ttl']['enabled']);
+    }
 
-		$mapping->enableTtl();
+    public function testNestedMapping()
+    {
+        $client = new Elastica_Client();
+        $index = $client->getIndex('test');
 
-		$data = $mapping->toArray();
-		$this->assertTrue($data[$type->getName()]['_ttl']['enabled']);
-	}
+        $index->create(array(), true);
+        $type = $index->getType('test');
 
-	public function testNestedMapping() {
-		$client = new Elastica_Client();
-		$index = $client->getIndex('test');
+        $this->markTestIncomplete('nested mapping is not set right yet');
+        $mapping = new Elastica_Type_Mapping($type,
+            array(
+                'test' => array(
+                    'type' => 'object', 'store' => 'yes', 'properties' => array(
+                        'user' => array(
+                            'properties' => array(
+                                'firstname' => array('type' => 'string', 'store' => 'yes'),
+                                'lastname' => array('type' => 'string', 'store' => 'yes'),
+                                'age' => array('type' => 'integer', 'store' => 'yes'),
+                            )
+                        ),
+                    ),
+                ),
+            )
+        );
 
-		$index->create(array(), true);
-		$type = $index->getType('test');
+        $type->setMapping($mapping);
 
-		$this->markTestIncomplete('nested mapping is not set right yet');
-		$mapping = new Elastica_Type_Mapping($type,
-			array(
-				'test' => array(
-					'type' => 'object', 'store' => 'yes', 'properties' => array(
-						'user' => array(
-							'properties' => array(
-								'firstname' => array('type' => 'string', 'store' => 'yes'),
-								'lastname' => array('type' => 'string', 'store' => 'yes'),
-								'age' => array('type' => 'integer', 'store' => 'yes'),
-							)
-						),
-					),
-				),
-			)
-		);
+        $doc = new Elastica_Document(1, array(
+            'user' => array(
+                'firstname' => 'Nicolas',
+                'lastname' => 'Ruflin',
+                'age' => 9
+            ),
+        ));
 
-		$type->setMapping($mapping);
+        //print_r($type->getMapping());
+        //exit();
+        $type->addDocument($doc);
 
-		$doc = new Elastica_Document(1, array(
-			'user' => array(
-				'firstname' => 'Nicolas',
-				'lastname' => 'Ruflin',
-				'age' => 9
-			),
-		));
+        $index->refresh();
+        $resultSet = $type->search('ruflin');
+        //print_r($resultSet);
+    }
 
-		//print_r($type->getMapping());
-		//exit();
-		$type->addDocument($doc);
+    public function testParentMapping()
+    {
+        $index = $this->_createIndex();
+        $parenttype = new Elastica_Type($index, 'parenttype');
+        $parentmapping = new Elastica_Type_Mapping($parenttype,
+            array(
+                'name' => array('type' => 'string', 'store' => 'yes')
+            )
+        );
 
-		$index->refresh();
-		$resultSet = $type->search('ruflin');
-		//print_r($resultSet);
-	}
+        $parenttype->setMapping($parentmapping);
 
-	public function testParentMapping() {
-		$index = $this->_createIndex();
-		$parenttype = new Elastica_Type($index, 'parenttype');
-		$parentmapping = new Elastica_Type_Mapping($parenttype,
-			array(
-				'name' => array('type' => 'string', 'store' => 'yes')
-			)
-		);
+        $childtype = new Elastica_Type($index, 'childtype');
+        $childmapping = new Elastica_Type_Mapping($childtype,
+            array(
+                'name' => array('type' => 'string', 'store' => 'yes'),
+            )
+        );
+        $childmapping->setParam('_parent', array('type' => 'parenttype'));
 
-		$parenttype->setMapping($parentmapping);
+        $childtype->setMapping($childmapping);
+    }
 
+    public function testMappingExample()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('notes');
 
-		$childtype = new Elastica_Type($index, 'childtype');
-		$childmapping = new Elastica_Type_Mapping($childtype,
-			array(
-				'name' => array('type' => 'string', 'store' => 'yes'),
-			)
-		);
-		$childmapping->setParam('_parent', array('type' => 'parenttype'));
+        $mapping = new Elastica_Type_Mapping($type,
+            array(
+                'note' => array(
+                    'store' => 'yes', 'properties' => array(
+                        'titulo'  => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0),
+                        'contenido' => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0)
+                    )
+                )
+            )
+        );
 
-		$childtype->setMapping($childmapping);
-	}
+        $type->setMapping($mapping);
 
-	public function testMappingExample() {
+        $doc = new Elastica_Document(1, array(
+                'note' => array(
+                    array(
+                        'titulo'        => 'nota1',
+                        'contenido'        => 'contenido1'
+                    ),
+                    array(
+                        'titulo'        => 'nota2',
+                        'contenido'        => 'contenido2'
+                    )
+                )
+            )
+        );
 
-		$index = $this->_createIndex();
-		$type = $index->getType('notes');
-
-		$mapping = new Elastica_Type_Mapping($type,
-			array(
-				'note' => array(
-					'store' => 'yes', 'properties' => array(
-						'titulo'  => array('type' => 'string', 'store' => 'no', 'include_in_all' => TRUE, 'boost' => 1.0),
-						'contenido' => array('type' => 'string', 'store' => 'no', 'include_in_all' => TRUE, 'boost' => 1.0)
-					)
-				)
-			)
-		);
-
-		$type->setMapping($mapping);
-
-		$doc = new Elastica_Document(1, array(
-				'note' => array(
-					array(
-						'titulo'        => 'nota1',
-						'contenido'        => 'contenido1'
-					),
-					array(
-						'titulo'        => 'nota2',
-						'contenido'        => 'contenido2'
-					)
-				)
-			)
-		);
-
-		$type->addDocument($doc);
-	}
+        $type->addDocument($doc);
+    }
 }
-
-
-

@@ -1,76 +1,80 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
 class Elastica_ClusterTest extends Elastica_Test
 {
 
-	public function testGetNodeNames() {
-		$client = new Elastica_Client();
+    public function testGetNodeNames()
+    {
+        $client = new Elastica_Client();
 
-		$cluster = new Elastica_Cluster($client);
+        $cluster = new Elastica_Cluster($client);
 
-		$names = $cluster->getNodeNames();
+        $names = $cluster->getNodeNames();
 
-		$this->assertInternalType('array', $names);
-		$this->assertGreaterThan(0, count($names));
-	}
+        $this->assertInternalType('array', $names);
+        $this->assertGreaterThan(0, count($names));
+    }
 
-	public function testGetNodes() {
-		$client = new Elastica_Client();
-		$cluster = $client->getCluster();
+    public function testGetNodes()
+    {
+        $client = new Elastica_Client();
+        $cluster = $client->getCluster();
 
-		$nodes = $cluster->getNodes();
+        $nodes = $cluster->getNodes();
 
-		foreach($nodes as $node) {
-			$this->assertInstanceOf('Elastica_Node', $node);
-		}
+        foreach ($nodes as $node) {
+            $this->assertInstanceOf('Elastica_Node', $node);
+        }
 
-		$this->assertGreaterThan(0, count($nodes));
-	}
+        $this->assertGreaterThan(0, count($nodes));
+    }
 
-	public function testGetState() {
-		$client = new Elastica_Client();
-		$cluster = $client->getCluster();
-		$state = $cluster->getState();
-		$this->assertInternalType('array', $state);
-	}
+    public function testGetState()
+    {
+        $client = new Elastica_Client();
+        $cluster = $client->getCluster();
+        $state = $cluster->getState();
+        $this->assertInternalType('array', $state);
+    }
 
-	public function testShutdown() {
-		$this->markTestSkipped('This test shuts down the cluster which means the following tests would not work');
-		$client = new Elastica_Client();
-		$cluster = $client->getCluster();
+    public function testShutdown()
+    {
+        $this->markTestSkipped('This test shuts down the cluster which means the following tests would not work');
+        $client = new Elastica_Client();
+        $cluster = $client->getCluster();
 
-		$cluster->shutdown('2s');
+        $cluster->shutdown('2s');
 
-		sleep(5);
+        sleep(5);
 
-		try {
-			$client->getStatus();
-			$this->fail('Should throw exception because cluster is shut down');
-		} catch(Elastica_Exception_Client $e) {
-			$this->assertTrue(true);
-		}
-	}
+        try {
+            $client->getStatus();
+            $this->fail('Should throw exception because cluster is shut down');
+        } catch (Elastica_Exception_Client $e) {
+            $this->assertTrue(true);
+        }
+    }
 
-	public function testGetIndexNames() {
-		$client = new Elastica_Client();
-		$cluster = $client->getCluster();
+    public function testGetIndexNames()
+    {
+        $client = new Elastica_Client();
+        $cluster = $client->getCluster();
 
-		$indexName = 'elastica_test999';
-		$index = $this->_createIndex($indexName);
-		$index->delete();
-		$cluster->refresh();
+        $indexName = 'elastica_test999';
+        $index = $this->_createIndex($indexName);
+        $index->delete();
+        $cluster->refresh();
 
-		// Checks that index does not exist
-		$indexNames = $cluster->getIndexNames();
-		$this->assertNotContains($index->getName(), $indexNames);
+        // Checks that index does not exist
+        $indexNames = $cluster->getIndexNames();
+        $this->assertNotContains($index->getName(), $indexNames);
 
-		$index = $this->_createIndex($indexName);
-		$cluster->refresh();
+        $index = $this->_createIndex($indexName);
+        $cluster->refresh();
 
-		// Now index should exist
-		$indexNames = $cluster->getIndexNames();
-		$this->assertContains($index->getname(), $indexNames);
-	}
+        // Now index should exist
+        $indexNames = $cluster->getIndexNames();
+        $this->assertContains($index->getname(), $indexNames);
+    }
 }

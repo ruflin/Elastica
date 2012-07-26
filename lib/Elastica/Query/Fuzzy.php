@@ -10,14 +10,15 @@
  */
 class Elastica_Query_Fuzzy extends Elastica_Query_Abstract
 {
-	/**
-	 * Adds field to fuzzy query
-	 *
-	 * @param string $fieldName Field name
-	 * @param array $args Data array
-	 * @return Elastica_Query_Fuzzy Current object
-	 */
-	public function addField($fieldName, array $args) {
-		return $this->setParam($fieldName, $args);
-	}
+    /**
+     * Adds field to fuzzy query
+     *
+     * @param  string               $fieldName Field name
+     * @param  array                $args      Data array
+     * @return Elastica_Query_Fuzzy Current object
+     */
+    public function addField($fieldName, array $args)
+    {
+        return $this->setParam($fieldName, $args);
+    }
 }

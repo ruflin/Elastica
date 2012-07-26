@@ -8,26 +8,30 @@ class Elastica_Query_BuilderTest extends PHPUnit_Framework_TestCase
      */
     private $builder;
 
-	public function setUp() {
+    public function setUp()
+    {
         $this->builder = new Elastica_Query_Builder();
-	}
+    }
 
-	public function tearDown() {
+    public function tearDown()
+    {
         $this->builder = null;
-	}
+    }
 
     /**
      * @covers Elastica_Query_Builder::factory
      * @covers Elastica_Query_Builder::__construct
      */
-    public function testFactory() {
+    public function testFactory()
+    {
         $this->assertInstanceOf(
             'Elastica_Query_Builder',
             Elastica_Query_Builder::factory('some string')
         );
     }
 
-    public function getQueryData() {
+    public function getQueryData()
+    {
         return array(
             array('allowLeadingWildcard', false, '{"allow_leading_wildcard":"false"}'),
             array('allowLeadingWildcard', true, '{"allow_leading_wildcard":"true"}'),
@@ -93,12 +97,14 @@ class Elastica_Query_BuilderTest extends PHPUnit_Framework_TestCase
      * @covers Elastica_Query_Builder::matchAll
      * @covers Elastica_Query_Builder::fields
      */
-    public function testAllowLeadingWildcard($method, $argument, $result) {
+    public function testAllowLeadingWildcard($method, $argument, $result)
+    {
         $this->assertSame($this->builder, $this->builder->$method($argument));
         $this->assertSame($result, (string) $this->builder);
     }
 
-    public function getQueryTypes() {
+    public function getQueryTypes()
+    {
         return array(
             array('bool', 'bool'),
             array('constantScore', 'constant_score'),
@@ -161,7 +167,8 @@ class Elastica_Query_BuilderTest extends PHPUnit_Framework_TestCase
      * @covers Elastica_Query_Builder::wildcard
      * @covers Elastica_Query_Builder::wildcardClose
      */
-    public function testQueryTypes($method, $queryType) {
+    public function testQueryTypes($method, $queryType)
+    {
         $this->assertSame($this->builder, $this->builder->$method()); // open
         $this->assertSame($this->builder, $this->builder->{$method."Close"}()); // close
         $this->assertSame('{"' . $queryType . '":{}}', (string) $this->builder);
@@ -173,7 +180,8 @@ class Elastica_Query_BuilderTest extends PHPUnit_Framework_TestCase
      * @covers Elastica_Query_Builder::open
      * @covers Elastica_Query_Builder::close
      */
-    public function testFieldOpenAndClose() {
+    public function testFieldOpenAndClose()
+    {
         $this->assertSame($this->builder, $this->builder->fieldOpen('someField'));
         $this->assertSame($this->builder, $this->builder->fieldClose());
         $this->assertSame('{"someField":{}}', (string) $this->builder);
@@ -182,7 +190,8 @@ class Elastica_Query_BuilderTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Elastica_Query_Builder::sortField
      */
-    public function testSortField() {
+    public function testSortField()
+    {
         $this->assertSame($this->builder, $this->builder->sortField('name', true));
         $this->assertSame('{"sort":{"name":{"reverse":"true"}}}', (string) $this->builder);
     }
@@ -190,7 +199,8 @@ class Elastica_Query_BuilderTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Elastica_Query_Builder::sortFields
      */
-    public function testSortFields() {
+    public function testSortFields()
+    {
         $this->assertSame($this->builder, $this->builder->sortFields(array('field1' => 'asc', 'field2' => 'desc', 'field3' => 'asc')));
         $this->assertSame('{"sort":[{"field1":"asc"},{"field2":"desc"},{"field3":"asc"}]}', (string) $this->builder);
     }
@@ -198,7 +208,8 @@ class Elastica_Query_BuilderTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Elastica_Query_Builder::queries
      */
-    public function testQueries() {
+    public function testQueries()
+    {
         $queries = array();
 
         $b1 = clone $this->builder;
@@ -211,7 +222,8 @@ class Elastica_Query_BuilderTest extends PHPUnit_Framework_TestCase
         $this->assertSame('{"queries":[{"term":{"age":"34"}},{"term":{"name":"christer"}}]}', (string) $this->builder);
     }
 
-    public function getFieldData() {
+    public function getFieldData()
+    {
         return array(
             array('name', 'value', '{"name":"value"}'),
             array('name', true, '{"name":"true"}'),
@@ -225,7 +237,8 @@ class Elastica_Query_BuilderTest extends PHPUnit_Framework_TestCase
      * @dataProvider getFieldData
      * @covers Elastica_Query_Builder::field
      */
-    public function testField($name, $value, $result) {
+    public function testField($name, $value, $result)
+    {
         $this->assertSame($this->builder, $this->builder->field($name, $value));
         $this->assertSame($result, (string) $this->builder);
     }
@@ -234,7 +247,8 @@ class Elastica_Query_BuilderTest extends PHPUnit_Framework_TestCase
      * @expectedException Elastica_Exception_Invalid
      * @covers Elastica_Query_Builder::toArray
      */
-    public function testToArrayWithInvalidData() {
+    public function testToArrayWithInvalidData()
+    {
         $this->builder->open('foo');
         $this->builder->toArray();
     }
@@ -242,7 +256,8 @@ class Elastica_Query_BuilderTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Elastica_Query_Builder::toArray
      */
-    public function testToArray() {
+    public function testToArray()
+    {
         $this->builder->query()->term()->field('category.id', array(1, 2, 3))->termClose()->queryClose();
         $this->assertEquals(array(
             'query' => array(

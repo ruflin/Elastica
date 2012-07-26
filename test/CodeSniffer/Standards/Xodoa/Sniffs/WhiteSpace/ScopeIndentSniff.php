@@ -33,245 +33,240 @@
 class Xodoa_Sniffs_WhiteSpace_ScopeIndentSniff implements PHP_CodeSniffer_Sniff
 {
 
-	/**
-	 * The number of spaces code should be indented.
-	 *
-	 * @var int
-	 */
-	protected $_indent = 1;
+    /**
+     * The number of spaces code should be indented.
+     *
+     * @var int
+     */
+    protected $_indent = 1;
 
-	/**
-	 * Any scope openers that should not cause an indent.
-	 *
-	 * @var array(int)
-	 */
-	protected $_nonIndentingScopes = array();
+    /**
+     * Any scope openers that should not cause an indent.
+     *
+     * @var array(int)
+     */
+    protected $_nonIndentingScopes = array();
 
+    /**
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return array
+     */
+    public function register()
+    {
+        return PHP_CodeSniffer_Tokens::$scopeOpeners;
 
-	/**
-	 * Returns an array of tokens this test wants to listen for.
-	 *
-	 * @return array
-	 */
-	public function register()
-	{
-		return PHP_CodeSniffer_Tokens::$scopeOpeners;
+    }//end register()
 
-	}//end register()
+    /**
+     * Processes this test, when one of its tokens is encountered.
+     *
+     * @param PHP_CodeSniffer_File $phpcsFile All the tokens found in the document.
+     * @param int                  $stackPtr  The position of the current token in the
+     *                                        stack passed in $tokens.
+     *
+     * @return void
+     */
+    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    {
+        $tokens = $phpcsFile->getTokens();
 
+        // If this is an inline condition (ie. there is no scope opener), then
+        // return, as this is not a new scope.
+        if (isset($tokens[$stackPtr]['scope_opener']) === false) {
+            return;
+        }
 
-	/**
-	 * Processes this test, when one of its tokens is encountered.
-	 *
-	 * @param PHP_CodeSniffer_File $phpcsFile All the tokens found in the document.
-	 * @param int                  $stackPtr  The position of the current token in the
-	 *                                        stack passed in $tokens.
-	 *
-	 * @return void
-	 */
-	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
-	{
-		$tokens = $phpcsFile->getTokens();
+        if ($tokens[$stackPtr]['code'] === T_ELSE) {
+            $next = $phpcsFile->findNext(PHP_CodeSniffer_Tokens::$emptyTokens, ($stackPtr + 1), null, true);
+            // We will handle the T_IF token in another call to process.
+            if ($tokens[$next]['code'] === T_IF) {
+                return;
+            }
+        }
 
-		// If this is an inline condition (ie. there is no scope opener), then
-		// return, as this is not a new scope.
-		if (isset($tokens[$stackPtr]['scope_opener']) === false) {
-			return;
-		}
+        // Find the first token on this line.
+        $firstToken = $stackPtr;
+        for ($i = $stackPtr; $i >= 0; $i--) {
+            // Record the first code token on the line.
+            if (in_array($tokens[$i]['code'], PHP_CodeSniffer_Tokens::$emptyTokens) === false) {
+                $firstToken = $i;
+            }
 
-		if ($tokens[$stackPtr]['code'] === T_ELSE) {
-			$next = $phpcsFile->findNext(PHP_CodeSniffer_Tokens::$emptyTokens, ($stackPtr + 1), null, true);
-			// We will handle the T_IF token in another call to process.
-			if ($tokens[$next]['code'] === T_IF) {
-				return;
-			}
-		}
+            // It's the start of the line, so we've found our first php token.
+            if ($tokens[$i]['column'] === 1) {
+                break;
+            }
+        }
 
-		// Find the first token on this line.
-		$firstToken = $stackPtr;
-		for ($i = $stackPtr; $i >= 0; $i--) {
-			// Record the first code token on the line.
-			if (in_array($tokens[$i]['code'], PHP_CodeSniffer_Tokens::$emptyTokens) === false) {
-				$firstToken = $i;
-			}
+        // Based on the conditions that surround this token, determine the
+        // indent that we expect this current content to be.
+        $expectedIndent = $this->calculateExpectedIndent($tokens, $firstToken);
 
-			// It's the start of the line, so we've found our first php token.
-			if ($tokens[$i]['column'] === 1) {
-				break;
-			}
-		}
+        if ($tokens[$firstToken]['column'] !== $expectedIndent) {
+            $error  = 'Line indented incorrectly; expected ';
+            $error .= ($expectedIndent - 1).' spaces, found ';
+            $error .= ($tokens[$firstToken]['column'] - 1);
+            $phpcsFile->addError($error, $stackPtr);
+        }
 
-		// Based on the conditions that surround this token, determine the
-		// indent that we expect this current content to be.
-		$expectedIndent = $this->calculateExpectedIndent($tokens, $firstToken);
+        $scopeOpener = $tokens[$stackPtr]['scope_opener'];
+        $scopeCloser = $tokens[$stackPtr]['scope_closer'];
 
-		if ($tokens[$firstToken]['column'] !== $expectedIndent) {
-			$error  = 'Line indented incorrectly; expected ';
-			$error .= ($expectedIndent - 1).' spaces, found ';
-			$error .= ($tokens[$firstToken]['column'] - 1);
-			$phpcsFile->addError($error, $stackPtr);
-		}
+        // Some scopes are expected not to have indents.
+        if (in_array($tokens[$firstToken]['code'], $this->_nonIndentingScopes) === false) {
+            $indent = ($expectedIndent + $this->_indent);
+        } else {
+            $indent = $expectedIndent;
+        }
 
-		$scopeOpener = $tokens[$stackPtr]['scope_opener'];
-		$scopeCloser = $tokens[$stackPtr]['scope_closer'];
+        $newline     = false;
+        $commentOpen = false;
+        $inHereDoc   = false;
 
-		// Some scopes are expected not to have indents.
-		if (in_array($tokens[$firstToken]['code'], $this->_nonIndentingScopes) === false) {
-			$indent = ($expectedIndent + $this->_indent);
-		} else {
-			$indent = $expectedIndent;
-		}
+        // Only loop over the content beween the opening and closing brace, not
+        // the braces themselves.
+        for ($i = ($scopeOpener + 1); $i < $scopeCloser; $i++) {
 
-		$newline     = false;
-		$commentOpen = false;
-		$inHereDoc   = false;
+            // If this token is another scope, skip it as it will be handled by
+            // another call to this sniff.
+            if (in_array($tokens[$i]['code'], PHP_CodeSniffer_Tokens::$scopeOpeners) === true) {
+                if (isset($tokens[$i]['scope_opener']) === true) {
+                    $i = $tokens[$i]['scope_closer'];
+                } else {
+                    // If this token does not have a scope_opener indice, then
+                    // it's probably an inline scope, so let's skip to the next
+                    // semicolon. Inline scopes include inline if's, abstract methods etc.
+                    $nextToken = $phpcsFile->findNext(T_SEMICOLON, $i, $scopeCloser);
+                    if ($nextToken !== false) {
+                        $i = $nextToken;
+                    }
+                }
 
-		// Only loop over the content beween the opening and closing brace, not
-		// the braces themselves.
-		for ($i = ($scopeOpener + 1); $i < $scopeCloser; $i++) {
+                continue;
+            }
 
-			// If this token is another scope, skip it as it will be handled by
-			// another call to this sniff.
-			if (in_array($tokens[$i]['code'], PHP_CodeSniffer_Tokens::$scopeOpeners) === true) {
-				if (isset($tokens[$i]['scope_opener']) === true) {
-					$i = $tokens[$i]['scope_closer'];
-				} else {
-					// If this token does not have a scope_opener indice, then
-					// it's probably an inline scope, so let's skip to the next
-					// semicolon. Inline scopes include inline if's, abstract methods etc.
-					$nextToken = $phpcsFile->findNext(T_SEMICOLON, $i, $scopeCloser);
-					if ($nextToken !== false) {
-						$i = $nextToken;
-					}
-				}
+            // If this is a HEREDOC then we need to ignore it as the whitespace
+            // before the contents within the HEREDOC are considered part of the content.
+            if ($tokens[$i]['code'] === T_START_HEREDOC) {
+                $inHereDoc = true;
+                continue;
+            } elseif ($inHereDoc === true) {
+                if ($tokens[$i]['code'] === T_END_HEREDOC) {
+                    $inHereDoc = false;
+                }
 
-				continue;
-			}
+                continue;
+            }
 
-			// If this is a HEREDOC then we need to ignore it as the whitespace
-			// before the contents within the HEREDOC are considered part of the content.
-			if ($tokens[$i]['code'] === T_START_HEREDOC) {
-				$inHereDoc = true;
-				continue;
-			} else if ($inHereDoc === true) {
-				if ($tokens[$i]['code'] === T_END_HEREDOC) {
-					$inHereDoc = false;
-				}
+            if ($tokens[$i]['column'] === 1) {
+                // We started a newline.
+                $newline = true;
+            }
 
-				continue;
-			}
+            if ($newline === true && $tokens[$i]['code'] !== T_WHITESPACE) {
+                // If we started a newline and we find a token that is not
+                // whitespace, then this must be the first token on the line that
+                // must be indented.
+                $newline    = false;
+                $firstToken = $i;
 
-			if ($tokens[$i]['column'] === 1) {
-				// We started a newline.
-				$newline = true;
-			}
+                $column = $tokens[$firstToken]['column'];
 
-			if ($newline === true && $tokens[$i]['code'] !== T_WHITESPACE) {
-				// If we started a newline and we find a token that is not
-				// whitespace, then this must be the first token on the line that
-				// must be indented.
-				$newline    = false;
-				$firstToken = $i;
+                // Special case for non-PHP code.
+                if ($tokens[$firstToken]['code'] === T_INLINE_HTML) {
+                    $trimmedContentLength = strlen(ltrim($tokens[$firstToken]['content']));
+                    if ($trimmedContentLength === 0) {
+                        continue;
+                    }
 
-				$column = $tokens[$firstToken]['column'];
+                    $contentLength = strlen($tokens[$firstToken]['content']);
+                    $column        = ($contentLength - $trimmedContentLength + 1);
+                }
 
-				// Special case for non-PHP code.
-				if ($tokens[$firstToken]['code'] === T_INLINE_HTML) {
-					$trimmedContentLength = strlen(ltrim($tokens[$firstToken]['content']));
-					if ($trimmedContentLength === 0) {
-						continue;
-					}
+                // Check to see if this constant string spans multiple lines.
+                // If so, then make sure that the strings on lines other than the
+                // first line are indented appropriately, based on their whitespace.
+                if (in_array($tokens[$firstToken]['code'], PHP_CodeSniffer_Tokens::$stringTokens) === true) {
+                    if (in_array($tokens[($firstToken - 1)]['code'], PHP_CodeSniffer_Tokens::$stringTokens) === true) {
+                        // If we find a string that directly follows another string
+                        // then its just a string that spans multiple lines, so we
+                        // don't need to check for indenting.
+                        continue;
+                    }
+                }
 
-					$contentLength = strlen($tokens[$firstToken]['content']);
-					$column        = ($contentLength - $trimmedContentLength + 1);
-				}
+                // This is a special condition for T_DOC_COMMENT and c style
+                // comments, which contain whitespace between each line.
+                if (in_array($tokens[$firstToken]['code'], array(T_COMMENT, T_DOC_COMMENT)) === true) {
 
-				// Check to see if this constant string spans multiple lines.
-				// If so, then make sure that the strings on lines other than the
-				// first line are indented appropriately, based on their whitespace.
-				if (in_array($tokens[$firstToken]['code'], PHP_CodeSniffer_Tokens::$stringTokens) === true) {
-					if (in_array($tokens[($firstToken - 1)]['code'], PHP_CodeSniffer_Tokens::$stringTokens) === true) {
-						// If we find a string that directly follows another string
-						// then its just a string that spans multiple lines, so we
-						// don't need to check for indenting.
-						continue;
-					}
-				}
+                    $content = trim($tokens[$firstToken]['content']);
+                    if (preg_match('|^/\*|', $content) !== 0) {
+                        // Check to see if the end of the comment is on the same line
+                        // as the start of the comment. If it is, then we don't
+                        // have to worry about opening a comment.
+                        if (preg_match('|\*/$|', $content) === 0) {
+                            // We don't have to calculate the column for the start
+                            // of the comment as there is a whitespace token before it.
+                            $commentOpen = true;
+                        }
+                    } elseif ($commentOpen === true) {
+                        if ($content === '') {
+                            // We are in a comment, but this line has nothing on it
+                            // so let's skip it.
+                            continue;
+                        }
 
-				// This is a special condition for T_DOC_COMMENT and c style
-				// comments, which contain whitespace between each line.
-				if (in_array($tokens[$firstToken]['code'], array(T_COMMENT, T_DOC_COMMENT)) === true) {
+                        $contentLength        = strlen($tokens[$firstToken]['content']);
+                        $trimmedContentLength = strlen(ltrim($tokens[$firstToken]['content']));
+                        $column               = ($contentLength - $trimmedContentLength + 1);
+                        if (preg_match('|\*/$|', $content) !== 0) {
+                            $commentOpen = false;
+                        }
+                    }//end if
+                }//end if
 
-					$content = trim($tokens[$firstToken]['content']);
-					if (preg_match('|^/\*|', $content) !== 0) {
-						// Check to see if the end of the comment is on the same line
-						// as the start of the comment. If it is, then we don't
-						// have to worry about opening a comment.
-						if (preg_match('|\*/$|', $content) === 0) {
-							// We don't have to calculate the column for the start
-							// of the comment as there is a whitespace token before it.
-							$commentOpen = true;
-						}
-					} else if ($commentOpen === true) {
-						if ($content === '') {
-							// We are in a comment, but this line has nothing on it
-							// so let's skip it.
-							continue;
-						}
+                // The token at the start of the line, needs to have its' column
+                // greater than the relative indent we set above. If it is less,
+                // an error should be shown.
+                if ($column < $indent) {
+                    $error  = 'Line indented incorrectly; expected at least ';
+                    $error .= ($indent - 1).' spaces, found ';
+                    $error .= ($column - 1);
+                    $phpcsFile->addError($error, $firstToken);
+                }
+            }//end if
+        }//end for
 
-						$contentLength        = strlen($tokens[$firstToken]['content']);
-						$trimmedContentLength = strlen(ltrim($tokens[$firstToken]['content']));
-						$column               = ($contentLength - $trimmedContentLength + 1);
-						if (preg_match('|\*/$|', $content) !== 0) {
-							$commentOpen = false;
-						}
-					}//end if
-				}//end if
+    }//end process()
 
-				// The token at the start of the line, needs to have its' column
-				// greater than the relative indent we set above. If it is less,
-				// an error should be shown.
-				if ($column < $indent) {
-					$error  = 'Line indented incorrectly; expected at least ';
-					$error .= ($indent - 1).' spaces, found ';
-					$error .= ($column - 1);
-					$phpcsFile->addError($error, $firstToken);
-				}
-			}//end if
-		}//end for
+    /**
+     * Calculates the expected indent of a token.
+     *
+     * @param array $tokens   The stack of tokens for this file.
+     * @param int   $stackPtr The position of the token to get indent for.
+     *
+     * @return int
+     */
+    protected function calculateExpectedIndent(array $tokens, $stackPtr)
+    {
+        $conditionStack = array();
 
-	}//end process()
+        // Empty conditions array (top level structure).
+        if (empty($tokens[$stackPtr]['conditions']) === true) {
+            return 1;
+        }
 
+        $tokenConditions = $tokens[$stackPtr]['conditions'];
+        foreach ($tokenConditions as $id => $condition) {
+            // If it's an indenting scope ie. it's not in our array of
+            // scopes that don't indent, add it to our condition stack.
+            if (in_array($condition, $this->_nonIndentingScopes) === false) {
+                $conditionStack[$id] = $condition;
+            }
+        }
 
-	/**
-	 * Calculates the expected indent of a token.
-	 *
-	 * @param array $tokens   The stack of tokens for this file.
-	 * @param int   $stackPtr The position of the token to get indent for.
-	 *
-	 * @return int
-	 */
-	protected function calculateExpectedIndent(array $tokens, $stackPtr)
-	{
-		$conditionStack = array();
+        return ((count($conditionStack) * $this->_indent) + 1);
 
-		// Empty conditions array (top level structure).
-		if (empty($tokens[$stackPtr]['conditions']) === true) {
-			return 1;
-		}
-
-		$tokenConditions = $tokens[$stackPtr]['conditions'];
-		foreach ($tokenConditions as $id => $condition) {
-			// If it's an indenting scope ie. it's not in our array of
-			// scopes that don't indent, add it to our condition stack.
-			if (in_array($condition, $this->_nonIndentingScopes) === false) {
-				$conditionStack[$id] = $condition;
-			}
-		}
-
-		return ((count($conditionStack) * $this->_indent) + 1);
-
-	}//end calculateExpectedIndent()
-
-
-}//end class
+    }//end calculateExpectedIndent()
+}

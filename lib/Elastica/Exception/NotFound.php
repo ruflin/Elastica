@@ -6,6 +6,6 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Exception_NotFound extends Elastica_Exception_Abstract {
-
+class Elastica_Exception_NotFound extends Elastica_Exception_Abstract
+{
 }

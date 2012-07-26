@@ -1,82 +1,75 @@
 <?php
 require_once dirname(__FILE__) . '/../../bootstrap.php';
 
-
 class Elastica_ResultTest extends Elastica_Test
 {
-	public function setUp() {
-	}
+    public function testGetters()
+    {
+        // Creates a new index 'xodoa' and a type 'user' inside this index
+        $typeName = 'user';
 
-	public function tearDown() {
-	}
+        $index = $this->_createIndex();
+        $type = $index->getType($typeName);
 
-	public function testGetters() {
-		// Creates a new index 'xodoa' and a type 'user' inside this index
-		$typeName = 'user';
+        // Adds 1 document to the index
+        $docId = 3;
+        $doc1 = new Elastica_Document($docId, array('username' => 'hans'));
+        $type->addDocument($doc1);
 
-		$index = $this->_createIndex();
-		$type = $index->getType($typeName);
+        // Refreshes index
+        $index->refresh();
 
+        $resultSet = $type->search('hans');
 
-		// Adds 1 document to the index
-		$docId = 3;
-		$doc1 = new Elastica_Document($docId, array('username' => 'hans'));
-		$type->addDocument($doc1);
+        $this->assertEquals(1, $resultSet->count());
 
-		// Refreshes index
-		$index->refresh();
+        $result = $resultSet->current();
 
-		$resultSet = $type->search('hans');
+        $this->assertInstanceOf('Elastica_Result', $result);
+        $this->assertEquals($index->getName(), $result->getIndex());
+        $this->assertEquals($typeName, $result->getType());
+        $this->assertEquals($docId, $result->getId());
+        $this->assertGreaterThan(0, $result->getScore());
+        $this->assertInternalType('array', $result->getData());
+    }
 
-		$this->assertEquals(1, $resultSet->count());
+    public function testGetIdNoSource()
+    {
+        // Creates a new index 'xodoa' and a type 'user' inside this index
+        $indexName = 'xodoa';
+        $typeName = 'user';
 
-		$result = $resultSet->current();
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
+        $type = $index->getType($typeName);
 
-		$this->assertInstanceOf('Elastica_Result', $result);
-		$this->assertEquals($index->getName(), $result->getIndex());
-		$this->assertEquals($typeName, $result->getType());
-		$this->assertEquals($docId, $result->getId());
-		$this->assertGreaterThan(0, $result->getScore());
-		$this->assertInternalType('array', $result->getData());
-	}
+        $mapping = new Elastica_Type_Mapping($type);
+        $mapping->disableSource();
+        $mapping->send();
 
-	public function testGetIdNoSource() {
-		// Creates a new index 'xodoa' and a type 'user' inside this index
-		$indexName = 'xodoa';
-		$typeName = 'user';
+        // Adds 1 document to the index
+        $docId = 3;
+        $doc1 = new Elastica_Document($docId, array('username' => 'hans'));
+        $type->addDocument($doc1);
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
-		$type = $index->getType($typeName);
+        // Refreshes index
+        $index->refresh();
 
-		$mapping = new Elastica_Type_Mapping($type);
-		$mapping->disableSource();
-		$mapping->send();
+        $resultSet = $type->search('hans');
 
+        $this->assertEquals(1, $resultSet->count());
 
-		// Adds 1 document to the index
-		$docId = 3;
-		$doc1 = new Elastica_Document($docId, array('username' => 'hans'));
-		$type->addDocument($doc1);
+        $result = $resultSet->current();
 
-		// Refreshes index
-		$index->refresh();
-
-		$resultSet = $type->search('hans');
-
-		$this->assertEquals(1, $resultSet->count());
-
-		$result = $resultSet->current();
-
-		$this->assertEquals(array(), $result->getSource());
-		$this->assertInstanceOf('Elastica_Result', $result);
-		$this->assertEquals($indexName, $result->getIndex());
-		$this->assertEquals($typeName, $result->getType());
-		$this->assertEquals($docId, $result->getId());
-		$this->assertGreaterThan(0, $result->getScore());
-		$this->assertInternalType('array', $result->getData());
-	}
+        $this->assertEquals(array(), $result->getSource());
+        $this->assertInstanceOf('Elastica_Result', $result);
+        $this->assertEquals($indexName, $result->getIndex());
+        $this->assertEquals($typeName, $result->getType());
+        $this->assertEquals($docId, $result->getId());
+        $this->assertGreaterThan(0, $result->getScore());
+        $this->assertInternalType('array', $result->getData());
+    }
 
     public function testGetTotalTimeReturnsExpectedResults()
     {

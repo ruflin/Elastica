@@ -3,61 +3,60 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Index_StatusTest extends PHPUnit_Framework_TestCase
 {
-	public function setUp() { }
+    public function testGetAliases()
+    {
+        $indexName = 'test';
+        $aliasName = 'test-alias';
 
-	public function tearDown() { }
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
 
-	public function testGetAliases() {
-		$indexName = 'test';
-		$aliasName = 'test-alias';
+        $status = new Elastica_Index_Status($index);
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
+        $aliases = $status->getAliases();
 
-		$status = new Elastica_Index_Status($index);
+        $this->assertTrue(empty($aliases));
+        $this->assertInternalType('array', $aliases);
 
-		$aliases = $status->getAliases();
+        $index->addAlias($aliasName);
+        $status->refresh();
 
-		$this->assertTrue(empty($aliases));
-		$this->assertInternalType('array', $aliases);
+        $aliases = $status->getAliases();
 
-		$index->addAlias($aliasName);
-		$status->refresh();
+        $this->assertTrue(in_array($aliasName, $aliases));
+    }
 
-		$aliases = $status->getAliases();
+    public function testHasAlias()
+    {
+        $indexName = 'test';
+        $aliasName = 'test-alias';
 
-		$this->assertTrue(in_array($aliasName, $aliases));
-	}
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
 
-	public function testHasAlias() {
-		$indexName = 'test';
-		$aliasName = 'test-alias';
+        $status = new Elastica_Index_Status($index);
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
+        $this->assertFalse($status->hasAlias($aliasName));
 
-		$status = new Elastica_Index_Status($index);
+        $index->addAlias($aliasName);
+        $status->refresh();
 
-		$this->assertFalse($status->hasAlias($aliasName));
+        $this->assertTrue($status->hasAlias($aliasName));
+    }
 
-		$index->addAlias($aliasName);
-		$status->refresh();
+    public function testGetSettings()
+    {
+        $indexName = 'test';
 
-		$this->assertTrue($status->hasAlias($aliasName));
-	}
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
+        $status = $index->getStatus();
 
-	public function testGetSettings() {
-		$indexName = 'test';
-
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
-		$status = $index->getStatus();
-
-		$settings = $status->getSettings();
-		$this->assertInternalType('array', $settings);
-		$this->assertTrue(isset($settings['index.number_of_shards']));
-	}
+        $settings = $status->getSettings();
+        $this->assertInternalType('array', $settings);
+        $this->assertTrue(isset($settings['index.number_of_shards']));
+    }
 }

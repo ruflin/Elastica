@@ -3,62 +3,58 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Query_TermsTest extends PHPUnit_Framework_TestCase
 {
-	public function setUp() {
-	}
+    public function testFilteredSearch()
+    {
+        $client = new Elastica_Client();
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
+        $type = $index->getType('helloworld');
 
-	public function tearDown() {
-	}
+        $doc = new Elastica_Document(1, array('name' => 'hello world'));
+        $type->addDocument($doc);
+        $doc = new Elastica_Document(2, array('name' => 'nicolas ruflin'));
+        $type->addDocument($doc);
+        $doc = new Elastica_Document(3, array('name' => 'ruflin'));
+        $type->addDocument($doc);
 
-	public function testFilteredSearch() {
-		$client = new Elastica_Client();
-		$index = $client->getIndex('test');
-		$index->create(array(), true);
-		$type = $index->getType('helloworld');
+        $query = new Elastica_Query_Terms();
+        $query->setTerms('name', array('nicolas', 'hello'));
 
-		$doc = new Elastica_Document(1, array('name' => 'hello world'));
-		$type->addDocument($doc);
-		$doc = new Elastica_Document(2, array('name' => 'nicolas ruflin'));
-		$type->addDocument($doc);
-		$doc = new Elastica_Document(3, array('name' => 'ruflin'));
-		$type->addDocument($doc);
+        $index->refresh();
 
+        $resultSet = $type->search($query);
 
-		$query = new Elastica_Query_Terms();
-		$query->setTerms('name', array('nicolas', 'hello'));
+        $this->assertEquals(2, $resultSet->count());
 
-		$index->refresh();
+        $query->addTerm('ruflin');
+        $resultSet = $type->search($query);
 
-		$resultSet = $type->search($query);
+        $this->assertEquals(3, $resultSet->count());
+    }
 
-		$this->assertEquals(2, $resultSet->count());
+    public function testSetMinimum()
+    {
+        $key = 'name';
+        $terms = array('nicolas', 'ruflin');
+        $minimum = 2;
 
-		$query->addTerm('ruflin');
-		$resultSet = $type->search($query);
+        $query = new Elastica_Query_Terms($key, $terms);
+        $query->setMinimumMatch($minimum);
 
-		$this->assertEquals(3, $resultSet->count());
-	}
+        $data = $query->toArray();
+        $this->assertEquals($minimum, $data['terms']['minimum_match']);
+    }
 
-	public function testSetMinimum() {
-		$key = 'name';
-		$terms = array('nicolas', 'ruflin');
-		$minimum = 2;
+    public function testInvalidParams()
+    {
+        $query = new Elastica_Query_Terms();
 
-		$query = new Elastica_Query_Terms($key, $terms);
-		$query->setMinimumMatch($minimum);
+        try {
+            $query->toArray();
+            $this->fail('Should throw exception because no key');
+        } catch (Elastica_Exception_Invalid $e) {
+            $this->assertTrue(true);
+        }
 
-		$data = $query->toArray();
-		$this->assertEquals($minimum, $data['terms']['minimum_match']);
-	}
-
-	public function testInvalidParams() {
-		$query = new Elastica_Query_Terms();
-
-		try {
-			$query->toArray();
-			$this->fail('Should throw exception because no key');
-		} catch (Elastica_Exception_Invalid $e) {
-			$this->assertTrue(true);
-		}
-
-	}
+    }
 }

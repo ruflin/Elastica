@@ -3,91 +3,90 @@ require_once dirname(__FILE__) . '/../../bootstrap.php';
 
 class Elastica_StatusTest extends Elastica_Test
 {
-	public function setUp() {
+    public function testGetResponse()
+    {
+        $index = $this->_createIndex();
+        $status = new Elastica_Status($index->getClient());
+        $this->assertInstanceOf('Elastica_Response', $status->getResponse());
+    }
 
-	}
+    public function testGetIndexStatuses()
+    {
+        $index = $this->_createIndex();
 
-	public function tearDown() {
-	}
+        $status = new Elastica_Status($index->getClient());
+        $statuses = $status->getIndexStatuses();
 
-	public function testGetResponse() {
-		$index = $this->_createIndex();
-		$status = new Elastica_Status($index->getClient());
-		$this->assertInstanceOf('Elastica_Response', $status->getResponse());
-	}
+        $this->assertInternalType('array', $statuses);
 
-	public function testGetIndexStatuses() {
-		$index = $this->_createIndex();
+        foreach ($statuses as $indexStatus) {
+            $this->assertInstanceOf('Elastica_Index_Status', $indexStatus);
+        }
+    }
 
-		$status = new Elastica_Status($index->getClient());
-		$statuses = $status->getIndexStatuses();
+    public function testGetIndexNames()
+    {
+        $indexName = 'test';
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
+        $index = $this->_createIndex();
 
-		$this->assertInternalType('array', $statuses);
+        $status = new Elastica_Status($index->getClient());
+        $names = $status->getIndexNames();
 
-		foreach($statuses as $indexStatus) {
-			$this->assertInstanceOf('Elastica_Index_Status', $indexStatus);
-		}
-	}
+        $this->assertInternalType('array', $names);
+        $this->assertTrue(in_array($index->getName(), $names));
 
-	public function testGetIndexNames() {
-		$indexName = 'test';
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
-		$index->create(array(), true);
-		$index = $this->_createIndex();
+        foreach ($names as $name) {
+            $this->assertInternalType('string', $name);
+        }
+    }
 
-		$status = new Elastica_Status($index->getClient());
-		$names = $status->getIndexNames();
+    public function testIndexExists()
+    {
+        $indexName = 'elastica_test';
+        $aliasName = 'elastica_test-alias';
 
-		$this->assertInternalType('array', $names);
-		$this->assertTrue(in_array($index->getName(), $names));
+        $client = new Elastica_Client();
+        $index = $client->getIndex($indexName);
 
-		foreach($names as $name) {
-			$this->assertInternalType('string', $name);
-		}
-	}
+        try {
+            // Make sure index is deleted first
+            $index->delete();
+        } catch (Elastica_Exception_Response $e) {
+        }
 
-	public function testIndexExists() {
-		$indexName = 'elastica_test';
-		$aliasName = 'elastica_test-alias';
+        $status = new Elastica_Status($client);
+        $this->assertFalse($status->indexExists($indexName));
+        $index->create();
 
-		$client = new Elastica_Client();
-		$index = $client->getIndex($indexName);
+        $status->refresh();
+        $this->assertTrue($status->indexExists($indexName));
+    }
 
-		try {
-			// Make sure index is deleted first
-			$index->delete();
-		} catch(Elastica_Exception_Response $e) { }
+    public function testAliasExists()
+    {
+        $indexName = 'test';
+        $aliasName = 'elastica_test-alias';
 
-		$status = new Elastica_Status($client);
-		$this->assertFalse($status->indexExists($indexName));
-		$index->create();
+        $index1 = $this->_createIndex();
 
-		$status->refresh();
-		$this->assertTrue($status->indexExists($indexName));
-	}
+        $status = new Elastica_Status($index1->getClient());
 
-	public function testAliasExists() {
-		$indexName = 'test';
-		$aliasName = 'elastica_test-alias';
+        foreach ($status->getIndicesWithAlias($aliasName) as $tmpIndex) {
+            $tmpIndex->removeAlias($aliasName);
+        }
 
-		$index1 = $this->_createIndex();
+        $this->assertFalse($status->aliasExists($aliasName));
 
-		$status = new Elastica_Status($index1->getClient());
+        $index1->addAlias($aliasName);
+        $status->refresh();
+        $this->assertTrue($status->aliasExists($aliasName));
+    }
 
-		foreach($status->getIndicesWithAlias($aliasName) as $tmpIndex) {
-			$tmpIndex->removeAlias($aliasName);
-		}
-
-		$this->assertFalse($status->aliasExists($aliasName));
-
-		$index1->addAlias($aliasName);
-		$status->refresh();
-		$this->assertTrue($status->aliasExists($aliasName));
-	}
-
-    public function testServerStatus() {
-
+    public function testServerStatus()
+    {
         $client = new Elastica_Client();
         $status = $client->getStatus();
         $serverStatus = $status->getServerStatus();
@@ -101,6 +100,4 @@ class Elastica_StatusTest extends Elastica_Test
         $versionInfo = $serverStatus['version'];
         $this->assertArrayHasKey('number', $versionInfo);
     }
-
-
 }
