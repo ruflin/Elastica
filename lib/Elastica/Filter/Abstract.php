@@ -39,8 +39,8 @@ abstract class Elastica_Filter_Abstract extends Elastica_Param
 
     /**
      * Sets the filter name
-     * 
-     * @param string $name Name
+     *
+     * @param  string                   $name Name
      * @return Elastica_Filter_Abstract
      */
     public function setName($name)
