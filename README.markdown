@@ -37,6 +37,4 @@ Contributing
 ------------
 Help is very welcomed, but code contributions must be done in respect of [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md).
 
-To facilitate this, you can use [php-cs-fixer](https://github.com/fabpot/PHP-CS-Fixer) by running `php-cs-fixer fix --level=all /path/to/project`.
-
-`--level=all` is used even though it is not part of a standard simply because we like the code to be consistent.
+See [Coding guidelines](https://github.com/ruflin/Elastica/wiki/Coding-guidelines) for tips on how to do so.
