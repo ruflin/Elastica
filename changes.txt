@@ -1,5 +1,8 @@
 CHANGES
 
+2012-07-26
+- Change Elastica_Filter_GeoDistance::__construct(), accepts geohash parameter (BC break, before: ($key, $latitude, $longitude, $distance), after: ($key, $location, $distance) where $location is array('lat' => $latitude, 'lon' => $longitude) or a geohash)
+
 2012-07-17
 - Changed naming for several methods to camelCase
 - Enforced PSR1 code style, as per https://github.com/pmjones/fig-standards/blob/psr-1-style-guide/proposed/PSR-1-basic.md
