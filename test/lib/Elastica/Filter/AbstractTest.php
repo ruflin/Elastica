@@ -49,6 +49,17 @@ class Elastica_Filter_AbstractTest extends PHPUnit_Framework_TestCase
         $stubFilter->setCacheKey($cacheKey);
     }
 
+    public function testSetName()
+    {
+        $stubFilter = $this->getStub();
+
+        $name = 'myFilter';
+
+        $stubFilter->setName($name);
+        $arrayFilter = current($stubFilter->toArray());
+        $this->assertEquals($name, $arrayFilter['_name']);
+    }
+
     private function getStub()
     {
         return $this->getMockForAbstractClass('Elastica_Filter_Abstract');
