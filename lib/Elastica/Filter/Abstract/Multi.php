@@ -51,7 +51,7 @@ abstract class Elastica_Filter_Abstract_Multi extends Elastica_Filter_Abstract
     public function toArray()
     {
         $data = parent::toArray();
-        $name = $this->_getName();
+        $name = $this->_getBaseName();
         $filterData = $data[$name];
 
         if (empty($filterData)) {

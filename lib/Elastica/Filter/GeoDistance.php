@@ -210,7 +210,7 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
         $data = parent::toArray();
 
         // Add location to data array
-        $filterName = $this->_getName();
+        $filterName = $this->_getBaseName();
         $filterData = $data[$filterName];
 
         if ($this->_locationType === 'latlon') { // Latitude/longitude
