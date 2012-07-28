@@ -33,7 +33,7 @@ class Elastica_Param
      */
     public function toArray()
     {
-        $data = array($this->_getName() => $this->getParams());
+        $data = array($this->_getBaseName() => $this->getParams());
 
         if (!empty($this->_rawParams)) {
             $data = array_merge($data, $this->_rawParams);
@@ -49,7 +49,7 @@ class Elastica_Param
      *
      * @return string name
      */
-    protected function _getName()
+    protected function _getBaseName()
     {
         $classNameParts = explode('_', get_class($this));
         $name = Elastica_Util::toSnakeCase(array_pop($classNameParts));

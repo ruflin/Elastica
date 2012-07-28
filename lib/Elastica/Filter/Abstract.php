@@ -36,4 +36,15 @@ abstract class Elastica_Filter_Abstract extends Elastica_Param
 
         return $this->setParam('_cache_key', (string) $cacheKey);
     }
+
+    /**
+     * Sets the filter name
+     *
+     * @param  string                   $name Name
+     * @return Elastica_Filter_Abstract
+     */
+    public function setName($name)
+    {
+        return $this->setParam('_name', $name);
+    }
 }

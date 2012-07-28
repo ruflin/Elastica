@@ -51,12 +51,12 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract
     }
 
     /**
-     * @see Elastica_Param::_getName()
+     * @see Elastica_Param::_getBaseName()
      */
-    protected function _getName()
+    protected function _getBaseName()
     {
         if (empty($this->_params)) {
-            return parent::_getName();
+            return parent::_getBaseName();
         } else {
             return 'fquery';
         }
@@ -69,7 +69,7 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract
     {
         $data = parent::toArray();
 
-        $name = $this->_getName();
+        $name = $this->_getBaseName();
         $filterData = $data[$name];
 
         if (empty($filterData)) {
