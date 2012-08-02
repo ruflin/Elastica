@@ -224,6 +224,11 @@ class Elastica_Client
                 $indexInfo['percolate'] = $percolate;
             }
 
+            $routing = $doc->getRouting();
+            if (!is_null($routing)) {
+                $indexInfo['_routing'] = $routing;
+            }
+
             $params[] = array('index' => $indexInfo);
             $params[] = $doc->getData();
         }

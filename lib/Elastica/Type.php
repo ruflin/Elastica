@@ -68,6 +68,10 @@ class Elastica_Type implements Elastica_Searchable
             $query['percolate'] = $doc->getPercolate();
         }
 
+        if (!is_null($doc->getRouting())) {
+            $query['routing'] = $doc->getRouting();
+        }
+
         $type = Elastica_Request::PUT;
 
         // If id is empty, POST has to be used to automatically create id

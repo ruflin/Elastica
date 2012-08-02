@@ -65,6 +65,13 @@ class Elastica_Document
     protected $_percolate = '';
 
     /**
+     * Routing
+     *
+     * @var string Routing
+     */
+    protected $_routing = null;
+
+    /**
      * Creates a new document
      *
      * @param int    $id    OPTIONAL $id Id is create if empty
@@ -354,6 +361,29 @@ class Elastica_Document
     }
 
     /**
+     * Set routing query param
+     *
+     * @param  string            $value routing
+     * @return Elastica_Document
+     */
+    public function setRouting($value)
+    {
+        $this->_routing = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get routing parameter
+     *
+     * @return string
+     */
+    public function getRouting()
+    {
+        return $this->_routing;
+    }
+
+    /**
      * Returns the document as an array
      * @return array
      */
@@ -381,6 +411,11 @@ class Elastica_Document
         $parent = $this->getParent();
         if (!is_null($parent)) {
             $doc['_parent'] = $parent;
+        }
+        
+        $routing = $this->getRouting();
+        if (!is_null($routing)) {
+            $doc['_routing'] = $routing;
         }
 
         $doc['_source'] = $this->getData();
