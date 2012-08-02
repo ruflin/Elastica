@@ -289,7 +289,7 @@ $elasticaType->getIndex()->refresh();</pre>
 					</p>
 <pre class="prettyprint">
 // Define a Query. We want a string query.
-$elasticaQueryString 	= new Elastica_Query_String();
+$elasticaQueryString 	= new Elastica_Query_QueryString();
 $elasticaQueryString->setDefaultOperator('AND');
 $elasticaQueryString->setQuery('sesam street');
 
