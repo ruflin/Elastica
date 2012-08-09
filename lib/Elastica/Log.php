@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Elastica log object
  *
