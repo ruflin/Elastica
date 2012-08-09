@@ -7,7 +7,7 @@
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/
+ * @link http://www.elasticsearch.org/guide/reference/api/search/
  */
 class Elastica_Query extends Elastica_Param
 {

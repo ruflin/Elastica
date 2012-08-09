@@ -6,6 +6,7 @@
  * @category Xodoa
  * @package Elastica
  * @author Tom Michaelis <tom.michaelis@gmail.com>
+ * @link http://www.elasticsearch.org/guide/reference/api/search/facets/terms-stats-facet.html
  */
 class Elastica_Facet_TermsStats extends Elastica_Facet_Abstract
 {
