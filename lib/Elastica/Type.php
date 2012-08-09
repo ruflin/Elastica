@@ -4,9 +4,7 @@
  *
  * elasticsearch has for every types as a substructure. This object
  * represents a type inside a context
- * The hirarchie is as following: client -> index -> type -> document
- *
- * Search over different indices and types is not supported yet {@link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/indices_types/}
+ * The hierarchy is as following: client -> index -> type -> document
  *
  * @category Xodoa
  * @package  Elastica

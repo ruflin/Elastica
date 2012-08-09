@@ -7,7 +7,7 @@
  * @category Xodoa
  * @package Elastica
  * @author Michael Maclean <mgdm@php.net>
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/geo_bounding_box_filter/
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-polygon-filter.html
  */
 class Elastica_Filter_GeoPolygon extends Elastica_Filter_Abstract
 {
