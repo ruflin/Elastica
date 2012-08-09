@@ -6,7 +6,7 @@
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/range_query/
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/range-query.html
  */
 class Elastica_Query_Range extends Elastica_Query_Abstract
 {
