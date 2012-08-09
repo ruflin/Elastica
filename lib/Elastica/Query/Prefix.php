@@ -5,6 +5,7 @@
  * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/prefix-query.html
  */
 class Elastica_Query_Prefix extends Elastica_Query_Abstract
 {
