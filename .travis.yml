@@ -1,5 +1,9 @@
 language: php
 
+php:
+  - 5.3
+  - 5.4
+
 before_script:
   - ./test/bin/install_php_memcache.sh
   - ./test/bin/run_elasticsearch.sh
