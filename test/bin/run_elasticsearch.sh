@@ -6,6 +6,7 @@ sed 's/# index.number_of_shards: 1/index.number_of_shards: 2/' elasticsearch-0.1
 sed 's/# index.number_of_replicas: 0/index.number_of_replicas: 0/' elasticsearch-0.19.3/config/elasticsearch.yml > elasticsearch-0.19.3/config/elasticsearch.yml
 sed 's/# discovery.zen.ping.multicast.enabled: false/discovery.zen.ping.multicast.enabled: false/' elasticsearch-0.19.3/config/elasticsearch.yml > elasticsearch-0.19.3/config/elasticsearch.yml
 elasticsearch-0.19.3/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/1.4.0
+elasticsearch-0.19.3/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/1.2.0
 
 export JAVA_OPTS="-server"
 elasticsearch-0.19.3/bin/elasticsearch &
