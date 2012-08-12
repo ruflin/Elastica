@@ -7,7 +7,7 @@
  * @category Xodoa
  * @package Elastica
  * @author Fabian Vogler <fabian@equivalence.ch>
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/geo_bounding_box_filter/
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-bounding-box-filter.html
  */
 class Elastica_Filter_GeoBoundingBox extends Elastica_Filter_Abstract
 {

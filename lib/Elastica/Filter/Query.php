@@ -7,6 +7,7 @@
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/query-filter.html
  */
 class Elastica_Filter_Query extends Elastica_Filter_Abstract
 {

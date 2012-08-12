@@ -6,7 +6,7 @@
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/query_dsl/term_query/
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/term-filter.html
  */
 class Elastica_Filter_Term extends Elastica_Filter_Abstract
 {

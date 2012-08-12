@@ -6,3 +6,4 @@ cache.properties
 /nbproject
 build
 atlassian-ide-plugin.xml
+.settings
