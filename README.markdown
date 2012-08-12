@@ -5,7 +5,7 @@ Elastica: elasticsearch PHP Client
 
 Documentation
 ---------------------
-Check out the [Elastica documentation](http://ruflin.github.com/Elastica/) to find out how Elastica works. If you have questions, don't hesitate to ask them in the [Elastica google group](https://groups.google.com/group/elastica-php-client). Issues should go to the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
+Check out the [Elastica documentation](http://Elastica.io/) to find out how Elastica works. If you have questions, don't hesitate to ask them in the [Elastica google group](https://groups.google.com/group/elastica-php-client). Issues should go to the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
 
 About
 ---------------------
