@@ -1,6 +1,7 @@
 CHANGES
 
 2012-08-11
+- Release v0.19.8.0
 - Elastica_Query_Prefix added
 
 2012-07-26
