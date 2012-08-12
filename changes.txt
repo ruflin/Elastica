@@ -1,5 +1,8 @@
 CHANGES
 
+2012-08-11
+- Elastica_Query_Prefix added
+
 2012-07-26
 - Change Elastica_Filter_GeoDistance::__construct(), accepts geohash parameter (BC break, before: ($key, $latitude, $longitude, $distance), after: ($key, $location, $distance) where $location is array('lat' => $latitude, 'lon' => $longitude) or a geohash)
 
