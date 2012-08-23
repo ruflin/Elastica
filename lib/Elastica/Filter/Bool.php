@@ -105,18 +105,18 @@ class Elastica_Filter_Bool extends Elastica_Filter_Abstract
         $args = array();
 
         if (!empty($this->_must)) {
-            $args['must'] = $this->_must;
+            $args['bool']['must'] = $this->_must;
         }
 
         if (!empty($this->_should)) {
-            $args['should'] = $this->_should;
+            $args['bool']['should'] = $this->_should;
         }
 
         if (!empty($this->_mustNot)) {
-            $args['must_not'] = $this->_mustNot;
+            $args['bool']['must_not'] = $this->_mustNot;
         }
 
-        return array('bool' => $args);
+        return $args;
     }
 
     /**
