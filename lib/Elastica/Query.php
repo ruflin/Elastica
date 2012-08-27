@@ -161,7 +161,7 @@ class Elastica_Query extends Elastica_Param
      *
      * @param  mixed          $highlight Add highlight argument
      * @return Elastica_Query Query object
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/highlighting/
+     * @link http://www.elasticsearch.org/guide/reference/api/search/highlighting.html
      */
     public function addHighlight($highlight)
     {
@@ -197,7 +197,7 @@ class Elastica_Query extends Elastica_Param
      *
      * @param  bool           $explain OPTIONAL Enabled or disable explain (default = true)
      * @return Elastica_Query Current object
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/explain/
+     * @link http://www.elasticsearch.org/guide/reference/api/search/explain.html
      */
     public function setExplain($explain = true)
     {
@@ -209,7 +209,7 @@ class Elastica_Query extends Elastica_Param
      *
      * @param  bool           $version OPTIONAL Enabled or disable version (default = true)
      * @return Elastica_Query Current object
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/version/
+     * @link http://www.elasticsearch.org/guide/reference/api/search/version.html
      */
     public function setVersion($version = true)
     {
@@ -221,7 +221,7 @@ class Elastica_Query extends Elastica_Param
      *
      * @param  array          $fields Fields to be returne
      * @return Elastica_Query Current object
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/fields/
+     * @link http://www.elasticsearch.org/guide/reference/api/search/fields.html
      */
     public function setFields(array $fields)
     {
@@ -233,7 +233,7 @@ class Elastica_Query extends Elastica_Param
      *
      * @param  array|Elastica_ScriptFields $scriptFields Script fields
      * @return Elastica_Query              Current object
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/script_fields/
+     * @link http://www.elasticsearch.org/guide/reference/api/search/script-fields.html
      */
     public function setScriptFields($scriptFields)
     {
@@ -262,7 +262,7 @@ class Elastica_Query extends Elastica_Param
      *
      * @param  array          $facets List of facet objects
      * @return Elastica_Query Query object
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/search/facets
+     * @link http://www.elasticsearch.org/guide/reference/api/search/facets/
      */
     public function setFacets(array $facets)
     {
