@@ -7,7 +7,10 @@
  * @author Mikhail Shamin <munk13@gmail.com>
  */
 
-$GLOBALS['THRIFT_ROOT'] = __DIR__ . '/../../../thrift';
+if (!isset($GLOBALS['THRIFT_ROOT'])) {
+    $GLOBALS['THRIFT_ROOT'] = realpath(dirname(__FILE__) . '/../../../thrift');
+}
+
 include_once $GLOBALS['THRIFT_ROOT'].'/Thrift.php';
 include_once $GLOBALS['THRIFT_ROOT'].'/transport/TSocket.php';
 include_once $GLOBALS['THRIFT_ROOT'].'/protocol/TBinaryProtocol.php';
@@ -30,7 +33,7 @@ class Elastica_Transport_Thrift extends Elastica_Transport_Abstract
      */
     protected function _createClient($host, $port, $sendTimeout = null, $recvTimeout = null, $framedTransport = false)
     {
-        $socket = new TSocket($host, $port);
+        $socket = new TSocket($host, $port, true);
 
         if (null !== $sendTimeout) {
             $socket->setSendTimeout($sendTimeout);
@@ -41,7 +44,7 @@ class Elastica_Transport_Thrift extends Elastica_Transport_Abstract
         }
 
         if ($framedTransport) {
-            $transport = new TFramedTransport($socket, true, true);
+            $transport = new TFramedTransport($socket);
         } else {
             $transport = new TBufferedTransport($socket, 1024, 1024);
         }
@@ -105,10 +108,15 @@ class Elastica_Transport_Thrift extends Elastica_Transport_Abstract
 
         $start = microtime(true);
         /* @var $result Elasticsearch_RestResponse */
-        $result = $client->execute($restRequest);
-        $end = microtime(true);
+        try {
+            $result = $client->execute($restRequest);
+            $response = new Elastica_Response($result->body);
+        } catch (TException $e) {
+            $response = new Elastica_Response('');
+            throw new Elastica_Exception_Transport($e, $request, $response);
+        }
 
-        $response = new Elastica_Response($result->body);
+        $end = microtime(true);
 
         if (defined('DEBUG') && DEBUG) {
             $response->setQueryTime($end - $start);
