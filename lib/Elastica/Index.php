@@ -101,7 +101,8 @@ class Elastica_Index implements Elastica_Searchable
      * Uses _bulk to send documents to the server
      *
      * @param array $docs Array of Elastica_Document
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     * @return Elastica_Response
      */
     public function addDocuments(array $docs)
     {
