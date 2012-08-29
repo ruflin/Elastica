@@ -51,7 +51,7 @@ class Elastica_ClusterTest extends Elastica_Test
         try {
             $client->getStatus();
             $this->fail('Should throw exception because cluster is shut down');
-        } catch (Elastica_Exception_Client $e) {
+        } catch (Elastica_Exception_Transport $e) {
             $this->assertTrue(true);
         }
     }

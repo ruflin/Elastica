@@ -29,6 +29,8 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
      *
      * @param  array             $params Host, Port, ...
      * @return Elastica_Response Response object
+     * @throws Elastica_Exception_Transport_Http
+     * @throws Elastica_Exception_Response
      */
     public function exec(array $params)
     {
@@ -114,7 +116,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
         }
 
         if ($errorNumber > 0) {
-            throw new Elastica_Exception_Client($errorNumber, $request, $response);
+            throw new Elastica_Exception_Transport_Http($errorNumber, $request, $response);
         }
 
         return $response;

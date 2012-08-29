@@ -25,7 +25,7 @@ class Elastica_Exception_Transport extends Elastica_Exception_Abstract
     /**
      * Construct Exception
      *
-     * @param string            $error    Error
+     * @param string            $message    Error
      * @param Elastica_Request  $request
      * @param Elastica_Response $response
      */

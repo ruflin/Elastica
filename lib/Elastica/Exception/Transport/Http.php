@@ -6,7 +6,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Exception_Client extends Elastica_Exception_Abstract
+class Elastica_Exception_Transport_Http extends Elastica_Exception_Transport
 {
     /**
      * Error code / message
@@ -39,11 +39,9 @@ class Elastica_Exception_Client extends Elastica_Exception_Abstract
     public function __construct($error, Elastica_Request $request = null, Elastica_Response $response = null)
     {
         $this->_error = $error;
-        $this->_request = $request;
-        $this->_response = $response;
 
         $message = $this->getErrorMessage($this->getError());
-        parent::__construct($message);
+        parent::__construct($message, $request, $response);
     }
 
     /**
@@ -93,25 +91,5 @@ class Elastica_Exception_Client extends Elastica_Exception_Abstract
     public function getError()
     {
         return $this->_error;
-    }
-
-    /**
-     * Returns request object
-     *
-     * @return Elastica_Transport_Abstract Request object
-     */
-    public function getRequest()
-    {
-        return $this->_request;
-    }
-
-    /**
-     * Returns response object
-     *
-     * @return Elastica_Response Response object
-     */
-    public function getResponse()
-    {
-        return $this->_response;
     }
 }
