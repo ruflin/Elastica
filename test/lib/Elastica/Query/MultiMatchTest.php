@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-class Elastica_Query_MultiMatchTest
+class Elastica_Query_MultiMatchTest extends PHPUnit_Framework_TestCase
 {
    public function testQuery()
     {
