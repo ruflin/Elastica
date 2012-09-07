@@ -44,6 +44,13 @@ class Elastica_Document
     protected $_version = '';
 
     /**
+     * Document version type
+     *
+     * @var string Version_type
+     */
+    protected $_version_type = '';
+
+    /**
      * Parent document id
      *
      * @var string|int Parent document id
@@ -283,6 +290,33 @@ class Elastica_Document
     }
 
     /**
+     * Returns document version type
+     *
+     * @return string|int Document version type
+     */
+    public function getVersionType()
+    {
+        return $this->_version_type;
+    }
+
+    /**
+     * Sets the _version_type of a document
+     * Default in ES is internal, but you can set to external to use custom versioning
+     *
+     * @param  int               $version Document version
+     * @return Elastica_Document Current object
+     * @link http://www.elasticsearch.org/guide/reference/api/index_.html
+     */
+    public function setVersionType($version_type)
+    {
+        if ($version_type !== '') {
+            $this->_version_type = $version_type;
+        }
+
+        return $this;
+    }
+
+    /**
      * Returns document version
      *
      * @return string|int Document version
@@ -406,6 +440,11 @@ class Elastica_Document
         $version = $this->getVersion();
         if (!empty($version)) {
             $doc['_version'] = $version;
+        }
+
+        $version_type = $this->getVersionType();
+        if (!empty($version_type)) {
+            $doc['_version_type'] = $version_type;
         }
 
         $parent = $this->getParent();

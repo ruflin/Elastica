@@ -56,6 +56,10 @@ class Elastica_Type implements Elastica_Searchable
             $query['version'] = $doc->getVersion();
         }
 
+        if ($doc->getVersionType() !== '') {
+            $query['version_type'] = $doc->getVersionType();
+        }
+
         if (!is_null($doc->getParent())) {
             $query['parent'] = $doc->getParent();
         }
