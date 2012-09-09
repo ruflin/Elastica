@@ -41,7 +41,7 @@ class Elastica_Query_MultiMatch extends Elastica_Query_Abstract
      * @param boolean                        $useDisMax
      * @return Elastica_Query_MultiMatch Current object
      */
-    public function SetUseDisMax($useDisMax = true)
+    public function setUseDisMax($useDisMax = true)
     {
         return $this->setParam('use_dis_max', $useDisMax);
     }
@@ -54,7 +54,7 @@ class Elastica_Query_MultiMatch extends Elastica_Query_Abstract
      * @param float $                        tieBreaker
      * @return Elastica_Query_MultiMatch Current object
      */
-    public function SetTieBreaker($tieBreaker = 0.0)
+    public function setTieBreaker($tieBreaker = 0.0)
     {
         return $this->setParam('tie_breaker', $tieBreaker);
     }
