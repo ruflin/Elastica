@@ -13,8 +13,14 @@ class Elastica_Query_MatchAllTest extends Elastica_Test
     }
 
 	public function testMatchAllIndicesTypes() {
+
 		$index1 = $this->_createIndex('test1');
-		$index2 = $this->_createIndex('test1');
+		$index2 = $this->_createIndex('test2');
+		
+		$client = $index1->getClient();
+		
+		$search1 = new Elastica_Search($client);
+		$resultSet1 = $search1->search(new Elastica_Query_MatchAll());
 
 		$doc = new Elastica_Document(1, array('name' => 'ruflin'));
 		$index1->getType('test')->addDocument($doc);
@@ -23,9 +29,9 @@ class Elastica_Query_MatchAllTest extends Elastica_Test
 		$index1->refresh();
 		$index2->refresh();
 
-		$search = new Elastica_Search($index1->getClient());
-		$resultSet = $search->search(new Elastica_Query_MatchAll());
+		$search2 = new Elastica_Search($client);
+		$resultSet2 = $search2->search(new Elastica_Query_MatchAll());
 
-		$this->assertEquals(2, $resultSet->count());
+		$this->assertEquals($resultSet1->getTotalHits() + 2, $resultSet2->getTotalHits());
 	}
 }
