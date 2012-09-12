@@ -9,8 +9,7 @@ class Elastica_Filter_TermsTest extends Elastica_Test
         $query = new Elastica_Filter_Term();
         $key = 'name';
         $value = 'ruflin';
-        $boost = 3;
-        $query->setTerm($key, $value, $boost);
+        $query->setTerm($key, $value);
 
         $data = $query->toArray();
 
