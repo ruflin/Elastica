@@ -143,7 +143,7 @@ class Elastica_SearchTest extends Elastica_Test
         $type2 = $index1->getType('type2');
 
         // No index
-        $this->assertEquals('_all/_search', $search1->getPath());
+        $this->assertEquals('/_search', $search1->getPath());
 
         // Only index
         $search1->addIndex($index1);
