@@ -307,10 +307,10 @@ class Elastica_Document
      * @return Elastica_Document Current object
      * @link http://www.elasticsearch.org/guide/reference/api/index_.html
      */
-    public function setVersionType($version_type)
+    public function setVersionType($versionType)
     {
-        if ($version_type !== '') {
-            $this->_version_type = $version_type;
+        if ($versionType !== '') {
+            $this->_version_type = $versionType;
         }
 
         return $this;
@@ -442,9 +442,9 @@ class Elastica_Document
             $doc['_version'] = $version;
         }
 
-        $version_type = $this->getVersionType();
-        if (!empty($version_type)) {
-            $doc['_version_type'] = $version_type;
+        $versionType = $this->getVersionType();
+        if (!empty($versionType)) {
+            $doc['_version_type'] = $versionType;
         }
 
         $parent = $this->getParent();

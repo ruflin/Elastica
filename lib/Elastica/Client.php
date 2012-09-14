@@ -214,9 +214,9 @@ class Elastica_Client
                 $indexInfo['_version'] = $version;
             }
 
-            $version_type = $doc->getVersionType();
-            if (!empty($version_type)) {
-                $indexInfo['_version_type'] = $version_type;
+            $versionType = $doc->getVersionType();
+            if (!empty($versionType)) {
+                $indexInfo['_version_type'] = $versionType;
             }
 
             $parent = $doc->getParent();
