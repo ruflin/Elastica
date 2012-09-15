@@ -1,0 +1,6 @@
+[2012-09-05 00:44:21,964][INFO ][discovery.zen            ] [Ghost Dancer] master_left [[Black Fox][m0ugDVieTP2e0ZBh889CMg][inet[/172.28.1.201:9300]]], reason [failed to ping, tried [3] times, each with  maximum [30s] timeout]
+[2012-09-05 00:44:21,966][INFO ][cluster.service          ] [Ghost Dancer] master {new [Ghost Dancer][o2TRyDo3Q2iivbmY7AYr6Q][inet[/172.28.1.201:9301]], previous [Black Fox][m0ugDVieTP2e0ZBh889CMg][inet[/172.28.1.201:9300]]}, removed {[Black Fox][m0ugDVieTP2e0ZBh889CMg][inet[/172.28.1.201:9300]],}, reason: zen-disco-master_failed ([Black Fox][m0ugDVieTP2e0ZBh889CMg][inet[/172.28.1.201:9300]])
+[2012-09-05 01:05:36,013][INFO ][node                     ] [Ghost Dancer] {0.19.9}[8909]: stopping ...
+[2012-09-05 01:05:36,139][INFO ][node                     ] [Ghost Dancer] {0.19.9}[8909]: stopped
+[2012-09-05 01:05:36,140][INFO ][node                     ] [Ghost Dancer] {0.19.9}[8909]: closing ...
+[2012-09-05 01:05:36,148][INFO ][node                     ] [Ghost Dancer] {0.19.9}[8909]: closed

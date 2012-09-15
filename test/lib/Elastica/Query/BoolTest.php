@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-class Elastica_Query_BoolTest extends PHPUnit_Framework_TestCase
+class Elastica_Query_BoolTest
 {
     public function testToArray()
     {
@@ -82,6 +82,11 @@ class Elastica_Query_BoolTest extends PHPUnit_Framework_TestCase
         $boolQuery->addMust($termQuery1);
         $resultSet = $type->search($boolQuery);
 
+echo '<pre>';
+	print_r($resultSet);
+echo '</pre>';
+exit;
+
         $this->assertEquals(2, $resultSet->count());
 
         $termQuery2 = new Elastica_Query_Term(array('test' => '5'));
@@ -103,3 +108,7 @@ class Elastica_Query_BoolTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, $resultSet->count());
     }
 }
+
+
+$queryBool = new Elastica_Query_BoolTest();
+$queryBool->testSearch();
