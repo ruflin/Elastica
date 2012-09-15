@@ -18,7 +18,7 @@ class Elastica_IndexTest extends Elastica_Test
         $type->addDocument($doc);
         $index->optimize();
 
-        $storedMapping = $type->getMapping('test');
+        $storedMapping = $type->getMapping();
 
         $this->assertEquals($storedMapping['test']['properties']['id']['type'], 'integer');
         $this->assertEquals($storedMapping['test']['properties']['id']['store'], 'yes');

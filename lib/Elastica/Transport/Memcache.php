@@ -59,11 +59,6 @@ class Elastica_Transport_Memcache extends Elastica_Transport_Abstract
 
         $response = new Elastica_Response($responseString);
 
-        if (defined('DEBUG') && DEBUG) {
-            $response->setQueryTime($end - $start);
-            $response->setTransferInfo(curl_getinfo($conn));
-        }
-
         if ($response->hasError()) {
             throw new Elastica_Exception_Response($response);
         }
