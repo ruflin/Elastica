@@ -214,6 +214,11 @@ class Elastica_Client
                 $indexInfo['_version'] = $version;
             }
 
+            $versionType = $doc->getVersionType();
+            if (!empty($versionType)) {
+                $indexInfo['_version_type'] = $versionType;
+            }
+
             $parent = $doc->getParent();
             if (!is_null($parent)) {
                 $indexInfo['_parent'] = $parent;
@@ -222,6 +227,11 @@ class Elastica_Client
             $percolate = $doc->getPercolate();
             if (!empty($percolate)) {
                 $indexInfo['percolate'] = $percolate;
+            }
+
+            $routing = $doc->getRouting();
+            if (!is_null($routing)) {
+                $indexInfo['_routing'] = $routing;
             }
 
             $params[] = array('index' => $indexInfo);
