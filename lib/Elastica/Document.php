@@ -48,7 +48,7 @@ class Elastica_Document
      *
      * @var string Version_type
      */
-    protected $_version_type = '';
+    protected $_versionType = '';
 
     /**
      * Parent document id
@@ -290,17 +290,17 @@ class Elastica_Document
     }
 
     /**
-     * Returns document version type
+     * Returns document version
      *
-     * @return string|int Document version type
+     * @return string|int Document version
      */
-    public function getVersionType()
+    public function getVersion()
     {
-        return $this->_version_type;
+        return $this->_version;
     }
 
     /**
-     * Sets the _version_type of a document
+     * Sets the version_type of a document
      * Default in ES is internal, but you can set to external to use custom versioning
      *
      * @param  int               $version Document version
@@ -310,20 +310,20 @@ class Elastica_Document
     public function setVersionType($versionType)
     {
         if ($versionType !== '') {
-            $this->_version_type = $versionType;
+            $this->_versionType = $versionType;
         }
 
         return $this;
     }
 
     /**
-     * Returns document version
+     * Returns document version type
      *
-     * @return string|int Document version
+     * @return string|int Document version type
      */
-    public function getVersion()
+    public function getVersionType()
     {
-        return $this->_version;
+        return $this->_versionType;
     }
 
     /**
