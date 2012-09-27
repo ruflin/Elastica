@@ -15,6 +15,7 @@ class Elastica_Response
      *
      * @param string|array $responseData A json response string or response data array.
      * @return Elastica_Response
+     * @throws Elastica_Exception_Invalid If the response is empty.
      */
     public static function create($responseData)
     {
@@ -29,6 +30,10 @@ class Elastica_Response
             if (!is_array($response)) {
                 $response = array('message' => $response);
             }
+        }
+
+        if (empty($response)) {
+            throw new Elastica_Exception_Invalid('Response is data is invalid.');
         }
 
         return new self($response);
@@ -177,7 +182,7 @@ class Elastica_Response
         $data = $this->getData();
 
         if (!isset($data['took'])) {
-            throw new Elastica_Exception_NotFound("Unable to find the field [took]from the response");
+            throw new Elastica_Exception_NotFound("Unable to find the field [took] from the response");
         }
 
         return $data['took'];
