@@ -11,25 +11,35 @@
 class Elastica_Response
 {
     /**
+     * Creates an Elastica_Response object from response data.
+     *
+     * @param string|array $responseData A json response string or response data array.
+     * @return Elastica_Response
+     */
+    public static function create($responseData)
+    {
+        $response = array();
+
+        if (is_array($responseData)) {
+            $response = $responseData;
+        }
+        elseif (is_string($responseData)) {
+            $response = json_decode($responseData, true);
+
+            if (!is_array($response)) {
+                $response = array('message' => $response);
+            }
+        }
+
+        return new self($response);
+    }
+
+    /**
      * Query time
      *
      * @var float Query time
      */
     protected $_queryTime = null;
-
-    /**
-     * Response string (json)
-     *
-     * @var string Response
-     */
-    protected $_responseString = '';
-
-    /**
-     * Error
-     *
-     * @var boolean Error
-     */
-    protected $_error = false;
 
     /**
      * Transfer info
@@ -39,20 +49,20 @@ class Elastica_Response
     protected $_transferInfo = array();
 
     /**
-     * Response
+     * Response data
      *
-     * @var Elastica_Response Response object
+     * @var array
      */
-    protected $_response = null;
+    protected $_response = array();
 
     /**
      * Construct
      *
-     * @param string $responseString Response string (json)
+     * @param array $response Response data
      */
-    public function __construct($responseString)
+    public function __construct($response = array())
     {
-        $this->_responseString = $responseString;
+        $this->_response = $response;
     }
 
     /**
@@ -107,31 +117,7 @@ class Elastica_Response
      */
     public function getData()
     {
-        if ($this->_response == null) {
-            $response = $this->_responseString;
-            if ($response === false) {
-                $this->_error = true;
-            } else {
-
-                $tempResponse = json_decode($response, true);
-                // If error is returned, json_decod makes empty string of string
-                if (!empty($tempResponse)) {
-                    $response = $tempResponse;
-                }
-            }
-
-            if (empty($response)) {
-                $response = array();
-            }
-
-            if (is_string($response)) {
-                $response = array('message' => $response);
-            }
-
-            $this->_response = $response;
-        }
-
-        return $this->_response;
+       return $this->_response;
     }
 
     /**
