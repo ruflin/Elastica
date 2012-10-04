@@ -25,6 +25,13 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
     protected $_likeText   = '';
 
     /**
+     * Ignore term frequency
+     *
+     * @var boolean ignore term frequency
+     */
+    protected $_ignoreTF = false;
+
+    /**
      * Max query terms value
      *
      * @var int Max query terms value
@@ -75,6 +82,19 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
     {
         $text = trim($text);
         $this->_likeText = $text;
+
+        return $this;
+    }
+
+    /**
+     * Set the "ignore_tf" value (ignore term frequency)
+     *
+     * @param  bool                         $ignoreTF
+     * @return Elastica_Query_FuzzyLikeThis Current object
+     */
+    public function setIgnoreTF($ignoreTF)
+    {
+        $this->_ignoreTF = (bool) $ignoreTF;
 
         return $this;
     }
@@ -155,6 +175,7 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
         $args['min_similarity'] = ($this->_minSimilarity > 0) ? $this->_minSimilarity : 0;
 
         $args['prefix_length']   = $this->_prefixLength;
+        $args['ignore_tf'] = $this->_ignoreTF;
         $args['max_query_terms'] = $this->_maxQueryTerms;
 
         return array('fuzzy_like_this' => $args);
