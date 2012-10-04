@@ -64,14 +64,14 @@ class Elastica_ClusterTest extends Elastica_Test
         $indexName = 'elastica_test999';
         $index = $this->_createIndex($indexName);
         $index->delete();
-        $cluster->refresh();
+        $cluster->refreshState();
 
         // Checks that index does not exist
         $indexNames = $cluster->getIndexNames();
         $this->assertNotContains($index->getName(), $indexNames);
 
         $index = $this->_createIndex($indexName);
-        $cluster->refresh();
+        $cluster->refreshState();
 
         // Now index should exist
         $indexNames = $cluster->getIndexNames();
