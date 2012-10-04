@@ -71,6 +71,31 @@ class Elastica_Query_FuzzyLikeThisTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(trim($text), $data['fuzzy_like_this']['like_text']);
     }
 
+    public function testSetIgnoreTF()
+    {
+        $query = new Elastica_Query_FuzzyLikeThis();
+
+        $ignoreTF = false;
+        $query->setIgnoreTF($ignoreTF);
+        $data = $query->toArray();
+        $this->assertEquals($ignoreTF, $data['fuzzy_like_this']['ignore_tf']);
+
+        $ignoreTF = true;
+        $query->setIgnoreTF($ignoreTF);
+        $data = $query->toArray();
+        $this->assertEquals($ignoreTF, $data['fuzzy_like_this']['ignore_tf']);
+    }
+
+    public function testSetIgnoreTFDefault()
+    {
+        $query = new Elastica_Query_FuzzyLikeThis();
+
+        $data = $query->toArray();
+
+        $defaultIgnoreTF = false;
+        $this->assertEquals($defaultIgnoreTF, $data['fuzzy_like_this']['ignore_tf']);
+    }
+
     public function testSetMinSimilarity()
     {
         $query = new Elastica_Query_FuzzyLikeThis();
