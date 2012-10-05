@@ -22,4 +22,9 @@ class Elastica_Cluster_HealthTest extends Elastica_Test
     {
         $this->assertEquals('green', $this->_health->getStatus());
     }
+
+    public function testGetTimedOut()
+    {
+        $this->assertFalse($this->_health->getTimedOut());
+    }
 }
