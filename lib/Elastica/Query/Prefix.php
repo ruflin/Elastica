@@ -23,7 +23,7 @@ class Elastica_Query_Prefix extends Elastica_Query_Abstract
      * setRawPrefix can be used instead of setPrefix if some more special
      * values for a prefix have to be set.
      *
-     * @param  array               $prefix Prefix array
+     * @param  array                 $prefix Prefix array
      * @return Elastica_Query_Prefix Current object
      */
     public function setRawPrefix(array $prefix)
@@ -34,9 +34,9 @@ class Elastica_Query_Prefix extends Elastica_Query_Abstract
     /**
      * Adds a prefix to the prefix query
      *
-     * @param  string              $key   Key to query
-     * @param  string|array        $value Values(s) for the query. Boost can be set with array
-     * @param  float               $boost OPTIONAL Boost value (default = 1.0)
+     * @param  string                $key   Key to query
+     * @param  string|array          $value Values(s) for the query. Boost can be set with array
+     * @param  float                 $boost OPTIONAL Boost value (default = 1.0)
      * @return Elastica_Query_Prefix Current object
      */
     public function setPrefix($key, $value, $boost = 1.0)

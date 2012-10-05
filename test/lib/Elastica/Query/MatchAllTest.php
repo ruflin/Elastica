@@ -12,26 +12,26 @@ class Elastica_Query_MatchAllTest extends Elastica_Test
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
-	public function testMatchAllIndicesTypes() {
+    public function testMatchAllIndicesTypes()
+    {
+        $index1 = $this->_createIndex('test1');
+        $index2 = $this->_createIndex('test2');
 
-		$index1 = $this->_createIndex('test1');
-		$index2 = $this->_createIndex('test2');
-		
-		$client = $index1->getClient();
-		
-		$search1 = new Elastica_Search($client);
-		$resultSet1 = $search1->search(new Elastica_Query_MatchAll());
+        $client = $index1->getClient();
 
-		$doc = new Elastica_Document(1, array('name' => 'ruflin'));
-		$index1->getType('test')->addDocument($doc);
-		$index2->getType('test')->addDocument($doc);
+        $search1 = new Elastica_Search($client);
+        $resultSet1 = $search1->search(new Elastica_Query_MatchAll());
 
-		$index1->refresh();
-		$index2->refresh();
+        $doc = new Elastica_Document(1, array('name' => 'ruflin'));
+        $index1->getType('test')->addDocument($doc);
+        $index2->getType('test')->addDocument($doc);
 
-		$search2 = new Elastica_Search($client);
-		$resultSet2 = $search2->search(new Elastica_Query_MatchAll());
+        $index1->refresh();
+        $index2->refresh();
 
-		$this->assertEquals($resultSet1->getTotalHits() + 2, $resultSet2->getTotalHits());
-	}
+        $search2 = new Elastica_Search($client);
+        $resultSet2 = $search2->search(new Elastica_Query_MatchAll());
+
+        $this->assertEquals($resultSet1->getTotalHits() + 2, $resultSet2->getTotalHits());
+    }
 }
