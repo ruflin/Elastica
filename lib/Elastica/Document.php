@@ -451,7 +451,7 @@ class Elastica_Document
         if (!is_null($parent)) {
             $doc['_parent'] = $parent;
         }
-        
+
         $routing = $this->getRouting();
         if (!is_null($routing)) {
             $doc['_routing'] = $routing;
