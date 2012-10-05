@@ -20,6 +20,6 @@ class Elastica_Cluster_HealthTest extends Elastica_Test
 
     public function testGetStatus()
     {
-        $this->_assertEquals('green', $this->_health->getStatus());
+        $this->assertEquals('green', $this->_health->getStatus());
     }
 }
