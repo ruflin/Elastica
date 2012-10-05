@@ -70,5 +70,15 @@ class Elastica_Cluster_Health
     {
         return $this->_healthData['status'];
     }
+
+    /**
+     * TODO determine the purpose of this.
+     * 
+     * @return bool
+     */
+    public function getTimedOut()
+    {
+        return $this->_healthData['timed_out'];
+    }
 }
 
