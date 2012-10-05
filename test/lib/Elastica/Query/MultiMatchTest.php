@@ -31,7 +31,7 @@ class Elastica_Query_MultiMatchTest extends Elastica_Test
         $multiMatch->setFields(array('name', 'last_name'));
         $query->setQuery($multiMatch);
         $resultSet = $index->search($query);
-        
+
         $this->assertEquals(1, $resultSet->count());
     }
 }

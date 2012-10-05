@@ -14,7 +14,7 @@ class Elastica_Query_MultiMatch extends Elastica_Query_Abstract
     /**
      * Sets the query
      *
-     * @param  string                       $query Query
+     * @param  string                     $query Query
      * @return Elastica_Query_QueryString Current object
      */
     public function setQuery($query = '')
@@ -38,7 +38,7 @@ class Elastica_Query_MultiMatch extends Elastica_Query_Abstract
      *
      * If not set, defaults to true.
      *
-     * @param boolean                        $useDisMax
+     * @param  boolean                   $useDisMax
      * @return Elastica_Query_MultiMatch Current object
      */
     public function setUseDisMax($useDisMax = true)

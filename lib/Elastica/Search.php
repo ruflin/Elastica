@@ -168,9 +168,9 @@ class Elastica_Search
         $types = $this->getTypes();
 
         if (empty($indices)) {
-			if (!empty($types)) {
-            	$path .= '_all';
-			}
+            if (!empty($types)) {
+                $path .= '_all';
+            }
         } else {
             $path .= implode(',', $indices);
         }
