@@ -17,15 +17,11 @@ class Elastica_Cluster_Health
     protected $_client = null;
 
     /**
-     * Gets the health data.
+     * The cluster health data.
      *
-     * @return array
+     * @var array
      */
-    private function _getHealthData()
-    {
-        $response = $this->_client->request('_cluster/health', Elastica_Request::GET);
-        return $response->getData();
-    }
+    protected $_healthData = null;
 
     /**
      * @param Elastica_Client $client The Elastica client.
@@ -33,6 +29,26 @@ class Elastica_Cluster_Health
     public function __construct(Elastica_Client $client)
     {
         $this->_client = $client;
+        $this->refresh();
+    }
+
+    /**
+     * Gets the health data.
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->_healthData;
+    }
+
+    /**
+     * Refreshes the health data for the cluster.
+     */
+    public function refresh()
+    {
+        $response = $this->_client->request('_cluster/health', Elastica_Request::GET);
+        $this->_healthData = $response->getData();
     }
 
     /**
@@ -42,8 +58,7 @@ class Elastica_Cluster_Health
      */
     public function getClusterName()
     {
-        $health = $this->_getHealthData();
-        return $health['cluster_name'];
+        return $this->_healthData['cluster_name'];
     }
 
     /**
@@ -53,8 +68,7 @@ class Elastica_Cluster_Health
      */
     public function getStatus()
     {
-        $health = $this->_getHealthData();
-        return $health['status'];
+        return $this->_healthData['status'];
     }
 }
 
