@@ -47,7 +47,8 @@ class Elastica_Cluster_Health
      */
     public function refresh()
     {
-        $response = $this->_client->request('_cluster/health', Elastica_Request::GET);
+        $path = '_cluster/health?level=shards';
+        $response = $this->_client->request($path, Elastica_Request::GET);
         $this->_healthData = $response->getData();
     }
 
@@ -149,6 +150,21 @@ class Elastica_Cluster_Health
     public function getUnassignedShards()
     {
         return $this->_healthData['unassigned_shards'];
+    }
+
+    /**
+     * Gets the status of the indices.
+     *
+     * @return array Array of Elastica_Cluster_Health_Index objects.
+     */
+    public function getIndices()
+    {
+        $indices = array();
+        foreach ($this->_healthData['indices'] as $indexName => $index) {
+            $indices[] = new Elastica_Cluster_Health_Index($indexName, $index);
+        }
+
+        return $indices;
     }
 }
 

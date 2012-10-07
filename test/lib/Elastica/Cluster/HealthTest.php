@@ -62,4 +62,18 @@ class Elastica_Cluster_HealthTest extends Elastica_Test
     {
         $this->assertInternalType('int', $this->_health->getUnassignedShards());
     }
+
+    public function testGetIndices()
+    {
+        $this->_createIndex();
+
+        $indices = $this->_health->getIndices();
+
+        $this->assertInternalType('array', $indices);
+        $this->assertNotEmpty($indices);
+
+        foreach ($indices as $index) {
+            $this->assertInstanceOf('Elastica_Cluster_Health_Index', $index);
+        }
+    }
 }
