@@ -73,12 +73,82 @@ class Elastica_Cluster_Health
 
     /**
      * TODO determine the purpose of this.
-     * 
+     *
      * @return bool
      */
     public function getTimedOut()
     {
         return $this->_healthData['timed_out'];
+    }
+
+    /**
+     * Gets the number of nodes in the cluster.
+     *
+     * @return int
+     */
+    public function getNumberOfNodes()
+    {
+        return $this->_healthData['number_of_nodes'];
+    }
+
+    /**
+     * Gets the number of data nodes in the cluster.
+     *
+     * @return int
+     */
+    public function getNumberOfDataNodes()
+    {
+        return $this->_healthData['number_of_data_nodes'];
+    }
+
+    /**
+     * Gets the number of active primary shards.
+     *
+     * @return int
+     */
+    public function getActivePrimaryShards()
+    {
+        return $this->_healthData['active_primary_shards'];
+    }
+
+    /**
+     * Gets the number of active shards.
+     *
+     * @return int
+     */
+    public function getActiveShards()
+    {
+        return $this->_healthData['active_shards'];
+    }
+
+    /**
+     * Gets the number of relocating shards.
+     *
+     * @return int
+     */
+    public function getRelocatingShards()
+    {
+        return $this->_healthData['relocating_shards'];
+    }
+
+    /**
+     * Gets the number of initializing shards.
+     *
+     * @return int
+     */
+    public function getInitializingShards()
+    {
+        return $this->_healthData['initializing_shards'];
+    }
+
+    /**
+     * Gets the number of unassigned shards.
+     *
+     * @return int
+     */
+    public function getUnassignedShards()
+    {
+        return $this->_healthData['unassigned_shards'];
     }
 }
 

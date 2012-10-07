@@ -27,4 +27,39 @@ class Elastica_Cluster_HealthTest extends Elastica_Test
     {
         $this->assertFalse($this->_health->getTimedOut());
     }
+
+    public function testGetNumberOfNodes()
+    {
+        $this->assertInternalType('int', $this->_health->getNumberOfNodes());
+    }
+
+    public function testGetNumberOfDataNodes()
+    {
+        $this->assertInternalType('int', $this->_health->getNumberOfDataNodes());
+    }
+
+    public function testGetActivePrimaryShards()
+    {
+        $this->assertInternalType('int', $this->_health->getActivePrimaryShards());
+    }
+
+    public function testGetActiveShards()
+    {
+        $this->assertInternalType('int', $this->_health->getActiveShards());
+    }
+
+    public function testGetRelocatingShards()
+    {
+        $this->assertInternalType('int', $this->_health->getRelocatingShards());
+    }
+
+    public function testGetInitializingShards()
+    {
+        $this->assertInternalType('int', $this->_health->getInitializingShards());
+    }
+
+    public function testGetUnassignedShards()
+    {
+        $this->assertInternalType('int', $this->_health->getUnassignedShards());
+    }
 }
