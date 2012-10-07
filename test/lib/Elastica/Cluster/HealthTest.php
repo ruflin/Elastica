@@ -20,7 +20,7 @@ class Elastica_Cluster_HealthTest extends Elastica_Test
 
     public function testGetStatus()
     {
-        $this->assertContains($this->_index->getStatus(), array('red', 'yellow', 'green'));
+        $this->assertContains($this->_health->getStatus(), array('red', 'yellow', 'green'));
     }
 
     public function testGetTimedOut()
