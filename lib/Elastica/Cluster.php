@@ -17,6 +17,20 @@ class Elastica_Cluster
     protected $_client = null;
 
     /**
+     * Cluster state response.
+     *
+     * @var Elastica_Response
+     */
+    protected $_response;
+
+    /**
+     * Cluster state data.
+     *
+     * @var array
+     */
+    protected $_data;
+
+    /**
      * Creates a cluster object
      *
      * @param Elastica_Client $client Connection client object
