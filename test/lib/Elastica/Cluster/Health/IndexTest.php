@@ -4,7 +4,7 @@ require_once dirname(__FILE__) . '/../../../../bootstrap.php';
 class Elastica_Cluster_Health_IndexTest extends Elastica_Test
 {
     /**
-     * @var Elastica_Cluster_index_Index
+     * @var Elastica_Cluster_Health_Index
      */
     protected $_index;
 
