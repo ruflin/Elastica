@@ -63,6 +63,16 @@ class Elastica_Query_Filtered extends Elastica_Query_Abstract
     }
 
     /**
+     * Gets the filter.
+     *
+     * @return Elastica_Filter_Abstract
+     */
+    public function getFilter()
+    {
+        return $this->_filter;
+    }
+
+    /**
      * Converts query to array
      *
      * @return array Query array
