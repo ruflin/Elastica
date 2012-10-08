@@ -98,7 +98,7 @@ class Elastica_Cluster_Health_Shard
      *
      * @return bool
      */
-    public function IsUnassigned()
+    public function isUnassigned()
     {
         return $this->_data['unassigned_shards'] == 1;
     }
