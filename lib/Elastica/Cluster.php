@@ -126,12 +126,12 @@ class Elastica_Cluster
     /**
      * Return Cluster health
      *
-     * @param array $args OPTIONAL
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/health/
+     * @return Elastica_Cluster_Health
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-health.html
      */
-    public function getHealth($args = array())
+    public function getHealth()
     {
-        throw new Exception('not implemented yet');
+        return new Elastica_Cluster_Health($this->getClient());
     }
 
     /**
