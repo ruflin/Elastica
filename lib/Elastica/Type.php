@@ -118,14 +118,15 @@ class Elastica_Type implements Elastica_Searchable
      * Get the document from search index
      *
      * @param  string            $id Document id
+     * @param array $options Options for the get request.
      * @return Elastica_Document
      */
-    public function getDocument($id)
+    public function getDocument($id, $options = array())
     {
         $path = $id;
 
         try {
-            $result = $this->request($path, Elastica_Request::GET)->getData();
+            $result = $this->request($path, Elastica_Request::GET, array(), $options)->getData();
         } catch (Elastica_Exception_Response $e) {
             throw new Elastica_Exception_NotFound('doc id ' . $id . ' not found');
         }
