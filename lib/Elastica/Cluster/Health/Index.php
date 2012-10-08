@@ -17,7 +17,7 @@ class Elastica_Cluster_Health_Index
     protected $_name;
 
     /**
-     * The index data.
+     * The index health data.
      *
      * @var array
      */
@@ -25,7 +25,7 @@ class Elastica_Cluster_Health_Index
 
     /**
      * @param string $name The name of the index.
-     * @param array $data The index status data.
+     * @param array $data The index health data.
      */
     public function __construct($name, $data)
     {
@@ -121,5 +121,20 @@ class Elastica_Cluster_Health_Index
     public function getUnassignedShards()
     {
         return $this->_data['unassigned_shards'];
+    }
+
+    /**
+     * Gets the health of the shards in this index.
+     *
+     * @return array Array of Elastica_Cluster_Health_Shard objects.
+     */
+    public function getShards()
+    {
+        $shards = array();
+        foreach ($this->_data['shards'] as $shardNumber => $shard) {
+            $shards[] = new Elastica_Cluster_Health_Shard($shardNumber, $shard);
+        }
+
+        return $shards;
     }
 }
