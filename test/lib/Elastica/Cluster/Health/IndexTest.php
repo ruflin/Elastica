@@ -10,56 +10,81 @@ class Elastica_Cluster_Health_IndexTest extends Elastica_Test
 
     public function setUp()
     {
-        $this->_createIndex();
+        $data = array(
+            "status" => "yellow",
+            "number_of_shards" => 2,
+            "number_of_replicas" => 1,
+            "active_primary_shards" => 1,
+            "active_shards" => 1,
+            "relocating_shards" => 1,
+            "initializing_shards" => 0,
+            "unassigned_shards" => 2,
+            "shards" => array(
+                "0" => array(
+                    "status" => "yellow",
+                    "primary_active" => false,
+                    "active_shards" => 0,
+                    "relocating_shards" => 1,
+                    "initializing_shards" => 0,
+                    "unassigned_shards" => 1
+                ),
+                "1" => array(
+                    "status" => "yellow",
+                    "primary_active" => true,
+                    "active_shards" => 1,
+                    "relocating_shards" => 0,
+                    "initializing_shards" => 0,
+                    "unassigned_shards" => 1
+                ),
+            )
+        );
 
-        $health = new Elastica_Cluster_Health($this->_getClient());
-        $indices = $health->getIndices();
-        $this->_index = $indices[0];
+        $this->_index = new Elastica_Cluster_Health_Index('test', $data);
     }
 
     public function testGetName()
     {
-        $this->assertEquals('elastica_test', $this->_index->getName());
+        $this->assertEquals('test', $this->_index->getName());
     }
 
     public function testGetStatus()
     {
-        $this->assertContains($this->_index->getStatus(), array('red', 'yellow', 'green'));
+        $this->assertEquals('yellow', $this->_index->getStatus());
     }
   
     public function testGetNumberOfShards()
     {
-        $this->assertInternalType('int', $this->_index->getNumberOfShards());
+        $this->assertEquals(2, $this->_index->getNumberOfShards());
     }
 
     public function testGetNumberOfReplicas()
     {
-        $this->assertInternalType('int', $this->_index->getNumberOfReplicas());
+        $this->assertEquals(1, $this->_index->getNumberOfReplicas());
     }
 
     public function testGetActivePrimaryShards()
     {
-        $this->assertInternalType('int', $this->_index->getActivePrimaryShards());
+        $this->assertEquals(1, $this->_index->getActivePrimaryShards());
     }
 
     public function testGetActiveShards()
     {
-        $this->assertInternalType('int', $this->_index->getActiveShards());
+        $this->assertEquals(1, $this->_index->getActiveShards());
     }
 
     public function testGetRelocatingShards()
     {
-        $this->assertInternalType('int', $this->_index->getRelocatingShards());
+        $this->assertEquals(1, $this->_index->getRelocatingShards());
     }
 
     public function testGetInitializingShards()
     {
-        $this->assertInternalType('int', $this->_index->getInitializingShards());
+        $this->assertEquals(0, $this->_index->getInitializingShards());
     }
 
     public function testGetUnassignedShards()
     {
-        $this->assertInternalType('int', $this->_index->getUnassignedShards());
+        $this->assertEquals(2, $this->_index->getUnassignedShards());
     }
 
     public function testGetShards()
