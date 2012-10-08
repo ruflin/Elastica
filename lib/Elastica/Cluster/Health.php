@@ -21,7 +21,7 @@ class Elastica_Cluster_Health
      *
      * @var array
      */
-    protected $_healthData = null;
+    protected $_data = null;
 
     /**
      * @param Elastica_Client $client The Elastica client.
@@ -39,7 +39,7 @@ class Elastica_Cluster_Health
      */
     public function getData()
     {
-        return $this->_healthData;
+        return $this->_data;
     }
 
     /**
@@ -49,7 +49,7 @@ class Elastica_Cluster_Health
     {
         $path = '_cluster/health?level=shards';
         $response = $this->_client->request($path, Elastica_Request::GET);
-        $this->_healthData = $response->getData();
+        $this->_data = $response->getData();
     }
 
     /**
@@ -59,7 +59,7 @@ class Elastica_Cluster_Health
      */
     public function getClusterName()
     {
-        return $this->_healthData['cluster_name'];
+        return $this->_data['cluster_name'];
     }
 
     /**
@@ -69,7 +69,7 @@ class Elastica_Cluster_Health
      */
     public function getStatus()
     {
-        return $this->_healthData['status'];
+        return $this->_data['status'];
     }
 
     /**
@@ -79,7 +79,7 @@ class Elastica_Cluster_Health
      */
     public function getTimedOut()
     {
-        return $this->_healthData['timed_out'];
+        return $this->_data['timed_out'];
     }
 
     /**
@@ -89,7 +89,7 @@ class Elastica_Cluster_Health
      */
     public function getNumberOfNodes()
     {
-        return $this->_healthData['number_of_nodes'];
+        return $this->_data['number_of_nodes'];
     }
 
     /**
@@ -99,7 +99,7 @@ class Elastica_Cluster_Health
      */
     public function getNumberOfDataNodes()
     {
-        return $this->_healthData['number_of_data_nodes'];
+        return $this->_data['number_of_data_nodes'];
     }
 
     /**
@@ -109,7 +109,7 @@ class Elastica_Cluster_Health
      */
     public function getActivePrimaryShards()
     {
-        return $this->_healthData['active_primary_shards'];
+        return $this->_data['active_primary_shards'];
     }
 
     /**
@@ -119,7 +119,7 @@ class Elastica_Cluster_Health
      */
     public function getActiveShards()
     {
-        return $this->_healthData['active_shards'];
+        return $this->_data['active_shards'];
     }
 
     /**
@@ -129,7 +129,7 @@ class Elastica_Cluster_Health
      */
     public function getRelocatingShards()
     {
-        return $this->_healthData['relocating_shards'];
+        return $this->_data['relocating_shards'];
     }
 
     /**
@@ -139,7 +139,7 @@ class Elastica_Cluster_Health
      */
     public function getInitializingShards()
     {
-        return $this->_healthData['initializing_shards'];
+        return $this->_data['initializing_shards'];
     }
 
     /**
@@ -149,7 +149,7 @@ class Elastica_Cluster_Health
      */
     public function getUnassignedShards()
     {
-        return $this->_healthData['unassigned_shards'];
+        return $this->_data['unassigned_shards'];
     }
 
     /**
@@ -160,7 +160,7 @@ class Elastica_Cluster_Health
     public function getIndices()
     {
         $indices = array();
-        foreach ($this->_healthData['indices'] as $indexName => $index) {
+        foreach ($this->_data['indices'] as $indexName => $index) {
             $indices[] = new Elastica_Cluster_Health_Index($indexName, $index);
         }
 
