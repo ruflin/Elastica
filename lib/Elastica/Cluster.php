@@ -38,13 +38,13 @@ class Elastica_Cluster
     public function __construct(Elastica_Client $client)
     {
         $this->_client = $client;
-        $this->refreshState();
+        $this->refresh();
     }
 
     /**
      * Refreshs all cluster information (state)
      */
-    public function refreshState()
+    public function refresh()
     {
         $path = '_cluster/state';
         $this->_response = $this->_client->request($path, Elastica_Request::GET);
