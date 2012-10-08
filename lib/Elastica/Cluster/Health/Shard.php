@@ -63,24 +63,43 @@ class Elastica_Cluster_Health_Shard
         return $this->_data['primary_active'];
     }
 
+    /**
+     * Is this shard active?
+     *
+     * @return bool
+     */
     public function isActive()
     {
         return $this->_data['active_shards'] == 1;
     }
 
+    /**
+     * Is this shard relocating?
+     *
+     * @return bool
+     */
     public function isRelocating()
     {
         return $this->_data['relocating_shards'] == 1;
     }
 
+    /**
+     * Is this shard initialized?
+     *
+     * @return bool
+     */
     public function isInitialized()
     {
         return $this->_data['initializing_shards'] == 1;
     }
 
+    /**
+     * Is this shard unassigned?
+     *
+     * @return bool
+     */
     public function IsUnassigned()
     {
         return $this->_data['unassigned_shards'] == 1;
     }
 }
-
