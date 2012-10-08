@@ -12,13 +12,13 @@ class Elastica_Cluster_Health_IndexTest extends Elastica_Test
     {
         $data = array(
             "status" => "yellow",
-            "number_of_shards" => 3,
-            "number_of_replicas" => 1,
-            "active_primary_shards" => 2,
-            "active_shards" => 2,
-            "relocating_shards" => 1,
-            "initializing_shards" => 0,
-            "unassigned_shards" => 2,
+            "number_of_shards" => 1,
+            "number_of_replicas" => 2,
+            "active_primary_shards" => 3,
+            "active_shards" => 4,
+            "relocating_shards" => 5,
+            "initializing_shards" => 6,
+            "unassigned_shards" => 7,
             "shards" => array(
                 "0" => array(
                     "status" => "yellow",
@@ -62,37 +62,37 @@ class Elastica_Cluster_Health_IndexTest extends Elastica_Test
   
     public function testGetNumberOfShards()
     {
-        $this->assertEquals(3, $this->_index->getNumberOfShards());
+        $this->assertEquals(1, $this->_index->getNumberOfShards());
     }
 
     public function testGetNumberOfReplicas()
     {
-        $this->assertEquals(1, $this->_index->getNumberOfReplicas());
+        $this->assertEquals(2, $this->_index->getNumberOfReplicas());
     }
 
     public function testGetActivePrimaryShards()
     {
-        $this->assertEquals(2, $this->_index->getActivePrimaryShards());
+        $this->assertEquals(3, $this->_index->getActivePrimaryShards());
     }
 
     public function testGetActiveShards()
     {
-        $this->assertEquals(2, $this->_index->getActiveShards());
+        $this->assertEquals(4, $this->_index->getActiveShards());
     }
 
     public function testGetRelocatingShards()
     {
-        $this->assertEquals(1, $this->_index->getRelocatingShards());
+        $this->assertEquals(5, $this->_index->getRelocatingShards());
     }
 
     public function testGetInitializingShards()
     {
-        $this->assertEquals(0, $this->_index->getInitializingShards());
+        $this->assertEquals(6, $this->_index->getInitializingShards());
     }
 
     public function testGetUnassignedShards()
     {
-        $this->assertEquals(2, $this->_index->getUnassignedShards());
+        $this->assertEquals(7, $this->_index->getUnassignedShards());
     }
 
     public function testGetShards()
