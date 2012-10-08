@@ -12,10 +12,10 @@ class Elastica_Cluster_Health_IndexTest extends Elastica_Test
     {
         $data = array(
             "status" => "yellow",
-            "number_of_shards" => 2,
+            "number_of_shards" => 3,
             "number_of_replicas" => 1,
-            "active_primary_shards" => 1,
-            "active_shards" => 1,
+            "active_primary_shards" => 2,
+            "active_shards" => 2,
             "relocating_shards" => 1,
             "initializing_shards" => 0,
             "unassigned_shards" => 2,
@@ -36,6 +36,14 @@ class Elastica_Cluster_Health_IndexTest extends Elastica_Test
                     "initializing_shards" => 0,
                     "unassigned_shards" => 1
                 ),
+                "2" => array(
+                    "status" => "green",
+                    "primary_active" => true,
+                    "active_shards" => 1,
+                    "relocating_shards" => 0,
+                    "initializing_shards" => 0,
+                    "unassigned_shards" => 0,
+                ),
             )
         );
 
@@ -54,7 +62,7 @@ class Elastica_Cluster_Health_IndexTest extends Elastica_Test
   
     public function testGetNumberOfShards()
     {
-        $this->assertEquals(2, $this->_index->getNumberOfShards());
+        $this->assertEquals(3, $this->_index->getNumberOfShards());
     }
 
     public function testGetNumberOfReplicas()
@@ -64,12 +72,12 @@ class Elastica_Cluster_Health_IndexTest extends Elastica_Test
 
     public function testGetActivePrimaryShards()
     {
-        $this->assertEquals(1, $this->_index->getActivePrimaryShards());
+        $this->assertEquals(2, $this->_index->getActivePrimaryShards());
     }
 
     public function testGetActiveShards()
     {
-        $this->assertEquals(1, $this->_index->getActiveShards());
+        $this->assertEquals(2, $this->_index->getActiveShards());
     }
 
     public function testGetRelocatingShards()
@@ -92,7 +100,7 @@ class Elastica_Cluster_Health_IndexTest extends Elastica_Test
         $shards = $this->_index->getShards();
 
         $this->assertInternalType('array', $shards);
-        $this->assertNotEmpty($shards);
+        $this->assertEquals(3, count($shards));
 
         foreach ($shards as $shard) {
             $this->assertInstanceOf('Elastica_Cluster_Health_Shard', $shard);
