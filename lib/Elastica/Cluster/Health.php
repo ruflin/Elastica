@@ -24,6 +24,15 @@ class Elastica_Cluster_Health
     protected $_data = null;
 
     /**
+     * @param Elastica_Client $client The Elastica client.
+     */
+    public function __construct(Elastica_Client $client)
+    {
+        $this->_client = $client;
+        $this->refresh();
+    }
+
+    /**
      * Retrieves the health data from the cluster.
      *
      * @return array
@@ -33,15 +42,6 @@ class Elastica_Cluster_Health
         $path = '_cluster/health?level=shards';
         $response = $this->_client->request($path, Elastica_Request::GET);
         return $response->getData();
-    }
-
-    /**
-     * @param Elastica_Client $client The Elastica client.
-     */
-    public function __construct(Elastica_Client $client)
-    {
-        $this->_client = $client;
-        $this->refresh();
     }
 
     /**
