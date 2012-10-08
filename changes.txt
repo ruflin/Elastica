@@ -1,5 +1,11 @@
 CHANGES
 
+2012-10-09
+- Added Elastica_Cluster_Health, Elastica_Cluster_Health_Index and Elastica_Cluster_Health_Shard which wrap the _cluster/health endpoint.
+- Added Elastica_Document::setId()
+- Added options parameter to Elastica_Type::getDocument()
+- Added Elastica_Query_Filtered::getFilter()
+
 2012-08-11
 - Release v0.19.8.0
 - Elastica_Query_Prefix added
