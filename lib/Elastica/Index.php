@@ -314,16 +314,19 @@ class Elastica_Index implements Elastica_Searchable
     {
         $path = '_aliases';
 
-        if ($replace) {
-            $status = new Elastica_Status($this->getClient());
+        $data = array( 'actions' => array( ) );
 
-            foreach ($status->getIndicesWithAlias($name) as $index) {
-                $index->removeAlias($name);
-            }
-        }
+    	if( $replace )
+		{
+			$status = new Elastica_Status( $this->getClient() );
+			foreach( $status->getIndicesWithAlias( $name ) as $index )
+			{
+				$data['actions'][] = array('remove' => array('index' => $index->getName(), 'alias' => $name));
+			}
+		}
 
-        $data = array('actions' => array(array('add' => array('index' => $this->getName(), 'alias' => $name))));
-
+		$data['actions'][] = array('add' => array('index' => $this->getName(), 'alias' => $name));
+            
         return $this->getClient()->request($path, Elastica_Request::POST, $data);
     }
 
