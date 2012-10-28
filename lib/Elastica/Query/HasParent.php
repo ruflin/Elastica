@@ -46,4 +46,15 @@ class Elastica_Query_HasParent extends Elastica_Query_Abstract
     {
         return $this->setParam('type', $type);
     }
+
+    /**
+     * Sets the scope
+     *
+     * @param  string                    $scope Scope
+     * @return Elastica_Filter_HasParent Current object
+     */
+    public function setScope($scope)
+    {
+        return $this->setParam('_scope', $scope);
+    }
 }
