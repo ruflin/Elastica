@@ -1,5 +1,8 @@
 CHANGES
 
+2012-10-28
+- Add Elastica_Filter_HasParent and Elastic_Query_HasParent
+
 2012-08-11
 - Release v0.19.8.0
 - Elastica_Query_Prefix added
