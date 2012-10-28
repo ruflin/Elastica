@@ -13,8 +13,8 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
     /**
      * Sets a param for the message array
      *
-     * @param  string              $field
-     * @param  mixed               $values
+     * @param  string               $field
+     * @param  mixed                $values
      * @return Elastica_Query_Match
      */
     public function setField($field, $values)
