@@ -39,7 +39,7 @@ class Elastica_Query_HasParent extends Elastica_Query_Abstract
     /**
      * Set type of the parent document
      *
-     * @param  string                  $type Parent document type
+     * @param  string                    $type Parent document type
      * @return Elastica_Filter_HasParent Current object
      */
     public function setType($type)
