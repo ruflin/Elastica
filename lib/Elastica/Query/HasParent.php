@@ -26,7 +26,7 @@ class Elastica_Query_HasParent extends Elastica_Query_Abstract
      * Sets query object
      *
      * @param  string|Elastica_Query|Elastica_Query_Abstract $query
-     * @return Elastica_Query_HasChild
+     * @return Elastica_Filter_HasParent
      */
     public function setQuery($query)
     {
@@ -40,7 +40,7 @@ class Elastica_Query_HasParent extends Elastica_Query_Abstract
      * Set type of the parent document
      *
      * @param  string                  $type Parent document type
-     * @return Elastica_Query_HasChild Current object
+     * @return Elastica_Filter_HasParent Current object
      */
     public function setType($type)
     {
