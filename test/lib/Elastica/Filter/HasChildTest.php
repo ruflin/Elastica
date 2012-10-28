@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-class Elastica_Query_HasChildTest extends PHPUnit_Framework_TestCase
+class Elastica_Filter_HasChildTest extends PHPUnit_Framework_TestCase
 {
     public function testToArray()
     {
@@ -9,7 +9,7 @@ class Elastica_Query_HasChildTest extends PHPUnit_Framework_TestCase
 
         $type = 'test';
 
-        $query = new Elastica_Query_HasChild($q, $type);
+        $filter = new Elastica_Filter_HasChild($q, $type);
 
         $expectedArray = array(
             'has_child' => array(
@@ -18,7 +18,7 @@ class Elastica_Query_HasChildTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertEquals($expectedArray, $query->toArray());
+        $this->assertEquals($expectedArray, $filter->toArray());
     }
 
     public function testSetScope()
@@ -29,8 +29,8 @@ class Elastica_Query_HasChildTest extends PHPUnit_Framework_TestCase
 
         $scope = 'foo';
 
-        $query = new Elastica_Query_HasChild($q, $type);
-        $query->setScope($scope);
+        $filter = new Elastica_Filter_HasChild($q, $type);
+        $filter->setScope($scope);
 
         $expectedArray = array(
             'has_child' => array(
@@ -40,6 +40,6 @@ class Elastica_Query_HasChildTest extends PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertEquals($expectedArray, $query->toArray());
+        $this->assertEquals($expectedArray, $filter->toArray());
     }
 }

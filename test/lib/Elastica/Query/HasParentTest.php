@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
-class Elastica_Query_HasChildTest extends PHPUnit_Framework_TestCase
+class Elastica_Query_HasParentTest extends PHPUnit_Framework_TestCase
 {
     public function testToArray()
     {
@@ -9,10 +9,10 @@ class Elastica_Query_HasChildTest extends PHPUnit_Framework_TestCase
 
         $type = 'test';
 
-        $query = new Elastica_Query_HasChild($q, $type);
+        $query = new Elastica_Query_HasParent($q, $type);
 
         $expectedArray = array(
-            'has_child' => array(
+            'has_parent' => array(
                 'query' => $q->toArray(),
                 'type' => $type
             )
@@ -29,11 +29,11 @@ class Elastica_Query_HasChildTest extends PHPUnit_Framework_TestCase
 
         $scope = 'foo';
 
-        $query = new Elastica_Query_HasChild($q, $type);
+        $query = new Elastica_Query_HasParent($q, $type);
         $query->setScope($scope);
 
         $expectedArray = array(
-            'has_child' => array(
+            'has_parent' => array(
                 'query' => $q->toArray(),
                 'type' => $type,
                 '_scope' => $scope
