@@ -117,8 +117,8 @@ class Elastica_Type implements Elastica_Searchable
     /**
      * Get the document from search index
      *
-     * @param  string            $id Document id
-     * @param array $options Options for the get request.
+     * @param  string            $id      Document id
+     * @param  array             $options Options for the get request.
      * @return Elastica_Document
      */
     public function getDocument($id, $options = array())

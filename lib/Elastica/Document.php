@@ -107,12 +107,13 @@ class Elastica_Document
     /**
      * Sets the id of the document.
      *
-     * @param string $id
+     * @param  string            $id
      * @return Elastica_Document
      */
     public function setId($id)
     {
         $this->_id = $id;
+
         return $this;
     }
 
