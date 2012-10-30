@@ -1,5 +1,8 @@
 CHANGES
 
+2012-10-30
+- Elastica_Search implement Elastica_Searchable interface
+
 2012-10-28
 - Add Elastica_Filter_HasParent and Elastic_Query_HasParent
 
