@@ -6,7 +6,7 @@
  * @package  Elastica
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Search
+class Elastica_Search implements Elastica_Searchable
 {
     /**
      * Array of indices
@@ -222,5 +222,19 @@ class Elastica_Search
         $response = $this->getClient()->request($path, Elastica_Request::GET, $query->toArray(), $params);
 
         return new Elastica_ResultSet($response);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count($query = '')
+    {
+        $query = Elastica_Query::create($query);
+        $path = $this->getPath();
+
+        $response = $this->getClient()->request($path, Elastica_Request::GET, $query->toArray(), array('search_type' => 'count'));
+        $resultSet = new Elastica_ResultSet($response);
+
+        return $resultSet->getTotalHits();
     }
 }
