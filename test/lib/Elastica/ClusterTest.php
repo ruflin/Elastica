@@ -77,4 +77,10 @@ class Elastica_ClusterTest extends Elastica_Test
         $indexNames = $cluster->getIndexNames();
         $this->assertContains($index->getname(), $indexNames);
     }
+
+    public function testGetHealth()
+    {
+        $client = new Elastica_Client();
+        $this->assertInstanceOf('Elastica_Cluster_Health', $client->getCluster()->getHealth());
+    }
 }
