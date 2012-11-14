@@ -211,6 +211,9 @@ class Elastica_Search
                         case 'search_type':
                             $params['search_type'] = $value;
                             break;
+                        case 'explain':
+                            $query->setExplain($value);
+                            break;
                         default:
                             throw new Elastica_Exception_Invalid('Invalid option ' . $key);
                             break;
