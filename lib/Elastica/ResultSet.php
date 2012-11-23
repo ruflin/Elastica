@@ -31,7 +31,9 @@ class Elastica_ResultSet implements Iterator, Countable
      * @var Elastica_Response Response object
      */
     protected $_response = null;
+
     protected $_took = 0;
+    
     /**
      * Constructs ResultSet object
      *

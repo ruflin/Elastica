@@ -360,6 +360,79 @@ class Elastica_Client
     }
 
     /**
+     * Performs a multi-search.
+     *
+     * Each query definition can contain the elements: query, index, type, search_type, preference, routing.
+     *
+     * @param array $queries Array of query definitions.
+     * @return array Array of ResultSet objects in order of the queries.
+     * @throws Elastica_Exception_Invalid If $queries is empty.
+     * @throws Elastica_Exception_NotFound If the response from the multi-search request doesn't contain the 'responses'
+     * element.
+     * @throws Elastica_Exception_MultiSearchResponse If one or more of the responses has an error.
+     * @link http://www.elasticsearch.org/guide/reference/api/multi-search.html
+     */
+    public function multiSearch($queries)
+    {
+        if (empty($queries)) {
+            throw new Elastica_Exception_Invalid('Array has to consist of at least one query');
+        }
+
+        // build up our multi search query string
+        $queryString = '';
+        foreach ($queries as $query) {
+            // meta info for the search (which index, type etc)
+            $header = array();
+
+            $headerOptions = array(
+                'index',
+                'type',
+                'search_type',
+                'preference',
+                'routing',
+            );
+
+            foreach ($headerOptions as $option) {
+                if (!empty($query[$option])) {
+                    $header[$option] = $query[$option];
+                }
+            }
+
+            $queryString .= json_encode($header) . "\n";
+
+            // create a query and encode it
+            $abstractQuery = isset($query['query']) ? $query['query'] : null;
+            $elasticaQuery = Elastica_Query::create($abstractQuery);
+            $queryString .= json_encode($elasticaQuery->toArray()) . "\n";
+        }
+
+        $response = $this->request('_msearch', Elastica_Request::GET, $queryString);
+        $data = $response->getData();
+
+        if (!isset($data['responses'])) {
+            throw new Elastica_Exception_NotFound('Unable to find the field [responses] from the response.');
+        }
+
+        // create individual responses for each query.
+        $responses = array();
+        foreach ($data['responses'] as $responseData) {
+            $responses[] = Elastica_Response::create($responseData);
+        }
+
+        // build up result sets and check the responses for errors
+        $resultSets = array();
+        foreach ($responses as /** @var Elastica_Response $response */$response) {
+            if ($response->hasError()) {
+                throw new Elastica_Exception_MultiSearchResponse($responses);
+            }
+
+            $resultSets[] = new Elastica_ResultSet($response);
+        }
+
+        return $resultSets;
+    }
+
+    /**
      * Makes calls to the elasticsearch server based on this index
      *
      * It's possible to make any REST query directly over this method

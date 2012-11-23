@@ -106,6 +106,36 @@ class Elastica_ClientTest extends Elastica_Test
         $client->bulk($params);
     }
 
+    public function testMultiSearch()
+    {
+        $client = new Elastica_Client();
+        $index = $this->_createIndex('multi');
+        $type = $index->getType('user');
+
+        // Add some documents
+        $doc1 = new Elastica_Document(1,
+            array('username' => 'hans', 'test' => array('2', '3', '5'))
+        );
+        $type->addDocument($doc1);
+
+        $doc2 = new Elastica_Document(2,
+            array('username' => 'john', 'test' => array('1', '3', '6'))
+        );
+        $type->addDocument($doc2);
+
+        $index->refresh();
+
+        $queries = array(
+            array('index' => 'elastica_multi', '_type' => 'user', 'query' => new Elastica_Query_Ids(null, array('1'))),
+            array('index' => 'elastica_multi', '_type' => 'user'),
+        );
+
+        $resultSets = $client->multiSearch($queries);
+        $this->assertEquals(2, count($resultSets));
+        $this->assertEquals(1, count($resultSets[0]));
+        $this->assertEquals(2, count($resultSets[1]));
+    }
+
     public function testOptimizeAll()
     {
         $client = new Elastica_Client();

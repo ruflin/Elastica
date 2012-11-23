@@ -102,7 +102,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
         // Checks if error exists
         $errorNumber = curl_errno($conn);
 
-        $response = new Elastica_Response($responseString);
+        $response = Elastica_Response::create($responseString);
 
         if (defined('DEBUG') && DEBUG) {
             $response->setQueryTime($end - $start);

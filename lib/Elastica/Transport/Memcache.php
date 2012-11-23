@@ -57,7 +57,7 @@ class Elastica_Transport_Memcache extends Elastica_Transport_Abstract
 
         }
 
-        $response = new Elastica_Response($responseString);
+        $response = Elastica_Response::create($responseString);
 
         if ($response->hasError()) {
             throw new Elastica_Exception_Response($response);
