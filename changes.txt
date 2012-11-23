@@ -1,5 +1,8 @@
 CHANGES
 
+2012-11-23
+- Simplified Elastica_Document data handling by extending Elastica_Param
+
 2012-11-10
 - Added Elastica_Cluster_Health, Elastica_Cluster_Health_Index and Elastica_Cluster_Health_Shard which wrap the _cluster/health endpoint.
 - Added Elastica_Document::setId()

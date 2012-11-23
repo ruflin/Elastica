@@ -50,15 +50,15 @@ class Elastica_Type implements Elastica_Searchable
 
         $query = array();
 
-        if ($doc->getVersion() > 0) {
+        if ($doc->hasParam('_version')) {
             $query['version'] = $doc->getVersion();
         }
 
-        if ($doc->getVersionType() !== '') {
+        if ($doc->hasParam('_version_type')) {
             $query['version_type'] = $doc->getVersionType();
         }
 
-        if (!is_null($doc->getParent())) {
+        if ($doc->hasParam('_parent')) {
             $query['parent'] = $doc->getParent();
         }
 
@@ -70,7 +70,7 @@ class Elastica_Type implements Elastica_Searchable
             $query['percolate'] = $doc->getPercolate();
         }
 
-        if (!is_null($doc->getRouting())) {
+        if ($doc->hasParam('_routing')) {
             $query['routing'] = $doc->getRouting();
         }
 

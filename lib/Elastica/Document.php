@@ -6,56 +6,14 @@
  * @package  Elastica
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Document
+class Elastica_Document extends Elastica_Param
 {
-    /**
-     * Document id
-     *
-     * @var string|int	Document id
-     */
-    protected $_id = '';
-
     /**
      * Document data
      *
      * @var array Document data
      */
     protected $_data = array();
-
-    /**
-     * Document type name
-     *
-     * @var string Document type name
-     */
-    protected $_type = null;
-
-    /**
-     * Document index name
-     *
-     * @var string Document index name
-     */
-    protected $_index = null;
-
-    /**
-     * Document version
-     *
-     * @var string Document version
-     */
-    protected $_version = '';
-
-    /**
-     * Document version type
-     *
-     * @var string Version_type
-     */
-    protected $_versionType = '';
-
-    /**
-     * Parent document id
-     *
-     * @var string|int Parent document id
-     */
-    protected $_parent = null;
 
     /**
      * Optype
@@ -88,7 +46,7 @@ class Elastica_Document
      */
     public function __construct($id = '', array $data = array(), $type = '', $index = '')
     {
-        $this->_id = $id;
+        $this->setId($id);
         $this->setData($data);
         $this->setType($type);
         $this->setIndex($index);
@@ -101,7 +59,7 @@ class Elastica_Document
      */
     public function getId()
     {
-        return $this->_id;
+		return ($this->hasParam('_id'))?$this->getParam('_id'):null;
     }
 
     /**
@@ -112,9 +70,7 @@ class Elastica_Document
      */
     public function setId($id)
     {
-        $this->_id = $id;
-
-        return $this;
+		return $this->setParam('_id', $id);
     }
 
     /**
@@ -234,9 +190,7 @@ class Elastica_Document
      */
     public function setType($type)
     {
-        $this->_type = $type;
-
-        return $this;
+		return $this->setParam('_type', $type);
     }
 
     /**
@@ -247,13 +201,7 @@ class Elastica_Document
      */
     public function getType()
     {
-        $type = $this->_type;
-
-        if (is_null($type)) {
-            throw new Elastica_Exception_Invalid('Type not set');
-        }
-
-        return $type;
+       return $this->getParam('_type');
     }
 
     /**
@@ -264,9 +212,7 @@ class Elastica_Document
      */
     public function setIndex($index)
     {
-        $this->_index = $index;
-
-        return $this;
+		return $this->setParam('_index', $index);
     }
 
     /**
@@ -277,13 +223,7 @@ class Elastica_Document
      */
     public function getIndex()
     {
-        $index = $this->_index;
-
-        if (is_null($index)) {
-            throw new Elastica_Exception_Invalid('Index not set');
-        }
-
-        return $index;
+        return $this->getParam('_index');
     }
 
     /**
@@ -295,11 +235,7 @@ class Elastica_Document
      */
     public function setVersion($version)
     {
-        if ($version !== '') {
-            $this->_version = (int) $version;
-        }
-
-        return $this;
+        return $this->setParam('_version', (int) $version);
     }
 
     /**
@@ -309,7 +245,7 @@ class Elastica_Document
      */
     public function getVersion()
     {
-        return $this->_version;
+		return $this->getParam('_version');
     }
 
     /**
@@ -322,11 +258,7 @@ class Elastica_Document
      */
     public function setVersionType($versionType)
     {
-        if ($versionType !== '') {
-            $this->_versionType = $versionType;
-        }
-
-        return $this;
+        return $this->setParam('_version_type', $versionType);
     }
 
     /**
@@ -336,7 +268,7 @@ class Elastica_Document
      */
     public function getVersionType()
     {
-        return $this->_versionType;
+		return $this->getParam('_version_type');
     }
 
     /**
@@ -348,9 +280,7 @@ class Elastica_Document
      */
     public function setParent($parent)
     {
-        $this->_parent = $parent;
-
-        return $this;
+        return $this->setParam('_parent', $parent);
     }
 
     /**
@@ -360,7 +290,7 @@ class Elastica_Document
      */
     public function getParent()
     {
-        return $this->_parent;
+		return $this->getParam('_parent');
     }
 
     /**
@@ -415,9 +345,7 @@ class Elastica_Document
      */
     public function setRouting($value)
     {
-        $this->_routing = $value;
-
-        return $this;
+		return $this->setParam('_routing', $value);
     }
 
     /**
@@ -427,7 +355,7 @@ class Elastica_Document
      */
     public function getRouting()
     {
-        return $this->_routing;
+        return $this->getParam('_routing');
     }
 
     /**
@@ -436,40 +364,7 @@ class Elastica_Document
      */
     public function toArray()
     {
-        $doc = array();
-
-        if (!is_null($this->_index)) {
-            $doc['_index'] = $this->_index;
-        }
-
-        if (!is_null($this->_type)) {
-            $doc['_type'] = $this->_type;
-        }
-
-        if (!is_null($this->_index)) {
-            $doc['_id'] = $this->getId();
-        }
-
-        $version = $this->getVersion();
-        if (!empty($version)) {
-            $doc['_version'] = $version;
-        }
-
-        $versionType = $this->getVersionType();
-        if (!empty($versionType)) {
-            $doc['_version_type'] = $versionType;
-        }
-
-        $parent = $this->getParent();
-        if (!is_null($parent)) {
-            $doc['_parent'] = $parent;
-        }
-
-        $routing = $this->getRouting();
-        if (!is_null($routing)) {
-            $doc['_routing'] = $routing;
-        }
-
+		$doc = $this->getParams();
         $doc['_source'] = $this->getData();
 
         return $doc;
