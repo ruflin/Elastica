@@ -310,4 +310,44 @@ class Elastica_SearchTest extends Elastica_Test
         $count = $search->count('farrelley');
         $this->assertEquals(11, $count);
     }
+
+    public function testEmptySearch()
+    {
+        $client = new Elastica_Client();
+        $search = new Elastica_Search($client);
+
+        $index = $client->getIndex('zero');
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+        $docs = array();
+        $docs[] = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
+        $docs[] = new Elastica_Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
+        $docs[] = new Elastica_Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
+        $docs[] = new Elastica_Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
+        $type = $index->getType('zeroType');
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $search->addIndex($index)->addType($type);
+        $resultSet = $search->search();
+        $this->assertInstanceOf('Elastica_ResultSet', $resultSet);
+        $this->assertCount(10, $resultSet);
+        $this->assertEquals(11, $resultSet->getTotalHits());
+
+        $query = new Elastica_Query_QueryString('bunny');
+        $search->setQuery($query);
+
+        $resultSet = $search->search();
+
+        $this->assertCount(4, $resultSet);
+        $this->assertEquals(4, $resultSet->getTotalHits());
+        $source = $resultSet->current()->getSource();
+        $this->assertEquals('bunny', $source['username']);
+    }
 }

@@ -306,6 +306,9 @@ class Elastica_Search implements Elastica_Searchable
      */
     public function getQuery()
     {
+        if (null === $this->_query) {
+            $this->_query = Elastica_Query::create('');
+        }
         return $this->_query;
     }
 
