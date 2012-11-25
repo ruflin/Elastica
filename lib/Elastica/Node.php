@@ -92,9 +92,9 @@ class Elastica_Node
     }
 
     /**
-     * Refreshs all node information
+     * Refreshes all node information
      *
-     * This should be called after upating a node to refresh all information
+     * This should be called after updating a node to refresh all information
      */
     public function refresh()
     {
@@ -105,7 +105,7 @@ class Elastica_Node
     /**
      * Shuts this node down
      *
-     * @param  string            $delay OPTIONAL Delay after which node is shut down (defualt = 1s)
+     * @param  string            $delay OPTIONAL Delay after which node is shut down (default = 1s)
      * @return Elastica_Response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown.html
      */

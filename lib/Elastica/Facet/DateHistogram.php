@@ -14,7 +14,7 @@ class Elastica_Facet_DateHistogram extends Elastica_Facet_Histogram
      * Set the time_zone parameter
      *
      * @param  string $tzOffset
-     * @return void
+     * @return Elastica_Facet_DateHistogram
      */
     public function setTimezone($tzOffset)
     {

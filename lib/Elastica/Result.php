@@ -32,7 +32,7 @@ class Elastica_Result
      *
      * This function can be used to retrieve all data for which a specific
      * function doesn't exist.
-     * If the param does not exist, an empty array is retured
+     * If the param does not exist, an empty array is returned
      *
      * @param  string $name Param name
      * @return array  Result data

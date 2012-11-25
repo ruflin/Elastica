@@ -42,7 +42,7 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
     public function addType($type)
     {
         if ($type instanceof Elastica_Type) {
-            $type = $type->getType();
+            $type = $type->getName();
         } elseif (empty($type) && !is_numeric($type)) {
             // TODO: Shouldn't this throw an exception?
             // A type can be 0, but cannot be empty
@@ -61,7 +61,7 @@ class Elastica_Filter_Ids extends Elastica_Filter_Abstract
     public function setType($type)
     {
         if ($type instanceof Elastica_Type) {
-            $type = $type->getType();
+            $type = $type->getName();
         } elseif (empty($type) && !is_numeric($type)) {
             // TODO: Shouldn't this throw an exception or let handling of invalid params to ES?
             // A type can be 0, but cannot be empty

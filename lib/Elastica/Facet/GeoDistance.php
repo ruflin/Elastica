@@ -5,7 +5,7 @@
  * @category Xodoa
  * @package Elastica
  * @author Gerard A. Matthew  <gerard.matthew@gmail.com>
- * @linkhttp://www.elasticsearch.org/guide/reference/api/search/facets/geo-distance-facet.html
+ * @link http://www.elasticsearch.org/guide/reference/api/search/facets/geo-distance-facet.html
  */
 class Elastica_Facet_GeoDistance extends Elastica_Facet_Abstract
 {

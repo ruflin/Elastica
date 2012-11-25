@@ -149,6 +149,9 @@ class Elastica_TypeTest extends Elastica_Test
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @expectedException Elastica_Exception_NotFound
+     */
     public function testGetDocumentNotExist()
     {
         $index = $this->_createIndex();
@@ -158,12 +161,7 @@ class Elastica_TypeTest extends Elastica_Test
 
         $type->getDocument(1);
 
-        try {
-            $type->getDocument(2);
-            $this->fail('Should throw exceptoin as doc does not exist');
-        } catch (Elastica_Exception_NotFound $e) {
-            $this->assertTrue(true);
-        }
+        $type->getDocument(2);
     }
 
     public function testDeleteByQuery()

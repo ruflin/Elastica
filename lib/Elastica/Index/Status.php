@@ -80,7 +80,7 @@ class Elastica_Index_Status
      */
     public function getAliases()
     {
-        // TODO Update as soon as new API is implmented
+        // TODO Update as soon as new API is implemented
         $cluster = new Elastica_Cluster($this->_index->getClient());
         $state = $cluster->getState();
 
@@ -94,7 +94,7 @@ class Elastica_Index_Status
      */
     public function getSettings()
     {
-        // TODO Update as soon as new API is implmented
+        // TODO Update as soon as new API is implemented
         $cluster = new Elastica_Cluster($this->_index->getClient());
         $state = $cluster->getState();
 
@@ -105,6 +105,7 @@ class Elastica_Index_Status
      * Checks if the index has the given alias
      *
      * @param string $name Alias name
+     * @return bool
      */
     public function hasAlias($name)
     {

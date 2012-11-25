@@ -47,6 +47,7 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
      *
      * @param string $key   Terms key
      * @param array  $terms Terms for the query.
+     * @return Elastica_Query_Terms
      */
     public function setTerms($key, array $terms)
     {
@@ -60,6 +61,7 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
      * Adds a single term to the list
      *
      * @param string $term Term
+     * @return \Elastica_Query_Terms
      */
     public function addTerm($term)
     {
@@ -72,6 +74,7 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
      * Sets the minimum matching values
      *
      * @param int $minimum Minimum value
+     * @return Elastica_Param
      */
     public function setMinimumMatch($minimum)
     {
@@ -81,6 +84,7 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
     /**
      * Converts the terms object to an array
      *
+     * @throws Elastica_Exception_Invalid
      * @return array Query array
      * @see Elastica_Query_Abstract::toArray()
      */

@@ -20,9 +20,8 @@ class Elastica_Filter_Range extends Elastica_Filter_Abstract
     /**
      * Construct range filter
      *
-     * @param  string                $fieldName Field name
+     * @param  string|bool                $fieldName Field name
      * @param  array                 $args      Field arguments
-     * @return Elastica_Filter_Range
      */
     public function __construct($fieldName = false, array $args = array())
     {
@@ -46,7 +45,7 @@ class Elastica_Filter_Range extends Elastica_Filter_Abstract
     }
 
     /**
-     * Convers object to array
+     * Converts object to array
      *
      * @see Elastica_Filter_Abstract::toArray()
      * @return array Filter array

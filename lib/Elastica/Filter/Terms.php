@@ -47,6 +47,7 @@ class Elastica_Filter_Terms extends Elastica_Filter_Abstract
      *
      * @param string $key   Terms key
      * @param array  $terms Terms for the query.
+     * @return Elastica_Filter_Terms
      */
     public function setTerms($key, array $terms)
     {
@@ -70,9 +71,10 @@ class Elastica_Filter_Terms extends Elastica_Filter_Abstract
     }
 
     /**
-     * Convers object to an arrray
+     * Converts object to an array
      *
      * @see Elastica_Filter_Abstract::toArray()
+     * @throws Elastica_Exception_Invalid
      * @return array data array
      */
     public function toArray()

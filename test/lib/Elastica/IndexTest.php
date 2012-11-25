@@ -212,6 +212,9 @@ class Elastica_IndexTest extends Elastica_Test
         $this->assertFalse(isset($data['file']));
     }
 
+    /**
+     * @expectedException Elastica_Exception_Response
+     */
     public function testAddRemoveAlias()
     {
         $client = new Elastica_Client();
@@ -245,12 +248,7 @@ class Elastica_IndexTest extends Elastica_Test
         $response = $index->removeAlias($aliasName)->getData();
         $this->assertTrue($response['ok']);
 
-        try {
-            $client->getIndex($aliasName)->getType($typeName)->search('ruflin');
-            $this->fail('Should throw no index exception');
-        } catch (Elastica_Exception_Response $e) {
-            $this->assertTrue(true);
-        }
+        $client->getIndex($aliasName)->getType($typeName)->search('ruflin');
     }
 
     public function testDeleteIndexDeleteAlias()
@@ -465,11 +463,13 @@ class Elastica_IndexTest extends Elastica_Test
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @expectedException Elastica_Exception_Invalid
+     */
     public function testCreateArray()
     {
         $client = new Elastica_Client();
         $indexName = 'test';
-        $aliasName = 'test-aliase';
 
         //Testing recreate (backward compatibility)
         $index = $client->getIndex($indexName);
@@ -484,14 +484,9 @@ class Elastica_IndexTest extends Elastica_Test
         $this->assertTrue($status->indexExists($indexName));
 
         //Testing invalid options
-        try {
-            $opts = array('recreate' => true, 'routing' => 'r1,r2', 'testing_invalid_option' => true);
-            $index->create(array(), $opts);
-            $status = new Elastica_Status($client);
-            $this->assertTrue($status->indexExists($indexName));
-            $this->fail('Should throw Elastica_Exception_Invalid');
-        } catch (Exception $ex) {
-            $this->assertTrue($ex instanceof Elastica_Exception_Invalid);
-        }
+        $opts = array('recreate' => true, 'routing' => 'r1,r2', 'testing_invalid_option' => true);
+        $index->create(array(), $opts);
+        $status = new Elastica_Status($client);
+        $this->assertTrue($status->indexExists($indexName));
     }
 }

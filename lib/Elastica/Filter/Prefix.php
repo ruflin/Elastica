@@ -40,6 +40,7 @@ class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
      * Sets the name of the prefix field.
      *
      * @param string $field Field name
+     * @return Elastica_Filter_Prefix
      */
     public function setField($field)
     {
@@ -52,6 +53,7 @@ class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
      * Sets the prefix string.
      *
      * @param string $prefix Prefix string
+     * @return Elastica_Filter_Prefix
      */
     public function setPrefix($prefix)
     {
@@ -61,7 +63,7 @@ class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
     }
 
     /**
-     * Convers object to an arrray
+     * Converts object to an array
      *
      * @see Elastica_Filter_Abstract::toArray()
      * @return array data array

@@ -148,7 +148,7 @@ class Elastica_Query_MoreLikeThis extends Elastica_Query_Abstract
     }
 
     /**
-     * Set stopwords
+     * Set stop words
      *
      * @param  array                       $stopWords
      * @return Elastica_Query_MoreLikeThis
