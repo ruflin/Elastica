@@ -234,7 +234,7 @@ class Elastica_Index implements Elastica_Searchable
      * @return Elastica_ResultSet          ResultSet with all results inside
      * @see Elastica_Searchable::search
      */
-    public function search($query, $options = null)
+    public function search($query = '', $options = null)
     {
         $search = new Elastica_Search($this->getClient());
         $search->addIndex($this);
@@ -255,7 +255,7 @@ class Elastica_Index implements Elastica_Searchable
         $path = '_search';
 
         $response = $this->request($path, Elastica_Request::GET, $query->toArray(), array('search_type' => 'count'));
-        $resultSet = new Elastica_ResultSet($response);
+        $resultSet = new Elastica_ResultSet($response, $query);
 
         return $resultSet->getTotalHits();
     }

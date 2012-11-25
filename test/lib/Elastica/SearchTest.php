@@ -104,30 +104,26 @@ class Elastica_SearchTest extends Elastica_Test
         $this->assertEquals(2, count($search->getTypes()));
     }
 
+    /**
+     * @expectedException Elastica_Exception_Invalid
+     */
     public function testAddTypeInvalid()
     {
         $client = new Elastica_Client();
         $search = new Elastica_Search($client);
 
-        try {
-            $search->addType(new stdClass());
-            $this->fail('Should throw invalid exception');
-        } catch (Elastica_Exception_Invalid $e) {
-            $this->assertTrue(true);
-        }
+        $search->addType(new stdClass());
     }
 
+    /**
+     * @expectedException Elastica_Exception_Invalid
+     */
     public function testAddIndexInvalid()
     {
         $client = new Elastica_Client();
         $search = new Elastica_Search($client);
 
-        try {
-            $search->addIndex(new stdClass());
-            $this->fail('Should throw invalid exception');
-        } catch (Elastica_Exception_Invalid $e) {
-            $this->assertTrue(true);
-        }
+        $search->addIndex(new stdClass());
     }
 
     public function testGetPath()

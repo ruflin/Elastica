@@ -31,16 +31,30 @@ class Elastica_ResultSet implements Iterator, Countable
      * @var Elastica_Response Response object
      */
     protected $_response = null;
+
+    /**
+     * @var int
+     */
     protected $_took = 0;
+
+    /**
+     * Query
+     *
+     * @var Elastica_Query Query object
+     */
+    protected $_query;
+
     /**
      * Constructs ResultSet object
      *
      * @param Elastica_Response $response Response object
+     * @param Elastica_Query $query Query object
      */
-    public function __construct(Elastica_Response $response)
+    public function __construct(Elastica_Response $response, Elastica_Query $query)
     {
         $this->rewind();
         $this->_init($response);
+        $this->_query = $query;
     }
 
     /**
@@ -123,6 +137,14 @@ class Elastica_ResultSet implements Iterator, Countable
     public function getResponse()
     {
         return $this->_response;
+    }
+
+    /**
+     * @return Elastica_Query
+     */
+    public function getQuery()
+    {
+        return $this->_query;
     }
 
     /**

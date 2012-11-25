@@ -48,11 +48,15 @@ class Elastica_Response
     /**
      * Construct
      *
-     * @param string $responseString Response string (json)
+     * @param string|array $responseString Response string (json)
      */
     public function __construct($responseString)
     {
-        $this->_responseString = $responseString;
+        if (is_array($responseString)) {
+            $this->_response = $responseString;
+        } else {
+            $this->_responseString = $responseString;
+        }
     }
 
     /**
@@ -114,7 +118,7 @@ class Elastica_Response
             } else {
 
                 $tempResponse = json_decode($response, true);
-                // If error is returned, json_decod makes empty string of string
+                // If error is returned, json_decode makes empty string of string
                 if (!empty($tempResponse)) {
                     $response = $tempResponse;
                 }
