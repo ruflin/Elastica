@@ -114,15 +114,13 @@ class Elastica_ClientTest extends Elastica_Test
         $this->assertFalse($response->hasError());
     }
 
+    /**
+     * @expectedException Elastica_Exception_Invalid
+     */
     public function testAddDocumentsEmpty()
     {
         $client = new Elastica_Client();
-        try {
-            $client->addDocuments(array());
-            $this->fail('Should throw exception');
-        } catch (Elastica_Exception_Invalid $e) {
-            $this->assertTrue(true);
-        }
+        $client->addDocuments(array());
     }
 
     /**

@@ -108,14 +108,12 @@ class Elastica_Query_QueryStringTest extends Elastica_Test
             $this->assertEquals($data['query_string']['rewrite'], $rewrite);
     }
 
+    /**
+     * @expectedException Elastica_Exception_Invalid
+     */
     public function testSetQueryStringInvalid()
     {
         $query = new Elastica_Query_QueryString();
-        try {
-            $query->setQueryString(array());
-            $this->fail('should throw exception because no string');
-        } catch (Elastica_Exception_Invalid $e) {
-            $this->assertTrue(true);
-        }
+        $query->setQueryString(array());
     }
 }
