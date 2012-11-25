@@ -316,7 +316,6 @@ class Elastica_Search implements Elastica_Searchable
      * Creates new search object
      *
      * @param Elastica_Searchable $searchObject
-     * @throws Elastica_Exception_NotImplemented
      */
     public static function create(Elastica_Searchable $searchObject)
     {
@@ -357,8 +356,8 @@ class Elastica_Search implements Elastica_Searchable
     /**
      * Search in the set indices, types
      *
-     * @param string|array|Elastica_Query $query
-     * @param int|array|null $options
+     * @param  mixed              $query
+     * @param  int|array          $options OPTIONAL Limit or associative array of options (option=>value)
      * @return Elastica_ResultSet
      */
     public function search($query = '', $options = null)

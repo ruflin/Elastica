@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Elastica multi search result set
+ * List of result sets for each search request
+ *
+ * @category Xodoa
+ * @package Elastica
+ * @author munkie
+ */
 class Elastica_Multi_ResultSet implements Iterator, Countable
 {
     /**
@@ -79,6 +86,21 @@ class Elastica_Multi_ResultSet implements Iterator, Countable
     public function getResponse()
     {
         return $this->_response;
+    }
+
+    /**
+     * There is at least one result set with error
+     *
+     * @return bool
+     */
+    public function hasError()
+    {
+        foreach ($this->getResultSets() as $resultSet) {
+            if ($resultSet->getResponse()->hasError()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

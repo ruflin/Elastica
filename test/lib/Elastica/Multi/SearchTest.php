@@ -4,6 +4,35 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Multi_SearchTest extends Elastica_Test
 {
+    /**
+     * @return Elastica_Type
+     */
+    protected function _createType()
+    {
+        $client = new Elastica_Client();
+
+        $index = $client->getIndex('zero');
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+
+        $docs = array();
+        $docs[] = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Elastica_Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'kate'));
+        $docs[] = new Elastica_Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'kate'));
+        $docs[] = new Elastica_Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
+        $docs[] = new Elastica_Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
+        $docs[] = new Elastica_Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
+        $docs[] = new Elastica_Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
+        $docs[] = new Elastica_Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
+        $docs[] = new Elastica_Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
+        $type = $index->getType('zeroType');
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        return $type;
+    }
+
     public function testConstruct()
     {
         $client = new Elastica_Client();
@@ -44,26 +73,9 @@ class Elastica_Multi_SearchTest extends Elastica_Test
 
     public function testSearch()
     {
-        $client = new Elastica_Client();
-
-        $index = $client->getIndex('zero');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
-
-        $docs = array();
-        $docs[] = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Elastica_Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'kate'));
-        $docs[] = new Elastica_Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'kate'));
-        $docs[] = new Elastica_Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
-        $docs[] = new Elastica_Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
-        $docs[] = new Elastica_Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
-        $docs[] = new Elastica_Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
-        $docs[] = new Elastica_Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
-        $docs[] = new Elastica_Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
-        $type = $index->getType('zeroType');
-        $type->addDocuments($docs);
-        $index->refresh();
+        $type = $this->_createType();
+        $index = $type->getIndex();
+        $client = $index->getClient();
 
         $multiSearch = new Elastica_Multi_Search($client);
 
@@ -123,6 +135,7 @@ class Elastica_Multi_SearchTest extends Elastica_Test
         $this->assertSame($query2, $resultSets[1]->getQuery());
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
 
+        $this->assertFalse($multiResultSet->hasError());
 
         $search1->setOption(Elastica_Search::OPTION_SEARCH_TYPE, Elastica_Search::OPTION_SEARCH_TYPE_COUNT);
         $search2->setOption(Elastica_Search::OPTION_SEARCH_TYPE, Elastica_Search::OPTION_SEARCH_TYPE_COUNT);
@@ -148,5 +161,50 @@ class Elastica_Multi_SearchTest extends Elastica_Test
         $this->assertCount(0, $resultSets[1]);
         $this->assertSame($query2, $resultSets[1]->getQuery());
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
+    }
+
+    public function testSearchWithError()
+    {
+        $type = $this->_createType();
+        $index = $type->getIndex();
+        $client = $index->getClient();
+
+        $multiSearch = new Elastica_Multi_Search($client);
+
+        $searchGood = new Elastica_Search($client);
+        $searchGood->setQuery('bunny');
+        $searchGood->addIndex($index)->addType($type);
+
+        $multiSearch->addSearch($searchGood);
+
+        $searchBad = new Elastica_Search($client);
+        $searchBadQuery = new Elastica_Query_Range();
+        $searchBadQuery->addField('bad', array('from' => 0));
+        $searchBadQuery->setParam('_cache', true);
+        $searchBad->setQuery($searchBadQuery);
+        $searchBad->addIndex($index)->addType($type);
+
+        $multiSearch->addSearch($searchBad);
+
+        $multiResultSet = $multiSearch->search();
+
+        $this->assertInstanceOf('Elastica_Multi_ResultSet', $multiResultSet);
+        $resultSets = $multiResultSet->getResultSets();
+        $this->assertInternalType('array', $resultSets);
+
+        $this->assertArrayHasKey(0, $resultSets);
+        $this->assertInstanceOf('Elastica_ResultSet', $resultSets[0]);
+        $this->assertSame($searchGood->getQuery(), $resultSets[0]->getQuery());
+        $this->assertSame(6, $resultSets[0]->getTotalHits());
+        $this->assertCount(6, $resultSets[0]);
+
+        $this->assertArrayHasKey(1, $resultSets);
+        $this->assertInstanceOf('Elastica_ResultSet', $resultSets[1]);
+        $this->assertSame($searchBad->getQuery(), $resultSets[1]->getQuery());
+        $this->assertSame(0, $resultSets[1]->getTotalHits());
+        $this->assertCount(0, $resultSets[1]);
+        $this->assertTrue($resultSets[1]->getResponse()->hasError());
+
+        $this->assertTrue($multiResultSet->hasError());
     }
 }

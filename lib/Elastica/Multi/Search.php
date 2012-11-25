@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Elastica multi search
+ *
+ * @category Xodoa
+ * @package Elastica
+ * @author munkie
+ * @link http://www.elasticsearch.org/guide/reference/api/multi-search.html
+ */
 class Elastica_Multi_Search
 {
     /**
@@ -117,6 +124,7 @@ class Elastica_Multi_Search
     protected function _getSearchData(Elastica_Search $search)
     {
         $header = $this->_getSearchDataHeader($search);
+        $header = (empty($header)) ? new StdClass : $header;
         $query = $search->getQuery();
 
         $data = json_encode($header) . "\n";

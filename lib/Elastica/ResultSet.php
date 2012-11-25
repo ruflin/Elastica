@@ -33,17 +33,16 @@ class Elastica_ResultSet implements Iterator, Countable
     protected $_response = null;
 
     /**
-     * @var int
-     */
-    protected $_took = 0;
-
-    /**
      * Query
      *
      * @var Elastica_Query Query object
      */
     protected $_query;
 
+    /**
+     * @var int
+     */
+    protected $_took = 0;
     /**
      * Constructs ResultSet object
      *
@@ -66,7 +65,7 @@ class Elastica_ResultSet implements Iterator, Countable
     {
         $this->_response = $response;
         $result = $response->getData();
-        $this->_totalHits = $result['hits']['total'];
+        $this->_totalHits = isset($result['hits']['total']) ? $result['hits']['total'] : 0;
         $this->_took = isset($result['took']) ? $result['took'] : 0;
         if (isset($result['hits']['hits'])) {
             foreach ($result['hits']['hits'] as $hit) {
