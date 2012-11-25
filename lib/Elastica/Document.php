@@ -131,10 +131,10 @@ class Elastica_Document extends Elastica_Param
     /**
      * Adds a geopoint to the document
      *
-     * Geohashes re not yet supported
+     * Geohashes are not yet supported
      *
      * @param string $key       Field key
-     * @param float  $latitude  Latitud value
+     * @param float  $latitude  Latitude value
      * @param float  $longitude Longitude value
      * @link http://www.elasticsearch.com/docs/elasticsearch/mapping/geo_point/
      * @return Elastica_Document

@@ -130,7 +130,7 @@ class Elastica_Cluster
      * Returns the cluster information (not implemented yet)
      *
      * @param array $args Additional arguments
-     * @throws Exception
+     * @throws Elastica_Exception_NotImplemented
      * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/nodes_info/
      */
     public function getInfo(array $args)
