@@ -13,6 +13,35 @@ class Elastica_Multi_SearchTest extends Elastica_Test
         $this->assertSame($client, $multiSearch->getClient());
     }
 
+    public function testSetSearches()
+    {
+        $client = new Elastica_Client();
+        $multiSearch = new Elastica_Multi_Search($client);
+
+        $search1 = new Elastica_Search($client);
+        $search2 = new Elastica_Search($client);
+        $search3 = new Elastica_Search($client);
+
+        $multiSearch->setSearches(array($search1, $search2, $search3));
+
+        $searches = $multiSearch->getSearches();
+
+        $this->assertInternalType('array', $searches);
+        $this->assertCount(3, $searches);
+        $this->assertArrayHasKey(0, $searches);
+        $this->assertSame($search1, $searches[0]);
+        $this->assertArrayHasKey(1, $searches);
+        $this->assertSame($search2, $searches[1]);
+        $this->assertArrayHasKey(2, $searches);
+        $this->assertSame($search3, $searches[2]);
+
+        $multiSearch->clearSearches();
+        $searches = $multiSearch->getSearches();
+
+        $this->assertInternalType('array', $searches);
+        $this->assertCount(0, $searches);
+    }
+
     public function testSearch()
     {
         $client = new Elastica_Client();
@@ -73,6 +102,10 @@ class Elastica_Multi_SearchTest extends Elastica_Test
         $this->assertInstanceOf('Elastica_Multi_ResultSet', $multiResultSet);
         $this->assertCount(2, $multiResultSet);
         $this->assertInstanceOf('Elastica_Response', $multiResultSet->getResponse());
+
+        foreach ($multiResultSet as $resultSet) {
+            $this->assertInstanceOf('Elastica_ResultSet', $resultSet);
+        }
 
         $resultSets = $multiResultSet->getResultSets();
 
