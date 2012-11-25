@@ -42,7 +42,7 @@ class Elastica_Cluster
     }
 
     /**
-     * Refreshs all cluster information (state)
+     * Refreshes all cluster information (state)
      */
     public function refresh()
     {
@@ -129,12 +129,13 @@ class Elastica_Cluster
     /**
      * Returns the cluster information (not implemented yet)
      *
-     * @param array $args Additional arguemtns
+     * @param array $args Additional arguments
+     * @throws Exception
      * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/nodes_info/
      */
     public function getInfo(array $args)
     {
-        throw new Exception('not implemented yet');
+        throw new Elastica_Exception_NotImplemented('not implemented yet');
     }
 
     /**

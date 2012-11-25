@@ -66,7 +66,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
     }
 
     /**
-     * Allow widcards (*, ?) as the first character in a query.
+     * Allow wildcards (*, ?) as the first character in a query.
      *
      * @param boolean $bool Defaults to true.
      *
@@ -102,7 +102,7 @@ class Elastica_Query_Builder extends Elastica_Query_Abstract
     }
 
     /**
-     * Auitogenerate phrase queries.
+     * Autogenerate phrase queries.
      *
      * @param boolean $bool Defaults to true.
      *

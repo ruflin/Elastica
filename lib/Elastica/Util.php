@@ -15,7 +15,7 @@ class Elastica_Util
      * and
      * escapes the following terms: + - && || ! ( ) { } [ ] ^ " ~ * ? : \
      *
-     * @param  string $term Query term to replare and escape
+     * @param  string $term Query term to replace and escape
      * @return string Replaced and escaped query term
      * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators
      * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters

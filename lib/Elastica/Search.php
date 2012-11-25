@@ -43,6 +43,7 @@ class Elastica_Search implements Elastica_Searchable
      * Adds a index to the list
      *
      * @param  Elastica_Index|string $index Index object or string
+     * @throws Elastica_Exception_Invalid
      * @return Elastica_Search       Current object
      */
     public function addIndex($index)
@@ -146,6 +147,8 @@ class Elastica_Search implements Elastica_Searchable
      * Creates new search object
      *
      * @param Elastica_Searchable $searchObject
+     * @throws Elastica_Exception_NotImplemented
+     * @return void
      */
     public static function create(Elastica_Searchable $searchObject)
     {
@@ -188,6 +191,7 @@ class Elastica_Search implements Elastica_Searchable
      *
      * @param  mixed              $query
      * @param  int|array          $options OPTIONAL Limit or associative array of options (option=>value)
+     * @throws Elastica_Exception_Invalid
      * @return Elastica_ResultSet
      */
     public function search($query, $options = null)

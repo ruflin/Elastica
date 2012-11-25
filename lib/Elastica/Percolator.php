@@ -17,7 +17,7 @@ class Elastica_Percolator
     protected $_index = null;
 
     /**
-     * Construct new perlocator
+     * Construct new percolator
      *
      * @param Elastica_Index $index
      */

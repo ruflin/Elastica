@@ -38,6 +38,8 @@ class Elastica_Facet_Range extends Elastica_Facet_Abstract
      *
      * @param string $keyScript   Script to check whether it falls into the range.
      * @param string $valueScript Script to use for statistical calculations.
+     *
+     * @return Elastica_Facet_Range
      */
     public function setKeyValueScripts($keyScript, $valueScript)
     {

@@ -54,9 +54,9 @@ class Elastica_Type_Mapping
     }
 
     /**
-     * Sets the mapping properites
+     * Sets the mapping properties
      *
-     * @param  array                 $properties Prpoerties
+     * @param  array                 $properties Properties
      * @return Elastica_Type_Mapping Mapping object
      */
     public function setProperties(array $properties)
@@ -143,7 +143,7 @@ class Elastica_Type_Mapping
     }
 
     /**
-     * Enables TTL for all documens in this type
+     * Enables TTL for all documents in this type
      *
      * @param  bool                  $enabled OPTIONAL (default = true)
      * @return Elastica_Type_Mapping
@@ -156,6 +156,7 @@ class Elastica_Type_Mapping
     /**
      * Converts the mapping to an array
      *
+     * @throws Elastica_Exception_Invalid
      * @return array Mapping as array
      */
     public function toArray()
@@ -166,7 +167,7 @@ class Elastica_Type_Mapping
             throw new Elastica_Exception_Invalid('Type has to be set');
         }
 
-        return array($type->getType() => $this->_mapping);
+        return array($type->getName() => $this->_mapping);
     }
 
     /**

@@ -12,7 +12,7 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
     /**
      * Sets the field for histogram
      *
-     * @param  string                   $field The name of the field for the historgram
+     * @param  string                   $field The name of the field for the histogram
      * @return Elastica_Facet_Histogram
      */
     public function setField($field)
@@ -48,6 +48,7 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
      *
      * @param string $keyScript   Script to check whether it falls into the range.
      * @param string $valueScript Script to use for statistical calculations.
+     * @return Elastica_Facet_Histogram
      */
     public function setKeyValueScripts($keyScript, $valueScript)
     {

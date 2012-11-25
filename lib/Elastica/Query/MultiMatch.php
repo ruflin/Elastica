@@ -51,7 +51,7 @@ class Elastica_Query_MultiMatch extends Elastica_Query_Abstract
      *
      * If not set, defaults to 0.0.
      *
-     * @param float $                        tieBreaker
+     * @param float $tieBreaker
      * @return Elastica_Query_MultiMatch Current object
      */
     public function setTieBreaker($tieBreaker = 0.0)

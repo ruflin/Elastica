@@ -53,7 +53,7 @@ class Elastica_Query_Ids extends Elastica_Query_Abstract
     public function addType($type)
     {
         if ($type instanceof Elastica_Type) {
-            $type = $type->getType();
+            $type = $type->getName();
         } elseif (empty($type) && !is_numeric($type)) {
             // A type can be 0, but cannot be empty
             return $this;
@@ -73,7 +73,7 @@ class Elastica_Query_Ids extends Elastica_Query_Abstract
     public function setType($type)
     {
         if ($type instanceof Elastica_Type) {
-            $type = $type->getType();
+            $type = $type->getName();
         } elseif (empty($type) && !is_numeric($type)) {
             // A type can be 0, but cannot be empty
             return $this;

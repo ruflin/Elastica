@@ -66,13 +66,13 @@ class Elastica_Exception_Client extends Elastica_Exception_Abstract
                 $error = "Malformed URL";
                 break;
             case CURLE_COULDNT_RESOLVE_PROXY:
-                $error = "Couldnt resolve proxy";
+                $error = "Couldn't resolve proxy";
                 break;
             case CURLE_COULDNT_RESOLVE_HOST:
-                $error = "Couldnt resolve host";
+                $error = "Couldn't resolve host";
                 break;
             case CURLE_COULDNT_CONNECT:
-                $error = "Couldnt connect to host, ElasticSearch down?";
+                $error = "Couldn't connect to host, ElasticSearch down?";
                 break;
             case 28:
                 $error = "Operation timed out";

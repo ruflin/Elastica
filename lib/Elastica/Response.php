@@ -2,7 +2,7 @@
 /**
  * Elastica Response object
  *
- * Stores query time, and result array -> is given to resultset, returned by ...
+ * Stores query time, and result array -> is given to result set, returned by ...
  *
  * @category Xodoa
  * @package Elastica
@@ -114,7 +114,7 @@ class Elastica_Response
             } else {
 
                 $tempResponse = json_decode($response, true);
-                // If error is returned, json_decod makes empty string of string
+                // If error is returned, json_decode makes empty string of string
                 if (!empty($tempResponse)) {
                     $response = $tempResponse;
                 }
@@ -184,6 +184,7 @@ class Elastica_Response
     /**
      * Time request took
      *
+     * @throws Elastica_Exception_NotFound
      * @return int Time request took
      */
     public function getEngineTime()
@@ -200,6 +201,7 @@ class Elastica_Response
     /**
      * Get the _shard statistics for the response
      *
+     * @throws Elastica_Exception_NotFound
      * @return array
      */
     public function getShardsStatistics()

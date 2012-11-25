@@ -85,6 +85,7 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
      * Has to be set in child class
      *
      * @param Elastica_Client $client OPTIONAL Client object
+     * @throws Elastica_Exception_Invalid
      */
     public function __construct(Elastica_Client $client = null)
     {

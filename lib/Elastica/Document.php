@@ -39,7 +39,7 @@ class Elastica_Document extends Elastica_Param
     /**
      * Creates a new document
      *
-     * @param int    $id    OPTIONAL $id Id is create if empty
+     * @param int|string $id OPTIONAL $id Id is create if empty
      * @param array  $data  OPTIONAL Data array
      * @param string $type  OPTIONAL Type name
      * @param string $index OPTIONAL Index name
@@ -149,7 +149,7 @@ class Elastica_Document extends Elastica_Param
     }
 
     /**
-     * Overwrites the curent document data with the given data
+     * Overwrites the current document data with the given data
      *
      * @param  array             $data Data array
      * @return Elastica_Document
@@ -252,7 +252,7 @@ class Elastica_Document extends Elastica_Param
      * Sets the version_type of a document
      * Default in ES is internal, but you can set to external to use custom versioning
      *
-     * @param  int               $version Document version
+     * @param int $versionType Document version type
      * @return Elastica_Document Current object
      * @link http://www.elasticsearch.org/guide/reference/api/index_.html
      */

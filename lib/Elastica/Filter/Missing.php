@@ -27,6 +27,7 @@ class Elastica_Filter_Missing extends Elastica_Filter_Abstract
      * Set field
      *
      * @param string $field
+     * @return Elastica_Filter_Missing
      */
     public function setField($field)
     {

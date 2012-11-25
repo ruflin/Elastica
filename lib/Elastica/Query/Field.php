@@ -53,6 +53,7 @@ class Elastica_Query_Field extends Elastica_Query_Abstract
      * Sets a new query string for the object
      *
      * @param  string               $queryString Query string
+     * @throws Elastica_Exception_Invalid
      * @return Elastica_Query_Field Current object
      */
     public function setQueryString($queryString)
