@@ -1,0 +1,8 @@
+php_thrift_protocol.lo: /home/munkie/Projects/Elastica/thrift/ext/thrift_protocol/php_thrift_protocol.cpp
+	$(LIBTOOL) --mode=compile $(CXX)  -I. -I/home/munkie/Projects/Elastica/thrift/ext/thrift_protocol $(COMMON_FLAGS) $(CXXFLAGS_CLEAN) $(EXTRA_CXXFLAGS)  -c /home/munkie/Projects/Elastica/thrift/ext/thrift_protocol/php_thrift_protocol.cpp -o php_thrift_protocol.lo 
+$(phplibdir)/thrift_protocol.la: ./thrift_protocol.la
+	$(LIBTOOL) --mode=install cp ./thrift_protocol.la $(phplibdir)
+
+./thrift_protocol.la: $(shared_objects_thrift_protocol) $(THRIFT_PROTOCOL_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_thrift_protocol) $(THRIFT_PROTOCOL_SHARED_LIBADD)
+
