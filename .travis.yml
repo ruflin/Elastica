@@ -1,5 +1,10 @@
 language: php
 
+php:
+  - 5.2
+  - 5.3
+  - 5.4
+
 env:
   global:
     - ES_VER=0.19.11
