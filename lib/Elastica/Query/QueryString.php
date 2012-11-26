@@ -31,6 +31,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      * Sets a new query string for the object
      *
      * @param  string                     $query Query string
+     * @throws Elastica_Exception_Invalid
      * @return Elastica_Query_QueryString Current object
      */
     public function setQuery($query = '')
@@ -120,7 +121,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
     }
 
     /**
-     * Sets the paramater to enable the position increments in result queries.
+     * Sets the parameter to enable the position increments in result queries.
      *
      * If not set, defaults to true.
      *
@@ -217,6 +218,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      * If no fields are set, _all is chosen
      *
      * @param  array                      $fields Fields
+     * @throws Elastica_Exception_Invalid
      * @return Elastica_Query_QueryString Current object
      */
     public function setFields(array $fields)
@@ -229,7 +231,7 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
     }
 
     /**
-     * Whether to use bool or dis_max quueries to internally combine results for multi field search.
+     * Whether to use bool or dis_max queries to internally combine results for multi field search.
      *
      * @param  bool                       $value Determines whether to use
      * @return Elastica_Query_QueryString Current object
@@ -246,8 +248,22 @@ class Elastica_Query_QueryString extends Elastica_Query_Abstract
      *
      * @param  int                        $tieBreaker
      * @return Elastica_Query_QueryString Current object
+     * @deprecated
      */
     public function setTieBraker($tieBreaker = 0)
+    {
+        return $this->setTieBreaker($tieBreaker);
+    }
+
+    /**
+     * When using dis_max, the disjunction max tie breaker.
+     *
+     * If not set, defaults to 0.
+     *
+     * @param  int                        $tieBreaker
+     * @return Elastica_Query_QueryString Current object
+     */
+    public function setTieBreaker($tieBreaker = 0)
     {
         return $this->setParam('tie_breaker', (int) $tieBreaker);
     }

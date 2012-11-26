@@ -31,6 +31,7 @@ class Elastica_Index implements Elastica_Searchable
      *
      * @param Elastica_Client $client Client object
      * @param string          $name   Index name
+     * @throws Elastica_Exception_Invalid
      */
     public function __construct(Elastica_Client $client, $name)
     {
@@ -66,7 +67,7 @@ class Elastica_Index implements Elastica_Searchable
     /**
      * Return Index Stats
      *
-     * @return ELastica_Index_Stats
+     * @return Elastica_Index_Stats
      */
     public function getStats()
     {
@@ -100,7 +101,8 @@ class Elastica_Index implements Elastica_Searchable
     /**
      * Uses _bulk to send documents to the server
      *
-     * @param array $docs Array of Elastica_Document
+     * @param array|Elastica_Document[] $docs Array of Elastica_Document
+     * @return Elastica_Response
      * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
      */
     public function addDocuments(array $docs)
@@ -156,7 +158,7 @@ class Elastica_Index implements Elastica_Searchable
     }
 
     /**
-     * Refreshs the index
+     * Refreshes the index
      *
      * @return Elastica_Response Response object
      * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/refresh/
@@ -173,6 +175,7 @@ class Elastica_Index implements Elastica_Searchable
      * @param bool|array $options OPTIONAL
      *                            bool=> Deletes index first if already exists (default = false).
      *                            array => Associative array of options (option=>value)
+     * @throws Elastica_Exception_Invalid
      * @return array Server response
      * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/
      */
@@ -347,7 +350,7 @@ class Elastica_Index implements Elastica_Searchable
     /**
      * Clears the cache of an index
      *
-     * @return Elastica_Response Reponse object
+     * @return Elastica_Response Response object
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache.html
      */
     public function clearCache()
@@ -358,9 +361,9 @@ class Elastica_Index implements Elastica_Searchable
     }
 
     /**
-     * Flushs the index to storage
+     * Flushes the index to storage
      *
-     * @return Elastica_Response Reponse object
+     * @return Elastica_Response Response object
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html
      */
     public function flush()

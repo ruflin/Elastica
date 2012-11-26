@@ -76,6 +76,7 @@ class Elastica_Param
      *
      * @param string $key   Key to set
      * @param mixed  $value Key Value
+     * @return Elastica_Param
      */
     public function setParam($key, $value)
     {

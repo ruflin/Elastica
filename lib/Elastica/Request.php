@@ -62,7 +62,7 @@ class Elastica_Request
      * @param string          $path   Request path
      * @param string          $method Request method (use const's)
      * @param array           $data   OPTIONAL Data array
-     * @param array           $query  OPTIONLA Query params
+     * @param array           $query  OPTIONAL Query params
      */
     public function __construct(Elastica_Client $client, $path, $method, $data = array(), array $query = array())
     {
@@ -100,6 +100,7 @@ class Elastica_Request
      * Sets the request data
      *
      * @param array $data Request data
+     * @return Elastica_Request
      */
     public function setData($data)
     {

@@ -48,6 +48,7 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
      *
      * @param  string                        $type Query type
      * @param  Elastica_Query_Abstract|array $args Query
+     * @return Elastica_Query_Bool
      * @throws Elastica_Exception_Invalid    If not valid query
      */
     protected function _addQuery($type, $args)

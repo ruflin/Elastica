@@ -75,16 +75,14 @@ class Elastica_ParamTest extends Elastica_Test
         $this->assertEquals(array($value1, $value2), $param->getParam($key));
     }
 
+    /**
+     * @expectedException Elastica_Exception_Invalid
+     */
     public function testGetParamInvalid()
     {
         $param = new Elastica_Param();
 
-        try {
-            $param->getParam('notest');
-            $this->fail('Should throw exception');
-        } catch (Elastica_Exception_Invalid $e) {
-            $this->assertTrue(true);
-        }
+        $param->getParam('notest');
     }
 
     public function testHasParam()

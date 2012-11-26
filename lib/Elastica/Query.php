@@ -38,8 +38,9 @@ class Elastica_Query extends Elastica_Param
      * If query is empty,
      *
      * @param  mixed          $query
+     * @throws Elastica_Exception_NotImplemented
      * @return Elastica_Query
-     **/
+     */
     public static function create($query)
     {
         switch (true) {
@@ -219,7 +220,7 @@ class Elastica_Query extends Elastica_Param
     /**
      * Sets the fields to be returned by the search
      *
-     * @param  array          $fields Fields to be returne
+     * @param  array          $fields Fields to be returned
      * @return Elastica_Query Current object
      * @link http://www.elasticsearch.org/guide/reference/api/search/fields.html
      */
@@ -247,6 +248,7 @@ class Elastica_Query extends Elastica_Param
     /**
      * Adds a Script to the query
      *
+     * @param string $name
      * @param  Elastica_Script $script Script object
      * @return Elastica_Query  Query object
      */
@@ -305,7 +307,8 @@ class Elastica_Query extends Elastica_Param
     /**
      * Allows filtering of documents based on a minimum score
      *
-     * @param  int|double     $minScore Minimum score to filter documents by
+     * @param  int     $minScore Minimum score to filter documents by
+     * @throws Elastica_Exception_Invalid
      * @return Elastica_Query Query object
      */
     public function setMinScore($minScore)

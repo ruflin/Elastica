@@ -27,7 +27,7 @@ class Elastica_Exception_Response extends Elastica_Exception_Abstract
     }
 
     /**
-     * Returns reponsce object
+     * Returns response object
      *
      * @return Elastica_Response Response object
      */

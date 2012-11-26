@@ -54,7 +54,7 @@ class Elastica_Status
     /**
      * Returns status objects of all indices
      *
-     * @return array List of Elastica_Client_Index objects
+     * @return array|Elastica_Index_Status[] List of Elastica_Client_Index objects
      */
     public function getIndexStatuses()
     {
@@ -114,7 +114,7 @@ class Elastica_Status
      * Returns an array with all indices that the given alias name points to
      *
      * @param  string $name Alias name
-     * @return array  List of Elastica_Index
+     * @return array|Elastica_Index[]  List of Elastica_Index
      */
     public function getIndicesWithAlias($name)
     {

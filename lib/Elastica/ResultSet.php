@@ -3,7 +3,7 @@
  * Elastica result set
  *
  * List of all hits that are returned for a search on elasticsearch
- * Result set implents iterator
+ * Result set implements iterator
  *
  * @category Xodoa
  * @package Elastica
@@ -32,6 +32,12 @@ class Elastica_ResultSet implements Iterator, Countable
      */
     protected $_response = null;
     protected $_took = 0;
+
+    /**
+     * @var int
+     */
+    protected $_totalHits = 0;
+
     /**
      * Constructs ResultSet object
      *
@@ -44,7 +50,7 @@ class Elastica_ResultSet implements Iterator, Countable
     }
 
     /**
-     * Loads all data into the results object (initalisation)
+     * Loads all data into the results object (initialisation)
      *
      * @param Elastica_Response $response Response object
      */
