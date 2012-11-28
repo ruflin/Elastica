@@ -20,6 +20,11 @@ class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_Abstract_GeoDista
     const RANGE_INCLUDE_UPPER = 'include_upper';
 
     /**
+     * @var array
+     */
+    protected $_ranges = array();
+
+    /**
      * @param string $key
      * @param array|string $location
      * @param string $distance
@@ -40,6 +45,8 @@ class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_Abstract_GeoDista
      */
     public function setRanges(array $ranges)
     {
+        $this->_ranges = array();
+
         foreach ($ranges as $key => $value) {
             $this->setRange($key, $value);
         }
@@ -70,8 +77,20 @@ class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_Abstract_GeoDista
             default:
                 throw new Elastica_Exception_Invalid('Invalid range parameter given: ' . $key);
         }
-        $this->setParam($key, $value);
+        $this->_ranges[$key] = $value;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        foreach ($this->_ranges as $key => $value) {
+            $this->setParam($key, $value);
+        }
+
+        return parent::toArray();
     }
 }

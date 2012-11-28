@@ -1,5 +1,8 @@
 CHANGES
 
+2012-11-38
+- Added Elastica_Filter_GeoDistanceRange filter
+
 2012-11-23
 - Simplified Elastica_Document data handling by extending Elastica_Param
 
