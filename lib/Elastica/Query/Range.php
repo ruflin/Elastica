@@ -11,6 +11,19 @@
 class Elastica_Query_Range extends Elastica_Query_Abstract
 {
     /**
+     * Constructor
+     *
+     * @param string    $fieldName  Field name
+     * @param array     $args       Field arguments
+     */
+    public function __construct($fieldName = null, array $args = array())
+    {
+        if ($fieldName) {
+            $this->addField($fieldName, $args);
+        }
+    }
+
+    /**
      * Adds a range field to the query
      *
      * @param  string               $fieldName Field name
@@ -20,6 +33,5 @@ class Elastica_Query_Range extends Elastica_Query_Abstract
     public function addField($fieldName, array $args)
     {
         return $this->setParam($fieldName, $args);
-
     }
 }
