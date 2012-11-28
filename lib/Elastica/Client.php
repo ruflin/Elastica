@@ -194,7 +194,7 @@ class Elastica_Client
      * @param  array|Elastica_Document[]  $docs Array of Elastica_Document
      * @return Elastica_Response          Response object
      * @throws Elastica_Exception_Invalid If docs is empty
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
     public function addDocuments(array $docs)
     {
@@ -283,7 +283,7 @@ class Elastica_Client
      * @param  string|Elastica_Type  $type  Type of documents
      * @throws Elastica_Exception_Invalid
      * @return Elastica_Response     Response object
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
     public function deleteIds(array $ids, $index, $type)
     {
@@ -332,7 +332,7 @@ class Elastica_Client
      * @throws Elastica_Exception_Invalid
      * @return Elastica_Response Response object
      * @todo Test
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
     public function bulk(array $params)
     {
@@ -386,7 +386,7 @@ class Elastica_Client
      *
      * @param  array             $args OPTIONAL Optional arguments
      * @return Elastica_Response Response object
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize.html
      */
     public function optimizeAll($args = array())
     {

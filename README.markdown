@@ -9,7 +9,7 @@ Check out the [Elastica documentation](http://Elastica.io/) to find out how Elas
 
 About
 ---------------------
-PHP client for the distributed search engine [elasticsearch](http://www.elasticsearch.com/) which is 
+PHP client for the distributed search engine [elasticsearch](http://www.elasticsearch.org/) which is
 based on [Lucene](http://lucene.apache.org/java/docs/index.html) and can be an alternative to [solr](http://lucene.apache.org/solr/).
 The client naming and structure is consistent with [Zend Framework](http://framework.zend.com/)
 and other PHP frameworks. This makes it easy to use the client in combination with Zend Framework.
