@@ -104,7 +104,7 @@ class Elastica_Type implements Elastica_Searchable
      *
      * @param array|Elastica_Document[] $docs Array of Elastica_Document
      * @return Elastica_Response
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
     public function addDocuments(array $docs)
     {
