@@ -103,7 +103,7 @@ class Elastica_Index implements Elastica_Searchable
      *
      * @param array|Elastica_Document[] $docs Array of Elastica_Document
      * @return Elastica_Response
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/bulk/
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
     public function addDocuments(array $docs)
     {
@@ -149,7 +149,7 @@ class Elastica_Index implements Elastica_Searchable
      *
      * @param  array $args OPTIONAL Additional arguments
      * @return array Server response
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/optimize/
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize.html
      */
     public function optimize($args = array())
     {
@@ -161,7 +161,7 @@ class Elastica_Index implements Elastica_Searchable
      * Refreshes the index
      *
      * @return Elastica_Response Response object
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/refresh/
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh.html
      */
     public function refresh()
     {
@@ -177,7 +177,7 @@ class Elastica_Index implements Elastica_Searchable
      *                            array => Associative array of options (option=>value)
      * @throws Elastica_Exception_Invalid
      * @return array Server response
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/indices/create_index/
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index.html
      */
     public function create(array $args = array(), $options = null)
     {

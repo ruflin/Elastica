@@ -136,7 +136,7 @@ class Elastica_Document extends Elastica_Param
      * @param string $key       Field key
      * @param float  $latitude  Latitude value
      * @param float  $longitude Longitude value
-     * @link http://www.elasticsearch.com/docs/elasticsearch/mapping/geo_point/
+     * @link http://www.elasticsearch.org/guide/reference/mapping/geo-point-type.html
      * @return Elastica_Document
      */
     public function addGeoPoint($key, $latitude, $longitude)
