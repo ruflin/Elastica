@@ -7,7 +7,7 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-filter.html
  */
-class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
+class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract_GeoDistance
 {
     const DISTANCE_TYPE_ARC = 'arc';
     const DISTANCE_TYPE_PLANE = 'plane';
@@ -15,44 +15,6 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
     const OPTIMIZE_BBOX_MEMORY = 'memory';
     const OPTIMIZE_BBOX_INDEXED = 'indexed';
     const OPTIMIZE_BBOX_NONE = 'none';
-
-    /**
-     * Location type
-     *
-     * Decides if this filter uses latitude/longitude or geohash for the location.
-     * Values are "latlon" or "geohash".
-     *
-     * @var string
-     */
-    private $_locationType = null;
-
-    /**
-     * Key
-     *
-     * @var string
-     */
-    private $_key = null;
-
-    /**
-     * Latitude
-     *
-     * @var float
-     */
-    private $_latitude = null;
-
-    /**
-     * Longitude
-     *
-     * @var float
-     */
-    private $_longitude = null;
-
-    /**
-     * Geohash
-     *
-     * @var string
-     */
-    private $_geohash = null;
 
     /**
      * Create GeoDistance object
@@ -69,31 +31,8 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
             extract($this->_oldConstruct(func_get_args()));
         }
 
-        // Key
-        $this->setKey($key);
+        parent::__construct($key, $location);
 
-        // Location
-        if (is_array($location)) { // Latitude/Longitude
-            // Latitude
-            if (isset($location['lat'])) {
-                $this->setLatitude($location['lat']);
-            } else {
-                throw new Elastica_Exception_Invalid('$location[\'lat\'] has to be set');
-            }
-
-            // Longitude
-            if (isset($location['lon'])) {
-                $this->setLongitude($location['lon']);
-            } else {
-                throw new Elastica_Exception_Invalid('$location[\'lon\'] has to be set');
-            }
-        } elseif (is_string($location)) { // Geohash
-            $this->setGeohash($location);
-        } else { // Invalid location
-            throw new Elastica_Exception_Invalid('$location has to be an array (latitude/longitude) or a string (geohash)');
-        }
-
-        //Distance
         $this->setDistance($distance);
     }
 
@@ -115,53 +54,6 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
             ),
             'distance' => $args[3]
         );
-    }
-
-    /**
-     * @param  string                      $key
-     * @return Elastica_Filter_GeoDistance current filter
-     */
-    public function setKey($key)
-    {
-        $this->_key = $key;
-
-        return $this;
-    }
-
-    /**
-     * @param  float                       $latitude
-     * @return Elastica_Filter_GeoDistance current filter
-     */
-    public function setLatitude($latitude)
-    {
-        $this->_latitude = (float) $latitude;
-        $this->_locationType = 'latlon';
-
-        return $this;
-    }
-
-    /**
-     * @param  float                       $longitude
-     * @return Elastica_Filter_GeoDistance current filter
-     */
-    public function setLongitude($longitude)
-    {
-        $this->_longitude = (float) $longitude;
-        $this->_locationType = 'latlon';
-
-        return $this;
-    }
-
-    /**
-     * @param  string                      $geohash
-     * @return Elastica_Filter_GeoDistance current filter
-     */
-    public function setGeohash($geohash)
-    {
-        $this->_geohash = $geohash;
-        $this->_locationType = 'geohash';
-
-        return $this;
     }
 
     /**
@@ -199,44 +91,5 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract
         $this->setParam('optimize_bbox', $optimizeBbox);
 
         return $this;
-    }
-
-    /**
-     * @see Elastica_Param::toArray()
-     * @throws Elastica_Exception_Invalid
-     */
-    public function toArray()
-    {
-        $data = parent::toArray();
-
-        // Add location to data array
-        $filterName = $this->_getBaseName();
-        $filterData = $data[$filterName];
-
-        if ($this->_locationType === 'latlon') { // Latitude/longitude
-            $location = array();
-
-            if (isset($this->_latitude)) { // Latitude
-                $location['lat'] = $this->_latitude;
-            } else {
-                throw new Elastica_Exception_Invalid('Latitude has to be set');
-            }
-
-            if (isset($this->_longitude)) { // Geohash
-                $location['lon'] = $this->_longitude;
-            } else {
-                throw new Elastica_Exception_Invalid('Longitude has to be set');
-            }
-        } elseif ($this->_locationType === 'geohash') { // Geohash
-            $location = $this->_geohash;
-        } else { // Invalid location type
-            throw new Elastica_Exception_Invalid('Invalid location type');
-        }
-
-        $filterData[$this->_key] = $location;
-
-        $data[$filterName] = $filterData;
-
-        return $data;
     }
 }
