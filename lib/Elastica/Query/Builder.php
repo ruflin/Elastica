@@ -6,7 +6,7 @@
  * @category Xodoa
  * @package Elastica
  * @author Chris Gedrim <chris@gedr.im>
- * @link http://www.elasticsearch.com/
+ * @link http://www.elasticsearch.org/
  **/
 class Elastica_Query_Builder extends Elastica_Query_Abstract
 {

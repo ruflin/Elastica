@@ -131,7 +131,7 @@ class Elastica_Cluster
      *
      * @param array $args Additional arguments
      * @throws Elastica_Exception_NotImplemented
-     * @link http://www.elasticsearch.com/docs/elasticsearch/rest_api/admin/cluster/nodes_info/
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-info.html
      */
     public function getInfo(array $args)
     {
