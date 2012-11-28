@@ -25,10 +25,10 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
     /**
      * Sets a param for the given field
      *
-     * @param  string              $field
-     * @param  string              $key
-     * @param  string              $value
-     * @return Elastica_Query_Text
+     * @param  string               $field
+     * @param  string               $key
+     * @param  string               $value
+     * @return Elastica_Query_Match
      */
     public function setFieldParam($field, $key, $value)
     {
@@ -44,9 +44,9 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
     /**
      * Sets the query string
      *
-     * @param  string              $field
-     * @param  string              $query
-     * @return Elastica_Query_Text
+     * @param  string               $field
+     * @param  string               $query
+     * @return Elastica_Query_Match
      */
     public function setFieldQuery($field, $query)
     {
@@ -56,9 +56,9 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
     /**
      * Set field type
      *
-     * @param  string              $field
-     * @param  string              $type  Text query type
-     * @return Elastica_Query_Text
+     * @param  string               $field
+     * @param  string               $type
+     * @return Elastica_Query_Match
      */
     public function setFieldType($field, $type)
     {
@@ -68,12 +68,26 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
     /**
      * Set field max expansions
      *
-     * @param  string              $field
-     * @param  int                 $maxExpansions
-     * @return Elastica_Query_Text
+     * @param  string               $field
+     * @param  int                  $maxExpansions
+     * @return Elastica_Query_Match
      */
     public function setFieldMaxExpansions($field, $maxExpansions)
     {
         return $this->setFieldParam($field, 'max_expansions', $maxExpansions);
     }
+    
+    /**
+     * Set field boost value
+     *
+     * If not set, defaults to 1.0.
+     *
+     * @param  string               $field
+     * @param  float                $boost
+     * @return Elastica_Query_Match
+     */
+    public function setFieldBoost($field, $boost = 1.0)
+    {
+    	return $this->setFieldParam($field, 'boost', (float) $boost);
+    }    
 }
