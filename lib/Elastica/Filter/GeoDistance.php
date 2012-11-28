@@ -7,7 +7,7 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-filter.html
  */
-class Elastica_Filter_GeoDistance extends Elastica_Filter_GeoDistance_Abstract
+class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract_GeoDistance
 {
     const DISTANCE_TYPE_ARC = 'arc';
     const DISTANCE_TYPE_PLANE = 'plane';

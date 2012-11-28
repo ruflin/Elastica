@@ -7,7 +7,7 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-filter.html
  */
-abstract class Elastica_Filter_GeoDistance_Abstract extends Elastica_Filter_Abstract
+abstract class Elastica_Filter_Abstract_GeoDistance extends Elastica_Filter_Abstract
 {
 
     const LOCATION_TYPE_GEOHASH = 'geohash';

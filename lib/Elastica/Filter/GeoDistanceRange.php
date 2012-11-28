@@ -7,7 +7,7 @@
  * @author munkie
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-range-filter.html
  */
-class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_GeoDistance_Abstract
+class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_Abstract_GeoDistance
 {
     const RANGE_FROM = 'from';
     const RANGE_TO = 'to';
@@ -36,7 +36,7 @@ class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_GeoDistance_Abstr
 
     /**
      * @param array $ranges
-     * @return Elastica_Filter_GeoDistanceRange
+     * @return Elastica_Filter_RangeGeoDistance
      */
     public function setRanges(array $ranges)
     {
@@ -50,7 +50,7 @@ class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_GeoDistance_Abstr
     /**
      * @param string $key
      * @param mixed $value
-     * @return Elastica_Filter_GeoDistanceRange
+     * @return Elastica_Filter_RangeGeoDistance
      * @throws Elastica_Exception_Invalid
      */
     public function setRange($key, $value)
