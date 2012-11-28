@@ -49,6 +49,7 @@ class Elastica_PercolatorTest extends Elastica_Test
         $doc2->add('name', 'nicolas');
 
         $index = new Elastica_Index($index->getClient(), '_percolator');
+        $index->optimize();
         $index->refresh();
 
         $matches1 = $percolator->matchDoc($doc1);
