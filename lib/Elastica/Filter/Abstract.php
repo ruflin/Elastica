@@ -48,4 +48,46 @@ abstract class Elastica_Filter_Abstract extends Elastica_Param
     {
         return $this->setParam('_name', $name);
     }
+
+    /**
+     * Returns a filter made from this "and" argument
+     *
+     * @param  Elastica_Filter_Abstract $filter Filter to add
+     * @return Elastica_Filter_Abstract
+     */
+    public function andFilter(Elastica_Filter_Abstract $filter)
+    {
+        if ($this instanceof Elastica_Filter_MatchAll) {
+            return $filter;
+        }
+
+        if ($this instanceof Elastica_Filter_And) {
+            return $this->addFilter($filter);
+        }
+
+        $result = new Elastica_Filter_And;
+
+        return $result->addFilter($this)->addFilter($filter);
+    }
+
+    /**
+     * Returns a filter made from this "or" argument
+     *
+     * @param  Elastica_Filter_Abstract $filter Filter to add
+     * @return Elastica_Filter_Abstract
+     */
+    public function orFilter(Elastica_Filter_Abstract $filter)
+    {
+        if ($this instanceof Elastica_Filter_MatchAll) {
+            return $filter;
+        }
+
+        if ($this instanceof Elastica_Filter_Or) {
+            return $this->addFilter($filter);
+        }
+
+        $result = new Elastica_Filter_Or;
+
+        return $result->addFilter($this)->addFilter($filter);
+    }
 }
