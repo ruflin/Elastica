@@ -15,6 +15,11 @@ class Elastica_Multi_Search
     protected $_searches = array();
 
     /**
+     * @var array
+     */
+    protected $_options = array();
+
+    /**
      * @var Elastica_Client
      */
     protected $_client;
@@ -26,7 +31,7 @@ class Elastica_Multi_Search
      */
     public function __construct(Elastica_Client $client)
     {
-        $this->_client = $client;
+        $this->setClient($client);
     }
 
     /**
@@ -35,6 +40,17 @@ class Elastica_Multi_Search
     public function getClient()
     {
         return $this->_client;
+    }
+
+    /**
+     * @param Elastica_Client $client
+     * @return Elastica_Multi_Search
+     */
+    public function setClient(Elastica_Client $client)
+    {
+        $this->_client = $client;
+
+        return $this;
     }
 
     /**
@@ -90,6 +106,17 @@ class Elastica_Multi_Search
     }
 
     /**
+     * @param string $searchType
+     * @return Elastica_Multi_Search
+     */
+    public function setSearchType($searchType)
+    {
+        $this->_options[Elastica_Search::OPTION_SEARCH_TYPE] = $searchType;
+
+        return $this;
+    }
+
+    /**
      * @return Elastica_Multi_ResultSet
      */
     public function search()
@@ -99,7 +126,8 @@ class Elastica_Multi_Search
         $response = $this->getClient()->request(
             '_msearch',
             Elastica_Request::POST,
-            $data
+            $data,
+            $this->_options
         );
 
         return new Elastica_Multi_ResultSet($response, $this->getSearches());

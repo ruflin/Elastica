@@ -362,7 +362,7 @@ class Elastica_Search implements Elastica_Searchable
      */
     public function search($query = '', $options = null)
     {
-        $this->setOptionsAndQuery($options, $query);
+        $this->_setOptionsAndQuery($options, $query);
         
         $query = $this->getQuery();
         $path = $this->getPath();
@@ -383,7 +383,7 @@ class Elastica_Search implements Elastica_Searchable
      */
     public function count($query = '')
     {
-        $this->setOptionsAndQuery(null, $query);
+        $this->_setOptionsAndQuery(null, $query);
 
         $query = $this->getQuery();
         $path = $this->getPath();
@@ -404,7 +404,7 @@ class Elastica_Search implements Elastica_Searchable
      * @param string|array|Elastica_Query $query
      * @return Elastica_Search
      */
-    protected function setOptionsAndQuery($options = null, $query = '')
+    protected function _setOptionsAndQuery($options = null, $query = '')
     {
         if ('' != $query) {
             $this->setQuery($query);

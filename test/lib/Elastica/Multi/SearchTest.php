@@ -207,4 +207,85 @@ class Elastica_Multi_SearchTest extends Elastica_Test
 
         $this->assertTrue($multiResultSet->hasError());
     }
+
+    public function testGlobalSearchTypeSearch()
+    {
+        $type = $this->_createType();
+        $index = $type->getIndex();
+        $client = $index->getClient();
+
+        $multiSearch = new Elastica_Multi_Search($client);
+
+        $search1 = new Elastica_Search($client);
+        $search1->addIndex($index)->addType($type);
+        $query1 = new Elastica_Query();
+        $termQuery1 = new Elastica_Query_Term();
+        $termQuery1->setTerm('username', 'farrelley');
+        $query1->setQuery($termQuery1);
+        $query1->setLimit(2);
+        $search1->setQuery($query1);
+
+        $multiSearch->addSearch($search1);
+
+        $this->assertCount(1, $multiSearch->getSearches());
+
+        $search2 = new Elastica_Search($client);
+        $search2->addIndex($index)->addType($type);
+        $query2 = new Elastica_Query();
+        $termQuery2 = new Elastica_Query_Term();
+        $termQuery2->setTerm('username', 'bunny');
+        $query2->setQuery($termQuery2);
+        $query2->setLimit(3);
+        $search2->setQuery($query2);
+
+        $multiSearch->addSearch($search2);
+
+        $multiSearch->setSearchType(Elastica_Search::OPTION_SEARCH_TYPE_COUNT);
+
+        $multiResultSet = $multiSearch->search();
+
+        $this->assertInstanceOf('Elastica_Multi_ResultSet', $multiResultSet);
+        $this->assertCount(2, $multiResultSet);
+        $this->assertInstanceOf('Elastica_Response', $multiResultSet->getResponse());
+
+        $resultSets = $multiResultSet->getResultSets();
+
+        $this->assertInternalType('array', $resultSets);
+
+        $this->assertArrayHasKey(0, $resultSets);
+        $this->assertInstanceOf('Elastica_ResultSet', $resultSets[0]);
+        $this->assertCount(0, $resultSets[0]);
+        $this->assertSame($query1, $resultSets[0]->getQuery());
+        $this->assertEquals(3, $resultSets[0]->getTotalHits());
+
+        $this->assertArrayHasKey(1, $resultSets);
+        $this->assertInstanceOf('Elastica_ResultSet', $resultSets[1]);
+        $this->assertCount(0, $resultSets[1]);
+        $this->assertSame($query2, $resultSets[1]->getQuery());
+        $this->assertEquals(6, $resultSets[1]->getTotalHits());
+
+        $search1->setOption(Elastica_Search::OPTION_SEARCH_TYPE, Elastica_Search::OPTION_SEARCH_TYPE_QUERY_AND_FETCH);
+
+        $multiResultSet = $multiSearch->search();
+
+        $this->assertInstanceOf('Elastica_Multi_ResultSet', $multiResultSet);
+        $this->assertCount(2, $multiResultSet);
+        $this->assertInstanceOf('Elastica_Response', $multiResultSet->getResponse());
+
+        $resultSets = $multiResultSet->getResultSets();
+
+        $this->assertInternalType('array', $resultSets);
+
+        $this->assertArrayHasKey(0, $resultSets);
+        $this->assertInstanceOf('Elastica_ResultSet', $resultSets[0]);
+        $this->assertCount(2, $resultSets[0]);
+        $this->assertSame($query1, $resultSets[0]->getQuery());
+        $this->assertEquals(3, $resultSets[0]->getTotalHits());
+
+        $this->assertArrayHasKey(1, $resultSets);
+        $this->assertInstanceOf('Elastica_ResultSet', $resultSets[1]);
+        $this->assertCount(0, $resultSets[1]);
+        $this->assertSame($query2, $resultSets[1]->getQuery());
+        $this->assertEquals(6, $resultSets[1]->getTotalHits());
+    }
 }
