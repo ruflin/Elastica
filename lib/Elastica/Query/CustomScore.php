@@ -22,9 +22,7 @@ class Elastica_Query_CustomScore extends Elastica_Query_Abstract
         if ($script) {
             $this->setScript($script);
         }
-        if ($query) {
-            $this->setQuery($query);
-        }
+        $this->setQuery($query);
     }
 
     /**

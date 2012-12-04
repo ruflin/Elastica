@@ -45,6 +45,6 @@ class Elastica_Filter_Script extends Elastica_Filter_Abstract
     public function setScript($script)
     {
         $script = Elastica_Script::create($script);
-        return $this->setParam('script', $script);
+        return $this->setParams($script->toArray());
     }
 }
