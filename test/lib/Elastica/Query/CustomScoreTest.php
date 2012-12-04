@@ -56,4 +56,21 @@ class Elastica_Query_CustomScoreTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $customScoreQuery->toArray());
     }
+
+    public function testConstructor()
+    {
+        $string = '_score * 2.0';
+        $customScoreQuery = new Elastica_Query_CustomScore($string);
+
+        $expected = array(
+            'custom_score' => array(
+                'query' => array(
+                    'match_all' => new stdClass,
+                ),
+                'script' => $string,
+            )
+        );
+
+        $this->assertEquals($expected, $customScoreQuery->toArray());
+    }
 }
