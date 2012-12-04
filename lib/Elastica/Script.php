@@ -73,7 +73,7 @@ class Elastica_Script extends Elastica_Param
     }
 
     /**
-     * @param string|array|Elastica_Script|Elastica_Query_Abstract $data
+     * @param string|array|Elastica_Script $data
      * @return Elastica_Script
      */
     static public function create($data)
@@ -82,8 +82,6 @@ class Elastica_Script extends Elastica_Param
         switch (true) {
             case $data instanceof self;
                 return $data;
-            case $data instanceof Elastica_Query_Abstract;
-                return self::_createFromArray($data->toArray());
             case is_array($data);
                 return self::_createFromArray($data);
             case is_string($data):

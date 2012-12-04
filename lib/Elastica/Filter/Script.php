@@ -33,6 +33,9 @@ class Elastica_Filter_Script extends Elastica_Filter_Abstract
      */
     public function setQuery($query)
     {
+        if ($query instanceof Elastica_Query_Abstract) {
+            $query = $query->toArray();
+        }
         return $this->setScript($query);
     }
 

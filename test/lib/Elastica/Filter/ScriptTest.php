@@ -45,4 +45,22 @@ class Elastica_Filter_ScriptTest extends Elastica_Test
         );
         $this->assertEquals($expected, $array);
     }
+
+    public function testSetQuery()
+    {
+        $string = '_score * 2.0';
+        $query = array(
+            'script' => $string,
+        );
+        $script = new Elastica_Filter_Script();
+        $script->setQuery($query);
+
+        $expected = array(
+            'script' => array(
+                'script' => $string,
+            )
+        );
+
+        $this->assertEquals($expected, $script->toArray());
+    }
 }
