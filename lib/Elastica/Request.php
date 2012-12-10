@@ -235,8 +235,13 @@ class Elastica_Request
             }
 
             $server = $servers[self::$_serverId];
-
-            $response = $transport->exec($server);
+			
+			try {
+				$response = $transport->exec($server);
+			} catch (Elastica_Exception_Client $exception) {
+				self::$_serverId = (self::$_serverId + 1) % count($servers);
+				$response = $transport->exec($servers[self::$_serverId];);
+			}
         }
 
         return $response;
