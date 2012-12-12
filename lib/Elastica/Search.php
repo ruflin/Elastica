@@ -210,10 +210,11 @@ class Elastica_Search implements Elastica_Searchable
                             $query->setLimit($value);
                             break;
                         case 'routing' :
-                            $params['routing'] = $value;
-                            break;
                         case 'search_type':
-                            $params['search_type'] = $value;
+                        case 'timeout':
+                        case 'size':
+                        case 'from':
+                            $params[$key] = $value;
                             break;
                         default:
                             throw new Elastica_Exception_Invalid('Invalid option ' . $key);
