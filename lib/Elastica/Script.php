@@ -76,19 +76,18 @@ class Elastica_Script extends Elastica_Param
      * @param string|array|Elastica_Script $data
      * @return Elastica_Script
      */
-    static public function create($data)
+    public static function create($data)
     {
-
-        switch (true) {
-            case $data instanceof self;
-                return $data;
-            case is_array($data);
-                return self::_createFromArray($data);
-            case is_string($data):
-                return new self($data);
+        if ($data instanceof self) {
+            $script = $data;
+        } elseif (is_array($data)) {
+            $script = self::_createFromArray($data);
+        } elseif (is_string($data)) {
+            $script = new self($data);
+        } else {
+            throw new Elastica_Exception_Invalid('Failed to create script. Invalid data passed.');
         }
-
-        throw new Elastica_Exception_Invalid('Failed to create script. Invalid data passed.');
+        return $script;
     }
 
     /**
@@ -96,7 +95,7 @@ class Elastica_Script extends Elastica_Param
      * @return Elastica_Script
      * @throws Elastica_Exception_Invalid
      */
-    static protected function _createFromArray(array $data)
+    protected static function _createFromArray(array $data)
     {
         if (!isset($data['script'])) {
             throw new Elastica_Exception_Invalid("\$data['script'] is required");

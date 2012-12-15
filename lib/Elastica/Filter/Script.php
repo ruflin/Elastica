@@ -14,7 +14,7 @@ class Elastica_Filter_Script extends Elastica_Filter_Abstract
     /**
      * Construct script filter
      *
-     * @param array|Elastica_Query_Abstract $query OPTIONAL Query object
+     * @param array|string|Elastica_Script $script OPTIONAL Script
      */
     public function __construct($script = null)
     {
@@ -29,7 +29,6 @@ class Elastica_Filter_Script extends Elastica_Filter_Abstract
      * @deprecated
      * @param  string|array|Elastica_Query_Abstract $query
      * @return Elastica_Filter_Script
-     * @throws Elastica_Exception_Invalid    Invalid argument type
      */
     public function setQuery($query)
     {
