@@ -230,15 +230,7 @@ class Elastica_Client
             $options['retry_on_conflict'] = $retryOnConflict;
         }
 
-        $data = array(
-            'script' => $script->getScript(),
-        );
-        if ($script->getLang() != null) {
-            $data['lang'] = $script->getLang();
-        }
-        if ($script->getParams() != null) {
-            $data['params'] = $script->getParams();
-        }
+        $data = $script->toArray();
 
         return $this->request($path, Elastica_Request::POST, $data, $options);
     }
