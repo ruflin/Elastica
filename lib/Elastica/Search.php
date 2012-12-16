@@ -209,6 +209,9 @@ class Elastica_Search implements Elastica_Searchable
                         case 'limit' :
                             $query->setLimit($value);
                             break;
+						case 'explain':
+							$query->setExplain($value);
+							break;
                         case 'routing' :
                         case 'search_type':
                         case 'timeout':
