@@ -219,6 +219,9 @@ class Elastica_Search implements Elastica_Searchable
                         case 'from':
                             $params[$key] = $value;
                             break;
+                        case 'explain':
+                            $query->setExplain($value);
+                            break;
                         default:
                             throw new Elastica_Exception_Invalid('Invalid option ' . $key);
                             break;
