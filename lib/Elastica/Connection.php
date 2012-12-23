@@ -32,19 +32,18 @@ class Elastica_Connection extends Elastica_Param
 	const TIMEOUT = 300;
 
 	/**
-	 * @var Elastica_Client
-	 */
-	protected $_client = null;
-
-	/**
 	 * Creates a new connection object. A connection is enabled by default
 	 *
 	 * @param array $params OPTIONAL Connection params: host, port, transport, timeout. All are optional
 	 */
-	public function __construct(Elastica_Client $client, array $params = array()) {
+	public function __construct(array $params = array()) {
 		$this->setParams($params);
-		$this->_client = $client;
 		$this->setEnabled(true);
+
+		// Set empty config param if not exists
+		if (!$this->hasParam('config')) {
+			$this->setParam('config', array());
+		}
 	}
 
 	/**
@@ -205,9 +204,5 @@ class Elastica_Connection extends Elastica_Param
 		}
 
 		return $this->$config[$key];
-	}
-
-	public function getClient() {
-		return $this->_client;
 	}
 }

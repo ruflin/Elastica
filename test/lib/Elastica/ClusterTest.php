@@ -39,7 +39,7 @@ class Elastica_ClusterTest extends Elastica_Test
     }
 
     /**
-     * @expectedException Elastica_Exception_Client
+     * @expectedException Elastica_Exception_Connection
      */
     public function testShutdown()
     {

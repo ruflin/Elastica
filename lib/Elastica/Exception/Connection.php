@@ -1,12 +1,12 @@
 <?php
 /**
- * Client exception
+ * Connection exception
  *
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Exception_Client extends Elastica_Exception_Abstract
+class Elastica_Exception_Connection extends Elastica_Exception_Abstract
 {
     /**
      * Error code / message

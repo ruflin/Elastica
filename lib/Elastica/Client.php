@@ -45,9 +45,9 @@ class Elastica_Client
         'persistent' => true,
         'timeout' => Elastica_Connection::TIMEOUT,
         'headers' => array(),
-		'servers' => array(),
-		'connections' => array(),
-        'curl' => array(),
+		'curl' => array(),
+		'servers' => array(),	// deprecated
+		'connections' => array(),	// host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers)
         'roundRobin' => false,
         'log' => false,
         'retryOnConflict' => 0,
@@ -74,10 +74,16 @@ class Elastica_Client
 	 */
 	protected function _initConnections() {
 
-		$servers = $this->getConfig('servers');
+		$connections = $this->getConfig('connections');
 
-		if (empty($servers)) {
-			$this->_connections[] = new Elastica_Connection($this, array(
+		if (empty($connections)) {
+			// For BC compatibility
+			$connections = $this->getConfig('servers');
+		}
+
+		if (empty($connections)) {
+			// Setup single connection
+			$this->_connections[] = new Elastica_Connection(array(
 				'url' => $this->getConfig('url'),
 				'host' => $this->getHost(),
 				'port' => $this->getPort(),
@@ -90,8 +96,8 @@ class Elastica_Client
 				),
 			));
 		} else {
-			foreach ($servers as $server) {
-				$this->_connections[] = new Elastica_Connection($this, $server);
+			foreach ($connections as $connection) {
+				$this->_connections[] = new Elastica_Connection($connection);
 			}
 		}
 	}
@@ -316,6 +322,13 @@ class Elastica_Client
 		return $this->_connections[0];
 	}
 
+	/**
+	 * @return Elastica_Connection[]
+	 */
+	public function getConnections() {
+		return $this->_connections;
+	}
+
     /**
      * Deletes documents with the given ids, index, type from the index
      *
@@ -417,14 +430,19 @@ class Elastica_Client
      */
     public function request($path, $method, $data = array(), array $query = array())
     {
-        $request = new Elastica_Request($this->getConnection(), $path, $method, $data, $query);
+		$connection = $this->getConnection();
+		try {
+			$request = new Elastica_Request($path, $method, $data, $query, $connection);
 
-		if ($this->getConfig('log')) {
-			$log = new Elastica_Log($this->getConfig('log'));
-			$log->log($request);
+			if ($this->getConfig('log')) {
+				$log = new Elastica_Log($this->getConfig('log'));
+				$log->log($request);
+			}
+
+			return $request->send();
+		} catch (Exception $e) {
+			throw $e;
 		}
-
-        return $request->send();
     }
 
     /**

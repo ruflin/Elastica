@@ -6,19 +6,12 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Request
+class Elastica_Request extends Elastica_Param
 {
     const POST = 'POST';
     const PUT = 'PUT';
     const GET = 'GET';
     const DELETE = 'DELETE';
-
-    /**
-     * Client
-     *
-     * @var Elastica_Client Client object
-     */
-    protected $_client;
 
     /**
      * Request path
@@ -54,28 +47,24 @@ class Elastica_Request
 	protected $_connection;
 
     /**
-     * Internal id of last used server. This is used for round robin
-     *
-     * @var int Last server id
-     */
-    protected static $_serverId = null;
-
-    /**
      * Construct
      *
-     * @param Elastica_Connection $connection
      * @param string          $path   Request path
-     * @param string          $method Request method (use const's)
+     * @param string          $method OPTIONAL Request method (use const's) (default = self::GET)
      * @param array           $data   OPTIONAL Data array
      * @param array           $query  OPTIONAL Query params
+	 * @param Elastica_Connection $connection OPTIONAL Connection object
      */
-    public function __construct(Elastica_Connection $connection, $path, $method, $data = array(), array $query = array())
+    public function __construct($path, $method = self::GET, $data = array(), array $query = array(), Elastica_Connection $connection = null)
     {
-        $this->_connection = $connection;
-        $this->_path = $path;
-        $this->_method = $method;
-        $this->_data = $data;
-        $this->_query = $query;
+        $this->setPath($path);
+        $this->setMethod($method);
+		$this->setData($data);
+		$this->setQuery($query);
+
+		if ($connection) {
+			$this->setConnection($connection);
+		}
     }
 
     /**
@@ -86,9 +75,7 @@ class Elastica_Request
      */
     public function setMethod($method)
     {
-        $this->_method = $method;
-
-        return $this;
+		return $this->setParam('method', $method);
     }
 
     /**
@@ -98,7 +85,7 @@ class Elastica_Request
      */
     public function getMethod()
     {
-        return $this->_method;
+		return $this->getParam('method');
     }
 
     /**
@@ -109,9 +96,7 @@ class Elastica_Request
      */
     public function setData($data)
     {
-        $this->_data = $data;
-
-        return $this;
+		return $this->setParam('data', $data);
     }
 
     /**
@@ -121,7 +106,7 @@ class Elastica_Request
      */
     public function getData()
     {
-        return $this->_data;
+        return $this->getParam('data');
     }
 
     /**
@@ -132,9 +117,7 @@ class Elastica_Request
      */
     public function setPath($path)
     {
-        $this->_path = $path;
-
-        return $this;
+		return $this->setParam('path', $path);
     }
 
     /**
@@ -144,7 +127,7 @@ class Elastica_Request
      */
     public function getPath()
     {
-        return $this->_path;
+		return $this->getParam('path');
     }
 
     /**
@@ -154,8 +137,26 @@ class Elastica_Request
      */
     public function getQuery()
     {
-        return $this->_query;
+		return $this->getParam('query');
     }
+
+	/**
+	 * @param array $query
+	 * @return Elastica_Request
+	 */
+	public function setQuery(array $query = array())
+	{
+		return $this->setParam('query', $query);
+	}
+
+	/**
+	 * @param Elastica_Connection $connection
+	 * @return Elastica_Request
+	 */
+	public function setConnection(Elastica_Connection $connection) {
+		$this->_connection = $connection;
+		return $this;
+	}
 
     /**
      * Return Connection Object
@@ -164,7 +165,10 @@ class Elastica_Request
      */
     public function getConnection()
     {
-        return $this->_connection;
+        if (empty($this->_connection)) {
+			throw new Elastica_Exception_Invalid('No valid connection object set');
+		}
+		return $this->_connection;
     }
 
     /**
@@ -175,6 +179,8 @@ class Elastica_Request
     public function send()
     {
 		$transport = $this->getConnection()->getTransportObject();
+
+		// Refactor: Not full toArray needed in exec?
 		return $transport->exec($this, $this->getConnection()->toArray());
     }
 }

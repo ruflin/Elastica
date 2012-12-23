@@ -26,7 +26,7 @@ class Elastica_Log
     /**
      * Inits log object. Checks if logging is enabled for the given client
      */
-    public function __construct($log)
+    public function __construct($log = '')
     {
         $this->setLog($log);
     }
@@ -44,7 +44,7 @@ class Elastica_Log
 
         $this->_lastMessage = $message;
 
-        if (is_string($this->_log)) {
+        if (!empty($this->_log) && is_string($this->_log)) {
             error_log($message . PHP_EOL, 3, $this->_log);
         } else {
             error_log($message);

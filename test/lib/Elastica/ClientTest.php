@@ -30,7 +30,7 @@ class Elastica_ClientTest extends Elastica_Test
     public function testServersArray()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = new Elastica_Client(array('servers' => array(array('host' => 'localhost', 'port' => 9200))));
+        $client = new Elastica_Client(array('connections' => array(array('host' => 'localhost', 'port' => 9200))));
         $index = $client->getIndex('elastica_test1');
         $index->create(array(), true);
 
@@ -61,7 +61,7 @@ class Elastica_ClientTest extends Elastica_Test
     public function testTwoServersSame()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = new Elastica_Client(array('servers' => array(
+        $client = new Elastica_Client(array('connections' => array(
             array('host' => 'localhost', 'port' => 9200),
             array('host' => 'localhost', 'port' => 9200),
         )));
