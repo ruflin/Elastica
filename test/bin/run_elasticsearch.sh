@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wget http://cloud.github.com/downloads/elasticsearch/elasticsearch/elasticsearch-0.20.1.tar.gz
+wget http://download.elasticsearch.org/elasticsearch/elasticsearch-0.20.1.tar.gz
 tar -xzf elasticsearch-0.20.1.tar.gz
 sed 's/# index.number_of_shards: 1/index.number_of_shards: 2/' elasticsearch-0.20.1/config/elasticsearch.yml > elasticsearch-0.20.1/config/elasticsearch.yml
 sed 's/# index.number_of_replicas: 0/index.number_of_replicas: 0/' elasticsearch-0.20.1/config/elasticsearch.yml > elasticsearch-0.20.1/config/elasticsearch.yml
