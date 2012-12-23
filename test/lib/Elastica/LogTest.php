@@ -25,8 +25,7 @@ class Elastica_LogTest extends Elastica_Test
 
     public function testGetLastMessage()
     {
-        $client = new Elastica_Client(array('log' => '/tmp/php.log'));
-        $log = new Elastica_Log($client);
+        $log = new Elastica_Log('/tmp/php.log');
         $message = 'hello world';
 
         $log->log($message);
