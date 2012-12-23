@@ -24,7 +24,9 @@ class Elastica_Log
     protected $_lastMessage = '';
 
     /**
-     * Inits log object. Checks if logging is enabled for the given client
+     * Inits log object
+	 *
+	 * @param string|bool String to set a specific file for logging
      */
     public function __construct($log = '')
     {
@@ -74,7 +76,7 @@ class Elastica_Log
     protected function _convertRequest(Elastica_Request $request)
     {
         $message = 'curl -X' . strtoupper($request->getMethod()) . ' ';
-        $message .= '\'http://' . $request->getClient()->getHost() . ':' . $request->getClient()->getPort() . '/';
+        $message .= '\'http://' . $request->getConnection()->getHost() . ':' . $request->getConnection()->getPort() . '/';
         $message .= $request->getPath();
 
         $query = $request->getQuery();

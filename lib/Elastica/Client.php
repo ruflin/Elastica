@@ -10,26 +10,36 @@ class Elastica_Client
 {
     /**
      * Default elastic search port
-     */
-    const DEFAULT_PORT = 9200;
+	 *
+	 * @var int
+	 * @deprecated Please us Elastica_Connection
+	 */
+    const DEFAULT_PORT = Elastica_Connection::DEFAULT_PORT;
 
     /**
      * Default host
-     */
-    const DEFAULT_HOST = 'localhost';
+	 *
+	 * @var string
+	 * @deprecated Please us Elastica_Connection
+	 */
+    const DEFAULT_HOST = Elastica_Connection::DEFAULT_HOST;
 
     /**
      * Default transport
      *
      * @var string
+	 * @deprecated Please us Elastica_Connection
      */
-    const DEFAULT_TRANSPORT = 'Http';
+    const DEFAULT_TRANSPORT = Elastica_Connection::DEFAULT_TRANSPORT;
 
     /**
      * Number of seconds after a timeout occurs for every request
      * If using indexing of file large value necessary.
+	 *
+	 * @var int Timeout seconds
+	 * @deprecated Please us Elastica_Connection
      */
-    const TIMEOUT = 300;
+    const TIMEOUT = Elastica_Connection::TIMEOUT;
 
     /**
      * Config with defaults
@@ -37,16 +47,13 @@ class Elastica_Client
      * @var array
      */
     protected $_config = array(
-        'host' => Elastica_Connection::DEFAULT_HOST,
-        'port' => Elastica_Connection::DEFAULT_PORT,
+        'host' => Elastica_Connection::DEFAULT_HOST,	// deprecated
+        'port' => Elastica_Connection::DEFAULT_PORT,	// deprecated
         'path' => '',
         'url' => null,
         'transport' => Elastica_Connection::DEFAULT_TRANSPORT,
         'persistent' => true,
         'timeout' => Elastica_Connection::TIMEOUT,
-        'headers' => array(),
-		'curl' => array(),
-		'servers' => array(),	// deprecated
 		'connections' => array(),	// host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers)
         'roundRobin' => false,
         'log' => false,
@@ -83,30 +90,39 @@ class Elastica_Client
 
 		$connections = $this->getConfig('connections');
 
-		if (empty($connections)) {
-			// For BC compatibility
-			$connections = $this->getConfig('servers');
+		foreach ($connections as $connection) {
+			$this->_connections[] = Elastica_Connection::create($connection);
 		}
 
-		if (empty($connections)) {
-			// Setup single connection
-			$this->_connections[] = Elastica_Connection::create(array(
-				'url' => $this->getConfig('url'),
-				'host' => $this->getHost(),
-				'port' => $this->getPort(),
-				'path' => $this->getConfig('path'),
-				'transport' => $this->getTransport(),
-				'persistent' => $this->getConfig('persistent'),
-				'config' => array(
-					'curl' => $this->getConfig('curl'),
-					'headers' => $this->getConfig('headers'),
-				),
-			));
-		} else {
-			foreach ($connections as $connection) {
-				$this->_connections[] = Elastica_Connection::create($connection);
-			}
+		if (isset($_config['servers'])) {
+			array_merge($this->_connections, $this->_initConnectionDeprecated());
 		}
+
+		// If no connections set, create default connection
+		if (empty($this->_connections)) {
+			$this->_connections[] = Elastica_Connection::create();
+		}
+	}
+
+	/**
+	 * @return Elastica_Connection[]
+	 * @deprecated
+	 */
+	protected function _initConnectionDeprecated() {
+		$this->_connections[] = Elastica_Connection::create(array(
+			'url' => $this->getConfig('url'),
+			'host' => $this->getHost(),
+			'port' => $this->getConfig('port'),
+			'path' => $this->getConfig('path'),
+			'transport' => $this->getConfig('transport'),
+			'persistent' => $this->getConfig('persistent'),
+			'config' => array(
+				'curl' => $this->getConfig('curl'),
+				'headers' => $this->getConfig('headers'),
+			),
+		));
+
+		return $connections;
 	}
 
     /**
@@ -178,25 +194,6 @@ class Elastica_Client
         return $this->getConfig('host');
     }
 
-    /**
-     * Returns connection port of this client
-     *
-     * @return int Connection port
-     */
-    public function getPort()
-    {
-        return (int) $this->getConfig('port');
-    }
-
-    /**
-     * Returns transport type to user
-     *
-     * @return string Transport type
-     */
-    public function getTransport()
-    {
-        return $this->getConfig('transport');
-    }
 
     /**
      * Adds a HTTP Header
@@ -334,7 +331,8 @@ class Elastica_Client
 	/**
 	 * @return Elastica_Connection
 	 */
-	public function getConnection() {
+	public function getConnection()
+	{
 		$enabledConnection = null;
 
 		// TODO: Choose one after other if roundRobin -> should we shuffle the array?

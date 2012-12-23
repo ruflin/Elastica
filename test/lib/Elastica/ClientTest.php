@@ -6,28 +6,11 @@ class Elastica_ClientTest extends Elastica_Test
 
     public function testConstruct()
     {
-        $host = 'ruflin.com';
-        $port = 9300;
-        $client = new Elastica_Client(array('host' => $host, 'port' => $port));
-
-        $this->assertEquals($host, $client->getHost());
-        $this->assertEquals($port, $client->getPort());
-    }
-
-    public function testDefaults()
-    {
         $client = new Elastica_Client();
-
-        $this->assertEquals(Elastica_Client::DEFAULT_HOST, 'localhost');
-        $this->assertEquals(Elastica_Client::DEFAULT_PORT, 9200);
-        $this->assertEquals(Elastica_Client::DEFAULT_TRANSPORT, 'Http');
-
-        $this->assertEquals(Elastica_Client::DEFAULT_HOST, $client->getHost());
-        $this->assertEquals(Elastica_Client::DEFAULT_PORT, $client->getPort());
-        $this->assertEquals(Elastica_Client::DEFAULT_TRANSPORT, $client->getTransport());
+		$this->assertCount(1, $client->getConnections());
     }
 
-    public function testServersArray()
+    public function testConnectionsArray()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
         $client = new Elastica_Client(array('connections' => array(array('host' => 'localhost', 'port' => 9200))));
