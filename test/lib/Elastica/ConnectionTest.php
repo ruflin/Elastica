@@ -24,16 +24,37 @@ class Elastica_ConnectionTest extends Elastica_Test
 		$this->assertTrue($connection->isEnabled());
 	}
 
+	/**
+	 * @expectedException Elastica_Exception_Connection
+	 */
 	public function testInvalidConnection() {
 
 		$connection = new Elastica_Connection(array('port' => 9202));
 
-		$request = new Elastica_Request($connection, '_status', Elastica_Request::GET);
-		$response = $request->send();
-		//curl -XGET 'http://localhost:9200/_status'
+		$request = new Elastica_Request('_status', Elastica_Request::GET);
+		$request->setConnection($connection);
 
-		print_r($response);
+		// Throws exception because no valid connection
+		$request->send();
+	}
 
+	public function testCreate() {
+		$connection = Elastica_Connection::create();
+		$this->assertInstanceOf('Elastica_Connection', $connection);
 
+		$connection = Elastica_Connection::create(array());
+		$this->assertInstanceOf('Elastica_Connection', $connection);
+
+		$port = 9999;
+		$connection = Elastica_Connection::create(array('port' => $port));
+		$this->assertInstanceOf('Elastica_Connection', $connection);
+		$this->assertEquals($port, $connection->getPort());
+	}
+
+	/**
+	 * @expectedException Elastica_Exception_Invalid
+	 */
+	public function testCreateInvalid() {
+		Elastica_Connection::create('test');
 	}
 }

@@ -205,4 +205,22 @@ class Elastica_Connection extends Elastica_Param
 
 		return $this->$config[$key];
 	}
+
+	/**
+	 * @param Elastica_Connection|array $params Params to create a connection
+	 * @return Elastica_Connection
+	 */
+	public static function create($params = array()) {
+		$connection = null;
+
+		if ($params instanceof Elastica_Connection) {
+			$connection = $params;
+		} else if (is_array($params)) {
+			$connection = new Elastica_Connection($params);
+		} else {
+			throw new Elastica_Exception_Invalid('Invalid data type');
+		}
+
+		return $connection;
+	}
 }

@@ -58,14 +58,21 @@ class Elastica_Client
 	 */
 	protected $_connections = array();
 
+	/**
+	 * @var callback
+	 */
+	protected $_callback = null;
+
     /**
      * Creates a new Elastica client
      *
      * @param array $config OPTIONAL Additional config options
+	 * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example conenction down)
      */
-    public function __construct(array $config = array())
+    public function __construct(array $config = array(), $callback = null)
     {
         $this->setConfig($config);
+		$this->_callback = $callback;
 		$this->_initConnections();
     }
 
@@ -83,7 +90,7 @@ class Elastica_Client
 
 		if (empty($connections)) {
 			// Setup single connection
-			$this->_connections[] = new Elastica_Connection(array(
+			$this->_connections[] = Elastica_Connection::create(array(
 				'url' => $this->getConfig('url'),
 				'host' => $this->getHost(),
 				'port' => $this->getPort(),
@@ -97,7 +104,7 @@ class Elastica_Client
 			));
 		} else {
 			foreach ($connections as $connection) {
-				$this->_connections[] = new Elastica_Connection($connection);
+				$this->_connections[] = Elastica_Connection::create($connection);
 			}
 		}
 	}
@@ -340,6 +347,7 @@ class Elastica_Client
 		if (!$enabledConnection) {
 			throw new Elastica_Exception_Client('No enabled connection');
 		}
+
 		return $enabledConnection;
 	}
 
@@ -472,7 +480,12 @@ class Elastica_Client
 			return $request->send();
 		} catch (Elastica_Exception_Connection $e) {
 			$connection->setEnabled(false);
-			// TODO: Call callback?
+
+			// Calls callback with connection as param to make it possible to persist invalid conenctions
+			if ($this->_callback) {
+				call_user_func($this->_callback, $connection);
+			}
+
 			return $this->request($path, $method, $data, $query);
 		}
     }

@@ -414,4 +414,40 @@ class Elastica_ClientTest extends Elastica_Test
 		// One connection has to be disabled
 		$this->assertTrue($connections[0]->isEnabled() == false || $connections[1]->isEnabled() == false);
 	}
+
+	/**
+	 * Tests if the callback works in case a connection is down
+	 */
+	public function testCallback() {
+
+		$count = 0;
+		$object = $this;
+
+		// Callback function which verifies that disabled connection objects are returned
+		$callback = function($connection) use (&$object, &$count) {
+			$object->assertInstanceOf('Elastica_Connection', $connection);
+			$object->assertFalse($connection->isEnabled());
+			$count++;
+		};
+
+		$client = new Elastica_Client(array(), $callback);
+
+		// First connection work, second should not work
+		$connection1 = new Elastica_Connection(array('host' => '127.0.0.2', 'timeout' => 2));
+		$connection2 = new Elastica_Connection(array('host' => '127.0.0.3', 'timeout' => 2));
+
+		$client->setConnections(array($connection1, $connection2));
+
+		$this->assertEquals(0, $count);
+
+		try {
+			$client->request('_status', Elastica_Request::GET);
+			$this->fail('Should throw exception as no connection valid');
+		} catch(Elastica_Exception_Client $e) {
+			$this->assertTrue(true);
+		}
+
+		// Two disabled connections (from closure call)
+		$this->assertEquals(2, $count);
+	}
 }
