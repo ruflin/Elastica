@@ -316,10 +316,31 @@ class Elastica_Client
     }
 
 	/**
+	 * @param Elastica_Connection $connection
+	 * @return Elastica_Client
+	 */
+	public function addConnection(Elastica_Connection $connection) {
+		$this->_connections[] = $connection;
+		return $this;
+	}
+
+	/**
 	 * @return Elastica_Connection
 	 */
 	public function getConnection() {
-		return $this->_connections[0];
+		$enabledConnection = null;
+
+		// TODO: Choose one after other if roundRobin -> should we shuffle the array?
+		foreach ($this->_connections as $connection) {
+			if ($connection->isEnabled()) {
+				$enabledConnection = $connection;
+			}
+		}
+
+		if (!$enabledConnection) {
+			throw new Elastica_Exception_Client('No enabled connection');
+		}
+		return $enabledConnection;
 	}
 
 	/**
@@ -327,6 +348,15 @@ class Elastica_Client
 	 */
 	public function getConnections() {
 		return $this->_connections;
+	}
+
+	/**
+	 * @param Elastica_Connection[] $connections
+	 * @return Elastica_Client
+	 */
+	public function setConnections(array $connections) {
+		$this->_connections = $connections;
+		return $this;
 	}
 
     /**
@@ -440,8 +470,10 @@ class Elastica_Client
 			}
 
 			return $request->send();
-		} catch (Exception $e) {
-			throw $e;
+		} catch (Elastica_Exception_Connection $e) {
+			$connection->setEnabled(false);
+			// TODO: Call callback?
+			return $this->request($path, $method, $data, $query);
 		}
     }
 

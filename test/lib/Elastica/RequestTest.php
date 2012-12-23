@@ -19,6 +19,7 @@ class Elastica_RequestTest extends Elastica_Test
 		$this->assertEquals($query, $request->getQuery());
 		$this->assertEquals($data, $request->getData());
 	}
+
 	/**
 	 * @expectedException Elastica_Exception_Invalid
 	 */
