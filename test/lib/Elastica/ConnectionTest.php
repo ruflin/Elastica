@@ -30,7 +30,7 @@ class Elastica_ConnectionTest extends Elastica_Test
 	 */
 	public function testInvalidConnection() {
 
-		$connection = new Elastica_Connection(array('port' => 9202));
+		$connection = new Elastica_Connection(array('port' => 9999));
 
 		$request = new Elastica_Request('_status', Elastica_Request::GET);
 		$request->setConnection($connection);

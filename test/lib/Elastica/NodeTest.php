@@ -53,17 +53,16 @@ class Elastica_NodeTest extends Elastica_Test
             $this->markTestSkipped('At least two nodes have to be running, because 1 node is shutdown');
         }
 
-        // Stores node info for later
-        $info = $nodes[1]->getInfo();
-		$node = $nodes[0];
-
-		// Do not shutdown node with port 9200 (used later again)
-		if ($info->getPort() != 9200) {
-			$info = $node->getInfo();
-			$node = $nodes[1];
+   		// Store node info of node with port 9200 for later
+		foreach ($nodes as $key => $node) {
+			if ($node->getInfo()->getPort() == 9200) {
+				$info = $node->getInfo();
+				unset($nodes[$key]);
+			}
 		}
 
-		// Shutdown node with port 9201
+		// Select one of the not port 9200 nodes and shut it down
+		$node = array_shift($nodes);
 		$node->shutdown('2s');
 
 		// Wait until node is shutdown

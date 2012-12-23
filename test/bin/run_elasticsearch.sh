@@ -10,6 +10,7 @@ elasticsearch-0.20.1/bin/plugin -install elasticsearch/elasticsearch-mapper-atta
 export JAVA_OPTS="-server"
 elasticsearch-0.20.1/bin/elasticsearch &
 elasticsearch-0.20.1/bin/elasticsearch &
+elasticsearch-0.20.1/bin/elasticsearch &
 
 echo "Waiting until elasticsearch node 1 is ready on port 9200"
 while [[ -z `curl -s 'http://localhost:9200' ` ]]
@@ -25,4 +26,11 @@ do
 	sleep 2s
 done
 
-echo "two elasticsearch nodes are up"
+echo "Waiting until elasticsearch node 3 is ready on port 9202"
+while [[ -z `curl -s 'http://localhost:9202' ` ]]
+do
+	echo -n "."
+	sleep 2s
+done
+
+echo "three elasticsearch nodes are up"
