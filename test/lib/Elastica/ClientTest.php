@@ -357,8 +357,8 @@ class Elastica_ClientTest extends Elastica_Test
 		$client = new Elastica_Client();
 
 		// First connection work, second should not work
-		$connection1 = new Elastica_Connection(array('host' => '127.0.0.1', 'timeout' => 2));
-		$connection2 = new Elastica_Connection(array('host' => '127.0.1.1', 'timeout' => 2));
+		$connection1 = new Elastica_Connection(array('port' => '9200', 'timeout' => 2));
+		$connection2 = new Elastica_Connection(array('port' => '9100', 'timeout' => 2));
 
 		$client->setConnections(array($connection1, $connection2));
 
@@ -377,8 +377,8 @@ class Elastica_ClientTest extends Elastica_Test
 		$client = new Elastica_Client();
 
 		// First connection work, second should not work
-		$connection1 = new Elastica_Connection(array('host' => '127.0.1.2', 'timeout' => 2));
-		$connection2 = new Elastica_Connection(array('host' => '127.0.1.3', 'timeout' => 2));
+		$connection1 = new Elastica_Connection(array('port' => '9101', 'timeout' => 2));
+		$connection2 = new Elastica_Connection(array('port' => '9102', 'timeout' => 2));
 
 		$client->setConnections(array($connection1, $connection2));
 
@@ -416,8 +416,8 @@ class Elastica_ClientTest extends Elastica_Test
 		$client = new Elastica_Client(array(), $callback);
 
 		// First connection work, second should not work
-		$connection1 = new Elastica_Connection(array('host' => '127.0.1.2', 'timeout' => 2));
-		$connection2 = new Elastica_Connection(array('host' => '127.0.2.3', 'timeout' => 2));
+		$connection1 = new Elastica_Connection(array('port' => '9101', 'timeout' => 2));
+		$connection2 = new Elastica_Connection(array('port' => '9102', 'timeout' => 2));
 
 		$client->setConnections(array($connection1, $connection2));
 
@@ -438,7 +438,7 @@ class Elastica_ClientTest extends Elastica_Test
 		$url = 'http://localhost:9200/';
 
 		// Url should overwrite invalid host
-		$client = new Elastica_Client(array('url' => $url, 'host' => '127.0.0.3', 'timeout' => 2));
+		$client = new Elastica_Client(array('url' => $url, 'port' => '9101', 'timeout' => 2));
 
 		$response = $client->request('_status');
 		$this->assertInstanceOf('Elastica_Response', $response);
