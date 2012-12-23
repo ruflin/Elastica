@@ -433,4 +433,14 @@ class Elastica_ClientTest extends Elastica_Test
 		// Two disabled connections (from closure call)
 		$this->assertEquals(2, $count);
 	}
+
+	public function testUrlConstructor() {
+		$url = 'http://localhost:9200/';
+
+		// Url should overwrite invalid host
+		$client = new Elastica_Client(array('url' => $url, 'host' => '127.0.0.3', 'timeout' => 2));
+
+		$response = $client->request('_status');
+		$this->assertInstanceOf('Elastica_Response', $response);
+	}
 }

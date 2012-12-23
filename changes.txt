@@ -7,6 +7,7 @@ CHANGES
 - Elastica_Transport refactored
 - Elastica_Log refactored
 - Renamed Elastica_Exception_Client to Elastica_Exception_Connection
+- Use Elastica_Connection for the following constants: DEFAULT_PORT, DEFAULT_HOST, DEFAULT_TRANSPORT, TIMEOUT
 
 2012-11-38
 - Added Elastica_Filter_GeoDistanceRange filter

@@ -12,6 +12,7 @@ class Elastica_ConnectionTest extends Elastica_Test
 		$this->assertEquals(Elastica_Connection::DEFAULT_TRANSPORT, $connection->getTransport());
 		$this->assertInstanceOf('Elastica_Transport_Abstract', $connection->getTransportObject());
 		$this->assertEquals(Elastica_Connection::TIMEOUT, $connection->getTimeout());
+		$this->assertEquals(array(), $connection->getConfig());
 		$this->assertTrue($connection->isEnabled());
 	}
 
@@ -56,5 +57,20 @@ class Elastica_ConnectionTest extends Elastica_Test
 	 */
 	public function testCreateInvalid() {
 		Elastica_Connection::create('test');
+	}
+
+	public function testGetConfig() {
+		$url = 'test';
+		$connection = new Elastica_Connection(array('config' => array('url' => $url)));
+		$this->assertTrue($connection->hasConfig('url'));
+		$this->assertEquals($url, $connection->getConfig('url'));
+	}
+
+	/**
+	 * @expectedException Elastica_Exception_Invalid
+	 */
+	public function testGetConfigInvalidValue() {
+		$connection = new Elastica_Connection();
+		$connection->getConfig('url');
 	}
 }

@@ -40,7 +40,10 @@ class Elastica_NodeTest extends Elastica_Test
         $this->assertInstanceOf('Elastica_Node_Stats', $stats);
     }
 
-    public function testShutdown()
+	/**
+	 * Shuts one of two nodes down (if two available)
+	 */
+	public function testShutdown()
     {
         $client = new Elastica_Client();
         $nodes = $client->getCluster()->getNodes();
@@ -54,8 +57,12 @@ class Elastica_NodeTest extends Elastica_Test
         $info = $nodes[1]->getInfo();
         $nodes[0]->shutdown('2s');
 
+		print_r($nodes);
+
+		// Wait until node is shutdown
         sleep(5);
 
+		// Use still existing node
         $client = new Elastica_Client(array('host' => $info->getIp(), 'port' => $info->getPort()));
         $names = $client->getCluster()->getNodeNames();
 

@@ -170,18 +170,31 @@ class Elastica_Connection extends Elastica_Param
 		return (bool) $this->hasParam('persistent')?$this->getParam('persistent'):true;
 	}
 
+	/**
+	 * @param array $config
+	 * @return Elastica_Param
+	 */
 	public function setConfig(array $config) {
 		return $this->setParam('config', $config);
 	}
 
+	/**
+	 * @param string $key
+	 * @param mixed $value
+	 * @return Elastica_Connection
+	 */
 	public function addConfig($key, $value) {
 		$this->_params['config'][$key] = $value;
 		return $this;
 	}
 
+	/**
+	 * @param string $key
+	 * @return bool
+	 */
 	public function hasConfig($key) {
 		$config = $this->getConfig();
-		return isset($config['key']);
+		return isset($config[$key]);
 	}
 
 	/**
@@ -199,11 +212,11 @@ class Elastica_Connection extends Elastica_Param
 			return $config;
 		}
 
-		if (!array_key_exists($key, $config[$key])) {
+		if (!array_key_exists($key, $config)) {
 			throw new Elastica_Exception_Invalid('Config key is not set: ' . $key);
 		}
 
-		return $this->$config[$key];
+		return $config[$key];
 	}
 
 	/**

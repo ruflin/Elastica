@@ -41,10 +41,12 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
 		$conn = $this->_getConnection($connection->isPersistent());
 
         // If url is set, url is taken. Otherwise port, host and path
-        if (!empty($params['url'])) {
-            $baseUri = $params['url'];
+		$url = $connection->hasConfig('url')?$connection->getConfig('url'):'';
+
+        if (!empty($url)) {
+            $baseUri = $url;
         } else {
-            $baseUri = $this->_scheme . '://' . $this->getConnection()->getHost() . ':' . $this->getConnection()->getPort() . '/' . $this->getConnection()->getPath();
+            $baseUri = $this->_scheme . '://' . $connection->getHost() . ':' . $connection->getPort() . '/' . $connection->getPath();
         }
 
         $baseUri .= $request->getPath();

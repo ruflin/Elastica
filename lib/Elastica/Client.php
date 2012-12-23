@@ -9,56 +9,26 @@
 class Elastica_Client
 {
     /**
-     * Default elastic search port
-	 *
-	 * @var int
-	 * @deprecated Please us Elastica_Connection
-	 */
-    const DEFAULT_PORT = Elastica_Connection::DEFAULT_PORT;
-
-    /**
-     * Default host
-	 *
-	 * @var string
-	 * @deprecated Please us Elastica_Connection
-	 */
-    const DEFAULT_HOST = Elastica_Connection::DEFAULT_HOST;
-
-    /**
-     * Default transport
-     *
-     * @var string
-	 * @deprecated Please us Elastica_Connection
-     */
-    const DEFAULT_TRANSPORT = Elastica_Connection::DEFAULT_TRANSPORT;
-
-    /**
-     * Number of seconds after a timeout occurs for every request
-     * If using indexing of file large value necessary.
-	 *
-	 * @var int Timeout seconds
-	 * @deprecated Please us Elastica_Connection
-     */
-    const TIMEOUT = Elastica_Connection::TIMEOUT;
-
-    /**
      * Config with defaults
+	 *
+	 * log: Set to true, to enable logging, set a string to log to a specific file
+	 * retryOnConflict: Use in Elastica_Client::updateDocument
      *
      * @var array
      */
     protected $_config = array(
-        'host' => Elastica_Connection::DEFAULT_HOST,	// deprecated
-        'port' => Elastica_Connection::DEFAULT_PORT,	// deprecated
-        'path' => '',
+        'host' => null,
+        'port' => null,
+        'path' => null,
         'url' => null,
-        'transport' => Elastica_Connection::DEFAULT_TRANSPORT,
+        'transport' => null,
         'persistent' => true,
-        'timeout' => Elastica_Connection::TIMEOUT,
-		'connections' => array(),	// host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers)
+        'timeout' => null,
+		'connections' => array(),	// host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers, url)
         'roundRobin' => false,
         'log' => false,
         'retryOnConflict' => 0,
-    );
+	);
 
 	/**
 	 * @var Elastica_Connection[] List of connections
@@ -95,34 +65,33 @@ class Elastica_Client
 		}
 
 		if (isset($_config['servers'])) {
-			array_merge($this->_connections, $this->_initConnectionDeprecated());
+			$this->_connections[] = Elastica_Connection::create($this->getConfig('servers'));
 		}
 
 		// If no connections set, create default connection
 		if (empty($this->_connections)) {
-			$this->_connections[] = Elastica_Connection::create();
+			$this->_connections[] = Elastica_Connection::create($this->_configureParams());
 		}
 	}
 
 	/**
-	 * @return Elastica_Connection[]
-	 * @deprecated
+	 * @return array $params
 	 */
-	protected function _initConnectionDeprecated() {
-		$this->_connections[] = Elastica_Connection::create(array(
-			'url' => $this->getConfig('url'),
-			'host' => $this->getHost(),
-			'port' => $this->getConfig('port'),
-			'path' => $this->getConfig('path'),
-			'transport' => $this->getConfig('transport'),
-			'persistent' => $this->getConfig('persistent'),
-			'config' => array(
-				'curl' => $this->getConfig('curl'),
-				'headers' => $this->getConfig('headers'),
-			),
-		));
+	protected function _configureParams()
+	{
+		$config = $this->getConfig();
 
-		return $connections;
+		$params = array();
+		$params['config'] = array();
+		foreach ($config as $key => $value) {
+			if (in_array($key, array('curl', 'headers', 'url'))) {
+				$params['config'][$key] = $value;
+			} else {
+				$params[$key] = $value;
+			}
+		}
+
+		return $params;
 	}
 
     /**
@@ -183,17 +152,6 @@ class Elastica_Client
     {
         return new Elastica_Index($this, $name);
     }
-
-    /**
-     * Returns host the client connects to
-     *
-     * @return string Host
-     */
-    public function getHost()
-    {
-        return $this->getConfig('host');
-    }
-
 
     /**
      * Adds a HTTP Header
@@ -464,7 +422,7 @@ class Elastica_Client
      * @param  array             $query  OPTIONAL Query params
      * @return Elastica_Response Response object
      */
-    public function request($path, $method, $data = array(), array $query = array())
+    public function request($path, $method = Elastica_Request::GET, $data = array(), array $query = array())
     {
 		$connection = $this->getConnection();
 		try {
