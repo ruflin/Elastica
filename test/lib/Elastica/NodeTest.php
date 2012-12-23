@@ -55,9 +55,16 @@ class Elastica_NodeTest extends Elastica_Test
 
         // Stores node info for later
         $info = $nodes[1]->getInfo();
-        $nodes[0]->shutdown('2s');
+		$node = $nodes[0];
 
-		print_r($nodes);
+		// Do not shutdown node with port 9200 (used later again)
+		if ($info->getPort() != 9200) {
+			$info = $node->getInfo();
+			$node = $nodes[1];
+		}
+
+		// Shutdown node with port 9201
+		$node->shutdown('2s');
 
 		// Wait until node is shutdown
         sleep(5);
