@@ -13,7 +13,7 @@ class Elastica_Transport_Null extends Elastica_Transport_Abstract
      * @param  array             $params Hostname, port, path, ...
      * @return Elastica_Response Response empty object
      */
-    public function exec(array $params)
+    public function exec(Elastica_Request $request, array $params)
     {
     	$response = array(
     			"took" => 0,

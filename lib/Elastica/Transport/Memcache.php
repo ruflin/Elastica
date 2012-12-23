@@ -16,12 +16,10 @@ class Elastica_Transport_Memcache extends Elastica_Transport_Abstract
      * @throws Elastica_Exception_Invalid
      * @return Elastica_Response Response object
      */
-    public function exec(array $params)
+    public function exec(Elastica_Request $request, array $params)
     {
-        $request = $this->getRequest();
-
         $memcache = new Memcache();
-        $memcache->connect($params['host'], $params['port']);
+        $memcache->connect($this->getConnection()->getHost(), $this->getConnection()->getPort());
 
         // Finds right function name
         $function = strtolower($request->getMethod());

@@ -37,20 +37,26 @@ class Elastica_Client
      * @var array
      */
     protected $_config = array(
-        'host' => self::DEFAULT_HOST,
-        'port' => self::DEFAULT_PORT,
+        'host' => Elastica_Connection::DEFAULT_HOST,
+        'port' => Elastica_Connection::DEFAULT_PORT,
         'path' => '',
         'url' => null,
-        'transport' => self::DEFAULT_TRANSPORT,
+        'transport' => Elastica_Connection::DEFAULT_TRANSPORT,
         'persistent' => true,
-        'timeout' => self::TIMEOUT,
+        'timeout' => Elastica_Connection::TIMEOUT,
         'headers' => array(),
-        'servers' => array(),
+		'servers' => array(),
+		'connections' => array(),
         'curl' => array(),
         'roundRobin' => false,
         'log' => false,
         'retryOnConflict' => 0,
     );
+
+	/**
+	 * @var Elastica_Connection[] List of connections
+	 */
+	protected $_connections = array();
 
     /**
      * Creates a new Elastica client
@@ -60,7 +66,35 @@ class Elastica_Client
     public function __construct(array $config = array())
     {
         $this->setConfig($config);
+		$this->_initConnections();
     }
+
+	/**
+	 * Inits the client connections
+	 */
+	protected function _initConnections() {
+
+		$servers = $this->getConfig('servers');
+
+		if (empty($servers)) {
+			$this->_connections[] = new Elastica_Connection($this, array(
+				'url' => $this->getConfig('url'),
+				'host' => $this->getHost(),
+				'port' => $this->getPort(),
+				'path' => $this->getConfig('path'),
+				'transport' => $this->getTransport(),
+				'persistent' => $this->getConfig('persistent'),
+				'config' => array(
+					'curl' => $this->getConfig('curl'),
+					'headers' => $this->getConfig('headers'),
+				),
+			));
+		} else {
+			foreach ($servers as $server) {
+				$this->_connections[] = new Elastica_Connection($this, $server);
+			}
+		}
+	}
 
     /**
      * Sets specific config values (updates and keeps default values)
@@ -275,6 +309,13 @@ class Elastica_Client
         return new Elastica_Cluster($this);
     }
 
+	/**
+	 * @return Elastica_Connection
+	 */
+	public function getConnection() {
+		return $this->_connections[0];
+	}
+
     /**
      * Deletes documents with the given ids, index, type from the index
      *
@@ -376,7 +417,12 @@ class Elastica_Client
      */
     public function request($path, $method, $data = array(), array $query = array())
     {
-        $request = new Elastica_Request($this, $path, $method, $data, $query);
+        $request = new Elastica_Request($this->getConnection(), $path, $method, $data, $query);
+
+		if ($this->getConfig('log')) {
+			$log = new Elastica_Log($this->getConfig('log'));
+			$log->log($request);
+		}
 
         return $request->send();
     }

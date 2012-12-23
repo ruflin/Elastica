@@ -14,7 +14,7 @@ class Elastica_Log
      *
      * @var string|bool
      */
-    protected $_log = false;
+    protected $_log = true;
 
     /**
      * Last logged message
@@ -25,12 +25,10 @@ class Elastica_Log
 
     /**
      * Inits log object. Checks if logging is enabled for the given client
-     *
-     * @param Elastica_Client $client
      */
-    public function __construct(Elastica_Client $client)
+    public function __construct($log)
     {
-        $this->setLog($client->getConfig('log'));
+        $this->setLog($log);
     }
 
     /**
@@ -40,10 +38,6 @@ class Elastica_Log
      */
     public function log($message)
     {
-        if (!$this->_log) {
-            return;
-        }
-
         if ($message instanceof Elastica_Request) {
             $message = $this->_convertRequest($message);
         }
