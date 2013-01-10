@@ -27,6 +27,16 @@ class Elastica_Type implements Elastica_Searchable
     protected $_name = '';
 
     /**
+     * @var \JMS\Serializer\Serializer
+     */
+    protected $_serializer;
+
+    /**
+     * @var array
+     */
+    protected $_serializerGroups;
+
+    /**
      * Creates a new type object inside the given index
      *
      * @param Elastica_Index $index Index Object
@@ -82,6 +92,22 @@ class Elastica_Type implements Elastica_Searchable
         }
 
         return $this->request($path, $type, $doc->getData(), $query);
+    }
+
+    public function addObject($object, Elastica_Document $doc = null)
+    {
+        if (!isset($this->_serializer)) {
+            throw new Elastica_Exception_Runtime('No serializer defined');
+        }
+
+        $this->_serializer->setGroups($this->_serializerGroups);
+        $data = $this->_serializer->serialize($object, 'json');
+        if (!$doc) {
+            $doc = new Elastica_Document();
+        }
+        $doc->setData($data);
+
+        return $this->addDocument($doc);
     }
 
     /**
@@ -328,5 +354,18 @@ class Elastica_Type implements Elastica_Searchable
         $path = $this->getName() . '/' . $path;
 
         return $this->getIndex()->request($path, $method, $data, $query);
+    }
+
+    /**
+     * Sets the serializer used in addObject
+     * @see Elastica_Type::addObject
+     *
+     * @param \JMS\Serializer\Serializer $serializer
+     * @param array $groups
+     */
+    public function setSerializer($serializer, array $groups = array())
+    {
+        $this->_serializer = $serializer;
+        $this->_serializerGroups = $groups;
     }
 }

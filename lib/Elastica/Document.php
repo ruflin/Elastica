@@ -39,12 +39,12 @@ class Elastica_Document extends Elastica_Param
     /**
      * Creates a new document
      *
-     * @param int|string $id OPTIONAL $id Id is create if empty
-     * @param array  $data  OPTIONAL Data array
-     * @param string $type  OPTIONAL Type name
-     * @param string $index OPTIONAL Index name
+     * @param int|string    $id OPTIONAL $id Id is create if empty
+     * @param array|string  $data  OPTIONAL Data array
+     * @param string        $type  OPTIONAL Type name
+     * @param string        $index OPTIONAL Index name
      */
-    public function __construct($id = '', array $data = array(), $type = '', $index = '')
+    public function __construct($id = '', $data = array(), $type = '', $index = '')
     {
         $this->setId($id);
         $this->setData($data);
@@ -151,10 +151,10 @@ class Elastica_Document extends Elastica_Param
     /**
      * Overwrites the current document data with the given data
      *
-     * @param  array             $data Data array
+     * @param  array|string             $data Data array
      * @return Elastica_Document
      */
-    public function setData(array $data)
+    public function setData($data)
     {
         $this->_data = $data;
 
@@ -175,7 +175,7 @@ class Elastica_Document extends Elastica_Param
     /**
      * Returns the document data
      *
-     * @return array Document data
+     * @return array|string Document data
      */
     public function getData()
     {
