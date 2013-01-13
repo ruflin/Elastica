@@ -46,7 +46,7 @@ class Elastica_Type implements Elastica_Searchable
      */
     public function addDocument(Elastica_Document $doc)
     {
-        $path = $doc->getId();
+        $path = urlencode($doc->getId());
 
         $query = array();
 
@@ -145,7 +145,7 @@ class Elastica_Type implements Elastica_Searchable
      */
     public function getDocument($id, $options = array())
     {
-        $path = $id;
+        $path = urlencode($id);
 
         try {
             $result = $this->request($path, Elastica_Request::GET, array(), $options)->getData();
@@ -214,6 +214,22 @@ class Elastica_Type implements Elastica_Searchable
     }
 
     /**
+     * Create search object
+     *
+     * @param  string|array|Elastica_Query $query   Array with all query data inside or a Elastica_Query object
+     * @param  int|array                   $options OPTIONAL Limit or associative array of options (option=>value)
+     * @return Elastica_Search
+     */
+    public function createSearch($query = '', $options = null)
+    {
+        $search = new Elastica_Search($this->getIndex()->getClient());
+        $search->addIndex($this->getIndex());
+        $search->addType($this);
+
+        return $search;
+    }
+
+    /**
      * Do a search on this type
      *
      * @param  string|array|Elastica_Query $query   Array with all query data inside or a Elastica_Query object
@@ -221,11 +237,9 @@ class Elastica_Type implements Elastica_Searchable
      * @return Elastica_ResultSet          ResultSet with all results inside
      * @see Elastica_Searchable::search
      */
-    public function search($query, $options = null)
+    public function search($query = '', $options = null)
     {
-        $search = new Elastica_Search($this->getIndex()->getClient());
-        $search->addIndex($this->getIndex());
-        $search->addType($this);
+        $search = $this->createSearch($query, $options);
 
         return $search->search($query, $options);
     }
@@ -239,13 +253,9 @@ class Elastica_Type implements Elastica_Searchable
      */
     public function count($query = '')
     {
-        $query = Elastica_Query::create($query);
-        $path = '_search';
+        $search = $this->createSearch($query);
 
-        $response = $this->request($path, Elastica_Request::GET, $query->toArray(), array('search_type' => 'count'));
-        $resultSet = new Elastica_ResultSet($response);
-
-        return $resultSet->getTotalHits();
+        return $search->count();
     }
 
     /**
@@ -331,7 +341,7 @@ class Elastica_Type implements Elastica_Searchable
 
         $response = $this->request($path, Elastica_Request::GET, $query->toArray(), $params);
 
-        return new Elastica_ResultSet($response);
+        return new Elastica_ResultSet($response, $query);
     }
 
     /**

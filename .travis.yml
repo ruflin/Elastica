@@ -1,5 +1,14 @@
 language: php
 
+php:
+  - 5.3
+  - 5.4
+
+env:
+  global:
+    - ES_VER=0.20.2
+    - ES_MAPPER_ATTACHMENTS_VER=1.6.0
+
 before_script:
   - ./test/bin/install_php_memcache.sh
   - ./test/bin/run_elasticsearch.sh

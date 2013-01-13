@@ -300,4 +300,25 @@ class Elastica_TypeTest extends Elastica_Test
         $updatedDoc = $type->getDocument($id)->getData();
         $this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
     }
+
+    public function testAddDocumentHashId()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test2');
+
+        $hashId = '#1';
+
+        $doc = new Elastica_Document($hashId, array('name' => 'ruflin'));
+        $type->addDocument($doc);
+
+        $index->refresh();
+
+        $search = new Elastica_Search($index->getClient());
+        $search->addIndex($index);
+        $resultSet = $search->search(new Elastica_Query_MatchAll());
+        $this->assertEquals($hashId, $resultSet->current()->getId());
+
+        $doc = $type->getDocument($hashId);
+        $this->assertEquals($hashId, $doc->getId());
+    }
 }

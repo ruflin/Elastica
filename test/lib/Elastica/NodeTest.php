@@ -40,6 +40,9 @@ class Elastica_NodeTest extends Elastica_Test
         $this->assertInstanceOf('Elastica_Node_Stats', $stats);
     }
 
+    /**
+     * Shuts one of two nodes down (if two available)
+     */
     public function testShutdown()
     {
         $client = new Elastica_Client();
@@ -50,12 +53,22 @@ class Elastica_NodeTest extends Elastica_Test
             $this->markTestSkipped('At least two nodes have to be running, because 1 node is shutdown');
         }
 
-        // Stores node info for later
-        $info = $nodes[1]->getInfo();
-        $nodes[0]->shutdown('2s');
+           // Store node info of node with port 9200 for later
+        foreach ($nodes as $key => $node) {
+            if ($node->getInfo()->getPort() == 9200) {
+                $info = $node->getInfo();
+                unset($nodes[$key]);
+            }
+        }
 
+        // Select one of the not port 9200 nodes and shut it down
+        $node = array_shift($nodes);
+        $node->shutdown('2s');
+
+        // Wait until node is shutdown
         sleep(5);
 
+        // Use still existing node
         $client = new Elastica_Client(array('host' => $info->getIp(), 'port' => $info->getPort()));
         $names = $client->getCluster()->getNodeNames();
 

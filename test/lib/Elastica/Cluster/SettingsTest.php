@@ -6,6 +6,11 @@ class Elastica_Cluster_SettingsTest extends Elastica_Test
     public function testSetTransient()
     {
         $index = $this->_createIndex();
+
+        if (count($index->getClient()->getCluster()->getNodes()) < 2) {
+            $this->markTestSkipped('At least two master nodes have to be running for this test');
+        }
+
         $settings = new Elastica_Cluster_Settings($index->getClient());
 
         $settings->setTransient('discovery.zen.minimum_master_nodes', 2);
@@ -20,6 +25,11 @@ class Elastica_Cluster_SettingsTest extends Elastica_Test
     public function testSetPersistent()
     {
         $index = $this->_createIndex();
+
+        if (count($index->getClient()->getCluster()->getNodes()) < 2) {
+            $this->markTestSkipped('At least two master nodes have to be running for this test');
+        }
+
         $settings = new Elastica_Cluster_Settings($index->getClient());
 
         $settings->setPersistent('discovery.zen.minimum_master_nodes', 2);

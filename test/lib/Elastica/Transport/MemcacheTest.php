@@ -10,16 +10,6 @@ class Elastica_Transport_MemcacheTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testConstruct()
-    {
-        $host = 'localhost';
-        $port = 11211;
-        $client = new Elastica_Client(array('host' => $host, 'port' => $port, 'transport' => 'Memcache'));
-
-        $this->assertEquals($host, $client->getHost());
-        $this->assertEquals($port, $client->getPort());
-    }
-
     public function testExample()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index

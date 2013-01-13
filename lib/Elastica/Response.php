@@ -48,11 +48,15 @@ class Elastica_Response
     /**
      * Construct
      *
-     * @param string $responseString Response string (json)
+     * @param string|array $responseString Response string (json)
      */
     public function __construct($responseString)
     {
-        $this->_responseString = $responseString;
+        if (is_array($responseString)) {
+            $this->_response = $responseString;
+        } else {
+            $this->_responseString = $responseString;
+        }
     }
 
     /**
@@ -96,6 +100,16 @@ class Elastica_Response
     public function isOk()
     {
         $data = $this->getData();
+
+        // Bulk insert checks. Check every item
+        if (isset($data['items'])) {
+            foreach ($data['items'] as $item) {
+                if (false == $item['index']['ok'] ) {
+                    return false;
+                 }
+            }
+            return true;
+        }
 
         return (isset($data['ok']) && $data['ok']);
     }

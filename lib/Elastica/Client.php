@@ -9,57 +9,89 @@
 class Elastica_Client
 {
     /**
-     * Default elastic search port
-     */
-    const DEFAULT_PORT = 9200;
-
-    /**
-     * Default host
-     */
-    const DEFAULT_HOST = 'localhost';
-
-    /**
-     * Default transport
-     *
-     * @var string
-     */
-    const DEFAULT_TRANSPORT = 'Http';
-
-    /**
-     * Number of seconds after a timeout occurs for every request
-     * If using indexing of file large value necessary.
-     */
-    const TIMEOUT = 300;
-
-    /**
      * Config with defaults
+     *
+     * log: Set to true, to enable logging, set a string to log to a specific file
+     * retryOnConflict: Use in Elastica_Client::updateDocument
      *
      * @var array
      */
     protected $_config = array(
-        'host' => self::DEFAULT_HOST,
-        'port' => self::DEFAULT_PORT,
-        'path' => '',
+        'host' => null,
+        'port' => null,
+        'path' => null,
         'url' => null,
-        'transport' => self::DEFAULT_TRANSPORT,
+        'transport' => null,
         'persistent' => true,
-        'timeout' => self::TIMEOUT,
-        'headers' => array(),
-        'servers' => array(),
-        'curl' => array(),
+        'timeout' => null,
+        'connections' => array(),	// host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers, url)
         'roundRobin' => false,
         'log' => false,
         'retryOnConflict' => 0,
     );
 
     /**
+     * @var Elastica_Connection[] List of connections
+     */
+    protected $_connections = array();
+
+    /**
+     * @var callback
+     */
+    protected $_callback = null;
+
+    /**
      * Creates a new Elastica client
      *
      * @param array $config OPTIONAL Additional config options
+     * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example conenction down)
      */
-    public function __construct(array $config = array())
+    public function __construct(array $config = array(), $callback = null)
     {
         $this->setConfig($config);
+        $this->_callback = $callback;
+        $this->_initConnections();
+    }
+
+    /**
+     * Inits the client connections
+     */
+    protected function _initConnections()
+    {
+        $connections = $this->getConfig('connections');
+
+        foreach ($connections as $connection) {
+            $this->_connections[] = Elastica_Connection::create($connection);
+        }
+
+        if (isset($_config['servers'])) {
+            $this->_connections[] = Elastica_Connection::create($this->getConfig('servers'));
+        }
+
+        // If no connections set, create default connection
+        if (empty($this->_connections)) {
+            $this->_connections[] = Elastica_Connection::create($this->_configureParams());
+        }
+    }
+
+    /**
+     * @return array $params
+     */
+    protected function _configureParams()
+    {
+        $config = $this->getConfig();
+
+        $params = array();
+        $params['config'] = array();
+        foreach ($config as $key => $value) {
+            if (in_array($key, array('curl', 'headers', 'url'))) {
+                $params['config'][$key] = $value;
+            } else {
+                $params[$key] = $value;
+            }
+        }
+
+        return $params;
     }
 
     /**
@@ -119,36 +151,6 @@ class Elastica_Client
     public function getIndex($name)
     {
         return new Elastica_Index($this, $name);
-    }
-
-    /**
-     * Returns host the client connects to
-     *
-     * @return string Host
-     */
-    public function getHost()
-    {
-        return $this->getConfig('host');
-    }
-
-    /**
-     * Returns connection port of this client
-     *
-     * @return int Connection port
-     */
-    public function getPort()
-    {
-        return (int) $this->getConfig('port');
-    }
-
-    /**
-     * Returns transport type to user
-     *
-     * @return string Transport type
-     */
-    public function getTransport()
-    {
-        return $this->getConfig('transport');
     }
 
     /**
@@ -272,6 +274,55 @@ class Elastica_Client
     }
 
     /**
+     * @param Elastica_Connection $connection
+     * @return Elastica_Client
+     */
+    public function addConnection(Elastica_Connection $connection)
+    {
+        $this->_connections[] = $connection;
+        return $this;
+    }
+
+    /**
+     * @return Elastica_Connection
+     */
+    public function getConnection()
+    {
+        $enabledConnection = null;
+
+        // TODO: Choose one after other if roundRobin -> should we shuffle the array?
+        foreach ($this->_connections as $connection) {
+            if ($connection->isEnabled()) {
+                $enabledConnection = $connection;
+            }
+        }
+
+        if (!$enabledConnection) {
+            throw new Elastica_Exception_Client('No enabled connection');
+        }
+
+        return $enabledConnection;
+    }
+
+    /**
+     * @return Elastica_Connection[]
+     */
+    public function getConnections()
+    {
+        return $this->_connections;
+    }
+
+    /**
+     * @param Elastica_Connection[] $connections
+     * @return Elastica_Client
+     */
+    public function setConnections(array $connections)
+    {
+        $this->_connections = $connections;
+        return $this;
+    }
+
+    /**
      * Deletes documents with the given ids, index, type from the index
      *
      * @param  array                 $ids   Document ids
@@ -370,11 +421,28 @@ class Elastica_Client
      * @param  array             $query  OPTIONAL Query params
      * @return Elastica_Response Response object
      */
-    public function request($path, $method, $data = array(), array $query = array())
+    public function request($path, $method = Elastica_Request::GET, $data = array(), array $query = array())
     {
-        $request = new Elastica_Request($this, $path, $method, $data, $query);
+        $connection = $this->getConnection();
+        try {
+            $request = new Elastica_Request($path, $method, $data, $query, $connection);
 
-        return $request->send();
+            if ($this->getConfig('log')) {
+                $log = new Elastica_Log($this->getConfig('log'));
+                $log->log($request);
+            }
+
+            return $request->send();
+        } catch (Elastica_Exception_Connection $e) {
+            $connection->setEnabled(false);
+
+            // Calls callback with connection as param to make it possible to persist invalid conenctions
+            if ($this->_callback) {
+                call_user_func($this->_callback, $connection);
+            }
+
+            return $this->request($path, $method, $data, $query);
+        }
     }
 
     /**

@@ -38,30 +38,34 @@ abstract class Elastica_Transport_Abstract
     protected $_config;
 
     /**
+     * @var Elastica_Connection
+     */
+    protected $_connection;
+
+    /**
      * Construct transport
      *
-     * @param Elastica_Request $request Request object
+     * @param Elastica_Connection $connection Connection object
      */
-    public function __construct(Elastica_Request $request)
+    public function __construct(Elastica_Connection $connection)
     {
-        $this->_request = $request;
+        $this->_connection = $connection;
     }
 
     /**
-     * Returns the request object
-     *
-     * @return Elastica_Request Request object
+     * @return Elastica_Connection Connection object
      */
-    public function getRequest()
+    public function getConnection()
     {
-        return $this->_request;
+        return $this->_connection;
     }
 
     /**
      * Executes the transport request
      *
+     * @param Elastica_Request	$request Request object
      * @param  array             $params Hostname, port, path, ...
      * @return Elastica_Response Response object
      */
-    abstract public function exec(array $params);
+    abstract public function exec(Elastica_Request $request, array $params);
 }
