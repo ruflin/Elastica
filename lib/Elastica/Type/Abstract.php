@@ -128,7 +128,7 @@ abstract class Elastica_Type_Abstract implements Elastica_Searchable
      * @return Elastica_ResultSet          ResultSet with all results inside
      * @see Elastica_Searchable::search
      */
-    public function search($query)
+    public function search($query = '')
     {
         return $this->getType()->search($query);
     }
