@@ -272,6 +272,14 @@ class Document extends Param
     }
 
     /**
+     * @return bool
+     */
+    public function hasVersion()
+    {
+        return $this->hasParam('_version');
+    }
+
+    /**
      * Sets the version_type of a document
      * Default in ES is internal, but you can set to external to use custom versioning
      *
@@ -295,6 +303,14 @@ class Document extends Param
     }
 
     /**
+     * @return bool
+     */
+    public function hasVersionType()
+    {
+        return $this->hasParam('_version_type');
+    }
+
+    /**
      * Sets parent document id
      *
      * @param  string|int        $parent Parent document id
@@ -314,6 +330,14 @@ class Document extends Param
     public function getParent()
     {
         return $this->getParam('_parent');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasParent()
+    {
+        return $this->hasParam('_parent');
     }
 
     /**
@@ -379,6 +403,14 @@ class Document extends Param
     public function getRouting()
     {
         return $this->getParam('_routing');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRouting()
+    {
+        return $this->hasParam('_routing');
     }
 
     /**
