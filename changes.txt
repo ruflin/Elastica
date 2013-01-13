@@ -2,6 +2,7 @@ CHANGES
 
 2013-01-13
 - Add version option to Elastica_Search::search
+- Remove compatibility for PHP 5.2
 
 2012-12-23
 - Elastica_Client config param "servers" to "connections" renamed. "headers" and "curl" are now a config param inside "connections"
