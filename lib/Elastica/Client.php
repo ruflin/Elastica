@@ -24,75 +24,75 @@ class Elastica_Client
         'transport' => null,
         'persistent' => true,
         'timeout' => null,
-		'connections' => array(),	// host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers, url)
+        'connections' => array(),	// host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers, url)
         'roundRobin' => false,
         'log' => false,
         'retryOnConflict' => 0,
-	);
+    );
 
-	/**
-	 * @var Elastica_Connection[] List of connections
-	 */
-	protected $_connections = array();
+    /**
+     * @var Elastica_Connection[] List of connections
+     */
+    protected $_connections = array();
 
-	/**
-	 * @var callback
-	 */
-	protected $_callback = null;
+    /**
+     * @var callback
+     */
+    protected $_callback = null;
 
     /**
      * Creates a new Elastica client
      *
      * @param array $config OPTIONAL Additional config options
-	 * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example conenction down)
+     * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example conenction down)
      */
     public function __construct(array $config = array(), $callback = null)
     {
         $this->setConfig($config);
-		$this->_callback = $callback;
-		$this->_initConnections();
+        $this->_callback = $callback;
+        $this->_initConnections();
     }
 
-	/**
-	 * Inits the client connections
-	 */
-	protected function _initConnections() {
+    /**
+     * Inits the client connections
+     */
+    protected function _initConnections()
+    {
+        $connections = $this->getConfig('connections');
 
-		$connections = $this->getConfig('connections');
+        foreach ($connections as $connection) {
+            $this->_connections[] = Elastica_Connection::create($connection);
+        }
 
-		foreach ($connections as $connection) {
-			$this->_connections[] = Elastica_Connection::create($connection);
-		}
+        if (isset($_config['servers'])) {
+            $this->_connections[] = Elastica_Connection::create($this->getConfig('servers'));
+        }
 
-		if (isset($_config['servers'])) {
-			$this->_connections[] = Elastica_Connection::create($this->getConfig('servers'));
-		}
+        // If no connections set, create default connection
+        if (empty($this->_connections)) {
+            $this->_connections[] = Elastica_Connection::create($this->_configureParams());
+        }
+    }
 
-		// If no connections set, create default connection
-		if (empty($this->_connections)) {
-			$this->_connections[] = Elastica_Connection::create($this->_configureParams());
-		}
-	}
+    /**
+     * @return array $params
+     */
+    protected function _configureParams()
+    {
+        $config = $this->getConfig();
 
-	/**
-	 * @return array $params
-	 */
-	protected function _configureParams()
-	{
-		$config = $this->getConfig();
+        $params = array();
+        $params['config'] = array();
+        foreach ($config as $key => $value) {
+            if (in_array($key, array('curl', 'headers', 'url'))) {
+                $params['config'][$key] = $value;
+            } else {
+                $params[$key] = $value;
+            }
+        }
 
-		$params = array();
-		$params['config'] = array();
-		foreach ($config as $key => $value) {
-			if (in_array($key, array('curl', 'headers', 'url'))) {
-				$params['config'][$key] = $value;
-			} else {
-				$params[$key] = $value;
-			}
-		}
-
-		return $params;
-	}
+        return $params;
+    }
 
     /**
      * Sets specific config values (updates and keeps default values)
@@ -277,51 +277,54 @@ class Elastica_Client
         return new Elastica_Cluster($this);
     }
 
-	/**
-	 * @param Elastica_Connection $connection
-	 * @return Elastica_Client
-	 */
-	public function addConnection(Elastica_Connection $connection) {
-		$this->_connections[] = $connection;
-		return $this;
-	}
+    /**
+     * @param Elastica_Connection $connection
+     * @return Elastica_Client
+     */
+    public function addConnection(Elastica_Connection $connection)
+    {
+        $this->_connections[] = $connection;
+        return $this;
+    }
 
-	/**
-	 * @return Elastica_Connection
-	 */
-	public function getConnection()
-	{
-		$enabledConnection = null;
+    /**
+     * @return Elastica_Connection
+     */
+    public function getConnection()
+    {
+        $enabledConnection = null;
 
-		// TODO: Choose one after other if roundRobin -> should we shuffle the array?
-		foreach ($this->_connections as $connection) {
-			if ($connection->isEnabled()) {
-				$enabledConnection = $connection;
-			}
-		}
+        // TODO: Choose one after other if roundRobin -> should we shuffle the array?
+        foreach ($this->_connections as $connection) {
+            if ($connection->isEnabled()) {
+                $enabledConnection = $connection;
+            }
+        }
 
-		if (!$enabledConnection) {
-			throw new Elastica_Exception_Client('No enabled connection');
-		}
+        if (!$enabledConnection) {
+            throw new Elastica_Exception_Client('No enabled connection');
+        }
 
-		return $enabledConnection;
-	}
+        return $enabledConnection;
+    }
 
-	/**
-	 * @return Elastica_Connection[]
-	 */
-	public function getConnections() {
-		return $this->_connections;
-	}
+    /**
+     * @return Elastica_Connection[]
+     */
+    public function getConnections()
+    {
+        return $this->_connections;
+    }
 
-	/**
-	 * @param Elastica_Connection[] $connections
-	 * @return Elastica_Client
-	 */
-	public function setConnections(array $connections) {
-		$this->_connections = $connections;
-		return $this;
-	}
+    /**
+     * @param Elastica_Connection[] $connections
+     * @return Elastica_Client
+     */
+    public function setConnections(array $connections)
+    {
+        $this->_connections = $connections;
+        return $this;
+    }
 
     /**
      * Deletes documents with the given ids, index, type from the index
@@ -424,26 +427,26 @@ class Elastica_Client
      */
     public function request($path, $method = Elastica_Request::GET, $data = array(), array $query = array())
     {
-		$connection = $this->getConnection();
-		try {
-			$request = new Elastica_Request($path, $method, $data, $query, $connection);
+        $connection = $this->getConnection();
+        try {
+            $request = new Elastica_Request($path, $method, $data, $query, $connection);
 
-			if ($this->getConfig('log')) {
-				$log = new Elastica_Log($this->getConfig('log'));
-				$log->log($request);
-			}
+            if ($this->getConfig('log')) {
+                $log = new Elastica_Log($this->getConfig('log'));
+                $log->log($request);
+            }
 
-			return $request->send();
-		} catch (Elastica_Exception_Connection $e) {
-			$connection->setEnabled(false);
+            return $request->send();
+        } catch (Elastica_Exception_Connection $e) {
+            $connection->setEnabled(false);
 
-			// Calls callback with connection as param to make it possible to persist invalid conenctions
-			if ($this->_callback) {
-				call_user_func($this->_callback, $connection);
-			}
+            // Calls callback with connection as param to make it possible to persist invalid conenctions
+            if ($this->_callback) {
+                call_user_func($this->_callback, $connection);
+            }
 
-			return $this->request($path, $method, $data, $query);
-		}
+            return $this->request($path, $method, $data, $query);
+        }
     }
 
     /**

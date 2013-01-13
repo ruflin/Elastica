@@ -37,10 +37,10 @@ abstract class Elastica_Transport_Abstract
      */
     protected $_config;
 
-	/**
-	 * @var Elastica_Connection
-	 */
-	protected $_connection;
+    /**
+     * @var Elastica_Connection
+     */
+    protected $_connection;
 
     /**
      * Construct transport
@@ -63,7 +63,7 @@ abstract class Elastica_Transport_Abstract
     /**
      * Executes the transport request
      *
-	 * @param Elastica_Request	$request Request object
+     * @param Elastica_Request	$request Request object
      * @param  array             $params Hostname, port, path, ...
      * @return Elastica_Response Response object
      */

@@ -59,7 +59,7 @@ class Elastica_Document extends Elastica_Param
      */
     public function getId()
     {
-		return ($this->hasParam('_id'))?$this->getParam('_id'):null;
+        return ($this->hasParam('_id'))?$this->getParam('_id'):null;
     }
 
     /**
@@ -70,7 +70,7 @@ class Elastica_Document extends Elastica_Param
      */
     public function setId($id)
     {
-		return $this->setParam('_id', $id);
+        return $this->setParam('_id', $id);
     }
 
     /**
@@ -190,7 +190,7 @@ class Elastica_Document extends Elastica_Param
      */
     public function setType($type)
     {
-		return $this->setParam('_type', $type);
+        return $this->setParam('_type', $type);
     }
 
     /**
@@ -212,7 +212,7 @@ class Elastica_Document extends Elastica_Param
      */
     public function setIndex($index)
     {
-		return $this->setParam('_index', $index);
+        return $this->setParam('_index', $index);
     }
 
     /**
@@ -245,7 +245,7 @@ class Elastica_Document extends Elastica_Param
      */
     public function getVersion()
     {
-		return $this->getParam('_version');
+        return $this->getParam('_version');
     }
 
     /**
@@ -268,7 +268,7 @@ class Elastica_Document extends Elastica_Param
      */
     public function getVersionType()
     {
-		return $this->getParam('_version_type');
+        return $this->getParam('_version_type');
     }
 
     /**
@@ -290,7 +290,7 @@ class Elastica_Document extends Elastica_Param
      */
     public function getParent()
     {
-		return $this->getParam('_parent');
+        return $this->getParam('_parent');
     }
 
     /**
@@ -345,7 +345,7 @@ class Elastica_Document extends Elastica_Param
      */
     public function setRouting($value)
     {
-		return $this->setParam('_routing', $value);
+        return $this->setParam('_routing', $value);
     }
 
     /**
@@ -364,7 +364,7 @@ class Elastica_Document extends Elastica_Param
      */
     public function toArray()
     {
-		$doc = $this->getParams();
+        $doc = $this->getParams();
         $doc['_source'] = $this->getData();
 
         return $doc;

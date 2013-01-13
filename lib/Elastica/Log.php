@@ -25,8 +25,8 @@ class Elastica_Log
 
     /**
      * Inits log object
-	 *
-	 * @param string|bool String to set a specific file for logging
+     *
+     * @param string|bool String to set a specific file for logging
      */
     public function __construct($log = '')
     {

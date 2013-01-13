@@ -57,7 +57,7 @@ class Elastica_Multi_ResultSet implements Iterator, Countable
 
                 if (!isset($searches[$key])) {
                     throw new Elastica_Exception_Invalid('No result found for search #' . $key);
-                } else if (!$searches[$key] instanceof Elastica_Search) {
+                } elseif (!$searches[$key] instanceof Elastica_Search) {
                     throw new Elastica_Exception_Invalid('Invalid object for search #' . $key . ' provided. Should be Elastica_Search');
                 }
 

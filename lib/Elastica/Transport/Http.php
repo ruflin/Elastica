@@ -27,7 +27,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
      *
      * All calls that are made to the server are done through this function
      *
-	 * @param Elastica_Request $request
+     * @param Elastica_Request $request
      * @param  array             $params Host, Port, ...
      * @throws Elastica_Exception_Response
      * @throws Elastica_Exception_Invalid
@@ -36,12 +36,12 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
      */
     public function exec(Elastica_Request $request, array $params)
     {
-		$connection = $this->getConnection();
+        $connection = $this->getConnection();
 
-		$conn = $this->_getConnection($connection->isPersistent());
+        $conn = $this->_getConnection($connection->isPersistent());
 
         // If url is set, url is taken. Otherwise port, host and path
-		$url = $connection->hasConfig('url')?$connection->getConfig('url'):'';
+        $url = $connection->hasConfig('url')?$connection->getConfig('url'):'';
 
         if (!empty($url)) {
             $baseUri = $url;
@@ -64,7 +64,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
 
         $this->_setupCurl($conn);
 
-		$headersConfig = $connection->hasConfig('headers')?$connection->getConfig('headers'):array();
+        $headersConfig = $connection->hasConfig('headers')?$connection->getConfig('headers'):array();
 
         if (!empty($headersConfig)) {
             $headers = array();
@@ -128,11 +128,11 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
      */
     protected function _setupCurl($curlConnection)
     {
-		if ($this->getConnection()->hasConfig('curl')) {
-        	foreach ($this->getConnection()->getConfig('curl') as $key => $param) {
-        	    curl_setopt($curlConnection, $key, $param);
-        	}
-		}
+        if ($this->getConnection()->hasConfig('curl')) {
+            foreach ($this->getConnection()->getConfig('curl') as $key => $param) {
+                curl_setopt($curlConnection, $key, $param);
+            }
+        }
     }
 
     /**

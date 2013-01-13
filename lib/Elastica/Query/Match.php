@@ -74,9 +74,9 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
      */
     public function setFieldOperator($field, $operator)
     {
-    	return $this->setFieldParam($field, 'operator', $operator);
+        return $this->setFieldParam($field, 'operator', $operator);
     }
-    
+
     /**
      * Set field analyzer
      *
@@ -86,9 +86,9 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
      */
     public function setFieldAnalyzer($field, $analyzer)
     {
-    	return $this->setFieldParam($field, 'analyzer', $analyzer);
+        return $this->setFieldParam($field, 'analyzer', $analyzer);
     }
-    
+
     /**
      * Set field boost value
      *
@@ -100,9 +100,9 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
      */
     public function setFieldBoost($field, $boost = 1.0)
     {
-    	return $this->setFieldParam($field, 'boost', (float) $boost);
-    }    
-    
+        return $this->setFieldParam($field, 'boost', (float) $boost);
+    }
+
     /**
      * Set field minimum should match
      *
@@ -112,9 +112,9 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
      */
     public function setFieldMinimumShouldMatch($field, $minimumShouldMatch)
     {
-    	return $this->setFieldParam($field, 'minimum_should_match', (int) $minimumShouldMatch);
+        return $this->setFieldParam($field, 'minimum_should_match', (int) $minimumShouldMatch);
     }
-    
+
     /**
      * Set field fuzziness
      *
@@ -124,9 +124,9 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
      */
     public function setFieldFuzziness($field, $fuzziness)
     {
-    	return $this->setFieldParam($field, 'fuzziness', (float) $fuzziness);
+        return $this->setFieldParam($field, 'fuzziness', (float) $fuzziness);
     }
-    
+
     /**
      * Set field fuzzy rewrite
      *
@@ -136,9 +136,9 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
      */
     public function setFieldFuzzyRewrite($field, $fuzzyRewrite)
     {
-    	return $this->setFieldParam($field, 'fuzzy_rewrite', $fuzzyRewrite);
+        return $this->setFieldParam($field, 'fuzzy_rewrite', $fuzzyRewrite);
     }
-    
+
     /**
      * Set field prefix length
      *
@@ -148,9 +148,9 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
      */
     public function setFieldPrefixLength($field, $prefixLength)
     {
-    	return $this->setFieldParam($field, 'prefix_length', (int) $prefixLength);
+        return $this->setFieldParam($field, 'prefix_length', (int) $prefixLength);
     }
-    
+
     /**
      * Set field max expansions
      *
@@ -160,6 +160,6 @@ class Elastica_Query_Match extends Elastica_Query_Abstract
      */
     public function setFieldMaxExpansions($field, $maxExpansions)
     {
-    	return $this->setFieldParam($field, 'max_expansions', (int) $maxExpansions);
+        return $this->setFieldParam($field, 'max_expansions', (int) $maxExpansions);
     }
 }
