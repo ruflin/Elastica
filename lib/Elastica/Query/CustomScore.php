@@ -12,6 +12,20 @@
 class Elastica_Query_CustomScore extends Elastica_Query_Abstract
 {
     /**
+     * Constructor
+     *
+     * @param string|array|Elastica_Script $script
+     * @param string|Elastica_Query_Abstract $query
+     */
+    public function __construct($script = null, $query= null)
+    {
+        if ($script) {
+            $this->setScript($script);
+        }
+        $this->setQuery($query);
+    }
+
+    /**
      * Sets query object
      *
      * @param  string|Elastica_Query|Elastica_Query_Abstract $query
@@ -28,12 +42,16 @@ class Elastica_Query_CustomScore extends Elastica_Query_Abstract
     /**
      * Set script
      *
-     * @param  string                     $script
+     * @param  string|Elastica_Script $script
      * @return Elastica_Query_CustomScore
      */
     public function setScript($script)
     {
-        return $this->setParam('script', $script);
+        $script = Elastica_Script::create($script);
+        foreach ($script->toArray() as $param => $value) {
+            $this->setParam($param, $value);
+        }
+        return $this;
     }
 
     /**

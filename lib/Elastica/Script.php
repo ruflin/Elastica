@@ -7,8 +7,14 @@
  * @author avasilenko <aa.vasilenko@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/modules/scripting.html
  */
-class Elastica_Script
+class Elastica_Script extends Elastica_Param
 {
+    const LANG_MVEL   = 'mvel';
+    const LANG_JS     = 'js';
+    const LANG_GROOVY = 'groovy';
+    const LANG_PYTHON = 'python';
+    const LANG_NATIVE = 'native';
+
     /**
      * @var string
      */
@@ -17,10 +23,6 @@ class Elastica_Script
      * @var string
      */
     private $_lang;
-    /**
-     * @var array
-     */
-    private $_params;
 
     /**
      * @param string      $script
@@ -29,9 +31,13 @@ class Elastica_Script
      */
     public function __construct($script, array $params = null, $lang = null)
     {
-        $this->_script = $script;
-        $this->_params = $params;
-        $this->_lang   = $lang;
+        $this->setScript($script);
+        if ($params) {
+            $this->setParams($params);
+        }
+        if ($lang) {
+            $this->setLang($lang);
+        }
     }
 
     /**
@@ -51,22 +57,6 @@ class Elastica_Script
     }
 
     /**
-     * @param array $params
-     */
-    public function setParams($params)
-    {
-        $this->_params = $params;
-    }
-
-    /**
-     * @return array
-     */
-    public function getParams()
-    {
-        return $this->_params;
-    }
-
-    /**
      * @param string $script
      */
     public function setScript($script)
@@ -82,12 +72,58 @@ class Elastica_Script
         return $this->_script;
     }
 
+    /**
+     * @param string|array|Elastica_Script $data
+     * @return Elastica_Script
+     */
+    public static function create($data)
+    {
+        if ($data instanceof self) {
+            $script = $data;
+        } elseif (is_array($data)) {
+            $script = self::_createFromArray($data);
+        } elseif (is_string($data)) {
+            $script = new self($data);
+        } else {
+            throw new Elastica_Exception_Invalid('Failed to create script. Invalid data passed.');
+        }
+        return $script;
+    }
+
+    /**
+     * @param array $data
+     * @return Elastica_Script
+     * @throws Elastica_Exception_Invalid
+     */
+    protected static function _createFromArray(array $data)
+    {
+        if (!isset($data['script'])) {
+            throw new Elastica_Exception_Invalid("\$data['script'] is required");
+        }
+
+        $script = new self($data['script']);
+
+        if (isset($data['lang'])) {
+            $script->setLang($data['lang']);
+        }
+        if (isset($data['params'])) {
+            if (!is_array($data['params'])) {
+                throw new Elastica_Exception_Invalid("\$data['params'] should be array");
+            }
+            $script->setParams($data['params']);
+        }
+        return $script;
+    }
+
+    /**
+     * @return array
+     */
     public function toArray()
     {
         $array = array(
             'script' => $this->_script,
         );
-        if ($this->_params) {
+        if (!empty($this->_params)) {
             $array['params'] = $this->_params;
         }
         if ($this->_lang) {

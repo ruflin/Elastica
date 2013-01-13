@@ -87,16 +87,36 @@ class Elastica_Type implements Elastica_Searchable
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
-     * @param  string            $id      Document id
-     * @param  Elastica_Script   $script  script to use for update
-     * @param  array             $options options for query
+     * @param Elastica_Document $document   Document with update data
+     * @param array             $options    options for query
      * @return Elastica_Response
-     * @see  Elastica_Client::updateDocument()
+     * @throws Elastica_Exception_Invalid
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
      */
-    public function updateDocument($id, Elastica_Script $script, array $options = array())
+    public function updateDocument(Elastica_Document $document, array $options = array())
     {
-        return $this->getIndex()->updateDocument($id, $script, $this->getName(), $options);
+        if (null === $document->getId()) {
+            throw new Elastica_Exception_Invalid('Document id is not set');
+        }
+
+        $path =  $document->getId() . '/_update';
+
+        if (!isset($options['retry_on_conflict'])) {
+            $retryOnConflict = $this->getIndex()->getClient()->getConfig("retryOnConflict");
+            $options['retry_on_conflict'] = $retryOnConflict;
+        }
+
+        if ($document->hasScript()) {
+            $requestData = $document->getScript()->toArray();
+            $documentData = $document->getData();
+            if (!empty($documentData)) {
+                $requestData['upsert'] = $documentData;
+            }
+        } else {
+            $requestData = array('doc' => $document->getData());
+        }
+
+        return $this->request($path, Elastica_Request::POST, $requestData, $options);
     }
 
     /**

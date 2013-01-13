@@ -5,15 +5,72 @@ class Elastica_Query_CustomScoreTest extends PHPUnit_Framework_TestCase
 {
     public function testCustomScoreQuery()
     {
-        $query = new Elastica_Query();
+        $query = new Elastica_Query_MatchAll();
 
-        $customscore_query = new Elastica_Query_CustomScore();
-        $customscore_query->setQuery($query);
-        $customscore_query->setScript("doc['hits'].value * (param1 + param2)");
-        $customscore_query->addParams(array('param1' => 1123, 'param2' => 2001));
+        $customScoreQuery = new Elastica_Query_CustomScore();
+        $customScoreQuery->setQuery($query);
+        $customScoreQuery->setScript("doc['hits'].value * (param1 + param2)");
+        $customScoreQuery->addParams(array('param1' => 1123, 'param2' => 2001));
 
-        $experted = '{"custom_score":{"query":{"match_all":{}},"script":"doc[\'hits\'].value * (param1 + param2)","params":{"param1":1123,"param2":2001}}}';
+        $expected = array(
+            'custom_score' => array(
+                'query' => array(
+                    'match_all' => new stdClass,
+                ),
+                'script' => "doc['hits'].value * (param1 + param2)",
+                'params' => array(
+                    'param1' => 1123,
+                    'param2' => 2001,
+                )
+            )
+        );
 
-        $this->assertEquals($experted, json_encode($customscore_query->toArray()));
+        $this->assertEquals($expected, $customScoreQuery->toArray());
+    }
+
+    public function testSetScript()
+    {
+        $string = '_score * 2.0';
+        $lang = 'mvel';
+        $params = array(
+            'param1' => 'one',
+            'param2' => 1,
+        );
+        $script = new Elastica_Script($string);
+        $script->setLang('mvel');
+        $script->setParams($params);
+
+        $customScoreQuery = new Elastica_Query_CustomScore();
+        $customScoreQuery->setScript($script);
+
+        $expected = array(
+            'custom_score' => array(
+                'query' => array(
+                    'match_all' => new stdClass,
+                ),
+                'script' => $string,
+                'params' => $params,
+                'lang' => $lang,
+            )
+        );
+
+        $this->assertEquals($expected, $customScoreQuery->toArray());
+    }
+
+    public function testConstructor()
+    {
+        $string = '_score * 2.0';
+        $customScoreQuery = new Elastica_Query_CustomScore($string);
+
+        $expected = array(
+            'custom_score' => array(
+                'query' => array(
+                    'match_all' => new stdClass,
+                ),
+                'script' => $string,
+            )
+        );
+
+        $this->assertEquals($expected, $customScoreQuery->toArray());
     }
 }

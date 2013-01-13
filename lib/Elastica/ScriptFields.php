@@ -10,7 +10,7 @@
 class Elastica_ScriptFields extends Elastica_Param
 {
     /**
-     * @param array $scripts OPTIONAL
+     * @param Elastica_Script[]|array $scripts OPTIONAL
      */
     public function __construct(array $scripts = array())
     {
@@ -36,7 +36,7 @@ class Elastica_ScriptFields extends Elastica_Param
     }
 
     /**
-     * @param  array                 $scripts Associative array of string => Elastica_Script
+     * @param  Elastica_Script[]|array $scripts Associative array of string => Elastica_Script
      * @return Elastica_ScriptFields
      */
     public function setScripts(array $scripts)
@@ -49,6 +49,9 @@ class Elastica_ScriptFields extends Elastica_Param
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function toArray()
     {
         return $this->_params;

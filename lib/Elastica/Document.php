@@ -37,6 +37,11 @@ class Elastica_Document extends Elastica_Param
     protected $_routing = null;
 
     /**
+     * @var Elastica_Script
+     */
+    protected $_script;
+
+    /**
      * Creates a new document
      *
      * @param int|string $id OPTIONAL $id Id is create if empty
@@ -356,6 +361,33 @@ class Elastica_Document extends Elastica_Param
     public function getRouting()
     {
         return $this->getParam('_routing');
+    }
+
+    /**
+     * @param Elastica_Script|array|string $data
+     * @return $this
+     */
+    public function setScript($data)
+    {
+        $script = Elastica_Script::create($data);
+        $this->_script = $script;
+        return $this;
+    }
+
+    /**
+     * @return Elastica_Script
+     */
+    public function getScript()
+    {
+        return $this->_script;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasScript()
+    {
+        return null !== $this->_script;
     }
 
     /**
