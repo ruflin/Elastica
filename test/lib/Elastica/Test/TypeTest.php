@@ -314,6 +314,19 @@ class TypeTest extends BaseTest
         $this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
     }
 
+    /**
+     * @expectedException Elastica_Exception_Invalid
+     */
+    public function testUpdateDocumentWithoutId()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('elastica_type');
+
+        $document = new Elastica_Document();
+
+        $type->updateDocument($document);
+    }
+
     public function testAddDocumentHashId()
     {
         $index = $this->_createIndex();
@@ -333,5 +346,25 @@ class TypeTest extends BaseTest
 
         $doc = $type->getDocument($hashId);
         $this->assertEquals($hashId, $doc->getId());
+    }
+
+    public function testSetTypeAndIndex()
+    {
+        $document = new Elastica_Document();
+        $document->setType('type');
+
+        $this->assertEquals('type', $document->getType());
+
+        $index = new Elastica_Index($this->_getClient(), 'index');
+        $type = $index->getType('type');
+
+        $document = new Elastica_Document();
+        $document->setIndex('index2');
+        $this->assertEquals('index2', $document->getIndex());
+
+        $document->setType($type);
+
+        $this->assertEquals('index', $document->getIndex());
+        $this->assertEquals('type', $document->getType());
     }
 }
