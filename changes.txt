@@ -1,6 +1,9 @@
 CHANGES
 
-2012-11-38
+2013-01-13
+- Refactored Elastica_Script and added it support in Elastica_Query_CustomFiltersScore, Elastica_Query_CustomScore and Elastica_Filter_Script
+
+2012-11-28
 - Added Elastica_Filter_GeoDistanceRange filter
 
 2012-11-23
