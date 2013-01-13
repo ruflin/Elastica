@@ -4,6 +4,7 @@ CHANGES
 - Add version option to Elastica_Search::search
 - Remove compatibility for PHP 5.2
 - Update to elasticsearch 0.20.2
+- Refactored Elastica_Script and added it support in Elastica_Query_CustomFiltersScore, Elastica_Query_CustomScore and Elastica_Filter_Script
 
 2012-12-23
 - Elastica_Client config param "servers" to "connections" renamed. "headers" and "curl" are now a config param inside "connections"
@@ -14,7 +15,7 @@ CHANGES
 - Renamed Elastica_Exception_Client to Elastica_Exception_Connection
 - Use Elastica_Connection for the following constants: DEFAULT_PORT, DEFAULT_HOST, DEFAULT_TRANSPORT, TIMEOUT
 
-2012-11-38
+2012-11-28
 - Added Elastica_Filter_GeoDistanceRange filter
 
 2012-11-23
