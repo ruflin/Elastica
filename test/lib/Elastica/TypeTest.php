@@ -291,8 +291,12 @@ class Elastica_TypeTest extends Elastica_Test
         $id = 1;
         $type->addDocument(new Elastica_Document($id, array('name' => 'bruce wayne batman')));
         $newName = 'batman';
-        $update = new Elastica_Script("ctx._source.name = name", array('name' => $newName));
-        $type->updateDocument($id, $update, array('refresh' => true));
+
+        $document = new Elastica_Document($id);
+        $script = new Elastica_Script("ctx._source.name = name", array('name' => $newName));
+        $document->setScript($script);
+
+        $type->updateDocument($document, array('refresh' => true));
         $updatedDoc = $type->getDocument($id)->getData();
         $this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
     }
