@@ -46,7 +46,7 @@ class Elastica_Type implements Elastica_Searchable
      */
     public function addDocument(Elastica_Document $doc)
     {
-        $path = $doc->getId();
+        $path = urlencode($doc->getId());
 
         $query = array();
 
@@ -125,7 +125,7 @@ class Elastica_Type implements Elastica_Searchable
      */
     public function getDocument($id, $options = array())
     {
-        $path = $id;
+        $path = urlencode($id);
 
         try {
             $result = $this->request($path, Elastica_Request::GET, array(), $options)->getData();
