@@ -58,7 +58,7 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
         }
 
         if (!is_array($args)) {
-            throw new Elastica_Exception_Invalid('Invalid parameter. Has to be array or instance of Elastica_Query');
+            throw new Elastica_Exception_Invalid('Invalid parameter. Has to be array or instance of Elastica_Query_Abstract');
         }
 
         return $this->addParam($type, $args);
