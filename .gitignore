@@ -7,3 +7,4 @@ cache.properties
 build
 atlassian-ide-plugin.xml
 .settings
+/vendor
