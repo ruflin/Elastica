@@ -8,3 +8,4 @@ build
 atlassian-ide-plugin.xml
 .settings
 /vendor
+composer.lock
