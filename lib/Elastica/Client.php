@@ -10,9 +10,9 @@ class Elastica_Client
 {
     /**
      * Config with defaults
-	 *
-	 * log: Set to true, to enable logging, set a string to log to a specific file
-	 * retryOnConflict: Use in Elastica_Client::updateDocument
+     *
+     * log: Set to true, to enable logging, set a string to log to a specific file
+     * retryOnConflict: Use in Elastica_Client::updateDocument
      *
      * @var array
      */

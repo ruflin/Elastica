@@ -3,7 +3,7 @@ CHANGES
 2012-12-23
 - Elastica_Client config param "servers" to "connections" renamed. "headers" and "curl" are now a config param inside "connections"
 - Elastica_Connection added to allow connection management (enabled / disable)
-- Refactoring of Elastica_Request. Takes Elastica_Connection in constructor instead of Elastica_Connection
+- Refactoring of Elastica_Request. Takes Elastica_Connection in constructor instead of Elastica_Client
 - Elastica_Transport refactored
 - Elastica_Log refactored
 - Renamed Elastica_Exception_Client to Elastica_Exception_Connection
