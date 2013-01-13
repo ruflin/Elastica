@@ -1,5 +1,8 @@
 CHANGES
 
+2013-01-13
+- Add version option to Elastica_Search::search
+
 2012-11-38
 - Added Elastica_Filter_GeoDistanceRange filter
 

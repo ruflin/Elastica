@@ -200,6 +200,7 @@ class Elastica_Search implements Elastica_Searchable
         $path = $this->getPath();
         $params = array();
 
+		// Deprecated: option for limit
         if (is_int($options)) {
             $query->setLimit($options);
         } else {
@@ -212,6 +213,7 @@ class Elastica_Search implements Elastica_Searchable
 						case 'explain':
 							$query->setExplain($value);
 							break;
+						case 'version':
                         case 'routing' :
                         case 'search_type':
                         case 'timeout':
