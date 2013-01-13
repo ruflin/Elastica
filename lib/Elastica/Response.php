@@ -101,6 +101,16 @@ class Elastica_Response
     {
         $data = $this->getData();
 
+		// Bulk insert checks. Check every item
+		if (isset($data['items'])) {
+			foreach ($data['items'] as $item) {
+				if (false == $item['index']['ok'] ) {
+					return false;
+ 				}
+			}			
+            return true;
+        }
+
         return (isset($data['ok']) && $data['ok']);
     }
 

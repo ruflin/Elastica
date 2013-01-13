@@ -45,4 +45,27 @@ class Elastica_ResponseTest extends Elastica_Test
         $this->assertArrayHasKey('total', $shardsStats);
         $this->assertArrayHasKey('successful', $shardsStats);
     }
+
+	public function testIsOk() {
+		$index = $this->_createIndex();
+        $type = $index->getType('test');
+
+        $doc = new Elastica_Document(1, array('name' => 'ruflin'));
+        $response = $type->addDocument($doc);
+		
+		$this->assertTrue($response->isOk());
+	}
+	
+	public function testIsOkMultiple() {
+		$index = $this->_createIndex();
+        $type = $index->getType('test');
+
+        $docs = array(
+			new Elastica_Document(1, array('name' => 'ruflin')),
+			new Elastica_Document(2, array('name' => 'ruflin'))
+		);
+        $response = $type->addDocuments($docs);
+		
+		$this->assertTrue($response->isOk());
+	}
 }
