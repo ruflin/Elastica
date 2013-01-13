@@ -1,16 +1,16 @@
 #!/bin/bash
 
-wget http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.20.1.tar.gz
-tar -xzf elasticsearch-0.20.1.tar.gz
-sed 's/# index.number_of_shards: 1/index.number_of_shards: 2/' elasticsearch-0.20.1/config/elasticsearch.yml > elasticsearch-0.20.1/config/elasticsearch.yml
-sed 's/# index.number_of_replicas: 0/index.number_of_replicas: 0/' elasticsearch-0.20.1/config/elasticsearch.yml > elasticsearch-0.20.1/config/elasticsearch.yml
-sed 's/# discovery.zen.ping.multicast.enabled: false/discovery.zen.ping.multicast.enabled: false/' elasticsearch-0.20.1/config/elasticsearch.yml > elasticsearch-0.20.1/config/elasticsearch.yml
-elasticsearch-0.20.1/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/1.6.0
+wget http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${ES_VER}.tar.gz
+tar -xzf elasticsearch-${ES_VER}.tar.gz
+sed 's/# index.number_of_shards: 1/index.number_of_shards: 2/' elasticsearch-${ES_VER}/config/elasticsearch.yml > elasticsearch-${ES_VER}/config/elasticsearch.yml
+sed 's/# index.number_of_replicas: 0/index.number_of_replicas: 0/' elasticsearch-${ES_VER}/config/elasticsearch.yml > elasticsearch-${ES_VER}/config/elasticsearch.yml
+sed 's/# discovery.zen.ping.multicast.enabled: false/discovery.zen.ping.multicast.enabled: false/' elasticsearch-${ES_VER}/config/elasticsearch.yml > elasticsearch-${ES_VER}/config/elasticsearch.yml
+elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/${ES_MAPPER_ATTACHMENTS_VER}
 
 export JAVA_OPTS="-server"
-elasticsearch-0.20.1/bin/elasticsearch &
-elasticsearch-0.20.1/bin/elasticsearch &
-elasticsearch-0.20.1/bin/elasticsearch &
+elasticsearch-${ES_VER}/bin/elasticsearch &
+elasticsearch-${ES_VER}/bin/elasticsearch &
+elasticsearch-${ES_VER}/bin/elasticsearch &
 
 echo "Waiting until elasticsearch node 1 is ready on port 9200"
 while [[ -z `curl -s 'http://localhost:9200' ` ]]
