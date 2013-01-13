@@ -1,4 +1,8 @@
 <?php
+
+namespace Elastica;
+use Elastica\Exception\InvalidException;
+
 /**
  * Container for scripts as fields
  *
@@ -7,10 +11,10 @@
  * @author Sebastien Lavoie <github@lavoie.sl>
  * @link http://www.elasticsearch.org/guide/reference/api/search/script-fields.html
  */
-class Elastica_ScriptFields extends Elastica_Param
+class ScriptFields extends Param
 {
     /**
-     * @param Elastica_Script[]|array $scripts OPTIONAL
+     * @param Elastica\Script[]|array $scripts OPTIONAL
      */
     public function __construct(array $scripts = array())
     {
@@ -20,15 +24,15 @@ class Elastica_ScriptFields extends Elastica_Param
     }
 
     /**
-     * @param  string                $name   Name of the Script field
-     * @param  Elastica_Script       $script
-     * @throws Elastica_Exception_Invalid
-     * @return Elastica_ScriptFields
+     * @param  string                              $name   Name of the Script field
+     * @param  Elastica\Script                     $script
+     * @throws Elastica\Exception\InvalidException
+     * @return Elastica\ScriptFields
      */
-    public function addScript($name, Elastica_Script $script)
+    public function addScript($name, Script $script)
     {
         if (!is_string($name) || !strlen($name)) {
-            throw new Elastica_Exception_Invalid('The name of a Script is required and must be a string');
+            throw new InvalidException('The name of a Script is required and must be a string');
         }
         $this->setParam($name, $script->toArray());
 
@@ -36,8 +40,8 @@ class Elastica_ScriptFields extends Elastica_Param
     }
 
     /**
-     * @param  Elastica_Script[]|array $scripts Associative array of string => Elastica_Script
-     * @return Elastica_ScriptFields
+     * @param  Elastica\Script[]|array $scripts Associative array of string => Elastica\Script
+     * @return Elastica\ScriptFields
      */
     public function setScripts(array $scripts)
     {

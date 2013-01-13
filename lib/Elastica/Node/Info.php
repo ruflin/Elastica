@@ -1,4 +1,10 @@
 <?php
+
+namespace Elastica\Node;
+
+use Elastica\Node as BaseNode;
+use Elastica\Request;
+
 /**
  * Elastica cluster node object
  *
@@ -7,12 +13,12 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
-class Elastica_Node_Info
+class Info
 {
     /**
      * Response
      *
-     * @var Elastica_Response Response object
+     * @var Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -26,17 +32,17 @@ class Elastica_Node_Info
     /**
      * Node
      *
-     * @var Elastica_Node Node object
+     * @var Elastica\Node Node object
      */
     protected $_node = null;
 
     /**
      * Create new info object for node
      *
-     * @param Elastica_Node $node   Node object
+     * @param Elastica\Node $node   Node object
      * @param array         $params List of params to return. Can be: settings, os, process, jvm, thread_pool, network, transport, http
      */
-    public function __construct(Elastica_Node $node, array $params = array())
+    public function __construct(BaseNode $node, array $params = array())
     {
         $this->_node = $node;
         $this->refresh($params);
@@ -110,7 +116,7 @@ class Elastica_Node_Info
     /**
      * Return node object
      *
-     * @return Elastica_Node Node object
+     * @return Elastica\Node Node object
      */
     public function getNode()
     {
@@ -120,7 +126,7 @@ class Elastica_Node_Info
     /**
      * Returns response object
      *
-     * @return Elastica_Response Response object
+     * @return Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -131,7 +137,7 @@ class Elastica_Node_Info
      * Reloads all nodes information. Has to be called if informations changed
      *
      * @param  array             $params Params to return (default none). Possible options: settings, os, process, jvm, thread_pool, network, transport, http
-     * @return Elastica_Response Response object
+     * @return Elastica\Response Response object
      */
     public function refresh(array $params = array())
     {
@@ -144,7 +150,7 @@ class Elastica_Node_Info
             }
         }
 
-        $this->_response = $this->getNode()->getClient()->request($path, Elastica_Request::GET);
+        $this->_response = $this->getNode()->getClient()->request($path, Request::GET);
         $data = $this->getResponse()->getData();
         $this->_data = reset($data['nodes']);
     }

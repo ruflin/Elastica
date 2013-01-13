@@ -1,12 +1,14 @@
 <?php
-require_once dirname(__FILE__) . '/../bootstrap.php';
 
-class ClientTest extends PHPUnit_Framework_TestCase
+use Elastica\Client;
+use Elastica\Document;
+
+class ClientTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testServersArray()
     {
-        $client = new Elastica_Client();
+        $client = new Client();
         $index = $client->getIndex('test');
         $index->create(array(), true);
         $type = $index->getType('test');
@@ -14,7 +16,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $start = microtime(true);
 
         for ($i = 1; $i <= 10000; $i++) {
-            $doc = new Elastica_Document($i, array('test' => 1));
+            $doc = new Document($i, array('test' => 1));
             $type->addDocument($doc);
         }
 

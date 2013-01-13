@@ -1,5 +1,7 @@
 <?php
 
+namespace Elastica;
+
 /**
  * Elastica log object
  *
@@ -7,7 +9,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Log
+class Log
 {
     /**
      * Log path or true if enabled
@@ -36,11 +38,11 @@ class Elastica_Log
     /**
      * Log a message
      *
-     * @param string|Elastica_Request $message
+     * @param string|Elastica\Request $message
      */
     public function log($message)
     {
-        if ($message instanceof Elastica_Request) {
+        if ($message instanceof Request) {
             $message = $this->_convertRequest($message);
         }
 
@@ -58,7 +60,7 @@ class Elastica_Log
      * Enable/disable log or set log path
      *
      * @param  bool|string  $log Enables log or sets log path
-     * @return Elastica_Log
+     * @return Elastica\Log
      */
     public function setLog($log)
     {
@@ -70,10 +72,10 @@ class Elastica_Log
     /**
      * Converts a request to a log message
      *
-     * @param  Elastica_Request $request
+     * @param  Elastica\Request $request
      * @return string           Request log message
      */
-    protected function _convertRequest(Elastica_Request $request)
+    protected function _convertRequest(Request $request)
     {
         $message = 'curl -X' . strtoupper($request->getMethod()) . ' ';
         $message .= '\'http://' . $request->getConnection()->getHost() . ':' . $request->getConnection()->getPort() . '/';

@@ -1,4 +1,8 @@
 <?php
+
+namespace Elastica;
+use Elastica\Exception\InvalidException;
+
 /**
  * Elastica connection instance to an elasticasearch node
  *
@@ -6,7 +10,7 @@
  * @package  Elastica
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Connection extends Elastica_Param
+class Connection extends Param
 {
     /**
      * Default elastic search port
@@ -56,8 +60,8 @@ class Elastica_Connection extends Elastica_Param
     }
 
     /**
-     * @param int $port
-     * @return Elastica_Connection
+     * @param  int                 $port
+     * @return Elastica\Connection
      */
     public function setPort($port)
     {
@@ -73,8 +77,8 @@ class Elastica_Connection extends Elastica_Param
     }
 
     /**
-     * @param string $host
-     * @return Elastica_Connection
+     * @param  string              $host
+     * @return Elastica\Connection
      */
     public function setHost($host)
     {
@@ -90,8 +94,8 @@ class Elastica_Connection extends Elastica_Param
     }
 
     /**
-     * @param string $transport
-     * @return Elastica_Connection
+     * @param  string              $transport
+     * @return Elastica\Connection
      */
     public function setTransport($transport)
     {
@@ -107,8 +111,8 @@ class Elastica_Connection extends Elastica_Param
     }
 
     /**
-     * @param string $path
-     * @return Elastica_Connection
+     * @param  string              $path
+     * @return Elastica\Connection
      */
     public function setPath($path)
     {
@@ -116,8 +120,8 @@ class Elastica_Connection extends Elastica_Param
     }
 
     /**
-     * @param int $timeout Timeout in seconds
-     * @return Elastica_Connection
+     * @param  int                 $timeout Timeout in seconds
+     * @return Elastica\Connection
      */
     public function setTimeout($timeout)
     {
@@ -129,14 +133,14 @@ class Elastica_Connection extends Elastica_Param
      */
     public function getTimeout()
     {
-        return (int)  $this->hasParam('timeout')?$this->getParam('timeout'):self::TIMEOUT;
+        return (int) $this->hasParam('timeout')?$this->getParam('timeout'):self::TIMEOUT;
     }
 
     /**
      * Enables a connection
      *
-     * @param bool $enabled OPTIONAL (default = true)
-     * @return Elastica_Connection
+     * @param  bool                $enabled OPTIONAL (default = true)
+     * @return Elastica\Connection
      */
     public function setEnabled($enabled = true)
     {
@@ -154,14 +158,14 @@ class Elastica_Connection extends Elastica_Param
     /**
      * Returns an instance of the transport type
      *
-     * @return Elastica_Transport_Abstract Transport object
-     * @throws Elastica_Exception_Invalid  If invalid transport type
+     * @return Elastica\Transport\AbstractTransport Transport object
+     * @throws Elastica\Exception\InvalidException  If invalid transport type
      */
     public function getTransportObject()
     {
-        $className = 'Elastica_Transport_' . $this->getTransport();
+        $className = 'Elastica\\Transport\\' . $this->getTransport() . 'Transport';
         if (!class_exists($className)) {
-            throw new Elastica_Exception_Invalid('Invalid transport');
+            throw new InvalidException('Invalid transport');
         }
 
         return new $className($this);
@@ -176,8 +180,8 @@ class Elastica_Connection extends Elastica_Param
     }
 
     /**
-     * @param array $config
-     * @return Elastica_Param
+     * @param  array               $config
+     * @return Elastica\Connection
      */
     public function setConfig(array $config)
     {
@@ -185,23 +189,25 @@ class Elastica_Connection extends Elastica_Param
     }
 
     /**
-     * @param string $key
-     * @param mixed $value
-     * @return Elastica_Connection
+     * @param  string              $key
+     * @param  mixed               $value
+     * @return Elastica\Connection
      */
     public function addConfig($key, $value)
     {
         $this->_params['config'][$key] = $value;
+
         return $this;
     }
 
     /**
-     * @param string $key
+     * @param  string $key
      * @return bool
      */
     public function hasConfig($key)
     {
         $config = $this->getConfig();
+
         return isset($config[$key]);
     }
 
@@ -209,9 +215,9 @@ class Elastica_Connection extends Elastica_Param
      * Returns a specific config key or the whole
      * config array if not set
      *
-     * @param  string       $key Config key
-     * @throws Elastica_Exception_Invalid
-     * @return array|string Config value
+     * @param  string                              $key Config key
+     * @throws Elastica\Exception\InvalidException
+     * @return array|string                        Config value
      */
     public function getConfig($key = '')
     {
@@ -221,26 +227,26 @@ class Elastica_Connection extends Elastica_Param
         }
 
         if (!array_key_exists($key, $config)) {
-            throw new Elastica_Exception_Invalid('Config key is not set: ' . $key);
+            throw new InvalidException('Config key is not set: ' . $key);
         }
 
         return $config[$key];
     }
 
     /**
-     * @param Elastica_Connection|array $params Params to create a connection
-     * @return Elastica_Connection
+     * @param  Elastica\Connection|array $params Params to create a connection
+     * @return Elastica\Connection
      */
     public static function create($params = array())
     {
         $connection = null;
 
-        if ($params instanceof Elastica_Connection) {
+        if ($params instanceof Connection) {
             $connection = $params;
         } elseif (is_array($params)) {
-            $connection = new Elastica_Connection($params);
+            $connection = new Connection($params);
         } else {
-            throw new Elastica_Exception_Invalid('Invalid data type');
+            throw new InvalidException('Invalid data type');
         }
 
         return $connection;

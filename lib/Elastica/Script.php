@@ -1,4 +1,9 @@
 <?php
+
+namespace Elastica;
+
+use Elastica\Exception\InvalidException;
+
 /**
  * Script objects, containing script internals
  *
@@ -7,7 +12,7 @@
  * @author avasilenko <aa.vasilenko@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/modules/scripting.html
  */
-class Elastica_Script extends Elastica_Param
+class Script extends Param
 {
     const LANG_MVEL   = 'mvel';
     const LANG_JS     = 'js';
@@ -73,8 +78,9 @@ class Elastica_Script extends Elastica_Param
     }
 
     /**
-     * @param string|array|Elastica_Script $data
-     * @return Elastica_Script
+     * @param  string|array|Elastica\Script        $data
+     * @throws Elastica\Exception\InvalidException
+     * @return Elastica\Script
      */
     public static function create($data)
     {
@@ -85,20 +91,21 @@ class Elastica_Script extends Elastica_Param
         } elseif (is_string($data)) {
             $script = new self($data);
         } else {
-            throw new Elastica_Exception_Invalid('Failed to create script. Invalid data passed.');
+            throw new InvalidException('Failed to create script. Invalid data passed.');
         }
+
         return $script;
     }
 
     /**
-     * @param array $data
-     * @return Elastica_Script
-     * @throws Elastica_Exception_Invalid
+     * @param  array                               $data
+     * @throws Elastica\Exception\InvalidException
+     * @return Elastica\Script
      */
     protected static function _createFromArray(array $data)
     {
         if (!isset($data['script'])) {
-            throw new Elastica_Exception_Invalid("\$data['script'] is required");
+            throw new InvalidException("\$data['script'] is required");
         }
 
         $script = new self($data['script']);
@@ -108,10 +115,11 @@ class Elastica_Script extends Elastica_Param
         }
         if (isset($data['params'])) {
             if (!is_array($data['params'])) {
-                throw new Elastica_Exception_Invalid("\$data['params'] should be array");
+                throw new InvalidException("\$data['params'] should be array");
             }
             $script->setParams($data['params']);
         }
+
         return $script;
     }
 
