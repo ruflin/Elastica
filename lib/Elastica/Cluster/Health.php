@@ -180,4 +180,3 @@ class Elastica_Cluster_Health
         return $indices;
     }
 }
-

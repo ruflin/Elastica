@@ -49,7 +49,7 @@ abstract class Elastica_Filter_Abstract_GeoDistance extends Elastica_Filter_Abst
      *
      * @var string
      */
-    protected  $_geohash = null;
+    protected $_geohash = null;
 
     /**
      * Create GeoDistance object

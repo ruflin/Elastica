@@ -369,7 +369,7 @@ class Elastica_Search implements Elastica_Searchable
     public function search($query = '', $options = null)
     {
         $this->_setOptionsAndQuery($options, $query);
-        
+
         $query = $this->getQuery();
         $path = $this->getPath();
 
@@ -419,12 +419,12 @@ class Elastica_Search implements Elastica_Searchable
 
         if (is_int($options)) {
             $this->getQuery()->setLimit($options);
-        } else if (is_array($options)) {
+        } elseif (is_array($options)) {
             if (isset($options['limit'])) {
                 $this->getQuery()->setLimit($options['limit']);
                 unset($options['limit']);
             }
-          	if (isset($options['explain'])) {
+              if (isset($options['explain'])) {
                 $this->getQuery()->setExplain($options['explain']);
                 unset($options['explain']);
             }
