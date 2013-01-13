@@ -108,24 +108,13 @@ class Type implements SearchableInterface
             throw new InvalidException('Document id is not set');
         }
 
-        $path =  $document->getId() . '/_update';
-
-        if (!isset($options['retry_on_conflict'])) {
-            $retryOnConflict = $this->getIndex()->getClient()->getConfig("retryOnConflict");
-            $options['retry_on_conflict'] = $retryOnConflict;
-        }
-
-        if ($document->hasScript()) {
-            $requestData = $document->getScript()->toArray();
-            $documentData = $document->getData();
-            if (!empty($documentData)) {
-                $requestData['upsert'] = $documentData;
-            }
-        } else {
-            $requestData = array('doc' => $document->getData());
-        }
-
-        return $this->request($path, Request::POST, $requestData, $options);
+        return $this->getIndex()->getClient()->updateDocument(
+            $document->getId(),
+            $document,
+            $this->getIndex()->getName(),
+            $this->getName(),
+            $options
+        );
     }
 
     /**
