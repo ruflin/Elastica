@@ -9,27 +9,13 @@ require_once dirname(__FILE__) . '/../../../bootstrap.php';
 
 class Elastica_Transport_NullTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-    	;
-    }
-
-    public function testConstruct()
-    {
-        $host = 'nullhost';
-        $port = 0;
-        $client = new Elastica_Client(array('host' => $host, 'port' => $port, 'transport' => 'Null'));
-
-        $this->assertEquals($host, $client->getHost());
-        $this->assertEquals($port, $client->getPort());
-    }
 
     public function testEmptyResult()
     {
         // Creates a client with any destination, and verify it returns a response object when executed
-        $host = 'nullhost';
-        $port = 0;
-        $client = new Elastica_Client(array('host' => $host, 'port' => $port, 'transport' => 'Null'));
+        $client = new Elastica_Client();
+		$connection = new Elastica_Connection(array('transport' => 'Null'));
+		$client->setConnections(array($connection));
     	
         $index = $client->getIndex('elasticaNullTransportTest1');
 

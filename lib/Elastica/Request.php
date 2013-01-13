@@ -6,19 +6,12 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Request
+class Elastica_Request extends Elastica_Param
 {
     const POST = 'POST';
     const PUT = 'PUT';
     const GET = 'GET';
     const DELETE = 'DELETE';
-
-    /**
-     * Client
-     *
-     * @var Elastica_Client Client object
-     */
-    protected $_client;
 
     /**
      * Request path
@@ -48,29 +41,30 @@ class Elastica_Request
      */
     protected $_query;
 
-    /**
-     * Internal id of last used server. This is used for round robin
-     *
-     * @var int Last server id
-     */
-    protected static $_serverId = null;
+	/**
+	 * @var Elastica_Connection
+	 */
+	protected $_connection;
 
     /**
      * Construct
      *
-     * @param Elastica_Client $client
      * @param string          $path   Request path
-     * @param string          $method Request method (use const's)
+     * @param string          $method OPTIONAL Request method (use const's) (default = self::GET)
      * @param array           $data   OPTIONAL Data array
      * @param array           $query  OPTIONAL Query params
+	 * @param Elastica_Connection $connection OPTIONAL Connection object
      */
-    public function __construct(Elastica_Client $client, $path, $method, $data = array(), array $query = array())
+    public function __construct($path, $method = self::GET, $data = array(), array $query = array(), Elastica_Connection $connection = null)
     {
-        $this->_client = $client;
-        $this->_path = $path;
-        $this->_method = $method;
-        $this->_data = $data;
-        $this->_query = $query;
+        $this->setPath($path);
+        $this->setMethod($method);
+		$this->setData($data);
+		$this->setQuery($query);
+
+		if ($connection) {
+			$this->setConnection($connection);
+		}
     }
 
     /**
@@ -81,9 +75,7 @@ class Elastica_Request
      */
     public function setMethod($method)
     {
-        $this->_method = $method;
-
-        return $this;
+		return $this->setParam('method', $method);
     }
 
     /**
@@ -93,7 +85,7 @@ class Elastica_Request
      */
     public function getMethod()
     {
-        return $this->_method;
+		return $this->getParam('method');
     }
 
     /**
@@ -104,9 +96,7 @@ class Elastica_Request
      */
     public function setData($data)
     {
-        $this->_data = $data;
-
-        return $this;
+		return $this->setParam('data', $data);
     }
 
     /**
@@ -116,7 +106,7 @@ class Elastica_Request
      */
     public function getData()
     {
-        return $this->_data;
+        return $this->getParam('data');
     }
 
     /**
@@ -127,9 +117,7 @@ class Elastica_Request
      */
     public function setPath($path)
     {
-        $this->_path = $path;
-
-        return $this;
+		return $this->setParam('path', $path);
     }
 
     /**
@@ -139,7 +127,7 @@ class Elastica_Request
      */
     public function getPath()
     {
-        return $this->_path;
+		return $this->getParam('path');
     }
 
     /**
@@ -149,45 +137,38 @@ class Elastica_Request
      */
     public function getQuery()
     {
-        return $this->_query;
+		return $this->getParam('query');
     }
 
-    /**
-     * Return Client Object
-     *
-     * @return Elastica_Client
-     */
-    public function getClient()
-    {
-        return $this->_client;
-    }
+	/**
+	 * @param array $query
+	 * @return Elastica_Request
+	 */
+	public function setQuery(array $query = array())
+	{
+		return $this->setParam('query', $query);
+	}
+
+	/**
+	 * @param Elastica_Connection $connection
+	 * @return Elastica_Request
+	 */
+	public function setConnection(Elastica_Connection $connection) {
+		$this->_connection = $connection;
+		return $this;
+	}
 
     /**
-     * Returns a specific config key or the whole
-     * config array if not set
+     * Return Connection Object
      *
-     * @param  string       $key Config key
-     * @return array|string Config value
+     * @return Elastica_Connection
      */
-    public function getConfig($key = '')
+    public function getConnection()
     {
-        return $this->getClient()->getConfig($key);
-    }
-
-    /**
-     * Returns an instance of the transport type
-     *
-     * @return Elastica_Transport_Abstract Transport object
-     * @throws Elastica_Exception_Invalid  If invalid transport type
-     */
-    public function getTransport()
-    {
-        $className = 'Elastica_Transport_' . $this->_client->getConfig('transport');
-        if (!class_exists($className)) {
-            throw new Elastica_Exception_Invalid('Invalid transport');
-        }
-
-        return new $className($this);
+        if (empty($this->_connection)) {
+			throw new Elastica_Exception_Invalid('No valid connection object set');
+		}
+		return $this->_connection;
     }
 
     /**
@@ -197,49 +178,9 @@ class Elastica_Request
      */
     public function send()
     {
-        $log = new Elastica_Log($this->getClient());
-        $log->log($this);
+		$transport = $this->getConnection()->getTransportObject();
 
-        $transport = $this->getTransport();
-
-        $servers = $this->getClient()->getConfig('servers');
-
-        /*
-
-        // Integration of temp file
-        $dir = sys_get_temp_dir();
-        $name = 'elasticaServers.json';
-        $file = $dir . DIRECTORY_SEPARATOR . $name;
-
-        if (!file_exists($file)) {
-            file_put_contents($file, 'hh');
-            error_log(print_r($this->getClient()->getCluster(), true));
-        }
-
-        */
-
-        if (empty($servers)) {
-            $params = array(
-                'url' => $this->getClient()->getConfig('url'),
-                'host' => $this->getClient()->getHost(),
-                'port' => $this->getClient()->getPort(),
-                'path' => $this->getClient()->getConfig('path'),
-            );
-            $response = $transport->exec($params);
-        } else {
-
-            // Set server id for first request (round robin by default)
-            if (is_null(self::$_serverId)) {
-                self::$_serverId = rand(0, count($servers) - 1);
-            } else {
-                self::$_serverId = (self::$_serverId + 1) % count($servers);
-            }
-
-            $server = $servers[self::$_serverId];
-
-            $response = $transport->exec($server);
-        }
-
-        return $response;
+		// Refactor: Not full toArray needed in exec?
+		return $transport->exec($this, $this->getConnection()->toArray());
     }
 }

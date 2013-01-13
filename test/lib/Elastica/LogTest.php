@@ -23,20 +23,9 @@ class Elastica_LogTest extends Elastica_Test
         $this->assertEmpty($client->getConfig('log'));
     }
 
-    public function testDisabledLog()
-    {
-        $client = new Elastica_Client();
-        $log = new Elastica_Log($client);
-
-        $log->log('hello world');
-
-        $this->assertEmpty($log->getLastMessage());
-    }
-
     public function testGetLastMessage()
     {
-        $client = new Elastica_Client(array('log' => '/tmp/php.log'));
-        $log = new Elastica_Log($client);
+        $log = new Elastica_Log('/tmp/php.log');
         $message = 'hello world';
 
         $log->log($message);

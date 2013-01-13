@@ -6,31 +6,14 @@ class Elastica_ClientTest extends Elastica_Test
 
     public function testConstruct()
     {
-        $host = 'ruflin.com';
-        $port = 9300;
-        $client = new Elastica_Client(array('host' => $host, 'port' => $port));
-
-        $this->assertEquals($host, $client->getHost());
-        $this->assertEquals($port, $client->getPort());
-    }
-
-    public function testDefaults()
-    {
         $client = new Elastica_Client();
-
-        $this->assertEquals(Elastica_Client::DEFAULT_HOST, 'localhost');
-        $this->assertEquals(Elastica_Client::DEFAULT_PORT, 9200);
-        $this->assertEquals(Elastica_Client::DEFAULT_TRANSPORT, 'Http');
-
-        $this->assertEquals(Elastica_Client::DEFAULT_HOST, $client->getHost());
-        $this->assertEquals(Elastica_Client::DEFAULT_PORT, $client->getPort());
-        $this->assertEquals(Elastica_Client::DEFAULT_TRANSPORT, $client->getTransport());
+		$this->assertCount(1, $client->getConnections());
     }
 
-    public function testServersArray()
+    public function testConnectionsArray()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = new Elastica_Client(array('servers' => array(array('host' => 'localhost', 'port' => 9200))));
+        $client = new Elastica_Client(array('connections' => array(array('host' => 'localhost', 'port' => 9200))));
         $index = $client->getIndex('elastica_test1');
         $index->create(array(), true);
 
@@ -61,7 +44,7 @@ class Elastica_ClientTest extends Elastica_Test
     public function testTwoServersSame()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = new Elastica_Client(array('servers' => array(
+        $client = new Elastica_Client(array('connections' => array(
             array('host' => 'localhost', 'port' => 9200),
             array('host' => 'localhost', 'port' => 9200),
         )));
@@ -369,4 +352,95 @@ class Elastica_ClientTest extends Elastica_Test
         $totalHits = $resultSet->getTotalHits();
         $this->assertEquals(0, $totalHits);
     }
+
+	public function testOneInvalidConnection() {
+		$client = new Elastica_Client();
+
+		// First connection work, second should not work
+		$connection1 = new Elastica_Connection(array('port' => '9200', 'timeout' => 2));
+		$connection2 = new Elastica_Connection(array('port' => '9100', 'timeout' => 2));
+
+		$client->setConnections(array($connection1, $connection2));
+
+		$client->request('_status', Elastica_Request::GET);
+
+		$connections = $client->getConnections();
+
+		// two connections are setup
+		$this->assertEquals(2, count($connections));
+
+		// One connection has to be disabled
+		$this->assertTrue($connections[0]->isEnabled() == false || $connections[1]->isEnabled() == false);
+	}
+
+	public function testTwoInvalidConnection() {
+		$client = new Elastica_Client();
+
+		// First connection work, second should not work
+		$connection1 = new Elastica_Connection(array('port' => '9101', 'timeout' => 2));
+		$connection2 = new Elastica_Connection(array('port' => '9102', 'timeout' => 2));
+
+		$client->setConnections(array($connection1, $connection2));
+
+		try {
+			$client->request('_status', Elastica_Request::GET);
+			$this->fail('Should throw exception as no connection valid');
+		} catch(Elastica_Exception_Client $e) {
+			$this->assertTrue(true);
+		}
+
+		$connections = $client->getConnections();
+
+		// two connections are setup
+		$this->assertEquals(2, count($connections));
+
+		// One connection has to be disabled
+		$this->assertTrue($connections[0]->isEnabled() == false || $connections[1]->isEnabled() == false);
+	}
+
+	/**
+	 * Tests if the callback works in case a connection is down
+	 */
+	public function testCallback() {
+
+		$count = 0;
+		$object = $this;
+
+		// Callback function which verifies that disabled connection objects are returned
+		$callback = function($connection) use (&$object, &$count) {
+			$object->assertInstanceOf('Elastica_Connection', $connection);
+			$object->assertFalse($connection->isEnabled());
+			$count++;
+		};
+
+		$client = new Elastica_Client(array(), $callback);
+
+		// First connection work, second should not work
+		$connection1 = new Elastica_Connection(array('port' => '9101', 'timeout' => 2));
+		$connection2 = new Elastica_Connection(array('port' => '9102', 'timeout' => 2));
+
+		$client->setConnections(array($connection1, $connection2));
+
+		$this->assertEquals(0, $count);
+
+		try {
+			$client->request('_status', Elastica_Request::GET);
+			$this->fail('Should throw exception as no connection valid');
+		} catch(Elastica_Exception_Client $e) {
+			$this->assertTrue(true);
+		}
+
+		// Two disabled connections (from closure call)
+		$this->assertEquals(2, $count);
+	}
+
+	public function testUrlConstructor() {
+		$url = 'http://localhost:9200/';
+
+		// Url should overwrite invalid host
+		$client = new Elastica_Client(array('url' => $url, 'port' => '9101', 'timeout' => 2));
+
+		$response = $client->request('_status');
+		$this->assertInstanceOf('Elastica_Response', $response);
+	}
 }
