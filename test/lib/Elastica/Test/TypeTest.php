@@ -61,6 +61,14 @@ class TypeTest extends BaseTest
         $mapping->setSource(array('enabled' => false));
         $type->setMapping($mapping);
 
+        $mapping = $type->getMapping();
+
+        $this->assertArrayHasKey('user', $mapping);
+        $this->assertArrayHasKey('properties', $mapping['user']);
+        $this->assertArrayHasKey('id', $mapping['user']['properties']);
+        $this->assertArrayHasKey('type', $mapping['user']['properties']['id']);
+        $this->assertEquals('integer', $mapping['user']['properties']['id']['type']);
+
         // Adds 1 document to the index
         $doc1 = new Document(1,
             array('username' => 'hans', 'test' => array('2', '3', '5'))
@@ -175,6 +183,18 @@ class TypeTest extends BaseTest
         $type->getDocument(1);
 
         $type->getDocument(2);
+    }
+
+    /**
+     * @expectedException Elastica_Exception_NotFound
+     */
+    public function testGetDocumentNotExistingIndex()
+    {
+        $client = new Elastica_Client();
+        $index = new Elastica_Index($client, 'index');
+        $type = new Elastica_Type($index, 'type');
+
+        $document = $type->getDocument(1);
     }
 
     public function testDeleteByQuery()
@@ -366,5 +386,7 @@ class TypeTest extends BaseTest
 
         $this->assertEquals('index', $document->getIndex());
         $this->assertEquals('type', $document->getType());
+        
+        $this->assertEquals('type', $type->getType());
     }
 }
