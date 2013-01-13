@@ -285,6 +285,26 @@ class Elastica_SearchTest extends Elastica_Test
         }
     }
 
+	public function testSearchWithVersionOption() {
+
+	    $index = $this->_createIndex('test1');
+		$doc = new Elastica_Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin'));
+		$index->getType('test')->addDocument($doc);
+		$index->refresh();
+		
+		$search = new Elastica_Search($index->getClient());
+	    $search->addIndex($index);
+	
+		// Version param should not be inside by default
+		$results = $search->search(new Elastica_Query_MatchAll());
+		$hit = $results->current();
+		$this->assertEquals(array(), $hit->getParam('_version'));
+			
+		// Added version param to result
+		$results = $search->search(new Elastica_Query_MatchAll(), array('version' => true));
+		$hit = $results->current();
+		$this->assertEquals(1, $hit->getParam('_version'));		
+	}
 
     public function testCountRequest() {
         $client = new Elastica_Client();
