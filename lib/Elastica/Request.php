@@ -41,10 +41,10 @@ class Elastica_Request extends Elastica_Param
      */
     protected $_query;
 
-	/**
-	 * @var Elastica_Connection
-	 */
-	protected $_connection;
+    /**
+     * @var Elastica_Connection
+     */
+    protected $_connection;
 
     /**
      * Construct
@@ -53,18 +53,18 @@ class Elastica_Request extends Elastica_Param
      * @param string          $method OPTIONAL Request method (use const's) (default = self::GET)
      * @param array           $data   OPTIONAL Data array
      * @param array           $query  OPTIONAL Query params
-	 * @param Elastica_Connection $connection OPTIONAL Connection object
+     * @param Elastica_Connection $connection OPTIONAL Connection object
      */
     public function __construct($path, $method = self::GET, $data = array(), array $query = array(), Elastica_Connection $connection = null)
     {
         $this->setPath($path);
         $this->setMethod($method);
-		$this->setData($data);
-		$this->setQuery($query);
+        $this->setData($data);
+        $this->setQuery($query);
 
-		if ($connection) {
-			$this->setConnection($connection);
-		}
+        if ($connection) {
+            $this->setConnection($connection);
+        }
     }
 
     /**
@@ -75,7 +75,7 @@ class Elastica_Request extends Elastica_Param
      */
     public function setMethod($method)
     {
-		return $this->setParam('method', $method);
+        return $this->setParam('method', $method);
     }
 
     /**
@@ -85,7 +85,7 @@ class Elastica_Request extends Elastica_Param
      */
     public function getMethod()
     {
-		return $this->getParam('method');
+        return $this->getParam('method');
     }
 
     /**
@@ -96,7 +96,7 @@ class Elastica_Request extends Elastica_Param
      */
     public function setData($data)
     {
-		return $this->setParam('data', $data);
+        return $this->setParam('data', $data);
     }
 
     /**
@@ -117,7 +117,7 @@ class Elastica_Request extends Elastica_Param
      */
     public function setPath($path)
     {
-		return $this->setParam('path', $path);
+        return $this->setParam('path', $path);
     }
 
     /**
@@ -127,7 +127,7 @@ class Elastica_Request extends Elastica_Param
      */
     public function getPath()
     {
-		return $this->getParam('path');
+        return $this->getParam('path');
     }
 
     /**
@@ -137,26 +137,27 @@ class Elastica_Request extends Elastica_Param
      */
     public function getQuery()
     {
-		return $this->getParam('query');
+        return $this->getParam('query');
     }
 
-	/**
-	 * @param array $query
-	 * @return Elastica_Request
-	 */
-	public function setQuery(array $query = array())
-	{
-		return $this->setParam('query', $query);
-	}
+    /**
+     * @param array $query
+     * @return Elastica_Request
+     */
+    public function setQuery(array $query = array())
+    {
+        return $this->setParam('query', $query);
+    }
 
-	/**
-	 * @param Elastica_Connection $connection
-	 * @return Elastica_Request
-	 */
-	public function setConnection(Elastica_Connection $connection) {
-		$this->_connection = $connection;
-		return $this;
-	}
+    /**
+     * @param Elastica_Connection $connection
+     * @return Elastica_Request
+     */
+    public function setConnection(Elastica_Connection $connection)
+    {
+        $this->_connection = $connection;
+        return $this;
+    }
 
     /**
      * Return Connection Object
@@ -166,9 +167,9 @@ class Elastica_Request extends Elastica_Param
     public function getConnection()
     {
         if (empty($this->_connection)) {
-			throw new Elastica_Exception_Invalid('No valid connection object set');
-		}
-		return $this->_connection;
+            throw new Elastica_Exception_Invalid('No valid connection object set');
+        }
+        return $this->_connection;
     }
 
     /**
@@ -178,9 +179,9 @@ class Elastica_Request extends Elastica_Param
      */
     public function send()
     {
-		$transport = $this->getConnection()->getTransportObject();
+        $transport = $this->getConnection()->getTransportObject();
 
-		// Refactor: Not full toArray needed in exec?
-		return $transport->exec($this, $this->getConnection()->toArray());
+        // Refactor: Not full toArray needed in exec?
+        return $transport->exec($this, $this->getConnection()->toArray());
     }
 }

@@ -59,7 +59,7 @@ class Elastica_Cluster_Health_IndexTest extends Elastica_Test
     {
         $this->assertEquals('yellow', $this->_index->getStatus());
     }
-  
+
     public function testGetNumberOfShards()
     {
         $this->assertEquals(1, $this->_index->getNumberOfShards());
