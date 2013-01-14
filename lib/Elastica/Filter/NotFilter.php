@@ -15,7 +15,7 @@ class NotFilter extends AbstractFilter
     /**
      * Creates Not filter query
      *
-     * @param Elastica\Filter\AbstractFilter $filter Filter object
+     * @param \Elastica\Filter\AbstractFilter $filter Filter object
      */
     public function __construct(AbstractFilter $filter)
     {
@@ -25,8 +25,8 @@ class NotFilter extends AbstractFilter
     /**
      * Set filter
      *
-     * @param  Elastica\Filter\AbstractFilter $filter
-     * @return Elastica\Filter\NotFilter
+     * @param  \Elastica\Filter\AbstractFilter $filter
+     * @return \Elastica\Filter\NotFilter
      */
     public function setFilter(AbstractFilter $filter)
     {

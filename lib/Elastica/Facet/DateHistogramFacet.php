@@ -17,7 +17,7 @@ class DateHistogramFacet extends HistogramFacet
      * Set the time_zone parameter
      *
      * @param  string                            $tzOffset
-     * @return Elastica\Facet\DateHistogramFacet
+     * @return \Elastica\Facet\DateHistogramFacet
      */
     public function setTimezone($tzOffset)
     {
@@ -28,8 +28,8 @@ class DateHistogramFacet extends HistogramFacet
      * Creates the full facet definition, which includes the basic
      * facet definition of the parent.
      *
-     * @see Elastica\Facet\AbstractFacet::toArray()
-     * @throws Elastica\Exception\InvalidException When the right fields haven't been set.
+     * @see \Elastica\Facet\AbstractFacet::toArray()
+     * @throws \Elastica\Exception\InvalidException When the right fields haven't been set.
      * @return array
      */
     public function toArray()

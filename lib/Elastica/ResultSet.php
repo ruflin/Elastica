@@ -31,14 +31,14 @@ class ResultSet implements \Iterator, \Countable
     /**
      * Response
      *
-     * @var Elastica\Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
     /**
      * Query
      *
-     * @var Elastica\Query Query object
+     * @var \Elastica\Query Query object
      */
     protected $_query;
 
@@ -55,8 +55,8 @@ class ResultSet implements \Iterator, \Countable
     /**
      * Constructs ResultSet object
      *
-     * @param Elastica\Response $response Response object
-     * @param Elastica\Query    $query    Query object
+     * @param \Elastica\Response $response Response object
+     * @param \Elastica\Query    $query    Query object
      */
     public function __construct(Response $response, Query $query)
     {
@@ -68,7 +68,7 @@ class ResultSet implements \Iterator, \Countable
     /**
      * Loads all data into the results object (initialisation)
      *
-     * @param Elastica\Response $response Response object
+     * @param \Elastica\Response $response Response object
      */
     protected function _init(Response $response)
     {
@@ -140,7 +140,7 @@ class ResultSet implements \Iterator, \Countable
     /**
      * Returns response object
      *
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -148,7 +148,7 @@ class ResultSet implements \Iterator, \Countable
     }
 
     /**
-     * @return Elastica\Query
+     * @return \Elastica\Query
      */
     public function getQuery()
     {
@@ -168,7 +168,7 @@ class ResultSet implements \Iterator, \Countable
     /**
      * Returns the current object of the set
      *
-     * @return Elastica\Result|bool Set object or false if not valid (no more entries)
+     * @return \Elastica\Result|bool Set object or false if not valid (no more entries)
      */
     public function current()
     {

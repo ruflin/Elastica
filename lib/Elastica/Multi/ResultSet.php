@@ -19,7 +19,7 @@ class ResultSet implements \Iterator, \Countable
     /**
      * Result Sets
      *
-     * @var array|Elastica\ResultSet[] Result Sets
+     * @var array|\Elastica\ResultSet[] Result Sets
      */
     protected $_resultSets = array();
 
@@ -33,15 +33,15 @@ class ResultSet implements \Iterator, \Countable
     /**
      * Response
      *
-     * @var Elastica\Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response;
 
     /**
      * Constructs ResultSet object
      *
-     * @param Elastica\Response       $response
-     * @param array|Elastica\Search[] $searches
+     * @param \Elastica\Response       $response
+     * @param array|\Elastica\Search[] $searches
      */
     public function __construct(Response $response, array $searches)
     {
@@ -50,9 +50,9 @@ class ResultSet implements \Iterator, \Countable
     }
 
     /**
-     * @param  Elastica\Response                   $response
-     * @param  array|Elastica\Search[]             $searches
-     * @throws Elastica\Exception\InvalidException
+     * @param  \Elastica\Response                   $response
+     * @param  array|\Elastica\Search[]             $searches
+     * @throws \Elastica\Exception\InvalidException
      */
     protected function _init(Response $response, array $searches)
     {
@@ -78,7 +78,7 @@ class ResultSet implements \Iterator, \Countable
     }
 
     /**
-     * @return array|Elastica\ResultSet[]
+     * @return array|\Elastica\ResultSet[]
      */
     public function getResultSets()
     {
@@ -88,7 +88,7 @@ class ResultSet implements \Iterator, \Countable
     /**
      * Returns response object
      *
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -112,7 +112,7 @@ class ResultSet implements \Iterator, \Countable
     }
 
     /**
-     * @return bool|Elastica\ResultSet
+     * @return bool|\Elastica\ResultSet
      */
     public function current()
     {

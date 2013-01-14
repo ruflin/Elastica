@@ -8,7 +8,7 @@ use Elastica\Test\Base as BaseTest;
 class ShardTest extends BaseTest
 {
     /**
-     * @var Elastica\Cluster\Health\Shard
+     * @var \Elastica\Cluster\Health\Shard
      */
     protected $_shard;
 

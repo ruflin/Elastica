@@ -26,7 +26,7 @@ class ExistsFilter extends AbstractFilter
      * Set field
      *
      * @param  string                       $field
-     * @return Elastica\Filter\ExistsFilter
+     * @return \Elastica\Filter\ExistsFilter
      */
     public function setField($field)
     {

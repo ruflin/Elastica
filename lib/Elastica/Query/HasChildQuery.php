@@ -16,7 +16,7 @@ class HasChildQuery extends AbstractQuery
     /**
      * Construct HasChild Query
      *
-     * @param string|Elastica\Query $query Query string or a Elastica\Query object
+     * @param string|\Elastica\Query $query Query string or a Elastica\Query object
      * @param string                $type  Parent document type
      */
     public function __construct($query, $type = null)
@@ -28,8 +28,8 @@ class HasChildQuery extends AbstractQuery
     /**
      * Sets query object
      *
-     * @param  string|Elastica\Query|Elastica\Query\AbstractQuery $query
-     * @return Elastica\Query\HasChild
+     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @return \Elastica\Query\HasChild
      */
     public function setQuery($query)
     {
@@ -43,7 +43,7 @@ class HasChildQuery extends AbstractQuery
      * Set type of the parent document
      *
      * @param  string                       $type Parent document type
-     * @return Elastica\Query\HasChildQuery Current object
+     * @return \Elastica\Query\HasChildQuery Current object
      */
     public function setType($type)
     {
@@ -54,7 +54,7 @@ class HasChildQuery extends AbstractQuery
      * Sets the scope
      *
      * @param  string                       $scope Scope
-     * @return Elastica\Query\HasChildQuery Current object
+     * @return \Elastica\Query\HasChildQuery Current object
      */
     public function setScope($scope)
     {

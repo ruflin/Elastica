@@ -34,8 +34,8 @@ class QueryStringQuery extends AbstractQuery
      * Sets a new query string for the object
      *
      * @param  string                              $query Query string
-     * @throws Elastica\Exception\InvalidException
-     * @return Elastica\Query\QueryStringQuery     Current object
+     * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\Query\QueryStringQuery     Current object
      */
     public function setQuery($query = '')
     {
@@ -52,7 +52,7 @@ class QueryStringQuery extends AbstractQuery
      * If no operator is set, OR is chosen
      *
      * @param  string                          $queryString Query string
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      * @deprecated Please use setQuery instead
      */
     public function setQueryString($queryString)
@@ -66,7 +66,7 @@ class QueryStringQuery extends AbstractQuery
      * If no field is set, _all is chosen
      *
      * @param  string                          $field Field
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setDefaultField($field)
     {
@@ -79,7 +79,7 @@ class QueryStringQuery extends AbstractQuery
      * If no operator is set, OR is chosen
      *
      * @param  string                          $operator Operator
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setDefaultOperator($operator)
     {
@@ -90,7 +90,7 @@ class QueryStringQuery extends AbstractQuery
      * Sets the analyzer to analyze the query with.
      *
      * @param  string                          $analyzer Analyser to use
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setAnalyzer($analyzer)
     {
@@ -103,7 +103,7 @@ class QueryStringQuery extends AbstractQuery
      * If not set, defaults to true.
      *
      * @param  bool                            $allow
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setAllowLeadingWildcard($allow = true)
     {
@@ -116,7 +116,7 @@ class QueryStringQuery extends AbstractQuery
      * If not set, defaults to true.
      *
      * @param  bool                            $lowercase
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setLowercaseExpandedTerms($lowercase = true)
     {
@@ -129,7 +129,7 @@ class QueryStringQuery extends AbstractQuery
      * If not set, defaults to true.
      *
      * @param  bool                            $enabled
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setEnablePositionIncrements($enabled = true)
     {
@@ -142,7 +142,7 @@ class QueryStringQuery extends AbstractQuery
      * If not set, defaults to 0.
      *
      * @param  int                             $length
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setFuzzyPrefixLength($length = 0)
     {
@@ -155,7 +155,7 @@ class QueryStringQuery extends AbstractQuery
      * If not set, defaults to 0.5
      *
      * @param  float                           $minSim
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setFuzzyMinSim($minSim = 0.5)
     {
@@ -169,7 +169,7 @@ class QueryStringQuery extends AbstractQuery
      * If not set, defaults to zero.
      *
      * @param  int                             $phraseSlop
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setPhraseSlop($phraseSlop = 0)
     {
@@ -182,7 +182,7 @@ class QueryStringQuery extends AbstractQuery
      * If not set, defaults to 1.0.
      *
      * @param  float                           $boost
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setBoost($boost = 1.0)
     {
@@ -195,7 +195,7 @@ class QueryStringQuery extends AbstractQuery
      * If not set, defaults to false
      *
      * @param  bool                            $analyze
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setAnalyzeWildcard($analyze = true)
     {
@@ -208,7 +208,7 @@ class QueryStringQuery extends AbstractQuery
      * If not set, defaults to false.
      *
      * @param  bool                            $autoGenerate
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setAutoGeneratePhraseQueries($autoGenerate = true)
     {
@@ -221,8 +221,8 @@ class QueryStringQuery extends AbstractQuery
      * If no fields are set, _all is chosen
      *
      * @param  array                               $fields Fields
-     * @throws Elastica\Exception\InvalidException
-     * @return Elastica\Query\QueryStringQuery     Current object
+     * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\Query\QueryStringQuery     Current object
      */
     public function setFields(array $fields)
     {
@@ -237,7 +237,7 @@ class QueryStringQuery extends AbstractQuery
      * Whether to use bool or dis_max queries to internally combine results for multi field search.
      *
      * @param  bool                            $value Determines whether to use
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setUseDisMax($value = true)
     {
@@ -250,7 +250,7 @@ class QueryStringQuery extends AbstractQuery
      * If not set, defaults to 0.
      *
      * @param  int                             $tieBreaker
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      * @deprecated
      */
     public function setTieBraker($tieBreaker = 0)
@@ -264,7 +264,7 @@ class QueryStringQuery extends AbstractQuery
      * If not set, defaults to 0.
      *
      * @param  int                             $tieBreaker
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setTieBreaker($tieBreaker = 0)
     {
@@ -275,7 +275,7 @@ class QueryStringQuery extends AbstractQuery
      * Set a re-write condition. See https://github.com/elasticsearch/elasticsearch/issues/1186 for additional information
      *
      * @param  string                          $rewrite
-     * @return Elastica\Query\QueryStringQuery Current object
+     * @return \Elastica\Query\QueryStringQuery Current object
      */
     public function setRewrite($rewrite = "")
     {
@@ -285,7 +285,7 @@ class QueryStringQuery extends AbstractQuery
     /**
      * Converts query to array
      *
-     * @see Elastica\Query\AbstractQuery::toArray()
+     * @see \Elastica\Query\AbstractQuery::toArray()
      * @return array Query array
      */
     public function toArray()

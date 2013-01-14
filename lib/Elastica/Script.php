@@ -78,9 +78,9 @@ class Script extends Param
     }
 
     /**
-     * @param  string|array|Elastica\Script        $data
-     * @throws Elastica\Exception\InvalidException
-     * @return Elastica\Script
+     * @param  string|array|\Elastica\Script        $data
+     * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\Script
      */
     public static function create($data)
     {
@@ -99,8 +99,8 @@ class Script extends Param
 
     /**
      * @param  array                               $data
-     * @throws Elastica\Exception\InvalidException
-     * @return Elastica\Script
+     * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\Script
      */
     protected static function _createFromArray(array $data)
     {

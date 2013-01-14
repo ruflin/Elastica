@@ -32,7 +32,7 @@ class WildcardQuery extends AbstractQuery
      * @param  string                       $key
      * @param  string                       $value
      * @param  float                        $boost
-     * @return Elastica\Query\WildcardQuery
+     * @return \Elastica\Query\WildcardQuery
      */
     public function setValue($key, $value, $boost = 1.0)
     {

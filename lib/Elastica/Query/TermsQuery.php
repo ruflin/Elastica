@@ -50,7 +50,7 @@ class TermsQuery extends AbstractQuery
      *
      * @param  string                    $key   Terms key
      * @param  array                     $terms Terms for the query.
-     * @return Elastica\Query\TermsQuery
+     * @return \Elastica\Query\TermsQuery
      */
     public function setTerms($key, array $terms)
     {
@@ -64,7 +64,7 @@ class TermsQuery extends AbstractQuery
      * Adds a single term to the list
      *
      * @param  string                    $term Term
-     * @return Elastica\Query\TermsQuery
+     * @return \Elastica\Query\TermsQuery
      */
     public function addTerm($term)
     {
@@ -77,7 +77,7 @@ class TermsQuery extends AbstractQuery
      * Sets the minimum matching values
      *
      * @param  int                       $minimum Minimum value
-     * @return Elastica\Query\TermsQuery
+     * @return \Elastica\Query\TermsQuery
      */
     public function setMinimumMatch($minimum)
     {
@@ -87,8 +87,8 @@ class TermsQuery extends AbstractQuery
     /**
      * Converts the terms object to an array
      *
-     * @see Elastica\Query\AbstractQuery::toArray()
-     * @throws Elastica\Exception\InvalidException
+     * @see \Elastica\Query\AbstractQuery::toArray()
+     * @throws \Elastica\Exception\InvalidException
      * @return array                               Query array
      */
     public function toArray()

@@ -28,7 +28,7 @@ class MissingFilter extends AbstractFilter
      * Set field
      *
      * @param  string                        $field
-     * @return Elastica\Filter\MissingFilter
+     * @return \Elastica\Filter\MissingFilter
      */
     public function setField($field)
     {

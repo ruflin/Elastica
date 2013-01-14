@@ -46,7 +46,7 @@ class Search implements SearchableInterface
     protected $_types = array();
 
     /**
-     * @var Elastica\Query
+     * @var \Elastica\Query
      */
     protected $_query;
 
@@ -58,14 +58,14 @@ class Search implements SearchableInterface
     /**
      * Client object
      *
-     * @var Elastica\Client
+     * @var \Elastica\Client
      */
     protected $_client;
 
     /**
      * Constructs search object
      *
-     * @param Elastica\Client $client Client object
+     * @param \Elastica\Client $client Client object
      */
     public function __construct(Client $client)
     {
@@ -75,9 +75,9 @@ class Search implements SearchableInterface
     /**
      * Adds a index to the list
      *
-     * @param  Elastica\Index|string               $index Index object or string
-     * @throws Elastica\Exception\InvalidException
-     * @return Elastica\Search                     Current object
+     * @param  \Elastica\Index|string               $index Index object or string
+     * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\Search                     Current object
      */
     public function addIndex($index)
     {
@@ -98,7 +98,7 @@ class Search implements SearchableInterface
      * Add array of indices at once
      *
      * @param  array           $indices
-     * @return Elastica\Search
+     * @return \Elastica\Search
      */
     public function addIndices(array $indices = array())
     {
@@ -112,9 +112,9 @@ class Search implements SearchableInterface
     /**
      * Adds a type to the current search
      *
-     * @param  Elastica\Type|string                $type Type name or object
-     * @return Elastica\Search                     Search object
-     * @throws Elastica\Exception\InvalidException
+     * @param  \Elastica\Type|string                $type Type name or object
+     * @return \Elastica\Search                     Search object
+     * @throws \Elastica\Exception\InvalidException
      */
     public function addType($type)
     {
@@ -135,7 +135,7 @@ class Search implements SearchableInterface
      * Add array of types
      *
      * @param  array           $types
-     * @return Elastica\Search
+     * @return \Elastica\Search
      */
     public function addTypes(array $types = array())
     {
@@ -147,8 +147,8 @@ class Search implements SearchableInterface
     }
 
     /**
-     * @param  string|array|Elastica\Query|Elastica\Query\AbstractQuery|Elastica\Filter\AbstractFilter $query
-     * @return Elastica\Search
+     * @param  string|array|\Elastica\Query|\Elastica\Query\AbstractQuery|\Elastica\Filter\AbstractFilter $query
+     * @return \Elastica\Search
      */
     public function setQuery($query)
     {
@@ -160,7 +160,7 @@ class Search implements SearchableInterface
     /**
      * @param  string          $key
      * @param  mixed           $value
-     * @return Elastica\Search
+     * @return \Elastica\Search
      */
     public function setOption($key, $value)
     {
@@ -173,7 +173,7 @@ class Search implements SearchableInterface
 
     /**
      * @param  array           $options
-     * @return Elastica\Search
+     * @return \Elastica\Search
      */
     public function setOptions(array $options)
     {
@@ -187,7 +187,7 @@ class Search implements SearchableInterface
     }
 
     /**
-     * @return Elastica\Search
+     * @return \Elastica\Search
      */
     public function clearOptions()
     {
@@ -199,7 +199,7 @@ class Search implements SearchableInterface
     /**
      * @param  string          $key
      * @param  mixed           $value
-     * @return Elastica\Search
+     * @return \Elastica\Search
      */
     public function addOption($key, $value)
     {
@@ -226,7 +226,7 @@ class Search implements SearchableInterface
     /**
      * @param  string                              $key
      * @return mixed
-     * @throws Elastica\Exception\InvalidException
+     * @throws \Elastica\Exception\InvalidException
      */
     public function getOption($key)
     {
@@ -248,7 +248,7 @@ class Search implements SearchableInterface
     /**
      * @param  string                              $key
      * @return bool
-     * @throws Elastica\Exception\InvalidException
+     * @throws \Elastica\Exception\InvalidException
      */
     protected function _validateOption($key)
     {
@@ -266,7 +266,7 @@ class Search implements SearchableInterface
     /**
      * Return client object
      *
-     * @return Elastica\Client Client object
+     * @return \Elastica\Client Client object
      */
     public function getClient()
     {
@@ -310,7 +310,7 @@ class Search implements SearchableInterface
     }
 
     /**
-     * @return Elastica\Query
+     * @return \Elastica\Query
      */
     public function getQuery()
     {
@@ -324,8 +324,8 @@ class Search implements SearchableInterface
     /**
      * Creates new search object
      *
-     * @param  Elastica\SearchableInterface               $searchObject
-     * @throws Elastica\Exception\NotImplementedException
+     * @param  \Elastica\SearchableInterface               $searchObject
+     * @throws \Elastica\Exception\NotImplementedException
      * @return void
      */
     public static function create(SearchableInterface $searchObject)
@@ -369,8 +369,8 @@ class Search implements SearchableInterface
      *
      * @param  mixed                               $query
      * @param  int|array                           $options OPTIONAL Limit or associative array of options (option=>value)
-     * @throws Elastica\Exception\InvalidException
-     * @return Elastica\ResultSet
+     * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\ResultSet
      */
     public function search($query = '', $options = null)
     {
@@ -414,8 +414,8 @@ class Search implements SearchableInterface
 
     /**
      * @param  array|int                   $options
-     * @param  string|array|Elastica\Query $query
-     * @return Elastica\Search
+     * @param  string|array|\Elastica\Query $query
+     * @return \Elastica\Search
      */
     protected function _setOptionsAndQuery($options = null, $query = '')
     {

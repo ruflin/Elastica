@@ -40,7 +40,7 @@ class AbstractTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testSetCacheKeyEmptyKey()
     {

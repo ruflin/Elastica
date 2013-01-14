@@ -119,7 +119,7 @@ class Util
 
     /**
      * Tries to guess the name of the param, based on its class
-     * Exemple: Elastica\Filter\HasChildFilter => has_child
+     * Exemple: \Elastica\Filter\HasChildFilter => has_child
      *
      * @param string|object Class or Class name
      * @return string parameter name

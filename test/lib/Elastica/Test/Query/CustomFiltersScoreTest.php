@@ -55,7 +55,7 @@ class CustomFiltersScoreTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\NotImplementedException
+     * @expectedException \Elastica\Exception\NotImplementedException
      */
     public function testSetQueryInvalid()
     {

@@ -17,7 +17,7 @@ class FuzzyQuery extends AbstractQuery
      *
      * @param  string                    $fieldName Field name
      * @param  array                     $args      Data array
-     * @return Elastica\Query\FuzzyQuery Current object
+     * @return \Elastica\Query\FuzzyQuery Current object
      */
     public function addField($fieldName, array $args)
     {

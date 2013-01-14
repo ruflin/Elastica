@@ -16,22 +16,22 @@ class FilteredQuery extends AbstractQuery
     /**
      * Query
      *
-     * @var Elastica\Query\AbstractQuery Query object
+     * @var \Elastica\Query\AbstractQuery Query object
      */
     protected $_query = null;
 
     /**
      * Filter
      *
-     * @var Elastica\Filter\AbstractFilter Filter object
+     * @var \Elastica\Filter\AbstractFilter Filter object
      */
     protected $_filter = null;
 
     /**
      * Constructs a filtered query
      *
-     * @param Elastica\Query\AbstractQuery   $query  Query object
-     * @param Elastica\Filter\AbstractFilter $filter Filter object
+     * @param \Elastica\Query\AbstractQuery   $query  Query object
+     * @param \Elastica\Filter\AbstractFilter $filter Filter object
      */
     public function __construct(AbstractQuery $query, AbstractFilter $filter)
     {
@@ -42,8 +42,8 @@ class FilteredQuery extends AbstractQuery
     /**
      * Sets a query
      *
-     * @param  Elastica\Query\AbstractQuery $query Query object
-     * @return Elastica\Query\Filtered      Current object
+     * @param  \Elastica\Query\AbstractQuery $query Query object
+     * @return \Elastica\Query\Filtered      Current object
      */
     public function setQuery(AbstractQuery $query)
     {
@@ -55,8 +55,8 @@ class FilteredQuery extends AbstractQuery
     /**
      * Sets the filter
      *
-     * @param  Elastica\Filter\AbstractFilter $filter Filter object
-     * @return Elastica\Query\Filtered        Current object
+     * @param  \Elastica\Filter\AbstractFilter $filter Filter object
+     * @return \Elastica\Query\Filtered        Current object
      */
     public function setFilter(AbstractFilter $filter)
     {
@@ -68,7 +68,7 @@ class FilteredQuery extends AbstractQuery
     /**
      * Gets the filter.
      *
-     * @return Elastica\Filter\AbstractFilter
+     * @return \Elastica\Filter\AbstractFilter
      */
     public function getFilter()
     {
@@ -79,7 +79,7 @@ class FilteredQuery extends AbstractQuery
      * Converts query to array
      *
      * @return array Query array
-     * @see Elastica\Query\AbstractQuery::toArray()
+     * @see \Elastica\Query\AbstractQuery::toArray()
      */
     public function toArray()
     {

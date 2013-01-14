@@ -16,8 +16,8 @@ class FilterFacet extends AbstractFacet
     /**
      * Set the filter for the facet.
      *
-     * @param  Elastica\Filter\AbstractFilter $filter
-     * @return Elastica\Facet\FilterFacet
+     * @param  \Elastica\Filter\AbstractFilter $filter
+     * @return \Elastica\Facet\FilterFacet
      */
     public function setFilter(AbstractFilter $filter)
     {

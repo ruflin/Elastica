@@ -18,14 +18,14 @@ class ScriptFilter extends AbstractFilter
     /**
      * Query object
      *
-     * @var array|Elastica\Query\AbstractQuery
+     * @var array|\Elastica\Query\AbstractQuery
      */
     protected $_query = null;
 
     /**
      * Construct script filter
      *
-     * @param array|string|Elastica\Script $script OPTIONAL Script
+     * @param array|string|\Elastica\Script $script OPTIONAL Script
      */
     public function __construct($script = null)
     {
@@ -38,8 +38,8 @@ class ScriptFilter extends AbstractFilter
      * Sets query object
      *
      * @deprecated
-     * @param  string|array|Elastica\Query\AbstractQuery $query
-     * @return Elastica\Filter\ScriptFilter
+     * @param  string|array|\Elastica\Query\AbstractQuery $query
+     * @return \Elastica\Filter\ScriptFilter
      */
     public function setQuery($query)
     {
@@ -53,8 +53,8 @@ class ScriptFilter extends AbstractFilter
     /**
      * Sets script object
      *
-     * @param  Elastica\Script|string|array $script
-     * @return Elastica\Filter\ScriptFilter
+     * @param  \Elastica\Script|string|array $script
+     * @return \Elastica\Filter\ScriptFilter
      */
     public function setScript($script)
     {
