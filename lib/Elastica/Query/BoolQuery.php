@@ -17,8 +17,8 @@ class BoolQuery extends AbstractQuery
     /**
      * Add should part to query
      *
-     * @param  Elastica\Query\AbstractQuery|array $args Should query
-     * @return Elastica\Query\BoolQuery           Current object
+     * @param  \Elastica\Query\AbstractQuery|array $args Should query
+     * @return \Elastica\Query\BoolQuery           Current object
      */
     public function addShould($args)
     {
@@ -28,8 +28,8 @@ class BoolQuery extends AbstractQuery
     /**
      * Add must part to query
      *
-     * @param  Elastica\Query\AbstractQuery|array $args Must query
-     * @return Elastica\Query\BoolQuery           Current object
+     * @param  \Elastica\Query\AbstractQuery|array $args Must query
+     * @return \Elastica\Query\BoolQuery           Current object
      */
     public function addMust($args)
     {
@@ -39,8 +39,8 @@ class BoolQuery extends AbstractQuery
     /**
      * Add must not part to query
      *
-     * @param  Elastica\Query\AbstractQuery|array $args Must not query
-     * @return Elastica\Query\BoolQuery           Current object
+     * @param  \Elastica\Query\AbstractQuery|array $args Must not query
+     * @return \Elastica\Query\BoolQuery           Current object
      */
     public function addMustNot($args)
     {
@@ -51,9 +51,9 @@ class BoolQuery extends AbstractQuery
      * Adds a query to the current object
      *
      * @param  string                              $type Query type
-     * @param  Elastica\Query\AbstractQuery|array  $args Query
-     * @return Elastica\Query\BoolQuery
-     * @throws Elastica\Exception\InvalidException If not valid query
+     * @param  \Elastica\Query\AbstractQuery|array  $args Query
+     * @return \Elastica\Query\BoolQuery
+     * @throws \Elastica\Exception\InvalidException If not valid query
      */
     protected function _addQuery($type, $args)
     {
@@ -72,7 +72,7 @@ class BoolQuery extends AbstractQuery
      * Sets boost value of this query
      *
      * @param  float               $boost Boost value
-     * @return Elastica\Query\Bool Current object
+     * @return \Elastica\Query\Bool Current object
      */
     public function setBoost($boost)
     {
@@ -83,7 +83,7 @@ class BoolQuery extends AbstractQuery
      * Set the minimum number of of should match
      *
      * @param  int                 $minimumNumberShouldMatch Should match minimum
-     * @return Elastica\Query\Bool Current object
+     * @return \Elastica\Query\Bool Current object
      */
     public function setMinimumNumberShouldMatch($minimumNumberShouldMatch)
     {

@@ -16,7 +16,7 @@ class LimitFilter extends AbstractFilter
      * Construct limit filter
      *
      * @param  int                         $limit Limit
-     * @return Elastica\Filter\LimitFilter
+     * @return \Elastica\Filter\LimitFilter
      */
     public function __construct($limit)
     {
@@ -27,7 +27,7 @@ class LimitFilter extends AbstractFilter
      * Set the limit
      *
      * @param  int                         $limit Limit
-     * @return Elastica\Filter\LimitFilter
+     * @return \Elastica\Filter\LimitFilter
      */
     public function setLimit($limit)
     {

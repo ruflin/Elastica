@@ -128,7 +128,7 @@ class Index
     /**
      * Gets the health of the shards in this index.
      *
-     * @return array Array of Elastica\Cluster\Health\Shard objects.
+     * @return \Elastica\Cluster\Health\Shard[]
      */
     public function getShards()
     {

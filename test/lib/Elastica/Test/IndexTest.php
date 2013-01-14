@@ -222,7 +222,7 @@ class IndexTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\ResponseException
+     * @expectedException \Elastica\Exception\ResponseException
      */
     public function testAddRemoveAlias()
     {
@@ -388,7 +388,7 @@ class IndexTest extends BaseTest
      *
      * Tests if deleting an index that does not exist in Elasticsearch,
      * correctly returns a boolean true from the hasError() method of
-     * the Elastica\Response object
+     * the \Elastica\Response object
      */
     public function testDeleteMissingIndexHasError()
     {
@@ -473,7 +473,7 @@ class IndexTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testCreateArray()
     {

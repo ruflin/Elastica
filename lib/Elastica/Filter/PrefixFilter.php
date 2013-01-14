@@ -42,7 +42,7 @@ class PrefixFilter extends AbstractFilter
      * Sets the name of the prefix field.
      *
      * @param  string                       $field Field name
-     * @return Elastica\Filter\PrefixFilter
+     * @return \Elastica\Filter\PrefixFilter
      */
     public function setField($field)
     {
@@ -55,7 +55,7 @@ class PrefixFilter extends AbstractFilter
      * Sets the prefix string.
      *
      * @param  string                       $prefix Prefix string
-     * @return Elastica\Filter\PrefixFilter
+     * @return \Elastica\Filter\PrefixFilter
      */
     public function setPrefix($prefix)
     {
@@ -67,7 +67,7 @@ class PrefixFilter extends AbstractFilter
     /**
      * Converts object to an array
      *
-     * @see Elastica\Filter\AbstractFilter::toArray()
+     * @see \Elastica\Filter\AbstractFilter::toArray()
      * @return array data array
      */
     public function toArray()

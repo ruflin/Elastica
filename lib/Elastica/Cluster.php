@@ -18,14 +18,14 @@ class Cluster
     /**
      * Client
      *
-     * @var Elastica\Client Client object
+     * @var \Elastica\Client Client object
      */
     protected $_client = null;
 
     /**
      * Cluster state response.
      *
-     * @var Elastica\Response
+     * @var \Elastica\Response
      */
     protected $_response;
 
@@ -39,7 +39,7 @@ class Cluster
     /**
      * Creates a cluster object
      *
-     * @param Elastica\Client $client Connection client object
+     * @param \Elastica\Client $client Connection client object
      */
     public function __construct(Client $client)
     {
@@ -60,7 +60,7 @@ class Cluster
     /**
      * Returns the response object
      *
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -110,7 +110,7 @@ class Cluster
     /**
      * Returns all nodes of the cluster
      *
-     * @return array List of Elastica\Node objects
+     * @return \Elastica\Node[]
      */
     public function getNodes()
     {
@@ -125,7 +125,7 @@ class Cluster
     /**
      * Returns the client object
      *
-     * @return Elastica\Client Client object
+     * @return \Elastica\Client Client object
      */
     public function getClient()
     {
@@ -136,7 +136,7 @@ class Cluster
      * Returns the cluster information (not implemented yet)
      *
      * @param  array                                      $args Additional arguments
-     * @throws Elastica\Exception\NotImplementedException
+     * @throws \Elastica\Exception\NotImplementedException
      * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-info.html
      */
     public function getInfo(array $args)
@@ -147,7 +147,7 @@ class Cluster
     /**
      * Return Cluster health
      *
-     * @return Elastica\Cluster\Health
+     * @return \Elastica\Cluster\Health
      * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-health.html
      */
     public function getHealth()
@@ -158,7 +158,7 @@ class Cluster
     /**
      * Return Cluster settings
      *
-     * @return Elastica\Cluster\Settings
+     * @return \Elastica\Cluster\Settings
      */
     public function getSettings()
     {
@@ -169,7 +169,7 @@ class Cluster
      * Shuts down the complete cluster
      *
      * @param  string            $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
-     * @return Elastica\Response
+     * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown.html
      */
     public function shutdown($delay = '1s')

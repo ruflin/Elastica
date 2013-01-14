@@ -20,8 +20,8 @@ abstract class AbstractMultiFilter extends AbstractFilter
     /**
      * Add filter
      *
-     * @param  Elastica\Filter\AbstractFilter      $filter
-     * @return Elastica\Filter\AbstractMultiFilter
+     * @param  \Elastica\Filter\AbstractFilter      $filter
+     * @return \Elastica\Filter\AbstractMultiFilter
      */
     public function addFilter(AbstractFilter $filter)
     {
@@ -34,7 +34,7 @@ abstract class AbstractMultiFilter extends AbstractFilter
      * Set filters
      *
      * @param  array                               $filters
-     * @return Elastica\Filter\AbstractMultiFilter
+     * @return \Elastica\Filter\AbstractMultiFilter
      */
     public function setFilters(array $filters)
     {
@@ -48,7 +48,7 @@ abstract class AbstractMultiFilter extends AbstractFilter
     }
 
     /**
-     * @see Elastica\Param::toArray()
+     * @see \Elastica\Param::toArray()
      */
     public function toArray()
     {

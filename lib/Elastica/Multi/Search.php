@@ -17,7 +17,7 @@ use Elastica\Search as BaseSearch;
 class Search
 {
     /**
-     * @var array|Elastica\Search[]
+     * @var array|\Elastica\Search[]
      */
     protected $_searches = array();
 
@@ -27,14 +27,14 @@ class Search
     protected $_options = array();
 
     /**
-     * @var Elastica\Client
+     * @var \Elastica\Client
      */
     protected $_client;
 
     /**
      * Constructs search object
      *
-     * @param Elastica\Client $client Client object
+     * @param \Elastica\Client $client Client object
      */
     public function __construct(Client $client)
     {
@@ -42,7 +42,7 @@ class Search
     }
 
     /**
-     * @return Elastica\Client
+     * @return \Elastica\Client
      */
     public function getClient()
     {
@@ -50,8 +50,8 @@ class Search
     }
 
     /**
-     * @param  Elastica\Client       $client
-     * @return Elastica\Multi\Search
+     * @param  \Elastica\Client       $client
+     * @return \Elastica\Multi\Search
      */
     public function setClient(Client $client)
     {
@@ -61,7 +61,7 @@ class Search
     }
 
     /**
-     * @return Elastica\Multi\Search
+     * @return \Elastica\Multi\Search
      */
     public function clearSearches()
     {
@@ -71,8 +71,8 @@ class Search
     }
 
     /**
-     * @param  Elastica\Search       $search
-     * @return Elastica\Multi\Search
+     * @param  \Elastica\Search       $search
+     * @return \Elastica\Multi\Search
      */
     public function addSearch(BaseSearch $search)
     {
@@ -82,8 +82,8 @@ class Search
     }
 
     /**
-     * @param  array|Elastica\Search[] $searches
-     * @return Elastica\Multi\Search
+     * @param  array|\Elastica\Search[] $searches
+     * @return \Elastica\Multi\Search
      */
     public function addSearches(array $searches)
     {
@@ -95,8 +95,8 @@ class Search
     }
 
     /**
-     * @param  array|Elastica\Search[] $searches
-     * @return Elastica\Multi\Search
+     * @param  array|\Elastica\Search[] $searches
+     * @return \Elastica\Multi\Search
      */
     public function setSearches(array $searches)
     {
@@ -107,7 +107,7 @@ class Search
     }
 
     /**
-     * @return array|Elastica\Search[]
+     * @return array|\Elastica\Search[]
      */
     public function getSearches()
     {
@@ -116,7 +116,7 @@ class Search
 
     /**
      * @param  string                $searchType
-     * @return Elastica\Multi\Search
+     * @return \Elastica\Multi\Search
      */
     public function setSearchType($searchType)
     {
@@ -126,7 +126,7 @@ class Search
     }
 
     /**
-     * @return Elastica\Multi\ResultSet
+     * @return \Elastica\Multi\ResultSet
      */
     public function search()
     {
@@ -156,7 +156,7 @@ class Search
     }
 
     /**
-     * @param  Elastica\Search $search
+     * @param  \Elastica\Search $search
      * @return string
      */
     protected function _getSearchData(BaseSearch $search)
@@ -172,7 +172,7 @@ class Search
     }
 
     /**
-     * @param  Elastica\Search $search
+     * @param  \Elastica\Search $search
      * @return array
      */
     protected function _getSearchDataHeader(BaseSearch $search)

@@ -13,7 +13,7 @@ class Base extends \PHPUnit_Framework_TestCase
 
     /**
      * @param  string         $name Index name
-     * @return Elastica\Index
+     * @return \Elastica\Index
      */
     protected function _createIndex($name = 'test')
     {

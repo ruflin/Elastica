@@ -33,7 +33,7 @@ class ArrayQuery extends AbstractQuery
      * Sets new query array
      *
      * @param  array                     $query Query array
-     * @return Elastica\Query\ArrayQuery Current object
+     * @return \Elastica\Query\ArrayQuery Current object
      */
     public function setQuery(array $query)
     {
@@ -46,7 +46,7 @@ class ArrayQuery extends AbstractQuery
      * Converts query to array
      *
      * @return array Query array
-     * @see Elastica\Query\AbstractQuery::toArray()
+     * @see \Elastica\Query\AbstractQuery::toArray()
      */
     public function toArray()
     {

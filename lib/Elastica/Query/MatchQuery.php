@@ -17,7 +17,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  mixed                     $values
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setField($field, $values)
     {
@@ -30,7 +30,7 @@ class MatchQuery extends AbstractQuery
      * @param  string                    $field
      * @param  string                    $key
      * @param  string                    $value
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setFieldParam($field, $key, $value)
     {
@@ -48,7 +48,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  string                    $query
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setFieldQuery($field, $query)
     {
@@ -60,7 +60,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  string                    $type
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setFieldType($field, $type)
     {
@@ -72,7 +72,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  string                    $operator
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setFieldOperator($field, $operator)
     {
@@ -84,7 +84,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  string                    $analyzer
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setFieldAnalyzer($field, $analyzer)
     {
@@ -98,7 +98,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  float                     $boost
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setFieldBoost($field, $boost = 1.0)
     {
@@ -110,7 +110,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  int                       $minimumShouldMatch
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setFieldMinimumShouldMatch($field, $minimumShouldMatch)
     {
@@ -122,7 +122,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  float                     $fuzziness
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setFieldFuzziness($field, $fuzziness)
     {
@@ -134,7 +134,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  string                    $fuzzyRewrite
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setFieldFuzzyRewrite($field, $fuzzyRewrite)
     {
@@ -146,7 +146,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  int                       $prefixLength
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setFieldPrefixLength($field, $prefixLength)
     {
@@ -158,7 +158,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  int                       $maxExpansions
-     * @return Elastica\Query\MatchQuery
+     * @return \Elastica\Query\MatchQuery
      */
     public function setFieldMaxExpansions($field, $maxExpansions)
     {

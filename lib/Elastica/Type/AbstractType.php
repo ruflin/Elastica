@@ -48,21 +48,21 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Client
      *
-     * @var Elastica\Client Client object
+     * @var \Elastica\Client Client object
      */
     protected $_client = null;
 
     /**
      * Index
      *
-     * @var Elastica\Index Index object
+     * @var \Elastica\Index Index object
      */
     protected $_index = null;
 
     /**
      * Type
      *
-     * @var Elastica\Type Type object
+     * @var \Elastica\Type Type object
      */
     protected $_type = null;
 
@@ -93,8 +93,8 @@ abstract class AbstractType implements SearchableInterface
      * Reads index and type name from protected vars _indexName and _typeName.
      * Has to be set in child class
      *
-     * @param  Elastica\Client                     $client OPTIONAL Client object
-     * @throws Elastica\Exception\InvalidException
+     * @param  \Elastica\Client                     $client OPTIONAL Client object
+     * @throws \Elastica\Exception\InvalidException
      */
     public function __construct(Client $client = null)
     {
@@ -133,9 +133,9 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Search on the type
      *
-     * @param  string|array|Elastica\Query $query Array with all query data inside or a Elastica\Query object
-     * @return Elastica\ResultSet          ResultSet with all results inside
-     * @see Elastica\SearchableInterface::search
+     * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
+     * @return \Elastica\ResultSet          ResultSet with all results inside
+     * @see \Elastica\SearchableInterface::search
      */
     public function search($query = '')
     {
@@ -145,9 +145,9 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Count docs in the type based on query
      *
-     * @param  string|array|Elastica\Query $query Array with all query data inside or a Elastica\Query object
+     * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
      * @return int                         number of documents matching the query
-     * @see Elastica\SearchableInterface::count
+     * @see \Elastica\SearchableInterface::count
      */
     public function count($query = '')
     {
@@ -157,7 +157,7 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Returns the search index
      *
-     * @return Elastica\Index Index object
+     * @return \Elastica\Index Index object
      */
     public function getIndex()
     {
@@ -167,7 +167,7 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Returns type object
      *
-     * @return Elastica\Type Type object
+     * @return \Elastica\Type Type object
      */
     public function getType()
     {

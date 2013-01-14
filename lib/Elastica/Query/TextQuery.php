@@ -17,7 +17,7 @@ class TextQuery extends AbstractQuery
      *
      * @param  string                   $field
      * @param  mixed                    $values
-     * @return Elastica\Query\TextQuery
+     * @return \Elastica\Query\TextQuery
      */
     public function setField($field, $values)
     {
@@ -30,7 +30,7 @@ class TextQuery extends AbstractQuery
      * @param  string                   $field
      * @param  string                   $key
      * @param  string                   $value
-     * @return Elastica\Query\TextQuery
+     * @return \Elastica\Query\TextQuery
      */
     public function setFieldParam($field, $key, $value)
     {
@@ -48,7 +48,7 @@ class TextQuery extends AbstractQuery
      *
      * @param  string                   $field
      * @param  string                   $query
-     * @return Elastica\Query\TextQuery
+     * @return \Elastica\Query\TextQuery
      */
     public function setFieldQuery($field, $query)
     {
@@ -60,7 +60,7 @@ class TextQuery extends AbstractQuery
      *
      * @param  string                   $field
      * @param  string                   $type  Text query type
-     * @return Elastica\Query\TextQuery
+     * @return \Elastica\Query\TextQuery
      */
     public function setFieldType($field, $type)
     {
@@ -72,7 +72,7 @@ class TextQuery extends AbstractQuery
      *
      * @param  string                   $field
      * @param  int                      $maxExpansions
-     * @return Elastica\Query\TextQuery
+     * @return \Elastica\Query\TextQuery
      */
     public function setFieldMaxExpansions($field, $maxExpansions)
     {

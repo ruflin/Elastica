@@ -45,7 +45,7 @@ class Response
     /**
      * Response
      *
-     * @var Elastica\Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -165,10 +165,10 @@ class Response
 
     /**
      * Sets the transfer info of the curl request. This function is called
-     * from the Elastica\Client::_callService only in debug mode.
+     * from the \Elastica\Client::_callService only in debug mode.
      *
      * @param  array             $transferInfo The curl transfer information.
-     * @return Elastica\Response Current object
+     * @return \Elastica\Response Current object
      */
     public function setTransferInfo(array $transferInfo)
     {
@@ -191,7 +191,7 @@ class Response
      * Sets the query time
      *
      * @param  float             $queryTime Query time
-     * @return Elastica\Response Current object
+     * @return \Elastica\Response Current object
      */
     public function setQueryTime($queryTime)
     {
@@ -203,7 +203,7 @@ class Response
     /**
      * Time request took
      *
-     * @throws Elastica\Exception\NotFoundException
+     * @throws \Elastica\Exception\NotFoundException
      * @return int                                  Time request took
      */
     public function getEngineTime()
@@ -220,7 +220,7 @@ class Response
     /**
      * Get the _shard statistics for the response
      *
-     * @throws Elastica\Exception\NotFoundException
+     * @throws \Elastica\Exception\NotFoundException
      * @return array
      */
     public function getShardsStatistics()

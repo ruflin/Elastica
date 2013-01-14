@@ -46,7 +46,7 @@ class Request extends Param
     protected $_query;
 
     /**
-     * @var Elastica\Connection
+     * @var \Elastica\Connection
      */
     protected $_connection;
 
@@ -57,7 +57,7 @@ class Request extends Param
      * @param string              $method     OPTIONAL Request method (use const's) (default = self::GET)
      * @param array               $data       OPTIONAL Data array
      * @param array               $query      OPTIONAL Query params
-     * @param Elastica\Connection $connection OPTIONAL Connection object
+     * @param \Elastica\Connection $connection OPTIONAL Connection object
      */
     public function __construct($path, $method = self::GET, $data = array(), array $query = array(), Connection $connection = null)
     {
@@ -75,7 +75,7 @@ class Request extends Param
      * Sets the request method. Use one of the for consts
      *
      * @param  string           $method Request method
-     * @return Elastica\Request Current object
+     * @return \Elastica\Request Current object
      */
     public function setMethod($method)
     {
@@ -96,7 +96,7 @@ class Request extends Param
      * Sets the request data
      *
      * @param  array            $data Request data
-     * @return Elastica\Request
+     * @return \Elastica\Request
      */
     public function setData($data)
     {
@@ -117,7 +117,7 @@ class Request extends Param
      * Sets the request path
      *
      * @param  string           $path Request path
-     * @return Elastica\Request Current object
+     * @return \Elastica\Request Current object
      */
     public function setPath($path)
     {
@@ -146,7 +146,7 @@ class Request extends Param
 
     /**
      * @param  array            $query
-     * @return Elastica\Request
+     * @return \Elastica\Request
      */
     public function setQuery(array $query = array())
     {
@@ -154,8 +154,8 @@ class Request extends Param
     }
 
     /**
-     * @param  Elastica\Connection $connection
-     * @return Elastica\Request
+     * @param  \Elastica\Connection $connection
+     * @return \Elastica\Request
      */
     public function setConnection(Connection $connection)
     {
@@ -167,7 +167,7 @@ class Request extends Param
     /**
      * Return Connection Object
      *
-     * @return Elastica\Connection
+     * @return \Elastica\Connection
      */
     public function getConnection()
     {
@@ -181,7 +181,7 @@ class Request extends Param
     /**
      * Sends request to server
      *
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function send()
     {

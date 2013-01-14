@@ -18,7 +18,7 @@ class Status
     /**
      * Response
      *
-     * @var Elastica\Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -32,14 +32,14 @@ class Status
     /**
      * Index
      *
-     * @var Elastica\Index Index object
+     * @var \Elastica\Index Index object
      */
     protected $_index = null;
 
     /**
      * Construct
      *
-     * @param Elastica\Index $index Index object
+     * @param \Elastica\Index $index Index object
      */
     public function __construct(BaseIndex $index)
     {
@@ -121,7 +121,7 @@ class Status
     /**
      * Returns the index object
      *
-     * @return Elastica\Index Index object
+     * @return \Elastica\Index Index object
      */
     public function getIndex()
     {
@@ -131,7 +131,7 @@ class Status
     /**
      * Returns response object
      *
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function getResponse()
     {

@@ -17,14 +17,14 @@ class Settings
     /**
      * Client
      *
-     * @var Elastica\Client Client object
+     * @var \Elastica\Client Client object
      */
     protected $_client = null;
 
     /**
      * Creates a cluster object
      *
-     * @param Elastica\Client $client Connection client object
+     * @param \Elastica\Client $client Connection client object
      */
     public function __construct(Client $client)
     {
@@ -94,7 +94,7 @@ class Settings
      *
      * @param  string            $key
      * @param  string            $value
-     * @return Elastica\Response
+     * @return \Elastica\Response
      */
     public function setPersistent($key, $value)
     {
@@ -112,7 +112,7 @@ class Settings
      *
      * @param  string            $key
      * @param  string            $value
-     * @return Elastica\Response
+     * @return \Elastica\Response
      */
     public function setTransient($key, $value)
     {
@@ -132,7 +132,7 @@ class Settings
      *
      * @param  bool              $readOnly
      * @param  bool              $persistent
-     * @return Elastica\Response $response
+     * @return \Elastica\Response $response
      */
     public function setReadOnly($readOnly = true, $persistent = false)
     {
@@ -151,7 +151,7 @@ class Settings
      * Set settings for cluster
      *
      * @param  array             $settings Raw settings (including persistent or transient)
-     * @return Elastica\Response
+     * @return \Elastica\Response
      */
     public function set(array $settings)
     {
@@ -161,7 +161,7 @@ class Settings
     /**
      * Get the client
      *
-     * @return Elastica\Client
+     * @return \Elastica\Client
      */
     public function getClient()
     {
@@ -172,8 +172,8 @@ class Settings
      * Sends settings request
      *
      * @param  array             $data   OPTIONAL Data array
-     * @param  string            $method OPTIONAL Transfer method (default = Elastica\Request::GET)
-     * @return Elastica\Response Response object
+     * @param  string            $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
+     * @return \Elastica\Response Response object
      */
     public function request(array $data = array(), $method = Request::GET)
     {

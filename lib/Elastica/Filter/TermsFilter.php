@@ -50,7 +50,7 @@ class TermsFilter extends AbstractFilter
      *
      * @param  string                      $key   Terms key
      * @param  array                       $terms Terms for the query.
-     * @return Elastica\Filter\TermsFilter
+     * @return \Elastica\Filter\TermsFilter
      */
     public function setTerms($key, array $terms)
     {
@@ -64,7 +64,7 @@ class TermsFilter extends AbstractFilter
      * Adds an additional term to the query
      *
      * @param  string                      $term Filter term
-     * @return Elastica\Filter\TermsFilter Filter object
+     * @return \Elastica\Filter\TermsFilter Filter object
      */
     public function addTerm($term)
     {
@@ -76,8 +76,8 @@ class TermsFilter extends AbstractFilter
     /**
      * Converts object to an array
      *
-     * @see Elastica\Filter\AbstractFilter::toArray()
-     * @throws Elastica\Exception\InvalidException
+     * @see \Elastica\Filter\AbstractFilter::toArray()
+     * @throws \Elastica\Exception\InvalidException
      * @return array                               data array
      */
     public function toArray()

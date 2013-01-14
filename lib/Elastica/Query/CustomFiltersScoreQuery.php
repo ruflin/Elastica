@@ -35,7 +35,7 @@ class CustomFiltersScoreQuery extends AbstractQuery
      * Sets a query
      *
      * @param  mixed                                  $query Query object or data to build it
-     * @return Elastica\Query\CustomFiltersScoreQuery Current object
+     * @return \Elastica\Query\CustomFiltersScoreQuery Current object
      */
     public function setQuery($query)
     {
@@ -49,9 +49,9 @@ class CustomFiltersScoreQuery extends AbstractQuery
     /**
      * Add a filter with boost
      *
-     * @param  Elastica\Filter\AbstractFilter         $filter Filter object
+     * @param  \Elastica\Filter\AbstractFilter         $filter Filter object
      * @param  float                                  $boost  Boost for the filter
-     * @return Elastica\Query\CustomFiltersScoreQuery Current object
+     * @return \Elastica\Query\CustomFiltersScoreQuery Current object
      */
     public function addFilter(AbstractFilter $filter, $boost)
     {
@@ -67,9 +67,9 @@ class CustomFiltersScoreQuery extends AbstractQuery
      * Add a filter with a script to calculate the score
      * Only script part of script object is used
      *
-     * @param  Elastica\Filter\AbstractFilter         $filter Filter object
-     * @param  Elastica\Script|string|array           $script Script for calculating the score
-     * @return Elastica\Query\CustomFiltersScoreQuery Current object
+     * @param  \Elastica\Filter\AbstractFilter         $filter Filter object
+     * @param  \Elastica\Script|string|array           $script Script for calculating the score
+     * @return \Elastica\Query\CustomFiltersScoreQuery Current object
      */
     public function addFilterScript(AbstractFilter $filter, $script)
     {
@@ -86,7 +86,7 @@ class CustomFiltersScoreQuery extends AbstractQuery
      * Set lang fot scripts in filters
      *
      * @param  string                                 $lang lang
-     * @return Elastica\Query\CustomFiltersScoreQuery current object
+     * @return \Elastica\Query\CustomFiltersScoreQuery current object
      */
     public function setScriptLang($lang)
     {
@@ -96,7 +96,7 @@ class CustomFiltersScoreQuery extends AbstractQuery
     /**
      * Set params for scripts in filters
      * @param  array                                  $params
-     * @return Elastica\Query\CustomFiltersScoreQuery current object
+     * @return \Elastica\Query\CustomFiltersScoreQuery current object
      */
     public function setScriptParams(array $params)
     {
@@ -105,7 +105,7 @@ class CustomFiltersScoreQuery extends AbstractQuery
 
     /**
      * @param  string                                 $scoreMode
-     * @return Elastica\Query\CustomFiltersScoreQuery current object
+     * @return \Elastica\Query\CustomFiltersScoreQuery current object
      */
     public function setScoreMode($scoreMode)
     {

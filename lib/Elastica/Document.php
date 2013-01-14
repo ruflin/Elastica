@@ -40,7 +40,7 @@ class Document extends Param
     protected $_routing = null;
 
     /**
-     * @var Elastica\Script
+     * @var \Elastica\Script
      */
     protected $_script;
 
@@ -74,7 +74,7 @@ class Document extends Param
      * Sets the id of the document.
      *
      * @param  string            $id
-     * @return Elastica\Document
+     * @return \Elastica\Document
      */
     public function setId($id)
     {
@@ -86,7 +86,7 @@ class Document extends Param
      *
      * @param  string            $key   Document entry key
      * @param  mixed             $value Document entry value
-     * @return Elastica\Document
+     * @return \Elastica\Document
      */
     public function add($key, $value)
     {
@@ -109,7 +109,7 @@ class Document extends Param
      * @param  string            $key      Key to add the file to
      * @param  string            $filepath Path to add the file
      * @param  string            $mimeType OPTIONAL Header mime type
-     * @return Elastica\Document
+     * @return \Elastica\Document
      */
     public function addFile($key, $filepath, $mimeType = '')
     {
@@ -129,7 +129,7 @@ class Document extends Param
      *
      * @param  string            $key     Document key
      * @param  string            $content Raw file content
-     * @return Elastica\Document
+     * @return \Elastica\Document
      */
     public function addFileContent($key, $content)
     {
@@ -145,7 +145,7 @@ class Document extends Param
      * @param float  $latitude  Latitude value
      * @param float  $longitude Longitude value
      * @link http://www.elasticsearch.org/guide/reference/mapping/geo-point-type.html
-     * @return Elastica\Document
+     * @return \Elastica\Document
      */
     public function addGeoPoint($key, $latitude, $longitude)
     {
@@ -160,7 +160,7 @@ class Document extends Param
      * Overwrites the current document data with the given data
      *
      * @param  array             $data Data array
-     * @return Elastica\Document
+     * @return \Elastica\Document
      */
     public function setData(array $data)
     {
@@ -173,7 +173,7 @@ class Document extends Param
      * Sets lifetime of document
      *
      * @param  string            $ttl
-     * @return Elastica\Document
+     * @return \Elastica\Document
      */
     public function setTtl($ttl)
     {
@@ -194,7 +194,7 @@ class Document extends Param
      * Sets the document type name
      *
      * @param  string            $type Type name
-     * @return Elastica\Document Current object
+     * @return \Elastica\Document Current object
      */
     public function setType($type)
     {
@@ -205,7 +205,7 @@ class Document extends Param
      * Return document type name
      *
      * @return string                              Document type name
-     * @throws Elastica\Exception\InvalidException
+     * @throws \Elastica\Exception\InvalidException
      */
     public function getType()
     {
@@ -216,7 +216,7 @@ class Document extends Param
      * Sets the document index name
      *
      * @param  string            $index Index name
-     * @return Elastica\Document Current object
+     * @return \Elastica\Document Current object
      */
     public function setIndex($index)
     {
@@ -227,7 +227,7 @@ class Document extends Param
      * Get the document index name
      *
      * @return string                              Index name
-     * @throws Elastica\Exception\InvalidException
+     * @throws \Elastica\Exception\InvalidException
      */
     public function getIndex()
     {
@@ -238,7 +238,7 @@ class Document extends Param
      * Sets the version of a document for use with optimistic concurrency control
      *
      * @param  int               $version Document version
-     * @return Elastica\Document Current object
+     * @return \Elastica\Document Current object
      * @link http://www.elasticsearch.org/blog/2011/02/08/versioning.html
      */
     public function setVersion($version)
@@ -261,7 +261,7 @@ class Document extends Param
      * Default in ES is internal, but you can set to external to use custom versioning
      *
      * @param  int               $versionType Document version type
-     * @return Elastica\Document Current object
+     * @return \Elastica\Document Current object
      * @link http://www.elasticsearch.org/guide/reference/api/index_.html
      */
     public function setVersionType($versionType)
@@ -283,7 +283,7 @@ class Document extends Param
      * Sets parent document id
      *
      * @param  string|int        $parent Parent document id
-     * @return Elastica\Document Current object
+     * @return \Elastica\Document Current object
      * @link http://www.elasticsearch.org/guide/reference/mapping/parent-field.html
      */
     public function setParent($parent)
@@ -305,7 +305,7 @@ class Document extends Param
      * Set operation type
      *
      * @param  string            $optype Only accept create
-     * @return Elastica\Document Current object
+     * @return \Elastica\Document Current object
      */
     public function setOpType($optype)
     {
@@ -326,7 +326,7 @@ class Document extends Param
      * Set percolate query param
      *
      * @param  string            $value percolator filter
-     * @return Elastica\Document
+     * @return \Elastica\Document
      */
     public function setPercolate($value = '*')
     {
@@ -349,7 +349,7 @@ class Document extends Param
      * Set routing query param
      *
      * @param  string            $value routing
-     * @return Elastica\Document
+     * @return \Elastica\Document
      */
     public function setRouting($value)
     {
@@ -367,7 +367,7 @@ class Document extends Param
     }
 
     /**
-     * @param Elastica\Script|array|string $data
+     * @param \Elastica\Script|array|string $data
      * @return $this
      */
     public function setScript($data)
@@ -379,7 +379,7 @@ class Document extends Param
     }
 
     /**
-     * @return Elastica\Script
+     * @return \Elastica\Script
      */
     public function getScript()
     {

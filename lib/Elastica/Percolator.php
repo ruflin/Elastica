@@ -15,14 +15,14 @@ class Percolator
     /**
      * Index object
      *
-     * @var Elastica\Index
+     * @var \Elastica\Index
      */
     protected $_index = null;
 
     /**
      * Construct new percolator
      *
-     * @param Elastica\Index $index
+     * @param \Elastica\Index $index
      */
     public function __construct(Index $index)
     {
@@ -33,8 +33,8 @@ class Percolator
      * Registers a percolator query
      *
      * @param  string                                             $name  Query name
-     * @param  string|Elastica\Query|Elastica\Query\AbstractQuery $query Query to add
-     * @return Elastica\Response
+     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Query to add
+     * @return \Elastica\Response
      */
     public function registerQuery($name, $query)
     {
@@ -47,7 +47,7 @@ class Percolator
     /**
      * Removes a percolator query
      * @param  string            $name query name
-     * @return Elastica\Response
+     * @return \Elastica\Response
      */
     public function unregisterQuery($name)
     {
@@ -59,9 +59,9 @@ class Percolator
     /**
      * Match a document to percolator queries
      *
-     * @param  Elastica\Document                                  $doc
-     * @param  string|Elastica\Query|Elastica\Query\AbstractQuery $query Not implemented yet
-     * @return Elastica\Response
+     * @param  \Elastica\Document                                  $doc
+     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Not implemented yet
+     * @return \Elastica\Response
      */
     public function matchDoc(Document $doc, $query = null)
     {
@@ -77,7 +77,7 @@ class Percolator
     /**
      * Return index object
      *
-     * @return Elastica\Index
+     * @return \Elastica\Index
      */
     public function getIndex()
     {

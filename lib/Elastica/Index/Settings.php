@@ -22,7 +22,7 @@ class Settings
     /**
      * Response
      *
-     * @var Elastica\Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -36,7 +36,7 @@ class Settings
     /**
      * Index
      *
-     * @var Elastica\Index Index object
+     * @var \Elastica\Index Index object
      */
     protected $_index = null;
 
@@ -45,7 +45,7 @@ class Settings
     /**
      * Construct
      *
-     * @param Elastica\Index $index Index object
+     * @param \Elastica\Index $index Index object
      */
     public function __construct(BaseIndex $index)
     {
@@ -82,7 +82,7 @@ class Settings
      * Sets the number of replicas
      *
      * @param  int               $replicas Number of replicas
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function setNumberOfReplicas($replicas)
     {
@@ -97,7 +97,7 @@ class Settings
      * Sets the index to read only
      *
      * @param  bool              $readOnly (default = true)
-     * @return Elastica\Response
+     * @return \Elastica\Response
      */
     public function setReadOnly($readOnly = true)
     {
@@ -114,7 +114,7 @@ class Settings
 
     /**
      * @param  bool              $state OPTIONAL (default = true)
-     * @return Elastica\Response
+     * @return \Elastica\Response
      */
     public function setBlocksRead($state = true)
     {
@@ -133,7 +133,7 @@ class Settings
 
     /**
      * @param  bool              $state OPTIONAL (default = true)
-     * @return Elastica\Response
+     * @return \Elastica\Response
      */
     public function setBlocksWrite($state = true)
     {
@@ -152,7 +152,7 @@ class Settings
 
     /**
      * @param  bool              $state OPTIONAL (default = true)
-     * @return Elastica\Response
+     * @return \Elastica\Response
      */
     public function setBlocksMetadata($state = true)
     {
@@ -168,7 +168,7 @@ class Settings
      * 5m for 5 minutes. -1 refreshing is disabled.
      *
      * @param  int               $interval Number of seconds
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function setRefreshInterval($interval)
     {
@@ -207,7 +207,7 @@ class Settings
      * Sets merge policy
      *
      * @param  string            $type Merge policy type
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
      */
     public function setMergePolicyType($type)
@@ -226,7 +226,7 @@ class Settings
      *
      * @param  string            $key   Merge policy key (for ex. expunge_deletes_allowed)
      * @param  string            $value
-     * @return Elastica\Response
+     * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/index-modules/merge.html
      */
     public function setMergePolicy($key, $value)
@@ -254,7 +254,7 @@ class Settings
      * Can be used to set/update settings
      *
      * @param  array             $data Arguments
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function set(array $data)
     {
@@ -264,7 +264,7 @@ class Settings
     /**
      * Returns the index object
      *
-     * @return Elastica\Index Index object
+     * @return \Elastica\Index Index object
      */
     public function getIndex()
     {
@@ -285,8 +285,8 @@ class Settings
      * - index.auto_expand_replicas
      *
      * @param  array             $data   OPTIONAL Data array
-     * @param  string            $method OPTIONAL Transfer method (default = Elastica\Request::GET)
-     * @return Elastica\Response Response object
+     * @param  string            $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
+     * @return \Elastica\Response Response object
      */
     public function request(array $data = array(), $method = Request::GET)
     {

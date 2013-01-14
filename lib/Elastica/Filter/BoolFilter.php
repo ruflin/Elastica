@@ -49,8 +49,8 @@ class BoolFilter extends AbstractFilter
     /**
      * Adds should filter
      *
-     * @param  array|Elastica\Filter\AbstractFilter $args Filter data
-     * @return Elastica\Filter\BoolFilter           Current object
+     * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @return \Elastica\Filter\BoolFilter           Current object
      */
     public function addShould($args)
     {
@@ -60,8 +60,8 @@ class BoolFilter extends AbstractFilter
     /**
      * Adds must filter
      *
-     * @param  array|Elastica\Filter\AbstractFilter $args Filter data
-     * @return Elastica\Filter\BoolFilter           Current object
+     * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @return \Elastica\Filter\BoolFilter           Current object
      */
     public function addMust($args)
     {
@@ -71,8 +71,8 @@ class BoolFilter extends AbstractFilter
     /**
      * Adds mustNot filter
      *
-     * @param  array|Elastica\Filter\AbstractFilter $args Filter data
-     * @return Elastica\Filter\BoolFilter           Current object
+     * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @return \Elastica\Filter\BoolFilter           Current object
      */
     public function addMustNot($args)
     {
@@ -83,9 +83,9 @@ class BoolFilter extends AbstractFilter
      * Adds general filter based on type
      *
      * @param  string                               $type Filter type
-     * @param  array|Elastica\Filter\AbstractFilter $args Filter data
-     * @throws Elastica\Exception\InvalidException
-     * @return Elastica\Filter\BoolFilter           Current object
+     * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\Filter\BoolFilter           Current object
      */
     protected function _addFilter($type, $args)
     {
@@ -106,7 +106,7 @@ class BoolFilter extends AbstractFilter
     /**
      * Converts bool filter to array
      *
-     * @see Elastica\Filter\AbstractFilter::toArray()
+     * @see \Elastica\Filter\AbstractFilter::toArray()
      * @return array Filter array
      */
     public function toArray()
@@ -132,7 +132,7 @@ class BoolFilter extends AbstractFilter
      * Sets the boost value for this filter
      *
      * @param  float                      $boost Boost
-     * @return Elastica\Filter\BoolFilter Current object
+     * @return \Elastica\Filter\BoolFilter Current object
      */
     public function setBoost($boost)
     {
@@ -145,7 +145,7 @@ class BoolFilter extends AbstractFilter
      * Sets the minimum number that should filter have to match
      *
      * @param  int                        $minimumNumberShouldMatch Number of matches
-     * @return Elastica\Filter\BoolFilter Current object
+     * @return \Elastica\Filter\BoolFilter Current object
      */
     public function setMinimumNumberShouldMatch($minimumNumberShouldMatch)
     {
