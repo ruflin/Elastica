@@ -113,7 +113,7 @@ class SearchTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddTypeInvalid()
     {
@@ -124,7 +124,7 @@ class SearchTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddIndexInvalid()
     {
@@ -200,7 +200,7 @@ class SearchTest extends BaseTest
     }
 
     /**
-     * Default Limit tests for Elastica\Search
+     * Default Limit tests for \Elastica\Search
      */
     public function testLimitDefaultSearch()
     {
@@ -238,7 +238,7 @@ class SearchTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testArrayConfigSearch()
     {

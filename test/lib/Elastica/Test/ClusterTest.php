@@ -44,7 +44,7 @@ class ClusterTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\ConnectionException
+     * @expectedException \Elastica\Exception\ConnectionException
      */
     public function testShutdown()
     {

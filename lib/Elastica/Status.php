@@ -16,7 +16,7 @@ class Status
     /**
      * Contains all status infos
      *
-     * @var Elastica\Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -30,14 +30,14 @@ class Status
     /**
      * Client object
      *
-     * @var Elastica\Client Client object
+     * @var \Elastica\Client Client object
      */
     protected $_client = null;
 
     /**
      * Constructs Status object
      *
-     * @param Elastica\Client $client Client object
+     * @param \Elastica\Client $client Client object
      */
     public function __construct(Client $client)
     {
@@ -58,7 +58,7 @@ class Status
     /**
      * Returns status objects of all indices
      *
-     * @return array|Elastica\Index\Status[] List of Elastica\Client\Index objects
+     * @return array|\Elastica\Index\Status[] List of Elastica\Client\Index objects
      */
     public function getIndexStatuses()
     {
@@ -118,7 +118,7 @@ class Status
      * Returns an array with all indices that the given alias name points to
      *
      * @param  string                 $name Alias name
-     * @return array|Elastica\Index[] List of Elastica\Index
+     * @return array|\Elastica\Index[] List of Elastica\Index
      */
     public function getIndicesWithAlias($name)
     {
@@ -135,7 +135,7 @@ class Status
     /**
      * Returns response object
      *
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function getResponse()
     {

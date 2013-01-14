@@ -14,14 +14,14 @@ class BulkResponseException extends AbstractException
     /**
      * Response
      *
-     * @var Elastica\Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
     /**
      * Construct Exception
      *
-     * @param Elastica\Response $response
+     * @param \Elastica\Response $response
      */
     public function __construct(Response $response)
     {
@@ -32,7 +32,7 @@ class BulkResponseException extends AbstractException
     /**
      * Returns response object
      *
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function getResponse()
     {

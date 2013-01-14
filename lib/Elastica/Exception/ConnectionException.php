@@ -23,14 +23,14 @@ class ConnectionException extends AbstractException
     /**
      * Request
      *
-     * @var Elastica\Request Request object
+     * @var \Elastica\Request Request object
      */
     protected $_request = null;
 
     /**
      * Response
      *
-     * @var Elastica\Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -38,8 +38,8 @@ class ConnectionException extends AbstractException
      * Construct Exception
      *
      * @param string            $error    Error
-     * @param Elastica\Request  $request
-     * @param Elastica\Response $response
+     * @param \Elastica\Request  $request
+     * @param \Elastica\Response $response
      */
     public function __construct($error, Request $request = null, Response $response = null)
     {
@@ -103,7 +103,7 @@ class ConnectionException extends AbstractException
     /**
      * Returns request object
      *
-     * @return Elastica\Transport\AbstractTransport Request object
+     * @return \Elastica\Transport\AbstractTransport Request object
      */
     public function getRequest()
     {
@@ -113,7 +113,7 @@ class ConnectionException extends AbstractException
     /**
      * Returns response object
      *
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function getResponse()
     {

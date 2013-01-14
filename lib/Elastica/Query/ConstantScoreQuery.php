@@ -16,7 +16,7 @@ class ConstantScoreQuery extends AbstractQuery
     /**
      * Construct constant score query
      *
-     * @param null|Elastica\Filter\AbstractFilter|array $filter
+     * @param null|\Elastica\Filter\AbstractFilter|array $filter
      */
     public function __construct($filter = null)
     {
@@ -28,8 +28,8 @@ class ConstantScoreQuery extends AbstractQuery
     /**
      * Set filter
      *
-     * @param  array|Elastica\Filter\AbstractFilter $filter
-     * @return Elastica\Query\ConstantScore         Query object
+     * @param  array|\Elastica\Filter\AbstractFilter $filter
+     * @return \Elastica\Query\ConstantScore         Query object
      */
     public function setFilter($filter)
     {
@@ -44,7 +44,7 @@ class ConstantScoreQuery extends AbstractQuery
      * Set boost
      *
      * @param  float                        $boost
-     * @return Elastica\Query\ConstantScore
+     * @return \Elastica\Query\ConstantScore
      */
     public function setBoost($boost)
     {

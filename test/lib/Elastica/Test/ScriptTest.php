@@ -102,7 +102,7 @@ class ScriptTest extends BaseTest
 
     /**
      * @dataProvider dataProviderCreateInvalid
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testCreateInvalid($data)
     {

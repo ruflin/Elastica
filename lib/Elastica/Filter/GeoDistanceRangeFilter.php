@@ -45,7 +45,7 @@ class GeoDistanceRangeFilter extends AbstractGeoDistanceFilter
 
     /**
      * @param  array                                  $ranges
-     * @return Elastica\Filter\GeoDistanceRangeFilter
+     * @return \Elastica\Filter\GeoDistanceRangeFilter
      */
     public function setRanges(array $ranges)
     {
@@ -61,8 +61,8 @@ class GeoDistanceRangeFilter extends AbstractGeoDistanceFilter
     /**
      * @param  string                                 $key
      * @param  mixed                                  $value
-     * @return Elastica\Filter\GeoDistanceRangeFilter
-     * @throws Elastica\Exception\InvalidException
+     * @return \Elastica\Filter\GeoDistanceRangeFilter
+     * @throws \Elastica\Exception\InvalidException
      */
     public function setRange($key, $value)
     {

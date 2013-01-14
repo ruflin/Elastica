@@ -13,7 +13,7 @@ use Elastica\Test\Base as BaseTest;
 class SearchTest extends BaseTest
 {
     /**
-     * @return Elastica\Type
+     * @return \Elastica\Type
      */
     protected function _createType()
     {

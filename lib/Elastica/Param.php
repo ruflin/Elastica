@@ -63,7 +63,7 @@ class Param
      *
      * @param  string         $key
      * @param  mixed          $value
-     * @return Elastica\Param
+     * @return \Elastica\Param
      */
     protected function _setRawParam($key, $value)
     {
@@ -77,7 +77,7 @@ class Param
      *
      * @param  string         $key   Key to set
      * @param  mixed          $value Key Value
-     * @return Elastica\Param
+     * @return \Elastica\Param
      */
     public function setParam($key, $value)
     {
@@ -90,7 +90,7 @@ class Param
      * Sets (overwrites) all params of this object
      *
      * @param  array          $params Parameter list
-     * @return Elastica\Param
+     * @return \Elastica\Param
      */
     public function setParams(array $params)
     {
@@ -106,7 +106,7 @@ class Param
      *
      * @param  string         $key   Param key
      * @param  mixed          $value Value to set
-     * @return Elastica\Param
+     * @return \Elastica\Param
      */
     public function addParam($key, $value)
     {
@@ -124,7 +124,7 @@ class Param
      *
      * @param  string                              $key Key to return
      * @return mixed                               Key value
-     * @throws Elastica\Exception\InvalidException If requested key is not set
+     * @throws \Elastica\Exception\InvalidException If requested key is not set
      */
     public function getParam($key)
     {

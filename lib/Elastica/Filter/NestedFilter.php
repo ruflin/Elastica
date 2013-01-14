@@ -17,7 +17,7 @@ class NestedFilter extends AbstractFilter
      * Adds field to mlt filter
      *
      * @param  string                       $path Nested object path
-     * @return Elastica\Filter\NestedFilter
+     * @return \Elastica\Filter\NestedFilter
      */
     public function setPath($path)
     {
@@ -27,8 +27,8 @@ class NestedFilter extends AbstractFilter
     /**
      * Sets nested query
      *
-     * @param  Elastica\Query\AbstractQuery $query
-     * @return Elastica\Filter\NestedFilter
+     * @param  \Elastica\Query\AbstractQuery $query
+     * @return \Elastica\Filter\NestedFilter
      */
     public function setQuery(AbstractQuery $query)
     {
@@ -39,7 +39,7 @@ class NestedFilter extends AbstractFilter
      * Set score mode
      *
      * @param  string                       $scoreMode Options: avg, total, max and none.
-     * @return Elastica\Filter\NestedFilter
+     * @return \Elastica\Filter\NestedFilter
      */
     public function setScoreMode($scoreMode)
     {

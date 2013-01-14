@@ -16,7 +16,7 @@ class HistogramFacet extends AbstractFacet
      * Sets the field for histogram
      *
      * @param  string                        $field The name of the field for the histogram
-     * @return Elastica\Facet\HistogramFacet
+     * @return \Elastica\Facet\HistogramFacet
      */
     public function setField($field)
     {
@@ -27,7 +27,7 @@ class HistogramFacet extends AbstractFacet
      * Set the value for interval
      *
      * @param  string                        $interval
-     * @return Elastica\Facet\HistogramFacet
+     * @return \Elastica\Facet\HistogramFacet
      */
     public function setInterval($interval)
     {
@@ -39,7 +39,7 @@ class HistogramFacet extends AbstractFacet
      *
      * @param  string                        $keyField   Key field
      * @param  string                        $valueField Value field
-     * @return Elastica\Facet\HistogramFacet
+     * @return \Elastica\Facet\HistogramFacet
      */
     public function setKeyValueFields($keyField, $valueField)
     {
@@ -51,7 +51,7 @@ class HistogramFacet extends AbstractFacet
      *
      * @param  string                        $keyScript   Script to check whether it falls into the range.
      * @param  string                        $valueScript Script to use for statistical calculations.
-     * @return Elastica\Facet\HistogramFacet
+     * @return \Elastica\Facet\HistogramFacet
      */
     public function setKeyValueScripts($keyScript, $valueScript)
     {
@@ -63,7 +63,7 @@ class HistogramFacet extends AbstractFacet
      * Set the "params" essential to the a script
      *
      * @param  array                         $params Associative array (key/value pair)
-     * @return Elastica\Facet\HistogramFacet
+     * @return \Elastica\Facet\HistogramFacet
      */
     public function setScriptParams(array $params)
     {
@@ -74,8 +74,8 @@ class HistogramFacet extends AbstractFacet
      * Creates the full facet definition, which includes the basic
      * facet definition of the parent.
      *
-     * @see Elastica\Facet\AbstractFacet::toArray()
-     * @throws Elastica\Exception\InvalidException When the right fields haven't been set.
+     * @see \Elastica\Facet\AbstractFacet::toArray()
+     * @throws \Elastica\Exception\InvalidException When the right fields haven't been set.
      * @return array
      */
     public function toArray()

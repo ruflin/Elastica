@@ -18,8 +18,8 @@ class CustomScoreQuery extends AbstractQuery
     /**
      * Constructor
      *
-     * @param string|array|Elastica\Script        $script
-     * @param string|Elastica\Query\AbstractQuery $query
+     * @param string|array|\Elastica\Script        $script
+     * @param string|\Elastica\Query\AbstractQuery $query
      */
     public function __construct($script = null, $query= null)
     {
@@ -32,8 +32,8 @@ class CustomScoreQuery extends AbstractQuery
     /**
      * Sets query object
      *
-     * @param  string|Elastica\Query|Elastica\Query\Abstract $query
-     * @return Elastica\Query\CustomScoreQuery
+     * @param  string|\Elastica\Query|\Elastica\Query\Abstract $query
+     * @return \Elastica\Query\CustomScoreQuery
      */
     public function setQuery($query)
     {
@@ -46,8 +46,8 @@ class CustomScoreQuery extends AbstractQuery
     /**
      * Set script
      *
-     * @param  string|Elastica\Script          $script
-     * @return Elastica\Query\CustomScoreQuery
+     * @param  string|\Elastica\Script          $script
+     * @return \Elastica\Query\CustomScoreQuery
      */
     public function setScript($script)
     {
@@ -63,7 +63,7 @@ class CustomScoreQuery extends AbstractQuery
      * Add params
      *
      * @param  array                           $params
-     * @return Elastica\Query\CustomScoreQuery
+     * @return \Elastica\Query\CustomScoreQuery
      */
     public function addParams(array $params)
     {

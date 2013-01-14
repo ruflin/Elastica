@@ -38,7 +38,7 @@ class Log
     /**
      * Log a message
      *
-     * @param string|Elastica\Request $message
+     * @param string|\Elastica\Request $message
      */
     public function log($message)
     {
@@ -60,7 +60,7 @@ class Log
      * Enable/disable log or set log path
      *
      * @param  bool|string  $log Enables log or sets log path
-     * @return Elastica\Log
+     * @return \Elastica\Log
      */
     public function setLog($log)
     {
@@ -72,7 +72,7 @@ class Log
     /**
      * Converts a request to a log message
      *
-     * @param  Elastica\Request $request
+     * @param  \Elastica\Request $request
      * @return string           Request log message
      */
     protected function _convertRequest(Request $request)

@@ -43,14 +43,14 @@ abstract class AbstractTransport
     protected $_config;
 
     /**
-     * @var Elastica\Connection
+     * @var \Elastica\Connection
      */
     protected $_connection;
 
     /**
      * Construct transport
      *
-     * @param Elastica\Connection $connection Connection object
+     * @param \Elastica\Connection $connection Connection object
      */
     public function __construct(Connection $connection)
     {
@@ -58,7 +58,7 @@ abstract class AbstractTransport
     }
 
     /**
-     * @return Elastica\Connection Connection object
+     * @return \Elastica\Connection Connection object
      */
     public function getConnection()
     {
@@ -68,9 +68,9 @@ abstract class AbstractTransport
     /**
      * Executes the transport request
      *
-     * @param  Elastica\Request  $request Request object
+     * @param  \Elastica\Request  $request Request object
      * @param  array             $params  Hostname, port, path, ...
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     abstract public function exec(Request $request, array $params);
 }

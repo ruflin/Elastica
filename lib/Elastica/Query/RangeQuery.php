@@ -30,7 +30,7 @@ class RangeQuery extends AbstractQuery
      *
      * @param  string                    $fieldName Field name
      * @param  array                     $args      Field arguments
-     * @return Elastica\Query\RangeQuery Current object
+     * @return \Elastica\Query\RangeQuery Current object
      */
     public function addField($fieldName, array $args)
     {

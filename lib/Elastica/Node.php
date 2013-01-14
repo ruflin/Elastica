@@ -17,7 +17,7 @@ class Node
     /**
      * Client
      *
-     * @var Elastica\Client
+     * @var \Elastica\Client
      */
     protected $_client = null;
 
@@ -31,14 +31,14 @@ class Node
     /**
      * Node stats
      *
-     * @var Elastica\Node\Stats Node Stats
+     * @var \Elastica\Node\Stats Node Stats
      */
     protected $_stats = null;
 
     /**
      * Node info
      *
-     * @var Elastica\Node\Info Node info
+     * @var \Elastica\Node\Info Node info
      */
     protected $_info = null;
 
@@ -46,7 +46,7 @@ class Node
      * Create a new node object
      *
      * @param string          $name   Node name
-     * @param Elastica\Client $client Node object
+     * @param \Elastica\Client $client Node object
      */
     public function __construct($name, Client $client)
     {
@@ -68,7 +68,7 @@ class Node
     /**
      * Returns the current client object
      *
-     * @return Elastica\Client Client
+     * @return \Elastica\Client Client
      */
     public function getClient()
     {
@@ -78,7 +78,7 @@ class Node
     /**
      * Return stats object of the current node
      *
-     * @return Elastica\Node\Stats Node stats
+     * @return \Elastica\Node\Stats Node stats
      */
     public function getStats()
     {
@@ -92,7 +92,7 @@ class Node
     /**
      * Return info object of the current node
      *
-     * @return Elastica\Node\Info Node info object
+     * @return \Elastica\Node\Info Node info object
      */
     public function getInfo()
     {
@@ -118,7 +118,7 @@ class Node
      * Shuts this node down
      *
      * @param  string            $delay OPTIONAL Delay after which node is shut down (default = 1s)
-     * @return Elastica\Response
+     * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown.html
      */
     public function shutdown($delay = '1s')

@@ -35,12 +35,12 @@ class HttpTransport extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param  Elastica\Request                     $request
+     * @param  \Elastica\Request                     $request
      * @param  array                                $params  Host, Port, ...
-     * @throws Elastica\Exception\ResponseException
-     * @throws Elastica\Exception\InvalidException
-     * @throws Elastica\Exception\ClientException
-     * @return Elastica\Response                    Response object
+     * @throws \Elastica\Exception\ResponseException
+     * @throws \Elastica\Exception\InvalidException
+     * @throws \Elastica\Exception\ClientException
+     * @return \Elastica\Response                    Response object
      */
     public function exec(Request $request, array $params)
     {

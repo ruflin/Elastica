@@ -25,7 +25,7 @@ class IdsQuery extends AbstractQuery
     /**
      * Creates filter object
      *
-     * @param string|Elastica\Type $type Type to filter on
+     * @param string|\Elastica\Type $type Type to filter on
      * @param array                $ids  List of ids
      */
     public function __construct($type = null, array $ids = array())
@@ -38,7 +38,7 @@ class IdsQuery extends AbstractQuery
      * Adds one more filter to the and filter
      *
      * @param  string                  $id Adds id to filter
-     * @return Elastica\Query\IdsQuery Current object
+     * @return \Elastica\Query\IdsQuery Current object
      */
     public function addId($id)
     {
@@ -50,8 +50,8 @@ class IdsQuery extends AbstractQuery
     /**
      * Adds one more type to query
      *
-     * @param  string|Elastica\Type    $type Type name or object
-     * @return Elastica\Query\IdsQuery Current object
+     * @param  string|\Elastica\Type    $type Type name or object
+     * @return \Elastica\Query\IdsQuery Current object
      */
     public function addType($type)
     {
@@ -70,8 +70,8 @@ class IdsQuery extends AbstractQuery
     /**
      * Set type
      *
-     * @param  string|Elastica\Type $type Type name or object
-     * @return Elastica\Query\Ids   Current object
+     * @param  string|\Elastica\Type $type Type name or object
+     * @return \Elastica\Query\Ids   Current object
      */
     public function setType($type)
     {
@@ -91,7 +91,7 @@ class IdsQuery extends AbstractQuery
      * Sets the ids to filter
      *
      * @param  array|string            $ids List of ids
-     * @return Elastica\Query\IdsQuery Current object
+     * @return \Elastica\Query\IdsQuery Current object
      */
     public function setIds($ids)
     {
@@ -107,7 +107,7 @@ class IdsQuery extends AbstractQuery
     /**
      * Converts filter to array
      *
-     * @see Elastica\Query\AbstractQuery::toArray()
+     * @see \Elastica\Query\AbstractQuery::toArray()
      * @return array Query array
      */
     public function toArray()

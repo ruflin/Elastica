@@ -8,7 +8,7 @@ use Elastica\Test\Base as BaseTest;
 class IndexTest extends BaseTest
 {
     /**
-     * @var Elastica\Cluster\Health\Index
+     * @var \Elastica\Cluster\Health\Index
      */
     protected $_index;
 

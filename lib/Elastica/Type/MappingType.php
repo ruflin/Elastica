@@ -25,14 +25,14 @@ class MappingType
     /**
      * Type
      *
-     * @var Elastica\Type Type object
+     * @var \Elastica\Type Type object
      */
     protected $_type = null;
 
     /**
      * Construct Mapping
      *
-     * @param Elastica\Type $type       OPTIONAL Type object
+     * @param \Elastica\Type $type       OPTIONAL Type object
      * @param array         $properties OPTIONAL Properties
      */
     public function __construct(BaseType $type = null, array $properties = array())
@@ -49,8 +49,8 @@ class MappingType
     /**
      * Sets the mapping type
      * Enter description here ...
-     * @param  Elastica\Type             $type Type object
-     * @return Elastica\Type\MappingType Current object
+     * @param  \Elastica\Type             $type Type object
+     * @return \Elastica\Type\MappingType Current object
      */
     public function setType(BaseType $type)
     {
@@ -63,7 +63,7 @@ class MappingType
      * Sets the mapping properties
      *
      * @param  array                     $properties Properties
-     * @return Elastica\Type\MappingType Mapping object
+     * @return \Elastica\Type\MappingType Mapping object
      */
     public function setProperties(array $properties)
     {
@@ -73,7 +73,7 @@ class MappingType
     /**
      * Returns mapping type
      *
-     * @return Elastica\Type Type
+     * @return \Elastica\Type Type
      */
     public function getType()
     {
@@ -87,7 +87,7 @@ class MappingType
      * array('enabled' => false)
      *
      * @param  array                     $source Source array
-     * @return Elastica\Type\MappingType Current object
+     * @return \Elastica\Type\MappingType Current object
      * @link http://www.elasticsearch.org/guide/reference/mapping/source-field.html
      */
     public function setSource(array $source)
@@ -101,7 +101,7 @@ class MappingType
      * Param can be set to true to enable again
      *
      * @param  bool                      $enabled OPTIONAL (default = false)
-     * @return Elastica\Type\MappingType Current object
+     * @return \Elastica\Type\MappingType Current object
      */
     public function disableSource($enabled = false)
     {
@@ -127,7 +127,7 @@ class MappingType
      *
      * @param  string                    $key   Key name
      * @param  mixed                     $value Key value
-     * @return Elastica\Type\MappingType Current object
+     * @return \Elastica\Type\MappingType Current object
      */
     public function setParam($key, $value)
     {
@@ -140,7 +140,7 @@ class MappingType
      * Set TTL
      *
      * @param  array                     $params TTL Params (enabled, default, ...)
-     * @return Elastica\Type\MappingType
+     * @return \Elastica\Type\MappingType
      */
     public function setTtl(array $params)
     {
@@ -152,7 +152,7 @@ class MappingType
      * Enables TTL for all documents in this type
      *
      * @param  bool                      $enabled OPTIONAL (default = true)
-     * @return Elastica\Type\MappingType
+     * @return \Elastica\Type\MappingType
      */
     public function enableTtl($enabled = true)
     {
@@ -162,7 +162,7 @@ class MappingType
     /**
      * Converts the mapping to an array
      *
-     * @throws Elastica\Exception\InvalidException
+     * @throws \Elastica\Exception\InvalidException
      * @return array                               Mapping as array
      */
     public function toArray()
@@ -179,7 +179,7 @@ class MappingType
     /**
      * Submits the mapping and sends it to the server
      *
-     * @return Elastica\Response Response object
+     * @return \Elastica\Response Response object
      */
     public function send()
     {
@@ -191,9 +191,9 @@ class MappingType
     /**
      * Creates a mapping object
      *
-     * @param  array|Elastica\Type\MappingType     $mapping Mapping object or properties array
-     * @return Elastica\Type\MappingType           Mapping object
-     * @throws Elastica\Exception\InvalidException If invalid type
+     * @param  array|\Elastica\Type\MappingType     $mapping Mapping object or properties array
+     * @return \Elastica\Type\MappingType           Mapping object
+     * @throws \Elastica\Exception\InvalidException If invalid type
      */
     public static function create($mapping)
     {

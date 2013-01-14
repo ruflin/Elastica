@@ -37,7 +37,7 @@ class RangeFilter extends AbstractFilter
      *
      * @param  string                      $fieldName Field name
      * @param  array                       $args      Field arguments
-     * @return Elastica\Filter\RangeFilter
+     * @return \Elastica\Filter\RangeFilter
      */
     public function addField($fieldName, array $args)
     {
@@ -49,7 +49,7 @@ class RangeFilter extends AbstractFilter
     /**
      * Converts object to array
      *
-     * @see Elastica\Filter\AbstractFilter::toArray()
+     * @see \Elastica\Filter\AbstractFilter::toArray()
      * @return array Filter array
      */
     public function toArray()

@@ -71,7 +71,7 @@ class GeoDistanceRangeTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testInvalidRange()
     {
@@ -84,7 +84,7 @@ class GeoDistanceRangeTest extends BaseTest
 
     /**
      * @dataProvider invalidLocationDataProvider
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testInvalidLocation($location)
     {

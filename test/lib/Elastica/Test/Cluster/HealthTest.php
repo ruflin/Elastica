@@ -7,7 +7,7 @@ use Elastica\Test\Base as BaseTest;
 class HealthTest extends BaseTest
 {
     /**
-     * @var Elastica\Cluster\Health
+     * @var \Elastica\Cluster\Health
      */
     protected $_health;
 

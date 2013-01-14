@@ -43,7 +43,7 @@ class FieldQuery extends AbstractQuery
      * Sets the field
      *
      * @param  string                    $field Field
-     * @return Elastica\Query\FieldQuery Current object
+     * @return \Elastica\Query\FieldQuery Current object
      */
     public function setField($field)
     {
@@ -56,8 +56,8 @@ class FieldQuery extends AbstractQuery
      * Sets a new query string for the object
      *
      * @param  string                              $queryString Query string
-     * @throws Elastica\Exception\InvalidException
-     * @return Elastica\Query\FieldQuery           Current object
+     * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\Query\FieldQuery           Current object
      */
     public function setQueryString($queryString)
     {
@@ -74,7 +74,7 @@ class FieldQuery extends AbstractQuery
      * Converts query to array
      *
      * @return array Query array
-     * @see Elastica\Query\AbstractQuery::toArray()
+     * @see \Elastica\Query\AbstractQuery::toArray()
      */
     public function toArray()
     {

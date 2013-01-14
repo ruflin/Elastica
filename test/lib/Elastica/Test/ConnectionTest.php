@@ -32,7 +32,7 @@ class ConnectionTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\ConnectionException
+     * @expectedException \Elastica\Exception\ConnectionException
      */
     public function testInvalidConnection()
     {
@@ -60,8 +60,8 @@ class ConnectionTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\InvalidException
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testCreateInvalid()
     {
@@ -77,7 +77,7 @@ class ConnectionTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testGetConfigInvalidValue()
     {

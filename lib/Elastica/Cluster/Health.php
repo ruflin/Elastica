@@ -17,7 +17,7 @@ class Health
     /**
      * Elastica client.
      *
-     * @var Elastica\Client Client object
+     * @var \Elastica\Client Client object
      */
     protected $_client = null;
 
@@ -29,7 +29,7 @@ class Health
     protected $_data = null;
 
     /**
-     * @param Elastica\Client $client The Elastica client.
+     * @param \Elastica\Client $client The Elastica client.
      */
     public function __construct(Client $client)
     {
@@ -63,7 +63,7 @@ class Health
     /**
      * Refreshes the health data for the cluster.
      *
-     * @return Elastica\Cluster\Health
+     * @return \Elastica\Cluster\Health
      */
     public function refresh()
     {
@@ -175,7 +175,7 @@ class Health
     /**
      * Gets the status of the indices.
      *
-     * @return array Array of Elastica\Cluster\Health\Index objects.
+     * @return \Elastica\Cluster\Health\Index[]
      */
     public function getIndices()
     {
