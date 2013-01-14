@@ -1,4 +1,11 @@
 <?php
+
+namespace Elastica\Multi;
+use Elastica\Exception\InvalidException;
+use Elastica\Response;
+use Elastica\Search as BaseSearch;
+use Elastica\ResultSet as BaseResultSet;
+
 /**
  * Elastica multi search result set
  * List of result sets for each search request
@@ -7,12 +14,12 @@
  * @package Elastica
  * @author munkie
  */
-class Elastica_Multi_ResultSet implements Iterator, Countable
+class ResultSet implements \Iterator, \Countable
 {
     /**
      * Result Sets
      *
-     * @var array|Elastica_ResultSet[] Result Sets
+     * @var array|Elastica\ResultSet[] Result Sets
      */
     protected $_resultSets = array();
 
@@ -26,28 +33,28 @@ class Elastica_Multi_ResultSet implements Iterator, Countable
     /**
      * Response
      *
-     * @var Elastica_Response Response object
+     * @var Elastica\Response Response object
      */
     protected $_response;
 
     /**
      * Constructs ResultSet object
      *
-     * @param Elastica_Response $response
-     * @param array|Elastica_Search[] $searches
+     * @param Elastica\Response       $response
+     * @param array|Elastica\Search[] $searches
      */
-    public function __construct(Elastica_Response $response, array $searches)
+    public function __construct(Response $response, array $searches)
     {
         $this->rewind();
         $this->_init($response, $searches);
     }
 
     /**
-     * @param Elastica_Response $response
-     * @param array|Elastica_Search[] $searches
-     * @throws Elastica_Exception_Invalid
+     * @param  Elastica\Response                   $response
+     * @param  array|Elastica\Search[]             $searches
+     * @throws Elastica\Exception\InvalidException
      */
-    protected function _init(Elastica_Response $response, array $searches)
+    protected function _init(Response $response, array $searches)
     {
         $this->_response = $response;
         $responseData = $response->getData();
@@ -56,22 +63,22 @@ class Elastica_Multi_ResultSet implements Iterator, Countable
             foreach ($responseData['responses'] as $key => $responseData) {
 
                 if (!isset($searches[$key])) {
-                    throw new Elastica_Exception_Invalid('No result found for search #' . $key);
-                } elseif (!$searches[$key] instanceof Elastica_Search) {
-                    throw new Elastica_Exception_Invalid('Invalid object for search #' . $key . ' provided. Should be Elastica_Search');
+                    throw new InvalidException('No result found for search #' . $key);
+                } elseif (!$searches[$key] instanceof BaseSearch) {
+                    throw new InvalidException('Invalid object for search #' . $key . ' provided. Should be Elastica\Search');
                 }
 
                 $search = $searches[$key];
                 $query = $search->getQuery();
 
-                $response = new Elastica_Response($responseData);
-                $this->_resultSets[] = new Elastica_ResultSet($response, $query);
+                $response = new Response($responseData);
+                $this->_resultSets[] = new BaseResultSet($response, $query);
             }
         }
     }
 
     /**
-     * @return array|Elastica_ResultSet[]
+     * @return array|Elastica\ResultSet[]
      */
     public function getResultSets()
     {
@@ -81,7 +88,7 @@ class Elastica_Multi_ResultSet implements Iterator, Countable
     /**
      * Returns response object
      *
-     * @return Elastica_Response Response object
+     * @return Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -100,11 +107,12 @@ class Elastica_Multi_ResultSet implements Iterator, Countable
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * @return bool|Elastica_ResultSet
+     * @return bool|Elastica\ResultSet
      */
     public function current()
     {

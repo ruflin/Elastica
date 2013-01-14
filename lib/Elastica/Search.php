@@ -1,4 +1,9 @@
 <?php
+
+namespace Elastica;
+use Elastica\Exception\InvalidException;
+use Elastica\Exception\NotImplementedException;
+
 /**
  * Elastica search object
  *
@@ -6,7 +11,7 @@
  * @package  Elastica
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Search implements Elastica_Searchable
+class Search implements SearchableInterface
 {
     /*
      * Options
@@ -41,7 +46,7 @@ class Elastica_Search implements Elastica_Searchable
     protected $_types = array();
 
     /**
-     * @var Elastica_Query
+     * @var Elastica\Query
      */
     protected $_query;
 
@@ -53,16 +58,16 @@ class Elastica_Search implements Elastica_Searchable
     /**
      * Client object
      *
-     * @var Elastica_Client
+     * @var Elastica\Client
      */
     protected $_client;
 
     /**
      * Constructs search object
      *
-     * @param Elastica_Client $client Client object
+     * @param Elastica\Client $client Client object
      */
-    public function __construct(Elastica_Client $client)
+    public function __construct(Client $client)
     {
         $this->_client = $client;
     }
@@ -70,19 +75,18 @@ class Elastica_Search implements Elastica_Searchable
     /**
      * Adds a index to the list
      *
-     * @param  Elastica_Index|string $index Index object or string
-     * @throws Elastica_Exception_Invalid
-     * @return Elastica_Search       Current object
-     * @throws Elastica_Exception_Invalid
+     * @param  Elastica\Index|string               $index Index object or string
+     * @throws Elastica\Exception\InvalidException
+     * @return Elastica\Search                     Current object
      */
     public function addIndex($index)
     {
-        if ($index instanceof Elastica_Index) {
+        if ($index instanceof Index) {
             $index = $index->getName();
         }
 
         if (!is_string($index)) {
-            throw new Elastica_Exception_Invalid('Invalid param type');
+            throw new InvalidException('Invalid param type');
         }
 
         $this->_indices[] = $index;
@@ -94,7 +98,7 @@ class Elastica_Search implements Elastica_Searchable
      * Add array of indices at once
      *
      * @param  array           $indices
-     * @return Elastica_Search
+     * @return Elastica\Search
      */
     public function addIndices(array $indices = array())
     {
@@ -108,18 +112,18 @@ class Elastica_Search implements Elastica_Searchable
     /**
      * Adds a type to the current search
      *
-     * @param  Elastica_Type|string       $type Type name or object
-     * @return Elastica_Search            Search object
-     * @throws Elastica_Exception_Invalid
+     * @param  Elastica\Type|string                $type Type name or object
+     * @return Elastica\Search                     Search object
+     * @throws Elastica\Exception\InvalidException
      */
     public function addType($type)
     {
-        if ($type instanceof Elastica_Type) {
+        if ($type instanceof Type) {
             $type = $type->getName();
         }
 
         if (!is_string($type)) {
-            throw new Elastica_Exception_Invalid('Invalid type type');
+            throw new InvalidException('Invalid type type');
         }
 
         $this->_types[] = $type;
@@ -131,7 +135,7 @@ class Elastica_Search implements Elastica_Searchable
      * Add array of types
      *
      * @param  array           $types
-     * @return Elastica_Search
+     * @return Elastica\Search
      */
     public function addTypes(array $types = array())
     {
@@ -143,20 +147,20 @@ class Elastica_Search implements Elastica_Searchable
     }
 
     /**
-     * @param string|array|Elastica_Query|Elastica_Query_Abstract|Elastica_Filter_Abstract $query
-     * @return Elastica_Search
+     * @param  string|array|Elastica\Query|Elastica\Query\AbstractQuery|Elastica\Filter\AbstractFilter $query
+     * @return Elastica\Search
      */
     public function setQuery($query)
     {
-        $this->_query = Elastica_Query::create($query);
+        $this->_query = Query::create($query);
 
         return $this;
     }
 
     /**
-     * @param string $key
-     * @param mixed $value
-     * @return Elastica_Search
+     * @param  string          $key
+     * @param  mixed           $value
+     * @return Elastica\Search
      */
     public function setOption($key, $value)
     {
@@ -168,8 +172,8 @@ class Elastica_Search implements Elastica_Searchable
     }
 
     /**
-     * @param array $options
-     * @return Elastica_Search
+     * @param  array           $options
+     * @return Elastica\Search
      */
     public function setOptions(array $options)
     {
@@ -183,7 +187,7 @@ class Elastica_Search implements Elastica_Searchable
     }
 
     /**
-     * @return Elastica_Search
+     * @return Elastica\Search
      */
     public function clearOptions()
     {
@@ -193,9 +197,9 @@ class Elastica_Search implements Elastica_Searchable
     }
 
     /**
-     * @param string $key
-     * @param mixed $value
-     * @return Elastica_Search
+     * @param  string          $key
+     * @param  mixed           $value
+     * @return Elastica\Search
      */
     public function addOption($key, $value)
     {
@@ -211,7 +215,7 @@ class Elastica_Search implements Elastica_Searchable
     }
 
     /**
-     * @param string $key
+     * @param  string $key
      * @return bool
      */
     public function hasOption($key)
@@ -220,15 +224,16 @@ class Elastica_Search implements Elastica_Searchable
     }
 
     /**
-     * @param string $key
+     * @param  string                              $key
      * @return mixed
-     * @throws Elastica_Exception_Invalid
+     * @throws Elastica\Exception\InvalidException
      */
     public function getOption($key)
     {
         if (!$this->hasOption($key)) {
-            throw new Elastica_Exception_Invalid('Option ' . $key . ' does not exist');
+            throw new InvalidException('Option ' . $key . ' does not exist');
         }
+
         return $this->_options[$key];
     }
 
@@ -241,9 +246,9 @@ class Elastica_Search implements Elastica_Searchable
     }
 
     /**
-     * @param string $key
+     * @param  string                              $key
      * @return bool
-     * @throws Elastica_Exception_Invalid
+     * @throws Elastica\Exception\InvalidException
      */
     protected function _validateOption($key)
     {
@@ -255,13 +260,13 @@ class Elastica_Search implements Elastica_Searchable
                 return true;
         }
 
-        throw new Elastica_Exception_Invalid('Invalid option ' . $key);
+        throw new InvalidException('Invalid option ' . $key);
     }
 
     /**
      * Return client object
      *
-     * @return Elastica_Client Client object
+     * @return Elastica\Client Client object
      */
     public function getClient()
     {
@@ -305,26 +310,27 @@ class Elastica_Search implements Elastica_Searchable
     }
 
     /**
-     * @return Elastica_Query
+     * @return Elastica\Query
      */
     public function getQuery()
     {
         if (null === $this->_query) {
-            $this->_query = Elastica_Query::create('');
+            $this->_query = Query::create('');
         }
+
         return $this->_query;
     }
 
     /**
      * Creates new search object
      *
-     * @param Elastica_Searchable $searchObject
-     * @throws Elastica_Exception_NotImplemented
+     * @param  Elastica\SearchableInterface               $searchObject
+     * @throws Elastica\Exception\NotImplementedException
      * @return void
      */
-    public static function create(Elastica_Searchable $searchObject)
+    public static function create(SearchableInterface $searchObject)
     {
-        throw new Elastica_Exception_NotImplemented();
+        throw new NotImplementedException();
         // Set index
         // set type
         // set client
@@ -361,10 +367,10 @@ class Elastica_Search implements Elastica_Searchable
     /**
      * Search in the set indices, types
      *
-     * @param  mixed              $query
-     * @param  int|array          $options OPTIONAL Limit or associative array of options (option=>value)
-     * @throws Elastica_Exception_Invalid
-     * @return Elastica_ResultSet
+     * @param  mixed                               $query
+     * @param  int|array                           $options OPTIONAL Limit or associative array of options (option=>value)
+     * @throws Elastica\Exception\InvalidException
+     * @return Elastica\ResultSet
      */
     public function search($query = '', $options = null)
     {
@@ -377,12 +383,12 @@ class Elastica_Search implements Elastica_Searchable
 
         $response = $this->getClient()->request(
             $path,
-            Elastica_Request::GET,
+            Request::GET,
             $query->toArray(),
             $params
         );
 
-        return new Elastica_ResultSet($response, $query);
+        return new ResultSet($response, $query);
     }
 
     /**
@@ -397,19 +403,19 @@ class Elastica_Search implements Elastica_Searchable
 
         $response = $this->getClient()->request(
             $path,
-            Elastica_Request::GET,
+            Request::GET,
             $query->toArray(),
             array(self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_COUNT)
         );
-        $resultSet = new Elastica_ResultSet($response, $query);
+        $resultSet = new ResultSet($response, $query);
 
         return $resultSet->getTotalHits();
     }
 
     /**
-     * @param array|int $options
-     * @param string|array|Elastica_Query $query
-     * @return Elastica_Search
+     * @param  array|int                   $options
+     * @param  string|array|Elastica\Query $query
+     * @return Elastica\Search
      */
     protected function _setOptionsAndQuery($options = null, $query = '')
     {

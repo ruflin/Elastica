@@ -1,4 +1,8 @@
 <?php
+
+namespace Elastica;
+use Elastica\Exception\InvalidException;
+
 /**
  * Elastica Request object
  *
@@ -6,7 +10,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Request extends Elastica_Param
+class Request extends Param
 {
     const POST = 'POST';
     const PUT = 'PUT';
@@ -42,20 +46,20 @@ class Elastica_Request extends Elastica_Param
     protected $_query;
 
     /**
-     * @var Elastica_Connection
+     * @var Elastica\Connection
      */
     protected $_connection;
 
     /**
      * Construct
      *
-     * @param string          $path   Request path
-     * @param string          $method OPTIONAL Request method (use const's) (default = self::GET)
-     * @param array           $data   OPTIONAL Data array
-     * @param array           $query  OPTIONAL Query params
-     * @param Elastica_Connection $connection OPTIONAL Connection object
+     * @param string              $path       Request path
+     * @param string              $method     OPTIONAL Request method (use const's) (default = self::GET)
+     * @param array               $data       OPTIONAL Data array
+     * @param array               $query      OPTIONAL Query params
+     * @param Elastica\Connection $connection OPTIONAL Connection object
      */
-    public function __construct($path, $method = self::GET, $data = array(), array $query = array(), Elastica_Connection $connection = null)
+    public function __construct($path, $method = self::GET, $data = array(), array $query = array(), Connection $connection = null)
     {
         $this->setPath($path);
         $this->setMethod($method);
@@ -71,7 +75,7 @@ class Elastica_Request extends Elastica_Param
      * Sets the request method. Use one of the for consts
      *
      * @param  string           $method Request method
-     * @return Elastica_Request Current object
+     * @return Elastica\Request Current object
      */
     public function setMethod($method)
     {
@@ -91,8 +95,8 @@ class Elastica_Request extends Elastica_Param
     /**
      * Sets the request data
      *
-     * @param array $data Request data
-     * @return Elastica_Request
+     * @param  array            $data Request data
+     * @return Elastica\Request
      */
     public function setData($data)
     {
@@ -113,7 +117,7 @@ class Elastica_Request extends Elastica_Param
      * Sets the request path
      *
      * @param  string           $path Request path
-     * @return Elastica_Request Current object
+     * @return Elastica\Request Current object
      */
     public function setPath($path)
     {
@@ -141,8 +145,8 @@ class Elastica_Request extends Elastica_Param
     }
 
     /**
-     * @param array $query
-     * @return Elastica_Request
+     * @param  array            $query
+     * @return Elastica\Request
      */
     public function setQuery(array $query = array())
     {
@@ -150,32 +154,34 @@ class Elastica_Request extends Elastica_Param
     }
 
     /**
-     * @param Elastica_Connection $connection
-     * @return Elastica_Request
+     * @param  Elastica\Connection $connection
+     * @return Elastica\Request
      */
-    public function setConnection(Elastica_Connection $connection)
+    public function setConnection(Connection $connection)
     {
         $this->_connection = $connection;
+
         return $this;
     }
 
     /**
      * Return Connection Object
      *
-     * @return Elastica_Connection
+     * @return Elastica\Connection
      */
     public function getConnection()
     {
         if (empty($this->_connection)) {
-            throw new Elastica_Exception_Invalid('No valid connection object set');
+            throw new InvalidException('No valid connection object set');
         }
+
         return $this->_connection;
     }
 
     /**
      * Sends request to server
      *
-     * @return Elastica_Response Response object
+     * @return Elastica\Response Response object
      */
     public function send()
     {
