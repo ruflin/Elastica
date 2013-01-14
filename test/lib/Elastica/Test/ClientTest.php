@@ -577,4 +577,19 @@ class ClientTest extends BaseTest
         $this->assertArrayHasKey('field2', $data);
         $this->assertEquals('value2', $data['field2']);
     }
+
+    public function testAddDocumentsWithoutIds()
+    {
+        $docs = array();
+        for ($i = 0; $i < 10; $i++) {
+            $docs[] = new Document(null, array('pos' => $i));
+        }
+        $index = $this->_createIndex();
+        $type = $index->getType('pos');
+        $type->addDocuments($docs);
+
+        foreach ($docs as $doc) {
+            $this->assertNotEquals('', $doc->getId());
+        }
+    }
 }

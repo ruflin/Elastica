@@ -219,7 +219,33 @@ class Client
             $params[] = $doc->getData();
         }
 
-        return $this->bulk($params);
+        $response = $this->bulk($params);
+
+        $this->_setDocumentIdsFromResponse($response, $docs);
+
+        return $response;
+    }
+
+    /**
+     * @param \Elastica\Response $response
+     * @param \Elastica\Document[] $docs
+     */
+    protected function _setDocumentIdsFromResponse(Response $response, array $docs)
+    {
+        $data = $response->getData();
+        /* @var Document $document */
+        $document = reset($docs);
+        if (isset($data['items']) && is_array($data['items'])) {
+            foreach ($data['items'] as $item) {
+                if (false === $document) {
+                    break;
+                }
+                if (!$document->hasId() && isset($item['create']['_id'])) {
+                    $document->setId($item['create']['_id']);
+                }
+                $document = next($docs);
+            }
+        }
     }
 
     /**
