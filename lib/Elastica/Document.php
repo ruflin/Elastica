@@ -1,4 +1,7 @@
 <?php
+
+namespace Elastica;
+
 /**
  * Single document stored in elastic search
  *
@@ -6,7 +9,7 @@
  * @package  Elastica
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Document extends Elastica_Param
+class Document extends Param
 {
     /**
      * Document data
@@ -37,17 +40,17 @@ class Elastica_Document extends Elastica_Param
     protected $_routing = null;
 
     /**
-     * @var Elastica_Script
+     * @var Elastica\Script
      */
     protected $_script;
 
     /**
      * Creates a new document
      *
-     * @param int|string $id OPTIONAL $id Id is create if empty
-     * @param array  $data  OPTIONAL Data array
-     * @param string $type  OPTIONAL Type name
-     * @param string $index OPTIONAL Index name
+     * @param int|string $id    OPTIONAL $id Id is create if empty
+     * @param array      $data  OPTIONAL Data array
+     * @param string     $type  OPTIONAL Type name
+     * @param string     $index OPTIONAL Index name
      */
     public function __construct($id = '', array $data = array(), $type = '', $index = '')
     {
@@ -71,7 +74,7 @@ class Elastica_Document extends Elastica_Param
      * Sets the id of the document.
      *
      * @param  string            $id
-     * @return Elastica_Document
+     * @return Elastica\Document
      */
     public function setId($id)
     {
@@ -83,7 +86,7 @@ class Elastica_Document extends Elastica_Param
      *
      * @param  string            $key   Document entry key
      * @param  mixed             $value Document entry value
-     * @return Elastica_Document
+     * @return Elastica\Document
      */
     public function add($key, $value)
     {
@@ -106,7 +109,7 @@ class Elastica_Document extends Elastica_Param
      * @param  string            $key      Key to add the file to
      * @param  string            $filepath Path to add the file
      * @param  string            $mimeType OPTIONAL Header mime type
-     * @return Elastica_Document
+     * @return Elastica\Document
      */
     public function addFile($key, $filepath, $mimeType = '')
     {
@@ -126,7 +129,7 @@ class Elastica_Document extends Elastica_Param
      *
      * @param  string            $key     Document key
      * @param  string            $content Raw file content
-     * @return Elastica_Document
+     * @return Elastica\Document
      */
     public function addFileContent($key, $content)
     {
@@ -142,7 +145,7 @@ class Elastica_Document extends Elastica_Param
      * @param float  $latitude  Latitude value
      * @param float  $longitude Longitude value
      * @link http://www.elasticsearch.org/guide/reference/mapping/geo-point-type.html
-     * @return Elastica_Document
+     * @return Elastica\Document
      */
     public function addGeoPoint($key, $latitude, $longitude)
     {
@@ -157,7 +160,7 @@ class Elastica_Document extends Elastica_Param
      * Overwrites the current document data with the given data
      *
      * @param  array             $data Data array
-     * @return Elastica_Document
+     * @return Elastica\Document
      */
     public function setData(array $data)
     {
@@ -170,7 +173,7 @@ class Elastica_Document extends Elastica_Param
      * Sets lifetime of document
      *
      * @param  string            $ttl
-     * @return Elastica_Document
+     * @return Elastica\Document
      */
     public function setTtl($ttl)
     {
@@ -191,7 +194,7 @@ class Elastica_Document extends Elastica_Param
      * Sets the document type name
      *
      * @param  string            $type Type name
-     * @return Elastica_Document Current object
+     * @return Elastica\Document Current object
      */
     public function setType($type)
     {
@@ -201,8 +204,8 @@ class Elastica_Document extends Elastica_Param
     /**
      * Return document type name
      *
-     * @return string                     Document type name
-     * @throws Elastica_Exception_Invalid
+     * @return string                              Document type name
+     * @throws Elastica\Exception\InvalidException
      */
     public function getType()
     {
@@ -213,7 +216,7 @@ class Elastica_Document extends Elastica_Param
      * Sets the document index name
      *
      * @param  string            $index Index name
-     * @return Elastica_Document Current object
+     * @return Elastica\Document Current object
      */
     public function setIndex($index)
     {
@@ -223,8 +226,8 @@ class Elastica_Document extends Elastica_Param
     /**
      * Get the document index name
      *
-     * @return string                     Index name
-     * @throws Elastica_Exception_Invalid
+     * @return string                              Index name
+     * @throws Elastica\Exception\InvalidException
      */
     public function getIndex()
     {
@@ -235,7 +238,7 @@ class Elastica_Document extends Elastica_Param
      * Sets the version of a document for use with optimistic concurrency control
      *
      * @param  int               $version Document version
-     * @return Elastica_Document Current object
+     * @return Elastica\Document Current object
      * @link http://www.elasticsearch.org/blog/2011/02/08/versioning.html
      */
     public function setVersion($version)
@@ -257,8 +260,8 @@ class Elastica_Document extends Elastica_Param
      * Sets the version_type of a document
      * Default in ES is internal, but you can set to external to use custom versioning
      *
-     * @param int $versionType Document version type
-     * @return Elastica_Document Current object
+     * @param  int               $versionType Document version type
+     * @return Elastica\Document Current object
      * @link http://www.elasticsearch.org/guide/reference/api/index_.html
      */
     public function setVersionType($versionType)
@@ -280,7 +283,7 @@ class Elastica_Document extends Elastica_Param
      * Sets parent document id
      *
      * @param  string|int        $parent Parent document id
-     * @return Elastica_Document Current object
+     * @return Elastica\Document Current object
      * @link http://www.elasticsearch.org/guide/reference/mapping/parent-field.html
      */
     public function setParent($parent)
@@ -302,7 +305,7 @@ class Elastica_Document extends Elastica_Param
      * Set operation type
      *
      * @param  string            $optype Only accept create
-     * @return Elastica_Document Current object
+     * @return Elastica\Document Current object
      */
     public function setOpType($optype)
     {
@@ -323,7 +326,7 @@ class Elastica_Document extends Elastica_Param
      * Set percolate query param
      *
      * @param  string            $value percolator filter
-     * @return Elastica_Document
+     * @return Elastica\Document
      */
     public function setPercolate($value = '*')
     {
@@ -346,7 +349,7 @@ class Elastica_Document extends Elastica_Param
      * Set routing query param
      *
      * @param  string            $value routing
-     * @return Elastica_Document
+     * @return Elastica\Document
      */
     public function setRouting($value)
     {
@@ -364,18 +367,19 @@ class Elastica_Document extends Elastica_Param
     }
 
     /**
-     * @param Elastica_Script|array|string $data
+     * @param Elastica\Script|array|string $data
      * @return $this
      */
     public function setScript($data)
     {
-        $script = Elastica_Script::create($data);
+        $script = Script::create($data);
         $this->_script = $script;
+
         return $this;
     }
 
     /**
-     * @return Elastica_Script
+     * @return Elastica\Script
      */
     public function getScript()
     {

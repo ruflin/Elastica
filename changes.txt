@@ -3,6 +3,13 @@ CHANGES
 2013-01-13
 - Add version option to Elastica_Search::search
 - Remove compatibility for PHP 5.2
+- Changed all syntax using namespaces, in compliance with PSR-2.
+- Usage of composer for lib and test autoloading
+- Added PHPUnit as a dev dependency in composer.json
+- All tests were rewritten for new syntax.
+- All tests where moved in Elastica\Test namespace
+- All tests now inherit from Elastica\Test\Base
+- Removed all executable flags on files where not needed.
 - Update to elasticsearch 0.20.2
 - Refactored Elastica_Script and added it support in Elastica_Query_CustomFiltersScore, Elastica_Query_CustomScore and Elastica_Filter_Script
 
