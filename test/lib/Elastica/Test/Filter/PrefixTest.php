@@ -4,7 +4,7 @@ namespace Elastica\Test\Filter;
 
 use Elastica\Document;
 use Elastica\Filter\Prefix;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
 class PrefixTest extends BaseTest
@@ -45,7 +45,7 @@ class PrefixTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $mapping = new MappingType($type, array(
+        $mapping = new Mapping($type, array(
                 'name' => array('type' => 'string', 'store' => 'no', 'index' => 'not_analyzed'),
             )
         );
@@ -106,7 +106,7 @@ class PrefixTest extends BaseTest
         $index->create($indexParams, true);
         $type = $index->getType('test');
 
-        $mapping = new MappingType($type, array(
+        $mapping = new Mapping($type, array(
                 'name' => array('type' => 'string', 'store' => 'no', 'analyzer' => 'lw'),
             )
         );

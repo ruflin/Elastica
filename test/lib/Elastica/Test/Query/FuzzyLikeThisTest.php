@@ -6,7 +6,7 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query\FuzzyLikeThis;
 use Elastica\Type;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
 class FuzzyLikeThisTest extends BaseTest
@@ -20,7 +20,7 @@ class FuzzyLikeThisTest extends BaseTest
         //$index->getSettings()->setNumberOfShards(1);
 
         $type = new Type($index, 'helloworldfuzzy');
-        $mapping = new MappingType($type , array(
+        $mapping = new Mapping($type , array(
                'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
                'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
           ));

@@ -7,7 +7,7 @@ use Elastica\Facet\DateHistogram;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 
 class DateHistogramTest extends BaseTest
 {
@@ -26,7 +26,7 @@ class DateHistogramTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('helloworld');
 
-        $mapping = new MappingType($type, array(
+        $mapping = new Mapping($type, array(
                 'name' => array('type' => 'string', 'store' => 'no'),
                 'dtmPosted' => array('type' => 'date', 'store' => 'no', 'format' => 'yyyy-MM-dd HH:mm:ss')
             ));

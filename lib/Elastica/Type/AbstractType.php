@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Type;
+
 use Elastica\Client;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
@@ -124,7 +125,7 @@ abstract class AbstractType implements SearchableInterface
     {
         $this->getIndex()->create($this->_indexParams, $recreate);
 
-        $mapping = new MappingType($this->getType());
+        $mapping = new Mapping($this->getType());
         $mapping->setProperties($this->_mapping);
         $mapping->setSource(array('enabled' => $this->_source));
         $mapping->send();

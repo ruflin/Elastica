@@ -6,7 +6,7 @@ use Elastica\Document;
 use Elastica\Filter\Nested;
 use Elastica\Query\Terms;
 use Elastica\Search;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
 class NestedTest extends BaseTest
@@ -17,7 +17,7 @@ class NestedTest extends BaseTest
         $index = $client->getIndex('elastica_test_filter_nested');
         $index->create(array(), true);
         $type = $index->getType('user');
-        $mapping = new MappingType();
+        $mapping = new Mapping();
         $mapping->setProperties(
             array(
                 'firstname' => array('type' => 'string', 'store' => 'yes'),

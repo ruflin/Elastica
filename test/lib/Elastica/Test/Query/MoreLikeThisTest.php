@@ -7,7 +7,7 @@ use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\MoreLikeThis;
 use Elastica\Type;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
 class MoreLikeThisTest extends BaseTest
@@ -21,7 +21,7 @@ class MoreLikeThisTest extends BaseTest
         //$index->getSettings()->setNumberOfShards(1);
 
         $type = new Type($index, 'helloworldmlt');
-        $mapping = new MappingType($type , array(
+        $mapping = new Mapping($type , array(
             'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
             'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
         ));

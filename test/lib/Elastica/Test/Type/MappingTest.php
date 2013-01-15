@@ -8,7 +8,7 @@ use Elastica\Query;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 
 class MappingTest extends BaseTest
 {
@@ -20,7 +20,7 @@ class MappingTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $mapping = new MappingType($type,
+        $mapping = new Mapping($type,
             array(
                 'firstname' => array('type' => 'string', 'store' => 'yes'),
                 // default is store => no expected
@@ -68,7 +68,7 @@ class MappingTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $mapping = new MappingType($type, array());
+        $mapping = new Mapping($type, array());
 
         $mapping->enableTtl();
 
@@ -85,7 +85,7 @@ class MappingTest extends BaseTest
         $type = $index->getType('test');
 
         $this->markTestIncomplete('nested mapping is not set right yet');
-        $mapping = new MappingType($type,
+        $mapping = new Mapping($type,
             array(
                 'test' => array(
                     'type' => 'object', 'store' => 'yes', 'properties' => array(
@@ -124,7 +124,7 @@ class MappingTest extends BaseTest
     {
         $index = $this->_createIndex();
         $parenttype = new Type($index, 'parenttype');
-        $parentmapping = new MappingType($parenttype,
+        $parentmapping = new Mapping($parenttype,
             array(
                 'name' => array('type' => 'string', 'store' => 'yes')
             )
@@ -133,7 +133,7 @@ class MappingTest extends BaseTest
         $parenttype->setMapping($parentmapping);
 
         $childtype = new Type($index, 'childtype');
-        $childmapping = new MappingType($childtype,
+        $childmapping = new Mapping($childtype,
             array(
                 'name' => array('type' => 'string', 'store' => 'yes'),
             )
@@ -148,7 +148,7 @@ class MappingTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('notes');
 
-        $mapping = new MappingType($type,
+        $mapping = new Mapping($type,
             array(
                 'note' => array(
                     'store' => 'yes', 'properties' => array(

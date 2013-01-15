@@ -5,7 +5,7 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Query\Wildcard;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 
 class WildcardTest extends BaseTest
 {
@@ -55,7 +55,7 @@ class WildcardTest extends BaseTest
         $index->create($indexParams, true);
         $type = $index->getType('test');
 
-        $mapping = new MappingType($type, array(
+        $mapping = new Mapping($type, array(
                 'name' => array('type' => 'string', 'store' => 'no', 'analyzer' => 'lw'),
             )
         );

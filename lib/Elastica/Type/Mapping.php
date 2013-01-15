@@ -1,9 +1,10 @@
 <?php
 
 namespace Elastica\Type;
+
 use Elastica\Exception\InvalidException;
 use Elastica\Request;
-use Elastica\Type as BaseType;
+use Elastica\Type;
 
 /**
  * Elastica Mapping object
@@ -13,7 +14,7 @@ use Elastica\Type as BaseType;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/mapping/
  */
-class MappingType
+class Mapping
 {
     /**
      * Mapping
@@ -35,7 +36,7 @@ class MappingType
      * @param \Elastica\Type $type       OPTIONAL Type object
      * @param array         $properties OPTIONAL Properties
      */
-    public function __construct(BaseType $type = null, array $properties = array())
+    public function __construct(Type $type = null, array $properties = array())
     {
         if ($type) {
             $this->setType($type);
@@ -50,9 +51,9 @@ class MappingType
      * Sets the mapping type
      * Enter description here ...
      * @param  \Elastica\Type             $type Type object
-     * @return \Elastica\Type\MappingType Current object
+     * @return \Elastica\Type\Mapping Current object
      */
-    public function setType(BaseType $type)
+    public function setType(Type $type)
     {
         $this->_type = $type;
 
@@ -63,7 +64,7 @@ class MappingType
      * Sets the mapping properties
      *
      * @param  array                     $properties Properties
-     * @return \Elastica\Type\MappingType Mapping object
+     * @return \Elastica\Type\Mapping Mapping object
      */
     public function setProperties(array $properties)
     {
@@ -87,7 +88,7 @@ class MappingType
      * array('enabled' => false)
      *
      * @param  array                     $source Source array
-     * @return \Elastica\Type\MappingType Current object
+     * @return \Elastica\Type\Mapping Current object
      * @link http://www.elasticsearch.org/guide/reference/mapping/source-field.html
      */
     public function setSource(array $source)
@@ -101,7 +102,7 @@ class MappingType
      * Param can be set to true to enable again
      *
      * @param  bool                      $enabled OPTIONAL (default = false)
-     * @return \Elastica\Type\MappingType Current object
+     * @return \Elastica\Type\Mapping Current object
      */
     public function disableSource($enabled = false)
     {
@@ -127,7 +128,7 @@ class MappingType
      *
      * @param  string                    $key   Key name
      * @param  mixed                     $value Key value
-     * @return \Elastica\Type\MappingType Current object
+     * @return \Elastica\Type\Mapping Current object
      */
     public function setParam($key, $value)
     {
@@ -140,7 +141,7 @@ class MappingType
      * Set TTL
      *
      * @param  array                     $params TTL Params (enabled, default, ...)
-     * @return \Elastica\Type\MappingType
+     * @return \Elastica\Type\Mapping
      */
     public function setTtl(array $params)
     {
@@ -152,7 +153,7 @@ class MappingType
      * Enables TTL for all documents in this type
      *
      * @param  bool                      $enabled OPTIONAL (default = true)
-     * @return \Elastica\Type\MappingType
+     * @return \Elastica\Type\Mapping
      */
     public function enableTtl($enabled = true)
     {
@@ -191,20 +192,20 @@ class MappingType
     /**
      * Creates a mapping object
      *
-     * @param  array|\Elastica\Type\MappingType     $mapping Mapping object or properties array
-     * @return \Elastica\Type\MappingType           Mapping object
+     * @param  array|\Elastica\Type\Mapping     $mapping Mapping object or properties array
+     * @return \Elastica\Type\Mapping           Mapping object
      * @throws \Elastica\Exception\InvalidException If invalid type
      */
     public static function create($mapping)
     {
         if (is_array($mapping)) {
-            $mappingObject = new MappingType();
+            $mappingObject = new Mapping();
             $mappingObject->setProperties($mapping);
         } else {
             $mappingObject = $mapping;
         }
 
-        if (!$mappingObject instanceof MappingType) {
+        if (!$mappingObject instanceof Mapping) {
             throw new InvalidException('Invalid object type');
         }
 
