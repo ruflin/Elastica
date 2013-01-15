@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Facet;
+
 use Elastica\Exception\InvalidException;
 
 /**
@@ -11,13 +12,13 @@ use Elastica\Exception\InvalidException;
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/range-facet.html
  */
-class RangeFacet extends AbstractFacet
+class Range extends AbstractFacet
 {
     /**
      * Sets the field for the range.
      *
      * @param  string                    $field The name of the field for range.
-     * @return \Elastica\Facet\RangeFacet
+     * @return \Elastica\Facet\Range
      */
     public function setField($field)
     {
@@ -29,7 +30,7 @@ class RangeFacet extends AbstractFacet
      *
      * @param  string                    $keyField   The key_field param for the range.
      * @param  string                    $valueField The key_value param for the range.
-     * @return \Elastica\Facet\RangeFacet
+     * @return \Elastica\Facet\Range
      */
     public function setKeyValueFields($keyField, $valueField)
     {
@@ -43,7 +44,7 @@ class RangeFacet extends AbstractFacet
      * @param string $keyScript   Script to check whether it falls into the range.
      * @param string $valueScript Script to use for statistical calculations.
      *
-     * @return \Elastica\Facet\RangeFacet
+     * @return \Elastica\Facet\Range
      */
     public function setKeyValueScripts($keyScript, $valueScript)
     {
@@ -61,7 +62,7 @@ class RangeFacet extends AbstractFacet
      * )
      *
      * @param  array                     $ranges Numerical array with range definitions.
-     * @return \Elastica\Facet\RangeFacet
+     * @return \Elastica\Facet\Range
      */
     public function setRanges(array $ranges)
     {
@@ -73,7 +74,7 @@ class RangeFacet extends AbstractFacet
      *
      * @param  mixed                     $from The from for the range.
      * @param  mixed                     $to   The to for the range.
-     * @return \Elastica\Facet\RangeFacet
+     * @return \Elastica\Facet\Range
      */
     public function addRange($from = null, $to = null)
     {

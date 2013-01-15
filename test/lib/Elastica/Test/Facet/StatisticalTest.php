@@ -3,7 +3,7 @@
 namespace Elastica\Test\Facet;
 
 use Elastica\Document;
-use Elastica\Facet\StatisticalFacet;
+use Elastica\Facet\Statistical;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
@@ -24,7 +24,7 @@ class StatisticalTest extends BaseTest
         $doc = new Document(2, array('price' => 45));
         $type->addDocument($doc);
 
-        $facet = new StatisticalFacet('stats');
+        $facet = new Statistical('stats');
         $facet->setField('price');
 
         $query = new Query();
@@ -55,7 +55,7 @@ class StatisticalTest extends BaseTest
         $doc = new Document(2, array('price' => 45, 'price2' => 90));
         $type->addDocument($doc);
 
-        $facet = new StatisticalFacet('stats');
+        $facet = new Statistical('stats');
         $facet->setFields(array('price','price2'));
 
         $query = new Query();

@@ -3,7 +3,7 @@
 namespace Elastica\Test\Facet;
 
 use Elastica\Document;
-use Elastica\Facet\QueryFacet;
+use Elastica\Facet\Query as FacetQuery;
 use Elastica\Query;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
@@ -25,7 +25,7 @@ class QueryTest extends BaseTest
 
         $termQuery = new Term(array('color' => 'red'));
 
-        $facet = new QueryFacet('test');
+        $facet = new FacetQuery('test');
         $facet->setQuery($termQuery);
 
         $query = new Query();

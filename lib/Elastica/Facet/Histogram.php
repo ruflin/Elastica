@@ -10,13 +10,13 @@ namespace Elastica\Facet;
  * @author Raul Martinez Jr  <juneym@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/histogram-facet.html
  */
-class HistogramFacet extends AbstractFacet
+class Histogram extends AbstractFacet
 {
     /**
      * Sets the field for histogram
      *
      * @param  string                        $field The name of the field for the histogram
-     * @return \Elastica\Facet\HistogramFacet
+     * @return \Elastica\Facet\Histogram
      */
     public function setField($field)
     {
@@ -27,7 +27,7 @@ class HistogramFacet extends AbstractFacet
      * Set the value for interval
      *
      * @param  string                        $interval
-     * @return \Elastica\Facet\HistogramFacet
+     * @return \Elastica\Facet\Histogram
      */
     public function setInterval($interval)
     {
@@ -39,7 +39,7 @@ class HistogramFacet extends AbstractFacet
      *
      * @param  string                        $keyField   Key field
      * @param  string                        $valueField Value field
-     * @return \Elastica\Facet\HistogramFacet
+     * @return \Elastica\Facet\Histogram
      */
     public function setKeyValueFields($keyField, $valueField)
     {
@@ -51,7 +51,7 @@ class HistogramFacet extends AbstractFacet
      *
      * @param  string                        $keyScript   Script to check whether it falls into the range.
      * @param  string                        $valueScript Script to use for statistical calculations.
-     * @return \Elastica\Facet\HistogramFacet
+     * @return \Elastica\Facet\Histogram
      */
     public function setKeyValueScripts($keyScript, $valueScript)
     {
@@ -63,7 +63,7 @@ class HistogramFacet extends AbstractFacet
      * Set the "params" essential to the a script
      *
      * @param  array                         $params Associative array (key/value pair)
-     * @return \Elastica\Facet\HistogramFacet
+     * @return \Elastica\Facet\Histogram
      */
     public function setScriptParams(array $params)
     {

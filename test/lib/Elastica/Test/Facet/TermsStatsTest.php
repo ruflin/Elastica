@@ -3,7 +3,7 @@
 namespace Elastica\Test\Facet;
 
 use Elastica\Document;
-use Elastica\Facet\TermsStatsFacet;
+use Elastica\Facet\TermsStats;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
@@ -30,7 +30,7 @@ class TermsStatsTest extends BaseTest
         $doc   = new Document( 6, array( 'name' => 'mike', 'paid' => 15 ) );
         $type->addDocument( $doc );
 
-        $facet = new TermsStatsFacet( 'test' );
+        $facet = new TermsStats( 'test' );
         $facet->setKeyField( 'name' );
         $facet->setValueField( 'paid' );
 

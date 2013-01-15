@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Facet;
+
 use Elastica\Param;
 use Elastica\Filter\AbstractFilter;
 use Elastica\Exception\InvalidException;

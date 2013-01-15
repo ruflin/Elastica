@@ -10,14 +10,14 @@ namespace Elastica\Facet;
  * @author Tom Michaelis <tom.michaelis@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/terms-stats-facet.html
  */
-class TermsStatsFacet extends AbstractFacet
+class TermsStats extends AbstractFacet
 {
 
     /**
      * Sets the key field for the query.
      *
      * @param  string                         $keyField The key field name for the query.
-     * @return \Elastica\Facet\TermsStatsFacet
+     * @return \Elastica\Facet\TermsStats
      */
     public function setKeyField( $keyField )
     {
@@ -28,7 +28,7 @@ class TermsStatsFacet extends AbstractFacet
      * Sets a script to calculate statistical information on a per term basis
      *
      * @param  string                         $valueScript The script to do calculations on the statistical values
-     * @return \Elastica\Facet\TermsStatsFacet
+     * @return \Elastica\Facet\TermsStats
      */
     public function setValueScript( $valueScript )
     {
@@ -39,7 +39,7 @@ class TermsStatsFacet extends AbstractFacet
      * Sets a field to compute basic statistical results on
      *
      * @param  string                         $valueField The field to compute statistical values for
-     * @return \Elastica\Facet\TermsStatsFacet
+     * @return \Elastica\Facet\TermsStats
      */
     public function setValueField( $valueField )
     {

@@ -11,13 +11,13 @@ namespace Elastica\Facet;
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/date-histogram-facet.html
  * @link https://github.com/elasticsearch/elasticsearch/issues/591
  */
-class DateHistogramFacet extends HistogramFacet
+class DateHistogram extends Histogram
 {
     /**
      * Set the time_zone parameter
      *
      * @param  string                            $tzOffset
-     * @return \Elastica\Facet\DateHistogramFacet
+     * @return \Elastica\Facet\DateHistogram
      */
     public function setTimezone($tzOffset)
     {

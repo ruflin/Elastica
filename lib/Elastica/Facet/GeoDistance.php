@@ -10,7 +10,7 @@ namespace Elastica\Facet;
  * @author Gerard A. Matthew  <gerard.matthew@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/geo-distance-facet.html
  */
-class GeoDistanceFacet extends AbstractFacet
+class GeoDistance extends AbstractFacet
 {
     /**
      * Sets the ranges for the facet all at once.
@@ -23,7 +23,7 @@ class GeoDistanceFacet extends AbstractFacet
      * )
      *
      * @param  array                           $ranges Numerical array with range definitions.
-     * @return \Elastica\Facet\GeoDistanceFacet
+     * @return \Elastica\Facet\GeoDistance
      */
     public function setRanges(array $ranges)
     {
@@ -36,7 +36,7 @@ class GeoDistanceFacet extends AbstractFacet
      * @param  string                          $typeField index type and field e.g foo.bar
      * @param  float                           $latitude
      * @param  float                           $longitude
-     * @return \Elastica\Facet\GeoDistanceFacet
+     * @return \Elastica\Facet\GeoDistance
      */
     public function setGeoPoint($typeField, $latitude, $longitude)
     {

@@ -3,7 +3,7 @@
 namespace Elastica\Test\Facet;
 
 use Elastica\Document;
-use Elastica\Facet\DateHistogramFacet;
+use Elastica\Facet\DateHistogram;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
@@ -13,8 +13,8 @@ class DateHistogramTest extends BaseTest
 {
     public function testClassHierarchy()
     {
-        $facet = new DateHistogramFacet('dateHist1');
-        $this->assertInstanceOf('Elastica\Facet\HistogramFacet', $facet);
+        $facet = new DateHistogram('dateHist1');
+        $this->assertInstanceOf('Elastica\Facet\Histogram', $facet);
         $this->assertInstanceOf('Elastica\Facet\AbstractFacet', $facet);
         unset($facet);
     }
@@ -41,7 +41,7 @@ class DateHistogramTest extends BaseTest
         $doc = new Document(4, array('name' => 'elastica search', 'dtmPosted' => "2011-07-08 01:53:00"));
         $type->addDocument($doc);
 
-        $facet = new DateHistogramFacet('dateHist1');
+        $facet = new DateHistogram('dateHist1');
         $facet->setInterval("day");
         $facet->setField("dtmPosted");
 
