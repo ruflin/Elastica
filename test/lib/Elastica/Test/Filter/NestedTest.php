@@ -3,7 +3,7 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
-use Elastica\Filter\NestedFilter;
+use Elastica\Filter\Nested;
 use Elastica\Query\Terms;
 use Elastica\Search;
 use Elastica\Type\MappingType;
@@ -68,7 +68,7 @@ class NestedTest extends BaseTest
 
     public function testToArray()
     {
-        $f = new NestedFilter();
+        $f = new Nested();
         $this->assertEquals(array('nested' => array()), $f->toArray());
         $q = new Terms();
         $q->setTerms('hobby', array('guitar'));
@@ -89,7 +89,7 @@ class NestedTest extends BaseTest
 
     public function testShouldReturnTheRightNumberOfResult()
     {
-        $f = new NestedFilter();
+        $f = new Nested();
         $this->assertEquals(array('nested' => array()), $f->toArray());
         $q = new Terms();
         $q->setTerms('hobby', array('guitar'));
@@ -104,7 +104,7 @@ class NestedTest extends BaseTest
 
         $this->assertEquals(1, $r->getTotalHits());
 
-        $f = new NestedFilter();
+        $f = new Nested();
         $this->assertEquals(array('nested' => array()), $f->toArray());
         $q = new Terms();
         $q->setTerms('hobby', array('opensource'));

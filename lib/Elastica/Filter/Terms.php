@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Filter;
+
 use Elastica\Exception\InvalidException;
 
 /**
@@ -11,7 +12,7 @@ use Elastica\Exception\InvalidException;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/terms-filter.html
  */
-class TermsFilter extends AbstractFilter
+class Terms extends AbstractFilter
 {
     /**
      * Terms
@@ -50,7 +51,7 @@ class TermsFilter extends AbstractFilter
      *
      * @param  string                      $key   Terms key
      * @param  array                       $terms Terms for the query.
-     * @return \Elastica\Filter\TermsFilter
+     * @return \Elastica\Filter\Terms
      */
     public function setTerms($key, array $terms)
     {
@@ -64,7 +65,7 @@ class TermsFilter extends AbstractFilter
      * Adds an additional term to the query
      *
      * @param  string                      $term Filter term
-     * @return \Elastica\Filter\TermsFilter Filter object
+     * @return \Elastica\Filter\Terms Filter object
      */
     public function addTerm($term)
     {

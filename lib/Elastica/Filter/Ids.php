@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Filter;
+
 use Elastica\Type;
 
 /**
@@ -11,7 +12,7 @@ use Elastica\Type;
  * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/ids-filter.html
  */
-class IdsFilter extends AbstractFilter
+class Ids extends AbstractFilter
 {
     /**
      * Creates filter object
@@ -29,7 +30,7 @@ class IdsFilter extends AbstractFilter
      * Adds one more filter to the and filter
      *
      * @param  string                    $id Adds id to filter
-     * @return \Elastica\Filter\IdsFilter Current object
+     * @return \Elastica\Filter\Ids Current object
      */
     public function addId($id)
     {
@@ -40,7 +41,7 @@ class IdsFilter extends AbstractFilter
      * Adds one more type to query
      *
      * @param  string|\Elastica\Type      $type Type name or object
-     * @return \Elastica\Filter\IdsFilter Current object
+     * @return \Elastica\Filter\Ids Current object
      */
     public function addType($type)
     {
@@ -59,7 +60,7 @@ class IdsFilter extends AbstractFilter
      * Set type
      *
      * @param  string|\Elastica\Type      $type Type name or object
-     * @return \Elastica\Filter\IdsFilter Current object
+     * @return \Elastica\Filter\Ids Current object
      */
     public function setType($type)
     {
@@ -78,7 +79,7 @@ class IdsFilter extends AbstractFilter
      * Sets the ids to filter
      *
      * @param  array|string              $ids List of ids
-     * @return \Elastica\Filter\IdsFilter Current object
+     * @return \Elastica\Filter\Ids Current object
      */
     public function setIds($ids)
     {

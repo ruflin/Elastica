@@ -2,8 +2,8 @@
 
 namespace Elastica\Filter;
 
+use Elastica;
 use Elastica\Query\AbstractQuery;
-use Elastica\Script;
 
 /**
  * Script filter
@@ -13,7 +13,7 @@ use Elastica\Script;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/script-filter.html
  */
-class ScriptFilter extends AbstractFilter
+class Script extends AbstractFilter
 {
     /**
      * Query object
@@ -39,7 +39,7 @@ class ScriptFilter extends AbstractFilter
      *
      * @deprecated
      * @param  string|array|\Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Filter\ScriptFilter
+     * @return \Elastica\Filter\Script
      */
     public function setQuery($query)
     {
@@ -54,11 +54,11 @@ class ScriptFilter extends AbstractFilter
      * Sets script object
      *
      * @param  \Elastica\Script|string|array $script
-     * @return \Elastica\Filter\ScriptFilter
+     * @return \Elastica\Filter\Script
      */
     public function setScript($script)
     {
-        $script = Script::create($script);
+        $script = Elastica\Script::create($script);
 
         return $this->setParams($script->toArray());
     }

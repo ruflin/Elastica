@@ -10,7 +10,7 @@ namespace Elastica\Filter;
  * @author Maciej Wiercinski <maciej@wiercinski.net>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter.html
  */
-class MissingFilter extends AbstractFilter
+class Missing extends AbstractFilter
 {
     /**
      * Construct missing filter
@@ -28,7 +28,7 @@ class MissingFilter extends AbstractFilter
      * Set field
      *
      * @param  string                        $field
-     * @return \Elastica\Filter\MissingFilter
+     * @return \Elastica\Filter\Missing
      */
     public function setField($field)
     {

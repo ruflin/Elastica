@@ -10,7 +10,7 @@ namespace Elastica\Filter;
  * @author Oleg Cherniy <oleg.cherniy@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/exists-filter.html
  */
-class ExistsFilter extends AbstractFilter
+class Exists extends AbstractFilter
 {
     /**
      * Construct exists filter
@@ -26,7 +26,7 @@ class ExistsFilter extends AbstractFilter
      * Set field
      *
      * @param  string                       $field
-     * @return \Elastica\Filter\ExistsFilter
+     * @return \Elastica\Filter\Exists
      */
     public function setField($field)
     {

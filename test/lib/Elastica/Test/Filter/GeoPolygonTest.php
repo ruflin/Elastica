@@ -3,7 +3,7 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
-use Elastica\Filter\GeoPolygonFilter;
+use Elastica\Filter\GeoPolygon;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
@@ -46,7 +46,7 @@ class GeoPolygonTest extends BaseTest
         // Only one point should be in polygon
         $query = new Query();
         $points = array(array(16, 16), array(16, 20), array(20, 20), array(20, 16), array(16, 16));
-        $geoFilter = new GeoPolygonFilter('point', compact('points'));
+        $geoFilter = new GeoPolygon('point', compact('points'));
 
         $query = new Query(new MatchAll());
         $query->setFilter($geoFilter);
@@ -55,7 +55,7 @@ class GeoPolygonTest extends BaseTest
         // Both points should be inside
         $query = new Query();
         $points = array(array(16, 16), array(16, 40), array(40, 40), array(40, 16), array(16, 16));
-        $geoFilter = new GeoPolygonFilter('point', compact('points'));
+        $geoFilter = new GeoPolygon('point', compact('points'));
 
         $query = new Query(new MatchAll());
         $query->setFilter($geoFilter);

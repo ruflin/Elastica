@@ -10,7 +10,7 @@ namespace Elastica\Filter;
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/prefix-filter.html
  */
-class PrefixFilter extends AbstractFilter
+class Prefix extends AbstractFilter
 {
     /**
      * Holds the name of the field for the prefix.
@@ -42,7 +42,7 @@ class PrefixFilter extends AbstractFilter
      * Sets the name of the prefix field.
      *
      * @param  string                       $field Field name
-     * @return \Elastica\Filter\PrefixFilter
+     * @return \Elastica\Filter\Prefix
      */
     public function setField($field)
     {
@@ -55,7 +55,7 @@ class PrefixFilter extends AbstractFilter
      * Sets the prefix string.
      *
      * @param  string                       $prefix Prefix string
-     * @return \Elastica\Filter\PrefixFilter
+     * @return \Elastica\Filter\Prefix
      */
     public function setPrefix($prefix)
     {

@@ -3,7 +3,7 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Filter\AbstractMultiFilter;
-use Elastica\Filter\MatchAllFilter;
+use Elastica\Filter\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
 class Abstract_MultiTest extends BaseTest
@@ -19,7 +19,7 @@ class Abstract_MultiTest extends BaseTest
     {
         $stub = $this->getStub();
 
-        $filter = new MatchAllFilter();
+        $filter = new MatchAll();
         $stub->addFilter($filter);
 
         $expected = array(
@@ -33,7 +33,7 @@ class Abstract_MultiTest extends BaseTest
     {
         $stub = $this->getStub();
 
-        $filter = new MatchAllFilter();
+        $filter = new MatchAll();
         $stub->setFilters(array($filter));
 
         $expected = array(
@@ -47,7 +47,7 @@ class Abstract_MultiTest extends BaseTest
     {
         $stub = $this->getStub();
 
-        $filter = new MatchAllFilter();
+        $filter = new MatchAll();
         $stub->addFilter($filter);
 
         $expected = array(
@@ -65,7 +65,7 @@ class Abstract_MultiTest extends BaseTest
 
         $stub->setCached(true);
 
-        $filter = new MatchAllFilter();
+        $filter = new MatchAll();
         $stub->addFilter($filter);
 
         $expected = array(

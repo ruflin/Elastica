@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Filter;
+
 use Elastica\Exception\InvalidException;
 
 /**
@@ -11,7 +12,7 @@ use Elastica\Exception\InvalidException;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/bool-query.html
  */
-class BoolFilter extends AbstractFilter
+class Bool extends AbstractFilter
 {
     /**
      * @var float
@@ -50,7 +51,7 @@ class BoolFilter extends AbstractFilter
      * Adds should filter
      *
      * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
-     * @return \Elastica\Filter\BoolFilter           Current object
+     * @return \Elastica\Filter\Bool           Current object
      */
     public function addShould($args)
     {
@@ -61,7 +62,7 @@ class BoolFilter extends AbstractFilter
      * Adds must filter
      *
      * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
-     * @return \Elastica\Filter\BoolFilter           Current object
+     * @return \Elastica\Filter\Bool           Current object
      */
     public function addMust($args)
     {
@@ -72,7 +73,7 @@ class BoolFilter extends AbstractFilter
      * Adds mustNot filter
      *
      * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
-     * @return \Elastica\Filter\BoolFilter           Current object
+     * @return \Elastica\Filter\Bool           Current object
      */
     public function addMustNot($args)
     {
@@ -85,7 +86,7 @@ class BoolFilter extends AbstractFilter
      * @param  string                               $type Filter type
      * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Filter\BoolFilter           Current object
+     * @return \Elastica\Filter\Bool           Current object
      */
     protected function _addFilter($type, $args)
     {
@@ -132,7 +133,7 @@ class BoolFilter extends AbstractFilter
      * Sets the boost value for this filter
      *
      * @param  float                      $boost Boost
-     * @return \Elastica\Filter\BoolFilter Current object
+     * @return \Elastica\Filter\Bool Current object
      */
     public function setBoost($boost)
     {
@@ -145,7 +146,7 @@ class BoolFilter extends AbstractFilter
      * Sets the minimum number that should filter have to match
      *
      * @param  int                        $minimumNumberShouldMatch Number of matches
-     * @return \Elastica\Filter\BoolFilter Current object
+     * @return \Elastica\Filter\Bool Current object
      */
     public function setMinimumNumberShouldMatch($minimumNumberShouldMatch)
     {

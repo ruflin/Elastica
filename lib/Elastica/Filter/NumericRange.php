@@ -10,6 +10,6 @@ namespace Elastica\Filter;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/numeric-range-filter.html
  */
-class NumericRangeFilter extends RangeFilter
+class NumericRange extends Range
 {
 }

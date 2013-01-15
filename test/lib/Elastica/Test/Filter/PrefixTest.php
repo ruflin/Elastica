@@ -3,7 +3,7 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
-use Elastica\Filter\PrefixFilter;
+use Elastica\Filter\Prefix;
 use Elastica\Type\MappingType;
 use Elastica\Test\Base as BaseTest;
 
@@ -14,7 +14,7 @@ class PrefixTest extends BaseTest
         $field = 'name';
         $prefix = 'ruf';
 
-        $filter = new PrefixFilter($field, $prefix);
+        $filter = new Prefix($field, $prefix);
 
         $expectedArray = array(
             'prefix' => array(
@@ -64,24 +64,24 @@ class PrefixTest extends BaseTest
 
         $index->refresh();
 
-        $query = new PrefixFilter('name', 'Ba');
+        $query = new Prefix('name', 'Ba');
         $resultSet = $index->search($query);
         $this->assertEquals(3, $resultSet->count());
 
         // Lower case should not return a result
-        $query = new PrefixFilter('name', 'ba');
+        $query = new Prefix('name', 'ba');
         $resultSet = $index->search($query);
         $this->assertEquals(0, $resultSet->count());
 
-        $query = new PrefixFilter('name', 'Baden');
+        $query = new Prefix('name', 'Baden');
         $resultSet = $index->search($query);
         $this->assertEquals(2, $resultSet->count());
 
-        $query = new PrefixFilter('name', 'Baden B');
+        $query = new Prefix('name', 'Baden B');
         $resultSet = $index->search($query);
         $this->assertEquals(1, $resultSet->count());
 
-        $query = new PrefixFilter('name', 'Baden Bas');
+        $query = new Prefix('name', 'Baden Bas');
         $resultSet = $index->search($query);
         $this->assertEquals(0, $resultSet->count());
     }
@@ -125,24 +125,24 @@ class PrefixTest extends BaseTest
 
         $index->refresh();
 
-        $query = new PrefixFilter('name', 'ba');
+        $query = new Prefix('name', 'ba');
         $resultSet = $index->search($query);
         $this->assertEquals(3, $resultSet->count());
 
         // Upper case should not return a result
-        $query = new PrefixFilter('name', 'Ba');
+        $query = new Prefix('name', 'Ba');
         $resultSet = $index->search($query);
         $this->assertEquals(0, $resultSet->count());
 
-        $query = new PrefixFilter('name', 'baden');
+        $query = new Prefix('name', 'baden');
         $resultSet = $index->search($query);
         $this->assertEquals(2, $resultSet->count());
 
-        $query = new PrefixFilter('name', 'baden b');
+        $query = new Prefix('name', 'baden b');
         $resultSet = $index->search($query);
         $this->assertEquals(1, $resultSet->count());
 
-        $query = new PrefixFilter('name', 'baden bas');
+        $query = new Prefix('name', 'baden bas');
         $resultSet = $index->search($query);
         $this->assertEquals(0, $resultSet->count());
     }

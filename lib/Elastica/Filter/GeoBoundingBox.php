@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Filter;
+
 use Elastica\Exception\InvalidException;
 
 /**
@@ -11,7 +12,7 @@ use Elastica\Exception\InvalidException;
  * @author Fabian Vogler <fabian@equivalence.ch>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-bounding-box-filter.html
  */
-class GeoBoundingBoxFilter extends AbstractFilter
+class GeoBoundingBox extends AbstractFilter
 {
     /**
      * Construct BoundingBoxFilter
@@ -30,7 +31,7 @@ class GeoBoundingBoxFilter extends AbstractFilter
      * @param  string                               $key         Key
      * @param  array                                $coordinates Array with top left coordinate as first and bottom right coordinate as second element
      * @throws \Elastica\Exception\InvalidException  If $coordinates doesn't have two elements
-     * @return \Elastica\Filter\GeoBoundingBoxFilter Current object
+     * @return \Elastica\Filter\GeoBoundingBox Current object
      */
     public function addCoordinates($key, array $coordinates)
     {

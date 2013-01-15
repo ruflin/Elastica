@@ -3,7 +3,7 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
-use Elastica\Filter\IdsFilter;
+use Elastica\Filter\Ids;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
 
@@ -53,7 +53,7 @@ class IdsTest extends BaseTest
 
     public function testSetIdsSearchSingle()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
         $filter->setIds('1');
 
         $query = Query::create($filter);
@@ -64,7 +64,7 @@ class IdsTest extends BaseTest
 
     public function testSetIdsSearchArray()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
         $filter->setIds(array(1, 7, 13));
 
         $query = Query::create($filter);
@@ -75,7 +75,7 @@ class IdsTest extends BaseTest
 
     public function testAddIdsSearchSingle()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
         $filter->addId('39');
 
         $query = Query::create($filter);
@@ -86,7 +86,7 @@ class IdsTest extends BaseTest
 
     public function testAddIdsSearchSingleNotInType()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
         $filter->addId('39');
 
         // Add an ID that is not in the index
@@ -100,7 +100,7 @@ class IdsTest extends BaseTest
 
     public function testComboIdsSearchArray()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
         $filter->setIds(array(1, 7, 13));
         $filter->addId('39');
 
@@ -112,7 +112,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeSingleSearchSingle()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
         $filter->setIds('1');
         $filter->setType('helloworld1');
 
@@ -124,7 +124,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeSingleSearchArray()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
         $filter->setIds(array('1', '2'));
         $filter->setType('helloworld1');
 
@@ -136,7 +136,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeSingleSearchSingleDocInOtherType()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
 
         // Doc 4 is in the second type...
         $filter->setIds('101');
@@ -151,7 +151,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeSingleSearchArrayDocInOtherType()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
 
         // Doc 4 is in the second type...
         $filter->setIds(array('1', '101'));
@@ -166,7 +166,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeArraySearchArray()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
         $filter->setIds(array('1', '4'));
         $filter->setType(array('helloworld1', 'helloworld2'));
 
@@ -178,7 +178,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeArraySearchSingle()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
         $filter->setIds('4');
         $filter->setType(array('helloworld1', 'helloworld2'));
 

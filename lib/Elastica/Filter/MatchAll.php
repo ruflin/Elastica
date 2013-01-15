@@ -10,7 +10,7 @@ namespace Elastica\Filter;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/match-all-filter.html
  */
-class MatchAllFilter extends AbstractFilter
+class MatchAll extends AbstractFilter
 {
     /**
      * Creates match all filter

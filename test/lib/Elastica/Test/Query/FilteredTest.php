@@ -3,7 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Filter\TermFilter;
+use Elastica\Filter\Term;
 use Elastica\Query\Filtered;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
@@ -24,10 +24,10 @@ class FilteredTest extends BaseTest
 
         $queryString = new QueryString('test*');
 
-        $filter1 = new TermFilter();
+        $filter1 = new Term();
         $filter1->setTerm('username', 'peter');
 
-        $filter2 = new TermFilter();
+        $filter2 = new Term();
         $filter2->setTerm('username', 'qwerqwer');
 
         $query1 = new Filtered($queryString, $filter1);

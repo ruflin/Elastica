@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Filter;
+
 use Elastica\Query;
 
 /**
@@ -10,7 +11,7 @@ use Elastica\Query;
  * @package Elastica
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/has-parent-filter.html
  */
-class HasParentFilter extends AbstractFilter
+class HasParent extends AbstractFilter
 {
     /**
      * Construct HasParent filter
@@ -28,7 +29,7 @@ class HasParentFilter extends AbstractFilter
      * Sets query object
      *
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Filter\HasParentFilter                    Current object
+     * @return \Elastica\Filter\HasParent                    Current object
      */
     public function setQuery($query)
     {
@@ -42,7 +43,7 @@ class HasParentFilter extends AbstractFilter
      * Set type of the parent document
      *
      * @param  string                          $type Parent document type
-     * @return \Elastica\Filter\HasParentFilter Current object
+     * @return \Elastica\Filter\HasParent Current object
      */
     public function setType($type)
     {
@@ -53,7 +54,7 @@ class HasParentFilter extends AbstractFilter
      * Sets the scope
      *
      * @param  string                          $scope Scope
-     * @return \Elastica\Filter\HasParentFilter Current object
+     * @return \Elastica\Filter\HasParent Current object
      */
     public function setScope($scope)
     {

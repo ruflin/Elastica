@@ -2,7 +2,7 @@
 
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\HasChildFilter;
+use Elastica\Filter\HasChild;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
@@ -14,7 +14,7 @@ class HasChildTest extends BaseTest
 
         $type = 'test';
 
-        $filter = new HasChildFilter($q, $type);
+        $filter = new HasChild($q, $type);
 
         $expectedArray = array(
             'has_child' => array(
@@ -34,7 +34,7 @@ class HasChildTest extends BaseTest
 
         $scope = 'foo';
 
-        $filter = new HasChildFilter($q, $type);
+        $filter = new HasChild($q, $type);
         $filter->setScope($scope);
 
         $expectedArray = array(

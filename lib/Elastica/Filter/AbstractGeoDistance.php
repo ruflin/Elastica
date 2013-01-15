@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Filter;
+
 use Elastica\Exception\InvalidException;
 
 /**
@@ -11,7 +12,7 @@ use Elastica\Exception\InvalidException;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-filter.html
  */
-abstract class AbstractGeoDistanceFilter extends AbstractFilter
+abstract class AbstractGeoDistance extends AbstractFilter
 {
 
     const LOCATION_TYPE_GEOHASH = 'geohash';

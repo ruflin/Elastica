@@ -4,7 +4,7 @@ namespace Elastica\Test\Filter;
 
 use Elastica\Document;
 use Elastica\Filter\AndFilter;
-use Elastica\Filter\IdsFilter;
+use Elastica\Filter\Ids;
 use Elastica\Test\Base as BaseTest;
 
 class AndTest extends BaseTest
@@ -14,7 +14,7 @@ class AndTest extends BaseTest
         $and = new AndFilter();
         $this->assertEquals(array('and' => array()), $and->toArray());
 
-        $idsFilter = new IdsFilter();
+        $idsFilter = new Ids();
         $idsFilter->setIds(12);
 
         $and->addFilter($idsFilter);
@@ -46,10 +46,10 @@ class AndTest extends BaseTest
 
         $and = new AndFilter();
 
-        $idsFilter1 = new IdsFilter();
+        $idsFilter1 = new Ids();
         $idsFilter1->setIds(1);
 
-        $idsFilter2 = new IdsFilter();
+        $idsFilter2 = new Ids();
         $idsFilter2->setIds(1);
 
         $and->addFilter($idsFilter1);

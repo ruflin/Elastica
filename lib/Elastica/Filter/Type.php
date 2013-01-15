@@ -10,7 +10,7 @@ namespace Elastica\Filter;
  * @author James Wilson <jwilson556@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/type-filter.html
  */
-class TypeFilter extends AbstractFilter
+class Type extends AbstractFilter
 {
     /**
      * Type name
@@ -23,7 +23,7 @@ class TypeFilter extends AbstractFilter
      * Construct Type Filter
      *
      * @param  string                     $typeName Type name
-     * @return \Elastica\Filter\TypeFilter
+     * @return \Elastica\Filter\Type
      */
     public function __construct($typeName = null)
     {
@@ -36,7 +36,7 @@ class TypeFilter extends AbstractFilter
      * Ads a field with arguments to the range query
      *
      * @param  string                     $typeName Type name
-     * @return \Elastica\Filter\TypeFilter current object
+     * @return \Elastica\Filter\Type current object
      */
     public function setType($typeName)
     {

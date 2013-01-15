@@ -2,8 +2,8 @@
 
 namespace Elastica\Test\Query;
 
-use Elastica\Filter\RangeFilter;
-use Elastica\Filter\TermFilter;
+use Elastica\Filter\Range;
+use Elastica\Filter\Term;
 use Elastica\Query\CustomFiltersScore;
 use Elastica\Query\QueryString;
 use Elastica\Script;
@@ -69,7 +69,7 @@ class CustomFiltersScoreTest extends BaseTest
     {
         $customFiltersScoreQuery = new CustomFiltersScore();
 
-        $rangeFilter = new RangeFilter('age', array('from' => 20, 'to' => 30));
+        $rangeFilter = new Range('age', array('from' => 20, 'to' => 30));
         $rangeBoost = 2.5;
         $customFiltersScoreQuery->addFilter($rangeFilter, $rangeBoost);
 
@@ -88,7 +88,7 @@ class CustomFiltersScoreTest extends BaseTest
         );
         $this->assertEquals($expected, $customFiltersScoreQuery->toArray());
 
-        $termFilter = new TermFilter();
+        $termFilter = new Term();
         $termFilter->setTerm('name', 'ruflin');
         $termBoost = 3.0;
 
@@ -119,7 +119,7 @@ class CustomFiltersScoreTest extends BaseTest
     {
         $customFiltersScoreQuery = new CustomFiltersScore();
 
-        $rangeFilter = new RangeFilter('age', array('from' => 20, 'to' => 30));
+        $rangeFilter = new Range('age', array('from' => 20, 'to' => 30));
         $rangeScript = "doc['num1'].value > 1";
         $customFiltersScoreQuery->addFilterScript($rangeFilter, $rangeScript);
 
@@ -164,7 +164,7 @@ class CustomFiltersScoreTest extends BaseTest
 
         $this->assertEquals($expected, $customFiltersScoreQuery->toArray());
 
-        $termFilter = new TermFilter();
+        $termFilter = new Term();
         $termFilter->setTerm('name', 'ruflin');
         $termScript = "doc['num2'].value > 1";
 
@@ -195,7 +195,7 @@ class CustomFiltersScoreTest extends BaseTest
     {
         $customFiltersScoreQuery = new CustomFiltersScore();
 
-        $rangeFilter = new RangeFilter('age', array('from' => 20, 'to' => 30));
+        $rangeFilter = new Range('age', array('from' => 20, 'to' => 30));
         $rangeScript = "doc['num1'].value > 1";
         $customFiltersScoreQuery->addFilterScript($rangeFilter, $rangeScript);
 
@@ -227,7 +227,7 @@ class CustomFiltersScoreTest extends BaseTest
     {
         $customFiltersScoreQuery = new CustomFiltersScore();
 
-        $rangeFilter = new RangeFilter('age', array('from' => 20, 'to' => 30));
+        $rangeFilter = new Range('age', array('from' => 20, 'to' => 30));
         $rangeScript = "doc['num1'].value > 1";
         $customFiltersScoreQuery->addFilterScript($rangeFilter, $rangeScript);
 
@@ -256,7 +256,7 @@ class CustomFiltersScoreTest extends BaseTest
     {
         $customFiltersScoreQuery = new CustomFiltersScore();
 
-        $rangeFilter = new RangeFilter('age', array('from' => 20, 'to' => 30));
+        $rangeFilter = new Range('age', array('from' => 20, 'to' => 30));
         $rangeBoost = 2.5;
         $customFiltersScoreQuery->addFilter($rangeFilter, $rangeBoost);
 

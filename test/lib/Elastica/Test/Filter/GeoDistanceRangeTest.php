@@ -3,7 +3,7 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
-use Elastica\Filter\GeoDistanceRangeFilter;
+use Elastica\Filter\GeoDistanceRange;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
@@ -46,7 +46,7 @@ class GeoDistanceRangeTest extends BaseTest
 
         // Only one point should be in radius
         $query = new Query();
-        $geoFilter = new GeoDistanceRangeFilter(
+        $geoFilter = new GeoDistanceRange(
             'point',
             array('lat' => 30, 'lon' => 40),
             array('from' => '0km', 'to' => '2km')
@@ -58,7 +58,7 @@ class GeoDistanceRangeTest extends BaseTest
 
         // Both points should be inside
         $query = new Query();
-        $geoFilter = new GeoDistanceRangeFilter(
+        $geoFilter = new GeoDistanceRange(
             'point',
             array('lat' => 30, 'lon' => 40),
             array('gte' => '0km', 'lte' => '40000km')
@@ -75,7 +75,7 @@ class GeoDistanceRangeTest extends BaseTest
      */
     public function testInvalidRange()
     {
-        $geoFilter = new GeoDistanceRangeFilter(
+        $geoFilter = new GeoDistanceRange(
             'point',
             array('lat' => 30, 'lon' => 40),
             array('invalid' => '0km', 'lte' => '40000km')
@@ -88,7 +88,7 @@ class GeoDistanceRangeTest extends BaseTest
      */
     public function testInvalidLocation($location)
     {
-        $geoFilter = new GeoDistanceRangeFilter(
+        $geoFilter = new GeoDistanceRange(
             'point',
             $location,
             array('gt' => '0km', 'lte' => '40000km')
@@ -100,7 +100,7 @@ class GeoDistanceRangeTest extends BaseTest
      */
     public function testConstruct($key, $location, $ranges, $expected)
     {
-        $filter = new GeoDistanceRangeFilter($key, $location, $ranges);
+        $filter = new GeoDistanceRange($key, $location, $ranges);
 
         $data = $filter->toArray();
 

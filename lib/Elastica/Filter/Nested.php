@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Filter;
+
 use Elastica\Query\AbstractQuery;
 
 /**
@@ -11,13 +12,13 @@ use Elastica\Query\AbstractQuery;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/nested-filter.html
  */
-class NestedFilter extends AbstractFilter
+class Nested extends AbstractFilter
 {
     /**
      * Adds field to mlt filter
      *
      * @param  string                       $path Nested object path
-     * @return \Elastica\Filter\NestedFilter
+     * @return \Elastica\Filter\Nested
      */
     public function setPath($path)
     {
@@ -28,7 +29,7 @@ class NestedFilter extends AbstractFilter
      * Sets nested query
      *
      * @param  \Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Filter\NestedFilter
+     * @return \Elastica\Filter\Nested
      */
     public function setQuery(AbstractQuery $query)
     {
@@ -39,7 +40,7 @@ class NestedFilter extends AbstractFilter
      * Set score mode
      *
      * @param  string                       $scoreMode Options: avg, total, max and none.
-     * @return \Elastica\Filter\NestedFilter
+     * @return \Elastica\Filter\Nested
      */
     public function setScoreMode($scoreMode)
     {

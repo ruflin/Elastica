@@ -10,7 +10,7 @@ namespace Elastica\Filter;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/range-filter.html
  */
-class RangeFilter extends AbstractFilter
+class Range extends AbstractFilter
 {
     /**
      * Fields
@@ -37,7 +37,7 @@ class RangeFilter extends AbstractFilter
      *
      * @param  string                      $fieldName Field name
      * @param  array                       $args      Field arguments
-     * @return \Elastica\Filter\RangeFilter
+     * @return \Elastica\Filter\Range
      */
     public function addField($fieldName, array $args)
     {

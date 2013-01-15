@@ -2,8 +2,8 @@
 
 namespace Elastica\Test\Query;
 
-use Elastica\Filter\TermFilter;
-use Elastica\Filter\IdsFilter;
+use Elastica\Filter\Term;
+use Elastica\Filter\Ids;
 use Elastica\Query\ConstantScore;
 use Elastica\Test\Base as BaseTest;
 
@@ -13,7 +13,7 @@ class ConstantScoreTest extends BaseTest
     {
         return array(
             array(
-                new TermFilter(array('foo', 'bar')),
+                new Term(array('foo', 'bar')),
                 array(
                     'constant_score' => array(
                         'filter' => array(
@@ -68,7 +68,7 @@ class ConstantScoreTest extends BaseTest
         $query = new ConstantScore();
 
         $boost = 1.2;
-        $filter = new IdsFilter();
+        $filter = new Ids();
         $filter->setIds(array(1));
 
         $query->setFilter($filter);
@@ -86,7 +86,7 @@ class ConstantScoreTest extends BaseTest
 
     public function testConstruct()
     {
-        $filter = new IdsFilter();
+        $filter = new Ids();
         $filter->setIds(array(1));
 
         $query = new ConstantScore($filter);

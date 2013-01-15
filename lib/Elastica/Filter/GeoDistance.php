@@ -10,7 +10,7 @@ namespace Elastica\Filter;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-filter.html
  */
-class GeoDistanceFilter extends AbstractGeoDistanceFilter
+class GeoDistance extends AbstractGeoDistance
 {
     const DISTANCE_TYPE_ARC = 'arc';
     const DISTANCE_TYPE_PLANE = 'plane';
@@ -61,7 +61,7 @@ class GeoDistanceFilter extends AbstractGeoDistanceFilter
 
     /**
      * @param  string                            $distance
-     * @return \Elastica\Filter\GeoDistanceFilter current filter
+     * @return \Elastica\Filter\GeoDistance current filter
      */
     public function setDistance($distance)
     {
@@ -74,7 +74,7 @@ class GeoDistanceFilter extends AbstractGeoDistanceFilter
      * See DISTANCE_TYPE_* constants
      *
      * @param  string                            $distanceType
-     * @return \Elastica\Filter\GeoDistanceFilter current filter
+     * @return \Elastica\Filter\GeoDistance current filter
      */
     public function setDistanceType($distanceType)
     {
@@ -87,7 +87,7 @@ class GeoDistanceFilter extends AbstractGeoDistanceFilter
      * See OPTIMIZE_BBOX_* constants
      *
      * @param  string                            $optimizeBbox
-     * @return \Elastica\Filter\GeoDistanceFilter current filter
+     * @return \Elastica\Filter\GeoDistance current filter
      */
     public function setOptimizeBbox($optimizeBbox)
     {

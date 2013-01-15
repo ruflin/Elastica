@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Filter;
+
 use Elastica\Exception\InvalidException;
 
 /**
@@ -11,7 +12,7 @@ use Elastica\Exception\InvalidException;
  * @author munkie
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-range-filter.html
  */
-class GeoDistanceRangeFilter extends AbstractGeoDistanceFilter
+class GeoDistanceRange extends AbstractGeoDistance
 {
     const RANGE_FROM = 'from';
     const RANGE_TO = 'to';
@@ -45,7 +46,7 @@ class GeoDistanceRangeFilter extends AbstractGeoDistanceFilter
 
     /**
      * @param  array                                  $ranges
-     * @return \Elastica\Filter\GeoDistanceRangeFilter
+     * @return \Elastica\Filter\GeoDistanceRange
      */
     public function setRanges(array $ranges)
     {
@@ -61,7 +62,7 @@ class GeoDistanceRangeFilter extends AbstractGeoDistanceFilter
     /**
      * @param  string                                 $key
      * @param  mixed                                  $value
-     * @return \Elastica\Filter\GeoDistanceRangeFilter
+     * @return \Elastica\Filter\GeoDistanceRange
      * @throws \Elastica\Exception\InvalidException
      */
     public function setRange($key, $value)

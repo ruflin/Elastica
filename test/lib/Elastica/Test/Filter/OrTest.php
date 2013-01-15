@@ -4,7 +4,7 @@ namespace Elastica\Test\Filter;
 
 use Elastica\Filter\AbstractFilter;
 use Elastica\Filter\OrFilter;
-use Elastica\Filter\IdsFilter;
+use Elastica\Filter\Ids;
 use Elastica\Test\Base as BaseTest;
 
 class OrTest extends BaseTest
@@ -21,10 +21,10 @@ class OrTest extends BaseTest
     {
         $orFilter = new OrFilter();
 
-        $filter1 = new IdsFilter();
+        $filter1 = new Ids();
         $filter1->setIds('1');
 
-        $filter2 = new IdsFilter();
+        $filter2 = new Ids();
         $filter2->setIds('2');
 
         $orFilter->addFilter($filter1);

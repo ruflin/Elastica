@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Filter;
+
 use Elastica\Filter\AbstractFilter;
 
 /**
@@ -11,7 +12,7 @@ use Elastica\Filter\AbstractFilter;
  * @author Michael Maclean <mgdm@php.net>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-polygon-filter.html
  */
-class GeoPolygonFilter extends AbstractFilter
+class GeoPolygon extends AbstractFilter
 {
     /**
      * Key

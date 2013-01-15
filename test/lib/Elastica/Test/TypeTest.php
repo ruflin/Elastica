@@ -9,7 +9,7 @@ use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Script;
 use Elastica\Search;
-use Elastica\Filter\TermFilter;
+use Elastica\Filter\Term;
 use Elastica\Type;
 use Elastica\Type\MappingType;
 use Elastica\Test\Base as BaseTest;
@@ -288,7 +288,7 @@ class TypeTest extends BaseTest
 
         // Return just the visible similar
         $query              = new Query();
-        $filterTerm         = new TermFilter();
+        $filterTerm         = new Term();
         $filterTerm->setTerm('visible', true);
         $query->setFilter($filterTerm);
 

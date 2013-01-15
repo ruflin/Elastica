@@ -3,7 +3,7 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
-use Elastica\Filter\GeoDistanceFilter;
+use Elastica\Filter\GeoDistance;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
@@ -46,7 +46,7 @@ class GeoDistanceTest extends BaseTest
 
         // Only one point should be in radius
         $query = new Query();
-        $geoFilter = new GeoDistanceFilter('point', array('lat' => 30, 'lon' => 40), '1km');
+        $geoFilter = new GeoDistance('point', array('lat' => 30, 'lon' => 40), '1km');
 
         $query = new Query(new MatchAll());
         $query->setFilter($geoFilter);
@@ -54,7 +54,7 @@ class GeoDistanceTest extends BaseTest
 
         // Both points should be inside
         $query = new Query();
-        $geoFilter = new GeoDistanceFilter('point', array('lat' => 30, 'lon' => 40), '40000km');
+        $geoFilter = new GeoDistance('point', array('lat' => 30, 'lon' => 40), '40000km');
         $query = new Query(new MatchAll());
         $query->setFilter($geoFilter);
         $index->refresh();
@@ -71,7 +71,7 @@ class GeoDistanceTest extends BaseTest
         );
         $distance = '10km';
 
-        $filter = new GeoDistanceFilter($key, $location, $distance);
+        $filter = new GeoDistance($key, $location, $distance);
 
         $expected = array(
             'geo_distance' => array(
@@ -91,7 +91,7 @@ class GeoDistanceTest extends BaseTest
         $location = 'u09tvqx';
         $distance = '10km';
 
-        $filter = new GeoDistanceFilter($key, $location, $distance);
+        $filter = new GeoDistance($key, $location, $distance);
 
         $expected = array(
             'geo_distance' => array(
@@ -112,7 +112,7 @@ class GeoDistanceTest extends BaseTest
         $longitude = 2.35;
         $distance = '10km';
 
-        $filter = new GeoDistanceFilter($key, $latitude, $longitude, $distance);
+        $filter = new GeoDistance($key, $latitude, $longitude, $distance);
 
         $expected = array(
             'geo_distance' => array(
@@ -131,8 +131,8 @@ class GeoDistanceTest extends BaseTest
 
     public function testSetDistanceType()
     {
-        $filter = new GeoDistanceFilter('location', array('lat' => 48.86, 'lon' => 2.35), '10km');
-        $distanceType = GeoDistanceFilter::DISTANCE_TYPE_ARC;
+        $filter = new GeoDistance('location', array('lat' => 48.86, 'lon' => 2.35), '10km');
+        $distanceType = GeoDistance::DISTANCE_TYPE_ARC;
         $filter->setDistanceType($distanceType);
 
         $data = $filter->toArray();
@@ -142,8 +142,8 @@ class GeoDistanceTest extends BaseTest
 
     public function testSetOptimizeBbox()
     {
-        $filter = new GeoDistanceFilter('location', array('lat' => 48.86, 'lon' => 2.35), '10km');
-        $optimizeBbox = GeoDistanceFilter::OPTIMIZE_BBOX_MEMORY;
+        $filter = new GeoDistance('location', array('lat' => 48.86, 'lon' => 2.35), '10km');
+        $optimizeBbox = GeoDistance::OPTIMIZE_BBOX_MEMORY;
         $filter->setOptimizeBbox($optimizeBbox);
 
         $data = $filter->toArray();

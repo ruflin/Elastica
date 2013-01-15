@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Filter;
+
 use Elastica\Exception\InvalidException;
 use Elastica\Query\AbstractQuery;
 
@@ -12,7 +13,7 @@ use Elastica\Query\AbstractQuery;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/query-filter.html
  */
-class QueryFilter extends AbstractFilter
+class Query extends AbstractFilter
 {
     /**
      * Query
@@ -36,7 +37,7 @@ class QueryFilter extends AbstractFilter
      * Set query
      *
      * @param  array|\Elastica\Query\AbstractQuery  $query
-     * @return \Elastica\Filter\QueryFilter         Query object
+     * @return \Elastica\Filter\Query         Query object
      * @throws \Elastica\Exception\InvalidException Invalid param
      */
     public function setQuery($query)
@@ -60,7 +61,7 @@ class QueryFilter extends AbstractFilter
     protected function _getBaseName()
     {
         if (empty($this->_params)) {
-            return parent::_getBaseName();
+            return 'query';
         } else {
             return 'fquery';
         }

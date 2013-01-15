@@ -10,7 +10,7 @@ namespace Elastica\Filter;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/term-filter.html
  */
-class TermFilter extends AbstractFilter
+class Term extends AbstractFilter
 {
     /**
      * Construct term filter
@@ -26,7 +26,7 @@ class TermFilter extends AbstractFilter
      * Sets/overwrites key and term directly
      *
      * @param  array                      $term Key value pair
-     * @return \Elastica\Filter\TermFilter Filter object
+     * @return \Elastica\Filter\Term Filter object
      */
     public function setRawTerm(array $term)
     {
@@ -38,7 +38,7 @@ class TermFilter extends AbstractFilter
      *
      * @param  string                     $key   Key to query
      * @param  string|array               $value Values(s) for the query. Boost can be set with array
-     * @return \Elastica\Filter\TermFilter Filter object
+     * @return \Elastica\Filter\Term Filter object
      */
     public function setTerm($key, $value)
     {
