@@ -13,7 +13,7 @@ use Elastica\Script;
  * @author Wu Yang <darkyoung@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/custom-score-query.html
  */
-class CustomScoreQuery extends AbstractQuery
+class CustomScore extends AbstractQuery
 {
     /**
      * Constructor
@@ -33,7 +33,7 @@ class CustomScoreQuery extends AbstractQuery
      * Sets query object
      *
      * @param  string|\Elastica\Query|\Elastica\Query\Abstract $query
-     * @return \Elastica\Query\CustomScoreQuery
+     * @return \Elastica\Query\CustomScore
      */
     public function setQuery($query)
     {
@@ -47,7 +47,7 @@ class CustomScoreQuery extends AbstractQuery
      * Set script
      *
      * @param  string|\Elastica\Script          $script
-     * @return \Elastica\Query\CustomScoreQuery
+     * @return \Elastica\Query\CustomScore
      */
     public function setScript($script)
     {
@@ -63,7 +63,7 @@ class CustomScoreQuery extends AbstractQuery
      * Add params
      *
      * @param  array                           $params
-     * @return \Elastica\Query\CustomScoreQuery
+     * @return \Elastica\Query\CustomScore
      */
     public function addParams(array $params)
     {

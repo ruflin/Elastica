@@ -5,7 +5,7 @@ namespace Elastica\Test\Filter;
 use Elastica\Document;
 use Elastica\Filter\GeoDistanceRangeFilter;
 use Elastica\Query;
-use Elastica\Query\MatchAllQuery;
+use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
 class GeoDistanceRangeTest extends BaseTest
@@ -52,7 +52,7 @@ class GeoDistanceRangeTest extends BaseTest
             array('from' => '0km', 'to' => '2km')
         );
 
-        $query = new Query(new MatchAllQuery());
+        $query = new Query(new MatchAll());
         $query->setFilter($geoFilter);
         $this->assertEquals(1, $type->search($query)->count());
 
@@ -63,7 +63,7 @@ class GeoDistanceRangeTest extends BaseTest
             array('lat' => 30, 'lon' => 40),
             array('gte' => '0km', 'lte' => '40000km')
         );
-        $query = new Query(new MatchAllQuery());
+        $query = new Query(new MatchAll());
         $query->setFilter($geoFilter);
         $index->refresh();
 

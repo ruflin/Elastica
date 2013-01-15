@@ -4,21 +4,22 @@ namespace Elastica\Query;
 use Elastica\Query as BaseQuery;
 
 /**
- * Returns child documents having parent docs matching the query
+ * Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.
  *
  * @category Xodoa
  * @package Elastica
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/has-parent-query.html
+ * @author Wu Yang <darkyoung@gmail.com>
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html
  */
-class HasParentQuery extends AbstractQuery
+class TopChildren extends AbstractQuery
 {
     /**
-     * Construct HasChild Query
+     * Construct topChildren query
      *
      * @param string|\Elastica\Query $query Query string or a Elastica\Query object
      * @param string                $type  Parent document type
      */
-    public function __construct($query, $type)
+    public function __construct($query, $type = null)
     {
         $this->setQuery($query);
         $this->setType($type);
@@ -28,7 +29,7 @@ class HasParentQuery extends AbstractQuery
      * Sets query object
      *
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Filter\HasParentFilter
+     * @return \Elastica\Query\TopChildren
      */
     public function setQuery($query)
     {
@@ -42,21 +43,10 @@ class HasParentQuery extends AbstractQuery
      * Set type of the parent document
      *
      * @param  string                          $type Parent document type
-     * @return \Elastica\Filter\HasParentFilter Current object
+     * @return \Elastica\Query\TopChildren Current object
      */
     public function setType($type)
     {
         return $this->setParam('type', $type);
-    }
-
-    /**
-     * Sets the scope
-     *
-     * @param  string                          $scope Scope
-     * @return \Elastica\Filter\HasParentFilter Current object
-     */
-    public function setScope($scope)
-    {
-        return $this->setParam('_scope', $scope);
     }
 }

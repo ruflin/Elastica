@@ -12,13 +12,13 @@ use Elastica\Query\AbstractQuery;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/bool-query.html
  */
-class BoolQuery extends AbstractQuery
+class Bool extends AbstractQuery
 {
     /**
      * Add should part to query
      *
      * @param  \Elastica\Query\AbstractQuery|array $args Should query
-     * @return \Elastica\Query\BoolQuery           Current object
+     * @return \Elastica\Query\Bool           Current object
      */
     public function addShould($args)
     {
@@ -29,7 +29,7 @@ class BoolQuery extends AbstractQuery
      * Add must part to query
      *
      * @param  \Elastica\Query\AbstractQuery|array $args Must query
-     * @return \Elastica\Query\BoolQuery           Current object
+     * @return \Elastica\Query\Bool           Current object
      */
     public function addMust($args)
     {
@@ -40,7 +40,7 @@ class BoolQuery extends AbstractQuery
      * Add must not part to query
      *
      * @param  \Elastica\Query\AbstractQuery|array $args Must not query
-     * @return \Elastica\Query\BoolQuery           Current object
+     * @return \Elastica\Query\Bool           Current object
      */
     public function addMustNot($args)
     {
@@ -52,7 +52,7 @@ class BoolQuery extends AbstractQuery
      *
      * @param  string                              $type Query type
      * @param  \Elastica\Query\AbstractQuery|array  $args Query
-     * @return \Elastica\Query\BoolQuery
+     * @return \Elastica\Query\Bool
      * @throws \Elastica\Exception\InvalidException If not valid query
      */
     protected function _addQuery($type, $args)

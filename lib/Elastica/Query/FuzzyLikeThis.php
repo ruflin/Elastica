@@ -10,7 +10,7 @@ namespace Elastica\Query;
  * @author Raul Martinez, Jr <juneym@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/flt-query.html
  */
-class FuzzyLikeThisQuery extends AbstractQuery
+class FuzzyLikeThis extends AbstractQuery
 {
     /**
      * Field names
@@ -65,7 +65,7 @@ class FuzzyLikeThisQuery extends AbstractQuery
      * Adds field to flt query
      *
      * @param  array                             $fields Field names
-     * @return \Elastica\Query\FuzzyLikeThisQuery Current object
+     * @return \Elastica\Query\FuzzyLikeThis Current object
      */
     public function addFields(array $fields)
     {
@@ -78,7 +78,7 @@ class FuzzyLikeThisQuery extends AbstractQuery
      * Set the "like_text" value
      *
      * @param  string                            $text
-     * @return \Elastica\Query\FuzzyLikeThisQuery This current object
+     * @return \Elastica\Query\FuzzyLikeThis This current object
      */
     public function setLikeText($text)
     {
@@ -92,7 +92,7 @@ class FuzzyLikeThisQuery extends AbstractQuery
      * Set the "ignore_tf" value (ignore term frequency)
      *
      * @param  bool                              $ignoreTF
-     * @return \Elastica\Query\FuzzyLikeThisQuery Current object
+     * @return \Elastica\Query\FuzzyLikeThis Current object
      */
     public function setIgnoreTF($ignoreTF)
     {
@@ -105,7 +105,7 @@ class FuzzyLikeThisQuery extends AbstractQuery
      * Set the minimum similarity
      *
      * @param  int                               $value
-     * @return \Elastica\Query\FuzzyLikeThisQuery This current object
+     * @return \Elastica\Query\FuzzyLikeThis This current object
      */
     public function setMinSimilarity($value)
     {
@@ -119,7 +119,7 @@ class FuzzyLikeThisQuery extends AbstractQuery
      * Set boost
      *
      * @param  float                             $value Boost value
-     * @return \Elastica\Query\FuzzyLikeThisQuery Query object
+     * @return \Elastica\Query\FuzzyLikeThis Query object
      */
     public function setBoost($value)
     {
@@ -132,7 +132,7 @@ class FuzzyLikeThisQuery extends AbstractQuery
      * Set Prefix Length
      *
      * @param  int                               $value Prefix length
-     * @return \Elastica\Query\FuzzyLikeThisQuery
+     * @return \Elastica\Query\FuzzyLikeThis
      */
     public function setPrefixLength($value)
     {
@@ -145,7 +145,7 @@ class FuzzyLikeThisQuery extends AbstractQuery
      * Set max_query_terms
      *
      * @param  int                               $value Max query terms value
-     * @return \Elastica\Query\FuzzyLikeThisQuery
+     * @return \Elastica\Query\FuzzyLikeThis
      */
     public function setMaxQueryTerms($value)
     {

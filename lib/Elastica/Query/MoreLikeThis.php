@@ -10,13 +10,13 @@ namespace Elastica\Query;
  * @author Raul Martinez, Jr <juneym@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/mlt-query.html
  */
-class MoreLikeThisQuery extends AbstractQuery
+class MoreLikeThis extends AbstractQuery
 {
     /**
      * Adds field to mlt query
      *
      * @param  array                            $fields Field names
-     * @return \Elastica\Query\MoreLikeThisQuery Current object
+     * @return \Elastica\Query\MoreLikeThis Current object
      */
     public function setFields(array $fields)
     {
@@ -27,7 +27,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * Set the "like_text" value
      *
      * @param  string                           $likeText
-     * @return \Elastica\Query\MoreLikeThisQuery This current object
+     * @return \Elastica\Query\MoreLikeThis This current object
      */
     public function setLikeText($likeText)
     {
@@ -40,7 +40,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * Set boost
      *
      * @param  float                            $boost Boost value
-     * @return \Elastica\Query\MoreLikeThisQuery Query object
+     * @return \Elastica\Query\MoreLikeThis Query object
      */
     public function setBoost($boost)
     {
@@ -51,7 +51,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * Set max_query_terms
      *
      * @param  int                              $maxQueryTerms Max query terms value
-     * @return \Elastica\Query\MoreLikeThisQuery
+     * @return \Elastica\Query\MoreLikeThis
      */
     public function setMaxQueryTerms($maxQueryTerms)
     {
@@ -62,7 +62,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * Set percent terms to match
      *
      * @param  float                            $percentTermsToMatch Percentage
-     * @return \Elastica\Query\MoreLikeThisQuery
+     * @return \Elastica\Query\MoreLikeThis
      */
     public function setPercentTermsToMatch($percentTermsToMatch)
     {
@@ -73,7 +73,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * Set min term frequency
      *
      * @param  int                              $minTermFreq
-     * @return \Elastica\Query\MoreLikeThisQuery
+     * @return \Elastica\Query\MoreLikeThis
      */
     public function setMinTermFrequency($minTermFreq)
     {
@@ -84,7 +84,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * set min document frequency
      *
      * @param  int                              $minDocFreq
-     * @return \Elastica\Query\MoreLikeThisQuery
+     * @return \Elastica\Query\MoreLikeThis
      */
     public function setMinDocFrequency($minDocFreq)
     {
@@ -95,7 +95,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * set max document frequency
      *
      * @param  int                              $maxDocFreq
-     * @return \Elastica\Query\MoreLikeThisQuery
+     * @return \Elastica\Query\MoreLikeThis
      */
     public function setMaxDocFrequency($maxDocFreq)
     {
@@ -106,7 +106,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * Set min word length
      *
      * @param  int                              $minWordLength
-     * @return \Elastica\Query\MoreLikeThisQuery
+     * @return \Elastica\Query\MoreLikeThis
      */
     public function setMinWordLength($minWordLength)
     {
@@ -117,7 +117,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * Set max word length
      *
      * @param  int                              $maxWordLength
-     * @return \Elastica\Query\MoreLikeThisQuery
+     * @return \Elastica\Query\MoreLikeThis
      */
     public function setMaxWordLength($maxWordLength)
     {
@@ -128,7 +128,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * Set boost terms
      *
      * @param  bool                             $boostTerms
-     * @return \Elastica\Query\MoreLikeThisQuery
+     * @return \Elastica\Query\MoreLikeThis
      * @link http://www.elasticsearch.org/guide/reference/query-dsl/mlt-query.html
      */
     public function setBoostTerms($boostTerms)
@@ -140,7 +140,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * Set analyzer
      *
      * @param  string                           $analyzer
-     * @return \Elastica\Query\MoreLikeThisQuery
+     * @return \Elastica\Query\MoreLikeThis
      */
     public function setAnalyzer($analyzer)
     {
@@ -153,7 +153,7 @@ class MoreLikeThisQuery extends AbstractQuery
      * Set stop words
      *
      * @param  array                            $stopWords
-     * @return \Elastica\Query\MoreLikeThisQuery
+     * @return \Elastica\Query\MoreLikeThis
      */
     public function setStopWords(array $stopWords)
     {

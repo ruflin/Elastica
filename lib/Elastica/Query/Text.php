@@ -10,14 +10,14 @@ namespace Elastica\Query;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/text-query.html
  */
-class TextQuery extends AbstractQuery
+class Text extends AbstractQuery
 {
     /**
      * Sets a param for the message array
      *
      * @param  string                   $field
      * @param  mixed                    $values
-     * @return \Elastica\Query\TextQuery
+     * @return \Elastica\Query\Text
      */
     public function setField($field, $values)
     {
@@ -30,7 +30,7 @@ class TextQuery extends AbstractQuery
      * @param  string                   $field
      * @param  string                   $key
      * @param  string                   $value
-     * @return \Elastica\Query\TextQuery
+     * @return \Elastica\Query\Text
      */
     public function setFieldParam($field, $key, $value)
     {
@@ -48,7 +48,7 @@ class TextQuery extends AbstractQuery
      *
      * @param  string                   $field
      * @param  string                   $query
-     * @return \Elastica\Query\TextQuery
+     * @return \Elastica\Query\Text
      */
     public function setFieldQuery($field, $query)
     {
@@ -60,7 +60,7 @@ class TextQuery extends AbstractQuery
      *
      * @param  string                   $field
      * @param  string                   $type  Text query type
-     * @return \Elastica\Query\TextQuery
+     * @return \Elastica\Query\Text
      */
     public function setFieldType($field, $type)
     {
@@ -72,7 +72,7 @@ class TextQuery extends AbstractQuery
      *
      * @param  string                   $field
      * @param  int                      $maxExpansions
-     * @return \Elastica\Query\TextQuery
+     * @return \Elastica\Query\Text
      */
     public function setFieldMaxExpansions($field, $maxExpansions)
     {

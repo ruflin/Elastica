@@ -5,7 +5,7 @@ namespace Elastica\Test\Type;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Query;
-use Elastica\Query\QueryStringQuery;
+use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 use Elastica\Type\MappingType;
@@ -42,7 +42,7 @@ class MappingTest extends BaseTest
         $type->addDocument($doc);
 
         $index->refresh();
-        $queryString = new QueryStringQuery('ruflin');
+        $queryString = new QueryString('ruflin');
         $query = Query::create($queryString);
         $query->setFields(array('*'));
 

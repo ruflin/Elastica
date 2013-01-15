@@ -13,7 +13,7 @@ use Elastica\Type;
  * @author Tim Rupp
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/ids-query.html
  */
-class IdsQuery extends AbstractQuery
+class Ids extends AbstractQuery
 {
     /**
      * Params
@@ -38,7 +38,7 @@ class IdsQuery extends AbstractQuery
      * Adds one more filter to the and filter
      *
      * @param  string                  $id Adds id to filter
-     * @return \Elastica\Query\IdsQuery Current object
+     * @return \Elastica\Query\Ids Current object
      */
     public function addId($id)
     {
@@ -51,7 +51,7 @@ class IdsQuery extends AbstractQuery
      * Adds one more type to query
      *
      * @param  string|\Elastica\Type    $type Type name or object
-     * @return \Elastica\Query\IdsQuery Current object
+     * @return \Elastica\Query\Ids Current object
      */
     public function addType($type)
     {
@@ -91,7 +91,7 @@ class IdsQuery extends AbstractQuery
      * Sets the ids to filter
      *
      * @param  array|string            $ids List of ids
-     * @return \Elastica\Query\IdsQuery Current object
+     * @return \Elastica\Query\Ids Current object
      */
     public function setIds($ids)
     {

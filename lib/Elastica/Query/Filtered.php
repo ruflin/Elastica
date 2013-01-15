@@ -11,7 +11,7 @@ use Elastica\Filter\AbstractFilter;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/filtered-query.html
  */
-class FilteredQuery extends AbstractQuery
+class Filtered extends AbstractQuery
 {
     /**
      * Query

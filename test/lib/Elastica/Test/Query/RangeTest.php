@@ -3,7 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\RangeQuery;
+use Elastica\Query\Range;
 use Elastica\Test\Base as BaseTest;
 
 class RangeTest extends BaseTest
@@ -27,11 +27,11 @@ class RangeTest extends BaseTest
         $index->optimize();
         $index->refresh();
 
-        $query = new RangeQuery('age', array('from' => 10, 'to' => 20));
+        $query = new Range('age', array('from' => 10, 'to' => 20));
         $result = $type->search($query)->count();
         $this->assertEquals(1, $result);
 
-        $query = new RangeQuery();
+        $query = new Range();
         $query->addField('height', array('gte' => 160));
 
         $result = $type->search($query)->count();
@@ -40,7 +40,7 @@ class RangeTest extends BaseTest
 
     public function testToArray()
     {
-        $range = new RangeQuery();
+        $range = new Range();
 
         $field = array('from' => 20, 'to' => 40);
         $range->addField('age', $field);
@@ -57,7 +57,7 @@ class RangeTest extends BaseTest
     public function testConstruct()
     {
         $ranges = array('from' => 20, 'to' => 40);
-        $range = new RangeQuery(
+        $range = new Range(
             'age',
             $ranges
         );

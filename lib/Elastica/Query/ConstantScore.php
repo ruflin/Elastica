@@ -11,7 +11,7 @@ use Elastica\Filter\AbstractFilter;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/constant-score-query.html
  */
-class ConstantScoreQuery extends AbstractQuery
+class ConstantScore extends AbstractQuery
 {
     /**
      * Construct constant score query

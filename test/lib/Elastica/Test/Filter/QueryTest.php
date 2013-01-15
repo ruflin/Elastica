@@ -2,7 +2,7 @@
 
 namespace Elastica\Test\Filter;
 
-use Elastica\Query\QueryStringQuery;
+use Elastica\Query\QueryString;
 use Elastica\Filter\QueryFilter;
 use Elastica\Test\Base as BaseTest;
 
@@ -10,7 +10,7 @@ class QueryTest extends BaseTest
 {
     public function testSimple()
     {
-        $query = new QueryStringQuery('foo bar');
+        $query = new QueryString('foo bar');
         $filter = new QueryFilter($query);
 
         $expected = array(
@@ -26,7 +26,7 @@ class QueryTest extends BaseTest
 
     public function testExtended()
     {
-        $query = new QueryStringQuery('foo bar');
+        $query = new QueryString('foo bar');
         $filter = new QueryFilter($query);
         $filter->setCached(true);
 

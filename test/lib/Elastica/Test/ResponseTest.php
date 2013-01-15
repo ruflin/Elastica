@@ -4,7 +4,7 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Facet\DateHistogramFacet;
 use Elastica\Query;
-use Elastica\Query\MatchAllQuery;
+use Elastica\Query\MatchAll;
 use Elastica\Type\MappingType;
 use Elastica\Test\Base as BaseTest;
 
@@ -39,7 +39,7 @@ class ResponseTest extends BaseTest
         $type->addDocument($doc);
 
         $query = new Query();
-        $query->setQuery(new MatchAllQuery());
+        $query->setQuery(new MatchAll());
         $index->refresh();
 
         $resultSet = $type->search($query);

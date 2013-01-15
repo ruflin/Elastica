@@ -10,7 +10,7 @@ namespace Elastica\Query;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/wildcard-query.html
  */
-class WildcardQuery extends AbstractQuery
+class Wildcard extends AbstractQuery
 {
     /**
      * Construct wildcard query
@@ -32,7 +32,7 @@ class WildcardQuery extends AbstractQuery
      * @param  string                       $key
      * @param  string                       $value
      * @param  float                        $boost
-     * @return \Elastica\Query\WildcardQuery
+     * @return \Elastica\Query\Wildcard
      */
     public function setValue($key, $value, $boost = 1.0)
     {

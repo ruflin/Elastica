@@ -4,8 +4,8 @@ namespace Elastica\Test\Query;
 
 use Elastica\Filter\RangeFilter;
 use Elastica\Filter\TermFilter;
-use Elastica\Query\CustomFiltersScoreQuery;
-use Elastica\Query\QueryStringQuery;
+use Elastica\Query\CustomFiltersScore;
+use Elastica\Query\QueryString;
 use Elastica\Script;
 use Elastica\Test\Base as BaseTest;
 
@@ -13,8 +13,8 @@ class CustomFiltersScoreTest extends BaseTest
 {
     public function testConstructor()
     {
-        $query = new QueryStringQuery('elastica');
-        $customFiltersScoreQuery = new CustomFiltersScoreQuery($query);
+        $query = new QueryString('elastica');
+        $customFiltersScoreQuery = new CustomFiltersScore($query);
 
         $expected = array(
             'custom_filters_score' => array(
@@ -26,7 +26,7 @@ class CustomFiltersScoreTest extends BaseTest
 
     public function testEmptyConstructor()
     {
-        $customFiltersScoreQuery = new CustomFiltersScoreQuery();
+        $customFiltersScoreQuery = new CustomFiltersScore();
 
         $expected = array(
             'custom_filters_score' => array(
@@ -41,9 +41,9 @@ class CustomFiltersScoreTest extends BaseTest
 
     public function testSetQuery()
     {
-        $customFiltersScoreQuery = new CustomFiltersScoreQuery();
+        $customFiltersScoreQuery = new CustomFiltersScore();
 
-        $query = new QueryStringQuery('elastica');
+        $query = new QueryString('elastica');
         $customFiltersScoreQuery->setQuery($query);
 
         $expected = array(
@@ -59,7 +59,7 @@ class CustomFiltersScoreTest extends BaseTest
      */
     public function testSetQueryInvalid()
     {
-        $customFiltersScoreQuery = new CustomFiltersScoreQuery();
+        $customFiltersScoreQuery = new CustomFiltersScore();
 
         $query = new \stdClass();
         $customFiltersScoreQuery->setQuery($query);
@@ -67,7 +67,7 @@ class CustomFiltersScoreTest extends BaseTest
 
     public function testAddFilter()
     {
-        $customFiltersScoreQuery = new CustomFiltersScoreQuery();
+        $customFiltersScoreQuery = new CustomFiltersScore();
 
         $rangeFilter = new RangeFilter('age', array('from' => 20, 'to' => 30));
         $rangeBoost = 2.5;
@@ -117,7 +117,7 @@ class CustomFiltersScoreTest extends BaseTest
 
     public function testAddFilterScript()
     {
-        $customFiltersScoreQuery = new CustomFiltersScoreQuery();
+        $customFiltersScoreQuery = new CustomFiltersScore();
 
         $rangeFilter = new RangeFilter('age', array('from' => 20, 'to' => 30));
         $rangeScript = "doc['num1'].value > 1";
@@ -139,7 +139,7 @@ class CustomFiltersScoreTest extends BaseTest
 
         $this->assertEquals($expected, $customFiltersScoreQuery->toArray());
 
-        $customFiltersScoreQuery = new CustomFiltersScoreQuery();
+        $customFiltersScoreQuery = new CustomFiltersScore();
 
         $script = "doc['num1'].value > 1";
         $rangeScript = new Script($script);
@@ -193,7 +193,7 @@ class CustomFiltersScoreTest extends BaseTest
 
     public function testSetScriptParams()
     {
-        $customFiltersScoreQuery = new CustomFiltersScoreQuery();
+        $customFiltersScoreQuery = new CustomFiltersScore();
 
         $rangeFilter = new RangeFilter('age', array('from' => 20, 'to' => 30));
         $rangeScript = "doc['num1'].value > 1";
@@ -225,7 +225,7 @@ class CustomFiltersScoreTest extends BaseTest
 
     public function testSetScriptLang()
     {
-        $customFiltersScoreQuery = new CustomFiltersScoreQuery();
+        $customFiltersScoreQuery = new CustomFiltersScore();
 
         $rangeFilter = new RangeFilter('age', array('from' => 20, 'to' => 30));
         $rangeScript = "doc['num1'].value > 1";
@@ -254,13 +254,13 @@ class CustomFiltersScoreTest extends BaseTest
 
     public function testSetScoreMode()
     {
-        $customFiltersScoreQuery = new CustomFiltersScoreQuery();
+        $customFiltersScoreQuery = new CustomFiltersScore();
 
         $rangeFilter = new RangeFilter('age', array('from' => 20, 'to' => 30));
         $rangeBoost = 2.5;
         $customFiltersScoreQuery->addFilter($rangeFilter, $rangeBoost);
 
-        $customFiltersScoreQuery->setScoreMode(CustomFiltersScoreQuery::SCORE_MODE_TOTAL);
+        $customFiltersScoreQuery->setScoreMode(CustomFiltersScore::SCORE_MODE_TOTAL);
 
         $expected = array(
             'custom_filters_score' => array(
@@ -273,7 +273,7 @@ class CustomFiltersScoreTest extends BaseTest
                         'boost' => $rangeBoost,
                     )
                 ),
-                'score_mode' => CustomFiltersScoreQuery::SCORE_MODE_TOTAL,
+                'score_mode' => CustomFiltersScore::SCORE_MODE_TOTAL,
             )
         );
         $this->assertEquals($expected, $customFiltersScoreQuery->toArray());

@@ -10,14 +10,14 @@ namespace Elastica\Query;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/fuzzy-query.html
  */
-class FuzzyQuery extends AbstractQuery
+class Fuzzy extends AbstractQuery
 {
     /**
      * Adds field to fuzzy query
      *
      * @param  string                    $fieldName Field name
      * @param  array                     $args      Data array
-     * @return \Elastica\Query\FuzzyQuery Current object
+     * @return \Elastica\Query\Fuzzy Current object
      */
     public function addField($fieldName, array $args)
     {

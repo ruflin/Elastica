@@ -4,14 +4,13 @@ namespace Elastica\Query;
 use Elastica\Query as BaseQuery;
 
 /**
- * Returns parent documents having child docs matching the query
+ * Returns child documents having parent docs matching the query
  *
  * @category Xodoa
  * @package Elastica
- * @author Fabian Vogler <fabian@equivalence.ch>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/has-child-query.html
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/has-parent-query.html
  */
-class HasChildQuery extends AbstractQuery
+class HasParent extends AbstractQuery
 {
     /**
      * Construct HasChild Query
@@ -19,7 +18,7 @@ class HasChildQuery extends AbstractQuery
      * @param string|\Elastica\Query $query Query string or a Elastica\Query object
      * @param string                $type  Parent document type
      */
-    public function __construct($query, $type = null)
+    public function __construct($query, $type)
     {
         $this->setQuery($query);
         $this->setType($type);
@@ -29,7 +28,7 @@ class HasChildQuery extends AbstractQuery
      * Sets query object
      *
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Query\HasChild
+     * @return \Elastica\Filter\HasParentFilter
      */
     public function setQuery($query)
     {
@@ -42,8 +41,8 @@ class HasChildQuery extends AbstractQuery
     /**
      * Set type of the parent document
      *
-     * @param  string                       $type Parent document type
-     * @return \Elastica\Query\HasChildQuery Current object
+     * @param  string                          $type Parent document type
+     * @return \Elastica\Filter\HasParentFilter Current object
      */
     public function setType($type)
     {
@@ -53,8 +52,8 @@ class HasChildQuery extends AbstractQuery
     /**
      * Sets the scope
      *
-     * @param  string                       $scope Scope
-     * @return \Elastica\Query\HasChildQuery Current object
+     * @param  string                          $scope Scope
+     * @return \Elastica\Filter\HasParentFilter Current object
      */
     public function setScope($scope)
     {

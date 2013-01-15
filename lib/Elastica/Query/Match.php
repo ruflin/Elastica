@@ -10,14 +10,14 @@ namespace Elastica\Query;
  * @author F21
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/match-query.html
  */
-class MatchQuery extends AbstractQuery
+class Match extends AbstractQuery
 {
     /**
      * Sets a param for the message array
      *
      * @param  string                    $field
      * @param  mixed                     $values
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setField($field, $values)
     {
@@ -30,7 +30,7 @@ class MatchQuery extends AbstractQuery
      * @param  string                    $field
      * @param  string                    $key
      * @param  string                    $value
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setFieldParam($field, $key, $value)
     {
@@ -48,7 +48,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  string                    $query
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setFieldQuery($field, $query)
     {
@@ -60,7 +60,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  string                    $type
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setFieldType($field, $type)
     {
@@ -72,7 +72,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  string                    $operator
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setFieldOperator($field, $operator)
     {
@@ -84,7 +84,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  string                    $analyzer
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setFieldAnalyzer($field, $analyzer)
     {
@@ -98,7 +98,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  float                     $boost
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setFieldBoost($field, $boost = 1.0)
     {
@@ -110,7 +110,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  int                       $minimumShouldMatch
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setFieldMinimumShouldMatch($field, $minimumShouldMatch)
     {
@@ -122,7 +122,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  float                     $fuzziness
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setFieldFuzziness($field, $fuzziness)
     {
@@ -134,7 +134,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  string                    $fuzzyRewrite
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setFieldFuzzyRewrite($field, $fuzzyRewrite)
     {
@@ -146,7 +146,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  int                       $prefixLength
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setFieldPrefixLength($field, $prefixLength)
     {
@@ -158,7 +158,7 @@ class MatchQuery extends AbstractQuery
      *
      * @param  string                    $field
      * @param  int                       $maxExpansions
-     * @return \Elastica\Query\MatchQuery
+     * @return \Elastica\Query\Match
      */
     public function setFieldMaxExpansions($field, $maxExpansions)
     {

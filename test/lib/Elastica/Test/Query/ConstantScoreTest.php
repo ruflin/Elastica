@@ -4,7 +4,7 @@ namespace Elastica\Test\Query;
 
 use Elastica\Filter\TermFilter;
 use Elastica\Filter\IdsFilter;
-use Elastica\Query\ConstantScoreQuery;
+use Elastica\Query\ConstantScore;
 use Elastica\Test\Base as BaseTest;
 
 class ConstantScoreTest extends BaseTest
@@ -55,7 +55,7 @@ class ConstantScoreTest extends BaseTest
      */
     public function testSimple($filter, $expected)
     {
-        $query = new ConstantScoreQuery();
+        $query = new ConstantScore();
         $query->setFilter($filter);
         if (is_string($expected)) {
             $expected = json_decode($expected, true);
@@ -65,7 +65,7 @@ class ConstantScoreTest extends BaseTest
 
     public function testToArray()
     {
-        $query = new ConstantScoreQuery();
+        $query = new ConstantScore();
 
         $boost = 1.2;
         $filter = new IdsFilter();
@@ -89,7 +89,7 @@ class ConstantScoreTest extends BaseTest
         $filter = new IdsFilter();
         $filter->setIds(array(1));
 
-        $query = new ConstantScoreQuery($filter);
+        $query = new ConstantScore($filter);
 
         $expectedArray = array(
             'constant_score' => array(
@@ -103,7 +103,7 @@ class ConstantScoreTest extends BaseTest
 
     public function testConstructEmpty()
     {
-        $query = new ConstantScoreQuery();
+        $query = new ConstantScore();
         $expectedArray = array('constant_score' => array());
 
         $this->assertEquals($expectedArray, $query->toArray());

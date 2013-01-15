@@ -4,17 +4,17 @@ namespace Elastica\Query;
 use Elastica\Query as BaseQuery;
 
 /**
- * Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.
+ * Returns parent documents having child docs matching the query
  *
  * @category Xodoa
  * @package Elastica
- * @author Wu Yang <darkyoung@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html
+ * @author Fabian Vogler <fabian@equivalence.ch>
+ * @link http://www.elasticsearch.org/guide/reference/query-dsl/has-child-query.html
  */
-class TopChildrenQuery extends AbstractQuery
+class HasChild extends AbstractQuery
 {
     /**
-     * Construct topChildren query
+     * Construct HasChild Query
      *
      * @param string|\Elastica\Query $query Query string or a Elastica\Query object
      * @param string                $type  Parent document type
@@ -29,7 +29,7 @@ class TopChildrenQuery extends AbstractQuery
      * Sets query object
      *
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Query\TopChildrenQuery
+     * @return \Elastica\Query\HasChild
      */
     public function setQuery($query)
     {
@@ -42,11 +42,22 @@ class TopChildrenQuery extends AbstractQuery
     /**
      * Set type of the parent document
      *
-     * @param  string                          $type Parent document type
-     * @return \Elastica\Query\TopChildrenQuery Current object
+     * @param  string                       $type Parent document type
+     * @return \Elastica\Query\HasChild Current object
      */
     public function setType($type)
     {
         return $this->setParam('type', $type);
+    }
+
+    /**
+     * Sets the scope
+     *
+     * @param  string                       $scope Scope
+     * @return \Elastica\Query\HasChild Current object
+     */
+    public function setScope($scope)
+    {
+        return $this->setParam('_scope', $scope);
     }
 }

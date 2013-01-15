@@ -3,7 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\IdsQuery;
+use Elastica\Query\Ids;
 use Elastica\Test\Base as BaseTest;
 
 class IdsTest extends BaseTest
@@ -47,7 +47,7 @@ class IdsTest extends BaseTest
 
     public function testSetIdsSearchSingle()
     {
-        $query = new IdsQuery();
+        $query = new Ids();
         $query->setIds('1');
 
         $resultSet = $this->_type->search($query);
@@ -57,7 +57,7 @@ class IdsTest extends BaseTest
 
     public function testSetIdsSearchArray()
     {
-        $query = new IdsQuery();
+        $query = new Ids();
         $query->setIds(array('1', '2'));
 
         $resultSet = $this->_type->search($query);
@@ -67,7 +67,7 @@ class IdsTest extends BaseTest
 
     public function testAddIdsSearchSingle()
     {
-        $query = new IdsQuery();
+        $query = new Ids();
         $query->addId('3');
 
         $resultSet = $this->_type->search($query);
@@ -77,7 +77,7 @@ class IdsTest extends BaseTest
 
     public function testComboIdsSearchArray()
     {
-        $query = new IdsQuery();
+        $query = new Ids();
 
         $query->setIds(array('1', '2'));
         $query->addId('3');
@@ -89,7 +89,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeSingleSearchSingle()
     {
-        $query = new IdsQuery();
+        $query = new Ids();
 
         $query->setIds('1');
         $query->setType('helloworld1');
@@ -101,7 +101,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeSingleSearchArray()
     {
-        $query = new IdsQuery();
+        $query = new Ids();
 
         $query->setIds(array('1', '2'));
         $query->setType('helloworld1');
@@ -113,7 +113,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeSingleSearchSingleDocInOtherType()
     {
-        $query = new IdsQuery();
+        $query = new Ids();
 
         // Doc 4 is in the second type...
         $query->setIds('4');
@@ -127,7 +127,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeSingleSearchArrayDocInOtherType()
     {
-        $query = new IdsQuery();
+        $query = new Ids();
 
         // Doc 4 is in the second type...
         $query->setIds(array('1', '4'));
@@ -141,7 +141,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeArraySearchArray()
     {
-        $query = new IdsQuery();
+        $query = new Ids();
 
         $query->setIds(array('1', '4'));
         $query->setType(array('helloworld1', 'helloworld2'));
@@ -153,7 +153,7 @@ class IdsTest extends BaseTest
 
     public function testSetTypeArraySearchSingle()
     {
-        $query = new IdsQuery();
+        $query = new Ids();
 
         $query->setIds('4');
         $query->setType(array('helloworld1', 'helloworld2'));

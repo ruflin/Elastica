@@ -6,7 +6,7 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Query;
-use Elastica\Query\MatchAllQuery;
+use Elastica\Query\MatchAll;
 use Elastica\Script;
 use Elastica\Search;
 use Elastica\Filter\TermFilter;
@@ -328,7 +328,7 @@ class TypeTest extends BaseTest
 
         $search = new Search($index->getClient());
         $search->addIndex($index);
-        $resultSet = $search->search(new MatchAllQuery());
+        $resultSet = $search->search(new MatchAll());
         $this->assertEquals($hashId, $resultSet->current()->getId());
 
         $doc = $type->getDocument($hashId);

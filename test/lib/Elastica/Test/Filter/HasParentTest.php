@@ -3,14 +3,14 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Filter\HasParentFilter;
-use Elastica\Query\MatchAllQuery;
+use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
 class HasParentTest extends BaseTest
 {
     public function testToArray()
     {
-        $q = new MatchAllQuery();
+        $q = new MatchAll();
 
         $type = 'test';
 
@@ -28,7 +28,7 @@ class HasParentTest extends BaseTest
 
     public function testSetScope()
     {
-        $q = new MatchAllQuery();
+        $q = new MatchAll();
 
         $type = 'test';
 

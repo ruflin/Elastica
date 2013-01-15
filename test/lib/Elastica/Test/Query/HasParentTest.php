@@ -2,19 +2,19 @@
 
 namespace Elastica\Test\Query;
 
-use Elastica\Query\HasParentQuery;
-use Elastica\Query\MatchAllQuery;
+use Elastica\Query\HasParent;
+use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
 class HasParentTest extends BaseTest
 {
     public function testToArray()
     {
-        $q = new MatchAllQuery();
+        $q = new MatchAll();
 
         $type = 'test';
 
-        $query = new HasParentQuery($q, $type);
+        $query = new HasParent($q, $type);
 
         $expectedArray = array(
             'has_parent' => array(
@@ -28,13 +28,13 @@ class HasParentTest extends BaseTest
 
     public function testSetScope()
     {
-        $q = new MatchAllQuery();
+        $q = new MatchAll();
 
         $type = 'test';
 
         $scope = 'foo';
 
-        $query = new HasParentQuery($q, $type);
+        $query = new HasParent($q, $type);
         $query->setScope($scope);
 
         $expectedArray = array(

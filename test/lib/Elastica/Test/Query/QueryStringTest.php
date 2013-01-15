@@ -5,7 +5,7 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Type;
-use Elastica\Query\QueryStringQuery;
+use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 
 class QueryStringTest extends BaseTest
@@ -13,7 +13,7 @@ class QueryStringTest extends BaseTest
     public function testSearchMultipleFields()
     {
         $str = md5(rand());
-        $query = new QueryStringQuery($str);
+        $query = new QueryString($str);
 
         $expected = array(
             'query' => $str
@@ -55,7 +55,7 @@ class QueryStringTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $queryString = new QueryStringQuery('test*');
+        $queryString = new QueryString('test*');
         $resultSet = $type->search($queryString);
 
         $this->assertEquals(1, $resultSet->count());
@@ -73,7 +73,7 @@ class QueryStringTest extends BaseTest
         $type->addDocument($doc);
         $index->refresh();
 
-        $query = new QueryStringQuery();
+        $query = new QueryString();
         $query = $query->setQuery('ruf*');
         $query = $query->setDefaultField('title');
         $query = $query->setFields(array('title', 'firstname', 'lastname', 'price', 'year'));
@@ -85,7 +85,7 @@ class QueryStringTest extends BaseTest
     public function testSetDefaultOperator()
     {
         $operator = 'AND';
-        $query = new QueryStringQuery('test');
+        $query = new QueryString('test');
         $query->setDefaultOperator($operator);
 
         $data = $query->toArray();
@@ -96,7 +96,7 @@ class QueryStringTest extends BaseTest
     public function testSetDefaultField()
     {
         $default = 'field1';
-        $query = new QueryStringQuery('test');
+        $query = new QueryString('test');
         $query->setDefaultField($default);
 
         $data = $query->toArray();
@@ -107,7 +107,7 @@ class QueryStringTest extends BaseTest
     public function testSetRewrite()
     {
             $rewrite = 'scoring_boolean';
-            $query = new QueryStringQuery('test');
+            $query = new QueryString('test');
             $query->setRewrite($rewrite);
 
             $data = $query->toArray();
@@ -120,7 +120,7 @@ class QueryStringTest extends BaseTest
      */
     public function testSetQueryStringInvalid()
     {
-        $query = new QueryStringQuery();
+        $query = new QueryString();
         $query->setQueryString(array());
     }
 }

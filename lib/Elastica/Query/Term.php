@@ -10,7 +10,7 @@ namespace Elastica\Query;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/term-query.html
  */
-class TermQuery extends AbstractQuery
+class Term extends AbstractQuery
 {
     /**
      * Constructs the Term query object
@@ -27,7 +27,7 @@ class TermQuery extends AbstractQuery
      * values for a term have to be set.
      *
      * @param  array                    $term Term array
-     * @return \Elastica\Query\TermQuery Current object
+     * @return \Elastica\Query\Term Current object
      */
     public function setRawTerm(array $term)
     {
@@ -40,7 +40,7 @@ class TermQuery extends AbstractQuery
      * @param  string                   $key   Key to query
      * @param  string|array             $value Values(s) for the query. Boost can be set with array
      * @param  float                    $boost OPTIONAL Boost value (default = 1.0)
-     * @return \Elastica\Query\TermQuery Current object
+     * @return \Elastica\Query\Term Current object
      */
     public function setTerm($key, $value, $boost = 1.0)
     {

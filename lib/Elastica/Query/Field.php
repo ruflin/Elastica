@@ -11,7 +11,7 @@ use Elastica\Exception\InvalidException;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/field-query.html
  */
-class FieldQuery extends AbstractQuery
+class Field extends AbstractQuery
 {
     /**
      * Field for object
@@ -43,7 +43,7 @@ class FieldQuery extends AbstractQuery
      * Sets the field
      *
      * @param  string                    $field Field
-     * @return \Elastica\Query\FieldQuery Current object
+     * @return \Elastica\Query\Field Current object
      */
     public function setField($field)
     {
@@ -57,7 +57,7 @@ class FieldQuery extends AbstractQuery
      *
      * @param  string                              $queryString Query string
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Query\FieldQuery           Current object
+     * @return \Elastica\Query\Field           Current object
      */
     public function setQueryString($queryString)
     {

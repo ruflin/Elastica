@@ -2,7 +2,7 @@
 
 namespace Elastica\Test\Query;
 
-use Elastica\Query\PrefixQuery;
+use Elastica\Query\Prefix;
 use Elastica\Test\Base as BaseTest;
 
 class PrefixTest extends BaseTest
@@ -10,7 +10,7 @@ class PrefixTest extends BaseTest
 
     public function testToArray()
     {
-        $query = new PrefixQuery();
+        $query = new Prefix();
         $key = 'name';
         $value = 'ni';
         $boost = 2;

@@ -5,7 +5,7 @@ namespace Elastica\Test\Facet;
 use Elastica\Document;
 use Elastica\Facet\TermsStatsFacet;
 use Elastica\Query;
-use Elastica\Query\MatchAllQuery;
+use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
 class TermsStatsTest extends BaseTest
@@ -36,7 +36,7 @@ class TermsStatsTest extends BaseTest
 
         $query = new Query();
         $query->addFacet( $facet );
-        $query->setQuery( new MatchAllQuery() );
+        $query->setQuery( new MatchAll() );
 
         $index->refresh();
 

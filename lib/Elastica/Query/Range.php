@@ -10,7 +10,7 @@ namespace Elastica\Query;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/range-query.html
  */
-class RangeQuery extends AbstractQuery
+class Range extends AbstractQuery
 {
     /**
      * Constructor
@@ -30,7 +30,7 @@ class RangeQuery extends AbstractQuery
      *
      * @param  string                    $fieldName Field name
      * @param  array                     $args      Field arguments
-     * @return \Elastica\Query\RangeQuery Current object
+     * @return \Elastica\Query\Range Current object
      */
     public function addField($fieldName, array $args)
     {

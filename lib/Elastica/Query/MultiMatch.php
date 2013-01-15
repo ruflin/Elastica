@@ -10,14 +10,14 @@ namespace Elastica\Query;
  * @author Rodolfo Adhenawer Campagnoli Moraes <adhenawer@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/multi-match-query.html
  */
-class MultiMatchQuery extends AbstractQuery
+class MultiMatch extends AbstractQuery
 {
 
     /**
      * Sets the query
      *
      * @param  string                         $query Query
-     * @return \Elastica\Query\MultiMatchQuery Current object
+     * @return \Elastica\Query\MultiMatch Current object
      */
     public function setQuery($query = '')
     {
@@ -28,7 +28,7 @@ class MultiMatchQuery extends AbstractQuery
      * Sets Fields to be used in the query.
      *
      * @param  array                          $fields Fields
-     * @return \Elastica\Query\MultiMatchQuery Current object
+     * @return \Elastica\Query\MultiMatch Current object
      */
     public function setFields($fields = array())
     {
@@ -41,7 +41,7 @@ class MultiMatchQuery extends AbstractQuery
      * If not set, defaults to true.
      *
      * @param  boolean                        $useDisMax
-     * @return \Elastica\Query\MultiMatchQuery Current object
+     * @return \Elastica\Query\MultiMatch Current object
      */
     public function setUseDisMax($useDisMax = true)
     {
@@ -54,7 +54,7 @@ class MultiMatchQuery extends AbstractQuery
      * If not set, defaults to 0.0.
      *
      * @param  float                          $tieBreaker
-     * @return \Elastica\Query\MultiMatchQuery Current object
+     * @return \Elastica\Query\MultiMatch Current object
      */
     public function setTieBreaker($tieBreaker = 0.0)
     {

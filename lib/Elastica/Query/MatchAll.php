@@ -10,7 +10,7 @@ namespace Elastica\Query;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/match-all-query.html
  */
-class MatchAllQuery extends AbstractQuery
+class MatchAll extends AbstractQuery
 {
     /**
      * Creates match all query

@@ -9,7 +9,7 @@ namespace Elastica\Query;
  * @package Elastica
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/prefix-query.html
  */
-class PrefixQuery extends AbstractQuery
+class Prefix extends AbstractQuery
 {
     /**
      * Constructs the Prefix query object
@@ -26,7 +26,7 @@ class PrefixQuery extends AbstractQuery
      * values for a prefix have to be set.
      *
      * @param  array                      $prefix Prefix array
-     * @return \Elastica\Query\PrefixQuery Current object
+     * @return \Elastica\Query\Prefix Current object
      */
     public function setRawPrefix(array $prefix)
     {
@@ -39,7 +39,7 @@ class PrefixQuery extends AbstractQuery
      * @param  string                     $key   Key to query
      * @param  string|array               $value Values(s) for the query. Boost can be set with array
      * @param  float                      $boost OPTIONAL Boost value (default = 1.0)
-     * @return \Elastica\Query\PrefixQuery Current object
+     * @return \Elastica\Query\Prefix Current object
      */
     public function setPrefix($key, $value, $boost = 1.0)
     {

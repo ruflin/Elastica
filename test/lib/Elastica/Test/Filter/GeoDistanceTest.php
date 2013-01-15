@@ -5,7 +5,7 @@ namespace Elastica\Test\Filter;
 use Elastica\Document;
 use Elastica\Filter\GeoDistanceFilter;
 use Elastica\Query;
-use Elastica\Query\MatchAllQuery;
+use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
 class GeoDistanceTest extends BaseTest
@@ -48,14 +48,14 @@ class GeoDistanceTest extends BaseTest
         $query = new Query();
         $geoFilter = new GeoDistanceFilter('point', array('lat' => 30, 'lon' => 40), '1km');
 
-        $query = new Query(new MatchAllQuery());
+        $query = new Query(new MatchAll());
         $query->setFilter($geoFilter);
         $this->assertEquals(1, $type->search($query)->count());
 
         // Both points should be inside
         $query = new Query();
         $geoFilter = new GeoDistanceFilter('point', array('lat' => 30, 'lon' => 40), '40000km');
-        $query = new Query(new MatchAllQuery());
+        $query = new Query(new MatchAll());
         $query->setFilter($geoFilter);
         $index->refresh();
 

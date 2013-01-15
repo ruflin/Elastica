@@ -3,7 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\FieldQuery;
+use Elastica\Query\Field;
 use Elastica\Test\Base as BaseTest;
 
 class FieldTest extends BaseTest
@@ -29,7 +29,7 @@ class FieldTest extends BaseTest
         $type = 'text_phrase';
         $field = 'name';
 
-        $query = new FieldQuery();
+        $query = new Field();
         $query->setField('name');
         $query->setQueryString('"Baden Baden"');
 
@@ -40,7 +40,7 @@ class FieldTest extends BaseTest
 
     public function testToArray()
     {
-        $query = new FieldQuery('user', 'jack');
+        $query = new Field('user', 'jack');
         $expected = array('field' => array('user' => array('query' => 'jack')));
 
         $this->assertSame($expected, $query->toArray());

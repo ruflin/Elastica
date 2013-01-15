@@ -11,7 +11,7 @@ use Elastica\Exception\InvalidException;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/terms-query.html
  */
-class TermsQuery extends AbstractQuery
+class Terms extends AbstractQuery
 {
     /**
      * Terms
@@ -50,7 +50,7 @@ class TermsQuery extends AbstractQuery
      *
      * @param  string                    $key   Terms key
      * @param  array                     $terms Terms for the query.
-     * @return \Elastica\Query\TermsQuery
+     * @return \Elastica\Query\Terms
      */
     public function setTerms($key, array $terms)
     {
@@ -64,7 +64,7 @@ class TermsQuery extends AbstractQuery
      * Adds a single term to the list
      *
      * @param  string                    $term Term
-     * @return \Elastica\Query\TermsQuery
+     * @return \Elastica\Query\Terms
      */
     public function addTerm($term)
     {
@@ -77,7 +77,7 @@ class TermsQuery extends AbstractQuery
      * Sets the minimum matching values
      *
      * @param  int                       $minimum Minimum value
-     * @return \Elastica\Query\TermsQuery
+     * @return \Elastica\Query\Terms
      */
     public function setMinimumMatch($minimum)
     {

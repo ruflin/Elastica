@@ -4,7 +4,7 @@ namespace Elastica\Test\Filter;
 
 use Elastica\Document;
 use Elastica\Filter\NestedFilter;
-use Elastica\Query\TermsQuery;
+use Elastica\Query\Terms;
 use Elastica\Search;
 use Elastica\Type\MappingType;
 use Elastica\Test\Base as BaseTest;
@@ -70,7 +70,7 @@ class NestedTest extends BaseTest
     {
         $f = new NestedFilter();
         $this->assertEquals(array('nested' => array()), $f->toArray());
-        $q = new TermsQuery();
+        $q = new Terms();
         $q->setTerms('hobby', array('guitar'));
         $f->setPath('hobbies');
         $f->setQuery($q);
@@ -91,7 +91,7 @@ class NestedTest extends BaseTest
     {
         $f = new NestedFilter();
         $this->assertEquals(array('nested' => array()), $f->toArray());
-        $q = new TermsQuery();
+        $q = new Terms();
         $q->setTerms('hobby', array('guitar'));
         $f->setPath('hobbies');
         $f->setQuery($q);
@@ -106,7 +106,7 @@ class NestedTest extends BaseTest
 
         $f = new NestedFilter();
         $this->assertEquals(array('nested' => array()), $f->toArray());
-        $q = new TermsQuery();
+        $q = new Terms();
         $q->setTerms('hobby', array('opensource'));
         $f->setPath('hobbies');
         $f->setQuery($q);
