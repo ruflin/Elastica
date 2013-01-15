@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Transport;
+
 use Elastica\Connection;
 use Elastica\Request;
 

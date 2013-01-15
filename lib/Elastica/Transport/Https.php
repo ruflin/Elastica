@@ -9,7 +9,7 @@ namespace Elastica\Transport;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class HttpsTransport extends HttpTransport
+class Https extends Http
 {
     /**
      * Https scheme

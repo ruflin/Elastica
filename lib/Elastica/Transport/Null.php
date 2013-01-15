@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Transport;
+
 use Elastica\Request;
 use Elastica\Response;
 
@@ -10,7 +11,7 @@ use Elastica\Response;
  * @package Elastica
  * @author James Boehmer <james.boehmer@jamesboehmer.com>
  */
-class NullTransport extends AbstractTransport
+class Null extends AbstractTransport
 {
     /**
      * Null transport.

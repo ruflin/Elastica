@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Transport;
+
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
@@ -14,7 +15,7 @@ use Elastica\Response;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class HttpTransport extends AbstractTransport
+class Http extends AbstractTransport
 {
     /**
      * Http scheme

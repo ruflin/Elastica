@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Transport;
+
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Request;
@@ -13,7 +14,7 @@ use Elastica\Response;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class MemcacheTransport extends AbstractTransport
+class Memcache extends AbstractTransport
 {
     /**
      * Makes calls to the elasticsearch server
