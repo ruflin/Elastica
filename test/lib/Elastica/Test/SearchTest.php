@@ -4,8 +4,8 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Document;
-use Elastica\Query\MatchAllQuery;
-use Elastica\Query\QueryStringQuery;
+use Elastica\Query\MatchAll;
+use Elastica\Query\QueryString;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 
@@ -298,12 +298,12 @@ class SearchTest extends BaseTest
         $search->addIndex($index);
 
         // Version param should not be inside by default
-        $results = $search->search(new MatchAllQuery());
+        $results = $search->search(new MatchAll());
         $hit = $results->current();
         $this->assertEquals(array(), $hit->getParam('_version'));
 
         // Added version param to result
-        $results = $search->search(new MatchAllQuery(), array('version' => true));
+        $results = $search->search(new MatchAll(), array('version' => true));
         $hit = $results->current();
         $this->assertEquals(1, $hit->getParam('_version'));
     }
@@ -367,7 +367,7 @@ class SearchTest extends BaseTest
         $this->assertCount(10, $resultSet);
         $this->assertEquals(11, $resultSet->getTotalHits());
 
-        $query = new QueryStringQuery('bunny');
+        $query = new QueryString('bunny');
         $search->setQuery($query);
 
         $resultSet = $search->search();

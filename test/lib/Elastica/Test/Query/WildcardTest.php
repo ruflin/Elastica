@@ -3,15 +3,15 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\WildcardQuery;
+use Elastica\Query\Wildcard;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 
 class WildcardTest extends BaseTest
 {
     public function testConstructEmpty()
     {
-        $wildcard = new WildcardQuery();
+        $wildcard = new Wildcard();
         $this->assertEmpty($wildcard->getParams());
     }
 
@@ -21,7 +21,7 @@ class WildcardTest extends BaseTest
         $value = 'Ru*lin';
         $boost = 2.0;
 
-        $wildcard = new WildcardQuery($key, $value, $boost);
+        $wildcard = new Wildcard($key, $value, $boost);
 
         $expectedArray = array(
             'wildcard' => array(
@@ -55,7 +55,7 @@ class WildcardTest extends BaseTest
         $index->create($indexParams, true);
         $type = $index->getType('test');
 
-        $mapping = new MappingType($type, array(
+        $mapping = new Mapping($type, array(
                 'name' => array('type' => 'string', 'store' => 'no', 'analyzer' => 'lw'),
             )
         );
@@ -74,25 +74,25 @@ class WildcardTest extends BaseTest
 
         $index->refresh();
 
-        $query = new WildcardQuery();
+        $query = new Wildcard();
         $query->setValue('name', 'ba*');
         $resultSet = $index->search($query);
 
         $this->assertEquals(3, $resultSet->count());
 
-        $query = new WildcardQuery();
+        $query = new Wildcard();
         $query->setValue('name', 'baden*');
         $resultSet = $index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
 
-        $query = new WildcardQuery();
+        $query = new Wildcard();
         $query->setValue('name', 'baden b*');
         $resultSet = $index->search($query);
 
         $this->assertEquals(1, $resultSet->count());
 
-        $query = new WildcardQuery();
+        $query = new Wildcard();
         $query->setValue('name', 'baden bas*');
         $resultSet = $index->search($query);
 

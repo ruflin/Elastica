@@ -1,11 +1,12 @@
 <?php
 
 namespace Elastica;
+
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 
 /**
  * Elastica type object
@@ -196,12 +197,12 @@ class Type implements SearchableInterface
     /**
      * Sets value type mapping for this type
      *
-     * @param  \Elastica\Type\MappingType|array $mapping Elastica\Type\MappingType object or property array with all mappings
+     * @param  \Elastica\Type\Mapping|array $mapping Elastica\Type\MappingType object or property array with all mappings
      * @return \Elastica\Response
      */
     public function setMapping($mapping)
     {
-        $mapping = MappingType::create($mapping);
+        $mapping = Mapping::create($mapping);
         $mapping->setType($this);
 
         return $mapping->send();

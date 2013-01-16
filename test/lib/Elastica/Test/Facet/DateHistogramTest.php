@@ -3,18 +3,18 @@
 namespace Elastica\Test\Facet;
 
 use Elastica\Document;
-use Elastica\Facet\DateHistogramFacet;
+use Elastica\Facet\DateHistogram;
 use Elastica\Query;
-use Elastica\Query\MatchAllQuery;
+use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 
 class DateHistogramTest extends BaseTest
 {
     public function testClassHierarchy()
     {
-        $facet = new DateHistogramFacet('dateHist1');
-        $this->assertInstanceOf('Elastica\Facet\HistogramFacet', $facet);
+        $facet = new DateHistogram('dateHist1');
+        $this->assertInstanceOf('Elastica\Facet\Histogram', $facet);
         $this->assertInstanceOf('Elastica\Facet\AbstractFacet', $facet);
         unset($facet);
     }
@@ -26,7 +26,7 @@ class DateHistogramTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('helloworld');
 
-        $mapping = new MappingType($type, array(
+        $mapping = new Mapping($type, array(
                 'name' => array('type' => 'string', 'store' => 'no'),
                 'dtmPosted' => array('type' => 'date', 'store' => 'no', 'format' => 'yyyy-MM-dd HH:mm:ss')
             ));
@@ -41,13 +41,13 @@ class DateHistogramTest extends BaseTest
         $doc = new Document(4, array('name' => 'elastica search', 'dtmPosted' => "2011-07-08 01:53:00"));
         $type->addDocument($doc);
 
-        $facet = new DateHistogramFacet('dateHist1');
+        $facet = new DateHistogram('dateHist1');
         $facet->setInterval("day");
         $facet->setField("dtmPosted");
 
         $query = new Query();
         $query->addFacet($facet);
-        $query->setQuery(new MatchAllQuery());
+        $query->setQuery(new MatchAll());
         $index->refresh();
 
         $response = $type->search($query);

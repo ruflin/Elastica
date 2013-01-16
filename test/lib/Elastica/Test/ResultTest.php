@@ -4,7 +4,7 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Document;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
 class ResultTest extends BaseTest
@@ -50,7 +50,7 @@ class ResultTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType($typeName);
 
-        $mapping = new MappingType($type);
+        $mapping = new Mapping($type);
         $mapping->disableSource();
         $mapping->send();
 

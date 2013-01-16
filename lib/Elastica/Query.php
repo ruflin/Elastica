@@ -6,8 +6,8 @@ use Elastica\Exception\NotImplementedException;
 use Elastica\Facet\AbstractFacet;
 use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
-use Elastica\Query\MatchAllQuery;
-use Elastica\Query\QueryStringQuery;
+use Elastica\Query\MatchAll;
+use Elastica\Query\QueryString;
 
 /**
  * Elastica query object
@@ -64,9 +64,9 @@ class Query extends Param
 
                 return $newQuery;
             case empty($query):
-                return new self(new MatchAllQuery());
+                return new self(new MatchAll());
             case is_string($query):
-                return new self(new QueryStringQuery($query));
+                return new self(new QueryString($query));
 
         }
 
@@ -308,7 +308,7 @@ class Query extends Param
     {
         // If no query is set, all query is chosen by default
         if (!isset($this->_params['query'])) {
-            $this->setQuery(new MatchAllQuery());
+            $this->setQuery(new MatchAll());
         }
 
         return $this->_params;

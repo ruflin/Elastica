@@ -2,18 +2,18 @@
 
 namespace Elastica\Test;
 use Elastica\Document;
-use Elastica\Facet\DateHistogramFacet;
+use Elastica\Facet\DateHistogram;
 use Elastica\Query;
-use Elastica\Query\MatchAllQuery;
-use Elastica\Type\MappingType;
+use Elastica\Query\MatchAll;
+use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
 class ResponseTest extends BaseTest
 {
     public function testClassHierarchy()
     {
-        $facet = new DateHistogramFacet('dateHist1');
-        $this->assertInstanceOf('Elastica\Facet\HistogramFacet', $facet);
+        $facet = new DateHistogram('dateHist1');
+        $this->assertInstanceOf('Elastica\Facet\Histogram', $facet);
         $this->assertInstanceOf('Elastica\Facet\AbstractFacet', $facet);
         unset($facet);
     }
@@ -23,7 +23,7 @@ class ResponseTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('helloworld');
 
-        $mapping = new MappingType($type, array(
+        $mapping = new Mapping($type, array(
                 'name' => array('type' => 'string', 'store' => 'no'),
                 'dtmPosted' => array('type' => 'date', 'store' => 'no', 'format' => 'yyyy-MM-dd HH:mm:ss')
             ));
@@ -39,7 +39,7 @@ class ResponseTest extends BaseTest
         $type->addDocument($doc);
 
         $query = new Query();
-        $query->setQuery(new MatchAllQuery());
+        $query->setQuery(new MatchAll());
         $index->refresh();
 
         $resultSet = $type->search($query);

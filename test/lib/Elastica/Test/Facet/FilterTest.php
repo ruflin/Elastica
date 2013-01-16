@@ -3,8 +3,8 @@
 namespace Elastica\Test\Facet;
 
 use Elastica\Document;
-use Elastica\Filter\TermFilter;
-use Elastica\Facet\FilterFacet;
+use Elastica\Filter\Term;
+use Elastica\Facet\Filter;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
 
@@ -23,9 +23,9 @@ class FilterTest extends BaseTest
 
         $index->refresh();
 
-        $filter = new TermFilter(array('color' => 'red'));
+        $filter = new Term(array('color' => 'red'));
 
-        $facet = new FilterFacet('test');
+        $facet = new Filter('test');
         $facet->setFilter($filter);
 
         $query = new Query();

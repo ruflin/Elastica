@@ -4,9 +4,9 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Index;
-use Elastica\Query\BoolQuery;
-use Elastica\Query\IdsQuery;
-use Elastica\Query\TermQuery;
+use Elastica\Query\Bool;
+use Elastica\Query\Ids;
+use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 
@@ -14,15 +14,15 @@ class BoolTest extends BaseTest
 {
     public function testToArray()
     {
-        $query = new BoolQuery();
+        $query = new Bool();
 
-        $idsQuery1 = new IdsQuery();
+        $idsQuery1 = new Ids();
         $idsQuery1->setIds(1);
 
-        $idsQuery2 = new IdsQuery();
+        $idsQuery2 = new Ids();
         $idsQuery2->setIds(2);
 
-        $idsQuery3 = new IdsQuery();
+        $idsQuery3 = new Ids();
         $idsQuery3->setIds(3);
 
         $boost = 1.2;
@@ -54,12 +54,12 @@ class BoolTest extends BaseTest
      */
     public function testToArrayStructure()
     {
-        $boolQuery = new BoolQuery();
+        $boolQuery = new Bool();
 
-        $term1 = new TermQuery();
+        $term1 = new Term();
         $term1->setParam('interests', 84);
 
-        $term2 = new TermQuery();
+        $term2 = new Term();
         $term2->setParam('interests', 92);
 
         $boolQuery->addShould($term1)->addShould($term2);
@@ -86,26 +86,26 @@ class BoolTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $boolQuery = new BoolQuery();
-        $termQuery1 = new TermQuery(array('test' => '2'));
+        $boolQuery = new Bool();
+        $termQuery1 = new Term(array('test' => '2'));
         $boolQuery->addMust($termQuery1);
         $resultSet = $type->search($boolQuery);
 
         $this->assertEquals(2, $resultSet->count());
 
-        $termQuery2 = new TermQuery(array('test' => '5'));
+        $termQuery2 = new Term(array('test' => '5'));
         $boolQuery->addMust($termQuery2);
         $resultSet = $type->search($boolQuery);
 
         $this->assertEquals(1, $resultSet->count());
 
-        $termQuery3 = new TermQuery(array('username' => 'hans'));
+        $termQuery3 = new Term(array('username' => 'hans'));
         $boolQuery->addMust($termQuery3);
         $resultSet = $type->search($boolQuery);
 
         $this->assertEquals(1, $resultSet->count());
 
-        $termQuery4 = new TermQuery(array('username' => 'emil'));
+        $termQuery4 = new Term(array('username' => 'emil'));
         $boolQuery->addMust($termQuery4);
         $resultSet = $type->search($boolQuery);
 

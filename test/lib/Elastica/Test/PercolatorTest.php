@@ -5,7 +5,7 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Percolator;
-use Elastica\Query\TermQuery;
+use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 
 class PercolatorTest extends BaseTest
@@ -17,7 +17,7 @@ class PercolatorTest extends BaseTest
         $index = $this->_createIndex($percolatorName);
         $percolator = new Percolator($index);
 
-        $query = new TermQuery(array('field1' => 'value1'));
+        $query = new Term(array('field1' => 'value1'));
         $response = $percolator->registerQuery($percolatorName, $query);
 
         $data = $response->getData();
@@ -43,7 +43,7 @@ class PercolatorTest extends BaseTest
 
         $percolatorName = 'percotest';
 
-        $query = new TermQuery(array('name' => 'ruflin'));
+        $query = new Term(array('name' => 'ruflin'));
         $response = $percolator->registerQuery($percolatorName, $query);
 
         $this->assertTrue($response->isOk());

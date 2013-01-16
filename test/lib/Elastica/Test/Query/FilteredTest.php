@@ -3,9 +3,9 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Filter\TermFilter;
-use Elastica\Query\FilteredQuery;
-use Elastica\Query\QueryStringQuery;
+use Elastica\Filter\Term;
+use Elastica\Query\Filtered;
+use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 
 class FilteredTest extends BaseTest
@@ -22,16 +22,16 @@ class FilteredTest extends BaseTest
         $doc = new Document(2, array('id' => 2, 'email' => 'test@test.com', 'username' => 'peter', 'test' => array('2', '3', '5')));
         $type->addDocument($doc);
 
-        $queryString = new QueryStringQuery('test*');
+        $queryString = new QueryString('test*');
 
-        $filter1 = new TermFilter();
+        $filter1 = new Term();
         $filter1->setTerm('username', 'peter');
 
-        $filter2 = new TermFilter();
+        $filter2 = new Term();
         $filter2->setTerm('username', 'qwerqwer');
 
-        $query1 = new FilteredQuery($queryString, $filter1);
-        $query2 = new FilteredQuery($queryString, $filter2);
+        $query1 = new Filtered($queryString, $filter1);
+        $query2 = new Filtered($queryString, $filter2);
         $index->refresh();
 
         $resultSet = $type->search($queryString);

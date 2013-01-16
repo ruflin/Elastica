@@ -7,8 +7,8 @@ use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Status;
 use Elastica\Type;
-use Elastica\Type\MappingType;
-use Elastica\Query\HasChildQuery;
+use Elastica\Type\Mapping;
+use Elastica\Query\HasChild;
 use Elastica\Test\Base as BaseTest;
 
 class IndexTest extends BaseTest
@@ -46,7 +46,7 @@ class IndexTest extends BaseTest
 
         $typeComment = new Type($index, 'comment');
 
-        $mapping = new MappingType();
+        $mapping = new Mapping();
         $mapping->setParam('_parent', array('type' => 'blog'));
         $typeComment->setMapping($mapping);
 
@@ -69,7 +69,7 @@ class IndexTest extends BaseTest
 
         $index->optimize();
 
-        $query = new HasChildQuery('Max', 'comment');
+        $query = new HasChild('Max', 'comment');
         $resultSet = $typeBlog->search($query);
         $this->assertEquals(1, $resultSet->count());
         $this->assertEquals(array('title' => 'Foo bar'), $resultSet->current()->getData());
@@ -194,7 +194,7 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
         $type = new Type($index, 'content');
 
-        $mapping = MappingType::create($indexMapping);
+        $mapping = Mapping::create($indexMapping);
         $mapping->setSource(array('excludes' => array('file')));
 
         $mapping->setType($type);

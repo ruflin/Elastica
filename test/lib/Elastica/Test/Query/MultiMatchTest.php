@@ -5,7 +5,7 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
-use Elastica\Query\MultiMatchQuery;
+use Elastica\Query\MultiMatch;
 use Elastica\Type;
 use Elastica\Test\Base as BaseTest;
 
@@ -25,7 +25,7 @@ class MultiMatchTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $multiMatch = new MultiMatchQuery();
+        $multiMatch = new MultiMatch();
         $query = new Query();
 
         $multiMatch->setQuery('Rodolfo');

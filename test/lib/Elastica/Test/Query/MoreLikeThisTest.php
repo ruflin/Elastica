@@ -5,9 +5,9 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
-use Elastica\Query\MoreLikeThisQuery;
+use Elastica\Query\MoreLikeThis;
 use Elastica\Type;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
 class MoreLikeThisTest extends BaseTest
@@ -21,7 +21,7 @@ class MoreLikeThisTest extends BaseTest
         //$index->getSettings()->setNumberOfShards(1);
 
         $type = new Type($index, 'helloworldmlt');
-        $mapping = new MappingType($type , array(
+        $mapping = new Mapping($type , array(
             'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
             'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
         ));
@@ -38,7 +38,7 @@ class MoreLikeThisTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $mltQuery = new MoreLikeThisQuery();
+        $mltQuery = new MoreLikeThis();
         $mltQuery->setLikeText('fake gmail sample');
         $mltQuery->setFields(array('email','content'));
         $mltQuery->setMaxQueryTerms(1);
@@ -56,7 +56,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetFields()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
 
         $fields = array('firstname', 'lastname');
         $query->setFields($fields);
@@ -67,7 +67,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetLikeText()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
         $query->setLikeText(' hello world');
 
         $data = $query->toArray();
@@ -76,7 +76,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetBoost()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
 
         $boost = 1.3;
         $query->setBoost($boost);
@@ -86,7 +86,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetMaxQueryTerms()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
 
         $max = 3;
         $query->setMaxQueryTerms($max);
@@ -96,7 +96,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetPercentTermsToMatch()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
 
         $match = 0.8;
         $query->setPercentTermsToMatch($match);
@@ -106,7 +106,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetMinDocFrequency()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
 
         $freq = 2;
         $query->setMinDocFrequency($freq);
@@ -116,7 +116,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetMaxDocFrequency()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
 
         $freq = 2;
         $query->setMaxDocFrequency($freq);
@@ -126,7 +126,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetMinWordLength()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
 
         $length = 4;
         $query->setMinWordLength($length);
@@ -136,7 +136,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetMaxWordLength()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
 
         $length = 5;
         $query->setMaxWordLength($length);
@@ -146,7 +146,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetBoostTerms()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
 
         $boost = false;
         $query->setBoostTerms($boost);
@@ -156,7 +156,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetAnalyzer()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
 
         $analyzer = 'UpperCase';
         $query->setAnalyzer($analyzer);
@@ -166,7 +166,7 @@ class MoreLikeThisTest extends BaseTest
 
     public function testSetStopWords()
     {
-        $query = new MoreLikeThisQuery();
+        $query = new MoreLikeThis();
 
         $stopWords = array('no', 'yes', 'test');
         $query->setStopWords($stopWords);
