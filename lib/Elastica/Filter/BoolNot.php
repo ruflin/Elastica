@@ -10,7 +10,7 @@ namespace Elastica\Filter;
  * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/not-filter.html
  */
-class Not extends AbstractFilter
+class BoolNot extends AbstractFilter
 {
     /**
      * Creates Not filter query
@@ -26,10 +26,18 @@ class Not extends AbstractFilter
      * Set filter
      *
      * @param  \Elastica\Filter\AbstractFilter $filter
-     * @return \Elastica\Filter\Not
+     * @return \Elastica\Filter\BoolNot
      */
     public function setFilter(AbstractFilter $filter)
     {
         return $this->setParam('filter', $filter->toArray());
+    }
+
+    /**
+     * @return string
+     */
+    protected function _getBaseName()
+    {
+        return 'not';
     }
 }

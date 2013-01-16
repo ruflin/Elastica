@@ -10,6 +10,13 @@ namespace Elastica\Filter;
  * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/and-filter.html
  */
-class AndFilter extends AbstractMultiFilter
+class BoolAnd extends AbstractMulti
 {
+    /**
+     * @return string
+     */
+    protected function _getBaseName()
+    {
+        return 'and';
+    }
 }

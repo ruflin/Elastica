@@ -3,23 +3,23 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Filter\AbstractFilter;
-use Elastica\Filter\OrFilter;
+use Elastica\Filter\BoolOr;
 use Elastica\Filter\Ids;
 use Elastica\Test\Base as BaseTest;
 
-class OrTest extends BaseTest
+class BoolOrTest extends BaseTest
 {
     public function testAddFilter()
     {
         $filter = $this->getMockForAbstractClass('Elastica\Filter\AbstractFilter');
-        $orFilter = new OrFilter();
+        $orFilter = new BoolOr();
         $returnValue = $orFilter->addFilter($filter);
-        $this->assertInstanceOf('Elastica\Filter\OrFilter', $returnValue);
+        $this->assertInstanceOf('Elastica\Filter\BoolOr', $returnValue);
     }
 
     public function testToArray()
     {
-        $orFilter = new OrFilter();
+        $orFilter = new BoolOr();
 
         $filter1 = new Ids();
         $filter1->setIds('1');

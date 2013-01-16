@@ -10,6 +10,13 @@ namespace Elastica\Filter;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/or-filter.html
  */
-class OrFilter extends AbstractMultiFilter
+class BoolOr extends AbstractMulti
 {
+    /**
+     * @return string
+     */
+    protected function _getBaseName()
+    {
+        return 'or';
+    }
 }

@@ -3,15 +3,15 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
-use Elastica\Filter\AndFilter;
+use Elastica\Filter\BoolAnd;
 use Elastica\Filter\Ids;
 use Elastica\Test\Base as BaseTest;
 
-class AndTest extends BaseTest
+class BoolAndTest extends BaseTest
 {
     public function testToArray()
     {
-        $and = new AndFilter();
+        $and = new BoolAnd();
         $this->assertEquals(array('and' => array()), $and->toArray());
 
         $idsFilter = new Ids();
@@ -44,7 +44,7 @@ class AndTest extends BaseTest
         $doc = new Document(3, array('name' => 'ruflin'));
         $type->addDocument($doc);
 
-        $and = new AndFilter();
+        $and = new BoolAnd();
 
         $idsFilter1 = new Ids();
         $idsFilter1->setIds(1);

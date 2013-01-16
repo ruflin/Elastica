@@ -9,7 +9,7 @@ namespace Elastica\Filter;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-abstract class AbstractMultiFilter extends AbstractFilter
+abstract class AbstractMulti extends AbstractFilter
 {
     /**
      * Filters
@@ -21,7 +21,7 @@ abstract class AbstractMultiFilter extends AbstractFilter
      * Add filter
      *
      * @param  \Elastica\Filter\AbstractFilter      $filter
-     * @return \Elastica\Filter\AbstractMultiFilter
+     * @return \Elastica\Filter\AbstractMulti
      */
     public function addFilter(AbstractFilter $filter)
     {
@@ -34,7 +34,7 @@ abstract class AbstractMultiFilter extends AbstractFilter
      * Set filters
      *
      * @param  array                               $filters
-     * @return \Elastica\Filter\AbstractMultiFilter
+     * @return \Elastica\Filter\AbstractMulti
      */
     public function setFilters(array $filters)
     {

@@ -2,15 +2,15 @@
 
 namespace Elastica\Test\Query;
 
-use Elastica\Query\ArrayQuery;
+use Elastica\Query\Simple;
 use Elastica\Test\Base as BaseTest;
 
-class ArrayTest extends BaseTest
+class SimpleTest extends BaseTest
 {
     public function testToArray()
     {
         $testQuery = array('hello' => array('world'), 'name' => 'ruflin');
-        $query = new ArrayQuery($testQuery);
+        $query = new Simple($testQuery);
 
         $this->assertEquals($testQuery, $query->toArray());
     }

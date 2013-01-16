@@ -3,14 +3,14 @@
 namespace Elastica\Query;
 
 /**
- * Array query
+ * Simple query
  * Pure php array query. Can be used to create any not existing type of query.
  *
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class ArrayQuery extends AbstractQuery
+class Simple extends AbstractQuery
 {
     /**
      * Query
@@ -33,7 +33,7 @@ class ArrayQuery extends AbstractQuery
      * Sets new query array
      *
      * @param  array                     $query Query array
-     * @return \Elastica\Query\ArrayQuery Current object
+     * @return \Elastica\Query\Simple Current object
      */
     public function setQuery(array $query)
     {
