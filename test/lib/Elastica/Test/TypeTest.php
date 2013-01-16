@@ -6,12 +6,12 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Query;
-use Elastica\Query\MatchAllQuery;
+use Elastica\Query\MatchAll;
 use Elastica\Script;
 use Elastica\Search;
-use Elastica\Filter\TermFilter;
+use Elastica\Filter\Term;
 use Elastica\Type;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
 class TypeTest extends BaseTest
@@ -54,7 +54,7 @@ class TypeTest extends BaseTest
         $index = $this->_createIndex();
 
         $type = new Type($index, 'user');
-        $mapping = new MappingType($type, array(
+        $mapping = new Mapping($type, array(
                 'id' => array('type' => 'integer', 'store' => 'yes'),
                 'username' => array('type' => 'string', 'store' => 'no'),
             ));
@@ -288,7 +288,7 @@ class TypeTest extends BaseTest
 
         // Return just the visible similar
         $query              = new Query();
-        $filterTerm         = new TermFilter();
+        $filterTerm         = new Term();
         $filterTerm->setTerm('visible', true);
         $query->setFilter($filterTerm);
 
@@ -328,7 +328,7 @@ class TypeTest extends BaseTest
 
         $search = new Search($index->getClient());
         $search->addIndex($index);
-        $resultSet = $search->search(new MatchAllQuery());
+        $resultSet = $search->search(new MatchAll());
         $this->assertEquals($hashId, $resultSet->current()->getId());
 
         $doc = $type->getDocument($hashId);

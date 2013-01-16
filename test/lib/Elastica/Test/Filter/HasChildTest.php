@@ -2,19 +2,19 @@
 
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\HasChildFilter;
-use Elastica\Query\MatchAllQuery;
+use Elastica\Filter\HasChild;
+use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
 class HasChildTest extends BaseTest
 {
     public function testToArray()
     {
-        $q = new MatchAllQuery();
+        $q = new MatchAll();
 
         $type = 'test';
 
-        $filter = new HasChildFilter($q, $type);
+        $filter = new HasChild($q, $type);
 
         $expectedArray = array(
             'has_child' => array(
@@ -28,13 +28,13 @@ class HasChildTest extends BaseTest
 
     public function testSetScope()
     {
-        $q = new MatchAllQuery();
+        $q = new MatchAll();
 
         $type = 'test';
 
         $scope = 'foo';
 
-        $filter = new HasChildFilter($q, $type);
+        $filter = new HasChild($q, $type);
         $filter->setScope($scope);
 
         $expectedArray = array(

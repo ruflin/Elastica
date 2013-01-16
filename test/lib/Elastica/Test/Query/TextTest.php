@@ -3,7 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\TextQuery;
+use Elastica\Query\Text;
 use Elastica\Test\Base as BaseTest;
 
 class TextTest extends BaseTest
@@ -16,7 +16,7 @@ class TextTest extends BaseTest
         $maxExpansions = 12;
         $field = 'test';
 
-        $query = new TextQuery();
+        $query = new Text();
         $query->setFieldQuery($field, $queryText);
         $query->setFieldType($field, $type);
         $query->setFieldParam($field, 'analyzer', $analyzer);
@@ -57,7 +57,7 @@ class TextTest extends BaseTest
         $type = 'text_phrase';
         $field = 'name';
 
-        $query = new TextQuery();
+        $query = new Text();
         $query->setFieldQuery($field, 'Basel New');
         $query->setField('operator', 'OR');
         $query->setFieldType($field, $type);

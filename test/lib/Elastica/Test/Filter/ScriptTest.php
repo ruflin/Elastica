@@ -3,7 +3,7 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Script;
-use Elastica\Filter\ScriptFilter;
+use Elastica\Filter\Script as ScriptFilter;
 use Elastica\Test\Base as BaseTest;
 
 class ScriptTest extends BaseTest
@@ -56,8 +56,8 @@ class ScriptTest extends BaseTest
         $query = array(
             'script' => $string,
         );
-        $script = new ScriptFilter();
-        $script->setQuery($query);
+        $filter = new ScriptFilter();
+        $filter->setQuery($query);
 
         $expected = array(
             'script' => array(
@@ -65,6 +65,6 @@ class ScriptTest extends BaseTest
             )
         );
 
-        $this->assertEquals($expected, $script->toArray());
+        $this->assertEquals($expected, $filter->toArray());
     }
 }

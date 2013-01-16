@@ -2,21 +2,21 @@
 
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\NumericRangeFilter;
+use Elastica\Filter\NumericRange;
 use Elastica\Test\Base as BaseTest;
 
 class NumericRangeTest extends BaseTest
 {
     public function testAddField()
     {
-        $rangeFilter = new NumericRangeFilter();
+        $rangeFilter = new NumericRange();
         $returnValue = $rangeFilter->addField('fieldName', array('to' => 'value'));
-        $this->assertInstanceOf('Elastica\Filter\NumericRangeFilter', $returnValue);
+        $this->assertInstanceOf('Elastica\Filter\NumericRange', $returnValue);
     }
 
     public function testToArray()
     {
-        $filter = new NumericRangeFilter();
+        $filter = new NumericRange();
 
         $fromTo = array('from' => 'ra', 'to' => 'ru');
         $filter->addField('name', $fromTo);

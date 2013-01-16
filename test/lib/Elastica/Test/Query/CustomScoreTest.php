@@ -2,8 +2,8 @@
 
 namespace Elastica\Test\Query;
 
-use Elastica\Query\MatchAllQuery;
-use Elastica\Query\CustomScoreQuery;
+use Elastica\Query\MatchAll;
+use Elastica\Query\CustomScore;
 use Elastica\Script;
 use Elastica\Test\Base as BaseTest;
 
@@ -11,9 +11,9 @@ class CustomScoreTest extends BaseTest
 {
     public function testCustomScoreQuery()
     {
-        $query = new MatchAllQuery();
+        $query = new MatchAll();
 
-        $customScoreQuery = new CustomScoreQuery();
+        $customScoreQuery = new CustomScore();
         $customScoreQuery->setQuery($query);
         $customScoreQuery->setScript("doc['hits'].value * (param1 + param2)");
         $customScoreQuery->addParams(array('param1' => 1123, 'param2' => 2001));
@@ -46,7 +46,7 @@ class CustomScoreTest extends BaseTest
         $script->setLang('mvel');
         $script->setParams($params);
 
-        $customScoreQuery = new CustomScoreQuery();
+        $customScoreQuery = new CustomScore();
         $customScoreQuery->setScript($script);
 
         $expected = array(
@@ -66,7 +66,7 @@ class CustomScoreTest extends BaseTest
     public function testConstructor()
     {
         $string = '_score * 2.0';
-        $customScoreQuery = new CustomScoreQuery($string);
+        $customScoreQuery = new CustomScore($string);
 
         $expected = array(
             'custom_score' => array(

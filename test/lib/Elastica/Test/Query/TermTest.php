@@ -2,7 +2,7 @@
 
 namespace Elastica\Test\Query;
 
-use Elastica\Query\TermQuery;
+use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 
 class TermTest extends BaseTest
@@ -10,7 +10,7 @@ class TermTest extends BaseTest
 
     public function testToArray()
     {
-        $query = new TermQuery();
+        $query = new Term();
         $key = 'name';
         $value = 'nicolas';
         $boost = 2;

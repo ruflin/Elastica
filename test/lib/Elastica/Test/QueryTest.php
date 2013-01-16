@@ -5,8 +5,8 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Query\Builder;
-use Elastica\Query\TermQuery;
-use Elastica\Query\TextQuery;
+use Elastica\Query\Term;
+use Elastica\Query\Text;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
 
@@ -52,7 +52,7 @@ class QueryTest extends BaseTest
 
     public function testRawQuery()
     {
-        $textQuery = new TextQuery();
+        $textQuery = new Text();
         $textQuery->setField('title', 'test');
 
         $query1 = Query::create($textQuery);
@@ -75,7 +75,7 @@ class QueryTest extends BaseTest
         $doc = new Document(3, array('firstname' => 'nicolas', 'lastname' => 'ruflin'));
         $type->addDocument($doc);
 
-        $queryTerm = new TermQuery();
+        $queryTerm = new Term();
         $queryTerm->setTerm('lastname', 'ruflin');
 
         $index->refresh();
@@ -150,7 +150,7 @@ class QueryTest extends BaseTest
             $this->assertTrue(true);
         }
 
-        $termQuery = new TermQuery();
+        $termQuery = new Term();
         $termQuery->setTerm('text', 'value');
         $query->setQuery($termQuery);
 

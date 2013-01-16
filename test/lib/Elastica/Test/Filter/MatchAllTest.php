@@ -2,14 +2,14 @@
 
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\MatchAllFilter;
+use Elastica\Filter\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
 class MatchAllTest extends BaseTest
 {
     public function testToArray()
     {
-        $filter = new MatchAllFilter();
+        $filter = new MatchAll();
 
         $expectedArray = array('match_all' => new \stdClass());
 

@@ -163,7 +163,7 @@ class Connection extends Param
      */
     public function getTransportObject()
     {
-        $className = 'Elastica\\Transport\\' . $this->getTransport() . 'Transport';
+        $className = 'Elastica\\Transport\\' . $this->getTransport();
         if (!class_exists($className)) {
             throw new InvalidException('Invalid transport');
         }

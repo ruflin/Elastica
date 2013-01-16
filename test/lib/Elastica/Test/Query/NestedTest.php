@@ -2,20 +2,20 @@
 
 namespace Elastica\Test\Query;
 
-use Elastica\Query\NestedQuery;
-use Elastica\Query\QueryStringQuery;
+use Elastica\Query\Nested;
+use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 
 class NestedTest extends BaseTest
 {
     public function testSetQuery()
     {
-        $nested = new NestedQuery();
+        $nested = new Nested();
         $path = 'test1';
 
-        $queryString = new QueryStringQuery('test');
-        $this->assertInstanceOf('Elastica\Query\NestedQuery', $nested->setQuery($queryString));
-        $this->assertInstanceOf('Elastica\Query\NestedQuery', $nested->setPath($path));
+        $queryString = new QueryString('test');
+        $this->assertInstanceOf('Elastica\Query\Nested', $nested->setQuery($queryString));
+        $this->assertInstanceOf('Elastica\Query\Nested', $nested->setPath($path));
         $expected = array(
             'nested' => array(
                 'query' => $queryString->toArray(),

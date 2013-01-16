@@ -3,10 +3,10 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
-use Elastica\Filter\NestedFilter;
-use Elastica\Query\TermsQuery;
+use Elastica\Filter\Nested;
+use Elastica\Query\Terms;
 use Elastica\Search;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
 class NestedTest extends BaseTest
@@ -17,7 +17,7 @@ class NestedTest extends BaseTest
         $index = $client->getIndex('elastica_test_filter_nested');
         $index->create(array(), true);
         $type = $index->getType('user');
-        $mapping = new MappingType();
+        $mapping = new Mapping();
         $mapping->setProperties(
             array(
                 'firstname' => array('type' => 'string', 'store' => 'yes'),
@@ -68,9 +68,9 @@ class NestedTest extends BaseTest
 
     public function testToArray()
     {
-        $f = new NestedFilter();
+        $f = new Nested();
         $this->assertEquals(array('nested' => array()), $f->toArray());
-        $q = new TermsQuery();
+        $q = new Terms();
         $q->setTerms('hobby', array('guitar'));
         $f->setPath('hobbies');
         $f->setQuery($q);
@@ -89,9 +89,9 @@ class NestedTest extends BaseTest
 
     public function testShouldReturnTheRightNumberOfResult()
     {
-        $f = new NestedFilter();
+        $f = new Nested();
         $this->assertEquals(array('nested' => array()), $f->toArray());
-        $q = new TermsQuery();
+        $q = new Terms();
         $q->setTerms('hobby', array('guitar'));
         $f->setPath('hobbies');
         $f->setQuery($q);
@@ -104,9 +104,9 @@ class NestedTest extends BaseTest
 
         $this->assertEquals(1, $r->getTotalHits());
 
-        $f = new NestedFilter();
+        $f = new Nested();
         $this->assertEquals(array('nested' => array()), $f->toArray());
-        $q = new TermsQuery();
+        $q = new Terms();
         $q->setTerms('hobby', array('opensource'));
         $f->setPath('hobbies');
         $f->setQuery($q);

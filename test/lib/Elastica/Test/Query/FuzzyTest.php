@@ -3,14 +3,14 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\FuzzyQuery;
+use Elastica\Query\Fuzzy;
 use Elastica\Test\Base as BaseTest;
 
 class FuzzyTest extends BaseTest
 {
     public function testToArray()
     {
-        $fuzzy = new FuzzyQuery();
+        $fuzzy = new Fuzzy();
 
         $fuzzy->addField('user', array('value' => 'Nicolas', 'boost' => 1.0));
 
@@ -47,7 +47,7 @@ class FuzzyTest extends BaseTest
         $type = 'text_phrase';
         $field = 'name';
 
-        $query = new FuzzyQuery();
+        $query = new Fuzzy();
         $query->addField('name', array('value' => 'Baden'));
 
         $resultSet = $index->search($query);

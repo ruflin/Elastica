@@ -3,7 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\TermsQuery;
+use Elastica\Query\Terms;
 use Elastica\Test\Base as BaseTest;
 
 class TermsTest extends BaseTest
@@ -22,7 +22,7 @@ class TermsTest extends BaseTest
         $doc = new Document(3, array('name' => 'ruflin'));
         $type->addDocument($doc);
 
-        $query = new TermsQuery();
+        $query = new Terms();
         $query->setTerms('name', array('nicolas', 'hello'));
 
         $index->refresh();
@@ -43,7 +43,7 @@ class TermsTest extends BaseTest
         $terms = array('nicolas', 'ruflin');
         $minimum = 2;
 
-        $query = new TermsQuery($key, $terms);
+        $query = new Terms($key, $terms);
         $query->setMinimumMatch($minimum);
 
         $data = $query->toArray();
@@ -55,7 +55,7 @@ class TermsTest extends BaseTest
      */
     public function testInvalidParams()
     {
-        $query = new TermsQuery();
+        $query = new Terms();
 
         $query->toArray();
     }

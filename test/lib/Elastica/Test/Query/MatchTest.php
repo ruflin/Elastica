@@ -3,7 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\MatchQuery;
+use Elastica\Query\Match;
 use Elastica\Test\Base as BaseTest;
 
 class MatchTest extends BaseTest
@@ -22,7 +22,7 @@ class MatchTest extends BaseTest
         $prefixLength = 3;
         $maxExpansions = 12;
 
-        $query = new MatchQuery();
+        $query = new Match();
         $query->setFieldQuery($field, $testQuery);
         $query->setFieldType($field, $type);
         $query->setFieldOperator($field, $operator);
@@ -75,7 +75,7 @@ class MatchTest extends BaseTest
         $field = 'name';
         $operator = 'or';
 
-        $query = new MatchQuery();
+        $query = new Match();
         $query->setFieldQuery($field, 'Basel New');
         $query->setFieldOperator($field, $operator);
 
@@ -105,7 +105,7 @@ class MatchTest extends BaseTest
         $field = 'name';
         $type = 'phrase';
 
-        $query = new MatchQuery();
+        $query = new Match();
         $query->setFieldQuery($field, 'New York');
         $query->setFieldType($field, $type);
 
@@ -135,7 +135,7 @@ class MatchTest extends BaseTest
         $field = 'name';
         $type = 'phrase_prefix';
 
-        $query = new MatchQuery();
+        $query = new Match();
         $query->setFieldQuery($field, 'New');
         $query->setFieldType($field, $type);
 

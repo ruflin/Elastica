@@ -4,9 +4,9 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Index;
-use Elastica\Query\FuzzyLikeThisQuery;
+use Elastica\Query\FuzzyLikeThis;
 use Elastica\Type;
-use Elastica\Type\MappingType;
+use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
 class FuzzyLikeThisTest extends BaseTest
@@ -20,7 +20,7 @@ class FuzzyLikeThisTest extends BaseTest
         //$index->getSettings()->setNumberOfShards(1);
 
         $type = new Type($index, 'helloworldfuzzy');
-        $mapping = new MappingType($type , array(
+        $mapping = new Mapping($type , array(
                'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
                'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
           ));
@@ -34,7 +34,7 @@ class FuzzyLikeThisTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $fltQuery = new FuzzyLikeThisQuery();
+        $fltQuery = new FuzzyLikeThis();
         $fltQuery->setLikeText("sample gmail");
         $fltQuery->addFields(array("email","content"));
         $fltQuery->setMinSimilarity(0.3);
@@ -45,7 +45,7 @@ class FuzzyLikeThisTest extends BaseTest
 
     public function testSetPrefixLength()
     {
-        $query = new FuzzyLikeThisQuery();
+        $query = new FuzzyLikeThis();
 
         $length = 3;
         $query->setPrefixLength($length);
@@ -57,7 +57,7 @@ class FuzzyLikeThisTest extends BaseTest
 
     public function testAddFields()
     {
-        $query = new FuzzyLikeThisQuery();
+        $query = new FuzzyLikeThis();
 
         $fields = array('test1', 'test2');
         $query->addFields($fields);
@@ -69,7 +69,7 @@ class FuzzyLikeThisTest extends BaseTest
 
     public function testSetLikeText()
     {
-        $query = new FuzzyLikeThisQuery();
+        $query = new FuzzyLikeThis();
 
         $text = ' hello world';
         $query->setLikeText($text);
@@ -81,7 +81,7 @@ class FuzzyLikeThisTest extends BaseTest
 
     public function testSetIgnoreTF()
     {
-        $query = new FuzzyLikeThisQuery();
+        $query = new FuzzyLikeThis();
 
         $ignoreTF = false;
         $query->setIgnoreTF($ignoreTF);
@@ -96,7 +96,7 @@ class FuzzyLikeThisTest extends BaseTest
 
     public function testSetIgnoreTFDefault()
     {
-        $query = new FuzzyLikeThisQuery();
+        $query = new FuzzyLikeThis();
 
         $data = $query->toArray();
 
@@ -106,7 +106,7 @@ class FuzzyLikeThisTest extends BaseTest
 
     public function testSetMinSimilarity()
     {
-        $query = new FuzzyLikeThisQuery();
+        $query = new FuzzyLikeThis();
 
         $similarity = 2;
         $query->setMinSimilarity($similarity);
@@ -118,7 +118,7 @@ class FuzzyLikeThisTest extends BaseTest
 
     public function testSetBoost()
     {
-        $query = new FuzzyLikeThisQuery();
+        $query = new FuzzyLikeThis();
 
         $boost = 2.2;
         $query->setBoost($boost);

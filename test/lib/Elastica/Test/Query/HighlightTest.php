@@ -4,7 +4,7 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Query;
-use Elastica\Query\QueryStringQuery;
+use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 
 class HighlightTest extends BaseTest
@@ -23,7 +23,7 @@ class HighlightTest extends BaseTest
         $doc = new Document(2, array('id' => 2, 'phrase' => $phrase, 'username' => 'peter', 'test' => array('2', '3', '5')));
         $type->addDocument($doc);
 
-        $queryString = new QueryStringQuery('rufl*');
+        $queryString = new QueryString('rufl*');
         $query = new Query($queryString);
         $query->setHighlight(array(
             'pre_tags' => array('<em class="highlight">'),
