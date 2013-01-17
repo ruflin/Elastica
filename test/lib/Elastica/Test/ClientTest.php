@@ -6,6 +6,7 @@ use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\ClientException;
+use Elastica\Script;
 use Elastica\Index;
 use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
@@ -455,5 +456,125 @@ class ClientTest extends BaseTest
 
         $response = $client->request('_status');
         $this->assertInstanceOf('Elastica\Response', $response);
+    }
+
+    public function testUpdateDocumentByDocument()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
+
+        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 'value2'));
+        $type->addDocument($newDocument);
+
+        $updateDocument = new Document(1, array('field2' => 'value2changed', 'field3' => 'value3added'));
+        $client->updateDocument(1, $updateDocument, $index->getName(), $type->getName());
+
+        $document = $type->getDocument(1);
+
+        $this->assertInstanceOf('Elastica\Document', $document);
+        $data = $document->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals('value2changed', $data['field2']);
+        $this->assertArrayHasKey('field3', $data);
+        $this->assertEquals('value3added', $data['field3']);
+    }
+
+    public function testUpdateDocumentByScript()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
+
+        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'should be changed'));
+        $type->addDocument($newDocument);
+
+        $script = new Script('ctx._source.field2 += 5; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
+        $client->updateDocument(1, $script, $index->getName(), $type->getName());
+
+        $document = $type->getDocument(1);
+
+        $this->assertInstanceOf('Elastica\Document', $document);
+        $data = $document->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals(15, $data['field2']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals('changed', $data['field4']);
+        $this->assertArrayNotHasKey('field3', $data);
+    }
+
+    public function testUpdateDocumentByDocumentWithScript()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
+
+        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4'));
+        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
+        $script->setParam('count', 5);
+        $newDocument->setScript($script);
+
+        // should use document fields because document does not exist, script is avoided
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
+
+        $document = $type->getDocument(1);
+
+        $this->assertInstanceOf('Elastica\Document', $document);
+        $data = $document->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals(10, $data['field2']);
+        $this->assertArrayHasKey('field3', $data);
+        $this->assertEquals('should be removed', $data['field3']);
+        $this->assertArrayHasKey('field4', $data);
+        $this->assertEquals('value4', $data['field4']);
+
+        // should use script because document exists, document values are ignored
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
+
+        $document = $type->getDocument(1);
+
+        $this->assertInstanceOf('Elastica\Document', $document);
+        $data = $document->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals(15, $data['field2']);
+        $this->assertArrayHasKey('field4', $data);
+        $this->assertEquals('changed', $data['field4']);
+        $this->assertArrayNotHasKey('field3', $data);
+    }
+
+    public function testUpdateDocumentByRawData()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
+
+        $newDocument = new Document(1, array('field1' => 'value1'));
+        $type->addDocument($newDocument);
+
+        $rawData = array(
+            'doc' => array(
+                'field2' => 'value2',
+            )
+        );
+
+        $response = $client->updateDocument(1, $rawData, $index->getName(), $type->getName(), array('retry_on_conflict' => 1));
+        $this->assertTrue($response->isOk());
+
+        $document = $type->getDocument(1);
+
+        $this->assertInstanceOf('Elastica\Document', $document);
+        $data = $document->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals('value2', $data['field2']);
     }
 }
