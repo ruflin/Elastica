@@ -4,13 +4,13 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Script;
 use Elastica\Search;
 use Elastica\Filter\Term;
 use Elastica\Type;
+use Elastica\Index;
 use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
@@ -186,15 +186,15 @@ class TypeTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica_Exception_NotFound
+     * @expectedException \Elastica\Exception\NotFoundException
      */
     public function testGetDocumentNotExistingIndex()
     {
-        $client = new Elastica_Client();
-        $index = new Elastica_Index($client, 'index');
-        $type = new Elastica_Type($index, 'type');
+        $client = new Client();
+        $index = new Index($client, 'index');
+        $type = new Type($index, 'type');
 
-        $document = $type->getDocument(1);
+        $type->getDocument(1);
     }
 
     public function testDeleteByQuery()
@@ -262,7 +262,7 @@ class TypeTest extends BaseTest
 
     /**
      * Test Delete of index type.  After delete will check for type mapping.
-     * @expectedException Elastica_Exception_Response
+     * @expectedException \Elastica\Exception\ResponseException
      * @expectedExceptionMessage TypeMissingException[[elastica_test] type[test] missing]
      */
     public function testDeleteType()
@@ -329,14 +329,14 @@ class TypeTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica_Exception_Invalid
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testUpdateDocumentWithoutId()
     {
         $index = $this->_createIndex();
         $type = $index->getType('elastica_type');
 
-        $document = new Elastica_Document();
+        $document = new Document();
 
         $type->updateDocument($document);
     }
@@ -362,25 +362,10 @@ class TypeTest extends BaseTest
         $this->assertEquals($hashId, $doc->getId());
     }
 
-    public function testSetTypeAndIndex()
+    public function testGetType()
     {
-        $document = new Elastica_Document();
-        $document->setType('type');
-
-        $this->assertEquals('type', $document->getType());
-
-        $index = new Elastica_Index($this->_getClient(), 'index');
+        $index = new Index($this->_getClient(), 'index');
         $type = $index->getType('type');
-
-        $document = new Elastica_Document();
-        $document->setIndex('index2');
-        $this->assertEquals('index2', $document->getIndex());
-
-        $document->setType($type);
-
-        $this->assertEquals('index', $document->getIndex());
-        $this->assertEquals('type', $document->getType());
-
         $this->assertEquals('type', $type->getType());
     }
 }
