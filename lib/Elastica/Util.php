@@ -118,8 +118,8 @@ class Util
     }
 
     /**
-     * Tries to guess the name of the param, based on its class
-     * Exemple: \Elastica\Filter\HasChildFilter => has_child
+     * Tries to guess the name of the param, based on the Elastica class
+     * Example: \Elastica\Filter\HasChildFilter => has_child
      *
      * @param string|object Class or Class name
      * @return string parameter name
@@ -131,10 +131,18 @@ class Util
         }
 
         $parts = explode('\\', $class);
+
+        while ($parts[0] != 'Elastica') {
+            $reflectionClass = new \ReflectionClass($class);
+            $class = $reflectionClass->getParentClass()->getName();
+            $parts = explode('\\', $class);
+        }
+        
         $last  = array_pop($parts);
         $last  = preg_replace('/(Facet|Query|Filter)$/', '', $last);
         $name  = self::toSnakeCase($last);
 
         return $name;
     }
+
 }
