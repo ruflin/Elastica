@@ -482,7 +482,7 @@ class Builder extends AbstractQuery
     }
 
     /**
-     * Add a greater than or equal to (lt) clause.
+     * Add a greater than or equal to (gte) clause.
      *
      * Used in range blocks.
      *
