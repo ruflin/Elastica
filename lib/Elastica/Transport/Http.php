@@ -2,8 +2,7 @@
 
 namespace Elastica\Transport;
 
-use Elastica\Exception\ConnectionException;
-use Elastica\Exception\InvalidException;
+use Elastica\Exception\Connection\HttpException;
 use Elastica\Exception\ResponseException;
 use Elastica\Request;
 use Elastica\Response;
@@ -39,8 +38,7 @@ class Http extends AbstractTransport
      * @param  \Elastica\Request                     $request
      * @param  array                                $params  Host, Port, ...
      * @throws \Elastica\Exception\ResponseException
-     * @throws \Elastica\Exception\InvalidException
-     * @throws \Elastica\Exception\ClientException
+     * @throws \Elastica\Exception\Connection\HttpException
      * @return \Elastica\Response                    Response object
      */
     public function exec(Request $request, array $params)
@@ -124,7 +122,7 @@ class Http extends AbstractTransport
         }
 
         if ($errorNumber > 0) {
-            throw new ConnectionException($errorNumber, $request, $response);
+            throw new HttpException($errorNumber, $request, $response);
         }
 
         return $response;

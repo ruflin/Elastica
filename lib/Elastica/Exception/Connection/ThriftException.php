@@ -1,4 +1,12 @@
 <?php
+
+namespace Elastica\Exception\Connection;
+
+use Elastica\Exception\ConnectionException;
+use Elastica\Request;
+use Elastica\Response;
+use Thrift\Exception\TException;
+
 /**
  * Transport exception
  *
@@ -6,7 +14,7 @@
  * @package Elastica
  * @author Mikhail Shamin <munk13@gmail.com>
  */
-class Elastica_Exception_Transport_Thrift extends Elastica_Exception_Transport
+class ThriftException extends ConnectionException
 {
     /**
      * @var TException
@@ -14,11 +22,11 @@ class Elastica_Exception_Transport_Thrift extends Elastica_Exception_Transport
     protected $_thriftException;
 
     /**
-     * @param TException $thriftException
-     * @param Elastica_Request $request
-     * @param Elastica_Response $response
+     * @param \Thrift\Exception\TException $thriftException
+     * @param \Elastica\Request $request
+     * @param \Elastica\Response $response
      */
-    public function __construct(TException $thriftException, Elastica_Request $request = null, Elastica_Response $response = null)
+    public function __construct(TException $thriftException, Request $request = null, Response $response = null)
     {
         $this->_thriftException = $thriftException;
         $message = $this->getErrorMessage($this->getThriftException());
@@ -26,7 +34,7 @@ class Elastica_Exception_Transport_Thrift extends Elastica_Exception_Transport
     }
 
     /**
-     * @param TException $thriftException
+     * @param \Thrift\Exception\TException $thriftException
      * @return string
      */
     public function getErrorMessage(TException $thriftException)

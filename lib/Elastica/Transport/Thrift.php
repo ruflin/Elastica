@@ -1,4 +1,21 @@
 <?php
+
+namespace Elastica\Transport;
+
+use Elastica\Exception\Connection\ThriftException;
+use Elastica\Exception\ResponseException;
+use Elastica\Request;
+use Elastica\Response;
+use Elasticsearch\Method;
+use Elasticsearch\RestResponse;
+use Elasticsearch\RestClient;
+use Elasticsearch\RestRequest;
+use Thrift\Transport\TSocket;
+use Thrift\Transport\TFramedTransport;
+use Thrift\Transport\TBufferedTransport;
+use Thrift\Protocol\TBinaryProtocolAccelerated;
+use Thrift\Exception\TException;
+
 /**
  * Elastica Thrift Transport object
  *
@@ -6,17 +23,7 @@
  * @package Elastica
  * @author Mikhail Shamin <munk13@gmail.com>
  */
-
-if (!isset($GLOBALS['THRIFT_ROOT'])) {
-    $GLOBALS['THRIFT_ROOT'] = realpath(dirname(__FILE__) . '/../../../thrift');
-}
-
-include_once $GLOBALS['THRIFT_ROOT'].'/Thrift.php';
-include_once $GLOBALS['THRIFT_ROOT'].'/transport/TSocket.php';
-include_once $GLOBALS['THRIFT_ROOT'].'/protocol/TBinaryProtocol.php';
-include_once $GLOBALS['THRIFT_ROOT'].'/packages/elasticsearch/Rest.php';
-
-class Elastica_Transport_Thrift extends Elastica_Transport_Abstract
+class Thrift extends AbstractTransport
 {
     /**
      * @var RestClient[]
@@ -29,7 +36,7 @@ class Elastica_Transport_Thrift extends Elastica_Transport_Abstract
      * @param int $sendTimeout millisecs
      * @param int $recvTimeout millisecs
      * @param bool $framedTransport
-     * @return RestClient
+     * @return \Elasticsearch\RestClient
      */
     protected function _createClient($host, $port, $sendTimeout = null, $recvTimeout = null, $framedTransport = false)
     {
@@ -46,7 +53,7 @@ class Elastica_Transport_Thrift extends Elastica_Transport_Abstract
         if ($framedTransport) {
             $transport = new TFramedTransport($socket);
         } else {
-            $transport = new TBufferedTransport($socket, 1024, 1024);
+            $transport = new TBufferedTransport($socket);
         }
         $protocol = new TBinaryProtocolAccelerated($transport);
 
@@ -62,7 +69,8 @@ class Elastica_Transport_Thrift extends Elastica_Transport_Abstract
      * @param int $port
      * @param int $sendTimeout
      * @param int $recvTimeout
-     * @return RestClient
+     * @param bool $framedProtocol
+     * @return \Elasticsearch\RestClient
      */
     protected function _getClient($host, $port, $sendTimeout = null, $recvTimeout = null, $framedProtocol = false)
     {
@@ -76,21 +84,32 @@ class Elastica_Transport_Thrift extends Elastica_Transport_Abstract
     /**
      * Makes calls to the elasticsearch server
      *
+     * @param \Elastica\Request $request
      * @param  array             $params Host, Port, ...
-     * @return Elastica_Response Response object
+     * @throws \Elastica\Exception\Connection\ThriftException
+     * @throws \Elastica\Exception\ResponseException
+     * @return \Elastica\Response Response object
      */
-    public function exec(array $params)
+    public function exec(Request $request, array $params)
     {
-        $request = $this->getRequest();
+        $connection = $this->getConnection();
 
-        $sendTimeout = (!empty($params['sendTimeout'])) ? $params['sendTimeout'] : null;
-        $recvTimeout = (!empty($params['recvTimeout'])) ? $params['recvTimeout'] : null;
-        $framedProtocol = (!empty($params['framedProtocol'])) ? (bool) $params['framedProtocol'] : false;
-        $client = $this->_getClient($params['host'], $params['port'], $sendTimeout, $recvTimeout, $framedProtocol);
+        $sendTimeout = $connection->hasConfig('sendTimeout') ? $connection->getConfig('sendTimeout') : null;
+        $recvTimeout = $connection->hasConfig('recvTimeout') ? $connection->getConfig('recvTimeout') : null;
+        $framedProtocol = $connection->hasConfig('framedProtocol') ? (bool) $connection->getConfig('framedProtocol') : false;
 
-        $restRequest = new Elasticsearch_RestRequest();
-        $restRequest->method = $GLOBALS['Elasticsearch_E_Method'][$request->getMethod()];
+        $client = $this->_getClient(
+            $connection->getHost(),
+            $connection->getPort(),
+            $sendTimeout,
+            $recvTimeout,
+            $framedProtocol
+        );
+
+        $restRequest = new RestRequest();
+        $restRequest->method = array_search($request->getMethod(), Method::$__names);
         $restRequest->uri = $request->getPath();
+
         $query = $request->getQuery();
         if (!empty($query)) {
             $restRequest->parameters = $query;
@@ -106,24 +125,17 @@ class Elastica_Transport_Thrift extends Elastica_Transport_Abstract
             $restRequest->body = $content;
         }
 
-        $start = microtime(true);
-        /* @var $result Elasticsearch_RestResponse */
+        /* @var $result RestResponse */
         try {
             $result = $client->execute($restRequest);
-            $response = new Elastica_Response($result->body);
+            $response = new Response($result->body);
         } catch (TException $e) {
-            $response = new Elastica_Response('');
-            throw new Elastica_Exception_Transport($e, $request, $response);
-        }
-
-        $end = microtime(true);
-
-        if (defined('DEBUG') && DEBUG) {
-            $response->setQueryTime($end - $start);
+            $response = new Response('');
+            throw new ThriftException($e, $request, $response);
         }
 
         if ($response->hasError()) {
-            throw new Elastica_Exception_Response($response);
+            throw new ResponseException($response);
         }
 
         return $response;
