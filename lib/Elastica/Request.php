@@ -18,34 +18,6 @@ class Request extends Param
     const DELETE = 'DELETE';
 
     /**
-     * Request path
-     *
-     * @var string Request path
-     */
-    protected $_path;
-
-    /**
-     * Request method (use const's)
-     *
-     * @var string Request method (use const's)
-     */
-    protected $_method;
-
-    /**
-     * Data array
-     *
-     * @var array Data array
-     */
-    protected $_data;
-
-    /**
-     * Query params
-     *
-     * @var array Query params
-     */
-    protected $_query;
-
-    /**
      * @var \Elastica\Connection
      */
     protected $_connection;
@@ -189,5 +161,39 @@ class Request extends Param
 
         // Refactor: Not full toArray needed in exec?
         return $transport->exec($this, $this->getConnection()->toArray());
+    }
+
+    /**
+     * Converts request to curl request format
+     *
+     * @return string
+     */
+    public function toString()
+    {
+        $message = 'curl -X' . strtoupper($this->getMethod()) . ' ';
+        $message .= '\'http://' . $this->getConnection()->getHost() . ':' . $this->getConnection()->getPort() . '/';
+        $message .= $this->getPath();
+
+        $query = $this->getQuery();
+        if (!empty($query)) {
+            $message .= '?' . http_build_query($query);
+        }
+
+        $message .= '\'';
+
+        $data = $this->getData();
+        if (!empty($data)) {
+            $message .= ' -d \'' . json_encode($data) . '\'';
+        }
+
+        return $message;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
     }
 }
