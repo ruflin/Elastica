@@ -1,14 +1,18 @@
 <?php
+
+namespace Elastica\Filter;
+
+use Elastica\Exception\InvalidException;
+
 /**
  * Terms filter
  *
- * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/terms-filter.html
  */
-class Elastica_Filter_Terms extends Elastica_Filter_Abstract
+class Terms extends AbstractFilter
 {
     /**
      * Terms
@@ -45,8 +49,9 @@ class Elastica_Filter_Terms extends Elastica_Filter_Abstract
     /**
      * Sets key and terms for the filter
      *
-     * @param string $key   Terms key
-     * @param array  $terms Terms for the query.
+     * @param  string                      $key   Terms key
+     * @param  array                       $terms Terms for the query.
+     * @return \Elastica\Filter\Terms
      */
     public function setTerms($key, array $terms)
     {
@@ -59,8 +64,8 @@ class Elastica_Filter_Terms extends Elastica_Filter_Abstract
     /**
      * Adds an additional term to the query
      *
-     * @param  string                   $term Filter term
-     * @return Elastica_Filter_Abstract Filter object
+     * @param  string                      $term Filter term
+     * @return \Elastica\Filter\Terms Filter object
      */
     public function addTerm($term)
     {
@@ -70,15 +75,16 @@ class Elastica_Filter_Terms extends Elastica_Filter_Abstract
     }
 
     /**
-     * Convers object to an arrray
+     * Converts object to an array
      *
-     * @see Elastica_Filter_Abstract::toArray()
-     * @return array data array
+     * @see \Elastica\Filter\AbstractFilter::toArray()
+     * @throws \Elastica\Exception\InvalidException
+     * @return array                               data array
      */
     public function toArray()
     {
         if (empty($this->_key)) {
-            throw new Elastica_Exception_Invalid('Terms key has to be set');
+            throw new InvalidException('Terms key has to be set');
         }
         $this->_params[$this->_key] = $this->_terms;
 

@@ -1,4 +1,7 @@
 <?php
+
+namespace Elastica\Facet;
+
 /**
  * Implements the Histogram facet.
  *
@@ -7,13 +10,13 @@
  * @author Raul Martinez Jr  <juneym@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/histogram-facet.html
  */
-class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
+class Histogram extends AbstractFacet
 {
     /**
      * Sets the field for histogram
      *
-     * @param  string                   $field The name of the field for the historgram
-     * @return Elastica_Facet_Histogram
+     * @param  string                        $field The name of the field for the histogram
+     * @return \Elastica\Facet\Histogram
      */
     public function setField($field)
     {
@@ -23,8 +26,8 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
     /**
      * Set the value for interval
      *
-     * @param  string               $interval
-     * @return Elastica_Facet_Range
+     * @param  string                        $interval
+     * @return \Elastica\Facet\Histogram
      */
     public function setInterval($interval)
     {
@@ -34,9 +37,9 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
     /**
      * Set the fields for key_field and value_field
      *
-     * @param  string               $keyField   Key field
-     * @param  string               $valueField Value field
-     * @return Elastica_Facet_Range
+     * @param  string                        $keyField   Key field
+     * @param  string                        $valueField Value field
+     * @return \Elastica\Facet\Histogram
      */
     public function setKeyValueFields($keyField, $valueField)
     {
@@ -46,8 +49,9 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
     /**
      * Sets the key and value for this facet by script.
      *
-     * @param string $keyScript   Script to check whether it falls into the range.
-     * @param string $valueScript Script to use for statistical calculations.
+     * @param  string                        $keyScript   Script to check whether it falls into the range.
+     * @param  string                        $valueScript Script to use for statistical calculations.
+     * @return \Elastica\Facet\Histogram
      */
     public function setKeyValueScripts($keyScript, $valueScript)
     {
@@ -58,8 +62,8 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
     /**
      * Set the "params" essential to the a script
      *
-     * @param  array                    $params Associative array (key/value pair)
-     * @return Elastica_Facet_Histogram Facet object
+     * @param  array                         $params Associative array (key/value pair)
+     * @return \Elastica\Facet\Histogram
      */
     public function setScriptParams(array $params)
     {
@@ -70,8 +74,8 @@ class Elastica_Facet_Histogram extends Elastica_Facet_Abstract
      * Creates the full facet definition, which includes the basic
      * facet definition of the parent.
      *
-     * @see Elastica_Facet_Abstract::toArray()
-     * @throws Elastica_Exception_Invalid When the right fields haven't been set.
+     * @see \Elastica\Facet\AbstractFacet::toArray()
+     * @throws \Elastica\Exception\InvalidException When the right fields haven't been set.
      * @return array
      */
     public function toArray()

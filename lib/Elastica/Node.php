@@ -1,4 +1,9 @@
 <?php
+
+namespace Elastica;
+use Elastica\Node\Info;
+use Elastica\Node\Stats;
+
 /**
  * Elastica cluster node object
  *
@@ -7,8 +12,15 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
-class Elastica_Node
+class Node
 {
+    /**
+     * Client
+     *
+     * @var \Elastica\Client
+     */
+    protected $_client = null;
+
     /**
      * Node name
      *
@@ -19,14 +31,14 @@ class Elastica_Node
     /**
      * Node stats
      *
-     * @var Elastica_Node_Stats Node Stats
+     * @var \Elastica\Node\Stats Node Stats
      */
     protected $_stats = null;
 
     /**
      * Node info
      *
-     * @var Elastica_Node_Info Node info
+     * @var \Elastica\Node\Info Node info
      */
     protected $_info = null;
 
@@ -34,9 +46,9 @@ class Elastica_Node
      * Create a new node object
      *
      * @param string          $name   Node name
-     * @param Elastica_Client $client Node object
+     * @param \Elastica\Client $client Node object
      */
-    public function __construct($name, Elastica_Client $client)
+    public function __construct($name, Client $client)
     {
         $this->_name = $name;
         $this->_client = $client;
@@ -56,7 +68,7 @@ class Elastica_Node
     /**
      * Returns the current client object
      *
-     * @return Elastica_Client Client
+     * @return \Elastica\Client Client
      */
     public function getClient()
     {
@@ -66,12 +78,12 @@ class Elastica_Node
     /**
      * Return stats object of the current node
      *
-     * @return Elastica_Node_Stats Node stats
+     * @return \Elastica\Node\Stats Node stats
      */
     public function getStats()
     {
         if (!$this->_stats) {
-            $this->_stats = new Elastica_Node_Stats($this);
+            $this->_stats = new Stats($this);
         }
 
         return $this->_stats;
@@ -80,21 +92,21 @@ class Elastica_Node
     /**
      * Return info object of the current node
      *
-     * @return Elastica_Node_Info Node info object
+     * @return \Elastica\Node\Info Node info object
      */
     public function getInfo()
     {
         if (!$this->_info) {
-            $this->_info = new Elastica_Node_Info($this);
+            $this->_info = new Info($this);
         }
 
         return $this->_info;
     }
 
     /**
-     * Refreshs all node information
+     * Refreshes all node information
      *
-     * This should be called after upating a node to refresh all information
+     * This should be called after updating a node to refresh all information
      */
     public function refresh()
     {
@@ -105,14 +117,14 @@ class Elastica_Node
     /**
      * Shuts this node down
      *
-     * @param  string            $delay OPTIONAL Delay after which node is shut down (defualt = 1s)
-     * @return Elastica_Response
+     * @param  string            $delay OPTIONAL Delay after which node is shut down (default = 1s)
+     * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown.html
      */
     public function shutdown($delay = '1s')
     {
         $path = '_cluster/nodes/' . $this->getName() . '/_shutdown?delay=' . $delay;
 
-        return $this->_client->request($path, Elastica_Request::POST);
+        return $this->_client->request($path, Request::POST);
     }
 }

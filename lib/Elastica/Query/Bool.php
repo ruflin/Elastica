@@ -1,20 +1,24 @@
 <?php
+
+namespace Elastica\Query;
+use Elastica\Exception\InvalidException;
+use Elastica\Query\AbstractQuery;
+
 /**
  * Bool query
  *
- * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/bool-query.html
  */
-class Elastica_Query_Bool extends Elastica_Query_Abstract
+class Bool extends AbstractQuery
 {
     /**
      * Add should part to query
      *
-     * @param  Elastica_Query_Abstract|array $args Should query
-     * @return Elastica_Query_Bool           Current object
+     * @param  \Elastica\Query\AbstractQuery|array $args Should query
+     * @return \Elastica\Query\Bool           Current object
      */
     public function addShould($args)
     {
@@ -24,8 +28,8 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
     /**
      * Add must part to query
      *
-     * @param  Elastica_Query_Abstract|array $args Must query
-     * @return Elastica_Query_Bool           Current object
+     * @param  \Elastica\Query\AbstractQuery|array $args Must query
+     * @return \Elastica\Query\Bool           Current object
      */
     public function addMust($args)
     {
@@ -35,8 +39,8 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
     /**
      * Add must not part to query
      *
-     * @param  Elastica_Query_Abstract|array $args Must not query
-     * @return Elastica_Query_Bool           Current object
+     * @param  \Elastica\Query\AbstractQuery|array $args Must not query
+     * @return \Elastica\Query\Bool           Current object
      */
     public function addMustNot($args)
     {
@@ -46,18 +50,19 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
     /**
      * Adds a query to the current object
      *
-     * @param  string                        $type Query type
-     * @param  Elastica_Query_Abstract|array $args Query
-     * @throws Elastica_Exception_Invalid    If not valid query
+     * @param  string                              $type Query type
+     * @param  \Elastica\Query\AbstractQuery|array  $args Query
+     * @return \Elastica\Query\Bool
+     * @throws \Elastica\Exception\InvalidException If not valid query
      */
     protected function _addQuery($type, $args)
     {
-        if ($args instanceof Elastica_Query_Abstract) {
+        if ($args instanceof AbstractQuery) {
             $args = $args->toArray();
         }
 
         if (!is_array($args)) {
-            throw new Elastica_Exception_Invalid('Invalid parameter. Has to be array or instance of Elastica_Query');
+            throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
         }
 
         return $this->addParam($type, $args);
@@ -67,7 +72,7 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
      * Sets boost value of this query
      *
      * @param  float               $boost Boost value
-     * @return Elastica_Query_Bool Current object
+     * @return \Elastica\Query\Bool Current object
      */
     public function setBoost($boost)
     {
@@ -78,7 +83,7 @@ class Elastica_Query_Bool extends Elastica_Query_Abstract
      * Set the minimum number of of should match
      *
      * @param  int                 $minimumNumberShouldMatch Should match minimum
-     * @return Elastica_Query_Bool Current object
+     * @return \Elastica\Query\Bool Current object
      */
     public function setMinimumNumberShouldMatch($minimumNumberShouldMatch)
     {

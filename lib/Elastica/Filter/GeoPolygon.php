@@ -1,15 +1,18 @@
 <?php
 
+namespace Elastica\Filter;
+
+use Elastica\Filter\AbstractFilter;
+
 /**
  * Geo polygon filter
  *
- * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Michael Maclean <mgdm@php.net>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-polygon-filter.html
  */
-class Elastica_Filter_GeoPolygon extends Elastica_Filter_Abstract
+class GeoPolygon extends AbstractFilter
 {
     /**
      * Key
@@ -40,7 +43,7 @@ class Elastica_Filter_GeoPolygon extends Elastica_Filter_Abstract
     /**
      * Converts filter to array
      *
-     * @see Elastica_Filter_Abstract::toArray()
+     * @see \Elastica\Filter\AbstractFilter::toArray()
      * @return array
      */
     public function toArray()

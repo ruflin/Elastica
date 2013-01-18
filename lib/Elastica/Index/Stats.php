@@ -1,4 +1,9 @@
 <?php
+
+namespace Elastica\Index;
+use Elastica\Index as BaseIndex;
+use Elastica\Request;
+
 /**
  * Elastica index stats object
  *
@@ -7,12 +12,12 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-stats.html
  */
-class Elastica_Index_Stats
+class Stats
 {
     /**
      * Response
      *
-     * @var Elastica_Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -26,16 +31,16 @@ class Elastica_Index_Stats
     /**
      * Index
      *
-     * @var Elastica_Index Index object
+     * @var \Elastica\Index Index object
      */
     protected $_index = null;
 
     /**
      * Construct
      *
-     * @param Elastica_Index $index Index object
+     * @param \Elastica\Index $index Index object
      */
-    public function __construct(Elastica_Index $index)
+    public function __construct(BaseIndex $index)
     {
         $this->_index = $index;
         $this->refresh();
@@ -75,7 +80,7 @@ class Elastica_Index_Stats
     /**
      * Returns the index object
      *
-     * @return Elastica_Index Index object
+     * @return \Elastica\Index Index object
      */
     public function getIndex()
     {
@@ -85,7 +90,7 @@ class Elastica_Index_Stats
     /**
      * Returns response object
      *
-     * @return Elastica_Response Response object
+     * @return \Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -98,7 +103,7 @@ class Elastica_Index_Stats
     public function refresh()
     {
         $path = '_stats';
-        $this->_response = $this->getIndex()->request($path, Elastica_Request::GET);
+        $this->_response = $this->getIndex()->request($path, Request::GET);
         $this->_data = $this->getResponse()->getData();
     }
 }

@@ -1,4 +1,10 @@
 <?php
+
+namespace Elastica\Node;
+
+use Elastica\Node as BaseNode;
+use Elastica\Request;
+
 /**
  * Elastica cluster node object
  *
@@ -7,12 +13,12 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
-class Elastica_Node_Stats
+class Stats
 {
     /**
      * Response
      *
-     * @var Elastica_Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -26,16 +32,16 @@ class Elastica_Node_Stats
     /**
      * Node
      *
-     * @var Elastica_Node Node object
+     * @var \Elastica\Node Node object
      */
     protected $_node = null;
 
     /**
      * Create new stats for node
      *
-     * @param Elastica_Node $node Elastica node object
+     * @param \Elastica\Node $node Elastica node object
      */
-    public function __construct(Elastica_Node $node)
+    public function __construct(BaseNode $node)
     {
         $this->_node = $node;
         $this->refresh();
@@ -77,7 +83,7 @@ class Elastica_Node_Stats
     /**
      * Returns node object
      *
-     * @return Elastica_Node Node object
+     * @return \Elastica\Node Node object
      */
     public function getNode()
     {
@@ -87,7 +93,7 @@ class Elastica_Node_Stats
     /**
      * Returns response object
      *
-     * @return Elastica_Response Response object
+     * @return \Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -97,12 +103,12 @@ class Elastica_Node_Stats
     /**
      * Reloads all nodes information. Has to be called if informations changed
      *
-     * @return Elastica_Response Response object
+     * @return \Elastica\Response Response object
      */
     public function refresh()
     {
         $path = '_cluster/nodes/' . $this->getNode()->getName() . '/stats';
-        $this->_response = $this->getNode()->getClient()->request($path, Elastica_Request::GET);
+        $this->_response = $this->getNode()->getClient()->request($path, Request::GET);
         $data = $this->getResponse()->getData();
         $this->_data = reset($data['nodes']);
     }

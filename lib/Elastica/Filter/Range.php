@@ -1,14 +1,16 @@
 <?php
+
+namespace Elastica\Filter;
+
 /**
  * Range Filter
  *
- * @uses Elastica_Filter_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/range-filter.html
  */
-class Elastica_Filter_Range extends Elastica_Filter_Abstract
+class Range extends AbstractFilter
 {
     /**
      * Fields
@@ -20,9 +22,8 @@ class Elastica_Filter_Range extends Elastica_Filter_Abstract
     /**
      * Construct range filter
      *
-     * @param  string                $fieldName Field name
-     * @param  array                 $args      Field arguments
-     * @return Elastica_Filter_Range
+     * @param string|bool $fieldName Field name
+     * @param array       $args      Field arguments
      */
     public function __construct($fieldName = false, array $args = array())
     {
@@ -34,9 +35,9 @@ class Elastica_Filter_Range extends Elastica_Filter_Abstract
     /**
      * Ads a field with arguments to the range query
      *
-     * @param  string                $fieldName Field name
-     * @param  array                 $args      Field arguments
-     * @return Elastica_Filter_Range
+     * @param  string                      $fieldName Field name
+     * @param  array                       $args      Field arguments
+     * @return \Elastica\Filter\Range
      */
     public function addField($fieldName, array $args)
     {
@@ -46,9 +47,9 @@ class Elastica_Filter_Range extends Elastica_Filter_Abstract
     }
 
     /**
-     * Convers object to array
+     * Converts object to array
      *
-     * @see Elastica_Filter_Abstract::toArray()
+     * @see \Elastica\Filter\AbstractFilter::toArray()
      * @return array Filter array
      */
     public function toArray()
