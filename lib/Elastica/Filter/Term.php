@@ -1,14 +1,16 @@
 <?php
+
+namespace Elastica\Filter;
+
 /**
  * Term query
  *
- * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/term-filter.html
  */
-class Elastica_Filter_Term extends Elastica_Filter_Abstract
+class Term extends AbstractFilter
 {
     /**
      * Construct term filter
@@ -23,8 +25,8 @@ class Elastica_Filter_Term extends Elastica_Filter_Abstract
     /**
      * Sets/overwrites key and term directly
      *
-     * @param  array                $term Key value pair
-     * @return Elastica_Filter_Term Filter object
+     * @param  array                      $term Key value pair
+     * @return \Elastica\Filter\Term Filter object
      */
     public function setRawTerm(array $term)
     {
@@ -34,9 +36,9 @@ class Elastica_Filter_Term extends Elastica_Filter_Abstract
     /**
      * Adds a term to the term query
      *
-     * @param  string               $key   Key to query
-     * @param  string|array         $value Values(s) for the query. Boost can be set with array
-     * @return Elastica_Filter_Term Filter object
+     * @param  string                     $key   Key to query
+     * @param  string|array               $value Values(s) for the query. Boost can be set with array
+     * @return \Elastica\Filter\Term Filter object
      */
     public function setTerm($key, $value)
     {

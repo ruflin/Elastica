@@ -1,14 +1,18 @@
 <?php
+
+namespace Elastica;
+use Elastica\Exception\NotFoundException;
+
 /**
  * Elastica Response object
  *
- * Stores query time, and result array -> is given to resultset, returned by ...
+ * Stores query time, and result array -> is given to result set, returned by ...
  *
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Response
+class Response
 {
     /**
      * Query time
@@ -41,18 +45,22 @@ class Elastica_Response
     /**
      * Response
      *
-     * @var Elastica_Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
     /**
      * Construct
      *
-     * @param string $responseString Response string (json)
+     * @param string|array $responseString Response string (json)
      */
     public function __construct($responseString)
     {
-        $this->_responseString = $responseString;
+        if (is_array($responseString)) {
+            $this->_response = $responseString;
+        } else {
+            $this->_responseString = $responseString;
+        }
     }
 
     /**
@@ -97,6 +105,17 @@ class Elastica_Response
     {
         $data = $this->getData();
 
+        // Bulk insert checks. Check every item
+        if (isset($data['items'])) {
+            foreach ($data['items'] as $item) {
+                if (false == $item['index']['ok']) {
+                    return false;
+                 }
+            }
+
+            return true;
+        }
+
         return (isset($data['ok']) && $data['ok']);
     }
 
@@ -114,7 +133,7 @@ class Elastica_Response
             } else {
 
                 $tempResponse = json_decode($response, true);
-                // If error is returned, json_decod makes empty string of string
+                // If error is returned, json_decode makes empty string of string
                 if (!empty($tempResponse)) {
                     $response = $tempResponse;
                 }
@@ -146,10 +165,10 @@ class Elastica_Response
 
     /**
      * Sets the transfer info of the curl request. This function is called
-     * from the Elastica_Client::_callService only in debug mode.
+     * from the \Elastica\Client::_callService only in debug mode.
      *
      * @param  array             $transferInfo The curl transfer information.
-     * @return Elastica_Response Current object
+     * @return \Elastica\Response Current object
      */
     public function setTransferInfo(array $transferInfo)
     {
@@ -172,7 +191,7 @@ class Elastica_Response
      * Sets the query time
      *
      * @param  float             $queryTime Query time
-     * @return Elastica_Response Current object
+     * @return \Elastica\Response Current object
      */
     public function setQueryTime($queryTime)
     {
@@ -184,14 +203,15 @@ class Elastica_Response
     /**
      * Time request took
      *
-     * @return int Time request took
+     * @throws \Elastica\Exception\NotFoundException
+     * @return int                                  Time request took
      */
     public function getEngineTime()
     {
         $data = $this->getData();
 
         if (!isset($data['took'])) {
-            throw new Elastica_Exception_NotFound("Unable to find the field [took]from the response");
+            throw new NotFoundException("Unable to find the field [took]from the response");
         }
 
         return $data['took'];
@@ -200,6 +220,7 @@ class Elastica_Response
     /**
      * Get the _shard statistics for the response
      *
+     * @throws \Elastica\Exception\NotFoundException
      * @return array
      */
     public function getShardsStatistics()
@@ -207,7 +228,7 @@ class Elastica_Response
         $data = $this->getData();
 
         if (!isset($data['_shards'])) {
-            throw new Elastica_Exception_NotFound("Unable to find the field [_shards] from the response");
+            throw new NotFoundException("Unable to find the field [_shards] from the response");
         }
 
         return $data['_shards'];

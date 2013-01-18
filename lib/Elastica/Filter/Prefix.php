@@ -1,14 +1,16 @@
 <?php
+
+namespace Elastica\Filter;
+
 /**
  * Prefix filter
  *
- * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/prefix-filter.html
  */
-class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
+class Prefix extends AbstractFilter
 {
     /**
      * Holds the name of the field for the prefix.
@@ -39,7 +41,8 @@ class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
     /**
      * Sets the name of the prefix field.
      *
-     * @param string $field Field name
+     * @param  string                       $field Field name
+     * @return \Elastica\Filter\Prefix
      */
     public function setField($field)
     {
@@ -51,7 +54,8 @@ class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
     /**
      * Sets the prefix string.
      *
-     * @param string $prefix Prefix string
+     * @param  string                       $prefix Prefix string
+     * @return \Elastica\Filter\Prefix
      */
     public function setPrefix($prefix)
     {
@@ -61,9 +65,9 @@ class Elastica_Filter_Prefix extends Elastica_Filter_Abstract
     }
 
     /**
-     * Convers object to an arrray
+     * Converts object to an array
      *
-     * @see Elastica_Filter_Abstract::toArray()
+     * @see \Elastica\Filter\AbstractFilter::toArray()
      * @return array data array
      */
     public function toArray()
