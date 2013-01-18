@@ -104,7 +104,7 @@ class Type implements SearchableInterface
      */
     public function updateDocument(Document $document, array $options = array())
     {
-        if ('' == $document->getId()) {
+        if (!$document->hasId()) {
             throw new InvalidException('Document id is not set');
         }
 
