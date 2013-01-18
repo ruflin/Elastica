@@ -1,14 +1,19 @@
 <?php
 
-require_once dirname(__FILE__) . '/../bootstrap.php';
+use Elastica\Client;
+use Elastica\Request;
+use Elastica\Document;
+use Elastica\Query;
+use Elastica\Type\Mapping;
+use Elastica\Query\MatchAll as MatchAllQuery;
+use Elastica\Filter\Term as TermFilter;
 
-/**
- * @backupGlobals disabled
- */
-class TransportTest extends PHPUnit_Framework_TestCase
+class TransportTest extends \PHPUnit_Framework_TestCase
 {
     protected $_max = 1000;
+
     protected $_maxData = 20;
+
     static protected $_results = array();
 
     public static function setUpBeforeClass()
@@ -27,11 +32,11 @@ class TransportTest extends PHPUnit_Framework_TestCase
 
     /**
      * @param array $config
-     * @return Elastica_Type
+     * @return \Elastica\Type
      */
     protected function getType(array $config)
     {
-        $client = new Elastica_Client($config);
+        $client = new Client($config);
         $index = $client->getIndex('test');
         return $index->getType('test');
     }
@@ -48,7 +53,7 @@ class TransportTest extends PHPUnit_Framework_TestCase
         $times = array();
         for ($i = 0; $i < $this->_max; $i++) {
             $data = $this->getData($i);
-            $doc = new Elastica_Document($i, $data);
+            $doc = new Document($i, $data);
             $result = $type->addDocument($doc);
             $times[] = $result->getQueryTime();
             $this->assertTrue($result->isOk());
@@ -56,7 +61,7 @@ class TransportTest extends PHPUnit_Framework_TestCase
 
         $index->refresh();
 
-        $this->logResults('insert', $transport, $times);
+        self::logResults('insert', $transport, $times);
     }
 
     /**
@@ -72,14 +77,14 @@ class TransportTest extends PHPUnit_Framework_TestCase
         $times = array();
         for ($i = 0; $i < $this->_max; $i++) {
             $test = rand(1, $this->_max);
-            $query = new Elastica_Query();
-            $query->setQuery(new Elastica_Query_MatchAll());
-            $query->setFilter(new Elastica_Filter_Term(array('test' => $test)));
+            $query = new Query();
+            $query->setQuery(new MatchAllQuery());
+            $query->setFilter(new TermFilter(array('test' => $test)));
             $result = $type->search($query);
             $times[] = $result->getResponse()->getQueryTime();
         }
 
-        $this->logResults('random read', $transport, $times);
+        self::logResults('random read', $transport, $times);
     }
 
     /**
@@ -95,14 +100,14 @@ class TransportTest extends PHPUnit_Framework_TestCase
             $docs = array();
             for ($j = 0; $j < 10; $j++) {
                 $data = $this->getData($i . $j);
-                $docs[] = new Elastica_Document($i, $data);
+                $docs[] = new Document($i, $data);
             }
 
             $result = $type->addDocuments($docs);
             $times[] = $result->getQueryTime();
         }
 
-        $this->logResults('bulk', $transport, $times);
+        self::logResults('bulk', $transport, $times);
     }
 
     /**
@@ -110,27 +115,27 @@ class TransportTest extends PHPUnit_Framework_TestCase
      */
     public function testGetMapping(array $config, $transport)
     {
-        $client = new Elastica_Client($config);
+        $client = new Client($config);
         $index = $client->getIndex('test');
         $index->create(array(), true);
         $type = $index->getType('mappingTest');
 
         // Define mapping
-        $mapping = new Elastica_Type_Mapping();
+        $mapping = new Mapping();
         $mapping->setParam('_boost', array('name' => '_boost', 'null_value' => 1.0));
         $mapping->setProperties(array(
-            'id'      => array('type' => 'integer', 'include_in_all' => FALSE),
-            'user'    => array(
+            'id' => array('type' => 'integer', 'include_in_all' => FALSE),
+            'user' => array(
                 'type' => 'object',
                 'properties' => array(
-                    'name'      => array('type' => 'string', 'include_in_all' => TRUE),
-                    'fullName'  => array('type' => 'string', 'include_in_all' => TRUE)
+                    'name' => array('type' => 'string', 'include_in_all' => TRUE),
+                    'fullName' => array('type' => 'string', 'include_in_all' => TRUE)
                 ),
             ),
-            'msg'     => array('type' => 'string', 'include_in_all' => TRUE),
-            'tstamp'  => array('type' => 'date', 'include_in_all' => FALSE),
+            'msg' => array('type' => 'string', 'include_in_all' => TRUE),
+            'tstamp' => array('type' => 'date', 'include_in_all' => FALSE),
             'location'=> array('type' => 'geo_point', 'include_in_all' => FALSE),
-            '_boost'  => array('type' => 'float', 'include_in_all' => FALSE)
+            '_boost' => array('type' => 'float', 'include_in_all' => FALSE)
         ));
 
         $type->setMapping($mapping);
@@ -138,10 +143,10 @@ class TransportTest extends PHPUnit_Framework_TestCase
 
         $times = array();
         for ($i = 0; $i < $this->_max; $i++) {
-            $response = $type->request('_mapping', Elastica_Request::GET);
+            $response = $type->request('_mapping', Request::GET);
             $times[] = $response->getQueryTime();
         }
-        $this->logResults('get mapping', $transport, $times);
+        self::logResults('get mapping', $transport, $times);
     }
 
     public function providerTransport()
@@ -165,21 +170,27 @@ class TransportTest extends PHPUnit_Framework_TestCase
                 ),
                 'Http:Persistent'
             ),
+            /*
             array(
                 array(
                     'transport' => 'Thrift',
                     'host' => 'localhost',
                     'port' => 9500,
-                    'framedProtocol' => true,
+                    'config' => array(
+                        'framedProtocol' => true
+                    )
                 ),
                 'Thrift:Framed'
             ),
+            */
             array(
                 array(
                     'transport' => 'Thrift',
                     'host' => 'localhost',
                     'port' => 9500,
-                    'framedProtocol' => false,
+                    'config' => array(
+                        'framedProtocol' => false,
+                    ),
                 ),
                 'Thrift:Binary'
             ),
@@ -207,7 +218,7 @@ class TransportTest extends PHPUnit_Framework_TestCase
      * @param $transport
      * @param array $times
      */
-    protected function logResults($name, $transport, array $times)
+    protected static function logResults($name, $transport, array $times)
     {
         self::$_results[$name][$transport] = array(
             'count' => count($times),

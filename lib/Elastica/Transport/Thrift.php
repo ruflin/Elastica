@@ -127,11 +127,19 @@ class Thrift extends AbstractTransport
 
         /* @var $result RestResponse */
         try {
+            $start = microtime(true);
+
             $result = $client->execute($restRequest);
             $response = new Response($result->body);
+
+            $end = microtime(true);
         } catch (TException $e) {
             $response = new Response('');
             throw new ThriftException($e, $request, $response);
+        }
+
+        if (defined('DEBUG') && DEBUG) {
+            $response->setQueryTime($end - $start);
         }
 
         if ($response->hasError()) {
