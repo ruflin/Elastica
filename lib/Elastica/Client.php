@@ -226,7 +226,7 @@ class Client
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
      * @param  int                  $id      document id
-     * @param  array|\Elastic\Script|\Elastic\Document $data    raw data for request body
+     * @param  array|\Elastica\Script|\Elastica\Document $data    raw data for request body
      * @param  string               $index   index to update
      * @param  string               $type    type of index to update
      * @param  array                $options array of query params to use for query. For possible options check es api

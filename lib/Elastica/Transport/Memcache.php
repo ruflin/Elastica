@@ -19,8 +19,9 @@ class Memcache extends AbstractTransport
     /**
      * Makes calls to the elasticsearch server
      *
+     * @param \Elastica\Request $request
      * @param  array                               $params Host, Port, ...
-     * @throws \Elastica\Exception\Response
+     * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Response                   Response object
      */

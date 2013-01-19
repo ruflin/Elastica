@@ -270,7 +270,7 @@ class Type implements SearchableInterface
      * Deletes an entry by its unique identifier
      *
      * @param  int|string               $id Document id
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return \Elastica\Response        Response object
      * @link http://www.elasticsearch.org/guide/reference/api/delete.html
      */
