@@ -57,7 +57,8 @@ class Request extends Param
      * @param string              $method     OPTIONAL Request method (use const's) (default = self::GET)
      * @param array               $data       OPTIONAL Data array
      * @param array               $query      OPTIONAL Query params
-     * @param \Elastica\Connection $connection OPTIONAL Connection object
+     * @param Connection $connection
+     * @return \Elastica\Request OPTIONAL Connection object
      */
     public function __construct($path, $method = self::GET, $data = array(), array $query = array(), Connection $connection = null)
     {
@@ -167,6 +168,7 @@ class Request extends Param
     /**
      * Return Connection Object
      *
+     * @throws Exception\InvalidException
      * @return \Elastica\Connection
      */
     public function getConnection()

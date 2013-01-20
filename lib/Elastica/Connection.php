@@ -235,6 +235,7 @@ class Connection extends Param
 
     /**
      * @param  \Elastica\Connection|array $params Params to create a connection
+     * @throws Exception\InvalidException
      * @return \Elastica\Connection
      */
     public static function create($params = array())
