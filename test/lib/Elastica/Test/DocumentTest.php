@@ -88,4 +88,15 @@ class DocumentTest extends BaseTest
         $this->assertEquals('index', $document->getIndex());
         $this->assertEquals('type2', $document->getType());
     }
+
+	public function testHasId() {
+		$document = new Document();
+		$this->assertFalse($document->hasId());
+		$document->setId('');
+		$this->assertFalse($document->hasId());
+		$document->setId(0);
+		$this->assertTrue($document->hasId());
+		$document->setId('hello');
+		$this->assertTrue($document->hasId());
+	}
 }
