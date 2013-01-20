@@ -61,8 +61,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
      *
      * @param  string                              $key      Key
      * @param  array|string                        $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
-     * @param  string                              $distance Distance
-     * @throws \Elastica\Exception\InvalidException
+     * @internal param string $distance Distance
      */
     public function __construct($key, $location)
     {
@@ -73,7 +72,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
 
     /**
      * @param  string                                    $key
-     * @return \Elastica\Filter\GeoAbstractDistanceFilter current filter
+     * @return \Elastica\Filter\AbstractGeoDistance current filter
      */
     public function setKey($key)
     {
@@ -84,7 +83,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
 
     /**
      * @param  array|string                              $location
-     * @return \Elastica\Filter\GeoAbstractDistanceFilter
+     * @return \Elastica\Filter\AbstractGeoDistance
      * @throws \Elastica\Exception\InvalidException
      */
     public function setLocation($location)
@@ -115,7 +114,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
 
     /**
      * @param  float                                     $latitude
-     * @return \Elastica\Filter\GeoAbstractDistanceFilter current filter
+     * @return \Elastica\Filter\AbstractGeoDistance current filter
      */
     public function setLatitude($latitude)
     {
@@ -127,7 +126,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
 
     /**
      * @param  float                                     $longitude
-     * @return \Elastica\Filter\GeoAbstractDistanceFilter current filter
+     * @return \Elastica\Filter\AbstractGeoDistance current filter
      */
     public function setLongitude($longitude)
     {
@@ -139,7 +138,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
 
     /**
      * @param  string                                    $geohash
-     * @return \Elastica\Filter\GeoAbstractDistanceFilter current filter
+     * @return \Elastica\Filter\AbstractGeoDistance current filter
      */
     public function setGeohash($geohash)
     {

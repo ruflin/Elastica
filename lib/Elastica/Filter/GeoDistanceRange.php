@@ -32,8 +32,8 @@ class GeoDistanceRange extends AbstractGeoDistance
     /**
      * @param string       $key
      * @param array|string $location
-     * @param string       $distance
      * @param array        $ranges
+     * @internal param string $distance
      */
     public function __construct($key, $location, array $ranges = array())
     {

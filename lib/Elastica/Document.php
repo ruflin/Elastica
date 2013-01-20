@@ -82,6 +82,14 @@ class Document extends Param
     }
 
     /**
+     * @return bool
+     */
+    public function hasId()
+    {
+        return '' !== (string) $this->getId();
+    }
+
+    /**
      * Adds the given key/value pair to the document
      *
      * @param  string            $key   Document entry key
@@ -198,6 +206,10 @@ class Document extends Param
      */
     public function setType($type)
     {
+        if ($type instanceof Type) {
+            $this->setIndex($type->getIndex());
+            $type = $type->getName();
+        }
         return $this->setParam('_type', $type);
     }
 
@@ -220,6 +232,9 @@ class Document extends Param
      */
     public function setIndex($index)
     {
+        if ($index instanceof Index) {
+            $index = $index->getName();
+        }
         return $this->setParam('_index', $index);
     }
 

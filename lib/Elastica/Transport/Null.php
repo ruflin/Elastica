@@ -16,6 +16,7 @@ class Null extends AbstractTransport
     /**
      * Null transport.
      *
+     * @param \Elastica\Request $request
      * @param  array             $params Hostname, port, path, ...
      * @return \Elastica\Response Response empty object
      */

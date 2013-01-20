@@ -4,13 +4,13 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Script;
 use Elastica\Search;
 use Elastica\Filter\Term;
 use Elastica\Type;
+use Elastica\Index;
 use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
@@ -60,6 +60,14 @@ class TypeTest extends BaseTest
             ));
         $mapping->setSource(array('enabled' => false));
         $type->setMapping($mapping);
+
+        $mapping = $type->getMapping();
+
+        $this->assertArrayHasKey('user', $mapping);
+        $this->assertArrayHasKey('properties', $mapping['user']);
+        $this->assertArrayHasKey('id', $mapping['user']['properties']);
+        $this->assertArrayHasKey('type', $mapping['user']['properties']['id']);
+        $this->assertEquals('integer', $mapping['user']['properties']['id']['type']);
 
         // Adds 1 document to the index
         $doc1 = new Document(1,
@@ -177,6 +185,18 @@ class TypeTest extends BaseTest
         $type->getDocument(2);
     }
 
+    /**
+     * @expectedException \Elastica\Exception\NotFoundException
+     */
+    public function testGetDocumentNotExistingIndex()
+    {
+        $client = new Client();
+        $index = new Index($client, 'index');
+        $type = new Type($index, 'type');
+
+        $type->getDocument(1);
+    }
+
     public function testDeleteByQuery()
     {
         $index = $this->_createIndex();
@@ -242,6 +262,8 @@ class TypeTest extends BaseTest
 
     /**
      * Test Delete of index type.  After delete will check for type mapping.
+     * @expectedException \Elastica\Exception\ResponseException
+     * @expectedExceptionMessage TypeMissingException[[elastica_test] type[test] missing]
      */
     public function testDeleteType()
     {
@@ -252,15 +274,7 @@ class TypeTest extends BaseTest
         $index->refresh();
 
         $type->delete();
-        try {
-            $type->getMapping();
-        } catch (ResponseException $expected) {
-            $this->assertEquals("TypeMissingException[[elastica_test] type[test] missing]", $expected->getMessage());
-
-            return;
-        }
-
-        $this->fail('Mapping for type[test] in [elastica_test] still exists');
+        $type->getMapping();
     }
 
     public function testMoreLikeThisApi()
@@ -314,6 +328,19 @@ class TypeTest extends BaseTest
         $this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
     }
 
+    /**
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testUpdateDocumentWithoutId()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('elastica_type');
+
+        $document = new Document();
+
+        $type->updateDocument($document);
+    }
+
     public function testAddDocumentHashId()
     {
         $index = $this->_createIndex();
@@ -333,5 +360,12 @@ class TypeTest extends BaseTest
 
         $doc = $type->getDocument($hashId);
         $this->assertEquals($hashId, $doc->getId());
+    }
+
+    public function testGetType()
+    {
+        $index = new Index($this->_getClient(), 'index');
+        $type = $index->getType('type');
+        $this->assertEquals('type', $type->getType());
     }
 }
