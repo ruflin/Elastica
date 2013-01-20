@@ -170,29 +170,16 @@ class TransportTest extends \PHPUnit_Framework_TestCase
                 ),
                 'Http:Persistent'
             ),
-            /*
             array(
                 array(
                     'transport' => 'Thrift',
                     'host' => 'localhost',
                     'port' => 9500,
                     'config' => array(
-                        'framedProtocol' => true
-                    )
-                ),
-                'Thrift:Framed'
-            ),
-            */
-            array(
-                array(
-                    'transport' => 'Thrift',
-                    'host' => 'localhost',
-                    'port' => 9500,
-                    'config' => array(
-                        'framedProtocol' => false,
+                        'framedTransport' => false,
                     ),
                 ),
-                'Thrift:Binary'
+                'Thrift:Buffered'
             ),
         );
     }
@@ -242,7 +229,7 @@ class TransportTest extends \PHPUnit_Framework_TestCase
         );
         foreach (self::$_results as $name => $values) {
             $means = array();
-            foreach ($values as $transport => $times) {
+            foreach ($values as $times) {
                 $means[] = $times['mean'];
             }
             $minMean = min($means);

@@ -5,6 +5,7 @@ namespace Elastica\Test\Transport;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
 
@@ -23,7 +24,7 @@ class ThriftTest extends BaseTest
     /**
      * @dataProvider configProvider
      */
-    public function testExample($config)
+    public function testSearchRequest($config)
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
         $client = new Client($config);
@@ -57,28 +58,49 @@ class ThriftTest extends BaseTest
         $this->assertEquals(1, $resultSet->getTotalHits());
     }
 
+    /**
+     * @expectedException \Elastica\Exception\ClientException
+     */
+    public function testInvalidHostRequest()
+    {
+        $client = new Client(array('host' => 'unknown', 'port' => 9555, 'transport' => 'Thrift'));
+        $client->getStatus();
+    }
+
+    /**
+     * @expectedException \Elastica\Exception\ResponseException
+     */
+    public function testInvalidElasticRequest()
+    {
+        $connection = new Connection();
+        $connection->setHost('localhost');
+        $connection->setPort(9500);
+        $connection->setTransport('Thrift');
+
+        $client = new Client();
+        $client->addConnection($connection);
+
+        $index = new Index($client, 'missing_index');
+        $index->getStatus();
+    }
+
     public function configProvider()
     {
         return array(
-            /*
             array(
                 array(
                     'host' => 'localhost',
                     'port' => 9500,
-                    'transport' => 'Thrift',
-                    'config' => array(
-                        'framedProtocol' => true
-                    )
-                ),
+                    'transport' => 'Thrift'
+                )
             ),
-            */
             array(
                 array(
                     'host' => 'localhost',
                     'port' => 9500,
                     'transport' => 'Thrift',
                     'config' => array(
-                        'framedProtocol' => false,
+                        'framedTransport' => false,
                         'sendTimeout' => 10000,
                         'recvTimeout' => 20000,
                     )

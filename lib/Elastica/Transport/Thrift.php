@@ -33,8 +33,8 @@ class Thrift extends AbstractTransport
     /**
      * @param string $host
      * @param int $port
-     * @param int $sendTimeout millisecs
-     * @param int $recvTimeout millisecs
+     * @param int $sendTimeout msec
+     * @param int $recvTimeout msec
      * @param bool $framedTransport
      * @return \Elasticsearch\RestClient
      */
@@ -69,14 +69,14 @@ class Thrift extends AbstractTransport
      * @param int $port
      * @param int $sendTimeout
      * @param int $recvTimeout
-     * @param bool $framedProtocol
+     * @param bool $framedTransport
      * @return \Elasticsearch\RestClient
      */
-    protected function _getClient($host, $port, $sendTimeout = null, $recvTimeout = null, $framedProtocol = false)
+    protected function _getClient($host, $port, $sendTimeout = null, $recvTimeout = null, $framedTransport = false)
     {
         $key = $host . ':' . $port;
         if (!isset($this->_clients[$key])) {
-            $this->_clients[$key] = $this->_createClient($host, $port, $sendTimeout, $recvTimeout, $framedProtocol);
+            $this->_clients[$key] = $this->_createClient($host, $port, $sendTimeout, $recvTimeout, $framedTransport);
         }
         return $this->_clients[$key];
     }
@@ -96,37 +96,37 @@ class Thrift extends AbstractTransport
 
         $sendTimeout = $connection->hasConfig('sendTimeout') ? $connection->getConfig('sendTimeout') : null;
         $recvTimeout = $connection->hasConfig('recvTimeout') ? $connection->getConfig('recvTimeout') : null;
-        $framedProtocol = $connection->hasConfig('framedProtocol') ? (bool) $connection->getConfig('framedProtocol') : false;
+        $framedTransport = $connection->hasConfig('framedTransport') ? (bool) $connection->getConfig('framedTransport') : false;
 
-        $client = $this->_getClient(
-            $connection->getHost(),
-            $connection->getPort(),
-            $sendTimeout,
-            $recvTimeout,
-            $framedProtocol
-        );
-
-        $restRequest = new RestRequest();
-        $restRequest->method = array_search($request->getMethod(), Method::$__names);
-        $restRequest->uri = $request->getPath();
-
-        $query = $request->getQuery();
-        if (!empty($query)) {
-            $restRequest->parameters = $query;
-        }
-
-        $data = $request->getData();
-        if (!empty($data)) {
-            if (is_array($data)) {
-                $content = json_encode($data);
-            } else {
-                $content = $data;
-            }
-            $restRequest->body = $content;
-        }
-
-        /* @var $result RestResponse */
         try {
+            $client = $this->_getClient(
+                $connection->getHost(),
+                $connection->getPort(),
+                $sendTimeout,
+                $recvTimeout,
+                $framedTransport
+            );
+
+            $restRequest = new RestRequest();
+            $restRequest->method = array_search($request->getMethod(), Method::$__names);
+            $restRequest->uri = $request->getPath();
+
+            $query = $request->getQuery();
+            if (!empty($query)) {
+                $restRequest->parameters = $query;
+            }
+
+            $data = $request->getData();
+            if (!empty($data)) {
+                if (is_array($data)) {
+                    $content = json_encode($data);
+                } else {
+                    $content = $data;
+                }
+                $restRequest->body = $content;
+            }
+
+            /* @var $result RestResponse */
             $start = microtime(true);
 
             $result = $client->execute($restRequest);
