@@ -1,7 +1,9 @@
 Elastica: elasticsearch PHP Client
 ==================================
-
+https://api.travis-ci.org/ruflin/Elastica.png
 [![Build Status](https://secure.travis-ci.org/ruflin/Elastica.png?branch=master)](http://travis-ci.org/ruflin/Elastica)
+
+Current stable version: [v0.19.8.0](https://github.com/ruflin/Elastica/tree/v0.19.8.0)
 
 Documentation
 ---------------------
