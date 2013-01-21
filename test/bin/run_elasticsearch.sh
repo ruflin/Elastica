@@ -6,6 +6,7 @@ sed 's/# index.number_of_shards: 1/index.number_of_shards: 2/' elasticsearch-${E
 sed 's/# index.number_of_replicas: 0/index.number_of_replicas: 0/' elasticsearch-${ES_VER}/config/elasticsearch.yml > elasticsearch-${ES_VER}/config/elasticsearch.yml
 sed 's/# discovery.zen.ping.multicast.enabled: false/discovery.zen.ping.multicast.enabled: false/' elasticsearch-${ES_VER}/config/elasticsearch.yml > elasticsearch-${ES_VER}/config/elasticsearch.yml
 elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/${ES_MAPPER_ATTACHMENTS_VER}
+elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/${ES_TRANSPORT_THRIFT_VER}
 
 export JAVA_OPTS="-server"
 elasticsearch-${ES_VER}/bin/elasticsearch &
