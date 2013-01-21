@@ -37,6 +37,7 @@ class Http extends AbstractTransport
      *
      * @param  \Elastica\Request                     $request
      * @param  array                                $params  Host, Port, ...
+     * @throws \Elastica\Exception\ConnectionException
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
      * @return \Elastica\Response                    Response object

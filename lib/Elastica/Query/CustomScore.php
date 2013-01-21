@@ -32,7 +32,7 @@ class CustomScore extends AbstractQuery
     /**
      * Sets query object
      *
-     * @param  string|\Elastica\Query|\Elastica\Query\Abstract $query
+     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
      * @return \Elastica\Query\CustomScore
      */
     public function setQuery($query)
