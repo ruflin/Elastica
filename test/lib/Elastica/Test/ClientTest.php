@@ -578,6 +578,69 @@ class ClientTest extends BaseTest
         $this->assertEquals('value2', $data['field2']);
     }
 
+    public function testUpdateDocumentPopulateFields()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
+
+        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4'));
+        $type->addDocument($newDocument);
+
+        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
+        $script->setParam('count', 5);
+        $newDocument->setScript($script);
+
+        $client->updateDocument(
+            1,
+            $newDocument,
+            $index->getName(),
+            $type->getName(),
+            array('fields' => '_source')
+        );
+
+        $data = $newDocument->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals(15, $data['field2']);
+        $this->assertArrayHasKey('field4', $data);
+        $this->assertEquals('changed', $data['field4']);
+        $this->assertArrayNotHasKey('field3', $data);
+
+        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field4");');
+        $script->setParam('count', 5);
+        $newDocument->setScript($script);
+
+        $client->updateDocument(
+            1,
+            $newDocument,
+            $index->getName(),
+            $type->getName(),
+            array('fields' => 'field2,field4')
+        );
+
+        $data = $newDocument->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals(20, $data['field2']);
+        $this->assertArrayHasKey('field4', $data);
+        $this->assertEquals('changed', $data['field4']);
+        $this->assertArrayNotHasKey('field3', $data);
+
+        $document = $type->getDocument(1);
+
+        $data = $document->getData();
+
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals(20, $data['field2']);
+        $this->assertArrayNotHasKey('field3', $data);
+        $this->assertArrayNotHasKey('field4', $data);
+    }
+
     public function testAddDocumentsWithoutIds()
     {
         $docs = array();

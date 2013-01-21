@@ -414,6 +414,120 @@ class Document extends Param
     }
 
     /**
+     * @param array $fields
+     * @return \Elastica\Document
+     */
+    public function setFields(array $fields)
+    {
+        return $this->setParam('_fields', $fields);
+    }
+
+    /**
+     * @param string $field
+     * @return \Elastica\Document
+     */
+    public function addField($field)
+    {
+        return $this->addParam('_fields', $field);
+    }
+
+    /**
+     * @return \Elastica\Document
+     */
+    public function setFieldsSource()
+    {
+        return $this->setFields(array('_source'));
+    }
+
+    /**
+     * @return array
+     */
+    public function getFields()
+    {
+        return $this->getParam('_fields');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFields()
+    {
+        return $this->hasParam('_fields');
+    }
+
+    /**
+     * @param int $num
+     * @return Param
+     */
+    public function setRetryOnConflict($num)
+    {
+        return $this->setParam('_retry_on_conflict', (int) $num);
+    }
+
+    /**
+     * @return int
+     */
+    public function getRetryOnConflict()
+    {
+        return $this->getParam('_retry_on_conflict');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRetryOnConflict()
+    {
+        return $this->hasParam('_retry_on_conflict');
+    }
+
+    /**
+     * @param bool $forUpdate
+     * @return array
+     */
+    public function getOptions($forUpdate = false)
+    {
+        $options = array();
+
+        if ($this->hasVersion()) {
+            $options['version'] = $this->getVersion();
+        }
+
+        if ($this->hasVersionType()) {
+            $options['version_type'] = $this->getVersionType();
+        }
+
+        if ($this->hasParent()) {
+            $options['parent'] = $this->getParent();
+        }
+
+        if ($this->getOpType()) {
+            $options['op_type'] = $this->getOpType();
+        }
+
+        if ($this->getPercolate()) {
+            $options['percolate'] = $this->getPercolate();
+        }
+
+        if ($this->hasRouting()) {
+            $options['routing'] = $this->getRouting();
+        }
+
+        if ($forUpdate) {
+
+            if ($this->hasFields()) {
+                $options['fields'] = implode(',', $this->getFields());
+            }
+
+            if ($this->hasRetryOnConflict()) {
+                $options['retty_on_conflict'] = $this->getRetryOnConflict();
+            }
+
+        }
+
+        return $options;
+    }
+
+    /**
      * @param \Elastica\Script|array|string $data
      * @return $this
      */

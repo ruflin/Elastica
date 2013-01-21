@@ -263,6 +263,10 @@ class Client
     {
         $path =  $index . '/' . $type . '/' . $id . '/_update';
 
+        if ($data instanceof Document) {
+            $options+= $data->getOptions(true);
+        }
+
         if (!isset($options['retry_on_conflict'])) {
             $retryOnConflict = $this->getConfig("retryOnConflict");
             $options['retry_on_conflict'] = $retryOnConflict;
@@ -284,7 +288,35 @@ class Client
             $requestData = $data;
         }
 
-        return $this->request($path, Request::POST, $requestData, $options);
+        $response = $this->request($path, Request::POST, $requestData, $options);
+
+        if ($data instanceof Document && isset($options['fields'])) {
+            $partial = ('_source' == $options['fields']) ? false : true;
+            $this->_populateDocumentFieldsFromResponse($response, $data, $partial);
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param Response $response
+     * @param Document $document
+     * @param bool $partial
+     */
+    protected function _populateDocumentFieldsFromResponse(Response $response, Document $document, $partial)
+    {
+        $responseData = $response->getData();
+        if ($partial) {
+            if (isset($responseData['get']['fields']) && is_array($responseData['get']['fields'])) {
+                foreach ($responseData['get']['fields'] as $key => $value) {
+                    $document->add($key, $value);
+                }
+            }
+        } else {
+            if (isset($responseData['get']['_source']) && is_array($responseData['get']['_source'])) {
+                $document->setData($responseData['get']['_source']);
+            }
+        }
     }
 
     /**
