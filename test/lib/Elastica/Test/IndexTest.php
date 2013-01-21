@@ -88,7 +88,7 @@ class IndexTest extends BaseTest
         $type->setMapping($indexMapping);
 
         $doc1 = new Document(1);
-        $doc1->addFile('file', BASE_PATH . '/data/test.pdf');
+        $doc1->addFile('file', BASE_PATH . '/data/test.pdf', 'application/pdf');
         $doc1->add('text', 'basel world');
         $type->addDocument($doc1);
 

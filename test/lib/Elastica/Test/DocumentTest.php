@@ -3,6 +3,8 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
+use Elastica\Script;
 use Elastica\Index;
 use Elastica\Type;
 use Elastica\Test\Base as BaseTest;
@@ -150,5 +152,98 @@ class DocumentTest extends BaseTest
 
         $this->assertArrayHasKey('fields', $options);
         $this->assertEquals('field1,field2', $options['fields']);
+
+        $document3 = new Document();
+        $document3->addField('field1');
+        $document3->addField('field2');
+        $document3->addField('field3');
+        $options = $document3->getOptions(true);
+
+        $this->assertArrayHasKey('fields', $options);
+        $this->assertEquals('field1,field2,field3', $options['fields']);
+
+        $document3->setFields(array('field1,field2'));
+        $options = $document3->getOptions(true);
+        $this->assertEquals('field1,field2', $options['fields']);
+    }
+
+    public function testDataPropertiesOverloading()
+    {
+        $document = new Document(1, array('field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null));
+
+        $this->assertEquals('value1', $document->field1);
+        $this->assertEquals('value2', $document->field2);
+        $this->assertEquals('value3', $document->field3);
+        $this->assertNull($document->field4);
+        try {
+            $document->field5;
+            $this->fail('Undefined field get should throw exception');
+        } catch (InvalidException $e) {
+            $this->assertTrue(true);
+        }
+
+        $this->assertTrue(isset($document->field1));
+        $this->assertTrue(isset($document->field2));
+        $this->assertTrue(isset($document->field3));
+        $this->assertFalse(isset($document->field4), 'Field4 should not be isset, because it is null');
+        $this->assertFalse(isset($document->field5), 'Field5 should not be isset, because it is not set');
+
+        $data = $document->getData();
+
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals('value2', $data['field2']);
+        $this->assertArrayHasKey('field3', $data);
+        $this->assertEquals('value3', $data['field3']);
+        $this->assertArrayHasKey('field4', $data);
+        $this->assertNull($data['field4']);
+
+        $document->field1 = 'changed1';
+        unset($document->field3);
+        try {
+            unset($document->field5);
+            $this->fail('Undefined field unset should throw exception');
+        } catch (InvalidException $e) {
+            $this->assertTrue(true);
+        }
+
+        $this->assertEquals('changed1', $document->field1);
+        $this->assertFalse(isset($document->field3));
+
+        $newData = $document->getData();
+
+        $this->assertNotEquals($data, $newData);
+    }
+
+    public function testSetTtl()
+    {
+        $document = new Document();
+
+        $data = $document->getData();
+        $this->assertArrayNotHasKey('_ttl', $data);
+
+        $document->setTtl('1d');
+
+        $newData = $document->getData();
+
+        $this->assertArrayHasKey('_ttl', $newData);
+        $this->assertEquals('1d', $newData['_ttl']);
+        $this->assertNotEquals($data, $newData);
+    }
+
+    public function testSetScript()
+    {
+        $document = new Document();
+
+        $script = new Script('ctx._source.counter += count');
+        $script->setParam('count', 1);
+
+        $this->assertFalse($document->hasScript());
+
+        $document->setScript($script);
+
+        $this->assertTrue($document->hasScript());
+        $this->assertSame($script, $document->getScript());
     }
 }

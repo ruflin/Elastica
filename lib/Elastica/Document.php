@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Single document stored in elastic search
  *
@@ -58,6 +60,49 @@ class Document extends Param
         $this->setData($data);
         $this->setType($type);
         $this->setIndex($index);
+    }
+
+    /**
+     * @param string $key
+     * @throws \Elastica\Exception\InvalidException
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        if (!array_key_exists($key, $this->_data)) {
+            throw new InvalidException("Field {$key} does not exist");
+        }
+        return $this->_data[$key];
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     */
+    public function __set($key, $value)
+    {
+        $this->add($key, $value);
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function __isset($key)
+    {
+        return isset($this->_data[$key]);
+    }
+
+    /**
+     * @param string $key
+     * @throws \Elastica\Exception\InvalidException
+     */
+    public function __unset($key)
+    {
+        if (!array_key_exists($key, $this->_data)) {
+            throw new InvalidException("Field {$key} does not exist");
+        }
+        unset($this->_data[$key]);
     }
 
     /**
