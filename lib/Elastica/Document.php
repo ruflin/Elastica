@@ -519,7 +519,7 @@ class Document extends Param
             }
 
             if ($this->hasRetryOnConflict()) {
-                $options['retty_on_conflict'] = $this->getRetryOnConflict();
+                $options['retry_on_conflict'] = $this->getRetryOnConflict();
             }
 
         }
