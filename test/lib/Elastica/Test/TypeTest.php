@@ -374,7 +374,7 @@ class TypeTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('elastica_type');
 
-        $document = new Elastica_Document();
+        $document = new Document();
         $document->add('name', 'ruflin');
         $this->assertEquals('', $document->getId());
         $this->assertFalse($document->hasId());
@@ -385,7 +385,7 @@ class TypeTest extends BaseTest
         $this->assertTrue($document->hasId());
 
         $foundDoc = $type->getDocument($document->getId());
-        $this->assertInstanceOf('Elastica_Document', $foundDoc);
+        $this->assertInstanceOf('Elastica\Document', $foundDoc);
         $this->assertEquals($document->getId(), $foundDoc->getId());
         $data = $foundDoc->getData();
         $this->assertArrayHasKey('name', $data);
