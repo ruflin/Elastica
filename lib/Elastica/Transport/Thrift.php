@@ -4,8 +4,10 @@ namespace Elastica\Transport;
 
 use Elastica\Exception\Connection\ThriftException;
 use Elastica\Exception\ResponseException;
+use Elastica\Exception\RuntimeException;
 use Elastica\Request;
 use Elastica\Response;
+use Elastica\Connection;
 use Elasticsearch\Method;
 use Elasticsearch\RestResponse;
 use Elasticsearch\RestClient;
@@ -29,6 +31,20 @@ class Thrift extends AbstractTransport
      * @var RestClient[]
      */
     protected $_clients = array();
+
+    /**
+     * Construct transport
+     *
+     * @param \Elastica\Connection $connection Connection object
+     * @throws \Elastica\Exception\RuntimeException
+     */
+    public function __construct(Connection $connection)
+    {
+        parent::__construct($connection);
+        if (!class_exists('Elasticsearch\\RestClient')) {
+            throw new RuntimeException('Elasticsearch\\RestClient class not found. Check that suggested package munkie/elasticsearch-thrift-php is required in composer.json');
+        }
+    }
 
     /**
      * @param string $host

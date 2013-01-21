@@ -9,9 +9,11 @@ env:
     - ES_VER=0.20.2
     - ES_MAPPER_ATTACHMENTS_VER=1.6.0
     - ES_TRANSPORT_THRIFT_VER=1.4.0
+    - TRANSPORT_THRIFT_PHP_VER="1.4.*"
 
 before_script:
   - composer install
+  - composer require munkie/elasticsearch-thrift-php:${TRANSPORT_THRIFT_PHP_VER}
   - ./test/bin/install_php_memcache.sh
   - ./test/bin/run_elasticsearch.sh
 
