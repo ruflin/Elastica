@@ -291,31 +291,35 @@ class Client
         $response = $this->request($path, Request::POST, $requestData, $options);
 
         if ($data instanceof Document && isset($options['fields'])) {
-            $partial = ('_source' == $options['fields']) ? false : true;
-            $this->_populateDocumentFieldsFromResponse($response, $data, $partial);
+            $this->_populateDocumentFieldsFromResponse($response, $data, $options['fields']);
         }
 
         return $response;
     }
 
     /**
-     * @param Response $response
-     * @param Document $document
-     * @param bool $partial
+     * @param \Elastica\Response $response
+     * @param \Elastica\Document $document
+     * @param string $fields Array of field names to be populated or '_source' if whole document data should be updated
      */
-    protected function _populateDocumentFieldsFromResponse(Response $response, Document $document, $partial)
+    protected function _populateDocumentFieldsFromResponse(Response $response, Document $document, $fields)
     {
         $responseData = $response->getData();
-        if ($partial) {
-            if (isset($responseData['get']['fields']) && is_array($responseData['get']['fields'])) {
-                foreach ($responseData['get']['fields'] as $key => $value) {
-                    $document->add($key, $value);
-                }
-            }
-        } else {
+        if ('_source' == $fields) {
             if (isset($responseData['get']['_source']) && is_array($responseData['get']['_source'])) {
                 $document->setData($responseData['get']['_source']);
             }
+        } else {
+            $keys = explode(',', $fields);
+            $data = $document->getData();
+            foreach ($keys as $key) {
+                if (isset($responseData['get']['fields'][$key])) {
+                    $data[$key] = $responseData['get']['fields'][$key];
+                } else if (isset($data[$key])) {
+                    unset($data[$key]);
+                }
+            }
+            $document->setData($data);
         }
     }
 

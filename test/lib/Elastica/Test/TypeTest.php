@@ -316,16 +316,54 @@ class TypeTest extends BaseTest
         $index = $client->getIndex('elastica_test');
         $type = $index->getType('update_type');
         $id = 1;
-        $type->addDocument(new Document($id, array('name' => 'bruce wayne batman')));
+        $type->addDocument(new Document($id, array('name' => 'bruce wayne batman', 'counter' => 1)));
         $newName = 'batman';
 
         $document = new Document($id);
-        $script = new Script("ctx._source.name = name", array('name' => $newName));
+        $script = new Script(
+            "ctx._source.name = name; ctx._source.counter += count",
+            array(
+                'name' => $newName,
+                'count' => 2,
+            )
+        );
         $document->setScript($script);
 
         $type->updateDocument($document, array('refresh' => true));
         $updatedDoc = $type->getDocument($id)->getData();
         $this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
+        $this->assertEquals(3, $updatedDoc['counter'], "Counter was not incremented");
+    }
+
+    public function testUpdateDocumentWithFieldsSource()
+    {
+        $client = $this->_getClient();
+        $index = $client->getIndex('elastica_test');
+        $type = $index->getType('update_type');
+
+        $newDocument = new Document(null, array('counter' => 5, 'name' => 'Batman'));
+        $type->addDocument($newDocument);
+
+        $this->assertTrue($newDocument->hasId());
+
+        $script = new Script('ctx._source.counter += count; ctx._source.realName = realName');
+        $script->setParam('count', 7);
+        $script->setParam('realName', 'Bruce Wayne');
+        $newDocument->setScript($script);
+
+        $newDocument->setFieldsSource();
+
+        $type->updateDocument($newDocument);
+
+        $data = $newDocument->getData();
+
+        $this->assertEquals(12, $data['counter']);
+        $this->assertEquals('Batman', $data['name']);
+        $this->assertEquals('Bruce Wayne', $data['realName']);
+
+        $document = $type->getDocument($newDocument->getId());
+
+        $this->assertEquals($newDocument->getData(), $document->getData());
     }
 
     /**

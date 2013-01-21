@@ -608,8 +608,9 @@ class ClientTest extends BaseTest
         $this->assertEquals('changed', $data['field4']);
         $this->assertArrayNotHasKey('field3', $data);
 
-        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field4");');
+        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field4"); ctx._source.field1 = field1;');
         $script->setParam('count', 5);
+        $script->setParam('field1', 'updated');
         $newDocument->setScript($script);
 
         $client->updateDocument(
@@ -622,19 +623,18 @@ class ClientTest extends BaseTest
 
         $data = $newDocument->getData();
         $this->assertArrayHasKey('field1', $data);
-        $this->assertEquals('value1', $data['field1']);
+        $this->assertEquals('value1', $data['field1'], 'Field1 should not be updated, because it is not in fields list');
         $this->assertArrayHasKey('field2', $data);
-        $this->assertEquals(20, $data['field2']);
-        $this->assertArrayHasKey('field4', $data);
-        $this->assertEquals('changed', $data['field4']);
-        $this->assertArrayNotHasKey('field3', $data);
+        $this->assertEquals(20, $data['field2'], 'Field2 should be 20 after incrementing by 5');
+        $this->assertArrayNotHasKey('field3', $data, 'Field3 should be removed already');
+        $this->assertArrayNotHasKey('field4', $data, 'Field3 should be removed');
 
         $document = $type->getDocument(1);
 
         $data = $document->getData();
 
         $this->assertArrayHasKey('field1', $data);
-        $this->assertEquals('value1', $data['field1']);
+        $this->assertEquals('updated', $data['field1']);
         $this->assertArrayHasKey('field2', $data);
         $this->assertEquals(20, $data['field2']);
         $this->assertArrayNotHasKey('field3', $data);
