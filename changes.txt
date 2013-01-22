@@ -5,6 +5,7 @@ CHANGES
 - Removed deprecated old constructor call in Filter\GeoDistance::__construct()
 - Removed deprecated method Filter\Script::setQuery()
 - Removed deprecated methods Query\QueryString::setTieBraker() and Query\QueryString::setQueryString()
+- Removed deprecated methods Query\Builder::minimumShouldMatch() and Query\Builder::tieBreaker()
 
 2013-01-21
 - Added Thrift transport. Ir requires installing munkie/elasticsearch-thrift-php package and elasticsearch-tranport-thrift plugin should be installed in elastcisearch
