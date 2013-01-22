@@ -105,30 +105,6 @@ class GeoDistanceTest extends BaseTest
         $this->assertEquals($expected, $data);
     }
 
-    public function testConstructOldSignature()
-    {
-        $key = 'location';
-        $latitude = 48.86;
-        $longitude = 2.35;
-        $distance = '10km';
-
-        $filter = new GeoDistance($key, $latitude, $longitude, $distance);
-
-        $expected = array(
-            'geo_distance' => array(
-                $key => array(
-                    'lat' => $latitude,
-                    'lon' => $longitude
-                ),
-                'distance' => $distance
-            )
-        );
-
-        $data = $filter->toArray();
-
-        $this->assertEquals($expected, $data);
-    }
-
     public function testSetDistanceType()
     {
         $filter = new GeoDistance('location', array('lat' => 48.86, 'lon' => 2.35), '10km');
