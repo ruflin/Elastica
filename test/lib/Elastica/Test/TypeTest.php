@@ -413,7 +413,7 @@ class TypeTest extends BaseTest
         $type = $index->getType('elastica_type');
 
         $document = new Document();
-        $document->add('name', 'ruflin');
+        $document->set('name', 'ruflin');
         $this->assertEquals('', $document->getId());
         $this->assertFalse($document->hasId());
 
