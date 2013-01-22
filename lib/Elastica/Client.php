@@ -53,7 +53,7 @@ class Client
      * Creates a new Elastica client
      *
      * @param array    $config   OPTIONAL Additional config options
-     * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example conenction down)
+     * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      */
     public function __construct(array $config = array(), $callback = null)
     {
@@ -521,7 +521,7 @@ class Client
         } catch (ConnectionException $e) {
             $connection->setEnabled(false);
 
-            // Calls callback with connection as param to make it possible to persist invalid conenctions
+            // Calls callback with connection as param to make it possible to persist invalid connections
             if ($this->_callback) {
                 call_user_func($this->_callback, $connection);
             }

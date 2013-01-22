@@ -116,7 +116,7 @@ class Document extends Param
      */
     public function __unset($key)
     {
-        return $this->remove($key);
+        $this->remove($key);
     }
 
     /**
