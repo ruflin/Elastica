@@ -361,11 +361,4 @@ class TypeTest extends BaseTest
         $doc = $type->getDocument($hashId);
         $this->assertEquals($hashId, $doc->getId());
     }
-
-    public function testGetType()
-    {
-        $index = new Index($this->_getClient(), 'index');
-        $type = $index->getType('type');
-        $this->assertEquals('type', $type->getType());
-    }
 }

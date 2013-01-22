@@ -1,5 +1,9 @@
 CHANGES
 
+2013-01-22
+- Removed deprecated method Type::getType()
+
+
 2013-01-21
 - Added Thrift transport. Ir requires installing munkie/elasticsearch-thrift-php package and elasticsearch-tranport-thrift plugin should be installed in elastcisearch
 
