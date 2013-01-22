@@ -1,5 +1,12 @@
 CHANGES
 
+2013-01-22
+- Add get/set/has/remove methods to Document
+- Add magic methods __get/__set/__isset/__unset to Document
+- Document::add method became deprecated, use set instead
+- Populate document id created by elasticsearch on addDocument()/addDocuments() call if no document id was set
+- Populate updated fields in document on Client::updateDocument() call if fields options is set
+
 2013-01-13
 - Add version option to Elastica_Search::search
 - Remove compatibility for PHP 5.2
