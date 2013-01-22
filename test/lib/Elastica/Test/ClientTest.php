@@ -647,12 +647,17 @@ class ClientTest extends BaseTest
         for ($i = 0; $i < 10; $i++) {
             $docs[] = new Document(null, array('pos' => $i));
         }
+
+        foreach ($docs as $doc) {
+            $this->assertFalse($doc->hasId());
+        }
+
         $index = $this->_createIndex();
         $type = $index->getType('pos');
         $type->addDocuments($docs);
 
         foreach ($docs as $doc) {
-            $this->assertNotEquals('', $doc->getId());
+            $this->assertTrue($doc->hasId());
         }
     }
 }

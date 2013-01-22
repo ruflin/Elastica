@@ -11,16 +11,6 @@ use Elastica\Test\Base as BaseTest;
 
 class DocumentTest extends BaseTest
 {
-    public function testAdd()
-    {
-        $doc = new Document();
-        $returnValue = $doc->add('key', 'value');
-        $data = $doc->getData();
-        $this->assertArrayHasKey('key', $data);
-        $this->assertEquals('value', $data['key']);
-        $this->assertInstanceOf('Elastica\Document', $returnValue);
-    }
-
     public function testAddFile()
     {
         $doc = new Document();
@@ -165,6 +155,57 @@ class DocumentTest extends BaseTest
         $document3->setFields(array('field1,field2'));
         $options = $document3->getOptions(true);
         $this->assertEquals('field1,field2', $options['fields']);
+    }
+
+    public function testGetSetHasRemove()
+    {
+        $document = new Document(1, array('field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null));
+
+        $this->assertEquals('value1', $document->get('field1'));
+        $this->assertEquals('value2', $document->get('field2'));
+        $this->assertEquals('value3', $document->get('field3'));
+        $this->assertNull($document->get('field4'));
+        try {
+            $document->get('field5');
+            $this->fail('Undefined field get should throw exception');
+        } catch (InvalidException $e) {
+            $this->assertTrue(true);
+        }
+
+        $this->assertTrue($document->has('field1'));
+        $this->assertTrue($document->has('field2'));
+        $this->assertTrue($document->has('field3'));
+        $this->assertTrue($document->has('field4'));
+        $this->assertFalse($document->has('field5'), 'Field5 should not be isset, because it is not set');
+
+        $data = $document->getData();
+
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals('value2', $data['field2']);
+        $this->assertArrayHasKey('field3', $data);
+        $this->assertEquals('value3', $data['field3']);
+        $this->assertArrayHasKey('field4', $data);
+        $this->assertNull($data['field4']);
+
+        $returnValue = $document->set('field1', 'changed1');
+        $this->assertInstanceOf('Elastica\Document', $returnValue);
+        $returnValue = $document->remove('field3');
+        $this->assertInstanceOf('Elastica\Document', $returnValue);
+        try {
+            $document->remove('field5');
+            $this->fail('Undefined field unset should throw exception');
+        } catch (InvalidException $e) {
+            $this->assertTrue(true);
+        }
+
+        $this->assertEquals('changed1', $document->get('field1'));
+        $this->assertFalse($document->has('field3'));
+
+        $newData = $document->getData();
+
+        $this->assertNotEquals($data, $newData);
     }
 
     public function testDataPropertiesOverloading()

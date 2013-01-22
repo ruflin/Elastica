@@ -35,13 +35,6 @@ class Document extends Param
     protected $_percolate = '';
 
     /**
-     * Routing
-     *
-     * @var string Routing
-     */
-    protected $_routing = null;
-
-    /**
      * @var \Elastica\Script
      */
     protected $_script;
@@ -63,46 +56,14 @@ class Document extends Param
     }
 
     /**
-     * @param string $key
-     * @throws \Elastica\Exception\InvalidException
-     * @return mixed
+     * Sets the id of the document.
+     *
+     * @param  string            $id
+     * @return \Elastica\Document
      */
-    public function __get($key)
+    public function setId($id)
     {
-        if (!array_key_exists($key, $this->_data)) {
-            throw new InvalidException("Field {$key} does not exist");
-        }
-        return $this->_data[$key];
-    }
-
-    /**
-     * @param string $key
-     * @param mixed $value
-     */
-    public function __set($key, $value)
-    {
-        $this->add($key, $value);
-    }
-
-    /**
-     * @param string $key
-     * @return bool
-     */
-    public function __isset($key)
-    {
-        return isset($this->_data[$key]);
-    }
-
-    /**
-     * @param string $key
-     * @throws \Elastica\Exception\InvalidException
-     */
-    public function __unset($key)
-    {
-        if (!array_key_exists($key, $this->_data)) {
-            throw new InvalidException("Field {$key} does not exist");
-        }
-        unset($this->_data[$key]);
+        return $this->setParam('_id', $id);
     }
 
     /**
@@ -116,17 +77,6 @@ class Document extends Param
     }
 
     /**
-     * Sets the id of the document.
-     *
-     * @param  string            $id
-     * @return \Elastica\Document
-     */
-    public function setId($id)
-    {
-        return $this->setParam('_id', $id);
-    }
-
-    /**
      * @return bool
      */
     public function hasId()
@@ -135,17 +85,100 @@ class Document extends Param
     }
 
     /**
+     * @param string $key
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        return $this->get($key);
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     */
+    public function __set($key, $value)
+    {
+        $this->set($key, $value);
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function __isset($key)
+    {
+        return $this->has($key) && null !== $this->get($key);
+    }
+
+    /**
+     * @param string $key
+     */
+    public function __unset($key)
+    {
+        return $this->remove($key);
+    }
+
+    /**
+     * @param string $key
+     * @return mixed
+     * @throws Exception\InvalidException
+     */
+    public function get($key)
+    {
+        if (!array_key_exists($key, $this->_data)) {
+            throw new InvalidException("Field {$key} does not exist");
+        }
+        return $this->_data[$key];
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return \Elastica\Document
+     */
+    public function set($key, $value)
+    {
+        $this->_data[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function has($key)
+    {
+        return array_key_exists($key, $this->_data);
+    }
+
+    /**
+     * @param string $key
+     * @throws Exception\InvalidException
+     * @return \Elastica\Document
+     */
+    public function remove($key)
+    {
+        if (!array_key_exists($key, $this->_data)) {
+            throw new InvalidException("Field {$key} does not exist");
+        }
+        unset($this->_data[$key]);
+
+        return $this;
+    }
+
+    /**
      * Adds the given key/value pair to the document
      *
+     * @deprecated
      * @param  string            $key   Document entry key
      * @param  mixed             $value Document entry value
      * @return \Elastica\Document
      */
     public function add($key, $value)
     {
-        $this->_data[$key] = $value;
-
-        return $this;
+        return $this->set($key, $value);
     }
 
     /**
@@ -172,7 +205,7 @@ class Document extends Param
             $value = array('_content_type' => $mimeType, '_name' => $filepath, 'content' => $value,);
         }
 
-        $this->add($key, $value);
+        $this->set($key, $value);
 
         return $this;
     }
@@ -186,7 +219,7 @@ class Document extends Param
      */
     public function addFileContent($key, $content)
     {
-        return $this->add($key, base64_encode($content));
+        return $this->set($key, base64_encode($content));
     }
 
     /**
@@ -204,7 +237,7 @@ class Document extends Param
     {
         $value = array('lat' => $latitude, 'lon' => $longitude,);
 
-        $this->add($key, $value);
+        $this->set($key, $value);
 
         return $this;
     }
@@ -230,7 +263,7 @@ class Document extends Param
      */
     public function setTtl($ttl)
     {
-        return $this->add('_ttl', $ttl);
+        return $this->set('_ttl', $ttl);
     }
 
     /**
