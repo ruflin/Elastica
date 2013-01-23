@@ -116,7 +116,7 @@ class BulkTest extends BaseTest
             $type->createDocument(3, array('name' => 'The Human Torch')),
             $type->createDocument(4, array('name' => 'The Thing')),
             $type->createDocument(5, array('name' => 'Mole Man')),
-            $type->createDocument(6, array('name' => ' Skrulls')),
+            $type->createDocument(6, array('name' => 'The Skrulls')),
         );
 
         $bulk = new Bulk($client);
@@ -124,8 +124,17 @@ class BulkTest extends BaseTest
 
         $bulk->sendUdp('localhost', 9700);
 
-        $index->refresh();
+        $i = 0;
+        $limit = 20;
+        do {
+            usleep(200000);
+        } while ($type->count() < 6 && ++$i < $limit);
 
-        $this->assertEquals(6, $type->count());
+        $this->assertLessThan($limit, $i, 'It took too much time waiting for UDP request result');
+
+        foreach ($docs as $doc) {
+            $getDoc = $type->getDocument($doc->getId());
+            $this->assertEquals($doc->getData(), $getDoc->getData());
+        }
     }
 }
