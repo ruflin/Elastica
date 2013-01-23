@@ -2,6 +2,7 @@
 
 namespace Elastica\Bulk;
 
+use Elastica\Exception\InvalidException;
 use Elastica\Response;
 use Elastica\Bulk\Response as BulkResponse;
 

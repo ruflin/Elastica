@@ -16,32 +16,20 @@ class Document extends Param
     const OP_TYPE_DELETE = 'delete';
 
     /**
+     * @var array
+     */
+    public static $opTypes = array(
+        self::OP_TYPE_INDEX,
+        self::OP_TYPE_CREATE,
+        self::OP_TYPE_DELETE,
+    );
+
+    /**
      * Document data
      *
      * @var array Document data
      */
     protected $_data = array();
-
-    /**
-     * Optype
-     *
-     * @var string Optype
-     */
-    protected $_optype = '';
-
-    /**
-     * Percolate
-     *
-     * @var string Percolate
-     */
-    protected $_percolate = '';
-
-    /**
-     * Routing
-     *
-     * @var string Routing
-     */
-    protected $_routing = null;
 
     /**
      * @var \Elastica\Script
@@ -189,7 +177,23 @@ class Document extends Param
      */
     public function setTtl($ttl)
     {
-        return $this->add('_ttl', $ttl);
+        return $this->setParam('_ttl', $ttl);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTtl()
+    {
+        return $this->getParam('_ttl');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasTtl()
+    {
+        return $this->hasParam('_ttl');
     }
 
     /**
@@ -465,5 +469,14 @@ class Document extends Param
             }
         }
         return $data;
+    }
+
+    /**
+     * @param string $opType
+     * @return bool
+     */
+    public static function isValidOpType($opType)
+    {
+        return in_array($opType, self::$opTypes);
     }
 }

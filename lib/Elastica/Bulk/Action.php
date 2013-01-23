@@ -2,6 +2,10 @@
 
 namespace Elastica\Bulk;
 
+use Elastica\Bulk;
+use Elastica\Index;
+use Elastica\Type;
+
 class Action
 {
     /**
@@ -102,5 +106,69 @@ class Action
     public function hasSource()
     {
         return !empty($this->_source);
+    }
+
+    /**
+     * @param string|Index $index
+     * @return $this
+     */
+    public function setIndex($index)
+    {
+        if ($index instanceof Index) {
+            $index = $index->getName();
+        }
+        $this->_metadata['_index'] = $index;
+
+        return $this;
+    }
+
+    /**
+     * @param string|Type $type
+     * @return $this
+     */
+    public function setType($type)
+    {
+        if ($type instanceof Type) {
+            $this->setIndex($type->getIndex()->getName());
+            $type = $type->getName();
+        }
+        $this->_metadata['_type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * @param string $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->_metadata['_id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $data[] = $this->getActionMetadata();
+        if ($this->hasSource()) {
+            $data[] = $this->getSource();
+        }
+        return $data;
+    }
+
+    /**
+     * @return string
+     */
+    public function toString()
+    {
+        $string = '';
+        foreach ($this->toArray() as $row) {
+            $string.= json_encode($row) . Bulk::DELIMITER;
+        }
+        return $string;
     }
 }

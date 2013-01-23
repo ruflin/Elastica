@@ -34,7 +34,7 @@ class BulkTest extends BaseTest
 
         $bulk = new Bulk($client);
         $bulk->setType($type2);
-        $bulk->setData($documents);
+        $bulk->addDocuments($documents);
 
         $actions = $bulk->getActions();
 

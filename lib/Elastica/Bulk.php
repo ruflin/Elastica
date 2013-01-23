@@ -5,12 +5,14 @@ namespace Elastica;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Document;
 use Elastica\Exception\BulkResponseException;
+use Elastica\Exception\InvalidException;
 use Elastica\Request;
 use Elastica\Response;
 use Elastica\Type;
 use Elastica\Index;
 use Elastica\Bulk\Action;
 use Elastica\Client;
+use Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
 
 class Bulk
 {
@@ -137,7 +139,7 @@ class Bulk
      * @param Action[] $actions
      * @return $this
      */
-    public function setActions(array $actions)
+    public function addActions(array $actions)
     {
         foreach ($actions as $action) {
             $this->addAction($action);
@@ -155,45 +157,73 @@ class Bulk
     }
 
     /**
-     * @param mixed $data
-     * @return $this
-     */
-    public function addRawAction($data)
-    {
-        $this->_actions[] = $data;
-
-        return $this;
-    }
-
-    /**
      * @param \Elastica\Document $document
      * @param string $opType
      * @return $this
      */
     public function addDocument(Document $document, $opType = null)
     {
-        $action = Action\AbstractDocument::create($document, $opType);
+        $action = AbstractDocumentAction::create($document, $opType);
 
         return $this->addAction($action);
     }
 
     /**
-     * @param array $data
+     * @param array $documents
+     * @param string $opType
      * @return $this
      */
-    public function setData(array $data)
+    public function addDocuments(array $documents, $opType = null)
     {
-        foreach ($data as $row) {
-            if ($row instanceof Document) {
-                $this->addDocument($row);
-            } else if ($row instanceof Action) {
-                $this->addAction($row);
-            } else {
-                $this->addRawAction($row);
-            }
+        foreach ($documents as $document) {
+            $this->addDocument($document, $opType);
         }
 
         return $this;
+    }
+
+    /**
+     * @param Client $client
+     * @param array $data
+     * @return Bulk
+     * @throws Exception\InvalidException
+     */
+    public static function create(Client $client, array $data)
+    {
+        $bulk = new self($client);
+
+        foreach ($data as $row) {
+            if ($row instanceof Document) {
+                $bulk->addDocument($row);
+                $action = null;
+            } else if ($row instanceof Action) {
+                $bulk->addAction($row);
+                $action = null;
+            } else if (is_array($row)) {
+                $opType = key($row);
+                $metadata = reset($row);
+                if (Document::isValidOpType($opType)) {
+                    // add previous action
+                    if (isset($action)) {
+                        $bulk->addAction($action);
+                    }
+                    $action = new Action($opType, $metadata);
+                } else if (isset($action)) {
+                    $action->setSource($metadata);
+                } else {
+                    throw new InvalidException('Invalid bulk data, source must follow action metadata');
+                }
+            } else {
+                throw new InvalidException('Invalid bulk data, should be array of array, Document or Bulk/Action');
+            }
+        }
+
+        // add last action if available
+        if (isset($action)) {
+            $bulk->addAction($action);
+        }
+
+        return $bulk;
     }
 
     /**
@@ -223,13 +253,8 @@ class Bulk
     {
         $data = array();
         foreach ($this->getActions() as $action) {
-            if ($action instanceof Action) {
-                $data[] = $action->getActionMetadata();
-                if ($action->hasSource()) {
-                    $data[] = $action->getSource();
-                }
-            } else {
-                $data[] = $action;
+            foreach ($action->toArray() as $row) {
+                $data[] = $row;
             }
         }
         return $data;
