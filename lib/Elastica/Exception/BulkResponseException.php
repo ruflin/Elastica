@@ -2,7 +2,7 @@
 
 namespace Elastica\Exception;
 
-use Elastica\Response;
+use Elastica\Bulk\ResponseSet;
 
 /**
  * Bulk Response exception
@@ -15,29 +15,29 @@ class BulkResponseException extends AbstractException
     /**
      * Response
      *
-     * @var \Elastica\Response Response object
+     * @var \Elastica\Bulk\ResponseSet ResponseSet object
      */
-    protected $_response = null;
+    protected $_responseSet;
 
     /**
      * Construct Exception
      *
-     * @param \Elastica\Response $response
+     * @param \Elastica\Bulk\ResponseSet $responseSet
      */
-    public function __construct(Response $response)
+    public function __construct(ResponseSet $responseSet)
     {
-        $this->_response = $response;
+        $this->_responseSet = $responseSet;
         parent::__construct('Error in one or more bulk request actions');
     }
 
     /**
-     * Returns response object
+     * Returns bulk response set object
      *
-     * @return \Elastica\Response Response object
+     * @return \Elastica\Bulk\ResponseSet
      */
-    public function getResponse()
+    public function getResponseSet()
     {
-        return $this->_response;
+        return $this->_responseSet;
     }
 
     /**
@@ -47,9 +47,17 @@ class BulkResponseException extends AbstractException
      */
     public function getFailures()
     {
-        $data = $this->_response->getData();
         $errors = array();
+        foreach ($this->getResponseSet()->getBulkResponses() as $response) {
+            if ($response->hasError()) {
+                $error = array(
+                    'action' => $response->getAction()->getOpType(),
+                );
+                $errors[] = $error;
+            }
+        }
 
+        /*
         foreach ($data['items'] as $item) {
             $meta = reset($item);
             $action = key($item);
@@ -65,6 +73,7 @@ class BulkResponseException extends AbstractException
                 $errors[] = $error;
             }
         }
+        */
 
         return $errors;
     }

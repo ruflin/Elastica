@@ -2,6 +2,7 @@
 
 namespace Elastica;
 
+use Elastica\Bulk\ResponseSet;
 use Elastica\Document;
 use Elastica\Exception\BulkResponseException;
 use Elastica\Request;
@@ -235,7 +236,7 @@ class Bulk
     }
 
     /**
-     * @return \Elastica\Response
+     * @return \Elastica\Bulk\ResponseSet
      */
     public function send()
     {
@@ -249,22 +250,18 @@ class Bulk
 
     /**
      * @param \Elastica\Response $response
+     * @return \Elastica\Bulk\ResponseSet
      * @throws \Elastica\Exception\BulkResponseException
-     * @return \Elastica\Response
      */
     protected function _processResponse(Response $response)
     {
-        $data = $response->getData();
+        $bulkResponseSet = new ResponseSet($response, $this->getActions());
 
-        if (isset($data['items'])) {
-            foreach ($data['items'] as $item) {
-                $params = reset($item);
-                if (isset($params['error'])) {
-                    throw new BulkResponseException($response);
-                }
-            }
+        if ($bulkResponseSet->hasError()) {
+            throw new BulkResponseException($bulkResponseSet);
         }
 
-        return $response;
+        return $bulkResponseSet;
     }
+
 }

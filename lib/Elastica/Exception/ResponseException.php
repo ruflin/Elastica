@@ -23,12 +23,12 @@ class ResponseException extends AbstractException
     /**
      * Construct Exception
      *
-     * @param \Elastica\Response $response
+     * @param \Elastica\Response $responseSet
      */
-    public function __construct(Response $response)
+    public function __construct(Response $responseSet)
     {
-        $this->_response = $response;
-        parent::__construct($response->getError());
+        $this->_response = $responseSet;
+        parent::__construct($responseSet->getError());
     }
 
     /**

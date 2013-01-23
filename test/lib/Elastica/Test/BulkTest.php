@@ -69,7 +69,7 @@ class BulkTest extends BaseTest
         $this->assertEquals($expected, $data);
 
 
-        $bulk->send();
+        $response = $bulk->send();
 
         $type->getIndex()->refresh();
         $type2->getIndex()->refresh();
