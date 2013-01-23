@@ -11,6 +11,10 @@ namespace Elastica;
  */
 class Document extends Param
 {
+    const OP_TYPE_INDEX = 'index';
+    const OP_TYPE_CREATE = 'create';
+    const OP_TYPE_DELETE = 'delete';
+
     /**
      * Document data
      *
@@ -319,22 +323,31 @@ class Document extends Param
     /**
      * Set operation type
      *
-     * @param  string            $optype Only accept create
+     * @param  string            $opType Only accept create
      * @return \Elastica\Document Current object
      */
-    public function setOpType($optype)
+    public function setOpType($opType)
     {
-        $this->_optype = $optype;
+        $this->setParam('_op_type', $opType);
 
         return $this;
     }
 
     /**
      * Get operation type
+     * @return string
      */
     public function getOpType()
     {
-        return $this->_optype;
+        return $this->getParam('_op_type');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOpType()
+    {
+        return $this->hasParam('_op_type');
     }
 
     /**
@@ -345,9 +358,7 @@ class Document extends Param
      */
     public function setPercolate($value = '*')
     {
-        $this->_percolate = $value;
-
-        return $this;
+        return $this->setParam('_percolate', $value);
     }
 
     /**
@@ -357,7 +368,7 @@ class Document extends Param
      */
     public function getPercolate()
     {
-        return $this->_percolate;
+        return $this->getParam('_percolate');
     }
 
     /**
@@ -419,5 +430,32 @@ class Document extends Param
         $doc['_source'] = $this->getData();
 
         return $doc;
+    }
+
+    /**
+     * @param array $fields if empty array all options will be returned, field names can be either with underscored either without, i.e. _percolate, routing
+     * @param bool $withoutUnderscore should option keys not contain underscore prefix
+     * @return array
+     */
+    public function getOptions(array $fields = array(), $withoutUnderscore = true)
+    {
+        if (!empty($fields)) {
+            $data = array();
+            foreach ($fields as $field) {
+                $key = '_' . ltrim($field, '_');
+                if ($this->hasParam($key) && '' !== (string) $this->getParam($key)) {
+                    $data[$key] = $this->getParam($key);
+                }
+            }
+        } else {
+            $data = $this->getParams();
+        }
+        if ($withoutUnderscore) {
+            foreach ($data as $key => $value) {
+                $data[ltrim('_' . $key)] = $value;
+                unset($data[$key]);
+            }
+        }
+        return $data;
     }
 }

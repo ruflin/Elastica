@@ -2,6 +2,7 @@
 
 namespace Elastica;
 
+use Elastica\Bulk\Bulk;
 use Elastica\Exception\BulkResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
@@ -410,27 +411,11 @@ class Client
             throw new InvalidException('Array has to consist of at least one param');
         }
 
-        $path = '_bulk';
+        $bulk = new Bulk($this);
 
-        $queryString = '';
-        foreach ($params as $baseArray) {
-            // Always newline needed
-            $queryString .= json_encode($baseArray) . PHP_EOL;
-        }
+        $bulk->setData($params);
 
-        $response = $this->request($path, Request::PUT, $queryString);
-        $data = $response->getData();
-
-        if (isset($data['items'])) {
-            foreach ($data['items'] as $item) {
-                $params = reset($item);
-                if (isset($params['error'])) {
-                    throw new BulkResponseException($response);
-                }
-            }
-        }
-
-        return $response;
+        return $bulk->send();
     }
 
     /**
