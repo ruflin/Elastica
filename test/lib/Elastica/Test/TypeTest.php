@@ -4,6 +4,7 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Exception\ResponseException;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Script;
@@ -377,6 +378,53 @@ class TypeTest extends BaseTest
         $document = new Document();
 
         $type->updateDocument($document);
+    }
+
+    public function testUpdateDocumentWithoutSource()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('elastica_type');
+
+        $mapping = new Mapping();
+        $mapping->setProperties(array(
+            'name' => array(
+                'type' => 'string',
+                'store' => 'yes'),
+            'counter' => array(
+                'type' => 'integer',
+                'store' => 'no'
+            ),
+        ));
+        $mapping->disableSource();
+        $type->setMapping($mapping);
+
+        $newDocument = new Document();
+        $newDocument->set('name', 'Batman');
+        $newDocument->set('counter', 1);
+
+        $type->addDocument($newDocument);
+
+        $script = new Script('ctx._source.counter += count; ctx._source.name = name');
+        $script->setParam('count', 2);
+        $script->setParam('name', 'robin');
+
+        $newDocument->setScript($script);
+
+        try {
+            $type->updateDocument($newDocument);
+            $this->fail('Update request should fail because source is disabled. Fields param is not set');
+        } catch (ResponseException $e) {
+            $this->assertStringStartsWith('DocumentSourceMissingException', $e->getMessage());
+        }
+
+        $newDocument->setFieldsSource();
+        
+        try {
+            $type->updateDocument($newDocument);
+            $this->fail('Update request should fail because source is disabled. Fields param is set to _source');
+        } catch (ResponseException $e) {
+            $this->assertStringStartsWith('DocumentSourceMissingException', $e->getMessage());
+        }
     }
 
     public function testAddDocumentHashId()
