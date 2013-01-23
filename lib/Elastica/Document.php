@@ -229,7 +229,7 @@ class Document extends Param
      */
     public function getType()
     {
-       return $this->getParam('_type');
+        return $this->getParam('_type');
     }
 
     /**

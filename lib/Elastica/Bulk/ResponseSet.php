@@ -164,6 +164,4 @@ class ResponseSet extends Response implements \Iterator, \Countable
     {
         return count($this->_bulkResponses);
     }
-
-
 }

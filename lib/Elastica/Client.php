@@ -243,7 +243,7 @@ class Client
 
         if ($data instanceof Script) {
             $requestData = $data->toArray();
-        } else if ($data instanceof Document) {
+        } elseif ($data instanceof Document) {
             if ($data->hasScript()) {
                 $requestData = $data->getScript()->toArray();
                 $documentData = $data->getData();

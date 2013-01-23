@@ -47,5 +47,4 @@ class IndexDocument extends AbstractDocument
 
         return $metadata;
     }
-
 }

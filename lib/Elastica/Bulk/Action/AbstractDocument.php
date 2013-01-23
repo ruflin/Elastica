@@ -22,13 +22,13 @@ abstract class AbstractDocument extends Action
 
     /**
      * @param \Elastica\Document $document
-     * @return \Elastica\Bulk\AbstractDocument
+     * @return \Elastica\Bulk\Action\AbstractDocument
      */
     public function setDocument(Document $document)
     {
         $this->_document = $document;
 
-        $metadata = $this->_getMetadataByDocument($document);;
+        $metadata = $this->_getMetadataByDocument($document);
 
         $this->setMetadata($metadata);
 
