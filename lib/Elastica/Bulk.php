@@ -289,4 +289,18 @@ class Bulk
         return $bulkResponseSet;
     }
 
+    /**
+     * @param string $host
+     * @param int $port
+     */
+    public function sendUdp($host = 'localhost', $port = 9700)
+    {
+        $message = $this->toString();
+        $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+        $result = socket_sendto($socket, $message, strlen($message), 0, $host, $port);
+        if (false === $result) {
+            throw new BulkResponseException('UDP request failed');
+        }
+        return $result;
+    }
 }

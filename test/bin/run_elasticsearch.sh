@@ -8,6 +8,10 @@ sed 's/# discovery.zen.ping.multicast.enabled: false/discovery.zen.ping.multicas
 elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/${ES_MAPPER_ATTACHMENTS_VER}
 elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/${ES_TRANSPORT_THRIFT_VER}
 
+# enable udp
+echo "bulk.udp.enabled: true" >> elasticsearch-${ES_VER}/config/elasticsearch.yml
+echo "bulk.udp.bulk_actions: 5" >> elasticsearch-${ES_VER}/config/elasticsearch.yml
+
 export JAVA_OPTS="-server"
 elasticsearch-${ES_VER}/bin/elasticsearch &
 elasticsearch-${ES_VER}/bin/elasticsearch &

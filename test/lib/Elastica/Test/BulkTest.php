@@ -101,4 +101,31 @@ class BulkTest extends BaseTest
             $this->assertTrue(true);
         }
     }
+
+    public function testUdp()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('udp_test');
+        $client = $index->getClient();
+
+        $type->setMapping(array('name' => array('type' => 'string')));
+
+        $docs = array(
+            $type->createDocument(1, array('name' => 'Mister Fantastic')),
+            $type->createDocument(2, array('name' => 'Invisible Woman')),
+            $type->createDocument(3, array('name' => 'The Human Torch')),
+            $type->createDocument(4, array('name' => 'The Thing')),
+            $type->createDocument(5, array('name' => 'Mole Man')),
+            $type->createDocument(6, array('name' => ' Skrulls')),
+        );
+
+        $bulk = new Bulk($client);
+        $bulk->addDocuments($docs);
+
+        $bulk->sendUdp('localhost', 9700);
+
+        $index->refresh();
+
+        $this->assertEquals(6, $type->count());
+    }
 }
