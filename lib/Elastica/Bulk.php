@@ -187,29 +187,20 @@ class Bulk
     }
 
     /**
-     * @param Client $client
      * @param array $data
-     * @return Bulk
-     * @throws Exception\InvalidException
+     * @return \Elastica\Bulk
+     * @throws \Elastica\Exception\InvalidException
      */
-    public static function create(Client $client, array $data)
+    public function addRawData(array $data)
     {
-        $bulk = new self($client);
-
         foreach ($data as $row) {
-            if ($row instanceof Document) {
-                $bulk->addDocument($row);
-                $action = null;
-            } else if ($row instanceof Action) {
-                $bulk->addAction($row);
-                $action = null;
-            } else if (is_array($row)) {
+            if (is_array($row)) {
                 $opType = key($row);
                 $metadata = reset($row);
                 if (Document::isValidOpType($opType)) {
                     // add previous action
                     if (isset($action)) {
-                        $bulk->addAction($action);
+                        $this->addAction($action);
                     }
                     $action = new Action($opType, $metadata);
                 } else if (isset($action)) {
@@ -224,10 +215,10 @@ class Bulk
 
         // add last action if available
         if (isset($action)) {
-            $bulk->addAction($action);
+            $this->addAction($action);
         }
 
-        return $bulk;
+        return $this;
     }
 
     /**

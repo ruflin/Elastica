@@ -48,32 +48,14 @@ class BulkResponseException extends AbstractException
     public function getFailures()
     {
         $errors = array();
-        foreach ($this->getResponseSet()->getBulkResponses() as $response) {
-            if ($response->hasError()) {
+        foreach ($this->getResponseSet()->getBulkResponses() as $bulkResponse) {
+            if ($bulkResponse->hasError()) {
                 $error = array(
-                    'action' => $response->getAction()->getOpType(),
-                );
+                    'action' => $bulkResponse->getOpType(),
+                ) + $bulkResponse->getData();
                 $errors[] = $error;
             }
         }
-
-        /*
-        foreach ($data['items'] as $item) {
-            $meta = reset($item);
-            $action = key($item);
-            if (isset($meta['error'])) {
-                $error = array(
-                    'action' => $action,
-                );
-                foreach ($meta as $key => $value) {
-                    $key = ltrim($key, '_');
-                    $error[$key] = $value;
-                }
-
-                $errors[] = $error;
-            }
-        }
-        */
 
         return $errors;
     }

@@ -405,7 +405,9 @@ class Client
             throw new InvalidException('Array has to consist of at least one param');
         }
 
-        $bulk = Bulk::create($this, $params);
+        $bulk = new Bulk($this);
+
+        $bulk->addRawData($params);
 
         return $bulk->send();
     }
