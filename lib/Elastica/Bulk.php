@@ -5,6 +5,7 @@ namespace Elastica;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Document;
 use Elastica\Exception\BulkResponseException;
+use Elastica\Exception\BulkUdpException;
 use Elastica\Exception\InvalidException;
 use Elastica\Request;
 use Elastica\Response;
@@ -17,6 +18,9 @@ use Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
 class Bulk
 {
     const DELIMITER = "\n";
+
+    const UDP_DEFAULT_HOST = 'localhost';
+    const UDP_DEFAULT_PORT = 9700;
 
     /**
      * @var Client
@@ -47,8 +51,8 @@ class Bulk
     }
 
     /**
-     * @param string|Index $index
-     * @return $this
+     * @param string|\Elastica\Index $index
+     * @return \Elastica\Bulk
      */
     public function setIndex($index)
     {
@@ -78,8 +82,8 @@ class Bulk
     }
 
     /**
-     * @param string|Type $type
-     * @return $this
+     * @param string|\Elastica\Type $type
+     * @return \Elastica\Bulk
      */
     public function setType($type)
     {
@@ -127,7 +131,7 @@ class Bulk
 
     /**
      * @param Action $action
-     * @return $this
+     * @return \Elastica\Bulk
      */
     public function addAction(Action $action)
     {
@@ -137,7 +141,7 @@ class Bulk
 
     /**
      * @param Action[] $actions
-     * @return $this
+     * @return \Elastica\Bulk
      */
     public function addActions(array $actions)
     {
@@ -159,7 +163,7 @@ class Bulk
     /**
      * @param \Elastica\Document $document
      * @param string $opType
-     * @return $this
+     * @return \Elastica\Bulk
      */
     public function addDocument(Document $document, $opType = null)
     {
@@ -169,9 +173,9 @@ class Bulk
     }
 
     /**
-     * @param array $documents
+     * @param \Elastica\Document[] $documents
      * @param string $opType
-     * @return $this
+     * @return \Elastica\Bulk
      */
     public function addDocuments(array $documents, $opType = null)
     {
@@ -292,15 +296,15 @@ class Bulk
     /**
      * @param string $host
      * @param int $port
+     * @throws \Elastica\Exception\BulkUdpException
      */
-    public function sendUdp($host = 'localhost', $port = 9700)
+    public function sendUdp($host = self::UDP_DEFAULT_HOST, $port = self::UDP_DEFAULT_PORT)
     {
         $message = $this->toString();
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         $result = socket_sendto($socket, $message, strlen($message), 0, $host, $port);
         if (false === $result) {
-            throw new BulkResponseException('UDP request failed');
+            throw new BulkUdpException('UDP request failed');
         }
-        return $result;
     }
 }
