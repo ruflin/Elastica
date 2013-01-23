@@ -37,8 +37,7 @@ class Response extends BaseResponse
     }
 
     /**
-     * @param string $opType
-     * @return $this
+     * @return string
      */
     public function getOpType()
     {

@@ -2,6 +2,7 @@
 
 namespace Elastica\Bulk\Action;
 
+use Elastica\Bulk\Action;
 use Elastica\Document;
 
 class IndexDocument extends AbstractDocument
@@ -13,7 +14,7 @@ class IndexDocument extends AbstractDocument
 
     /**
      * @param \Elastica\Document $document
-     * @return $this
+     * @return \Elastica\Bulk\Action\IndexDocument
      */
     public function setDocument(Document $document)
     {

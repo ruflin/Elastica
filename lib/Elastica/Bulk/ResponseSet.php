@@ -29,8 +29,8 @@ class ResponseSet extends Response implements \Iterator, \Countable
     }
 
     /**
-     * @param \Elastica\Response $response
      * @param Action[] $actions
+     * @throws \Elastica\Exception\InvalidException
      */
     protected function _init(array $actions)
     {

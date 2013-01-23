@@ -8,7 +8,6 @@ use Elastica\Exception\BulkResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\NotImplementedException;
 
 /**
  * Client to connect the the elasticsearch server
@@ -205,7 +204,7 @@ class Client
      * documents can belong to any type and index
      *
      * @param  array|\Elastica\Document[]           $docs Array of Elastica\Document
-     * @return \Elastica\Response                   Response object
+     * @return \Elastica\Bulk\ResponseSet                   Response object
      * @throws \Elastica\Exception\InvalidException If docs is empty
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
@@ -264,9 +263,9 @@ class Client
     /**
      * Bulk deletes documents
      *
-     * @param array $docs
-     * @return Bulk\ResponseSet
-     * @throws Exception\InvalidException
+     * @param array|\Elastica\Document[] $docs
+     * @return \Elastica\Bulk\ResponseSet
+     * @throws \Elastica\Exception\InvalidException
      */
     public function deleteDocuments(array $docs)
     {
@@ -398,7 +397,6 @@ class Client
      * @throws \Elastica\Exception\BulkResponseException
      * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Bulk\ResponseSet                        Response object
-     * @todo Test
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
     public function bulk(array $params)

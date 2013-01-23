@@ -121,7 +121,7 @@ class Type implements SearchableInterface
      * Uses _bulk to send documents to the server
      *
      * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
-     * @return \Elastica\Response
+     * @return \Elastica\Bulk\ResponseSet
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
     public function addDocuments(array $docs)

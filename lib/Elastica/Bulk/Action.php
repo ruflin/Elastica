@@ -37,7 +37,7 @@ class Action
 
     /**
      * @param string $type
-     * @return $this
+     * @return \Elastica\Bulk\Action
      */
     public function setOpType($type)
     {
@@ -56,7 +56,7 @@ class Action
 
     /**
      * @param array $metadata
-     * @return $this
+     * @return \Elastica\Bulk\Action
      */
     public function setMetadata(array $metadata)
     {
@@ -83,7 +83,7 @@ class Action
 
     /**
      * @param array $source
-     * @return $this
+     * @return \Elastica\Bulk\Action
      */
     public function setSource(array $source)
     {
@@ -109,8 +109,8 @@ class Action
     }
 
     /**
-     * @param string|Index $index
-     * @return $this
+     * @param string|\Elastica\Index $index
+     * @return \Elastica\Bulk\Action
      */
     public function setIndex($index)
     {
@@ -123,8 +123,8 @@ class Action
     }
 
     /**
-     * @param string|Type $type
-     * @return $this
+     * @param string|\Elastica\Type $type
+     * @return \Elastica\Bulk\Action
      */
     public function setType($type)
     {
@@ -139,7 +139,7 @@ class Action
 
     /**
      * @param string $id
-     * @return $this
+     * @return \Elastica\Bulk\Action
      */
     public function setId($id)
     {

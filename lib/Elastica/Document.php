@@ -406,7 +406,7 @@ class Document extends Param
 
     /**
      * @param \Elastica\Script|array|string $data
-     * @return $this
+     * @return \Elastica\Document
      */
     public function setScript($data)
     {

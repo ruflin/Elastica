@@ -22,7 +22,7 @@ abstract class AbstractDocument extends Action
 
     /**
      * @param \Elastica\Document $document
-     * @return $this
+     * @return \Elastica\Bulk\AbstractDocument
      */
     public function setDocument(Document $document)
     {
