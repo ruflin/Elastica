@@ -2,7 +2,7 @@
 
 namespace Elastica;
 
-use Elastica\Bulk\Bulk;
+use Elastica\Bulk;
 use Elastica\Exception\BulkResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;

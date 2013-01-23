@@ -372,6 +372,14 @@ class Document extends Param
     }
 
     /**
+     * @return bool
+     */
+    public function hasPercolate()
+    {
+        return $this->hasParam('_percolate');
+    }
+
+    /**
      * Set routing query param
      *
      * @param  string            $value routing

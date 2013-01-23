@@ -71,11 +71,11 @@ class Type implements SearchableInterface
             $query['parent'] = $doc->getParent();
         }
 
-        if ($doc->getOpType()) {
+        if ($doc->hasOpType()) {
             $query['op_type'] = $doc->getOpType();
         }
 
-        if ($doc->getPercolate()) {
+        if ($doc->hasPercolate()) {
             $query['percolate'] = $doc->getPercolate();
         }
 
