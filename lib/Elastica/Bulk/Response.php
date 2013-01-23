@@ -12,14 +12,20 @@ class Response extends BaseResponse
     protected $_action;
 
     /**
-     * @param Action $action
-     * @return $this
+     * @var string
      */
-    public function setAction(Action $action)
-    {
-        $this->_action = $action;
+    protected $_opType;
 
-        return $this;
+    /**
+     * @param array|string $responseData
+     * @param Action $action
+     * @param string $opType
+     */
+    public function __construct($responseData, Action $action, $opType)
+    {
+        parent::__construct($responseData);
+        $this->_action = $action;
+        $this->_opType = $opType;
     }
 
     /**
@@ -28,5 +34,14 @@ class Response extends BaseResponse
     public function getAction()
     {
         return $this->_action;
+    }
+
+    /**
+     * @param string $opType
+     * @return $this
+     */
+    public function getOpType()
+    {
+        return $this->_opType;
     }
 }

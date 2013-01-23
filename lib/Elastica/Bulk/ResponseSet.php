@@ -45,10 +45,10 @@ class ResponseSet extends Response implements \Iterator, \Countable
                     throw new InvalidException('Invalid object for response #' . $key . ' provided. Should be Elastica\Bulk\Action');
                 }
 
-                $bulkResponse = new BulkResponse($responseData);
-                $bulkResponse->setAction($actions[$key]);
+                $opType = key($item);
+                $bulkResponseData = reset($item);
 
-                $this->_bulkResponses[] = $bulkResponse;
+                $this->_bulkResponses[] = new BulkResponse($bulkResponseData, $actions[$key], $opType);
             }
         }
     }

@@ -577,4 +577,46 @@ class ClientTest extends BaseTest
         $this->assertArrayHasKey('field2', $data);
         $this->assertEquals('value2', $data['field2']);
     }
+
+    public function testDeleteDocuments()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
+
+        $docs = array(
+            new Document(1, array('field' => 'value1'), $type, $index),
+            new Document(2, array('field' => 'value2'), $type, $index),
+            new Document(3, array('field' => 'value3'), $type, $index),
+        );
+
+        $response = $client->addDocuments($docs);
+
+        $this->assertInstanceOf('Elastica\Bulk\ResponseSet', $response);
+        $this->assertEquals(3, count($response));
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+        $this->assertEquals('', $response->getError());
+
+        $index->refresh();
+
+        $this->assertEquals(3, $type->count());
+
+        $deleteDocs = array(
+            $docs[0],
+            $docs[2],
+        );
+
+        $response = $client->deleteDocuments($deleteDocs);
+
+        $this->assertInstanceOf('Elastica\Bulk\ResponseSet', $response);
+        $this->assertEquals(2, count($response));
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+        $this->assertEquals('', $response->getError());
+
+        $index->refresh();
+
+        $this->assertEquals(1, $type->count());
+    }
 }

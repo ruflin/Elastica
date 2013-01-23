@@ -262,15 +262,22 @@ class Client
     }
 
     /**
-     * Bulk deletes documents (not implemented yet)
+     * Bulk deletes documents
      *
-     * @param  array                                      $docs Docs
-     * @throws \Elastica\Exception\NotImplementedException
+     * @param array $docs
+     * @return Bulk\ResponseSet
+     * @throws Exception\InvalidException
      */
     public function deleteDocuments(array $docs)
     {
-        // TODO: similar to delete ids but with type and index inside files
-        throw new NotImplementedException('not implemented yet');
+        if (empty($docs)) {
+            throw new InvalidException('Array has to consist of at least one element');
+        }
+
+        $bulk = new Bulk($this);
+        $bulk->addDocuments($docs, Document::OP_TYPE_DELETE);
+
+        return $bulk->send();
     }
 
     /**
