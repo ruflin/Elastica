@@ -114,7 +114,7 @@ class ResponseSet extends Response implements \Iterator, \Countable
     }
 
     /**
-     * @return bool|BulkResponse
+     * @return bool|\Elastica\Bulk\Response
      */
     public function current()
     {

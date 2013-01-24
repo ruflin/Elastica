@@ -5,12 +5,13 @@ namespace Elastica\Test;
 use Elastica\Bulk;
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Test\Base as BaseTest;
 
 class BulkTest extends BaseTest
 {
-    public function testIndexDocuments()
+    public function testSend()
     {
         $index = $this->_createIndex();
         $type = $index->getType('bulk_test');
@@ -71,6 +72,18 @@ class BulkTest extends BaseTest
 
         $response = $bulk->send();
 
+        $this->assertInstanceOf('Elastica\Bulk\ResponseSet', $response);
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        foreach ($response as $i => $bulkResponse) {
+            $this->assertInstanceOf('Elastica\Bulk\Response', $bulkResponse);
+            $this->assertTrue($bulkResponse->isOk());
+            $this->assertFalse($bulkResponse->hasError());
+            $this->assertSame($actions[$i], $bulkResponse->getAction());
+        }
+
         $type->getIndex()->refresh();
         $type2->getIndex()->refresh();
 
@@ -102,9 +115,43 @@ class BulkTest extends BaseTest
         }
     }
 
-    public function testUdp()
+    public function testErrorRequest()
     {
         $index = $this->_createIndex();
+        $type = $index->getType('bulk_test');
+        $client = $index->getClient();
+
+        $documents = array(
+            $type->createDocument(1, array('name' => 'Mister Fantastic')),
+            $type->createDocument(2, array('name' => 'Invisible Woman')),
+            $type->createDocument(2, array('name' => 'The Human Torch')),
+        );
+
+        $documents[2]->setopType(Document::OP_TYPE_CREATE);
+
+        $bulk = new Bulk($client);
+        $bulk->addDocuments($documents);
+        
+        try {
+            $bulk->send();
+            $bulk->fail('3rd document create should produce error');
+        } catch (ResponseException $e) {
+            $this->assertContains('DocumentAlreadyExists', $e->getMessage());
+            $failures = $e->getFailures();
+            $this->assertInternalType('array', $failures);
+            $this->assertArrayHasKey(0, $failures);
+            $this->assertContains('DocumentAlreadyExists', $failures[0]);
+        }
+    }
+
+    /**
+     * @dataProvider udpDataProvider
+     */
+    public function testUdp($clientConfig, $host, $port, $shouldFail = false)
+    {
+        $client = new Client($clientConfig);
+        $index = $client->getIndex('elastica_test');
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
         $type = $index->getType('udp_test');
         $client = $index->getClient();
 
@@ -122,7 +169,7 @@ class BulkTest extends BaseTest
         $bulk = new Bulk($client);
         $bulk->addDocuments($docs);
 
-        $bulk->sendUdp('localhost', 9700);
+        $bulk->sendUdp($host, $port);
 
         $i = 0;
         $limit = 20;
@@ -130,11 +177,79 @@ class BulkTest extends BaseTest
             usleep(200000);
         } while ($type->count() < 6 && ++$i < $limit);
 
-        $this->assertLessThan($limit, $i, 'It took too much time waiting for UDP request result');
+        if ($shouldFail) {
+            $this->assertEquals($limit, $i, 'Invalid udp connection data. Test should fail');
+        } else {
+            $this->assertLessThan($limit, $i, 'It took too much time waiting for UDP request result');
 
-        foreach ($docs as $doc) {
-            $getDoc = $type->getDocument($doc->getId());
-            $this->assertEquals($doc->getData(), $getDoc->getData());
+            foreach ($docs as $doc) {
+                $getDoc = $type->getDocument($doc->getId());
+                $this->assertEquals($doc->getData(), $getDoc->getData());
+            }
         }
+    }
+
+    public function udpDataProvider()
+    {
+        return array(
+            array(
+                array(),
+                null,
+                null
+            ),
+            array(
+                array(),
+                'localhost',
+                null
+            ),
+            array(
+                array(),
+                null,
+                9700
+            ),
+            array(
+                array(),
+                'localhost',
+                9700
+            ),
+            array(
+                array(
+                    'udp' => array(
+                        'host' => 'localhost',
+                        'port' => 9700,
+                    )
+                ),
+                null,
+                null
+            ),
+            array(
+                array(
+                    'udp' => array(
+                        'host' => 'localhost',
+                        'port' => 9800,
+                    )
+                ),
+                'localhost',
+                9700
+            ),
+            array(
+                array(
+                    'udp' => array(
+                        'host' => 'localhost',
+                        'port' => 9800,
+                    )
+                ),
+                null,
+                null,
+                true
+            ),
+            array(
+                array(
+                ),
+                'localhost',
+                9800,
+                true
+            ),
+        );
     }
 }

@@ -4,7 +4,7 @@ namespace Elastica;
 
 use Elastica\Bulk;
 use Elastica\Bulk\Action;
-use Elastica\Exception\BulkResponseException;
+use Elastica\Exception\ResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
@@ -394,7 +394,7 @@ class Client
      * );
      *
      * @param  array                                    $params Parameter array
-     * @throws \Elastica\Exception\BulkResponseException
+     * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Bulk\ResponseSet                        Response object
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html

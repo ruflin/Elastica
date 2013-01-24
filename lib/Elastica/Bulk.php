@@ -4,8 +4,8 @@ namespace Elastica;
 
 use Elastica\Bulk\ResponseSet;
 use Elastica\Document;
-use Elastica\Exception\BulkResponseException;
-use Elastica\Exception\BulkUdpException;
+use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
+use Elastica\Exception\Bulk\UdpException;
 use Elastica\Exception\InvalidException;
 use Elastica\Request;
 use Elastica\Response;
@@ -271,7 +271,7 @@ class Bulk
     /**
      * @param \Elastica\Response $response
      * @return \Elastica\Bulk\ResponseSet
-     * @throws \Elastica\Exception\BulkResponseException
+     * @throws \Elastica\Exception\Bulk\ResponseException
      */
     protected function _processResponse(Response $response)
     {
@@ -287,15 +287,24 @@ class Bulk
     /**
      * @param string $host
      * @param int $port
-     * @throws \Elastica\Exception\BulkUdpException
+     * @throws \Elastica\Exception\Bulk\UdpException
      */
-    public function sendUdp($host = self::UDP_DEFAULT_HOST, $port = self::UDP_DEFAULT_PORT)
+    public function sendUdp($host = null, $port = null)
     {
+        $config = $this->_client->getConfig();
+        if (null === $host) {
+            $host = isset($config['udp']['host']) ? $config['udp']['host'] : self::UDP_DEFAULT_HOST;
+        }
+        if (null === $port) {
+            $port = isset($config['udp']['port']) ? $config['udp']['port'] : self::UDP_DEFAULT_PORT;
+        }
+
         $message = $this->toString();
         $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         $result = socket_sendto($socket, $message, strlen($message), 0, $host, $port);
+        socket_close($socket);
         if (false === $result) {
-            throw new BulkUdpException('UDP request failed');
+            throw new UdpException('UDP request failed');
         }
     }
 }
