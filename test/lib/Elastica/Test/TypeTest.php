@@ -370,25 +370,25 @@ class TypeTest extends BaseTest
     }
 
     /**
-     * @expectedException Elastica_Exception_Runtime
+     * @expectedException \Elastica\Exception\RuntimeException
      */
     public function testAddDocumentWithoutSerializer()
     {
         $index = $this->_createIndex();
 
-        $type = new Elastica_Type($index, 'user');
+        $type = new Type($index, 'user');
 
-        $type->addObject(new stdClass());
+        $type->addObject(new \stdClass());
     }
 
     public function testAddObject()
     {
         $index = $this->_createIndex();
 
-        $type = new Elastica_Type($index, 'user');
+        $type = new Type($index, 'user');
         $type->setSerializer(array(new SerializerMock(), 'serialize'));
 
-        $userObject = new stdClass();
+        $userObject = new \stdClass();
         $userObject->username = 'hans';
         $userObject->test = array('2', '3', '5');
 
