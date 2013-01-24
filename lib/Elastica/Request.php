@@ -164,29 +164,25 @@ class Request extends Param
     }
 
     /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $data = $this->getParams();
+        if ($this->_connection) {
+            $data['connection'] = $this->_connection->getParams();
+        }
+        return $data;
+    }
+
+    /**
      * Converts request to curl request format
      *
      * @return string
      */
     public function toString()
     {
-        $message = 'curl -X' . strtoupper($this->getMethod()) . ' ';
-        $message .= '\'http://' . $this->getConnection()->getHost() . ':' . $this->getConnection()->getPort() . '/';
-        $message .= $this->getPath();
-
-        $query = $this->getQuery();
-        if (!empty($query)) {
-            $message .= '?' . http_build_query($query);
-        }
-
-        $message .= '\'';
-
-        $data = $this->getData();
-        if (!empty($data)) {
-            $message .= ' -d \'' . json_encode($data) . '\'';
-        }
-
-        return $message;
+        return json_encode($this->toArray());
     }
 
     /**
