@@ -3,9 +3,11 @@
 namespace Elastica\Test;
 
 use Elastica\Bulk;
+use Elastica\Bulk\Action;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException;
+use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Test\Base as BaseTest;
 
@@ -69,6 +71,17 @@ class BulkTest extends BaseTest
         );
         $this->assertEquals($expected, $data);
 
+        $expected = '{"index":{"_index":"elastica_test","_type":"bulk_test","_id":1,"_percolate":"*"}}
+{"name":"Mister Fantastic"}
+{"index":{"_id":2}}
+{"name":"Invisible Woman"}
+{"create":{"_index":"elastica_test","_type":"bulk_test","_id":3}}
+{"name":"The Human Torch"}
+{"index":{"_index":"elastica_test","_type":"bulk_test"}}
+{"name":"The Thing"}
+';
+
+        $this->assertEquals($expected, (string) $bulk);
 
         $response = $bulk->send();
 
@@ -113,6 +126,175 @@ class BulkTest extends BaseTest
         } catch (NotFoundException $e) {
             $this->assertTrue(true);
         }
+    }
+
+    public function testSetIndexType()
+    {
+        $client = new Client();
+        $index = $client->getIndex('index');
+        $type = $index->getType('type');
+
+        $index2 = $client->getIndex('index2');
+        $type2 = $index2->getType('type2');
+
+        $bulk = new Bulk($client);
+
+        $this->assertFalse($bulk->hasIndex());
+        $this->assertFalse($bulk->hasType());
+
+        $bulk->setIndex($index);
+        $this->assertTrue($bulk->hasIndex());
+        $this->assertFalse($bulk->hasType());
+        $this->assertEquals('index', $bulk->getIndex());
+
+        $bulk->setType($type2);
+        $this->assertTrue($bulk->hasIndex());
+        $this->assertTrue($bulk->hasType());
+        $this->assertEquals('index2', $bulk->getIndex());
+        $this->assertEquals('type2', $bulk->getType());
+
+        $bulk->setType($type);
+        $this->assertTrue($bulk->hasIndex());
+        $this->assertTrue($bulk->hasType());
+        $this->assertEquals('index', $bulk->getIndex());
+        $this->assertEquals('type', $bulk->getType());
+
+        $bulk->setIndex($index2);
+        $this->assertTrue($bulk->hasIndex());
+        $this->assertTrue($bulk->hasType());
+        $this->assertEquals('index2', $bulk->getIndex());
+        $this->assertEquals('type', $bulk->getType());
+    }
+
+    public function testAddActions()
+    {
+        $client = new Client();
+        $bulk = new Bulk($client);
+
+        $action1 = new Action(Document::OP_TYPE_DELETE);
+        $action1->setIndex('index');
+        $action1->setType('type');
+        $action1->setId(1);
+
+        $action2 = new Action(Document::OP_TYPE_INDEX);
+        $action2->setIndex('index');
+        $action2->setType('type');
+        $action2->setId(1);
+        $action2->setSource(array('name' => 'Batman'));
+
+        $actions = array(
+            $action1,
+            $action2
+        );
+
+        $bulk->addActions($actions);
+
+        $getActions = $bulk->getActions();
+
+        $this->assertSame($action1, $getActions[0]);
+        $this->assertSame($action2, $getActions[1]);
+    }
+
+    public function testAddRawData()
+    {
+        $bulk = new Bulk($this->_getClient());
+
+        $rawData = array(
+            array('index' => array('_index' => 'test', '_type' => 'user', '_id' => '1')),
+            array('user' => array('name' => 'hans')),
+            array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '2')),
+            array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '3')),
+            array('create' => array('_index' => 'test', '_type' => 'user', '_id' => '4')),
+            array('user' => array('name' => 'mans')),
+            array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '5')),
+        );
+
+        $bulk->addRawData($rawData);
+
+        $actions = $bulk->getActions();
+
+        $this->assertInternalType('array', $actions);
+        $this->assertEquals(5, count($actions));
+
+        $this->assertInstanceOf('Elastica\Bulk\Action', $actions[0]);
+        $this->assertEquals('index', $actions[0]->getOpType());
+        $this->assertEquals($rawData[0]['index'], $actions[0]->getMetadata());
+        $this->assertTrue($actions[0]->hasSource());
+        $this->assertEquals($rawData[1], $actions[0]->getSource());
+
+        $this->assertInstanceOf('Elastica\Bulk\Action', $actions[1]);
+        $this->assertEquals('delete', $actions[1]->getOpType());
+        $this->assertEquals($rawData[2]['delete'], $actions[1]->getMetadata());
+        $this->assertFalse($actions[1]->hasSource());
+
+        $this->assertInstanceOf('Elastica\Bulk\Action', $actions[2]);
+        $this->assertEquals('delete', $actions[2]->getOpType());
+        $this->assertEquals($rawData[3]['delete'], $actions[2]->getMetadata());
+        $this->assertFalse($actions[2]->hasSource());
+
+        $this->assertInstanceOf('Elastica\Bulk\Action', $actions[3]);
+        $this->assertEquals('create', $actions[3]->getOpType());
+        $this->assertEquals($rawData[4]['create'], $actions[3]->getMetadata());
+        $this->assertTrue($actions[3]->hasSource());
+        $this->assertEquals($rawData[5], $actions[3]->getSource());
+
+        $this->assertInstanceOf('Elastica\Bulk\Action', $actions[4]);
+        $this->assertEquals('delete', $actions[4]->getOpType());
+        $this->assertEquals($rawData[6]['delete'], $actions[4]->getMetadata());
+        $this->assertFalse($actions[4]->hasSource());
+    }
+
+    /**
+     * @dataProvider invalidRawDataProvider
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testInvalidRawData($rawData, $failMessage)
+    {
+        $bulk = new Bulk($this->_getClient());
+
+        $bulk->addRawData($rawData);
+
+        $this->fail($failMessage);
+    }
+
+    public function invalidRawDataProvider()
+    {
+        return array(
+            array(
+                array(
+                    array('index' => array('_index' => 'test', '_type' => 'user', '_id' => '1')),
+                    array('user' => array('name' => 'hans')),
+                    array('user' => array('name' => 'mans')),
+                ),
+                'Two sources for one action'
+            ),
+            array(
+                array(
+                    array('index' => array('_index' => 'test', '_type' => 'user', '_id' => '1')),
+                    array('user' => array('name' => 'hans')),
+                    array('upsert' => array('_index' => 'test', '_type' => 'user', '_id' => '2')),
+                ),
+                'Invalid optype for action'
+            ),
+            array(
+                array(
+                    array('user' => array('name' => 'mans')),
+                ),
+                'Source without action'
+            ),
+            array(
+                array(
+                    array(),
+                ),
+                'Empty array'
+            ),
+            array(
+                array(
+                    'dummy',
+                ),
+                'String as data'
+            )
+        );
     }
 
     public function testErrorRequest()

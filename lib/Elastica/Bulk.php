@@ -204,7 +204,9 @@ class Bulk
                     }
                     $action = new Action($opType, $metadata);
                 } elseif (isset($action)) {
-                    $action->setSource($metadata);
+                    $action->setSource($row);
+                    $this->addAction($action);
+                    $action = null;
                 } else {
                     throw new InvalidException('Invalid bulk data, source must follow action metadata');
                 }
