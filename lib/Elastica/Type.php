@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Elastica type object
  *
@@ -27,14 +28,9 @@ class Elastica_Type implements Elastica_Searchable
     protected $_name = '';
 
     /**
-     * @var \JMS\Serializer\Serializer
+     * @var array|string
      */
     protected $_serializer;
-
-    /**
-     * @var array
-     */
-    protected $_serializerGroups;
 
     /**
      * Creates a new type object inside the given index
@@ -100,8 +96,7 @@ class Elastica_Type implements Elastica_Searchable
             throw new Elastica_Exception_Runtime('No serializer defined');
         }
 
-        $this->_serializer->setGroups($this->_serializerGroups);
-        $data = $this->_serializer->serialize($object, 'json');
+        $data = call_user_func($this->_serializer, $object);
         if (!$doc) {
             $doc = new Elastica_Document();
         }
@@ -357,15 +352,13 @@ class Elastica_Type implements Elastica_Searchable
     }
 
     /**
-     * Sets the serializer used in addObject
+     * Sets the serializer callable used in addObject
      * @see Elastica_Type::addObject
      *
-     * @param \JMS\Serializer\Serializer $serializer
-     * @param array $groups
+     * @param array|string $serializer, a callable that serializes an object passed to it
      */
-    public function setSerializer($serializer, array $groups = array())
+    public function setSerializer($serializer)
     {
         $this->_serializer = $serializer;
-        $this->_serializerGroups = $groups;
     }
 }
