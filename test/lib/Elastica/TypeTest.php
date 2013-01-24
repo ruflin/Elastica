@@ -296,4 +296,48 @@ class Elastica_TypeTest extends Elastica_Test
         $updatedDoc = $type->getDocument($id)->getData();
         $this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
     }
+
+    /**
+     * @expectedException Elastica_Exception_Runtime
+     */
+    public function testAddDocumentWithoutSerializer()
+    {
+        $index = $this->_createIndex();
+
+        $type = new Elastica_Type($index, 'user');
+
+        $type->addObject(new stdClass());
+    }
+
+    public function testAddObject()
+    {
+        $index = $this->_createIndex();
+
+        $type = new Elastica_Type($index, 'user');
+        $type->setSerializer(array(new SerializerMock(), 'serialize'));
+
+        $userObject = new stdClass();
+        $userObject->username = 'hans';
+        $userObject->test = array('2', '3', '5');
+
+        $type->addObject($userObject);
+
+        $index->refresh();
+
+        $resultSet = $type->search('hans');
+        $this->assertEquals(1, $resultSet->count());
+
+        // Test if source is returned
+        $result = $resultSet->current();
+        $data = $result->getData();
+        $this->assertEquals('hans', $data['username']);
+    }
+}
+
+class SerializerMock
+{
+    public function serialize($object)
+    {
+        return get_object_vars($object);
+    }
 }
