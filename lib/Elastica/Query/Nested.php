@@ -1,20 +1,22 @@
 <?php
+
+namespace Elastica\Query;
+
 /**
  * Nested query
  *
- * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/nested-query.html
  */
-class Elastica_Query_Nested extends Elastica_Query_Abstract
+class Nested extends AbstractQuery
 {
     /**
      * Adds field to mlt query
      *
-     * @param  string                $path Nested object path
-     * @return Elastica_Query_Nested
+     * @param  string                     $path Nested object path
+     * @return \Elastica\Query\Nested
      */
     public function setPath($path)
     {
@@ -24,10 +26,10 @@ class Elastica_Query_Nested extends Elastica_Query_Abstract
     /**
      * Sets nested query
      *
-     * @param  Elastica_Query_Abstract $query
-     * @return Elastica_Query_Nested
+     * @param  \Elastica\Query\AbstractQuery $query
+     * @return \Elastica\Query\Nested
      */
-    public function setQuery(Elastica_Query_Abstract $query)
+    public function setQuery(AbstractQuery $query)
     {
         return $this->setParam('query', $query->toArray());
     }
@@ -35,8 +37,8 @@ class Elastica_Query_Nested extends Elastica_Query_Abstract
     /**
      * Set score method
      *
-     * @param  string                $scoreMode Options: avg, total, max and none.
-     * @return Elastica_Query_Nested
+     * @param  string                     $scoreMode Options: avg, total, max and none.
+     * @return \Elastica\Query\Nested
      */
     public function setScoreMode($scoreMode)
     {

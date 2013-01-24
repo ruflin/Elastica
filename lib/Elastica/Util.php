@@ -1,4 +1,7 @@
 <?php
+
+namespace Elastica;
+
 /**
  * Elastica tools
  *
@@ -8,7 +11,7 @@
  * @author Thibault Duplessis <thibault.duplessis@gmail.com>
  * @author Oleg Zinchenko <olegz@default-value.com>
  */
-class Elastica_Util
+class Util
 {
     /**
      * Replace the following reserved words: AND OR NOT
@@ -112,5 +115,26 @@ class Elastica_Util
         $string =  date('Y-m-d\TH:i:s\Z', $timestamp);
 
         return $string;
+    }
+
+    /**
+     * Tries to guess the name of the param, based on its class
+     * Exemple: \Elastica\Filter\HasChildFilter => has_child
+     *
+     * @param string|object Class or Class name
+     * @return string parameter name
+     */
+    public static function getParamName($class)
+    {
+        if (is_object($class)) {
+            $class = get_class($class);
+        }
+
+        $parts = explode('\\', $class);
+        $last  = array_pop($parts);
+        $last  = preg_replace('/(Facet|Query|Filter)$/', '', $last);
+        $name  = self::toSnakeCase($last);
+
+        return $name;
     }
 }

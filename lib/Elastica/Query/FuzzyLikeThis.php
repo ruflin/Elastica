@@ -1,14 +1,16 @@
 <?php
+
+namespace Elastica\Query;
+
 /**
  * Fuzzy Like This query
  *
- * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Raul Martinez, Jr <juneym@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/flt-query.html
  */
-class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
+class FuzzyLikeThis extends AbstractQuery
 {
     /**
      * Field names
@@ -62,8 +64,8 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
     /**
      * Adds field to flt query
      *
-     * @param  array                        $fields Field names
-     * @return Elastica_Query_FuzzyLikeThis Current object
+     * @param  array                             $fields Field names
+     * @return \Elastica\Query\FuzzyLikeThis Current object
      */
     public function addFields(array $fields)
     {
@@ -75,8 +77,8 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
     /**
      * Set the "like_text" value
      *
-     * @param  string                       $text
-     * @return Elastica_Query_FuzzyLikeThis This current object
+     * @param  string                            $text
+     * @return \Elastica\Query\FuzzyLikeThis This current object
      */
     public function setLikeText($text)
     {
@@ -89,8 +91,8 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
     /**
      * Set the "ignore_tf" value (ignore term frequency)
      *
-     * @param  bool                         $ignoreTF
-     * @return Elastica_Query_FuzzyLikeThis Current object
+     * @param  bool                              $ignoreTF
+     * @return \Elastica\Query\FuzzyLikeThis Current object
      */
     public function setIgnoreTF($ignoreTF)
     {
@@ -102,8 +104,8 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
     /**
      * Set the minimum similarity
      *
-     * @param  int                          $value
-     * @return Elastica_Query_FuzzyLikeThis This current object
+     * @param  int                               $value
+     * @return \Elastica\Query\FuzzyLikeThis This current object
      */
     public function setMinSimilarity($value)
     {
@@ -116,8 +118,8 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
     /**
      * Set boost
      *
-     * @param  float                        $value Boost value
-     * @return Elastica_Query_FuzzyLikeThis Query object
+     * @param  float                             $value Boost value
+     * @return \Elastica\Query\FuzzyLikeThis Query object
      */
     public function setBoost($value)
     {
@@ -129,8 +131,8 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
     /**
      * Set Prefix Length
      *
-     * @param  int                          $value Prefix length
-     * @return Elastica_Query_FuzzyLikeThis
+     * @param  int                               $value Prefix length
+     * @return \Elastica\Query\FuzzyLikeThis
      */
     public function setPrefixLength($value)
     {
@@ -142,8 +144,8 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
     /**
      * Set max_query_terms
      *
-     * @param  int                          $value Max query terms value
-     * @return Elastica_Query_FuzzyLikeThis
+     * @param  int                               $value Max query terms value
+     * @return \Elastica\Query\FuzzyLikeThis
      */
     public function setMaxQueryTerms($value)
     {
@@ -156,7 +158,7 @@ class Elastica_Query_FuzzyLikeThis extends Elastica_Query_Abstract
      * Converts fuzzy like this query to array
      *
      * @return array Query array
-     * @see Elastica_Query_Abstract::toArray()
+     * @see \Elastica\Query\AbstractQuery::toArray()
      */
     public function toArray()
     {

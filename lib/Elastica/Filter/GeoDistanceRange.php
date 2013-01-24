@@ -1,4 +1,9 @@
 <?php
+
+namespace Elastica\Filter;
+
+use Elastica\Exception\InvalidException;
+
 /**
  * Geo distance filter
  *
@@ -7,7 +12,7 @@
  * @author munkie
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-range-filter.html
  */
-class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_Abstract_GeoDistance
+class GeoDistanceRange extends AbstractGeoDistance
 {
     const RANGE_FROM = 'from';
     const RANGE_TO = 'to';
@@ -25,10 +30,10 @@ class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_Abstract_GeoDista
     protected $_ranges = array();
 
     /**
-     * @param string $key
+     * @param string       $key
      * @param array|string $location
-     * @param string $distance
-     * @param array $ranges
+     * @param array        $ranges
+     * @internal param string $distance
      */
     public function __construct($key, $location, array $ranges = array())
     {
@@ -40,8 +45,8 @@ class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_Abstract_GeoDista
     }
 
     /**
-     * @param array $ranges
-     * @return Elastica_Filter_RangeGeoDistance
+     * @param  array                                  $ranges
+     * @return \Elastica\Filter\GeoDistanceRange
      */
     public function setRanges(array $ranges)
     {
@@ -55,10 +60,10 @@ class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_Abstract_GeoDista
     }
 
     /**
-     * @param string $key
-     * @param mixed $value
-     * @return Elastica_Filter_RangeGeoDistance
-     * @throws Elastica_Exception_Invalid
+     * @param  string                                 $key
+     * @param  mixed                                  $value
+     * @return \Elastica\Filter\GeoDistanceRange
+     * @throws \Elastica\Exception\InvalidException
      */
     public function setRange($key, $value)
     {
@@ -75,7 +80,7 @@ class Elastica_Filter_GeoDistanceRange extends Elastica_Filter_Abstract_GeoDista
                 $value = (boolean) $value;
                 break;
             default:
-                throw new Elastica_Exception_Invalid('Invalid range parameter given: ' . $key);
+                throw new InvalidException('Invalid range parameter given: ' . $key);
         }
         $this->_ranges[$key] = $value;
 

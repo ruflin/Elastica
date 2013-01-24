@@ -1,4 +1,7 @@
 <?php
+
+namespace Elastica\Filter;
+
 /**
  * Geo distance filter
  *
@@ -7,7 +10,7 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-filter.html
  */
-class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract_GeoDistance
+class GeoDistance extends AbstractGeoDistance
 {
     const DISTANCE_TYPE_ARC = 'arc';
     const DISTANCE_TYPE_PLANE = 'plane';
@@ -19,10 +22,10 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract_GeoDistance
     /**
      * Create GeoDistance object
      *
-     * @param  string                     $key      Key
-     * @param  array|string               $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
-     * @param  string                     $distance Distance
-     * @throws Elastica_Exception_Invalid
+     * @param  string                              $key      Key
+     * @param  array|string                        $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
+     * @param  string                              $distance Distance
+     * @throws \Elastica\Exception\InvalidException
      */
     public function __construct($key, $location, $distance)
     {
@@ -57,8 +60,8 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract_GeoDistance
     }
 
     /**
-     * @param  string                      $distance
-     * @return Elastica_Filter_GeoDistance current filter
+     * @param  string                            $distance
+     * @return \Elastica\Filter\GeoDistance current filter
      */
     public function setDistance($distance)
     {
@@ -70,8 +73,8 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract_GeoDistance
     /**
      * See DISTANCE_TYPE_* constants
      *
-     * @param  string                      $distanceType
-     * @return Elastica_Filter_GeoDistance current filter
+     * @param  string                            $distanceType
+     * @return \Elastica\Filter\GeoDistance current filter
      */
     public function setDistanceType($distanceType)
     {
@@ -83,8 +86,8 @@ class Elastica_Filter_GeoDistance extends Elastica_Filter_Abstract_GeoDistance
     /**
      * See OPTIMIZE_BBOX_* constants
      *
-     * @param  string                      $optimizeBbox
-     * @return Elastica_Filter_GeoDistance current filter
+     * @param  string                            $optimizeBbox
+     * @return \Elastica\Filter\GeoDistance current filter
      */
     public function setOptimizeBbox($optimizeBbox)
     {

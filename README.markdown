@@ -1,7 +1,8 @@
 Elastica: elasticsearch PHP Client
 ==================================
-
 [![Build Status](https://secure.travis-ci.org/ruflin/Elastica.png?branch=master)](http://travis-ci.org/ruflin/Elastica)
+
+Current stable version: [v0.19.8.0](https://github.com/ruflin/Elastica/tree/v0.19.8.0)
 
 Documentation
 ---------------------
@@ -24,8 +25,7 @@ The version numbers are consistent with elasticsearch. The version number 0.16.0
 
 Compatibility
 -------------
-At the moment the client should be backward compatible to PHP 5.2. That's the reason why 
-the client was not directly built with namespaces and other nice PHP 5.3 features.
+Elastica is tested with PHP 5.3 and later. Versions prior and equal to v0.19.8.0 are compatible with PHP 5.2
 
 File indexing
 -------------

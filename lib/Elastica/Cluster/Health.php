@@ -1,5 +1,10 @@
 <?php
 
+namespace Elastica\Cluster;
+use Elastica\Client;
+use Elastica\Cluster\Health\Index;
+use Elastica\Request;
+
 /**
  * Elastic cluster health.
  *
@@ -7,12 +12,12 @@
  * @author Ray Ward <ray.ward@bigcommerce.com>
  * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-health.html
  */
-class Elastica_Cluster_Health
+class Health
 {
     /**
      * Elastica client.
      *
-     * @var Elastica_Client Client object
+     * @var \Elastica\Client Client object
      */
     protected $_client = null;
 
@@ -24,9 +29,9 @@ class Elastica_Cluster_Health
     protected $_data = null;
 
     /**
-     * @param Elastica_Client $client The Elastica client.
+     * @param \Elastica\Client $client The Elastica client.
      */
-    public function __construct(Elastica_Client $client)
+    public function __construct(Client $client)
     {
         $this->_client = $client;
         $this->refresh();
@@ -40,7 +45,8 @@ class Elastica_Cluster_Health
     protected function _retrieveHealthData()
     {
         $path = '_cluster/health?level=shards';
-        $response = $this->_client->request($path, Elastica_Request::GET);
+        $response = $this->_client->request($path, Request::GET);
+
         return $response->getData();
     }
 
@@ -57,11 +63,12 @@ class Elastica_Cluster_Health
     /**
      * Refreshes the health data for the cluster.
      *
-     * @return Elastica_Cluster_Health
+     * @return \Elastica\Cluster\Health
      */
     public function refresh()
     {
         $this->_data = $this->_retrieveHealthData();
+
         return $this;
     }
 
@@ -168,16 +175,15 @@ class Elastica_Cluster_Health
     /**
      * Gets the status of the indices.
      *
-     * @return array Array of Elastica_Cluster_Health_Index objects.
+     * @return \Elastica\Cluster\Health\Index[]
      */
     public function getIndices()
     {
         $indices = array();
         foreach ($this->_data['indices'] as $indexName => $index) {
-            $indices[] = new Elastica_Cluster_Health_Index($indexName, $index);
+            $indices[] = new Index($indexName, $index);
         }
 
         return $indices;
     }
 }
-

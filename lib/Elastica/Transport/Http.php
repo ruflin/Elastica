@@ -1,4 +1,12 @@
 <?php
+
+namespace Elastica\Transport;
+
+use Elastica\Exception\Connection\HttpException;
+use Elastica\Exception\ResponseException;
+use Elastica\Request;
+use Elastica\Response;
+
 /**
  * Elastica Http Transport object
  *
@@ -6,7 +14,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Transport_Http extends Elastica_Transport_Abstract
+class Http extends AbstractTransport
 {
     /**
      * Http scheme
@@ -20,36 +28,33 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
      *
      * @var resource Curl resource to reuse
      */
-    protected static $_connection = null;
+    protected static $_curlConnection = null;
 
     /**
      * Makes calls to the elasticsearch server
      *
      * All calls that are made to the server are done through this function
      *
-     * @param  array             $params Host, Port, ...
-     * @throws Elastica_Exception_Response
-     * @throws Elastica_Exception_Invalid
-     * @throws Elastica_Exception_Client
-     * @return Elastica_Response Response object
+     * @param  \Elastica\Request                     $request
+     * @param  array                                $params  Host, Port, ...
+     * @throws \Elastica\Exception\ConnectionException
+     * @throws \Elastica\Exception\ResponseException
+     * @throws \Elastica\Exception\Connection\HttpException
+     * @return \Elastica\Response                    Response object
      */
-    public function exec(array $params)
+    public function exec(Request $request, array $params)
     {
-        $request = $this->getRequest();
+        $connection = $this->getConnection();
 
-        $conn = $this->_getConnection($request->getConfig('persistent'));
+        $conn = $this->_getConnection($connection->isPersistent());
 
         // If url is set, url is taken. Otherwise port, host and path
-        if (!empty($params['url'])) {
-            $baseUri = $params['url'];
+        $url = $connection->hasConfig('url')?$connection->getConfig('url'):'';
+
+        if (!empty($url)) {
+            $baseUri = $url;
         } else {
-            if (!isset($params['host']) || !isset($params['port'])) {
-                throw new Elastica_Exception_Invalid('host and port have to be set');
-            }
-
-            $path = isset($params['path']) ? $params['path'] : '';
-
-            $baseUri = $this->_scheme . '://' . $params['host'] . ':' . $params['port'] . '/' . $path;
+            $baseUri = $this->_scheme . '://' . $connection->getHost() . ':' . $connection->getPort() . '/' . $connection->getPath();
         }
 
         $baseUri .= $request->getPath();
@@ -61,13 +66,14 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
         }
 
         curl_setopt($conn, CURLOPT_URL, $baseUri);
-        curl_setopt($conn, CURLOPT_TIMEOUT, $request->getConfig('timeout'));
+        curl_setopt($conn, CURLOPT_TIMEOUT, $connection->getTimeout());
         curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $request->getMethod());
         curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
 
         $this->_setupCurl($conn);
 
-        $headersConfig = $request->getConfig('headers');
+        $headersConfig = $connection->hasConfig('headers')?$connection->getConfig('headers'):array();
+
         if (!empty($headersConfig)) {
             $headers = array();
             while (list($header, $headerValue) = each($headersConfig)) {
@@ -105,7 +111,7 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
         // Checks if error exists
         $errorNumber = curl_errno($conn);
 
-        $response = new Elastica_Response($responseString);
+        $response = new Response($responseString);
 
         if (defined('DEBUG') && DEBUG) {
             $response->setQueryTime($end - $start);
@@ -113,11 +119,11 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
         }
 
         if ($response->hasError()) {
-            throw new Elastica_Exception_Response($response);
+            throw new ResponseException($response);
         }
 
         if ($errorNumber > 0) {
-            throw new Elastica_Exception_Client($errorNumber, $request, $response);
+            throw new HttpException($errorNumber, $request, $response);
         }
 
         return $response;
@@ -126,12 +132,14 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
     /**
      * Called to add additional curl params
      *
-     * @param resource $connection Curl connection
+     * @param resource $curlConnection Curl connection
      */
-    protected function _setupCurl($connection)
+    protected function _setupCurl($curlConnection)
     {
-        foreach ($this->_request->getClient()->getConfig('curl') as $key => $param) {
-            curl_setopt($connection, $key, $param);
+        if ($this->getConnection()->hasConfig('curl')) {
+            foreach ($this->getConnection()->getConfig('curl') as $key => $param) {
+                curl_setopt($curlConnection, $key, $param);
+            }
         }
     }
 
@@ -143,10 +151,10 @@ class Elastica_Transport_Http extends Elastica_Transport_Abstract
      */
     protected function _getConnection($persistent = true)
     {
-        if (!$persistent || !self::$_connection) {
-            self::$_connection = curl_init();
+        if (!$persistent || !self::$_curlConnection) {
+            self::$_curlConnection = curl_init();
         }
 
-        return self::$_connection;
+        return self::$_curlConnection;
     }
 }

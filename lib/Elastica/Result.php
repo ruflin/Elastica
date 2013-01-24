@@ -1,4 +1,7 @@
 <?php
+
+namespace Elastica;
+
 /**
  * Elastica result item
  *
@@ -8,7 +11,7 @@
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Elastica_Result
+class Result
 {
     /**
      * Hit array
