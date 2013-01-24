@@ -99,4 +99,41 @@ class DocumentTest extends BaseTest
 		$document->setId('hello');
 		$this->assertTrue($document->hasId());
 	}
+
+    public function testGetOptions()
+    {
+        $document = new Document();
+        $document->setIndex('index');
+        $document->setOpType(Document::OP_TYPE_CREATE);
+        $document->setParent('2');
+        $document->setId(1);
+
+        $options = $document->getOptions(array('index', 'type', 'id', 'parent'));
+
+        $this->assertInternalType('array', $options);
+        $this->assertEquals(3, count($options));
+        $this->assertArrayHasKey('index', $options);
+        $this->assertArrayHasKey('id', $options);
+        $this->assertArrayHasKey('parent', $options);
+        $this->assertEquals('index', $options['index']);
+        $this->assertEquals(1, $options['id']);
+        $this->assertEquals('2', $options['parent']);
+        $this->assertArrayNotHasKey('type', $options);
+        $this->assertArrayNotHasKey('op_type', $options);
+        $this->assertArrayNotHasKey('_index', $options);
+        $this->assertArrayNotHasKey('_id', $options);
+        $this->assertArrayNotHasKey('_parent', $options);
+
+        $options = $document->getOptions(array('parent', 'op_type', 'percolate'), false);
+
+        $this->assertInternalType('array', $options);
+        $this->assertEquals(2, count($options));
+        $this->assertArrayHasKey('_parent', $options);
+        $this->assertArrayHasKey('_op_type', $options);
+        $this->assertEquals('2', $options['_parent']);
+        $this->assertEquals(Document::OP_TYPE_CREATE, $options['_op_type']);
+        $this->assertArrayNotHasKey('percolate', $options);
+        $this->assertArrayNotHasKey('op_type', $options);
+        $this->assertArrayNotHasKey('parent', $options);
+    }
 }

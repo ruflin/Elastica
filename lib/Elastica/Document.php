@@ -464,7 +464,7 @@ class Document extends Param
         }
         if ($withoutUnderscore) {
             foreach ($data as $key => $value) {
-                $data[ltrim('_' . $key)] = $value;
+                $data[ltrim($key, '_')] = $value;
                 unset($data[$key]);
             }
         }

@@ -18,13 +18,13 @@ class DeleteDocument extends AbstractDocument
     protected function _getMetadataByDocument(Document $document)
     {
         $params = array(
-            '_index',
-            '_type',
-            '_id',
-            '_version',
-            '_version_type',
-            '_routing',
-            '_parent'
+            'index',
+            'type',
+            'id',
+            'version',
+            'version_type',
+            'routing',
+            'parent'
         );
         $metadata = $document->getOptions($params, false);
 

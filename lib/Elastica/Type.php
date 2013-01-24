@@ -57,31 +57,22 @@ class Type implements SearchableInterface
     {
         $path = urlencode($doc->getId());
 
-        $query = array();
-
-        if ($doc->hasParam('_version')) {
-            $query['version'] = $doc->getVersion();
-        }
-
-        if ($doc->hasParam('_version_type')) {
-            $query['version_type'] = $doc->getVersionType();
-        }
-
-        if ($doc->hasParam('_parent')) {
-            $query['parent'] = $doc->getParent();
-        }
-
-        if ($doc->hasOpType()) {
-            $query['op_type'] = $doc->getOpType();
-        }
-
-        if ($doc->hasPercolate()) {
-            $query['percolate'] = $doc->getPercolate();
-        }
-
-        if ($doc->hasParam('_routing')) {
-            $query['routing'] = $doc->getRouting();
-        }
+        $query = $doc->getOptions(
+            array(
+                'version',
+                'version_type',
+                'parent',
+                'op_type',
+                'percolate',
+                'routing',
+                'timestamp',
+                'ttl',
+                'consistency',
+                'replication',
+                'refresh',
+                'timeout'
+            )
+        );
 
         $type = Request::PUT;
 

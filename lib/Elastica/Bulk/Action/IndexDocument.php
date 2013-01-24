@@ -32,16 +32,16 @@ class IndexDocument extends AbstractDocument
     protected function _getMetadataByDocument(Document $document)
     {
         $params = array(
-            '_index',
-            '_type',
-            '_id',
-            '_version',
-            '_version_type',
-            '_routing',
-            '_percolate',
-            '_parent',
-            '_ttl',
-            '_timestamp',
+            'index',
+            'type',
+            'id',
+            'version',
+            'version_type',
+            'routing',
+            'percolate',
+            'parent',
+            'ttl',
+            'timestamp',
         );
         $metadata = $document->getOptions($params, false);
 
