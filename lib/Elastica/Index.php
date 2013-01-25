@@ -365,14 +365,20 @@ class Index implements SearchableInterface
     /**
      * Flushes the index to storage
      *
+     * @param bool $refresh OPTIONAL Force to do a refresh
      * @return \Elastica\Response Response object
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html
      */
-    public function flush()
+    public function flush($refresh = false)
     {
         $path = '_flush';
-        // TODO: Add option for refresh
-        return $this->request($path, Request::POST);
+        $data = array();
+
+        if ($refresh) {
+            $data['refresh'] = 'true';
+        }
+
+        return $this->request($path, Request::POST, $data);
     }
 
     /**
