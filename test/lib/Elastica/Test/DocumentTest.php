@@ -250,6 +250,35 @@ class DocumentTest extends BaseTest
         $this->assertEquals('1d', $document->getTtl());
     }
 
+    public function testSerializedData()
+    {
+        $data = '{"user":"rolf"}';
+        $document = new Document(1, $data);
+
+        $this->assertFalse($document->has('user'));
+
+        try {
+            $document->get('user');
+            $this->fail('User field should not be available');
+        } catch (InvalidException $e) {
+            $this->assertTrue(true);
+        }
+
+        try {
+            $document->remove('user');
+            $this->fail('User field should not be available for removal');
+        } catch (InvalidException $e) {
+            $this->assertTrue(true);
+        }
+
+        try {
+            $document->set('name', 'shawn');
+            $this->fail('Document should not allow to set new data');
+        } catch (InvalidException $e) {
+            $this->assertTrue(true);
+        }
+    }
+
     public function testSetScript()
     {
         $document = new Document();

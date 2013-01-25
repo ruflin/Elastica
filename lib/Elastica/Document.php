@@ -112,7 +112,7 @@ class Document extends Param
      */
     public function get($key)
     {
-        if (!array_key_exists($key, $this->_data)) {
+        if (!$this->has($key)) {
             throw new InvalidException("Field {$key} does not exist");
         }
         return $this->_data[$key];
@@ -125,6 +125,9 @@ class Document extends Param
      */
     public function set($key, $value)
     {
+        if (!is_array($this->_data)) {
+            throw new InvalidException('Document data is serialized data. Data creation is forbidden.');
+        }
         $this->_data[$key] = $value;
 
         return $this;
@@ -136,7 +139,7 @@ class Document extends Param
      */
     public function has($key)
     {
-        return array_key_exists($key, $this->_data);
+        return is_array($this->_data) && array_key_exists($key, $this->_data);
     }
 
     /**
@@ -146,7 +149,7 @@ class Document extends Param
      */
     public function remove($key)
     {
-        if (!array_key_exists($key, $this->_data)) {
+        if (!$this->has($key)) {
             throw new InvalidException("Field {$key} does not exist");
         }
         unset($this->_data[$key]);
