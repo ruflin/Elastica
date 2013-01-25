@@ -48,11 +48,11 @@ class Document extends Param
      * Creates a new document
      *
      * @param int|string $id    OPTIONAL $id Id is create if empty
-     * @param array      $data  OPTIONAL Data array
+     * @param array|string  $data  OPTIONAL Data array
      * @param string     $type  OPTIONAL Type name
      * @param string     $index OPTIONAL Index name
      */
-    public function __construct($id = '', array $data = array(), $type = '', $index = '')
+    public function __construct($id = '', $data = array(), $type = '', $index = '')
     {
         $this->setId($id);
         $this->setData($data);
@@ -79,6 +79,14 @@ class Document extends Param
     public function setId($id)
     {
         return $this->setParam('_id', $id);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasId()
+    {
+        return '' !== (string) $this->getId();
     }
 
     /**
@@ -159,10 +167,10 @@ class Document extends Param
     /**
      * Overwrites the current document data with the given data
      *
-     * @param  array             $data Data array
+     * @param  array|string             $data Data array
      * @return \Elastica\Document
      */
-    public function setData(array $data)
+    public function setData($data)
     {
         $this->_data = $data;
 
@@ -183,7 +191,7 @@ class Document extends Param
     /**
      * Returns the document data
      *
-     * @return array Document data
+     * @return array|string Document data
      */
     public function getData()
     {
@@ -198,6 +206,10 @@ class Document extends Param
      */
     public function setType($type)
     {
+        if ($type instanceof Type) {
+            $this->setIndex($type->getIndex());
+            $type = $type->getName();
+        }
         return $this->setParam('_type', $type);
     }
 
@@ -220,6 +232,9 @@ class Document extends Param
      */
     public function setIndex($index)
     {
+        if ($index instanceof Index) {
+            $index = $index->getName();
+        }
         return $this->setParam('_index', $index);
     }
 

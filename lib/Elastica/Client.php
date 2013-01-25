@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica;
+
 use Elastica\Exception\BulkResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
@@ -235,7 +236,7 @@ class Client
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
      * @param  int                  $id      document id
-     * @param  array|Elastic\Script $data    raw data for request body
+     * @param  array|\Elastica\Script|\Elastica\Document $data    raw data for request body
      * @param  string               $index   index to update
      * @param  string               $type    type of index to update
      * @param  array                $options array of query params to use for query. For possible options check es api
@@ -245,18 +246,29 @@ class Client
     public function updateDocument($id, $data, $index, $type, array $options = array())
     {
         $path =  $index . '/' . $type . '/' . $id . '/_update';
+
         if (!isset($options['retry_on_conflict'])) {
             $retryOnConflict = $this->getConfig("retryOnConflict");
             $options['retry_on_conflict'] = $retryOnConflict;
         }
 
         if ($data instanceof Script) {
-            $data = $data->toArray();
-        } elseif ($data instanceof Document) {
-            $data = array('doc' => $data->getData());
+            $requestData = $data->toArray();
+        } else if ($data instanceof Document) {
+            if ($data->hasScript()) {
+                $requestData = $data->getScript()->toArray();
+                $documentData = $data->getData();
+                if (!empty($documentData)) {
+                    $requestData['upsert'] = $documentData;
+                }
+            } else {
+                $requestData = array('doc' => $data->getData());
+            }
+        } else {
+            $requestData = $data;
         }
 
-        return $this->request($path, Request::POST, $data, $options);
+        return $this->request($path, Request::POST, $requestData, $options);
     }
 
     /**
@@ -460,7 +472,7 @@ class Client
         } catch (ConnectionException $e) {
             $connection->setEnabled(false);
 
-            // Calls callback with connection as param to make it possible to persist invalid conenctions
+            // Calls callback with connection as param to make it possible to persist invalid connections
             if ($this->_callback) {
                 call_user_func($this->_callback, $connection);
             }

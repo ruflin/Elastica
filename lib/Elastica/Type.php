@@ -3,6 +3,7 @@
 namespace Elastica;
 
 use Elastica\Document;
+use Elastica\Exception\RuntimeException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
@@ -34,6 +35,11 @@ class Type implements SearchableInterface
      * @var string Type name
      */
     protected $_name = '';
+
+    /**
+     * @var array|string A callable that serializes an object passed to it
+     */
+    protected $_serializer;
 
     /**
      * Creates a new type object inside the given index
@@ -93,6 +99,21 @@ class Type implements SearchableInterface
         return $this->request($path, $type, $doc->getData(), $query);
     }
 
+    public function addObject($object, Document $doc = null)
+    {
+        if (!isset($this->_serializer)) {
+            throw new RuntimeException('No serializer defined');
+        }
+
+        $data = call_user_func($this->_serializer, $object);
+        if (!$doc) {
+            $doc = new Document();
+        }
+        $doc->setData($data);
+
+        return $this->addDocument($doc);
+    }
+
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
@@ -104,28 +125,17 @@ class Type implements SearchableInterface
      */
     public function updateDocument(Document $document, array $options = array())
     {
-        if (null === $document->getId()) {
+        if (!$document->hasId()) {
             throw new InvalidException('Document id is not set');
         }
 
-        $path =  $document->getId() . '/_update';
-
-        if (!isset($options['retry_on_conflict'])) {
-            $retryOnConflict = $this->getIndex()->getClient()->getConfig("retryOnConflict");
-            $options['retry_on_conflict'] = $retryOnConflict;
-        }
-
-        if ($document->hasScript()) {
-            $requestData = $document->getScript()->toArray();
-            $documentData = $document->getData();
-            if (!empty($documentData)) {
-                $requestData['upsert'] = $documentData;
-            }
-        } else {
-            $requestData = array('doc' => $document->getData());
-        }
-
-        return $this->request($path, Request::POST, $requestData, $options);
+        return $this->getIndex()->getClient()->updateDocument(
+            $document->getId(),
+            $document,
+            $this->getIndex()->getName(),
+            $this->getName(),
+            $options
+        );
     }
 
     /**
@@ -281,7 +291,7 @@ class Type implements SearchableInterface
      * Deletes an entry by its unique identifier
      *
      * @param  int|string               $id Document id
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return \Elastica\Response        Response object
      * @link http://www.elasticsearch.org/guide/reference/api/delete.html
      */
@@ -367,5 +377,16 @@ class Type implements SearchableInterface
         $path = $this->getName() . '/' . $path;
 
         return $this->getIndex()->request($path, $method, $data, $query);
+    }
+
+    /**
+     * Sets the serializer callable used in addObject
+     * @see \Elastica\Type::addObject
+     *
+     * @param array|string $serializer  @see \Elastica\Type::_serializer
+     */
+    public function setSerializer($serializer)
+    {
+        $this->_serializer = $serializer;
     }
 }

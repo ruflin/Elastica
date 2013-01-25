@@ -1,0 +1,10 @@
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="../bootstrap.php"
+         colors="true">
+    <testsuites>
+        <testsuite name="Transport">
+            <file>TransportTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>

@@ -1,5 +1,11 @@
 CHANGES
 
+2013-01-24
+- Added serialization support. Objects can be added to elastica directly when a serializer callable is configured on \Elastica\Type
+
+2013-01-21
+- Added Thrift transport. Ir requires installing munkie/elasticsearch-thrift-php package and elasticsearch-tranport-thrift plugin should be installed in elastcisearch
+
 2013-01-13
 - Add version option to Elastica_Search::search
 - Remove compatibility for PHP 5.2
@@ -12,6 +18,8 @@ CHANGES
 - Removed all executable flags on files where not needed.
 - Update to elasticsearch 0.20.2
 - Refactored Elastica_Script and added it support in Elastica_Query_CustomFiltersScore, Elastica_Query_CustomScore and Elastica_Filter_Script
+- Refactored Elastica_Client::updateDocument() method to support partial document update. $data can be Elastic_Script, Elastic_Document or array.
+- Elastica_Type::updateDocument() now takes Elastica_Document instead of Elastica_Script (BC break). Script can be set to document to perform script update.
 
 2012-12-23
 - Elastica_Client config param "servers" to "connections" renamed. "headers" and "curl" are now a config param inside "connections"
