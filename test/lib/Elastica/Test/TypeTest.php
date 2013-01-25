@@ -4,6 +4,7 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
@@ -99,7 +100,7 @@ class TypeTest extends BaseTest
         $this->assertEmpty($result->getData());
     }
 
-    public function testDeleteDocument()
+    public function testDeleteById()
     {
         $index = $this->_createIndex();
         $type = new Type($index, 'user');
@@ -129,39 +130,52 @@ class TypeTest extends BaseTest
 
         // it should not be possible to delete the entire type with this method
         try {
+            $type->deleteById('');
+            $this->fail('Delete with empty string id should fail');
+        } catch (\InvalidArgumentException $e) {
+            $this->assertTrue(true);
+        }
+
+        try {
             $type->deleteById(' ');
-        } catch (\Exception $e) {
-            /* ignore */
+            $this->fail('Delete with one space string id should fail');
+        } catch (\InvalidArgumentException $e) {
+            $this->assertTrue(true);
         }
 
         try {
             $type->deleteById(null);
-        } catch (\Exception $e) {
-            /* ignore */
+            $this->fail('Delete with null id should fail');
+        } catch (\InvalidArgumentException $e) {
+            $this->assertTrue(true);
         }
 
         try {
             $type->deleteById(array());
-        } catch (\Exception $e) {
-            /* ignore */
+            $this->fail('Delete with empty array id should fail');
+        } catch (\InvalidArgumentException $e) {
+            $this->assertTrue(true);
         }
 
         try {
             $type->deleteById('*');
-        } catch (\Exception $e) {
-            /* ignore */
+            $this->fail('Delete request should fail because of invalid id: *');
+        } catch (ResponseException $e) {
+            $this->assertTrue(true);
         }
 
         try {
             $type->deleteById('*:*');
-        } catch (\Exception $e) {
-            /* ignore */
+            $this->fail('Delete request should fail because document with id *.* does not exist');
+        } catch (NotFoundException $e) {
+            $this->assertTrue(true);
         }
 
         try {
             $type->deleteById('!');
-        } catch (\Exception $e) {
-            /* ignore */
+            $this->fail('Delete request should fail because document with id ! does not exist');
+        } catch (NotFoundException $e) {
+            $this->assertTrue(true);
         }
 
         $index->refresh();
@@ -169,6 +183,38 @@ class TypeTest extends BaseTest
         // rolf should no longer be there
         $resultSet = $type->search('john');
         $this->assertEquals(1, $resultSet->count());
+    }
+
+    public function testDeleteDocument()
+    {
+        $index = $this->_createIndex();
+        $type = new Type($index, 'user');
+
+        // Adds hans, john and rolf to the index
+        $docs = array(
+            new Document(1, array('username' => 'hans', 'test' => array('2', '3', '5'))),
+            new Document(2, array('username' => 'john', 'test' => array('1', '3', '6'))),
+            new Document(3, array('username' => 'rolf', 'test' => array('2', '3', '7'))),
+        );
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $document = $type->getDocument(1);
+        $this->assertEquals(1, $document->getId());
+        $this->assertEquals('hans', $document->get('username'));
+
+        $this->assertEquals(3, $type->count());
+
+        $type->deleteDocument($document);
+        $index->refresh();
+
+        try {
+            $type->getDocument(1);
+            $this->fail('Document was not deleted');
+        } catch (NotFoundException $e) {
+            $this->assertTrue(true);
+            $this->assertEquals(2, $type->count(), 'Documents count in type should be 2');
+        }
     }
 
     /**

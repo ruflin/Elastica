@@ -2,7 +2,6 @@
 
 namespace Elastica;
 
-use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
@@ -267,6 +266,27 @@ class Type implements SearchableInterface
     }
 
     /**
+     * @param \Elastica\Document $document
+     * @return \Elastica\Response
+     */
+    public function deleteDocument(Document $document)
+    {
+        $options = $document->getOptions(
+            array(
+                'version',
+                'version_type',
+                'routing',
+                'parent',
+                'replication',
+                'consistency',
+                'refresh',
+                'timeout'
+            )
+        );
+        return $this->deleteById($document->getId(), $options);
+    }
+
+    /**
      * Deletes an entry by its unique identifier
      *
      * @param  int|string               $id Document id
@@ -274,13 +294,21 @@ class Type implements SearchableInterface
      * @return \Elastica\Response        Response object
      * @link http://www.elasticsearch.org/guide/reference/api/delete.html
      */
-    public function deleteById($id)
+    public function deleteById($id, array $options = array())
     {
         if (empty($id) || !trim($id)) {
             throw new \InvalidArgumentException();
         }
 
-        return $this->request($id, Request::DELETE);
+        $response = $this->request($id, Request::DELETE, array(), $options);
+
+        $responseData = $response->getData();
+
+        if (isset($responseData['found']) && false == $responseData['found']) {
+            throw new NotFoundException('Doc id ' . $id . ' not found and can not be deleted');
+        }
+
+        return $response;
     }
 
     /**
