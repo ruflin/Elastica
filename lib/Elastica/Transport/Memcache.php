@@ -69,7 +69,7 @@ class Memcache extends AbstractTransport
         $response = new Response($responseString);
 
         if ($response->hasError()) {
-            throw new ResponseException($response);
+            throw new ResponseException($request, $response);
         }
 
         return $response;
