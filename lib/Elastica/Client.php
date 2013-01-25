@@ -215,7 +215,21 @@ class Client
         $params = array();
 
         foreach ($docs as $doc) {
-            $params[] = array('index' => $doc->getParams());
+            $params[] = array('index' => $doc->getOptions(
+                array(
+                    'index',
+                    'type',
+                    'id',
+                    'version',
+                    'version_type',
+                    'routing',
+                    'percolate',
+                    'parent',
+                    'ttl',
+                    'timestamp',
+                ),
+                true
+            ));
             $params[] = $doc->getData();
         }
 
@@ -263,18 +277,9 @@ class Client
     {
         $path =  $index . '/' . $type . '/' . $id . '/_update';
 
-        if ($data instanceof Document) {
-            $options+= $data->getOptions(true);
-        }
-
-        if (!isset($options['retry_on_conflict'])) {
-            $retryOnConflict = $this->getConfig("retryOnConflict");
-            $options['retry_on_conflict'] = $retryOnConflict;
-        }
-
         if ($data instanceof Script) {
             $requestData = $data->toArray();
-        } else if ($data instanceof Document) {
+        } elseif ($data instanceof Document) {
             if ($data->hasScript()) {
                 $requestData = $data->getScript()->toArray();
                 $documentData = $data->getData();
@@ -284,8 +289,29 @@ class Client
             } else {
                 $requestData = array('doc' => $data->getData());
             }
+            $docOptions = $data->getOptions(
+                array(
+                    'version',
+                    'version_type',
+                    'routing',
+                    'percolate',
+                    'parent',
+                    'fields',
+                    'retry_on_conflict',
+                    'consistency',
+                    'replication',
+                    'refresh',
+                    'timeout',
+                )
+            );
+            $options += $docOptions;
         } else {
             $requestData = $data;
+        }
+
+        if (!isset($options['retry_on_conflict'])) {
+            $retryOnConflict = $this->getConfig("retryOnConflict");
+            $options['retry_on_conflict'] = $retryOnConflict;
         }
 
         $response = $this->request($path, Request::POST, $requestData, $options);
@@ -315,7 +341,7 @@ class Client
             foreach ($keys as $key) {
                 if (isset($responseData['get']['fields'][$key])) {
                     $data[$key] = $responseData['get']['fields'][$key];
-                } else if (isset($data[$key])) {
+                } elseif (isset($data[$key])) {
                     unset($data[$key]);
                 }
             }

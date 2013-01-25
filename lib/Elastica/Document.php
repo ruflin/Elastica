@@ -21,20 +21,6 @@ class Document extends Param
     protected $_data = array();
 
     /**
-     * Optype
-     *
-     * @var string Optype
-     */
-    protected $_optype = '';
-
-    /**
-     * Percolate
-     *
-     * @var string Percolate
-     */
-    protected $_percolate = '';
-
-    /**
      * @var \Elastica\Script
      */
     protected $_script;
@@ -73,7 +59,7 @@ class Document extends Param
      */
     public function getId()
     {
-        return ($this->hasParam('_id'))?$this->getParam('_id'):null;
+        return ($this->hasParam('_id')) ? $this->getParam('_id') : null;
     }
 
     /**
@@ -122,7 +108,7 @@ class Document extends Param
     /**
      * @param string $key
      * @return mixed
-     * @throws Exception\InvalidException
+     * @throws \Elastica\Exception\InvalidException
      */
     public function get($key)
     {
@@ -155,7 +141,7 @@ class Document extends Param
 
     /**
      * @param string $key
-     * @throws Exception\InvalidException
+     * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Document
      */
     public function remove($key)
@@ -263,7 +249,23 @@ class Document extends Param
      */
     public function setTtl($ttl)
     {
-        return $this->set('_ttl', $ttl);
+        return $this->setParam('_ttl', $ttl);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTtl()
+    {
+        return $this->getParam('_ttl');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasTtl()
+    {
+        return $this->hasParam('_ttl');
     }
 
     /**
@@ -299,7 +301,7 @@ class Document extends Param
      */
     public function getType()
     {
-       return $this->getParam('_type');
+        return $this->getParam('_type');
     }
 
     /**
@@ -421,22 +423,29 @@ class Document extends Param
     /**
      * Set operation type
      *
-     * @param  string            $optype Only accept create
+     * @param  string            $opType Only accept create
      * @return \Elastica\Document Current object
      */
-    public function setOpType($optype)
+    public function setOpType($opType)
     {
-        $this->_optype = $optype;
-
-        return $this;
+        return $this->setParam('_op_type', $opType);
     }
 
     /**
      * Get operation type
+     * @return string
      */
     public function getOpType()
     {
-        return $this->_optype;
+        return $this->getParam('_op_type');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOpType()
+    {
+        return $this->hasParam('_op_type');
     }
 
     /**
@@ -447,9 +456,7 @@ class Document extends Param
      */
     public function setPercolate($value = '*')
     {
-        $this->_percolate = $value;
-
-        return $this;
+        return $this->setParam('_percolate', $value);
     }
 
     /**
@@ -459,7 +466,15 @@ class Document extends Param
      */
     public function getPercolate()
     {
-        return $this->_percolate;
+        return $this->getParam('_percolate');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPercolate()
+    {
+        return $this->hasParam('_percolate');
     }
 
     /**
@@ -492,21 +507,15 @@ class Document extends Param
     }
 
     /**
-     * @param array $fields
+     * @param array|string $fields
      * @return \Elastica\Document
      */
-    public function setFields(array $fields)
+    public function setFields($fields)
     {
-        return $this->setParam('_fields', $fields);
-    }
-
-    /**
-     * @param string $field
-     * @return \Elastica\Document
-     */
-    public function addField($field)
-    {
-        return $this->addParam('_fields', $field);
+        if (is_array($fields)) {
+            $fields = implode(',', $fields);
+        }
+        return $this->setParam('_fields', (string) $fields);
     }
 
     /**
@@ -514,11 +523,11 @@ class Document extends Param
      */
     public function setFieldsSource()
     {
-        return $this->setFields(array('_source'));
+        return $this->setFields('_source');
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getFields()
     {
@@ -535,7 +544,7 @@ class Document extends Param
 
     /**
      * @param int $num
-     * @return Param
+     * @return \Elastica\Document
      */
     public function setRetryOnConflict($num)
     {
@@ -559,50 +568,128 @@ class Document extends Param
     }
 
     /**
-     * @param bool $forUpdate
-     * @return array
+     * @param string $timestamp
+     * @return \Elastica\Document
      */
-    public function getOptions($forUpdate = false)
+    public function setTimestamp($timestamp)
     {
-        $options = array();
+        return $this->setParam('_timestamp', $timestamp);
+    }
 
-        if ($this->hasVersion()) {
-            $options['version'] = $this->getVersion();
-        }
+    /**
+     * @return int
+     */
+    public function getTimestamp()
+    {
+        return $this->getParam('_timestamp');
+    }
 
-        if ($this->hasVersionType()) {
-            $options['version_type'] = $this->getVersionType();
-        }
+    /**
+     * @return bool
+     */
+    public function hasTimestamp()
+    {
+        return $this->hasParam('_timestamp');
+    }
 
-        if ($this->hasParent()) {
-            $options['parent'] = $this->getParent();
-        }
+    /**
+     * @param bool $refresh
+     * @return \Elastica\Document
+     */
+    public function setRefresh($refresh = true)
+    {
+        return $this->setParam('_refresh', (bool) $refresh);
+    }
 
-        if ($this->getOpType()) {
-            $options['op_type'] = $this->getOpType();
-        }
+    /**
+     * @return bool
+     */
+    public function getRefresh()
+    {
+        return $this->getParam('_refresh');
+    }
 
-        if ($this->getPercolate()) {
-            $options['percolate'] = $this->getPercolate();
-        }
+    /**
+     * @return bool
+     */
+    public function hasRefresh()
+    {
+        return $this->hasParam('_refresh');
+    }
 
-        if ($this->hasRouting()) {
-            $options['routing'] = $this->getRouting();
-        }
+    /**
+     * @param string $timeout
+     * @return \Elastica\Document
+     */
+    public function setTimeout($timeout)
+    {
+        return $this->setParam('_timeout', $timeout);
+    }
 
-        if ($forUpdate) {
+    /**
+     * @return bool
+     */
+    public function getTimeout()
+    {
+        return $this->getParam('_timeout');
+    }
 
-            if ($this->hasFields()) {
-                $options['fields'] = implode(',', $this->getFields());
-            }
+    /**
+     * @return string
+     */
+    public function hasTimeout()
+    {
+        return $this->hasParam('_timeout');
+    }
 
-            if ($this->hasRetryOnConflict()) {
-                $options['retry_on_conflict'] = $this->getRetryOnConflict();
-            }
+    /**
+     * @param string $timeout
+     * @return \Elastica\Document
+     */
+    public function setConsistency($timeout)
+    {
+        return $this->setParam('_consistency', $timeout);
+    }
 
-        }
+    /**
+     * @return string
+     */
+    public function getConsistency()
+    {
+        return $this->getParam('_consistency');
+    }
 
-        return $options;
+    /**
+     * @return string
+     */
+    public function hasConsistency()
+    {
+        return $this->hasParam('_consistency');
+    }
+
+    /**
+     * @param string $timeout
+     * @return \Elastica\Document
+     */
+    public function setReplication($timeout)
+    {
+        return $this->setParam('_replication', $timeout);
+    }
+
+    /**
+     * @return string
+     */
+    public function getReplication()
+    {
+        return $this->getParam('_replication');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasReplication()
+    {
+        return $this->hasParam('_replication');
     }
 
     /**
@@ -643,5 +730,32 @@ class Document extends Param
         $doc['_source'] = $this->getData();
 
         return $doc;
+    }
+
+    /**
+     * @param array $fields if empty array all options will be returned, field names can be either with underscored either without, i.e. _percolate, routing
+     * @param bool $withUnderscore should option keys contain underscore prefix
+     * @return array
+     */
+    public function getOptions(array $fields = array(), $withUnderscore = false)
+    {
+        if (!empty($fields)) {
+            $data = array();
+            foreach ($fields as $field) {
+                $key = '_' . ltrim($field, '_');
+                if ($this->hasParam($key) && '' !== (string) $this->getParam($key)) {
+                    $data[$key] = $this->getParam($key);
+                }
+            }
+        } else {
+            $data = $this->getParams();
+        }
+        if (!$withUnderscore) {
+            foreach ($data as $key => $value) {
+                $data[ltrim($key, '_')] = $value;
+                unset($data[$key]);
+            }
+        }
+        return $data;
     }
 }

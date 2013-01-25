@@ -92,69 +92,42 @@ class DocumentTest extends BaseTest
         $document->setId('hello');
         $this->assertTrue($document->hasId());
     }
-    
+
     public function testGetOptions()
     {
         $document = new Document();
-        $document->setVersion(1);
-        $document->setVersionType(2);
-        $document->setParent(3);
+        $document->setIndex('index');
         $document->setOpType('create');
-        $document->setPercolate('percolate');
-        $document->setRouting('routing');
+        $document->setParent('2');
+        $document->setId(1);
 
-        $document->setRetryOnConflict(2);
-        $document->setFieldsSource();
+        $options = $document->getOptions(array('index', 'type', 'id', 'parent'));
 
-        $options = $document->getOptions();
-
-        $this->assertArrayHasKey('version', $options);
-        $this->assertEquals('1', $options['version']);
-        $this->assertArrayHasKey('version_type', $options);
-        $this->assertEquals('2', $options['version_type']);
+        $this->assertInternalType('array', $options);
+        $this->assertEquals(3, count($options));
+        $this->assertArrayHasKey('index', $options);
+        $this->assertArrayHasKey('id', $options);
         $this->assertArrayHasKey('parent', $options);
-        $this->assertEquals('3', $options['parent']);
-        $this->assertArrayHasKey('op_type', $options);
-        $this->assertEquals('create', $options['op_type']);
-        $this->assertArrayHasKey('percolate', $options);
-        $this->assertEquals('percolate', $options['percolate']);
-        $this->assertArrayHasKey('routing', $options);
-        $this->assertEquals('routing', $options['routing']);
-        $this->assertArrayNotHasKey('retry_on_conflict', $options);
-        $this->assertArrayNotHasKey('fields', $options);
+        $this->assertEquals('index', $options['index']);
+        $this->assertEquals(1, $options['id']);
+        $this->assertEquals('2', $options['parent']);
+        $this->assertArrayNotHasKey('type', $options);
+        $this->assertArrayNotHasKey('op_type', $options);
+        $this->assertArrayNotHasKey('_index', $options);
+        $this->assertArrayNotHasKey('_id', $options);
+        $this->assertArrayNotHasKey('_parent', $options);
 
-        $options = $document->getOptions(true);
+        $options = $document->getOptions(array('parent', 'op_type', 'percolate'), true);
 
-        $this->assertArrayHasKey('version', $options);
-        $this->assertArrayHasKey('version_type', $options);
-        $this->assertArrayHasKey('parent', $options);
-        $this->assertArrayHasKey('op_type', $options);
-        $this->assertArrayHasKey('percolate', $options);
-        $this->assertArrayHasKey('routing', $options);
-        $this->assertArrayHasKey('retry_on_conflict', $options);
-        $this->assertEquals(2, $options['retry_on_conflict']);
-        $this->assertArrayHasKey('fields', $options);
-        $this->assertEquals('_source', $options['fields']);
-
-        $document2 = new Document();
-        $document2->setFields(array('field1', 'field2'));
-        $options = $document2->getOptions(true);
-
-        $this->assertArrayHasKey('fields', $options);
-        $this->assertEquals('field1,field2', $options['fields']);
-
-        $document3 = new Document();
-        $document3->addField('field1');
-        $document3->addField('field2');
-        $document3->addField('field3');
-        $options = $document3->getOptions(true);
-
-        $this->assertArrayHasKey('fields', $options);
-        $this->assertEquals('field1,field2,field3', $options['fields']);
-
-        $document3->setFields(array('field1,field2'));
-        $options = $document3->getOptions(true);
-        $this->assertEquals('field1,field2', $options['fields']);
+        $this->assertInternalType('array', $options);
+        $this->assertEquals(2, count($options));
+        $this->assertArrayHasKey('_parent', $options);
+        $this->assertArrayHasKey('_op_type', $options);
+        $this->assertEquals('2', $options['_parent']);
+        $this->assertEquals('create', $options['_op_type']);
+        $this->assertArrayNotHasKey('percolate', $options);
+        $this->assertArrayNotHasKey('op_type', $options);
+        $this->assertArrayNotHasKey('parent', $options);
     }
 
     public function testGetSetHasRemove()
@@ -261,16 +234,20 @@ class DocumentTest extends BaseTest
     {
         $document = new Document();
 
-        $data = $document->getData();
-        $this->assertArrayNotHasKey('_ttl', $data);
+        $this->assertFalse($document->hasTtl());
+        $options = $document->getOptions();
+        $this->assertArrayNotHasKey('ttl', $options);
 
         $document->setTtl('1d');
 
-        $newData = $document->getData();
+        $newOptions = $document->getOptions();
 
-        $this->assertArrayHasKey('_ttl', $newData);
-        $this->assertEquals('1d', $newData['_ttl']);
-        $this->assertNotEquals($data, $newData);
+        $this->assertArrayHasKey('ttl', $newOptions);
+        $this->assertEquals('1d', $newOptions['ttl']);
+        $this->assertNotEquals($options, $newOptions);
+
+        $this->assertTrue($document->hasTtl());
+        $this->assertEquals('1d', $document->getTtl());
     }
 
     public function testSetScript()
