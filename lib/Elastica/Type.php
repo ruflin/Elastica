@@ -381,9 +381,9 @@ class Type implements SearchableInterface
 
     /**
      * Sets the serializer callable used in addObject
-     * @see Elastica_Type::addObject
+     * @see \Elastica\Type::addObject
      *
-     * @param array|string $serializer  @see Elastica_Type::_serializer
+     * @param array|string $serializer  @see \Elastica\Type::_serializer
      */
     public function setSerializer($serializer)
     {
