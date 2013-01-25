@@ -119,7 +119,7 @@ class Http extends AbstractTransport
         }
 
         if ($response->hasError()) {
-            throw new ResponseException($response);
+            throw new ResponseException($request, $response);
         }
 
         if ($errorNumber > 0) {
