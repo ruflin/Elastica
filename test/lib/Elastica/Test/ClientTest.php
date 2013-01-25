@@ -675,6 +675,8 @@ class ClientTest extends BaseTest
 
         foreach ($docs as $doc) {
             $this->assertTrue($doc->hasId());
+            $this->assertTrue($doc->hasVersion());
+            $this->assertEquals(1, $doc->getVersion());
         }
     }
 }

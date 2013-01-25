@@ -264,8 +264,13 @@ class Client
                 if (false === $document) {
                     break;
                 }
-                if (!$document->hasId() && isset($item['create']['_id'])) {
-                    $document->setId($item['create']['_id']);
+                $opType = key($item);
+                $data = reset($item);
+                if (!$document->hasId() && 'create' == $opType && isset($data['_id'])) {
+                    $document->setId($data['_id']);
+                }
+                if (isset($data['_version'])) {
+                    $document->setVersion($data['_version']);
                 }
                 $document = next($docs);
             }
@@ -326,8 +331,14 @@ class Client
 
         $response = $this->request($path, Request::POST, $requestData, $options);
 
-        if ($data instanceof Document && isset($options['fields'])) {
-            $this->_populateDocumentFieldsFromResponse($response, $data, $options['fields']);
+        if ($response->isOk() && $data instanceof Document) {
+            $responseData = $response->getData();
+            if (isset($responseData['_version'])) {
+                $data->setVersion($responseData['_version']);
+            }
+            if (isset($options['fields'])) {
+                $this->_populateDocumentFieldsFromResponse($response, $data, $options['fields']);
+            }
         }
 
         return $response;

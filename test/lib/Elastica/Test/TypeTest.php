@@ -389,7 +389,16 @@ class TypeTest extends BaseTest
         $type = $index->getType('update_type');
 
         $newDocument = new Document(null, array('counter' => 5, 'name' => 'Batman'));
-        $type->addDocument($newDocument);
+
+        $this->assertFalse($newDocument->hasVersion());
+
+        $response = $type->addDocument($newDocument);
+        $responseData = $response->getData();
+
+        $this->assertTrue($newDocument->hasVersion());
+        $this->assertArrayHasKey('_version', $responseData, '_version is missing in response data it is weird');
+        $this->assertEquals(1, $responseData['_version']);
+        $this->assertEquals($responseData['_version'], $newDocument->getVersion());
 
         $this->assertTrue($newDocument->hasId());
 
@@ -400,13 +409,19 @@ class TypeTest extends BaseTest
 
         $newDocument->setFieldsSource();
 
-        $type->updateDocument($newDocument);
+        $response = $type->updateDocument($newDocument);
+        $responseData = $response->getData();
 
         $data = $newDocument->getData();
 
         $this->assertEquals(12, $data['counter']);
         $this->assertEquals('Batman', $data['name']);
         $this->assertEquals('Bruce Wayne', $data['realName']);
+
+        $this->assertTrue($newDocument->hasVersion());
+        $this->assertArrayHasKey('_version', $responseData, '_version is missing in response data it is weird');
+        $this->assertEquals(2, $responseData['_version']);
+        $this->assertEquals($responseData['_version'], $newDocument->getVersion());
 
         $document = $type->getDocument($newDocument->getId());
 
