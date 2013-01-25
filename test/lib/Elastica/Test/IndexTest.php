@@ -401,6 +401,8 @@ class IndexTest extends BaseTest
         } catch (ResponseException $error) {
             $response = $error->getResponse();
             $this->assertTrue($response->hasError());
+            $request = $error->getRequest();
+            $this->assertInstanceOf('Elastica\Request', $request);
         }
     }
 

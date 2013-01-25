@@ -1,6 +1,8 @@
 <?php
 
 namespace Elastica\Exception;
+
+use Elastica\Request;
 use Elastica\Response;
 
 /**
@@ -13,6 +15,13 @@ use Elastica\Response;
 class ResponseException extends AbstractException
 {
     /**
+     * Request
+     *
+     * @var \Elastica\Request Request object
+     */
+    protected $_request = null;
+
+    /**
      * Response
      *
      * @var \Elastica\Response Response object
@@ -22,12 +31,24 @@ class ResponseException extends AbstractException
     /**
      * Construct Exception
      *
+     * @param \Elastica\Request $request
      * @param \Elastica\Response $response
      */
-    public function __construct(Response $response)
+    public function __construct(Request $request, Response $response)
     {
+        $this->_request = $request;
         $this->_response = $response;
         parent::__construct($response->getError());
+    }
+
+    /**
+     * Returns request object
+     *
+     * @return \Elastica\Request Request object
+     */
+    public function getRequest()
+    {
+        return $this->_request;
     }
 
     /**

@@ -464,7 +464,7 @@ class TypeTest extends BaseTest
         }
 
         $newDocument->setFieldsSource();
-        
+
         try {
             $type->updateDocument($newDocument);
             $this->fail('Update request should fail because source is disabled. Fields param is set to _source');
@@ -522,5 +522,49 @@ class TypeTest extends BaseTest
         $data = $foundDoc->getData();
         $this->assertArrayHasKey('name', $data);
         $this->assertEquals('ruflin', $data['name']);
+    }
+
+    /**
+     * @expectedException \Elastica\Exception\RuntimeException
+     */
+    public function testAddDocumentWithoutSerializer()
+    {
+        $index = $this->_createIndex();
+
+        $type = new Type($index, 'user');
+
+        $type->addObject(new \stdClass());
+    }
+
+    public function testAddObject()
+    {
+        $index = $this->_createIndex();
+
+        $type = new Type($index, 'user');
+        $type->setSerializer(array(new SerializerMock(), 'serialize'));
+
+        $userObject = new \stdClass();
+        $userObject->username = 'hans';
+        $userObject->test = array('2', '3', '5');
+
+        $type->addObject($userObject);
+
+        $index->refresh();
+
+        $resultSet = $type->search('hans');
+        $this->assertEquals(1, $resultSet->count());
+
+        // Test if source is returned
+        $result = $resultSet->current();
+        $data = $result->getData();
+        $this->assertEquals('hans', $data['username']);
+    }
+}
+
+class SerializerMock
+{
+    public function serialize($object)
+    {
+        return get_object_vars($object);
     }
 }

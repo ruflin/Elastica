@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\Document;
+use Elastica\Exception\RuntimeException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
@@ -33,6 +35,11 @@ class Type implements SearchableInterface
      * @var string Type name
      */
     protected $_name = '';
+
+    /**
+     * @var array|string A callable that serializes an object passed to it
+     */
+    protected $_serializer;
 
     /**
      * Creates a new type object inside the given index
@@ -91,6 +98,21 @@ class Type implements SearchableInterface
         }
 
         return $response;
+    }
+
+    public function addObject($object, Document $doc = null)
+    {
+        if (!isset($this->_serializer)) {
+            throw new RuntimeException('No serializer defined');
+        }
+
+        $data = call_user_func($this->_serializer, $object);
+        if (!$doc) {
+            $doc = new Document();
+        }
+        $doc->setData($data);
+
+        return $this->addDocument($doc);
     }
 
     /**
@@ -384,5 +406,16 @@ class Type implements SearchableInterface
         $path = $this->getName() . '/' . $path;
 
         return $this->getIndex()->request($path, $method, $data, $query);
+    }
+
+    /**
+     * Sets the serializer callable used in addObject
+     * @see \Elastica\Type::addObject
+     *
+     * @param array|string $serializer  @see \Elastica\Type::_serializer
+     */
+    public function setSerializer($serializer)
+    {
+        $this->_serializer = $serializer;
     }
 }

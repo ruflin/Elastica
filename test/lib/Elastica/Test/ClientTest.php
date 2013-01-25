@@ -578,6 +578,23 @@ class ClientTest extends BaseTest
         $this->assertEquals('value2', $data['field2']);
     }
 
+    public function testLastRequestResponse()
+    {
+        $client = new Client(array('log' => '/tmp/php.log'));
+        $response = $client->request('_status');
+
+        $this->assertInstanceOf('Elastica\Response', $response);
+
+        $lastRequest = $client->getLastRequest();
+
+        $this->assertInstanceOf('Elastica\Request', $lastRequest);
+        $this->assertEquals('_status', $lastRequest->getPath());
+
+        $lastResponse = $client->getLastResponse();
+        $this->assertInstanceOf('Elastica\Response', $lastResponse);
+        $this->assertSame($response, $lastResponse);
+    }
+    
     public function testUpdateDocumentPopulateFields()
     {
         $index = $this->_createIndex();
