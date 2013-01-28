@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Single document stored in elastic search
  *
@@ -19,30 +21,14 @@ class Document extends Param
     protected $_data = array();
 
     /**
-     * Optype
-     *
-     * @var string Optype
-     */
-    protected $_optype = '';
-
-    /**
-     * Percolate
-     *
-     * @var string Percolate
-     */
-    protected $_percolate = '';
-
-    /**
-     * Routing
-     *
-     * @var string Routing
-     */
-    protected $_routing = null;
-
-    /**
      * @var \Elastica\Script
      */
     protected $_script;
+
+    /**
+     * @var boolean
+     */
+    protected $_autoPopulate = false;
 
     /**
      * Creates a new document
@@ -61,16 +47,6 @@ class Document extends Param
     }
 
     /**
-     * Returns document id
-     *
-     * @return string|int Document id
-     */
-    public function getId()
-    {
-        return ($this->hasParam('_id'))?$this->getParam('_id'):null;
-    }
-
-    /**
      * Sets the id of the document.
      *
      * @param  string            $id
@@ -82,6 +58,16 @@ class Document extends Param
     }
 
     /**
+     * Returns document id
+     *
+     * @return string|int Document id
+     */
+    public function getId()
+    {
+        return ($this->hasParam('_id')) ? $this->getParam('_id') : null;
+    }
+
+    /**
      * @return bool
      */
     public function hasId()
@@ -90,17 +76,103 @@ class Document extends Param
     }
 
     /**
+     * @param string $key
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        return $this->get($key);
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     */
+    public function __set($key, $value)
+    {
+        $this->set($key, $value);
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function __isset($key)
+    {
+        return $this->has($key) && null !== $this->get($key);
+    }
+
+    /**
+     * @param string $key
+     */
+    public function __unset($key)
+    {
+        $this->remove($key);
+    }
+
+    /**
+     * @param string $key
+     * @return mixed
+     * @throws \Elastica\Exception\InvalidException
+     */
+    public function get($key)
+    {
+        if (!$this->has($key)) {
+            throw new InvalidException("Field {$key} does not exist");
+        }
+        return $this->_data[$key];
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return \Elastica\Document
+     */
+    public function set($key, $value)
+    {
+        if (!is_array($this->_data)) {
+            throw new InvalidException('Document data is serialized data. Data creation is forbidden.');
+        }
+        $this->_data[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function has($key)
+    {
+        return is_array($this->_data) && array_key_exists($key, $this->_data);
+    }
+
+    /**
+     * @param string $key
+     * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\Document
+     */
+    public function remove($key)
+    {
+        if (!$this->has($key)) {
+            throw new InvalidException("Field {$key} does not exist");
+        }
+        unset($this->_data[$key]);
+
+        return $this;
+    }
+
+    /**
      * Adds the given key/value pair to the document
      *
+     * @deprecated
      * @param  string            $key   Document entry key
      * @param  mixed             $value Document entry value
      * @return \Elastica\Document
      */
     public function add($key, $value)
     {
-        $this->_data[$key] = $value;
-
-        return $this;
+        return $this->set($key, $value);
     }
 
     /**
@@ -127,7 +199,7 @@ class Document extends Param
             $value = array('_content_type' => $mimeType, '_name' => $filepath, 'content' => $value,);
         }
 
-        $this->add($key, $value);
+        $this->set($key, $value);
 
         return $this;
     }
@@ -141,7 +213,7 @@ class Document extends Param
      */
     public function addFileContent($key, $content)
     {
-        return $this->add($key, base64_encode($content));
+        return $this->set($key, base64_encode($content));
     }
 
     /**
@@ -159,7 +231,7 @@ class Document extends Param
     {
         $value = array('lat' => $latitude, 'lon' => $longitude,);
 
-        $this->add($key, $value);
+        $this->set($key, $value);
 
         return $this;
     }
@@ -185,7 +257,23 @@ class Document extends Param
      */
     public function setTtl($ttl)
     {
-        return $this->add('_ttl', $ttl);
+        return $this->setParam('_ttl', $ttl);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTtl()
+    {
+        return $this->getParam('_ttl');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasTtl()
+    {
+        return $this->hasParam('_ttl');
     }
 
     /**
@@ -221,7 +309,7 @@ class Document extends Param
      */
     public function getType()
     {
-       return $this->getParam('_type');
+        return $this->getParam('_type');
     }
 
     /**
@@ -272,6 +360,14 @@ class Document extends Param
     }
 
     /**
+     * @return bool
+     */
+    public function hasVersion()
+    {
+        return $this->hasParam('_version');
+    }
+
+    /**
      * Sets the version_type of a document
      * Default in ES is internal, but you can set to external to use custom versioning
      *
@@ -292,6 +388,14 @@ class Document extends Param
     public function getVersionType()
     {
         return $this->getParam('_version_type');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasVersionType()
+    {
+        return $this->hasParam('_version_type');
     }
 
     /**
@@ -317,24 +421,39 @@ class Document extends Param
     }
 
     /**
+     * @return bool
+     */
+    public function hasParent()
+    {
+        return $this->hasParam('_parent');
+    }
+
+    /**
      * Set operation type
      *
-     * @param  string            $optype Only accept create
+     * @param  string            $opType Only accept create
      * @return \Elastica\Document Current object
      */
-    public function setOpType($optype)
+    public function setOpType($opType)
     {
-        $this->_optype = $optype;
-
-        return $this;
+        return $this->setParam('_op_type', $opType);
     }
 
     /**
      * Get operation type
+     * @return string
      */
     public function getOpType()
     {
-        return $this->_optype;
+        return $this->getParam('_op_type');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOpType()
+    {
+        return $this->hasParam('_op_type');
     }
 
     /**
@@ -345,9 +464,7 @@ class Document extends Param
      */
     public function setPercolate($value = '*')
     {
-        $this->_percolate = $value;
-
-        return $this;
+        return $this->setParam('_percolate', $value);
     }
 
     /**
@@ -357,7 +474,15 @@ class Document extends Param
      */
     public function getPercolate()
     {
-        return $this->_percolate;
+        return $this->getParam('_percolate');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPercolate()
+    {
+        return $this->hasParam('_percolate');
     }
 
     /**
@@ -379,6 +504,200 @@ class Document extends Param
     public function getRouting()
     {
         return $this->getParam('_routing');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRouting()
+    {
+        return $this->hasParam('_routing');
+    }
+
+    /**
+     * @param array|string $fields
+     * @return \Elastica\Document
+     */
+    public function setFields($fields)
+    {
+        if (is_array($fields)) {
+            $fields = implode(',', $fields);
+        }
+        return $this->setParam('_fields', (string) $fields);
+    }
+
+    /**
+     * @return \Elastica\Document
+     */
+    public function setFieldsSource()
+    {
+        return $this->setFields('_source');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFields()
+    {
+        return $this->getParam('_fields');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFields()
+    {
+        return $this->hasParam('_fields');
+    }
+
+    /**
+     * @param int $num
+     * @return \Elastica\Document
+     */
+    public function setRetryOnConflict($num)
+    {
+        return $this->setParam('_retry_on_conflict', (int) $num);
+    }
+
+    /**
+     * @return int
+     */
+    public function getRetryOnConflict()
+    {
+        return $this->getParam('_retry_on_conflict');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRetryOnConflict()
+    {
+        return $this->hasParam('_retry_on_conflict');
+    }
+
+    /**
+     * @param string $timestamp
+     * @return \Elastica\Document
+     */
+    public function setTimestamp($timestamp)
+    {
+        return $this->setParam('_timestamp', $timestamp);
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimestamp()
+    {
+        return $this->getParam('_timestamp');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasTimestamp()
+    {
+        return $this->hasParam('_timestamp');
+    }
+
+    /**
+     * @param bool $refresh
+     * @return \Elastica\Document
+     */
+    public function setRefresh($refresh = true)
+    {
+        return $this->setParam('_refresh', (bool) $refresh);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getRefresh()
+    {
+        return $this->getParam('_refresh');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRefresh()
+    {
+        return $this->hasParam('_refresh');
+    }
+
+    /**
+     * @param string $timeout
+     * @return \Elastica\Document
+     */
+    public function setTimeout($timeout)
+    {
+        return $this->setParam('_timeout', $timeout);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getTimeout()
+    {
+        return $this->getParam('_timeout');
+    }
+
+    /**
+     * @return string
+     */
+    public function hasTimeout()
+    {
+        return $this->hasParam('_timeout');
+    }
+
+    /**
+     * @param string $timeout
+     * @return \Elastica\Document
+     */
+    public function setConsistency($timeout)
+    {
+        return $this->setParam('_consistency', $timeout);
+    }
+
+    /**
+     * @return string
+     */
+    public function getConsistency()
+    {
+        return $this->getParam('_consistency');
+    }
+
+    /**
+     * @return string
+     */
+    public function hasConsistency()
+    {
+        return $this->hasParam('_consistency');
+    }
+
+    /**
+     * @param string $timeout
+     * @return \Elastica\Document
+     */
+    public function setReplication($timeout)
+    {
+        return $this->setParam('_replication', $timeout);
+    }
+
+    /**
+     * @return string
+     */
+    public function getReplication()
+    {
+        return $this->getParam('_replication');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasReplication()
+    {
+        return $this->hasParam('_replication');
     }
 
     /**
@@ -410,6 +729,25 @@ class Document extends Param
     }
 
     /**
+     * @param bool $autoPopulate
+     * @return $this
+     */
+    public function setAutoPopulate($autoPopulate = true)
+    {
+        $this->_autoPopulate = (bool) $autoPopulate;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAutoPopulate()
+    {
+        return $this->_autoPopulate;
+    }
+
+    /**
      * Returns the document as an array
      * @return array
      */
@@ -419,5 +757,32 @@ class Document extends Param
         $doc['_source'] = $this->getData();
 
         return $doc;
+    }
+
+    /**
+     * @param array $fields if empty array all options will be returned, field names can be either with underscored either without, i.e. _percolate, routing
+     * @param bool $withUnderscore should option keys contain underscore prefix
+     * @return array
+     */
+    public function getOptions(array $fields = array(), $withUnderscore = false)
+    {
+        if (!empty($fields)) {
+            $data = array();
+            foreach ($fields as $field) {
+                $key = '_' . ltrim($field, '_');
+                if ($this->hasParam($key) && '' !== (string) $this->getParam($key)) {
+                    $data[$key] = $this->getParam($key);
+                }
+            }
+        } else {
+            $data = $this->getParams();
+        }
+        if (!$withUnderscore) {
+            foreach ($data as $key => $value) {
+                $data[ltrim($key, '_')] = $value;
+                unset($data[$key]);
+            }
+        }
+        return $data;
     }
 }
