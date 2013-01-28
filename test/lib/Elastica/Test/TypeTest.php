@@ -478,7 +478,7 @@ class TypeTest extends BaseTest
             $type->updateDocument($newDocument);
             $this->fail('Update request should fail because source is disabled. Fields param is not set');
         } catch (ResponseException $e) {
-            $this->assertStringStartsWith('DocumentSourceMissingException', $e->getMessage());
+            $this->assertContains('DocumentSourceMissingException', $e->getMessage());
         }
 
         $newDocument->setFieldsSource();
@@ -487,7 +487,7 @@ class TypeTest extends BaseTest
             $type->updateDocument($newDocument);
             $this->fail('Update request should fail because source is disabled. Fields param is set to _source');
         } catch (ResponseException $e) {
-            $this->assertStringStartsWith('DocumentSourceMissingException', $e->getMessage());
+            $this->assertContains('DocumentSourceMissingException', $e->getMessage());
         }
     }
 
