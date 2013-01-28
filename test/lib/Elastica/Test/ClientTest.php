@@ -602,6 +602,7 @@ class ClientTest extends BaseTest
         $client = $index->getClient();
 
         $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4'));
+        $newDocument->setAutoPopulate();
         $type->addDocument($newDocument);
 
         $script = new Script('ctx._source.field2 += count; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
@@ -670,6 +671,10 @@ class ClientTest extends BaseTest
         }
 
         $index = $this->_createIndex();
+
+        $client = $index->getClient();
+        $client->setConfigValue('document', array('autoPopulate' => true));
+
         $type = $index->getType('pos');
         $type->addDocuments($docs);
 
@@ -678,5 +683,31 @@ class ClientTest extends BaseTest
             $this->assertTrue($doc->hasVersion());
             $this->assertEquals(1, $doc->getVersion());
         }
+    }
+
+    public function testConfigValue()
+    {
+        $config = array(
+            'level1' => array(
+                'level2' => array(
+                    'level3' => 'value3',
+                ),
+                'level21' => 'value21'
+            ),
+            'level11' => 'value11'
+        );
+        $client = new Client($config);
+
+        $this->assertNull($client->getConfigValue('level12'));
+        $this->assertFalse($client->getConfigValue('level12', false));
+        $this->assertEquals(10, $client->getConfigValue('level12', 10));
+
+        $this->assertEquals('value11', $client->getConfigValue('level11'));
+        $this->assertNotNull($client->getConfigValue('level11'));
+        $this->assertNotEquals(false, $client->getConfigValue('level11', false));
+        $this->assertNotEquals(10, $client->getConfigValue('level11', 10));
+
+        $this->assertEquals('value3', $client->getConfigValue(array('level1', 'level2', 'level3')));
+        $this->assertInternalType('array', $client->getConfigValue(array('level1', 'level2')));
     }
 }

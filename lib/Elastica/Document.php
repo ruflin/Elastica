@@ -26,6 +26,11 @@ class Document extends Param
     protected $_script;
 
     /**
+     * @var boolean
+     */
+    protected $_autoPopulate = false;
+
+    /**
      * Creates a new document
      *
      * @param int|string $id    OPTIONAL $id Id is create if empty
@@ -721,6 +726,25 @@ class Document extends Param
     public function hasScript()
     {
         return null !== $this->_script;
+    }
+
+    /**
+     * @param bool $autoPopulate
+     * @return $this
+     */
+    public function setAutoPopulate($autoPopulate = true)
+    {
+        $this->_autoPopulate = (bool) $autoPopulate;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAutoPopulate()
+    {
+        return $this->_autoPopulate;
     }
 
     /**

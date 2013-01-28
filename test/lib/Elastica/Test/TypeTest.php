@@ -388,6 +388,8 @@ class TypeTest extends BaseTest
         $index = $client->getIndex('elastica_test');
         $type = $index->getType('update_type');
 
+        $client->setConfigValue('document', array('autoPopulate' => true));
+
         $newDocument = new Document(null, array('counter' => 5, 'name' => 'Batman'));
 
         $this->assertFalse($newDocument->hasVersion());
@@ -460,6 +462,7 @@ class TypeTest extends BaseTest
         $type->setMapping($mapping);
 
         $newDocument = new Document();
+        $newDocument->setAutoPopulate();
         $newDocument->set('name', 'Batman');
         $newDocument->set('counter', 1);
 
@@ -522,6 +525,7 @@ class TypeTest extends BaseTest
         $type = $index->getType('elastica_type');
 
         $document = new Document();
+        $document->setAutoPopulate();
         $document->set('name', 'ruflin');
         $this->assertEquals('', $document->getId());
         $this->assertFalse($document->hasId());

@@ -162,6 +162,23 @@ class Client
     }
 
     /**
+     * @param string|array $key config key or path to config key
+     * @param mixed $default default value will be returned if key was not found
+     */
+    public function getConfigValue($keys, $default = null)
+    {
+        $value = $this->_config;
+        foreach ((array) $keys as $key) {
+            if (isset($value[$key])) {
+                $value = $value[$key];
+            } else {
+                return $default;
+            }
+        }
+        return $value;
+    }
+
+    /**
      * Returns the index for the given connection
      *
      * @param  string         $name Index name to create connection to
@@ -264,13 +281,17 @@ class Client
                 if (false === $document) {
                     break;
                 }
-                $opType = key($item);
-                $data = reset($item);
-                if (!$document->hasId() && 'create' == $opType && isset($data['_id'])) {
-                    $document->setId($data['_id']);
-                }
-                if (isset($data['_version'])) {
-                    $document->setVersion($data['_version']);
+                if ($document->isAutoPopulate()
+                    || $this->getConfigValue(array('document', 'autoPopulate'), false)
+                ) {
+                    $opType = key($item);
+                    $data = reset($item);
+                    if (!$document->hasId() && 'create' == $opType && isset($data['_id'])) {
+                        $document->setId($data['_id']);
+                    }
+                    if (isset($data['_version'])) {
+                        $document->setVersion($data['_version']);
+                    }
                 }
                 $document = next($docs);
             }
@@ -320,6 +341,13 @@ class Client
                 )
             );
             $options += $docOptions;
+            // set fields param to source only if options was not set before
+            if (($data->isAutoPopulate()
+                || $this->getConfigValue(array('document', 'autoPopulate'), false))
+                && !isset($options['fields'])
+            ) {
+                $options['fields'] = '_source';
+            }
         } else {
             $requestData = $data;
         }
@@ -331,7 +359,10 @@ class Client
 
         $response = $this->request($path, Request::POST, $requestData, $options);
 
-        if ($response->isOk() && $data instanceof Document) {
+        if ($response->isOk()
+            && $data instanceof Document
+            && ($data->isAutoPopulate() || $this->getConfigValue(array('document', 'autoPopulate'), false))
+        ) {
             $responseData = $response->getData();
             if (isset($responseData['_version'])) {
                 $data->setVersion($responseData['_version']);
