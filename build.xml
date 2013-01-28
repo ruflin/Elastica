@@ -4,187 +4,187 @@
 	<property name="source" value="${basedir}/lib"/>
 
 	<target name="parallelTasks">
-		<parallel threadCount="2">
-			<sequential>
-				<antcall target="pdepend"/>
-				<antcall target="phpmd-ci"/>
-			</sequential>
-			<antcall target="phpcpd"/>
-			<antcall target="phpcs-ci"/>
-			<antcall target="phpdoc"/>
-			<antcall target="phpcb"/>
-		</parallel>
+	<parallel threadCount="2">
+		<sequential>
+		<antcall target="pdepend"/>
+		<antcall target="phpmd-ci"/>
+		</sequential>
+		<antcall target="phpcpd"/>
+		<antcall target="phpcs-ci"/>
+		<antcall target="phpdoc"/>
+		<antcall target="phpcb"/>
+	</parallel>
 	</target>
 
 	<target name="clean" description="Cleanup build artifacts">
-		<delete dir="${basedir}/build/api"/>
-		<delete dir="${basedir}/build/code-browser"/>
-		<delete dir="${basedir}/build/coverage"/>
-		<delete dir="${basedir}/build/logs"/>
-		<delete dir="${basedir}/build/pdepend"/>
-		<delete file="${basedir}/cache.properties"/>
+	<delete dir="${basedir}/build/api"/>
+	<delete dir="${basedir}/build/code-browser"/>
+	<delete dir="${basedir}/build/coverage"/>
+	<delete dir="${basedir}/build/logs"/>
+	<delete dir="${basedir}/build/pdepend"/>
+	<delete file="${basedir}/cache.properties"/>
 	</target>
 
 	<target name="prepare" depends="clean" description="Prepare for build">
-		<mkdir dir="${basedir}/build/api"/>
-		<mkdir dir="${basedir}/build/code-browser"/>
-		<mkdir dir="${basedir}/build/coverage"/>
-		<mkdir dir="${basedir}/build/logs"/>
-		<mkdir dir="${basedir}/build/pdepend"/>
+	<mkdir dir="${basedir}/build/api"/>
+	<mkdir dir="${basedir}/build/code-browser"/>
+	<mkdir dir="${basedir}/build/coverage"/>
+	<mkdir dir="${basedir}/build/logs"/>
+	<mkdir dir="${basedir}/build/pdepend"/>
 	</target>
 
 	<target name="lint">
-		<apply executable="php" failonerror="true">
-			<arg value="-lf"/>
+	<apply executable="php" failonerror="true">
+		<arg value="-lf"/>
 
-			<fileset dir="${source}">
-				<include name="**/*.php"/>
-				<modified/>
-			</fileset>
+		<fileset dir="${source}">
+		<include name="**/*.php"/>
+		<modified/>
+		</fileset>
 
-			<fileset dir="${basedir}/test">
-				<include name="**/*.php"/>
-				<modified/>
-			</fileset>
-		</apply>
+		<fileset dir="${basedir}/test">
+		<include name="**/*.php"/>
+		<modified/>
+		</fileset>
+	</apply>
 	</target>
 
 	<target name="phpunit" depends="prepare">
-		<exec executable="phpunit" dir="${basedir}/test" failonerror="off" />
+	<exec executable="phpunit" dir="${basedir}/test" failonerror="off" />
 	</target>
 
 	<!-- Generate jdepend.xml and software metrics charts -->
 	<target name="pdepend">
-		<exec executable="pdepend">
-			<arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
-			<arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
-			<arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
-			<arg path="${source}" />
-		</exec>
+	<exec executable="pdepend">
+		<arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
+		<arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
+		<arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+		<arg path="${source}" />
+	</exec>
 	</target>
 
 	<target name="phpmd-ci">
-		<exec executable="phpmd">
-			<arg path="${source}" />
-			<arg value="xml" />
-			<arg value="codesize,unusedcode,naming,design" />
-			<arg value="--reportfile" />
-			<arg value="${basedir}/build/logs/pmd.xml" />
-		</exec>
+	<exec executable="phpmd">
+		<arg path="${source}" />
+		<arg value="xml" />
+		<arg value="codesize,unusedcode,naming,design" />
+		<arg value="--reportfile" />
+		<arg value="${basedir}/build/logs/pmd.xml" />
+	</exec>
 	</target>
 
 	<!-- Generate pmd-cpd.xml -->
 	<target name="phpcpd">
-		<exec executable="phpcpd">
-			<arg line="--log-pmd ${basedir}/build/logs/pmd-cpd.xml ${source}" />
-		</exec>
+	<exec executable="phpcpd">
+		<arg line="--log-pmd ${basedir}/build/logs/pmd-cpd.xml ${source}" />
+	</exec>
 	</target>
 
 	<!-- Generate checkstyle.xml -->
 	<target name="phpcs-ci">
-		<exec executable="phpcs" output="/dev/null">
-			<arg line="--report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml --standard=PSR2 ${source}" />
-		</exec>
+	<exec executable="phpcs" output="/dev/null">
+		<arg line="--report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml --standard=PSR2 ${source}" />
+	</exec>
 	</target>
 
 	<target name="phploc" description="Generate phploc.csv">
-		<exec executable="phploc">
-		<arg value="--log-csv" />
-		<arg value="${basedir}/build/logs/phploc.csv" />
-		<arg path="${source}" />
-		</exec>
+	<exec executable="phploc">
+	<arg value="--log-csv" />
+	<arg value="${basedir}/build/logs/phploc.csv" />
+	<arg path="${source}" />
+	</exec>
 	</target>
 
 	<!-- Generate API documentation -->
 	<target name="phpdoc">
-		<exec executable="phpdoc">
-			<arg line="run" />
-		</exec>
+	<exec executable="phpdoc">
+		<arg line="run" />
+	</exec>
 	</target>
 
 	<target name="phpcb">
-		<exec executable="phpcb">
-			<arg line="--log ${basedir}/build/logs
-					--source ${source}
-					--output ${basedir}/build/code-browser" />
-		</exec>
+	<exec executable="phpcb">
+		<arg line="--log ${basedir}/build/logs
+			--source ${source}
+			--output ${basedir}/build/code-browser" />
+	</exec>
 	</target>
 
 	<target name="build" depends="prepare,lint,parallelTasks,phpunit"/>
 
 	<!-- Checkstyle with human output -->
 	<target name="phpcs">
-		<exec executable="phpcs">
-			<arg line="--standard=PSR2 ${source}" />
-		</exec>
+	<exec executable="phpcs">
+		<arg line="--standard=PSR2 ${source}" />
+	</exec>
 	</target>
 
 	<target name="phpmd" description="Perform phpmd with human readable output">
-		<exec executable="phpmd">
-			<arg path="${source}"/>
-			<arg value="text"/>
-			<arg value="codesize,unusedcode,naming,design" />
-			<arg value="${basedir}/build/phpmd.xml"/>
-		</exec>
+	<exec executable="phpmd">
+		<arg path="${source}"/>
+		<arg value="text"/>
+		<arg value="codesize,unusedcode,naming,design" />
+		<arg value="${basedir}/build/phpmd.xml"/>
+	</exec>
 	</target>
 
 	<!-- Setups test environment -->
 	<target name="setup" description="setups php libs for">
-		<exec executable="pear">
-			<arg line="channel-discover pear.pdepend.org" />
-		</exec>
-		<exec executable="pear">
-			<arg line="channel-discover pear.phpmd.org" />
-		</exec>
-		<exec executable="pear">
-			<arg line="channel-discover pear.phpunit.de" />
-		</exec>
-		<exec executable="pear">
-			<arg line="channel-discover components.ez.no" />
-		</exec>
-		<exec executable="pear">
-			<arg line="channel-discover pear.symfony-project.com" />
-		</exec>
-		<exec executable="pear">
-			<arg line="channel-discover pear.michelf.com" />
-		</exec>
-		<exec executable="pear">
-			<arg line="channel-discover pear.phpdoc.org" />
-		</exec>
+	<exec executable="pear">
+		<arg line="channel-discover pear.pdepend.org" />
+	</exec>
+	<exec executable="pear">
+		<arg line="channel-discover pear.phpmd.org" />
+	</exec>
+	<exec executable="pear">
+		<arg line="channel-discover pear.phpunit.de" />
+	</exec>
+	<exec executable="pear">
+		<arg line="channel-discover components.ez.no" />
+	</exec>
+	<exec executable="pear">
+		<arg line="channel-discover pear.symfony-project.com" />
+	</exec>
+	<exec executable="pear">
+		<arg line="channel-discover pear.michelf.com" />
+	</exec>
+	<exec executable="pear">
+		<arg line="channel-discover pear.phpdoc.org" />
+	</exec>
 
-		<exec executable="pear">
-			<arg line="install pdepend/PHP_Depend" />
-		</exec>
-		<exec executable="pear">
-			<arg line="install phpmd/PHP_PMD" />
-		</exec>
-		<exec executable="pear">
-			<arg line="install phpunit/phpcpd" />
-		</exec>
-		<exec executable="pear">
-			<arg line="install phpunit/phploc" />
-		</exec>
-		<exec executable="pear">
-			<arg line="install channel://pear.phpdoc.org/phpDocumentor-2.0.0a2" />
-		</exec>
-		<exec executable="pear">
-			<arg line="install PHP_CodeSniffer" />
-		</exec>
-		<exec executable="pear">
-			<arg line="install --alldeps phpunit/PHP_CodeBrowser" />
-		</exec>
-		<exec executable="pear">
-			<arg line="install --alldeps phpunit/PHPUnit" />
-		</exec>
+	<exec executable="pear">
+		<arg line="install pdepend/PHP_Depend" />
+	</exec>
+	<exec executable="pear">
+		<arg line="install phpmd/PHP_PMD" />
+	</exec>
+	<exec executable="pear">
+		<arg line="install phpunit/phpcpd" />
+	</exec>
+	<exec executable="pear">
+		<arg line="install phpunit/phploc" />
+	</exec>
+	<exec executable="pear">
+		<arg line="install channel://pear.phpdoc.org/phpDocumentor-2.0.0a2" />
+	</exec>
+	<exec executable="pear">
+		<arg line="install PHP_CodeSniffer" />
+	</exec>
+	<exec executable="pear">
+		<arg line="install --alldeps phpunit/PHP_CodeBrowser" />
+	</exec>
+	<exec executable="pear">
+		<arg line="install --alldeps phpunit/PHPUnit" />
+	</exec>
 	</target>
 
 	<target name="gource" description="Visualize repos with gource">
-		<exec executable="gource">
-			<arg line="--log-format git" />
-			<arg line="--seconds-per-day 0.1" />
-			<arg line="--title 'Elastica (https://github.com/ruflin/Elastica)'" />
-			<arg line="--user-scale 1" />
-			<arg line="--max-user-speed 50" />
-		</exec>
+	<exec executable="gource">
+		<arg line="--log-format git" />
+		<arg line="--seconds-per-day 0.1" />
+		<arg line="--title 'Elastica (https://github.com/ruflin/Elastica)'" />
+		<arg line="--user-scale 1" />
+		<arg line="--max-user-speed 50" />
+	</exec>
 	</target>
 </project>

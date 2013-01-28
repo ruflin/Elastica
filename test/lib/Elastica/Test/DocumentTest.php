@@ -90,13 +90,13 @@ class DocumentTest extends BaseTest
     }
 
 	public function testHasId() {
-		$document = new Document();
-		$this->assertFalse($document->hasId());
-		$document->setId('');
-		$this->assertFalse($document->hasId());
-		$document->setId(0);
-		$this->assertTrue($document->hasId());
-		$document->setId('hello');
-		$this->assertTrue($document->hasId());
+	$document = new Document();
+	$this->assertFalse($document->hasId());
+	$document->setId('');
+	$this->assertFalse($document->hasId());
+	$document->setId(0);
+	$this->assertTrue($document->hasId());
+	$document->setId('hello');
+	$this->assertTrue($document->hasId());
 	}
 }

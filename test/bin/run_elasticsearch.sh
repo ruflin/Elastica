@@ -15,14 +15,14 @@ elasticsearch-${ES_VER}/bin/elasticsearch &
 
 echo "Waiting until elasticsearch node 1 is ready on port 9200"
 while [[ -z `curl -s 'http://localhost:9200' ` ]]
-do 
+do
 	echo -n "."
 	sleep 2s
 done
 
 echo "Waiting until elasticsearch node 2 is ready on port 9201"
 while [[ -z `curl -s 'http://localhost:9201' ` ]]
-do 
+do
 	echo -n "."
 	sleep 2s
 done
