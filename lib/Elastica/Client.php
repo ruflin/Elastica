@@ -50,6 +50,16 @@ class Client
     protected $_callback = null;
 
     /**
+     * @var \Elastica\Request
+     */
+    protected $_lastRequest;
+
+    /**
+     * @var \Elastica\Response
+     */
+    protected $_lastResponse;
+
+    /**
      * Creates a new Elastica client
      *
      * @param array    $config   OPTIONAL Additional config options
@@ -450,12 +460,15 @@ class Client
         try {
             $request = new Request($path, $method, $data, $query, $connection);
 
-            if ($this->getConfig('log')) {
-                $log = new Log($this->getConfig('log'));
-                $log->log($request);
-            }
+            $this->_log($request);
 
-            return $request->send();
+            $response = $request->send();
+
+            $this->_lastRequest = $request;
+            $this->_lastResponse = $response;
+
+            return $response;
+
         } catch (ConnectionException $e) {
             $connection->setEnabled(false);
 
@@ -478,5 +491,32 @@ class Client
     public function optimizeAll($args = array())
     {
         return $this->request('_optimize', Request::POST, $args);
+    }
+
+    /**
+     * @param string|\Elastica\Request $message
+     */
+    protected function _log($message)
+    {
+        if ($this->getConfig('log')) {
+            $log = new Log($this->getConfig('log'));
+            $log->log($message);
+        }
+    }
+
+    /**
+     * @return \Elastica\Request
+     */
+    public function getLastRequest()
+    {
+        return $this->_lastRequest;
+    }
+
+    /**
+     * @return \Elastica\Response
+     */
+    public function getLastResponse()
+    {
+        return $this->_lastResponse;
     }
 }

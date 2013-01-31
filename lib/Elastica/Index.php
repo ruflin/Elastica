@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica;
+
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index\Settings as IndexSettings;
