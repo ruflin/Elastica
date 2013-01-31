@@ -362,13 +362,6 @@ class TypeTest extends BaseTest
         $this->assertEquals($hashId, $doc->getId());
     }
 
-    public function testGetType()
-    {
-        $index = new Index($this->_getClient(), 'index');
-        $type = $index->getType('type');
-        $this->assertEquals('type', $type->getType());
-    }
-
     /**
      * @expectedException \Elastica\Exception\RuntimeException
      */
