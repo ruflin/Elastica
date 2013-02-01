@@ -149,9 +149,12 @@ class SettingsTest extends BaseTest
         $index = $this->_createIndex();
 
         // Add document to normal index
-        $doc = new Document(null, array('hello' => 'world'));
+        $doc1 = new Document(null, array('hello' => 'world'));
+        $doc2 = new Document(null, array('hello' => 'world'));
+        $doc3 = new Document(null, array('hello' => 'world'));
+
         $type = $index->getType('test');
-        $type->addDocument($doc);
+        $type->addDocument($doc1);
         $this->assertFalse((bool) $index->getSettings()->get('blocks.read_only'));
 
         // Try to add doc to read only index
@@ -159,7 +162,7 @@ class SettingsTest extends BaseTest
         $this->assertTrue((bool) $index->getSettings()->get('blocks.read_only'));
 
         try {
-            $type->addDocument($doc);
+            $type->addDocument($doc2);
             $this->fail('Should throw exception because of read only');
         } catch (ResponseException $e) {
             $message = $e->getMessage();
@@ -171,7 +174,7 @@ class SettingsTest extends BaseTest
         $response = $index->getSettings()->setReadOnly(false);
         $this->assertTrue($response->isOk());
 
-        $type->addDocument($doc);
+        $type->addDocument($doc3);
         $index->refresh();
 
         $this->assertEquals(2, $type->count());
