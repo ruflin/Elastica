@@ -7,6 +7,13 @@ CHANGES
 - Removed deprecated methods Query\QueryString::setTieBraker() and Query\QueryString::setQueryString()
 - Removed deprecated methods Query\Builder::minimumShouldMatch() and Query\Builder::tieBreaker()
 
+2013-01-25
+- Add get/set/has/remove methods to Document
+- Add magic methods __get/__set/__isset/__unset to Document
+- Document::add method became deprecated, use set instead
+- Populate document id created by elasticsearch on addDocument()/addDocuments() call if no document id was set
+- Populate updated fields in document on Client::updateDocument() call if fields options is set
+
 2013-01-24
 - Added serialization support. Objects can be added to elastica directly when a serializer callable is configured on \Elastica\Type
 

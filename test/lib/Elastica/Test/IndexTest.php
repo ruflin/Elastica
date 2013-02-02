@@ -51,19 +51,19 @@ class IndexTest extends BaseTest
         $typeComment->setMapping($mapping);
 
         $entry1 = new Document(1);
-        $entry1->add('title', 'Hello world');
+        $entry1->set('title', 'Hello world');
         $typeBlog->addDocument($entry1);
 
         $entry2 = new Document(2);
-        $entry2->add('title', 'Foo bar');
+        $entry2->set('title', 'Foo bar');
         $typeBlog->addDocument($entry2);
 
         $entry3 = new Document(3);
-        $entry3->add('title', 'Till dawn');
+        $entry3->set('title', 'Till dawn');
         $typeBlog->addDocument($entry3);
 
         $comment = new Document(1);
-        $comment->add('author', 'Max');
+        $comment->set('author', 'Max');
         $comment->setParent(2); // Entry Foo bar
         $typeComment->addDocument($comment);
 
@@ -88,12 +88,12 @@ class IndexTest extends BaseTest
         $type->setMapping($indexMapping);
 
         $doc1 = new Document(1);
-        $doc1->addFile('file', BASE_PATH . '/data/test.pdf');
-        $doc1->add('text', 'basel world');
+        $doc1->addFile('file', BASE_PATH . '/data/test.pdf', 'application/pdf');
+        $doc1->set('text', 'basel world');
         $type->addDocument($doc1);
 
         $doc2 = new Document(2);
-        $doc2->add('text', 'running in basel');
+        $doc2->set('text', 'running in basel');
         $type->addDocument($doc2);
 
         $index->optimize();
@@ -127,11 +127,11 @@ class IndexTest extends BaseTest
 
         $doc1 = new Document(1);
         $doc1->addFileContent('file', file_get_contents(BASE_PATH . '/data/test.pdf'));
-        $doc1->add('text', 'basel world');
+        $doc1->set('text', 'basel world');
         $type->addDocument($doc1);
 
         $doc2 = new Document(2);
-        $doc2->add('text', 'running in basel');
+        $doc2->set('text', 'running in basel');
         $type->addDocument($doc2);
 
         $index->optimize();
@@ -165,11 +165,11 @@ class IndexTest extends BaseTest
 
         $doc1 = new Document(1);
         $doc1->addFile('file', BASE_PATH . '/data/test.docx');
-        $doc1->add('text', 'basel world');
+        $doc1->set('text', 'basel world');
         $type->addDocument($doc1);
 
         $doc2 = new Document(2);
-        $doc2->add('text', 'running in basel');
+        $doc2->set('text', 'running in basel');
         $type->addDocument($doc2);
 
         $index->optimize();
@@ -208,8 +208,8 @@ class IndexTest extends BaseTest
 
         $doc1 = new Document($docId);
         $doc1->addFile('file', BASE_PATH . '/data/test.docx');
-        $doc1->add('text', $text);
-        $doc1->add('title', $title);
+        $doc1->set('text', $text);
+        $doc1->set('title', $title);
         $type->addDocument($doc1);
 
         // Optimization necessary, as otherwise source still in realtime get
@@ -343,7 +343,7 @@ class IndexTest extends BaseTest
         $type = new Type($index, 'test');
 
         $doc1 = new Document(1);
-        $doc1->add('title', 'Hello world');
+        $doc1->set('title', 'Hello world');
 
         $return = $type->addDocument($doc1);
         $data = $return->getData();
