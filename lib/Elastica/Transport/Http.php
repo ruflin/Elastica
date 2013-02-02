@@ -67,7 +67,6 @@ class Http extends AbstractTransport
 
         curl_setopt($conn, CURLOPT_URL, $baseUri);
         curl_setopt($conn, CURLOPT_TIMEOUT, $connection->getTimeout());
-        curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $request->getMethod());
         curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
 
         $this->_setupCurl($conn);
@@ -85,8 +84,13 @@ class Http extends AbstractTransport
 
         // TODO: REFACTOR
         $data = $request->getData();
+        $httpMethod = $request->getMethod();
 
         if (isset($data) && !empty($data)) {
+            if ($connection->hasParam('postWithRequestBody') && $connection->getParam('postWithRequestBody') == true) {
+                $httpMethod = Request::POST;
+            }
+
             if (is_array($data)) {
                 $content = json_encode($data);
             } else {
@@ -97,6 +101,13 @@ class Http extends AbstractTransport
             $content = str_replace('\/', '/', $content);
 
             curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
+        }
+
+        curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $httpMethod);
+
+        if (defined('DEBUG') && DEBUG) {
+            // Track request headers when in debug mode
+            curl_setopt($conn, CURLINFO_HEADER_OUT, true);
         }
 
         $start = microtime(true);
