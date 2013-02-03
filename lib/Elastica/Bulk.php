@@ -167,6 +167,12 @@ class Bulk
      */
     public function addDocument(Document $document, $opType = null)
     {
+        if (!$document->isAutoPopulate()
+            && $this->_client->getConfigValue(array('document', 'autoPopulate'), false)
+        ) {
+            $document->setAutoPopulate(true);
+        }
+
         $action = AbstractDocumentAction::create($document, $opType);
 
         return $this->addAction($action);

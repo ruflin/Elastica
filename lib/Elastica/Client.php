@@ -249,37 +249,6 @@ class Client
     }
 
     /**
-     * @param \Elastica\Response $response
-     * @param \Elastica\Document[] $docs
-     */
-    protected function _setDocumentIdsFromResponse(Response $response, array $docs)
-    {
-        $data = $response->getData();
-        /* @var Document $document */
-        $document = reset($docs);
-        if (isset($data['items']) && is_array($data['items'])) {
-            foreach ($data['items'] as $item) {
-                if (false === $document) {
-                    break;
-                }
-                if ($document->isAutoPopulate()
-                    || $this->getConfigValue(array('document', 'autoPopulate'), false)
-                ) {
-                    $opType = key($item);
-                    $data = reset($item);
-                    if (!$document->hasId() && 'create' == $opType && isset($data['_id'])) {
-                        $document->setId($data['_id']);
-                    }
-                    if (isset($data['_version'])) {
-                        $document->setVersion($data['_version']);
-                    }
-                }
-                $document = next($docs);
-            }
-        }
-    }
-
-    /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
      * @param  int                  $id      document id
