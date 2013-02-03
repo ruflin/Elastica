@@ -26,7 +26,7 @@ class DeleteDocument extends AbstractDocument
             'routing',
             'parent'
         );
-        $metadata = $document->getOptions($params, false);
+        $metadata = $document->getOptions($params, true);
 
         return $metadata;
     }

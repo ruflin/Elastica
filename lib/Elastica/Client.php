@@ -51,10 +51,20 @@ class Client
     protected $_callback = null;
 
     /**
+     * @var \Elastica\Request
+     */
+    protected $_lastRequest;
+
+    /**
+     * @var \Elastica\Response
+     */
+    protected $_lastResponse;
+
+    /**
      * Creates a new Elastica client
      *
      * @param array    $config   OPTIONAL Additional config options
-     * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example conenction down)
+     * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      */
     public function __construct(array $config = array(), $callback = null)
     {
@@ -153,6 +163,23 @@ class Client
     }
 
     /**
+     * @param string|array $key config key or path to config key
+     * @param mixed $default default value will be returned if key was not found
+     */
+    public function getConfigValue($keys, $default = null)
+    {
+        $value = $this->_config;
+        foreach ((array) $keys as $key) {
+            if (isset($value[$key])) {
+                $value = $value[$key];
+            } else {
+                return $default;
+            }
+        }
+        return $value;
+    }
+
+    /**
      * Returns the index for the given connection
      *
      * @param  string         $name Index name to create connection to
@@ -222,6 +249,37 @@ class Client
     }
 
     /**
+     * @param \Elastica\Response $response
+     * @param \Elastica\Document[] $docs
+     */
+    protected function _setDocumentIdsFromResponse(Response $response, array $docs)
+    {
+        $data = $response->getData();
+        /* @var Document $document */
+        $document = reset($docs);
+        if (isset($data['items']) && is_array($data['items'])) {
+            foreach ($data['items'] as $item) {
+                if (false === $document) {
+                    break;
+                }
+                if ($document->isAutoPopulate()
+                    || $this->getConfigValue(array('document', 'autoPopulate'), false)
+                ) {
+                    $opType = key($item);
+                    $data = reset($item);
+                    if (!$document->hasId() && 'create' == $opType && isset($data['_id'])) {
+                        $document->setId($data['_id']);
+                    }
+                    if (isset($data['_version'])) {
+                        $document->setVersion($data['_version']);
+                    }
+                }
+                $document = next($docs);
+            }
+        }
+    }
+
+    /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
      * @param  int                  $id      document id
@@ -236,11 +294,6 @@ class Client
     {
         $path =  $index . '/' . $type . '/' . $id . '/_update';
 
-        if (!isset($options['retry_on_conflict'])) {
-            $retryOnConflict = $this->getConfig("retryOnConflict");
-            $options['retry_on_conflict'] = $retryOnConflict;
-        }
-
         if ($data instanceof Script) {
             $requestData = $data->toArray();
         } elseif ($data instanceof Document) {
@@ -253,15 +306,85 @@ class Client
             } else {
                 $requestData = array('doc' => $data->getData());
             }
+            $docOptions = $data->getOptions(
+                array(
+                    'version',
+                    'version_type',
+                    'routing',
+                    'percolate',
+                    'parent',
+                    'fields',
+                    'retry_on_conflict',
+                    'consistency',
+                    'replication',
+                    'refresh',
+                    'timeout',
+                )
+            );
+            $options += $docOptions;
+            // set fields param to source only if options was not set before
+            if (($data->isAutoPopulate()
+                || $this->getConfigValue(array('document', 'autoPopulate'), false))
+                && !isset($options['fields'])
+            ) {
+                $options['fields'] = '_source';
+            }
         } else {
             $requestData = $data;
         }
 
-        return $this->request($path, Request::POST, $requestData, $options);
+        if (!isset($options['retry_on_conflict'])) {
+            $retryOnConflict = $this->getConfig("retryOnConflict");
+            $options['retry_on_conflict'] = $retryOnConflict;
+        }
+
+        $response = $this->request($path, Request::POST, $requestData, $options);
+
+        if ($response->isOk()
+            && $data instanceof Document
+            && ($data->isAutoPopulate() || $this->getConfigValue(array('document', 'autoPopulate'), false))
+        ) {
+            $responseData = $response->getData();
+            if (isset($responseData['_version'])) {
+                $data->setVersion($responseData['_version']);
+            }
+            if (isset($options['fields'])) {
+                $this->_populateDocumentFieldsFromResponse($response, $data, $options['fields']);
+            }
+        }
+
+        return $response;
     }
 
     /**
      * Bulk deletes documents
+     * @param \Elastica\Response $response
+     * @param \Elastica\Document $document
+     * @param string $fields Array of field names to be populated or '_source' if whole document data should be updated
+     */
+    protected function _populateDocumentFieldsFromResponse(Response $response, Document $document, $fields)
+    {
+        $responseData = $response->getData();
+        if ('_source' == $fields) {
+            if (isset($responseData['get']['_source']) && is_array($responseData['get']['_source'])) {
+                $document->setData($responseData['get']['_source']);
+            }
+        } else {
+            $keys = explode(',', $fields);
+            $data = $document->getData();
+            foreach ($keys as $key) {
+                if (isset($responseData['get']['fields'][$key])) {
+                    $data[$key] = $responseData['get']['fields'][$key];
+                } elseif (isset($data[$key])) {
+                    unset($data[$key]);
+                }
+            }
+            $document->setData($data);
+        }
+    }
+
+    /**
+     * Bulk deletes documents (not implemented yet)
      *
      * @param array|\Elastica\Document[] $docs
      * @return \Elastica\Bulk\ResponseSet
@@ -429,12 +552,15 @@ class Client
         try {
             $request = new Request($path, $method, $data, $query, $connection);
 
-            if ($this->getConfig('log')) {
-                $log = new Log($this->getConfig('log'));
-                $log->log($request);
-            }
+            $this->_log($request);
 
-            return $request->send();
+            $response = $request->send();
+
+            $this->_lastRequest = $request;
+            $this->_lastResponse = $response;
+
+            return $response;
+
         } catch (ConnectionException $e) {
             $connection->setEnabled(false);
 
@@ -457,5 +583,32 @@ class Client
     public function optimizeAll($args = array())
     {
         return $this->request('_optimize', Request::POST, $args);
+    }
+
+    /**
+     * @param string|\Elastica\Request $message
+     */
+    protected function _log($message)
+    {
+        if ($this->getConfig('log')) {
+            $log = new Log($this->getConfig('log'));
+            $log->log($message);
+        }
+    }
+
+    /**
+     * @return \Elastica\Request
+     */
+    public function getLastRequest()
+    {
+        return $this->_lastRequest;
+    }
+
+    /**
+     * @return \Elastica\Response
+     */
+    public function getLastResponse()
+    {
+        return $this->_lastResponse;
     }
 }

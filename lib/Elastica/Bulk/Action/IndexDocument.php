@@ -43,7 +43,7 @@ class IndexDocument extends AbstractDocument
             'ttl',
             'timestamp',
         );
-        $metadata = $document->getOptions($params, false);
+        $metadata = $document->getOptions($params, true);
 
         return $metadata;
     }
