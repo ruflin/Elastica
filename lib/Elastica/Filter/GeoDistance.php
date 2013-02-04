@@ -29,34 +29,9 @@ class GeoDistance extends AbstractGeoDistance
      */
     public function __construct($key, $location, $distance)
     {
-        // Fix old constructor. Remove it when the old constructor is not supported anymore
-        if (func_num_args() === 4) {
-            extract($this->_oldConstruct(func_get_args()));
-        }
-
         parent::__construct($key, $location);
 
         $this->setDistance($distance);
-    }
-
-    /**
-     * Convert old constructor signature to the new one
-     * Remove it when the old constructor is not supported
-     *
-     * @deprecated
-     * @param  array $args old arguments
-     * @return array new arguments
-     */
-    private function _oldConstruct(array $args)
-    {
-        return array(
-            'key' => $args[0],
-            'location' => array(
-                'lat' => $args[1],
-                'lon' => $args[2]
-            ),
-            'distance' => $args[3]
-        );
     }
 
     /**

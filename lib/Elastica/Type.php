@@ -194,17 +194,6 @@ class Type implements SearchableInterface
     /**
      * Returns the type name
      *
-     * @return string Type
-     * @deprecated Use getName instead
-     */
-    public function getType()
-    {
-        return $this->getName();
-    }
-
-    /**
-     * Returns the type name
-     *
      * @return string Type name
      */
     public function getName()

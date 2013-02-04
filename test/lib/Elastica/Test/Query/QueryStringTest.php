@@ -118,9 +118,9 @@ class QueryStringTest extends BaseTest
     /**
      * @expectedException \Elastica\Exception\InvalidException
      */
-    public function testSetQueryStringInvalid()
+    public function testSetQueryInvalid()
     {
         $query = new QueryString();
-        $query->setQueryString(array());
+        $query->setQuery(array());
     }
 }
