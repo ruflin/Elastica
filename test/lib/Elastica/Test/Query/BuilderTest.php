@@ -62,11 +62,9 @@ class BuilderTest extends BaseTest
             array('lt', 10, '{"lt":"10"}'),
             array('lte', 11, '{"lte":"11"}'),
             array('minimumNumberShouldMatch', 21, '{"minimum_number_should_match":"21"}'),
-            array('minimumShouldMatch', 21, '{"minimum_number_should_match":"21"}'),
             array('phraseSlop', 6, '{"phrase_slop":"6"}'),
             array('size', 7, '{"size":"7"}'),
             array('tieBreakerMultiplier', 7, '{"tie_breaker_multiplier":"7"}'),
-            array('tieBreaker', 7, '{"tie_breaker_multiplier":"7"}'),
             array('matchAll', 1.1, '{"match_all":{"boost":"1.1"}}'),
             array('fields', array("age", "sex", "location"), '{"fields":["age","sex","location"]}'),
         );
@@ -93,11 +91,9 @@ class BuilderTest extends BaseTest
      * @covers \Elastica\Query\Builder::lt
      * @covers \Elastica\Query\Builder::lte
      * @covers \Elastica\Query\Builder::minimumNumberShouldMatch
-     * @covers \Elastica\Query\Builder::minimumShouldMatch
      * @covers \Elastica\Query\Builder::phraseSlop
      * @covers \Elastica\Query\Builder::size
      * @covers \Elastica\Query\Builder::tieBreakerMultiplier
-     * @covers \Elastica\Query\Builder::tieBreaker
      * @covers \Elastica\Query\Builder::matchAll
      * @covers \Elastica\Query\Builder::fields
      */

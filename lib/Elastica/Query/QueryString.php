@@ -47,20 +47,6 @@ class QueryString extends AbstractQuery
     }
 
     /**
-     * Sets the default operator AND or OR
-     *
-     * If no operator is set, OR is chosen
-     *
-     * @param  string                          $queryString Query string
-     * @return \Elastica\Query\QueryString Current object
-     * @deprecated Please use setQuery instead
-     */
-    public function setQueryString($queryString)
-    {
-        return $this->setQuery($queryString);
-    }
-
-    /**
      * Sets the default field
      *
      * If no field is set, _all is chosen
@@ -242,20 +228,6 @@ class QueryString extends AbstractQuery
     public function setUseDisMax($value = true)
     {
         return $this->setParam('use_dis_max', (bool) $value);
-    }
-
-    /**
-     * When using dis_max, the disjunction max tie breaker.
-     *
-     * If not set, defaults to 0.
-     *
-     * @param  int                             $tieBreaker
-     * @return \Elastica\Query\QueryString Current object
-     * @deprecated
-     */
-    public function setTieBraker($tieBreaker = 0)
-    {
-        return $this->setTieBreaker($tieBreaker);
     }
 
     /**
