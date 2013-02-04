@@ -1,5 +1,12 @@
 CHANGES
 
+2013-01-31
+- Removed deprecated method Type::getType()
+- Removed deprecated old constructor call in Filter\GeoDistance::__construct()
+- Removed deprecated method Filter\Script::setQuery()
+- Removed deprecated methods Query\QueryString::setTieBraker() and Query\QueryString::setQueryString()
+- Removed deprecated methods Query\Builder::minimumShouldMatch() and Query\Builder::tieBreaker()
+
 2013-01-25
 - Add get/set/has/remove methods to Document
 - Add magic methods __get/__set/__isset/__unset to Document
