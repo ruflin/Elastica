@@ -163,8 +163,9 @@ class Client
     }
 
     /**
-     * @param string|array $key config key or path to config key
+     * @param array|string $keys config key or path of config keys
      * @param mixed $default default value will be returned if key was not found
+     * @return mixed
      */
     public function getConfigValue($keys, $default = null)
     {

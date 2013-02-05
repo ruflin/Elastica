@@ -4,7 +4,6 @@ namespace Elastica\Bulk;
 
 use Elastica\Document;
 use Elastica\Response as BaseResponse;
-use Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
 
 class Response extends BaseResponse
 {
@@ -29,29 +28,6 @@ class Response extends BaseResponse
 
         $this->_action = $action;
         $this->_opType = $opType;
-
-        $this->_init();
-    }
-
-    /**
-     *
-     */
-    protected function _init()
-    {
-        $action = $this->getAction();
-
-        if ($action instanceof AbstractDocumentAction) {
-            $document = $action->getDocument();
-            if ($document->isAutoPopulate()) {
-                $data = $this->getData();
-                if (!$document->hasId() && Document::OP_TYPE_CREATE == $this->getOpType() && isset($data['_id'])) {
-                    $document->setId($data['_id']);
-                }
-                if (isset($data['_version'])) {
-                    $document->setVersion($data['_version']);
-                }
-            }
-        }
     }
 
     /**

@@ -167,12 +167,6 @@ class Bulk
      */
     public function addDocument(Document $document, $opType = null)
     {
-        if (!$document->isAutoPopulate()
-            && $this->_client->getConfigValue(array('document', 'autoPopulate'), false)
-        ) {
-            $document->setAutoPopulate(true);
-        }
-
         $action = AbstractDocumentAction::create($document, $opType);
 
         return $this->addAction($action);
@@ -289,7 +283,36 @@ class Bulk
             throw new BulkResponseException($bulkResponseSet);
         }
 
+        $this->_populateDocumentsFromResponse($bulkResponseSet);
+
         return $bulkResponseSet;
+    }
+
+    /**
+     * Populates documents _id and _version fields
+     *
+     * @param \Elastica\Bulk\ResponseSet $bulkResponseSet
+     */
+    protected function _populateDocumentsFromResponse(ResponseSet $bulkResponseSet)
+    {
+        foreach ($bulkResponseSet as $bulkResponse) {
+            $action = $bulkResponse->getAction();
+
+            if ($action instanceof AbstractDocumentAction) {
+                $document = $action->getDocument();
+                if ($document->isAutoPopulate()
+                    || $this->_client->getConfigValue(array('document', 'autoPopulate'), false)
+                ) {
+                    $data = $bulkResponse->getData();
+                    if (!$document->hasId() && isset($data['_id'])) {
+                        $document->setId($data['_id']);
+                    }
+                    if (isset($data['_version'])) {
+                        $document->setVersion($data['_version']);
+                    }
+                }
+            }
+        }
     }
 
     /**

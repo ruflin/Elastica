@@ -140,6 +140,7 @@ class Document extends Param
     /**
      * @param string $key
      * @param mixed $value
+     * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Document
      */
     public function set($key, $value)
