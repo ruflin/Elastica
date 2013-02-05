@@ -302,7 +302,7 @@ class Bulk
                         if (!$document->hasId() && isset($bulkResponseData['_id'])) {
                             $document->setId($bulkResponseData['_id']);
                         }
-                        if (isset($data['_version'])) {
+                        if (isset($bulkResponseData['_version'])) {
                             $document->setVersion($bulkResponseData['_version']);
                         }
                     }
