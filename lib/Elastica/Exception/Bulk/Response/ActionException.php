@@ -9,7 +9,7 @@ use Elastica\Bulk\Response;
 class ActionException extends BulkException
 {
     /**
-     * @var Response
+     * @var \Elastica\Response
      */
     protected $_response;
 

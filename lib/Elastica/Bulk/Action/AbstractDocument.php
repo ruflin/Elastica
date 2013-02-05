@@ -8,12 +8,12 @@ use Elastica\Document;
 abstract class AbstractDocument extends Action
 {
     /**
-     * @var Document
+     * @var \Elastica\Document
      */
     protected $_document;
 
     /**
-     * @param Document $document
+     * @param \Elastica\Document $document
      */
     public function __construct(Document $document)
     {
@@ -52,7 +52,7 @@ abstract class AbstractDocument extends Action
     /**
      * @param \Elastica\Document $document
      * @param string $opType
-     * @return AbstractDocument
+     * @return \Elastica\Bulk\Action\AbstractDocument
      */
     public static function create(Document $document, $opType = null)
     {
@@ -61,13 +61,13 @@ abstract class AbstractDocument extends Action
         }
 
         switch ($opType) {
-            case Document::OP_TYPE_DELETE:
+            case self::OP_TYPE_DELETE:
                 $action = new DeleteDocument($document);
                 break;
-            case Document::OP_TYPE_CREATE:
+            case self::OP_TYPE_CREATE:
                 $action = new CreateDocument($document);
                 break;
-            case Document::OP_TYPE_INDEX:
+            case self::OP_TYPE_INDEX:
             default:
                 $action = new IndexDocument($document);
                 break;

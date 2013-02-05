@@ -10,7 +10,7 @@ class IndexDocument extends AbstractDocument
     /**
      * @var string
      */
-    protected $_opType = Document::OP_TYPE_INDEX;
+    protected $_opType = self::OP_TYPE_INDEX;
 
     /**
      * @param \Elastica\Document $document

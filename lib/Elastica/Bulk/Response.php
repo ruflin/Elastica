@@ -2,13 +2,12 @@
 
 namespace Elastica\Bulk;
 
-use Elastica\Document;
 use Elastica\Response as BaseResponse;
 
 class Response extends BaseResponse
 {
     /**
-     * @var Action
+     * @var \Elastica\Bulk\Action
      */
     protected $_action;
 
@@ -19,7 +18,7 @@ class Response extends BaseResponse
 
     /**
      * @param array|string $responseData
-     * @param Action $action
+     * @param \Elastica\Bulk\Action $action
      * @param string $opType
      */
     public function __construct($responseData, Action $action, $opType)
@@ -31,7 +30,7 @@ class Response extends BaseResponse
     }
 
     /**
-     * @return Action
+     * @return \Elastica\Bulk\Action
      */
     public function getAction()
     {

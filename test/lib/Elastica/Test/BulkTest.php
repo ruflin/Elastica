@@ -105,7 +105,7 @@ class BulkTest extends BaseTest
 
 
         $bulk = new Bulk($client);
-        $bulk->addDocument($newDocument3, Document::OP_TYPE_DELETE);
+        $bulk->addDocument($newDocument3, Action::OP_TYPE_DELETE);
 
         $data = $bulk->toArray();
 
@@ -171,12 +171,12 @@ class BulkTest extends BaseTest
         $client = new Client();
         $bulk = new Bulk($client);
 
-        $action1 = new Action(Document::OP_TYPE_DELETE);
+        $action1 = new Action(Action::OP_TYPE_DELETE);
         $action1->setIndex('index');
         $action1->setType('type');
         $action1->setId(1);
 
-        $action2 = new Action(Document::OP_TYPE_INDEX);
+        $action2 = new Action(Action::OP_TYPE_INDEX);
         $action2->setIndex('index');
         $action2->setType('type');
         $action2->setId(1);
@@ -309,7 +309,7 @@ class BulkTest extends BaseTest
             $type->createDocument(2, array('name' => 'The Human Torch')),
         );
 
-        $documents[2]->setopType(Document::OP_TYPE_CREATE);
+        $documents[2]->setOpType(Document::OP_TYPE_CREATE);
 
         $bulk = new Bulk($client);
         $bulk->addDocuments($documents);

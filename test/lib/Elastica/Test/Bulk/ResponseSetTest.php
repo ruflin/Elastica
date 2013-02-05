@@ -10,6 +10,11 @@ use Elastica\Response;
 
 class ResponseSetTest extends BaseTest
 {
+    public static function setUpBeforeClass()
+    {
+        self::markTestSkipped();
+    }
+
     /**
      * @dataProvider invalidConstructorDataProvider
      * @expectedException \Elastica\Exception\InvalidException
@@ -164,11 +169,11 @@ class ResponseSetTest extends BaseTest
                 )
             )
         );
-        $actions = array(
-            new Action(Document::OP_TYPE_INDEX),
-            new Action(Document::OP_TYPE_INDEX),
-            new Action(Document::OP_TYPE_INDEX),
+        $bulkResponses = array(
+            new Action(),
+            new Action(),
+            new Action(),
         );
-        return array($responseData, $actions);
+        return array($responseData, $bulkResponses);
     }
 }

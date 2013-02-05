@@ -13,19 +13,7 @@ use Elastica\Exception\InvalidException;
  */
 class Document extends Param
 {
-    const OP_TYPE_INDEX = 'index';
     const OP_TYPE_CREATE = 'create';
-    const OP_TYPE_DELETE = 'delete';
-
-    /**
-     * @var array
-     * @var \Elastica\Script
-     */
-    public static $opTypes = array(
-        self::OP_TYPE_INDEX,
-        self::OP_TYPE_CREATE,
-        self::OP_TYPE_DELETE,
-    );
 
     /**
      * Document data
@@ -799,14 +787,5 @@ class Document extends Param
             }
         }
         return $data;
-    }
-
-    /**
-     * @param string $opType
-     * @return bool
-     */
-    public static function isValidOpType($opType)
-    {
-        return in_array($opType, self::$opTypes);
     }
 }

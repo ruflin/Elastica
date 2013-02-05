@@ -2,14 +2,12 @@
 
 namespace Elastica\Bulk;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Response;
-use Elastica\Bulk\Response as BulkResponse;
+use Elastica\Response as BaseResponse;
 
-class ResponseSet extends Response implements \Iterator, \Countable
+class ResponseSet extends BaseResponse implements \Iterator, \Countable
 {
     /**
-     * @var BulkResponse[]
+     * @var \Elastica\Bulk\Response[]
      */
     protected $_bulkResponses = array();
 
@@ -20,41 +18,17 @@ class ResponseSet extends Response implements \Iterator, \Countable
 
     /**
      * @param \Elastica\Response $response
-     * @param Action[] $actions
+     * @param \Elastica\Bulk\Response[] $bulkResponses
      */
-    public function __construct(Response $response, array $actions)
+    public function __construct(BaseResponse $response, array $bulkResponses)
     {
         parent::__construct($response->getData());
-        $this->_init($actions);
+
+        $this->_bulkResponses = $bulkResponses;
     }
 
     /**
-     * @param Action[] $actions
-     * @throws \Elastica\Exception\InvalidException
-     */
-    protected function _init(array $actions)
-    {
-        $responseData = $this->getData();
-
-        if (isset($responseData['items']) && is_array($responseData['items'])) {
-            foreach ($responseData['items'] as $key => $item) {
-
-                if (!isset($actions[$key])) {
-                    throw new InvalidException('No response found for action #' . $key);
-                } elseif (!$actions[$key] instanceof Action) {
-                    throw new InvalidException('Invalid object for response #' . $key . ' provided. Should be Elastica\Bulk\Action');
-                }
-
-                $opType = key($item);
-                $bulkResponseData = reset($item);
-
-                $this->_bulkResponses[] = new BulkResponse($bulkResponseData, $actions[$key], $opType);
-            }
-        }
-    }
-
-    /**
-     * @return BulkResponse[]
+     * @return \Elastica\Bulk\Response[]
      */
     public function getBulkResponses()
     {

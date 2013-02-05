@@ -2,18 +2,19 @@
 
 namespace Elastica;
 
-use Elastica\Bulk\ResponseSet;
 use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\Bulk\UdpException;
 use Elastica\Exception\InvalidException;
 use Elastica\Request;
 use Elastica\Response;
-use Elastica\Type;
-use Elastica\Index;
-use Elastica\Bulk\Action;
 use Elastica\Client;
+use Elastica\Index;
+use Elastica\Type;
+use Elastica\Bulk\Action;
 use Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
+use Elastica\Bulk\ResponseSet;
+use Elastica\Bulk\Response as BulkResponse;
 
 class Bulk
 {
@@ -23,12 +24,12 @@ class Bulk
     const UDP_DEFAULT_PORT = 9700;
 
     /**
-     * @var Client
+     * @var \Elastica\Client
      */
     protected $_client;
 
     /**
-     * @var Action[]
+     * @var \Elastica\Bulk\Action[]
      */
     protected $_actions = array();
 
@@ -130,7 +131,7 @@ class Bulk
     }
 
     /**
-     * @param Action $action
+     * @param \Elastica\Bulk\Action $action
      * @return \Elastica\Bulk
      */
     public function addAction(Action $action)
@@ -140,7 +141,7 @@ class Bulk
     }
 
     /**
-     * @param Action[] $actions
+     * @param \Elastica\Bulk\Action[] $actions
      * @return \Elastica\Bulk
      */
     public function addActions(array $actions)
@@ -153,7 +154,7 @@ class Bulk
     }
 
     /**
-     * @return Action[]
+     * @return \Elastica\Bulk\Action[]
      */
     public function getActions()
     {
@@ -197,7 +198,7 @@ class Bulk
             if (is_array($row)) {
                 $opType = key($row);
                 $metadata = reset($row);
-                if (Document::isValidOpType($opType)) {
+                if (Action::isValidOpType($opType)) {
                     // add previous action
                     if (isset($action)) {
                         $this->addAction($action);
@@ -277,42 +278,47 @@ class Bulk
      */
     protected function _processResponse(Response $response)
     {
-        $bulkResponseSet = new ResponseSet($response, $this->getActions());
+        $responseData = $response->getData();
+
+        $actions = $this->getActions();
+
+        $bulkResponses = array();
+
+        if (isset($responseData['items']) && is_array($responseData['items'])) {
+            foreach ($responseData['items'] as $key => $item) {
+
+                if (!isset($actions[$key])) {
+                    throw new InvalidException('No response found for action #' . $key);
+                }
+
+                $opType = key($item);
+                $bulkResponseData = reset($item);
+
+                if ($actions[$key] instanceof AbstractDocumentAction) {
+                    $document = $actions[$key]->getDocument();
+                    if ($document->isAutoPopulate()
+                        || $this->_client->getConfigValue(array('document', 'autoPopulate'), false)
+                    ) {
+                        if (!$document->hasId() && isset($bulkResponseData['_id'])) {
+                            $document->setId($bulkResponseData['_id']);
+                        }
+                        if (isset($data['_version'])) {
+                            $document->setVersion($bulkResponseData['_version']);
+                        }
+                    }
+                }
+
+                $bulkResponses[] = new BulkResponse($bulkResponseData, $actions[$key], $opType);
+            }
+        }
+
+        $bulkResponseSet = new ResponseSet($response, $bulkResponses);
 
         if ($bulkResponseSet->hasError()) {
             throw new BulkResponseException($bulkResponseSet);
         }
 
-        $this->_populateDocumentsFromResponse($bulkResponseSet);
-
         return $bulkResponseSet;
-    }
-
-    /**
-     * Populates documents _id and _version fields
-     *
-     * @param \Elastica\Bulk\ResponseSet $bulkResponseSet
-     */
-    protected function _populateDocumentsFromResponse(ResponseSet $bulkResponseSet)
-    {
-        foreach ($bulkResponseSet as $bulkResponse) {
-            $action = $bulkResponse->getAction();
-
-            if ($action instanceof AbstractDocumentAction) {
-                $document = $action->getDocument();
-                if ($document->isAutoPopulate()
-                    || $this->_client->getConfigValue(array('document', 'autoPopulate'), false)
-                ) {
-                    $data = $bulkResponse->getData();
-                    if (!$document->hasId() && isset($data['_id'])) {
-                        $document->setId($data['_id']);
-                    }
-                    if (isset($data['_version'])) {
-                        $document->setVersion($data['_version']);
-                    }
-                }
-            }
-        }
     }
 
     /**
@@ -322,12 +328,11 @@ class Bulk
      */
     public function sendUdp($host = null, $port = null)
     {
-        $config = $this->_client->getConfig();
         if (null === $host) {
-            $host = isset($config['udp']['host']) ? $config['udp']['host'] : self::UDP_DEFAULT_HOST;
+            $host = $this->_client->getConfigValue(array('udp', 'host'), self::UDP_DEFAULT_HOST);
         }
         if (null === $port) {
-            $port = isset($config['udp']['port']) ? $config['udp']['port'] : self::UDP_DEFAULT_PORT;
+            $port = $this->_client->getConfigValue(array('udp', 'port'), self::UDP_DEFAULT_PORT);
         }
 
         $message = $this->toString();

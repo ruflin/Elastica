@@ -8,6 +8,19 @@ use Elastica\Type;
 
 class Action
 {
+    const OP_TYPE_CREATE = 'create';
+    const OP_TYPE_INDEX  = 'index';
+    const OP_TYPE_DELETE = 'delete';
+
+    /**
+     * @var array
+     */
+    public static $opTypes = array(
+        self::OP_TYPE_CREATE,
+        self::OP_TYPE_INDEX,
+        self::OP_TYPE_DELETE,
+    );
+
     /**
      * @var string
      */
@@ -28,7 +41,7 @@ class Action
      * @param array $metadata
      * @param array $source
      */
-    public function __construct($opType, array $metadata = array(), array $source = array())
+    public function __construct($opType = self::OP_TYPE_INDEX, array $metadata = array(), array $source = array())
     {
         $this->setOpType($opType);
         $this->setMetadata($metadata);
@@ -170,5 +183,14 @@ class Action
             $string.= json_encode($row) . Bulk::DELIMITER;
         }
         return $string;
+    }
+
+    /**
+     * @param string $opType
+     * @return bool
+     */
+    public static function isValidOpType($opType)
+    {
+        return in_array($opType, self::$opTypes);
     }
 }

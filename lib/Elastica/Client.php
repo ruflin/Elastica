@@ -327,7 +327,6 @@ class Client
     }
 
     /**
-     * Bulk deletes documents
      * @param \Elastica\Response $response
      * @param \Elastica\Document $document
      * @param string $fields Array of field names to be populated or '_source' if whole document data should be updated
@@ -354,7 +353,7 @@ class Client
     }
 
     /**
-     * Bulk deletes documents (not implemented yet)
+     * Bulk deletes documents
      *
      * @param array|\Elastica\Document[] $docs
      * @return \Elastica\Bulk\ResponseSet
@@ -367,7 +366,7 @@ class Client
         }
 
         $bulk = new Bulk($this);
-        $bulk->addDocuments($docs, Document::OP_TYPE_DELETE);
+        $bulk->addDocuments($docs, Action::OP_TYPE_DELETE);
 
         return $bulk->send();
     }
@@ -465,7 +464,7 @@ class Client
         $bulk->setType($type);
 
         foreach ($ids as $id) {
-            $action = new Action(Document::OP_TYPE_DELETE);
+            $action = new Action(Action::OP_TYPE_DELETE);
             $action->setId($id);
 
             $bulk->addAction($action);

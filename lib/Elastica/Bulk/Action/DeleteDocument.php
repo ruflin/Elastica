@@ -9,7 +9,7 @@ class DeleteDocument extends AbstractDocument
     /**
      * @var string
      */
-    protected $_opType = Document::OP_TYPE_DELETE;
+    protected $_opType = self::OP_TYPE_DELETE;
 
     /**
      * @param \Elastica\Document $document

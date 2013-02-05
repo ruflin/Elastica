@@ -48,7 +48,7 @@ class ResponseException extends BulkException
     {
         $this->_responseSet = $responseSet;
 
-        foreach ($responseSet as $bulkResponse) {
+        foreach ($responseSet->getBulkResponses() as $bulkResponse) {
             if ($bulkResponse->hasError()) {
                 $this->_actionExceptions[] = new ActionException($bulkResponse);
             }
