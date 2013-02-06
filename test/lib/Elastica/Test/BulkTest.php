@@ -72,16 +72,16 @@ class BulkTest extends BaseTest
         $this->assertEquals($expected, $data);
 
         $expected = '{"index":{"_index":"elastica_test","_type":"bulk_test","_id":1,"_percolate":"*"}}
-{"name":"Mister Fantastic"}
-{"index":{"_id":2}}
-{"name":"Invisible Woman"}
-{"create":{"_index":"elastica_test","_type":"bulk_test","_id":3}}
-{"name":"The Human Torch"}
+{"name": "Mister Fantastic"}
+{"index": {"_id":2}}
+{"name": "Invisible Woman"}
+{"create": {"_index":"elastica_test","_type":"bulk_test","_id":3}}
+{"name": "The Human Torch"}
 {"index":{"_index":"elastica_test","_type":"bulk_test"}}
 {"name":"The Thing"}
 ';
 
-        $this->assertEquals($expected, (string) $bulk);
+        $this->assertJsonStringEqualsJsonString($expected, (string) $bulk);
 
         $response = $bulk->send();
 
