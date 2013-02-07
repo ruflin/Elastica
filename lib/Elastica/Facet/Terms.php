@@ -40,9 +40,14 @@ class Terms extends AbstractFacet
      * @param  string                   $script The script for the term.
      * @return Elastica_Facet_Terms
      */
-    public function setScript($script)
+     public function setScript($script)
     {
-        return $this->setParam('script', $script);
+        $script = Elastica_Script::create($script);
+        foreach ($script->toArray() as $param => $value) {
+            $this->setParam($param, $value);
+        }
+
+        return $this;
     }
 
     /**
