@@ -42,7 +42,7 @@ class Terms extends AbstractFacet
      */
      public function setScript($script)
     {
-        $script = Elastica_Script::create($script);
+        $script = Script::create($script);
         foreach ($script->toArray() as $param => $value) {
             $this->setParam($param, $value);
         }
