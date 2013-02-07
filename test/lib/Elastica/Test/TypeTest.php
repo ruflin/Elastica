@@ -110,6 +110,7 @@ class TypeTest extends BaseTest
             new Document(1, array('username' => 'hans', 'test' => array('2', '3', '5'))),
             new Document(2, array('username' => 'john', 'test' => array('1', '3', '6'))),
             new Document(3, array('username' => 'rolf', 'test' => array('2', '3', '7'))),
+            new Document('foo/bar', array('username' => 'georg', 'test' => array('4', '2', '5'))),
         );
         $type->addDocuments($docs);
         $index->refresh();
@@ -126,6 +127,18 @@ class TypeTest extends BaseTest
 
         // rolf should no longer be there
         $resultSet = $type->search('rolf');
+        $this->assertEquals(0, $resultSet->count());
+
+        // sanity check for id with slash
+        $resultSet = $type->search('georg');
+        $this->assertEquals(1, $resultSet->count());
+
+        // delete georg
+        $type->deleteById('foo/bar');
+        $index->refresh();
+
+        // georg should no longer be there
+        $resultSet = $type->search('georg');
         $this->assertEquals(0, $resultSet->count());
 
         // it should not be possible to delete the entire type with this method
@@ -160,7 +173,7 @@ class TypeTest extends BaseTest
         try {
             $type->deleteById('*');
             $this->fail('Delete request should fail because of invalid id: *');
-        } catch (ResponseException $e) {
+        } catch (NotFoundException $e) {
             $this->assertTrue(true);
         }
 
