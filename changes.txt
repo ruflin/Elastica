@@ -1,5 +1,8 @@
 CHANGES
 
+2013-02-08
+- Terms->setScript() Added, namespace Elastica/Facet
+
 2013-01-13
 - Add version option to Elastica_Search::search
 - Remove compatibility for PHP 5.2
