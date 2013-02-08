@@ -28,9 +28,10 @@ class MatchAllTest extends BaseTest
         $search1 = new Search($client);
         $resultSet1 = $search1->search(new MatchAll());
 
-        $doc = new Document(1, array('name' => 'ruflin'));
-        $index1->getType('test')->addDocument($doc);
-        $index2->getType('test')->addDocument($doc);
+        $doc1 = new Document(1, array('name' => 'ruflin'));
+        $doc2 = new Document(1, array('name' => 'ruflin'));
+        $index1->getType('test')->addDocument($doc1);
+        $index2->getType('test')->addDocument($doc2);
 
         $index1->refresh();
         $index2->refresh();

@@ -1,0 +1,19 @@
+// $Id: config.w32 303962 2010-10-03 15:48:23Z hradtke $
+// vim:ft=javascript
+
+ARG_ENABLE("memcache", "memcache support", "no");
+
+if (PHP_MEMCACHE != "no") {
+	if (
+		((PHP_ZLIB=="no") && (CHECK_LIB("zlib_a.lib;zlib.lib", "memcache", PHP_MEMCACHE) )) || 
+			(PHP_ZLIB_SHARED && CHECK_LIB("zlib.lib", "memcache", PHP_MEMCACHE)) || (PHP_ZLIB == "yes" && (!PHP_ZLIB_SHARED))
+	) {
+		EXTENSION("memcache", "memcache.c memcache_queue.c memcache_standard_hash.c memcache_consistent_hash.c memcache_session.c");
+		AC_DEFINE('HAVE_MEMCACHE', 1, 'Have memcache support');
+		ADD_FLAG("CFLAGS_MEMCACHE", "/D HAVE_MEMCACHE_SESSION=1");
+		ADD_EXTENSION_DEP('memcache', 'session');
+	} else {
+		WARNING("memcache not enabled; libraries and headers not found");
+	}
+}
+

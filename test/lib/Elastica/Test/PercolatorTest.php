@@ -50,10 +50,10 @@ class PercolatorTest extends BaseTest
         $this->assertFalse($response->hasError());
 
         $doc1 = new Document();
-        $doc1->add('name', 'ruflin');
+        $doc1->set('name', 'ruflin');
 
         $doc2 = new Document();
-        $doc2->add('name', 'nicolas');
+        $doc2->set('name', 'nicolas');
 
         $index = new Index($index->getClient(), '_percolator');
         $index->optimize();

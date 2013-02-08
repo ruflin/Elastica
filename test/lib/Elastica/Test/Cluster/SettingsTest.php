@@ -55,11 +55,16 @@ class SettingsTest extends BaseTest
 
         $settings = new Settings($index1->getClient());
 
-        $doc = new Document(null, array('hello' => 'world'));
+        $doc1 = new Document(null, array('hello' => 'world'));
+        $doc2 = new Document(null, array('hello' => 'world'));
+        $doc3 = new Document(null, array('hello' => 'world'));
+        $doc4 = new Document(null, array('hello' => 'world'));
+        $doc5 = new Document(null, array('hello' => 'world'));
+        $doc6 = new Document(null, array('hello' => 'world'));
 
         // Check that adding documents work
-        $index1->getType('test')->addDocument($doc);
-        $index2->getType('test')->addDocument($doc);
+        $index1->getType('test')->addDocument($doc1);
+        $index2->getType('test')->addDocument($doc2);
 
         $response = $settings->setReadOnly(true);
         $this->assertFalse($response->hasError());
@@ -68,7 +73,7 @@ class SettingsTest extends BaseTest
 
         // Make sure both index are read only
         try {
-            $index1->getType('test')->addDocument($doc);
+            $index1->getType('test')->addDocument($doc3);
             $this->fail('should throw read only exception');
         } catch (ResponseException $e) {
             $message = $e->getMessage();
@@ -77,7 +82,7 @@ class SettingsTest extends BaseTest
         }
 
         try {
-            $index2->getType('test')->addDocument($doc);
+            $index2->getType('test')->addDocument($doc4);
             $this->fail('should throw read only exception');
         } catch (ResponseException $e) {
             $message = $e->getMessage();
@@ -91,8 +96,8 @@ class SettingsTest extends BaseTest
         $this->assertEquals('false', $setting);
 
         // Check that adding documents works again
-        $index1->getType('test')->addDocument($doc);
-        $index2->getType('test')->addDocument($doc);
+        $index1->getType('test')->addDocument($doc5);
+        $index2->getType('test')->addDocument($doc6);
 
         $index1->refresh();
         $index2->refresh();

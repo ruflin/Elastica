@@ -49,22 +49,4 @@ class ScriptTest extends BaseTest
         );
         $this->assertEquals($expected, $array);
     }
-
-    public function testSetQuery()
-    {
-        $string = '_score * 2.0';
-        $query = array(
-            'script' => $string,
-        );
-        $filter = new ScriptFilter();
-        $filter->setQuery($query);
-
-        $expected = array(
-            'script' => array(
-                'script' => $string,
-            )
-        );
-
-        $this->assertEquals($expected, $filter->toArray());
-    }
 }

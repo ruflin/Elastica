@@ -1,5 +1,8 @@
 <?php
 
+<<<<<<< HEAD
+class Elastica_Query_BoolTest
+=======
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -11,6 +14,7 @@ use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 
 class BoolTest extends BaseTest
+>>>>>>> ruflin/master
 {
     public function testToArray()
     {
@@ -91,6 +95,11 @@ class BoolTest extends BaseTest
         $boolQuery->addMust($termQuery1);
         $resultSet = $type->search($boolQuery);
 
+echo '<pre>';
+	print_r($resultSet);
+echo '</pre>';
+exit;
+
         $this->assertEquals(2, $resultSet->count());
 
         $termQuery2 = new Term(array('test' => '5'));
@@ -112,3 +121,7 @@ class BoolTest extends BaseTest
         $this->assertEquals(0, $resultSet->count());
     }
 }
+
+
+$queryBool = new Elastica_Query_BoolTest();
+$queryBool->testSearch();

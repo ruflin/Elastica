@@ -1,8 +1,5 @@
 CHANGES
 
-2013-02-08
-- Terms->setScript() Added, namespace Elastica/Facet
-
 2013-01-31
 - Removed deprecated method Type::getType()
 - Removed deprecated old constructor call in Filter\GeoDistance::__construct()

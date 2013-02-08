@@ -35,22 +35,6 @@ class Script extends AbstractFilter
     }
 
     /**
-     * Sets query object
-     *
-     * @deprecated
-     * @param  string|array|\Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Filter\Script
-     */
-    public function setQuery($query)
-    {
-        if ($query instanceof AbstractQuery) {
-            $query = $query->toArray();
-        }
-
-        return $this->setScript($query);
-    }
-
-    /**
      * Sets script object
      *
      * @param  \Elastica\Script|string|array $script
