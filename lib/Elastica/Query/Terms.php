@@ -1,14 +1,17 @@
 <?php
+
+namespace Elastica\Query;
+use Elastica\Exception\InvalidException;
+
 /**
  * Terms query
  *
- * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/terms-query.html
  */
-class Elastica_Query_Terms extends Elastica_Query_Abstract
+class Terms extends AbstractQuery
 {
     /**
      * Terms
@@ -45,8 +48,9 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
     /**
      * Sets key and terms for the query
      *
-     * @param string $key   Terms key
-     * @param array  $terms Terms for the query.
+     * @param  string                    $key   Terms key
+     * @param  array                     $terms Terms for the query.
+     * @return \Elastica\Query\Terms
      */
     public function setTerms($key, array $terms)
     {
@@ -59,7 +63,8 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
     /**
      * Adds a single term to the list
      *
-     * @param string $term Term
+     * @param  string                    $term Term
+     * @return \Elastica\Query\Terms
      */
     public function addTerm($term)
     {
@@ -71,7 +76,8 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
     /**
      * Sets the minimum matching values
      *
-     * @param int $minimum Minimum value
+     * @param  int                       $minimum Minimum value
+     * @return \Elastica\Query\Terms
      */
     public function setMinimumMatch($minimum)
     {
@@ -81,13 +87,14 @@ class Elastica_Query_Terms extends Elastica_Query_Abstract
     /**
      * Converts the terms object to an array
      *
-     * @return array Query array
-     * @see Elastica_Query_Abstract::toArray()
+     * @see \Elastica\Query\AbstractQuery::toArray()
+     * @throws \Elastica\Exception\InvalidException
+     * @return array                               Query array
      */
     public function toArray()
     {
         if (empty($this->_key)) {
-            throw new Elastica_Exception_Invalid('Terms key has to be set');
+            throw new InvalidException('Terms key has to be set');
         }
         $this->setParam($this->_key, $this->_terms);
 

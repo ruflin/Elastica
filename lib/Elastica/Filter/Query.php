@@ -1,15 +1,19 @@
 <?php
 
+namespace Elastica\Filter;
+
+use Elastica\Exception\InvalidException;
+use Elastica\Query\AbstractQuery;
+
 /**
  * Query filter
  *
- * @uses Elastica_Filter_Query
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/query-filter.html
  */
-class Elastica_Filter_Query extends Elastica_Filter_Abstract
+class Query extends AbstractFilter
 {
     /**
      * Query
@@ -20,7 +24,7 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract
     /**
      * Construct query filter
      *
-     * @param array|Elastica_Query_Abstract $query
+     * @param array|\Elastica\Query\AbstractQuery $query
      */
     public function __construct($query = null)
     {
@@ -32,17 +36,17 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract
     /**
      * Set query
      *
-     * @param  array|Elastica_Query_Abstract $query
-     * @return Elastca_Filter_Query          Query object
-     * @throws Elastica_Exception_Invalid    Invalid param
+     * @param  array|\Elastica\Query\AbstractQuery  $query
+     * @return \Elastica\Filter\Query         Query object
+     * @throws \Elastica\Exception\InvalidException Invalid param
      */
     public function setQuery($query)
     {
-        if (!$query instanceof Elastica_Query_Abstract && ! is_array($query)) {
-            throw new Elastica_Exception_Invalid('expected an array or instance of Elastica_Query_Abstract');
+        if (!$query instanceof AbstractQuery && ! is_array($query)) {
+            throw new InvalidException('expected an array or instance of Elastica\Query\AbstractQuery');
         }
 
-        if ($query instanceof Elastica_Query_Abstract) {
+        if ($query instanceof AbstractQuery) {
             $query = $query->toArray();
         }
 
@@ -52,19 +56,19 @@ class Elastica_Filter_Query extends Elastica_Filter_Abstract
     }
 
     /**
-     * @see Elastica_Param::_getBaseName()
+     * @see \Elastica\Param::_getBaseName()
      */
     protected function _getBaseName()
     {
         if (empty($this->_params)) {
-            return parent::_getBaseName();
+            return 'query';
         } else {
             return 'fquery';
         }
     }
 
     /**
-     * @see Elastica_Param::toArray()
+     * @see \Elastica\Param::toArray()
      */
     public function toArray()
     {

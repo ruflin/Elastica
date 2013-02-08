@@ -1,4 +1,10 @@
 <?php
+
+namespace Elastica\Index;
+use Elastica\Cluster;
+use Elastica\Index as BaseIndex;
+use Elastica\Request;
+
 /**
  * Elastica index status object
  *
@@ -7,12 +13,12 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
-class Elastica_Index_Status
+class Status
 {
     /**
      * Response
      *
-     * @var Elastica_Response Response object
+     * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -26,16 +32,16 @@ class Elastica_Index_Status
     /**
      * Index
      *
-     * @var Elastica_Index Index object
+     * @var \Elastica\Index Index object
      */
     protected $_index = null;
 
     /**
      * Construct
      *
-     * @param Elastica_Index $index Index object
+     * @param \Elastica\Index $index Index object
      */
-    public function __construct(Elastica_Index $index)
+    public function __construct(BaseIndex $index)
     {
         $this->_index = $index;
         $this->refresh();
@@ -80,8 +86,8 @@ class Elastica_Index_Status
      */
     public function getAliases()
     {
-        // TODO Update as soon as new API is implmented
-        $cluster = new Elastica_Cluster($this->_index->getClient());
+        // TODO Update as soon as new API is implemented
+        $cluster = new Cluster($this->_index->getClient());
         $state = $cluster->getState();
 
         return $state['metadata']['indices'][$this->_index->getName()]['aliases'];
@@ -94,8 +100,8 @@ class Elastica_Index_Status
      */
     public function getSettings()
     {
-        // TODO Update as soon as new API is implmented
-        $cluster = new Elastica_Cluster($this->_index->getClient());
+        // TODO Update as soon as new API is implemented
+        $cluster = new Cluster($this->_index->getClient());
         $state = $cluster->getState();
 
         return $state['metadata']['indices'][$this->_index->getName()]['settings'];
@@ -104,7 +110,8 @@ class Elastica_Index_Status
     /**
      * Checks if the index has the given alias
      *
-     * @param string $name Alias name
+     * @param  string $name Alias name
+     * @return bool
      */
     public function hasAlias($name)
     {
@@ -114,7 +121,7 @@ class Elastica_Index_Status
     /**
      * Returns the index object
      *
-     * @return Elastica_Index Index object
+     * @return \Elastica\Index Index object
      */
     public function getIndex()
     {
@@ -124,7 +131,7 @@ class Elastica_Index_Status
     /**
      * Returns response object
      *
-     * @return Elastica_Response Response object
+     * @return \Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -137,7 +144,7 @@ class Elastica_Index_Status
     public function refresh()
     {
         $path = '_status';
-        $this->_response = $this->getIndex()->request($path, Elastica_Request::GET);
+        $this->_response = $this->getIndex()->request($path, Request::GET);
         $this->_data = $this->getResponse()->getData();
     }
 }

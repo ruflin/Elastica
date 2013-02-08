@@ -83,7 +83,7 @@
 	<!-- Generate checkstyle.xml -->
 	<target name="phpcs-ci">
 		<exec executable="phpcs" output="/dev/null">
-			<arg line="--report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml --standard=${basedir}/test/CodeSniffer/Standards/Xodoa ${source}" />
+			<arg line="--report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml --standard=PSR2 ${source}" />
 		</exec>
 	</target>
 
@@ -115,7 +115,7 @@
 	<!-- Checkstyle with human output -->
 	<target name="phpcs">
 		<exec executable="phpcs">
-			<arg line="--standard=${basedir}/test/CodeSniffer/Standards/Xodoa ${source}" />
+			<arg line="--standard=PSR2 ${source}" />
 		</exec>
 	</target>
 

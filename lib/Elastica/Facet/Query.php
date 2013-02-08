@@ -1,4 +1,9 @@
 <?php
+
+namespace Elastica\Facet;
+
+use Elastica\Query\AbstractQuery;
+
 /**
  * Query facet
  *
@@ -7,15 +12,15 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/query-facet.html
  */
-class Elastica_Facet_Query extends Elastica_Facet_Abstract
+class Query extends AbstractFacet
 {
     /**
      * Set the query for the facet.
      *
-     * @param  Elastica_Query_Abstract $query
-     * @return Elastica_Facet_Query
+     * @param  \Elastica\Query\AbstractQuery $query
+     * @return \Elastica\Facet\Query
      */
-    public function setQuery(Elastica_Query_Abstract $query)
+    public function setQuery(AbstractQuery $query)
     {
         return $this->_setFacetParam('query', $query->toArray());
     }

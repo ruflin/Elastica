@@ -1,20 +1,22 @@
 <?php
 
+namespace Elastica\Query;
+use Elastica\Query as BaseQuery;
+
 /**
  * Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.
  *
- * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Wu Yang <darkyoung@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html
  */
-class Elastica_Query_TopChildren extends Elastica_Query_Abstract
+class TopChildren extends AbstractQuery
 {
     /**
      * Construct topChildren query
      *
-     * @param string|Elastica_Query $query Query string or a Elastica_Query object
+     * @param string|\Elastica\Query $query Query string or a Elastica\Query object
      * @param string                $type  Parent document type
      */
     public function __construct($query, $type = null)
@@ -26,12 +28,12 @@ class Elastica_Query_TopChildren extends Elastica_Query_Abstract
     /**
      * Sets query object
      *
-     * @param  string|Elastica_Query|Elastica_Query_Abstract $query
-     * @return Elastica_Query_TopChildren
+     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @return \Elastica\Query\TopChildren
      */
     public function setQuery($query)
     {
-        $query = Elastica_Query::create($query);
+        $query = BaseQuery::create($query);
         $data = $query->toArray();
 
         return $this->setParam('query', $data['query']);
@@ -40,8 +42,8 @@ class Elastica_Query_TopChildren extends Elastica_Query_Abstract
     /**
      * Set type of the parent document
      *
-     * @param  string                     $type Parent document type
-     * @return Elastica_Query_TopChildren Current object
+     * @param  string                          $type Parent document type
+     * @return \Elastica\Query\TopChildren Current object
      */
     public function setType($type)
     {

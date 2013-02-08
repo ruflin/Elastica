@@ -1,4 +1,9 @@
 <?php
+
+namespace Elastica\Cluster;
+use Elastica\Client;
+use Elastica\Request;
+
 /**
  * Cluster settings
  *
@@ -7,21 +12,21 @@
  * @author   Nicolas Ruflin <spam@ruflin.com>
  * @link     http://www.elasticsearch.org/guide/reference/api/admin-cluster-update-settings.html
  */
-class Elastica_Cluster_Settings
+class Settings
 {
     /**
      * Client
      *
-     * @var Elastica_Client Client object
+     * @var \Elastica\Client Client object
      */
     protected $_client = null;
 
     /**
      * Creates a cluster object
      *
-     * @param Elastica_Client $client Connection client object
+     * @param \Elastica\Client $client Connection client object
      */
-    public function __construct(Elastica_Client $client)
+    public function __construct(Client $client)
     {
         $this->_client = $client;
     }
@@ -89,7 +94,7 @@ class Elastica_Cluster_Settings
      *
      * @param  string            $key
      * @param  string            $value
-     * @return Elastica_Response
+     * @return \Elastica\Response
      */
     public function setPersistent($key, $value)
     {
@@ -107,7 +112,7 @@ class Elastica_Cluster_Settings
      *
      * @param  string            $key
      * @param  string            $value
-     * @return Elastica_Response
+     * @return \Elastica\Response
      */
     public function setTransient($key, $value)
     {
@@ -127,7 +132,7 @@ class Elastica_Cluster_Settings
      *
      * @param  bool              $readOnly
      * @param  bool              $persistent
-     * @return Elastica_Response $response
+     * @return \Elastica\Response $response
      */
     public function setReadOnly($readOnly = true, $persistent = false)
     {
@@ -146,17 +151,17 @@ class Elastica_Cluster_Settings
      * Set settings for cluster
      *
      * @param  array             $settings Raw settings (including persistent or transient)
-     * @return Elastica_Response
+     * @return \Elastica\Response
      */
     public function set(array $settings)
     {
-        return $this->request($settings, Elastica_Request::PUT);
+        return $this->request($settings, Request::PUT);
     }
 
     /**
      * Get the client
      *
-     * @return Elastica_Client
+     * @return \Elastica\Client
      */
     public function getClient()
     {
@@ -167,10 +172,10 @@ class Elastica_Cluster_Settings
      * Sends settings request
      *
      * @param  array             $data   OPTIONAL Data array
-     * @param  string            $method OPTIONAL Transfer method (default = Elastica_Request::GET)
-     * @return Elastica_Response Response object
+     * @param  string            $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
+     * @return \Elastica\Response Response object
      */
-    public function request(array $data = array(), $method = Elastica_Request::GET)
+    public function request(array $data = array(), $method = Request::GET)
     {
         $path = '_cluster/settings';
 

@@ -1,27 +1,29 @@
 <?php
+
+namespace Elastica\Filter;
+
 /**
  * Type Filter
  *
- * @uses Elastica_Filter_Abstract
  * @category Xodoa
  * @package Elastica
  * @author James Wilson <jwilson556@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/type-filter.html
  */
-class Elastica_Filter_Type extends Elastica_Filter_Abstract
+class Type extends AbstractFilter
 {
     /**
-     * Type
+     * Type name
      *
-     * @var Elastica_Type Type object
+     * @var string
      */
     protected $_type = null;
 
     /**
      * Construct Type Filter
      *
-     * @param  string               $typeName Type name
-     * @return Elastica_Filter_Type
+     * @param  string                     $typeName Type name
+     * @return \Elastica\Filter\Type
      */
     public function __construct($typeName = null)
     {
@@ -33,8 +35,8 @@ class Elastica_Filter_Type extends Elastica_Filter_Abstract
     /**
      * Ads a field with arguments to the range query
      *
-     * @param  string               $typeName Type name
-     * @return Elastica_Filter_Type current object
+     * @param  string                     $typeName Type name
+     * @return \Elastica\Filter\Type current object
      */
     public function setType($typeName)
     {
@@ -46,7 +48,7 @@ class Elastica_Filter_Type extends Elastica_Filter_Abstract
     /**
      * Convert object to array
      *
-     * @see Elastica_Filter_Abstract::toArray()
+     * @see \Elastica\Filter\AbstractFilter::toArray()
      * @return array Filter array
      */
     public function toArray()

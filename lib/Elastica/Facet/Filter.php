@@ -1,4 +1,9 @@
 <?php
+
+namespace Elastica\Facet;
+
+use Elastica\Filter\AbstractFilter;
+
 /**
  * Filter facet
  *
@@ -7,15 +12,15 @@
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/filter-facet.html
  */
-class Elastica_Facet_Filter extends Elastica_Facet_Abstract
+class Filter extends AbstractFacet
 {
     /**
      * Set the filter for the facet.
      *
-     * @param  Elastica_Filter_Abstract $filter
-     * @return Elastica_Facet_Filter
+     * @param  \Elastica\Filter\AbstractFilter $filter
+     * @return \Elastica\Facet\Filter
      */
-    public function setFilter(Elastica_Filter_Abstract $filter)
+    public function setFilter(AbstractFilter $filter)
     {
         return $this->_setFacetParam('filter', $filter->toArray());
     }

@@ -1,4 +1,7 @@
 <?php
+
+namespace Elastica\Facet;
+
 /**
  * Implements the Date Histogram facet.
  *
@@ -8,13 +11,13 @@
  * @link http://www.elasticsearch.org/guide/reference/api/search/facets/date-histogram-facet.html
  * @link https://github.com/elasticsearch/elasticsearch/issues/591
  */
-class Elastica_Facet_DateHistogram extends Elastica_Facet_Histogram
+class DateHistogram extends Histogram
 {
     /**
      * Set the time_zone parameter
      *
-     * @param  string $tzOffset
-     * @return void
+     * @param  string                            $tzOffset
+     * @return \Elastica\Facet\DateHistogram
      */
     public function setTimezone($tzOffset)
     {
@@ -25,8 +28,8 @@ class Elastica_Facet_DateHistogram extends Elastica_Facet_Histogram
      * Creates the full facet definition, which includes the basic
      * facet definition of the parent.
      *
-     * @see Elastica_Facet_Abstract::toArray()
-     * @throws Elastica_Exception_Invalid When the right fields haven't been set.
+     * @see \Elastica\Facet\AbstractFacet::toArray()
+     * @throws \Elastica\Exception\InvalidException When the right fields haven't been set.
      * @return array
      */
     public function toArray()

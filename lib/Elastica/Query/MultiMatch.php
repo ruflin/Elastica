@@ -1,21 +1,23 @@
 <?php
+
+namespace Elastica\Query;
+
 /**
  * Multi Match
  *
- * @uses Elastica_Query_Abstract
  * @category Xodoa
  * @package Elastica
  * @author Rodolfo Adhenawer Campagnoli Moraes <adhenawer@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/multi-match-query.html
  */
-class Elastica_Query_MultiMatch extends Elastica_Query_Abstract
+class MultiMatch extends AbstractQuery
 {
 
     /**
      * Sets the query
      *
-     * @param  string                       $query Query
-     * @return Elastica_Query_QueryString Current object
+     * @param  string                         $query Query
+     * @return \Elastica\Query\MultiMatch Current object
      */
     public function setQuery($query = '')
     {
@@ -25,8 +27,8 @@ class Elastica_Query_MultiMatch extends Elastica_Query_Abstract
     /**
      * Sets Fields to be used in the query.
      *
-     * @param  array                     $fields Fields
-     * @return Elastica_Query_MultiMatch Current object
+     * @param  array                          $fields Fields
+     * @return \Elastica\Query\MultiMatch Current object
      */
     public function setFields($fields = array())
     {
@@ -38,8 +40,8 @@ class Elastica_Query_MultiMatch extends Elastica_Query_Abstract
      *
      * If not set, defaults to true.
      *
-     * @param boolean                        $useDisMax
-     * @return Elastica_Query_MultiMatch Current object
+     * @param  boolean                        $useDisMax
+     * @return \Elastica\Query\MultiMatch Current object
      */
     public function setUseDisMax($useDisMax = true)
     {
@@ -51,8 +53,8 @@ class Elastica_Query_MultiMatch extends Elastica_Query_Abstract
      *
      * If not set, defaults to 0.0.
      *
-     * @param float $                        tieBreaker
-     * @return Elastica_Query_MultiMatch Current object
+     * @param  float                          $tieBreaker
+     * @return \Elastica\Query\MultiMatch Current object
      */
     public function setTieBreaker($tieBreaker = 0.0)
     {
