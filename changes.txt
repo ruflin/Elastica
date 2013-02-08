@@ -3,6 +3,26 @@ CHANGES
 2013-02-08
 - Terms->setScript() Added, namespace Elastica/Facet
 
+2013-01-31
+- Removed deprecated method Type::getType()
+- Removed deprecated old constructor call in Filter\GeoDistance::__construct()
+- Removed deprecated method Filter\Script::setQuery()
+- Removed deprecated methods Query\QueryString::setTieBraker() and Query\QueryString::setQueryString()
+- Removed deprecated methods Query\Builder::minimumShouldMatch() and Query\Builder::tieBreaker()
+
+2013-01-25
+- Add get/set/has/remove methods to Document
+- Add magic methods __get/__set/__isset/__unset to Document
+- Document::add method became deprecated, use set instead
+- Populate document id created by elasticsearch on addDocument()/addDocuments() call if no document id was set
+- Populate updated fields in document on Client::updateDocument() call if fields options is set
+
+2013-01-24
+- Added serialization support. Objects can be added to elastica directly when a serializer callable is configured on \Elastica\Type
+
+2013-01-21
+- Added Thrift transport. Ir requires installing munkie/elasticsearch-thrift-php package and elasticsearch-tranport-thrift plugin should be installed in elastcisearch
+
 2013-01-13
 - Add version option to Elastica_Search::search
 - Remove compatibility for PHP 5.2
@@ -15,6 +35,8 @@ CHANGES
 - Removed all executable flags on files where not needed.
 - Update to elasticsearch 0.20.2
 - Refactored Elastica_Script and added it support in Elastica_Query_CustomFiltersScore, Elastica_Query_CustomScore and Elastica_Filter_Script
+- Refactored Elastica_Client::updateDocument() method to support partial document update. $data can be Elastic_Script, Elastic_Document or array.
+- Elastica_Type::updateDocument() now takes Elastica_Document instead of Elastica_Script (BC break). Script can be set to document to perform script update.
 
 2012-12-23
 - Elastica_Client config param "servers" to "connections" renamed. "headers" and "curl" are now a config param inside "connections"
@@ -307,3 +329,4 @@ CHANGES
 - getResponse in Elastica_Response renamed to getData. getResponse now deprecated
 - Index status objects added
 - getIndexName in Elastica_Index renamed to getName. getIndexName is deprecated
+
