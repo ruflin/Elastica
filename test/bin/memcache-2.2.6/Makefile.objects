@@ -1,0 +1,16 @@
+memcache.lo: /home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6/memcache.c
+	$(LIBTOOL) --mode=compile $(CC) -I/usr/include/php5 -I. -I/home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6/memcache.c -o memcache.lo 
+memcache_queue.lo: /home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6/memcache_queue.c
+	$(LIBTOOL) --mode=compile $(CC) -I/usr/include/php5 -I. -I/home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6/memcache_queue.c -o memcache_queue.lo 
+memcache_standard_hash.lo: /home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6/memcache_standard_hash.c
+	$(LIBTOOL) --mode=compile $(CC) -I/usr/include/php5 -I. -I/home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6/memcache_standard_hash.c -o memcache_standard_hash.lo 
+memcache_consistent_hash.lo: /home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6/memcache_consistent_hash.c
+	$(LIBTOOL) --mode=compile $(CC) -I/usr/include/php5 -I. -I/home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6/memcache_consistent_hash.c -o memcache_consistent_hash.lo 
+memcache_session.lo: /home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6/memcache_session.c
+	$(LIBTOOL) --mode=compile $(CC) -I/usr/include/php5 -I. -I/home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/armazenamento/desenvolvimento/projetos/elasticSearch/Elastica/test/bin/memcache-2.2.6/memcache_session.c -o memcache_session.lo 
+$(phplibdir)/memcache.la: ./memcache.la
+	$(LIBTOOL) --mode=install cp ./memcache.la $(phplibdir)
+
+./memcache.la: $(shared_objects_memcache) $(MEMCACHE_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_memcache) $(MEMCACHE_SHARED_LIBADD)
+
