@@ -3,6 +3,8 @@
 namespace Elastica\Test;
 
 use Elastica\Util;
+use Elastica\Request;
+use Elastica\Connection;
 use Elastica\Test\Base as BaseTest;
 
 class UtilTest extends BaseTest
@@ -51,5 +53,25 @@ class UtilTest extends BaseTest
 
         $string = 'HowAreYouToday';
         $this->assertEquals('how_are_you_today', Util::toSnakeCase($string));
+    }
+
+    public function testConvertRequestToCurlCommand()
+    {
+        $path = 'test';
+        $method = Request::POST;
+        $query = array('no' => 'params');
+        $data = array('key' => 'value');
+
+        $connection = new Connection();
+        $connection->setHost('localhost');
+        $connection->setPort('9200');
+
+        $request = new Request($path, $method, $data, $query, $connection);
+
+        $curlCommand = Util::convertRequestToCurlCommand($request);
+
+        $expected = 'curl -XPOST \'http://localhost:9200/test?no=params\' -d \'{"key":"value"}\'';
+        $this->assertEquals($expected, $curlCommand);
+
     }
 }

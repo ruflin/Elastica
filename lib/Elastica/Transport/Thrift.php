@@ -159,7 +159,7 @@ class Thrift extends AbstractTransport
         }
 
         if ($response->hasError()) {
-            throw new ResponseException($response);
+            throw new ResponseException($request, $response);
         }
 
         return $response;

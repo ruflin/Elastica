@@ -570,15 +570,6 @@ class Builder extends AbstractQuery
     }
 
     /**
-     * @see minimumNumberShouldMatch()
-     * @deprecated
-     */
-    public function minimumShouldMatch($minimum)
-    {
-        return $this->minimumNumberShouldMatch($minimum);
-    }
-
-    /**
      * The clause (query) must appear in matching documents.
      *
      * @return \Elastica\Query\Builder
@@ -915,15 +906,6 @@ class Builder extends AbstractQuery
     public function tieBreakerMultiplier($multiplier)
     {
         return $this->field('tie_breaker_multiplier', (float) $multiplier);
-    }
-
-    /**
-     * @see tieBreakerMultiplier
-     * @deprecated
-     */
-    public function tieBreaker($multiplier)
-    {
-        return $this->tieBreakerMultiplier($multiplier);
     }
 
     /**

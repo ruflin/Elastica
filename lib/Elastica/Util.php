@@ -137,4 +137,30 @@ class Util
 
         return $name;
     }
+
+    /**
+     * Converts Request to Curl console command
+     *
+     * @param Request $request
+     * @return string
+     */
+    public static function convertRequestToCurlCommand(Request $request)
+    {
+        $message = 'curl -X' . strtoupper($request->getMethod()) . ' ';
+        $message .= '\'http://' . $request->getConnection()->getHost() . ':' . $request->getConnection()->getPort() . '/';
+        $message .= $request->getPath();
+
+        $query = $request->getQuery();
+        if (!empty($query)) {
+            $message .= '?' . http_build_query($query);
+        }
+
+        $message .= '\'';
+
+        $data = $request->getData();
+        if (!empty($data)) {
+            $message .= ' -d \'' . json_encode($data) . '\'';
+        }
+        return $message;
+    }
 }

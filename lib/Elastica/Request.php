@@ -18,34 +18,6 @@ class Request extends Param
     const DELETE = 'DELETE';
 
     /**
-     * Request path
-     *
-     * @var string Request path
-     */
-    protected $_path;
-
-    /**
-     * Request method (use const's)
-     *
-     * @var string Request method (use const's)
-     */
-    protected $_method;
-
-    /**
-     * Data array
-     *
-     * @var array Data array
-     */
-    protected $_data;
-
-    /**
-     * Query params
-     *
-     * @var array Query params
-     */
-    protected $_query;
-
-    /**
      * @var \Elastica\Connection
      */
     protected $_connection;
@@ -191,5 +163,35 @@ class Request extends Param
 
         // Refactor: Not full toArray needed in exec?
         return $transport->exec($this, $this->getConnection()->toArray());
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $data = $this->getParams();
+        if ($this->_connection) {
+            $data['connection'] = $this->_connection->getParams();
+        }
+        return $data;
+    }
+
+    /**
+     * Converts request to curl request format
+     *
+     * @return string
+     */
+    public function toString()
+    {
+        return json_encode($this->toArray());
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->toString();
     }
 }

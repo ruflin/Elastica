@@ -577,4 +577,137 @@ class ClientTest extends BaseTest
         $this->assertArrayHasKey('field2', $data);
         $this->assertEquals('value2', $data['field2']);
     }
+
+    public function testLastRequestResponse()
+    {
+        $client = new Client(array('log' => '/tmp/php.log'));
+        $response = $client->request('_status');
+
+        $this->assertInstanceOf('Elastica\Response', $response);
+
+        $lastRequest = $client->getLastRequest();
+
+        $this->assertInstanceOf('Elastica\Request', $lastRequest);
+        $this->assertEquals('_status', $lastRequest->getPath());
+
+        $lastResponse = $client->getLastResponse();
+        $this->assertInstanceOf('Elastica\Response', $lastResponse);
+        $this->assertSame($response, $lastResponse);
+    }
+    
+    public function testUpdateDocumentPopulateFields()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
+
+        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4'));
+        $newDocument->setAutoPopulate();
+        $type->addDocument($newDocument);
+
+        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
+        $script->setParam('count', 5);
+        $newDocument->setScript($script);
+
+        $client->updateDocument(
+            1,
+            $newDocument,
+            $index->getName(),
+            $type->getName(),
+            array('fields' => '_source')
+        );
+
+        $data = $newDocument->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals(15, $data['field2']);
+        $this->assertArrayHasKey('field4', $data);
+        $this->assertEquals('changed', $data['field4']);
+        $this->assertArrayNotHasKey('field3', $data);
+
+        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field4"); ctx._source.field1 = field1;');
+        $script->setParam('count', 5);
+        $script->setParam('field1', 'updated');
+        $newDocument->setScript($script);
+
+        $client->updateDocument(
+            1,
+            $newDocument,
+            $index->getName(),
+            $type->getName(),
+            array('fields' => 'field2,field4')
+        );
+
+        $data = $newDocument->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1'], 'Field1 should not be updated, because it is not in fields list');
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals(20, $data['field2'], 'Field2 should be 20 after incrementing by 5');
+        $this->assertArrayNotHasKey('field3', $data, 'Field3 should be removed already');
+        $this->assertArrayNotHasKey('field4', $data, 'Field3 should be removed');
+
+        $document = $type->getDocument(1);
+
+        $data = $document->getData();
+
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('updated', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals(20, $data['field2']);
+        $this->assertArrayNotHasKey('field3', $data);
+        $this->assertArrayNotHasKey('field4', $data);
+    }
+
+    public function testAddDocumentsWithoutIds()
+    {
+        $docs = array();
+        for ($i = 0; $i < 10; $i++) {
+            $docs[] = new Document(null, array('pos' => $i));
+        }
+
+        foreach ($docs as $doc) {
+            $this->assertFalse($doc->hasId());
+        }
+
+        $index = $this->_createIndex();
+
+        $client = $index->getClient();
+        $client->setConfigValue('document', array('autoPopulate' => true));
+
+        $type = $index->getType('pos');
+        $type->addDocuments($docs);
+
+        foreach ($docs as $doc) {
+            $this->assertTrue($doc->hasId());
+            $this->assertTrue($doc->hasVersion());
+            $this->assertEquals(1, $doc->getVersion());
+        }
+    }
+
+    public function testConfigValue()
+    {
+        $config = array(
+            'level1' => array(
+                'level2' => array(
+                    'level3' => 'value3',
+                ),
+                'level21' => 'value21'
+            ),
+            'level11' => 'value11'
+        );
+        $client = new Client($config);
+
+        $this->assertNull($client->getConfigValue('level12'));
+        $this->assertFalse($client->getConfigValue('level12', false));
+        $this->assertEquals(10, $client->getConfigValue('level12', 10));
+
+        $this->assertEquals('value11', $client->getConfigValue('level11'));
+        $this->assertNotNull($client->getConfigValue('level11'));
+        $this->assertNotEquals(false, $client->getConfigValue('level11', false));
+        $this->assertNotEquals(10, $client->getConfigValue('level11', 10));
+
+        $this->assertEquals('value3', $client->getConfigValue(array('level1', 'level2', 'level3')));
+        $this->assertInternalType('array', $client->getConfigValue(array('level1', 'level2')));
+    }
 }
