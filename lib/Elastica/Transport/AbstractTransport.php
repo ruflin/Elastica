@@ -37,13 +37,6 @@ abstract class AbstractTransport
     protected $_data;
 
     /**
-     * Config
-     *
-     * @var array config
-     */
-    protected $_config;
-
-    /**
      * @var \Elastica\Connection
      */
     protected $_connection;
