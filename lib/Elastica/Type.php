@@ -333,6 +333,8 @@ class Type implements SearchableInterface
             throw new \InvalidArgumentException();
         }
 
+        $id = urlencode($id);
+
         $response = $this->request($id, Request::DELETE, array(), $options);
 
         $responseData = $response->getData();
