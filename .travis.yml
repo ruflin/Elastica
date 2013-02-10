@@ -6,12 +6,13 @@ php:
 
 env:
   global:
-    - ES_VER=0.20.2
+    - ES_VER=0.20.4
     - ES_MAPPER_ATTACHMENTS_VER=1.6.0
     - ES_TRANSPORT_THRIFT_VER=1.4.0
 
 before_script:
   - composer --dev install
+  - composer.phar self-update
   - ./test/bin/install_php_memcache.sh
   - ./test/bin/run_elasticsearch.sh
 
