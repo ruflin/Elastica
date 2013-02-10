@@ -11,8 +11,8 @@ env:
     - ES_TRANSPORT_THRIFT_VER=1.4.0
 
 before_script:
+  - composer self-update
   - composer --dev install
-  - composer.phar self-update
   - ./test/bin/install_php_memcache.sh
   - ./test/bin/run_elasticsearch.sh
 
