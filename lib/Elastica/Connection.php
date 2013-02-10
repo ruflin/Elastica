@@ -86,7 +86,7 @@ class Connection extends Param
     }
 
     /**
-     * @return string
+     * @return string|array
      */
     public function getTransport()
     {
@@ -94,7 +94,7 @@ class Connection extends Param
     }
 
     /**
-     * @param  string              $transport
+     * @param  string|array        $transport
      * @return \Elastica\Connection
      */
     public function setTransport($transport)
@@ -163,7 +163,21 @@ class Connection extends Param
      */
     public function getTransportObject()
     {
-        $className = 'Elastica\\Transport\\' . $this->getTransport();
+        $transport = $this->getTransport();
+
+        if (is_array($transport) && isset($transport['type'])) {
+            $transportOptions = $transport;
+            unset($transportOptions['type']);
+
+            // Set remaining options
+            foreach ($transportOptions as $key => $value) {
+                $this->setParam($key, $value);
+            }
+
+            $transport = $transport['type'];
+        }
+
+        $className = 'Elastica\\Transport\\' . $transport;
         if (!class_exists($className)) {
             throw new InvalidException('Invalid transport');
         }
