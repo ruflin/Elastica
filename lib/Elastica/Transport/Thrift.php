@@ -38,7 +38,7 @@ class Thrift extends AbstractTransport
      * @param \Elastica\Connection $connection Connection object
      * @throws \Elastica\Exception\RuntimeException
      */
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection = null)
     {
         parent::__construct($connection);
         if (!class_exists('Elasticsearch\\RestClient')) {
