@@ -4,6 +4,7 @@ namespace Elastica\Test\Transport;
 
 use Elastica\Client;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Exception\ResponseException;
 
 class HttpTest extends BaseTest
 {
@@ -48,9 +49,13 @@ class HttpTest extends BaseTest
     {
         $client = new Client($config);
 
-        $index = $client->getIndex('elastica_test1');
-        $index->create(array(), true);
-        $index->refresh();
+        $index = $client->getIndex('dynamic_http_method_test');
+
+        try {
+            $index->create();
+        } catch (ResponseException $e) {
+            // ignore
+        }
 
         $resultSet = $index->search('test');
 

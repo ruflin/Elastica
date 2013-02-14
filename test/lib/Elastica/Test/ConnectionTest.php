@@ -78,10 +78,8 @@ class ConnectionTest extends BaseTest
 
     public function testGetConfigWithArrayUsedForTransport()
     {
-        $connection = new Connection(array('transport' => array('type' => 'Http', 'postWithRequestBody' => true)));
+        $connection = new Connection(array('transport' => array('type' => 'Http')));
         $this->assertInstanceOf('Elastica\Transport\Http', $connection->getTransportObject());
-        $this->assertTrue($connection->getParam('postWithRequestBody'));
-        $this->assertArrayNotHasKey('type', $connection->getParams());
     }
 
     /**
