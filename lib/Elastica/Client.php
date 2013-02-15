@@ -604,7 +604,7 @@ class Client
 
             // Calls callback with connection as param to make it possible to persist invalid connections
             if ($this->_callback) {
-                call_user_func($this->_callback, $connection);
+                call_user_func($this->_callback, $connection, $e);
             }
 
             return $this->request($path, $method, $data, $query);

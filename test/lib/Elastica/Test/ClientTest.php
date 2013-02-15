@@ -420,8 +420,9 @@ class ClientTest extends BaseTest
         $object = $this;
 
         // Callback function which verifies that disabled connection objects are returned
-        $callback = function($connection) use (&$object, &$count) {
+        $callback = function($connection, $exception) use (&$object, &$count) {
             $object->assertInstanceOf('Elastica\Connection', $connection);
+            $object->assertInstanceOf('Elastica\Exception\ConnectionException', $exception);
             $object->assertFalse($connection->isEnabled());
             $count++;
         };
@@ -594,7 +595,7 @@ class ClientTest extends BaseTest
         $this->assertInstanceOf('Elastica\Response', $lastResponse);
         $this->assertSame($response, $lastResponse);
     }
-    
+
     public function testUpdateDocumentPopulateFields()
     {
         $index = $this->_createIndex();
