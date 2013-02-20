@@ -1,5 +1,8 @@
 CHANGES
 
+2013-02-20
+- Release candidate 0.20.5.0.RC1 
+
 2013-02-14
 - Added factory for transports that is used by the Connection class
 - The transport instances now has support for parameters that can be injected by specifying an array as a transport when creating the Elastica client
