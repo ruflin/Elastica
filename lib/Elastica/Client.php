@@ -162,8 +162,9 @@ class Client
     }
 
     /**
-     * @param string|array $key config key or path to config key
-     * @param mixed $default default value will be returned if key was not found
+     * @param string|array $keys config key or path to config key
+     * @param mixed        $default default value will be returned if key was not found
+     * @return mixed
      */
     public function getConfigValue($keys, $default = null)
     {
@@ -582,6 +583,7 @@ class Client
      * @param  string            $method Rest method to use (GET, POST, DELETE, PUT)
      * @param  array             $data   OPTIONAL Arguments as array
      * @param  array             $query  OPTIONAL Query params
+     * @throws Exception\ClientException
      * @return \Elastica\Response Response object
      */
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
