@@ -14,7 +14,7 @@ use Elastica\ResultSet as BaseResultSet;
  * @package Elastica
  * @author munkie
  */
-class ResultSet implements \Iterator, \Countable
+class ResultSet implements \IteratorAggregate, \Countable
 {
     /**
      * Result Sets
@@ -22,13 +22,6 @@ class ResultSet implements \Iterator, \Countable
      * @var array|\Elastica\ResultSet[] Result Sets
      */
     protected $_resultSets = array();
-
-    /**
-     * Current position
-     *
-     * @var int Current position
-     */
-    protected $_position = 0;
 
     /**
      * Response
@@ -45,7 +38,6 @@ class ResultSet implements \Iterator, \Countable
      */
     public function __construct(Response $response, array $searches)
     {
-        $this->rewind();
         $this->_init($response, $searches);
     }
 
@@ -112,47 +104,11 @@ class ResultSet implements \Iterator, \Countable
     }
 
     /**
-     * @return bool|\Elastica\ResultSet
+     * @return \ArrayIterator
      */
-    public function current()
+    public function getIterator()
     {
-        if ($this->valid()) {
-            return $this->_resultSets[$this->key()];
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * @return void
-     */
-    public function next()
-    {
-        $this->_position++;
-    }
-
-    /**
-     * @return int
-     */
-    public function key()
-    {
-        return $this->_position;
-    }
-
-    /**
-     * @return bool
-     */
-    public function valid()
-    {
-        return isset($this->_resultSets[$this->key()]);
-    }
-
-    /**
-     * @return void
-     */
-    public function rewind()
-    {
-        $this->_position = 0;
+        return new \ArrayIterator($this->_resultSets);
     }
 
     /**

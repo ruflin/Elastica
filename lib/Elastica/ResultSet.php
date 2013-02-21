@@ -12,7 +12,7 @@ namespace Elastica;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class ResultSet implements \Iterator, \Countable
+class ResultSet implements \IteratorAggregate, \Countable
 {
     /**
      * Results
@@ -20,13 +20,6 @@ class ResultSet implements \Iterator, \Countable
      * @var array Results
      */
     protected $_results = array();
-
-    /**
-     * Current position
-     *
-     * @var int Current position
-     */
-    protected $_position = 0;
 
     /**
      * Response
@@ -60,7 +53,6 @@ class ResultSet implements \Iterator, \Countable
      */
     public function __construct(Response $response, Query $query)
     {
-        $this->rewind();
         $this->_init($response);
         $this->_query = $query;
     }
@@ -166,54 +158,12 @@ class ResultSet implements \Iterator, \Countable
     }
 
     /**
-     * Returns the current object of the set
+     * Returns an iterator for the results.
      *
-     * @return \Elastica\Result|bool Set object or false if not valid (no more entries)
+     * @return \ArrayIterator
      */
-    public function current()
+    public function getIterator()
     {
-        if ($this->valid()) {
-            return $this->_results[$this->key()];
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Sets pointer (current) to the next item of the set
-     */
-    public function next()
-    {
-        $this->_position++;
-
-        return $this->current();
-    }
-
-    /**
-     * Returns the position of the current entry
-     *
-     * @return int Current position
-     */
-    public function key()
-    {
-        return $this->_position;
-    }
-
-    /**
-     * Check if an object exists at the current position
-     *
-     * @return bool True if object exists
-     */
-    public function valid()
-    {
-        return isset($this->_results[$this->key()]);
-    }
-
-    /**
-     * Resets position to 0, restarts iterator
-     */
-    public function rewind()
-    {
-        $this->_position = 0;
+        return new \ArrayIterator($this->_results);
     }
 }
