@@ -586,28 +586,36 @@ class Client
      */
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
     {
-        $connection = $this->getConnection();
-        try {
-            $request = new Request($path, $method, $data, $query, $connection);
+        $connectionExceptions = array();
+        $request = new Request($path, $method, $data, $query);
+        while (true) {
+            try {
+                $connection = $this->getConnection();
 
-            $this->_log($request);
+                $request->setConnection($connection);
 
-            $response = $request->send();
+                $this->_log($request);
 
-            $this->_lastRequest = $request;
-            $this->_lastResponse = $response;
+                $response = $request->send();
 
-            return $response;
+                $this->_lastRequest = $request;
+                $this->_lastResponse = $response;
 
-        } catch (ConnectionException $e) {
-            $connection->setEnabled(false);
+                return $response;
 
-            // Calls callback with connection as param to make it possible to persist invalid connections
-            if ($this->_callback) {
-                call_user_func($this->_callback, $connection, $e);
+            } catch (ConnectionException $connectionException) {
+                $connection->setEnabled(false);
+
+                // Calls callback with connection as param to make it possible to persist invalid connections
+                if ($this->_callback) {
+                    call_user_func($this->_callback, $connection, $connectionException);
+                }
+
+                $connectionExceptions[] = $connectionException;
+
+            } catch (ClientException $clientException) {
+                throw new ClientException($clientException->getMessage(), $connectionExceptions);
             }
-
-            return $this->request($path, $method, $data, $query);
         }
     }
 
