@@ -3,6 +3,7 @@
 namespace Elastica\Facet;
 
 use Elastica\Exception\InvalidException;
+use Elastica\Script;
 
 /**
  * Implements the terms facet.
@@ -38,9 +39,9 @@ class Terms extends AbstractFacet
      * Sets the script for the term.
      *
      * @param  string                   $script The script for the term.
-     * @return Elastica_Facet_Terms
+     * @return \Elastica\Facet\Terms
      */
-     public function setScript($script)
+    public function setScript($script)
     {
         $script = Script::create($script);
         foreach ($script->toArray() as $param => $value) {

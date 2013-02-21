@@ -2,6 +2,7 @@
 
 namespace Elastica;
 use Elastica\Exception\InvalidException;
+use Elastica\Transport\AbstractTransport;
 
 /**
  * Elastica connection instance to an elasticasearch node
@@ -86,7 +87,7 @@ class Connection extends Param
     }
 
     /**
-     * @return string
+     * @return string|array
      */
     public function getTransport()
     {
@@ -94,7 +95,7 @@ class Connection extends Param
     }
 
     /**
-     * @param  string              $transport
+     * @param  string|array        $transport
      * @return \Elastica\Connection
      */
     public function setTransport($transport)
@@ -163,12 +164,9 @@ class Connection extends Param
      */
     public function getTransportObject()
     {
-        $className = 'Elastica\\Transport\\' . $this->getTransport();
-        if (!class_exists($className)) {
-            throw new InvalidException('Invalid transport');
-        }
+        $transport = $this->getTransport();
 
-        return new $className($this);
+        return AbstractTransport::create($transport, $this);
     }
 
     /**

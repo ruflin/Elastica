@@ -76,6 +76,22 @@ class ConnectionTest extends BaseTest
         $this->assertEquals($url, $connection->getConfig('url'));
     }
 
+    public function testGetConfigWithArrayUsedForTransport()
+    {
+        $connection = new Connection(array('transport' => array('type' => 'Http')));
+        $this->assertInstanceOf('Elastica\Transport\Http', $connection->getTransportObject());
+    }
+
+    /**
+     * @expectedException Elastica\Exception\InvalidException
+     * @expectedExceptionMessage Invalid transport
+     */
+    public function testGetInvalidConfigWithArrayUsedForTransport()
+    {
+        $connection = new Connection(array('transport' => array('type' => 'invalidtransport')));
+        $connection->getTransportObject();
+    }
+
     /**
      * @expectedException \Elastica\Exception\InvalidException
      */
