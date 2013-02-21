@@ -452,7 +452,10 @@ class Client
     {
         $enabledConnection = null;
 
-        // TODO: Choose one after other if roundRobin -> should we shuffle the array?
+        // TODO: Choose one after other if roundRobin -> should we shuffle the array? YES!
+        if ($this->getConfig('roundRobin')) {
+            shuffle($this->_connections);
+        }
         foreach ($this->_connections as $connection) {
             if ($connection->isEnabled()) {
                 $enabledConnection = $connection;
