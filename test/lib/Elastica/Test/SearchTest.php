@@ -298,13 +298,15 @@ class SearchTest extends BaseTest
         $search->addIndex($index);
 
         // Version param should not be inside by default
-        $results = $search->search(new MatchAll());
-        $hit = $results->current();
+        $resultSet = $search->search(new MatchAll());
+        $results = $resultSet->getIterator();
+        $hit = current($results);
         $this->assertEquals(array(), $hit->getParam('_version'));
 
         // Added version param to result
-        $results = $search->search(new MatchAll(), array('version' => true));
-        $hit = $results->current();
+        $resultSet = $search->search(new MatchAll(), array('version' => true));
+        $results = $resultSet->getIterator();
+        $hit = current($results);
         $this->assertEquals(1, $hit->getParam('_version'));
     }
 
@@ -371,10 +373,11 @@ class SearchTest extends BaseTest
         $search->setQuery($query);
 
         $resultSet = $search->search();
+        $results = $resultSet->getIterator();
 
         $this->assertCount(4, $resultSet);
         $this->assertEquals(4, $resultSet->getTotalHits());
-        $source = $resultSet->current()->getSource();
+        $source = current($results)->getSource();
         $this->assertEquals('bunny', $source['username']);
     }
 }

@@ -42,10 +42,11 @@ class TypeTest extends BaseTest
         $index->refresh();
 
         $resultSet = $type->search('rolf');
+        $results = $resultSet->getIterator();
         $this->assertEquals(1, $resultSet->count());
 
         // Test if source is returned
-        $result = $resultSet->current();
+        $result = current($results);
         $this->assertEquals(3, $result->getId());
         $data = $result->getData();
         $this->assertEquals('rolf', $data['username']);
@@ -91,11 +92,12 @@ class TypeTest extends BaseTest
         $index->refresh();
 
         $resultSet = $type->search('rolf');
+        $results = $resultSet->getIterator();
 
         $this->assertEquals(1, $resultSet->count());
 
         // Tests if no source is in response except id
-        $result = $resultSet->current();
+        $result = current($results);
         $this->assertEquals(3, $result->getId());
         $this->assertEmpty($result->getData());
     }
@@ -117,8 +119,9 @@ class TypeTest extends BaseTest
 
         // sanity check for rolf
         $resultSet = $type->search('rolf');
+        $results = $resultSet->getIterator();
         $this->assertEquals(1, $resultSet->count());
-        $data = $resultSet->current()->getData();
+        $data = current($results)->getData();
         $this->assertEquals('rolf', $data['username']);
 
         // delete rolf
@@ -519,7 +522,8 @@ class TypeTest extends BaseTest
         $search = new Search($index->getClient());
         $search->addIndex($index);
         $resultSet = $search->search(new MatchAll());
-        $this->assertEquals($hashId, $resultSet->current()->getId());
+        $results = $resultSet->getIterator();
+        $this->assertEquals($hashId, current($results)->getId());
 
         $doc = $type->getDocument($hashId);
         $this->assertEquals($hashId, $doc->getId());
@@ -577,10 +581,11 @@ class TypeTest extends BaseTest
         $index->refresh();
 
         $resultSet = $type->search('hans');
+        $results = $resultSet->getIterator();
         $this->assertEquals(1, $resultSet->count());
 
         // Test if source is returned
-        $result = $resultSet->current();
+        $result = current($results);
         $data = $result->getData();
         $this->assertEquals('hans', $data['username']);
     }

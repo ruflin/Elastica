@@ -26,10 +26,11 @@ class ResultTest extends BaseTest
         $index->refresh();
 
         $resultSet = $type->search('hans');
+        $results = $resultSet->getIterator();
 
         $this->assertEquals(1, $resultSet->count());
 
-        $result = $resultSet->current();
+        $result = current($results);
 
         $this->assertInstanceOf('Elastica\Result', $result);
         $this->assertEquals($index->getName(), $result->getIndex());
@@ -63,10 +64,11 @@ class ResultTest extends BaseTest
         $index->refresh();
 
         $resultSet = $type->search('hans');
+        $results = $resultSet->getIterator();
 
         $this->assertEquals(1, $resultSet->count());
 
-        $result = $resultSet->current();
+        $result = current($results);
 
         $this->assertEquals(array(), $result->getSource());
         $this->assertInstanceOf('Elastica\Result', $result);

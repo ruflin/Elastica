@@ -47,7 +47,8 @@ class MappingTest extends BaseTest
         $query->setFields(array('*'));
 
         $resultSet = $type->search($query);
-        $result = $resultSet->current();
+        $results = $resultSet->getIterator();
+        $result = current($results);
         $fields = $result->getFields();
 
         $this->assertEquals($firstname, $fields['firstname']);
