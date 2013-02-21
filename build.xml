@@ -8,7 +8,7 @@
 			<sequential>
 				<antcall target="pdepend"/>
 				<antcall target="phpmd-ci"/>
-                <antcall target="phpcb"/>
+    			<antcall target="phpcb"/>
 			</sequential>
 			<antcall target="phpcpd"/>
 			<antcall target="phpcs-ci"/>
@@ -22,7 +22,7 @@
 		<delete dir="${basedir}/build/coverage"/>
 		<delete dir="${basedir}/build/logs"/>
 		<delete dir="${basedir}/build/pdepend"/>
-        <delete dir="${basedir}/build/docs"/>
+		<delete dir="${basedir}/build/docs"/>
 		<delete file="${basedir}/cache.properties"/>
 	</target>
 
@@ -31,16 +31,16 @@
 		<mkdir dir="${basedir}/build/code-browser"/>
 		<mkdir dir="${basedir}/build/coverage"/>
 		<mkdir dir="${basedir}/build/logs"/>
-        <mkdir dir="${basedir}/build/docs"/>
+		<mkdir dir="${basedir}/build/docs"/>
 		<mkdir dir="${basedir}/build/pdepend"/>
 	</target>
 
-    <target name="composer" depends="prepare" description="Install dependencies">
-        <exec executable="composer">
-            <arg value="--dev"></arg>
-            <arg value="install"></arg>
-        </exec>
-    </target>
+	<target name="composer" depends="prepare" description="Install dependencies">
+		<exec executable="composer">
+			<arg value="--dev"></arg>
+			<arg value="install"></arg>
+		</exec>
+	</target>
 
 	<target name="lint">
 		<apply executable="php" failonerror="true">
@@ -107,20 +107,20 @@
 	<!-- Generate API documentation -->
 	<target name="phpdoc">
 		<exec executable="phpdoc">
-            <arg line="run" />
-            <arg line="-d lib/" />
-            <arg line="-t build/docs" />
+			<arg line="run" />
+			<arg line="-d lib/" />
+			<arg line="-t build/docs" />
 		</exec>
 	</target>
 
-    <target name="phpdoc-ci">
-        <exec executable="phpdoc">
-            <arg line="run" />
-            <arg line="-d lib/" />
-            <arg line="-t build/docs" />
-            <arg line="-q" />
-        </exec>
-    </target>
+	<target name="phpdoc-ci">
+		<exec executable="phpdoc">
+			<arg line="run" />
+			<arg line="-d lib/" />
+			<arg line="-t build/docs" />
+			<arg line="-q" />
+		</exec>
+	</target>
 
 	<target name="phpcb">
 		<exec executable="phpcb">
