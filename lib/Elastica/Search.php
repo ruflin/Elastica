@@ -20,6 +20,10 @@ class Search implements SearchableInterface
     const OPTION_ROUTING = 'routing';
     const OPTION_PREFERENCE = 'preference';
     const OPTION_VERSION = 'version';
+    const OPTION_TIMEOUT = 'timeout';
+    const OPTION_FROM = 'from';
+    const OPTION_SIZE = 'size';
+    const OPTION_LIMIT = 'limit';
 
     /*
      * Search types
@@ -257,6 +261,10 @@ class Search implements SearchableInterface
             case self::OPTION_ROUTING:
             case self::OPTION_PREFERENCE:
             case self::OPTION_VERSION:
+            case self::OPTION_TIMEOUT;
+            case self::OPTION_FROM;
+            case self::OPTION_SIZE;
+            case self::OPTION_LIMIT;
                 return true;
         }
 
