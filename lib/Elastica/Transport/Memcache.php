@@ -74,4 +74,14 @@ class Memcache extends AbstractTransport
 
         return $response;
     }
+
+
+    /**
+     * @return string
+     */
+    public function getDsn()
+    {
+        $connection = $this->getConnection();
+        return 'memcache://' . $connection->getHost() . ':' . $connection->getPort();
+    }
 }

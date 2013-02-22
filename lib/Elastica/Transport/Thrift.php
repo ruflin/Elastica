@@ -164,4 +164,12 @@ class Thrift extends AbstractTransport
 
         return $response;
     }
+
+    /**
+     * @return string
+     */
+    public function getDsn()
+    {
+        return 'thrift://' . $this->getConnection()->getHost() . ':' . $this->getConnection()->getPort();
+    }
 }

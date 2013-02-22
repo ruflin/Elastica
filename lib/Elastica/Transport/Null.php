@@ -40,4 +40,12 @@ class Null extends AbstractTransport
 
          return new Response(json_encode($response));
     }
+
+    /**
+     * @return string
+     */
+    public function getDsn()
+    {
+        return 'null://';
+    }
 }
