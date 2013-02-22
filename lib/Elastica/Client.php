@@ -589,12 +589,12 @@ class Client
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
     {
         $connectionExceptions = array();
-        $request = new Request($path, $method, $data, $query);
+
         while (true) {
             try {
                 $connection = $this->getConnection();
 
-                $request->setConnection($connection);
+                $request = new Request($path, $method, $data, $query, $connection);
 
                 $this->_log($request);
 
