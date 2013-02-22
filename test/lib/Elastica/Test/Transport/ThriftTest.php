@@ -8,6 +8,7 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Transport\Thrift;
 
 class ThriftTest extends BaseTest
 {
@@ -89,6 +90,19 @@ class ThriftTest extends BaseTest
 
         $index = new Index($client, 'missing_index');
         $index->getStatus();
+    }
+
+    public function testDsn()
+    {
+        $config = array(
+            'host' => 'thrift.es.host',
+            'port' => 9500,
+        );
+        $connection = new Connection($config);
+        $transport = new Thrift($connection);
+
+        $dsn = $transport->getDsn();
+        $this->assertEquals('thrift://thrift.es.host:9500', $dsn);
     }
 
     public function configProvider()
