@@ -260,9 +260,9 @@ class Search implements SearchableInterface
             case self::OPTION_ROUTING:
             case self::OPTION_PREFERENCE:
             case self::OPTION_VERSION:
-            case self::OPTION_TIMEOUT;
-            case self::OPTION_FROM;
-            case self::OPTION_SIZE;
+            case self::OPTION_TIMEOUT:
+            case self::OPTION_FROM:
+            case self::OPTION_SIZE:
                 return true;
         }
 
