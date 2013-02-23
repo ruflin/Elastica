@@ -81,7 +81,7 @@ class ResultSet implements \Iterator, \Countable
         $result = $response->getData();
         $this->_totalHits = isset($result['hits']['total']) ? $result['hits']['total'] : 0;
         $this->_took = isset($result['took']) ? $result['took'] : 0;
-        $this->_timed_out = isset($result['timed_out']) ? $result['timed_out'] : false;
+        $this->_timed_out = !empty($result['timed_out']);
         if (isset($result['hits']['hits'])) {
             foreach ($result['hits']['hits'] as $hit) {
                 $this->_results[] = new Result($hit);
