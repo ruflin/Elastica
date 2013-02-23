@@ -180,17 +180,6 @@ class Query extends Param
     }
 
     /**
-     * Alias for setLimit
-     *
-     * @param  int            $limit OPTIONAL Maximal number of results for query (default = 10)
-     * @return \Elastica\Query Query object
-     */
-    public function setSize($limit = 10)
-    {
-        return $this->setLimit($limit);
-    }
-
-    /**
      * Sets maximum number of results for this query
      *
      * Setting the limit to 0, means no limit
@@ -198,9 +187,21 @@ class Query extends Param
      * @param  int            $limit OPTIONAL Maximal number of results for query (default = 10)
      * @return \Elastica\Query Query object
      */
+    public function setSize($size = 10)
+    {
+        return $this->setParam('size', $size);
+        
+    }
+
+    /**
+     * Alias for setSize
+     *
+     * @param  int            $limit OPTIONAL Maximal number of results for query (default = 10)
+     * @return \Elastica\Query Query object
+     */
     public function setLimit($limit = 10)
     {
-        return $this->setParam('size', $limit);
+        return $this->setSize($limit);
     }
 
     /**
