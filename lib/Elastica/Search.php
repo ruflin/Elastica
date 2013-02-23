@@ -23,7 +23,6 @@ class Search implements SearchableInterface
     const OPTION_TIMEOUT = 'timeout';
     const OPTION_FROM = 'from';
     const OPTION_SIZE = 'size';
-    const OPTION_LIMIT = 'limit';
 
     /*
      * Search types
@@ -264,7 +263,6 @@ class Search implements SearchableInterface
             case self::OPTION_TIMEOUT;
             case self::OPTION_FROM;
             case self::OPTION_SIZE;
-            case self::OPTION_LIMIT;
                 return true;
         }
 

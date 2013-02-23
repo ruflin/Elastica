@@ -48,6 +48,11 @@ class ResultSet implements \Iterator, \Countable
     protected $_took = 0;
 
     /**
+     * @var boolean
+     */
+    protected $_timed_out = false;
+
+    /**
      * @var int
      */
     protected $_totalHits = 0;
@@ -76,6 +81,7 @@ class ResultSet implements \Iterator, \Countable
         $result = $response->getData();
         $this->_totalHits = isset($result['hits']['total']) ? $result['hits']['total'] : 0;
         $this->_took = isset($result['took']) ? $result['took'] : 0;
+        $this->_timed_out = isset($result['timed_out']) ? $result['timed_out'] : false;
         if (isset($result['hits']['hits'])) {
             foreach ($result['hits']['hits'] as $hit) {
                 $this->_results[] = new Result($hit);
@@ -135,6 +141,16 @@ class ResultSet implements \Iterator, \Countable
     public function getTotalTime()
     {
         return (int) $this->_took;
+    }
+
+    /**
+    * Returns true iff the query has timed out
+    *
+    * @return bool Timed out
+    */
+    public function hasTimedOut()
+    {
+        return (bool) $this->_timed_out;
     }
 
     /**
