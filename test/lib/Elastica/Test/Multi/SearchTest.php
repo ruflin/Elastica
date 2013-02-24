@@ -93,7 +93,7 @@ class SearchTest extends BaseTest
         $termQuery1 = new Term();
         $termQuery1->setTerm('username', 'farrelley');
         $query1->setQuery($termQuery1);
-        $query1->setLimit(2);
+        $query1->setSize(2);
         $search1->setQuery($query1);
 
         $multiSearch->addSearch($search1);
@@ -106,7 +106,7 @@ class SearchTest extends BaseTest
         $termQuery2 = new Term();
         $termQuery2->setTerm('username', 'bunny');
         $query2->setQuery($termQuery2);
-        $query2->setLimit(3);
+        $query2->setSize(3);
         $search2->setQuery($query2);
 
         $multiSearch->addSearch($search2);
@@ -230,7 +230,7 @@ class SearchTest extends BaseTest
         $termQuery1 = new Term();
         $termQuery1->setTerm('username', 'farrelley');
         $query1->setQuery($termQuery1);
-        $query1->setLimit(2);
+        $query1->setSize(2);
         $search1->setQuery($query1);
 
         $multiSearch->addSearch($search1);
@@ -243,7 +243,7 @@ class SearchTest extends BaseTest
         $termQuery2 = new Term();
         $termQuery2->setTerm('username', 'bunny');
         $query2->setQuery($termQuery2);
-        $query2->setLimit(3);
+        $query2->setSize(3);
         $search2->setQuery($query2);
 
         $multiSearch->addSearch($search2);
