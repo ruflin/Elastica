@@ -150,7 +150,7 @@ class ResultSet implements \Iterator, \Countable
     */
     public function hasTimedOut()
     {
-        return (bool) $this->_timed_out;
+        return (bool) $this->_timedOut;
     }
 
     /**
