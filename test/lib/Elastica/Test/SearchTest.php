@@ -6,6 +6,8 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
+use Elastica\Query\CustomScore;
+use Elastica\Script;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 
@@ -271,6 +273,14 @@ class SearchTest extends BaseTest
         $resultSet = $search->search('test', array('limit' => 2));
         $this->assertEquals(2, $resultSet->count());
 
+        //Array with size
+        $resultSet = $search->search('test', array('size' => 2));
+        $this->assertEquals(2, $resultSet->count());
+
+        //Array with from
+        $resultSet = $search->search('test', array('from' => 10));
+        $this->assertEquals(10, $resultSet->current()->getId());
+
         //Array with routing
         $resultSet = $search->search('test', array('routing' => 'r1,r2'));
         $this->assertEquals(10, $resultSet->count());
@@ -282,6 +292,12 @@ class SearchTest extends BaseTest
         //Search types
         $resultSet = $search->search('test', array('limit' => 5, 'search_type' => 'count'));
         $this->assertTrue(($resultSet->count() === 0) && $resultSet->getTotalHits() === 11);
+
+        //Timeout - this one is a bit more tricky to test
+        $script = new Script('Thread.sleep(100); return _score;');
+        $query = new CustomScore($script, 'test');
+        $resultSet = $search->search($query, array('timeout' => 50));
+        $this->assertTrue($resultSet->hasTimedOut());
 
         // Throws InvalidException
         $resultSet = $search->search('test', array('invalid_option' => 'invalid_option_value'));

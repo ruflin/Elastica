@@ -9,3 +9,4 @@ atlassian-ide-plugin.xml
 .settings
 /vendor
 composer.lock
+composer.phar
