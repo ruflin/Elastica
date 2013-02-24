@@ -50,7 +50,7 @@ class ResultSet implements \Iterator, \Countable
     /**
      * @var boolean
      */
-    protected $_timed_out = false;
+    protected $_timedOut = false;
 
     /**
      * @var int
@@ -81,7 +81,7 @@ class ResultSet implements \Iterator, \Countable
         $result = $response->getData();
         $this->_totalHits = isset($result['hits']['total']) ? $result['hits']['total'] : 0;
         $this->_took = isset($result['took']) ? $result['took'] : 0;
-        $this->_timed_out = !empty($result['timed_out']);
+        $this->_timedOut = !empty($result['timed_out']);
         if (isset($result['hits']['hits'])) {
             foreach ($result['hits']['hits'] as $hit) {
                 $this->_results[] = new Result($hit);
@@ -150,7 +150,7 @@ class ResultSet implements \Iterator, \Countable
     */
     public function hasTimedOut()
     {
-        return (bool) $this->_timed_out;
+        return (bool) $this->_timedOut;
     }
 
     /**
