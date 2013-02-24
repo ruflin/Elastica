@@ -11,10 +11,6 @@ tar -xzf elasticsearch-${ES_VER}.tar.gz
 elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/${ES_MAPPER_ATTACHMENTS_VER}
 elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/${ES_TRANSPORT_THRIFT_VER}
 
-# enable udp
-echo "bulk.udp.enabled: true" >> elasticsearch-${ES_VER}/config/elasticsearch.yml
-echo "bulk.udp.bulk_actions: 5" >> elasticsearch-${ES_VER}/config/elasticsearch.yml
-
 export JAVA_OPTS="-server"
 
 for i in 0 1 2
@@ -35,6 +31,10 @@ do
     echo "discovery.zen.ping.multicast.enabled: false" >> $config_yml
     echo "http.port: $http_port" >> $config_yml
     echo "thrift.port: $thrift_port" >> $config_yml
+
+    # enable udp
+    echo "bulk.udp.enabled: true" >> $config_yml
+    echo "bulk.udp.bulk_actions: 5" >> $config_yml
 
     echo "Starting server on http port: $http_port"
 
