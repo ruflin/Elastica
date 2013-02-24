@@ -2,11 +2,12 @@
 
 namespace Elastica;
 
-use Elastica\Exception\BulkResponseException;
+use Elastica\Bulk;
+use Elastica\Bulk\Action;
+use Elastica\Exception\ResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\NotImplementedException;
 
 /**
  * Client to connect the the elasticsearch server
@@ -162,8 +163,9 @@ class Client
     }
 
     /**
-     * @param string|array $key config key or path to config key
+     * @param array|string $keys config key or path of config keys
      * @param mixed $default default value will be returned if key was not found
+     * @return mixed
      */
     public function getConfigValue($keys, $default = null)
     {
@@ -230,7 +232,7 @@ class Client
      * documents can belong to any type and index
      *
      * @param  array|\Elastica\Document[]           $docs Array of Elastica\Document
-     * @return \Elastica\Response                   Response object
+     * @return \Elastica\Bulk\ResponseSet                   Response object
      * @throws \Elastica\Exception\InvalidException If docs is empty
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
@@ -239,63 +241,12 @@ class Client
         if (empty($docs)) {
             throw new InvalidException('Array has to consist of at least one element');
         }
-        $params = array();
 
-        foreach ($docs as $doc) {
-            $params[] = array('index' => $doc->getOptions(
-                array(
-                    'index',
-                    'type',
-                    'id',
-                    'version',
-                    'version_type',
-                    'routing',
-                    'percolate',
-                    'parent',
-                    'ttl',
-                    'timestamp',
-                ),
-                true
-            ));
-            $params[] = $doc->getData();
-        }
+        $bulk = new Bulk($this);
 
-        $response = $this->bulk($params);
+        $bulk->addDocuments($docs);
 
-        $this->_setDocumentIdsFromResponse($response, $docs);
-
-        return $response;
-    }
-
-    /**
-     * @param \Elastica\Response $response
-     * @param \Elastica\Document[] $docs
-     */
-    protected function _setDocumentIdsFromResponse(Response $response, array $docs)
-    {
-        $data = $response->getData();
-        /* @var Document $document */
-        $document = reset($docs);
-        if (isset($data['items']) && is_array($data['items'])) {
-            foreach ($data['items'] as $item) {
-                if (false === $document) {
-                    break;
-                }
-                if ($document->isAutoPopulate()
-                    || $this->getConfigValue(array('document', 'autoPopulate'), false)
-                ) {
-                    $opType = key($item);
-                    $data = reset($item);
-                    if (!$document->hasId() && 'create' == $opType && isset($data['_id'])) {
-                        $document->setId($data['_id']);
-                    }
-                    if (isset($data['_version'])) {
-                        $document->setVersion($data['_version']);
-                    }
-                }
-                $document = next($docs);
-            }
-        }
+        return $bulk->send();
     }
 
     /**
@@ -402,15 +353,22 @@ class Client
     }
 
     /**
-     * Bulk deletes documents (not implemented yet)
+     * Bulk deletes documents
      *
-     * @param  array                                      $docs Docs
-     * @throws \Elastica\Exception\NotImplementedException
+     * @param array|\Elastica\Document[] $docs
+     * @return \Elastica\Bulk\ResponseSet
+     * @throws \Elastica\Exception\InvalidException
      */
     public function deleteDocuments(array $docs)
     {
-        // TODO: similar to delete ids but with type and index inside files
-        throw new NotImplementedException('not implemented yet');
+        if (empty($docs)) {
+            throw new InvalidException('Array has to consist of at least one element');
+        }
+
+        $bulk = new Bulk($this);
+        $bulk->addDocuments($docs, Action::OP_TYPE_DELETE);
+
+        return $bulk->send();
     }
 
     /**
@@ -492,7 +450,7 @@ class Client
      * @param  string|\Elastica\Index               $index Index name
      * @param  string|\Elastica\Type                $type  Type of documents
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Response                   Response object
+     * @return \Elastica\Bulk\ResponseSet                   Response object
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
     public function deleteIds(array $ids, $index, $type)
@@ -501,28 +459,18 @@ class Client
             throw new InvalidException('Array has to consist of at least one id');
         }
 
-        if ($index instanceof Index) {
-            $index = $index->getName();
-        }
+        $bulk = new Bulk($this);
+        $bulk->setIndex($index);
+        $bulk->setType($type);
 
-        if ($type instanceof Type) {
-            $type = $type->getName();
-        }
-
-        $params = array();
         foreach ($ids as $id) {
-            $action = array(
-                'delete' => array(
-                    '_index' => $index,
-                    '_type' => $type,
-                    '_id' => $id,
-                )
-            );
+            $action = new Action(Action::OP_TYPE_DELETE);
+            $action->setId($id);
 
-            $params[] = $action;
+            $bulk->addAction($action);
         }
 
-        return $this->bulk($params);
+        return $bulk->send();
     }
 
     /**
@@ -538,10 +486,9 @@ class Client
      * );
      *
      * @param  array                                    $params Parameter array
-     * @throws \Elastica\Exception\BulkResponseException
+     * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Response                        Response object
-     * @todo Test
+     * @return \Elastica\Bulk\ResponseSet                        Response object
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
     public function bulk(array $params)
@@ -550,27 +497,11 @@ class Client
             throw new InvalidException('Array has to consist of at least one param');
         }
 
-        $path = '_bulk';
+        $bulk = new Bulk($this);
 
-        $queryString = '';
-        foreach ($params as $baseArray) {
-            // Always newline needed
-            $queryString .= json_encode($baseArray) . PHP_EOL;
-        }
+        $bulk->addRawData($params);
 
-        $response = $this->request($path, Request::PUT, $queryString);
-        $data = $response->getData();
-
-        if (isset($data['items'])) {
-            foreach ($data['items'] as $item) {
-                $params = reset($item);
-                if (isset($params['error'])) {
-                    throw new BulkResponseException($response);
-                }
-            }
-        }
-
-        return $response;
+        return $bulk->send();
     }
 
     /**

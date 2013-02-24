@@ -127,9 +127,8 @@ class Type implements SearchableInterface
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
      * @param  \Elastica\Document                   $document Document with update data
-     * @param  array                               $options  options for query
-     * @return \Elastica\Response
      * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
      */
     public function updateDocument(Document $document)
@@ -150,7 +149,7 @@ class Type implements SearchableInterface
      * Uses _bulk to send documents to the server
      *
      * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
-     * @return \Elastica\Response
+     * @return \Elastica\Bulk\ResponseSet
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
     public function addDocuments(array $docs)
@@ -187,6 +186,19 @@ class Type implements SearchableInterface
         $data = isset($result['_source']) ? $result['_source'] : array();
         $document = new Document($id, $data, $this->getName(), $this->getIndex());
         $document->setVersion($result['_version']);
+
+        return $document;
+    }
+
+    /**
+     * @param string $id
+     * @param array $data
+     * @return Document
+     */
+    public function createDocument($id = '', array $data = array())
+    {
+        $document = new Document($id, $data);
+        $document->setType($this);
 
         return $document;
     }
@@ -309,7 +321,9 @@ class Type implements SearchableInterface
      * Deletes an entry by its unique identifier
      *
      * @param  int|string               $id Document id
+     * @param array $options
      * @throws \InvalidArgumentException
+     * @throws \Elastica\Exception\NotFoundException
      * @return \Elastica\Response        Response object
      * @link http://www.elasticsearch.org/guide/reference/api/delete.html
      */
