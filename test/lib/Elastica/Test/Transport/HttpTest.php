@@ -3,8 +3,10 @@
 namespace Elastica\Test\Transport;
 
 use Elastica\Client;
+use Elastica\Connection;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Exception\ResponseException;
+use Elastica\Transport\Http;
 
 class HttpTest extends BaseTest
 {
@@ -73,5 +75,19 @@ class HttpTest extends BaseTest
         $status = $client->getStatus();
         $info = $status->getResponse()->getTransferInfo();
         $this->assertStringStartsWith('GET', $info['request_header']);
+    }
+
+    public function testUri()
+    {
+        $config = array(
+            'host' => 'localhost',
+            'port' => 9300,
+            'path' => 'path'
+        );
+        $connection = new Connection($config);
+        $transport = new Http($connection);
+
+        $uri = $transport->getUri();
+        $this->assertEquals('http://localhost:9300/path', $uri);
     }
 }

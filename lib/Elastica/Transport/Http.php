@@ -168,4 +168,13 @@ class Http extends AbstractTransport
 
         return self::$_curlConnection;
     }
+
+    /**
+     * @return string
+     */
+    public function getUri()
+    {
+        $connection = $this->getConnection();
+        return $this->_scheme . '://' . $connection->getHost() . ':' . $connection->getPort() . '/' . $connection->getPath();
+    }
 }

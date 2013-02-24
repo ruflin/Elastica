@@ -162,8 +162,9 @@ class Client
     }
 
     /**
-     * @param string|array $key config key or path to config key
-     * @param mixed $default default value will be returned if key was not found
+     * @param string|array $keys config key or path to config key
+     * @param mixed        $default default value will be returned if key was not found
+     * @return mixed
      */
     public function getConfigValue($keys, $default = null)
     {
@@ -582,32 +583,41 @@ class Client
      * @param  string            $method Rest method to use (GET, POST, DELETE, PUT)
      * @param  array             $data   OPTIONAL Arguments as array
      * @param  array             $query  OPTIONAL Query params
+     * @throws Exception\ClientException
      * @return \Elastica\Response Response object
      */
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
     {
-        $connection = $this->getConnection();
-        try {
-            $request = new Request($path, $method, $data, $query, $connection);
+        $connectionExceptions = array();
 
-            $this->_log($request);
+        while (true) {
+            try {
+                $connection = $this->getConnection();
 
-            $response = $request->send();
+                $request = new Request($path, $method, $data, $query, $connection);
 
-            $this->_lastRequest = $request;
-            $this->_lastResponse = $response;
+                $this->_log($request);
 
-            return $response;
+                $response = $request->send();
 
-        } catch (ConnectionException $e) {
-            $connection->setEnabled(false);
+                $this->_lastRequest = $request;
+                $this->_lastResponse = $response;
 
-            // Calls callback with connection as param to make it possible to persist invalid connections
-            if ($this->_callback) {
-                call_user_func($this->_callback, $connection, $e);
+                return $response;
+
+            } catch (ConnectionException $connectionException) {
+                $connection->setEnabled(false);
+
+                // Calls callback with connection as param to make it possible to persist invalid connections
+                if ($this->_callback) {
+                    call_user_func($this->_callback, $connection, $connectionException);
+                }
+
+                $connectionExceptions[] = $connectionException;
+
+            } catch (ClientException $clientException) {
+                throw new ClientException($clientException->getMessage(), $connectionExceptions);
             }
-
-            return $this->request($path, $method, $data, $query);
         }
     }
 

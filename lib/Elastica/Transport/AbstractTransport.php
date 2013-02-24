@@ -106,4 +106,9 @@ abstract class AbstractTransport extends Param
 
         return $transport;
     }
+
+    /**
+     * @return string
+     */
+    abstract public function getUri();
 }

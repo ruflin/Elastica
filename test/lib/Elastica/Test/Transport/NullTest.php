@@ -2,10 +2,10 @@
 
 namespace Elastica\Test\Transport;
 
-use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Transport\Null;
 
 /**
  * Elastica Null Transport Test
@@ -55,5 +55,18 @@ class NullTest extends BaseTest
          $this->assertEquals(0, $shards["successful"]);
          $this->assertContains("failed", $shards);
          $this->assertEquals(0, $shards["failed"]);
+    }
+
+    public function testUri()
+    {
+        $config = array(
+            'host' => 'null.es.host',
+            'port' => 9666,
+        );
+        $connection = new Connection($config);
+        $transport = new Null($connection);
+
+        $uri = $transport->getUri();
+        $this->assertEquals('null://', $uri);
     }
 }
