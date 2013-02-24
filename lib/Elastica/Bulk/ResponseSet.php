@@ -77,6 +77,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     public function hasError()
     {
         $return = false;
+
         foreach ($this->getBulkResponses() as $bulkResponse) {
             if ($bulkResponse->hasError()) {
                 $return = true;

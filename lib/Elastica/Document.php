@@ -3,6 +3,7 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
+use Elastica\Bulk\Action;
 
 /**
  * Single document stored in elastic search
@@ -13,7 +14,7 @@ use Elastica\Exception\InvalidException;
  */
 class Document extends Param
 {
-    const OP_TYPE_CREATE = 'create';
+    const OP_TYPE_CREATE = Action::OP_TYPE_CREATE;
 
     /**
      * Document data

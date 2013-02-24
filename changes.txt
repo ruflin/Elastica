@@ -1,5 +1,8 @@
 CHANGES
 
+2013-02-25
+- Added Elastica\Bulk class responsible for performing bulk requests. New bulk requests implemented: Client::deleteDocuments(), Bulk::sendUdp()
+
 2013-02-20
 - Release candidate 0.20.5.0.RC1 
 
@@ -8,7 +11,7 @@ CHANGES
 - The transport instances now has support for parameters that can be injected by specifying an array as a transport when creating the Elastica client
 
 2013-02-08
-- Terms->setScript() Added, namespace Elastica/Facet
+- Terms->setScript() Added, namespace Elastica\Facet
 
 2013-01-31
 - Removed deprecated method Type::getType()
