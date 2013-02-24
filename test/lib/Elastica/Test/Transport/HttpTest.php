@@ -77,7 +77,7 @@ class HttpTest extends BaseTest
         $this->assertStringStartsWith('GET', $info['request_header']);
     }
 
-    public function testDsn()
+    public function testUri()
     {
         $config = array(
             'host' => 'localhost',
@@ -87,7 +87,7 @@ class HttpTest extends BaseTest
         $connection = new Connection($config);
         $transport = new Http($connection);
 
-        $dsn = $transport->getDsn();
-        $this->assertEquals('http://localhost:9300/path', $dsn);
+        $uri = $transport->getUri();
+        $this->assertEquals('http://localhost:9300/path', $uri);
     }
 }

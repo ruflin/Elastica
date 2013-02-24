@@ -57,7 +57,7 @@ class NullTest extends BaseTest
          $this->assertEquals(0, $shards["failed"]);
     }
 
-    public function testDsn()
+    public function testUri()
     {
         $config = array(
             'host' => 'null.es.host',
@@ -66,7 +66,7 @@ class NullTest extends BaseTest
         $connection = new Connection($config);
         $transport = new Null($connection);
 
-        $dsn = $transport->getDsn();
-        $this->assertEquals('null://', $dsn);
+        $uri = $transport->getUri();
+        $this->assertEquals('null://', $uri);
     }
 }

@@ -44,7 +44,7 @@ class Null extends AbstractTransport
     /**
      * @return string
      */
-    public function getDsn()
+    public function getUri()
     {
         return 'null://';
     }

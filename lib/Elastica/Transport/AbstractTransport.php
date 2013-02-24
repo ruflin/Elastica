@@ -110,5 +110,5 @@ abstract class AbstractTransport extends Param
     /**
      * @return string
      */
-    abstract public function getDsn();
+    abstract public function getUri();
 }

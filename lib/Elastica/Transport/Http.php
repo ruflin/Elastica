@@ -172,7 +172,7 @@ class Http extends AbstractTransport
     /**
      * @return string
      */
-    public function getDsn()
+    public function getUri()
     {
         $connection = $this->getConnection();
         return $this->_scheme . '://' . $connection->getHost() . ':' . $connection->getPort() . '/' . $connection->getPath();

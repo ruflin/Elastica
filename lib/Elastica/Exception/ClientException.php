@@ -69,7 +69,7 @@ class ClientException extends AbstractException
         if ($this->hasConnectionExceptions()) {
             $message.= "\n\nFollowing connection exceptions occurred:\n";
             foreach ($this->getConnectionExceptions() as $connectionException) {
-                $message.= $this->_getTransportDsn($connectionException);
+                $message.= $this->_getTransportUri($connectionException);
                 $message.= $connectionException->getMessage() . "\n";
             }
         }
@@ -80,19 +80,19 @@ class ClientException extends AbstractException
      * @param \Elastica\Exception\ConnectionException $connectionException
      * @return string
      */
-    protected function _getTransportDsn(ConnectionException $connectionException)
+    protected function _getTransportUri(ConnectionException $connectionException)
     {
-        $dsn = '';
+        $uri = '';
         $request = $connectionException->getRequest();
         if ($request) {
             $connection = $request->getConnection();
             if ($connection) {
                 $transport = $connection->getTransportObject();
                 if ($transport) {
-                    $dsn .= $transport->getDsn() . ': ';
+                    $uri .= $transport->getUri() . ': ';
                 }
             }
         }
-        return $dsn;
+        return $uri;
     }
 }

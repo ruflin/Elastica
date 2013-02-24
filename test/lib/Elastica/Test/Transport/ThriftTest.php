@@ -92,7 +92,7 @@ class ThriftTest extends BaseTest
         $index->getStatus();
     }
 
-    public function testDsn()
+    public function testUri()
     {
         $config = array(
             'host' => 'thrift.es.host',
@@ -101,8 +101,8 @@ class ThriftTest extends BaseTest
         $connection = new Connection($config);
         $transport = new Thrift($connection);
 
-        $dsn = $transport->getDsn();
-        $this->assertEquals('thrift://thrift.es.host:9500', $dsn);
+        $uri = $transport->getUri();
+        $this->assertEquals('thrift://thrift.es.host:9500', $uri);
     }
 
     public function configProvider()
