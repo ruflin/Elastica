@@ -184,7 +184,7 @@ class Query extends Param
      *
      * Setting the limit to 0, means no limit
      *
-     * @param  int            $limit OPTIONAL Maximal number of results for query (default = 10)
+     * @param  int            $size OPTIONAL Maximal number of results for query (default = 10)
      * @return \Elastica\Query Query object
      */
     public function setSize($size = 10)
@@ -196,6 +196,7 @@ class Query extends Param
     /**
      * Alias for setSize
      *
+     * @deprecated Use the setSize() method, this method will be removed in future releases
      * @param  int            $limit OPTIONAL Maximal number of results for query (default = 10)
      * @return \Elastica\Query Query object
      */
