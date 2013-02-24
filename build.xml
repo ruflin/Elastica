@@ -32,6 +32,15 @@
 		<mkdir dir="${basedir}/build/logs"/>
 		<mkdir dir="${basedir}/build/pdepend"/>
 	</target>
+	
+	<target name="install" description="installs and starts elasticsearch">
+		<exec executable="bash">
+			<env key="ES_VER" value="0.20.5"/>
+			<env key="ES_MAPPER_ATTACHMENTS_VER" value="1.6.0"/>
+			<env key="ES_TRANSPORT_THRIFT_VER" value="1.4.0"/>
+			<arg value="test/bin/run_elasticsearch.sh"/>
+		</exec>
+	</target>
 
 	<target name="lint">
 		<apply executable="php" failonerror="true">
