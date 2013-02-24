@@ -35,6 +35,19 @@
 	
 	<target name="install" description="installs and starts elasticsearch">
 		<exec executable="bash">
+			<arg value="-c" />
+			<arg value="curl -sS https://getcomposer.org/installer | php" />
+		</exec>
+		<exec executable="php">
+			<arg value="composer.phar" />
+			<arg value="self-update" />
+		</exec>
+		<exec executable="php">
+			<arg value="composer.phar" />
+			<arg value="--dev" />
+			<arg value="install" />
+		</exec>	
+		<exec executable="bash">
 			<env key="ES_VER" value="0.20.5"/>
 			<env key="ES_MAPPER_ATTACHMENTS_VER" value="1.6.0"/>
 			<env key="ES_TRANSPORT_THRIFT_VER" value="1.4.0"/>
