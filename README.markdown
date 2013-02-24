@@ -25,7 +25,7 @@ The version numbers are consistent with elasticsearch. The version number 0.16.0
 
 Compatibility
 -------------
-Elastica is tested with PHP 5.3 and later. Versions prior and equal to v0.19.8.0 are compatible with PHP 5.2
+Elastica is tested with PHP 5.3.3 and later. Versions prior and equal to v0.19.8.0 are compatible with PHP 5.2
 
 File indexing
 -------------

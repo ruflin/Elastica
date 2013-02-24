@@ -8,11 +8,11 @@
 			<sequential>
 				<antcall target="pdepend"/>
 				<antcall target="phpmd-ci"/>
+    			<antcall target="phpcb"/>
 			</sequential>
 			<antcall target="phpcpd"/>
 			<antcall target="phpcs-ci"/>
-			<antcall target="phpdoc"/>
-			<antcall target="phpcb"/>
+			<antcall target="phpdoc-ci"/>
 		</parallel>
 	</target>
 
@@ -22,6 +22,7 @@
 		<delete dir="${basedir}/build/coverage"/>
 		<delete dir="${basedir}/build/logs"/>
 		<delete dir="${basedir}/build/pdepend"/>
+		<delete dir="${basedir}/build/docs"/>
 		<delete file="${basedir}/cache.properties"/>
 	</target>
 
@@ -30,6 +31,7 @@
 		<mkdir dir="${basedir}/build/code-browser"/>
 		<mkdir dir="${basedir}/build/coverage"/>
 		<mkdir dir="${basedir}/build/logs"/>
+		<mkdir dir="${basedir}/build/docs"/>
 		<mkdir dir="${basedir}/build/pdepend"/>
 	</target>
 	
@@ -55,6 +57,13 @@
 		</exec>
 	</target>
 
+	<target name="composer" depends="prepare" description="Install dependencies">
+		<exec executable="composer">
+			<arg value="--dev"></arg>
+			<arg value="install"></arg>
+		</exec>
+	</target>
+
 	<target name="lint">
 		<apply executable="php" failonerror="true">
 			<arg value="-lf"/>
@@ -71,7 +80,7 @@
 		</apply>
 	</target>
 
-	<target name="phpunit" depends="prepare">
+	<target name="phpunit" depends="composer">
 		<exec executable="phpunit" dir="${basedir}/test" failonerror="off" />
 	</target>
 
@@ -121,6 +130,17 @@
 	<target name="phpdoc">
 		<exec executable="phpdoc">
 			<arg line="run" />
+			<arg line="-d lib/" />
+			<arg line="-t build/docs" />
+		</exec>
+	</target>
+
+	<target name="phpdoc-ci">
+		<exec executable="phpdoc">
+			<arg line="run" />
+			<arg line="-d lib/" />
+			<arg line="-t build/docs" />
+			<arg line="-q" />
 		</exec>
 	</target>
 
@@ -132,7 +152,7 @@
 		</exec>
 	</target>
 
-	<target name="build" depends="prepare,lint,parallelTasks,phpunit"/>
+	<target name="build" depends="prepare,composer,lint,parallelTasks,phpunit"/>
 
 	<!-- Checkstyle with human output -->
 	<target name="phpcs">
@@ -187,7 +207,7 @@
 			<arg line="install phpunit/phploc" />
 		</exec>
 		<exec executable="pear">
-			<arg line="install channel://pear.phpdoc.org/phpDocumentor-2.0.0a2" />
+			<arg line="install phpdoc/phpDocumentor-alpha" />
 		</exec>
 		<exec executable="pear">
 			<arg line="install PHP_CodeSniffer" />
