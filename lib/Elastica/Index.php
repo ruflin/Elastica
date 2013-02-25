@@ -111,7 +111,7 @@ class Index implements SearchableInterface
      * Uses _bulk to send documents to the server
      *
      * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
-     * @return \Elastica\Response
+     * @return \Elastica\Bulk\ResponseSet
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
     public function addDocuments(array $docs)
@@ -237,7 +237,7 @@ class Index implements SearchableInterface
     }
 
     /**
-     * Searchs in this index
+     * Searches in this index
      *
      * @param  string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
      * @param  int|array                   $options OPTIONAL Limit or associative array of options (option=>value)

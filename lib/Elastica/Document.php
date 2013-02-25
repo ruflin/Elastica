@@ -3,6 +3,7 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
+use Elastica\Bulk\Action;
 
 /**
  * Single document stored in elastic search
@@ -13,6 +14,8 @@ use Elastica\Exception\InvalidException;
  */
 class Document extends Param
 {
+    const OP_TYPE_CREATE = Action::OP_TYPE_CREATE;
+
     /**
      * Document data
      *
@@ -126,6 +129,7 @@ class Document extends Param
     /**
      * @param string $key
      * @param mixed $value
+     * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Document
      */
     public function set($key, $value)
@@ -702,7 +706,7 @@ class Document extends Param
 
     /**
      * @param \Elastica\Script|array|string $data
-     * @return $this
+     * @return \Elastica\Document
      */
     public function setScript($data)
     {

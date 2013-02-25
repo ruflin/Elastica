@@ -32,6 +32,10 @@ do
     echo "http.port: $http_port" >> $config_yml
     echo "thrift.port: $thrift_port" >> $config_yml
 
+    # enable udp
+    echo "bulk.udp.enabled: true" >> $config_yml
+    echo "bulk.udp.bulk_actions: 5" >> $config_yml
+
     echo "Starting server on http port: $http_port"
 
     elasticsearch-${ES_VER}/bin/elasticsearch -Des.config=$config_yml &

@@ -3,6 +3,7 @@
 namespace Elastica\Test\Transport;
 
 use Elastica\Client;
+use Elastica\Document;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Exception\ResponseException;
 
@@ -51,11 +52,12 @@ class HttpTest extends BaseTest
 
         $index = $client->getIndex('dynamic_http_method_test');
 
-        try {
-            $index->create();
-        } catch (ResponseException $e) {
-            // ignore
-        }
+        $index->create(array(), true);
+
+        $type = $index->getType('test');
+        $type->addDocument(new Document(1, array('test' => 'test')));
+
+        $index->refresh();
 
         $resultSet = $index->search('test');
 
