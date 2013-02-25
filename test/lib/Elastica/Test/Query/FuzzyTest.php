@@ -54,4 +54,11 @@ class FuzzyTest extends BaseTest
 
         $this->assertEquals(2, $resultSet->count());
     }
+
+    public function testBadArguments ()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $query = new Fuzzy();
+        $query->addField('name', array(array('value' => 'Baden')));
+    }
 }

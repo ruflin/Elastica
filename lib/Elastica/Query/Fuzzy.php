@@ -21,6 +21,14 @@ class Fuzzy extends AbstractQuery
      */
     public function addField($fieldName, array $args)
     {
+        $numericKeys = array_filter(array_keys($args), function ($key)
+        {
+            return is_numeric($key);
+        });
+        if (!empty($numericKeys))
+        {
+            throw new \InvalidArgumentException('Fuzzy does not accept two dimensional arrays.');
+        }
         return $this->setParam($fieldName, $args);
     }
 }
