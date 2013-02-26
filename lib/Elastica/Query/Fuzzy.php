@@ -2,6 +2,8 @@
 
 namespace Elastica\Query;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Fuzzy query
  *
@@ -13,22 +15,65 @@ namespace Elastica\Query;
 class Fuzzy extends AbstractQuery
 {
     /**
-     * Adds field to fuzzy query
+     * Construct a fuzzy query
      *
      * @param  string                    $fieldName Field name
-     * @param  array                     $args      Data array
+     * @param  string                    $value     String to search for
      * @return \Elastica\Query\Fuzzy Current object
      */
-    public function addField($fieldName, array $args)
+    public function __construct ($fieldName, $value)
     {
-        $numericKeys = array_filter(array_keys($args), function ($key)
-        {
-            return is_numeric($key);
-        });
-        if (!empty($numericKeys))
-        {
-            throw new \InvalidArgumentException('Fuzzy does not accept two dimensional arrays.');
+        $this->setField($fieldName, $value);
+    }
+
+    /**
+     * Set field for fuzzy query
+     *
+     * @param  string                    $fieldName Field name
+     * @param  string                    $value     String to search for
+     * @return \Elastica\Query\Fuzzy Current object
+     */
+    public function setField ($fieldName, $value)
+    {
+        if (!is_string($value) or !$is_string($field)) {
+            throw new InvalidException('The field and value arguments must be of type string.');
         }
-        return $this->setParam($fieldName, $args);
+        if (count($this->getParams()) > 0 and array_shift(array_keys($this->getParams())) != $fieldName) {
+            throw new InvalidException('Fuzzy query can only support a single field.');
+        }
+        return $this->setParam($fieldName, array('value' => $value));
+    }
+
+    /**
+     * Set optional parameters on the existing query
+     *
+     * @param  string                    $optionName option name
+     * @param  mixed                     $value      Value of the parameter
+     * @return \Elastica\Query\Fuzzy Current object
+     */
+    public function setFieldOption ($optionName, $value) {
+        //Retrieve the single existing field for alteration.
+        $params = $this->getParams();
+        if (count($params) < 1) {
+           throw new InvalidException('No field has been set');
+        }
+        $keyArray = array_keys($params);
+        $params[$keyArray[0]][$optionName] = $value;
+
+        return $this->setparam($keyArray[0], $params[$keyArray[0]]);
+    }
+
+    /**
+     * Deprecated method of setting a field.
+     * @deprecated
+     */
+    public function addField($fieldName, $args)
+    {
+        $this->setField($fieldName, $args['value']);
+        unset($args['value']);
+        foreach ($args as $optionName => $value) {
+            $this->setFieldOption($optionName, $value);
+        }
+        return $this;
     }
 }
