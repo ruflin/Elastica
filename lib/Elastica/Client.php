@@ -408,16 +408,23 @@ class Client
      */
     public function getConnection()
     {
-        if ($this->_config['roundRobin'] === true) {
+        $enabledConnection = null;
+        
+        if (($this->_config['roundRobin'] === true) && (count($this->_connections) > 1)) {
             shuffle($this->_connections);
         }
+        
         foreach ($this->_connections as $connection) {
             if ($connection->isEnabled()) {
-                return $connection;
+                $enabledConnection = $connection;
             }
         }
-        // No connection is enabled. Throw an error.
-        throw new ClientException('No enabled connection');
+        
+        if (empty($enabledConnection)) {
+            throw new ClientException('No enabled connection');
+        }
+
+        return $enabledConnection;
     }
 
     /**
