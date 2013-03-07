@@ -417,6 +417,7 @@ class Client
         foreach ($this->_connections as $connection) {
             if ($connection->isEnabled()) {
                 $enabledConnection = $connection;
+                break;
             }
         }
         
