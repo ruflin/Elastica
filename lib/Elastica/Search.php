@@ -430,10 +430,10 @@ class Search implements SearchableInterface
         }
 
         if (is_int($options)) {
-            $this->getQuery()->setLimit($options);
+            $this->getQuery()->setSize($options);
         } elseif (is_array($options)) {
             if (isset($options['limit'])) {
-                $this->getQuery()->setLimit($options['limit']);
+                $this->getQuery()->setSize($options['limit']);
                 unset($options['limit']);
             }
               if (isset($options['explain'])) {
