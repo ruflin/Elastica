@@ -20,7 +20,7 @@ class ActionTest extends BaseTest
         $this->assertEquals('index', $action->getOpType());
         $this->assertFalse($action->hasSource());
 
-        $expected = '{"index":[]}' . "\n";
+        $expected = '{"index":{}}' . "\n";
         $this->assertJsonStringEqualsJsonString($expected, $action->toString());
 
         $action->setIndex('index');
