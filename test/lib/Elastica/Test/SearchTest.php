@@ -4,12 +4,16 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Index;
+use Elastica\Query\Builder;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
 use Elastica\Query\CustomScore;
+use Elastica\Query;
 use Elastica\Script;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Type;
 
 class SearchTest extends BaseTest
 {
@@ -333,17 +337,18 @@ class SearchTest extends BaseTest
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
         $docs = array();
-        $docs[] = new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Document(1,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Document(2,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Document(3,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Document(4,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Document(5,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Document(6,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley'));
+        $docs[] = new Document(7,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley'));
+        $docs[] = new Document(8,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley'));
+        $docs[] = new Document(9,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley'));
+        $docs[] = new Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley'));
+        $docs[] = new Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley'));
+
         $type = $index->getType('zeroType');
         $type->addDocuments($docs);
         $index->refresh();
@@ -351,7 +356,19 @@ class SearchTest extends BaseTest
         $search->addIndex($index)->addType($type);
 
         $count = $search->count('farrelley');
+        $this->assertEquals(5, $count);
+
+        $count = $search->count('marley');
+        $this->assertEquals(6, $count);
+
+        $count = $search->count();
+        $this->assertEquals(6, $count, 'Uses previous query set');
+
+        $count = $search->count(new MatchAll());
         $this->assertEquals(11, $count);
+
+        $count = $search->count('bunny');
+        $this->assertEquals(0, $count);
     }
 
     public function testEmptySearch()

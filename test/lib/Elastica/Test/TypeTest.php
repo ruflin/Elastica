@@ -44,6 +44,9 @@ class TypeTest extends BaseTest
         $resultSet = $type->search('rolf');
         $this->assertEquals(1, $resultSet->count());
 
+        $count = $type->count('rolf');
+        $this->assertEquals(1, $count);
+
         // Test if source is returned
         $result = $resultSet->current();
         $this->assertEquals(3, $result->getId());

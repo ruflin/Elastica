@@ -380,7 +380,7 @@ class Search implements SearchableInterface
      */
     public function search($query = '', $options = null)
     {
-        $this->_setOptionsAndQuery($options, $query);
+        $this->setOptionsAndQuery($options, $query);
 
         $query = $this->getQuery();
         $path = $this->getPath();
@@ -402,7 +402,7 @@ class Search implements SearchableInterface
      */
     public function count($query = '')
     {
-        $this->_setOptionsAndQuery(null, $query);
+        $this->setOptionsAndQuery(null, $query);
 
         $query = $this->getQuery();
         $path = $this->getPath();
@@ -423,7 +423,7 @@ class Search implements SearchableInterface
      * @param  string|array|\Elastica\Query $query
      * @return \Elastica\Search
      */
-    protected function _setOptionsAndQuery($options = null, $query = '')
+    public function setOptionsAndQuery($options = null, $query = '')
     {
         if ('' != $query) {
             $this->setQuery($query);
