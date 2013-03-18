@@ -98,7 +98,7 @@ class Action
      * @param array $source
      * @return \Elastica\Bulk\Action
      */
-    public function setSource(array $source)
+    public function setSource($source)
     {
         $this->_source = $source;
 
@@ -178,9 +178,15 @@ class Action
      */
     public function toString()
     {
-        $string = '';
-        foreach ($this->toArray() as $row) {
-            $string.= json_encode($row) . Bulk::DELIMITER;
+        $string = json_encode($this->getActionMetadata(), JSON_FORCE_OBJECT) . Bulk::DELIMITER;
+        if ($this->hasSource()) {
+            $source = $this->getSource();
+            if (is_string($source)) {
+                $string.= $source;
+            } else {
+                $string.= json_encode($source);
+            }
+            $string.= Bulk::DELIMITER;
         }
         return $string;
     }

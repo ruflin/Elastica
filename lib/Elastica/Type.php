@@ -192,10 +192,10 @@ class Type implements SearchableInterface
 
     /**
      * @param string $id
-     * @param array $data
+     * @param array|string $data
      * @return Document
      */
-    public function createDocument($id = '', array $data = array())
+    public function createDocument($id = '', $data = array())
     {
         $document = new Document($id, $data);
         $document->setType($this);

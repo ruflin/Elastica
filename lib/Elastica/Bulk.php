@@ -238,8 +238,8 @@ class Bulk
     public function toString()
     {
         $data = '';
-        foreach ($this->toArray() as $row) {
-            $data.= json_encode($row) . self::DELIMITER;
+        foreach ($this->getActions() as $action) {
+            $data.= $action->toString();
         }
         return $data;
     }
