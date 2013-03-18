@@ -298,6 +298,19 @@ class Search implements SearchableInterface
     }
 
     /**
+     * @param Index|string $index
+     * @return bool
+     */
+    public function hasIndex($index)
+    {
+        if ($index instanceof Index) {
+            $index = $index->getName();
+        }
+
+        return in_array($index, $this->_indices);
+    }
+
+    /**
      * Return array of types
      *
      * @return array List of types
@@ -313,6 +326,19 @@ class Search implements SearchableInterface
     public function hasTypes()
     {
         return count($this->_types) > 0;
+    }
+
+    /**
+     * @param \Elastica\Type|string $type
+     * @return bool
+     */
+    public function hasType($type)
+    {
+        if ($type instanceof Type) {
+            $type = $type->getName();
+        }
+
+        return in_array($type, $this->_types);
     }
 
     /**
