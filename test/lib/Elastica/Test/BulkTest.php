@@ -72,16 +72,16 @@ class BulkTest extends BaseTest
         $this->assertEquals($expected, $data);
 
         $expected = '{"index":{"_index":"elastica_test","_type":"bulk_test","_id":1,"_percolate":"*"}}
-{"name": "Mister Fantastic"}
-{"index": {"_id":2}}
-{"name": "Invisible Woman"}
-{"create": {"_index":"elastica_test","_type":"bulk_test","_id":3}}
-{"name": "The Human Torch"}
+{"name":"Mister Fantastic"}
+{"index":{"_id":2}}
+{"name":"Invisible Woman"}
+{"create":{"_index":"elastica_test","_type":"bulk_test","_id":3}}
+{"name":"The Human Torch"}
 {"index":{"_index":"elastica_test","_type":"bulk_test"}}
 {"name":"The Thing"}
 ';
 
-        $this->assertJsonStringEqualsJsonString($expected, (string) $bulk);
+        $this->assertEquals($expected, (string) $bulk);
 
         $response = $bulk->send();
 
@@ -323,6 +323,45 @@ class BulkTest extends BaseTest
             $this->assertInternalType('array', $failures);
             $this->assertArrayHasKey(0, $failures);
             $this->assertContains('DocumentAlreadyExists', $failures[0]);
+        }
+    }
+
+    public function testRawDocumentDataRequest()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('bulk_test');
+        $client = $index->getClient();
+
+        $documents = array(
+            new Document(null, '{"name":"Mister Fantastic"}'),
+            new Document(null, '{"name":"Invisible Woman"}'),
+            new Document(null, '{"name":"The Human Torch"}'),
+        );
+
+        $bulk = new Bulk($client);
+        $bulk->addDocuments($documents);
+        $bulk->setType($type);
+
+        $expectedJson = '{"index":{}}
+{"name":"Mister Fantastic"}
+{"index":{}}
+{"name":"Invisible Woman"}
+{"index":{}}
+{"name":"The Human Torch"}
+';
+        $this->assertEquals($expectedJson, $bulk->toString());
+
+        $response = $bulk->send();
+        $this->assertTrue($response->isOk());
+
+        $type->getIndex()->refresh();
+
+        $response = $type->search();
+        $this->assertEquals(3, $response->count());
+
+        foreach (array("Mister", "Invisible", "Torch") as $name) {
+            $result = $type->search($name);
+            $this->assertEquals(1, count($result->getResults()));
         }
     }
 
