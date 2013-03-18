@@ -1,8 +1,8 @@
 <?php
 
 namespace Elastica;
+
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\NotImplementedException;
 
 /**
  * Elastica search object
@@ -11,7 +11,7 @@ use Elastica\Exception\NotImplementedException;
  * @package  Elastica
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
-class Search implements SearchableInterface
+class Search
 {
     /*
      * Options
@@ -357,15 +357,11 @@ class Search implements SearchableInterface
      * Creates new search object
      *
      * @param  \Elastica\SearchableInterface               $searchObject
-     * @throws \Elastica\Exception\NotImplementedException
-     * @return void
+     * @return \Elastica\Search
      */
     public static function create(SearchableInterface $searchObject)
     {
-        throw new NotImplementedException();
-        // Set index
-        // set type
-        // set client
+        return $searchObject->createSearch();
     }
 
     /**
@@ -424,7 +420,9 @@ class Search implements SearchableInterface
     }
 
     /**
-     * {@inheritdoc}
+     *
+     * @param mixed $query
+     * @return int
      */
     public function count($query = '')
     {
