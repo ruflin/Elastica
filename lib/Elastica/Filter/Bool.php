@@ -20,13 +20,6 @@ class Bool extends AbstractFilter
     protected $_boost = 1.0;
 
     /**
-     * minimum number of matches
-     *
-     * @var int minimum number of matches
-     */
-    protected $_minimumNumberShouldMatch = 1;
-
-    /**
      * Must
      *
      * @var array
@@ -142,16 +135,4 @@ class Bool extends AbstractFilter
         return $this;
     }
 
-    /**
-     * Sets the minimum number that should filter have to match
-     *
-     * @param  int                        $minimumNumberShouldMatch Number of matches
-     * @return \Elastica\Filter\Bool Current object
-     */
-    public function setMinimumNumberShouldMatch($minimumNumberShouldMatch)
-    {
-        $this->_minimumNumberShouldMatch = intval($minimumNumberShouldMatch);
-
-        return $this;
-    }
 }
