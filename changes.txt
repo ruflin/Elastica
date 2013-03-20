@@ -1,5 +1,8 @@
 CHANGES
 
+2013-03-20
+- Removal of unsupported minimum_number_should_match for Boolean Filter
+
 2013-02-25
 - Added Elastica\Bulk class responsible for performing bulk requests. New bulk requests implemented: Client::deleteDocuments(), Bulk::sendUdp()
 
