@@ -240,7 +240,7 @@ class QueryString extends AbstractQuery
      */
     public function setTieBreaker($tieBreaker = 0)
     {
-        return $this->setParam('tie_breaker', (int) $tieBreaker);
+        return $this->setParam('tie_breaker', (float) $tieBreaker);
     }
 
     /**
