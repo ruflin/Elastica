@@ -4,6 +4,7 @@ namespace Elastica;
 
 use Elastica\Bulk;
 use Elastica\Bulk\Action;
+use Elastica\Connection\Pool;
 use Elastica\Exception\ResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
@@ -41,9 +42,9 @@ class Client
     );
 
     /**
-     * @var \Elastica\Connection[] List of connections
+     * @var \Elastica\Connection\Pool Connection pool
      */
-    protected $_connections = array();
+    protected $_connectionPool;
 
     /**
      * @var callback
@@ -69,49 +70,7 @@ class Client
     public function __construct(array $config = array(), $callback = null)
     {
         $this->setConfig($config);
-        $this->_callback = $callback;
-        $this->_initConnections();
-    }
-
-    /**
-     * Inits the client connections
-     */
-    protected function _initConnections()
-    {
-        $connections = $this->getConfig('connections');
-
-        foreach ($connections as $connection) {
-            $this->_connections[] = Connection::create($connection);
-        }
-
-        if (isset($_config['servers'])) {
-            $this->_connections[] = Connection::create($this->getConfig('servers'));
-        }
-
-        // If no connections set, create default connection
-        if (empty($this->_connections)) {
-            $this->_connections[] = Connection::create($this->_configureParams());
-        }
-    }
-
-    /**
-     * @return array $params
-     */
-    protected function _configureParams()
-    {
-        $config = $this->getConfig();
-
-        $params = array();
-        $params['config'] = array();
-        foreach ($config as $key => $value) {
-            if (in_array($key, array('curl', 'headers', 'url'))) {
-                $params['config'][$key] = $value;
-            } else {
-                $params[$key] = $value;
-            }
-        }
-
-        return $params;
+        $this->_connectionPool = Pool::create($this->getConfig(), $callback);
     }
 
     /**
@@ -397,7 +356,7 @@ class Client
      */
     public function addConnection(Connection $connection)
     {
-        $this->_connections[] = $connection;
+        $this->_connectionPool->addConnection($connection);
 
         return $this;
     }
@@ -408,14 +367,7 @@ class Client
      */
     public function getConnection()
     {
-        $enabledConnection = null;
-        
-        foreach ($this->_connections as $connection) {
-            if ($connection->isEnabled()) {
-                $enabledConnection = $connection;
-                break;
-            }
-        }
+        $enabledConnection = $this->_connectionPool->getConnection();
         
         if (empty($enabledConnection)) {
             throw new ClientException('No enabled connection');
@@ -429,7 +381,7 @@ class Client
      */
     public function getConnections()
     {
-        return $this->_connections;
+        return $this->_connectionPool->getConnections();
     }
 
     /**
@@ -438,7 +390,7 @@ class Client
      */
     public function setConnections(array $connections)
     {
-        $this->_connections = $connections;
+        $this->_connectionPool->setConnections($connections);
 
         return $this;
     }
@@ -528,15 +480,13 @@ class Client
             $this->_lastRequest = $request;
             $this->_lastResponse = $response;
 
+            $this->_connectionPool->onSuccess($connection);
+
             return $response;
 
-        } catch (ConnectionException $e) {
-            $connection->setEnabled(false);
+        } catch (ConnectionException $connectionException) {
 
-            // Calls callback with connection as param to make it possible to persist invalid connections
-            if ($this->_callback) {
-                call_user_func($this->_callback, $connection, $e);
-            }
+            $this->_connectionPool->onFail($connection, $connectionException);
 
             return $this->request($path, $method, $data, $query);
         }
