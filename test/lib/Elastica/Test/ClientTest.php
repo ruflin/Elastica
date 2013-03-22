@@ -369,8 +369,8 @@ class ClientTest extends BaseTest
         $client = $this->_getClient();
 
         // First connection work, second should not work
-        $connection1 = new Connection(array('port' => '9200', 'timeout' => 2));
-        $connection2 = new Connection(array('port' => '9100', 'timeout' => 2));
+        $connection1 = new Connection(array('port' => '9100', 'timeout' => 2));
+        $connection2 = new Connection(array('port' => '9200', 'timeout' => 2));
 
         $client->setConnections(array($connection1, $connection2));
 
