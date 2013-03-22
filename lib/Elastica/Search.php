@@ -1,8 +1,8 @@
 <?php
 
 namespace Elastica;
+
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\NotImplementedException;
 
 /**
  * Elastica search object
@@ -11,7 +11,7 @@ use Elastica\Exception\NotImplementedException;
  * @package  Elastica
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
-class Search implements SearchableInterface
+class Search
 {
     /*
      * Options
@@ -298,6 +298,19 @@ class Search implements SearchableInterface
     }
 
     /**
+     * @param Index|string $index
+     * @return bool
+     */
+    public function hasIndex($index)
+    {
+        if ($index instanceof Index) {
+            $index = $index->getName();
+        }
+
+        return in_array($index, $this->_indices);
+    }
+
+    /**
      * Return array of types
      *
      * @return array List of types
@@ -316,6 +329,19 @@ class Search implements SearchableInterface
     }
 
     /**
+     * @param \Elastica\Type|string $type
+     * @return bool
+     */
+    public function hasType($type)
+    {
+        if ($type instanceof Type) {
+            $type = $type->getName();
+        }
+
+        return in_array($type, $this->_types);
+    }
+
+    /**
      * @return \Elastica\Query
      */
     public function getQuery()
@@ -331,15 +357,11 @@ class Search implements SearchableInterface
      * Creates new search object
      *
      * @param  \Elastica\SearchableInterface               $searchObject
-     * @throws \Elastica\Exception\NotImplementedException
-     * @return void
+     * @return \Elastica\Search
      */
     public static function create(SearchableInterface $searchObject)
     {
-        throw new NotImplementedException();
-        // Set index
-        // set type
-        // set client
+        return $searchObject->createSearch();
     }
 
     /**
@@ -380,7 +402,7 @@ class Search implements SearchableInterface
      */
     public function search($query = '', $options = null)
     {
-        $this->_setOptionsAndQuery($options, $query);
+        $this->setOptionsAndQuery($options, $query);
 
         $query = $this->getQuery();
         $path = $this->getPath();
@@ -398,11 +420,13 @@ class Search implements SearchableInterface
     }
 
     /**
-     * {@inheritdoc}
+     *
+     * @param mixed $query
+     * @return int
      */
     public function count($query = '')
     {
-        $this->_setOptionsAndQuery(null, $query);
+        $this->setOptionsAndQuery(null, $query);
 
         $query = $this->getQuery();
         $path = $this->getPath();
@@ -423,17 +447,17 @@ class Search implements SearchableInterface
      * @param  string|array|\Elastica\Query $query
      * @return \Elastica\Search
      */
-    protected function _setOptionsAndQuery($options = null, $query = '')
+    public function setOptionsAndQuery($options = null, $query = '')
     {
         if ('' != $query) {
             $this->setQuery($query);
         }
 
         if (is_int($options)) {
-            $this->getQuery()->setLimit($options);
+            $this->getQuery()->setSize($options);
         } elseif (is_array($options)) {
             if (isset($options['limit'])) {
-                $this->getQuery()->setLimit($options['limit']);
+                $this->getQuery()->setSize($options['limit']);
                 unset($options['limit']);
             }
               if (isset($options['explain'])) {

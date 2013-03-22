@@ -238,8 +238,8 @@ class Bulk
     public function toString()
     {
         $data = '';
-        foreach ($this->toArray() as $row) {
-            $data.= json_encode($row) . self::DELIMITER;
+        foreach ($this->getActions() as $action) {
+            $data.= $action->toString();
         }
         return $data;
     }
@@ -273,8 +273,9 @@ class Bulk
 
     /**
      * @param \Elastica\Response $response
+     * @throws Exception\Bulk\ResponseException
+     * @throws Exception\InvalidException
      * @return \Elastica\Bulk\ResponseSet
-     * @throws \Elastica\Exception\Bulk\ResponseException
      */
     protected function _processResponse(Response $response)
     {
@@ -291,11 +292,13 @@ class Bulk
                     throw new InvalidException('No response found for action #' . $key);
                 }
 
+                $action = $actions[$key];
+
                 $opType = key($item);
                 $bulkResponseData = reset($item);
 
-                if ($actions[$key] instanceof AbstractDocumentAction) {
-                    $document = $actions[$key]->getDocument();
+                if ($action instanceof AbstractDocumentAction) {
+                    $document = $action->getDocument();
                     if ($document->isAutoPopulate()
                         || $this->_client->getConfigValue(array('document', 'autoPopulate'), false)
                     ) {
@@ -308,7 +311,7 @@ class Bulk
                     }
                 }
 
-                $bulkResponses[] = new BulkResponse($bulkResponseData, $actions[$key], $opType);
+                $bulkResponses[] = new BulkResponse($bulkResponseData, $action, $opType);
             }
         }
 

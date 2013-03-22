@@ -192,10 +192,10 @@ class Type implements SearchableInterface
 
     /**
      * @param string $id
-     * @param array $data
+     * @param array|string $data
      * @return Document
      */
-    public function createDocument($id = '', array $data = array())
+    public function createDocument($id = '', $data = array())
     {
         $document = new Document($id, $data);
         $document->setType($this);
@@ -253,6 +253,7 @@ class Type implements SearchableInterface
         $search = new Search($this->getIndex()->getClient());
         $search->addIndex($this->getIndex());
         $search->addType($this);
+        $search->setOptionsAndQuery($options, $query);
 
         return $search;
     }
@@ -269,7 +270,7 @@ class Type implements SearchableInterface
     {
         $search = $this->createSearch($query, $options);
 
-        return $search->search($query, $options);
+        return $search->search();
     }
 
     /**

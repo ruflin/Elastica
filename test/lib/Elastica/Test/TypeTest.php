@@ -44,11 +44,50 @@ class TypeTest extends BaseTest
         $resultSet = $type->search('rolf');
         $this->assertEquals(1, $resultSet->count());
 
+        $count = $type->count('rolf');
+        $this->assertEquals(1, $count);
+
         // Test if source is returned
         $result = $resultSet->current();
         $this->assertEquals(3, $result->getId());
         $data = $result->getData();
         $this->assertEquals('rolf', $data['username']);
+    }
+
+    public function testCreateSearch()
+    {
+        $client = $this->_getClient();
+        $index = new Index($client, 'test_index');
+        $type = new Type($index, 'test_type');
+
+        $query = new Query\QueryString('test');
+        $options = array(
+            'limit' => 5,
+            'explain' => true,
+        );
+
+        $search = $type->createSearch($query, $options);
+
+        $expected = array(
+            'query' => array(
+                'query_string' => array(
+                    'query' => 'test'
+                )
+            ),
+            'size' => 5,
+            'explain' => true
+        );
+        $this->assertEquals($expected, $search->getQuery()->toArray());
+        $this->assertEquals(array('test_index'), $search->getIndices());
+        $this->assertTrue($search->hasIndices());
+        $this->assertTrue($search->hasIndex($index));
+        $this->assertTrue($search->hasIndex('test_index'));
+        $this->assertFalse($search->hasIndex('test'));
+        $this->assertEquals(array('test_type'), $search->getTypes());
+        $this->assertTrue($search->hasTypes());
+        $this->assertTrue($search->hasType($type));
+        $this->assertTrue($search->hasType('test_type'));
+        $this->assertFalse($search->hasType('test_type2'));
     }
 
     public function testNoSource()

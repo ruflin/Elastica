@@ -5,6 +5,8 @@ namespace Elastica\Test;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
+use Elastica\Index;
+use Elastica\Query\QueryString;
 use Elastica\Status;
 use Elastica\Type;
 use Elastica\Type\Mapping;
@@ -500,5 +502,65 @@ class IndexTest extends BaseTest
         $index->create(array(), $opts);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
+    }
+
+    public function testCreateSearch()
+    {
+        $client = $this->_getClient();
+        $index = new Index($client, 'test');
+
+        $query = new QueryString('test');
+        $options = 5;
+
+        $search = $index->createSearch($query, $options);
+
+        $expected = array(
+            'query' => array(
+                'query_string' => array(
+                    'query' => 'test'
+                )
+            ),
+            'size' => 5
+        );
+        $this->assertEquals($expected, $search->getQuery()->toArray());
+        $this->assertEquals(array('test'), $search->getIndices());
+        $this->assertTrue($search->hasIndices());
+        $this->assertTrue($search->hasIndex('test'));
+        $this->assertTrue($search->hasIndex($index));
+        $this->assertEquals(array(), $search->getTypes());
+        $this->assertFalse($search->hasTypes());
+        $this->assertFalse($search->hasType('test_type'));
+
+        $type = new Type($index, 'test_type2');
+        $this->assertFalse($search->hasType($type));
+    }
+
+    public function testSearch()
+    {
+        $index = $this->_createIndex();
+
+        $type = new Type($index, 'user');
+
+        $docs = array();
+        $docs[] = new Document(1, array('username' => 'hans', 'test' => array('2', '3', '5')));
+        $docs[] = new Document(2, array('username' => 'john', 'test' => array('1', '3', '6')));
+        $docs[] = new Document(3, array('username' => 'rolf', 'test' => array('2', '3', '7')));
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $resultSet = $index->search('rolf');
+        $this->assertEquals(1, $resultSet->count());
+
+        $count = $index->count('rolf');
+        $this->assertEquals(1, $count);
+
+        // Test if source is returned
+        $result = $resultSet->current();
+        $this->assertEquals(3, $result->getId());
+        $data = $result->getData();
+        $this->assertEquals('rolf', $data['username']);
+
+        $count = $index->count();
+        $this->assertEquals(3, $count);
     }
 }

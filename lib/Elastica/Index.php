@@ -232,6 +232,7 @@ class Index implements SearchableInterface
     {
         $search = new Search($this->getClient());
         $search->addIndex($this);
+        $search->setOptionsAndQuery($options, $query);
 
         return $search;
     }
@@ -248,7 +249,7 @@ class Index implements SearchableInterface
     {
         $search = $this->createSearch($query, $options);
 
-        return $search->search($query, $options);
+        return $search->search();
     }
 
     /**

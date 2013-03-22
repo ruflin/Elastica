@@ -132,15 +132,25 @@ abstract class AbstractType implements SearchableInterface
     }
 
     /**
+     * @param \Elastica\Query $query
+     * @param array|int $options
+     * @return \Elastica\Search
+     */
+    public function createSearch($query = '', $options = null)
+    {
+        return $this->getType()->createSearch($query, $options);
+    }
+
+    /**
      * Search on the type
      *
      * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
      * @return \Elastica\ResultSet          ResultSet with all results inside
      * @see \Elastica\SearchableInterface::search
      */
-    public function search($query = '')
+    public function search($query = '', $options = null)
     {
-        return $this->getType()->search($query);
+        return $this->getType()->search($query, $options = null);
     }
 
     /**

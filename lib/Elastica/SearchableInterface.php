@@ -31,7 +31,7 @@ interface SearchableInterface
      * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
      * @return \Elastica\ResultSet          ResultSet with all results inside
      */
-    public function search($query = '');
+    public function search($query = '', $options = null);
 
     /**
      * Counts results for a query
@@ -42,4 +42,11 @@ interface SearchableInterface
      * @return int                         number of documents matching the query
      */
     public function count($query = '');
+
+    /**
+     * @param \Elastica\Query $query
+     * @param array $options
+     * @return \Elastica\Search
+     */
+    public function createSearch($query = '', $options = null);
 }
