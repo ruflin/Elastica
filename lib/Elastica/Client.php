@@ -79,13 +79,12 @@ class Client
     protected function _initConnections()
     {
         $connections = $this->getConfig('connections');
+        if (isset($this->_config['servers'])) {
+            $connections = array_merge($connections, $this->_config['servers']);
+        }
 
         foreach ($connections as $connection) {
             $this->_connections[] = Connection::create($connection);
-        }
-
-        if (isset($_config['servers'])) {
-            $this->_connections[] = Connection::create($this->getConfig('servers'));
         }
 
         // If no connections set, create default connection

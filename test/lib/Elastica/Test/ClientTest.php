@@ -86,6 +86,20 @@ class ClientTest extends BaseTest
         $resultSet = $type->search('rolf');
     }
 
+    public function testMergeServersAndConnectionsArray()
+    {
+        $client = new Client(array(
+            'servers' => array(
+                array('host' => 'localhost', 'port' => 9200),
+                array('host' => 'localhost', 'port' => 9201),
+            ),
+            'connections' => array(
+                array('host' => 'localhost', 'port' => 9202),
+            )
+        ));
+        $this->assertCount(3, $client->getConnections());
+    }
+
     public function testBulk()
     {
         $client = $this->_getClient();
