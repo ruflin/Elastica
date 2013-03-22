@@ -409,15 +409,15 @@ class Client
     public function getConnection()
     {
         $enabledConnection = null;
-
-        // TODO: Choose one after other if roundRobin -> should we shuffle the array?
+        
         foreach ($this->_connections as $connection) {
             if ($connection->isEnabled()) {
                 $enabledConnection = $connection;
+                break;
             }
         }
-
-        if (!$enabledConnection) {
+        
+        if (empty($enabledConnection)) {
             throw new ClientException('No enabled connection');
         }
 
