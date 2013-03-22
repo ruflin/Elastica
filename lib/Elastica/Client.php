@@ -410,10 +410,6 @@ class Client
     {
         $enabledConnection = null;
         
-        if (($this->_config['roundRobin'] === true) && (count($this->_connections) > 1)) {
-            shuffle($this->_connections);
-        }
-        
         foreach ($this->_connections as $connection) {
             if ($connection->isEnabled()) {
                 $enabledConnection = $connection;
