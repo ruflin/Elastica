@@ -177,4 +177,41 @@ class MappingTest extends BaseTest
 
         $type->addDocument($doc);
     }
+
+    /**
+     * Test setting a dynamic template and validate whether the right mapping is applied after adding a document which
+     * should match the dynamic template. The example is the template_1 from the Elasticsearch documentation.
+     * 
+     * @link http://www.elasticsearch.org/guide/reference/mapping/root-object-type/
+     */
+    public function testDynamicTemplate()
+    {
+        $index = $this->_createIndex();
+        $type  = $index->getType('person');
+        
+        // set a dynamic template "template_1" which creates a multi field for multi* matches. 
+        $mapping = new Mapping($type);
+        $mapping->setParam('dynamic_templates', array(
+            array('template_1' => array(
+                'match'   => 'multi*',
+                'mapping' => array(
+                    'type'   => 'multi_field',
+                    'fields' => array(
+                        '{name}' => array('type' => '{dynamic_type}', 'index' => 'analyzed'),
+                        'org'    => array('type' => '{dynamic_type}', 'index' => 'not_analyzed')
+                    )
+                )
+            ))
+        ));
+        
+        $mapping->send();
+        
+        // create a document which should create a mapping for the field: multiname.
+        $testDoc = new Document('person1', array('multiname' => 'Jasper van Wanrooy'), $type);
+        $index->addDocuments(array($testDoc));
+        
+        // read the mapping from Elasticsearch and assert that the multiname.org field is "not_analyzed"
+        $newMapping = $type->getMapping();
+        $this->assertEquals('not_analyzed', $newMapping['person']['properties']['multiname']['fields']['org']['index']);
+    }
 }
