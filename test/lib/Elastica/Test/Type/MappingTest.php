@@ -212,6 +212,11 @@ class MappingTest extends BaseTest
         
         // read the mapping from Elasticsearch and assert that the multiname.org field is "not_analyzed"
         $newMapping = $type->getMapping();
-        $this->assertEquals('not_analyzed', $newMapping['person']['properties']['multiname']['fields']['org']['index']);
+        $this->assertArrayHasKey('person', $newMapping,
+            'Person type not available in mapping from ES. Mapping set at all?');
+        $this->assertArrayHasKey('properties', $newMapping['person'],
+            'Person type doesnt have any properties. Document properly added?');
+        $this->assertArrayHasKey('multiname', $newMapping['person']['properties'],
+            'The multi* matcher did not create a mapping for the multiname property when indexing the document.');
     }
 }
