@@ -217,6 +217,13 @@ class MappingTest extends BaseTest
         $this->assertArrayHasKey('properties', $newMapping['person'],
             'Person type doesnt have any properties. Document properly added?');
         $this->assertArrayHasKey('multiname', $newMapping['person']['properties'],
-            'The multi* matcher did not create a mapping for the multiname property when indexing the document.');
+            'The multiname property is not added to the mapping. Document properly added?');
+        $this->assertArrayHasKey('fields', $newMapping['person']['properties']['multiname'],
+            'The multiname field of the Person type is presumably not a multi_field type. Dynamic mapping not applied?');
+        $this->assertArrayHasKey('org', $newMapping['person']['properties']['multiname']['fields'],
+            'The multi* matcher did not create a mapping for the multiname.org property when indexing the document.');
+        $this->assertArrayHasKey('index', $newMapping['person']['properties']['multiname']['fields']['org'],
+            'Indexing status of the multiname.org not available. Dynamic mapping not fully applied!');
+        $this->assertEquals('not_analyzed', $newMapping['person']['properties']['multiname']['fields']['org']['index']);
     }
 }
