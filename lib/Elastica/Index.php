@@ -218,9 +218,11 @@ class Index implements SearchableInterface
      */
     public function exists()
     {
-        $cluster = new Cluster($this->getClient());
+        $path = '_cluster/state?filter_indices=' . $this->getName();
+        $response = $this->_client->request($path, Elastica_Request::GET);
+        $data = $response->getData();
 
-        return in_array($this->getName(), $cluster->getIndexNames());
+        return isset($data['metadata']['indices'][$this->getName()]);
     }
 
     /**
