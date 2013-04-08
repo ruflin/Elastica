@@ -84,8 +84,10 @@ class Client
             $this->_connections[] = Connection::create($connection);
         }
 
-        if (isset($_config['servers'])) {
-            $this->_connections[] = Connection::create($this->getConfig('servers'));
+        if (isset($this->_config['servers'])) {
+			foreach ($this->getConfig('servers') as $server) {
+				$this->_connections[] = Connection::create($server);
+			}
         }
 
         // If no connections set, create default connection
