@@ -218,9 +218,13 @@ class Index implements SearchableInterface
      */
     public function exists()
     {
-        $cluster = new Cluster($this->getClient());
+        $path = '_cluster/state';
+        $response = $this->_client->request($path, Request::GET, array(), array(
+            'filter_indices' => $this->getName(),
+        ));
+        $data = $response->getData();
 
-        return in_array($this->getName(), $cluster->getIndexNames());
+        return isset($data['metadata']['indices'][$this->getName()]);
     }
 
     /**
