@@ -58,6 +58,11 @@ class ResultSet implements \Iterator, \Countable
     protected $_totalHits = 0;
 
     /**
+     * @var float
+     */
+    protected $_maxScore = 0;
+
+    /**
      * Constructs ResultSet object
      *
      * @param \Elastica\Response $response Response object
@@ -80,6 +85,7 @@ class ResultSet implements \Iterator, \Countable
         $this->_response = $response;
         $result = $response->getData();
         $this->_totalHits = isset($result['hits']['total']) ? $result['hits']['total'] : 0;
+        $this->_maxScore = isset($result['hits']['max_score']) ? $result['hits']['max_score'] : 0;
         $this->_took = isset($result['took']) ? $result['took'] : 0;
         $this->_timedOut = !empty($result['timed_out']);
         if (isset($result['hits']['hits'])) {
@@ -131,6 +137,16 @@ class ResultSet implements \Iterator, \Countable
     public function getTotalHits()
     {
         return (int) $this->_totalHits;
+    }
+
+    /**
+     * Returns the max score of the results found
+     *
+     * @return float Max Score
+     */
+    public function getMaxScore()
+    {
+        return (float) $this->_maxScore;
     }
 
     /**
