@@ -23,7 +23,9 @@ class Fuzzy extends AbstractQuery
      */
     public function __construct ($fieldName, $value)
     {
-        $this->setField($fieldName, $value);
+        if ($fieldName and $value) {
+            $this->setField($fieldName, $value);
+        }
     }
 
     /**
@@ -47,18 +49,18 @@ class Fuzzy extends AbstractQuery
     /**
      * Set optional parameters on the existing query
      *
-     * @param  string                    $optionName option name
+     * @param  string                    $param option name
      * @param  mixed                     $value      Value of the parameter
      * @return \Elastica\Query\Fuzzy Current object
      */
-    public function setFieldOption ($optionName, $value) {
+    public function setFieldOption ($param, $value) {
         //Retrieve the single existing field for alteration.
         $params = $this->getParams();
         if (count($params) < 1) {
            throw new InvalidException('No field has been set');
         }
         $keyArray = array_keys($params);
-        $params[$keyArray[0]][$optionName] = $value;
+        $params[$keyArray[0]][$param] = $value;
 
         return $this->setparam($keyArray[0], $params[$keyArray[0]]);
     }
@@ -71,8 +73,8 @@ class Fuzzy extends AbstractQuery
     {
         $this->setField($fieldName, $args['value']);
         unset($args['value']);
-        foreach ($args as $optionName => $value) {
-            $this->setFieldOption($optionName, $value);
+        foreach ($args as $param => $value) {
+            $this->setFieldOption($param, $value);
         }
         return $this;
     }
