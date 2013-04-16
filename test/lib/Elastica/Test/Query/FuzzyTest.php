@@ -33,7 +33,7 @@ class FuzzyTest extends BaseTest
         $this->assertEquals($expectedArray, $fuzzy->toArray());
 
         $fuzzy = new Fuzzy();
-        $fuzzy->setField('user', 'Nicolas')->setFieldOptions('boost', 1.0);
+        $fuzzy->setField('user', 'Nicolas')->setFieldOption('boost', 1.0);
         $expectedArray = array(
             'fuzzy' => array(
                 'user' => array(
@@ -75,15 +75,15 @@ class FuzzyTest extends BaseTest
 
     public function testBadArguments ()
     {
-        $this->setExpectedException('InvalidException');
+        $this->setExpectedException('Elastica\Exception\InvalidException');
         $query = new Fuzzy();
         $query->addField('name', array(array('value' => 'Baden')));
 
-        $this->setExpectedException('InvalidException');
+        $this->setExpectedException('Elastica\Exception\InvalidException');
         $query = new Fuzzy();
         $query->setField('name', array());
 
-        $this->setExpectedException('InvalidException');
+        $this->setExpectedException('Elastica\Exception\InvalidException');
         $query = new Fuzzy();
         $query->setField('name', 'value');
         $query->setField('name1', 'value1');
