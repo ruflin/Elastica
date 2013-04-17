@@ -73,8 +73,9 @@ class IndexTest extends BaseTest
 
         $query = new HasChild('Max', 'comment');
         $resultSet = $typeBlog->search($query);
+        $results = $resultSet->getIterator();
         $this->assertEquals(1, $resultSet->count());
-        $this->assertEquals(array('title' => 'Foo bar'), $resultSet->current()->getData());
+        $this->assertEquals(array('title' => 'Foo bar'), current($results)->getData());
     }
 
     public function testAddPdfFile()

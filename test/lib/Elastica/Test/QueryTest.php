@@ -85,10 +85,11 @@ class QueryTest extends BaseTest
         // ASC order
         $query->setSort(array(array('firstname' => array('order' => 'asc'))));
         $resultSet = $type->search($query);
+        $results = $resultSet->getIterator();
         $this->assertEquals(2, $resultSet->count());
 
-        $first = $resultSet->current()->getData();
-        $second = $resultSet->next()->getData();
+        $first = current($results)->getData();
+        $second = next($results)->getData();
 
         $this->assertEquals('guschti', $first['firstname']);
         $this->assertEquals('nicolas', $second['firstname']);
@@ -96,10 +97,11 @@ class QueryTest extends BaseTest
         // DESC order
         $query->setSort(array('firstname' => array('order' => 'desc')));
         $resultSet = $type->search($query);
+        $results = $resultSet->getIterator();
         $this->assertEquals(2, $resultSet->count());
 
-        $first = $resultSet->current()->getData();
-        $second = $resultSet->next()->getData();
+        $first = current($results)->getData();
+        $second = next($results)->getData();
 
         $this->assertEquals('nicolas', $first['firstname']);
         $this->assertEquals('guschti', $second['firstname']);

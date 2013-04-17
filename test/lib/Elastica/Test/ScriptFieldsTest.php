@@ -87,7 +87,8 @@ class ScriptFieldsTest extends BaseTest
         $query->setScriptFields($scriptFields);
 
         $resultSet = $type->search($query);
-        $first = $resultSet->current()->getData();
+        $results = $resultSet->getIterator();
+        $first = current($results)->getData();
 
         // 1 + 2
         $this->assertEquals(3, $first['test']);
