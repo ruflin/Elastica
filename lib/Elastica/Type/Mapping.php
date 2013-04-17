@@ -161,6 +161,28 @@ class Mapping
     }
 
     /**
+     * Sets params for the "_all" field
+     *
+     * @param array                       $params _all Params (enabled, store, term_vector, analyzer)
+     * @return \Elastica\Type\Mapping
+     */
+    public function setAllField(array $params)
+    {
+        return $this->setParam('_all', $params);
+    }
+
+    /**
+     * Enables the "_all" field
+     *
+     * @param  bool                      $enabled OPTIONAL (default = true)
+     * @return \Elastica\Type\Mapping
+     */
+    public function enableAllField($enabled = true)
+    {
+        return $this->setAllField(array('enabled' => $enabled));
+    }
+
+    /**
      * Converts the mapping to an array
      *
      * @throws \Elastica\Exception\InvalidException
