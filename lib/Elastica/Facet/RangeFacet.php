@@ -82,8 +82,12 @@ class RangeFacet extends AbstractFacet
         }
 
         $range = array();
-        if (isset($from)) $range['from'] = $from;
-        if (isset($to)) $range['to'] = $to;
+        if (isset($from)) {
+            $range['from'] = $from;
+        }
+        if (isset($to)) {
+            $range['to'] = $to;
+        }
         $this->_params['ranges'][] = $range;
 
         return $this;
