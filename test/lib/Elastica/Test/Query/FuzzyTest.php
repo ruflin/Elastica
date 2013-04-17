@@ -11,7 +11,9 @@ class FuzzyTest extends BaseTest
     public function testToArray()
     {
         $fuzzy = new Fuzzy();
+
         $fuzzy->addField('user', array('value' => 'Nicolas', 'boost' => 1.0));
+
         $expectedArray = array(
             'fuzzy' => array(
                 'user' => array(
@@ -20,28 +22,7 @@ class FuzzyTest extends BaseTest
                 )
             )
         );
-        $this->assertEquals($expectedArray, $fuzzy->toArray(), 'Deprecated method failed');
 
-        $fuzzy = new Fuzzy('user', 'Nicolas');
-        $expectedArray = array(
-            'fuzzy' => array(
-                'user' => array(
-                    'value' => 'Nicolas',
-                )
-            )
-        );
-        $this->assertEquals($expectedArray, $fuzzy->toArray());
-
-        $fuzzy = new Fuzzy();
-        $fuzzy->setField('user', 'Nicolas')->setFieldOption('boost', 1.0);
-        $expectedArray = array(
-            'fuzzy' => array(
-                'user' => array(
-                    'value' => 'Nicolas',
-                    'boost' => 1.0
-                )
-            )
-        );
         $this->assertEquals($expectedArray, $fuzzy->toArray());
     }
 
@@ -63,29 +44,14 @@ class FuzzyTest extends BaseTest
 
         $index->refresh();
 
+        $type = 'text_phrase';
         $field = 'name';
 
         $query = new Fuzzy();
-        $query->setField($field, 'Baden');
+        $query->addField('name', array('value' => 'Baden'));
 
         $resultSet = $index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
-    }
-
-    public function testBadArguments ()
-    {
-        $this->setExpectedException('Elastica\Exception\InvalidException');
-        $query = new Fuzzy();
-        $query->addField('name', array(array('value' => 'Baden')));
-
-        $this->setExpectedException('Elastica\Exception\InvalidException');
-        $query = new Fuzzy();
-        $query->setField('name', array());
-
-        $this->setExpectedException('Elastica\Exception\InvalidException');
-        $query = new Fuzzy();
-        $query->setField('name', 'value');
-        $query->setField('name1', 'value1');
     }
 }
