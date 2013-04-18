@@ -12,7 +12,7 @@ env:
 
 before_script:
   - composer self-update
-  - composer --dev install
+  - composer --dev --prefer-source install
   - ./test/bin/install_php_memcache.sh
   - ./test/bin/run_elasticsearch.sh
 
