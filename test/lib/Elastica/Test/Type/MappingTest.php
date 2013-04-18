@@ -138,9 +138,12 @@ class MappingTest extends BaseTest
                 'name' => array('type' => 'string', 'store' => 'yes'),
             )
         );
-        $childmapping->setParam('_parent', array('type' => 'parenttype'));
+        $childmapping->setParent('parenttype');
 
         $childtype->setMapping($childmapping);
+
+        $data = $childmapping->toArray();
+        $this->assertEquals('parenttype', $data[$childtype->getName()]['_parent']['type']);
     }
 
     public function testMappingExample()

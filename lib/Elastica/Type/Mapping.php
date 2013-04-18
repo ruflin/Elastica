@@ -161,6 +161,17 @@ class Mapping
     }
 
     /**
+     * Set parent type
+     *
+     * @param string                     $type Parent type
+     * @return \Elastica\Type\Mapping
+     */
+    public function setParent($type)
+    {
+        return $this->setParam('_parent', array('type' => $type));
+    }
+
+    /**
      * Converts the mapping to an array
      *
      * @throws \Elastica\Exception\InvalidException
