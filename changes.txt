@@ -1,5 +1,9 @@
 CHANGES
 
+2013-04-17
+- Query\Fuzzy to comply with DSL spec. Multi-field queries now throw an exception. Implemented: Query\Fuzzy::setField, Query\Fuzzy::setFieldOption.
+- Query\Fuzzy::addField has been deprecated.
+
 2013-04-12
 - Adding max score information in ResultSet
 - Adding test for the ResultSet class
