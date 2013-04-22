@@ -3,12 +3,12 @@
 namespace Elastica\Exception;
 
 /**
- * Abstract general Elastica exception object
+ * General Elastica exception interface
  *
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-abstract class AbstractException extends \Exception
+interface ExceptionInterface
 {
 }
