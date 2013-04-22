@@ -44,9 +44,9 @@ class Result
     {
         if (isset($this->_hit[$name])) {
             return $this->_hit[$name];
-        } else {
-            return array();
         }
+
+        return array();
     }
 
     /**
@@ -130,9 +130,9 @@ class Result
     {
         if (isset($this->_hit['fields']) && !isset($this->_hit['_source'])) {
             return $this->getFields();
-        } else {
-            return $this->getSource();
         }
+
+        return $this->getSource();
     }
 
     /**

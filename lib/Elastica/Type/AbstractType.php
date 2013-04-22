@@ -16,12 +16,12 @@ use Elastica\Util;
  * with some easy config entries that are overloaded.
  *
  * The following variables have to be set:
- *	- $_indexName
- *	- $_typeName
+ *    - $_indexName
+ *    - $_typeName
  *
  * The following variables can be set for additional configuration
- *	- $_mapping: Value type mapping for the given type
- *	- $_indexParams: Parameters for the index
+ *    - $_mapping: Value type mapping for the given type
+ *    - $_indexParams: Parameters for the index
  *
  * @todo Add some settings examples to code
  * @category Xodoa

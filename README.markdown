@@ -31,7 +31,7 @@ File indexing
 -------------
 File upload is supported but the mapper attachement plugin has to be installed
 
-	./bin/plugin install mapper-attachments
+    ./bin/plugin install mapper-attachments
 
 Contributing
 ------------
