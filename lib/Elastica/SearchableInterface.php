@@ -16,16 +16,16 @@ interface SearchableInterface
      *
      * TODO: Improve sample code
      * {
-     *	 "from" : 0,
-     *	 "size" : 10,
-     *	 "sort" : {
-     *		  "postDate" : {"reverse" : true},
-     *		  "user" : { },
-     *		  "_score" : { }
-     *	  },
-     *	  "query" : {
-     *		  "term" : { "user" : "kimchy" }
-     *	  }
+     *     "from" : 0,
+     *     "size" : 10,
+     *     "sort" : {
+     *          "postDate" : {"reverse" : true},
+     *          "user" : { },
+     *          "_score" : { }
+     *      },
+     *      "query" : {
+     *          "term" : { "user" : "kimchy" }
+     *      }
      * }
      *
      * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object

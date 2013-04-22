@@ -34,7 +34,7 @@ class Client
         'transport'       => null,
         'persistent'      => true,
         'timeout'         => null,
-        'connections'     => array(),	// host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers, url)
+        'connections'     => array(), // host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers, url)
         'roundRobin'      => false,
         'log'             => false,
         'retryOnConflict' => 0,
@@ -85,9 +85,9 @@ class Client
         }
 
         if (isset($this->_config['servers'])) {
-			foreach ($this->getConfig('servers') as $server) {
-				$this->_connections[] = Connection::create($server);
-			}
+            foreach ($this->getConfig('servers') as $server) {
+                $this->_connections[] = Connection::create($server);
+            }
         }
 
         // If no connections set, create default connection
