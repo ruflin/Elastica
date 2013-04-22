@@ -420,7 +420,7 @@ class IndexTest extends BaseTest
             'username' => array('type' => 'string', 'store' => 'no'), 'test' => array('type' => 'integer', 'store' => 'no'),);
 
         $type->setMapping($mapping);
-		$index->refresh();
+        $index->refresh();
         $indexMappings = $index->getMapping();
 
         $this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['type'], 'integer');

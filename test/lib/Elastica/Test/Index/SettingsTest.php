@@ -243,7 +243,7 @@ class SettingsTest extends BaseTest
         $settings->setBlocksMetadata();
         $this->assertTrue($settings->getBlocksMetadata());
 
-        $settings->setBlocksMetadata(false);	// Cannot delete index otherwise
+        $settings->setBlocksMetadata(false); // Cannot delete index otherwise
         $index->delete();
     }
 }
