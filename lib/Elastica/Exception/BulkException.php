@@ -2,6 +2,6 @@
 
 namespace Elastica\Exception;
 
-class BulkException extends AbstractException
+class BulkException extends \RuntimeException implements ExceptionInterface
 {
 }

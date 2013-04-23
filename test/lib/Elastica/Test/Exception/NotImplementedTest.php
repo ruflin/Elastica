@@ -14,7 +14,7 @@ class NotImplementedTest extends BaseTest
         $exception = new NotImplementedException($message, $code);
 
         $this->assertInstanceOf('Elastica\Exception\NotImplementedException', $exception);
-        $this->assertInstanceOf('Elastica\Exception\AbstractException', $exception);
+        $this->assertInstanceOf('Elastica\Exception\ExceptionInterface', $exception);
         $this->assertInstanceOf('Exception', $exception);
 
         $this->assertEquals($message, $exception->getMessage());

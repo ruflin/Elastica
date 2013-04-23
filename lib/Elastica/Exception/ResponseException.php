@@ -12,7 +12,7 @@ use Elastica\Response;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class ResponseException extends AbstractException
+class ResponseException extends \RuntimeException implements ExceptionInterface
 {
     /**
      * Request

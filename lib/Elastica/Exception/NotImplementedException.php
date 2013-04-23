@@ -11,6 +11,6 @@ namespace Elastica\Exception;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class NotImplementedException extends AbstractException
+class NotImplementedException extends \BadMethodCallException implements ExceptionInterface
 {
 }
