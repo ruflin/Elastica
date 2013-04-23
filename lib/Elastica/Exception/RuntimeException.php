@@ -9,6 +9,6 @@ namespace Elastica\Exception;
  * @package Elastica
  * @author Mikhail Shamin <munk13@gmail.com>
  */
-class RuntimeException extends AbstractException
+class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }
