@@ -1,5 +1,9 @@
 CHANGES
 
+2013-04-23
+- Removed Elastica\Exception\AbstractException
+- All Exceptions now implement Elastica\Exception\ExceptionInterface
+
 2013-04-17
 - Query\Fuzzy to comply with DSL spec. Multi-field queries now throw an exception. Implemented: Query\Fuzzy::setField, Query\Fuzzy::setFieldOption.
 - Query\Fuzzy::addField has been deprecated.
