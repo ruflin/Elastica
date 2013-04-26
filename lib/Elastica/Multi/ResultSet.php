@@ -14,7 +14,7 @@ use Elastica\ResultSet as BaseResultSet;
  * @package Elastica
  * @author munkie
  */
-class ResultSet implements \Iterator, \Countable
+class ResultSet implements \Iterator, \ArrayAccess, \Countable
 {
     /**
      * Result Sets
@@ -60,19 +60,21 @@ class ResultSet implements \Iterator, \Countable
         $responseData = $response->getData();
 
         if (isset($responseData['responses']) && is_array($responseData['responses'])) {
+            reset($searches);
             foreach ($responseData['responses'] as $key => $responseData) {
+                $currentSearch = each($searches);
 
-                if (!isset($searches[$key])) {
+                if ($currentSearch === false) {
                     throw new InvalidException('No result found for search #' . $key);
-                } elseif (!$searches[$key] instanceof BaseSearch) {
+                } elseif (!$currentSearch['value'] instanceof BaseSearch) {
                     throw new InvalidException('Invalid object for search #' . $key . ' provided. Should be Elastica\Search');
                 }
 
-                $search = $searches[$key];
+                $search = $currentSearch['value'];
                 $query = $search->getQuery();
 
                 $response = new Response($responseData);
-                $this->_resultSets[] = new BaseResultSet($response, $query);
+                $this->_resultSets[$currentSearch['key']] = new BaseResultSet($response, $query);
             }
         }
     }
@@ -161,5 +163,46 @@ class ResultSet implements \Iterator, \Countable
     public function count()
     {
         return count($this->_resultSets);
+    }
+
+    /**
+     * @param  string|int $offset
+     * @return boolean true on success or false on failure.
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->_resultSets[$offset]);
+    }
+
+    /**
+     * @param mixed $offset
+     * @return mixed Can return all value types.
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->_resultSets[$offset]) ? $this->_resultSets[$offset] : null;
+    }
+
+    /**
+     * @param mixed $offset
+     * @param mixed $value
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (is_null($offset)) {
+            $this->_resultSets[] = $value;
+        } else {
+            $this->_resultSets[$offset] = $value;
+        }
+    }
+
+    /**
+     * @param mixed $offset
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->_resultSets[$offset]);
     }
 }
