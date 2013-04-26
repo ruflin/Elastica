@@ -108,6 +108,12 @@ class Type implements SearchableInterface
         return $response;
     }
 
+    /**
+     * @param $object
+     * @param Document $doc
+     * @return Response
+     * @throws Exception\RuntimeException
+     */
     public function addObject($object, Document $doc = null)
     {
         if (!isset($this->_serializer)) {
@@ -119,6 +125,9 @@ class Type implements SearchableInterface
             $doc = new Document();
         }
         $doc->setData($data);
+        if ($object instanceof DocumentObjectInterface) {
+            $doc->setId($object->getElasticaDocumentId());
+        }
 
         return $this->addDocument($doc);
     }
@@ -155,6 +164,33 @@ class Type implements SearchableInterface
     public function addDocuments(array $docs)
     {
         foreach ($docs as $doc) {
+            $doc->setType($this->getName());
+        }
+
+        return $this->getIndex()->addDocuments($docs);
+    }
+
+    /**
+     * Uses _bulk to send documents to the server
+     *
+     * @param DocumentObjectInterface[] $objects
+     * @return \Elastica\Bulk\ResponseSet
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     */
+    public function addObjects(array $objects)
+    {
+        if (!isset($this->_serializer)) {
+            throw new RuntimeException('No serializer defined');
+        }
+
+        $docs = array();
+        foreach ($objects as $object) {
+            if (!$object instanceof DocumentObjectInterface) {
+                throw new RuntimeException('Object does not implement Elastica\DocumentObjectInterface');
+            }
+            $data = call_user_func($this->_serializer, $object);
+            $doc = new Document($object->getElasticaDocumentId());
+            $doc->setData($data);
             $doc->setType($this->getName());
         }
 
