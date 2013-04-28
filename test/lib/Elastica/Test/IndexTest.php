@@ -22,7 +22,7 @@ class IndexTest extends BaseTest
 
         $type = $index->getType('test');
 
-        $mapping = array('id' => array('type' => 'integer', 'store' => 'yes'), 'email' => array('type' => 'string', 'store' => 'no'),
+        $mapping = array('id' => array('type' => 'integer', 'store' => true), 'email' => array('type' => 'string', 'store' => 'no'),
             'username' => array('type' => 'string', 'store' => 'no'), 'test' => array('type' => 'integer', 'store' => 'no'),);
         $type->setMapping($mapping);
 
@@ -31,8 +31,9 @@ class IndexTest extends BaseTest
 
         $storedMapping = $type->getMapping();
 
+		print_r($storedMapping);
         $this->assertEquals($storedMapping['test']['properties']['id']['type'], 'integer');
-        $this->assertEquals($storedMapping['test']['properties']['id']['store'], 'yes');
+        $this->assertEquals($storedMapping['test']['properties']['id']['store'], true);
         $this->assertEquals($storedMapping['test']['properties']['email']['type'], 'string');
         $this->assertEquals($storedMapping['test']['properties']['username']['type'], 'string');
         $this->assertEquals($storedMapping['test']['properties']['test']['type'], 'integer');
@@ -300,6 +301,10 @@ class IndexTest extends BaseTest
         $index2->create(array(), true);
 
         $status = new Status($client);
+		
+		$index1->refresh();
+		$index2->refresh();
+		
         $this->assertTrue($status->indexExists($indexName1));
         $this->assertTrue($status->indexExists($indexName2));
         $this->assertTrue($status->aliasExists($aliasName));
@@ -416,7 +421,7 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $mapping = array('id' => array('type' => 'integer', 'store' => 'yes'), 'email' => array('type' => 'string', 'store' => 'no'),
+        $mapping = array('id' => array('type' => 'integer', 'store' => true), 'email' => array('type' => 'string', 'store' => 'no'),
             'username' => array('type' => 'string', 'store' => 'no'), 'test' => array('type' => 'integer', 'store' => 'no'),);
 
         $type->setMapping($mapping);
@@ -424,7 +429,7 @@ class IndexTest extends BaseTest
         $indexMappings = $index->getMapping();
 
         $this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['type'], 'integer');
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['store'], 'yes');
+        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['store'], true);
         $this->assertEquals($indexMappings['elastica_test']['test']['properties']['email']['type'], 'string');
         $this->assertEquals($indexMappings['elastica_test']['test']['properties']['username']['type'], 'string');
         $this->assertEquals($indexMappings['elastica_test']['test']['properties']['test']['type'], 'integer');
