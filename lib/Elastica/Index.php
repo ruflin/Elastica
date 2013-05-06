@@ -267,7 +267,7 @@ class Index implements SearchableInterface
     {
         $search = $this->createSearch($query);
 
-        return $search->count();
+        return $search->count($query);
     }
 
     /**
