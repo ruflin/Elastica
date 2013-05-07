@@ -31,7 +31,6 @@ class IndexTest extends BaseTest
 
         $storedMapping = $type->getMapping();
 
-		print_r($storedMapping);
         $this->assertEquals($storedMapping['test']['properties']['id']['type'], 'integer');
         $this->assertEquals($storedMapping['test']['properties']['id']['store'], true);
         $this->assertEquals($storedMapping['test']['properties']['email']['type'], 'string');
@@ -301,10 +300,10 @@ class IndexTest extends BaseTest
         $index2->create(array(), true);
 
         $status = new Status($client);
-		
-		$index1->refresh();
-		$index2->refresh();
-		
+        
+        $index1->refresh();
+        $index2->refresh();
+        
         $this->assertTrue($status->indexExists($indexName1));
         $this->assertTrue($status->indexExists($indexName2));
         $this->assertTrue($status->aliasExists($aliasName));
