@@ -192,6 +192,7 @@ class Type implements SearchableInterface
             $doc = new Document($object->getElasticaDocumentId());
             $doc->setData($data);
             $doc->setType($this->getName());
+            $docs[] = $doc;
         }
 
         return $this->getIndex()->addDocuments($docs);
