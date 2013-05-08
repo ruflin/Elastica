@@ -64,4 +64,11 @@ abstract class Elastica_Filter_Abstract_Multi extends Elastica_Filter_Abstract
 
         return $data;
     }
+
+    /**
+     * @return array An array of already set filters.
+     */
+    public function getFilters() {
+        return $this->_filters;
+    }
 }
