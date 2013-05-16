@@ -125,9 +125,6 @@ class Type implements SearchableInterface
             $doc = new Document();
         }
         $doc->setData($data);
-        if ($object instanceof DocumentObjectInterface) {
-            $doc->setId($object->getElasticaDocumentId());
-        }
 
         return $this->addDocument($doc);
     }
@@ -173,7 +170,7 @@ class Type implements SearchableInterface
     /**
      * Uses _bulk to send documents to the server
      *
-     * @param DocumentObjectInterface[] $objects
+     * @param objects[] $objects
      * @return \Elastica\Bulk\ResponseSet
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
@@ -185,11 +182,8 @@ class Type implements SearchableInterface
 
         $docs = array();
         foreach ($objects as $object) {
-            if (!$object instanceof DocumentObjectInterface) {
-                throw new RuntimeException('Object does not implement Elastica\DocumentObjectInterface');
-            }
             $data = call_user_func($this->_serializer, $object);
-            $doc = new Document($object->getElasticaDocumentId());
+            $doc = new Document();
             $doc->setData($data);
             $doc->setType($this->getName());
             $docs[] = $doc;
