@@ -8,6 +8,8 @@ use Elastica\Exception\ResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Client to connect the the elasticsearch server
@@ -16,7 +18,7 @@ use Elastica\Exception\InvalidException;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Client
+class Client implements LoggerAwareInterface
 {
     /**
      * Config with defaults
@@ -59,6 +61,11 @@ class Client
      * @var \Elastica\Response
      */
     protected $_lastResponse;
+
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger = null;
 
     /**
      * Creates a new Elastica client
@@ -411,14 +418,14 @@ class Client
     public function getConnection()
     {
         $enabledConnection = null;
-        
+
         foreach ($this->_connections as $connection) {
             if ($connection->isEnabled()) {
                 $enabledConnection = $connection;
                 break;
             }
         }
-        
+
         if (empty($enabledConnection)) {
             throw new ClientException('No enabled connection');
         }
@@ -557,13 +564,20 @@ class Client
     }
 
     /**
-     * @param string|\Elastica\Request $message
+     * @param string|\Elastica\Request $context
      */
-    protected function _log($message)
+    protected function _log($context)
     {
-        if ($this->getConfig('log')) {
-            $log = new Log($this->getConfig('log'));
-            $log->log($message);
+        if (!$this->logger && $this->getConfig('log')) {
+            $this->setLogger(new Log($this->getConfig('log')));
+        }
+        if($this->logger){
+            if ($context instanceof Request) {
+                $data = $context->toArray();
+            } else {
+                $data = array('message' => $context);
+            }
+            $this->logger->info('logging Request', $data);
         }
     }
 
@@ -581,5 +595,18 @@ class Client
     public function getLastResponse()
     {
         return $this->_lastResponse;
+    }
+
+    /**
+     * set Logger
+     *
+     * @param LoggerInterface $logger
+     * @return $this
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+
+        return $this;
     }
 }

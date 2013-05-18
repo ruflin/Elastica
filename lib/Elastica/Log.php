@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Psr\Log\AbstractLogger;
+
 /**
  * Elastica log object
  *
@@ -9,7 +11,7 @@ namespace Elastica;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Log
+class Log extends AbstractLogger
 {
     /**
      * Log path or true if enabled
@@ -38,20 +40,19 @@ class Log
     /**
      * Log a message
      *
-     * @param string|\Elastica\Request $message
+     * @param mixed $level
+     * @param string $message
+     * @param array $context
+     * @return null|void
      */
-    public function log($message)
+    public function log($level, $message, array $context = array())
     {
-        if ($message instanceof Request) {
-            $message = $message->toString();
-        }
-
-        $this->_lastMessage = $message;
+        $this->_lastMessage = json_encode($context);
 
         if (!empty($this->_log) && is_string($this->_log)) {
-            error_log($message . PHP_EOL, 3, $this->_log);
+            error_log(json_encode($context) . PHP_EOL, 3, $this->_log);
         } else {
-            error_log($message);
+            error_log(json_encode($context));
         }
 
     }
