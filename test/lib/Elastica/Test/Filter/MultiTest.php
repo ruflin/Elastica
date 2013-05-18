@@ -88,11 +88,6 @@ class AbstractMultiTest extends BaseTest
 
 class AbstractMultiDebug extends AbstractMulti
 {
-    public function getFilters()
-    {
-        return $this->_filters;
-    }
-
     public function getBaseName()
     {
         return parent::_getBaseName();

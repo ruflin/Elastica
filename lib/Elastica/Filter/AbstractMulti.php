@@ -48,6 +48,14 @@ abstract class AbstractMulti extends AbstractFilter
     }
 
     /**
+     * @return array Filters
+     */
+    public function getFilters()
+    {
+        return $this->_filters;
+    }
+
+    /**
      * @see \Elastica\Param::toArray()
      */
     public function toArray()
