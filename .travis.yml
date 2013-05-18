@@ -6,7 +6,7 @@ php:
 
 env:
   global:
-    - ES_VER=0.20.5
+    - ES_VER=0.90.0
     - ES_MAPPER_ATTACHMENTS_VER=1.6.0
     - ES_TRANSPORT_THRIFT_VER=1.4.0
 
