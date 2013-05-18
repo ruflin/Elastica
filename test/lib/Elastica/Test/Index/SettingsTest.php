@@ -180,6 +180,7 @@ class SettingsTest extends BaseTest
         $this->assertEquals(2, $type->count());
     }
 
+
     public function testGetSetBlocksRead()
     {
         $client = $this->_getClient();
