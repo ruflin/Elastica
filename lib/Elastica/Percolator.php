@@ -60,13 +60,19 @@ class Percolator
      * Match a document to percolator queries
      *
      * @param  \Elastica\Document                                  $doc
-     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Not implemented yet
+     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Query to filter the data
      * @return \Elastica\Response
      */
     public function matchDoc(Document $doc, $query = null)
     {
         $path = $this->_index->getName() . '/type/_percolate';
         $data = array('doc' => $doc->getData());
+
+        // Add query to filter results after percolation
+        if ($query) {
+            $query = Query::create($query);
+            $data['query'] = $query->getQuery();
+        }
 
         $response = $this->getIndex()->getClient()->request($path, Request::GET, $data);
         $data = $response->getData();
