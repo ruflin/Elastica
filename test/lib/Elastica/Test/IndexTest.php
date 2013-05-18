@@ -299,13 +299,15 @@ class IndexTest extends BaseTest
         $index1->addAlias($aliasName);
         $index2->create(array(), true);
 
-        $status = new Status($client);
-        
         $index1->refresh();
         $index2->refresh();
-        
+
+        $status = new Status($client);
+
+
         $this->assertTrue($status->indexExists($indexName1));
         $this->assertTrue($status->indexExists($indexName2));
+
         $this->assertTrue($status->aliasExists($aliasName));
         $this->assertTrue($index1->getStatus()->hasAlias($aliasName));
         $this->assertFalse($index2->getStatus()->hasAlias($aliasName));
@@ -329,7 +331,11 @@ class IndexTest extends BaseTest
         $index1->addAlias($aliasName);
         $index2->create(array(), true);
 
+        $index1->refresh();
+        $index2->refresh();
+
         $status = new Status($client);
+
         $this->assertTrue($status->indexExists($indexName1));
         $this->assertTrue($status->indexExists($indexName2));
         $this->assertTrue($status->aliasExists($aliasName));

@@ -12,6 +12,7 @@ use Elastica\Exception\InvalidException;
  */
 class Request extends Param
 {
+    const HEAD = 'HEAD';
     const POST = 'POST';
     const PUT = 'PUT';
     const GET = 'GET';

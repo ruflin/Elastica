@@ -154,7 +154,7 @@ class Response
     }
 
     /**
-     * Gets the transfer information if in DEBUG mode.
+     * Gets the transfer information.
      *
      * @return array Information about the curl request.
      */
@@ -165,7 +165,7 @@ class Response
 
     /**
      * Sets the transfer info of the curl request. This function is called
-     * from the \Elastica\Client::_callService only in debug mode.
+     * from the \Elastica\Client::_callService .
      *
      * @param  array             $transferInfo The curl transfer information.
      * @return \Elastica\Response Current object
@@ -173,7 +173,6 @@ class Response
     public function setTransferInfo(array $transferInfo)
     {
         $this->_transferInfo = $transferInfo;
-
         return $this;
     }
 

@@ -1,5 +1,8 @@
 CHANGES
 
+2013-05-18
+- Elastica\Index::exists fixed for 0.90.0. HEAD request method introduced
+
 2013-04-23
 - Removed Elastica\Exception\AbstractException
 - All Exceptions now implement Elastica\Exception\ExceptionInterface

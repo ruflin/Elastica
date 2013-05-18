@@ -218,13 +218,10 @@ class Index implements SearchableInterface
      */
     public function exists()
     {
-        $path = '_cluster/state';
-        $response = $this->_client->request($path, Request::GET, array(), array(
-            'filter_indices' => $this->getName(),
-        ));
-        $data = $response->getData();
+		$response = $this->getClient()->request($this->getName(), Request::HEAD);
+        $info = $response->getTransferInfo();
 
-        return isset($data['metadata']['indices'][$this->getName()]);
+        return (bool) ($info['http_code'] == 200);
     }
 
     /**

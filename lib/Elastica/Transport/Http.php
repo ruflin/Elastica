@@ -103,6 +103,10 @@ class Http extends AbstractTransport
             curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
         }
 
+        if ($httpMethod == 'HEAD') {
+            curl_setopt($conn, CURLOPT_NOBODY, true);
+        }
+
         curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $httpMethod);
 
         if (defined('DEBUG') && DEBUG) {
@@ -126,8 +130,10 @@ class Http extends AbstractTransport
 
         if (defined('DEBUG') && DEBUG) {
             $response->setQueryTime($end - $start);
-            $response->setTransferInfo(curl_getinfo($conn));
         }
+
+        $response->setTransferInfo(curl_getinfo($conn));
+
 
         if ($response->hasError()) {
             throw new ResponseException($request, $response);
