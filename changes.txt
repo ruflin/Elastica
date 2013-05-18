@@ -1,5 +1,8 @@
 CHANGES
 
+2013-05-18
+- Added optional parameter to filter result while percolate #384
+
 2013-05-07
 - Added EXPERIMENTAL DocumentObjectInterface to be used with Type::addObject()/addObjects()
 
