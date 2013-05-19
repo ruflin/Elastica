@@ -5,6 +5,10 @@ CHANGES
 - Elastica\Filter\AbstractMulti::getFilters() added
 - Implement Elastica\Type\Mapping::enableAllField
 - Refresh for Elastica\Index::flush implemented #316
+- Added optional parameter to filter result while percolate #384
+
+2013-05-07
+- Added EXPERIMENTAL DocumentObjectInterface to be used with Type::addObject()/addObjects()
 
 2013-04-23
 - Removed Elastica\Exception\AbstractException
