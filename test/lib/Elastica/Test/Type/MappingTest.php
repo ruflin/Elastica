@@ -60,6 +60,22 @@ class MappingTest extends BaseTest
         $this->assertEmpty($document->getData());
     }
 
+    public function testEnableAllField()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+
+        $mapping = new Mapping($type, array());
+
+        $mapping->enableAllField();
+
+        $data = $mapping->toArray();
+        $this->assertTrue($data[$type->getName()]['_all']['enabled']);
+
+        $response = $mapping->send();
+        $this->assertTrue($response->isOk());
+    }
+
     public function testEnableTtl()
     {
         $client = $this->_getClient();

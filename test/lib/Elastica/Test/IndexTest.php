@@ -7,6 +7,7 @@ use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Query\QueryString;
+use Elastica\Query\Term;
 use Elastica\Status;
 use Elastica\Type;
 use Elastica\Type\Mapping;
@@ -260,6 +261,30 @@ class IndexTest extends BaseTest
         $this->assertTrue($response['ok']);
 
         $client->getIndex($aliasName)->getType($typeName)->search('ruflin');
+    }
+
+    public function testCount() {
+        $index = $this->_createIndex();
+
+        // Add document to normal index
+        $doc1 = new Document(null, array('name' => 'ruflin'));
+        $doc2 = new Document(null, array('name' => 'nicolas'));
+
+        $type = $index->getType('test');
+        $type->addDocument($doc1);
+        $type->addDocument($doc2);
+
+
+        $index->refresh();
+
+        $this->assertEquals(2, $index->count());
+
+        $query = new Term();
+        $key = 'name';
+        $value = 'nicolas';
+        $query->setTerm($key, $value);
+
+        $this->assertEquals(1, $index->count($query));
     }
 
     public function testDeleteIndexDeleteAlias()

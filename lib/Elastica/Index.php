@@ -370,11 +370,10 @@ class Index implements SearchableInterface
      * @return \Elastica\Response Response object
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-flush.html
      */
-    public function flush()
+    public function flush($refresh = false)
     {
         $path = '_flush';
-        // TODO: Add option for refresh
-        return $this->request($path, Request::POST);
+        return $this->request($path, Request::POST, array(), array('refresh' => $refresh));
     }
 
     /**
