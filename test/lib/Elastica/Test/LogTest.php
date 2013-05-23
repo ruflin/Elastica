@@ -9,6 +9,9 @@ use Psr\Log\LogLevel;
 
 class LogTest extends BaseTest
 {
+    private $context = array();
+    private $message = 'hello world';
+
     public function testLogInterface()
     {
         $log = new Log();
@@ -44,9 +47,11 @@ class LogTest extends BaseTest
     public function testGetLastMessage()
     {
         $log = new Log('/tmp/php.log');
-        $message = 'hello world';
 
-        $log->log(LogLevel::DEBUG, $message);
+        $log->log(LogLevel::DEBUG, $this->message, $this->context);
+
+        $this->context['error_message'] = $this->message;
+        $message = json_encode($this->context);
 
         $this->assertEquals($message, $log->getLastMessage());
     }
@@ -60,12 +65,84 @@ class LogTest extends BaseTest
         $errorLog = ini_get('error_log');
         ini_set('error_log', sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'php.log');
 
-        $message = 'hello world';
+        $this->context['error_message'] = $this->message;
+        $message = json_encode($this->context);
 
-        $log->log(LogLevel::DEBUG, $message);
+        $log->log(LogLevel::DEBUG, $this->message, $this->context);
 
         ini_set('error_log', $errorLog);
 
         $this->assertEquals($message, $log->getLastMessage());
+    }
+
+    public function testGetLastMessageInfo()
+    {
+        $log = $this->initLog();
+        $log->info($this->message, $this->context);
+        $this->assertEquals($this->getMessage(), $log->getLastMessage());
+    }
+
+    public function testGetLastMessageCritical()
+    {
+        $log = $this->initLog();
+        $log->critical($this->message, $this->context);
+        $this->assertEquals($this->getMessage(), $log->getLastMessage());
+    }
+
+
+    public function testGetLastMessageAlert()
+    {
+        $log = $this->initLog();
+        $log->alert($this->message, $this->context);
+        $this->assertEquals($this->getMessage(), $log->getLastMessage());
+    }
+
+    public function testGetLastMessageDebug()
+    {
+        $log = $this->initLog();
+        $log->debug($this->message, $this->context);
+        $this->assertEquals($this->getMessage(), $log->getLastMessage());
+    }
+
+    public function testGetLastMessageEmergency()
+    {
+        $log = $this->initLog();
+        $log->emergency($this->message, $this->context);
+        $this->assertEquals($this->getMessage(), $log->getLastMessage());
+    }
+
+    public function testGetLastMessageError()
+    {
+        $log = $this->initLog();
+        $log->error($this->message, $this->context);
+        $this->assertEquals($this->getMessage(), $log->getLastMessage());
+    }
+
+    public function testGetLastMessageNotice()
+    {
+        $log = $this->initLog();
+        $log->notice($this->message, $this->context);
+        $this->assertEquals($this->getMessage(), $log->getLastMessage());
+    }
+
+    public function testGetLastMessageWarning()
+    {
+        $log = $this->initLog();
+        $log->warning($this->message, $this->context);
+        $this->assertEquals($this->getMessage(), $log->getLastMessage());
+    }
+
+    private function initLog()
+    {
+        $log = new Log('/tmp/php.log');
+
+        return $log;
+    }
+
+    private function getMessage()
+    {
+        $this->context['error_message'] = $this->message;
+
+        return json_encode($this->context);
     }
 }

@@ -47,12 +47,13 @@ class Log extends AbstractLogger
      */
     public function log($level, $message, array $context = array())
     {
+        $context['error_message'] = $message;
         $this->_lastMessage = json_encode($context);
 
         if (!empty($this->_log) && is_string($this->_log)) {
-            error_log(json_encode($context) . PHP_EOL, 3, $this->_log);
+            error_log($this->_lastMessage . PHP_EOL, 3, $this->_log);
         } else {
-            error_log(json_encode($context));
+            error_log($this->_lastMessage);
         }
 
     }
@@ -60,7 +61,7 @@ class Log extends AbstractLogger
     /**
      * Enable/disable log or set log path
      *
-     * @param  bool|string  $log Enables log or sets log path
+     * @param  bool|string $log Enables log or sets log path
      * @return \Elastica\Log
      */
     public function setLog($log)
