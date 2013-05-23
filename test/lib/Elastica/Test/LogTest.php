@@ -8,6 +8,12 @@ use Elastica\Test\Base as BaseTest;
 
 class LogTest extends BaseTest
 {
+    public function testLogInterface()
+    {
+        $log = new Log();
+        $this->assertInstanceOf('Psr\Log\LoggerInterface', $log);
+    }
+
     public function testSetLogConfigPath()
     {
         $logPath = '/tmp/php.log';
@@ -19,6 +25,13 @@ class LogTest extends BaseTest
     {
         $client = new Client(array('log' => true));
         $this->assertTrue($client->getConfig('log'));
+    }
+
+    public function testSetLogConfigEnable1()
+    {
+        $client = new Client();
+        $client->setLogger(new Log());
+        $this->assertFalse($client->getConfig('log'));
     }
 
     public function testEmptyLogConfig()

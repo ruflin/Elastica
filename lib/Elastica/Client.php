@@ -8,7 +8,6 @@ use Elastica\Exception\ResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -18,7 +17,7 @@ use Psr\Log\LoggerInterface;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Client implements LoggerAwareInterface
+class Client
 {
     /**
      * Config with defaults
