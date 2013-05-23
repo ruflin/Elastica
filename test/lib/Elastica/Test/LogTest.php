@@ -5,6 +5,7 @@ namespace Elastica\Test;
 use Elastica\Client;
 use Elastica\Log;
 use Elastica\Test\Base as BaseTest;
+use Psr\Log\LogLevel;
 
 class LogTest extends BaseTest
 {
@@ -45,7 +46,7 @@ class LogTest extends BaseTest
         $log = new Log('/tmp/php.log');
         $message = 'hello world';
 
-        $log->log($message);
+        $log->log(LogLevel::DEBUG, $message);
 
         $this->assertEquals($message, $log->getLastMessage());
     }
@@ -61,7 +62,7 @@ class LogTest extends BaseTest
 
         $message = 'hello world';
 
-        $log->log($message);
+        $log->log(LogLevel::DEBUG, $message);
 
         ini_set('error_log', $errorLog);
 
