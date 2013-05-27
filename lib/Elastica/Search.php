@@ -23,6 +23,8 @@ class Search
     const OPTION_TIMEOUT = 'timeout';
     const OPTION_FROM = 'from';
     const OPTION_SIZE = 'size';
+    const OPTION_SCROLL = 'scroll';
+    const OPTION_SCROLL_ID = 'scroll_id';
 
     /*
      * Search types
@@ -263,6 +265,8 @@ class Search
             case self::OPTION_TIMEOUT:
             case self::OPTION_FROM:
             case self::OPTION_SIZE:
+            case self::OPTION_SCROLL:
+            case self::OPTION_SCROLL_ID:
                 return true;
         }
 
