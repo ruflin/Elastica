@@ -623,7 +623,7 @@ class ClientTest extends BaseTest
 
     public function testLastRequestResponse()
     {
-        $client = new Client(array('log' => '/tmp/php.log'));
+        $client = new Client();
         $response = $client->request('_status');
 
         $this->assertInstanceOf('Elastica\Response', $response);
