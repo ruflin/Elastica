@@ -8,6 +8,7 @@ use Elastica\Exception\ResponseException;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\RuntimeException;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -64,7 +65,7 @@ class Client
     /**
      * @var LoggerInterface
      */
-    protected $logger = null;
+    protected $_logger = null;
 
     /**
      * Creates a new Elastica client
@@ -563,20 +564,26 @@ class Client
     }
 
     /**
+     * logging
+     *
      * @param string|\Elastica\Request $context
+     * @throws Exception\RuntimeException
      */
     protected function _log($context)
     {
-        if (!$this->logger && $this->getConfig('log')) {
+        $log = $this->getConfig('log');
+        if($log && !class_exists('Psr\Log\AbstractLogger')){
+            throw new RuntimeException('Class Psr\Log\AbstractLogger not found');
+        } elseif (!$this->_logger && $log) {
             $this->setLogger(new Log($this->getConfig('log')));
         }
-        if($this->logger){
+        if($this->_logger){
             if ($context instanceof Request) {
                 $data = $context->toArray();
             } else {
                 $data = array('message' => $context);
             }
-            $this->logger->info('logging Request', $data);
+            $this->_logger->info('logging Request', $data);
         }
     }
 
@@ -604,7 +611,7 @@ class Client
      */
     public function setLogger(LoggerInterface $logger)
     {
-        $this->logger = $logger;
+        $this->_logger = $logger;
 
         return $this;
     }
