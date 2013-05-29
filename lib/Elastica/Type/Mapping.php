@@ -72,6 +72,17 @@ class Mapping
     }
 
     /**
+     * Sets the mapping _meta
+     * @param array $meta metadata
+     * @return \Elastica\Type\Mapping Mapping object
+     * @link http://www.elasticsearch.org/guide/reference/mapping/meta.html
+     */
+    public function setMeta(array $meta)
+    {
+        return $this->setParam('_meta', $meta);
+    }
+
+    /**
      * Returns mapping type
      *
      * @return \Elastica\Type Type
