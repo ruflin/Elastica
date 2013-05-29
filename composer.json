@@ -15,11 +15,13 @@
         "php": ">=5.3.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*",
+        "psr/log": "~1.0",
         "munkie/elasticsearch-thrift-php": "1.4.*"
     },
     "suggest": {
-        "munkie/elasticsearch-thrift-php": "Allow using thrift transport"
+        "munkie/elasticsearch-thrift-php": "Allow using thrift transport",
+        "psr/log": "for logging",
+        "monolog/monolog": "Logging request"
     },
     "autoload": {
         "psr-0": {
