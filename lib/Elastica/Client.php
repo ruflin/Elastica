@@ -572,12 +572,12 @@ class Client
     protected function _log($context)
     {
         $log = $this->getConfig('log');
-        if($log && !class_exists('Psr\Log\AbstractLogger')){
+        if ($log && !class_exists('Psr\Log\AbstractLogger')) {
             throw new RuntimeException('Class Psr\Log\AbstractLogger not found');
         } elseif (!$this->_logger && $log) {
             $this->setLogger(new Log($this->getConfig('log')));
         }
-        if($this->_logger){
+        if ($this->_logger) {
             if ($context instanceof Request) {
                 $data = $context->toArray();
             } else {

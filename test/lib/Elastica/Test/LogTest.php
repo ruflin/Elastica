@@ -12,8 +12,9 @@ class LogTest extends BaseTest
     private $_context = array();
     private $_message = 'hello world';
 
-    protected function setUp(){
-        if(!class_exists('Psr\Log\AbstractLogger')){
+    protected function setUp()
+    {
+        if (!class_exists('Psr\Log\AbstractLogger')) {
             $this->markTestSkipped('The Psr extension is not available.');
         }
     }
@@ -93,7 +94,6 @@ class LogTest extends BaseTest
         $log->critical($this->_message, $this->_context);
         $this->assertEquals($this->getMessage(), $log->getLastMessage());
     }
-
 
     public function testGetLastMessageAlert()
     {

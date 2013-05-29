@@ -1,7 +1,7 @@
 CHANGES
 
 2013-05-23
-- add suport PSR-3(https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md)
+- add support PSR-3(https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md)
 - Elastica\Log implement LoggerInterface(extends Psr\Log\AbstractLogger)
   if you want use logging need install https://github.com/php-fig/log for example (composer require psr/log:dev-master)
   if use Elastica\Log inside Elastica\Client nothing more is needed
