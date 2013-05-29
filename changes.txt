@@ -1,5 +1,13 @@
 CHANGES
 
+2013-05-23
+- add support PSR-3(https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md)
+- Elastica\Log implement LoggerInterface(extends Psr\Log\AbstractLogger)
+  if you want use logging need install https://github.com/php-fig/log for example (composer require psr/log:dev-master)
+  if use Elastica\Log inside Elastica\Client nothing more is needed
+  if use Elastica\Log outside we need use as(https://github.com/php-fig/log) for example Elastica\Log::info($message) or Elastica\Log::log(LogLevel::INFO,$message)
+- Elastica\Client add setLogger for setting custom Logger for example Monolog(https://github.com/Seldaek/monolog)
+
 2013-05-18
 - Elastica\Index::exists fixed for 0.90.0. HEAD request method introduced
 - Elastica\Filter\AbstractMulti::getFilters() added
