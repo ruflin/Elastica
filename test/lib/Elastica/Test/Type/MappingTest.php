@@ -245,4 +245,19 @@ class MappingTest extends BaseTest
             'Indexing status of the multiname.org not available. Dynamic mapping not fully applied!');
         $this->assertEquals('not_analyzed', $newMapping['person']['properties']['multiname']['fields']['org']['index']);
     }
+
+    public function testSetMeta()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $mapping = new Mapping($type, array(
+            'firstname' => array('type' => 'string', 'store' => 'yes'),
+            'lastname' => array('type' => 'string')
+        ));
+        $mapping->setMeta(array('class' => 'test'));
+        $type->setMapping($mapping);
+
+        $mappingData = $type->getMapping();
+        $this->assertEquals('test', $mappingData['test']['_meta']['class']);
+    }
 }
