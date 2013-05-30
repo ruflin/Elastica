@@ -3,6 +3,9 @@ CHANGES
 2013-05-29
 - Add _meta to mapping. #330
 
+2013-05-27
+- Added parameters to implement scroll
+
 2013-05-23
 - add support PSR-3(https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md)
 - Elastica\Log implement LoggerInterface(extends Psr\Log\AbstractLogger)
