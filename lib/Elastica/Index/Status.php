@@ -86,11 +86,8 @@ class Status
      */
     public function getAliases()
     {
-        // TODO Update as soon as new API is implemented
-        $cluster = new Cluster($this->_index->getClient());
-        $state = $cluster->getState();
-
-        return $state['metadata']['indices'][$this->_index->getName()]['aliases'];
+        $responseData = $this->getIndex()->request('_aliases', \Elastica\Request::GET)->getData();
+        return array_keys($responseData[$this->getIndex()->getName()]['aliases']);
     }
 
     /**
@@ -100,11 +97,8 @@ class Status
      */
     public function getSettings()
     {
-        // TODO Update as soon as new API is implemented
-        $cluster = new Cluster($this->_index->getClient());
-        $state = $cluster->getState();
-
-        return $state['metadata']['indices'][$this->_index->getName()]['settings'];
+        $responseData = $this->getIndex()->request('_settings', \Elastica\Request::GET)->getData();
+        return $responseData[$this->getIndex()->getName()]['settings'];
     }
 
     /**
