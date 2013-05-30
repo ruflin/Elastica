@@ -1,5 +1,9 @@
 CHANGES
 
+2013-05-30
+- Update Index\Status::getAliases() to use new API
+- Update Index\Status::getSettings() to use new API
+
 2013-05-29
 - Add _meta to mapping. #330
 
