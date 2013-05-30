@@ -232,4 +232,21 @@ class Response
 
         return $data['_shards'];
     }
+
+    /**
+     * Get the _scroll value for the response
+     *
+     * @throws \Elastica\Exception\NotFoundException
+     * @return string
+     */
+    public function getScrollId()
+    {
+        $data = $this->getData();
+
+        if (!isset($data['_scroll_id'])) {
+            throw new NotFoundException("Unable to find the field [_scroll_id] from the response");
+        }
+
+        return $data['_scroll_id'];
+    }
 }

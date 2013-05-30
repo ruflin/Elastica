@@ -205,6 +205,27 @@ class SearchTest extends BaseTest
         $this->assertFalse($result->getResponse()->hasError());
     }
 
+    public function testSearchScrollRequest()
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $index = $this->_createIndex('test');
+        $type = $index->getType('hello');
+
+        $result = $search->search(array(), array(
+            Search::OPTION_SEARCH_TYPE => Search::OPTION_SEARCH_TYPE_SCAN,
+            Search::OPTION_SCROLL => '5m',
+        ));
+        $this->assertFalse($result->getResponse()->hasError());
+
+        $scrollId = $result->getResponse()->getScrollId();
+        $result = $search->search(array(), array(
+            Search::OPTION_SCROLL_ID => $scrollId,
+        ));
+        $this->assertFalse($result->getResponse()->hasError());
+    }
+
     /**
      * Default Limit tests for \Elastica\Search
      */
