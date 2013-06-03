@@ -1,5 +1,8 @@
 CHANGES
 
+2013-06-03
+- Add getPlugins and hasPlugin methods to Node\Info
+
 2013-05-30
 - Update Index\Status::getAliases() to use new API
 - Update Index\Status::getSettings() to use new API
