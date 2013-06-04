@@ -1,5 +1,8 @@
 CHANGES
 
+2013-06-04
+- Elastica\Client::_configureParams() changed to _prepareConnectionParams(), which now takes the config array as an argument
+
 2013-06-03
 - Add getPlugins and hasPlugin methods to Node\Info
 

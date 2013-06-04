@@ -86,6 +86,30 @@ class ClientTest extends BaseTest
         $resultSet = $type->search('rolf');
     }
 
+    public function testConnectionParamsArePreparedForConnectionsOption()
+    {
+        $client = new Client(array('connections' => array(array('url' => 'https://localhost:9200'))));
+        $connection = $client->getConnection();
+
+        $this->assertEquals('https://localhost:9200', $connection->getConfig('url'));
+    }
+
+    public function testConnectionParamsArePreparedForServersOption()
+    {
+        $client = new Client(array('servers' => array(array('url' => 'https://localhost:9200'))));
+        $connection = $client->getConnection();
+
+        $this->assertEquals('https://localhost:9200', $connection->getConfig('url'));
+    }
+
+    public function testConnectionParamsArePreparedForDefaultOptions()
+    {
+        $client = new Client(array('url' => 'https://localhost:9200'));
+        $connection = $client->getConnection();
+
+        $this->assertEquals('https://localhost:9200', $connection->getConfig('url'));
+    }
+
     public function testBulk()
     {
         $client = $this->_getClient();
