@@ -11,6 +11,20 @@ use Elastica\Test\Base as BaseTest;
  */
 class ExampleTest extends BaseTest
 {
+	public function testBasicGettingStarted() {
+		
+		$client = new \Elastica\Client();
+		$index = $client->getIndex('ruflin');
+		$type = $index->getType('users');
+		
+		$id = 2;
+		$data = array('firstname' => 'Nicolas', 'lastname' => 'Ruflin');
+		$doc = new \Elastica\Document($id, $data);
+		
+		$type->addDocument($doc);
+	
+	}
+	
     public function testExample()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
