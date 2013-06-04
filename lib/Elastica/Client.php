@@ -88,28 +88,29 @@ class Client
         $connections = $this->getConfig('connections');
 
         foreach ($connections as $connection) {
-            $this->_connections[] = Connection::create($connection);
+            $this->_connections[] = Connection::create($this->_prepareConnectionParams($connection));
         }
 
         if (isset($this->_config['servers'])) {
             foreach ($this->getConfig('servers') as $server) {
-                $this->_connections[] = Connection::create($server);
+                $this->_connections[] = Connection::create($this->_prepareConnectionParams($server));
             }
         }
 
         // If no connections set, create default connection
         if (empty($this->_connections)) {
-            $this->_connections[] = Connection::create($this->_configureParams());
+            $this->_connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
         }
     }
 
     /**
-     * @return array $params
+     * Creates a Connection params array from a Client or server config array.
+     *
+     * @param array $config
+     * @return array
      */
-    protected function _configureParams()
+    protected function _prepareConnectionParams(array $config)
     {
-        $config = $this->getConfig();
-
         $params = array();
         $params['config'] = array();
         foreach ($config as $key => $value) {
