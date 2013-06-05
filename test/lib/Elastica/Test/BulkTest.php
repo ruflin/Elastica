@@ -411,7 +411,8 @@ class BulkTest extends BaseTest
         }
     }
 
-    public function testUpdate(){
+    public function testUpdate()
+    {
         $index = $this->_createIndex();
         $type = $index->getType('bulk_test');
         $client = $index->getClient();
