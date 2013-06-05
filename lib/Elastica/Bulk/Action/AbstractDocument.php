@@ -67,6 +67,9 @@ abstract class AbstractDocument extends Action
             case self::OP_TYPE_CREATE:
                 $action = new CreateDocument($document);
                 break;
+            case self::OP_TYPE_UPDATE:
+                $action = new UpdateDocument($document);
+                break;
             case self::OP_TYPE_INDEX:
             default:
                 $action = new IndexDocument($document);

@@ -1,5 +1,10 @@
 CHANGES
 
+2013-06-05
+- Add Bulk\Action\UpdateDocument.
+- Update Bulk\Action\AbstractDocument and Bulk\Action to enable use of OP_TYPE_UPDATE.
+- Update .travis.yml to use Elasticsearch version 0.9.1, as bulk update is a new feature in 0.9.1.
+
 2013-06-04
 - Elastica\Client::_configureParams() changed to _prepareConnectionParams(), which now takes the config array as an argument
 

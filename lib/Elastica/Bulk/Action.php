@@ -11,6 +11,7 @@ class Action
     const OP_TYPE_CREATE = 'create';
     const OP_TYPE_INDEX  = 'index';
     const OP_TYPE_DELETE = 'delete';
+    const OP_TYPE_UPDATE = 'update';
 
     /**
      * @var array
@@ -19,6 +20,7 @@ class Action
         self::OP_TYPE_CREATE,
         self::OP_TYPE_INDEX,
         self::OP_TYPE_DELETE,
+        self::OP_TYPE_UPDATE
     );
 
     /**
