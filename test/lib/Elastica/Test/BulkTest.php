@@ -411,6 +411,81 @@ class BulkTest extends BaseTest
         }
     }
 
+    public function testUpdate(){
+        $index = $this->_createIndex();
+        $type = $index->getType('bulk_test');
+        $client = $index->getClient();
+
+        $doc1 = $type->createDocument(1, array('name' => 'John'));
+        $doc2 = $type->createDocument(2, array('name' => 'Paul'));
+        $doc3 = $type->createDocument(3, array('name' => 'George'));
+        $doc4 = $type->createDocument(4, array('name' => 'Ringo'));
+        $documents = array($doc1, $doc2, $doc3, $doc4);
+
+        //index some documents
+        $bulk = new Bulk($client);
+        $bulk->setType($type);
+        $bulk->addDocuments($documents);
+        $response = $bulk->send();
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        $index->refresh();
+
+        //test updating via document
+        $doc2 = $type->createDocument(2, array('name' => 'The Walrus'));
+        $bulk = new Bulk($client);
+        $bulk->setType($type);
+        $updateAction = new \Elastica\Bulk\Action\UpdateDocument($doc2);
+        $bulk->addAction($updateAction);
+        $response = $bulk->send();
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        $index->refresh();
+
+        $doc = $type->getDocument(2);
+        $docData = $doc->getData();
+        $this->assertEquals('The Walrus', $docData['name']);
+
+        //test updating via script
+        $doc2 = new Document(2);
+        $doc2->setScript(new \Elastica\Script('ctx._source.name += param1;', array('param1' => ' was Paul')));
+        $updateAction = Action\AbstractDocument::create($doc2, Action::OP_TYPE_UPDATE);
+        $bulk = new Bulk($client);
+        $bulk->setType($type);
+        $bulk->addAction($updateAction);
+        $response = $bulk->send();
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        $index->refresh();
+
+        $doc2 = $type->getDocument(2);
+        $this->assertEquals('The Walrus was Paul', $doc2->name);
+
+        //test upsert
+        $doc = new Document(5, array('counter' => 1));
+        $doc->setScript(new \Elastica\Script('ctx._scource.counter += count', array('count' => 1)));
+        $updateAction = Action\AbstractDocument::create($doc, Action::OP_TYPE_UPDATE);
+        $bulk = new Bulk($client);
+        $bulk->setType($type);
+        $bulk->addAction($updateAction);
+        $response = $bulk->send();
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        $index->refresh();
+        $doc = $type->getDocument(5);
+        $this->assertEquals(1, $doc->counter);
+
+        $index->delete();
+    }
+
     public function udpDataProvider()
     {
         return array(
