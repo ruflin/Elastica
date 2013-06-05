@@ -1,5 +1,12 @@
 CHANGES
 
+2013-06-05
+- Changed package name to lowercase to prevent potential issues with case sensitive file systems and to refelect the package name from packagist.org.
+  If you are requiring elastica in your project you might want to change the name in the require to lowercase, although it will still work if written in uppercase.
+  The composer autoloader will handle the package correctly and you will not notice any difference.
+  If you are requiring or including a file by hand with require() or include() from the composer vendor folder, pay attention that the package name in
+  the path will change to lowercase.
+
 2013-06-04
 - Elastica\Client::_configureParams() changed to _prepareConnectionParams(), which now takes the config array as an argument
 
