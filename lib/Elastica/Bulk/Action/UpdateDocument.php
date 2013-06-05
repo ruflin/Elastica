@@ -24,10 +24,10 @@ class UpdateDocument extends IndexDocument
     public function setDocument(Document $document)
     {
         parent::setDocument($document);
-        if($document->hasScript()) {
+        if ($document->hasScript()) {
             $source = $document->getScript()->toArray();
             $documentData = $document->getData();
-            if(!empty($documentData)) {
+            if (!empty($documentData)) {
                 $source['upsert'] = $documentData;
             }
             $this->setSource($source);
