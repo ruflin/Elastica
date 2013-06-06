@@ -76,4 +76,28 @@ class HttpTest extends BaseTest
         $info = $status->getResponse()->getTransferInfo();
         $this->assertStringStartsWith('GET', $info['request_header']);
     }
+
+    public function testCurlNobodyOptionIsResetAfterHeadRequest()
+    {
+        $client = new \Elastica\Client();
+        $index = $client->getIndex('curl_test');
+        $type = $index->getType('item');
+
+        // Force HEAD request to set CURLOPT_NOBODY = true
+        $index->exists();
+
+        $id = 1;
+        $data = array('id' => $id, 'name' => 'Item 1');
+        $doc = new \Elastica\Document($id, $data);
+
+        $type->addDocument($doc);
+
+        $index->refresh();
+
+        $doc = $type->getDocument($id);
+
+        // Document should be retrieved correctly
+        $this->assertSame($data, $doc->getData());
+        $this->assertEquals($id, $doc->getId());
+    }
 }
