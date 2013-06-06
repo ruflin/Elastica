@@ -1,5 +1,5 @@
 {
-    "name": "ruflin/Elastica",
+    "name": "ruflin/elastica",
     "description": "Elasticsearch Client",
     "keywords": ["search","client"],
     "homepage": "http://ruflin.github.com/Elastica/",
