@@ -30,18 +30,21 @@ class Percolator
     }
 
     /**
-     * Registers a percolator query
+     * Registers a percolator query, with optional extra fields to include in the registered query.
      *
-     * @param  string                                             $name  Query name
-     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Query to add
+     * @param  string                                               $name   Query name
+     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query  Query to add
+     * @param  array                                                $fields Extra fields to include in the registered query. 
      * @return \Elastica\Response
      */
-    public function registerQuery($name, $query)
+    public function registerQuery($name, $query, $fields = array())
     {
         $path = '_percolator/' . $this->_index->getName() . '/' . $name;
         $query = Query::create($query);
+        
+        $fields['query'] = $query->getQuery();
 
-        return $this->_index->getClient()->request($path, Request::PUT, $query->toArray());
+        return $this->_index->getClient()->request($path, Request::PUT, $fields);
     }
 
     /**
@@ -59,13 +62,14 @@ class Percolator
     /**
      * Match a document to percolator queries
      *
-     * @param  \Elastica\Document                                  $doc
+     * @param  \Elastica\Document                                   $doc
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Query to filter the data
-     * @return \Elastica\Response
+     * @param  string                                               $type
+     * @return array With matching registered queries.
      */
-    public function matchDoc(Document $doc, $query = null)
+    public function matchDoc(Document $doc, $query = null, $type = 'type')
     {
-        $path = $this->_index->getName() . '/type/_percolate';
+        $path = $this->_index->getName() . '/' . $type . '/_percolate';
         $data = array('doc' => $doc->getData());
 
         // Add query to filter results after percolation
