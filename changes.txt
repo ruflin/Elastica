@@ -1,5 +1,8 @@
 CHANGES
 
+2013-06-14
+- Fix support for making scroll queries once the scroll has been started.
+
 2013-06-07
 - Release 0.90.1.0
 
