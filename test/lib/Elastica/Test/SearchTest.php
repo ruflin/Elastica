@@ -208,22 +208,53 @@ class SearchTest extends BaseTest
     public function testSearchScrollRequest()
     {
         $client = $this->_getClient();
-        $search = new Search($client);
 
         $index = $this->_createIndex('test');
-        $type = $index->getType('hello');
-
+        $type = $index->getType('scrolltest');
+        
+        $docs = array();
+        for ($x = 1; $x <= 10; $x++) {
+            $docs[] = new Document($x, array('id' => $x, 'testscroll' => 'jbafford'));
+        }
+        
+        $type->addDocuments($docs);
+        $index->refresh();
+        
+        $search = new Search($client);
+        $search->addIndex($index)->addType($type);
         $result = $search->search(array(), array(
             Search::OPTION_SEARCH_TYPE => Search::OPTION_SEARCH_TYPE_SCAN,
             Search::OPTION_SCROLL => '5m',
+            Search::OPTION_SIZE => 5,
         ));
         $this->assertFalse($result->getResponse()->hasError());
 
         $scrollId = $result->getResponse()->getScrollId();
+        $this->assertNotEmpty($scrollId);
+
+        //There are 10 items, and we're scrolling with a size of 5
+        //So we should get two results of 5 items, and then no items
+        $search = new Search($client);
         $result = $search->search(array(), array(
+            Search::OPTION_SCROLL => '5m',
             Search::OPTION_SCROLL_ID => $scrollId,
         ));
         $this->assertFalse($result->getResponse()->hasError());
+        $this->assertEquals(5, count($result->getResults()));
+        
+        $result = $search->search(array(), array(
+            Search::OPTION_SCROLL => '5m',
+            Search::OPTION_SCROLL_ID => $scrollId,
+        ));
+        $this->assertFalse($result->getResponse()->hasError());
+        $this->assertEquals(5, count($result->getResults()));
+        
+        $result = $search->search(array(), array(
+            Search::OPTION_SCROLL => '5m',
+            Search::OPTION_SCROLL_ID => $scrollId,
+        ));
+        $this->assertFalse($result->getResponse()->hasError());
+        $this->assertEquals(0, count($result->getResults()));
     }
 
     /**
