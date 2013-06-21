@@ -5,7 +5,7 @@ namespace Elastica\Test\Filter;
 use Elastica\Filter\Term;
 use Elastica\Test\Base as BaseTest;
 
-class TermsTest extends BaseTest
+class TermTest extends BaseTest
 {
 
     public function testToArray()
