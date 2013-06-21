@@ -10,7 +10,7 @@ class TermsTest extends BaseTest
 
     public function testLookup()
     {
-        $index = $this->_createIndex('test');
+        $index = $this->_createIndex('terms_filter_test');
         $type1 = $index->getType('musicians');
         $type2 = $index->getType('bands');
 
