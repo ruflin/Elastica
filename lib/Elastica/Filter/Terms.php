@@ -62,6 +62,35 @@ class Terms extends AbstractFilter
     }
 
     /**
+     * Set the lookup parameters for this filter
+     * @param string $key terms key
+     * @param string|\Elastica\Type $type document type from which to fetch the terms values
+     * @param string $id id of the document from which to fetch the terms values
+     * @param string $path the field from which to fetch the values for the filter
+     * @param string|\Elastica\Index $index the index from which to fetch the terms values. Defaults to the current index.
+     * @return \Elastica\Filter\Terms Filter object
+     */
+    public function setLookup($key, $type, $id, $path, $index = NULL)
+    {
+        $this->_key = $key;
+        if ($type instanceof \Elastica\Type) {
+            $type = $type->getName();
+        }
+        $this->_terms = array(
+            'type' => $type,
+            'id' => $id,
+            'path' => $path
+        );
+        if (!is_null($index)) {
+            if ($index instanceof \Elastica\Index) {
+                $index = $index->getName();
+            }
+            $this->_terms['index'] = $index;
+        }
+        return $this;
+    }
+
+    /**
      * Adds an additional term to the query
      *
      * @param  string                      $term Filter term
