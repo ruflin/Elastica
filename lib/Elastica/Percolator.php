@@ -8,7 +8,7 @@ namespace Elastica;
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/api/percolate.html
+ * @link http://www.elasticsearch.org/guide/reference/api/percolate/
  */
 class Percolator
 {
@@ -34,7 +34,8 @@ class Percolator
      *
      * @param  string                                               $name   Query name
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query  Query to add
-     * @param  array                                                $fields Extra fields to include in the registered query. 
+     * @param  array                                                $fields Extra fields to include in the registered query
+     *                                                                      and can be used to filter executed queries. 
      * @return \Elastica\Response
      */
     public function registerQuery($name, $query, $fields = array())
