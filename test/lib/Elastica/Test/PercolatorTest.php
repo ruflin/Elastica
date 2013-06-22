@@ -99,4 +99,37 @@ class PercolatorTest extends BaseTest
         $this->assertTrue(in_array($percolatorSecondName, $secondMatches));
         $this->assertEquals(1, count($secondMatches));
     }
+
+    /**
+     * Test case for using filtered percolator queries based on the Elasticsearch documentation examples.
+     */
+    public function testFilteredMatchDoc()
+    {
+        // step one: register create index and setup the percolator query from the ES documentation.
+        $index = $this->_createIndex();
+        $percolator = new Percolator($index);
+        $baseQuery = new Term(array('field1' => 'value1'));
+        $fields = array('color' => 'blue');
+        
+        $response = $percolator->registerQuery('kuku', $baseQuery, $fields);
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        // refreshing is required in order to ensure the query is really ready for execution.
+        $index = new Index($index->getClient(), '_percolator');
+        $index->refresh();
+        
+        // step two: match a document which should match the kuku query when filtered on the blue color
+        $doc = new Document();
+        $doc->set('field1', 'value1');
+        
+        $matches = $percolator->matchDoc($doc, new Term(array('color' => 'blue')));
+        $this->assertCount(1, $matches, 'No or too much registered query matched.');
+        $this->assertEquals('kuku', $matches[0], 'A wrong registered query has matched.');
+        
+        // step three: validate that using a different color, no registered query matches.
+        $matches = $percolator->matchDoc($doc, new Term(array('color' => 'green')));
+        $this->assertCount(0, $matches, 'A registered query matched, although nothing should match at all.');
+    }
 }
