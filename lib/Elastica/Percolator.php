@@ -43,9 +43,9 @@ class Percolator
         $path = '_percolator/' . $this->_index->getName() . '/' . $name;
         $query = Query::create($query);
         
-        $fields['query'] = $query->getQuery();
+        $data = array_merge($query->toArray(), $fields);
 
-        return $this->_index->getClient()->request($path, Request::PUT, $fields);
+        return $this->_index->getClient()->request($path, Request::PUT, $data);
     }
 
     /**
