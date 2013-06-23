@@ -1,5 +1,8 @@
 CHANGES
 
+2013-06-23
+- Add filtered queries to the percolator API.
+
 2013-06-07
 - Release 0.90.1.0
 
