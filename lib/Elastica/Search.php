@@ -375,6 +375,10 @@ class Search
      */
     public function getPath()
     {
+    	if (isset($this->_options[self::OPTION_SCROLL_ID])) {
+    	    return '_search/scroll';
+    	}
+    	
         $indices = $this->getIndices();
 
         $path = '';

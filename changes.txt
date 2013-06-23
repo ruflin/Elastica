@@ -3,6 +3,13 @@ CHANGES
 2013-06-23
 - Add filtered queries to the percolator API.
 
+2013-06-21
+- Correct class name for TermTest unit test
+- Implement terms lookup feature for terms filter
+
+2013-06-14
+- Fix support for making scroll queries once the scroll has been started.
+
 2013-06-07
 - Release 0.90.1.0
 
