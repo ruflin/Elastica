@@ -137,7 +137,7 @@ class Type implements SearchableInterface
      * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
      */
-    public function updateDocument(Document $document)
+    public function updateDocument(Document $document, $upsert = null)
     {
         if (!$document->hasId()) {
             throw new InvalidException('Document id is not set');
@@ -147,7 +147,9 @@ class Type implements SearchableInterface
             $document->getId(),
             $document,
             $this->getIndex()->getName(),
-            $this->getName()
+            $this->getName(),
+        	array(),
+        	$upsert
         );
     }
 
