@@ -149,8 +149,8 @@ class Type implements SearchableInterface
             $document,
             $this->getIndex()->getName(),
             $this->getName(),
-        	array(),
-        	$upsert
+            array(),
+            $upsert
         );
     }
 
