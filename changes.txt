@@ -3,6 +3,9 @@ CHANGES
 2013-06-25
 - Added upsert support when updating a document with a partial document or a script.
 
+2013-06-23
+- Add filtered queries to the percolator API.
+
 2013-06-21
 - Correct class name for TermTest unit test
 - Implement terms lookup feature for terms filter
