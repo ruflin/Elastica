@@ -602,6 +602,25 @@ class ClientTest extends BaseTest
         $this->assertArrayHasKey('field2', $data);
         $this->assertEquals('value2', $data['field2']);
     }
+    
+    public function testUpdateDocumentWithUpsert()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
+
+        $newDocument = new Document(1, array('field1' => 'value1updated', 'field2' => 'value2updated'));
+        $upsert = new Document(1, array('field1' => 'value1', 'field2' => 'value2'));
+        $type->updateDocument($newDocument, $upsert);
+
+        $document = $type->getDocument(1);
+        $this->assertInstanceOf('Elastica\Document', $document);
+        $data = $document->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals('value2', $data['field2']);
+    }
 
     public function testDeleteDocuments()
     {
