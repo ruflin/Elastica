@@ -133,6 +133,7 @@ class Type implements SearchableInterface
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
      * @param  \Elastica\Document                   $document Document with update data
+     * @param  array|\Elastica\Document             $upsert   Array or document for upserting
      * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/update.html

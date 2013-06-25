@@ -267,6 +267,7 @@ class Client
      * @param  string               $index   index to update
      * @param  string               $type    type of index to update
      * @param  array                $options array of query params to use for query. For possible options check es api
+     * @param  array|\Elastica\Document $upsert array or document for upserting
      * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
      */
@@ -313,11 +314,11 @@ class Client
             $requestData = $data;
         }
         
-        if($upsert){
+        if ($upsert) {
 
-        	if(is_array($upsert)){
+        	if (is_array($upsert)) {
         		$requestData['upsert'] = $upsert;
-        	}else if($upsert instanceof Document){
+        	}elseif ($upsert instanceof Document) {
         		$requestData['upsert'] = $upsert->getData();
         	}else{
         		throw new InvalidException('Upsert should be a Document or an associative array.');
