@@ -14,7 +14,7 @@ use Elastica\Filter\AbstractFilter;
  * @author Christian Hansen <quid@gmx.de>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-shape-filter/
  */
-class GeoShape extends AbstractFilter
+class GeoShapeProvided extends AbstractFilter
 {
     /**
      * Key
