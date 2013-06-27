@@ -217,7 +217,14 @@ class Type implements SearchableInterface
             throw new NotFoundException('doc id ' . $id . ' not found');
         }
 
-        $data = isset($result['_source']) ? $result['_source'] : array();
+        if (isset($result['fields'])) {
+            $data = $result['fields'];
+        } elseif ($result['_source']) {
+            $data = $result['_source'];
+        } else {
+            $data = array();
+        }
+
         $document = new Document($id, $data, $this->getName(), $this->getIndex());
         $document->setVersion($result['_version']);
 
