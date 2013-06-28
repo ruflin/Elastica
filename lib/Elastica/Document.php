@@ -4,6 +4,7 @@ namespace Elastica;
 
 use Elastica\Exception\InvalidException;
 use Elastica\Bulk\Action;
+use Elastica\Filter\Bool;
 
 /**
  * Single document stored in elastic search
@@ -24,9 +25,16 @@ class Document extends Param
     protected $_data = array();
 
     /**
-     * @var \Elastica\Script
+     * @var \Elastica\Document
      */
-    protected $_script;
+    protected $_upsert;
+    
+    /**
+     * Whether to use this document to upsert if the document does not exist.
+     * 
+     * @var boolean
+     */
+    protected $_docAsUpsert = false;
 
     /**
      * @var boolean
@@ -705,31 +713,48 @@ class Document extends Param
     }
 
     /**
-     * @param \Elastica\Script|array|string $data
+     * @param \Elastica\Document|array $data
      * @return \Elastica\Document
      */
-    public function setScript($data)
+    public function setUpsert($data)
     {
-        $script = Script::create($data);
-        $this->_script = $script;
+        $document = Document::create($data);
+        $this->_upsert = $document;
 
         return $this;
     }
 
     /**
-     * @return \Elastica\Script
+     * @return \Elastica\Document
      */
-    public function getScript()
+    public function getUpsert()
     {
-        return $this->_script;
+        return $this->_upsert;
     }
 
     /**
      * @return bool
      */
-    public function hasScript()
+    public function hasUpsert()
     {
-        return null !== $this->_script;
+        return null !== $this->_upsert;
+    }
+    
+    /**
+     * @param bool $value
+     * @return \Elastica\Document
+     */
+    public function setDocAsUpsert($value)
+    {
+    	$this->_docAsUpsert = (bool) $value;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function getDocAsUpsert()
+    {
+    	return $this->_docAsUpsert;
     }
 
     /**
@@ -788,5 +813,21 @@ class Document extends Param
             }
         }
         return $data;
+    }
+    
+    /**
+     * @param  array|\Elastica\Document        $data
+     * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\Document
+     */
+    public static function create($data)
+    {
+    	if ($data instanceof self) {
+    		return $data;
+    	} elseif (is_array($data)) {
+    		return new self('', $data);
+    	} else {
+    		throw new InvalidException('Failed to create document. Invalid data passed.');
+    	}
     }
 }

@@ -276,16 +276,15 @@ class Client
 
         if ($data instanceof Script) {
             $requestData = $data->toArray();
+            
         } elseif ($data instanceof Document) {
-            if ($data->hasScript()) {
-                $requestData = $data->getScript()->toArray();
-                $documentData = $data->getData();
-                if (!empty($documentData)) {
-                    $requestData['upsert'] = $documentData;
-                }
-            } else {
-                $requestData = array('doc' => $data->getData());
+
+            $requestData = array('doc' => $data->getData());
+            
+            if($data->getDocAsUpsert()){
+            	$requestData['doc_as_upsert'] = true;
             }
+
             $docOptions = $data->getOptions(
                 array(
                     'version',
@@ -311,6 +310,14 @@ class Client
             }
         } else {
             $requestData = $data;
+        }
+        
+        //If an upsert document exists
+        if($data instanceof Script || $data instanceof Document){
+        	
+        	if($data->hasUpsert()){
+        		$requestData['upsert'] = $data->getUpsert()->getData();
+        	}
         }
 
         if (!isset($options['retry_on_conflict'])) {

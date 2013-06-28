@@ -28,6 +28,11 @@ class Script extends Param
      * @var string
      */
     private $_lang;
+    
+    /**
+     * @var \Elastica\Document
+     */
+    protected $_upsert;
 
     /**
      * @param string      $script
@@ -95,6 +100,34 @@ class Script extends Param
         }
 
         return $script;
+    }
+    
+    /**
+     * @param \Elastica\Document|array $data
+     * @return \Elastica\Document
+     */
+    public function setUpsert($data)
+    {
+    	$document = Document::create($data);
+    	$this->_upsert = $document;
+    
+    	return $this;
+    }
+    
+    /**
+     * @return \Elastica\Document
+     */
+    public function getUpsert()
+    {
+    	return $this->_upsert;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function hasUpsert()
+    {
+    	return null !== $this->_upsert;
     }
 
     /**
