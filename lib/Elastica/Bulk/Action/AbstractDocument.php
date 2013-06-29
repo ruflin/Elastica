@@ -4,13 +4,14 @@ namespace Elastica\Bulk\Action;
 
 use Elastica\Bulk\Action;
 use Elastica\Document;
+use Elastica\Script;
 
 abstract class AbstractDocument extends Action
 {
     /**
-     * @var \Elastica\Document
+     * @var \Elastica\Document|\Elastica\Script
      */
-    protected $_document;
+    protected $_data;
 
     /**
      * @param \Elastica\Document $document
@@ -26,7 +27,7 @@ abstract class AbstractDocument extends Action
      */
     public function setDocument(Document $document)
     {
-        $this->_document = $document;
+        $this->_data = $document;
 
         $metadata = $this->_getMetadataByDocument($document);
 
@@ -40,7 +41,7 @@ abstract class AbstractDocument extends Action
      */
     public function getDocument()
     {
-        return $this->_document;
+        return $this->_data;
     }
 
     /**
