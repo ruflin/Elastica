@@ -1,5 +1,8 @@
 CHANGES
 
+2013-06-29
+- Update to elasticsearch 0.90.2
+
 2013-06-25
 - Added upsert support when updating a document with a partial document or a script.
 
