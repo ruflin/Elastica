@@ -14,7 +14,7 @@ env:
     - ES_VER=0.90.2
     - ES_MAPPER_ATTACHMENTS_VER=1.6.0
     - ES_TRANSPORT_THRIFT_VER=1.4.0
-	- ES_WAIT_ON_MAPPING_CHANGE=true
+	- ES_WAIT_ON_MAPPING_CHANGE="true"
   matrix:
     - ES_REQUIRE=dev
     - ES_REQUIRE=no-dev
