@@ -3,6 +3,7 @@
 namespace Elastica\Bulk\Action;
 
 use Elastica\Document;
+use Elastica\Script;
 
 /**
  * @package Elastica\Bulk\Action
@@ -37,5 +38,51 @@ class UpdateDocument extends IndexDocument
         $this->setSource($source);
         
         return $this;
+    }
+    
+    /**
+     * @param \Elastica\Script $script
+     * @return \Elastica\Bulk\Action\AbstractDocument
+     */
+    public function setScript(Script $script)
+    {
+    	parent::setScript($script);
+
+    	$source = $script->toArray();
+    
+    	if ($script->hasUpsert()) {
+    		$upsert = $script->getUpsert()->getData();
+    		 
+    		if (!empty($upsert)) {
+    			$source['upsert'] = $upsert;
+    		}
+    	}
+    
+    	$this->setSource($source);
+    
+    	return $this;
+    }
+    
+    /**
+     * @param \Elastica\Script $script
+     * @return array
+     */
+    protected function _getMetadataByScript(Script $script)
+    {
+    	$params = array(
+    			'index',
+    			'type',
+    			'id',
+    			'version',
+    			'version_type',
+    			'routing',
+    			'percolate',
+    			'parent',
+    			'ttl',
+    			'timestamp',
+    	);
+    	$metadata = $script->getOptions($params, true);
+    
+    	return $metadata;
     }
 }

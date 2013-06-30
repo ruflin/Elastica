@@ -43,22 +43,13 @@ abstract class AbstractDocument extends Action
     public function setScript(Script $script)
     {
     	if(!($this instanceof UpdateDocument)){
-    		throw new \BadMethodCallException("setScript() can only b used for UpdateDocument");
+    		throw new \BadMethodCallException("setScript() can only be used for UpdateDocument");
     	}
     	
     	$this->_data = $script;
     	 
-    	$source = $script->toArray();
-    	 
-    	if ($script->hasUpsert()) {
-    		$upsert = $script->getUpsert()->getData();
-    		 
-    		if (!empty($upsert)) {
-    			$source['upsert'] = $upsert;
-    		}
-    	}
-    	 
-    	$this->setSource($source);
+    	$metadata = $this->_getMetadataByScript($script);
+    	$this->setMetadata($metadata);
     
     	return $this;
     }
@@ -123,6 +114,14 @@ abstract class AbstractDocument extends Action
      * @return array
      */
     abstract protected function _getMetadataByDocument(Document $document);
+    
+    /**
+     * @param \Elastica\Script $script
+     * @return array
+     */
+    protected function _getMetadataByScript(Script $script){
+    	
+    }
 
     /**
      * @param \Elastica\Document|\Elastica\Script $data

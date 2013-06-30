@@ -349,15 +349,15 @@ class Bulk
                 $bulkResponseData = reset($item);
 
                 if ($action instanceof AbstractDocumentAction) {
-                    $document = $action->getDocument();
-                    if ($document->isAutoPopulate()
+                    $data = $action->getData();
+                    if ($data instanceof Document && $data->isAutoPopulate()
                         || $this->_client->getConfigValue(array('document', 'autoPopulate'), false)
                     ) {
-                        if (!$document->hasId() && isset($bulkResponseData['_id'])) {
-                            $document->setId($bulkResponseData['_id']);
+                        if (!$data->hasId() && isset($bulkResponseData['_id'])) {
+                            $data->setId($bulkResponseData['_id']);
                         }
                         if (isset($bulkResponseData['_version'])) {
-                            $document->setVersion($bulkResponseData['_version']);
+                            $data->setVersion($bulkResponseData['_version']);
                         }
                     }
                 }
