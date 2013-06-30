@@ -27,7 +27,11 @@ class UpdateDocument extends IndexDocument
 
         $source = array('doc' => $document->getData());
 
-        if ($document->hasUpsert()) {
+        if ($document->getDocAsUpsert()) {
+        	$source['doc_as_upsert'] = true;
+        	
+        }else if ($document->hasUpsert()) {
+        	
             $upsert = $document->getUpsert()->getData();
 
             if (!empty($upsert)) {
