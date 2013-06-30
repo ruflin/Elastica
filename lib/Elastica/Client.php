@@ -302,7 +302,7 @@ class Client
             );
             $options += $docOptions;
             // set fields param to source only if options was not set before
-            if (($data->isAutoPopulate()
+            if ($data instanceof Document && ($data->isAutoPopulate()
                 || $this->getConfigValue(array('document', 'autoPopulate'), false))
                 && !isset($options['fields'])
             ) {
