@@ -10,6 +10,8 @@ use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Bulk\Action\AbstractDocument;
+use Elastica\Filter\Script;
 
 class BulkTest extends BaseTest
 {
@@ -296,6 +298,27 @@ class BulkTest extends BaseTest
                 'String as data'
             )
         );
+    }
+    
+    public function testCreateAbstractDocumentWithInvalidData()
+    {
+    	//Wrong class type
+    	try {
+    		$badDocument = new \stdClass();
+    		AbstractDocument::create($badDocument);
+    		$this->fail('Tried to create an abstract document with an object that is not a Document or Script, but no exception was thrown');
+    	} catch (\Exception $e) {
+    		//Excepted exception was thrown.
+    	}
+
+    	//Try to create document with a script
+    	try {
+    		$script = new Script();
+    		AbstractDocument::create($script, AbstractDocument::OP_TYPE_CREATE);
+    		$this->fail('Tried to create an abstract document with a Script, but no exception was thrown');
+    	} catch (\Exception $e) {
+    		//Excepted exception was thrown.
+    	}
     }
 
     public function testErrorRequest()

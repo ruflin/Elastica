@@ -602,7 +602,7 @@ class ClientTest extends BaseTest
         $this->assertEquals('value2', $data['field2']);
     }
     
-    public function testUpdateDocumentWithByDocumentWithUpsert()
+    public function testUpdateDocumentByDocumentWithUpsert()
     {
         $index = $this->_createIndex();
         $type = $index->getType('test');
@@ -658,6 +658,23 @@ class ClientTest extends BaseTest
     	$this->assertEquals('value1', $data['field1']);
     	$this->assertArrayHasKey('field2', $data);
     	$this->assertEquals('value2', $data['field2']);
+    }
+    
+    public function testUpdateWithInvalidType()
+    {
+    	$index = $this->_createIndex();
+    	$type = $index->getType('test');
+    	$client = $index->getClient();
+    	 
+    	//Try to update using a stdClass object
+    	$badDocument = new \stdClass();
+
+    	try {
+    		$client->updateDocument(1, $badDocument, $index->getName(), $type->getName());
+    		$this->fail('Tried to update using an object that is not a Document or a Script but no exception was thrown');
+    	} catch (\Exception $e) {
+    		//Good. An exception was thrown.
+    	}
     }
 
     public function testDeleteDocuments()
