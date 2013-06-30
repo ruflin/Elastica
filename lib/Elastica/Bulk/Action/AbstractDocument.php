@@ -18,7 +18,7 @@ abstract class AbstractDocument extends Action
      */
     public function __construct($document)
     {
-        $this->setDocument($document);
+        $this->setData($document);
     }
 
     /**
