@@ -281,7 +281,7 @@ class Client
 
             $requestData = array('doc' => $data->getData());
 
-            if($data->getDocAsUpsert()){
+            if ($data->getDocAsUpsert()) {
                 $requestData['doc_as_upsert'] = true;
             }
 
@@ -313,9 +313,9 @@ class Client
         }
 
         //If an upsert document exists
-        if($data instanceof Script || $data instanceof Document){
+        if ($data instanceof Script || $data instanceof Document) {
 
-            if($data->hasUpsert()){
+            if ($data->hasUpsert()) {
                 $requestData['upsert'] = $data->getUpsert()->getData();
             }
         }

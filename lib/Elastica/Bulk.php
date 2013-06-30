@@ -226,9 +226,9 @@ class Bulk
 
         foreach ($data as $actionData){
 
-            if($actionData instanceOf Script){
+            if ($actionData instanceOf Script) {
                 $this->addScript($actionData, $opType);
-            }else if ($actionData instanceof Document){
+            }else if ($actionData instanceof Document) {
                 $this->addDocument($actionData, $opType);
             }else{
                 throw new \InvalidArgumentException("Data should be a Document, a Script or an array containing Documents and/or Scripts");

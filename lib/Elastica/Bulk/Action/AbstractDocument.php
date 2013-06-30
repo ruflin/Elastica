@@ -42,7 +42,7 @@ abstract class AbstractDocument extends Action
      */
     public function setScript(Script $script)
     {
-        if(!($this instanceof UpdateDocument)){
+        if (!($this instanceof UpdateDocument)) {
             throw new \BadMethodCallException("setScript() can only be used for UpdateDocument");
         }
 
@@ -61,11 +61,11 @@ abstract class AbstractDocument extends Action
      */
     public function setData($data)
     {
-        if ($data instanceof Script){
+        if ($data instanceof Script) {
 
             $this->setScript($data);
 
-        }else if ($data instanceof Document){
+        }else if ($data instanceof Document) {
 
             $this->setDocument($data);
 
@@ -82,7 +82,7 @@ abstract class AbstractDocument extends Action
      */
     public function getDocument()
     {
-        if($this->_data instanceof Document){
+        if ($this->_data instanceof Document) {
             return $this->_data;
         }
 
@@ -95,7 +95,7 @@ abstract class AbstractDocument extends Action
      */
     public function getScript()
     {
-        if($this->_data instanceof Script){
+        if ($this->_data instanceof Script) {
             return $this->_data;
         }
 
@@ -136,9 +136,9 @@ abstract class AbstractDocument extends Action
         }
 
         //Check types
-        if(!($data instanceof Document) && !($data instanceof Script)){
+        if (!($data instanceof Document) && !($data instanceof Script)) {
             throw new \InvalidArgumentException("The data needs to be a Document or a Script.");
-        }else if($data instanceof Script  && isset($opType) && $opType != self::OP_TYPE_UPDATE){
+        }else if ($data instanceof Script  && isset($opType) && $opType != self::OP_TYPE_UPDATE) {
             throw new \InvalidArgumentException("When performing an update action, the data needs to be a Document or a Script.");
         }
 

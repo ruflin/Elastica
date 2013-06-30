@@ -139,7 +139,7 @@ class Type implements SearchableInterface
      */
     public function updateDocument($data)
     {
-        if(!($data instanceof Document) && !($data instanceof Script)){
+        if (!($data instanceof Document) && !($data instanceof Script)) {
             throw new \InvalidArgumentException("Data should be a Document or Script");
         }
 

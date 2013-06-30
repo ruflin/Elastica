@@ -50,7 +50,7 @@ class Script extends Param
             $this->setLang($lang);
         }
 
-        if($id){
+        if ($id) {
             $this->setId($id);
         }
     }
@@ -173,15 +173,18 @@ class Script extends Param
     {
         if (!empty($fields)) {
             $data = array();
+            
             foreach ($fields as $field) {
                 $key = '_' . ltrim($field, '_');
                 if ($this->hasParam($key) && '' !== (string) $this->getParam($key)) {
                     $data[$key] = $this->getParam($key);
                 }
             }
+            
         } else {
             $data = $this->getParams();
         }
+        
         if (!$withUnderscore) {
             foreach ($data as $key => $value) {
                 $data[ltrim($key, '_')] = $value;
