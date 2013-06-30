@@ -186,7 +186,7 @@ class Bulk
 
         return $this;
     }
-    
+
     /**
      * @param \Elastica\Script $data
      * @param string $opType
@@ -194,11 +194,11 @@ class Bulk
      */
     public function addScript(Script $script, $opType = null)
     {
-    	$action = AbstractDocumentAction::create($script, $opType);
-    
-    	return $this->addAction($action);
+        $action = AbstractDocumentAction::create($script, $opType);
+
+        return $this->addAction($action);
     }
-    
+
     /**
      * @param \Elastica\Document[] $scripts
      * @param string $opType
@@ -206,13 +206,13 @@ class Bulk
      */
     public function addScripts(array $scripts, $opType = null)
     {
-    	foreach ($scripts as $document) {
-    		$this->addScript($document, $opType);
-    	}
-    
-    	return $this;
+        foreach ($scripts as $document) {
+            $this->addScript($document, $opType);
+        }
+
+        return $this;
     }
-    
+
     /**
      * @param \Elastica\Script|\Elastica\Document\array $data
      * @param string $opType
@@ -220,22 +220,22 @@ class Bulk
      */
     public function addData($data, $opType = null)
     {
-    	if(!is_array($data)){
-    		$data = array($data);
-    	}
-    	
-    	foreach ($data as $actionData){
-    		
-    		if($actionData instanceOf Script){
-    			$this->addScript($actionData, $opType);
-    		}else if ($actionData instanceof Document){
-    			$this->addDocument($actionData, $opType);
-    		}else{
-    			throw new \InvalidArgumentException("Data should be a Document, a Script or an array containing Documents and/or Scripts");
-    		}
-    	}
-    	
-    	return $this;
+        if(!is_array($data)){
+            $data = array($data);
+        }
+
+        foreach ($data as $actionData){
+
+            if($actionData instanceOf Script){
+                $this->addScript($actionData, $opType);
+            }else if ($actionData instanceof Document){
+                $this->addDocument($actionData, $opType);
+            }else{
+                throw new \InvalidArgumentException("Data should be a Document, a Script or an array containing Documents and/or Scripts");
+            }
+        }
+
+        return $this;
     }
 
     /**

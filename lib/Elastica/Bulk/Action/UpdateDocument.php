@@ -24,65 +24,65 @@ class UpdateDocument extends IndexDocument
     public function setDocument(Document $document)
     {
         parent::setDocument($document);
-        
+
         $source = array('doc' => $document->getData());
-        
+
         if ($document->hasUpsert()) {
             $upsert = $document->getUpsert()->getData();
-            
+
             if (!empty($upsert)) {
                 $source['upsert'] = $upsert;
             }
         }
-        
+
         $this->setSource($source);
-        
+
         return $this;
     }
-    
+
     /**
      * @param \Elastica\Script $script
      * @return \Elastica\Bulk\Action\AbstractDocument
      */
     public function setScript(Script $script)
     {
-    	parent::setScript($script);
+        parent::setScript($script);
 
-    	$source = $script->toArray();
-    
-    	if ($script->hasUpsert()) {
-    		$upsert = $script->getUpsert()->getData();
-    		 
-    		if (!empty($upsert)) {
-    			$source['upsert'] = $upsert;
-    		}
-    	}
-    
-    	$this->setSource($source);
-    
-    	return $this;
+        $source = $script->toArray();
+
+        if ($script->hasUpsert()) {
+            $upsert = $script->getUpsert()->getData();
+
+            if (!empty($upsert)) {
+                $source['upsert'] = $upsert;
+            }
+        }
+
+        $this->setSource($source);
+
+        return $this;
     }
-    
+
     /**
      * @param \Elastica\Script $script
      * @return array
      */
     protected function _getMetadataByScript(Script $script)
     {
-    	$params = array(
-    			'index',
-    			'type',
-    			'id',
-    			'version',
-    			'version_type',
-    			'routing',
-    			'percolate',
-    			'parent',
-    			'ttl',
-    			'timestamp',
-    	);
-    	$metadata = $script->getOptions($params, true);
-    
-    	return $metadata;
+        $params = array(
+                'index',
+                'type',
+                'id',
+                'version',
+                'version_type',
+                'routing',
+                'percolate',
+                'parent',
+                'ttl',
+                'timestamp',
+        );
+        $metadata = $script->getOptions($params, true);
+
+        return $metadata;
     }
 }

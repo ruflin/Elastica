@@ -601,7 +601,7 @@ class ClientTest extends BaseTest
         $this->assertArrayHasKey('field2', $data);
         $this->assertEquals('value2', $data['field2']);
     }
-    
+
     public function testUpdateDocumentByDocumentWithUpsert()
     {
         $index = $this->_createIndex();
@@ -620,10 +620,10 @@ class ClientTest extends BaseTest
         $this->assertEquals('value1', $data['field1']);
         $this->assertArrayHasKey('field2', $data);
         $this->assertEquals('value2', $data['field2']);
-        
+
         // should use update document because document exists, upsert document values are ignored
         $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
-        
+
         $document = $type->getDocument(1);
         $this->assertInstanceOf('Elastica\Document', $document);
         $data = $document->getData();
@@ -632,49 +632,49 @@ class ClientTest extends BaseTest
         $this->assertArrayHasKey('field2', $data);
         $this->assertEquals('value2updated', $data['field2']);
     }
-    
+
     public function testDocAsUpsert()
     {
-    	$index = $this->_createIndex();
-    	$type = $index->getType('test');
-    	$client = $index->getClient();
-    	
-    	//Confirm document one does not exist
-    	try {
-    		$document = $type->getDocument(1);
-    		$this->fail('Exception was not thrown. Maybe the document exists?');
-    	} catch (\Exception $e) {
-    		//Ignore the exception because we expect the document to not exist.
-    	}
-    	
-    	$newDocument = new Document(1, array('field1' => 'value1', 'field2' => 'value2'));
-    	$newDocument->setDocAsUpsert(true);
-    	$client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
-    
-    	$document = $type->getDocument(1);
-    	$this->assertInstanceOf('Elastica\Document', $document);
-    	$data = $document->getData();
-    	$this->assertArrayHasKey('field1', $data);
-    	$this->assertEquals('value1', $data['field1']);
-    	$this->assertArrayHasKey('field2', $data);
-    	$this->assertEquals('value2', $data['field2']);
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
+
+        //Confirm document one does not exist
+        try {
+            $document = $type->getDocument(1);
+            $this->fail('Exception was not thrown. Maybe the document exists?');
+        } catch (\Exception $e) {
+            //Ignore the exception because we expect the document to not exist.
+        }
+
+        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 'value2'));
+        $newDocument->setDocAsUpsert(true);
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
+
+        $document = $type->getDocument(1);
+        $this->assertInstanceOf('Elastica\Document', $document);
+        $data = $document->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals('value2', $data['field2']);
     }
-    
+
     public function testUpdateWithInvalidType()
     {
-    	$index = $this->_createIndex();
-    	$type = $index->getType('test');
-    	$client = $index->getClient();
-    	 
-    	//Try to update using a stdClass object
-    	$badDocument = new \stdClass();
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
 
-    	try {
-    		$client->updateDocument(1, $badDocument, $index->getName(), $type->getName());
-    		$this->fail('Tried to update using an object that is not a Document or a Script but no exception was thrown');
-    	} catch (\Exception $e) {
-    		//Good. An exception was thrown.
-    	}
+        //Try to update using a stdClass object
+        $badDocument = new \stdClass();
+
+        try {
+            $client->updateDocument(1, $badDocument, $index->getName(), $type->getName());
+            $this->fail('Tried to update using an object that is not a Document or a Script but no exception was thrown');
+        } catch (\Exception $e) {
+            //Good. An exception was thrown.
+        }
     }
 
     public function testDeleteDocuments()

@@ -425,8 +425,8 @@ class TypeTest extends BaseTest
                 'name' => $newName,
                 'count' => 2,
             ),
-        	null,
-        	$id
+            null,
+            $id
         );
         $script->setUpsert($document);
 

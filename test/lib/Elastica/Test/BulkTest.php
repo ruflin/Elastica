@@ -299,26 +299,26 @@ class BulkTest extends BaseTest
             )
         );
     }
-    
+
     public function testCreateAbstractDocumentWithInvalidData()
     {
-    	//Wrong class type
-    	try {
-    		$badDocument = new \stdClass();
-    		AbstractDocument::create($badDocument);
-    		$this->fail('Tried to create an abstract document with an object that is not a Document or Script, but no exception was thrown');
-    	} catch (\Exception $e) {
-    		//Excepted exception was thrown.
-    	}
+        //Wrong class type
+        try {
+            $badDocument = new \stdClass();
+            AbstractDocument::create($badDocument);
+            $this->fail('Tried to create an abstract document with an object that is not a Document or Script, but no exception was thrown');
+        } catch (\Exception $e) {
+            //Excepted exception was thrown.
+        }
 
-    	//Try to create document with a script
-    	try {
-    		$script = new Script();
-    		AbstractDocument::create($script, AbstractDocument::OP_TYPE_CREATE);
-    		$this->fail('Tried to create an abstract document with a Script, but no exception was thrown');
-    	} catch (\Exception $e) {
-    		//Excepted exception was thrown.
-    	}
+        //Try to create document with a script
+        try {
+            $script = new Script();
+            AbstractDocument::create($script, AbstractDocument::OP_TYPE_CREATE);
+            $this->fail('Tried to create an abstract document with a Script, but no exception was thrown');
+        } catch (\Exception $e) {
+            //Excepted exception was thrown.
+        }
     }
 
     public function testErrorRequest()
@@ -337,7 +337,7 @@ class BulkTest extends BaseTest
 
         $bulk = new Bulk($client);
         $bulk->addDocuments($documents);
-        
+
         try {
             $bulk->send();
             $bulk->fail('3rd document create should produce error');

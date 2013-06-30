@@ -24,12 +24,12 @@ class Script extends Param
      * @var string
      */
     private $_script;
-    
+
     /**
      * @var string
      */
     private $_lang;
-    
+
     /**
      * @var \Elastica\Document
      */
@@ -49,9 +49,9 @@ class Script extends Param
         if ($lang) {
             $this->setLang($lang);
         }
-        
+
         if($id){
-        	$this->setId($id);
+            $this->setId($id);
         }
     }
 
@@ -106,35 +106,35 @@ class Script extends Param
 
         return $script;
     }
-    
+
     /**
      * @param \Elastica\Document|array $data
      * @return \Elastica\Document
      */
     public function setUpsert($data)
     {
-    	$document = Document::create($data);
-    	$this->_upsert = $document;
-    
-    	return $this;
+        $document = Document::create($data);
+        $this->_upsert = $document;
+
+        return $this;
     }
-    
+
     /**
      * @return \Elastica\Document
      */
     public function getUpsert()
     {
-    	return $this->_upsert;
+        return $this->_upsert;
     }
-    
+
     /**
      * @return bool
      */
     public function hasUpsert()
     {
-    	return null !== $this->_upsert;
+        return null !== $this->_upsert;
     }
-    
+
     /**
      * Sets the id of the document the script updates.
      *
@@ -143,9 +143,9 @@ class Script extends Param
      */
     public function setId($id)
     {
-    	return $this->setParam('_id', $id);
+        return $this->setParam('_id', $id);
     }
-    
+
     /**
      * Returns id of the document the script updates.
      *
@@ -153,17 +153,17 @@ class Script extends Param
      */
     public function getId()
     {
-    	return ($this->hasParam('_id')) ? $this->getParam('_id') : null;
+        return ($this->hasParam('_id')) ? $this->getParam('_id') : null;
     }
-    
+
     /**
      * @return bool
      */
     public function hasId()
     {
-    	return (bool)$this->getId();
+        return (bool)$this->getId();
     }
-    
+
     /**
      * @param array $fields if empty array all options will be returned, field names can be either with underscored either without, i.e. _percolate, routing
      * @param bool $withUnderscore should option keys contain underscore prefix
@@ -171,24 +171,24 @@ class Script extends Param
      */
     public function getOptions(array $fields = array(), $withUnderscore = false)
     {
-    	if (!empty($fields)) {
-    		$data = array();
-    		foreach ($fields as $field) {
-    			$key = '_' . ltrim($field, '_');
-    			if ($this->hasParam($key) && '' !== (string) $this->getParam($key)) {
-    				$data[$key] = $this->getParam($key);
-    			}
-    		}
-    	} else {
-    		$data = $this->getParams();
-    	}
-    	if (!$withUnderscore) {
-    		foreach ($data as $key => $value) {
-    			$data[ltrim($key, '_')] = $value;
-    			unset($data[$key]);
-    		}
-    	}
-    	return $data;
+        if (!empty($fields)) {
+            $data = array();
+            foreach ($fields as $field) {
+                $key = '_' . ltrim($field, '_');
+                if ($this->hasParam($key) && '' !== (string) $this->getParam($key)) {
+                    $data[$key] = $this->getParam($key);
+                }
+            }
+        } else {
+            $data = $this->getParams();
+        }
+        if (!$withUnderscore) {
+            foreach ($data as $key => $value) {
+                $data[ltrim($key, '_')] = $value;
+                unset($data[$key]);
+            }
+        }
+        return $data;
     }
 
     /**

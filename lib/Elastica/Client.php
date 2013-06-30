@@ -276,13 +276,13 @@ class Client
 
         if ($data instanceof Script) {
             $requestData = $data->toArray();
-            
+
         } elseif ($data instanceof Document) {
 
             $requestData = array('doc' => $data->getData());
-            
+
             if($data->getDocAsUpsert()){
-            	$requestData['doc_as_upsert'] = true;
+                $requestData['doc_as_upsert'] = true;
             }
 
             $docOptions = $data->getOptions(
@@ -311,13 +311,13 @@ class Client
         } else {
             $requestData = $data;
         }
-        
+
         //If an upsert document exists
         if($data instanceof Script || $data instanceof Document){
-        	
-        	if($data->hasUpsert()){
-        		$requestData['upsert'] = $data->getUpsert()->getData();
-        	}
+
+            if($data->hasUpsert()){
+                $requestData['upsert'] = $data->getUpsert()->getData();
+            }
         }
 
         if (!isset($options['retry_on_conflict'])) {

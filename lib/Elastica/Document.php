@@ -28,10 +28,10 @@ class Document extends Param
      * @var \Elastica\Document
      */
     protected $_upsert;
-    
+
     /**
      * Whether to use this document to upsert if the document does not exist.
-     * 
+     *
      * @var boolean
      */
     protected $_docAsUpsert = false;
@@ -739,22 +739,22 @@ class Document extends Param
     {
         return null !== $this->_upsert;
     }
-    
+
     /**
      * @param bool $value
      * @return \Elastica\Document
      */
     public function setDocAsUpsert($value)
     {
-    	$this->_docAsUpsert = (bool) $value;
+        $this->_docAsUpsert = (bool) $value;
     }
-    
+
     /**
      * @return boolean
      */
     public function getDocAsUpsert()
     {
-    	return $this->_docAsUpsert;
+        return $this->_docAsUpsert;
     }
 
     /**
@@ -814,7 +814,7 @@ class Document extends Param
         }
         return $data;
     }
-    
+
     /**
      * @param  array|\Elastica\Document        $data
      * @throws \Elastica\Exception\InvalidException
@@ -822,12 +822,12 @@ class Document extends Param
      */
     public static function create($data)
     {
-    	if ($data instanceof self) {
-    		return $data;
-    	} elseif (is_array($data)) {
-    		return new self('', $data);
-    	} else {
-    		throw new InvalidException('Failed to create document. Invalid data passed.');
-    	}
+        if ($data instanceof self) {
+            return $data;
+        } elseif (is_array($data)) {
+            return new self('', $data);
+        } else {
+            throw new InvalidException('Failed to create document. Invalid data passed.');
+        }
     }
 }
