@@ -131,14 +131,17 @@ abstract class AbstractDocument extends Action
      */
     public static function create($data, $opType = null)
     {
+    	//Check type
+    	if (!($data instanceof Document) && !($data instanceof Script)) {
+    		throw new \InvalidArgumentException("The data needs to be a Document or a Script.");
+    	}
+    	
         if (null === $opType && $data->hasOpType()) {
             $opType = $data->getOpType();
         }
 
-        //Check types
-        if (!($data instanceof Document) && !($data instanceof Script)) {
-            throw new \InvalidArgumentException("The data needs to be a Document or a Script.");
-        }else if ($data instanceof Script  && isset($opType) && $opType != self::OP_TYPE_UPDATE) {
+        //Check that scripts can only be used for updates
+        if ($data instanceof Script  && isset($opType) && $opType != self::OP_TYPE_UPDATE) {
             throw new \InvalidArgumentException("When performing an update action, the data needs to be a Document or a Script.");
         }
 
