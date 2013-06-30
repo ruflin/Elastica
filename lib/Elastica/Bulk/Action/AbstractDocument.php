@@ -137,8 +137,6 @@ abstract class AbstractDocument extends Action
         //Check types
         if(!($data instanceof Document) && !($data instanceof Script)){
         	throw new \InvalidArgumentException("The data needs to be a Document or a Script.");
-        }else if($data instanceof Document && isset($opType) && !in_array($opType, array(self::OP_TYPE_DELETE, self::OP_TYPE_CREATE, self::OP_TYPE_UPDATE,self::OP_TYPE_INDEX))){
-        	throw new \InvalidArgumentException("When performing a $opType action, the data needs to be a Document.");
         }else if($data instanceof Script  && isset($opType) && $opType != self::OP_TYPE_UPDATE){
         	throw new \InvalidArgumentException("When performing an update action, the data needs to be a Document or a Script.");
         }
