@@ -279,18 +279,18 @@ class DocumentTest extends BaseTest
         }
     }
 
-    public function testSetScript()
+    public function testUpsert()
     {
         $document = new Document();
 
-        $script = new Script('ctx._source.counter += count');
-        $script->setParam('count', 1);
+        $upsert = new Document();
+        $upsert->setData(array('someproperty' => 'somevalue'));
 
-        $this->assertFalse($document->hasScript());
+        $this->assertFalse($document->hasUpsert());
 
-        $document->setScript($script);
+        $document->setUpsert($upsert);
 
-        $this->assertTrue($document->hasScript());
-        $this->assertSame($script, $document->getScript());
+        $this->assertTrue($document->hasUpsert());
+        $this->assertSame($upsert, $document->getUpsert());
     }
 }

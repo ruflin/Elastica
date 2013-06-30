@@ -452,9 +452,10 @@ class BulkTest extends BaseTest
         $this->assertEquals('The Walrus', $docData['name']);
 
         //test updating via script
-        $doc2 = new Document(2);
-        $doc2->setScript(new \Elastica\Script('ctx._source.name += param1;', array('param1' => ' was Paul')));
-        $updateAction = Action\AbstractDocument::create($doc2, Action::OP_TYPE_UPDATE);
+        $script = new \Elastica\Script('ctx._source.name += param1;', array('param1' => ' was Paul'), null, 2);
+        $doc2 = new Document();
+        $script->setUpsert($doc2);
+        $updateAction = Action\AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
         $bulk = new Bulk($client);
         $bulk->setType($type);
         $bulk->addAction($updateAction);
@@ -469,9 +470,10 @@ class BulkTest extends BaseTest
         $this->assertEquals('The Walrus was Paul', $doc2->name);
 
         //test upsert
-        $doc = new Document(5, array('counter' => 1));
-        $doc->setScript(new \Elastica\Script('ctx._scource.counter += count', array('count' => 1)));
-        $updateAction = Action\AbstractDocument::create($doc, Action::OP_TYPE_UPDATE);
+        $script = new \Elastica\Script('ctx._scource.counter += count', array('count' => 1), null, 5);
+        $doc = new Document('', array('counter' => 1));
+        $script->setUpsert($doc);
+        $updateAction = Action\AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
         $bulk = new Bulk($client);
         $bulk->setType($type);
         $bulk->addAction($updateAction);
