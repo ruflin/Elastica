@@ -508,7 +508,23 @@ class BulkTest extends BaseTest
         $index->refresh();
         $doc = $type->getDocument(5);
         $this->assertEquals(1, $doc->counter);
+        
+        //test doc_as_upsert
+        $doc = new \Elastica\Document(6, array('test' => 'test'));
+        $doc->setDocAsUpsert(true);
+        $updateAction = Action\AbstractDocument::create($doc, Action::OP_TYPE_UPDATE);
+        $bulk = new Bulk($client);
+        $bulk->setType($type);
+        $bulk->addAction($updateAction);
+        $response = $bulk->send();
 
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        $index->refresh();
+        $doc = $type->getDocument(6);
+        $this->assertEquals('test', $doc->test);
+        
         $index->delete();
     }
 
