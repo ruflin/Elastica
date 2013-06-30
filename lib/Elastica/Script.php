@@ -24,6 +24,7 @@ class Script extends Param
      * @var string
      */
     private $_script;
+    
     /**
      * @var string
      */
@@ -39,7 +40,7 @@ class Script extends Param
      * @param array|null  $params
      * @param string|null $lang
      */
-    public function __construct($script, array $params = null, $lang = null)
+    public function __construct($script, array $params = null, $lang = null, $id = null)
     {
         $this->setScript($script);
         if ($params) {
@@ -128,6 +129,35 @@ class Script extends Param
     public function hasUpsert()
     {
     	return null !== $this->_upsert;
+    }
+    
+    /**
+     * Sets the id of the document the script updates.
+     *
+     * @param  string            $id
+     * @return \Elastica\Script
+     */
+    public function setId($id)
+    {
+    	return $this->setParam('_id', $id);
+    }
+    
+    /**
+     * Returns id of the document the script updates.
+     *
+     * @return string|int Document id
+     */
+    public function getId()
+    {
+    	return ($this->hasParam('_id')) ? $this->getParam('_id') : null;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function hasId()
+    {
+    	return (bool)$this->getId();
     }
 
     /**

@@ -132,20 +132,24 @@ class Type implements SearchableInterface
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
-     * @param  \Elastica\Document                   $document Document with update data
+     * @param  \Elastica\Document|\Elastica\Script                   $data Document with update data
      * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
      */
-    public function updateDocument(Document $document)
+    public function updateDocument($data)
     {
-        if (!$document->hasId()) {
-            throw new InvalidException('Document id is not set');
+    	if(!($data instanceof Document) || !($data instanceof Script)){
+    		throw new \InvalidArgumentException("Data should be a Document or Script");
+    	}
+    	
+        if (!$data->hasId()) {
+            throw new InvalidException('Document or Script id is not set');
         }
 
         return $this->getIndex()->getClient()->updateDocument(
-            $document->getId(),
-            $document,
+            $data->getId(),
+            $data,
             $this->getIndex()->getName(),
             $this->getName()
         );
