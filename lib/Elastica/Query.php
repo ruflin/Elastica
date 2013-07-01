@@ -65,6 +65,8 @@ class Query extends Param
                 return $newQuery;
             case empty($query):
                 return new self(new MatchAll());
+            case is_array($query):
+                return new self($query);
             case is_string($query):
                 return new self(new QueryString($query));
 
