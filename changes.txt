@@ -1,5 +1,8 @@
 CHANGES
 
+2013-07-01
+- Add Filter\GeohashCell
+
 2013-06-29
 - Update to elasticsearch 0.90.2
 - Enabled ES_WAIT_ON_MAPPING_CHANGE for travis builds
