@@ -63,6 +63,24 @@ class QueryTest extends BaseTest
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }
 
+    public function testArrayQuery()
+    {
+        $query = array(
+            'query' => array(
+                'text' => array(
+                    'title' => 'test'
+                )
+            )
+        );
+
+        $query1 = Query::create($query);
+
+        $query2 = new Query();
+        $query2->setRawQuery(array('query' => array('text' => array('title' => 'test'))));
+
+        $this->assertEquals($query1->toArray(), $query2->toArray());
+    }
+
     public function testSetSort()
     {
         $index = $this->_createIndex();
