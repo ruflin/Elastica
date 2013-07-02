@@ -90,6 +90,49 @@ class TypeTest extends BaseTest
         $this->assertFalse($search->hasType('test_type2'));
     }
 
+    public function testCreateSearchWithArray()
+    {
+        $client = $this->_getClient();
+        $index = new Index($client, 'test_index');
+        $type = new Type($index, 'test_type');
+
+        $query = array(
+            'query' => array(
+                'query_string' => array(
+                    'query' => 'test'
+                )
+            )
+        );
+
+        $options = array(
+            'limit' => 5,
+            'explain' => true,
+        );
+
+        $search = $type->createSearch($query, $options);
+
+        $expected = array(
+            'query' => array(
+                'query_string' => array(
+                    'query' => 'test'
+                )
+            ),
+            'size' => 5,
+            'explain' => true
+        );
+        $this->assertEquals($expected, $search->getQuery()->toArray());
+        $this->assertEquals(array('test_index'), $search->getIndices());
+        $this->assertTrue($search->hasIndices());
+        $this->assertTrue($search->hasIndex($index));
+        $this->assertTrue($search->hasIndex('test_index'));
+        $this->assertFalse($search->hasIndex('test'));
+        $this->assertEquals(array('test_type'), $search->getTypes());
+        $this->assertTrue($search->hasTypes());
+        $this->assertTrue($search->hasType($type));
+        $this->assertTrue($search->hasType('test_type'));
+        $this->assertFalse($search->hasType('test_type2'));
+    }
+
     public function testNoSource()
     {
         $index = $this->_createIndex();
