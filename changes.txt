@@ -1,5 +1,8 @@
 CHANGES
 
+2013-07-02
+- Can now create a query by passing an array to Type::search()
+
 2013-07-01
 - Add Filter\GeohashCell
 
