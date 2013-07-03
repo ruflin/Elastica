@@ -225,6 +225,9 @@ class MappingTest extends BaseTest
         
         $mapping->send();
         
+        // when running the tests, the mapping sometimes isn't available yet. Optimize index to enforce reload mapping.
+        $index->optimize();
+        
         // create a document which should create a mapping for the field: multiname.
         $testDoc = new Document('person1', array('multiname' => 'Jasper van Wanrooy'), $type);
         $index->addDocuments(array($testDoc));
