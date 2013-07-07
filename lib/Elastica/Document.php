@@ -5,6 +5,7 @@ namespace Elastica;
 use Elastica\Exception\InvalidException;
 use Elastica\Bulk\Action;
 use Elastica\Filter\Bool;
+use Elastica\Exception\NotImplementedException;
 
 /**
  * Single document stored in elastic search
@@ -711,6 +712,16 @@ class Document extends Param
     {
         return $this->hasParam('_replication');
     }
+    
+    /**
+     * @param \Elastica\Script $data
+     * @throws NotImplementedException
+     * @deprecated
+     */
+    public function setScript($data)
+    {
+       throw new NotImplementedException("setScript() is no longer avaliable as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
+    }
 
     /**
      * @param \Elastica\Document|array $data
@@ -723,6 +734,15 @@ class Document extends Param
 
         return $this;
     }
+    
+    /**
+     * @throws NotImplementedException
+     * @deprecated
+     */
+    public function getScript()
+    {
+        throw new NotImplementedException("getScript() is no longer avaliable as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
+    }
 
     /**
      * @return \Elastica\Document
@@ -730,6 +750,15 @@ class Document extends Param
     public function getUpsert()
     {
         return $this->_upsert;
+    }
+    
+    /**
+     * @throws NotImplementedException
+     * @deprecated
+     */
+    public function hasScript()
+    {
+        throw new NotImplementedException("hasScript() is no longer avaliable as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
     }
 
     /**
