@@ -2,6 +2,7 @@ CHANGES
 
 2013-06-30
 - Revamped upsert so that Scripts are now first class citizens. (BC break)
+  See http://elastica.io/migrations/0.90.2/upsert.html
 - Implemented doc_as_upsert.
 
 2013-06-25
