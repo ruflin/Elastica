@@ -4,6 +4,8 @@ namespace Elastica;
 
 use Elastica\Exception\InvalidException;
 use Elastica\Bulk\Action;
+use Elastica\Filter\Bool;
+use Elastica\Exception\NotImplementedException;
 
 /**
  * Single document stored in elastic search
@@ -24,9 +26,16 @@ class Document extends Param
     protected $_data = array();
 
     /**
-     * @var \Elastica\Script
+     * @var \Elastica\Document
      */
-    protected $_script;
+    protected $_upsert;
+
+    /**
+     * Whether to use this document to upsert if the document does not exist.
+     *
+     * @var boolean
+     */
+    protected $_docAsUpsert = false;
 
     /**
      * @var boolean
@@ -703,33 +712,78 @@ class Document extends Param
     {
         return $this->hasParam('_replication');
     }
-
+    
     /**
-     * @param \Elastica\Script|array|string $data
-     * @return \Elastica\Document
+     * @param \Elastica\Script $data
+     * @throws NotImplementedException
+     * @deprecated
      */
     public function setScript($data)
     {
-        $script = Script::create($data);
-        $this->_script = $script;
-
-        return $this;
+       throw new NotImplementedException("setScript() is no longer avaliable as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
     }
 
     /**
-     * @return \Elastica\Script
+     * @param \Elastica\Document|array $data
+     * @return \Elastica\Document
+     */
+    public function setUpsert($data)
+    {
+        $document = Document::create($data);
+        $this->_upsert = $document;
+
+        return $this;
+    }
+    
+    /**
+     * @throws NotImplementedException
+     * @deprecated
      */
     public function getScript()
     {
-        return $this->_script;
+        throw new NotImplementedException("getScript() is no longer avaliable as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
+    }
+
+    /**
+     * @return \Elastica\Document
+     */
+    public function getUpsert()
+    {
+        return $this->_upsert;
+    }
+    
+    /**
+     * @throws NotImplementedException
+     * @deprecated
+     */
+    public function hasScript()
+    {
+        throw new NotImplementedException("hasScript() is no longer avaliable as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
     }
 
     /**
      * @return bool
      */
-    public function hasScript()
+    public function hasUpsert()
     {
-        return null !== $this->_script;
+        return null !== $this->_upsert;
+    }
+
+    /**
+     * @param bool $value
+     * @return \Elastica\Document
+     */
+    public function setDocAsUpsert($value)
+    {
+        $this->_docAsUpsert = (bool) $value;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getDocAsUpsert()
+    {
+        return $this->_docAsUpsert;
     }
 
     /**
@@ -788,5 +842,21 @@ class Document extends Param
             }
         }
         return $data;
+    }
+
+    /**
+     * @param  array|\Elastica\Document        $data
+     * @throws \Elastica\Exception\InvalidException
+     * @return \Elastica\Document
+     */
+    public static function create($data)
+    {
+        if ($data instanceof self) {
+            return $data;
+        } elseif (is_array($data)) {
+            return new self('', $data);
+        } else {
+            throw new InvalidException('Failed to create document. Invalid data passed.');
+        }
     }
 }

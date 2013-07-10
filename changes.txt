@@ -7,6 +7,11 @@ CHANGES
 2013-07-01
 - Add Filter\GeohashCell
 
+2013-06-30
+- Revamped upsert so that Scripts are now first class citizens. (BC break)
+  See http://elastica.io/migration/0.90.2/upsert.html
+- Implemented doc_as_upsert.
+
 2013-06-29
 - Update to elasticsearch 0.90.2
 - Enabled ES_WAIT_ON_MAPPING_CHANGE for travis builds

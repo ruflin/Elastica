@@ -4,20 +4,21 @@ namespace Elastica\Bulk\Action;
 
 use Elastica\Bulk\Action;
 use Elastica\Document;
+use Elastica\Script;
 
 abstract class AbstractDocument extends Action
 {
     /**
-     * @var \Elastica\Document
+     * @var \Elastica\Document|\Elastica\Script
      */
-    protected $_document;
+    protected $_data;
 
     /**
-     * @param \Elastica\Document $document
+     * @param \Elastica\Document|\Elastica\Script $document
      */
-    public function __construct(Document $document)
+    public function __construct($document)
     {
-        $this->setDocument($document);
+        $this->setData($document);
     }
 
     /**
@@ -26,7 +27,7 @@ abstract class AbstractDocument extends Action
      */
     public function setDocument(Document $document)
     {
-        $this->_document = $document;
+        $this->_data = $document;
 
         $metadata = $this->_getMetadataByDocument($document);
 
@@ -36,11 +37,77 @@ abstract class AbstractDocument extends Action
     }
 
     /**
+     * @param \Elastica\Script $script
+     * @return \Elastica\Bulk\Action\AbstractDocument
+     */
+    public function setScript(Script $script)
+    {
+        if (!($this instanceof UpdateDocument)) {
+            throw new \BadMethodCallException("setScript() can only be used for UpdateDocument");
+        }
+
+        $this->_data = $script;
+
+        $metadata = $this->_getMetadataByScript($script);
+        $this->setMetadata($metadata);
+
+        return $this;
+    }
+
+    /**
+     * @param \Elastica\Script|\Elastica\Document $data
+     * @throws \InvalidArgumentException
+     * @return \Elastica\Bulk\Action\AbstractDocument
+     */
+    public function setData($data)
+    {
+        if ($data instanceof Script) {
+
+            $this->setScript($data);
+
+        }else if ($data instanceof Document) {
+
+            $this->setDocument($data);
+
+        }else{
+            throw new \InvalidArgumentException("Data should be a Document or a Script.");
+        }
+
+        return $this;
+    }
+
+    /**
+     * Note: This is for backwards compatibility.
      * @return \Elastica\Document
      */
     public function getDocument()
     {
-        return $this->_document;
+        if ($this->_data instanceof Document) {
+            return $this->_data;
+        }
+
+        return null;
+    }
+
+    /**
+     * Note: This is for backwards compatibility.
+     * @return \Elastica\Script
+     */
+    public function getScript()
+    {
+        if ($this->_data instanceof Script) {
+            return $this->_data;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return \Elastica\Document|\Elastica\Script
+     */
+    public function getData()
+    {
+        return $this->_data;
     }
 
     /**
@@ -50,29 +117,47 @@ abstract class AbstractDocument extends Action
     abstract protected function _getMetadataByDocument(Document $document);
 
     /**
-     * @param \Elastica\Document $document
+     * @param \Elastica\Script $script
+     * @return array
+     */
+    protected function _getMetadataByScript(Script $script)
+    {
+    }
+
+    /**
+     * @param \Elastica\Document|\Elastica\Script $data
      * @param string $opType
      * @return \Elastica\Bulk\Action\AbstractDocument
      */
-    public static function create(Document $document, $opType = null)
+    public static function create($data, $opType = null)
     {
-        if (null === $opType && $document->hasOpType()) {
-            $opType = $document->getOpType();
+    	//Check type
+    	if (!($data instanceof Document) && !($data instanceof Script)) {
+    		throw new \InvalidArgumentException("The data needs to be a Document or a Script.");
+    	}
+    	
+        if (null === $opType && $data->hasOpType()) {
+            $opType = $data->getOpType();
+        }
+
+        //Check that scripts can only be used for updates
+        if ($data instanceof Script  && isset($opType) && $opType != self::OP_TYPE_UPDATE) {
+            throw new \InvalidArgumentException("When performing an update action, the data needs to be a Document or a Script.");
         }
 
         switch ($opType) {
             case self::OP_TYPE_DELETE:
-                $action = new DeleteDocument($document);
+                $action = new DeleteDocument($data);
                 break;
             case self::OP_TYPE_CREATE:
-                $action = new CreateDocument($document);
+                $action = new CreateDocument($data);
                 break;
             case self::OP_TYPE_UPDATE:
-                $action = new UpdateDocument($document);
+                $action = new UpdateDocument($data);
                 break;
             case self::OP_TYPE_INDEX:
             default:
-                $action = new IndexDocument($document);
+                $action = new IndexDocument($data);
                 break;
         }
         return $action;
