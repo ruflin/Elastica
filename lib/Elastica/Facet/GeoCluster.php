@@ -8,7 +8,7 @@ namespace Elastica\Facet;
  * @category Xodoa
  * @package Elastica
  * @author Konstantin Nikiforov <konstantin.nikiforov@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/api/search/facets/geo-cluster-facet.html
+ * @link https://github.com/zenobase/geocluster-facet
  */
 class GeoCluster extends AbstractFacet {
 
