@@ -22,10 +22,10 @@ class GeoCluster extends AbstractFacet {
     }
 
     /**
-     * @param float $factor
+     * @param double $factor
      * @return $this
      */
-    public function setFactor(float $factor){
+    public function setFactor($factor){
         $this->setParam('factor', $factor);
         return $this;
     }
@@ -39,11 +39,7 @@ class GeoCluster extends AbstractFacet {
      * @return array
      */
     public function toArray(){
-        /**
-         * Set the geo_cluster in the abstract as param.
-         */
         $this->_setFacetParam ('geo_cluster', $this->_params);
-
         return parent::toArray();
     }
 }
