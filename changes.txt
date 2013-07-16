@@ -1,5 +1,8 @@
 CHANGES
 
+2013-07-16
+- Plugin geocluster-facet support added
+
 2013-07-02
 - Add Query\Common
 - Can now create a query by passing an array to Type::search()

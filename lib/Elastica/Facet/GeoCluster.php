@@ -13,7 +13,7 @@ namespace Elastica\Facet;
 class GeoCluster extends AbstractFacet {
 
     /**
-     * @param $fieldName
+     * @param string $fieldName
      * @return $this
      */
     public function setField($fieldName) {
