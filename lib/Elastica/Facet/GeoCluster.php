@@ -31,9 +31,6 @@ class GeoCluster extends AbstractFacet {
     }
 
     /**
-     * Creates the full facet definition, which includes the basic
-     * facet definition of the parent.
-     *
      * @see \Elastica\Facet\AbstractFacet::toArray()
      * @throws \Elastica\Exception\InvalidException When the right fields haven't been set.
      * @return array
