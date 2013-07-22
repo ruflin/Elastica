@@ -8,21 +8,21 @@ class GeoClusterTest extends BaseTest{
     public function testQuery() {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create([], true);
+        $index->create(array(), true);
         $type = $index->getType('testQuery');
         $geoField = 'location';
 
-        $type->setMapping(new \Elastica\Type\Mapping($type, [
-            $geoField => [ 'type' => 'geo_point', 'lat_lon' => true ]
-        ]));
+        $type->setMapping(new \Elastica\Type\Mapping($type, array(
+            $geoField => array( 'type' => 'geo_point', 'lat_lon' => true )
+        )));
 
-        $doc = new \Elastica\Document(1, ['name' => 'item1', 'location' => [20,20]]);
+        $doc = new \Elastica\Document(1, array('name' => 'item1', 'location' => array(20,20)));
         $type->addDocument($doc);
 
-        $doc = new \Elastica\Document(2, ['name' => 'item2', 'location' => [20,20]]);
+        $doc = new \Elastica\Document(2, array('name' => 'item2', 'location' => array(20,20)));
         $type->addDocument($doc);
 
-        $doc = new \Elastica\Document(3, ['name' => 'item3', 'location' => [20,20]]);
+        $doc = new \Elastica\Document(3, array('name' => 'item3', 'location' => array(20,20)));
         $type->addDocument($doc);
 
         $index->refresh();
