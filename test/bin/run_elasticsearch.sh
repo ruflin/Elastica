@@ -8,8 +8,12 @@ check_port_http_code() {
 wget http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${ES_VER}.tar.gz
 tar -xzf elasticsearch-${ES_VER}.tar.gz
 
+wget https://github.com/zenobase/geocluster-facet/releases/download/0.0.6/geocluster-facet-0.0.6.jar
+tar -xzf geocluster-facet-0.0.6.jar
+
 elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/${ES_MAPPER_ATTACHMENTS_VER}
 elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/${ES_TRANSPORT_THRIFT_VER}
+elasticsearch-${ES_VER}/bin/plugin -install geocluster-facet-0.0.6.jar
 
 export JAVA_OPTS="-server"
 
