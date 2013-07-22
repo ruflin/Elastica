@@ -30,7 +30,7 @@ class GeoClusterTest extends BaseTest{
         $facet = new \Elastica\Facet\GeoCluster('clusters');
         $facet
             ->setField($geoField)
-            ->setFactor(0.5)
+            ->setFactor(1)
             ->setShowIds(false);
         $query = new \Elastica\Query();
         $query->setFacets(array($facet));
@@ -38,6 +38,6 @@ class GeoClusterTest extends BaseTest{
         $response = $type->search($query);
         $facets = $response->getFacets();
 
-        $this->assertEquals(1, $facets['clusters']['count']);
+        $this->assertEquals(1, count($facets['clusters']['clusters']));
     }
 }
