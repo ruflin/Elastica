@@ -38,6 +38,6 @@ class GeoClusterTest extends BaseTest{
         $response = $type->search($query);
         $facets = $response->getFacets();
 
-        $this->assertEquals(1, $facets);
+        $this->assertEquals(1, $facets['clusters']['count']);
     }
 }
