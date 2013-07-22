@@ -31,6 +31,18 @@ class GeoCluster extends AbstractFacet {
     }
 
     /**
+     * @param boolean $showIds
+     * @return $this
+     */
+    public function setShowIds($showIds) {
+        $this->setParam('showIds', $showIds);
+        return $this;
+    }
+
+    /**
+     * Creates the full facet definition, which includes the basic
+     * facet definition of the parent.
+     *
      * @see \Elastica\Facet\AbstractFacet::toArray()
      * @throws \Elastica\Exception\InvalidException When the right fields haven't been set.
      * @return array
