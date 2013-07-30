@@ -38,8 +38,8 @@ class Index implements SearchableInterface
      *
      * All the communication to and from an index goes of this object
      *
-     * @param  \Elastica\Client                     $client Client object
-     * @param  string                              $name   Index name
+     * @param  \Elastica\Client $client Client object
+     * @param  string           $name   Index name
      * @throws \Elastica\Exception\InvalidException
      */
     public function __construct(Client $client, $name)
@@ -218,7 +218,7 @@ class Index implements SearchableInterface
      */
     public function exists()
     {
-		$response = $this->getClient()->request($this->getName(), Request::HEAD);
+        $response = $this->getClient()->request($this->getName(), Request::HEAD);
         $info = $response->getTransferInfo();
 
         return (bool) ($info['http_code'] == 200);
