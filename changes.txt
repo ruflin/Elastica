@@ -1,5 +1,8 @@
 CHANGES
 
+2013-08-01
+- Second param to \Elastica\Search.php:count($query = '', $fullResult = false) added. If second param is set to true, full ResultSet is returned including facets.
+
 2013-07-16
 - Plugin geocluster-facet support added
 

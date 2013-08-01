@@ -430,9 +430,10 @@ class Search
     /**
      *
      * @param mixed $query
-     * @return int
+	 * @param $fullResult (default = false) By default only the total hit count is returned. If set to true, the full ResultSet including facets is returned.
+     * @return int|ResultSet
      */
-    public function count($query = '')
+    public function count($query = '', $fullResult = false)
     {
         $this->setOptionsAndQuery(null, $query);
 
@@ -446,8 +447,8 @@ class Search
             array(self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_COUNT)
         );
         $resultSet = new ResultSet($response, $query);
-
-        return $resultSet->getTotalHits();
+		
+        return $fullResult?$resultSet:$resultSet->getTotalHits();
     }
 
     /**
