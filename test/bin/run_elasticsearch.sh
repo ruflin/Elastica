@@ -14,7 +14,7 @@ elasticsearch-${ES_VER}/bin/plugin -install geocluster-facet --url https://githu
 
 # Create tmpfs for data storage for ElasticSearch.
 mkdir -p elasticsearch-${ES_VER}/data
-mount -t tmpfs -o size=256m tmpfs elasticsearch-${ES_VER}/data
+sudo mount -t tmpfs -o size=256m tmpfs elasticsearch-${ES_VER}/data
 
 export JAVA_OPTS="-server"
 
