@@ -69,4 +69,32 @@ class Rescore extends AbstractQuery
 
         return $this->setParam('rescore', $rescore);
     }
+
+    /**
+     * Sets query_weight
+     *
+     * @param int $weight
+     * @return \Elastica\Query\Rescore
+     */
+    public function setQueryWeight($weight)
+    {
+        $rescore = $this->getParam('rescore');
+        $rescore['query']['query_weight'] = $weight;
+
+        return $this->setParam('rescore', $rescore);
+    }
+
+    /**
+     * Sets rescore_query_weight
+     *
+     * @param int $size
+     * @return \Elastica\Query\Rescore
+     */
+    public function setRescoreQueryWeight($weight)
+    {
+        $rescore = $this->getParam('rescore');
+        $rescore['query']['rescore_query_weight'] = $weight;
+
+        return $this->setParam('rescore', $rescore);
+    }
 }
