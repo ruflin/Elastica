@@ -4,6 +4,7 @@ namespace Elastica\Test\Filter;
 
 use Elastica\Document;
 use Elastica\Filter\Ids;
+use Elastica\Filter\Type;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
 
@@ -186,5 +187,11 @@ class IdsTest extends BaseTest
         $resultSet = $this->_index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
+    }
+
+    public function testFilterTypeAndTypeCollision()
+    {
+        $filterType = new Type();
+        $filter = new Ids();
     }
 }
