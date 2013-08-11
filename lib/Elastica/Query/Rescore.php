@@ -17,14 +17,14 @@ class Rescore extends AbstractQuery
     /**
      * Constructor
      *
-     * @param string|\Elastica\Query\AbstractQuery $rescore_query
+     * @param string|\Elastica\Query\AbstractQuery $rescoreQuery
      * @param string|\Elastica\Query\AbstractQuery $query
      */
-    public function __construct($query = null, $rescore_query= null)
+    public function __construct($query = null, $rescoreQuery= null)
     {
         $this->setQuery($query);
         $this->setParam('rescore', array());
-        $this->setRescoreQuery($rescore_query);
+        $this->setRescoreQuery($rescoreQuery);
     }
 
     /**
@@ -59,14 +59,14 @@ class Rescore extends AbstractQuery
     }
 
     /**
-     * Sets rescore_query object
+     * Sets rescoreQuery object
      *
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
      * @return \Elastica\Query\Rescore
      */
-    public function setRescoreQuery($rescore_query)
+    public function setRescoreQuery($rescoreQuery)
     {
-        $query = BaseQuery::create($rescore_query);
+        $query = BaseQuery::create($rescoreQuery);
         $data = $query->toArray();
 
         $rescore = $this->getParam('rescore');
