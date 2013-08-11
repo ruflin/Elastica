@@ -2,6 +2,8 @@
 
 namespace Elastica\Query;
 
+use Elastica\Query as BaseQuery;
+
 /**
  * Rescore query
  *
@@ -23,6 +25,23 @@ class Rescore extends AbstractQuery
         $this->setQuery($query);
         $this->setParam('rescore', array());
         $this->setRescoreQuery($rescore_query);
+    }
+
+    /**
+     * Override default implementation so params are in the format
+     * expected by elasticsearch
+     *
+     * @return array Rescore array
+     */
+    public function toArray()
+    {
+        $data = $this->getParams();
+
+        if (!empty($this->_rawParams)) {
+            $data = array_merge($data, $this->_rawParams);
+        }
+
+        return $data;
     }
 
     /**
@@ -65,7 +84,7 @@ class Rescore extends AbstractQuery
     public function setWindowSize($size)
     {
         $rescore = $this->getParam('rescore');
-        $rescore['query']['window_size'] = $size;
+        $rescore['window_size'] = $size;
 
         return $this->setParam('rescore', $rescore);
     }
@@ -73,13 +92,13 @@ class Rescore extends AbstractQuery
     /**
      * Sets query_weight
      *
-     * @param int $weight
+     * @param float $weight
      * @return \Elastica\Query\Rescore
      */
     public function setQueryWeight($weight)
     {
         $rescore = $this->getParam('rescore');
-        $rescore['query']['query_weight'] = $weight;
+        $rescore['query_weight'] = $weight;
 
         return $this->setParam('rescore', $rescore);
     }
@@ -87,13 +106,13 @@ class Rescore extends AbstractQuery
     /**
      * Sets rescore_query_weight
      *
-     * @param int $size
+     * @param float $size
      * @return \Elastica\Query\Rescore
      */
     public function setRescoreQueryWeight($weight)
     {
         $rescore = $this->getParam('rescore');
-        $rescore['query']['rescore_query_weight'] = $weight;
+        $rescore['rescore_query_weight'] = $weight;
 
         return $this->setParam('rescore', $rescore);
     }
