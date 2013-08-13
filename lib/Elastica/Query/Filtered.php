@@ -74,7 +74,6 @@ class Filtered extends AbstractQuery
     {
         return $this->_filter;
     }
-    
 
     /**
      * Gets the query.
