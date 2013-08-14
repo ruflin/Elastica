@@ -58,11 +58,6 @@ class Query extends Param
             case $query instanceof Query:
                 return $query;
             case $query instanceof AbstractQuery:
-                $queryArray = $query->toArray();
-                if (count($queryArray) > 1)
-                {
-                    return new self($queryArray);
-                }
                 return new self($query);
             case $query instanceof AbstractFilter:
                 $newQuery = new self();
