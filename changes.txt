@@ -1,7 +1,8 @@
 CHANGES
 
 2013-08-14
-- Added Query\Rescore
+- Added Rescore
+- Set up structure to be easily extended for more types of rescores
 
 2013-08-13
 - Add a getQuery method on the FilteredQuery object
