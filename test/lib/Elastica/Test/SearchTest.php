@@ -12,6 +12,9 @@ use Elastica\Query\CustomScore;
 use Elastica\Query;
 use Elastica\Script;
 use Elastica\Search;
+use Elastica\Query\Match;
+use Elastica\Query\Term;
+use Elastica\Rescore\QueryRescore;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 
@@ -484,4 +487,59 @@ class SearchTest extends BaseTest
 		$this->assertInstanceOf('\Elastica\ResultSet', $result2);
 		$this->assertEquals(1, $result2->getTotalHits());
 	}
+
+    public function testSetRescore()
+    {
+        $client = new Client(array('connections' => array(array('host' => 'localhost', 'port' => 9200))));
+        $index = $client->getIndex('elastica_test1');
+        $index->create(array(), true);
+        $search = new Search($client);
+        $search = $search->addIndex($index);
+
+        $mainQuery = new Match();
+        $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
+        $queryRescore = new QueryRescore();
+        $rescoreQuery = new Term();
+        $rescoreQuery = $rescoreQuery->setTerm('test2', 'bar', 2);
+        $queryRescore->setQuery($rescoreQuery);
+        $queryRescore->setWindowSize(50);
+        $queryRescore->setQueryWeight(.7);
+        $queryRescore->setRescoreQueryWeight(1.2);
+
+        $search = $search->setQuery($mainQuery);
+        $search = $search->setRescore($queryRescore);
+
+        $response = $search->search()->getResponse();
+        $data = $response->getData();
+        $shards = $data['_shards'];
+        $failed = $shards['failed'];
+        $expectedData = array(
+            'query' => array(
+                'match' => array(
+                    'test1' => array(
+                        'query' => 'foo',
+                    ),
+                ),
+            ),
+            'rescore' => array(
+                'window_size' => 50,
+                'query' => array(
+                    'rescore_query' => array(
+                        'term' => array(
+                            'test2' => array(
+                                'value' => 'bar',
+                                'boost' => 2,
+                            ),
+                        ),
+                    ),
+                    'query_weight' => 0.7,
+                    'rescore_query_weight' => 1.2
+                ),
+            ),
+        );
+
+        $this->assertEquals($expectedData, $search->getQuery()->toArray());
+        $this->assertEquals(false, $response->hasError());
+        $this->assertEquals(0, $failed);
+    }
 }

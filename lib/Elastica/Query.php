@@ -8,6 +8,7 @@ use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
+use Elastica\Rescore\AbstractRescore;
 
 /**
  * Elastica query object
@@ -103,6 +104,18 @@ class Query extends Param
     public function setQuery(AbstractQuery $query)
     {
         return $this->setParam('query', $query->toArray());
+    }
+
+    /**
+     * Sets the rescore
+     *
+     * @param  \Elastica\Rescore\AbstractRescore $rescore Rescore object
+     * @return \Elastica\Query               Query object
+     */
+    public function setRescore(AbstractRescore $rescore)
+    {
+        $data = $rescore->toArray();
+        return $this->setParam('rescore', $data['rescore']);
     }
 
     /**

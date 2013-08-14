@@ -3,6 +3,7 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
+use Elastica\Rescore\AbstractRescore;
 
 /**
  * Elastica search object
@@ -158,6 +159,24 @@ class Search
     public function setQuery($query)
     {
         $this->_query = Query::create($query);
+
+        return $this;
+    }
+
+    /**
+     * Sets the rescore
+     *
+     * @param  \Elastica\Rescore\AbstractRescore $rescore Rescore object
+     * @return \Elastica\Query               Query object
+     */
+    public function setRescore(AbstractRescore $rescore)
+    {
+        if (!isset($this->_query))
+        {
+            throw new InvalidException('Please set query before setting rescore');
+        }
+        $data = $rescore->toArray();
+        $this->_query->setParam('rescore', $data['rescore']);
 
         return $this;
     }
