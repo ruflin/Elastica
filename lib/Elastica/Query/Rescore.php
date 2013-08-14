@@ -98,7 +98,7 @@ class Rescore extends AbstractQuery
     public function setQueryWeight($weight)
     {
         $rescore = $this->getParam('rescore');
-        $rescore['query_weight'] = $weight;
+        $rescore['query']['query_weight'] = $weight;
 
         return $this->setParam('rescore', $rescore);
     }
@@ -112,7 +112,7 @@ class Rescore extends AbstractQuery
     public function setRescoreQueryWeight($weight)
     {
         $rescore = $this->getParam('rescore');
-        $rescore['rescore_query_weight'] = $weight;
+        $rescore['query']['rescore_query_weight'] = $weight;
 
         return $this->setParam('rescore', $rescore);
     }
