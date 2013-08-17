@@ -37,6 +37,7 @@ class StatusTest extends BaseTest
         $index->create(array(), true);
         $index = $this->_createIndex();
 		$index->refresh();
+		$index->optimize();
 
         $status = new Status($index->getClient());
         $names = $status->getIndexNames();
