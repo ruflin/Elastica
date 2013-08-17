@@ -98,7 +98,7 @@ class ResultSet implements \Iterator, \Countable
     /**
      * Returns all results
      *
-     * @return array Results
+     * @return Result[] Results
      */
     public function getResults()
     {

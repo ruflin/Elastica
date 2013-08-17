@@ -2,7 +2,7 @@
 
 namespace Elastica\Filter;
 
-use Elastica\Type;
+use Elastica\Type as ElasticaType;
 
 /**
  * Ids Filter
@@ -45,7 +45,7 @@ class Ids extends AbstractFilter
      */
     public function addType($type)
     {
-        if ($type instanceof Type) {
+        if ($type instanceof ElasticaType) {
             $type = $type->getName();
         } elseif (empty($type) && !is_numeric($type)) {
             // TODO: Shouldn't this throw an exception?
@@ -64,7 +64,7 @@ class Ids extends AbstractFilter
      */
     public function setType($type)
     {
-        if ($type instanceof Type) {
+        if ($type instanceof ElasticaType) {
             $type = $type->getName();
         } elseif (empty($type) && !is_numeric($type)) {
             // TODO: Shouldn't this throw an exception or let handling of invalid params to ES?

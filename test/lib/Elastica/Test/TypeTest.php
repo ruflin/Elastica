@@ -90,6 +90,49 @@ class TypeTest extends BaseTest
         $this->assertFalse($search->hasType('test_type2'));
     }
 
+    public function testCreateSearchWithArray()
+    {
+        $client = $this->_getClient();
+        $index = new Index($client, 'test_index');
+        $type = new Type($index, 'test_type');
+
+        $query = array(
+            'query' => array(
+                'query_string' => array(
+                    'query' => 'test'
+                )
+            )
+        );
+
+        $options = array(
+            'limit' => 5,
+            'explain' => true,
+        );
+
+        $search = $type->createSearch($query, $options);
+
+        $expected = array(
+            'query' => array(
+                'query_string' => array(
+                    'query' => 'test'
+                )
+            ),
+            'size' => 5,
+            'explain' => true
+        );
+        $this->assertEquals($expected, $search->getQuery()->toArray());
+        $this->assertEquals(array('test_index'), $search->getIndices());
+        $this->assertTrue($search->hasIndices());
+        $this->assertTrue($search->hasIndex($index));
+        $this->assertTrue($search->hasIndex('test_index'));
+        $this->assertFalse($search->hasIndex('test'));
+        $this->assertEquals(array('test_type'), $search->getTypes());
+        $this->assertTrue($search->hasTypes());
+        $this->assertTrue($search->hasType($type));
+        $this->assertTrue($search->hasType('test_type'));
+        $this->assertFalse($search->hasType('test_type2'));
+    }
+
     public function testNoSource()
     {
         $index = $this->_createIndex();
@@ -418,17 +461,19 @@ class TypeTest extends BaseTest
         $type->addDocument(new Document($id, array('name' => 'bruce wayne batman', 'counter' => 1)));
         $newName = 'batman';
 
-        $document = new Document($id);
+        $document = new Document();
         $script = new Script(
             "ctx._source.name = name; ctx._source.counter += count",
             array(
                 'name' => $newName,
                 'count' => 2,
-            )
+            ),
+            null,
+            $id
         );
-        $document->setScript($script);
+        $script->setUpsert($document);
 
-        $type->updateDocument($document, array('refresh' => true));
+        $type->updateDocument($script, array('refresh' => true));
         $updatedDoc = $type->getDocument($id)->getData();
         $this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
         $this->assertEquals(3, $updatedDoc['counter'], "Counter was not incremented");
@@ -457,16 +502,17 @@ class TypeTest extends BaseTest
         $this->assertTrue($newDocument->hasId());
 
         $script = new Script('ctx._source.counter += count; ctx._source.realName = realName');
+        $script->setId($newDocument->getId());
         $script->setParam('count', 7);
         $script->setParam('realName', 'Bruce Wayne');
-        $newDocument->setScript($script);
+        $script->setUpsert($newDocument);
 
         $newDocument->setFieldsSource();
 
-        $response = $type->updateDocument($newDocument);
+        $response = $type->updateDocument($script);
         $responseData = $response->getData();
 
-        $data = $newDocument->getData();
+        $data = $type->getDocument($newDocument->getId())->getData();
 
         $this->assertEquals(12, $data['counter']);
         $this->assertEquals('Batman', $data['name']);
@@ -475,11 +521,8 @@ class TypeTest extends BaseTest
         $this->assertTrue($newDocument->hasVersion());
         $this->assertArrayHasKey('_version', $responseData, '_version is missing in response data it is weird');
         $this->assertEquals(2, $responseData['_version']);
-        $this->assertEquals($responseData['_version'], $newDocument->getVersion());
 
         $document = $type->getDocument($newDocument->getId());
-
-        $this->assertEquals($newDocument->getData(), $document->getData());
     }
 
     /**
@@ -521,13 +564,14 @@ class TypeTest extends BaseTest
         $type->addDocument($newDocument);
 
         $script = new Script('ctx._source.counter += count; ctx._source.name = name');
+        $script->setId($newDocument->getId());
         $script->setParam('count', 2);
         $script->setParam('name', 'robin');
 
-        $newDocument->setScript($script);
+        $script->setUpsert($newDocument);
 
         try {
-            $type->updateDocument($newDocument);
+            $type->updateDocument($script);
             $this->fail('Update request should fail because source is disabled. Fields param is not set');
         } catch (ResponseException $e) {
             $this->assertContains('DocumentSourceMissingException', $e->getMessage());

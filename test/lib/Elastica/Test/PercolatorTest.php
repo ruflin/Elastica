@@ -85,6 +85,7 @@ class PercolatorTest extends BaseTest
         // refreshing is required in order to ensure the query is really ready for execution.
         $percolatorIndex = new Index($index->getClient(), '_percolator');
         $percolatorIndex->refresh();
+        $percolatorIndex->optimize();
         
         // step two: match a document which should match the kuku query when filtered on the blue color
         $doc = new Document();

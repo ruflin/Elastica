@@ -532,19 +532,18 @@ class ClientTest extends BaseTest
         $this->assertArrayNotHasKey('field3', $data);
     }
 
-    public function testUpdateDocumentByDocumentWithScript()
+    public function testUpdateDocumentByScriptWithUpsert()
     {
         $index = $this->_createIndex();
         $type = $index->getType('test');
         $client = $index->getClient();
 
-        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4'));
         $script = new Script('ctx._source.field2 += count; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
         $script->setParam('count', 5);
-        $newDocument->setScript($script);
+        $script->setUpsert(array('field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4'));
 
         // should use document fields because document does not exist, script is avoided
-        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
+        $client->updateDocument(1, $script, $index->getName(), $type->getName(), array('fields' => '_source'));
 
         $document = $type->getDocument(1);
 
@@ -560,7 +559,7 @@ class ClientTest extends BaseTest
         $this->assertEquals('value4', $data['field4']);
 
         // should use script because document exists, document values are ignored
-        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
+        $client->updateDocument(1, $script, $index->getName(), $type->getName(), array('fields' => '_source'));
 
         $document = $type->getDocument(1);
 
@@ -602,8 +601,8 @@ class ClientTest extends BaseTest
         $this->assertArrayHasKey('field2', $data);
         $this->assertEquals('value2', $data['field2']);
     }
-    
-    public function testUpdateDocumentWithUpsert()
+
+    public function testUpdateDocumentByDocumentWithUpsert()
     {
         $index = $this->_createIndex();
         $type = $index->getType('test');
@@ -611,7 +610,8 @@ class ClientTest extends BaseTest
 
         $newDocument = new Document(1, array('field1' => 'value1updated', 'field2' => 'value2updated'));
         $upsert = new Document(1, array('field1' => 'value1', 'field2' => 'value2'));
-        $type->updateDocument($newDocument, $upsert);
+        $newDocument->setUpsert($upsert);
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
 
         $document = $type->getDocument(1);
         $this->assertInstanceOf('Elastica\Document', $document);
@@ -620,6 +620,61 @@ class ClientTest extends BaseTest
         $this->assertEquals('value1', $data['field1']);
         $this->assertArrayHasKey('field2', $data);
         $this->assertEquals('value2', $data['field2']);
+
+        // should use update document because document exists, upsert document values are ignored
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
+
+        $document = $type->getDocument(1);
+        $this->assertInstanceOf('Elastica\Document', $document);
+        $data = $document->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1updated', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals('value2updated', $data['field2']);
+    }
+
+    public function testDocAsUpsert()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
+
+        //Confirm document one does not exist
+        try {
+            $document = $type->getDocument(1);
+            $this->fail('Exception was not thrown. Maybe the document exists?');
+        } catch (\Exception $e) {
+            //Ignore the exception because we expect the document to not exist.
+        }
+
+        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 'value2'));
+        $newDocument->setDocAsUpsert(true);
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
+
+        $document = $type->getDocument(1);
+        $this->assertInstanceOf('Elastica\Document', $document);
+        $data = $document->getData();
+        $this->assertArrayHasKey('field1', $data);
+        $this->assertEquals('value1', $data['field1']);
+        $this->assertArrayHasKey('field2', $data);
+        $this->assertEquals('value2', $data['field2']);
+    }
+
+    public function testUpdateWithInvalidType()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+        $client = $index->getClient();
+
+        //Try to update using a stdClass object
+        $badDocument = new \stdClass();
+
+        try {
+            $client->updateDocument(1, $badDocument, $index->getName(), $type->getName());
+            $this->fail('Tried to update using an object that is not a Document or a Script but no exception was thrown');
+        } catch (\Exception $e) {
+            //Good. An exception was thrown.
+        }
     }
 
     public function testDeleteDocuments()
@@ -693,17 +748,17 @@ class ClientTest extends BaseTest
 
         $script = new Script('ctx._source.field2 += count; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
         $script->setParam('count', 5);
-        $newDocument->setScript($script);
+        $script->setUpsert($newDocument);
 
         $client->updateDocument(
             1,
-            $newDocument,
+            $script,
             $index->getName(),
             $type->getName(),
             array('fields' => '_source')
         );
 
-        $data = $newDocument->getData();
+        $data = $type->getDocument(1)->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
         $this->assertArrayHasKey('field2', $data);
@@ -715,23 +770,15 @@ class ClientTest extends BaseTest
         $script = new Script('ctx._source.field2 += count; ctx._source.remove("field4"); ctx._source.field1 = field1;');
         $script->setParam('count', 5);
         $script->setParam('field1', 'updated');
-        $newDocument->setScript($script);
+        $script->setUpsert($newDocument);
 
         $client->updateDocument(
             1,
-            $newDocument,
+            $script,
             $index->getName(),
             $type->getName(),
             array('fields' => 'field2,field4')
         );
-
-        $data = $newDocument->getData();
-        $this->assertArrayHasKey('field1', $data);
-        $this->assertEquals('value1', $data['field1'], 'Field1 should not be updated, because it is not in fields list');
-        $this->assertArrayHasKey('field2', $data);
-        $this->assertEquals(20, $data['field2'], 'Field2 should be 20 after incrementing by 5');
-        $this->assertArrayNotHasKey('field3', $data, 'Field3 should be removed already');
-        $this->assertArrayNotHasKey('field4', $data, 'Field3 should be removed');
 
         $document = $type->getDocument(1);
 

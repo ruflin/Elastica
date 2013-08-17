@@ -326,6 +326,8 @@ class IndexTest extends BaseTest
 
         $index1->refresh();
         $index2->refresh();
+		$index1->optimize();
+		$index2->optimize();
 
         $status = new Status($client);
 
