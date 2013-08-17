@@ -1,5 +1,8 @@
 CHANGES
 
+2013-08-17
+- Add support for fields parameter in Elastica_Type::getDocument()
+
 2013-08-13
 - Add a getQuery method on the FilteredQuery object
 

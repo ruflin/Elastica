@@ -220,7 +220,7 @@ class Type implements SearchableInterface
 
         if (isset($result['fields'])) {
             $data = $result['fields'];
-        } elseif ($result['_source']) {
+        } elseif (isset($result['_source'])) {
             $data = $result['_source'];
         } else {
             $data = array();
