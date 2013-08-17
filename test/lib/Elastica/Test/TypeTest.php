@@ -368,6 +368,25 @@ class TypeTest extends BaseTest
     }
 
     /**
+     * Test to see if Elastica_Type::getDocument() is properly using
+     * the fields array when available instead of _source
+     */
+    public function testGetDocumentWithFieldsSelection()
+    {
+        $index = $this->_createIndex();
+        $type = new Type($index, 'test');
+        $type->addDocument(new Document(1, array('name' => 'loris', 'country' => 'FR', 'email' => 'test@test.com')));
+        $index->refresh();
+
+        $document = $type->getDocument(1, array('fields' => 'name,email'));
+        $data = $document->getData();
+
+        $this->assertArrayHasKey('name', $data);
+        $this->assertArrayHasKey('email', $data);
+        $this->assertArrayNotHasKey('country', $data);
+    }
+
+    /**
      * Test to see if search Default Limit works
      */
     public function testLimitDefaultType()
