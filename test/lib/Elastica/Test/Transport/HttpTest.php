@@ -100,4 +100,55 @@ class HttpTest extends BaseTest
         $this->assertSame($data, $doc->getData());
         $this->assertEquals($id, $doc->getId());
     }
+
+    public function testWithEnvironmentalProxy()
+    {
+        putenv('http_proxy=http://127.0.0.1:12345/');
+
+        $client = new \Elastica\Client();
+        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $this->assertEquals(200, $transferInfo['http_code']);
+
+        $client->getConnection()->setProxy(null); // will not change anything
+        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $this->assertEquals(200, $transferInfo['http_code']);
+
+        putenv('http_proxy=');
+    }
+
+    public function testWithEnabledEnvironmentalProxy()
+    {
+        putenv('http_proxy=http://127.0.0.1:12346/');
+
+        $client = new \Elastica\Client();
+
+        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $this->assertEquals(403, $transferInfo['http_code']);
+
+        $client = new \Elastica\Client();
+        $client->getConnection()->setProxy('');
+        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $this->assertEquals(200, $transferInfo['http_code']);
+
+        putenv('http_proxy=');
+    }
+
+    public function testWithProxy()
+    {
+        $client = new \Elastica\Client();
+        $client->getConnection()->setProxy('http://127.0.0.1:12345');
+
+        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $this->assertEquals(200, $transferInfo['http_code']);
+    }
+
+    public function testWithoutProxy()
+    {
+        $client = new \Elastica\Client();
+        $client->getConnection()->setProxy('');
+
+        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $this->assertEquals(200, $transferInfo['http_code']);
+    }
+
 }

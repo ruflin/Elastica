@@ -10,3 +10,5 @@ atlassian-ide-plugin.xml
 /vendor
 composer.lock
 composer.phar
+/test/nginx/logs/access.log
+/test/nginx/logs/error.log
