@@ -33,6 +33,7 @@ class Client
         'port'            => null,
         'path'            => null,
         'url'             => null,
+        'proxy'           => null,
         'transport'       => null,
         'persistent'      => true,
         'timeout'         => null,
