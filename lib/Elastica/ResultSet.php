@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica;
+use Elastica\Exception\InvalidException;
 
 /**
  * Elastica result set
@@ -12,7 +13,7 @@ namespace Elastica;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class ResultSet implements \Iterator, \Countable
+class ResultSet implements \Iterator, \Countable, \ArrayAccess
 {
     /**
      * Results
@@ -247,5 +248,57 @@ class ResultSet implements \Iterator, \Countable
     public function rewind()
     {
         $this->_position = 0;
+    }
+
+    /**
+     * Whether a offset exists
+     * @link http://php.net/manual/en/arrayaccess.offsetexists.php
+     *
+     * @param   integer $offset
+     * @return  boolean true on success or false on failure.
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->_results[$offset]);
+    }
+
+    /**
+     * Offset to retrieve
+     * @link http://php.net/manual/en/arrayaccess.offsetget.php
+     *
+     * @param   integer $offset
+     * @return  Result|null
+     */
+    public function offsetGet($offset)
+    {
+        return isset($this->_results[$offset]) ? $this->_results[$offset] : null;
+    }
+
+    /**
+     * Offset to set
+     * @link http://php.net/manual/en/arrayaccess.offsetset.php
+     *
+     * @param   integer $offset
+     * @param   Result  $value
+     * @throws  Exception\InvalidException
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (!($value instanceof Result)) {
+            throw new InvalidException("ResultSet is a collection of Result only.");
+        }
+
+        $this->_results[$offset] = $value;
+    }
+
+    /**
+     * Offset to unset
+     * @link http://php.net/manual/en/arrayaccess.offsetunset.php
+     *
+     * @param integer $offset
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->_results[$offset]);
     }
 }
