@@ -179,4 +179,17 @@ class Result
 
         return array_key_exists($key, $source) ? $source[$key] : null;
     }
+    
+    /**
+     * Magic function to support isset() calls
+     *
+     * @param string $key Key name
+     * @return bool
+     */
+    public function __isset($key)
+    {
+        $source = $this->getData();
+
+        return array_key_exists($key, $source) && $source[$key] !== null;
+    }
 }
