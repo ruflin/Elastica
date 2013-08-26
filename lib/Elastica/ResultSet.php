@@ -267,11 +267,16 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      * @link http://php.net/manual/en/arrayaccess.offsetget.php
      *
      * @param   integer $offset
+     * @throws  Exception\InvalidException
      * @return  Result|null
      */
     public function offsetGet($offset)
     {
-        return isset($this->_results[$offset]) ? $this->_results[$offset] : null;
+        if ($this->offsetExists($offset)) {
+            return $this->_results[$offset];
+        } else {
+            throw new InvalidException("Offset does not exist.");
+        }
     }
 
     /**
@@ -286,6 +291,10 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         if (!($value instanceof Result)) {
             throw new InvalidException("ResultSet is a collection of Result only.");
+        }
+
+        if (!isset($this->_results[$offset])) {
+            throw new InvalidException("Offset does not exist.");
         }
 
         $this->_results[$offset] = $value;

@@ -54,11 +54,40 @@ class ResultSetTest extends BaseTest
         $this->assertInstanceOf('Elastica\Result', $resultSet[2]);
 
         $this->assertFalse(isset($resultSet[3]));
+    }
+
+    /**
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testInvalidOffsetCreation()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+
+        $doc = new Document(1, array('name' => 'elastica search'));
+        $type->addDocument($doc);
+        $index->refresh();
+
+        $resultSet = $type->search('elastica search');
 
         $result = new Result(array('_id' => 'fakeresult'));
-        $resultSet[3] = $result;
+        $resultSet[1] = $result;
+    }
 
-        $this->assertTrue(isset($resultSet[3]));
-        $this->assertInstanceOf('Elastica\Result', $resultSet[3]);
+    /**
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testInvalidOffsetGet()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+
+        $doc = new Document(1, array('name' => 'elastica search'));
+        $type->addDocument($doc);
+        $index->refresh();
+
+        $resultSet = $type->search('elastica search');
+
+        return $resultSet[3];
     }
 }
