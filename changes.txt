@@ -1,5 +1,8 @@
 CHANGES
 
+2013-08-27
+- Add \ArrayAccess on the ResultSet object
+
 2013-08-25
 - Update to elasticsearch 0.90.3
 
