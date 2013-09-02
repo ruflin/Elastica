@@ -1,5 +1,8 @@
 CHANGES
 
+2013-09-03
+- Support isset() calls on Result objects
+
 2013-08-27
 - Add \ArrayAccess on the ResultSet object
 
