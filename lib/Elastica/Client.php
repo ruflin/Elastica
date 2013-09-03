@@ -421,6 +421,24 @@ class Client
     }
 
     /**
+     * Determines whether a valid connection is available for use.
+     * 
+     * @return bool
+     */
+    public function hasConnection()
+    {
+        foreach ($this->_connections as $connection)
+        {
+            if ($connection->isEnabled())
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    /**
      * @throws \Elastica\Exception\ClientException
      * @return \Elastica\Connection
      */
@@ -531,6 +549,7 @@ class Client
      * @param  string            $method Rest method to use (GET, POST, DELETE, PUT)
      * @param  array             $data   OPTIONAL Arguments as array
      * @param  array             $query  OPTIONAL Query params
+     * @throws Exception\ConnectionException|\Exception
      * @return \Elastica\Response Response object
      */
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
@@ -556,6 +575,12 @@ class Client
                 call_user_func($this->_callback, $connection, $e);
             }
 
+            // In case there is no valid connection left, throw exception which caused the disabling of the connection.
+            if (!$this->hasConnection())
+            {
+                throw $e;
+            }
+            
             return $this->request($path, $method, $data, $query);
         }
     }
