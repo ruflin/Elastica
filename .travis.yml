@@ -27,3 +27,5 @@ before_script:
   - ./test/bin/run_proxy.sh
 
 script: phpunit -c test/
+
+after_script: ./test/bin/show_logs.sh
