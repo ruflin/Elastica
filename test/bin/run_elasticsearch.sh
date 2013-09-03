@@ -12,6 +12,10 @@ elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-mapper-a
 elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/${ES_TRANSPORT_THRIFT_VER}
 elasticsearch-${ES_VER}/bin/plugin -install geocluster-facet --url https://github.com/zenobase/geocluster-facet/releases/download/0.0.6/geocluster-facet-0.0.6.jar
 
+# Create tmpfs for data storage for ElasticSearch.
+mkdir -p elasticsearch-${ES_VER}/data
+sudo mount -t tmpfs -o size=256m tmpfs elasticsearch-${ES_VER}/data
+
 export JAVA_OPTS="-server"
 
 for i in 0 1 2
@@ -32,6 +36,9 @@ do
     echo "discovery.zen.ping.multicast.enabled: false" >> $config_yml
     echo "http.port: $http_port" >> $config_yml
     echo "thrift.port: $thrift_port" >> $config_yml
+    
+    # lock the memory for ElasticSearch
+    echo "bootstrap.mlockall: true" >> $config_yml
 
     # enable udp
     echo "bulk.udp.enabled: true" >> $config_yml
