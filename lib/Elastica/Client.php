@@ -576,14 +576,12 @@ class Client
             }
 
             // In case there is no valid connection left, throw exception which caused the disabling of the connection.
-            if ($this->hasConnection())
-            {
-                return $this->request($path, $method, $data, $query);
-            }
-            else
+            if (!$this->hasConnection())
             {
                 throw $e;
             }
+            
+            return $this->request($path, $method, $data, $query);
         }
     }
 
