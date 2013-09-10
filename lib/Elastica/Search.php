@@ -478,4 +478,10 @@ class Search
 
         return $this;
     }
+
+
+    public function addSuggest($query)
+    {
+        $this->setQuery($query);
+    }
 }
