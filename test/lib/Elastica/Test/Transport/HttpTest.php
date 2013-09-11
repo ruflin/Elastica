@@ -103,6 +103,8 @@ class HttpTest extends BaseTest
 
     public function testWithEnvironmentalProxy()
     {
+        return $this->markTestSkipped('Proxy tests disabled due to load on Travis instance.');
+        
         putenv('http_proxy=http://127.0.0.1:12345/');
 
         $client = new \Elastica\Client();
@@ -118,6 +120,8 @@ class HttpTest extends BaseTest
 
     public function testWithEnabledEnvironmentalProxy()
     {
+        return $this->markTestSkipped('Proxy tests disabled due to load on Travis instance.');
+        
         putenv('http_proxy=http://127.0.0.1:12346/');
 
         $client = new \Elastica\Client();
@@ -135,6 +139,8 @@ class HttpTest extends BaseTest
 
     public function testWithProxy()
     {
+        return $this->markTestSkipped('Proxy tests disabled due to load on Travis instance.');
+        
         $client = new \Elastica\Client();
         $client->getConnection()->setProxy('http://127.0.0.1:12345');
 
@@ -144,6 +150,8 @@ class HttpTest extends BaseTest
 
     public function testWithoutProxy()
     {
+        return $this->markTestSkipped('Proxy tests disabled due to load on Travis instance.');
+        
         $client = new \Elastica\Client();
         $client->getConnection()->setProxy('');
 
