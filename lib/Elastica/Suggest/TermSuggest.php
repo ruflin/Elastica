@@ -22,19 +22,24 @@ class TermSuggest extends AbstractSuggest
     /**
      * Options
      *
-     * @var array options
+     * @var array parameters
      */
-    protected $_options = array();
+    protected $_parameters = array();
 
     /**
      * Creates term suggest object
      */
-    public function construct($name, $options)
+    public function construct($name, $parameters)
     {
     	$this->_name = $name;
-    	$this->_options[] = $options;
+    	$this->_params[] = $parameters;
 
     	return $this;
+    }
+
+    public function toArray()
+    {
+        return $this->_params;
     }
 
     

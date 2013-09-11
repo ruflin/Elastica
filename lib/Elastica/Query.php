@@ -39,6 +39,8 @@ class Query extends Param
             $this->setRawQuery($query);
         } elseif ($query instanceof AbstractQuery) {
             $this->setQuery($query);
+        } elseif ($query instanceof AbstractSuggest) {
+            $this->addSuggest($query);
         }
     }
 
@@ -69,7 +71,8 @@ class Query extends Param
                 return new self($query);
             case is_string($query):
                 return new self(new QueryString($query));
-
+            case $query instanceof AbstractSuggest:
+                return new self($query);
         }
 
         // TODO: Implement queries without
@@ -311,7 +314,7 @@ class Query extends Param
     public function toArray()
     {
         // If no query is set, all query is chosen by default
-        if (!isset($this->_params['query'])) {
+        if (!isset($this->_params['query']) && (!isset($this->params['suggest']))) {
             $this->setQuery(new MatchAll());
         }
 
@@ -332,5 +335,13 @@ class Query extends Param
         }
 
         return $this->setParam('min_score', $minScore);
+    }
+
+    public function addSuggest($query)
+    {
+        if(!is_array($this->_params['query'])) {
+            $this->setParam('query', array());
+        }
+        $this->setParam('query', $query->toArray());
     }
 }

@@ -23,6 +23,13 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     protected $_results = array();
 
     /**
+    * Suggests
+    *
+    * @var array Suggests
+    */
+    protected $_suggests = array();
+
+    /**
      * Current position
      *
      * @var int Current position
@@ -92,6 +99,11 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
         if (isset($result['hits']['hits'])) {
             foreach ($result['hits']['hits'] as $hit) {
                 $this->_results[] = new Result($hit);
+            }
+        }
+        if(isset($result['suggest'])) {
+            foreach($result['suggest'] as $suggest) {
+                $this->_suggests[] = $suggest;
             }
         }
     }
@@ -309,5 +321,11 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->_results[$offset]);
+    }
+
+
+    public function getSuggests() 
+    {
+        return $this->_suggests;
     }
 }
