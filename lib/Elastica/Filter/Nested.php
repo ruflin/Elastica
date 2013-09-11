@@ -37,6 +37,17 @@ class Nested extends AbstractFilter
     }
 
     /**
+     * Sets nested filter
+     *
+     * @param  \Elastica\Filter\AbstractFilter $filter
+     * @return \Elastica\Filter\Nested
+     */
+    public function setFilter(AbstractFilter $filter)
+    {
+        return $this->setParam('filter', $filter->toArray());
+    }
+
+    /**
      * Set score mode
      *
      * @param  string                       $scoreMode Options: avg, total, max and none.
