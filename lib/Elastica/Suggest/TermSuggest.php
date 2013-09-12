@@ -13,11 +13,11 @@ namespace Elastica\Suggest;
 class TermSuggest extends AbstractSuggest
 {
 	 /**
-     * Name
+     * Global text
      *
-     * @var string Name
+     * @var string Global text
      */
-    protected $_name;
+    protected $_globalText;
 
     /**
      * Options
@@ -29,17 +29,47 @@ class TermSuggest extends AbstractSuggest
     /**
      * Creates term suggest object
      */
-    public function construct($name, $parameters)
-    {
-    	$this->_name = $name;
-    	$this->_params[] = $parameters;
+    // public function construct($name, $parameters)
+    // {
+    // 	$this->_name = $name;
+    // 	$this->_params[] = $parameters;
 
-    	return $this;
-    }
+    // 	return $this;
+    // }
 
     public function toArray()
     {
         return $this->_params;
+    }
+
+    public function addTerm($name, Array $term) {
+
+        $this->addParam($name, $term);
+    }
+
+    public function setGlobalText($text) {
+        $this->_globalText = $text;
+    }
+
+
+    /**
+     * Adds a param to the list
+     *
+     * This function can be used to add an array of params
+     *
+     * @param  string         $key   Param key
+     * @param  mixed          $value Value to set
+     * @return \Elastica\Param
+     */
+    public function addParam($key, $value)
+    {
+        if (!isset($this->_params[$key])) {
+            $this->_params[$key] = array();
+        }
+
+        $this->_params[$key] = $value;
+
+        return $this;
     }
 
     

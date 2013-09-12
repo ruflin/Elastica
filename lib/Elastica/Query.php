@@ -8,6 +8,7 @@ use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
+use Elastica\Suggest\AbstractSuggest;
 
 /**
  * Elastica query object
@@ -27,6 +28,13 @@ class Query extends Param
      * @var array Params
      */
     protected $_params = array();
+
+    /**
+    * Suggest query or not
+    *
+    * @var int suggest
+    */
+    protected $_suggest = 0;
 
     /**
      * Creates a query object
@@ -313,8 +321,7 @@ class Query extends Param
      */
     public function toArray()
     {
-        // If no query is set, all query is chosen by default
-        if (!isset($this->_params['query']) && (!isset($this->params['suggest']))) {
+        if (!isset($this->_params['query']) && ($this->_suggest == 0)) {
             $this->setQuery(new MatchAll());
         }
 
@@ -337,11 +344,13 @@ class Query extends Param
         return $this->setParam('min_score', $minScore);
     }
 
+    /**
+     * Add a suggest term
+     *
+     * @param  \Elastica\Query          Query object
+     */
     public function addSuggest($query)
     {
-        if(!is_array($this->_params['query'])) {
-            $this->setParam('query', array());
-        }
-        $this->setParam('query', $query->toArray());
+        $this->addParam(NULL, $query->toArray());
     }
 }

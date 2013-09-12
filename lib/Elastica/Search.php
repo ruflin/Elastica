@@ -153,7 +153,7 @@ class Search
     }
 
     /**
-     * @param  string|array|\Elastica\Query|\Elastica\Query\AbstractQuery|\Elastica\Filter\AbstractFilter $query
+     * @param  string|array|\Elastica\Query|Elastica\Suggest\TermSuggest\Elastica\Query\AbstractQuery|\Elastica\Filter\AbstractFilter $query|
      * @return \Elastica\Search
      */
     public function setQuery($query)
@@ -485,9 +485,15 @@ class Search
         return $this;
     }
 
+    /**
+     * @param  \Elastica\Suggest\TermSuggest   $term
+     * @return \Elastica\Search
+     */
 
-    public function addSuggest($query)
+    public function addSuggest($suggest)
     {
-        $this->setOptionsAndQuery(array(self::OPTION_SEARCH_TYPE_SUGGEST => 'suggest'), $query);
+        $this->setOptionsAndQuery(array(self::OPTION_SEARCH_TYPE_SUGGEST => 'suggest'), $suggest);
+    
+        return $this;
     }
 }

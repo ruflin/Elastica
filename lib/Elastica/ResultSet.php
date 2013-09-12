@@ -101,10 +101,9 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
                 $this->_results[] = new Result($hit);
             }
         }
-        if(isset($result['suggest'])) {
-            foreach($result['suggest'] as $suggest) {
-                $this->_suggests[] = $suggest;
-            }
+
+        foreach($result as $key => $value) {
+            $this->_suggests[$key] = $value;
         }
     }
 
@@ -116,6 +115,16 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     public function getResults()
     {
         return $this->_results;
+    }
+
+    /**
+    * Return all suggests
+    *
+    * @return Suggest[] Suggests
+    */
+    public function getSuggests() 
+    {
+        return $this->_suggests;
     }
 
     /**
@@ -321,11 +330,5 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->_results[$offset]);
-    }
-
-
-    public function getSuggests() 
-    {
-        return $this->_suggests;
     }
 }
