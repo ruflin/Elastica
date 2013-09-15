@@ -14,7 +14,7 @@ elasticsearch-${ES_VER}/bin/plugin -install geocluster-facet --url https://githu
 
 export JAVA_OPTS="-server"
 
-for i in 0 1 2
+for i in 0 1
 do
     echo "Setup node #$i"
 
