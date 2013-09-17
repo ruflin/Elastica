@@ -8,6 +8,7 @@ namespace Elastica\Query;
  * @category Xodoa
  * @package Elastica
  * @author F21
+ * @author WONG Wing Lun <luiges90@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/match-query.html
  */
 class Match extends AbstractQuery
