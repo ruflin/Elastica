@@ -1,5 +1,9 @@
 CHANGES
 
+2013-09-16
+- Update to elasticsearch 0.90.4
+- Add support for function_score query
+
 2013-09-03
 - Support isset() calls on Result objects
 
