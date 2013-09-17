@@ -6,6 +6,7 @@ use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\ClientException;
+use Elastica\Exception\Connection\HttpException;
 use Elastica\Script;
 use Elastica\Index;
 use Elastica\Request;
@@ -422,7 +423,7 @@ class ClientTest extends BaseTest
         try {
             $client->request('_status', Request::GET);
             $this->fail('Should throw exception as no connection valid');
-        } catch (ClientException $e) {
+        } catch (HttpException $e) {
             $this->assertTrue(true);
         }
 
@@ -464,7 +465,7 @@ class ClientTest extends BaseTest
         try {
             $client->request('_status', Request::GET);
             $this->fail('Should throw exception as no connection valid');
-        } catch (ClientException $e) {
+        } catch (HttpException $e) {
             $this->assertTrue(true);
         }
 
