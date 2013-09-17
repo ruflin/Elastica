@@ -164,4 +164,30 @@ class Match extends AbstractQuery
     {
         return $this->setFieldParam($field, 'max_expansions', (int) $maxExpansions);
     }
+    
+    /**
+     * Set zero terms query
+     *
+     * If not set, default to 'none'
+     * 
+     * @param  string                       $field
+     * @param  string                       $zeroTermQuery
+     * @return \Elastica\Query\Match
+     */
+    public function setFieldZeroTermsQuery($field, $zeroTermQuery = 'none')
+    {
+        return $this->setFieldParam($field, 'zero_terms_query', $zeroTermQuery);
+    }
+    
+    /**
+     * Set cutoff frequency
+     * 
+     * @param  string                      $field
+     * @param  float                       $cutoffFrequency
+     * @return \Elastica\Query\Match
+     */
+    public function setFieldCutoffFrequency($field, $cutoffFrequency)
+    {
+        return $this->setFieldParam($field, 'cutoff_frequency', $cutoffFrequency);
+    }
 }
