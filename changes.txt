@@ -1,10 +1,43 @@
 CHANGES
 
+2013-09-03
+- Support isset() calls on Result objects
+
+2013-08-27
+- Add \ArrayAccess on the ResultSet object
+
+2013-08-25
+- Update to elasticsearch 0.90.3
+
+2013-08-25
+- Release v0.90.2.0
+
+2013-08-20
+- Support for "proxy" param for http connections
+
+2013-08-17
+- Add support for fields parameter in Elastica_Type::getDocument()
+
+2013-08-13
+- Add a getQuery method on the FilteredQuery object
+
+2013-08-01
+- Second param to \Elastica\Search.php:count($query = '', $fullResult = false) added. If second param is set to true, full ResultSet is returned including facets.
+
+2013-07-16
+- Plugin geocluster-facet support added
+
 2013-07-02
+- Add Query\Common
 - Can now create a query by passing an array to Type::search()
 
 2013-07-01
 - Add Filter\GeohashCell
+
+2013-06-30
+- Revamped upsert so that Scripts are now first class citizens. (BC break)
+  See http://elastica.io/migration/0.90.2/upsert.html
+- Implemented doc_as_upsert.
 
 2013-06-29
 - Update to elasticsearch 0.90.2

@@ -37,6 +37,8 @@ class ResultTest extends BaseTest
         $this->assertEquals($docId, $result->getId());
         $this->assertGreaterThan(0, $result->getScore());
         $this->assertInternalType('array', $result->getData());
+        $this->assertTrue(isset($result->username));
+        $this->assertEquals('hans', $result->username);
     }
 
     public function testGetIdNoSource()

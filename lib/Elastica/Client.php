@@ -33,6 +33,7 @@ class Client
         'port'            => null,
         'path'            => null,
         'url'             => null,
+        'proxy'           => null,
         'transport'       => null,
         'persistent'      => true,
         'timeout'         => null,
@@ -267,26 +268,24 @@ class Client
      * @param  string               $index   index to update
      * @param  string               $type    type of index to update
      * @param  array                $options array of query params to use for query. For possible options check es api
-     * @param  array|\Elastica\Document $upsert array or document for upserting
      * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
      */
-    public function updateDocument($id, $data, $index, $type, array $options = array(), $upsert = null)
+    public function updateDocument($id, $data, $index, $type, array $options = array())
     {
         $path =  $index . '/' . $type . '/' . $id . '/_update';
 
         if ($data instanceof Script) {
             $requestData = $data->toArray();
+
         } elseif ($data instanceof Document) {
-            if ($data->hasScript()) {
-                $requestData = $data->getScript()->toArray();
-                $documentData = $data->getData();
-                if (!empty($documentData)) {
-                    $requestData['upsert'] = $documentData;
-                }
-            } else {
-                $requestData = array('doc' => $data->getData());
+
+            $requestData = array('doc' => $data->getData());
+
+            if ($data->getDocAsUpsert()) {
+                $requestData['doc_as_upsert'] = true;
             }
+
             $docOptions = $data->getOptions(
                 array(
                     'version',
@@ -304,7 +303,7 @@ class Client
             );
             $options += $docOptions;
             // set fields param to source only if options was not set before
-            if (($data->isAutoPopulate()
+            if ($data instanceof Document && ($data->isAutoPopulate()
                 || $this->getConfigValue(array('document', 'autoPopulate'), false))
                 && !isset($options['fields'])
             ) {
@@ -313,16 +312,13 @@ class Client
         } else {
             $requestData = $data;
         }
-        
-        if ($upsert) {
 
-        	if (is_array($upsert)) {
-        		$requestData['upsert'] = $upsert;
-        	}elseif ($upsert instanceof Document) {
-        		$requestData['upsert'] = $upsert->getData();
-        	}else{
-        		throw new InvalidException('Upsert should be a Document or an associative array.');
-        	}
+        //If an upsert document exists
+        if ($data instanceof Script || $data instanceof Document) {
+
+            if ($data->hasUpsert()) {
+                $requestData['upsert'] = $data->getUpsert()->getData();
+            }
         }
 
         if (!isset($options['retry_on_conflict'])) {
@@ -422,6 +418,24 @@ class Client
         $this->_connections[] = $connection;
 
         return $this;
+    }
+
+    /**
+     * Determines whether a valid connection is available for use.
+     * 
+     * @return bool
+     */
+    public function hasConnection()
+    {
+        foreach ($this->_connections as $connection)
+        {
+            if ($connection->isEnabled())
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
 
     /**
@@ -535,6 +549,7 @@ class Client
      * @param  string            $method Rest method to use (GET, POST, DELETE, PUT)
      * @param  array             $data   OPTIONAL Arguments as array
      * @param  array             $query  OPTIONAL Query params
+     * @throws Exception\ConnectionException|\Exception
      * @return \Elastica\Response Response object
      */
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
@@ -560,6 +575,12 @@ class Client
                 call_user_func($this->_callback, $connection, $e);
             }
 
+            // In case there is no valid connection left, throw exception which caused the disabling of the connection.
+            if (!$this->hasConnection())
+            {
+                throw $e;
+            }
+            
             return $this->request($path, $method, $data, $query);
         }
     }

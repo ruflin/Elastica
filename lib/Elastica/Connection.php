@@ -87,6 +87,27 @@ class Connection extends Param
     }
 
     /**
+     * @return string|null Host
+     */
+    public function getProxy()
+    {
+        return $this->hasParam('proxy')?$this->getParam('proxy'):null;
+    }
+
+    /**
+     * Set proxy for http connections. Null is for environmental proxy,
+     * empty string to disable proxy and proxy string to set actual http proxy.
+     *
+     * @see http://curl.haxx.se/libcurl/c/curl_easy_setopt.html#CURLOPTPROXY
+     * @param  string|null              $proxy
+     * @return \Elastica\Connection
+     */
+    public function setProxy($proxy)
+    {
+        return $this->setParam('proxy', $proxy);
+    }
+
+    /**
      * @return string|array
      */
     public function getTransport()

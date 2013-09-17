@@ -132,25 +132,26 @@ class Type implements SearchableInterface
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
-     * @param  \Elastica\Document                   $document Document with update data
-     * @param  array|\Elastica\Document             $upsert   Array or document for upserting
+     * @param  \Elastica\Document|\Elastica\Script                   $data Document with update data
      * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
      */
-    public function updateDocument(Document $document, $upsert = null)
+    public function updateDocument($data)
     {
-        if (!$document->hasId()) {
-            throw new InvalidException('Document id is not set');
+        if (!($data instanceof Document) && !($data instanceof Script)) {
+            throw new \InvalidArgumentException("Data should be a Document or Script");
+        }
+
+        if (!$data->hasId()) {
+            throw new InvalidException('Document or Script id is not set');
         }
 
         return $this->getIndex()->getClient()->updateDocument(
-            $document->getId(),
-            $document,
+            $data->getId(),
+            $data,
             $this->getIndex()->getName(),
-            $this->getName(),
-            array(),
-            $upsert
+            $this->getName()
         );
     }
 
@@ -217,7 +218,14 @@ class Type implements SearchableInterface
             throw new NotFoundException('doc id ' . $id . ' not found');
         }
 
-        $data = isset($result['_source']) ? $result['_source'] : array();
+        if (isset($result['fields'])) {
+            $data = $result['fields'];
+        } elseif (isset($result['_source'])) {
+            $data = $result['_source'];
+        } else {
+            $data = array();
+        }
+
         $document = new Document($id, $data, $this->getName(), $this->getIndex());
         $document->setVersion($result['_version']);
 

@@ -36,12 +36,14 @@ class StatusTest extends BaseTest
         $index = $client->getIndex($indexName);
         $index->create(array(), true);
         $index = $this->_createIndex();
+		$index->refresh();
+		$index->optimize();
 
         $status = new Status($index->getClient());
         $names = $status->getIndexNames();
 
         $this->assertInternalType('array', $names);
-        $this->assertTrue(in_array($index->getName(), $names));
+        $this->assertContains($index->getName(), $names);
 
         foreach ($names as $name) {
             $this->assertInternalType('string', $name);

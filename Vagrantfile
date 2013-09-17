@@ -7,7 +7,7 @@
 Vagrant::Config.run do |config|
 
   config.vm.box = "debian-6.0.3-64-elastica-20120115"
-  config.vm.box_url = "http://ruflin.com/files/vagrant/debian-6.0.3-64-elastica-20120528.box"
+  config.vm.box_url = "http://files.ruflin.com/vagrant/debian-6.0.3-64-elastica-20120528.box"
   config.vm.network :hostonly, "10.10.10.10"
   
   config.vm.share_folder "project", "/project", "."

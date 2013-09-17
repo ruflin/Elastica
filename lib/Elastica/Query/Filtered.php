@@ -76,6 +76,16 @@ class Filtered extends AbstractQuery
     }
 
     /**
+     * Gets the query.
+     *
+     * @return \Elastica\Query\AbstractQuery
+     */
+    public function getQuery()
+    {
+        return $this->_query;
+    }
+
+    /**
      * Converts query to array
      *
      * @return array Query array

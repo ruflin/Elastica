@@ -462,4 +462,26 @@ class SearchTest extends BaseTest
         $source = $resultSet->current()->getSource();
         $this->assertEquals('bunny', $source['username']);
     }
+	
+	public function testCount() {
+        $index = $this->_createIndex('eeee');
+        $search = new Search($index->getClient());
+		$type = $index->getType('test');
+		
+        $doc = new Document(1, array('id' => 1, 'username' => 'ruflin'));
+		
+		$type->addDocument($doc);
+		$index->refresh();
+		
+		$search->addIndex($index);
+		$search->addType($type);
+		
+		$result1 = $search->count(new \Elastica\Query\MatchAll());
+		$this->assertEquals(1, $result1);
+		
+		
+		$result2 = $search->count(new \Elastica\Query\MatchAll(), true);
+		$this->assertInstanceOf('\Elastica\ResultSet', $result2);
+		$this->assertEquals(1, $result2->getTotalHits());
+	}
 }
