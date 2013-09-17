@@ -91,15 +91,18 @@ class Http extends AbstractTransport
                 $httpMethod = Request::POST;
             }
 
-            if (is_array($data)) {
-                $content = json_encode($data);
-            } else {
-                $content = $data;
-            }
-
             // Escaping of / not necessary. Causes problems in base64 encoding of files
-            $content = str_replace('\/', '/', $content);
-
+            // Use PHP > 5.4 JSON_UNESCAPED_SLASHES option if available
+            if (is_array($data)) {
+                if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+                    $content = json_encode($data, JSON_UNESCAPED_SLASHES);
+                } else {
+                    $content = $this->_stripJsonSlashes(json_encode($data));
+                }
+            } else {
+                $content = $this->_stripJsonSlashes($data);
+            }
+            
             curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
         }
 
@@ -158,6 +161,10 @@ class Http extends AbstractTransport
         }
     }
 
+    protected function _stripJsonSlashes($data) {
+        return str_replace('\/', '/', $data);
+    }
+    
     /**
      * Return Curl resource
      *
