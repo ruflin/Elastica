@@ -50,6 +50,7 @@ class NodeTest extends BaseTest
      */
     public function testShutdown()
     {
+        $this->markTestSkipped('At least two nodes have to be running, because 1 node is shutdown');
         $client = $this->_getClient();
         $nodes = $client->getCluster()->getNodes();
 
