@@ -90,7 +90,7 @@ class SettingsTest extends BaseTest
         $index = $client->getIndex($indexName);
         $index->create(array(), true);
         //wait for the shards to be allocated
-        $this->waitForAllocation($index);
+        $this->_waitForAllocation($index);
 
         $settings = $index->getSettings();
 
@@ -112,7 +112,7 @@ class SettingsTest extends BaseTest
         $index->create(array(), true);
 
         //wait for the shards to be allocated
-        $this->waitForAllocation($index);
+        $this->_waitForAllocation($index);
 
         $settings = $index->getSettings();
 
@@ -135,7 +135,7 @@ class SettingsTest extends BaseTest
         $index->create(array(), true);
 
         //wait for the shards to be allocated
-        $this->waitForAllocation($index);
+        $this->_waitForAllocation($index);
 
         $settings = $index->getSettings();
 
@@ -154,7 +154,7 @@ class SettingsTest extends BaseTest
     {
         $index = $this->_createIndex('test');
         //wait for the shards to be allocated
-        $this->waitForAllocation($index);
+        $this->_waitForAllocation($index);
         $index->getSettings()->setReadOnly(false);
 
 
@@ -258,7 +258,7 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    protected function waitForAllocation(Index $index)
+    protected function _waitForAllocation(Index $index)
     {
         do {
             $settings = $index->getStatus()->get();

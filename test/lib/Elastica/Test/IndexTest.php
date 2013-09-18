@@ -80,10 +80,7 @@ class IndexTest extends BaseTest
 
     public function testAddPdfFile()
     {
-        $nodes = $this->_getClient()->getCluster()->getNodes();
-        if (!$nodes[0]->getInfo()->hasPlugin('mapper-attachments')) {
-            $this->markTestSkipped('mapper-attachments plugin not installed');
-        }
+        $this->_checkAttachmentsPlugin();
         $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'),);
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
@@ -122,10 +119,7 @@ class IndexTest extends BaseTest
 
     public function testAddPdfFileContent()
     {
-        $nodes = $this->_getClient()->getCluster()->getNodes();
-        if (!$nodes[0]->getInfo()->hasPlugin('mapper-attachments')) {
-            $this->markTestSkipped('mapper-attachments plugin not installed');
-        }
+        $this->_checkAttachmentsPlugin();
         $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'),);
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
@@ -164,10 +158,7 @@ class IndexTest extends BaseTest
 
     public function testAddWordxFile()
     {
-        $nodes = $this->_getClient()->getCluster()->getNodes();
-        if (!$nodes[0]->getInfo()->hasPlugin('mapper-attachments')) {
-            $this->markTestSkipped('mapper-attachments plugin not installed');
-        }
+        $this->_checkAttachmentsPlugin();
         $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => 'no'),);
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
@@ -201,10 +192,7 @@ class IndexTest extends BaseTest
 
     public function testExcludeFileSource()
     {
-        $nodes = $this->_getClient()->getCluster()->getNodes();
-        if (!$nodes[0]->getInfo()->hasPlugin('mapper-attachments')) {
-            $this->markTestSkipped('mapper-attachments plugin not installed');
-        }
+        $this->_checkAttachmentsPlugin();
         $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'yes'), 'text' => array('type' => 'string', 'store' => 'yes'),
             'title' => array('type' => 'string', 'store' => 'yes'),);
 
@@ -616,5 +604,16 @@ class IndexTest extends BaseTest
 
         $count = $index->count();
         $this->assertEquals(3, $count);
+    }
+
+    /**
+     * Check for the presence of the mapper-attachments plugin and skip the current test if it is not found.
+     */
+    protected function _checkAttachmentsPlugin()
+    {
+        $nodes = $this->_getClient()->getCluster()->getNodes();
+        if (!$nodes[0]->getInfo()->hasPlugin('mapper-attachments')) {
+            $this->markTestSkipped('mapper-attachments plugin not installed');
+        }
     }
 }
