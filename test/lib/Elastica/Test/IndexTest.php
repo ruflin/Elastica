@@ -80,6 +80,7 @@ class IndexTest extends BaseTest
 
     public function testAddPdfFile()
     {
+        $this->_checkAttachmentsPlugin();
         $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'),);
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
@@ -118,6 +119,7 @@ class IndexTest extends BaseTest
 
     public function testAddPdfFileContent()
     {
+        $this->_checkAttachmentsPlugin();
         $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'),);
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
@@ -156,6 +158,7 @@ class IndexTest extends BaseTest
 
     public function testAddWordxFile()
     {
+        $this->_checkAttachmentsPlugin();
         $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => 'no'),);
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
@@ -189,6 +192,7 @@ class IndexTest extends BaseTest
 
     public function testExcludeFileSource()
     {
+        $this->_checkAttachmentsPlugin();
         $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'yes'), 'text' => array('type' => 'string', 'store' => 'yes'),
             'title' => array('type' => 'string', 'store' => 'yes'),);
 
@@ -263,7 +267,8 @@ class IndexTest extends BaseTest
         $client->getIndex($aliasName)->getType($typeName)->search('ruflin');
     }
 
-    public function testCount() {
+    public function testCount()
+    {
         $index = $this->_createIndex();
 
         // Add document to normal index
@@ -326,8 +331,8 @@ class IndexTest extends BaseTest
 
         $index1->refresh();
         $index2->refresh();
-		$index1->optimize();
-		$index2->optimize();
+        $index1->optimize();
+        $index2->optimize();
 
         $status = new Status($client);
 
@@ -599,5 +604,16 @@ class IndexTest extends BaseTest
 
         $count = $index->count();
         $this->assertEquals(3, $count);
+    }
+
+    /**
+     * Check for the presence of the mapper-attachments plugin and skip the current test if it is not found.
+     */
+    protected function _checkAttachmentsPlugin()
+    {
+        $nodes = $this->_getClient()->getCluster()->getNodes();
+        if (!$nodes[0]->getInfo()->hasPlugin('mapper-attachments')) {
+            $this->markTestSkipped('mapper-attachments plugin not installed');
+        }
     }
 }
