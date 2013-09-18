@@ -134,17 +134,6 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set field fuzzy rewrite
-     *
-     * @param  string                    $fuzzyRewrite
-     * @return \Elastica\Query\Match
-     */
-    public function setFieldFuzzyRewrite($field, $fuzzyRewrite)
-    {
-        return $this->setFieldParam($field, 'fuzzy_rewrite', $fuzzyRewrite);
-    }
-
-    /**
      * Set prefix length
      *
      * @param  int                       $prefixLength
