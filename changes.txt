@@ -1,6 +1,6 @@
 CHANGES
 
-2013-09-13
+2013-09-18
 - Fix \Elastica\Filter\HasChild usage of \Elastica\Query as to not collide with \Elastica\Filter\Query namespace
 
 2013-09-03
