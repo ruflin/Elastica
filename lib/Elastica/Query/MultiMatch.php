@@ -8,7 +8,7 @@ namespace Elastica\Query;
  * @category Xodoa
  * @package Elastica
  * @author Rodolfo Adhenawer Campagnoli Moraes <adhenawer@gmail.com>
- * @author Peter WONG Wing Lun <luiges90@gmail.com>
+ * @author Wong Wing Lun <luiges90@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/multi-match-query.html
  */
 class MultiMatch extends AbstractQuery
@@ -108,5 +108,72 @@ class MultiMatch extends AbstractQuery
     public function setCutoffFrequency($cutoffFrequency)
     {
         return $this->setParam('cutoff_frequency', $cutoffFrequency);
+    }
+    
+    /**
+     * Set type
+     *
+     * @param  string                    $field
+     * @param  string                    $type
+     * @return \Elastica\Query\Match
+     */
+    public function setType($type)
+    {
+        return $this->setParam('type', $type);
+    }
+    
+    /**
+     * Set fuzziness
+     *
+     * @param  float                     $fuzziness
+     * @return \Elastica\Query\Match
+     */
+    public function setFuzziness($fuzziness)
+    {
+        return $this->setParam('fuzziness', (float) $fuzziness);
+    }
+
+    /**
+     * Set field fuzzy rewrite
+     *
+     * @param  string                    $fuzzyRewrite
+     * @return \Elastica\Query\Match
+     */
+    public function setFieldFuzzyRewrite($field, $fuzzyRewrite)
+    {
+        return $this->setFieldParam($field, 'fuzzy_rewrite', $fuzzyRewrite);
+    }
+
+    /**
+     * Set prefix length
+     *
+     * @param  int                       $prefixLength
+     * @return \Elastica\Query\Match
+     */
+    public function setPrefixLength($prefixLength)
+    {
+        return $this->setParam('prefix_length', (int) $prefixLength);
+    }
+
+    /**
+     * Set max expansions
+     *
+     * @param  int                       $maxExpansions
+     * @return \Elastica\Query\Match
+     */
+    public function setMaxExpansions($maxExpansions)
+    {
+        return $this->setParam('max_expansions', (int) $maxExpansions);
+    }
+    
+    /**
+     * Set analyzer
+     *
+     * @param  string                    $analyzer
+     * @return \Elastica\Query\Match
+     */
+    public function setAnalyzer($analyzer)
+    {
+        return $this->setParam('analyzer', $analyzer);
     }
 }
