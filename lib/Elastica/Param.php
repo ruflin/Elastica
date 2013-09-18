@@ -110,7 +110,7 @@ class Param
      */
     public function addParam($key, $value)
     {
-        if($key != NULL) {
+        if($key != null) {
             if (!isset($this->_params[$key])) {
                 $this->_params[$key] = array();
             }

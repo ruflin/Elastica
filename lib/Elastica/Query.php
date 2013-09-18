@@ -351,6 +351,6 @@ class Query extends Param
      */
     public function addSuggest($query)
     {
-        $this->addParam(NULL, $query->toArray());
+        $this->addParam(null, $query->toArray());
     }
 }

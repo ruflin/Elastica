@@ -10,7 +10,7 @@ namespace Elastica\Suggest;
  * @author Imanol Cea <imanol.cea@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/api/search/term-suggest/
  */
-class TermSuggest extends AbstractSuggest
+class Term extends AbstractSuggest
 {
 	 /**
      * Global text
@@ -25,17 +25,6 @@ class TermSuggest extends AbstractSuggest
      * @var array parameters
      */
     protected $_parameters = array();
-
-    /**
-     * Creates term suggest object
-     */
-    // public function construct($name, $parameters)
-    // {
-    // 	$this->_name = $name;
-    // 	$this->_params[] = $parameters;
-
-    // 	return $this;
-    // }
 
     public function toArray()
     {
@@ -71,7 +60,4 @@ class TermSuggest extends AbstractSuggest
 
         return $this;
     }
-
-    
-
 }
