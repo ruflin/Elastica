@@ -103,7 +103,11 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
         }
 
         foreach($result as $key => $value) {
-            $this->_suggests[$key] = $value;
+            if($key != '_shards') {
+                if(count($value[0]['options'])>0) {
+                    $this->suggests[$key] = $value[0];
+                }
+            }
         }
     }
 
@@ -217,6 +221,16 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     public function count()
     {
         return sizeof($this->_results);
+    }
+
+    /**
+     * Returns size of current suggests
+     *
+     * @return int Size of suggests
+     */
+    public function countSuggests()
+    {
+        return sizeof($this->_suggests);
     }
 
     /**
