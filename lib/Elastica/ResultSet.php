@@ -104,7 +104,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 
         foreach($result as $key => $value) {
             if($key != '_shards') {
-                if(count($value[0]['options'])>0) {
+                if(isset($value[0]['options']) && count($value[0]['options'])>0) {
                     $this->suggests[$key] = $value[0];
                 }
             }
