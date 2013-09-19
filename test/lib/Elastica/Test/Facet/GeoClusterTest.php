@@ -7,6 +7,11 @@ use Elastica\Test\Base as BaseTest;
 class GeoClusterTest extends BaseTest{
     public function testQuery() {
         $client = $this->_getClient();
+        $nodes = $client->getCluster()->getNodes();
+        if(!$nodes[0]->getInfo()->hasPlugin('geocluster-facet')){
+            $this->markTestSkipped('geocluster-facet plugin not installed');
+        }
+
         $index = $client->getIndex('test');
         $index->create(array(), true);
         $type = $index->getType('testQuery');
