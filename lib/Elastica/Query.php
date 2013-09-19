@@ -28,7 +28,7 @@ class Query extends Param
      * @var array Params
      */
     protected $_params = array();
-
+    
     /**
     * Suggest query or not
     *
@@ -81,6 +81,7 @@ class Query extends Param
                 return new self(new QueryString($query));
             case $query instanceof AbstractSuggest:
                 return new self($query);
+
         }
 
         // TODO: Implement queries without
@@ -351,6 +352,10 @@ class Query extends Param
      */
     public function addSuggest($query)
     {
-        $this->addParam(null, $query->toArray());
+        $this->addParam(NULL, $query->toArray());
+        $this->_suggest = 1;
     }
 }
+
+
+
