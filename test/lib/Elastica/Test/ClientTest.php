@@ -153,13 +153,13 @@ class ClientTest extends BaseTest
 
         $doc1 = new Document(
             1,
-            array('username' => 'hans', 'age' => $initialValue),
+            array('name' => 'hans', 'age' => $initialValue),
             $typeName,
             $indexName
         );
         $doc2 = new Document(
             2,
-            array('username' => 'anna', 'age' => $initialValue),
+            array('name' => 'anna', 'age' => $initialValue),
             $typeName,
             $indexName
         );
