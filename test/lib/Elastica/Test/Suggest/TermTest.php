@@ -5,6 +5,9 @@ namespace Elastica\Test\Suggest;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Suggest\Term;
 use Elastica\Query;
+use Elastica\Document;
+use Elastica\Search;
+use Elastica\Index;
 
 class TermTest extends BaseTest
 {
@@ -24,7 +27,7 @@ class TermTest extends BaseTest
                         'size' => 4)
                     )
                 );
-        $this->assertEquals($expectedArray, $query->toArray());
+        $this->assertEquals($expectedArray, $suggest->toArray());
     }
 
     public function testToArrayMultipleTerms()
@@ -51,15 +54,16 @@ class TermTest extends BaseTest
                     )
             );
 
-        $this->assertEquals($expectedArray, $query->toArray());
+        $this->assertEquals($expectedArray, $suggest->toArray());
     }
 
     public function testSuggestResults()
     {
         $client = $this->_getClient();
+        $index = new Index($client, 'test_suggest');
         $search = new Search($client);
 
-        $index = $client->getIndex('zero');
+        $index = $client->getIndex('test_suggest');
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
         $docs = array();
@@ -68,7 +72,7 @@ class TermTest extends BaseTest
         $docs[] = new Document(7, array('id' => 1, 'text' => 'Search'));
         $docs[] = new Document(3, array('id' => 1, 'text' => 'Food'));
         $docs[] = new Document(4, array('id' => 1, 'text' => 'Folks'));
-        $type = $index->getType('zeroType');
+        $type = $index->getType('testSuggestType');
         $type->addDocuments($docs);
         $index->refresh();
 
@@ -85,16 +89,17 @@ class TermTest extends BaseTest
         
         $suggests = $result->getSuggests();
 
-        $this->assertEquals('Github', $suggests['suggest2']['options'][0]['text']);
-        $this->assertEquals('Food', $suggests['suggest1']['options'][0]['text']);
+        $this->assertEquals('github', $suggests['suggest2']['options'][0]['text']);
+        $this->assertEquals('food', $suggests['suggest1']['options'][0]['text']);
     }
 
     public function testSuggestNoResults()
     {
         $client = $this->_getClient();
         $search = new Search($client);
+        $index = new Index($client, 'test_suggest');
 
-        $index = $client->getIndex('zero');
+        $index = $client->getIndex('test_suggest');
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
         $docs = array();
@@ -102,7 +107,7 @@ class TermTest extends BaseTest
         $docs[] = new Document(6, array('id' => 1, 'text' => 'Elastic'));
         $docs[] = new Document(3, array('id' => 1, 'text' => 'Food'));
         $docs[] = new Document(4, array('id' => 1, 'text' => 'Folks'));
-        $type = $index->getType('zeroType');
+        $type = $index->getType('testSuggestType');
         $type->addDocuments($docs);
         $index->refresh();
 
