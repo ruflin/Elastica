@@ -2,7 +2,7 @@
     "name": "ruflin/elastica",
     "description": "Elasticsearch Client",
     "keywords": ["search","client"],
-    "homepage": "http://ruflin.github.com/Elastica/",
+    "homepage": "http://elastica.io/",
     "type": "library",
     "license": "Apache 2.0",
     "authors": [
