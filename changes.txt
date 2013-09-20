@@ -1,5 +1,15 @@
 CHANGES
 
+2013-09-18
+- Fix \Elastica\Filter\HasChild usage of \Elastica\Query as to not collide with \Elastica\Filter\Query namespace
+
+2013-09-17
+- Update to elasticsearch 0.90.4
+- Add support for function_score query
+- Skip geocluster-facet test if the plugin is not installed
+- Correct \Elastica\Test\ClientTest to catch the proper exception type on connection failure
+- Fix unit test errors
+
 2013-09-03
 - Support isset() calls on Result objects
 

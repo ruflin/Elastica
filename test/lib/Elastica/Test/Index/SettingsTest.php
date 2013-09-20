@@ -89,6 +89,8 @@ class SettingsTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
         $index->create(array(), true);
+        //wait for the shards to be allocated
+        $this->_waitForAllocation($index);
 
         $settings = $index->getSettings();
 
@@ -97,6 +99,8 @@ class SettingsTest extends BaseTest
 
         $settings->setMergePolicy('expunge_deletes_allowed', 10);
         $this->assertEquals(10, $settings->getMergePolicy('expunge_deletes_allowed'));
+
+        $index->delete();
     }
 
     public function testSetMergeFactor()
@@ -106,6 +110,9 @@ class SettingsTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
         $index->create(array(), true);
+
+        //wait for the shards to be allocated
+        $this->_waitForAllocation($index);
 
         $settings = $index->getSettings();
 
@@ -127,6 +134,9 @@ class SettingsTest extends BaseTest
         $index = $client->getIndex($indexName);
         $index->create(array(), true);
 
+        //wait for the shards to be allocated
+        $this->_waitForAllocation($index);
+
         $settings = $index->getSettings();
 
         //$response = $settings->setMergePolicyType('LogByteSizeMergePolicyProvider');
@@ -142,11 +152,11 @@ class SettingsTest extends BaseTest
 
     public function testSetReadOnly()
     {
-        $client = $this->_getClient();
-        $index = new Index($client, 'elastica_test');
+        $index = $this->_createIndex('test');
+        //wait for the shards to be allocated
+        $this->_waitForAllocation($index);
         $index->getSettings()->setReadOnly(false);
 
-        $index = $this->_createIndex();
 
         // Add document to normal index
         $doc1 = new Document(null, array('hello' => 'world'));
@@ -155,11 +165,11 @@ class SettingsTest extends BaseTest
 
         $type = $index->getType('test');
         $type->addDocument($doc1);
-        $this->assertFalse((bool) $index->getSettings()->get('blocks.read_only'));
+        $this->assertEquals('false', $index->getSettings()->get('blocks.read_only')); //ES returns a string for this setting
 
         // Try to add doc to read only index
         $index->getSettings()->setReadOnly(true);
-        $this->assertTrue((bool) $index->getSettings()->get('blocks.read_only'));
+        $this->assertEquals('true', $index->getSettings()->get('blocks.read_only'));
 
         try {
             $type->addDocument($doc2);
@@ -246,5 +256,18 @@ class SettingsTest extends BaseTest
 
         $settings->setBlocksMetadata(false); // Cannot delete index otherwise
         $index->delete();
+    }
+
+    protected function _waitForAllocation(Index $index)
+    {
+        do {
+            $settings = $index->getStatus()->get();
+            $allocated = true;
+            foreach ($settings['shards'] as $shard) {
+                if ($shard[0]['routing']['state'] != 'STARTED') {
+                    $allocated = false;
+                }
+            }
+        } while (!$allocated);
     }
 }
