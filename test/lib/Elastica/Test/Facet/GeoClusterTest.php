@@ -12,8 +12,7 @@ class GeoClusterTest extends BaseTest{
             $this->markTestSkipped('geocluster-facet plugin not installed');
         }
 
-        $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index = $this->_createIndex('geocluster_test');
         $type = $index->getType('testQuery');
         $geoField = 'location';
 
@@ -44,5 +43,7 @@ class GeoClusterTest extends BaseTest{
         $facets = $response->getFacets();
 
         $this->assertEquals(1, count($facets['clusters']['clusters']));
+
+        $index->delete();
     }
 }

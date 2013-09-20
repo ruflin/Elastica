@@ -1,6 +1,7 @@
 CHANGES
 
 2013-09-20
+- Update to geocluster-facet 0.0.8
 - Add support for term suggest API
   See http://www.elasticsearch.org/guide/reference/api/search/term-suggest/
 
