@@ -1,5 +1,9 @@
 CHANGES
 
+2013-09-20
+- Add support for term suggest API
+  See http://www.elasticsearch.org/guide/reference/api/search/term-suggest/
+
 2013-09-18
 - Fix \Elastica\Filter\HasChild usage of \Elastica\Query as to not collide with \Elastica\Filter\Query namespace
 
