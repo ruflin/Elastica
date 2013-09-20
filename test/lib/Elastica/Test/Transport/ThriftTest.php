@@ -66,7 +66,7 @@ class ThriftTest extends BaseTest
     }
 
     /**
-     * @expectedException \Elastica\Exception\ClientException
+     * @expectedException \Elastica\Exception\ConnectionException
      */
     public function testInvalidHostRequest()
     {
