@@ -23,6 +23,13 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     protected $_results = array();
 
     /**
+    * Suggests
+    *
+    * @var array Suggests
+    */
+    protected $_suggests = array();
+
+    /**
      * Current position
      *
      * @var int Current position
@@ -94,6 +101,14 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
                 $this->_results[] = new Result($hit);
             }
         }
+
+        foreach($result as $key => $value) {
+            if($key != '_shards') {
+                if(isset($value[0]['options']) && count($value[0]['options'])>0) {
+                    $this->_suggests[$key] = $value[0];
+                }
+            }
+        }
     }
 
     /**
@@ -104,6 +119,16 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     public function getResults()
     {
         return $this->_results;
+    }
+
+    /**
+    * Return all suggests
+    *
+    * @return Suggest[] Suggests
+    */
+    public function getSuggests() 
+    {
+        return $this->_suggests;
     }
 
     /**
@@ -196,6 +221,16 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     public function count()
     {
         return sizeof($this->_results);
+    }
+
+    /**
+     * Returns size of current suggests
+     *
+     * @return int Size of suggests
+     */
+    public function countSuggests()
+    {
+        return sizeof($this->_suggests);
     }
 
     /**
