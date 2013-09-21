@@ -32,7 +32,7 @@ class Query extends Param
     /**
     * Suggest query or not
     *
-    * @var int suggest
+    * @var int Suggest
     */
     protected $_suggest = 0;
 

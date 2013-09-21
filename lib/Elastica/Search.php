@@ -489,7 +489,6 @@ class Search
      * @param  \Elastica\Suggest\Term   $term
      * @return \Elastica\Search
      */
-
     public function addSuggest($suggest)
     {
         $this->setOptionsAndQuery(array(self::OPTION_SEARCH_TYPE_SUGGEST => 'suggest'), $suggest);
