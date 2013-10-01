@@ -1,5 +1,8 @@
 CHANGES
 
+2013-10-01
+- Also pass the current client object to the failure callback in \Elastica\Client.
+
 2013-09-20
 - Update to geocluster-facet 0.0.8
 - Add support for term suggest API
