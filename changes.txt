@@ -21,6 +21,9 @@ CHANGES
 - Correct \Elastica\Test\ClientTest to catch the proper exception type on connection failure
 - Fix unit test errors
 
+2013-09-14
+- Nested filter supports now the setFilter method
+
 2013-09-03
 - Support isset() calls on Result objects
 
