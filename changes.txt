@@ -1,5 +1,8 @@
 CHANGES
 
+2013-10-26
+- Update to elasticsearch 0.90.5
+
 2013-10-21
 - Fix \Elastica\Filter\HasParent usage of \Elastica\Query as to not collide with \Elastica\Filter\Query, bring \Elasitca\Filter\HasChild into line
 
