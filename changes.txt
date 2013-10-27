@@ -1,5 +1,8 @@
 CHANGES
 
+2013-10-27
+- Release v0.90.5.0
+
 2013-10-26
 - Update to elasticsearch 0.90.5
 
