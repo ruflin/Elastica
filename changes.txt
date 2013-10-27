@@ -1,6 +1,9 @@
 CHANGES
 
 2013-10-27
+- Adapted possible values (not only in) for minimum_should_match param based on elasticsearch documetnation  http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
+
+2013-10-27
 - Release v0.90.5.0
 
 2013-10-26

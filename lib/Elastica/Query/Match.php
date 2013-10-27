@@ -109,12 +109,13 @@ class Match extends AbstractQuery
      * Set field minimum should match
      *
      * @param  string                    $field
-     * @param  int                       $minimumShouldMatch
+     * @param  int|string                       $minimumShouldMatch
      * @return \Elastica\Query\Match
+     * @link Possible values for minimum_should_match http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
     public function setFieldMinimumShouldMatch($field, $minimumShouldMatch)
     {
-        return $this->setFieldParam($field, 'minimum_should_match', (int) $minimumShouldMatch);
+        return $this->setFieldParam($field, 'minimum_should_match', $minimumShouldMatch);
     }
 
     /**
