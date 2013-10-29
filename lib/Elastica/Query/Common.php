@@ -88,12 +88,13 @@ class Common extends AbstractQuery
 
     /**
      * Set the minimum_should_match parameter
-     * @param int $minimum minimum number of low frequency terms which must be present
+     * @param int|string $minimum minimum number of low frequency terms which must be present
      * @return \Elastica\Query\Common
+     * @link Possible values for minimum_should_match http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
     public function setMinimumShouldMatch($minimum)
     {
-        return $this->setQueryParam('minimum_should_match', (int)$minimum);
+        return $this->setQueryParam('minimum_should_match', $minimum);
     }
 
     /**

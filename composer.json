@@ -28,10 +28,5 @@
             "Elastica": "lib/",
             "Elastica\\Test": "test/lib/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.20.5.x-dev"
-        }
     }
 }

@@ -4,8 +4,20 @@ CHANGES
 - Elastica_Type::exists() added
   See http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-types-exists.html#indices-types-exists
 
+2013-10-27
+- Adapted possible values (not only in) for minimum_should_match param based on elasticsearch documetnation  http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
+
+2013-10-27
+- Release v0.90.5.0
+
+2013-10-26
+- Update to elasticsearch 0.90.5
+
 2013-10-21
 - Fix \Elastica\Filter\HasParent usage of \Elastica\Query as to not collide with \Elastica\Filter\Query, bring \Elasitca\Filter\HasChild into line
+
+2013-10-01
+- Also pass the current client object to the failure callback in \Elastica\Client.
 
 2013-09-20
 - Update to geocluster-facet 0.0.8
@@ -21,6 +33,9 @@ CHANGES
 - Skip geocluster-facet test if the plugin is not installed
 - Correct \Elastica\Test\ClientTest to catch the proper exception type on connection failure
 - Fix unit test errors
+
+2013-09-14
+- Nested filter supports now the setFilter method
 
 2013-09-03
 - Support isset() calls on Result objects
