@@ -686,6 +686,23 @@ class TypeTest extends BaseTest
         $data = $result->getData();
         $this->assertEquals('hans', $data['username']);
     }
+
+    public function testExists()
+    {
+        $index = $this->_createIndex();
+        $this->assertTrue($index->exists());
+
+        $type = new Type($index, 'user');
+        $this->assertFalse($type->exists());
+
+        $type->addDocument(new Document(1, array('name' => 'test name')));
+
+        //Test if type exists
+        $this->assertTrue($type->exists());
+
+        $index->delete();
+        $this->assertFalse($index->exists());
+    }
 }
 
 class SerializerMock
