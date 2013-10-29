@@ -1,5 +1,9 @@
 CHANGES
 
+2013-10-29
+- Elastica_Type::exists() added
+  See http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-types-exists.html#indices-types-exists
+
 2013-10-21
 - Fix \Elastica\Filter\HasParent usage of \Elastica\Query as to not collide with \Elastica\Filter\Query, bring \Elasitca\Filter\HasChild into line
 
