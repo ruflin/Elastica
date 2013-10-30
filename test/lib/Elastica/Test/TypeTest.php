@@ -696,6 +696,7 @@ class TypeTest extends BaseTest
         $this->assertFalse($type->exists());
 
         $type->addDocument(new Document(1, array('name' => 'test name')));
+        $index->refresh();
 
         //Test if type exists
         $this->assertTrue($type->exists());
