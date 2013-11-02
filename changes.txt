@@ -1,5 +1,9 @@
 CHANGES
 
+2013-10-29
+- Elastica_Type::exists() added
+  See http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-types-exists.html#indices-types-exists
+
 2013-10-27
 - Adapted possible values (not only in) for minimum_should_match param based on elasticsearch documetnation  http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
 
