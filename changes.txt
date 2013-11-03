@@ -1,5 +1,8 @@
 CHANGES
 
+2013-11-03
+- Issue #490: Set Elastica\Query\FunctionScore::DECAY_EXPONENTIAL to "exp" instead of "exponential"
+
 2013-10-29
 - Elastica_Type::exists() added
   See http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-types-exists.html#indices-types-exists
