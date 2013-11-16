@@ -2,6 +2,7 @@ CHANGES
 
 2013-11-16
 - Remove wrong documentation for "no limit" #496
+- Update to elasticsearch 0.90.7
 
 2013-11-03
 - Issue #490: Set Elastica\Query\FunctionScore::DECAY_EXPONENTIAL to "exp" instead of "exponential"
