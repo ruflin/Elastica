@@ -196,8 +196,6 @@ class Query extends Param
     /**
      * Sets maximum number of results for this query
      *
-     * Setting the limit to 0, means no limit
-     *
      * @param  int            $size OPTIONAL Maximal number of results for query (default = 10)
      * @return \Elastica\Query Query object
      */
