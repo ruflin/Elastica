@@ -1,4 +1,6 @@
 CHANGES
+2013-11-18
+- Added \Elastica\Filter\Regexp
 
 2013-11-16
 - Remove wrong documentation for "no limit" #496
