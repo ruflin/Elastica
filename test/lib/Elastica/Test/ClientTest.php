@@ -868,7 +868,26 @@ class ClientTest extends BaseTest
         $path = $index->getName() . '/' . $type->getName() . '/_search';
         
         $response = $client->request($path, Request::GET, $query);
-        error_log(print_r($response->getData(), true));
+        $responseArray = $response->getData();
+        
+        $this->assertEquals(1, $responseArray['hits']['total']);
+    }
+    
+    public function testJSONQuery()
+    {
+        $client = new Client();
+        
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
+        $type = $index->getType('test');
+        $type->addDocument(new Document(1, array('username' => 'ruflin')));
+        $index->refresh();
+        
+        $query = '{"query":{"query_string":{"query":"ruflin"}}}';
+
+        $path = $index->getName() . '/' . $type->getName() . '/_search';
+        
+        $response = $client->request($path, Request::GET, $query);
         $responseArray = $response->getData();
         
         $this->assertEquals(1, $responseArray['hits']['total']);
