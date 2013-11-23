@@ -6,12 +6,12 @@ Current stable version: [v0.90.5.0](https://github.com/ruflin/Elastica/tree/v0.9
 
 Dependencies
 ------------
-|Project|Version|
-|-------|-------|
-|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v0.90.7)|0.90.7|
-|[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v1.9.0)|1.9.0|
-|[Elasticsearch thrift transport plugin](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v1.4.0)|1.4.0|
-|[Elasticsearch geocluster facet plugin](https://github.com/zenobase/geocluster-facet/tree/0.0.9)|0.0.9|
+|Project|Version|Required|
+|-------|-------|--------|
+|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v0.90.7)|0.90.7|yes|
+|[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v1.9.0)|1.9.0|no|
+|[Elasticsearch thrift transport plugin](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v1.4.0)|1.4.0|no|
+|[Elasticsearch geocluster facet plugin](https://github.com/zenobase/geocluster-facet/tree/0.0.9)|0.0.9|no|
 
 
 Documentation
