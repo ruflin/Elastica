@@ -1,5 +1,8 @@
 CHANGES
 
+2013-11-23
+- Release v0.90.7.0
+
 2013-11-19
 - Updated geocluster-facet to 0.0.9
 
