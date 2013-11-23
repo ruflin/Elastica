@@ -845,4 +845,32 @@ class ClientTest extends BaseTest
         $this->assertEquals('value3', $client->getConfigValue(array('level1', 'level2', 'level3')));
         $this->assertInternalType('array', $client->getConfigValue(array('level1', 'level2')));
     }
+    
+    
+    public function testArrayQuery()
+    {
+        $client = new Client();
+        
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
+        $type = $index->getType('test');
+        $type->addDocument(new Document(1, array('username' => 'ruflin')));
+        $index->refresh();
+        
+        $query = array(
+            'query' => array(
+                'query_string' => array(
+                    'query' => 'ruflin',
+                )
+            )
+        );
+        
+        $path = $index->getName() . '/' . $type->getName() . '/_search';
+        
+        $response = $client->request($path, Request::GET, $query);
+        error_log(print_r($response->getData(), true));
+        $responseArray = $response->getData();
+        
+        $this->assertEquals(1, $responseArray['hits']['total']);
+    }
 }
