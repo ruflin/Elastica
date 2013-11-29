@@ -474,4 +474,17 @@ class Type implements SearchableInterface
     {
         $this->_serializer = $serializer;
     }
+
+    /**
+     * Checks if the given type exists in Index
+     *
+     * @return bool True if type exists
+     */
+    public function exists()
+    {
+        $response = $this->getIndex()->request($this->getName(), Request::HEAD);
+        $info = $response->getTransferInfo();
+
+        return (bool) ($info['http_code'] == 200);
+    }
 }

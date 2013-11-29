@@ -6,6 +6,7 @@ use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\ClientException;
+use Elastica\Exception\Connection\HttpException;
 use Elastica\Script;
 use Elastica\Index;
 use Elastica\Request;
@@ -422,7 +423,7 @@ class ClientTest extends BaseTest
         try {
             $client->request('_status', Request::GET);
             $this->fail('Should throw exception as no connection valid');
-        } catch (ClientException $e) {
+        } catch (HttpException $e) {
             $this->assertTrue(true);
         }
 
@@ -444,9 +445,10 @@ class ClientTest extends BaseTest
         $object = $this;
 
         // Callback function which verifies that disabled connection objects are returned
-        $callback = function($connection, $exception) use (&$object, &$count) {
+        $callback = function($connection, $exception, $client) use (&$object, &$count) {
             $object->assertInstanceOf('Elastica\Connection', $connection);
             $object->assertInstanceOf('Elastica\Exception\ConnectionException', $exception);
+            $object->assertInstanceOf('Elastica\Client', $client);
             $object->assertFalse($connection->isEnabled());
             $count++;
         };
@@ -464,7 +466,7 @@ class ClientTest extends BaseTest
         try {
             $client->request('_status', Request::GET);
             $this->fail('Should throw exception as no connection valid');
-        } catch (ClientException $e) {
+        } catch (HttpException $e) {
             $this->assertTrue(true);
         }
 
@@ -842,5 +844,52 @@ class ClientTest extends BaseTest
 
         $this->assertEquals('value3', $client->getConfigValue(array('level1', 'level2', 'level3')));
         $this->assertInternalType('array', $client->getConfigValue(array('level1', 'level2')));
+    }
+    
+    
+    public function testArrayQuery()
+    {
+        $client = new Client();
+        
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
+        $type = $index->getType('test');
+        $type->addDocument(new Document(1, array('username' => 'ruflin')));
+        $index->refresh();
+        
+        $query = array(
+            'query' => array(
+                'query_string' => array(
+                    'query' => 'ruflin',
+                )
+            )
+        );
+        
+        $path = $index->getName() . '/' . $type->getName() . '/_search';
+        
+        $response = $client->request($path, Request::GET, $query);
+        $responseArray = $response->getData();
+        
+        $this->assertEquals(1, $responseArray['hits']['total']);
+    }
+    
+    public function testJSONQuery()
+    {
+        $client = new Client();
+        
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
+        $type = $index->getType('test');
+        $type->addDocument(new Document(1, array('username' => 'ruflin')));
+        $index->refresh();
+        
+        $query = '{"query":{"query_string":{"query":"ruflin"}}}';
+
+        $path = $index->getName() . '/' . $type->getName() . '/_search';
+        
+        $response = $client->request($path, Request::GET, $query);
+        $responseArray = $response->getData();
+        
+        $this->assertEquals(1, $responseArray['hits']['total']);
     }
 }

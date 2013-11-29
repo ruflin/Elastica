@@ -7,8 +7,12 @@ use Elastica\Test\Base as BaseTest;
 class GeoClusterTest extends BaseTest{
     public function testQuery() {
         $client = $this->_getClient();
-        $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $nodes = $client->getCluster()->getNodes();
+        if(!$nodes[0]->getInfo()->hasPlugin('geocluster-facet')){
+            $this->markTestSkipped('geocluster-facet plugin not installed');
+        }
+
+        $index = $this->_createIndex('geocluster_test');
         $type = $index->getType('testQuery');
         $geoField = 'location';
 
@@ -39,5 +43,7 @@ class GeoClusterTest extends BaseTest{
         $facets = $response->getFacets();
 
         $this->assertEquals(1, count($facets['clusters']['clusters']));
+
+        $index->delete();
     }
 }

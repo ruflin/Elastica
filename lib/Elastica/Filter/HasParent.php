@@ -2,8 +2,6 @@
 
 namespace Elastica\Filter;
 
-use Elastica\Query;
-
 /**
  * Returns child documents having parent docs matching the query
  *
@@ -33,7 +31,7 @@ class HasParent extends AbstractFilter
      */
     public function setQuery($query)
     {
-        $query = Query::create($query);
+        $query = \Elastica\Query::create($query);
         $data = $query->toArray();
 
         return $this->setParam('query', $data['query']);

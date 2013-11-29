@@ -8,6 +8,7 @@ use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
+use Elastica\Suggest\AbstractSuggest;
 
 /**
  * Elastica query object
@@ -27,6 +28,13 @@ class Query extends Param
      * @var array Params
      */
     protected $_params = array();
+    
+    /**
+    * Suggest query or not
+    *
+    * @var int Suggest
+    */
+    protected $_suggest = 0;
 
     /**
      * Creates a query object
@@ -39,6 +47,8 @@ class Query extends Param
             $this->setRawQuery($query);
         } elseif ($query instanceof AbstractQuery) {
             $this->setQuery($query);
+        } elseif ($query instanceof AbstractSuggest) {
+            $this->addSuggest($query);
         }
     }
 
@@ -69,6 +79,8 @@ class Query extends Param
                 return new self($query);
             case is_string($query):
                 return new self(new QueryString($query));
+            case $query instanceof AbstractSuggest:
+                return new self($query);
 
         }
 
@@ -183,8 +195,6 @@ class Query extends Param
 
     /**
      * Sets maximum number of results for this query
-     *
-     * Setting the limit to 0, means no limit
      *
      * @param  int            $size OPTIONAL Maximal number of results for query (default = 10)
      * @return \Elastica\Query Query object
@@ -310,8 +320,7 @@ class Query extends Param
      */
     public function toArray()
     {
-        // If no query is set, all query is chosen by default
-        if (!isset($this->_params['query'])) {
+        if (!isset($this->_params['query']) && ($this->_suggest == 0)) {
             $this->setQuery(new MatchAll());
         }
 
@@ -333,4 +342,18 @@ class Query extends Param
 
         return $this->setParam('min_score', $minScore);
     }
+
+    /**
+     * Add a suggest term
+     *
+     * @param  \Elastica\Query          Query object
+     */
+    public function addSuggest($query)
+    {
+        $this->addParam(NULL, $query->toArray());
+        $this->_suggest = 1;
+    }
 }
+
+
+

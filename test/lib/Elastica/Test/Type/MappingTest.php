@@ -231,7 +231,8 @@ class MappingTest extends BaseTest
         // create a document which should create a mapping for the field: multiname.
         $testDoc = new Document('person1', array('multiname' => 'Jasper van Wanrooy'), $type);
         $index->addDocuments(array($testDoc));
-        
+        sleep(1);   //sleep 1 to ensure that the test passes every time
+
         // read the mapping from Elasticsearch and assert that the multiname.org field is "not_analyzed"
         $newMapping = $type->getMapping();
         $this->assertArrayHasKey('person', $newMapping,

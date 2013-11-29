@@ -2,7 +2,17 @@ Elastica: elasticsearch PHP Client
 ==================================
 [![Build Status](https://secure.travis-ci.org/ruflin/Elastica.png?branch=master)](http://travis-ci.org/ruflin/Elastica)
 
-Current stable version: [v0.90.1.0](https://github.com/ruflin/Elastica/tree/v0.90.1.0)
+Current stable version: [v0.90.7.0](https://github.com/ruflin/Elastica/tree/v0.90.7.0)
+
+Dependencies
+------------
+|Project|Version|Required|
+|-------|-------|--------|
+|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v0.90.7)|0.90.7|yes|
+|[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v1.9.0)|1.9.0|no|
+|[Elasticsearch thrift transport plugin](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v1.4.0)|1.4.0|no|
+|[Elasticsearch geocluster facet plugin](https://github.com/zenobase/geocluster-facet/tree/0.0.9)|0.0.9|no|
+
 
 Documentation
 ---------------------

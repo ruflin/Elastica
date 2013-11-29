@@ -35,6 +35,7 @@ class Search
     const OPTION_SEARCH_TYPE_DFS_QUERY_AND_FETCH = 'dfs_query_and_fetch';
     const OPTION_SEARCH_TYPE_QUERY_THEN_FETCH = 'query_then_fetch';
     const OPTION_SEARCH_TYPE_QUERY_AND_FETCH = 'query_and_fetch';
+    const OPTION_SEARCH_TYPE_SUGGEST = 'suggest';
 
     /**
      * Array of indices
@@ -152,7 +153,7 @@ class Search
     }
 
     /**
-     * @param  string|array|\Elastica\Query|\Elastica\Query\AbstractQuery|\Elastica\Filter\AbstractFilter $query
+     * @param  string|array|\Elastica\Query|Elastica\Suggest\Term|\Elastica\Query\AbstractQuery|\Elastica\Filter\AbstractFilter $query|
      * @return \Elastica\Search
      */
     public function setQuery($query)
@@ -267,6 +268,7 @@ class Search
             case self::OPTION_SIZE:
             case self::OPTION_SCROLL:
             case self::OPTION_SCROLL_ID:
+            case self::OPTION_SEARCH_TYPE_SUGGEST:
                 return true;
         }
 
@@ -396,6 +398,10 @@ class Search
             $path .= '/' . implode(',', $types);
         }
 
+        if(isset($this->_options[self::OPTION_SEARCH_TYPE_SUGGEST])) {
+            return '/_suggest';
+        }
+
         // Add full path based on indices and types -> could be all
         return $path . '/_search';
     }
@@ -476,6 +482,17 @@ class Search
             $this->setOptions($options);
         }
 
+        return $this;
+    }
+
+    /**
+     * @param  \Elastica\Suggest\Term   $term
+     * @return \Elastica\Search
+     */
+    public function addSuggest($suggest)
+    {
+        $this->setOptionsAndQuery(array(self::OPTION_SEARCH_TYPE_SUGGEST => 'suggest'), $suggest);
+    
         return $this;
     }
 }
