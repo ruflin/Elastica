@@ -47,6 +47,17 @@ class TermsStats extends AbstractFacet
     }
 
     /**
+     * Sets the amount of terms to be returned.
+     *
+     * @param  int                            $size The amount of terms to be returned.
+     * @return \Elastica\Facet\Terms
+     */
+    public function setSize($size)
+    {
+        return $this->setParam('size', (int) $size);
+    }
+
+    /**
      * Creates the full facet definition, which includes the basic
      * facet definition of the parent.
      *

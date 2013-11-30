@@ -53,4 +53,15 @@ class TermsStatsTest extends BaseTest
             }
         }
     }
+
+	public function testSetSize()
+	{
+		$facet = new TermsStats( 'test' );
+		$facet->setSize(100);
+
+		$data = $facet->toArray();
+
+		$this->assertArrayHasKey('size', $data['terms_stats']);
+		$this->assertEquals(100, $data['terms_stats']['size']);
+	}
 }
