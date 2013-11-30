@@ -8,6 +8,7 @@ use Elastica\Query\Builder;
 use Elastica\Query\Term;
 use Elastica\Query\Text;
 use Elastica\Query;
+use Elastica\Facet\Terms;
 use Elastica\Test\Base as BaseTest;
 
 class QueryTest extends BaseTest
@@ -173,5 +174,22 @@ class QueryTest extends BaseTest
         $query->setQuery($termQuery);
 
         $this->assertEquals($termQuery->toArray(), $query->getQuery());
+    }
+
+    public function testSetFacets()
+    {
+        $query = new Query();
+
+        $facet = new Terms('text');
+        $query->setFacets(array($facet));
+
+        $data = $query->toArray();
+
+        $this->assertArrayHasKey('facets', $data);
+        $this->assertEquals(array('text' => array('terms' => array())), $data['facets']);
+
+        $query->setFacets(array());
+
+        $this->assertArrayNotHasKey('facets', $query->toArray());
     }
 }
