@@ -3,6 +3,7 @@ CHANGES
 2013-12-01
 - Issue #501 resolved
 - satooshi/php-coveralls package added for coverall.io
+- Multiple badges for downloads and latest stable release added
 
 2013-11-30
 - Remove facets param from query if is empty array

@@ -2,6 +2,10 @@ Elastica: elasticsearch PHP Client
 ==================================
 [![Build Status](https://secure.travis-ci.org/ruflin/Elastica.png?branch=master)](http://travis-ci.org/ruflin/Elastica)
 [![Coverage Status](https://coveralls.io/repos/ruflin/Elastica/badge.png)](https://coveralls.io/r/ruflin/Elastica)
+[![Dependency Status](https://www.versioneye.com/php/ruflin:Elastica/master/badge.png)](https://www.versioneye.com/php/ruflin:elastica/)
+[![Latest Stable Version](https://poser.pugx.org/ruflin/Elastica/v/stable.png)](https://packagist.org/packages/ruflin/elastica)
+[![Total Downloads](https://poser.pugx.org/ruflin/Elastica/downloads.png)](https://packagist.org/packages/ruflin/elastica)
+
 
 Current stable version: [v0.90.7.0](https://github.com/ruflin/Elastica/tree/v0.90.7.0)
 
