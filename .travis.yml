@@ -24,14 +24,16 @@ services:
     - memcached
 
 before_script:
-  - composer self-update
-  - composer --${ES_REQUIRE} --prefer-source install
-  - ./test/bin/install_php_memcache.sh
-  - ./test/bin/run_elasticsearch.sh
-  - ./test/bin/run_proxy.sh
+    - composer self-update
+    - composer --${ES_REQUIRE} --prefer-source install
+    - php composer.phar install --dev --no-interaction
+    - ./test/bin/install_php_memcache.sh
+    - ./test/bin/run_elasticsearch.sh
+    - ./test/bin/run_proxy.sh
 
 script:
-    - phpunit -c test/
+    - mkdir -p build/logs
+    - phpunit --coverage-clover build/logs/clover.xml -c test/
 
 after_script:
     - ./test/bin/show_logs.sh
