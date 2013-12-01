@@ -19,6 +19,9 @@ env:
   matrix:
     - ES_REQUIRE=dev
     - ES_REQUIRE=no-dev
+    
+services:
+    - memcached
 
 before_script:
   - composer self-update
