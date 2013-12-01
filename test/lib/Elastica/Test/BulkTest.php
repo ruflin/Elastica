@@ -527,6 +527,22 @@ class BulkTest extends BaseTest
         
         $index->delete();
     }
+    
+    public function testGetPath() {
+        $client = $this->_getClient();
+        $bulk = new Bulk($client);
+        
+        $this->assertEquals('_bulk', $bulk->getPath());
+        
+        $indexName = 'testIndex';
+        
+        $bulk->setIndex($indexName);
+        $this->assertEquals($indexName . '/_bulk', $bulk->getPath());
+        
+        $typeName = 'testType';
+        $bulk->setType($typeName);
+        $this->assertEquals($indexName . '/' . $typeName . '/_bulk', $bulk->getPath());
+    }
 
     public function udpDataProvider()
     {

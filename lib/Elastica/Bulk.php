@@ -119,14 +119,14 @@ class Bulk
      */
     public function getPath()
     {
-        $path = '/';
+        $path = '';
         if ($this->hasIndex()) {
-            $path.= $this->getIndex() . '/';
+            $path .= $this->getIndex() . '/';
             if ($this->hasType()) {
-                $path.= $this->getType() . '/';
+                $path .= $this->getType() . '/';
             }
         }
-        $path.= '_bulk';
+        $path .= '_bulk';
         return $path;
     }
 
