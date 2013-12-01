@@ -3,6 +3,9 @@ CHANGES
 2013-12-01
 - Issue #501 resolved
 
+2013-11-30
+- Remove facets param from query if is empty array
+
 2013-11-23
 - Release v0.90.7.0
 
