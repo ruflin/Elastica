@@ -8,7 +8,9 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Filter\Term;
 use Elastica\Query\FunctionScore;
+use Elastica\Script;
 use Elastica\Test\Base as BaseTest;
 
 class FunctionScoreTest extends BaseTest
@@ -103,5 +105,83 @@ class FunctionScoreTest extends BaseTest
         // the document with the closest location and lowest price should be scored highest
         $result0 = $results[0]->getData();
         $this->assertEquals("Mr. Frostie's", $result0['name']);
+    }
+
+    public function testBoostFactor()
+    {
+        $filter = new Term(array('foo' => 'bar'));
+        $query = new FunctionScore();
+        $query->addBoostFactorFunction(5.0, $filter, 2.0);
+        $expected = array(
+            'function_score' => array(
+                'functions' => array(
+                    array(
+                        'boost_factor' => 5.0,
+                        'filter' => array(
+                            'term' => array(
+                                'foo' => 'bar'
+                            )
+                        ),
+                        'boost' => 2.0
+                    )
+                )
+            )
+        );
+
+        $this->assertEquals($expected, $query->toArray());
+    }
+
+    public function testRandomScore()
+    {
+        $filter = new Term(array('foo' => 'bar'));
+        $query = new FunctionScore();
+        $query->addRandomScoreFunction(2, $filter, 2.0);
+        $expected = array(
+            'function_score' => array(
+                'functions' => array(
+                    array(
+                        'random_score' => array(
+                            'seed' => 2
+                        ),
+                        'filter' => array(
+                            'term' => array(
+                                'foo' => 'bar'
+                            )
+                        ),
+                        'boost' => 2.0
+                    )
+                )
+            )
+        );
+
+        $this->assertEquals($expected, $query->toArray());
+    }
+
+    public function testScriptScore()
+    {
+        $filter = new Term(array('foo' => 'bar'));
+        $scriptString = "_score * doc['my_numeric_field'].value";
+        $script = new Script($scriptString);
+        $query = new FunctionScore();
+        $query->addScriptScoreFunction($script, $filter, 2.0);
+        $expected = array(
+            'function_score' => array(
+                'functions' => array(
+                    array(
+                        'script_score' => array(
+                            'script' => $scriptString
+                        ),
+                        'filter' => array(
+                            'term' => array(
+                                'foo' => 'bar'
+                            )
+                        ),
+                        'boost' => 2.0
+                    )
+                )
+            )
+        );
+
+        $this->assertEquals($expected, $query->toArray());
     }
 }
