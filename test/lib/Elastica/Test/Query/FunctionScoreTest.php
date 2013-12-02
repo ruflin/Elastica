@@ -8,7 +8,9 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Filter\Term;
 use Elastica\Query\FunctionScore;
+use Elastica\Script;
 use Elastica\Test\Base as BaseTest;
 
 class FunctionScoreTest extends BaseTest
@@ -103,5 +105,95 @@ class FunctionScoreTest extends BaseTest
         // the document with the closest location and lowest price should be scored highest
         $result0 = $results[0]->getData();
         $this->assertEquals("Mr. Frostie's", $result0['name']);
+    }
+
+    public function testBoostFactor()
+    {
+        $filter = new Term(array('price' => 4.5));
+        $query = new FunctionScore();
+        $query->addBoostFactorFunction(5.0, $filter);
+        $expected = array(
+            'function_score' => array(
+                'functions' => array(
+                    array(
+                        'boost_factor' => 5.0,
+                        'filter' => array(
+                            'term' => array(
+                                'price' => 4.5
+                            )
+                        )
+                    )
+                )
+            )
+        );
+
+        $this->assertEquals($expected, $query->toArray());
+
+        $response = $this->type->search($query);
+        $results = $response->getResults();
+
+        // the document with price = 4.5 should be scored highest
+        $result0 = $results[0]->getData();
+        $this->assertEquals("Mr. Frostie's", $result0['name']);
+    }
+
+    public function testRandomScore()
+    {
+        $filter = new Term(array('price' => 4.5));
+        $query = new FunctionScore();
+        $query->addRandomScoreFunction(2, $filter);
+        $expected = array(
+            'function_score' => array(
+                'functions' => array(
+                    array(
+                        'random_score' => array(
+                            'seed' => 2
+                        ),
+                        'filter' => array(
+                            'term' => array(
+                                'price' => 4.5
+                            )
+                        )
+                    )
+                )
+            )
+        );
+
+        $this->assertEquals($expected, $query->toArray());
+
+        $response = $this->type->search($query);
+        $results = $response->getResults();
+
+        // the document with no random score should be scored highest
+        $result0 = $results[0]->getData();
+        $this->assertEquals("Miller's Field", $result0['name']);
+    }
+
+    public function testScriptScore()
+    {
+        $scriptString = "_score * doc['price'].value";
+        $script = new Script($scriptString);
+        $query = new FunctionScore();
+        $query->addScriptScoreFunction($script);
+        $expected = array(
+            'function_score' => array(
+                'functions' => array(
+                    array(
+                        'script_score' => array(
+                            'script' => $scriptString
+                        )
+                    )
+                )
+            )
+        );
+
+        $this->assertEquals($expected, $query->toArray());
+
+        $response = $this->type->search($query);
+        $results = $response->getResults();
+
+        // the document the highest price should be scored highest
+        $result0 = $results[0]->getData();
+        $this->assertEquals("Miller's Field", $result0['name']);
     }
 }

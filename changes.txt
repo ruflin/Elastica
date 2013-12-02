@@ -1,5 +1,8 @@
 CHANGES
 
+2013-12-02
+- Issue #491 resolved
+
 2013-12-01
 - Issue #501 resolved
 - satooshi/php-coveralls package added for coverall.io

@@ -53,12 +53,12 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a function to the function_score query
      * @param string $functionType valid values are DECAY_* constants and script_score
-     * @param array $functionParams the body of the function. See documentation for proper syntax.
+     * @param array|float $functionParams the body of the function. See documentation for proper syntax.
      * @param AbstractFilter $filter optional filter to apply to the function
      * @param float $boost optional boost value associated with the function
      * @return \Elastica\Query\FunctionScore
      */
-    public function addFunction($functionType, array $functionParams, AbstractFilter $filter = NULL, $boost = NULL)
+    public function addFunction($functionType, $functionParams, AbstractFilter $filter = NULL, $boost = NULL)
     {
         $function = array(
             $functionType => $functionParams
@@ -117,6 +117,28 @@ class FunctionScore extends AbstractQuery
             $functionParams[$field]['scale_weight'] = (float)$scaleWeight;
         }
         return $this->addFunction($function, $functionParams, $filter, $boost);
+    }
+
+    /**
+     * Add a boost_factor function to the query
+     * @param float $boostFactor the boost factor value
+     * @param AbstractFilter $filter a filter associated with this function
+     * @param float $boost an optional boost value associated with this function
+     */
+    public function addBoostFactorFunction($boostFactor, AbstractFilter $filter = NULL, $boost = NULL)
+    {
+        $this->addFunction('boost_factor', $boostFactor, $filter, $boost);
+    }
+
+    /**
+     * Add a random_score function to the query
+     * @param number $seed the seed value
+     * @param AbstractFilter $filter a filter associated with this function
+     * @param float $boost an optional boost value associated with this function
+     */
+    public function addRandomScoreFunction($seed, AbstractFilter $filter = NULL, $boost = NULL)
+    {
+        $this->addFunction('random_score', array('seed' => $seed), $filter, $boost);
     }
 
     /**
