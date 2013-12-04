@@ -1,5 +1,8 @@
 CHANGES
 
+2013-12-04
+- Remove boost from FunctionScore::addFunction because this is not supported by elasticsearch
+
 2013-12-02
 - Issue #491 resolved
 

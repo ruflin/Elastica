@@ -55,19 +55,15 @@ class FunctionScore extends AbstractQuery
      * @param string $functionType valid values are DECAY_* constants and script_score
      * @param array|float $functionParams the body of the function. See documentation for proper syntax.
      * @param AbstractFilter $filter optional filter to apply to the function
-     * @param float $boost optional boost value associated with the function
      * @return \Elastica\Query\FunctionScore
      */
-    public function addFunction($functionType, $functionParams, AbstractFilter $filter = NULL, $boost = NULL)
+    public function addFunction($functionType, $functionParams, AbstractFilter $filter = NULL)
     {
         $function = array(
             $functionType => $functionParams
         );
         if (!is_null($filter)) {
             $function['filter'] = $filter->toArray();
-        }
-        if (!is_null($boost)) {
-            $function['boost'] = $boost;
         }
         $this->_functions[] = $function;
         return $this;
@@ -77,12 +73,11 @@ class FunctionScore extends AbstractQuery
      * Add a script_score function to the query
      * @param Script $script a Script object
      * @param AbstractFilter $filter an optional filter to apply to the function
-     * @param float $boost optional boost avlue associated with this function
      * @return \Elastica\Query\FunctionScore
      */
-    public function addScriptScoreFunction(Script $script, AbstractFilter $filter = NULL, $boost = NULL)
+    public function addScriptScoreFunction(Script $script, AbstractFilter $filter = NULL)
     {
-        return $this->addFunction('script_score', $script->toArray(), $filter, $boost);
+        return $this->addFunction('script_score', $script->toArray(), $filter);
     }
 
     /**
@@ -95,11 +90,10 @@ class FunctionScore extends AbstractQuery
      * @param float $decay optionally defines how documents are scored at the distance given by the $scale parameter
      * @param float $scaleWeight optional factor by which to multiply the score at the value provided by the $scale parameter
      * @param AbstractFilter $filter a filter associated with this function
-     * @param float $boost an optional boost value associated with this function
      * @return \Elastica\Query\FunctionScore
      */
     public function addDecayFunction($function, $field, $origin, $scale, $offset = NULL, $decay = NULL, $scaleWeight = NULL,
-                                     AbstractFilter $filter = NULL, $boost = NULL)
+                                     AbstractFilter $filter = NULL)
     {
         $functionParams = array(
             $field => array(
@@ -116,18 +110,17 @@ class FunctionScore extends AbstractQuery
         if (!is_null($scaleWeight)) {
             $functionParams[$field]['scale_weight'] = (float)$scaleWeight;
         }
-        return $this->addFunction($function, $functionParams, $filter, $boost);
+        return $this->addFunction($function, $functionParams, $filter);
     }
 
     /**
      * Add a boost_factor function to the query
      * @param float $boostFactor the boost factor value
      * @param AbstractFilter $filter a filter associated with this function
-     * @param float $boost an optional boost value associated with this function
      */
-    public function addBoostFactorFunction($boostFactor, AbstractFilter $filter = NULL, $boost = NULL)
+    public function addBoostFactorFunction($boostFactor, AbstractFilter $filter = NULL)
     {
-        $this->addFunction('boost_factor', $boostFactor, $filter, $boost);
+        $this->addFunction('boost_factor', $boostFactor, $filter);
     }
 
     /**
