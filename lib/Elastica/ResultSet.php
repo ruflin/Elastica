@@ -102,11 +102,9 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
             }
         }
 
-        foreach($result as $key => $value) {
-            if($key != '_shards') {
-                if(isset($value[0]['options']) && count($value[0]['options'])>0) {
-                    $this->_suggests[$key] = $value[0];
-                }
+        if(isset($result['suggest'])){
+            foreach($result['suggest'] as $key => $value){
+                $this->_suggests[$key] = $value[0];
             }
         }
     }

@@ -1,5 +1,10 @@
 CHANGES
 
+2013-12-05
+- Add *.iml to .gitignore
+- Refactor suggest implementation (\Elastica\Suggest, \Elastica\Suggest\AbstractSuggest, and \Elastica\Suggest\Term) to more closely resemble query implementation
+- Add \Elastica\Suggest\Phrase, \Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator, and \Elastica\Suggest\CandidateGenerator\DirectGenerator
+
 2013-12-04
 - Remove boost from FunctionScore::addFunction because this is not supported by elasticsearch
 

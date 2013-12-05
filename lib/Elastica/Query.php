@@ -9,6 +9,7 @@ use Elastica\Query\AbstractQuery;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
 use Elastica\Suggest\AbstractSuggest;
+use Elastica\Suggest;
 
 /**
  * Elastica query object
@@ -47,7 +48,7 @@ class Query extends Param
             $this->setRawQuery($query);
         } elseif ($query instanceof AbstractQuery) {
             $this->setQuery($query);
-        } elseif ($query instanceof AbstractSuggest) {
+        } elseif ($query instanceof AbstractSuggest || $query instanceof Suggest) {
             $this->addSuggest($query);
         }
     }
@@ -80,6 +81,9 @@ class Query extends Param
             case is_string($query):
                 return new self(new QueryString($query));
             case $query instanceof AbstractSuggest:
+                return new self($query);
+
+            case $query instanceof Suggest:
                 return new self($query);
 
         }
@@ -350,7 +354,7 @@ class Query extends Param
     /**
      * Add a suggest term
      *
-     * @param  \Elastica\Query          Query object
+     * @param  \Elastica\Suggest $query suggestion object
      */
     public function addSuggest($query)
     {
