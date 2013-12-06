@@ -141,6 +141,8 @@ class Phrase extends AbstractSuggest
     public function addCandidateGenerator(AbstractCandidateGenerator $generator)
     {
         $generator = $generator->toArray();
-        return $this->addParam(array_keys($generator)[0], array_values($generator)[0]);
+        $keys = array_keys($generator);
+        $values = array_values($generator);
+        return $this->addParam($keys[0], $values[0]);
     }
 }
