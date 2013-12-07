@@ -4,6 +4,9 @@ CHANGES
 - Add refreshAll on Client
 
 2013-12-07
+- Added Result::hasFields() and Result::hasParam() methods for consistency with Document
+
+2013-12-07
 - Escape slash in Util::escapeTerm, as it is used for regexp from Elastic 0.90
 
 2013-12-05

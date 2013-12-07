@@ -4,6 +4,7 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Result;
 use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
@@ -101,5 +102,19 @@ class ResultTest extends BaseTest
             getType($resultSet->getTotalTime()),
             'Total Time should be an integer'
          );
+    }
+    
+    public function testHasFields()
+    {
+        $result = new Result(array());
+        $this->assertFalse($result->hasFields());
+        
+        $result = new Result(array('_source' => 'no fields'));
+        $this->assertFalse($result->hasFields());
+        
+        $data = array('fields' => 'value set');
+        $result = new Result($data);
+        $this->assertTrue($result->hasFields());
+        $this->assertEquals($data, $result->getFields());
     }
 }
