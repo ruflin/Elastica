@@ -80,6 +80,16 @@ class Result
     }
 
     /**
+     * Returns whether result has fields
+     * 
+     * @return bool
+     */
+    public function hasFields()
+    {
+        return $this->hasParam('fields');
+    }    
+    
+    /**
      * Returns the index name of the result
      *
      * @return string Index name
