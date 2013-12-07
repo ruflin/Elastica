@@ -50,6 +50,17 @@ class Result
     }
 
     /**
+     * Test if a param from the result hit is set
+     *
+     * @param  string  $name Param name to test
+     * @return boolean True if the param is set, false otherwise
+     */
+    public function hasParam($name)
+    {
+        return isset($this->_hit[$name]);
+    }    
+    
+    /**
      * Returns the hit id
      *
      * @return string Hit id
