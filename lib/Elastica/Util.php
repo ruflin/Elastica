@@ -44,7 +44,7 @@ class Util
     {
         $result = $term;
         // \ escaping has to be first, otherwise escaped later once again
-        $chars = array('\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':');
+        $chars = array('\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '/');
 
         foreach ($chars as $char) {
             $result = str_replace($char, '\\' . $char, $result);

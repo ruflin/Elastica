@@ -1,4 +1,6 @@
 CHANGES
+2013-12-07
+- Escape slash in Util::escapeTerm, as it is used for regexp from Elastic 0.90
 
 2013-12-04
 - Remove boost from FunctionScore::addFunction because this is not supported by elasticsearch
