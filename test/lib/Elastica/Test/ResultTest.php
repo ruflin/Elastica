@@ -106,14 +106,15 @@ class ResultTest extends BaseTest
     
     public function testHasFields()
     {
+        $data = array('value set');
+
         $result = new Result(array());
         $this->assertFalse($result->hasFields());
         
-        $result = new Result(array('_source' => 'no fields'));
+        $result = new Result(array('_source' => $data));
         $this->assertFalse($result->hasFields());
         
-        $data = array('fields' => 'value set');
-        $result = new Result($data);
+        $result = new Result(array('fields' => $data));
         $this->assertTrue($result->hasFields());
         $this->assertEquals($data, $result->getFields());
     }
