@@ -594,7 +594,7 @@ class Client
      */
     public function optimizeAll($args = array())
     {
-        return $this->request('_optimize', Request::POST, $args);
+        return $this->request('_optimize', Request::GET, array(), $args);
     }
 
     /**
