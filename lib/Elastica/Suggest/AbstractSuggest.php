@@ -21,6 +21,10 @@ abstract class AbstractSuggest extends Param
      */
     protected $_text;
 
+    /**
+     * @param string $name
+     * @param string $field
+     */
     public function __construct($name, $field)
     {
         $this->_name = $name;

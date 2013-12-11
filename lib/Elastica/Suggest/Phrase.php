@@ -38,7 +38,7 @@ class Phrase extends AbstractSuggest
      */
     public function setRealWorldErrorLikelihood($likelihood)
     {
-        return $this->setParam("real_word_error_likelihood", $likelihood);
+        return $this->setParam("real_world_error_likelihood", $likelihood);
     }
 
     /**

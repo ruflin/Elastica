@@ -91,11 +91,10 @@ class TermTest extends BaseTest
 
     public function testSuggestNoResults()
     {
-        $suggest = new Suggest();
         $termSuggest = new Term('suggest1', '_all');
-        $suggest->addSuggestion($termSuggest->setText('Foobar')->setSize(4));
+        $termSuggest->setText('Foobar')->setSize(4);
 
-        $result = $this->_index->search($suggest);
+        $result = $this->_index->search($termSuggest);
 
         $this->assertEquals(1, $result->countSuggests());
 

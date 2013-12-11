@@ -70,7 +70,7 @@ class DirectGenerator extends AbstractCandidateGenerator
     }
 
     /**
-     * @param int $min defaulst to 4
+     * @param int $min defaults to 4
      * @return DirectGenerator
      */
     public function setMinWordLength($min)
