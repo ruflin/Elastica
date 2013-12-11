@@ -2,6 +2,14 @@ CHANGES
 2013-12-07
 - Escape slash in Util::escapeTerm, as it is used for regexp from Elastic 0.90
 
+2013-12-05
+- Add *.iml to .gitignore
+- Refactor suggest implementation (\Elastica\Suggest, \Elastica\Suggest\AbstractSuggest, and \Elastica\Suggest\Term) to more closely resemble query implementation. (BC break)
+- \Elastica\Search::addSuggest() has been renamed to \Elastica\Search::setSuggest()
+- \Elastica\Query::addSuggest() has been renamed to \Elastica\Query::setSuggest()
+- Add \Elastica\Suggest\Phrase, \Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator, and \Elastica\Suggest\CandidateGenerator\DirectGenerator
+  (see http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html)
+
 2013-12-04
 - Remove boost from FunctionScore::addFunction because this is not supported by elasticsearch
 
