@@ -1,4 +1,8 @@
 CHANGES
+2013-12-12
+- Fix the manner in which suggestion results are returned in \Elastica\ResultSet and adjust associated tests to account for the fix.
+- Add \Elastica\Resultset::hasSuggests()
+
 2013-12-11
 - Pass arguments to optimize as query
 - Add refreshAll on Client
