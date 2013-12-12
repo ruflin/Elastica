@@ -594,7 +594,18 @@ class Client
      */
     public function optimizeAll($args = array())
     {
-        return $this->request('_optimize', Request::GET, array(), $args);
+        return $this->request('_optimize', Request::POST, array(), $args);
+    }
+
+    /**
+     * Refreshes all search indices
+     *
+     * @return \Elastica\Response Response object
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh.html
+     */
+    public function refreshAll()
+    {
+        return $this->request('_refresh', Request::POST);
     }
 
     /**

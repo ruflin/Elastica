@@ -146,7 +146,7 @@ class Index implements SearchableInterface
      */
     public function optimize($args = array())
     {
-        $this->request('_optimize', Request::GET, array(), $args);
+        $this->request('_optimize', Request::POST, array(), $args);
     }
 
     /**
