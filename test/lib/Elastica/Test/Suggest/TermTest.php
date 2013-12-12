@@ -23,11 +23,12 @@ class TermTest extends BaseTest
         parent::setUp();
         $this->_index = $this->_createIndex('test_suggest');
         $docs = array();
-        $docs[] = new Document(5, array('id' => 1, 'text' => 'GitHub'));
-        $docs[] = new Document(6, array('id' => 1, 'text' => 'Elastic'));
-        $docs[] = new Document(7, array('id' => 1, 'text' => 'Search'));
-        $docs[] = new Document(3, array('id' => 1, 'text' => 'Food'));
-        $docs[] = new Document(4, array('id' => 1, 'text' => 'Folks'));
+        $docs[] = new Document(1, array('id' => 1, 'text' => 'GitHub'));
+        $docs[] = new Document(2, array('id' => 1, 'text' => 'Elastic'));
+        $docs[] = new Document(3, array('id' => 1, 'text' => 'Search'));
+        $docs[] = new Document(4, array('id' => 1, 'text' => 'Food'));
+        $docs[] = new Document(5, array('id' => 1, 'text' => 'Flood'));
+        $docs[] = new Document(6, array('id' => 1, 'text' => 'Folks'));
         $type = $this->_index->getType(self::TEST_TYPE);
         $type->addDocuments($docs);
         $this->_index->refresh();
@@ -70,7 +71,7 @@ class TermTest extends BaseTest
     {
         $suggest = new Suggest();
         $suggest1 = new Term('suggest1', '_all');
-        $suggest->addSuggestion($suggest1->setText('Foor'));
+        $suggest->addSuggestion($suggest1->setText('Foor seach'));
         $suggest2 = new Term('suggest2', '_all');
         $suggest->addSuggestion($suggest2->setText('Girhub'));
 
@@ -80,13 +81,11 @@ class TermTest extends BaseTest
 
         $suggests = $result->getSuggests();
 
-        // Ensure that one suggestion result is returned per suggestion term
-        foreach ($suggests as $sug) {
-            $this->assertEquals(1, sizeof($sug['options']));
-        }
+        // Ensure that two suggestion results are returned for suggest1
+        $this->assertEquals(2, sizeof($suggests['suggest1']));
 
-        $this->assertEquals('github', $suggests['suggest2']['options'][0]['text']);
-        $this->assertEquals('food', $suggests['suggest1']['options'][0]['text']);
+        $this->assertEquals('github', $suggests['suggest2'][0]['options'][0]['text']);
+        $this->assertEquals('food', $suggests['suggest1'][0]['options'][0]['text']);
     }
 
     public function testSuggestNoResults()
@@ -100,6 +99,6 @@ class TermTest extends BaseTest
 
         // Assert that no suggestions were returned
         $suggests = $result->getSuggests();
-        $this->assertEquals(0, sizeof($suggests['suggest1']['options']));
+        $this->assertEquals(0, sizeof($suggests['suggest1'][0]['options']));
     }
 }

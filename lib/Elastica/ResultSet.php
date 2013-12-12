@@ -23,13 +23,6 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     protected $_results = array();
 
     /**
-    * Suggests
-    *
-    * @var array Suggests
-    */
-    protected $_suggests = array();
-
-    /**
      * Current position
      *
      * @var int Current position
@@ -101,12 +94,6 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
                 $this->_results[] = new Result($hit);
             }
         }
-
-        if(isset($result['suggest'])){
-            foreach($result['suggest'] as $key => $value){
-                $this->_suggests[$key] = $value[0];
-            }
-        }
     }
 
     /**
@@ -120,13 +107,23 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
+     * Returns true if the response contains suggestion results; false otherwise
+     * @return bool
+     */
+    public function hasSuggests(){
+        $data = $this->_response->getData();
+        return isset($data['suggest']);
+    }
+
+    /**
     * Return all suggests
     *
-    * @return Suggest[] Suggests
+    * @return array suggest results
     */
     public function getSuggests() 
     {
-        return $this->_suggests;
+        $data = $this->_response->getData();
+        return isset($data['suggest']) ? $data['suggest'] : array();
     }
 
     /**
@@ -228,7 +225,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function countSuggests()
     {
-        return sizeof($this->_suggests);
+        return sizeof($this->getSuggests());
     }
 
     /**
