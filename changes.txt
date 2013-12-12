@@ -1,4 +1,8 @@
 CHANGES
+2013-12-11
+- Pass arguments to optimize as query
+- Add refreshAll on Client
+
 2013-12-07
 - Escape slash in Util::escapeTerm, as it is used for regexp from Elastic 0.90
 
