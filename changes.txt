@@ -1,4 +1,7 @@
 CHANGES
+2013-12-12
+- Always send scroll_id via HTTP body instead of as a query param
+
 2013-12-11
 - Pass arguments to optimize as query
 - Add refreshAll on Client
