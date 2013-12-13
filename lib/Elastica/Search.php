@@ -420,10 +420,18 @@ class Search
 
         $params = $this->getOptions();
 
+        // Send scroll_id via raw HTTP body to handle cases of very large (> 4kb) ids.
+        if ('_search/scroll' == $path) {
+            $data = $params[self::OPTION_SCROLL_ID];
+            unset($params[self::OPTION_SCROLL_ID]);
+        } else {
+            $data = $query->toArray();
+        }
+
         $response = $this->getClient()->request(
             $path,
             Request::GET,
-            $query->toArray(),
+            $data,
             $params
         );
 
