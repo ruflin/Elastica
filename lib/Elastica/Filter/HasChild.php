@@ -15,12 +15,18 @@ class HasChild extends AbstractFilter
     /**
      * Construct HasChild filter
      *
-     * @param string|\Elastica\Query $query Query string or a Elastica\Query object
+     * @param string|\Elastica\Query|\Elastica\Filter\AbstractFilter $query Query string or a Elastica\Query object or a filter
      * @param string                $type  Parent document type
      */
     public function __construct($query, $type = null)
     {
-        $this->setQuery($query);
+        switch (true) {
+            case $query instanceof AbstractFilter:
+                $this->setFilter($query);
+                break;
+            default:
+                $this->setQuery($query);
+        }
         $this->setType($type);
     }
 
@@ -36,6 +42,18 @@ class HasChild extends AbstractFilter
         $data = $query->toArray();
 
         return $this->setParam('query', $data['query']);
+    }
+
+    /**
+     * Sets the filter object
+     *
+     * @param \Elastica\Filter\AbstractFilter $filter
+     * @return \Elastica\Filter\HasChild Current object
+     */
+    public function setFilter($filter)
+    {
+        $data = $filter->toArray();
+        return $this->setParam('filter', $data);
     }
 
     /**
