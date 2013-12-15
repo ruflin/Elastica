@@ -1,6 +1,7 @@
 CHANGES
 2013-12-15
 - Add support for filter inside HasChild filter
+- Add support for filter inside HasParent filter
 
 2013-12-12
 - Always send scroll_id via HTTP body instead of as a query param
