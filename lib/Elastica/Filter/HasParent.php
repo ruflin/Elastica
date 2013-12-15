@@ -19,12 +19,10 @@ class HasParent extends AbstractFilter
      */
     public function __construct($query, $type)
     {
-        switch (true) {
-            case $query instanceof AbstractFilter:
-                $this->setFilter($query);
-                break;
-            default:
-                $this->setQuery($query);
+        if ($query instanceof AbstractFilter) {
+            $this->setFilter($query);
+        } else {
+            $this->setQuery($query);
         }
         $this->setType($type);
     }
