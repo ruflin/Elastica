@@ -47,4 +47,23 @@ class HasChildTest extends BaseTest
 
         $this->assertEquals($expectedArray, $filter->toArray());
     }
+
+    public function testFilterInsideHasChild()
+    {
+        $f = new \Elastica\Filter\MatchAll();
+
+        $type = 'test';
+
+        $filter = new HasChild($f, $type);
+
+        $expectedArray = array(
+            'has_child' => array(
+                'filter' => $f->toArray(),
+                'type' => $type
+            )
+        );
+
+        $this->assertEquals($expectedArray, $filter->toArray());
+
+    }
 }
