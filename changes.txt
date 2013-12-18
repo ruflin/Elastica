@@ -1,5 +1,5 @@
 CHANGES
-2013-12-16
+2013-12-18
 - Update to Elasticsearch 0.90.8
 - Add support for simple_query_string query
 
