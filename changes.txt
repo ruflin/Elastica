@@ -1,4 +1,8 @@
 CHANGES
+2013-12-18
+- Update to Elasticsearch 0.90.8
+- Add support for simple_query_string query
+
 2013-12-15
 - Add support for filter inside HasChild filter
 - Add support for filter inside HasParent filter
