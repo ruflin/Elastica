@@ -1,4 +1,7 @@
 CHANGES
+2014-01-07
+- Document::setDocAsUpsert() now returns the Document
+
 2013-12-18
 - Update to Elasticsearch 0.90.8
 - Add support for simple_query_string query

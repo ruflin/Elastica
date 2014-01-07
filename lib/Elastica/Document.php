@@ -712,7 +712,7 @@ class Document extends Param
     {
         return $this->hasParam('_replication');
     }
-    
+
     /**
      * @param \Elastica\Script $data
      * @throws NotImplementedException
@@ -734,7 +734,7 @@ class Document extends Param
 
         return $this;
     }
-    
+
     /**
      * @throws NotImplementedException
      * @deprecated
@@ -751,7 +751,7 @@ class Document extends Param
     {
         return $this->_upsert;
     }
-    
+
     /**
      * @throws NotImplementedException
      * @deprecated
@@ -776,6 +776,8 @@ class Document extends Param
     public function setDocAsUpsert($value)
     {
         $this->_docAsUpsert = (bool) $value;
+
+        return $this;
     }
 
     /**

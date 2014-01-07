@@ -293,4 +293,13 @@ class DocumentTest extends BaseTest
         $this->assertTrue($document->hasUpsert());
         $this->assertSame($upsert, $document->getUpsert());
     }
+
+    public function testDocAsUpsert()
+    {
+        $document = new Document();
+
+        $this->assertFalse($document->getDocAsUpsert());
+        $this->assertSame($document, $document->setDocAsUpsert(true));
+        $this->assertTrue($document->getDocAsUpsert());
+    }
 }
