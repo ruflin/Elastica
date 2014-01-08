@@ -636,21 +636,19 @@ class IndexTest extends BaseTest
     public function testAnalyze()
     {
         $index = $this->_createIndex();
-        $response = $index->analyze('foo');
+        $returnedTokens = $index->analyze('foo');
 
         $tokens = array(
-            'tokens' => array(
-                array(
-                    'token' => 'foo',
-                    'start_offset' => 0,
-                    'end_offset' => 3,
-                    'type' => '<ALPHANUM>',
-                    'position' => 1,
-                )
+            array(
+                'token' => 'foo',
+                'start_offset' => 0,
+                'end_offset' => 3,
+                'type' => '<ALPHANUM>',
+                'position' => 1,
             )
         );
 
-        $this->assertEquals($tokens, $response->getData());
+        $this->assertEquals($tokens, $returnedTokens);
     }
 
     /**

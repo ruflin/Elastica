@@ -416,6 +416,7 @@ class Index implements SearchableInterface
      */
     public function analyze($text, $args = array())
     {
-        return $this->request('_analyze', Request::POST, $text, $args);
+        $data = $this->request('_analyze', Request::POST, $text, $args)->getData();
+        return $data['tokens'];
     }
 }
