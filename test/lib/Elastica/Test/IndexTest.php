@@ -606,6 +606,33 @@ class IndexTest extends BaseTest
         $this->assertEquals(3, $count);
     }
 
+    public function testOptimize()
+    {
+        $index = $this->_createIndex();
+
+        $type = new Type($index, 'optimize');
+
+        $docs = array();
+        $docs[] = new Document(1, array('foo' => 'bar'));
+        $docs[] = new Document(2, array('foo' => 'bar'));
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $stats = $index->getStats()->getData();
+        $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
+
+        $type->deleteById(1);
+        $index->refresh();
+
+        $stats = $index->getStats()->getData();
+        $this->assertEquals(1, $stats['_all']['primaries']['docs']['deleted']);
+
+        $index->optimize(array('max_num_segments' => 1));
+
+        $stats = $index->getStats()->getData();
+        $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
+    }
+
     /**
      * Check for the presence of the mapper-attachments plugin and skip the current test if it is not found.
      */
