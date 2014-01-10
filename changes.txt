@@ -1,4 +1,7 @@
 CHANGES
+2014-01-14
+- added \Elastica\Exception\ResponseException::getElasticsearchException()
+
 2014-01-07
 - Document::setDocAsUpsert() now returns the Document
 
