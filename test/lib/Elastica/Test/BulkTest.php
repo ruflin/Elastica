@@ -544,6 +544,28 @@ class BulkTest extends BaseTest
         $this->assertEquals($indexName . '/' . $typeName . '/_bulk', $bulk->getPath());
     }
 
+    public function testShardTimeout() {
+        $client = $this->_getClient();
+        $index = $client->getIndex('bulk_test_timeout');
+        $index->create(array(
+            'settings' => array(
+                'number_of_shards' => 100,
+            ),
+        ), true );
+        $type = $index->getType('bulk_test_timeout');
+
+        $bulk = new Bulk($client);
+        $bulk->addDocument($type->createDocument(1, array('junk' => 'dontcare')));
+        $bulk->setShardTimeout('1ms');
+        try {
+            $bulk->send();
+            $this->fail('Expected shard timeout');
+        } catch (ResponseException $e)  {
+            print $e->getMessage();
+            $this->assertTrue(true);
+        }
+    }
+
     public function udpDataProvider()
     {
         return array(
