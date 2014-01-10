@@ -1,4 +1,7 @@
 CHANGES
+2014-01-21
+- Add support for shard timeout to the Bulk api.
+
 2014-01-07
 - Document::setDocAsUpsert() now returns the Document
 
