@@ -142,6 +142,43 @@ class ClientTest extends BaseTest
         $client->addDocuments(array());
     }
 
+    public function testUpdateDocuments() {
+        $indexName = 'test';
+        $typeName = 'people';
+
+        $client = $this->_getClient();
+        $type = $client->getIndex($indexName)->getType($typeName);
+
+        $initialValue = 28;
+        $modifiedValue = 27;
+
+        $doc1 = new Document(
+            1,
+            array('name' => 'hans', 'age' => $initialValue),
+            $typeName,
+            $indexName
+        );
+        $doc2 = new Document(
+            2,
+            array('name' => 'anna', 'age' => $initialValue),
+            $typeName,
+            $indexName
+        );
+        $data = array($doc1, $doc2);
+        $client->addDocuments($data);
+
+        foreach ($data as $i => $doc) {
+            $data[$i]->age = $modifiedValue;
+        }
+        $client->updateDocuments($data);
+
+        $docData1 = $type->getDocument(1)->getData();
+        $docData2 = $type->getDocument(2)->getData();
+
+        $this->assertEquals($modifiedValue, $docData1['age']);
+        $this->assertEquals($modifiedValue, $docData2['age']);
+    }
+
     /**
     * Test deleteIds method using string parameters
     *
