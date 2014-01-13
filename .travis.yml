@@ -1,4 +1,4 @@
-language: php
+asticslanguage: php
 
 php:
   - 5.3
@@ -11,7 +11,7 @@ matrix:
 
 env:
   global:
-    - ES_VER=0.90.8
+    - ES_VER=0.90.10
     - ES_MAPPER_ATTACHMENTS_VER=1.9.0
     - ES_TRANSPORT_THRIFT_VER=1.4.0
     - ES_GEOCLUSTER_FACET_VER=0.0.9
