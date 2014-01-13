@@ -14,6 +14,16 @@ class TermsStats extends AbstractFacet
 {
 
     /**
+     * Holds the types of ordering which are allowed
+     * by ElasticSearch.
+     *
+     * @var array
+     */
+    protected $_orderTypes = array('term', 'reverse_term', 'count', 'reverse_count',
+        'total', 'reverse_total', 'min', 'reverse_min', 'max', 'reverse_max', 'mean',
+        'reverse_mean');
+
+    /**
      * Sets the key field for the query.
      *
      * @param  string                         $keyField The key field name for the query.
@@ -33,6 +43,23 @@ class TermsStats extends AbstractFacet
     public function setValueScript( $valueScript )
     {
         return $this->setParam( 'value_script', $valueScript );
+    }
+
+    /**
+     * Sets the ordering type for this facet. ElasticSearch
+     * internal default is count.
+     *
+     * @param  string                              $type The order type to set use for sorting of the terms.
+     * @throws \Elastica\Exception\InvalidException When an invalid order type was set.
+     * @return \Elastica\Facet\TermsStats
+     */
+    public function setOrder($type)
+    {
+        if (!in_array($type, $this->_orderTypes)) {
+            throw new InvalidException('Invalid order type: ' . $type);
+        }
+
+        return $this->setParam('order', $type);
     }
 
     /**
