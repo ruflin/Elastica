@@ -142,7 +142,44 @@ class ClientTest extends BaseTest
         $client->addDocuments(array());
     }
 
-    public function testUpdateDocuments() {
+    public function testUpdateIndex()
+    {
+        $index = $this->_getClient()->getIndex('cryptocurrencies');
+
+        $index->addDocuments(array(
+            new Document(1, array('name' => 'anoncoin'), 'altcoin'),
+            new Document(2, array('name' => 'ixcoin'), 'altcoin')
+        ));
+
+        $index->updateDocuments(array(
+            new Document(1, array('name' => 'AnonCoin'), 'altcoin'),
+            new Document(2, array('name' => 'iXcoin'), 'altcoin')
+        ));
+
+        $this->assertEquals('AnonCoin', $index->getType('altcoin')->getDocument(1)->get('name'));
+        $this->assertEquals('iXcoin', $index->getType('altcoin')->getDocument(2)->get('name'));
+    }
+
+    public function testUpdateType()
+    {
+        $type = $this->_getClient()->getIndex('cryptocurrencies')->getType('altcoin');
+
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'litecoin')),
+            new Document(2, array('name' => 'namecoin'))
+        ));
+
+        $type->updateDocuments(array(
+            new Document(1, array('name' => 'LiteCoin')),
+            new Document(2, array('name' => 'NameCoin'))
+        ));
+
+        $this->assertEquals('LiteCoin', $type->getDocument(1)->get('name'));
+        $this->assertEquals('StableCoin', $type->getDocument(2)->get('name'));
+    }
+
+    public function testUpdateDocuments()
+    {
         $indexName = 'test';
         $typeName = 'people';
 
