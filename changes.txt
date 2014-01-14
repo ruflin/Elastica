@@ -1,8 +1,7 @@
 CHANGES
-2014-01-14
-- added \Elastica\Exception\ResponseException::getElasticsearchException()
 
 2014-01-14
+- added \Elastica\Exception\ResponseException::getElasticsearchException()
 - Changed logger default log level to debug from info
 
 2014-01-13
