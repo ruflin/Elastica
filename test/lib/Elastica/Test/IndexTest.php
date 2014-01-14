@@ -633,6 +633,25 @@ class IndexTest extends BaseTest
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
     }
 
+    public function testAnalyze()
+    {
+        $index = $this->_createIndex();
+        $index->optimize(); 
+        $returnedTokens = $index->analyze('foo');
+
+        $tokens = array(
+            array(
+                'token' => 'foo',
+                'start_offset' => 0,
+                'end_offset' => 3,
+                'type' => '<ALPHANUM>',
+                'position' => 1,
+            )
+        );
+
+        $this->assertEquals($tokens, $returnedTokens);
+    }
+
     /**
      * Check for the presence of the mapper-attachments plugin and skip the current test if it is not found.
      */
