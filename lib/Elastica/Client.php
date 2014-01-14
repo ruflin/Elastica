@@ -628,7 +628,7 @@ class Client
             } else {
                 $data = array('message' => $context);
             }
-            $this->_logger->info('logging Request', $data);
+            $this->_logger->debug('logging Request', $data);
         }
     }
 
