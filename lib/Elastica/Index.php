@@ -403,4 +403,20 @@ class Index implements SearchableInterface
 
         return $this->getClient()->request($path, $method, $data, $query);
     }
+
+    /**
+     * Analyzes a string
+     *
+     * Detailed arguments can be found here in the link
+     *
+     * @param  string $text  String to be analyzed
+     * @param  array  $args  OPTIONAL Additional arguments
+     * @return array Server response
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze.html
+     */
+    public function analyze($text, $args = array())
+    {
+        $data = $this->request('_analyze', Request::POST, $text, $args)->getData();
+        return $data['tokens'];
+    }
 }

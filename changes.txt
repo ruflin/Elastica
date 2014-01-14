@@ -2,6 +2,12 @@ CHANGES
 2014-01-14
 - added \Elastica\Exception\ResponseException::getElasticsearchException()
 
+2014-01-13
+- Update to elasticsearch 0.90.10
+
+2014-01-08
+- Adding analyze function to Index to expose the _analyze API
+
 2014-01-07
 - Document::setDocAsUpsert() now returns the Document
 
