@@ -1,5 +1,8 @@
 CHANGES
 
+2014-01-14
+- Changed logger default log level to debug from info
+
 2014-01-13
 - Update to elasticsearch 0.90.10
 
