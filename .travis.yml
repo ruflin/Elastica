@@ -1,4 +1,4 @@
-asticslanguage: php
+language: php
 
 php:
   - 5.3
