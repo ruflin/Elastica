@@ -175,7 +175,7 @@ class ClientTest extends BaseTest
         ));
 
         $this->assertEquals('LiteCoin', $type->getDocument(1)->get('name'));
-        $this->assertEquals('StableCoin', $type->getDocument(2)->get('name'));
+        $this->assertEquals('NameCoin', $type->getDocument(2)->get('name'));
     }
 
     public function testUpdateDocuments()
