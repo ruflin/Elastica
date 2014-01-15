@@ -162,6 +162,21 @@ class Type implements SearchableInterface
      * @return \Elastica\Bulk\ResponseSet
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
+    public function updateDocuments(array $docs) {
+        foreach ($docs as $doc) {
+            $doc->setType($this->getName());
+        }
+
+        return $this->getIndex()->updateDocuments($docs);
+    }
+
+    /**
+     * Uses _bulk to send documents to the server
+     *
+     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @return \Elastica\Bulk\ResponseSet
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     */
     public function addDocuments(array $docs)
     {
         foreach ($docs as $doc) {

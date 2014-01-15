@@ -1,4 +1,6 @@
 CHANGES
+2014-01-13
+- Add support for _bulk update
 
 2014-01-14
 - added \Elastica\Exception\ResponseException::getElasticsearchException()

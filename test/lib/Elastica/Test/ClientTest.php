@@ -142,6 +142,80 @@ class ClientTest extends BaseTest
         $client->addDocuments(array());
     }
 
+    public function testUpdateIndex()
+    {
+        $index = $this->_getClient()->getIndex('cryptocurrencies');
+
+        $index->addDocuments(array(
+            new Document(1, array('name' => 'anoncoin'), 'altcoin'),
+            new Document(2, array('name' => 'ixcoin'), 'altcoin')
+        ));
+
+        $index->updateDocuments(array(
+            new Document(1, array('name' => 'AnonCoin'), 'altcoin'),
+            new Document(2, array('name' => 'iXcoin'), 'altcoin')
+        ));
+
+        $this->assertEquals('AnonCoin', $index->getType('altcoin')->getDocument(1)->get('name'));
+        $this->assertEquals('iXcoin', $index->getType('altcoin')->getDocument(2)->get('name'));
+    }
+
+    public function testUpdateType()
+    {
+        $type = $this->_getClient()->getIndex('cryptocurrencies')->getType('altcoin');
+
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'litecoin')),
+            new Document(2, array('name' => 'namecoin'))
+        ));
+
+        $type->updateDocuments(array(
+            new Document(1, array('name' => 'LiteCoin')),
+            new Document(2, array('name' => 'NameCoin'))
+        ));
+
+        $this->assertEquals('LiteCoin', $type->getDocument(1)->get('name'));
+        $this->assertEquals('NameCoin', $type->getDocument(2)->get('name'));
+    }
+
+    public function testUpdateDocuments()
+    {
+        $indexName = 'test';
+        $typeName = 'people';
+
+        $client = $this->_getClient();
+        $type = $client->getIndex($indexName)->getType($typeName);
+
+        $initialValue = 28;
+        $modifiedValue = 27;
+
+        $doc1 = new Document(
+            1,
+            array('name' => 'hans', 'age' => $initialValue),
+            $typeName,
+            $indexName
+        );
+        $doc2 = new Document(
+            2,
+            array('name' => 'anna', 'age' => $initialValue),
+            $typeName,
+            $indexName
+        );
+        $data = array($doc1, $doc2);
+        $client->addDocuments($data);
+
+        foreach ($data as $i => $doc) {
+            $data[$i]->age = $modifiedValue;
+        }
+        $client->updateDocuments($data);
+
+        $docData1 = $type->getDocument(1)->getData();
+        $docData2 = $type->getDocument(2)->getData();
+
+        $this->assertEquals($modifiedValue, $docData1['age']);
+        $this->assertEquals($modifiedValue, $docData2['age']);
+    }
+
     /**
     * Test deleteIds method using string parameters
     *
