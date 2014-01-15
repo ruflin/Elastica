@@ -637,6 +637,7 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex('analyze');
         $index->optimize();
+        sleep(2);
         $returnedTokens = $index->analyze('foo');
 
         $tokens = array(
