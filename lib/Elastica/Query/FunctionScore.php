@@ -25,7 +25,7 @@ class FunctionScore extends AbstractQuery
     const SCORE_MODE_MAX = 'max';
     const SCORE_MODE_MIN = 'min';
 
-    const DECAY_GUASS = 'gauss';
+    const DECAY_GAUSS = 'gauss';
     const DECAY_EXPONENTIAL = 'exp';
     const DECAY_LINEAR = 'linear';
 

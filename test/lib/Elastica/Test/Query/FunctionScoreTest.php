@@ -66,8 +66,8 @@ class FunctionScoreTest extends BaseTest
         $query = new FunctionScore();
         $childQuery = new \Elastica\Query\MatchAll();
         $query->setQuery($childQuery);
-        $query->addDecayFunction(FunctionScore::DECAY_GUASS, 'location', $this->locationOrigin, $locationScale);
-        $query->addDecayFunction(FunctionScore::DECAY_GUASS, 'price', $priceOrigin, $priceScale);
+        $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'location', $this->locationOrigin, $locationScale);
+        $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', $priceOrigin, $priceScale);
         $expected = array(
             'function_score' => array(
                 'query' => $childQuery->toArray(),
@@ -97,8 +97,8 @@ class FunctionScoreTest extends BaseTest
     public function testGauss()
     {
         $query = new FunctionScore();
-        $query->addDecayFunction(FunctionScore::DECAY_GUASS, 'location', $this->locationOrigin, "4mi");
-        $query->addDecayFunction(FunctionScore::DECAY_GUASS, 'price', 0, 10);
+        $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'location', $this->locationOrigin, "4mi");
+        $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', 0, 10);
         $response = $this->type->search($query);
         $results = $response->getResults();
 
