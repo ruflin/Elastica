@@ -178,7 +178,7 @@ class QueryString extends AbstractQuery
     /**
      * Allows analyzing of wildcard terms.
      *
-     * If not set, defaults to false
+     * If not set, defaults to true
      *
      * @param  bool                            $analyze
      * @return \Elastica\Query\QueryString Current object
@@ -191,7 +191,7 @@ class QueryString extends AbstractQuery
     /**
      * Sets the param to automatically generate phrase queries.
      *
-     * If not set, defaults to false.
+     * If not set, defaults to true.
      *
      * @param  bool                            $autoGenerate
      * @return \Elastica\Query\QueryString Current object
