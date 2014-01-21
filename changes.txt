@@ -1,4 +1,8 @@
 CHANGES
+
+2014-01-17
+- Fix typo in constant name: Elastica\Query\FunctionScore::DECAY_GUASS becomes DECAY_GAUSS
+
 2014-01-13
 - Add support for _bulk update
 
