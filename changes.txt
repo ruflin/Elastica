@@ -1,5 +1,8 @@
 CHANGES
 
+2014-01-21
+- Code coverage generation for coveralls.io added: https://coveralls.io/r/ruflin/Elastica
+
 2014-01-17
 - Fix typo in constant name: Elastica\Query\FunctionScore::DECAY_GUASS becomes DECAY_GAUSS
 
