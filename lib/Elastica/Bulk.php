@@ -44,6 +44,11 @@ class Bulk
     protected $_type = '';
 
     /**
+     * @var array request parameters to the bulk api
+     */
+    protected $_requestParams = array();
+
+    /**
      * @param \Elastica\Client $client
      */
     public function __construct(Client $client)
@@ -273,6 +278,24 @@ class Bulk
         }
 
         return $this;
+    }
+
+    /**
+     * Set a url parameter on the request bulk request.
+     * @var string $name name of the parameter
+     * @var string $value value of the parameter
+     */
+    public function setRequestParam($name, $value) {
+        $this->_requestParams[ $name ] = $value;
+    }
+
+    /**
+     * Set the amount of time that the request will wait the shards to come on line.
+     * Requires Elasticsearch version >= 0.90.8.
+     * @var string $time timeout in Elasticsearch time format
+     */
+    public function setShardTimeout($time) {
+        $this->setRequestParam( 'timeout', $time );
     }
 
     /**
