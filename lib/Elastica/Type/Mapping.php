@@ -149,6 +149,18 @@ class Mapping
     }
 
     /**
+     * Get raw parameters
+     *
+     * @see setParam
+     * @param  string                    $key   Key name
+     * @return mixed                     $value Key value
+     */
+    public function getParam($key)
+    {
+        return isset($this->_mapping[$key])?$this->_mapping[$key]:null;
+    }
+
+    /**
      * Sets params for the "_all" field
      *
      * @param array                       $params _all Params (enabled, store, term_vector, analyzer)
