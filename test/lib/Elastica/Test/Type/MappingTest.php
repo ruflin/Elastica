@@ -265,14 +265,15 @@ class MappingTest extends BaseTest
         $this->assertEquals('test', $mappingData['test']['_meta']['class']);
     }
 
-    public function testGetParam()
+    public function testGetters()
     {
         $index = $this->_createIndex();
         $type = $index->getType('test');
-        $mapping = new Mapping($type, array(
+        $properties = array(
             'firstname' => array('type' => 'string', 'store' => 'yes'),
             'lastname' => array('type' => 'string')
-        ));
+        );
+        $mapping = new Mapping($type, $properties);
         $all = array(
            "enabled" => true,
            "store" => "yes"
@@ -283,5 +284,7 @@ class MappingTest extends BaseTest
         $this->assertEquals($get_all, $all);
 
         $this->assertNull($mapping->getParam('_boost', $all));
+
+        $this->assertEquals($properties, $mapping->getProperties());
     }
 }

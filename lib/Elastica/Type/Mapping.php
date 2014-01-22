@@ -72,6 +72,16 @@ class Mapping
     }
 
     /**
+     * Gets the mapping properties
+     *
+     * @return  array                     $properties Properties
+     */
+    public function getProperties()
+    {
+        return $this->getParam('properties');
+    }
+
+    /**
      * Sets the mapping _meta
      * @param array $meta metadata
      * @return \Elastica\Type\Mapping Mapping object

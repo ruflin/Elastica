@@ -1,7 +1,7 @@
 CHANGES
 
 2014-01-22
-- Add getParam method to Elastica\Type\Mapping
+- Add getParam & getProperties methods to Elastica\Type\Mapping
 
 2014-01-21
 - Code coverage generation for coveralls.io added: https://coveralls.io/r/ruflin/Elastica
