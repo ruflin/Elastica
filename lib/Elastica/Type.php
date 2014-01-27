@@ -162,7 +162,8 @@ class Type implements SearchableInterface
      * @return \Elastica\Bulk\ResponseSet
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
-    public function updateDocuments(array $docs) {
+    public function updateDocuments(array $docs)
+    {
         foreach ($docs as $doc) {
             $doc->setType($this->getName());
         }
@@ -373,6 +374,18 @@ class Type implements SearchableInterface
             )
         );
         return $this->deleteById($document->getId(), $options);
+    }
+
+    /**
+     * Uses _bulk to delete documents from the server
+     *
+     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @return \Elastica\Bulk\ResponseSet
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     */
+    public function deleteDocuments(array $docs)
+    {
+        return $this->getIndex()->deleteDocuments($docs);
     }
 
     /**
