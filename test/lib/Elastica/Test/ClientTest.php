@@ -144,7 +144,6 @@ class ClientTest extends BaseTest
 
     /**
      * Test bulk operations on Index
-     * @expectedException Elastica\Exception\NotFoundException
      */
     public function testBulkIndex()
     {
@@ -168,13 +167,12 @@ class ClientTest extends BaseTest
 
         $index->deleteDocuments(array($anonCoin, $ixCoin));
 
-        // Throw expected NotFoundException
+        $this->setExpectedException('Elastica\Exception\NotFoundException');
         $index->getType('altcoin')->getDocument(1);
     }
 
     /**
      * Test bulk operations on Type
-     * @expectedException Elastica\Exception\NotFoundException
      */
     public function testBulkType()
     {
@@ -198,7 +196,7 @@ class ClientTest extends BaseTest
 
         $type->deleteDocuments(array($liteCoin, $nameCoin));
 
-        // Throw expected NotFoundException
+        $this->setExpectedException('Elastica\Exception\NotFoundException');
         $type->getDocument(2);
     }
 
