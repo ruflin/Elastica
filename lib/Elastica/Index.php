@@ -114,7 +114,8 @@ class Index implements SearchableInterface
      * @return \Elastica\Bulk\ResponseSet
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
-    public function updateDocuments(array $docs) {
+    public function updateDocuments(array $docs)
+    {
         foreach ($docs as $doc) {
             $doc->setIndex($this->getName());
         }
@@ -148,6 +149,18 @@ class Index implements SearchableInterface
         $response = $this->request('', Request::DELETE);
 
         return $response;
+    }
+
+    /**
+     * Uses _bulk to delete documents from the server
+     *
+     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @return \Elastica\Bulk\ResponseSet
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     */
+    public function deleteDocuments(array $docs)
+    {
+        return $this->getClient()->deleteDocuments($docs);
     }
 
     /**
