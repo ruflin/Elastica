@@ -604,7 +604,6 @@ class Client
             {
                 throw $e;
             }
-            
             return $this->request($path, $method, $data, $query);
         }
     }

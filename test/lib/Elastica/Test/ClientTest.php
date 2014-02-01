@@ -165,10 +165,12 @@ class ClientTest extends BaseTest
         $this->assertEquals('AnonCoin', $index->getType('altcoin')->getDocument(1)->get('name'));
         $this->assertEquals('iXcoin', $index->getType('altcoin')->getDocument(2)->get('name'));
 
+        $ixCoin->setIndex(null);  // Make sure the index gets set properly if missing
         $index->deleteDocuments(array($anonCoin, $ixCoin));
 
         $this->setExpectedException('Elastica\Exception\NotFoundException');
         $index->getType('altcoin')->getDocument(1);
+        $index->getType('altcoin')->getDocument(2);
     }
 
     /**
@@ -194,9 +196,11 @@ class ClientTest extends BaseTest
         $this->assertEquals('LiteCoin', $type->getDocument(1)->get('name'));
         $this->assertEquals('NameCoin', $type->getDocument(2)->get('name'));
 
+        $nameCoin->setType(null);  // Make sure the type gets set properly if missing
         $type->deleteDocuments(array($liteCoin, $nameCoin));
 
         $this->setExpectedException('Elastica\Exception\NotFoundException');
+        $type->getDocument(1);
         $type->getDocument(2);
     }
 

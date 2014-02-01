@@ -385,6 +385,10 @@ class Type implements SearchableInterface
      */
     public function deleteDocuments(array $docs)
     {
+        foreach ($docs as $doc) {
+            $doc->setType($this->getName());
+        }
+
         return $this->getIndex()->deleteDocuments($docs);
     }
 
