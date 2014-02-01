@@ -1,5 +1,8 @@
 CHANGES
 
+2014-01-31
+- Fix _bulk delete proxy methods if type or index not explicitly defined.
+
 2014-01-28
 - Add _bulk delete proxy methods to Index and Type for consistency.
 
