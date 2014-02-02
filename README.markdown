@@ -23,6 +23,12 @@ Documentation
 ---------------------
 Check out the [Elastica documentation](http://Elastica.io/) to find out how Elastica works. If you have questions, don't hesitate to ask them in the [Elastica google group](https://groups.google.com/group/elastica-php-client). Issues should go to the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
 
+Contributing
+------------
+Help is very welcomed, but code contributions must be done in respect of [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md). More details on how to contribute and guidelines for [pull requests](http://elastica.io/contribute/pull-request.html) can be found [here](http://elastica.io/contribute/).
+
+See [Coding guidelines](https://github.com/ruflin/Elastica/wiki/Coding-guidelines) for tips on how to do so.
+
 About
 ---------------------
 PHP client for the distributed search engine [elasticsearch](http://www.elasticsearch.org/) which is
@@ -48,8 +54,4 @@ File upload is supported but the mapper attachement plugin has to be installed
 
     ./bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/1.9.0
 
-Contributing
-------------
-Help is very welcomed, but code contributions must be done in respect of [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md).
 
-See [Coding guidelines](https://github.com/ruflin/Elastica/wiki/Coding-guidelines) for tips on how to do so.
