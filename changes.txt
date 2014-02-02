@@ -5,6 +5,7 @@ CHANGES
 
 2014-01-28
 - Add _bulk delete proxy methods to Index and Type for consistency.
+- Use the HTTP response code of GET requests (getDocument), instead of extists/found json property.
 
 2014-01-22
 - Add getParam & getProperties methods to Elastica\Type\Mapping

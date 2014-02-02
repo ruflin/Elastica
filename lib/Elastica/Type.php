@@ -225,12 +225,14 @@ class Type implements SearchableInterface
         $path = urlencode($id);
 
         try {
-            $result = $this->request($path, Request::GET, array(), $options)->getData();
+            $response = $this->request($path, Request::GET, array(), $options);
+            $result = $response->getData();
         } catch (ResponseException $e) {
             throw new NotFoundException('doc id ' . $id . ' not found');
         }
 
-        if (empty($result['exists'])) {
+        $info = $response->getTransferInfo();
+        if ($info['http_code'] !== 200) {
             throw new NotFoundException('doc id ' . $id . ' not found');
         }
 
