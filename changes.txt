@@ -1,6 +1,9 @@
 CHANGES
 
 2014-01-02
+- Update to elasticsearch v1.0.0.RC1
+
+2014-01-02
 - Release v0.90.10
 
 2014-01-31
