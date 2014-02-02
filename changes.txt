@@ -1,5 +1,8 @@
 CHANGES
 
+2014-01-02
+- Release v0.90.10
+
 2014-01-31
 - Fix _bulk delete proxy methods if type or index not explicitly defined.
 
