@@ -1,6 +1,7 @@
 CHANGES
 
 2014-01-02
+- Added Elastica\Query\DisMax
 - Update to elasticsearch v1.0.0.RC1
 
 2014-01-02
