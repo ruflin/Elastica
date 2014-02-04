@@ -24,7 +24,7 @@ class CustomFiltersScore extends AbstractQuery
     const SCORE_MODE_MULTIPLY   = 'multiply';
 
     /**
-     * @param mixed $query Query object or data to build it, match_all query will be created be default
+     * @param string|\Elastica\Query|Elastica\Query\AbstractQuery $query match_all query will be created by default
      */
     public function __construct($query = null)
     {
@@ -34,7 +34,7 @@ class CustomFiltersScore extends AbstractQuery
     /**
      * Sets a query
      *
-     * @param  mixed                                  $query Query object or data to build it
+     * @param  string|\Elastica\Query|Elastica\Query\AbstractQuery $query
      * @return \Elastica\Query\CustomFiltersScore Current object
      */
     public function setQuery($query)

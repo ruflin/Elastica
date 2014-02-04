@@ -16,7 +16,7 @@ class HasChild extends AbstractQuery
     /**
      * Construct HasChild Query
      *
-     * @param string|\Elastica\Query $query Query string or a Elastica\Query object
+     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
      * @param string                $type  Parent document type
      */
     public function __construct($query, $type = null)
