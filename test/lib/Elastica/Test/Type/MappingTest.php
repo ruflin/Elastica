@@ -132,13 +132,10 @@ class MappingTest extends BaseTest
             ),
         ));
 
-        //print_r($type->getMapping());
-        //exit();
         $type->addDocument($doc);
 
         $index->refresh();
         $resultSet = $type->search('ruflin');
-        //print_r($resultSet);
 
         $index->delete();
     }
@@ -246,7 +243,6 @@ class MappingTest extends BaseTest
 
         // read the mapping from Elasticsearch and assert that the multiname.org field is "not_analyzed"
         $newMapping = $type->getMapping();
-        print_r($newMapping);
         $this->assertArrayHasKey('person', $newMapping,
             'Person type not available in mapping from ES. Mapping set at all?');
         $this->assertArrayHasKey('properties', $newMapping['person'],
