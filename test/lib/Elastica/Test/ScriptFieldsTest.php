@@ -90,6 +90,6 @@ class ScriptFieldsTest extends BaseTest
         $first = $resultSet->current()->getData();
 
         // 1 + 2
-        $this->assertEquals(3, $first['test']);
+        $this->assertEquals(3, $first['test'][0]);
     }
 }

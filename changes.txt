@@ -1,4 +1,10 @@
 CHANGES
+2014-02-04:
+- Remove Elastica\Query\Field and Elastica\Query\Text, which are not supported in ES 1.0.0.RC1
+- Minor tweaking of request and result handling classes to adjust for changes in ES 1.0.0.RC1
+- Update mapper-attachments plugin to version 2.0.0.RC1 in .travis.yml
+- Adjust tests to account for changes in ES 1.0.0.RC1
+- Prevent the geocluster-facet plugin from being installed in test/bin/run_elasticsearch.sh as the plugin has not yet been updated for ES 1.0.0.RC1
 
 2014-01-02
 - Added Elastica\Query\DisMax

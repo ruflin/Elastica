@@ -180,7 +180,7 @@ class Info
     {
         $this->_params = $params;
 
-        $path = '_cluster/nodes/' . $this->getNode()->getName();
+        $path = '_nodes/' . $this->getNode()->getName();
 
         if (!empty($params)) {
             $path .= '?';

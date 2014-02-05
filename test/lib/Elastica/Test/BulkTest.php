@@ -84,7 +84,8 @@ class BulkTest extends BaseTest
 {"name":"The Thing"}
 ';
 
-        $this->assertEquals($expected, (string) $bulk);
+        $expected = str_replace(PHP_EOL, "\n", $expected);
+        $this->assertEquals($expected, (string)str_replace(PHP_EOL, "\n", (string)$bulk));
 
         $response = $bulk->send();
 
@@ -373,6 +374,7 @@ class BulkTest extends BaseTest
 {"index":{}}
 {"name":"The Human Torch"}
 ';
+        $expectedJson = str_replace(PHP_EOL, "\n", $expectedJson);
         $this->assertEquals($expectedJson, $bulk->toString());
 
         $response = $bulk->send();
@@ -394,6 +396,9 @@ class BulkTest extends BaseTest
      */
     public function testUdp($clientConfig, $host, $port, $shouldFail = false)
     {
+        if (!function_exists('socket_create')) {
+            $this->markTestSkipped('Function socket_create() does not exist.');
+        }
         $client = new Client($clientConfig);
         $index = $client->getIndex('elastica_test');
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
@@ -508,7 +513,7 @@ class BulkTest extends BaseTest
         $index->refresh();
         $doc = $type->getDocument(5);
         $this->assertEquals(1, $doc->counter);
-        
+
         //test doc_as_upsert
         $doc = new \Elastica\Document(6, array('test' => 'test'));
         $doc->setDocAsUpsert(true);
@@ -524,21 +529,22 @@ class BulkTest extends BaseTest
         $index->refresh();
         $doc = $type->getDocument(6);
         $this->assertEquals('test', $doc->test);
-        
+
         $index->delete();
     }
-    
-    public function testGetPath() {
+
+    public function testGetPath()
+    {
         $client = $this->_getClient();
         $bulk = new Bulk($client);
-        
+
         $this->assertEquals('_bulk', $bulk->getPath());
-        
+
         $indexName = 'testIndex';
-        
+
         $bulk->setIndex($indexName);
         $this->assertEquals($indexName . '/_bulk', $bulk->getPath());
-        
+
         $typeName = 'testType';
         $bulk->setType($typeName);
         $this->assertEquals($indexName . '/' . $typeName . '/_bulk', $bulk->getPath());
@@ -599,8 +605,7 @@ class BulkTest extends BaseTest
                 true
             ),
             array(
-                array(
-                ),
+                array(),
                 'localhost',
                 9800,
                 true
