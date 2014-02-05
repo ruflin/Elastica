@@ -22,7 +22,7 @@ class InfoTest extends BaseTest
         // Load os infos
         $info = new NodeInfo($node, array('os'));
 
-        $this->assertInternalType('float', $info->get('os', 'mem', 'total_in_bytes'));
+        $this->assertTrue(is_double($info->get('os', 'mem', 'total_in_bytes')));
         $this->assertInternalType('array', $info->get('os', 'mem'));
         $this->assertNull($info->get('test', 'notest', 'notexist'));
     }
