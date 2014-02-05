@@ -253,7 +253,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
 
         $data = $index->addAlias($aliasName, true)->getData();
-        $this->assertTrue($data['ok']);
+        $this->assertTrue($data['acknowledged']);
 
         $index2 = $client->getIndex($aliasName);
         $type2 = $index2->getType($typeName);
@@ -262,7 +262,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(1, $resultSet2->count());
 
         $response = $index->removeAlias($aliasName)->getData();
-        $this->assertTrue($response['ok']);
+        $this->assertTrue($response['acknowledged']);
 
         $client->getIndex($aliasName)->getType($typeName)->search('ruflin');
     }
@@ -465,11 +465,11 @@ class IndexTest extends BaseTest
         $index->refresh();
         $indexMappings = $index->getMapping();
 
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['type'], 'integer');
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['store'], true);
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['email']['type'], 'string');
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['username']['type'], 'string');
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['test']['type'], 'integer');
+        $this->assertEquals($indexMappings['test']['properties']['id']['type'], 'integer');
+        $this->assertEquals($indexMappings['test']['properties']['id']['store'], true);
+        $this->assertEquals($indexMappings['test']['properties']['email']['type'], 'string');
+        $this->assertEquals($indexMappings['test']['properties']['username']['type'], 'string');
+        $this->assertEquals($indexMappings['test']['properties']['test']['type'], 'integer');
     }
 
     /**

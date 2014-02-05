@@ -24,6 +24,8 @@ class SettingsTest extends BaseTest
         $this->assertNotNull($settings->get('number_of_replicas'));
         $this->assertNotNull($settings->get('number_of_shards'));
         $this->assertNull($settings->get('kjqwerjlqwer'));
+
+        $index->delete();
     }
 
     public function testSetNumberOfReplicas()
@@ -42,6 +44,8 @@ class SettingsTest extends BaseTest
         $settings->setNumberOfReplicas(3);
         $index->refresh();
         $this->assertEquals(3, $settings->get('number_of_replicas'));
+
+        $index->delete();
     }
 
     public function testSetRefreshInterval()
@@ -61,6 +65,8 @@ class SettingsTest extends BaseTest
         $settings->setRefreshInterval('5s');
         $index->refresh();
         $this->assertEquals('5s', $settings->get('refresh_interval'));
+
+        $index->delete();
     }
 
     public function testGetRefreshInterval()
@@ -80,6 +86,8 @@ class SettingsTest extends BaseTest
         $index->refresh();
         $this->assertEquals($interval, $settings->getRefreshInterval());
         $this->assertEquals($interval, $settings->get('refresh_interval'));
+
+        $index->delete();
     }
 
     public function testSetMergePolicy()
@@ -119,11 +127,12 @@ class SettingsTest extends BaseTest
         $response = $settings->setMergePolicy('merge_factor', 15);
         $this->assertEquals(15, $settings->getMergePolicy('merge_factor'));
         $this->assertInstanceOf('Elastica\Response', $response);
-        $data = $response->getData();
-        $this->assertTrue($data['ok']);
+        $this->assertTrue($response->isOk());
 
         $settings->setMergePolicy('merge_factor', 10);
         $this->assertEquals(10, $settings->getMergePolicy('merge_factor'));
+
+        $index->delete();
     }
 
     public function testSetMergePolicyType()
@@ -139,15 +148,15 @@ class SettingsTest extends BaseTest
 
         $settings = $index->getSettings();
 
-        //$response = $settings->setMergePolicyType('LogByteSizeMergePolicyProvider');
-        $response = $settings->setMergePolicyType('log_byte_size');
+        $settings->setMergePolicyType('log_byte_size');
         $this->assertEquals('log_byte_size', $settings->getMergePolicyType());
 
         $response = $settings->setMergePolicy('merge_factor', 15);
         $this->assertEquals(15, $settings->getMergePolicy('merge_factor'));
         $this->assertInstanceOf('Elastica\Response', $response);
-        $data = $response->getData();
-        $this->assertTrue($data['ok']);
+        $this->assertTrue($response->isOk());
+
+        $index->delete();
     }
 
     public function testSetReadOnly()
@@ -188,14 +197,14 @@ class SettingsTest extends BaseTest
         $index->refresh();
 
         $this->assertEquals(2, $type->count());
+
+        $index->delete();
     }
 
 
     public function testGetSetBlocksRead()
     {
-        $client = $this->_getClient();
-        $index = $client->getIndex('elastica-test');
-        $index->create();
+        $index = $this->_createIndex('elastica-test');
         $index->refresh();
         $settings = $index->getSettings();
 
@@ -215,9 +224,7 @@ class SettingsTest extends BaseTest
 
     public function testGetSetBlocksWrite()
     {
-        $client = $this->_getClient();
-        $index = $client->getIndex('elastica-test');
-        $index->create();
+        $index = $this->_createIndex('elastica-test');
         $index->refresh();
         $settings = $index->getSettings();
 
@@ -237,9 +244,7 @@ class SettingsTest extends BaseTest
 
     public function testGetSetBlocksMetadata()
     {
-        $client = $this->_getClient();
-        $index = $client->getIndex('elastica-test');
-        $index->create();
+        $index = $this->_createIndex('elastica-test');
         $index->refresh();
         $settings = $index->getSettings();
 

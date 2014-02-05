@@ -32,17 +32,17 @@ class Percolator
     /**
      * Registers a percolator query, with optional extra fields to include in the registered query.
      *
-     * @param  string                                               $name   Query name
-     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query  Query to add
-     * @param  array                                                $fields Extra fields to include in the registered query
-     *                                                                      and can be used to filter executed queries. 
+     * @param  string $name Query name
+     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Query to add
+     * @param  array $fields Extra fields to include in the registered query
+     *                                                                      and can be used to filter executed queries.
      * @return \Elastica\Response
      */
     public function registerQuery($name, $query, $fields = array())
     {
-        $path = '_percolator/' . $this->_index->getName() . '/' . $name;
+        $path = $this->_index->getName() . '/.percolator/' . '/' . $name;
         $query = Query::create($query);
-        
+
         $data = array_merge($query->toArray(), $fields);
 
         return $this->_index->getClient()->request($path, Request::PUT, $data);
@@ -50,7 +50,7 @@ class Percolator
 
     /**
      * Removes a percolator query
-     * @param  string            $name query name
+     * @param  string $name query name
      * @return \Elastica\Response
      */
     public function unregisterQuery($name)
@@ -63,10 +63,10 @@ class Percolator
     /**
      * Match a document to percolator queries
      *
-     * @param  \Elastica\Document                                   $doc
+     * @param  \Elastica\Document $doc
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Query to filter the percolator queries which
      *                                                                     are executed.
-     * @param  string                                               $type
+     * @param  string $type
      * @return array With matching registered queries.
      */
     public function matchDoc(Document $doc, $query = null, $type = 'type')
@@ -83,7 +83,10 @@ class Percolator
         $response = $this->getIndex()->getClient()->request($path, Request::GET, $data);
         $data = $response->getData();
 
-        return $data['matches'];
+        if (isset($data['matches'])) {
+            return $data['matches'];
+        }
+        return array();
     }
 
     /**

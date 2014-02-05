@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica;
+
 use Elastica\Exception\NotFoundException;
 
 /**
@@ -50,17 +51,26 @@ class Response
     protected $_response = null;
 
     /**
+     * HTTP response status code
+     *
+     * @var int
+     */
+    protected $_status = null;
+
+    /**
      * Construct
      *
      * @param string|array $responseString Response string (json)
+     * @param int $responseStatus http status code
      */
-    public function __construct($responseString)
+    public function __construct($responseString, $responseStatus = null)
     {
         if (is_array($responseString)) {
             $this->_response = $responseString;
         } else {
             $this->_responseString = $responseString;
         }
+        $this->_status = $responseStatus;
     }
 
     /**
@@ -106,18 +116,38 @@ class Response
         $data = $this->getData();
 
         // Bulk insert checks. Check every item
+        if (isset($data['status'])) {
+            if ($data['status'] >= 200 && $data['status'] <= 300) {
+                return true;
+            }
+            return false;
+        }
         if (isset($data['items'])) {
             foreach ($data['items'] as $item) {
                 if (false == $item['index']['ok']) {
                     return false;
-                 }
+                }
             }
 
             return true;
         }
 
+        if ($this->_status >= 200 && $this->_status <= 300) {
+            // http status is ok
+            return true;
+        }
+
         return (isset($data['ok']) && $data['ok']);
     }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->_status;
+    }
+
 
     /**
      * Response data array
@@ -167,7 +197,7 @@ class Response
      * Sets the transfer info of the curl request. This function is called
      * from the \Elastica\Client::_callService .
      *
-     * @param  array             $transferInfo The curl transfer information.
+     * @param  array $transferInfo The curl transfer information.
      * @return \Elastica\Response Current object
      */
     public function setTransferInfo(array $transferInfo)
@@ -189,7 +219,7 @@ class Response
     /**
      * Sets the query time
      *
-     * @param  float             $queryTime Query time
+     * @param  float $queryTime Query time
      * @return \Elastica\Response Current object
      */
     public function setQueryTime($queryTime)

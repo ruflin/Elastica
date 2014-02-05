@@ -50,10 +50,11 @@ class SettingsTest extends BaseTest
     public function testSetReadOnly()
     {
         // Create two indices to check that the complete cluster is read only
+        $settings = new Settings($this->_getClient());
+        $settings->setReadOnly(false);
         $index1 = $this->_createIndex('test1');
         $index2 = $this->_createIndex('test2');
 
-        $settings = new Settings($index1->getClient());
 
         $doc1 = new Document(null, array('hello' => 'world'));
         $doc2 = new Document(null, array('hello' => 'world'));

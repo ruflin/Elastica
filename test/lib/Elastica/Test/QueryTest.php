@@ -53,13 +53,12 @@ class QueryTest extends BaseTest
 
     public function testRawQuery()
     {
-        $textQuery = new Text();
-        $textQuery->setField('title', 'test');
+        $textQuery = new Term(array('title' => 'test'));
 
         $query1 = Query::create($textQuery);
 
         $query2 = new Query();
-        $query2->setRawQuery(array('query' => array('text' => array('title' => 'test'))));
+        $query2->setRawQuery(array('query' => array('term' => array('title' => 'test'))));
 
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }

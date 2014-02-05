@@ -39,7 +39,7 @@ class Index implements SearchableInterface
      * All the communication to and from an index goes of this object
      *
      * @param  \Elastica\Client $client Client object
-     * @param  string           $name   Index name
+     * @param  string $name Index name
      * @throws \Elastica\Exception\InvalidException
      */
     public function __construct(Client $client, $name)
@@ -55,7 +55,7 @@ class Index implements SearchableInterface
     /**
      * Returns a type object for the current index with the given name
      *
-     * @param  string        $type Type name
+     * @param  string $type Type name
      * @return \Elastica\Type Type object
      */
     public function getType($type)
@@ -93,8 +93,12 @@ class Index implements SearchableInterface
         $path = '_mapping';
 
         $response = $this->request($path, Request::GET);
+        $data = $response->getData();
+        if (isset($data[$this->getName()]['mappings'])) {
+            return $data[$this->getName()]['mappings'];
+        }
 
-        return $response->getData();
+        return array();
     }
 
     /**
@@ -195,7 +199,7 @@ class Index implements SearchableInterface
     /**
      * Creates a new index with the given arguments
      *
-     * @param array      $args    OPTIONAL Arguments to use
+     * @param array $args OPTIONAL Arguments to use
      * @param bool|array $options OPTIONAL
      *                            bool=> Deletes index first if already exists (default = false).
      *                            array => Associative array of options (option=>value)
@@ -252,12 +256,12 @@ class Index implements SearchableInterface
         $response = $this->getClient()->request($this->getName(), Request::HEAD);
         $info = $response->getTransferInfo();
 
-        return (bool) ($info['http_code'] == 200);
+        return (bool)($info['http_code'] == 200);
     }
 
     /**
-     * @param  string          $query
-     * @param  int|array       $options
+     * @param  string $query
+     * @param  int|array $options
      * @return \Elastica\Search
      */
     public function createSearch($query = '', $options = null)
@@ -272,8 +276,8 @@ class Index implements SearchableInterface
     /**
      * Searches in this index
      *
-     * @param  string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
-     * @param  int|array                   $options OPTIONAL Limit or associative array of options (option=>value)
+     * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
+     * @param  int|array $options OPTIONAL Limit or associative array of options (option=>value)
      * @return \Elastica\ResultSet          ResultSet with all results inside
      * @see \Elastica\SearchableInterface::search
      */
@@ -343,8 +347,8 @@ class Index implements SearchableInterface
     /**
      * Adds an alias to the current index
      *
-     * @param  string            $name    Alias name
-     * @param  bool              $replace OPTIONAL If set, an existing alias will be replaced
+     * @param  string $name Alias name
+     * @param  bool $replace OPTIONAL If set, an existing alias will be replaced
      * @return \Elastica\Response Response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
      */
@@ -352,11 +356,11 @@ class Index implements SearchableInterface
     {
         $path = '_aliases';
 
-        $data = array( 'actions' => array( ) );
+        $data = array('actions' => array());
 
         if ($replace) {
-            $status = new Status( $this->getClient() );
-            foreach ( $status->getIndicesWithAlias( $name ) as $index ) {
+            $status = new Status($this->getClient());
+            foreach ($status->getIndicesWithAlias($name) as $index) {
                 $data['actions'][] = array('remove' => array('index' => $index->getName(), 'alias' => $name));
             }
         }
@@ -369,7 +373,7 @@ class Index implements SearchableInterface
     /**
      * Removes an alias pointing to the current index
      *
-     * @param  string            $name Alias name
+     * @param  string $name Alias name
      * @return \Elastica\Response Response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases.html
      */
@@ -411,7 +415,7 @@ class Index implements SearchableInterface
      * Can be used to change settings during runtime. One example is to use
      * if for bulk updating {@link http://www.elasticsearch.org/blog/2011/03/23/update-settings.html}
      *
-     * @param  array             $data Data array
+     * @param  array $data Data array
      * @return \Elastica\Response Response object
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html
      */
@@ -423,10 +427,10 @@ class Index implements SearchableInterface
     /**
      * Makes calls to the elasticsearch server based on this index
      *
-     * @param  string            $path   Path to call
-     * @param  string            $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param  array             $data   OPTIONAL Arguments as array
-     * @param  array             $query  OPTIONAL Query params
+     * @param  string $path Path to call
+     * @param  string $method Rest method to use (GET, POST, DELETE, PUT)
+     * @param  array $data OPTIONAL Arguments as array
+     * @param  array $query OPTIONAL Query params
      * @return \Elastica\Response Response object
      */
     public function request($path, $method, $data = array(), array $query = array())
@@ -441,8 +445,8 @@ class Index implements SearchableInterface
      *
      * Detailed arguments can be found here in the link
      *
-     * @param  string $text  String to be analyzed
-     * @param  array  $args  OPTIONAL Additional arguments
+     * @param  string $text String to be analyzed
+     * @param  array $args OPTIONAL Additional arguments
      * @return array Server response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze.html
      */
