@@ -100,8 +100,8 @@ class StatusTest extends BaseTest
 
         $this->assertTrue(!empty($serverStatus) );
         $this->assertTrue('array' == gettype($serverStatus));
-        $this->assertArrayHasKey('ok', $serverStatus);
-        $this->assertTrue($serverStatus['ok']);
+        $this->assertArrayHasKey('status', $serverStatus);
+        $this->assertTrue($serverStatus['status'] == 200);
         $this->assertArrayHasKey('version', $serverStatus);
 
         $versionInfo = $serverStatus['version'];

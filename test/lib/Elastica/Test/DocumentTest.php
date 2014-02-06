@@ -13,8 +13,12 @@ class DocumentTest extends BaseTest
 {
     public function testAddFile()
     {
+        $fileName = '/dev/null';
+        if(!file_exists($fileName)){
+            $this->markTestSkipped("File {$fileName} does not exist.");
+        }
         $doc = new Document();
-        $returnValue = $doc->addFile('key', '/dev/null');
+        $returnValue = $doc->addFile('key', $fileName);
         $this->assertInstanceOf('Elastica\Document', $returnValue);
     }
 

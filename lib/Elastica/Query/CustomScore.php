@@ -19,7 +19,7 @@ class CustomScore extends AbstractQuery
      * Constructor
      *
      * @param string|array|\Elastica\Script        $script
-     * @param string|\Elastica\Query\AbstractQuery $query
+     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
      */
     public function __construct($script = null, $query= null)
     {
