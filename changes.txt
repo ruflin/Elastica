@@ -1,5 +1,9 @@
 CHANGES
-2014-02-04:
+
+2014-02-08
+- Setting shard timeout doesn't work #547
+
+2014-02-04
 - Remove Elastica\Query\Field and Elastica\Query\Text, which are not supported in ES 1.0.0.RC1
 - Minor tweaking of request and result handling classes to adjust for changes in ES 1.0.0.RC1
 - Update mapper-attachments plugin to version 2.0.0.RC1 in .travis.yml
