@@ -1,6 +1,7 @@
 CHANGES
 
 2014-02-12
+- Release v1.0.0.0
 - Updated to elasticsearch 1.0: http://www.elasticsearch.org/blog/1-0-0-released/
 
 2014-02-11
