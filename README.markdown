@@ -18,11 +18,11 @@ See [Coding guidelines](https://github.com/ruflin/Elastica/wiki/Coding-guideline
 
 Dependencies
 ------------
-|Project|Version|Required|
-|-------|-------|--------|
-|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v0.90.10)|0.90.10|yes|
-|[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v1.9.0)|1.9.0|no|
-|[Elasticsearch thrift transport plugin](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v1.7.0)|1.7.0|no|
+| Project | Version | Required |
+|---------|---------|----------|
+|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v1.0.0)|1.0.0|yes|
+|[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1)|2.0.0.RC1|no|
+|[Elasticsearch thrift transport plugin](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC1)|2.0.0.RC1|no|
 |[Elasticsearch geocluster facet plugin](https://github.com/zenobase/geocluster-facet/tree/0.0.9)|0.0.9|no|
 
 
