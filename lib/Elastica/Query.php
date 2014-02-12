@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica;
+use Elastica\Aggregation\AbstractAggregation;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotImplementedException;
 use Elastica\Facet\AbstractFacet;
@@ -314,6 +315,21 @@ class Query extends Param
     {
         $this->_params['facets'][$facet->getName()] = $facet->toArray();
 
+        return $this;
+    }
+
+    /**
+     * Adds an Aggregation to the query
+     *
+     * @param AbstractAggregation $agg
+     * @return \Elastica\Query Query object
+     */
+    public function addAggregation(AbstractAggregation $agg)
+    {
+        if (!array_key_exists('aggs', $this->_params)) {
+            $this->_params['aggs'] = array();
+        }
+        $this->_params['aggs'][$agg->getName()] = $agg->toArray();
         return $this;
     }
 

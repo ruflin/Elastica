@@ -139,6 +139,34 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
+     * Returns all aggregation results
+     *
+     * @return array
+     */
+    public function getAggregations()
+    {
+        $data = $this->_response->getData();
+
+        return isset($data['aggregations']) ? $data['aggregations'] : array();
+    }
+
+    /**
+     * Retrieve a specific aggregation from this result set
+     * @param string $name the name of the desired aggregation
+     * @return array
+     * @throws Exception\InvalidException if an aggregation by the given name cannot be found
+     */
+    public function getAggregation($name)
+    {
+        $data = $this->_response->getData();
+
+        if (isset($data['aggregations']) && isset($data['aggregations'][$name])) {
+            return $data['aggregations'][$name];
+        }
+        throw new InvalidException("This result set does not contain an aggregation named {$name}.");
+    }
+
+    /**
      * Returns all facets results
      *
      * @return array Facet results
