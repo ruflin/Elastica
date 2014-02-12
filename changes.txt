@@ -1,5 +1,8 @@
 CHANGES
 
+2014-02-12
+- Updated to elasticsearch 1.0: http://www.elasticsearch.org/blog/1-0-0-released/
+
 2014-02-11
 - Add aggregations
 
