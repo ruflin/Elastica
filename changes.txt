@@ -1,7 +1,7 @@
 CHANGES
 2014-02-14
 - Add methods setSize, setShradSize to Elastica/Aggregation/Terms
-- Elastica/Aggregation/GlobalAggregationTest fixed but where JSON returned [] instead of {}
+- Elastica/Aggregation/GlobalAggregationTest fixed bug where JSON returned [] instead of {}
 - Elastica/ResultSet added method hasAggregations
 
 2014-02-13
