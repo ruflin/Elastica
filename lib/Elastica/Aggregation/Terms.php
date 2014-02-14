@@ -65,6 +65,26 @@ class Terms extends AbstractSimpleAggregation
     }
 
     /**
+     * Sets the amount of terms to be returned.
+     * @param  int $size The amount of terms to be returned.
+     * @return \Elastica\Aggregation\Terms
+     */
+    public function setSize($size)
+    {
+        return $this->setParam('size', $size);
+    }
+
+    /**
+     * Sets how many terms the coordinating node will request from each shard.
+     * @param int $shard_size The amount of terms to be returned.
+     * @return \Elastica\Aggregation\Terms
+     */
+    public function setShardSize($shard_size)
+    {
+        return $this->setParam('shard_size', $shard_size);
+    }
+
+    /**
      * Instruct Elasticsearch to use direct field data or ordinals of the field values to execute this aggregation.
      * The execution hint will be ignored if it is not applicable.
      * @param string $hint map or ordinals
