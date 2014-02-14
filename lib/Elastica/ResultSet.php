@@ -139,6 +139,18 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
+     * Returns whether aggregations exist
+     *
+     * @return boolean Aggregation existence
+     */
+    public function hasAggregations()
+    {
+        $data = $this->_response->getData();
+
+        return isset($data['aggregations']);
+    }
+
+    /**
      * Returns all aggregation results
      *
      * @return array
