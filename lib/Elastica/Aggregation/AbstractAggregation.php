@@ -73,7 +73,10 @@ abstract class AbstractAggregation extends Param
         $array = parent::toArray();
         if (array_key_exists('global_aggregation', $array)) {
             // compensate for class name GlobalAggregation
-            $array = array('global' => $array['global_aggregation']);
+            if(empty($array['global_aggregation']))
+                $array = array('global' => new \stdClass());
+            else
+                $array = array('global' => $array['global_aggregation']);
         }
         if (sizeof($this->_aggs)) {
             $array['aggs'] = $this->_aggs;
