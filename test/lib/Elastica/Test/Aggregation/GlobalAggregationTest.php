@@ -11,7 +11,7 @@ class GlobalAggregationTest extends BaseAggregationTest
     public function testToArray()
     {
         $expected = array(
-            "global" => array(),
+            "global" => new \stdClass(),
             "aggs" => array(
                 "avg_price" => array("avg" => array("field" => "price"))
             )
