@@ -1,6 +1,7 @@
 CHANGES
 2014-02-17
 - Throw PartialShardFailureException if response has failed shards
+- Issue #555: Elastica/Aggregations/GlobalAggragation not allowed as sub aggragation
 
 2014-02-14
 - Add methods setSize, setShardSize to Elastica/Aggregation/Terms
