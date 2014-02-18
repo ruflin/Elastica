@@ -1,4 +1,7 @@
 CHANGES
+2014-02-17
+- Throw PartialShardFailureException if response has failed shards
+
 2014-02-14
 - Add methods setSize, setShardSize to Elastica/Aggregation/Terms
 - Elastica/Aggregation/GlobalAggregationTest fixed bug where JSON returned [] instead of {}

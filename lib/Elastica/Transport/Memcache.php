@@ -3,6 +3,7 @@
 namespace Elastica\Transport;
 
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
 use Elastica\Request;
 use Elastica\Response;
@@ -70,6 +71,10 @@ class Memcache extends AbstractTransport
 
         if ($response->hasError()) {
             throw new ResponseException($request, $response);
+        }
+
+        if ($response->hasFailedShards()) {
+            throw new PartialShardFailureException($request, $response);
         }
 
         return $response;

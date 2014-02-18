@@ -3,6 +3,7 @@
 namespace Elastica\Transport;
 
 use Elastica\Exception\Connection\HttpException;
+use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
 use Elastica\Request;
 use Elastica\Response;
@@ -140,6 +141,10 @@ class Http extends AbstractTransport
 
         if ($response->hasError()) {
             throw new ResponseException($request, $response);
+        }
+
+        if ($response->hasFailedShards()) {
+            throw new PartialShardFailureException($request, $response);
         }
 
         if ($errorNumber > 0) {

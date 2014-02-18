@@ -107,6 +107,22 @@ class Response
     }
 
     /**
+     * True if response has failed shards
+     *
+     * @return bool True if response has failed shards
+     */
+    public function hasFailedShards()
+    {
+        try {
+            $shardsStatistics = $this->getShardsStatistics();
+        } catch (NotFoundException $e) {
+            return false;
+        }
+
+        return array_key_exists('failures', $shardsStatistics);
+    }
+
+    /**
      * Checks if the query returned ok
      *
      * @return bool True if ok
