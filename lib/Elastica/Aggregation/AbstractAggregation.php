@@ -62,8 +62,9 @@ abstract class AbstractAggregation extends Param
      */
     public function addAggregation(AbstractAggregation $aggregation)
     {
-        if(is_a($aggregation, 'Elastica\Aggregation\GlobalAggregation'))
+        if(is_a($aggregation, 'Elastica\Aggregation\GlobalAggregation')) {
             throw new InvalidException('Global aggregators can only be placed as top level aggregators');
+        }
 
         $this->_aggs[$aggregation->getName()] = $aggregation->toArray();
         return $this;
