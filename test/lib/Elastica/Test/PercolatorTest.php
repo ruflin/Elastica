@@ -108,4 +108,51 @@ class PercolatorTest extends BaseTest
 
         $index->delete();
     }
+
+    /**
+     * Test case for using filtered percolator queries based on the Elasticsearch documentation examples.
+     */
+    public function testRegisterAndUnregisterPercolator()
+    {
+        // step one: register create index and setup the percolator query from the ES documentation.
+        $index = $this->_createIndex();
+        $percolator = new Percolator($index);
+        $baseQuery = new Term(array('field1' => 'value1'));
+        $fields = array('color' => 'blue');
+
+        $response = $percolator->registerQuery('kuku', $baseQuery, $fields);
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        // refreshing is required in order to ensure the query is really ready for execution.
+        $index->refresh();
+
+        // step two: match a document which should match the kuku query when filtered on the blue color
+        $doc = new Document();
+        $doc->set('field1', 'value1');
+
+        $matches = $percolator->matchDoc($doc, new Term(array('color' => 'blue')));
+        $this->assertCount(1, $matches, 'No or too much registered query matched.');
+        $this->assertEquals('kuku', $matches[0]['_id'], 'A wrong registered query has matched.');
+
+        // step three: validate that using a different color, no registered query matches.
+        $matches = $percolator->matchDoc($doc, new Term(array('color' => 'green')));
+        $this->assertCount(0, $matches, 'A registered query matched, although nothing should match at all.');
+
+
+        // unregister percolator query
+        $response = $percolator->unregisterQuery('kuku');
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        // refreshing is required in order to ensure the query is really ready for execution.
+        $index->refresh();
+
+        $matches = $percolator->matchDoc($doc, new Term(array('color' => 'blue')));
+        $this->assertCount(0, $matches, 'Percolator query did not get deleted.');
+
+        $index->delete();
+    }
 }

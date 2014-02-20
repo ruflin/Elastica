@@ -1,4 +1,7 @@
 CHANGES
+2014-02-20
+- Issue #558: fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route. 
+
 2014-02-17
 - Throw PartialShardFailureException if response has failed shards
 - Issue #555: Elastica/Aggregations/GlobalAggragation not allowed as sub aggragation
