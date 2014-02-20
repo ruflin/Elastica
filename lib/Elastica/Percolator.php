@@ -40,7 +40,7 @@ class Percolator
      */
     public function registerQuery($name, $query, $fields = array())
     {
-        $path = $this->_index->getName() . '/.percolator/' . '/' . $name;
+        $path = $this->_index->getName() . '/.percolator/' . $name;
         $query = Query::create($query);
 
         $data = array_merge($query->toArray(), $fields);
@@ -55,7 +55,7 @@ class Percolator
      */
     public function unregisterQuery($name)
     {
-        $path = '_percolator/' . $this->_index->getName() . '/' . $name;
+        $path = $this->_index->getName() . '/.percolator/'  . $name;
 
         return $this->_index->getClient()->request($path, Request::DELETE);
     }
