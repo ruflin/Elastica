@@ -186,7 +186,11 @@ class Action
             if (is_string($source)) {
                 $string.= $source;
             } else {
-                $string.= json_encode($source);
+                if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+                    $string.= json_encode($source, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+                } else {
+                    $string.= json_encode($source);
+                }
             }
             $string.= Bulk::DELIMITER;
         }
