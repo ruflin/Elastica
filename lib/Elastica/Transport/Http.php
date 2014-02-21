@@ -103,7 +103,6 @@ class Http extends AbstractTransport
                 } else {
                      $content = json_encode($data);
                 }
-                $content = json_encode($data);
             } else {
                 $content = $data;
             }
