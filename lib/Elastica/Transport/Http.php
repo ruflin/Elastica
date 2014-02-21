@@ -99,7 +99,7 @@ class Http extends AbstractTransport
 
             if (is_array($data)) {
                 if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
-                     $content = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+                     $content = json_encode($data, JSON_UNESCAPED_UNICODE);
                 } else {
                      $content = json_encode($data);
                 }

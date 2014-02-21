@@ -187,7 +187,7 @@ class Action
                 $string.= $source;
             } else {
                 if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
-                    $string.= json_encode($source, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+                    $string.= json_encode($source, JSON_UNESCAPED_UNICODE);
                 } else {
                     $string.= json_encode($source);
                 }

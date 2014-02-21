@@ -1,6 +1,6 @@
 CHANGES
 2014-02-21
-- Issue #559: add JSON_UNESCAPED_UNICODE and JSON_PRETTY_PRINT options in Elastica/Transport/Http
+- Issue #559: add JSON_UNESCAPED_UNICODE option in Elastica/Transport/Http, Elastica/Bulk/Action
 
 2014-02-20
 - Issue #558: fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route. 
