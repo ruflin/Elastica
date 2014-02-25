@@ -2,6 +2,11 @@
 
 namespace Elastica\Bulk;
 
+if (!defined('JSON_UNESCAPED_UNICODE')) {
+    define('JSON_UNESCAPED_SLASHES', 64);
+    define('JSON_UNESCAPED_UNICODE', 256);
+}
+
 use Elastica\Bulk;
 use Elastica\Index;
 use Elastica\Type;
@@ -186,11 +191,7 @@ class Action
             if (is_string($source)) {
                 $string.= $source;
             } else {
-                if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
-                    $string.= json_encode($source, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-                } else {
-                    $string.= json_encode($source);
-                }
+                $string.= json_encode($source, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             }
             $string.= Bulk::DELIMITER;
         }
