@@ -101,6 +101,35 @@ class HttpTest extends BaseTest
         $this->assertEquals($id, $doc->getId());
     }
 
+    public function testUnicodeData()
+    {
+        $client = new \Elastica\Client();
+        $index = $client->getIndex('curl_test');
+        $type = $index->getType('item');
+
+        // Force HEAD request to set CURLOPT_NOBODY = true
+        $index->exists();
+
+        $id = 22;
+        $data = array('id' => $id, 'name' => '
+            Сегодня, я вижу, особенно грустен твой взгляд, /
+            И руки особенно тонки, колени обняв. /
+            Послушай: далеко, далеко, на озере Чад /
+            Изысканный бродит жираф.');
+
+        $doc = new \Elastica\Document($id, $data);
+
+        $type->addDocument($doc);
+
+        $index->refresh();
+
+        $doc = $type->getDocument($id);
+
+        // Document should be retrieved correctly
+        $this->assertSame($data, $doc->getData());
+        $this->assertEquals($id, $doc->getId());
+    }
+
     public function testWithEnvironmentalProxy()
     {
         putenv('http_proxy=http://127.0.0.1:12345/');
