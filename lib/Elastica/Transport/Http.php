@@ -2,6 +2,11 @@
 
 namespace Elastica\Transport;
 
+if (!defined('JSON_UNESCAPED_UNICODE')) {
+    define('JSON_UNESCAPED_SLASHES', 64);
+    define('JSON_UNESCAPED_UNICODE', 256);
+}
+
 use Elastica\Exception\Connection\HttpException;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
@@ -98,7 +103,7 @@ class Http extends AbstractTransport
             }
 
             if (is_array($data)) {
-                $content = json_encode($data);
+                $content = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             } else {
                 $content = $data;
             }

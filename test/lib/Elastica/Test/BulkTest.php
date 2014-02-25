@@ -132,6 +132,34 @@ class BulkTest extends BaseTest
         }
     }
 
+    public function testUnicodeBulkSend()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('bulk_test');
+        $type2 = $index->getType('bulk_test2');
+        $client = $index->getClient();
+
+        $newDocument1 = $type->createDocument(1, array('name' => 'Сегодня, я вижу, особенно грустен твой взгляд,'));
+        $newDocument2 = new Document(2, array('name' => 'И руки особенно тонки, колени обняв.'));
+        $newDocument3 = $type->createDocument(3, array('name' => 'Послушай: далеко, далеко, на озере Чад / Изысканный бродит жираф.'));
+
+        $documents = array(
+            $newDocument1,
+            $newDocument2,
+            $newDocument3
+        );
+
+        $bulk = new Bulk($client);
+        $bulk->setType($type2);
+        $bulk->addDocuments($documents);
+
+        $actions = $bulk->getActions();
+
+        $this->assertSame($newDocument1, $actions[0]->getDocument());
+        $this->assertSame($newDocument2, $actions[1]->getDocument());
+        $this->assertSame($newDocument3, $actions[2]->getDocument());
+    }
+
     public function testSetIndexType()
     {
         $client = new Client();
