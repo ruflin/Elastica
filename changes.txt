@@ -1,4 +1,8 @@
 CHANGES
+
+2014-02-27
+- Update to elasticsearch 1.0.1. Update Thrift and Geocluster plugin.
+
 2014-02-25
 - Issue #559: add JSON_UNESCAPED_UNICODE and JSON_UNESCAPED_SLASHES options in Elastica/Transport/Http, Elastica/Bulk/Action
 
