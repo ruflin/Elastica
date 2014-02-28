@@ -1,5 +1,8 @@
 CHANGES
 
+2014-03-02
+- Issue #554: Fixed Type->deleteByQuery() not working with Query objects
+
 2014-02-27
 - Update to elasticsearch 1.0.1. Update Thrift and Geocluster plugin.
 
@@ -7,7 +10,7 @@ CHANGES
 - Issue #559: add JSON_UNESCAPED_UNICODE and JSON_UNESCAPED_SLASHES options in Elastica/Transport/Http, Elastica/Bulk/Action
 
 2014-02-20
-- Issue #558: fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route. 
+- Issue #558: fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route.
 
 2014-02-17
 - Throw PartialShardFailureException if response has failed shards
