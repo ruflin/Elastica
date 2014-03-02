@@ -1,6 +1,7 @@
 CHANGES
 
 2014-03-02
+- Release v1.0.1.0
 - Issue #554: Fixed Type->deleteByQuery() not working with Query objects
 
 2014-02-27
