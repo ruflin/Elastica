@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica;
+use Elastica\Exception\ResponseException;
 use Elastica\Index\Status as IndexStatus;
 
 /**
@@ -105,11 +106,7 @@ class Status
      */
     public function aliasExists($name)
     {
-        foreach ($this->getIndexStatuses() as $status) {
-            if ($status->hasAlias($name)) {
-                return true;
-            }
-        }
+        return count($this->getIndicesWithAlias($name)) > 0;
 
         return false;
     }
@@ -117,18 +114,27 @@ class Status
     /**
      * Returns an array with all indices that the given alias name points to
      *
-     * @param  string                 $name Alias name
+     * @param  string                 $alias Alias name
      * @return array|\Elastica\Index[] List of Elastica\Index
      */
-    public function getIndicesWithAlias($name)
+    public function getIndicesWithAlias($alias)
     {
-        $indices = array();
-        foreach ($this->getIndexStatuses() as $status) {
-            if ($status->hasAlias($name)) {
-                $indices[] = $status->getIndex();
+        $response = null;
+        try {
+            $response = $this->_client->request('/_alias/' . $alias);
+        } catch (ResponseException $e) {
+            $transferInfo = $e->getResponse()->getTransferInfo();
+            // 404 means the index alias doesn't exist which means no indexes have it.
+            if ($transferInfo['http_code'] === 404) {
+                return array();
             }
+            // If we don't have a 404 then this is still unexpected so rethrow the exception.
+            throw $e;
         }
-
+        $indices = array();
+        foreach ($response->getData() as $name => $unused) {
+            $indices[] = new Index($this->_client, $name);
+        }
         return $indices;
     }
 

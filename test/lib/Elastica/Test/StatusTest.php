@@ -90,6 +90,12 @@ class StatusTest extends BaseTest
         $index1->addAlias($aliasName);
         $status->refresh();
         $this->assertTrue($status->aliasExists($aliasName));
+
+        $indicesWithAlias = $status->getIndicesWithAlias($aliasName);
+        $this->assertEquals(array("elastica_$indexName"), array_map(
+            function($index) {
+                return $index->getName();
+            }, $indicesWithAlias));
     }
 
     public function testServerStatus()
