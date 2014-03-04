@@ -1,4 +1,6 @@
 CHANGES
+2014-03-04
+- Issue #563: Improve performance of Elastica/Status->getIndicesWithAlias and aliasExists on clusters with many indices
 
 2014-03-02
 - Release v1.0.1.0
