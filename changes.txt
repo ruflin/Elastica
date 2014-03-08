@@ -1,4 +1,6 @@
 CHANGES
+2014-03-07
+- Add snapshot / restore functionality (Elastica\Snapshot) #566
 
 2014-03-04
 - Add PHP 5.6 to travis test environment
