@@ -20,7 +20,7 @@ class Snapshot
     /**
      * @param Client $client
      */
-    function __construct(Client $client)
+    public function __construct(Client $client)
     {
         $this->_client = $client;
     }
@@ -52,14 +52,14 @@ class Snapshot
     {
         try {
             $response = $this->request($name);
-            $data = $response->getData();
-            return $data[$name];
         } catch (ResponseException $e) {
             if ($e->getResponse()->getStatus() == 404) {
-                throw new NotFoundException("Repository '{$name}' does not exist.");
+                throw new NotFoundException("Repository '" . $name . "' does not exist.");
             }
             throw $e;
         }
+        $data = $response->getData();
+        return $data[$name];
     }
 
     /**
@@ -81,7 +81,7 @@ class Snapshot
      */
     public function createSnapshot($repository, $name, $options = array(), $waitForCompletion = false)
     {
-        return $this->request("{$repository}/{$name}", Request::PUT, $options, array('wait_for_completion' => $waitForCompletion));
+        return $this->request($repository . '/' . $name, Request::PUT, $options, array('wait_for_completion' => $waitForCompletion));
     }
 
     /**
@@ -95,15 +95,15 @@ class Snapshot
     public function getSnapshot($repository, $name)
     {
         try {
-            $response = $this->request("{$repository}/{$name}");
-            $data = $response->getData();
-            return $data['snapshots'][0];
+            $response = $this->request($repository . "/" . $name);
         } catch (ResponseException $e) {
             if ($e->getResponse()->getStatus() == 404) {
-                throw new NotFoundException("Snapshot '{$name}' does not exist in repository '{$repository}'.");
+                throw new NotFoundException("Snapshot '" . $name . "' does not exist in repository '" . $repository . "'.");
             }
             throw $e;
         }
+        $data = $response->getData();
+        return $data['snapshots'][0];
     }
 
     /**
@@ -113,7 +113,7 @@ class Snapshot
      */
     public function getAllSnapshots($repository)
     {
-        return $this->request("{$repository}/_all")->getData();
+        return $this->request($repository . "/_all")->getData();
     }
 
     /**
@@ -124,7 +124,7 @@ class Snapshot
      */
     public function deleteSnapshot($repository, $name)
     {
-        return $this->request("{$repository}/{$name}", Request::DELETE);
+        return $this->request($repository . "/" . $name, Request::DELETE);
     }
 
     /**
@@ -132,11 +132,12 @@ class Snapshot
      * @param string $repository the name of the repository
      * @param string $name the name of the snapshot
      * @param array $options options for the restore operation
+     * @param bool $waitForCompletion if true, the request will not return until the restore operation is complete
      * @return Response
      */
-    public function restoreSnapshot($repository, $name, $options = array())
+    public function restoreSnapshot($repository, $name, $options = array(), $waitForCompletion = false)
     {
-        return $this->request("{$repository}/{$name}/_restore", Request::POST, $options);
+        return $this->request($repository . "/" . $name . "/_restore", Request::POST, $options, array("wait_for_completion" => $waitForCompletion));
     }
 
     /**
@@ -149,6 +150,6 @@ class Snapshot
      */
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
     {
-        return $this->_client->request("/_snapshot/{$path}", $method, $data, $query);
+        return $this->_client->request("/_snapshot/" . $path, $method, $data, $query);
     }
 } 

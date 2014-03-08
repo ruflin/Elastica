@@ -90,10 +90,11 @@ class SnapshotTest extends Base
         $this->_index->delete();
 
         // restore the index from our snapshot
-        $response = $this->_snapshot->restoreSnapshot($repositoryName, $snapshotName);
+        $response = $this->_snapshot->restoreSnapshot($repositoryName, $snapshotName, array(), true);
         $this->assertTrue($response->isOk());
 
-        sleep(1); // wait for ES to restore the index
+        $this->_index->refresh();
+        $this->_index->optimize();
 
         // ensure that the index has been restored
         $count = $this->_index->getType("test")->count();
