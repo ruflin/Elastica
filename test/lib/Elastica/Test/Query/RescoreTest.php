@@ -12,12 +12,12 @@ class RescoreTest extends BaseTest
     public function testToArray()
     {
         $query = new Rescore();
-        $main_query = new Match();
-        $main_query = $main_query->setFieldQuery('test1', 'foo');
-        $rescore_query = new Term();
-        $rescore_query = $rescore_query->setTerm('test2', 'bar', 2);
-        $query->setQuery($main_query);
-        $query->setRescoreQuery($rescore_query);
+        $mainQuery = new Match();
+        $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
+        $rescoreQuery = new Term();
+        $rescoreQuery = $rescoreQuery->setTerm('test2', 'bar', 2);
+        $query->setQuery($mainQuery);
+        $query->setRescoreQuery($rescoreQuery);
 
         $data = $query->toArray();
         $expected = array(
@@ -48,12 +48,12 @@ class RescoreTest extends BaseTest
     public function testSetSize()
     {
         $query = new Rescore();
-        $main_query = new Match();
-        $main_query = $main_query->setFieldQuery('test1', 'foo');
-        $rescore_query = new Term();
-        $rescore_query = $rescore_query->setTerm('test2', 'bar', 2);
-        $query->setQuery($main_query);
-        $query->setRescoreQuery($rescore_query);
+        $mainQuery = new Match();
+        $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
+        $rescoreQuery = new Term();
+        $rescoreQuery = $rescoreQuery->setTerm('test2', 'bar', 2);
+        $query->setQuery($mainQuery);
+        $query->setRescoreQuery($rescoreQuery);
         $query->setWindowSize(50);
 
         $data = $query->toArray();
@@ -86,12 +86,12 @@ class RescoreTest extends BaseTest
     public function testSetWeights()
     {
         $query = new Rescore();
-        $main_query = new Match();
-        $main_query = $main_query->setFieldQuery('test1', 'foo');
-        $rescore_query = new Term();
-        $rescore_query = $rescore_query->setTerm('test2', 'bar', 2);
-        $query->setQuery($main_query);
-        $query->setRescoreQuery($rescore_query);
+        $mainQuery = new Match();
+        $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
+        $rescoreQuery = new Term();
+        $rescoreQuery = $rescoreQuery->setTerm('test2', 'bar', 2);
+        $query->setQuery($mainQuery);
+        $query->setRescoreQuery($rescoreQuery);
         $query->setWindowSize(50);
         $query->setQueryWeight(.7);
         $query->setRescoreQueryWeight(1.2);
