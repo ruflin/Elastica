@@ -1,6 +1,7 @@
 CHANGES
 
 2014-03-08
+- Release v1.0.1.1
 - Enable goecluster-facet again as now compatible with elasticsearch 1.0 on travis
 - Run elasticsearch in the background to not have log output in travis build
 - Set memache php version as environment variable
