@@ -1,9 +1,10 @@
 CHANGES
 
 2014-03-08
-- Enable goecluster-facet again as now compatible with elasticsearch 1.0
+- Enable goecluster-facet again as now compatible with elasticsearch 1.0 on travis
 - Run elasticsearch in the background to not have log output in travis build
 - Set memache php version as environment variable
+- Update to memcache 3.0.8 for travis
 
 2014-03-07
 - Issue #566: Add snapshot / restore functionality (Elastica\Snapshot) 
