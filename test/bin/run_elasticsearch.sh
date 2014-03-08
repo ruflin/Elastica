@@ -39,7 +39,7 @@ do
 
     echo "Starting server on http port: $http_port"
 
-    elasticsearch-${ES_VER}/bin/elasticsearch -Des.config=$config_yml &
+    elasticsearch-${ES_VER}/bin/elasticsearch -d -Des.config=$config_yml &
 
     while ! check_port_http_code $http_port 200; do
         echo -n "."
