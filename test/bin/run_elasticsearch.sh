@@ -10,8 +10,7 @@ tar -xzf elasticsearch-${ES_VER}.tar.gz
 
 elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/${ES_MAPPER_ATTACHMENTS_VER}
 elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/${ES_TRANSPORT_THRIFT_VER}
-# geocluster-facet has not been updated for ES 1.0.0.RC1
-#elasticsearch-${ES_VER}/bin/plugin -install geocluster-facet --url https://github.com/zenobase/geocluster-facet/releases/download/${ES_GEOCLUSTER_FACET_VER}/geocluster-facet-${ES_GEOCLUSTER_FACET_VER}.jar
+elasticsearch-${ES_VER}/bin/plugin -install geocluster-facet --url https://github.com/zenobase/geocluster-facet/releases/download/${ES_GEOCLUSTER_FACET_VER}/geocluster-facet-${ES_GEOCLUSTER_FACET_VER}.jar
 
 export JAVA_OPTS="-server"
 
