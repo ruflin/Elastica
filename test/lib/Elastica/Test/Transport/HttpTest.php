@@ -4,6 +4,8 @@ namespace Elastica\Test\Transport;
 
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Query;
+use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Exception\ResponseException;
 
@@ -178,6 +180,35 @@ class HttpTest extends BaseTest
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
+    }
+
+    public function testBodyReuse()
+    {
+        $client = new Client();
+
+        $index = $client->getIndex('elastica_body_reuse_test');
+
+        $index->create(array(), true);
+
+        $type = $index->getType('test');
+        $type->addDocument(new Document(1, array('test' => 'test')));
+
+        $index->refresh();
+
+        $resultSet = $index->search(array(
+            'query' => array(
+                'query_string' => array(
+                    'query' => 'pew pew pew',
+                ),
+            ),
+        ));
+
+        $this->assertEquals(0, $resultSet->getTotalHits());
+
+        $response = $index->request('/_search', 'POST');
+        $resultSet = new ResultSet($response, Query::create(array()));
+
+        $this->assertEquals(1, $resultSet->getTotalHits());
     }
 
 }
