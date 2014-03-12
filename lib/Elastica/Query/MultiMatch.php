@@ -9,10 +9,19 @@ namespace Elastica\Query;
  * @package Elastica
  * @author Rodolfo Adhenawer Campagnoli Moraes <adhenawer@gmail.com>
  * @author Wong Wing Lun <luiges90@gmail.com>
+ * @author Tristan Maindron <tmaindron@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/multi-match-query.html
  */
 class MultiMatch extends AbstractQuery
 {
+    const TYPE_BEST_FIELDS   = 'best_fields';
+    const TYPE_MOST_FIELDS   = 'most_fields';
+    const TYPE_CROSS_FIELDS  = 'cross_fields';
+    const TYPE_PHRASE        = 'phrase';
+    const TYPE_PHRASE_PREFIX = 'phrase_prefix';
+
+    const OPERATOR_OR        = 'or';
+    const OPERATOR_AND       = 'and';
 
     /**
      * Sets the query
@@ -61,7 +70,7 @@ class MultiMatch extends AbstractQuery
     {
         return $this->setParam('tie_breaker', $tieBreaker);
     }
-    
+
     /**
      * Sets operator for Match Query
      *
@@ -74,7 +83,7 @@ class MultiMatch extends AbstractQuery
     {
         return $this->setParam('operator', $operator);
     }
-    
+
     /**
      * Set field minimum should match for Match Query
      *
@@ -85,12 +94,12 @@ class MultiMatch extends AbstractQuery
     {
         return $this->setParam('minimum_should_match', (int) $minimumShouldMatch);
     }
-    
+
     /**
      * Set zero terms query for Match Query
      *
      * If not set, default to 'none'
-     * 
+     *
      * @param  string                       $zeroTermQuery
      * @return \Elastica\Query\Match
      */
@@ -98,10 +107,10 @@ class MultiMatch extends AbstractQuery
     {
         return $this->setParam('zero_terms_query', $zeroTermQuery);
     }
-    
+
     /**
      * Set cutoff frequency for Match Query
-     * 
+     *
      * @param  float                       $cutoffFrequency
      * @return \Elastica\Query\Match
      */
@@ -109,7 +118,7 @@ class MultiMatch extends AbstractQuery
     {
         return $this->setParam('cutoff_frequency', $cutoffFrequency);
     }
-    
+
     /**
      * Set type
      *
@@ -121,7 +130,7 @@ class MultiMatch extends AbstractQuery
     {
         return $this->setParam('type', $type);
     }
-    
+
     /**
      * Set fuzziness
      *
@@ -154,7 +163,7 @@ class MultiMatch extends AbstractQuery
     {
         return $this->setParam('max_expansions', (int) $maxExpansions);
     }
-    
+
     /**
      * Set analyzer
      *
