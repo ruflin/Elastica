@@ -1,7 +1,7 @@
 CHANGES
 
 2014-03-11
-- Fixed request body reuse in http transport
+- Fixed request body reuse in http transport #567
 
 2014-03-08
 - Release v1.0.1.1
@@ -11,28 +11,28 @@ CHANGES
 - Update to memcache 3.0.8 for travis
 
 2014-03-07
-- Issue #566: Add snapshot / restore functionality (Elastica\Snapshot) 
+- Add snapshot / restore functionality (Elastica\Snapshot) #566
 
 2014-03-04
 - Add PHP 5.6 to travis test environment
-- Issue #563: Improve performance of Elastica/Status->getIndicesWithAlias and aliasExists on clusters with many indices
+- Improve performance of Elastica/Status->getIndicesWithAlias and aliasExists on clusters with many indices #563
 
 2014-03-02
 - Release v1.0.1.0
-- Issue #554: Fixed Type->deleteByQuery() not working with Query objects
+- Fixed Type->deleteByQuery() not working with Query objects #554
 
 2014-02-27
 - Update to elasticsearch 1.0.1. Update Thrift and Geocluster plugin.
 
 2014-02-25
-- Issue #559: add JSON_UNESCAPED_UNICODE and JSON_UNESCAPED_SLASHES options in Elastica/Transport/Http, Elastica/Bulk/Action
+- Add JSON_UNESCAPED_UNICODE and JSON_UNESCAPED_SLASHES options in Elastica/Transport/Http, Elastica/Bulk/Action #559
 
 2014-02-20
-- Issue #558: fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route.
+- Fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route. #558
 
 2014-02-17
 - Throw PartialShardFailureException if response has failed shards
-- Issue #555: Elastica/Aggregations/GlobalAggragation not allowed as sub aggragation
+- Elastica/Aggregations/GlobalAggragation not allowed as sub aggragation #555
 
 2014-02-14
 - Add methods setSize, setShardSize to Elastica/Aggregation/Terms
