@@ -1,5 +1,8 @@
 CHANGES
 
+2014-03-11
+- Fixed request body reuse in http transport
+
 2014-03-08
 - Release v1.0.1.1
 - Enable goecluster-facet again as now compatible with elasticsearch 1.0 on travis
