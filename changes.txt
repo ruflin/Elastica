@@ -1,5 +1,8 @@
 CHANGES
 
+2014-03-17
+- Added filters: AbstractGeoShape, GeoShapePreIndexed, GeoShapeProvided #568
+
 2014-03-15
 - Percolate existing documents and add percolate options (#570)
 

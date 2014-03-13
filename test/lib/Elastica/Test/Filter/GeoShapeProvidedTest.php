@@ -3,16 +3,44 @@
 
 namespace Elastica\Test\Filter;
 
+use Elastica\Filter\AbstractGeoShape;
 use Elastica\Filter\GeoShapeProvided;
+use Elastica\Query\Filtered;
+use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
-class GeoShapePreIndexedTest extends BaseTest
+class GeoShapeProvidedTest extends BaseTest
 {
     public function testConstructEnvelope()
     {
+        $index = $this->_createIndex('geo_shape_filter_test');
+        $type = $index->getType('test');
+
+        // create mapping
+        $mapping = new \Elastica\Type\Mapping($type, array(
+            'location' => array(
+                'type' => 'geo_shape'
+            )
+        ));
+        $type->setMapping($mapping);
+
+        // add docs
+        $type->addDocument(new \Elastica\Document(1, array(
+            'location' => array(
+                "type"          => "envelope",
+                "coordinates"   => array(
+                    array(-50.0, 50.0),
+                    array(50.0, -50.0)
+                )
+            )
+        )));
+
+        $index->optimize();
+        $index->refresh();
+
         $envelope = array(
-            array(13.0, 53.0),
-            array(14.0, 52.0)
+            array(25.0, 75.0),
+            array(75.0, 25.0)
         );
         $gsp = new GeoShapeProvided('location', $envelope);
 
@@ -23,12 +51,19 @@ class GeoShapePreIndexedTest extends BaseTest
                         'type' => GeoShapeProvided::TYPE_ENVELOPE,
                         'coordinates' => $envelope
                     ),
-                    'relation' => $gsp->getRelation()
+                    'relation' => AbstractGeoShape::RELATION_INTERSECT
                 ),
             )
         );
 
         $this->assertEquals($expected, $gsp->toArray());
+
+        $query = new Filtered(new MatchAll(), $gsp);
+        $results = $type->search($query);
+
+        $this->assertEquals(1, $results->count());
+
+        $index->delete();
     }
 
     public function testConstructPolygon()
