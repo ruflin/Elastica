@@ -23,6 +23,9 @@ class MultiMatch extends AbstractQuery
     const OPERATOR_OR        = 'or';
     const OPERATOR_AND       = 'and';
 
+    const ZERO_TERM_NONE     = 'none';
+    const ZERO_TERM_ALL      = 'all';
+
     /**
      * Sets the query
      *

@@ -105,13 +105,13 @@ class MultiMatchTest extends BaseTest
     {
         $this->multiMatch->setQuery('not'); // This is a stopword.
         $this->multiMatch->setFields(array('full_name', 'last_name'));
-        $this->multiMatch->setZeroTermsQuery('none');
+        $this->multiMatch->setZeroTermsQuery(MultiMatch::ZERO_TERM_NONE);
         $this->multiMatch->setAnalyzer('stops');
         $resultSet = $this->getResults();
 
         $this->assertEquals(0, $resultSet->count());
 
-        $this->multiMatch->setZeroTermsQuery('all');
+        $this->multiMatch->setZeroTermsQuery(MultiMatch::ZERO_TERM_ALL);
         $resultSet = $this->getResults();
 
         $this->assertEquals(4, $resultSet->count());
