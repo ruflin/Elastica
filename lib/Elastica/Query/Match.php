@@ -8,6 +8,7 @@ namespace Elastica\Query;
  * @category Xodoa
  * @package Elastica
  * @author F21
+ * @author WONG Wing Lun <luiges90@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/query-dsl/match-query.html
  */
 class Match extends AbstractQuery
@@ -164,5 +165,31 @@ class Match extends AbstractQuery
     public function setFieldMaxExpansions($field, $maxExpansions)
     {
         return $this->setFieldParam($field, 'max_expansions', (int) $maxExpansions);
+    }
+    
+    /**
+     * Set zero terms query
+     *
+     * If not set, default to 'none'
+     * 
+     * @param  string                       $field
+     * @param  string                       $zeroTermQuery
+     * @return \Elastica\Query\Match
+     */
+    public function setFieldZeroTermsQuery($field, $zeroTermQuery = 'none')
+    {
+        return $this->setFieldParam($field, 'zero_terms_query', $zeroTermQuery);
+    }
+    
+    /**
+     * Set cutoff frequency
+     * 
+     * @param  string                      $field
+     * @param  float                       $cutoffFrequency
+     * @return \Elastica\Query\Match
+     */
+    public function setFieldCutoffFrequency($field, $cutoffFrequency)
+    {
+        return $this->setFieldParam($field, 'cutoff_frequency', $cutoffFrequency);
     }
 }
