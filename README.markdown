@@ -6,6 +6,7 @@ Elastica: elasticsearch PHP Client
 [![Coverage Status](https://coveralls.io/repos/ruflin/Elastica/badge.png)](https://coveralls.io/r/ruflin/Elastica)
 [![Dependency Status](https://www.versioneye.com/php/ruflin:Elastica/master/badge.png)](https://www.versioneye.com/php/ruflin:elastica/)
 [![Total Downloads](https://poser.pugx.org/ruflin/Elastica/downloads.png)](https://packagist.org/packages/ruflin/elastica)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ruflin/elastica/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 All documentation for Elastica can be found under [Elastica.io](http://Elastica.io/). If you have questions, don't hesitate to ask them in the [Elastica google group](https://groups.google.com/group/elastica-php-client). All library issues should go to the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
 
