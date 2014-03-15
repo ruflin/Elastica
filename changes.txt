@@ -1,5 +1,9 @@
 CHANGES
 
+2014-03-13
+- Added missing query options for MultiMatch (operator, minimum_should_match, zero_terms_query, cutoff_frequency, type, fuzziness, prefix_length, max_expansions, analyzer) #569
+- Added missing query options for Match (zero_terms_query, cutoff_frequency) #569
+
 2014-03-11
 - Fixed request body reuse in http transport #567
 
