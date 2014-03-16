@@ -1,5 +1,8 @@
 CHANGES
 
+2014-03-15
+- percolate existing documents and add percolate options (#570)
+
 2014-03-11
 - Fixed request body reuse in http transport #567
 

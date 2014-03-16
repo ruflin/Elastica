@@ -75,7 +75,7 @@ class Percolator
         $path = $this->_index->getName() . '/' . $type . '/_percolate';
         $data = array('doc' => $doc->getData());
 
-        return $this->percolate($path, $query, $data, $params);
+        return $this->_percolate($path, $query, $data, $params);
     }
 
     /**
@@ -93,7 +93,7 @@ class Percolator
         $id = urlencode($id);
         $path = $this->_index->getName() . '/' . $type . '/'. $id . '/_percolate';
 
-        return $this->percolate($path, $query, array(), $params);
+        return $this->_percolate($path, $query, array(), $params);
     }
 
     /**
@@ -103,7 +103,7 @@ class Percolator
      * @param  array  $params
      * @return array
      */
-    protected function percolate($path, $query, $data = array(), $params = array())
+    protected function _percolate($path, $query, $data = array(), $params = array())
     {
         // Add query to filter the percolator queries which are executed.
         if ($query) {
