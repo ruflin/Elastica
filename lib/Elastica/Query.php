@@ -377,6 +377,16 @@ class Query extends Param
         $this->addParam(NULL, $suggest->toArray());
         $this->_suggest = 1;
     }
+
+    /**
+     * Add a Rescore
+     *
+     * @param  \Elastica\Rescore\AbstractRescore $suggest suggestion object
+     */
+    public function setRescore($rescore)
+    {
+        $this->setParam('rescore', $rescore->toArray());
+    }
 }
 
 

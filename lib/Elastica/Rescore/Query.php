@@ -1,18 +1,18 @@
 <?php
 
-namespace Elastica\Query;
+namespace Elastica\Rescore;
 
 use Elastica\Query as BaseQuery;
 
 /**
- * Rescore query
+ * Query Rescore
  *
  * @category Xodoa
  * @package Elastica
  * @author Jason Hu <mjhu91@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/api/search/rescore/
  */
-class Rescore extends AbstractQuery
+class Query extends AbstractRescore
 {
     /**
      * Constructor
@@ -20,11 +20,10 @@ class Rescore extends AbstractQuery
      * @param string|\Elastica\Query\AbstractQuery $rescoreQuery
      * @param string|\Elastica\Query\AbstractQuery $query
      */
-    public function __construct($query = null, $rescoreQuery= null)
+    public function __construct($query = null)
     {
-        $this->setQuery($query);
-        $this->setParam('rescore', array());
-        $this->setRescoreQuery($rescoreQuery);
+        $this->setParam('query', array());
+        $this->setRescoreQuery($query);
     }
 
     /**
@@ -45,20 +44,6 @@ class Rescore extends AbstractQuery
     }
 
     /**
-     * Sets query object
-     *
-     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Query\Rescore
-     */
-    public function setQuery($query)
-    {
-        $query = BaseQuery::create($query);
-        $data = $query->toArray();
-
-        return $this->setParam('query', $data['query']);
-    }
-
-    /**
      * Sets rescoreQuery object
      *
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
@@ -69,24 +54,10 @@ class Rescore extends AbstractQuery
         $query = BaseQuery::create($rescoreQuery);
         $data = $query->toArray();
 
-        $rescore = $this->getParam('rescore');
-        $rescore['query']['rescore_query'] = $data['query'];
+        $query = $this->getParam('query');
+        $query['rescore_query'] = $data['query'];
 
-        return $this->setParam('rescore', $rescore);
-    }
-
-    /**
-     * Sets window_size
-     *
-     * @param int $size
-     * @return \Elastica\Query\Rescore
-     */
-    public function setWindowSize($size)
-    {
-        $rescore = $this->getParam('rescore');
-        $rescore['window_size'] = $size;
-
-        return $this->setParam('rescore', $rescore);
+        return $this->setParam('query', $query);
     }
 
     /**
@@ -97,10 +68,10 @@ class Rescore extends AbstractQuery
      */
     public function setQueryWeight($weight)
     {
-        $rescore = $this->getParam('rescore');
-        $rescore['query_weight'] = $weight;
+        $query = $this->getParam('query');
+        $query['query_weight'] = $weight;
 
-        return $this->setParam('rescore', $rescore);
+        return $this->setParam('query', $query);
     }
 
     /**
@@ -111,9 +82,9 @@ class Rescore extends AbstractQuery
      */
     public function setRescoreQueryWeight($weight)
     {
-        $rescore = $this->getParam('rescore');
-        $rescore['rescore_query_weight'] = $weight;
+        $query = $this->getParam('query');
+        $query['rescore_query_weight'] = $weight;
 
-        return $this->setParam('rescore', $rescore);
+        return $this->setParam('query', $query);
     }
 }
