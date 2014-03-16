@@ -155,4 +155,70 @@ class PercolatorTest extends BaseTest
 
         $index->delete();
     }
+
+    protected function _getDefaultPercolator($percolatorName = 'existingDoc')
+    {
+        $index = $this->_createIndex();
+        $percolator = new Percolator($index);
+
+        $query = new Term(array('name' => 'foobar'));
+        $percolator->registerQuery($percolatorName, $query);
+        return $percolator;
+    }
+
+    protected function _addDefaultDocuments($index, $type='testing')
+    {
+        $type = $index->getType('testing');
+        $doc1 = new Document(1, array('name' => 'foobar'));
+        $doc2 = new Document(2, array('name' => 'barbaz'));
+        $type->addDocument($doc1);
+        $type->addDocument($doc2);
+        $index->refresh();
+        return $type;
+    }
+
+    public function testPercolateExistingDocWithoutAnyParameter()
+    {
+        $percolator = $this->_getDefaultPercolator();
+        $index      = $percolator->getIndex();
+        $type       = $this->_addDefaultDocuments($index);
+
+        $matches = $percolator->matchExistingDoc(1, $type->getName());
+
+        $this->assertCount(1, $matches);
+        $this->assertEquals('existingDoc', $matches[0]['_id']);
+        $index->delete();
+    }
+
+    public function testPercolateExistingDocWithPercolateFormatIds()
+    {
+        $percolator = $this->_getDefaultPercolator();
+        $index      = $percolator->getIndex();
+        $type       = $this->_addDefaultDocuments($index);
+
+        $parameter = array('percolate_format' => 'ids');
+        $matches   = $percolator->matchExistingDoc(1, $type->getName(), null, $parameter);
+
+        $this->assertCount(1, $matches);
+        $this->assertEquals('existingDoc', $matches[0]);
+        $index->delete();
+    }
+
+    public function testPercolateExistingDocWithIdThatShouldBeUrlEncoded()
+    {
+        $percolator = $this->_getDefaultPercolator();
+        $index      = $percolator->getIndex();
+        $type       = $this->_addDefaultDocuments($index);
+
+        // id with whitespace, should be urlencoded
+        $id = "foo bar 1";
+
+        $type->addDocument(new Document($id, array('name' => 'foobar')));
+        $index->refresh();
+
+        $matches = $percolator->matchExistingDoc($id, $type->getName());
+
+        $this->assertCount(1, $matches);
+        $index->delete();
+    }
 }
