@@ -1,7 +1,7 @@
 CHANGES
 
 2014-03-20
-- Allow for request params in delete by query calls
+- Allow for request params in delete by query calls #573
 
 2014-03-17
 - Added filters: AbstractGeoShape, GeoShapePreIndexed, GeoShapeProvided #568
