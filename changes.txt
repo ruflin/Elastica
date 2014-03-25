@@ -1,5 +1,8 @@
 CHANGES
 
+2014-03-25
+- Allow json string as data srouce for Bulk\Action on update
+
 2014-03-20
 - Allow for request params in delete by query calls #573
 

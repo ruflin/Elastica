@@ -558,6 +558,24 @@ class BulkTest extends BaseTest
         $doc = $type->getDocument(6);
         $this->assertEquals('test', $doc->test);
 
+        //test updating via document with json string as data
+        $doc3 = $type->createDocument(2);
+        $bulk = new Bulk($client);
+        $bulk->setType($type);
+        $doc3->setData('{"name" : "Paul it is"}');
+        $updateAction = new \Elastica\Bulk\Action\UpdateDocument($doc3);
+        $bulk->addAction($updateAction);
+        $response = $bulk->send();
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        $index->refresh();
+
+        $doc = $type->getDocument(2);
+        $docData = $doc->getData();
+        $this->assertEquals('Paul it is', $docData['name']);
+
         $index->delete();
     }
 
