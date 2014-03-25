@@ -1,6 +1,6 @@
 CHANGES
 2014-03-24
-- Added Filter\Indices
+- Added Filter\Indices #574
 
 2014-03-20
 - Allow for request params in delete by query calls #573
