@@ -190,6 +190,8 @@ class Action
             $source = $this->getSource();
             if (is_string($source)) {
                 $string.= $source;
+            } elseif (is_array($source) && array_key_exists('doc', $source) && is_string($source['doc'])) {
+                $string.= '{"doc": ' . $source['doc'] . '}';
             } else {
                 $string.= json_encode($source, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             }
