@@ -1,4 +1,7 @@
 CHANGES
+2014-03-26
+- Fixed Query\Match Fuzziness parameter type
+
 2014-03-24
 - Added Filter\Indices #574
 
