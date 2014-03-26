@@ -126,12 +126,12 @@ class Match extends AbstractQuery
      * Set field fuzziness
      *
      * @param  string                    $field
-     * @param  float                     $fuzziness
+     * @param  mixed                     $fuzziness
      * @return \Elastica\Query\Match
      */
     public function setFieldFuzziness($field, $fuzziness)
     {
-        return $this->setFieldParam($field, 'fuzziness', (float) $fuzziness);
+        return $this->setFieldParam($field, 'fuzziness', $fuzziness);
     }
 
     /**
