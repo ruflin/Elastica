@@ -67,10 +67,10 @@ class Terms extends AbstractFilter
      * @param string|\Elastica\Type $type document type from which to fetch the terms values
      * @param string $id id of the document from which to fetch the terms values
      * @param string $path the field from which to fetch the values for the filter
-     * @param string|\Elastica\Index $index the index from which to fetch the terms values. Defaults to the current index.
+     * @param string|array|\Elastica\Index $options An array of options or the index from which to fetch the terms values. Defaults to the current index.
      * @return \Elastica\Filter\Terms Filter object
      */
-    public function setLookup($key, $type, $id, $path, $index = NULL)
+    public function setLookup($key, $type, $id, $path, $options = array())
     {
         $this->_key = $key;
         if ($type instanceof \Elastica\Type) {
@@ -81,6 +81,16 @@ class Terms extends AbstractFilter
             'id' => $id,
             'path' => $path
         );
+        
+        $index = $options;
+        if(is_array($options)) {
+            if(isset($options['index'])) {
+                $index = $options['index'];
+                unset($options['index']);
+            }
+            $this->_terms = array_merge($options, $this->_terms);
+        }
+        
         if (!is_null($index)) {
             if ($index instanceof \Elastica\Index) {
                 $index = $index->getName();
