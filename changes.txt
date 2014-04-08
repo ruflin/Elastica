@@ -1,5 +1,8 @@
 CHANGES
 
+2014-04-7
+- Support for Terms filter lookup options
+
 2014-03-29
 - Update to elasticsearch 1.1.0
 
