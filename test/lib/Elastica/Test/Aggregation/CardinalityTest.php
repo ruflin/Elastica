@@ -32,7 +32,7 @@ class CardinalityTest extends BaseAggregationTest
         $query->addAggregation($agg);
         $results = $this->_index->search($query)->getAggregation("cardinality");
 
-        $this->assertEquals(3, $result['value']);
+        $this->assertEquals(3, $results['value']);
     }
 }
  
