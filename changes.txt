@@ -1,5 +1,8 @@
 CHANGES
 
+2014-04-09
+- Added Cardinality aggregation
+
 2014-04-7
 - Support for Terms filter lookup options
 
