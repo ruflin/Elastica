@@ -10,8 +10,7 @@
          stopOnFailure="false"
          stopOnIncomplete="false"
          stopOnSkipped="false"
-         syntaxCheck="false"
-         testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader">
+         syntaxCheck="false">
 
     <testsuites>
         <testsuite name="Elastica">

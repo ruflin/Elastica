@@ -1,13 +1,13 @@
 CHANGES
 
 2014-04-09
-- Added Cardinality aggregation
+- Added Cardinality aggregation #581
 
 2014-04-7
-- Support for Terms filter lookup options
+- Support for Terms filter lookup options #579
 
 2014-03-29
-- Update to elasticsearch 1.1.0
+- Update to elasticsearch 1.1.0 http://www.elasticsearch.org/downloads/1-1-0/
 
 2014-03-26
 - Fixed Query\Match Fuzziness parameter type #576
