@@ -96,7 +96,7 @@ class Regexp extends AbstractFilter
     public function toArray()
     {
         if (count($this->_options) > 0) {
-            $options = array("value" => $this_regexp);
+            $options = array("value" => $this->_regexp);
             $options = array_merge($options, $this->_options);
 
             $this->setParam($this->_field, $options);
