@@ -27,16 +27,25 @@ class Regexp extends AbstractFilter
     protected $_regexp = '';
 
     /**
+     * Holds the regexp options.
+     *
+     * @var array
+     */
+    protected $_options = array();
+
+    /**
      * Create Regexp object
      *
-     * @param  string $field    Field name
-     * @param  string $regexp   Regular expression
+     * @param  string $field     Field name
+     * @param  string $regexp    Regular expression
+     * @param  array  $options   Regular expression options
      * @throws \Elastica\Exception\InvalidException
      */
-    public function __construct($field = '', $regexp = '')
+    public function __construct($field = '', $regexp = '', $options = array())
     {
         $this->setField($field);
         $this->setRegexp($regexp);
+        $this->setOptions($options);
     }
 
     /**
@@ -66,6 +75,19 @@ class Regexp extends AbstractFilter
     }
 
     /**
+     * Sets the regular expression query options.
+     *
+     * @param  array                        $options Regular expression options
+     * @return \Elastica\Filter\Regexp
+     */
+    public function setOptions($options)
+    {
+        $this->_options = $options;
+
+        return $this;
+    }
+
+    /**
      * Converts object to an array
      *
      * @see \Elastica\Filter\AbstractFilter::toArray()
@@ -73,7 +95,14 @@ class Regexp extends AbstractFilter
      */
     public function toArray()
     {
-        $this->setParam($this->_field, $this->_regexp);
+        if (count($this->_options) > 0) {
+            $options = array("value" => $this_regexp);
+            $options = array_merge($options, $this->_options);
+
+            $this->setParam($this->_field, $options);
+        } else {
+            $this->setParam($this->_field, $this->_regexp);
+        }
 
         return parent::toArray();
     }
