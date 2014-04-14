@@ -24,6 +24,28 @@ class RegexpTest extends BaseTest
 
         $this->assertequals($expectedArray, $filter->toArray());
     }
+    
+    public function testToArrayWithOptions()
+    {
+        $field = 'name';
+        $regexp = 'ruf';
+        $options = array(
+            'flags' => 'ALL'
+        );
+        
+        $filter = new Regexp($field, $regexp, $options);
+        
+        $expectedArray = array(
+            'regexp' => array(
+                $field => array(
+                    'value' => $regexp,
+                    'flags' => 'ALL'
+                )
+            )
+        );
+        
+        $this->assertequals($expectedArray, $filter->toArray());
+    }
 
     public function testDifferentRegexp()
     {
