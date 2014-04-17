@@ -180,7 +180,7 @@ class Response
 
                 $tempResponse = json_decode($response, true);
                 // If error is returned, json_decode makes empty string of string
-                if (!empty($tempResponse)) {
+                if (!json_last_error()) {
                     $response = $tempResponse;
                 }
             }

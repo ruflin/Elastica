@@ -5,6 +5,7 @@ use Elastica\Document;
 use Elastica\Facet\DateHistogram;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
+use Elastica\Request;
 use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
@@ -77,4 +78,17 @@ class ResponseTest extends BaseTest
 
         $this->assertTrue($response->isOk());
     }
+
+    public function testGetDataEmpty()
+    {
+        $index = $this->_createIndex();
+
+        $response = $index->request(
+            'non-existant-type/_mapping',
+            Request::GET
+        )->getData();
+
+        $this->assertEquals(0, count($response));
+    }
+
 }

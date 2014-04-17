@@ -1,5 +1,8 @@
 CHANGES
 
+2014-04-17
+- Only trap real JSON parse errors in Response class #586
+
 2014-04-09
 - Added Cardinality aggregation #581
 
