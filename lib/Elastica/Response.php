@@ -179,8 +179,8 @@ class Response
             } else {
 
                 $tempResponse = json_decode($response, true);
-                // If error is returned, json_decode makes empty string of string
-                if (!json_last_error()) {
+                // Check if decoding went as expected. If error is returned, json_decode makes empty string of string
+                if (json_last_error() == JSON_ERROR_NONE) {
                     $response = $tempResponse;
                 }
             }
