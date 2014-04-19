@@ -35,7 +35,7 @@ class InfoTest extends BaseTest
         $info = $node->getInfo();
 
         $pluginName = 'mapper-attachments';
-
+        
         $this->assertTrue($info->hasPlugin($pluginName));
         $this->assertFalse($info->hasPlugin('foo'));
     }
