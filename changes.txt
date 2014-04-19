@@ -2,6 +2,7 @@ CHANGES
 
 2014-04-19
 - Update to elasticsearch 1.1.1 http://www.elasticsearch.org/downloads/1-1-1/
+- Remove CustomFiltersScore and CustomScore query as removed in elasticsearch 1.1.0 https://github.com/elasticsearch/elasticsearch/pull/5076/files
 
 2014-04-17
 - Only trap real JSON parse errors in Response class #586
