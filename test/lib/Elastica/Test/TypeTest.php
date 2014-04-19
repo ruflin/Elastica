@@ -771,6 +771,37 @@ class TypeTest extends BaseTest
         $index->delete();
         $this->assertFalse($index->exists());
     }
+    
+    public function testGetMappingAlias() {
+            
+        $indexName = 'test-mapping';
+        $aliasName = 'test-mapping-alias';
+        
+        $index = $this->_createIndex($indexName);
+        $indexName = $index->getName();
+        $index->addAlias($aliasName);
+        
+        $type = new Type($index, 'test');
+        $mapping = new Mapping($type, array(
+                'id' => array('type' => 'integer', 'store' => 'yes'),
+            ));
+        $type->setMapping($mapping);
+        
+        $client = $index->getClient();
+        
+        // Index mapping
+        $mapping1 = $client->getIndex($indexName)->getMapping();
+        
+        // Alias mapping
+        $mapping2 = $client->getIndex($aliasName)->getMapping();
+        
+        // Make sure, a mapping is set
+        $this->assertNotEmpty($mapping1);
+        
+        // Alias and index mapping should be identical
+        $this->assertEquals($mapping1, $mapping2);
+        
+    }
 }
 
 class SerializerMock

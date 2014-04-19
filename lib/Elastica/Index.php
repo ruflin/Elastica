@@ -94,8 +94,12 @@ class Index implements SearchableInterface
 
         $response = $this->request($path, Request::GET);
         $data = $response->getData();
-        if (isset($data[$this->getName()]['mappings'])) {
-            return $data[$this->getName()]['mappings'];
+        
+        // Get first entry as if index is an Alias, the name of the mapping is the real name and not alias name
+        $mapping = array_shift($data);
+        
+        if (isset($mapping['mappings'])) {
+            return $mapping['mappings'];
         }
 
         return array();
