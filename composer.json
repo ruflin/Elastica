@@ -17,8 +17,7 @@
     "require-dev": {
         "psr/log": "~1.0",
         "munkie/elasticsearch-thrift-php": "1.4.*",
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/phpunit": "4.0.*"
+        "satooshi/php-coveralls": "dev-master"
     },
     "suggest": {
         "munkie/elasticsearch-thrift-php": "Allow using thrift transport",
