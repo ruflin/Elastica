@@ -24,7 +24,7 @@ class MultiMatchTest extends BaseTest
 
     protected function setUp()
     {
-        $this->index = $this->generateIndex();
+        $this->index = $this->_generateIndex();
         $this->multiMatch = new MultiMatch();
     }
 
@@ -33,7 +33,7 @@ class MultiMatchTest extends BaseTest
         $this->multiMatch->setQuery('Tristan Maindron');
         $this->multiMatch->setFields(array('full_name', 'name'));
         $this->multiMatch->setMinimumShouldMatch(2);
-        $resultSet = $this->getResults();
+        $resultSet = $this->_getResults();
 
         $this->assertEquals(1, $resultSet->count());
     }
@@ -43,7 +43,7 @@ class MultiMatchTest extends BaseTest
         $this->multiMatch->setQuery('Monique Maindron');
         $this->multiMatch->setFields(array('full_name', 'name'));
         $this->multiMatch->setOperator(MultiMatch::OPERATOR_AND);
-        $resultSet = $this->getResults();
+        $resultSet = $this->_getResults();
 
         $this->assertEquals(1, $resultSet->count());
     }
@@ -53,7 +53,7 @@ class MultiMatchTest extends BaseTest
         $this->multiMatch->setQuery('Trist');
         $this->multiMatch->setFields(array('full_name', 'name'));
         $this->multiMatch->setType(MultiMatch::TYPE_PHRASE_PREFIX);
-        $resultSet = $this->getResults();
+        $resultSet = $this->_getResults();
 
         $this->assertEquals(1, $resultSet->count());
     }
@@ -63,19 +63,19 @@ class MultiMatchTest extends BaseTest
         $this->multiMatch->setQuery('Tritsan'); // Mispell on purpose
         $this->multiMatch->setFields(array('full_name', 'name'));
         $this->multiMatch->setFuzziness(2);
-        $resultSet = $this->getResults();
+        $resultSet = $this->_getResults();
 
         $this->assertEquals(1, $resultSet->count());
 
         $this->multiMatch->setQuery('Tritsan'); // Mispell on purpose
         $this->multiMatch->setFields(array('full_name', 'name'));
         $this->multiMatch->setFuzziness(0);
-        $resultSet = $this->getResults();
+        $resultSet = $this->_getResults();
 
         $this->assertEquals(0, $resultSet->count());
     }
 
-    public function testFuzzyWithOptions()
+    public function testFuzzyWithOptions1()
     {
         // Here ElasticSearch will not accept mispells
         // on the first 6 letters.
@@ -83,9 +83,12 @@ class MultiMatchTest extends BaseTest
         $this->multiMatch->setFields(array('full_name', 'name'));
         $this->multiMatch->setFuzziness(2);
         $this->multiMatch->setPrefixLength(6);
-        $resultSet = $this->getResults();
+        $resultSet = $this->_getResults();
 
-        $this->assertEquals(0, $resultSet->count());
+        $this->assertEquals(0, $resultSet->count());   
+    }
+    
+    public function testFuzzyWithOptions2() {
 
         // Here with a 'M' search we should hit 'Moraes' first
         // and then stop because MaxExpansion = 1.
@@ -93,10 +96,9 @@ class MultiMatchTest extends BaseTest
         $this->multiMatch->setQuery('M');
         $this->multiMatch->setFields(array('name'));
         $this->multiMatch->setType(MultiMatch::TYPE_PHRASE_PREFIX);
-        $this->multiMatch->setFuzziness(2);
         $this->multiMatch->setPrefixLength(0);
         $this->multiMatch->setMaxExpansions(1);
-        $resultSet = $this->getResults();
+        $resultSet = $this->_getResults();
 
         $this->assertEquals(1, $resultSet->count());
     }
@@ -107,12 +109,12 @@ class MultiMatchTest extends BaseTest
         $this->multiMatch->setFields(array('full_name', 'last_name'));
         $this->multiMatch->setZeroTermsQuery(MultiMatch::ZERO_TERM_NONE);
         $this->multiMatch->setAnalyzer('stops');
-        $resultSet = $this->getResults();
+        $resultSet = $this->_getResults();
 
         $this->assertEquals(0, $resultSet->count());
 
         $this->multiMatch->setZeroTermsQuery(MultiMatch::ZERO_TERM_ALL);
-        $resultSet = $this->getResults();
+        $resultSet = $this->_getResults();
 
         $this->assertEquals(4, $resultSet->count());
     }
@@ -121,13 +123,13 @@ class MultiMatchTest extends BaseTest
     {
         $this->multiMatch->setQuery('Rodolfo');
         $this->multiMatch->setFields(array('name', 'last_name'));
-        $resultSet = $this->getResults();
+        $resultSet = $this->_getResults();
 
         $this->assertEquals(1, $resultSet->count());
 
         $this->multiMatch->setQuery('Moraes');
         $this->multiMatch->setFields(array('name', 'last_name'));
-        $resultSet = $this->getResults();
+        $resultSet = $this->_getResults();
 
         $this->assertEquals(1, $resultSet->count());
     }
@@ -135,7 +137,7 @@ class MultiMatchTest extends BaseTest
     /**
      * Executes the query with the current multimatch.
      */
-    private function getResults()
+    private function _getResults()
     {
         return $this->index->search(new Query($this->multiMatch));
     }
@@ -143,7 +145,7 @@ class MultiMatchTest extends BaseTest
     /**
      * Builds an index for testing.
      */
-    private function generateIndex()
+    private function _generateIndex()
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
