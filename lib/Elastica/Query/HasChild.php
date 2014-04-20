@@ -21,8 +21,8 @@ class HasChild extends AbstractQuery
      */
     public function __construct($query, $type = null)
     {
-        $this->setQuery($query);
         $this->setType($type);
+        $this->setQuery($query);
     }
 
     /**
