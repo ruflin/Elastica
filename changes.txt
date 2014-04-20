@@ -1,5 +1,8 @@
 CHANGES
 
+2014-04-20
+- Handling of HasChild type parsing bug #585
+
 2014-04-19
 - Release v1.1.1.0
 - Update to elasticsearch 1.1.1 http://www.elasticsearch.org/downloads/1-1-1/
