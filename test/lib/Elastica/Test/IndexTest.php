@@ -30,7 +30,7 @@ class IndexTest extends BaseTest
         $type->addDocument($doc);
         $index->optimize();
 
-        $storedMapping = $type->getMapping();
+        $storedMapping = $index->getMapping();
 
         $this->assertEquals($storedMapping['test']['properties']['id']['type'], 'integer');
         $this->assertEquals($storedMapping['test']['properties']['id']['store'], true);
@@ -39,6 +39,36 @@ class IndexTest extends BaseTest
         $this->assertEquals($storedMapping['test']['properties']['test']['type'], 'integer');
 
         $result = $type->search('hanswurst');
+    }
+
+    public function testGetMappingAlias() {
+
+        $indexName = 'test-mapping';
+        $aliasName = 'test-mapping-alias';
+
+        $index = $this->_createIndex($indexName);
+        $indexName = $index->getName();
+        $index->addAlias($aliasName);
+
+        $type = new Type($index, 'test');
+        $mapping = new Mapping($type, array(
+                'id' => array('type' => 'integer', 'store' => 'yes'),
+            ));
+        $type->setMapping($mapping);
+
+        $client = $index->getClient();
+
+        // Index mapping
+        $mapping1 = $client->getIndex($indexName)->getMapping();
+
+        // Alias mapping
+        $mapping2 = $client->getIndex($aliasName)->getMapping();
+
+        // Make sure, a mapping is set
+        $this->assertNotEmpty($mapping1);
+
+        // Alias and index mapping should be identical
+        $this->assertEquals($mapping1, $mapping2);
     }
 
     public function testParent()
