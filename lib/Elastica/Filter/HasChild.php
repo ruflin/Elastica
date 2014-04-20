@@ -20,12 +20,12 @@ class HasChild extends AbstractFilter
      */
     public function __construct($query, $type = null)
     {
+        $this->setType($type);
         if ($query instanceof AbstractFilter) {
             $this->setFilter($query);
         } else {
             $this->setQuery($query);
         }
-        $this->setType($type);
     }
 
     /**
