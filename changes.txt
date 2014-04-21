@@ -1,5 +1,8 @@
 CHANGES
 
+2014-04-21
+- escape \ by \\
+
 2014-04-20
 - Handling of HasChild type parsing bug #585
 - Consolidate Index getMapping tests
