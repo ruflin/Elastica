@@ -2,6 +2,8 @@ CHANGES
 
 2014-04-20
 - Handling of HasChild type parsing bug #585
+- Consolidate Index getMapping tests
+- Fix Type::getMapping when using an aliased index #588
 
 2014-04-19
 - Release v1.1.1.0

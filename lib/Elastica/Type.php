@@ -298,10 +298,13 @@ class Type implements SearchableInterface
 
         $response = $this->request($path, Request::GET);
         $data = $response->getData();
-        if (!isset($data[$this->getIndex()->getName()])) {
-            return array();
+
+        $mapping = array_shift($data);
+        if (isset($mapping['mappings'])) {
+            return $mapping['mappings'];
         }
-        return $data[$this->getIndex()->getName()]['mappings'];
+
+        return array();
     }
 
     /**

@@ -771,36 +771,46 @@ class TypeTest extends BaseTest
         $index->delete();
         $this->assertFalse($index->exists());
     }
-    
-    public function testGetMappingAlias() {
-            
-        $indexName = 'test-mapping';
-        $aliasName = 'test-mapping-alias';
-        
+
+    public function testGetMapping() {
+        $indexName = 'test';
+        $typeName = 'test-type';
+
         $index = $this->_createIndex($indexName);
         $indexName = $index->getName();
-        $index->addAlias($aliasName);
-        
-        $type = new Type($index, 'test');
-        $mapping = new Mapping($type, array(
-                'id' => array('type' => 'integer', 'store' => 'yes'),
-            ));
+        $type = new Type($index, $typeName);
+        $mapping = new Mapping($type, $expect = array(
+            'id' => array('type' => 'integer', 'store' => true)
+        ));
         $type->setMapping($mapping);
-        
+
         $client = $index->getClient();
-        
-        // Index mapping
-        $mapping1 = $client->getIndex($indexName)->getMapping();
-        
-        // Alias mapping
-        $mapping2 = $client->getIndex($aliasName)->getMapping();
-        
-        // Make sure, a mapping is set
-        $this->assertNotEmpty($mapping1);
-        
-        // Alias and index mapping should be identical
-        $this->assertEquals($mapping1, $mapping2);
-        
+
+        $this->assertEquals(
+            array('test-type' => array('properties' => $expect)),
+            $client->getIndex($indexName)->getType($typeName)->getMapping()
+        );
+    }
+
+    public function testGetMappingAlias() {
+        $indexName = 'test';
+        $aliasName = 'test-alias';
+        $typeName = 'test-alias-type';
+
+        $index = $this->_createIndex($indexName);
+        $index->addAlias($aliasName);
+        $type = new Type($index, $typeName);
+        $mapping = new Mapping($type, $expect = array(
+            'id' => array('type' => 'integer', 'store' => true)
+        ));
+        $type->setMapping($mapping);
+
+        $client = $index->getClient();
+
+        $this->assertEquals(
+            array('test-alias-type' => array('properties' => $expect)),
+            $client->getIndex($aliasName)->getType($typeName)->getMapping()
+        );
     }
 }
 
