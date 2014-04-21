@@ -44,11 +44,14 @@ class Util
     {
         $result = $term;
         // \ escaping has to be first, otherwise escaped later once again
-        $chars = array('\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '/');
+        $chars = array('\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':');
 
         foreach ($chars as $char) {
             $result = str_replace($char, '\\' . $char, $result);
         }
+
+        // since elastisearch uses lucene 4.0 / needs to be escaped by \\
+        $result = str_replace('/', '\\\\/', $result);
 
         return $result;
     }
