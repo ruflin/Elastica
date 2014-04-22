@@ -58,7 +58,6 @@ class Memcache extends AbstractTransport
                 break;
             case 'get':
                 $responseString = $memcache->get($request->getPath() . '?source=' . $content);
-                echo $responseString . PHP_EOL;
                 break;
             case 'delete':
                 break;

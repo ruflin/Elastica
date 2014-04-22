@@ -1,5 +1,8 @@
 CHANGES
 
+2014-04-22
+- Remove useless echo in the Memcache Transport object #595
+
 2014-04-21
 - escape \ by \\
 
