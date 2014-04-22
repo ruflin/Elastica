@@ -43,8 +43,6 @@ class BoolTest extends BaseTest
             )
         );
 
-        print_r($mainBool->toArray());
-
         $this->assertEquals($expectedArray, $mainBool->toArray());
     }
 }
