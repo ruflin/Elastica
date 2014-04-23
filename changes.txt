@@ -1,5 +1,8 @@
 CHANGES
 
+2014-04-24
+- Fixing the Bool filter with Bool filter children bug #594
+
 2014-04-22
 - Remove useless echo in the Memcache Transport object #595
 
