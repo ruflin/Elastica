@@ -107,8 +107,6 @@ class Status
     public function aliasExists($name)
     {
         return count($this->getIndicesWithAlias($name)) > 0;
-
-        return false;
     }
 
     /**
