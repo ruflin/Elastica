@@ -2,6 +2,8 @@
 
 namespace Elastica\Facet;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Implements the statistical facet on a per term basis.
  *
@@ -15,7 +17,7 @@ class TermsStats extends AbstractFacet
 
     /**
      * Holds the types of ordering which are allowed
-     * by ElasticSearch.
+     * by Elasticsearch.
      *
      * @var array
      */
@@ -46,7 +48,7 @@ class TermsStats extends AbstractFacet
     }
 
     /**
-     * Sets the ordering type for this facet. ElasticSearch
+     * Sets the ordering type for this facet. Elasticsearch
      * internal default is count.
      *
      * @param  string                              $type The order type to set use for sorting of the terms.

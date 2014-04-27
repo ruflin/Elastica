@@ -1,5 +1,9 @@
 CHANGES
 
+2014-04-27
+- Fix missing use in TermsStats->setOrder()
+- Replace all instances of ElasticSearch with Elasticsearch
+
 2014-04-24
 - Fixing the Bool filter with Bool filter children bug #594
 
