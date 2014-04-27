@@ -2,8 +2,8 @@ CHANGES
 
 2014-04-27
 - Release v1.1.1.1
-- Fix missing use in TermsStats->setOrder()
-- Replace all instances of ElasticSearch with Elasticsearch
+- Fix missing use in TermsStats->setOrder() #597
+- Replace all instances of ElasticSearch with Elasticsearch #597
 
 2014-04-24
 - Fixing the Bool filter with Bool filter children bug #594
@@ -12,11 +12,11 @@ CHANGES
 - Remove useless echo in the Memcache Transport object #595
 
 2014-04-21
-- escape \ by \\
+- escape \ by \\ #592
 
 2014-04-20
 - Handling of HasChild type parsing bug #585
-- Consolidate Index getMapping tests
+- Consolidate Index getMapping tests #591
 - Fix Type::getMapping when using an aliased index #588
 
 2014-04-19
