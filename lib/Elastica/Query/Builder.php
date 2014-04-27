@@ -285,7 +285,7 @@ class Builder extends AbstractQuery
      * In the simple case, a facet can return facet counts for various facet
      * values for a specific field.
      *
-     * ElasticSearch supports more advanced facet implementations, such as
+     * Elasticsearch supports more advanced facet implementations, such as
      * statistical or date histogram facets.
      *
      * @return \Elastica\Query\Builder

@@ -80,7 +80,7 @@ abstract class AbstractFacet extends Param
     /**
      * Sets the flag to either run the facet globally or bound to the
      * current search query. When not set, it defaults to the
-     * ElasticSearch default value.
+     * Elasticsearch default value.
      *
      * @param  bool                         $global Flag to either run the facet globally.
      * @return \Elastica\Facet\AbstractFacet

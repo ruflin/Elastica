@@ -77,7 +77,7 @@ class MultiMatchTest extends BaseTest
 
     public function testFuzzyWithOptions1()
     {
-        // Here ElasticSearch will not accept mispells
+        // Here Elasticsearch will not accept mispells
         // on the first 6 letters.
         $this->multiMatch->setQuery('Tritsan'); // Mispell on purpose
         $this->multiMatch->setFields(array('full_name', 'name'));
