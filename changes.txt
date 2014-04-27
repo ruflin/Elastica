@@ -1,6 +1,7 @@
 CHANGES
 
 2014-04-27
+- Release v1.1.1.1
 - Fix missing use in TermsStats->setOrder()
 - Replace all instances of ElasticSearch with Elasticsearch
 
