@@ -1,10 +1,10 @@
 CHANGES
 
 2014-04-28
-- Typo fixes
+- Typo fixes #600
+- Remove unreachable return statement #598
 
 2014-04-27
-- Remove unreachable return statement #598
 - Release v1.1.1.1
 - Fix missing use in TermsStats->setOrder() #597
 - Replace all instances of ElasticSearch with Elasticsearch #597
