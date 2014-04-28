@@ -1,5 +1,8 @@
 CHANGES
 
+2014-04-28
+- Typo fixes
+
 2014-04-27
 - Remove unreachable return statement #598
 - Release v1.1.1.1

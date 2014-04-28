@@ -720,7 +720,7 @@ class Document extends Param
      */
     public function setScript($data)
     {
-       throw new NotImplementedException("setScript() is no longer avaliable as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
+       throw new NotImplementedException("setScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
     }
 
     /**
@@ -741,7 +741,7 @@ class Document extends Param
      */
     public function getScript()
     {
-        throw new NotImplementedException("getScript() is no longer avaliable as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
+        throw new NotImplementedException("getScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
     }
 
     /**
@@ -758,7 +758,7 @@ class Document extends Param
      */
     public function hasScript()
     {
-        throw new NotImplementedException("hasScript() is no longer avaliable as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
+        throw new NotImplementedException("hasScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate");
     }
 
     /**
