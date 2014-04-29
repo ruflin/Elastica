@@ -14,7 +14,7 @@ use Elastica\Param;
 abstract class AbstractRescore extends Param
 {
 	/**
-	 * Overriden to return rescore as name
+	 * Overridden to return rescore as name
      *
      * @return string name
      */

@@ -1,7 +1,7 @@
 CHANGES
 
 2014-04-28
-- Typo fixes #600
+- Typo fixes #600, #602
 - Remove unreachable return statement #598
 
 2014-04-27
