@@ -180,7 +180,7 @@ class FunctionScore extends AbstractQuery
 
     /**
      * Set the score method
-     * @param string $mode see SCORE_MODE_* constatns for valid options. Default is multiply.
+     * @param string $mode see SCORE_MODE_* constants for valid options. Default is multiply.
      * @return \Elastica\Query\FunctionScore
      */
     public function setScoreMode($mode)
