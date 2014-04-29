@@ -1,5 +1,8 @@
 CHANGES
 
+2014-04-29
+- Fix function name for SetTtl #603
+
 2014-04-28
 - Typo fixes #600, #602
 - Remove unreachable return statement #598

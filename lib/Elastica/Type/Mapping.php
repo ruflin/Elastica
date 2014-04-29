@@ -212,7 +212,7 @@ class Mapping
      */
     public function enableTtl($enabled = true)
     {
-        return $this->setTTL(array('enabled' => $enabled));
+        return $this->setTtl(array('enabled' => $enabled));
     }
 
     /**
