@@ -1,5 +1,8 @@
 CHANGES
 
+2014-05-05
+- Added named function for source filtering #605
+
 2014-04-28
 - Typo fixes #600, #602
 - Remove unreachable return statement #598
