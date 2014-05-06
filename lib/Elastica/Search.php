@@ -37,6 +37,7 @@ class Search
     const OPTION_SEARCH_TYPE_QUERY_THEN_FETCH = 'query_then_fetch';
     const OPTION_SEARCH_TYPE_QUERY_AND_FETCH = 'query_and_fetch';
     const OPTION_SEARCH_TYPE_SUGGEST = 'suggest';
+    const OPTION_SEARCH_TYPE_SCROLL = 'scroll';
 
     /**
      * Array of indices
