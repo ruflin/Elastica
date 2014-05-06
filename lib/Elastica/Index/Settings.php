@@ -65,8 +65,8 @@ class Settings
      */
     public function get($setting = '')
     {
-        $data = $this->request()->getData();
-        $settings = $data[$this->_index->getName()]['settings']['index'];
+        $data = reset($this->request()->getData());
+        $settings = $data['settings']['index'];
 
         if (!empty($setting)) {
             if (isset($settings[$setting])) {
