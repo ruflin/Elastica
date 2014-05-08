@@ -127,4 +127,34 @@ class FuzzyLikeThisTest extends BaseTest
 
         $this->assertEquals($boost, $data['fuzzy_like_this']['boost']);
     }
+
+    public function testAddAnalyzerViasetParam()
+    {
+        $analyzer = 'snowball';
+
+        $query = new FuzzyLikeThis();
+        $query->setParam('analyzer', $analyzer);
+
+        $data = $query->toArray();
+        $this->assertEquals($analyzer, $data['fuzzy_like_this']['analyzer']);
+    }
+
+    public function testSetAnalyzer()
+    {
+        $analyzer = 'snowball';
+
+        $query = new FuzzyLikeThis();
+        $query->setAnalyzer($analyzer);
+
+        $data = $query->toArray();
+        $this->assertEquals($analyzer, $data['fuzzy_like_this']['analyzer']);
+    }
+
+    public function testAnalyzerNotPresentInArrayToMaintainDefaultOfField()
+    {
+        $query = new FuzzyLikeThis();
+
+        $data = $query->toArray();
+        $this->assertArrayNotHasKey('analyzer', $data);
+    }
 }
