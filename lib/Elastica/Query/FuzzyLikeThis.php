@@ -208,7 +208,7 @@ class FuzzyLikeThis extends AbstractQuery
         $args['max_query_terms'] = $this->_maxQueryTerms;
 
         $data = parent::toArray();
-        $args = $args + $data['fuzzy_like_this'];
+        $args = array_merge($args, $data['fuzzy_like_this']);
 
         return array('fuzzy_like_this' => $args);
     }

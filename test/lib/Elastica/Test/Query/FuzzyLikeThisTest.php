@@ -157,4 +157,14 @@ class FuzzyLikeThisTest extends BaseTest
         $data = $query->toArray();
         $this->assertArrayNotHasKey('analyzer', $data);
     }
+
+    public function testArgArrayFieldsOverwrittenBySetParams()
+    {
+        $query = new FuzzyLikeThis();
+        $query->setMaxQueryTerms(100);
+        $query->setParam('max_query_terms', 200);
+
+        $data = $query->toArray();
+        $this->assertEquals(200, $data['fuzzy_like_this']['max_query_terms']);
+    }
 }
