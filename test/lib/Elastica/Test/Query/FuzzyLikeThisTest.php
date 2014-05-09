@@ -167,4 +167,62 @@ class FuzzyLikeThisTest extends BaseTest
         $data = $query->toArray();
         $this->assertEquals(200, $data['fuzzy_like_this']['max_query_terms']);
     }
+
+    public function testSearchSetAnalyzer()
+    {
+        $client = $this->_getClient();
+        $index = new Index($client, 'test');
+        $index->create(array('analysis' => array(
+            'analyzer' => array(
+               'searchAnalyzer' => array(
+                    'type' => 'custom',
+                    'tokenizer' => 'standard',
+                    'filter' => array('myStopWords')
+                )
+            ),
+            'filter' => array(
+                'myStopWords' => array(
+                    'type' => 'stop',
+                    'stopwords' => array('The')
+                )
+            )
+        )), true);
+
+        $index->getSettings()->setNumberOfReplicas(0);
+        //$index->getSettings()->setNumberOfShards(1);
+        
+        $type = new Type($index, 'helloworldfuzzy');
+        $mapping = new Mapping($type , array(
+               'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
+               'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
+          ));
+        
+        $mapping->setSource(array('enabled' => false));
+        $type->setMapping($mapping);
+
+        $doc = new Document(1000, array('email' => 'testemail@gmail.com', 'content' => 'The Fuzzy Test!'));
+        $type->addDocument($doc);
+
+        $doc = new Document(1001, array('email' => 'testemail@gmail.com', 'content' => 'Elastica Fuzzy Test'));
+        $type->addDocument($doc);
+
+        // Refresh index
+        $index->refresh();
+
+        $fltQuery = new FuzzyLikeThis();
+        $fltQuery->addFields(array("email","content"));
+        $fltQuery->setLikeText("The");
+
+        $fltQuery->setMinSimilarity(0.1);
+        $fltQuery->setMaxQueryTerms(3);
+
+        // Test before analyzer applied, should return 1 result
+        $resultSet = $type->search($fltQuery);
+        $this->assertEquals(1, $resultSet->count());
+
+        $fltQuery->setParam('analyzer', 'searchAnalyzer');
+
+        $resultSet = $type->search($fltQuery);
+        $this->assertEquals(0, $resultSet->count());
+    }
 }
