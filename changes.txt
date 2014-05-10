@@ -1,4 +1,6 @@
 CHANGES
+2014-04-28
+- Added setAnalyzer method to Query\FuzzyLikeThis Class and fixed issue with params not being merged #611
 
 2014-04-28
 - Typo fixes #600, #602

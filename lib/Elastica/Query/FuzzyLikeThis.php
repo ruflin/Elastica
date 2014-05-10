@@ -62,6 +62,14 @@ class FuzzyLikeThis extends AbstractQuery
     protected $_boost = 1.0;
 
     /**
+     * Analyzer
+     *
+     * @var sting Analyzer
+     */
+    protected $_analyzer;
+
+
+    /**
      * Adds field to flt query
      *
      * @param  array                             $fields Field names
@@ -155,6 +163,20 @@ class FuzzyLikeThis extends AbstractQuery
     }
 
     /**
+     * Set analyzer
+     *
+     * @param  string $text Analyzer text
+     * @return \Elastica\Query\FuzzyLikeThis
+     */
+    public function setAnalyzer($text)
+    {
+        $text = trim($text);
+        $this->_analyzer = $text;
+
+        return $this;
+    }
+
+    /**
      * Converts fuzzy like this query to array
      *
      * @return array Query array
@@ -174,11 +196,19 @@ class FuzzyLikeThis extends AbstractQuery
             $args['like_text'] = $this->_likeText;
         }
 
+        if (!empty($this->_analyzer)) {
+            $args['analyzer'] = $this->_analyzer;
+        }
+
+
         $args['min_similarity'] = ($this->_minSimilarity > 0) ? $this->_minSimilarity : 0;
 
         $args['prefix_length']   = $this->_prefixLength;
         $args['ignore_tf'] = $this->_ignoreTF;
         $args['max_query_terms'] = $this->_maxQueryTerms;
+
+        $data = parent::toArray();
+        $args = array_merge($args, $data['fuzzy_like_this']);
 
         return array('fuzzy_like_this' => $args);
     }
