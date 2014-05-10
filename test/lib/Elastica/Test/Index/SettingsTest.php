@@ -28,6 +28,28 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
+    public function testGetWithAlias()
+    {
+        $indexName = 'elasticatest';
+        $aliasName = 'elasticatest_alias';
+
+        $client = $this->_getClient();
+        $index = $client->getIndex($indexName);
+        $index->create(array(), true);
+        $index->refresh();
+
+        $index->addAlias($aliasName);
+        $index = $client->getIndex($aliasName);
+        $settings = $index->getSettings();
+
+        $this->assertInternalType('array', $settings->get());
+        $this->assertNotNull($settings->get('number_of_replicas'));
+        $this->assertNotNull($settings->get('number_of_shards'));
+        $this->assertNull($settings->get('kjqwerjlqwer'));
+
+        $index->delete();
+    }
+
     public function testSetNumberOfReplicas()
     {
         $indexName = 'test';
