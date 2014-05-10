@@ -387,6 +387,18 @@ class Query extends Param
     {
         $this->setParam('rescore', $rescore->toArray());
     }
+
+    /**
+     * Sets the _source field to be returned with every hit
+     *
+     * @param  array          $fields Fields to be returned
+     * @return \Elastica\Query Current object
+     * @link   http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-source-filtering.html
+     */
+    public function setSource(array $fields)
+    {
+        return $this->setParam('_source', $fields);
+    }
 }
 
 
