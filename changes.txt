@@ -1,14 +1,12 @@
 CHANGES
-2014-04-28
-- Added setAnalyzer method to Query\FuzzyLikeThis Class and fixed issue with params not being merged #611
-
-2014-05-06
-- Fix get settings on alaised index #608
 
 2014-05-05
+- Fix get settings on alaised index #608
 - Added named function for source filtering #605
+- Scroll type constant to Elastica\Search added #607
 
 2014-04-28
+- Added setAnalyzer method to Query\FuzzyLikeThis Class and fixed issue with params not being merged #611
 - Typo fixes #600, #602
 - Remove unreachable return statement #598
 
