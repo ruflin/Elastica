@@ -1,5 +1,8 @@
 CHANGES
 
+2014-05-11
+- Set processIsolation and backupGlobals to false to speed up tests. processIsolation was very slow with phpunit 4.0.19.
+
 2014-05-05
 - Fix get settings on alaised index #608
 - Added named function for source filtering #605
