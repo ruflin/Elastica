@@ -1,5 +1,8 @@
 CHANGES
 
+2014-05-12
+- Introduce ELASTICA_JSON_UNESCAPED_UNICODE ELASTICA_JSON_UNESCAPED_SLASHES to avoid using the global defines from PHP. Follows up #559.
+
 2014-04-28
 - Typo fixes #600, #602
 - Remove unreachable return statement #598

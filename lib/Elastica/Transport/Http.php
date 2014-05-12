@@ -3,8 +3,11 @@
 namespace Elastica\Transport;
 
 if (!defined('JSON_UNESCAPED_UNICODE')) {
-    define('JSON_UNESCAPED_SLASHES', 64);
-    define('JSON_UNESCAPED_UNICODE', 256);
+    define('ELASTICA_JSON_UNESCAPED_SLASHES', 64);
+    define('ELASTICA_JSON_UNESCAPED_UNICODE', 256);
+} else {
+    define('ELASTICA_JSON_UNESCAPED_SLASHES', JSON_UNESCAPED_SLASHES);
+    define('ELASTICA_JSON_UNESCAPED_UNICODE', JSON_UNESCAPED_UNICODE);
 }
 
 use Elastica\Exception\Connection\HttpException;
@@ -103,7 +106,7 @@ class Http extends AbstractTransport
             }
 
             if (is_array($data)) {
-                $content = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $content = json_encode($data, ELASTICA_JSON_UNESCAPED_UNICODE | ELASTICA_JSON_UNESCAPED_SLASHES);
             } else {
                 $content = $data;
             }

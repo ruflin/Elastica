@@ -3,8 +3,11 @@
 namespace Elastica\Bulk;
 
 if (!defined('JSON_UNESCAPED_UNICODE')) {
-    define('JSON_UNESCAPED_SLASHES', 64);
-    define('JSON_UNESCAPED_UNICODE', 256);
+    define('ELASTICA_JSON_UNESCAPED_SLASHES', 64);
+    define('ELASTICA_JSON_UNESCAPED_UNICODE', 256);
+} else {
+    define('ELASTICA_JSON_UNESCAPED_SLASHES', JSON_UNESCAPED_SLASHES);
+    define('ELASTICA_JSON_UNESCAPED_UNICODE', JSON_UNESCAPED_UNICODE);
 }
 
 use Elastica\Bulk;
@@ -193,7 +196,7 @@ class Action
             } elseif (is_array($source) && array_key_exists('doc', $source) && is_string($source['doc'])) {
                 $string.= '{"doc": ' . $source['doc'] . '}';
             } else {
-                $string.= json_encode($source, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $string.= json_encode($source, ELASTICA_JSON_UNESCAPED_UNICODE | ELASTICA_JSON_UNESCAPED_SLASHES);
             }
             $string.= Bulk::DELIMITER;
         }
