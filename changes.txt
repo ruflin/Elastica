@@ -1,5 +1,8 @@
 CHANGES
 
+2014-05-12
+- Update dev builds to phpunit 4.1.*
+
 2014-05-11
 - Set processIsolation and backupGlobals to false to speed up tests. processIsolation was very slow with phpunit 4.0.19.
 
