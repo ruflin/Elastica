@@ -2,12 +2,8 @@
 
 namespace Elastica\Bulk;
 
-if (!defined('JSON_UNESCAPED_UNICODE')) {
-    define('JSON_UNESCAPED_SLASHES', 64);
-    define('JSON_UNESCAPED_UNICODE', 256);
-}
-
 use Elastica\Bulk;
+use Elastica\JSON;
 use Elastica\Index;
 use Elastica\Type;
 
@@ -193,7 +189,7 @@ class Action
             } elseif (is_array($source) && array_key_exists('doc', $source) && is_string($source['doc'])) {
                 $string.= '{"doc": ' . $source['doc'] . '}';
             } else {
-                $string.= json_encode($source, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                $string.= JSON::stringify($source, 'JSON_ELASTICSEARCH');
             }
             $string.= Bulk::DELIMITER;
         }

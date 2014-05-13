@@ -1,5 +1,8 @@
 CHANGES
 
+2014-05-13
+- Add JSON compat library; Elasticsearch JSON flags and nicer error handling
+
 2014-05-12
 - Update dev builds to phpunit 4.1.*
 
