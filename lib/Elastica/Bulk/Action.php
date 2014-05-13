@@ -181,7 +181,7 @@ class Action
      */
     public function toString()
     {
-        $string = json_encode($this->getActionMetadata(), JSON_FORCE_OBJECT) . Bulk::DELIMITER;
+        $string = JSON::stringify($this->getActionMetadata(), JSON_FORCE_OBJECT) . Bulk::DELIMITER;
         if ($this->hasSource()) {
             $source = $this->getSource();
             if (is_string($source)) {

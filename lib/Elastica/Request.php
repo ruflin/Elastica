@@ -1,7 +1,9 @@
 <?php
 
 namespace Elastica;
+
 use Elastica\Exception\InvalidException;
+use Elastica\JSON;
 
 /**
  * Elastica Request object
@@ -185,7 +187,7 @@ class Request extends Param
      */
     public function toString()
     {
-        return json_encode($this->toArray());
+        return JSON::stringify($this->toArray());
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Elastica\Exception;
 
+use Elastica\JSON;
 use Elastica\Request;
 use Elastica\Response;
 
@@ -26,7 +27,7 @@ class PartialShardFailureException extends ResponseException
         parent::__construct($request, $response);
 
         $shardsStatistics = $response->getShardsStatistics();
-        $this->message = json_encode($shardsStatistics['failed']);
+        $this->message = JSON::stringify($shardsStatistics['failed']);
     }
 
 }

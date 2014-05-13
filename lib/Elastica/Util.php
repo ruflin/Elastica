@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\JSON;
+
 /**
  * Elastica tools
  *
@@ -162,7 +164,7 @@ class Util
 
         $data = $request->getData();
         if (!empty($data)) {
-            $message .= ' -d \'' . json_encode($data) . '\'';
+            $message .= ' -d \'' . JSON::stringify($data) . '\'';
         }
         return $message;
     }
