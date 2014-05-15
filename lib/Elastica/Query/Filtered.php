@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Query;
+use Elastica\Exception\NotImplementedException;
 use Elastica\Filter\AbstractFilter;
 
 /**
@@ -33,8 +34,10 @@ class Filtered extends AbstractQuery
      * @param \Elastica\Query\AbstractQuery   $query  Query object
      * @param \Elastica\Filter\AbstractFilter $filter Filter object
      */
-    public function __construct(AbstractQuery $query, AbstractFilter $filter)
-    {
+    public function __construct(
+        AbstractQuery $query = null,
+        AbstractFilter $filter = null
+    ) {
         $this->setQuery($query);
         $this->setFilter($filter);
     }
@@ -93,9 +96,20 @@ class Filtered extends AbstractQuery
      */
     public function toArray()
     {
-        return array('filtered' => array(
-            'query' => $this->_query->toArray(),
-            'filter' => $this->_filter->toArray()
-        ));
+        if ($this->_query === null && $this->_filter === null) {
+            throw new NotImplementedException('The query or filter have not been defined, you define at least one');
+        }
+
+        $filtered = array();
+
+        if ($this->_query !== null) {
+            $filtered['query'] = $this->_query->toArray();
+        }
+
+        if ($this->_filter !== null) {
+            $filtered['filter'] = $this->_filter->toArray();
+        }
+
+        return array('filtered' => $filtered);
     }
 }
