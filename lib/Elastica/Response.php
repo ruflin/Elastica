@@ -2,7 +2,9 @@
 
 namespace Elastica;
 
+use Elastica\Exception\JSONParseException;
 use Elastica\Exception\NotFoundException;
+use Elastica\JSON;
 
 /**
  * Elastica Response object
@@ -177,11 +179,10 @@ class Response
             if ($response === false) {
                 $this->_error = true;
             } else {
-
-                $tempResponse = json_decode($response, true);
-                // Check if decoding went as expected. If error is returned, json_decode makes empty string of string
-                if (json_last_error() == JSON_ERROR_NONE) {
-                    $response = $tempResponse;
+                try {
+                    $response = JSON::parse($response);
+                } catch (JSONParseException $e) {
+                    // leave reponse as is if parse fails
                 }
             }
 

@@ -1,7 +1,10 @@
 <?php
 
 namespace Elastica\Query;
+
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\JSONParseException;
+use Elastica\JSON;
 
 /**
  * Query Builder.
@@ -59,13 +62,11 @@ class Builder extends AbstractQuery
      */
     public function toArray()
     {
-        $array = json_decode($this->__toString(), true);
-
-        if (is_null($array)) {
+        try {
+            return JSON::parse($this->__toString());
+        } catch (JSONParseException $e) {
             throw new InvalidException('The query produced is invalid');
         }
-
-        return $array;
     }
 
     /**
