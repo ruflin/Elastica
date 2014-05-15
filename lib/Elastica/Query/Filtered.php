@@ -38,8 +38,13 @@ class Filtered extends AbstractQuery
         AbstractQuery $query = null,
         AbstractFilter $filter = null
     ) {
-        $this->setQuery($query);
-        $this->setFilter($filter);
+        if ($query !== null) {
+            $this->setQuery($query);
+        }
+
+        if ($filter !== null) {
+            $this->setFilter($filter);
+        }
     }
 
     /**
