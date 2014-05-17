@@ -62,4 +62,13 @@ class FilteredTest extends BaseTest
         $this->assertEquals($query1->getFilter(), $filter1);
         $this->assertEquals($query2->getFilter(), $filter2);
     }
+
+    /**
+     * @expectedException \Elastica\Exception\NotImplementedException
+     */
+    public function testFilteredWithoutArgumentsShouldRaiseException()
+    {
+        $query = new Filtered();
+        $query->toArray();
+    }
 }
