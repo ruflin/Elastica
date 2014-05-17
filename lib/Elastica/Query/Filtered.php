@@ -1,8 +1,9 @@
 <?php
 
 namespace Elastica\Query;
-use Elastica\Exception\NotImplementedException;
+
 use Elastica\Filter\AbstractFilter;
+use Elastica\Exception\NotImplementedException;
 
 /**
  * Filtered query. Needs a query and a filter
@@ -38,13 +39,8 @@ class Filtered extends AbstractQuery
         AbstractQuery $query = null,
         AbstractFilter $filter = null
     ) {
-        if ($query !== null) {
-            $this->setQuery($query);
-        }
-
-        if ($filter !== null) {
-            $this->setFilter($filter);
-        }
+        $this->setQuery($query);
+        $this->setFilter($filter);
     }
 
     /**
