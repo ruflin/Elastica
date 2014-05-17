@@ -39,8 +39,8 @@ class Filtered extends AbstractQuery
         AbstractQuery $query = null,
         AbstractFilter $filter = null
     ) {
-        $this->setQuery($query);
-        $this->setFilter($filter);
+        $this->_query  = $query;
+        $this->_filter = $filter;
     }
 
     /**
@@ -97,10 +97,6 @@ class Filtered extends AbstractQuery
      */
     public function toArray()
     {
-        if ($this->_query === null && $this->_filter === null) {
-            throw new NotImplementedException('The query or filter have not been defined, you define at least one');
-        }
-
         $filtered = array();
 
         if ($this->_query !== null) {
@@ -109,6 +105,10 @@ class Filtered extends AbstractQuery
 
         if ($this->_filter !== null) {
             $filtered['filter'] = $this->_filter->toArray();
+        }
+
+        if (empty($filtered)) {
+            throw new NotImplementedException('A query and/or filter is required');
         }
 
         return array('filtered' => $filtered);
