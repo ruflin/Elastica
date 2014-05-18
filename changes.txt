@@ -1,6 +1,10 @@
 CHANGES
 
 2014-05-13
+ - Removed the requirement to set arguments filter and/or query in Filtered, according to the documentation:
+ http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html
+
+2014-05-13
 - Add JSON compat library; Elasticsearch JSON flags and nicer error handling
 
 2014-05-12
