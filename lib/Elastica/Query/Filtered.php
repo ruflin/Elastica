@@ -3,7 +3,7 @@
 namespace Elastica\Query;
 
 use Elastica\Filter\AbstractFilter;
-use Elastica\Exception\NotImplementedException;
+use Elastica\Exception\InvalidException;
 
 /**
  * Filtered query. Needs a query and a filter
@@ -108,7 +108,7 @@ class Filtered extends AbstractQuery
         }
 
         if (empty($filtered)) {
-            throw new NotImplementedException('A query and/or filter is required');
+            throw new InvalidException('A query and/or filter is required');
         }
 
         return array('filtered' => $filtered);

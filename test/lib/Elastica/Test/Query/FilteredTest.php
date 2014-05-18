@@ -64,7 +64,7 @@ class FilteredTest extends BaseTest
     }
 
     /**
-     * @expectedException \Elastica\Exception\NotImplementedException
+     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testFilteredWithoutArgumentsShouldRaiseException()
     {
