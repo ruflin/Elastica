@@ -27,9 +27,15 @@ class Filter extends AbstractAggregation
      */
     public function toArray()
     {
-        return array(
-            "filter" => $this->getParam("filter"),
-            "aggs" => $this->_aggs
+        $array = array(
+            "filter" => $this->getParam("filter")
         );
+
+        if($this->_aggs)
+        {
+            $array['aggs'] = $this->_aggs;
+        }
+
+        return $array;
     }
 }

@@ -54,10 +54,25 @@ class FilterTest extends BaseAggregationTest
 
         $query = new Query();
         $query->addAggregation($agg);
+
         $results = $this->_index->search($query)->getAggregation("filter");
         $results = $results['price']['value'];
 
         $this->assertEquals((5 + 8) / 2.0, $results);
+    }
+
+    public function testFilterNoSubAggregation()
+    {
+        $agg = new Avg("price");
+        $agg->setField("price");
+
+        $query = new Query();
+        $query->addAggregation($agg);
+
+        $results = $this->_index->search($query)->getAggregation("price");
+        $results = $results['value'];
+
+        $this->assertEquals((5 + 8 + 1 + 3) / 4.0, $results);
     }
 }
  
