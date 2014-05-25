@@ -55,7 +55,7 @@ class Guzzle extends AbstractTransport
         $connection = $this->getConnection();
 
         try {
-            $client = $this->getGuzzleClient($this->getBaseUrl($connection), $connection->isPersistent());
+            $client = $this->_getGuzzleClient($this->_getBaseUrl($connection), $connection->isPersistent());
 
             $options = array();
             if ($connection->getTimeout()) {
@@ -66,7 +66,7 @@ class Guzzle extends AbstractTransport
                 $options['proxy'] = $connection->getProxy();
             }
 
-            $req = $client->createRequest($request->getMethod(), $this->getActionPath($request), $options);
+            $req = $client->createRequest($request->getMethod(), $this->_getActionPath($request), $options);
             $req->setHeaders($connection->hasConfig('headers') ?: array());
 
             $data = $request->getData();
@@ -130,7 +130,7 @@ class Guzzle extends AbstractTransport
      * @param  bool $persistent False if not persistent connection
      * @return resource Connection resource
      */
-    protected function getGuzzleClient($baseUrl, $persistent = true)
+    protected function _getGuzzleClient($baseUrl, $persistent = true)
     {
         if (!$persistent || !self::$_guzzleClientConnection) {
             self::$_guzzleClientConnection = new Client(array('base_url' => $baseUrl));
@@ -144,7 +144,7 @@ class Guzzle extends AbstractTransport
      *
      * @param  \Elastica\Connection $connection
      */
-    protected function getBaseUrl(Connection $connection)
+    protected function _getBaseUrl(Connection $connection)
     {
         // If url is set, url is taken. Otherwise port, host and path
         $url = $connection->hasConfig('url') ? $connection->getConfig('url') : '';
@@ -162,7 +162,7 @@ class Guzzle extends AbstractTransport
      *
      * @param  \Elastica\Request $request
      */
-    protected function getActionPath(Request $request)
+    protected function _getActionPath(Request $request)
     {
         $action = $request->getPath();
         if ($action) {
