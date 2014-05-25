@@ -74,7 +74,7 @@ class ScanAndScrollTest extends BaseTest {
         // We expect 2 scrolls:
         // 1. with 10 hits,
         // 2. with 1 hit
-        // Note: there is a 3. scroll with 0 requests
+        // Note: there is a 3. scroll with 0 hits
 
         $count = 0;
         foreach($scanAndScroll as $resultSet) {

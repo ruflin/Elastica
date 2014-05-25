@@ -3,7 +3,7 @@
 namespace Elastica;
 
 /**
- * scan and scroll object for distributed search execution
+ * scan and scroll object
  *
  * @category Xodoa
  * @package Elastica
@@ -18,12 +18,12 @@ class ScanAndScroll implements \Iterator {
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html
      * @var string
      */
-    public $expiryTime = '1m';
+    public $expiryTime;
 
     /**
      * @var int
      */
-    public $sizePerShard = 1000;
+    public $sizePerShard;
 
     /**
      * @var Search
@@ -41,7 +41,7 @@ class ScanAndScroll implements \Iterator {
     protected $_lastScrollId = null;
 
     /**
-     * @var ResultSet
+     * @var null|ResultSet
      */
     protected $_currentResultSet = null;
 
@@ -49,9 +49,13 @@ class ScanAndScroll implements \Iterator {
      * Constructs scroll iterator object
      *
      * @param Search $search
+     * @param string $expiryTime
+     * @param int $sizePerShard
      */
-    function __construct(Search $search) {
+    function __construct(Search $search, $expiryTime = '1m', $sizePerShard = 1000) {
         $this->_search = $search;
+        $this->expiryTime = $expiryTime;
+        $this->sizePerShard = $sizePerShard;
     }
 
     /**
@@ -75,7 +79,7 @@ class ScanAndScroll implements \Iterator {
     }
 
     /**
-     * Return the scroll id of current scroll search
+     * Return the scroll id of current scroll request
      *
      * @link http://php.net/manual/en/iterator.key.php
      * @return string
@@ -85,7 +89,7 @@ class ScanAndScroll implements \Iterator {
     }
 
     /**
-     * Returns true if current result set contains hit
+     * Returns true if current result set contains one hit
      *
      * @link http://php.net/manual/en/iterator.valid.php
      * @return boolean
@@ -109,7 +113,7 @@ class ScanAndScroll implements \Iterator {
         $this->_search->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_SCAN);
         $this->_search->setOption(Search::OPTION_SCROLL, $this->expiryTime);
 
-        // initial search
+        // initial scan request
         $this->_setScrollId($this->_search->search());
 
         // trigger first scroll request
