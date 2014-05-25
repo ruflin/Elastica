@@ -2,6 +2,7 @@ CHANGES
 
 2014-05-25
 - Added Guzzle transport as an alternative to the default Http transport #618
+- Added Elastica\ScanAndScroll Iterator (http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/scan-scroll.html) #617
 
 2014-05-13
 - Add JSON compat library; Elasticsearch JSON flags and nicer error handling #614

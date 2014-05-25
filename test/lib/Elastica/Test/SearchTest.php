@@ -492,4 +492,9 @@ class SearchTest extends BaseTest
 		$this->assertInstanceOf('\Elastica\ResultSet', $result2);
 		$this->assertEquals(1, $result2->getTotalHits());
 	}
+
+    public function testScanAndScroll() {
+        $search = new Search($this->_getClient());
+        $this->assertInstanceOf('Elastica\ScanAndScroll', $search->scanAndScroll());
+    }
 }
