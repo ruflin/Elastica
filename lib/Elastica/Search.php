@@ -499,4 +499,16 @@ class Search
     {
         return $this->setOptionsAndQuery(array(self::OPTION_SEARCH_TYPE_SUGGEST => 'suggest'), $suggest);
     }
+
+    /**
+     * Returns the ScanAndScroll Iterator
+     *
+     * @see Elastica\ScanAndScroll
+     * @param string $expiryTime
+     * @param int $sizePerShard
+     * @return ScanAndScroll
+     */
+    public function scanAndScroll($expiryTime = '1m', $sizePerShard = 1000) {
+        return new ScanAndScroll($this, $expiryTime, $sizePerShard);
+    }
 }
