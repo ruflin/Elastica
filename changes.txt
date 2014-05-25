@@ -1,5 +1,8 @@
 CHANGES
 
+2014-05-25
+- Added Guzzle transport as an alternative to the default Http transport
+
 2014-05-13
 - Add JSON compat library; Elasticsearch JSON flags and nicer error handling
 
