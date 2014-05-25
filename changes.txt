@@ -1,10 +1,10 @@
 CHANGES
 
 2014-05-25
-- Added Guzzle transport as an alternative to the default Http transport
+- Added Guzzle transport as an alternative to the default Http transport #618
 
 2014-05-13
-- Add JSON compat library; Elasticsearch JSON flags and nicer error handling
+- Add JSON compat library; Elasticsearch JSON flags and nicer error handling #614
 
 2014-05-12
 - Update dev builds to phpunit 4.1.*
