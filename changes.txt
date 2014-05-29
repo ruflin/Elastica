@@ -1,7 +1,7 @@
 CHANGES
 
 2014-05-27
-- Fix Aggragations/Filter to work with es v1.2.0
+- Fix Aggragations/Filter to work with es v1.2.0 #619
 
 2014-05-25
 - Added Guzzle transport as an alternative to the default Http transport #618
