@@ -1,5 +1,8 @@
 CHANGES
 
+2014-05-27
+- Fix Aggragations/Filter to work with es v1.2.0
+
 2014-05-25
 - Added Guzzle transport as an alternative to the default Http transport #618
 - Added Elastica\ScanAndScroll Iterator (http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/scan-scroll.html) #617
