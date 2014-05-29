@@ -13,7 +13,7 @@ Contributing
 ------------
 Help is very welcomed, but code contributions must be done in respect of [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md). More details on how to contribute and guidelines for [pull requests](http://elastica.io/contribute/pull-request.html) can be found [here](http://elastica.io/contribute/).
 
-See [Coding guidelines](https://github.com/ruflin/Elastica/wiki/Coding-guidelines) for tips on how to do so. All changes which are made to the project are added to the [changes.txt](https://github.com/ruflin/Elastica/blob/master/changes.txt).
+See [Coding guidelines](http://elastica.io/contribute/coding-guidelines.html) for tips on how to do so. All changes which are made to the project are added to the [changes.txt](https://github.com/ruflin/Elastica/blob/master/changes.txt).
 
 
 Dependencies
