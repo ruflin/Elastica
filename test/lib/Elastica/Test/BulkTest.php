@@ -558,6 +558,26 @@ class BulkTest extends BaseTest
         $doc = $type->getDocument(6);
         $this->assertEquals('test', $doc->test);
 
+        //test doc_as_upsert with set of documents (use of addDocuments)
+        $doc1 = new \Elastica\Document(7, array('test' => 'test1'));
+        $doc1->setDocAsUpsert(true);
+        $doc2 = new \Elastica\Document(8, array('test' => 'test2'));
+        $doc2->setDocAsUpsert(true);
+        $docs = array($doc1, $doc2);
+        $bulk = new Bulk($client);
+        $bulk->setType($type);
+        $bulk->addDocuments($docs, \Elastica\Bulk\Action::OP_TYPE_UPDATE);
+        $response = $bulk->send();
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        $index->refresh();
+        $doc = $type->getDocument(7);
+        $this->assertEquals('test1', $doc->test);
+        $doc = $type->getDocument();
+        $this->assertEquals('test2', $doc->test);
+
         //test updating via document with json string as data
         $doc3 = $type->createDocument(2);
         $bulk = new Bulk($client);
