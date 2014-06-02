@@ -42,6 +42,7 @@ class IndexDocument extends AbstractDocument
             'parent',
             'ttl',
             'timestamp',
+            'retry_on_conflict',
         );
         $metadata = $document->getOptions($params, true);
 
