@@ -575,7 +575,7 @@ class BulkTest extends BaseTest
         $index->refresh();
         $doc = $type->getDocument(7);
         $this->assertEquals('test1', $doc->test);
-        $doc = $type->getDocument();
+        $doc = $type->getDocument(8);
         $this->assertEquals('test2', $doc->test);
 
         //test updating via document with json string as data
