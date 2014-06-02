@@ -1,5 +1,8 @@
 CHANGES
 
+2014-06-01
+- toString updated to consider doc_as_upsert if sent an array source #622
+
 2014-05-27
 - Fix Aggragations/Filter to work with es v1.2.0 #619
 
