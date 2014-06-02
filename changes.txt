@@ -1,5 +1,8 @@
 CHANGES
 
+2014-06-02
+- add retry_on_conflict support to bulk #623
+
 2014-06-01
 - toString updated to consider doc_as_upsert if sent an array source #622
 

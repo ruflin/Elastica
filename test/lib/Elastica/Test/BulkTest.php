@@ -616,6 +616,25 @@ class BulkTest extends BaseTest
         $this->assertEquals($indexName . '/' . $typeName . '/_bulk', $bulk->getPath());
     }
 
+    public function testRetry()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('bulk_test');
+        $client = $index->getClient();
+
+        $doc1 = $type->createDocument(1, array('name' => 'Mister Fantastic'));
+        $doc1->setOpType(Action::OP_TYPE_UPDATE);
+        $doc1->setRetryOnConflict(5);
+
+        $bulk = new Bulk($client);
+        $bulk->addDocument($doc1);
+
+        $actions = $bulk->getActions();
+
+        $metadata = $actions[0]->getMetadata();
+        $this->assertEquals(5, $metadata[ '_retry_on_conflict' ]);
+    }
+
     public function udpDataProvider()
     {
         return array(
