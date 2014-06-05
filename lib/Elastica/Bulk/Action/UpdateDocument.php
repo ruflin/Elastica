@@ -66,27 +66,4 @@ class UpdateDocument extends IndexDocument
 
         return $this;
     }
-
-    /**
-     * @param \Elastica\Script $script
-     * @return array
-     */
-    protected function _getMetadataByScript(Script $script)
-    {
-        $params = array(
-                'index',
-                'type',
-                'id',
-                'version',
-                'version_type',
-                'routing',
-                'percolate',
-                'parent',
-                'ttl',
-                'timestamp',
-        );
-        $metadata = $script->getOptions($params, true);
-
-        return $metadata;
-    }
 }

@@ -2,7 +2,7 @@
 
 namespace Elastica\Bulk\Action;
 
-use Elastica\Document;
+use Elastica\AbstractUpdateAction;
 
 class DeleteDocument extends AbstractDocument
 {
@@ -12,10 +12,10 @@ class DeleteDocument extends AbstractDocument
     protected $_opType = self::OP_TYPE_DELETE;
 
     /**
-     * @param \Elastica\Document $document
+     * @param \Elastica\AbstractUpdateAction $action
      * @return array
      */
-    protected function _getMetadataByDocument(Document $document)
+    protected function _getMetadata(AbstractUpdateAction $action)
     {
         $params = array(
             'index',
@@ -26,7 +26,7 @@ class DeleteDocument extends AbstractDocument
             'routing',
             'parent'
         );
-        $metadata = $document->getOptions($params, true);
+        $metadata = $action->getOptions($params, true);
 
         return $metadata;
     }

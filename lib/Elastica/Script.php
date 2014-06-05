@@ -12,7 +12,7 @@ use Elastica\Exception\InvalidException;
  * @author avasilenko <aa.vasilenko@gmail.com>
  * @link http://www.elasticsearch.org/guide/reference/modules/scripting.html
  */
-class Script extends Param
+class Script extends AbstractUpdateAction
 {
     const LANG_MVEL   = 'mvel';
     const LANG_JS     = 'js';
@@ -29,11 +29,6 @@ class Script extends Param
      * @var string
      */
     private $_lang;
-
-    /**
-     * @var \Elastica\Document
-     */
-    protected $_upsert;
 
     /**
      * @param string      $script
@@ -105,93 +100,6 @@ class Script extends Param
         }
 
         return $script;
-    }
-
-    /**
-     * @param \Elastica\Document|array $data
-     * @return \Elastica\Document
-     */
-    public function setUpsert($data)
-    {
-        $document = Document::create($data);
-        $this->_upsert = $document;
-
-        return $this;
-    }
-
-    /**
-     * @return \Elastica\Document
-     */
-    public function getUpsert()
-    {
-        return $this->_upsert;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasUpsert()
-    {
-        return null !== $this->_upsert;
-    }
-
-    /**
-     * Sets the id of the document the script updates.
-     *
-     * @param  string            $id
-     * @return \Elastica\Script
-     */
-    public function setId($id)
-    {
-        return $this->setParam('_id', $id);
-    }
-
-    /**
-     * Returns id of the document the script updates.
-     *
-     * @return string|int Document id
-     */
-    public function getId()
-    {
-        return ($this->hasParam('_id')) ? $this->getParam('_id') : null;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasId()
-    {
-        return (bool)$this->getId();
-    }
-
-    /**
-     * @param array $fields if empty array all options will be returned, field names can be either with underscored either without, i.e. _percolate, routing
-     * @param bool $withUnderscore should option keys contain underscore prefix
-     * @return array
-     */
-    public function getOptions(array $fields = array(), $withUnderscore = false)
-    {
-        if (!empty($fields)) {
-            $data = array();
-            
-            foreach ($fields as $field) {
-                $key = '_' . ltrim($field, '_');
-                if ($this->hasParam($key) && '' !== (string) $this->getParam($key)) {
-                    $data[$key] = $this->getParam($key);
-                }
-            }
-            
-        } else {
-            $data = $this->getParams();
-        }
-        
-        if (!$withUnderscore) {
-            foreach ($data as $key => $value) {
-                $data[ltrim($key, '_')] = $value;
-                unset($data[$key]);
-            }
-        }
-        return $data;
     }
 
     /**
