@@ -3,19 +3,19 @@
 namespace Elastica\Query;
 
 /**
- * Class BoostingQuery
+ * Class Boosting
  * @package Elastica\Query
  * @author Balazs Nadasdi <yitsushi@gmail.com>
  * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
  */
-class BoostingQuery extends AbstractQuery
+class Boosting extends AbstractQuery
 {
     const NEGATIVE_BOOST = 0.2;
 
     /**
      * Set the positive query for this Boosting Query
      * @param AbstractQuery $query
-     * @return \Elastica\Query\BoostingQuery
+     * @return \Elastica\Query\Boosting
      */
     public function setPositiveQuery(AbstractQuery $query)
     {
@@ -25,7 +25,7 @@ class BoostingQuery extends AbstractQuery
     /**
      * Set the negative query for this Boosting Query
      * @param AbstractQuery $query
-     * @return \Elastica\Query\BoostingQuery
+     * @return \Elastica\Query\Boosting
      */
     public function setNegativeQuery(AbstractQuery $query)
     {
@@ -35,7 +35,7 @@ class BoostingQuery extends AbstractQuery
     /**
      * Set the negative_boost parameter for this Boosting Query
      * @param Float $negativeBoost
-     * @return \Elastica\Query\BoostingQuery
+     * @return \Elastica\Query\Boosting
      */
     public function setNegativeBoost($negativeBoost)
     {

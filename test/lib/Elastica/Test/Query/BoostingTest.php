@@ -3,10 +3,10 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\BoostingQuery;
+use Elastica\Query\Boosting;
 use Elastica\Test\Base as BaseTest;
 
-class BoostingQueryTest extends BaseTest
+class BoostingTest extends BaseTest
 {
     /**
      * @var \Elastica\Index
@@ -59,7 +59,7 @@ class BoostingQueryTest extends BaseTest
         $keyword = "vital";
         $negativeKeyword = "Mercury";
 
-        $query = new BoostingQuery();
+        $query = new Boosting();
         $positiveQuery = new \Elastica\Query\Term(array('name' => $keyword));
         $negativeQuery = new \Elastica\Query\Term(array('name' => $negativeKeyword));
         $query->setPositiveQuery($positiveQuery);
@@ -81,7 +81,7 @@ class BoostingQueryTest extends BaseTest
         $keyword = "vital";
         $negativeKeyword = "mercury";
 
-        $query = new BoostingQuery();
+        $query = new Boosting();
         $positiveQuery = new \Elastica\Query\Term(array('name' => $keyword));
         $negativeQuery = new \Elastica\Query\Term(array('name' => $negativeKeyword));
         $query->setPositiveQuery($positiveQuery);
