@@ -1,7 +1,7 @@
 CHANGES
 
-2014-06-05
-- Update travis to elasticsearch 1.2.1
+2014-06-10
+- Update travis to elasticsearch 1.2.1, disable Thrift plugin as not compatible
 
 2014-06-02
 - add retry_on_conflict support to bulk #623
