@@ -36,6 +36,9 @@ do
     # enable udp
     echo "bulk.udp.enabled: true" >> $config_yml
     echo "bulk.udp.bulk_actions: 5" >> $config_yml
+    
+    # enable dynamic scripting
+    echo "script.disable_dynamic: false" >> $config_yml
 
     echo "Starting server on http port: $http_port"
 
