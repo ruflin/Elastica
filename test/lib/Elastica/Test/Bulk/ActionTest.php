@@ -37,23 +37,27 @@ class ActionTest extends BaseTest
         $expected = '{"index":{"_index":"index","_type":"type","_id":1}}' . "\n";
         $this->assertEquals($expected, $action->toString());
 
+        $action->setRouting(1);
+        $expected = '{"index":{"_index":"index","_type":"type","_id":1,"_routing":1}}' . "\n";
+        $this->assertEquals($expected, $action->toString());
+
         $client = new Client();
         $index = new Index($client, 'index2');
         $type = new Type($index, 'type2');
 
         $action->setIndex($index);
 
-        $expected = '{"index":{"_index":"index2","_type":"type","_id":1}}' . "\n";
+        $expected = '{"index":{"_index":"index2","_type":"type","_id":1,"_routing":1}}' . "\n";
         $this->assertEquals($expected, $action->toString());
 
         $action->setType($type);
 
-        $expected = '{"index":{"_index":"index2","_type":"type2","_id":1}}' . "\n";
+        $expected = '{"index":{"_index":"index2","_type":"type2","_id":1,"_routing":1}}' . "\n";
         $this->assertEquals($expected, $action->toString());
 
         $action->setSource(array('user' => 'name'));
 
-        $expected = '{"index":{"_index":"index2","_type":"type2","_id":1}}' . "\n";
+        $expected = '{"index":{"_index":"index2","_type":"type2","_id":1,"_routing":1}}' . "\n";
         $expected.= '{"user":"name"}' . "\n";
 
         $this->assertEquals($expected, $action->toString());
