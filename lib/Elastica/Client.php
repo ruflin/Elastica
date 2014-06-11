@@ -528,8 +528,9 @@ class Client
             $action = new Action(Action::OP_TYPE_DELETE);
             $action->setId($id);
 
-            if (!empty($routing))
+            if (!empty($routing)) {
                 $action->setRouting($routing);
+            }
 
             $bulk->addAction($action);
         }
