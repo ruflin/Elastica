@@ -165,6 +165,17 @@ class Action
     }
 
     /**
+     * @param string $routing
+     * @return \Elastica\Bulk\Action
+     */
+    public function setRouting($routing)
+    {
+        $this->_metadata['_routing'] = $routing;
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function toArray()

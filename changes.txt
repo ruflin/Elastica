@@ -1,5 +1,8 @@
 CHANGES
 
+2014-06-11
+- Allow bulk API deletes to be routed #631
+
 2014-06-10
 - Update travis to elasticsearch 1.2.1, disable Thrift plugin as not compatible and fix incompatible tests
 
