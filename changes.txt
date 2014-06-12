@@ -1,5 +1,8 @@
 CHANGES
 
+2014-06-11
+- Allow bulk API deletes to be routed #631
+
 2014-06-04
 - Implement Boosting Query (http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html) #625
 

@@ -506,14 +506,15 @@ class Client
     /**
      * Deletes documents with the given ids, index, type from the index
      *
-     * @param  array                               $ids   Document ids
-     * @param  string|\Elastica\Index               $index Index name
-     * @param  string|\Elastica\Type                $type  Type of documents
+     * @param  array                                $ids      Document ids
+     * @param  string|\Elastica\Index               $index    Index name
+     * @param  string|\Elastica\Type                $type     Type of documents
+     * @param  string|false                         $routing  Optional routing key for all ids
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Bulk\ResponseSet                   Response object
+     * @return \Elastica\Bulk\ResponseSet           Response  object
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
-    public function deleteIds(array $ids, $index, $type)
+    public function deleteIds(array $ids, $index, $type, $routing = false)
     {
         if (empty($ids)) {
             throw new InvalidException('Array has to consist of at least one id');
@@ -526,6 +527,10 @@ class Client
         foreach ($ids as $id) {
             $action = new Action(Action::OP_TYPE_DELETE);
             $action->setId($id);
+
+            if (!empty($routing)) {
+                $action->setRouting($routing);
+            }
 
             $bulk->addAction($action);
         }
