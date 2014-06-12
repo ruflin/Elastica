@@ -34,14 +34,16 @@ class IpRangeTest extends BaseAggregationTest
         $agg = new IpRange("ip", "address");
         $agg->addRange("192.168.1.101");
         $agg->addRange(null, "192.168.1.200");
-        $agg->addMaskRange("192.168.1.0/24");
+        
+        $cidrRange = "192.168.1.0/24";
+        $agg->addMaskRange($cidrRange);
 
         $query = new Query();
         $query->addAggregation($agg);
         $results = $this->_index->search($query)->getAggregation("ip");
-
+        
         foreach ($results['buckets'] as $bucket) {
-            if (array_key_exists('key', $bucket)) {
+            if (array_key_exists('key', $bucket) && $bucket['key'] == $cidrRange) {
                 // the CIDR mask
                 $this->assertEquals(3, $bucket['doc_count']);
             } else {

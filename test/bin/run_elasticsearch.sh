@@ -9,7 +9,7 @@ wget http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch
 tar -xzf elasticsearch-${ES_VER}.tar.gz
 
 elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/${ES_MAPPER_ATTACHMENTS_VER}
-elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/${ES_TRANSPORT_THRIFT_VER}
+#elasticsearch-${ES_VER}/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/${ES_TRANSPORT_THRIFT_VER}
 elasticsearch-${ES_VER}/bin/plugin -install geocluster-facet --url https://github.com/zenobase/geocluster-facet/releases/download/${ES_GEOCLUSTER_FACET_VER}/geocluster-facet-${ES_GEOCLUSTER_FACET_VER}.jar
 
 export JAVA_OPTS="-server"
@@ -36,6 +36,9 @@ do
     # enable udp
     echo "bulk.udp.enabled: true" >> $config_yml
     echo "bulk.udp.bulk_actions: 5" >> $config_yml
+    
+    # enable dynamic scripting
+    echo "script.disable_dynamic: false" >> $config_yml
 
     echo "Starting server on http port: $http_port"
 
