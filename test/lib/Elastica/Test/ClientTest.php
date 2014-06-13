@@ -271,6 +271,7 @@ class ClientTest extends BaseTest
 
         // Adds 1 document to the index
         $doc = new Document(null, $data);
+        $doc->setRouting(1);
         $result = $type->addDocument($doc);
 
         // Refresh index
@@ -291,9 +292,8 @@ class ClientTest extends BaseTest
         $this->assertEquals(true, is_string($idxString));
         $this->assertEquals(true, is_string($typeString));
 
-
-        // Try to delete doc with a routing value different from _id
-        // which should fail to delete any docs
+        // Try to delete doc with a routing value which hashes to
+        // a different shard then the id.
         $resp = $index->getClient()->deleteIds($ids, $index, $type, 2);
 
         // Refresh the index
