@@ -29,6 +29,7 @@ class ScanAndScrollTest extends BaseTest {
         $query->setSize(100);
 
         $index = $this->_createIndex('test_1');
+        $index->refresh();  // Waits for the index to be fully created.
         $type = $index->getType('scanAndScrollTest');
 
         $search = new Search($this->_getClient());
