@@ -2,6 +2,7 @@ CHANGES
 
 2014-06-13
 - Stop ClientTest->testDeleteIdsIdxStringTypeString from failing 1/3 of the time #634
+- Stop ScanAndScrollTest->testQuerySizeOverride from failing frequently for no reason #635
 
 2014-06-11
 - Allow bulk API deletes to be routed #631
