@@ -633,6 +633,17 @@ class BulkTest extends BaseTest
 
         $metadata = $actions[0]->getMetadata();
         $this->assertEquals(5, $metadata[ '_retry_on_conflict' ]);
+
+        $script = new \Elastica\Script( '' );
+        $script->setRetryOnConflict(5);
+
+        $bulk = new Bulk($client);
+        $bulk->addScript($script);
+
+        $actions = $bulk->getActions();
+
+        $metadata = $actions[0]->getMetadata();
+        $this->assertEquals(5, $metadata[ '_retry_on_conflict' ]);
     }
 
     public function udpDataProvider()
