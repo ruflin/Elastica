@@ -132,7 +132,7 @@ class Param
      */
     public function getParam($key)
     {
-        if (!isset($this->_params[$key])) {
+        if (!$this->hasParam($key)) {
             throw new InvalidException('Param ' . $key . ' does not exist');
         }
 

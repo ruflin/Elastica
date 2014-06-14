@@ -1,5 +1,9 @@
 CHANGES
 
+
+2014-06-14
+ - Removed the requirement to set arguments filter and/or query in Filtered, according to the documentation: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html
+ 
 2014-06-13
 - Stop ClientTest->testDeleteIdsIdxStringTypeString from failing 1/3 of the time #634
 - Stop ScanAndScrollTest->testQuerySizeOverride from failing frequently for no reason #635
