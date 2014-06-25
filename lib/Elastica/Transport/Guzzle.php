@@ -70,7 +70,7 @@ class Guzzle extends AbstractTransport
             $req->setHeaders($connection->hasConfig('headers') ?: array());
 
             $data = $request->getData();
-            if ('' != $data) {
+            if ('' != $data && array() !== $data) {
 
                 if ($req->getMethod() == Request::GET) {
                     $req->setMethod(Request::POST);
