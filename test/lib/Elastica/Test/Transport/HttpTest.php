@@ -211,4 +211,16 @@ class HttpTest extends BaseTest
         $this->assertEquals(1, $resultSet->getTotalHits());
     }
 
+    public function testPostWith0Body()
+    {
+        $client = new Client();
+
+        $index = $client->getIndex('elastica_0_body');
+        $index->create(array(), true);
+
+        $tokens = $index->analyze('0');
+
+        $this->assertNotEmpty($tokens);
+    }
+
 }
