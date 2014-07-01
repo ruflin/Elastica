@@ -135,7 +135,7 @@ class Thrift extends AbstractTransport
             }
 
             $data = $request->getData();
-            if (!empty($data)) {
+            if (!empty($data) || '0' === $data) {
                 if (is_array($data)) {
                     $content = JSON::stringify($data);
                 } else {

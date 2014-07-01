@@ -39,7 +39,7 @@ class Memcache extends AbstractTransport
 
         $content = '';
 
-        if (!empty($data)) {
+        if (!empty($data) || '0' === $data) {
             if (is_array($data)) {
                 $content = JSON::stringify($data);
             } else {
