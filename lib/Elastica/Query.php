@@ -348,6 +348,10 @@ class Query extends Param
             unset($this->_params['facets']);
         }
 
+        if (isset($this->_params['post_filter']) && 0 === count($this->_params['post_filter'])) {
+            unset($this->_params['post_filter']);
+        }
+
         return $this->_params;
     }
 
@@ -398,6 +402,17 @@ class Query extends Param
     public function setSource(array $fields)
     {
         return $this->setParam('_source', $fields);
+    }
+
+    /**
+     * Sets post_filter argument for the query. The filter is applied after the query has executed
+     * @param   array $post
+     * @return  \Elastica\Query Current object
+     * @link    http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_filtering_queries_and_aggregations.html#_post_filter
+     */
+    public function setPostFilter(array $post)
+    {
+        return $this->setParam("post_filter", $post);
     }
 }
 
