@@ -216,6 +216,7 @@ class HttpTest extends BaseTest
         $client = new Client();
 
         $index = $client->getIndex('elastica_0_body');
+        $index->refresh();
         $index->create(array(), true);
 
         $tokens = $index->analyze('0');
