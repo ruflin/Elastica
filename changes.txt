@@ -1,10 +1,10 @@
 CHANGES
 
 2014-07-02
-- Add setPostFilter method to Elastica\Query (http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_filtering_queries_and_aggregations.html#_post_filter)
+- Add setPostFilter method to Elastica\Query (http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_filtering_queries_and_aggregations.html#_post_filter) #645
 
 2014-06-30
-- Add Reverse Nested aggregation (http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html).
+- Add Reverse Nested aggregation (http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html). #642
 
 2014-06-14
 - Release v1.2.1.0
