@@ -171,9 +171,9 @@ class FunctionScore extends AbstractQuery
      */
     public function setRandomScore($seed = NULL)
     {
-        $seedParam = array();
+        $seedParam = new \stdClass();
         if (!is_null($seed)) {
-            $seedParam['seed'] = $seed;
+            $seedParam->seed = $seed;
         }
         return $this->setParam('random_score', $seedParam);
     }
