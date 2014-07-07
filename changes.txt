@@ -1,5 +1,8 @@
 CHANGES
 
+2014-07-07
+ - Fix FunstionScore Query random_score without seed bug. #647
+
 2014-07-02
 - Add setPostFilter method to Elastica\Query (http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_filtering_queries_and_aggregations.html#_post_filter) #645
 

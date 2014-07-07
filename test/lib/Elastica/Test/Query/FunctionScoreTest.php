@@ -170,6 +170,16 @@ class FunctionScoreTest extends BaseTest
         $this->assertEquals("Miller's Field", $result0['name']);
     }
 
+    public function testRandomScoreWithoutSeed()
+    {
+        $query = new FunctionScore();
+        $query->setRandomScore();
+
+        $response = $this->type->search($query);
+
+        $this->assertEquals(2, $response->count());
+    }
+
     public function testScriptScore()
     {
         $scriptString = "_score * doc['price'].value";
