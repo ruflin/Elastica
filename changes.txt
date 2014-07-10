@@ -1,5 +1,8 @@
 CHANGES
 
+2014-07-09
+ - Make sure Travis run tests on HHVM. #649
+
 2014-07-07
  - Fix FunstionScore Query random_score without seed bug. #647
 

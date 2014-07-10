@@ -5,10 +5,11 @@ php:
   - 5.4
   - 5.5
   - 5.6
+  - hhvm
 
 matrix:
   allow_failures:
-    - php: 5.6
+    - php: hhvm
 
 env:
   global:
@@ -28,7 +29,7 @@ services:
 before_script:
     - composer self-update
     - composer --${ES_REQUIRE} --prefer-source install
-    - ./test/bin/install_php_memcache.sh
+    - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then ./test/bin/install_php_memcache.sh; fi;' 
     - ./test/bin/run_elasticsearch.sh
     - ./test/bin/run_proxy.sh
 
