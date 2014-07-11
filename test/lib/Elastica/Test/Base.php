@@ -8,7 +8,10 @@ class Base extends \PHPUnit_Framework_TestCase
 {
     protected function _getClient()
     {
-        return new Client();
+        return new Client(array(
+            'host' => getenv('ES_HOST') ?: 'localhost',
+            'port' => getenv('ES_PORT') ?: 9200,
+        ));
     }
 
     /**
