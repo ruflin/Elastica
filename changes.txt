@@ -1,5 +1,8 @@
 CHANGES
 
+2014-07-12
+ - Be able to configure ES host/port via ENV var in test env
+
 2014-07-07
  - Fix FunstionScore Query random_score without seed bug. #647
 
