@@ -5,7 +5,11 @@ namespace Elastica\Test\Query;
 use Elastica\Filter\Term;
 use Elastica\Filter\Ids;
 use Elastica\Query\ConstantScore;
+use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Index;
+use Elastica\Document;
+use Elastica\Type;
 
 class ConstantScoreTest extends BaseTest
 {
@@ -98,6 +102,49 @@ class ConstantScoreTest extends BaseTest
         );
 
         $this->assertEquals($expectedArray, $query->toArray());
+
+    }
+
+    public function testQuery()
+    {
+
+        $client = $this->_getClient();
+        $index = new Index($client, 'test');
+        $index->create(array(), true);
+
+        $type = new Type($index, 'constant_score');
+
+        $doc = new Document(1, array('id' => 1, 'email' => 'hans@test.com', 'username' => 'hans'));
+        $type->addDocument($doc);
+        $doc = new Document(2, array('id' => 2, 'email' => 'emil@test.com', 'username' => 'emil'));
+        $type->addDocument($doc);
+        $doc = new Document(3, array('id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth'));
+        $type->addDocument($doc);
+
+        // Refresh index
+        $index->refresh();
+
+        $boost = 1.3;
+        $query_match = new MatchAll();
+
+        $query = new ConstantScore();
+        $query->setQuery($query_match);
+        $query->setBoost($boost);
+
+        $expectedArray = array(
+            'constant_score' => array(
+                'query' => $query_match->toArray(),
+                'boost' => $boost
+            )
+        );
+
+        $this->assertEquals($expectedArray, $query->toArray());
+        $resultSet = $type->search($query);
+
+        $results = $resultSet->getResults();
+
+        $this->assertEquals($resultSet->count(), 3);
+        $this->assertEquals($results[1]->getScore(), 1);
 
     }
 

@@ -1,5 +1,8 @@
 CHANGES
 
+2014-07-14
+ - Add setQuery() method to Elastica\Query\ConstantScore #653
+
 2014-07-12
  - Be able to configure ES host/port via ENV var in test env #652
 
