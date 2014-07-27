@@ -1,5 +1,9 @@
 CHANGES
 
+2014-07-26
+- Release v1.3.0.0
+- Prepare Elastica Release v1.3.0.0
+
 2014-07-25
 - Update to elasticsearch version 1.3.0 http://www.elasticsearch.org/downloads/1-3-0/
 
