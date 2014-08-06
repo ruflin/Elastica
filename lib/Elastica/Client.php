@@ -109,7 +109,7 @@ class Client
             $strategy = Connection\Strategy\StrategyFactory::getSimpleStrategy();
         }
         
-        $this->_connectionPool = new Connection\ConnectionPool($connections, $strategy);
+        $this->_connectionPool = new Connection\ConnectionPool($connections, $strategy, $this->_callback);
     }
 
     /**
@@ -584,12 +584,7 @@ class Client
             return $response;
 
         } catch (ConnectionException $e) {
-            $connection->setEnabled(false);
-
-            // Calls callback with connection as param to make it possible to persist invalid connections
-            if ($this->_callback) {
-                call_user_func($this->_callback, $connection, $e, $this);
-            }
+            $this->_connectionPool->onFail($connection, $e, $this);
 
             // In case there is no valid connection left, throw exception which caused the disabling of the connection.
             if (!$this->hasConnection())

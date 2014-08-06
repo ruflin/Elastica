@@ -2,8 +2,10 @@
 
 namespace Elastica\Connection;
 
+use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Connection\Strategy\StrategyInterface;
+use Exception;
 
 /**
  * Description of ConnectionPool
@@ -19,22 +21,29 @@ class ConnectionPool
     protected $connections;
     /**
      *
-     * @var  Elastica\Connection\Strategy\StrategyInterface
+     * @var  StrategyInterface
      */
     protected $strategy;
+    /**
+     *
+     * @var callback
+     */
+    protected $callback;
     /**
      * 
      * @param array|Connection[] $connections
      */
-    public function __construct(array $connections, StrategyInterface $strategy)
+    public function __construct(array $connections, StrategyInterface $strategy, $callback = null)
     {
         $this->connections = $connections;
         
         $this->strategy = $strategy;
+        
+        $this->callback = $callback;
     }
     /**
      * 
-     * @param \Elastica\Connection $connection
+     * @param Connection $connection
      */
     public function addConnection(Connection $connection)
     {
@@ -72,10 +81,24 @@ class ConnectionPool
     }
     /**
      * 
-     * @return \Elastica\Connection
+     * @return Connection
      */
     public function getConnection()
     {
         return $this->strategy->getConnection($this->getConnections());
+    }
+    /**
+     * 
+     * @param Connection $connection
+     * @param Exception $e
+     * @param Client $client
+     */
+    public function onFail(Connection $connection, Exception $e, Client $client)
+    {
+        $connection->setEnabled(false);
+        
+        if ($this->callback) {
+            call_user_func($this->callback, $connection, $e, $client);
+        }
     }
 }

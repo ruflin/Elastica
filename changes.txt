@@ -1,5 +1,8 @@
 CHANGES
 
+2014-08-06
+ - Add connection pool and connection strategy
+
 2014-07-26
 - Release v1.3.0.0
 - Prepare Elastica Release v1.3.0.0

@@ -22,7 +22,7 @@ class StrategyFactory
             $strategy = $strategyName;
         } else if (CallbackStrategy::isValid($strategyName)) {
             $strategy = new CallbackStrategy($strategyName);
-        } else if (class_exists($strategyName)) {
+        } else if (is_string($strategyName) && class_exists($strategyName)) {
             $strategy = new $strategyName();
         } else if (is_string($strategyName)) {
             $pathToStrategy = '\\Elastica\\Connection\\Strategy\\'.$strategyName;

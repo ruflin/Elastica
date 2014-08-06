@@ -42,6 +42,6 @@ class CallbackStrategy implements StrategyInterface
      */
     public static function isValid($callback)
     {
-        return is_object($callback) && ($callback instanceof Closure);
+        return is_object($callback) && ($callback instanceof \Closure);
     }
 }
