@@ -44,11 +44,6 @@ class Client
     );
 
     /**
-     * @var \Elastica\Connection[] List of connections
-     */
-    protected $_connections = array();
-
-    /**
      * @var callback
      */
     protected $_callback = null;
@@ -67,6 +62,11 @@ class Client
      * @var LoggerInterface
      */
     protected $_logger = null;
+    /**
+     *
+     * @var Connection\ConnectionPool
+     */
+    protected $_connectionPool = null;
 
     /**
      * Creates a new Elastica client
@@ -86,22 +86,30 @@ class Client
      */
     protected function _initConnections()
     {
-        $connections = $this->getConfig('connections');
-
-        foreach ($connections as $connection) {
-            $this->_connections[] = Connection::create($this->_prepareConnectionParams($connection));
+        $connections = array();
+        
+        foreach ($this->getConfig('connections') as $connection) {
+            $connections[] = Connection::create($this->_prepareConnectionParams($connection));
         }
 
         if (isset($this->_config['servers'])) {
             foreach ($this->getConfig('servers') as $server) {
-                $this->_connections[] = Connection::create($this->_prepareConnectionParams($server));
+                $connections[] = Connection::create($this->_prepareConnectionParams($server));
             }
         }
 
         // If no connections set, create default connection
-        if (empty($this->_connections)) {
-            $this->_connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
+        if (empty($connections)) {
+            $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
         }
+        
+        if (isset($this->_config['connectionStrategy'])) {
+            $strategy = Connection\Strategy\StrategyFactory::create($this->getConfig('connectionStrategy'));
+        } else {
+            $strategy = Connection\Strategy\StrategyFactory::getSimpleStrategy();
+        }
+        
+        $this->_connectionPool = new Connection\ConnectionPool($connections, $strategy);
     }
 
     /**
@@ -439,7 +447,7 @@ class Client
      */
     public function addConnection(Connection $connection)
     {
-        $this->_connections[] = $connection;
+        $this->_connectionPool->addConnection($connection);
 
         return $this;
     }
@@ -451,15 +459,7 @@ class Client
      */
     public function hasConnection()
     {
-        foreach ($this->_connections as $connection)
-        {
-            if ($connection->isEnabled())
-            {
-                return true;
-            }
-        }
-        
-        return false;
+        return $this->_connectionPool->hasConnection();
     }
 
     /**
@@ -468,20 +468,7 @@ class Client
      */
     public function getConnection()
     {
-        $enabledConnection = null;
-
-        foreach ($this->_connections as $connection) {
-            if ($connection->isEnabled()) {
-                $enabledConnection = $connection;
-                break;
-            }
-        }
-
-        if (empty($enabledConnection)) {
-            throw new ClientException('No enabled connection');
-        }
-
-        return $enabledConnection;
+        return $this->_connectionPool->getConnection();
     }
 
     /**
@@ -489,7 +476,7 @@ class Client
      */
     public function getConnections()
     {
-        return $this->_connections;
+        return $this->_connectionPool->getConnections();
     }
 
     /**
@@ -498,7 +485,7 @@ class Client
      */
     public function setConnections(array $connections)
     {
-        $this->_connections = $connections;
+        $this->_connectionPool->setConnections($connections);
 
         return $this;
     }
