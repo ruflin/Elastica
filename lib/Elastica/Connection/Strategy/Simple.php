@@ -11,8 +11,8 @@ use Elastica\Connection\Strategy\StrategyInterface;
  */
 class Simple implements StrategyInterface
 {
+    
     /**
-     * 
      * @param array|\Elastica\Connection[] $connections
      * @return \Elastica\Connection
      */

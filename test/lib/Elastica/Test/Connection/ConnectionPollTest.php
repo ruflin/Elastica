@@ -73,10 +73,9 @@ class ConnectionPollTest extends BaseTest
     protected function createPool()
     {
         $connections = $this->getConnections();
-        $strategy = \Elastica\Connection\Strategy\StrategyFactory::getSimpleStrategy();
+        $strategy = \Elastica\Connection\Strategy\StrategyFactory::create('Simple');
         
         $pool = new \Elastica\Connection\ConnectionPool($connections, $strategy);
-        $pool->getConnections();
         
         return $pool;
     }

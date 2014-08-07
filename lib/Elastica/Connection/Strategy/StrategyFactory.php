@@ -10,7 +10,6 @@ namespace Elastica\Connection\Strategy;
 class StrategyFactory
 {
     /**
-     * 
      * @param mixed|Closure|String|StrategyInterface $strategyName
      * @return \Elastica\Connection\Strategy\StrategyInterface
      * @throws \InvalidArgumentException
@@ -36,13 +35,5 @@ class StrategyFactory
         }
         
         return $strategy;
-    }
-    /**
-     * 
-     * @return \Elastica\Connection\Strategy\Simple
-     */
-    public static function getSimpleStrategy()
-    {
-        return new Simple();
     }
 }

@@ -15,55 +15,62 @@ use Exception;
 class ConnectionPool
 {
     /**
-     *
-     * @var array
+     * Connections array
+     * 
+     * @var array|\Elastica\Connection[]
      */
-    protected $connections;
+    protected $_connections;
+    
     /**
-     *
-     * @var  StrategyInterface
+     * Strategy for connection
+     * 
+     * @var  \Elastica\Connection\Strategy\StrategyInterface
      */
-    protected $strategy;
+    protected $_strategy;
+    
     /**
-     *
+     * Callback function called on connection fail
+     * 
      * @var callback
      */
-    protected $callback;
+    protected $_callback;
+    
     /**
-     * 
-     * @param array|Connection[] $connections
+     * @param array $connections
+     * @param \Elastica\Connection\Strategy\StrategyInterface $strategy
+     * @param type $callback
      */
     public function __construct(array $connections, StrategyInterface $strategy, $callback = null)
     {
-        $this->connections = $connections;
+        $this->_connections = $connections;
         
-        $this->strategy = $strategy;
+        $this->_strategy = $strategy;
         
-        $this->callback = $callback;
+        $this->_callback = $callback;
     }
+    
     /**
-     * 
-     * @param Connection $connection
+     * @param \Elastica\Connection $connection
      */
     public function addConnection(Connection $connection)
     {
-        $this->connections[] = $connection;
+        $this->_connections[] = $connection;
     }
+    
     /**
-     * 
-     * @param array|Connection[] $connections
+     * @param array|\Elastica\Connection[] $connections
      */
     public function setConnections(array $connections)
     {
-        $this->connections = $connections;
+        $this->_connections = $connections;
     }
+    
     /**
-     * 
      * @return boolean
      */
     public function hasConnection()
     {
-        foreach ($this->connections as $connection) {
+        foreach ($this->_connections as $connection) {
             if ($connection->isEnabled()) {
                 return true;
             }
@@ -71,25 +78,25 @@ class ConnectionPool
         
         return false;
     }
+    
     /**
-     * 
      * @return array
      */
     public function getConnections()
     {
-        return $this->connections;
+        return $this->_connections;
     }
+    
     /**
-     * 
-     * @return Connection
+     * @return \Elastica\Connection
      */
     public function getConnection()
     {
-        return $this->strategy->getConnection($this->getConnections());
+        return $this->_strategy->getConnection($this->getConnections());
     }
+    
     /**
-     * 
-     * @param Connection $connection
+     * @param \Elastica\Connection $connection
      * @param Exception $e
      * @param Client $client
      */
@@ -97,8 +104,17 @@ class ConnectionPool
     {
         $connection->setEnabled(false);
         
-        if ($this->callback) {
-            call_user_func($this->callback, $connection, $e, $client);
+        if ($this->_callback) {
+            call_user_func($this->_callback, $connection, $e, $client);
         }
+    }
+    
+    /**
+     * 
+     * @return \Elastica\Connection\Strategy\StrategyInterface
+     */
+    public function getStrategy()
+    {
+        return $this->_strategy;
     }
 }

@@ -9,13 +9,13 @@ namespace Elastica\Connection\Strategy;
  */
 class CallbackStrategy implements StrategyInterface
 {
+    
     /**
-     *
      * @var Closure 
      */
-    protected $callback;
+    protected $_callback;
+    
     /**
-     * 
      * @param Closure $callback
      * @throws \InvalidArgumentException
      */
@@ -25,19 +25,19 @@ class CallbackStrategy implements StrategyInterface
             throw new \InvalidArgumentException(sprintf('Callback should be a Closure, %s given!', gettype($callback)));
         }
         
-        $this->callback = $callback;
+        $this->_callback = $callback;
     }
+    
     /**
-     * 
      * @param array|\Elastica\Connection[] $connections
      * @return \Elastica\Connection
      */
     public function getConnection($connections)
     {
-        return $this->callback->__invoke($connections);
+        return $this->_callback->__invoke($connections);
     }
+    
     /**
-     * 
      * @return boolean
      */
     public static function isValid($callback)

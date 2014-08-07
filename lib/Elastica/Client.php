@@ -4,8 +4,6 @@ namespace Elastica;
 
 use Elastica\Bulk;
 use Elastica\Bulk\Action;
-use Elastica\Exception\ResponseException;
-use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\RuntimeException;
@@ -103,11 +101,15 @@ class Client
             $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
         }
         
-        if (isset($this->_config['connectionStrategy'])) {
-            $strategy = Connection\Strategy\StrategyFactory::create($this->getConfig('connectionStrategy'));
-        } else {
-            $strategy = Connection\Strategy\StrategyFactory::getSimpleStrategy();
+        if (!isset($this->_config['connectionStrategy'])) {
+            if ($this->getConfig('roundRobin') === true) {
+                $this->setConfigValue('connectionStrategy', 'RoundRobin');
+            } else {
+                $this->setConfigValue('connectionStrategy', 'Simple');
+            }
         }
+        
+        $strategy = Connection\Strategy\StrategyFactory::create($this->getConfig('connectionStrategy'));
         
         $this->_connectionPool = new Connection\ConnectionPool($connections, $strategy, $this->_callback);
     }
@@ -478,9 +480,18 @@ class Client
     {
         return $this->_connectionPool->getConnections();
     }
+    
+    /**
+     * 
+     * @return \Connection\Strategy\StrategyInterface
+     */
+    public function getConnectionStrategy()
+    {
+        return $this->_connectionPool->getStrategy();
+    }
 
     /**
-     * @param  \Elastica\Connection[] $connections
+     * @param  array|\Elastica\Connection[] $connections
      * @return \Elastica\Client
      */
     public function setConnections(array $connections)

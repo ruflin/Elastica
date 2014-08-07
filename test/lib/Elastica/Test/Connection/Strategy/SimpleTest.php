@@ -3,45 +3,33 @@
 namespace Elastica\Test\Connection\Strategy;
 
 use Elastica\Client;
-use Elastica\Connection\Strategy\RoundRobin;
-use Elastica\Exception\ConnectionException;
-use Elastica\Response;
+use Elastica\Connection\Strategy\Simple;
 use Elastica\Test\Base;
 
 /**
- * Description of RoundRobinTest
+ * Description of SimplyTest
  *
  * @author chabior
  */
-class RoundRobinTest extends Base
+class SimpleTest extends Base
 {
-
     public function testConnection()
     {
-        $config = array('connectionStrategy' => 'RoundRobin');
-        $client = new Client($config);
+        $client = new Client();
         $resonse = $client->request('/_aliases');
-        /* @var $resonse Response */
-
+        /* @var $resonse \Elastica\Response */
+       
         $this->_checkResponse($resonse);
-
+        
         $this->_checkStrategy($client);
     }
-
-    public function testOldStrategySetted()
-    {
-        $config = array('roundRobin' => true);
-        $client = new Client($config);
-
-        $this->_checkStrategy($client);
-    }
-
+    
     /**
      * @expectedException \Elastica\Exception\ConnectionException
      */
     public function testFailConnection()
     {
-        $config = array('connectionStrategy' => 'RoundRobin', 'host' => '255.255.255.0');
+        $config = array('host' => '255.255.255.0');
         $client = new Client($config);
 
         $client->request('/_aliases');
@@ -60,7 +48,7 @@ class RoundRobinTest extends Base
             ++$count;
         };
         
-        $client = new Client(array('connectionStrategy' => 'RoundRobin'), $callback);
+        $client = new Client(array(), $callback);
         $client->setConnections($connections);
         
         $resonse = $client->request('/_aliases');
@@ -83,7 +71,7 @@ class RoundRobinTest extends Base
         );
 
         $count = 0;
-        $client = new Client(array('roundRobin' => true), function() use (&$count) {
+        $client = new Client(array(), function() use (&$count) {
             ++$count;
         });
         
@@ -94,7 +82,6 @@ class RoundRobinTest extends Base
             $this->fail('Should throw exception as no connection valid');
         } catch (\Elastica\Exception\ConnectionException $e) {
             $this->assertEquals(count($connections), $count);
-            $this->_checkStrategy($client);
         }
 
     }
@@ -103,7 +90,7 @@ class RoundRobinTest extends Base
     {
         $strategy = $client->getConnectionStrategy();
 
-        $condition = ($strategy instanceof RoundRobin);
+        $condition = ($strategy instanceof Simple);
 
         $this->assertTrue($condition);
     }
@@ -112,5 +99,4 @@ class RoundRobinTest extends Base
     {
         $this->assertTrue($resonse->isOk());
     }
-
 }

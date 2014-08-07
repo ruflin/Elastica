@@ -20,13 +20,6 @@ use Elastica\Test\Base;
  */
 class StrategyFactoryTest extends Base
 {
-   public function testGetSimpleStrategy()
-   {
-       $condition = (StrategyFactory::getSimpleStrategy() instanceof Simple);
-       
-       $this->assertTrue($condition);
-   }
-   
    public function testCreateCallbackStrategy()
    {
        $callback = function ($connections)

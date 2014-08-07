@@ -54,8 +54,16 @@ class CallbackStrategyTest extends Base
        });
        
        $client = new \Elastica\Client($config);
-       $client->request('/_aliases');
+       $resonse = $client->request('/_aliases');
        
        $this->assertEquals(1, $count);
+       
+       $this->assertTrue($resonse->isOk());
+       
+       $strategy = $client->getConnectionStrategy();
+       
+       $condition = ($strategy instanceof CallbackStrategy);
+       
+       $this->assertTrue($condition);
     }
 }

@@ -10,7 +10,6 @@ namespace Elastica\Connection\Strategy;
 interface StrategyInterface
 {
     /**
-     * 
      * @param array|\Elastica\Connection[] $connections
      * @return \Elastica\Connection
      */
