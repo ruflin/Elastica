@@ -13,6 +13,7 @@ class RoundRobin extends Simple
     /**
      * @param array|\Elastica\Connection[] $connections
      * @return \Elastica\Connection
+     * @throws \Elastica\Exception\ClientException
      */
     public function getConnection($connections)
     {

@@ -38,7 +38,7 @@ class ConnectionPool
     /**
      * @param array $connections
      * @param \Elastica\Connection\Strategy\StrategyInterface $strategy
-     * @param type $callback
+     * @param callback $callback
      */
     public function __construct(array $connections, StrategyInterface $strategy, $callback = null)
     {
@@ -89,6 +89,7 @@ class ConnectionPool
     
     /**
      * @return \Elastica\Connection
+     * @throws \Elastica\Exception\ClientException
      */
     public function getConnection()
     {
@@ -97,7 +98,7 @@ class ConnectionPool
     
     /**
      * @param \Elastica\Connection $connection
-     * @param Exception $e
+     * @param \Exception $e
      * @param Client $client
      */
     public function onFail(Connection $connection, Exception $e, Client $client)

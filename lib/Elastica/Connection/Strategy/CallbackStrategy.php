@@ -2,6 +2,8 @@
 
 namespace Elastica\Connection\Strategy;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Description of CallbackStrategy
  *
@@ -17,12 +19,12 @@ class CallbackStrategy implements StrategyInterface
     
     /**
      * @param Closure $callback
-     * @throws \InvalidArgumentException
+     * @throws \Elastica\Exception\InvalidException
      */
     public function __construct($callback)
     {
         if (!self::isValid($callback)) {
-            throw new \InvalidArgumentException(sprintf('Callback should be a Closure, %s given!', gettype($callback)));
+            throw new InvalidException(sprintf('Callback should be a Closure, %s given!', gettype($callback)));
         }
         
         $this->_callback = $callback;

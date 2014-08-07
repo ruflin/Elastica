@@ -2,6 +2,8 @@
 
 namespace Elastica\Connection\Strategy;
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Description of StrategyFactory
  *
@@ -12,7 +14,7 @@ class StrategyFactory
     /**
      * @param mixed|Closure|String|StrategyInterface $strategyName
      * @return \Elastica\Connection\Strategy\StrategyInterface
-     * @throws \InvalidArgumentException
+     * @throws \Elastica\Exception\InvalidException
      */
     public static function create($strategyName)
     {
@@ -31,7 +33,7 @@ class StrategyFactory
         }
         
         if (!$strategy instanceof StrategyInterface) {
-            throw new \InvalidArgumentException('Can\'t load strategy class');
+            throw new InvalidException('Can\'t load strategy class');
         }
         
         return $strategy;
