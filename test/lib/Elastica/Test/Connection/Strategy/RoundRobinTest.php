@@ -43,7 +43,9 @@ class RoundRobinTest extends Base
     {
         $config = array('connectionStrategy' => 'RoundRobin', 'host' => '255.255.255.0');
         $client = new Client($config);
-
+        
+        $this->_checkStrategy($client);
+        
         $client->request('/_aliases');
         
     }
