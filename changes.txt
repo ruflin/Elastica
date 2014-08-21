@@ -1,5 +1,8 @@
 CHANGES
 
+2014-08-22
+ - Fixed escaping of / character in Elastica\Util::escapeTerm(), removed usage of JSON_UNESCAPED_SLASHES in Elastica\JSON #660
+
 2014-08-06
  - Add connection pool and connection strategy
 

@@ -57,8 +57,7 @@ class JSON
         // allow special options value for Elasticsearch compatibility
         if (sizeof($args) > 1 && $args[1] === 'JSON_ELASTICSEARCH') {
             // Use built in JSON constants if available (php >= 5.4)
-            $args[1] = (defined('JSON_UNESCAPED_SLASHES') ? JSON_UNESCAPED_SLASHES : 64)
-                     | (defined('JSON_UNESCAPED_UNICODE') ? JSON_UNESCAPED_UNICODE : 256);
+            $args[1] = defined('JSON_UNESCAPED_UNICODE') ? JSON_UNESCAPED_UNICODE : 256;
         }
 
         // run encode and output

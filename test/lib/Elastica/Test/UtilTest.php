@@ -32,7 +32,7 @@ class UtilTest extends BaseTest
     public function testEscapeTermSpecialCharacters()
     {
         $before = '\\+-&&||!(){}[]^"~*?:/';
-        $after = '\\\\\\+\\-\\&&\\||\\!\\(\\)\\{\\}\\[\\]\\^\\"\\~\\*\\?\\:\\\\/';
+        $after = '\\\\\\+\\-\\&&\\||\\!\\(\\)\\{\\}\\[\\]\\^\\"\\~\\*\\?\\:\\/';
 
         $this->assertEquals(Util::escapeTerm($before), $after);
     }
