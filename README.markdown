@@ -20,7 +20,7 @@ Dependencies
 ------------
 | Project | Version | Required |
 |---------|---------|----------|
-|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v1.1.1)|1.1.1|yes|
+|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v1.3.0)|1.3.0|yes|
 |[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1)|2.0.0.RC1|no|
 |[Elasticsearch thrift transport plugin](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0)|2.0.0|no|
 |[Elasticsearch geocluster facet plugin](https://github.com/zenobase/geocluster-facet/tree/0.0.10)|0.0.10|no|
