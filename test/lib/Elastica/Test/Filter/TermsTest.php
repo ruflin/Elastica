@@ -28,24 +28,24 @@ class TermsTest extends BaseTest
         $termsFilter = new Terms();
         $termsFilter->setLookup('lastName', $type2, 'led zeppelin', 'members', NULL);
         $query = new \Elastica\Query();
-        $query->setFilter($termsFilter);
+        $query->setPostFilter($termsFilter);
         $results = $index->search($query);
         $this->assertEquals($results->count(), 4, 'Terms lookup with null index');
         
         $termsFilter->setLookup('lastName', $type2, 'led zeppelin', 'members', $index);
-        $query->setFilter($termsFilter);
+        $query->setPostFilter($termsFilter);
         $results = $index->search($query);
         $this->assertEquals($results->count(), 4, 'Terms lookup with index as object');
         
         //Query with index given as string
         $termsFilter->setLookup('lastName', $type2, 'led zeppelin', 'members', $index->getName());
-        $query->setFilter($termsFilter);
+        $query->setPostFilter($termsFilter);
         $results = $index->search($query);
         $this->assertEquals($results->count(), 4, 'Terms lookup with index as string');
         
         //Query with array of options
         $termsFilter->setLookup('lastName', $type2, 'led zeppelin', 'members', array('index' => $index, 'cache' => false));
-        $query->setFilter($termsFilter);
+        $query->setPostFilter($termsFilter);
         $results = $index->search($query);
         $this->assertEquals($results->count(), 4, 'Terms lookup with options array');
         

@@ -42,7 +42,7 @@ class GeohashCellTest extends BaseTest
 
         $filter = new GeohashCell('pin', array('lat' => 32.828326, 'lon' => -117.255854));
         $query = new \Elastica\Query();
-        $query->setFilter($filter);
+        $query->setPostFilter($filter);
         $results = $type->search($query);
 
         $this->assertEquals(1, $results->count());
@@ -50,7 +50,7 @@ class GeohashCellTest extends BaseTest
         //test precision parameter
         $filter = new GeohashCell('pin', '9', 1);
         $query = new \Elastica\Query();
-        $query->setFilter($filter);
+        $query->setPostFilter($filter);
         $results = $type->search($query);
 
         $this->assertEquals(2, $results->count());

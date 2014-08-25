@@ -49,14 +49,14 @@ class GeoDistanceTest extends BaseTest
         $geoFilter = new GeoDistance('point', array('lat' => 30, 'lon' => 40), '1km');
 
         $query = new Query(new MatchAll());
-        $query->setFilter($geoFilter);
+        $query->setPostFilter($geoFilter);
         $this->assertEquals(1, $type->search($query)->count());
 
         // Both points should be inside
         $query = new Query();
         $geoFilter = new GeoDistance('point', array('lat' => 30, 'lon' => 40), '40000km');
         $query = new Query(new MatchAll());
-        $query->setFilter($geoFilter);
+        $query->setPostFilter($geoFilter);
         $index->refresh();
 
         $this->assertEquals(2, $type->search($query)->count());

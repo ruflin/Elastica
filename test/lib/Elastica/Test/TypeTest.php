@@ -532,7 +532,7 @@ class TypeTest extends BaseTest
         $query              = new Query();
         $filterTerm         = new Term();
         $filterTerm->setTerm('visible', true);
-        $query->setFilter($filterTerm);
+        $query->setPostFilter($filterTerm);
 
         $resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'), $query);
         $this->assertEquals(2, $resultSet->count());

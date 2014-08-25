@@ -79,7 +79,7 @@ class TransportTest extends \PHPUnit_Framework_TestCase
             $test = rand(1, $this->_max);
             $query = new Query();
             $query->setQuery(new MatchAllQuery());
-            $query->setFilter(new TermFilter(array('test' => $test)));
+            $query->setPostFilter(new TermFilter(array('test' => $test)));
             $result = $type->search($query);
             $times[] = $result->getResponse()->getQueryTime();
         }
