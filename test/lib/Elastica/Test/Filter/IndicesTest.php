@@ -71,7 +71,7 @@ class IndicesTest extends BaseTest
         $filter = new Indices(new BoolNot(new Term(array("color" => "blue"))), array($this->_index1->getName()));
         $filter->setNoMatchFilter(new BoolNot(new Term(array("color" => "yellow"))));
         $query = new Query();
-        $query->setFilter($filter);
+        $query->setPostFilter($filter);
 
         // search over the alias
         $index = $this->_getClient()->getIndex("indices_filter");

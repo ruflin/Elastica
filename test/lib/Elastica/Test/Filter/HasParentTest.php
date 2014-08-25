@@ -77,7 +77,7 @@ class HasParentTest extends BaseTest
         $filter = new HasParent($f, 'parent');
 
         $searchQuery = new \Elastica\Query();
-        $searchQuery->setFilter($filter);
+        $searchQuery->setPostFilter($filter);
         $searchResults = $index->search($searchQuery);
 
         $this->assertEquals(1, $searchResults->count());
@@ -97,7 +97,7 @@ class HasParentTest extends BaseTest
         $filter = new HasParent($f, 'parent');
 
         $searchQuery = new \Elastica\Query();
-        $searchQuery->setFilter($filter);
+        $searchQuery->setPostFilter($filter);
         $searchResults = $index->search($searchQuery);
 
         $this->assertEquals(1, $searchResults->count());

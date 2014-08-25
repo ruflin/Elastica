@@ -87,7 +87,7 @@ class BoolTest extends BaseTest
         $mustNotFilter->addMustNot($publisherFilter);
 
         $mainBoolFilter->addMust(array($shouldFilter, $mustNotFilter));
-        $query->setFilter($mainBoolFilter);
+        $query->setPostFilter($mainBoolFilter);
         //execute the query
         $results = $index->search($query);
 
