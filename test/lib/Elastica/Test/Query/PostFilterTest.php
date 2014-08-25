@@ -44,16 +44,13 @@ class PostFilterTest extends BaseTest
         $query = new Query();
 
         $post_filter = new Term(array('color' => 'green'));
-        $query->setPostFilter($post_filter->toArray());
+        $query->setPostFilter($post_filter);
 
         $data = $query->toArray();
 
         $this->assertArrayHasKey('post_filter', $data);
         $this->assertEquals(array('term' => array('color' => 'green')), $data['post_filter']);
 
-        $query->setPostFilter(array());
-
-        $this->assertArrayNotHasKey('post_filter', $query->toArray());
     }
 
     public function testQuery()
@@ -68,7 +65,7 @@ class PostFilterTest extends BaseTest
         $filter = new Term();
         $filter->setTerm('color', 'green');
 
-        $query->setPostFilter($filter->toArray());
+        $query->setPostFilter($filter);
 
         $results = $this->_index->search($query);
 
