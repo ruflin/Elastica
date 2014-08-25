@@ -137,6 +137,7 @@ class Query extends Param
      */
     public function setFilter(AbstractFilter $filter)
     {
+        trigger_error('Deprecated: Elastica\Query::setFilter() is deprecated. Use Elastica\Query::setPostFilter() instead.', E_USER_DEPRECATED);
         return $this->setPostFilter($filter);
     }
 
@@ -418,6 +419,8 @@ class Query extends Param
         if($filter instanceof AbstractFilter)
         {
             $filter = $filter->toArray();
+        } else {
+            trigger_error('Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractFilter instead.', E_USER_DEPRECATED);
         }
 
         return $this->setParam("post_filter", $filter);
