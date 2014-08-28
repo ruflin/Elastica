@@ -251,6 +251,8 @@ class Query extends Param
 
     /**
      * Sets the fields to be returned by the search
+     * NOTICE php will encode modified(or named keys) array into object format in json format request
+     * so the fields array must a sequence(list) type of array
      *
      * @param  array          $fields Fields to be returned
      * @return \Elastica\Query Current object
