@@ -1,5 +1,8 @@
 CHANGES
 
+2014-09-08
+ - Delete execution permission from non-executable files #677
+
 2014-08-25
  - Top-level filter parameter in search has been renamed to post_filter #669 #670
  - Deprecated: Elastica\Query::setFilter() is deprecated. Use Elastica\Query::setPostFilter() instead. #669
