@@ -11,7 +11,7 @@
          stopOnIncomplete="false"
          stopOnSkipped="false"
          syntaxCheck="false"
-         testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader">
+         >
 
     <testsuites>
         <testsuite name="Elastica">
