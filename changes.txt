@@ -1,5 +1,8 @@
 CHANGES
 
+2014-09-16
+ - Update license in composer.json to match project #681
+
 2014-09-08
  - Delete execution permission from non-executable files #677
 
