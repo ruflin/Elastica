@@ -4,7 +4,7 @@
     "keywords": ["search","client"],
     "homepage": "http://elastica.io/",
     "type": "library",
-    "license": "Apache 2.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "Nicolas Ruflin",
