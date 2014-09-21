@@ -240,7 +240,7 @@ class Mapping
             throw new InvalidException('Type has to be set');
         }
 
-        return array($type->getName() => $this->_mapping);
+        return $this->_mapping;
     }
 
     /**
