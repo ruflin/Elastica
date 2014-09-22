@@ -1,5 +1,8 @@
 CHANGES
 
+2014-09-22
+ - Update the branch alias in composer.json to match the library version
+
 2014-09-16
  - Update license in composer.json to match project #681
 
