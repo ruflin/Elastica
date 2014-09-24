@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>storing-and-indexing-documents - Elastica</title>
+  <meta name="author" content="@ruflin">
+
+  
+  <meta name="description" content="Storing-and-indexing-documents Define Analysis
+Define Mapping
+Add documents Storing and indexing documents To add data to the index you can just &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Elastica.io/getting-started/storing-and-indexing-documents.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-10160648-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Elastica</a></h1>
+  
+    <h2>A PHP client for elasticsearch.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Elastica.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/examples/">Examples</a></li>
+  <li><a href="/api/">Api</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/faq/">FAQ</a></li>
+</ul>
+
+</nav>
+  <a href="https://github.com/ruflin/Elastica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Storing-and-indexing-documents</h1>
+    
+  </header>
+  
+  <ul>
+<li><a href="#section-analysis">Define Analysis</a></li>
+<li><a href="#section-mapping">Define Mapping</a></li>
+<li><a href="#section-add">Add documents</a></li>
+</ul>
+
+
+<h2 id="section-storing">Storing and indexing documents</h2>
+
+
+<p>To add data to the index you can just drop some documents in and it will be indexed directly. But in most cases you want to specify how your data is indexed. There are a lot of possibilities in elasticsearch to do so. You can decide how each field is mapped and how your data is analyzed to provide the full text search.</p>
+
+<p>For more information and all the possibilities elasticsearch provides, take a look at the <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/">Analysis</a> and the <a href="http://www.elasticsearch.org/guide/reference/mapping/">Mapping</a> reference.</p>
+
+<p>The documents in elasticsearch are organized in indexes. Each index contains one or more types which contains the documents. So to put our data in elasticsearch, we first have to define how the index and the type will look like.</p>
+
+<h3 id="section-analysis">Define Analysis</h3>
+
+
+<p>In elasticsearch, when you create an index, you define the number of shards and number of replicas. A shard is a part of your data and a replica is like an backup of that data. So when you have one node, all the shards and all the replicas will be on that node. When you have more nodes, your data will be balanced to these nodes. How it is balanced depends on your configuration. More on this topic can be found <a href="http://www.elasticsearch.org/videos/2010/02/08/es-distributed-diagram.html"> here</a>.</p>
+
+<p>Data in elasticsearch is analyzed at two different times. Once, when you index a document it&rsquo;s analyzed and this information is put in the index. The other time is when do a search. Elasticsearch analyzes the search query and looks up the gained information in the index. To see all possible analyzers and filter check out the <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/">Analysis</a> reference.</p>
+
+<p>Let&rsquo;s create an index called twitter! We&rsquo;ll include two analyzers. Let&rsquo;s call them  <code>indexAnalyzer</code> and <code>searchAnalyzer</code>, but you can use any name. <code>indexAnalyzer</code> defines how the data will be analyzed when it&rsquo;s indexed and <code>searchAnalyzer</code> defines how elasticsearch will analyze the search query. We&rsquo;ll reference these when we create the Mapping below. In this example we&rsquo;ll also use a custom snowball filter for the data.</p>
+
+<p>The second argument of <code>\Elastica\Index</code> is an OPTIONAL bool=> (true) Deletes index first if already exists (default = false)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// Load index</span>
+</span><span class='line'><span class="nv">$elasticaIndex</span> <span class="o">=</span> <span class="nv">$elasticaClient</span><span class="o">-&gt;</span><span class="na">getIndex</span><span class="p">(</span><span class="s1">&#39;twitter&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Create the index new</span>
+</span><span class='line'><span class="nv">$elasticaIndex</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">(</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;number_of_shards&#39;</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;number_of_replicas&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;analysis&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>            <span class="s1">&#39;analyzer&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>                <span class="s1">&#39;indexAnalyzer&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>                    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;custom&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s1">&#39;tokenizer&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;standard&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;lowercase&#39;</span><span class="p">,</span> <span class="s1">&#39;mySnowball&#39;</span><span class="p">)</span>
+</span><span class='line'>                <span class="p">),</span>
+</span><span class='line'>                <span class="s1">&#39;searchAnalyzer&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>                    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;custom&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s1">&#39;tokenizer&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;standard&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span> <span class="s1">&#39;lowercase&#39;</span><span class="p">,</span> <span class="s1">&#39;mySnowball&#39;</span><span class="p">)</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>            <span class="p">),</span>
+</span><span class='line'>            <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>                <span class="s1">&#39;mySnowball&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>                    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;snowball&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="s1">&#39;language&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;German&#39;</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>            <span class="p">)</span>
+</span><span class='line'>        <span class="p">)</span>
+</span><span class='line'>    <span class="p">),</span>
+</span><span class='line'>    <span class="k">true</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h3 id="section-mapping">Define Mapping</h3>
+
+
+<p>The Mapping defines what kind of data is in which field. If no mapping is defined, elasticsearch will guess the kind of the data and map it automatically. To see all of the possibilities, check out the <a href="http://www.elasticsearch.org/guide/reference/mapping/">Mapping</a> reference.</p></p>
+
+<p>If you aren&rsquo;t going to define a mapping, you should probably change the name of the analyzers we defined above to <code>default_index</code> and <code>default_search</code>. These will be used automatically when no analyzer is specified. An analyzer named <code>default</code> can be used for both searching and indexing.</p>
+
+<p>In our example, we will create an type called tweet which is in our index twitter. So first we create that type and afterwards we define the mapping. Note that it is possible to boost data in elasticsearch. You can either boost a specific field or you can boost a complete document. To boost a document, we&rsquo;ll use the field <code>_boost</code>. If we boost a field it&rsquo;s defined just like the kind of the field.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">//Create a type</span>
+</span><span class='line'><span class="nv">$elasticaType</span> <span class="o">=</span> <span class="nv">$elasticaIndex</span><span class="o">-&gt;</span><span class="na">getType</span><span class="p">(</span><span class="s1">&#39;tweet&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Define mapping</span>
+</span><span class='line'><span class="nv">$mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Type\Mapping</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$mapping</span><span class="o">-&gt;</span><span class="na">setType</span><span class="p">(</span><span class="nv">$elasticaType</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$mapping</span><span class="o">-&gt;</span><span class="na">setParam</span><span class="p">(</span><span class="s1">&#39;index_analyzer&#39;</span><span class="p">,</span> <span class="s1">&#39;indexAnalyzer&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$mapping</span><span class="o">-&gt;</span><span class="na">setParam</span><span class="p">(</span><span class="s1">&#39;search_analyzer&#39;</span><span class="p">,</span> <span class="s1">&#39;searchAnalyzer&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Define boost field</span>
+</span><span class='line'><span class="nv">$mapping</span><span class="o">-&gt;</span><span class="na">setParam</span><span class="p">(</span><span class="s1">&#39;_boost&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;_boost&#39;</span><span class="p">,</span> <span class="s1">&#39;null_value&#39;</span> <span class="o">=&gt;</span> <span class="mf">1.0</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Set mapping</span>
+</span><span class='line'><span class="nv">$mapping</span><span class="o">-&gt;</span><span class="na">setProperties</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;id&#39;</span>      <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">FALSE</span><span class="p">),</span>
+</span><span class='line'>    <span class="s1">&#39;user&#39;</span>    <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;properties&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>            <span class="s1">&#39;name&#39;</span>      <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">TRUE</span><span class="p">),</span>
+</span><span class='line'>            <span class="s1">&#39;fullName&#39;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">TRUE</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">),</span>
+</span><span class='line'>    <span class="p">),</span>
+</span><span class='line'>    <span class="s1">&#39;msg&#39;</span>     <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">TRUE</span><span class="p">),</span>
+</span><span class='line'>    <span class="s1">&#39;tstamp&#39;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">FALSE</span><span class="p">),</span>
+</span><span class='line'>    <span class="s1">&#39;location&#39;</span><span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;geo_point&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">FALSE</span><span class="p">),</span>
+</span><span class='line'>    <span class="s1">&#39;_boost&#39;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">FALSE</span><span class="p">)</span>
+</span><span class='line'><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Send mapping to type</span>
+</span><span class='line'><span class="nv">$mapping</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h3 id="section-add">Add documents</h3>
+
+
+<p>Now that we have our index ready for the data, we just need to go ahead an put some data in there!</p>
+
+<p>First we put together our document. In our example it&rsquo;s a tweet. This tweet is going to be a <code>\Elastica\Document</code> which is then added to our type tweet in the index twitter.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// The Id of the document</span>
+</span><span class='line'><span class="nv">$id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Create a document</span>
+</span><span class='line'><span class="nv">$tweet</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;id&#39;</span>      <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;user&#39;</span>    <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;mewantcookie&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;fullName&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;Cookie Monster&#39;</span>
+</span><span class='line'>    <span class="p">),</span>
+</span><span class='line'>    <span class="s1">&#39;msg&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;Me wish there were expression for cookies like there is for apples. &quot;A cookie a day make the doctor diagnose you with diabetes&quot; not catchy.&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;tstamp&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;1238081389&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;location&#39;</span><span class="o">=&gt;</span> <span class="s1">&#39;41.12,-71.34&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;_boost&#39;</span>  <span class="o">=&gt;</span> <span class="mf">1.0</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'><span class="c1">// First parameter is the id of document.</span>
+</span><span class='line'><span class="nv">$tweetDocument</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Document</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$tweet</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Add tweet to type</span>
+</span><span class='line'><span class="nv">$elasticaType</span><span class="o">-&gt;</span><span class="na">addDocument</span><span class="p">(</span><span class="nv">$tweetDocument</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Refresh Index</span>
+</span><span class='line'><span class="nv">$elasticaType</span><span class="o">-&gt;</span><span class="na">getIndex</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">refresh</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now the index contains a document. But that&rsquo;s not enough! Add more documents to the index, so a search makes sense!</p>
+
+<h3 id="section-bulk">Bulk indexing</h3>
+
+
+<p>Of course you can add one document after another. But what if you want to put the content of a large database this can be slow. It&rsquo;s better to create an array of documents and add them all at once:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// Create holder for Elastica documents</span>
+</span><span class='line'><span class="nv">$documents</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'><span class="k">while</span> <span class="p">(</span> <span class="o">...</span> <span class="p">)</span> <span class="p">{</span> <span class="c1">// Fetching content from the database</span>
+</span><span class='line'>    <span class="nv">$documents</span><span class="p">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Document</span><span class="p">(</span>
+</span><span class='line'>        <span class="nv">$id</span><span class="p">,</span>
+</span><span class='line'>        <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>            <span class="o">...</span>
+</span><span class='line'>        <span class="p">);</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nv">$elasticaType</span><span class="o">-&gt;</span><span class="na">addDocuments</span><span class="p">(</span><span class="nv">$documents</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$elasticaType</span><span class="o">-&gt;</span><span class="na">getIndex</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">refresh</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A good start are 500 documents per bulk operation. Depending on the size of your documents you&rsquo;ve to play around a little how many documents are a good number for your application.</p>
+
+  
+    <footer>
+      
+      
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/getting-started/storing-and-indexing-documents.html" data-via="" data-counturl="http://Elastica.io/getting-started/storing-and-indexing-documents.html" >Tweet</a>
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/07/27/release-v1-dot-3-0-dot-0/">Release v1.3.0.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/06/14/release-v1-dot-2-1-dot-0/">Release v1.2.1.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/27/release-v1-dot-1-1-dot-1/">Release v1.1.1.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/19/release-v1-dot-1-1-dot-0/">Release v1.1.1.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/25/release-v1-dot-0-1-dot-2/">Release v1.0.1.2</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/116483615197289019288?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - @ruflin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

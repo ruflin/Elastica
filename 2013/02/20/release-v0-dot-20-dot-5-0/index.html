@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Release v0.20.5.0 - Elastica</title>
+  <meta name="author" content="@ruflin">
+
+  
+  <meta name="description" content="Download Migration Guide From 0.19 to 0.20 First you had to meet the conditions and install Elastica 0.20 version which work with elasticsearch 0.20 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Elastica.io/2013/02/20/release-v0-dot-20-dot-5-0">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-10160648-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Elastica</a></h1>
+  
+    <h2>A PHP client for elasticsearch.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Elastica.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/examples/">Examples</a></li>
+  <li><a href="/api/">Api</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/faq/">FAQ</a></li>
+</ul>
+
+</nav>
+  <a href="https://github.com/ruflin/Elastica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Release v0.20.5.0</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-20T21:15:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul>
+<li><a href="https://github.com/ruflin/Elastica/tree/v0.20.5.0">Download</a></li>
+</ul>
+
+
+<h2>Migration Guide From  0.19 to 0.20</h2>
+
+<p>First you had to meet the <a href="#section-required">conditions</a> <a href="#">and install Elastica 0.20 version which work with elasticsearch 0.20.</a></p>
+
+<p>Elastica 0.20 uses namespace that&rsquo;s why PHP5.3 is required , and each class belongs of a namespace.</p>
+
+<p>For understanding namespace , and how use it let see <a href="http://php.net/manual/en/language.namespaces.php">php.net</a></p>
+
+<p>Each class which call with an underscore , is include in a namespace.</p>
+
+<p>Example :</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">//Before</span>
+</span><span class='line'><span class="nv">$Document</span><span class="o">=</span><span class="k">new</span> <span class="nx">Elastica_Document</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span><span class="nv">$documentArray</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//Now</span>
+</span><span class='line'><span class="nv">$Document</span><span class="o">=</span><span class="k">new</span> <span class="nx">\Elastica\Document</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span><span class="nv">$documentArray</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Before</span>
+</span><span class='line'><span class="nv">$BoolOr</span><span class="o">=</span><span class="k">new</span> <span class="nx">Elastica_Filter_BoolOr</span><span class="p">();</span>
+</span><span class='line'><span class="c1">//Now</span>
+</span><span class='line'><span class="nv">$BoolOr</span><span class="o">=</span><span class="k">new</span> <span class="nx">Elastica\Filter\BoolOr</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h3>Migration on class</h3>
+
+
+<h2>List of Deleted class</h2>
+
+
+<ul>
+<li>Elastica_Filter_Or</li>
+<li>Elastica_Filter_And</li>
+</ul>
+
+
+<h2>List of Deprecated class</h2>
+
+
+<table>
+<tr>
+<th>Ex method</th>
+<th>New method</th>
+<th>Comments</th>
+</tr>
+<tr>
+<td>Elastica_Filter_Or</td>
+<td>Elastica\Filter\BoolOr</td>
+<td></td>
+</tr>
+<tr>
+<td>Elastica_Filter_And</td>
+<td>Elastica\Filter\BoolAnd</td>
+<td></td>
+</tr>
+</table>
+
+
+
+
+<h2>List of new class</h2>
+
+
+<ul>
+<li>Elastica\Connection()</li>
+</ul>
+
+
+<h3>Migration on methods</h3>
+
+
+<h2>List of Deleted methods</h2>
+
+
+<ul>
+<li>\Elastica\Type::getType()</li>
+<li>\Elastica\Filter\Script::setQuery()</li>
+<li>\Elastica\Query\QueryString::setQueryString()</li>
+<li>\Elastica\Query\Builder::minimumShouldMatch()</li>
+<li>\Elastica\Query\Builder::tieBreaker()</li>
+</ul>
+
+
+<h2>List of Deprecated methods</h2>
+
+
+<table>
+<tr>
+<th>Ex method</th>
+<th>New method</th>
+<th>Comments</th>
+</tr>
+<tr>
+<td>Elastica_Document::add($key,$value)</td>
+<td>Elastica\Document::set($key,$value)</td>
+<td></td>
+</tr>
+</table>
+
+
+
+
+<h2>List of new methods</h2>
+
+
+<ul>
+<li>\Elastica\Facet\Terms::setScript()</li>
+<li>\Elastica\Document::set() &amp;&amp; get() &amp;&amp; has() &amp;&amp; remove()</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="http://ruflin.com/">@ruflin</a></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-20T21:15:00+01:00" pubdate data-updated="true">Feb 20<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/2013/02/20/release-v0-dot-20-dot-5-0/" data-via="" data-counturl="http://Elastica.io/2013/02/20/release-v0-dot-20-dot-5-0/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/08/12/release-v0-dot-19-dot-8-0/" title="Previous Post: Release v0.19.8.0">&laquo; Release v0.19.8.0</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/06/07/release-v0-dot-90-dot-1-0/" title="Next Post: Release v0.90.1.0">Release v0.90.1.0 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/07/27/release-v1-dot-3-0-dot-0/">Release v1.3.0.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/06/14/release-v1-dot-2-1-dot-0/">Release v1.2.1.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/27/release-v1-dot-1-1-dot-1/">Release v1.1.1.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/19/release-v1-dot-1-1-dot-0/">Release v1.1.1.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/25/release-v1-dot-0-1-dot-2/">Release v1.0.1.2</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/116483615197289019288?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - @ruflin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Release v0.90.1.0 - Elastica</title>
+  <meta name="author" content="@ruflin">
+
+  
+  <meta name="description" content="Download This release is a consists of several bigger refactoring steps in Elastica to make it compatible with the newest elasticsearch versions and &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Elastica.io/2013/06/07/release-v0-dot-90-dot-1-0">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-10160648-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Elastica</a></h1>
+  
+    <h2>A PHP client for elasticsearch.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Elastica.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/examples/">Examples</a></li>
+  <li><a href="/api/">Api</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/faq/">FAQ</a></li>
+</ul>
+
+</nav>
+  <a href="https://github.com/ruflin/Elastica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Release v0.90.1.0</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T21:14:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul>
+<li><a href="https://github.com/ruflin/Elastica/tree/v0.90.1.0">Download</a></li>
+</ul>
+
+
+<p>This release is a consists of several bigger refactoring steps in Elastica to make it compatible with the newest elasticsearch versions and allow to use the newest features. The release v0.90.1.0 is compatible with <a href="http://www.elasticsearch.org/2013/05/30/0-90-1-released/">elasticsearch 0.90.1</a>.</p>
+
+<p>There are quite a few changes which break BC since the last official release <a href="/2012/08/12/release-v0-dot-19-dot-8-0/">v0.19.8.0</a>. For more details on the BC breaks follow the changes below and also check the <a href="/2013/02/20/release-v0-dot-20-dot-5-0/">v0.20.5.0</a> release candidate changes for more details.</p>
+
+<p>There are still some open pull requests pending with larger changes which could break BC. The goal is to get these changes in before release 1.0 of elasticsearch.</p>
+
+<h1>Changes</h1>
+
+<ul>
+<li>Changed package name to lowercase to prevent potential issues with case sensitive file systems and to refelect the package name from packagist.org.
+If you are requiring elastica in your project you might want to change the name in the require to lowercase, although it will still work if written in uppercase.
+The composer autoloader will handle the package correctly and you will not notice any difference.
+If you are requiring or including a file by hand with require() or include() from the composer vendor folder, pay attention that the package name in
+the path will change to lowercase.</li>
+<li>Add Bulk\Action\UpdateDocument.</li>
+<li>Update Bulk\Action\AbstractDocument and Bulk\Action to enable use of OP_TYPE_UPDATE.</li>
+<li>Update .travis.yml to use Elasticsearch version 0.9.1, as bulk update is a new feature in 0.9.1.</li>
+<li>Elastica\Client::<em>configureParams() changed to </em>prepareConnectionParams(), which now takes the config array as an argument</li>
+<li>Add getPlugins and hasPlugin methods to Node\Info</li>
+<li>Update Index\Status::getAliases() to use new API</li>
+<li>Update Index\Status::getSettings() to use new API</li>
+<li>Add _meta to mapping. #330</li>
+<li>Added parameters to implement scroll</li>
+<li>add support PSR-3(<a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md">https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md</a>)</li>
+<li>Elastica\Log implement LoggerInterface(extends Psr\Log\AbstractLogger)
+if you want use logging need install <a href="https://github.com/php-fig/log">https://github.com/php-fig/log</a> for example (composer require psr/log:dev-master)
+if use Elastica\Log inside Elastica\Client nothing more is needed
+if use Elastica\Log outside we need use as(<a href="https://github.com/php-fig/log">https://github.com/php-fig/log</a>) for example Elastica\Log::info($message) or Elastica\Log::log(LogLevel::INFO,$message)</li>
+<li>Elastica\Client add setLogger for setting custom Logger for example Monolog(<a href="https://github.com/Seldaek/monolog">https://github.com/Seldaek/monolog</a>)</li>
+<li>Elastica\Index::exists fixed for 0.90.0. HEAD request method introduced</li>
+<li>Elastica\Filter\AbstractMulti::getFilters() added</li>
+<li>Implement Elastica\Type\Mapping::enableAllField</li>
+<li>Refresh for Elastica\Index::flush implemented #316</li>
+<li>Added optional parameter to filter result while percolate #384</li>
+<li>Added EXPERIMENTAL DocumentObjectInterface to be used with Type::addObject()/addObjects()</li>
+<li>Removed Elastica\Exception\AbstractException</li>
+<li>All Exceptions now implement Elastica\Exception\ExceptionInterface</li>
+<li>Query\Fuzzy to comply with DSL spec. Multi-field queries now throw an exception. Implemented: Query\Fuzzy::setField, Query\Fuzzy::setFieldOption.</li>
+<li>Query\Fuzzy::addField has been deprecated.</li>
+<li>Adding max score information in ResultSet</li>
+<li>Adding test for the ResultSet class</li>
+<li>Removal of unsupported minimum_number_should_match for Boolean Filter</li>
+<li>Added Elastica\Bulk class responsible for performing bulk requests. New bulk requests implemented: Client::deleteDocuments(), Bulk::sendUdp()</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="http://ruflin.com/">@ruflin</a></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T21:14:00+02:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/2013/06/07/release-v0-dot-90-dot-1-0/" data-via="" data-counturl="http://Elastica.io/2013/06/07/release-v0-dot-90-dot-1-0/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/02/20/release-v0-dot-20-dot-5-0/" title="Previous Post: Release v0.20.5.0">&laquo; Release v0.20.5.0</a>
+      
+      
+        <a class="basic-alignment right" href="/2013/08/25/release-v0-dot-90-dot-2-0/" title="Next Post: Release v0.90.2.0">Release v0.90.2.0 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/07/27/release-v1-dot-3-0-dot-0/">Release v1.3.0.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/06/14/release-v1-dot-2-1-dot-0/">Release v1.2.1.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/27/release-v1-dot-1-1-dot-1/">Release v1.1.1.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/19/release-v1-dot-1-1-dot-0/">Release v1.1.1.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/25/release-v1-dot-0-1-dot-2/">Release v1.0.1.2</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/116483615197289019288?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - @ruflin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

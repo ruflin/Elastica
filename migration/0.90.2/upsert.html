@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Upsert migration - Elastica</title>
+  <meta name="author" content="@ruflin">
+
+  
+  <meta name="description" content="Upsert Migration Prior to 0.90.2, upsert is done in the following manner: 1
+2
+3
+4
+5
+6
+7
+$document = new Elastica\Document();
+$document-&gt;setId(1 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Elastica.io/migration/0.90.2/upsert.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-10160648-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Elastica</a></h1>
+  
+    <h2>A PHP client for elasticsearch.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Elastica.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/examples/">Examples</a></li>
+  <li><a href="/api/">Api</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/faq/">FAQ</a></li>
+</ul>
+
+</nav>
+  <a href="https://github.com/ruflin/Elastica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Upsert Migration</h1>
+    
+  </header>
+  
+  <p>Prior to 0.90.2, upsert is done in the following manner:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$document</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Elastica\Document</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$document</span><span class="o">-&gt;</span><span class="na">setId</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$document</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;counter&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$script</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Elastica\Script</span><span class="p">(</span><span class="s1">&#39;ctx._source.counter += count&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;count&#39;</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$document</span><span class="o">-&gt;</span><span class="na">setScript</span><span class="p">(</span><span class="nv">$script</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$type</span><span class="o">-&gt;</span><span class="na">updateDocument</span><span class="p">(</span><span class="nv">$document</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the above, the <code>Elastica\Document</code> is used as the upsert if the document does not exist. If it does, the script is used to update the document.</p>
+
+<p>While the above is quite elegant and doesn&rsquo;t break backwards compatibility, it doesn&rsquo;t support other types of upsert scenarios.</p>
+
+<p>In Elasticsearch, we can perform these type of updates with upsert support:</p>
+
+<ul>
+<li>Update the document with a script and provide an optional document to use as the upsert.</li>
+<li>Update the document with a partial document and provide an optional document to use as the upsert.</li>
+<li>Update the document with a partial document and set <code>doc_as_upsert</code> to use the document as the upsert if it does not exist.</li>
+</ul>
+
+
+<p>In light of the above requirements, we need to change the way upsert is done and this results in a backwards-compatibility break.</p>
+
+<p>Now, Elastica\Script and Elastica\Document are both first class citizens. To include upsert data, we would do the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$upsert</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Document</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$upsert</span><span class="o">-&gt;</span><span class="na">setData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;myfield&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;myvalue&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$script</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Script</span><span class="p">(</span><span class="s1">&#39;ctx._source.field2 += count; ctx._source.remove(&quot;field3&quot;)&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$script</span><span class="o">-&gt;</span><span class="na">setUpsert</span><span class="p">(</span><span class="nv">$upsert</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$script</span><span class="o">-&gt;</span><span class="na">setId</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">//Will use script to update document 1</span>
+</span><span class='line'><span class="nv">$type</span><span class="o">-&gt;</span><span class="na">updateDocument</span><span class="p">(</span><span class="nv">$script</span><span class="p">);</span> <span class="c1">//Will try to update the document with the script. If it does not exist, upsert using the upsert document.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the above example, we tell Elasticsearch to attempt to update the document using the update script. If the document does not exist, upsert (insert) the provided document instead.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$upsert</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Document</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$upsert</span><span class="o">-&gt;</span><span class="na">setData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;myfield&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;value&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$doc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Document</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;myfield&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;updatedvalue&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$doc</span><span class="o">-&gt;</span><span class="na">setUpsert</span><span class="p">(</span><span class="nv">$upsert</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$type</span><span class="o">-&gt;</span><span class="na">updateDocument</span><span class="p">(</span><span class="nv">$doc</span><span class="p">);</span> <span class="c1">//Will try to update the document with the partial document. If it does not exist, upsert using the upsert document.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this example, we ask Elasticsearch to try and update the document using a partial document (<code>$doc</code>). If it does not exist, we then upsert the document provided (<code>$upsert</code>).</p>
+
+<p>Finally, there are cases where we want to update a document using a partial document, but if it does not exist, we would like to use it as the upsert.
+This feature was introduced in Elasticsearch 0.90.2 and helps cut down on the about of data sent over the wire:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$doc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Document</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$doc</span><span class="o">-&gt;</span><span class="na">setData</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;myfield&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;myvalue&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$doc</span><span class="o">-&gt;</span><span class="na">setId</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$doc</span><span class="o">-&gt;</span><span class="na">setUpsertAsDoc</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$type</span><span class="o">-&gt;</span><span class="na">updateDocument</span><span class="p">(</span><span class="nv">$doc</span><span class="p">);</span> <span class="c1">//If the document does not exist, treat the document as an upsert.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+  
+    <footer>
+      
+      
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/migration/0.90.2/upsert.html" data-via="" data-counturl="http://Elastica.io/migration/0.90.2/upsert.html" >Tweet</a>
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/07/27/release-v1-dot-3-0-dot-0/">Release v1.3.0.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/06/14/release-v1-dot-2-1-dot-0/">Release v1.2.1.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/27/release-v1-dot-1-1-dot-1/">Release v1.1.1.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/19/release-v1-dot-1-1-dot-0/">Release v1.1.1.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/25/release-v1-dot-0-1-dot-2/">Release v1.0.1.2</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/116483615197289019288?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - @ruflin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

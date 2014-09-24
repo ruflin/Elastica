@@ -1,0 +1,996 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Elastica]]></title>
+  <link href="http://Elastica.io/atom.xml" rel="self"/>
+  <link href="http://Elastica.io/"/>
+  <updated>2014-09-24T07:36:57+02:00</updated>
+  <id>http://Elastica.io/</id>
+  <author>
+    <name><![CDATA[@ruflin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Release v1.3.0.0]]></title>
+    <link href="http://Elastica.io/2014/07/27/release-v1-dot-3-0-dot-0/"/>
+    <updated>2014-07-27T15:39:20+02:00</updated>
+    <id>http://Elastica.io/2014/07/27/release-v1-dot-3-0-dot-0</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/v1.3.0.0">Elastica v1.3.0.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/v1.3.0.0">download</a>). This release is compatible with elasticsearch 1.3.0.</p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.3.0">Elasticsearch</a></td>
+<td> 1.3.0 </td>
+<td> yes</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1">Elasticsearch mapper attachments plugin</a></td>
+<td>2.0.0.RC1</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC2">Elasticsearch thrift transport plugin</a></td>
+<td>2.0.0.RC2</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.10">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.10</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Update to elasticsearch version 1.3.0 <a href="http://www.elasticsearch.org/downloads/1-3-0/">http://www.elasticsearch.org/downloads/1-3-0/</a></li>
+<li>Add setQuery() method to Elastica\Query\ConstantScore #653</li>
+<li>Be able to configure ES host/port via ENV var in test env #652</li>
+<li>Fix FunstionScore Query random_score without seed bug. #647</li>
+<li>Add setPostFilter method to Elastica\Query (<a href="http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_filtering_queries_and_aggregations.html#_post_filter">http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_filtering_queries_and_aggregations.html#_post_filter</a>) #645</li>
+<li>Add Reverse Nested aggregation (<a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html</a>). #642</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v1.2.1.0]]></title>
+    <link href="http://Elastica.io/2014/06/14/release-v1-dot-2-1-dot-0/"/>
+    <updated>2014-06-14T10:47:11+02:00</updated>
+    <id>http://Elastica.io/2014/06/14/release-v1-dot-2-1-dot-0</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/v1.2.1.0">Elastica v1.2.1.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/v1.2.1.0">download</a>). This release is compatible with elasticsearch 1.2.1.</p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.2.1">Elasticsearch</a></td>
+<td> 1.2.1 </td>
+<td> yes</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1">Elasticsearch mapper attachments plugin</a></td>
+<td>2.0.0.RC1</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC2">Elasticsearch thrift transport plugin</a></td>
+<td>2.0.0.RC2</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.10">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.10</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Removed the requirement to set arguments filter and/or query in Filtered, according to the documentation: <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html</a> #616</li>
+<li>Stop ClientTest->testDeleteIdsIdxStringTypeString from failing 1/3 of the time #634</li>
+<li>Stop ScanAndScrollTest->testQuerySizeOverride from failing frequently for no reason #635</li>
+<li>rework Document and Script so they can share some infrastructure allowing scripts to specify things like <em>retry_on_conflict and </em>routing #629</li>
+<li>Allow bulk API deletes to be routed #631</li>
+<li>Update travis to elasticsearch 1.2.1, disable Thrift plugin as not compatible and fix incompatible tests</li>
+<li>Implement Boosting Query (<a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html</a>) #625</li>
+<li>add retry_on_conflict support to bulk #623</li>
+<li>toString updated to consider doc_as_upsert if sent an array source #622</li>
+<li>Fix Aggragations/Filter to work with es v1.2.0 #619</li>
+<li>Added Guzzle transport as an alternative to the default Http transport #618</li>
+<li>Added Elastica\ScanAndScroll Iterator (<a href="http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/scan-scroll.html">http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/scan-scroll.html</a>) #617</li>
+<li>Add JSON compat library; Elasticsearch JSON flags and nicer error handling #614</li>
+<li>Update dev builds to phpunit 4.1.*</li>
+<li>Set processIsolation and backupGlobals to false to speed up tests. processIsolation was very slow with phpunit 4.0.19.</li>
+<li>Fix get settings on alaised index #608</li>
+<li>Added named function for source filtering #605</li>
+<li>Scroll type constant to Elastica\Search added #607</li>
+<li>Added setAnalyzer method to Query\FuzzyLikeThis Class and fixed issue with params not being merged #611</li>
+<li>Typo fixes #600, #602</li>
+<li>Remove unreachable return statement #598</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v1.1.1.1]]></title>
+    <link href="http://Elastica.io/2014/04/27/release-v1-dot-1-1-dot-1/"/>
+    <updated>2014-04-27T19:35:03+02:00</updated>
+    <id>http://Elastica.io/2014/04/27/release-v1-dot-1-1-dot-1</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/v1.1.1.1">Elastica v1.1.1.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/v1.1.1.1">download</a>). This release is compatible with elasticsearch 1.1.1.</p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.1.1">Elasticsearch</a></td>
+<td> 1.1.1 </td>
+<td> yes</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1">Elasticsearch mapper attachments plugin</a></td>
+<td>2.0.0.RC1</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC2">Elasticsearch thrift transport plugin</a></td>
+<td>2.0.0.RC2</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.10">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.10</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Fix missing use in TermsStats->setOrder() #597</li>
+<li>Replace all instances of ElasticSearch with Elasticsearch #597</li>
+<li>Fixing the Bool filter with Bool filter children bug #594</li>
+<li>Remove useless echo in the Memcache Transport object #595</li>
+<li>escape \ by \ #592</li>
+<li>Handling of HasChild type parsing bug #585</li>
+<li>Consolidate Index getMapping tests #591</li>
+<li>Fix Type::getMapping when using an aliased index #588</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v1.1.1.0]]></title>
+    <link href="http://Elastica.io/2014/04/19/release-v1-dot-1-1-dot-0/"/>
+    <updated>2014-04-19T17:13:36+02:00</updated>
+    <id>http://Elastica.io/2014/04/19/release-v1-dot-1-1-dot-0</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/v1.1.1.0">Elastica v1.1.1.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/v1.1.1.0">download</a>). This release is compatible with elasticsearch 1.1.1.</p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.1.1">Elasticsearch</a></td>
+<td> 1.1.1 </td>
+<td> yes</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1">Elasticsearch mapper attachments plugin</a></td>
+<td>2.0.0.RC1</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC2">Elasticsearch thrift transport plugin</a></td>
+<td>2.0.0.RC2</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.10">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.10</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Update to elasticsearch 1.1.1 <a href="http://www.elasticsearch.org/downloads/1-1-1/">http://www.elasticsearch.org/downloads/1-1-1/</a></li>
+<li>Remove CustomFiltersScore and CustomScore query as removed in elasticsearch 1.1.0 <a href="https://github.com/elasticsearch/elasticsearch/pull/5076/files">https://github.com/elasticsearch/elasticsearch/pull/5076/files</a></li>
+<li>Update Node Info to use plugins instead of plugin (<a href="https://github.com/elasticsearch/elasticsearch/pull/5072">https://github.com/elasticsearch/elasticsearch/pull/5072</a>)</li>
+<li>Fix mapping issue for aliases #588</li>
+<li>Only trap real JSON parse errors in Response class #586</li>
+<li>Added Cardinality aggregation #581</li>
+<li>Support for Terms filter lookup options #579</li>
+<li>Update to elasticsearch 1.1.0 <a href="http://www.elasticsearch.org/downloads/1-1-0/">http://www.elasticsearch.org/downloads/1-1-0/</a></li>
+<li>Fixed Query\Match Fuzziness parameter type #576</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v1.0.1.2]]></title>
+    <link href="http://Elastica.io/2014/03/25/release-v1-dot-0-1-dot-2/"/>
+    <updated>2014-03-25T20:37:06+01:00</updated>
+    <id>http://Elastica.io/2014/03/25/release-v1-dot-0-1-dot-2</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/v1.0.1.2">Elastica v1.0.1.2</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/v1.0.1.2">download</a>). This release is compatible with elasticsearch 1.0.1.</p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.0.1">Elasticsearch</a></td>
+<td> 1.0.1 </td>
+<td> yes</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1">Elasticsearch mapper attachments plugin</a></td>
+<td>2.0.0.RC1</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC2">Elasticsearch thrift transport plugin</a></td>
+<td>2.0.0.RC2</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.10">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.10</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Added Filter\Indices #574</li>
+<li>Allow json string as data srouce for Bulk\Action on update #575</li>
+<li>Allow for request params in delete by query calls #573</li>
+<li>Added filters: AbstractGeoShape, GeoShapePreIndexed, GeoShapeProvided #568</li>
+<li>Percolate existing documents and add percolate options (#570)</li>
+<li>Added Query\Rescore #441</li>
+<li>Added missing query options for MultiMatch (operator, minimum_should_match, zero_terms_query, cutoff_frequency, type, fuzziness, prefix_length, max_expansions, analyzer) #569</li>
+<li>Added missing query options for Match (zero_terms_query, cutoff_frequency) #569</li>
+<li>Fixed request body reuse in http transport #567</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v1.0.1.1]]></title>
+    <link href="http://Elastica.io/2014/03/08/release-v1-dot-0-1-dot-1/"/>
+    <updated>2014-03-08T13:06:47+01:00</updated>
+    <id>http://Elastica.io/2014/03/08/release-v1-dot-0-1-dot-1</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/v1.0.1.1">Elastica v1.0.1.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/v1.0.1.1">download</a>). This release is compatible with elasticsearch 1.0.1.</p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.0.1">Elasticsearch</a></td>
+<td> 1.0.1 </td>
+<td> yes</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1">Elasticsearch mapper attachments plugin</a></td>
+<td>2.0.0.RC1</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC2">Elasticsearch thrift transport plugin</a></td>
+<td>2.0.0.RC2</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.10">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.10</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Issue #566: Add snapshot / restore functionality (Elastica\Snapshot)</li>
+<li>Issue #563: Improve performance of Elastica/Status->getIndicesWithAlias and aliasExists on clusters with many indices- Enable goecluster-facet again as now compatible with elasticsearch 1.0 on travis</li>
+<li>Changes for Travis
+
+<ul>
+<li>Add PHP 5.6 to travis test environment</li>
+<li>Run elasticsearch in the background to not have log output in travis build</li>
+<li>Set memache php version as environment variable</li>
+<li>Update to memcache 3.0.8 for travis</li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v1.0.1.0]]></title>
+    <link href="http://Elastica.io/2014/03/02/release-v1-dot-0-1-dot-0/"/>
+    <updated>2014-03-02T12:12:34+01:00</updated>
+    <id>http://Elastica.io/2014/03/02/release-v1-dot-0-1-dot-0</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/v1.0.1.0">Elastica v1.0.1.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/v1.0.1.0">download</a>). This release is compatible with elasticsearch 1.0.1.</p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.0.1">Elasticsearch</a></td>
+<td> 1.0.1 </td>
+<td> yes</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1">Elasticsearch mapper attachments plugin</a></td>
+<td>2.0.0.RC1</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC2">Elasticsearch thrift transport plugin</a></td>
+<td>2.0.0.RC2</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.10">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.10</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Issue #554: Fixed Type->deleteByQuery() not working with Query objects</li>
+<li>Update to elasticsearch 1.0.1. Update Thrift and Geocluster plugin.</li>
+<li>Issue #559: add JSON_UNESCAPED_UNICODE and JSON_UNESCAPED_SLASHES options in Elastica/Transport/Http, Elastica/Bulk/Action</li>
+<li>Issue #558: fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route.</li>
+<li>Throw PartialShardFailureException if response has failed shards</li>
+<li>Issue #555: Elastica/Aggregations/GlobalAggragation not allowed as sub aggragation</li>
+<li>Add methods setSize, setShardSize to Elastica/Aggregation/Terms</li>
+<li>Elastica/Aggregation/GlobalAggregationTest fixed bug where JSON returned [] instead of {}</li>
+<li>Elastica/ResultSet added method hasAggregations</li>
+<li>Moved from Apache License to MIT license</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v1.0.0.0]]></title>
+    <link href="http://Elastica.io/2014/02/12/release-v1-dot-0-0-dot-0/"/>
+    <updated>2014-02-12T20:13:31+01:00</updated>
+    <id>http://Elastica.io/2014/02/12/release-v1-dot-0-0-dot-0</id>
+    <content type="html"><![CDATA[<p>Elastica v1.0.0.0 <a href="https://github.com/ruflin/Elastica/tree/v1.0.0.0">download</a>. This release is compatible with elasticsearch 1.0.0. There is a larger list of breaking changes in this release on the elasticsearch site. This will mean you have to adapt some code in your app but perhaps also on the configuration of elasticsearch. All changes can be found here: <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/breaking-changes.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/breaking-changes.html</a></p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.0.0">Elasticsearch</a></td>
+<td>1.0.0</td>
+<td>yes|</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1">Elasticsearch mapper attachments plugin</a></td>
+<td>2.0.0.RC1</td>
+<td>no|</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC1">Elasticsearch thrift transport plugin</a></td>
+<td>2.0.0.RC1</td>
+<td>no|</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.9">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.9</td>
+<td>no|</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Updated to elasticsearch 1.0: <a href="http://www.elasticsearch.org/blog/1-0-0-released/">http://www.elasticsearch.org/blog/1-0-0-released/</a></li>
+<li>Add aggregations</li>
+<li>Setting shard timeout doesn&rsquo;t work #547</li>
+<li>Remove Elastica\Query\Field and Elastica\Query\Text, which are not supported in ES 1.0.0.RC1</li>
+<li>Minor tweaking of request and result handling classes to adjust for changes in ES 1.0.0.RC1</li>
+<li>Update mapper-attachments plugin to version 2.0.0.RC1 in .travis.yml</li>
+<li>Adjust tests to account for changes in ES 1.0.0.RC1</li>
+<li>Prevent the geocluster-facet plugin from being installed in test/bin/run_elasticsearch.sh as the plugin has not yet been updated for ES 1.0.0.RC1</li>
+<li>Added Elastica\Query\DisMax</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v0.90.10.0]]></title>
+    <link href="http://Elastica.io/2014/02/02/release-v0-dot-90-dot-10-dot-0/"/>
+    <updated>2014-02-02T09:50:00+01:00</updated>
+    <id>http://Elastica.io/2014/02/02/release-v0-dot-90-dot-10-dot-0</id>
+    <content type="html"><![CDATA[<p>Elastica v0.90.10.0 <a href="https://github.com/ruflin/Elastica/tree/v0.90.10.0">download</a>. This release is compatible with elasticsearch 0.90.10</p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v0.90.10">Elasticsearch</a></td>
+<td>0.90.10</td>
+<td>yes|</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v1.9.0">Elasticsearch mapper attachments plugin</a></td>
+<td>1.9.0</td>
+<td>no|</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v1.7.0">Elasticsearch thrift transport plugin</a></td>
+<td>1.7.0</td>
+<td>no|</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.9">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.9</td>
+<td>no|</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Updates for release v0.90.10.0</li>
+<li>Fix _bulk delete proxy methods if type or index not explicitly defined.</li>
+<li>Add _bulk delete proxy methods to Index and Type for consistency.</li>
+<li>Use the HTTP response code of GET requests (getDocument), instead of extists/found json property.</li>
+<li>Add getParam &amp; getProperties methods to Elastica\Type\Mapping</li>
+<li>Code coverage generation for coveralls.io added: <a href="https://coveralls.io/r/ruflin/Elastica">https://coveralls.io/r/ruflin/Elastica</a></li>
+<li>Add support for shard timeout to the Bulk api.</li>
+<li>Fix typo in constant name: Elastica\Query\FunctionScore::DECAY_GUASS becomes DECAY_GAUSS</li>
+<li>Add support for _bulk update</li>
+<li>added \Elastica\Exception\ResponseException::getElasticsearchException()</li>
+<li>Changed logger default log level to debug from info</li>
+<li>Update to elasticsearch 0.90.10</li>
+<li>Add Elastica\Facet\TermsStats::setOrder()</li>
+<li>Adding analyze function to Index to expose the _analyze API</li>
+<li>Document::setDocAsUpsert() now returns the Document</li>
+<li>Update to Elasticsearch 0.90.8</li>
+<li>Add support for simple_query_string query</li>
+<li>Add support for filter inside HasChild filter</li>
+<li>Add support for filter inside HasParent filter</li>
+<li>Always send scroll_id via HTTP body instead of as a query param</li>
+<li>Fix the manner in which suggestion results are returned in \Elastica\ResultSet and adjust associated tests to account for the fix.</li>
+<li>Add \Elastica\Resultset::hasSuggests()</li>
+<li>Pass arguments to optimize as query</li>
+<li>Add refreshAll on Client</li>
+<li>Added Result::hasFields() and Result::hasParam() methods for consistency with Document</li>
+<li>Escape slash in Util::escapeTerm, as it is used for regexp from Elastic 0.90</li>
+<li>Add *.iml to .gitignore</li>
+<li>Refactor suggest implementation (\Elastica\Suggest, \Elastica\Suggest\AbstractSuggest, and \Elastica\Suggest\Term) to more closely resemble query implementation. (BC break)</li>
+<li>\Elastica\Search::addSuggest() has been renamed to \Elastica\Search::setSuggest()</li>
+<li>\Elastica\Query::addSuggest() has been renamed to \Elastica\Query::setSuggest()</li>
+<li>Add \Elastica\Suggest\Phrase, \Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator, and \Elastica\Suggest\CandidateGenerator\DirectGenerator</li>
+<li>(see <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html</a>)</li>
+<li>Remove boost from FunctionScore::addFunction because this is not supported by elasticsearch</li>
+<li>Issue #491 resolved</li>
+<li>Issue #501 resolved</li>
+<li>satooshi/php-coveralls package added for coverall.io</li>
+<li>Multiple badges for downloads and latest stable release added</li>
+<li>Remove facets param from query if is empty array</li>
+<li>Add size param to API for TermsStats</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v0.90.7.0]]></title>
+    <link href="http://Elastica.io/2013/11/23/release-v0-dot-90-dot-7-0/"/>
+    <updated>2013-11-23T22:37:00+01:00</updated>
+    <id>http://Elastica.io/2013/11/23/release-v0-dot-90-dot-7-0</id>
+    <content type="html"><![CDATA[<p>Elastica v0.90.7.0 <a href="https://github.com/ruflin/Elastica/tree/v0.90.7.0">download</a>. This release is compatible with elasticsearch 0.90.7</p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v0.90.7">Elasticsearch</a></td>
+<td>0.90.7</td>
+<td>yes</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v1.9.0">Elasticsearch mapper attachments plugin</a></td>
+<td>1.9.0</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v1.4.0">Elasticsearch thrift transport plugin</a></td>
+<td>1.4.0</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.9">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.9</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Updated geocluster-facet to 0.0.9</li>
+<li>Added \Elastica\Filter\Regexp</li>
+<li>Remove wrong documentation for &ldquo;no limit&rdquo; #496</li>
+<li>Update to elasticsearch 0.90.7</li>
+<li>Issue #490: Set Elastica\Query\FunctionScore::DECAY_EXPONENTIAL to &ldquo;exp&rdquo; instead of &ldquo;exponential&rdquo;</li>
+<li>Elastica_Type::exists() added. See <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-types-exists.html#indices-types-exists">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-types-exists.html#indices-types-exists</a></li>
+<li>Adapted possible values (not only in) for minimum_should_match param based on elasticsearch documetnation  <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v0.90.5.0]]></title>
+    <link href="http://Elastica.io/2013/10/27/release-v0-dot-90-dot-5-0/"/>
+    <updated>2013-10-27T13:56:00+01:00</updated>
+    <id>http://Elastica.io/2013/10/27/release-v0-dot-90-dot-5-0</id>
+    <content type="html"><![CDATA[<p>Elastica v0.90.5.0 <a href="https://github.com/ruflin/Elastica/tree/v0.90.5.0">download</a>. This release is compatible with elasticsearch 0.90.5</p>
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Update to elasticsearch <a href="http://www.elasticsearch.org/downloads/0-90-5/">0.90.5</a></li>
+<li>Fix \Elastica\Filter\HasParent usage of \Elastica\Query as to not collide with \Elastica\Filter\Query, bring \Elasitca\Filter\HasChild into line</li>
+<li>Also pass the current client object to the failure callback in \Elastica\Client.</li>
+<li>Update to geocluster-facet 0.0.8</li>
+<li>Add support for term suggest API. See <a href="http://www.elasticsearch.org/guide/reference/api/search/term-suggest/">http://www.elasticsearch.org/guide/reference/api/search/term-suggest/</a></li>
+<li>Fix \Elastica\Filter\HasChild usage of \Elastica\Query as to not collide with \Elastica\Filter\Query namespace</li>
+<li>Update to elasticsearch 0.90.4</li>
+<li>Add support for function_score query</li>
+<li>Skip geocluster-facet test if the plugin is not installed</li>
+<li>Correct \Elastica\Test\ClientTest to catch the proper exception type on connection failure</li>
+<li>Fix unit test errors</li>
+<li>Nested filter supports now the setFilter method</li>
+<li>Support isset() calls on Result objects</li>
+<li>Add \ArrayAccess on the ResultSet object</li>
+<li>Update to elasticsearch 0.90.3</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v0.90.2.0]]></title>
+    <link href="http://Elastica.io/2013/08/25/release-v0-dot-90-dot-2-0/"/>
+    <updated>2013-08-25T10:47:00+02:00</updated>
+    <id>http://Elastica.io/2013/08/25/release-v0-dot-90-dot-2-0</id>
+    <content type="html"><![CDATA[<p>This release is compatible with <a href="http://www.elasticsearch.org/downloads/0-90-2/">elasticsearch 0.90.2</a>. The only BC break in this release is that now Scripts is a frist class citizens in upsert. The migration guide can be found <a href="http://Elastica.io/migration/0.90.2/upsert.html">here</a>.</p>
+
+<p><a href="https://github.com/ruflin/Elastica/tree/v0.90.2.0">Download</a></p>
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Support for &ldquo;proxy&rdquo; param for http connections</li>
+<li>Add support for fields parameter in Elastica_Type::getDocument()</li>
+<li>Add a getQuery method on the FilteredQuery object</li>
+<li>Second param to \Elastica\Search.php:count($query = &lsquo;&rsquo;, $fullResult = false) added. If second param is set to true, full ResultSet is returned including facets.</li>
+<li>Plugin geocluster-facet support added</li>
+<li>Add Query\Common</li>
+<li>Can now create a query by passing an array to Type::search()</li>
+<li>Add Filter\GeohashCell</li>
+<li>Revamped upsert so that Scripts are now first class citizens. (BC break)
+See <a href="http://elastica.io/migration/0.90.2/upsert.html">http://elastica.io/migration/0.90.2/upsert.html</a></li>
+<li>Implemented doc_as_upsert.</li>
+<li>Update to elasticsearch 0.90.2</li>
+<li>Enabled ES_WAIT_ON_MAPPING_CHANGE for travis builds</li>
+<li>Added upsert support when updating a document with a partial document or a script.</li>
+<li>Add filtered queries to the percolator API.</li>
+<li>Correct class name for TermTest unit test</li>
+<li>Implement terms lookup feature for terms filter</li>
+<li>Fix support for making scroll queries once the scroll has been started.</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v0.90.1.0]]></title>
+    <link href="http://Elastica.io/2013/06/07/release-v0-dot-90-dot-1-0/"/>
+    <updated>2013-06-07T21:14:00+02:00</updated>
+    <id>http://Elastica.io/2013/06/07/release-v0-dot-90-dot-1-0</id>
+    <content type="html"><![CDATA[<ul>
+<li><a href="https://github.com/ruflin/Elastica/tree/v0.90.1.0">Download</a></li>
+</ul>
+
+
+<p>This release is a consists of several bigger refactoring steps in Elastica to make it compatible with the newest elasticsearch versions and allow to use the newest features. The release v0.90.1.0 is compatible with <a href="http://www.elasticsearch.org/2013/05/30/0-90-1-released/">elasticsearch 0.90.1</a>.</p>
+
+<p>There are quite a few changes which break BC since the last official release <a href="http://Elastica.io/2012/08/12/release-v0-dot-19-dot-8-0/">v0.19.8.0</a>. For more details on the BC breaks follow the changes below and also check the <a href="http://Elastica.io/2013/02/20/release-v0-dot-20-dot-5-0/">v0.20.5.0</a> release candidate changes for more details.</p>
+
+<p>There are still some open pull requests pending with larger changes which could break BC. The goal is to get these changes in before release 1.0 of elasticsearch.</p>
+
+<h1>Changes</h1>
+
+<ul>
+<li>Changed package name to lowercase to prevent potential issues with case sensitive file systems and to refelect the package name from packagist.org.
+If you are requiring elastica in your project you might want to change the name in the require to lowercase, although it will still work if written in uppercase.
+The composer autoloader will handle the package correctly and you will not notice any difference.
+If you are requiring or including a file by hand with require() or include() from the composer vendor folder, pay attention that the package name in
+the path will change to lowercase.</li>
+<li>Add Bulk\Action\UpdateDocument.</li>
+<li>Update Bulk\Action\AbstractDocument and Bulk\Action to enable use of OP_TYPE_UPDATE.</li>
+<li>Update .travis.yml to use Elasticsearch version 0.9.1, as bulk update is a new feature in 0.9.1.</li>
+<li>Elastica\Client::<em>configureParams() changed to </em>prepareConnectionParams(), which now takes the config array as an argument</li>
+<li>Add getPlugins and hasPlugin methods to Node\Info</li>
+<li>Update Index\Status::getAliases() to use new API</li>
+<li>Update Index\Status::getSettings() to use new API</li>
+<li>Add _meta to mapping. #330</li>
+<li>Added parameters to implement scroll</li>
+<li>add support PSR-3(<a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md">https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md</a>)</li>
+<li>Elastica\Log implement LoggerInterface(extends Psr\Log\AbstractLogger)
+if you want use logging need install <a href="https://github.com/php-fig/log">https://github.com/php-fig/log</a> for example (composer require psr/log:dev-master)
+if use Elastica\Log inside Elastica\Client nothing more is needed
+if use Elastica\Log outside we need use as(<a href="https://github.com/php-fig/log">https://github.com/php-fig/log</a>) for example Elastica\Log::info($message) or Elastica\Log::log(LogLevel::INFO,$message)</li>
+<li>Elastica\Client add setLogger for setting custom Logger for example Monolog(<a href="https://github.com/Seldaek/monolog">https://github.com/Seldaek/monolog</a>)</li>
+<li>Elastica\Index::exists fixed for 0.90.0. HEAD request method introduced</li>
+<li>Elastica\Filter\AbstractMulti::getFilters() added</li>
+<li>Implement Elastica\Type\Mapping::enableAllField</li>
+<li>Refresh for Elastica\Index::flush implemented #316</li>
+<li>Added optional parameter to filter result while percolate #384</li>
+<li>Added EXPERIMENTAL DocumentObjectInterface to be used with Type::addObject()/addObjects()</li>
+<li>Removed Elastica\Exception\AbstractException</li>
+<li>All Exceptions now implement Elastica\Exception\ExceptionInterface</li>
+<li>Query\Fuzzy to comply with DSL spec. Multi-field queries now throw an exception. Implemented: Query\Fuzzy::setField, Query\Fuzzy::setFieldOption.</li>
+<li>Query\Fuzzy::addField has been deprecated.</li>
+<li>Adding max score information in ResultSet</li>
+<li>Adding test for the ResultSet class</li>
+<li>Removal of unsupported minimum_number_should_match for Boolean Filter</li>
+<li>Added Elastica\Bulk class responsible for performing bulk requests. New bulk requests implemented: Client::deleteDocuments(), Bulk::sendUdp()</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v0.20.5.0]]></title>
+    <link href="http://Elastica.io/2013/02/20/release-v0-dot-20-dot-5-0/"/>
+    <updated>2013-02-20T21:15:00+01:00</updated>
+    <id>http://Elastica.io/2013/02/20/release-v0-dot-20-dot-5-0</id>
+    <content type="html"><![CDATA[<ul>
+<li><a href="https://github.com/ruflin/Elastica/tree/v0.20.5.0">Download</a></li>
+</ul>
+
+
+<h2>Migration Guide From  0.19 to 0.20</h2>
+
+<p>First you had to meet the <a href="#section-required">conditions</a> <a href="#">and install Elastica 0.20 version which work with elasticsearch 0.20.</a></p>
+
+<p>Elastica 0.20 uses namespace that&rsquo;s why PHP5.3 is required , and each class belongs of a namespace.</p>
+
+<p>For understanding namespace , and how use it let see <a href="http://php.net/manual/en/language.namespaces.php">php.net</a></p>
+
+<p>Each class which call with an underscore , is include in a namespace.</p>
+
+<p>Example :</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">//Before</span>
+</span><span class='line'><span class="nv">$Document</span><span class="o">=</span><span class="k">new</span> <span class="nx">Elastica_Document</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span><span class="nv">$documentArray</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//Now</span>
+</span><span class='line'><span class="nv">$Document</span><span class="o">=</span><span class="k">new</span> <span class="nx">\Elastica\Document</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span><span class="nv">$documentArray</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Before</span>
+</span><span class='line'><span class="nv">$BoolOr</span><span class="o">=</span><span class="k">new</span> <span class="nx">Elastica_Filter_BoolOr</span><span class="p">();</span>
+</span><span class='line'><span class="c1">//Now</span>
+</span><span class='line'><span class="nv">$BoolOr</span><span class="o">=</span><span class="k">new</span> <span class="nx">Elastica\Filter\BoolOr</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h3>Migration on class</h3>
+
+
+<h2>List of Deleted class</h2>
+
+
+<ul>
+<li>Elastica_Filter_Or</li>
+<li>Elastica_Filter_And</li>
+</ul>
+
+
+<h2>List of Deprecated class</h2>
+
+
+<table>
+<tr>
+<th>Ex method</th>
+<th>New method</th>
+<th>Comments</th>
+</tr>
+<tr>
+<td>Elastica_Filter_Or</td>
+<td>Elastica\Filter\BoolOr</td>
+<td></td>
+</tr>
+<tr>
+<td>Elastica_Filter_And</td>
+<td>Elastica\Filter\BoolAnd</td>
+<td></td>
+</tr>
+</table>
+
+
+
+
+<h2>List of new class</h2>
+
+
+<ul>
+<li>Elastica\Connection()</li>
+</ul>
+
+
+<h3>Migration on methods</h3>
+
+
+<h2>List of Deleted methods</h2>
+
+
+<ul>
+<li>\Elastica\Type::getType()</li>
+<li>\Elastica\Filter\Script::setQuery()</li>
+<li>\Elastica\Query\QueryString::setQueryString()</li>
+<li>\Elastica\Query\Builder::minimumShouldMatch()</li>
+<li>\Elastica\Query\Builder::tieBreaker()</li>
+</ul>
+
+
+<h2>List of Deprecated methods</h2>
+
+
+<table>
+<tr>
+<th>Ex method</th>
+<th>New method</th>
+<th>Comments</th>
+</tr>
+<tr>
+<td>Elastica_Document::add($key,$value)</td>
+<td>Elastica\Document::set($key,$value)</td>
+<td></td>
+</tr>
+</table>
+
+
+
+
+<h2>List of new methods</h2>
+
+
+<ul>
+<li>\Elastica\Facet\Terms::setScript()</li>
+<li>\Elastica\Document::set() &amp;&amp; get() &amp;&amp; has() &amp;&amp; remove()</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Release v0.19.8.0]]></title>
+    <link href="http://Elastica.io/2012/08/12/release-v0-dot-19-dot-8-0/"/>
+    <updated>2012-08-12T21:15:00+02:00</updated>
+    <id>http://Elastica.io/2012/08/12/release-v0-dot-19-dot-8-0</id>
+    <content type="html"><![CDATA[<h1>Release <a href="https://github.com/ruflin/Elastica/tree/v0.19.8.0">v0.19.8.0</a></h1>
+
+<p>This release breaks backward compatibility!</p>
+
+<p>Date: 2012-08-12</p>
+
+<h2>Release Notes</h2>
+
+<p>All changes can be found in the <a href="https://github.com/ruflin/Elastica/blob/v0.19.8.0/changes.txt">changes.txt</a></p>
+
+<h3>BC Breaks</h3>
+
+<ul>
+<li>Change Elastica_Filter_GeoDistance::__construct(), accepts geohash parameter (BC break, before: ($key, $latitude, $longitude, $distance), after: ($key, $location, $distance) where $location is array(&lsquo;lat&rsquo; => $latitude, &lsquo;lon&rsquo; => $longitude) or a geohash)</li>
+</ul>
+
+
+<h3>Changes</h3>
+
+<ul>
+<li>Remove old style path creation through params in Elastica_Index::create and Elastica_Search::search</li>
+<li>PSR1/PSR2 Style enforced&lt;</li>
+</ul>
+
+
+<h3>Additions</h3>
+
+<ul>
+<li>Elastica_Query_Prefix added</li>
+<li>Added Elastica_ScriptFields</li>
+<li>Added Elastica_Filter_Limit</li>
+<li>Facet scope added</li>
+<li>Added Elastica_Filter_MatchAll</li>
+<li>Added Elastica_Filter_Limit</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

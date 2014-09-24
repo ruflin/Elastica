@@ -1,1 +1,225 @@
-My Octopress Page is coming soon &hellip;
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Elastica - Elastica</title>
+  <meta name="author" content="@ruflin">
+
+  
+  <meta name="description" content="Elastica - PHP client for elasticsearch">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Elastica.io">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-10160648-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Elastica</a></h1>
+  
+    <h2>A PHP client for elasticsearch.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Elastica.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/examples/">Examples</a></li>
+  <li><a href="/api/">Api</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/faq/">FAQ</a></li>
+</ul>
+
+</nav>
+  <a href="https://github.com/ruflin/Elastica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Elastica</h1>
+    
+  </header>
+  
+  <p><a href="https://packagist.org/packages/ruflin/elastica"><img src="https://poser.pugx.org/ruflin/Elastica/v/stable.png" alt="Latest Stable Version" /></a>
+<a href="https://coveralls.io/r/ruflin/Elastica"><img src="https://coveralls.io/repos/ruflin/Elastica/badge.png" alt="Coverage Status" /></a>
+<a href="https://www.versioneye.com/php/ruflin:elastica/"><img src="https://www.versioneye.com/php/ruflin:Elastica/master/badge.png" alt="Dependency Status" /></a>
+<a href="https://packagist.org/packages/ruflin/elastica"><img src="https://poser.pugx.org/ruflin/Elastica/downloads.png" alt="Total Downloads" /></a></p>
+
+<p>Elastica.io is the documentation for <a href="http://github.com/ruflin/Elastica">Elastica</a>, a PHP client for <a href="http://elasticsearch.org">elasticsearch</a>. Elastica is open source and you can download or clone the source code on Github from <a href="http://github.com/ruflin/Elastica">ruflin/Elastica</a>.</p>
+
+<p>These pages should give you an overview of how to use Elastica. You can find the complete <a href="api/index.html">API here</a>. Any contributions to the documentations are highly welcome. Elastica.io is based on <a href="http://octopress.org/">Octopress</a> and is hosted on Github. Fork your copy from <a href="https://github.com/ruflin/Elastica.io">ruflin/Elastica.io</a> and open a pull request.</p>
+
+<ul>
+<li><a href="/getting-started/">Getting Started</a></li>
+<li><a href="/examples/">Examples</a></li>
+<li><a href="/contribute/">How to Contribute</a></li>
+<li><a href="/releases/">Releases</a></li>
+<li><a href="/migrations/">Migrations</a></li>
+<li><a href="/references/">References</a></li>
+</ul>
+
+
+<h2>Versions</h2>
+
+<p>The version numbers are consistent with elasticsearch. The version number 0.16.0.0 means it is the first release for elasticsearch version 0.16.0. The next release is called 0.16.0.1. As soon as the elasticsearch is updated and the client is updated, also the next version is called 0.16.1.0. Like this it should be always clear to which versions the Elastica client is compatible.</p>
+
+<h2>Compatibilitiy</h2>
+
+<p>Elastica is tested with PHP 5.3.3 and later. Versions prior and equal to v0.19.8.0 are compatible with PHP 5.2</p>
+
+<h2>File indexing</h2>
+
+<p>File upload is supported but the mapper attachement plugin has to be installed</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>./bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/1.9.0</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Credits</h2>
+
+<p>Credits go to <a href="https://github.com/ruflin/Elastica/network/members">all users that gave feedback and committed code</a>.</p>
+
+  
+    <footer>
+      
+      
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/index.html" data-via="" data-counturl="http://Elastica.io/index.html" >Tweet</a>
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2014/07/27/release-v1-dot-3-0-dot-0/">Release v1.3.0.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/06/14/release-v1-dot-2-1-dot-0/">Release v1.2.1.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/27/release-v1-dot-1-1-dot-1/">Release v1.1.1.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/04/19/release-v1-dot-1-1-dot-0/">Release v1.1.1.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2014/03/25/release-v1-dot-0-1-dot-2/">Release v1.0.1.2</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/116483615197289019288?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - @ruflin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
