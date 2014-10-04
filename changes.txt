@@ -1,6 +1,7 @@
 CHANGES
 
 2014-10-04
+- Release v1.3.4.0
 - Update to elasticsearch 1.3.4 #691
 
 2014-09-22
