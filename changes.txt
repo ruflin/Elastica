@@ -1,7 +1,10 @@
 CHANGES
 
+2014-10-04
+- Update to elasticsearch 1.3.4 #691
+
 2014-09-22
- - Update the branch alias in composer.json to match the library version
+ - Update the branch alias in composer.json to match the library version #683
 
 2014-09-16
  - Update license in composer.json to match project #681
