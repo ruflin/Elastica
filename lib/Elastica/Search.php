@@ -436,7 +436,7 @@ class Search
             $params
         );
 
-        return new ResultSet($response, $query);
+        return ResultSet::create($response, $query);
     }
 
     /**
@@ -458,7 +458,7 @@ class Search
             $query->toArray(),
             array(self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_COUNT)
         );
-        $resultSet = new ResultSet($response, $query);
+        $resultSet = ResultSet::create($response, $query);
 
         return $fullResult ? $resultSet : $resultSet->getTotalHits();
     }

@@ -1,5 +1,8 @@
 CHANGES
 
+2014-10-05
+ - ResultSet creation moved to static ResultSet::create() method #690
+
 2014-10-04
 - Release v1.3.4.0
 - Update to elasticsearch 1.3.4 #691

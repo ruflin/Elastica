@@ -16,6 +16,13 @@ use Elastica\Exception\InvalidException;
 class ResultSet implements \Iterator, \Countable, \ArrayAccess
 {
     /**
+     * Class for the static create method to use.
+     *
+     * @var string
+     */
+    protected static $_class = 'Elastica\\ResultSet';
+
+    /**
      * Results
      *
      * @var array Results
@@ -74,6 +81,31 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
         $this->rewind();
         $this->_init($response);
         $this->_query = $query;
+    }
+
+    /**
+     * Creates a new ResultSet object. Can be configured to return a different
+     * implementation of the ResultSet class.
+     *
+     * @param Response $response
+     * @param Query $query
+     * @return ResultSet
+     */
+    public static function create(Response $response, Query $query)
+    {
+        $class = static::$_class;
+
+        return new $class($response, $query);
+    }
+
+    /**
+     * Sets the class to be used for the static create method.
+     *
+     * @param string $class
+     */
+    public static function setClass($class)
+    {
+        static::$_class = $class;
     }
 
     /**
