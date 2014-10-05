@@ -4,6 +4,9 @@ CHANGES
 - Release v1.3.4.0
 - Update to elasticsearch 1.3.4 #691
 
+2014-10-02
+ - Accept an options array at Type::updateDocument()
+
 2014-09-22
  - Update the branch alias in composer.json to match the library version #683
 
