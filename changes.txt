@@ -1,6 +1,6 @@
 CHANGES
 
-2014-10-02
+2014-10-05
  - Accept an options array at Type::updateDocument() #686
 
 2014-10-04
