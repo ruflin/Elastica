@@ -492,7 +492,7 @@ class Type implements SearchableInterface
 
         $response = $this->request($path, Request::GET, $query->toArray(), $params);
 
-        return new ResultSet($response, $query);
+        return ResultSet::create($response, $query);
     }
 
     /**
