@@ -224,8 +224,12 @@ class Type implements SearchableInterface
     {
         $path = urlencode($id);
 
-        $response = $this->request($path, Request::GET, array(), $options);
-        $result = $response->getData();
+        try {
+            $response = $this->request($path, Request::GET, array(), $options);
+            $result = $response->getData();
+        } catch (ResponseException $e) {
+            throw new NotFoundException('unable to retrieve doc id ' . $id. ': '.$e->getMessage(), $e->getCode(), $e);
+        }
 
         $info = $response->getTransferInfo();
         if ($info['http_code'] !== 200) {
