@@ -1,7 +1,7 @@
 CHANGES
 
 2014-10-05
-- Remove exception catch in Type::getDocument() #687
+- Improve exception handling in Type::getDocument() #693
 
 2014-10-04
 - Release v1.3.4.0
