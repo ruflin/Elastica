@@ -2,6 +2,7 @@ CHANGES
 
 2014-10-05
  - ResultSet creation moved to static ResultSet::create() method #690
+ - Accept an options array at Type::updateDocument() #686
 
 2014-10-04
 - Release v1.3.4.0

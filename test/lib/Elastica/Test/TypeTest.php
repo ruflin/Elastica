@@ -565,6 +565,37 @@ class TypeTest extends BaseTest
         $this->assertEquals(3, $updatedDoc['counter'], "Counter was not incremented");
     }
 
+    public function testUpdateDocumentWithParameter()
+    {
+        $client = $this->_getClient();
+        $index = $client->getIndex('elastica_test');
+        $type = $index->getType('update_type');
+        $id = 1;
+        $type->addDocument(new Document($id, array('name' => 'bruce wayne batman', 'counter' => 1)));
+        $newName = 'batman';
+
+        $document = new Document();
+        $script = new Script(
+            "ctx._source.name = name; ctx._source.counter += count",
+            array(
+                'name' => $newName,
+                'count' => 2,
+            ),
+            null,
+            $id
+        );
+        $script->setUpsert($document);
+
+        try {
+            $type->updateDocument($script, array('version' => 999)); // Wrong version number to make the update fail
+        } catch (ResponseException $e) {
+            $this->assertContains('VersionConflictEngineException', $e->getMessage());
+        }
+        $updatedDoc = $type->getDocument($id)->getData();
+        $this->assertNotEquals($newName, $updatedDoc['name'], "Name was updated");
+        $this->assertNotEquals(3, $updatedDoc['counter'], "Counter was incremented");
+    }
+
     public function testUpdateDocumentWithFieldsSource()
     {
         $client = $this->_getClient();
