@@ -1,32 +1,33 @@
 CHANGES
 
 2014-10-05
- - ResultSet creation moved to static ResultSet::create() method #690
- - Accept an options array at Type::updateDocument() #686
+- ResultSet creation moved to static ResultSet::create() method #690
+- Accept an options array at Type::updateDocument() #686
+- Improve exception handling in Type::getDocument() #693
 
 2014-10-04
 - Release v1.3.4.0
 - Update to elasticsearch 1.3.4 #691
 
 2014-09-22
- - Update the branch alias in composer.json to match the library version #683
+- Update the branch alias in composer.json to match the library version #683
 
 2014-09-16
- - Update license in composer.json to match project #681
+- Update license in composer.json to match project #681
 
 2014-09-08
- - Delete execution permission from non-executable files #677
+- Delete execution permission from non-executable files #677
 
 2014-08-25
- - Top-level filter parameter in search has been renamed to post_filter #669 #670
- - Deprecated: Elastica\Query::setFilter() is deprecated. Use Elastica\Query::setPostFilter() instead. #669
- - Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractFilter instead. #669
+- Top-level filter parameter in search has been renamed to post_filter #669 #670
+- Deprecated: Elastica\Query::setFilter() is deprecated. Use Elastica\Query::setPostFilter() instead. #669
+- Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractFilter instead. #669
 
 2014-08-22
- - Fixed escaping of / character in Elastica\Util::escapeTerm(), removed usage of JSON_UNESCAPED_SLASHES in Elastica\JSON #660
+- Fixed escaping of / character in Elastica\Util::escapeTerm(), removed usage of JSON_UNESCAPED_SLASHES in Elastica\JSON #660
 
 2014-08-06
- - Add connection pool and connection strategy
+- Add connection pool and connection strategy
 
 2014-07-26
 - Release v1.3.0.0

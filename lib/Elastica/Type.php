@@ -230,7 +230,7 @@ class Type implements SearchableInterface
             $response = $this->request($path, Request::GET, array(), $options);
             $result = $response->getData();
         } catch (ResponseException $e) {
-            throw new NotFoundException('doc id ' . $id . ' not found');
+            throw new NotFoundException('unable to retrieve doc id ' . $id. ': '.$e->getMessage(), $e->getCode(), $e);
         }
 
         $info = $response->getTransferInfo();
