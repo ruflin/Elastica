@@ -192,10 +192,6 @@ class FuzzyLikeThis extends AbstractQuery
             $args['boost'] = $this->_boost;
         }
 
-        if (!empty($this->_likeText)) {
-            $args['like_text'] = $this->_likeText;
-        }
-
         if (!empty($this->_analyzer)) {
             $args['analyzer'] = $this->_analyzer;
         }
@@ -203,6 +199,7 @@ class FuzzyLikeThis extends AbstractQuery
 
         $args['min_similarity'] = ($this->_minSimilarity > 0) ? $this->_minSimilarity : 0;
 
+        $args['like_text'] = $this->_likeText;
         $args['prefix_length']   = $this->_prefixLength;
         $args['ignore_tf'] = $this->_ignoreTF;
         $args['max_query_terms'] = $this->_maxQueryTerms;
