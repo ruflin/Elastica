@@ -6,6 +6,7 @@ use Elastica\Facet\DateHistogram;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Request;
+use Elastica\Response;
 use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
 
@@ -77,6 +78,86 @@ class ResponseTest extends BaseTest
         $response = $type->addDocuments($docs);
 
         $this->assertTrue($response->isOk());
+    }
+
+    public function testIsOkBulkWithErrorsField()
+    {
+        $response = new Response(json_encode(array(
+            'took' => 213,
+            'errors' => false,
+            'items' => array(
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200)),
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'status' => 200)),
+            )
+        )));
+
+        $this->assertTrue($response->isOk());
+    }
+
+    public function testIsNotOkBulkWithErrorsField()
+    {
+        $response = new Response(json_encode(array(
+            'took' => 213,
+            'errors' => true,
+            'items' => array(
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200)),
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'status' => 200)),
+            )
+        )));
+
+        $this->assertFalse($response->isOk());
+    }
+
+    public function testIsOkBulkItemsWithOkField()
+    {
+        $response = new Response(json_encode(array(
+            'took' => 213,
+            'items' => array(
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'ok' => true)),
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'ok' => true)),
+            )
+        )));
+
+        $this->assertTrue($response->isOk());
+    }
+
+    public function testIsNotOkBulkItemsWithOkField()
+    {
+        $response = new Response(json_encode(array(
+            'took' => 213,
+            'items' => array(
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'ok' => true)),
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'ok' => false)),
+            )
+        )));
+
+        $this->assertFalse($response->isOk());
+    }
+
+    public function testIsOkBulkItemsWithStatusField()
+    {
+        $response = new Response(json_encode(array(
+            'took' => 213,
+            'items' => array(
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200)),
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'status' => 200)),
+            )
+        )));
+
+        $this->assertTrue($response->isOk());
+    }
+
+    public function testIsNotOkBulkItemsWithStatusField()
+    {
+        $response = new Response(json_encode(array(
+            'took' => 213,
+            'items' => array(
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200)),
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'status' => 301)),
+            )
+        )));
+
+        $this->assertFalse($response->isOk());
     }
 
     public function testGetDataEmpty()
