@@ -225,4 +225,36 @@ class FuzzyLikeThisTest extends BaseTest
         $resultSet = $type->search($fltQuery);
         $this->assertEquals(0, $resultSet->count());
     }
+
+    public function testNoLikeTextProvidedShouldReturnNoResults()
+    {
+        $client = $this->_getClient();
+        $index = new Index($client, 'test');
+        $index->create(array(), true);
+        $index->getSettings()->setNumberOfReplicas(0);
+
+        $type = new Type($index, 'helloworldfuzzy');
+        $mapping = new Mapping($type , array(
+                'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
+                'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
+            ));
+
+        $mapping->setSource(array('enabled' => false));
+        $type->setMapping($mapping);
+
+        $doc = new Document(1000, array('email' => 'testemail@gmail.com', 'content' => 'This is a sample post. Hello World Fuzzy Like This!'));
+        $type->addDocument($doc);
+
+        // Refresh index
+        $index->refresh();
+
+        $fltQuery = new FuzzyLikeThis();
+        $fltQuery->setLikeText("");
+        $fltQuery->addFields(array("email","content"));
+        $fltQuery->setMinSimilarity(0.3);
+        $fltQuery->setMaxQueryTerms(3);
+        $resultSet = $type->search($fltQuery);
+
+        $this->assertEquals(0, $resultSet->count());
+    }
 }
