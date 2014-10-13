@@ -1,5 +1,8 @@
 CHANGES
 
+2014-10-10
+- Fixed Response::isOk() to work better with bulk update api
+
 2014-10-05
 - ResultSet creation moved to static ResultSet::create() method #690
 - Accept an options array at Type::updateDocument() #686

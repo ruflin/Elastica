@@ -140,9 +140,17 @@ class Response
             }
             return false;
         }
+
         if (isset($data['items'])) {
+            if (isset($data['errors']) && true === $data['errors']) {
+                return false;
+            }
+
             foreach ($data['items'] as $item) {
-                if (false == $item['index']['ok']) {
+                if (isset($item['index']['ok']) && false == $item['index']['ok']) {
+                    return false;
+
+                } elseif (isset($item['index']['status']) && ($item['index']['status'] < 200 || $item['index']['status'] >= 300)) {
                     return false;
                 }
             }
