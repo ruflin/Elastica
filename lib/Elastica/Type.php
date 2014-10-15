@@ -220,18 +220,15 @@ class Type implements SearchableInterface
      * @param  string $id Document id
      * @param  array $options Options for the get request.
      * @throws \Elastica\Exception\NotFoundException
+     * @throws \Elastica\Exception\Response
      * @return \Elastica\Document
      */
     public function getDocument($id, $options = array())
     {
         $path = urlencode($id);
 
-        try {
-            $response = $this->request($path, Request::GET, array(), $options);
-            $result = $response->getData();
-        } catch (ResponseException $e) {
-            throw new NotFoundException('unable to retrieve doc id ' . $id. ': '.$e->getMessage(), $e->getCode(), $e);
-        }
+        $response = $this->request($path, Request::GET, array(), $options);
+        $result = $response->getData();
 
         $info = $response->getTransferInfo();
         if ($info['http_code'] !== 200) {

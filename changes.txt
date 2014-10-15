@@ -1,5 +1,8 @@
 CHANGES
 
+2014-10-15
+- Remove exception catched in Type::getDocument() #687
+
 2014-10-10
 - Fixed Response::isOk() to work better with bulk update api
 
