@@ -181,7 +181,7 @@ class Settings
      * Value can be for example 3s for 3 seconds or
      * 5m for 5 minutes. -1 refreshing is disabled.
      *
-     * @param  int $interval Number of seconds
+     * @param  int $interval Number of milliseconds
      * @return \Elastica\Response Response object
      */
     public function setRefreshInterval($interval)
