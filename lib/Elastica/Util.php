@@ -120,6 +120,23 @@ class Util
     }
 
     /**
+     * Convert a \DateTime object to format: 1995-12-31T23:59:59Z+02:00
+     *
+     * Converts it to the lucene format, including the appropriate TimeZone
+     *
+     * @param \DateTime $dateTime
+     * @param boolean $includeTimezone
+     * @return string
+     */
+    public static function convertDateTimeObject(\DateTime $dateTime, $includeTimezone = true)
+    {
+        $formatString = 'Y-m-d\TH:i:s' . ($includeTimezone === true ? 'P' : '\Z');
+        $string = $dateTime->format($formatString);
+
+        return $string;
+    }
+
+    /**
      * Tries to guess the name of the param, based on its class
      * Example: \Elastica\Filter\HasChildFilter => has_child
      *

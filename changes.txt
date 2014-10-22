@@ -1,5 +1,8 @@
 CHANGES
 
+2014-10-22
+- Added Util::convertDateTimeObject to Util class to easily convert \DateTime objects to required format #708
+
 2014-10-10
 - Fixed Response::isOk() to work better with bulk update api
 
