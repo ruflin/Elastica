@@ -14,7 +14,7 @@
 
     <testsuites>
         <testsuite name="Elastica">
-            <directory>./lib/Elastica/</directory>
+            <directory>./lib/</directory>
         </testsuite>
     </testsuites>
     <filter>
