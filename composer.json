@@ -27,9 +27,9 @@
         "monolog/monolog": "Logging request"
     },
     "autoload": {
-        "psr-0": {
-            "Elastica": "lib/",
-            "Elastica\\Test": "test/lib/"
+        "psr-4": {
+            "Elastica\\": "lib/Elastica/",
+            "Elastica\\Test\\": "test/lib/Elastica/Test/"
         }
     },
     "extra": {
