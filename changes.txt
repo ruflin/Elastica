@@ -1,5 +1,8 @@
 CHANGES
 
+2014-10-31
+- Adding PSR-4 autoloading support
+
 2014-10-22
 - Added Util::convertDateTimeObject to Util class to easily convert \DateTime objects to required format #708
 
