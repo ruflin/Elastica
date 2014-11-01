@@ -1,7 +1,7 @@
 CHANGES
 
 2014-10-29
-- Updated Type::getDocument() exception handling #687
+- Updated Type::getDocument() exception handling. \Elastica\Exception\ResponseException will be thrown instead of \Elastica\Exception\NotFoundException if the ES response contains any error (i.e: Missing index) (BC break) #687
 
 2014-10-22
 - Added Util::convertDateTimeObject to Util class to easily convert \DateTime objects to required format #708

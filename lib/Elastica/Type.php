@@ -220,6 +220,7 @@ class Type implements SearchableInterface
      * @param  string $id Document id
      * @param  array $options Options for the get request.
      * @throws \Elastica\Exception\NotFoundException
+     * @throws \Elastica\Exception\ResponseException
      * @return \Elastica\Document
      */
     public function getDocument($id, $options = array())
