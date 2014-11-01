@@ -329,7 +329,7 @@ class TypeTest extends BaseTest
     }
 
     /**
-     * @expectedException \Elastica\Exception\NotFoundException
+     * @expectedException \Elastica\Exception\ResponseException
      */
     public function testGetDocumentNotExistingIndex()
     {
