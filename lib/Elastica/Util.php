@@ -63,7 +63,7 @@ class Util
      */
     public static function replaceBooleanWords($term)
     {
-        $replacementMap = array('AND'=>'&&', 'OR'=>'||', 'NOT'=>'!');
+        $replacementMap = array(' AND '=>' && ', ' OR '=>' || ', ' NOT '=>' !');
         $result = strtr($term, $replacementMap);
 
         return $result;
