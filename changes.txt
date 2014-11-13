@@ -1,5 +1,8 @@
 CHANGES
 
+2014-11-13
+- fixed reserved words in queries which composed of upper case letters (Util::replaceBooleanWords)
+
 2013-09-20
 - Update to geocluster-facet 0.0.8
 - Add support for term suggest API
