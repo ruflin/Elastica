@@ -68,7 +68,11 @@ class Http extends AbstractTransport
         }
 
         curl_setopt($conn, CURLOPT_URL, $baseUri);
-        curl_setopt($conn, CURLOPT_TIMEOUT, $connection->getTimeout());
+        if ($connection->getTimeInMillis()) {
+            curl_setopt($conn, CURLOPT_TIMEOUT_MS, $connection->getTimeout());
+        } else {
+            curl_setopt($conn, CURLOPT_TIMEOUT, $connection->getTimeout());
+        }
         curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
 
         $proxy = $connection->getProxy();
