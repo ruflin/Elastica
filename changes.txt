@@ -1,4 +1,5 @@
 CHANGES
+
 2014-11-13
 - New timeInMillis config parameter in Elastica\Client, default false. Timeout could be considered as millisecods from now on.
 - New method getTimeInMillis to Elastica\Connection, determining whether the timeout should be considered as millisecods.
