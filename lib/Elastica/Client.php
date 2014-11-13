@@ -4,8 +4,6 @@ namespace Elastica;
 
 use Elastica\Bulk;
 use Elastica\Bulk\Action;
-use Elastica\Exception\ResponseException;
-use Elastica\Exception\ClientException;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\RuntimeException;
@@ -44,11 +42,6 @@ class Client
     );
 
     /**
-     * @var \Elastica\Connection[] List of connections
-     */
-    protected $_connections = array();
-
-    /**
      * @var callback
      */
     protected $_callback = null;
@@ -67,6 +60,11 @@ class Client
      * @var LoggerInterface
      */
     protected $_logger = null;
+    /**
+     *
+     * @var Connection\ConnectionPool
+     */
+    protected $_connectionPool = null;
 
     /**
      * Creates a new Elastica client
@@ -86,22 +84,34 @@ class Client
      */
     protected function _initConnections()
     {
-        $connections = $this->getConfig('connections');
-
-        foreach ($connections as $connection) {
-            $this->_connections[] = Connection::create($this->_prepareConnectionParams($connection));
+        $connections = array();
+        
+        foreach ($this->getConfig('connections') as $connection) {
+            $connections[] = Connection::create($this->_prepareConnectionParams($connection));
         }
 
         if (isset($this->_config['servers'])) {
             foreach ($this->getConfig('servers') as $server) {
-                $this->_connections[] = Connection::create($this->_prepareConnectionParams($server));
+                $connections[] = Connection::create($this->_prepareConnectionParams($server));
             }
         }
 
         // If no connections set, create default connection
-        if (empty($this->_connections)) {
-            $this->_connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
+        if (empty($connections)) {
+            $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
         }
+        
+        if (!isset($this->_config['connectionStrategy'])) {
+            if ($this->getConfig('roundRobin') === true) {
+                $this->setConfigValue('connectionStrategy', 'RoundRobin');
+            } else {
+                $this->setConfigValue('connectionStrategy', 'Simple');
+            }
+        }
+        
+        $strategy = Connection\Strategy\StrategyFactory::create($this->getConfig('connectionStrategy'));
+        
+        $this->_connectionPool = new Connection\ConnectionPool($connections, $strategy, $this->_callback);
     }
 
     /**
@@ -233,6 +243,30 @@ class Client
         } else {
             throw new InvalidException('Header must be a string');
         }
+    }
+
+    /**
+     * Uses _bulk to send documents to the server
+     *
+     * Array of \Elastica\Document as input. Index and type has to be
+     * set inside the document, because for bulk settings documents,
+     * documents can belong to any type and index
+     *
+     * @param  array|\Elastica\Document[]           $docs Array of Elastica\Document
+     * @return \Elastica\Bulk\ResponseSet                   Response object
+     * @throws \Elastica\Exception\InvalidException If docs is empty
+     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     */
+    public function updateDocuments(array $docs) {
+        if (empty($docs)) {
+            throw new InvalidException('Array has to consist of at least one element');
+        }
+
+        $bulk = new Bulk($this);
+
+        $bulk->addDocuments($docs, \Elastica\Bulk\Action::OP_TYPE_UPDATE);
+
+        return $bulk->send();
     }
 
     /**
@@ -415,7 +449,7 @@ class Client
      */
     public function addConnection(Connection $connection)
     {
-        $this->_connections[] = $connection;
+        $this->_connectionPool->addConnection($connection);
 
         return $this;
     }
@@ -427,15 +461,7 @@ class Client
      */
     public function hasConnection()
     {
-        foreach ($this->_connections as $connection)
-        {
-            if ($connection->isEnabled())
-            {
-                return true;
-            }
-        }
-        
-        return false;
+        return $this->_connectionPool->hasConnection();
     }
 
     /**
@@ -444,20 +470,7 @@ class Client
      */
     public function getConnection()
     {
-        $enabledConnection = null;
-
-        foreach ($this->_connections as $connection) {
-            if ($connection->isEnabled()) {
-                $enabledConnection = $connection;
-                break;
-            }
-        }
-
-        if (empty($enabledConnection)) {
-            throw new ClientException('No enabled connection');
-        }
-
-        return $enabledConnection;
+        return $this->_connectionPool->getConnection();
     }
 
     /**
@@ -465,16 +478,25 @@ class Client
      */
     public function getConnections()
     {
-        return $this->_connections;
+        return $this->_connectionPool->getConnections();
+    }
+    
+    /**
+     * 
+     * @return \Connection\Strategy\StrategyInterface
+     */
+    public function getConnectionStrategy()
+    {
+        return $this->_connectionPool->getStrategy();
     }
 
     /**
-     * @param  \Elastica\Connection[] $connections
+     * @param  array|\Elastica\Connection[] $connections
      * @return \Elastica\Client
      */
     public function setConnections(array $connections)
     {
-        $this->_connections = $connections;
+        $this->_connectionPool->setConnections($connections);
 
         return $this;
     }
@@ -482,14 +504,15 @@ class Client
     /**
      * Deletes documents with the given ids, index, type from the index
      *
-     * @param  array                               $ids   Document ids
-     * @param  string|\Elastica\Index               $index Index name
-     * @param  string|\Elastica\Type                $type  Type of documents
+     * @param  array                                $ids      Document ids
+     * @param  string|\Elastica\Index               $index    Index name
+     * @param  string|\Elastica\Type                $type     Type of documents
+     * @param  string|false                         $routing  Optional routing key for all ids
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Bulk\ResponseSet                   Response object
+     * @return \Elastica\Bulk\ResponseSet           Response  object
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
-    public function deleteIds(array $ids, $index, $type)
+    public function deleteIds(array $ids, $index, $type, $routing = false)
     {
         if (empty($ids)) {
             throw new InvalidException('Array has to consist of at least one id');
@@ -502,6 +525,10 @@ class Client
         foreach ($ids as $id) {
             $action = new Action(Action::OP_TYPE_DELETE);
             $action->setId($id);
+
+            if (!empty($routing)) {
+                $action->setRouting($routing);
+            }
 
             $bulk->addAction($action);
         }
@@ -568,19 +595,13 @@ class Client
             return $response;
 
         } catch (ConnectionException $e) {
-            $connection->setEnabled(false);
-
-            // Calls callback with connection as param to make it possible to persist invalid connections
-            if ($this->_callback) {
-                call_user_func($this->_callback, $connection, $e);
-            }
+            $this->_connectionPool->onFail($connection, $e, $this);
 
             // In case there is no valid connection left, throw exception which caused the disabling of the connection.
             if (!$this->hasConnection())
             {
                 throw $e;
             }
-            
             return $this->request($path, $method, $data, $query);
         }
     }
@@ -594,7 +615,18 @@ class Client
      */
     public function optimizeAll($args = array())
     {
-        return $this->request('_optimize', Request::POST, $args);
+        return $this->request('_optimize', Request::POST, array(), $args);
+    }
+
+    /**
+     * Refreshes all search indices
+     *
+     * @return \Elastica\Response Response object
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh.html
+     */
+    public function refreshAll()
+    {
+        return $this->request('_refresh', Request::POST);
     }
 
     /**
@@ -617,7 +649,7 @@ class Client
             } else {
                 $data = array('message' => $context);
             }
-            $this->_logger->info('logging Request', $data);
+            $this->_logger->debug('logging Request', $data);
         }
     }
 

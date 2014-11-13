@@ -22,7 +22,7 @@ class InfoTest extends BaseTest
         // Load os infos
         $info = new NodeInfo($node, array('os'));
 
-        $this->assertInternalType('string', $info->get('os', 'mem', 'total'));
+        $this->assertTrue(!is_null($info->get('os', 'mem', 'total_in_bytes')));
         $this->assertInternalType('array', $info->get('os', 'mem'));
         $this->assertNull($info->get('test', 'notest', 'notexist'));
     }
@@ -35,7 +35,7 @@ class InfoTest extends BaseTest
         $info = $node->getInfo();
 
         $pluginName = 'mapper-attachments';
-
+        
         $this->assertTrue($info->hasPlugin($pluginName));
         $this->assertFalse($info->hasPlugin('foo'));
     }

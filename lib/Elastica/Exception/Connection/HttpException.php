@@ -63,7 +63,7 @@ class HttpException extends ConnectionException
                 $error = "Couldn't resolve host";
                 break;
             case CURLE_COULDNT_CONNECT:
-                $error = "Couldn't connect to host, ElasticSearch down?";
+                $error = "Couldn't connect to host, Elasticsearch down?";
                 break;
             case 28:
                 $error = "Operation timed out";

@@ -84,6 +84,27 @@ class MatchTest extends BaseTest
         $this->assertEquals(4, $resultSet->count());
     }
 
+    public function testMatchZeroTerm()
+    {
+        $client = $this->_getClient();
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
+        $type = $index->getType('test');
+        $doc = new Document(1, array('name' => 'Basel-Stadt'));
+        $type->addDocument($doc);
+        $doc = new Document(2, array('name' => 'New York'));
+        $type->addDocument($doc);
+        $index->refresh();
+
+        $query = new Match();
+        $query->setFieldQuery('name', '');
+        $query->setFieldZeroTermsQuery('name', Match::ZERO_TERM_ALL);
+
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(2, $resultSet->count());
+    }
+
     public function testMatchPhrase()
     {
         $client = $this->_getClient();
@@ -142,5 +163,25 @@ class MatchTest extends BaseTest
         $resultSet = $index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
+    }
+    
+    
+    public function testMatchFuzzinessType()
+    {
+        $field = 'test';
+        $query = new Match();
+        
+        $fuzziness = "AUTO";
+        $query->setFieldFuzziness($field, $fuzziness);
+        
+        $parameters =  $query->getParam($field);
+        $this->assertEquals($fuzziness, $parameters['fuzziness']);      
+        
+        
+        $fuzziness = 0.3;
+        $query->setFieldFuzziness($field, $fuzziness);
+        
+        $parameters =  $query->getParam($field);
+        $this->assertEquals($fuzziness, $parameters['fuzziness']);      
     }
 }

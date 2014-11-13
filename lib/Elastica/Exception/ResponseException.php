@@ -60,4 +60,17 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     {
         return $this->_response;
     }
+
+    /**
+     * Returns elasticsearch exception
+     *
+     * @return ElasticsearchException
+     */
+    public function getElasticsearchException() {
+        $response = $this->getResponse();
+        $transfer = $response->getTransferInfo();
+        $code     = array_key_exists('http_code', $transfer) ? $transfer['http_code'] : 0;
+
+        return new ElasticsearchException($code, $response->getError());
+    }
 }

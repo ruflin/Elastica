@@ -117,9 +117,9 @@ class Info
      */
     public function getPlugins()
     {
-        if(!in_array('plugin', $this->_params)) {
+        if(!in_array('plugins', $this->_params)) {
             //Plugin data was not retrieved when refresh() was called last. Get it now.
-            $this->_params[] = 'plugin';
+            $this->_params[] = 'plugins';
             $this->refresh($this->_params);
         }
         return $this->get('plugins');
@@ -180,7 +180,7 @@ class Info
     {
         $this->_params = $params;
 
-        $path = '_cluster/nodes/' . $this->getNode()->getName();
+        $path = '_nodes/' . $this->getNode()->getName();
 
         if (!empty($params)) {
             $path .= '?';

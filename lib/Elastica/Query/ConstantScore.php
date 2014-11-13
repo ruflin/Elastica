@@ -41,6 +41,21 @@ class ConstantScore extends AbstractQuery
     }
 
     /**
+     * Set query
+     *
+     * @param array|\Elastica\Query\AbstractQuery $query
+     * @return \Elastica\Query\ConstantScore         Query object
+     */
+    public function setQuery($query)
+    {
+        if ($query instanceof AbstractQuery) {
+            $query = $query->toArray();
+        }
+
+        return $this->setParam('query', $query);
+    }
+
+    /**
      * Set boost
      *
      * @param  float                        $boost

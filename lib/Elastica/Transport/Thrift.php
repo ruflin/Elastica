@@ -3,8 +3,10 @@
 namespace Elastica\Transport;
 
 use Elastica\Exception\Connection\ThriftException;
+use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
 use Elastica\Exception\RuntimeException;
+use Elastica\JSON;
 use Elastica\Request;
 use Elastica\Response;
 use Elastica\Connection;
@@ -133,9 +135,9 @@ class Thrift extends AbstractTransport
             }
 
             $data = $request->getData();
-            if (!empty($data)) {
+            if (!empty($data) || '0' === $data) {
                 if (is_array($data)) {
-                    $content = json_encode($data);
+                    $content = JSON::stringify($data);
                 } else {
                     $content = $data;
                 }
@@ -160,6 +162,10 @@ class Thrift extends AbstractTransport
 
         if ($response->hasError()) {
             throw new ResponseException($request, $response);
+        }
+
+        if ($response->hasFailedShards()) {
+            throw new PartialShardFailureException($request, $response);
         }
 
         return $response;

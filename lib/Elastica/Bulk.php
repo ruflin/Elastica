@@ -44,6 +44,11 @@ class Bulk
     protected $_type = '';
 
     /**
+     * @var array request parameters to the bulk api
+     */
+    protected $_requestParams = array();
+
+    /**
      * @param \Elastica\Client $client
      */
     public function __construct(Client $client)
@@ -119,14 +124,14 @@ class Bulk
      */
     public function getPath()
     {
-        $path = '/';
+        $path = '';
         if ($this->hasIndex()) {
-            $path.= $this->getIndex() . '/';
+            $path .= $this->getIndex() . '/';
             if ($this->hasType()) {
-                $path.= $this->getType() . '/';
+                $path .= $this->getType() . '/';
             }
         }
-        $path.= '_bulk';
+        $path .= '_bulk';
         return $path;
     }
 
@@ -276,6 +281,24 @@ class Bulk
     }
 
     /**
+     * Set a url parameter on the request bulk request.
+     * @var string $name name of the parameter
+     * @var string $value value of the parameter
+     */
+    public function setRequestParam($name, $value) {
+        $this->_requestParams[ $name ] = $value;
+    }
+
+    /**
+     * Set the amount of time that the request will wait the shards to come on line.
+     * Requires Elasticsearch version >= 0.90.8.
+     * @var string $time timeout in Elasticsearch time format
+     */
+    public function setShardTimeout($time) {
+        $this->setRequestParam( 'timeout', $time );
+    }
+
+    /**
      * @return string
      */
     public function __toString()
@@ -317,7 +340,7 @@ class Bulk
         $path = $this->getPath();
         $data = $this->toString();
 
-        $response = $this->_client->request($path, Request::PUT, $data);
+        $response = $this->_client->request($path, Request::PUT, $data, $this->_requestParams);
 
         return $this->_processResponse($response);
     }

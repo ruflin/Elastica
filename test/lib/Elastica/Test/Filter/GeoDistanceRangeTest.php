@@ -53,7 +53,7 @@ class GeoDistanceRangeTest extends BaseTest
         );
 
         $query = new Query(new MatchAll());
-        $query->setFilter($geoFilter);
+        $query->setPostFilter($geoFilter);
         $this->assertEquals(1, $type->search($query)->count());
 
         // Both points should be inside
@@ -64,7 +64,7 @@ class GeoDistanceRangeTest extends BaseTest
             array('gte' => '0km', 'lte' => '40000km')
         );
         $query = new Query(new MatchAll());
-        $query->setFilter($geoFilter);
+        $query->setPostFilter($geoFilter);
         $index->refresh();
 
         $this->assertEquals(2, $type->search($query)->count());

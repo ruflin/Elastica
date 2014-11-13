@@ -1,7 +1,9 @@
 <?php
 
 namespace Elastica\Query;
+
 use Elastica\Filter\AbstractFilter;
+use Elastica\Exception\InvalidException;
 
 /**
  * Filtered query. Needs a query and a filter
@@ -14,27 +16,12 @@ use Elastica\Filter\AbstractFilter;
 class Filtered extends AbstractQuery
 {
     /**
-     * Query
-     *
-     * @var \Elastica\Query\AbstractQuery Query object
-     */
-    protected $_query = null;
-
-    /**
-     * Filter
-     *
-     * @var \Elastica\Filter\AbstractFilter Filter object
-     */
-    protected $_filter = null;
-
-    /**
      * Constructs a filtered query
      *
-     * @param \Elastica\Query\AbstractQuery   $query  Query object
-     * @param \Elastica\Filter\AbstractFilter $filter Filter object
+     * @param \Elastica\Query\AbstractQuery   $query  OPTIONAL Query object
+     * @param \Elastica\Filter\AbstractFilter $filter OPTIONAL Filter object
      */
-    public function __construct(AbstractQuery $query, AbstractFilter $filter)
-    {
+    public function __construct(AbstractQuery $query = null, AbstractFilter $filter = null) {
         $this->setQuery($query);
         $this->setFilter($filter);
     }
@@ -45,11 +32,9 @@ class Filtered extends AbstractQuery
      * @param  \Elastica\Query\AbstractQuery $query Query object
      * @return \Elastica\Query\Filtered      Current object
      */
-    public function setQuery(AbstractQuery $query)
+    public function setQuery(AbstractQuery $query = null)
     {
-        $this->_query = $query;
-
-        return $this;
+        return $this->setParam('query', $query);
     }
 
     /**
@@ -58,11 +43,9 @@ class Filtered extends AbstractQuery
      * @param  \Elastica\Filter\AbstractFilter $filter Filter object
      * @return \Elastica\Query\Filtered        Current object
      */
-    public function setFilter(AbstractFilter $filter)
+    public function setFilter(AbstractFilter $filter = null)
     {
-        $this->_filter = $filter;
-
-        return $this;
+        return $this->setParam('filter', $filter);
     }
 
     /**
@@ -72,7 +55,7 @@ class Filtered extends AbstractQuery
      */
     public function getFilter()
     {
-        return $this->_filter;
+        return $this->getParam('filter');
     }
 
     /**
@@ -82,7 +65,7 @@ class Filtered extends AbstractQuery
      */
     public function getQuery()
     {
-        return $this->_query;
+        return $this->getParam('query');
     }
 
     /**
@@ -93,9 +76,20 @@ class Filtered extends AbstractQuery
      */
     public function toArray()
     {
-        return array('filtered' => array(
-            'query' => $this->_query->toArray(),
-            'filter' => $this->_filter->toArray()
-        ));
+        $filtered = array();
+
+        if ($this->hasParam('query') && $this->getParam('query') instanceof AbstractQuery) {
+            $filtered['query'] = $this->getParam('query')->toArray();
+        }
+
+        if ($this->hasParam('filter') && $this->getParam('filter') instanceof AbstractFilter) {
+            $filtered['filter'] = $this->getParam('filter')->toArray();
+        }
+
+        if (empty($filtered)) {
+            throw new InvalidException('A query and/or filter is required');
+        }
+            
+        return array('filtered' => $filtered);
     }
 }

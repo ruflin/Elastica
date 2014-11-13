@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Cluster;
+
 use Elastica\Client;
 use Elastica\Request;
 
@@ -46,7 +47,7 @@ class Settings
      *
      * If param is set, only specified setting is return.
      *
-     * @param  string            $setting OPTIONAL Setting name to return
+     * @param  string $setting OPTIONAL Setting name to return
      * @return array|string|null Settings data
      */
     public function getPersistent($setting = '')
@@ -55,7 +56,7 @@ class Settings
         $settings = $data['persistent'];
 
         if (!empty($setting)) {
-            if (isset($settings[ $setting])) {
+            if (isset($settings[$setting])) {
                 return $settings[$setting];
             } else {
                 return null;
@@ -70,7 +71,7 @@ class Settings
      *
      * If param is set, only specified setting is return.
      *
-     * @param  string            $setting OPTIONAL Setting name to return
+     * @param  string $setting OPTIONAL Setting name to return
      * @return array|string|null Settings data
      */
     public function getTransient($setting = '')
@@ -79,9 +80,21 @@ class Settings
         $settings = $data['transient'];
 
         if (!empty($setting)) {
-            if (isset($settings[ $setting])) {
+            if (isset($settings[$setting])) {
                 return $settings[$setting];
             } else {
+                if (strpos($setting, '.') !== false) {
+                    // convert dot notation to nested arrays
+                    $keys = explode('.', $setting);
+                    foreach ($keys as $key) {
+                        if (isset($settings[$key])) {
+                            $settings = $settings[$key];
+                        } else {
+                            return null;
+                        }
+                    }
+                    return $settings;
+                }
                 return null;
             }
         }
@@ -92,8 +105,8 @@ class Settings
     /**
      * Sets persistent setting
      *
-     * @param  string            $key
-     * @param  string            $value
+     * @param  string $key
+     * @param  string $value
      * @return \Elastica\Response
      */
     public function setPersistent($key, $value)
@@ -110,8 +123,8 @@ class Settings
     /**
      * Sets transient settings
      *
-     * @param  string            $key
-     * @param  string            $value
+     * @param  string $key
+     * @param  string $value
      * @return \Elastica\Response
      */
     public function setTransient($key, $value)
@@ -130,8 +143,8 @@ class Settings
      *
      * Second param can be used to set it persistent
      *
-     * @param  bool              $readOnly
-     * @param  bool              $persistent
+     * @param  bool $readOnly
+     * @param  bool $persistent
      * @return \Elastica\Response $response
      */
     public function setReadOnly($readOnly = true, $persistent = false)
@@ -150,7 +163,7 @@ class Settings
     /**
      * Set settings for cluster
      *
-     * @param  array             $settings Raw settings (including persistent or transient)
+     * @param  array $settings Raw settings (including persistent or transient)
      * @return \Elastica\Response
      */
     public function set(array $settings)
@@ -171,8 +184,8 @@ class Settings
     /**
      * Sends settings request
      *
-     * @param  array             $data   OPTIONAL Data array
-     * @param  string            $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
+     * @param  array $data OPTIONAL Data array
+     * @param  string $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
      * @return \Elastica\Response Response object
      */
     public function request(array $data = array(), $method = Request::GET)

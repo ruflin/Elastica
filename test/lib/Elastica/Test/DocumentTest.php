@@ -13,8 +13,12 @@ class DocumentTest extends BaseTest
 {
     public function testAddFile()
     {
+        $fileName = '/dev/null';
+        if(!file_exists($fileName)){
+            $this->markTestSkipped("File {$fileName} does not exist.");
+        }
         $doc = new Document();
-        $returnValue = $doc->addFile('key', '/dev/null');
+        $returnValue = $doc->addFile('key', $fileName);
         $this->assertInstanceOf('Elastica\Document', $returnValue);
     }
 
@@ -292,5 +296,14 @@ class DocumentTest extends BaseTest
 
         $this->assertTrue($document->hasUpsert());
         $this->assertSame($upsert, $document->getUpsert());
+    }
+
+    public function testDocAsUpsert()
+    {
+        $document = new Document();
+
+        $this->assertFalse($document->getDocAsUpsert());
+        $this->assertSame($document, $document->setDocAsUpsert(true));
+        $this->assertTrue($document->getDocAsUpsert());
     }
 }

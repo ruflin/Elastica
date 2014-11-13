@@ -61,6 +61,6 @@ class StatusTest extends BaseTest
 
         $settings = $status->getSettings();
         $this->assertInternalType('array', $settings);
-        $this->assertTrue(isset($settings['index.number_of_shards']));
+        $this->assertTrue(isset($settings['index']['number_of_shards']));
     }
 }

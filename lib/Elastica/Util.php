@@ -2,6 +2,8 @@
 
 namespace Elastica;
 
+use Elastica\JSON;
+
 /**
  * Elastica tools
  *
@@ -44,7 +46,7 @@ class Util
     {
         $result = $term;
         // \ escaping has to be first, otherwise escaped later once again
-        $chars = array('\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':');
+        $chars = array('\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '/');
 
         foreach ($chars as $char) {
             $result = str_replace($char, '\\' . $char, $result);
@@ -118,8 +120,25 @@ class Util
     }
 
     /**
+     * Convert a \DateTime object to format: 1995-12-31T23:59:59Z+02:00
+     *
+     * Converts it to the lucene format, including the appropriate TimeZone
+     *
+     * @param \DateTime $dateTime
+     * @param boolean $includeTimezone
+     * @return string
+     */
+    public static function convertDateTimeObject(\DateTime $dateTime, $includeTimezone = true)
+    {
+        $formatString = 'Y-m-d\TH:i:s' . ($includeTimezone === true ? 'P' : '\Z');
+        $string = $dateTime->format($formatString);
+
+        return $string;
+    }
+
+    /**
      * Tries to guess the name of the param, based on its class
-     * Exemple: \Elastica\Filter\HasChildFilter => has_child
+     * Example: \Elastica\Filter\HasChildFilter => has_child
      *
      * @param string|object Class or Class name
      * @return string parameter name
@@ -159,7 +178,7 @@ class Util
 
         $data = $request->getData();
         if (!empty($data)) {
-            $message .= ' -d \'' . json_encode($data) . '\'';
+            $message .= ' -d \'' . JSON::stringify($data) . '\'';
         }
         return $message;
     }

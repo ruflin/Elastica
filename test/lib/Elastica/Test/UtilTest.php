@@ -51,8 +51,8 @@ class UtilTest extends BaseTest
     
     public function testEscapeTermSpecialCharacters()
     {
-        $before = '\\+-&&||!(){}[]^"~*?:';
-        $after = '\\\\\\+\\-\\&&\\||\\!\\(\\)\\{\\}\\[\\]\\^\\"\\~\\*\\?\\:';
+        $before = '\\+-&&||!(){}[]^"~*?:/';
+        $after = '\\\\\\+\\-\\&&\\||\\!\\(\\)\\{\\}\\[\\]\\^\\"\\~\\*\\?\\:\\/';
 
         $this->assertEquals(Util::escapeTerm($before), $after);
     }
@@ -93,5 +93,29 @@ class UtilTest extends BaseTest
         $expected = 'curl -XPOST \'http://localhost:9200/test?no=params\' -d \'{"key":"value"}\'';
         $this->assertEquals($expected, $curlCommand);
 
+    }
+
+    public function testConvertDateTimeObjectWithTimezone()
+    {
+        $dateTimeObject = new \DateTime();
+        $timestamp = $dateTimeObject->getTimestamp();
+
+        $convertedString = Util::convertDateTimeObject($dateTimeObject);
+
+        $date = date('Y-m-d\TH:i:sP', $timestamp);
+
+        $this->assertEquals($convertedString, $date);
+    }
+
+    public function testConvertDateTimeObjectWithoutTimezone()
+    {
+        $dateTimeObject = new \DateTime();
+        $timestamp = $dateTimeObject->getTimestamp();
+
+        $convertedString = Util::convertDateTimeObject($dateTimeObject, false);
+
+        $date = date('Y-m-d\TH:i:s\Z', $timestamp);
+
+        $this->assertEquals($convertedString, $date);
     }
 }

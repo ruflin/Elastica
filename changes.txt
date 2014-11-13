@@ -1,5 +1,366 @@
 CHANGES
 
+2014-10-31
+- Adding PSR-4 autoloading support
+
+2014-10-29
+- Updated Type::getDocument() exception handling. \Elastica\Exception\ResponseException will be thrown instead of \Elastica\Exception\NotFoundException if the ES response contains any error (i.e: Missing index) (BC break) #687
+
+2014-10-22
+- Added Util::convertDateTimeObject to Util class to easily convert \DateTime objects to required format #708
+
+2014-10-10
+- Fixed Response::isOk() to work better with bulk update api
+
+2014-10-05
+- ResultSet creation moved to static ResultSet::create() method #690
+- Accept an options array at Type::updateDocument() #686
+- Improve exception handling in Type::getDocument() #693
+
+2014-10-04
+- Release v1.3.4.0
+- Update to elasticsearch 1.3.4 #691
+
+2014-09-22
+- Update the branch alias in composer.json to match the library version #683
+
+2014-09-16
+- Update license in composer.json to match project #681
+
+2014-09-08
+- Delete execution permission from non-executable files #677
+
+2014-08-25
+- Top-level filter parameter in search has been renamed to post_filter #669 #670
+- Deprecated: Elastica\Query::setFilter() is deprecated. Use Elastica\Query::setPostFilter() instead. #669
+- Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractFilter instead. #669
+
+2014-08-22
+- Fixed escaping of / character in Elastica\Util::escapeTerm(), removed usage of JSON_UNESCAPED_SLASHES in Elastica\JSON #660
+
+2014-08-06
+- Add connection pool and connection strategy
+
+2014-07-26
+- Release v1.3.0.0
+- Prepare Elastica Release v1.3.0.0
+
+2014-07-25
+- Update to elasticsearch version 1.3.0 http://www.elasticsearch.org/downloads/1-3-0/
+
+2014-07-14
+ - Add setQuery() method to Elastica\Query\ConstantScore #653
+
+2014-07-12
+ - Be able to configure ES host/port via ENV var in test env #652
+
+2014-07-07
+ - Fix FunstionScore Query random_score without seed bug. #647
+
+2014-07-02
+- Add setPostFilter method to Elastica\Query (http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_filtering_queries_and_aggregations.html#_post_filter) #645
+
+2014-06-30
+- Add Reverse Nested aggregation (http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html). #642
+
+2014-06-14
+- Release v1.2.1.0
+- Removed the requirement to set arguments filter and/or query in Filtered, according to the documentation: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html #616
+
+2014-06-13
+- Stop ClientTest->testDeleteIdsIdxStringTypeString from failing 1/3 of the time #634
+- Stop ScanAndScrollTest->testQuerySizeOverride from failing frequently for no reason #635
+- rework Document and Script so they can share some infrastructure allowing scripts to specify things like _retry_on_conflict and _routing #629
+
+2014-06-11
+- Allow bulk API deletes to be routed #631
+
+2014-06-10
+- Update travis to elasticsearch 1.2.1, disable Thrift plugin as not compatible and fix incompatible tests
+
+2014-06-04
+- Implement Boosting Query (http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html) #625
+
+2014-06-02
+- add retry_on_conflict support to bulk #623
+
+2014-06-01
+- toString updated to consider doc_as_upsert if sent an array source #622
+
+2014-05-27
+- Fix Aggragations/Filter to work with es v1.2.0 #619
+
+2014-05-25
+- Added Guzzle transport as an alternative to the default Http transport #618
+- Added Elastica\ScanAndScroll Iterator (http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/scan-scroll.html) #617
+
+2014-05-13
+- Add JSON compat library; Elasticsearch JSON flags and nicer error handling #614
+
+2014-05-12
+- Update dev builds to phpunit 4.1.*
+
+2014-05-11
+- Set processIsolation and backupGlobals to false to speed up tests. processIsolation was very slow with phpunit 4.0.19.
+
+2014-05-05
+- Fix get settings on alaised index #608
+- Added named function for source filtering #605
+- Scroll type constant to Elastica\Search added #607
+
+2014-04-28
+- Added setAnalyzer method to Query\FuzzyLikeThis Class and fixed issue with params not being merged #611
+- Typo fixes #600, #602
+- Remove unreachable return statement #598
+
+2014-04-27
+- Release v1.1.1.1
+- Fix missing use in TermsStats->setOrder() #597
+- Replace all instances of ElasticSearch with Elasticsearch #597
+
+2014-04-24
+- Fixing the Bool filter with Bool filter children bug #594
+
+2014-04-22
+- Remove useless echo in the Memcache Transport object #595
+
+2014-04-21
+- escape \ by \\ #592
+
+2014-04-20
+- Handling of HasChild type parsing bug #585
+- Consolidate Index getMapping tests #591
+- Fix Type::getMapping when using an aliased index #588
+
+2014-04-19
+- Release v1.1.1.0
+- Update to elasticsearch 1.1.1 http://www.elasticsearch.org/downloads/1-1-1/
+- Remove CustomFiltersScore and CustomScore query as removed in elasticsearch 1.1.0 https://github.com/elasticsearch/elasticsearch/pull/5076/files
+- Update Node Info to use plugins instead of plugin (https://github.com/elasticsearch/elasticsearch/pull/5072)
+- Fix mapping issue for aliases #588
+
+2014-04-17
+- Only trap real JSON parse errors in Response class #586
+
+2014-04-09
+- Added Cardinality aggregation #581
+
+2014-04-7
+- Support for Terms filter lookup options #579
+
+2014-03-29
+- Update to elasticsearch 1.1.0 http://www.elasticsearch.org/downloads/1-1-0/
+
+2014-03-26
+- Fixed Query\Match Fuzziness parameter type #576
+
+2014-03-24
+- Release v1.0.1.2
+- Added Filter\Indices #574
+
+2014-03-25
+- Allow json string as data srouce for Bulk\Action on update #575
+
+2014-03-20
+- Allow for request params in delete by query calls #573
+
+2014-03-17
+- Added filters: AbstractGeoShape, GeoShapePreIndexed, GeoShapeProvided #568
+
+2014-03-15
+- Percolate existing documents and add percolate options (#570)
+
+2014-03-14
+- Added Query\Rescore #441
+
+2014-03-13
+- Added missing query options for MultiMatch (operator, minimum_should_match, zero_terms_query, cutoff_frequency, type, fuzziness, prefix_length, max_expansions, analyzer) #569
+- Added missing query options for Match (zero_terms_query, cutoff_frequency) #569
+
+2014-03-11
+- Fixed request body reuse in http transport #567
+
+2014-03-08
+- Release v1.0.1.1
+- Enable goecluster-facet again as now compatible with elasticsearch 1.0 on travis
+- Run elasticsearch in the background to not have log output in travis build
+- Set memache php version as environment variable
+- Update to memcache 3.0.8 for travis
+
+2014-03-07
+- Add snapshot / restore functionality (Elastica\Snapshot) #566
+
+2014-03-04
+- Add PHP 5.6 to travis test environment
+- Improve performance of Elastica/Status->getIndicesWithAlias and aliasExists on clusters with many indices #563
+
+2014-03-02
+- Release v1.0.1.0
+- Fixed Type->deleteByQuery() not working with Query objects #554
+
+2014-02-27
+- Update to elasticsearch 1.0.1. Update Thrift and Geocluster plugin.
+
+2014-02-25
+- Add JSON_UNESCAPED_UNICODE and JSON_UNESCAPED_SLASHES options in Elastica/Transport/Http, Elastica/Bulk/Action #559
+
+2014-02-20
+- Fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route. #558
+
+2014-02-17
+- Throw PartialShardFailureException if response has failed shards
+- Elastica/Aggregations/GlobalAggragation not allowed as sub aggragation #555
+
+2014-02-14
+- Add methods setSize, setShardSize to Elastica/Aggregation/Terms
+- Elastica/Aggregation/GlobalAggregationTest fixed bug where JSON returned [] instead of {}
+- Elastica/ResultSet added method hasAggregations
+
+2014-02-13
+- Moved from Apache License to MIT license
+
+2014-02-12
+- Release v1.0.0.0
+- Updated to elasticsearch 1.0: http://www.elasticsearch.org/blog/1-0-0-released/
+
+2014-02-11
+- Add aggregations
+
+2014-02-08
+- Setting shard timeout doesn't work #547
+
+2014-02-04
+- Remove Elastica\Query\Field and Elastica\Query\Text, which are not supported in ES 1.0.0.RC1
+- Minor tweaking of request and result handling classes to adjust for changes in ES 1.0.0.RC1
+- Update mapper-attachments plugin to version 2.0.0.RC1 in .travis.yml
+- Adjust tests to account for changes in ES 1.0.0.RC1
+- Prevent the geocluster-facet plugin from being installed in test/bin/run_elasticsearch.sh as the plugin has not yet been updated for ES 1.0.0.RC1
+
+2014-01-06
+- Update to elasticsearch v1.0.0.RC2
+
+2014-01-02
+- Added Elastica\Query\DisMax
+- Update to elasticsearch v1.0.0.RC1
+
+2014-01-02
+- Release v0.90.10
+
+2014-01-31
+- Fix _bulk delete proxy methods if type or index not explicitly defined.
+
+2014-01-28
+- Add _bulk delete proxy methods to Index and Type for consistency.
+- Use the HTTP response code of GET requests (getDocument), instead of extists/found json property.
+
+2014-01-22
+- Add getParam & getProperties methods to Elastica\Type\Mapping
+
+2014-01-21
+- Code coverage generation for coveralls.io added: https://coveralls.io/r/ruflin/Elastica
+- Add support for shard timeout to the Bulk api.
+
+2014-01-17
+- Fix typo in constant name: Elastica\Query\FunctionScore::DECAY_GUASS becomes DECAY_GAUSS
+
+2014-01-13
+- Add support for _bulk update
+
+2014-01-14
+- added \Elastica\Exception\ResponseException::getElasticsearchException()
+- Changed logger default log level to debug from info
+
+2014-01-13
+- Update to elasticsearch 0.90.10
+- Add Elastica\Facet\TermsStats::setOrder()
+
+2014-01-08
+- Adding analyze function to Index to expose the _analyze API
+
+2014-01-07
+- Document::setDocAsUpsert() now returns the Document
+
+2013-12-18
+- Update to Elasticsearch 0.90.8
+- Add support for simple_query_string query
+
+2013-12-15
+- Add support for filter inside HasChild filter
+- Add support for filter inside HasParent filter
+
+2013-12-12
+- Always send scroll_id via HTTP body instead of as a query param
+- Fix the manner in which suggestion results are returned in \Elastica\ResultSet and adjust associated tests to account for the fix.
+- Add \Elastica\Resultset::hasSuggests()
+
+2013-12-11
+- Pass arguments to optimize as query
+- Add refreshAll on Client
+
+2013-12-07
+- Added Result::hasFields() and Result::hasParam() methods for consistency with Document
+
+2013-12-07
+- Escape slash in Util::escapeTerm, as it is used for regexp from Elastic 0.90
+
+2013-12-05
+- Add *.iml to .gitignore
+- Refactor suggest implementation (\Elastica\Suggest, \Elastica\Suggest\AbstractSuggest, and \Elastica\Suggest\Term) to more closely resemble query implementation. (BC break)
+- \Elastica\Search::addSuggest() has been renamed to \Elastica\Search::setSuggest()
+- \Elastica\Query::addSuggest() has been renamed to \Elastica\Query::setSuggest()
+- Add \Elastica\Suggest\Phrase, \Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator, and \Elastica\Suggest\CandidateGenerator\DirectGenerator
+  (see http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html)
+
+2013-12-04
+- Remove boost from FunctionScore::addFunction because this is not supported by elasticsearch
+
+2013-12-02
+- Issue #491 resolved
+
+2013-12-01
+- Issue #501 resolved
+- satooshi/php-coveralls package added for coverall.io
+- Multiple badges for downloads and latest stable release added
+
+2013-11-30
+- Remove facets param from query if is empty array
+- Add size param to API for TermsStats
+
+2013-11-23
+- Release v0.90.7.0
+
+2013-11-19
+- Updated geocluster-facet to 0.0.9
+
+2013-11-18
+- Added \Elastica\Filter\Regexp
+
+2013-11-16
+- Remove wrong documentation for "no limit" #496
+- Update to elasticsearch 0.90.7
+
+2013-11-03
+- Issue #490: Set Elastica\Query\FunctionScore::DECAY_EXPONENTIAL to "exp" instead of "exponential"
+
+2013-10-29
+- Elastica_Type::exists() added
+  See http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-types-exists.html#indices-types-exists
+
+2013-10-27
+- Adapted possible values (not only in) for minimum_should_match param based on elasticsearch documetnation  http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
+
+2013-10-27
+- Release v0.90.5.0
+
+2013-10-26
+- Update to elasticsearch 0.90.5
+
+2013-10-21
+- Fix \Elastica\Filter\HasParent usage of \Elastica\Query as to not collide with \Elastica\Filter\Query, bring \Elasitca\Filter\HasChild into line
+
+2013-10-01
+- Also pass the current client object to the failure callback in \Elastica\Client.
+
 2013-09-20
 - Update to geocluster-facet 0.0.8
 - Add support for term suggest API
@@ -14,6 +375,9 @@ CHANGES
 - Skip geocluster-facet test if the plugin is not installed
 - Correct \Elastica\Test\ClientTest to catch the proper exception type on connection failure
 - Fix unit test errors
+
+2013-09-14
+- Nested filter supports now the setFilter method
 
 2013-09-03
 - Support isset() calls on Result objects

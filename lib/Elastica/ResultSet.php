@@ -16,18 +16,18 @@ use Elastica\Exception\InvalidException;
 class ResultSet implements \Iterator, \Countable, \ArrayAccess
 {
     /**
+     * Class for the static create method to use.
+     *
+     * @var string
+     */
+    protected static $_class = 'Elastica\\ResultSet';
+
+    /**
      * Results
      *
      * @var array Results
      */
     protected $_results = array();
-
-    /**
-    * Suggests
-    *
-    * @var array Suggests
-    */
-    protected $_suggests = array();
 
     /**
      * Current position
@@ -84,6 +84,31 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
+     * Creates a new ResultSet object. Can be configured to return a different
+     * implementation of the ResultSet class.
+     *
+     * @param Response $response
+     * @param Query $query
+     * @return ResultSet
+     */
+    public static function create(Response $response, Query $query)
+    {
+        $class = static::$_class;
+
+        return new $class($response, $query);
+    }
+
+    /**
+     * Sets the class to be used for the static create method.
+     *
+     * @param string $class
+     */
+    public static function setClass($class)
+    {
+        static::$_class = $class;
+    }
+
+    /**
      * Loads all data into the results object (initialisation)
      *
      * @param \Elastica\Response $response Response object
@@ -101,14 +126,6 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
                 $this->_results[] = new Result($hit);
             }
         }
-
-        foreach($result as $key => $value) {
-            if($key != '_shards') {
-                if(isset($value[0]['options']) && count($value[0]['options'])>0) {
-                    $this->_suggests[$key] = $value[0];
-                }
-            }
-        }
     }
 
     /**
@@ -122,13 +139,23 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
+     * Returns true if the response contains suggestion results; false otherwise
+     * @return bool
+     */
+    public function hasSuggests(){
+        $data = $this->_response->getData();
+        return isset($data['suggest']);
+    }
+
+    /**
     * Return all suggests
     *
-    * @return Suggest[] Suggests
+    * @return array suggest results
     */
     public function getSuggests() 
     {
-        return $this->_suggests;
+        $data = $this->_response->getData();
+        return isset($data['suggest']) ? $data['suggest'] : array();
     }
 
     /**
@@ -141,6 +168,46 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
         $data = $this->_response->getData();
 
         return isset($data['facets']);
+    }
+
+    /**
+     * Returns whether aggregations exist
+     *
+     * @return boolean Aggregation existence
+     */
+    public function hasAggregations()
+    {
+        $data = $this->_response->getData();
+
+        return isset($data['aggregations']);
+    }
+
+    /**
+     * Returns all aggregation results
+     *
+     * @return array
+     */
+    public function getAggregations()
+    {
+        $data = $this->_response->getData();
+
+        return isset($data['aggregations']) ? $data['aggregations'] : array();
+    }
+
+    /**
+     * Retrieve a specific aggregation from this result set
+     * @param string $name the name of the desired aggregation
+     * @return array
+     * @throws Exception\InvalidException if an aggregation by the given name cannot be found
+     */
+    public function getAggregation($name)
+    {
+        $data = $this->_response->getData();
+
+        if (isset($data['aggregations']) && isset($data['aggregations'][$name])) {
+            return $data['aggregations'][$name];
+        }
+        throw new InvalidException("This result set does not contain an aggregation named {$name}.");
     }
 
     /**
@@ -230,7 +297,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function countSuggests()
     {
-        return sizeof($this->_suggests);
+        return sizeof($this->getSuggests());
     }
 
     /**

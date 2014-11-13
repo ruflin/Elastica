@@ -30,7 +30,7 @@ class IndexTest extends BaseTest
         $type->addDocument($doc);
         $index->optimize();
 
-        $storedMapping = $type->getMapping();
+        $storedMapping = $index->getMapping();
 
         $this->assertEquals($storedMapping['test']['properties']['id']['type'], 'integer');
         $this->assertEquals($storedMapping['test']['properties']['id']['store'], true);
@@ -39,6 +39,36 @@ class IndexTest extends BaseTest
         $this->assertEquals($storedMapping['test']['properties']['test']['type'], 'integer');
 
         $result = $type->search('hanswurst');
+    }
+
+    public function testGetMappingAlias() {
+
+        $indexName = 'test-mapping';
+        $aliasName = 'test-mapping-alias';
+
+        $index = $this->_createIndex($indexName);
+        $indexName = $index->getName();
+        $index->addAlias($aliasName);
+
+        $type = new Type($index, 'test');
+        $mapping = new Mapping($type, array(
+                'id' => array('type' => 'integer', 'store' => 'yes'),
+            ));
+        $type->setMapping($mapping);
+
+        $client = $index->getClient();
+
+        // Index mapping
+        $mapping1 = $client->getIndex($indexName)->getMapping();
+
+        // Alias mapping
+        $mapping2 = $client->getIndex($aliasName)->getMapping();
+
+        // Make sure, a mapping is set
+        $this->assertNotEmpty($mapping1);
+
+        // Alias and index mapping should be identical
+        $this->assertEquals($mapping1, $mapping2);
     }
 
     public function testParent()
@@ -253,7 +283,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
 
         $data = $index->addAlias($aliasName, true)->getData();
-        $this->assertTrue($data['ok']);
+        $this->assertTrue($data['acknowledged']);
 
         $index2 = $client->getIndex($aliasName);
         $type2 = $index2->getType($typeName);
@@ -262,7 +292,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(1, $resultSet2->count());
 
         $response = $index->removeAlias($aliasName)->getData();
-        $this->assertTrue($response['ok']);
+        $this->assertTrue($response['acknowledged']);
 
         $client->getIndex($aliasName)->getType($typeName)->search('ruflin');
     }
@@ -465,11 +495,11 @@ class IndexTest extends BaseTest
         $index->refresh();
         $indexMappings = $index->getMapping();
 
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['type'], 'integer');
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['id']['store'], true);
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['email']['type'], 'string');
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['username']['type'], 'string');
-        $this->assertEquals($indexMappings['elastica_test']['test']['properties']['test']['type'], 'integer');
+        $this->assertEquals($indexMappings['test']['properties']['id']['type'], 'integer');
+        $this->assertEquals($indexMappings['test']['properties']['id']['store'], true);
+        $this->assertEquals($indexMappings['test']['properties']['email']['type'], 'string');
+        $this->assertEquals($indexMappings['test']['properties']['username']['type'], 'string');
+        $this->assertEquals($indexMappings['test']['properties']['test']['type'], 'integer');
     }
 
     /**
@@ -604,6 +634,53 @@ class IndexTest extends BaseTest
 
         $count = $index->count();
         $this->assertEquals(3, $count);
+    }
+
+    public function testOptimize()
+    {
+        $index = $this->_createIndex();
+
+        $type = new Type($index, 'optimize');
+
+        $docs = array();
+        $docs[] = new Document(1, array('foo' => 'bar'));
+        $docs[] = new Document(2, array('foo' => 'bar'));
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $stats = $index->getStats()->getData();
+        $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
+
+        $type->deleteById(1);
+        $index->refresh();
+
+        $stats = $index->getStats()->getData();
+        $this->assertEquals(1, $stats['_all']['primaries']['docs']['deleted']);
+
+        $index->optimize(array('max_num_segments' => 1));
+
+        $stats = $index->getStats()->getData();
+        $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
+    }
+
+    public function testAnalyze()
+    {
+        $index = $this->_createIndex('analyze');
+        $index->optimize();
+        sleep(2);
+        $returnedTokens = $index->analyze('foo');
+
+        $tokens = array(
+            array(
+                'token' => 'foo',
+                'start_offset' => 0,
+                'end_offset' => 3,
+                'type' => '<ALPHANUM>',
+                'position' => 1,
+            )
+        );
+
+        $this->assertEquals($tokens, $returnedTokens);
     }
 
     /**

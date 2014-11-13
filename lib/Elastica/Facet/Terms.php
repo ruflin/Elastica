@@ -18,7 +18,7 @@ class Terms extends AbstractFacet
 {
     /**
      * Holds the types of ordering which are allowed
-     * by ElasticSearch.
+     * by Elasticsearch.
      *
      * @var array
      */
@@ -75,7 +75,7 @@ class Terms extends AbstractFacet
     }
 
     /**
-     * Sets the ordering type for this facet. ElasticSearch
+     * Sets the ordering type for this facet. Elasticsearch
      * internal default is count.
      *
      * @param  string                              $type The order type to set use for sorting of the terms.

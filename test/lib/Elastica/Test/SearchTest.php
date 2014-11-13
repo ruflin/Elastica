@@ -8,7 +8,7 @@ use Elastica\Index;
 use Elastica\Query\Builder;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
-use Elastica\Query\CustomScore;
+use Elastica\Query\FunctionScore;
 use Elastica\Query;
 use Elastica\Script;
 use Elastica\Search;
@@ -211,15 +211,15 @@ class SearchTest extends BaseTest
 
         $index = $this->_createIndex('test');
         $type = $index->getType('scrolltest');
-        
+
         $docs = array();
         for ($x = 1; $x <= 10; $x++) {
             $docs[] = new Document($x, array('id' => $x, 'testscroll' => 'jbafford'));
         }
-        
+
         $type->addDocuments($docs);
         $index->refresh();
-        
+
         $search = new Search($client);
         $search->addIndex($index)->addType($type);
         $result = $search->search(array(), array(
@@ -234,6 +234,7 @@ class SearchTest extends BaseTest
 
         //There are 10 items, and we're scrolling with a size of 5
         //So we should get two results of 5 items, and then no items
+        //We should also have sent the raw scroll_id as the HTTP request body
         $search = new Search($client);
         $result = $search->search(array(), array(
             Search::OPTION_SCROLL => '5m',
@@ -241,20 +242,26 @@ class SearchTest extends BaseTest
         ));
         $this->assertFalse($result->getResponse()->hasError());
         $this->assertEquals(5, count($result->getResults()));
-        
+        $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
+        $this->assertEquals($scrollId, $search->getClient()->getLastRequest()->getData());
+
         $result = $search->search(array(), array(
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SCROLL_ID => $scrollId,
         ));
         $this->assertFalse($result->getResponse()->hasError());
         $this->assertEquals(5, count($result->getResults()));
-        
+        $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
+        $this->assertEquals($scrollId, $search->getClient()->getLastRequest()->getData());
+
         $result = $search->search(array(), array(
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SCROLL_ID => $scrollId,
         ));
         $this->assertFalse($result->getResponse()->hasError());
         $this->assertEquals(0, count($result->getResults()));
+        $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
+        $this->assertEquals($scrollId, $search->getClient()->getLastRequest()->getData());
     }
 
     /**
@@ -351,7 +358,8 @@ class SearchTest extends BaseTest
 
         //Timeout - this one is a bit more tricky to test
         $script = new Script('Thread.sleep(100); return _score;');
-        $query = new CustomScore($script, 'test');
+        $query = new FunctionScore();
+        $query->addScriptScoreFunction($script);
         $resultSet = $search->search($query, array('timeout' => 50));
         $this->assertTrue($resultSet->hasTimedOut());
 
@@ -484,4 +492,9 @@ class SearchTest extends BaseTest
 		$this->assertInstanceOf('\Elastica\ResultSet', $result2);
 		$this->assertEquals(1, $result2->getTotalHits());
 	}
+
+    public function testScanAndScroll() {
+        $search = new Search($this->_getClient());
+        $this->assertInstanceOf('Elastica\ScanAndScroll', $search->scanAndScroll());
+    }
 }

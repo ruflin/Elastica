@@ -8,6 +8,7 @@ use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
+use Elastica\Query\SimpleQueryString;
 use Elastica\Script;
 use Elastica\Search;
 use Elastica\Filter\Term;
@@ -328,7 +329,7 @@ class TypeTest extends BaseTest
     }
 
     /**
-     * @expectedException \Elastica\Exception\NotFoundException
+     * @expectedException \Elastica\Exception\ResponseException
      */
     public function testGetDocumentNotExistingIndex()
     {
@@ -339,7 +340,7 @@ class TypeTest extends BaseTest
         $type->getDocument(1);
     }
 
-    public function testDeleteByQuery()
+    public function testDeleteByQueryWithQueryString()
     {
         $index = $this->_createIndex();
         $type = new Type($index, 'test');
@@ -355,6 +356,74 @@ class TypeTest extends BaseTest
 
         // Delete first document
         $response = $type->deleteByQuery('nicolas');
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+
+        // Makes sure, document is deleted
+        $response = $index->search('ruflin*');
+        $this->assertEquals(1, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(0, $response->count());
+    }
+
+    public function testDeleteByQueryWithQuery()
+    {
+        $index = $this->_createIndex();
+        $type = new Type($index, 'test');
+        $type->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
+        $type->addDocument(new Document(2, array('name' => 'ruflin')));
+        $index->refresh();
+
+        $response = $index->search('ruflin*');
+        $this->assertEquals(2, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(1, $response->count());
+
+        // Delete first document
+        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'));
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+
+        // Makes sure, document is deleted
+        $response = $index->search('ruflin*');
+        $this->assertEquals(1, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(0, $response->count());
+    }
+
+    public function testDeleteByQueryWithQueryAndOptions()
+    {
+        $index = $this->_createIndex('test', true, 2);
+        $type = new Type($index, 'test');
+        $type->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
+        $type->addDocument(new Document(2, array('name' => 'ruflin')));
+        $index->refresh();
+
+        $response = $index->search('ruflin*');
+        $this->assertEquals(2, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(1, $response->count());
+
+        // Route to the wrong document id; should not delete
+        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing'=>'2'));
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+
+        $response = $index->search('ruflin*');
+        $this->assertEquals(2, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(1, $response->count());
+
+        // Delete first document
+        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing'=>'1'));
         $this->assertTrue($response->isOk());
 
         $index->refresh();
@@ -423,8 +492,6 @@ class TypeTest extends BaseTest
 
     /**
      * Test Delete of index type.  After delete will check for type mapping.
-     * @expectedException \Elastica\Exception\ResponseException
-     * @expectedExceptionMessage TypeMissingException[[elastica_test] type[test] missing]
      */
     public function testDeleteType()
     {
@@ -435,7 +502,7 @@ class TypeTest extends BaseTest
         $index->refresh();
 
         $type->delete();
-        $type->getMapping();
+        $this->assertFalse($type->exists());
     }
 
     public function testMoreLikeThisApi()
@@ -465,7 +532,7 @@ class TypeTest extends BaseTest
         $query              = new Query();
         $filterTerm         = new Term();
         $filterTerm->setTerm('visible', true);
-        $query->setFilter($filterTerm);
+        $query->setPostFilter($filterTerm);
 
         $resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'), $query);
         $this->assertEquals(2, $resultSet->count());
@@ -496,6 +563,37 @@ class TypeTest extends BaseTest
         $updatedDoc = $type->getDocument($id)->getData();
         $this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
         $this->assertEquals(3, $updatedDoc['counter'], "Counter was not incremented");
+    }
+
+    public function testUpdateDocumentWithParameter()
+    {
+        $client = $this->_getClient();
+        $index = $client->getIndex('elastica_test');
+        $type = $index->getType('update_type');
+        $id = 1;
+        $type->addDocument(new Document($id, array('name' => 'bruce wayne batman', 'counter' => 1)));
+        $newName = 'batman';
+
+        $document = new Document();
+        $script = new Script(
+            "ctx._source.name = name; ctx._source.counter += count",
+            array(
+                'name' => $newName,
+                'count' => 2,
+            ),
+            null,
+            $id
+        );
+        $script->setUpsert($document);
+
+        try {
+            $type->updateDocument($script, array('version' => 999)); // Wrong version number to make the update fail
+        } catch (ResponseException $e) {
+            $this->assertContains('VersionConflictEngineException', $e->getMessage());
+        }
+        $updatedDoc = $type->getDocument($id)->getData();
+        $this->assertNotEquals($newName, $updatedDoc['name'], "Name was updated");
+        $this->assertNotEquals(3, $updatedDoc['counter'], "Counter was incremented");
     }
 
     public function testUpdateDocumentWithFieldsSource()
@@ -685,6 +783,65 @@ class TypeTest extends BaseTest
         $result = $resultSet->current();
         $data = $result->getData();
         $this->assertEquals('hans', $data['username']);
+    }
+
+    public function testExists()
+    {
+        $index = $this->_createIndex();
+        $this->assertTrue($index->exists());
+
+        $type = new Type($index, 'user');
+        $this->assertFalse($type->exists());
+
+        $type->addDocument(new Document(1, array('name' => 'test name')));
+        $index->optimize();
+
+        //Test if type exists
+        $this->assertTrue($type->exists());
+
+        $index->delete();
+        $this->assertFalse($index->exists());
+    }
+
+    public function testGetMapping() {
+        $indexName = 'test';
+        $typeName = 'test-type';
+
+        $index = $this->_createIndex($indexName);
+        $indexName = $index->getName();
+        $type = new Type($index, $typeName);
+        $mapping = new Mapping($type, $expect = array(
+            'id' => array('type' => 'integer', 'store' => true)
+        ));
+        $type->setMapping($mapping);
+
+        $client = $index->getClient();
+
+        $this->assertEquals(
+            array('test-type' => array('properties' => $expect)),
+            $client->getIndex($indexName)->getType($typeName)->getMapping()
+        );
+    }
+
+    public function testGetMappingAlias() {
+        $indexName = 'test';
+        $aliasName = 'test-alias';
+        $typeName = 'test-alias-type';
+
+        $index = $this->_createIndex($indexName);
+        $index->addAlias($aliasName);
+        $type = new Type($index, $typeName);
+        $mapping = new Mapping($type, $expect = array(
+            'id' => array('type' => 'integer', 'store' => true)
+        ));
+        $type->setMapping($mapping);
+
+        $client = $index->getClient();
+
+        $this->assertEquals(
+            array('test-alias-type' => array('properties' => $expect)),
+            $client->getIndex($aliasName)->getType($typeName)->getMapping()
+        );
     }
 }
 

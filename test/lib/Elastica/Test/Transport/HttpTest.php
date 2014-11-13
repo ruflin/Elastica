@@ -4,6 +4,8 @@ namespace Elastica\Test\Transport;
 
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Query;
+use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Exception\ResponseException;
 
@@ -101,6 +103,35 @@ class HttpTest extends BaseTest
         $this->assertEquals($id, $doc->getId());
     }
 
+    public function testUnicodeData()
+    {
+        $client = new \Elastica\Client();
+        $index = $client->getIndex('curl_test');
+        $type = $index->getType('item');
+
+        // Force HEAD request to set CURLOPT_NOBODY = true
+        $index->exists();
+
+        $id = 22;
+        $data = array('id' => $id, 'name' => '
+            Сегодня, я вижу, особенно грустен твой взгляд, /
+            И руки особенно тонки, колени обняв. /
+            Послушай: далеко, далеко, на озере Чад /
+            Изысканный бродит жираф.');
+
+        $doc = new \Elastica\Document($id, $data);
+
+        $type->addDocument($doc);
+
+        $index->refresh();
+
+        $doc = $type->getDocument($id);
+
+        // Document should be retrieved correctly
+        $this->assertSame($data, $doc->getData());
+        $this->assertEquals($id, $doc->getId());
+    }
+
     public function testWithEnvironmentalProxy()
     {
         putenv('http_proxy=http://127.0.0.1:12345/');
@@ -149,6 +180,48 @@ class HttpTest extends BaseTest
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
+    }
+
+    public function testBodyReuse()
+    {
+        $client = new Client();
+
+        $index = $client->getIndex('elastica_body_reuse_test');
+
+        $index->create(array(), true);
+
+        $type = $index->getType('test');
+        $type->addDocument(new Document(1, array('test' => 'test')));
+
+        $index->refresh();
+
+        $resultSet = $index->search(array(
+            'query' => array(
+                'query_string' => array(
+                    'query' => 'pew pew pew',
+                ),
+            ),
+        ));
+
+        $this->assertEquals(0, $resultSet->getTotalHits());
+
+        $response = $index->request('/_search', 'POST');
+        $resultSet = new ResultSet($response, Query::create(array()));
+
+        $this->assertEquals(1, $resultSet->getTotalHits());
+    }
+
+    public function testPostWith0Body()
+    {
+        $client = new Client();
+
+        $index = $client->getIndex('elastica_0_body');
+        $index->create(array(), true);
+        $index->refresh();
+
+        $tokens = $index->analyze('0');
+
+        $this->assertNotEmpty($tokens);
     }
 
 }
