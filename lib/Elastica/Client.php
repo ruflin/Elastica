@@ -35,7 +35,8 @@ class Client
         'transport'       => null,
         'persistent'      => true,
         'timeout'         => null,
-        'connections'     => array(), // host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers, url)
+        'timeInMillis'    => false,
+        'connections'     => array(), // host, port, path, timeout, transport, persistent, timeout, timeInMillis, config -> (curl, headers, url)
         'roundRobin'      => false,
         'log'             => false,
         'retryOnConflict' => 0,
@@ -85,7 +86,7 @@ class Client
     protected function _initConnections()
     {
         $connections = array();
-        
+
         foreach ($this->getConfig('connections') as $connection) {
             $connections[] = Connection::create($this->_prepareConnectionParams($connection));
         }
@@ -100,7 +101,7 @@ class Client
         if (empty($connections)) {
             $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
         }
-        
+
         if (!isset($this->_config['connectionStrategy'])) {
             if ($this->getConfig('roundRobin') === true) {
                 $this->setConfigValue('connectionStrategy', 'RoundRobin');
@@ -108,9 +109,9 @@ class Client
                 $this->setConfigValue('connectionStrategy', 'Simple');
             }
         }
-        
+
         $strategy = Connection\Strategy\StrategyFactory::create($this->getConfig('connectionStrategy'));
-        
+
         $this->_connectionPool = new Connection\ConnectionPool($connections, $strategy, $this->_callback);
     }
 
@@ -456,7 +457,7 @@ class Client
 
     /**
      * Determines whether a valid connection is available for use.
-     * 
+     *
      * @return bool
      */
     public function hasConnection()
@@ -480,9 +481,9 @@ class Client
     {
         return $this->_connectionPool->getConnections();
     }
-    
+
     /**
-     * 
+     *
      * @return \Connection\Strategy\StrategyInterface
      */
     public function getConnectionStrategy()

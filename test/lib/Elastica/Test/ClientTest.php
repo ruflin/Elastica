@@ -958,18 +958,18 @@ class ClientTest extends BaseTest
         $this->assertEquals('value3', $client->getConfigValue(array('level1', 'level2', 'level3')));
         $this->assertInternalType('array', $client->getConfigValue(array('level1', 'level2')));
     }
-    
-    
+
+
     public function testArrayQuery()
     {
         $client = new Client();
-        
+
         $index = $client->getIndex('test');
         $index->create(array(), true);
         $type = $index->getType('test');
         $type->addDocument(new Document(1, array('username' => 'ruflin')));
         $index->refresh();
-        
+
         $query = array(
             'query' => array(
                 'query_string' => array(
@@ -977,32 +977,45 @@ class ClientTest extends BaseTest
                 )
             )
         );
-        
+
         $path = $index->getName() . '/' . $type->getName() . '/_search';
-        
+
         $response = $client->request($path, Request::GET, $query);
         $responseArray = $response->getData();
-        
+
         $this->assertEquals(1, $responseArray['hits']['total']);
     }
-    
+
     public function testJSONQuery()
     {
         $client = new Client();
-        
+
         $index = $client->getIndex('test');
         $index->create(array(), true);
         $type = $index->getType('test');
         $type->addDocument(new Document(1, array('username' => 'ruflin')));
         $index->refresh();
-        
+
         $query = '{"query":{"query_string":{"query":"ruflin"}}}';
 
         $path = $index->getName() . '/' . $type->getName() . '/_search';
-        
+
         $response = $client->request($path, Request::GET, $query);
         $responseArray = $response->getData();
-        
+
         $this->assertEquals(1, $responseArray['hits']['total']);
+    }
+
+    /**
+     * Tries to determine whether the value for timeInMillis is propagated
+     * to the connection, in absence of either connections or server config
+     * parameters in constructor config array
+     */
+    public function testTimeInMillisFromDefaultConfig() {
+        $client = new Client();
+        $this->assertFalse($client->getConnection()->getTimeInMillis());
+
+        $client = new Client(array("timeInMillis" => true));
+        $this->assertTrue($client->getConnection()->getTimeInMillis());
     }
 }

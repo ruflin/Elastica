@@ -39,7 +39,7 @@ class Connection extends Param
     /**
      * Creates a new connection object. A connection is enabled by default
      *
-     * @param array $params OPTIONAL Connection params: host, port, transport, timeout. All are optional
+     * @param array $params OPTIONAL Connection params: host, port, transport, timeout, timeInMillis. All are optional
      */
     public function __construct(array $params = array())
     {
@@ -156,6 +156,23 @@ class Connection extends Param
     public function getTimeout()
     {
         return (int) $this->hasParam('timeout')?$this->getParam('timeout'):self::TIMEOUT;
+    }
+
+    /**
+     * @param bool                 $timeInMillis Whether timeout should be considered as millisecods.
+     * @return \Elastica\Connection
+     */
+    public function setTimeInMillis($timeInMillis)
+    {
+        return $this->setParam('timeInMillis', ($timeInMillis === true)?:false);
+    }
+
+    /**
+     * @return bool Whether timeout should be taken as milliseconds
+     */
+    public function getTimeInMillis()
+    {
+        return (bool) $this->hasParam('timeInMillis')?($this->getParam('timeInMillis') === true):false;
     }
 
     /**

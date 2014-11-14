@@ -19,6 +19,7 @@ class ConnectionTest extends BaseTest
         $this->assertEquals(Connection::TIMEOUT, $connection->getTimeout());
         $this->assertEquals(array(), $connection->getConfig());
         $this->assertTrue($connection->isEnabled());
+        $this->assertFalse($connection->getTimeInMillis());
     }
 
     public function testEnabledDisable()
@@ -99,5 +100,26 @@ class ConnectionTest extends BaseTest
     {
         $connection = new Connection();
         $connection->getConfig('url');
+    }
+
+    public function testTimestampMilliseconds()
+    {
+        $connection = new Connection(array('timeInMillis' => false));
+        $this->assertFalse($connection->getTimeInMillis());
+
+        $connection = new Connection(array('timeInMillis' => true));
+        $this->assertTrue($connection->getTimeInMillis());
+
+        $connection = new Connection(array('timeInMillis' => 'foo'));
+        $this->assertFalse($connection->getTimeInMillis());
+
+        $connection = new Connection();
+        $this->assertFalse($connection->getTimeInMillis());
+        $connection->setTimeInMillis(true);
+        $this->assertTrue($connection->getTimeInMillis());
+        $connection->setTimeInMillis(false);
+        $this->assertFalse($connection->getTimeInMillis());
+        $connection->setTimeInMillis("foo");
+        $this->assertFalse($connection->getTimeInMillis());
     }
 }
