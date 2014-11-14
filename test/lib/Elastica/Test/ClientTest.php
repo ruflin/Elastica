@@ -1015,7 +1015,7 @@ class ClientTest extends BaseTest
         $client = new Client();
         $this->assertFalse($client->getConnection()->getTimeInMillis());
 
-        $client = new Client(["timeInMillis" => true]);
+        $client = new Client(array("timeInMillis" => true));
         $this->assertTrue($client->getConnection()->getTimeInMillis());
     }
 }
