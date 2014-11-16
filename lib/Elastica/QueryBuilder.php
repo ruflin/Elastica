@@ -1,0 +1,111 @@
+<?php
+
+namespace Elastica;
+
+use Elastica\Exception\QueryBuilderException;
+use Elastica\QueryBuilder\DSL\Aggregation;
+use Elastica\QueryBuilder\DSL;
+use Elastica\QueryBuilder\DSL\Filter;
+use Elastica\QueryBuilder\DSL\Query;
+use Elastica\QueryBuilder\DSL\Suggest;
+use Elastica\QueryBuilder\Facade;
+use Elastica\QueryBuilder\Version;
+use Elastica\QueryBuilder\Version\Version140;
+
+/**
+ * Query Builder
+ *
+ * @package Elastica
+ * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
+ */
+class QueryBuilder {
+
+    /**
+     * @var Version
+     */
+    private $_version;
+
+    /**
+     * @var Facade[]
+     */
+    private $_facades = array();
+
+    /**
+     * Constructor
+     *
+     * @param Version $version
+     */
+    public function __construct(Version $version = null) {
+        $this->_version = $version ?: new Version140();
+
+        $this->addDSL(new Query());
+        $this->addDSL(new Filter());
+        $this->addDSL(new Aggregation());
+        $this->addDSL(new Suggest());
+    }
+
+    /**
+     * Returns Facade for custom DSL object
+     *
+     * @param $dsl
+     * @param array $arguments
+     * @return Facade
+     * @throws QueryBuilderException
+     */
+    public function __call($dsl, array $arguments) {
+        if(false === isset($this->_facades[$dsl])) {
+            throw new QueryBuilderException('DSL "' . $dsl . '" not supported');
+        }
+
+        return $this->_facades[$dsl];
+    }
+
+    /**
+     * Adds a new DSL object
+     *
+     * @param DSL $dsl
+     */
+    public function addDSL(DSL $dsl) {
+        $this->_facades[$dsl->getType()] = new Facade($dsl, $this->_version);
+    }
+
+    /*
+     * convenience methods
+     */
+
+    /**
+     * Query DSL
+     *
+     * @return Query
+     */
+    public function query() {
+        return $this->_facades[DSL::TYPE_QUERY];
+    }
+
+    /**
+     * Filter DSL
+     *
+     * @return Filter
+     */
+    public function filter() {
+        return $this->_facades[DSL::TYPE_FILTER];
+    }
+
+    /**
+     * Aggregation DSL
+     *
+     * @return Aggregation
+     */
+    public function agg() {
+        return $this->_facades[DSL::TYPE_AGGREGATION];
+    }
+
+    /**
+     * Suggest DSL
+     *
+     * @return Suggest
+     */
+    public function suggest() {
+        return $this->_facades[DSL::TYPE_SUGGEST];
+    }
+} 
