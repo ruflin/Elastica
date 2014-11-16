@@ -8,9 +8,17 @@ php:
 
 matrix:
   allow_failures:
-    - php: 5.6
+    - php: 5.3
 
 env:
+  global:
+    - ES_VER=1.4.0
+    - ES_MAPPER_ATTACHMENTS_VER=2.0.0.RC1
+    - ES_TRANSPORT_THRIFT_VER=2.0.0
+    - ES_GEOCLUSTER_FACET_VER=0.0.10
+    - ES_WAIT_ON_MAPPING_CHANGE=true
+    - MEMCACHE_VER=3.0.8
+
   matrix:
     - ES_COMPOSER_NODEV=no
     - ES_COMPOSER_NODEV=yes
