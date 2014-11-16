@@ -17,11 +17,6 @@ class ScriptFieldsTest extends BaseTest
         $this->index = $this->_createIndex();
     }
 
-    public function tearDown()
-    {
-        $this->index->delete();
-    }
-
     public function testNewScriptFields()
     {
         $script = new Script('1 + 2');
