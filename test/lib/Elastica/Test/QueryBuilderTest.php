@@ -106,12 +106,12 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
         // unsupported
         $exceptionMessage = '';
         try {
-            $qb->agg()->top_hits('top_hits');
+            $qb->aggregation()->top_hits('top_hits');
         } catch (QueryBuilderException $exception) {
             $exceptionMessage = $exception->getMessage();
         }
 
-        $this->assertEquals('agg "top_hits" in Version100 not supported', $exceptionMessage);
+        $this->assertEquals('aggregation "top_hits" in Version100 not supported', $exceptionMessage);
     }
 }
 
