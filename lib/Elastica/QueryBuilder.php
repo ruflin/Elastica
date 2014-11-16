@@ -3,11 +3,7 @@
 namespace Elastica;
 
 use Elastica\Exception\QueryBuilderException;
-use Elastica\QueryBuilder\DSL\Aggregation;
 use Elastica\QueryBuilder\DSL;
-use Elastica\QueryBuilder\DSL\Filter;
-use Elastica\QueryBuilder\DSL\Query;
-use Elastica\QueryBuilder\DSL\Suggest;
 use Elastica\QueryBuilder\Facade;
 use Elastica\QueryBuilder\Version;
 use Elastica\QueryBuilder\Version\Version140;
@@ -38,10 +34,10 @@ class QueryBuilder {
     public function __construct(Version $version = null) {
         $this->_version = $version ?: new Version140();
 
-        $this->addDSL(new Query());
-        $this->addDSL(new Filter());
-        $this->addDSL(new Aggregation());
-        $this->addDSL(new Suggest());
+        $this->addDSL(new DSL\Query());
+        $this->addDSL(new DSL\Filter());
+        $this->addDSL(new DSL\Aggregation());
+        $this->addDSL(new DSL\Suggest());
     }
 
     /**
@@ -76,7 +72,7 @@ class QueryBuilder {
     /**
      * Query DSL
      *
-     * @return Query
+     * @return DSL\Query
      */
     public function query() {
         return $this->_facades[DSL::TYPE_QUERY];
@@ -85,7 +81,7 @@ class QueryBuilder {
     /**
      * Filter DSL
      *
-     * @return Filter
+     * @return DSL\Filter
      */
     public function filter() {
         return $this->_facades[DSL::TYPE_FILTER];
@@ -94,7 +90,7 @@ class QueryBuilder {
     /**
      * Aggregation DSL
      *
-     * @return Aggregation
+     * @return DSL\Aggregation
      */
     public function agg() {
         return $this->_facades[DSL::TYPE_AGGREGATION];
@@ -103,7 +99,7 @@ class QueryBuilder {
     /**
      * Suggest DSL
      *
-     * @return Suggest
+     * @return DSL\Suggest
      */
     public function suggest() {
         return $this->_facades[DSL::TYPE_SUGGEST];
