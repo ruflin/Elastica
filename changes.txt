@@ -1,5 +1,8 @@
 CHANGES
 
+2014-11-13
+- fixed reserved words in queries which composed of upper case letters (Util::replaceBooleanWords)
+
 2014-10-31
 - Adding PSR-4 autoloading support
 
