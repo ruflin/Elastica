@@ -2,7 +2,6 @@
 
 namespace Elastica\QueryBuilder\DSL;
 
-
 use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\DateHistogram;
@@ -35,14 +34,15 @@ use Elastica\QueryBuilder\DSL;
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations.html
  */
-class Aggregation implements DSL {
-
+class Aggregation implements DSL
+{
     /**
      * must return type for QueryBuilder usage
      *
      * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return DSL::TYPE_AGGREGATION;
     }
 
@@ -53,7 +53,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return Min
      */
-    public function min($name) {
+    public function min($name)
+    {
         return new Min($name);
     }
 
@@ -64,7 +65,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return Max
      */
-    public function max($name) {
+    public function max($name)
+    {
         return new Max($name);
     }
 
@@ -75,7 +77,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return Sum
      */
-    public function sum($name) {
+    public function sum($name)
+    {
         return new Sum($name);
     }
 
@@ -86,7 +89,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return Avg
      */
-    public function avg($name) {
+    public function avg($name)
+    {
         return new Avg($name);
     }
 
@@ -97,7 +101,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return Stats
      */
-    public function stats($name) {
+    public function stats($name)
+    {
         return new Stats($name);
     }
 
@@ -108,7 +113,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return ExtendedStats
      */
-    public function extended_stats($name) {
+    public function extended_stats($name)
+    {
         return new ExtendedStats($name);
     }
 
@@ -120,7 +126,8 @@ class Aggregation implements DSL {
      * @param string $field
      * @return ValueCount
      */
-    public function value_count($name, $field) {
+    public function value_count($name, $field)
+    {
         return new ValueCount($name, $field);
     }
 
@@ -130,7 +137,8 @@ class Aggregation implements DSL {
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html
      * @param string $name
      */
-    public function percentiles($name) {
+    public function percentiles($name)
+    {
         throw new NotImplementedException();
     }
 
@@ -140,7 +148,8 @@ class Aggregation implements DSL {
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-rank-aggregation.html
      * @param string $name
      */
-    public function percentile_ranks($name) {
+    public function percentile_ranks($name)
+    {
         throw new NotImplementedException();
     }
 
@@ -151,7 +160,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return Cardinality
      */
-    public function cardinality($name) {
+    public function cardinality($name)
+    {
         return new Cardinality($name);
     }
 
@@ -161,7 +171,8 @@ class Aggregation implements DSL {
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html
      * @param string $name
      */
-    public function geo_bounds($name) {
+    public function geo_bounds($name)
+    {
         throw new NotImplementedException();
     }
 
@@ -171,7 +182,8 @@ class Aggregation implements DSL {
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
      * @param string $name
      */
-    public function top_hits($name) {
+    public function top_hits($name)
+    {
         throw new NotImplementedException();
     }
 
@@ -181,7 +193,8 @@ class Aggregation implements DSL {
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html
      * @param string $name
      */
-    public function scripted_metric($name) {
+    public function scripted_metric($name)
+    {
         throw new NotImplementedException();
     }
 
@@ -192,7 +205,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return GlobalAggregation
      */
-    public function global_agg($name) {
+    public function global_agg($name)
+    {
         return new GlobalAggregation($name);
     }
 
@@ -204,7 +218,8 @@ class Aggregation implements DSL {
      * @param AbstractFilter $filter
      * @return FilterAggregation
      */
-    public function filter($name, AbstractFilter $filter) {
+    public function filter($name, AbstractFilter $filter)
+    {
         $filterAgg = new FilterAggregation($name);
         $filterAgg->setFilter($filter);
 
@@ -217,7 +232,8 @@ class Aggregation implements DSL {
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html
      * @param string $name
      */
-    public function filters($name) {
+    public function filters($name)
+    {
         throw new NotImplementedException();
     }
 
@@ -229,7 +245,8 @@ class Aggregation implements DSL {
      * @param string $field
      * @return Missing
      */
-    public function missing($name, $field) {
+    public function missing($name, $field)
+    {
         return new Missing($name, $field);
     }
 
@@ -241,7 +258,8 @@ class Aggregation implements DSL {
      * @param string $path the nested path for this aggregation
      * @return Nested
      */
-    public function nested($name, $path) {
+    public function nested($name, $path)
+    {
         return new Nested($name, $path);
     }
 
@@ -252,7 +270,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return ReverseNested
      */
-    public function reverse_nested($name) {
+    public function reverse_nested($name)
+    {
         return new ReverseNested($name);
     }
 
@@ -262,7 +281,8 @@ class Aggregation implements DSL {
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-children-aggregation.html
      * @param string $name
      */
-    public function children($name) {
+    public function children($name)
+    {
         throw new NotImplementedException();
     }
 
@@ -273,7 +293,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return Terms
      */
-    public function terms($name) {
+    public function terms($name)
+    {
         return new Terms($name);
     }
 
@@ -283,7 +304,8 @@ class Aggregation implements DSL {
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html
      * @param string $name
      */
-    public function significant_terms($name) {
+    public function significant_terms($name)
+    {
         throw new NotImplementedException();
     }
 
@@ -294,7 +316,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return Range
      */
-    public function range($name) {
+    public function range($name)
+    {
         return new Range($name);
     }
 
@@ -305,7 +328,8 @@ class Aggregation implements DSL {
      * @param string $name
      * @return DateRange
      */
-    public function date_range($name) {
+    public function date_range($name)
+    {
         return new DateRange($name);
     }
 
@@ -317,7 +341,8 @@ class Aggregation implements DSL {
      * @param string $field
      * @return IpRange
      */
-    public function ipv4_range($name, $field) {
+    public function ipv4_range($name, $field)
+    {
         return new IpRange($name, $field);
     }
 
@@ -330,7 +355,8 @@ class Aggregation implements DSL {
      * @param int $interval the interval by which documents will be bucketed
      * @return Histogram
      */
-    public function histogram($name, $field, $interval) {
+    public function histogram($name, $field, $interval)
+    {
         return new Histogram($name, $field, $interval);
     }
 
@@ -343,7 +369,8 @@ class Aggregation implements DSL {
      * @param int $interval the interval by which documents will be bucketed
      * @return DateHistogram
      */
-    public function date_histogram($name, $field, $interval) {
+    public function date_histogram($name, $field, $interval)
+    {
         return new DateHistogram($name, $field, $interval);
     }
 
@@ -356,7 +383,8 @@ class Aggregation implements DSL {
      * @param string|array $origin the point from which distances will be calculated
      * @return GeoDistance
      */
-    public function geo_distance($name, $field, $origin) {
+    public function geo_distance($name, $field, $origin)
+    {
         return new GeoDistance($name, $field, $origin);
     }
 
@@ -366,10 +394,10 @@ class Aggregation implements DSL {
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html
      * @param string $name the name of this aggregation
      * @param string $field the field on which to perform this aggregation
-     * @return Range
+     * @return GeohashGrid
      */
-    public function geohash_grid($name, $field) {
+    public function geohash_grid($name, $field)
+    {
         return new GeohashGrid($name, $field);
     }
-
-} 
+}

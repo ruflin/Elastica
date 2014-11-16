@@ -2,7 +2,6 @@
 
 namespace Elastica\QueryBuilder\Version;
 
-
 use Elastica\QueryBuilder\Version;
 
 /**
@@ -12,8 +11,8 @@ use Elastica\QueryBuilder\Version;
  * @package Elastica
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  */
-class Version110 extends Version {
-
+class Version110 extends Version
+{
     protected $queries = array(
         'match',
         'multi_match',
@@ -119,5 +118,4 @@ class Version110 extends Version {
         'phrase',
         'completion'
     );
-
-} 
+}

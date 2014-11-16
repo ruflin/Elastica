@@ -14,25 +14,26 @@ use Elastica\QueryBuilder\Version\Version140;
  * @package Elastica
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  */
-class QueryBuilder {
-
+class QueryBuilder
+{
     /**
      * @var Version
      */
-    private $_version;
+    private $version;
 
     /**
      * @var Facade[]
      */
-    private $_facades = array();
+    private $facades = array();
 
     /**
      * Constructor
      *
      * @param Version $version
      */
-    public function __construct(Version $version = null) {
-        $this->_version = $version ?: new Version140();
+    public function __construct(Version $version = null)
+    {
+        $this->version = $version ?: new Version140();
 
         $this->addDSL(new DSL\Query());
         $this->addDSL(new DSL\Filter());
@@ -48,12 +49,13 @@ class QueryBuilder {
      * @return Facade
      * @throws QueryBuilderException
      */
-    public function __call($dsl, array $arguments) {
-        if(false === isset($this->_facades[$dsl])) {
+    public function __call($dsl, array $arguments)
+    {
+        if (false === isset($this->facades[$dsl])) {
             throw new QueryBuilderException('DSL "' . $dsl . '" not supported');
         }
 
-        return $this->_facades[$dsl];
+        return $this->facades[$dsl];
     }
 
     /**
@@ -61,8 +63,9 @@ class QueryBuilder {
      *
      * @param DSL $dsl
      */
-    public function addDSL(DSL $dsl) {
-        $this->_facades[$dsl->getType()] = new Facade($dsl, $this->_version);
+    public function addDSL(DSL $dsl)
+    {
+        $this->facades[$dsl->getType()] = new Facade($dsl, $this->version);
     }
 
     /*
@@ -74,8 +77,9 @@ class QueryBuilder {
      *
      * @return DSL\Query
      */
-    public function query() {
-        return $this->_facades[DSL::TYPE_QUERY];
+    public function query()
+    {
+        return $this->facades[DSL::TYPE_QUERY];
     }
 
     /**
@@ -83,8 +87,9 @@ class QueryBuilder {
      *
      * @return DSL\Filter
      */
-    public function filter() {
-        return $this->_facades[DSL::TYPE_FILTER];
+    public function filter()
+    {
+        return $this->facades[DSL::TYPE_FILTER];
     }
 
     /**
@@ -92,8 +97,9 @@ class QueryBuilder {
      *
      * @return DSL\Aggregation
      */
-    public function agg() {
-        return $this->_facades[DSL::TYPE_AGGREGATION];
+    public function aggregation()
+    {
+        return $this->facades[DSL::TYPE_AGGREGATION];
     }
 
     /**
@@ -101,7 +107,8 @@ class QueryBuilder {
      *
      * @return DSL\Suggest
      */
-    public function suggest() {
-        return $this->_facades[DSL::TYPE_SUGGEST];
+    public function suggest()
+    {
+        return $this->facades[DSL::TYPE_SUGGEST];
     }
-} 
+}

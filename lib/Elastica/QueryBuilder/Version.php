@@ -2,7 +2,6 @@
 
 namespace Elastica\QueryBuilder;
 
-
 use Elastica\QueryBuilder\DSL;
 
 /**
@@ -11,8 +10,8 @@ use Elastica\QueryBuilder\DSL;
  * @package Elastica
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  */
-abstract class Version {
-
+abstract class Version
+{
     /**
      * supported query methods
      *
@@ -48,8 +47,9 @@ abstract class Version {
      * @param $type
      * @return bool
      */
-    public function supports($name, $type) {
-        switch($type) {
+    public function supports($name, $type)
+    {
+        switch ($type) {
             case DSL::TYPE_QUERY:
                 $supports = in_array($name, $this->queries);
                 break;
@@ -69,5 +69,4 @@ abstract class Version {
 
         return $supports;
     }
-    
-} 
+}

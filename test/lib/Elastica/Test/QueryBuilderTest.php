@@ -7,12 +7,13 @@ use Elastica\Query;
 use Elastica\QueryBuilder;
 use Elastica\Suggest;
 
-class QueryBuilderTest extends \PHPUnit_Framework_TestCase {
-
+class QueryBuilderTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * @group grain
      */
-    public function testQueryBuilder() {
+    public function testQueryBuilder()
+    {
         $qb = new QueryBuilder();
 
         $query = new Query();
@@ -30,8 +31,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase {
                     ->addMustNot(
                         $qb->query()->boosting()
                             ->setNegativeBoost(1.5)
-                    )
-                ,
+                    ),
                 $qb->filter()->bool()
                     ->addMust(
                         $qb->filter()->exists('field')
@@ -53,10 +53,10 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase {
                     )
             )
         )->addAggregation(
-            $qb->agg()->sum('name', 'field')
+            $qb->aggregation()->sum('name', 'field')
                 ->addAggregation(
-                    $qb->agg()->max('name', 'field')
-                        ->addAggregation($qb->agg()->min('name', 'field'))
+                    $qb->aggregation()->max('name', 'field')
+                        ->addAggregation($qb->aggregation()->min('name', 'field'))
                 )
         )->setSuggest(new Suggest(
                 $qb->suggest()->phrase('name', 'field')
@@ -66,7 +66,8 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase {
     /**
      * @group grain
      */
-    public function testCustomDSL() {
+    public function testCustomDSL()
+    {
         $qb = new QueryBuilder();
 
         // test custom DSL
@@ -78,7 +79,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase {
         $exceptionMessage = '';
         try {
             $qb->invalid();
-        } catch(QueryBuilderException $exception) {
+        } catch (QueryBuilderException $exception) {
             $exceptionMessage = $exception->getMessage();
         }
 
@@ -88,14 +89,15 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase {
     /**
      * @group grain
      */
-    public function testFacade() {
+    public function testFacade()
+    {
         $qb = new QueryBuilder(new QueryBuilder\Version\Version100());
 
         // undefined
         $exceptionMessage = '';
         try {
             $qb->query()->invalid();
-        } catch(QueryBuilderException $exception) {
+        } catch (QueryBuilderException $exception) {
             $exceptionMessage = $exception->getMessage();
         }
 
@@ -105,21 +107,23 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase {
         $exceptionMessage = '';
         try {
             $qb->agg()->top_hits('top_hits');
-        } catch(QueryBuilderException $exception) {
+        } catch (QueryBuilderException $exception) {
             $exceptionMessage = $exception->getMessage();
         }
 
         $this->assertEquals('agg "top_hits" in Version100 not supported', $exceptionMessage);
     }
-
 }
 
-class CustomDSL implements QueryBuilder\DSL {
-    public function getType() {
+class CustomDSL implements QueryBuilder\DSL
+{
+    public function getType()
+    {
         return 'custom';
     }
 
-    public function custom_method() {
+    public function custom_method()
+    {
         return true;
     }
 }

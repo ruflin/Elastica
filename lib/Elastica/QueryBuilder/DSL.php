@@ -8,8 +8,8 @@ namespace Elastica\QueryBuilder;
  * @package Elastica
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  */
-interface DSL {
-
+interface DSL
+{
     const TYPE_QUERY = 'query';
     const TYPE_FILTER = 'filter';
     const TYPE_AGGREGATION = 'agg';
@@ -21,5 +21,4 @@ interface DSL {
      * @return string
      */
     public function getType();
-
 }
