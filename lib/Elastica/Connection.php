@@ -162,17 +162,17 @@ class Connection extends Param
      * @param bool                 $timeInMillis Whether timeout should be considered as millisecods.
      * @return \Elastica\Connection
      */
-    public function setTimeInMillis($timeInMillis)
+    public function setMillisecondTimeout($millisecondTimeout)
     {
-        return $this->setParam('timeInMillis', ($timeInMillis === true)?:false);
+        return $this->setParam('millisecondTimeout', ($millisecondTimeout === true)?:false);
     }
 
     /**
      * @return bool Whether timeout should be taken as milliseconds
      */
-    public function getTimeInMillis()
+    public function getMillisecondTimeout()
     {
-        return (bool) $this->hasParam('timeInMillis')?($this->getParam('timeInMillis') === true):false;
+        return (bool) $this->hasParam('millisecondTimeout')?($this->getParam('millisecondTimeout') === true):false;
     }
 
     /**

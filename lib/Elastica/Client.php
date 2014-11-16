@@ -27,19 +27,19 @@ class Client
      * @var array
      */
     protected $_config = array(
-        'host'            => null,
-        'port'            => null,
-        'path'            => null,
-        'url'             => null,
-        'proxy'           => null,
-        'transport'       => null,
-        'persistent'      => true,
-        'timeout'         => null,
-        'timeInMillis'    => false,
-        'connections'     => array(), // host, port, path, timeout, transport, persistent, timeout, timeInMillis, config -> (curl, headers, url)
-        'roundRobin'      => false,
-        'log'             => false,
-        'retryOnConflict' => 0,
+        'host'               => null,
+        'port'               => null,
+        'path'               => null,
+        'url'                => null,
+        'proxy'              => null,
+        'transport'          => null,
+        'persistent'         => true,
+        'timeout'            => null,
+        'millisecondTimeout' => false,
+        'connections'        => array(), // host, port, path, timeout, transport, persistent, timeout, millisecondTimeout, config -> (curl, headers, url)
+        'roundRobin'         => false,
+        'log'                => false,
+        'retryOnConflict'    => 0,
     );
 
     /**

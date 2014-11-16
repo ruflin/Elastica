@@ -19,7 +19,7 @@ class ConnectionTest extends BaseTest
         $this->assertEquals(Connection::TIMEOUT, $connection->getTimeout());
         $this->assertEquals(array(), $connection->getConfig());
         $this->assertTrue($connection->isEnabled());
-        $this->assertFalse($connection->getTimeInMillis());
+        $this->assertFalse($connection->getMillisecondTimeout());
     }
 
     public function testEnabledDisable()
@@ -104,22 +104,22 @@ class ConnectionTest extends BaseTest
 
     public function testTimestampMilliseconds()
     {
-        $connection = new Connection(array('timeInMillis' => false));
-        $this->assertFalse($connection->getTimeInMillis());
+        $connection = new Connection(array('millisecondTimeout' => false));
+        $this->assertFalse($connection->getMillisecondTimeout());
 
-        $connection = new Connection(array('timeInMillis' => true));
-        $this->assertTrue($connection->getTimeInMillis());
+        $connection = new Connection(array('millisecondTimeout' => true));
+        $this->assertTrue($connection->getMillisecondTimeout());
 
-        $connection = new Connection(array('timeInMillis' => 'foo'));
-        $this->assertFalse($connection->getTimeInMillis());
+        $connection = new Connection(array('millisecondTimeout' => 'foo'));
+        $this->assertFalse($connection->getMillisecondTimeout());
 
         $connection = new Connection();
-        $this->assertFalse($connection->getTimeInMillis());
-        $connection->setTimeInMillis(true);
-        $this->assertTrue($connection->getTimeInMillis());
-        $connection->setTimeInMillis(false);
-        $this->assertFalse($connection->getTimeInMillis());
-        $connection->setTimeInMillis("foo");
-        $this->assertFalse($connection->getTimeInMillis());
+        $this->assertFalse($connection->getMillisecondTimeout());
+        $connection->setMillisecondTimeout(true);
+        $this->assertTrue($connection->getMillisecondTimeout());
+        $connection->setMillisecondTimeout(false);
+        $this->assertFalse($connection->getMillisecondTimeout());
+        $connection->setMillisecondTimeout("foo");
+        $this->assertFalse($connection->getMillisecondTimeout());
     }
 }

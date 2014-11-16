@@ -1007,15 +1007,15 @@ class ClientTest extends BaseTest
     }
 
     /**
-     * Tries to determine whether the value for timeInMillis is propagated
+     * Tries to determine whether the value for millisecondTimeout is propagated
      * to the connection, in absence of either connections or server config
      * parameters in constructor config array
      */
-    public function testTimeInMillisFromDefaultConfig() {
+    public function testMillisecondTimeoutFromDefaultConfig() {
         $client = new Client();
-        $this->assertFalse($client->getConnection()->getTimeInMillis());
+        $this->assertFalse($client->getConnection()->getMillisecondTimeout());
 
-        $client = new Client(array("timeInMillis" => true));
-        $this->assertTrue($client->getConnection()->getTimeInMillis());
+        $client = new Client(array("millisecondTimeout" => true));
+        $this->assertTrue($client->getConnection()->getMillisecondTimeout());
     }
 }
