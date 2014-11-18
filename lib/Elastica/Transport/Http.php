@@ -70,6 +70,7 @@ class Http extends AbstractTransport
         curl_setopt($conn, CURLOPT_URL, $baseUri);
         if ($connection->getMillisecondTimeout()) {
             curl_setopt($conn, CURLOPT_TIMEOUT_MS, $connection->getTimeout());
+            curl_setopt($conn, CURLOPT_NOSIGNAL,   1);
         } else {
             curl_setopt($conn, CURLOPT_TIMEOUT, $connection->getTimeout());
         }
