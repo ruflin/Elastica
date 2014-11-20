@@ -1,5 +1,8 @@
 CHANGES
 
+2014-11-20
+- add cache control parameters support to Elastica\Filter\Bool
+
 2014-11-13
 - fixed reserved words in queries which composed of upper case letters (Util::replaceBooleanWords)
 
