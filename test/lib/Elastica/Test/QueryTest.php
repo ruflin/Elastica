@@ -9,6 +9,7 @@ use Elastica\Query\Term;
 use Elastica\Query\Text;
 use Elastica\Query;
 use Elastica\Facet\Terms;
+use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
 
 class QueryTest extends BaseTest
@@ -59,6 +60,23 @@ class QueryTest extends BaseTest
 
         $query2 = new Query();
         $query2->setRawQuery(array('query' => array('term' => array('title' => 'test'))));
+
+        $this->assertEquals($query1->toArray(), $query2->toArray());
+    }
+
+    public function testSuggestShouldNotRemoveOtherParameters()
+    {
+        $query1 = new Query();
+        $query2 = new Query();
+
+        $suggest = new Suggest();
+        $suggest->setGlobalText('test');
+
+        $query1->setSize(40);
+        $query1->setSuggest($suggest);
+
+        $query2->setSuggest($suggest);
+        $query2->setSize(40);
 
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }
