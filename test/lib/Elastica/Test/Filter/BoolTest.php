@@ -2,6 +2,7 @@
 
 namespace Elastica\Test\Filter;
 
+use Elastica\Filter\Terms;
 use \Elastica\Query;
 use Elastica\Filter\Bool;
 use Elastica\Filter\Term;
@@ -10,8 +11,15 @@ use Elastica\Test\Base as BaseTest;
 
 class BoolTest extends BaseTest
 {
-    public function testToArray()
+
+    /**
+     * @return array
+     */
+    public function getTestToArrayData()
     {
+        $out = array();
+
+        // case #0
         $mainBool = new Bool();
 
         $idsFilter1 = new Ids();
@@ -44,8 +52,41 @@ class BoolTest extends BaseTest
                 )
             )
         );
+        $out[] = array($mainBool, $expectedArray);
 
-        $this->assertEquals($expectedArray, $mainBool->toArray());
+        // case #1 _cache parameter should be supported
+        $bool = new Bool();
+        $terms = new Terms('field1', array('value1', 'value2'));
+        $termsNot = new Terms('field2', array('value1', 'value2'));
+        $bool->addMust($terms);
+        $bool->addMustNot($termsNot);
+        $bool->setCached(true);
+        $bool->setCacheKey('my-cache-key');
+        $expected = array(
+            'bool' => array(
+                'must' => array(
+                    $terms->toArray()
+                ),
+                'must_not' => array(
+                    $termsNot->toArray()
+                ),
+                '_cache' => true,
+                '_cache_key' => 'my-cache-key'
+            )
+        );
+        $out[] = array($bool, $expected);
+
+        return $out;
+    }
+
+    /**
+     * @dataProvider getTestToArrayData()
+     * @param Bool $bool
+     * @param array $expectedArray
+     */
+    public function testToArray(Bool $bool, $expectedArray)
+    {
+        $this->assertEquals($expectedArray, $bool->toArray());
     }
 
     public function testBoolFilter()
