@@ -69,4 +69,36 @@ abstract class Version
 
         return $supports;
     }
+
+    /**
+     * @return string[]
+     */
+    public function getAggregations()
+    {
+        return $this->aggregations;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getFilters()
+    {
+        return $this->filters;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getQueries()
+    {
+        return $this->queries;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSuggesters()
+    {
+        return $this->suggesters;
+    }
 }

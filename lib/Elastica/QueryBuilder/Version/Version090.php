@@ -59,14 +59,14 @@ class Version090 extends Version
     );
 
     protected $filters = array(
-        'and',
+        'bool_and', // original: bool
         'bool',
         'exists',
         'geo_bounding_box',
         'geo_distance',
         'geo_distance_range',
         'geo_polygon',
-        'geoshape',
+        'geo_shape',
         'geohash_cell',
         'has_child',
         'has_parent',
@@ -76,9 +76,9 @@ class Version090 extends Version
         'match_all',
         'missing',
         'nested',
-        'not',
+        'bool_not', // original: not
         'numeric_range',
-        'or',
+        'bool_or', // original: or
         'prefix',
         'query',
         'range',

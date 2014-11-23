@@ -9,10 +9,7 @@ use Elastica\Suggest;
 
 class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @group grain
-     */
-    public function testQueryBuilder()
+    public function example()
     {
         $qb = new QueryBuilder();
 
@@ -31,7 +28,8 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
                     ->addMustNot(
                         $qb->query()->boosting()
                             ->setNegativeBoost(1.5)
-                    ),
+                    )
+                ,
                 $qb->filter()->bool()
                     ->addMust(
                         $qb->filter()->exists('field')
@@ -45,8 +43,8 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
                                     "lat" => 40.12,
                                     "lon" => -71.34
                                 ), array(
-                                    "lat" => 40.01,
-                                    "lon" => -71.12
+                                "lat" => 40.01,
+                                "lon" => -71.12
                                 )
                             )
                         )
@@ -56,16 +54,15 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
             $qb->aggregation()->sum('name', 'field')
                 ->addAggregation(
                     $qb->aggregation()->max('name', 'field')
-                        ->addAggregation($qb->aggregation()->min('name', 'field'))
+                        ->addAggregation(
+                            $qb->aggregation()->min('name', 'field')
+                        )
                 )
         )->setSuggest(new Suggest(
-                $qb->suggest()->phrase('name', 'field')
+            $qb->suggest()->phrase('name', 'field')
         ));
     }
 
-    /**
-     * @group grain
-     */
     public function testCustomDSL()
     {
         $qb = new QueryBuilder();
@@ -73,7 +70,7 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
         // test custom DSL
         $qb->addDSL(new CustomDSL());
 
-        $this->assertTrue($qb->custom()->custom_method());
+        $this->assertTrue($qb->custom()->custom_method(), 'custom DSL execution failed');
 
         // test custom DSL exception message
         $exceptionMessage = '';
@@ -86,9 +83,6 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('DSL "invalid" not supported', $exceptionMessage);
     }
 
-    /**
-     * @group grain
-     */
     public function testFacade()
     {
         $qb = new QueryBuilder(new QueryBuilder\Version\Version100());
@@ -112,6 +106,60 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
         }
 
         $this->assertEquals('aggregation "top_hits" in Version100 not supported', $exceptionMessage);
+    }
+
+    public function testVersions()
+    {
+        $dsl = array(
+            new QueryBuilder\DSL\Query(),
+            new QueryBuilder\DSL\Filter(),
+            new QueryBuilder\DSL\Aggregation(),
+            new QueryBuilder\DSL\Suggest(),
+        );
+
+        $versions = array(
+            new QueryBuilder\Version\Version090(),
+            new QueryBuilder\Version\Version100(),
+            new QueryBuilder\Version\Version110(),
+            new QueryBuilder\Version\Version120(),
+            new QueryBuilder\Version\Version130(),
+            new QueryBuilder\Version\Version140(),
+        );
+
+        foreach($versions as $version) {
+            $this->assertVersions($version, $dsl);
+        }
+    }
+
+    private function assertVersions(QueryBuilder\Version $version, array $dsl)
+    {
+        foreach ($version->getQueries() as $query) {
+            $this->assertTrue(
+                method_exists($dsl[0], $query),
+                'query "' . $query . '" in ' . get_class($version) . ' must be defined in ' . get_class($dsl[0])
+            );
+        }
+
+        foreach ($version->getFilters() as $filter) {
+            $this->assertTrue(
+                method_exists($dsl[1], $filter),
+                'filter "' . $filter . '" in ' . get_class($version) . ' must be defined in ' . get_class($dsl[1])
+            );
+        }
+
+        foreach ($version->getAggregations() as $aggregation) {
+            $this->assertTrue(
+                method_exists($dsl[2], $aggregation),
+                'aggregation "' . $aggregation . '" in ' . get_class($version) . ' must be defined in ' . get_class($dsl[2])
+            );
+        }
+
+        foreach ($version->getSuggesters() as $suggester) {
+            $this->assertTrue(
+                method_exists($dsl[3], $suggester),
+                'suggester "' . $suggester . '" in ' . get_class($version) . ' must be defined in ' . get_class($dsl[3])
+            );
+        }
     }
 }
 

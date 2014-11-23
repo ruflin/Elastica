@@ -52,19 +52,26 @@ class Version120 extends Version
         'wildcard',
         'minimum_should_match',
 
+        // removed in 1.0.0
+        // 'text'
+        // 'field'
+        // 'custom_filters_score'
+        // 'custom_score'
+        // 'custom_boost_factor'
+
         // new in 1.1.0
         'template'
     );
 
     protected $filters = array(
-        'and',
+        'bool_and', // original: bool
         'bool',
         'exists',
         'geo_bounding_box',
         'geo_distance',
         'geo_distance_range',
         'geo_polygon',
-        'geoshape',
+        'geo_shape',
         'geohash_cell',
         'has_child',
         'has_parent',
@@ -74,8 +81,8 @@ class Version120 extends Version
         'match_all',
         'missing',
         'nested',
-        'not',
-        'or',
+        'bool_not', // original: not
+        'bool_or', // original: or
         'prefix',
         'query',
         'range',
@@ -84,6 +91,9 @@ class Version120 extends Version
         'term',
         'terms',
         'type',
+
+        // removed in 1.0.0
+        // 'numeric_range'
     );
 
     protected $aggregations = array(
@@ -94,7 +104,7 @@ class Version120 extends Version
         'stats',
         'extended_stats',
         'value_count',
-        'global',
+        'global_agg', // original: global
         'filter',
         'missing',
         'nested',
