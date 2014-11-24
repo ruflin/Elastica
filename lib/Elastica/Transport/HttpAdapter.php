@@ -56,13 +56,13 @@ class HttpAdapter extends AbstractTransport
             $this->httpAdapter->getConfiguration()->setTimeout($timeout);
         }
 
-        $httpAdapterRequest = $this->createHttpAdapterRequest($elasticaRequest, $connection);
+        $httpAdapterRequest = $this->_createHttpAdapterRequest($elasticaRequest, $connection);
 
         $start = microtime(true);
         $httpAdapterResponse = $this->httpAdapter->sendRequest($httpAdapterRequest);
         $end = microtime(true);
 
-        $elasticaResponse = $this->createElasticaResponse($httpAdapterResponse, $connection);
+        $elasticaResponse = $this->_createElasticaResponse($httpAdapterResponse, $connection);
 
         if (defined('DEBUG') && DEBUG) {
             $elasticaResponse->setQueryTime($end - $start);
@@ -91,7 +91,7 @@ class HttpAdapter extends AbstractTransport
      *
      * @return ElasticaResponse
      */
-    protected function createElasticaResponse(HttpAdapterResponse $httpAdapterResponse)
+    protected function _createElasticaResponse(HttpAdapterResponse $httpAdapterResponse)
     {
         return new ElasticaResponse((string)$httpAdapterResponse->getBody(), $httpAdapterResponse->getStatusCode());
     }
@@ -102,7 +102,7 @@ class HttpAdapter extends AbstractTransport
      *
      * @return HttpAdapterRequest
      */
-    protected function createHttpAdapterRequest(ElasticaRequest $elasticaRequest, Connection $connection)
+    protected function _createHttpAdapterRequest(ElasticaRequest $elasticaRequest, Connection $connection)
     {
         $data = $elasticaRequest->getData();
         $body = null;
@@ -126,7 +126,7 @@ class HttpAdapter extends AbstractTransport
             }
         }
 
-        $url = $this->getUri($elasticaRequest, $connection);
+        $url = $this->_getUri($elasticaRequest, $connection);
         $streamBody = new StringStream($body);
 
         return new HttpAdapterRequest($url, $method, HttpAdapterRequest::PROTOCOL_VERSION_1_1, $headers, $streamBody);
@@ -138,7 +138,7 @@ class HttpAdapter extends AbstractTransport
      *
      * @return string
      */
-    protected function getUri(ElasticaRequest $request, Connection $connection)
+    protected function _getUri(ElasticaRequest $request, Connection $connection)
     {
         $url = $connection->hasConfig('url') ? $connection->getConfig('url') : '';
 
