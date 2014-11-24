@@ -37,5 +37,38 @@ class RangeTest extends BaseAggregationTest
 
         $this->assertEquals(2, $results['buckets'][0]['doc_count']);
     }
-}
- 
+
+
+    public function testRangeAggregationWithKey()
+    {
+        $agg = new Range("range");
+        $agg->setField("price");
+        $agg->addRange(null, 50, "cheap");
+        $agg->addRange(50, 100, "average");
+        $agg->addRange(100, null, "expensive");
+
+        $expected = array (
+            'range' =>
+                array (
+                    'field' => 'price',
+                    'ranges' =>
+                        array (
+                            array (
+                                'to' => 50,
+                                'key' => 'cheap',
+                            ),
+                            array (
+                                'from' => 50,
+                                'to' => 100,
+                                'key' => 'average',
+                            ),
+                            array (
+                                'from' => 100,
+                                'key' => 'expensive',
+                            ),
+                        ),
+                ),
+        );
+
+        $this->assertEquals($expected, $agg->toArray());
+    }}
