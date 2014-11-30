@@ -9,6 +9,9 @@ CHANGES
 2014-11-19
 - Avoid remove previously added params when adding a suggest to the query #726
 
+2014-11-16
+- Added Elastica\QueryBuilder #724
+
 2014-11-13
 - fixed reserved words in queries which composed of upper case letters (Util::replaceBooleanWords) #722
 
