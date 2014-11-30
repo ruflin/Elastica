@@ -19,12 +19,12 @@ class QueryBuilder
     /**
      * @var Version
      */
-    private $version;
+    private $_version;
 
     /**
      * @var Facade[]
      */
-    private $facades = array();
+    private $_facades = array();
 
     /**
      * Constructor
@@ -33,7 +33,7 @@ class QueryBuilder
      */
     public function __construct(Version $version = null)
     {
-        $this->version = $version ?: new Version140();
+        $this->_version = $version ?: new Version140();
 
         $this->addDSL(new DSL\Query());
         $this->addDSL(new DSL\Filter());
@@ -51,11 +51,11 @@ class QueryBuilder
      */
     public function __call($dsl, array $arguments)
     {
-        if (false === isset($this->facades[$dsl])) {
+        if (false === isset($this->_facades[$dsl])) {
             throw new QueryBuilderException('DSL "' . $dsl . '" not supported');
         }
 
-        return $this->facades[$dsl];
+        return $this->_facades[$dsl];
     }
 
     /**
@@ -65,7 +65,7 @@ class QueryBuilder
      */
     public function addDSL(DSL $dsl)
     {
-        $this->facades[$dsl->getType()] = new Facade($dsl, $this->version);
+        $this->_facades[$dsl->getType()] = new Facade($dsl, $this->_version);
     }
 
     /*
@@ -79,7 +79,7 @@ class QueryBuilder
      */
     public function query()
     {
-        return $this->facades[DSL::TYPE_QUERY];
+        return $this->_facades[DSL::TYPE_QUERY];
     }
 
     /**
@@ -89,7 +89,7 @@ class QueryBuilder
      */
     public function filter()
     {
-        return $this->facades[DSL::TYPE_FILTER];
+        return $this->_facades[DSL::TYPE_FILTER];
     }
 
     /**
@@ -99,7 +99,7 @@ class QueryBuilder
      */
     public function aggregation()
     {
-        return $this->facades[DSL::TYPE_AGGREGATION];
+        return $this->_facades[DSL::TYPE_AGGREGATION];
     }
 
     /**
@@ -109,6 +109,6 @@ class QueryBuilder
      */
     public function suggest()
     {
-        return $this->facades[DSL::TYPE_SUGGEST];
+        return $this->_facades[DSL::TYPE_SUGGEST];
     }
 }

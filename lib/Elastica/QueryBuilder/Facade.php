@@ -17,12 +17,12 @@ class Facade
     /**
      * @var DSL
      */
-    private $dsl;
+    private $_dsl;
 
     /**
      * @var Version
      */
-    private $version;
+    private $_version;
 
     /**
      * Constructor
@@ -32,8 +32,8 @@ class Facade
      */
     public function __construct(DSL $dsl, Version $version)
     {
-        $this->dsl = $dsl;
-        $this->version = $version;
+        $this->_dsl = $dsl;
+        $this->_version = $version;
     }
 
     /**
@@ -47,20 +47,20 @@ class Facade
     public function __call($name, array $arguments)
     {
         // defined check
-        if (false === method_exists($this->dsl, $name)) {
+        if (false === method_exists($this->_dsl, $name)) {
             throw new QueryBuilderException(
-                'undefined ' . $this->dsl->getType() . ' "' . $name . '"'
+                'undefined ' . $this->_dsl->getType() . ' "' . $name . '"'
             );
         }
 
         // version support check
-        if (false === $this->version->supports($name, $this->dsl->getType())) {
-            $reflection = new \ReflectionClass($this->version);
+        if (false === $this->_version->supports($name, $this->_dsl->getType())) {
+            $reflection = new \ReflectionClass($this->_version);
             throw new QueryBuilderException(
-                $this->dsl->getType() . ' "' . $name . '" in ' . $reflection->getShortName() . ' not supported'
+                $this->_dsl->getType() . ' "' . $name . '" in ' . $reflection->getShortName() . ' not supported'
             );
         }
 
-        return call_user_func_array(array($this->dsl, $name), $arguments);
+        return call_user_func_array(array($this->_dsl, $name), $arguments);
     }
 }

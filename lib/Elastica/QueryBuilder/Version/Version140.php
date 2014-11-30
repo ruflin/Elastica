@@ -71,7 +71,8 @@ class Version140 extends Version130
         'geo_distance',
         'geo_distance_range',
         'geo_polygon',
-        'geo_shape',
+        'geo_shape_provided', // original: geo_shape
+        'geo_shape_preIndexed', // original: geo_shape
         'geohash_cell',
         'has_child',
         'has_parent',

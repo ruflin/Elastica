@@ -383,7 +383,7 @@ class Query implements DSL
      */
     public function range($fieldName, array $args)
     {
-        return new Range($fieldName. $args);
+        return new Range($fieldName, $args);
     }
 
     /**

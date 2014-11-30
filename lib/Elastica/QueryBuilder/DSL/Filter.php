@@ -58,7 +58,7 @@ class Filter implements DSL
      * and filter
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-and-filter.html
-     * @param array $filters
+     * @param AbstractFilter[] $filters
      * @return BoolAnd
      */
     public function bool_and(array $filters)
@@ -84,7 +84,7 @@ class Filter implements DSL
      * exists filter
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-exists-filter.html
-     * @param $field
+     * @param string $field
      * @return Exists
      */
     public function exists($field)
@@ -96,7 +96,7 @@ class Filter implements DSL
      * geo bounding box filter
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-filter.html
-     * @param $field
+     * @param string $field
      * @param array $coordinates
      * @return GeoBoundingBox
      */
@@ -155,10 +155,25 @@ class Filter implements DSL
      * @param string $shapeType
      * @return GeoShapeProvided
      */
-    public function geo_shape($path, array $coordinates, $shapeType = GeoShapeProvided::TYPE_ENVELOPE)
+    public function geo_shape_provided($path, array $coordinates, $shapeType = GeoShapeProvided::TYPE_ENVELOPE)
     {
-        // TODO new GeoShapePreIndexed()
         return new GeoShapeProvided($path, $coordinates, $shapeType);
+    }
+
+    /**
+     * pre indexed geo shape filter
+     *
+     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-filter.html
+     * @param string $path         The path/field of the shape searched
+     * @param string $indexedId    Id of the pre-indexed shape
+     * @param string $indexedType  Type of the pre-indexed shape
+     * @param string $indexedIndex Index of the pre-indexed shape
+     * @param string $indexedPath  Path of the pre-indexed shape
+     * @return GeoShapePreIndexed
+     */
+    public function geo_shape_preIndexed($path, $indexedId, $indexedType, $indexedIndex, $indexedPath)
+    {
+        return new GeoShapePreIndexed($path, $indexedId, $indexedType, $indexedIndex, $indexedPath);
     }
 
     /**
@@ -379,13 +394,12 @@ class Filter implements DSL
      * term filter
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-term-filter.html
-     * @param string $field
-     * @param string $term
+     * @param array $term
      * @return Term
      */
-    public function term($field, $term)
+    public function term(array $term = array())
     {
-        return new Term($field, $term);
+        return new Term($term);
     }
 
     /**
