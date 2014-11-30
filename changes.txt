@@ -1,5 +1,8 @@
 CHANGES
 
+2014-11-30
+- Added transport to support egeloen/http-adapter #727
+
 2014-11-20
 - add cache control parameters support to Elastica\Filter\Bool #725
 
