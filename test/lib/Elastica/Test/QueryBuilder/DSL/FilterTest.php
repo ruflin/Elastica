@@ -19,7 +19,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         'geo_distance_range' => array('key', 'location'),
         'geo_polygon' => array('key', array()),
         'geo_shape_provided' => array('path', array()),
-        'geo_shape_preIndexed' => array('path', 'indexedId', 'indexedType', 'indexedIndex', 'indexedPath'),
+        'geo_shape_pre_indexed' => array('path', 'indexedId', 'indexedType', 'indexedIndex', 'indexedPath'),
         'geohash_cell' => array('field', 'location'),
         'ids' => array('type', array()),
         'limit' => array(1),

@@ -171,7 +171,7 @@ class Filter implements DSL
      * @param string $indexedPath  Path of the pre-indexed shape
      * @return GeoShapePreIndexed
      */
-    public function geo_shape_preIndexed($path, $indexedId, $indexedType, $indexedIndex, $indexedPath)
+    public function geo_shape_pre_indexed($path, $indexedId, $indexedType, $indexedIndex, $indexedPath)
     {
         return new GeoShapePreIndexed($path, $indexedId, $indexedType, $indexedIndex, $indexedPath);
     }

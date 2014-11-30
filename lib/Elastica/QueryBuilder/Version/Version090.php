@@ -67,7 +67,7 @@ class Version090 extends Version
         'geo_distance_range',
         'geo_polygon',
         'geo_shape_provided', // original: geo_shape
-        'geo_shape_preIndexed', // original: geo_shape
+        'geo_shape_pre_indexed', // original: geo_shape
         'geohash_cell',
         'has_child',
         'has_parent',
