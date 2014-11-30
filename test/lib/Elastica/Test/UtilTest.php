@@ -29,6 +29,26 @@ class UtilTest extends BaseTest
         );
     }
 
+    /**
+     * @dataProvider getReplaceBooleanWordsPairs
+     */
+    public function testReplaceBooleanWords($before, $after) 
+    {
+        $this->assertEquals($after, Util::replaceBooleanWords($before));
+    }
+    
+    public function getReplaceBooleanWordsPairs()
+    {
+        return array(
+            array('to be OR not to be', 'to be || not to be'),
+            array('ORIGINAL GIFTS', 'ORIGINAL GIFTS'),
+            array('Black AND White', 'Black && White'),
+            array('TIMBERLAND Men`s', 'TIMBERLAND Men`s'),
+            array('hello NOT kitty', 'hello !kitty'),
+            array('SEND NOTIFICATION', 'SEND NOTIFICATION')
+        );
+    }        
+    
     public function testEscapeTermSpecialCharacters()
     {
         $before = '\\+-&&||!(){}[]^"~*?:/';

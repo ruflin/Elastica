@@ -127,6 +127,10 @@ class Bool extends AbstractFilter
             $args['bool']['must_not'] = $this->_mustNot;
         }
 
+        if (isset($args['bool'])) {
+            $args['bool'] = array_merge($args['bool'], $this->getParams());
+        }
+
         return $args;
     }
 

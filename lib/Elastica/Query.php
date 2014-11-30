@@ -383,7 +383,10 @@ class Query extends Param
      */
     public function setSuggest(Suggest $suggest)
     {
-        $this->addParam(NULL, $suggest->toArray());
+        $this->setParams(array_merge(
+            $this->getParams(),
+            $suggest->toArray()
+        ));
         $this->_suggest = 1;
     }
 
