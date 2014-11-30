@@ -23,6 +23,7 @@
     "suggest": {
         "munkie/elasticsearch-thrift-php": "Allow using thrift transport",
         "guzzlehttp/guzzle": "Allow using guzzle 4.x as the http transport (requires php 5.4)",
+        "egeloen/http-adapter": "Allow using httpadapter transport",
         "psr/log": "for logging",
         "monolog/monolog": "Logging request"
     },
