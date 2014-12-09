@@ -36,9 +36,9 @@ class Phrase extends AbstractSuggest
      * @param float $likelihood Defaults to 0.95, meaning 5% of the words are misspelled.
      * @return \Elastica\Suggest\Phrase
      */
-    public function setRealWorldErrorLikelihood($likelihood)
+    public function setRealWordErrorLikelihood($likelihood)
     {
-        return $this->setParam("real_world_error_likelihood", $likelihood);
+        return $this->setParam("real_word_error_likelihood", $likelihood);
     }
 
     /**
