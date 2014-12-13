@@ -314,7 +314,7 @@ class Index implements SearchableInterface
      */
     public function open()
     {
-        $this->request('_open', Request::POST);
+        return $this->request('_open', Request::POST);
     }
 
     /**
