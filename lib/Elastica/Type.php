@@ -148,8 +148,10 @@ class Type implements SearchableInterface
             throw new InvalidException('Document or Script id is not set');
         }
 
+        $id = urlencode($data->getId());
+
         return $this->getIndex()->getClient()->updateDocument(
-            $data->getId(),
+            $id,
             $data,
             $this->getIndex()->getName(),
             $this->getName(),
