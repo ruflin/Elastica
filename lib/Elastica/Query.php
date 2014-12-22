@@ -397,7 +397,7 @@ class Query extends Param
      * @param  \Elastica\Rescore\AbstractRescore $rescore suggestion object
      * @return \Elastica\Query Current object
      */
-    public function setRescore(AbstractRescore $rescore)
+    public function setRescore($rescore)
     {
         return $this->setParam('rescore', $rescore->toArray());
     }
