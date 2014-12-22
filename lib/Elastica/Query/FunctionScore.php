@@ -70,8 +70,8 @@ class FunctionScore extends AbstractQuery
         if ($weight !== null) {
             $function['weight'] = $weight;
         }
-        $this->_functions[] = $function;
 
+        $this->_functions[] = $function;
         return $this;
     }
 
@@ -100,9 +100,16 @@ class FunctionScore extends AbstractQuery
      * @param  AbstractFilter                $filter      a filter associated with this function
      * @return \Elastica\Query\FunctionScore
      */
-    public function addDecayFunction($function, $field, $origin, $scale, $offset = null, $decay = null, $weight = null,
-                                     AbstractFilter $filter = null)
-    {
+    public function addDecayFunction(
+        $function,
+        $field,
+        $origin,
+        $scale,
+        $offset = null,
+        $decay = null,
+        $weight = null,
+        AbstractFilter $filter = null
+    ) {
         $functionParams = array(
             $field => array(
                 'origin' => $origin,
