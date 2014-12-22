@@ -139,9 +139,9 @@ class FunctionScore extends AbstractQuery
      *
      * @return void
      */
-    public function addBoostFactorFunction($boostFactor, AbstractFilter $filter = null, $weight = null)
+    public function addWeightFunction($weight, AbstractFilter $filter = null)
     {
-        $this->addFunction('boost_factor', $boostFactor, $filter, $weight);
+        $this->addFunction('weight', $weight, $filter);
     }
 
     /**
