@@ -12,6 +12,26 @@ namespace Elastica;
  */
 class Percolator
 {
+    const EXTRA_FILTER         = 'filter';
+    const EXTRA_QUERY          = 'query';
+    const EXTRA_SIZE           = 'size';
+    const EXTRA_TRACK_SCORES   = 'track_scores';
+    const EXTRA_SORT           = 'sort';
+    const EXTRA_FACETS         = 'facets';
+    const EXTRA_AGGS           = 'aggs';
+    const EXTRA_HIGHLIGHT      = 'highlight';
+
+    private $extraRequestBodyOptions = array(
+        self::EXTRA_FILTER,
+        self::EXTRA_QUERY,
+        self::EXTRA_SIZE,
+        self::EXTRA_TRACK_SCORES,
+        self::EXTRA_SORT,
+        self::EXTRA_FACETS,
+        self::EXTRA_AGGS,
+        self::EXTRA_HIGHLIGHT,
+    );
+
     /**
      * Index object
      *
@@ -75,6 +95,8 @@ class Percolator
         $path = $this->_index->getName() . '/' . $type . '/_percolate';
         $data = array('doc' => $doc->getData());
 
+        $this->applyAdditionalRequestBodyOptions($params, $data);
+
         return $this->_percolate($path, $query, $data, $params);
     }
 
@@ -93,7 +115,26 @@ class Percolator
         $id = urlencode($id);
         $path = $this->_index->getName() . '/' . $type . '/'. $id . '/_percolate';
 
-        return $this->_percolate($path, $query, array(), $params);
+        $data = array();
+        $this->applyAdditionalRequestBodyOptions($params, $data);
+
+        return $this->_percolate($path, $query, $data, $params);
+    }
+
+    /**
+     * Process the provided parameters and apply them to the data array.
+     * 
+     * @param &$params
+     * @param &$data
+     */
+    protected function applyAdditionalRequestBodyOptions(&$params, &$data)
+    {
+        foreach ($params as $key => $value) {
+            if (in_array($key, $this->extraRequestBodyOptions)) {
+                $data[$key] = $params[$key];
+                unset($params[$key]);
+            }
+        }
     }
 
     /**
