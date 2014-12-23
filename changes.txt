@@ -1,5 +1,8 @@
 CHANGES
 
+2014-12-14
+- Added fluent interface to Elastica\Query::setRescore #733
+
 2014-11-30
 - Added transport to support egeloen/http-adapter #727
 
