@@ -1,5 +1,8 @@
 CHANGES
 
+2015-01-19
+- Update to elasticsearch 1.4.2
+
 2015-01-14
 - added @return annotation to top_hits aggregation DSL method
 

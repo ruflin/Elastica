@@ -12,7 +12,7 @@ matrix:
 
 env:
   global:
-    - ES_VER=1.4.0
+    - ES_VER=1.4.2
     - ES_MAPPER_ATTACHMENTS_VER=2.0.0.RC1
     - ES_TRANSPORT_THRIFT_VER=2.0.0
     - ES_GEOCLUSTER_FACET_VER=0.0.10
