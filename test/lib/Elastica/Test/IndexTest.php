@@ -684,6 +684,22 @@ class IndexTest extends BaseTest
     }
 
     /**
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testThrowExceptionIfNotScalar()
+    {
+        $this->_createIndex(new \stdClass());
+    }
+    
+    public function testConvertScalarsToString()
+    {
+        $index = $this->_createIndex(1);
+
+        $this->assertEquals('1', $index->getName());
+        $this->assertInternalType('string', $index->getName());
+    }
+
+    /**
      * Check for the presence of the mapper-attachments plugin and skip the current test if it is not found.
      */
     protected function _checkAttachmentsPlugin()
