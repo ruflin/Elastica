@@ -688,12 +688,14 @@ class IndexTest extends BaseTest
      */
     public function testThrowExceptionIfNotScalar()
     {
-        $this->_createIndex(new \stdClass());
+        $client = $this->_getClient();
+        $client->getIndex(new \stdClass());
     }
-    
+
     public function testConvertScalarsToString()
     {
-        $index = $this->_createIndex(1);
+        $client = $this->_getClient();
+        $index  = $client->getIndex(1);
 
         $this->assertEquals('1', $index->getName());
         $this->assertInternalType('string', $index->getName());
