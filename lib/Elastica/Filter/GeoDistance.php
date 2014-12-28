@@ -14,6 +14,7 @@ class GeoDistance extends AbstractGeoDistance
 {
     const DISTANCE_TYPE_ARC = 'arc';
     const DISTANCE_TYPE_PLANE = 'plane';
+    const DISTANCE_TYPE_SLOPPY_ARC = 'sloppy_arc';
 
     const OPTIMIZE_BBOX_MEMORY = 'memory';
     const OPTIMIZE_BBOX_INDEXED = 'indexed';
