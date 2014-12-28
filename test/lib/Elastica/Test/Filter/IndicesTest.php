@@ -89,5 +89,38 @@ class IndicesTest extends BaseTest
             }
         }
     }
+
+    public function testSetIndices()
+    {
+        $indices = array('one', 'two');
+        $filter = new Indices(new Term(array('color' => 'blue')), $indices);
+        $this->assertEquals($indices, $filter->getParam('indices'));
+
+        $indices[] = 'three';
+        $filter->setIndices($indices);
+        $this->assertEquals($indices, $filter->getParam('indices'));
+
+        $filter->setIndices(array($this->_index1, $this->_index2));
+        $expected = array($this->_index1->getName(), $this->_index2->getName());
+        $this->assertEquals($expected, $filter->getParam('indices'));
+
+        $returnValue = $filter->setIndices($indices);
+        $this->assertInstanceOf('Elastica\Filter\Indices', $returnValue);
+    }
+
+    public function testAddIndex()
+    {
+        $filter = new Indices(new Term(array('color' => 'blue')), array());
+
+        $filter->addIndex($this->_index1);
+        $expected = array($this->_index1->getName());
+        $this->assertEquals($expected, $filter->getParam('indices'));
+
+        $filter->addIndex('foo');
+        $expected = array($this->_index1->getName(), 'foo');
+        $this->assertEquals($expected, $filter->getParam('indices'));
+
+        $returnValue = $filter->addIndex('bar');
+        $this->assertInstanceOf('Elastica\Filter\Indices', $returnValue);
+    }
 }
- 
