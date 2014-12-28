@@ -75,4 +75,24 @@ class HasChild extends AbstractFilter
     {
         return $this->setParam('_scope', $scope);
     }
+
+    /**
+     * Set minimum number of children are required to match for the parent doc to be considered a match
+     * @param  int                       $count
+     * @return \Elastica\Filter\HasChild
+     */
+    public function setMinimumChildrenCount($count)
+    {
+        return $this->setParam('min_children', (int) $count);
+    }
+
+    /**
+     * Set maximum number of children are required to match for the parent doc to be considered a match
+     * @param  int                       $count
+     * @return \Elastica\Filter\HasChild
+     */
+    public function setMaximumChildrenCount($count)
+    {
+        return $this->setParam('max_children', (int) $count);
+    }
 }

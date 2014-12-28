@@ -49,6 +49,30 @@ class HasChildTest extends BaseTest
         $this->assertEquals($expectedArray, $filter->toArray());
     }
 
+    public function testSetMinimumChildrenCount()
+    {
+        $query = new MatchAll;
+        $filter = new HasChild($query, 'test');
+
+        $filter->setMinimumChildrenCount(2);
+        $this->assertEquals(2, $filter->getParam('min_children'));
+
+        $returnValue = $filter->setMinimumChildrenCount(2);
+        $this->assertInstanceOf('Elastica\Filter\HasChild', $returnValue);
+    }
+
+    public function testSetMaximumChildrenCount()
+    {
+        $query = new MatchAll;
+        $filter = new HasChild($query, 'test');
+
+        $filter->setMaximumChildrenCount(10);
+        $this->assertEquals(10, $filter->getParam('max_children'));
+
+        $returnValue = $filter->setMaximumChildrenCount(10);
+        $this->assertInstanceOf('Elastica\Filter\HasChild', $returnValue);
+    }
+
     public function testFilterInsideHasChild()
     {
         $f = new \Elastica\Filter\MatchAll();
