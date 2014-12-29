@@ -21,7 +21,7 @@ class Percolator
     const EXTRA_AGGS           = 'aggs';
     const EXTRA_HIGHLIGHT      = 'highlight';
 
-    private $extraRequestBodyOptions = array(
+    private $_extraRequestBodyOptions = array(
         self::EXTRA_FILTER,
         self::EXTRA_QUERY,
         self::EXTRA_SIZE,
@@ -87,7 +87,15 @@ class Percolator
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Query to filter the percolator queries which
      *                                                                     are executed.
      * @param  string $type
-     * @param  array  $params
+     * @param  array  $params Supports setting additional request body options to the percolate request.
+     *                        [ Percolator::EXTRA_FILTER,
+     *                          Percolator::EXTRA_QUERY,
+     *                          Percolator::EXTRA_SIZE,
+     *                          Percolator::EXTRA_TRACK_SCORES,
+     *                          Percolator::EXTRA_SORT,
+     *                          Percolator::EXTRA_FACETS,
+     *                          Percolator::EXTRA_AGGS,
+     *                          Percolator::EXTRA_HIGHLIGHT ]
      * @return array With matching registered queries.
      */
     public function matchDoc(Document $doc, $query = null, $type = 'type', $params = array())
@@ -95,7 +103,7 @@ class Percolator
         $path = $this->_index->getName() . '/' . $type . '/_percolate';
         $data = array('doc' => $doc->getData());
 
-        $this->applyAdditionalRequestBodyOptions($params, $data);
+        $this->_applyAdditionalRequestBodyOptions($params, $data);
 
         return $this->_percolate($path, $query, $data, $params);
     }
@@ -107,7 +115,15 @@ class Percolator
      * @param  string $type
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Query to filter the percolator queries which
      *                                                                     are executed.
-     * @param  array  $params
+     * @param  array  $params Supports setting additional request body options to the percolate request.
+     *                        [ Percolator::EXTRA_FILTER,
+     *                          Percolator::EXTRA_QUERY,
+     *                          Percolator::EXTRA_SIZE,
+     *                          Percolator::EXTRA_TRACK_SCORES,
+     *                          Percolator::EXTRA_SORT,
+     *                          Percolator::EXTRA_FACETS,
+     *                          Percolator::EXTRA_AGGS,
+     *                          Percolator::EXTRA_HIGHLIGHT ]
      * @return array With matching registered queries.
      */
     public function matchExistingDoc($id, $type, $query = null, $params = array())
@@ -116,7 +132,7 @@ class Percolator
         $path = $this->_index->getName() . '/' . $type . '/'. $id . '/_percolate';
 
         $data = array();
-        $this->applyAdditionalRequestBodyOptions($params, $data);
+        $this->_applyAdditionalRequestBodyOptions($params, $data);
 
         return $this->_percolate($path, $query, $data, $params);
     }
@@ -127,10 +143,10 @@ class Percolator
      * @param &$params
      * @param &$data
      */
-    protected function applyAdditionalRequestBodyOptions(&$params, &$data)
+    protected function _applyAdditionalRequestBodyOptions(&$params, &$data)
     {
         foreach ($params as $key => $value) {
-            if (in_array($key, $this->extraRequestBodyOptions)) {
+            if (in_array($key, $this->_extraRequestBodyOptions)) {
                 $data[$key] = $params[$key];
                 unset($params[$key]);
             }
