@@ -99,4 +99,13 @@ class TermsTest extends BaseTest
         $expected = array('terms' => array('color' => array('cyan')));
         $this->assertEquals($expected, $filter->toArray());
     }
+
+    /**
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testToArrayInvalidException()
+    {
+        $filter = new Terms();
+        $filter->toArray();
+    }
 }
