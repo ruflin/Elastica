@@ -48,13 +48,13 @@ class Nested extends AbstractFilter
     }
 
     /**
-     * Set score mode
+     * Set join option
      *
-     * @param  string                       $scoreMode Options: avg, total, max and none.
+     * @param  bool                    $join
      * @return \Elastica\Filter\Nested
      */
-    public function setScoreMode($scoreMode)
+    public function setJoin($join)
     {
-        return $this->setParam('score_mode', $scoreMode);
+        return $this->setParam('join', (bool) $join);
     }
 }
