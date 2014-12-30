@@ -63,9 +63,12 @@ class Builder extends AbstractQuery
     public function toArray()
     {
         try {
-            return JSON::parse($this->__toString());
+            return JSON::parse($input = $this->__toString());
         } catch (JSONParseException $e) {
-            throw new InvalidException('The query produced is invalid');
+            throw new InvalidException(sprintf(
+                'The produced query is not a valid json string : "%s"',
+                $input
+            ));
         }
     }
 
