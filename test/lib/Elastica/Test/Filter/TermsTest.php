@@ -51,4 +51,61 @@ class TermsTest extends BaseTest
         
         $index->delete();
     }
+
+    public function testSetExecution()
+    {
+        $filter = new Terms('color', array('blue', 'green'));
+
+        $filter->setExecution('bool');
+        $this->assertEquals('bool', $filter->getParam('execution'));
+
+        $returnValue = $filter->setExecution('bool');
+        $this->assertInstanceOf('Elastica\Filter\Terms', $returnValue);
+    }
+
+    public function testSetTerms()
+    {
+        $field = 'color';
+        $terms = array('blue', 'green');
+
+        $filter = new Terms();
+        $filter->setTerms($field, $terms);
+        $expected = array('terms' => array($field => $terms));
+        $this->assertEquals($expected, $filter->toArray());
+
+        $returnValue = $filter->setTerms($field, $terms);
+        $this->assertInstanceOf('Elastica\Filter\Terms', $returnValue);
+    }
+
+    public function testAddTerm()
+    {
+        $filter = new Terms('color', array('blue'));
+
+        $filter->addTerm('green');
+        $expected = array('terms' => array('color' => array('blue', 'green')));
+        $this->assertEquals($expected, $filter->toArray());
+
+        $returnValue = $filter->addTerm('cyan');
+        $this->assertInstanceOf('Elastica\Filter\Terms', $returnValue);
+    }
+
+    public function testToArray()
+    {
+        $filter = new Terms('color', array());
+        $expected = array('terms' => array('color' => array()));
+        $this->assertEquals($expected, $filter->toArray());
+
+        $filter = new Terms('color', array('cyan'));
+        $expected = array('terms' => array('color' => array('cyan')));
+        $this->assertEquals($expected, $filter->toArray());
+    }
+
+    /**
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testToArrayInvalidException()
+    {
+        $filter = new Terms();
+        $filter->toArray();
+    }
 }

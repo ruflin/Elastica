@@ -16,17 +16,25 @@ class RangeTest extends BaseTest
 
     public function testToArray()
     {
+        $field = 'field_name';
+        $range = array('gte' => 10, 'lte' => 99);
+
         $filter = new Range();
-
-        $fromTo = array('from' => 'ra', 'to' => 'ru');
-        $filter->addField('name', $fromTo);
-
-        $expectedArray = array(
-            'range' => array(
-                'name' => $fromTo
-            )
-        );
-
+        $filter->addField($field, $range);
+        $expectedArray = array('range' => array($field => $range));
         $this->assertEquals($expectedArray, $filter->toArray());
+    }
+
+    public function testSetExecution()
+    {
+        $field = 'field_name';
+        $range = array('gte' => 10, 'lte' => 99);
+        $filter = new Range('field_name', $range);
+
+        $filter->setExecution('fielddata');
+        $this->assertEquals('fielddata', $filter->getParam('execution'));
+
+        $returnValue = $filter->setExecution('index');
+        $this->assertInstanceOf('Elastica\Filter\Range', $returnValue);
     }
 }

@@ -145,4 +145,31 @@ class BoolTest extends BaseTest
 
         $index->delete();
     }
+
+    /**
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testAddMustInvalidException()
+    {
+        $filter = new Bool();
+        $filter->addMust('fail!');
+    }
+
+    /**
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testAddMustNotInvalidException()
+    {
+        $filter = new Bool();
+        $filter->addMustNot('fail!');
+    }
+
+    /**
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testAddShouldInvalidException()
+    {
+        $filter = new Bool();
+        $filter->addShould('fail!');
+    }
 }

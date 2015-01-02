@@ -16,7 +16,7 @@ class HasChild extends AbstractFilter
      * Construct HasChild filter
      *
      * @param string|\Elastica\Query|\Elastica\Filter\AbstractFilter $query Query string or a Elastica\Query object or a filter
-     * @param string                $type  Parent document type
+     * @param string|\Elastica\Type                                  $type  Child document type
      */
     public function __construct($query, $type = null)
     {
@@ -50,29 +50,41 @@ class HasChild extends AbstractFilter
      */
     public function setFilter($filter)
     {
-        $data = $filter->toArray();
-        return $this->setParam('filter', $data);
+        return $this->setParam('filter', $filter->toArray());
     }
 
     /**
-     * Set type of the parent document
+     * Set type of the child document
      *
-     * @param  string                         $type Parent document type
-     * @return \Elastica\Filter\HasChild Current object
+     * @param  string|\Elastica\Type      $type Child document type
+     * @return \Elastica\Filter\HasParent       Current object
      */
     public function setType($type)
     {
-        return $this->setParam('type', $type);
+        if ($type instanceof \Elastica\Type) {
+            $type = $type->getName();
+        }
+
+        return $this->setParam('type', (string) $type);
     }
 
     /**
-     * Sets the scope
-     *
-     * @param  string                         $scope Scope
-     * @return \Elastica\Filter\HasChild Current object
+     * Set minimum number of children are required to match for the parent doc to be considered a match
+     * @param  int                       $count
+     * @return \Elastica\Filter\HasChild
      */
-    public function setScope($scope)
+    public function setMinimumChildrenCount($count)
     {
-        return $this->setParam('_scope', $scope);
+        return $this->setParam('min_children', (int) $count);
+    }
+
+    /**
+     * Set maximum number of children are required to match for the parent doc to be considered a match
+     * @param  int                       $count
+     * @return \Elastica\Filter\HasChild
+     */
+    public function setMaximumChildrenCount($count)
+    {
+        return $this->setParam('max_children', (int) $count);
     }
 }

@@ -27,26 +27,50 @@ class HasChildTest extends BaseTest
         $this->assertEquals($expectedArray, $filter->toArray());
     }
 
-    public function testSetScope()
+    public function testSetType()
     {
-        $q = new MatchAll();
+        $index = $this->prepareSearchData();
 
-        $type = 'test';
+        $filter = new HasChild(new MatchAll(), 'type_name');
+        $this->assertEquals('type_name', $filter->getParam('type'));
 
-        $scope = 'foo';
+        $filter->setType('new_type_name');
+        $this->assertEquals('new_type_name', $filter->getParam('type'));
 
-        $filter = new HasChild($q, $type);
-        $filter->setScope($scope);
+        $type = $index->getType('foo');
+        $filter = new HasChild(new MatchAll(), $type);
+        $this->assertEquals('foo', $filter->getParam('type'));
 
-        $expectedArray = array(
-            'has_child' => array(
-                'query' => $q->toArray(),
-                'type' => $type,
-                '_scope' => $scope
-            )
-        );
+        $type = $index->getType('bar');
+        $filter->setType($type);
+        $this->assertEquals('bar', $filter->getParam('type'));
 
-        $this->assertEquals($expectedArray, $filter->toArray());
+        $returnValue = $filter->setType('last');
+        $this->assertInstanceOf('Elastica\Filter\HasChild', $returnValue);
+    }
+
+    public function testSetMinimumChildrenCount()
+    {
+        $query = new MatchAll;
+        $filter = new HasChild($query, 'test');
+
+        $filter->setMinimumChildrenCount(2);
+        $this->assertEquals(2, $filter->getParam('min_children'));
+
+        $returnValue = $filter->setMinimumChildrenCount(2);
+        $this->assertInstanceOf('Elastica\Filter\HasChild', $returnValue);
+    }
+
+    public function testSetMaximumChildrenCount()
+    {
+        $query = new MatchAll;
+        $filter = new HasChild($query, 'test');
+
+        $filter->setMaximumChildrenCount(10);
+        $this->assertEquals(10, $filter->getParam('max_children'));
+
+        $returnValue = $filter->setMaximumChildrenCount(10);
+        $this->assertInstanceOf('Elastica\Filter\HasChild', $returnValue);
     }
 
     public function testFilterInsideHasChild()

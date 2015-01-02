@@ -118,4 +118,16 @@ class NestedTest extends BaseTest
         $r = $s->search($f);
         $this->assertEquals(2, $r->getTotalHits());
     }
+
+    public function testSetJoin()
+    {
+        $filter = new Nested();
+
+        $this->assertTrue($filter->setJoin(true)->getParam('join'));
+
+        $this->assertFalse($filter->setJoin(false)->getParam('join'));
+
+        $returnValue = $filter->setJoin(true);
+        $this->assertInstanceOf('Elastica\Filter\Nested', $returnValue);
+    }
 }

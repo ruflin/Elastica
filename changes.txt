@@ -1,5 +1,11 @@
 CHANGES
 
+2014-12-30
+- Added: Filter\Range::setExecution, Filter\Terms::setExecution, Filter\Missing::setExistence, Filter\Missing::setNullValue, Filter\HasChild::setMinumumChildrenCount, Filter\HasChild::Filter\HasChild::setMaximumChildrenCount, Filter\Indices::addIndex
+- Filter\HasChild::setType, Filter\HasParent::setType now support Type instance as argument
+- Filter\Indices::setIndices, Filter\Indices::addIndex now support Index instance as argument
+- (BC break) Removed as added by mistake: Filter\HasChild::setScope, Filter\HasParent::setScope, Filter\Nested::setScoreMode, Filter\Bool::setBoost
+
 2014-12-14
 - Added fluent interface to Elastica\Query::setRescore #733
 

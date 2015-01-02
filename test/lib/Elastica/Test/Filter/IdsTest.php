@@ -198,4 +198,18 @@ class IdsTest extends BaseTest
         $filterType = new Type();
         $filter = new Ids();
     }
+
+    public function testAddType()
+    {
+        $filter = new Ids();
+
+        $filter->addType('foo');
+        $this->assertEquals(array('foo'), $filter->getParam('type'));
+
+        $filter->addType($this->_type);
+        $this->assertEquals(array('foo', $this->_type->getName()), $filter->getParam('type'));
+
+        $returnValue = $filter->addType('bar');
+        $this->assertInstanceOf('Elastica\Filter\Ids', $returnValue);
+    }
 }

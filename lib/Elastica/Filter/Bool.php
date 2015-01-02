@@ -10,15 +10,10 @@ use Elastica\Exception\InvalidException;
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/bool-query.html
+ * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-bool-filter.html
  */
 class Bool extends AbstractFilter
 {
-    /**
-     * @var float
-     */
-    protected $_boost = 1.0;
-
     /**
      * Must
      *
@@ -133,18 +128,4 @@ class Bool extends AbstractFilter
 
         return $args;
     }
-
-    /**
-     * Sets the boost value for this filter
-     *
-     * @param  float                      $boost Boost
-     * @return \Elastica\Filter\Bool Current object
-     */
-    public function setBoost($boost)
-    {
-        $this->_boost = $boost;
-
-        return $this;
-    }
-
 }

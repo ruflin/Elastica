@@ -129,4 +129,15 @@ class Terms extends AbstractFilter
 
         return array('terms' => $this->_params);
     }
+
+    /**
+     * Set execution mode
+     *
+     * @param string                  $execution Options: "bool", "and", "or", "plain" or "fielddata"
+     * @return \Elastica\Filter\Terms
+     */
+    public function setExecution($execution)
+    {
+        return $this->setParam('execution', (string) $execution);
+    }
 }
