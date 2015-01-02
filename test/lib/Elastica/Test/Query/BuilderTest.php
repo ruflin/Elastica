@@ -245,6 +245,7 @@ class BuilderTest extends BaseTest
 
     /**
      * @expectedException \Elastica\Exception\InvalidException
+     * @expectedExceptionMessage The produced query is not a valid json string : "{{}"
      * @covers \Elastica\Query\Builder::toArray
      */
     public function testToArrayWithInvalidData()
