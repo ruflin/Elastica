@@ -9,6 +9,7 @@ use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
+use Elastica\Rescore\AbstractRescore;
 use Elastica\Suggest\AbstractSuggest;
 use Elastica\Suggest;
 
@@ -393,11 +394,12 @@ class Query extends Param
     /**
      * Add a Rescore
      *
-     * @param  \Elastica\Rescore\AbstractRescore $suggest suggestion object
+     * @param  \Elastica\Rescore\AbstractRescore $rescore suggestion object
+     * @return \Elastica\Query Current object
      */
     public function setRescore($rescore)
     {
-        $this->setParam('rescore', $rescore->toArray());
+        return $this->setParam('rescore', $rescore->toArray());
     }
 
     /**
@@ -416,7 +418,7 @@ class Query extends Param
      * Sets post_filter argument for the query. The filter is applied after the query has executed
      *
      * @param   array|\Elastica\Filter\AbstractFilter $filter
-     * @return  \Elastica\Param
+     * @return  \Elastica\Query Current object
      * @link    http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-post-filter.html
      */
     public function setPostFilter($filter)
