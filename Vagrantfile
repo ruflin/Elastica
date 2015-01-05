@@ -7,6 +7,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.network :private_network, ip: "10.10.10.10"
 
+  config.vm.provision "shell" do |sh|
+    sh.inline = "/bin/bash /vagrant/ansible/provision.sh"
+  end
+
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", "512"]
   end

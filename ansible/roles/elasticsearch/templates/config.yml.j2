@@ -1,0 +1,26 @@
+#################################### Index ####################################
+
+index.number_of_shards: 2
+index.number_of_replicas: 0
+
+#################################### Plugin ###################################
+
+plugin.mandatory: mapper-attachments,geocluster-facet,transport-thrift
+
+############################## Network And HTTP ###############################
+
+http.port: 9200
+thrift.port: 9500
+
+################################## Discovery ##################################
+
+discovery.zen.ping.multicast.enabled: false
+
+################################## UDP ########################################
+
+bulk.udp.enabled: true
+bulk.udp.bulk_actions: 5
+
+################################## Scripting ##################################
+
+script.disable_dynamic: false

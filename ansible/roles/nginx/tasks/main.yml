@@ -1,0 +1,26 @@
+---
+
+- name: install nginx
+  apt: >
+    force=yes
+    name=nginx
+    state=present
+    update_cache=no
+
+- name: create mime.types
+  template: >
+    dest=/etc/nginx/mime.types
+    src=mime.types.j2
+  notify: restart nginx
+
+- name: create nginx.conf
+  template: >
+    dest=/etc/nginx/nginx.conf
+    src=nginx.conf.j2
+  notify: restart nginx
+
+- name: start nginx
+  service: >
+    enabled=yes
+    name=nginx
+    state=started
