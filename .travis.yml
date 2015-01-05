@@ -11,8 +11,6 @@ matrix:
     - php: 5.6
 
 env:
-  global:
-    - ES_WAIT_ON_MAPPING_CHANGE=true
   matrix:
     - ES_COMPOSER_NODEV=no
     - ES_COMPOSER_NODEV=yes
