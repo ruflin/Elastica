@@ -27,4 +27,5 @@ script:
 after_script:
   - cat /var/log/elasticsearch/*.log
   - cat /var/log/nginx/*.log
+  - cat build/logs/phpunit-tap.log
   - php vendor/bin/coveralls -v
