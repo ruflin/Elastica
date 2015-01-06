@@ -1,5 +1,8 @@
 CHANGES
 
+2015-01-07
+- Added Elastica\Aggregation\TopHits #718
+
 2014-12-30
 - Added: Filter\Range::setExecution, Filter\Terms::setExecution, Filter\Missing::setExistence, Filter\Missing::setNullValue, Filter\HasChild::setMinumumChildrenCount, Filter\HasChild::Filter\HasChild::setMaximumChildrenCount, Filter\Indices::addIndex
 - Filter\HasChild::setType, Filter\HasParent::setType now support Type instance as argument
