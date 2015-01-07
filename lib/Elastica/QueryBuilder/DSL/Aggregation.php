@@ -22,6 +22,7 @@ use Elastica\Aggregation\ReverseNested;
 use Elastica\Aggregation\Stats;
 use Elastica\Aggregation\Sum;
 use Elastica\Aggregation\Terms;
+use Elastica\Aggregation\TopHits;
 use Elastica\Aggregation\ValueCount;
 use Elastica\Exception\NotImplementedException;
 use Elastica\Filter\AbstractFilter;
@@ -184,7 +185,7 @@ class Aggregation implements DSL
      */
     public function top_hits($name)
     {
-        throw new NotImplementedException();
+        return new TopHits($name);
     }
 
     /**
