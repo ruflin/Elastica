@@ -290,12 +290,12 @@ class TopHitsTest extends BaseAggregationTest
 
     public function testAggregateWithHighlight()
     {
-        $queryString = new \Elastica\Query\SimpleQueryString('linux', array('title'));
+        $queryString = new SimpleQueryString('linux', array('title'));
 
         $aggr = new TopHits('top_tag_hits');
         $aggr->setHighlight(array('fields' => array('title' => new \stdClass())));
 
-        $query = new \Elastica\Query($queryString);
+        $query = new Query($queryString);
         $query->addAggregation($aggr);
 
         $resultSet = $this->_index->search($query);

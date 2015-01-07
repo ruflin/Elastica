@@ -96,7 +96,7 @@ class TopHits extends AbstractAggregation
     /**
      * Set script fields
      *
-     * @param  array|\Elastica\ScriptFields $scriptFields Script fields
+     * @param  array|\Elastica\ScriptFields $scriptFields
      * @return self
      */
     public function setScriptFields($scriptFields)
@@ -109,10 +109,10 @@ class TopHits extends AbstractAggregation
     }
 
     /**
-     * Adds a Script to the query
+     * Adds a Script to the aggregation
      *
      * @param  string           $name
-     * @param  \Elastica\Script $script Script object
+     * @param  \Elastica\Script $script
      * @return self
      */
     public function addScriptField($name, Script $script)
