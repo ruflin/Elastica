@@ -1,0 +1,79 @@
+---
+
+- name: import ppa:webupd8team/java gpg key
+  apt_key: >
+    id=EEA14886
+    keyserver=keyserver.ubuntu.com
+    state=present
+
+- name: add ppa:webupd8team/java repository
+  apt_repository: >
+    repo="deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main"
+    state=present
+    update_cache=yes
+
+- name: accept oracle license
+  shell: >
+    echo "oracle-java7-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
+
+- name: install java
+  apt: >
+    force=yes
+    name={{ item }}
+    state=present
+    update_cache=no
+  with_items:
+    - oracle-java7-installer
+    - oracle-java7-set-default
+
+- name: import elasticsearch gpg key
+  apt_key: >
+    id=D88E42B4
+    keyserver=pgp.mit.edu
+    state=present
+
+- name: add elasticsearch repository
+  apt_repository: >
+    repo="deb http://packages.elasticsearch.org/elasticsearch/{{ ES_SHORT_VER }}/debian stable main"
+    state=present
+    update_cache=yes
+
+- name: install elasticsearch
+  apt: >
+    force=yes
+    name=elasticsearch={{ ES_VER }}
+    state=present
+    update_cache=no
+
+- name: install mapper-attachments plugin
+  command: >
+    creates=/usr/share/elasticsearch/plugins/mapper-attachments
+    /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/{{ ES_MAPPER_ATTACHMENTS_VER }}
+
+- name: install geocluster-facet plugin
+  command: >
+    creates=/usr/share/elasticsearch/plugins/geocluster-facet
+    /usr/share/elasticsearch/bin/plugin -install geocluster-facet --url https://github.com/zenobase/geocluster-facet/releases/download/{{ ES_GEOCLUSTER_FACET_VER }}/geocluster-facet-{{ ES_GEOCLUSTER_FACET_VER }}.jar
+
+- name: install transport-thrift plugin
+  command: >
+    creates=/usr/share/elasticsearch/plugins/transport-thrift
+    /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/{{ ES_TRANSPORT_THRIFT_VER }}
+
+- name: create elasticsearch config
+  template: >
+    dest=/etc/elasticsearch/elasticsearch.yml
+    src=config.yml.j2
+  notify: restart elasticsearch
+
+- name: create elasticsearch service config
+  template: >
+    dest=/etc/default/elasticsearch
+    src=service-default.j2
+  notify: restart elasticsearch
+
+- name: start elasticsearch
+  service: >
+    enabled=yes
+    name=elasticsearch
+    state=started

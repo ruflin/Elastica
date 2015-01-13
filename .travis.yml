@@ -11,31 +11,21 @@ matrix:
     - php: 5.6
 
 env:
-  global:
-    - ES_VER=1.3.4
-    - ES_MAPPER_ATTACHMENTS_VER=2.0.0.RC1
-    - ES_TRANSPORT_THRIFT_VER=2.0.0
-    - ES_GEOCLUSTER_FACET_VER=0.0.10
-    - ES_WAIT_ON_MAPPING_CHANGE=true
-    - MEMCACHE_VER=3.0.8
   matrix:
-    - ES_REQUIRE=dev
-    - ES_REQUIRE=no-dev
-    
-services:
-    - memcached
+    - ES_COMPOSER_NODEV=no
+    - ES_COMPOSER_NODEV=yes
+
+install:
+  - /bin/bash ansible/provision.sh
 
 before_script:
-    - composer self-update
-    - composer --${ES_REQUIRE} --prefer-source install
-    - ./test/bin/install_php_memcache.sh
-    - ./test/bin/run_elasticsearch.sh
-    - ./test/bin/run_proxy.sh
+  - mkdir -p build/logs
 
 script:
-    - mkdir -p build/logs
-    - phpunit --coverage-clover build/logs/clover.xml -c test/
+  - phpunit -c test/
 
 after_script:
-    - ./test/bin/show_logs.sh
-    - php vendor/bin/coveralls -v
+  - cat /var/log/elasticsearch/*.log
+  - cat /var/log/nginx/*.log
+  - cat build/logs/phpunit-tap.log
+  - php vendor/bin/coveralls -v

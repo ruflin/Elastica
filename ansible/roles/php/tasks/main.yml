@@ -1,0 +1,32 @@
+---
+
+- name: install php
+  apt: >
+    force=yes
+    name={{ item }}
+    state=present
+    update_cache=no
+  with_items:
+    - php5-cli
+    - php5-curl
+    - php5-xdebug
+    - php5-memcache
+
+- name: install phar packages
+  get_url: >
+    dest={{ item.dest }}
+    url={{ item.url }}
+    mode=0755
+  with_items:
+    - { dest: "/usr/local/bin/php-cs-fixer", url: "http://get.sensiolabs.org/php-cs-fixer.phar" }
+    - { dest: "/usr/local/bin/phpdoc", url: "http://phpdoc.org/phpDocumentor.phar" }
+    - { dest: "/usr/local/bin/phpunit", url: "https://phar.phpunit.de/phpunit.phar" }
+    - { dest: "/usr/local/bin/composer", url: "https://getcomposer.org/composer.phar" }
+
+- name: install dependencies from composer.json
+  composer: >
+    command=install
+    no_dev={{ ES_COMPOSER_NODEV }}
+    optimize_autoloader=yes
+    prefer_source=yes
+    working_dir={{ ES_PROJECT_ROOT }}

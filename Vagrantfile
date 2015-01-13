@@ -1,14 +1,18 @@
-# Elastica debian image
-# 
-# All passwords and username (db, ...) are root / root
-#
-# The image has 2GB of memory and a size of 10GB
 
-Vagrant::Config.run do |config|
+Vagrant.require_version ">= 1.4.0"
 
-  config.vm.box = "debian-6.0.3-64-elastica-20120115"
-  config.vm.box_url = "http://files.ruflin.com/vagrant/debian-6.0.3-64-elastica-20120528.box"
-  config.vm.network :hostonly, "10.10.10.10"
-  
-  config.vm.share_folder "project", "/project", "."
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "ubuntu/precise32"
+
+  config.vm.network :private_network, ip: "10.10.10.10"
+
+  config.vm.provision "shell" do |sh|
+    sh.inline = "/bin/bash /vagrant/ansible/provision.sh"
+  end
+
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "512"]
+  end
+
 end
