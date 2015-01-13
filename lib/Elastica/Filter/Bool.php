@@ -80,14 +80,12 @@ class Bool extends AbstractFilter
     {
         if ($args instanceof AbstractFilter) {
             $args = $args->toArray();
-        }
-        else if (!is_array($args)) {
+        } elseif (!is_array($args)) {
             throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Filter');
-        }
-        else{
+        } else{
             $parsedArgs = array();
-            foreach($args as $filter){
-                if($filter instanceof AbstractFilter){
+            foreach ($args as $filter){
+                if ($filter instanceof AbstractFilter){
                     $parsedArgs[] = $filter->toArray();
                 }
             }
