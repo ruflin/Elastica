@@ -38,6 +38,7 @@ class Search
     const OPTION_SEARCH_TYPE_QUERY_AND_FETCH = 'query_and_fetch';
     const OPTION_SEARCH_TYPE_SUGGEST = 'suggest';
     const OPTION_SEARCH_TYPE_SCROLL = 'scroll';
+    const OPTION_SEARCH_IGNORE_UNAVAILABLE = 'ignore_unavailable';
 
     /**
      * Array of indices
@@ -271,6 +272,7 @@ class Search
             case self::OPTION_SCROLL:
             case self::OPTION_SCROLL_ID:
             case self::OPTION_SEARCH_TYPE_SUGGEST:
+            case self::OPTION_SEARCH_IGNORE_UNAVAILABLE:
                 return true;
         }
 

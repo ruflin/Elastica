@@ -4,6 +4,7 @@ namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Query\Builder;
 use Elastica\Query\MatchAll;
@@ -497,4 +498,27 @@ class SearchTest extends BaseTest
         $search = new Search($this->_getClient());
         $this->assertInstanceOf('Elastica\ScanAndScroll', $search->scanAndScroll());
     }
+
+
+    public function testIgnoreUnavailableOption()
+    {
+        $client = $this->_getClient();
+        $index = $client->getIndex('elastica_7086b4c2ee585bbb6740ece5ed7ece01');
+        $query = new MatchAll();
+
+        $search = new Search($client);
+        $search->addIndex($index);
+
+        $exception = null;
+        try {
+            $search->search($query);
+        } catch (ResponseException $e) {
+            $exception = $e;
+        }
+        $this->assertEquals('IndexMissingException', $exception->getElasticsearchException()->getExceptionName());
+
+        $results = $search->search($query, array(Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true));
+        $this->assertInstanceOf('\Elastica\ResultSet', $results);
+    }
+
 }
