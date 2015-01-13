@@ -10,15 +10,6 @@ use Elastica\Test\Base as BaseTest;
 
 class SettingsTest extends BaseTest
 {
-    public function setUp() {
-    	$this->testIndex = $this->_createIndex('test' . rand());
-    }
-	
-    public function tearDown()		
-   	{		
-		$this->testIndex->getSettings()->setReadOnly(false);
-   	    $this->testIndex->delete();		
-   	}
 	
 	public function testGet()
     {
@@ -193,7 +184,7 @@ class SettingsTest extends BaseTest
 
     public function testSetReadOnly()
     {
-        $index = $this->testIndex;
+        $index = $this->_createIndex('test' . rand());;
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
         $index->getSettings()->setReadOnly(false);
@@ -211,8 +202,6 @@ class SettingsTest extends BaseTest
         // Try to add doc to read only index
         $index->getSettings()->setReadOnly(true);
 
-
-var_dump($index->getSettings());
         $this->assertEquals('true', $index->getSettings()->get('blocks.read_only'));
 
         try {
