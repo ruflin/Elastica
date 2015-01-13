@@ -10,7 +10,17 @@ use Elastica\Test\Base as BaseTest;
 
 class SettingsTest extends BaseTest
 {
-    public function testGet()
+    public function setUp() {
+    	$this->testIndex = $this->_createIndex('test' . rand());
+    }
+	
+    public function tearDown()		
+   	{		
+		$this->testIndex->getSettings()->setReadOnly(false);
+   	    $this->testIndex->delete();		
+   	}
+	
+	public function testGet()
     {
         $indexName = 'elasticatest';
 
@@ -183,7 +193,7 @@ class SettingsTest extends BaseTest
 
     public function testSetReadOnly()
     {
-        $index = $this->_createIndex('test');
+        $index = $this->testIndex;
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
         $index->getSettings()->setReadOnly(false);
@@ -200,6 +210,9 @@ class SettingsTest extends BaseTest
 
         // Try to add doc to read only index
         $index->getSettings()->setReadOnly(true);
+
+
+var_dump($index->getSettings());
         $this->assertEquals('true', $index->getSettings()->get('blocks.read_only'));
 
         try {
@@ -226,7 +239,7 @@ class SettingsTest extends BaseTest
 
     public function testGetSetBlocksRead()
     {
-        $index = $this->_createIndex('elastica-test');
+        $index = $this->_createIndex('elastica-test' . '123');
         $index->refresh();
         $settings = $index->getSettings();
 
@@ -246,7 +259,7 @@ class SettingsTest extends BaseTest
 
     public function testGetSetBlocksWrite()
     {
-        $index = $this->_createIndex('elastica-test');
+        $index = $this->_createIndex('elastica-test' . '432');
         $index->refresh();
         $settings = $index->getSettings();
 
@@ -266,7 +279,7 @@ class SettingsTest extends BaseTest
 
     public function testGetSetBlocksMetadata()
     {
-        $index = $this->_createIndex('elastica-test');
+        $index = $this->_createIndex('elastica-test' . '534');
         $index->refresh();
         $settings = $index->getSettings();
 

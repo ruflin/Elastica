@@ -1,5 +1,8 @@
 CHANGES
 
+2015-01-07
+- Added Elastica\Aggregation\TopHits #718
+
 2015-01-05
 - Vagrantfile updated #423
 - Plugins updated to ES 1.3.4

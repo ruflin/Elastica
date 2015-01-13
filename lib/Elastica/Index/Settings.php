@@ -67,6 +67,7 @@ class Settings
     {
         $requestData = $this->request()->getData();
         $data = reset($requestData);
+
         $settings = $data['settings']['index'];
 
         if (!empty($setting)) {
@@ -313,6 +314,9 @@ class Settings
 
         $data = array('index' => $data);
 
+		var_dump($data);
+		var_dump($path);
+		var_dump($method);
         return $this->getIndex()->request($path, $method, $data);
     }
 }
