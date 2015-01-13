@@ -314,9 +314,6 @@ class Settings
 
         $data = array('index' => $data);
 
-		var_dump($data);
-		var_dump($path);
-		var_dump($method);
         return $this->getIndex()->request($path, $method, $data);
     }
 }
