@@ -8,7 +8,6 @@ use Elastica\Exception\ResponseException;
 use Elastica\JSON;
 use Elastica\Request as ElasticaRequest;
 use Elastica\Response as ElasticaResponse;
-use Elastica\Transport\AbstractTransport;
 use Ivory\HttpAdapter\HttpAdapterInterface;
 use Ivory\HttpAdapter\Message\Stream\StringStream;
 use Ivory\HttpAdapter\Message\Request as HttpAdapterRequest;
@@ -41,12 +40,12 @@ class HttpAdapter extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param  \Elastica\Request $elasticaRequest
-     * @param  array $params Host, Port, ...
+     * @param  \Elastica\Request                            $elasticaRequest
+     * @param  array                                        $params          Host, Port, ...
      * @throws \Elastica\Exception\ConnectionException
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
-     * @return \Elastica\Response                    Response object
+     * @return \Elastica\Response                           Response object
      */
     public function exec(ElasticaRequest $elasticaRequest, array $params)
     {
@@ -93,12 +92,12 @@ class HttpAdapter extends AbstractTransport
      */
     protected function _createElasticaResponse(HttpAdapterResponse $httpAdapterResponse)
     {
-        return new ElasticaResponse((string)$httpAdapterResponse->getBody(), $httpAdapterResponse->getStatusCode());
+        return new ElasticaResponse((string) $httpAdapterResponse->getBody(), $httpAdapterResponse->getStatusCode());
     }
 
     /**
      * @param ElasticaRequest $elasticaRequest
-     * @param Connection $connection
+     * @param Connection      $connection
      *
      * @return HttpAdapterRequest
      */
@@ -109,7 +108,6 @@ class HttpAdapter extends AbstractTransport
         $method = $elasticaRequest->getMethod();
         $headers = $connection->hasConfig('headers') ?: array();
         if (!empty($data) || '0' === $data) {
-
             if ($method == ElasticaRequest::GET) {
                 $method = ElasticaRequest::POST;
             }
@@ -133,7 +131,7 @@ class HttpAdapter extends AbstractTransport
     }
 
     /**
-     * @param ElasticaRequest $request
+     * @param ElasticaRequest      $request
      * @param \Elastica\Connection $connection
      *
      * @return string
@@ -145,7 +143,7 @@ class HttpAdapter extends AbstractTransport
         if (!empty($url)) {
             $baseUri = $url;
         } else {
-            $baseUri = $this->_scheme . '://' . $connection->getHost() . ':' . $connection->getPort() . '/' . $connection->getPath();
+            $baseUri = $this->_scheme.'://'.$connection->getHost().':'.$connection->getPort().'/'.$connection->getPath();
         }
 
         $baseUri .= $request->getPath();
@@ -153,7 +151,7 @@ class HttpAdapter extends AbstractTransport
         $query = $request->getQuery();
 
         if (!empty($query)) {
-            $baseUri .= '?' . http_build_query($query);
+            $baseUri .= '?'.http_build_query($query);
         }
 
         return $baseUri;

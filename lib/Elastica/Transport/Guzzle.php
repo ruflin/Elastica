@@ -6,7 +6,6 @@ use Elastica\Exception\Connection\HttpException;
 use Elastica\Exception\Connection\GuzzleException;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
-use Elastica\Exception\InvalidException;
 use Elastica\Connection;
 use Elastica\Request;
 use Elastica\Response;
@@ -43,12 +42,12 @@ class Guzzle extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param  \Elastica\Request $request
-     * @param  array $params Host, Port, ...
+     * @param  \Elastica\Request                            $request
+     * @param  array                                        $params  Host, Port, ...
      * @throws \Elastica\Exception\ConnectionException
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
-     * @return \Elastica\Response                    Response object
+     * @return \Elastica\Response                           Response object
      */
     public function exec(Request $request, array $params)
     {
@@ -71,7 +70,6 @@ class Guzzle extends AbstractTransport
 
             $data = $request->getData();
             if (!empty($data) || '0' === $data) {
-
                 if ($req->getMethod() == Request::GET) {
                     $req->setMethod(Request::POST);
                 }
@@ -93,7 +91,7 @@ class Guzzle extends AbstractTransport
             $res = $client->send($req);
             $end = microtime(true);
 
-            $response = new Response((string)$res->getBody(), $res->getStatusCode());
+            $response = new Response((string) $res->getBody(), $res->getStatusCode());
 
             if (defined('DEBUG') && DEBUG) {
                 $response->setQueryTime($end - $start);
@@ -102,7 +100,7 @@ class Guzzle extends AbstractTransport
             $response->setTransferInfo(
                 array(
                     'request_header' => $request->getMethod(),
-                    'http_code' => $res->getStatusCode()
+                    'http_code' => $res->getStatusCode(),
                 )
             );
 
@@ -115,19 +113,17 @@ class Guzzle extends AbstractTransport
             }
 
             return $response;
-
         } catch (ClientException $e) {
             // ignore 4xx errors
         } catch (TransferException $e) {
             throw new GuzzleException($e, $request, new Response($e->getMessage()));
         }
-
     }
 
     /**
      * Return Guzzle resource
      *
-     * @param  bool $persistent False if not persistent connection
+     * @param  bool     $persistent False if not persistent connection
      * @return resource Connection resource
      */
     protected function _getGuzzleClient($baseUrl, $persistent = true)
@@ -142,7 +138,7 @@ class Guzzle extends AbstractTransport
     /**
      * Builds the base url for the guzzle connection
      *
-     * @param  \Elastica\Connection $connection
+     * @param \Elastica\Connection $connection
      */
     protected function _getBaseUrl(Connection $connection)
     {
@@ -152,26 +148,27 @@ class Guzzle extends AbstractTransport
         if (!empty($url)) {
             $baseUri = $url;
         } else {
-            $baseUri = $this->_scheme . '://' . $connection->getHost() . ':' . $connection->getPort() . '/' . $connection->getPath();
+            $baseUri = $this->_scheme.'://'.$connection->getHost().':'.$connection->getPort().'/'.$connection->getPath();
         }
+
         return rtrim($baseUri, '/');
     }
 
     /**
      * Builds the action path url for each request
      *
-     * @param  \Elastica\Request $request
+     * @param \Elastica\Request $request
      */
     protected function _getActionPath(Request $request)
     {
         $action = $request->getPath();
         if ($action) {
-            $action = '/'. ltrim($action, '/');
+            $action = '/'.ltrim($action, '/');
         }
         $query = $request->getQuery();
 
         if (!empty($query)) {
-            $action .= '?' . http_build_query($query);
+            $action .= '?'.http_build_query($query);
         }
 
         return $action;

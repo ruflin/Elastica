@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Query;
+
 use Elastica\Type;
 
 /**
@@ -26,7 +27,7 @@ class Ids extends AbstractQuery
      * Creates filter object
      *
      * @param string|\Elastica\Type $type Type to filter on
-     * @param array                $ids  List of ids
+     * @param array                 $ids  List of ids
      */
     public function __construct($type = null, array $ids = array())
     {
@@ -37,7 +38,7 @@ class Ids extends AbstractQuery
     /**
      * Adds one more filter to the and filter
      *
-     * @param  string                  $id Adds id to filter
+     * @param  string              $id Adds id to filter
      * @return \Elastica\Query\Ids Current object
      */
     public function addId($id)
@@ -50,8 +51,8 @@ class Ids extends AbstractQuery
     /**
      * Adds one more type to query
      *
-     * @param  string|\Elastica\Type    $type Type name or object
-     * @return \Elastica\Query\Ids Current object
+     * @param  string|\Elastica\Type $type Type name or object
+     * @return \Elastica\Query\Ids   Current object
      */
     public function addType($type)
     {
@@ -90,7 +91,7 @@ class Ids extends AbstractQuery
     /**
      * Sets the ids to filter
      *
-     * @param  array|string            $ids List of ids
+     * @param  array|string        $ids List of ids
      * @return \Elastica\Query\Ids Current object
      */
     public function setIds($ids)

@@ -14,7 +14,7 @@ class IndexDocument extends AbstractDocument
     protected $_opType = self::OP_TYPE_INDEX;
 
     /**
-     * @param \Elastica\Document $document
+     * @param  \Elastica\Document                  $document
      * @return \Elastica\Bulk\Action\IndexDocument
      */
     public function setDocument(Document $document)
@@ -27,7 +27,7 @@ class IndexDocument extends AbstractDocument
     }
 
     /**
-     * @param \Elastica\AbstractUpdateAction $source
+     * @param  \Elastica\AbstractUpdateAction $source
      * @return array
      */
     protected function _getMetadata(AbstractUpdateAction $action)

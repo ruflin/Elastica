@@ -1,7 +1,7 @@
 <?php
 
 namespace Elastica\Index;
-use Elastica\Cluster;
+
 use Elastica\Index as BaseIndex;
 use Elastica\Request;
 
@@ -72,7 +72,7 @@ class Status
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {
-                return null;
+                return;
             }
         }
 
@@ -87,6 +87,7 @@ class Status
     public function getAliases()
     {
         $responseData = $this->getIndex()->request('_aliases', \Elastica\Request::GET)->getData();
+
         return array_keys($responseData[$this->getIndex()->getName()]['aliases']);
     }
 
@@ -98,6 +99,7 @@ class Status
     public function getSettings()
     {
         $responseData = $this->getIndex()->request('_settings', \Elastica\Request::GET)->getData();
+
         return $responseData[$this->getIndex()->getName()]['settings'];
     }
 

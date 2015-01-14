@@ -2,7 +2,6 @@
 
 namespace Elastica\Suggest;
 
-
 use Elastica\Param;
 
 /**
@@ -33,17 +32,18 @@ abstract class AbstractSuggest extends Param
 
     /**
      * Suggest text must be set either globally or per suggestion
-     * @param string $text
+     * @param  string                            $text
      * @return \Elastica\Suggest\AbstractSuggest
      */
     public function setText($text)
     {
         $this->_text = $text;
+
         return $this;
     }
 
     /**
-     * @param string $field
+     * @param  string                            $field
      * @return \Elastica\Suggest\AbstractSuggest
      */
     public function setField($field)
@@ -52,7 +52,7 @@ abstract class AbstractSuggest extends Param
     }
 
     /**
-     * @param int $size
+     * @param  int                               $size
      * @return \Elastica\Suggest\AbstractSuggest
      */
     public function setSize($size)
@@ -61,7 +61,7 @@ abstract class AbstractSuggest extends Param
     }
 
     /**
-     * @param int $size maximum number of suggestions to be retrieved from each shard
+     * @param  int                               $size maximum number of suggestions to be retrieved from each shard
      * @return \Elastica\Suggest\AbstractSuggest
      */
     public function setShardSize($size)
@@ -87,6 +87,7 @@ abstract class AbstractSuggest extends Param
         if (isset($this->_text)) {
             $array['text'] = $this->_text;
         }
+
         return $array;
     }
 }

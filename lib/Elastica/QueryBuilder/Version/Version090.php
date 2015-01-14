@@ -93,6 +93,6 @@ class Version090 extends Version
     protected $suggesters = array(
         'term',
         'phrase',
-        'completion'
+        'completion',
     );
 }

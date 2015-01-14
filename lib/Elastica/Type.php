@@ -2,7 +2,6 @@
 
 namespace Elastica;
 
-use Elastica\Document;
 use Elastica\Exception\RuntimeException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
@@ -45,7 +44,7 @@ class Type implements SearchableInterface
      * Creates a new type object inside the given index
      *
      * @param \Elastica\Index $index Index Object
-     * @param string $name Type name
+     * @param string          $name  Type name
      */
     public function __construct(Index $index, $name)
     {
@@ -110,7 +109,7 @@ class Type implements SearchableInterface
 
     /**
      * @param $object
-     * @param Document $doc
+     * @param  Document                   $doc
      * @return Response
      * @throws Exception\RuntimeException
      */
@@ -132,8 +131,8 @@ class Type implements SearchableInterface
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
-     * @param  \Elastica\Document|\Elastica\Script $data Document with update data
-     * @param  array                $options array of query params to use for query. For possible options check es api
+     * @param  \Elastica\Document|\Elastica\Script  $data    Document with update data
+     * @param  array                                $options array of query params to use for query. For possible options check es api
      * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
@@ -194,7 +193,7 @@ class Type implements SearchableInterface
     /**
      * Uses _bulk to send documents to the server
      *
-     * @param objects[] $objects
+     * @param  objects[]                  $objects
      * @return \Elastica\Bulk\ResponseSet
      * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
      */
@@ -219,8 +218,8 @@ class Type implements SearchableInterface
     /**
      * Get the document from search index
      *
-     * @param  string $id Document id
-     * @param  array $options Options for the get request.
+     * @param  string                                $id      Document id
+     * @param  array                                 $options Options for the get request.
      * @throws \Elastica\Exception\NotFoundException
      * @throws \Elastica\Exception\ResponseException
      * @return \Elastica\Document
@@ -233,7 +232,7 @@ class Type implements SearchableInterface
         $result = $response->getData();
 
         if (!isset($result['found']) || $result['found'] === false) {
-            throw new NotFoundException('doc id ' . $id . ' not found');
+            throw new NotFoundException('doc id '.$id.' not found');
         }
 
         if (isset($result['fields'])) {
@@ -251,8 +250,8 @@ class Type implements SearchableInterface
     }
 
     /**
-     * @param string $id
-     * @param array|string $data
+     * @param  string       $id
+     * @param  array|string $data
      * @return Document
      */
     public function createDocument($id = '', $data = array())
@@ -310,8 +309,8 @@ class Type implements SearchableInterface
     /**
      * Create search object
      *
-     * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
-     * @param  int|array $options OPTIONAL Limit or associative array of options (option=>value)
+     * @param  string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
+     * @param  int|array                    $options OPTIONAL Limit or associative array of options (option=>value)
      * @return \Elastica\Search
      */
     public function createSearch($query = '', $options = null)
@@ -327,8 +326,8 @@ class Type implements SearchableInterface
     /**
      * Do a search on this type
      *
-     * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
-     * @param  int|array $options OPTIONAL Limit or associative array of options (option=>value)
+     * @param  string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
+     * @param  int|array                    $options OPTIONAL Limit or associative array of options (option=>value)
      * @return \Elastica\ResultSet          ResultSet with all results inside
      * @see \Elastica\SearchableInterface::search
      */
@@ -343,7 +342,7 @@ class Type implements SearchableInterface
      * Count docs by query
      *
      * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
-     * @return int                         number of documents matching the query
+     * @return int                          number of documents matching the query
      * @see \Elastica\SearchableInterface::count
      */
     public function count($query = '')
@@ -364,7 +363,7 @@ class Type implements SearchableInterface
     }
 
     /**
-     * @param \Elastica\Document $document
+     * @param  \Elastica\Document $document
      * @return \Elastica\Response
      */
     public function deleteDocument(Document $document)
@@ -378,9 +377,10 @@ class Type implements SearchableInterface
                 'replication',
                 'consistency',
                 'refresh',
-                'timeout'
+                'timeout',
             )
         );
+
         return $this->deleteById($document->getId(), $options);
     }
 
@@ -403,11 +403,11 @@ class Type implements SearchableInterface
     /**
      * Deletes an entry by its unique identifier
      *
-     * @param  int|string $id Document id
-     * @param array $options
+     * @param  int|string                            $id      Document id
+     * @param  array                                 $options
      * @throws \InvalidArgumentException
      * @throws \Elastica\Exception\NotFoundException
-     * @return \Elastica\Response        Response object
+     * @return \Elastica\Response                    Response object
      * @link http://www.elasticsearch.org/guide/reference/api/delete.html
      */
     public function deleteById($id, array $options = array())
@@ -423,7 +423,7 @@ class Type implements SearchableInterface
         $responseData = $response->getData();
 
         if (isset($responseData['found']) && false == $responseData['found']) {
-            throw new NotFoundException('Doc id ' . $id . ' not found and can not be deleted');
+            throw new NotFoundException('Doc id '.$id.' not found and can not be deleted');
         }
 
         return $response;
@@ -433,7 +433,7 @@ class Type implements SearchableInterface
      * Deletes the given list of ids from this type
      *
      * @param  array              $ids
-     * @param  string|false       $routing  Optional routing key for all ids
+     * @param  string|false       $routing Optional routing key for all ids
      * @return \Elastica\Response Response  object
      */
     public function deleteIds(array $ids, $routing = false)
@@ -454,6 +454,7 @@ class Type implements SearchableInterface
         if (is_string($query)) {
             // query_string queries are not supported for delete by query operations
             $options['q'] = $query;
+
             return $this->request('_query', Request::DELETE, array(), $options);
         }
         $query = Query::create($query);
@@ -478,15 +479,15 @@ class Type implements SearchableInterface
      *
      * The id in the given object has to be set
      *
-     * @param  \Elastica\Document $doc Document to query for similar objects
-     * @param  array $params OPTIONAL Additional arguments for the query
-     * @param  string|array|\Elastica\Query $query OPTIONAL Query to filter the moreLikeThis results
+     * @param  \Elastica\Document           $doc    Document to query for similar objects
+     * @param  array                        $params OPTIONAL Additional arguments for the query
+     * @param  string|array|\Elastica\Query $query  OPTIONAL Query to filter the moreLikeThis results
      * @return \Elastica\ResultSet          ResultSet with all results inside
      * @link http://www.elasticsearch.org/guide/reference/api/more-like-this.html
      */
     public function moreLikeThis(Document $doc, $params = array(), $query = array())
     {
-        $path = $doc->getId() . '/_mlt';
+        $path = $doc->getId().'/_mlt';
 
         $query = Query::create($query);
 
@@ -498,15 +499,15 @@ class Type implements SearchableInterface
     /**
      * Makes calls to the elasticsearch server based on this type
      *
-     * @param  string $path Path to call
-     * @param  string $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param  array $data OPTIONAL Arguments as array
-     * @param  array $query OPTIONAL Query params
+     * @param  string             $path   Path to call
+     * @param  string             $method Rest method to use (GET, POST, DELETE, PUT)
+     * @param  array              $data   OPTIONAL Arguments as array
+     * @param  array              $query  OPTIONAL Query params
      * @return \Elastica\Response Response object
      */
     public function request($path, $method, $data = array(), array $query = array())
     {
-        $path = $this->getName() . '/' . $path;
+        $path = $this->getName().'/'.$path;
 
         return $this->getIndex()->request($path, $method, $data, $query);
     }
@@ -532,6 +533,6 @@ class Type implements SearchableInterface
         $response = $this->getIndex()->request($this->getName(), Request::HEAD);
         $info = $response->getTransferInfo();
 
-        return (bool)($info['http_code'] == 200);
+        return (bool) ($info['http_code'] == 200);
     }
 }

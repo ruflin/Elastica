@@ -23,8 +23,8 @@ class ThriftException extends ConnectionException
 
     /**
      * @param \Thrift\Exception\TException $thriftException
-     * @param \Elastica\Request $request
-     * @param \Elastica\Response $response
+     * @param \Elastica\Request            $request
+     * @param \Elastica\Response           $response
      */
     public function __construct(TException $thriftException, Request $request = null, Response $response = null)
     {
@@ -34,7 +34,7 @@ class ThriftException extends ConnectionException
     }
 
     /**
-     * @param \Thrift\Exception\TException $thriftException
+     * @param  \Thrift\Exception\TException $thriftException
      * @return string
      */
     public function getErrorMessage(TException $thriftException)

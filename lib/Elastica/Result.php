@@ -58,8 +58,8 @@ class Result
     public function hasParam($name)
     {
         return isset($this->_hit[$name]);
-    }    
-    
+    }
+
     /**
      * Returns the hit id
      *
@@ -92,14 +92,14 @@ class Result
 
     /**
      * Returns whether result has fields
-     * 
+     *
      * @return bool
      */
     public function hasFields()
     {
         return $this->hasParam('fields');
-    }    
-    
+    }
+
     /**
      * Returns the index name of the result
      *
@@ -200,11 +200,11 @@ class Result
 
         return array_key_exists($key, $source) ? $source[$key] : null;
     }
-    
+
     /**
      * Magic function to support isset() calls
      *
-     * @param string $key Key name
+     * @param  string $key Key name
      * @return bool
      */
     public function __isset($key)

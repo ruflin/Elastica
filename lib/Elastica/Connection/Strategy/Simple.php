@@ -2,7 +2,6 @@
 
 namespace Elastica\Connection\Strategy;
 
-use Elastica\Connection\Strategy\StrategyInterface;
 use Elastica\Exception\ClientException;
 
 /**
@@ -12,20 +11,19 @@ use Elastica\Exception\ClientException;
  */
 class Simple implements StrategyInterface
 {
-    
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param  array|\Elastica\Connection[]        $connections
      * @return \Elastica\Connection
      * @throws \Elastica\Exception\ClientException
      */
     public function getConnection($connections)
     {
         foreach ($connections as $connection) {
-              if ($connection->isEnabled()) {
-                  return $connection;
-              }   
+            if ($connection->isEnabled()) {
+                return $connection;
+            }
         }
-        
+
         throw new ClientException('No enabled connection');
     }
 }

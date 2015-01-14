@@ -17,7 +17,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     protected $_position = 0;
 
     /**
-     * @param \Elastica\Response $response
+     * @param \Elastica\Response        $response
      * @param \Elastica\Bulk\Response[] $bulkResponses
      */
     public function __construct(BaseResponse $response, array $bulkResponses)

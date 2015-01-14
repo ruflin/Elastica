@@ -60,7 +60,7 @@ class Version110 extends Version
         // 'custom_boost_factor'
 
         // new in 1.1.0
-        'template'
+        'template',
     );
 
     protected $filters = array(
@@ -121,12 +121,12 @@ class Version110 extends Version
         // new in 1.1.0
         'percentiles',
         'cardinality',
-        'significant_terms'
+        'significant_terms',
     );
 
     protected $suggesters = array(
         'term',
         'phrase',
-        'completion'
+        'completion',
     );
 }

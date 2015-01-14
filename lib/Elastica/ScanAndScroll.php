@@ -10,8 +10,8 @@ namespace Elastica;
  * @author Manuel Andreo Garcia <andreo.garcia@gmail.com>
  * @link http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/scan-scroll.html
  */
-class ScanAndScroll implements \Iterator {
-
+class ScanAndScroll implements \Iterator
+{
     /**
      * time value parameter
      *
@@ -50,9 +50,10 @@ class ScanAndScroll implements \Iterator {
      *
      * @param Search $search
      * @param string $expiryTime
-     * @param int $sizePerShard
+     * @param int    $sizePerShard
      */
-    public function __construct(Search $search, $expiryTime = '1m', $sizePerShard = 1000) {
+    public function __construct(Search $search, $expiryTime = '1m', $sizePerShard = 1000)
+    {
         $this->_search = $search;
         $this->expiryTime = $expiryTime;
         $this->sizePerShard = $sizePerShard;
@@ -64,7 +65,8 @@ class ScanAndScroll implements \Iterator {
      * @link http://php.net/manual/en/iterator.current.php
      * @return ResultSet
      */
-    public function current() {
+    public function current()
+    {
         return $this->_currentResultSet;
     }
 
@@ -74,7 +76,8 @@ class ScanAndScroll implements \Iterator {
      * @link http://php.net/manual/en/iterator.next.php
      * @return void
      */
-    public function next() {
+    public function next()
+    {
         $this->_scroll();
     }
 
@@ -84,7 +87,8 @@ class ScanAndScroll implements \Iterator {
      * @link http://php.net/manual/en/iterator.key.php
      * @return string
      */
-    public function key() {
+    public function key()
+    {
         return $this->_lastScrollId;
     }
 
@@ -94,7 +98,8 @@ class ScanAndScroll implements \Iterator {
      * @link http://php.net/manual/en/iterator.valid.php
      * @return boolean
      */
-    public function valid() {
+    public function valid()
+    {
         return
             $this->_nextScrollId !== null
             && $this->_currentResultSet !== null
@@ -107,7 +112,8 @@ class ScanAndScroll implements \Iterator {
      * @throws \Elastica\Exception\InvalidException
      * @return void
      */
-    public function rewind() {
+    public function rewind()
+    {
         $this->_search->getQuery()->setSize($this->sizePerShard);
 
         $this->_search->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_SCAN);
@@ -125,7 +131,8 @@ class ScanAndScroll implements \Iterator {
      * @throws \Elastica\Exception\InvalidException
      * @return void
      */
-    protected function _scroll() {
+    protected function _scroll()
+    {
         $this->_search->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_SCROLL);
         $this->_search->setOption(Search::OPTION_SCROLL_ID, $this->_nextScrollId);
 
@@ -138,13 +145,13 @@ class ScanAndScroll implements \Iterator {
      * Save last scroll id and extract the new one if possible
      * @param ResultSet $resultSet
      */
-    protected function _setScrollId(ResultSet $resultSet) {
+    protected function _setScrollId(ResultSet $resultSet)
+    {
         $this->_lastScrollId = $this->_nextScrollId;
 
         $this->_nextScrollId = null;
-        if($resultSet->getResponse()->isOk()) {
+        if ($resultSet->getResponse()->isOk()) {
             $this->_nextScrollId = $resultSet->getResponse()->getScrollId();
         }
     }
-
-} 
+}

@@ -47,7 +47,7 @@ class Info
      * Create new info object for node
      *
      * @param \Elastica\Node $node   Node object
-     * @param array         $params List of params to return. Can be: settings, os, process, jvm, thread_pool, network, transport, http
+     * @param array          $params List of params to return. Can be: settings, os, process, jvm, thread_pool, network, transport, http
      */
     public function __construct(BaseNode $node, array $params = array())
     {
@@ -73,7 +73,7 @@ class Info
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {
-                return null;
+                return;
             }
         }
 
@@ -117,26 +117,28 @@ class Info
      */
     public function getPlugins()
     {
-        if(!in_array('plugins', $this->_params)) {
+        if (!in_array('plugins', $this->_params)) {
             //Plugin data was not retrieved when refresh() was called last. Get it now.
             $this->_params[] = 'plugins';
             $this->refresh($this->_params);
         }
+
         return $this->get('plugins');
     }
 
     /**
      * Check if the given plugin is installed on this node
-     * @param string $name plugin name
-     * @return bool true if the plugin is installed, false otherwise
+     * @param  string $name plugin name
+     * @return bool   true if the plugin is installed, false otherwise
      */
     public function hasPlugin($name)
     {
-        foreach($this->getPlugins() as $plugin) {
-            if($plugin['name'] == $name) {
+        foreach ($this->getPlugins() as $plugin) {
+            if ($plugin['name'] == $name) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -173,19 +175,19 @@ class Info
     /**
      * Reloads all nodes information. Has to be called if informations changed
      *
-     * @param  array             $params Params to return (default none). Possible options: settings, os, process, jvm, thread_pool, network, transport, http, plugin
+     * @param  array              $params Params to return (default none). Possible options: settings, os, process, jvm, thread_pool, network, transport, http, plugin
      * @return \Elastica\Response Response object
      */
     public function refresh(array $params = array())
     {
         $this->_params = $params;
 
-        $path = '_nodes/' . $this->getNode()->getName();
+        $path = '_nodes/'.$this->getNode()->getName();
 
         if (!empty($params)) {
             $path .= '?';
             foreach ($params as $param) {
-                $path .= $param . '=true&';
+                $path .= $param.'=true&';
             }
         }
 

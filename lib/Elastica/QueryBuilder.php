@@ -45,14 +45,14 @@ class QueryBuilder
      * Returns Facade for custom DSL object
      *
      * @param $dsl
-     * @param array $arguments
+     * @param  array                 $arguments
      * @return Facade
      * @throws QueryBuilderException
      */
     public function __call($dsl, array $arguments)
     {
         if (false === isset($this->_facades[$dsl])) {
-            throw new QueryBuilderException('DSL "' . $dsl . '" not supported');
+            throw new QueryBuilderException('DSL "'.$dsl.'" not supported');
         }
 
         return $this->_facades[$dsl];

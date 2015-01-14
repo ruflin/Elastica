@@ -21,11 +21,11 @@ class Memcache extends AbstractTransport
     /**
      * Makes calls to the elasticsearch server
      *
-     * @param \Elastica\Request $request
-     * @param  array                               $params Host, Port, ...
+     * @param  \Elastica\Request                     $request
+     * @param  array                                 $params  Host, Port, ...
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Response                   Response object
+     * @return \Elastica\Response                    Response object
      */
     public function exec(Request $request, array $params)
     {
@@ -58,12 +58,12 @@ class Memcache extends AbstractTransport
                 $memcache->set($request->getPath(), $content);
                 break;
             case 'get':
-                $responseString = $memcache->get($request->getPath() . '?source=' . $content);
+                $responseString = $memcache->get($request->getPath().'?source='.$content);
                 break;
             case 'delete':
                 break;
             default:
-                throw new InvalidException('Method ' . $function . ' is not supported in memcache transport');
+                throw new InvalidException('Method '.$function.' is not supported in memcache transport');
 
         }
 

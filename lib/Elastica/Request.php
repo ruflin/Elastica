@@ -3,7 +3,6 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
-use Elastica\JSON;
 
 /**
  * Elastica Request object
@@ -28,11 +27,11 @@ class Request extends Param
     /**
      * Construct
      *
-     * @param string              $path       Request path
-     * @param string              $method     OPTIONAL Request method (use const's) (default = self::GET)
-     * @param array               $data       OPTIONAL Data array
-     * @param array               $query      OPTIONAL Query params
-     * @param Connection $connection
+     * @param  string            $path       Request path
+     * @param  string            $method     OPTIONAL Request method (use const's) (default = self::GET)
+     * @param  array             $data       OPTIONAL Data array
+     * @param  array             $query      OPTIONAL Query params
+     * @param  Connection        $connection
      * @return \Elastica\Request OPTIONAL Connection object
      */
     public function __construct($path, $method = self::GET, $data = array(), array $query = array(), Connection $connection = null)
@@ -50,7 +49,7 @@ class Request extends Param
     /**
      * Sets the request method. Use one of the for consts
      *
-     * @param  string           $method Request method
+     * @param  string            $method Request method
      * @return \Elastica\Request Current object
      */
     public function setMethod($method)
@@ -71,7 +70,7 @@ class Request extends Param
     /**
      * Sets the request data
      *
-     * @param  array            $data Request data
+     * @param  array             $data Request data
      * @return \Elastica\Request
      */
     public function setData($data)
@@ -92,7 +91,7 @@ class Request extends Param
     /**
      * Sets the request path
      *
-     * @param  string           $path Request path
+     * @param  string            $path Request path
      * @return \Elastica\Request Current object
      */
     public function setPath($path)
@@ -121,7 +120,7 @@ class Request extends Param
     }
 
     /**
-     * @param  array            $query
+     * @param  array             $query
      * @return \Elastica\Request
      */
     public function setQuery(array $query = array())
@@ -177,6 +176,7 @@ class Request extends Param
         if ($this->_connection) {
             $data['connection'] = $this->_connection->getParams();
         }
+
         return $data;
     }
 

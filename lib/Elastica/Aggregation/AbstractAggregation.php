@@ -56,7 +56,7 @@ abstract class AbstractAggregation extends Param
 
     /**
      * Add a sub-aggregation
-     * @param AbstractAggregation $aggregation
+     * @param  AbstractAggregation                  $aggregation
      * @throws \Elastica\Exception\InvalidException
      * @return AbstractAggregation
      */
@@ -67,6 +67,7 @@ abstract class AbstractAggregation extends Param
         }
 
         $this->_aggs[$aggregation->getName()] = $aggregation->toArray();
+
         return $this;
     }
 
@@ -78,11 +79,12 @@ abstract class AbstractAggregation extends Param
         $array = parent::toArray();
         if (array_key_exists('global_aggregation', $array)) {
             // compensate for class name GlobalAggregation
-            $array = array('global' => new \stdClass);
+            $array = array('global' => new \stdClass());
         }
         if (sizeof($this->_aggs)) {
             $array['aggs'] = $this->_aggs;
         }
+
         return $array;
     }
 }

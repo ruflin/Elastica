@@ -12,8 +12,8 @@ use Elastica\Index as ElasticaIndex;
 class Indices extends AbstractFilter
 {
     /**
-     * @param AbstractFilter $filter filter which will be applied to docs in the specified indices
-     * @param mixed[] $indices
+     * @param AbstractFilter $filter  filter which will be applied to docs in the specified indices
+     * @param mixed[]        $indices
      */
     public function __construct(AbstractFilter $filter, array $indices)
     {
@@ -22,7 +22,7 @@ class Indices extends AbstractFilter
 
     /**
      * Set the indices on which this filter should be applied
-     * @param mixed[] $indices
+     * @param  mixed[] $indices
      * @return Indices
      */
     public function setIndices(array $indices)
@@ -31,12 +31,13 @@ class Indices extends AbstractFilter
         foreach ($indices as $index) {
             $this->addIndex($index);
         }
+
         return $this;
     }
 
     /**
      * Adds one more index on which this filter should be applied
-     * @param string|\Elastica\Index $index
+     * @param  string|\Elastica\Index $index
      * @return Indices
      */
     public function addIndex($index)
@@ -44,12 +45,13 @@ class Indices extends AbstractFilter
         if ($index instanceof ElasticaIndex) {
             $index = $index->getName();
         }
+
         return $this->addParam('indices', (string) $index);
     }
 
     /**
      * Set the filter to be applied to docs in the specified indices
-     * @param AbstractFilter $filter
+     * @param  AbstractFilter $filter
      * @return Indices
      */
     public function setFilter(AbstractFilter $filter)
@@ -59,11 +61,11 @@ class Indices extends AbstractFilter
 
     /**
      * Set the filter to be applied to docs in indices which do not match those specified in the "indices" parameter
-     * @param AbstractFilter $filter
+     * @param  AbstractFilter $filter
      * @return Indices
      */
     public function setNoMatchFilter(AbstractFilter $filter)
     {
         return $this->setParam('no_match_filter', $filter->toArray());
     }
-} 
+}

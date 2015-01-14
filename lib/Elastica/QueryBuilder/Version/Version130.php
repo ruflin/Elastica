@@ -60,7 +60,7 @@ class Version130 extends Version
         // 'custom_boost_factor'
 
         // new in 1.1.0
-        'template'
+        'template',
     );
 
     protected $filters = array(
@@ -129,7 +129,7 @@ class Version130 extends Version
         // new in 1.3.0
         'percentile_ranks',
         'geo_bounds',
-        'top_hits'
+        'top_hits',
     );
 
     protected $suggesters = array(
@@ -138,6 +138,6 @@ class Version130 extends Version
         'completion',
 
         // new in 1.2.0
-        'context'
+        'context',
     );
 }

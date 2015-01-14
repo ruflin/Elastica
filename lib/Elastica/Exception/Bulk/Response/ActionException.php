@@ -40,7 +40,7 @@ class ActionException extends BulkException
     }
 
     /**
-     * @param \Elastica\Bulk\Response $response
+     * @param  \Elastica\Bulk\Response $response
      * @return string
      */
     public function getErrorMessage(Response $response)
@@ -51,13 +51,13 @@ class ActionException extends BulkException
 
         $path = '';
         if (isset($data['_index'])) {
-            $path.= '/' . $data['_index'];
+            $path .= '/'.$data['_index'];
         }
         if (isset($data['_type'])) {
-            $path.= '/' . $data['_type'];
+            $path .= '/'.$data['_type'];
         }
         if (isset($data['_id'])) {
-            $path.= '/' . $data['_id'];
+            $path .= '/'.$data['_id'];
         }
         $message = "$opType: $path caused $error";
 

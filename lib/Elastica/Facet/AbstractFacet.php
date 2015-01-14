@@ -42,7 +42,7 @@ abstract class AbstractFacet extends Param
      * Sets the name of the facet. It is automatically set by
      * the constructor.
      *
-     * @param  string                              $name The name of the facet.
+     * @param  string                               $name The name of the facet.
      * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Facet\AbstractFacet
      */
@@ -82,7 +82,7 @@ abstract class AbstractFacet extends Param
      * current search query. When not set, it defaults to the
      * Elasticsearch default value.
      *
-     * @param  bool                         $global Flag to either run the facet globally.
+     * @param  bool                          $global Flag to either run the facet globally.
      * @return \Elastica\Facet\AbstractFacet
      */
     public function setGlobal($global = true)
@@ -93,7 +93,7 @@ abstract class AbstractFacet extends Param
     /**
      * Sets the path to the nested document
      *
-     * @param  string                       $nestedPath Nested path
+     * @param  string                        $nestedPath Nested path
      * @return \Elastica\Facet\AbstractFacet
      */
     public function setNested($nestedPath)
@@ -104,7 +104,7 @@ abstract class AbstractFacet extends Param
     /**
      * Sets the scope
      *
-     * @param  string                       $scope Scope
+     * @param  string                        $scope Scope
      * @return \Elastica\Facet\AbstractFacet
      */
     public function setScope($scope)
@@ -128,8 +128,8 @@ abstract class AbstractFacet extends Param
      * Sets a param for the facet. Each facet implementation needs to take
      * care of handling their own params.
      *
-     * @param  string                       $key   The key of the param to set.
-     * @param  mixed                        $value The value of the param.
+     * @param  string                        $key   The key of the param to set.
+     * @param  mixed                         $value The value of the param.
      * @return \Elastica\Facet\AbstractFacet
      */
     protected function _setFacetParam($key, $value)

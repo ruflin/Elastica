@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Multi;
+
 use Elastica\Exception\InvalidException;
 use Elastica\Response;
 use Elastica\Search as BaseSearch;
@@ -65,9 +66,9 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
                 $currentSearch = each($searches);
 
                 if ($currentSearch === false) {
-                    throw new InvalidException('No result found for search #' . $key);
+                    throw new InvalidException('No result found for search #'.$key);
                 } elseif (!$currentSearch['value'] instanceof BaseSearch) {
-                    throw new InvalidException('Invalid object for search #' . $key . ' provided. Should be Elastica\Search');
+                    throw new InvalidException('Invalid object for search #'.$key.' provided. Should be Elastica\Search');
                 }
 
                 $search = $currentSearch['value'];
@@ -167,7 +168,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
 
     /**
      * @param  string|int $offset
-     * @return boolean true on success or false on failure.
+     * @return boolean    true on success or false on failure.
      */
     public function offsetExists($offset)
     {
@@ -175,7 +176,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param mixed $offset
+     * @param  mixed $offset
      * @return mixed Can return all value types.
      */
     public function offsetGet($offset)
@@ -184,8 +185,8 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param mixed $offset
-     * @param mixed $value
+     * @param  mixed $offset
+     * @param  mixed $value
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -198,7 +199,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param mixed $offset
+     * @param  mixed $offset
      * @return void
      */
     public function offsetUnset($offset)

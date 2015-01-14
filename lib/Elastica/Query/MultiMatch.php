@@ -29,7 +29,7 @@ class MultiMatch extends AbstractQuery
     /**
      * Sets the query
      *
-     * @param  string                         $query Query
+     * @param  string                     $query Query
      * @return \Elastica\Query\MultiMatch Current object
      */
     public function setQuery($query = '')
@@ -40,7 +40,7 @@ class MultiMatch extends AbstractQuery
     /**
      * Sets Fields to be used in the query.
      *
-     * @param  array                          $fields Fields
+     * @param  array                      $fields Fields
      * @return \Elastica\Query\MultiMatch Current object
      */
     public function setFields($fields = array())
@@ -53,7 +53,7 @@ class MultiMatch extends AbstractQuery
      *
      * If not set, defaults to true.
      *
-     * @param  boolean                        $useDisMax
+     * @param  boolean                    $useDisMax
      * @return \Elastica\Query\MultiMatch Current object
      */
     public function setUseDisMax($useDisMax = true)
@@ -66,7 +66,7 @@ class MultiMatch extends AbstractQuery
      *
      * If not set, defaults to 0.0.
      *
-     * @param  float                          $tieBreaker
+     * @param  float                      $tieBreaker
      * @return \Elastica\Query\MultiMatch Current object
      */
     public function setTieBreaker($tieBreaker = 0.0)
@@ -79,7 +79,7 @@ class MultiMatch extends AbstractQuery
      *
      * If not set, defaults to 'or'
      *
-     * @param  string                             $operator
+     * @param  string                     $operator
      * @return \Elastica\Query\MultiMatch Current object
      */
     public function setOperator($operator = 'or')
@@ -90,7 +90,7 @@ class MultiMatch extends AbstractQuery
     /**
      * Set field minimum should match for Match Query
      *
-     * @param  int                       $minimumShouldMatch
+     * @param  int                   $minimumShouldMatch
      * @return \Elastica\Query\Match
      */
     public function setMinimumShouldMatch($minimumShouldMatch)
@@ -103,7 +103,7 @@ class MultiMatch extends AbstractQuery
      *
      * If not set, default to 'none'
      *
-     * @param  string                       $zeroTermQuery
+     * @param  string                $zeroTermQuery
      * @return \Elastica\Query\Match
      */
     public function setZeroTermsQuery($zeroTermQuery = 'none')
@@ -114,7 +114,7 @@ class MultiMatch extends AbstractQuery
     /**
      * Set cutoff frequency for Match Query
      *
-     * @param  float                       $cutoffFrequency
+     * @param  float                 $cutoffFrequency
      * @return \Elastica\Query\Match
      */
     public function setCutoffFrequency($cutoffFrequency)
@@ -125,8 +125,8 @@ class MultiMatch extends AbstractQuery
     /**
      * Set type
      *
-     * @param  string                    $field
-     * @param  string                    $type
+     * @param  string                $field
+     * @param  string                $type
      * @return \Elastica\Query\Match
      */
     public function setType($type)
@@ -137,7 +137,7 @@ class MultiMatch extends AbstractQuery
     /**
      * Set fuzziness
      *
-     * @param  float                     $fuzziness
+     * @param  float                 $fuzziness
      * @return \Elastica\Query\Match
      */
     public function setFuzziness($fuzziness)
@@ -148,7 +148,7 @@ class MultiMatch extends AbstractQuery
     /**
      * Set prefix length
      *
-     * @param  int                       $prefixLength
+     * @param  int                   $prefixLength
      * @return \Elastica\Query\Match
      */
     public function setPrefixLength($prefixLength)
@@ -159,7 +159,7 @@ class MultiMatch extends AbstractQuery
     /**
      * Set max expansions
      *
-     * @param  int                       $maxExpansions
+     * @param  int                   $maxExpansions
      * @return \Elastica\Query\Match
      */
     public function setMaxExpansions($maxExpansions)
@@ -170,7 +170,7 @@ class MultiMatch extends AbstractQuery
     /**
      * Set analyzer
      *
-     * @param  string                    $analyzer
+     * @param  string                $analyzer
      * @return \Elastica\Query\Match
      */
     public function setAnalyzer($analyzer)

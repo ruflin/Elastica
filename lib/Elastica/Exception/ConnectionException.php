@@ -31,7 +31,7 @@ class ConnectionException extends \RuntimeException implements ExceptionInterfac
     /**
      * Construct Exception
      *
-     * @param string            $message    Message
+     * @param string             $message  Message
      * @param \Elastica\Request  $request
      * @param \Elastica\Response $response
      */

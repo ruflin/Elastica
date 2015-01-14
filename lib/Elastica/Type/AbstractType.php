@@ -132,8 +132,8 @@ abstract class AbstractType implements SearchableInterface
     }
 
     /**
-     * @param \Elastica\Query $query
-     * @param array|int $options
+     * @param  \Elastica\Query  $query
+     * @param  array|int        $options
      * @return \Elastica\Search
      */
     public function createSearch($query = '', $options = null)
@@ -157,7 +157,7 @@ abstract class AbstractType implements SearchableInterface
      * Count docs in the type based on query
      *
      * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
-     * @return int                         number of documents matching the query
+     * @return int                          number of documents matching the query
      * @see \Elastica\SearchableInterface::count
      */
     public function count($query = '')

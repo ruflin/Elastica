@@ -2,15 +2,9 @@
 
 namespace Elastica;
 
-use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\Bulk\UdpException;
 use Elastica\Exception\InvalidException;
-use Elastica\Request;
-use Elastica\Response;
-use Elastica\Client;
-use Elastica\Index;
-use Elastica\Type;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
 use Elastica\Bulk\ResponseSet;
@@ -57,7 +51,7 @@ class Bulk
     }
 
     /**
-     * @param string|\Elastica\Index $index
+     * @param  string|\Elastica\Index $index
      * @return \Elastica\Bulk
      */
     public function setIndex($index)
@@ -88,7 +82,7 @@ class Bulk
     }
 
     /**
-     * @param string|\Elastica\Type $type
+     * @param  string|\Elastica\Type $type
      * @return \Elastica\Bulk
      */
     public function setType($type)
@@ -126,27 +120,29 @@ class Bulk
     {
         $path = '';
         if ($this->hasIndex()) {
-            $path .= $this->getIndex() . '/';
+            $path .= $this->getIndex().'/';
             if ($this->hasType()) {
-                $path .= $this->getType() . '/';
+                $path .= $this->getType().'/';
             }
         }
         $path .= '_bulk';
+
         return $path;
     }
 
     /**
-     * @param \Elastica\Bulk\Action $action
+     * @param  \Elastica\Bulk\Action $action
      * @return \Elastica\Bulk
      */
     public function addAction(Action $action)
     {
         $this->_actions[] = $action;
+
         return $this;
     }
 
     /**
-     * @param \Elastica\Bulk\Action[] $actions
+     * @param  \Elastica\Bulk\Action[] $actions
      * @return \Elastica\Bulk
      */
     public function addActions(array $actions)
@@ -167,8 +163,8 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Document $document
-     * @param string $opType
+     * @param  \Elastica\Document $document
+     * @param  string             $opType
      * @return \Elastica\Bulk
      */
     public function addDocument(Document $document, $opType = null)
@@ -179,8 +175,8 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Document[] $documents
-     * @param string $opType
+     * @param  \Elastica\Document[] $documents
+     * @param  string               $opType
      * @return \Elastica\Bulk
      */
     public function addDocuments(array $documents, $opType = null)
@@ -193,8 +189,8 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Script $data
-     * @param string $opType
+     * @param  \Elastica\Script $data
+     * @param  string           $opType
      * @return \Elastica\Bulk
      */
     public function addScript(Script $script, $opType = null)
@@ -205,8 +201,8 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Document[] $scripts
-     * @param string $opType
+     * @param  \Elastica\Document[] $scripts
+     * @param  string               $opType
      * @return \Elastica\Bulk
      */
     public function addScripts(array $scripts, $opType = null)
@@ -219,23 +215,22 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Script|\Elastica\Document\array $data
-     * @param string $opType
+     * @param  \Elastica\Script|\Elastica\Document\array $data
+     * @param  string                                    $opType
      * @return \Elastica\Bulk
      */
     public function addData($data, $opType = null)
     {
-        if(!is_array($data)){
+        if (!is_array($data)) {
             $data = array($data);
         }
 
-        foreach ($data as $actionData){
-
-            if ($actionData instanceOf Script) {
+        foreach ($data as $actionData) {
+            if ($actionData instanceof Script) {
                 $this->addScript($actionData, $opType);
-            }else if ($actionData instanceof Document) {
+            } elseif ($actionData instanceof Document) {
                 $this->addDocument($actionData, $opType);
-            }else{
+            } else {
                 throw new \InvalidArgumentException("Data should be a Document, a Script or an array containing Documents and/or Scripts");
             }
         }
@@ -244,7 +239,7 @@ class Bulk
     }
 
     /**
-     * @param array $data
+     * @param  array                                $data
      * @return \Elastica\Bulk
      * @throws \Elastica\Exception\InvalidException
      */
@@ -285,7 +280,8 @@ class Bulk
      * @var string $name name of the parameter
      * @var string $value value of the parameter
      */
-    public function setRequestParam($name, $value) {
+    public function setRequestParam($name, $value)
+    {
         $this->_requestParams[ $name ] = $value;
     }
 
@@ -294,8 +290,9 @@ class Bulk
      * Requires Elasticsearch version >= 0.90.8.
      * @var string $time timeout in Elasticsearch time format
      */
-    public function setShardTimeout($time) {
-        $this->setRequestParam( 'timeout', $time );
+    public function setShardTimeout($time)
+    {
+        $this->setRequestParam('timeout', $time);
     }
 
     /**
@@ -313,8 +310,9 @@ class Bulk
     {
         $data = '';
         foreach ($this->getActions() as $action) {
-            $data.= $action->toString();
+            $data .= $action->toString();
         }
+
         return $data;
     }
 
@@ -329,6 +327,7 @@ class Bulk
                 $data[] = $row;
             }
         }
+
         return $data;
     }
 
@@ -346,7 +345,7 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Response $response
+     * @param  \Elastica\Response               $response
      * @throws Exception\Bulk\ResponseException
      * @throws Exception\InvalidException
      * @return \Elastica\Bulk\ResponseSet
@@ -361,9 +360,8 @@ class Bulk
 
         if (isset($responseData['items']) && is_array($responseData['items'])) {
             foreach ($responseData['items'] as $key => $item) {
-
                 if (!isset($actions[$key])) {
-                    throw new InvalidException('No response found for action #' . $key);
+                    throw new InvalidException('No response found for action #'.$key);
                 }
 
                 $action = $actions[$key];
@@ -399,8 +397,8 @@ class Bulk
     }
 
     /**
-     * @param string $host
-     * @param int $port
+     * @param  string                                $host
+     * @param  int                                   $port
      * @throws \Elastica\Exception\Bulk\UdpException
      */
     public function sendUdp($host = null, $port = null)

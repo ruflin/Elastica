@@ -32,7 +32,7 @@ class Simple extends AbstractQuery
     /**
      * Sets new query array
      *
-     * @param  array                     $query Query array
+     * @param  array                  $query Query array
      * @return \Elastica\Query\Simple Current object
      */
     public function setQuery(array $query)
