@@ -25,8 +25,8 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
     public function setScript($script)
     {
         if ($script instanceof Script) {
-            $this->setParam('params', $script->getParams());
-            $script = $script->getScript();
+            $params = array_merge($this->getParams(), $script->toArray());
+            return $this->setParams($params);
         }
         return $this->setParam('script', $script);
     }
