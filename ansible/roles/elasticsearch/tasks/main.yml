@@ -29,7 +29,7 @@
 - name: import elasticsearch gpg key
   apt_key: >
     id=D88E42B4
-    keyserver=pgp.mit.edu
+    url=https://packages.elasticsearch.org/GPG-KEY-elasticsearch
     state=present
 
 - name: add elasticsearch repository
