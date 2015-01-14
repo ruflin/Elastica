@@ -38,6 +38,18 @@ class ScriptTest extends BaseAggregationTest
 		$this->assertEquals(5 + 8 + 1 + 3, $results['value']);
 	}
 
+	public function testAggregationScriptAsString()
+	{
+		$agg = new Sum("sum");
+		$agg->setScript("doc['price'].value");
+
+		$query = new Query();
+		$query->addAggregation( $agg );
+		$results = $this->_index->search($query)->getAggregation("sum");
+
+		$this->assertEquals(5 + 8 + 1 + 3, $results['value']);
+	}
+
 	public function testSetScript() {
 		$aggregation = "sum";
 		$string = "doc['price'].value";
