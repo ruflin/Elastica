@@ -17,7 +17,7 @@ class Nested extends AbstractFilter
     /**
      * Adds field to mlt filter
      *
-     * @param  string                       $path Nested object path
+     * @param  string                  $path Nested object path
      * @return \Elastica\Filter\Nested
      */
     public function setPath($path)

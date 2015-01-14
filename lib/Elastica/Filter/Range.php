@@ -35,8 +35,8 @@ class Range extends AbstractFilter
     /**
      * Ads a field with arguments to the range query
      *
-     * @param  string                      $fieldName Field name
-     * @param  array                       $args      Field arguments
+     * @param  string                 $fieldName Field name
+     * @param  array                  $args      Field arguments
      * @return \Elastica\Filter\Range
      */
     public function addField($fieldName, array $args)

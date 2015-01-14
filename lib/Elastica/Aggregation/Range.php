@@ -1,7 +1,6 @@
 <?php
 namespace Elastica\Aggregation;
 
-
 use Elastica\Exception\InvalidException;
 
 /**
@@ -13,9 +12,9 @@ class Range extends AbstractSimpleAggregation
 {
     /**
      * Add a range to this aggregation
-     * @param int|float $fromValue low end of this range, exclusive (greater than)
-     * @param int|float $toValue high end of this range, exclusive (less than)
-     * @param string $key customized key value
+     * @param  int|float                            $fromValue low end of this range, exclusive (greater than)
+     * @param  int|float                            $toValue   high end of this range, exclusive (less than)
+     * @param  string                               $key       customized key value
      * @return Range
      * @throws \Elastica\Exception\InvalidException
      */
@@ -40,11 +39,11 @@ class Range extends AbstractSimpleAggregation
 
     /**
      * If set to true, a unique string key will be associated with each bucket, and ranges will be returned as an associative array
-     * @param bool $keyed
+     * @param  bool  $keyed
      * @return Range
      */
     public function setKeyedResponse($keyed = true)
     {
-        return $this->setParam('keyed', (bool)$keyed);
+        return $this->setParam('keyed', (bool) $keyed);
     }
 }

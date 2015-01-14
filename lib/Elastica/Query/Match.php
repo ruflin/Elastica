@@ -19,8 +19,8 @@ class Match extends AbstractQuery
     /**
      * Sets a param for the message array
      *
-     * @param  string                    $field
-     * @param  mixed                     $values
+     * @param  string                $field
+     * @param  mixed                 $values
      * @return \Elastica\Query\Match
      */
     public function setField($field, $values)
@@ -31,9 +31,9 @@ class Match extends AbstractQuery
     /**
      * Sets a param for the given field
      *
-     * @param  string                    $field
-     * @param  string                    $key
-     * @param  string                    $value
+     * @param  string                $field
+     * @param  string                $key
+     * @param  string                $value
      * @return \Elastica\Query\Match
      */
     public function setFieldParam($field, $key, $value)
@@ -50,8 +50,8 @@ class Match extends AbstractQuery
     /**
      * Sets the query string
      *
-     * @param  string                    $field
-     * @param  string                    $query
+     * @param  string                $field
+     * @param  string                $query
      * @return \Elastica\Query\Match
      */
     public function setFieldQuery($field, $query)
@@ -62,8 +62,8 @@ class Match extends AbstractQuery
     /**
      * Set field type
      *
-     * @param  string                    $field
-     * @param  string                    $type
+     * @param  string                $field
+     * @param  string                $type
      * @return \Elastica\Query\Match
      */
     public function setFieldType($field, $type)
@@ -74,8 +74,8 @@ class Match extends AbstractQuery
     /**
      * Set field operator
      *
-     * @param  string                    $field
-     * @param  string                    $operator
+     * @param  string                $field
+     * @param  string                $operator
      * @return \Elastica\Query\Match
      */
     public function setFieldOperator($field, $operator)
@@ -86,8 +86,8 @@ class Match extends AbstractQuery
     /**
      * Set field analyzer
      *
-     * @param  string                    $field
-     * @param  string                    $analyzer
+     * @param  string                $field
+     * @param  string                $analyzer
      * @return \Elastica\Query\Match
      */
     public function setFieldAnalyzer($field, $analyzer)
@@ -100,8 +100,8 @@ class Match extends AbstractQuery
      *
      * If not set, defaults to 1.0.
      *
-     * @param  string                    $field
-     * @param  float                     $boost
+     * @param  string                $field
+     * @param  float                 $boost
      * @return \Elastica\Query\Match
      */
     public function setFieldBoost($field, $boost = 1.0)
@@ -112,8 +112,8 @@ class Match extends AbstractQuery
     /**
      * Set field minimum should match
      *
-     * @param  string                    $field
-     * @param  int|string                       $minimumShouldMatch
+     * @param  string                $field
+     * @param  int|string            $minimumShouldMatch
      * @return \Elastica\Query\Match
      * @link Possible values for minimum_should_match http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
@@ -125,8 +125,8 @@ class Match extends AbstractQuery
     /**
      * Set field fuzziness
      *
-     * @param  string                    $field
-     * @param  mixed                     $fuzziness
+     * @param  string                $field
+     * @param  mixed                 $fuzziness
      * @return \Elastica\Query\Match
      */
     public function setFieldFuzziness($field, $fuzziness)
@@ -137,8 +137,8 @@ class Match extends AbstractQuery
     /**
      * Set field fuzzy rewrite
      *
-     * @param  string                    $field
-     * @param  string                    $fuzzyRewrite
+     * @param  string                $field
+     * @param  string                $fuzzyRewrite
      * @return \Elastica\Query\Match
      */
     public function setFieldFuzzyRewrite($field, $fuzzyRewrite)
@@ -149,8 +149,8 @@ class Match extends AbstractQuery
     /**
      * Set field prefix length
      *
-     * @param  string                    $field
-     * @param  int                       $prefixLength
+     * @param  string                $field
+     * @param  int                   $prefixLength
      * @return \Elastica\Query\Match
      */
     public function setFieldPrefixLength($field, $prefixLength)
@@ -161,8 +161,8 @@ class Match extends AbstractQuery
     /**
      * Set field max expansions
      *
-     * @param  string                    $field
-     * @param  int                       $maxExpansions
+     * @param  string                $field
+     * @param  int                   $maxExpansions
      * @return \Elastica\Query\Match
      */
     public function setFieldMaxExpansions($field, $maxExpansions)
@@ -175,8 +175,8 @@ class Match extends AbstractQuery
      *
      * If not set, default to 'none'
      *
-     * @param  string                       $field
-     * @param  string                       $zeroTermQuery
+     * @param  string                $field
+     * @param  string                $zeroTermQuery
      * @return \Elastica\Query\Match
      */
     public function setFieldZeroTermsQuery($field, $zeroTermQuery = 'none')
@@ -187,8 +187,8 @@ class Match extends AbstractQuery
     /**
      * Set cutoff frequency
      *
-     * @param  string                      $field
-     * @param  float                       $cutoffFrequency
+     * @param  string                $field
+     * @param  float                 $cutoffFrequency
      * @return \Elastica\Query\Match
      */
     public function setFieldCutoffFrequency($field, $cutoffFrequency)

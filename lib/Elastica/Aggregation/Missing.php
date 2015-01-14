@@ -10,7 +10,7 @@ namespace Elastica\Aggregation;
 class Missing extends AbstractAggregation
 {
     /**
-     * @param string $name the name of this aggregation
+     * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
      */
     public function __construct($name, $field)
@@ -21,11 +21,11 @@ class Missing extends AbstractAggregation
 
     /**
      * Set the field for this aggregation
-     * @param string $field the name of the document field on which to perform this aggregation
+     * @param  string  $field the name of the document field on which to perform this aggregation
      * @return Missing
      */
     public function setField($field)
     {
         return $this->setParam('field', $field);
     }
-} 
+}

@@ -18,7 +18,7 @@ abstract class AbstractFilter extends Param
     /**
      * Sets the filter cache
      *
-     * @param  boolean                        $cached Cached
+     * @param  boolean                         $cached Cached
      * @return \Elastica\Filter\AbstractFilter
      */
     public function setCached($cached = true)
@@ -29,7 +29,7 @@ abstract class AbstractFilter extends Param
     /**
      * Sets the filter cache key
      *
-     * @param  string                              $cacheKey Cache key
+     * @param  string                               $cacheKey Cache key
      * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Filter\AbstractFilter
      */
@@ -47,7 +47,7 @@ abstract class AbstractFilter extends Param
     /**
      * Sets the filter name
      *
-     * @param  string                         $name Name
+     * @param  string                          $name Name
      * @return \Elastica\Filter\AbstractFilter
      */
     public function setName($name)

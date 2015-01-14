@@ -2,7 +2,6 @@
 
 namespace Elastica\Aggregation;
 
-
 use Elastica\Filter\AbstractFilter;
 
 /**
@@ -14,7 +13,7 @@ class Filter extends AbstractAggregation
 {
     /**
      * Set the filter for this aggregation
-     * @param AbstractFilter $filter
+     * @param  AbstractFilter $filter
      * @return Filter
      */
     public function setFilter(AbstractFilter $filter)
@@ -28,11 +27,10 @@ class Filter extends AbstractAggregation
     public function toArray()
     {
         $array = array(
-            "filter" => $this->getParam("filter")
+            "filter" => $this->getParam("filter"),
         );
 
-        if($this->_aggs)
-        {
+        if ($this->_aggs) {
             $array['aggs'] = $this->_aggs;
         }
 

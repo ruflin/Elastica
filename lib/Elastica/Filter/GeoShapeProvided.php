@@ -64,11 +64,11 @@ class GeoShapeProvided extends AbstractGeoShape
                 $this->_path => array(
                     'shape' => array(
                         'type' => $this->_shapeType,
-                        'coordinates' => $this->_coordinates
+                        'coordinates' => $this->_coordinates,
                     ),
-                    'relation' => $this->_relation
+                    'relation' => $this->_relation,
                 ),
-            )
+            ),
         );
     }
 }

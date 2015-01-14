@@ -28,8 +28,8 @@ class Range extends AbstractQuery
     /**
      * Adds a range field to the query
      *
-     * @param  string                    $fieldName Field name
-     * @param  array                     $args      Field arguments
+     * @param  string                $fieldName Field name
+     * @param  array                 $args      Field arguments
      * @return \Elastica\Query\Range Current object
      */
     public function addField($fieldName, array $args)

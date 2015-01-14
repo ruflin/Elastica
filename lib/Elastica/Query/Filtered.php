@@ -21,7 +21,8 @@ class Filtered extends AbstractQuery
      * @param \Elastica\Query\AbstractQuery   $query  OPTIONAL Query object
      * @param \Elastica\Filter\AbstractFilter $filter OPTIONAL Filter object
      */
-    public function __construct(AbstractQuery $query = null, AbstractFilter $filter = null) {
+    public function __construct(AbstractQuery $query = null, AbstractFilter $filter = null)
+    {
         $this->setQuery($query);
         $this->setFilter($filter);
     }
@@ -89,7 +90,7 @@ class Filtered extends AbstractQuery
         if (empty($filtered)) {
             throw new InvalidException('A query and/or filter is required');
         }
-            
+
         return array('filtered' => $filtered);
     }
 }

@@ -31,7 +31,7 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     /**
      * Construct Exception
      *
-     * @param \Elastica\Request $request
+     * @param \Elastica\Request  $request
      * @param \Elastica\Response $response
      */
     public function __construct(Request $request, Response $response)
@@ -66,7 +66,8 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
      *
      * @return ElasticsearchException
      */
-    public function getElasticsearchException() {
+    public function getElasticsearchException()
+    {
         $response = $this->getResponse();
         $transfer = $response->getTransferInfo();
         $code     = array_key_exists('http_code', $transfer) ? $transfer['http_code'] : 0;

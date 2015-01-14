@@ -11,11 +11,11 @@ class DateRange extends Range
 {
     /**
      * Set the formatting for the returned date values
-     * @param string $format see documentation for formatting options
+     * @param  string $format see documentation for formatting options
      * @return Range
      */
     public function setFormat($format)
     {
         return $this->setParam('format', $format);
     }
-} 
+}

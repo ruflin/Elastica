@@ -11,7 +11,6 @@ namespace Elastica\Exception;
  */
 class ElasticsearchException extends \Exception
 {
-
     const REMOTE_TRANSPORT_EXCEPTION = 'RemoteTransportException';
 
     /**
@@ -31,7 +30,7 @@ class ElasticsearchException extends \Exception
     /**
      * Constructs elasticsearch exception
      *
-     * @param int $code Error code
+     * @param int    $code  Error code
      * @param string $error Error message from elasticsearch
      */
     public function __construct($code, $error)
@@ -64,7 +63,7 @@ class ElasticsearchException extends \Exception
     /**
      * Extract exception name from error response
      *
-     * @param string $error
+     * @param  string      $error
      * @return null|string
      */
     protected function _extractException($error)
@@ -72,7 +71,7 @@ class ElasticsearchException extends \Exception
         if (preg_match('/^(\w+)\[.*\]/', $error, $matches)) {
             return $matches[1];
         } else {
-            return null;
+            return;
         }
     }
 
@@ -95,5 +94,4 @@ class ElasticsearchException extends \Exception
     {
         return $this->_isRemote;
     }
-
 }

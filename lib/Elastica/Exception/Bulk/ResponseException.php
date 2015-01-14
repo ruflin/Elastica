@@ -35,8 +35,8 @@ class ResponseException extends BulkException
     {
         $this->_init($responseSet);
 
-        $message = 'Error in one or more bulk request actions:' . PHP_EOL . PHP_EOL;
-        $message.= $this->getActionExceptionsAsString();
+        $message = 'Error in one or more bulk request actions:'.PHP_EOL.PHP_EOL;
+        $message .= $this->getActionExceptionsAsString();
 
         parent::__construct($message);
     }
@@ -96,8 +96,9 @@ class ResponseException extends BulkException
     {
         $message = '';
         foreach ($this->getActionExceptions() as $actionException) {
-            $message.= $actionException->getMessage() . PHP_EOL;
+            $message .= $actionException->getMessage().PHP_EOL;
         }
+
         return $message;
     }
 }

@@ -3,8 +3,6 @@
 namespace Elastica\QueryBuilder;
 
 use Elastica\Exception\QueryBuilderException;
-use Elastica\QueryBuilder\DSL;
-use Elastica\QueryBuilder\Version;
 
 /**
  * Facade for a specific DSL object
@@ -27,7 +25,7 @@ class Facade
     /**
      * Constructor
      *
-     * @param DSL $dsl
+     * @param DSL     $dsl
      * @param Version $version
      */
     public function __construct(DSL $dsl, Version $version)
@@ -40,7 +38,7 @@ class Facade
      * Executes DSL methods
      *
      * @param $name
-     * @param array $arguments
+     * @param  array                 $arguments
      * @return mixed
      * @throws QueryBuilderException
      */
@@ -49,7 +47,7 @@ class Facade
         // defined check
         if (false === method_exists($this->_dsl, $name)) {
             throw new QueryBuilderException(
-                'undefined ' . $this->_dsl->getType() . ' "' . $name . '"'
+                'undefined '.$this->_dsl->getType().' "'.$name.'"'
             );
         }
 
@@ -57,7 +55,7 @@ class Facade
         if (false === $this->_version->supports($name, $this->_dsl->getType())) {
             $reflection = new \ReflectionClass($this->_version);
             throw new QueryBuilderException(
-                $this->_dsl->getType() . ' "' . $name . '" in ' . $reflection->getShortName() . ' not supported'
+                $this->_dsl->getType().' "'.$name.'" in '.$reflection->getShortName().' not supported'
             );
         }
 

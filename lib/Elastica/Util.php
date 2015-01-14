@@ -2,7 +2,6 @@
 
 namespace Elastica;
 
-use Elastica\JSON;
 
 /**
  * Elastica tools
@@ -49,7 +48,7 @@ class Util
         $chars = array('\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '/');
 
         foreach ($chars as $char) {
-            $result = str_replace($char, '\\' . $char, $result);
+            $result = str_replace($char, '\\'.$char, $result);
         }
 
         return $result;
@@ -65,7 +64,7 @@ class Util
      */
     public static function replaceBooleanWords($term)
     {
-        $replacementMap = array(' AND '=>' && ', ' OR '=>' || ', ' NOT '=>' !');
+        $replacementMap = array(' AND ' => ' && ', ' OR ' => ' || ', ' NOT ' => ' !');
         $result = strtr($term, $replacementMap);
 
         return $result;
@@ -96,7 +95,7 @@ class Util
     {
         $string = preg_replace('/([A-Z])/', '_$1', $string);
 
-        return strtolower(substr($string,1));
+        return strtolower(substr($string, 1));
     }
 
     /**
@@ -124,13 +123,13 @@ class Util
      *
      * Converts it to the lucene format, including the appropriate TimeZone
      *
-     * @param \DateTime $dateTime
-     * @param boolean $includeTimezone
+     * @param  \DateTime $dateTime
+     * @param  boolean   $includeTimezone
      * @return string
      */
     public static function convertDateTimeObject(\DateTime $dateTime, $includeTimezone = true)
     {
-        $formatString = 'Y-m-d\TH:i:s' . ($includeTimezone === true ? 'P' : '\Z');
+        $formatString = 'Y-m-d\TH:i:s'.($includeTimezone === true ? 'P' : '\Z');
         $string = $dateTime->format($formatString);
 
         return $string;
@@ -160,26 +159,27 @@ class Util
     /**
      * Converts Request to Curl console command
      *
-     * @param Request $request
+     * @param  Request $request
      * @return string
      */
     public static function convertRequestToCurlCommand(Request $request)
     {
-        $message = 'curl -X' . strtoupper($request->getMethod()) . ' ';
-        $message .= '\'http://' . $request->getConnection()->getHost() . ':' . $request->getConnection()->getPort() . '/';
+        $message = 'curl -X'.strtoupper($request->getMethod()).' ';
+        $message .= '\'http://'.$request->getConnection()->getHost().':'.$request->getConnection()->getPort().'/';
         $message .= $request->getPath();
 
         $query = $request->getQuery();
         if (!empty($query)) {
-            $message .= '?' . http_build_query($query);
+            $message .= '?'.http_build_query($query);
         }
 
         $message .= '\'';
 
         $data = $request->getData();
         if (!empty($data)) {
-            $message .= ' -d \'' . JSON::stringify($data) . '\'';
+            $message .= ' -d \''.JSON::stringify($data).'\'';
         }
+
         return $message;
     }
 }

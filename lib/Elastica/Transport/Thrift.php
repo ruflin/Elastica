@@ -37,7 +37,7 @@ class Thrift extends AbstractTransport
     /**
      * Construct transport
      *
-     * @param \Elastica\Connection $connection Connection object
+     * @param  \Elastica\Connection                 $connection Connection object
      * @throws \Elastica\Exception\RuntimeException
      */
     public function __construct(Connection $connection = null)
@@ -49,11 +49,11 @@ class Thrift extends AbstractTransport
     }
 
     /**
-     * @param string $host
-     * @param int $port
-     * @param int $sendTimeout msec
-     * @param int $recvTimeout msec
-     * @param bool $framedTransport
+     * @param  string                    $host
+     * @param  int                       $port
+     * @param  int                       $sendTimeout     msec
+     * @param  int                       $recvTimeout     msec
+     * @param  bool                      $framedTransport
      * @return \Elasticsearch\RestClient
      */
     protected function _createClient($host, $port, $sendTimeout = null, $recvTimeout = null, $framedTransport = false)
@@ -83,30 +83,31 @@ class Thrift extends AbstractTransport
     }
 
     /**
-     * @param string $host
-     * @param int $port
-     * @param int $sendTimeout
-     * @param int $recvTimeout
-     * @param bool $framedTransport
+     * @param  string                    $host
+     * @param  int                       $port
+     * @param  int                       $sendTimeout
+     * @param  int                       $recvTimeout
+     * @param  bool                      $framedTransport
      * @return \Elasticsearch\RestClient
      */
     protected function _getClient($host, $port, $sendTimeout = null, $recvTimeout = null, $framedTransport = false)
     {
-        $key = $host . ':' . $port;
+        $key = $host.':'.$port;
         if (!isset($this->_clients[$key])) {
             $this->_clients[$key] = $this->_createClient($host, $port, $sendTimeout, $recvTimeout, $framedTransport);
         }
+
         return $this->_clients[$key];
     }
 
     /**
      * Makes calls to the elasticsearch server
      *
-     * @param \Elastica\Request $request
-     * @param  array             $params Host, Port, ...
+     * @param  \Elastica\Request                              $request
+     * @param  array                                          $params  Host, Port, ...
      * @throws \Elastica\Exception\Connection\ThriftException
      * @throws \Elastica\Exception\ResponseException
-     * @return \Elastica\Response Response object
+     * @return \Elastica\Response                             Response object
      */
     public function exec(Request $request, array $params)
     {

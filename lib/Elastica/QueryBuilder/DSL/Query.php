@@ -55,8 +55,8 @@ class Query implements DSL
      * match query
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
-     * @param null|string $field
-     * @param null|string $value
+     * @param  null|string $field
+     * @param  null|string $value
      * @return Match
      */
     public function match($field = null, $value = null)
@@ -108,9 +108,9 @@ class Query implements DSL
      * common terms query
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
-     * @param string $field
-     * @param string $query
-     * @param float $cutoffFrequency percentage in decimal form (.001 == 0.1%)
+     * @param  string $field
+     * @param  string $query
+     * @param  float  $cutoffFrequency percentage in decimal form (.001 == 0.1%)
      * @return Common
      */
     public function common_terms($field, $query, $cutoffFrequency)
@@ -183,8 +183,8 @@ class Query implements DSL
     /**
      * filtered query
      *
-     * @param AbstractFilter $filter
-     * @param AbstractQuery $query
+     * @param  AbstractFilter $filter
+     * @param  AbstractQuery  $query
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html
      * @return Filtered
      */
@@ -250,8 +250,8 @@ class Query implements DSL
      * has child query
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
-     * @param AbstractQuery $query
-     * @param null|string $type
+     * @param  AbstractQuery $query
+     * @param  null|string   $type
      * @return HasChild
      */
     public function has_child(AbstractQuery $query, $type = null)
@@ -263,8 +263,8 @@ class Query implements DSL
      * has parent query
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
-     * @param AbstractQuery $query
-     * @param string $type
+     * @param  AbstractQuery $query
+     * @param  string        $type
      * @return HasParent
      */
     public function has_parent(AbstractQuery $query, $type)
@@ -276,8 +276,8 @@ class Query implements DSL
      * ids query
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html
-     * @param array|string|\Elastica\Type $type
-     * @param array $ids
+     * @param  array|string|\Elastica\Type $type
+     * @param  array                       $ids
      * @return Ids
      */
     public function ids($type, array $ids)
@@ -364,8 +364,8 @@ class Query implements DSL
      * simple_query_string query
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html
-     * @param string $query
-     * @param array $fields
+     * @param  string            $query
+     * @param  array             $fields
      * @return SimpleQueryString
      */
     public function simple_query_string($query, array $fields = array())
@@ -377,8 +377,8 @@ class Query implements DSL
      * range query
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-range-query.html
-     * @param string $fieldName
-     * @param array $args
+     * @param  string $fieldName
+     * @param  array  $args
      * @return Range
      */
     public function range($fieldName, array $args)
@@ -471,8 +471,8 @@ class Query implements DSL
      * terms query
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html
-     * @param string $field
-     * @param array $terms
+     * @param  string $field
+     * @param  array  $terms
      * @return Terms
      */
     public function terms($field, array $terms)
@@ -484,8 +484,8 @@ class Query implements DSL
      * top children query
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-top-children-query.html
-     * @param AbstractQuery $query
-     * @param string $type
+     * @param  AbstractQuery $query
+     * @param  string        $type
      * @return TopChildren
      */
     public function top_children(AbstractQuery $query, $type)

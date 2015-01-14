@@ -75,11 +75,11 @@ class GeoShapePreIndexed extends AbstractGeoShape
                         'id' => $this->_indexedId,
                         'type' => $this->_indexedType,
                         'index' => $this->_indexedIndex,
-                        'path' => $this->_indexedPath
+                        'path' => $this->_indexedPath,
                     ),
-                    'relation' => $this->_relation
-                )
-            )
+                    'relation' => $this->_relation,
+                ),
+            ),
         );
     }
 }

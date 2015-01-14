@@ -2,7 +2,6 @@
 
 namespace Elastica\QueryBuilder;
 
-use Elastica\QueryBuilder\DSL;
 
 /**
  * Abstract Version class
@@ -43,7 +42,7 @@ abstract class Version
     /**
      * returns true if $name is supported, false otherwise
      *
-     * @param string $name
+     * @param  string $name
      * @param $type
      * @return bool
      */

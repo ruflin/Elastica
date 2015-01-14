@@ -9,5 +9,4 @@ namespace Elastica\Aggregation;
  */
 class Max extends AbstractSimpleAggregation
 {
-
-} 
+}

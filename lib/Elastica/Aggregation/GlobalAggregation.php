@@ -9,5 +9,4 @@ namespace Elastica\Aggregation;
  */
 class GlobalAggregation extends AbstractAggregation
 {
-
-} 
+}

@@ -15,7 +15,7 @@ class JSON
      * Parse JSON string to an array
      *
      * @param  string $json JSON string to parse
-     * @return array PHP array representation of JSON string
+     * @return array  PHP array representation of JSON string
      * @link http://php.net/manual/en/function.json-decode.php
      * @link http://www.php.net/manual/en/function.json-last-error.php
      */

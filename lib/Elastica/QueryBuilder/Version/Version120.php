@@ -60,7 +60,7 @@ class Version120 extends Version
         // 'custom_boost_factor'
 
         // new in 1.1.0
-        'template'
+        'template',
     );
 
     protected $filters = array(
@@ -124,7 +124,7 @@ class Version120 extends Version
         'significant_terms',
 
         // new in 1.2.0
-        'reverse_nested'
+        'reverse_nested',
     );
 
     protected $suggesters = array(
@@ -133,6 +133,6 @@ class Version120 extends Version
         'completion',
 
         // new in 1.2.0
-        'context'
+        'context',
     );
 }

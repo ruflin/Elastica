@@ -9,5 +9,4 @@ namespace Elastica\Aggregation;
  */
 class Min extends AbstractSimpleAggregation
 {
-
-} 
+}

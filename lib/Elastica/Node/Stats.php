@@ -63,7 +63,7 @@ class Stats
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {
-                return null;
+                return;
             }
         }
 
@@ -107,7 +107,7 @@ class Stats
      */
     public function refresh()
     {
-        $path = '_nodes/' . $this->getNode()->getName() . '/stats';
+        $path = '_nodes/'.$this->getNode()->getName().'/stats';
         $this->_response = $this->getNode()->getClient()->request($path, Request::GET);
         $data = $this->getResponse()->getData();
         $this->_data = reset($data['nodes']);

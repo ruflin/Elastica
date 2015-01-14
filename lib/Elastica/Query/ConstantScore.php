@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Query;
+
 use Elastica\Filter\AbstractFilter;
 
 /**
@@ -43,8 +44,8 @@ class ConstantScore extends AbstractQuery
     /**
      * Set query
      *
-     * @param array|\Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Query\ConstantScore         Query object
+     * @param  array|\Elastica\Query\AbstractQuery $query
+     * @return \Elastica\Query\ConstantScore       Query object
      */
     public function setQuery($query)
     {
@@ -58,7 +59,7 @@ class ConstantScore extends AbstractQuery
     /**
      * Set boost
      *
-     * @param  float                        $boost
+     * @param  float                         $boost
      * @return \Elastica\Query\ConstantScore
      */
     public function setBoost($boost)

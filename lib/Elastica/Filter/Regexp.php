@@ -29,8 +29,8 @@ class Regexp extends AbstractFilter
     /**
      * Create Regexp object
      *
-     * @param  string $field    Field name
-     * @param  string $regexp   Regular expression
+     * @param  string                               $field  Field name
+     * @param  string                               $regexp Regular expression
      * @throws \Elastica\Exception\InvalidException
      */
     public function __construct($field = '', $regexp = '')
@@ -42,7 +42,7 @@ class Regexp extends AbstractFilter
     /**
      * Sets the name of the regexp field.
      *
-     * @param  string                       $field Field name
+     * @param  string                  $field Field name
      * @return \Elastica\Filter\Regexp
      */
     public function setField($field)
@@ -55,7 +55,7 @@ class Regexp extends AbstractFilter
     /**
      * Sets the regular expression query string.
      *
-     * @param  string                       $regexp Regular expression
+     * @param  string                  $regexp Regular expression
      * @return \Elastica\Filter\Regexp
      */
     public function setRegexp($regexp)

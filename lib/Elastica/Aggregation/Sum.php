@@ -9,5 +9,4 @@ namespace Elastica\Aggregation;
  */
 class Sum extends AbstractSimpleAggregation
 {
-
-} 
+}

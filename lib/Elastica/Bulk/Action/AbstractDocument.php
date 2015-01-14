@@ -23,7 +23,7 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param \Elastica\Document $document
+     * @param  \Elastica\Document                     $document
      * @return \Elastica\Bulk\Action\AbstractDocument
      */
     public function setDocument(Document $document)
@@ -38,7 +38,7 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param \Elastica\Script $script
+     * @param  \Elastica\Script                       $script
      * @return \Elastica\Bulk\Action\AbstractDocument
      */
     public function setScript(Script $script)
@@ -56,21 +56,17 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param \Elastica\Script|\Elastica\Document $data
+     * @param  \Elastica\Script|\Elastica\Document    $data
      * @throws \InvalidArgumentException
      * @return \Elastica\Bulk\Action\AbstractDocument
      */
     public function setData($data)
     {
         if ($data instanceof Script) {
-
             $this->setScript($data);
-
-        }else if ($data instanceof Document) {
-
+        } elseif ($data instanceof Document) {
             $this->setDocument($data);
-
-        }else{
+        } else {
             throw new \InvalidArgumentException("Data should be a Document or a Script.");
         }
 
@@ -87,7 +83,7 @@ abstract class AbstractDocument extends Action
             return $this->_data;
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -100,7 +96,7 @@ abstract class AbstractDocument extends Action
             return $this->_data;
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -112,23 +108,23 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param \Elastica\AbstractUpdateAction $source
+     * @param  \Elastica\AbstractUpdateAction $source
      * @return array
      */
     abstract protected function _getMetadata(AbstractUpdateAction $source);
 
     /**
-     * @param \Elastica\Document|\Elastica\Script $data
-     * @param string $opType
+     * @param  \Elastica\Document|\Elastica\Script    $data
+     * @param  string                                 $opType
      * @return \Elastica\Bulk\Action\AbstractDocument
      */
     public static function create($data, $opType = null)
     {
-    	//Check type
-    	if (!($data instanceof Document) && !($data instanceof Script)) {
-    		throw new \InvalidArgumentException("The data needs to be a Document or a Script.");
-    	}
-        
+        //Check type
+        if (!($data instanceof Document) && !($data instanceof Script)) {
+            throw new \InvalidArgumentException("The data needs to be a Document or a Script.");
+        }
+
         if (null === $opType && $data->hasOpType()) {
             $opType = $data->getOpType();
         }
@@ -137,7 +133,7 @@ abstract class AbstractDocument extends Action
         if ($data instanceof Script) {
             if ($opType === null) {
                 $opType = self::OP_TYPE_UPDATE;
-            } else if ($opType != self::OP_TYPE_UPDATE) {
+            } elseif ($opType != self::OP_TYPE_UPDATE) {
                 throw new \InvalidArgumentException("Scripts can only be used with the update operation type.");
             }
         }
@@ -157,6 +153,7 @@ abstract class AbstractDocument extends Action
                 $action = new IndexDocument($data);
                 break;
         }
+
         return $action;
     }
 }

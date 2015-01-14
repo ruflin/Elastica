@@ -9,5 +9,4 @@ namespace Elastica\Aggregation;
  */
 class ExtendedStats extends AbstractSimpleAggregation
 {
-
-} 
+}

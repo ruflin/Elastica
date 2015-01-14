@@ -11,7 +11,7 @@ class DateHistogram extends Histogram
 {
     /**
      * Set pre-rounding based on interval
-     * @param string $preZone
+     * @param  string        $preZone
      * @return DateHistogram
      */
     public function setPreZone($preZone)
@@ -21,7 +21,7 @@ class DateHistogram extends Histogram
 
     /**
      * Set post-rounding based on interval
-     * @param string $postZone
+     * @param  string        $postZone
      * @return DateHistogram
      */
     public function setPostZone($postZone)
@@ -31,7 +31,7 @@ class DateHistogram extends Histogram
 
     /**
      * Set pre-zone adjustment for larger time intervals (day and above)
-     * @param string $adjust
+     * @param  string        $adjust
      * @return DateHistogram
      */
     public function setPreZoneAdjustLargeInterval($adjust)
@@ -41,7 +41,7 @@ class DateHistogram extends Histogram
 
     /**
      * Adjust for granularity of date data
-     * @param int $factor set to 1000 if date is stored in seconds rather than milliseconds
+     * @param  int           $factor set to 1000 if date is stored in seconds rather than milliseconds
      * @return DateHistogram
      */
     public function setFactor($factor)
@@ -51,7 +51,7 @@ class DateHistogram extends Histogram
 
     /**
      * Set the offset for pre-rounding
-     * @param string $offset "1d", for example
+     * @param  string        $offset "1d", for example
      * @return DateHistogram
      */
     public function setPreOffset($offset)
@@ -61,7 +61,7 @@ class DateHistogram extends Histogram
 
     /**
      * Set the offset for post-rounding
-     * @param string $offset "1d", for example
+     * @param  string        $offset "1d", for example
      * @return DateHistogram
      */
     public function setPostOffset($offset)
@@ -72,11 +72,11 @@ class DateHistogram extends Histogram
     /**
      * Set the format for returned bucket key_as_string values
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern
-     * @param string $format see link for formatting options
+     * @param  string        $format see link for formatting options
      * @return DateHistogram
      */
     public function setFormat($format)
     {
         return $this->setParam("format", $format);
     }
-} 
+}

@@ -71,17 +71,17 @@ class Search
         return $this;
     }
 
-  /**
-   * @param  \Elastica\Search $search
-   * @param  string           $key      Optional key
-   * @return \Elastica\Multi\Search
-   */
+    /**
+     * @param  \Elastica\Search       $search
+     * @param  string                 $key    Optional key
+     * @return \Elastica\Multi\Search
+     */
     public function addSearch(BaseSearch $search, $key = null)
     {
         if ($key) {
-          $this->_searches[$key] = $search;
+            $this->_searches[$key] = $search;
         } else {
-          $this->_searches[]     = $search;
+            $this->_searches[]     = $search;
         }
 
         return $this;
@@ -121,7 +121,7 @@ class Search
     }
 
     /**
-     * @param  string                $searchType
+     * @param  string                 $searchType
      * @return \Elastica\Multi\Search
      */
     public function setSearchType($searchType)
@@ -155,7 +155,7 @@ class Search
     {
         $data = '';
         foreach ($this->getSearches() as $search) {
-            $data.= $this->_getSearchData($search);
+            $data .= $this->_getSearchData($search);
         }
 
         return $data;
@@ -168,11 +168,11 @@ class Search
     protected function _getSearchData(BaseSearch $search)
     {
         $header = $this->_getSearchDataHeader($search);
-        $header = (empty($header)) ? new \stdClass : $header;
+        $header = (empty($header)) ? new \stdClass() : $header;
         $query = $search->getQuery();
 
-        $data = JSON::stringify($header) . "\n";
-        $data.= JSON::stringify($query->toArray()) . "\n";
+        $data = JSON::stringify($header)."\n";
+        $data .= JSON::stringify($query->toArray())."\n";
 
         return $data;
     }

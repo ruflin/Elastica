@@ -25,7 +25,7 @@ class HttpException extends ConnectionException
     /**
      * Construct Exception
      *
-     * @param string            $error    Error
+     * @param string             $error    Error
      * @param \Elastica\Request  $request
      * @param \Elastica\Response $response
      */
@@ -69,7 +69,7 @@ class HttpException extends ConnectionException
                 $error = "Operation timed out";
                 break;
             default:
-                $error = "Unknown error:" . $error;
+                $error = "Unknown error:".$error;
                 break;
         }
 

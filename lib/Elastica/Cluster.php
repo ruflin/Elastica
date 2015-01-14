@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica;
+
 use Elastica\Cluster\Health;
 use Elastica\Cluster\Settings;
 use Elastica\Exception\NotImplementedException;
@@ -135,7 +136,7 @@ class Cluster
     /**
      * Returns the cluster information (not implemented yet)
      *
-     * @param  array                                      $args Additional arguments
+     * @param  array                                       $args Additional arguments
      * @throws \Elastica\Exception\NotImplementedException
      * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-info.html
      */
@@ -168,13 +169,13 @@ class Cluster
     /**
      * Shuts down the complete cluster
      *
-     * @param  string            $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
+     * @param  string             $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
      * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown.html
      */
     public function shutdown($delay = '1s')
     {
-        $path = '_shutdown?delay=' . $delay;
+        $path = '_shutdown?delay='.$delay;
 
         return $this->_client->request($path, Request::POST);
     }

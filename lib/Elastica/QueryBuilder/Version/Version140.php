@@ -2,7 +2,6 @@
 
 namespace Elastica\QueryBuilder\Version;
 
-use Elastica\QueryBuilder\Version;
 
 /**
  * elasticsearch 1.4 DSL
@@ -60,7 +59,7 @@ class Version140 extends Version130
         // 'custom_boost_factor'
 
         // new in 1.1.0
-        'template'
+        'template',
     );
 
     protected $filters = array(
@@ -134,7 +133,7 @@ class Version140 extends Version130
         // new in 1.4.0
         'scripted_metric',
         'filters',
-        'children'
+        'children',
     );
 
     protected $suggesters = array(
@@ -143,6 +142,6 @@ class Version140 extends Version130
         'completion',
 
         // new in 1.2.0
-        'context'
+        'context',
     );
 }

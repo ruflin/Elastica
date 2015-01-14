@@ -45,7 +45,7 @@ class GeoDistanceRange extends AbstractGeoDistance
     }
 
     /**
-     * @param  array                                  $ranges
+     * @param  array                             $ranges
      * @return \Elastica\Filter\GeoDistanceRange
      */
     public function setRanges(array $ranges)
@@ -60,8 +60,8 @@ class GeoDistanceRange extends AbstractGeoDistance
     }
 
     /**
-     * @param  string                                 $key
-     * @param  mixed                                  $value
+     * @param  string                               $key
+     * @param  mixed                                $value
      * @return \Elastica\Filter\GeoDistanceRange
      * @throws \Elastica\Exception\InvalidException
      */
@@ -80,7 +80,7 @@ class GeoDistanceRange extends AbstractGeoDistance
                 $value = (boolean) $value;
                 break;
             default:
-                throw new InvalidException('Invalid range parameter given: ' . $key);
+                throw new InvalidException('Invalid range parameter given: '.$key);
         }
         $this->_ranges[$key] = $value;
 

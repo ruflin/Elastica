@@ -17,9 +17,9 @@ class Response extends BaseResponse
     protected $_opType;
 
     /**
-     * @param array|string $responseData
+     * @param array|string          $responseData
      * @param \Elastica\Bulk\Action $action
-     * @param string $opType
+     * @param string                $opType
      */
     public function __construct($responseData, Action $action, $opType)
     {

@@ -17,7 +17,7 @@ class Range extends AbstractFacet
     /**
      * Sets the field for the range.
      *
-     * @param  string                    $field The name of the field for range.
+     * @param  string                $field The name of the field for range.
      * @return \Elastica\Facet\Range
      */
     public function setField($field)
@@ -28,8 +28,8 @@ class Range extends AbstractFacet
     /**
      * Sets the fields by their separate key and value fields.
      *
-     * @param  string                    $keyField   The key_field param for the range.
-     * @param  string                    $valueField The key_value param for the range.
+     * @param  string                $keyField   The key_field param for the range.
+     * @param  string                $valueField The key_value param for the range.
      * @return \Elastica\Facet\Range
      */
     public function setKeyValueFields($keyField, $valueField)
@@ -61,7 +61,7 @@ class Range extends AbstractFacet
      *     array('from' => 150)
      * )
      *
-     * @param  array                     $ranges Numerical array with range definitions.
+     * @param  array                 $ranges Numerical array with range definitions.
      * @return \Elastica\Facet\Range
      */
     public function setRanges(array $ranges)
@@ -72,8 +72,8 @@ class Range extends AbstractFacet
     /**
      * Adds a range to the range facet.
      *
-     * @param  mixed                     $from The from for the range.
-     * @param  mixed                     $to   The to for the range.
+     * @param  mixed                 $from The from for the range.
+     * @param  mixed                 $to   The to for the range.
      * @return \Elastica\Facet\Range
      */
     public function addRange($from = null, $to = null)

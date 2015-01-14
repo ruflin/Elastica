@@ -23,9 +23,9 @@ class GeoDistance extends AbstractGeoDistance
     /**
      * Create GeoDistance object
      *
-     * @param  string                              $key      Key
-     * @param  array|string                        $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
-     * @param  string                              $distance Distance
+     * @param  string                               $key      Key
+     * @param  array|string                         $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
+     * @param  string                               $distance Distance
      * @throws \Elastica\Exception\InvalidException
      */
     public function __construct($key, $location, $distance)
@@ -36,7 +36,7 @@ class GeoDistance extends AbstractGeoDistance
     }
 
     /**
-     * @param  string                            $distance
+     * @param  string                       $distance
      * @return \Elastica\Filter\GeoDistance current filter
      */
     public function setDistance($distance)
@@ -49,7 +49,7 @@ class GeoDistance extends AbstractGeoDistance
     /**
      * See DISTANCE_TYPE_* constants
      *
-     * @param  string                            $distanceType
+     * @param  string                       $distanceType
      * @return \Elastica\Filter\GeoDistance current filter
      */
     public function setDistanceType($distanceType)
@@ -62,7 +62,7 @@ class GeoDistance extends AbstractGeoDistance
     /**
      * See OPTIMIZE_BBOX_* constants
      *
-     * @param  string                            $optimizeBbox
+     * @param  string                       $optimizeBbox
      * @return \Elastica\Filter\GeoDistance current filter
      */
     public function setOptimizeBbox($optimizeBbox)
