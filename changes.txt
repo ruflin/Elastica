@@ -1,5 +1,8 @@
 CHANGES
 
+2015-01-14
+- added @return annotation to top_hits aggregation DSL method
+
 2015-01-07
 - Added Elastica\Aggregation\TopHits #718
 
