@@ -31,7 +31,7 @@ class Query extends Param
      * @var array Params
      */
     protected $_params = array();
-    
+
     /**
     * Suggest query or not
     *
@@ -211,7 +211,6 @@ class Query extends Param
     public function setSize($size = 10)
     {
         return $this->setParam('size', $size);
-        
     }
 
     /**
@@ -433,6 +432,3 @@ class Query extends Param
         return $this->setParam("post_filter", $filter);
     }
 }
-
-
-
