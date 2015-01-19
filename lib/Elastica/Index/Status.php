@@ -88,7 +88,11 @@ class Status
     {
         $responseData = $this->getIndex()->request('_aliases', \Elastica\Request::GET)->getData();
 
-        return array_keys($responseData[$this->getIndex()->getName()]['aliases']);
+        $data = $responseData[$this->getIndex()->getName()];
+        if (!empty($data['aliases'])) {
+            return array_keys($data['aliases']);
+        }
+        return [];
     }
 
     /**

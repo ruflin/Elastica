@@ -68,31 +68,33 @@ class Settings
         $requestData = $this->request()->getData();
         $data = reset($requestData);
 
+        if (empty($data['settings']) || empty($data['settings']['index'])) {
+            return []; // index not found
+        }
         $settings = $data['settings']['index'];
 
-        if (!empty($setting)) {
-            if (isset($settings[$setting])) {
-                return $settings[$setting];
-            } else {
-                if (strpos($setting, '.') !== false) {
-                    // translate old dot-notation settings to nested arrays
-                    $keys = explode('.', $setting);
-                    foreach ($keys as $key) {
-                        if (isset($settings[$key])) {
-                            $settings = $settings[$key];
-                        } else {
-                            return;
-                        }
-                    }
-
-                    return $settings;
-                }
-
-                return;
-            }
+        if (!$setting) {
+            // return all array
+            return $settings;
         }
 
-        return $settings;
+        if (isset($settings[$setting])) {
+            return $settings[$setting];
+        } else {
+            if (strpos($setting, '.') !== false) {
+                // translate old dot-notation settings to nested arrays
+                $keys = explode('.', $setting);
+                foreach ($keys as $key) {
+                    if (isset($settings[$key])) {
+                        $settings = $settings[$key];
+                    } else {
+                        return null;
+                    }
+                }
+                return $settings;
+            }
+            return null;
+        }
     }
 
     /**
@@ -118,7 +120,18 @@ class Settings
      */
     public function setReadOnly($readOnly = true)
     {
-        return $this->set(array('blocks.read_only' => $readOnly));
+        return $this->set(array('blocks.write' => $readOnly));
+    }
+
+    /**
+     * getReadOnly
+     *
+     * @access public
+     * @return bool
+     */
+    public function getReadOnly()
+    {
+        return $this->get('blocks.write') === 'true'; // ES returns a string for this setting
     }
 
     /**
@@ -314,7 +327,9 @@ class Settings
     {
         $path = '_settings';
 
-        $data = array('index' => $data);
+        if (!empty($data)) {
+            $data = array('index' => $data);
+        }
 
         return $this->getIndex()->request($path, $method, $data);
     }

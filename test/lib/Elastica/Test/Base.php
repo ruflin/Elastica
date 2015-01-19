@@ -3,6 +3,7 @@
 namespace Elastica\Test;
 
 use Elastica\Client;
+use Elastica\Index;
 
 class Base extends \PHPUnit_Framework_TestCase
 {
@@ -27,5 +28,18 @@ class Base extends \PHPUnit_Framework_TestCase
         $index->create(array('index' => array('number_of_shards' => $shards, 'number_of_replicas' => 0)), $delete);
 
         return $index;
+    }
+
+    protected function _waitForAllocation(Index $index)
+    {
+        do {
+            $settings = $index->getStatus()->get();
+            $allocated = true;
+            foreach ($settings['shards'] as $shard) {
+                if ($shard[0]['routing']['state'] != 'STARTED') {
+                    $allocated = false;
+                }
+            }
+        } while (!$allocated);
     }
 }
