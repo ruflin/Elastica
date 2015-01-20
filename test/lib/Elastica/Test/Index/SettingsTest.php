@@ -285,4 +285,25 @@ class SettingsTest extends BaseTest
         $settings->setBlocksMetadata(false); // Cannot delete index otherwise
         $index->delete();
     }
+
+    /**
+     * testNotFoundIndex
+     *
+     * @access public
+     * @return void
+     */
+    public function testNotFoundIndex()
+    {
+        $client = $this->_getClient();
+        $index = $client->getIndex('not_found_index');
+        //wait for the shards to be allocated
+
+        try {
+            $settings = $index->getSettings()->get();
+            $this->fail('Should throw exception because of index not found');
+        } catch (ResponseException $e) {
+            $message = $e->getMessage();
+            $this->assertContains('IndexMissingException', $message);
+        }
+    }
 }

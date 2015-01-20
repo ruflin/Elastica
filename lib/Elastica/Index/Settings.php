@@ -70,7 +70,8 @@ class Settings
         $data = reset($requestData);
 
         if (empty($data['settings']) || empty($data['settings']['index'])) {
-            throw new NotFoundException('Index ' . $this->getIndex()->getName() . ' not found'); // index not found
+            // should not append, the request should throw a ResponseException
+            throw new NotFoundException('Index ' . $this->getIndex()->getName() . ' not found');
         }
         $settings = $data['settings']['index'];
 
