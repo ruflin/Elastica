@@ -2,6 +2,7 @@
 
 namespace Elastica\Index;
 
+use Elastica\Exception\NotFoundException;
 use Elastica\Index as BaseIndex;
 use Elastica\Request;
 
@@ -69,7 +70,7 @@ class Settings
         $data = reset($requestData);
 
         if (empty($data['settings']) || empty($data['settings']['index'])) {
-            return []; // index not found
+            throw new NotFoundException('Index ' . $this->getIndex()->getName() . ' not found'); // index not found
         }
         $settings = $data['settings']['index'];
 
