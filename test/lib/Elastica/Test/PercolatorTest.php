@@ -9,6 +9,7 @@ use Elastica\Percolator;
 use Elastica\Query\Term;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Type;
 
 class PercolatorTest extends BaseTest
 {
@@ -17,6 +18,7 @@ class PercolatorTest extends BaseTest
         $percolatorName = 'percotest';
 
         $index = $this->_createIndex($percolatorName);
+
         $percolator = new Percolator($index);
 
         $query = new Term(array('field1' => 'value1'));
@@ -40,6 +42,7 @@ class PercolatorTest extends BaseTest
     public function testMatchDoc()
     {
         $index = $this->_createIndex();
+
         $percolator = new Percolator($index);
 
         $percolatorName = 'percotest';
@@ -220,5 +223,25 @@ class PercolatorTest extends BaseTest
 
         $this->assertCount(1, $matches);
         $index->delete();
+    }
+
+    /**
+     * _createIndex
+     *
+     * @access protected
+     * @return void
+     */
+    protected function _createIndex()
+    {
+        $index = parent::_createIndex();
+        $type = new Type($index, 'test');
+        $mapping = [
+            'name' => ['type' => 'string'],
+            'field1' => ['type' => 'string'],
+        ];
+
+        $type->setMapping($mapping);
+
+        return $index;
     }
 }
