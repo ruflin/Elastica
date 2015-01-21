@@ -81,4 +81,11 @@ class NodeTest extends BaseTest
         // One node less ...
         $this->assertEquals($count - 1, count($names));
     }
+
+    public function testGetName()
+    {
+        $nodes = $this->_getClient()->getCluster()->getNodes();
+        $this->assertCount(1, $nodes);
+        $this->assertEquals('elastica_test_node', $nodes[0]->getName());
+    }
 }
