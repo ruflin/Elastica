@@ -39,6 +39,7 @@ class GeoClusterTest extends BaseTest{
         $query = new \Elastica\Query();
         $query->setFacets(array($facet));
 
+
         $response = $type->search($query);
         $facets = $response->getFacets();
 

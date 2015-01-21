@@ -4,11 +4,11 @@
   hosts: localhost
   connection: local
   vars:
-    - ES_VER: "1.3.4"
-    - ES_SHORT_VER: "1.3"
-    - ES_MAPPER_ATTACHMENTS_VER: "2.3.2"
-    - ES_TRANSPORT_THRIFT_VER: "2.3.0"
-    - ES_GEOCLUSTER_FACET_VER: "0.0.11"
+    - ES_VER: "1.4.2"
+    - ES_SHORT_VER: "1.4"
+    - ES_MAPPER_ATTACHMENTS_VER: "2.4.1"
+    - ES_TRANSPORT_THRIFT_VER: "2.4.1"
+    - ES_GEOCLUSTER_FACET_VER: "0.0.12"
     - ES_PROJECT_ROOT: "{{ lookup('env', 'ES_PROJECT_ROOT') }}"
     - ES_COMPOSER_NODEV: "{{ lookup('env', 'ES_COMPOSER_NODEV') }}"
   roles:

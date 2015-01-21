@@ -165,8 +165,8 @@ class FunctionScoreTest extends BaseTest
         $results = $response->getResults();
 
         // the document with the random score should have a score > 1, means it is the first result
-        $result0 = $results[1]->getData();
-        
+        $result0 = $results[0]->getData();
+
         $this->assertEquals("Miller's Field", $result0['name']);
     }
 

@@ -356,8 +356,10 @@ class IndexTest extends BaseTest
         $index2 = $client->getIndex($indexName2);
 
         $index1->create(array(), true);
+        $this->_waitForAllocation($index1);
         $index1->addAlias($aliasName);
         $index2->create(array(), true);
+        $this->_waitForAllocation($index2);
 
         $index1->refresh();
         $index2->refresh();
@@ -560,18 +562,21 @@ class IndexTest extends BaseTest
         //Testing recreate (backward compatibility)
         $index = $client->getIndex($indexName);
         $index->create(array(), true);
+        $this->_waitForAllocation($index);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
 
         //Testing create index with array options
         $opts = array('recreate' => true, 'routing' => 'r1,r2');
         $index->create(array(), $opts);
+        $this->_waitForAllocation($index);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
 
         //Testing invalid options
         $opts = array('recreate' => true, 'routing' => 'r1,r2', 'testing_invalid_option' => true);
         $index->create(array(), $opts);
+        $this->_waitForAllocation($index);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
     }

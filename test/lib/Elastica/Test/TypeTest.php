@@ -674,6 +674,7 @@ class TypeTest extends BaseTest
     public function testUpdateDocumentWithoutId()
     {
         $index = $this->_createIndex();
+        $this->_waitForAllocation($index);
         $type = $index->getType('elastica_type');
 
         $document = new Document();
@@ -781,6 +782,7 @@ class TypeTest extends BaseTest
     public function testAddDocumentWithoutSerializer()
     {
         $index = $this->_createIndex();
+        $this->_waitForAllocation($index);
 
         $type = new Type($index, 'user');
 

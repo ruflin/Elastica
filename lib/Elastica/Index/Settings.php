@@ -2,6 +2,8 @@
 
 namespace Elastica\Index;
 
+use Elastica\Exception\NotFoundException;
+use Elastica\Exception\ResponseException;
 use Elastica\Index as BaseIndex;
 use Elastica\Request;
 
@@ -68,31 +70,34 @@ class Settings
         $requestData = $this->request()->getData();
         $data = reset($requestData);
 
+        if (empty($data['settings']) || empty($data['settings']['index'])) {
+            // should not append, the request should throw a ResponseException
+            throw new NotFoundException('Index ' . $this->getIndex()->getName() . ' not found');
+        }
         $settings = $data['settings']['index'];
 
-        if (!empty($setting)) {
-            if (isset($settings[$setting])) {
-                return $settings[$setting];
-            } else {
-                if (strpos($setting, '.') !== false) {
-                    // translate old dot-notation settings to nested arrays
-                    $keys = explode('.', $setting);
-                    foreach ($keys as $key) {
-                        if (isset($settings[$key])) {
-                            $settings = $settings[$key];
-                        } else {
-                            return;
-                        }
-                    }
-
-                    return $settings;
-                }
-
-                return;
-            }
+        if (!$setting) {
+            // return all array
+            return $settings;
         }
 
-        return $settings;
+        if (isset($settings[$setting])) {
+            return $settings[$setting];
+        } else {
+            if (strpos($setting, '.') !== false) {
+                // translate old dot-notation settings to nested arrays
+                $keys = explode('.', $setting);
+                foreach ($keys as $key) {
+                    if (isset($settings[$key])) {
+                        $settings = $settings[$key];
+                    } else {
+                        return null;
+                    }
+                }
+                return $settings;
+            }
+            return null;
+        }
     }
 
     /**
@@ -118,7 +123,18 @@ class Settings
      */
     public function setReadOnly($readOnly = true)
     {
-        return $this->set(array('blocks.read_only' => $readOnly));
+        return $this->set(array('blocks.write' => $readOnly));
+    }
+
+    /**
+     * getReadOnly
+     *
+     * @access public
+     * @return bool
+     */
+    public function getReadOnly()
+    {
+        return $this->get('blocks.write') === 'true'; // ES returns a string for this setting
     }
 
     /**
@@ -156,7 +172,7 @@ class Settings
     {
         $state = $state ? 1 : 0;
 
-        return $this->set(array('blocks.write' => (int) $state));
+        return $this->set(array('blocks.write' => $state));
     }
 
     /**
@@ -164,7 +180,18 @@ class Settings
      */
     public function getBlocksMetadata()
     {
-        return (bool) $this->get('blocks.metadata');
+        // TODO will have to be replace by block.metadata.write once https://github.com/elasticsearch/elasticsearch/pull/9203 has been fixed
+        // the try/catch will have to be remove too
+        try {
+            return (bool) $this->get('blocks.metadata');
+        } catch (ResponseException $e) {
+            if (strpos($e->getMessage(), 'ClusterBlockException') !== false) {
+                // hacky way to test if the metadata is blocked since bug 9203 is not fixed
+                return true;
+            } else {
+                throw $e;
+            }
+        }
     }
 
     /**
@@ -173,9 +200,10 @@ class Settings
      */
     public function setBlocksMetadata($state = true)
     {
+        // TODO will have to be replace by block.metadata.write once https://github.com/elasticsearch/elasticsearch/pull/9203 has been fixed
         $state = $state ? 1 : 0;
 
-        return $this->set(array('blocks.metadata' => (int) $state));
+        return $this->set(array('blocks.metadata' => $state));
     }
 
     /**
@@ -314,7 +342,9 @@ class Settings
     {
         $path = '_settings';
 
-        $data = array('index' => $data);
+        if (!empty($data)) {
+            $data = array('index' => $data);
+        }
 
         return $this->getIndex()->request($path, $method, $data);
     }

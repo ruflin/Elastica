@@ -80,12 +80,7 @@ class Status
      */
     public function getIndexNames()
     {
-        $names = array();
-        foreach ($this->_data['indices'] as $name => $data) {
-            $names[] = $name;
-        }
-
-        return $names;
+        return array_keys($this->_data['indices']);
     }
 
     /**

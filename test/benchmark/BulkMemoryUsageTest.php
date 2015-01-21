@@ -41,6 +41,6 @@ class BulkMemoryUsageTest extends \PHPUnit_Framework_TestCase
 
         $endMemory = memory_get_usage();
 
-        $this->assertLessThan(1.2, $endMemory/$startMemory);
+        $this->assertLessThan(1.3, $endMemory/$startMemory);
     }
 }

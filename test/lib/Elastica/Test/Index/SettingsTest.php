@@ -10,7 +10,7 @@ use Elastica\Test\Base as BaseTest;
 
 class SettingsTest extends BaseTest
 {
-	
+
 	public function testGet()
     {
         $indexName = 'elasticatest';
@@ -197,12 +197,11 @@ class SettingsTest extends BaseTest
 
         $type = $index->getType('test');
         $type->addDocument($doc1);
-        $this->assertEquals('false', $index->getSettings()->get('blocks.read_only')); //ES returns a string for this setting
+        $this->assertFalse($index->getSettings()->getReadOnly());
 
         // Try to add doc to read only index
         $index->getSettings()->setReadOnly(true);
-
-        $this->assertEquals('true', $index->getSettings()->get('blocks.read_only'));
+        $this->assertTrue($index->getSettings()->getReadOnly());
 
         try {
             $type->addDocument($doc2);
@@ -210,7 +209,7 @@ class SettingsTest extends BaseTest
         } catch (ResponseException $e) {
             $message = $e->getMessage();
             $this->assertContains('ClusterBlockException', $message);
-            $this->assertContains('index read-only', $message);
+            $this->assertContains('index write', $message);
         }
 
         // Remove read only, add document
@@ -287,16 +286,24 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-    protected function _waitForAllocation(Index $index)
+    /**
+     * testNotFoundIndex
+     *
+     * @access public
+     * @return void
+     */
+    public function testNotFoundIndex()
     {
-        do {
-            $settings = $index->getStatus()->get();
-            $allocated = true;
-            foreach ($settings['shards'] as $shard) {
-                if ($shard[0]['routing']['state'] != 'STARTED') {
-                    $allocated = false;
-                }
-            }
-        } while (!$allocated);
+        $client = $this->_getClient();
+        $index = $client->getIndex('not_found_index');
+        //wait for the shards to be allocated
+
+        try {
+            $settings = $index->getSettings()->get();
+            $this->fail('Should throw exception because of index not found');
+        } catch (ResponseException $e) {
+            $message = $e->getMessage();
+            $this->assertContains('IndexMissingException', $message);
+        }
     }
 }
