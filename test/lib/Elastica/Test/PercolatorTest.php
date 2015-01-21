@@ -226,14 +226,11 @@ class PercolatorTest extends BaseTest
     }
 
     /**
-     * _createIndex
-     *
-     * @access protected
-     * @return void
+     * {@inheritdoc}
      */
-    protected function _createIndex()
+    protected function _createIndex($name = 'test', $delete = true, $shards = 1)
     {
-        $index = parent::_createIndex();
+        $index = parent::_createIndex($name, $delete, $shards);
         $type = new Type($index, 'test');
         $mapping = [
             'name' => ['type' => 'string'],
