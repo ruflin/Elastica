@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<phpunit
+    backupGlobals="false" 
+    backupStaticAttributes="false" 
+    bootstrap="./bootstrap.php" 
+    convertErrorsToExceptions="true" 
+    convertNoticesToExceptions="true" 
+    convertWarningsToExceptions="true" 
+    processIsolation="false" 
+    stopOnError="false" 
+    stopOnFailure="false" 
+    stopOnIncomplete="false" 
+    stopOnSkipped="false" 
+    syntaxCheck="false" 
+    verbose="true"
+    >
+  <filter>
+    <whitelist>
+      <directory suffix=".php">../lib/</directory>
+    </whitelist>
+  </filter>
+  <testsuites>
+    <testsuite name="Elastica">
+      <directory>./lib/Elastica/</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>
