@@ -21,11 +21,11 @@ class SettingsTest extends BaseTest
 
         $settings->setTransient('discovery.zen.minimum_master_nodes', 2);
         $data = $settings->get();
-        $this->assertEquals(2, $data['transient']['discovery.zen.minimum_master_nodes']);
+        $this->assertEquals(2, $data['transient']['discovery']['zen']['minimum_master_nodes']);
 
         $settings->setTransient('discovery.zen.minimum_master_nodes', 1);
         $data = $settings->get();
-        $this->assertEquals(1, $data['transient']['discovery.zen.minimum_master_nodes']);
+        $this->assertEquals(1, $data['transient']['discovery']['zen']['minimum_master_nodes']);
     }
 
     public function testSetPersistent()
@@ -40,11 +40,11 @@ class SettingsTest extends BaseTest
 
         $settings->setPersistent('discovery.zen.minimum_master_nodes', 2);
         $data = $settings->get();
-        $this->assertEquals(2, $data['persistent']['discovery.zen.minimum_master_nodes']);
+        $this->assertEquals(2, $data['persistent']['discovery']['zen']['minimum_master_nodes']);
 
         $settings->setPersistent('discovery.zen.minimum_master_nodes', 1);
         $data = $settings->get();
-        $this->assertEquals(1, $data['persistent']['discovery.zen.minimum_master_nodes']);
+        $this->assertEquals(1, $data['persistent']['discovery']['zen']['minimum_master_nodes']);
     }
 
     public function testSetReadOnly()
