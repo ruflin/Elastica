@@ -17,8 +17,7 @@ class ClusterTest extends BaseTest
 
         $names = $cluster->getNodeNames();
 
-        $this->assertInternalType('array', $names);
-        $this->assertGreaterThan(0, count($names));
+        $this->assertSame(['elastica_test_node'], $names);
     }
 
     public function testGetNodes()

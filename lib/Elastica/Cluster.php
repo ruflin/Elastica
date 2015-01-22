@@ -104,8 +104,12 @@ class Cluster
     public function getNodeNames()
     {
         $data = $this->getState();
+        $nodeNames = array();
+        foreach ($data['nodes'] as $node) {
+            $nodeNames[] = $node['name'];
+        }
 
-        return array_keys($data['routing_nodes']['nodes']);
+        return $nodeNames;
     }
 
     /**
