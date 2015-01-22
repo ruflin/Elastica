@@ -17,7 +17,7 @@ class ClusterTest extends BaseTest
 
         $names = $cluster->getNodeNames();
 
-        $this->assertSame(['elastica_test_node'], $names);
+        $this->assertSame(['Silver Fox', 'Skywalker', 'Wolverine'], $names);
     }
 
     public function testGetNodes()

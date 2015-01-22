@@ -85,7 +85,9 @@ class NodeTest extends BaseTest
     public function testGetName()
     {
         $nodes = $this->_getClient()->getCluster()->getNodes();
-        $this->assertCount(1, $nodes);
-        $this->assertEquals('elastica_test_node', $nodes[0]->getName());
+        $this->assertCount(3, $nodes);
+        foreach ($nodes as $node) {
+            $this->assertContains($node->getName(), ['Silver Fox', 'Skywalker', 'Wolverine']);
+        }
     }
 }
