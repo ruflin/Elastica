@@ -1,3 +1,5 @@
+{% block default_config %}
+
 #################################### Index ####################################
 
 index.number_of_shards: 2
@@ -5,16 +7,7 @@ index.number_of_replicas: 0
 
 #################################### Plugin ###################################
 
-plugin.mandatory: mapper-attachments,geocluster-facet,transport-thrift
-
-############################## Network And HTTP ###############################
-
-http.port: 9200
-thrift.port: 9500
-
-################################## Discovery ##################################
-
-discovery.zen.ping.multicast.enabled: false
+plugin.mandatory: mapper-attachments, geocluster-facet, transport-thrift
 
 ################################## UDP ########################################
 
@@ -25,6 +18,13 @@ bulk.udp.bulk_actions: 5
 
 script.disable_dynamic: false
 
-#################################### Node #####################################
+################################### Memory ####################################
 
-node.name: "elastica_test_node"
+bootstrap.mlockall: true
+
+{% endblock %}
+
+################################### Node specific #############################
+{% block config %}
+
+{% endblock %}

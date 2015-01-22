@@ -60,16 +60,29 @@
     creates=/usr/share/elasticsearch/plugins/transport-thrift
     /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/{{ ES_TRANSPORT_THRIFT_VER }}
 
-- name: create elasticsearch config
+- name: remove default config
+  file: >
+    path={{ item }}
+    state=absent
+  with_items:
+    - /etc/default/elasticsearch
+    - /etc/elasticsearch/elasticsearch.yml
+
+- name: create custom config
   template: >
-    dest=/etc/elasticsearch/elasticsearch.yml
-    src=config.yml.j2
+    dest=/etc/elasticsearch/{{ item }}
+    src={{ item }}
+  with_items:
+    - config-0.yml
+    - config-1.yml
+    - config-2.yml
+    - logging.yml
   notify: restart elasticsearch
 
-- name: create elasticsearch service config
+- name: create elasticsearch service script
   template: >
-    dest=/etc/default/elasticsearch
-    src=service-default.j2
+    dest=/etc/init.d/elasticsearch
+    src=elasticsearch.service
   notify: restart elasticsearch
 
 - name: start elasticsearch

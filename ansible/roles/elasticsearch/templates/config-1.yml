@@ -1,0 +1,10 @@
+{% extends "config-default.yml" %}
+
+{% block config %}
+
+http.port: 9201
+transport.tcp.port: 9301
+thrift.port: 9501
+node.name: "Skywalker"
+
+{% endblock %}
