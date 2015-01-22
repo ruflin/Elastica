@@ -17,10 +17,11 @@ before_script:
   - mkdir -p build/logs
 
 script:
-  - phpunit -c test/
+  - phpunit -c test/phpunit-travis.xml
 
 after_script:
   - cat /var/log/elasticsearch/*.log
   - cat /var/log/nginx/*.log
   - cat build/logs/phpunit-tap.log
+  - composer require satooshi/php-coveralls
   - php vendor/bin/coveralls -v
