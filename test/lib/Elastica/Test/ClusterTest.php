@@ -15,9 +15,9 @@ class ClusterTest extends BaseTest
 
         $cluster = new Cluster($client);
 
-        $names = $cluster->getNodeNames();
-
-        $this->assertSame(['Silver Fox', 'Skywalker', 'Wolverine'], $names);
+        foreach ($cluster->getNodeNames() as $name) {
+            $this->assertContains($name, ['Silver Fox', 'Skywalker', 'Wolverine']);
+        }
     }
 
     public function testGetNodes()
@@ -40,22 +40,6 @@ class ClusterTest extends BaseTest
         $cluster = $client->getCluster();
         $state = $cluster->getState();
         $this->assertInternalType('array', $state);
-    }
-
-    /**
-     * @expectedException \Elastica\Exception\ConnectionException
-     */
-    public function testShutdown()
-    {
-        $this->markTestSkipped('This test shuts down the cluster which means the following tests would not work');
-        $client = $this->_getClient();
-        $cluster = $client->getCluster();
-
-        $cluster->shutdown('2s');
-
-        sleep(5);
-
-        $client->getStatus();
     }
 
     public function testGetIndexNames()
