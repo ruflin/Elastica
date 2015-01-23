@@ -53,71 +53,72 @@ class Guzzle extends AbstractTransport
     {
         $connection = $this->getConnection();
 
+        $client = $this->_getGuzzleClient($this->_getBaseUrl($connection), $connection->isPersistent());
+
+        $options = array(
+            'exceptions' => false, // 4xx and 5xx is expected and NOT an exceptions in this context
+        );
+        if ($connection->getTimeout()) {
+            $options['timeout'] = $connection->getTimeout();
+        }
+
+        $proxy = $connection->getProxy();
+        if (!is_null($proxy)) {
+            $options['proxy'] = $proxy;
+        }
+
+        $req = $client->createRequest($request->getMethod(), $this->_getActionPath($request), $options);
+        $req->setHeaders($connection->hasConfig('headers') ?: array());
+
+        $data = $request->getData();
+        if (!empty($data) || '0' === $data) {
+            if ($req->getMethod() == Request::GET) {
+                $req->setMethod(Request::POST);
+            }
+
+            if ($this->hasParam('postWithRequestBody') && $this->getParam('postWithRequestBody') == true) {
+                $request->setMethod(Request::POST);
+                $req->setMethod(Request::POST);
+            }
+
+            if (is_array($data)) {
+                $content = JSON::stringify($data, 'JSON_ELASTICSEARCH');
+            } else {
+                $content = $data;
+            }
+            $req->setBody(Stream::factory($content));
+        }
+
         try {
-            $client = $this->_getGuzzleClient($this->_getBaseUrl($connection), $connection->isPersistent());
-
-            $options = array();
-            if ($connection->getTimeout()) {
-                $options['timeout'] = $connection->getTimeout();
-            }
-
-            if ($connection->getProxy()) {
-                $options['proxy'] = $connection->getProxy();
-            }
-
-            $req = $client->createRequest($request->getMethod(), $this->_getActionPath($request), $options);
-            $req->setHeaders($connection->hasConfig('headers') ?: array());
-
-            $data = $request->getData();
-            if (!empty($data) || '0' === $data) {
-                if ($req->getMethod() == Request::GET) {
-                    $req->setMethod(Request::POST);
-                }
-
-                if ($this->hasParam('postWithRequestBody') && $this->getParam('postWithRequestBody') == true) {
-                    $request->setMethod(Request::POST);
-                    $req->setMethod(Request::POST);
-                }
-
-                if (is_array($data)) {
-                    $content = JSON::stringify($data, 'JSON_ELASTICSEARCH');
-                } else {
-                    $content = $data;
-                }
-                $req->setBody(Stream::factory($content));
-            }
-
             $start = microtime(true);
             $res = $client->send($req);
             $end = microtime(true);
-
-            $response = new Response((string) $res->getBody(), $res->getStatusCode());
-
-            if (defined('DEBUG') && DEBUG) {
-                $response->setQueryTime($end - $start);
-            }
-
-            $response->setTransferInfo(
-                array(
-                    'request_header' => $request->getMethod(),
-                    'http_code' => $res->getStatusCode(),
-                )
-            );
-
-            if ($response->hasError()) {
-                throw new ResponseException($request, $response);
-            }
-
-            if ($response->hasFailedShards()) {
-                throw new PartialShardFailureException($request, $response);
-            }
-
-            return $response;
-        } catch (ClientException $e) {
-            // ignore 4xx errors
-        } catch (TransferException $e) {
-            throw new GuzzleException($e, $request, new Response($e->getMessage()));
+        } catch (TransferException $ex) {
+            throw new GuzzleException($ex, $request, new Response($ex->getMessage()));
         }
+
+        $response = new Response((string) $res->getBody(), $res->getStatusCode());
+
+        if (defined('DEBUG') && DEBUG) {
+            $response->setQueryTime($end - $start);
+        }
+
+        $response->setTransferInfo(
+            array(
+                'request_header' => $request->getMethod(),
+                'http_code' => $res->getStatusCode(),
+            )
+        );
+
+        if ($response->hasError()) {
+            throw new ResponseException($request, $response);
+        }
+
+        if ($response->hasFailedShards()) {
+            throw new PartialShardFailureException($request, $response);
+        }
+
+        return $response;
     }
 
     /**
