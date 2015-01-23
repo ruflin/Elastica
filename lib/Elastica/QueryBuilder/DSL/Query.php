@@ -25,6 +25,7 @@ use Elastica\Query\Nested;
 use Elastica\Query\Prefix;
 use Elastica\Query\QueryString;
 use Elastica\Query\Range;
+use Elastica\Query\Regexp;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
@@ -388,12 +389,16 @@ class Query implements DSL
 
     /**
      * regexp query
+	 * @param string $fieldName
+	 * @param string $value
+	 * @param float $boost
+	 * @return Regexp
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
      */
-    public function regexp()
+    public function regexp($fieldName, $value, $boost)
     {
-        throw new NotImplementedException();
+        return new Regexp($fieldName, $value, $boost);
     }
 
     /**
