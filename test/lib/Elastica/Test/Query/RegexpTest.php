@@ -5,7 +5,7 @@ namespace Elastica\Test\Query;
 use Elastica\Query\Regexp;
 use Elastica\Test\Base as BaseTest;
 
-class setFieldParam extends BaseTest
+class RegexpTest extends BaseTest
 {
 
     public function testToArray()
