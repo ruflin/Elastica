@@ -53,9 +53,8 @@ class HttpTest extends BaseTest
         $client = new Client($config);
 
         $index = $client->getIndex('dynamic_http_method_test');
-        $this->_waitForAllocation($index);
-
         $index->create(array(), true);
+        $this->_waitForAllocation($index);
 
         $type = $index->getType('test');
         $type->addDocument(new Document(1, array('test' => 'test')));
@@ -84,9 +83,10 @@ class HttpTest extends BaseTest
     {
         $client = new \Elastica\Client();
         $index = $client->getIndex('curl_test');
+        $index->create(array(), true);
         $this->_waitForAllocation($index);
-        $type = $index->getType('item');
 
+        $type = $index->getType('item');
         // Force HEAD request to set CURLOPT_NOBODY = true
         $index->exists();
 
@@ -109,7 +109,9 @@ class HttpTest extends BaseTest
     {
         $client = new \Elastica\Client();
         $index = $client->getIndex('curl_test');
+        $index->create(array(), true);
         $this->_waitForAllocation($index);
+
         $type = $index->getType('item');
 
         // Force HEAD request to set CURLOPT_NOBODY = true
@@ -188,9 +190,8 @@ class HttpTest extends BaseTest
     public function testBodyReuse()
     {
         $client = new Client();
-
+        
         $index = $client->getIndex('elastica_body_reuse_test');
-
         $index->create(array(), true);
         $this->_waitForAllocation($index);
 
