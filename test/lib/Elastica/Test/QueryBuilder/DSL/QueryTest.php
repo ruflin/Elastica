@@ -37,7 +37,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
         'query_string' => array(),
         'simple_query_string' => array('query'),
         'range' => array('field', array()),
-        'regexp' => array(),
+        'regexp' => array('field', 'value', 1.0),
         'span_first' => array(),
         'span_multi_term' => array(),
         'span_near' => array(),
