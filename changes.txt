@@ -1,5 +1,8 @@
 CHANGES
 
+2015-01-23
+- Added Elastica\Query\Regexp
+
 2015-01-19
 - Update to elasticsearch 1.4.2
 - Remove support for PHP 5.3
