@@ -2,7 +2,6 @@
 
 namespace Elastica;
 
-use Elastica\JSON;
 use Psr\Log\AbstractLogger;
 
 /**
@@ -41,9 +40,9 @@ class Log extends AbstractLogger
     /**
      * Log a message
      *
-     * @param mixed $level
-     * @param string $message
-     * @param array $context
+     * @param  mixed     $level
+     * @param  string    $message
+     * @param  array     $context
      * @return null|void
      */
     public function log($level, $message, array $context = array())
@@ -52,17 +51,16 @@ class Log extends AbstractLogger
         $this->_lastMessage = JSON::stringify($context);
 
         if (!empty($this->_log) && is_string($this->_log)) {
-            error_log($this->_lastMessage . PHP_EOL, 3, $this->_log);
+            error_log($this->_lastMessage.PHP_EOL, 3, $this->_log);
         } else {
             error_log($this->_lastMessage);
         }
-
     }
 
     /**
      * Enable/disable log or set log path
      *
-     * @param  bool|string $log Enables log or sets log path
+     * @param  bool|string   $log Enables log or sets log path
      * @return \Elastica\Log
      */
     public function setLog($log)

@@ -396,14 +396,19 @@ body .modal {
         background-color: white;
     }
 
-    .footer-sections h1 {
+    .footer-sections .span4 h1 {
         color: #ccccd9;
+        margin-top: 0;
     }
 
     .detailsbar {
         background-color: white;
         color: #333;
         border: none;
+    }
+
+    .row-fluid .span2 {
+        width: 100%;
     }
 }
 

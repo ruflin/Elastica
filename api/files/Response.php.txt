@@ -4,7 +4,6 @@ namespace Elastica;
 
 use Elastica\Exception\JSONParseException;
 use Elastica\Exception\NotFoundException;
-use Elastica\JSON;
 
 /**
  * Elastica Response object
@@ -63,7 +62,7 @@ class Response
      * Construct
      *
      * @param string|array $responseString Response string (json)
-     * @param int $responseStatus http status code
+     * @param int          $responseStatus http status code
      */
     public function __construct($responseString, $responseStatus = null)
     {
@@ -138,11 +137,19 @@ class Response
             if ($data['status'] >= 200 && $data['status'] <= 300) {
                 return true;
             }
+
             return false;
         }
+
         if (isset($data['items'])) {
+            if (isset($data['errors']) && true === $data['errors']) {
+                return false;
+            }
+
             foreach ($data['items'] as $item) {
-                if (false == $item['index']['ok']) {
+                if (isset($item['index']['ok']) && false == $item['index']['ok']) {
+                    return false;
+                } elseif (isset($item['index']['status']) && ($item['index']['status'] < 200 || $item['index']['status'] >= 300)) {
                     return false;
                 }
             }
@@ -165,7 +172,6 @@ class Response
     {
         return $this->_status;
     }
-
 
     /**
      * Response data array
@@ -214,12 +220,13 @@ class Response
      * Sets the transfer info of the curl request. This function is called
      * from the \Elastica\Client::_callService .
      *
-     * @param  array $transferInfo The curl transfer information.
+     * @param  array              $transferInfo The curl transfer information.
      * @return \Elastica\Response Current object
      */
     public function setTransferInfo(array $transferInfo)
     {
         $this->_transferInfo = $transferInfo;
+
         return $this;
     }
 
@@ -236,7 +243,7 @@ class Response
     /**
      * Sets the query time
      *
-     * @param  float $queryTime Query time
+     * @param  float              $queryTime Query time
      * @return \Elastica\Response Current object
      */
     public function setQueryTime($queryTime)
@@ -250,7 +257,7 @@ class Response
      * Time request took
      *
      * @throws \Elastica\Exception\NotFoundException
-     * @return int                                  Time request took
+     * @return int                                   Time request took
      */
     public function getEngineTime()
     {

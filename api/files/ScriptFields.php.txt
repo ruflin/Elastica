@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica;
+
 use Elastica\Exception\InvalidException;
 
 /**
@@ -24,7 +25,7 @@ class ScriptFields extends Param
     }
 
     /**
-     * @param  string                              $name   Name of the Script field
+     * @param  string                               $name   Name of the Script field
      * @param  \Elastica\Script                     $script
      * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\ScriptFields

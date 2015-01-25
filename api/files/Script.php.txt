@@ -103,7 +103,7 @@ class Script extends AbstractUpdateAction
     }
 
     /**
-     * @param  array                               $data
+     * @param  array                                $data
      * @throws \Elastica\Exception\InvalidException
      * @return \Elastica\Script
      */
