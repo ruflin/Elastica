@@ -4,7 +4,7 @@
   <title><![CDATA[Elastica]]></title>
   <link href="http://Elastica.io/atom.xml" rel="self"/>
   <link href="http://Elastica.io/"/>
-  <updated>2014-12-21T17:22:21+01:00</updated>
+  <updated>2015-01-25T14:15:40+01:00</updated>
   <id>http://Elastica.io/</id>
   <author>
     <name><![CDATA[@ruflin]]></name>
@@ -12,6 +12,95 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release v1.4.2.0]]></title>
+    <link href="http://Elastica.io/2015/01/25/release-v1-dot-4-2-dot-0/"/>
+    <updated>2015-01-25T14:11:25+01:00</updated>
+    <id>http://Elastica.io/2015/01/25/release-v1-dot-4-2-dot-0</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/v1.4.2.0">Elastica v1.4.2.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/v1.4.2.0">download</a>). This release is compatible with elasticsearch 1.4.2.</p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.4.2">Elasticsearch</a></td>
+<td> 1.4.2 </td>
+<td> yes</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.4.1">Elasticsearch mapper attachments plugin</a></td>
+<td>2.4.1</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.4.1">Elasticsearch thrift transport plugin</a></td>
+<td>2.4.1</td>
+<td>no</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.12">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.12</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Added Elastica\Query\Regexp #757</li>
+<li>Update to elasticsearch 1.4.2 #378</li>
+<li>Remove support for PHP 5.3</li>
+<li>added @return annotation to top_hits aggregation DSL method #752</li>
+<li>Added Elastica\Aggregation\TopHits #718</li>
+<li>Vagrantfile updated #742</li>
+<li>Plugins updated to ES 1.3.4</li>
+<li>Since new version of thrift plugin is compatible with ES 1.3.4, plugin added back to test environment</li>
+<li>Added: Filter\Range::setExecution, Filter\Terms::setExecution, Filter\Missing::setExistence, Filter\Missing::setNullValue, Filter\HasChild::setMinumumChildrenCount, Filter\HasChild::Filter\HasChild::setMaximumChildrenCount, Filter\Indices::addIndex</li>
+<li>Filter\HasChild::setType, Filter\HasParent::setType now support Type instance as argument</li>
+<li>Filter\Indices::setIndices, Filter\Indices::addIndex now support Index instance as argument</li>
+<li>(BC break) Removed as added by mistake: Filter\HasChild::setScope, Filter\HasParent::setScope, Filter\Nested::setScoreMode, Filter\Bool::setBoost</li>
+<li>Additional Request Body Options for Percolator #737</li>
+<li>making sure id is urlencoded when using updateDocument #734</li>
+<li>Implement the <code>weight</code> in the function score query #735</li>
+<li>Changed setRealWorldErrorLikelihood to setRealWordErrorLikelihood #729</li>
+<li>allow to customize the key on a range aggregation #728</li>
+<li>Added fluent interface to Elastica\Query::setRescore #733</li>
+<li>Added transport to support egeloen/http-adapter #727</li>
+<li>add cache control parameters support to Elastica\Filter\Bool #725</li>
+<li>Avoid remove previously added params when adding a suggest to the query #726</li>
+<li>Added Elastica\QueryBuilder #724</li>
+<li>Update to elasticsearch 1.4.0</li>
+<li>Disable official support for PHP 5.3</li>
+<li>fixed reserved words in queries which composed of upper case letters (Util::replaceBooleanWords) #722</li>
+<li>Adding PSR-4 autoloading support #714</li>
+<li>Updated Type::getDocument() exception handling. \Elastica\Exception\ResponseException will be thrown instead of \Elastica\Exception\NotFoundException if the ES response contains any error (i.e: Missing index) (BC break) #687</li>
+<li>Added Util::convertDateTimeObject to Util class to easily convert \DateTime objects to required format #709</li>
+<li>Remove ResponseException catch in Type::getDocument() #704</li>
+<li>Fixed Response::isOk() to work better with bulk update api #702</li>
+<li>Adding magic __call() #700</li>
+<li>ResultSet creation moved to static ResultSet::create() method #690</li>
+<li>Accept an options array at Type::updateDocument() #686</li>
+<li>Improve exception handling in Type::getDocument() #693</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Release v1.3.4.0]]></title>
