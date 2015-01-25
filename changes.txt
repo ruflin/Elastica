@@ -1,20 +1,23 @@
 CHANGES
 
+2015-01-25
+- Release v1.4.2.0
+
 2015-01-23
-- Added Elastica\Query\Regexp
+- Added Elastica\Query\Regexp #757
 
 2015-01-19
-- Update to elasticsearch 1.4.2
+- Update to elasticsearch 1.4.2 #378
 - Remove support for PHP 5.3
 
 2015-01-14
-- added @return annotation to top_hits aggregation DSL method
+- added @return annotation to top_hits aggregation DSL method #752
 
 2015-01-07
 - Added Elastica\Aggregation\TopHits #718
 
 2015-01-05
-- Vagrantfile updated #423
+- Vagrantfile updated #742
 - Plugins updated to ES 1.3.4
 - Since new version of thrift plugin is compatible with ES 1.3.4, plugin added back to test environment
 
@@ -23,6 +26,19 @@ CHANGES
 - Filter\HasChild::setType, Filter\HasParent::setType now support Type instance as argument
 - Filter\Indices::setIndices, Filter\Indices::addIndex now support Index instance as argument
 - (BC break) Removed as added by mistake: Filter\HasChild::setScope, Filter\HasParent::setScope, Filter\Nested::setScoreMode, Filter\Bool::setBoost
+
+2014-12-23
+- Additional Request Body Options for Percolator #737
+
+2014-12-19
+- making sure id is urlencoded when using updateDocument #734
+- Implement the `weight` in the function score query #735
+
+2014-12-09
+- Changed setRealWorldErrorLikelihood to setRealWordErrorLikelihood #729
+
+2014-11-23
+- allow to customize the key on a range aggregation #728
 
 2014-12-14
 - Added fluent interface to Elastica\Query::setRescore #733
@@ -51,10 +67,14 @@ CHANGES
 - Updated Type::getDocument() exception handling. \Elastica\Exception\ResponseException will be thrown instead of \Elastica\Exception\NotFoundException if the ES response contains any error (i.e: Missing index) (BC break) #687
 
 2014-10-22
-- Added Util::convertDateTimeObject to Util class to easily convert \DateTime objects to required format #708
+- Added Util::convertDateTimeObject to Util class to easily convert \DateTime objects to required format #709
+
+2014-10-15
+- Remove ResponseException catch in Type::getDocument() #704
 
 2014-10-10
-- Fixed Response::isOk() to work better with bulk update api
+- Fixed Response::isOk() to work better with bulk update api #702
+- Adding magic __call() #700
 
 2014-10-05
 - ResultSet creation moved to static ResultSet::create() method #690
