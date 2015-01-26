@@ -1,4 +1,15 @@
 ---
+- name: import ppa:ondrej/php5 gpg key
+  apt_key: >
+    id=E5267A6C
+    keyserver=keyserver.ubuntu.com
+    state=present
+
+- name: add ppa:ondrej/php5 repository
+  apt_repository: >
+    repo="deb http://ppa.launchpad.net/ondrej/php5/ubuntu precise main"
+    state=present
+    update_cache=yes
 
 - name: install php
   apt: >
