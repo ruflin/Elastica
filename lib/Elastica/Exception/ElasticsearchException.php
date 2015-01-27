@@ -9,7 +9,7 @@ namespace Elastica\Exception;
  * @package Elastica
  * @author Ian Babrou <ibobrik@gmail.com>
  */
-class ElasticsearchException extends \Exception
+class ElasticsearchException extends \Exception implements ExceptionInterface
 {
     const REMOTE_TRANSPORT_EXCEPTION = 'RemoteTransportException';
 
