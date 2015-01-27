@@ -23,5 +23,5 @@ after_script:
   - cat /var/log/elasticsearch/*.log
   - cat /var/log/nginx/*.log
   - cat build/logs/phpunit-tap.log
-  - sudo composer require satooshi/php-coveralls
+  - sudo composer require satooshi/php-coveralls --no-ansi --no-progress --no-interaction
   - php vendor/bin/coveralls -v
