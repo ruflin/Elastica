@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Exception;
 
 use Elastica\Document;
@@ -10,6 +9,14 @@ use Elastica\Test\Base as BaseTest;
 
 class PartialShardFailureExceptionTest extends BaseTest
 {
+    public function testInheritance()
+    {
+        $exception = $this->getMockBuilder('Elastica\Exception\PartialShardFailureException')
+                          ->disableOriginalConstructor()
+                          ->getMock();
+        $this->assertInstanceOf('Exception', $exception);
+        $this->assertInstanceOf('Elastica\Exception\ExceptionInterface', $exception);
+    }
 
     public function testPartialFailure()
     {

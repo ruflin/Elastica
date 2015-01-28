@@ -1,5 +1,8 @@
 CHANGES
 
+2015-01-27
+- Exception\ElasticsearchException now can be catched like all other exceptions as Exception\ExceptionInterface
+
 2015-01-25
 - Release v1.4.2.0
 
