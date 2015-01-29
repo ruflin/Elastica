@@ -288,8 +288,8 @@ class ClientTest extends BaseTest
         // deleteIds are the type we are testing for
         $idxString = $index->getName();
         $typeString = $type->getName();
-        $this->assertEquals(true, is_string($idxString));
-        $this->assertEquals(true, is_string($typeString));
+        $this->assertTrue(is_string($idxString));
+        $this->assertTrue(is_string($typeString));
 
         // Try to delete doc with a routing value which hashes to
         // a different shard then the id.
@@ -362,8 +362,8 @@ class ClientTest extends BaseTest
         // And verify that the variables we are doing to send to
         // deleteIds are the type we are testing for
         $idxString = $index->getName();
-        $this->assertEquals(true, is_string($idxString));
-        $this->assertEquals(true, ($type instanceof Type));
+        $this->assertTrue(is_string($idxString));
+        $this->assertInstanceOf('Elastica\Type', $type);
 
         // Using the existing $index and $type variables which
         // are \Elastica\Index and \Elastica\Type objects respectively
@@ -424,8 +424,8 @@ class ClientTest extends BaseTest
         // And verify that the variables we are doing to send to
         // deleteIds are the type we are testing for
         $typeString = $type->getName();
-        $this->assertEquals(true, ($index instanceof Index));
-        $this->assertEquals(true, is_string($typeString));
+        $this->assertInstanceOf('Elastica\Index', $index);
+        $this->assertTrue(is_string($typeString));
 
         // Using the existing $index and $type variables which
         // are \Elastica\Index and \Elastica\Type objects respectively
@@ -485,8 +485,8 @@ class ClientTest extends BaseTest
 
         // And verify that the variables we are doing to send to
         // deleteIds are the type we are testing for
-        $this->assertEquals(true, ($index instanceof Index));
-        $this->assertEquals(true, ($type instanceof Type));
+        $this->assertInstanceOf('Elastica\Index', $index);
+        $this->assertInstanceOf('Elastica\Type', $type);
 
         // Using the existing $index and $type variables which
         // are \Elastica\Index and \Elastica\Type objects respectively
@@ -536,7 +536,6 @@ class ClientTest extends BaseTest
             $client->request('_status', Request::GET);
             $this->fail('Should throw exception as no connection valid');
         } catch (HttpException $e) {
-            $this->assertTrue(true);
         }
 
         $connections = $client->getConnections();

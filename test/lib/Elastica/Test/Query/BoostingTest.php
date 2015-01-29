@@ -18,7 +18,7 @@ class BoostingTest extends BaseTest
      */
     protected $type;
 
-    /*
+    /**
      * @var array
      */
     protected $sampleData;

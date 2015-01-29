@@ -13,13 +13,13 @@ class ExampleTest extends BaseTest
 {
     public function testBasicGettingStarted()
     {
-        $client = new \Elastica\Client();
+        $client = new Client();
         $index = $client->getIndex('ruflin');
         $type = $index->getType('users');
 
         $id = 2;
         $data = array('firstname' => 'Nicolas', 'lastname' => 'Ruflin');
-        $doc = new \Elastica\Document($id, $data);
+        $doc = new Document($id, $data);
 
         $type->addDocument($doc);
     }

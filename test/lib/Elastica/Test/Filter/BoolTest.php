@@ -2,6 +2,7 @@
 
 namespace Elastica\Test\Filter;
 
+use Elastica\Document;
 use Elastica\Filter\Bool;
 use Elastica\Filter\Ids;
 use Elastica\Filter\Term;
@@ -95,11 +96,11 @@ class BoolTest extends BaseTest
         $type = $index->getType('book');
 
         //index some test data
-        $type->addDocument(new \Elastica\Document(1, array('author' => 'Michael Shermer', 'title' => 'The Believing Brain', 'publisher' => 'Robinson')));
-        $type->addDocument(new \Elastica\Document(2, array('author' => 'Jared Diamond', 'title' => 'Guns, Germs and Steel', 'publisher' => 'Vintage')));
-        $type->addDocument(new \Elastica\Document(3, array('author' => 'Jared Diamond', 'title' => 'Collapse', 'publisher' => 'Penguin')));
-        $type->addDocument(new \Elastica\Document(4, array('author' => 'Richard Dawkins', 'title' => 'The Selfish Gene', 'publisher' => 'OUP Oxford')));
-        $type->addDocument(new \Elastica\Document(5, array('author' => 'Anthony Burges', 'title' => 'A Clockwork Orange', 'publisher' => 'Penguin')));
+        $type->addDocument(new Document(1, array('author' => 'Michael Shermer', 'title' => 'The Believing Brain', 'publisher' => 'Robinson')));
+        $type->addDocument(new Document(2, array('author' => 'Jared Diamond', 'title' => 'Guns, Germs and Steel', 'publisher' => 'Vintage')));
+        $type->addDocument(new Document(3, array('author' => 'Jared Diamond', 'title' => 'Collapse', 'publisher' => 'Penguin')));
+        $type->addDocument(new Document(4, array('author' => 'Richard Dawkins', 'title' => 'The Selfish Gene', 'publisher' => 'OUP Oxford')));
+        $type->addDocument(new Document(5, array('author' => 'Anthony Burges', 'title' => 'A Clockwork Orange', 'publisher' => 'Penguin')));
 
         $index->refresh();
 

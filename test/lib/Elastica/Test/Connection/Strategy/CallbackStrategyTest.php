@@ -2,6 +2,7 @@
 
 namespace Elastica\Test\Connection\Strategy;
 
+use Elastica\Client;
 use Elastica\Connection\Strategy\CallbackStrategy;
 use Elastica\Test\Base;
 
@@ -54,17 +55,15 @@ class CallbackStrategyTest extends Base
             return current($connections);
        });
 
-        $client = new \Elastica\Client($config);
-        $resonse = $client->request('/_aliases');
+        $client = new Client($config);
+        $response = $client->request('/_aliases');
 
         $this->assertEquals(1, $count);
 
-        $this->assertTrue($resonse->isOk());
+        $this->assertTrue($response->isOk());
 
         $strategy = $client->getConnectionStrategy();
 
-        $condition = ($strategy instanceof CallbackStrategy);
-
-        $this->assertTrue($condition);
+        $this->assertInstanceOf('Elastica\Connection\Strategy\CallbackStrategy', $strategy);
     }
 }

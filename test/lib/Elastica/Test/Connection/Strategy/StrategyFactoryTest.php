@@ -2,16 +2,8 @@
 
 namespace Elastica\Test\Connection\Strategy;
 
-use Elastica\Connection\Strategy\CallbackStrategy;
-use Elastica\Connection\Strategy\Simple;
 use Elastica\Connection\Strategy\StrategyFactory;
 use Elastica\Test\Base;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  * Description of StrategyFactoryTest
@@ -20,18 +12,15 @@ use Elastica\Test\Base;
  */
 class StrategyFactoryTest extends Base
 {
-   public function testCreateCallbackStrategy()
-   {
-       $callback = function ($connections) {
+    public function testCreateCallbackStrategy()
+    {
+        $callback = function ($connections) {
+        };
 
-       };
+        $strategy = StrategyFactory::create($callback);
 
-       $strategy = StrategyFactory::create($callback);
-
-       $condition = $strategy instanceof CallbackStrategy;
-
-       $this->assertTrue($condition);
-   }
+        $this->assertInstanceOf('Elastica\Connection\Strategy\CallbackStrategy', $strategy);
+    }
 
     public function testCreateByName()
     {
@@ -39,7 +28,7 @@ class StrategyFactoryTest extends Base
 
         $strategy = StrategyFactory::create($strategyName);
 
-        $this->assertTrue($strategy instanceof Simple);
+        $this->assertInstanceOf('Elastica\Connection\Strategy\Simple', $strategy);
     }
 
     public function testCreateByClass()
@@ -55,17 +44,16 @@ class StrategyFactoryTest extends Base
 
         $strategy = StrategyFactory::create($strategyName);
 
-        $condition = $strategy instanceof $strategyName;
-
-        $this->assertTrue($condition);
+        $this->assertInstanceOf($strategyName, $strategy);
     }
-   /**
-    * @expectedException \InvalidArgumentException
-    */
-   public function testFailCreate()
-   {
-       $strategy = new \stdClass();
 
-       StrategyFactory::create($strategy);
-   }
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testFailCreate()
+    {
+        $strategy = new \stdClass();
+
+        StrategyFactory::create($strategy);
+    }
 }

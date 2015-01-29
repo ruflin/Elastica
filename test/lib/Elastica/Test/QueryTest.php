@@ -172,7 +172,7 @@ class QueryTest extends BaseTest
 
         $this->assertContains('firstname', $data['fields']);
         $this->assertContains('lastname', $data['fields']);
-        $this->assertEquals(2, count($data['fields']));
+        $this->assertCount(2, $data['fields']);
     }
 
     public function testGetQuery()

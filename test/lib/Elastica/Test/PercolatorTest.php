@@ -257,7 +257,7 @@ class PercolatorTest extends BaseTest
 
         $this->assertCount(1, $matches);
         $this->assertEquals('percotest1', $matches[0]['_id']);
-        $this->assertTrue(array_key_exists('_score', $matches[0]));
+        $this->assertArrayHasKey('_score', $matches[0]);
     }
 
     public function testPercolateExistingDocWithAdditionalRequestBodyOptions()
@@ -281,7 +281,7 @@ class PercolatorTest extends BaseTest
 
         $this->assertCount(1, $matches);
         $this->assertEquals('existingDoc1', $matches[0]['_id']);
-        $this->assertTrue(array_key_exists('_score', $matches[0]));
+        $this->assertArrayHasKey('_score', $matches[0]);
         $index->delete();
     }
 
