@@ -2,12 +2,11 @@
 
 namespace Elastica\Test;
 
-use Elastica\Client;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Percolator;
-use Elastica\Query\Term;
 use Elastica\Query;
+use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 
@@ -31,7 +30,7 @@ class PercolatorTest extends BaseTest
             '_index' => $index->getName(),
             '_id' => $percolatorName,
             '_version' => 1,
-            'created' => 1
+            'created' => 1,
         );
 
         $this->assertEquals($expectedArray, $data);
@@ -143,7 +142,6 @@ class PercolatorTest extends BaseTest
         $matches = $percolator->matchDoc($doc, new Term(array('color' => 'green')));
         $this->assertCount(0, $matches, 'A registered query matched, although nothing should match at all.');
 
-
         // unregister percolator query
         $response = $percolator->unregisterQuery('kuku');
 
@@ -170,7 +168,7 @@ class PercolatorTest extends BaseTest
         return $percolator;
     }
 
-    protected function _addDefaultDocuments($index, $type='testing')
+    protected function _addDefaultDocuments($index, $type = 'testing')
     {
         $type = $index->getType('testing');
         $doc1 = new Document(1, array('name' => 'foobar'));
@@ -178,6 +176,7 @@ class PercolatorTest extends BaseTest
         $type->addDocument($doc1);
         $type->addDocument($doc2);
         $index->refresh();
+
         return $type;
     }
 

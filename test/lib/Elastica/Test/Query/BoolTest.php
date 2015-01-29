@@ -41,7 +41,7 @@ class BoolTest extends BaseTest
                 'minimum_number_should_match' => $minMatch,
                 'must_not' => array($idsQuery2->toArray()),
                 'boost' => $boost,
-            )
+            ),
         );
 
         $this->assertEquals($expectedArray, $query->toArray());

@@ -48,7 +48,7 @@ class RangeTest extends BaseTest
         $expectedArray = array(
             'range' => array(
                 'age' => $field,
-            )
+            ),
         );
 
         $this->assertEquals($expectedArray, $range->toArray());
@@ -65,7 +65,7 @@ class RangeTest extends BaseTest
         $expectedArray = array(
             'range' => array(
                 'age' => $ranges,
-            )
+            ),
         );
 
         $this->assertEquals($expectedArray, $range->toArray());

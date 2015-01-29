@@ -24,7 +24,7 @@ class ConnectionPool
     /**
      * Strategy for connection
      *
-     * @var  \Elastica\Connection\Strategy\StrategyInterface
+     * @var \Elastica\Connection\Strategy\StrategyInterface
      */
     protected $_strategy;
 

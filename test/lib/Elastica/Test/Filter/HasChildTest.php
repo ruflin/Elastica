@@ -20,8 +20,8 @@ class HasChildTest extends BaseTest
         $expectedArray = array(
             'has_child' => array(
                 'query' => $q->toArray(),
-                'type' => $type
-            )
+                'type' => $type,
+            ),
         );
 
         $this->assertEquals($expectedArray, $filter->toArray());
@@ -51,7 +51,7 @@ class HasChildTest extends BaseTest
 
     public function testSetMinimumChildrenCount()
     {
-        $query = new MatchAll;
+        $query = new MatchAll();
         $filter = new HasChild($query, 'test');
 
         $filter->setMinimumChildrenCount(2);
@@ -63,7 +63,7 @@ class HasChildTest extends BaseTest
 
     public function testSetMaximumChildrenCount()
     {
-        $query = new MatchAll;
+        $query = new MatchAll();
         $filter = new HasChild($query, 'test');
 
         $filter->setMaximumChildrenCount(10);
@@ -84,12 +84,11 @@ class HasChildTest extends BaseTest
         $expectedArray = array(
             'has_child' => array(
                 'filter' => $f->toArray(),
-                'type' => $type
-            )
+                'type' => $type,
+            ),
         );
 
         $this->assertEquals($expectedArray, $filter->toArray());
-
     }
 
     public function testFilterInsideHasChildSearch()
@@ -131,24 +130,24 @@ class HasChildTest extends BaseTest
 
         $this->assertEquals($expected, $result);
     }
-    
+
     public function testTypeInsideHasChildSearch()
     {
         $index = $this->prepareSearchData();
-        
+
         $f = new \Elastica\Query\Match();
         $f->setField('alt.name', 'testname');
         $filter = new HasChild($f, 'child');
-        
+
         $searchQuery = new \Elastica\Query();
         $searchQuery->setPostFilter($filter);
         $searchResults = $index->search($searchQuery);
-        
+
         $this->assertEquals(1, $searchResults->count());
-        
+
         $result = $searchResults->current()->getData();
         $expected = array('id' => 'parent2', 'user' => 'parent2', 'email' => 'parent2@test.com');
-        
+
         $this->assertEquals($expected, $result);
     }
 
@@ -159,7 +158,7 @@ class HasChildTest extends BaseTest
         $index->create(array(), true);
 
         $parentType = $index->getType('parent');
-        
+
         $childType = $index->getType('child');
         $childMapping = new \Elastica\Type\Mapping($childType);
         $childMapping->setParent('parent');
@@ -168,7 +167,7 @@ class HasChildTest extends BaseTest
         $altType = $index->getType('alt');
         $altDoc = new Document('alt1', array('name' => 'altname'));
         $altType->addDocument($altDoc);
-        
+
         $parent1 = new Document('parent1', array('id' => 'parent1', 'user' => 'parent1', 'email' => 'parent1@test.com'));
         $parentType->addDocument($parent1);
         $parent2 = new Document('parent2', array('id' => 'parent2', 'user' => 'parent2', 'email' => 'parent2@test.com'));
@@ -185,6 +184,7 @@ class HasChildTest extends BaseTest
         $childType->addDocument($child3);
 
         $index->refresh();
+
         return $index;
     }
 }

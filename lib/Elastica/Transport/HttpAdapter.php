@@ -9,9 +9,9 @@ use Elastica\JSON;
 use Elastica\Request as ElasticaRequest;
 use Elastica\Response as ElasticaResponse;
 use Ivory\HttpAdapter\HttpAdapterInterface;
-use Ivory\HttpAdapter\Message\Stream\StringStream;
 use Ivory\HttpAdapter\Message\Request as HttpAdapterRequest;
 use Ivory\HttpAdapter\Message\Response as HttpAdapterResponse;
+use Ivory\HttpAdapter\Message\Stream\StringStream;
 
 class HttpAdapter extends AbstractTransport
 {

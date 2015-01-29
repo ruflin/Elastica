@@ -25,7 +25,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
             new Version\Version140(),
         );
 
-        foreach($versions as $version) {
+        foreach ($versions as $version) {
             $this->assertVersions($version, $dsl);
         }
     }
@@ -35,30 +35,29 @@ class VersionTest extends \PHPUnit_Framework_TestCase
         foreach ($version->getQueries() as $query) {
             $this->assertTrue(
                 method_exists($dsl[0], $query),
-                'query "' . $query . '" in ' . get_class($version) . ' must be defined in ' . get_class($dsl[0])
+                'query "'.$query.'" in '.get_class($version).' must be defined in '.get_class($dsl[0])
             );
         }
 
         foreach ($version->getFilters() as $filter) {
             $this->assertTrue(
                 method_exists($dsl[1], $filter),
-                'filter "' . $filter . '" in ' . get_class($version) . ' must be defined in ' . get_class($dsl[1])
+                'filter "'.$filter.'" in '.get_class($version).' must be defined in '.get_class($dsl[1])
             );
         }
 
         foreach ($version->getAggregations() as $aggregation) {
             $this->assertTrue(
                 method_exists($dsl[2], $aggregation),
-                'aggregation "' . $aggregation . '" in ' . get_class($version) . ' must be defined in ' . get_class($dsl[2])
+                'aggregation "'.$aggregation.'" in '.get_class($version).' must be defined in '.get_class($dsl[2])
             );
         }
 
         foreach ($version->getSuggesters() as $suggester) {
             $this->assertTrue(
                 method_exists($dsl[3], $suggester),
-                'suggester "' . $suggester . '" in ' . get_class($version) . ' must be defined in ' . get_class($dsl[3])
+                'suggester "'.$suggester.'" in '.get_class($version).' must be defined in '.get_class($dsl[3])
             );
         }
     }
-
-} 
+}

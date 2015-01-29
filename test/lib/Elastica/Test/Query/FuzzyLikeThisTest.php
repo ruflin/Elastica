@@ -5,9 +5,9 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query\FuzzyLikeThis;
+use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 use Elastica\Type\Mapping;
-use Elastica\Test\Base as BaseTest;
 
 class FuzzyLikeThisTest extends BaseTest
 {
@@ -20,7 +20,7 @@ class FuzzyLikeThisTest extends BaseTest
         //$index->getSettings()->setNumberOfShards(1);
 
         $type = new Type($index, 'helloworldfuzzy');
-        $mapping = new Mapping($type , array(
+        $mapping = new Mapping($type, array(
                'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
                'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
           ));
@@ -36,7 +36,7 @@ class FuzzyLikeThisTest extends BaseTest
 
         $fltQuery = new FuzzyLikeThis();
         $fltQuery->setLikeText("sample gmail");
-        $fltQuery->addFields(array("email","content"));
+        $fltQuery->addFields(array("email", "content"));
         $fltQuery->setMinSimilarity(0.3);
         $fltQuery->setMaxQueryTerms(3);
         $resultSet = $type->search($fltQuery);
@@ -177,26 +177,26 @@ class FuzzyLikeThisTest extends BaseTest
                'searchAnalyzer' => array(
                     'type' => 'custom',
                     'tokenizer' => 'standard',
-                    'filter' => array('myStopWords')
-                )
+                    'filter' => array('myStopWords'),
+                ),
             ),
             'filter' => array(
                 'myStopWords' => array(
                     'type' => 'stop',
-                    'stopwords' => array('The')
-                )
-            )
+                    'stopwords' => array('The'),
+                ),
+            ),
         )), true);
 
         $index->getSettings()->setNumberOfReplicas(0);
         //$index->getSettings()->setNumberOfShards(1);
-        
+
         $type = new Type($index, 'helloworldfuzzy');
-        $mapping = new Mapping($type , array(
+        $mapping = new Mapping($type, array(
                'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
                'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
           ));
-        
+
         $mapping->setSource(array('enabled' => false));
         $type->setMapping($mapping);
 
@@ -210,7 +210,7 @@ class FuzzyLikeThisTest extends BaseTest
         $index->refresh();
 
         $fltQuery = new FuzzyLikeThis();
-        $fltQuery->addFields(array("email","content"));
+        $fltQuery->addFields(array("email", "content"));
         $fltQuery->setLikeText("The");
 
         $fltQuery->setMinSimilarity(0.1);
@@ -234,7 +234,7 @@ class FuzzyLikeThisTest extends BaseTest
         $index->getSettings()->setNumberOfReplicas(0);
 
         $type = new Type($index, 'helloworldfuzzy');
-        $mapping = new Mapping($type , array(
+        $mapping = new Mapping($type, array(
                 'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
                 'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
             ));
@@ -250,7 +250,7 @@ class FuzzyLikeThisTest extends BaseTest
 
         $fltQuery = new FuzzyLikeThis();
         $fltQuery->setLikeText("");
-        $fltQuery->addFields(array("email","content"));
+        $fltQuery->addFields(array("email", "content"));
         $fltQuery->setMinSimilarity(0.3);
         $fltQuery->setMaxQueryTerms(3);
         $resultSet = $type->search($fltQuery);

@@ -22,51 +22,50 @@ class StrategyFactoryTest extends Base
 {
    public function testCreateCallbackStrategy()
    {
-       $callback = function ($connections)
-       {
-           
+       $callback = function ($connections) {
+
        };
-       
+
        $strategy = StrategyFactory::create($callback);
-       
+
        $condition = $strategy instanceof CallbackStrategy;
-       
+
        $this->assertTrue($condition);
    }
-   
-   public function testCreateByName()
-   {
-       $strategyName = 'Simple';
-       
-       $strategy = StrategyFactory::create($strategyName);
-       
-       $this->assertTrue($strategy instanceof Simple);
-   }
-   
-   public function testCreateByClass()
-   {
-       $strategy = new EmptyStrategy();
-       
-       $this->assertEquals($strategy, StrategyFactory::create($strategy));
-   }
-   
-   public function testCreateByClassName()
-   {
-       $strategyName = '\\Elastica\Test\Connection\Strategy\\EmptyStrategy';
-       
-       $strategy = StrategyFactory::create($strategyName);
-       
-       $condition = $strategy instanceof $strategyName;
-       
-       $this->assertTrue($condition);
-   }
+
+    public function testCreateByName()
+    {
+        $strategyName = 'Simple';
+
+        $strategy = StrategyFactory::create($strategyName);
+
+        $this->assertTrue($strategy instanceof Simple);
+    }
+
+    public function testCreateByClass()
+    {
+        $strategy = new EmptyStrategy();
+
+        $this->assertEquals($strategy, StrategyFactory::create($strategy));
+    }
+
+    public function testCreateByClassName()
+    {
+        $strategyName = '\\Elastica\Test\Connection\Strategy\\EmptyStrategy';
+
+        $strategy = StrategyFactory::create($strategyName);
+
+        $condition = $strategy instanceof $strategyName;
+
+        $this->assertTrue($condition);
+    }
    /**
     * @expectedException \InvalidArgumentException
     */
    public function testFailCreate()
    {
        $strategy = new \stdClass();
-       
+
        StrategyFactory::create($strategy);
    }
 }

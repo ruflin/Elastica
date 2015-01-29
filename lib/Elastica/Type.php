@@ -2,10 +2,10 @@
 
 namespace Elastica;
 
-use Elastica\Exception\RuntimeException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
+use Elastica\Exception\RuntimeException;
 use Elastica\Type\Mapping;
 
 /**

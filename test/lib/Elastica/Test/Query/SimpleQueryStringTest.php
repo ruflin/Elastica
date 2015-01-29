@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Query;
 
-
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query\SimpleQueryString;
@@ -24,7 +23,7 @@ class SimpleQueryStringTest extends Base
             new Document(2, array('make' => 'Gibson', 'model' => 'SG Standard')),
             new Document(3, array('make' => 'Gibson', 'model' => 'SG Supreme')),
             new Document(4, array('make' => 'Gibson', 'model' => 'SG Faded')),
-            new Document(5, array('make' => 'Fender', 'model' => 'Stratocaster'))
+            new Document(5, array('make' => 'Fender', 'model' => 'Stratocaster')),
         );
         $this->_index->getType("guitars")->addDocuments($docs);
         $this->_index->refresh();
@@ -49,8 +48,8 @@ class SimpleQueryStringTest extends Base
                 "query" => $string,
                 "fields" => $fields,
                 "analyzer" => "whitespace",
-                "default_operator" => SimpleQueryString::OPERATOR_OR
-            )
+                "default_operator" => SimpleQueryString::OPERATOR_OR,
+            ),
         );
 
         $this->assertEquals($expected, $query->toArray());
@@ -70,4 +69,3 @@ class SimpleQueryStringTest extends Base
         $this->assertEquals(0, $results->getTotalHits());
     }
 }
- 

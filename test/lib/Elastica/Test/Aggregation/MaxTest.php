@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\Max;
 use Elastica\Document;
 use Elastica\Query;
@@ -31,12 +30,12 @@ class MaxTest extends BaseAggregationTest
                 "field" => "price",
                 "script" => "_value * conversion_rate",
                 "params" => array(
-                    "conversion_rate" => 1.2
-                )
+                    "conversion_rate" => 1.2,
+                ),
             ),
             "aggs" => array(
-                "subagg" => array("max" => array("field" => "foo"))
-            )
+                "subagg" => array("max" => array("field" => "foo")),
+            ),
         );
 
         $agg = new Max("min_price_in_euros");
@@ -69,4 +68,3 @@ class MaxTest extends BaseAggregationTest
         $this->assertEquals(8 * 1.2, $results['value']);
     }
 }
- 

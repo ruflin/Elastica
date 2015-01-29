@@ -4,7 +4,6 @@ namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Exception\NotImplementedException;
 use Elastica\Filter\AbstractFilter;
-use Elastica\Query\HasChild;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\Bool;
 use Elastica\Query\Boosting;
@@ -15,6 +14,7 @@ use Elastica\Query\Filtered;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\Fuzzy;
 use Elastica\Query\FuzzyLikeThis;
+use Elastica\Query\HasChild;
 use Elastica\Query\HasParent;
 use Elastica\Query\Ids;
 use Elastica\Query\Match;
@@ -389,10 +389,10 @@ class Query implements DSL
 
     /**
      * regexp query
-	 * @param string $fieldName
-	 * @param string $value
-	 * @param float $boost
-	 * @return Regexp
+     * @param  string $fieldName
+     * @param  string $value
+     * @param  float  $boost
+     * @return Regexp
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
      */

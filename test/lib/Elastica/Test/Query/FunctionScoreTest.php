@@ -4,7 +4,6 @@
  * Date: 9/16/13
  * Time: 5:05 PM
  */
-
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -35,18 +34,18 @@ class FunctionScoreTest extends BaseTest
         $this->type->setMapping(array(
             'name' => array('type' => 'string', 'index' => 'not_analyzed'),
             'location' => array('type' => 'geo_point'),
-            'price' => array('type' => 'float')
+            'price' => array('type' => 'float'),
         ));
 
         $this->type->addDocument(new Document(1, array(
             'name' => "Mr. Frostie's",
             'location' => array('lat' => 32.799605, 'lon' => -117.243027),
-            'price' => 4.5
+            'price' => 4.5,
         )));
         $this->type->addDocument(new Document(2, array(
             'name' => "Miller's Field",
             'location' => array('lat' => 32.795964, 'lon' => -117.255028),
-            'price' => 9.5
+            'price' => 9.5,
         )));
 
         $this->index->refresh();
@@ -76,20 +75,20 @@ class FunctionScoreTest extends BaseTest
                         'gauss' => array(
                             'location' => array(
                                 'origin' => $this->locationOrigin,
-                                'scale' => $locationScale
-                            )
-                        )
+                                'scale' => $locationScale,
+                            ),
+                        ),
                     ),
                     array(
                         'gauss' => array(
                             'price' => array(
                                 'origin' => $priceOrigin,
-                                'scale' => $priceScale
-                            )
-                        )
-                    )
-                )
-            )
+                                'scale' => $priceScale,
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         );
         $this->assertEquals($expected, $query->toArray());
     }
@@ -120,8 +119,8 @@ class FunctionScoreTest extends BaseTest
                         'gauss' => array(
                             'location' => array(
                                 'origin' => $this->locationOrigin,
-                                'scale' => $locationScale
-                            )
+                                'scale' => $locationScale,
+                            ),
                         ),
                         'weight' => .5,
                     ),
@@ -129,13 +128,13 @@ class FunctionScoreTest extends BaseTest
                         'gauss' => array(
                             'price' => array(
                                 'origin' => $priceOrigin,
-                                'scale' => $priceScale
-                            )
+                                'scale' => $priceScale,
+                            ),
                         ),
                         'weight' => 2,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
         $this->assertEquals($expected, $query->toArray());
     }
@@ -165,12 +164,12 @@ class FunctionScoreTest extends BaseTest
                         'weight' => 5.0,
                         'filter' => array(
                             'term' => array(
-                                'price' => 4.5
-                            )
-                        )
-                    )
-                )
-            )
+                                'price' => 4.5,
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $query->toArray());
@@ -193,16 +192,16 @@ class FunctionScoreTest extends BaseTest
                 'functions' => array(
                     array(
                         'random_score' => array(
-                            'seed' => 2
+                            'seed' => 2,
                         ),
                         'filter' => array(
                             'term' => array(
-                                'price' => 4.5
-                            )
-                        )
-                    )
-                )
-            )
+                                'price' => 4.5,
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $query->toArray());
@@ -226,17 +225,17 @@ class FunctionScoreTest extends BaseTest
                 'functions' => array(
                     array(
                         'random_score' => array(
-                            'seed' => 2
+                            'seed' => 2,
                         ),
                         'filter' => array(
                             'term' => array(
-                                'price' => 4.5
-                            )
+                                'price' => 4.5,
+                            ),
                         ),
                         'weight' => 2,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $query->toArray());
@@ -263,11 +262,11 @@ class FunctionScoreTest extends BaseTest
                 'functions' => array(
                     array(
                         'script_score' => array(
-                            'script' => $scriptString
-                        )
-                    )
-                )
-            )
+                            'script' => $scriptString,
+                        ),
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $query->toArray());

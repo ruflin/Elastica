@@ -6,8 +6,8 @@ use Elastica\Document;
 use Elastica\Filter\Nested;
 use Elastica\Filter\Terms;
 use Elastica\Search;
-use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Type\Mapping;
 
 class NestedFilterWithSetFilterTest extends BaseTest
 {
@@ -26,8 +26,8 @@ class NestedFilterWithSetFilterTest extends BaseTest
                 'hobbies' => array(
                     'type' => 'nested',
                     'include_in_parent' => true,
-                    'properties' => array('hobby' => array('type' => 'string'))
-                )
+                    'properties' => array('hobby' => array('type' => 'string')),
+                ),
             )
         );
         $type->setMapping($mapping);
@@ -39,8 +39,8 @@ class NestedFilterWithSetFilterTest extends BaseTest
                 'firstname' => 'Nicolas',
                 'lastname' => 'Ruflin',
                 'hobbies' => array(
-                    array('hobby' => 'opensource')
-                )
+                    array('hobby' => 'opensource'),
+                ),
             )
         );
         $docs[] = new Document(2,
@@ -50,7 +50,7 @@ class NestedFilterWithSetFilterTest extends BaseTest
                 'hobbies' => array(
                     array('hobby' => 'opensource'),
                     array('hobby' => 'guitar'),
-                )
+                ),
             )
         );
         $response = $type->addDocuments($docs);
@@ -79,9 +79,9 @@ class NestedFilterWithSetFilterTest extends BaseTest
             'nested' => array(
                 'path' => 'hobbies',
                 'filter' => array('terms' => array(
-                    'hobby' => array('guitar')
-                ))
-            )
+                    'hobby' => array('guitar'),
+                )),
+            ),
         );
 
         $this->assertEquals($expectedArray, $f->toArray());

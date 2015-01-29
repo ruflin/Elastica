@@ -36,8 +36,8 @@ class ResponseExceptionTest extends BaseTest
 
         $type->setMapping(array(
             'num' => array(
-                'type' => 'long'
-            )
+                'type' => 'long',
+            ),
         ));
 
         try {
@@ -63,5 +63,4 @@ class ResponseExceptionTest extends BaseTest
             $this->assertEquals(404, $ex->getElasticsearchException()->getCode());
         }
     }
-
 }

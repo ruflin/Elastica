@@ -2,12 +2,11 @@
 
 namespace Elastica\Test\Suggest;
 
+use Elastica\Document;
+use Elastica\Index;
 use Elastica\Suggest;
 use Elastica\Suggest\Term;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Query;
-use Elastica\Document;
-use Elastica\Index;
 
 class TermTest extends BaseTest
 {
@@ -51,17 +50,17 @@ class TermTest extends BaseTest
             'suggest' => array(
                 'suggest1' => array(
                     'term' => array(
-                        'field' => '_all'
+                        'field' => '_all',
                     ),
-                    'text' => 'Foor'
+                    'text' => 'Foor',
                 ),
                 'suggest2' => array(
                     'term' => array(
-                        'field' => '_all'
+                        'field' => '_all',
                     ),
-                    'text' => 'Girhub'
-                )
-            )
+                    'text' => 'Girhub',
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $suggest->toArray());

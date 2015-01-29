@@ -70,7 +70,7 @@ class LogTest extends BaseTest
 
         // Set log path temp path as otherwise test fails with output
         $errorLog = ini_get('error_log');
-        ini_set('error_log', sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'php.log');
+        ini_set('error_log', sys_get_temp_dir().DIRECTORY_SEPARATOR.'php.log');
 
         $this->_context['error_message'] = $this->_message;
         $message = json_encode($this->_context);

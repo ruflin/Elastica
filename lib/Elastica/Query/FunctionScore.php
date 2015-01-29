@@ -72,6 +72,7 @@ class FunctionScore extends AbstractQuery
         }
 
         $this->_functions[] = $function;
+
         return $this;
     }
 
@@ -141,8 +142,8 @@ class FunctionScore extends AbstractQuery
     }
 
     /**
-     * @param float          $weight      the weight of the function
-     * @param AbstractFilter $filter      a filter associated with this function
+     * @param float          $weight the weight of the function
+     * @param AbstractFilter $filter a filter associated with this function
      *
      * @return void
      */

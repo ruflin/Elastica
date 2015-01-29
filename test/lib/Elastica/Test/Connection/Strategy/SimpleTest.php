@@ -18,12 +18,12 @@ class SimpleTest extends Base
         $client = new Client();
         $resonse = $client->request('/_aliases');
         /* @var $resonse \Elastica\Response */
-       
+
         $this->_checkResponse($resonse);
-        
+
         $this->_checkStrategy($client);
     }
-    
+
     /**
      * @expectedException \Elastica\Exception\ConnectionException
      */
@@ -31,39 +31,37 @@ class SimpleTest extends Base
     {
         $config = array('host' => '255.255.255.0');
         $client = new Client($config);
-        
+
         $this->_checkStrategy($client);
 
         $client->request('/_aliases');
-        
     }
-    
+
     public function testWithOneFailConnection()
     {
         $connections = array(
             new \Elastica\Connection(array('host' => '255.255.255.0')),
             new \Elastica\Connection(array('host' => 'localhost')),
         );
-        
+
         $count = 0;
-        $callback = function($connection, $exception, $client) use(&$count) {
+        $callback = function ($connection, $exception, $client) use (&$count) {
             ++$count;
         };
-        
+
         $client = new Client(array(), $callback);
         $client->setConnections($connections);
-        
+
         $resonse = $client->request('/_aliases');
         /* @var $resonse Response */
 
         $this->_checkResponse($resonse);
-        
+
         $this->_checkStrategy($client);
-        
-        
+
         $this->assertLessThan(count($connections), $count);
     }
-    
+
     public function testWithNoValidConnection()
     {
         $connections = array(
@@ -73,10 +71,10 @@ class SimpleTest extends Base
         );
 
         $count = 0;
-        $client = new Client(array(), function() use (&$count) {
+        $client = new Client(array(), function () use (&$count) {
             ++$count;
         });
-        
+
         $client->setConnections($connections);
 
         try {
@@ -85,9 +83,8 @@ class SimpleTest extends Base
         } catch (\Elastica\Exception\ConnectionException $e) {
             $this->assertEquals(count($connections), $count);
         }
-
     }
-    
+
     protected function _checkStrategy($client)
     {
         $strategy = $client->getConnectionStrategy();
@@ -96,7 +93,7 @@ class SimpleTest extends Base
 
         $this->assertTrue($condition);
     }
-    
+
     protected function _checkResponse($resonse)
     {
         $this->assertTrue($resonse->isOk());

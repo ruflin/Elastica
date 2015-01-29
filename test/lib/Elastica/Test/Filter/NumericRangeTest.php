@@ -23,8 +23,8 @@ class NumericRangeTest extends BaseTest
 
         $expectedArray = array(
             'numeric_range' => array(
-                'name' => $fromTo
-            )
+                'name' => $fromTo,
+            ),
         );
 
         $this->assertEquals($expectedArray, $filter->toArray());

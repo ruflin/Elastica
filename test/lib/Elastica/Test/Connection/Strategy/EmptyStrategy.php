@@ -13,6 +13,6 @@ class EmptyStrategy implements StrategyInterface
 {
     public function getConnection($connections)
     {
-        return null;
+        return;
     }
 }

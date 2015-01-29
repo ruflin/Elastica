@@ -2,17 +2,16 @@
 
 namespace Elastica\Transport;
 
-use Elastica\Exception\Connection\HttpException;
+use Elastica\Connection;
 use Elastica\Exception\Connection\GuzzleException;
+use Elastica\Exception\Connection\HttpException;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
-use Elastica\Connection;
+use Elastica\JSON;
 use Elastica\Request;
 use Elastica\Response;
-use Elastica\JSON;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Stream\Stream;
 
 /**

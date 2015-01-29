@@ -28,7 +28,7 @@ class DateHistogramTest extends BaseTest
 
         $mapping = new Mapping($type, array(
                 'name' => array('type' => 'string', 'store' => 'no'),
-                'dtmPosted' => array('type' => 'date', 'store' => 'no', 'format' => 'yyyy-MM-dd HH:mm:ss')
+                'dtmPosted' => array('type' => 'date', 'store' => 'no', 'format' => 'yyyy-MM-dd HH:mm:ss'),
             ));
         $type->setMapping($mapping);
 

@@ -3,9 +3,9 @@
 namespace Elastica\Transport;
 
 use Elastica\Connection;
-use Elastica\Request;
 use Elastica\Exception\InvalidException;
 use Elastica\Param;
+use Elastica\Request;
 
 /**
  * Elastica Abstract Transport object

@@ -25,8 +25,8 @@ class PartialShardFailureExceptionTest extends BaseTest
         $index->create(array(
             'index' => array(
                 'number_of_shards'   => 5,
-                'number_of_replicas' => 0
-            )
+                'number_of_replicas' => 0,
+            ),
         ), true);
 
         $type = $index->getType('folks');
@@ -58,5 +58,4 @@ class PartialShardFailureExceptionTest extends BaseTest
             $this->assertEquals(0, count($resultSet->getResults()));
         }
     }
-
 }

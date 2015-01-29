@@ -2,8 +2,8 @@
 
 namespace Elastica\Test\Filter;
 
-use Elastica\Query\QueryString;
 use Elastica\Filter\Query;
+use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 
 class QueryTest extends BaseTest
@@ -17,8 +17,8 @@ class QueryTest extends BaseTest
             'query' => array(
                 'query_string' => array(
                     'query' => 'foo bar',
-                )
-            )
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $filter->toArray());
@@ -37,8 +37,8 @@ class QueryTest extends BaseTest
                         'query' => 'foo bar',
                     ),
                 ),
-                '_cache' => true
-            )
+                '_cache' => true,
+            ),
         );
 
         $this->assertEquals($expected, $filter->toArray());

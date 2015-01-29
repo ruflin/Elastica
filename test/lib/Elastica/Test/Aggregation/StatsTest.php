@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\Stats;
 use Elastica\Document;
 use Elastica\Query;
@@ -39,4 +38,3 @@ class StatsTest extends BaseAggregationTest
         $this->assertEquals((5 + 8 + 1 + 3), $results['sum']);
     }
 }
- 

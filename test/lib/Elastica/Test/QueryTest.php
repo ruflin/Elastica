@@ -4,11 +4,11 @@ namespace Elastica\Test;
 
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
+use Elastica\Facet\Terms;
+use Elastica\Query;
 use Elastica\Query\Builder;
 use Elastica\Query\Term;
 use Elastica\Query\Text;
-use Elastica\Query;
-use Elastica\Facet\Terms;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
 
@@ -86,9 +86,9 @@ class QueryTest extends BaseTest
         $query = array(
             'query' => array(
                 'text' => array(
-                    'title' => 'test'
-                )
-            )
+                    'title' => 'test',
+                ),
+            ),
         );
 
         $query1 = Query::create($query);

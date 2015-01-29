@@ -2,7 +2,6 @@
 
 namespace Elastica\QueryBuilder;
 
-
 /**
  * Abstract Version class
  *

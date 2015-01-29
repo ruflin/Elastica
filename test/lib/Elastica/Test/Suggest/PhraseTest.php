@@ -2,13 +2,12 @@
 
 namespace Elastica\Test\Suggest;
 
+use Elastica\Document;
+use Elastica\Index;
 use Elastica\Suggest;
 use Elastica\Suggest\CandidateGenerator\DirectGenerator;
 use Elastica\Suggest\Phrase;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Query;
-use Elastica\Document;
-use Elastica\Index;
 
 class PhraseTest extends BaseTest
 {
@@ -55,10 +54,10 @@ class PhraseTest extends BaseTest
                     'text' => 'elasticsearch is bansai coor',
                     'phrase' => array(
                         'field' => 'text',
-                        'analyzer' => 'simple'
-                    )
-                )
-            )
+                        'analyzer' => 'simple',
+                    ),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $suggest->toArray());

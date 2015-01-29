@@ -4,11 +4,13 @@ namespace Elastica\Test\Facet;
 
 use Elastica\Test\Base as BaseTest;
 
-class GeoClusterTest extends BaseTest{
-    public function testQuery() {
+class GeoClusterTest extends BaseTest
+{
+    public function testQuery()
+    {
         $client = $this->_getClient();
         $nodes = $client->getCluster()->getNodes();
-        if(!$nodes[0]->getInfo()->hasPlugin('geocluster-facet')){
+        if (!$nodes[0]->getInfo()->hasPlugin('geocluster-facet')) {
             $this->markTestSkipped('geocluster-facet plugin not installed');
         }
 
@@ -17,16 +19,16 @@ class GeoClusterTest extends BaseTest{
         $geoField = 'location';
 
         $type->setMapping(new \Elastica\Type\Mapping($type, array(
-            $geoField => array( 'type' => 'geo_point', 'lat_lon' => true )
+            $geoField => array( 'type' => 'geo_point', 'lat_lon' => true ),
         )));
 
-        $doc = new \Elastica\Document(1, array('name' => 'item1', 'location' => array(20,20)));
+        $doc = new \Elastica\Document(1, array('name' => 'item1', 'location' => array(20, 20)));
         $type->addDocument($doc);
 
-        $doc = new \Elastica\Document(2, array('name' => 'item2', 'location' => array(20,20)));
+        $doc = new \Elastica\Document(2, array('name' => 'item2', 'location' => array(20, 20)));
         $type->addDocument($doc);
 
-        $doc = new \Elastica\Document(3, array('name' => 'item3', 'location' => array(20,20)));
+        $doc = new \Elastica\Document(3, array('name' => 'item3', 'location' => array(20, 20)));
         $type->addDocument($doc);
 
         $index->refresh();
@@ -38,7 +40,6 @@ class GeoClusterTest extends BaseTest{
             ->setShowIds(false);
         $query = new \Elastica\Query();
         $query->setFacets(array($facet));
-
 
         $response = $type->search($query);
         $facets = $response->getFacets();

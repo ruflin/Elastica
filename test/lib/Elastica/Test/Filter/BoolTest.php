@@ -2,11 +2,11 @@
 
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\Terms;
-use \Elastica\Query;
 use Elastica\Filter\Bool;
-use Elastica\Filter\Term;
 use Elastica\Filter\Ids;
+use Elastica\Filter\Term;
+use Elastica\Filter\Terms;
+use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
 
 class BoolTest extends BaseTest
@@ -42,15 +42,15 @@ class BoolTest extends BaseTest
                                 'should' => array(
                                     array(
                                         $idsFilter1->toArray(),
-                                        $idsFilter2->toArray()
-                                    )
-                                )
-                            )
+                                        $idsFilter2->toArray(),
+                                    ),
+                                ),
+                            ),
                         ),
-                        $idsFilter3->toArray()
-                    )
-                )
-            )
+                        $idsFilter3->toArray(),
+                    ),
+                ),
+            ),
         );
         $out[] = array($mainBool, $expectedArray);
 
@@ -65,14 +65,14 @@ class BoolTest extends BaseTest
         $expected = array(
             'bool' => array(
                 'must' => array(
-                    $terms->toArray()
+                    $terms->toArray(),
                 ),
                 'must_not' => array(
-                    $termsNot->toArray()
+                    $termsNot->toArray(),
                 ),
                 '_cache' => true,
-                '_cache_key' => 'my-cache-key'
-            )
+                '_cache_key' => 'my-cache-key',
+            ),
         );
         $out[] = array($bool, $expected);
 
@@ -81,7 +81,7 @@ class BoolTest extends BaseTest
 
     /**
      * @dataProvider getTestToArrayData()
-     * @param Bool $bool
+     * @param Bool  $bool
      * @param array $expectedArray
      */
     public function testToArray(Bool $bool, $expectedArray)
@@ -138,10 +138,10 @@ class BoolTest extends BaseTest
         //count compare the id's
         $ids = array();
         /** @var \Elastica\Result $result **/
-        foreach($results as $result){
+        foreach ($results as $result) {
             $ids[] = $result->getId();
         }
-        $this->assertEquals($ids, array("2","4"), 'Bool filter with child Bool filters: result ID check');
+        $this->assertEquals($ids, array("2", "4"), 'Bool filter with child Bool filters: result ID check');
 
         $index->delete();
     }

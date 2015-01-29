@@ -2,9 +2,8 @@
 
 namespace Elastica\Test\Aggregation;
 
-
-use Elastica\Document;
 use Elastica\Aggregation\Histogram;
+use Elastica\Document;
 use Elastica\Query;
 
 class HistogramTest extends BaseAggregationTest
@@ -42,4 +41,3 @@ class HistogramTest extends BaseAggregationTest
         $this->assertEquals(2, $buckets[3]['doc_count']);
     }
 }
- 

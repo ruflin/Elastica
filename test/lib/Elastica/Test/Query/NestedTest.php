@@ -20,7 +20,7 @@ class NestedTest extends BaseTest
             'nested' => array(
                 'query' => $queryString->toArray(),
                 'path' => $path,
-            )
+            ),
         );
 
         $this->assertEquals($expected, $nested->toArray());

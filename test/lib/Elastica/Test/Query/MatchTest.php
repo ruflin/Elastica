@@ -46,9 +46,9 @@ class MatchTest extends BaseTest
                     'fuzziness' => $fuzziness,
                     'fuzzy_rewrite' => $fuzzyRewrite,
                     'prefix_length' => $prefixLength,
-                    'max_expansions' => $maxExpansions
-                )
-            )
+                    'max_expansions' => $maxExpansions,
+                ),
+            ),
         );
 
         $this->assertEquals($expectedArray, $query->toArray());
@@ -164,24 +164,22 @@ class MatchTest extends BaseTest
 
         $this->assertEquals(2, $resultSet->count());
     }
-    
-    
+
     public function testMatchFuzzinessType()
     {
         $field = 'test';
         $query = new Match();
-        
+
         $fuzziness = "AUTO";
         $query->setFieldFuzziness($field, $fuzziness);
-        
+
         $parameters =  $query->getParam($field);
-        $this->assertEquals($fuzziness, $parameters['fuzziness']);      
-        
-        
+        $this->assertEquals($fuzziness, $parameters['fuzziness']);
+
         $fuzziness = 0.3;
         $query->setFieldFuzziness($field, $fuzziness);
-        
+
         $parameters =  $query->getParam($field);
-        $this->assertEquals($fuzziness, $parameters['fuzziness']);      
+        $this->assertEquals($fuzziness, $parameters['fuzziness']);
     }
 }

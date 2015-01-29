@@ -2,7 +2,6 @@
 
 namespace Elastica;
 
-
 /**
  * Elastica tools
  *

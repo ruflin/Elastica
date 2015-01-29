@@ -20,9 +20,9 @@ class RegexpTest extends BaseTest
             'regexp' => array(
                 $field => array(
                     'value' => $value,
-                    'boost' => $boost
-                )
-            )
+                    'boost' => $boost,
+                ),
+            ),
         );
 
         $this->assertequals($expectedArray, $query->toArray());

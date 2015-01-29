@@ -4,17 +4,16 @@ namespace Elastica\Test;
 
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
-use Elastica\Script;
 use Elastica\Index;
-use Elastica\Type;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Type;
 
 class DocumentTest extends BaseTest
 {
     public function testAddFile()
     {
         $fileName = '/dev/null';
-        if(!file_exists($fileName)){
+        if (!file_exists($fileName)) {
             $this->markTestSkipped("File {$fileName} does not exist.");
         }
         $doc = new Document();

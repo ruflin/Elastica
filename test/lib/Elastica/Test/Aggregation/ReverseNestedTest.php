@@ -2,9 +2,9 @@
 
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\Terms;
 use Elastica\Aggregation\Nested;
 use Elastica\Aggregation\ReverseNested;
+use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Type\Mapping;
@@ -21,9 +21,9 @@ class ReverseNestedTest extends BaseAggregationTest
                 "type" => "nested",
                 "properties" => array(
                     "name" => array("type" => "string"),
-                    "body" => array("type" => "string")
-                )
-            )
+                    "body" => array("type" => "string"),
+                ),
+            ),
         ));
         $type = $this->_index->getType("test");
         $type->setMapping($mapping);
@@ -53,7 +53,7 @@ class ReverseNestedTest extends BaseAggregationTest
                     ),
                 ),
                 "tags" => array("foo", "baz"),
-            ))
+            )),
         );
         $type->addDocuments($docs);
         $this->_index->refresh();

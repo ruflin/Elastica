@@ -56,7 +56,7 @@ class StatisticalTest extends BaseTest
         $type->addDocument($doc);
 
         $facet = new Statistical('stats');
-        $facet->setFields(array('price','price2'));
+        $facet->setFields(array('price', 'price2'));
 
         $query = new Query();
         $query->addFacet($facet);

@@ -192,7 +192,7 @@ class IdsTest extends BaseTest
     public function testFilterTypeAndTypeCollision()
     {
         // This test ensures that Elastica\Type and Elastica\Filter\Type
-        // do not collide when used together, which at one point 
+        // do not collide when used together, which at one point
         // happened because of a use statement in Elastica\Filter\Ids
         // Test goal is to make sure a Fatal Error is not triggered
         $filterType = new Type();

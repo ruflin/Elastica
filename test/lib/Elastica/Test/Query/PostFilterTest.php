@@ -5,8 +5,8 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Filter\Term;
 use Elastica\Index;
-use Elastica\Query\Match;
 use Elastica\Query;
+use Elastica\Query\Match;
 use Elastica\Test\Base as BaseTest;
 
 class PostFilterTest extends BaseTest
@@ -28,7 +28,6 @@ class PostFilterTest extends BaseTest
         );
         $this->_index->getType("test")->addDocuments($docs);
         $this->_index->refresh();
-
     }
 
     protected function tearDown()
@@ -50,7 +49,6 @@ class PostFilterTest extends BaseTest
 
         $this->assertArrayHasKey('post_filter', $data);
         $this->assertEquals(array('term' => array('color' => 'green')), $data['post_filter']);
-
     }
 
     public function testQuery()
@@ -70,11 +68,10 @@ class PostFilterTest extends BaseTest
         $results = $this->_index->search($query);
 
         $this->assertEquals(1, $results->getTotalHits());
-
     }
 
     protected function _createIndex($name = 'test', $delete = true, $shards = 1)
     {
-        return parent::_createIndex('test_postfilter_' . $name, $delete, $shards);
+        return parent::_createIndex('test_postfilter_'.$name, $delete, $shards);
     }
 }

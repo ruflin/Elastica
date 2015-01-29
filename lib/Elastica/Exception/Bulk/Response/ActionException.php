@@ -2,9 +2,9 @@
 
 namespace Elastica\Exception\Bulk\Response;
 
-use Elastica\Exception\BulkException;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\Response;
+use Elastica\Exception\BulkException;
 
 class ActionException extends BulkException
 {

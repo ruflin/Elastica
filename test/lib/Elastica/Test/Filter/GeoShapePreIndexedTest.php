@@ -5,8 +5,8 @@ namespace Elastica\Test\Filter;
 
 use Elastica\Filter\AbstractGeoShape;
 use Elastica\Filter\GeoShapePreIndexed;
-use Elastica\Query\MatchAll;
 use Elastica\Query\Filtered;
+use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
 class GeoShapePreIndexedTest extends BaseTest
@@ -21,16 +21,16 @@ class GeoShapePreIndexedTest extends BaseTest
         // create mapping
         $mapping = new \Elastica\Type\Mapping($type, array(
             'location' => array(
-                'type' => 'geo_shape'
-            )
+                'type' => 'geo_shape',
+            ),
         ));
         $type->setMapping($mapping);
 
         // create other type mapping
         $otherMapping = new \Elastica\Type\Mapping($type, array(
             'location' => array(
-                'type' => 'geo_shape'
-            )
+                'type' => 'geo_shape',
+            ),
         ));
         $otherType->setMapping($otherMapping);
 
@@ -40,9 +40,9 @@ class GeoShapePreIndexedTest extends BaseTest
                 "type"          => "envelope",
                 "coordinates"   => array(
                     array(0.0, 50.0),
-                    array(50.0, 0.0)
-                )
-            )
+                    array(50.0, 0.0),
+                ),
+            ),
         )));
 
         // add other type docs
@@ -51,9 +51,9 @@ class GeoShapePreIndexedTest extends BaseTest
                 "type"          => "envelope",
                 "coordinates"   => array(
                     array(25.0, 75.0),
-                    array(75.0, 25.0)
-                )
-            )
+                    array(75.0, 25.0),
+                ),
+            ),
         )));
 
         $index->optimize();
@@ -71,11 +71,11 @@ class GeoShapePreIndexedTest extends BaseTest
                         'id' => '1',
                         'type' => 'type',
                         'index' => 'elastica_'.$indexName,
-                        'path' => 'location'
+                        'path' => 'location',
                     ),
-                    'relation' => $gsp->getRelation()
-                )
-            )
+                    'relation' => $gsp->getRelation(),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $gsp->toArray());

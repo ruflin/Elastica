@@ -2,7 +2,6 @@
 
 namespace Elastica\Filter;
 
-
 /**
  * Geo polygon filter
  *

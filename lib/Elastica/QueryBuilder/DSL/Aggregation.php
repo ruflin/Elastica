@@ -181,7 +181,7 @@ class Aggregation implements DSL
      * top hits aggregation
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
-     * @param string $name
+     * @param  string  $name
      * @return TopHits
      */
     public function top_hits($name)

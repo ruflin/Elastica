@@ -11,7 +11,7 @@ use Elastica\Test\Base as BaseTest;
 class SettingsTest extends BaseTest
 {
 
-	public function testGet()
+    public function testGet()
     {
         $indexName = 'elasticatest';
 
@@ -184,11 +184,10 @@ class SettingsTest extends BaseTest
 
     public function testSetReadOnly()
     {
-        $index = $this->_createIndex('test' . rand());;
+        $index = $this->_createIndex('test'.rand());
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
         $index->getSettings()->setReadOnly(false);
-
 
         // Add document to normal index
         $doc1 = new Document(null, array('hello' => 'world'));
@@ -224,10 +223,9 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-
     public function testGetSetBlocksRead()
     {
-        $index = $this->_createIndex('elastica-test' . '123');
+        $index = $this->_createIndex('elastica-test'.'123');
         $index->refresh();
         $settings = $index->getSettings();
 
@@ -247,7 +245,7 @@ class SettingsTest extends BaseTest
 
     public function testGetSetBlocksWrite()
     {
-        $index = $this->_createIndex('elastica-test' . '432');
+        $index = $this->_createIndex('elastica-test'.'432');
         $index->refresh();
         $settings = $index->getSettings();
 
@@ -267,7 +265,7 @@ class SettingsTest extends BaseTest
 
     public function testGetSetBlocksMetadata()
     {
-        $index = $this->_createIndex('elastica-test' . '534');
+        $index = $this->_createIndex('elastica-test'.'534');
         $index->refresh();
         $settings = $index->getSettings();
 

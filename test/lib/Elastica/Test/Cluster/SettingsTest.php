@@ -2,10 +2,10 @@
 
 namespace Elastica\Test\Cluster;
 
+use Elastica\Cluster\Settings;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Cluster\Settings;
 
 class SettingsTest extends BaseTest
 {
@@ -54,7 +54,6 @@ class SettingsTest extends BaseTest
         $settings->setReadOnly(false);
         $index1 = $this->_createIndex('test1');
         $index2 = $this->_createIndex('test2');
-
 
         $doc1 = new Document(null, array('hello' => 'world'));
         $doc2 = new Document(null, array('hello' => 'world'));

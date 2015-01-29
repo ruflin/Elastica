@@ -2,10 +2,10 @@
 
 namespace Elastica\Test\Transport;
 
-use Elastica\Transport\AbstractTransport;
-use Elastica\Transport\Http;
 use Elastica\Connection;
 use Elastica\Exception\InvalidException;
+use Elastica\Transport\AbstractTransport;
+use Elastica\Transport\Http;
 
 class AbstractTransportTest extends \PHPUnit_Framework_TestCase
 {

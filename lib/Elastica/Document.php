@@ -2,10 +2,10 @@
 
 namespace Elastica;
 
-use Elastica\Exception\InvalidException;
 use Elastica\Bulk\Action;
-use Elastica\Filter\Bool;
+use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotImplementedException;
+use Elastica\Filter\Bool;
 
 /**
  * Single document stored in elastic search

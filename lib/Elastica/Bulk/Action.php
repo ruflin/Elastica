@@ -3,8 +3,8 @@
 namespace Elastica\Bulk;
 
 use Elastica\Bulk;
-use Elastica\JSON;
 use Elastica\Index;
+use Elastica\JSON;
 use Elastica\Type;
 
 class Action

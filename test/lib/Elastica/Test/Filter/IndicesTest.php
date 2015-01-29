@@ -54,12 +54,12 @@ class IndicesTest extends BaseTest
             "indices" => array(
                 "indices" => array("index1", "index2"),
                 "filter" => array(
-                    "term" => array("tag" => "wow")
+                    "term" => array("tag" => "wow"),
                 ),
                 "no_match_filter" => array(
-                    "term" => array("tag" => "such filter")
-                )
-            )
+                    "term" => array("tag" => "such filter"),
+                ),
+            ),
         );
         $filter = new Indices(new Term(array("tag" => "wow")), array("index1", "index2"));
         $filter->setNoMatchFilter(new Term(array("tag" => "such filter")));

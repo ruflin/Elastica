@@ -6,7 +6,6 @@ use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Index;
-use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
 
 class ThriftTest extends BaseTest
@@ -104,8 +103,8 @@ class ThriftTest extends BaseTest
                 array(
                     'host' => 'localhost',
                     'port' => 9500,
-                    'transport' => 'Thrift'
-                )
+                    'transport' => 'Thrift',
+                ),
             ),
             array(
                 array(
@@ -116,9 +115,9 @@ class ThriftTest extends BaseTest
                         'framedTransport' => false,
                         'sendTimeout' => 10000,
                         'recvTimeout' => 20000,
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 

@@ -6,13 +6,13 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
+use Elastica\Query\HasChild;
 use Elastica\Query\QueryString;
 use Elastica\Query\Term;
 use Elastica\Status;
+use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 use Elastica\Type\Mapping;
-use Elastica\Query\HasChild;
-use Elastica\Test\Base as BaseTest;
 
 class IndexTest extends BaseTest
 {
@@ -41,8 +41,8 @@ class IndexTest extends BaseTest
         $result = $type->search('hanswurst');
     }
 
-    public function testGetMappingAlias() {
-
+    public function testGetMappingAlias()
+    {
         $indexName = 'test-mapping';
         $aliasName = 'test-mapping-alias';
 
@@ -111,9 +111,9 @@ class IndexTest extends BaseTest
     public function testAddPdfFile()
     {
         $this->_checkAttachmentsPlugin();
-        $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'),);
+        $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'));
 
-        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
+        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
 
         $index = $this->_createIndex();
         $type = new Type($index, 'test');
@@ -122,7 +122,7 @@ class IndexTest extends BaseTest
         $type->setMapping($indexMapping);
 
         $doc1 = new Document(1);
-        $doc1->addFile('file', BASE_PATH . '/data/test.pdf', 'application/pdf');
+        $doc1->addFile('file', BASE_PATH.'/data/test.pdf', 'application/pdf');
         $doc1->set('text', 'basel world');
         $type->addDocument($doc1);
 
@@ -150,9 +150,9 @@ class IndexTest extends BaseTest
     public function testAddPdfFileContent()
     {
         $this->_checkAttachmentsPlugin();
-        $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'),);
+        $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'));
 
-        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
+        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
 
         $index = $this->_createIndex();
         $type = new Type($index, 'test');
@@ -161,7 +161,7 @@ class IndexTest extends BaseTest
         $type->setMapping($indexMapping);
 
         $doc1 = new Document(1);
-        $doc1->addFileContent('file', file_get_contents(BASE_PATH . '/data/test.pdf'));
+        $doc1->addFileContent('file', file_get_contents(BASE_PATH.'/data/test.pdf'));
         $doc1->set('text', 'basel world');
         $type->addDocument($doc1);
 
@@ -189,9 +189,9 @@ class IndexTest extends BaseTest
     public function testAddWordxFile()
     {
         $this->_checkAttachmentsPlugin();
-        $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => 'no'),);
+        $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => 'no'));
 
-        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
+        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
 
         $index = $this->_createIndex();
         $type = new Type($index, 'content');
@@ -200,7 +200,7 @@ class IndexTest extends BaseTest
         $type->setMapping($indexMapping);
 
         $doc1 = new Document(1);
-        $doc1->addFile('file', BASE_PATH . '/data/test.docx');
+        $doc1->addFile('file', BASE_PATH.'/data/test.docx');
         $doc1->set('text', 'basel world');
         $type->addDocument($doc1);
 
@@ -226,7 +226,7 @@ class IndexTest extends BaseTest
         $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'yes'), 'text' => array('type' => 'string', 'store' => 'yes'),
             'title' => array('type' => 'string', 'store' => 'yes'),);
 
-        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0),);
+        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
 
         $index = $this->_createIndex();
         $type = new Type($index, 'content');
@@ -244,7 +244,7 @@ class IndexTest extends BaseTest
         $title = 'No Title';
 
         $doc1 = new Document($docId);
-        $doc1->addFile('file', BASE_PATH . '/data/test.docx');
+        $doc1->addFile('file', BASE_PATH.'/data/test.docx');
         $doc1->set('text', $text);
         $doc1->set('title', $title);
         $type->addDocument($doc1);
@@ -309,7 +309,6 @@ class IndexTest extends BaseTest
         $type->addDocument($doc1);
         $type->addDocument($doc2);
 
-
         $index->refresh();
 
         $this->assertEquals(2, $index->count());
@@ -367,7 +366,6 @@ class IndexTest extends BaseTest
         $index2->optimize();
 
         $status = new Status($client);
-
 
         $this->assertTrue($status->indexExists($indexName1));
         $this->assertTrue($status->indexExists($indexName2));
@@ -594,10 +592,10 @@ class IndexTest extends BaseTest
         $expected = array(
             'query' => array(
                 'query_string' => array(
-                    'query' => 'test'
-                )
+                    'query' => 'test',
+                ),
             ),
-            'size' => 5
+            'size' => 5,
         );
         $this->assertEquals($expected, $search->getQuery()->toArray());
         $this->assertEquals(array('test'), $search->getIndices());
@@ -682,7 +680,7 @@ class IndexTest extends BaseTest
                 'end_offset' => 3,
                 'type' => '<ALPHANUM>',
                 'position' => 1,
-            )
+            ),
         );
 
         $this->assertEquals($tokens, $returnedTokens);

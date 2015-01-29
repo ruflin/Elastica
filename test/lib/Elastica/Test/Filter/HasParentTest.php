@@ -20,8 +20,8 @@ class HasParentTest extends BaseTest
         $expectedArray = array(
             'has_parent' => array(
                 'query' => $q->toArray(),
-                'type' => $type
-            )
+                'type' => $type,
+            ),
         );
 
         $this->assertEquals($expectedArray, $filter->toArray());
@@ -60,12 +60,11 @@ class HasParentTest extends BaseTest
         $expectedArray = array(
             'has_parent' => array(
                 'filter' => $f->toArray(),
-                'type' => $type
-            )
+                'type' => $type,
+            ),
         );
 
         $this->assertEquals($expectedArray, $filter->toArray());
-
     }
 
     public function testFilterInsideHasParentSearch()
@@ -134,6 +133,7 @@ class HasParentTest extends BaseTest
         $childType->addDocument($child2);
 
         $index->refresh();
+
         return $index;
     }
 }

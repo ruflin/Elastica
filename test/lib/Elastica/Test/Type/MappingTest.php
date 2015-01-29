@@ -34,7 +34,7 @@ class MappingTest extends BaseTest
         $doc = new Document(1,
             array(
                 'firstname' => $firstname,
-                'lastname' => 'Ruflin'
+                'lastname' => 'Ruflin',
             )
         );
 
@@ -115,7 +115,7 @@ class MappingTest extends BaseTest
                                 'firstname' => array('type' => 'string', 'store' => 'yes'),
                                 'lastname' => array('type' => 'string', 'store' => 'yes'),
                                 'age' => array('type' => 'integer', 'store' => 'yes'),
-                            )
+                            ),
                         ),
                     ),
                 ),
@@ -128,7 +128,7 @@ class MappingTest extends BaseTest
             'user' => array(
                 'firstname' => 'Nicolas',
                 'lastname' => 'Ruflin',
-                'age' => 9
+                'age' => 9,
             ),
         ));
 
@@ -146,7 +146,7 @@ class MappingTest extends BaseTest
         $parenttype = new Type($index, 'parenttype');
         $parentmapping = new Mapping($parenttype,
             array(
-                'name' => array('type' => 'string', 'store' => 'yes')
+                'name' => array('type' => 'string', 'store' => 'yes'),
             )
         );
 
@@ -178,9 +178,9 @@ class MappingTest extends BaseTest
                 'note' => array(
                     'store' => 'yes', 'properties' => array(
                         'titulo'  => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0),
-                        'contenido' => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0)
-                    )
-                )
+                        'contenido' => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0),
+                    ),
+                ),
             )
         );
 
@@ -190,13 +190,13 @@ class MappingTest extends BaseTest
                 'note' => array(
                     array(
                         'titulo'        => 'nota1',
-                        'contenido'        => 'contenido1'
+                        'contenido'        => 'contenido1',
                     ),
                     array(
                         'titulo'        => 'nota2',
-                        'contenido'        => 'contenido2'
-                    )
-                )
+                        'contenido'        => 'contenido2',
+                    ),
+                ),
             )
         );
 
@@ -208,15 +208,15 @@ class MappingTest extends BaseTest
     /**
      * Test setting a dynamic template and validate whether the right mapping is applied after adding a document which
      * should match the dynamic template. The example is the template_1 from the Elasticsearch documentation.
-     * 
+     *
      * @link http://www.elasticsearch.org/guide/reference/mapping/root-object-type/
      */
     public function testDynamicTemplate()
     {
         $index = $this->_createIndex();
         $type  = $index->getType('person');
-        
-        // set a dynamic template "template_1" which creates a multi field for multi* matches. 
+
+        // set a dynamic template "template_1" which creates a multi field for multi* matches.
         $mapping = new Mapping($type);
         $mapping->setParam('dynamic_templates', array(
             array('template_1' => array(
@@ -225,17 +225,17 @@ class MappingTest extends BaseTest
                     'type'   => 'multi_field',
                     'fields' => array(
                         '{name}' => array('type' => '{dynamic_type}', 'index' => 'analyzed'),
-                        'org'    => array('type' => '{dynamic_type}', 'index' => 'not_analyzed')
-                    )
-                )
-            ))
+                        'org'    => array('type' => '{dynamic_type}', 'index' => 'not_analyzed'),
+                    ),
+                ),
+            )),
         ));
-        
+
         $mapping->send();
-        
+
         // when running the tests, the mapping sometimes isn't available yet. Optimize index to enforce reload mapping.
         $index->optimize();
-        
+
         // create a document which should create a mapping for the field: multiname.
         $testDoc = new Document('person1', array('multiname' => 'Jasper van Wanrooy'), $type);
         $index->addDocuments(array($testDoc));
@@ -266,7 +266,7 @@ class MappingTest extends BaseTest
         $type = $index->getType('test');
         $mapping = new Mapping($type, array(
             'firstname' => array('type' => 'string', 'store' => 'yes'),
-            'lastname' => array('type' => 'string')
+            'lastname' => array('type' => 'string'),
         ));
         $mapping->setMeta(array('class' => 'test'));
         $type->setMapping($mapping);
@@ -283,12 +283,12 @@ class MappingTest extends BaseTest
         $type = $index->getType('test');
         $properties = array(
             'firstname' => array('type' => 'string', 'store' => 'yes'),
-            'lastname' => array('type' => 'string')
+            'lastname' => array('type' => 'string'),
         );
         $mapping = new Mapping($type, $properties);
         $all = array(
            "enabled" => true,
-           "store" => "yes"
+           "store" => "yes",
         );
         $mapping->setParam('_all', $all);
         $get_all = $mapping->getParam('_all');
