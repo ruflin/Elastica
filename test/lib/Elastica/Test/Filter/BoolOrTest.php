@@ -33,8 +33,8 @@ class BoolOrTest extends BaseTest
         $expectedArray = array(
             'or' => array(
                     $filter1->toArray(),
-                    $filter2->toArray()
-                )
+                    $filter2->toArray(),
+                ),
             );
 
         $this->assertEquals($expectedArray, $orFilter->toArray());

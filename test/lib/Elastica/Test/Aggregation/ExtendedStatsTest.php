@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\ExtendedStats;
 use Elastica\Document;
 use Elastica\Query;
@@ -40,4 +39,3 @@ class ExtendedStatsTest extends BaseAggregationTest
         $this->assertTrue(array_key_exists('sum_of_squares', $results));
     }
 }
- 

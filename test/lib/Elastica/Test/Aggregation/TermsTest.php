@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Query;
@@ -36,4 +35,3 @@ class TermsTest extends BaseAggregationTest
         $this->assertEquals("blue", $results['buckets'][0]['key']);
     }
 }
- 

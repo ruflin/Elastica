@@ -26,6 +26,5 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $end = microtime(true);
 
         //echo $end - $start;
-
     }
 }

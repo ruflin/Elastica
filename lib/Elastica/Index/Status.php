@@ -92,6 +92,7 @@ class Status
         if (!empty($data['aliases'])) {
             return array_keys($data['aliases']);
         }
+
         return [];
     }
 

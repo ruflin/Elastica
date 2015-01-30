@@ -25,35 +25,35 @@ class NullTest extends BaseTest
 
         $index = $client->getIndex('elasticaNullTransportTest1');
 
-         $resultSet = $index->search(new Query());
-         $this->assertNotNull($resultSet);
+        $resultSet = $index->search(new Query());
+        $this->assertNotNull($resultSet);
 
-         $response = $resultSet->getResponse();
-         $this->assertNotNull($response);
+        $response = $resultSet->getResponse();
+        $this->assertNotNull($response);
 
          // Validate most of the expected fields in the response data.  Consumers of the response
          // object have a reasonable expectation of finding "hits", "took", etc
          $responseData = $response->getData();
-         $this->assertContains("took", $responseData);
-         $this->assertEquals(0, $responseData["took"]);
-         $this->assertContains("_shards", $responseData);
-         $this->assertContains("hits", $responseData);
-         $this->assertContains("total", $responseData["hits"]);
-         $this->assertEquals(0, $responseData["hits"]["total"]);
-         $this->assertContains("params", $responseData);
+        $this->assertContains("took", $responseData);
+        $this->assertEquals(0, $responseData["took"]);
+        $this->assertContains("_shards", $responseData);
+        $this->assertContains("hits", $responseData);
+        $this->assertContains("total", $responseData["hits"]);
+        $this->assertEquals(0, $responseData["hits"]["total"]);
+        $this->assertContains("params", $responseData);
 
-         $took = $response->getEngineTime();
-         $this->assertEquals(0, $took);
+        $took = $response->getEngineTime();
+        $this->assertEquals(0, $took);
 
-         $errorString = $response->getError();
-         $this->assertEmpty($errorString);
+        $errorString = $response->getError();
+        $this->assertEmpty($errorString);
 
-         $shards = $response->getShardsStatistics();
-         $this->assertContains("total", $shards);
-         $this->assertEquals(0, $shards["total"]);
-         $this->assertContains("successful", $shards);
-         $this->assertEquals(0, $shards["successful"]);
-         $this->assertContains("failed", $shards);
-         $this->assertEquals(0, $shards["failed"]);
+        $shards = $response->getShardsStatistics();
+        $this->assertContains("total", $shards);
+        $this->assertEquals(0, $shards["total"]);
+        $this->assertContains("successful", $shards);
+        $this->assertEquals(0, $shards["successful"]);
+        $this->assertContains("failed", $shards);
+        $this->assertEquals(0, $shards["failed"]);
     }
 }

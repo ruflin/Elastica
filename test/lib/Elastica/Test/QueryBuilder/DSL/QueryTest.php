@@ -52,27 +52,30 @@ class QueryTest extends \PHPUnit_Framework_TestCase
         'template' => array(),
     );
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->queries['filtered'] = array(new Match(), new Exists('field'));
         $this->queries['has_child'] = array(new Match());
         $this->queries['has_parent'] = array(new Match(), 'type');
         $this->queries['top_children'] = array(new Match(), 'type');
     }
 
-    public function testType() {
+    public function testType()
+    {
         $queryDSL = new DSL\Query();
 
         $this->assertInstanceOf('Elastica\QueryBuilder\DSL', $queryDSL);
         $this->assertEquals(DSL::TYPE_QUERY, $queryDSL->getType());
     }
 
-    public function testQueries() {
+    public function testQueries()
+    {
         $queryDSL = new DSL\Query();
 
-        foreach($this->queries as $methodName => $arguments) {
+        foreach ($this->queries as $methodName => $arguments) {
             $this->assertTrue(
                 method_exists($queryDSL, $methodName),
-                'method for query "' . $methodName . '" not found'
+                'method for query "'.$methodName.'" not found'
             );
 
             try {
@@ -82,20 +85,21 @@ class QueryTest extends \PHPUnit_Framework_TestCase
                 $this->assertInstanceOf(
                     'Elastica\Exception\NotImplementedException',
                     $exception,
-                    'breaking change in query "' . $methodName . '" found: ' . $exception->getMessage()
+                    'breaking change in query "'.$methodName.'" found: '.$exception->getMessage()
                 );
             }
         }
     }
 
-    public function testMatch() {
+    public function testMatch()
+    {
         $queryDSL = new DSL\Query();
 
         $shortMatch = $queryDSL->match('field', 'match');
         $this->assertEquals($shortMatch->getParam('field'), array(
-            'field' => 'match'
+            'field' => 'match',
         ));
 
         $this->assertInstanceOf('Elastica\Query\Match', $queryDSL->match());
     }
-} 
+}

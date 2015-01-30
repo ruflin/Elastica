@@ -2,8 +2,8 @@
 
 namespace Elastica\Query;
 
-use Elastica\Filter\AbstractFilter;
 use Elastica\Exception\InvalidException;
+use Elastica\Filter\AbstractFilter;
 
 /**
  * Filtered query. Needs a query and a filter

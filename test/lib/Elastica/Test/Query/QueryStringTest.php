@@ -4,9 +4,9 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Index;
-use Elastica\Type;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Type;
 
 class QueryStringTest extends BaseTest
 {
@@ -16,7 +16,7 @@ class QueryStringTest extends BaseTest
         $query = new QueryString($str);
 
         $expected = array(
-            'query' => $str
+            'query' => $str,
         );
 
         $this->assertEquals(array('query_string' => $expected), $query->toArray());
@@ -106,13 +106,13 @@ class QueryStringTest extends BaseTest
 
     public function testSetRewrite()
     {
-            $rewrite = 'scoring_boolean';
-            $query = new QueryString('test');
-            $query->setRewrite($rewrite);
+        $rewrite = 'scoring_boolean';
+        $query = new QueryString('test');
+        $query->setRewrite($rewrite);
 
-            $data = $query->toArray();
+        $data = $query->toArray();
 
-            $this->assertEquals($data['query_string']['rewrite'], $rewrite);
+        $this->assertEquals($data['query_string']['rewrite'], $rewrite);
     }
 
     /**

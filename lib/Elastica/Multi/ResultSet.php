@@ -4,8 +4,8 @@ namespace Elastica\Multi;
 
 use Elastica\Exception\InvalidException;
 use Elastica\Response;
-use Elastica\Search as BaseSearch;
 use Elastica\ResultSet as BaseResultSet;
+use Elastica\Search as BaseSearch;
 
 /**
  * Elastica multi search result set

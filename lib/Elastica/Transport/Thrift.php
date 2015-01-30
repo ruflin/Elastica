@@ -2,6 +2,7 @@
 
 namespace Elastica\Transport;
 
+use Elastica\Connection;
 use Elastica\Exception\Connection\ThriftException;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
@@ -9,16 +10,15 @@ use Elastica\Exception\RuntimeException;
 use Elastica\JSON;
 use Elastica\Request;
 use Elastica\Response;
-use Elastica\Connection;
 use Elasticsearch\Method;
-use Elasticsearch\RestResponse;
 use Elasticsearch\RestClient;
 use Elasticsearch\RestRequest;
-use Thrift\Transport\TSocket;
-use Thrift\Transport\TFramedTransport;
-use Thrift\Transport\TBufferedTransport;
-use Thrift\Protocol\TBinaryProtocolAccelerated;
+use Elasticsearch\RestResponse;
 use Thrift\Exception\TException;
+use Thrift\Protocol\TBinaryProtocolAccelerated;
+use Thrift\Transport\TBufferedTransport;
+use Thrift\Transport\TFramedTransport;
+use Thrift\Transport\TSocket;
 
 /**
  * Elastica Thrift Transport object

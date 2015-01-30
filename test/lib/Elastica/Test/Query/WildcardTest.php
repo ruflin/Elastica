@@ -27,9 +27,9 @@ class WildcardTest extends BaseTest
             'wildcard' => array(
                 $key => array(
                     'value' => $value,
-                    'boost' => $boost
-                )
-            )
+                    'boost' => $boost,
+                ),
+            ),
         );
 
         $this->assertEquals($expectedArray, $wildcard->toArray());
@@ -46,10 +46,10 @@ class WildcardTest extends BaseTest
                     'lw' => array(
                         'type' => 'custom',
                         'tokenizer' => 'keyword',
-                        'filter' => array('lowercase')
-                    )
+                        'filter' => array('lowercase'),
+                    ),
                 ),
-            )
+            ),
         );
 
         $index->create($indexParams, true);

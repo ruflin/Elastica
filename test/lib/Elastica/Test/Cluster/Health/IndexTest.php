@@ -30,7 +30,7 @@ class IndexTest extends BaseTest
                     "active_shards" => 0,
                     "relocating_shards" => 1,
                     "initializing_shards" => 0,
-                    "unassigned_shards" => 1
+                    "unassigned_shards" => 1,
                 ),
                 "1" => array(
                     "status" => "yellow",
@@ -38,7 +38,7 @@ class IndexTest extends BaseTest
                     "active_shards" => 1,
                     "relocating_shards" => 0,
                     "initializing_shards" => 0,
-                    "unassigned_shards" => 1
+                    "unassigned_shards" => 1,
                 ),
                 "2" => array(
                     "status" => "green",
@@ -48,7 +48,7 @@ class IndexTest extends BaseTest
                     "initializing_shards" => 0,
                     "unassigned_shards" => 0,
                 ),
-            )
+            ),
         );
 
         $this->_index = new HealthIndex('test', $data);

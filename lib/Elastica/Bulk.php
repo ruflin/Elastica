@@ -2,13 +2,13 @@
 
 namespace Elastica;
 
+use Elastica\Bulk\Action;
+use Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
+use Elastica\Bulk\Response as BulkResponse;
+use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\Bulk\UdpException;
 use Elastica\Exception\InvalidException;
-use Elastica\Bulk\Action;
-use Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
-use Elastica\Bulk\ResponseSet;
-use Elastica\Bulk\Response as BulkResponse;
 
 class Bulk
 {

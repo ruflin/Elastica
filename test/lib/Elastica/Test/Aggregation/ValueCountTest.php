@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\ValueCount;
 use Elastica\Document;
 use Elastica\Query;
@@ -35,4 +34,3 @@ class ValueCountTest extends BaseAggregationTest
         $this->assertEquals(5, $results['value']);
     }
 }
- 

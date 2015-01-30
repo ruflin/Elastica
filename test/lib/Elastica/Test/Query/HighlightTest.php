@@ -44,6 +44,5 @@ class HighlightTest extends BaseTest
             $this->assertEquals(array('phrase' => array(0 => 'My name is <em class="highlight">ruflin</em>')), $highlight);
         }
         $this->assertEquals(2, $resultSet->count());
-
     }
 }

@@ -16,24 +16,26 @@ class SuggestTest extends \PHPUnit_Framework_TestCase
         'context' => array(),
     );
 
-    public function __construct() {
-
+    public function __construct()
+    {
     }
 
-    public function testType() {
+    public function testType()
+    {
         $suggestDSL = new DSL\Suggest();
 
         $this->assertInstanceOf('Elastica\QueryBuilder\DSL', $suggestDSL);
         $this->assertEquals(DSL::TYPE_SUGGEST, $suggestDSL->getType());
     }
 
-    public function testFilters() {
+    public function testFilters()
+    {
         $suggestDSL = new DSL\Suggest();
 
-        foreach($this->suggesters as $methodName => $arguments) {
+        foreach ($this->suggesters as $methodName => $arguments) {
             $this->assertTrue(
                 method_exists($suggestDSL, $methodName),
-                'method for suggest "' . $methodName . '" not found'
+                'method for suggest "'.$methodName.'" not found'
             );
 
             try {
@@ -43,9 +45,9 @@ class SuggestTest extends \PHPUnit_Framework_TestCase
                 $this->assertInstanceOf(
                     'Elastica\Exception\NotImplementedException',
                     $exception,
-                    'breaking change in suggest "' . $methodName . '" found: ' . $exception->getMessage()
+                    'breaking change in suggest "'.$methodName.'" found: '.$exception->getMessage()
                 );
             }
         }
     }
-} 
+}

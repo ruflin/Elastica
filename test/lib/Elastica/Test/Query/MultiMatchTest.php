@@ -85,10 +85,11 @@ class MultiMatchTest extends BaseTest
         $this->multiMatch->setPrefixLength(6);
         $resultSet = $this->_getResults();
 
-        $this->assertEquals(0, $resultSet->count());   
+        $this->assertEquals(0, $resultSet->count());
     }
-    
-    public function testFuzzyWithOptions2() {
+
+    public function testFuzzyWithOptions2()
+    {
 
         // Here with a 'M' search we should hit 'Moraes' first
         // and then stop because MaxExpansion = 1.
@@ -155,14 +156,14 @@ class MultiMatchTest extends BaseTest
                 'analyzer' => array(
                     'noStops' => array(
                         'type'      => 'standard',
-                        'stopwords' => '_none_'
+                        'stopwords' => '_none_',
                     ),
                     'stops' => array(
                         'type'      => 'standard',
-                        'stopwords' => array('not')
+                        'stopwords' => array('not'),
                     ),
                 ),
-            )
+            ),
         ), true);
 
         $type = $index->getType('test');

@@ -19,8 +19,8 @@ class GeoShapeProvidedTest extends BaseTest
         // create mapping
         $mapping = new \Elastica\Type\Mapping($type, array(
             'location' => array(
-                'type' => 'geo_shape'
-            )
+                'type' => 'geo_shape',
+            ),
         ));
         $type->setMapping($mapping);
 
@@ -30,9 +30,9 @@ class GeoShapeProvidedTest extends BaseTest
                 "type"          => "envelope",
                 "coordinates"   => array(
                     array(-50.0, 50.0),
-                    array(50.0, -50.0)
-                )
-            )
+                    array(50.0, -50.0),
+                ),
+            ),
         )));
 
         $index->optimize();
@@ -40,7 +40,7 @@ class GeoShapeProvidedTest extends BaseTest
 
         $envelope = array(
             array(25.0, 75.0),
-            array(75.0, 25.0)
+            array(75.0, 25.0),
         );
         $gsp = new GeoShapeProvided('location', $envelope);
 
@@ -49,11 +49,11 @@ class GeoShapeProvidedTest extends BaseTest
                 'location' => array(
                     'shape' => array(
                         'type' => GeoShapeProvided::TYPE_ENVELOPE,
-                        'coordinates' => $envelope
+                        'coordinates' => $envelope,
                     ),
-                    'relation' => AbstractGeoShape::RELATION_INTERSECT
+                    'relation' => AbstractGeoShape::RELATION_INTERSECT,
                 ),
-            )
+            ),
         );
 
         $this->assertEquals($expected, $gsp->toArray());
@@ -76,11 +76,11 @@ class GeoShapeProvidedTest extends BaseTest
                 'location' => array(
                     'shape' => array(
                         'type' => GeoShapeProvided::TYPE_POLYGON,
-                        'coordinates' => $polygon
+                        'coordinates' => $polygon,
                     ),
-                    'relation' => $gsp->getRelation()
+                    'relation' => $gsp->getRelation(),
                 ),
-            )
+            ),
         );
 
         $this->assertEquals($expected, $gsp->toArray());

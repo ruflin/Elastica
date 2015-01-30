@@ -130,7 +130,7 @@ class GeoDistanceRangeTest extends BaseTest
             ),
             array(
                 false,
-            )
+            ),
         );
     }
 
@@ -149,8 +149,8 @@ class GeoDistanceRangeTest extends BaseTest
                         'from' => '10km',
                         'to' => '20km',
                         'location' => 'u09tvqx',
-                    )
-                )
+                    ),
+                ),
             ),
             array(
                 'location',
@@ -168,8 +168,8 @@ class GeoDistanceRangeTest extends BaseTest
                         'from' => '10km',
                         'include_lower' => true,
                         'location' => 'u09tvqx',
-                    )
-                )
+                    ),
+                ),
             ),
             array(
                 'location',
@@ -189,8 +189,8 @@ class GeoDistanceRangeTest extends BaseTest
                             'lat' => 48.86,
                             'lon' => 2.35,
                         ),
-                    )
-                )
+                    ),
+                ),
             ),
             array(
                 'location',
@@ -210,9 +210,9 @@ class GeoDistanceRangeTest extends BaseTest
                             'lat' => 48.86,
                             'lon' => 2.35,
                         ),
-                    )
-                )
-            )
+                    ),
+                ),
+            ),
         );
     }
 }

@@ -36,7 +36,8 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         'type' => array('type'),
     );
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->filters['bool_and'] = array(array(new Exists('field')));
         $this->filters['bool_or'] = array(array(new Exists('field')));
         $this->filters['bool_not'] = array(new Exists('field'));
@@ -46,20 +47,22 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         $this->filters['query'] = array(new Match());
     }
 
-    public function testType() {
+    public function testType()
+    {
         $filterDSL = new DSL\Filter();
 
         $this->assertInstanceOf('Elastica\QueryBuilder\DSL', $filterDSL);
         $this->assertEquals(DSL::TYPE_FILTER, $filterDSL->getType());
     }
 
-    public function testFilters() {
+    public function testFilters()
+    {
         $filterDSL = new DSL\Filter();
 
-        foreach($this->filters as $methodName => $arguments) {
+        foreach ($this->filters as $methodName => $arguments) {
             $this->assertTrue(
                 method_exists($filterDSL, $methodName),
-                'method for filter "' . $methodName . '" not found'
+                'method for filter "'.$methodName.'" not found'
             );
 
             try {
@@ -69,9 +72,9 @@ class FilterTest extends \PHPUnit_Framework_TestCase
                 $this->assertInstanceOf(
                     'Elastica\Exception\NotImplementedException',
                     $exception,
-                    'breaking change in filter "' . $methodName . '" found: ' . $exception->getMessage()
+                    'breaking change in filter "'.$methodName.'" found: '.$exception->getMessage()
                 );
             }
         }
     }
-} 
+}

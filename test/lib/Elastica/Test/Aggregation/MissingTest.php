@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\Missing;
 use Elastica\Document;
 use Elastica\Query;
@@ -34,4 +33,3 @@ class MissingTest extends BaseAggregationTest
         $this->assertEquals(1, $results['doc_count']);
     }
 }
- 

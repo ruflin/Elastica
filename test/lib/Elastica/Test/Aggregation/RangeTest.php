@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\Range;
 use Elastica\Document;
 use Elastica\Query;
@@ -38,7 +37,6 @@ class RangeTest extends BaseAggregationTest
         $this->assertEquals(2, $results['buckets'][0]['doc_count']);
     }
 
-
     public function testRangeAggregationWithKey()
     {
         $agg = new Range("range");
@@ -47,22 +45,20 @@ class RangeTest extends BaseAggregationTest
         $agg->addRange(50, 100, "average");
         $agg->addRange(100, null, "expensive");
 
-        $expected = array (
-            'range' =>
-                array (
+        $expected = array(
+            'range' => array(
                     'field' => 'price',
-                    'ranges' =>
-                        array (
-                            array (
+                    'ranges' => array(
+                            array(
                                 'to' => 50,
                                 'key' => 'cheap',
                             ),
-                            array (
+                            array(
                                 'from' => 50,
                                 'to' => 100,
                                 'key' => 'average',
                             ),
-                            array (
+                            array(
                                 'from' => 100,
                                 'key' => 'expensive',
                             ),
@@ -71,4 +67,5 @@ class RangeTest extends BaseAggregationTest
         );
 
         $this->assertEquals($expected, $agg->toArray());
-    }}
+    }
+}

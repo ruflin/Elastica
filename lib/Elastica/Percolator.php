@@ -83,20 +83,20 @@ class Percolator
     /**
      * Match a document to percolator queries
      *
-     * @param  \Elastica\Document $doc
-     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Query to filter the percolator queries which
-     *                                                                     are executed.
-     * @param  string $type
-     * @param  array  $params Supports setting additional request body options to the percolate request.
-     *                        [ Percolator::EXTRA_FILTER,
-     *                          Percolator::EXTRA_QUERY,
-     *                          Percolator::EXTRA_SIZE,
-     *                          Percolator::EXTRA_TRACK_SCORES,
-     *                          Percolator::EXTRA_SORT,
-     *                          Percolator::EXTRA_FACETS,
-     *                          Percolator::EXTRA_AGGS,
-     *                          Percolator::EXTRA_HIGHLIGHT ]
-     * @return array With matching registered queries.
+     * @param  \Elastica\Document                                   $doc
+     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query  Query to filter the percolator queries which
+     *                                                                      are executed.
+     * @param  string                                               $type
+     * @param  array                                                $params Supports setting additional request body options to the percolate request.
+     *                                                                      [ Percolator::EXTRA_FILTER,
+     *                                                                      Percolator::EXTRA_QUERY,
+     *                                                                      Percolator::EXTRA_SIZE,
+     *                                                                      Percolator::EXTRA_TRACK_SCORES,
+     *                                                                      Percolator::EXTRA_SORT,
+     *                                                                      Percolator::EXTRA_FACETS,
+     *                                                                      Percolator::EXTRA_AGGS,
+     *                                                                      Percolator::EXTRA_HIGHLIGHT ]
+     * @return array                                                With matching registered queries.
      */
     public function matchDoc(Document $doc, $query = null, $type = 'type', $params = array())
     {
@@ -111,20 +111,20 @@ class Percolator
     /**
      * Percolating an existing document
      *
-     * @param  string $id
-     * @param  string $type
-     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query Query to filter the percolator queries which
-     *                                                                     are executed.
-     * @param  array  $params Supports setting additional request body options to the percolate request.
-     *                        [ Percolator::EXTRA_FILTER,
-     *                          Percolator::EXTRA_QUERY,
-     *                          Percolator::EXTRA_SIZE,
-     *                          Percolator::EXTRA_TRACK_SCORES,
-     *                          Percolator::EXTRA_SORT,
-     *                          Percolator::EXTRA_FACETS,
-     *                          Percolator::EXTRA_AGGS,
-     *                          Percolator::EXTRA_HIGHLIGHT ]
-     * @return array With matching registered queries.
+     * @param  string                                               $id
+     * @param  string                                               $type
+     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query  Query to filter the percolator queries which
+     *                                                                      are executed.
+     * @param  array                                                $params Supports setting additional request body options to the percolate request.
+     *                                                                      [ Percolator::EXTRA_FILTER,
+     *                                                                      Percolator::EXTRA_QUERY,
+     *                                                                      Percolator::EXTRA_SIZE,
+     *                                                                      Percolator::EXTRA_TRACK_SCORES,
+     *                                                                      Percolator::EXTRA_SORT,
+     *                                                                      Percolator::EXTRA_FACETS,
+     *                                                                      Percolator::EXTRA_AGGS,
+     *                                                                      Percolator::EXTRA_HIGHLIGHT ]
+     * @return array                                                With matching registered queries.
      */
     public function matchExistingDoc($id, $type, $query = null, $params = array())
     {
@@ -139,7 +139,7 @@ class Percolator
 
     /**
      * Process the provided parameters and apply them to the data array.
-     * 
+     *
      * @param &$params
      * @param &$data
      */

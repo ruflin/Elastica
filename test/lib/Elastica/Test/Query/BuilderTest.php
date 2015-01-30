@@ -171,7 +171,7 @@ class BuilderTest extends BaseTest
     {
         $this->assertSame($this->builder, $this->builder->$method()); // open
         $this->assertSame($this->builder, $this->builder->{$method."Close"}()); // close
-        $this->assertSame('{"' . $queryType . '":{}}', (string) $this->builder);
+        $this->assertSame('{"'.$queryType.'":{}}', (string) $this->builder);
     }
 
     /**
@@ -263,9 +263,9 @@ class BuilderTest extends BaseTest
         $this->assertEquals(array(
             'query' => array(
                 'term' => array(
-                    'category.id' => array(1, 2, 3)
-                )
-            )
+                    'category.id' => array(1, 2, 3),
+                ),
+            ),
         ), $this->builder->toArray());
     }
 }

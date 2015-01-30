@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\IpRange;
 use Elastica\Document;
 use Elastica\Query;
@@ -16,7 +15,7 @@ class IpRangeTest extends BaseAggregationTest
         $this->_index = $this->_createIndex("ip_range");
         $mapping = new Mapping();
         $mapping->setProperties(array(
-            "address" => array("type" => "ip")
+            "address" => array("type" => "ip"),
         ));
         $type = $this->_index->getType("test");
         $type->setMapping($mapping);
@@ -34,14 +33,14 @@ class IpRangeTest extends BaseAggregationTest
         $agg = new IpRange("ip", "address");
         $agg->addRange("192.168.1.101");
         $agg->addRange(null, "192.168.1.200");
-        
+
         $cidrRange = "192.168.1.0/24";
         $agg->addMaskRange($cidrRange);
 
         $query = new Query();
         $query->addAggregation($agg);
         $results = $this->_index->search($query)->getAggregation("ip");
-        
+
         foreach ($results['buckets'] as $bucket) {
             if (array_key_exists('key', $bucket) && $bucket['key'] == $cidrRange) {
                 // the CIDR mask
@@ -53,4 +52,3 @@ class IpRangeTest extends BaseAggregationTest
         }
     }
 }
- 

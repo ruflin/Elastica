@@ -4,8 +4,8 @@ namespace Elastica\Test\Filter;
 
 use Elastica\Document;
 use Elastica\Filter\Regexp;
-use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Type\Mapping;
 
 class RegexpTest extends BaseTest
 {
@@ -18,8 +18,8 @@ class RegexpTest extends BaseTest
 
         $expectedArray = array(
             'regexp' => array(
-                $field => $regexp
-            )
+                $field => $regexp,
+            ),
         );
 
         $this->assertequals($expectedArray, $filter->toArray());
@@ -85,10 +85,10 @@ class RegexpTest extends BaseTest
                     'lw' => array(
                         'type' => 'custom',
                         'tokenizer' => 'keyword',
-                        'filter' => array('lowercase')
-                    )
+                        'filter' => array('lowercase'),
+                    ),
                 ),
-            )
+            ),
         );
 
         $index->create($indexParams, true);

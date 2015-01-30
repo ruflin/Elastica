@@ -69,7 +69,7 @@ class FilteredTest extends BaseTest
         $query = new Filtered();
         $query->toArray();
     }
-    
+
     public function testFilteredSearchNoQuery()
     {
         $index = $this->_createIndex();
@@ -89,7 +89,7 @@ class FilteredTest extends BaseTest
         $resultSet = $type->search($query);
         $this->assertEquals(1, $resultSet->count());
     }
-    
+
     public function testFilteredSearchNoFilter()
     {
         $index = $this->_createIndex();
@@ -108,5 +108,4 @@ class FilteredTest extends BaseTest
         $resultSet = $type->search($query);
         $this->assertEquals(1, $resultSet->count());
     }
-    
 }

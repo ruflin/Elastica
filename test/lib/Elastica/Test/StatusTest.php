@@ -1,6 +1,7 @@
 <?php
 
 namespace Elastica\Test;
+
 use Elastica\Client;
 use Elastica\Exception\ResponseException;
 use Elastica\Status;
@@ -36,8 +37,8 @@ class StatusTest extends BaseTest
         $index = $client->getIndex($indexName);
         $index->create(array(), true);
         $index = $this->_createIndex();
-		$index->refresh();
-		$index->optimize();
+        $index->refresh();
+        $index->optimize();
 
         $status = new Status($index->getClient());
         $names = $status->getIndexNames();
@@ -93,7 +94,7 @@ class StatusTest extends BaseTest
 
         $indicesWithAlias = $status->getIndicesWithAlias($aliasName);
         $this->assertEquals(array("elastica_$indexName"), array_map(
-            function($index) {
+            function ($index) {
                 return $index->getName();
             }, $indicesWithAlias));
     }
@@ -104,7 +105,7 @@ class StatusTest extends BaseTest
         $status = $client->getStatus();
         $serverStatus = $status->getServerStatus();
 
-        $this->assertTrue(!empty($serverStatus) );
+        $this->assertTrue(!empty($serverStatus));
         $this->assertTrue('array' == gettype($serverStatus));
         $this->assertArrayHasKey('status', $serverStatus);
         $this->assertTrue($serverStatus['status'] == 200);

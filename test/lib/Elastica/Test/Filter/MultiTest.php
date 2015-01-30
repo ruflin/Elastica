@@ -23,7 +23,7 @@ class AbstractMultiTest extends BaseTest
         $stub->addFilter($filter);
 
         $expected = array(
-            $filter->toArray()
+            $filter->toArray(),
         );
 
         $this->assertEquals($expected, $stub->getFilters());
@@ -37,7 +37,7 @@ class AbstractMultiTest extends BaseTest
         $stub->setFilters(array($filter));
 
         $expected = array(
-            $filter->toArray()
+            $filter->toArray(),
         );
 
         $this->assertEquals($expected, $stub->getFilters());
@@ -52,8 +52,8 @@ class AbstractMultiTest extends BaseTest
 
         $expected = array(
             $stub->getBaseName() => array(
-                $filter->toArray()
-            )
+                $filter->toArray(),
+            ),
         );
 
         $this->assertEquals($expected, $stub->toArray());
@@ -72,9 +72,9 @@ class AbstractMultiTest extends BaseTest
             $stub->getBaseName() => array(
                 '_cache' => true,
                 'filters' => array(
-                    $filter->toArray()
-                )
-            )
+                    $filter->toArray(),
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $stub->toArray());

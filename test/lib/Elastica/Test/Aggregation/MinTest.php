@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\Min;
 use Elastica\Document;
 use Elastica\Query;
@@ -35,4 +34,3 @@ class MinTest extends BaseAggregationTest
         $this->assertEquals(1, $results['value']);
     }
 }
- 

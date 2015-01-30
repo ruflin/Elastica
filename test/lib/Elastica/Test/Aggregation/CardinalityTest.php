@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\Cardinality;
 use Elastica\Document;
 use Elastica\Query;
@@ -35,4 +34,3 @@ class CardinalityTest extends BaseAggregationTest
         $this->assertEquals(3, $results['value']);
     }
 }
- 

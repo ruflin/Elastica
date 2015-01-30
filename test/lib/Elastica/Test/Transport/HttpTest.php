@@ -7,7 +7,6 @@ use Elastica\Document;
 use Elastica\Query;
 use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Exception\ResponseException;
 
 class HttpTest extends BaseTest
 {
@@ -32,15 +31,15 @@ class HttpTest extends BaseTest
         return array(
             array(
                 array('transport' => 'Http'),
-                'GET'
+                'GET',
             ),
             array(
                 array('transport' => array('type' => 'Http', 'postWithRequestBody' => false)),
-                'GET'
+                'GET',
             ),
             array(
                 array('transport' => array('type' => 'Http', 'postWithRequestBody' => true)),
-                'POST'
+                'POST',
             ),
         );
     }
@@ -190,7 +189,7 @@ class HttpTest extends BaseTest
     public function testBodyReuse()
     {
         $client = new Client();
-        
+
         $index = $client->getIndex('elastica_body_reuse_test');
         $index->create(array(), true);
         $this->_waitForAllocation($index);
@@ -229,5 +228,4 @@ class HttpTest extends BaseTest
 
         $this->assertNotEmpty($tokens);
     }
-
 }

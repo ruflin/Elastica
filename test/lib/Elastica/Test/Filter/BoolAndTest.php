@@ -23,8 +23,8 @@ class BoolAndTest extends BaseTest
         $expectedArray = array(
             'and' => array(
                 $idsFilter->toArray(),
-                $idsFilter->toArray()
-            )
+                $idsFilter->toArray(),
+            ),
         );
 
         $this->assertEquals($expectedArray, $and->toArray());

@@ -116,14 +116,14 @@ class ScriptTest extends BaseTest
     {
         return array(
             array(
-                new \stdClass
+                new \stdClass(),
             ),
             array(
                 array('params' => array('param1' => 'one')),
             ),
             array(
                 array('script' => '_score * 2.0', 'params' => 'param'),
-            )
+            ),
         );
     }
 }

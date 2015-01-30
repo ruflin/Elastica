@@ -2,10 +2,10 @@
 
 namespace Elastica\Test\Query;
 
-use Elastica\Rescore\Query as QueryRescore;
-use Elastica\Query\Term;
-use Elastica\Query\Match;
 use Elastica\Query;
+use Elastica\Query\Match;
+use Elastica\Query\Term;
+use Elastica\Rescore\Query as QueryRescore;
 use Elastica\Test\Base as BaseTest;
 
 class RescoreTest extends BaseTest
@@ -133,7 +133,7 @@ class RescoreTest extends BaseTest
                         ),
                     ),
                     'query_weight' => 0.7,
-                    'rescore_query_weight' => 1.2
+                    'rescore_query_weight' => 1.2,
                 ),
             ),
         );

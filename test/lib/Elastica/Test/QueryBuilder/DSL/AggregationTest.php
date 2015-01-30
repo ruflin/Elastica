@@ -41,24 +41,27 @@ class AggregationTest extends \PHPUnit_Framework_TestCase
         'geohash_grid' => array('name', 'field'),
     );
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->aggregations['filter'] = array('name', new Exists('field'));
     }
 
-    public function testType() {
+    public function testType()
+    {
         $aggregationDSL = new DSL\Aggregation();
 
         $this->assertInstanceOf('Elastica\QueryBuilder\DSL', $aggregationDSL);
         $this->assertEquals(DSL::TYPE_AGGREGATION, $aggregationDSL->getType());
     }
 
-    public function testAggregations() {
+    public function testAggregations()
+    {
         $aggregationDSL = new DSL\Aggregation();
 
-        foreach($this->aggregations as $methodName => $arguments) {
+        foreach ($this->aggregations as $methodName => $arguments) {
             $this->assertTrue(
                 method_exists($aggregationDSL, $methodName),
-                'method for aggregation "' . $methodName . '" not found'
+                'method for aggregation "'.$methodName.'" not found'
             );
 
             try {
@@ -68,9 +71,9 @@ class AggregationTest extends \PHPUnit_Framework_TestCase
                 $this->assertInstanceOf(
                     'Elastica\Exception\NotImplementedException',
                     $exception,
-                    'breaking change in aggregation "' . $methodName . '" found: ' . $exception->getMessage()
+                    'breaking change in aggregation "'.$methodName.'" found: '.$exception->getMessage()
                 );
             }
         }
     }
-} 
+}

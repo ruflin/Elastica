@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\DateRange;
 use Elastica\Document;
 use Elastica\Query;
@@ -16,7 +15,7 @@ class DateRangeTest extends BaseAggregationTest
         $this->_index = $this->_createIndex("date_range");
         $mapping = new Mapping();
         $mapping->setProperties(array(
-            "created" => array("type" => "date")
+            "created" => array("type" => "date"),
         ));
         $type = $this->_index->getType("test");
         $type->setMapping($mapping);
@@ -42,10 +41,9 @@ class DateRangeTest extends BaseAggregationTest
         foreach ($results['buckets'] as $bucket) {
             if (array_key_exists('to', $bucket)) {
                 $this->assertEquals(1, $bucket['doc_count']);
-            } else if (array_key_exists('from', $bucket)) {
+            } elseif (array_key_exists('from', $bucket)) {
                 $this->assertEquals(2, $bucket['doc_count']);
             }
         }
     }
 }
- 

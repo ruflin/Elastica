@@ -2,8 +2,8 @@
 
 namespace Elastica\Aggregation;
 
-use Elastica\Param;
 use Elastica\Exception\InvalidException;
+use Elastica\Param;
 
 abstract class AbstractAggregation extends Param
 {

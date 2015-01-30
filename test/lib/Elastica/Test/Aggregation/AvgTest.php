@@ -2,10 +2,8 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\Avg;
 use Elastica\Document;
-use Elastica\Index;
 use Elastica\Query;
 
 class AvgTest extends BaseAggregationTest
@@ -35,4 +33,3 @@ class AvgTest extends BaseAggregationTest
         $this->assertEquals((5 + 8 + 1 + 3) / 4.0, $results['avg']['value']);
     }
 }
- 

@@ -24,20 +24,20 @@ class Null extends AbstractTransport
     public function exec(Request $request, array $params)
     {
         $response = array(
-                "took" => 0,
-                "timed_out" => false,
-                "_shards" => array(
-                        "total" => 0,
-                        "successful" => 0,
-                        "failed" => 0,
-                        ),
-                "hits" => array(
-                        "total" => 0,
-                        "max_score" => null,
-                        "hits" => array(),
-                        ),
-                "params" => $params,
-                );
+            "took" => 0,
+            "timed_out" => false,
+            "_shards" => array(
+                "total" => 0,
+                "successful" => 0,
+                "failed" => 0,
+            ),
+            "hits" => array(
+                "total" => 0,
+                "max_score" => null,
+                "hits" => array(),
+            ),
+            "params" => $params,
+        );
 
         return new Response(JSON::stringify($response));
     }

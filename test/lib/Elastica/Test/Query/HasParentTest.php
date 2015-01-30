@@ -19,8 +19,8 @@ class HasParentTest extends BaseTest
         $expectedArray = array(
             'has_parent' => array(
                 'query' => $q->toArray(),
-                'type' => $type
-            )
+                'type' => $type,
+            ),
         );
 
         $this->assertEquals($expectedArray, $query->toArray());
@@ -41,8 +41,8 @@ class HasParentTest extends BaseTest
             'has_parent' => array(
                 'query' => $q->toArray(),
                 'type' => $type,
-                '_scope' => $scope
-            )
+                '_scope' => $scope,
+            ),
         );
 
         $this->assertEquals($expectedArray, $query->toArray());

@@ -19,7 +19,7 @@ class TypeTest extends BaseTest
         $typeFilter = new Type('type_name');
 
         $expectedArray = array(
-            'type' => array('value' => 'type_name')
+            'type' => array('value' => 'type_name'),
         );
 
         $this->assertEquals($expectedArray, $typeFilter->toArray());

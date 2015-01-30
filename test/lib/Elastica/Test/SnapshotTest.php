@@ -2,7 +2,6 @@
 
 namespace Elastica\Test;
 
-
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Snapshot;
@@ -109,4 +108,3 @@ class SnapshotTest extends Base
         $this->_snapshot->getSnapshot($repositoryName, $snapshotName);
     }
 }
- 

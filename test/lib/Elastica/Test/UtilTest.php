@@ -2,10 +2,10 @@
 
 namespace Elastica\Test;
 
-use Elastica\Util;
-use Elastica\Request;
 use Elastica\Connection;
+use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Util;
 
 class UtilTest extends BaseTest
 {
@@ -25,18 +25,18 @@ class UtilTest extends BaseTest
             array('oh yeah!', 'oh yeah\\!'),
             // Seperate test below because phpunit seems to have some problems
             //array('\\+-&&||!(){}[]^"~*?:', '\\\\\\+\\-\\&&\\||\\!\\(\\)\\{\\}\\[\\]\\^\\"\\~\\*\\?\\:'),
-            array('some signs, can stay.', 'some signs, can stay.')
+            array('some signs, can stay.', 'some signs, can stay.'),
         );
     }
 
     /**
      * @dataProvider getReplaceBooleanWordsPairs
      */
-    public function testReplaceBooleanWords($before, $after) 
+    public function testReplaceBooleanWords($before, $after)
     {
         $this->assertEquals($after, Util::replaceBooleanWords($before));
     }
-    
+
     public function getReplaceBooleanWordsPairs()
     {
         return array(
@@ -45,10 +45,10 @@ class UtilTest extends BaseTest
             array('Black AND White', 'Black && White'),
             array('TIMBERLAND Men`s', 'TIMBERLAND Men`s'),
             array('hello NOT kitty', 'hello !kitty'),
-            array('SEND NOTIFICATION', 'SEND NOTIFICATION')
+            array('SEND NOTIFICATION', 'SEND NOTIFICATION'),
         );
-    }        
-    
+    }
+
     public function testEscapeTermSpecialCharacters()
     {
         $before = '\\+-&&||!(){}[]^"~*?:/';
@@ -92,7 +92,6 @@ class UtilTest extends BaseTest
 
         $expected = 'curl -XPOST \'http://localhost:9200/test?no=params\' -d \'{"key":"value"}\'';
         $this->assertEquals($expected, $curlCommand);
-
     }
 
     public function testConvertDateTimeObjectWithTimezone()

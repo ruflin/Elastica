@@ -7,7 +7,6 @@ use Elastica\Document;
 use Elastica\Query;
 use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Exception\ResponseException;
 
 class GuzzleTest extends BaseTest
 {
@@ -39,15 +38,15 @@ class GuzzleTest extends BaseTest
         return array(
             array(
                 array('persistent' => false, 'transport' => 'Guzzle'),
-                'GET'
+                'GET',
             ),
             array(
                 array('persistent' => false, 'transport' => array('type' => 'Guzzle', 'postWithRequestBody' => false)),
-                'GET'
+                'GET',
             ),
             array(
                 array('persistent' => false, 'transport' => array('type' => 'Guzzle', 'postWithRequestBody' => true)),
-                'POST'
+                'POST',
             ),
         );
     }
@@ -164,7 +163,6 @@ class GuzzleTest extends BaseTest
      */
     public function testInvalidConnection()
     {
-
         $client = new Client(array('transport' => 'Guzzle', 'port' => 4500, 'persistent' => false));
         $response = $client->request('_status', 'GET');
     }

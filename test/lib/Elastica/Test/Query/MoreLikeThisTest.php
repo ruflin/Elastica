@@ -6,9 +6,9 @@ use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\MoreLikeThis;
+use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 use Elastica\Type\Mapping;
-use Elastica\Test\Base as BaseTest;
 
 class MoreLikeThisTest extends BaseTest
 {
@@ -21,7 +21,7 @@ class MoreLikeThisTest extends BaseTest
         //$index->getSettings()->setNumberOfShards(1);
 
         $type = new Type($index, 'helloworldmlt');
-        $mapping = new Mapping($type , array(
+        $mapping = new Mapping($type, array(
             'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
             'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
         ));
@@ -40,7 +40,7 @@ class MoreLikeThisTest extends BaseTest
 
         $mltQuery = new MoreLikeThis();
         $mltQuery->setLikeText('fake gmail sample');
-        $mltQuery->setFields(array('email','content'));
+        $mltQuery->setFields(array('email', 'content'));
         $mltQuery->setMaxQueryTerms(1);
         $mltQuery->setMinDocFrequency(1);
         $mltQuery->setMinTermFrequency(1);

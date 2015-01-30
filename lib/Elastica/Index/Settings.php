@@ -72,7 +72,7 @@ class Settings
 
         if (empty($data['settings']) || empty($data['settings']['index'])) {
             // should not append, the request should throw a ResponseException
-            throw new NotFoundException('Index ' . $this->getIndex()->getName() . ' not found');
+            throw new NotFoundException('Index '.$this->getIndex()->getName().' not found');
         }
         $settings = $data['settings']['index'];
 
@@ -91,12 +91,14 @@ class Settings
                     if (isset($settings[$key])) {
                         $settings = $settings[$key];
                     } else {
-                        return null;
+                        return;
                     }
                 }
+
                 return $settings;
             }
-            return null;
+
+            return;
         }
     }
 

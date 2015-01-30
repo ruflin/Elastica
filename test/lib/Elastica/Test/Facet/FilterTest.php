@@ -3,8 +3,8 @@
 namespace Elastica\Test\Facet;
 
 use Elastica\Document;
-use Elastica\Filter\Term;
 use Elastica\Facet\Filter;
+use Elastica\Filter\Term;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
 

@@ -6,16 +6,16 @@ use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
+use Elastica\Filter\Term;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Script;
 use Elastica\Search;
-use Elastica\Filter\Term;
-use Elastica\Type;
-use Elastica\Index;
-use Elastica\Type\Mapping;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Type;
+use Elastica\Type\Mapping;
 
 class TypeTest extends BaseTest
 {
@@ -72,11 +72,11 @@ class TypeTest extends BaseTest
         $expected = array(
             'query' => array(
                 'query_string' => array(
-                    'query' => 'test'
-                )
+                    'query' => 'test',
+                ),
             ),
             'size' => 5,
-            'explain' => true
+            'explain' => true,
         );
         $this->assertEquals($expected, $search->getQuery()->toArray());
         $this->assertEquals(array('test_index'), $search->getIndices());
@@ -100,9 +100,9 @@ class TypeTest extends BaseTest
         $query = array(
             'query' => array(
                 'query_string' => array(
-                    'query' => 'test'
-                )
-            )
+                    'query' => 'test',
+                ),
+            ),
         );
 
         $options = array(
@@ -115,11 +115,11 @@ class TypeTest extends BaseTest
         $expected = array(
             'query' => array(
                 'query_string' => array(
-                    'query' => 'test'
-                )
+                    'query' => 'test',
+                ),
             ),
             'size' => 5,
-            'explain' => true
+            'explain' => true,
         );
         $this->assertEquals($expected, $search->getQuery()->toArray());
         $this->assertEquals(array('test_index'), $search->getIndices());
@@ -411,7 +411,7 @@ class TypeTest extends BaseTest
         $this->assertEquals(1, $response->count());
 
         // Route to the wrong document id; should not delete
-        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing'=>'2'));
+        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => '2'));
         $this->assertTrue($response->isOk());
 
         $index->refresh();
@@ -423,7 +423,7 @@ class TypeTest extends BaseTest
         $this->assertEquals(1, $response->count());
 
         // Delete first document
-        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing'=>'1'));
+        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => '1'));
         $this->assertTrue($response->isOk());
 
         $index->refresh();
@@ -691,10 +691,10 @@ class TypeTest extends BaseTest
         $mapping->setProperties(array(
             'name' => array(
                 'type' => 'string',
-                'store' => 'yes'),
+                'store' => 'yes', ),
             'counter' => array(
                 'type' => 'integer',
-                'store' => 'no'
+                'store' => 'no',
             ),
         ));
         $mapping->disableSource();
@@ -831,7 +831,8 @@ class TypeTest extends BaseTest
         $this->assertFalse($index->exists());
     }
 
-    public function testGetMapping() {
+    public function testGetMapping()
+    {
         $indexName = 'test';
         $typeName = 'test-type';
 
@@ -839,7 +840,7 @@ class TypeTest extends BaseTest
         $indexName = $index->getName();
         $type = new Type($index, $typeName);
         $mapping = new Mapping($type, $expect = array(
-            'id' => array('type' => 'integer', 'store' => true)
+            'id' => array('type' => 'integer', 'store' => true),
         ));
         $type->setMapping($mapping);
 
@@ -851,7 +852,8 @@ class TypeTest extends BaseTest
         );
     }
 
-    public function testGetMappingAlias() {
+    public function testGetMappingAlias()
+    {
         $indexName = 'test';
         $aliasName = 'test-alias';
         $typeName = 'test-alias-type';
@@ -860,7 +862,7 @@ class TypeTest extends BaseTest
         $index->addAlias($aliasName);
         $type = new Type($index, $typeName);
         $mapping = new Mapping($type, $expect = array(
-            'id' => array('type' => 'integer', 'store' => true)
+            'id' => array('type' => 'integer', 'store' => true),
         ));
         $type->setMapping($mapping);
 

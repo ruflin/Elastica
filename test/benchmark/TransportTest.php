@@ -1,12 +1,12 @@
 <?php
 
 use Elastica\Client;
-use Elastica\Request;
 use Elastica\Document;
-use Elastica\Query;
-use Elastica\Type\Mapping;
-use Elastica\Query\MatchAll as MatchAllQuery;
 use Elastica\Filter\Term as TermFilter;
+use Elastica\Query;
+use Elastica\Query\MatchAll as MatchAllQuery;
+use Elastica\Request;
+use Elastica\Type\Mapping;
 
 class TransportTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,13 +14,13 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 
     protected $_maxData = 20;
 
-    static protected $_results = array();
+    protected static $_results = array();
 
     public static function setUpBeforeClass()
     {
         if (!defined('DEBUG')) {
             define('DEBUG', true);
-        } else if (false == DEBUG) {
+        } elseif (false == DEBUG) {
             self::markTestIncomplete('DEBUG const is set to false, it prevents query time measuring.');
         }
     }
@@ -31,13 +31,14 @@ class TransportTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param array $config
+     * @param  array          $config
      * @return \Elastica\Type
      */
     protected function getType(array $config)
     {
         $client = new Client($config);
         $index = $client->getIndex('test');
+
         return $index->getType('test');
     }
 
@@ -99,7 +100,7 @@ class TransportTest extends \PHPUnit_Framework_TestCase
         for ($i = 0; $i < $this->_max; $i++) {
             $docs = array();
             for ($j = 0; $j < 10; $j++) {
-                $data = $this->getData($i . $j);
+                $data = $this->getData($i.$j);
                 $docs[] = new Document($i, $data);
             }
 
@@ -124,18 +125,18 @@ class TransportTest extends \PHPUnit_Framework_TestCase
         $mapping = new Mapping();
         $mapping->setParam('_boost', array('name' => '_boost', 'null_value' => 1.0));
         $mapping->setProperties(array(
-            'id' => array('type' => 'integer', 'include_in_all' => FALSE),
+            'id' => array('type' => 'integer', 'include_in_all' => false),
             'user' => array(
                 'type' => 'object',
                 'properties' => array(
-                    'name' => array('type' => 'string', 'include_in_all' => TRUE),
-                    'fullName' => array('type' => 'string', 'include_in_all' => TRUE)
+                    'name' => array('type' => 'string', 'include_in_all' => true),
+                    'fullName' => array('type' => 'string', 'include_in_all' => true),
                 ),
             ),
-            'msg' => array('type' => 'string', 'include_in_all' => TRUE),
-            'tstamp' => array('type' => 'date', 'include_in_all' => FALSE),
-            'location'=> array('type' => 'geo_point', 'include_in_all' => FALSE),
-            '_boost' => array('type' => 'float', 'include_in_all' => FALSE)
+            'msg' => array('type' => 'string', 'include_in_all' => true),
+            'tstamp' => array('type' => 'date', 'include_in_all' => false),
+            'location' => array('type' => 'geo_point', 'include_in_all' => false),
+            '_boost' => array('type' => 'float', 'include_in_all' => false),
         ));
 
         $type->setMapping($mapping);
@@ -159,7 +160,7 @@ class TransportTest extends \PHPUnit_Framework_TestCase
                     'port' => 9200,
                     'persistent' => false,
                 ),
-                'Http:NotPersistent'
+                'Http:NotPersistent',
             ),
             array(
                 array(
@@ -168,7 +169,7 @@ class TransportTest extends \PHPUnit_Framework_TestCase
                     'port' => 9200,
                     'persistent' => true,
                 ),
-                'Http:Persistent'
+                'Http:Persistent',
             ),
             array(
                 array(
@@ -179,13 +180,13 @@ class TransportTest extends \PHPUnit_Framework_TestCase
                         'framedTransport' => false,
                     ),
                 ),
-                'Thrift:Buffered'
+                'Thrift:Buffered',
             ),
         );
     }
 
     /**
-     * @param string $test
+     * @param  string $test
      * @return array
      */
     protected function getData($test)
@@ -197,6 +198,7 @@ class TransportTest extends \PHPUnit_Framework_TestCase
         for ($i = 0; $i < $this->_maxData; $i++) {
             $data['name'][] = uniqid();
         }
+
         return $data;
     }
 

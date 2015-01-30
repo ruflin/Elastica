@@ -17,9 +17,9 @@ class CommonTest extends BaseTest
                 'body' => array(
                     'query' => 'test query',
                     'cutoff_frequency' => .001,
-                    'low_freq_operator' => 'and'
-                )
-            )
+                    'low_freq_operator' => 'and',
+                ),
+            ),
         );
 
         $this->assertEquals($expected, $query->toArray());

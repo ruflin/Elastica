@@ -39,9 +39,9 @@ class DisMaxTest extends BaseTest
                 'queries' => array(
                     $idsQuery1->toArray(),
                     $idsQuery2->toArray(),
-                    $idsQuery3->toArray()
-                )
-            )
+                    $idsQuery3->toArray(),
+                ),
+            ),
         );
 
         $this->assertEquals($expectedArray, $query->toArray());

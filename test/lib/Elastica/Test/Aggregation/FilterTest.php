@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Aggregation;
 
-
 use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\Filter;
 use Elastica\Document;
@@ -31,8 +30,8 @@ class FilterTest extends BaseAggregationTest
         $expected = array(
             "filter" => array("range" => array("stock" => array("gt" => 0))),
             "aggs" => array(
-                "avg_price" => array("avg" => array("field" => "price"))
-            )
+                "avg_price" => array("avg" => array("field" => "price")),
+            ),
         );
 
         $agg = new Filter("in_stock_products");
@@ -75,4 +74,3 @@ class FilterTest extends BaseAggregationTest
         $this->assertEquals((5 + 8 + 1 + 3) / 4.0, $results);
     }
 }
- 

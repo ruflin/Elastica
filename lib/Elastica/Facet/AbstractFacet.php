@@ -2,9 +2,9 @@
 
 namespace Elastica\Facet;
 
-use Elastica\Param;
-use Elastica\Filter\AbstractFilter;
 use Elastica\Exception\InvalidException;
+use Elastica\Filter\AbstractFilter;
+use Elastica\Param;
 
 /**
  * Abstract facet object. Should be extended by all facet types
