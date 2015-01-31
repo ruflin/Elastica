@@ -2,6 +2,7 @@
 
 namespace Elastica\Transport;
 
+use Elastica\Exception\Connection\MemcacheException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
@@ -18,6 +19,8 @@ use Elastica\Response;
  */
 class Memcache extends AbstractTransport
 {
+    const MAX_KEY_LENGTH = 250;
+
     /**
      * Makes calls to the elasticsearch server
      *
@@ -52,13 +55,19 @@ class Memcache extends AbstractTransport
         switch ($request->getMethod()) {
             case Request::POST:
             case Request::PUT:
-                $memcache->set($request->getPath(), $content);
+                $key = $request->getPath();
+                $this->checkKeyLength($key);
+                $memcache->set($key, $content);
                 break;
             case Request::GET:
-                $responseString = $memcache->get($request->getPath().'?source='.$content);
+                $key = $request->getPath().'?source='.$content;
+                $this->checkKeyLength($key);
+                $responseString = $memcache->get($key);
                 break;
             case Request::DELETE:
-                $responseString = $memcache->delete($request->getPath().'?source='.$content);
+                $key = $request->getPath().'?source='.$content;
+                $this->checkKeyLength($key);
+                $responseString = $memcache->delete($key);
                 break;
             default:
             case Request::HEAD:
@@ -76,5 +85,18 @@ class Memcache extends AbstractTransport
         }
 
         return $response;
+    }
+
+    /**
+     * Check if key that will be used dont exceed 250 symbols
+     *
+     * @throws Elastica\Exception\Connection\MemcacheException If key is too long
+     * @param  string                                          $key
+     */
+    private function checkKeyLength($key)
+    {
+        if (strlen($key) >= self::MAX_KEY_LENGTH) {
+            throw new MemcacheException('Memcache key is too long');
+        }
     }
 }

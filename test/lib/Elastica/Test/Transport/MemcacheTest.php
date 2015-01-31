@@ -125,6 +125,7 @@ class MemcacheTest extends BaseTest
 
     /**
      * @expectedException Elastica\Exception\InvalidException
+     * @expectedExceptionMessage is not supported in memcache transport
      */
     public function testHeadRequest()
     {
@@ -134,10 +135,25 @@ class MemcacheTest extends BaseTest
 
     /**
      * @expectedException Elastica\Exception\InvalidException
+     * @expectedExceptionMessage is not supported in memcache transport
      */
     public function testInvalidRequest()
     {
         $client = $this->_getClient();
         $client->request('foo', 'its_fail');
+    }
+
+    /**
+     * @expectedException Elastica\Exception\Connection\MemcacheException
+     * @expectedExceptionMessage is too long
+     */
+    public function testRequestWithLongPath()
+    {
+        $index = $this->_createIndex('memcache_test');
+        $this->_waitForAllocation($index);
+
+        $queryString = new QueryString(str_repeat('z', 300));
+        $query = new Query($queryString);
+        $index->search($query);
     }
 }
