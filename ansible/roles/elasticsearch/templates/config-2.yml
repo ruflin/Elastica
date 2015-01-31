@@ -5,6 +5,7 @@
 http.port: 9202
 transport.tcp.port: 9302
 thrift.port: 9502
+memcached.port: 11213
 node.name: "Wolverine"
 
 {% endblock %}
