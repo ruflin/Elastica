@@ -15,6 +15,5 @@
   roles:
     - base
     - elasticsearch
-    - memcached
     - nginx
     - php
