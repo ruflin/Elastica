@@ -52,6 +52,8 @@ class Memcache extends AbstractTransport
 
         $responseString = '';
 
+        $start = microtime(true);
+
         switch ($request->getMethod()) {
             case Request::POST:
             case Request::PUT:
@@ -74,7 +76,13 @@ class Memcache extends AbstractTransport
                 throw new InvalidException('Method '.$request->getMethod().' is not supported in memcache transport');
         }
 
+        $end = microtime(true);
+
         $response = new Response($responseString);
+
+        if (defined('DEBUG') && DEBUG) {
+            $response->setQueryTime($end - $start);
+        }
 
         if ($response->hasError()) {
             throw new ResponseException($request, $response);
