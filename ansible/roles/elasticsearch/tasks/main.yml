@@ -60,6 +60,11 @@
     creates=/usr/share/elasticsearch/plugins/transport-thrift
     /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/{{ ES_TRANSPORT_THRIFT_VER }}
 
+- name: install transport-memcached plugin
+  command: >
+    creates=/usr/share/elasticsearch/plugins/transport-memcached
+    /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-transport-memcached/{{ ES_TRANSPORT_MEMCACHED_VER }}
+
 - name: remove default config
   file: >
     path={{ item }}
