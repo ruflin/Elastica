@@ -1,8 +1,9 @@
 ---
 
 - name: Create a virtual machine
-  hosts: localhost
   connection: local
+  hosts: localhost
+  sudo: true
   vars:
     - ES_VER: "1.4.2"
     - ES_SHORT_VER: "1.4"

@@ -31,7 +31,7 @@ fi
 # ----------------------------------------------------------------------------
 # Run playbook
 
-ansible-playbook $ES_PROJECT_ROOT/ansible/es-playbook.yml -v -s | tee /tmp/ansible-playbook-progress
+ansible-playbook $ES_PROJECT_ROOT/ansible/es-playbook.yml -v | tee /tmp/ansible-playbook-progress
 
 if grep -q 'FATAL\|ERROR' /tmp/ansible-playbook-progress; then
     exit 1
