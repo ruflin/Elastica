@@ -32,9 +32,6 @@ class Memcache extends AbstractTransport
         $memcache = new \Memcache();
         $memcache->connect($this->getConnection()->getHost(), $this->getConnection()->getPort());
 
-        // Finds right function name
-        $function = strtolower($request->getMethod());
-
         $data = $request->getData();
 
         $content = '';
@@ -52,19 +49,20 @@ class Memcache extends AbstractTransport
 
         $responseString = '';
 
-        switch ($function) {
-            case 'post':
-            case 'put':
+        switch ($request->getMethod()) {
+            case Request::POST:
+            case Request::PUT:
                 $memcache->set($request->getPath(), $content);
                 break;
-            case 'get':
+            case Request::GET:
                 $responseString = $memcache->get($request->getPath().'?source='.$content);
                 break;
-            case 'delete':
+            case Request::DELETE:
+                $responseString = $memcache->delete($request->getPath().'?source='.$content);
                 break;
             default:
-                throw new InvalidException('Method '.$function.' is not supported in memcache transport');
-
+            case Request::HEAD:
+                throw new InvalidException('Method '.$request->getMethod().' is not supported in memcache transport');
         }
 
         $response = new Response($responseString);

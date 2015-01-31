@@ -4,6 +4,9 @@ namespace Elastica\Test\Transport;
 
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Query;
+use Elastica\Query\QueryString;
+use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
 
 class MemcacheTest extends BaseTest
@@ -15,37 +18,126 @@ class MemcacheTest extends BaseTest
         }
     }
 
-    public function testExample()
+    protected function _getClient()
     {
-        // Creates a new index 'xodoa' and a type 'user' inside this index
-        $host = 'localhost';
-        $port = 11211;
-        $client = new Client(array('host' => $host, 'port' => $port, 'transport' => 'Memcache'));
+        return new Client(array(
+            'host' => 'localhost',
+            'port' => 11211,
+            'transport' => 'Memcache',
+        ));
+    }
 
-        $index = $client->getIndex('elastica_test1');
-        $index->create(array(), true);
+    public function testConstruct()
+    {
+        $client = $this->_getClient();
+        $this->assertEquals('localhost', $client->getConnection()->getHost());
+        $this->assertEquals(11211, $client->getConnection()->getPort());
+    }
 
-        $type = $index->getType('user');
+    public function testCreateDocument()
+    {
+        $index = $this->_createIndex('memcache_test');
+        $this->_waitForAllocation($index);
+        $type = $index->getType('foo');
 
-        // Adds 1 document to the index
-        $doc1 = new Document(1,
-            array('username' => 'hans', 'test' => array('2', '3', '5'))
-        );
-        $type->addDocument($doc1);
+        // Create document
+        $document = new Document(1, array('username' => 'John Doe'));
+        $type->addDocument($document);
+        $index->refresh();
 
-        // Adds a list of documents with _bulk upload to the index
-        $docs = array();
-        $docs[] = new Document(2,
-            array('username' => 'john', 'test' => array('1', '3', '6'))
-        );
-        $docs[] = new Document(3,
-            array('username' => 'rolf', 'test' => array('2', '3', '7'))
+        // Check it was saved
+        $document = $type->getDocument(1);
+        $this->assertEquals('John Doe', $document->get('username'));
+    }
+
+    /**
+     * @expectedException Elastica\Exception\NotFoundException
+     */
+    public function testDeleteDocument()
+    {
+        $index = $this->_createIndex('memcache_test');
+        $this->_waitForAllocation($index);
+        $type = $index->getType('foo');
+
+        // Create document
+        $document = new Document(1, array('username' => 'John Doe'));
+        $type->addDocument($document);
+        $index->refresh();
+
+        // Delete document
+        $type->deleteById(1);
+
+        // Check if document is not exists
+        $document = $type->getDocument(1);
+    }
+
+    public function testUpdateDocument()
+    {
+        $index = $this->_createIndex('memcache_test');
+        $this->_waitForAllocation($index);
+        $type = $index->getType('foo');
+
+        // Create document
+        $document = new Document(1, array('username' => 'John Doe'));
+        $type->addDocument($document);
+        $index->refresh();
+
+        // Check it was saved
+        $savedDocument = $type->getDocument(1);
+        $this->assertEquals('John Doe', $savedDocument->get('username'));
+
+        // Update document
+        $newDocument = new Document(1, array('username' => 'Doe John'));
+        $type->updateDocument($newDocument);
+        $index->refresh();
+
+        // Check it was updated
+        $newSavedDocument = $type->getDocument(1);
+        $this->assertEquals('Doe John', $newSavedDocument->get('username'));
+    }
+
+    public function testSearchDocument()
+    {
+        $index = $this->_createIndex('memcache_test');
+        $this->_waitForAllocation($index);
+        $type = $index->getType('fruits');
+
+        // Create documents
+        $docs = array(
+            new Document(1, array('name' => 'banana')),
+            new Document(2, array('name' => 'apple')),
+            new Document(3, array('name' => 'orange')),
         );
         $type->addDocuments($docs);
-
-        // Refresh index
         $index->refresh();
-        $this->markTestIncomplete('Memcache implementation is not finished yet');
-        $resultSet = $type->search('rolf');
+
+        // Search documents
+        $queryString = new QueryString('orange');
+        $query = new Query($queryString);
+        $resultSet = $type->search($query);
+
+        // Check if correct document was found
+        $this->assertEquals(1, $resultSet->getTotalHits());
+        $this->assertEquals(3, $resultSet[0]->getId());
+        $data = $resultSet[0]->getData();
+        $this->assertEquals('orange', $data['name']);
+    }
+
+    /**
+     * @expectedException Elastica\Exception\InvalidException
+     */
+    public function testHeadRequest()
+    {
+        $client = $this->_getClient();
+        $client->request('foo', Request::HEAD);
+    }
+
+    /**
+     * @expectedException Elastica\Exception\InvalidException
+     */
+    public function testInvalidRequest()
+    {
+        $client = $this->_getClient();
+        $client->request('foo', 'its_fail');
     }
 }
