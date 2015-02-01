@@ -1,12 +1,14 @@
 ---
 
 - name: Create a virtual machine
-  hosts: localhost
   connection: local
+  hosts: localhost
+  sudo: true
   vars:
     - ES_VER: "1.4.2"
     - ES_SHORT_VER: "1.4"
     - ES_MAPPER_ATTACHMENTS_VER: "2.4.1"
+    - ES_TRANSPORT_MEMCACHED_VER: "2.4.1"
     - ES_TRANSPORT_THRIFT_VER: "2.4.1"
     - ES_GEOCLUSTER_FACET_VER: "0.0.12"
     - ES_PROJECT_ROOT: "{{ lookup('env', 'ES_PROJECT_ROOT') }}"
@@ -14,6 +16,5 @@
   roles:
     - base
     - elasticsearch
-    - memcached
     - nginx
     - php

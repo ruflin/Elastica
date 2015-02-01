@@ -20,7 +20,7 @@
     </whitelist>
   </filter>
   <testsuites>
-    <testsuite name="Elastica">
+    <testsuite name="default">
       <directory>./lib/Elastica/</directory>
     </testsuite>
   </testsuites>
