@@ -58,17 +58,17 @@ class Memcache extends AbstractTransport
             case Request::POST:
             case Request::PUT:
                 $key = $request->getPath();
-                $this->checkKeyLength($key);
+                $this->_checkKeyLength($key);
                 $memcache->set($key, $content);
                 break;
             case Request::GET:
                 $key = $request->getPath().'?source='.$content;
-                $this->checkKeyLength($key);
+                $this->_checkKeyLength($key);
                 $responseString = $memcache->get($key);
                 break;
             case Request::DELETE:
                 $key = $request->getPath().'?source='.$content;
-                $this->checkKeyLength($key);
+                $this->_checkKeyLength($key);
                 $responseString = $memcache->delete($key);
                 break;
             default:
@@ -101,7 +101,7 @@ class Memcache extends AbstractTransport
      * @throws Elastica\Exception\Connection\MemcacheException If key is too long
      * @param  string                                          $key
      */
-    private function checkKeyLength($key)
+    private function _checkKeyLength($key)
     {
         if (strlen($key) >= self::MAX_KEY_LENGTH) {
             throw new MemcacheException('Memcache key is too long');
