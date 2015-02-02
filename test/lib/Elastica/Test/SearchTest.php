@@ -357,7 +357,7 @@ class SearchTest extends BaseTest
         $this->assertTrue(($resultSet->count() === 0) && $resultSet->getTotalHits() === 11);
 
         //Timeout - this one is a bit more tricky to test
-        $mockResponse = new \Elastica\Response(json_encode(['timed_out' => true]));
+        $mockResponse = new \Elastica\Response(json_encode(array('timed_out' => true)));
         $client = $this->getMockBuilder('Elastica\\Client')
             ->disableOriginalConstructor()
             ->getMock();
