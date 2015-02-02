@@ -163,7 +163,7 @@ class PercolatorTest extends BaseTest
         $percolator = new Percolator($index);
 
         $query = new Term(array('name' => 'foobar'));
-        $percolator->registerQuery($percolatorName, $query, array('field1' => ['tag1', 'tag2']));
+        $percolator->registerQuery($percolatorName, $query, array('field1' => array('tag1', 'tag2')));
 
         return $percolator;
     }
@@ -231,13 +231,13 @@ class PercolatorTest extends BaseTest
         $percolator = new Percolator($index);
 
         $query = new Term(array('name' => 'foo'));
-        $response = $percolator->registerQuery('percotest', $query, array( 'field1' => ['tag1', 'tag2']));
+        $response = $percolator->registerQuery('percotest', $query, array( 'field1' => array('tag1', 'tag2')));
 
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
 
         $query = new Term(array('name' => 'foo'));
-        $response = $percolator->registerQuery('percotest1', $query, array( 'field1' => ['tag2']));
+        $response = $percolator->registerQuery('percotest1', $query, array( 'field1' => array('tag2')));
 
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
@@ -266,7 +266,7 @@ class PercolatorTest extends BaseTest
         $percolator = $this->_getDefaultPercolator($percolatorName);
 
         $query = new Term(array('name' => 'foobar'));
-        $percolator->registerQuery($percolatorName.'1', $query, array('field1' => ['tag2']));
+        $percolator->registerQuery($percolatorName.'1', $query, array('field1' => array('tag2')));
 
         $index      = $percolator->getIndex();
         $type       = $this->_addDefaultDocuments($index);
