@@ -16,7 +16,7 @@ class ClusterTest extends BaseTest
         $cluster = new Cluster($client);
 
         foreach ($cluster->getNodeNames() as $name) {
-            $this->assertContains($name, ['Silver Fox', 'Skywalker', 'Wolverine']);
+            $this->assertContains($name, array('Silver Fox', 'Skywalker', 'Wolverine'));
         }
     }
 
