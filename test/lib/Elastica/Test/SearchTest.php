@@ -140,6 +140,14 @@ class SearchTest extends BaseTest
         $search->addIndex(new \stdClass());
     }
 
+    public function testAddNumericIndex()
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $search->addIndex(1);
+    }
+
     public function testGetPath()
     {
         $client = $this->_getClient();
