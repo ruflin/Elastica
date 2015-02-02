@@ -146,6 +146,8 @@ class SearchTest extends BaseTest
         $search = new Search($client);
 
         $search->addIndex(1);
+
+        $this->assertContains('1', $search->getIndices(), 'Make sure it has been added and converted to string');
     }
 
     public function testGetPath()
