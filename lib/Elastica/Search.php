@@ -93,7 +93,7 @@ class Search
             $index = $index->getName();
         }
 
-        if (!is_string($index)) {
+        if (!is_scalar($index)) {
             throw new InvalidException('Invalid param type');
         }
 
