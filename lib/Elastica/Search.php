@@ -97,7 +97,7 @@ class Search
             throw new InvalidException('Invalid param type');
         }
 
-        $this->_indices[] = $index;
+        $this->_indices[] = (string) $index;
 
         return $this;
     }
