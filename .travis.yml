@@ -21,6 +21,7 @@ install:
 before_script:
   - mkdir -p build/logs
   - echo "extension=memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - if [ $ES_COMPOSER_NODEV == "no" ] && ! $(php -v | head -1 | grep -q 'PHP 5.3'); then composer require "guzzlehttp/guzzle" "4.2.*" --dev --no-ansi --no-progress --no-interaction; fi
 
 script:
   - phpunit -c test/phpunit-travis.xml
