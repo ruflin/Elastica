@@ -1,4 +1,6 @@
 CHANGES
+2015-02-04
+- Reset PHP 5.3 tests
 
 2015-01-27
 - Exception\ElasticsearchException now can be catched like all other exceptions as Exception\ExceptionInterface
