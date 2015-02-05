@@ -41,13 +41,6 @@ class IndicesTest extends BaseTest
         $this->_index2->refresh();
     }
 
-    protected function tearDown()
-    {
-        $this->_index1->delete();
-        $this->_index2->delete();
-        parent::tearDown();
-    }
-
     public function testToArray()
     {
         $expected = array(

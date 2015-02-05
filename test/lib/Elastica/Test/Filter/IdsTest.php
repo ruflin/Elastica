@@ -45,13 +45,6 @@ class IdsTest extends BaseTest
         $this->_index = $index;
     }
 
-    public function tearDown()
-    {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test');
-        $index->delete();
-    }
-
     public function testSetIdsSearchSingle()
     {
         $filter = new Ids();

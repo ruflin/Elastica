@@ -33,11 +33,6 @@ class PhraseTest extends BaseTest
         $this->_index->refresh();
     }
 
-    protected function tearDown()
-    {
-        $this->_index->delete();
-    }
-
     public function testToArray()
     {
         $suggest = new Suggest();

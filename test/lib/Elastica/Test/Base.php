@@ -42,4 +42,10 @@ class Base extends \PHPUnit_Framework_TestCase
             }
         } while (!$allocated);
     }
+
+    protected function tearDown()
+    {
+        $this->_getClient()->getIndex('_all')->delete();
+        $this->_getClient()->getIndex('_all')->clearCache();
+    }
 }

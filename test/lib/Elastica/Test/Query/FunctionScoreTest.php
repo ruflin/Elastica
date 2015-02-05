@@ -51,12 +51,6 @@ class FunctionScoreTest extends BaseTest
         $this->index->refresh();
     }
 
-    protected function tearDown()
-    {
-        $this->index->delete();
-        parent::tearDown();
-    }
-
     public function testToArray()
     {
         $priceOrigin = 0;

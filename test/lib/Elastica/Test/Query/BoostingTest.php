@@ -48,12 +48,6 @@ class BoostingTest extends BaseTest
         $this->index->refresh();
     }
 
-    protected function tearDown()
-    {
-        $this->index->delete();
-        parent::tearDown();
-    }
-
     public function testToArray()
     {
         $keyword = "vital";

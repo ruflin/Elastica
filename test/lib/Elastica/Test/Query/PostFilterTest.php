@@ -30,14 +30,6 @@ class PostFilterTest extends BaseTest
         $this->_index->refresh();
     }
 
-    protected function tearDown()
-    {
-        parent::tearDown();
-        if ($this->_index instanceof Index) {
-            $this->_index->delete();
-        }
-    }
-
     public function testToArray()
     {
         $query = new Query();

@@ -29,12 +29,6 @@ class SimpleQueryStringTest extends Base
         $this->_index->refresh();
     }
 
-    protected function tearDown()
-    {
-        parent::tearDown();
-        $this->_index->delete();
-    }
-
     public function testToArray()
     {
         $string = "this is a test";
