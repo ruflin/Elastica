@@ -76,7 +76,7 @@ export ES_JAVA_OPTS
 MAX_OPEN_FILES="65535"
 
 # Maximum amount of locked memory
-MAX_LOCKED_MEMORY="$ES_HEAP_SIZE"
+MAX_LOCKED_MEMORY="unlimited"
 
 # Elasticsearch log directory
 LOG_DIR="/var/log/$NAME"
