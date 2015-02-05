@@ -90,9 +90,6 @@ WORK_DIR="/tmp/$NAME"
 # Elasticsearch configuration directory
 CONF_DIR="/etc/$NAME"
 
-# Maximum number of VMA (Virtual Memory Areas) a process can own
-MAX_MAP_COUNT="262144"
-
 # Define other required variables
 DAEMON="$ES_HOME/bin/elasticsearch"
 
@@ -133,10 +130,6 @@ case "$1" in
 
     if [ -n "$MAX_LOCKED_MEMORY" ];then
         ulimit -l $MAX_LOCKED_MEMORY
-    fi
-
-    if [ -n "$MAX_MAP_COUNT" -a -f /proc/sys/vm/max_map_count ];then
-        sysctl -q -w vm.max_map_count=$MAX_MAP_COUNT
     fi
 
     for node in 0 1 2; do
