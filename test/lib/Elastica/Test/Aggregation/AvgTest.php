@@ -11,7 +11,7 @@ class AvgTest extends BaseAggregationTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex('avg');
+        $this->_index = $this->_createIndex();
         $docs = array(
             new Document('1', array('price' => 5)),
             new Document('2', array('price' => 8)),

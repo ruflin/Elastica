@@ -11,7 +11,7 @@ class HistogramTest extends BaseAggregationTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex("histogram");
+        $this->_index = $this->_createIndex();
         $docs = array(
             new Document("1", array("price" => 5, "color" => "blue")),
             new Document("2", array("price" => 8, "color" => "blue")),

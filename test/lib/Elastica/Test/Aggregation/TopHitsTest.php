@@ -18,7 +18,7 @@ class TopHitsTest extends BaseAggregationTest
     public function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex('top_hits_test', true);
+        $this->_index = $this->_createIndex();
 
         $docs = array(
             new Document(1, array(

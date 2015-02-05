@@ -27,7 +27,7 @@ class CommonTest extends BaseTest
 
     public function testQuery()
     {
-        $index = $this->_createIndex('common_test');
+        $index = $this->_createIndex();
         $type = $index->getType('test');
 
         //add documents to create common terms

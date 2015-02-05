@@ -29,7 +29,7 @@ class FunctionScoreTest extends BaseTest
     protected function setUp()
     {
         parent::setUp();
-        $this->index = $this->_createIndex('test_functionscore');
+        $this->index = $this->_createIndex();
         $this->type = $this->index->getType('test');
         $this->type->setMapping(array(
             'name' => array('type' => 'string', 'index' => 'not_analyzed'),

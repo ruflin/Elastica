@@ -12,7 +12,7 @@ class DateRangeTest extends BaseAggregationTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex("date_range");
+        $this->_index = $this->_createIndex();
         $mapping = new Mapping();
         $mapping->setProperties(array(
             "created" => array("type" => "date"),

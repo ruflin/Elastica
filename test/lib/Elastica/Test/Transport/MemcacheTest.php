@@ -36,7 +36,7 @@ class MemcacheTest extends BaseTest
 
     public function testCreateDocument()
     {
-        $index = $this->_createIndex('memcache_test');
+        $index = $this->_createIndex();
         $this->_waitForAllocation($index);
         $type = $index->getType('foo');
 
@@ -55,7 +55,7 @@ class MemcacheTest extends BaseTest
      */
     public function testDeleteDocument()
     {
-        $index = $this->_createIndex('memcache_test');
+        $index = $this->_createIndex();
         $this->_waitForAllocation($index);
         $type = $index->getType('foo');
 
@@ -73,7 +73,7 @@ class MemcacheTest extends BaseTest
 
     public function testUpdateDocument()
     {
-        $index = $this->_createIndex('memcache_test');
+        $index = $this->_createIndex();
         $this->_waitForAllocation($index);
         $type = $index->getType('foo');
 
@@ -98,7 +98,7 @@ class MemcacheTest extends BaseTest
 
     public function testSearchDocument()
     {
-        $index = $this->_createIndex('memcache_test');
+        $index = $this->_createIndex();
         $this->_waitForAllocation($index);
         $type = $index->getType('fruits');
 
@@ -149,7 +149,7 @@ class MemcacheTest extends BaseTest
      */
     public function testRequestWithLongPath()
     {
-        $index = $this->_createIndex('memcache_test');
+        $index = $this->_createIndex();
         $this->_waitForAllocation($index);
 
         $queryString = new QueryString(str_repeat('z', 300));

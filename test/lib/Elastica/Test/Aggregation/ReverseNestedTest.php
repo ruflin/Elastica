@@ -14,7 +14,7 @@ class ReverseNestedTest extends BaseAggregationTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex("nested");
+        $this->_index = $this->_createIndex();
         $mapping = new Mapping();
         $mapping->setProperties(array(
             "comments" => array(

@@ -14,9 +14,8 @@ class PercolatorTest extends BaseTest
 {
     public function testConstruct()
     {
-        $percolatorName = 'percotest';
-
-        $index = $this->_createIndex($percolatorName);
+        $index = $this->_createIndex();
+        $percolatorName = $index->getName();
 
         $percolator = new Percolator($index);
 
@@ -44,7 +43,7 @@ class PercolatorTest extends BaseTest
 
         $percolator = new Percolator($index);
 
-        $percolatorName = 'percotest';
+        $percolatorName = $index->getName();
 
         $query = new Term(array('name' => 'ruflin'));
         $response = $percolator->registerQuery($percolatorName, $query);
@@ -285,9 +284,9 @@ class PercolatorTest extends BaseTest
         $index->delete();
     }
 
-    protected function _createIndex($name = 'test', $delete = true, $shards = 1)
+    protected function _createIndex($name = null, $delete = true, $shards = 1)
     {
-        $index = parent::_createIndex($name, $delete, $shards);
+        $index = parent::_createIndex();
         $type = $index->getType('.percolator');
 
         $mapping = new Type\Mapping($type,

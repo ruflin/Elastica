@@ -21,8 +21,12 @@ class Base extends \PHPUnit_Framework_TestCase
      * @param  int             $shards Number of shards to create
      * @return \Elastica\Index
      */
-    protected function _createIndex($name = 'test', $delete = true, $shards = 1)
+    protected function _createIndex($name = null, $delete = true, $shards = 1)
     {
+        if (is_null($name)) {
+            $name = preg_replace('/[^a-z]/i', '', strtolower(get_called_class())).uniqid();
+        }
+
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_'.$name);
         $index->create(array('index' => array('number_of_shards' => $shards, 'number_of_replicas' => 0)), $delete);

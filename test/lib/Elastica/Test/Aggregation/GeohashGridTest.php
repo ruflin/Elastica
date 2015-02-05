@@ -12,7 +12,7 @@ class GeohashGridTest extends BaseAggregationTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex("geohash_grid");
+        $this->_index = $this->_createIndex();
         $mapping = new Mapping();
         $mapping->setProperties(array(
             "location" => array("type" => "geo_point"),

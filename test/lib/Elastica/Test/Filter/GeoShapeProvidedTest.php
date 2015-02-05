@@ -13,7 +13,7 @@ class GeoShapeProvidedTest extends BaseTest
 {
     public function testConstructEnvelope()
     {
-        $index = $this->_createIndex('geo_shape_filter_test');
+        $index = $this->_createIndex();
         $type = $index->getType('test');
 
         // create mapping
@@ -62,8 +62,6 @@ class GeoShapeProvidedTest extends BaseTest
         $results = $type->search($query);
 
         $this->assertEquals(1, $results->count());
-
-        $index->delete();
     }
 
     public function testConstructPolygon()

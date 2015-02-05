@@ -15,9 +15,7 @@ class IdsTest extends BaseTest
 
     public function setUp()
     {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index = $this->_createIndex();
 
         $type1 = $index->getType('helloworld1');
         $type2 = $index->getType('helloworld2');

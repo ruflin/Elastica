@@ -20,7 +20,7 @@ class TermTest extends BaseTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex('test_suggest');
+        $this->_index = $this->_createIndex();
         $docs = array();
         $docs[] = new Document(1, array('id' => 1, 'text' => 'GitHub'));
         $docs[] = new Document(2, array('id' => 1, 'text' => 'Elastic'));
