@@ -67,7 +67,7 @@ class Guzzle extends AbstractTransport
         }
 
         $req = $client->createRequest($request->getMethod(), $this->_getActionPath($request), $options);
-        $req->setHeaders($connection->hasConfig('headers') ?: array());
+        $req->setHeaders($connection->hasConfig('headers') ? $connection->getConfig('headers') : array());
 
         $data = $request->getData();
         if (!empty($data) || '0' === $data) {
