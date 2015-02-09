@@ -132,7 +132,7 @@ case "$1" in
         ulimit -l $MAX_LOCKED_MEMORY
     fi
 
-    for node in 0 1 2; do
+    for node in 0 1; do
         log_daemon_msg "Starting elasticsearch node #$node"
 
         PID_FILE="/var/run/$NAME-$node.pid"
@@ -177,7 +177,7 @@ case "$1" in
     done
     ;;      
   stop)
-    for node in 0 1 2; do
+    for node in 0 1; do
         log_daemon_msg "Stopping elasticsearch node #$node"
 
         PID_FILE="/var/run/$NAME-$node.pid"
@@ -202,14 +202,14 @@ case "$1" in
     log_end_msg 0
     ;;
   status)
-    for node in 0 1 2; do
+    for node in 0 1; do
         PID_FILE="/var/run/$NAME-$node.pid"
         status_of_proc -p $PID_FILE "Elasticsearch node #$node" "Elasticsearch node #$node"
     done
     exit 0
     ;;
   restart|force-reload)
-    for node in 0 1 2; do
+    for node in 0 1; do
         PID_FILE="/var/run/$NAME-$node.pid"
         if [ -f "$PID_FILE" ]; then
             $0 stop

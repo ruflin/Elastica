@@ -15,24 +15,21 @@ class ShutdownTest extends BaseTest
         // So, just do nothing
     }
 
-    /**
-     * @test
-     */
-    public function nodeShutdown()
+    public function testNodeShutdown()
     {
         // Get cluster nodes
         $client = $this->_getClient();
         $cluster = $client->getCluster();
         $nodes = $cluster->getNodes();
 
-        if (count($nodes) < 3) {
-            $this->markTestIncomplete('At least three nodes have to be running, because 1 node is shutdown');
+        if (count($nodes) < 2) {
+            $this->markTestIncomplete('At least two nodes have to be running, because 1 node is shutdown');
         }
 
         // sayonara, wolverine, we'd never love you
         foreach ($nodes as $node) {
-            if ($node->getName() === 'Wolverine') {
-                $node->shutdown('2s');
+            if ((int)$node->getInfo()->getPort() === 9201) {
+                $node->shutdown('1s');
                 break;
             }
         }
@@ -45,30 +42,28 @@ class ShutdownTest extends BaseTest
         $cluster = $client->getCluster();
         $nodes = $cluster->getNodes();
 
-        // Only two left
-        $this->assertCount(2, $nodes);
+        // Only one left
+        $this->assertCount(1, $nodes);
     }
 
     /**
-     * @test
-     * @depends nodeShutdown
-     * @expectedException \Elastica\Exception\ConnectionException
+     * @depends testNodeShutdown
+     * @expectedException \Elastica\Exception\Connection\HttpException
      */
-    public function clusterShutdown()
+    public function testClusterShutdown()
     {
         // Get cluster nodes
         $client = $this->_getClient();
         $cluster = $client->getCluster();
         $nodes = $cluster->getNodes();
 
-        if (count($nodes) < 2) {
-            $this->markTestIncomplete('At least two nodes have to be running, because we shuts down entire cluster');
-        }
+        // Shutdown cluster
+        $cluster->shutdown('1s');
 
-        $cluster->shutdown('2s');
-
+        // Wait...
         sleep(5);
 
+        // Now exception must be thrown
         $client->getStatus();
     }
 }
