@@ -23,6 +23,8 @@ script.disable_dynamic: false
 
 bootstrap.mlockall: true
 
+network.host: "127.0.0.1"
+
 {% endblock %}
 
 ################################### Node specific #############################
