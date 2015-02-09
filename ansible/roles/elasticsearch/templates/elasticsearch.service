@@ -132,6 +132,8 @@ case "$1" in
         ulimit -l $MAX_LOCKED_MEMORY
     fi
 
+    ulimit -s 1024
+
     for node in 0 1; do
         log_daemon_msg "Starting elasticsearch node #$node"
 
