@@ -9,7 +9,7 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
     /**
      * Set the field for this aggregation
      * @param  string                    $field the name of the document field on which to perform this aggregation
-     * @return AbstractSimpleAggregation
+     * @return static
      */
     public function setField($field)
     {
@@ -19,7 +19,7 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
     /**
      * Set a script for this aggregation
      * @param  string|Script             $script
-     * @return AbstractSimpleAggregation
+     * @return static
      */
     public function setScript($script)
     {

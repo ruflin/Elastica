@@ -58,7 +58,7 @@ abstract class AbstractAggregation extends Param
      * Add a sub-aggregation
      * @param  AbstractAggregation                  $aggregation
      * @throws \Elastica\Exception\InvalidException
-     * @return AbstractAggregation
+     * @return static
      */
     public function addAggregation(AbstractAggregation $aggregation)
     {
