@@ -8,6 +8,7 @@ use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\DateRange;
 use Elastica\Aggregation\ExtendedStats;
 use Elastica\Aggregation\Filter as FilterAggregation;
+use Elastica\Aggregation\Filters;
 use Elastica\Aggregation\GeoDistance;
 use Elastica\Aggregation\GeohashGrid;
 use Elastica\Aggregation\GlobalAggregation;
@@ -233,10 +234,11 @@ class Aggregation implements DSL
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html
      * @param string $name
+     * @return Filters
      */
     public function filters($name)
     {
-        throw new NotImplementedException();
+        return new Filters($name);
     }
 
     /**
