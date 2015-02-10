@@ -501,7 +501,12 @@ class TypeTest extends BaseTest
         $type->addDocument(new Document(2, array('name' => 'ruflin')));
         $index->refresh();
 
+        // sleep a moment to be sure that all nodes in cluster has new type
+        sleep(5);
+
         $type->delete();
+        $index->optimize();
+
         $this->assertFalse($type->exists());
     }
 
@@ -823,6 +828,9 @@ class TypeTest extends BaseTest
 
         $type->addDocument(new Document(1, array('name' => 'test name')));
         $index->optimize();
+
+        // sleep a moment to be sure that all nodes in cluster has new type
+        sleep(5);
 
         //Test if type exists
         $this->assertTrue($type->exists());
