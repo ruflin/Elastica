@@ -286,7 +286,7 @@ class PercolatorTest extends BaseTest
 
     protected function _createIndex($name = null, $delete = true, $shards = 1)
     {
-        $index = parent::_createIndex();
+        $index = parent::_createIndex($name, $delete, $shards);
         $type = $index->getType('.percolator');
 
         $mapping = new Type\Mapping($type,
