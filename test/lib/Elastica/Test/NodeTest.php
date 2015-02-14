@@ -50,7 +50,7 @@ class NodeTest extends BaseTest
         $nodes = $this->_getClient()->getCluster()->getNodes();
         $this->assertCount(2, $nodes);
         foreach ($nodes as $node) {
-            $this->assertContains($node->getName(), ['Silver Fox', 'Skywalker']);
+            $this->assertContains($node->getName(), array('Silver Fox', 'Skywalker'));
         }
     }
 }
