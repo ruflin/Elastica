@@ -262,7 +262,7 @@ class ClientTest extends BaseTest
         $data = array('username' => 'hans');
         $userSearch = 'username:hans';
 
-        $index = $this->_createIndex('test', true, 2);
+        $index = $this->_createIndex(null, true, 2);
 
         // Create the index, deleting it first if it already exists
         $index->create(array(), true);

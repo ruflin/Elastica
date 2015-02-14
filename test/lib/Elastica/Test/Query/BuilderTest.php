@@ -20,6 +20,7 @@ class BuilderTest extends BaseTest
     public function tearDown()
     {
         $this->builder = null;
+        parent::tearDown();
     }
 
     /**

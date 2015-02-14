@@ -21,7 +21,7 @@ class PhraseTest extends BaseTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex('test_suggest_phrase');
+        $this->_index = $this->_createIndex();
         $docs = array();
         $docs[] = new Document(1, array('text' => 'Github is pretty cool'));
         $docs[] = new Document(2, array('text' => 'Elasticsearch is bonsai cool'));
@@ -31,11 +31,6 @@ class PhraseTest extends BaseTest
         $type = $this->_index->getType(self::TEST_TYPE);
         $type->addDocuments($docs);
         $this->_index->refresh();
-    }
-
-    protected function tearDown()
-    {
-        $this->_index->delete();
     }
 
     public function testToArray()

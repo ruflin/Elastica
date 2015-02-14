@@ -75,10 +75,10 @@ class StatusTest extends BaseTest
 
     public function testAliasExists()
     {
-        $indexName = 'test';
         $aliasName = 'elastica_test-alias';
 
         $index1 = $this->_createIndex();
+        $indexName = $index1->getName();
 
         $status = new Status($index1->getClient());
 
@@ -93,7 +93,7 @@ class StatusTest extends BaseTest
         $this->assertTrue($status->aliasExists($aliasName));
 
         $indicesWithAlias = $status->getIndicesWithAlias($aliasName);
-        $this->assertEquals(array("elastica_$indexName"), array_map(
+        $this->assertEquals(array($indexName), array_map(
             function ($index) {
                 return $index->getName();
             }, $indicesWithAlias));

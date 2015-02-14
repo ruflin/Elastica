@@ -13,8 +13,8 @@ class GeoShapePreIndexedTest extends BaseTest
 {
     public function testGeoProvided()
     {
-        $indexName = 'geo_shape_filter_test';
-        $index = $this->_createIndex($indexName);
+        $index = $this->_createIndex();
+        $indexName = $index->getName();
         $type = $index->getType('type');
         $otherType = $index->getType('other_type');
 
@@ -60,7 +60,7 @@ class GeoShapePreIndexedTest extends BaseTest
         $index->refresh();
 
         $gsp = new GeoShapePreIndexed(
-            'location', '1', 'type', 'elastica_'.$indexName, 'location'
+            'location', '1', 'type', $indexName, 'location'
         );
         $gsp->setRelation(AbstractGeoShape::RELATION_INTERSECT);
 
@@ -70,7 +70,7 @@ class GeoShapePreIndexedTest extends BaseTest
                     'indexed_shape' => array(
                         'id' => '1',
                         'type' => 'type',
-                        'index' => 'elastica_'.$indexName,
+                        'index' => $indexName,
                         'path' => 'location',
                     ),
                     'relation' => $gsp->getRelation(),

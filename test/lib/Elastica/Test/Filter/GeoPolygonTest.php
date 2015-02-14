@@ -12,9 +12,7 @@ class GeoPolygonTest extends BaseTest
 {
     public function testGeoPoint()
     {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index = $this->_createIndex();
 
         $type = $index->getType('test');
 

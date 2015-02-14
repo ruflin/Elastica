@@ -184,7 +184,7 @@ class SettingsTest extends BaseTest
 
     public function testSetReadOnly()
     {
-        $index = $this->_createIndex('test'.rand());
+        $index = $this->_createIndex();
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
         $index->getSettings()->setReadOnly(false);
@@ -225,7 +225,7 @@ class SettingsTest extends BaseTest
 
     public function testGetSetBlocksRead()
     {
-        $index = $this->_createIndex('elastica-test'.'123');
+        $index = $this->_createIndex();
         $index->refresh();
         $settings = $index->getSettings();
 
@@ -245,7 +245,7 @@ class SettingsTest extends BaseTest
 
     public function testGetSetBlocksWrite()
     {
-        $index = $this->_createIndex('elastica-test'.'432');
+        $index = $this->_createIndex();
         $index->refresh();
         $settings = $index->getSettings();
 
@@ -265,7 +265,7 @@ class SettingsTest extends BaseTest
 
     public function testGetSetBlocksMetadata()
     {
-        $index = $this->_createIndex('elastica-test'.'534');
+        $index = $this->_createIndex();
         $index->refresh();
         $settings = $index->getSettings();
 

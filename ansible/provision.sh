@@ -39,17 +39,47 @@ fi
 
 # ----------------------------------------------------------------------------
 
-echo 'Waiting for elasticsearch server ready'
-elasticsearch_ready() {
-    http_code=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:9200")
-    return $(test $http_code = "200")
+all_nodes_available() {
+    curl -m 5 -s -o /dev/null "http://localhost:9200" &&
+    curl -m 5 -s -o /dev/null "http://localhost:9201"
+    return $?
 }
-while ! elasticsearch_ready; do
-    echo -n '.'
-    sleep 1s
-done
 
-# ----------------------------------------------------------------------------
-# Say bye
+check_cluster() {
+    restarts_left=$1
+    seconds_left=$2
 
-echo 'Done'
+    if [ $seconds_left -eq 0 ]; then
+        if [ $restarts_left -eq 0 ]; then
+            echo "Cluster was restarted 10 times, but still not ready for phpunit. Build failed!"
+            return 1
+        else
+            echo "Restart cluster. Restarts left: $restarts_left"
+            sudo service elasticsearch restart
+            check_cluster $(( $restarts_left - 1 )) 30
+            return $?
+        fi
+    else
+        if all_nodes_available; then
+            echo "All nodes available. Sleep 30 seconds and try to check them again..."
+            if sleep 10s && all_nodes_available; then
+                echo "All nodes still available - cluster ready."
+                return 0
+            else
+                echo "Some nodes were stopped during sleep. Trying cluster restart..."
+                check_cluster $restarts_left 0
+                return $?
+            fi
+        else
+            echo "Some nodes still unavailable. Sleep 1 second and try to check them again. Seconds to start left: $seconds_left"
+            sleep 1s && check_cluster $restarts_left $(( $seconds_left - 1 ))
+            return $?
+        fi
+    fi
+}
+
+echo "Wait cluster start..."
+if ! check_cluster 10 30; then
+    cat /var/log/elasticsearch/*.log
+    exit 1
+fi

@@ -59,13 +59,6 @@ class NestedTest extends BaseTest
         $index->refresh();
     }
 
-    public function tearDown()
-    {
-        $client = $this->_getClient();
-        $index = $client->getIndex('elastica_test_filter_nested');
-        $index->delete();
-    }
-
     public function testToArray()
     {
         $f = new Nested();

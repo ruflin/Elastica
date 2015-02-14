@@ -19,6 +19,7 @@ class BulkTest extends BaseTest
     public function testSend()
     {
         $index = $this->_createIndex();
+        $indexName = $index->getName();
         $type = $index->getType('bulk_test');
         $type2 = $index->getType('bulk_test2');
         $client = $index->getClient();
@@ -63,24 +64,24 @@ class BulkTest extends BaseTest
         $data = $bulk->toArray();
 
         $expected = array(
-            array('index' => array('_index' => 'elastica_test', '_type' => 'bulk_test', '_id' => 1, '_percolate' => '*')),
+            array('index' => array('_index' => $indexName, '_type' => 'bulk_test', '_id' => 1, '_percolate' => '*')),
             array('name' => 'Mister Fantastic'),
             array('index' => array('_id' => 2)),
             array('name' => 'Invisible Woman'),
-            array('create' => array('_index' => 'elastica_test', '_type' => 'bulk_test', '_id' => 3)),
+            array('create' => array('_index' => $indexName, '_type' => 'bulk_test', '_id' => 3)),
             array('name' => 'The Human Torch'),
-            array('index' => array('_index' => 'elastica_test', '_type' => 'bulk_test')),
+            array('index' => array('_index' => $indexName, '_type' => 'bulk_test')),
             array('name' => 'The Thing'),
         );
         $this->assertEquals($expected, $data);
 
-        $expected = '{"index":{"_index":"elastica_test","_type":"bulk_test","_id":1,"_percolate":"*"}}
+        $expected = '{"index":{"_index":"'.$indexName.'","_type":"bulk_test","_id":1,"_percolate":"*"}}
 {"name":"Mister Fantastic"}
 {"index":{"_id":2}}
 {"name":"Invisible Woman"}
-{"create":{"_index":"elastica_test","_type":"bulk_test","_id":3}}
+{"create":{"_index":"'.$indexName.'","_type":"bulk_test","_id":3}}
 {"name":"The Human Torch"}
-{"index":{"_index":"elastica_test","_type":"bulk_test"}}
+{"index":{"_index":"'.$indexName.'","_type":"bulk_test"}}
 {"name":"The Thing"}
 ';
 
@@ -113,7 +114,7 @@ class BulkTest extends BaseTest
         $data = $bulk->toArray();
 
         $expected = array(
-            array('delete' => array('_index' => 'elastica_test', '_type' => 'bulk_test', '_id' => 3)),
+            array('delete' => array('_index' => $indexName, '_type' => 'bulk_test', '_id' => 3)),
         );
         $this->assertEquals($expected, $data);
 

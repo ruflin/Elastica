@@ -19,7 +19,7 @@ class PostFilterTest extends BaseTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex("query");
+        $this->_index = $this->_createIndex();
         $docs = array(
             new Document("1", array("color" => "green", "make" => "ford")),
             new Document("2", array("color" => "blue", "make" => "volvo")),
@@ -28,14 +28,6 @@ class PostFilterTest extends BaseTest
         );
         $this->_index->getType("test")->addDocuments($docs);
         $this->_index->refresh();
-    }
-
-    protected function tearDown()
-    {
-        parent::tearDown();
-        if ($this->_index instanceof Index) {
-            $this->_index->delete();
-        }
     }
 
     public function testToArray()
@@ -68,10 +60,5 @@ class PostFilterTest extends BaseTest
         $results = $this->_index->search($query);
 
         $this->assertEquals(1, $results->getTotalHits());
-    }
-
-    protected function _createIndex($name = 'test', $delete = true, $shards = 1)
-    {
-        return parent::_createIndex('test_postfilter_'.$name, $delete, $shards);
     }
 }

@@ -26,7 +26,7 @@ class BoostingTest extends BaseTest
     protected function setUp()
     {
         parent::setUp();
-        $this->index = $this->_createIndex('test_boostingquery');
+        $this->index = $this->_createIndex();
         $this->type = $this->index->getType('test');
         $this->type->setMapping(array(
             'name' => array('type' => 'string', 'index' => 'analyzed'),
@@ -46,12 +46,6 @@ class BoostingTest extends BaseTest
         }
 
         $this->index->refresh();
-    }
-
-    protected function tearDown()
-    {
-        $this->index->delete();
-        parent::tearDown();
     }
 
     public function testToArray()

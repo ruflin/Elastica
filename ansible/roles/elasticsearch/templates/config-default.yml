@@ -1,30 +1,33 @@
 {% block default_config %}
 
-#################################### Index ####################################
-
 index.number_of_shards: 2
 index.number_of_replicas: 0
 
-#################################### Plugin ###################################
+# Dont write data to hdd in tests
+index.store.type: memory
 
+# Required plugins
 plugin.mandatory: mapper-attachments, geocluster-facet, transport-thrift, transport-memcached
 
-################################## UDP ########################################
-
+# For bulk tests
 bulk.udp.enabled: true
 bulk.udp.bulk_actions: 5
 
-################################## Scripting ##################################
-
+# For script tests
 script.disable_dynamic: false
 
-################################### Memory ####################################
-
+# Disable dynamic memory allocation
 bootstrap.mlockall: true
+
+# Dont accept connections not from localhost
+network.host: "127.0.0.1"
+
+# Limit threadpool by set number of available processors to 1
+# Without this, travis builds will be failed with OutOfMemory error
+processors: 1
 
 {% endblock %}
 
-################################### Node specific #############################
 {% block config %}
-
+# Node specific config should be overwritten in child template
 {% endblock %}

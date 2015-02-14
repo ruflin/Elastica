@@ -18,7 +18,7 @@ class RescoreTest extends BaseTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex("rescore_test");
+        $this->_index = $this->_createIndex();
         $this->_index->refresh();
     }
 

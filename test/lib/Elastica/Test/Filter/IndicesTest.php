@@ -25,8 +25,8 @@ class IndicesTest extends BaseTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index1 = $this->_createIndex('indices_filter_1');
-        $this->_index2 = $this->_createIndex('indices_filter_2');
+        $this->_index1 = $this->_createIndex();
+        $this->_index2 = $this->_createIndex();
         $this->_index1->addAlias("indices_filter");
         $this->_index2->addAlias("indices_filter");
         $docs = array(
@@ -39,13 +39,6 @@ class IndicesTest extends BaseTest
         $this->_index2->getType("test")->addDocuments($docs);
         $this->_index1->refresh();
         $this->_index2->refresh();
-    }
-
-    protected function tearDown()
-    {
-        $this->_index1->delete();
-        $this->_index2->delete();
-        parent::tearDown();
     }
 
     public function testToArray()
