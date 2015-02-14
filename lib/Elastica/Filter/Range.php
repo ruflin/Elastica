@@ -65,8 +65,7 @@ class Range extends AbstractFilter
      */
     public function toArray()
     {
-        $this->setParams($this->_fields);
-
+        $this->setParams(array_merge($this->getParams(), $this->_fields));
         return parent::toArray();
     }
 }

@@ -37,4 +37,14 @@ class RangeTest extends BaseTest
         $returnValue = $filter->setExecution('index');
         $this->assertInstanceOf('Elastica\Filter\Range', $returnValue);
     }
+
+    /**
+     * Tests that parent fields are not overwritten by the toArray method
+     */
+    public function testSetCachedNotOverwritten() {
+        $filter = new Range('field_name', array());
+        $filter->setCached(true);
+        $array = $filter->toArray();
+        $this->assertTrue($array['range']['_cache']);
+    }
 }
