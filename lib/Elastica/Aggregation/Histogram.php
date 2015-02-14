@@ -24,7 +24,7 @@ class Histogram extends AbstractSimpleAggregation
     /**
      * Set the interval by which documents will be bucketed
      * @param  int       $interval
-     * @return Histogram
+     * @return $this
      */
     public function setInterval($interval)
     {
@@ -35,7 +35,7 @@ class Histogram extends AbstractSimpleAggregation
      * Set the bucket sort order
      * @param  string    $order     "_count", "_term", or the name of a sub-aggregation or sub-aggregation response field
      * @param  string    $direction "asc" or "desc"
-     * @return Histogram
+     * @return $this
      */
     public function setOrder($order, $direction)
     {
@@ -45,7 +45,7 @@ class Histogram extends AbstractSimpleAggregation
     /**
      * Set the minimum number of documents which must fall into a bucket in order for the bucket to be returned
      * @param  int       $count set to 0 to include empty buckets
-     * @return Histogram
+     * @return $this
      */
     public function setMinimumDocumentCount($count)
     {

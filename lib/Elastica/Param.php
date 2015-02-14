@@ -78,7 +78,7 @@ class Param
      *
      * @param  string          $key   Key to set
      * @param  mixed           $value Key Value
-     * @return \Elastica\Param
+     * @return $this
      */
     public function setParam($key, $value)
     {
@@ -91,7 +91,7 @@ class Param
      * Sets (overwrites) all params of this object
      *
      * @param  array           $params Parameter list
-     * @return \Elastica\Param
+     * @return $this
      */
     public function setParams(array $params)
     {
@@ -107,7 +107,7 @@ class Param
      *
      * @param  string          $key   Param key
      * @param  mixed           $value Value to set
-     * @return \Elastica\Param
+     * @return $this
      */
     public function addParam($key, $value)
     {
