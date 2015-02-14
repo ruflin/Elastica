@@ -31,7 +31,7 @@ class ResponseExceptionTest extends BaseTest
 
     public function testBadType()
     {
-        $index = $this->_createIndex('woo');
+        $index = $this->_createIndex();
         $type  = $index->getType('test');
 
         $type->setMapping(array(
@@ -53,7 +53,7 @@ class ResponseExceptionTest extends BaseTest
 
     public function testWhatever()
     {
-        $index = $this->_createIndex('woo');
+        $index = $this->_createIndex();
         $index->delete();
 
         try {

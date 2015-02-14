@@ -17,7 +17,7 @@ class SimpleQueryStringTest extends Base
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex("simple_query_string_test");
+        $this->_index = $this->_createIndex();
         $docs = array(
             new Document(1, array('make' => 'Gibson', 'model' => 'Les Paul')),
             new Document(2, array('make' => 'Gibson', 'model' => 'SG Standard')),
@@ -27,12 +27,6 @@ class SimpleQueryStringTest extends Base
         );
         $this->_index->getType("guitars")->addDocuments($docs);
         $this->_index->refresh();
-    }
-
-    protected function tearDown()
-    {
-        parent::tearDown();
-        $this->_index->delete();
     }
 
     public function testToArray()

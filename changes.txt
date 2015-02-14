@@ -1,5 +1,8 @@
 CHANGES
 
+2015-02-11
+- Fixed issue with OutOfMemory exception in travis builds
+
 2015-01-27
 - Exception\ElasticsearchException now can be catched like all other exceptions as Exception\ExceptionInterface
 

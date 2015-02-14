@@ -11,7 +11,7 @@ class CardinalityTest extends BaseAggregationTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex("cardinality");
+        $this->_index = $this->_createIndex();
         $docs = array(
             new Document("1", array("color" => "blue")),
             new Document("2", array("color" => "blue")),

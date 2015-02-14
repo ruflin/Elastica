@@ -76,7 +76,7 @@ export ES_JAVA_OPTS
 MAX_OPEN_FILES="65535"
 
 # Maximum amount of locked memory
-MAX_LOCKED_MEMORY="$ES_HEAP_SIZE"
+MAX_LOCKED_MEMORY="unlimited"
 
 # Elasticsearch log directory
 LOG_DIR="/var/log/$NAME"
@@ -89,9 +89,6 @@ WORK_DIR="/tmp/$NAME"
 
 # Elasticsearch configuration directory
 CONF_DIR="/etc/$NAME"
-
-# Maximum number of VMA (Virtual Memory Areas) a process can own
-MAX_MAP_COUNT="262144"
 
 # Define other required variables
 DAEMON="$ES_HOME/bin/elasticsearch"
@@ -135,11 +132,9 @@ case "$1" in
         ulimit -l $MAX_LOCKED_MEMORY
     fi
 
-    if [ -n "$MAX_MAP_COUNT" -a -f /proc/sys/vm/max_map_count ];then
-        sysctl -q -w vm.max_map_count=$MAX_MAP_COUNT
-    fi
+    ulimit -s 1024
 
-    for node in 0 1 2; do
+    for node in 0 1; do
         log_daemon_msg "Starting elasticsearch node #$node"
 
         PID_FILE="/var/run/$NAME-$node.pid"
@@ -184,7 +179,7 @@ case "$1" in
     done
     ;;      
   stop)
-    for node in 0 1 2; do
+    for node in 0 1; do
         log_daemon_msg "Stopping elasticsearch node #$node"
 
         PID_FILE="/var/run/$NAME-$node.pid"
@@ -209,14 +204,14 @@ case "$1" in
     log_end_msg 0
     ;;
   status)
-    for node in 0 1 2; do
+    for node in 0 1; do
         PID_FILE="/var/run/$NAME-$node.pid"
         status_of_proc -p $PID_FILE "Elasticsearch node #$node" "Elasticsearch node #$node"
     done
     exit 0
     ;;
   restart|force-reload)
-    for node in 0 1 2; do
+    for node in 0 1; do
         PID_FILE="/var/run/$NAME-$node.pid"
         if [ -f "$PID_FILE" ]; then
             $0 stop

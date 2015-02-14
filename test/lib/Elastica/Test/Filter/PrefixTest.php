@@ -30,18 +30,6 @@ class PrefixTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
 
-        /*$indexParams = array(
-            'analysis' => array(
-                'analyzer' => array(
-                    'lw' => array(
-                        'type' => 'custom',
-                        'tokenizer' => 'keyword',
-                        'filter' => array('lowercase')
-                    )
-                ),
-            )
-        );*/
-
         $index->create(array(), true);
         $type = $index->getType('test');
 

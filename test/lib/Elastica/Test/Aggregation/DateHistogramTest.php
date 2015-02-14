@@ -12,7 +12,7 @@ class DateHistogramTest extends BaseAggregationTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_index = $this->_createIndex("date_histogram");
+        $this->_index = $this->_createIndex();
         $mapping = new Mapping();
         $mapping->setProperties(array(
             "created" => array("type" => "date"),

@@ -47,8 +47,7 @@ class ClusterTest extends BaseTest
         $client = $this->_getClient();
         $cluster = $client->getCluster();
 
-        $indexName = 'elastica_test999';
-        $index = $this->_createIndex($indexName);
+        $index = $this->_createIndex();
         $index->delete();
         $cluster->refresh();
 
@@ -56,7 +55,7 @@ class ClusterTest extends BaseTest
         $indexNames = $cluster->getIndexNames();
         $this->assertNotContains($index->getName(), $indexNames);
 
-        $index = $this->_createIndex($indexName);
+        $index = $this->_createIndex();
         $cluster->refresh();
 
         // Now index should exist

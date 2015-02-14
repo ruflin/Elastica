@@ -92,7 +92,7 @@ class BoolTest extends BaseTest
 
     public function testBoolFilter()
     {
-        $index = $this->_createIndex('bool_filter_test');
+        $index = $this->_createIndex();
         $type = $index->getType('book');
 
         //index some test data

@@ -398,7 +398,7 @@ class TypeTest extends BaseTest
 
     public function testDeleteByQueryWithQueryAndOptions()
     {
-        $index = $this->_createIndex('test', true, 2);
+        $index = $this->_createIndex(null, true, 2);
         $type = new Type($index, 'test');
         $type->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
         $type->addDocument(new Document(2, array('name' => 'ruflin')));
@@ -501,7 +501,12 @@ class TypeTest extends BaseTest
         $type->addDocument(new Document(2, array('name' => 'ruflin')));
         $index->refresh();
 
+        // sleep a moment to be sure that all nodes in cluster has new type
+        sleep(5);
+
         $type->delete();
+        $index->optimize();
+
         $this->assertFalse($type->exists());
     }
 
@@ -824,6 +829,9 @@ class TypeTest extends BaseTest
         $type->addDocument(new Document(1, array('name' => 'test name')));
         $index->optimize();
 
+        // sleep a moment to be sure that all nodes in cluster has new type
+        sleep(5);
+
         //Test if type exists
         $this->assertTrue($type->exists());
 
@@ -833,10 +841,9 @@ class TypeTest extends BaseTest
 
     public function testGetMapping()
     {
-        $indexName = 'test';
         $typeName = 'test-type';
 
-        $index = $this->_createIndex($indexName);
+        $index = $this->_createIndex();
         $indexName = $index->getName();
         $type = new Type($index, $typeName);
         $mapping = new Mapping($type, $expect = array(
@@ -854,11 +861,10 @@ class TypeTest extends BaseTest
 
     public function testGetMappingAlias()
     {
-        $indexName = 'test';
         $aliasName = 'test-alias';
         $typeName = 'test-alias-type';
 
-        $index = $this->_createIndex($indexName);
+        $index = $this->_createIndex();
         $index->addAlias($aliasName);
         $type = new Type($index, $typeName);
         $mapping = new Mapping($type, $expect = array(

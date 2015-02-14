@@ -18,7 +18,7 @@ class GeoClusterTest extends BaseTest
             $this->markTestSkipped('geocluster-facet plugin not installed');
         }
 
-        $index = $this->_createIndex('geocluster_test');
+        $index = $this->_createIndex();
         $type = $index->getType('testQuery');
         $geoField = 'location';
 

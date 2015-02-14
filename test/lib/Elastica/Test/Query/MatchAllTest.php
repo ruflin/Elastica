@@ -20,8 +20,8 @@ class MatchAllTest extends BaseTest
 
     public function testMatchAllIndicesTypes()
     {
-        $index1 = $this->_createIndex('test1');
-        $index2 = $this->_createIndex('test2');
+        $index1 = $this->_createIndex();
+        $index2 = $this->_createIndex();
 
         $client = $index1->getClient();
 

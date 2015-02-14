@@ -43,11 +43,10 @@ class IndexTest extends BaseTest
 
     public function testGetMappingAlias()
     {
-        $indexName = 'test-mapping';
-        $aliasName = 'test-mapping-alias';
-
-        $index = $this->_createIndex($indexName);
+        $index = $this->_createIndex();
         $indexName = $index->getName();
+
+        $aliasName = 'test-mapping-alias';
         $index->addAlias($aliasName);
 
         $type = new Type($index, 'test');
@@ -430,18 +429,14 @@ class IndexTest extends BaseTest
 
     public function testClearCache()
     {
-        $client = $this->_getClient();
-        $index1 = $client->getIndex('test1');
-
-        $response = $index1->clearCache();
+        $index = $this->_createIndex();
+        $response = $index->clearCache();
         $this->assertFalse($response->hasError());
     }
 
     public function testFlush()
     {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test1');
-
+        $index = $this->_createIndex();
         $response = $index->flush();
         $this->assertFalse($response->hasError());
     }
@@ -668,7 +663,7 @@ class IndexTest extends BaseTest
 
     public function testAnalyze()
     {
-        $index = $this->_createIndex('analyze');
+        $index = $this->_createIndex();
         $index->optimize();
         sleep(2);
         $returnedTokens = $index->analyze('foo');

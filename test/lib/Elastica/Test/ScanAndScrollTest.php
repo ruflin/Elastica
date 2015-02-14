@@ -32,7 +32,7 @@ class ScanAndScrollTest extends BaseTest
         $query = new Query();
         $query->setSize(100);
 
-        $index = $this->_createIndex('test_1');
+        $index = $this->_createIndex();
         $index->refresh();  // Waits for the index to be fully created.
         $type = $index->getType('scanAndScrollTest');
 
@@ -49,7 +49,7 @@ class ScanAndScrollTest extends BaseTest
 
     public function testSizePerShard()
     {
-        $search = $this->_prepareSearch('test_2', 2, 20);
+        $search = $this->_prepareSearch(2, 20);
 
         $scanAndScroll = new ScanAndScroll($search);
         $scanAndScroll->sizePerShard = 5;
@@ -60,7 +60,7 @@ class ScanAndScrollTest extends BaseTest
 
     public function testScrollId()
     {
-        $search = $this->_prepareSearch('test_3', 1, 2);
+        $search = $this->_prepareSearch(1, 2);
 
         $scanAndScroll = new ScanAndScroll($search);
         $scanAndScroll->sizePerShard = 1;
@@ -74,7 +74,7 @@ class ScanAndScrollTest extends BaseTest
 
     public function testForeach()
     {
-        $search = $this->_prepareSearch('test_4', 2, 11);
+        $search = $this->_prepareSearch(2, 11);
 
         $scanAndScroll = new ScanAndScroll($search);
         $scanAndScroll->sizePerShard = 5;
@@ -103,9 +103,9 @@ class ScanAndScrollTest extends BaseTest
         return new ScanAndScroll(new Search($this->_getClient()));
     }
 
-    private function _prepareSearch($indexName, $indexShards, $docs)
+    private function _prepareSearch($indexShards, $docs)
     {
-        $index = $this->_createIndex($indexName, true, $indexShards);
+        $index = $this->_createIndex(null, true, $indexShards);
         $type = $index->getType('scanAndScrollTest');
 
         $insert = array();

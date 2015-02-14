@@ -80,7 +80,6 @@
   with_items:
     - config-0.yml
     - config-1.yml
-    - config-2.yml
     - logging.yml
   notify: restart elasticsearch
 

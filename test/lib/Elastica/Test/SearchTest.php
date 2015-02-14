@@ -31,8 +31,8 @@ class SearchTest extends BaseTest
         $client = $this->_getClient();
         $search = new Search($client);
 
-        $index1 = $this->_createIndex('test1');
-        $index2 = $this->_createIndex('test2');
+        $index1 = $this->_createIndex();
+        $index2 = $this->_createIndex();
 
         $search->addIndex($index1);
         $indices = $search->getIndices();
@@ -156,8 +156,8 @@ class SearchTest extends BaseTest
         $search1 = new Search($client);
         $search2 = new Search($client);
 
-        $index1 = $this->_createIndex('test1');
-        $index2 = $this->_createIndex('test2');
+        $index1 = $this->_createIndex();
+        $index2 = $this->_createIndex();
 
         $type1 = $index1->getType('type1');
         $type2 = $index1->getType('type2');
@@ -191,8 +191,8 @@ class SearchTest extends BaseTest
         $client = $this->_getClient();
         $search1 = new Search($client);
 
-        $index1 = $this->_createIndex('test1');
-        $index2 = $this->_createIndex('test2');
+        $index1 = $this->_createIndex();
+        $index2 = $this->_createIndex();
 
         $type1 = $index1->getType('hello1');
 
@@ -219,7 +219,7 @@ class SearchTest extends BaseTest
     {
         $client = $this->_getClient();
 
-        $index = $this->_createIndex('test');
+        $index = $this->_createIndex();
         $type = $index->getType('scrolltest');
 
         $docs = array();
@@ -386,7 +386,7 @@ class SearchTest extends BaseTest
 
     public function testSearchWithVersionOption()
     {
-        $index = $this->_createIndex('test1');
+        $index = $this->_createIndex();
         $doc = new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin'));
         $index->getType('test')->addDocument($doc);
         $index->refresh();
@@ -490,7 +490,7 @@ class SearchTest extends BaseTest
 
     public function testCount()
     {
-        $index = $this->_createIndex('eeee');
+        $index = $this->_createIndex();
         $search = new Search($index->getClient());
         $type = $index->getType('test');
 

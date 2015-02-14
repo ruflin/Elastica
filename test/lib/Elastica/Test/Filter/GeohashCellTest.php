@@ -25,7 +25,7 @@ class GeohashCellTest extends BaseTest
 
     public function testFilter()
     {
-        $index = $this->_createIndex('geohash_filter_test');
+        $index = $this->_createIndex();
         $type = $index->getType('test');
         $mapping = new \Elastica\Type\Mapping($type, array(
             'pin' => array(
