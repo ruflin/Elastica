@@ -20,6 +20,7 @@ use Elastica\Aggregation\Missing;
 use Elastica\Aggregation\Nested;
 use Elastica\Aggregation\Range;
 use Elastica\Aggregation\ReverseNested;
+use Elastica\Aggregation\ScriptedMetric;
 use Elastica\Aggregation\Stats;
 use Elastica\Aggregation\Sum;
 use Elastica\Aggregation\Terms;
@@ -194,11 +195,18 @@ class Aggregation implements DSL
      * scripted metric aggregation
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html
-     * @param string $name
+     *
+     * @param string      $name
+     * @param string|null $initScript
+     * @param string|null $mapScript
+     * @param string|null $combineScript
+     * @param string|null $reduceScript
+     *
+     * @return ScriptedMetric
      */
-    public function scripted_metric($name)
+    public function scripted_metric($name, $initScript = null, $mapScript = null, $combineScript = null, $reduceScript = null)
     {
-        throw new NotImplementedException();
+        return new ScriptedMetric($name, $initScript, $mapScript, $combineScript, $reduceScript);
     }
 
     /**
