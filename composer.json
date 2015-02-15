@@ -18,7 +18,6 @@
     "require-dev": {
         "munkie/elasticsearch-thrift-php": "1.4.*",
         "phpunit/phpunit": "4.1.*",
-        "guzzlehttp/guzzle": "4.2.*",
         "fabpot/php-cs-fixer": "~1.4"
     },
     "suggest": {
