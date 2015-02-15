@@ -2,6 +2,7 @@ CHANGES
 
 2015-02-14
 - Added availability to specify regexp options in \Elastica\Filters\Regexp #583 #777
+- Add HHVM as build in travis #649
 
 2015-02-11
 - Fixed issue with OutOfMemory exception in travis builds
