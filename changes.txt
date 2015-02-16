@@ -1,11 +1,16 @@
 CHANGES
 
+2015-02-16
+- Update elasticsearch compatibility to 1.4.3 #782
+- Add support for scripted metric aggrations #780
+
 2015-02-14
 - Added availability to specify regexp options in \Elastica\Filters\Regexp #583 #777
 - Add HHVM as build in travis #649
 
 2015-02-11
-- Fixed issue with OutOfMemory exception in travis builds
+- Fixed issue with OutOfMemory exception in travis builds #775
+- Add support for filters aggregation #773
 
 2015-01-27
 - Exception\ElasticsearchException now can be catched like all other exceptions as Exception\ExceptionInterface
