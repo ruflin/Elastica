@@ -8,6 +8,9 @@ use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
+/**
+ * @todo Add test for Statistical with setScript
+ */
 class StatisticalTest extends BaseTest
 {
     public function testStatisticalWithSetField()
@@ -70,13 +73,5 @@ class StatisticalTest extends BaseTest
         $this->assertEquals(165, $facets['stats']['total']);
         $this->assertEquals(10, $facets['stats']['min']);
         $this->assertEquals(90, $facets['stats']['max']);
-    }
-
-    /**
-     * @todo
-     */
-    public function testStatisticalWithSetScript()
-    {
-        $this->markTestIncomplete('Test for setting the script value');
     }
 }
