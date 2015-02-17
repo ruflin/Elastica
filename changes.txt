@@ -1,4 +1,6 @@
 CHANGES
+2015-02-04
+- Reset PHP 5.3 tests
 
 2015-02-16
 - Update elasticsearch compatibility to 1.4.3 #782

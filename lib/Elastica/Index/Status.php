@@ -93,7 +93,7 @@ class Status
             return array_keys($data['aliases']);
         }
 
-        return [];
+        return array();
     }
 
     /**
