@@ -4,6 +4,8 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Query\Match;
+use Elastica\Query\MatchPhrase;
+use Elastica\Query\MatchPhrasePrefix;
 use Elastica\Test\Base as BaseTest;
 
 class MatchTest extends BaseTest
@@ -135,6 +137,34 @@ class MatchTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
+    public function testMatchPhraseAlias()
+    {
+        $client = $this->_getClient();
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
+        $type = $index->getType('test');
+
+        $doc = new Document(1, array('name' => 'Basel-Stadt'));
+        $type->addDocument($doc);
+        $doc = new Document(2, array('name' => 'New York'));
+        $type->addDocument($doc);
+        $doc = new Document(3, array('name' => 'New Hampshire'));
+        $type->addDocument($doc);
+        $doc = new Document(4, array('name' => 'Basel Land'));
+        $type->addDocument($doc);
+
+        $index->refresh();
+
+        $field = 'name';
+
+        $query = new MatchPhrase();
+        $query->setFieldQuery($field, 'New York');
+
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(1, $resultSet->count());
+    }
+
     public function testMatchPhrasePrefix()
     {
         $client = $this->_getClient();
@@ -164,6 +194,35 @@ class MatchTest extends BaseTest
 
         $this->assertEquals(2, $resultSet->count());
     }
+
+    public function testMatchPhrasePrefixAlias()
+    {
+        $client = $this->_getClient();
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
+        $type = $index->getType('test');
+
+        $doc = new Document(1, array('name' => 'Basel-Stadt'));
+        $type->addDocument($doc);
+        $doc = new Document(2, array('name' => 'New York'));
+        $type->addDocument($doc);
+        $doc = new Document(3, array('name' => 'New Hampshire'));
+        $type->addDocument($doc);
+        $doc = new Document(4, array('name' => 'Basel Land'));
+        $type->addDocument($doc);
+
+        $index->refresh();
+
+        $field = 'name';
+
+        $query = new MatchPhrasePrefix();
+        $query->setFieldQuery($field, 'New');
+
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(2, $resultSet->count());
+    }
+
 
     public function testMatchFuzzinessType()
     {
