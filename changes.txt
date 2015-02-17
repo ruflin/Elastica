@@ -1,11 +1,12 @@
 CHANGES
 
 2015-02-17
+- Release v1.4.3.0
 - Added Elastica\Query\MatchPhrase #599
 - Added Elastica\Query\MatchPhrasePrefix #599
 
 2015-02-04
-- Reset PHP 5.3 tests
+- Reset PHP 5.3 tests and enable compatibility for PHP 5.3 again
 
 2015-02-16
 - Update elasticsearch compatibility to 1.4.3 #782
@@ -20,7 +21,8 @@ CHANGES
 - Add support for filters aggregation #773
 
 2015-01-27
-- Exception\ElasticsearchException now can be catched like all other exceptions as Exception\ExceptionInterface
+- Housekeeping, coding standard #764 
+- Exception\ElasticsearchException now can be catched like all other exceptions as Exception\ExceptionInterface #762
 
 2015-01-25
 - Release v1.4.2.0

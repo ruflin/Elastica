@@ -105,7 +105,7 @@ class MappingTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $this->markTestIncomplete('nested mapping is not set right yet');
+        //$this->markTestIncomplete('nested mapping is not set right yet');
         $mapping = new Mapping($type,
             array(
                 'test' => array(
@@ -122,7 +122,8 @@ class MappingTest extends BaseTest
             )
         );
 
-        $type->setMapping($mapping);
+        $response = $type->setMapping($mapping);
+		$this->assertFalse($response->hasError());
 
         $doc = new Document(1, array(
             'user' => array(
@@ -136,6 +137,7 @@ class MappingTest extends BaseTest
 
         $index->refresh();
         $resultSet = $type->search('ruflin');
+		$this->assertEquals($resultSet->count(), 1);
 
         $index->delete();
     }
