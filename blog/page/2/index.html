@@ -9,9 +9,7 @@
   <meta name="author" content="@ruflin">
 
   
-  <meta name="description" content="Elastica v0.90.10.0 download. This release is compatible with elasticsearch 0.90.10 Dependencies Project Version Required Elasticsearch
-0.90.10
-yes| &hellip;">
+  <meta name="description" content="Elastica v1.0.0.0 download. This release is compatible with elasticsearch 1.0.0. There is a larger list of breaking changes in this release on the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +81,97 @@ yes| &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/02/12/release-v1-dot-0-0-dot-0/">Release v1.0.0.0</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-12T20:13:31+01:00" pubdate data-updated="true">Feb 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Elastica v1.0.0.0 <a href="https://github.com/ruflin/Elastica/tree/v1.0.0.0">download</a>. This release is compatible with elasticsearch 1.0.0. There is a larger list of breaking changes in this release on the elasticsearch site. This will mean you have to adapt some code in your app but perhaps also on the configuration of elasticsearch. All changes can be found here: <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/breaking-changes.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/breaking-changes.html</a></p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.0.0">Elasticsearch</a></td>
+<td>1.0.0</td>
+<td>yes|</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1">Elasticsearch mapper attachments plugin</a></td>
+<td>2.0.0.RC1</td>
+<td>no|</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC1">Elasticsearch thrift transport plugin</a></td>
+<td>2.0.0.RC1</td>
+<td>no|</td>
+</tr>
+<tr>
+<td></td>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.9">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.9</td>
+<td>no|</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Updated to elasticsearch 1.0: <a href="http://www.elasticsearch.org/blog/1-0-0-released/">http://www.elasticsearch.org/blog/1-0-0-released/</a></li>
+<li>Add aggregations</li>
+<li>Setting shard timeout doesn&rsquo;t work #547</li>
+<li>Remove Elastica\Query\Field and Elastica\Query\Text, which are not supported in ES 1.0.0.RC1</li>
+<li>Minor tweaking of request and result handling classes to adjust for changes in ES 1.0.0.RC1</li>
+<li>Update mapper-attachments plugin to version 2.0.0.RC1 in .travis.yml</li>
+<li>Adjust tests to account for changes in ES 1.0.0.RC1</li>
+<li>Prevent the geocluster-facet plugin from being installed in test/bin/run_elasticsearch.sh as the plugin has not yet been updated for ES 1.0.0.RC1</li>
+<li>Added Elastica\Query\DisMax</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -745,6 +834,10 @@ if use Elastica\Log outside we need use as(<a href="https://github.com/php-fig/l
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/02/17/release-v1-dot-4-3-dot-0/">Release v1.4.3.0</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/25/release-v1-dot-4-2-dot-0/">Release v1.4.2.0</a>
       </li>
     
@@ -758,10 +851,6 @@ if use Elastica\Log outside we need use as(<a href="https://github.com/php-fig/l
     
       <li class="post">
         <a href="/2014/06/14/release-v1-dot-2-1-dot-0/">Release v1.2.1.0</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/04/27/release-v1-dot-1-1-dot-1/">Release v1.1.1.1</a>
       </li>
     
   </ul>

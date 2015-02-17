@@ -69,16 +69,20 @@
         <lastmod>2015-01-25T14:13:34+01:00</lastmod>
     </url>
     <url>
+        <loc>http://Elastica.io/2015/02/17/release-v1-dot-4-3-dot-0/</loc>
+        <lastmod>2015-02-17T20:59:30+01:00</lastmod>
+    </url>
+    <url>
         <loc>http://Elastica.io/404.html</loc>
         <lastmod>2014-09-22T17:37:43+02:00</lastmod>
     </url>
     <url>
         <loc>http://Elastica.io/blog/archives/</loc>
-        <lastmod>2015-01-25T14:13:34+01:00</lastmod>
+        <lastmod>2015-02-17T20:59:30+01:00</lastmod>
     </url>
     <url>
         <loc>http://Elastica.io/blog/</loc>
-        <lastmod>2015-01-25T14:13:34+01:00</lastmod>
+        <lastmod>2015-02-17T20:59:30+01:00</lastmod>
     </url>
     <url>
         <loc>http://Elastica.io/contribute/build.html</loc>
@@ -146,7 +150,7 @@
     </url>
     <url>
         <loc>http://Elastica.io/</loc>
-        <lastmod>2014-09-22T17:37:43+02:00</lastmod>
+        <lastmod>2015-02-17T19:50:25+01:00</lastmod>
     </url>
     <url>
         <loc>http://Elastica.io/migration/0.90.2/upsert.html</loc>
@@ -174,7 +178,7 @@
     </url>
     <url>
         <loc>http://Elastica.io/releases/</loc>
-        <lastmod>2015-01-25T14:15:07+01:00</lastmod>
+        <lastmod>2015-02-17T19:48:57+01:00</lastmod>
     </url>
     <url>
         <loc>http://Elastica.io/robots.txt</loc>
