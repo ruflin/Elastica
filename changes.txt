@@ -1,4 +1,9 @@
 CHANGES
+
+2015-02-17
+- Added Elastica\Query\MatchPhrase #599
+- Added Elastica\Query\MatchPhrasePrefix #599
+
 2015-02-04
 - Reset PHP 5.3 tests
 
