@@ -1,5 +1,8 @@
 CHANGES
 
+2015-02-18
+- Added support for percentiles aggregation
+
 2015-02-17
 - Release v1.4.3.0
 - Added Elastica\Query\MatchPhrase #599

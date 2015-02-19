@@ -18,6 +18,7 @@ use Elastica\Aggregation\Max;
 use Elastica\Aggregation\Min;
 use Elastica\Aggregation\Missing;
 use Elastica\Aggregation\Nested;
+use Elastica\Aggregation\Percentiles;
 use Elastica\Aggregation\Range;
 use Elastica\Aggregation\ReverseNested;
 use Elastica\Aggregation\ScriptedMetric;
@@ -138,11 +139,13 @@ class Aggregation implements DSL
      * percentiles aggregation
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html
-     * @param string $name
+     * @param  string      $name  the name of this aggregation
+     * @param  string      $field the field on which to perform this aggregation
+     * @return Percentiles
      */
-    public function percentiles($name)
+    public function percentiles($name, $field = null)
     {
-        throw new NotImplementedException();
+        return new Percentiles($name, $field);
     }
 
     /**
@@ -241,7 +244,7 @@ class Aggregation implements DSL
      * filters aggregation
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html
-     * @param string $name
+     * @param  string  $name
      * @return Filters
      */
     public function filters($name)
