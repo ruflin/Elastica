@@ -43,10 +43,13 @@ abstract class AbstractTransport extends Param
 
     /**
      * @param \Elastica\Connection $connection Connection object
+     * @return $this
      */
     public function setConnection(Connection $connection)
     {
         $this->_connection = $connection;
+
+        return $this;
     }
 
     /**

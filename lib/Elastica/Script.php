@@ -38,9 +38,11 @@ class Script extends AbstractUpdateAction
     public function __construct($script, array $params = null, $lang = null, $id = null)
     {
         $this->setScript($script);
+
         if ($params) {
             $this->setParams($params);
         }
+
         if ($lang) {
             $this->setLang($lang);
         }
@@ -51,11 +53,14 @@ class Script extends AbstractUpdateAction
     }
 
     /**
-     * @param string $lang
+     * @param  string $lang
+     * @return $this
      */
     public function setLang($lang)
     {
         $this->_lang = $lang;
+
+        return $this;
     }
 
     /**
@@ -67,11 +72,14 @@ class Script extends AbstractUpdateAction
     }
 
     /**
-     * @param string $script
+     * @param  string $script
+     * @return $this
      */
     public function setScript($script)
     {
         $this->_script = $script;
+
+        return $this;
     }
 
     /**
@@ -118,6 +126,7 @@ class Script extends AbstractUpdateAction
         if (isset($data['lang'])) {
             $script->setLang($data['lang']);
         }
+
         if (isset($data['params'])) {
             if (!is_array($data['params'])) {
                 throw new InvalidException("\$data['params'] should be array");
@@ -136,9 +145,11 @@ class Script extends AbstractUpdateAction
         $array = array(
             'script' => $this->_script,
         );
+
         if (!empty($this->_params)) {
             $array['params'] = $this->_params;
         }
+
         if ($this->_lang) {
             $array['lang'] = $this->_lang;
         }

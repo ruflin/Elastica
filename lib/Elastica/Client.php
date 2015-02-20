@@ -217,6 +217,7 @@ class Client
      *
      * @param  string                               $header      The HTTP Header
      * @param  string                               $headerValue The HTTP Header Value
+     * @return $this
      * @throws \Elastica\Exception\InvalidException If $header or $headerValue is not a string
      */
     public function addHeader($header, $headerValue)
@@ -226,12 +227,15 @@ class Client
         } else {
             throw new InvalidException('Header must be a string');
         }
+
+        return $this;
     }
 
     /**
      * Remove a HTTP Header
      *
      * @param  string                               $header The HTTP Header to remove
+     * @return $this
      * @throws \Elastica\Exception\InvalidException IF $header is not a string
      */
     public function removeHeader($header)
@@ -243,6 +247,8 @@ class Client
         } else {
             throw new InvalidException('Header must be a string');
         }
+
+        return $this;
     }
 
     /**

@@ -521,6 +521,8 @@ class Type implements SearchableInterface
     public function setSerializer($serializer)
     {
         $this->_serializer = $serializer;
+
+        return $this;
     }
 
     /**

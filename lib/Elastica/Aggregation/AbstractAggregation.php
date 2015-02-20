@@ -34,6 +34,8 @@ abstract class AbstractAggregation extends Param
     public function setName($name)
     {
         $this->_name = $name;
+
+        return $this;
     }
 
     /**

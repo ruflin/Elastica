@@ -64,7 +64,7 @@ class Fuzzy extends AbstractQuery
         $keyArray = array_keys($params);
         $params[$keyArray[0]][$param] = $value;
 
-        return $this->setparam($keyArray[0], $params[$keyArray[0]]);
+        return $this->setParam($keyArray[0], $params[$keyArray[0]]);
     }
 
     /**

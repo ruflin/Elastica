@@ -389,7 +389,10 @@ class Query extends Param
             $this->getParams(),
             $suggest->toArray()
         ));
+
         $this->_suggest = 1;
+        
+        return $this;
     }
 
     /**

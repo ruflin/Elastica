@@ -51,18 +51,24 @@ class ConnectionPool
 
     /**
      * @param \Elastica\Connection $connection
+     * @return $this
      */
     public function addConnection(Connection $connection)
     {
         $this->_connections[] = $connection;
+
+        return $this;
     }
 
     /**
      * @param array|\Elastica\Connection[] $connections
+     * @return $this
      */
     public function setConnections(array $connections)
     {
         $this->_connections = $connections;
+
+        return $this;
     }
 
     /**

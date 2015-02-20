@@ -277,22 +277,26 @@ class Bulk
 
     /**
      * Set a url parameter on the request bulk request.
-     * @var string $name name of the parameter
-     * @var string $value value of the parameter
+     * @param  string $name  name of the parameter
+     * @param  string $value value of the parameter
+     * @return $this
      */
     public function setRequestParam($name, $value)
     {
-        $this->_requestParams[ $name ] = $value;
+        $this->_requestParams[$name] = $value;
+
+        return $this;
     }
 
     /**
      * Set the amount of time that the request will wait the shards to come on line.
      * Requires Elasticsearch version >= 0.90.8.
-     * @var string $time timeout in Elasticsearch time format
+     * @param  string $time timeout in Elasticsearch time format
+     * @return $this
      */
     public function setShardTimeout($time)
     {
-        $this->setRequestParam('timeout', $time);
+        return $this->setRequestParam('timeout', $time);
     }
 
     /**
