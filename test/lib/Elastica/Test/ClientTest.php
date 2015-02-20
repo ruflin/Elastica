@@ -6,6 +6,7 @@ use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\Connection\HttpException;
+use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Request;
 use Elastica\Script;
@@ -1001,5 +1002,63 @@ class ClientTest extends BaseTest
         $responseArray = $response->getData();
 
         $this->assertEquals(1, $responseArray['hits']['total']);
+    }
+
+    public function testAddHeader()
+    {
+        $client = new Client();
+
+        // add one header
+        $client->addHeader('foo', 'bar');
+        $this->assertEquals(array('foo' => 'bar'), $client->getConfigValue('headers'));
+
+        // check class
+        $this->assertInstanceOf('Elastica\Client', $client->addHeader('foo', 'bar'));
+
+        // check invalid parameters
+        try {
+            $client->addHeader(new \stdClass(), 'foo');
+            $this->fail('Header name is not a string but exception not thrown');
+        } catch (InvalidException $ex) {
+
+        }
+
+        try {
+            $client->addHeader('foo', new \stdClass());
+            $this->fail('Header value is not a string but exception not thrown');
+        } catch (InvalidException $ex) {
+
+        }
+    }
+
+    public function testRemoveHeader()
+    {
+        $client = new Client();
+
+        // set headers
+        $headers = array(
+            'first' => 'first value',
+            'second' => 'second value',
+        );
+        foreach ($headers as $key => $value) {
+            $client->addHeader($key, $value);
+        }
+        $this->assertEquals($headers, $client->getConfigValue('headers'));
+
+        // remove one
+        $client->removeHeader('first');
+        unset($headers['first']);
+        $this->assertEquals($headers, $client->getConfigValue('headers'));
+
+        // check class
+        $this->assertInstanceOf('Elastica\Client', $client->removeHeader('second'));
+
+        // check invalid parameter
+        try {
+            $client->removeHeader(new \stdClass());
+            $this->fail('Header name is not a string but exception not thrown');
+        } catch (InvalidException $ex) {
+
+        }
     }
 }

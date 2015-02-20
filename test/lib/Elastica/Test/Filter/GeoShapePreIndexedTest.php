@@ -87,4 +87,12 @@ class GeoShapePreIndexedTest extends BaseTest
 
         $index->delete();
     }
+
+    public function testSetRelation()
+    {
+        $gsp = new GeoShapePreIndexed('location', '1', 'type', 'indexName', 'location');
+        $gsp->setRelation(AbstractGeoShape::RELATION_INTERSECT);
+        $this->assertEquals(AbstractGeoShape::RELATION_INTERSECT, $gsp->getRelation());
+        $this->assertInstanceOf('Elastica\Filter\GeoShapePreIndexed', $gsp->setRelation(AbstractGeoShape::RELATION_INTERSECT));
+    }
 }

@@ -818,6 +818,14 @@ class TypeTest extends BaseTest
         $this->assertEquals('hans', $data['username']);
     }
 
+    public function testSetSerializer()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('user');
+        $ret = $type->setSerializer(array(new SerializerMock(), 'serialize'));
+        $this->assertInstanceOf('Elastica\Type', $ret);
+    }
+
     public function testExists()
     {
         $index = $this->_createIndex();

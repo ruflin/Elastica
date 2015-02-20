@@ -30,6 +30,24 @@ class ConnectionPollTest extends BaseTest
         $pool->setConnections($connections);
 
         $this->assertEquals($connections, $pool->getConnections());
+
+        $this->assertInstanceOf('Elastica\Connection\ConnectionPool', $pool->setConnections($connections));
+    }
+
+    public function testAddConnection()
+    {
+        $pool = $this->createPool();
+        $pool->setConnections(array());
+
+        $connections = $this->getConnections(5);
+
+        foreach ($connections as $connection) {
+            $pool->addConnection($connection);
+        }
+
+        $this->assertEquals($connections, $pool->getConnections());
+
+        $this->assertInstanceOf('Elastica\Connection\ConnectionPool', $pool->addConnection($connections[0]));
     }
 
     public function testHasConnection()

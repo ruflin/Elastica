@@ -646,6 +646,18 @@ class BulkTest extends BaseTest
         $this->assertEquals(5, $metadata[ '_retry_on_conflict' ]);
     }
 
+    public function testSetShardTimeout()
+    {
+        $bulk = new Bulk($this->_getClient());
+        $this->assertInstanceOf('Elastica\Bulk', $bulk->setShardTimeout(10));
+    }
+
+    public function testSetRequestParam()
+    {
+        $bulk = new Bulk($this->_getClient());
+        $this->assertInstanceOf('Elastica\Bulk', $bulk->setRequestParam('key', 'value'));
+    }
+
     public function udpDataProvider()
     {
         return array(

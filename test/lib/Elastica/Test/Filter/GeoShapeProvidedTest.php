@@ -83,4 +83,12 @@ class GeoShapeProvidedTest extends BaseTest
 
         $this->assertEquals($expected, $gsp->toArray());
     }
+
+    public function testSetRelation()
+    {
+        $gsp = new GeoShapeProvided('location', array(array(25.0, 75.0), array(75.0, 25.0)));
+        $gsp->setRelation(AbstractGeoShape::RELATION_INTERSECT);
+        $this->assertEquals(AbstractGeoShape::RELATION_INTERSECT, $gsp->getRelation());
+        $this->assertInstanceOf('Elastica\Filter\GeoShapeProvided', $gsp->setRelation(AbstractGeoShape::RELATION_INTERSECT));
+    }
 }

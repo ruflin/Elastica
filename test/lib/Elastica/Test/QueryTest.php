@@ -81,6 +81,13 @@ class QueryTest extends BaseTest
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }
 
+    public function testSetSuggestMustReturnQueryInstance()
+    {
+        $query = new Query();
+        $suggest = new Suggest();
+        $this->assertInstanceOf('Elastica\Query', $query->setSuggest($suggest));
+    }
+
     public function testArrayQuery()
     {
         $query = array(
