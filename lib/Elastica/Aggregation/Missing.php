@@ -22,7 +22,7 @@ class Missing extends AbstractAggregation
     /**
      * Set the field for this aggregation
      * @param  string  $field the name of the document field on which to perform this aggregation
-     * @return Missing
+     * @return $this
      */
     public function setField($field)
     {

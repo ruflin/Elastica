@@ -21,7 +21,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  mixed                 $values
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setField($field, $values)
     {
@@ -34,7 +34,7 @@ class Match extends AbstractQuery
      * @param  string                $field
      * @param  string                $key
      * @param  string                $value
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldParam($field, $key, $value)
     {
@@ -52,7 +52,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  string                $query
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldQuery($field, $query)
     {
@@ -64,7 +64,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  string                $type
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldType($field, $type)
     {
@@ -76,7 +76,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  string                $operator
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldOperator($field, $operator)
     {
@@ -88,7 +88,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  string                $analyzer
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldAnalyzer($field, $analyzer)
     {
@@ -102,7 +102,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  float                 $boost
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldBoost($field, $boost = 1.0)
     {
@@ -114,7 +114,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  int|string            $minimumShouldMatch
-     * @return \Elastica\Query\Match
+     * @return $this
      * @link Possible values for minimum_should_match http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
     public function setFieldMinimumShouldMatch($field, $minimumShouldMatch)
@@ -127,7 +127,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  mixed                 $fuzziness
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldFuzziness($field, $fuzziness)
     {
@@ -139,7 +139,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  string                $fuzzyRewrite
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldFuzzyRewrite($field, $fuzzyRewrite)
     {
@@ -151,7 +151,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  int                   $prefixLength
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldPrefixLength($field, $prefixLength)
     {
@@ -163,7 +163,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  int                   $maxExpansions
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldMaxExpansions($field, $maxExpansions)
     {
@@ -177,7 +177,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  string                $zeroTermQuery
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldZeroTermsQuery($field, $zeroTermQuery = 'none')
     {
@@ -189,7 +189,7 @@ class Match extends AbstractQuery
      *
      * @param  string                $field
      * @param  float                 $cutoffFrequency
-     * @return \Elastica\Query\Match
+     * @return $this
      */
     public function setFieldCutoffFrequency($field, $cutoffFrequency)
     {

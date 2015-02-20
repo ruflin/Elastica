@@ -23,7 +23,7 @@ class GeoDistance extends AbstractFacet
      * )
      *
      * @param  array                       $ranges Numerical array with range definitions.
-     * @return \Elastica\Facet\GeoDistance
+     * @return $this
      */
     public function setRanges(array $ranges)
     {
@@ -36,7 +36,7 @@ class GeoDistance extends AbstractFacet
      * @param  string                      $typeField index type and field e.g foo.bar
      * @param  float                       $latitude
      * @param  float                       $longitude
-     * @return \Elastica\Facet\GeoDistance
+     * @return $this
      */
     public function setGeoPoint($typeField, $latitude, $longitude)
     {

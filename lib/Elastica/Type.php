@@ -517,6 +517,7 @@ class Type implements SearchableInterface
      * @see \Elastica\Type::addObject
      *
      * @param array|string $serializer @see \Elastica\Type::_serializer
+     * @return $this
      */
     public function setSerializer($serializer)
     {

@@ -30,8 +30,8 @@ class GeoBoundingBox extends AbstractFilter
      *
      * @param  string                               $key         Key
      * @param  array                                $coordinates Array with top left coordinate as first and bottom right coordinate as second element
+     * @return $this
      * @throws \Elastica\Exception\InvalidException If $coordinates doesn't have two elements
-     * @return \Elastica\Filter\GeoBoundingBox      Current object
      */
     public function addCoordinates($key, array $coordinates)
     {

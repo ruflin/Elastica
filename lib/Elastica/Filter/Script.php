@@ -38,7 +38,7 @@ class Script extends AbstractFilter
      * Sets script object
      *
      * @param  \Elastica\Script|string|array $script
-     * @return \Elastica\Filter\Script
+     * @return $this
      */
     public function setScript($script)
     {

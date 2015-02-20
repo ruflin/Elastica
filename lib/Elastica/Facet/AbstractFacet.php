@@ -44,7 +44,7 @@ abstract class AbstractFacet extends Param
      *
      * @param  string                               $name The name of the facet.
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Facet\AbstractFacet
+     * @return $this
      */
     public function setName($name)
     {
@@ -70,7 +70,7 @@ abstract class AbstractFacet extends Param
      * Sets a filter for this facet.
      *
      * @param  \Elastica\Filter\AbstractFilter $filter A filter to apply on the facet.
-     * @return \Elastica\Facet\AbstractFacet
+     * @return $this
      */
     public function setFilter(AbstractFilter $filter)
     {
@@ -83,7 +83,7 @@ abstract class AbstractFacet extends Param
      * Elasticsearch default value.
      *
      * @param  bool                          $global Flag to either run the facet globally.
-     * @return \Elastica\Facet\AbstractFacet
+     * @return $this
      */
     public function setGlobal($global = true)
     {
@@ -94,7 +94,7 @@ abstract class AbstractFacet extends Param
      * Sets the path to the nested document
      *
      * @param  string                        $nestedPath Nested path
-     * @return \Elastica\Facet\AbstractFacet
+     * @return $this
      */
     public function setNested($nestedPath)
     {
@@ -105,7 +105,7 @@ abstract class AbstractFacet extends Param
      * Sets the scope
      *
      * @param  string                        $scope Scope
-     * @return \Elastica\Facet\AbstractFacet
+     * @return $this
      */
     public function setScope($scope)
     {
@@ -130,7 +130,7 @@ abstract class AbstractFacet extends Param
      *
      * @param  string                        $key   The key of the param to set.
      * @param  mixed                         $value The value of the param.
-     * @return \Elastica\Facet\AbstractFacet
+     * @return $this
      */
     protected function _setFacetParam($key, $value)
     {

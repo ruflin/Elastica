@@ -64,7 +64,7 @@ class Health
     /**
      * Refreshes the health data for the cluster.
      *
-     * @return \Elastica\Cluster\Health
+     * @return $this
      */
     public function refresh()
     {

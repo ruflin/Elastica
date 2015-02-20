@@ -138,7 +138,7 @@ class Client
      * Sets specific config values (updates and keeps default values)
      *
      * @param  array            $config Params
-     * @return \Elastica\Client
+     * @return $this
      */
     public function setConfig(array $config)
     {
@@ -175,7 +175,7 @@ class Client
      *
      * @param  string           $key   Key to set
      * @param  mixed            $value Value
-     * @return \Elastica\Client Client object
+     * @return $this
      */
     public function setConfigValue($key, $value)
     {
@@ -449,7 +449,7 @@ class Client
 
     /**
      * @param  \Elastica\Connection $connection
-     * @return \Elastica\Client
+     * @return $this
      */
     public function addConnection(Connection $connection)
     {
@@ -495,7 +495,7 @@ class Client
 
     /**
      * @param  array|\Elastica\Connection[] $connections
-     * @return \Elastica\Client
+     * @return $this
      */
     public function setConnections(array $connections)
     {

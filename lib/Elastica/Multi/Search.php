@@ -52,7 +52,7 @@ class Search
 
     /**
      * @param  \Elastica\Client       $client
-     * @return \Elastica\Multi\Search
+     * @return $this
      */
     public function setClient(Client $client)
     {
@@ -62,7 +62,7 @@ class Search
     }
 
     /**
-     * @return \Elastica\Multi\Search
+     * @return $this
      */
     public function clearSearches()
     {
@@ -74,7 +74,7 @@ class Search
     /**
      * @param  \Elastica\Search       $search
      * @param  string                 $key    Optional key
-     * @return \Elastica\Multi\Search
+     * @return $this
      */
     public function addSearch(BaseSearch $search, $key = null)
     {
@@ -89,7 +89,7 @@ class Search
 
     /**
      * @param  array|\Elastica\Search[] $searches
-     * @return \Elastica\Multi\Search
+     * @return $this
      */
     public function addSearches(array $searches)
     {
@@ -102,7 +102,7 @@ class Search
 
     /**
      * @param  array|\Elastica\Search[] $searches
-     * @return \Elastica\Multi\Search
+     * @return $this
      */
     public function setSearches(array $searches)
     {
@@ -122,7 +122,7 @@ class Search
 
     /**
      * @param  string                 $searchType
-     * @return \Elastica\Multi\Search
+     * @return $this
      */
     public function setSearchType($searchType)
     {

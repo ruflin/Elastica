@@ -221,7 +221,7 @@ class Response
      * from the \Elastica\Client::_callService .
      *
      * @param  array              $transferInfo The curl transfer information.
-     * @return \Elastica\Response Current object
+     * @return $this
      */
     public function setTransferInfo(array $transferInfo)
     {
@@ -244,7 +244,7 @@ class Response
      * Sets the query time
      *
      * @param  float              $queryTime Query time
-     * @return \Elastica\Response Current object
+     * @return $this
      */
     public function setQueryTime($queryTime)
     {

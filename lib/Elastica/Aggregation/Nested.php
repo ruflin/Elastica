@@ -22,7 +22,7 @@ class Nested extends AbstractAggregation
     /**
      * Set the nested path for this aggregation
      * @param  string $path
-     * @return Nested
+     * @return $this
      */
     public function setPath($path)
     {

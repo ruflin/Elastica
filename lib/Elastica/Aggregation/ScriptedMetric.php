@@ -38,8 +38,7 @@ class ScriptedMetric extends AbstractAggregation
      * Set the field for this aggregation
      *
      * @param  string $script the name of the document field on which to perform this aggregation
-     *
-     * @return static
+     * @return $this
      */
     public function setCombineScript($script)
     {
@@ -50,8 +49,7 @@ class ScriptedMetric extends AbstractAggregation
      * Set the field for this aggregation
      *
      * @param  string $script the name of the document field on which to perform this aggregation
-     *
-     * @return static
+     * @return $this
      */
     public function setInitScript($script)
     {
@@ -62,8 +60,7 @@ class ScriptedMetric extends AbstractAggregation
      * Set the field for this aggregation
      *
      * @param  string $script the name of the document field on which to perform this aggregation
-     *
-     * @return static
+     * @return $this
      */
     public function setMapScript($script)
     {
@@ -74,8 +71,7 @@ class ScriptedMetric extends AbstractAggregation
      * Set the field for this aggregation
      *
      * @param  string $script the name of the document field on which to perform this aggregation
-     *
-     * @return static
+     * @return $this
      */
     public function setReduceScript($script)
     {

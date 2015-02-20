@@ -28,7 +28,7 @@ abstract class AbstractRescore extends Param
      * Sets window_size
      *
      * @param  int               $size
-     * @return \Elastica\Rescore
+     * @return $this
      */
     public function setWindowSize($size)
     {

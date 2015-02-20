@@ -106,7 +106,7 @@ class Document extends AbstractUpdateAction
      * @param  string                               $key
      * @param  mixed                                $value
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Document
+     * @return $this
      */
     public function set($key, $value)
     {
@@ -130,7 +130,7 @@ class Document extends AbstractUpdateAction
     /**
      * @param  string                               $key
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Document
+     * @return $this
      */
     public function remove($key)
     {
@@ -148,7 +148,7 @@ class Document extends AbstractUpdateAction
      * @deprecated
      * @param  string             $key   Document entry key
      * @param  mixed              $value Document entry value
-     * @return \Elastica\Document
+     * @return $this
      */
     public function add($key, $value)
     {
@@ -169,7 +169,7 @@ class Document extends AbstractUpdateAction
      * @param  string             $key      Key to add the file to
      * @param  string             $filepath Path to add the file
      * @param  string             $mimeType OPTIONAL Header mime type
-     * @return \Elastica\Document
+     * @return $this
      */
     public function addFile($key, $filepath, $mimeType = '')
     {
@@ -189,7 +189,7 @@ class Document extends AbstractUpdateAction
      *
      * @param  string             $key     Document key
      * @param  string             $content Raw file content
-     * @return \Elastica\Document
+     * @return $this
      */
     public function addFileContent($key, $content)
     {
@@ -205,7 +205,7 @@ class Document extends AbstractUpdateAction
      * @param  float              $latitude  Latitude value
      * @param  float              $longitude Longitude value
      * @link http://www.elasticsearch.org/guide/reference/mapping/geo-point-type.html
-     * @return \Elastica\Document
+     * @return $this
      */
     public function addGeoPoint($key, $latitude, $longitude)
     {
@@ -220,7 +220,7 @@ class Document extends AbstractUpdateAction
      * Overwrites the current document data with the given data
      *
      * @param  array|string       $data Data array
-     * @return \Elastica\Document
+     * @return $this
      */
     public function setData($data)
     {
@@ -269,7 +269,7 @@ class Document extends AbstractUpdateAction
 
     /**
      * @param  bool               $value
-     * @return \Elastica\Document
+     * @return $this
      */
     public function setDocAsUpsert($value)
     {
@@ -320,7 +320,7 @@ class Document extends AbstractUpdateAction
     /**
      * @param  array|\Elastica\Document             $data
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Document
+     * @return self
      */
     public static function create($data)
     {

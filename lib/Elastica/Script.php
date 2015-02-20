@@ -93,7 +93,7 @@ class Script extends AbstractUpdateAction
     /**
      * @param  string|array|\Elastica\Script        $data
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Script
+     * @return self
      */
     public static function create($data)
     {
@@ -113,7 +113,7 @@ class Script extends AbstractUpdateAction
     /**
      * @param  array                                $data
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Script
+     * @return self
      */
     protected static function _createFromArray(array $data)
     {

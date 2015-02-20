@@ -32,7 +32,7 @@ class HasChild extends AbstractFilter
      * Sets query object
      *
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Filter\HasChild                            Current object
+     * @return $this
      */
     public function setQuery($query)
     {
@@ -46,7 +46,7 @@ class HasChild extends AbstractFilter
      * Sets the filter object
      *
      * @param  \Elastica\Filter\AbstractFilter $filter
-     * @return \Elastica\Filter\HasChild       Current object
+     * @return $this
      */
     public function setFilter($filter)
     {
@@ -57,7 +57,7 @@ class HasChild extends AbstractFilter
      * Set type of the child document
      *
      * @param  string|\Elastica\Type      $type Child document type
-     * @return \Elastica\Filter\HasParent Current object
+     * @return $this
      */
     public function setType($type)
     {
@@ -71,7 +71,7 @@ class HasChild extends AbstractFilter
     /**
      * Set minimum number of children are required to match for the parent doc to be considered a match
      * @param  int                       $count
-     * @return \Elastica\Filter\HasChild
+     * @return $this
      */
     public function setMinimumChildrenCount($count)
     {
@@ -81,7 +81,7 @@ class HasChild extends AbstractFilter
     /**
      * Set maximum number of children are required to match for the parent doc to be considered a match
      * @param  int                       $count
-     * @return \Elastica\Filter\HasChild
+     * @return $this
      */
     public function setMaximumChildrenCount($count)
     {

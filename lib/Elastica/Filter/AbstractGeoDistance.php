@@ -71,7 +71,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
 
     /**
      * @param  string                               $key
-     * @return \Elastica\Filter\AbstractGeoDistance current filter
+     * @return $this
      */
     public function setKey($key)
     {
@@ -82,7 +82,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
 
     /**
      * @param  array|string                         $location
-     * @return \Elastica\Filter\AbstractGeoDistance
+     * @return $this
      * @throws \Elastica\Exception\InvalidException
      */
     public function setLocation($location)
@@ -113,7 +113,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
 
     /**
      * @param  float                                $latitude
-     * @return \Elastica\Filter\AbstractGeoDistance current filter
+     * @return $this
      */
     public function setLatitude($latitude)
     {
@@ -125,7 +125,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
 
     /**
      * @param  float                                $longitude
-     * @return \Elastica\Filter\AbstractGeoDistance current filter
+     * @return $this
      */
     public function setLongitude($longitude)
     {
@@ -137,7 +137,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
 
     /**
      * @param  string                               $geohash
-     * @return \Elastica\Filter\AbstractGeoDistance current filter
+     * @return $this
      */
     public function setGeohash($geohash)
     {

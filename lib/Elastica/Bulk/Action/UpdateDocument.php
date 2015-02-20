@@ -19,7 +19,7 @@ class UpdateDocument extends IndexDocument
     /**
      * Set the document for this bulk update action.
      * @param  \Elastica\Document                   $document
-     * @return \Elastica\Bulk\Action\UpdateDocument
+     * @return $this
      */
     public function setDocument(Document $document)
     {
@@ -44,7 +44,7 @@ class UpdateDocument extends IndexDocument
 
     /**
      * @param  \Elastica\Script                       $script
-     * @return \Elastica\Bulk\Action\AbstractDocument
+     * @return $this
      */
     public function setScript(Script $script)
     {

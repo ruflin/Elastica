@@ -52,7 +52,7 @@ class Bulk
 
     /**
      * @param  string|\Elastica\Index $index
-     * @return \Elastica\Bulk
+     * @return $this
      */
     public function setIndex($index)
     {
@@ -83,7 +83,7 @@ class Bulk
 
     /**
      * @param  string|\Elastica\Type $type
-     * @return \Elastica\Bulk
+     * @return $this
      */
     public function setType($type)
     {
@@ -132,7 +132,7 @@ class Bulk
 
     /**
      * @param  \Elastica\Bulk\Action $action
-     * @return \Elastica\Bulk
+     * @return $this
      */
     public function addAction(Action $action)
     {
@@ -143,7 +143,7 @@ class Bulk
 
     /**
      * @param  \Elastica\Bulk\Action[] $actions
-     * @return \Elastica\Bulk
+     * @return $this
      */
     public function addActions(array $actions)
     {
@@ -165,7 +165,7 @@ class Bulk
     /**
      * @param  \Elastica\Document $document
      * @param  string             $opType
-     * @return \Elastica\Bulk
+     * @return $this
      */
     public function addDocument(Document $document, $opType = null)
     {
@@ -177,7 +177,7 @@ class Bulk
     /**
      * @param  \Elastica\Document[] $documents
      * @param  string               $opType
-     * @return \Elastica\Bulk
+     * @return $this
      */
     public function addDocuments(array $documents, $opType = null)
     {
@@ -191,7 +191,7 @@ class Bulk
     /**
      * @param  \Elastica\Script $data
      * @param  string           $opType
-     * @return \Elastica\Bulk
+     * @return $this
      */
     public function addScript(Script $script, $opType = null)
     {
@@ -203,7 +203,7 @@ class Bulk
     /**
      * @param  \Elastica\Document[] $scripts
      * @param  string               $opType
-     * @return \Elastica\Bulk
+     * @return $this
      */
     public function addScripts(array $scripts, $opType = null)
     {
@@ -217,7 +217,7 @@ class Bulk
     /**
      * @param  \Elastica\Script|\Elastica\Document\array $data
      * @param  string                                    $opType
-     * @return \Elastica\Bulk
+     * @return $this
      */
     public function addData($data, $opType = null)
     {
@@ -240,7 +240,7 @@ class Bulk
 
     /**
      * @param  array                                $data
-     * @return \Elastica\Bulk
+     * @return $this
      * @throws \Elastica\Exception\InvalidException
      */
     public function addRawData(array $data)

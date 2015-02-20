@@ -16,7 +16,7 @@ class Nested extends AbstractQuery
      * Adds field to mlt query
      *
      * @param  string                 $path Nested object path
-     * @return \Elastica\Query\Nested
+     * @return $this
      */
     public function setPath($path)
     {
@@ -27,7 +27,7 @@ class Nested extends AbstractQuery
      * Sets nested query
      *
      * @param  \Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Query\Nested
+     * @return $this
      */
     public function setQuery(AbstractQuery $query)
     {
@@ -38,7 +38,7 @@ class Nested extends AbstractQuery
      * Set score method
      *
      * @param  string                 $scoreMode Options: avg, total, max and none.
-     * @return \Elastica\Query\Nested
+     * @return $this
      */
     public function setScoreMode($scoreMode)
     {

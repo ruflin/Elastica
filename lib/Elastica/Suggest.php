@@ -25,7 +25,7 @@ class Suggest extends Param
     /**
      * Set the global text for this suggester
      * @param  string            $text
-     * @return \Elastica\Suggest
+     * @return $this
      */
     public function setGlobalText($text)
     {
@@ -35,7 +35,7 @@ class Suggest extends Param
     /**
      * Add a suggestion to this suggest clause
      * @param  AbstractSuggest   $suggestion
-     * @return \Elastica\Suggest
+     * @return $this
      */
     public function addSuggestion(AbstractSuggest $suggestion)
     {
@@ -44,7 +44,7 @@ class Suggest extends Param
 
     /**
      * @param  Suggest|AbstractSuggest           $suggestion
-     * @return \Elastica\Suggest
+     * @return self
      * @throws Exception\NotImplementedException
      */
     public static function create($suggestion)

@@ -18,7 +18,7 @@ class Filters extends AbstractAggregation
      *
      * @param  AbstractFilter $filter
      * @param  string         $name
-     * @return Filters
+     * @return $this
      */
     public function addFilter(AbstractFilter $filter, $name = '')
     {

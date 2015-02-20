@@ -39,7 +39,7 @@ class Bool extends AbstractFilter
      * Adds should filter
      *
      * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
-     * @return \Elastica\Filter\Bool                 Current object
+     * @return $this
      */
     public function addShould($args)
     {
@@ -50,7 +50,7 @@ class Bool extends AbstractFilter
      * Adds must filter
      *
      * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
-     * @return \Elastica\Filter\Bool                 Current object
+     * @return $this
      */
     public function addMust($args)
     {
@@ -61,7 +61,7 @@ class Bool extends AbstractFilter
      * Adds mustNot filter
      *
      * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
-     * @return \Elastica\Filter\Bool                 Current object
+     * @return $this
      */
     public function addMustNot($args)
     {
@@ -74,7 +74,7 @@ class Bool extends AbstractFilter
      * @param  string                                $type Filter type
      * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Filter\Bool                 Current object
+     * @return $this
      */
     protected function _addFilter($type, $args)
     {

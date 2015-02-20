@@ -18,7 +18,7 @@ class DisMax extends AbstractQuery
      * Adds a query to the current object
      *
      * @param  \Elastica\Query\AbstractQuery|array  $args Query
-     * @return \Elastica\Query\DisMax
+     * @return $this
      * @throws \Elastica\Exception\InvalidException If not valid query
      */
     public function addQuery($args)
@@ -38,7 +38,7 @@ class DisMax extends AbstractQuery
      * Set boost
      *
      * @param  float                  $boost
-     * @return \Elastica\Query\DisMax
+     * @return $this
      */
     public function setBoost($boost)
     {
@@ -51,7 +51,7 @@ class DisMax extends AbstractQuery
      * If not set, defaults to 0.0
      *
      * @param  float                  $tieBreaker
-     * @return \Elastica\Query\DisMax
+     * @return $this
      */
     public function setTieBreaker($tieBreaker = 0.0)
     {

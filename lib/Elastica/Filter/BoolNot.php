@@ -26,7 +26,7 @@ class BoolNot extends AbstractFilter
      * Set filter
      *
      * @param  \Elastica\Filter\AbstractFilter $filter
-     * @return \Elastica\Filter\BoolNot
+     * @return $this
      */
     public function setFilter(AbstractFilter $filter)
     {

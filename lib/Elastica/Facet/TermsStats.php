@@ -28,7 +28,7 @@ class TermsStats extends AbstractFacet
      * Sets the key field for the query.
      *
      * @param  string                     $keyField The key field name for the query.
-     * @return \Elastica\Facet\TermsStats
+     * @return $this
      */
     public function setKeyField($keyField)
     {
@@ -39,7 +39,7 @@ class TermsStats extends AbstractFacet
      * Sets a script to calculate statistical information on a per term basis
      *
      * @param  string                     $valueScript The script to do calculations on the statistical values
-     * @return \Elastica\Facet\TermsStats
+     * @return $this
      */
     public function setValueScript($valueScript)
     {
@@ -52,7 +52,7 @@ class TermsStats extends AbstractFacet
      *
      * @param  string                               $type The order type to set use for sorting of the terms.
      * @throws \Elastica\Exception\InvalidException When an invalid order type was set.
-     * @return \Elastica\Facet\TermsStats
+     * @return $this
      */
     public function setOrder($type)
     {
@@ -67,7 +67,7 @@ class TermsStats extends AbstractFacet
      * Sets a field to compute basic statistical results on
      *
      * @param  string                     $valueField The field to compute statistical values for
-     * @return \Elastica\Facet\TermsStats
+     * @return $this
      */
     public function setValueField($valueField)
     {
@@ -78,7 +78,7 @@ class TermsStats extends AbstractFacet
      * Sets the amount of terms to be returned.
      *
      * @param  int                   $size The amount of terms to be returned.
-     * @return \Elastica\Facet\Terms
+     * @return $this
      */
     public function setSize($size)
     {

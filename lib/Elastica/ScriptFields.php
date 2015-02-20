@@ -28,7 +28,7 @@ class ScriptFields extends Param
      * @param  string                               $name   Name of the Script field
      * @param  \Elastica\Script                     $script
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\ScriptFields
+     * @return $this
      */
     public function addScript($name, Script $script)
     {
@@ -42,7 +42,7 @@ class ScriptFields extends Param
 
     /**
      * @param  \Elastica\Script[]|array $scripts Associative array of string => Elastica\Script
-     * @return \Elastica\ScriptFields
+     * @return $this
      */
     public function setScripts(array $scripts)
     {

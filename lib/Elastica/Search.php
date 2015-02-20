@@ -85,7 +85,7 @@ class Search
      *
      * @param  \Elastica\Index|string               $index Index object or string
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Search                     Current object
+     * @return $this
      */
     public function addIndex($index)
     {
@@ -106,7 +106,7 @@ class Search
      * Add array of indices at once
      *
      * @param  array            $indices
-     * @return \Elastica\Search
+     * @return $this
      */
     public function addIndices(array $indices = array())
     {
@@ -121,7 +121,7 @@ class Search
      * Adds a type to the current search
      *
      * @param  \Elastica\Type|string                $type Type name or object
-     * @return \Elastica\Search                     Search object
+     * @return $this
      * @throws \Elastica\Exception\InvalidException
      */
     public function addType($type)
@@ -143,7 +143,7 @@ class Search
      * Add array of types
      *
      * @param  array            $types
-     * @return \Elastica\Search
+     * @return $this
      */
     public function addTypes(array $types = array())
     {
@@ -156,7 +156,7 @@ class Search
 
     /**
      * @param  string|array|\Elastica\Query|\Elastica\Suggest|\Elastica\Query\AbstractQuery|\Elastica\Filter\AbstractFilter $query|
-     * @return \Elastica\Search
+     * @return $this
      */
     public function setQuery($query)
     {
@@ -168,7 +168,7 @@ class Search
     /**
      * @param  string           $key
      * @param  mixed            $value
-     * @return \Elastica\Search
+     * @return $this
      */
     public function setOption($key, $value)
     {
@@ -181,7 +181,7 @@ class Search
 
     /**
      * @param  array            $options
-     * @return \Elastica\Search
+     * @return $this
      */
     public function setOptions(array $options)
     {
@@ -195,7 +195,7 @@ class Search
     }
 
     /**
-     * @return \Elastica\Search
+     * @return $this
      */
     public function clearOptions()
     {
@@ -207,7 +207,7 @@ class Search
     /**
      * @param  string           $key
      * @param  mixed            $value
-     * @return \Elastica\Search
+     * @return $this
      */
     public function addOption($key, $value)
     {
@@ -366,7 +366,7 @@ class Search
      * Creates new search object
      *
      * @param  \Elastica\SearchableInterface $searchObject
-     * @return \Elastica\Search
+     * @return Search
      */
     public static function create(SearchableInterface $searchObject)
     {
@@ -467,7 +467,7 @@ class Search
     /**
      * @param  array|int                    $options
      * @param  string|array|\Elastica\Query $query
-     * @return \Elastica\Search
+     * @return $this
      */
     public function setOptionsAndQuery($options = null, $query = '')
     {
@@ -494,7 +494,7 @@ class Search
 
     /**
      * @param  Suggest $suggest
-     * @return Search
+     * @return $this
      */
     public function setSuggest(Suggest $suggest)
     {

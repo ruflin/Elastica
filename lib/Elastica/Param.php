@@ -64,7 +64,7 @@ class Param
      *
      * @param  string          $key
      * @param  mixed           $value
-     * @return \Elastica\Param
+     * @return $this
      */
     protected function _setRawParam($key, $value)
     {

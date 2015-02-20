@@ -17,7 +17,7 @@ class DateHistogram extends Histogram
      * Set the time_zone parameter
      *
      * @param  string                        $tzOffset
-     * @return \Elastica\Facet\DateHistogram
+     * @return $this
      */
     public function setTimezone($tzOffset)
     {

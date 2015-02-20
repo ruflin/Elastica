@@ -18,7 +18,7 @@ class Query extends AbstractFacet
      * Set the query for the facet.
      *
      * @param  \Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Facet\Query
+     * @return $this
      */
     public function setQuery(AbstractQuery $query)
     {

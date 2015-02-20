@@ -15,7 +15,7 @@ class IndexDocument extends AbstractDocument
 
     /**
      * @param  \Elastica\Document                  $document
-     * @return \Elastica\Bulk\Action\IndexDocument
+     * @return $this
      */
     public function setDocument(Document $document)
     {

@@ -37,7 +37,7 @@ class GeoDistance extends AbstractGeoDistance
 
     /**
      * @param  string                       $distance
-     * @return \Elastica\Filter\GeoDistance current filter
+     * @return $this
      */
     public function setDistance($distance)
     {
@@ -50,7 +50,7 @@ class GeoDistance extends AbstractGeoDistance
      * See DISTANCE_TYPE_* constants
      *
      * @param  string                       $distanceType
-     * @return \Elastica\Filter\GeoDistance current filter
+     * @return $this
      */
     public function setDistanceType($distanceType)
     {
@@ -63,7 +63,7 @@ class GeoDistance extends AbstractGeoDistance
      * See OPTIMIZE_BBOX_* constants
      *
      * @param  string                       $optimizeBbox
-     * @return \Elastica\Filter\GeoDistance current filter
+     * @return $this
      */
     public function setOptimizeBbox($optimizeBbox)
     {

@@ -37,7 +37,7 @@ class Range extends AbstractFilter
      *
      * @param  string                 $fieldName Field name
      * @param  array                  $args      Field arguments
-     * @return \Elastica\Filter\Range
+     * @return $this
      */
     public function addField($fieldName, array $args)
     {
@@ -50,7 +50,7 @@ class Range extends AbstractFilter
      * Set execution mode
      *
      * @param  string                 $execution Options: "index" or "fielddata"
-     * @return \Elastica\Filter\Range
+     * @return $this
      */
     public function setExecution($execution)
     {

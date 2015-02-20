@@ -61,7 +61,7 @@ class Log extends AbstractLogger
      * Enable/disable log or set log path
      *
      * @param  bool|string   $log Enables log or sets log path
-     * @return \Elastica\Log
+     * @return $this
      */
     public function setLog($log)
     {

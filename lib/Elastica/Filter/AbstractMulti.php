@@ -21,7 +21,7 @@ abstract class AbstractMulti extends AbstractFilter
      * Add filter
      *
      * @param  \Elastica\Filter\AbstractFilter $filter
-     * @return \Elastica\Filter\AbstractMulti
+     * @return $this
      */
     public function addFilter(AbstractFilter $filter)
     {
@@ -34,7 +34,7 @@ abstract class AbstractMulti extends AbstractFilter
      * Set filters
      *
      * @param  array                          $filters
-     * @return \Elastica\Filter\AbstractMulti
+     * @return $this
      */
     public function setFilters(array $filters)
     {

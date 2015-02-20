@@ -37,7 +37,7 @@ class Query extends AbstractFilter
      * Set query
      *
      * @param  array|\Elastica\Query\AbstractQuery  $query
-     * @return \Elastica\Filter\Query               Query object
+     * @return $this
      * @throws \Elastica\Exception\InvalidException Invalid param
      */
     public function setQuery($query)

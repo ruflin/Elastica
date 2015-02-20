@@ -32,7 +32,7 @@ class Regexp extends AbstractQuery
      * @param  string                 $key
      * @param  string                 $value
      * @param  float                  $boost
-     * @return \Elastica\Query\Regexp
+     * @return $this
      */
     public function setValue($key, $value, $boost = 1.0)
     {

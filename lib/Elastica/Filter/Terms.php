@@ -51,7 +51,7 @@ class Terms extends AbstractFilter
      *
      * @param  string                 $key   Terms key
      * @param  array                  $terms Terms for the query.
-     * @return \Elastica\Filter\Terms
+     * @return $this
      */
     public function setTerms($key, array $terms)
     {
@@ -68,7 +68,7 @@ class Terms extends AbstractFilter
      * @param  string                       $id      id of the document from which to fetch the terms values
      * @param  string                       $path    the field from which to fetch the values for the filter
      * @param  string|array|\Elastica\Index $options An array of options or the index from which to fetch the terms values. Defaults to the current index.
-     * @return \Elastica\Filter\Terms       Filter object
+     * @return $this
      */
     public function setLookup($key, $type, $id, $path, $options = array())
     {
@@ -105,7 +105,7 @@ class Terms extends AbstractFilter
      * Adds an additional term to the query
      *
      * @param  string                 $term Filter term
-     * @return \Elastica\Filter\Terms Filter object
+     * @return $this
      */
     public function addTerm($term)
     {
@@ -135,7 +135,7 @@ class Terms extends AbstractFilter
      * Set execution mode
      *
      * @param  string                 $execution Options: "bool", "and", "or", "plain" or "fielddata"
-     * @return \Elastica\Filter\Terms
+     * @return $this
      */
     public function setExecution($execution)
     {
