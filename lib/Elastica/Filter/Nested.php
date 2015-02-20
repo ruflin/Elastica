@@ -17,7 +17,7 @@ class Nested extends AbstractFilter
     /**
      * Adds field to mlt filter
      *
-     * @param  string                  $path Nested object path
+     * @param  string $path Nested object path
      * @return $this
      */
     public function setPath($path)
@@ -50,7 +50,7 @@ class Nested extends AbstractFilter
     /**
      * Set join option
      *
-     * @param  bool                    $join
+     * @param  bool  $join
      * @return $this
      */
     public function setJoin($join)

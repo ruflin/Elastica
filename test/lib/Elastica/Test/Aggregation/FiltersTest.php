@@ -6,7 +6,6 @@ use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\Filter;
 use Elastica\Aggregation\Filters;
 use Elastica\Document;
-use Elastica\Filter\Range;
 use Elastica\Filter\Term;
 use Elastica\Query;
 
@@ -32,12 +31,12 @@ class FiltersTest extends BaseAggregationTest
             "filters" => array(
               "filters" => array(
                   "blue" => array(
-                      "term" => array("color" => "blue")
+                      "term" => array("color" => "blue"),
                   ),
                   "red" => array(
-                      "term" => array("color" => "red")
-                  )
-              )
+                      "term" => array("color" => "red"),
+                  ),
+              ),
             ),
             "aggs" => array(
                 "avg_price" => array("avg" => array("field" => "price")),
@@ -61,12 +60,12 @@ class FiltersTest extends BaseAggregationTest
             "filters" => array(
                 "filters" => array(
                     array(
-                        "term" => array("color" => "blue")
+                        "term" => array("color" => "blue"),
                     ),
                     array(
-                        "term" => array("color" => "red")
-                    )
-                )
+                        "term" => array("color" => "red"),
+                    ),
+                ),
             ),
             "aggs" => array(
                 "avg_price" => array("avg" => array("field" => "price")),

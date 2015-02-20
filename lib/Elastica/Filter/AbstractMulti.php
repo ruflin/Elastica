@@ -33,7 +33,7 @@ abstract class AbstractMulti extends AbstractFilter
     /**
      * Set filters
      *
-     * @param  array                          $filters
+     * @param  array $filters
      * @return $this
      */
     public function setFilters(array $filters)
@@ -57,6 +57,7 @@ abstract class AbstractMulti extends AbstractFilter
 
     /**
      * @see \Elastica\Param::toArray()
+     * @return array
      */
     public function toArray()
     {

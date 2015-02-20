@@ -38,7 +38,7 @@ class Ids extends AbstractQuery
     /**
      * Adds one more filter to the and filter
      *
-     * @param  string              $id Adds id to filter
+     * @param  string $id Adds id to filter
      * @return $this
      */
     public function addId($id)
@@ -91,7 +91,7 @@ class Ids extends AbstractQuery
     /**
      * Sets the ids to filter
      *
-     * @param  array|string        $ids List of ids
+     * @param  array|string $ids List of ids
      * @return $this
      */
     public function setIds($ids)

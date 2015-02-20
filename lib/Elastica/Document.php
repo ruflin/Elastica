@@ -89,9 +89,10 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param  string                               $key
-     * @return mixed
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  string $key
+     * @return mixed
      */
     public function get($key)
     {
@@ -103,9 +104,10 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param  string                               $key
-     * @param  mixed                                $value
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  string $key
+     * @param  mixed  $value
      * @return $this
      */
     public function set($key, $value)
@@ -128,8 +130,9 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param  string                               $key
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  string $key
      * @return $this
      */
     public function remove($key)
@@ -146,8 +149,8 @@ class Document extends AbstractUpdateAction
      * Adds the given key/value pair to the document
      *
      * @deprecated
-     * @param  string             $key   Document entry key
-     * @param  mixed              $value Document entry value
+     * @param  string $key   Document entry key
+     * @param  mixed  $value Document entry value
      * @return $this
      */
     public function add($key, $value)
@@ -166,9 +169,9 @@ class Document extends AbstractUpdateAction
      * This installs the tika file analysis plugin. More infos about supported formats
      * can be found here: {@link http://tika.apache.org/0.7/formats.html}
      *
-     * @param  string             $key      Key to add the file to
-     * @param  string             $filepath Path to add the file
-     * @param  string             $mimeType OPTIONAL Header mime type
+     * @param  string $key      Key to add the file to
+     * @param  string $filepath Path to add the file
+     * @param  string $mimeType OPTIONAL Header mime type
      * @return $this
      */
     public function addFile($key, $filepath, $mimeType = '')
@@ -187,8 +190,8 @@ class Document extends AbstractUpdateAction
     /**
      * Add file content
      *
-     * @param  string             $key     Document key
-     * @param  string             $content Raw file content
+     * @param  string $key     Document key
+     * @param  string $content Raw file content
      * @return $this
      */
     public function addFileContent($key, $content)
@@ -201,9 +204,9 @@ class Document extends AbstractUpdateAction
      *
      * Geohashes are not yet supported
      *
-     * @param  string             $key       Field key
-     * @param  float              $latitude  Latitude value
-     * @param  float              $longitude Longitude value
+     * @param  string $key       Field key
+     * @param  float  $latitude  Latitude value
+     * @param  float  $longitude Longitude value
      * @link http://www.elasticsearch.org/guide/reference/mapping/geo-point-type.html
      * @return $this
      */
@@ -219,7 +222,7 @@ class Document extends AbstractUpdateAction
     /**
      * Overwrites the current document data with the given data
      *
-     * @param  array|string       $data Data array
+     * @param  array|string $data Data array
      * @return $this
      */
     public function setData($data)
@@ -240,9 +243,10 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param  \Elastica\Script        $data
      * @throws NotImplementedException
      * @deprecated
+     *
+     * @param \Elastica\Script $data
      */
     public function setScript($data)
     {
@@ -268,7 +272,7 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param  bool               $value
+     * @param  bool  $value
      * @return $this
      */
     public function setDocAsUpsert($value)
@@ -318,8 +322,9 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param  array|\Elastica\Document             $data
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  array|\Elastica\Document $data
      * @return self
      */
     public static function create($data)

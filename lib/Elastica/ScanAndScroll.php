@@ -110,6 +110,7 @@ class ScanAndScroll implements \Iterator
      * Start the initial scan search
      * @link http://php.net/manual/en/iterator.rewind.php
      * @throws \Elastica\Exception\InvalidException
+     *
      * @return void
      */
     public function rewind()
@@ -129,7 +130,6 @@ class ScanAndScroll implements \Iterator
     /**
      * Perform next scroll search
      * @throws \Elastica\Exception\InvalidException
-     * @return void
      */
     protected function _scroll()
     {

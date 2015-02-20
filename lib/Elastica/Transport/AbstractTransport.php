@@ -42,7 +42,7 @@ abstract class AbstractTransport extends Param
     }
 
     /**
-     * @param \Elastica\Connection $connection Connection object
+     * @param  \Elastica\Connection $connection Connection object
      * @return $this
      */
     public function setConnection(Connection $connection)
@@ -71,10 +71,11 @@ abstract class AbstractTransport extends Param
      * * array: An array with a "type" key which must be set to one of the two options. All other
      *          keys in the array will be set as parameters in the transport instance
      *
-     * @param  mixed                                $transport  A transport definition
-     * @param  \Elastica\Connection                 $connection A connection instance
-     * @param  array                                $params     Parameters for the transport class
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  mixed                $transport  A transport definition
+     * @param  \Elastica\Connection $connection A connection instance
+     * @param  array                $params     Parameters for the transport class
      * @return AbstractTransport
      */
     public static function create($transport, Connection $connection, array $params = array())

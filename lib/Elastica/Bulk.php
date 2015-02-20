@@ -239,9 +239,10 @@ class Bulk
     }
 
     /**
-     * @param  array                                $data
-     * @return $this
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  array $data
+     * @return $this
      */
     public function addRawData(array $data)
     {
@@ -349,9 +350,10 @@ class Bulk
     }
 
     /**
-     * @param  \Elastica\Response               $response
-     * @throws Exception\Bulk\ResponseException
-     * @throws Exception\InvalidException
+     * @throws \Elastica\Exception\Bulk\ResponseException
+     * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  \Elastica\Response         $response
      * @return \Elastica\Bulk\ResponseSet
      */
     protected function _processResponse(Response $response)
@@ -401,9 +403,10 @@ class Bulk
     }
 
     /**
-     * @param  string                                $host
-     * @param  int                                   $port
      * @throws \Elastica\Exception\Bulk\UdpException
+     *
+     * @param string $host
+     * @param int    $port
      */
     public function sendUdp($host = null, $port = null)
     {

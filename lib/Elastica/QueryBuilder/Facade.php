@@ -37,10 +37,11 @@ class Facade
     /**
      * Executes DSL methods
      *
-     * @param $name
-     * @param  array                 $arguments
-     * @return mixed
      * @throws QueryBuilderException
+     *
+     * @param  string $name
+     * @param  array  $arguments
+     * @return mixed
      */
     public function __call($name, array $arguments)
     {

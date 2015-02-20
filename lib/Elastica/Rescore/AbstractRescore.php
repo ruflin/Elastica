@@ -27,7 +27,7 @@ abstract class AbstractRescore extends Param
     /**
      * Sets window_size
      *
-     * @param  int               $size
+     * @param  int   $size
      * @return $this
      */
     public function setWindowSize($size)

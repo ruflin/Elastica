@@ -52,7 +52,7 @@ class Action
     }
 
     /**
-     * @param  string                $type
+     * @param  string $type
      * @return $this
      */
     public function setOpType($type)
@@ -71,7 +71,7 @@ class Action
     }
 
     /**
-     * @param  array                 $metadata
+     * @param  array $metadata
      * @return $this
      */
     public function setMetadata(array $metadata)
@@ -98,7 +98,7 @@ class Action
     }
 
     /**
-     * @param  array                 $source
+     * @param  array $source
      * @return $this
      */
     public function setSource($source)
@@ -154,7 +154,7 @@ class Action
     }
 
     /**
-     * @param  string                $id
+     * @param  string $id
      * @return $this
      */
     public function setId($id)
@@ -165,7 +165,7 @@ class Action
     }
 
     /**
-     * @param  string                $routing
+     * @param  string $routing
      * @return $this
      */
     public function setRouting($routing)

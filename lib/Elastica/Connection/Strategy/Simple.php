@@ -12,9 +12,10 @@ use Elastica\Exception\ClientException;
 class Simple implements StrategyInterface
 {
     /**
-     * @param  array|\Elastica\Connection[]        $connections
-     * @return \Elastica\Connection
      * @throws \Elastica\Exception\ClientException
+     *
+     * @param  array|\Elastica\Connection[] $connections
+     * @return \Elastica\Connection
      */
     public function getConnection($connections)
     {

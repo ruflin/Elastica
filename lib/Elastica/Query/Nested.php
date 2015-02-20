@@ -15,7 +15,7 @@ class Nested extends AbstractQuery
     /**
      * Adds field to mlt query
      *
-     * @param  string                 $path Nested object path
+     * @param  string $path Nested object path
      * @return $this
      */
     public function setPath($path)
@@ -37,7 +37,7 @@ class Nested extends AbstractQuery
     /**
      * Set score method
      *
-     * @param  string                 $scoreMode Options: avg, total, max and none.
+     * @param  string $scoreMode Options: avg, total, max and none.
      * @return $this
      */
     public function setScoreMode($scoreMode)

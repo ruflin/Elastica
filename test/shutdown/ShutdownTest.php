@@ -28,7 +28,7 @@ class ShutdownTest extends BaseTest
 
         // sayonara, wolverine, we'd never love you
         foreach ($nodes as $node) {
-            if ((int)$node->getInfo()->getPort() === 9201) {
+            if ((int) $node->getInfo()->getPort() === 9201) {
                 $node->shutdown('1s');
                 break;
             }

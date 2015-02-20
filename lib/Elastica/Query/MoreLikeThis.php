@@ -15,7 +15,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Adds field to mlt query
      *
-     * @param  array                        $fields Field names
+     * @param  array $fields Field names
      * @return $this
      */
     public function setFields(array $fields)
@@ -26,7 +26,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set the "like_text" value
      *
-     * @param  string                       $likeText
+     * @param  string $likeText
      * @return $this
      */
     public function setLikeText($likeText)
@@ -39,7 +39,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set boost
      *
-     * @param  float                        $boost Boost value
+     * @param  float $boost Boost value
      * @return $this
      */
     public function setBoost($boost)
@@ -50,7 +50,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set max_query_terms
      *
-     * @param  int                          $maxQueryTerms Max query terms value
+     * @param  int   $maxQueryTerms Max query terms value
      * @return $this
      */
     public function setMaxQueryTerms($maxQueryTerms)
@@ -61,7 +61,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set percent terms to match
      *
-     * @param  float                        $percentTermsToMatch Percentage
+     * @param  float $percentTermsToMatch Percentage
      * @return $this
      */
     public function setPercentTermsToMatch($percentTermsToMatch)
@@ -72,7 +72,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set min term frequency
      *
-     * @param  int                          $minTermFreq
+     * @param  int   $minTermFreq
      * @return $this
      */
     public function setMinTermFrequency($minTermFreq)
@@ -83,7 +83,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * set min document frequency
      *
-     * @param  int                          $minDocFreq
+     * @param  int   $minDocFreq
      * @return $this
      */
     public function setMinDocFrequency($minDocFreq)
@@ -94,7 +94,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * set max document frequency
      *
-     * @param  int                          $maxDocFreq
+     * @param  int   $maxDocFreq
      * @return $this
      */
     public function setMaxDocFrequency($maxDocFreq)
@@ -105,7 +105,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set min word length
      *
-     * @param  int                          $minWordLength
+     * @param  int   $minWordLength
      * @return $this
      */
     public function setMinWordLength($minWordLength)
@@ -116,7 +116,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set max word length
      *
-     * @param  int                          $maxWordLength
+     * @param  int   $maxWordLength
      * @return $this
      */
     public function setMaxWordLength($maxWordLength)
@@ -127,7 +127,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set boost terms
      *
-     * @param  bool                         $boostTerms
+     * @param  bool  $boostTerms
      * @return $this
      * @link http://www.elasticsearch.org/guide/reference/query-dsl/mlt-query.html
      */
@@ -139,7 +139,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set analyzer
      *
-     * @param  string                       $analyzer
+     * @param  string $analyzer
      * @return $this
      */
     public function setAnalyzer($analyzer)
@@ -152,7 +152,7 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set stop words
      *
-     * @param  array                        $stopWords
+     * @param  array $stopWords
      * @return $this
      */
     public function setStopWords(array $stopWords)

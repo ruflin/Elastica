@@ -68,7 +68,7 @@ class Terms extends AbstractSimpleAggregation
 
     /**
      * Sets the amount of terms to be returned.
-     * @param  int                         $size The amount of terms to be returned.
+     * @param  int   $size The amount of terms to be returned.
      * @return $this
      */
     public function setSize($size)
@@ -78,7 +78,7 @@ class Terms extends AbstractSimpleAggregation
 
     /**
      * Sets how many terms the coordinating node will request from each shard.
-     * @param  int                         $shard_size The amount of terms to be returned.
+     * @param  int   $shard_size The amount of terms to be returned.
      * @return $this
      */
     public function setShardSize($shard_size)

@@ -14,16 +14,12 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     const REMOTE_TRANSPORT_EXCEPTION = 'RemoteTransportException';
 
     /**
-     * Elasticsearch exception name
-     *
-     * @var string|null
+     * @var string|null Elasticsearch exception name
      */
     private $_exception;
 
     /**
-     * Whether exception was local to server node or remote
-     *
-     * @var bool
+     * @var bool Whether exception was local to server node or remote
      */
     private $_isRemote = false;
 

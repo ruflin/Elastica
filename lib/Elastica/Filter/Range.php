@@ -35,8 +35,8 @@ class Range extends AbstractFilter
     /**
      * Ads a field with arguments to the range query
      *
-     * @param  string                 $fieldName Field name
-     * @param  array                  $args      Field arguments
+     * @param  string $fieldName Field name
+     * @param  array  $args      Field arguments
      * @return $this
      */
     public function addField($fieldName, array $args)
@@ -49,7 +49,7 @@ class Range extends AbstractFilter
     /**
      * Set execution mode
      *
-     * @param  string                 $execution Options: "index" or "fielddata"
+     * @param  string $execution Options: "index" or "fielddata"
      * @return $this
      */
     public function setExecution($execution)
@@ -66,6 +66,7 @@ class Range extends AbstractFilter
     public function toArray()
     {
         $this->setParams(array_merge($this->getParams(), $this->_fields));
+
         return parent::toArray();
     }
 }

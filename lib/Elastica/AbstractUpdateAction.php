@@ -20,7 +20,7 @@ class AbstractUpdateAction extends Param
     /**
      * Sets the id of the document.
      *
-     * @param  string             $id
+     * @param  string $id
      * @return $this
      */
     public function setId($id)
@@ -49,7 +49,7 @@ class AbstractUpdateAction extends Param
     /**
      * Sets lifetime of document
      *
-     * @param  string             $ttl
+     * @param  string $ttl
      * @return $this
      */
     public function setTtl($ttl)
@@ -76,7 +76,7 @@ class AbstractUpdateAction extends Param
     /**
      * Sets the document type name
      *
-     * @param  string             $type Type name
+     * @param  string $type Type name
      * @return $this
      */
     public function setType($type)
@@ -92,8 +92,9 @@ class AbstractUpdateAction extends Param
     /**
      * Return document type name
      *
-     * @return string                               Document type name
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @return string Document type name
      */
     public function getType()
     {
@@ -103,7 +104,7 @@ class AbstractUpdateAction extends Param
     /**
      * Sets the document index name
      *
-     * @param  string             $index Index name
+     * @param  string $index Index name
      * @return $this
      */
     public function setIndex($index)
@@ -118,8 +119,9 @@ class AbstractUpdateAction extends Param
     /**
      * Get the document index name
      *
-     * @return string                               Index name
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @return string Index name
      */
     public function getIndex()
     {
@@ -129,7 +131,7 @@ class AbstractUpdateAction extends Param
     /**
      * Sets the version of a document for use with optimistic concurrency control
      *
-     * @param  int                $version Document version
+     * @param  int   $version Document version
      * @return $this
      * @link http://www.elasticsearch.org/blog/2011/02/08/versioning.html
      */
@@ -160,7 +162,7 @@ class AbstractUpdateAction extends Param
      * Sets the version_type of a document
      * Default in ES is internal, but you can set to external to use custom versioning
      *
-     * @param  int                $versionType Document version type
+     * @param  int   $versionType Document version type
      * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/index_.html
      */
@@ -190,7 +192,7 @@ class AbstractUpdateAction extends Param
     /**
      * Sets parent document id
      *
-     * @param  string|int         $parent Parent document id
+     * @param  string|int $parent Parent document id
      * @return $this
      * @link http://www.elasticsearch.org/guide/reference/mapping/parent-field.html
      */
@@ -220,7 +222,7 @@ class AbstractUpdateAction extends Param
     /**
      * Set operation type
      *
-     * @param  string             $opType Only accept create
+     * @param  string $opType Only accept create
      * @return $this
      */
     public function setOpType($opType)
@@ -248,7 +250,7 @@ class AbstractUpdateAction extends Param
     /**
      * Set percolate query param
      *
-     * @param  string             $value percolator filter
+     * @param  string $value percolator filter
      * @return $this
      */
     public function setPercolate($value = '*')
@@ -277,7 +279,7 @@ class AbstractUpdateAction extends Param
     /**
      * Set routing query param
      *
-     * @param  string             $value routing
+     * @param  string $value routing
      * @return $this
      */
     public function setRouting($value)
@@ -304,7 +306,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  array|string       $fields
+     * @param  array|string $fields
      * @return $this
      */
     public function setFields($fields)
@@ -341,7 +343,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  int                $num
+     * @param  int   $num
      * @return $this
      */
     public function setRetryOnConflict($num)
@@ -366,7 +368,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  string             $timestamp
+     * @param  string $timestamp
      * @return $this
      */
     public function setTimestamp($timestamp)
@@ -391,7 +393,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  bool               $refresh
+     * @param  bool  $refresh
      * @return $this
      */
     public function setRefresh($refresh = true)
@@ -416,7 +418,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  string             $timeout
+     * @param  string $timeout
      * @return $this
      */
     public function setTimeout($timeout)
@@ -441,7 +443,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  string             $timeout
+     * @param  string $timeout
      * @return $this
      */
     public function setConsistency($timeout)
@@ -466,7 +468,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  string             $timeout
+     * @param  string $timeout
      * @return $this
      */
     public function setReplication($timeout)

@@ -23,7 +23,7 @@ class DirectGenerator extends AbstractCandidateGenerator
 
     /**
      * Set the field name from which to fetch candidate suggestions
-     * @param  string          $field
+     * @param  string $field
      * @return $this
      */
     public function setField($field)
@@ -33,7 +33,7 @@ class DirectGenerator extends AbstractCandidateGenerator
 
     /**
      * Set the maximum corrections to be returned per suggest text token
-     * @param  int             $size
+     * @param  int   $size
      * @return $this
      */
     public function setSize($size)
@@ -42,7 +42,7 @@ class DirectGenerator extends AbstractCandidateGenerator
     }
 
     /**
-     * @param  string          $mode see SUGGEST_MODE_* constants for options
+     * @param  string $mode see SUGGEST_MODE_* constants for options
      * @return $this
      */
     public function setSuggestMode($mode)
@@ -51,7 +51,7 @@ class DirectGenerator extends AbstractCandidateGenerator
     }
 
     /**
-     * @param  int             $max can only be a value between 1 and 2. Defaults to 2.
+     * @param  int   $max can only be a value between 1 and 2. Defaults to 2.
      * @return $this
      */
     public function setMaxEdits($max)
@@ -60,7 +60,7 @@ class DirectGenerator extends AbstractCandidateGenerator
     }
 
     /**
-     * @param  int             $length defaults to 1
+     * @param  int   $length defaults to 1
      * @return $this
      */
     public function setPrefixLength($length)
@@ -69,7 +69,7 @@ class DirectGenerator extends AbstractCandidateGenerator
     }
 
     /**
-     * @param  int             $min defaults to 4
+     * @param  int   $min defaults to 4
      * @return $this
      */
     public function setMinWordLength($min)
@@ -78,7 +78,7 @@ class DirectGenerator extends AbstractCandidateGenerator
     }
 
     /**
-     * @param  int             $max
+     * @param  int   $max
      * @return $this
      */
     public function setMaxInspections($max)
@@ -87,7 +87,7 @@ class DirectGenerator extends AbstractCandidateGenerator
     }
 
     /**
-     * @param  float           $min
+     * @param  float $min
      * @return $this
      */
     public function setMinDocFrequency($min)
@@ -96,7 +96,7 @@ class DirectGenerator extends AbstractCandidateGenerator
     }
 
     /**
-     * @param  float           $max
+     * @param  float $max
      * @return $this
      */
     public function setMaxTermFrequency($max)
@@ -106,7 +106,7 @@ class DirectGenerator extends AbstractCandidateGenerator
 
     /**
      * Set an analyzer to be applied to the original token prior to candidate generation
-     * @param  string          $pre an analyzer
+     * @param  string $pre an analyzer
      * @return $this
      */
     public function setPreFilter($pre)
@@ -116,7 +116,7 @@ class DirectGenerator extends AbstractCandidateGenerator
 
     /**
      * Set an analyzer to be applied to generated tokens before they are passed to the phrase scorer
-     * @param  string          $post
+     * @param  string $post
      * @return $this
      */
     public function setPostFilter($post)

@@ -49,8 +49,8 @@ class Terms extends AbstractFilter
     /**
      * Sets key and terms for the filter
      *
-     * @param  string                 $key   Terms key
-     * @param  array                  $terms Terms for the query.
+     * @param  string $key   Terms key
+     * @param  array  $terms Terms for the query.
      * @return $this
      */
     public function setTerms($key, array $terms)
@@ -104,7 +104,7 @@ class Terms extends AbstractFilter
     /**
      * Adds an additional term to the query
      *
-     * @param  string                 $term Filter term
+     * @param  string $term Filter term
      * @return $this
      */
     public function addTerm($term)
@@ -119,7 +119,8 @@ class Terms extends AbstractFilter
      *
      * @see \Elastica\Filter\AbstractFilter::toArray()
      * @throws \Elastica\Exception\InvalidException
-     * @return array                                data array
+     *
+     * @return array
      */
     public function toArray()
     {
@@ -134,7 +135,7 @@ class Terms extends AbstractFilter
     /**
      * Set execution mode
      *
-     * @param  string                 $execution Options: "bool", "and", "or", "plain" or "fielddata"
+     * @param  string $execution Options: "bool", "and", "or", "plain" or "fielddata"
      * @return $this
      */
     public function setExecution($execution)

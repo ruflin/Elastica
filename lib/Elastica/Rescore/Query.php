@@ -63,7 +63,7 @@ class Query extends AbstractRescore
     /**
      * Sets query_weight
      *
-     * @param  float                   $weight
+     * @param  float $weight
      * @return $this
      */
     public function setQueryWeight($weight)
@@ -77,7 +77,7 @@ class Query extends AbstractRescore
     /**
      * Sets rescore_query_weight
      *
-     * @param  float                   $size
+     * @param  float $size
      * @return $this
      */
     public function setRescoreQueryWeight($weight)

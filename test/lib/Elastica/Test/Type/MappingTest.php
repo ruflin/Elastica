@@ -123,7 +123,7 @@ class MappingTest extends BaseTest
         );
 
         $response = $type->setMapping($mapping);
-		$this->assertFalse($response->hasError());
+        $this->assertFalse($response->hasError());
 
         $doc = new Document(1, array(
             'user' => array(
@@ -137,7 +137,7 @@ class MappingTest extends BaseTest
 
         $index->refresh();
         $resultSet = $type->search('ruflin');
-		$this->assertEquals($resultSet->count(), 1);
+        $this->assertEquals($resultSet->count(), 1);
 
         $index->delete();
     }

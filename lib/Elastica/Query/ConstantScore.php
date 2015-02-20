@@ -59,7 +59,7 @@ class ConstantScore extends AbstractQuery
     /**
      * Set boost
      *
-     * @param  float                         $boost
+     * @param  float $boost
      * @return $this
      */
     public function setBoost($boost)

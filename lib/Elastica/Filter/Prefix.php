@@ -41,7 +41,7 @@ class Prefix extends AbstractFilter
     /**
      * Sets the name of the prefix field.
      *
-     * @param  string                  $field Field name
+     * @param  string $field Field name
      * @return $this
      */
     public function setField($field)
@@ -54,7 +54,7 @@ class Prefix extends AbstractFilter
     /**
      * Sets the prefix string.
      *
-     * @param  string                  $prefix Prefix string
+     * @param  string $prefix Prefix string
      * @return $this
      */
     public function setPrefix($prefix)

@@ -1020,14 +1020,12 @@ class ClientTest extends BaseTest
             $client->addHeader(new \stdClass(), 'foo');
             $this->fail('Header name is not a string but exception not thrown');
         } catch (InvalidException $ex) {
-
         }
 
         try {
             $client->addHeader('foo', new \stdClass());
             $this->fail('Header value is not a string but exception not thrown');
         } catch (InvalidException $ex) {
-
         }
     }
 
@@ -1058,7 +1056,6 @@ class ClientTest extends BaseTest
             $client->removeHeader(new \stdClass());
             $this->fail('Header name is not a string but exception not thrown');
         } catch (InvalidException $ex) {
-
         }
     }
 }

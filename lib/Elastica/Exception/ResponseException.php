@@ -15,15 +15,11 @@ use Elastica\Response;
 class ResponseException extends \RuntimeException implements ExceptionInterface
 {
     /**
-     * Request
-     *
      * @var \Elastica\Request Request object
      */
     protected $_request = null;
 
     /**
-     * Response
-     *
      * @var \Elastica\Response Response object
      */
     protected $_response = null;

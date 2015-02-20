@@ -30,7 +30,7 @@ class TopHits extends AbstractAggregation
     /**
      * The maximum number of top matching hits to return per bucket. By default the top three matching hits are returned.
      *
-     * @param  int  $size
+     * @param  int   $size
      * @return $this
      */
     public function setSize($size)
@@ -41,7 +41,7 @@ class TopHits extends AbstractAggregation
     /**
      * The offset from the first result you want to fetch.
      *
-     * @param  int  $from
+     * @param  int   $from
      * @return $this
      */
     public function setFrom($from)
@@ -74,7 +74,7 @@ class TopHits extends AbstractAggregation
     /**
      * Returns a version for each search hit.
      *
-     * @param  bool $version
+     * @param  bool  $version
      * @return $this
      */
     public function setVersion($version)
@@ -85,7 +85,7 @@ class TopHits extends AbstractAggregation
     /**
      * Enables explanation for each hit on how its score was computed.
      *
-     * @param  bool $explain
+     * @param  bool  $explain
      * @return $this
      */
     public function setExplain($explain)

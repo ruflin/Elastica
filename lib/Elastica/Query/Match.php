@@ -19,8 +19,8 @@ class Match extends AbstractQuery
     /**
      * Sets a param for the message array
      *
-     * @param  string                $field
-     * @param  mixed                 $values
+     * @param  string $field
+     * @param  mixed  $values
      * @return $this
      */
     public function setField($field, $values)
@@ -31,9 +31,9 @@ class Match extends AbstractQuery
     /**
      * Sets a param for the given field
      *
-     * @param  string                $field
-     * @param  string                $key
-     * @param  string                $value
+     * @param  string $field
+     * @param  string $key
+     * @param  string $value
      * @return $this
      */
     public function setFieldParam($field, $key, $value)
@@ -50,8 +50,8 @@ class Match extends AbstractQuery
     /**
      * Sets the query string
      *
-     * @param  string                $field
-     * @param  string                $query
+     * @param  string $field
+     * @param  string $query
      * @return $this
      */
     public function setFieldQuery($field, $query)
@@ -62,8 +62,8 @@ class Match extends AbstractQuery
     /**
      * Set field type
      *
-     * @param  string                $field
-     * @param  string                $type
+     * @param  string $field
+     * @param  string $type
      * @return $this
      */
     public function setFieldType($field, $type)
@@ -74,8 +74,8 @@ class Match extends AbstractQuery
     /**
      * Set field operator
      *
-     * @param  string                $field
-     * @param  string                $operator
+     * @param  string $field
+     * @param  string $operator
      * @return $this
      */
     public function setFieldOperator($field, $operator)
@@ -86,8 +86,8 @@ class Match extends AbstractQuery
     /**
      * Set field analyzer
      *
-     * @param  string                $field
-     * @param  string                $analyzer
+     * @param  string $field
+     * @param  string $analyzer
      * @return $this
      */
     public function setFieldAnalyzer($field, $analyzer)
@@ -100,8 +100,8 @@ class Match extends AbstractQuery
      *
      * If not set, defaults to 1.0.
      *
-     * @param  string                $field
-     * @param  float                 $boost
+     * @param  string $field
+     * @param  float  $boost
      * @return $this
      */
     public function setFieldBoost($field, $boost = 1.0)
@@ -112,8 +112,8 @@ class Match extends AbstractQuery
     /**
      * Set field minimum should match
      *
-     * @param  string                $field
-     * @param  int|string            $minimumShouldMatch
+     * @param  string     $field
+     * @param  int|string $minimumShouldMatch
      * @return $this
      * @link Possible values for minimum_should_match http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
@@ -125,8 +125,8 @@ class Match extends AbstractQuery
     /**
      * Set field fuzziness
      *
-     * @param  string                $field
-     * @param  mixed                 $fuzziness
+     * @param  string $field
+     * @param  mixed  $fuzziness
      * @return $this
      */
     public function setFieldFuzziness($field, $fuzziness)
@@ -137,8 +137,8 @@ class Match extends AbstractQuery
     /**
      * Set field fuzzy rewrite
      *
-     * @param  string                $field
-     * @param  string                $fuzzyRewrite
+     * @param  string $field
+     * @param  string $fuzzyRewrite
      * @return $this
      */
     public function setFieldFuzzyRewrite($field, $fuzzyRewrite)
@@ -149,8 +149,8 @@ class Match extends AbstractQuery
     /**
      * Set field prefix length
      *
-     * @param  string                $field
-     * @param  int                   $prefixLength
+     * @param  string $field
+     * @param  int    $prefixLength
      * @return $this
      */
     public function setFieldPrefixLength($field, $prefixLength)
@@ -161,8 +161,8 @@ class Match extends AbstractQuery
     /**
      * Set field max expansions
      *
-     * @param  string                $field
-     * @param  int                   $maxExpansions
+     * @param  string $field
+     * @param  int    $maxExpansions
      * @return $this
      */
     public function setFieldMaxExpansions($field, $maxExpansions)
@@ -175,8 +175,8 @@ class Match extends AbstractQuery
      *
      * If not set, default to 'none'
      *
-     * @param  string                $field
-     * @param  string                $zeroTermQuery
+     * @param  string $field
+     * @param  string $zeroTermQuery
      * @return $this
      */
     public function setFieldZeroTermsQuery($field, $zeroTermQuery = 'none')
@@ -187,8 +187,8 @@ class Match extends AbstractQuery
     /**
      * Set cutoff frequency
      *
-     * @param  string                $field
-     * @param  float                 $cutoffFrequency
+     * @param  string $field
+     * @param  float  $cutoffFrequency
      * @return $this
      */
     public function setFieldCutoffFrequency($field, $cutoffFrequency)

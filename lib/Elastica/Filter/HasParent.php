@@ -55,7 +55,7 @@ class HasParent extends AbstractFilter
     /**
      * Set type of the parent document
      *
-     * @param  string|\Elastica\Type      $type Parent document type
+     * @param  string|\Elastica\Type $type Parent document type
      * @return $this
      */
     public function setType($type)

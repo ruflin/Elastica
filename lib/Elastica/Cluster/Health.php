@@ -16,16 +16,12 @@ use Elastica\Request;
 class Health
 {
     /**
-     * Elastica client.
-     *
-     * @var \Elastica\Client Client object
+     * @var \Elastica\Client Client object.
      */
     protected $_client = null;
 
     /**
-     * The cluster health data.
-     *
-     * @var array
+     * @var array The cluster health data.
      */
     protected $_data = null;
 

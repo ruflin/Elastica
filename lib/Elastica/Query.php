@@ -60,8 +60,9 @@ class Query extends Param
      *
      * If query is empty,
      *
-     * @param  mixed                                       $query
      * @throws \Elastica\Exception\NotImplementedException
+     *
+     * @param  mixed $query
      * @return self
      */
     public static function create($query)
@@ -97,7 +98,7 @@ class Query extends Param
     /**
      * Sets query as raw array. Will overwrite all already set arguments
      *
-     * @param  array           $query Query array
+     * @param  array $query Query array
      * @return $this
      */
     public function setRawQuery(array $query)
@@ -146,7 +147,7 @@ class Query extends Param
     /**
      * Sets the start from which the search results should be returned
      *
-     * @param  int             $from
+     * @param  int   $from
      * @return $this
      */
     public function setFrom($from)
@@ -158,7 +159,7 @@ class Query extends Param
      * Sets sort arguments for the query
      * Replaces existing values
      *
-     * @param  array           $sortArgs Sorting arguments
+     * @param  array $sortArgs Sorting arguments
      * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/sort.html
      */
@@ -170,7 +171,7 @@ class Query extends Param
     /**
      * Adds a sort param to the query
      *
-     * @param  mixed           $sort Sort parameter
+     * @param  mixed $sort Sort parameter
      * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/sort.html
      */
@@ -182,7 +183,7 @@ class Query extends Param
     /**
      * Sets highlight arguments for the query
      *
-     * @param  array           $highlightArgs Set all highlight arguments
+     * @param  array $highlightArgs Set all highlight arguments
      * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/highlighting.html
      */
@@ -194,7 +195,7 @@ class Query extends Param
     /**
      * Adds a highlight argument
      *
-     * @param  mixed           $highlight Add highlight argument
+     * @param  mixed $highlight Add highlight argument
      * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/highlighting.html
      */
@@ -206,7 +207,7 @@ class Query extends Param
     /**
      * Sets maximum number of results for this query
      *
-     * @param  int             $size OPTIONAL Maximal number of results for query (default = 10)
+     * @param  int   $size OPTIONAL Maximal number of results for query (default = 10)
      * @return $this
      */
     public function setSize($size = 10)
@@ -218,7 +219,7 @@ class Query extends Param
      * Alias for setSize
      *
      * @deprecated Use the setSize() method, this method will be removed in future releases
-     * @param  int             $limit OPTIONAL Maximal number of results for query (default = 10)
+     * @param  int   $limit OPTIONAL Maximal number of results for query (default = 10)
      * @return $this
      */
     public function setLimit($limit = 10)
@@ -229,7 +230,7 @@ class Query extends Param
     /**
      * Enables explain on the query
      *
-     * @param  bool            $explain OPTIONAL Enabled or disable explain (default = true)
+     * @param  bool  $explain OPTIONAL Enabled or disable explain (default = true)
      * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/explain.html
      */
@@ -241,7 +242,7 @@ class Query extends Param
     /**
      * Enables version on the query
      *
-     * @param  bool            $version OPTIONAL Enabled or disable version (default = true)
+     * @param  bool  $version OPTIONAL Enabled or disable version (default = true)
      * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/version.html
      */
@@ -255,7 +256,7 @@ class Query extends Param
      * NOTICE php will encode modified(or named keys) array into object format in json format request
      * so the fields array must a sequence(list) type of array
      *
-     * @param  array           $fields Fields to be returned
+     * @param  array $fields Fields to be returned
      * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/fields.html
      */
@@ -297,7 +298,7 @@ class Query extends Param
     /**
      * Sets all facets for this query object. Replaces existing facets
      *
-     * @param  array           $facets List of facet objects
+     * @param  array $facets List of facet objects
      * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/facets/
      */
@@ -365,8 +366,9 @@ class Query extends Param
     /**
      * Allows filtering of documents based on a minimum score
      *
-     * @param  int                                  $minScore Minimum score to filter documents by
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  int   $minScore Minimum score to filter documents by
      * @return $this
      */
     public function setMinScore($minScore)
@@ -381,7 +383,7 @@ class Query extends Param
     /**
      * Add a suggest term
      *
-     * @param \Elastica\Suggest $suggest suggestion object
+     * @param  \Elastica\Suggest $suggest suggestion object
      * @return $this
      */
     public function setSuggest(Suggest $suggest)
@@ -392,7 +394,7 @@ class Query extends Param
         ));
 
         $this->_suggest = 1;
-        
+
         return $this;
     }
 
@@ -410,7 +412,7 @@ class Query extends Param
     /**
      * Sets the _source field to be returned with every hit
      *
-     * @param  array           $fields Fields to be returned
+     * @param  array $fields Fields to be returned
      * @return $this
      * @link   http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-source-filtering.html
      */

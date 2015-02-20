@@ -25,9 +25,10 @@ class ScriptFields extends Param
     }
 
     /**
-     * @param  string                               $name   Name of the Script field
-     * @param  \Elastica\Script                     $script
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  string           $name   Name of the Script field
+     * @param  \Elastica\Script $script
      * @return $this
      */
     public function addScript($name, Script $script)

@@ -51,7 +51,7 @@ class Search
     }
 
     /**
-     * @param  \Elastica\Client       $client
+     * @param  \Elastica\Client $client
      * @return $this
      */
     public function setClient(Client $client)
@@ -72,8 +72,8 @@ class Search
     }
 
     /**
-     * @param  \Elastica\Search       $search
-     * @param  string                 $key    Optional key
+     * @param  \Elastica\Search $search
+     * @param  string           $key    Optional key
      * @return $this
      */
     public function addSearch(BaseSearch $search, $key = null)
@@ -121,7 +121,7 @@ class Search
     }
 
     /**
-     * @param  string                 $searchType
+     * @param  string $searchType
      * @return $this
      */
     public function setSearchType($searchType)

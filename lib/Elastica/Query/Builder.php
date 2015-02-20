@@ -314,8 +314,8 @@ class Builder extends AbstractQuery
     /**
      * Add a specific field / value entry.
      *
-     * @param string $name  Field to add.
-     * @param mixed  $value Value to set.
+     * @param  string $name  Field to add.
+     * @param  mixed  $value Value to set.
      * @return $this
      */
     public function field($name, $value)

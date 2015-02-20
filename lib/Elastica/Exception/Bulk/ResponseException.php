@@ -15,8 +15,6 @@ use Elastica\Exception\BulkException;
 class ResponseException extends BulkException
 {
     /**
-     * Response
-     *
      * @var \Elastica\Bulk\ResponseSet ResponseSet object
      */
     protected $_responseSet;

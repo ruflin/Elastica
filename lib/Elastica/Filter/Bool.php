@@ -71,9 +71,10 @@ class Bool extends AbstractFilter
     /**
      * Adds general filter based on type
      *
+     * @throws \Elastica\Exception\InvalidException
+     *
      * @param  string                                $type Filter type
      * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
-     * @throws \Elastica\Exception\InvalidException
      * @return $this
      */
     protected function _addFilter($type, $args)
@@ -102,6 +103,7 @@ class Bool extends AbstractFilter
      * Converts bool filter to array
      *
      * @see \Elastica\Filter\AbstractFilter::toArray()
+     *
      * @return array Filter array
      */
     public function toArray()

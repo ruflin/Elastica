@@ -51,9 +51,10 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param  \Elastica\Response                   $response
-     * @param  array|\Elastica\Search[]             $searches
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param \Elastica\Response       $response
+     * @param array|\Elastica\Search[] $searches
      */
     protected function _init(Response $response, array $searches)
     {

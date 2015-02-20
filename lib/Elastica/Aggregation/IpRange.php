@@ -23,7 +23,7 @@ class IpRange extends AbstractAggregation
 
     /**
      * Set the field for this aggregation
-     * @param  string  $field the name of the document field on which to perform this aggregation
+     * @param  string $field the name of the document field on which to perform this aggregation
      * @return $this
      */
     public function setField($field)
@@ -56,7 +56,7 @@ class IpRange extends AbstractAggregation
 
     /**
      * Add an ip range in the form of a CIDR mask
-     * @param  string  $mask a valid CIDR mask
+     * @param  string $mask a valid CIDR mask
      * @return $this
      */
     public function addMaskRange($mask)

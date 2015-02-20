@@ -23,7 +23,7 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param  \Elastica\Document                     $document
+     * @param  \Elastica\Document $document
      * @return $this
      */
     public function setDocument(Document $document)
@@ -38,7 +38,7 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param  \Elastica\Script                       $script
+     * @param  \Elastica\Script $script
      * @return $this
      */
     public function setScript(Script $script)
@@ -56,8 +56,9 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param  \Elastica\Script|\Elastica\Document    $data
      * @throws \InvalidArgumentException
+     *
+     * @param  \Elastica\Script|\Elastica\Document $data
      * @return $this
      */
     public function setData($data)
@@ -114,8 +115,8 @@ abstract class AbstractDocument extends Action
     abstract protected function _getMetadata(AbstractUpdateAction $source);
 
     /**
-     * @param  \Elastica\Document|\Elastica\Script    $data
-     * @param  string                                 $opType
+     * @param  \Elastica\Document|\Elastica\Script $data
+     * @param  string                              $opType
      * @return static
      */
     public static function create($data, $opType = null)

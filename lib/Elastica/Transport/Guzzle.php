@@ -41,12 +41,13 @@ class Guzzle extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param  \Elastica\Request                            $request
-     * @param  array                                        $params  Host, Port, ...
      * @throws \Elastica\Exception\ConnectionException
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
-     * @return \Elastica\Response                           Response object
+     *
+     * @param  \Elastica\Request  $request
+     * @param  array              $params  Host, Port, ...
+     * @return \Elastica\Response Response object
      */
     public function exec(Request $request, array $params)
     {

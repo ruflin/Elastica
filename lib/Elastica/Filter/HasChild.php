@@ -56,7 +56,7 @@ class HasChild extends AbstractFilter
     /**
      * Set type of the child document
      *
-     * @param  string|\Elastica\Type      $type Child document type
+     * @param  string|\Elastica\Type $type Child document type
      * @return $this
      */
     public function setType($type)
@@ -70,7 +70,7 @@ class HasChild extends AbstractFilter
 
     /**
      * Set minimum number of children are required to match for the parent doc to be considered a match
-     * @param  int                       $count
+     * @param  int   $count
      * @return $this
      */
     public function setMinimumChildrenCount($count)
@@ -80,7 +80,7 @@ class HasChild extends AbstractFilter
 
     /**
      * Set maximum number of children are required to match for the parent doc to be considered a match
-     * @param  int                       $count
+     * @param  int   $count
      * @return $this
      */
     public function setMaximumChildrenCount($count)

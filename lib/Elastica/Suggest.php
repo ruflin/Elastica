@@ -24,7 +24,7 @@ class Suggest extends Param
 
     /**
      * Set the global text for this suggester
-     * @param  string            $text
+     * @param  string $text
      * @return $this
      */
     public function setGlobalText($text)
@@ -34,7 +34,7 @@ class Suggest extends Param
 
     /**
      * Add a suggestion to this suggest clause
-     * @param  AbstractSuggest   $suggestion
+     * @param  AbstractSuggest $suggestion
      * @return $this
      */
     public function addSuggestion(AbstractSuggest $suggestion)
@@ -43,9 +43,10 @@ class Suggest extends Param
     }
 
     /**
-     * @param  Suggest|AbstractSuggest           $suggestion
-     * @return self
      * @throws Exception\NotImplementedException
+     *
+     * @param  Suggest|AbstractSuggest $suggestion
+     * @return self
      */
     public static function create($suggestion)
     {

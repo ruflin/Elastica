@@ -77,5 +77,4 @@ class ScriptedMetric extends AbstractAggregation
     {
         return $this->setParam('reduce_script', $script);
     }
-
 }

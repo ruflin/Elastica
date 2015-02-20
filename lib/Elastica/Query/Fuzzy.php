@@ -17,8 +17,8 @@ class Fuzzy extends AbstractQuery
     /**
      * Construct a fuzzy query
      *
-     * @param  string                $fieldName Field name
-     * @param  string                $value     String to search for
+     * @param string $fieldName Field name
+     * @param string $value     String to search for
      */
     public function __construct($fieldName = null, $value = null)
     {
@@ -30,8 +30,8 @@ class Fuzzy extends AbstractQuery
     /**
      * Set field for fuzzy query
      *
-     * @param  string                $fieldName Field name
-     * @param  string                $value     String to search for
+     * @param  string $fieldName Field name
+     * @param  string $value     String to search for
      * @return $this
      */
     public function setField($fieldName, $value)
@@ -49,8 +49,8 @@ class Fuzzy extends AbstractQuery
     /**
      * Set optional parameters on the existing query
      *
-     * @param  string                $param option name
-     * @param  mixed                 $value Value of the parameter
+     * @param  string $param option name
+     * @param  mixed  $value Value of the parameter
      * @return $this
      */
     public function setFieldOption($param, $value)

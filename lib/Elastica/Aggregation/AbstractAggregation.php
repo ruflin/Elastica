@@ -8,14 +8,12 @@ use Elastica\Param;
 abstract class AbstractAggregation extends Param
 {
     /**
-     * The name of this aggregation
-     * @var string
+     * @var string The name of this aggregation
      */
     protected $_name;
 
     /**
-     * Subaggregations belonging to this aggregation
-     * @var array
+     * @var array Subaggregations belonging to this aggregation
      */
     protected $_aggs = array();
 
@@ -58,8 +56,9 @@ abstract class AbstractAggregation extends Param
 
     /**
      * Add a sub-aggregation
-     * @param  AbstractAggregation                  $aggregation
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  AbstractAggregation $aggregation
      * @return $this
      */
     public function addAggregation(AbstractAggregation $aggregation)

@@ -23,10 +23,11 @@ class GeoDistance extends AbstractGeoDistance
     /**
      * Create GeoDistance object
      *
-     * @param  string                               $key      Key
-     * @param  array|string                         $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
-     * @param  string                               $distance Distance
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param string       $key      Key
+     * @param array|string $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
+     * @param string       $distance Distance
      */
     public function __construct($key, $location, $distance)
     {
@@ -36,7 +37,7 @@ class GeoDistance extends AbstractGeoDistance
     }
 
     /**
-     * @param  string                       $distance
+     * @param  string $distance
      * @return $this
      */
     public function setDistance($distance)
@@ -49,7 +50,7 @@ class GeoDistance extends AbstractGeoDistance
     /**
      * See DISTANCE_TYPE_* constants
      *
-     * @param  string                       $distanceType
+     * @param  string $distanceType
      * @return $this
      */
     public function setDistanceType($distanceType)
@@ -62,7 +63,7 @@ class GeoDistance extends AbstractGeoDistance
     /**
      * See OPTIMIZE_BBOX_* constants
      *
-     * @param  string                       $optimizeBbox
+     * @param  string $optimizeBbox
      * @return $this
      */
     public function setOptimizeBbox($optimizeBbox)

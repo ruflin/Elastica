@@ -14,10 +14,11 @@ class JSON
     /**
      * Parse JSON string to an array
      *
-     * @param  string $json JSON string to parse
-     * @return array  PHP array representation of JSON string
      * @link http://php.net/manual/en/function.json-decode.php
      * @link http://www.php.net/manual/en/function.json-last-error.php
+     *
+     * @param  string $json JSON string to parse
+     * @return array  PHP array representation of JSON string
      */
     public static function parse(/* inherit from json_decode */)
     {
@@ -45,9 +46,10 @@ class JSON
     /**
      * Convert input to JSON string with standard options
      *
+     * @link http://php.net/manual/en/function.json-encode.php
+     *
      * @param  mixed check args for PHP function json_encode
      * @return string Valid JSON representation of $input
-     * @link http://php.net/manual/en/function.json-encode.php
      */
     public static function stringify(/* inherit from json_encode */)
     {

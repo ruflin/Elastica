@@ -43,7 +43,7 @@ class HasChild extends AbstractQuery
     /**
      * Set type of the parent document
      *
-     * @param  string                   $type Parent document type
+     * @param  string $type Parent document type
      * @return $this
      */
     public function setType($type)
@@ -54,7 +54,7 @@ class HasChild extends AbstractQuery
     /**
      * Sets the scope
      *
-     * @param  string                   $scope Scope
+     * @param  string $scope Scope
      * @return $this
      */
     public function setScope($scope)
