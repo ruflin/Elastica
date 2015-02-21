@@ -1,5 +1,8 @@
 CHANGES
 
+2015-02-21
+- Add Scrutinizer Code Quality status badge
+
 2015-02-18
 - Added support for percentiles aggregation
 
