@@ -49,8 +49,8 @@ class Request extends Param
     /**
      * Sets the request method. Use one of the for consts
      *
-     * @param  string            $method Request method
-     * @return \Elastica\Request Current object
+     * @param  string $method Request method
+     * @return $this
      */
     public function setMethod($method)
     {
@@ -70,8 +70,8 @@ class Request extends Param
     /**
      * Sets the request data
      *
-     * @param  array             $data Request data
-     * @return \Elastica\Request
+     * @param  array $data Request data
+     * @return $this
      */
     public function setData($data)
     {
@@ -91,8 +91,8 @@ class Request extends Param
     /**
      * Sets the request path
      *
-     * @param  string            $path Request path
-     * @return \Elastica\Request Current object
+     * @param  string $path Request path
+     * @return $this
      */
     public function setPath($path)
     {
@@ -120,8 +120,8 @@ class Request extends Param
     }
 
     /**
-     * @param  array             $query
-     * @return \Elastica\Request
+     * @param  array $query
+     * @return $this
      */
     public function setQuery(array $query = array())
     {
@@ -130,7 +130,7 @@ class Request extends Param
 
     /**
      * @param  \Elastica\Connection $connection
-     * @return \Elastica\Request
+     * @return $this
      */
     public function setConnection(Connection $connection)
     {
@@ -142,7 +142,8 @@ class Request extends Param
     /**
      * Return Connection Object
      *
-     * @throws Exception\InvalidException
+     * @throws Exception\InvalidException If no valid connection was setted
+     *
      * @return \Elastica\Connection
      */
     public function getConnection()

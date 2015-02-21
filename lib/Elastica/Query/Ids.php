@@ -38,8 +38,8 @@ class Ids extends AbstractQuery
     /**
      * Adds one more filter to the and filter
      *
-     * @param  string              $id Adds id to filter
-     * @return \Elastica\Query\Ids Current object
+     * @param  string $id Adds id to filter
+     * @return $this
      */
     public function addId($id)
     {
@@ -52,7 +52,7 @@ class Ids extends AbstractQuery
      * Adds one more type to query
      *
      * @param  string|\Elastica\Type $type Type name or object
-     * @return \Elastica\Query\Ids   Current object
+     * @return $this
      */
     public function addType($type)
     {
@@ -72,7 +72,7 @@ class Ids extends AbstractQuery
      * Set type
      *
      * @param  string|\Elastica\Type $type Type name or object
-     * @return \Elastica\Query\Ids   Current object
+     * @return $this
      */
     public function setType($type)
     {
@@ -91,8 +91,8 @@ class Ids extends AbstractQuery
     /**
      * Sets the ids to filter
      *
-     * @param  array|string        $ids List of ids
-     * @return \Elastica\Query\Ids Current object
+     * @param  array|string $ids List of ids
+     * @return $this
      */
     public function setIds($ids)
     {

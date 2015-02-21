@@ -64,6 +64,7 @@ class GeoShapePreIndexed extends AbstractGeoShape
      * Converts filter to array
      *
      * @see \Elastica\Filter\AbstractFilter::toArray()
+     *
      * @return array
      */
     public function toArray()

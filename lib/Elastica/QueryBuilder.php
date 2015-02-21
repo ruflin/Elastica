@@ -44,10 +44,11 @@ class QueryBuilder
     /**
      * Returns Facade for custom DSL object
      *
-     * @param $dsl
-     * @param  array                 $arguments
-     * @return Facade
      * @throws QueryBuilderException
+     *
+     * @param $dsl
+     * @param  array  $arguments
+     * @return Facade
      */
     public function __call($dsl, array $arguments)
     {

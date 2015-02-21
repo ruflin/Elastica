@@ -799,7 +799,7 @@ class TypeTest extends BaseTest
         $index = $this->_createIndex();
 
         $type = new Type($index, 'user');
-        $type->setSerializer(array(new SerializerMock(), 'serialize'));
+        $type->setSerializer('get_object_vars');
 
         $userObject = new \stdClass();
         $userObject->username = 'hans';
@@ -816,6 +816,14 @@ class TypeTest extends BaseTest
         $result = $resultSet->current();
         $data = $result->getData();
         $this->assertEquals('hans', $data['username']);
+    }
+
+    public function testSetSerializer()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('user');
+        $ret = $type->setSerializer('get_object_vars');
+        $this->assertInstanceOf('Elastica\Type', $ret);
     }
 
     public function testExists()
@@ -878,13 +886,5 @@ class TypeTest extends BaseTest
             array('test-alias-type' => array('properties' => $expect)),
             $client->getIndex($aliasName)->getType($typeName)->getMapping()
         );
-    }
-}
-
-class SerializerMock
-{
-    public function serialize($object)
-    {
-        return get_object_vars($object);
     }
 }

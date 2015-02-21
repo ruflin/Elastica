@@ -126,4 +126,26 @@ class ScriptTest extends BaseTest
             ),
         );
     }
+
+    public function testSetLang()
+    {
+        $script = new Script('foo', array(), Script::LANG_GROOVY);
+        $this->assertEquals(Script::LANG_GROOVY, $script->getLang());
+
+        $script->setLang(Script::LANG_PYTHON);
+        $this->assertEquals(Script::LANG_PYTHON, $script->getLang());
+
+        $this->assertInstanceOf('Elastica\Script', $script->setLang(Script::LANG_PYTHON));
+    }
+
+    public function testSetScript()
+    {
+        $script = new Script('foo');
+        $this->assertEquals('foo', $script->getScript());
+
+        $script->setScript('bar');
+        $this->assertEquals('bar', $script->getScript());
+
+        $this->assertInstanceOf('Elastica\Script', $script->setScript('foo'));
+    }
 }

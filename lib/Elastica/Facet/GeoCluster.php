@@ -51,6 +51,7 @@ class GeoCluster extends AbstractFacet
      *
      * @see \Elastica\Facet\AbstractFacet::toArray()
      * @throws \Elastica\Exception\InvalidException When the right fields haven't been set.
+     *
      * @return array
      */
     public function toArray()

@@ -16,8 +16,6 @@ use Elastica\Request;
 class Settings
 {
     /**
-     * Client
-     *
      * @var \Elastica\Client Client object
      */
     protected $_client = null;

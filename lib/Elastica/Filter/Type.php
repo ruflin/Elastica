@@ -22,8 +22,7 @@ class Type extends AbstractFilter
     /**
      * Construct Type Filter
      *
-     * @param  string                $typeName Type name
-     * @return \Elastica\Filter\Type
+     * @param string $typeName Type name
      */
     public function __construct($typeName = null)
     {
@@ -35,8 +34,8 @@ class Type extends AbstractFilter
     /**
      * Ads a field with arguments to the range query
      *
-     * @param  string                $typeName Type name
-     * @return \Elastica\Filter\Type current object
+     * @param  string $typeName Type name
+     * @return $this
      */
     public function setType($typeName)
     {
@@ -49,6 +48,7 @@ class Type extends AbstractFilter
      * Convert object to array
      *
      * @see \Elastica\Filter\AbstractFilter::toArray()
+     *
      * @return array Filter array
      */
     public function toArray()

@@ -23,8 +23,8 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param  \Elastica\Document                     $document
-     * @return \Elastica\Bulk\Action\AbstractDocument
+     * @param  \Elastica\Document $document
+     * @return $this
      */
     public function setDocument(Document $document)
     {
@@ -38,8 +38,8 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param  \Elastica\Script                       $script
-     * @return \Elastica\Bulk\Action\AbstractDocument
+     * @param  \Elastica\Script $script
+     * @return $this
      */
     public function setScript(Script $script)
     {
@@ -56,9 +56,10 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param  \Elastica\Script|\Elastica\Document    $data
      * @throws \InvalidArgumentException
-     * @return \Elastica\Bulk\Action\AbstractDocument
+     *
+     * @param  \Elastica\Script|\Elastica\Document $data
+     * @return $this
      */
     public function setData($data)
     {
@@ -75,7 +76,7 @@ abstract class AbstractDocument extends Action
 
     /**
      * Note: This is for backwards compatibility.
-     * @return \Elastica\Document
+     * @return \Elastica\Document|null
      */
     public function getDocument()
     {
@@ -88,7 +89,7 @@ abstract class AbstractDocument extends Action
 
     /**
      * Note: This is for backwards compatibility.
-     * @return \Elastica\Script
+     * @return \Elastica\Script|null
      */
     public function getScript()
     {
@@ -114,9 +115,9 @@ abstract class AbstractDocument extends Action
     abstract protected function _getMetadata(AbstractUpdateAction $source);
 
     /**
-     * @param  \Elastica\Document|\Elastica\Script    $data
-     * @param  string                                 $opType
-     * @return \Elastica\Bulk\Action\AbstractDocument
+     * @param  \Elastica\Document|\Elastica\Script $data
+     * @param  string                              $opType
+     * @return static
      */
     public static function create($data, $opType = null)
     {

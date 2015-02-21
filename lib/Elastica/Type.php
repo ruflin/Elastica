@@ -108,10 +108,11 @@ class Type implements SearchableInterface
     }
 
     /**
-     * @param $object
-     * @param  Document                   $doc
-     * @return Response
      * @throws Exception\RuntimeException
+     *
+     * @param $object
+     * @param  Document $doc
+     * @return Response
      */
     public function addObject($object, Document $doc = null)
     {
@@ -131,11 +132,12 @@ class Type implements SearchableInterface
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
-     * @param  \Elastica\Document|\Elastica\Script  $data    Document with update data
-     * @param  array                                $options array of query params to use for query. For possible options check es api
-     * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Response
      * @link http://www.elasticsearch.org/guide/reference/api/update.html
+     * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  \Elastica\Document|\Elastica\Script $data    Document with update data
+     * @param  array                               $options array of query params to use for query. For possible options check es api
+     * @return \Elastica\Response
      */
     public function updateDocument($data, array $options = array())
     {
@@ -218,10 +220,11 @@ class Type implements SearchableInterface
     /**
      * Get the document from search index
      *
-     * @param  string                                $id      Document id
-     * @param  array                                 $options Options for the get request.
      * @throws \Elastica\Exception\NotFoundException
      * @throws \Elastica\Exception\ResponseException
+     *
+     * @param  string             $id      Document id
+     * @param  array              $options Options for the get request.
      * @return \Elastica\Document
      */
     public function getDocument($id, $options = array())
@@ -403,12 +406,13 @@ class Type implements SearchableInterface
     /**
      * Deletes an entry by its unique identifier
      *
-     * @param  int|string                            $id      Document id
-     * @param  array                                 $options
      * @throws \InvalidArgumentException
      * @throws \Elastica\Exception\NotFoundException
-     * @return \Elastica\Response                    Response object
      * @link http://www.elasticsearch.org/guide/reference/api/delete.html
+     *
+     * @param  int|string         $id      Document id
+     * @param  array              $options
+     * @return \Elastica\Response Response object
      */
     public function deleteById($id, array $options = array())
     {
@@ -516,11 +520,14 @@ class Type implements SearchableInterface
      * Sets the serializer callable used in addObject
      * @see \Elastica\Type::addObject
      *
-     * @param array|string $serializer @see \Elastica\Type::_serializer
+     * @param  array|string $serializer @see \Elastica\Type::_serializer
+     * @return $this
      */
     public function setSerializer($serializer)
     {
         $this->_serializer = $serializer;
+
+        return $this;
     }
 
     /**

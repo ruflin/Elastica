@@ -14,7 +14,7 @@ class Filter extends AbstractAggregation
     /**
      * Set the filter for this aggregation
      * @param  AbstractFilter $filter
-     * @return Filter
+     * @return $this
      */
     public function setFilter(AbstractFilter $filter)
     {

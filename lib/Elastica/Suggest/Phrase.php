@@ -12,8 +12,8 @@ use Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator;
 class Phrase extends AbstractSuggest
 {
     /**
-     * @param  string                   $analyzer
-     * @return \Elastica\Suggest\Phrase
+     * @param  string $analyzer
+     * @return $this
      */
     public function setAnalyzer($analyzer)
     {
@@ -22,8 +22,8 @@ class Phrase extends AbstractSuggest
 
     /**
      * Set the max size of the n-grams (shingles) in the field
-     * @param  int                      $size
-     * @return \Elastica\Suggest\Phrase
+     * @param  int   $size
+     * @return $this
      */
     public function setGramSize($size)
     {
@@ -32,8 +32,8 @@ class Phrase extends AbstractSuggest
 
     /**
      * Set the likelihood of a term being misspelled even if the term exists in the dictionary
-     * @param  float                    $likelihood Defaults to 0.95, meaning 5% of the words are misspelled.
-     * @return \Elastica\Suggest\Phrase
+     * @param  float $likelihood Defaults to 0.95, meaning 5% of the words are misspelled.
+     * @return $this
      */
     public function setRealWordErrorLikelihood($likelihood)
     {
@@ -43,8 +43,8 @@ class Phrase extends AbstractSuggest
     /**
      * Set the factor applied to the input phrases score to be used as a threshold for other suggestion candidates.
      * Only candidates which score higher than this threshold will be included in the result.
-     * @param  float                    $confidence Defaults to 1.0.
-     * @return \Elastica\Suggest\Phrase
+     * @param  float $confidence Defaults to 1.0.
+     * @return $this
      */
     public function setConfidence($confidence)
     {
@@ -53,8 +53,8 @@ class Phrase extends AbstractSuggest
 
     /**
      * Set the maximum percentage of the terms considered to be misspellings in order to form a correction
-     * @param  float                    $max
-     * @return \Elastica\Suggest\Phrase
+     * @param  float $max
+     * @return $this
      */
     public function setMaxErrors($max)
     {
@@ -62,8 +62,8 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param  string          $separator
-     * @return \Elastica\Param
+     * @param  string $separator
+     * @return $this
      */
     public function setSeparator($separator)
     {
@@ -72,9 +72,9 @@ class Phrase extends AbstractSuggest
 
     /**
      * Set suggestion highlighting
-     * @param  string                   $preTag
-     * @param  string                   $postTag
-     * @return \Elastica\Suggest\Phrase
+     * @param  string $preTag
+     * @param  string $postTag
+     * @return $this
      */
     public function setHighlight($preTag, $postTag)
     {
@@ -85,8 +85,8 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param  float                    $discount
-     * @return \Elastica\Suggest\Phrase
+     * @param  float $discount
+     * @return $this
      */
     public function setStupidBackoffSmoothing($discount = 0.4)
     {
@@ -96,8 +96,8 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param  float                    $alpha
-     * @return \Elastica\Suggest\Phrase
+     * @param  float $alpha
+     * @return $this
      */
     public function setLaplaceSmoothing($alpha = 0.5)
     {
@@ -107,10 +107,10 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param  float                    $trigramLambda
-     * @param  float                    $bigramLambda
-     * @param  float                    $unigramLambda
-     * @return \Elastica\Suggest\Phrase
+     * @param  float $trigramLambda
+     * @param  float $bigramLambda
+     * @param  float $unigramLambda
+     * @return $this
      */
     public function setLinearInterpolationSmoothing($trigramLambda, $bigramLambda, $unigramLambda)
     {
@@ -122,9 +122,9 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @param  string                   $model  the name of the smoothing model
-     * @param  array                    $params
-     * @return \Elastica\Suggest\Phrase
+     * @param  string $model  the name of the smoothing model
+     * @param  array  $params
+     * @return $this
      */
     public function setSmoothingModel($model, array $params)
     {
@@ -135,7 +135,7 @@ class Phrase extends AbstractSuggest
 
     /**
      * @param  AbstractCandidateGenerator $generator
-     * @return \Elastica\Suggest\Phrase
+     * @return $this
      */
     public function addCandidateGenerator(AbstractCandidateGenerator $generator)
     {

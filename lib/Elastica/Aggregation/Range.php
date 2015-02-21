@@ -23,13 +23,17 @@ class Range extends AbstractSimpleAggregation
         if (is_null($fromValue) && is_null($toValue)) {
             throw new InvalidException("Either fromValue or toValue must be set. Both cannot be null.");
         }
+
         $range = array();
+
         if (!is_null($fromValue)) {
             $range['from'] = $fromValue;
         }
+
         if (!is_null($toValue)) {
             $range['to'] = $toValue;
         }
+
         if (!is_null($key)) {
             $range['key'] = $key;
         }

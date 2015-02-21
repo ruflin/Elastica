@@ -223,7 +223,6 @@ class MatchTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
-
     public function testMatchFuzzinessType()
     {
         $field = 'test';

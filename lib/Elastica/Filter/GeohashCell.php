@@ -24,8 +24,8 @@ class GeohashCell extends AbstractGeoDistance
 
     /**
      * Set the precision for this filter
-     * @param  string|int                   $precision Integer length of geohash prefix or distance (3, or "50m")
-     * @return \Elastica\Filter\GeohashCell
+     * @param  string|int $precision Integer length of geohash prefix or distance (3, or "50m")
+     * @return $this
      */
     public function setPrecision($precision)
     {
@@ -34,8 +34,8 @@ class GeohashCell extends AbstractGeoDistance
 
     /**
      * Set the neighbors option for this filter
-     * @param  bool                         $neighbors If true, filters cells next to the given cell.
-     * @return \Elastica\Filter\GeohashCell
+     * @param  bool  $neighbors If true, filters cells next to the given cell.
+     * @return $this
      */
     public function setNeighbors($neighbors)
     {

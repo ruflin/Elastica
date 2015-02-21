@@ -15,8 +15,8 @@ class Histogram extends AbstractFacet
     /**
      * Sets the field for histogram
      *
-     * @param  string                    $field The name of the field for the histogram
-     * @return \Elastica\Facet\Histogram
+     * @param  string $field The name of the field for the histogram
+     * @return $this
      */
     public function setField($field)
     {
@@ -26,8 +26,8 @@ class Histogram extends AbstractFacet
     /**
      * Set the value for interval
      *
-     * @param  string                    $interval
-     * @return \Elastica\Facet\Histogram
+     * @param  string $interval
+     * @return $this
      */
     public function setInterval($interval)
     {
@@ -37,9 +37,9 @@ class Histogram extends AbstractFacet
     /**
      * Set the fields for key_field and value_field
      *
-     * @param  string                    $keyField   Key field
-     * @param  string                    $valueField Value field
-     * @return \Elastica\Facet\Histogram
+     * @param  string $keyField   Key field
+     * @param  string $valueField Value field
+     * @return $this
      */
     public function setKeyValueFields($keyField, $valueField)
     {
@@ -49,9 +49,9 @@ class Histogram extends AbstractFacet
     /**
      * Sets the key and value for this facet by script.
      *
-     * @param  string                    $keyScript   Script to check whether it falls into the range.
-     * @param  string                    $valueScript Script to use for statistical calculations.
-     * @return \Elastica\Facet\Histogram
+     * @param  string $keyScript   Script to check whether it falls into the range.
+     * @param  string $valueScript Script to use for statistical calculations.
+     * @return $this
      */
     public function setKeyValueScripts($keyScript, $valueScript)
     {
@@ -62,8 +62,8 @@ class Histogram extends AbstractFacet
     /**
      * Set the "params" essential to the a script
      *
-     * @param  array                     $params Associative array (key/value pair)
-     * @return \Elastica\Facet\Histogram
+     * @param  array $params Associative array (key/value pair)
+     * @return $this
      */
     public function setScriptParams(array $params)
     {
@@ -76,6 +76,7 @@ class Histogram extends AbstractFacet
      *
      * @see \Elastica\Facet\AbstractFacet::toArray()
      * @throws \Elastica\Exception\InvalidException When the right fields haven't been set.
+     *
      * @return array
      */
     public function toArray()

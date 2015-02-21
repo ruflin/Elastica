@@ -34,8 +34,8 @@ class FunctionScore extends AbstractQuery
 
     /**
      * Set the child query for this function_score query
-     * @param  AbstractQuery                 $query
-     * @return \Elastica\Query\FunctionScore
+     * @param  AbstractQuery $query
+     * @return $this
      */
     public function setQuery(AbstractQuery $query)
     {
@@ -43,8 +43,8 @@ class FunctionScore extends AbstractQuery
     }
 
     /**
-     * @param  AbstractFilter  $filter
-     * @return \Elastica\Param
+     * @param  AbstractFilter $filter
+     * @return $this
      */
     public function setFilter(AbstractFilter $filter)
     {
@@ -53,11 +53,11 @@ class FunctionScore extends AbstractQuery
 
     /**
      * Add a function to the function_score query
-     * @param  string                        $functionType   valid values are DECAY_* constants and script_score
-     * @param  array|float                   $functionParams the body of the function. See documentation for proper syntax.
-     * @param  AbstractFilter                $filter         optional filter to apply to the function
-     * @param  float                         $weight         function weight
-     * @return \Elastica\Query\FunctionScore
+     * @param  string         $functionType   valid values are DECAY_* constants and script_score
+     * @param  array|float    $functionParams the body of the function. See documentation for proper syntax.
+     * @param  AbstractFilter $filter         optional filter to apply to the function
+     * @param  float          $weight         function weight
+     * @return $this
      */
     public function addFunction($functionType, $functionParams, AbstractFilter $filter = null, $weight = null)
     {
@@ -78,10 +78,10 @@ class FunctionScore extends AbstractQuery
 
     /**
      * Add a script_score function to the query
-     * @param  Script                        $script a Script object
-     * @param  AbstractFilter                $filter an optional filter to apply to the function
-     * @param  float                         $weight the weight of the function
-     * @return \Elastica\Query\FunctionScore
+     * @param  Script         $script a Script object
+     * @param  AbstractFilter $filter an optional filter to apply to the function
+     * @param  float          $weight the weight of the function
+     * @return $this
      */
     public function addScriptScoreFunction(Script $script, AbstractFilter $filter = null, $weight = null)
     {
@@ -90,16 +90,16 @@ class FunctionScore extends AbstractQuery
 
     /**
      * Add a decay function to the query
-     * @param  string                        $function    see DECAY_* constants for valid options
-     * @param  string                        $field       the document field on which to perform the decay function
-     * @param  string                        $origin      the origin value for this decay function
-     * @param  string                        $scale       a scale to define the rate of decay for this function
-     * @param  string                        $offset      If defined, this function will only be computed for documents with a distance from the origin greater than this value
-     * @param  float                         $decay       optionally defines how documents are scored at the distance given by the $scale parameter
-     * @param  float                         $scaleWeight optional factor by which to multiply the score at the value provided by the $scale parameter
-     * @param  float                         $weight      optional factor by which to multiply the score at the value provided by the $scale parameter
-     * @param  AbstractFilter                $filter      a filter associated with this function
-     * @return \Elastica\Query\FunctionScore
+     * @param  string         $function    see DECAY_* constants for valid options
+     * @param  string         $field       the document field on which to perform the decay function
+     * @param  string         $origin      the origin value for this decay function
+     * @param  string         $scale       a scale to define the rate of decay for this function
+     * @param  string         $offset      If defined, this function will only be computed for documents with a distance from the origin greater than this value
+     * @param  float          $decay       optionally defines how documents are scored at the distance given by the $scale parameter
+     * @param  float          $scaleWeight optional factor by which to multiply the score at the value provided by the $scale parameter
+     * @param  float          $weight      optional factor by which to multiply the score at the value provided by the $scale parameter
+     * @param  AbstractFilter $filter      a filter associated with this function
+     * @return $this
      */
     public function addDecayFunction(
         $function,
@@ -165,8 +165,8 @@ class FunctionScore extends AbstractQuery
 
     /**
      * Set an overall boost value for this query
-     * @param  float                         $boost
-     * @return \Elastica\Query\FunctionScore
+     * @param  float $boost
+     * @return $this
      */
     public function setBoost($boost)
     {
@@ -175,8 +175,8 @@ class FunctionScore extends AbstractQuery
 
     /**
      * Restrict the combined boost of the function_score query and its child query
-     * @param  float                         $maxBoost
-     * @return \Elastica\Query\FunctionScore
+     * @param  float $maxBoost
+     * @return $this
      */
     public function setMaxBoost($maxBoost)
     {
@@ -185,8 +185,8 @@ class FunctionScore extends AbstractQuery
 
     /**
      * The boost mode determines how the score of this query is combined with that of the child query
-     * @param  string                        $mode see BOOST_MODE_* constants for valid options. Default is multiply.
-     * @return \Elastica\Query\FunctionScore
+     * @param  string $mode see BOOST_MODE_* constants for valid options. Default is multiply.
+     * @return $this
      */
     public function setBoostMode($mode)
     {
@@ -195,8 +195,8 @@ class FunctionScore extends AbstractQuery
 
     /**
      * If set, this query will return results in random order.
-     * @param  int                           $seed Set a seed value to return results in the same random order for consistent pagination.
-     * @return \Elastica\Query\FunctionScore
+     * @param  int   $seed Set a seed value to return results in the same random order for consistent pagination.
+     * @return $this
      */
     public function setRandomScore($seed = null)
     {
@@ -210,8 +210,8 @@ class FunctionScore extends AbstractQuery
 
     /**
      * Set the score method
-     * @param  string                        $mode see SCORE_MODE_* constants for valid options. Default is multiply.
-     * @return \Elastica\Query\FunctionScore
+     * @param  string $mode see SCORE_MODE_* constants for valid options. Default is multiply.
+     * @return $this
      */
     public function setScoreMode($mode)
     {

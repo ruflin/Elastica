@@ -26,8 +26,8 @@ class Term extends AbstractQuery
      * Set term can be used instead of addTerm if some more special
      * values for a term have to be set.
      *
-     * @param  array                $term Term array
-     * @return \Elastica\Query\Term Current object
+     * @param  array $term Term array
+     * @return $this
      */
     public function setRawTerm(array $term)
     {
@@ -37,10 +37,10 @@ class Term extends AbstractQuery
     /**
      * Adds a term to the term query
      *
-     * @param  string               $key   Key to query
-     * @param  string|array         $value Values(s) for the query. Boost can be set with array
-     * @param  float                $boost OPTIONAL Boost value (default = 1.0)
-     * @return \Elastica\Query\Term Current object
+     * @param  string       $key   Key to query
+     * @param  string|array $value Values(s) for the query. Boost can be set with array
+     * @param  float        $boost OPTIONAL Boost value (default = 1.0)
+     * @return $this
      */
     public function setTerm($key, $value, $boost = 1.0)
     {

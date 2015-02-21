@@ -220,8 +220,8 @@ class Response
      * Sets the transfer info of the curl request. This function is called
      * from the \Elastica\Client::_callService .
      *
-     * @param  array              $transferInfo The curl transfer information.
-     * @return \Elastica\Response Current object
+     * @param  array $transferInfo The curl transfer information.
+     * @return $this
      */
     public function setTransferInfo(array $transferInfo)
     {
@@ -243,8 +243,8 @@ class Response
     /**
      * Sets the query time
      *
-     * @param  float              $queryTime Query time
-     * @return \Elastica\Response Current object
+     * @param  float $queryTime Query time
+     * @return $this
      */
     public function setQueryTime($queryTime)
     {
@@ -257,7 +257,8 @@ class Response
      * Time request took
      *
      * @throws \Elastica\Exception\NotFoundException
-     * @return int                                   Time request took
+     *
+     * @return int Time request took
      */
     public function getEngineTime()
     {
@@ -274,6 +275,7 @@ class Response
      * Get the _shard statistics for the response
      *
      * @throws \Elastica\Exception\NotFoundException
+     *
      * @return array
      */
     public function getShardsStatistics()
@@ -291,6 +293,7 @@ class Response
      * Get the _scroll value for the response
      *
      * @throws \Elastica\Exception\NotFoundException
+     *
      * @return string
      */
     public function getScrollId()

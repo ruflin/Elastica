@@ -38,9 +38,10 @@ class Index implements SearchableInterface
      *
      * All the communication to and from an index goes of this object
      *
-     * @param  \Elastica\Client                     $client Client object
-     * @param  string                               $name   Index name
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param \Elastica\Client $client Client object
+     * @param string           $name   Index name
      */
     public function __construct(Client $client, $name)
     {
@@ -203,14 +204,15 @@ class Index implements SearchableInterface
     /**
      * Creates a new index with the given arguments
      *
-     * @param  array                                 $args    OPTIONAL Arguments to use
-     * @param  bool|array                            $options OPTIONAL
-     *                                                        bool=> Deletes index first if already exists (default = false).
-     *                                                        array => Associative array of options (option=>value)
      * @throws \Elastica\Exception\InvalidException
      * @throws \Elastica\Exception\ResponseException
-     * @return array                                 Server response
      * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index.html
+     *
+     * @param  array      $args    OPTIONAL Arguments to use
+     * @param  bool|array $options OPTIONAL
+     *                             bool=> Deletes index first if already exists (default = false).
+     *                             array => Associative array of options (option=>value)
+     * @return array      Server response
      */
     public function create(array $args = array(), $options = null)
     {

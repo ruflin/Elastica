@@ -44,9 +44,11 @@ class Snapshot
 
     /**
      * Retrieve a repository record by name
-     * @param  string                      $name the name of the desired repository
+     *
      * @throws Exception\ResponseException
      * @throws Exception\NotFoundException
+     *
+     * @param  string $name the name of the desired repository
      * @return array
      */
     public function getRepository($name)
@@ -88,10 +90,12 @@ class Snapshot
 
     /**
      * Retrieve data regarding a specific snapshot
-     * @param  string                      $repository the name of the repository from which to retrieve the snapshot
-     * @param  string                      $name       the name of the desired snapshot
+     *
      * @throws Exception\ResponseException
      * @throws Exception\NotFoundException
+     *
+     * @param  string $repository the name of the repository from which to retrieve the snapshot
+     * @param  string $name       the name of the desired snapshot
      * @return array
      */
     public function getSnapshot($repository, $name)

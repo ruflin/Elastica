@@ -18,10 +18,11 @@ class Util
      * and
      * escapes the following terms: + - && || ! ( ) { } [ ] ^ " ~ * ? : \
      *
-     * @param  string $term Query term to replace and escape
-     * @return string Replaced and escaped query term
      * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators
      * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters
+     *
+     * @param  string $term Query term to replace and escape
+     * @return string Replaced and escaped query term
      */
     public static function replaceBooleanWordsAndEscapeTerm($term)
     {
@@ -36,9 +37,10 @@ class Util
      * Escapes the following terms (because part of the query language)
      * + - && || ! ( ) { } [ ] ^ " ~ * ? : \
      *
+     * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters
+     *
      * @param  string $term Query term to escape
      * @return string Escaped query term
-     * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters
      */
     public static function escapeTerm($term)
     {
@@ -57,9 +59,10 @@ class Util
      * Replace the following reserved words (because part of the query language)
      * AND OR NOT
      *
+     * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators
+     *
      * @param  string $term Query term to replace
      * @return string Replaced query term
-     * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators
      */
     public static function replaceBooleanWords($term)
     {

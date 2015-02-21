@@ -33,11 +33,14 @@ abstract class AbstractGeoShape extends AbstractFilter
     protected $_relation = self::RELATION_INTERSECT;
 
     /**
-     * @param string $relation
+     * @param  string $relation
+     * @return $this
      */
     public function setRelation($relation)
     {
         $this->_relation = $relation;
+
+        return $this;
     }
 
     /**

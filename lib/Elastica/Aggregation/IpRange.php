@@ -23,8 +23,8 @@ class IpRange extends AbstractAggregation
 
     /**
      * Set the field for this aggregation
-     * @param  string  $field the name of the document field on which to perform this aggregation
-     * @return IpRange
+     * @param  string $field the name of the document field on which to perform this aggregation
+     * @return $this
      */
     public function setField($field)
     {
@@ -35,7 +35,7 @@ class IpRange extends AbstractAggregation
      * Add an ip range to this aggregation
      * @param  string                               $fromValue a valid ipv4 address. Low end of this range, exclusive (greater than)
      * @param  string                               $toValue   a valid ipv4 address. High end of this range, exclusive (less than)
-     * @return IpRange
+     * @return $this
      * @throws \Elastica\Exception\InvalidException
      */
     public function addRange($fromValue = null, $toValue = null)
@@ -56,8 +56,8 @@ class IpRange extends AbstractAggregation
 
     /**
      * Add an ip range in the form of a CIDR mask
-     * @param  string  $mask a valid CIDR mask
-     * @return IpRange
+     * @param  string $mask a valid CIDR mask
+     * @return $this
      */
     public function addMaskRange($mask)
     {

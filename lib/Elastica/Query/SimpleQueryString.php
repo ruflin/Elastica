@@ -26,8 +26,8 @@ class SimpleQueryString extends AbstractQuery
 
     /**
      * Set the querystring for this query
-     * @param  string                            $query see ES documentation for querystring syntax
-     * @return \Elastica\Query\SimpleQueryString
+     * @param  string $query see ES documentation for querystring syntax
+     * @return $this
      */
     public function setQuery($query)
     {
@@ -35,8 +35,8 @@ class SimpleQueryString extends AbstractQuery
     }
 
     /**
-     * @param  string[]                          $fields the fields on which to perform this query. Defaults to index.query.default_field.
-     * @return \Elastica\Query\SimpleQueryString
+     * @param  string[] $fields the fields on which to perform this query. Defaults to index.query.default_field.
+     * @return $this
      */
     public function setFields(array $fields)
     {
@@ -45,8 +45,8 @@ class SimpleQueryString extends AbstractQuery
 
     /**
      * Set the default operator to use if no explicit operator is defined in the query string
-     * @param  string                            $operator see OPERATOR_* constants for options
-     * @return \Elastica\Query\SimpleQueryString
+     * @param  string $operator see OPERATOR_* constants for options
+     * @return $this
      */
     public function setDefaultOperator($operator)
     {
@@ -55,8 +55,8 @@ class SimpleQueryString extends AbstractQuery
 
     /**
      * Set the analyzer used to analyze each term of the query
-     * @param  string                            $analyzer
-     * @return \Elastica\Query\SimpleQueryString
+     * @param  string $analyzer
+     * @return $this
      */
     public function setAnalyzer($analyzer)
     {

@@ -47,7 +47,7 @@ class Query extends AbstractRescore
      * Sets rescoreQuery object
      *
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Query\Rescore
+     * @return $this
      */
     public function setRescoreQuery($rescoreQuery)
     {
@@ -63,8 +63,8 @@ class Query extends AbstractRescore
     /**
      * Sets query_weight
      *
-     * @param  float                   $weight
-     * @return \Elastica\Query\Rescore
+     * @param  float $weight
+     * @return $this
      */
     public function setQueryWeight($weight)
     {
@@ -77,8 +77,8 @@ class Query extends AbstractRescore
     /**
      * Sets rescore_query_weight
      *
-     * @param  float                   $size
-     * @return \Elastica\Query\Rescore
+     * @param  float $size
+     * @return $this
      */
     public function setRescoreQueryWeight($weight)
     {

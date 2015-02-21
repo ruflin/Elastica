@@ -27,8 +27,8 @@ class Missing extends AbstractFilter
     /**
      * Set field
      *
-     * @param  string                   $field
-     * @return \Elastica\Filter\Missing
+     * @param  string $field
+     * @return $this
      */
     public function setField($field)
     {
@@ -37,8 +37,8 @@ class Missing extends AbstractFilter
 
     /**
      * Set "existence" parameter
-     * @param  bool                     $existence
-     * @return \Elastica\Filter\Missing
+     * @param  bool  $existence
+     * @return $this
      */
     public function setExistence($existence)
     {
@@ -47,8 +47,8 @@ class Missing extends AbstractFilter
 
     /**
      * Set "null_value" parameter
-     * @param  bool                     $nullValue
-     * @return \Elastica\Filter\Missing
+     * @param  bool  $nullValue
+     * @return $this
      */
     public function setNullValue($nullValue)
     {

@@ -12,16 +12,12 @@ namespace Elastica\Cluster\Health;
 class Shard
 {
     /**
-     * The shard index/number.
-     *
-     * @var int
+     * @var int The shard index/number.
      */
     protected $_shardNumber;
 
     /**
-     * The shard health data.
-     *
-     * @var array
+     * @var array The shard health data.
      */
     protected $_data;
 

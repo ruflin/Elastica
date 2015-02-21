@@ -140,9 +140,10 @@ class Cluster
     /**
      * Returns the cluster information (not implemented yet)
      *
-     * @param  array                                       $args Additional arguments
      * @throws \Elastica\Exception\NotImplementedException
      * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-info.html
+     *
+     * @param array $args Additional arguments
      */
     public function getInfo(array $args)
     {
@@ -152,8 +153,9 @@ class Cluster
     /**
      * Return Cluster health
      *
-     * @return \Elastica\Cluster\Health
      * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-health.html
+     *
+     * @return \Elastica\Cluster\Health
      */
     public function getHealth()
     {
@@ -173,9 +175,10 @@ class Cluster
     /**
      * Shuts down the complete cluster
      *
+     * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown.html
+     *
      * @param  string             $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
      * @return \Elastica\Response
-     * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown.html
      */
     public function shutdown($delay = '1s')
     {

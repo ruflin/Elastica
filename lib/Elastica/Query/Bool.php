@@ -18,7 +18,7 @@ class Bool extends AbstractQuery
      * Add should part to query
      *
      * @param  \Elastica\Query\AbstractQuery|array $args Should query
-     * @return \Elastica\Query\Bool                Current object
+     * @return $this
      */
     public function addShould($args)
     {
@@ -29,7 +29,7 @@ class Bool extends AbstractQuery
      * Add must part to query
      *
      * @param  \Elastica\Query\AbstractQuery|array $args Must query
-     * @return \Elastica\Query\Bool                Current object
+     * @return $this
      */
     public function addMust($args)
     {
@@ -40,7 +40,7 @@ class Bool extends AbstractQuery
      * Add must not part to query
      *
      * @param  \Elastica\Query\AbstractQuery|array $args Must not query
-     * @return \Elastica\Query\Bool                Current object
+     * @return $this
      */
     public function addMustNot($args)
     {
@@ -50,10 +50,11 @@ class Bool extends AbstractQuery
     /**
      * Adds a query to the current object
      *
-     * @param  string                               $type Query type
-     * @param  \Elastica\Query\AbstractQuery|array  $args Query
-     * @return \Elastica\Query\Bool
      * @throws \Elastica\Exception\InvalidException If not valid query
+     *
+     * @param  string                              $type Query type
+     * @param  \Elastica\Query\AbstractQuery|array $args Query
+     * @return $this
      */
     protected function _addQuery($type, $args)
     {
@@ -71,8 +72,8 @@ class Bool extends AbstractQuery
     /**
      * Sets boost value of this query
      *
-     * @param  float                $boost Boost value
-     * @return \Elastica\Query\Bool Current object
+     * @param  float $boost Boost value
+     * @return $this
      */
     public function setBoost($boost)
     {
@@ -82,8 +83,8 @@ class Bool extends AbstractQuery
     /**
      * Set the minimum number of of should match
      *
-     * @param  int                  $minimumNumberShouldMatch Should match minimum
-     * @return \Elastica\Query\Bool Current object
+     * @param  int   $minimumNumberShouldMatch Should match minimum
+     * @return $this
      */
     public function setMinimumNumberShouldMatch($minimumNumberShouldMatch)
     {

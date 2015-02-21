@@ -200,9 +200,11 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 
     /**
      * Retrieve a specific aggregation from this result set
-     * @param  string                     $name the name of the desired aggregation
-     * @return array
+     *
      * @throws Exception\InvalidException if an aggregation by the given name cannot be found
+     *
+     * @param  string $name the name of the desired aggregation
+     * @return array
      */
     public function getAggregation($name)
     {
@@ -371,9 +373,9 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Offset to retrieve
      * @link http://php.net/manual/en/arrayaccess.offsetget.php
+     * @throws Exception\InvalidException If offset doesn't exist
      *
-     * @param  integer                    $offset
-     * @throws Exception\InvalidException
+     * @param  integer     $offset
      * @return Result|null
      */
     public function offsetGet($offset)
@@ -388,10 +390,10 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Offset to set
      * @link http://php.net/manual/en/arrayaccess.offsetset.php
-     *
-     * @param  integer                    $offset
-     * @param  Result                     $value
      * @throws Exception\InvalidException
+     *
+     * @param integer $offset
+     * @param Result  $value
      */
     public function offsetSet($offset, $value)
     {

@@ -29,10 +29,10 @@ class Wildcard extends AbstractQuery
     /**
      * Sets the query expression for a key with its boost value
      *
-     * @param  string                   $key
-     * @param  string                   $value
-     * @param  float                    $boost
-     * @return \Elastica\Query\Wildcard
+     * @param  string $key
+     * @param  string $value
+     * @param  float  $boost
+     * @return $this
      */
     public function setValue($key, $value, $boost = 1.0)
     {

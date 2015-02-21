@@ -12,7 +12,7 @@ class DateRange extends Range
     /**
      * Set the formatting for the returned date values
      * @param  string $format see documentation for formatting options
-     * @return Range
+     * @return $this
      */
     public function setFormat($format)
     {

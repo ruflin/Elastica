@@ -12,16 +12,12 @@ namespace Elastica\Cluster\Health;
 class Index
 {
     /**
-     * The name of the index.
-     *
-     * @var string
+     * @var string The name of the index.
      */
     protected $_name;
 
     /**
-     * The index health data.
-     *
-     * @var array
+     * @var array The index health data.
      */
     protected $_data;
 

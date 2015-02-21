@@ -70,8 +70,8 @@ abstract class AbstractGeoDistance extends AbstractFilter
     }
 
     /**
-     * @param  string                               $key
-     * @return \Elastica\Filter\AbstractGeoDistance current filter
+     * @param  string $key
+     * @return $this
      */
     public function setKey($key)
     {
@@ -81,9 +81,10 @@ abstract class AbstractGeoDistance extends AbstractFilter
     }
 
     /**
-     * @param  array|string                         $location
-     * @return \Elastica\Filter\AbstractGeoDistance
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param  array|string $location
+     * @return $this
      */
     public function setLocation($location)
     {
@@ -112,8 +113,8 @@ abstract class AbstractGeoDistance extends AbstractFilter
     }
 
     /**
-     * @param  float                                $latitude
-     * @return \Elastica\Filter\AbstractGeoDistance current filter
+     * @param  float $latitude
+     * @return $this
      */
     public function setLatitude($latitude)
     {
@@ -124,8 +125,8 @@ abstract class AbstractGeoDistance extends AbstractFilter
     }
 
     /**
-     * @param  float                                $longitude
-     * @return \Elastica\Filter\AbstractGeoDistance current filter
+     * @param  float $longitude
+     * @return $this
      */
     public function setLongitude($longitude)
     {
@@ -136,8 +137,8 @@ abstract class AbstractGeoDistance extends AbstractFilter
     }
 
     /**
-     * @param  string                               $geohash
-     * @return \Elastica\Filter\AbstractGeoDistance current filter
+     * @param  string $geohash
+     * @return $this
      */
     public function setGeohash($geohash)
     {
@@ -148,8 +149,9 @@ abstract class AbstractGeoDistance extends AbstractFilter
     }
 
     /**
-     * @return array|string
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @return array|string
      */
     protected function _getLocationData()
     {
@@ -179,6 +181,8 @@ abstract class AbstractGeoDistance extends AbstractFilter
     /**
      * @see \Elastica\Param::toArray()
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @return array
      */
     public function toArray()
     {

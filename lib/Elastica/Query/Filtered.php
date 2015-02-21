@@ -31,7 +31,7 @@ class Filtered extends AbstractQuery
      * Sets a query
      *
      * @param  \Elastica\Query\AbstractQuery $query Query object
-     * @return \Elastica\Query\Filtered      Current object
+     * @return $this
      */
     public function setQuery(AbstractQuery $query = null)
     {
@@ -42,7 +42,7 @@ class Filtered extends AbstractQuery
      * Sets the filter
      *
      * @param  \Elastica\Filter\AbstractFilter $filter Filter object
-     * @return \Elastica\Query\Filtered        Current object
+     * @return $this
      */
     public function setFilter(AbstractFilter $filter = null)
     {

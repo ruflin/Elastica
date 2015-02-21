@@ -36,8 +36,8 @@ class Common extends AbstractQuery
 
     /**
      * Set the field on which to query
-     * @param  string                 $field the field on which to query
-     * @return \Elastica\Query\Common
+     * @param  string $field the field on which to query
+     * @return $this
      */
     public function setField($field)
     {
@@ -48,8 +48,8 @@ class Common extends AbstractQuery
 
     /**
      * Set the query string for this query
-     * @param  string                 $query
-     * @return \Elastica\Query\Common
+     * @param  string $query
+     * @return $this
      */
     public function setQuery($query)
     {
@@ -58,8 +58,8 @@ class Common extends AbstractQuery
 
     /**
      * Set the frequency below which terms will be put in the low frequency group
-     * @param  float                  $frequency percentage in decimal form (.001 == 0.1%)
-     * @return \Elastica\Query\Common
+     * @param  float $frequency percentage in decimal form (.001 == 0.1%)
+     * @return $this
      */
     public function setCutoffFrequency($frequency)
     {
@@ -68,8 +68,8 @@ class Common extends AbstractQuery
 
     /**
      * Set the logic operator for low frequency terms
-     * @param  string                 $operator see OPERATOR_* class constants for options
-     * @return \Elastica\Query\Common
+     * @param  string $operator see OPERATOR_* class constants for options
+     * @return $this
      */
     public function setLowFrequencyOperator($operator)
     {
@@ -78,8 +78,8 @@ class Common extends AbstractQuery
 
     /**
      * Set the logic operator for high frequency terms
-     * @param  string                 $operator see OPERATOR_* class constants for options
-     * @return \Elastica\Query\Common
+     * @param  string $operator see OPERATOR_* class constants for options
+     * @return $this
      */
     public function setHighFrequencyOperator($operator)
     {
@@ -88,8 +88,8 @@ class Common extends AbstractQuery
 
     /**
      * Set the minimum_should_match parameter
-     * @param  int|string             $minimum minimum number of low frequency terms which must be present
-     * @return \Elastica\Query\Common
+     * @param  int|string $minimum minimum number of low frequency terms which must be present
+     * @return $this
      * @link Possible values for minimum_should_match http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
     public function setMinimumShouldMatch($minimum)
@@ -99,8 +99,8 @@ class Common extends AbstractQuery
 
     /**
      * Set the boost for this query
-     * @param  float                  $boost
-     * @return \Elastica\Query\Common
+     * @param  float $boost
+     * @return $this
      */
     public function setBoost($boost)
     {
@@ -109,8 +109,8 @@ class Common extends AbstractQuery
 
     /**
      * Set the analyzer for this query
-     * @param  string                 $analyzer
-     * @return \Elastica\Query\Common
+     * @param  string $analyzer
+     * @return $this
      */
     public function setAnalyzer($analyzer)
     {
@@ -119,8 +119,8 @@ class Common extends AbstractQuery
 
     /**
      * Enable / disable computation of score factor based on the fraction of all query terms contained in the document
-     * @param  bool                   $disable disable_coord is false by default
-     * @return \Elastica\Query\Common
+     * @param  bool  $disable disable_coord is false by default
+     * @return $this
      */
     public function setDisableCoord($disable = true)
     {
@@ -129,9 +129,9 @@ class Common extends AbstractQuery
 
     /**
      * Set a parameter in the body of this query
-     * @param  string                 $key   parameter key
-     * @param  mixed                  $value parameter value
-     * @return \Elastica\Query\Common
+     * @param  string $key   parameter key
+     * @param  mixed  $value parameter value
+     * @return $this
      */
     public function setQueryParam($key, $value)
     {

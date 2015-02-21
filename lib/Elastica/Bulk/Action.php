@@ -52,8 +52,8 @@ class Action
     }
 
     /**
-     * @param  string                $type
-     * @return \Elastica\Bulk\Action
+     * @param  string $type
+     * @return $this
      */
     public function setOpType($type)
     {
@@ -71,8 +71,8 @@ class Action
     }
 
     /**
-     * @param  array                 $metadata
-     * @return \Elastica\Bulk\Action
+     * @param  array $metadata
+     * @return $this
      */
     public function setMetadata(array $metadata)
     {
@@ -98,8 +98,8 @@ class Action
     }
 
     /**
-     * @param  array                 $source
-     * @return \Elastica\Bulk\Action
+     * @param  array $source
+     * @return $this
      */
     public function setSource($source)
     {
@@ -126,7 +126,7 @@ class Action
 
     /**
      * @param  string|\Elastica\Index $index
-     * @return \Elastica\Bulk\Action
+     * @return $this
      */
     public function setIndex($index)
     {
@@ -140,7 +140,7 @@ class Action
 
     /**
      * @param  string|\Elastica\Type $type
-     * @return \Elastica\Bulk\Action
+     * @return $this
      */
     public function setType($type)
     {
@@ -154,8 +154,8 @@ class Action
     }
 
     /**
-     * @param  string                $id
-     * @return \Elastica\Bulk\Action
+     * @param  string $id
+     * @return $this
      */
     public function setId($id)
     {
@@ -165,8 +165,8 @@ class Action
     }
 
     /**
-     * @param  string                $routing
-     * @return \Elastica\Bulk\Action
+     * @param  string $routing
+     * @return $this
      */
     public function setRouting($routing)
     {

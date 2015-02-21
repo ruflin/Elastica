@@ -24,11 +24,12 @@ class Memcache extends AbstractTransport
     /**
      * Makes calls to the elasticsearch server
      *
-     * @param  \Elastica\Request                     $request
-     * @param  array                                 $params  Host, Port, ...
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Response                    Response object
+     *
+     * @param  \Elastica\Request  $request
+     * @param  array              $params  Host, Port, ...
+     * @return \Elastica\Response Response object
      */
     public function exec(Request $request, array $params)
     {
@@ -99,7 +100,8 @@ class Memcache extends AbstractTransport
      * Check if key that will be used dont exceed 250 symbols
      *
      * @throws Elastica\Exception\Connection\MemcacheException If key is too long
-     * @param  string                                          $key
+     *
+     * @param string $key
      */
     private function _checkKeyLength($key)
     {

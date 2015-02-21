@@ -22,8 +22,8 @@ class GeoDistance extends AbstractFacet
      * array('from' => 150)
      * )
      *
-     * @param  array                       $ranges Numerical array with range definitions.
-     * @return \Elastica\Facet\GeoDistance
+     * @param  array $ranges Numerical array with range definitions.
+     * @return $this
      */
     public function setRanges(array $ranges)
     {
@@ -33,10 +33,10 @@ class GeoDistance extends AbstractFacet
     /**
      * Set the relative GeoPoint for the facet.
      *
-     * @param  string                      $typeField index type and field e.g foo.bar
-     * @param  float                       $latitude
-     * @param  float                       $longitude
-     * @return \Elastica\Facet\GeoDistance
+     * @param  string $typeField index type and field e.g foo.bar
+     * @param  float  $latitude
+     * @param  float  $longitude
+     * @return $this
      */
     public function setGeoPoint($typeField, $latitude, $longitude)
     {
@@ -52,6 +52,7 @@ class GeoDistance extends AbstractFacet
      *
      * @see \Elastica\Facet\AbstractFacet::toArray()
      * @throws \Elastica\Exception\InvalidException When the right fields haven't been set.
+     *
      * @return array
      */
     public function toArray()

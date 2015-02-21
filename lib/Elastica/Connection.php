@@ -62,8 +62,8 @@ class Connection extends Param
     }
 
     /**
-     * @param  int                  $port
-     * @return \Elastica\Connection
+     * @param  int   $port
+     * @return $this
      */
     public function setPort($port)
     {
@@ -79,8 +79,8 @@ class Connection extends Param
     }
 
     /**
-     * @param  string               $host
-     * @return \Elastica\Connection
+     * @param  string $host
+     * @return $this
      */
     public function setHost($host)
     {
@@ -100,8 +100,8 @@ class Connection extends Param
      * empty string to disable proxy and proxy string to set actual http proxy.
      *
      * @see http://curl.haxx.se/libcurl/c/curl_easy_setopt.html#CURLOPTPROXY
-     * @param  string|null          $proxy
-     * @return \Elastica\Connection
+     * @param  string|null $proxy
+     * @return $this
      */
     public function setProxy($proxy)
     {
@@ -117,8 +117,8 @@ class Connection extends Param
     }
 
     /**
-     * @param  string|array         $transport
-     * @return \Elastica\Connection
+     * @param  string|array $transport
+     * @return $this
      */
     public function setTransport($transport)
     {
@@ -134,8 +134,8 @@ class Connection extends Param
     }
 
     /**
-     * @param  string               $path
-     * @return \Elastica\Connection
+     * @param  string $path
+     * @return $this
      */
     public function setPath($path)
     {
@@ -143,8 +143,8 @@ class Connection extends Param
     }
 
     /**
-     * @param  int                  $timeout Timeout in seconds
-     * @return \Elastica\Connection
+     * @param  int   $timeout Timeout in seconds
+     * @return $this
      */
     public function setTimeout($timeout)
     {
@@ -162,8 +162,8 @@ class Connection extends Param
     /**
      * Enables a connection
      *
-     * @param  bool                 $enabled OPTIONAL (default = true)
-     * @return \Elastica\Connection
+     * @param  bool  $enabled OPTIONAL (default = true)
+     * @return $this
      */
     public function setEnabled($enabled = true)
     {
@@ -181,8 +181,9 @@ class Connection extends Param
     /**
      * Returns an instance of the transport type
      *
+     * @throws \Elastica\Exception\InvalidException If invalid transport type
+     *
      * @return \Elastica\Transport\AbstractTransport Transport object
-     * @throws \Elastica\Exception\InvalidException  If invalid transport type
      */
     public function getTransportObject()
     {
@@ -200,8 +201,8 @@ class Connection extends Param
     }
 
     /**
-     * @param  array                $config
-     * @return \Elastica\Connection
+     * @param  array $config
+     * @return $this
      */
     public function setConfig(array $config)
     {
@@ -209,9 +210,9 @@ class Connection extends Param
     }
 
     /**
-     * @param  string               $key
-     * @param  mixed                $value
-     * @return \Elastica\Connection
+     * @param  string $key
+     * @param  mixed  $value
+     * @return $this
      */
     public function addConfig($key, $value)
     {
@@ -235,9 +236,10 @@ class Connection extends Param
      * Returns a specific config key or the whole
      * config array if not set
      *
-     * @param  string                               $key Config key
      * @throws \Elastica\Exception\InvalidException
-     * @return array|string                         Config value
+     *
+     * @param  string       $key Config key
+     * @return array|string Config value
      */
     public function getConfig($key = '')
     {
@@ -254,9 +256,10 @@ class Connection extends Param
     }
 
     /**
-     * @param  \Elastica\Connection|array $params Params to create a connection
      * @throws Exception\InvalidException
-     * @return \Elastica\Connection
+     *
+     * @param  \Elastica\Connection|array $params Params to create a connection
+     * @return self
      */
     public static function create($params = array())
     {

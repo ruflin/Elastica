@@ -23,7 +23,7 @@ class Indices extends AbstractFilter
     /**
      * Set the indices on which this filter should be applied
      * @param  mixed[] $indices
-     * @return Indices
+     * @return $this
      */
     public function setIndices(array $indices)
     {
@@ -38,7 +38,7 @@ class Indices extends AbstractFilter
     /**
      * Adds one more index on which this filter should be applied
      * @param  string|\Elastica\Index $index
-     * @return Indices
+     * @return $this
      */
     public function addIndex($index)
     {
@@ -52,7 +52,7 @@ class Indices extends AbstractFilter
     /**
      * Set the filter to be applied to docs in the specified indices
      * @param  AbstractFilter $filter
-     * @return Indices
+     * @return $this
      */
     public function setFilter(AbstractFilter $filter)
     {
@@ -62,7 +62,7 @@ class Indices extends AbstractFilter
     /**
      * Set the filter to be applied to docs in indices which do not match those specified in the "indices" parameter
      * @param  AbstractFilter $filter
-     * @return Indices
+     * @return $this
      */
     public function setNoMatchFilter(AbstractFilter $filter)
     {

@@ -60,9 +60,10 @@ class Query extends Param
      *
      * If query is empty,
      *
-     * @param  mixed                                       $query
      * @throws \Elastica\Exception\NotImplementedException
-     * @return \Elastica\Query
+     *
+     * @param  mixed $query
+     * @return self
      */
     public static function create($query)
     {
@@ -97,8 +98,8 @@ class Query extends Param
     /**
      * Sets query as raw array. Will overwrite all already set arguments
      *
-     * @param  array           $query Query array
-     * @return \Elastica\Query Query object
+     * @param  array $query Query array
+     * @return $this
      */
     public function setRawQuery(array $query)
     {
@@ -111,7 +112,7 @@ class Query extends Param
      * Sets the query
      *
      * @param  \Elastica\Query\AbstractQuery $query Query object
-     * @return \Elastica\Query               Query object
+     * @return $this
      */
     public function setQuery(AbstractQuery $query)
     {
@@ -132,7 +133,7 @@ class Query extends Param
      * Set Filter
      *
      * @param  \Elastica\Filter\AbstractFilter $filter Filter object
-     * @return \Elastica\Query                 Current object
+     * @return $this
      * @link    https://github.com/elasticsearch/elasticsearch/issues/7422
      * @deprecated
      */
@@ -146,8 +147,8 @@ class Query extends Param
     /**
      * Sets the start from which the search results should be returned
      *
-     * @param  int             $from
-     * @return \Elastica\Query Query object
+     * @param  int   $from
+     * @return $this
      */
     public function setFrom($from)
     {
@@ -158,8 +159,8 @@ class Query extends Param
      * Sets sort arguments for the query
      * Replaces existing values
      *
-     * @param  array           $sortArgs Sorting arguments
-     * @return \Elastica\Query Query object
+     * @param  array $sortArgs Sorting arguments
+     * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/sort.html
      */
     public function setSort(array $sortArgs)
@@ -170,8 +171,8 @@ class Query extends Param
     /**
      * Adds a sort param to the query
      *
-     * @param  mixed           $sort Sort parameter
-     * @return \Elastica\Query Query object
+     * @param  mixed $sort Sort parameter
+     * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/sort.html
      */
     public function addSort($sort)
@@ -182,8 +183,8 @@ class Query extends Param
     /**
      * Sets highlight arguments for the query
      *
-     * @param  array           $highlightArgs Set all highlight arguments
-     * @return \Elastica\Query Query object
+     * @param  array $highlightArgs Set all highlight arguments
+     * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/highlighting.html
      */
     public function setHighlight(array $highlightArgs)
@@ -194,8 +195,8 @@ class Query extends Param
     /**
      * Adds a highlight argument
      *
-     * @param  mixed           $highlight Add highlight argument
-     * @return \Elastica\Query Query object
+     * @param  mixed $highlight Add highlight argument
+     * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/highlighting.html
      */
     public function addHighlight($highlight)
@@ -206,8 +207,8 @@ class Query extends Param
     /**
      * Sets maximum number of results for this query
      *
-     * @param  int             $size OPTIONAL Maximal number of results for query (default = 10)
-     * @return \Elastica\Query Query object
+     * @param  int   $size OPTIONAL Maximal number of results for query (default = 10)
+     * @return $this
      */
     public function setSize($size = 10)
     {
@@ -218,8 +219,8 @@ class Query extends Param
      * Alias for setSize
      *
      * @deprecated Use the setSize() method, this method will be removed in future releases
-     * @param  int             $limit OPTIONAL Maximal number of results for query (default = 10)
-     * @return \Elastica\Query Query object
+     * @param  int   $limit OPTIONAL Maximal number of results for query (default = 10)
+     * @return $this
      */
     public function setLimit($limit = 10)
     {
@@ -229,8 +230,8 @@ class Query extends Param
     /**
      * Enables explain on the query
      *
-     * @param  bool            $explain OPTIONAL Enabled or disable explain (default = true)
-     * @return \Elastica\Query Current object
+     * @param  bool  $explain OPTIONAL Enabled or disable explain (default = true)
+     * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/explain.html
      */
     public function setExplain($explain = true)
@@ -241,8 +242,8 @@ class Query extends Param
     /**
      * Enables version on the query
      *
-     * @param  bool            $version OPTIONAL Enabled or disable version (default = true)
-     * @return \Elastica\Query Current object
+     * @param  bool  $version OPTIONAL Enabled or disable version (default = true)
+     * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/version.html
      */
     public function setVersion($version = true)
@@ -255,8 +256,8 @@ class Query extends Param
      * NOTICE php will encode modified(or named keys) array into object format in json format request
      * so the fields array must a sequence(list) type of array
      *
-     * @param  array           $fields Fields to be returned
-     * @return \Elastica\Query Current object
+     * @param  array $fields Fields to be returned
+     * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/fields.html
      */
     public function setFields(array $fields)
@@ -268,7 +269,7 @@ class Query extends Param
      * Set script fields
      *
      * @param  array|\Elastica\ScriptFields $scriptFields Script fields
-     * @return \Elastica\Query              Current object
+     * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/script-fields.html
      */
     public function setScriptFields($scriptFields)
@@ -285,7 +286,7 @@ class Query extends Param
      *
      * @param  string           $name
      * @param  \Elastica\Script $script Script object
-     * @return \Elastica\Query  Query object
+     * @return $this
      */
     public function addScriptField($name, Script $script)
     {
@@ -297,8 +298,8 @@ class Query extends Param
     /**
      * Sets all facets for this query object. Replaces existing facets
      *
-     * @param  array           $facets List of facet objects
-     * @return \Elastica\Query Query object
+     * @param  array $facets List of facet objects
+     * @return $this
      * @link http://www.elasticsearch.org/guide/reference/api/search/facets/
      */
     public function setFacets(array $facets)
@@ -315,7 +316,7 @@ class Query extends Param
      * Adds a Facet to the query
      *
      * @param  \Elastica\Facet\AbstractFacet $facet Facet object
-     * @return \Elastica\Query               Query object
+     * @return $this
      */
     public function addFacet(AbstractFacet $facet)
     {
@@ -328,7 +329,7 @@ class Query extends Param
      * Adds an Aggregation to the query
      *
      * @param  AbstractAggregation $agg
-     * @return \Elastica\Query     Query object
+     * @return $this
      */
     public function addAggregation(AbstractAggregation $agg)
     {
@@ -365,9 +366,10 @@ class Query extends Param
     /**
      * Allows filtering of documents based on a minimum score
      *
-     * @param  int                                  $minScore Minimum score to filter documents by
      * @throws \Elastica\Exception\InvalidException
-     * @return \Elastica\Query                      Query object
+     *
+     * @param  int   $minScore Minimum score to filter documents by
+     * @return $this
      */
     public function setMinScore($minScore)
     {
@@ -381,7 +383,8 @@ class Query extends Param
     /**
      * Add a suggest term
      *
-     * @param \Elastica\Suggest $suggest suggestion object
+     * @param  \Elastica\Suggest $suggest suggestion object
+     * @return $this
      */
     public function setSuggest(Suggest $suggest)
     {
@@ -389,14 +392,17 @@ class Query extends Param
             $this->getParams(),
             $suggest->toArray()
         ));
+
         $this->_suggest = 1;
+
+        return $this;
     }
 
     /**
      * Add a Rescore
      *
      * @param  \Elastica\Rescore\AbstractRescore $rescore suggestion object
-     * @return \Elastica\Query                   Current object
+     * @return $this
      */
     public function setRescore($rescore)
     {
@@ -406,8 +412,8 @@ class Query extends Param
     /**
      * Sets the _source field to be returned with every hit
      *
-     * @param  array           $fields Fields to be returned
-     * @return \Elastica\Query Current object
+     * @param  array $fields Fields to be returned
+     * @return $this
      * @link   http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-source-filtering.html
      */
     public function setSource(array $fields)
@@ -419,7 +425,7 @@ class Query extends Param
      * Sets post_filter argument for the query. The filter is applied after the query has executed
      *
      * @param  array|\Elastica\Filter\AbstractFilter $filter
-     * @return \Elastica\Query                       Current object
+     * @return $this
      * @link    http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-post-filter.html
      */
     public function setPostFilter($filter)

@@ -94,8 +94,9 @@ abstract class AbstractType implements SearchableInterface
      * Reads index and type name from protected vars _indexName and _typeName.
      * Has to be set in child class
      *
-     * @param  \Elastica\Client                     $client OPTIONAL Client object
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @param \Elastica\Client $client OPTIONAL Client object
      */
     public function __construct(Client $client = null)
     {

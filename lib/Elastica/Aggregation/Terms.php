@@ -13,7 +13,7 @@ class Terms extends AbstractSimpleAggregation
      * Set the bucket sort order
      * @param  string $order     "_count", "_term", or the name of a sub-aggregation or sub-aggregation response field
      * @param  string $direction "asc" or "desc"
-     * @return Terms
+     * @return $this
      */
     public function setOrder($order, $direction)
     {
@@ -23,7 +23,7 @@ class Terms extends AbstractSimpleAggregation
     /**
      * Set the minimum number of documents in which a term must appear in order to be returned in a bucket
      * @param  int   $count
-     * @return Terms
+     * @return $this
      */
     public function setMinimumDocumentCount($count)
     {
@@ -34,7 +34,7 @@ class Terms extends AbstractSimpleAggregation
      * Filter documents to include based on a regular expression
      * @param  string $pattern a regular expression
      * @param  string $flags   Java Pattern flags
-     * @return Terms
+     * @return $this
      */
     public function setInclude($pattern, $flags = null)
     {
@@ -52,7 +52,7 @@ class Terms extends AbstractSimpleAggregation
      * Filter documents to exclude based on a regular expression
      * @param  string $pattern a regular expression
      * @param  string $flags   Java Pattern flags
-     * @return Terms
+     * @return $this
      */
     public function setExclude($pattern, $flags = null)
     {
@@ -68,8 +68,8 @@ class Terms extends AbstractSimpleAggregation
 
     /**
      * Sets the amount of terms to be returned.
-     * @param  int                         $size The amount of terms to be returned.
-     * @return \Elastica\Aggregation\Terms
+     * @param  int   $size The amount of terms to be returned.
+     * @return $this
      */
     public function setSize($size)
     {
@@ -78,8 +78,8 @@ class Terms extends AbstractSimpleAggregation
 
     /**
      * Sets how many terms the coordinating node will request from each shard.
-     * @param  int                         $shard_size The amount of terms to be returned.
-     * @return \Elastica\Aggregation\Terms
+     * @param  int   $shard_size The amount of terms to be returned.
+     * @return $this
      */
     public function setShardSize($shard_size)
     {
@@ -90,7 +90,7 @@ class Terms extends AbstractSimpleAggregation
      * Instruct Elasticsearch to use direct field data or ordinals of the field values to execute this aggregation.
      * The execution hint will be ignored if it is not applicable.
      * @param  string $hint map or ordinals
-     * @return Terms
+     * @return $this
      */
     public function setExecutionHint($hint)
     {

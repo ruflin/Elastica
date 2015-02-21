@@ -17,8 +17,8 @@ class Nested extends AbstractFilter
     /**
      * Adds field to mlt filter
      *
-     * @param  string                  $path Nested object path
-     * @return \Elastica\Filter\Nested
+     * @param  string $path Nested object path
+     * @return $this
      */
     public function setPath($path)
     {
@@ -29,7 +29,7 @@ class Nested extends AbstractFilter
      * Sets nested query
      *
      * @param  \Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Filter\Nested
+     * @return $this
      */
     public function setQuery(AbstractQuery $query)
     {
@@ -40,7 +40,7 @@ class Nested extends AbstractFilter
      * Sets nested filter
      *
      * @param  \Elastica\Filter\AbstractFilter $filter
-     * @return \Elastica\Filter\Nested
+     * @return $this
      */
     public function setFilter(AbstractFilter $filter)
     {
@@ -50,8 +50,8 @@ class Nested extends AbstractFilter
     /**
      * Set join option
      *
-     * @param  bool                    $join
-     * @return \Elastica\Filter\Nested
+     * @param  bool  $join
+     * @return $this
      */
     public function setJoin($join)
     {

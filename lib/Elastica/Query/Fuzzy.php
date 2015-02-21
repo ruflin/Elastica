@@ -17,9 +17,8 @@ class Fuzzy extends AbstractQuery
     /**
      * Construct a fuzzy query
      *
-     * @param  string                $fieldName Field name
-     * @param  string                $value     String to search for
-     * @return \Elastica\Query\Fuzzy Current object
+     * @param string $fieldName Field name
+     * @param string $value     String to search for
      */
     public function __construct($fieldName = null, $value = null)
     {
@@ -31,9 +30,9 @@ class Fuzzy extends AbstractQuery
     /**
      * Set field for fuzzy query
      *
-     * @param  string                $fieldName Field name
-     * @param  string                $value     String to search for
-     * @return \Elastica\Query\Fuzzy Current object
+     * @param  string $fieldName Field name
+     * @param  string $value     String to search for
+     * @return $this
      */
     public function setField($fieldName, $value)
     {
@@ -50,9 +49,9 @@ class Fuzzy extends AbstractQuery
     /**
      * Set optional parameters on the existing query
      *
-     * @param  string                $param option name
-     * @param  mixed                 $value Value of the parameter
-     * @return \Elastica\Query\Fuzzy Current object
+     * @param  string $param option name
+     * @param  mixed  $value Value of the parameter
+     * @return $this
      */
     public function setFieldOption($param, $value)
     {
@@ -64,7 +63,7 @@ class Fuzzy extends AbstractQuery
         $keyArray = array_keys($params);
         $params[$keyArray[0]][$param] = $value;
 
-        return $this->setparam($keyArray[0], $params[$keyArray[0]]);
+        return $this->setParam($keyArray[0], $params[$keyArray[0]]);
     }
 
     /**

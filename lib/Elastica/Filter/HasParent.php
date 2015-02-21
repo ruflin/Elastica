@@ -31,7 +31,7 @@ class HasParent extends AbstractFilter
      * Sets query object
      *
      * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
-     * @return \Elastica\Filter\HasParent                           Current object
+     * @return $this
      */
     public function setQuery($query)
     {
@@ -45,7 +45,7 @@ class HasParent extends AbstractFilter
      * Sets filter object
      *
      * @param  \Elastica\Filter\AbstractFilter $filter
-     * @return \Elastica\Filter\HasParent      Current object
+     * @return $this
      */
     public function setFilter($filter)
     {
@@ -55,8 +55,8 @@ class HasParent extends AbstractFilter
     /**
      * Set type of the parent document
      *
-     * @param  string|\Elastica\Type      $type Parent document type
-     * @return \Elastica\Filter\HasParent Current object
+     * @param  string|\Elastica\Type $type Parent document type
+     * @return $this
      */
     public function setType($type)
     {

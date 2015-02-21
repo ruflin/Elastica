@@ -14,8 +14,8 @@ class Boosting extends AbstractQuery
 
     /**
      * Set the positive query for this Boosting Query
-     * @param  AbstractQuery            $query
-     * @return \Elastica\Query\Boosting
+     * @param  AbstractQuery $query
+     * @return $this
      */
     public function setPositiveQuery(AbstractQuery $query)
     {
@@ -24,8 +24,8 @@ class Boosting extends AbstractQuery
 
     /**
      * Set the negative query for this Boosting Query
-     * @param  AbstractQuery            $query
-     * @return \Elastica\Query\Boosting
+     * @param  AbstractQuery $query
+     * @return $this
      */
     public function setNegativeQuery(AbstractQuery $query)
     {
@@ -34,8 +34,8 @@ class Boosting extends AbstractQuery
 
     /**
      * Set the negative_boost parameter for this Boosting Query
-     * @param  Float                    $negativeBoost
-     * @return \Elastica\Query\Boosting
+     * @param  Float $negativeBoost
+     * @return $this
      */
     public function setNegativeBoost($negativeBoost)
     {

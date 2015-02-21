@@ -27,8 +27,8 @@ class TermsStats extends AbstractFacet
     /**
      * Sets the key field for the query.
      *
-     * @param  string                     $keyField The key field name for the query.
-     * @return \Elastica\Facet\TermsStats
+     * @param  string $keyField The key field name for the query.
+     * @return $this
      */
     public function setKeyField($keyField)
     {
@@ -38,8 +38,8 @@ class TermsStats extends AbstractFacet
     /**
      * Sets a script to calculate statistical information on a per term basis
      *
-     * @param  string                     $valueScript The script to do calculations on the statistical values
-     * @return \Elastica\Facet\TermsStats
+     * @param  string $valueScript The script to do calculations on the statistical values
+     * @return $this
      */
     public function setValueScript($valueScript)
     {
@@ -50,9 +50,10 @@ class TermsStats extends AbstractFacet
      * Sets the ordering type for this facet. Elasticsearch
      * internal default is count.
      *
-     * @param  string                               $type The order type to set use for sorting of the terms.
      * @throws \Elastica\Exception\InvalidException When an invalid order type was set.
-     * @return \Elastica\Facet\TermsStats
+     *
+     * @param  string $type The order type to set use for sorting of the terms.
+     * @return $this
      */
     public function setOrder($type)
     {
@@ -66,8 +67,8 @@ class TermsStats extends AbstractFacet
     /**
      * Sets a field to compute basic statistical results on
      *
-     * @param  string                     $valueField The field to compute statistical values for
-     * @return \Elastica\Facet\TermsStats
+     * @param  string $valueField The field to compute statistical values for
+     * @return $this
      */
     public function setValueField($valueField)
     {
@@ -77,8 +78,8 @@ class TermsStats extends AbstractFacet
     /**
      * Sets the amount of terms to be returned.
      *
-     * @param  int                   $size The amount of terms to be returned.
-     * @return \Elastica\Facet\Terms
+     * @param  int   $size The amount of terms to be returned.
+     * @return $this
      */
     public function setSize($size)
     {
@@ -90,6 +91,7 @@ class TermsStats extends AbstractFacet
      * facet definition of the parent.
      *
      * @see \Elastica\Facet\AbstractFacet::toArray()
+     *
      * @return array
      */
     public function toArray()
