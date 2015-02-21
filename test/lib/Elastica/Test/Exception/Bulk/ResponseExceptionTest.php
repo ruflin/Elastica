@@ -1,16 +1,8 @@
 <?php
 namespace Elastica\Test\Exception\Bulk;
 
-use Elastica\Test\Base as BaseTest;
+use Elastica\Test\Exception\AbstractExceptionTest;
 
-class ResponseExceptionTest extends BaseTest
+class ResponseExceptionTest extends AbstractExceptionTest
 {
-    public function testInheritance()
-    {
-        $exception = $this->getMockBuilder('Elastica\Exception\Bulk\ResponseException')
-                          ->disableOriginalConstructor()
-                          ->getMock();
-        $this->assertInstanceOf('Exception', $exception);
-        $this->assertInstanceOf('Elastica\Exception\ExceptionInterface', $exception);
-    }
 }

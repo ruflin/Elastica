@@ -1,15 +1,8 @@
 <?php
 namespace Elastica\Test\Exception\Bulk;
 
-use Elastica\Exception\Bulk\UdpException;
-use Elastica\Test\Base as BaseTest;
+use Elastica\Test\Exception\AbstractExceptionTest;
 
-class UdpExceptionTest extends BaseTest
+class UdpExceptionTest extends AbstractExceptionTest
 {
-    public function testInheritance()
-    {
-        $exception = new UdpException();
-        $this->assertInstanceOf('Exception', $exception);
-        $this->assertInstanceOf('Elastica\Exception\ExceptionInterface', $exception);
-    }
 }

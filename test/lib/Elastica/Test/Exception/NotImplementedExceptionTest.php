@@ -2,17 +2,9 @@
 namespace Elastica\Test\Exception;
 
 use Elastica\Exception\NotImplementedException;
-use Elastica\Test\Base as BaseTest;
 
-class NotImplementedExceptionTest extends BaseTest
+class NotImplementedExceptionTest extends AbstractExceptionTest
 {
-    public function testInheritance()
-    {
-        $exception = new NotImplementedException();
-        $this->assertInstanceOf('Exception', $exception);
-        $this->assertInstanceOf('Elastica\Exception\ExceptionInterface', $exception);
-    }
-
     public function testInstance()
     {
         $code = 4;

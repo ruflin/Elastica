@@ -3,19 +3,9 @@ namespace Elastica\Test\Exception;
 
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
-use Elastica\Test\Base as BaseTest;
 
-class ResponseExceptionTest extends BaseTest
+class ResponseExceptionTest extends AbstractExceptionTest
 {
-    public function testInheritance()
-    {
-        $exception = $this->getMockBuilder('Elastica\Exception\ResponseException')
-                          ->disableOriginalConstructor()
-                          ->getMock();
-        $this->assertInstanceOf('Exception', $exception);
-        $this->assertInstanceOf('Elastica\Exception\ExceptionInterface', $exception);
-    }
-
     public function testCreateExistingIndex()
     {
         $this->_createIndex('woo', true);
