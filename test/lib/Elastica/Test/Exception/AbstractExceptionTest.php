@@ -7,7 +7,7 @@ abstract class AbstractExceptionTest extends BaseTest
 {
     protected function getExceptionClass()
     {
-        $reflection = new ReflectionObject($this);
+        $reflection = new \ReflectionObject($this);
 
         // Elastica\Test\Exception\RuntimeExceptionTest => Elastica\Exception\RuntimeExceptionTest
         $name = preg_replace('/^Elastica\\\\Test/', 'Elastica', $reflection->getName());
