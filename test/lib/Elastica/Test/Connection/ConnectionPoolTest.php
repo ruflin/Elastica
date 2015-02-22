@@ -8,11 +8,9 @@ use Elastica\Connection\Strategy\StrategyFactory;
 use Elastica\Test\Base as BaseTest;
 
 /**
- * Description of ConnectionPollTest
- *
  * @author chabior
  */
-class ConnectionPollTest extends BaseTest
+class ConnectionPoolTest extends BaseTest
 {
     public function testConstruct()
     {
