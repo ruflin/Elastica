@@ -5,7 +5,7 @@ use Elastica\Test\Base as BaseTest;
 
 abstract class AbstractExceptionTest extends BaseTest
 {
-    protected function getExceptionClass()
+    protected function _getExceptionClass()
     {
         $reflection = new \ReflectionObject($this);
 
@@ -20,7 +20,7 @@ abstract class AbstractExceptionTest extends BaseTest
 
     public function testInheritance()
     {
-        $className = $this->getExceptionClass();
+        $className = $this->_getExceptionClass();
         $reflection = new \ReflectionClass($className);
         $this->assertTrue($reflection->isSubclassOf('Exception'));
         $this->assertTrue($reflection->implementsInterface('Elastica\Exception\ExceptionInterface'));
