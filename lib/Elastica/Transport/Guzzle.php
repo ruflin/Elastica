@@ -63,6 +63,12 @@ class Guzzle extends AbstractTransport
         }
 
         $proxy = $connection->getProxy();
+
+        // See: https://github.com/facebook/hhvm/issues/4875
+        if (is_null($proxy) && defined('HHVM_VERSION')) {
+            $proxy = getenv('http_proxy') ?: null;
+        }
+
         if (!is_null($proxy)) {
             $options['proxy'] = $proxy;
         }

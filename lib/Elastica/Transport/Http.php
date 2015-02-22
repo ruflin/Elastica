@@ -73,6 +73,12 @@ class Http extends AbstractTransport
         curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
 
         $proxy = $connection->getProxy();
+
+        // See: https://github.com/facebook/hhvm/issues/4875
+        if (is_null($proxy) && defined('HHVM_VERSION')) {
+            $proxy = getenv('http_proxy') ?: null;
+        }
+
         if (!is_null($proxy)) {
             curl_setopt($conn, CURLOPT_PROXY, $proxy);
         }
