@@ -1,16 +1,8 @@
 <?php
 namespace Elastica\Test\Exception\Connection;
 
-use Elastica\Test\Base as BaseTest;
+use Elastica\Test\Exception\AbstractExceptionTest;
 
-class MemcacheExceptionTest extends BaseTest
+class MemcacheExceptionTest extends AbstractExceptionTest
 {
-    public function testInheritance()
-    {
-        $exception = $this->getMockBuilder('Elastica\Exception\Connection\MemcacheException')
-                          ->disableOriginalConstructor()
-                          ->getMock();
-        $this->assertInstanceOf('Exception', $exception);
-        $this->assertInstanceOf('Elastica\Exception\ExceptionInterface', $exception);
-    }
 }
