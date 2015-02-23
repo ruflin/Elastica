@@ -45,6 +45,11 @@
     state=present
     update_cache=no
 
+- name: install image plugin
+  command: >
+    creates=/usr/share/elasticsearch/plugins/image
+    /usr/share/elasticsearch/bin/plugin --url https://github.com/SibaTokyo/elasticsearch-image/releases/download/{{ ES_IMAGE_PLUGIN_VER }}/elasticsearch-image-{{ ES_IMAGE_PLUGIN_VER }}.zip -install image
+
 - name: install mapper-attachments plugin
   command: >
     creates=/usr/share/elasticsearch/plugins/mapper-attachments

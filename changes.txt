@@ -1,5 +1,8 @@
 CHANGES
 
+2015-02-22
+- Added Elastica\Query\Image
+
 2015-02-21
 - Add Scrutinizer Code Quality status badge
 
