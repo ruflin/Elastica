@@ -9,6 +9,16 @@ namespace Elastica\Query;
  * @package  Elastica
  * @author   Jacques Moati <jacques@moati.net>
  * @link     https://github.com/kzwang/elasticsearch-image
+ *
+ *
+ * To use this feature you have to call the following command in the
+ * elasticsearch directory:
+ * <code>
+ * ./bin/plugin --url https://github.com/SibaTokyo/elasticsearch-image/releases/download/1.4.0/elasticsearch-image-1.4.0.zip --install image
+ * </code>
+ * This installs the image plugin. More infos
+ * can be found here: {@link https://github.com/SibaTokyo/elasticsearch-image}
+ *
  */
 class Image extends AbstractQuery
 {
@@ -24,7 +34,7 @@ class Image extends AbstractQuery
      * @param  string $key
      * @param  string $value
      *
-     * @return \Elastica\Query\Image
+     * @return $this
      */
     public function setFieldParam($field, $key, $value)
     {
@@ -45,7 +55,7 @@ class Image extends AbstractQuery
      * @param  string $field
      * @param  float  $boost
      *
-     * @return \Elastica\Query\Image
+     * @return $this
      */
     public function setFieldBoost($field, $boost = 1.0)
     {
@@ -60,7 +70,7 @@ class Image extends AbstractQuery
      * @param  string $field
      * @param  string $feature
      *
-     * @return \Elastica\Query\Image
+     * @return $this
      */
     public function setFieldFeature($field, $feature = "CEDD")
     {
@@ -75,7 +85,7 @@ class Image extends AbstractQuery
      * @param  string $field
      * @param  string $hash
      *
-     * @return \Elastica\Query\Image
+     * @return $this
      */
     public function setFieldHash($field, $hash = "BIT_SAMPLING")
     {
@@ -88,7 +98,7 @@ class Image extends AbstractQuery
      * @param  string $field
      * @param  string $path File will be base64_encode
      *
-     * @return Image
+     * @return $this
      * @throws \Exception
      */
     public function setFieldImage($field, $path)
@@ -106,7 +116,7 @@ class Image extends AbstractQuery
      * @param  string $field
      * @param  string $index
      *
-     * @return \Elastica\Query\Image
+     * @return $this
      */
     public function setFieldIndex($field, $index)
     {
@@ -119,7 +129,7 @@ class Image extends AbstractQuery
      * @param  string $field
      * @param  string $type
      *
-     * @return \Elastica\Query\Image
+     * @return $this
      */
     public function setFieldType($field, $type)
     {
@@ -132,7 +142,7 @@ class Image extends AbstractQuery
      * @param  string $field
      * @param  string $id
      *
-     * @return \Elastica\Query\Image
+     * @return $this
      */
     public function setFieldId($field, $id)
     {
@@ -145,7 +155,7 @@ class Image extends AbstractQuery
      * @param  string $field
      * @param  string $path
      *
-     * @return \Elastica\Query\Image
+     * @return $this
      */
     public function setFieldPath($field, $path)
     {
@@ -163,7 +173,7 @@ class Image extends AbstractQuery
      * @param  string $id
      * @param string  $path
      *
-     * @return \Elastica\Query\Image
+     * @return $this
      */
     public function setImageByReference($field, $index, $type, $id, $path = null)
     {

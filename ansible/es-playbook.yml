@@ -11,6 +11,7 @@
     - ES_TRANSPORT_MEMCACHED_VER: "2.4.1"
     - ES_TRANSPORT_THRIFT_VER: "2.4.1"
     - ES_GEOCLUSTER_FACET_VER: "0.0.12"
+    - ES_IMAGE_PLUGIN_VER: "1.4.0"
     - ES_PROJECT_ROOT: "{{ lookup('env', 'ES_PROJECT_ROOT') }}"
     - ES_COMPOSER_NODEV: "{{ lookup('env', 'ES_COMPOSER_NODEV') }}"
   roles:
