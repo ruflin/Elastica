@@ -10,6 +10,7 @@ namespace Elastica;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Thibault Duplessis <thibault.duplessis@gmail.com>
  * @author Oleg Zinchenko <olegz@default-value.com>
+ * @author Roberto Nygaard <roberto@nygaard.es>
  */
 class Util
 {
@@ -35,9 +36,10 @@ class Util
 
     /**
      * Escapes the following terms (because part of the query language)
-     * + - && || ! ( ) { } [ ] ^ " ~ * ? : \
+     * + - && || ! ( ) { } [ ] ^ " ~ * ? : \ < >
      *
      * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters
+     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#_reserved_characters
      *
      * @param  string $term Query term to escape
      * @return string Escaped query term
@@ -46,7 +48,7 @@ class Util
     {
         $result = $term;
         // \ escaping has to be first, otherwise escaped later once again
-        $chars = array('\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '/');
+        $chars = array('\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '/', '<', '>');
 
         foreach ($chars as $char) {
             $result = str_replace($char, '\\'.$char, $result);
