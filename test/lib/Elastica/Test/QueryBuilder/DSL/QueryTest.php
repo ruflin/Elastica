@@ -96,9 +96,7 @@ class QueryTest extends \PHPUnit_Framework_TestCase
         $queryDSL = new DSL\Query();
 
         $shortMatch = $queryDSL->match('field', 'match');
-        $this->assertEquals($shortMatch->getParam('field'), array(
-            'field' => 'match',
-        ));
+        $this->assertEquals('match', $shortMatch->getParam('field'));
 
         $this->assertInstanceOf('Elastica\Query\Match', $queryDSL->match());
     }
