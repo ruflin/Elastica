@@ -64,7 +64,7 @@ class Query implements DSL
     {
         if ($field !== null && $value !== null) {
             $match = new Match();
-            $match->setFieldParam('field', $field, $value);
+            $match->setParam($field, $value);
 
             return $match;
         }
