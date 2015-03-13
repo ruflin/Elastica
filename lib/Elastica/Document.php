@@ -207,7 +207,7 @@ class Document extends AbstractUpdateAction
      * @param  string $key       Field key
      * @param  float  $latitude  Latitude value
      * @param  float  $longitude Longitude value
-     * @link http://www.elasticsearch.org/guide/reference/mapping/geo-point-type.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html
      * @return $this
      */
     public function addGeoPoint($key, $latitude, $longitude)
