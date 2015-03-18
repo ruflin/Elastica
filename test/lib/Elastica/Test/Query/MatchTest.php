@@ -85,6 +85,68 @@ class MatchTest extends BaseTest
 
         $this->assertEquals(4, $resultSet->count());
     }
+	
+    public function testMatchSetFieldBoost()
+    {
+        $client = $this->_getClient();
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
+        $type = $index->getType('test');
+
+        $doc = new Document(1, array('name' => 'Basel-Stadt'));
+        $type->addDocument($doc);
+        $doc = new Document(2, array('name' => 'New York'));
+        $type->addDocument($doc);
+        $doc = new Document(3, array('name' => 'New Hampshire'));
+        $type->addDocument($doc);
+        $doc = new Document(4, array('name' => 'Basel Land'));
+        $type->addDocument($doc);
+
+        $index->refresh();
+
+        $field = 'name';
+        $operator = 'or';
+
+        $query = new Match();
+        $query->setFieldQuery($field, 'Basel New');
+        $query->setFieldOperator($field, $operator);
+		$query->setFieldBoost($field, 1.2);
+
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(4, $resultSet->count());
+    }
+	
+    public function testMatchSetFieldBoostWithString()
+    {
+        $client = $this->_getClient();
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
+        $type = $index->getType('test');
+
+        $doc = new Document(1, array('name' => 'Basel-Stadt'));
+        $type->addDocument($doc);
+        $doc = new Document(2, array('name' => 'New York'));
+        $type->addDocument($doc);
+        $doc = new Document(3, array('name' => 'New Hampshire'));
+        $type->addDocument($doc);
+        $doc = new Document(4, array('name' => 'Basel Land'));
+        $type->addDocument($doc);
+
+        $index->refresh();
+
+        $field = 'name';
+        $operator = 'or';
+
+        $query = new Match();
+        $query->setFieldQuery($field, 'Basel New');
+        $query->setFieldOperator($field, $operator);
+		$query->setFieldBoost($field, "1.2");
+
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(4, $resultSet->count());
+    }
 
     public function testMatchZeroTerm()
     {
