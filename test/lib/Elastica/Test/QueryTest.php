@@ -9,6 +9,8 @@ use Elastica\Query;
 use Elastica\Query\Builder;
 use Elastica\Query\Term;
 use Elastica\Query\Text;
+use Elastica\Script;
+use Elastica\ScriptFields;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
 
@@ -215,5 +217,143 @@ class QueryTest extends BaseTest
         $query->setFacets(array());
 
         $this->assertArrayNotHasKey('facets', $query->toArray());
+    }
+
+    public function testSetQueryToArrayCast()
+    {
+        $query = new Query();
+        $termQuery = new Term();
+        $termQuery->setTerm('text', 'value');
+        $query->setQuery($termQuery);
+
+        $termQuery->setTerm('text', 'another value');
+
+        $anotherQuery = new Query();
+        $anotherQuery->setQuery($termQuery);
+
+        $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
+    }
+
+    public function testSetQueryToArrayChangeQuery()
+    {
+        $query = new Query();
+        $termQuery = new Term();
+        $termQuery->setTerm('text', 'value');
+        $query->setQuery($termQuery);
+
+        $queryArray = $query->toArray();
+
+        $termQuery = $query->getQuery();
+        $termQuery['term']['text']['value'] = 'another value';
+
+        $this->assertEquals($queryArray, $query->toArray());
+    }
+
+    public function testSetScriptFieldsToArrayCast()
+    {
+        $query = new Query();
+        $scriptFields = new ScriptFields();
+        $scriptFields->addScript('script',  new Script('script'));
+
+        $query->setScriptFields($scriptFields);
+
+        $scriptFields->addScript('another script',  new Script('another script'));
+
+        $anotherQuery = new Query();
+        $anotherQuery->setScriptFields($scriptFields);
+
+        $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
+    }
+
+    public function testAddScriptFieldsToArrayCast()
+    {
+        $query = new Query();
+        $scriptField = new Script('script');
+
+        $query->addScriptField('script', $scriptField);
+
+        $scriptField->setScript('another script');
+
+        $anotherQuery = new Query();
+        $anotherQuery->addScriptField('script', $scriptField);
+
+        $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
+    }
+
+    public function testAddFacetToArrayCast()
+    {
+        $query = new Query();
+        $facet = new Terms('text');
+
+        $query->addFacet($facet);
+
+        $facet->setName('another text');
+
+        $anotherQuery = new Query();
+        $anotherQuery->addFacet($facet);
+
+        $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
+    }
+
+    public function testAddAggregationToArrayCast()
+    {
+        $query = new Query();
+        $aggregation = new \Elastica\Aggregation\Terms('text');
+
+        $query->addAggregation($aggregation);
+
+        $aggregation->setName('another text');
+
+        $anotherQuery = new Query();
+        $anotherQuery->addAggregation($aggregation);
+
+        $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
+    }
+
+    public function testSetSuggestToArrayCast()
+    {
+        $query = new Query();
+        $suggest = new Suggest();
+        $suggest->setGlobalText('text');
+
+        $query->setSuggest($suggest);
+
+        $suggest->setGlobalText('another text');
+
+        $anotherQuery = new Query();
+        $anotherQuery->setSuggest($suggest);
+
+        $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
+    }
+
+    public function testSetRescoreToArrayCast()
+    {
+        $query = new Query();
+        $rescore = new \Elastica\Rescore\Query();
+        $rescore->setQueryWeight(1);
+
+        $query->setRescore($rescore);
+
+        $rescore->setQueryWeight(2);
+
+        $anotherQuery = new Query();
+        $anotherQuery->setRescore($rescore);
+
+        $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
+    }
+
+    public function testSetPostFilterToArrayCast()
+    {
+        $query = new Query();
+        $postFilter = new \Elastica\Filter\Terms();
+        $postFilter->setTerms('key', array('term'));
+        $query->setPostFilter($postFilter);
+
+        $postFilter->setTerms('another key', array('another term'));
+
+        $anotherQuery = new Query();
+        $anotherQuery->setPostFilter($postFilter);
+
+        $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
     }
 }
