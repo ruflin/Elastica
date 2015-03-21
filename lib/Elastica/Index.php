@@ -266,8 +266,8 @@ class Index implements SearchableInterface
     }
 
     /**
-     * @param  string           $query
-     * @param  int|array        $options
+     * @param  string|array|\Elastica\Query $query
+     * @param  int|array                    $options
      * @return \Elastica\Search
      */
     public function createSearch($query = '', $options = null)
