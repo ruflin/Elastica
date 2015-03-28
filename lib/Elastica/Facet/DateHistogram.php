@@ -25,6 +25,17 @@ class DateHistogram extends Histogram
     }
 
     /**
+     * Set the factor parameter
+     *
+     * @param  integer $factor
+     * @return $this
+     */
+    public function setFactor($factor)
+    {
+        return $this->setParam('factor', $factor);
+    }
+
+    /**
      * Creates the full facet definition, which includes the basic
      * facet definition of the parent.
      *

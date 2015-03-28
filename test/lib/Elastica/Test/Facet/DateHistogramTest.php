@@ -28,22 +28,23 @@ class DateHistogramTest extends BaseTest
 
         $mapping = new Mapping($type, array(
                 'name' => array('type' => 'string', 'store' => 'no'),
-                'dtmPosted' => array('type' => 'date', 'store' => 'no', 'format' => 'yyyy-MM-dd HH:mm:ss'),
+                'dtmPosted' => array('type' => 'long', 'store' => 'no'),
             ));
         $type->setMapping($mapping);
 
-        $doc = new Document(1, array('name' => 'nicolas ruflin', 'dtmPosted' => "2011-06-23 21:53:00"));
+        $doc = new Document(1, array('name' => 'nicolas ruflin', 'dtmPosted' => 1308865980));
         $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'raul martinez jr', 'dtmPosted' => "2011-06-23 09:53:00"));
+        $doc = new Document(2, array('name' => 'raul martinez jr', 'dtmPosted' => 1308822780));
         $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'rachelle clemente', 'dtmPosted' => "2011-07-08 08:53:00"));
+        $doc = new Document(3, array('name' => 'rachelle clemente', 'dtmPosted' => 1310115180));
         $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'elastica search', 'dtmPosted' => "2011-07-08 01:53:00"));
+        $doc = new Document(4, array('name' => 'elastica search', 'dtmPosted' => 1310089980));
         $type->addDocument($doc);
 
         $facet = new DateHistogram('dateHist1');
         $facet->setInterval("day");
         $facet->setField("dtmPosted");
+        $facet->setFactor(1000);
 
         $query = new Query();
         $query->addFacet($facet);
