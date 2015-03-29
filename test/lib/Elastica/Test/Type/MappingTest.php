@@ -211,7 +211,7 @@ class MappingTest extends BaseTest
      * Test setting a dynamic template and validate whether the right mapping is applied after adding a document which
      * should match the dynamic template. The example is the template_1 from the Elasticsearch documentation.
      *
-     * @link http://www.elasticsearch.org/guide/reference/mapping/root-object-type/
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-root-object-type.html
      */
     public function testDynamicTemplate()
     {

@@ -6,7 +6,7 @@ namespace Elastica\Aggregation;
  * Reversed Nested Aggregation
  *
  * @package Elastica\Aggregation
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html
  */
 class ReverseNested extends AbstractAggregation
 {

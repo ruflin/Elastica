@@ -5,7 +5,7 @@ namespace Elastica\Query;
 /**
  * Class SimpleQueryString
  * @package Elastica\Query
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html
  */
 class SimpleQueryString extends AbstractQuery
 {

@@ -8,7 +8,7 @@ use Elastica\Exception\ResponseException;
 /**
  * Class Snapshot
  * @package Elastica
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html
  */
 class Snapshot
 {

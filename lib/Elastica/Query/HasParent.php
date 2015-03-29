@@ -9,7 +9,7 @@ use Elastica\Query as BaseQuery;
  *
  * @category Xodoa
  * @package Elastica
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/has-parent-query.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
  */
 class HasParent extends AbstractQuery
 {

@@ -5,7 +5,7 @@ namespace Elastica\Suggest\CandidateGenerator;
 /**
  * Class DirectGenerator
  * @package Elastica\Suggest\Phrase
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html#_direct_generators
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html#_direct_generators
  */
 class DirectGenerator extends AbstractCandidateGenerator
 {

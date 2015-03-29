@@ -5,7 +5,7 @@ namespace Elastica\Aggregation;
 /**
  * Class DateHistogram
  * @package Elastica\Aggregation
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-aggregations-bucket-datehistogram-aggregation.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html
  */
 class DateHistogram extends Histogram
 {
@@ -71,7 +71,7 @@ class DateHistogram extends Histogram
 
     /**
      * Set the format for returned bucket key_as_string values
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern
      * @param  string $format see link for formatting options
      * @return $this
      */

@@ -11,7 +11,7 @@ use Elastica\Query\AbstractQuery;
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/script-filter.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-filter.html
  */
 class Script extends AbstractFilter
 {

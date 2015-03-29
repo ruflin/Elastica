@@ -133,7 +133,7 @@ class AbstractUpdateAction extends Param
      *
      * @param  int   $version Document version
      * @return $this
-     * @link http://www.elasticsearch.org/blog/2011/02/08/versioning.html
+     * @link https://www.elastic.co/blog/versioning
      */
     public function setVersion($version)
     {
@@ -164,7 +164,6 @@ class AbstractUpdateAction extends Param
      *
      * @param  int   $versionType Document version type
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/api/index_.html
      */
     public function setVersionType($versionType)
     {
@@ -194,7 +193,7 @@ class AbstractUpdateAction extends Param
      *
      * @param  string|int $parent Parent document id
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/mapping/parent-field.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html
      */
     public function setParent($parent)
     {

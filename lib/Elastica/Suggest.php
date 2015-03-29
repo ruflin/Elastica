@@ -8,7 +8,7 @@ use Elastica\Suggest\AbstractSuggest;
 /**
  * Class Suggest
  * @package Elastica\Suggest
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
  */
 class Suggest extends Param
 {

@@ -7,7 +7,7 @@ use Elastica\Exception\InvalidException;
 /**
  * Class IpRange
  * @package Elastica\Aggregation
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-aggregations-bucket-iprange-aggregation.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html
  */
 class IpRange extends AbstractAggregation
 {

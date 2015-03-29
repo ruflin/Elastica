@@ -8,7 +8,7 @@ namespace Elastica\Facet;
  * @category Xodoa
  * @package Elastica
  * @author Raul Martinez Jr  <juneym@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/api/search/facets/date-histogram-facet.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-date-histogram-facet.html
  * @link https://github.com/elasticsearch/elasticsearch/issues/591
  */
 class DateHistogram extends Histogram

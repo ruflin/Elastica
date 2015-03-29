@@ -10,7 +10,7 @@ use Elastica\Exception\InvalidException;
  * @category Xodoa
  * @package Elastica
  * @author Sebastien Lavoie <github@lavoie.sl>
- * @link http://www.elasticsearch.org/guide/reference/api/search/script-fields.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
  */
 class ScriptFields extends Param
 {

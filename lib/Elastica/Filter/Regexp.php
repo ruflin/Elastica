@@ -8,7 +8,7 @@ namespace Elastica\Filter;
  * @category Xodoa
  * @package Elastica
  * @author Timothy Lamb <trash80@gmail.com>
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-regexp-filter.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-filter.html
  */
 class Regexp extends AbstractFilter
 {

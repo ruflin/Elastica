@@ -10,7 +10,7 @@ namespace Elastica\Filter;
  * @category Xodoa
  * @package Elastica
  * @author BennieKrijger <benniekrijger@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-shape-filter/
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-filter.html
  */
 class GeoShapeProvided extends AbstractGeoShape
 {

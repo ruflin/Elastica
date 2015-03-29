@@ -7,7 +7,7 @@ namespace Elastica\Query;
  *
  * @category Xodoa
  * @package Elastica
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/prefix-query.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
  */
 class Prefix extends AbstractQuery
 {

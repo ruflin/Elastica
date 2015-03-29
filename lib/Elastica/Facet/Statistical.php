@@ -8,7 +8,7 @@ namespace Elastica\Facet;
  * @category Xodoa
  * @package Elastica
  * @author Robert Katzki <robert@katzki.de>
- * @link http://www.elasticsearch.org/guide/reference/api/search/facets/statistical-facet.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-statistical-facet.html
  */
 class Statistical extends AbstractFacet
 {

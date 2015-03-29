@@ -7,7 +7,7 @@ use Elastica\Exception\InvalidException;
 /**
  * Class GeoDistance
  * @package Elastica\Aggregation
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-aggregations-bucket-geodistance-aggregation.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html
  */
 class GeoDistance extends AbstractAggregation
 {

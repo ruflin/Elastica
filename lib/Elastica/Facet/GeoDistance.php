@@ -8,7 +8,7 @@ namespace Elastica\Facet;
  * @category Xodoa
  * @package Elastica
  * @author Gerard A. Matthew  <gerard.matthew@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/api/search/facets/geo-distance-facet.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-geo-distance-facet.html
  */
 class GeoDistance extends AbstractFacet
 {

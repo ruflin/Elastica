@@ -8,7 +8,7 @@ namespace Elastica\Facet;
  * @category Xodoa
  * @package Elastica
  * @author Raul Martinez Jr  <juneym@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/api/search/facets/histogram-facet.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-histogram-facet.html
  */
 class Histogram extends AbstractFacet
 {

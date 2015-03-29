@@ -10,7 +10,7 @@ use Elastica\Exception\InvalidException;
  * @category Xodoa
  * @package Elastica
  * @author munkie
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-distance-range-filter.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-range-filter.html
  */
 class GeoDistanceRange extends AbstractGeoDistance
 {

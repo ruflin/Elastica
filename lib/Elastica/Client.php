@@ -262,7 +262,7 @@ class Client
      * documents can belong to any type and index
      *
      * @throws \Elastica\Exception\InvalidException If docs is empty
-     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
      * @return \Elastica\Bulk\ResponseSet Response object
@@ -288,7 +288,7 @@ class Client
      * documents can belong to any type and index
      *
      * @throws \Elastica\Exception\InvalidException If docs is empty
-     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
      * @return \Elastica\Bulk\ResponseSet Response object
@@ -315,7 +315,7 @@ class Client
      * @param  string                                    $type    type of index to update
      * @param  array                                     $options array of query params to use for query. For possible options check es api
      * @return \Elastica\Response
-     * @link http://www.elasticsearch.org/guide/reference/api/update.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      */
     public function updateDocument($id, $data, $index, $type, array $options = array())
     {
@@ -515,7 +515,7 @@ class Client
      * Deletes documents with the given ids, index, type from the index
      *
      * @throws \Elastica\Exception\InvalidException
-     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param  array                      $ids     Document ids
      * @param  string|\Elastica\Index     $index   Index name
@@ -561,7 +561,7 @@ class Client
      *
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\InvalidException
-     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param  array                      $params Parameter array
      * @return \Elastica\Bulk\ResponseSet Response object
@@ -623,7 +623,7 @@ class Client
      *
      * @param  array              $args OPTIONAL Optional arguments
      * @return \Elastica\Response Response object
-     * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
     public function optimizeAll($args = array())
     {
@@ -634,7 +634,7 @@ class Client
      * Refreshes all search indices
      *
      * @return \Elastica\Response Response object
-     * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
      */
     public function refreshAll()
     {

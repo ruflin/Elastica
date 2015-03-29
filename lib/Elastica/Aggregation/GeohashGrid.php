@@ -5,7 +5,7 @@ namespace Elastica\Aggregation;
 /**
  * Class GeohashGrid
  * @package Elastica\Aggregation
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-aggregations-bucket-geohashgrid-aggregation.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html
  */
 class GeohashGrid extends AbstractAggregation
 {

@@ -10,7 +10,7 @@ use Elastica\Query as BaseQuery;
  * @category Xodoa
  * @package Elastica
  * @author Wu Yang <darkyoung@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-top-children-query.html
  */
 class TopChildren extends AbstractQuery
 {

@@ -8,7 +8,7 @@ namespace Elastica\Query;
  * @category Xodoa
  * @package Elastica
  * @author Raul Martinez, Jr <juneym@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/mlt-query.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html
  */
 class MoreLikeThis extends AbstractQuery
 {
@@ -129,7 +129,6 @@ class MoreLikeThis extends AbstractQuery
      *
      * @param  bool  $boostTerms
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/query-dsl/mlt-query.html
      */
     public function setBoostTerms($boostTerms)
     {

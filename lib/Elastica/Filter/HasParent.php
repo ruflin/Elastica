@@ -7,7 +7,7 @@ namespace Elastica\Filter;
  *
  * @category Xodoa
  * @package Elastica
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/has-parent-filter.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-filter.html
  */
 class HasParent extends AbstractFilter
 {

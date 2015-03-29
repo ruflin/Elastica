@@ -146,7 +146,7 @@ CHANGES
 - Prepare Elastica Release v1.3.0.0
 
 2014-07-25
-- Update to elasticsearch version 1.3.0 http://www.elasticsearch.org/downloads/1-3-0/
+- Update to elasticsearch version 1.3.0 https://www.elastic.co/downloads/past-releases/1-3-0
 
 2014-07-14
  - Add setQuery() method to Elastica\Query\ConstantScore #653
@@ -158,14 +158,14 @@ CHANGES
  - Fix FunstionScore Query random_score without seed bug. #647
 
 2014-07-02
-- Add setPostFilter method to Elastica\Query (http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_filtering_queries_and_aggregations.html#_post_filter) #645
+- Add setPostFilter method to Elastica\Query (http://www.elastic.co/guide/en/elasticsearch/guide/current/_post_filter.html) #645
 
 2014-06-30
-- Add Reverse Nested aggregation (http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html). #642
+- Add Reverse Nested aggregation (http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html). #642
 
 2014-06-14
 - Release v1.2.1.0
-- Removed the requirement to set arguments filter and/or query in Filtered, according to the documentation: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html #616
+- Removed the requirement to set arguments filter and/or query in Filtered, according to the documentation: http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html #616
 
 2014-06-13
 - Stop ClientTest->testDeleteIdsIdxStringTypeString from failing 1/3 of the time #634
@@ -179,7 +179,7 @@ CHANGES
 - Update travis to elasticsearch 1.2.1, disable Thrift plugin as not compatible and fix incompatible tests
 
 2014-06-04
-- Implement Boosting Query (http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html) #625
+- Implement Boosting Query (http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html) #625
 
 2014-06-02
 - add retry_on_conflict support to bulk #623
@@ -192,7 +192,7 @@ CHANGES
 
 2014-05-25
 - Added Guzzle transport as an alternative to the default Http transport #618
-- Added Elastica\ScanAndScroll Iterator (http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/scan-scroll.html) #617
+- Added Elastica\ScanAndScroll Iterator (http://www.elastic.co/guide/en/elasticsearch/guide/current/scan-scroll.html) #617
 
 2014-05-13
 - Add JSON compat library; Elasticsearch JSON flags and nicer error handling #614
@@ -234,7 +234,7 @@ CHANGES
 
 2014-04-19
 - Release v1.1.1.0
-- Update to elasticsearch 1.1.1 http://www.elasticsearch.org/downloads/1-1-1/
+- Update to elasticsearch 1.1.1 https://www.elastic.co/downloads/past-releases/1-1-1
 - Remove CustomFiltersScore and CustomScore query as removed in elasticsearch 1.1.0 https://github.com/elasticsearch/elasticsearch/pull/5076/files
 - Update Node Info to use plugins instead of plugin (https://github.com/elasticsearch/elasticsearch/pull/5072)
 - Fix mapping issue for aliases #588
@@ -249,7 +249,7 @@ CHANGES
 - Support for Terms filter lookup options #579
 
 2014-03-29
-- Update to elasticsearch 1.1.0 http://www.elasticsearch.org/downloads/1-1-0/
+- Update to elasticsearch 1.1.0 https://www.elastic.co/downloads/past-releases/1-1-0
 
 2014-03-26
 - Fixed Query\Match Fuzziness parameter type #576
@@ -321,7 +321,7 @@ CHANGES
 
 2014-02-12
 - Release v1.0.0.0
-- Updated to elasticsearch 1.0: http://www.elasticsearch.org/blog/1-0-0-released/
+- Updated to elasticsearch 1.0: https://www.elastic.co/blog/1-0-0-released/
 
 2014-02-11
 - Add aggregations
@@ -409,7 +409,7 @@ CHANGES
 - \Elastica\Search::addSuggest() has been renamed to \Elastica\Search::setSuggest()
 - \Elastica\Query::addSuggest() has been renamed to \Elastica\Query::setSuggest()
 - Add \Elastica\Suggest\Phrase, \Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator, and \Elastica\Suggest\CandidateGenerator\DirectGenerator
-  (see http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html)
+  (see http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html)
 
 2013-12-04
 - Remove boost from FunctionScore::addFunction because this is not supported by elasticsearch
@@ -444,10 +444,10 @@ CHANGES
 
 2013-10-29
 - Elastica_Type::exists() added
-  See http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-types-exists.html#indices-types-exists
+  See http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-types-exists.html#indices-types-exists
 
 2013-10-27
-- Adapted possible values (not only in) for minimum_should_match param based on elasticsearch documetnation  http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
+- Adapted possible values (not only in) for minimum_should_match param based on elasticsearch documetnation http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
 
 2013-10-27
 - Release v0.90.5.0
@@ -464,7 +464,7 @@ CHANGES
 2013-09-20
 - Update to geocluster-facet 0.0.8
 - Add support for term suggest API
-  See http://www.elasticsearch.org/guide/reference/api/search/term-suggest/
+  See http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-term.html
 
 2013-09-18
 - Fix \Elastica\Filter\HasChild usage of \Elastica\Query as to not collide with \Elastica\Filter\Query namespace
@@ -712,7 +712,7 @@ CHANGES
 
 2012-03-04
 - Node info call update. The receive os info and more, param is needed. By default, only basics are returned
-- Release v0.19.0.0 which is compatible with ES 0.19.0 http://www.elasticsearch.org/blog/2012/03/01/0.19.0-released.html
+- Release v0.19.0.0 which is compatible with ES 0.19.0 https://www.elastic.co/downloads/past-releases/0-19-0
 
 2012-02-21
 - Allow percolate queries in bulk requests
@@ -886,7 +886,7 @@ CHANGES
 
 2011-04-29
 - Added getParam to Elastica_Result that more values can be retrieved from the hit array
-- Elastica_Filter_Ids added http://www.elasticsearch.org/guide/reference/query-dsl/ids-filter.html
+- Elastica_Filter_Ids added http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-filter.html
 - getMergePolicyMergeFactor and getRefreshInterval to Elastica_Type_Settings added. If no value is set, default values are returned
 
 2011-04-28
@@ -924,7 +924,7 @@ CHANGES
 
 2011-03-24
 - Renaming of Elastica_Status_Index to Elastica_Index_Status => API Change!
-- IndexSettings added for improved bulk updating http://www.elasticsearch.org/blog/2011/03/23/update-settings.html
+- IndexSettings added for improved bulk updating http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
 
 2011-03-21
 - Node object added

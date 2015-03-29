@@ -5,10 +5,6 @@ namespace Elastica\Bulk\Action;
 use Elastica\Document;
 use Elastica\Script;
 
-/**
- * @package Elastica\Bulk\Action
- * @link http://www.elasticsearch.org/guide/reference/api/bulk/
- */
 class UpdateDocument extends IndexDocument
 {
     /**

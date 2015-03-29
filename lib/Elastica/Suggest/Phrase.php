@@ -7,7 +7,7 @@ use Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator;
 /**
  * Class Phrase
  * @package Elastica\Suggest
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html
  */
 class Phrase extends AbstractSuggest
 {

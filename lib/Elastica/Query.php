@@ -21,7 +21,7 @@ use Elastica\Suggest\AbstractSuggest;
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/api/search/
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
  */
 class Query extends Param
 {
@@ -161,7 +161,7 @@ class Query extends Param
      *
      * @param  array $sortArgs Sorting arguments
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/api/search/sort.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
     public function setSort(array $sortArgs)
     {
@@ -173,7 +173,7 @@ class Query extends Param
      *
      * @param  mixed $sort Sort parameter
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/api/search/sort.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
     public function addSort($sort)
     {
@@ -185,7 +185,7 @@ class Query extends Param
      *
      * @param  array $highlightArgs Set all highlight arguments
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/api/search/highlighting.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      */
     public function setHighlight(array $highlightArgs)
     {
@@ -197,7 +197,7 @@ class Query extends Param
      *
      * @param  mixed $highlight Add highlight argument
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/api/search/highlighting.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      */
     public function addHighlight($highlight)
     {
@@ -232,7 +232,7 @@ class Query extends Param
      *
      * @param  bool  $explain OPTIONAL Enabled or disable explain (default = true)
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/api/search/explain.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-explain.html
      */
     public function setExplain($explain = true)
     {
@@ -244,7 +244,7 @@ class Query extends Param
      *
      * @param  bool  $version OPTIONAL Enabled or disable version (default = true)
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/api/search/version.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-version.html
      */
     public function setVersion($version = true)
     {
@@ -258,7 +258,7 @@ class Query extends Param
      *
      * @param  array $fields Fields to be returned
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/api/search/fields.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fields.html
      */
     public function setFields(array $fields)
     {
@@ -270,7 +270,7 @@ class Query extends Param
      *
      * @param  array|\Elastica\ScriptFields $scriptFields Script fields
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/api/search/script-fields.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
      */
     public function setScriptFields($scriptFields)
     {
@@ -300,7 +300,7 @@ class Query extends Param
      *
      * @param  array $facets List of facet objects
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/api/search/facets/
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets.html
      */
     public function setFacets(array $facets)
     {
@@ -414,7 +414,7 @@ class Query extends Param
      *
      * @param  array $fields Fields to be returned
      * @return $this
-     * @link   http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-source-filtering.html
+     * @link   http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
      */
     public function setSource(array $fields)
     {
@@ -424,9 +424,9 @@ class Query extends Param
     /**
      * Sets post_filter argument for the query. The filter is applied after the query has executed
      *
-     * @param  array|\Elastica\Filter\AbstractFilter $filter
+     * @param array|\Elastica\Filter\AbstractFilter $filter
      * @return $this
-     * @link    http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-post-filter.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html
      */
     public function setPostFilter($filter)
     {

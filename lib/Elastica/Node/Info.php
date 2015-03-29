@@ -11,7 +11,7 @@ use Elastica\Request;
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-status.html
  */
 class Info
 {
@@ -113,7 +113,7 @@ class Info
     /**
      * Return data regarding plugins installed on this node
      * @return array plugin data
-     * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-info/
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      */
     public function getPlugins()
     {

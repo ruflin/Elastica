@@ -12,7 +12,7 @@ use Elastica\Type;
  * @author Lee Parker
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Tim Rupp
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/ids-query.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html
  */
 class Ids extends AbstractQuery
 {

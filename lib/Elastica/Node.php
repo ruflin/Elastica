@@ -11,7 +11,6 @@ use Elastica\Node\Stats;
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/api/admin-indices-status.html
  */
 class Node
 {
@@ -79,6 +78,7 @@ class Node
     /**
      * Return stats object of the current node
      *
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
      * @return \Elastica\Node\Stats Node stats
      */
     public function getStats()
@@ -93,6 +93,7 @@ class Node
     /**
      * Return info object of the current node
      *
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      * @return \Elastica\Node\Info Node info object
      */
     public function getInfo()
@@ -120,7 +121,7 @@ class Node
      *
      * @param  string             $delay OPTIONAL Delay after which node is shut down (default = 1s)
      * @return \Elastica\Response
-     * @link http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-shutdown.html
      */
     public function shutdown($delay = '1s')
     {
