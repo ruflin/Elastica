@@ -1,5 +1,8 @@
 CHANGES
 
+2015-03-29
+- Added Elastica\Suggest\Completion
+
 2015-03-12
 - Fixed short match construction in query DSL #796
 

@@ -12,7 +12,7 @@ class SuggestTest extends \PHPUnit_Framework_TestCase
     private $suggesters = array(
         'term' => array('name', 'field'),
         'phrase' => array('name', 'field'),
-        'completion' => array(),
+        'completion' => array('name', 'field'),
         'context' => array(),
     );
 

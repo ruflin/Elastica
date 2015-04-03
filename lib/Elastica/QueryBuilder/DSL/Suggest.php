@@ -4,6 +4,7 @@ namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Exception\NotImplementedException;
 use Elastica\QueryBuilder\DSL;
+use Elastica\Suggest\Completion;
 use Elastica\Suggest\Phrase;
 use Elastica\Suggest\Term;
 
@@ -56,10 +57,13 @@ class Suggest implements DSL
      * completion suggester
      *
      * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-completion.html
+     * @param  string     $name
+     * @param  string     $field
+     * @return Completion
      */
-    public function completion()
+    public function completion($name, $field)
     {
-        throw new NotImplementedException();
+        return new Completion($name, $field);
     }
 
     /**
