@@ -10,7 +10,7 @@ use Elastica\Exception\InvalidException;
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/terms-query.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html
  */
 class Terms extends AbstractQuery
 {

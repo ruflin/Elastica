@@ -5,7 +5,7 @@ namespace Elastica\Filter;
 /**
  * Class GeohashCell
  * @package Elastica
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/geohash-cell-filter/
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geohash-cell-filter.html
  */
 class GeohashCell extends AbstractGeoDistance
 {

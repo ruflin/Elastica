@@ -10,7 +10,7 @@ use Elastica\Exception\InvalidException;
  * @category Xodoa
  * @package  Elastica
  * @author   Nicolas Ruflin <spam@ruflin.com>, Jasper van Wanrooy <jasper@vanwanrooy.net>
- * @link     http://www.elasticsearch.org/guide/reference/query-dsl/query-string-query.html
+ * @link     http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
  */
 class QueryString extends AbstractQuery
 {

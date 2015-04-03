@@ -38,7 +38,7 @@ use Elastica\QueryBuilder\DSL;
  *
  * @package Elastica
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-queries.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-queries.html
  */
 class Query implements DSL
 {
@@ -55,7 +55,7 @@ class Query implements DSL
     /**
      * match query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
      * @param  null|string $field
      * @param  null|string $value
      * @return Match
@@ -75,7 +75,7 @@ class Query implements DSL
     /**
      * multi match query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
      * @return \Elastica\Query\MultiMatch
      */
     public function multi_match()
@@ -86,7 +86,7 @@ class Query implements DSL
     /**
      * bool query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
      * @return \Elastica\Query\Bool
      */
     public function bool()
@@ -97,7 +97,7 @@ class Query implements DSL
     /**
      * boosting query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
      * @return Boosting
      */
     public function boosting()
@@ -108,7 +108,7 @@ class Query implements DSL
     /**
      * common terms query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
      * @param  string $field
      * @param  string $query
      * @param  float  $cutoffFrequency percentage in decimal form (.001 == 0.1%)
@@ -122,7 +122,7 @@ class Query implements DSL
     /**
      * custom filters score query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/query-dsl-custom-filters-score-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-custom-filters-score-query.html
      */
     public function custom_filters_score()
     {
@@ -132,7 +132,7 @@ class Query implements DSL
     /**
      * custom score query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/query-dsl-custom-score-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-custom-score-query.html
      */
     public function custom_score()
     {
@@ -142,7 +142,7 @@ class Query implements DSL
     /**
      * custom boost factor query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/query-dsl-custom-boost-factor-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-custom-boost-factor-query.html
      */
     public function custom_boost_factor()
     {
@@ -152,7 +152,7 @@ class Query implements DSL
     /**
      * constant score query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html
      * @return ConstantScore
      */
     public function constant_score()
@@ -163,7 +163,7 @@ class Query implements DSL
     /**
      * dis max query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html
      * @return DisMax
      */
     public function dis_max()
@@ -174,7 +174,7 @@ class Query implements DSL
     /**
      * field query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/query-dsl-field-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-field-query.html
      */
     public function field()
     {
@@ -186,7 +186,7 @@ class Query implements DSL
      *
      * @param  AbstractFilter $filter
      * @param  AbstractQuery  $query
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html
      * @return Filtered
      */
     public function filtered(AbstractQuery $query, AbstractFilter $filter)
@@ -197,7 +197,7 @@ class Query implements DSL
     /**
      * fuzzy like this query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-flt-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-flt-query.html
      * @return FuzzyLikeThis
      */
     public function fuzzy_like_this()
@@ -208,7 +208,7 @@ class Query implements DSL
     /**
      * fuzzy like this field query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-flt-field-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-flt-field-query.html
      */
     public function fuzzy_like_this_field()
     {
@@ -218,7 +218,7 @@ class Query implements DSL
     /**
      * function score query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
      * @return FunctionScore
      */
     public function function_score()
@@ -229,7 +229,7 @@ class Query implements DSL
     /**
      * fuzzy query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html
      * @return Fuzzy
      */
     public function fuzzy()
@@ -240,7 +240,7 @@ class Query implements DSL
     /**
      * geo shape query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html
      */
     public function geo_shape()
     {
@@ -250,7 +250,7 @@ class Query implements DSL
     /**
      * has child query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
      * @param  AbstractQuery $query
      * @param  null|string   $type
      * @return HasChild
@@ -263,7 +263,7 @@ class Query implements DSL
     /**
      * has parent query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
      * @param  AbstractQuery $query
      * @param  string        $type
      * @return HasParent
@@ -276,7 +276,7 @@ class Query implements DSL
     /**
      * ids query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html
      * @param  array|string|\Elastica\Type $type
      * @param  array                       $ids
      * @return Ids
@@ -289,7 +289,7 @@ class Query implements DSL
     /**
      * indices query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-indices-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-indices-query.html
      */
     public function indices()
     {
@@ -299,7 +299,7 @@ class Query implements DSL
     /**
      * match all query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html
      * @return MatchAll
      */
     public function match_all()
@@ -310,7 +310,7 @@ class Query implements DSL
     /**
      * more like this query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html
      * @return MoreLikeThis
      */
     public function more_like_this()
@@ -321,7 +321,7 @@ class Query implements DSL
     /**
      * more_like_this_field query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-flt-field-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/1.4/query-dsl-mlt-field-query.html
      */
     public function more_like_this_field()
     {
@@ -331,7 +331,7 @@ class Query implements DSL
     /**
      * nested query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
      * @return Nested
      */
     public function nested()
@@ -342,7 +342,7 @@ class Query implements DSL
     /**
      * prefix query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
      * @return Prefix
      */
     public function prefix()
@@ -353,7 +353,7 @@ class Query implements DSL
     /**
      * query string query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
      * @return QueryString
      */
     public function query_string()
@@ -364,7 +364,7 @@ class Query implements DSL
     /**
      * simple_query_string query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-simple-query-string-query.html
      * @param  string            $query
      * @param  array             $fields
      * @return SimpleQueryString
@@ -377,7 +377,7 @@ class Query implements DSL
     /**
      * range query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-range-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html
      * @param  string $fieldName
      * @param  array  $args
      * @return Range
@@ -394,7 +394,7 @@ class Query implements DSL
      * @param  float  $boost
      * @return Regexp
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
      */
     public function regexp($fieldName, $value, $boost)
     {
@@ -404,7 +404,7 @@ class Query implements DSL
     /**
      * span first query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
      */
     public function span_first()
     {
@@ -414,7 +414,7 @@ class Query implements DSL
     /**
      * span multi term query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html
      */
     public function span_multi_term()
     {
@@ -424,7 +424,7 @@ class Query implements DSL
     /**
      * span near query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-span-near-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-near-query.html
      */
     public function span_near()
     {
@@ -434,7 +434,7 @@ class Query implements DSL
     /**
      * span not query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-span-not-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-not-query.html
      */
     public function span_not()
     {
@@ -444,7 +444,7 @@ class Query implements DSL
     /**
      * span or query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-span-or-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-or-query.html
      */
     public function span_or()
     {
@@ -454,7 +454,7 @@ class Query implements DSL
     /**
      * span term query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
      */
     public function span_term()
     {
@@ -464,7 +464,7 @@ class Query implements DSL
     /**
      * term query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-term-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html
      * @return Term
      */
     public function term()
@@ -475,7 +475,7 @@ class Query implements DSL
     /**
      * terms query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html
      * @param  string $field
      * @param  array  $terms
      * @return Terms
@@ -488,7 +488,7 @@ class Query implements DSL
     /**
      * top children query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-top-children-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-top-children-query.html
      * @param  AbstractQuery $query
      * @param  string        $type
      * @return TopChildren
@@ -501,7 +501,7 @@ class Query implements DSL
     /**
      * wildcard query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html
      * @return Wildcard
      */
     public function wildcard()
@@ -512,7 +512,7 @@ class Query implements DSL
     /**
      * text query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/query-dsl-text-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-text-query.html
      */
     public function text()
     {
@@ -522,7 +522,7 @@ class Query implements DSL
     /**
      * minimum should match query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
     public function minimum_should_match()
     {
@@ -532,7 +532,7 @@ class Query implements DSL
     /**
      * template query
      *
-     * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-template-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-template-query.html
      */
     public function template()
     {

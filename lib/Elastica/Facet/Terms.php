@@ -12,7 +12,7 @@ use Elastica\Script;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
- * @link http://www.elasticsearch.org/guide/reference/api/search/facets/terms-facet.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-terms-facet.html
  */
 class Terms extends AbstractFacet
 {

@@ -5,7 +5,7 @@ namespace Elastica\Suggest;
 /**
  * Class Term
  * @package Elastica\Suggest
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters-term.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-term.html
  */
 class Term extends AbstractSuggest
 {

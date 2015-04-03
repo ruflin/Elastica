@@ -8,7 +8,7 @@ namespace Elastica\Query;
  * @category Xodoa
  * @package Elastica
  * @author Aurélien Le Grand <gnitg@yahoo.fr>
- * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
  */
 class Regexp extends AbstractQuery
 {

@@ -10,7 +10,7 @@ use Elastica\Exception\InvalidException;
  * @category Xodoa
  * @package Elastica
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
- * @link http://www.elasticsearch.org/guide/reference/api/search/facets/range-facet.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-range-facet.html
  */
 class Range extends AbstractFacet
 {

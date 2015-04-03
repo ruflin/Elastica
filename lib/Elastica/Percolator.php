@@ -8,7 +8,7 @@ namespace Elastica;
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/api/percolate/
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-percolate.html
  */
 class Percolator
 {

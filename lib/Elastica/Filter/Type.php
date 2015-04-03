@@ -8,7 +8,7 @@ namespace Elastica\Filter;
  * @category Xodoa
  * @package Elastica
  * @author James Wilson <jwilson556@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/type-filter.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-filter.html
  */
 class Type extends AbstractFilter
 {

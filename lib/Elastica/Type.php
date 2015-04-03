@@ -132,7 +132,7 @@ class Type implements SearchableInterface
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0
      *
-     * @link http://www.elasticsearch.org/guide/reference/api/update.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      * @throws \Elastica\Exception\InvalidException
      *
      * @param  \Elastica\Document|\Elastica\Script $data    Document with update data
@@ -165,7 +165,7 @@ class Type implements SearchableInterface
      *
      * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
      * @return \Elastica\Bulk\ResponseSet
-     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function updateDocuments(array $docs)
     {
@@ -181,7 +181,7 @@ class Type implements SearchableInterface
      *
      * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
      * @return \Elastica\Bulk\ResponseSet
-     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function addDocuments(array $docs)
     {
@@ -197,7 +197,7 @@ class Type implements SearchableInterface
      *
      * @param  objects[]                  $objects
      * @return \Elastica\Bulk\ResponseSet
-     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function addObjects(array $objects)
     {
@@ -392,7 +392,7 @@ class Type implements SearchableInterface
      *
      * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
      * @return \Elastica\Bulk\ResponseSet
-     * @link http://www.elasticsearch.org/guide/reference/api/bulk.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function deleteDocuments(array $docs)
     {
@@ -408,7 +408,7 @@ class Type implements SearchableInterface
      *
      * @throws \InvalidArgumentException
      * @throws \Elastica\Exception\NotFoundException
-     * @link http://www.elasticsearch.org/guide/reference/api/delete.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
      *
      * @param  int|string         $id      Document id
      * @param  array              $options
@@ -451,7 +451,7 @@ class Type implements SearchableInterface
      * @param  \Elastica\Query|string $query   Query object
      * @param  array                  $options Optional params
      * @return \Elastica\Response
-     * @link http://www.elasticsearch.org/guide/reference/api/delete-by-query.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      */
     public function deleteByQuery($query, array $options = array())
     {
@@ -487,7 +487,7 @@ class Type implements SearchableInterface
      * @param  array                        $params OPTIONAL Additional arguments for the query
      * @param  string|array|\Elastica\Query $query  OPTIONAL Query to filter the moreLikeThis results
      * @return \Elastica\ResultSet          ResultSet with all results inside
-     * @link http://www.elasticsearch.org/guide/reference/api/more-like-this.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-more-like-this.html
      */
     public function moreLikeThis(Document $doc, $params = array(), $query = array())
     {

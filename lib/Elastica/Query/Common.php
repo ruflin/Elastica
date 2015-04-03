@@ -5,7 +5,7 @@ namespace Elastica\Query;
 /**
  * Class Common
  * @package Elastica
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/common-terms-query/
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-common-terms-query.html
  */
 class Common extends AbstractQuery
 {
@@ -90,7 +90,7 @@ class Common extends AbstractQuery
      * Set the minimum_should_match parameter
      * @param  int|string $minimum minimum number of low frequency terms which must be present
      * @return $this
-     * @link Possible values for minimum_should_match http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
+     * @link Possible values for minimum_should_match http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
     public function setMinimumShouldMatch($minimum)
     {

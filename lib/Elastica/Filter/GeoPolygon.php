@@ -8,7 +8,7 @@ namespace Elastica\Filter;
  * @category Xodoa
  * @package Elastica
  * @author Michael Maclean <mgdm@php.net>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-polygon-filter.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-filter.html
  */
 class GeoPolygon extends AbstractFilter
 {

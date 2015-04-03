@@ -10,7 +10,7 @@ use Elastica\Query as BaseQuery;
  * @category Xodoa
  * @package Elastica
  * @author Jason Hu <mjhu91@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/api/search/rescore/
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html
  */
 class Query extends AbstractRescore
 {

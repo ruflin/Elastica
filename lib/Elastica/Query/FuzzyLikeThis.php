@@ -8,7 +8,7 @@ namespace Elastica\Query;
  * @category Xodoa
  * @package Elastica
  * @author Raul Martinez, Jr <juneym@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/flt-query.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-flt-query.html
  */
 class FuzzyLikeThis extends AbstractQuery
 {

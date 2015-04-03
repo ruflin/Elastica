@@ -12,7 +12,7 @@ use Elastica\JSON;
  * @category Xodoa
  * @package Elastica
  * @author Chris Gedrim <chris@gedr.im>
- * @link http://www.elasticsearch.org/
+ * @link http://www.elastic.co/
  **/
 class Builder extends AbstractQuery
 {

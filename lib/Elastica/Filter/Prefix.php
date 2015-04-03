@@ -8,7 +8,7 @@ namespace Elastica\Filter;
  * @category Xodoa
  * @package Elastica
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/prefix-filter.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-filter.html
  */
 class Prefix extends AbstractFilter
 {

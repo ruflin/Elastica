@@ -11,7 +11,7 @@ use Elastica\Request;
  * @category Xodoa
  * @package  Elastica
  * @author   Nicolas Ruflin <spam@ruflin.com>
- * @link     http://www.elasticsearch.org/guide/reference/api/admin-cluster-update-settings.html
+ * @link     http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-update-settings.html
  */
 class Settings
 {

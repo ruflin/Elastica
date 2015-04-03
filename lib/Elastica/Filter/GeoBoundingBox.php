@@ -10,7 +10,7 @@ use Elastica\Exception\InvalidException;
  * @category Xodoa
  * @package Elastica
  * @author Fabian Vogler <fabian@equivalence.ch>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/geo-bounding-box-filter.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-filter.html
  */
 class GeoBoundingBox extends AbstractFilter
 {

@@ -13,7 +13,7 @@ use Elastica\Search as BaseSearch;
  * @category Xodoa
  * @package Elastica
  * @author munkie
- * @link http://www.elasticsearch.org/guide/reference/api/multi-search.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html
  */
 class Search
 {

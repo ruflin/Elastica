@@ -10,7 +10,7 @@ use Elastica\Type as ElasticaType;
  * @category Xodoa
  * @package Elastica
  * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/ids-filter.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-filter.html
  */
 class Ids extends AbstractFilter
 {

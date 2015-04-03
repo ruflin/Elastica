@@ -12,7 +12,7 @@ use Elastica\Type;
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/mapping/
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html
  */
 class Mapping
 {
@@ -85,7 +85,7 @@ class Mapping
      * Sets the mapping _meta
      * @param  array $meta metadata
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/mapping/meta.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-meta.html
      */
     public function setMeta(array $meta)
     {
@@ -110,7 +110,7 @@ class Mapping
      *
      * @param  array $source Source array
      * @return $this
-     * @link http://www.elasticsearch.org/guide/reference/mapping/source-field.html
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-source-field.html
      */
     public function setSource(array $source)
     {

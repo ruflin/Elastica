@@ -8,7 +8,7 @@ namespace Elastica\Query;
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
- * @link http://www.elasticsearch.org/guide/reference/query-dsl/wildcard-query.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html
  */
 class Wildcard extends AbstractQuery
 {

@@ -10,7 +10,7 @@ use Elastica\Exception\InvalidException;
  * @category Xodoa
  * @package Elastica
  * @author avasilenko <aa.vasilenko@gmail.com>
- * @link http://www.elasticsearch.org/guide/reference/modules/scripting.html
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html
  */
 class Script extends AbstractUpdateAction
 {
