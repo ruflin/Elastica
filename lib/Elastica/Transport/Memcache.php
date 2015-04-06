@@ -16,6 +16,7 @@ use Elastica\Response;
  * @category Xodoa
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ * @deprecated The memcached transport is deprecated as of ES 1.5, and will be removed in ES 2.0
  */
 class Memcache extends AbstractTransport
 {
