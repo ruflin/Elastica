@@ -99,19 +99,6 @@ class QueryString extends AbstractQuery
     }
 
     /**
-     * Sets the parameter to auto-lowercase terms of some queries.
-     *
-     * If not set, defaults to true.
-     *
-     * @param  bool  $lowercase
-     * @return $this
-     */
-    public function setLowercaseExpandedTerms($lowercase = true)
-    {
-        return $this->setParam('lowercase_expanded_terms', (bool) $lowercase);
-    }
-
-    /**
      * Sets the parameter to enable the position increments in result queries.
      *
      * If not set, defaults to true.
