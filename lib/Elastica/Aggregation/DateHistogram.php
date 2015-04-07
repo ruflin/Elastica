@@ -11,6 +11,9 @@ class DateHistogram extends Histogram
 {
     /**
      * Set pre-rounding based on interval
+     *
+     * @deprecated Option "pre_zone" is deprecated as of ES 1.5. Use "time_zone" instead
+     *
      * @param  string $preZone
      * @return $this
      */
@@ -21,12 +24,26 @@ class DateHistogram extends Histogram
 
     /**
      * Set post-rounding based on interval
+     *
+     * @deprecated Option "post_zone" is deprecated as of ES 1.5. Use "time_zone" instead
+     *
      * @param  string $postZone
      * @return $this
      */
     public function setPostZone($postZone)
     {
         return $this->setParam("post_zone", $postZone);
+    }
+
+    /**
+     * Set time_zone option
+     *
+     * @param  string
+     * @return $this
+     */
+    public function setTimezone($timezone)
+    {
+        return $this->setParam('time_zone', $timezone);
     }
 
     /**

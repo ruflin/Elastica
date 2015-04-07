@@ -1,8 +1,8 @@
 CHANGES
 
 2015-04-08
-- Added Elastica\Aggregation\DateHistogram::setOffset
-- Added deprecation notice to setPreOffset, setPostOffset and setPreZoneAdjustLargeInterval methods in Elastica\Aggregation\DateHistogram
+- Added new methods to Elastica\Aggregation\DateHistogram: setOffset, setTimezone
+- Following methods in Elastica\Aggregation\DateHistogram marked as deprecated: setPreOffset, setPostOffset, setPreZone, setPostZone, setPreZoneAdjustLargeInterval
 
 2015-04-07
 - [BC break] Elastica\Query\QueryString::setLowercaseExpandedTerms removed

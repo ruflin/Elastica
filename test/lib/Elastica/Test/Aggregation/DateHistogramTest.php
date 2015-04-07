@@ -69,4 +69,23 @@ class DateHistogramTest extends BaseAggregationTest
 
         $this->assertEquals('2014-01-29T00:19:40.000Z', $results['buckets'][0]['key_as_string']);
     }
+
+    public function testSetTimezone()
+    {
+        $agg = new DateHistogram('hist', 'created', '1h');
+
+        $agg->setTimezone('-02:30');
+
+        $expected = array(
+            'date_histogram' => array(
+                'field' => 'created',
+                'interval' => '1h',
+                'time_zone' => '-02:30',
+            ),
+        );
+
+       $this->assertEquals($expected, $agg->toArray());
+
+       $this->assertInstanceOf('Elastica\Aggregation\DateHistogram', $agg->setTimezone('-02:30'));
+    }
 }
