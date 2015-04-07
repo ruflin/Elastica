@@ -2,6 +2,7 @@ CHANGES
 
 2015-04-07
 - [BC break] Elastica\Query\QueryString::setLowercaseExpandedTerms removed
+- Added Elastica\Query\QueryString::setTimezone
 
 2015-04-06
 - Update Elasticsearch version to 1.5

@@ -123,4 +123,23 @@ class QueryStringTest extends BaseTest
         $query = new QueryString();
         $query->setQuery(array());
     }
+
+    public function testSetTimezone()
+    {
+        $timezone = 'Europe/Paris';
+        $text = 'date:[2012 TO 2014]';
+
+        $query = new QueryString($text);
+        $query->setTimezone($timezone);
+
+        $expected = array(
+            'query_string' => array(
+                'query' => $text,
+                'time_zone' => $timezone,
+            ),
+        );
+
+        $this->assertEquals($expected, $query->toArray());
+        $this->assertInstanceOf('Elastica\Query\QueryString', $query->setTimezone($timezone));
+    }
 }

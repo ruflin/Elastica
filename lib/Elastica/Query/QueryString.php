@@ -243,6 +243,17 @@ class QueryString extends AbstractQuery
     }
 
     /**
+     * Set timezone option.
+     *
+     * @param  string $timezone
+     * @return $this
+     */
+    public function setTimezone($timezone)
+    {
+        return $this->setParam('time_zone', $timezone);
+    }
+
+    /**
      * Converts query to array
      *
      * @see \Elastica\Query\AbstractQuery::toArray()
