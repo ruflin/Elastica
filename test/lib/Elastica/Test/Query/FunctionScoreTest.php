@@ -272,4 +272,37 @@ class FunctionScoreTest extends BaseTest
         $result0 = $results[0]->getData();
         $this->assertEquals("Miller's Field", $result0['name']);
     }
+
+    public function testSetMinScore()
+    {
+        $expected = array(
+            'function_score' => array(
+                'min_score' => 0.8,
+                'functions' => array(
+                    array(
+                        'gauss' => array(
+                            'price' => array(
+                                'origin' => 0,
+                                'scale' => 10,
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $query = new FunctionScore();
+        $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', 0, 10);
+        $returnedValue = $query->setMinScore(0.8);
+
+        $this->assertEquals($expected, $query->toArray());
+        $this->assertInstanceOf('Elastica\Query\FunctionScore', $returnedValue);
+
+        $response = $this->type->search($query);
+        $results = $response->getResults();
+
+        $this->assertCount(1, $results);
+        $this->assertEquals(1, $results[0]->getId());
+
+    }
 }

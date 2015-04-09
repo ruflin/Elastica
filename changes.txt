@@ -2,6 +2,7 @@ CHANGES
 
 2015-04-09
 - Added Elastica\Query\SimpleQueryString::setMinimumShouldMatch
+- Added Elastica\Query\FunctionScore::setMinScore
 
 2015-04-08
 - Added new methods to Elastica\Aggregation\DateHistogram: setOffset, setTimezone
