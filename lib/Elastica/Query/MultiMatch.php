@@ -90,12 +90,12 @@ class MultiMatch extends AbstractQuery
     /**
      * Set field minimum should match for Match Query
      *
-     * @param  int   $minimumShouldMatch
+     * @param  mixed $minimumShouldMatch
      * @return $this
      */
     public function setMinimumShouldMatch($minimumShouldMatch)
     {
-        return $this->setParam('minimum_should_match', (int) $minimumShouldMatch);
+        return $this->setParam('minimum_should_match', $minimumShouldMatch);
     }
 
     /**

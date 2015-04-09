@@ -32,7 +32,7 @@ class MultiMatchTest extends BaseTest
     {
         $this->multiMatch->setQuery('Tristan Maindron');
         $this->multiMatch->setFields(array('full_name', 'name'));
-        $this->multiMatch->setMinimumShouldMatch(2);
+        $this->multiMatch->setMinimumShouldMatch('2<100%');
         $resultSet = $this->_getResults();
 
         $this->assertEquals(1, $resultSet->count());
