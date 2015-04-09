@@ -23,6 +23,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
             new Version\Version120(),
             new Version\Version130(),
             new Version\Version140(),
+            new Version\Version150(),
         );
 
         foreach ($versions as $version) {
