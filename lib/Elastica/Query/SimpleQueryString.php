@@ -62,4 +62,15 @@ class SimpleQueryString extends AbstractQuery
     {
         return $this->setParam("analyzer", $analyzer);
     }
+
+    /**
+     * Set minimum_should_match option.
+     *
+     * @param  int|string $minimumShouldMatch
+     * @return $this
+     */
+    public function setMinimumShouldMatch($minimumShouldMatch)
+    {
+        return $this->setParam("minimum_should_match", $minimumShouldMatch);
+    }
 }
