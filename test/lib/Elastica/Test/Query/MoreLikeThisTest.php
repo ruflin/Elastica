@@ -65,6 +65,16 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($fields, $data['more_like_this']['fields']);
     }
 
+    public function testSetIds()
+    {
+        $query = new MoreLikeThis();
+        $ids = array(1, 2, 3);
+        $query->setIds($ids);
+
+        $data = $query->toArray();
+        $this->assertEquals($ids, $data['more_like_this']['ids']);
+    }
+
     public function testSetLikeText()
     {
         $query = new MoreLikeThis();
