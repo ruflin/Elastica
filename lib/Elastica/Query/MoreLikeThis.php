@@ -13,15 +13,27 @@ namespace Elastica\Query;
 class MoreLikeThis extends AbstractQuery
 {
     /**
-     * Adds field to mlt query
+     * Set fields to which to restrict the mlt query
      *
-     * @param  array $fields Field names
-     * @return $this
+     * @param  array                            $fields Field names
+     * @return \Elastica\Query\MoreLikeThis Current object
      */
     public function setFields(array $fields)
     {
         return $this->setParam('fields', $fields);
     }
+
+    /**
+     * Set document ids for the mlt query
+     *
+     * @param  array                        $ids Document ids
+     * @return \Elastica\Query\MoreLikeThis Current object
+     */
+    public function setIds(array $ids)
+    {
+        return $this->setParam('ids', $ids);
+    }
+
 
     /**
      * Set the "like_text" value
