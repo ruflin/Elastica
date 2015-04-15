@@ -1,5 +1,8 @@
 CHANGES
 
+2015-04-15
+- deleteByQuery() implemented in Elastica\Index
+
 2015-03-29
 - Added Elastica\Suggest\Completion
 
