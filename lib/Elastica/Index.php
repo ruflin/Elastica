@@ -149,6 +149,27 @@ class Index implements SearchableInterface
     }
 
     /**
+     * Deletes entries in the db based on a query
+     *
+     * @param  \Elastica\Query|string $query   Query object
+     * @param  array                  $options Optional params
+     * @return \Elastica\Response
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
+     */
+    public function deleteByQuery($query, array $options = array())
+    {
+        if (is_string($query)) {
+            // query_string queries are not supported for delete by query operations
+            $options['q'] = $query;
+
+            return $this->request('_query', Request::DELETE, array(), $options);
+        }
+        $query = Query::create($query);
+
+        return $this->request('_query', Request::DELETE, array('query' => $query->getQuery()), $options);
+    }
+
+    /**
      * Deletes the index
      *
      * @return \Elastica\Response Response object

@@ -8,6 +8,7 @@ use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Query\HasChild;
 use Elastica\Query\QueryString;
+use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
@@ -318,6 +319,111 @@ class IndexTest extends BaseTest
         $query->setTerm($key, $value);
 
         $this->assertEquals(1, $index->count($query));
+    }
+
+    public function testDeleteByQueryWithQueryString()
+    {
+        $index = $this->_createIndex();
+        $type1 = new Type($index, 'test1');
+        $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
+        $type1->addDocument(new Document(2, array('name' => 'ruflin')));
+        $type2 = new Type($index, 'test2');
+        $type2->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
+        $type2->addDocument(new Document(2, array('name' => 'ruflin')));
+        $index->refresh();
+
+        $response = $index->search('ruflin*');
+        $this->assertEquals(4, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(2, $response->count());
+
+        // Delete first document
+        $response = $index->deleteByQuery('nicolas');
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+
+        // Makes sure, document is deleted
+        $response = $index->search('ruflin*');
+        $this->assertEquals(2, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(0, $response->count());
+    }
+
+    public function testDeleteByQueryWithQuery()
+    {
+        $index = $this->_createIndex();
+        $type1 = new Type($index, 'test1');
+        $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
+        $type1->addDocument(new Document(2, array('name' => 'ruflin')));
+        $type2 = new Type($index, 'test2');
+        $type2->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
+        $type2->addDocument(new Document(2, array('name' => 'ruflin')));
+        $index->refresh();
+
+        $response = $index->search('ruflin*');
+        $this->assertEquals(4, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(2, $response->count());
+
+        // Delete first document
+        $response = $index->deleteByQuery(new SimpleQueryString('nicolas'));
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+
+        // Makes sure, document is deleted
+        $response = $index->search('ruflin*');
+        $this->assertEquals(2, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(0, $response->count());
+    }
+
+    public function testDeleteByQueryWithQueryAndOptions()
+    {
+        $index = $this->_createIndex(null, true, 2);
+        $type1 = new Type($index, 'test1');
+        $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
+        $type1->addDocument(new Document(2, array('name' => 'ruflin')));
+        $type2 = new Type($index, 'test2');
+        $type2->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
+        $type2->addDocument(new Document(2, array('name' => 'ruflin')));
+        $index->refresh();
+
+        $response = $index->search('ruflin*');
+        $this->assertEquals(4, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(2, $response->count());
+
+        // Route to the wrong document id; should not delete
+        $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => '2'));
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+
+        $response = $index->search('ruflin*');
+        $this->assertEquals(4, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(2, $response->count());
+
+        // Delete first document
+        $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => '1'));
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+
+        // Makes sure, document is deleted
+        $response = $index->search('ruflin*');
+        $this->assertEquals(2, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(0, $response->count());
     }
 
     public function testDeleteIndexDeleteAlias()
