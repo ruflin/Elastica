@@ -322,6 +322,7 @@ class Query implements DSL
      * more_like_this_field query
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/1.4/query-dsl-mlt-field-query.html
+     * @deprecated More Like This Field query is deprecated as of ES 1.4 and will be removed in ES 2.0
      */
     public function more_like_this_field()
     {

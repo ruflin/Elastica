@@ -75,6 +75,8 @@ class MoreLikeThis extends AbstractQuery
      *
      * @param  float $percentTermsToMatch Percentage
      * @return $this
+     *
+     * @deprecated Option "percent_terms_to_match" deprecated as of ES 1.5. Use "minimum_should_match" instead.
      */
     public function setPercentTermsToMatch($percentTermsToMatch)
     {
@@ -169,5 +171,16 @@ class MoreLikeThis extends AbstractQuery
     public function setStopWords(array $stopWords)
     {
         return $this->setParam('stop_words', $stopWords);
+    }
+
+    /**
+     * Set minimum_should_match option.
+     *
+     * @param  int|string $minimumShouldMatch
+     * @return $this
+     */
+    public function setMinimumShouldMatch($minimumShouldMatch)
+    {
+        return $this->setParam('minimum_should_match', $minimumShouldMatch);
     }
 }

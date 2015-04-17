@@ -26,6 +26,7 @@ use Thrift\Transport\TSocket;
  * @category Xodoa
  * @package Elastica
  * @author Mikhail Shamin <munk13@gmail.com>
+ * @deprecated The thrift transport is deprecated as of ES 1.5, and will be removed in ES 2.0
  */
 class Thrift extends AbstractTransport
 {

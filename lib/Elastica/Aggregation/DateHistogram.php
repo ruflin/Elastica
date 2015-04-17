@@ -11,6 +11,9 @@ class DateHistogram extends Histogram
 {
     /**
      * Set pre-rounding based on interval
+     *
+     * @deprecated Option "pre_zone" is deprecated as of ES 1.5. Use "time_zone" instead
+     *
      * @param  string $preZone
      * @return $this
      */
@@ -21,6 +24,9 @@ class DateHistogram extends Histogram
 
     /**
      * Set post-rounding based on interval
+     *
+     * @deprecated Option "post_zone" is deprecated as of ES 1.5. Use "time_zone" instead
+     *
      * @param  string $postZone
      * @return $this
      */
@@ -30,7 +36,21 @@ class DateHistogram extends Histogram
     }
 
     /**
+     * Set time_zone option
+     *
+     * @param  string
+     * @return $this
+     */
+    public function setTimezone($timezone)
+    {
+        return $this->setParam('time_zone', $timezone);
+    }
+
+    /**
      * Set pre-zone adjustment for larger time intervals (day and above)
+     *
+     * @deprecated Option "pre_zone_adjust_large_interval" is deprecated as of ES 1.5
+     *
      * @param  string $adjust
      * @return $this
      */
@@ -51,6 +71,9 @@ class DateHistogram extends Histogram
 
     /**
      * Set the offset for pre-rounding
+     *
+     * @deprecated Option "pre_offset" is deprecated as of ES 1.5. Use "offset" instead
+     *
      * @param  string $offset "1d", for example
      * @return $this
      */
@@ -61,12 +84,26 @@ class DateHistogram extends Histogram
 
     /**
      * Set the offset for post-rounding
+     *
+     * @deprecated Option "post_offset" is deprecated as of ES 1.5. Use "offset" instead
+     *
      * @param  string $offset "1d", for example
      * @return $this
      */
     public function setPostOffset($offset)
     {
         return $this->setParam("post_offset", $offset);
+    }
+
+    /**
+     * Set offset option
+     *
+     * @param  string
+     * @return $this
+     */
+    public function setOffset($offset)
+    {
+        return $this->setParam("offset", $offset);
     }
 
     /**

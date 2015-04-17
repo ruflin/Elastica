@@ -6,7 +6,7 @@ use Elastica\Exception\QueryBuilderException;
 use Elastica\QueryBuilder\DSL;
 use Elastica\QueryBuilder\Facade;
 use Elastica\QueryBuilder\Version;
-use Elastica\QueryBuilder\Version\Version140;
+use Elastica\QueryBuilder\Version\Version150;
 
 /**
  * Query Builder
@@ -33,7 +33,7 @@ class QueryBuilder
      */
     public function __construct(Version $version = null)
     {
-        $this->_version = $version ?: new Version140();
+        $this->_version = $version ?: new Version150();
 
         $this->addDSL(new DSL\Query());
         $this->addDSL(new DSL\Filter());

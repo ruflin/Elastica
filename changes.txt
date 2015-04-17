@@ -3,6 +3,23 @@ CHANGES
 2015-04-15
 - deleteByQuery() implemented in Elastica\Index
 
+2015-04-09
+- Added Elastica\Query\SimpleQueryString::setMinimumShouldMatch
+- Added Elastica\Query\FunctionScore::setMinScore
+- Added Elastica\Query\MoreLikeThis::setMinimumShouldMatch
+
+2015-04-08
+- Added new methods to Elastica\Aggregation\DateHistogram: setOffset, setTimezone
+- Following methods in Elastica\Aggregation\DateHistogram marked as deprecated: setPreOffset, setPostOffset, setPreZone, setPostZone, setPreZoneAdjustLargeInterval
+
+2015-04-07
+- [BC break] Elastica\Query\QueryString::setLowercaseExpandedTerms removed
+- Added Elastica\Query\QueryString::setTimezone
+
+2015-04-06
+- Update Elasticsearch version to 1.5
+- Added deprecation notice to Elastica\Transport\Thrift, Elastica\Transport\Memcached and Elastica\Type::deleteByQuery
+
 2015-03-29
 - Added Elastica\Suggest\Completion
 
@@ -39,7 +56,7 @@ CHANGES
 - Add support for filters aggregation #773
 
 2015-01-27
-- Housekeeping, coding standard #764 
+- Housekeeping, coding standard #764
 - Exception\ElasticsearchException now can be catched like all other exceptions as Exception\ExceptionInterface #762
 
 2015-01-25

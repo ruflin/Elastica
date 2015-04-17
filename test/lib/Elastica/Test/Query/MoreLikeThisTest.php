@@ -114,6 +114,16 @@ class MoreLikeThisTest extends BaseTest
         $this->assertEquals($match, $query->getParam('percent_terms_to_match'));
     }
 
+    public function testSetMinimumShouldMatch()
+    {
+        $query = new MoreLikeThis();
+
+        $match = '80%';
+        $query->setMinimumShouldMatch($match);
+
+        $this->assertEquals($match, $query->getParam('minimum_should_match'));
+    }
+
     public function testSetMinDocFrequency()
     {
         $query = new MoreLikeThis();

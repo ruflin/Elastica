@@ -219,6 +219,17 @@ class FunctionScore extends AbstractQuery
     }
 
     /**
+     * Set min_score option.
+     *
+     * @param  float $minScore
+     * @return $this
+     */
+    public function setMinScore($minScore)
+    {
+        return $this->setParam('min_score', (float) $minScore);
+    }
+
+    /**
      * @return array
      */
     public function toArray()
