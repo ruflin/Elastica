@@ -406,7 +406,18 @@ class Query extends Param
      */
     public function setRescore($rescore)
     {
-        return $this->setParam('rescore', $rescore->toArray());
+        if (is_array($rescore)) {
+            $buffer = [];
+
+            foreach($rescore as $rescoreQuery) {
+                $buffer []= $rescoreQuery->toArray();
+            }
+        }
+        else {
+            $buffer = $rescore->toArray();
+        }
+
+        return $this->setParam('rescore', $buffer);
     }
 
     /**
