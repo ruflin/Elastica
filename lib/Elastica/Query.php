@@ -407,7 +407,7 @@ class Query extends Param
     public function setRescore($rescore)
     {
         if (is_array($rescore)) {
-            $buffer = [];
+            $buffer = array();
 
             foreach($rescore as $rescoreQuery) {
                 $buffer []= $rescoreQuery->toArray();
