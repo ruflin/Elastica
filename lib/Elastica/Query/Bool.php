@@ -90,4 +90,18 @@ class Bool extends AbstractQuery
     {
         return $this->setParam('minimum_number_should_match', $minimumNumberShouldMatch);
     }
+
+    /**
+     * Converts array to an object in case no queries are added
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        if (empty($this->_params)) {
+            $this->_params = new \stdClass();
+        }
+        return parent::toArray();
+    }
+
 }

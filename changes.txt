@@ -1,5 +1,8 @@
 CHANGES
 
+2015-04-23
+- Fix empty bool query to act as match all query #817
+
 2015-04-15
 - deleteByQuery() implemented in Elastica\Index
 
