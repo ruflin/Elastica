@@ -1,6 +1,7 @@
 CHANGES
 
 2015-04-23
+- Allow bool in Query::setSource function #818 http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
 - Fix empty bool query to act as match all query #817
 
 2015-04-15
