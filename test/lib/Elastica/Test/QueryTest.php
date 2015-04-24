@@ -13,6 +13,7 @@ use Elastica\Script;
 use Elastica\ScriptFields;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Type;
 
 class QueryTest extends BaseTest
 {
@@ -355,5 +356,42 @@ class QueryTest extends BaseTest
         $anotherQuery->setPostFilter($postFilter);
 
         $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
+    }
+
+    public function testNoSource()
+    {
+        $index = $this->_createIndex();
+
+        $type = new Type($index, 'user');
+
+        // Adds 1 document to the index
+        $doc1 = new Document(1,
+            array('username' => 'ruflin', 'test' => array('2', '3', '5'))
+        );
+        $type->addDocument($doc1);
+
+        // To update index
+        $index->refresh();
+
+        $query = Query::create('ruflin');
+        $resultSet = $type->search($query);
+
+        // Disable source
+        $query->setSource(false);
+
+        $resultSetNoSource = $type->search($query);
+
+        $this->assertEquals(1, $resultSet->count());
+        $this->assertEquals(1, $resultSetNoSource->count());
+
+        // Tests if no source is in response except id
+        $result = $resultSetNoSource->current();
+        $this->assertEquals(1, $result->getId());
+        $this->assertEmpty($result->getData());
+
+        // Tests if source is in response except id
+        $result = $resultSet->current();
+        $this->assertEquals(1, $result->getId());
+        $this->assertNotEmpty($result->getData());
     }
 }

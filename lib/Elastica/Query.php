@@ -412,13 +412,13 @@ class Query extends Param
     /**
      * Sets the _source field to be returned with every hit
      *
-     * @param  array $fields Fields to be returned
+     * @param  array|bool $params Fields to be returned or false to disable source
      * @return $this
      * @link   http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
      */
-    public function setSource(array $fields)
+    public function setSource($params)
     {
-        return $this->setParam('_source', $fields);
+        return $this->setParam('_source', $params);
     }
 
     /**
