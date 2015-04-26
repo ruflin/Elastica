@@ -141,6 +141,59 @@ class RescoreTest extends BaseTest
         $this->assertEquals($expected, $data);
     }
 
+    public function testMultipleQueries()
+    {
+        $query = new Query();
+        $mainQuery = new Match();
+        $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
+        $secQuery1 = new Term();
+        $secQuery1 = $secQuery1->setTerm('test2', 'bar', 1);
+        $secQuery2 = new Term();
+        $secQuery2 = $secQuery2->setTerm('test2', 'tom', 2);
+        $queryRescore = new QueryRescore(array($secQuery1, $secQuery2));
+        $query->setQuery($mainQuery);
+        $query->setRescore($queryRescore);
+        $data = $query->toArray();
+
+        $expected = array(
+            'query' => array(
+                'match' => array(
+                    'test1' => array(
+                        'query' => 'foo',
+                    ),
+                ),
+            ),
+            'rescore' => array(
+                array(
+                    'query' => array(
+                        'rescore_query' => array(
+                            'term' => array(
+                                'test2' => array(
+                                    'value' => 'bar',
+                                    'boost' => 1,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                array(
+                    'query' => array(
+                        'rescore_query' => array(
+                            'term' => array(
+                                'test2' => array(
+                                    'value' => 'tom',
+                                    'boost' => 2,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $this->assertEquals($expected, $data);
+    }
+
     public function testQuery()
     {
         $query = new Query();
