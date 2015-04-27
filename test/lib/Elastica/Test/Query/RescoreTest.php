@@ -146,13 +146,19 @@ class RescoreTest extends BaseTest
         $query = new Query();
         $mainQuery = new Match();
         $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
+
         $secQuery1 = new Term();
         $secQuery1 = $secQuery1->setTerm('test2', 'bar', 1);
+        $rescoreQuery1 = new QueryRescore();
+        $rescoreQuery1->setRescoreQuery($secQuery1);
+
         $secQuery2 = new Term();
         $secQuery2 = $secQuery2->setTerm('test2', 'tom', 2);
-        $queryRescore = new QueryRescore(array($secQuery1, $secQuery2));
+        $rescoreQuery2 = new QueryRescore();
+        $rescoreQuery2->setRescoreQuery($secQuery2);
+
         $query->setQuery($mainQuery);
-        $query->setRescore($queryRescore);
+        $query->setRescore(array($rescoreQuery1, $rescoreQuery2));
         $data = $query->toArray();
 
         $expected = array(

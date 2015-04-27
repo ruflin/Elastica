@@ -401,7 +401,7 @@ class Query extends Param
     /**
      * Add a Rescore
      *
-     * @param  \Elastica\Rescore\AbstractRescore $rescore suggestion object
+     * @param  mixed $rescore suggestion object
      * @return $this
      */
     public function setRescore($rescore)
