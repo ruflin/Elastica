@@ -2,6 +2,7 @@
 
 namespace Elastica;
 
+use Elastica\Bulk\Action;
 /**
  * Elastica tools
  *
@@ -184,5 +185,40 @@ class Util
         }
 
         return $message;
+    }
+    
+    /**
+     * reindex data
+     * @param \Elastica\Client $client
+     * @param \Elastica\Index $newIndex
+     * @param \Elastica\Index $oldIndex
+     * @param type $expiryTime
+     * @param type $sizePerShard
+     * @return string
+     */
+    public static function reindex(Client $client, $newIndex, $oldIndex, $expiryTime = '1m', $sizePerShard = 1000)
+    {
+        $search = new Search($client);
+        $oldIndex = new Index($client, $oldIndex);
+        $newIndex = new Index($client, $newIndex);
+        
+        $bulk = new Bulk($client);
+        $bulk->setIndex($newIndex);
+                
+        $search->addIndex($oldIndex);
+        $search->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_SCAN);
+        $scanAndScroll = new ScanAndScroll($search, $expiryTime, $sizePerShard);
+        foreach ($scanAndScroll as $resultSet) {
+            $data = $resultSet->getResponse()->getData();
+            foreach ($data['hits']['hits'] as $d) {
+                $meta = array('_index' => $newIndex->getName() , '_type' => $d['_type'], '_id' => $d['_id']);
+                $actions[] = new Action(Action::OP_TYPE_INDEX, $meta ,$d['_source']);
+            }
+            //$actions = new Bulk\Action();
+            $bulk->addActions($actions);
+            $bulk->send();
+        }
+        $newIndex->refresh();
+        return "reindex complete";
     }
 }
