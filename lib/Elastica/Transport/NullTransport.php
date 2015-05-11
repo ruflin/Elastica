@@ -9,10 +9,13 @@ use Elastica\Response;
 /**
  * Elastica Null Transport object
  *
+ * This is used in case you just need a test transport that doesn't do any connection to an elasticsearch
+ * host but still returns a valid response object
+ *
  * @package Elastica
  * @author James Boehmer <james.boehmer@jamesboehmer.com>
  */
-class Null extends AbstractTransport
+class NullTransport extends AbstractTransport
 {
     /**
      * Null transport.

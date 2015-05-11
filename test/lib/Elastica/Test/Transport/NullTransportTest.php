@@ -2,10 +2,11 @@
 
 namespace Elastica\Test\Transport;
 
-use Elastica\Client;
+use Elastica\Request;
 use Elastica\Connection;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Transport\NullTransport;
 
 /**
  * Elastica Null Transport Test
@@ -20,7 +21,7 @@ class NullTest extends BaseTest
     {
         // Creates a client with any destination, and verify it returns a response object when executed
         $client = $this->_getClient();
-        $connection = new Connection(array('transport' => 'Null'));
+        $connection = new Connection(array('transport' => 'NullTransport'));
         $client->setConnections(array($connection));
 
         $index = $client->getIndex('elasticaNullTransportTest1');
@@ -55,5 +56,17 @@ class NullTest extends BaseTest
         $this->assertEquals(0, $shards["successful"]);
         $this->assertContains("failed", $shards);
         $this->assertEquals(0, $shards["failed"]);
+    }
+
+    public function testExec()
+    {
+        $request = new Request('/test');
+        $params = array('name' => 'ruflin');
+        $transport = new NullTransport();
+        $response = $transport->exec($request, $params);
+
+        $this->assertInstanceOf('\Elastica\Response', $response);
+
+        $this->assertEquals($params, $response->getData()['params']);
     }
 }
