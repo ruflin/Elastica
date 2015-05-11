@@ -6,6 +6,7 @@ use Elastica\Connection;
 use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Util;
+use Elastica\Exception\ResponseException;
 
 class UtilTest extends BaseTest
 {
@@ -117,45 +118,71 @@ class UtilTest extends BaseTest
 
         $this->assertEquals($convertedString, $date);
     }
-    
-    public function testReindex() 
+
+    public function testReindex()
     {
         $client = $this->_getClient();
         $oldIndex = $client->getIndex("elastica_test_reindex");
         $oldIndex->create(array(
-		'number_of_shards' => 4,
-		'number_of_replicas' => 1,
-	),true);
-        
+            'number_of_shards' => 4,
+            'number_of_replicas' => 1,
+        ),true);
+
         $newIndex = $client->getIndex("elastica_test_reindex_v2");
         $newIndex->create(array(
-		'number_of_shards' => 4,
-		'number_of_replicas' => 1,
-	),true);
-        
+            'number_of_shards' => 4,
+            'number_of_replicas' => 1,
+        ),true);
+
         $type1 = $oldIndex->getType("test1");
         $type2 = $oldIndex->getType("test2");
-        
+
         $documents1[] = $type1->createDocument(1, array('name' => 'Xwei1'));
         $documents1[] = $type1->createDocument(2, array('name' => 'Xwei2'));
         $documents1[] = $type1->createDocument(3, array('name' => 'Xwei3'));
         $documents1[] = $type1->createDocument(4, array('name' => 'Xwei4'));
-        
+
         $documents2[] = $type2->createDocument(1, array('name' => 'Xwei5'));
         $documents2[] = $type2->createDocument(2, array('name' => 'Xwei6'));
         $documents2[] = $type2->createDocument(3, array('name' => 'Xwei7'));
         $documents2[] = $type2->createDocument(4, array('name' => 'Xwei8'));
-        
+
         $type1->addDocuments($documents1);
         $type2->addDocuments($documents2);
-        
+
         $oldIndex->refresh();
-        
-        
-        Util::reindex($newIndex, $oldIndex ,"1m",1);
-        
+
+
+        $this->assertTrue(Util::reindex($newIndex, $oldIndex ,"1m",1));
+
         $newCount = $newIndex->count();
         $this->assertEquals(8, $newCount);
-        
+    }
+
+    public function testReindexFail()
+    {
+        $client = $this->_getClient();
+
+        $oldIndex = $client->getIndex("elastica_test_reindex");
+        $oldIndex->create(array(
+            'number_of_shards' => 4,
+            'number_of_replicas' => 1,
+        ), true);
+
+        $newIndex = $client->getIndex("elastica_test_reindex_v2");
+        $newIndex->create(array(
+            'number_of_shards' => 4,
+            'number_of_replicas' => 1,
+        ), true);
+
+        $newIndex2 = $client->getIndex("elastica_test_reindex_v2");
+        $newIndex2->delete();
+
+        try {
+            Util::reindex($newIndex, $oldIndex);
+            $this->fail('New Index should not exist');
+        } catch (ResponseException $e) {
+            $this->assertContains('IndexMissingException', $e->getMessage());
+        }
     }
 }

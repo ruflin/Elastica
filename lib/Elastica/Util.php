@@ -186,24 +186,26 @@ class Util
 
         return $message;
     }
-    
+
     /**
-     * reindex data
+     * Copy all data from and old index to a new index
+     *
      * @param \Elastica\Index $newIndex
      * @param \Elastica\Index $oldIndex
      * @param type $expiryTime
      * @param type $sizePerShard
-     * @return void
+     * @return bool
      */
     public static function reindex(Index $newIndex, Index $oldIndex, $expiryTime = '1m', $sizePerShard = 1000)
     {
         $search = new Search($oldIndex->getClient());
         $bulk = new Bulk($newIndex->getClient());
         $bulk->setIndex($newIndex);
-                
+
         $search->addIndex($oldIndex);
         $search->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_SCAN);
         $scanAndScroll = new ScanAndScroll($search, $expiryTime, $sizePerShard);
+
         foreach ($scanAndScroll as $resultSet) {
             $data = $resultSet->getResponse()->getData();
             $actions = array();
@@ -216,5 +218,7 @@ class Util
             $bulk->send();
         }
         $newIndex->refresh();
+
+        return true;
     }
 }
