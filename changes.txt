@@ -18,18 +18,18 @@ CHANGES
 - Add MLT query against documents #814
 
 2015-04-09
-- Added Elastica\Query\SimpleQueryString::setMinimumShouldMatch
-- Added Elastica\Query\FunctionScore::setMinScore
-- Added Elastica\Query\MoreLikeThis::setMinimumShouldMatch
+- Added Elastica\Query\SimpleQueryString::setMinimumShouldMatch #813
+- Added Elastica\Query\FunctionScore::setMinScore #813
+- Added Elastica\Query\MoreLikeThis::setMinimumShouldMatch #813
 
 2015-04-08
-- Added new methods to Elastica\Aggregation\DateHistogram: setOffset, setTimezone
-- Following methods in Elastica\Aggregation\DateHistogram marked as deprecated: setPreOffset, setPostOffset, setPreZone, setPostZone, setPreZoneAdjustLargeInterval
+- Added new methods to Elastica\Aggregation\DateHistogram: setOffset, setTimezone #813
+- Following methods in Elastica\Aggregation\DateHistogram marked as deprecated: setPreOffset, setPostOffset, setPreZone, setPostZone, setPreZoneAdjustLargeInterval #813
 - Add Elastica\Facet\DateHistogram::setFactor() #806
 
 2015-04-07
-- [BC break] Elastica\Query\QueryString::setLowercaseExpandedTerms removed
-- Added Elastica\Query\QueryString::setTimezone
+- [BC break] Elastica\Query\QueryString::setLowercaseExpandedTerms removed #813
+- Added Elastica\Query\QueryString::setTimezone #813
 
 2015-04-06
 - Update Elasticsearch version to 1.5 #813
