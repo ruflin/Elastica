@@ -1,13 +1,20 @@
 CHANGES
+
+2015-05-11
+- Add testing on PHP 7 on Travis #826
+
 2015-05-06
-- add Elastica\Util::reindex function by scan and bulk way http://www.elastic.co/guide/en/elasticsearch/guide/master/reindex.html
+- Add Elastica\Util::reindex function by scan and bulk way http://www.elastic.co/guide/en/elasticsearch/guide/master/reindex.html #829 #931
 
 2015-04-23
 - Allow bool in Query::setSource function #818 http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
 - Fix empty bool query to act as match all query #817
 
 2015-04-15
-- deleteByQuery() implemented in Elastica\Index
+- deleteByQuery() implemented in Elastica\Index #816
+
+2015-04-11
+- Add MLT query against documents #814
 
 2015-04-09
 - Added Elastica\Query\SimpleQueryString::setMinimumShouldMatch
@@ -17,29 +24,39 @@ CHANGES
 2015-04-08
 - Added new methods to Elastica\Aggregation\DateHistogram: setOffset, setTimezone
 - Following methods in Elastica\Aggregation\DateHistogram marked as deprecated: setPreOffset, setPostOffset, setPreZone, setPostZone, setPreZoneAdjustLargeInterval
+- Add Elastica\Facet\DateHistogram::setFactor() #806
 
 2015-04-07
 - [BC break] Elastica\Query\QueryString::setLowercaseExpandedTerms removed
 - Added Elastica\Query\QueryString::setTimezone
 
 2015-04-06
-- Update Elasticsearch version to 1.5
+- Update Elasticsearch version to 1.5 #813
 - Added deprecation notice to Elastica\Transport\Thrift, Elastica\Transport\Memcached and Elastica\Type::deleteByQuery
 
+2015-04-03
+- Add .editorconfig #807
+
 2015-03-29
-- Added Elastica\Suggest\Completion
+- Added Elastica\Suggest\Completion #808
+- Fix elasticsearch links to elastic domain #809
 
 2015-03-12
 - Fixed short match construction in query DSL #796
+- Index optimize method to return Response object. #797
+
+2015-03-04
+- Escape new symbols in Util::escapeTerm #795
 
 2015-02-22
-- Added Elastica\Query\Image
+- Added Elastica\Query\Image #787
 
 2015-02-21
 - Add Scrutinizer Code Quality status badge
+- Fix fluent interface inconsistency #788
 
 2015-02-18
-- Added support for percentiles aggregation
+- Added support for percentiles aggregation #786
 
 2015-02-17
 - Release v1.4.3.0
@@ -274,7 +291,7 @@ CHANGES
 2014-04-09
 - Added Cardinality aggregation #581
 
-2014-04-7
+2014-04-07
 - Support for Terms filter lookup options #579
 
 2014-03-29
