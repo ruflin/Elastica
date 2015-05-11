@@ -33,7 +33,7 @@ CHANGES
 
 2015-04-06
 - Update Elasticsearch version to 1.5 #813
-- Added deprecation notice to Elastica\Transport\Thrift, Elastica\Transport\Memcached and Elastica\Type::deleteByQuery
+- Added deprecation notice to Elastica\Transport\Thrift, Elastica\Transport\Memcached and Elastica\Type::deleteByQuery #813
 
 2015-04-03
 - Add .editorconfig #807
