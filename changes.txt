@@ -1,7 +1,7 @@
 CHANGES
 
 2015-05-11
-- Update elasticsearch dependency to elasticsearch 1.5.2 https://www.elastic.co/downloads/past-releases/elasticsearch-1-5-2
+- Update elasticsearch dependency to elasticsearch 1.5.2 https://www.elastic.co/downloads/past-releases/elasticsearch-1-5-2 #834
 - Add testing on PHP 7 on Travis #826
 
 2015-05-06
