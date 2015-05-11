@@ -119,7 +119,7 @@ class UtilTest extends BaseTest
         $this->assertEquals($convertedString, $date);
     }
 
-    public function testReindex()
+    public function testCopy()
     {
         $client = $this->_getClient();
         $oldIndex = $client->getIndex("elastica_test_reindex");
@@ -153,13 +153,13 @@ class UtilTest extends BaseTest
         $oldIndex->refresh();
 
 
-        $this->assertTrue(Util::reindex($newIndex, $oldIndex ,"1m",1));
+        $this->assertInstanceOf('Elastica\Index', Util::copy($oldIndex, $newIndex,"1m",1));
 
         $newCount = $newIndex->count();
         $this->assertEquals(8, $newCount);
     }
 
-    public function testReindexFail()
+    public function testCopyFail()
     {
         $client = $this->_getClient();
 
@@ -179,7 +179,7 @@ class UtilTest extends BaseTest
         $newIndex2->delete();
 
         try {
-            Util::reindex($newIndex, $oldIndex);
+            Util::copy($oldIndex, $newIndex);
             $this->fail('New Index should not exist');
         } catch (ResponseException $e) {
             $this->assertContains('IndexMissingException', $e->getMessage());

@@ -190,13 +190,13 @@ class Util
     /**
      * Copy all data from and old index to a new index
      *
-     * @param \Elastica\Index $newIndex
      * @param \Elastica\Index $oldIndex
+     * @param \Elastica\Index $newIndex
      * @param string $expiryTime
      * @param int $sizePerShard
-     * @return bool
+     * @return Index
      */
-    public static function reindex(Index $newIndex, Index $oldIndex, $expiryTime = '1m', $sizePerShard = 1000)
+    public static function copy(Index $oldIndex, Index $newIndex, $expiryTime = '1m', $sizePerShard = 1000)
     {
         $search = new Search($oldIndex->getClient());
         $bulk = new Bulk($newIndex->getClient());
@@ -217,8 +217,9 @@ class Util
             $bulk->addActions($actions);
             $bulk->send();
         }
+
         $newIndex->refresh();
 
-        return true;
+        return $newIndex;
     }
 }
