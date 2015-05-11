@@ -152,7 +152,7 @@ class UtilTest extends BaseTest
         $oldIndex->refresh();
         
         
-        Util::reindex($client, "elastica_test_reindex_v2", "elastica_test_reindex","1m",1);
+        Util::reindex($newIndex, $oldIndex ,"1m",1);
         
         $newCount = $newIndex->count();
         $this->assertEquals(8, $newCount);
