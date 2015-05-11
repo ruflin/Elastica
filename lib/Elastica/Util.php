@@ -194,7 +194,7 @@ class Util
      * @param \Elastica\Index $newIndex
      * @param string $expiryTime
      * @param int $sizePerShard
-     * @return Index
+     * @return \Elastica\Index The new index object
      */
     public static function copy(Index $oldIndex, Index $newIndex, $expiryTime = '1m', $sizePerShard = 1000)
     {
