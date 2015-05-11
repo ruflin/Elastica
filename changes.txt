@@ -1,6 +1,7 @@
 CHANGES
 
 2015-05-11
+- Release 2.0.0
 - Add testing on PHP 7 on Travis #826
 
 2015-05-06
