@@ -45,17 +45,31 @@ class ScanAndScroll implements \Iterator
     protected $_currentResultSet = null;
 
     /**
+     * By default, ES's scroll-scan respects sorting on the result set although with a performance cost.
+     * Elastica ignores by default sorting on scroll for performance reasons, but this flag allows to do
+     * not ignore it when needed
+     *
+     * @see ScanAndScroll::ignoreSorting()
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/1.5/search-request-scroll.html#scroll-scan
+     *
+     * @var bool
+     */
+    private $ignoreSorting;
+
+    /**
      * Constructs scroll iterator object
      *
      * @param Search $search
      * @param string $expiryTime
      * @param int    $sizePerShard
+     * @param bool   $ignoreSorting
      */
-    public function __construct(Search $search, $expiryTime = '1m', $sizePerShard = 1000)
+    public function __construct(Search $search, $expiryTime = '1m', $sizePerShard = 1000, $ignoreSorting = true)
     {
         $this->_search = $search;
         $this->expiryTime = $expiryTime;
         $this->sizePerShard = $sizePerShard;
+        $this->ignoreSorting($ignoreSorting);
     }
 
     /**
@@ -116,7 +130,9 @@ class ScanAndScroll implements \Iterator
     {
         $this->_search->getQuery()->setSize($this->sizePerShard);
 
-        $this->_search->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_SCAN);
+        if ($this->ignoreSorting) {
+            $this->_search->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_SCAN);
+        }
         $this->_search->setOption(Search::OPTION_SCROLL, $this->expiryTime);
 
         // initial scan request
@@ -124,6 +140,20 @@ class ScanAndScroll implements \Iterator
 
         // trigger first scroll request
         $this->_scroll();
+    }
+
+    /**
+     * Sets whether sorting should be ignored when scrolling
+     *
+     * @param bool $boolean
+     */
+    public function ignoreSorting($boolean)
+    {
+        if (!is_bool($boolean)) {
+            throw new \InvalidArgumentException();
+        }
+
+        $this->ignoreSorting = $boolean;
     }
 
     /**

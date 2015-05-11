@@ -2,6 +2,9 @@ CHANGES
 2015-05-06
 - add Elastica\Util::reindex function by scan and bulk way http://www.elastic.co/guide/en/elasticsearch/guide/master/reindex.html
 
+2015-05-05
+- Added option to choose whether the ordering of results should be taken into account when Scrolling #827
+
 2015-04-23
 - Allow bool in Query::setSource function #818 http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
 - Fix empty bool query to act as match all query #817

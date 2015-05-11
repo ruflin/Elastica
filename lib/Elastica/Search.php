@@ -512,10 +512,11 @@ class Search
      * @see Elastica\ScanAndScroll
      * @param  string        $expiryTime
      * @param  int           $sizePerShard
+     * @param  bool          $ignoreSorting
      * @return ScanAndScroll
      */
-    public function scanAndScroll($expiryTime = '1m', $sizePerShard = 1000)
+    public function scanAndScroll($expiryTime = '1m', $sizePerShard = 1000, $ignoreSorting = true)
     {
-        return new ScanAndScroll($this, $expiryTime, $sizePerShard);
+        return new ScanAndScroll($this, $expiryTime, $sizePerShard, $ignoreSorting);
     }
 }

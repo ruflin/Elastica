@@ -98,6 +98,59 @@ class ScanAndScrollTest extends BaseTest
         $this->assertEquals(2, $count);
     }
 
+    public function testScrollIgnoresSortingByDefault()
+    {
+        $search = $this->_prepareSearch(1, 2);
+        $scanAndScroll = new ScanAndScroll($search);
+        $scanAndScroll->rewind();
+
+        $option = $search->getOption(Search::OPTION_SEARCH_TYPE);
+        $this->assertNotSame(Search::OPTION_SEARCH_TYPE_SCAN, $option);
+    }
+
+    public function testSettingScrollToDoNotIgnoreSorting()
+    {
+        $search = $this->_prepareSearch(1, 2);
+        $scanAndScroll = new ScanAndScroll($search);
+        $scanAndScroll->ignoreSorting(false);
+        $scanAndScroll->rewind();
+
+        $option = $search->getOption(Search::OPTION_SEARCH_TYPE);
+        $this->assertSame(Search::OPTION_SEARCH_TYPE_SCROLL, $option);
+    }
+
+    public function testSettingScrollToDoNotIgnoreSortingConstructor()
+    {
+        $search = $this->_prepareSearch(1, 2);
+        $scanAndScroll = new ScanAndScroll($search, '1m', 1000, false);
+        $scanAndScroll->rewind();
+
+        $option = $search->getOption(Search::OPTION_SEARCH_TYPE);
+        $this->assertSame(Search::OPTION_SEARCH_TYPE_SCROLL, $option);
+    }
+
+    /**
+     * @param mixed $ignoreSorting
+     * @dataProvider invalidIgnoreSortingProvider
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidIgnoreSortingParameters($ignoreSorting)
+    {
+        $scanAndScroll = $this->_prepareScanAndScroll();
+        $scanAndScroll->ignoreSorting($ignoreSorting);
+    }
+
+    public function invalidIgnoreSortingProvider()
+    {
+        return array(
+            'string' => array('invalid'),
+            'array' => array(array()),
+            'stdClass' => array(new \StdClass),
+            'int' => array(10),
+            'float' => array(5.5),
+        );
+    }
+
     private function _prepareScanAndScroll()
     {
         return new ScanAndScroll(new Search($this->_getClient()));
