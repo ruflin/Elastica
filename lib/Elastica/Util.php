@@ -192,8 +192,8 @@ class Util
      *
      * @param \Elastica\Index $newIndex
      * @param \Elastica\Index $oldIndex
-     * @param type $expiryTime
-     * @param type $sizePerShard
+     * @param string $expiryTime
+     * @param int $sizePerShard
      * @return bool
      */
     public static function reindex(Index $newIndex, Index $oldIndex, $expiryTime = '1m', $sizePerShard = 1000)
