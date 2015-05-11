@@ -5,7 +5,7 @@ namespace Elastica;
 use Elastica\Bulk\Action;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotImplementedException;
-use Elastica\Filter\Bool;
+use Elastica\Filter\BoolFilter;
 
 /**
  * Single document stored in elastic search

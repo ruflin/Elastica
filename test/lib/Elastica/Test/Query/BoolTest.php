@@ -14,7 +14,7 @@ class BoolTest extends BaseTest
 {
     public function testToArray()
     {
-        $query = new Bool();
+        $query = new BoolQuery();
 
         $idsQuery1 = new Ids();
         $idsQuery1->setIds(1);
@@ -54,7 +54,7 @@ class BoolTest extends BaseTest
      */
     public function testToArrayStructure()
     {
-        $boolQuery = new Bool();
+        $boolQuery = new BoolQuery();
 
         $term1 = new Term();
         $term1->setParam('interests', 84);
@@ -86,7 +86,7 @@ class BoolTest extends BaseTest
         // Refresh index
         $index->refresh();
 
-        $boolQuery = new Bool();
+        $boolQuery = new BoolQuery();
         $termQuery1 = new Term(array('test' => '2'));
         $boolQuery->addMust($termQuery1);
         $resultSet = $type->search($boolQuery);
@@ -124,7 +124,7 @@ class BoolTest extends BaseTest
 
 		$index->refresh();
 
-		$boolQuery = new Bool();
+		$boolQuery = new BoolQuery();
 
 		$resultSet = $type->search($boolQuery);
 
