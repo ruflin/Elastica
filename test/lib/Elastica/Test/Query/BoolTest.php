@@ -4,7 +4,7 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Index;
-use Elastica\Query\Bool;
+use Elastica\Query\BoolQuery;
 use Elastica\Query\Ids;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
