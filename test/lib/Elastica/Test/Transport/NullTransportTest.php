@@ -67,6 +67,7 @@ class NullTest extends BaseTest
 
         $this->assertInstanceOf('\Elastica\Response', $response);
 
-        $this->assertEquals($params, $response->getData()['params']);
+		$data = $response->getData();
+        $this->assertEquals($params, $data['params']);
     }
 }
