@@ -1,10 +1,11 @@
 CHANGES
 
 2015-05-11
+- Update elasticsearch dependency to elasticsearch 1.5.2 https://www.elastic.co/downloads/past-releases/elasticsearch-1-5-2 #834
 - Add testing on PHP 7 on Travis #826
 
 2015-05-06
-- Add Elastica\Util::reindex function by scan and bulk way http://www.elastic.co/guide/en/elasticsearch/guide/master/reindex.html #829 #931
+- Add Elastica\Util::copy function by scan and bulk way http://www.elastic.co/guide/en/elasticsearch/guide/master/reindex.html. Note: This was first called reindex #829 #931 ##836
 
 2015-04-23
 - Allow bool in Query::setSource function #818 http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
