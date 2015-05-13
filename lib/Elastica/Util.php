@@ -203,7 +203,6 @@ class Util
         $bulk->setIndex($newIndex);
 
         $search->addIndex($oldIndex);
-        $search->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_SCAN);
         $scanAndScroll = new ScanAndScroll($search, $expiryTime, $sizePerShard);
 
         foreach ($scanAndScroll as $resultSet) {
