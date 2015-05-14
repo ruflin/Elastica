@@ -17,6 +17,7 @@ class ConnectionTest extends BaseTest
         $this->assertEquals(Connection::DEFAULT_TRANSPORT, $connection->getTransport());
         $this->assertInstanceOf('Elastica\Transport\AbstractTransport', $connection->getTransportObject());
         $this->assertEquals(Connection::TIMEOUT, $connection->getTimeout());
+        $this->assertEquals(Connection::CONNECT_TIMEOUT, $connection->getConnectTimeout());
         $this->assertEquals(array(), $connection->getConfig());
         $this->assertTrue($connection->isEnabled());
     }

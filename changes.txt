@@ -1,5 +1,9 @@
 CHANGES
 
+2015-05-14
+- CURLOPT_CONNECTTIMEOUT added to the HTTP transport curl options
+- Support for a custom connection timeout through a connectTimeout parameter
+
 2015-05-11
 - Release 2.0.0
 - Update elasticsearch dependency to elasticsearch 1.5.2 https://www.elastic.co/downloads/past-releases/elasticsearch-1-5-2 #834
