@@ -11,7 +11,6 @@ use Elastica\Response as ElasticaResponse;
 use Ivory\HttpAdapter\HttpAdapterInterface;
 use Ivory\HttpAdapter\Message\Request as HttpAdapterRequest;
 use Ivory\HttpAdapter\Message\Response as HttpAdapterResponse;
-use Ivory\HttpAdapter\Message\Stream\StringStream;
 
 class HttpAdapter extends AbstractTransport
 {
@@ -126,9 +125,9 @@ class HttpAdapter extends AbstractTransport
         }
 
         $url = $this->_getUri($elasticaRequest, $connection);
-        $streamBody = new StringStream($body);
 
-        return new HttpAdapterRequest($url, $method, HttpAdapterRequest::PROTOCOL_VERSION_1_1, $headers, $streamBody);
+        $factory = new \Ivory\HttpAdapter\Message\MessageFactory();
+        return $factory->createRequest($url, $method, HttpAdapterRequest::PROTOCOL_VERSION_1_1, $headers, $body);
     }
 
     /**
