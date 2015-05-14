@@ -198,6 +198,12 @@ class RescoreTest extends BaseTest
         );
 
         $this->assertEquals($expected, $data);
+
+        $results = $this->_index->search($query);
+        $response = $results->getResponse();
+
+        $this->assertEquals(true, $response->isOk());
+        $this->assertEquals(0, $results->getTotalHits());
     }
 
     public function testQuery()
