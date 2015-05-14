@@ -1,64 +1,52 @@
-CHANGES
+# Change Log
+All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard
+This project adheres to [Semantic Versioning](http://semver.org/)
 
-2015-05-14
-- Add multiple rescore query #820
+## [Unreleased][unreleased]
 
-2015-05-11
-- Release 2.0.0
+### Added
+- Multiple rescore query #820
+
+
+## [ 2.0.0 ] - 2015-05-11
+
+
+### Backward Compatibility Breaks
+- Elastica\Query\QueryString::setLowercaseExpandedTerms removed #813
 - Update elasticsearch dependency to elasticsearch 1.5.2 https://www.elastic.co/downloads/past-releases/elasticsearch-1-5-2 #834
-- Add testing on PHP 7 on Travis #826
+- Added deprecation notice to Elastica\Transport\Thrift, Elastica\Transport\Memcached and Elastica\Type::deleteByQuery  #817
+- Escape new symbols in Util::escapeTerm #795
 
-2015-04-23
-- Allow bool in Query::setSource function #818 http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
+### Bugfixes
 - Fix empty bool query to act as match all query #817
+- Fixed short match construction in query DSL #796
+- Index optimize method to return Response object. #797
+- Fix fluent interface inconsistency #788
 
-2015-04-15
+
+### Improvements
+- Add testing on PHP 7 on Travis #826
+- Allow bool in Query::setSource function #818 http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
 - deleteByQuery() implemented in Elastica\Index #816
-
-2015-04-11
 - Add MLT query against documents #814
-
-2015-04-09
 - Added Elastica\Query\SimpleQueryString::setMinimumShouldMatch #813
 - Added Elastica\Query\FunctionScore::setMinScore #813
 - Added Elastica\Query\MoreLikeThis::setMinimumShouldMatch #813
-
-2015-04-08
 - Added new methods to Elastica\Aggregation\DateHistogram: setOffset, setTimezone #813
 - Following methods in Elastica\Aggregation\DateHistogram marked as deprecated: setPreOffset, setPostOffset, setPreZone, setPostZone, setPreZoneAdjustLargeInterval #813
 - Add Elastica\Facet\DateHistogram::setFactor() #806
-
-2015-04-07
-- [BC break] Elastica\Query\QueryString::setLowercaseExpandedTerms removed #813
 - Added Elastica\Query\QueryString::setTimezone #813
-
-2015-04-06
-- Update Elasticsearch version to 1.5 #813
-- Added deprecation notice to Elastica\Transport\Thrift, Elastica\Transport\Memcached and Elastica\Type::deleteByQuery #813
-
-2015-04-03
 - Add .editorconfig #807
-
-2015-03-29
 - Added Elastica\Suggest\Completion #808
 - Fix elasticsearch links to elastic domain #809
-
-2015-03-12
-- Fixed short match construction in query DSL #796
-- Index optimize method to return Response object. #797
-
-2015-03-04
-- Escape new symbols in Util::escapeTerm #795
-
-2015-02-22
 - Added Elastica\Query\Image #787
-
-2015-02-21
 - Add Scrutinizer Code Quality status badge
-- Fix fluent interface inconsistency #788
-
-2015-02-18
 - Added support for percentiles aggregation #786
+
+
+
+## Changelog before 2.0.0
+The changelog before version 2.0.0 was organised by date. All changes can be found below.
 
 2015-02-17
 - Release v1.4.3.0
