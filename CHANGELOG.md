@@ -2,10 +2,14 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard
 This project adheres to [Semantic Versioning](http://semver.org/)
 
+
 ## [Unreleased][unreleased]
 
 ### Added
 - Multiple rescore query #820
+
+### Improvements
+- Introduction of Changelog standard based on http://keepachangelog.com/. changes.txt moved to CHANGELOG.md #844
 
 
 ## [2.0.0] - 2015-05-11
