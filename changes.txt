@@ -1,5 +1,8 @@
 CHANGES
 
+2015-05-14
+- Add multiple rescore query #820
+
 2015-05-11
 - Release 2.0.0
 - Update elasticsearch dependency to elasticsearch 1.5.2 https://www.elastic.co/downloads/past-releases/elasticsearch-1-5-2 #834
