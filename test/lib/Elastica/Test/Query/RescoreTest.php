@@ -141,6 +141,71 @@ class RescoreTest extends BaseTest
         $this->assertEquals($expected, $data);
     }
 
+    public function testMultipleQueries()
+    {
+        $query = new Query();
+        $mainQuery = new Match();
+        $mainQuery = $mainQuery->setFieldQuery('test1', 'foo');
+
+        $secQuery1 = new Term();
+        $secQuery1 = $secQuery1->setTerm('test2', 'bar', 1);
+        $rescoreQuery1 = new QueryRescore();
+        $rescoreQuery1->setRescoreQuery($secQuery1);
+
+        $secQuery2 = new Term();
+        $secQuery2 = $secQuery2->setTerm('test2', 'tom', 2);
+        $rescoreQuery2 = new QueryRescore();
+        $rescoreQuery2->setRescoreQuery($secQuery2);
+
+        $query->setQuery($mainQuery);
+        $query->setRescore(array($rescoreQuery1, $rescoreQuery2));
+        $data = $query->toArray();
+
+        $expected = array(
+            'query' => array(
+                'match' => array(
+                    'test1' => array(
+                        'query' => 'foo',
+                    ),
+                ),
+            ),
+            'rescore' => array(
+                array(
+                    'query' => array(
+                        'rescore_query' => array(
+                            'term' => array(
+                                'test2' => array(
+                                    'value' => 'bar',
+                                    'boost' => 1,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+                array(
+                    'query' => array(
+                        'rescore_query' => array(
+                            'term' => array(
+                                'test2' => array(
+                                    'value' => 'tom',
+                                    'boost' => 2,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $this->assertEquals($expected, $data);
+
+        $results = $this->_index->search($query);
+        $response = $results->getResponse();
+
+        $this->assertEquals(true, $response->isOk());
+        $this->assertEquals(0, $results->getTotalHits());
+    }
+
     public function testQuery()
     {
         $query = new Query();
