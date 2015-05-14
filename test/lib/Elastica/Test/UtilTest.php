@@ -6,7 +6,6 @@ use Elastica\Connection;
 use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Util;
-use Elastica\Exception\ResponseException;
 
 class UtilTest extends BaseTest
 {
