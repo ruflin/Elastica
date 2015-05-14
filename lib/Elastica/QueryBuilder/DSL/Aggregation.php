@@ -25,6 +25,7 @@ use Elastica\Aggregation\ScriptedMetric;
 use Elastica\Aggregation\Stats;
 use Elastica\Aggregation\Sum;
 use Elastica\Aggregation\Terms;
+use Elastica\Aggregation\SignificantTerms;
 use Elastica\Aggregation\TopHits;
 use Elastica\Aggregation\ValueCount;
 use Elastica\Exception\NotImplementedException;
@@ -318,10 +319,11 @@ class Aggregation implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html
      * @param string $name
+     * @return SignificantTerms
      */
     public function significant_terms($name)
     {
-        throw new NotImplementedException();
+        return new SignificantTerms($name);
     }
 
     /**
