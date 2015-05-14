@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 - Multiple rescore query #820
 
 
-## [ 2.0.0 ] - 2015-05-11
+## [2.0.0] - 2015-05-11
 
 
 ### Backward Compatibility Breaks
