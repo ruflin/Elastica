@@ -72,6 +72,12 @@ class Http extends AbstractTransport
         curl_setopt($conn, CURLOPT_TIMEOUT, $connection->getTimeout());
         curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
 
+        /* @see Connection::setConnectTimeout() */
+        $connectTimeout = $connection->getConnectTimeout();
+        if ($connectTimeout>0) {
+            curl_setopt($conn, CURLOPT_CONNECTTIMEOUT, $connectTimeout);
+        }
+
         $proxy = $connection->getProxy();
 
         // See: https://github.com/facebook/hhvm/issues/4875

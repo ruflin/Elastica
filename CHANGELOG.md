@@ -1,11 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.0.0...HEAD)
 
 ### Added
 - Multiple rescore query [#820](https://github.com/ruflin/Elastica/issues/820/)
+- Support for a custom connection timeout through a connectTimeout parameter. CURLOPT_CONNECTTIMEOUT added to the HTTP transport curl options if a connectTimeout is >0 #841
 
 ### Improvements
 - Introduction of Changelog standard based on http://keepachangelog.com/. changes.txt moved to CHANGELOG.md [#844](https://github.com/ruflin/Elastica/issues/844/)
