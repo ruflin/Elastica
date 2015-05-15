@@ -1,8 +1,7 @@
 CHANGES
 
 2015-05-14
-- CURLOPT_CONNECTTIMEOUT added to the HTTP transport curl options
-- Support for a custom connection timeout through a connectTimeout parameter
+- Support for a custom connection timeout through a connectTimeout parameter. CURLOPT_CONNECTTIMEOUT added to the HTTP transport curl options if a connectTimeout is >0 #841
 
 2015-05-11
 - Release 2.0.0
