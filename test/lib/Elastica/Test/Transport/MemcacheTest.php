@@ -151,6 +151,8 @@ class MemcacheTest extends BaseTest
     {
         $client = $this->_getMemcacheClient();
         $index = $client->getIndex('memcache-test');
+        $index->create();
+
         $this->_waitForAllocation($index);
 
         $queryString = new QueryString(str_repeat('z', 300));
