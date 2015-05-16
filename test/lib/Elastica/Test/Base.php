@@ -95,4 +95,18 @@ class Base extends \PHPUnit_Framework_TestCase
         $this->_getClient()->getIndex('_all')->delete();
         $this->_getClient()->getIndex('_all')->clearCache();
     }
+
+    protected function _isUnitGroup()
+    {
+        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+
+        return in_array('unit', $groups);
+    }
+
+    protected function _isFunctionalGroup()
+    {
+        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+
+        return in_array('functional', $groups);
+    }
 }
