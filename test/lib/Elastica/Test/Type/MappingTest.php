@@ -11,6 +11,9 @@ use Elastica\Type\Mapping;
 
 class MappingTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testMappingStoreFields()
     {
         $client = $this->_getClient();
@@ -61,6 +64,9 @@ class MappingTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group functional
+     */
     public function testEnableAllField()
     {
         $index = $this->_createIndex();
@@ -79,6 +85,9 @@ class MappingTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group functional
+     */
     public function testEnableTtl()
     {
         $client = $this->_getClient();
@@ -97,6 +106,9 @@ class MappingTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group functional
+     */
     public function testNestedMapping()
     {
         $client = $this->_getClient();
@@ -142,6 +154,9 @@ class MappingTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group functional
+     */
     public function testParentMapping()
     {
         $index = $this->_createIndex();
@@ -170,6 +185,9 @@ class MappingTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group functional
+     */
     public function testMappingExample()
     {
         $index = $this->_createIndex();
@@ -208,10 +226,12 @@ class MappingTest extends BaseTest
     }
 
     /**
+     * @group functional
+     *
      * Test setting a dynamic template and validate whether the right mapping is applied after adding a document which
      * should match the dynamic template. The example is the template_1 from the Elasticsearch documentation.
-     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-root-object-type.html
+     *
      */
     public function testDynamicTemplate()
     {
@@ -262,6 +282,9 @@ class MappingTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group functional
+     */
     public function testSetMeta()
     {
         $index = $this->_createIndex();
@@ -279,6 +302,9 @@ class MappingTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group functional
+     */
     public function testGetters()
     {
         $index = $this->_createIndex();
