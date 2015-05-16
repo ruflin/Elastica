@@ -3,23 +3,13 @@
 namespace Elastica\Test\QueryBuilder\DSL;
 
 use Elastica\QueryBuilder\DSL;
+use Elastica\Test\Base as BaseTest;
 
-class SuggestTest extends \PHPUnit_Framework_TestCase
+class SuggestTest extends BaseTest
 {
     /**
-     * @var array (method name => arguments)
+     * @group unit
      */
-    private $suggesters = array(
-        'term' => array('name', 'field'),
-        'phrase' => array('name', 'field'),
-        'completion' => array('name', 'field'),
-        'context' => array(),
-    );
-
-    public function __construct()
-    {
-    }
-
     public function testType()
     {
         $suggestDSL = new DSL\Suggest();
@@ -28,11 +18,14 @@ class SuggestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(DSL::TYPE_SUGGEST, $suggestDSL->getType());
     }
 
+    /**
+     * @group unit
+     */
     public function testFilters()
     {
         $suggestDSL = new DSL\Suggest();
 
-        foreach ($this->suggesters as $methodName => $arguments) {
+        foreach ($this->_getSuggesters() as $methodName => $arguments) {
             $this->assertTrue(
                 method_exists($suggestDSL, $methodName),
                 'method for suggest "'.$methodName.'" not found'
@@ -49,5 +42,18 @@ class SuggestTest extends \PHPUnit_Framework_TestCase
                 );
             }
         }
+    }
+
+    /**
+     * @return array
+     */
+    protected function _getSuggesters()
+    {
+        return array(
+            'term' => array('name', 'field'),
+            'phrase' => array('name', 'field'),
+            'completion' => array('name', 'field'),
+            'context' => array(),
+        );
     }
 }
