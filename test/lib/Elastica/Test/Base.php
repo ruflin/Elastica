@@ -120,4 +120,11 @@ class Base extends \PHPUnit_Framework_TestCase
 
         return in_array('functional', $groups);
     }
+
+    protected function _isShutdownGroup()
+    {
+        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+
+        return in_array('shutdown', $groups);
+    }
 }
