@@ -9,26 +9,30 @@ use Elastica\Type\Mapping;
 
 class ScriptedMetricTest extends BaseAggregationTest
 {
-    protected function setUp()
+    protected function _getIndexForTest()
     {
-        parent::setUp();
-        $this->_index = $this->_createIndex();
-        $mapping = new Mapping();
-        $mapping->setProperties(array(
+        $index = $this->_createIndex();
+        $type = $index->getType("test");
+
+        $type->setMapping(new Mapping(null, array(
             "start" => array("type" => "long"),
             "end"   => array("type" => "long"),
+        )));
+
+        $type->addDocuments(array(
+            new Document(1, array("start" => 100, "end" => 200)),
+            new Document(2, array("start" => 200, "end" => 250)),
+            new Document(3, array("start" => 300, "end" => 450)),
         ));
-        $type = $this->_index->getType("test");
-        $type->setMapping($mapping);
-        $docs = array(
-            new Document("1", array("start" => 100, "end" => 200)),
-            new Document("2", array("start" => 200, "end" => 250)),
-            new Document("3", array("start" => 300, "end" => 450)),
-        );
-        $type->addDocuments($docs);
-        $this->_index->refresh();
+
+        $index->refresh();
+
+        return $index;
     }
 
+    /**
+     * @group functional
+     */
     public function testScriptedMetricAggregation()
     {
         $agg = new ScriptedMetric(
@@ -40,7 +44,7 @@ class ScriptedMetricTest extends BaseAggregationTest
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_index->search($query)->getAggregation("scripted");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation("scripted");
 
         $this->assertEquals(array(100, 50, 150), $results['value'][0]);
     }

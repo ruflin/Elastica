@@ -7,6 +7,9 @@ use Elastica\Query;
 
 class PercentilesTest extends BaseAggregationTest
 {
+    /**
+     * @group functional
+     */
     public function testConstruct()
     {
         $aggr = new Percentiles('price_percentile');
@@ -16,6 +19,9 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertEquals('price', $aggr->getParam('field'));
     }
 
+    /**
+     * @group functional
+     */
     public function testSetField()
     {
         $aggr = new Percentiles('price_percentile');
@@ -25,6 +31,9 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\Percentiles', $aggr->setField('price'));
     }
 
+    /**
+     * @group functional
+     */
     public function testSetCompression()
     {
         $aggr = new Percentiles('price_percentile');
@@ -33,6 +42,9 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\Percentiles', $aggr->setCompression(200));
     }
 
+    /**
+     * @group functional
+     */
     public function testSetPercents()
     {
         $percents = array(1, 2, 3);
@@ -42,6 +54,9 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\Percentiles', $aggr->setPercents($percents));
     }
 
+    /**
+     * @group functional
+     */
     public function testAddPercent()
     {
         $percents = array(1, 2, 3);
@@ -54,6 +69,9 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\Percentiles', $aggr->addPercent(4));
     }
 
+    /**
+     * @group functional
+     */
     public function testSetScript()
     {
         $script = 'doc["load_time"].value / 20';
@@ -63,6 +81,9 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\Percentiles', $aggr->setScript($script));
     }
 
+    /**
+     * @group functional
+     */
     public function testActualWork()
     {
         // prepare

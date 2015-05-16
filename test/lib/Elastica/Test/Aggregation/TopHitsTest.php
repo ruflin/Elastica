@@ -13,14 +13,11 @@ use Elastica\ScriptFields;
 
 class TopHitsTest extends BaseAggregationTest
 {
-    protected $_index;
-
-    public function setUp()
+    protected function _getIndexForTest()
     {
-        parent::setUp();
-        $this->_index = $this->_createIndex();
+        $index = $this->_createIndex();
 
-        $docs = array(
+        $index->getType('questions')->addDocuments(array(
             new Document(1, array(
                 'tags' => array('linux'),
                 'last_activity_date' => '2015-01-05',
@@ -46,12 +43,16 @@ class TopHitsTest extends BaseAggregationTest
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about osx',
             )),
-        );
+        ));
 
-        $this->_index->getType('questions')->addDocuments($docs);
-        $this->_index->refresh();
+        $index->refresh();
+
+        return $index;
     }
 
+    /**
+     * @group unit
+     */
     public function testSetSize()
     {
         $agg = new TopHits('agg_name');
@@ -60,6 +61,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\TopHits', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetFrom()
     {
         $agg = new TopHits('agg_name');
@@ -68,6 +72,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\TopHits', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetSort()
     {
         $sort = array('last_activity_date' => array('order' => 'desc'));
@@ -77,6 +84,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\TopHits', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetSource()
     {
         $fields = array('title', 'tags');
@@ -86,6 +96,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\TopHits', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetVersion()
     {
         $agg = new TopHits('agg_name');
@@ -97,6 +110,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertFalse($agg->getParam('version'));
     }
 
+    /**
+     * @group unit
+     */
     public function testSetExplain()
     {
         $agg = new TopHits('agg_name');
@@ -108,6 +124,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertFalse($agg->getParam('explain'));
     }
 
+    /**
+     * @group unit
+     */
     public function testSetHighlight()
     {
         $highlight = array(
@@ -121,6 +140,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\TopHits', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetFieldDataFields()
     {
         $fields = array('title', 'tags');
@@ -130,6 +152,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\TopHits', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetScriptFields()
     {
         $script = new Script('1 + 2');
@@ -141,6 +166,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertInstanceOf('Elastica\Aggregation\TopHits', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testAddScriptField()
     {
         $script = new Script('2+3');
@@ -160,9 +188,12 @@ class TopHitsTest extends BaseAggregationTest
         $query = new Query(new MatchAll());
         $query->addAggregation($outerAggr);
 
-        return $this->_index->search($query)->getAggregation('top_tags');
+        return $this->_getIndexForTest()->search($query)->getAggregation('top_tags');
     }
 
+    /**
+     * @group functional
+     */
     public function testAggregateUpdatedRecently()
     {
         $aggr = new TopHits('top_tag_hits');
@@ -179,6 +210,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertEquals(array(1, 3), $resultDocs);
     }
 
+    /**
+     * @group functional
+     */
     public function testAggregateUpdatedFarAgo()
     {
         $aggr = new TopHits('top_tag_hits');
@@ -195,6 +229,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertEquals(array(2, 4), $resultDocs);
     }
 
+    /**
+     * @group functional
+     */
     public function testAggregateTwoDocumentPerTag()
     {
         $aggr = new TopHits('top_tag_hits');
@@ -210,6 +247,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertEquals(array(1, 2, 3, 4), $resultDocs);
     }
 
+    /**
+     * @group functional
+     */
     public function testAggregateTwoDocumentPerTagWithOffset()
     {
         $aggr = new TopHits('top_tag_hits');
@@ -227,6 +267,9 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertEquals(array(2, 4), $resultDocs);
     }
 
+    /**
+     * @group functional
+     */
     public function testAggregateWithLimitedSource()
     {
         $aggr = new TopHits('top_tag_hits');
@@ -243,6 +286,9 @@ class TopHitsTest extends BaseAggregationTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testAggregateWithVersion()
     {
         $aggr = new TopHits('top_tag_hits');
@@ -257,6 +303,9 @@ class TopHitsTest extends BaseAggregationTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testAggregateWithExplain()
     {
         $aggr = new TopHits('top_tag_hits');
@@ -271,6 +320,9 @@ class TopHitsTest extends BaseAggregationTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testAggregateWithScriptFields()
     {
         $aggr = new TopHits('top_tag_hits');
@@ -288,6 +340,9 @@ class TopHitsTest extends BaseAggregationTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testAggregateWithHighlight()
     {
         $queryString = new SimpleQueryString('linux', array('title'));
@@ -298,7 +353,7 @@ class TopHitsTest extends BaseAggregationTest
         $query = new Query($queryString);
         $query->addAggregation($aggr);
 
-        $resultSet = $this->_index->search($query);
+        $resultSet = $this->_getIndexForTest()->search($query);
         $aggrResult = $resultSet->getAggregation('top_tag_hits');
 
         foreach ($aggrResult['hits']['hits'] as $doc) {
@@ -307,6 +362,9 @@ class TopHitsTest extends BaseAggregationTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testAggregateWithFieldData()
     {
         $aggr = new TopHits('top_tag_hits');
@@ -315,7 +373,7 @@ class TopHitsTest extends BaseAggregationTest
         $query = new Query(new MatchAll());
         $query->addAggregation($aggr);
 
-        $resultSet = $this->_index->search($query);
+        $resultSet = $this->_getIndexForTest()->search($query);
         $aggrResult = $resultSet->getAggregation('top_tag_hits');
 
         foreach ($aggrResult['hits']['hits'] as $doc) {

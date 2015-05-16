@@ -10,12 +10,12 @@ use Elastica\Type\Mapping;
 
 class NestedTest extends BaseAggregationTest
 {
-    protected function setUp()
+    protected function _getIndexForTest()
     {
-        parent::setUp();
-        $this->_index = $this->_createIndex();
-        $mapping = new Mapping();
-        $mapping->setProperties(array(
+        $index = $this->_createIndex();
+        $type = $index->getType("test");
+
+        $type->setMapping(new Mapping(null, array(
             "resellers" => array(
                 "type" => "nested",
                 "properties" => array(
@@ -23,27 +23,31 @@ class NestedTest extends BaseAggregationTest
                     "price" => array("type" => "double"),
                 ),
             ),
-        ));
-        $type = $this->_index->getType("test");
-        $type->setMapping($mapping);
-        $docs = array(
-            new Document("1", array(
+        )));
+
+        $type->addDocuments(array(
+            new Document(1, array(
                 "resellers" => array(
                     "name" => "spacely sprockets",
                     "price" => 5.55,
                 ),
             )),
-            new Document("1", array(
+            new Document(2, array(
                 "resellers" => array(
                     "name" => "cogswell cogs",
                     "price" => 4.98,
                 ),
             )),
-        );
-        $type->addDocuments($docs);
-        $this->_index->refresh();
+        ));
+
+        $index->refresh();
+
+        return $index;
     }
 
+    /**
+     * @group functional
+     */
     public function testNestedAggregation()
     {
         $agg = new Nested("resellers", "resellers");
@@ -53,7 +57,7 @@ class NestedTest extends BaseAggregationTest
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_index->search($query)->getAggregation("resellers");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation("resellers");
 
         $this->assertEquals(4.98, $results['min_price']['value']);
     }
