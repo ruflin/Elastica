@@ -56,7 +56,7 @@ class GuzzleTest extends BaseTest
      */
     public function testDynamicHttpMethodBasedOnConfigParameter(array $config, $httpMethod)
     {
-        $client = new Client($config);
+        $client = $this->_getClient($config);
 
         $index = $client->getIndex('dynamic_http_method_test');
         $index->create(array(), true);
@@ -73,7 +73,7 @@ class GuzzleTest extends BaseTest
      */
     public function testDynamicHttpMethodOnlyAffectsRequestsWithBody(array $config, $httpMethod)
     {
-        $client = new Client($config);
+        $client = $this->_getClient($config);
 
         $status = $client->getStatus();
         $info = $status->getResponse()->getTransferInfo();
@@ -82,9 +82,9 @@ class GuzzleTest extends BaseTest
 
     public function testWithEnvironmentalProxy()
     {
-        putenv('http_proxy=http://127.0.0.1:12345/');
+        putenv('http_proxy=' . $this->_getProxyUrl() . '/');
 
-        $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
 
@@ -97,13 +97,13 @@ class GuzzleTest extends BaseTest
 
     public function testWithEnabledEnvironmentalProxy()
     {
-        putenv('http_proxy=http://127.0.0.1:12346/');
+        putenv('http_proxy=' . $this->_getProxyUrl403() . '/');
 
-        $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(403, $transferInfo['http_code']);
 
-        $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $client->getConnection()->setProxy('');
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
@@ -113,8 +113,8 @@ class GuzzleTest extends BaseTest
 
     public function testWithProxy()
     {
-        $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
-        $client->getConnection()->setProxy('http://127.0.0.1:12345');
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
+        $client->getConnection()->setProxy($this->_getProxyUrl());
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
@@ -122,7 +122,7 @@ class GuzzleTest extends BaseTest
 
     public function testWithoutProxy()
     {
-        $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $client->getConnection()->setProxy('');
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -131,7 +131,7 @@ class GuzzleTest extends BaseTest
 
     public function testBodyReuse()
     {
-        $client = new Client(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
 
         $index = $client->getIndex('elastica_body_reuse_test');
         $index->create(array(), true);
@@ -163,7 +163,14 @@ class GuzzleTest extends BaseTest
      */
     public function testInvalidConnection()
     {
-        $client = new Client(array('transport' => 'Guzzle', 'port' => 4500, 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'port' => 4500, 'persistent' => false));
         $response = $client->request('_status', 'GET');
     }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        putenv('http_proxy=');
+    }
+
 }

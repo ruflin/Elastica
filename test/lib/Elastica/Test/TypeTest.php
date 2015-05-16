@@ -333,7 +333,7 @@ class TypeTest extends BaseTest
      */
     public function testGetDocumentNotExistingIndex()
     {
-        $client = new Client();
+        $client = $this->_getClient();
         $index = new Index($client, 'index');
         $type = new Type($index, 'type');
 
@@ -512,7 +512,7 @@ class TypeTest extends BaseTest
 
     public function testMoreLikeThisApi()
     {
-        $client = new Client(array('persistent' => false));
+        $client = $this->_getClient(array('persistent' => false));
         $index = $client->getIndex('elastica_test');
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 

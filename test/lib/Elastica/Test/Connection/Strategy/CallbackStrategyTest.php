@@ -55,7 +55,7 @@ class CallbackStrategyTest extends Base
             return current($connections);
        });
 
-        $client = new Client($config);
+        $client = $this->_getClient($config);
         $response = $client->request('/_aliases');
 
         $this->assertEquals(1, $count);

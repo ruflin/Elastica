@@ -84,14 +84,14 @@ class UtilTest extends BaseTest
         $data = array('key' => 'value');
 
         $connection = new Connection();
-        $connection->setHost('localhost');
+        $connection->setHost($this->_getHost());
         $connection->setPort('9200');
 
         $request = new Request($path, $method, $data, $query, $connection);
 
         $curlCommand = Util::convertRequestToCurlCommand($request);
 
-        $expected = 'curl -XPOST \'http://localhost:9200/test?no=params\' -d \'{"key":"value"}\'';
+        $expected = 'curl -XPOST \'http://' . $this->_getHost() . ':9200/test?no=params\' -d \'{"key":"value"}\'';
         $this->assertEquals($expected, $curlCommand);
     }
 

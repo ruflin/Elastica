@@ -13,7 +13,7 @@ class ExampleTest extends BaseTest
 {
     public function testBasicGettingStarted()
     {
-        $client = new Client();
+        $client = $this->_getClient();
         $index = $client->getIndex('ruflin');
         $type = $index->getType('users');
 

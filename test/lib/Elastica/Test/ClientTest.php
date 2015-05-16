@@ -25,7 +25,7 @@ class ClientTest extends BaseTest
     public function testConnectionsArray()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = new Client(array('connections' => array(array('host' => 'localhost', 'port' => 9200))));
+        $client = $this->_getClient(array('connections' => array(array('host' => $this->_getHost(), 'port' => 9200))));
         $index = $client->getIndex('elastica_test1');
         $index->create(array(), true);
 
@@ -56,9 +56,9 @@ class ClientTest extends BaseTest
     public function testTwoServersSame()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = new Client(array('connections' => array(
-            array('host' => 'localhost', 'port' => 9200),
-            array('host' => 'localhost', 'port' => 9200),
+        $client = $this->_getClient(array('connections' => array(
+            array('host' => $this->_getHost(), 'port' => 9200),
+            array('host' => $this->_getHost(), 'port' => 9200),
         )));
         $index = $client->getIndex('elastica_test1');
         $index->create(array(), true);
@@ -67,17 +67,17 @@ class ClientTest extends BaseTest
 
         // Adds 1 document to the index
         $doc1 = new Document(1,
-        array('username' => 'hans', 'test' => array('2', '3', '5'))
+            array('username' => 'hans', 'test' => array('2', '3', '5'))
         );
         $type->addDocument($doc1);
 
         // Adds a list of documents with _bulk upload to the index
         $docs = array();
         $docs[] = new Document(2,
-        array('username' => 'john', 'test' => array('1', '3', '6'))
+            array('username' => 'john', 'test' => array('1', '3', '6'))
         );
         $docs[] = new Document(3,
-        array('username' => 'rolf', 'test' => array('2', '3', '7'))
+            array('username' => 'rolf', 'test' => array('2', '3', '7'))
         );
         $type->addDocuments($docs);
 
@@ -89,26 +89,29 @@ class ClientTest extends BaseTest
 
     public function testConnectionParamsArePreparedForConnectionsOption()
     {
-        $client = new Client(array('connections' => array(array('url' => 'https://localhost:9200'))));
+        $url = 'https://' . $this->_getHost() . ':9200';
+        $client = $this->_getClient(array('connections' => array(array('url' => $url))));
         $connection = $client->getConnection();
 
-        $this->assertEquals('https://localhost:9200', $connection->getConfig('url'));
+        $this->assertEquals($url, $connection->getConfig('url'));
     }
 
     public function testConnectionParamsArePreparedForServersOption()
     {
-        $client = new Client(array('servers' => array(array('url' => 'https://localhost:9200'))));
+        $url = 'https://' . $this->_getHost() . ':9200';
+        $client = $this->_getClient(array('servers' => array(array('url' => $url))));
         $connection = $client->getConnection();
 
-        $this->assertEquals('https://localhost:9200', $connection->getConfig('url'));
+        $this->assertEquals($url, $connection->getConfig('url'));
     }
 
     public function testConnectionParamsArePreparedForDefaultOptions()
     {
-        $client = new Client(array('url' => 'https://localhost:9200'));
+        $url = 'https://' . $this->_getHost() . ':9200';
+        $client = $this->_getClient(array('url' => $url));
         $connection = $client->getConnection();
 
-        $this->assertEquals('https://localhost:9200', $connection->getConfig('url'));
+        $this->assertEquals($url, $connection->getConfig('url'));
     }
 
     public function testBulk()
@@ -565,7 +568,7 @@ class ClientTest extends BaseTest
             $count++;
         };
 
-        $client = new Client(array(), $callback);
+        $client = $this->_getClient(array(), $callback);
 
         // First connection work, second should not work
         $connection1 = new Connection(array('port' => '9101', 'timeout' => 2));
@@ -588,10 +591,10 @@ class ClientTest extends BaseTest
 
     public function testUrlConstructor()
     {
-        $url = 'http://localhost:9200/';
+        $url = 'http://' . $this->_getHost() . ':9200/';
 
         // Url should overwrite invalid host
-        $client = new Client(array('url' => $url, 'port' => '9101', 'timeout' => 2));
+        $client = $this->_getClient(array('url' => $url, 'port' => '9101', 'timeout' => 2));
 
         $response = $client->request('_status');
         $this->assertInstanceOf('Elastica\Response', $response);
@@ -835,7 +838,7 @@ class ClientTest extends BaseTest
 
     public function testLastRequestResponse()
     {
-        $client = new Client();
+        $client = $this->_getClient();
         $response = $client->request('_status');
 
         $this->assertInstanceOf('Elastica\Response', $response);
@@ -943,7 +946,7 @@ class ClientTest extends BaseTest
             ),
             'level11' => 'value11',
         );
-        $client = new Client($config);
+        $client = $this->_getClient($config);
 
         $this->assertNull($client->getConfigValue('level12'));
         $this->assertFalse($client->getConfigValue('level12', false));
@@ -960,7 +963,7 @@ class ClientTest extends BaseTest
 
     public function testArrayQuery()
     {
-        $client = new Client();
+        $client = $this->_getClient();
 
         $index = $client->getIndex('test');
         $index->create(array(), true);
@@ -986,7 +989,7 @@ class ClientTest extends BaseTest
 
     public function testJSONQuery()
     {
-        $client = new Client();
+        $client = $this->_getClient();
 
         $index = $client->getIndex('test');
         $index->create(array(), true);
@@ -1006,7 +1009,7 @@ class ClientTest extends BaseTest
 
     public function testAddHeader()
     {
-        $client = new Client();
+        $client = $this->_getClient();
 
         // add one header
         $client->addHeader('foo', 'bar');
@@ -1031,7 +1034,7 @@ class ClientTest extends BaseTest
 
     public function testRemoveHeader()
     {
-        $client = new Client();
+        $client = $this->_getClient();
 
         // set headers
         $headers = array(

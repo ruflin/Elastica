@@ -18,10 +18,10 @@ class MemcacheTest extends BaseTest
         }
     }
 
-    protected function _getClient()
+    protected function _getMemcacheClient()
     {
-        return new Client(array(
-            'host' => 'localhost',
+        return $this->_getClient(array(
+            'host' => $this->_getHost(),
             'port' => 11211,
             'transport' => 'Memcache',
         ));
@@ -29,8 +29,8 @@ class MemcacheTest extends BaseTest
 
     public function testConstruct()
     {
-        $client = $this->_getClient();
-        $this->assertEquals('localhost', $client->getConnection()->getHost());
+        $client = $this->_getMemcacheClient();
+        $this->assertEquals($this->_getHost(), $client->getConnection()->getHost());
         $this->assertEquals(11211, $client->getConnection()->getPort());
     }
 
@@ -129,7 +129,7 @@ class MemcacheTest extends BaseTest
      */
     public function testHeadRequest()
     {
-        $client = $this->_getClient();
+        $client = $this->_getMemcacheClient();
         $client->request('foo', Request::HEAD);
     }
 
@@ -139,7 +139,7 @@ class MemcacheTest extends BaseTest
      */
     public function testInvalidRequest()
     {
-        $client = $this->_getClient();
+        $client = $this->_getMemcacheClient();
         $client->request('foo', 'its_fail');
     }
 
@@ -149,7 +149,10 @@ class MemcacheTest extends BaseTest
      */
     public function testRequestWithLongPath()
     {
-        $index = $this->_createIndex();
+        $client = $this->_getMemcacheClient();
+        $index = $client->getIndex('memcache-test');
+        $index->create();
+
         $this->_waitForAllocation($index);
 
         $queryString = new QueryString(str_repeat('z', 300));
