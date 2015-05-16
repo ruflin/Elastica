@@ -155,12 +155,12 @@ class HttpTest extends BaseTest
     {
         putenv('http_proxy=' . $this->_getProxyUrl() . '/');
 
-        $client = $this->_getClient();
+        $client = new \Elastica\Client();
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(403, $transferInfo['http_code']);
 
-        $client = $this->_getClient();
+        $client =  new \Elastica\Client();
         $client->getConnection()->setProxy('');
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
