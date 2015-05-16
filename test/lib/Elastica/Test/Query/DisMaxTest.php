@@ -10,6 +10,9 @@ use Elastica\Test\Base as BaseTest;
 
 class DisMaxTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $query = new DisMax();
@@ -47,21 +50,20 @@ class DisMaxTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testQuery()
     {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'Baden'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Baden Baden'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'Baden')),
+            new Document(4, array('name' => 'Baden Baden')),
+        ));
 
         $index->refresh();
 

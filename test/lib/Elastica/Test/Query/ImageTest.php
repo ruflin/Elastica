@@ -11,6 +11,20 @@ use Elastica\Type\Mapping;
 
 class ImageTest extends BaseTest
 {
+    /**
+     * @var string
+     */
+    protected $_testFileContent;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->_testFileContent = base64_encode(file_get_contents(BASE_PATH . '/data/test.jpg'));
+    }
+
+    /**
+     * @group unit
+     */
     public function testToArrayFromReference()
     {
         $client = $this->_getClient();
@@ -29,6 +43,9 @@ class ImageTest extends BaseTest
         $this->assertEquals($jsonString, json_encode($query->toArray()));
     }
 
+    /**
+     * @group unit
+     */
     public function testToArrayFromImage()
     {
         $field = "image";
@@ -44,6 +61,9 @@ class ImageTest extends BaseTest
         $this->assertEquals($jsonString, json_encode($query->toArray()));
     }
 
+    /**
+     * @group functional
+     */
     public function testFromReference()
     {
         $field = "image";
@@ -70,12 +90,11 @@ class ImageTest extends BaseTest
 
         $type->setMapping($mapping);
 
-        $doc = new Document(1, array($field => base64_encode(file_get_contents(BASE_PATH . '/data/test.jpg'))));
-        $type->addDocument($doc);
-        $doc = new Document(2, array($field => base64_encode(file_get_contents(BASE_PATH . '/data/test.jpg'))));
-        $type->addDocument($doc);
-        $doc = new Document(3, array($field => base64_encode(file_get_contents(BASE_PATH . '/data/test.jpg'))));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array($field => $this->_testFileContent)),
+            new Document(2, array($field => $this->_testFileContent)),
+            new Document(3, array($field => $this->_testFileContent)),
+        ));
 
         $index->refresh();
 
@@ -89,6 +108,9 @@ class ImageTest extends BaseTest
         $this->assertEquals(3, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testFromImage()
     {
         $field = "image";
@@ -115,12 +137,11 @@ class ImageTest extends BaseTest
 
         $type->setMapping($mapping);
 
-        $doc = new Document(1, array($field => base64_encode(file_get_contents(BASE_PATH . '/data/test.jpg'))));
-        $type->addDocument($doc);
-        $doc = new Document(2, array($field => base64_encode(file_get_contents(BASE_PATH . '/data/test.jpg'))));
-        $type->addDocument($doc);
-        $doc = new Document(3, array($field => base64_encode(file_get_contents(BASE_PATH . '/data/test.jpg'))));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array($field => $this->_testFileContent)),
+            new Document(2, array($field => $this->_testFileContent)),
+            new Document(3, array($field => $this->_testFileContent)),
+        ));
 
         $index->refresh();
 

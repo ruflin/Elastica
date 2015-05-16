@@ -2,11 +2,15 @@
 
 namespace Elastica\Test\Query;
 
+use Elastica\Document;
 use Elastica\Query\Common;
 use Elastica\Test\Base as BaseTest;
 
 class CommonTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $query = new Common('body', 'test query', .001);
@@ -25,21 +29,24 @@ class CommonTest extends BaseTest
         $this->assertEquals($expected, $query->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testQuery()
     {
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
+        $docs = array(
+            new Document(1, array('body' => 'foo baz')),
+            new Document(2, array('body' => 'foo bar baz')),
+            new Document(3, array('body' => 'foo bar baz bat')),
+        );
         //add documents to create common terms
-        $docs = array();
-        for ($i = 0; $i < 20; $i++) {
-            $docs[] = new \Elastica\Document($i, array('body' => 'foo bar'));
+        for ($i = 4; $i < 24; $i++) {
+            $docs[] = new Document($i, array('body' => 'foo bar'));
         }
         $type->addDocuments($docs);
-
-        $type->addDocument(new \Elastica\Document(20, array('body' => 'foo baz')));
-        $type->addDocument(new \Elastica\Document(21, array('body' => 'foo bar baz')));
-        $type->addDocument(new \Elastica\Document(22, array('body' => 'foo bar baz bat')));
         $index->refresh();
 
         $query = new Common('body', 'foo bar baz bat', .5);
@@ -53,7 +60,5 @@ class CommonTest extends BaseTest
 
         //only the document containing both low frequency terms should match
         $this->assertEquals(1, $results->count());
-
-        $index->delete();
     }
 }

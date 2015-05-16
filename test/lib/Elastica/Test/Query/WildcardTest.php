@@ -9,12 +9,18 @@ use Elastica\Type\Mapping;
 
 class WildcardTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testConstructEmpty()
     {
         $wildcard = new Wildcard();
         $this->assertEmpty($wildcard->getParams());
     }
 
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $key = 'name';
@@ -35,6 +41,9 @@ class WildcardTest extends BaseTest
         $this->assertEquals($expectedArray, $wildcard->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testSearchWithAnalyzer()
     {
         $client = $this->_getClient();
@@ -61,16 +70,13 @@ class WildcardTest extends BaseTest
         );
         $type->setMapping($mapping);
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'Baden'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Baden Baden'));
-        $type->addDocument($doc);
-        $doc = new Document(5, array('name' => 'New Orleans'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'Baden')),
+            new Document(4, array('name' => 'Baden Baden')),
+            new Document(5, array('name' => 'New Orleans')),
+        ));
 
         $index->refresh();
 
