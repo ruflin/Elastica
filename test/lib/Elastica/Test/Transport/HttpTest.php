@@ -49,7 +49,7 @@ class HttpTest extends BaseTest
      */
     public function testDynamicHttpMethodBasedOnConfigParameter(array $config, $httpMethod)
     {
-        $client = new Client($config);
+        $client = $this->_getClient($config);
 
         $index = $client->getIndex('dynamic_http_method_test');
         $index->create(array(), true);
@@ -71,7 +71,7 @@ class HttpTest extends BaseTest
      */
     public function testDynamicHttpMethodOnlyAffectsRequestsWithBody(array $config, $httpMethod)
     {
-        $client = new Client($config);
+        $client = $this->_getClient($config);
 
         $status = $client->getStatus();
         $info = $status->getResponse()->getTransferInfo();
@@ -188,7 +188,7 @@ class HttpTest extends BaseTest
 
     public function testBodyReuse()
     {
-        $client = new Client();
+        $client = $this->_getClient();
 
         $index = $client->getIndex('elastica_body_reuse_test');
         $index->create(array(), true);
@@ -217,7 +217,7 @@ class HttpTest extends BaseTest
 
     public function testPostWith0Body()
     {
-        $client = new Client();
+        $client = $this->_getClient();
 
         $index = $client->getIndex('elastica_0_body');
         $index->create(array(), true);

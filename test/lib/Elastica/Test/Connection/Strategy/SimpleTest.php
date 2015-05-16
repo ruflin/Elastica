@@ -17,7 +17,7 @@ class SimpleTest extends Base
 {
     public function testConnection()
     {
-        $client = new Client();
+        $client = $this->_getClient();
         $response = $client->request('/_aliases');
         /* @var $response \Elastica\Response */
 
@@ -32,7 +32,7 @@ class SimpleTest extends Base
     public function testFailConnection()
     {
         $config = array('host' => '255.255.255.0');
-        $client = new Client($config);
+        $client = $this->_getClient($config);
 
         $this->_checkStrategy($client);
 
@@ -51,7 +51,7 @@ class SimpleTest extends Base
             ++$count;
         };
 
-        $client = new Client(array(), $callback);
+        $client = $this->_getClient(array(), $callback);
         $client->setConnections($connections);
 
         $response = $client->request('/_aliases');
@@ -73,7 +73,7 @@ class SimpleTest extends Base
         );
 
         $count = 0;
-        $client = new Client(array(), function () use (&$count) {
+        $client = $this->_getClient(array(), function () use (&$count) {
             ++$count;
         });
 

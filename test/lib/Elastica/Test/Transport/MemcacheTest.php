@@ -20,7 +20,7 @@ class MemcacheTest extends BaseTest
 
     protected function _getClient()
     {
-        return new Client(array(
+        return $this->_getClient(array(
             'host' => 'localhost',
             'port' => 11211,
             'transport' => 'Memcache',

@@ -28,19 +28,19 @@ class LogTest extends BaseTest
     public function testSetLogConfigPath()
     {
         $logPath = '/tmp/php.log';
-        $client = new Client(array('log' => $logPath));
+        $client = $this->_getClient(array('log' => $logPath));
         $this->assertEquals($logPath, $client->getConfig('log'));
     }
 
     public function testSetLogConfigEnable()
     {
-        $client = new Client(array('log' => true));
+        $client = $this->_getClient(array('log' => true));
         $this->assertTrue($client->getConfig('log'));
     }
 
     public function testSetLogConfigEnable1()
     {
-        $client = new Client();
+        $client = $this->_getClient();
         $client->setLogger(new Log());
         $this->assertFalse($client->getConfig('log'));
     }
@@ -65,7 +65,7 @@ class LogTest extends BaseTest
 
     public function testGetLastMessage2()
     {
-        $client = new Client(array('log' => true));
+        $client = $this->_getClient(array('log' => true));
         $log = new Log($client);
 
         // Set log path temp path as otherwise test fails with output

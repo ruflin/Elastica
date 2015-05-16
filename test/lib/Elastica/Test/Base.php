@@ -7,12 +7,28 @@ use Elastica\Index;
 
 class Base extends \PHPUnit_Framework_TestCase
 {
-    protected function _getClient()
+    /**
+     * @param array $params Additional configuration params. Host and Port are already set
+     * @param callback $callback
+     * @return Client
+     */
+    protected function _getClient(array $params = array(), $callback = null)
     {
-        return new Client(array(
-            'host' => getenv('ES_HOST') ?: 'localhost',
+        $config = array(
+            'host' => $this->_getHost(),
             'port' => getenv('ES_PORT') ?: 9200,
-        ));
+        );
+
+        $config = array_merge($config, $params);
+        return new Client($config, $callback);
+    }
+
+    /**
+     * @return string Returns es host for tests
+     */
+    protected function _getHost()
+    {
+        return getenv('ES_HOST') ?: 'localhost';
     }
 
     /**

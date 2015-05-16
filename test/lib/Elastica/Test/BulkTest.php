@@ -162,7 +162,7 @@ class BulkTest extends BaseTest
 
     public function testSetIndexType()
     {
-        $client = new Client();
+        $client = $this->_getClient();
         $index = $client->getIndex('index');
         $type = $index->getType('type');
 
@@ -200,7 +200,7 @@ class BulkTest extends BaseTest
 
     public function testAddActions()
     {
-        $client = new Client();
+        $client = $this->_getClient();
         $bulk = new Bulk($client);
 
         $action1 = new Action(Action::OP_TYPE_DELETE);
@@ -427,7 +427,7 @@ class BulkTest extends BaseTest
         if (!function_exists('socket_create')) {
             $this->markTestSkipped('Function socket_create() does not exist.');
         }
-        $client = new Client($clientConfig);
+        $client = $this->_getClient($clientConfig);
         $index = $client->getIndex('elastica_test');
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
         $type = $index->getType('udp_test');

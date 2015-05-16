@@ -56,7 +56,7 @@ class GuzzleTest extends BaseTest
      */
     public function testDynamicHttpMethodBasedOnConfigParameter(array $config, $httpMethod)
     {
-        $client = new Client($config);
+        $client = $this->_getClient($config);
 
         $index = $client->getIndex('dynamic_http_method_test');
         $index->create(array(), true);
@@ -73,7 +73,7 @@ class GuzzleTest extends BaseTest
      */
     public function testDynamicHttpMethodOnlyAffectsRequestsWithBody(array $config, $httpMethod)
     {
-        $client = new Client($config);
+        $client = $this->_getClient($config);
 
         $status = $client->getStatus();
         $info = $status->getResponse()->getTransferInfo();
@@ -131,7 +131,7 @@ class GuzzleTest extends BaseTest
 
     public function testBodyReuse()
     {
-        $client = new Client(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
 
         $index = $client->getIndex('elastica_body_reuse_test');
         $index->create(array(), true);
@@ -163,7 +163,7 @@ class GuzzleTest extends BaseTest
      */
     public function testInvalidConnection()
     {
-        $client = new Client(array('transport' => 'Guzzle', 'port' => 4500, 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'port' => 4500, 'persistent' => false));
         $response = $client->request('_status', 'GET');
     }
 }

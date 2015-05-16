@@ -37,7 +37,7 @@ class ActionTest extends BaseTest
         $expected = '{"index":{"_index":"index","_type":"type","_id":1,"_routing":1}}'."\n";
         $this->assertEquals($expected, $action->toString());
 
-        $client = new Client();
+        $client = $this->_getClient();
         $index = new Index($client, 'index2');
         $type = new Type($index, 'type2');
 
