@@ -668,7 +668,7 @@ class BulkTest extends BaseTest
             ),
             array(
                 array(),
-                'localhost',
+                $this->_getHost(),
                 null,
             ),
             array(
@@ -678,13 +678,13 @@ class BulkTest extends BaseTest
             ),
             array(
                 array(),
-                'localhost',
+                $this->_getHost(),
                 9700,
             ),
             array(
                 array(
                     'udp' => array(
-                        'host' => 'localhost',
+                        'host' => $this->_getHost(),
                         'port' => 9700,
                     ),
                 ),
@@ -694,17 +694,17 @@ class BulkTest extends BaseTest
             array(
                 array(
                     'udp' => array(
-                        'host' => 'localhost',
+                        'host' => $this->_getHost(),
                         'port' => 9800,
                     ),
                 ),
-                'localhost',
+                $this->_getHost(),
                 9700,
             ),
             array(
                 array(
                     'udp' => array(
-                        'host' => 'localhost',
+                        'host' => $this->_getHost(),
                         'port' => 9800,
                     ),
                 ),
@@ -714,7 +714,7 @@ class BulkTest extends BaseTest
             ),
             array(
                 array(),
-                'localhost',
+                $this->_getHost(),
                 9800,
                 true,
             ),

@@ -43,7 +43,7 @@ class SimpleTest extends Base
     {
         $connections = array(
             new Connection(array('host' => '255.255.255.0')),
-            new Connection(array('host' => 'localhost')),
+            new Connection(array('host' => $this->_getHost())),
         );
 
         $count = 0;

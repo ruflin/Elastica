@@ -19,7 +19,7 @@ class ThriftTest extends BaseTest
 
     public function testConstruct()
     {
-        $host = 'localhost';
+        $host = $this->_getHost();
         $port = 9500;
         $client = $this->_getClient(array('host' => $host, 'port' => $port, 'transport' => 'Thrift'));
 
@@ -85,7 +85,7 @@ class ThriftTest extends BaseTest
         $this->_checkPlugin();
 
         $connection = new Connection();
-        $connection->setHost('localhost');
+        $connection->setHost($this->_getHost());
         $connection->setPort(9500);
         $connection->setTransport('Thrift');
 
@@ -101,14 +101,14 @@ class ThriftTest extends BaseTest
         return array(
             array(
                 array(
-                    'host' => 'localhost',
+                    'host' => $this->_getHost(),
                     'port' => 9500,
                     'transport' => 'Thrift',
                 ),
             ),
             array(
                 array(
-                    'host' => 'localhost',
+                    'host' => $this->_getHost(),
                     'port' => 9500,
                     'transport' => 'Thrift',
                     'config' => array(

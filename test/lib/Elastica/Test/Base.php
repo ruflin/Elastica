@@ -20,6 +20,7 @@ class Base extends \PHPUnit_Framework_TestCase
         );
 
         $config = array_merge($config, $params);
+
         return new Client($config, $callback);
     }
 
@@ -65,6 +66,7 @@ class Base extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
+        parent::tearDown();
         $this->_getClient()->getIndex('_all')->delete();
         $this->_getClient()->getIndex('_all')->clearCache();
     }

@@ -20,8 +20,8 @@ class MemcacheTest extends BaseTest
 
     protected function _getClient()
     {
-        return $this->_getClient(array(
-            'host' => 'localhost',
+        return parent::_getClient(array(
+            'host' => $this->_getHost(),
             'port' => 11211,
             'transport' => 'Memcache',
         ));
@@ -30,7 +30,7 @@ class MemcacheTest extends BaseTest
     public function testConstruct()
     {
         $client = $this->_getClient();
-        $this->assertEquals('localhost', $client->getConnection()->getHost());
+        $this->assertEquals($this->_getHost(), $client->getConnection()->getHost());
         $this->assertEquals(11211, $client->getConnection()->getPort());
     }
 

@@ -25,7 +25,7 @@ class ClientTest extends BaseTest
     public function testConnectionsArray()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = $this->_getClient(array('connections' => array(array('host' => 'localhost', 'port' => 9200))));
+        $client = $this->_getClient(array('connections' => array(array('host' => $this->_getHost(), 'port' => 9200))));
         $index = $client->getIndex('elastica_test1');
         $index->create(array(), true);
 
@@ -57,8 +57,8 @@ class ClientTest extends BaseTest
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
         $client = $this->_getClient(array('connections' => array(
-            array('host' => 'localhost', 'port' => 9200),
-            array('host' => 'localhost', 'port' => 9200),
+            array('host' => $this->_getHost(), 'port' => 9200),
+            array('host' => $this->_getHost(), 'port' => 9200),
         )));
         $index = $client->getIndex('elastica_test1');
         $index->create(array(), true);
@@ -89,26 +89,29 @@ class ClientTest extends BaseTest
 
     public function testConnectionParamsArePreparedForConnectionsOption()
     {
-        $client = $this->_getClient(array('connections' => array(array('url' => 'https://localhost:9200'))));
+        $url = 'https://' . $this->_getHost() . ':9200';
+        $client = $this->_getClient(array('connections' => array(array('url' => $url))));
         $connection = $client->getConnection();
 
-        $this->assertEquals('https://localhost:9200', $connection->getConfig('url'));
+        $this->assertEquals($url, $connection->getConfig('url'));
     }
 
     public function testConnectionParamsArePreparedForServersOption()
     {
-        $client = $this->_getClient(array('servers' => array(array('url' => 'https://localhost:9200'))));
+        $url = 'https://' . $this->_getHost() . ':9200';
+        $client = $this->_getClient(array('servers' => array(array('url' => $url))));
         $connection = $client->getConnection();
 
-        $this->assertEquals('https://localhost:9200', $connection->getConfig('url'));
+        $this->assertEquals($url, $connection->getConfig('url'));
     }
 
     public function testConnectionParamsArePreparedForDefaultOptions()
     {
-        $client = $this->_getClient(array('url' => 'https://localhost:9200'));
+        $url = 'https://' . $this->_getHost() . ':9200';
+        $client = $this->_getClient(array('url' => $url));
         $connection = $client->getConnection();
 
-        $this->assertEquals('https://localhost:9200', $connection->getConfig('url'));
+        $this->assertEquals($url, $connection->getConfig('url'));
     }
 
     public function testBulk()
@@ -588,7 +591,7 @@ class ClientTest extends BaseTest
 
     public function testUrlConstructor()
     {
-        $url = 'http://localhost:9200/';
+        $url = 'http://' . $this->_getHost() . ':9200/';
 
         // Url should overwrite invalid host
         $client = $this->_getClient(array('url' => $url, 'port' => '9101', 'timeout' => 2));
