@@ -3,6 +3,7 @@
 namespace Elastica\Test;
 
 use Elastica\Client;
+use Elastica\Connection;
 use Elastica\Index;
 
 class Base extends \PHPUnit_Framework_TestCase
@@ -16,7 +17,7 @@ class Base extends \PHPUnit_Framework_TestCase
     {
         $config = array(
             'host' => $this->_getHost(),
-            'port' => getenv('ES_PORT') ?: 9200,
+            'port' => $this->_getPort(),
         );
 
         $config = array_merge($config, $params);
@@ -25,11 +26,19 @@ class Base extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return string Returns es host for tests
+     * @return string Host to es for elastica tests
      */
     protected function _getHost()
     {
-        return getenv('ES_HOST') ?: 'localhost';
+        return getenv('ES_HOST') ?: Connection::DEFAULT_HOST;
+    }
+
+    /**
+     * @return int Port to es for elastica tests
+     */
+    protected function _getPort()
+    {
+        return getenv('ES_PORT') ?: Connection::DEFAULT_PORT;
     }
 
     /**
