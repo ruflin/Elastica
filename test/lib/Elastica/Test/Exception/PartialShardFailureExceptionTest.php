@@ -8,6 +8,9 @@ use Elastica\ResultSet;
 
 class PartialShardFailureExceptionTest extends AbstractExceptionTest
 {
+    /**
+     * @group functional
+     */
     public function testPartialFailure()
     {
         $client = $this->_getClient();

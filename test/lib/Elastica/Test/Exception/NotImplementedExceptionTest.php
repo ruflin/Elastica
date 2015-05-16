@@ -5,6 +5,9 @@ use Elastica\Exception\NotImplementedException;
 
 class NotImplementedExceptionTest extends AbstractExceptionTest
 {
+    /**
+     * @group unit
+     */
     public function testInstance()
     {
         $code = 4;
