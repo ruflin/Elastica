@@ -80,7 +80,7 @@ class HttpTest extends BaseTest
 
     public function testCurlNobodyOptionIsResetAfterHeadRequest()
     {
-        $client = new \Elastica\Client();
+        $client = $this->_getClient();
         $index = $client->getIndex('curl_test');
         $index->create(array(), true);
         $this->_waitForAllocation($index);
@@ -106,7 +106,7 @@ class HttpTest extends BaseTest
 
     public function testUnicodeData()
     {
-        $client = new \Elastica\Client();
+        $client = $this->_getClient();
         $index = $client->getIndex('curl_test');
         $index->create(array(), true);
         $this->_waitForAllocation($index);
@@ -138,9 +138,9 @@ class HttpTest extends BaseTest
 
     public function testWithEnvironmentalProxy()
     {
-        putenv('http_proxy=http://127.0.0.1:12345/');
+        putenv('http_proxy=' . $this->_getProxyUrl());
 
-        $client = new \Elastica\Client();
+        $client = $this->_getClient();
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
 
@@ -153,14 +153,14 @@ class HttpTest extends BaseTest
 
     public function testWithEnabledEnvironmentalProxy()
     {
-        putenv('http_proxy=http://127.0.0.1:12346/');
+        putenv('http_proxy=' . $this->_getProxyUrl());
 
-        $client = new \Elastica\Client();
+        $client = $this->_getClient();
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(403, $transferInfo['http_code']);
 
-        $client = new \Elastica\Client();
+        $client = $this->_getClient();
         $client->getConnection()->setProxy('');
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
@@ -170,8 +170,8 @@ class HttpTest extends BaseTest
 
     public function testWithProxy()
     {
-        $client = new \Elastica\Client();
-        $client->getConnection()->setProxy('http://127.0.0.1:12345');
+        $client = $this->_getClient();
+        $client->getConnection()->setProxy($this->_getProxyUrl());
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
@@ -179,7 +179,7 @@ class HttpTest extends BaseTest
 
     public function testWithoutProxy()
     {
-        $client = new \Elastica\Client();
+        $client = $this->_getClient();
         $client->getConnection()->setProxy('');
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();

@@ -82,7 +82,7 @@ class GuzzleTest extends BaseTest
 
     public function testWithEnvironmentalProxy()
     {
-        putenv('http_proxy=http://127.0.0.1:12345/');
+        putenv('http_proxy=' . $this->_getProxyUrl());
 
         $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -97,7 +97,7 @@ class GuzzleTest extends BaseTest
 
     public function testWithEnabledEnvironmentalProxy()
     {
-        putenv('http_proxy=http://127.0.0.1:12346/');
+        putenv('http_proxy=' . $this->_getProxyUrl());
 
         $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -114,7 +114,7 @@ class GuzzleTest extends BaseTest
     public function testWithProxy()
     {
         $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
-        $client->getConnection()->setProxy('http://127.0.0.1:12345');
+        $client->getConnection()->setProxy($this->_getProxyUrl());
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);

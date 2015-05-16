@@ -33,6 +33,14 @@ class Base extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @return string Proxy url string
+     */
+    protected function _getProxyUrl()
+    {
+        return "http://127.0.0.1:12345";
+    }
+
+    /**
      * @param  string          $name   Index name
      * @param  bool            $delete Delete index if it exists
      * @param  int             $shards Number of shards to create
