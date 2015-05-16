@@ -153,14 +153,14 @@ class HttpTest extends BaseTest
 
     public function testWithEnabledEnvironmentalProxy()
     {
-        putenv('http_proxy=' . $this->_getProxyUrl() . '/');
+        putenv('http_proxy=http://127.0.0.1:12346/');
 
         $client = new \Elastica\Client();
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(403, $transferInfo['http_code']);
 
-        $client =  new \Elastica\Client();
+        $client = new \Elastica\Client();
         $client->getConnection()->setProxy('');
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
