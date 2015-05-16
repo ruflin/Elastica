@@ -84,7 +84,7 @@ class GuzzleTest extends BaseTest
     {
         putenv('http_proxy=' . $this->_getProxyUrl() . '/');
 
-        $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
 
@@ -99,11 +99,11 @@ class GuzzleTest extends BaseTest
     {
         putenv('http_proxy=' . $this->_getProxyUrl() . '/');
 
-        $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(403, $transferInfo['http_code']);
 
-        $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $client->getConnection()->setProxy('');
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
@@ -113,7 +113,7 @@ class GuzzleTest extends BaseTest
 
     public function testWithProxy()
     {
-        $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $client->getConnection()->setProxy($this->_getProxyUrl());
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -122,7 +122,7 @@ class GuzzleTest extends BaseTest
 
     public function testWithoutProxy()
     {
-        $client = new \Elastica\Client(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $client->getConnection()->setProxy('');
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
