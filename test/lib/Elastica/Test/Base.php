@@ -89,6 +89,14 @@ class Base extends \PHPUnit_Framework_TestCase
         } while (!$allocated);
     }
 
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $hasGroup = $this->_isUnitGroup() || $this->_isFunctionalGroup() || $this->_isShutdownGroup();
+        $this->assertTrue($hasGroup, 'Every test must have one of "unit", "functional" or "shutdown" group');
+    }
+
     protected function tearDown()
     {
         if ($this->_isFunctionalGroup()) {
