@@ -24,16 +24,19 @@ install:
   - /bin/bash ansible/provision.sh
 
 before_script:
-  - mkdir -p build/logs
+  - mkdir -p build/logs build/coverage
   - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$TRAVIS_PHP_VERSION" != "7" ]; then echo "extension=memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;'
   - if [ $ES_COMPOSER_NODEV == "no" ] && ! $(phpenv version-name | grep -q '5.3'); then sudo composer require "guzzlehttp/guzzle" "4.2.*" --dev --no-ansi --no-progress --no-interaction; fi
 
 script:
-  - phpunit -c test/phpunit-travis.xml
+  - phpunit -c test/ --group functional --coverage-php build/coverage/functional.cov
+  - phpunit -c test/ --group shutdown --coverage-php build/coverage/shutdown.cov
+  - phpunit -c test/ --group unit --coverage-php build/coverage/unit.cov
 
 after_script:
   - cat /var/log/elasticsearch/*.log
   - cat /var/log/nginx/*.log
-  - cat build/logs/phpunit-tap.log
-  - sudo composer require satooshi/php-coveralls --no-ansi --no-progress --no-interaction
-  - php vendor/bin/coveralls -v
+  - sudo rm composer.lock && sudo composer require satooshi/php-coveralls dev-master --no-ansi --no-progress --no-interaction
+  - sudo rm composer.lock && sudo composer require phpunit/phpcov --no-ansi --no-progress --no-interaction
+  - vendor/bin/phpcov merge --clover build/coverage/clover.xml build/coverage/
+  - vendor/bin/coveralls -v
