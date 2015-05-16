@@ -12,6 +12,9 @@ use Elastica\Test\Base;
  */
 class StrategyFactoryTest extends Base
 {
+    /**
+     * @group unit
+     */
     public function testCreateCallbackStrategy()
     {
         $callback = function ($connections) {
@@ -22,6 +25,9 @@ class StrategyFactoryTest extends Base
         $this->assertInstanceOf('Elastica\Connection\Strategy\CallbackStrategy', $strategy);
     }
 
+    /**
+     * @group unit
+     */
     public function testCreateByName()
     {
         $strategyName = 'Simple';
@@ -31,6 +37,9 @@ class StrategyFactoryTest extends Base
         $this->assertInstanceOf('Elastica\Connection\Strategy\Simple', $strategy);
     }
 
+    /**
+     * @group unit
+     */
     public function testCreateByClass()
     {
         $strategy = new EmptyStrategy();
@@ -38,6 +47,9 @@ class StrategyFactoryTest extends Base
         $this->assertEquals($strategy, StrategyFactory::create($strategy));
     }
 
+    /**
+     * @group unit
+     */
     public function testCreateByClassName()
     {
         $strategyName = '\\Elastica\Test\Connection\Strategy\\EmptyStrategy';
@@ -48,6 +60,7 @@ class StrategyFactoryTest extends Base
     }
 
     /**
+     * @group unit
      * @expectedException \InvalidArgumentException
      */
     public function testFailCreate()

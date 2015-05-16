@@ -13,6 +13,9 @@ use Elastica\Test\Base;
  */
 class CallbackStrategyTest extends Base
 {
+    /**
+     * @group unit
+     */
     public function testInvoke()
     {
         $count = 0;
@@ -27,6 +30,9 @@ class CallbackStrategyTest extends Base
         $this->assertEquals(1, $count);
     }
 
+    /**
+     * @group unit
+     */
     public function testIsValid()
     {
         $callback = function () {};
@@ -36,6 +42,9 @@ class CallbackStrategyTest extends Base
         $this->assertTrue($isValid);
     }
 
+    /**
+     * @group unit
+     */
     public function testFailIsValid()
     {
         $callback = new \stdClass();
@@ -45,6 +54,9 @@ class CallbackStrategyTest extends Base
         $this->assertFalse($isValid);
     }
 
+    /**
+     * @group functional
+     */
     public function testConnection()
     {
         $count = 0;
