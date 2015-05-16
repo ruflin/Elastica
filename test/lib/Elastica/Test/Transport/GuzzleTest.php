@@ -166,4 +166,11 @@ class GuzzleTest extends BaseTest
         $client = $this->_getClient(array('transport' => 'Guzzle', 'port' => 4500, 'persistent' => false));
         $response = $client->request('_status', 'GET');
     }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        putenv('http_proxy=');
+    }
+
 }

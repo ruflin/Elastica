@@ -153,7 +153,7 @@ class HttpTest extends BaseTest
 
     public function testWithEnabledEnvironmentalProxy()
     {
-        putenv('http_proxy=http://127.0.0.1:12346/');
+        putenv('http_proxy=http://' . $this->_getProxyUrl() . '/');
 
         $client = new \Elastica\Client();
 
@@ -227,5 +227,11 @@ class HttpTest extends BaseTest
         $tokens = $index->analyze('0');
 
         $this->assertNotEmpty($tokens);
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        putenv('http_proxy=');
     }
 }
