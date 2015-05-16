@@ -97,7 +97,7 @@ class GuzzleTest extends BaseTest
 
     public function testWithEnabledEnvironmentalProxy()
     {
-        putenv('http_proxy=' . $this->_getProxyUrl() . '/');
+        putenv('http_proxy=' . $this->_getProxyUrl403() . '/');
 
         $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
