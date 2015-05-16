@@ -138,7 +138,7 @@ class HttpTest extends BaseTest
 
     public function testWithEnvironmentalProxy()
     {
-        putenv('http_proxy=' . $this->_getProxyUrl());
+        putenv('http_proxy=' . $this->_getProxyUrl() . '/');
 
         $client = $this->_getClient();
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -153,7 +153,7 @@ class HttpTest extends BaseTest
 
     public function testWithEnabledEnvironmentalProxy()
     {
-        putenv('http_proxy=' . $this->_getProxyUrl());
+        putenv('http_proxy=' . $this->_getProxyUrl() . '/');
 
         $client = $this->_getClient();
 
