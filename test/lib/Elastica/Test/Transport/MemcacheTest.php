@@ -18,9 +18,9 @@ class MemcacheTest extends BaseTest
         }
     }
 
-    protected function _getClient()
+    protected function _getMemcacheClient()
     {
-        return parent::_getClient(array(
+        return $this->_getClient(array(
             'host' => $this->_getHost(),
             'port' => 11211,
             'transport' => 'Memcache',
@@ -29,7 +29,7 @@ class MemcacheTest extends BaseTest
 
     public function testConstruct()
     {
-        $client = $this->_getClient();
+        $client = $this->_getMemcacheClient();
         $this->assertEquals($this->_getHost(), $client->getConnection()->getHost());
         $this->assertEquals(11211, $client->getConnection()->getPort());
     }
@@ -129,7 +129,7 @@ class MemcacheTest extends BaseTest
      */
     public function testHeadRequest()
     {
-        $client = $this->_getClient();
+        $client = $this->_getMemcacheClient();
         $client->request('foo', Request::HEAD);
     }
 
@@ -139,7 +139,7 @@ class MemcacheTest extends BaseTest
      */
     public function testInvalidRequest()
     {
-        $client = $this->_getClient();
+        $client = $this->_getMemcacheClient();
         $client->request('foo', 'its_fail');
     }
 
