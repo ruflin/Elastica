@@ -11,14 +11,18 @@ use Elastica\Test\Base as BaseTest;
 
 class ScanAndScrollTest extends BaseTest
 {
-
+    /**
+     * @group unit
+     */
     public function testConstruct()
     {
         $scanAndScroll = $this->_prepareScanAndScroll();
 
         $this->assertInstanceOf('Elastica\ScanAndScroll', $scanAndScroll);
     }
-
+    /**
+     * @group unit
+     */
     public function testDefaultProperties()
     {
         $scanAndScroll = $this->_prepareScanAndScroll();
@@ -27,6 +31,9 @@ class ScanAndScrollTest extends BaseTest
         $this->assertEquals(1000, $scanAndScroll->sizePerShard);
     }
 
+    /**
+     * @group functional
+     */
     public function testQuerySizeOverride()
     {
         $query = new Query();
@@ -47,6 +54,9 @@ class ScanAndScrollTest extends BaseTest
         $this->assertEquals(10, $query->getParam('size'));
     }
 
+    /**
+     * @group functional
+     */
     public function testSizePerShard()
     {
         $search = $this->_prepareSearch(2, 20);
@@ -58,6 +68,9 @@ class ScanAndScrollTest extends BaseTest
         $this->assertEquals(10, $scanAndScroll->current()->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testScrollId()
     {
         $search = $this->_prepareSearch(1, 2);
@@ -72,6 +85,9 @@ class ScanAndScrollTest extends BaseTest
         );
     }
 
+    /**
+     * @group functional
+     */
     public function testForeach()
     {
         $search = $this->_prepareSearch(2, 11);

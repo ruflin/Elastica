@@ -11,6 +11,9 @@ use Elastica\Test\Base as BaseTest;
  */
 class ExampleTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testBasicGettingStarted()
     {
         $client = $this->_getClient();
@@ -24,6 +27,9 @@ class ExampleTest extends BaseTest
         $type->addDocument($doc);
     }
 
+    /**
+     * @group functional
+     */
     public function testExample()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
