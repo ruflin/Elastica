@@ -149,7 +149,7 @@ class MemcacheTest extends BaseTest
      */
     public function testRequestWithLongPath()
     {
-        $index = $this->_createIndex();
+        $index = $this->_getMemcacheClient();
         $this->_waitForAllocation($index);
 
         $queryString = new QueryString(str_repeat('z', 300));

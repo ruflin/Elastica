@@ -9,6 +9,11 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 - Introduction of Changelog standard based on http://keepachangelog.com/. changes.txt moved to CHANGELOG.md [#844](https://github.com/ruflin/Elastica/issues/844/)
+- Make host for all tests dynamic to prepare it for a more dynamic test environment #846
+
+
+
+
 
 
 ## [2.0.0](https://github.com/ruflin/Elastica/releases/tag/2.0.0) - 2015-05-11
