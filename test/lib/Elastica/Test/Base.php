@@ -54,7 +54,7 @@ class Base extends \PHPUnit_Framework_TestCase
      */
     protected function _getProxyUrl403()
     {
-        return "http://127.0.0.1:12345";
+        return "http://127.0.0.1:12346";
     }
 
     /**
