@@ -10,72 +10,82 @@ use Elastica\Test\Base as BaseTest;
 
 class IdsTest extends BaseTest
 {
-    protected $_index;
-    protected $_type;
-
-    public function setUp()
+    protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
 
-        $type1 = $index->getType('helloworld1');
-        $type2 = $index->getType('helloworld2');
-
         // Add documents to first type
+        $docs = array();
         for ($i = 1; $i < 100; $i++) {
-            $doc = new Document($i, array('name' => 'ruflin'));
-            $type1->addDocument($doc);
+            $docs[] = new Document($i, array('name' => 'ruflin'));
         }
+        $index->getType('helloworld1')->addDocuments($docs);
 
         // Add documents to second type
+        $docs = array();
         for ($i = 1; $i < 100; $i++) {
-            $doc = new Document($i, array('name' => 'ruflin'));
-            $type2->addDocument($doc);
+            $docs[] = new Document($i, array('name' => 'ruflin'));
         }
-
         // This is a special id that will only be in the second type
-        $doc = new Document('101', array('name' => 'ruflin'));
-        $type2->addDocument($doc);
+        $docs[] = new Document(101, array('name' => 'ruflin'));
+        $index->getType('helloworld2')->addDocuments($docs);
 
         $index->optimize();
         $index->refresh();
 
-        $this->_type = $type1;
-        $this->_index = $index;
+        return $index;
     }
 
+    protected function _getTypeForTest()
+    {
+        return $this->_getIndexForTest()->getType('helloworld1');
+    }
+
+    /**
+     * @group functional
+     */
     public function testSetIdsSearchSingle()
     {
         $filter = new Ids();
         $filter->setIds('1');
 
         $query = Query::create($filter);
-        $resultSet = $this->_type->search($query);
+        $resultSet = $this->_getTypeForTest()->search($query);
 
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testSetIdsSearchArray()
     {
         $filter = new Ids();
         $filter->setIds(array(1, 7, 13));
 
         $query = Query::create($filter);
-        $resultSet = $this->_type->search($query);
+        $resultSet = $this->_getTypeForTest()->search($query);
 
         $this->assertEquals(3, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testAddIdsSearchSingle()
     {
         $filter = new Ids();
         $filter->addId('39');
 
         $query = Query::create($filter);
-        $resultSet = $this->_type->search($query);
+        $resultSet = $this->_getTypeForTest()->search($query);
 
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testAddIdsSearchSingleNotInType()
     {
         $filter = new Ids();
@@ -85,11 +95,14 @@ class IdsTest extends BaseTest
         $filter->addId(104);
 
         $query = Query::create($filter);
-        $resultSet = $this->_type->search($query);
+        $resultSet = $this->_getTypeForTest()->search($query);
 
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testComboIdsSearchArray()
     {
         $filter = new Ids();
@@ -97,11 +110,14 @@ class IdsTest extends BaseTest
         $filter->addId('39');
 
         $query = Query::create($filter);
-        $resultSet = $this->_type->search($query);
+        $resultSet = $this->_getTypeForTest()->search($query);
 
         $this->assertEquals(4, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testSetTypeSingleSearchSingle()
     {
         $filter = new Ids();
@@ -109,11 +125,14 @@ class IdsTest extends BaseTest
         $filter->setType('helloworld1');
 
         $query = Query::create($filter);
-        $resultSet = $this->_index->search($query);
+        $resultSet = $this->_getIndexForTest()->search($query);
 
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testSetTypeSingleSearchArray()
     {
         $filter = new Ids();
@@ -121,11 +140,14 @@ class IdsTest extends BaseTest
         $filter->setType('helloworld1');
 
         $query = Query::create($filter);
-        $resultSet = $this->_index->search($query);
+        $resultSet = $this->_getIndexForTest()->search($query);
 
         $this->assertEquals(2, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testSetTypeSingleSearchSingleDocInOtherType()
     {
         $filter = new Ids();
@@ -135,12 +157,15 @@ class IdsTest extends BaseTest
         $filter->setType('helloworld1');
 
         $query = Query::create($filter);
-        $resultSet = $this->_type->search($query);
+        $resultSet = $this->_getTypeForTest()->search($query);
 
         // ...therefore 0 results should be returned
         $this->assertEquals(0, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testSetTypeSingleSearchArrayDocInOtherType()
     {
         $filter = new Ids();
@@ -150,12 +175,15 @@ class IdsTest extends BaseTest
         $filter->setType('helloworld1');
 
         $query = Query::create($filter);
-        $resultSet = $this->_type->search($query);
+        $resultSet = $this->_getTypeForTest()->search($query);
 
         // ...therefore only 1 result should be returned
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testSetTypeArraySearchArray()
     {
         $filter = new Ids();
@@ -163,11 +191,14 @@ class IdsTest extends BaseTest
         $filter->setType(array('helloworld1', 'helloworld2'));
 
         $query = Query::create($filter);
-        $resultSet = $this->_index->search($query);
+        $resultSet = $this->_getIndexForTest()->search($query);
 
         $this->assertEquals(4, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testSetTypeArraySearchSingle()
     {
         $filter = new Ids();
@@ -175,11 +206,14 @@ class IdsTest extends BaseTest
         $filter->setType(array('helloworld1', 'helloworld2'));
 
         $query = Query::create($filter);
-        $resultSet = $this->_index->search($query);
+        $resultSet = $this->_getIndexForTest()->search($query);
 
         $this->assertEquals(2, $resultSet->count());
     }
 
+    /**
+     * @group unit
+     */
     public function testFilterTypeAndTypeCollision()
     {
         // This test ensures that Elastica\Type and Elastica\Filter\Type
@@ -190,15 +224,20 @@ class IdsTest extends BaseTest
         $filter = new Ids();
     }
 
+    /**
+     * @group unit
+     */
     public function testAddType()
     {
+        $type = $this->_getClient()->getIndex('indexname')->getType('typename');
+
         $filter = new Ids();
 
         $filter->addType('foo');
         $this->assertEquals(array('foo'), $filter->getParam('type'));
 
-        $filter->addType($this->_type);
-        $this->assertEquals(array('foo', $this->_type->getName()), $filter->getParam('type'));
+        $filter->addType($type);
+        $this->assertEquals(array('foo', $type->getName()), $filter->getParam('type'));
 
         $returnValue = $filter->addType('bar');
         $this->assertInstanceOf('Elastica\Filter\Ids', $returnValue);

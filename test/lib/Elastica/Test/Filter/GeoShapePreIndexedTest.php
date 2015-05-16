@@ -11,6 +11,9 @@ use Elastica\Test\Base as BaseTest;
 
 class GeoShapePreIndexedTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testGeoProvided()
     {
         $index = $this->_createIndex();
@@ -88,6 +91,9 @@ class GeoShapePreIndexedTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group unit
+     */
     public function testSetRelation()
     {
         $gsp = new GeoShapePreIndexed('location', '1', 'type', 'indexName', 'location');

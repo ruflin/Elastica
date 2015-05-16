@@ -8,6 +8,9 @@ use Elastica\Test\Base as BaseTest;
 
 class AbstractMultiTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testConstruct()
     {
         $stub = $this->getStub();
@@ -15,6 +18,9 @@ class AbstractMultiTest extends BaseTest
         $this->assertEmpty($stub->getFilters());
     }
 
+    /**
+     * @group unit
+     */
     public function testAddFilter()
     {
         $stub = $this->getStub();
@@ -29,6 +35,9 @@ class AbstractMultiTest extends BaseTest
         $this->assertEquals($expected, $stub->getFilters());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetFilters()
     {
         $stub = $this->getStub();
@@ -43,6 +52,9 @@ class AbstractMultiTest extends BaseTest
         $this->assertEquals($expected, $stub->getFilters());
     }
 
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $stub = $this->getStub();
@@ -59,6 +71,9 @@ class AbstractMultiTest extends BaseTest
         $this->assertEquals($expected, $stub->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testToArrayWithParam()
     {
         $stub = $this->getStub();

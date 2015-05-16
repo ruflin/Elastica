@@ -2,12 +2,16 @@
 
 namespace Elastica\Test\Filter;
 
+use Elastica\Document;
 use Elastica\Filter\Terms;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Query;
 
 class TermsTest extends BaseTest
 {
-
+    /**
+     * @group functional
+     */
     public function testLookup()
     {
         $index = $this->_createIndex();
@@ -15,19 +19,21 @@ class TermsTest extends BaseTest
         $type2 = $index->getType('bands');
 
         //index some test data
-        $type1->addDocument(new \Elastica\Document(1, array('name' => 'robert', 'lastName' => 'plant')));
-        $type1->addDocument(new \Elastica\Document(2, array('name' => 'jimmy', 'lastName' => 'page')));
-        $type1->addDocument(new \Elastica\Document(3, array('name' => 'john paul', 'lastName' => 'jones')));
-        $type1->addDocument(new \Elastica\Document(4, array('name' => 'john', 'lastName' => 'bonham')));
-        $type1->addDocument(new \Elastica\Document(5, array('name' => 'jimi', 'lastName' => 'hendrix')));
+        $type1->addDocuments(array(
+            new Document(1, array('name' => 'robert', 'lastName' => 'plant')),
+            new Document(2, array('name' => 'jimmy', 'lastName' => 'page')),
+            new Document(3, array('name' => 'john paul', 'lastName' => 'jones')),
+            new Document(4, array('name' => 'john', 'lastName' => 'bonham')),
+            new Document(5, array('name' => 'jimi', 'lastName' => 'hendrix')),
+        ));
 
-        $type2->addDocument(new \Elastica\Document('led zeppelin', array('members' => array('plant', 'page', 'jones', 'bonham'))));
+        $type2->addDocument(new Document('led zeppelin', array('members' => array('plant', 'page', 'jones', 'bonham'))));
         $index->refresh();
 
         //use the terms lookup feature to query for some data
         $termsFilter = new Terms();
         $termsFilter->setLookup('lastName', $type2, 'led zeppelin', 'members', null);
-        $query = new \Elastica\Query();
+        $query = new Query();
         $query->setPostFilter($termsFilter);
         $results = $index->search($query);
         $this->assertEquals($results->count(), 4, 'Terms lookup with null index');
@@ -52,6 +58,9 @@ class TermsTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group unit
+     */
     public function testSetExecution()
     {
         $filter = new Terms('color', array('blue', 'green'));
@@ -63,6 +72,9 @@ class TermsTest extends BaseTest
         $this->assertInstanceOf('Elastica\Filter\Terms', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetTerms()
     {
         $field = 'color';
@@ -77,6 +89,9 @@ class TermsTest extends BaseTest
         $this->assertInstanceOf('Elastica\Filter\Terms', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testAddTerm()
     {
         $filter = new Terms('color', array('blue'));
@@ -89,6 +104,9 @@ class TermsTest extends BaseTest
         $this->assertInstanceOf('Elastica\Filter\Terms', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $filter = new Terms('color', array());
@@ -101,6 +119,7 @@ class TermsTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testToArrayInvalidException()
