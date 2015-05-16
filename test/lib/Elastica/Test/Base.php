@@ -91,9 +91,12 @@ class Base extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
+        if ($this->_isFunctionalGroup()) {
+            $this->_getClient()->getIndex('_all')->delete();
+            $this->_getClient()->getIndex('_all')->clearCache();
+        }
+
         parent::tearDown();
-        $this->_getClient()->getIndex('_all')->delete();
-        $this->_getClient()->getIndex('_all')->clearCache();
     }
 
     protected function _isUnitGroup()
