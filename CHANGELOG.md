@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 - Multiple rescore query [#820](https://github.com/ruflin/Elastica/issues/820/)
-- Support for a custom connection timeout through a connectTimeout parameter. CURLOPT_CONNECTTIMEOUT added to the HTTP transport curl options if a connectTimeout is >0 #841
+- Support for a custom connection timeout through a connectTimeout parameter. [#841](https://github.com/ruflin/Elastica/issues/841/)
 - SignificantTerms Aggregation [#847](https://github.com/ruflin/Elastica/issues/847/)
 
 
