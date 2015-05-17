@@ -9,11 +9,11 @@ php:
   - hhvm
 
 matrix:
-    allow_failures:
-        - php: 5.3
-        - php: 7
-        - php: hhvm
-    fast_finish: true
+  allow_failures:
+    - php: 5.3
+    - php: 7
+    - php: hhvm
+  fast_finish: true
 
 env:
   matrix:
@@ -29,14 +29,12 @@ before_script:
   - if [ $ES_COMPOSER_NODEV == "no" ] && ! $(phpenv version-name | grep -q '5.3'); then sudo composer require "guzzlehttp/guzzle" "4.2.*" --dev --no-ansi --no-progress --no-interaction; fi
 
 script:
-  - phpunit -c test/ --group functional --coverage-php build/coverage/functional.cov
-  - phpunit -c test/ --group shutdown --coverage-php build/coverage/shutdown.cov
-  - phpunit -c test/ --group unit --coverage-php build/coverage/unit.cov
+  - phpunit -c test/ --coverage-clover build/coverage/clover-functional.xml --group functional
+  - phpunit -c test/ --coverage-clover build/coverage/clover-shutdown.xml --group shutdown
+  - phpunit -c test/ --coverage-clover build/coverage/clover-unit.xml --group unit
 
 after_script:
   - cat /var/log/elasticsearch/*.log
   - cat /var/log/nginx/*.log
   - sudo rm composer.lock && sudo composer require satooshi/php-coveralls dev-master --no-ansi --no-progress --no-interaction
-  - sudo rm composer.lock && sudo composer require phpunit/phpcov --no-ansi --no-progress --no-interaction
-  - vendor/bin/phpcov merge --clover build/coverage/clover.xml build/coverage/
   - vendor/bin/coveralls -v
