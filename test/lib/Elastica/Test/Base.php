@@ -46,7 +46,8 @@ class Base extends \PHPUnit_Framework_TestCase
      */
     protected function _getProxyUrl()
     {
-        return "http://127.0.0.1:12345";
+        $proxyHost = getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
+        return 'http://' . $proxyHost . ':12345';
     }
 
     /**
@@ -54,7 +55,8 @@ class Base extends \PHPUnit_Framework_TestCase
      */
     protected function _getProxyUrl403()
     {
-        return "http://127.0.0.1:12346";
+        $proxyHost = getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
+        return 'http://' . $proxyHost . ':12346';
     }
 
     /**

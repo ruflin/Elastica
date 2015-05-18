@@ -38,3 +38,6 @@ after_script:
   - cat /var/log/nginx/*.log
   - sudo rm composer.lock && sudo composer require satooshi/php-coveralls dev-master --no-ansi --no-progress --no-interaction
   - vendor/bin/coveralls -v
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
