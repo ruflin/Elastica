@@ -20,9 +20,6 @@ env:
     - ES_COMPOSER_NODEV=no
     - ES_COMPOSER_NODEV=yes
 
-before_insll:
-  - pip install codecov
-
 install:
   - /bin/bash ansible/provision.sh
 
@@ -42,4 +39,4 @@ after_script:
   - php vendor/bin/coveralls -v
 
 after_success:
-  - codecov
+  - bash <(curl -s https://codecov.io/bash)
