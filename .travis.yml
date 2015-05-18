@@ -20,6 +20,9 @@ env:
     - ES_COMPOSER_NODEV=no
     - ES_COMPOSER_NODEV=yes
 
+before_insll:
+  - pip install codecov
+
 install:
   - /bin/bash ansible/provision.sh
 
@@ -37,3 +40,6 @@ after_script:
   - cat build/logs/phpunit-tap.log
   - sudo composer require satooshi/php-coveralls --no-ansi --no-progress --no-interaction
   - php vendor/bin/coveralls -v
+
+after_success:
+  - codecov
