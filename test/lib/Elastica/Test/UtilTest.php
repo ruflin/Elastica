@@ -84,14 +84,14 @@ class UtilTest extends BaseTest
         $data = array('key' => 'value');
 
         $connection = new Connection();
-        $connection->setHost('localhost');
+        $connection->setHost($this->_getHost());
         $connection->setPort('9200');
 
         $request = new Request($path, $method, $data, $query, $connection);
 
         $curlCommand = Util::convertRequestToCurlCommand($request);
 
-        $expected = 'curl -XPOST \'http://localhost:9200/test?no=params\' -d \'{"key":"value"}\'';
+        $expected = 'curl -XPOST \'http://' . $this->_getHost() . ':9200/test?no=params\' -d \'{"key":"value"}\'';
         $this->assertEquals($expected, $curlCommand);
     }
 
@@ -117,72 +117,5 @@ class UtilTest extends BaseTest
         $date = date('Y-m-d\TH:i:s\Z', $timestamp);
 
         $this->assertEquals($convertedString, $date);
-    }
-
-    public function testCopy()
-    {
-        $client = $this->_getClient();
-        $oldIndex = $client->getIndex("elastica_test_reindex");
-        $oldIndex->create(array(
-            'number_of_shards' => 4,
-            'number_of_replicas' => 1,
-        ),true);
-
-        $newIndex = $client->getIndex("elastica_test_reindex_v2");
-        $newIndex->create(array(
-            'number_of_shards' => 4,
-            'number_of_replicas' => 1,
-        ),true);
-
-        $type1 = $oldIndex->getType("test1");
-        $type2 = $oldIndex->getType("test2");
-
-        $documents1[] = $type1->createDocument(1, array('name' => 'Xwei1'));
-        $documents1[] = $type1->createDocument(2, array('name' => 'Xwei2'));
-        $documents1[] = $type1->createDocument(3, array('name' => 'Xwei3'));
-        $documents1[] = $type1->createDocument(4, array('name' => 'Xwei4'));
-
-        $documents2[] = $type2->createDocument(1, array('name' => 'Xwei5'));
-        $documents2[] = $type2->createDocument(2, array('name' => 'Xwei6'));
-        $documents2[] = $type2->createDocument(3, array('name' => 'Xwei7'));
-        $documents2[] = $type2->createDocument(4, array('name' => 'Xwei8'));
-
-        $type1->addDocuments($documents1);
-        $type2->addDocuments($documents2);
-
-        $oldIndex->refresh();
-
-
-        $this->assertInstanceOf('Elastica\Index', Util::copy($oldIndex, $newIndex,"1m",1));
-
-        $newCount = $newIndex->count();
-        $this->assertEquals(8, $newCount);
-    }
-
-    public function testCopyFail()
-    {
-        $client = $this->_getClient();
-
-        $oldIndex = $client->getIndex("elastica_test_reindex");
-        $oldIndex->create(array(
-            'number_of_shards' => 4,
-            'number_of_replicas' => 1,
-        ), true);
-
-        $newIndex = $client->getIndex("elastica_test_reindex_v2");
-        $newIndex->create(array(
-            'number_of_shards' => 4,
-            'number_of_replicas' => 1,
-        ), true);
-
-        $newIndex2 = $client->getIndex("elastica_test_reindex_v2");
-        $newIndex2->delete();
-
-        try {
-            Util::copy($oldIndex, $newIndex);
-            $this->fail('New Index should not exist');
-        } catch (ResponseException $e) {
-            $this->assertContains('IndexMissingException', $e->getMessage());
-        }
     }
 }

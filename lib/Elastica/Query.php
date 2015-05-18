@@ -401,12 +401,23 @@ class Query extends Param
     /**
      * Add a Rescore
      *
-     * @param  \Elastica\Rescore\AbstractRescore $rescore suggestion object
+     * @param  mixed $rescore suggestion object
      * @return $this
      */
     public function setRescore($rescore)
     {
-        return $this->setParam('rescore', $rescore->toArray());
+        if (is_array($rescore)) {
+            $buffer = array();
+
+            foreach($rescore as $rescoreQuery) {
+                $buffer []= $rescoreQuery->toArray();
+            }
+        }
+        else {
+            $buffer = $rescore->toArray();
+        }
+
+        return $this->setParam('rescore', $buffer);
     }
 
     /**

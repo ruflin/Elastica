@@ -1,106 +1,105 @@
-CHANGES
+# Change Log
+All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-2015-05-11
-- Update elasticsearch dependency to elasticsearch 1.5.2 https://www.elastic.co/downloads/past-releases/elasticsearch-1-5-2 #834
-- Add testing on PHP 7 on Travis #826
+## [Unreleased](https://github.com/ruflin/Elastica/compare/2.0.0...HEAD)
 
-2015-05-06
-- Add Elastica\Util::copy function by scan and bulk way http://www.elastic.co/guide/en/elasticsearch/guide/master/reindex.html. Note: This was first called reindex #829 #931 ##836
+### Added
+- Multiple rescore query [#820](https://github.com/ruflin/Elastica/issues/820/)
+- Support for a custom connection timeout through a connectTimeout parameter. [#841](https://github.com/ruflin/Elastica/issues/841/)
+- SignificantTerms Aggregation [#847](https://github.com/ruflin/Elastica/issues/847/)
 
-2015-04-23
-- Allow bool in Query::setSource function #818 http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
-- Fix empty bool query to act as match all query #817
 
-2015-04-15
-- deleteByQuery() implemented in Elastica\Index #816
+### Improvements
+- Introduction of Changelog standard based on http://keepachangelog.com/. changes.txt moved to CHANGELOG.md [#844](https://github.com/ruflin/Elastica/issues/844/)
+- Make host for all tests dynamic to prepare it for a more dynamic test environment #846
 
-2015-04-11
-- Add MLT query against documents #814
 
-2015-04-09
-- Added Elastica\Query\SimpleQueryString::setMinimumShouldMatch
-- Added Elastica\Query\FunctionScore::setMinScore
-- Added Elastica\Query\MoreLikeThis::setMinimumShouldMatch
 
-2015-04-08
-- Added new methods to Elastica\Aggregation\DateHistogram: setOffset, setTimezone
-- Following methods in Elastica\Aggregation\DateHistogram marked as deprecated: setPreOffset, setPostOffset, setPreZone, setPostZone, setPreZoneAdjustLargeInterval
-- Add Elastica\Facet\DateHistogram::setFactor() #806
 
-2015-04-07
-- [BC break] Elastica\Query\QueryString::setLowercaseExpandedTerms removed
-- Added Elastica\Query\QueryString::setTimezone
 
-2015-04-06
-- Update Elasticsearch version to 1.5 #813
-- Added deprecation notice to Elastica\Transport\Thrift, Elastica\Transport\Memcached and Elastica\Type::deleteByQuery
 
-2015-04-03
-- Add .editorconfig #807
+## [2.0.0](https://github.com/ruflin/Elastica/releases/tag/2.0.0) - 2015-05-11
 
-2015-03-29
-- Added Elastica\Suggest\Completion #808
-- Fix elasticsearch links to elastic domain #809
 
-2015-03-12
-- Fixed short match construction in query DSL #796
-- Index optimize method to return Response object. #797
+### Backward Compatibility Breaks
+- Elastica\Query\QueryString::setLowercaseExpandedTerms removed [#813](https://github.com/ruflin/Elastica/issues/813/)
+- Update elasticsearch dependency to elasticsearch 1.5.2 https://www.elastic.co/downloads/past-releases/elasticsearch-1-5-2 [#834](https://github.com/ruflin/Elastica/issues/834/)
+- Added deprecation notice to Elastica\Transport\Thrift, Elastica\Transport\Memcached and Elastica\Type::deleteByQuery  [#817](https://github.com/ruflin/Elastica/issues/817/)
+- Escape new symbols in Util::escapeTerm [#795](https://github.com/ruflin/Elastica/issues/795/)
 
-2015-03-04
-- Escape new symbols in Util::escapeTerm #795
+### Bugfixes
+- Fix empty bool query to act as match all query [#817](https://github.com/ruflin/Elastica/issues/817/)
+- Fixed short match construction in query DSL [#796](https://github.com/ruflin/Elastica/issues/796/)
+- Index optimize method to return Response object. [#797](https://github.com/ruflin/Elastica/issues/797/)
+- Fix fluent interface inconsistency [#788](https://github.com/ruflin/Elastica/issues/788/)
 
-2015-02-22
-- Added Elastica\Query\Image #787
 
-2015-02-21
+### Improvements
+- Add testing on PHP 7 on Travis [#826](https://github.com/ruflin/Elastica/issues/826/)
+- Allow bool in Query::setSource function [#818](https://github.com/ruflin/Elastica/issues/818/) http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
+- deleteByQuery() implemented in Elastica\Index [#816](https://github.com/ruflin/Elastica/issues/816/)
+- Add MLT query against documents [#814](https://github.com/ruflin/Elastica/issues/814/)
+- Added Elastica\Query\SimpleQueryString::setMinimumShouldMatch [#813](https://github.com/ruflin/Elastica/issues/813/)
+- Added Elastica\Query\FunctionScore::setMinScore [#813](https://github.com/ruflin/Elastica/issues/813/)
+- Added Elastica\Query\MoreLikeThis::setMinimumShouldMatch [#813](https://github.com/ruflin/Elastica/issues/813/)
+- Added new methods to Elastica\Aggregation\DateHistogram: setOffset, setTimezone [#813](https://github.com/ruflin/Elastica/issues/813/)
+- Following methods in Elastica\Aggregation\DateHistogram marked as deprecated: setPreOffset, setPostOffset, setPreZone, setPostZone, setPreZoneAdjustLargeInterval [#813](https://github.com/ruflin/Elastica/issues/813/)
+- Add Elastica\Facet\DateHistogram::setFactor() [#806](https://github.com/ruflin/Elastica/issues/806/)
+- Added Elastica\Query\QueryString::setTimezone [#813](https://github.com/ruflin/Elastica/issues/813/)
+- Add .editorconfig [#807](https://github.com/ruflin/Elastica/issues/807/)
+- Added Elastica\Suggest\Completion [#808](https://github.com/ruflin/Elastica/issues/808/)
+- Fix elasticsearch links to elastic domain [#809](https://github.com/ruflin/Elastica/issues/809/)
+- Added Elastica\Query\Image [#787](https://github.com/ruflin/Elastica/issues/787/)
 - Add Scrutinizer Code Quality status badge
-- Fix fluent interface inconsistency #788
+- Added support for percentiles aggregation [#786](https://github.com/ruflin/Elastica/issues/786/)
 
-2015-02-18
-- Added support for percentiles aggregation #786
+
+
+## Changelog before 2.0.0
+The changelog before version 2.0.0 was organised by date. All changes can be found below.
 
 2015-02-17
 - Release v1.4.3.0
-- Added Elastica\Query\MatchPhrase #599
-- Added Elastica\Query\MatchPhrasePrefix #599
+- Added Elastica\Query\MatchPhrase [#599](https://github.com/ruflin/Elastica/issues/599/)
+- Added Elastica\Query\MatchPhrasePrefix [#599](https://github.com/ruflin/Elastica/issues/599/)
 
 2015-02-04
 - Reset PHP 5.3 tests and enable compatibility for PHP 5.3 again
 
 2015-02-16
-- Update elasticsearch compatibility to 1.4.3 #782
-- Add support for scripted metric aggrations #780
+- Update elasticsearch compatibility to 1.4.3 [#782](https://github.com/ruflin/Elastica/issues/782/)
+- Add support for scripted metric aggrations [#780](https://github.com/ruflin/Elastica/issues/780/)
 
 2015-02-14
-- Added availability to specify regexp options in \Elastica\Filters\Regexp #583 #777
-- Add HHVM as build in travis #649
+- Added availability to specify regexp options in \Elastica\Filters\Regexp [#583](https://github.com/ruflin/Elastica/issues/583/) [#777](https://github.com/ruflin/Elastica/issues/777/)
+- Add HHVM as build in travis [#649](https://github.com/ruflin/Elastica/issues/649/)
 
 2015-02-11
-- Fixed issue with OutOfMemory exception in travis builds #775
-- Add support for filters aggregation #773
+- Fixed issue with OutOfMemory exception in travis builds [#775](https://github.com/ruflin/Elastica/issues/775/)
+- Add support for filters aggregation [#773](https://github.com/ruflin/Elastica/issues/773/)
 
 2015-01-27
-- Housekeeping, coding standard #764
-- Exception\ElasticsearchException now can be catched like all other exceptions as Exception\ExceptionInterface #762
+- Housekeeping, coding standard [#764](https://github.com/ruflin/Elastica/issues/764/)
+- Exception\ElasticsearchException now can be catched like all other exceptions as Exception\ExceptionInterface [#762](https://github.com/ruflin/Elastica/issues/762/)
 
 2015-01-25
 - Release v1.4.2.0
 
 2015-01-23
-- Added Elastica\Query\Regexp #757
+- Added Elastica\Query\Regexp [#757](https://github.com/ruflin/Elastica/issues/757/)
 
 2015-01-19
-- Update to elasticsearch 1.4.2 #378
+- Update to elasticsearch 1.4.2 [#378](https://github.com/ruflin/Elastica/issues/378/)
 - Remove support for PHP 5.3
 
 2015-01-14
-- added @return annotation to top_hits aggregation DSL method #752
+- added @return annotation to top_hits aggregation DSL method [#752](https://github.com/ruflin/Elastica/issues/752/)
 
 2015-01-07
-- Added Elastica\Aggregation\TopHits #718
+- Added Elastica\Aggregation\TopHits [#718](https://github.com/ruflin/Elastica/issues/718/)
 
 2015-01-05
-- Vagrantfile updated #742
+- Vagrantfile updated [#742](https://github.com/ruflin/Elastica/issues/742/)
 - Plugins updated to ES 1.3.4
 - Since new version of thrift plugin is compatible with ES 1.3.4, plugin added back to test environment
 
@@ -111,79 +110,79 @@ CHANGES
 - (BC break) Removed as added by mistake: Filter\HasChild::setScope, Filter\HasParent::setScope, Filter\Nested::setScoreMode, Filter\Bool::setBoost
 
 2014-12-23
-- Additional Request Body Options for Percolator #737
+- Additional Request Body Options for Percolator [#737](https://github.com/ruflin/Elastica/issues/737/)
 
 2014-12-19
-- making sure id is urlencoded when using updateDocument #734
-- Implement the `weight` in the function score query #735
+- making sure id is urlencoded when using updateDocument [#734](https://github.com/ruflin/Elastica/issues/734/)
+- Implement the `weight` in the function score query [#735](https://github.com/ruflin/Elastica/issues/735/)
 
 2014-12-09
-- Changed setRealWorldErrorLikelihood to setRealWordErrorLikelihood #729
+- Changed setRealWorldErrorLikelihood to setRealWordErrorLikelihood [#729](https://github.com/ruflin/Elastica/issues/729/)
 
 2014-11-23
-- allow to customize the key on a range aggregation #728
+- allow to customize the key on a range aggregation [#728](https://github.com/ruflin/Elastica/issues/728/)
 
 2014-12-14
-- Added fluent interface to Elastica\Query::setRescore #733
+- Added fluent interface to Elastica\Query::setRescore [#733](https://github.com/ruflin/Elastica/issues/733/)
 
 2014-11-30
-- Added transport to support egeloen/http-adapter #727
+- Added transport to support egeloen/http-adapter [#727](https://github.com/ruflin/Elastica/issues/727/)
 
 2014-11-20
-- add cache control parameters support to Elastica\Filter\Bool #725
+- add cache control parameters support to Elastica\Filter\Bool [#725](https://github.com/ruflin/Elastica/issues/725/)
 
 2014-11-19
-- Avoid remove previously added params when adding a suggest to the query #726
+- Avoid remove previously added params when adding a suggest to the query [#726](https://github.com/ruflin/Elastica/issues/726/)
 
 2014-11-16
-- Added Elastica\QueryBuilder #724
+- Added Elastica\QueryBuilder [#724](https://github.com/ruflin/Elastica/issues/724/)
 - Update to elasticsearch 1.4.0
 - Disable official support for PHP 5.3
 
 2014-11-13
-- fixed reserved words in queries which composed of upper case letters (Util::replaceBooleanWords) #722
+- fixed reserved words in queries which composed of upper case letters (Util::replaceBooleanWords) [#722](https://github.com/ruflin/Elastica/issues/722/)
 
 2014-10-31
-- Adding PSR-4 autoloading support #714
+- Adding PSR-4 autoloading support [#714](https://github.com/ruflin/Elastica/issues/714/)
 
 2014-10-29
-- Updated Type::getDocument() exception handling. \Elastica\Exception\ResponseException will be thrown instead of \Elastica\Exception\NotFoundException if the ES response contains any error (i.e: Missing index) (BC break) #687
+- Updated Type::getDocument() exception handling. \Elastica\Exception\ResponseException will be thrown instead of \Elastica\Exception\NotFoundException if the ES response contains any error (i.e: Missing index) (BC break) [#687](https://github.com/ruflin/Elastica/issues/687/)
 
 2014-10-22
-- Added Util::convertDateTimeObject to Util class to easily convert \DateTime objects to required format #709
+- Added Util::convertDateTimeObject to Util class to easily convert \DateTime objects to required format [#709](https://github.com/ruflin/Elastica/issues/709/)
 
 2014-10-15
-- Remove ResponseException catch in Type::getDocument() #704
+- Remove ResponseException catch in Type::getDocument() [#704](https://github.com/ruflin/Elastica/issues/704/)
 
 2014-10-10
-- Fixed Response::isOk() to work better with bulk update api #702
-- Adding magic __call() #700
+- Fixed Response::isOk() to work better with bulk update api [#702](https://github.com/ruflin/Elastica/issues/702/)
+- Adding magic __call() [#700](https://github.com/ruflin/Elastica/issues/700/)
 
 2014-10-05
-- ResultSet creation moved to static ResultSet::create() method #690
-- Accept an options array at Type::updateDocument() #686
-- Improve exception handling in Type::getDocument() #693
+- ResultSet creation moved to static ResultSet::create() method [#690](https://github.com/ruflin/Elastica/issues/690/)
+- Accept an options array at Type::updateDocument() [#686](https://github.com/ruflin/Elastica/issues/686/)
+- Improve exception handling in Type::getDocument() [#693](https://github.com/ruflin/Elastica/issues/693/)
 
 2014-10-04
 - Release v1.3.4.0
-- Update to elasticsearch 1.3.4 #691
+- Update to elasticsearch 1.3.4 [#691](https://github.com/ruflin/Elastica/issues/691/)
 
 2014-09-22
-- Update the branch alias in composer.json to match the library version #683
+- Update the branch alias in composer.json to match the library version [#683](https://github.com/ruflin/Elastica/issues/683/)
 
 2014-09-16
-- Update license in composer.json to match project #681
+- Update license in composer.json to match project [#681](https://github.com/ruflin/Elastica/issues/681/)
 
 2014-09-08
-- Delete execution permission from non-executable files #677
+- Delete execution permission from non-executable files [#677](https://github.com/ruflin/Elastica/issues/677/)
 
 2014-08-25
-- Top-level filter parameter in search has been renamed to post_filter #669 #670
-- Deprecated: Elastica\Query::setFilter() is deprecated. Use Elastica\Query::setPostFilter() instead. #669
-- Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractFilter instead. #669
+- Top-level filter parameter in search has been renamed to post_filter [#669](https://github.com/ruflin/Elastica/issues/669/) [#670](https://github.com/ruflin/Elastica/issues/670/)
+- Deprecated: Elastica\Query::setFilter() is deprecated. Use Elastica\Query::setPostFilter() instead. [#669](https://github.com/ruflin/Elastica/issues/669/)
+- Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractFilter instead. [#669](https://github.com/ruflin/Elastica/issues/669/)
 
 2014-08-22
-- Fixed escaping of / character in Elastica\Util::escapeTerm(), removed usage of JSON_UNESCAPED_SLASHES in Elastica\JSON #660
+- Fixed escaping of / character in Elastica\Util::escapeTerm(), removed usage of JSON_UNESCAPED_SLASHES in Elastica\JSON [#660](https://github.com/ruflin/Elastica/issues/660/)
 
 2014-08-06
 - Add connection pool and connection strategy
@@ -196,53 +195,53 @@ CHANGES
 - Update to elasticsearch version 1.3.0 https://www.elastic.co/downloads/past-releases/1-3-0
 
 2014-07-14
- - Add setQuery() method to Elastica\Query\ConstantScore #653
+ - Add setQuery() method to Elastica\Query\ConstantScore [#653](https://github.com/ruflin/Elastica/issues/653/)
 
 2014-07-12
- - Be able to configure ES host/port via ENV var in test env #652
+ - Be able to configure ES host/port via ENV var in test env [#652](https://github.com/ruflin/Elastica/issues/652/)
 
 2014-07-07
- - Fix FunstionScore Query random_score without seed bug. #647
+ - Fix FunstionScore Query random_score without seed bug. [#647](https://github.com/ruflin/Elastica/issues/647/)
 
 2014-07-02
-- Add setPostFilter method to Elastica\Query (http://www.elastic.co/guide/en/elasticsearch/guide/current/_post_filter.html) #645
+- Add setPostFilter method to Elastica\Query (http://www.elastic.co/guide/en/elasticsearch/guide/current/_post_filter.html) [#645](https://github.com/ruflin/Elastica/issues/645/)
 
 2014-06-30
-- Add Reverse Nested aggregation (http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html). #642
+- Add Reverse Nested aggregation (http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html). [#642](https://github.com/ruflin/Elastica/issues/642/)
 
 2014-06-14
 - Release v1.2.1.0
-- Removed the requirement to set arguments filter and/or query in Filtered, according to the documentation: http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html #616
+- Removed the requirement to set arguments filter and/or query in Filtered, according to the documentation: http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html [#616](https://github.com/ruflin/Elastica/issues/616/)
 
 2014-06-13
-- Stop ClientTest->testDeleteIdsIdxStringTypeString from failing 1/3 of the time #634
-- Stop ScanAndScrollTest->testQuerySizeOverride from failing frequently for no reason #635
-- rework Document and Script so they can share some infrastructure allowing scripts to specify things like _retry_on_conflict and _routing #629
+- Stop ClientTest->testDeleteIdsIdxStringTypeString from failing 1/3 of the time [#634](https://github.com/ruflin/Elastica/issues/634/)
+- Stop ScanAndScrollTest->testQuerySizeOverride from failing frequently for no reason [#635](https://github.com/ruflin/Elastica/issues/635/)
+- rework Document and Script so they can share some infrastructure allowing scripts to specify things like _retry_on_conflict and _routing [#629](https://github.com/ruflin/Elastica/issues/629/)
 
 2014-06-11
-- Allow bulk API deletes to be routed #631
+- Allow bulk API deletes to be routed [#631](https://github.com/ruflin/Elastica/issues/631/)
 
 2014-06-10
 - Update travis to elasticsearch 1.2.1, disable Thrift plugin as not compatible and fix incompatible tests
 
 2014-06-04
-- Implement Boosting Query (http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html) #625
+- Implement Boosting Query (http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html) [#625](https://github.com/ruflin/Elastica/issues/625/)
 
 2014-06-02
-- add retry_on_conflict support to bulk #623
+- add retry_on_conflict support to bulk [#623](https://github.com/ruflin/Elastica/issues/623/)
 
 2014-06-01
-- toString updated to consider doc_as_upsert if sent an array source #622
+- toString updated to consider doc_as_upsert if sent an array source [#622](https://github.com/ruflin/Elastica/issues/622/)
 
 2014-05-27
-- Fix Aggragations/Filter to work with es v1.2.0 #619
+- Fix Aggragations/Filter to work with es v1.2.0 [#619](https://github.com/ruflin/Elastica/issues/619/)
 
 2014-05-25
-- Added Guzzle transport as an alternative to the default Http transport #618
-- Added Elastica\ScanAndScroll Iterator (http://www.elastic.co/guide/en/elasticsearch/guide/current/scan-scroll.html) #617
+- Added Guzzle transport as an alternative to the default Http transport [#618](https://github.com/ruflin/Elastica/issues/618/)
+- Added Elastica\ScanAndScroll Iterator (http://www.elastic.co/guide/en/elasticsearch/guide/current/scan-scroll.html) [#617](https://github.com/ruflin/Elastica/issues/617/)
 
 2014-05-13
-- Add JSON compat library; Elasticsearch JSON flags and nicer error handling #614
+- Add JSON compat library; Elasticsearch JSON flags and nicer error handling [#614](https://github.com/ruflin/Elastica/issues/614/)
 
 2014-05-12
 - Update dev builds to phpunit 4.1.*
@@ -251,81 +250,81 @@ CHANGES
 - Set processIsolation and backupGlobals to false to speed up tests. processIsolation was very slow with phpunit 4.0.19.
 
 2014-05-05
-- Fix get settings on alaised index #608
-- Added named function for source filtering #605
-- Scroll type constant to Elastica\Search added #607
+- Fix get settings on alaised index [#608](https://github.com/ruflin/Elastica/issues/608/)
+- Added named function for source filtering [#605](https://github.com/ruflin/Elastica/issues/605/)
+- Scroll type constant to Elastica\Search added [#607](https://github.com/ruflin/Elastica/issues/607/)
 
 2014-04-28
-- Added setAnalyzer method to Query\FuzzyLikeThis Class and fixed issue with params not being merged #611
-- Typo fixes #600, #602
-- Remove unreachable return statement #598
+- Added setAnalyzer method to Query\FuzzyLikeThis Class and fixed issue with params not being merged [#611](https://github.com/ruflin/Elastica/issues/611/)
+- Typo fixes [#600](https://github.com/ruflin/Elastica/issues/600/), [#602](https://github.com/ruflin/Elastica/issues/602/)
+- Remove unreachable return statement [#598](https://github.com/ruflin/Elastica/issues/598/)
 
 2014-04-27
 - Release v1.1.1.1
-- Fix missing use in TermsStats->setOrder() #597
-- Replace all instances of ElasticSearch with Elasticsearch #597
+- Fix missing use in TermsStats->setOrder() [#597](https://github.com/ruflin/Elastica/issues/597/)
+- Replace all instances of ElasticSearch with Elasticsearch [#597](https://github.com/ruflin/Elastica/issues/597/)
 
 2014-04-24
-- Fixing the Bool filter with Bool filter children bug #594
+- Fixing the Bool filter with Bool filter children bug [#594](https://github.com/ruflin/Elastica/issues/594/)
 
 2014-04-22
-- Remove useless echo in the Memcache Transport object #595
+- Remove useless echo in the Memcache Transport object [#595](https://github.com/ruflin/Elastica/issues/595/)
 
 2014-04-21
-- escape \ by \\ #592
+- escape \ by \\ [#592](https://github.com/ruflin/Elastica/issues/592/)
 
 2014-04-20
-- Handling of HasChild type parsing bug #585
-- Consolidate Index getMapping tests #591
-- Fix Type::getMapping when using an aliased index #588
+- Handling of HasChild type parsing bug [#585](https://github.com/ruflin/Elastica/issues/585/)
+- Consolidate Index getMapping tests [#591](https://github.com/ruflin/Elastica/issues/591/)
+- Fix Type::getMapping when using an aliased index [#588](https://github.com/ruflin/Elastica/issues/588/)
 
 2014-04-19
 - Release v1.1.1.0
 - Update to elasticsearch 1.1.1 https://www.elastic.co/downloads/past-releases/1-1-1
 - Remove CustomFiltersScore and CustomScore query as removed in elasticsearch 1.1.0 https://github.com/elasticsearch/elasticsearch/pull/5076/files
 - Update Node Info to use plugins instead of plugin (https://github.com/elasticsearch/elasticsearch/pull/5072)
-- Fix mapping issue for aliases #588
+- Fix mapping issue for aliases [#588](https://github.com/ruflin/Elastica/issues/588/)
 
 2014-04-17
-- Only trap real JSON parse errors in Response class #586
+- Only trap real JSON parse errors in Response class [#586](https://github.com/ruflin/Elastica/issues/586/)
 
 2014-04-09
-- Added Cardinality aggregation #581
+- Added Cardinality aggregation [#581](https://github.com/ruflin/Elastica/issues/581/)
 
 2014-04-07
-- Support for Terms filter lookup options #579
+- Support for Terms filter lookup options [#579](https://github.com/ruflin/Elastica/issues/579/)
 
 2014-03-29
 - Update to elasticsearch 1.1.0 https://www.elastic.co/downloads/past-releases/1-1-0
 
 2014-03-26
-- Fixed Query\Match Fuzziness parameter type #576
+- Fixed Query\Match Fuzziness parameter type [#576](https://github.com/ruflin/Elastica/issues/576/)
 
 2014-03-24
 - Release v1.0.1.2
-- Added Filter\Indices #574
+- Added Filter\Indices [#574](https://github.com/ruflin/Elastica/issues/574/)
 
 2014-03-25
-- Allow json string as data srouce for Bulk\Action on update #575
+- Allow json string as data srouce for Bulk\Action on update [#575](https://github.com/ruflin/Elastica/issues/575/)
 
 2014-03-20
-- Allow for request params in delete by query calls #573
+- Allow for request params in delete by query calls [#573](https://github.com/ruflin/Elastica/issues/573/)
 
 2014-03-17
-- Added filters: AbstractGeoShape, GeoShapePreIndexed, GeoShapeProvided #568
+- Added filters: AbstractGeoShape, GeoShapePreIndexed, GeoShapeProvided [#568](https://github.com/ruflin/Elastica/issues/568/)
 
 2014-03-15
-- Percolate existing documents and add percolate options (#570)
+- Percolate existing documents and add percolate options ([#570](https://github.com/ruflin/Elastica/issues/570/))
 
 2014-03-14
-- Added Query\Rescore #441
+- Added Query\Rescore [#441](https://github.com/ruflin/Elastica/issues/441/)
 
 2014-03-13
-- Added missing query options for MultiMatch (operator, minimum_should_match, zero_terms_query, cutoff_frequency, type, fuzziness, prefix_length, max_expansions, analyzer) #569
-- Added missing query options for Match (zero_terms_query, cutoff_frequency) #569
+- Added missing query options for MultiMatch (operator, minimum_should_match, zero_terms_query, cutoff_frequency, type, fuzziness, prefix_length, max_expansions, analyzer) [#569](https://github.com/ruflin/Elastica/issues/569/)
+- Added missing query options for Match (zero_terms_query, cutoff_frequency) [#569](https://github.com/ruflin/Elastica/issues/569/)
 
 2014-03-11
-- Fixed request body reuse in http transport #567
+- Fixed request body reuse in http transport [#567](https://github.com/ruflin/Elastica/issues/567/)
 
 2014-03-08
 - Release v1.0.1.1
@@ -335,28 +334,28 @@ CHANGES
 - Update to memcache 3.0.8 for travis
 
 2014-03-07
-- Add snapshot / restore functionality (Elastica\Snapshot) #566
+- Add snapshot / restore functionality (Elastica\Snapshot) [#566](https://github.com/ruflin/Elastica/issues/566/)
 
 2014-03-04
 - Add PHP 5.6 to travis test environment
-- Improve performance of Elastica/Status->getIndicesWithAlias and aliasExists on clusters with many indices #563
+- Improve performance of Elastica/Status->getIndicesWithAlias and aliasExists on clusters with many indices [#563](https://github.com/ruflin/Elastica/issues/563/)
 
 2014-03-02
 - Release v1.0.1.0
-- Fixed Type->deleteByQuery() not working with Query objects #554
+- Fixed Type->deleteByQuery() not working with Query objects [#554](https://github.com/ruflin/Elastica/issues/554/)
 
 2014-02-27
 - Update to elasticsearch 1.0.1. Update Thrift and Geocluster plugin.
 
 2014-02-25
-- Add JSON_UNESCAPED_UNICODE and JSON_UNESCAPED_SLASHES options in Elastica/Transport/Http, Elastica/Bulk/Action #559
+- Add JSON_UNESCAPED_UNICODE and JSON_UNESCAPED_SLASHES options in Elastica/Transport/Http, Elastica/Bulk/Action [#559](https://github.com/ruflin/Elastica/issues/559/)
 
 2014-02-20
-- Fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route. #558
+- Fixed unregister percolator (still used _percolator instead of .percolator). removed duplicate slash from register percolator route. [#558](https://github.com/ruflin/Elastica/issues/558/)
 
 2014-02-17
 - Throw PartialShardFailureException if response has failed shards
-- Elastica/Aggregations/GlobalAggragation not allowed as sub aggragation #555
+- Elastica/Aggregations/GlobalAggragation not allowed as sub aggragation [#555](https://github.com/ruflin/Elastica/issues/555/)
 
 2014-02-14
 - Add methods setSize, setShardSize to Elastica/Aggregation/Terms
@@ -374,7 +373,7 @@ CHANGES
 - Add aggregations
 
 2014-02-08
-- Setting shard timeout doesn't work #547
+- Setting shard timeout doesn't work [#547](https://github.com/ruflin/Elastica/issues/547/)
 
 2014-02-04
 - Remove Elastica\Query\Field and Elastica\Query\Text, which are not supported in ES 1.0.0.RC1
@@ -462,10 +461,10 @@ CHANGES
 - Remove boost from FunctionScore::addFunction because this is not supported by elasticsearch
 
 2013-12-02
-- Issue #491 resolved
+- Issue [#491](https://github.com/ruflin/Elastica/issues/491/) resolved
 
 2013-12-01
-- Issue #501 resolved
+- Issue [#501](https://github.com/ruflin/Elastica/issues/501/) resolved
 - satooshi/php-coveralls package added for coverall.io
 - Multiple badges for downloads and latest stable release added
 
@@ -483,11 +482,11 @@ CHANGES
 - Added \Elastica\Filter\Regexp
 
 2013-11-16
-- Remove wrong documentation for "no limit" #496
+- Remove wrong documentation for "no limit" [#496](https://github.com/ruflin/Elastica/issues/496/)
 - Update to elasticsearch 0.90.7
 
 2013-11-03
-- Issue #490: Set Elastica\Query\FunctionScore::DECAY_EXPONENTIAL to "exp" instead of "exponential"
+- Issue [#490](https://github.com/ruflin/Elastica/issues/490/): Set Elastica\Query\FunctionScore::DECAY_EXPONENTIAL to "exp" instead of "exponential"
 
 2013-10-29
 - Elastica_Type::exists() added
@@ -606,7 +605,7 @@ CHANGES
 - Update Index\Status::getSettings() to use new API
 
 2013-05-29
-- Add _meta to mapping. #330
+- Add _meta to mapping. [#330](https://github.com/ruflin/Elastica/issues/330/)
 
 2013-05-27
 - Added parameters to implement scroll
@@ -623,8 +622,8 @@ CHANGES
 - Elastica\Index::exists fixed for 0.90.0. HEAD request method introduced
 - Elastica\Filter\AbstractMulti::getFilters() added
 - Implement Elastica\Type\Mapping::enableAllField
-- Refresh for Elastica\Index::flush implemented #316
-- Added optional parameter to filter result while percolate #384
+- Refresh for Elastica\Index::flush implemented [#316](https://github.com/ruflin/Elastica/issues/316/)
+- Added optional parameter to filter result while percolate [#384](https://github.com/ruflin/Elastica/issues/384/)
 
 2013-05-07
 - Added EXPERIMENTAL DocumentObjectInterface to be used with Type::addObject()/addObjects()
@@ -772,8 +771,8 @@ CHANGES
 - Vagrantfile for vagrant environment with elasticsearch added. Run: vagrant up
 
 2012-01-08
-- Allow to set curl params over client config #106 #107
-- Add the possiblity to add path or url in config for a request #120
+- Allow to set curl params over client config [#106](https://github.com/ruflin/Elastica/issues/106/) [#107](https://github.com/ruflin/Elastica/issues/107/)
+- Add the possiblity to add path or url in config for a request [#120](https://github.com/ruflin/Elastica/issues/120/)
 
 2012-01-04
 - Elastica_Index::exists() and Elastica_Cluster::getIndexNames() added
@@ -858,7 +857,7 @@ CHANGES
 - Https transport layer added
 
 2011-08-22
-- Typo in Terms query fixed (issue #74)
+- Typo in Terms query fixed (issue [#74](https://github.com/ruflin/Elastica/issues/74/))
 
 2011-08-15
 - Refactoring HTTP connection to keep alive connection -> speed improvement during using the same client
@@ -915,7 +914,7 @@ CHANGES
 - Release tag v0.16.4.0 added
 
 2011-06-19
-- Add support for multiple servers to Elastica_Client (issue #39)
+- Add support for multiple servers to Elastica_Client (issue [#39](https://github.com/ruflin/Elastica/issues/39/))
 
 2011-06-16
 - Support for multiple index, type queries and _all queries added through Elastica_Search object

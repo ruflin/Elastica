@@ -186,40 +186,4 @@ class Util
 
         return $message;
     }
-
-    /**
-     * Copy all data from and old index to a new index
-     *
-     * @param \Elastica\Index $oldIndex
-     * @param \Elastica\Index $newIndex
-     * @param string $expiryTime
-     * @param int $sizePerShard
-     * @return \Elastica\Index The new index object
-     */
-    public static function copy(Index $oldIndex, Index $newIndex, $expiryTime = '1m', $sizePerShard = 1000)
-    {
-        $search = new Search($oldIndex->getClient());
-        $bulk = new Bulk($newIndex->getClient());
-        $bulk->setIndex($newIndex);
-
-        $search->addIndex($oldIndex);
-        $search->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_SCAN);
-        $scanAndScroll = new ScanAndScroll($search, $expiryTime, $sizePerShard);
-
-        foreach ($scanAndScroll as $resultSet) {
-            $data = $resultSet->getResponse()->getData();
-            $actions = array();
-            foreach ($data['hits']['hits'] as $d) {
-                $meta = array('_index' => $newIndex->getName() , '_type' => $d['_type'], '_id' => $d['_id']);
-                $actions[] = new Action(Action::OP_TYPE_INDEX, $meta ,$d['_source']);
-            }
-            //$actions = new Bulk\Action();
-            $bulk->addActions($actions);
-            $bulk->send();
-        }
-
-        $newIndex->refresh();
-
-        return $newIndex;
-    }
 }

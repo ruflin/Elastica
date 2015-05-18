@@ -19,9 +19,9 @@ class ThriftTest extends BaseTest
 
     public function testConstruct()
     {
-        $host = 'localhost';
+        $host = $this->_getHost();
         $port = 9500;
-        $client = new Client(array('host' => $host, 'port' => $port, 'transport' => 'Thrift'));
+        $client = $this->_getClient(array('host' => $host, 'port' => $port, 'transport' => 'Thrift'));
 
         $this->assertEquals($host, $client->getConnection()->getHost());
         $this->assertEquals($port, $client->getConnection()->getPort());
@@ -35,7 +35,7 @@ class ThriftTest extends BaseTest
         $this->_checkPlugin();
 
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = new Client($config);
+        $client = $this->_getClient($config);
 
         $index = $client->getIndex('elastica_test1');
         $index->create(array(), true);
@@ -73,7 +73,7 @@ class ThriftTest extends BaseTest
     {
         $this->_checkPlugin();
 
-        $client = new Client(array('host' => 'unknown', 'port' => 9555, 'transport' => 'Thrift'));
+        $client = $this->_getClient(array('host' => 'unknown', 'port' => 9555, 'transport' => 'Thrift'));
         $client->getStatus();
     }
 
@@ -85,11 +85,11 @@ class ThriftTest extends BaseTest
         $this->_checkPlugin();
 
         $connection = new Connection();
-        $connection->setHost('localhost');
+        $connection->setHost($this->_getHost());
         $connection->setPort(9500);
         $connection->setTransport('Thrift');
 
-        $client = new Client();
+        $client = $this->_getClient();
         $client->addConnection($connection);
 
         $index = new Index($client, 'missing_index');
@@ -101,14 +101,14 @@ class ThriftTest extends BaseTest
         return array(
             array(
                 array(
-                    'host' => 'localhost',
+                    'host' => $this->_getHost(),
                     'port' => 9500,
                     'transport' => 'Thrift',
                 ),
             ),
             array(
                 array(
-                    'host' => 'localhost',
+                    'host' => $this->_getHost(),
                     'port' => 9500,
                     'transport' => 'Thrift',
                     'config' => array(

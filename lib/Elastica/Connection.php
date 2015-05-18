@@ -38,6 +38,12 @@ class Connection extends Param
     const TIMEOUT = 300;
 
     /**
+     * Number of seconds after a connection timeout occurs for every request during the connection phase.
+     * @see Connection::setConnectTimeout();
+     */
+    const CONNECT_TIMEOUT = 0;
+
+    /**
      * Creates a new connection object. A connection is enabled by default
      *
      * @param array $params OPTIONAL Connection params: host, port, transport, timeout. All are optional
@@ -157,6 +163,29 @@ class Connection extends Param
     public function getTimeout()
     {
         return (int) $this->hasParam('timeout') ? $this->getParam('timeout') : self::TIMEOUT;
+    }
+
+    /**
+     * Number of seconds after a connection timeout occurs for every request during the connection phase.
+     * Use a small value if you need a fast fail in case of dead, unresponsive or unreachable servers (~5 sec).
+     *
+     * Set to zero to switch to the default built-in connection timeout (300 seconds in curl).
+     * @see http://curl.haxx.se/libcurl/c/CURLOPT_CONNECTTIMEOUT.html
+     *
+     * @param  int   $timeout Connect timeout in seconds
+     * @return $this
+     */
+    public function setConnectTimeout($timeout)
+    {
+        return $this->setParam('connectTimeout', $timeout);
+    }
+
+    /**
+     * @return int Connection timeout in seconds
+     */
+    public function getConnectTimeout()
+    {
+        return (int) $this->hasParam('connectTimeout') ? $this->getParam('connectTimeout') : self::CONNECT_TIMEOUT;
     }
 
     /**

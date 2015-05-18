@@ -36,7 +36,7 @@ class RequestTest extends BaseTest
     public function testSend()
     {
         $connection = new Connection();
-        $connection->setHost('localhost');
+        $connection->setHost($this->_getHost());
         $connection->setPort('9200');
 
         $request = new Request('_status', Request::GET, array(), array(), $connection);
@@ -54,7 +54,7 @@ class RequestTest extends BaseTest
         $data = array('key' => 'value');
 
         $connection = new Connection();
-        $connection->setHost('localhost');
+        $connection->setHost($this->_getHost());
         $connection->setPort('9200');
 
         $request = new Request($path, $method, $data, $query, $connection);

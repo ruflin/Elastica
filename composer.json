@@ -16,9 +16,7 @@
         "psr/log": "~1.0"
     },
     "require-dev": {
-        "munkie/elasticsearch-thrift-php": "1.4.*",
-        "phpunit/phpunit": "4.1.*",
-        "fabpot/php-cs-fixer": "~1.4"
+        "munkie/elasticsearch-thrift-php": "1.4.*"
     },
     "suggest": {
         "munkie/elasticsearch-thrift-php": "Allow using thrift transport",
@@ -34,7 +32,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.4.x-dev"
+            "dev-master": "2.0.x-dev"
         }
     }
 }
