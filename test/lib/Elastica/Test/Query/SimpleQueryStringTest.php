@@ -9,6 +9,9 @@ use Elastica\Test\Base;
 
 class SimpleQueryStringTest extends Base
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $string = "this is a test";
@@ -29,6 +32,9 @@ class SimpleQueryStringTest extends Base
         $this->assertEquals($expected, $query->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testQuery()
     {
         $index = $this->_createIndex();
@@ -54,6 +60,9 @@ class SimpleQueryStringTest extends Base
         $this->assertEquals(0, $results->getTotalHits());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetMinimumShouldMatch()
     {
         $expected = array(
@@ -70,6 +79,9 @@ class SimpleQueryStringTest extends Base
         $this->assertInstanceOf('Elastica\Query\SimpleQueryString', $query->setMinimumShouldMatch('75%'));
     }
 
+    /**
+     * @group functional
+     */
     public function testSetMinimumShouldMatchWorks()
     {
         $index = $this->_createIndex();

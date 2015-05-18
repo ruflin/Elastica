@@ -8,13 +8,9 @@ use Elastica\Test\Base as BaseTest;
  */
 class ShutdownTest extends BaseTest
 {
-    protected function tearDown()
-    {
-        // We can't use Elastica\Test\Base::tearDown here,
-        // because cluster was shutted down and indices can't be anymore deleted.
-        // So, just do nothing
-    }
-
+    /**
+     * @group shutdown
+     */
     public function testNodeShutdown()
     {
         // Get cluster nodes
@@ -47,6 +43,7 @@ class ShutdownTest extends BaseTest
     }
 
     /**
+     * @group shutdown
      * @depends testNodeShutdown
      * @expectedException \Elastica\Exception\Connection\HttpException
      */

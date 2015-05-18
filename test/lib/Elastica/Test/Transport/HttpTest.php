@@ -10,10 +10,10 @@ use Elastica\Test\Base as BaseTest;
 
 class HttpTest extends BaseTest
 {
-    public function setUp()
+    public static function setUpBeforeClass()
     {
         if (defined('DEBUG') && !DEBUG) {
-            $this->markTestSkipped('The DEBUG constant must be set to true for this test to run');
+            self::markTestSkipped('The DEBUG constant must be set to true for this test to run');
         }
 
         if (!defined('DEBUG')) {
@@ -45,6 +45,7 @@ class HttpTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @dataProvider getConfig
      */
     public function testDynamicHttpMethodBasedOnConfigParameter(array $config, $httpMethod)
@@ -67,6 +68,7 @@ class HttpTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @dataProvider getConfig
      */
     public function testDynamicHttpMethodOnlyAffectsRequestsWithBody(array $config, $httpMethod)
@@ -78,6 +80,9 @@ class HttpTest extends BaseTest
         $this->assertStringStartsWith('GET', $info['request_header']);
     }
 
+    /**
+     * @group functional
+     */
     public function testCurlNobodyOptionIsResetAfterHeadRequest()
     {
         $client = $this->_getClient();
@@ -104,6 +109,9 @@ class HttpTest extends BaseTest
         $this->assertEquals($id, $doc->getId());
     }
 
+    /**
+     * @group functional
+     */
     public function testUnicodeData()
     {
         $client = $this->_getClient();
@@ -136,6 +144,9 @@ class HttpTest extends BaseTest
         $this->assertEquals($id, $doc->getId());
     }
 
+    /**
+     * @group functional
+     */
     public function testWithEnvironmentalProxy()
     {
         putenv('http_proxy=' . $this->_getProxyUrl() . '/');
@@ -151,6 +162,9 @@ class HttpTest extends BaseTest
         putenv('http_proxy=');
     }
 
+    /**
+     * @group functional
+     */
     public function testWithEnabledEnvironmentalProxy()
     {
         putenv('http_proxy=' . $this->_getProxyUrl403() . '/');
@@ -164,6 +178,9 @@ class HttpTest extends BaseTest
         putenv('http_proxy=');
     }
 
+    /**
+     * @group functional
+     */
     public function testWithProxy()
     {
         $client = $this->_getClient();
@@ -173,6 +190,9 @@ class HttpTest extends BaseTest
         $this->assertEquals(200, $transferInfo['http_code']);
     }
 
+    /**
+     * @group functional
+     */
     public function testWithoutProxy()
     {
         $client = $this->_getClient();
@@ -182,6 +202,9 @@ class HttpTest extends BaseTest
         $this->assertEquals(200, $transferInfo['http_code']);
     }
 
+    /**
+     * @group functional
+     */
     public function testBodyReuse()
     {
         $client = $this->_getClient();
@@ -211,6 +234,9 @@ class HttpTest extends BaseTest
         $this->assertEquals(1, $resultSet->getTotalHits());
     }
 
+    /**
+     * @group functional
+     */
     public function testPostWith0Body()
     {
         $client = $this->_getClient();

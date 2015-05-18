@@ -9,36 +9,43 @@ use Elastica\Type\Mapping;
 
 class DateHistogramTest extends BaseAggregationTest
 {
-    protected function setUp()
+    protected function _getIndexForTest()
     {
-        parent::setUp();
-        $this->_index = $this->_createIndex();
-        $mapping = new Mapping();
-        $mapping->setProperties(array(
+        $index = $this->_createIndex();
+        $type = $index->getType("test");
+
+        $type->setMapping(new Mapping(null, array(
             "created" => array("type" => "date"),
+        )));
+
+        $type->addDocuments(array(
+            new Document(1, array("created" => "2014-01-29T00:20:00")),
+            new Document(2, array("created" => "2014-01-29T02:20:00")),
+            new Document(3, array("created" => "2014-01-29T03:20:00")),
         ));
-        $type = $this->_index->getType("test");
-        $type->setMapping($mapping);
-        $docs = array(
-            new Document("1", array("created" => "2014-01-29T00:20:00")),
-            new Document("2", array("created" => "2014-01-29T02:20:00")),
-            new Document("3", array("created" => "2014-01-29T03:20:00")),
-        );
-        $type->addDocuments($docs);
-        $this->_index->refresh();
+
+        $index->refresh();
+
+        return $index;
     }
 
+    /**
+     * @group functional
+     */
     public function testDateHistogramAggregation()
     {
         $agg = new DateHistogram("hist", "created", "1h");
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_index->search($query)->getAggregation("hist");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation("hist");
 
         $this->assertEquals(3, sizeof($results['buckets']));
     }
 
+    /**
+     * @group unit
+     */
     public function testSetOffset()
     {
         $agg = new DateHistogram('hist', 'created', '1h');
@@ -58,6 +65,9 @@ class DateHistogramTest extends BaseAggregationTest
        $this->assertInstanceOf('Elastica\Aggregation\DateHistogram', $agg->setOffset('3m'));
     }
 
+    /**
+     * @group functional
+     */
     public function testSetOffsetWorks()
     {
         $agg = new DateHistogram('hist', 'created', '1m');
@@ -65,11 +75,14 @@ class DateHistogramTest extends BaseAggregationTest
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_index->search($query)->getAggregation('hist');
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
 
         $this->assertEquals('2014-01-29T00:19:40.000Z', $results['buckets'][0]['key_as_string']);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetTimezone()
     {
         $agg = new DateHistogram('hist', 'created', '1h');

@@ -6,6 +6,9 @@ use Elastica\Exception\ResponseException;
 
 class ResponseExceptionTest extends AbstractExceptionTest
 {
+    /**
+     * @group functional
+     */
     public function testCreateExistingIndex()
     {
         $this->_createIndex('woo', true);
@@ -19,6 +22,9 @@ class ResponseExceptionTest extends AbstractExceptionTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testBadType()
     {
         $index = $this->_createIndex();
@@ -41,6 +47,9 @@ class ResponseExceptionTest extends AbstractExceptionTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testWhatever()
     {
         $index = $this->_createIndex();

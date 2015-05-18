@@ -17,6 +17,9 @@ use Elastica\Type;
 
 class QueryTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testStringConversion()
     {
         $queryString = '{
@@ -55,6 +58,9 @@ class QueryTest extends BaseTest
         $this->assertEquals('2011-07-18 00:00:00', $queryArray['query']['filtered']['filter']['range']['due']['gte']);
     }
 
+    /**
+     * @group unit
+     */
     public function testRawQuery()
     {
         $textQuery = new Term(array('title' => 'test'));
@@ -67,6 +73,9 @@ class QueryTest extends BaseTest
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSuggestShouldNotRemoveOtherParameters()
     {
         $query1 = new Query();
@@ -84,6 +93,9 @@ class QueryTest extends BaseTest
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetSuggestMustReturnQueryInstance()
     {
         $query = new Query();
@@ -91,6 +103,9 @@ class QueryTest extends BaseTest
         $this->assertInstanceOf('Elastica\Query', $query->setSuggest($suggest));
     }
 
+    /**
+     * @group unit
+     */
     public function testArrayQuery()
     {
         $query = array(
@@ -109,17 +124,19 @@ class QueryTest extends BaseTest
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testSetSort()
     {
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'hello world'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('firstname' => 'guschti', 'lastname' => 'ruflin'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('firstname' => 'nicolas', 'lastname' => 'ruflin'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'hello world')),
+            new Document(2, array('firstname' => 'guschti', 'lastname' => 'ruflin')),
+            new Document(3, array('firstname' => 'nicolas', 'lastname' => 'ruflin')),
+        ));
 
         $queryTerm = new Term();
         $queryTerm->setTerm('lastname', 'ruflin');
@@ -151,6 +168,9 @@ class QueryTest extends BaseTest
         $this->assertEquals('guschti', $second['firstname']);
     }
 
+    /**
+     * @group unit
+     */
     public function testAddSort()
     {
         $query = new Query();
@@ -160,6 +180,9 @@ class QueryTest extends BaseTest
         $this->assertEquals($query->getParam('sort'), array($sortParam));
     }
 
+    /**
+     * @group unit
+     */
     public function testSetRawQuery()
     {
         $query = new Query();
@@ -170,6 +193,9 @@ class QueryTest extends BaseTest
         $this->assertEquals($params, $query->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetFields()
     {
         $query = new Query();
@@ -185,6 +211,9 @@ class QueryTest extends BaseTest
         $this->assertCount(2, $data['fields']);
     }
 
+    /**
+     * @group unit
+     */
     public function testGetQuery()
     {
         $query = new Query();
@@ -203,6 +232,9 @@ class QueryTest extends BaseTest
         $this->assertEquals($termQuery->toArray(), $query->getQuery());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetFacets()
     {
         $query = new Query();
@@ -220,6 +252,9 @@ class QueryTest extends BaseTest
         $this->assertArrayNotHasKey('facets', $query->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetQueryToArrayCast()
     {
         $query = new Query();
@@ -235,6 +270,9 @@ class QueryTest extends BaseTest
         $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetQueryToArrayChangeQuery()
     {
         $query = new Query();
@@ -250,6 +288,9 @@ class QueryTest extends BaseTest
         $this->assertEquals($queryArray, $query->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetScriptFieldsToArrayCast()
     {
         $query = new Query();
@@ -266,6 +307,9 @@ class QueryTest extends BaseTest
         $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testAddScriptFieldsToArrayCast()
     {
         $query = new Query();
@@ -281,6 +325,9 @@ class QueryTest extends BaseTest
         $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testAddFacetToArrayCast()
     {
         $query = new Query();
@@ -296,6 +343,9 @@ class QueryTest extends BaseTest
         $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testAddAggregationToArrayCast()
     {
         $query = new Query();
@@ -311,6 +361,9 @@ class QueryTest extends BaseTest
         $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetSuggestToArrayCast()
     {
         $query = new Query();
@@ -327,6 +380,9 @@ class QueryTest extends BaseTest
         $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetRescoreToArrayCast()
     {
         $query = new Query();
@@ -343,6 +399,9 @@ class QueryTest extends BaseTest
         $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetPostFilterToArrayCast()
     {
         $query = new Query();
@@ -358,6 +417,9 @@ class QueryTest extends BaseTest
         $this->assertNotEquals($query->toArray(), $anotherQuery->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testNoSource()
     {
         $index = $this->_createIndex();

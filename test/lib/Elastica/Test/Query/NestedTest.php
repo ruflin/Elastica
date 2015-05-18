@@ -8,6 +8,9 @@ use Elastica\Test\Base as BaseTest;
 
 class NestedTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testSetQuery()
     {
         $nested = new Nested();

@@ -9,11 +9,11 @@ php:
   - hhvm
 
 matrix:
-    allow_failures:
-        - php: 5.3
-        - php: 7
-        - php: hhvm
-    fast_finish: true
+  allow_failures:
+    - php: 5.3
+    - php: 7
+    - php: hhvm
+  fast_finish: true
 
 env:
   matrix:
@@ -24,19 +24,20 @@ install:
   - /bin/bash ansible/provision.sh
 
 before_script:
-  - mkdir -p build/logs
+  - mkdir -p build/logs build/coverage
   - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$TRAVIS_PHP_VERSION" != "7" ]; then echo "extension=memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;'
   - if [ $ES_COMPOSER_NODEV == "no" ] && ! $(phpenv version-name | grep -q '5.3'); then sudo composer require "guzzlehttp/guzzle" "4.2.*" --dev --no-ansi --no-progress --no-interaction; fi
 
 script:
-  - phpunit -c test/phpunit-travis.xml
+  - phpunit -c test/ --coverage-clover build/coverage/clover-functional.xml --group functional
+  - phpunit -c test/ --coverage-clover build/coverage/clover-shutdown.xml --group shutdown
+  - phpunit -c test/ --coverage-clover build/coverage/clover-unit.xml --group unit
 
 after_script:
   - cat /var/log/elasticsearch/*.log
   - cat /var/log/nginx/*.log
-  - cat build/logs/phpunit-tap.log
-  - sudo composer require satooshi/php-coveralls --no-ansi --no-progress --no-interaction
-  - php vendor/bin/coveralls -v
+  - sudo rm composer.lock && sudo composer require satooshi/php-coveralls dev-master --no-ansi --no-progress --no-interaction
+  - vendor/bin/coveralls -v
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

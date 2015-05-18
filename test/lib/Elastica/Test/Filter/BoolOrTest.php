@@ -9,6 +9,9 @@ use Elastica\Test\Base as BaseTest;
 
 class BoolOrTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testAddFilter()
     {
         $filter = $this->getMockForAbstractClass('Elastica\Filter\AbstractFilter');
@@ -17,6 +20,9 @@ class BoolOrTest extends BaseTest
         $this->assertInstanceOf('Elastica\Filter\BoolOr', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $orFilter = new BoolOr();

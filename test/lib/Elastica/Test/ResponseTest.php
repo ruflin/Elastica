@@ -13,6 +13,9 @@ use Elastica\Type\Mapping;
 
 class ResponseTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testClassHierarchy()
     {
         $facet = new DateHistogram('dateHist1');
@@ -21,25 +24,26 @@ class ResponseTest extends BaseTest
         unset($facet);
     }
 
+    /**
+     * @group functional
+     */
     public function testResponse()
     {
         $index = $this->_createIndex();
         $type = $index->getType('helloworld');
 
         $mapping = new Mapping($type, array(
-                'name' => array('type' => 'string', 'store' => 'no'),
-                'dtmPosted' => array('type' => 'date', 'store' => 'no', 'format' => 'yyyy-MM-dd HH:mm:ss'),
-            ));
+            'name' => array('type' => 'string', 'store' => 'no'),
+            'dtmPosted' => array('type' => 'date', 'store' => 'no', 'format' => 'yyyy-MM-dd HH:mm:ss'),
+        ));
         $type->setMapping($mapping);
 
-        $doc = new Document(1, array('name' => 'nicolas ruflin', 'dtmPosted' => "2011-06-23 21:53:00"));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'raul martinez jr', 'dtmPosted' => "2011-06-23 09:53:00"));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'rachelle clemente', 'dtmPosted' => "2011-07-08 08:53:00"));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'elastica search', 'dtmPosted' => "2011-07-08 01:53:00"));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'nicolas ruflin', 'dtmPosted' => "2011-06-23 21:53:00")),
+            new Document(2, array('name' => 'raul martinez jr', 'dtmPosted' => "2011-06-23 09:53:00")),
+            new Document(3, array('name' => 'rachelle clemente', 'dtmPosted' => "2011-07-08 08:53:00")),
+            new Document(4, array('name' => 'elastica search', 'dtmPosted' => "2011-07-08 01:53:00")),
+        ));
 
         $query = new Query();
         $query->setQuery(new MatchAll());
@@ -56,6 +60,9 @@ class ResponseTest extends BaseTest
         $this->assertArrayHasKey('successful', $shardsStats);
     }
 
+    /**
+     * @group functional
+     */
     public function testIsOk()
     {
         $index = $this->_createIndex();
@@ -67,6 +74,9 @@ class ResponseTest extends BaseTest
         $this->assertTrue($response->isOk());
     }
 
+    /**
+     * @group functional
+     */
     public function testIsOkMultiple()
     {
         $index = $this->_createIndex();
@@ -81,6 +91,9 @@ class ResponseTest extends BaseTest
         $this->assertTrue($response->isOk());
     }
 
+    /**
+     * @group unit
+     */
     public function testIsOkBulkWithErrorsField()
     {
         $response = new Response(json_encode(array(
@@ -95,6 +108,9 @@ class ResponseTest extends BaseTest
         $this->assertTrue($response->isOk());
     }
 
+    /**
+     * @group unit
+     */
     public function testIsNotOkBulkWithErrorsField()
     {
         $response = new Response(json_encode(array(
@@ -109,6 +125,9 @@ class ResponseTest extends BaseTest
         $this->assertFalse($response->isOk());
     }
 
+    /**
+     * @group unit
+     */
     public function testIsOkBulkItemsWithOkField()
     {
         $response = new Response(json_encode(array(
@@ -122,6 +141,9 @@ class ResponseTest extends BaseTest
         $this->assertTrue($response->isOk());
     }
 
+    /**
+     * @group unit
+     */
     public function testIsNotOkBulkItemsWithOkField()
     {
         $response = new Response(json_encode(array(
@@ -135,6 +157,9 @@ class ResponseTest extends BaseTest
         $this->assertFalse($response->isOk());
     }
 
+    /**
+     * @group unit
+     */
     public function testIsOkBulkItemsWithStatusField()
     {
         $response = new Response(json_encode(array(
@@ -148,6 +173,9 @@ class ResponseTest extends BaseTest
         $this->assertTrue($response->isOk());
     }
 
+    /**
+     * @group unit
+     */
     public function testIsNotOkBulkItemsWithStatusField()
     {
         $response = new Response(json_encode(array(
@@ -161,6 +189,9 @@ class ResponseTest extends BaseTest
         $this->assertFalse($response->isOk());
     }
 
+    /**
+     * @group functional
+     */
     public function testGetDataEmpty()
     {
         $index = $this->_createIndex();

@@ -10,6 +10,9 @@ use Elastica\Test\Base as BaseTest;
 
 class MatchTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $field = 'test';
@@ -56,6 +59,9 @@ class MatchTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testMatch()
     {
         $client = $this->_getClient();
@@ -63,14 +69,12 @@ class MatchTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'New Hampshire'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Basel Land'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'New Hampshire')),
+            new Document(4, array('name' => 'Basel Land')),
+        ));
 
         $index->refresh();
 
@@ -85,7 +89,10 @@ class MatchTest extends BaseTest
 
         $this->assertEquals(4, $resultSet->count());
     }
-	
+
+    /**
+     * @group functional
+     */
     public function testMatchSetFieldBoost()
     {
         $client = $this->_getClient();
@@ -93,14 +100,12 @@ class MatchTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'New Hampshire'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Basel Land'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'New Hampshire')),
+            new Document(4, array('name' => 'Basel Land')),
+        ));
 
         $index->refresh();
 
@@ -116,7 +121,10 @@ class MatchTest extends BaseTest
 
         $this->assertEquals(4, $resultSet->count());
     }
-	
+
+    /**
+     * @group functional
+     */
     public function testMatchSetFieldBoostWithString()
     {
         $client = $this->_getClient();
@@ -124,14 +132,12 @@ class MatchTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'New Hampshire'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Basel Land'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'New Hampshire')),
+            new Document(4, array('name' => 'Basel Land')),
+        ));
 
         $index->refresh();
 
@@ -148,16 +154,21 @@ class MatchTest extends BaseTest
         $this->assertEquals(4, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testMatchZeroTerm()
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
         $index->create(array(), true);
         $type = $index->getType('test');
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
+
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+        ));
+
         $index->refresh();
 
         $query = new Match();
@@ -169,6 +180,9 @@ class MatchTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testMatchPhrase()
     {
         $client = $this->_getClient();
@@ -176,14 +190,12 @@ class MatchTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'New Hampshire'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Basel Land'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'New Hampshire')),
+            new Document(4, array('name' => 'Basel Land')),
+        ));
 
         $index->refresh();
 
@@ -199,6 +211,9 @@ class MatchTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testMatchPhraseAlias()
     {
         $client = $this->_getClient();
@@ -206,14 +221,12 @@ class MatchTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'New Hampshire'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Basel Land'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'New Hampshire')),
+            new Document(4, array('name' => 'Basel Land')),
+        ));
 
         $index->refresh();
 
@@ -227,6 +240,9 @@ class MatchTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testMatchPhrasePrefix()
     {
         $client = $this->_getClient();
@@ -234,14 +250,12 @@ class MatchTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'New Hampshire'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Basel Land'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'New Hampshire')),
+            new Document(4, array('name' => 'Basel Land')),
+        ));
 
         $index->refresh();
 
@@ -257,6 +271,9 @@ class MatchTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testMatchPhrasePrefixAlias()
     {
         $client = $this->_getClient();
@@ -264,14 +281,12 @@ class MatchTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'New Hampshire'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Basel Land'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'New Hampshire')),
+            new Document(4, array('name' => 'Basel Land')),
+        ));
 
         $index->refresh();
 
@@ -285,6 +300,9 @@ class MatchTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
+    /**
+     * @group unit
+     */
     public function testMatchFuzzinessType()
     {
         $field = 'test';

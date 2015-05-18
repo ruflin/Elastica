@@ -7,7 +7,9 @@ use Elastica\Test\Base as BaseTest;
 
 class RegexpTest extends BaseTest
 {
-
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $field = 'name';

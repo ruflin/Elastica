@@ -16,7 +16,9 @@ use Elastica\Test\Base;
  */
 class RoundRobinTest extends Base
 {
-
+    /**
+     * @group functional
+     */
     public function testConnection()
     {
         $config = array('connectionStrategy' => 'RoundRobin');
@@ -29,6 +31,9 @@ class RoundRobinTest extends Base
         $this->_checkStrategy($client);
     }
 
+    /**
+     * @group unit
+     */
     public function testOldStrategySetted()
     {
         $config = array('roundRobin' => true);
@@ -38,6 +43,7 @@ class RoundRobinTest extends Base
     }
 
     /**
+     * @group functional
      * @expectedException \Elastica\Exception\ConnectionException
      */
     public function testFailConnection()
@@ -50,6 +56,9 @@ class RoundRobinTest extends Base
         $client->request('/_aliases');
     }
 
+    /**
+     * @group functional
+     */
     public function testWithOneFailConnection()
     {
         $connections = array(
@@ -75,6 +84,9 @@ class RoundRobinTest extends Base
         $this->assertLessThan(count($connections), $count);
     }
 
+    /**
+     * @group functional
+     */
     public function testWithNoValidConnection()
     {
         $connections = array(
