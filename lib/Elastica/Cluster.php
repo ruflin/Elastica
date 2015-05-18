@@ -120,8 +120,10 @@ class Cluster
     public function getNodes()
     {
         $nodes = array();
-        foreach ($this->getNodeNames() as $name) {
-            $nodes[] = new Node($name, $this->getClient());
+        $data = $this->getState();
+
+        foreach ($data['nodes'] as $id => $name) {
+            $nodes[] = new Node($id, $this->getClient());
         }
 
         return $nodes;

@@ -2,7 +2,6 @@
 
 namespace Elastica\Test;
 
-use Elastica\Client;
 use Elastica\Node;
 use Elastica\Test\Base as BaseTest;
 
@@ -61,8 +60,17 @@ class NodeTest extends BaseTest
         $nodes = $this->_getClient()->getCluster()->getNodes();
         // At least 1 instance must exist
         $this->assertGreaterThan(0, $nodes);
+
         foreach ($nodes as $node) {
             $this->assertEquals($node->getName(), 'Elastica');
         }
+    }
+
+    /**
+     * @group functional
+     */
+    public function testGetId()
+    {
+        $node = new Node('Elastica', $this->_getClient());
     }
 }

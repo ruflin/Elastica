@@ -18,16 +18,25 @@ class ShutdownTest extends BaseTest
         $cluster = $client->getCluster();
         $nodes = $cluster->getNodes();
 
-        if (count($nodes) < 2) {
+        $nodesCount = count($nodes);
+
+        if ($nodesCount < 2) {
             $this->markTestIncomplete('At least two nodes have to be running, because 1 node is shutdown');
         }
 
+        $portFound = false;
         // sayonara, wolverine, we'd never love you
         foreach ($nodes as $node) {
+
             if ((int) $node->getInfo()->getPort() === 9201) {
+                $portFound = true;
                 $node->shutdown('1s');
                 break;
             }
+        }
+
+        if (!$portFound) {
+            $this->markTestSkipped('This test was skipped as in the new docker environment all elasticsearch instances run on the same port');
         }
 
         // Wait until node is shutdown
@@ -39,7 +48,7 @@ class ShutdownTest extends BaseTest
         $nodes = $cluster->getNodes();
 
         // Only one left
-        $this->assertCount(1, $nodes);
+        $this->assertCount($nodesCount - 1, $nodes);
     }
 
     /**
