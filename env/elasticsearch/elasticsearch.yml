@@ -1,4 +1,3 @@
-{% block default_config %}
 
 index.number_of_shards: 2
 index.number_of_replicas: 0
@@ -20,7 +19,7 @@ script.disable_dynamic: false
 bootstrap.mlockall: true
 
 # Dont accept connections not from localhost
-network.host: "127.0.0.1"
+#network.host: "127.0.0.1"
 
 # Limit threadpool by set number of available processors to 1
 # Without this, travis builds will be failed with OutOfMemory error
@@ -29,8 +28,8 @@ processors: 1
 # All nodes will be called Elastica
 node.name: Elastica
 
-{% endblock %}
-
-{% block config %}
-# Node specific config should be overwritten in child template
-{% endblock %}
+# Ports config
+http.port: 9200
+transport.tcp.port: 9300
+thrift.port: 9500
+memcached.port: 11211

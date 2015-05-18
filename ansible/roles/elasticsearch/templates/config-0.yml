@@ -6,6 +6,5 @@ http.port: 9200
 transport.tcp.port: 9300
 thrift.port: 9500
 memcached.port: 11211
-node.name: "Silver Fox"
 
 {% endblock %}
