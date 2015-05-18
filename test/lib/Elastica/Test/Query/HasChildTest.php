@@ -4,11 +4,17 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Query\HasChild;
+use Elastica\Query\Match;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Type\Mapping;
+use Elastica\Query;
 
 class HasChildTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $q = new MatchAll();
@@ -27,6 +33,9 @@ class HasChildTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetScope()
     {
         $q = new MatchAll();
@@ -49,15 +58,18 @@ class HasChildTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testTypeInsideHasChildSearch()
     {
-        $index = $this->prepareSearchData();
+        $index = $this->_getTestIndex();
 
-        $f = new \Elastica\Query\Match();
+        $f = new Match();
         $f->setField('alt.name', 'testname');
         $query = new HasChild($f, 'child');
 
-        $searchQuery = new \Elastica\Query();
+        $searchQuery = new Query();
         $searchQuery->setQuery($query);
         $searchResults = $index->search($searchQuery);
 
@@ -69,16 +81,14 @@ class HasChildTest extends BaseTest
         $this->assertEquals($expected, $result);
     }
 
-    private function prepareSearchData()
+    protected function _getTestIndex()
     {
-        $client = $this->_getClient();
-        $index = $client->getIndex('has_child_test');
-        $index->create(array(), true);
+        $index = $this->_createIndex('has_child_test');
 
         $parentType = $index->getType('parent');
 
         $childType = $index->getType('child');
-        $childMapping = new \Elastica\Type\Mapping($childType);
+        $childMapping = new Mapping($childType);
         $childMapping->setParent('parent');
         $childMapping->send();
 

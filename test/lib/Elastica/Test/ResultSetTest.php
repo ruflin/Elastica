@@ -8,17 +8,19 @@ use Elastica\Test\Base as BaseTest;
 
 class ResultSetTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testGetters()
     {
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'elastica search'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'elastica library'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'elastica test'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'elastica search')),
+            new Document(2, array('name' => 'elastica library')),
+            new Document(3, array('name' => 'elastica test')),
+        ));
         $index->refresh();
 
         $resultSet = $type->search('elastica search');
@@ -30,17 +32,19 @@ class ResultSetTest extends BaseTest
         $this->assertEquals(3, count($resultSet));
     }
 
+    /**
+     * @group functional
+     */
     public function testArrayAccess()
     {
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'elastica search'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'elastica library'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'elastica test'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'elastica search')),
+            new Document(2, array('name' => 'elastica library')),
+            new Document(3, array('name' => 'elastica test')),
+        ));
         $index->refresh();
 
         $resultSet = $type->search('elastica search');
@@ -54,6 +58,7 @@ class ResultSetTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testInvalidOffsetCreation()
@@ -72,6 +77,7 @@ class ResultSetTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testInvalidOffsetGet()

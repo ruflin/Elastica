@@ -18,6 +18,9 @@ abstract class AbstractExceptionTest extends BaseTest
         return $name;
     }
 
+    /**
+     * @group unit
+     */
     public function testInheritance()
     {
         $className = $this->_getExceptionClass();

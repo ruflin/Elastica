@@ -7,6 +7,9 @@ use Elastica\Test\Base as BaseTest;
 
 class ScriptTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testConstructor()
     {
         $value = "_score * doc['my_numeric_field'].value";
@@ -50,6 +53,9 @@ class ScriptTest extends BaseTest
         $this->assertEquals($expected, $script->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testCreateString()
     {
         $string = '_score * 2.0';
@@ -65,6 +71,9 @@ class ScriptTest extends BaseTest
         $this->assertEquals($expected, $script->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testCreateScript()
     {
         $data = new Script('_score * 2.0');
@@ -75,6 +84,9 @@ class ScriptTest extends BaseTest
         $this->assertSame($data, $script);
     }
 
+    /**
+     * @group unit
+     */
     public function testCreateArray()
     {
         $string = '_score * 2.0';
@@ -101,6 +113,7 @@ class ScriptTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @dataProvider dataProviderCreateInvalid
      * @expectedException \Elastica\Exception\InvalidException
      */
@@ -127,6 +140,9 @@ class ScriptTest extends BaseTest
         );
     }
 
+    /**
+     * @group unit
+     */
     public function testSetLang()
     {
         $script = new Script('foo', array(), Script::LANG_GROOVY);
@@ -138,6 +154,9 @@ class ScriptTest extends BaseTest
         $this->assertInstanceOf('Elastica\Script', $script->setLang(Script::LANG_PYTHON));
     }
 
+    /**
+     * @group unit
+     */
     public function testSetScript()
     {
         $script = new Script('foo');

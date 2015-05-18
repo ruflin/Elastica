@@ -6,6 +6,9 @@ use Elastica\Test\Base as BaseTest;
 
 class AbstractTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testSetCached()
     {
         $stubFilter = $this->getStub();
@@ -19,6 +22,9 @@ class AbstractTest extends BaseTest
         $this->assertFalse($arrayFilter['_cache']);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetCachedDefaultValue()
     {
         $stubFilter = $this->getStub();
@@ -28,6 +34,9 @@ class AbstractTest extends BaseTest
         $this->assertTrue($arrayFilter['_cache']);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetCacheKey()
     {
         $stubFilter = $this->getStub();
@@ -40,6 +49,7 @@ class AbstractTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testSetCacheKeyEmptyKey()
@@ -51,6 +61,9 @@ class AbstractTest extends BaseTest
         $stubFilter->setCacheKey($cacheKey);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetName()
     {
         $stubFilter = $this->getStub();

@@ -9,6 +9,9 @@ use Elastica\Test\Base as BaseTest;
 
 class StatusTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testGetResponse()
     {
         $index = $this->_createIndex();
@@ -16,6 +19,9 @@ class StatusTest extends BaseTest
         $this->assertInstanceOf('Elastica\Response', $status->getResponse());
     }
 
+    /**
+     * @group functional
+     */
     public function testGetIndexStatuses()
     {
         $index = $this->_createIndex();
@@ -30,6 +36,9 @@ class StatusTest extends BaseTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testGetIndexNames()
     {
         $indexName = 'test';
@@ -51,6 +60,9 @@ class StatusTest extends BaseTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testIndexExists()
     {
         $indexName = 'elastica_test';
@@ -73,6 +85,9 @@ class StatusTest extends BaseTest
         $this->assertTrue($status->indexExists($indexName));
     }
 
+    /**
+     * @group functional
+     */
     public function testAliasExists()
     {
         $aliasName = 'elastica_test-alias';
@@ -99,6 +114,9 @@ class StatusTest extends BaseTest
             }, $indicesWithAlias));
     }
 
+    /**
+     * @group functional
+     */
     public function testServerStatus()
     {
         $client = $this->_getClient();

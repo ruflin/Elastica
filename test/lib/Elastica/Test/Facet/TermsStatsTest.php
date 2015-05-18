@@ -10,6 +10,9 @@ use Elastica\Test\Base as BaseTest;
 
 class TermsStatsTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testOrder()
     {
         $client = $this->_getClient();
@@ -48,6 +51,9 @@ class TermsStatsTest extends BaseTest
         $this->assertEquals(29, $facets[ 'test' ][ 'terms' ][1]['total']);
     }
 
+    /**
+     * @group functional
+     */
     public function testQuery()
     {
         $client = $this->_getClient();
@@ -92,6 +98,9 @@ class TermsStatsTest extends BaseTest
         }
     }
 
+    /**
+     * @group unit
+     */
     public function testSetSize()
     {
         $facet = new TermsStats('test');

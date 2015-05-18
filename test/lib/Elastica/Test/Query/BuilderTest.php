@@ -8,22 +8,7 @@ use Elastica\Test\Base as BaseTest;
 class BuilderTest extends BaseTest
 {
     /**
-     * @var \Elastica\Query\Builder
-     */
-    private $builder;
-
-    public function setUp()
-    {
-        $this->builder = new Builder();
-    }
-
-    public function tearDown()
-    {
-        $this->builder = null;
-        parent::tearDown();
-    }
-
-    /**
+     * @group unit
      * @covers \Elastica\Query\Builder::factory
      * @covers \Elastica\Query\Builder::__construct
      */
@@ -72,6 +57,7 @@ class BuilderTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @dataProvider getQueryData
      * @covers \Elastica\Query\Builder::__toString
      * @covers \Elastica\Query\Builder::allowLeadingWildcard
@@ -100,8 +86,9 @@ class BuilderTest extends BaseTest
      */
     public function testAllowLeadingWildcard($method, $argument, $result)
     {
-        $this->assertSame($this->builder, $this->builder->$method($argument));
-        $this->assertSame($result, (string) $this->builder);
+        $builder = new Builder();
+        $this->assertSame($builder, $builder->$method($argument));
+        $this->assertSame($result, (string) $builder);
     }
 
     public function getQueryTypes()
@@ -128,11 +115,10 @@ class BuilderTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @dataProvider getQueryTypes
-     *
      * @covers \Elastica\Query\Builder::fieldClose
      * @covers \Elastica\Query\Builder::close
-     *
      * @covers \Elastica\Query\Builder::bool
      * @covers \Elastica\Query\Builder::boolClose
      * @covers \Elastica\Query\Builder::constantScore
@@ -170,12 +156,14 @@ class BuilderTest extends BaseTest
      */
     public function testQueryTypes($method, $queryType)
     {
-        $this->assertSame($this->builder, $this->builder->$method()); // open
-        $this->assertSame($this->builder, $this->builder->{$method."Close"}()); // close
-        $this->assertSame('{"'.$queryType.'":{}}', (string) $this->builder);
+        $builder = new Builder();
+        $this->assertSame($builder, $builder->$method()); // open
+        $this->assertSame($builder, $builder->{$method."Close"}()); // close
+        $this->assertSame('{"'.$queryType.'":{}}', (string) $builder);
     }
 
     /**
+     * @group unit
      * @covers \Elastica\Query\Builder::fieldOpen
      * @covers \Elastica\Query\Builder::fieldClose
      * @covers \Elastica\Query\Builder::open
@@ -183,44 +171,51 @@ class BuilderTest extends BaseTest
      */
     public function testFieldOpenAndClose()
     {
-        $this->assertSame($this->builder, $this->builder->fieldOpen('someField'));
-        $this->assertSame($this->builder, $this->builder->fieldClose());
-        $this->assertSame('{"someField":{}}', (string) $this->builder);
+        $builder = new Builder();
+        $this->assertSame($builder, $builder->fieldOpen('someField'));
+        $this->assertSame($builder, $builder->fieldClose());
+        $this->assertSame('{"someField":{}}', (string) $builder);
     }
 
     /**
+     * @group unit
      * @covers \Elastica\Query\Builder::sortField
      */
     public function testSortField()
     {
-        $this->assertSame($this->builder, $this->builder->sortField('name', true));
-        $this->assertSame('{"sort":{"name":{"reverse":"true"}}}', (string) $this->builder);
+        $builder = new Builder();
+        $this->assertSame($builder, $builder->sortField('name', true));
+        $this->assertSame('{"sort":{"name":{"reverse":"true"}}}', (string) $builder);
     }
 
     /**
+     * @group unit
      * @covers \Elastica\Query\Builder::sortFields
      */
     public function testSortFields()
     {
-        $this->assertSame($this->builder, $this->builder->sortFields(array('field1' => 'asc', 'field2' => 'desc', 'field3' => 'asc')));
-        $this->assertSame('{"sort":[{"field1":"asc"},{"field2":"desc"},{"field3":"asc"}]}', (string) $this->builder);
+        $builder = new Builder();
+        $this->assertSame($builder, $builder->sortFields(array('field1' => 'asc', 'field2' => 'desc', 'field3' => 'asc')));
+        $this->assertSame('{"sort":[{"field1":"asc"},{"field2":"desc"},{"field3":"asc"}]}', (string) $builder);
     }
 
     /**
+     * @group unit
      * @covers \Elastica\Query\Builder::queries
      */
     public function testQueries()
     {
         $queries = array();
 
-        $b1 = clone $this->builder;
-        $b2 = clone $this->builder;
+        $builder = new Builder();
+        $b1 = clone $builder;
+        $b2 = clone $builder;
 
         $queries[] = $b1->term()->field('age', 34)->termClose();
         $queries[] = $b2->term()->field('name', 'christer')->termClose();
 
-        $this->assertSame($this->builder, $this->builder->queries($queries));
-        $this->assertSame('{"queries":[{"term":{"age":"34"}},{"term":{"name":"christer"}}]}', (string) $this->builder);
+        $this->assertSame($builder, $builder->queries($queries));
+        $this->assertSame('{"queries":[{"term":{"age":"34"}},{"term":{"name":"christer"}}]}', (string) $builder);
     }
 
     public function getFieldData()
@@ -235,38 +230,45 @@ class BuilderTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @dataProvider getFieldData
      * @covers \Elastica\Query\Builder::field
      */
     public function testField($name, $value, $result)
     {
-        $this->assertSame($this->builder, $this->builder->field($name, $value));
-        $this->assertSame($result, (string) $this->builder);
+        $builder = new Builder();
+        $this->assertSame($builder, $builder->field($name, $value));
+        $this->assertSame($result, (string) $builder);
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      * @expectedExceptionMessage The produced query is not a valid json string : "{{}"
      * @covers \Elastica\Query\Builder::toArray
      */
     public function testToArrayWithInvalidData()
     {
-        $this->builder->open('foo');
-        $this->builder->toArray();
+        $builder = new Builder();
+        $builder->open('foo');
+        $builder->toArray();
     }
 
     /**
+     * @group unit
      * @covers \Elastica\Query\Builder::toArray
      */
     public function testToArray()
     {
-        $this->builder->query()->term()->field('category.id', array(1, 2, 3))->termClose()->queryClose();
-        $this->assertEquals(array(
+        $builder = new Builder();
+        $builder->query()->term()->field('category.id', array(1, 2, 3))->termClose()->queryClose();
+        $expected = array(
             'query' => array(
                 'term' => array(
                     'category.id' => array(1, 2, 3),
                 ),
             ),
-        ), $this->builder->toArray());
+        );
+        $this->assertEquals($expected, $builder->toArray());
     }
 }

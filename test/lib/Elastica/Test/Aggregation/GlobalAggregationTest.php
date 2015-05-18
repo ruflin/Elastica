@@ -7,6 +7,9 @@ use Elastica\Aggregation\GlobalAggregation;
 
 class GlobalAggregationTest extends BaseAggregationTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $expected = array(

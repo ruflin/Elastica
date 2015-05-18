@@ -91,10 +91,42 @@ class Base extends \PHPUnit_Framework_TestCase
         } while (!$allocated);
     }
 
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $hasGroup = $this->_isUnitGroup() || $this->_isFunctionalGroup() || $this->_isShutdownGroup();
+        $this->assertTrue($hasGroup, 'Every test must have one of "unit", "functional" or "shutdown" group');
+    }
+
     protected function tearDown()
     {
+        if ($this->_isFunctionalGroup()) {
+            $this->_getClient()->getIndex('_all')->delete();
+            $this->_getClient()->getIndex('_all')->clearCache();
+        }
+
         parent::tearDown();
-        $this->_getClient()->getIndex('_all')->delete();
-        $this->_getClient()->getIndex('_all')->clearCache();
+    }
+
+    protected function _isUnitGroup()
+    {
+        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+
+        return in_array('unit', $groups);
+    }
+
+    protected function _isFunctionalGroup()
+    {
+        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+
+        return in_array('functional', $groups);
+    }
+
+    protected function _isShutdownGroup()
+    {
+        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+
+        return in_array('shutdown', $groups);
     }
 }

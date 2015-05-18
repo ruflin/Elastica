@@ -11,11 +11,9 @@ use Elastica\Type\Mapping;
 
 class NestedTest extends BaseTest
 {
-    public function setUp()
+    protected function _getIndexForTest()
     {
-        $client = $this->_getClient();
-        $index = $client->getIndex('elastica_test_filter_nested');
-        $index->create(array(), true);
+        $index = $this->_createIndex('elastica_test_filter_nested');
         $type = $index->getType('user');
         $mapping = new Mapping();
         $mapping->setProperties(
@@ -32,41 +30,44 @@ class NestedTest extends BaseTest
         );
         $type->setMapping($mapping);
 
-        // Adds a list of documents with _bulk upload to the index
-        $docs = array();
-        $docs[] = new Document(1,
-            array(
-                'firstname' => 'Nicolas',
-                'lastname' => 'Ruflin',
-                'hobbies' => array(
-                    array('hobby' => 'opensource'),
-                ),
-            )
-        );
-        $docs[] = new Document(2,
-            array(
-                'firstname' => 'Nicolas',
-                'lastname' => 'Ippolito',
-                'hobbies' => array(
-                    array('hobby' => 'opensource'),
-                    array('hobby' => 'guitar'),
-                ),
-            )
-        );
-        $response = $type->addDocuments($docs);
+        $response = $type->addDocuments(array(
+            new Document(1,
+                array(
+                    'firstname' => 'Nicolas',
+                    'lastname' => 'Ruflin',
+                    'hobbies' => array(
+                        array('hobby' => 'opensource'),
+                    ),
+                )
+            ),
+            new Document(2,
+                array(
+                    'firstname' => 'Nicolas',
+                    'lastname' => 'Ippolito',
+                    'hobbies' => array(
+                        array('hobby' => 'opensource'),
+                        array('hobby' => 'guitar'),
+                    ),
+                )
+            ),
+        ));
 
-        // Refresh index
         $index->refresh();
+
+        return $index;
     }
 
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
-        $f = new Nested();
-        $this->assertEquals(array('nested' => array()), $f->toArray());
-        $q = new Terms();
-        $q->setTerms('hobby', array('guitar'));
-        $f->setPath('hobbies');
-        $f->setQuery($q);
+        $filter = new Nested();
+        $this->assertEquals(array('nested' => array()), $filter->toArray());
+        $query = new Terms();
+        $query->setTerms('hobby', array('guitar'));
+        $filter->setPath('hobbies');
+        $filter->setQuery($query);
 
         $expectedArray = array(
             'nested' => array(
@@ -77,41 +78,42 @@ class NestedTest extends BaseTest
             ),
         );
 
-        $this->assertEquals($expectedArray, $f->toArray());
+        $this->assertEquals($expectedArray, $filter->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testShouldReturnTheRightNumberOfResult()
     {
-        $f = new Nested();
-        $this->assertEquals(array('nested' => array()), $f->toArray());
-        $q = new Terms();
-        $q->setTerms('hobby', array('guitar'));
-        $f->setPath('hobbies');
-        $f->setQuery($q);
+        $filter = new Nested();
+        $this->assertEquals(array('nested' => array()), $filter->toArray());
+        $query = new Terms();
+        $query->setTerms('hobby', array('guitar'));
+        $filter->setPath('hobbies');
+        $filter->setQuery($query);
 
-        $c = $this->_getClient();
-        $s = new Search($c);
-        $i = $c->getIndex('elastica_test_filter_nested');
-        $s->addIndex($i);
-        $r = $s->search($f);
+        $search = new Search($this->_getClient());
+        $search->addIndex($this->_getIndexForTest());
+        $resultSet = $search->search($filter);
+        $this->assertEquals(1, $resultSet->getTotalHits());
 
-        $this->assertEquals(1, $r->getTotalHits());
+        $filter = new Nested();
+        $this->assertEquals(array('nested' => array()), $filter->toArray());
+        $query = new Terms();
+        $query->setTerms('hobby', array('opensource'));
+        $filter->setPath('hobbies');
+        $filter->setQuery($query);
 
-        $f = new Nested();
-        $this->assertEquals(array('nested' => array()), $f->toArray());
-        $q = new Terms();
-        $q->setTerms('hobby', array('opensource'));
-        $f->setPath('hobbies');
-        $f->setQuery($q);
-
-        $c = $this->_getClient();
-        $s = new Search($c);
-        $i = $c->getIndex('elastica_test_filter_nested');
-        $s->addIndex($i);
-        $r = $s->search($f);
-        $this->assertEquals(2, $r->getTotalHits());
+        $search = new Search($this->_getClient());
+        $search->addIndex($this->_getIndexForTest());
+        $resultSet = $search->search($filter);
+        $this->assertEquals(2, $resultSet->getTotalHits());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetJoin()
     {
         $filter = new Nested();

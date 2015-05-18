@@ -7,7 +7,9 @@ use Elastica\Test\Base as BaseTest;
 
 class PrefixTest extends BaseTest
 {
-
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $query = new Prefix();

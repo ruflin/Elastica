@@ -9,6 +9,9 @@ use Elastica\Test\Base as BaseTest;
 
 class HasParentTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $q = new MatchAll();
@@ -27,6 +30,9 @@ class HasParentTest extends BaseTest
         $this->assertEquals($expectedArray, $filter->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testSetType()
     {
         $index = $this->prepareSearchData();
@@ -49,6 +55,9 @@ class HasParentTest extends BaseTest
         $this->assertInstanceOf('Elastica\Filter\HasParent', $returnValue);
     }
 
+    /**
+     * @group unit
+     */
     public function testFilterInsideHasParent()
     {
         $f = new \Elastica\Filter\MatchAll();
@@ -67,6 +76,9 @@ class HasParentTest extends BaseTest
         $this->assertEquals($expectedArray, $filter->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testFilterInsideHasParentSearch()
     {
         $index = $this->prepareSearchData();
@@ -87,6 +99,9 @@ class HasParentTest extends BaseTest
         $this->assertEquals($expected, $result);
     }
 
+    /**
+     * @group functional
+     */
     public function testQueryInsideHasParentSearch()
     {
         $index = $this->prepareSearchData();

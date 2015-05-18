@@ -10,6 +10,9 @@ use Elastica\Type;
 
 class QueryStringTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testSearchMultipleFields()
     {
         $str = md5(rand());
@@ -39,20 +42,17 @@ class QueryStringTest extends BaseTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testSearch()
     {
-        $client = $this->_getClient();
-        $index = new Index($client, 'test');
-        $index->create(array(), true);
+        $index = $this->_createIndex();
         $index->getSettings()->setNumberOfReplicas(0);
-        //$index->getSettings()->setNumberOfShards(1);
-
-        $type = new Type($index, 'helloworld');
+        $type = $index->getType('helloworld');
 
         $doc = new Document(1, array('email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
         $type->addDocument($doc);
-
-        // Refresh index
         $index->refresh();
 
         $queryString = new QueryString('test*');
@@ -63,6 +63,8 @@ class QueryStringTest extends BaseTest
 
     /**
      * Tests if search in multiple fields is possible
+     *
+     * @group functional
      */
     public function testSearchFields()
     {
@@ -82,6 +84,9 @@ class QueryStringTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetDefaultOperator()
     {
         $operator = 'AND';
@@ -93,6 +98,9 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($data['query_string']['default_operator'], $operator);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetDefaultField()
     {
         $default = 'field1';
@@ -104,6 +112,9 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($data['query_string']['default_field'], $default);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetRewrite()
     {
         $rewrite = 'scoring_boolean';
@@ -116,6 +127,7 @@ class QueryStringTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testSetQueryInvalid()
@@ -124,6 +136,9 @@ class QueryStringTest extends BaseTest
         $query->setQuery(array());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetTimezone()
     {
         $timezone = 'Europe/Paris';

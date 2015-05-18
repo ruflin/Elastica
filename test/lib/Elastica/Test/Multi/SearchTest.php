@@ -41,6 +41,9 @@ class SearchTest extends BaseTest
         return $type;
     }
 
+    /**
+     * @group unit
+     */
     public function testConstruct()
     {
         $client = $this->_getClient();
@@ -50,6 +53,9 @@ class SearchTest extends BaseTest
         $this->assertSame($client, $multiSearch->getClient());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetSearches()
     {
         $client = $this->_getClient();
@@ -79,6 +85,9 @@ class SearchTest extends BaseTest
         $this->assertCount(0, $searches);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetSearchesByKeys()
     {
         $client = $this->_getClient();
@@ -108,6 +117,9 @@ class SearchTest extends BaseTest
         $this->assertCount(0, $searches);
     }
 
+    /**
+     * @group functional
+     */
     public function testSearch()
     {
         $type = $this->_createType();
@@ -200,6 +212,9 @@ class SearchTest extends BaseTest
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
     }
 
+    /**
+     * @group functional
+     */
     public function testSearchWithKeys()
     {
         $type = $this->_createType();
@@ -295,6 +310,9 @@ class SearchTest extends BaseTest
         $this->assertEquals(6, $resultSets["search2"]->getTotalHits());
     }
 
+    /**
+     * @group functional
+     */
     public function testSearchWithError()
     {
         $type = $this->_createType();
@@ -340,6 +358,9 @@ class SearchTest extends BaseTest
         $this->assertTrue($multiResultSet->hasError());
     }
 
+    /**
+     * @group functional
+     */
     public function testSearchWithErrorWithKeys()
     {
         $type = $this->_createType();
@@ -385,6 +406,9 @@ class SearchTest extends BaseTest
         $this->assertTrue($multiResultSet->hasError());
     }
 
+    /**
+     * @group functional
+     */
     public function testGlobalSearchTypeSearch()
     {
         $type = $this->_createType();
@@ -466,6 +490,9 @@ class SearchTest extends BaseTest
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
     }
 
+    /**
+     * @group functional
+     */
     public function testGlobalSearchTypeSearchWithKeys()
     {
         $type = $this->_createType();

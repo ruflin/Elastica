@@ -10,6 +10,9 @@ use Elastica\Test\Base as BaseTest;
 
 class GeoPolygonTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testGeoPoint()
     {
         $index = $this->_createIndex();

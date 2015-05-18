@@ -12,6 +12,9 @@ use Elastica\Test\Base as BaseTest;
  */
 class ConnectionPoolTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testConstruct()
     {
         $pool = $this->createPool();
@@ -19,6 +22,9 @@ class ConnectionPoolTest extends BaseTest
         $this->assertEquals($this->getConnections(), $pool->getConnections());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetConnections()
     {
         $pool = $this->createPool();
@@ -32,6 +38,9 @@ class ConnectionPoolTest extends BaseTest
         $this->assertInstanceOf('Elastica\Connection\ConnectionPool', $pool->setConnections($connections));
     }
 
+    /**
+     * @group unit
+     */
     public function testAddConnection()
     {
         $pool = $this->createPool();
@@ -48,6 +57,9 @@ class ConnectionPoolTest extends BaseTest
         $this->assertInstanceOf('Elastica\Connection\ConnectionPool', $pool->addConnection($connections[0]));
     }
 
+    /**
+     * @group unit
+     */
     public function testHasConnection()
     {
         $pool = $this->createPool();
@@ -55,6 +67,9 @@ class ConnectionPoolTest extends BaseTest
         $this->assertTrue($pool->hasConnection());
     }
 
+    /**
+     * @group unit
+     */
     public function testFailHasConnections()
     {
         $pool = $this->createPool();
@@ -64,6 +79,9 @@ class ConnectionPoolTest extends BaseTest
         $this->assertFalse($pool->hasConnection());
     }
 
+    /**
+     * @group unit
+     */
     public function testGetConnection()
     {
         $pool = $this->createPool();

@@ -10,13 +10,9 @@ use Elastica\Test\Base as BaseTest;
 
 class ScriptFieldsTest extends BaseTest
 {
-    protected $index;
-
-    public function setUp()
-    {
-        $this->index = $this->_createIndex();
-    }
-
+    /**
+     * @group unit
+     */
     public function testNewScriptFields()
     {
         $script = new Script('1 + 2');
@@ -40,6 +36,9 @@ class ScriptFieldsTest extends BaseTest
         $this->assertEquals($scriptFields->getParam('test'), $script->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetScriptFields()
     {
         $query = new Query();
@@ -58,6 +57,7 @@ class ScriptFieldsTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testNameException()
@@ -66,13 +66,17 @@ class ScriptFieldsTest extends BaseTest
         $scriptFields = new ScriptFields(array($script));
     }
 
+    /**
+     * @group functional
+     */
     public function testQuery()
     {
-        $type = $this->index->getType('test');
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
 
         $doc = new Document(1, array('firstname' => 'guschti', 'lastname' => 'ruflin'));
         $type->addDocument($doc);
-        $this->index->refresh();
+        $index->refresh();
 
         $query = new Query();
         $script = new Script('1 + 2');

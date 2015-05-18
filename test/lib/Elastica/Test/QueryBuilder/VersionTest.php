@@ -4,9 +4,13 @@ namespace Elastica\Test\QueryBuilder;
 
 use Elastica\QueryBuilder\DSL;
 use Elastica\QueryBuilder\Version;
+use Elastica\Test\Base as BaseTest;
 
-class VersionTest extends \PHPUnit_Framework_TestCase
+class VersionTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testVersions()
     {
         $dsl = array(

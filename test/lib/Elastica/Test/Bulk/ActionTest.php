@@ -10,6 +10,9 @@ use Elastica\Type;
 
 class ActionTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testAction()
     {
         $action = new Action();

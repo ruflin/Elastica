@@ -15,10 +15,7 @@ class GuzzleTest extends BaseTest
         if (!class_exists('GuzzleHttp\\Client')) {
             self::markTestSkipped('guzzlehttp/guzzle package should be installed to run guzzle transport tests');
         }
-    }
 
-    public function setUp()
-    {
         if (defined('DEBUG') && !DEBUG) {
             $this->markTestSkipped('The DEBUG constant must be set to true for this test to run');
         }
@@ -52,6 +49,7 @@ class GuzzleTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @dataProvider getConfig
      */
     public function testDynamicHttpMethodBasedOnConfigParameter(array $config, $httpMethod)
@@ -69,6 +67,7 @@ class GuzzleTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @dataProvider getConfig
      */
     public function testDynamicHttpMethodOnlyAffectsRequestsWithBody(array $config, $httpMethod)
@@ -80,6 +79,9 @@ class GuzzleTest extends BaseTest
         $this->assertStringStartsWith('GET', $info['request_header']);
     }
 
+    /**
+     * @group functional
+     */
     public function testWithEnvironmentalProxy()
     {
         putenv('http_proxy=' . $this->_getProxyUrl() . '/');
@@ -95,6 +97,9 @@ class GuzzleTest extends BaseTest
         putenv('http_proxy=');
     }
 
+    /**
+     * @group functional
+     */
     public function testWithEnabledEnvironmentalProxy()
     {
         putenv('http_proxy=' . $this->_getProxyUrl403() . '/');
@@ -111,6 +116,9 @@ class GuzzleTest extends BaseTest
         putenv('http_proxy=');
     }
 
+    /**
+     * @group functional
+     */
     public function testWithProxy()
     {
         $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
@@ -120,6 +128,9 @@ class GuzzleTest extends BaseTest
         $this->assertEquals(200, $transferInfo['http_code']);
     }
 
+    /**
+     * @group functional
+     */
     public function testWithoutProxy()
     {
         $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
@@ -129,6 +140,9 @@ class GuzzleTest extends BaseTest
         $this->assertEquals(200, $transferInfo['http_code']);
     }
 
+    /**
+     * @group functional
+     */
     public function testBodyReuse()
     {
         $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
@@ -159,6 +173,7 @@ class GuzzleTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException Elastica\Exception\Connection\GuzzleException
      */
     public function testInvalidConnection()

@@ -11,13 +11,13 @@ use Elastica\Util;
 
 class EscapeStringTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testSearch()
     {
-        $client = $this->_getClient();
-        $index = new Index($client, 'test');
-        $index->create(array(), true);
+        $index = $this->_createIndex();
         $index->getSettings()->setNumberOfReplicas(0);
-        //$index->getSettings()->setNumberOfShards(1);
 
         $type = new Type($index, 'helloworld');
 

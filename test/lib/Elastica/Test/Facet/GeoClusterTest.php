@@ -10,6 +10,9 @@ use Elastica\Type\Mapping;
 
 class GeoClusterTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testQuery()
     {
         $client = $this->_getClient();

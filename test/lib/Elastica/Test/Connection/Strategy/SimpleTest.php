@@ -15,6 +15,9 @@ use Elastica\Test\Base;
  */
 class SimpleTest extends Base
 {
+    /**
+     * @group functional
+     */
     public function testConnection()
     {
         $client = $this->_getClient();
@@ -27,6 +30,7 @@ class SimpleTest extends Base
     }
 
     /**
+     * @group functional
      * @expectedException \Elastica\Exception\ConnectionException
      */
     public function testFailConnection()
@@ -39,6 +43,9 @@ class SimpleTest extends Base
         $client->request('/_aliases');
     }
 
+    /**
+     * @group functional
+     */
     public function testWithOneFailConnection()
     {
         $connections = array(
@@ -64,6 +71,9 @@ class SimpleTest extends Base
         $this->assertLessThan(count($connections), $count);
     }
 
+    /**
+     * @group functional
+     */
     public function testWithNoValidConnection()
     {
         $connections = array(
