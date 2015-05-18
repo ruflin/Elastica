@@ -78,4 +78,47 @@ class CardinalityTest extends BaseAggregationTest
             'more-than-max' => array(40001),
         );
     }
+
+    /**
+     * @dataProvider validRehashProvider
+     * @param bool $rehash
+     */
+    public function testRehash($rehash)
+    {
+        $agg = new Cardinality('rehash');
+        $agg->setRehash($rehash);
+
+        $this->assertNotNull($agg->getParam('rehash'));
+        $this->assertInternalType('boolean', $agg->getParam('rehash'));
+    }
+
+    /**
+     * @dataProvider invalidRehashProvider
+     * @expectedException \InvalidArgumentException
+     * @param mixed $rehash
+     */
+    public function testInvalidRehash($rehash)
+    {
+        $agg = new Cardinality('rehash');
+        $agg->setRehash($rehash);
+    }
+
+    public function invalidRehashProvider()
+    {
+        return array(
+            'string' => array('100'),
+            'int' => array(100),
+            'float' => array(7.8),
+            'array' => array(array()),
+            'object' => array(new \StdClass),
+        );
+    }
+
+    public function validRehashProvider()
+    {
+        return array(
+            'true' => array(true),
+            'false' => array(false),
+        );
+    }
 }
