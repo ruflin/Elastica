@@ -15,7 +15,8 @@ All notable changes to this project will be documented in this file based on the
 - Make host for all tests dynamic to prepare it for a more dynamic test environment #846
 
 
-
+### Backward Compatibility Breaks
+- `Elastica\ScanAndScroll::$_lastScrollId` removed: `key()` now always returns the next scroll id [#842](https://github.com/ruflin/Elastica/issues/842/)
 
 
 
