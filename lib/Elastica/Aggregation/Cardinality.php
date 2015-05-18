@@ -9,4 +9,17 @@ namespace Elastica\Aggregation;
  */
 class Cardinality extends AbstractSimpleAggregation
 {
+    /**
+     * @param int $precisionThreshold
+     *
+     * @return $this
+     */
+    public function setPrecisionThreshold($precisionThreshold)
+    {
+        if (!is_int($precisionThreshold)) {
+            throw new \InvalidArgumentException('precision_threshold only supports integer values');
+        }
+
+        return $this->setParam("precision_threshold", $precisionThreshold);
+    }
 }

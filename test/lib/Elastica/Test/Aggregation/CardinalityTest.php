@@ -33,4 +33,49 @@ class CardinalityTest extends BaseAggregationTest
 
         $this->assertEquals(3, $results['value']);
     }
+
+    /**
+     * @dataProvider invalidPrecisionThresholdProvider
+     * @expectedException \InvalidArgumentException
+     * @param $threshold
+     */
+    public function testInvalidPrecisionThreshold($threshold)
+    {
+        $agg = new Cardinality('threshold');
+        $agg->setPrecisionThreshold($threshold);
+    }
+
+    /**
+     * @dataProvider validPrecisionThresholdProvider
+     * @param $threshold
+     */
+    public function testPrecisionThreshold($threshold)
+    {
+        $agg = new Cardinality('threshold');
+        $agg->setPrecisionThreshold($threshold);
+
+        $this->assertNotNull($agg->getParam('precision_threshold'));
+        $this->assertInternalType('int', $agg->getParam('precision_threshold'));
+    }
+
+    public function invalidPrecisionThresholdProvider()
+    {
+        return array(
+            'string' => array('100'),
+            'float' => array(7.8),
+            'boolean' => array(true),
+            'array' => array(array()),
+            'object' => array(new \StdClass),
+        );
+    }
+
+    public function validPrecisionThresholdProvider()
+    {
+        return array(
+            'negative-int' => array(-140),
+            'zero' => array(0),
+            'positive-int' => array(150),
+            'more-than-max' => array(40001),
+        );
+    }
 }
