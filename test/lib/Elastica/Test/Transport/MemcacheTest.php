@@ -11,10 +11,10 @@ use Elastica\Test\Base as BaseTest;
 
 class MemcacheTest extends BaseTest
 {
-    public function setUp()
+    public static function setUpBeforeClass()
     {
         if (!extension_loaded('Memcache')) {
-            $this->markTestSkipped('pecl/memcache must be installed to run this test case');
+            self::markTestSkipped('pecl/memcache must be installed to run this test case');
         }
     }
 
@@ -27,6 +27,9 @@ class MemcacheTest extends BaseTest
         ));
     }
 
+    /**
+     * @group functional
+     */
     public function testConstruct()
     {
         $client = $this->_getMemcacheClient();
@@ -34,6 +37,9 @@ class MemcacheTest extends BaseTest
         $this->assertEquals(11211, $client->getConnection()->getPort());
     }
 
+    /**
+     * @group functional
+     */
     public function testCreateDocument()
     {
         $index = $this->_createIndex();
@@ -51,6 +57,7 @@ class MemcacheTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @expectedException Elastica\Exception\NotFoundException
      */
     public function testDeleteDocument()
@@ -71,6 +78,9 @@ class MemcacheTest extends BaseTest
         $document = $type->getDocument(1);
     }
 
+    /**
+     * @group functional
+     */
     public function testUpdateDocument()
     {
         $index = $this->_createIndex();
@@ -96,6 +106,9 @@ class MemcacheTest extends BaseTest
         $this->assertEquals('Doe John', $newSavedDocument->get('username'));
     }
 
+    /**
+     * @group functional
+     */
     public function testSearchDocument()
     {
         $index = $this->_createIndex();
@@ -124,6 +137,7 @@ class MemcacheTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @expectedException Elastica\Exception\InvalidException
      * @expectedExceptionMessage is not supported in memcache transport
      */
@@ -134,6 +148,7 @@ class MemcacheTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @expectedException Elastica\Exception\InvalidException
      * @expectedExceptionMessage is not supported in memcache transport
      */
@@ -144,6 +159,7 @@ class MemcacheTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @expectedException Elastica\Exception\Connection\MemcacheException
      * @expectedExceptionMessage is too long
      */

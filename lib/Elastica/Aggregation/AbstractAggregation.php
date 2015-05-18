@@ -28,6 +28,7 @@ abstract class AbstractAggregation extends Param
     /**
      * Set the name of this aggregation
      * @param string $name
+     * @return $this
      */
     public function setName($name)
     {

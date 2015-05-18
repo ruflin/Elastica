@@ -11,6 +11,7 @@ use Elastica\Exception\ResponseException;
 class UtilTest extends BaseTest
 {
     /**
+     * @group unit
      * @dataProvider getEscapeTermPairs
      */
     public function testEscapeTerm($unescaped, $escaped)
@@ -31,6 +32,7 @@ class UtilTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @dataProvider getReplaceBooleanWordsPairs
      */
     public function testReplaceBooleanWords($before, $after)
@@ -50,6 +52,9 @@ class UtilTest extends BaseTest
         );
     }
 
+    /**
+     * @group unit
+     */
     public function testEscapeTermSpecialCharacters()
     {
         $before = '\\+-&&||!(){}[]^"~*?:/<>';
@@ -58,6 +63,9 @@ class UtilTest extends BaseTest
         $this->assertEquals(Util::escapeTerm($before), $after);
     }
 
+    /**
+     * @group unit
+     */
     public function testToCamelCase()
     {
         $string = 'hello_world';
@@ -67,6 +75,9 @@ class UtilTest extends BaseTest
         $this->assertEquals('HowAreYouToday', Util::toCamelCase($string));
     }
 
+    /**
+     * @group unit
+     */
     public function testToSnakeCase()
     {
         $string = 'HelloWorld';
@@ -76,6 +87,9 @@ class UtilTest extends BaseTest
         $this->assertEquals('how_are_you_today', Util::toSnakeCase($string));
     }
 
+    /**
+     * @group unit
+     */
     public function testConvertRequestToCurlCommand()
     {
         $path = 'test';
@@ -95,6 +109,9 @@ class UtilTest extends BaseTest
         $this->assertEquals($expected, $curlCommand);
     }
 
+    /**
+     * @group unit
+     */
     public function testConvertDateTimeObjectWithTimezone()
     {
         $dateTimeObject = new \DateTime();
@@ -107,6 +124,9 @@ class UtilTest extends BaseTest
         $this->assertEquals($convertedString, $date);
     }
 
+    /**
+     * @group unit
+     */
     public function testConvertDateTimeObjectWithoutTimezone()
     {
         $dateTimeObject = new \DateTime();

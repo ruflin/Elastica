@@ -10,12 +10,12 @@ use Elastica\Test\Base as BaseTest;
 
 class GeoDistanceRangeTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testGeoPoint()
     {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test');
-        $index->create(array(), true);
-
+        $index = $this->_createIndex();
         $type = $index->getType('test');
 
         // Set mapping
@@ -71,6 +71,7 @@ class GeoDistanceRangeTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testInvalidRange()
@@ -83,6 +84,7 @@ class GeoDistanceRangeTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @dataProvider invalidLocationDataProvider
      * @expectedException \Elastica\Exception\InvalidException
      */
@@ -96,6 +98,7 @@ class GeoDistanceRangeTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @dataProvider constructDataProvider
      */
     public function testConstruct($key, $location, $ranges, $expected)

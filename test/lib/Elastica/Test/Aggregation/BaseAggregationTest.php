@@ -7,8 +7,4 @@ use Elastica\Test\Base;
 
 abstract class BaseAggregationTest extends Base
 {
-    /**
-     * @var Index
-     */
-    protected $_index;
 }

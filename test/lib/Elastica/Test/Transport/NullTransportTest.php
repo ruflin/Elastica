@@ -16,7 +16,9 @@ use Elastica\Transport\NullTransport;
  */
 class NullTest extends BaseTest
 {
-
+    /**
+     * @group functional
+     */
     public function testEmptyResult()
     {
         // Creates a client with any destination, and verify it returns a response object when executed

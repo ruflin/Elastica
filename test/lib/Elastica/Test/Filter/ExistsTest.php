@@ -7,6 +7,9 @@ use Elastica\Test\Base as BaseTest;
 
 class ExistsTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $field = 'test';
@@ -16,6 +19,9 @@ class ExistsTest extends BaseTest
         $this->assertEquals($expectedArray, $filter->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetField()
     {
         $field = 'test';

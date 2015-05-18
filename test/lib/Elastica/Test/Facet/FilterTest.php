@@ -10,6 +10,9 @@ use Elastica\Test\Base as BaseTest;
 
 class FilterTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testFilter()
     {
         $client = $this->_getClient();

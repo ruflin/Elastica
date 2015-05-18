@@ -11,32 +11,37 @@ use Elastica\Query;
 
 class FiltersTest extends BaseAggregationTest
 {
-    protected function setUp()
+    protected function _getIndexForTest()
     {
-        parent::setUp();
-        $this->_index = $this->_createIndex("filter");
-        $docs = array(
-            new Document("1", array("price" => 5, "color" => "blue")),
-            new Document("2", array("price" => 8, "color" => "blue")),
-            new Document("3", array("price" => 1, "color" => "red")),
-            new Document("4", array("price" => 3, "color" => "green")),
-        );
-        $this->_index->getType("test")->addDocuments($docs);
-        $this->_index->refresh();
+        $index = $this->_createIndex("filter");
+
+        $index->getType("test")->addDocuments(array(
+            new Document(1, array("price" => 5, "color" => "blue")),
+            new Document(2, array("price" => 8, "color" => "blue")),
+            new Document(3, array("price" => 1, "color" => "red")),
+            new Document(4, array("price" => 3, "color" => "green")),
+        ));
+
+        $index->refresh();
+
+        return $index;
     }
 
+    /**
+     * @group unit
+     */
     public function testToArrayUsingNamedFilters()
     {
         $expected = array(
             "filters" => array(
-              "filters" => array(
-                  "blue" => array(
-                      "term" => array("color" => "blue"),
-                  ),
-                  "red" => array(
-                      "term" => array("color" => "red"),
-                  ),
-              ),
+                "filters" => array(
+                    "blue" => array(
+                        "term" => array("color" => "blue"),
+                    ),
+                    "red" => array(
+                        "term" => array("color" => "red"),
+                    ),
+                ),
             ),
             "aggs" => array(
                 "avg_price" => array("avg" => array("field" => "price")),
@@ -54,6 +59,9 @@ class FiltersTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testToArrayUsingAnonymousFilters()
     {
         $expected = array(
@@ -83,6 +91,9 @@ class FiltersTest extends BaseAggregationTest
         $this->assertEquals($expected, $agg->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testFilterAggregation()
     {
         $agg = new Filters("by_color");
@@ -96,7 +107,7 @@ class FiltersTest extends BaseAggregationTest
         $query = new Query();
         $query->addAggregation($agg);
 
-        $results = $this->_index->search($query)->getAggregation("by_color");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation("by_color");
 
         $resultsForBlue = $results["buckets"]["blue"];
         $resultsForRed  = $results["buckets"]["red"];

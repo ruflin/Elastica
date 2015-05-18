@@ -9,6 +9,9 @@ use Elastica\Type\Mapping;
 
 class PrefixTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $field = 'name';
@@ -25,6 +28,9 @@ class PrefixTest extends BaseTest
         $this->assertequals($expectedArray, $filter->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testDifferentPrefixes()
     {
         $client = $this->_getClient();
@@ -38,17 +44,13 @@ class PrefixTest extends BaseTest
             )
         );
         $type->setMapping($mapping);
-
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'Baden'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Baden Baden'));
-        $type->addDocument($doc);
-        $doc = new Document(5, array('name' => 'New Orleans'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'Baden')),
+            new Document(4, array('name' => 'Baden Baden')),
+            new Document(5, array('name' => 'New Orleans')),
+        ));
 
         $index->refresh();
 
@@ -74,6 +76,9 @@ class PrefixTest extends BaseTest
         $this->assertEquals(0, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testDifferentPrefixesLowercase()
     {
         $client = $this->_getClient();
@@ -100,16 +105,13 @@ class PrefixTest extends BaseTest
         );
         $type->setMapping($mapping);
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'Baden'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Baden Baden'));
-        $type->addDocument($doc);
-        $doc = new Document(5, array('name' => 'New Orleans'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'Baden')),
+            new Document(4, array('name' => 'Baden Baden')),
+            new Document(5, array('name' => 'New Orleans')),
+        ));
 
         $index->refresh();
 

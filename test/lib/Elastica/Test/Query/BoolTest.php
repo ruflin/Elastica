@@ -12,6 +12,9 @@ use Elastica\Type;
 
 class BoolTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $query = new BoolQuery();
@@ -50,7 +53,9 @@ class BoolTest extends BaseTest
     /**
      * Test to resolve the following issue
      *
-     * https://groups.google.com/forum/?fromgroups#!topic/elastica-php-client/zK_W_hClfvU
+     * @link https://groups.google.com/forum/?fromgroups#!topic/elastica-php-client/zK_W_hClfvU
+     *
+     * @group unit
      */
     public function testToArrayStructure()
     {
@@ -68,6 +73,9 @@ class BoolTest extends BaseTest
         $this->assertEquals($jsonString, json_encode($boolQuery->toArray()));
     }
 
+    /**
+     * @group functional
+     */
     public function testSearch()
     {
         $client = $this->_getClient();
@@ -112,6 +120,9 @@ class BoolTest extends BaseTest
         $this->assertEquals(0, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
 	public function testEmptyBoolQuery() {
         $index = $this->_createIndex();
 		$type = new Type($index, 'test');
@@ -129,7 +140,5 @@ class BoolTest extends BaseTest
 		$resultSet = $type->search($boolQuery);
 
 		$this->assertEquals($resultSet->count(), $docNumber);
-
-
 	}
 }

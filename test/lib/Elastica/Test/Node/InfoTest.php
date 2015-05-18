@@ -8,6 +8,9 @@ use Elastica\Test\Base as BaseTest;
 
 class InfoTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testGet()
     {
         $client = $this->_getClient();
@@ -27,6 +30,9 @@ class InfoTest extends BaseTest
         $this->assertNull($info->get('test', 'notest', 'notexist'));
     }
 
+    /**
+     * @group functional
+     */
     public function testHasPlugin()
     {
         $client = $this->_getClient();

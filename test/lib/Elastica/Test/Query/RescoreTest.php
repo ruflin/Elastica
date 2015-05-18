@@ -11,17 +11,8 @@ use Elastica\Test\Base as BaseTest;
 class RescoreTest extends BaseTest
 {
     /**
-     * @var Index
+     * @group unit
      */
-    protected $_index;
-
-    protected function setUp()
-    {
-        parent::setUp();
-        $this->_index = $this->_createIndex();
-        $this->_index->refresh();
-    }
-
     public function testToArray()
     {
         $query = new Query();
@@ -59,6 +50,9 @@ class RescoreTest extends BaseTest
         $this->assertEquals($expected, $data);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetSize()
     {
         $query = new Query();
@@ -98,6 +92,9 @@ class RescoreTest extends BaseTest
         $this->assertEquals($expected, $data);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetWeights()
     {
         $query = new Query();
@@ -141,6 +138,9 @@ class RescoreTest extends BaseTest
         $this->assertEquals($expected, $data);
     }
 
+    /**
+     * @group functional
+     */
     public function testMultipleQueries()
     {
         $query = new Query();
@@ -199,13 +199,18 @@ class RescoreTest extends BaseTest
 
         $this->assertEquals($expected, $data);
 
-        $results = $this->_index->search($query);
+        $index = $this->_createIndex();
+        $index->refresh();
+        $results = $index->search($query);
         $response = $results->getResponse();
 
         $this->assertEquals(true, $response->isOk());
         $this->assertEquals(0, $results->getTotalHits());
     }
 
+    /**
+     * @group functional
+     */
     public function testQuery()
     {
         $query = new Query();
@@ -221,7 +226,9 @@ class RescoreTest extends BaseTest
         $query->setRescore($queryRescore);
         $data = $query->toArray();
 
-        $results = $this->_index->search($query);
+        $index = $this->_createIndex();
+        $index->refresh();
+        $results = $index->search($query);
         $response = $results->getResponse();
 
         $this->assertEquals(true, $response->isOk());

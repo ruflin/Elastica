@@ -12,7 +12,6 @@ use Elastica\Test\Base as BaseTest;
 
 class BoolTest extends BaseTest
 {
-
     /**
      * @return array
      */
@@ -81,6 +80,7 @@ class BoolTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @dataProvider getTestToArrayData()
      * @param Bool  $bool
      * @param array $expectedArray
@@ -90,17 +90,22 @@ class BoolTest extends BaseTest
         $this->assertEquals($expectedArray, $bool->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testBoolFilter()
     {
         $index = $this->_createIndex();
         $type = $index->getType('book');
 
         //index some test data
-        $type->addDocument(new Document(1, array('author' => 'Michael Shermer', 'title' => 'The Believing Brain', 'publisher' => 'Robinson')));
-        $type->addDocument(new Document(2, array('author' => 'Jared Diamond', 'title' => 'Guns, Germs and Steel', 'publisher' => 'Vintage')));
-        $type->addDocument(new Document(3, array('author' => 'Jared Diamond', 'title' => 'Collapse', 'publisher' => 'Penguin')));
-        $type->addDocument(new Document(4, array('author' => 'Richard Dawkins', 'title' => 'The Selfish Gene', 'publisher' => 'OUP Oxford')));
-        $type->addDocument(new Document(5, array('author' => 'Anthony Burges', 'title' => 'A Clockwork Orange', 'publisher' => 'Penguin')));
+        $type->addDocuments(array(
+            new Document(1, array('author' => 'Michael Shermer', 'title' => 'The Believing Brain', 'publisher' => 'Robinson')),
+            new Document(2, array('author' => 'Jared Diamond', 'title' => 'Guns, Germs and Steel', 'publisher' => 'Vintage')),
+            new Document(3, array('author' => 'Jared Diamond', 'title' => 'Collapse', 'publisher' => 'Penguin')),
+            new Document(4, array('author' => 'Richard Dawkins', 'title' => 'The Selfish Gene', 'publisher' => 'OUP Oxford')),
+            new Document(5, array('author' => 'Anthony Burges', 'title' => 'A Clockwork Orange', 'publisher' => 'Penguin')),
+        ));
 
         $index->refresh();
 
@@ -148,6 +153,7 @@ class BoolTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddMustInvalidException()
@@ -157,6 +163,7 @@ class BoolTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddMustNotInvalidException()
@@ -166,6 +173,7 @@ class BoolTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddShouldInvalidException()
