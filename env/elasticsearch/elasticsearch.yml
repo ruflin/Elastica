@@ -25,6 +25,9 @@ bootstrap.mlockall: true
 # Without this, travis builds will be failed with OutOfMemory error
 processors: 1
 
+# All nodes will be called Elastica
+node.name: Elastica
+
 # Ports config
 http.port: 9200
 transport.tcp.port: 9300

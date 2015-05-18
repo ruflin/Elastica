@@ -48,9 +48,10 @@ class NodeTest extends BaseTest
     public function testGetName()
     {
         $nodes = $this->_getClient()->getCluster()->getNodes();
-        $this->assertCount(2, $nodes);
+        // At least 1 instance must exist
+        $this->assertGreaterThan(0, $nodes);
         foreach ($nodes as $node) {
-            $this->assertContains($node->getName(), array('Silver Fox', 'Skywalker'));
+            $this->assertEquals($node->getName(), 'Elastica');
         }
     }
 }
