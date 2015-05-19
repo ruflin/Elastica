@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Deprecated
 - Facets are deprecated. You are encouraged to migrate to aggregations instead.
+- Elastica\Query\Builder is deprecated. Use new Elastica\QueryBuilder instead.
 
 
 
