@@ -9,6 +9,8 @@ namespace Elastica\Facet;
  * @package Elastica
  * @author Konstantin Nikiforov <konstantin.nikiforov@gmail.com>
  * @link https://github.com/zenobase/geocluster-facet
+ *
+ * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
  */
 class GeoCluster extends AbstractFacet
 {

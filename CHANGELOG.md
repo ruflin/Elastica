@@ -15,7 +15,8 @@ All notable changes to this project will be documented in this file based on the
 - Make host for all tests dynamic to prepare it for a more dynamic test environment #846
 - Node information is retrieved based on id instead of name as multiple nodes can have the same name.
 
-
+### Deprecated
+- Facets are deprecated. You are encouraged to migrate to aggregations instead.
 
 
 

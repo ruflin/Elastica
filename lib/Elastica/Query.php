@@ -301,6 +301,8 @@ class Query extends Param
      * @param  array $facets List of facet objects
      * @return $this
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets.html
+     *
+     * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
      */
     public function setFacets(array $facets)
     {
@@ -317,6 +319,8 @@ class Query extends Param
      *
      * @param  \Elastica\Facet\AbstractFacet $facet Facet object
      * @return $this
+     *
+     * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
      */
     public function addFacet(AbstractFacet $facet)
     {

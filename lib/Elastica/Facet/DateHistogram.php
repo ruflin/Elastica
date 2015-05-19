@@ -10,6 +10,8 @@ namespace Elastica\Facet;
  * @author Raul Martinez Jr  <juneym@gmail.com>
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-date-histogram-facet.html
  * @link https://github.com/elasticsearch/elasticsearch/issues/591
+ *
+ * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
  */
 class DateHistogram extends Histogram
 {

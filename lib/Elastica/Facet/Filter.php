@@ -11,6 +11,8 @@ use Elastica\Filter\AbstractFilter;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-filter-facet.html
+ *
+ * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
  */
 class Filter extends AbstractFacet
 {
