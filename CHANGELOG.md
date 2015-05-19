@@ -16,8 +16,8 @@ All notable changes to this project will be documented in this file based on the
 - Node information is retrieved based on id instead of name as multiple nodes can have the same name.
 
 ### Deprecated
-- Facets are deprecated. You are encouraged to migrate to aggregations instead.
-- Elastica\Query\Builder is deprecated. Use new Elastica\QueryBuilder instead.
+- Facets are deprecated. You are encouraged to migrate to aggregations instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
+- Elastica\Query\Builder is deprecated. Use new Elastica\QueryBuilder instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
 
 
 
