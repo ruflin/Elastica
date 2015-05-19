@@ -54,4 +54,18 @@ abstract class AbstractFilter extends Param
     {
         return $this->setParam('_name', $name);
     }
+
+
+    /**
+     * Disable the filter cache by default
+     *
+     * @inheritdoc
+     */
+    public function toArray() {
+        if (! $this->hasParam('_cache')) {
+            $this->setCached(false);
+        }
+
+        return parent::toArray();
+    }
 }
