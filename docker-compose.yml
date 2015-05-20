@@ -1,0 +1,27 @@
+elastica:
+  build: .
+  ports:
+    - "9200:9200"
+  volumes:
+    - .:/app
+  links:
+    - nginx
+    - elasticsearch
+  environment:
+    ES_HOST: elasticsearch
+    PROXY_HOST: nginx
+
+elasticsearch:
+  build: ./env/elasticsearch/
+
+nginx:
+  image: nginx
+  volumes:
+    - ./env/nginx/nginx.conf:/etc/nginx/nginx.conf
+    - ./env/nginx/mime.types:/etc/nginx/mime.types
+  ports:
+    - "12345"
+    - "12346"
+    - "80"
+  links:
+    - elasticsearch

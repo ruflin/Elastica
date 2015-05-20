@@ -22,6 +22,11 @@ class Node
     protected $_client = null;
 
     /**
+     * @var string Unique node id
+     */
+    protected $_id = '';
+
+    /**
      * Node name
      *
      * @var string Node name
@@ -45,14 +50,31 @@ class Node
     /**
      * Create a new node object
      *
-     * @param string           $name   Node name
+     * @param string           $id   Node id or name
      * @param \Elastica\Client $client Node object
      */
-    public function __construct($name, Client $client)
+    public function __construct($id, Client $client)
     {
-        $this->_name = $name;
         $this->_client = $client;
-        $this->refresh();
+        $this->setId($id);
+    }
+
+    /**
+     * @return string Unique node id. Can also be name if id not exists.
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    /**
+     * @param string $id Node id
+     * @return $this Refreshed object
+     */
+    public function setId($id)
+    {
+        $this->_id = $id;
+        return $this->refresh();
     }
 
     /**
@@ -62,6 +84,9 @@ class Node
      */
     public function getName()
     {
+        if (empty($this->_name)) {
+            $this->_name = $this->getInfo()->getName();
+        }
         return $this->_name;
     }
 
@@ -125,8 +150,7 @@ class Node
      */
     public function shutdown($delay = '1s')
     {
-        $path = '_cluster/nodes/'.$this->getName().'/_shutdown?delay='.$delay;
-
+        $path = '_cluster/nodes/'.$this->getId().'/_shutdown?delay='.$delay;
         return $this->_client->request($path, Request::POST);
     }
 }
