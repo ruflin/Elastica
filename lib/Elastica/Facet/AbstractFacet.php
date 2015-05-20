@@ -13,6 +13,8 @@ use Elastica\Param;
  * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
+ *
+ * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
  */
 abstract class AbstractFacet extends Param
 {

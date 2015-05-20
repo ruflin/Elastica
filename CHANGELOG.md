@@ -22,6 +22,11 @@ All notable changes to this project will be documented in this file based on the
 - `Elastica\ScanAndScroll::$_lastScrollId` removed: `key()` now always returns the next scroll id [#842](https://github.com/ruflin/Elastica/issues/842/)
 
 
+### Deprecated
+- Facets are deprecated. You are encouraged to migrate to aggregations instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
+- Elastica\Query\Builder is deprecated. Use new Elastica\QueryBuilder instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
+
+
 
 ## [2.0.0](https://github.com/ruflin/Elastica/releases/tag/2.0.0) - 2015-05-11
 
