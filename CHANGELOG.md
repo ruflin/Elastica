@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 - Support for 'precision_threshold' and 'rehash' options for the Cardinality Aggregation [#851]
 - Support for retrieving id node
 - Scroll Iterator [#842](https://github.com/ruflin/Elastica/issues/842/)
+- Gitter Elastica Chat Room add for Elastica discussions: https://gitter.im/ruflin/Elastica
 
 
 ### Improvements
