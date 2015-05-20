@@ -34,4 +34,11 @@ class Missing extends AbstractFilter
     {
         return $this->setParam('field', (string) $field);
     }
+
+    /**
+     * @return bool
+     */
+    public function isSupportingCache() {
+        return false;
+    }
 }

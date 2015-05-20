@@ -19,4 +19,11 @@ class MatchAll extends AbstractFilter
     {
         $this->_params = new \stdClass();
     }
+
+    /**
+     * @return bool
+     */
+    public function isSupportingCache() {
+        return false;
+    }
 }

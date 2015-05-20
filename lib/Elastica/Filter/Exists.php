@@ -32,4 +32,11 @@ class Exists extends AbstractFilter
     {
         return $this->setParam('field', $field);
     }
+
+    /**
+     * @return bool
+     */
+    public function isSupportingCache() {
+        return false;
+    }
 }
