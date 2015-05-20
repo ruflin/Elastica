@@ -507,6 +507,18 @@ class Search
     }
 
     /**
+     * Returns the Scroll Iterator
+     *
+     * @see Elastica\Scroll
+     * @param  string        $expiryTime
+     * @return Scroll
+     */
+    public function scroll($expiryTime = '1m')
+    {
+        return new Scroll($this, $expiryTime);
+    }
+
+    /**
      * Returns the ScanAndScroll Iterator
      *
      * @see Elastica\ScanAndScroll
