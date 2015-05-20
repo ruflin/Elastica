@@ -13,6 +13,8 @@ class MemcacheTest extends BaseTest
 {
     public static function setUpBeforeClass()
     {
+
+        self::markTestSkipped('pecl/memcache must be installed to run this test case');
         if (!extension_loaded('Memcache')) {
             self::markTestSkipped('pecl/memcache must be installed to run this test case');
         }

@@ -13,6 +13,8 @@ class ShutdownTest extends BaseTest
      */
     public function testNodeShutdown()
     {
+        self::markTestSkipped('pecl/memcache must be installed to run this test case');
+
         // Get cluster nodes
         $client = $this->_getClient();
         $cluster = $client->getCluster();
