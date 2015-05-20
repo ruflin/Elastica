@@ -12,8 +12,6 @@ class HttpTest extends BaseTest
 {
     public static function setUpBeforeClass()
     {
-        self::markTestSkipped('pecl/memcache must be installed to run this test case');
-
         if (defined('DEBUG') && !DEBUG) {
             self::markTestSkipped('The DEBUG constant must be set to true for this test to run');
         }
