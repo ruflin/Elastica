@@ -12,9 +12,6 @@ class GuzzleTest extends BaseTest
 {
     public static function setUpBeforeClass()
     {
-        self::markTestSkipped('Skip test because of PHP 7');
-
-
         if (!class_exists('GuzzleHttp\\Client')) {
             self::markTestSkipped('guzzlehttp/guzzle package should be installed to run guzzle transport tests');
         }
