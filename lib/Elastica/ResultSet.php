@@ -166,6 +166,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      * Returns whether facets exist
      *
      * @return boolean Facet existence
+     *
+     * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
      */
     public function hasFacets()
     {
@@ -220,6 +222,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      * Returns all facets results
      *
      * @return array Facet results
+     *
+     * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
      */
     public function getFacets()
     {

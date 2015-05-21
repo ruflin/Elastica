@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 - Support for 'precision_threshold' and 'rehash' options for the Cardinality Aggregation [#851]
 - Support for retrieving id node
 - Scroll Iterator [#842](https://github.com/ruflin/Elastica/issues/842/)
+- Gitter Elastica Chat Room add for Elastica discussions: https://gitter.im/ruflin/Elastica
 
 
 ### Improvements
@@ -20,6 +21,11 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 - `Elastica\ScanAndScroll::$_lastScrollId` removed: `key()` now always returns the next scroll id [#842](https://github.com/ruflin/Elastica/issues/842/)
+
+
+### Deprecated
+- Facets are deprecated. You are encouraged to migrate to aggregations instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
+- Elastica\Query\Builder is deprecated. Use new Elastica\QueryBuilder instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
 
 
 

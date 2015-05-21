@@ -448,7 +448,7 @@ class Search
     /**
      *
      * @param  mixed         $query
-     * @param $fullResult (default = false) By default only the total hit count is returned. If set to true, the full ResultSet including facets is returned.
+     * @param $fullResult (default = false) By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned.
      * @return int|ResultSet
      */
     public function count($query = '', $fullResult = false)
