@@ -22,14 +22,11 @@ install:
   - /bin/bash ansible/provision.sh
 
 before_script:
-  - mkdir -p build/logs build/coverage
   - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$TRAVIS_PHP_VERSION" != "7" ]; then echo "extension=memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;'
   - if ! $(phpenv version-name | grep -q '5.3'); then sudo composer require "guzzlehttp/guzzle" "4.2.*" --dev --no-ansi --no-progress --no-interaction; fi
 
 script:
-  - phpunit -c test/ --coverage-clover build/coverage/clover-unit.xml --group unit
-  - phpunit -c test/ --coverage-clover build/coverage/clover-functional.xml --group functional
-  - phpunit -c test/ --coverage-clover build/coverage/clover-shutdown.xml --group shutdown
+  - make phpunit
 
 after_script:
   - cat /var/log/elasticsearch/*.log
