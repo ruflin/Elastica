@@ -17,8 +17,6 @@ matrix:
 
 env:
   matrix:
-    - ES_COMPOSER_NODEV=no
-    - ES_COMPOSER_NODEV=yes
 
 install:
   - /bin/bash ansible/provision.sh
@@ -26,7 +24,7 @@ install:
 before_script:
   - mkdir -p build/logs build/coverage
   - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$TRAVIS_PHP_VERSION" != "7" ]; then echo "extension=memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;'
-  - if [ $ES_COMPOSER_NODEV == "no" ] && ! $(phpenv version-name | grep -q '5.3'); then sudo composer require "guzzlehttp/guzzle" "4.2.*" --dev --no-ansi --no-progress --no-interaction; fi
+  - if ! $(phpenv version-name | grep -q '5.3'); then sudo composer require "guzzlehttp/guzzle" "4.2.*" --dev --no-ansi --no-progress --no-interaction; fi
 
 script:
   - phpunit -c test/ --coverage-clover build/coverage/clover-unit.xml --group unit
