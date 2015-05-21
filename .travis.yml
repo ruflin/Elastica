@@ -1,18 +1,9 @@
 language: php
 
 php:
-  - 5.3
-  - 5.4
-  - 5.5
   - 5.6
-  - 7
-  - hhvm
 
 matrix:
-  allow_failures:
-    - php: 5.3
-    - php: 7
-    - php: hhvm
   fast_finish: true
 
 env:
@@ -24,14 +15,11 @@ install:
   - /bin/bash ansible/provision.sh
 
 before_script:
-  - mkdir -p build/logs build/coverage
   - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$TRAVIS_PHP_VERSION" != "7" ]; then echo "extension=memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;'
   - if [ $ES_COMPOSER_NODEV == "no" ] && ! $(phpenv version-name | grep -q '5.3'); then sudo composer require "guzzlehttp/guzzle" "5.3.*" --dev --no-ansi --no-progress --no-interaction; fi
 
 script:
-  - phpunit -c test/ --coverage-clover build/coverage/clover-functional.xml --group functional
-  - phpunit -c test/ --coverage-clover build/coverage/clover-shutdown.xml --group shutdown
-  - phpunit -c test/ --coverage-clover build/coverage/clover-unit.xml --group unit
+  - make phpunit
 
 after_script:
   - cat /var/log/elasticsearch/*.log
