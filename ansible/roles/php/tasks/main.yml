@@ -39,4 +39,5 @@
     command=install
     optimize_autoloader=yes
     prefer_source=yes
+    dev=true
     working_dir={{ ES_PROJECT_ROOT }}
