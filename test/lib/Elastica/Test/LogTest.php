@@ -14,8 +14,6 @@ class LogTest extends BaseTest
 
     public static function setUpBeforeClass()
     {
-        self::markTestSkipped('pecl/memcache must be installed to run this test case');
-
         if (!class_exists('Psr\Log\AbstractLogger')) {
             self::markTestSkipped('The Psr extension is not available.');
         }

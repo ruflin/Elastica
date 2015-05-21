@@ -449,8 +449,6 @@ class BulkTest extends BaseTest
      */
     public function testUdp($clientConfig, $host, $port, $shouldFail = false)
     {
-        self::markTestSkipped('pecl/memcache must be installed to run this test case');
-
         if (!function_exists('socket_create')) {
             $this->markTestSkipped('Function socket_create() does not exist.');
         }
