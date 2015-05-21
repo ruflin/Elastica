@@ -29,9 +29,9 @@ before_script:
   - if [ $ES_COMPOSER_NODEV == "no" ] && ! $(phpenv version-name | grep -q '5.3'); then sudo composer require "guzzlehttp/guzzle" "4.2.*" --dev --no-ansi --no-progress --no-interaction; fi
 
 script:
+  - phpunit -c test/ --coverage-clover build/coverage/clover-unit.xml --group unit
   - phpunit -c test/ --coverage-clover build/coverage/clover-functional.xml --group functional
   - phpunit -c test/ --coverage-clover build/coverage/clover-shutdown.xml --group shutdown
-  - phpunit -c test/ --coverage-clover build/coverage/clover-unit.xml --group unit
 
 after_script:
   - cat /var/log/elasticsearch/*.log
