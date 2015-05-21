@@ -24,7 +24,7 @@ class GuzzleTest extends BaseTest
             define('DEBUG', true);
         }
 
-        if (version_compare(php_version(), 7, '>=')) {
+        if (version_compare(phpversion(), 7, '>=')) {
             self::markTestSkipped('Http tests currently do not work with PHP 7');
         }
     }
