@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file based on the
 - Introduction of Changelog standard based on http://keepachangelog.com/. changes.txt moved to CHANGELOG.md [#844](https://github.com/ruflin/Elastica/issues/844/)
 - Make host for all tests dynamic to prepare it for a more dynamic test environment #846
 - Node information is retrieved based on id instead of name as multiple nodes can have the same name.
+- Guzzle Http dependency updated to 5.3.*
 
 ### Backward Compatibility Breaks
 - `Elastica\ScanAndScroll::$_lastScrollId` removed: `key()` now always returns the next scroll id [#842](https://github.com/ruflin/Elastica/issues/842/)
