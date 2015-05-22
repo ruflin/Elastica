@@ -13,6 +13,10 @@ class GuzzleTest extends BaseTest
     public static function setUpBeforeClass()
     {
 
+        if (version_compare(phpversion(), 7, '>=')) {
+            self::markTestSkipped('Http tests currently do not work with PHP 7');
+        }
+
         if (!class_exists('GuzzleHttp\\Client')) {
             self::markTestSkipped('guzzlehttp/guzzle package should be installed to run guzzle transport tests');
         }
@@ -26,9 +30,7 @@ class GuzzleTest extends BaseTest
         }
 
         self::markTestSkipped('Http tests currently do not work with PHP 7');
-        if (version_compare(phpversion(), 7, '>=')) {
-            self::markTestSkipped('Http tests currently do not work with PHP 7');
-        }
+
     }
 
     /**
