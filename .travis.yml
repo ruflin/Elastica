@@ -15,9 +15,6 @@ matrix:
     - php: hhvm
   fast_finish: true
 
-env:
-  matrix:
-
 install:
   - /bin/bash ansible/provision.sh
 
