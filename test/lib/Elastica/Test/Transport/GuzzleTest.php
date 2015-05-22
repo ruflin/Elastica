@@ -17,12 +17,14 @@ class GuzzleTest extends BaseTest
             self::markTestSkipped('guzzlehttp/guzzle package should be installed to run guzzle transport tests');
         }
 
-        self::markTestSkipped('Http tests currently do not work with PHP 7');
 
 
         if (defined('DEBUG') && !DEBUG) {
             $this->markTestSkipped('The DEBUG constant must be set to true for this test to run');
         }
+
+        self::markTestSkipped('Http tests currently do not work with PHP 7');
+
 
         if (!defined('DEBUG')) {
             define('DEBUG', true);
