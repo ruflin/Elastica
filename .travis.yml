@@ -2,20 +2,14 @@ language: php
 
 php:
   - 5.6
-<<<<<<< HEAD
-=======
   - 5.5
   - 5.4
   - 5.3
   - 7
   - hhvm
->>>>>>> master
 
 matrix:
   fast_finish: true
-
-env:
-  matrix:
 
 install:
   - /bin/bash ansible/provision.sh
