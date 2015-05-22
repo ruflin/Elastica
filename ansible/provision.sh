@@ -22,11 +22,6 @@ run_playbook() {
         export ES_PROJECT_ROOT="$(dirname $(dirname $(readlink -f $0)))"
     fi
 
-    # Install or not require-dev packages
-    if [ -z "$ES_COMPOSER_NODEV" ]; then
-        export ES_COMPOSER_NODEV="no"
-    fi
-
     if [ ! -x $(which ansible-playbook) ]; then
         echo "Ansible is not installed"
         return 1
