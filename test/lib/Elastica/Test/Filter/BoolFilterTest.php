@@ -189,7 +189,8 @@ class BoolFilterTest extends BaseTest
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testOldObject() {
-        if (version_compare(phpversion(), 7, '<')) {
+
+        if (version_compare(phpversion(), 7, '>=')) {
             self::markTestSkipped('These objects are not supported in PHP 7');
         }
 
