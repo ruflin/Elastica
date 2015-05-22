@@ -9,6 +9,8 @@ namespace Elastica\Facet;
  * @package Elastica
  * @author Raul Martinez Jr  <juneym@gmail.com>
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-histogram-facet.html
+ *
+ * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
  */
 class Histogram extends AbstractFacet
 {

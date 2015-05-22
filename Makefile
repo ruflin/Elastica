@@ -75,9 +75,9 @@ dependencies: prepare
 		${SOURCE}
 
 phpunit: prepare
+	phpunit -c test/ --coverage-clover build/coverage/clover-unit.xml --group unit
 	phpunit -c test/ --coverage-clover build/coverage/clover-functional.xml --group functional
 	phpunit -c test/ --coverage-clover build/coverage/clover-shutdown.xml --group shutdown
-	phpunit -c test/ --coverage-clover build/coverage/clover-unit.xml --group unit
 
 doc: prepare
 	phpdoc run -d lib/ -t build/docs

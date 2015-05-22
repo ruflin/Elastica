@@ -37,7 +37,7 @@
 - name: install dependencies from composer.json
   composer: >
     command=install
-    no_dev={{ ES_COMPOSER_NODEV }}
     optimize_autoloader=yes
     prefer_source=yes
+    no_dev=no
     working_dir={{ ES_PROJECT_ROOT }}
