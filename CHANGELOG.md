@@ -11,13 +11,15 @@ All notable changes to this project will be documented in this file based on the
 - Support for retrieving id node
 - Scroll Iterator [#842](https://github.com/ruflin/Elastica/issues/842/)
 - Gitter Elastica Chat Room add for Elastica discussions: https://gitter.im/ruflin/Elastica
+- Introduce PHP7 compatibility and tests.
 
 
 ### Improvements
 - Introduction of Changelog standard based on http://keepachangelog.com/. changes.txt moved to CHANGELOG.md [#844](https://github.com/ruflin/Elastica/issues/844/)
 - Make host for all tests dynamic to prepare it for a more dynamic test environment #846
 - Node information is retrieved based on id instead of name as multiple nodes can have the same name.
-- Remote NO_DEV builds from travis build matrix to speed up building. All builds include no dev packages.
+- Guzzle Http dependency updated to 5.3.*
+- Remove NO_DEV builds from travis build matrix to speed up building. All builds include no dev packages.
 
 ### Backward Compatibility Breaks
 - `Elastica\ScanAndScroll::$_lastScrollId` removed: `key()` now always returns the next scroll id [#842](https://github.com/ruflin/Elastica/issues/842/)
@@ -26,6 +28,7 @@ All notable changes to this project will be documented in this file based on the
 ### Deprecated
 - Facets are deprecated. You are encouraged to migrate to aggregations instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
 - Elastica\Query\Builder is deprecated. Use new Elastica\QueryBuilder instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
+- For PHP 7 compatibility Elastica\Query\Bool was renamed to *\BoolQuery, Elastica\Filter\Bool was renamed to BoolFilter, Elastica\Transport\Null was renamed to NullTransport as Null and Bool are reserved phrases in PHP 7. Proxy objects for all three exist to keep backward compatibility. It is recommended to start using the new objects as the proxy classes will be deprecated as soon as PHP 7 is stable.
 
 
 
