@@ -10,7 +10,7 @@ use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 
-class BoolTest extends BaseTest
+class BoolQueryTest extends BaseTest
 {
     /**
      * @group unit
@@ -141,4 +141,32 @@ class BoolTest extends BaseTest
 
 		$this->assertEquals($resultSet->count(), $docNumber);
 	}
+
+
+    /**
+     * @group functional
+     */
+    public function testOldObject() {
+
+        if (version_compare(phpversion(), 7, '>=')) {
+            self::markTestSkipped('These objects are not supported in PHP 7');
+        }
+
+        $index = $this->_createIndex();
+        $type = new Type($index, 'test');
+
+        $docNumber = 3;
+        for ($i = 0; $i < $docNumber; $i++) {
+            $doc = new Document($i, array('email' => 'test@test.com'));
+            $type->addDocument($doc);
+        }
+
+        $index->refresh();
+
+        $boolQuery = new \Elastica\Query\Bool();
+
+        $resultSet = $type->search($boolQuery);
+
+        $this->assertEquals($resultSet->count(), $docNumber);
+    }
 }

@@ -14,7 +14,7 @@ use Elastica\Transport\NullTransport;
  * @package Elastica
  * @author James Boehmer <james.boehmer@jamesboehmer.com>
  */
-class NullTest extends BaseTest
+class NullTransportTest extends BaseTest
 {
     /**
      * @group functional
@@ -60,6 +60,10 @@ class NullTest extends BaseTest
         $this->assertEquals(0, $shards["failed"]);
     }
 
+
+    /**
+     * @group functional
+     */
     public function testExec()
     {
         $request = new Request('/test');
@@ -70,6 +74,26 @@ class NullTest extends BaseTest
         $this->assertInstanceOf('\Elastica\Response', $response);
 
 		$data = $response->getData();
+        $this->assertEquals($params, $data['params']);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testOldObject()
+    {
+        if (version_compare(phpversion(), 7, '>=')) {
+            self::markTestSkipped('These objects are not supported in PHP 7');
+        }
+
+        $request = new Request('/test');
+        $params = array('name' => 'ruflin');
+        $transport = new \Elastica\Transport\Null();
+        $response = $transport->exec($request, $params);
+
+        $this->assertInstanceOf('\Elastica\Response', $response);
+
+        $data = $response->getData();
         $this->assertEquals($params, $data['params']);
     }
 }
