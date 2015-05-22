@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file based on the
 ### Deprecated
 - Facets are deprecated. You are encouraged to migrate to aggregations instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
 - Elastica\Query\Builder is deprecated. Use new Elastica\QueryBuilder instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
+- For PHP 7 compatibility Elastica\Query\Bool was renamed to *\BoolQuery, Elastica\Filter\Bool was renamed to BoolFilter, Elastica\Transport\Null was renamed to NullTransport as Null and Bool are reserved phrases in PHP 7. Proxy objects for all three exist to keep backward compatibility. It is recommended to start using the new objects as the proxy classes will be deprecated as soon as PHP 7 is stable.
 
 
 
