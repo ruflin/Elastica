@@ -2,7 +2,7 @@
 
 namespace Elastica\Transport;
 
-use Elastica\Transport\NullTransport
+use Elastica\Transport\NullTransport;
 
 /**
  * Elastica Null Transport object
