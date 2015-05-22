@@ -181,4 +181,19 @@ class BoolFilterTest extends BaseTest
         $filter = new BoolFilter();
         $filter->addShould('fail!');
     }
+
+    /**
+     * Small unit test to check if also the old object name works
+     *
+     * @group unit
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testOldObject() {
+        if (version_compare(phpversion(), 7, '<')) {
+            self::markTestSkipped('These objects are not supported in PHP 7');
+        }
+
+        $filter = new \Elastica\Filter\Bool();
+        $filter->addShould('fail!');
+    }
 }
