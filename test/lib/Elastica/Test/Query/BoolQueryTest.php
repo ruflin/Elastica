@@ -10,7 +10,7 @@ use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 
-class BoolTest extends BaseTest
+class BoolQueryTest extends BaseTest
 {
     /**
      * @group unit

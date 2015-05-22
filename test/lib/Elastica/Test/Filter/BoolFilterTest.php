@@ -10,7 +10,7 @@ use Elastica\Filter\Terms;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
 
-class BoolTest extends BaseTest
+class BoolFilterTest extends BaseTest
 {
     /**
      * @return array

@@ -14,7 +14,7 @@ use Elastica\Transport\NullTransport;
  * @package Elastica
  * @author James Boehmer <james.boehmer@jamesboehmer.com>
  */
-class NullTest extends BaseTest
+class NullTransportTest extends BaseTest
 {
     /**
      * @group functional
