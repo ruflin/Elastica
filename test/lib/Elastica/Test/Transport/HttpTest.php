@@ -12,8 +12,9 @@ class HttpTest extends BaseTest
 {
     public static function setUpBeforeClass()
     {
-        self::markTestSkipped('Disable because of PHP 7');
-
+        if (version_compare(phpversion(), 7, '>=')) {
+            self::markTestSkipped('Http tests currently do not work with PHP 7');
+        }
 
         if (defined('DEBUG') && !DEBUG) {
             self::markTestSkipped('The DEBUG constant must be set to true for this test to run');
