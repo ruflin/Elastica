@@ -13,7 +13,6 @@ class MemcacheTest extends BaseTest
 {
     public static function setUpBeforeClass()
     {
-        self::markTestSkipped('PHP 7');
         if (!extension_loaded('Memcache')) {
             self::markTestSkipped('pecl/memcache must be installed to run this test case');
         }

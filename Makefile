@@ -76,8 +76,8 @@ dependencies: prepare
 
 phpunit: prepare
 	phpunit -c test/ --coverage-clover build/coverage/clover-unit.xml --group unit
-	phpunit -c test/ --coverage-clover build/coverage/clover-functional.xml --group functional lib/Elastica/Test/ClientTest.php
-	#phpunit -c test/ --coverage-clover build/coverage/clover-shutdown.xml --group shutdown
+	phpunit -c test/ --coverage-clover build/coverage/clover-functional.xml --group functional
+	phpunit -c test/ --coverage-clover build/coverage/clover-shutdown.xml --group shutdown
 
 doc: prepare
 	phpdoc run -d lib/ -t build/docs
