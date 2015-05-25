@@ -29,7 +29,7 @@ RUN composer self-update
 
 # Install development tools
 RUN composer global require "phpunit/phpunit"
-RUN composer global require "pdepend/pdepend"
+RUN composer global require "pdepend/pdepend=2.0.*"
 RUN composer global require "phpmd/phpmd"
 RUN composer global require "mayflower/php-codebrowser"
 RUN composer global require "sebastian/phpcpd"
@@ -51,3 +51,6 @@ RUN composer install
 RUN composer require "guzzlehttp/guzzle"
 
 ENTRYPOINT []
+
+ENV ES_HOST elasticsearch
+ENV PROXY_HOST nginx
