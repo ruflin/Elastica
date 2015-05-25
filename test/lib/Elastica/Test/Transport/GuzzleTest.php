@@ -23,12 +23,12 @@ class GuzzleTest extends BaseTest
             $this->markTestSkipped('The DEBUG constant must be set to true for this test to run');
         }
 
-        self::markTestSkipped('Http tests currently do not work with PHP 7');
 
 
         if (!defined('DEBUG')) {
             define('DEBUG', true);
         }
+        self::markTestSkipped('Http tests currently do not work with PHP 7');
 
     }
 
