@@ -69,7 +69,7 @@ class RoundRobinTest extends Base
     {
         $connections = array(
             new Connection(array('host' => '255.255.255.0', 'timeout' => $this->_timeout)),
-            new Connection(array('host' => $this->_getHost())),
+            new Connection(array('host' => $this->_getHost(), 'timeout' => $this->_timeout)),
         );
 
         $count = 0;
