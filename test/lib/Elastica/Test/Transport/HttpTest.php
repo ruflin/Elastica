@@ -15,14 +15,6 @@ class HttpTest extends BaseTest
         if (version_compare(phpversion(), 7, '>=')) {
             self::markTestSkipped('Http tests currently do not work with PHP 7');
         }
-
-        if (defined('DEBUG') && !DEBUG) {
-            self::markTestSkipped('The DEBUG constant must be set to true for this test to run');
-        }
-
-        if (!defined('DEBUG')) {
-            define('DEBUG', true);
-        }
     }
 
     /**
@@ -54,6 +46,8 @@ class HttpTest extends BaseTest
      */
     public function testDynamicHttpMethodBasedOnConfigParameter(array $config, $httpMethod)
     {
+        $this->_checkDebug();
+
         $client = $this->_getClient($config);
 
         $index = $client->getIndex('dynamic_http_method_test');
@@ -77,6 +71,8 @@ class HttpTest extends BaseTest
      */
     public function testDynamicHttpMethodOnlyAffectsRequestsWithBody(array $config, $httpMethod)
     {
+        $this->_checkDebug();
+
         $client = $this->_getClient($config);
 
         $status = $client->getStatus();

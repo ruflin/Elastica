@@ -129,4 +129,14 @@ class Base extends \PHPUnit_Framework_TestCase
 
         return in_array('shutdown', $groups);
     }
+
+    /**
+     * Skips test if debugging is not enabled or not set
+     */
+    protected function _checkDebug() {
+
+        if (defined('DEBUG') === false || DEBUG === false) {
+            self::markTestSkipped('The DEBUG constant must be set to true for this test to run');
+        }
+    }
 }
