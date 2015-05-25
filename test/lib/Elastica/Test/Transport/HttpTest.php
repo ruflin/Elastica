@@ -44,7 +44,6 @@ class HttpTest extends BaseTest
      */
     public function testDynamicHttpMethodBasedOnConfigParameter(array $config, $httpMethod)
     {
-        self::_checkDebug();
 
         $client = $this->_getClient($config);
 
@@ -69,7 +68,6 @@ class HttpTest extends BaseTest
      */
     public function testDynamicHttpMethodOnlyAffectsRequestsWithBody(array $config, $httpMethod)
     {
-        self::_checkDebug();
 
         $client = $this->_getClient($config);
 

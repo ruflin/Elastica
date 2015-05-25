@@ -21,7 +21,6 @@ class TransportBenchmarkTest extends BaseTest
     {
         self::markTestSkipped('PHP 7');
 
-        self::_checkDebug();
     }
 
     public static function tearDownAfterClass()
