@@ -26,7 +26,7 @@ class GuzzleTest extends BaseTest
 
 
         if (!defined('DEBUG')) {
-            define('DEBUG', true);
+            //define('DEBUG', true);
         }
         self::markTestSkipped('Http tests currently do not work with PHP 7');
 
