@@ -19,14 +19,6 @@ class GuzzleTest extends BaseTest
         if (!class_exists('GuzzleHttp\\Client')) {
             self::markTestSkipped('guzzlehttp/guzzle package should be installed to run guzzle transport tests');
         }
-
-        if (defined('DEBUG') && !DEBUG) {
-            $this->markTestSkipped('The DEBUG constant must be set to true for this test to run');
-        }
-
-        if (!defined('DEBUG')) {
-            define('DEBUG', true);
-        }
     }
 
     /**
