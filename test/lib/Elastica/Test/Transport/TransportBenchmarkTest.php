@@ -19,6 +19,8 @@ class TransportBenchmarkTest extends BaseTest
 
     public static function setUpBeforeClass()
     {
+        self::markTestSkipped('PHP 7');
+
         self::_checkDebug();
     }
 
