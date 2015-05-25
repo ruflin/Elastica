@@ -15,6 +15,11 @@ use Elastica\Test\Base as BaseTest;
 
 class BulkTest extends BaseTest
 {
+    public static function setUpBeforeClass()
+    {
+        self::markTestSkipped('PHP 7');
+    }
+
     /**
      * @group functional
      */
