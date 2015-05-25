@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file based on the
 - Node information is retrieved based on id instead of name as multiple nodes can have the same name.
 - Guzzle Http dependency updated to 5.3.*
 - Remove NO_DEV builds from travis build matrix to speed up building. All builds include no dev packages.
+- Introduction of benchmark test group to make it easy to run benchmark tests.
 
 ### Backward Compatibility Breaks
 - `Elastica\ScanAndScroll::$_lastScrollId` removed: `key()` now always returns the next scroll id [#842](https://github.com/ruflin/Elastica/issues/842/)

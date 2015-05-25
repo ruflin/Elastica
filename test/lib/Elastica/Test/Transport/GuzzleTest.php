@@ -12,23 +12,13 @@ class GuzzleTest extends BaseTest
 {
     public static function setUpBeforeClass()
     {
+        if (version_compare(phpversion(), 7, '>=')) {
+            self::markTestSkipped('Http tests currently do not work with PHP 7');
+        }
 
-        /*if (!class_exists('GuzzleHttp\\Client')) {
+        if (!class_exists('GuzzleHttp\\Client')) {
             self::markTestSkipped('guzzlehttp/guzzle package should be installed to run guzzle transport tests');
         }
-
-
-
-        if (defined('DEBUG') && !DEBUG) {
-            $this->markTestSkipped('The DEBUG constant must be set to true for this test to run');
-        }
-
-
-
-        if (!defined('DEBUG')) {
-            define('DEBUG', true);
-        }*/
-        //self::markTestSkipped('Http tests currently do not work with PHP 7');
 
     }
 

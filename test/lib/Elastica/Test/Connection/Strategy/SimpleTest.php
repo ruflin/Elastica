@@ -16,6 +16,11 @@ use Elastica\Test\Base;
 class SimpleTest extends Base
 {
     /**
+     * @var int Number of seconds to wait before timeout is called. Is set low for tests to have fast tests.
+     */
+    protected $_timeout = 1;
+
+    /**
      * @group functional
      */
     public function testConnection()
@@ -35,7 +40,7 @@ class SimpleTest extends Base
      */
     public function testFailConnection()
     {
-        $config = array('host' => '255.255.255.0');
+        $config = array('host' => '255.255.255.0', 'timeout' => $this->_timeout);
         $client = $this->_getClient($config);
 
         $this->_checkStrategy($client);
@@ -49,8 +54,8 @@ class SimpleTest extends Base
     public function testWithOneFailConnection()
     {
         $connections = array(
-            new Connection(array('host' => '255.255.255.0')),
-            new Connection(array('host' => $this->_getHost())),
+            new Connection(array('host' => '255.255.255.0', 'timeout' => $this->_timeout)),
+            new Connection(array('host' => $this->_getHost(), 'timeout' => $this->_timeout)),
         );
 
         $count = 0;
@@ -77,9 +82,9 @@ class SimpleTest extends Base
     public function testWithNoValidConnection()
     {
         $connections = array(
-            new Connection(array('host' => '255.255.255.0', 'timeout' => 2)),
-            new Connection(array('host' => '45.45.45.45', 'port' => '80', 'timeout' => 2)),
-            new Connection(array('host' => '10.123.213.123', 'timeout' => 2)),
+            new Connection(array('host' => '255.255.255.0', 'timeout' => $this->_timeout)),
+            new Connection(array('host' => '45.45.45.45', 'port' => '80', 'timeout' => $this->_timeout)),
+            new Connection(array('host' => '10.123.213.123', 'timeout' => $this->_timeout)),
         );
 
         $count = 0;
