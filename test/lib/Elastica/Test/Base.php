@@ -96,7 +96,7 @@ class Base extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $hasGroup = $this->_isUnitGroup() || $this->_isFunctionalGroup() || $this->_isShutdownGroup() || $this->_isBenchmarkGroup();
-        $this->assertTrue($hasGroup, 'Every test must have one of "unit", "functional" or "shutdown" group');
+        $this->assertTrue($hasGroup, 'Every test must have one of "unit", "functional", "shutdown" or "benchmark" group');
     }
 
     protected function tearDown()
@@ -140,7 +140,7 @@ class Base extends \PHPUnit_Framework_TestCase
     /**
      * Skips test if debugging is not enabled or not set
      */
-    protected function _checkDebug() {
+    protected static function _checkDebug() {
 
         if (defined('DEBUG') === false || DEBUG === false) {
             self::markTestSkipped('The DEBUG constant must be set to true for this test to run');

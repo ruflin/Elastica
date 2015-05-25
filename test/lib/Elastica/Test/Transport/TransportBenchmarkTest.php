@@ -1,14 +1,15 @@
 <?php
 
-use Elastica\Client;
-use Elastica\Document;
-use Elastica\Filter\Term as TermFilter;
-use Elastica\Query;
-use Elastica\Query\MatchAll as MatchAllQuery;
-use Elastica\Request;
-use Elastica\Type\Mapping;
+namespace Elastica\Test\Transport;
 
-class TransportTest extends \PHPUnit_Framework_TestCase
+use Elastica\Client;
+use Elastica\Connection;
+use Elastica\Document;
+use Elastica\Index;
+use Elastica\Query;
+use Elastica\Test\Base as BaseTest;
+
+class TransportBenchmarkTest extends BaseTest
 {
     protected $_max = 1000;
 
@@ -18,11 +19,7 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        if (!defined('DEBUG')) {
-            define('DEBUG', true);
-        } elseif (false == DEBUG) {
-            self::markTestIncomplete('DEBUG const is set to false, it prevents query time measuring.');
-        }
+        self::_checkDebug();
     }
 
     public static function tearDownAfterClass()
@@ -36,17 +33,21 @@ class TransportTest extends \PHPUnit_Framework_TestCase
      */
     protected function getType(array $config)
     {
-        $client = new Client($config);
-        $index = $client->getIndex('test');
+        $client = $this->_getClient($config);
+        $index = $client->getIndex('benchmark' . uniqid());
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
-        return $index->getType('test');
+        return $index->getType('benchmark');
     }
 
     /**
      * @dataProvider providerTransport
+     * @group benchmark
      */
     public function testAddDocument(array $config, $transport)
     {
+        $this->_checkThrift($transport);
+
         $type = $this->getType($config);
         $index = $type->getIndex();
         $index->create(array(), true);
@@ -68,9 +69,13 @@ class TransportTest extends \PHPUnit_Framework_TestCase
     /**
      * @depends testAddDocument
      * @dataProvider providerTransport
+     * @group benchmark
      */
     public function testRandomRead(array $config, $transport)
     {
+
+        $this->_checkThrift($transport);
+
         $type = $this->getType($config);
 
         $type->search('test');
@@ -79,8 +84,8 @@ class TransportTest extends \PHPUnit_Framework_TestCase
         for ($i = 0; $i < $this->_max; $i++) {
             $test = rand(1, $this->_max);
             $query = new Query();
-            $query->setQuery(new MatchAllQuery());
-            $query->setPostFilter(new TermFilter(array('test' => $test)));
+            $query->setQuery(new \Elastica\Query\MatchAll());
+            $query->setPostFilter(new \Elastica\Filter\Term(array('test' => $test)));
             $result = $type->search($query);
             $times[] = $result->getResponse()->getQueryTime();
         }
@@ -91,9 +96,11 @@ class TransportTest extends \PHPUnit_Framework_TestCase
     /**
      * @depends testAddDocument
      * @dataProvider providerTransport
+     * @group benchmark
      */
     public function testBulk(array $config, $transport)
     {
+
         $type = $this->getType($config);
 
         $times = array();
@@ -113,16 +120,17 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider providerTransport
+     * @group benchmark
      */
     public function testGetMapping(array $config, $transport)
     {
-        $client = new Client($config);
-        $index = $client->getIndex('test');
+        $client = $this->_getClient($config);
+        $index = $client->getIndex('benchmark');
         $index->create(array(), true);
         $type = $index->getType('mappingTest');
 
         // Define mapping
-        $mapping = new Mapping();
+        $mapping = new \Elastica\Type\Mapping();
         $mapping->setParam('_boost', array('name' => '_boost', 'null_value' => 1.0));
         $mapping->setProperties(array(
             'id' => array('type' => 'integer', 'include_in_all' => false),
@@ -144,7 +152,7 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 
         $times = array();
         for ($i = 0; $i < $this->_max; $i++) {
-            $response = $type->request('_mapping', Request::GET);
+            $response = $type->request('_mapping', \Elastica\Request::GET);
             $times[] = $response->getQueryTime();
         }
         self::logResults('get mapping', $transport, $times);
@@ -156,8 +164,8 @@ class TransportTest extends \PHPUnit_Framework_TestCase
             array(
                 array(
                     'transport' => 'Http',
-                    'host' => 'localhost',
-                    'port' => 9200,
+                    'host' => $this->_getHost(),
+                    'port' => $this->_getPort(),
                     'persistent' => false,
                 ),
                 'Http:NotPersistent',
@@ -165,8 +173,8 @@ class TransportTest extends \PHPUnit_Framework_TestCase
             array(
                 array(
                     'transport' => 'Http',
-                    'host' => 'localhost',
-                    'port' => 9200,
+                    'host' => $this->_getHost(),
+                    'port' => $this->_getPort(),
                     'persistent' => true,
                 ),
                 'Http:Persistent',
@@ -174,7 +182,7 @@ class TransportTest extends \PHPUnit_Framework_TestCase
             array(
                 array(
                     'transport' => 'Thrift',
-                    'host' => 'localhost',
+                    'host' => $this->_getHost(),
                     'port' => 9500,
                     'config' => array(
                         'framedTransport' => false,
@@ -249,6 +257,13 @@ class TransportTest extends \PHPUnit_Framework_TestCase
                 );
             }
             echo "\n";
+        }
+    }
+
+    protected function _checkThrift($transport)
+    {
+        if (strpos($transport, 'Thrift') !== false && !class_exists('Elasticsearch\\RestClient')) {
+            self::markTestSkipped('munkie/elasticsearch-thrift-php package should be installed to run thrift transport tests');
         }
     }
 }
