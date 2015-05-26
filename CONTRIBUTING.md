@@ -23,8 +23,6 @@ Elastica currently allows two setups for development. Either through vagrant or 
 Coding
 ------
 
-These are the points to be discussed (just some examples below)
-
 ## Rules
 * Changes are never pushed into master
 * Pull requests are made to master

@@ -12,7 +12,7 @@ Elastica: elasticsearch PHP Client
 [![Join the chat at https://gitter.im/ruflin/Elastica](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ruflin/Elastica?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 All documentation for Elastica can be found under [Elastica.io](http://Elastica.io/).
-If you have questions, don't hesitate to ask them in the [Elastica google group](https://groups.google.com/group/elastica-php-client) or
+If you have questions, don't hesitate to ask them on [Stackoverflow](http://stackoverflow.com/questions/tagged/elastica) and add the Tag "Elastica" or
 in our [Gitter](https://gitter.im/ruflin/Elastica) channel.
 All library issues should go to the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
 
