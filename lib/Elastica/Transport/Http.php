@@ -129,7 +129,7 @@ class Http extends AbstractTransport
 
         curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $httpMethod);
 
-        if (defined('DEBUG') && DEBUG) {
+        if (defined('ELASTICA_DEBUG') && ELASTICA_DEBUG) {
             // Track request headers when in debug mode
             curl_setopt($conn, CURLINFO_HEADER_OUT, true);
         }
@@ -148,7 +148,7 @@ class Http extends AbstractTransport
 
         $response = new Response($responseString, curl_getinfo($this->_getConnection(), CURLINFO_HTTP_CODE));
 
-        if (defined('DEBUG') && DEBUG) {
+        if (defined('ELASTICA_DEBUG') && ELASTICA_DEBUG) {
             $response->setQueryTime($end - $start);
         }
 

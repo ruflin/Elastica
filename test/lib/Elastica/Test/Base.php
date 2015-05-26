@@ -140,9 +140,14 @@ class Base extends \PHPUnit_Framework_TestCase
     /**
      * Skips test if debugging is not enabled or not set
      */
-    protected static function _checkDebug() {
+    protected static function _checkDebug()
+    {
 
-        if (defined('DEBUG') === false || DEBUG === false) {
+        if (version_compare(phpversion(), 7, '>=')) {
+            self::markTestSkipped('Http tests currently do not work with PHP 7');
+        }
+
+        if (defined('ELASTICA_DEBUG') === false || ELASTICA_DEBUG === false) {
             self::markTestSkipped('The DEBUG constant must be set to true for this test to run');
         }
     }

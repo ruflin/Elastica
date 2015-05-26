@@ -25,6 +25,6 @@
     </testsuite>
   </testsuites>
   <php>
-      <const name="DEBUG" value="true"/>
+      <const name="ELASTICA_DEBUG" value="true" />
   </php>
 </phpunit>
