@@ -64,7 +64,7 @@ class HttpAdapter extends AbstractTransport
 
         $elasticaResponse = $this->_createElasticaResponse($httpAdapterResponse, $connection);
 
-        if (defined('DEBUG') && DEBUG) {
+        if (defined('ELASTICA_DEBUG') && ELASTICA_DEBUG) {
             $elasticaResponse->setQueryTime($end - $start);
         }
 

@@ -147,7 +147,7 @@ class Base extends \PHPUnit_Framework_TestCase
             self::markTestSkipped('Http tests currently do not work with PHP 7');
         }
 
-        if (defined('DEBUG') === false || DEBUG === false) {
+        if (defined('ELASTICA_DEBUG') === false || ELASTICA_DEBUG === false) {
             self::markTestSkipped('The DEBUG constant must be set to true for this test to run');
         }
     }
