@@ -105,7 +105,7 @@ class Guzzle extends AbstractTransport
 
         $response = new Response((string) $res->getBody(), $res->getStatusCode());
 
-        if (defined('DEBUG') && DEBUG) {
+        if (\Elastica\Util::debugEnabled()) {
             $response->setQueryTime($end - $start);
         }
 
