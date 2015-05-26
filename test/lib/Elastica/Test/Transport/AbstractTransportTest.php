@@ -27,6 +27,7 @@ class AbstractTransportTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group unit
      * @dataProvider getValidDefinitions
      */
     public function testCanCreateTransportInstances($transport)
@@ -47,6 +48,7 @@ class AbstractTransportTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group unit
      * @dataProvider getInvalidDefinitions
      * @expectedException Elastica\Exception\InvalidException
      * @expectedExceptionMessage Invalid transport
@@ -56,6 +58,9 @@ class AbstractTransportTest extends \PHPUnit_Framework_TestCase
         AbstractTransport::create($transport, new Connection());
     }
 
+    /**
+     * @group unit
+     */
     public function testCanInjectParamsWhenUsingArray()
     {
         $connection = new Connection();

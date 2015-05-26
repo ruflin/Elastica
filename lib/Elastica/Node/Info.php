@@ -163,6 +163,22 @@ class Info
     }
 
     /**
+     * @return string Unique node id
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    /**
+     * @return string Node name
+     */
+    public function getName()
+    {
+        return $this->_data['name'];
+    }
+
+    /**
      * Returns response object
      *
      * @return \Elastica\Response Response object
@@ -182,7 +198,7 @@ class Info
     {
         $this->_params = $params;
 
-        $path = '_nodes/'.$this->getNode()->getName();
+        $path = '_nodes/'.$this->getNode()->getId();
 
         if (!empty($params)) {
             $path .= '?';
@@ -193,6 +209,9 @@ class Info
 
         $this->_response = $this->getNode()->getClient()->request($path, Request::GET);
         $data = $this->getResponse()->getData();
+
         $this->_data = reset($data['nodes']);
+        $this->_id = key($data['nodes']);
+        $this->getNode()->setId($this->getId());
     }
 }

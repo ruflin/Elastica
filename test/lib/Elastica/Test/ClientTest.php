@@ -15,13 +15,18 @@ use Elastica\Type;
 
 class ClientTest extends BaseTest
 {
-
+    /**
+     * @group unit
+     */
     public function testConstruct()
     {
         $client = $this->_getClient();
         $this->assertCount(1, $client->getConnections());
     }
 
+    /**
+     * @group functional
+     */
     public function testConnectionsArray()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
@@ -53,6 +58,9 @@ class ClientTest extends BaseTest
         $resultSet = $type->search('rolf');
     }
 
+    /**
+     * @group functional
+     */
     public function testTwoServersSame()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
@@ -87,6 +95,9 @@ class ClientTest extends BaseTest
         $resultSet = $type->search('rolf');
     }
 
+    /**
+     * @group unit
+     */
     public function testConnectionParamsArePreparedForConnectionsOption()
     {
         $url = 'https://' . $this->_getHost() . ':9200';
@@ -96,6 +107,9 @@ class ClientTest extends BaseTest
         $this->assertEquals($url, $connection->getConfig('url'));
     }
 
+    /**
+     * @group unit
+     */
     public function testConnectionParamsArePreparedForServersOption()
     {
         $url = 'https://' . $this->_getHost() . ':9200';
@@ -105,6 +119,9 @@ class ClientTest extends BaseTest
         $this->assertEquals($url, $connection->getConfig('url'));
     }
 
+    /**
+     * @group unit
+     */
     public function testConnectionParamsArePreparedForDefaultOptions()
     {
         $url = 'https://' . $this->_getHost() . ':9200';
@@ -114,6 +131,9 @@ class ClientTest extends BaseTest
         $this->assertEquals($url, $connection->getConfig('url'));
     }
 
+    /**
+     * @group functional
+     */
     public function testBulk()
     {
         $client = $this->_getClient();
@@ -128,6 +148,9 @@ class ClientTest extends BaseTest
         $client->bulk($params);
     }
 
+    /**
+     * @group functional
+     */
     public function testOptimizeAll()
     {
         $client = $this->_getClient();
@@ -137,6 +160,7 @@ class ClientTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddDocumentsEmpty()
@@ -146,7 +170,9 @@ class ClientTest extends BaseTest
     }
 
     /**
-     * Test bulk operations on Index
+     * Test bulk operations on Index.
+     *
+     * @group functional
      */
     public function testBulkIndex()
     {
@@ -177,7 +203,9 @@ class ClientTest extends BaseTest
     }
 
     /**
-     * Test bulk operations on Type
+     * Test bulk operations on Type.
+     *
+     * @group functional
      */
     public function testBulkType()
     {
@@ -207,6 +235,9 @@ class ClientTest extends BaseTest
         $type->getDocument(2);
     }
 
+    /**
+     * @group functional
+     */
     public function testUpdateDocuments()
     {
         $indexName = 'test';
@@ -260,6 +291,8 @@ class ClientTest extends BaseTest
      * It will add a document, search for it, then delete it
      * using the parameter types we are interested in, and then
      * re-search to verify that they have been deleted
+     *
+     * @group functional
      */
     public function testDeleteIdsIdxStringTypeString()
     {
@@ -336,6 +369,8 @@ class ClientTest extends BaseTest
      * It will add a document, search for it, then delete it
      * using the parameter types we are interested in, and then
      * re-search to verify that they have been deleted
+     *
+     * @group functional
      */
     public function testDeleteIdsIdxStringTypeObject()
     {
@@ -398,6 +433,8 @@ class ClientTest extends BaseTest
      * It will add a document, search for it, then delete it
      * using the parameter types we are interested in, and then
      * re-search to verify that they have been deleted
+     *
+     * @group functional
      */
     public function testDeleteIdsIdxObjectTypeString()
     {
@@ -460,6 +497,8 @@ class ClientTest extends BaseTest
      * It will add a document, search for it, then delete it
      * using the parameter types we are interested in, and then
      * re-search to verify that they have been deleted
+     *
+     * @group functional
      */
     public function testDeleteIdsIdxObjectTypeObject()
     {
@@ -505,6 +544,9 @@ class ClientTest extends BaseTest
         $this->assertEquals(0, $totalHits);
     }
 
+    /**
+     * @group functional
+     */
     public function testOneInvalidConnection()
     {
         $client = $this->_getClient();
@@ -526,6 +568,9 @@ class ClientTest extends BaseTest
         $this->assertTrue($connections[0]->isEnabled() == false || $connections[1]->isEnabled() == false);
     }
 
+    /**
+     * @group functional
+     */
     public function testTwoInvalidConnection()
     {
         $client = $this->_getClient();
@@ -552,7 +597,9 @@ class ClientTest extends BaseTest
     }
 
     /**
-     * Tests if the callback works in case a connection is down
+     * Tests if the callback works in case a connection is down.
+     *
+     * @group functional
      */
     public function testCallback()
     {
@@ -589,6 +636,9 @@ class ClientTest extends BaseTest
         $this->assertEquals(2, $count);
     }
 
+    /**
+     * @group functional
+     */
     public function testUrlConstructor()
     {
         $url = 'http://' . $this->_getHost() . ':9200/';
@@ -600,6 +650,9 @@ class ClientTest extends BaseTest
         $this->assertInstanceOf('Elastica\Response', $response);
     }
 
+    /**
+     * @group functional
+     */
     public function testUpdateDocumentByDocument()
     {
         $index = $this->_createIndex();
@@ -624,6 +677,9 @@ class ClientTest extends BaseTest
         $this->assertEquals('value3added', $data['field3']);
     }
 
+    /**
+     * @group functional
+     */
     public function testUpdateDocumentByScript()
     {
         $index = $this->_createIndex();
@@ -649,6 +705,9 @@ class ClientTest extends BaseTest
         $this->assertArrayNotHasKey('field3', $data);
     }
 
+    /**
+     * @group functional
+     */
     public function testUpdateDocumentByScriptWithUpsert()
     {
         $index = $this->_createIndex();
@@ -691,6 +750,9 @@ class ClientTest extends BaseTest
         $this->assertArrayNotHasKey('field3', $data);
     }
 
+    /**
+     * @group functional
+     */
     public function testUpdateDocumentByRawData()
     {
         $index = $this->_createIndex();
@@ -719,6 +781,9 @@ class ClientTest extends BaseTest
         $this->assertEquals('value2', $data['field2']);
     }
 
+    /**
+     * @group functional
+     */
     public function testUpdateDocumentByDocumentWithUpsert()
     {
         $index = $this->_createIndex();
@@ -750,6 +815,9 @@ class ClientTest extends BaseTest
         $this->assertEquals('value2updated', $data['field2']);
     }
 
+    /**
+     * @group functional
+     */
     public function testDocAsUpsert()
     {
         $index = $this->_createIndex();
@@ -777,6 +845,9 @@ class ClientTest extends BaseTest
         $this->assertEquals('value2', $data['field2']);
     }
 
+    /**
+     * @group functional
+     */
     public function testUpdateWithInvalidType()
     {
         $index = $this->_createIndex();
@@ -794,6 +865,9 @@ class ClientTest extends BaseTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testDeleteDocuments()
     {
         $index = $this->_createIndex();
@@ -836,6 +910,9 @@ class ClientTest extends BaseTest
         $this->assertEquals(1, $type->count());
     }
 
+    /**
+     * @group functional
+     */
     public function testLastRequestResponse()
     {
         $client = $this->_getClient();
@@ -853,6 +930,9 @@ class ClientTest extends BaseTest
         $this->assertSame($response, $lastResponse);
     }
 
+    /**
+     * @group functional
+     */
     public function testUpdateDocumentPopulateFields()
     {
         $index = $this->_createIndex();
@@ -909,6 +989,9 @@ class ClientTest extends BaseTest
         $this->assertArrayNotHasKey('field4', $data);
     }
 
+    /**
+     * @group functional
+     */
     public function testAddDocumentsWithoutIds()
     {
         $docs = array();
@@ -935,6 +1018,9 @@ class ClientTest extends BaseTest
         }
     }
 
+    /**
+     * @group unit
+     */
     public function testConfigValue()
     {
         $config = array(
@@ -961,6 +1047,9 @@ class ClientTest extends BaseTest
         $this->assertInternalType('array', $client->getConfigValue(array('level1', 'level2')));
     }
 
+    /**
+     * @group functional
+     */
     public function testArrayQuery()
     {
         $client = $this->_getClient();
@@ -987,6 +1076,9 @@ class ClientTest extends BaseTest
         $this->assertEquals(1, $responseArray['hits']['total']);
     }
 
+    /**
+     * @group functional
+     */
     public function testJSONQuery()
     {
         $client = $this->_getClient();
@@ -1007,6 +1099,9 @@ class ClientTest extends BaseTest
         $this->assertEquals(1, $responseArray['hits']['total']);
     }
 
+    /**
+     * @group unit
+     */
     public function testAddHeader()
     {
         $client = $this->_getClient();
@@ -1032,6 +1127,9 @@ class ClientTest extends BaseTest
         }
     }
 
+    /**
+     * @group unit
+     */
     public function testRemoveHeader()
     {
         $client = $this->_getClient();

@@ -38,6 +38,9 @@ class SnapshotTest extends Base
         $this->_index->refresh();
     }
 
+    /**
+     * @group functional
+     */
     public function testRegisterRepository()
     {
         $name = "test_register";
@@ -54,6 +57,9 @@ class SnapshotTest extends Base
         $this->_snapshot->getRepository("foobar");
     }
 
+    /**
+     * @group functional
+     */
     public function testSnapshotAndRestore()
     {
         $repositoryName = "test_repository";

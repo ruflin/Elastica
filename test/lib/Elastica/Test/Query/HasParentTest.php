@@ -8,6 +8,9 @@ use Elastica\Test\Base as BaseTest;
 
 class HasParentTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $q = new MatchAll();
@@ -26,6 +29,9 @@ class HasParentTest extends BaseTest
         $this->assertEquals($expectedArray, $query->toArray());
     }
 
+    /**
+     * @group unit
+     */
     public function testSetScope()
     {
         $q = new MatchAll();

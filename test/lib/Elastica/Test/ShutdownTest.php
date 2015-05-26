@@ -8,13 +8,9 @@ use Elastica\Test\Base as BaseTest;
  */
 class ShutdownTest extends BaseTest
 {
-    protected function tearDown()
-    {
-        // We can't use Elastica\Test\Base::tearDown here,
-        // because cluster was shutted down and indices can't be anymore deleted.
-        // So, just do nothing
-    }
-
+    /**
+     * @group shutdown
+     */
     public function testNodeShutdown()
     {
         // Get cluster nodes
@@ -22,16 +18,25 @@ class ShutdownTest extends BaseTest
         $cluster = $client->getCluster();
         $nodes = $cluster->getNodes();
 
-        if (count($nodes) < 2) {
+        $nodesCount = count($nodes);
+
+        if ($nodesCount < 2) {
             $this->markTestIncomplete('At least two nodes have to be running, because 1 node is shutdown');
         }
 
+        $portFound = false;
         // sayonara, wolverine, we'd never love you
         foreach ($nodes as $node) {
+
             if ((int) $node->getInfo()->getPort() === 9201) {
+                $portFound = true;
                 $node->shutdown('1s');
                 break;
             }
+        }
+
+        if (!$portFound) {
+            $this->markTestSkipped('This test was skipped as in the new docker environment all elasticsearch instances run on the same port');
         }
 
         // Wait until node is shutdown
@@ -43,10 +48,11 @@ class ShutdownTest extends BaseTest
         $nodes = $cluster->getNodes();
 
         // Only one left
-        $this->assertCount(1, $nodes);
+        $this->assertCount($nodesCount - 1, $nodes);
     }
 
     /**
+     * @group shutdown
      * @depends testNodeShutdown
      * @expectedException \Elastica\Exception\Connection\HttpException
      */

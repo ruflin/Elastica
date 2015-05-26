@@ -9,6 +9,9 @@ use Elastica\Test\Base as BaseTest;
 
 class BoolAndTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $and = new BoolAnd();
@@ -30,6 +33,9 @@ class BoolAndTest extends BaseTest
         $this->assertEquals($expectedArray, $and->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testSetCache()
     {
         $client = $this->_getClient();
@@ -37,12 +43,11 @@ class BoolAndTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'hello world'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'nicolas ruflin'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'ruflin'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'hello world')),
+            new Document(2, array('name' => 'nicolas ruflin')),
+            new Document(3, array('name' => 'ruflin')),
+        ));
 
         $and = new BoolAnd();
 

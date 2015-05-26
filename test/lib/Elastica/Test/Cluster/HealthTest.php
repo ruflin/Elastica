@@ -11,8 +11,10 @@ class HealthTest extends BaseTest
      */
     protected $_health;
 
-    public function setUp()
+    protected function setUp()
     {
+        parent::setUp();
+
         $data = array(
             'cluster_name' => 'test_cluster',
             'status' => 'green',
@@ -49,56 +51,89 @@ class HealthTest extends BaseTest
         $this->_health = $health;
     }
 
+    /**
+     * @group unit
+     */
     public function testGetClusterName()
     {
         $this->assertEquals('test_cluster', $this->_health->getClusterName());
     }
 
+    /**
+     * @group unit
+     */
     public function testGetStatus()
     {
         $this->assertEquals('green', $this->_health->getStatus());
     }
 
+    /**
+     * @group unit
+     */
     public function testGetTimedOut()
     {
         $this->assertFalse($this->_health->getTimedOut());
     }
 
+    /**
+     * @group unit
+     */
     public function testGetNumberOfNodes()
     {
         $this->assertEquals(10, $this->_health->getNumberOfNodes());
     }
 
+    /**
+     * @group unit
+     */
     public function testGetNumberOfDataNodes()
     {
         $this->assertEquals(8, $this->_health->getNumberOfDataNodes());
     }
 
+    /**
+     * @group unit
+     */
     public function testGetActivePrimaryShards()
     {
         $this->assertEquals(3, $this->_health->getActivePrimaryShards());
     }
 
+    /**
+     * @group unit
+     */
     public function testGetActiveShards()
     {
         $this->assertEquals(4, $this->_health->getActiveShards());
     }
 
+    /**
+     * @group unit
+     */
     public function testGetRelocatingShards()
     {
         $this->assertEquals(2, $this->_health->getRelocatingShards());
     }
 
+    /**
+     * @group unit
+     */
     public function testGetInitializingShards()
     {
         $this->assertEquals(7, $this->_health->getInitializingShards());
     }
 
+    /**
+     * @group unit
+     */
     public function testGetUnassignedShards()
     {
         $this->assertEquals(5, $this->_health->getUnassignedShards());
     }
 
+    /**
+     * @group unit
+     */
     public function testGetIndices()
     {
         $indices = $this->_health->getIndices();

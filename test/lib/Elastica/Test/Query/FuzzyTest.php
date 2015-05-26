@@ -8,6 +8,9 @@ use Elastica\Test\Base as BaseTest;
 
 class FuzzyTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $fuzzy = new Fuzzy();
@@ -45,6 +48,9 @@ class FuzzyTest extends BaseTest
         $this->assertEquals($expectedArray, $fuzzy->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testQuery()
     {
         $client = $this->_getClient();
@@ -52,14 +58,12 @@ class FuzzyTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'Baden'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Baden Baden'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'Baden')),
+            new Document(4, array('name' => 'Baden Baden')),
+        ));
 
         $index->refresh();
 
@@ -73,6 +77,9 @@ class FuzzyTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
+    /**
+     * @group unit
+     */
     public function testBadArguments()
     {
         $this->setExpectedException('Elastica\Exception\InvalidException');
@@ -89,19 +96,20 @@ class FuzzyTest extends BaseTest
         $query->setField('name1', 'value1');
     }
 
+    /**
+     * @group functional
+     */
     public function testFuzzyWithFacets()
     {
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'Basel-Stadt'));
-        $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'New York'));
-        $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'Baden'));
-        $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'Baden Baden'));
-        $type->addDocument($doc);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'Basel-Stadt')),
+            new Document(2, array('name' => 'New York')),
+            new Document(3, array('name' => 'Baden')),
+            new Document(4, array('name' => 'Baden Baden')),
+        ));
 
         $index->refresh();
 

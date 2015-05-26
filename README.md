@@ -9,6 +9,7 @@ Elastica: elasticsearch PHP Client
 [![Total Downloads](https://poser.pugx.org/ruflin/Elastica/downloads.png)](https://packagist.org/packages/ruflin/elastica)
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=ruflin&url=https://github.com/ruflin/Elastica&title=Elastica&language=PHP&tags=github&category=software)
 [![codecov.io](http://codecov.io/github/ruflin/Elastica/coverage.svg?branch=master)](http://codecov.io/github/ruflin/Elastica?branch=master)
+[![Join the chat at https://gitter.im/ruflin/Elastica](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ruflin/Elastica?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 All documentation for Elastica can be found under [Elastica.io](http://Elastica.io/).
 If you have questions, don't hesitate to ask them in the [Elastica google group](https://groups.google.com/group/elastica-php-client) or

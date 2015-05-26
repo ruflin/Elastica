@@ -4,7 +4,7 @@
          colors="true">
     <testsuites>
         <testsuite name="Transport">
-            <file>TransportTest.php</file>
+            <file>lib/Elastica/Test/Transport/TransportBenchmarkTest.php</file>
         </testsuite>
     </testsuites>
     <listeners>

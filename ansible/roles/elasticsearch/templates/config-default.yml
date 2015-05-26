@@ -26,6 +26,9 @@ network.host: "127.0.0.1"
 # Without this, travis builds will be failed with OutOfMemory error
 processors: 1
 
+# All nodes will be called Elastica
+node.name: Elastica
+
 {% endblock %}
 
 {% block config %}

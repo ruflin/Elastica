@@ -7,6 +7,9 @@ use Elastica\Test\Base as BaseTest;
 
 class MatchAllTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $filter = new MatchAll();

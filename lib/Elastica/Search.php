@@ -448,7 +448,7 @@ class Search
     /**
      *
      * @param  mixed         $query
-     * @param $fullResult (default = false) By default only the total hit count is returned. If set to true, the full ResultSet including facets is returned.
+     * @param $fullResult (default = false) By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned.
      * @return int|ResultSet
      */
     public function count($query = '', $fullResult = false)
@@ -504,6 +504,18 @@ class Search
     public function setSuggest(Suggest $suggest)
     {
         return $this->setOptionsAndQuery(array(self::OPTION_SEARCH_TYPE_SUGGEST => 'suggest'), $suggest);
+    }
+
+    /**
+     * Returns the Scroll Iterator
+     *
+     * @see Elastica\Scroll
+     * @param  string        $expiryTime
+     * @return Scroll
+     */
+    public function scroll($expiryTime = '1m')
+    {
+        return new Scroll($this, $expiryTime);
     }
 
     /**

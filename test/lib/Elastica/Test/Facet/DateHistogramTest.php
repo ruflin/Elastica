@@ -11,6 +11,9 @@ use Elastica\Type\Mapping;
 
 class DateHistogramTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
     public function testClassHierarchy()
     {
         $facet = new DateHistogram('dateHist1');
@@ -19,6 +22,9 @@ class DateHistogramTest extends BaseTest
         unset($facet);
     }
 
+    /**
+     * @group functional
+     */
     public function testQuery()
     {
         $client = $this->_getClient();
@@ -57,6 +63,9 @@ class DateHistogramTest extends BaseTest
         $this->assertEquals(2, count($facets['dateHist1']['entries']));
     }
 
+    /**
+     * @group functional
+     */
     public function testFactor()
     {
         $client = $this->_getClient();

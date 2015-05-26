@@ -11,25 +11,24 @@ use Elastica\Test\Base as BaseTest;
 
 class PostFilterTest extends BaseTest
 {
-    /**
-     * @var Index
-     */
-    protected $_index;
-
-    protected function setUp()
+    protected function _getTestIndex()
     {
-        parent::setUp();
-        $this->_index = $this->_createIndex();
+        $index = $this->_createIndex();
         $docs = array(
-            new Document("1", array("color" => "green", "make" => "ford")),
-            new Document("2", array("color" => "blue", "make" => "volvo")),
-            new Document("3", array("color" => "red", "make" => "ford")),
-            new Document("4", array("color" => "green", "make" => "renault")),
+            new Document(1, array("color" => "green", "make" => "ford")),
+            new Document(2, array("color" => "blue", "make" => "volvo")),
+            new Document(3, array("color" => "red", "make" => "ford")),
+            new Document(4, array("color" => "green", "make" => "renault")),
         );
-        $this->_index->getType("test")->addDocuments($docs);
-        $this->_index->refresh();
+        $index->getType("test")->addDocuments($docs);
+        $index->refresh();
+
+        return $index;
     }
 
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $query = new Query();
@@ -43,6 +42,9 @@ class PostFilterTest extends BaseTest
         $this->assertEquals(array('term' => array('color' => 'green')), $data['post_filter']);
     }
 
+    /**
+     * @group functional
+     */
     public function testQuery()
     {
         $query = new Query();
@@ -57,7 +59,7 @@ class PostFilterTest extends BaseTest
 
         $query->setPostFilter($filter);
 
-        $results = $this->_index->search($query);
+        $results = $this->_getTestIndex()->search($query);
 
         $this->assertEquals(1, $results->getTotalHits());
     }

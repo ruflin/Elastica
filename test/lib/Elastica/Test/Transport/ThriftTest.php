@@ -17,6 +17,9 @@ class ThriftTest extends BaseTest
         }
     }
 
+    /**
+     * @group unit
+     */
     public function testConstruct()
     {
         $host = $this->_getHost();
@@ -28,6 +31,7 @@ class ThriftTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @dataProvider configProvider
      */
     public function testSearchRequest($config)
@@ -67,6 +71,7 @@ class ThriftTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\ConnectionException
      */
     public function testInvalidHostRequest()
@@ -78,6 +83,7 @@ class ThriftTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @expectedException \Elastica\Exception\ResponseException
      */
     public function testInvalidElasticRequest()

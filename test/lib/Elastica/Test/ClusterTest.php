@@ -8,7 +8,9 @@ use Elastica\Test\Base as BaseTest;
 
 class ClusterTest extends BaseTest
 {
-
+    /**
+     * @group functional
+     */
     public function testGetNodeNames()
     {
         $client = $this->_getClient();
@@ -16,10 +18,13 @@ class ClusterTest extends BaseTest
         $cluster = new Cluster($client);
 
         foreach ($cluster->getNodeNames() as $name) {
-            $this->assertContains($name, array('Silver Fox', 'Skywalker', 'Wolverine'));
+            $this->assertEquals('Elastica', $name);
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testGetNodes()
     {
         $client = $this->_getClient();
@@ -34,6 +39,9 @@ class ClusterTest extends BaseTest
         $this->assertGreaterThan(0, count($nodes));
     }
 
+    /**
+     * @group functional
+     */
     public function testGetState()
     {
         $client = $this->_getClient();
@@ -42,6 +50,9 @@ class ClusterTest extends BaseTest
         $this->assertInternalType('array', $state);
     }
 
+    /**
+     * @group functional
+     */
     public function testGetIndexNames()
     {
         $client = $this->_getClient();
@@ -63,6 +74,9 @@ class ClusterTest extends BaseTest
         $this->assertContains($index->getname(), $indexNames);
     }
 
+    /**
+     * @group functional
+     */
     public function testGetHealth()
     {
         $client = $this->_getClient();

@@ -11,14 +11,12 @@ use Elastica\Test\Base as BaseTest;
 class CompletionTest extends BaseTest
 {
     /**
-     * @var Index
+     * @return Index
      */
-    protected $_index;
-
-    protected function setUp()
+    protected function _getIndexForTest()
     {
-        $this->_index = $this->_createIndex();
-        $type = $this->_index->getType('song');
+        $index = $this->_createIndex();
+        $type = $index->getType('song');
 
         $type->setMapping(array(
             'fieldName' => array(
@@ -57,9 +55,14 @@ class CompletionTest extends BaseTest
             )),
         ));
 
-        $this->_index->refresh();
+        $index->refresh();
+
+        return $index;
     }
 
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $suggest = new Completion('suggestName', 'fieldName');
@@ -75,12 +78,16 @@ class CompletionTest extends BaseTest
         $this->assertEquals($expected, $suggest->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testSuggestWorks()
     {
         $suggest = new Completion('suggestName', 'fieldName');
         $suggest->setText('Never');
 
-        $resultSet = $this->_index->search(Query::create($suggest));
+        $index = $this->_getIndexForTest();
+        $resultSet = $index->search(Query::create($suggest));
 
         $this->assertTrue($resultSet->hasSuggests());
 
@@ -92,13 +99,17 @@ class CompletionTest extends BaseTest
         $this->assertEquals(1991, $options[0]['payload']['year']);
     }
 
+    /**
+     * @group functional
+     */
     public function testFuzzySuggestWorks()
     {
         $suggest = new Completion('suggestName', 'fieldName');
         $suggest->setFuzzy(array('fuzziness' => 2));
         $suggest->setText('Neavermint');
 
-        $resultSet = $this->_index->search(Query::create($suggest));
+        $index = $this->_getIndexForTest();
+        $resultSet = $index->search(Query::create($suggest));
 
         $this->assertTrue($resultSet->hasSuggests());
 
@@ -109,6 +120,9 @@ class CompletionTest extends BaseTest
         $this->assertEquals('Nevermind - Nirvana', $options[0]['text']);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetFuzzy()
     {
         $suggest = new Completion('suggestName', 'fieldName');

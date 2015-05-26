@@ -8,6 +8,9 @@ use Elastica\Test\Base as BaseTest;
 
 class InfoTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testGet()
     {
         $client = $this->_getClient();
@@ -27,6 +30,9 @@ class InfoTest extends BaseTest
         $this->assertNull($info->get('test', 'notest', 'notexist'));
     }
 
+    /**
+     * @group functional
+     */
     public function testHasPlugin()
     {
         $client = $this->_getClient();
@@ -38,5 +44,36 @@ class InfoTest extends BaseTest
 
         $this->assertTrue($info->hasPlugin($pluginName));
         $this->assertFalse($info->hasPlugin('foo'));
+    }
+
+    /**
+     * @group functional
+     */
+    public function testGetId()
+    {
+        $client = $this->_getClient();
+        $nodes = $client->getCluster()->getNodes();
+
+        $ids = array();
+
+        foreach($nodes as $node) {
+            $id = $node->getInfo()->getId();
+
+            // Checks that the ids are unique
+            $this->assertFalse(in_array($id, $ids));
+            $ids[] = $id;
+        }
+    }
+
+    /**
+     * @group functional
+     */
+    public function testGetName() {
+        $client = $this->_getClient();
+        $nodes = $client->getCluster()->getNodes();
+
+        foreach($nodes as $node) {
+            $this->assertEquals('Elastica', $node->getInfo()->getName());
+        }
     }
 }

@@ -15,7 +15,9 @@ use Elastica\Test\Base as BaseTest;
 
 class BulkTest extends BaseTest
 {
-
+    /**
+     * @group functional
+     */
     public function testSend()
     {
         $index = $this->_createIndex();
@@ -132,6 +134,9 @@ class BulkTest extends BaseTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testUnicodeBulkSend()
     {
         $index = $this->_createIndex();
@@ -160,6 +165,9 @@ class BulkTest extends BaseTest
         $this->assertSame($newDocument3, $actions[2]->getDocument());
     }
 
+    /**
+     * @group functional
+     */
     public function testSetIndexType()
     {
         $client = $this->_getClient();
@@ -198,6 +206,9 @@ class BulkTest extends BaseTest
         $this->assertEquals('type', $bulk->getType());
     }
 
+    /**
+     * @group unit
+     */
     public function testAddActions()
     {
         $client = $this->_getClient();
@@ -227,6 +238,9 @@ class BulkTest extends BaseTest
         $this->assertSame($action2, $getActions[1]);
     }
 
+    /**
+     * @group unit
+     */
     public function testAddRawData()
     {
         $bulk = new Bulk($this->_getClient());
@@ -277,6 +291,7 @@ class BulkTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @dataProvider invalidRawDataProvider
      * @expectedException \Elastica\Exception\InvalidException
      */
@@ -329,6 +344,9 @@ class BulkTest extends BaseTest
         );
     }
 
+    /**
+     * @group unit
+     */
     public function testCreateAbstractDocumentWithInvalidData()
     {
         //Wrong class type
@@ -350,6 +368,9 @@ class BulkTest extends BaseTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testErrorRequest()
     {
         $index = $this->_createIndex();
@@ -379,6 +400,9 @@ class BulkTest extends BaseTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testRawDocumentDataRequest()
     {
         $index = $this->_createIndex();
@@ -420,6 +444,7 @@ class BulkTest extends BaseTest
     }
 
     /**
+     * @group functional
      * @dataProvider udpDataProvider
      */
     public function testUdp($clientConfig, $host, $port, $shouldFail = false)
@@ -467,6 +492,9 @@ class BulkTest extends BaseTest
         }
     }
 
+    /**
+     * @group functional
+     */
     public function testUpdate()
     {
         $index = $this->_createIndex();
@@ -599,6 +627,9 @@ class BulkTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group unit
+     */
     public function testGetPath()
     {
         $client = $this->_getClient();
@@ -616,6 +647,9 @@ class BulkTest extends BaseTest
         $this->assertEquals($indexName.'/'.$typeName.'/_bulk', $bulk->getPath());
     }
 
+    /**
+     * @group functional
+     */
     public function testRetry()
     {
         $index = $this->_createIndex();
@@ -646,16 +680,55 @@ class BulkTest extends BaseTest
         $this->assertEquals(5, $metadata[ '_retry_on_conflict' ]);
     }
 
+    /**
+     * @group unit
+     */
     public function testSetShardTimeout()
     {
         $bulk = new Bulk($this->_getClient());
         $this->assertInstanceOf('Elastica\Bulk', $bulk->setShardTimeout(10));
     }
 
+    /**
+     * @group unit
+     */
     public function testSetRequestParam()
     {
         $bulk = new Bulk($this->_getClient());
         $this->assertInstanceOf('Elastica\Bulk', $bulk->setRequestParam('key', 'value'));
+    }
+
+    /**
+     * @group benchmark
+     */
+    public function testMemoryUsage()
+    {
+        $type = $this->_createIndex()->getType('test');
+
+        $data = array(
+            'text1' => 'Very long text for a string',
+            'text2' => 'But this is not very long',
+            'text3' => 'random or not random?',
+        );
+
+        $startMemory = memory_get_usage();
+
+        for ($n = 1; $n < 10; $n++) {
+            $docs = array();
+
+            for ($i = 1; $i <= 3000; $i++) {
+                $docs[] = new Document(uniqid(), $data);
+            }
+
+            $type->addDocuments($docs);
+            $docs = array();
+        }
+
+        unset($docs);
+
+        $endMemory = memory_get_usage();
+
+        $this->assertLessThan(1.3, $endMemory/$startMemory);
     }
 
     public function udpDataProvider()

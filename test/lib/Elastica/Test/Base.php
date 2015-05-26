@@ -91,10 +91,59 @@ class Base extends \PHPUnit_Framework_TestCase
         } while (!$allocated);
     }
 
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $hasGroup = $this->_isUnitGroup() || $this->_isFunctionalGroup() || $this->_isShutdownGroup() || $this->_isBenchmarkGroup();
+        $this->assertTrue($hasGroup, 'Every test must have one of "unit", "functional", "shutdown" or "benchmark" group');
+    }
+
     protected function tearDown()
     {
+        if ($this->_isFunctionalGroup()) {
+            $this->_getClient()->getIndex('_all')->delete();
+            $this->_getClient()->getIndex('_all')->clearCache();
+        }
+
         parent::tearDown();
-        $this->_getClient()->getIndex('_all')->delete();
-        $this->_getClient()->getIndex('_all')->clearCache();
+    }
+
+    protected function _isUnitGroup()
+    {
+        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+
+        return in_array('unit', $groups);
+    }
+
+    protected function _isFunctionalGroup()
+    {
+        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+
+        return in_array('functional', $groups);
+    }
+
+    protected function _isShutdownGroup()
+    {
+        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+
+        return in_array('shutdown', $groups);
+    }
+
+    protected function _isBenchmarkGroup()
+    {
+        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+
+        return in_array('benchmark', $groups);
+    }
+
+    /**
+     * Skips test if debugging is not enabled or not set
+     */
+    protected static function _checkDebug() {
+
+        if (defined('DEBUG') === false || DEBUG === false) {
+            self::markTestSkipped('The DEBUG constant must be set to true for this test to run');
+        }
     }
 }

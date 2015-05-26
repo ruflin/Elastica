@@ -13,6 +13,8 @@ use Elastica\JSON;
  * @package Elastica
  * @author Chris Gedrim <chris@gedr.im>
  * @link http://www.elastic.co/
+ *
+ * @deprecated This builder is deprecated and will be removed. Use new Elastica\QueryBuilder instead.
  **/
 class Builder extends AbstractQuery
 {

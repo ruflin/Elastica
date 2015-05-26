@@ -3,16 +3,15 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
-use Elastica\Filter\Bool;
+use Elastica\Filter\BoolFilter;
 use Elastica\Filter\Ids;
 use Elastica\Filter\Term;
 use Elastica\Filter\Terms;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
 
-class BoolTest extends BaseTest
+class BoolFilterTest extends BaseTest
 {
-
     /**
      * @return array
      */
@@ -21,7 +20,7 @@ class BoolTest extends BaseTest
         $out = array();
 
         // case #0
-        $mainBool = new Bool();
+        $mainBool = new BoolFilter();
 
         $idsFilter1 = new Ids();
         $idsFilter1->setIds(1);
@@ -30,7 +29,7 @@ class BoolTest extends BaseTest
         $idsFilter3 = new Ids();
         $idsFilter3->setIds(3);
 
-        $childBool = new Bool();
+        $childBool = new BoolFilter();
         $childBool->addShould(array($idsFilter1, $idsFilter2));
         $mainBool->addShould(array($childBool, $idsFilter3));
 
@@ -56,7 +55,7 @@ class BoolTest extends BaseTest
         $out[] = array($mainBool, $expectedArray);
 
         // case #1 _cache parameter should be supported
-        $bool = new Bool();
+        $bool = new BoolFilter();
         $terms = new Terms('field1', array('value1', 'value2'));
         $termsNot = new Terms('field2', array('value1', 'value2'));
         $bool->addMust($terms);
@@ -81,26 +80,32 @@ class BoolTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @dataProvider getTestToArrayData()
      * @param Bool  $bool
      * @param array $expectedArray
      */
-    public function testToArray(Bool $bool, $expectedArray)
+    public function testToArray(BoolFilter $bool, $expectedArray)
     {
         $this->assertEquals($expectedArray, $bool->toArray());
     }
 
+    /**
+     * @group functional
+     */
     public function testBoolFilter()
     {
         $index = $this->_createIndex();
         $type = $index->getType('book');
 
         //index some test data
-        $type->addDocument(new Document(1, array('author' => 'Michael Shermer', 'title' => 'The Believing Brain', 'publisher' => 'Robinson')));
-        $type->addDocument(new Document(2, array('author' => 'Jared Diamond', 'title' => 'Guns, Germs and Steel', 'publisher' => 'Vintage')));
-        $type->addDocument(new Document(3, array('author' => 'Jared Diamond', 'title' => 'Collapse', 'publisher' => 'Penguin')));
-        $type->addDocument(new Document(4, array('author' => 'Richard Dawkins', 'title' => 'The Selfish Gene', 'publisher' => 'OUP Oxford')));
-        $type->addDocument(new Document(5, array('author' => 'Anthony Burges', 'title' => 'A Clockwork Orange', 'publisher' => 'Penguin')));
+        $type->addDocuments(array(
+            new Document(1, array('author' => 'Michael Shermer', 'title' => 'The Believing Brain', 'publisher' => 'Robinson')),
+            new Document(2, array('author' => 'Jared Diamond', 'title' => 'Guns, Germs and Steel', 'publisher' => 'Vintage')),
+            new Document(3, array('author' => 'Jared Diamond', 'title' => 'Collapse', 'publisher' => 'Penguin')),
+            new Document(4, array('author' => 'Richard Dawkins', 'title' => 'The Selfish Gene', 'publisher' => 'OUP Oxford')),
+            new Document(5, array('author' => 'Anthony Burges', 'title' => 'A Clockwork Orange', 'publisher' => 'Penguin')),
+        ));
 
         $index->refresh();
 
@@ -115,15 +120,15 @@ class BoolTest extends BaseTest
 
         //construct the query
         $query = new Query();
-        $mainBoolFilter = new Bool();
-        $shouldFilter = new Bool();
+        $mainBoolFilter = new BoolFilter();
+        $shouldFilter = new BoolFilter();
         $authorFilter1 = new Term();
         $authorFilter1->setTerm('author', 'jared');
         $authorFilter2 = new Term();
         $authorFilter2->setTerm('author', 'richard');
         $shouldFilter->addShould(array($authorFilter1, $authorFilter2));
 
-        $mustNotFilter = new Bool();
+        $mustNotFilter = new BoolFilter();
         $publisherFilter = new Term();
         $publisherFilter->setTerm('publisher', 'penguin');
         $mustNotFilter->addMustNot($publisherFilter);
@@ -148,29 +153,48 @@ class BoolTest extends BaseTest
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddMustInvalidException()
     {
-        $filter = new Bool();
+        $filter = new BoolFilter();
         $filter->addMust('fail!');
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddMustNotInvalidException()
     {
-        $filter = new Bool();
+        $filter = new BoolFilter();
         $filter->addMustNot('fail!');
     }
 
     /**
+     * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddShouldInvalidException()
     {
-        $filter = new Bool();
+        $filter = new BoolFilter();
+        $filter->addShould('fail!');
+    }
+
+    /**
+     * Small unit test to check if also the old object name works
+     *
+     * @group unit
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testOldObject() {
+
+        if (version_compare(phpversion(), 7, '>=')) {
+            self::markTestSkipped('These objects are not supported in PHP 7');
+        }
+
+        $filter = new \Elastica\Filter\Bool();
         $filter->addShould('fail!');
     }
 }

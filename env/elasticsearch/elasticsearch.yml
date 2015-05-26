@@ -1,0 +1,35 @@
+
+index.number_of_shards: 2
+index.number_of_replicas: 0
+
+# Dont write data to hdd in tests
+index.store.type: memory
+
+# Required plugins
+plugin.mandatory: mapper-attachments, geocluster-facet, transport-thrift, transport-memcached, image
+
+# For bulk tests
+bulk.udp.enabled: true
+bulk.udp.bulk_actions: 5
+
+# For script tests
+script.disable_dynamic: false
+
+# Disable dynamic memory allocation
+bootstrap.mlockall: true
+
+# Dont accept connections not from localhost
+#network.host: "127.0.0.1"
+
+# Limit threadpool by set number of available processors to 1
+# Without this, travis builds will be failed with OutOfMemory error
+processors: 1
+
+# All nodes will be called Elastica
+node.name: Elastica
+
+# Ports config
+http.port: 9200
+transport.tcp.port: 9300
+thrift.port: 9500
+memcached.port: 11211

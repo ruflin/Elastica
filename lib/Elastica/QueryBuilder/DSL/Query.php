@@ -5,7 +5,7 @@ namespace Elastica\QueryBuilder\DSL;
 use Elastica\Exception\NotImplementedException;
 use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
-use Elastica\Query\Bool;
+use Elastica\Query\BoolQuery;
 use Elastica\Query\Boosting;
 use Elastica\Query\Common;
 use Elastica\Query\ConstantScore;
@@ -87,11 +87,11 @@ class Query implements DSL
      * bool query
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
-     * @return \Elastica\Query\Bool
+     * @return \Elastica\Query\BoolQuery
      */
     public function bool()
     {
-        return new Bool();
+        return new BoolQuery();
     }
 
     /**

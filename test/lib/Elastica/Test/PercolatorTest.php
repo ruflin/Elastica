@@ -12,6 +12,9 @@ use Elastica\Type;
 
 class PercolatorTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
     public function testConstruct()
     {
         $index = $this->_createIndex();
@@ -37,6 +40,9 @@ class PercolatorTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group functional
+     */
     public function testMatchDoc()
     {
         $index = $this->_createIndex();
@@ -78,6 +84,8 @@ class PercolatorTest extends BaseTest
 
     /**
      * Test case for using filtered percolator queries based on the Elasticsearch documentation examples.
+     *
+     * @group functional
      */
     public function testFilteredMatchDoc()
     {
@@ -112,6 +120,8 @@ class PercolatorTest extends BaseTest
 
     /**
      * Test case for using filtered percolator queries based on the Elasticsearch documentation examples.
+     *
+     * @group functional
      */
     public function testRegisterAndUnregisterPercolator()
     {
@@ -170,15 +180,18 @@ class PercolatorTest extends BaseTest
     protected function _addDefaultDocuments($index, $type = 'testing')
     {
         $type = $index->getType('testing');
-        $doc1 = new Document(1, array('name' => 'foobar'));
-        $doc2 = new Document(2, array('name' => 'barbaz'));
-        $type->addDocument($doc1);
-        $type->addDocument($doc2);
+        $type->addDocuments(array(
+            new Document(1, array('name' => 'foobar')),
+            new Document(2, array('name' => 'barbaz')),
+        ));
         $index->refresh();
 
         return $type;
     }
 
+    /**
+     * @group functional
+     */
     public function testPercolateExistingDocWithoutAnyParameter()
     {
         $percolator = $this->_getDefaultPercolator();
@@ -192,6 +205,9 @@ class PercolatorTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group functional
+     */
     public function testPercolateExistingDocWithPercolateFormatIds()
     {
         $percolator = $this->_getDefaultPercolator();
@@ -206,6 +222,9 @@ class PercolatorTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group functional
+     */
     public function testPercolateExistingDocWithIdThatShouldBeUrlEncoded()
     {
         $percolator = $this->_getDefaultPercolator();
@@ -224,6 +243,9 @@ class PercolatorTest extends BaseTest
         $index->delete();
     }
 
+    /**
+     * @group functional
+     */
     public function testPercolateWithAdditionalRequestBodyOptions()
     {
         $index = $this->_createIndex();
@@ -259,6 +281,9 @@ class PercolatorTest extends BaseTest
         $this->assertArrayHasKey('_score', $matches[0]);
     }
 
+    /**
+     * @group functional
+     */
     public function testPercolateExistingDocWithAdditionalRequestBodyOptions()
     {
         $percolatorName = 'existingDoc';
