@@ -82,7 +82,7 @@ class Memcache extends AbstractTransport
 
         $response = new Response($responseString);
 
-        if (defined('DEBUG') && DEBUG) {
+        if (\Elastica\Util::debugEnabled()) {
             $response->setQueryTime($end - $start);
         }
 

@@ -186,4 +186,12 @@ class Util
 
         return $message;
     }
+
+    /**
+     * @return bool Returns true if debugging is enabled, otherwise false
+     */
+    public static function debugEnabled()
+    {
+        return defined('DEBUG') && DEBUG;
+    }
 }
