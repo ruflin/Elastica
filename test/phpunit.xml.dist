@@ -24,4 +24,7 @@
       <directory>./lib/Elastica/</directory>
     </testsuite>
   </testsuites>
+  <php>
+      <const name="Helloworld" value="true" />
+  </php>
 </phpunit>
