@@ -2,7 +2,6 @@
 
 namespace Elastica;
 
-use Elastica\Bulk\Action;
 /**
  * Elastica tools
  *
