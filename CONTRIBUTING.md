@@ -38,3 +38,13 @@ Coding
 * Update the CHANGELOG.md file with your changes
 * Backward Compatibility breaks: In case you break backward compatibility, provide details on why this is needed.
 * Merge: No one should ever merge his own pull request
+
+
+## Name Spaces & Classes
+Most name spaces and classes are self explanotary and use cases can be taken from classes which already exist.
+
+### Tool Namespace
+The namespace Tool is used for making more complex functionality of Elastica available to the users. In general it maps existing functionality of Elastica and offers simplified functions.
+
+### Util Class
+The util class is used for all static functions which are used in the Elastica library but don't access the library itself.
