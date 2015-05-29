@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Cluster\Health;
 
 use Elastica\Cluster\Health\Index as HealthIndex;
@@ -17,38 +16,38 @@ class IndexTest extends BaseTest
         parent::setUp();
 
         $data = array(
-            "status" => "yellow",
-            "number_of_shards" => 1,
-            "number_of_replicas" => 2,
-            "active_primary_shards" => 3,
-            "active_shards" => 4,
-            "relocating_shards" => 5,
-            "initializing_shards" => 6,
-            "unassigned_shards" => 7,
-            "shards" => array(
-                "0" => array(
-                    "status" => "yellow",
-                    "primary_active" => false,
-                    "active_shards" => 0,
-                    "relocating_shards" => 1,
-                    "initializing_shards" => 0,
-                    "unassigned_shards" => 1,
+            'status' => 'yellow',
+            'number_of_shards' => 1,
+            'number_of_replicas' => 2,
+            'active_primary_shards' => 3,
+            'active_shards' => 4,
+            'relocating_shards' => 5,
+            'initializing_shards' => 6,
+            'unassigned_shards' => 7,
+            'shards' => array(
+                '0' => array(
+                    'status' => 'yellow',
+                    'primary_active' => false,
+                    'active_shards' => 0,
+                    'relocating_shards' => 1,
+                    'initializing_shards' => 0,
+                    'unassigned_shards' => 1,
                 ),
-                "1" => array(
-                    "status" => "yellow",
-                    "primary_active" => true,
-                    "active_shards" => 1,
-                    "relocating_shards" => 0,
-                    "initializing_shards" => 0,
-                    "unassigned_shards" => 1,
+                '1' => array(
+                    'status' => 'yellow',
+                    'primary_active' => true,
+                    'active_shards' => 1,
+                    'relocating_shards' => 0,
+                    'initializing_shards' => 0,
+                    'unassigned_shards' => 1,
                 ),
-                "2" => array(
-                    "status" => "green",
-                    "primary_active" => true,
-                    "active_shards" => 1,
-                    "relocating_shards" => 0,
-                    "initializing_shards" => 0,
-                    "unassigned_shards" => 0,
+                '2' => array(
+                    'status' => 'green',
+                    'primary_active' => true,
+                    'active_shards' => 1,
+                    'relocating_shards' => 0,
+                    'initializing_shards' => 0,
+                    'unassigned_shards' => 0,
                 ),
             ),
         );

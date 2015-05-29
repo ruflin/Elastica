@@ -1,15 +1,14 @@
 <?php
-
 namespace Elastica\Facet;
 
 /**
  * Implements the statistical facet.
  *
  * @category Xodoa
- * @package Elastica
- * @author Robert Katzki <robert@katzki.de>
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-statistical-facet.html
  *
+ * @author Robert Katzki <robert@katzki.de>
+ *
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-statistical-facet.html
  * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
  */
 class Statistical extends AbstractFacet
@@ -17,7 +16,8 @@ class Statistical extends AbstractFacet
     /**
      * Sets the field for the statistical query.
      *
-     * @param  string $field The field name for the statistical query.
+     * @param string $field The field name for the statistical query.
+     *
      * @return $this
      */
     public function setField($field)
@@ -28,7 +28,8 @@ class Statistical extends AbstractFacet
     /**
      * Sets multiple fields for the statistical query.
      *
-     * @param  array $fields Numerical array with the fields for the statistical query.
+     * @param array $fields Numerical array with the fields for the statistical query.
+     *
      * @return $this
      */
     public function setFields(array $fields)
@@ -37,9 +38,10 @@ class Statistical extends AbstractFacet
     }
 
     /**
-     * Sets a script to calculate statistical information
+     * Sets a script to calculate statistical information.
      *
-     * @param  string $script The script to do calculations on the statistical values
+     * @param string $script The script to do calculations on the statistical values
+     *
      * @return $this
      */
     public function setScript($script)
@@ -52,6 +54,7 @@ class Statistical extends AbstractFacet
      * facet definition of the parent.
      *
      * @see \Elastica\Facet\AbstractFacet::toArray()
+     *
      * @return array
      */
     public function toArray()

@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Facet;
 
 use Elastica\Document;
@@ -16,21 +15,21 @@ class TermsStatsTest extends BaseTest
     public function testOrder()
     {
         $client = $this->_getClient();
-        $index  = $client->getIndex('test');
-        $index->create(array( ), true);
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
         $type = $index->getType('helloworld');
 
-        $doc = new Document(1, array( 'name' => 'tom', 'paid' => 7 ));
+        $doc = new Document(1, array('name' => 'tom', 'paid' => 7));
         $type->addDocument($doc);
-        $doc   = new Document(2, array( 'name' => 'tom', 'paid' => 2 ));
+        $doc = new Document(2, array('name' => 'tom', 'paid' => 2));
         $type->addDocument($doc);
-        $doc   = new Document(3, array( 'name' => 'tom', 'paid' => 5 ));
+        $doc = new Document(3, array('name' => 'tom', 'paid' => 5));
         $type->addDocument($doc);
-        $doc   = new Document(4, array( 'name' => 'mike', 'paid' => 13 ));
+        $doc = new Document(4, array('name' => 'mike', 'paid' => 13));
         $type->addDocument($doc);
-        $doc   = new Document(5, array( 'name' => 'mike', 'paid' => 1 ));
+        $doc = new Document(5, array('name' => 'mike', 'paid' => 1));
         $type->addDocument($doc);
-        $doc   = new Document(6, array( 'name' => 'mike', 'paid' => 15 ));
+        $doc = new Document(6, array('name' => 'mike', 'paid' => 15));
         $type->addDocument($doc);
 
         $facet = new TermsStats('test');
@@ -45,7 +44,7 @@ class TermsStatsTest extends BaseTest
         $index->refresh();
 
         $response = $type->search($query);
-        $facets   = $response->getFacets();
+        $facets = $response->getFacets();
 
         $this->assertEquals(14, $facets[ 'test' ][ 'terms' ][0]['total']);
         $this->assertEquals(29, $facets[ 'test' ][ 'terms' ][1]['total']);
@@ -57,21 +56,21 @@ class TermsStatsTest extends BaseTest
     public function testQuery()
     {
         $client = $this->_getClient();
-        $index  = $client->getIndex('test');
-        $index->create(array( ), true);
+        $index = $client->getIndex('test');
+        $index->create(array(), true);
         $type = $index->getType('helloworld');
 
-        $doc = new Document(1, array( 'name' => 'tom', 'paid' => 7 ));
+        $doc = new Document(1, array('name' => 'tom', 'paid' => 7));
         $type->addDocument($doc);
-        $doc   = new Document(2, array( 'name' => 'tom', 'paid' => 2 ));
+        $doc = new Document(2, array('name' => 'tom', 'paid' => 2));
         $type->addDocument($doc);
-        $doc   = new Document(3, array( 'name' => 'tom', 'paid' => 5 ));
+        $doc = new Document(3, array('name' => 'tom', 'paid' => 5));
         $type->addDocument($doc);
-        $doc   = new Document(4, array( 'name' => 'mike', 'paid' => 13 ));
+        $doc = new Document(4, array('name' => 'mike', 'paid' => 13));
         $type->addDocument($doc);
-        $doc   = new Document(5, array( 'name' => 'mike', 'paid' => 1 ));
+        $doc = new Document(5, array('name' => 'mike', 'paid' => 1));
         $type->addDocument($doc);
-        $doc   = new Document(6, array( 'name' => 'mike', 'paid' => 15 ));
+        $doc = new Document(6, array('name' => 'mike', 'paid' => 15));
         $type->addDocument($doc);
 
         $facet = new TermsStats('test');
@@ -85,7 +84,7 @@ class TermsStatsTest extends BaseTest
         $index->refresh();
 
         $response = $type->search($query);
-        $facets   = $response->getFacets();
+        $facets = $response->getFacets();
 
         $this->assertEquals(2, count($facets[ 'test' ][ 'terms' ]));
         foreach ($facets[ 'test' ][ 'terms' ] as $facet) {

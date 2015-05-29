@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
@@ -10,10 +9,10 @@ use Elastica\JSON;
  * Query Builder.
  *
  * @category Xodoa
- * @package Elastica
- * @author Chris Gedrim <chris@gedr.im>
- * @link http://www.elastic.co/
  *
+ * @author Chris Gedrim <chris@gedr.im>
+ *
+ * @link http://www.elastic.co/
  * @deprecated This builder is deprecated and will be removed. Use new Elastica\QueryBuilder instead.
  **/
 class Builder extends AbstractQuery
@@ -34,17 +33,17 @@ class Builder extends AbstractQuery
      */
     public static function factory($string = null)
     {
-        return new Builder($string);
+        return new self($string);
     }
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $string JSON encoded string to use as query.
      */
     public function __construct($string = null)
     {
-        if (! $string == null) {
+        if (!$string == null) {
             $this->_string .= substr($string, 1, -1);
         }
     }
@@ -77,7 +76,7 @@ class Builder extends AbstractQuery
     /**
      * Allow wildcards (*, ?) as the first character in a query.
      *
-     * @param boolean $bool Defaults to true.
+     * @param bool $bool Defaults to true.
      *
      * @return $this
      */
@@ -89,7 +88,7 @@ class Builder extends AbstractQuery
     /**
      * Enable best effort analysis of wildcard terms.
      *
-     * @param boolean $bool Defaults to true.
+     * @param bool $bool Defaults to true.
      *
      * @return $this
      */
@@ -113,7 +112,7 @@ class Builder extends AbstractQuery
     /**
      * Autogenerate phrase queries.
      *
-     * @param boolean $bool Defaults to true.
+     * @param bool $bool Defaults to true.
      *
      * @return $this
      */
@@ -262,7 +261,7 @@ class Builder extends AbstractQuery
     /**
      * Enable position increments in result queries.
      *
-     * @param boolean $bool Defaults to true.
+     * @param bool $bool Defaults to true.
      *
      * @return $this
      */
@@ -274,7 +273,7 @@ class Builder extends AbstractQuery
     /**
      * Enables explanation for each hit on how its score was computed.
      *
-     * @param boolean $value Turn on / off explain.
+     * @param bool $value Turn on / off explain.
      *
      * @return $this
      */
@@ -316,8 +315,9 @@ class Builder extends AbstractQuery
     /**
      * Add a specific field / value entry.
      *
-     * @param  string $name  Field to add.
-     * @param  mixed  $value Value to set.
+     * @param string $name  Field to add.
+     * @param mixed  $value Value to set.
+     *
      * @return $this
      */
     public function field($name, $value)
@@ -439,7 +439,7 @@ class Builder extends AbstractQuery
     /**
      * Set the from parameter (offset).
      *
-     * @param integer $value Result number to start from.
+     * @param int $value Result number to start from.
      *
      * @return $this
      */
@@ -463,7 +463,7 @@ class Builder extends AbstractQuery
     /**
      * Set the prefix length for fuzzy queries.
      *
-     * @param integer $value Defaults to 0.
+     * @param int $value Defaults to 0.
      *
      * @return $this
      */
@@ -503,7 +503,7 @@ class Builder extends AbstractQuery
     /**
      * Automatically lower-case terms of wildcard, prefix, fuzzy, and range queries.
      *
-     * @param boolean $bool Defaults to true.
+     * @param bool $bool Defaults to true.
      *
      * @return $this
      */
@@ -555,7 +555,7 @@ class Builder extends AbstractQuery
     {
         $this->fieldOpen('match_all');
 
-        if (! $boost == null && is_numeric($boost)) {
+        if (!$boost == null && is_numeric($boost)) {
             $this->field('boost', (float) $boost);
         }
 
@@ -565,7 +565,7 @@ class Builder extends AbstractQuery
     /**
      * The minimum number of should clauses to match.
      *
-     * @param integer $minimum Minimum number that should match.
+     * @param int $minimum Minimum number that should match.
      *
      * @return $this
      */
@@ -638,7 +638,7 @@ class Builder extends AbstractQuery
      *
      * If zero, then exact phrase matches are required.
      *
-     * @param integer $value Defaults to 0.
+     * @param int $value Defaults to 0.
      *
      * @return $this
      */
@@ -785,7 +785,7 @@ class Builder extends AbstractQuery
     /**
      * Set the size parameter (number of records to return).
      *
-     * @param integer $value Number of records to return.
+     * @param int $value Number of records to return.
      *
      * @return $this
      */
@@ -819,8 +819,8 @@ class Builder extends AbstractQuery
     /**
      * Add a field to sort on.
      *
-     * @param string  $name    Field to sort.
-     * @param boolean $reverse Reverse direction.
+     * @param string $name    Field to sort.
+     * @param bool   $reverse Reverse direction.
      *
      * @return $this
      */
@@ -835,7 +835,7 @@ class Builder extends AbstractQuery
     }
 
     /**
-     * Sort on multiple fields
+     * Sort on multiple fields.
      *
      * @param array $fields Associative array where the keys are field names to sort on, and the
      *                      values are the sort order: "asc" or "desc"

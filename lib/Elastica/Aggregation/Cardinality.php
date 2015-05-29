@@ -1,10 +1,9 @@
 <?php
-
 namespace Elastica\Aggregation;
 
 /**
- * Class Cardinality
- * @package Elastica\Aggregation
+ * Class Cardinality.
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html
  */
 class Cardinality extends AbstractSimpleAggregation
@@ -20,7 +19,7 @@ class Cardinality extends AbstractSimpleAggregation
             throw new \InvalidArgumentException('precision_threshold only supports integer values');
         }
 
-        return $this->setParam("precision_threshold", $precisionThreshold);
+        return $this->setParam('precision_threshold', $precisionThreshold);
     }
 
     /**
@@ -34,6 +33,6 @@ class Cardinality extends AbstractSimpleAggregation
             throw new \InvalidArgumentException('rehash only supports boolean values');
         }
 
-        return $this->setParam("rehash", $rehash);
+        return $this->setParam('rehash', $rehash);
     }
 }

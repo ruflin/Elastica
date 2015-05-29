@@ -1,12 +1,11 @@
 <?php
-
 namespace Elastica\Filter;
 
 use Elastica\Index as ElasticaIndex;
 
 /**
- * Class Indices
- * @package Elastica\Filter
+ * Class Indices.
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-indices-filter.html
  */
 class Indices extends AbstractFilter
@@ -21,8 +20,10 @@ class Indices extends AbstractFilter
     }
 
     /**
-     * Set the indices on which this filter should be applied
-     * @param  mixed[] $indices
+     * Set the indices on which this filter should be applied.
+     *
+     * @param mixed[] $indices
+     *
      * @return $this
      */
     public function setIndices(array $indices)
@@ -36,8 +37,10 @@ class Indices extends AbstractFilter
     }
 
     /**
-     * Adds one more index on which this filter should be applied
-     * @param  string|\Elastica\Index $index
+     * Adds one more index on which this filter should be applied.
+     *
+     * @param string|\Elastica\Index $index
+     *
      * @return $this
      */
     public function addIndex($index)
@@ -50,8 +53,10 @@ class Indices extends AbstractFilter
     }
 
     /**
-     * Set the filter to be applied to docs in the specified indices
-     * @param  AbstractFilter $filter
+     * Set the filter to be applied to docs in the specified indices.
+     *
+     * @param AbstractFilter $filter
+     *
      * @return $this
      */
     public function setFilter(AbstractFilter $filter)
@@ -60,8 +65,10 @@ class Indices extends AbstractFilter
     }
 
     /**
-     * Set the filter to be applied to docs in indices which do not match those specified in the "indices" parameter
-     * @param  AbstractFilter $filter
+     * Set the filter to be applied to docs in indices which do not match those specified in the "indices" parameter.
+     *
+     * @param AbstractFilter $filter
+     *
      * @return $this
      */
     public function setNoMatchFilter(AbstractFilter $filter)

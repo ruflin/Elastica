@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Terms;
@@ -12,11 +11,11 @@ class TermsTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType("test")->addDocuments(array(
-            new Document(1, array("color" => "blue")),
-            new Document(2, array("color" => "blue")),
-            new Document(3, array("color" => "red")),
-            new Document(4, array("color" => "green")),
+        $index->getType('test')->addDocuments(array(
+            new Document(1, array('color' => 'blue')),
+            new Document(2, array('color' => 'blue')),
+            new Document(3, array('color' => 'red')),
+            new Document(4, array('color' => 'green')),
         ));
 
         $index->refresh();
@@ -29,14 +28,14 @@ class TermsTest extends BaseAggregationTest
      */
     public function testTermsAggregation()
     {
-        $agg = new Terms("terms");
-        $agg->setField("color");
+        $agg = new Terms('terms');
+        $agg->setField('color');
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("terms");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('terms');
 
         $this->assertEquals(2, $results['buckets'][0]['doc_count']);
-        $this->assertEquals("blue", $results['buckets'][0]['key']);
+        $this->assertEquals('blue', $results['buckets'][0]['key']);
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Max;
@@ -31,23 +30,23 @@ class MaxTest extends BaseAggregationTest
     public function testToArray()
     {
         $expected = array(
-            "max" => array(
-                "field" => "price",
-                "script" => "_value * conversion_rate",
-                "params" => array(
-                    "conversion_rate" => 1.2,
+            'max' => array(
+                'field' => 'price',
+                'script' => '_value * conversion_rate',
+                'params' => array(
+                    'conversion_rate' => 1.2,
                 ),
             ),
-            "aggs" => array(
-                "subagg" => array("max" => array("field" => "foo")),
+            'aggs' => array(
+                'subagg' => array('max' => array('field' => 'foo')),
             ),
         );
 
-        $agg = new Max("min_price_in_euros");
-        $agg->setField("price");
-        $agg->setScript(new Script("_value * conversion_rate", array('conversion_rate' => 1.2)));
-        $max = new Max("subagg");
-        $max->setField("foo");
+        $agg = new Max('min_price_in_euros');
+        $agg->setField('price');
+        $agg->setScript(new Script('_value * conversion_rate', array('conversion_rate' => 1.2)));
+        $max = new Max('subagg');
+        $max->setField('foo');
         $agg->addAggregation($max);
 
         $this->assertEquals($expected, $agg->toArray());
@@ -60,20 +59,20 @@ class MaxTest extends BaseAggregationTest
     {
         $index = $this->_getIndexForTest();
 
-        $agg = new Max("min_price");
-        $agg->setField("price");
+        $agg = new Max('min_price');
+        $agg->setField('price');
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $index->search($query)->getAggregation("min_price");
+        $results = $index->search($query)->getAggregation('min_price');
 
         $this->assertEquals(8, $results['value']);
 
         // test using a script
-        $agg->setScript(new Script("_value * conversion_rate", array("conversion_rate" => 1.2)));
+        $agg->setScript(new Script('_value * conversion_rate', array('conversion_rate' => 1.2)));
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $index->search($query)->getAggregation("min_price");
+        $results = $index->search($query)->getAggregation('min_price');
 
         $this->assertEquals(8 * 1.2, $results['value']);
     }

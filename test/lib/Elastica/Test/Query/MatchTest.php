@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -115,7 +114,7 @@ class MatchTest extends BaseTest
         $query = new Match();
         $query->setFieldQuery($field, 'Basel New');
         $query->setFieldOperator($field, $operator);
-		$query->setFieldBoost($field, 1.2);
+        $query->setFieldBoost($field, 1.2);
 
         $resultSet = $index->search($query);
 
@@ -147,7 +146,7 @@ class MatchTest extends BaseTest
         $query = new Match();
         $query->setFieldQuery($field, 'Basel New');
         $query->setFieldOperator($field, $operator);
-		$query->setFieldBoost($field, "1.2");
+        $query->setFieldBoost($field, '1.2');
 
         $resultSet = $index->search($query);
 
@@ -308,16 +307,16 @@ class MatchTest extends BaseTest
         $field = 'test';
         $query = new Match();
 
-        $fuzziness = "AUTO";
+        $fuzziness = 'AUTO';
         $query->setFieldFuzziness($field, $fuzziness);
 
-        $parameters =  $query->getParam($field);
+        $parameters = $query->getParam($field);
         $this->assertEquals($fuzziness, $parameters['fuzziness']);
 
         $fuzziness = 0.3;
         $query->setFieldFuzziness($field, $fuzziness);
 
-        $parameters =  $query->getParam($field);
+        $parameters = $query->getParam($field);
         $this->assertEquals($fuzziness, $parameters['fuzziness']);
     }
 }

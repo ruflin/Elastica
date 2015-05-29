@@ -1,10 +1,8 @@
 <?php
-
 namespace Elastica\Transport;
 
 use Elastica\Connection;
 use Elastica\Exception\Connection\GuzzleException;
-use Elastica\Exception\Connection\HttpException;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
 use Elastica\JSON;
@@ -15,29 +13,28 @@ use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Stream\Stream;
 
 /**
- * Elastica Guzzle Transport object
+ * Elastica Guzzle Transport object.
  *
- * @package Elastica
  * @author Milan Magudia <milan@magudia.com>
  */
 class Guzzle extends AbstractTransport
 {
     /**
-     * Http scheme
+     * Http scheme.
      *
      * @var string Http scheme
      */
     protected $_scheme = 'http';
 
     /**
-     * Curl resource to reuse
+     * Curl resource to reuse.
      *
      * @var resource Guzzle resource to reuse
      */
     protected static $_guzzleClientConnection = null;
 
     /**
-     * Makes calls to the elasticsearch server
+     * Makes calls to the elasticsearch server.
      *
      * All calls that are made to the server are done through this function
      *
@@ -45,8 +42,9 @@ class Guzzle extends AbstractTransport
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
      *
-     * @param  \Elastica\Request  $request
-     * @param  array              $params  Host, Port, ...
+     * @param \Elastica\Request $request
+     * @param array             $params  Host, Port, ...
+     *
      * @return \Elastica\Response Response object
      */
     public function exec(Request $request, array $params)
@@ -128,9 +126,10 @@ class Guzzle extends AbstractTransport
     }
 
     /**
-     * Return Guzzle resource
+     * Return Guzzle resource.
      *
-     * @param  bool     $persistent False if not persistent connection
+     * @param bool $persistent False if not persistent connection
+     *
      * @return resource Connection resource
      */
     protected function _getGuzzleClient($baseUrl, $persistent = true)
@@ -143,7 +142,7 @@ class Guzzle extends AbstractTransport
     }
 
     /**
-     * Builds the base url for the guzzle connection
+     * Builds the base url for the guzzle connection.
      *
      * @param \Elastica\Connection $connection
      */
@@ -162,7 +161,7 @@ class Guzzle extends AbstractTransport
     }
 
     /**
-     * Builds the action path url for each request
+     * Builds the action path url for each request.
      *
      * @param \Elastica\Request $request
      */

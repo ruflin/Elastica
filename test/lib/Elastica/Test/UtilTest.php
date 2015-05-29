@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test;
 
 use Elastica\Connection;
@@ -104,7 +103,7 @@ class UtilTest extends BaseTest
 
         $curlCommand = Util::convertRequestToCurlCommand($request);
 
-        $expected = 'curl -XPOST \'http://' . $this->_getHost() . ':9200/test?no=params\' -d \'{"key":"value"}\'';
+        $expected = 'curl -XPOST \'http://'.$this->_getHost().':9200/test?no=params\' -d \'{"key":"value"}\'';
         $this->assertEquals($expected, $curlCommand);
     }
 

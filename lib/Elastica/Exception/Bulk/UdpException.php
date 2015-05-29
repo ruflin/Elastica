@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Exception\Bulk;
 
 use Elastica\Exception\BulkException;

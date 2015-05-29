@@ -1,15 +1,14 @@
 <?php
-
 namespace Elastica\Exception;
 
 use Elastica\Request;
 use Elastica\Response;
 
 /**
- * Response exception
+ * Response exception.
  *
  * @category Xodoa
- * @package Elastica
+ *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class ResponseException extends \RuntimeException implements ExceptionInterface
@@ -25,7 +24,7 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     protected $_response = null;
 
     /**
-     * Construct Exception
+     * Construct Exception.
      *
      * @param \Elastica\Request  $request
      * @param \Elastica\Response $response
@@ -38,7 +37,7 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     }
 
     /**
-     * Returns request object
+     * Returns request object.
      *
      * @return \Elastica\Request Request object
      */
@@ -48,7 +47,7 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     }
 
     /**
-     * Returns response object
+     * Returns response object.
      *
      * @return \Elastica\Response Response object
      */
@@ -58,7 +57,7 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     }
 
     /**
-     * Returns elasticsearch exception
+     * Returns elasticsearch exception.
      *
      * @return ElasticsearchException
      */
@@ -66,7 +65,7 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     {
         $response = $this->getResponse();
         $transfer = $response->getTransferInfo();
-        $code     = array_key_exists('http_code', $transfer) ? $transfer['http_code'] : 0;
+        $code = array_key_exists('http_code', $transfer) ? $transfer['http_code'] : 0;
 
         return new ElasticsearchException($code, $response->getError());
     }

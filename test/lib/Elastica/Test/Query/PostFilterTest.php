@@ -1,10 +1,8 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Filter\Term;
-use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Match;
 use Elastica\Test\Base as BaseTest;
@@ -15,12 +13,12 @@ class PostFilterTest extends BaseTest
     {
         $index = $this->_createIndex();
         $docs = array(
-            new Document(1, array("color" => "green", "make" => "ford")),
-            new Document(2, array("color" => "blue", "make" => "volvo")),
-            new Document(3, array("color" => "red", "make" => "ford")),
-            new Document(4, array("color" => "green", "make" => "renault")),
+            new Document(1, array('color' => 'green', 'make' => 'ford')),
+            new Document(2, array('color' => 'blue', 'make' => 'volvo')),
+            new Document(3, array('color' => 'red', 'make' => 'ford')),
+            new Document(4, array('color' => 'green', 'make' => 'renault')),
         );
-        $index->getType("test")->addDocuments($docs);
+        $index->getType('test')->addDocuments($docs);
         $index->refresh();
 
         return $index;

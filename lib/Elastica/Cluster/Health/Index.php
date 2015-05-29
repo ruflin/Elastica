@@ -1,12 +1,11 @@
 <?php
-
 namespace Elastica\Cluster\Health;
 
 /**
  * Wraps status information for an index.
  *
- * @package Elastica
  * @author Ray Ward <ray.ward@bigcommerce.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
  */
 class Index

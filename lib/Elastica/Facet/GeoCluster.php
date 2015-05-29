@@ -1,21 +1,21 @@
 <?php
-
 namespace Elastica\Facet;
 
 /**
  * Implements the Geo Cluster facet.
  *
  * @category Xodoa
- * @package Elastica
- * @author Konstantin Nikiforov <konstantin.nikiforov@gmail.com>
- * @link https://github.com/zenobase/geocluster-facet
  *
+ * @author Konstantin Nikiforov <konstantin.nikiforov@gmail.com>
+ *
+ * @link https://github.com/zenobase/geocluster-facet
  * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
  */
 class GeoCluster extends AbstractFacet
 {
     /**
-     * @param  string $fieldName
+     * @param string $fieldName
+     *
      * @return $this
      */
     public function setField($fieldName)
@@ -26,7 +26,8 @@ class GeoCluster extends AbstractFacet
     }
 
     /**
-     * @param  double $factor
+     * @param float $factor
+     *
      * @return $this
      */
     public function setFactor($factor)
@@ -37,7 +38,8 @@ class GeoCluster extends AbstractFacet
     }
 
     /**
-     * @param  boolean $showIds
+     * @param bool $showIds
+     *
      * @return $this
      */
     public function setShowIds($showIds)
@@ -52,6 +54,7 @@ class GeoCluster extends AbstractFacet
      * facet definition of the parent.
      *
      * @see \Elastica\Facet\AbstractFacet::toArray()
+     *
      * @throws \Elastica\Exception\InvalidException When the right fields haven't been set.
      *
      * @return array

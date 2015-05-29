@@ -1,12 +1,9 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Index;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 
 class QueryStringTest extends BaseTest
 {
@@ -62,7 +59,7 @@ class QueryStringTest extends BaseTest
     }
 
     /**
-     * Tests if search in multiple fields is possible
+     * Tests if search in multiple fields is possible.
      *
      * @group functional
      */

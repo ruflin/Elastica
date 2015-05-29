@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\AbstractFilter;
 use Elastica\Filter\BoolOr;
 use Elastica\Filter\Ids;
 use Elastica\Test\Base as BaseTest;

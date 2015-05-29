@@ -1,10 +1,9 @@
 <?php
-
 namespace Elastica\Aggregation;
 
 /**
- * Class Nested
- * @package Elastica\Aggregation
+ * Class Nested.
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-nested-aggregation.html
  */
 class Nested extends AbstractAggregation
@@ -20,12 +19,14 @@ class Nested extends AbstractAggregation
     }
 
     /**
-     * Set the nested path for this aggregation
-     * @param  string $path
+     * Set the nested path for this aggregation.
+     *
+     * @param string $path
+     *
      * @return $this
      */
     public function setPath($path)
     {
-        return $this->setParam("path", $path);
+        return $this->setParam('path', $path);
     }
 }

@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test;
 
-use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
@@ -467,7 +465,7 @@ class TypeTest extends BaseTest
 
     /**
      * Test to see if Elastica_Type::getDocument() is properly using
-     * the fields array when available instead of _source
+     * the fields array when available instead of _source.
      *
      * @group functional
      */
@@ -487,7 +485,7 @@ class TypeTest extends BaseTest
     }
 
     /**
-     * Test to see if search Default Limit works
+     * Test to see if search Default Limit works.
      *
      * @group functional
      */
@@ -525,6 +523,7 @@ class TypeTest extends BaseTest
 
     /**
      * Test Delete of index type.  After delete will check for type mapping.
+     *
      * @group functional
      */
     public function testDeleteType()
@@ -574,8 +573,8 @@ class TypeTest extends BaseTest
         $this->assertEquals(4, $resultSet->count());
 
         // Return just the visible similar
-        $query              = new Query();
-        $filterTerm         = new Term();
+        $query = new Query();
+        $filterTerm = new Term();
         $filterTerm->setTerm('visible', true);
         $query->setPostFilter($filterTerm);
 
@@ -597,7 +596,7 @@ class TypeTest extends BaseTest
 
         $document = new Document();
         $script = new Script(
-            "ctx._source.name = name; ctx._source.counter += count",
+            'ctx._source.name = name; ctx._source.counter += count',
             array(
                 'name' => $newName,
                 'count' => 2,
@@ -609,8 +608,8 @@ class TypeTest extends BaseTest
 
         $type->updateDocument($script, array('refresh' => true));
         $updatedDoc = $type->getDocument($id)->getData();
-        $this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
-        $this->assertEquals(3, $updatedDoc['counter'], "Counter was not incremented");
+        $this->assertEquals($newName, $updatedDoc['name'], 'Name was not updated');
+        $this->assertEquals(3, $updatedDoc['counter'], 'Counter was not incremented');
     }
 
     /**
@@ -627,7 +626,7 @@ class TypeTest extends BaseTest
 
         $document = new Document();
         $script = new Script(
-            "ctx._source.name = name; ctx._source.counter += count",
+            'ctx._source.name = name; ctx._source.counter += count',
             array(
                 'name' => $newName,
                 'count' => 2,
@@ -639,8 +638,8 @@ class TypeTest extends BaseTest
 
         $type->updateDocument($script, array('refresh' => true));
         $updatedDoc = $type->getDocument($id)->getData();
-        $this->assertEquals($newName, $updatedDoc['name'], "Name was not updated");
-        $this->assertEquals(3, $updatedDoc['counter'], "Counter was not incremented");
+        $this->assertEquals($newName, $updatedDoc['name'], 'Name was not updated');
+        $this->assertEquals(3, $updatedDoc['counter'], 'Counter was not incremented');
     }
 
     /**
@@ -657,7 +656,7 @@ class TypeTest extends BaseTest
 
         $document = new Document();
         $script = new Script(
-            "ctx._source.name = name; ctx._source.counter += count",
+            'ctx._source.name = name; ctx._source.counter += count',
             array(
                 'name' => $newName,
                 'count' => 2,
@@ -673,8 +672,8 @@ class TypeTest extends BaseTest
             $this->assertContains('VersionConflictEngineException', $e->getMessage());
         }
         $updatedDoc = $type->getDocument($id)->getData();
-        $this->assertNotEquals($newName, $updatedDoc['name'], "Name was updated");
-        $this->assertNotEquals(3, $updatedDoc['counter'], "Counter was incremented");
+        $this->assertNotEquals($newName, $updatedDoc['name'], 'Name was updated');
+        $this->assertNotEquals(3, $updatedDoc['counter'], 'Counter was incremented');
     }
 
     /**

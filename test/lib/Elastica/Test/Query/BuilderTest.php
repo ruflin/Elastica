@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Query\Builder;
@@ -52,7 +51,7 @@ class BuilderTest extends BaseTest
             array('size', 7, '{"size":"7"}'),
             array('tieBreakerMultiplier', 7, '{"tie_breaker_multiplier":"7"}'),
             array('matchAll', 1.1, '{"match_all":{"boost":"1.1"}}'),
-            array('fields', array("age", "sex", "location"), '{"fields":["age","sex","location"]}'),
+            array('fields', array('age', 'sex', 'location'), '{"fields":["age","sex","location"]}'),
         );
     }
 
@@ -158,7 +157,7 @@ class BuilderTest extends BaseTest
     {
         $builder = new Builder();
         $this->assertSame($builder, $builder->$method()); // open
-        $this->assertSame($builder, $builder->{$method."Close"}()); // close
+        $this->assertSame($builder, $builder->{$method.'Close'}()); // close
         $this->assertSame('{"'.$queryType.'":{}}', (string) $builder);
     }
 

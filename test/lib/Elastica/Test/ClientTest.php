@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test;
 
-use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\Connection\HttpException;
@@ -100,7 +98,7 @@ class ClientTest extends BaseTest
      */
     public function testConnectionParamsArePreparedForConnectionsOption()
     {
-        $url = 'https://' . $this->_getHost() . ':9200';
+        $url = 'https://'.$this->_getHost().':9200';
         $client = $this->_getClient(array('connections' => array(array('url' => $url))));
         $connection = $client->getConnection();
 
@@ -112,7 +110,7 @@ class ClientTest extends BaseTest
      */
     public function testConnectionParamsArePreparedForServersOption()
     {
-        $url = 'https://' . $this->_getHost() . ':9200';
+        $url = 'https://'.$this->_getHost().':9200';
         $client = $this->_getClient(array('servers' => array(array('url' => $url))));
         $connection = $client->getConnection();
 
@@ -124,7 +122,7 @@ class ClientTest extends BaseTest
      */
     public function testConnectionParamsArePreparedForDefaultOptions()
     {
-        $url = 'https://' . $this->_getHost() . ':9200';
+        $url = 'https://'.$this->_getHost().':9200';
         $client = $this->_getClient(array('url' => $url));
         $connection = $client->getConnection();
 
@@ -277,7 +275,7 @@ class ClientTest extends BaseTest
     }
 
     /**
-     * Test deleteIds method using string parameters
+     * Test deleteIds method using string parameters.
      *
      * This test ensures that the deleteIds method of
      * the \Elastica\Client can properly accept and use
@@ -355,7 +353,7 @@ class ClientTest extends BaseTest
 
     /**
      * Test deleteIds method using string parameter for $index
-     * and object parameter for $type
+     * and object parameter for $type.
      *
      * This test ensures that the deleteIds method of
      * the \Elastica\Client can properly accept and use
@@ -419,7 +417,7 @@ class ClientTest extends BaseTest
 
     /**
      * Test deleteIds method using object parameter for $index
-     * and string parameter for $type
+     * and string parameter for $type.
      *
      * This test ensures that the deleteIds method of
      * the \Elastica\Client can properly accept and use
@@ -483,7 +481,7 @@ class ClientTest extends BaseTest
 
     /**
      * Test deleteIds method using object parameter for $index
-     * and object parameter for $type
+     * and object parameter for $type.
      *
      * This test ensures that the deleteIds method of
      * the \Elastica\Client can properly accept and use
@@ -641,7 +639,7 @@ class ClientTest extends BaseTest
      */
     public function testUrlConstructor()
     {
-        $url = 'http://' . $this->_getHost() . ':9200/';
+        $url = 'http://'.$this->_getHost().':9200/';
 
         // Url should overwrite invalid host
         $client = $this->_getClient(array('url' => $url, 'port' => '9101', 'timeout' => 2));

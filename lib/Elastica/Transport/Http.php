@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Transport;
 
 use Elastica\Exception\Connection\HttpException;
@@ -10,30 +9,30 @@ use Elastica\Request;
 use Elastica\Response;
 
 /**
- * Elastica Http Transport object
+ * Elastica Http Transport object.
  *
  * @category Xodoa
- * @package Elastica
+ *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Http extends AbstractTransport
 {
     /**
-     * Http scheme
+     * Http scheme.
      *
      * @var string Http scheme
      */
     protected $_scheme = 'http';
 
     /**
-     * Curl resource to reuse
+     * Curl resource to reuse.
      *
      * @var resource Curl resource to reuse
      */
     protected static $_curlConnection = null;
 
     /**
-     * Makes calls to the elasticsearch server
+     * Makes calls to the elasticsearch server.
      *
      * All calls that are made to the server are done through this function
      *
@@ -41,8 +40,9 @@ class Http extends AbstractTransport
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
      *
-     * @param  \Elastica\Request  $request
-     * @param  array              $params  Host, Port, ...
+     * @param \Elastica\Request $request
+     * @param array             $params  Host, Port, ...
+     *
      * @return \Elastica\Response Response object
      */
     public function exec(Request $request, array $params)
@@ -74,7 +74,7 @@ class Http extends AbstractTransport
 
         /* @see Connection::setConnectTimeout() */
         $connectTimeout = $connection->getConnectTimeout();
-        if ($connectTimeout>0) {
+        if ($connectTimeout > 0) {
             curl_setopt($conn, CURLOPT_CONNECTTIMEOUT, $connectTimeout);
         }
 
@@ -170,7 +170,7 @@ class Http extends AbstractTransport
     }
 
     /**
-     * Called to add additional curl params
+     * Called to add additional curl params.
      *
      * @param resource $curlConnection Curl connection
      */
@@ -184,9 +184,10 @@ class Http extends AbstractTransport
     }
 
     /**
-     * Return Curl resource
+     * Return Curl resource.
      *
-     * @param  bool     $persistent False if not persistent connection
+     * @param bool $persistent False if not persistent connection
+     *
      * @return resource Connection resource
      */
     protected function _getConnection($persistent = true)

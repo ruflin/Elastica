@@ -1,13 +1,11 @@
 <?php
-
 namespace Elastica\Test\Connection\Strategy;
 
-use Elastica\Client;
 use Elastica\Connection\Strategy\CallbackStrategy;
 use Elastica\Test\Base;
 
 /**
- * Description of CallbackStrategyTest
+ * Description of CallbackStrategyTest.
  *
  * @author chabior
  */

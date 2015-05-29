@@ -1,17 +1,15 @@
 <?php
-
 namespace Elastica\Test\Transport;
 
-use Elastica\Request;
 use Elastica\Connection;
 use Elastica\Query;
+use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Transport\NullTransport;
 
 /**
- * Elastica Null Transport Test
+ * Elastica Null Transport Test.
  *
- * @package Elastica
  * @author James Boehmer <james.boehmer@jamesboehmer.com>
  */
 class NullTransportTest extends BaseTest
@@ -37,13 +35,13 @@ class NullTransportTest extends BaseTest
          // Validate most of the expected fields in the response data.  Consumers of the response
          // object have a reasonable expectation of finding "hits", "took", etc
          $responseData = $response->getData();
-        $this->assertContains("took", $responseData);
-        $this->assertEquals(0, $responseData["took"]);
-        $this->assertContains("_shards", $responseData);
-        $this->assertContains("hits", $responseData);
-        $this->assertContains("total", $responseData["hits"]);
-        $this->assertEquals(0, $responseData["hits"]["total"]);
-        $this->assertContains("params", $responseData);
+        $this->assertContains('took', $responseData);
+        $this->assertEquals(0, $responseData['took']);
+        $this->assertContains('_shards', $responseData);
+        $this->assertContains('hits', $responseData);
+        $this->assertContains('total', $responseData['hits']);
+        $this->assertEquals(0, $responseData['hits']['total']);
+        $this->assertContains('params', $responseData);
 
         $took = $response->getEngineTime();
         $this->assertEquals(0, $took);
@@ -52,14 +50,13 @@ class NullTransportTest extends BaseTest
         $this->assertEmpty($errorString);
 
         $shards = $response->getShardsStatistics();
-        $this->assertContains("total", $shards);
-        $this->assertEquals(0, $shards["total"]);
-        $this->assertContains("successful", $shards);
-        $this->assertEquals(0, $shards["successful"]);
-        $this->assertContains("failed", $shards);
-        $this->assertEquals(0, $shards["failed"]);
+        $this->assertContains('total', $shards);
+        $this->assertEquals(0, $shards['total']);
+        $this->assertContains('successful', $shards);
+        $this->assertEquals(0, $shards['successful']);
+        $this->assertContains('failed', $shards);
+        $this->assertEquals(0, $shards['failed']);
     }
-
 
     /**
      * @group functional
@@ -73,7 +70,7 @@ class NullTransportTest extends BaseTest
 
         $this->assertInstanceOf('\Elastica\Response', $response);
 
-		$data = $response->getData();
+        $data = $response->getData();
         $this->assertEquals($params, $data['params']);
     }
 

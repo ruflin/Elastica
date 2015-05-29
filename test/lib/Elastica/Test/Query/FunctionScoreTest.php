@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -11,7 +10,7 @@ use Elastica\Test\Base as BaseTest;
 
 class FunctionScoreTest extends BaseTest
 {
-    protected $locationOrigin = "32.804654, -117.242594";
+    protected $locationOrigin = '32.804654, -117.242594';
 
     protected function _getIndexForTest()
     {
@@ -136,7 +135,7 @@ class FunctionScoreTest extends BaseTest
     public function testGauss()
     {
         $query = new FunctionScore();
-        $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'location', $this->locationOrigin, "4mi");
+        $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'location', $this->locationOrigin, '4mi');
         $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', 0, 10);
         $response = $this->_getIndexForTest()->search($query);
         $results = $response->getResults();
@@ -321,6 +320,5 @@ class FunctionScoreTest extends BaseTest
 
         $this->assertCount(1, $results);
         $this->assertEquals(1, $results[0]->getId());
-
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Min;
@@ -29,12 +28,12 @@ class MinTest extends BaseAggregationTest
      */
     public function testMinAggregation()
     {
-        $agg = new Min("min_price");
-        $agg->setField("price");
+        $agg = new Min('min_price');
+        $agg->setField('price');
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("min_price");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('min_price');
 
         $this->assertEquals(1, $results['value']);
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\QueryBuilder;
 
 use Elastica\QueryBuilder\DSL;

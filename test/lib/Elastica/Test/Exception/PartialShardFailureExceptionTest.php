@@ -17,7 +17,7 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
         $index = $client->getIndex('elastica_partial_failure');
         $index->create(array(
             'index' => array(
-                'number_of_shards'   => 5,
+                'number_of_shards' => 5,
                 'number_of_replicas' => 0,
             ),
         ), true);

@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Multi;
 
 use Elastica\Exception\InvalidException;
@@ -9,37 +8,37 @@ use Elastica\Search as BaseSearch;
 
 /**
  * Elastica multi search result set
- * List of result sets for each search request
+ * List of result sets for each search request.
  *
  * @category Xodoa
- * @package Elastica
+ *
  * @author munkie
  */
 class ResultSet implements \Iterator, \ArrayAccess, \Countable
 {
     /**
-     * Result Sets
+     * Result Sets.
      *
      * @var array|\Elastica\ResultSet[] Result Sets
      */
     protected $_resultSets = array();
 
     /**
-     * Current position
+     * Current position.
      *
      * @var int Current position
      */
     protected $_position = 0;
 
     /**
-     * Response
+     * Response.
      *
      * @var \Elastica\Response Response object
      */
     protected $_response;
 
     /**
-     * Constructs ResultSet object
+     * Constructs ResultSet object.
      *
      * @param \Elastica\Response       $response
      * @param array|\Elastica\Search[] $searches
@@ -90,7 +89,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * Returns response object
+     * Returns response object.
      *
      * @return \Elastica\Response Response object
      */
@@ -100,7 +99,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * There is at least one result set with error
+     * There is at least one result set with error.
      *
      * @return bool
      */
@@ -128,7 +127,6 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @return void
      */
     public function next()
     {
@@ -152,7 +150,6 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @return void
      */
     public function rewind()
     {
@@ -168,8 +165,9 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param  string|int $offset
-     * @return boolean    true on success or false on failure.
+     * @param string|int $offset
+     *
+     * @return bool true on success or false on failure.
      */
     public function offsetExists($offset)
     {
@@ -177,7 +175,8 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param  mixed $offset
+     * @param mixed $offset
+     *
      * @return mixed Can return all value types.
      */
     public function offsetGet($offset)
@@ -186,9 +185,8 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param  mixed $offset
-     * @param  mixed $value
-     * @return void
+     * @param mixed $offset
+     * @param mixed $value
      */
     public function offsetSet($offset, $value)
     {
@@ -200,8 +198,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param  mixed $offset
-     * @return void
+     * @param mixed $offset
      */
     public function offsetUnset($offset)
     {

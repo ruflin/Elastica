@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Facet;
 
 use Elastica\Document;
@@ -26,7 +25,7 @@ class GeoClusterTest extends BaseTest
         $geoField = 'location';
 
         $type->setMapping(new Mapping($type, array(
-            $geoField => array( 'type' => 'geo_point', 'lat_lon' => true ),
+            $geoField => array('type' => 'geo_point', 'lat_lon' => true),
         )));
 
         $doc = new Document(1, array('name' => 'item1', 'location' => array(20, 20)));

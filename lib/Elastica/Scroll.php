@@ -1,9 +1,8 @@
 <?php
-
 namespace Elastica;
 
 /**
- * Scroll Iterator
+ * Scroll Iterator.
  *
  * @author Manuel Andreo Garcia <andreo.garcia@gmail.com>
  *
@@ -41,7 +40,7 @@ class Scroll implements \Iterator
     protected $_options = array(null, null, null);
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Search $search
      * @param string $expiryTime
@@ -53,7 +52,7 @@ class Scroll implements \Iterator
     }
 
     /**
-     * Returns current result set
+     * Returns current result set.
      *
      * @link http://php.net/manual/en/iterator.current.php
      *
@@ -65,7 +64,7 @@ class Scroll implements \Iterator
     }
 
     /**
-     * Next scroll search
+     * Next scroll search.
      *
      * @link http://php.net/manual/en/iterator.next.php
      */
@@ -82,7 +81,7 @@ class Scroll implements \Iterator
     }
 
     /**
-     * Returns scroll id
+     * Returns scroll id.
      *
      * @link http://php.net/manual/en/iterator.key.php
      *
@@ -94,7 +93,7 @@ class Scroll implements \Iterator
     }
 
     /**
-     * Returns true if current result set contains at least one hit
+     * Returns true if current result set contains at least one hit.
      *
      * @link http://php.net/manual/en/iterator.valid.php
      *
@@ -109,7 +108,7 @@ class Scroll implements \Iterator
     }
 
     /**
-     * Initial scroll search
+     * Initial scroll search.
      *
      * @link http://php.net/manual/en/iterator.rewind.php
      */
@@ -131,7 +130,7 @@ class Scroll implements \Iterator
     }
 
     /**
-     * Prepares Scroll for next request
+     * Prepares Scroll for next request.
      *
      * @param ResultSet $resultSet
      */
@@ -146,7 +145,7 @@ class Scroll implements \Iterator
     }
 
     /**
-     * Save all search options manipulated by Scroll
+     * Save all search options manipulated by Scroll.
      */
     protected function _saveOptions()
     {
@@ -164,7 +163,7 @@ class Scroll implements \Iterator
     }
 
     /**
-     * Revert search options to previously saved state
+     * Revert search options to previously saved state.
      */
     protected function _revertOptions()
     {

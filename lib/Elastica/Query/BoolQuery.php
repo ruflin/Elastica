@@ -1,23 +1,24 @@
 <?php
-
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
 
 /**
- * Bool query
+ * Bool query.
  *
  * @category Xodoa
- * @package Elastica
+ *
  * @author Nicolas Ruflin <spam@ruflin.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
  */
 class BoolQuery extends AbstractQuery
 {
     /**
-     * Add should part to query
+     * Add should part to query.
      *
-     * @param  \Elastica\Query\AbstractQuery|array $args Should query
+     * @param \Elastica\Query\AbstractQuery|array $args Should query
+     *
      * @return $this
      */
     public function addShould($args)
@@ -26,9 +27,10 @@ class BoolQuery extends AbstractQuery
     }
 
     /**
-     * Add must part to query
+     * Add must part to query.
      *
-     * @param  \Elastica\Query\AbstractQuery|array $args Must query
+     * @param \Elastica\Query\AbstractQuery|array $args Must query
+     *
      * @return $this
      */
     public function addMust($args)
@@ -37,9 +39,10 @@ class BoolQuery extends AbstractQuery
     }
 
     /**
-     * Add must not part to query
+     * Add must not part to query.
      *
-     * @param  \Elastica\Query\AbstractQuery|array $args Must not query
+     * @param \Elastica\Query\AbstractQuery|array $args Must not query
+     *
      * @return $this
      */
     public function addMustNot($args)
@@ -48,12 +51,13 @@ class BoolQuery extends AbstractQuery
     }
 
     /**
-     * Adds a query to the current object
+     * Adds a query to the current object.
      *
      * @throws \Elastica\Exception\InvalidException If not valid query
      *
-     * @param  string                              $type Query type
-     * @param  \Elastica\Query\AbstractQuery|array $args Query
+     * @param string                              $type Query type
+     * @param \Elastica\Query\AbstractQuery|array $args Query
+     *
      * @return $this
      */
     protected function _addQuery($type, $args)
@@ -70,9 +74,10 @@ class BoolQuery extends AbstractQuery
     }
 
     /**
-     * Sets boost value of this query
+     * Sets boost value of this query.
      *
-     * @param  float $boost Boost value
+     * @param float $boost Boost value
+     *
      * @return $this
      */
     public function setBoost($boost)
@@ -81,9 +86,10 @@ class BoolQuery extends AbstractQuery
     }
 
     /**
-     * Set the minimum number of of should match
+     * Set the minimum number of of should match.
      *
-     * @param  int   $minimumNumberShouldMatch Should match minimum
+     * @param int $minimumNumberShouldMatch Should match minimum
+     *
      * @return $this
      */
     public function setMinimumNumberShouldMatch($minimumNumberShouldMatch)
@@ -92,7 +98,7 @@ class BoolQuery extends AbstractQuery
     }
 
     /**
-     * Converts array to an object in case no queries are added
+     * Converts array to an object in case no queries are added.
      *
      * @return array
      */
@@ -101,7 +107,7 @@ class BoolQuery extends AbstractQuery
         if (empty($this->_params)) {
             $this->_params = new \stdClass();
         }
+
         return parent::toArray();
     }
-
 }

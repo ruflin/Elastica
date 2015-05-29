@@ -1,15 +1,12 @@
 <?php
-
 namespace Elastica\Test\Connection\Strategy;
 
-use Elastica\Client;
 use Elastica\Connection;
-use Elastica\Connection\Strategy\Simple;
 use Elastica\Exception\ConnectionException;
 use Elastica\Test\Base;
 
 /**
- * Description of SimplyTest
+ * Description of SimplyTest.
  *
  * @author chabior
  */

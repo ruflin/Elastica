@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test;
 
 use Elastica\Document;
@@ -195,8 +194,8 @@ class PercolatorTest extends BaseTest
     public function testPercolateExistingDocWithoutAnyParameter()
     {
         $percolator = $this->_getDefaultPercolator();
-        $index      = $percolator->getIndex();
-        $type       = $this->_addDefaultDocuments($index);
+        $index = $percolator->getIndex();
+        $type = $this->_addDefaultDocuments($index);
 
         $matches = $percolator->matchExistingDoc(1, $type->getName());
 
@@ -211,11 +210,11 @@ class PercolatorTest extends BaseTest
     public function testPercolateExistingDocWithPercolateFormatIds()
     {
         $percolator = $this->_getDefaultPercolator();
-        $index      = $percolator->getIndex();
-        $type       = $this->_addDefaultDocuments($index);
+        $index = $percolator->getIndex();
+        $type = $this->_addDefaultDocuments($index);
 
         $parameter = array('percolate_format' => 'ids');
-        $matches   = $percolator->matchExistingDoc(1, $type->getName(), null, $parameter);
+        $matches = $percolator->matchExistingDoc(1, $type->getName(), null, $parameter);
 
         $this->assertCount(1, $matches);
         $this->assertEquals('existingDoc', $matches[0]);
@@ -228,11 +227,11 @@ class PercolatorTest extends BaseTest
     public function testPercolateExistingDocWithIdThatShouldBeUrlEncoded()
     {
         $percolator = $this->_getDefaultPercolator();
-        $index      = $percolator->getIndex();
-        $type       = $this->_addDefaultDocuments($index);
+        $index = $percolator->getIndex();
+        $type = $this->_addDefaultDocuments($index);
 
         // id with whitespace, should be urlencoded
-        $id = "foo bar 1";
+        $id = 'foo bar 1';
 
         $type->addDocument(new Document($id, array('name' => 'foobar')));
         $index->refresh();
@@ -252,13 +251,13 @@ class PercolatorTest extends BaseTest
         $percolator = new Percolator($index);
 
         $query = new Term(array('name' => 'foo'));
-        $response = $percolator->registerQuery('percotest', $query, array( 'field1' => array('tag1', 'tag2')));
+        $response = $percolator->registerQuery('percotest', $query, array('field1' => array('tag1', 'tag2')));
 
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
 
         $query = new Term(array('name' => 'foo'));
-        $response = $percolator->registerQuery('percotest1', $query, array( 'field1' => array('tag2')));
+        $response = $percolator->registerQuery('percotest1', $query, array('field1' => array('tag2')));
 
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
@@ -270,8 +269,8 @@ class PercolatorTest extends BaseTest
 
         $options = array(
             'track_scores' => true,
-            'sort'         => array('_score' => 'desc'),
-            'size'         => 1,
+            'sort' => array('_score' => 'desc'),
+            'size' => 1,
         );
 
         $matches = $percolator->matchDoc($doc1, new Term(array('field1' => 'tag2')), 'type', $options);
@@ -292,13 +291,13 @@ class PercolatorTest extends BaseTest
         $query = new Term(array('name' => 'foobar'));
         $percolator->registerQuery($percolatorName.'1', $query, array('field1' => array('tag2')));
 
-        $index      = $percolator->getIndex();
-        $type       = $this->_addDefaultDocuments($index);
+        $index = $percolator->getIndex();
+        $type = $this->_addDefaultDocuments($index);
 
         $options = array(
             'track_scores' => true,
-            'sort'         => array('_score' => 'desc'),
-            'size'         => 1,
+            'sort' => array('_score' => 'desc'),
+            'size' => 1,
         );
 
         $matches = $percolator->matchExistingDoc(1, $type->getName(), new Term(array('field1' => 'tag2')), $options);

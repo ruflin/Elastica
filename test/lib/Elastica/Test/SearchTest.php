@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test;
 
-use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
@@ -304,7 +302,7 @@ class SearchTest extends BaseTest
     }
 
     /**
-     * Default Limit tests for \Elastica\Search
+     * Default Limit tests for \Elastica\Search.
      *
      * @group functional
      */

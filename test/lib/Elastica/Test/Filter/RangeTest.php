@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Filter;
 
 use Elastica\Filter\Range;
@@ -48,7 +47,7 @@ class RangeTest extends BaseTest
     }
 
     /**
-     * Tests that parent fields are not overwritten by the toArray method
+     * Tests that parent fields are not overwritten by the toArray method.
      *
      * @group unit
      */

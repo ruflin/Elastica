@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Bulk\Action;
 
 use Elastica\Document;
@@ -14,7 +13,9 @@ class UpdateDocument extends IndexDocument
 
     /**
      * Set the document for this bulk update action.
-     * @param  \Elastica\Document $document
+     *
+     * @param \Elastica\Document $document
+     *
      * @return $this
      */
     public function setDocument(Document $document)
@@ -39,7 +40,8 @@ class UpdateDocument extends IndexDocument
     }
 
     /**
-     * @param  \Elastica\Script $script
+     * @param \Elastica\Script $script
+     *
      * @return $this
      */
     public function setScript(Script $script)

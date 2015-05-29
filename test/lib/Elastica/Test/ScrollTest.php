@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test;
 
 use Elastica\Document;
@@ -11,7 +10,7 @@ use Elastica\Search;
 class ScrollTest extends Base
 {
     /**
-     * Full foreach test
+     * Full foreach test.
      *
      * @group functional
      */
@@ -55,7 +54,7 @@ class ScrollTest extends Base
     }
 
     /**
-     * Scroll must not overwrite options
+     * Scroll must not overwrite options.
      *
      * @group functional
      */
@@ -79,7 +78,7 @@ class ScrollTest extends Base
 
     /**
      * index: 11 docs
-     * query size: 5
+     * query size: 5.
      *
      * @return Search
      */

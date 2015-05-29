@@ -1,9 +1,7 @@
 <?php
-
 namespace Elastica\Test\Bulk;
 
 use Elastica\Bulk\Action;
-use Elastica\Client;
 use Elastica\Index;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;

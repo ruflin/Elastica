@@ -1,9 +1,6 @@
 <?php
-
 namespace Elastica\Test\Transport;
 
-use Elastica\Client;
-use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
@@ -28,13 +25,14 @@ class TransportBenchmarkTest extends BaseTest
     }
 
     /**
-     * @param  array          $config
+     * @param array $config
+     *
      * @return \Elastica\Type
      */
     protected function getType(array $config)
     {
         $client = $this->_getClient($config);
-        $index = $client->getIndex('benchmark' . uniqid());
+        $index = $client->getIndex('benchmark'.uniqid());
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
         return $index->getType('benchmark');
@@ -73,7 +71,6 @@ class TransportBenchmarkTest extends BaseTest
      */
     public function testRandomRead(array $config, $transport)
     {
-
         $this->_checkThrift($transport);
 
         $type = $this->getType($config);
@@ -100,7 +97,6 @@ class TransportBenchmarkTest extends BaseTest
      */
     public function testBulk(array $config, $transport)
     {
-
         $type = $this->getType($config);
 
         $times = array();
@@ -194,7 +190,8 @@ class TransportBenchmarkTest extends BaseTest
     }
 
     /**
-     * @param  string $test
+     * @param string $test
+     *
      * @return array
      */
     protected function getData($test)
@@ -219,9 +216,9 @@ class TransportBenchmarkTest extends BaseTest
     {
         self::$_results[$name][$transport] = array(
             'count' => count($times),
-            'max'   => max($times) * 1000,
-            'min'   => min($times) * 1000,
-            'mean'  => (array_sum($times) / count($times)) * 1000,
+            'max' => max($times) * 1000,
+            'min' => min($times) * 1000,
+            'mean' => (array_sum($times) / count($times)) * 1000,
         );
     }
 

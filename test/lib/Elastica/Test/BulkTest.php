@@ -1,14 +1,11 @@
 <?php
-
 namespace Elastica\Test;
 
 use Elastica\Bulk;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\Action\AbstractDocument;
-use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException;
-use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Filter\Script;
 use Elastica\Test\Base as BaseTest;
@@ -437,7 +434,7 @@ class BulkTest extends BaseTest
         $response = $type->search();
         $this->assertEquals(3, $response->count());
 
-        foreach (array("Mister", "Invisible", "Torch") as $name) {
+        foreach (array('Mister', 'Invisible', 'Torch') as $name) {
             $result = $type->search($name);
             $this->assertEquals(1, count($result->getResults()));
         }
@@ -728,7 +725,7 @@ class BulkTest extends BaseTest
 
         $endMemory = memory_get_usage();
 
-        $this->assertLessThan(1.3, $endMemory/$startMemory);
+        $this->assertLessThan(1.3, $endMemory / $startMemory);
     }
 
     public function udpDataProvider()

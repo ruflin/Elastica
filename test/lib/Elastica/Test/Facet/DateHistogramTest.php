@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Facet;
 
 use Elastica\Document;
@@ -38,18 +37,18 @@ class DateHistogramTest extends BaseTest
             ));
         $type->setMapping($mapping);
 
-        $doc = new Document(1, array('name' => 'nicolas ruflin', 'dtmPosted' => "2011-06-23 21:53:00"));
+        $doc = new Document(1, array('name' => 'nicolas ruflin', 'dtmPosted' => '2011-06-23 21:53:00'));
         $type->addDocument($doc);
-        $doc = new Document(2, array('name' => 'raul martinez jr', 'dtmPosted' => "2011-06-23 09:53:00"));
+        $doc = new Document(2, array('name' => 'raul martinez jr', 'dtmPosted' => '2011-06-23 09:53:00'));
         $type->addDocument($doc);
-        $doc = new Document(3, array('name' => 'rachelle clemente', 'dtmPosted' => "2011-07-08 08:53:00"));
+        $doc = new Document(3, array('name' => 'rachelle clemente', 'dtmPosted' => '2011-07-08 08:53:00'));
         $type->addDocument($doc);
-        $doc = new Document(4, array('name' => 'elastica search', 'dtmPosted' => "2011-07-08 01:53:00"));
+        $doc = new Document(4, array('name' => 'elastica search', 'dtmPosted' => '2011-07-08 01:53:00'));
         $type->addDocument($doc);
 
         $facet = new DateHistogram('dateHist1');
-        $facet->setInterval("day");
-        $facet->setField("dtmPosted");
+        $facet->setInterval('day');
+        $facet->setField('dtmPosted');
 
         $query = new Query();
         $query->addFacet($facet);
@@ -89,8 +88,8 @@ class DateHistogramTest extends BaseTest
         $type->addDocument($doc);
 
         $facet = new DateHistogram('dateHist1');
-        $facet->setInterval("day");
-        $facet->setField("dtmPosted");
+        $facet->setInterval('day');
+        $facet->setField('dtmPosted');
         $facet->setFactor(1000);
 
         $query = new Query();

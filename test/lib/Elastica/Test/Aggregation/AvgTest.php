@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Avg;
@@ -29,7 +28,7 @@ class AvgTest extends BaseAggregationTest
      */
     public function testAvgAggregation()
     {
-        $agg = new Avg("avg");
+        $agg = new Avg('avg');
         $agg->setField('price');
 
         $query = new Query();

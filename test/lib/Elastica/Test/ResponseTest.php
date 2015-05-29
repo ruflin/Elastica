@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test;
 
 use Elastica\Document;
@@ -39,10 +38,10 @@ class ResponseTest extends BaseTest
         $type->setMapping($mapping);
 
         $type->addDocuments(array(
-            new Document(1, array('name' => 'nicolas ruflin', 'dtmPosted' => "2011-06-23 21:53:00")),
-            new Document(2, array('name' => 'raul martinez jr', 'dtmPosted' => "2011-06-23 09:53:00")),
-            new Document(3, array('name' => 'rachelle clemente', 'dtmPosted' => "2011-07-08 08:53:00")),
-            new Document(4, array('name' => 'elastica search', 'dtmPosted' => "2011-07-08 01:53:00")),
+            new Document(1, array('name' => 'nicolas ruflin', 'dtmPosted' => '2011-06-23 21:53:00')),
+            new Document(2, array('name' => 'raul martinez jr', 'dtmPosted' => '2011-06-23 09:53:00')),
+            new Document(3, array('name' => 'rachelle clemente', 'dtmPosted' => '2011-07-08 08:53:00')),
+            new Document(4, array('name' => 'elastica search', 'dtmPosted' => '2011-07-08 01:53:00')),
         ));
 
         $query = new Query();

@@ -1,15 +1,15 @@
 <?php
-
 namespace Elastica\Filter;
 
 use Elastica\Exception\InvalidException;
 
 /**
- * Geo distance filter
+ * Geo distance filter.
  *
  * @category Xodoa
- * @package Elastica
+ *
  * @author munkie
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-range-filter.html
  */
 class GeoDistanceRange extends AbstractGeoDistance
@@ -33,6 +33,7 @@ class GeoDistanceRange extends AbstractGeoDistance
      * @param string       $key
      * @param array|string $location
      * @param array        $ranges
+     *
      * @internal param string $distance
      */
     public function __construct($key, $location, array $ranges = array())
@@ -45,7 +46,8 @@ class GeoDistanceRange extends AbstractGeoDistance
     }
 
     /**
-     * @param  array $ranges
+     * @param array $ranges
+     *
      * @return $this
      */
     public function setRanges(array $ranges)
@@ -62,8 +64,9 @@ class GeoDistanceRange extends AbstractGeoDistance
     /**
      * @throws \Elastica\Exception\InvalidException
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return $this
      */
     public function setRange($key, $value)

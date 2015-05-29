@@ -1,13 +1,11 @@
 <?php
-
 namespace Elastica\Test;
 
-use Elastica\Client;
 use Elastica\Document;
 use Elastica\Test\Base as BaseTest;
 
 /**
- * Tests the example code
+ * Tests the example code.
  */
 class ExampleTest extends BaseTest
 {

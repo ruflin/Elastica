@@ -1,5 +1,6 @@
 elastica:
-  build: .
+  #build: . # In case the image must be built locally
+  image: ruflin/elastica
   ports:
     - "9200:9200"
   volumes:

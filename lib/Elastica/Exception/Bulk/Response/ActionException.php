@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Exception\Bulk\Response;
 
-use Elastica\Bulk\Action;
 use Elastica\Bulk\Response;
 use Elastica\Exception\BulkException;
 
@@ -40,7 +38,8 @@ class ActionException extends BulkException
     }
 
     /**
-     * @param  \Elastica\Bulk\Response $response
+     * @param \Elastica\Bulk\Response $response
+     *
      * @return string
      */
     public function getErrorMessage(Response $response)

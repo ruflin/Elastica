@@ -1,6 +1,4 @@
 <?php
-
-
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
@@ -32,8 +30,8 @@ class GeoShapeProvidedTest extends BaseTest
         // add docs
         $type->addDocument(new Document(1, array(
             'location' => array(
-                "type"          => "envelope",
-                "coordinates"   => array(
+                'type' => 'envelope',
+                'coordinates' => array(
                     array(-50.0, 50.0),
                     array(50.0, -50.0),
                 ),

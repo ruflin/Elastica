@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test;
 
-use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
@@ -614,7 +612,7 @@ class IndexTest extends BaseTest
     }
 
     /**
-     * Test $index->delete() return value for unknown index
+     * Test $index->delete() return value for unknown index.
      *
      * Tests if deleting an index that does not exist in Elasticsearch,
      * correctly returns a boolean true from the hasError() method of
@@ -639,7 +637,7 @@ class IndexTest extends BaseTest
     }
 
     /**
-     * Tests to see if the test type mapping exists when calling $index->getMapping()
+     * Tests to see if the test type mapping exists when calling $index->getMapping().
      *
      * @group functional
      */
@@ -676,7 +674,7 @@ class IndexTest extends BaseTest
     }
 
     /**
-     * Test to see if search Default Limit works
+     * Test to see if search Default Limit works.
      *
      * @group functional
      */
@@ -880,7 +878,7 @@ class IndexTest extends BaseTest
     public function testConvertScalarsToString()
     {
         $client = $this->_getClient();
-        $index  = $client->getIndex(1);
+        $index = $client->getIndex(1);
 
         $this->assertEquals('1', $index->getName());
         $this->assertInternalType('string', $index->getName());

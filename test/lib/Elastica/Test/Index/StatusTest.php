@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Index;
 
 use Elastica\Index\Status as IndexStatus;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Node;
 
 use Elastica\Node;
@@ -56,7 +55,7 @@ class InfoTest extends BaseTest
 
         $ids = array();
 
-        foreach($nodes as $node) {
+        foreach ($nodes as $node) {
             $id = $node->getInfo()->getId();
 
             // Checks that the ids are unique
@@ -68,11 +67,12 @@ class InfoTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetName() {
+    public function testGetName()
+    {
         $client = $this->_getClient();
         $nodes = $client->getCluster()->getNodes();
 
-        foreach($nodes as $node) {
+        foreach ($nodes as $node) {
             $this->assertEquals('Elastica', $node->getInfo()->getName());
         }
     }

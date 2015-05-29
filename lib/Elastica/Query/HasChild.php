@@ -1,21 +1,21 @@
 <?php
-
 namespace Elastica\Query;
 
 use Elastica\Query as BaseQuery;
 
 /**
- * Returns parent documents having child docs matching the query
+ * Returns parent documents having child docs matching the query.
  *
  * @category Xodoa
- * @package Elastica
+ *
  * @author Fabian Vogler <fabian@equivalence.ch>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
  */
 class HasChild extends AbstractQuery
 {
     /**
-     * Construct HasChild Query
+     * Construct HasChild Query.
      *
      * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
      * @param string                                               $type  Parent document type
@@ -27,9 +27,10 @@ class HasChild extends AbstractQuery
     }
 
     /**
-     * Sets query object
+     * Sets query object.
      *
-     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     *
      * @return $this
      */
     public function setQuery($query)
@@ -41,9 +42,10 @@ class HasChild extends AbstractQuery
     }
 
     /**
-     * Set type of the parent document
+     * Set type of the parent document.
      *
-     * @param  string $type Parent document type
+     * @param string $type Parent document type
+     *
      * @return $this
      */
     public function setType($type)
@@ -52,9 +54,10 @@ class HasChild extends AbstractQuery
     }
 
     /**
-     * Sets the scope
+     * Sets the scope.
      *
-     * @param  string $scope Scope
+     * @param string $scope Scope
+     *
      * @return $this
      */
     public function setScope($scope)

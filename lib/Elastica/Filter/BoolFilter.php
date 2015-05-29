@@ -1,44 +1,45 @@
 <?php
-
 namespace Elastica\Filter;
 
 use Elastica\Exception\InvalidException;
 
 /**
- * Bool Filter
+ * Bool Filter.
  *
  * @category Xodoa
- * @package Elastica
+ *
  * @author Nicolas Ruflin <spam@ruflin.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-filter.html
  */
 class BoolFilter extends AbstractFilter
 {
     /**
-     * Must
+     * Must.
      *
      * @var array
      */
     protected $_must = array();
 
     /**
-     * Should
+     * Should.
      *
      * @var array
      */
     protected $_should = array();
 
     /**
-     * Must not
+     * Must not.
      *
      * @var array
      */
     protected $_mustNot = array();
 
     /**
-     * Adds should filter
+     * Adds should filter.
      *
-     * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @param array|\Elastica\Filter\AbstractFilter $args Filter data
+     *
      * @return $this
      */
     public function addShould($args)
@@ -47,9 +48,10 @@ class BoolFilter extends AbstractFilter
     }
 
     /**
-     * Adds must filter
+     * Adds must filter.
      *
-     * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @param array|\Elastica\Filter\AbstractFilter $args Filter data
+     *
      * @return $this
      */
     public function addMust($args)
@@ -58,9 +60,10 @@ class BoolFilter extends AbstractFilter
     }
 
     /**
-     * Adds mustNot filter
+     * Adds mustNot filter.
      *
-     * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @param array|\Elastica\Filter\AbstractFilter $args Filter data
+     *
      * @return $this
      */
     public function addMustNot($args)
@@ -69,12 +72,13 @@ class BoolFilter extends AbstractFilter
     }
 
     /**
-     * Adds general filter based on type
+     * Adds general filter based on type.
      *
      * @throws \Elastica\Exception\InvalidException
      *
-     * @param  string                                $type Filter type
-     * @param  array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @param string                                $type Filter type
+     * @param array|\Elastica\Filter\AbstractFilter $args Filter data
+     *
      * @return $this
      */
     protected function _addFilter($type, $args)
@@ -100,7 +104,7 @@ class BoolFilter extends AbstractFilter
     }
 
     /**
-     * Converts bool filter to array
+     * Converts bool filter to array.
      *
      * @see \Elastica\Filter\AbstractFilter::toArray()
      *

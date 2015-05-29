@@ -1,9 +1,8 @@
 <?php
-
 namespace Elastica;
 
 /**
- * Scan and Scroll Iterator
+ * Scan and Scroll Iterator.
  *
  * @author Manuel Andreo Garcia <andreo.garcia@gmail.com>
  *
@@ -17,7 +16,7 @@ class ScanAndScroll extends Scroll
     public $sizePerShard;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Search $search
      * @param string $expiryTime
@@ -31,7 +30,7 @@ class ScanAndScroll extends Scroll
     }
 
     /**
-     * Initial scan search
+     * Initial scan search.
      *
      * @link http://php.net/manual/en/iterator.rewind.php
      */
@@ -57,7 +56,7 @@ class ScanAndScroll extends Scroll
     }
 
     /**
-     * Save all search options manipulated by Scroll
+     * Save all search options manipulated by Scroll.
      */
     protected function _saveOptions()
     {
@@ -70,7 +69,7 @@ class ScanAndScroll extends Scroll
     }
 
     /**
-     * Revert search options to previously saved state
+     * Revert search options to previously saved state.
      */
     protected function _revertOptions()
     {

@@ -1,13 +1,13 @@
 <?php
-
 namespace Elastica\Filter;
 
 /**
- * Geo distance filter
+ * Geo distance filter.
  *
  * @category Xodoa
- * @package Elastica
+ *
  * @author Nicolas Ruflin <spam@ruflin.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-filter.html
  */
 class GeoDistance extends AbstractGeoDistance
@@ -21,7 +21,7 @@ class GeoDistance extends AbstractGeoDistance
     const OPTIMIZE_BBOX_NONE = 'none';
 
     /**
-     * Create GeoDistance object
+     * Create GeoDistance object.
      *
      * @throws \Elastica\Exception\InvalidException
      *
@@ -37,7 +37,8 @@ class GeoDistance extends AbstractGeoDistance
     }
 
     /**
-     * @param  string $distance
+     * @param string $distance
+     *
      * @return $this
      */
     public function setDistance($distance)
@@ -48,9 +49,10 @@ class GeoDistance extends AbstractGeoDistance
     }
 
     /**
-     * See DISTANCE_TYPE_* constants
+     * See DISTANCE_TYPE_* constants.
      *
-     * @param  string $distanceType
+     * @param string $distanceType
+     *
      * @return $this
      */
     public function setDistanceType($distanceType)
@@ -61,9 +63,10 @@ class GeoDistance extends AbstractGeoDistance
     }
 
     /**
-     * See OPTIMIZE_BBOX_* constants
+     * See OPTIMIZE_BBOX_* constants.
      *
-     * @param  string $optimizeBbox
+     * @param string $optimizeBbox
+     *
      * @return $this
      */
     public function setOptimizeBbox($optimizeBbox)

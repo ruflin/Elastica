@@ -1,11 +1,10 @@
 <?php
-
 namespace Elastica\Connection\Strategy;
 
 use Elastica\Exception\InvalidException;
 
 /**
- * Description of CallbackStrategy
+ * Description of CallbackStrategy.
  *
  * @author chabior
  */
@@ -17,7 +16,8 @@ class CallbackStrategy implements StrategyInterface
     protected $_callback;
 
     /**
-     * @param  Closure                              $callback
+     * @param Closure $callback
+     *
      * @throws \Elastica\Exception\InvalidException
      */
     public function __construct($callback)
@@ -30,7 +30,8 @@ class CallbackStrategy implements StrategyInterface
     }
 
     /**
-     * @param  array|\Elastica\Connection[] $connections
+     * @param array|\Elastica\Connection[] $connections
+     *
      * @return \Elastica\Connection
      */
     public function getConnection($connections)
@@ -39,7 +40,7 @@ class CallbackStrategy implements StrategyInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public static function isValid($callback)
     {

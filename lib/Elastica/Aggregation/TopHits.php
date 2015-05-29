@@ -5,8 +5,8 @@ use Elastica\Script;
 use Elastica\ScriptFields;
 
 /**
- * Class TopHits
- * @package Elastica\Aggregation
+ * Class TopHits.
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
  */
 class TopHits extends AbstractAggregation
@@ -30,7 +30,8 @@ class TopHits extends AbstractAggregation
     /**
      * The maximum number of top matching hits to return per bucket. By default the top three matching hits are returned.
      *
-     * @param  int   $size
+     * @param int $size
+     *
      * @return $this
      */
     public function setSize($size)
@@ -41,7 +42,8 @@ class TopHits extends AbstractAggregation
     /**
      * The offset from the first result you want to fetch.
      *
-     * @param  int   $from
+     * @param int $from
+     *
      * @return $this
      */
     public function setFrom($from)
@@ -52,7 +54,8 @@ class TopHits extends AbstractAggregation
     /**
      * How the top matching hits should be sorted. By default the hits are sorted by the score of the main query.
      *
-     * @param  array $sortArgs
+     * @param array $sortArgs
+     *
      * @return $this
      */
     public function setSort(array $sortArgs)
@@ -63,7 +66,8 @@ class TopHits extends AbstractAggregation
     /**
      * Allows to control how the _source field is returned with every hit.
      *
-     * @param  array $fields
+     * @param array $fields
+     *
      * @return $this
      */
     public function setSource(array $fields)
@@ -74,7 +78,8 @@ class TopHits extends AbstractAggregation
     /**
      * Returns a version for each search hit.
      *
-     * @param  bool  $version
+     * @param bool $version
+     *
      * @return $this
      */
     public function setVersion($version)
@@ -85,7 +90,8 @@ class TopHits extends AbstractAggregation
     /**
      * Enables explanation for each hit on how its score was computed.
      *
-     * @param  bool  $explain
+     * @param bool $explain
+     *
      * @return $this
      */
     public function setExplain($explain)
@@ -94,9 +100,10 @@ class TopHits extends AbstractAggregation
     }
 
     /**
-     * Set script fields
+     * Set script fields.
      *
-     * @param  array|\Elastica\ScriptFields $scriptFields
+     * @param array|\Elastica\ScriptFields $scriptFields
+     *
      * @return $this
      */
     public function setScriptFields($scriptFields)
@@ -109,10 +116,11 @@ class TopHits extends AbstractAggregation
     }
 
     /**
-     * Adds a Script to the aggregation
+     * Adds a Script to the aggregation.
      *
-     * @param  string           $name
-     * @param  \Elastica\Script $script
+     * @param string           $name
+     * @param \Elastica\Script $script
+     *
      * @return $this
      */
     public function addScriptField($name, Script $script)
@@ -123,9 +131,10 @@ class TopHits extends AbstractAggregation
     }
 
     /**
-     * Sets highlight arguments for the results
+     * Sets highlight arguments for the results.
      *
-     * @param  array $highlightArgs
+     * @param array $highlightArgs
+     *
      * @return $this
      */
     public function setHighlight(array $highlightArgs)
@@ -134,9 +143,10 @@ class TopHits extends AbstractAggregation
     }
 
     /**
-     * Allows to return the field data representation of a field for each hit
+     * Allows to return the field data representation of a field for each hit.
      *
-     * @param  array $fields
+     * @param array $fields
+     *
      * @return $this
      */
     public function setFieldDataFields(array $fields)

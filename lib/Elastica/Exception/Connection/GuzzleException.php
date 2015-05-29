@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Exception\Connection;
 
 use Elastica\Exception\ConnectionException;
@@ -8,9 +7,8 @@ use Elastica\Response;
 use GuzzleHttp\Exception\TransferException;
 
 /**
- * Transport exception
+ * Transport exception.
  *
- * @package Elastica
  * @author Milan Magudia <milan@magudia.com>
  */
 class GuzzleException extends ConnectionException
@@ -33,7 +31,8 @@ class GuzzleException extends ConnectionException
     }
 
     /**
-     * @param  \GuzzleHttp\Exception\TransferException $guzzleException
+     * @param \GuzzleHttp\Exception\TransferException $guzzleException
+     *
      * @return string
      */
     public function getErrorMessage(TransferException $guzzleException)

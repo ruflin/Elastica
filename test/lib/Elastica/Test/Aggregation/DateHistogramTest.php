@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\DateHistogram;
@@ -12,16 +11,16 @@ class DateHistogramTest extends BaseAggregationTest
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
-        $type = $index->getType("test");
+        $type = $index->getType('test');
 
         $type->setMapping(new Mapping(null, array(
-            "created" => array("type" => "date"),
+            'created' => array('type' => 'date'),
         )));
 
         $type->addDocuments(array(
-            new Document(1, array("created" => "2014-01-29T00:20:00")),
-            new Document(2, array("created" => "2014-01-29T02:20:00")),
-            new Document(3, array("created" => "2014-01-29T03:20:00")),
+            new Document(1, array('created' => '2014-01-29T00:20:00')),
+            new Document(2, array('created' => '2014-01-29T02:20:00')),
+            new Document(3, array('created' => '2014-01-29T03:20:00')),
         ));
 
         $index->refresh();
@@ -34,11 +33,11 @@ class DateHistogramTest extends BaseAggregationTest
      */
     public function testDateHistogramAggregation()
     {
-        $agg = new DateHistogram("hist", "created", "1h");
+        $agg = new DateHistogram('hist', 'created', '1h');
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("hist");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
 
         $this->assertEquals(3, sizeof($results['buckets']));
     }
@@ -60,9 +59,9 @@ class DateHistogramTest extends BaseAggregationTest
             ),
         );
 
-       $this->assertEquals($expected, $agg->toArray());
+        $this->assertEquals($expected, $agg->toArray());
 
-       $this->assertInstanceOf('Elastica\Aggregation\DateHistogram', $agg->setOffset('3m'));
+        $this->assertInstanceOf('Elastica\Aggregation\DateHistogram', $agg->setOffset('3m'));
     }
 
     /**
@@ -97,8 +96,8 @@ class DateHistogramTest extends BaseAggregationTest
             ),
         );
 
-       $this->assertEquals($expected, $agg->toArray());
+        $this->assertEquals($expected, $agg->toArray());
 
-       $this->assertInstanceOf('Elastica\Aggregation\DateHistogram', $agg->setTimezone('-02:30'));
+        $this->assertInstanceOf('Elastica\Aggregation\DateHistogram', $agg->setTimezone('-02:30'));
     }
 }

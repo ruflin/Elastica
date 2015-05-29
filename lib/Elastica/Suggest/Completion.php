@@ -1,21 +1,22 @@
 <?php
-
 namespace Elastica\Suggest;
 
 /**
- * Comletion suggester
+ * Comletion suggester.
  *
  * @author Igor Denisenko <im.denisenko@yahoo.com>
+ *
  * @link   http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html
  */
 class Completion extends AbstractSuggest
 {
     /**
-     * Set fuzzy parameter
-     * 
+     * Set fuzzy parameter.
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html#fuzzy
-     * 
-     * @param  array $fuzzy
+     *
+     * @param array $fuzzy
+     *
      * @return $this
      */
     public function setFuzzy(array $fuzzy)
