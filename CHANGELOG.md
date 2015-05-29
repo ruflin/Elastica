@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file based on the
 - Scroll Iterator [#842](https://github.com/ruflin/Elastica/issues/842/)
 - Gitter Elastica Chat Room add for Elastica discussions: https://gitter.im/ruflin/Elastica
 - Introduce PHP7 compatibility and tests.
+- `Tool\CrossIndex` for reindexing and copying data and mapping between indices [#853](https://github.com/ruflin/Elastica/pull/853)
 
 
 ### Improvements
