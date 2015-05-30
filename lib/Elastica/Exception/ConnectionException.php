@@ -7,7 +7,6 @@ use Elastica\Response;
 /**
  * Connection exception.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class ConnectionException extends \RuntimeException implements ExceptionInterface

@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Type Filter.
  *
- *
  * @author James Wilson <jwilson556@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-filter.html

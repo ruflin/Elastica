@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Implements the range facet.
  *
- *
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-range-facet.html

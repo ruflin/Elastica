@@ -9,7 +9,6 @@ use Elastica\Search as BaseSearch;
 /**
  * Elastica multi search.
  *
- *
  * @author munkie
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html

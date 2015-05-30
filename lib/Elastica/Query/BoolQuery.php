@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Bool query.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
@@ -52,10 +51,10 @@ class BoolQuery extends AbstractQuery
     /**
      * Adds a query to the current object.
      *
-     * @throws \Elastica\Exception\InvalidException If not valid query
-     *
      * @param string                              $type Query type
      * @param \Elastica\Query\AbstractQuery|array $args Query
+     *
+     * @throws \Elastica\Exception\InvalidException If not valid query
      *
      * @return $this
      */

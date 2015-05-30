@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Script objects, containing script internals.
  *
- *
  * @author avasilenko <aa.vasilenko@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html
@@ -92,9 +91,9 @@ class Script extends AbstractUpdateAction
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string|array|\Elastica\Script $data
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return self
      */
@@ -114,9 +113,9 @@ class Script extends AbstractUpdateAction
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param array $data
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return self
      */

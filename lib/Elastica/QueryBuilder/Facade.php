@@ -35,10 +35,10 @@ class Facade
     /**
      * Executes DSL methods.
      *
-     * @throws QueryBuilderException
-     *
      * @param string $name
      * @param array  $arguments
+     *
+     * @throws QueryBuilderException
      *
      * @return mixed
      */

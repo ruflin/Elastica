@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Implements the statistical facet on a per term basis.
  *
- *
  * @author Tom Michaelis <tom.michaelis@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-terms-stats-facet.html
@@ -52,9 +51,9 @@ class TermsStats extends AbstractFacet
      * Sets the ordering type for this facet. Elasticsearch
      * internal default is count.
      *
-     * @throws \Elastica\Exception\InvalidException When an invalid order type was set.
-     *
      * @param string $type The order type to set use for sorting of the terms.
+     *
+     * @throws \Elastica\Exception\InvalidException When an invalid order type was set.
      *
      * @return $this
      */

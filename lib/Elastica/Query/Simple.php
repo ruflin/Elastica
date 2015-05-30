@@ -5,7 +5,6 @@ namespace Elastica\Query;
  * Simple query
  * Pure php array query. Can be used to create any not existing type of query.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Simple extends AbstractQuery

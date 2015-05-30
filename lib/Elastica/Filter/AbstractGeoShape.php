@@ -6,7 +6,6 @@ namespace Elastica\Filter;
  *
  * Filter pre-indexed shape definitions
  *
- *
  * @author Bennie Krijger <benniekrijger@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-filter.html

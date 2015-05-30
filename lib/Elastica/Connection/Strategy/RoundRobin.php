@@ -9,9 +9,9 @@ namespace Elastica\Connection\Strategy;
 class RoundRobin extends Simple
 {
     /**
-     * @throws \Elastica\Exception\ClientException
-     *
      * @param array|\Elastica\Connection[] $connections
+     *
+     * @throws \Elastica\Exception\ClientException
      *
      * @return \Elastica\Connection
      */

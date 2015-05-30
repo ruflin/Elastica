@@ -6,7 +6,6 @@ namespace Elastica;
  *
  * Stores all information from a result
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Result

@@ -8,7 +8,6 @@ use Elastica\Param;
 /**
  * Abstract facet object. Should be extended by all facet types.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  *
@@ -40,9 +39,9 @@ abstract class AbstractFacet extends Param
      * Sets the name of the facet. It is automatically set by
      * the constructor.
      *
-     * @throws \Elastica\Exception\InvalidException If name is empty
-     *
      * @param string $name The name of the facet.
+     *
+     * @throws \Elastica\Exception\InvalidException If name is empty
      *
      * @return $this
      */

@@ -4,11 +4,9 @@ namespace Elastica\Query;
 /**
  * Image query.
  *
- *
  * @author   Jacques Moati <jacques@moati.net>
  *
  * @link     https://github.com/kzwang/elasticsearch-image
- *
  *
  * To use this feature you have to call the following command in the
  * elasticsearch directory:
@@ -96,9 +94,9 @@ class Image extends AbstractQuery
      * @param string $field
      * @param string $path  File will be base64_encode
      *
-     * @return $this
-     *
      * @throws \Exception
+     *
+     * @return $this
      */
     public function setFieldImage($field, $path)
     {

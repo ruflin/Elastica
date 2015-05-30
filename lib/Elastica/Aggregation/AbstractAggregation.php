@@ -61,9 +61,9 @@ abstract class AbstractAggregation extends Param
     /**
      * Add a sub-aggregation.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param AbstractAggregation $aggregation
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return $this
      */

@@ -38,9 +38,9 @@ class IpRange extends AbstractAggregation
      * @param string $fromValue a valid ipv4 address. Low end of this range, exclusive (greater than)
      * @param string $toValue   a valid ipv4 address. High end of this range, exclusive (less than)
      *
-     * @return $this
-     *
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @return $this
      */
     public function addRange($fromValue = null, $toValue = null)
     {

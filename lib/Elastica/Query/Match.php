@@ -4,7 +4,6 @@ namespace Elastica\Query;
 /**
  * Match query.
  *
- *
  * @author F21
  * @author WONG Wing Lun <luiges90@gmail.com>
  *

@@ -6,7 +6,6 @@ use Elastica\Query as BaseQuery;
 /**
  * Returns parent documents having child docs matching the query.
  *
- *
  * @author Fabian Vogler <fabian@equivalence.ch>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html

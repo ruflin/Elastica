@@ -6,7 +6,6 @@ use Elastica\Query as BaseQuery;
 /**
  * Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.
  *
- *
  * @author Wu Yang <darkyoung@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-top-children-query.html

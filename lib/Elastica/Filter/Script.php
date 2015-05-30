@@ -6,7 +6,6 @@ use Elastica;
 /**
  * Script filter.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-filter.html

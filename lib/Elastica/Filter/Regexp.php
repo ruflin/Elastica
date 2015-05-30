@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Regexp filter.
  *
- *
  * @author Timothy Lamb <trash80@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-filter.html
@@ -35,11 +34,11 @@ class Regexp extends AbstractFilter
     /**
      * Create Regexp object.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string $field   Field name
      * @param string $regexp  Regular expression
      * @param array  $options Regular expression options
+     *
+     * @throws \Elastica\Exception\InvalidException
      */
     public function __construct($field = '', $regexp = '', $options = array())
     {

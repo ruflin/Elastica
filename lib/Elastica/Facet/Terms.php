@@ -7,7 +7,6 @@ use Elastica\Script;
 /**
  * Implements the terms facet.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  *
@@ -82,9 +81,9 @@ class Terms extends AbstractFacet
      * Sets the ordering type for this facet. Elasticsearch
      * internal default is count.
      *
-     * @throws \Elastica\Exception\InvalidException When an invalid order type was set.
-     *
      * @param string $type The order type to set use for sorting of the terms.
+     *
+     * @throws \Elastica\Exception\InvalidException When an invalid order type was set.
      *
      * @return $this
      */

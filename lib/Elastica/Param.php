@@ -8,7 +8,6 @@ use Elastica\Exception\InvalidException;
  *
  * This function can be used to handle params for queries, filter, facets
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Param
@@ -129,9 +128,9 @@ class Param
     /**
      * Returns a specific param.
      *
-     * @throws \Elastica\Exception\InvalidException If requested key is not set
-     *
      * @param string $key Key to return
+     *
+     * @throws \Elastica\Exception\InvalidException If requested key is not set
      *
      * @return mixed Key value
      */

@@ -4,7 +4,6 @@ namespace Elastica\Facet;
 /**
  * Implements the Geo Cluster facet.
  *
- *
  * @author Konstantin Nikiforov <konstantin.nikiforov@gmail.com>
  *
  * @link https://github.com/zenobase/geocluster-facet

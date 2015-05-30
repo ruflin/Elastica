@@ -12,7 +12,6 @@ use Elastica\Index\Status as IndexStatus;
  *
  * Handles reads, deletes and configurations of an index
  *
- *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
 class Index implements SearchableInterface
@@ -36,10 +35,10 @@ class Index implements SearchableInterface
      *
      * All the communication to and from an index goes of this object
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param \Elastica\Client $client Client object
      * @param string           $name   Index name
+     *
+     * @throws \Elastica\Exception\InvalidException
      */
     public function __construct(Client $client, $name)
     {
@@ -235,15 +234,15 @@ class Index implements SearchableInterface
     /**
      * Creates a new index with the given arguments.
      *
-     * @throws \Elastica\Exception\InvalidException
-     * @throws \Elastica\Exception\ResponseException
-     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
      *
      * @param array      $args    OPTIONAL Arguments to use
      * @param bool|array $options OPTIONAL
      *                            bool=> Deletes index first if already exists (default = false).
      *                            array => Associative array of options (option=>value)
+     *
+     * @throws \Elastica\Exception\InvalidException
+     * @throws \Elastica\Exception\ResponseException
      *
      * @return array Server response
      */

@@ -11,7 +11,6 @@ use Elastica\Response;
 /**
  * Elastica Http Transport object.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Http extends AbstractTransport
@@ -35,12 +34,12 @@ class Http extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
+     * @param \Elastica\Request $request
+     * @param array             $params  Host, Port, ...
+     *
      * @throws \Elastica\Exception\ConnectionException
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
-     *
-     * @param \Elastica\Request $request
-     * @param array             $params  Host, Port, ...
      *
      * @return \Elastica\Response Response object
      */

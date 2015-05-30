@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Bool Filter.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-filter.html
@@ -73,10 +72,10 @@ class BoolFilter extends AbstractFilter
     /**
      * Adds general filter based on type.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string                                $type Filter type
      * @param array|\Elastica\Filter\AbstractFilter $args Filter data
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return $this
      */

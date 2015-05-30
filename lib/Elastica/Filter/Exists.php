@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Exists query.
  *
- *
  * @author Oleg Cherniy <oleg.cherniy@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-filter.html

@@ -8,7 +8,6 @@ use Elastica\Exception\NotImplementedException;
 /**
  * Cluster informations for elasticsearch.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html
@@ -142,11 +141,11 @@ class Cluster
     /**
      * Returns the cluster information (not implemented yet).
      *
-     * @throws \Elastica\Exception\NotImplementedException
-     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      *
      * @param array $args Additional arguments
+     *
+     * @throws \Elastica\Exception\NotImplementedException
      */
     public function getInfo(array $args)
     {

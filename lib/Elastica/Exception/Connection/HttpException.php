@@ -8,7 +8,6 @@ use Elastica\Response;
 /**
  * Connection exception.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class HttpException extends ConnectionException

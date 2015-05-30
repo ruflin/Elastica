@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Elastica search object.
  *
- *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
 class Search
@@ -81,9 +80,9 @@ class Search
     /**
      * Adds a index to the list.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param \Elastica\Index|string $index Index object or string
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -121,9 +120,9 @@ class Search
     /**
      * Adds a type to the current search.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param \Elastica\Type|string $type Type name or object
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -241,9 +240,9 @@ class Search
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string $key
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return mixed
      */
@@ -265,9 +264,9 @@ class Search
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string $key
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return bool
      */
@@ -424,10 +423,10 @@ class Search
     /**
      * Search in the set indices, types.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param mixed     $query
      * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return \Elastica\ResultSet
      */

@@ -4,7 +4,6 @@ namespace Elastica\Facet;
 /**
  * Implements the Histogram facet.
  *
- *
  * @author Raul Martinez Jr  <juneym@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-histogram-facet.html

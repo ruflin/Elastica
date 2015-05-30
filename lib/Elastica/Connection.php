@@ -7,7 +7,6 @@ use Elastica\Transport\AbstractTransport;
 /**
  * Elastica connection instance to an elasticasearch node.
  *
- *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
 class Connection extends Param
@@ -277,9 +276,9 @@ class Connection extends Param
      * Returns a specific config key or the whole
      * config array if not set.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string $key Config key
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return array|string Config value
      */
@@ -298,9 +297,9 @@ class Connection extends Param
     }
 
     /**
-     * @throws Exception\InvalidException
-     *
      * @param \Elastica\Connection|array $params Params to create a connection
+     *
+     * @throws Exception\InvalidException
      *
      * @return self
      */

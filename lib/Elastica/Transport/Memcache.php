@@ -12,7 +12,6 @@ use Elastica\Response;
 /**
  * Elastica Memcache Transport object.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @deprecated The memcached transport is deprecated as of ES 1.5, and will be removed in ES 2.0
@@ -24,11 +23,11 @@ class Memcache extends AbstractTransport
     /**
      * Makes calls to the elasticsearch server.
      *
-     * @throws \Elastica\Exception\ResponseException
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param \Elastica\Request $request
      * @param array             $params  Host, Port, ...
+     *
+     * @throws \Elastica\Exception\ResponseException
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return \Elastica\Response Response object
      */
@@ -100,9 +99,9 @@ class Memcache extends AbstractTransport
     /**
      * Check if key that will be used dont exceed 250 symbols.
      *
-     * @throws Elastica\Exception\Connection\MemcacheException If key is too long
-     *
      * @param string $key
+     *
+     * @throws Elastica\Exception\Connection\MemcacheException If key is too long
      */
     private function _checkKeyLength($key)
     {

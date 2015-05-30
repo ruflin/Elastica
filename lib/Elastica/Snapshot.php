@@ -46,10 +46,10 @@ class Snapshot
     /**
      * Retrieve a repository record by name.
      *
+     * @param string $name the name of the desired repository
+     *
      * @throws Exception\ResponseException
      * @throws Exception\NotFoundException
-     *
-     * @param string $name the name of the desired repository
      *
      * @return array
      */
@@ -96,11 +96,11 @@ class Snapshot
     /**
      * Retrieve data regarding a specific snapshot.
      *
-     * @throws Exception\ResponseException
-     * @throws Exception\NotFoundException
-     *
      * @param string $repository the name of the repository from which to retrieve the snapshot
      * @param string $name       the name of the desired snapshot
+     *
+     * @throws Exception\ResponseException
+     * @throws Exception\NotFoundException
      *
      * @return array
      */

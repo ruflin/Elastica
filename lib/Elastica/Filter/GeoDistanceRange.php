@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Geo distance filter.
  *
- *
  * @author munkie
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-range-filter.html
@@ -61,10 +60,10 @@ class GeoDistanceRange extends AbstractGeoDistance
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string $key
      * @param mixed  $value
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return $this
      */

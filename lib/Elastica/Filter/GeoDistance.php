@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Geo distance filter.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-filter.html
@@ -22,11 +21,11 @@ class GeoDistance extends AbstractGeoDistance
     /**
      * Create GeoDistance object.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string       $key      Key
      * @param array|string $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
      * @param string       $distance Distance
+     *
+     * @throws \Elastica\Exception\InvalidException
      */
     public function __construct($key, $location, $distance)
     {

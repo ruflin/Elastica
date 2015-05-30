@@ -4,7 +4,6 @@ namespace Elastica\Query;
 /**
  * Multi Match.
  *
- *
  * @author Rodolfo Adhenawer Campagnoli Moraes <adhenawer@gmail.com>
  * @author Wong Wing Lun <luiges90@gmail.com>
  * @author Tristan Maindron <tmaindron@gmail.com>

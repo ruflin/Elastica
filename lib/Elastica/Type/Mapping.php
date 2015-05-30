@@ -8,7 +8,6 @@ use Elastica\Type;
 /**
  * Elastica Mapping object.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html
@@ -274,9 +273,9 @@ class Mapping
     /**
      * Creates a mapping object.
      *
-     * @throws \Elastica\Exception\InvalidException If invalid type
-     *
      * @param array|\Elastica\Type\Mapping $mapping Mapping object or properties array
+     *
+     * @throws \Elastica\Exception\InvalidException If invalid type
      *
      * @return self
      */

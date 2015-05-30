@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Geo polygon filter.
  *
- *
  * @author Michael Maclean <mgdm@php.net>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-filter.html

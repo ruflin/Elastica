@@ -7,7 +7,6 @@ use Elastica\Param;
 /**
  * Abstract filter object. Should be extended by all filter types.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-filters.html
@@ -29,9 +28,9 @@ abstract class AbstractFilter extends Param
     /**
      * Sets the filter cache key.
      *
-     * @throws \Elastica\Exception\InvalidException If given key is empty
-     *
      * @param string $cacheKey Cache key
+     *
+     * @throws \Elastica\Exception\InvalidException If given key is empty
      *
      * @return $this
      */

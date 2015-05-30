@@ -46,9 +46,9 @@ class Suggest extends Param
     }
 
     /**
-     * @throws Exception\NotImplementedException
-     *
      * @param Suggest|AbstractSuggest $suggestion
+     *
+     * @throws Exception\NotImplementedException
      *
      * @return self
      */

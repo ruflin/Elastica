@@ -13,7 +13,6 @@ use Elastica\Request;
  * can be changed on a running indices. To make changes like the merge policy (http://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html)
  * the index has to be closed first and reopened after the call
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html

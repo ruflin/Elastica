@@ -10,7 +10,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Client to connect the the elasticsearch server.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Client
@@ -152,9 +151,9 @@ class Client
      * Returns a specific config key or the whole
      * config array if not set.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string $key Config key
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return array|string Config value
      */
@@ -219,10 +218,10 @@ class Client
     /**
      * Adds a HTTP Header.
      *
-     * @throws \Elastica\Exception\InvalidException If $header or $headerValue is not a string
-     *
      * @param string $header      The HTTP Header
      * @param string $headerValue The HTTP Header Value
+     *
+     * @throws \Elastica\Exception\InvalidException If $header or $headerValue is not a string
      *
      * @return $this
      */
@@ -240,9 +239,9 @@ class Client
     /**
      * Remove a HTTP Header.
      *
-     * @throws \Elastica\Exception\InvalidException If $header is not a string
-     *
      * @param string $header The HTTP Header to remove
+     *
+     * @throws \Elastica\Exception\InvalidException If $header is not a string
      *
      * @return $this
      */
@@ -266,11 +265,11 @@ class Client
      * set inside the document, because for bulk settings documents,
      * documents can belong to any type and index
      *
-     * @throws \Elastica\Exception\InvalidException If docs is empty
-     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     *
+     * @throws \Elastica\Exception\InvalidException If docs is empty
      *
      * @return \Elastica\Bulk\ResponseSet Response object
      */
@@ -294,11 +293,11 @@ class Client
      * set inside the document, because for bulk settings documents,
      * documents can belong to any type and index
      *
-     * @throws \Elastica\Exception\InvalidException If docs is empty
-     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     *
+     * @throws \Elastica\Exception\InvalidException If docs is empty
      *
      * @return \Elastica\Bulk\ResponseSet Response object
      */
@@ -427,9 +426,9 @@ class Client
     /**
      * Bulk deletes documents.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param array|\Elastica\Document[] $docs
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return \Elastica\Bulk\ResponseSet
      */
@@ -528,14 +527,14 @@ class Client
     /**
      * Deletes documents with the given ids, index, type from the index.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array                  $ids     Document ids
      * @param string|\Elastica\Index $index   Index name
      * @param string|\Elastica\Type  $type    Type of documents
      * @param string|false           $routing Optional routing key for all ids
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return \Elastica\Bulk\ResponseSet Response  object
      */
@@ -575,12 +574,12 @@ class Client
      *         array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '2'))
      * );
      *
-     * @throws \Elastica\Exception\ResponseException
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array $params Parameter array
+     *
+     * @throws \Elastica\Exception\ResponseException
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return \Elastica\Bulk\ResponseSet Response object
      */
@@ -602,12 +601,12 @@ class Client
      *
      * It's possible to make any REST query directly over this method
      *
-     * @throws Exception\ConnectionException|\Exception
-     *
      * @param string $path   Path to call
      * @param string $method Rest method to use (GET, POST, DELETE, PUT)
      * @param array  $data   OPTIONAL Arguments as array
      * @param array  $query  OPTIONAL Query params
+     *
+     * @throws Exception\ConnectionException|\Exception
      *
      * @return \Elastica\Response Response object
      */
@@ -666,9 +665,9 @@ class Client
     /**
      * logging.
      *
-     * @throws Exception\RuntimeException
-     *
      * @param string|\Elastica\Request $context
+     *
+     * @throws Exception\RuntimeException
      */
     protected function _log($context)
     {

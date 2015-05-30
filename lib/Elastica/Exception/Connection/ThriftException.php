@@ -9,7 +9,6 @@ use Thrift\Exception\TException;
 /**
  * Transport exception.
  *
- *
  * @author Mikhail Shamin <munk13@gmail.com>
  */
 class ThriftException extends ConnectionException

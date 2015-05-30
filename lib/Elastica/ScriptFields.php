@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Container for scripts as fields.
  *
- *
  * @author Sebastien Lavoie <github@lavoie.sl>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
@@ -24,10 +23,10 @@ class ScriptFields extends Param
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string           $name   Name of the Script field
      * @param \Elastica\Script $script
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return $this
      */

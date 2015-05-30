@@ -42,10 +42,10 @@ class QueryBuilder
     /**
      * Returns Facade for custom DSL object.
      *
-     * @throws QueryBuilderException
-     *
      * @param $dsl
      * @param array $arguments
+     *
+     * @throws QueryBuilderException
      *
      * @return Facade
      */

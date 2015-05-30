@@ -24,7 +24,6 @@ use Elastica\Util;
  *
  * @todo Add some settings examples to code
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 abstract class AbstractType implements SearchableInterface
@@ -93,9 +92,9 @@ abstract class AbstractType implements SearchableInterface
      * Reads index and type name from protected vars _indexName and _typeName.
      * Has to be set in child class
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param \Elastica\Client $client OPTIONAL Client object
+     *
+     * @throws \Elastica\Exception\InvalidException
      */
     public function __construct(Client $client = null)
     {

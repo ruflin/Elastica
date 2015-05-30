@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * DisMax query.
  *
- *
  * @author Hung Tran <oohnoitz@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html
@@ -16,9 +15,9 @@ class DisMax extends AbstractQuery
     /**
      * Adds a query to the current object.
      *
-     * @throws \Elastica\Exception\InvalidException If not valid query
-     *
      * @param \Elastica\Query\AbstractQuery|array $args Query
+     *
+     * @throws \Elastica\Exception\InvalidException If not valid query
      *
      * @return $this
      */

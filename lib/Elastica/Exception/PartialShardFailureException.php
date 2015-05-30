@@ -8,7 +8,6 @@ use Elastica\Response;
 /**
  * Partial shard failure exception.
  *
- *
  * @author Ian Babrou <ibobrik@gmail.com>
  */
 class PartialShardFailureException extends ResponseException

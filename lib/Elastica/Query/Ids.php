@@ -6,7 +6,6 @@ use Elastica\Type;
 /**
  * Ids Query.
  *
- *
  * @author Lee Parker
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Tim Rupp

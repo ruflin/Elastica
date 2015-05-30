@@ -57,9 +57,9 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @throws \InvalidArgumentException
-     *
      * @param \Elastica\Script|\Elastica\Document $data
+     *
+     * @throws \InvalidArgumentException
      *
      * @return $this
      */

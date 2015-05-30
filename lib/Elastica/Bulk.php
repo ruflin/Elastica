@@ -247,9 +247,9 @@ class Bulk
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param array $data
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -363,10 +363,10 @@ class Bulk
     }
 
     /**
+     * @param \Elastica\Response $response
+     *
      * @throws \Elastica\Exception\Bulk\ResponseException
      * @throws \Elastica\Exception\InvalidException
-     *
-     * @param \Elastica\Response $response
      *
      * @return \Elastica\Bulk\ResponseSet
      */
@@ -417,10 +417,10 @@ class Bulk
     }
 
     /**
-     * @throws \Elastica\Exception\Bulk\UdpException
-     *
      * @param string $host
      * @param int    $port
+     *
+     * @throws \Elastica\Exception\Bulk\UdpException
      */
     public function sendUdp($host = null, $port = null)
     {

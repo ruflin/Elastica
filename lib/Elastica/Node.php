@@ -7,7 +7,6 @@ use Elastica\Node\Stats;
 /**
  * Elastica cluster node object.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Node

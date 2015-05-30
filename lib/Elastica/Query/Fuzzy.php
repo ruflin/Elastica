@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Fuzzy query.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html

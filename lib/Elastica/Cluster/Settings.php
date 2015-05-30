@@ -7,7 +7,6 @@ use Elastica\Request;
 /**
  * Cluster settings.
  *
- *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  *
  * @link     http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-update-settings.html

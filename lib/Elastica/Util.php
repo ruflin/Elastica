@@ -4,7 +4,6 @@ namespace Elastica;
 /**
  * Elastica tools.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Thibault Duplessis <thibault.duplessis@gmail.com>
  * @author Oleg Zinchenko <olegz@default-value.com>

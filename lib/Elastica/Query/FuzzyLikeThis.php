@@ -4,7 +4,6 @@ namespace Elastica\Query;
 /**
  * Fuzzy Like This query.
  *
- *
  * @author Raul Martinez, Jr <juneym@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-flt-query.html

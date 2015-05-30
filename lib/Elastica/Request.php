@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Elastica Request object.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Request extends Param

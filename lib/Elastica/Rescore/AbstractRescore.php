@@ -6,7 +6,6 @@ use Elastica\Param;
 /**
  * Abstract rescore object. Should be extended by all rescorers.
  *
- *
  * @author Jason Hu <mjhu91@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html

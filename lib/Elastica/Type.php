@@ -13,7 +13,6 @@ use Elastica\Type\Mapping;
  * represents a type inside a context
  * The hierarchy is as following: client -> index -> type -> document
  *
- *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
 class Type implements SearchableInterface
@@ -106,10 +105,10 @@ class Type implements SearchableInterface
     }
 
     /**
-     * @throws Exception\RuntimeException
-     *
      * @param $object
      * @param Document $doc
+     *
+     * @throws Exception\RuntimeException
      *
      * @return Response
      */
@@ -133,10 +132,10 @@ class Type implements SearchableInterface
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param \Elastica\Document|\Elastica\Script $data    Document with update data
      * @param array                               $options array of query params to use for query. For possible options check es api
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return \Elastica\Response
      */
@@ -227,11 +226,11 @@ class Type implements SearchableInterface
     /**
      * Get the document from search index.
      *
-     * @throws \Elastica\Exception\NotFoundException
-     * @throws \Elastica\Exception\ResponseException
-     *
      * @param string $id      Document id
      * @param array  $options Options for the get request.
+     *
+     * @throws \Elastica\Exception\NotFoundException
+     * @throws \Elastica\Exception\ResponseException
      *
      * @return \Elastica\Document
      */
@@ -424,13 +423,13 @@ class Type implements SearchableInterface
     /**
      * Deletes an entry by its unique identifier.
      *
-     * @throws \InvalidArgumentException
-     * @throws \Elastica\Exception\NotFoundException
-     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
      *
      * @param int|string $id      Document id
      * @param array      $options
+     *
+     * @throws \InvalidArgumentException
+     * @throws \Elastica\Exception\NotFoundException
      *
      * @return \Elastica\Response Response object
      */

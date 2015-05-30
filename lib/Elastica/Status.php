@@ -7,7 +7,6 @@ use Elastica\Index\Status as IndexStatus;
 /**
  * Elastica general status.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-status.html

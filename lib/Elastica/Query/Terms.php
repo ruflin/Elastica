@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Terms query.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html

@@ -9,7 +9,6 @@ use Elastica\Exception\InvalidException;
  * List of all hits that are returned for a search on elasticsearch
  * Result set implements iterator
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class ResultSet implements \Iterator, \Countable, \ArrayAccess
@@ -203,9 +202,9 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Retrieve a specific aggregation from this result set.
      *
-     * @throws Exception\InvalidException if an aggregation by the given name cannot be found
-     *
      * @param string $name the name of the desired aggregation
+     *
+     * @throws Exception\InvalidException if an aggregation by the given name cannot be found
      *
      * @return array
      */
@@ -382,9 +381,9 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @link http://php.net/manual/en/arrayaccess.offsetget.php
      *
-     * @throws Exception\InvalidException If offset doesn't exist
-     *
      * @param int $offset
+     *
+     * @throws Exception\InvalidException If offset doesn't exist
      *
      * @return Result|null
      */
@@ -402,10 +401,10 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @link http://php.net/manual/en/arrayaccess.offsetset.php
      *
-     * @throws Exception\InvalidException
-     *
      * @param int    $offset
      * @param Result $value
+     *
+     * @throws Exception\InvalidException
      */
     public function offsetSet($offset, $value)
     {

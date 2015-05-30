@@ -8,7 +8,6 @@ use Elastica\Exception\NotImplementedException;
 /**
  * Single document stored in elastic search.
  *
- *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
 class Document extends AbstractUpdateAction
@@ -88,9 +87,9 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string $key
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return mixed
      */
@@ -104,10 +103,10 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string $key
      * @param mixed  $value
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -132,9 +131,9 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param string $key
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -253,11 +252,11 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @throws NotImplementedException
-     *
      * @deprecated
      *
      * @param \Elastica\Script $data
+     *
+     * @throws NotImplementedException
      */
     public function setScript($data)
     {
@@ -338,9 +337,9 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param array|\Elastica\Document $data
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return self
      */

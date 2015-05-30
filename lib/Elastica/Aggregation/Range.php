@@ -17,9 +17,9 @@ class Range extends AbstractSimpleAggregation
      * @param int|float $toValue   high end of this range, exclusive (less than)
      * @param string    $key       customized key value
      *
-     * @return $this
-     *
      * @throws \Elastica\Exception\InvalidException
+     *
+     * @return $this
      */
     public function addRange($fromValue = null, $toValue = null, $key = null)
     {

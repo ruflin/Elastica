@@ -4,7 +4,6 @@ namespace Elastica\Facet;
 /**
  * Implements the statistical facet.
  *
- *
  * @author Robert Katzki <robert@katzki.de>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-statistical-facet.html

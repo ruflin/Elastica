@@ -4,7 +4,6 @@ namespace Elastica\Query;
 /**
  * Regexp query.
  *
- *
  * @author Aurélien Le Grand <gnitg@yahoo.fr>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html

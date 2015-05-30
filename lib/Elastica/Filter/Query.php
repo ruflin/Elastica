@@ -7,7 +7,6 @@ use Elastica\Query\AbstractQuery;
 /**
  * Query filter.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-filter.html
@@ -36,9 +35,9 @@ class Query extends AbstractFilter
     /**
      * Set query.
      *
-     * @throws \Elastica\Exception\InvalidException If parameter is invalid
-     *
      * @param array|\Elastica\Query\AbstractQuery $query
+     *
+     * @throws \Elastica\Exception\InvalidException If parameter is invalid
      *
      * @return $this
      */

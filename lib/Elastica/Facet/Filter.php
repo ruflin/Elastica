@@ -6,7 +6,6 @@ use Elastica\Filter\AbstractFilter;
 /**
  * Filter facet.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-filter-facet.html

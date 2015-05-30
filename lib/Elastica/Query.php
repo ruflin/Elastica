@@ -16,7 +16,6 @@ use Elastica\Suggest\AbstractSuggest;
  *
  * Creates different types of queries
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
@@ -58,9 +57,9 @@ class Query extends Param
      *
      * If query is empty,
      *
-     * @throws \Elastica\Exception\NotImplementedException
-     *
      * @param mixed $query
+     *
+     * @throws \Elastica\Exception\NotImplementedException
      *
      * @return self
      */
@@ -397,9 +396,9 @@ class Query extends Param
     /**
      * Allows filtering of documents based on a minimum score.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param int $minScore Minimum score to filter documents by
+     *
+     * @throws \Elastica\Exception\InvalidException
      *
      * @return $this
      */

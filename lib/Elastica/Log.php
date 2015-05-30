@@ -6,7 +6,6 @@ use Psr\Log\AbstractLogger;
 /**
  * Elastica log object.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Log extends AbstractLogger

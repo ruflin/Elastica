@@ -4,7 +4,6 @@ namespace Elastica;
 /**
  * Elastica searchable interface.
  *
- *
  * @author Thibault Duplessis <thibault.duplessis@gmail.com>
  */
 interface SearchableInterface

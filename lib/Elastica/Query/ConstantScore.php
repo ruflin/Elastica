@@ -6,7 +6,6 @@ use Elastica\Filter\AbstractFilter;
 /**
  * Constant score query.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html

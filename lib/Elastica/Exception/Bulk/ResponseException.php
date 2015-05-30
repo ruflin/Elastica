@@ -7,7 +7,6 @@ use Elastica\Exception\BulkException;
 
 /**
  * Bulk Response exception.
- *
  */
 class ResponseException extends BulkException
 {

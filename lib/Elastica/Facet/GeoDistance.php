@@ -4,7 +4,6 @@ namespace Elastica\Facet;
 /**
  * Implements the Geo Distance facet.
  *
- *
  * @author Gerard A. Matthew  <gerard.matthew@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-geo-distance-facet.html

@@ -10,7 +10,6 @@ use Elastica\Search as BaseSearch;
  * Elastica multi search result set
  * List of result sets for each search request.
  *
- *
  * @author munkie
  */
 class ResultSet implements \Iterator, \ArrayAccess, \Countable
@@ -49,10 +48,10 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param \Elastica\Response       $response
      * @param array|\Elastica\Search[] $searches
+     *
+     * @throws \Elastica\Exception\InvalidException
      */
     protected function _init(Response $response, array $searches)
     {

@@ -22,7 +22,6 @@ use Thrift\Transport\TSocket;
 /**
  * Elastica Thrift Transport object.
  *
- *
  * @author Mikhail Shamin <munk13@gmail.com>
  *
  * @deprecated The thrift transport is deprecated as of ES 1.5, and will be removed in ES 2.0
@@ -37,9 +36,9 @@ class Thrift extends AbstractTransport
     /**
      * Construct transport.
      *
-     * @throws \Elastica\Exception\RuntimeException
-     *
      * @param \Elastica\Connection $connection Connection object
+     *
+     * @throws \Elastica\Exception\RuntimeException
      */
     public function __construct(Connection $connection = null)
     {
@@ -106,11 +105,11 @@ class Thrift extends AbstractTransport
     /**
      * Makes calls to the elasticsearch server.
      *
-     * @throws \Elastica\Exception\Connection\ThriftException
-     * @throws \Elastica\Exception\ResponseException
-     *
      * @param \Elastica\Request $request
      * @param array             $params  Host, Port, ...
+     *
+     * @throws \Elastica\Exception\Connection\ThriftException
+     * @throws \Elastica\Exception\ResponseException
      *
      * @return \Elastica\Response Response object
      */

@@ -7,7 +7,6 @@ use Elastica\Response;
 /**
  * Response exception.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class ResponseException extends \RuntimeException implements ExceptionInterface

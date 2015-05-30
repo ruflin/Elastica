@@ -4,7 +4,6 @@ namespace Elastica\Query;
 /**
  * Nested query.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html

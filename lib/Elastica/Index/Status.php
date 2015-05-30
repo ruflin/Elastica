@@ -7,7 +7,6 @@ use Elastica\Request;
 /**
  * Elastica index status object.
  *
- *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-status.html

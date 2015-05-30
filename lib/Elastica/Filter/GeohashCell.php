@@ -11,7 +11,7 @@ class GeohashCell extends AbstractGeoDistance
     /**
      * @param string       $key       The field on which to filter
      * @param array|string $location  Location as coordinates array or geohash string ['lat' => 40.3, 'lon' => 45.2]
-     * @param $precision Integer length of geohash prefix or distance (3, or "50m")
+     * @param string|int   $precision Integer length of geohash prefix or distance (3, or "50m")
      * @param bool         $neighbors If true, filters cells next to the given cell.
      */
     public function __construct($key, $location, $precision = -1, $neighbors = false)

@@ -4,7 +4,6 @@ namespace Elastica\Exception;
 /**
  * Elasticsearch exception.
  *
- *
  * @author Ian Babrou <ibobrik@gmail.com>
  */
 class ElasticsearchException extends \Exception implements ExceptionInterface
