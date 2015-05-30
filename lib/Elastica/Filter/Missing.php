@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Missing Filter.
  *
- * @category Xodoa
  *
  * @author Maciej Wiercinski <maciej@wiercinski.net>
  *

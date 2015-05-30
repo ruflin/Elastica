@@ -12,7 +12,6 @@ use Elastica\Index\Status as IndexStatus;
  *
  * Handles reads, deletes and configurations of an index
  *
- * @category Xodoa
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */

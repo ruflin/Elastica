@@ -9,7 +9,6 @@ use Elastica\Exception\NotFoundException;
  *
  * Stores query time, and result array -> is given to result set, returned by ...
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

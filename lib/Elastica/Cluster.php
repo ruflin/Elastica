@@ -8,7 +8,6 @@ use Elastica\Exception\NotImplementedException;
 /**
  * Cluster informations for elasticsearch.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

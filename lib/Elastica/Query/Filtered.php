@@ -7,7 +7,6 @@ use Elastica\Filter\AbstractFilter;
 /**
  * Filtered query. Needs a query and a filter.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

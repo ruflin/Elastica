@@ -7,7 +7,6 @@ use Elastica\Script;
 /**
  * Implements the terms facet.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>

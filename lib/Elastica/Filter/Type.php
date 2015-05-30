@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Type Filter.
  *
- * @category Xodoa
  *
  * @author James Wilson <jwilson556@gmail.com>
  *

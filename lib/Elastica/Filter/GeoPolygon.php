@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Geo polygon filter.
  *
- * @category Xodoa
  *
  * @author Michael Maclean <mgdm@php.net>
  *

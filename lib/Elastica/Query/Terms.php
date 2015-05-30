@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Terms query.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

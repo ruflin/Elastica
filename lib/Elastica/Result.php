@@ -6,7 +6,6 @@ namespace Elastica;
  *
  * Stores all information from a result
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

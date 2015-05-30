@@ -16,7 +16,6 @@ use Elastica\Suggest\AbstractSuggest;
  *
  * Creates different types of queries
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

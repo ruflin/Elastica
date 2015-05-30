@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Term query.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

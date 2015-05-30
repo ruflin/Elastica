@@ -4,7 +4,6 @@ namespace Elastica\Query;
 /**
  * Nested query.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

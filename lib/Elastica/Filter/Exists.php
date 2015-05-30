@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Exists query.
  *
- * @category Xodoa
  *
  * @author Oleg Cherniy <oleg.cherniy@gmail.com>
  *

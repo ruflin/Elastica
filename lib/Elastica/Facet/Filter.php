@@ -6,7 +6,6 @@ use Elastica\Filter\AbstractFilter;
 /**
  * Filter facet.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

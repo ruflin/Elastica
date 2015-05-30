@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Elastica Request object.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

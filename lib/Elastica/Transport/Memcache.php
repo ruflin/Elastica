@@ -12,7 +12,6 @@ use Elastica\Response;
 /**
  * Elastica Memcache Transport object.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

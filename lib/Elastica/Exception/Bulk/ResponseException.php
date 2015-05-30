@@ -8,7 +8,6 @@ use Elastica\Exception\BulkException;
 /**
  * Bulk Response exception.
  *
- * @category Xodoa
  */
 class ResponseException extends BulkException
 {

@@ -8,7 +8,6 @@ use Elastica\Response;
 /**
  * Connection exception.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

@@ -9,7 +9,6 @@ use Elastica\Request;
 /**
  * Elastica Abstract Transport object.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

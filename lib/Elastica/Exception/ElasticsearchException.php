@@ -4,7 +4,6 @@ namespace Elastica\Exception;
 /**
  * Elasticsearch exception.
  *
- * @category Xodoa
  *
  * @author Ian Babrou <ibobrik@gmail.com>
  */

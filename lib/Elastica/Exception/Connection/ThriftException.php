@@ -9,7 +9,6 @@ use Thrift\Exception\TException;
 /**
  * Transport exception.
  *
- * @category Xodoa
  *
  * @author Mikhail Shamin <munk13@gmail.com>
  */

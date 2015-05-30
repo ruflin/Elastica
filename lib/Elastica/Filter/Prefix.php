@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Prefix filter.
  *
- * @category Xodoa
  *
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  *

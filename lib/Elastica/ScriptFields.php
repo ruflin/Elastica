@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Container for scripts as fields.
  *
- * @category Xodoa
  *
  * @author Sebastien Lavoie <github@lavoie.sl>
  *

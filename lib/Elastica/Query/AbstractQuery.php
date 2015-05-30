@@ -6,7 +6,6 @@ use Elastica\Param;
 /**
  * Abstract query object. Should be extended by all query types.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

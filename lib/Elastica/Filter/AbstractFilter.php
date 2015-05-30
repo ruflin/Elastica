@@ -7,7 +7,6 @@ use Elastica\Param;
 /**
  * Abstract filter object. Should be extended by all filter types.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

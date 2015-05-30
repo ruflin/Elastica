@@ -13,7 +13,6 @@ use Elastica\Type\Mapping;
  * represents a type inside a context
  * The hierarchy is as following: client -> index -> type -> document
  *
- * @category Xodoa
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */

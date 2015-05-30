@@ -6,7 +6,6 @@ use Elastica\Param;
 /**
  * Abstract rescore object. Should be extended by all rescorers.
  *
- * @category Xodoa
  *
  * @author Jason Hu <mjhu91@gmail.com>
  *

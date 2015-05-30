@@ -7,7 +7,6 @@ use Elastica\Request;
 /**
  * Cluster settings.
  *
- * @category Xodoa
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  *

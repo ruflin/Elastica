@@ -7,7 +7,6 @@ use Elastica\Index\Status as IndexStatus;
 /**
  * Elastica general status.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

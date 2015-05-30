@@ -4,7 +4,6 @@ namespace Elastica\Query;
 /**
  * Match Phrase Prefix query.
  *
- * @category Xodoa
  *
  * @author Jacques Moati <jacques@moati.net>
  *

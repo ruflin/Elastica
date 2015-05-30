@@ -6,7 +6,6 @@ use Elastica\Type as ElasticaType;
 /**
  * Ids Filter.
  *
- * @category Xodoa
  *
  * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
  *

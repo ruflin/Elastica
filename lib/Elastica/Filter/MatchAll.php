@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Match all filter.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

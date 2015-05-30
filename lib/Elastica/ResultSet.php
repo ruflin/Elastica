@@ -9,7 +9,6 @@ use Elastica\Exception\InvalidException;
  * List of all hits that are returned for a search on elasticsearch
  * Result set implements iterator
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

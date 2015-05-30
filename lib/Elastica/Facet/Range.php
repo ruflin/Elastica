@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Implements the range facet.
  *
- * @category Xodoa
  *
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  *

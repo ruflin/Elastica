@@ -6,7 +6,6 @@ namespace Elastica\Exception;
  *
  * Is thrown if a function or feature is not implemented yet
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

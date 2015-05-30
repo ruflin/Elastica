@@ -4,7 +4,6 @@ namespace Elastica\Facet;
 /**
  * Implements the Histogram facet.
  *
- * @category Xodoa
  *
  * @author Raul Martinez Jr  <juneym@gmail.com>
  *

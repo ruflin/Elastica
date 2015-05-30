@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Script objects, containing script internals.
  *
- * @category Xodoa
  *
  * @author avasilenko <aa.vasilenko@gmail.com>
  *

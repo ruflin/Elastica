@@ -7,7 +7,6 @@ use Elastica\Query\AbstractQuery;
 /**
  * Query filter.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

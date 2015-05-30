@@ -6,7 +6,6 @@ use Elastica\Query\AbstractQuery;
 /**
  * Nested filter.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

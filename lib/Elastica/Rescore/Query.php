@@ -6,7 +6,6 @@ use Elastica\Query as BaseQuery;
 /**
  * Query Rescore.
  *
- * @category Xodoa
  *
  * @author Jason Hu <mjhu91@gmail.com>
  *

@@ -8,7 +8,6 @@ use Elastica\Exception\NotImplementedException;
 /**
  * Single document stored in elastic search.
  *
- * @category Xodoa
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */

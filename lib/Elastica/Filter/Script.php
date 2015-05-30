@@ -6,7 +6,6 @@ use Elastica;
 /**
  * Script filter.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

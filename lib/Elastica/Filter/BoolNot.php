@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Not Filter.
  *
- * @category Xodoa
  *
  * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
  *

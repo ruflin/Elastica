@@ -24,7 +24,6 @@ use Elastica\Util;
  *
  * @todo Add some settings examples to code
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

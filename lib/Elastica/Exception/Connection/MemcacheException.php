@@ -6,7 +6,6 @@ use Elastica\Exception\ConnectionException;
 /**
  * Transport exception.
  *
- * @category Xodoa
  *
  * @author Igor Denisenko <im.denisenko@yahoo.com>
  */

@@ -4,7 +4,6 @@ namespace Elastica;
 /**
  * Elastica searchable interface.
  *
- * @category Xodoa
  *
  * @author Thibault Duplessis <thibault.duplessis@gmail.com>
  */

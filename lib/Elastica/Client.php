@@ -10,7 +10,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Client to connect the the elasticsearch server.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

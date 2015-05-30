@@ -4,7 +4,6 @@ namespace Elastica\Facet;
 /**
  * Implements the Geo Distance facet.
  *
- * @category Xodoa
  *
  * @author Gerard A. Matthew  <gerard.matthew@gmail.com>
  *

@@ -4,7 +4,6 @@ namespace Elastica\Exception;
 /**
  * Client exception.
  *
- * @category Xodoa
  *
  * @author Mikhail Shamin <munk13@gmail.com>
  */

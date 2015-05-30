@@ -10,7 +10,6 @@ use Elastica\Search as BaseSearch;
  * Elastica multi search result set
  * List of result sets for each search request.
  *
- * @category Xodoa
  *
  * @author munkie
  */

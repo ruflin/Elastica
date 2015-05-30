@@ -5,7 +5,6 @@ namespace Elastica;
  * Base class for things that can be sent to the update api (Document and
  * Script).
  *
- * @category Xodoa
  *
  * @author   Nik Everett <nik9000@gmail.com>
  */

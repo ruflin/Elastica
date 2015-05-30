@@ -4,7 +4,6 @@ namespace Elastica;
 /**
  * Percolator class.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

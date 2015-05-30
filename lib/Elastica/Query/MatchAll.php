@@ -4,7 +4,6 @@ namespace Elastica\Query;
 /**
  * Match all query. Returns all results.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

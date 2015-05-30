@@ -4,7 +4,6 @@ namespace Elastica\Query;
 /**
  * Regexp query.
  *
- * @category Xodoa
  *
  * @author Aurélien Le Grand <gnitg@yahoo.fr>
  *

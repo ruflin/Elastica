@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * QueryString query.
  *
- * @category Xodoa
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>, Jasper van Wanrooy <jasper@vanwanrooy.net>
  *

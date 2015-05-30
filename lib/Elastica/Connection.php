@@ -7,7 +7,6 @@ use Elastica\Transport\AbstractTransport;
 /**
  * Elastica connection instance to an elasticasearch node.
  *
- * @category Xodoa
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */

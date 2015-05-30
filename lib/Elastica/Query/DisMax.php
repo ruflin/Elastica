@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * DisMax query.
  *
- * @category Xodoa
  *
  * @author Hung Tran <oohnoitz@gmail.com>
  *

@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Multi Abstract filter object. Should be extended by filter types composed of an array of sub filters.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

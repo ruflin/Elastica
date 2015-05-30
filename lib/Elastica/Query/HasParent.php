@@ -6,7 +6,6 @@ use Elastica\Query as BaseQuery;
 /**
  * Returns child documents having parent docs matching the query.
  *
- * @category Xodoa
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
  */

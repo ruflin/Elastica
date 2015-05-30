@@ -6,7 +6,6 @@ use Elastica\Query as BaseQuery;
 /**
  * Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.
  *
- * @category Xodoa
  *
  * @author Wu Yang <darkyoung@gmail.com>
  *

@@ -8,7 +8,6 @@ use Elastica\JSON;
 /**
  * Query Builder.
  *
- * @category Xodoa
  *
  * @author Chris Gedrim <chris@gedr.im>
  *

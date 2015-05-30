@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Limit Filter.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

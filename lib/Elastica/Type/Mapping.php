@@ -8,7 +8,6 @@ use Elastica\Type;
 /**
  * Elastica Mapping object.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

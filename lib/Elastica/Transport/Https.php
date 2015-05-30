@@ -4,7 +4,6 @@ namespace Elastica\Transport;
 /**
  * Elastica Http Transport object.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

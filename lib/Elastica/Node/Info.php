@@ -7,7 +7,6 @@ use Elastica\Request;
 /**
  * Elastica cluster node object.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

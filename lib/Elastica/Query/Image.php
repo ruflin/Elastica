@@ -4,7 +4,6 @@ namespace Elastica\Query;
 /**
  * Image query.
  *
- * @category Xodoa
  *
  * @author   Jacques Moati <jacques@moati.net>
  *

@@ -6,7 +6,6 @@ use Psr\Log\AbstractLogger;
 /**
  * Elastica log object.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

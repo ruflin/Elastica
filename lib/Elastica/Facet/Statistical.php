@@ -4,7 +4,6 @@ namespace Elastica\Facet;
 /**
  * Implements the statistical facet.
  *
- * @category Xodoa
  *
  * @author Robert Katzki <robert@katzki.de>
  *

@@ -4,7 +4,6 @@ namespace Elastica\Exception;
 /**
  * Invalid exception.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

@@ -4,7 +4,6 @@ namespace Elastica\Query;
 /**
  * More Like This query.
  *
- * @category Xodoa
  *
  * @author Raul Martinez, Jr <juneym@gmail.com>
  *

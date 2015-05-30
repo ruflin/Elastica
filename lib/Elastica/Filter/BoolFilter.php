@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Bool Filter.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

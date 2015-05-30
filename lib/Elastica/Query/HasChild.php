@@ -6,7 +6,6 @@ use Elastica\Query as BaseQuery;
 /**
  * Returns parent documents having child docs matching the query.
  *
- * @category Xodoa
  *
  * @author Fabian Vogler <fabian@equivalence.ch>
  *

@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Geo bounding box filter.
  *
- * @category Xodoa
  *
  * @author Fabian Vogler <fabian@equivalence.ch>
  *

@@ -6,7 +6,6 @@ use Elastica\Query\AbstractQuery;
 /**
  * Query facet.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

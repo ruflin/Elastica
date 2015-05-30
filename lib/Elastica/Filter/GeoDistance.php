@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Geo distance filter.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

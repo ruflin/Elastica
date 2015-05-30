@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Geo distance filter.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

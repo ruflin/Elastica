@@ -8,7 +8,6 @@ use Elastica\Response;
 /**
  * Partial shard failure exception.
  *
- * @category Xodoa
  *
  * @author Ian Babrou <ibobrik@gmail.com>
  */

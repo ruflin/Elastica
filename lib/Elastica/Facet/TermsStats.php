@@ -6,7 +6,6 @@ use Elastica\Exception\InvalidException;
 /**
  * Implements the statistical facet on a per term basis.
  *
- * @category Xodoa
  *
  * @author Tom Michaelis <tom.michaelis@gmail.com>
  *

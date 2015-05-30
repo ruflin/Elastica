@@ -6,7 +6,6 @@ namespace Elastica\Filter;
  *
  * Filter provided shape definitions
  *
- * @category Xodoa
  *
  * @author BennieKrijger <benniekrijger@gmail.com>
  *

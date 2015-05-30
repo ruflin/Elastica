@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Regexp filter.
  *
- * @category Xodoa
  *
  * @author Timothy Lamb <trash80@gmail.com>
  *

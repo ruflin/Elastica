@@ -8,7 +8,6 @@ use Elastica\Param;
 /**
  * Abstract facet object. Should be extended by all facet types.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>

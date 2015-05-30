@@ -9,7 +9,6 @@ use Elastica\Search as BaseSearch;
 /**
  * Elastica multi search.
  *
- * @category Xodoa
  *
  * @author munkie
  *

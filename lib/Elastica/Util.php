@@ -4,7 +4,6 @@ namespace Elastica;
 /**
  * Elastica tools.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Thibault Duplessis <thibault.duplessis@gmail.com>

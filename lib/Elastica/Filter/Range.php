@@ -4,7 +4,6 @@ namespace Elastica\Filter;
 /**
  * Range Filter.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

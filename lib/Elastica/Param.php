@@ -8,7 +8,6 @@ use Elastica\Exception\InvalidException;
  *
  * This function can be used to handle params for queries, filter, facets
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

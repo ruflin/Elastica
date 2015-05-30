@@ -11,7 +11,6 @@ use Elastica\Response;
 /**
  * Elastica Http Transport object.
  *
- * @category Xodoa
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */

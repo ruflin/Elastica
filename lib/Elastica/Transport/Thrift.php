@@ -22,7 +22,6 @@ use Thrift\Transport\TSocket;
 /**
  * Elastica Thrift Transport object.
  *
- * @category Xodoa
  *
  * @author Mikhail Shamin <munk13@gmail.com>
  *
