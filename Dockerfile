@@ -35,7 +35,7 @@ RUN composer global require "mayflower/php-codebrowser"
 RUN composer global require "sebastian/phpcpd"
 RUN composer global require "squizlabs/php_codesniffer"
 RUN composer global require "phploc/phploc"
-RUN composer global require "fabpot/php-cs-fixer"
+RUN composer global require "fabpot/php-cs-fixer=1.8.1"
 
 
 # Documentor dependencies
