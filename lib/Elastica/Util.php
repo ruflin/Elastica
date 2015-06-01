@@ -197,6 +197,6 @@ class Util
      */
     public static function debugEnabled()
     {
-        return defined('DEBUG') && DEBUG;
+        return defined('ELASTICA_DEBUG') && ELASTICA_DEBUG;
     }
 }

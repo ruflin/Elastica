@@ -229,7 +229,7 @@ class Response
     }
 
     /**
-     * This is only available if DEBUG constant is set to true.
+     * This is only available if ELASTICA_DEBUG constant is set to true.
      *
      * @return float Query time
      */

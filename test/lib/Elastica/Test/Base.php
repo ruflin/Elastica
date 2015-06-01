@@ -146,7 +146,7 @@ class Base extends \PHPUnit_Framework_TestCase
     protected static function _checkDebug()
     {
         if (!\Elastica\Util::debugEnabled()) {
-            self::markTestSkipped('The DEBUG constant must be set to true for this test to run');
+            self::markTestSkipped('The ELASTICA_DEBUG constant must be set to true for this test to run');
         }
     }
 }
