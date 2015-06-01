@@ -82,11 +82,11 @@ phpunit: prepare
 doc: prepare
 	phpdoc run -d lib/ -t build/docs
 
-# TODO: Command needs to be updated with Elastica standard
-lint-fixing:
-	php-cs-fixer fix ./lib
-
+# Uses the preconfigured standards in .php_cs
 lint:
+	php-cs-fixer fix 
+
+syntax-check:
 	php -lf ${SOURCE} **/*.php
 	php -lf ${BASEDIR}/test **/*.php
 
