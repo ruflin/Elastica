@@ -1,24 +1,26 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/2.0.0...HEAD)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/2.1.0...HEAD)
+
+## [2.1.0](https://github.com/ruflin/Elastica/releases/tag/2.1.0) - 2015-06-01
 
 ### Added
 - Multiple rescore query [#820](https://github.com/ruflin/Elastica/issues/820/)
 - Support for a custom connection timeout through a connectTimeout parameter. [#841](https://github.com/ruflin/Elastica/issues/841/)
 - SignificantTerms Aggregation [#847](https://github.com/ruflin/Elastica/issues/847/)
 - Support for 'precision_threshold' and 'rehash' options for the Cardinality Aggregation [#851]
-- Support for retrieving id node
+- Support for retrieving id node #852
 - Scroll Iterator [#842](https://github.com/ruflin/Elastica/issues/842/)
 - Gitter Elastica Chat Room add for Elastica discussions: https://gitter.im/ruflin/Elastica
-- Introduce PHP7 compatibility and tests.
+- Introduce PHP7 compatibility and tests. #837
 - `Tool\CrossIndex` for reindexing and copying data and mapping between indices [#853](https://github.com/ruflin/Elastica/pull/853)
-
+- CONTIRUBTING.md file added for contributor guidelines. #854
 
 ### Improvements
 - Introduction of Changelog standard based on http://keepachangelog.com/. changes.txt moved to CHANGELOG.md [#844](https://github.com/ruflin/Elastica/issues/844/)
 - Make host for all tests dynamic to prepare it for a more dynamic test environment #846
-- Node information is retrieved based on id instead of name as multiple nodes can have the same name.
+- Node information is retrieved based on id instead of name as multiple nodes can have the same name. #852
 - Guzzle Http dependency updated to 5.3.*
 - Remove NO_DEV builds from travis build matrix to speed up building. All builds include no dev packages.
 - Introduction of benchmark test group to make it easy to run benchmark tests.
@@ -31,7 +33,7 @@ All notable changes to this project will be documented in this file based on the
 ### Deprecated
 - Facets are deprecated. You are encouraged to migrate to aggregations instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
 - Elastica\Query\Builder is deprecated. Use new Elastica\QueryBuilder instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
-- For PHP 7 compatibility Elastica\Query\Bool was renamed to *\BoolQuery, Elastica\Filter\Bool was renamed to BoolFilter, Elastica\Transport\Null was renamed to NullTransport as Null and Bool are reserved phrases in PHP 7. Proxy objects for all three exist to keep backward compatibility. It is recommended to start using the new objects as the proxy classes will be deprecated as soon as PHP 7 is stable.
+- For PHP 7 compatibility Elastica\Query\Bool was renamed to *\BoolQuery, Elastica\Filter\Bool was renamed to BoolFilter, Elastica\Transport\Null was renamed to NullTransport as Null and Bool are reserved phrases in PHP 7. Proxy objects for all three exist to keep backward compatibility. It is recommended to start using the new objects as the proxy classes will be deprecated as soon as PHP 7 is stable. #837
 
 
 
