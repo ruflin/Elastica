@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test;
 
-use Elastica\Client;
 use Elastica\Exception\ResponseException;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;

@@ -1,19 +1,17 @@
 <?php
-
 namespace Elastica\Query;
 
 /**
- * Regexp query
+ * Regexp query.
  *
- * @category Xodoa
- * @package Elastica
  * @author Aurélien Le Grand <gnitg@yahoo.fr>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
  */
 class Regexp extends AbstractQuery
 {
     /**
-     * Construct regexp query
+     * Construct regexp query.
      *
      * @param string $key   OPTIONAL Regexp key
      * @param string $value OPTIONAL Regexp value
@@ -27,11 +25,12 @@ class Regexp extends AbstractQuery
     }
 
     /**
-     * Sets the query expression for a key with its boost value
+     * Sets the query expression for a key with its boost value.
      *
-     * @param  string $key
-     * @param  string $value
-     * @param  float  $boost
+     * @param string $key
+     * @param string $value
+     * @param float  $boost
+     *
      * @return $this
      */
     public function setValue($key, $value, $boost = 1.0)

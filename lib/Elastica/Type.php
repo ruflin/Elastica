@@ -1,35 +1,31 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
-use Elastica\Exception\ResponseException;
 use Elastica\Exception\RuntimeException;
 use Elastica\Type\Mapping;
 
 /**
- * Elastica type object
+ * Elastica type object.
  *
  * elasticsearch has for every types as a substructure. This object
  * represents a type inside a context
  * The hierarchy is as following: client -> index -> type -> document
  *
- * @category Xodoa
- * @package  Elastica
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
 class Type implements SearchableInterface
 {
     /**
-     * Index
+     * Index.
      *
      * @var \Elastica\Index Index object
      */
     protected $_index = null;
 
     /**
-     * Type name
+     * Type name.
      *
      * @var string Type name
      */
@@ -41,7 +37,7 @@ class Type implements SearchableInterface
     protected $_serializer;
 
     /**
-     * Creates a new type object inside the given index
+     * Creates a new type object inside the given index.
      *
      * @param \Elastica\Index $index Index Object
      * @param string          $name  Type name
@@ -53,9 +49,10 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Adds the given document to the search index
+     * Adds the given document to the search index.
      *
-     * @param  \Elastica\Document $doc Document with data
+     * @param \Elastica\Document $doc Document with data
+     *
      * @return \Elastica\Response
      */
     public function addDocument(Document $doc)
@@ -108,10 +105,11 @@ class Type implements SearchableInterface
     }
 
     /**
+     * @param $object
+     * @param Document $doc
+     *
      * @throws Exception\RuntimeException
      *
-     * @param $object
-     * @param  Document $doc
      * @return Response
      */
     public function addObject($object, Document $doc = null)
@@ -130,19 +128,21 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Update document, using update script. Requires elasticsearch >= 0.19.0
+     * Update document, using update script. Requires elasticsearch >= 0.19.0.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
+     *
+     * @param \Elastica\Document|\Elastica\Script $data    Document with update data
+     * @param array                               $options array of query params to use for query. For possible options check es api
+     *
      * @throws \Elastica\Exception\InvalidException
      *
-     * @param  \Elastica\Document|\Elastica\Script $data    Document with update data
-     * @param  array                               $options array of query params to use for query. For possible options check es api
      * @return \Elastica\Response
      */
     public function updateDocument($data, array $options = array())
     {
         if (!($data instanceof Document) && !($data instanceof Script)) {
-            throw new \InvalidArgumentException("Data should be a Document or Script");
+            throw new \InvalidArgumentException('Data should be a Document or Script');
         }
 
         if (!$data->hasId()) {
@@ -161,10 +161,12 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Uses _bulk to send documents to the server
+     * Uses _bulk to send documents to the server.
      *
-     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     *
      * @return \Elastica\Bulk\ResponseSet
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function updateDocuments(array $docs)
@@ -177,10 +179,12 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Uses _bulk to send documents to the server
+     * Uses _bulk to send documents to the server.
      *
-     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     *
      * @return \Elastica\Bulk\ResponseSet
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function addDocuments(array $docs)
@@ -193,10 +197,12 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Uses _bulk to send documents to the server
+     * Uses _bulk to send documents to the server.
      *
-     * @param  objects[]                  $objects
+     * @param objects[] $objects
+     *
      * @return \Elastica\Bulk\ResponseSet
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function addObjects(array $objects)
@@ -218,13 +224,14 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Get the document from search index
+     * Get the document from search index.
+     *
+     * @param string $id      Document id
+     * @param array  $options Options for the get request.
      *
      * @throws \Elastica\Exception\NotFoundException
      * @throws \Elastica\Exception\ResponseException
      *
-     * @param  string             $id      Document id
-     * @param  array              $options Options for the get request.
      * @return \Elastica\Document
      */
     public function getDocument($id, $options = array())
@@ -253,8 +260,9 @@ class Type implements SearchableInterface
     }
 
     /**
-     * @param  string       $id
-     * @param  array|string $data
+     * @param string       $id
+     * @param array|string $data
+     *
      * @return Document
      */
     public function createDocument($id = '', $data = array())
@@ -266,7 +274,7 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Returns the type name
+     * Returns the type name.
      *
      * @return string Type name
      */
@@ -276,9 +284,10 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Sets value type mapping for this type
+     * Sets value type mapping for this type.
      *
-     * @param  \Elastica\Type\Mapping|array $mapping Elastica\Type\MappingType object or property array with all mappings
+     * @param \Elastica\Type\Mapping|array $mapping Elastica\Type\MappingType object or property array with all mappings
+     *
      * @return \Elastica\Response
      */
     public function setMapping($mapping)
@@ -290,7 +299,7 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Returns current mapping for the given type
+     * Returns current mapping for the given type.
      *
      * @return array Current mapping
      */
@@ -310,10 +319,11 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Create search object
+     * Create search object.
      *
-     * @param  string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
-     * @param  int|array                    $options OPTIONAL Limit or associative array of options (option=>value)
+     * @param string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
+     * @param int|array                    $options OPTIONAL Limit or associative array of options (option=>value)
+     *
      * @return \Elastica\Search
      */
     public function createSearch($query = '', $options = null)
@@ -327,11 +337,13 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Do a search on this type
+     * Do a search on this type.
      *
-     * @param  string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
-     * @param  int|array                    $options OPTIONAL Limit or associative array of options (option=>value)
-     * @return \Elastica\ResultSet          ResultSet with all results inside
+     * @param string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
+     * @param int|array                    $options OPTIONAL Limit or associative array of options (option=>value)
+     *
+     * @return \Elastica\ResultSet ResultSet with all results inside
+     *
      * @see \Elastica\SearchableInterface::search
      */
     public function search($query = '', $options = null)
@@ -342,10 +354,12 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Count docs by query
+     * Count docs by query.
      *
-     * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
-     * @return int                          number of documents matching the query
+     * @param string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
+     *
+     * @return int number of documents matching the query
+     *
      * @see \Elastica\SearchableInterface::count
      */
     public function count($query = '')
@@ -356,7 +370,7 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Returns index client
+     * Returns index client.
      *
      * @return \Elastica\Index Index object
      */
@@ -366,7 +380,8 @@ class Type implements SearchableInterface
     }
 
     /**
-     * @param  \Elastica\Document $document
+     * @param \Elastica\Document $document
+     *
      * @return \Elastica\Response
      */
     public function deleteDocument(Document $document)
@@ -388,10 +403,12 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Uses _bulk to delete documents from the server
+     * Uses _bulk to delete documents from the server.
      *
-     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     *
      * @return \Elastica\Bulk\ResponseSet
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function deleteDocuments(array $docs)
@@ -404,14 +421,16 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Deletes an entry by its unique identifier
+     * Deletes an entry by its unique identifier.
+     *
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
+     *
+     * @param int|string $id      Document id
+     * @param array      $options
      *
      * @throws \InvalidArgumentException
      * @throws \Elastica\Exception\NotFoundException
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
      *
-     * @param  int|string         $id      Document id
-     * @param  array              $options
      * @return \Elastica\Response Response object
      */
     public function deleteById($id, array $options = array())
@@ -434,10 +453,11 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Deletes the given list of ids from this type
+     * Deletes the given list of ids from this type.
      *
-     * @param  array              $ids
-     * @param  string|false       $routing Optional routing key for all ids
+     * @param array        $ids
+     * @param string|false $routing Optional routing key for all ids
+     *
      * @return \Elastica\Response Response  object
      */
     public function deleteIds(array $ids, $routing = false)
@@ -446,11 +466,13 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Deletes entries in the db based on a query
+     * Deletes entries in the db based on a query.
      *
-     * @param  \Elastica\Query|string $query   Query object
-     * @param  array                  $options Optional params
+     * @param \Elastica\Query|string $query   Query object
+     * @param array                  $options Optional params
+     *
      * @return \Elastica\Response
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      * @deprecated Delete by Query api is deprecated as of ES 1.5, and will be removed in ES 2.0
      */
@@ -480,14 +502,16 @@ class Type implements SearchableInterface
     }
 
     /**
-     * More like this query based on the given object
+     * More like this query based on the given object.
      *
      * The id in the given object has to be set
      *
-     * @param  \Elastica\Document           $doc    Document to query for similar objects
-     * @param  array                        $params OPTIONAL Additional arguments for the query
-     * @param  string|array|\Elastica\Query $query  OPTIONAL Query to filter the moreLikeThis results
-     * @return \Elastica\ResultSet          ResultSet with all results inside
+     * @param \Elastica\Document           $doc    Document to query for similar objects
+     * @param array                        $params OPTIONAL Additional arguments for the query
+     * @param string|array|\Elastica\Query $query  OPTIONAL Query to filter the moreLikeThis results
+     *
+     * @return \Elastica\ResultSet ResultSet with all results inside
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-more-like-this.html
      */
     public function moreLikeThis(Document $doc, $params = array(), $query = array())
@@ -502,12 +526,13 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Makes calls to the elasticsearch server based on this type
+     * Makes calls to the elasticsearch server based on this type.
      *
-     * @param  string             $path   Path to call
-     * @param  string             $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param  array              $data   OPTIONAL Arguments as array
-     * @param  array              $query  OPTIONAL Query params
+     * @param string $path   Path to call
+     * @param string $method Rest method to use (GET, POST, DELETE, PUT)
+     * @param array  $data   OPTIONAL Arguments as array
+     * @param array  $query  OPTIONAL Query params
+     *
      * @return \Elastica\Response Response object
      */
     public function request($path, $method, $data = array(), array $query = array())
@@ -518,10 +543,12 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Sets the serializer callable used in addObject
+     * Sets the serializer callable used in addObject.
+     *
      * @see \Elastica\Type::addObject
      *
-     * @param  array|string $serializer @see \Elastica\Type::_serializer
+     * @param array|string $serializer @see \Elastica\Type::_serializer
+     *
      * @return $this
      */
     public function setSerializer($serializer)
@@ -532,7 +559,7 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Checks if the given type exists in Index
+     * Checks if the given type exists in Index.
      *
      * @return bool True if type exists
      */

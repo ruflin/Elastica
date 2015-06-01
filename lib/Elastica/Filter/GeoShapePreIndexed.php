@@ -1,49 +1,47 @@
 <?php
-
 namespace Elastica\Filter;
 
 /**
- * geo_shape filter for pre-indexed shapes
+ * geo_shape filter for pre-indexed shapes.
  *
  * Filter pre-indexed shape definitions
  *
- * @category Xodoa
- * @package Elastica
  * @author Bennie Krijger <benniekrijger@gmail.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-filter.html
  */
 class GeoShapePreIndexed extends AbstractGeoShape
 {
     /**
-     * elasticsearch id of the pre-indexed shape
+     * elasticsearch id of the pre-indexed shape.
      *
      * @var string
      */
     protected $_indexedId;
 
     /**
-     * elasticsearch type of the pre-indexed shape
+     * elasticsearch type of the pre-indexed shape.
      *
      * @var string
      */
     protected $_indexedType;
 
     /**
-     *  elasticsearch index of the pre-indexed shape
+     *  elasticsearch index of the pre-indexed shape.
      *
      * @var string
      */
     protected $_indexedIndex;
 
     /**
-     *  elasticsearch path/field name of the pre-indexed shape
+     *  elasticsearch path/field name of the pre-indexed shape.
      *
      * @var string
      */
     protected $_indexedPath;
 
     /**
-     * Construct geo_shape filter with a pre-indexed shape
+     * Construct geo_shape filter with a pre-indexed shape.
      *
      * @param string $path         The path/field of the shape searched
      * @param string $indexedId    Id of the pre-indexed shape
@@ -61,7 +59,7 @@ class GeoShapePreIndexed extends AbstractGeoShape
     }
 
     /**
-     * Converts filter to array
+     * Converts filter to array.
      *
      * @see \Elastica\Filter\AbstractFilter::toArray()
      *

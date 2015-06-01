@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Exception\QueryBuilderException;
@@ -9,9 +8,8 @@ use Elastica\QueryBuilder\Version;
 use Elastica\QueryBuilder\Version\Version150;
 
 /**
- * Query Builder
+ * Query Builder.
  *
- * @package Elastica
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  */
 class QueryBuilder
@@ -27,7 +25,7 @@ class QueryBuilder
     private $_facades = array();
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Version $version
      */
@@ -42,12 +40,13 @@ class QueryBuilder
     }
 
     /**
-     * Returns Facade for custom DSL object
+     * Returns Facade for custom DSL object.
+     *
+     * @param $dsl
+     * @param array $arguments
      *
      * @throws QueryBuilderException
      *
-     * @param $dsl
-     * @param  array  $arguments
      * @return Facade
      */
     public function __call($dsl, array $arguments)
@@ -60,7 +59,7 @@ class QueryBuilder
     }
 
     /**
-     * Adds a new DSL object
+     * Adds a new DSL object.
      *
      * @param DSL $dsl
      */
@@ -74,7 +73,7 @@ class QueryBuilder
      */
 
     /**
-     * Query DSL
+     * Query DSL.
      *
      * @return DSL\Query
      */
@@ -84,7 +83,7 @@ class QueryBuilder
     }
 
     /**
-     * Filter DSL
+     * Filter DSL.
      *
      * @return DSL\Filter
      */
@@ -94,7 +93,7 @@ class QueryBuilder
     }
 
     /**
-     * Aggregation DSL
+     * Aggregation DSL.
      *
      * @return DSL\Aggregation
      */
@@ -104,7 +103,7 @@ class QueryBuilder
     }
 
     /**
-     * Suggest DSL
+     * Suggest DSL.
      *
      * @return DSL\Suggest
      */

@@ -1,35 +1,34 @@
 <?php
-
 namespace Elastica\Query;
 
 /**
- * Multi Match
+ * Multi Match.
  *
- * @category Xodoa
- * @package Elastica
  * @author Rodolfo Adhenawer Campagnoli Moraes <adhenawer@gmail.com>
  * @author Wong Wing Lun <luiges90@gmail.com>
  * @author Tristan Maindron <tmaindron@gmail.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
  */
 class MultiMatch extends AbstractQuery
 {
-    const TYPE_BEST_FIELDS   = 'best_fields';
-    const TYPE_MOST_FIELDS   = 'most_fields';
-    const TYPE_CROSS_FIELDS  = 'cross_fields';
-    const TYPE_PHRASE        = 'phrase';
+    const TYPE_BEST_FIELDS = 'best_fields';
+    const TYPE_MOST_FIELDS = 'most_fields';
+    const TYPE_CROSS_FIELDS = 'cross_fields';
+    const TYPE_PHRASE = 'phrase';
     const TYPE_PHRASE_PREFIX = 'phrase_prefix';
 
-    const OPERATOR_OR        = 'or';
-    const OPERATOR_AND       = 'and';
+    const OPERATOR_OR = 'or';
+    const OPERATOR_AND = 'and';
 
-    const ZERO_TERM_NONE     = 'none';
-    const ZERO_TERM_ALL      = 'all';
+    const ZERO_TERM_NONE = 'none';
+    const ZERO_TERM_ALL = 'all';
 
     /**
-     * Sets the query
+     * Sets the query.
      *
-     * @param  string $query Query
+     * @param string $query Query
+     *
      * @return $this
      */
     public function setQuery($query = '')
@@ -40,7 +39,8 @@ class MultiMatch extends AbstractQuery
     /**
      * Sets Fields to be used in the query.
      *
-     * @param  array $fields Fields
+     * @param array $fields Fields
+     *
      * @return $this
      */
     public function setFields($fields = array())
@@ -53,7 +53,8 @@ class MultiMatch extends AbstractQuery
      *
      * If not set, defaults to true.
      *
-     * @param  boolean $useDisMax
+     * @param bool $useDisMax
+     *
      * @return $this
      */
     public function setUseDisMax($useDisMax = true)
@@ -66,7 +67,8 @@ class MultiMatch extends AbstractQuery
      *
      * If not set, defaults to 0.0.
      *
-     * @param  float $tieBreaker
+     * @param float $tieBreaker
+     *
      * @return $this
      */
     public function setTieBreaker($tieBreaker = 0.0)
@@ -75,11 +77,12 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Sets operator for Match Query
+     * Sets operator for Match Query.
      *
      * If not set, defaults to 'or'
      *
-     * @param  string $operator
+     * @param string $operator
+     *
      * @return $this
      */
     public function setOperator($operator = 'or')
@@ -88,9 +91,10 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set field minimum should match for Match Query
+     * Set field minimum should match for Match Query.
      *
-     * @param  mixed $minimumShouldMatch
+     * @param mixed $minimumShouldMatch
+     *
      * @return $this
      */
     public function setMinimumShouldMatch($minimumShouldMatch)
@@ -99,11 +103,12 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set zero terms query for Match Query
+     * Set zero terms query for Match Query.
      *
      * If not set, default to 'none'
      *
-     * @param  string $zeroTermQuery
+     * @param string $zeroTermQuery
+     *
      * @return $this
      */
     public function setZeroTermsQuery($zeroTermQuery = 'none')
@@ -112,9 +117,10 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set cutoff frequency for Match Query
+     * Set cutoff frequency for Match Query.
      *
-     * @param  float $cutoffFrequency
+     * @param float $cutoffFrequency
+     *
      * @return $this
      */
     public function setCutoffFrequency($cutoffFrequency)
@@ -123,10 +129,11 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set type
+     * Set type.
      *
-     * @param  string $field
-     * @param  string $type
+     * @param string $field
+     * @param string $type
+     *
      * @return $this
      */
     public function setType($type)
@@ -135,9 +142,10 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set fuzziness
+     * Set fuzziness.
      *
-     * @param  float $fuzziness
+     * @param float $fuzziness
+     *
      * @return $this
      */
     public function setFuzziness($fuzziness)
@@ -146,9 +154,10 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set prefix length
+     * Set prefix length.
      *
-     * @param  int   $prefixLength
+     * @param int $prefixLength
+     *
      * @return $this
      */
     public function setPrefixLength($prefixLength)
@@ -157,9 +166,10 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set max expansions
+     * Set max expansions.
      *
-     * @param  int   $maxExpansions
+     * @param int $maxExpansions
+     *
      * @return $this
      */
     public function setMaxExpansions($maxExpansions)
@@ -168,9 +178,10 @@ class MultiMatch extends AbstractQuery
     }
 
     /**
-     * Set analyzer
+     * Set analyzer.
      *
-     * @param  string $analyzer
+     * @param string $analyzer
+     *
      * @return $this
      */
     public function setAnalyzer($analyzer)

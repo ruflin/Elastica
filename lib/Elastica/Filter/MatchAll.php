@@ -1,19 +1,17 @@
 <?php
-
 namespace Elastica\Filter;
 
 /**
- * Match all filter
+ * Match all filter.
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-filter.html
  */
 class MatchAll extends AbstractFilter
 {
     /**
-     * Creates match all filter
+     * Creates match all filter.
      */
     public function __construct()
     {

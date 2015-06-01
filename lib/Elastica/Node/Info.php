@@ -1,50 +1,48 @@
 <?php
-
 namespace Elastica\Node;
 
 use Elastica\Node as BaseNode;
 use Elastica\Request;
 
 /**
- * Elastica cluster node object
+ * Elastica cluster node object.
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-status.html
  */
 class Info
 {
     /**
-     * Response
+     * Response.
      *
      * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
     /**
-     * Stats data
+     * Stats data.
      *
      * @var array stats data
      */
     protected $_data = array();
 
     /**
-     * Node
+     * Node.
      *
      * @var \Elastica\Node Node object
      */
     protected $_node = null;
 
     /**
-     * Query parameters
+     * Query parameters.
      *
      * @var array
      */
     protected $_params = array();
 
     /**
-     * Create new info object for node
+     * Create new info object for node.
      *
      * @param \Elastica\Node $node   Node object
      * @param array          $params List of params to return. Can be: settings, os, process, jvm, thread_pool, network, transport, http
@@ -81,7 +79,7 @@ class Info
     }
 
     /**
-     * Return port of the node
+     * Return port of the node.
      *
      * @return string Returns Node port
      */
@@ -96,7 +94,7 @@ class Info
     }
 
     /**
-     * Return IP of the node
+     * Return IP of the node.
      *
      * @return string Returns Node ip address
      */
@@ -111,8 +109,10 @@ class Info
     }
 
     /**
-     * Return data regarding plugins installed on this node
+     * Return data regarding plugins installed on this node.
+     *
      * @return array plugin data
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      */
     public function getPlugins()
@@ -127,9 +127,11 @@ class Info
     }
 
     /**
-     * Check if the given plugin is installed on this node
-     * @param  string $name plugin name
-     * @return bool   true if the plugin is installed, false otherwise
+     * Check if the given plugin is installed on this node.
+     *
+     * @param string $name plugin name
+     *
+     * @return bool true if the plugin is installed, false otherwise
      */
     public function hasPlugin($name)
     {
@@ -143,7 +145,7 @@ class Info
     }
 
     /**
-     * Return all info data
+     * Return all info data.
      *
      * @return array Data array
      */
@@ -153,7 +155,7 @@ class Info
     }
 
     /**
-     * Return node object
+     * Return node object.
      *
      * @return \Elastica\Node Node object
      */
@@ -179,7 +181,7 @@ class Info
     }
 
     /**
-     * Returns response object
+     * Returns response object.
      *
      * @return \Elastica\Response Response object
      */
@@ -189,9 +191,10 @@ class Info
     }
 
     /**
-     * Reloads all nodes information. Has to be called if informations changed
+     * Reloads all nodes information. Has to be called if informations changed.
      *
-     * @param  array              $params Params to return (default none). Possible options: settings, os, process, jvm, thread_pool, network, transport, http, plugin
+     * @param array $params Params to return (default none). Possible options: settings, os, process, jvm, thread_pool, network, transport, http, plugin
+     *
      * @return \Elastica\Response Response object
      */
     public function refresh(array $params = array())

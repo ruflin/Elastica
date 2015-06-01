@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Range;
@@ -31,13 +30,13 @@ class RangeTest extends BaseAggregationTest
      */
     public function testRangeAggregation()
     {
-        $agg = new Range("range");
-        $agg->setField("price");
+        $agg = new Range('range');
+        $agg->setField('price');
         $agg->addRange(1.5, 5);
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("range");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('range');
 
         $this->assertEquals(2, $results['buckets'][0]['doc_count']);
     }
@@ -47,11 +46,11 @@ class RangeTest extends BaseAggregationTest
      */
     public function testRangeAggregationWithKey()
     {
-        $agg = new Range("range");
-        $agg->setField("price");
-        $agg->addRange(null, 50, "cheap");
-        $agg->addRange(50, 100, "average");
-        $agg->addRange(100, null, "expensive");
+        $agg = new Range('range');
+        $agg->setField('price');
+        $agg->addRange(null, 50, 'cheap');
+        $agg->addRange(50, 100, 'average');
+        $agg->addRange(100, null, 'expensive');
 
         $expected = array(
             'range' => array(

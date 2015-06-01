@@ -1,21 +1,19 @@
 <?php
-
 namespace Elastica\Filter;
 
 use Elastica\Exception\InvalidException;
 
 /**
- * Geo bounding box filter
+ * Geo bounding box filter.
  *
- * @category Xodoa
- * @package Elastica
  * @author Fabian Vogler <fabian@equivalence.ch>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-filter.html
  */
 class GeoBoundingBox extends AbstractFilter
 {
     /**
-     * Construct BoundingBoxFilter
+     * Construct BoundingBoxFilter.
      *
      * @param string $key         Key
      * @param array  $coordinates Array with top left coordinate as first and bottom right coordinate as second element
@@ -26,12 +24,13 @@ class GeoBoundingBox extends AbstractFilter
     }
 
     /**
-     * Add coordinates
+     * Add coordinates.
+     *
+     * @param string $key         Key
+     * @param array  $coordinates Array with top left coordinate as first and bottom right coordinate as second element
      *
      * @throws \Elastica\Exception\InvalidException If $coordinates doesn't have two elements
      *
-     * @param  string $key         Key
-     * @param  array  $coordinates Array with top left coordinate as first and bottom right coordinate as second element
      * @return $this
      */
     public function addCoordinates($key, array $coordinates)

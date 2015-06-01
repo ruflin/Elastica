@@ -1,15 +1,13 @@
 <?php
-
 namespace Elastica\Aggregation;
 
 /**
- * Class ScriptedMetric
- * @package Elastica\Aggregation
+ * Class ScriptedMetric.
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html
  */
 class ScriptedMetric extends AbstractAggregation
 {
-
     /**
      * @param string      $name          the name if this aggregation
      * @param string|null $initScript    Executed prior to any collection of documents
@@ -35,9 +33,10 @@ class ScriptedMetric extends AbstractAggregation
     }
 
     /**
-     * Set the field for this aggregation
+     * Set the field for this aggregation.
      *
-     * @param  string $script the name of the document field on which to perform this aggregation
+     * @param string $script the name of the document field on which to perform this aggregation
+     *
      * @return $this
      */
     public function setCombineScript($script)
@@ -46,9 +45,10 @@ class ScriptedMetric extends AbstractAggregation
     }
 
     /**
-     * Set the field for this aggregation
+     * Set the field for this aggregation.
      *
-     * @param  string $script the name of the document field on which to perform this aggregation
+     * @param string $script the name of the document field on which to perform this aggregation
+     *
      * @return $this
      */
     public function setInitScript($script)
@@ -57,9 +57,10 @@ class ScriptedMetric extends AbstractAggregation
     }
 
     /**
-     * Set the field for this aggregation
+     * Set the field for this aggregation.
      *
-     * @param  string $script the name of the document field on which to perform this aggregation
+     * @param string $script the name of the document field on which to perform this aggregation
+     *
      * @return $this
      */
     public function setMapScript($script)
@@ -68,9 +69,10 @@ class ScriptedMetric extends AbstractAggregation
     }
 
     /**
-     * Set the field for this aggregation
+     * Set the field for this aggregation.
      *
-     * @param  string $script the name of the document field on which to perform this aggregation
+     * @param string $script the name of the document field on which to perform this aggregation
+     *
      * @return $this
      */
     public function setReduceScript($script)

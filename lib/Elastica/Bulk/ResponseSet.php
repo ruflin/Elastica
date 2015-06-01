@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Bulk;
 
 use Elastica\Response as BaseResponse;
@@ -36,7 +35,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     }
 
     /**
-     * Returns first found error
+     * Returns first found error.
      *
      * @return string
      */

@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test\Transport;
 
-use Elastica\Client;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\ResultSet;
@@ -22,7 +20,7 @@ class GuzzleTest extends BaseTest
     }
 
     /**
-     * Return transport configuration and the expected HTTP method
+     * Return transport configuration and the expected HTTP method.
      *
      * @return array[]
      */
@@ -80,7 +78,7 @@ class GuzzleTest extends BaseTest
      */
     public function testWithEnvironmentalProxy()
     {
-        putenv('http_proxy=' . $this->_getProxyUrl() . '/');
+        putenv('http_proxy='.$this->_getProxyUrl().'/');
 
         $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -98,7 +96,7 @@ class GuzzleTest extends BaseTest
      */
     public function testWithEnabledEnvironmentalProxy()
     {
-        putenv('http_proxy=' . $this->_getProxyUrl403() . '/');
+        putenv('http_proxy='.$this->_getProxyUrl403().'/');
 
         $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -183,5 +181,4 @@ class GuzzleTest extends BaseTest
         parent::tearDown();
         putenv('http_proxy=');
     }
-
 }

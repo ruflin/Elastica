@@ -1,39 +1,38 @@
 <?php
-
 namespace Elastica\Filter;
 
 /**
- * geo_shape filter
+ * geo_shape filter.
  *
  * Filter pre-indexed shape definitions
  *
- * @category Xodoa
- * @package Elastica
  * @author Bennie Krijger <benniekrijger@gmail.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-filter.html
  */
 abstract class AbstractGeoShape extends AbstractFilter
 {
-    const RELATION_INTERSECT    = 'intersects';
-    const RELATION_DISJOINT     = 'disjoint';
-    const RELATION_CONTAINS     = 'within';
+    const RELATION_INTERSECT = 'intersects';
+    const RELATION_DISJOINT = 'disjoint';
+    const RELATION_CONTAINS = 'within';
 
     /**
-     * @var string $_path
+     * @var string
      *
      * elasticsearch path of the pre-indexed shape
      */
     protected $_path;
 
     /**
-     * @var string $_relation
+     * @var string
      *
      * the relation of the 2 shaped: intersects, disjoint, within
      */
     protected $_relation = self::RELATION_INTERSECT;
 
     /**
-     * @param  string $relation
+     * @param string $relation
+     *
      * @return $this
      */
     public function setRelation($relation)

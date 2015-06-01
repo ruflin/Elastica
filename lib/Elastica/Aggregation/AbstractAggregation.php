@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
@@ -26,8 +25,10 @@ abstract class AbstractAggregation extends Param
     }
 
     /**
-     * Set the name of this aggregation
+     * Set the name of this aggregation.
+     *
      * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
@@ -38,7 +39,8 @@ abstract class AbstractAggregation extends Param
     }
 
     /**
-     * Retrieve the name of this aggregation
+     * Retrieve the name of this aggregation.
+     *
      * @return string
      */
     public function getName()
@@ -47,7 +49,8 @@ abstract class AbstractAggregation extends Param
     }
 
     /**
-     * Retrieve all subaggregations belonging to this aggregation
+     * Retrieve all subaggregations belonging to this aggregation.
+     *
      * @return array
      */
     public function getAggs()
@@ -56,10 +59,12 @@ abstract class AbstractAggregation extends Param
     }
 
     /**
-     * Add a sub-aggregation
+     * Add a sub-aggregation.
+     *
+     * @param AbstractAggregation $aggregation
+     *
      * @throws \Elastica\Exception\InvalidException
      *
-     * @param  AbstractAggregation $aggregation
      * @return $this
      */
     public function addAggregation(AbstractAggregation $aggregation)

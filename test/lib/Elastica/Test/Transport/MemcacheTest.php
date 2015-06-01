@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test\Transport;
 
-use Elastica\Client;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Query\QueryString;

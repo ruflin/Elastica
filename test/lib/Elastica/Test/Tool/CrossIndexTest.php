@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Tool;
 
 use Elastica\Document;
@@ -10,7 +9,7 @@ use Elastica\Type;
 class CrossIndexTest extends Base
 {
     /**
-     * Test default reindex
+     * Test default reindex.
      */
     public function testReindex()
     {
@@ -28,7 +27,7 @@ class CrossIndexTest extends Base
     }
 
     /**
-     * Test reindex type option
+     * Test reindex type option.
      */
     public function testReindexTypeOption()
     {
@@ -66,7 +65,7 @@ class CrossIndexTest extends Base
     }
 
     /**
-     * Test default copy
+     * Test default copy.
      */
     public function testCopy()
     {

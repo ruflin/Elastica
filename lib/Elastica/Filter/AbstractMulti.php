@@ -1,26 +1,25 @@
 <?php
-
 namespace Elastica\Filter;
 
 /**
- * Multi Abstract filter object. Should be extended by filter types composed of an array of sub filters
+ * Multi Abstract filter object. Should be extended by filter types composed of an array of sub filters.
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 abstract class AbstractMulti extends AbstractFilter
 {
     /**
-     * Filters
+     * Filters.
+     *
      * @var array
      */
     protected $_filters = array();
 
     /**
-     * Add filter
+     * Add filter.
      *
-     * @param  \Elastica\Filter\AbstractFilter $filter
+     * @param \Elastica\Filter\AbstractFilter $filter
+     *
      * @return $this
      */
     public function addFilter(AbstractFilter $filter)
@@ -31,9 +30,10 @@ abstract class AbstractMulti extends AbstractFilter
     }
 
     /**
-     * Set filters
+     * Set filters.
      *
-     * @param  array $filters
+     * @param array $filters
+     *
      * @return $this
      */
     public function setFilters(array $filters)
@@ -57,6 +57,7 @@ abstract class AbstractMulti extends AbstractFilter
 
     /**
      * @see \Elastica\Param::toArray()
+     *
      * @return array
      */
     public function toArray()

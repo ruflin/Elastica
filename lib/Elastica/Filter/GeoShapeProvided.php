@@ -1,42 +1,40 @@
 <?php
-
 namespace Elastica\Filter;
 
 /**
- * geo_shape filter or provided shapes
+ * geo_shape filter or provided shapes.
  *
  * Filter provided shape definitions
  *
- * @category Xodoa
- * @package Elastica
  * @author BennieKrijger <benniekrijger@gmail.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-filter.html
  */
 class GeoShapeProvided extends AbstractGeoShape
 {
-    const TYPE_ENVELOPE         = 'envelope';
-    const TYPE_MULTIPOINT       = 'multipoint';
-    const TYPE_POINT            = 'point';
-    const TYPE_MULTIPOLYGON     = 'multipolygon';
-    const TYPE_LINESTRING       = 'linestring';
-    const TYPE_POLYGON          = 'polygon';
+    const TYPE_ENVELOPE = 'envelope';
+    const TYPE_MULTIPOINT = 'multipoint';
+    const TYPE_POINT = 'point';
+    const TYPE_MULTIPOLYGON = 'multipolygon';
+    const TYPE_LINESTRING = 'linestring';
+    const TYPE_POLYGON = 'polygon';
 
     /**
-     * Type of the geo_shape
+     * Type of the geo_shape.
      *
      * @var string
      */
     protected $_shapeType;
 
     /**
-     * Coordinates making up geo_shape
+     * Coordinates making up geo_shape.
      *
      * @var array Coordinates making up geo_shape
      */
     protected $_coordinates;
 
     /**
-     * Construct geo_shape filter
+     * Construct geo_shape filter.
      *
      * @param string $path        The path/field of the shape searched
      * @param array  $coordinates Points making up the shape
@@ -52,7 +50,7 @@ class GeoShapeProvided extends AbstractGeoShape
     }
 
     /**
-     * Converts filter to array
+     * Converts filter to array.
      *
      * @see \Elastica\Filter\AbstractFilter::toArray()
      *

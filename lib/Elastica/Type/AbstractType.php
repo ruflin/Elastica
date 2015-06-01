@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Type;
 
 use Elastica\Client;
@@ -24,8 +23,7 @@ use Elastica\Util;
  *    - $_indexParams: Parameters for the index
  *
  * @todo Add some settings examples to code
- * @category Xodoa
- * @package Elastica
+ *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 abstract class AbstractType implements SearchableInterface
@@ -33,70 +31,70 @@ abstract class AbstractType implements SearchableInterface
     const MAX_DOCS_PER_REQUEST = 1000;
 
     /**
-     * Index name
+     * Index name.
      *
      * @var string Index name
      */
     protected $_indexName = '';
 
     /**
-     * Index name
+     * Index name.
      *
      * @var string Index name
      */
     protected $_typeName = '';
 
     /**
-     * Client
+     * Client.
      *
      * @var \Elastica\Client Client object
      */
     protected $_client = null;
 
     /**
-     * Index
+     * Index.
      *
      * @var \Elastica\Index Index object
      */
     protected $_index = null;
 
     /**
-     * Type
+     * Type.
      *
      * @var \Elastica\Type Type object
      */
     protected $_type = null;
 
     /**
-     * Mapping
+     * Mapping.
      *
      * @var array Mapping
      */
     protected $_mapping = array();
 
     /**
-     * Index params
+     * Index params.
      *
      * @var array Index  params
      */
     protected $_indexParams = array();
 
     /**
-     * Source
+     * Source.
      *
-     * @var boolean Source
+     * @var bool Source
      */
     protected $_source = true;
 
     /**
-     * Creates index object with client connection
+     * Creates index object with client connection.
      *
      * Reads index and type name from protected vars _indexName and _typeName.
      * Has to be set in child class
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
      * @param \Elastica\Client $client OPTIONAL Client object
+     *
+     * @throws \Elastica\Exception\InvalidException
      */
     public function __construct(Client $client = null)
     {
@@ -118,7 +116,7 @@ abstract class AbstractType implements SearchableInterface
     }
 
     /**
-     * Creates the index and sets the mapping for this type
+     * Creates the index and sets the mapping for this type.
      *
      * @param bool $recreate OPTIONAL Recreates the index if true (default = false)
      */
@@ -133,8 +131,9 @@ abstract class AbstractType implements SearchableInterface
     }
 
     /**
-     * @param  \Elastica\Query  $query
-     * @param  array|int        $options
+     * @param \Elastica\Query $query
+     * @param array|int       $options
+     *
      * @return \Elastica\Search
      */
     public function createSearch($query = '', $options = null)
@@ -143,10 +142,12 @@ abstract class AbstractType implements SearchableInterface
     }
 
     /**
-     * Search on the type
+     * Search on the type.
      *
-     * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
-     * @return \Elastica\ResultSet          ResultSet with all results inside
+     * @param string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
+     *
+     * @return \Elastica\ResultSet ResultSet with all results inside
+     *
      * @see \Elastica\SearchableInterface::search
      */
     public function search($query = '', $options = null)
@@ -155,10 +156,12 @@ abstract class AbstractType implements SearchableInterface
     }
 
     /**
-     * Count docs in the type based on query
+     * Count docs in the type based on query.
      *
-     * @param  string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
-     * @return int                          number of documents matching the query
+     * @param string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
+     *
+     * @return int number of documents matching the query
+     *
      * @see \Elastica\SearchableInterface::count
      */
     public function count($query = '')
@@ -167,7 +170,7 @@ abstract class AbstractType implements SearchableInterface
     }
 
     /**
-     * Returns the search index
+     * Returns the search index.
      *
      * @return \Elastica\Index Index object
      */
@@ -177,7 +180,7 @@ abstract class AbstractType implements SearchableInterface
     }
 
     /**
-     * Returns type object
+     * Returns type object.
      *
      * @return \Elastica\Type Type object
      */
@@ -187,11 +190,12 @@ abstract class AbstractType implements SearchableInterface
     }
 
     /**
-     * Converts given time to format: 1995-12-31T23:59:59Z
+     * Converts given time to format: 1995-12-31T23:59:59Z.
      *
      * This is the lucene date format
      *
-     * @param  int    $date Date input (could be string etc.) -> must be supported by strtotime
+     * @param int $date Date input (could be string etc.) -> must be supported by strtotime
+     *
      * @return string Converted date string
      */
     public function convertDate($date)

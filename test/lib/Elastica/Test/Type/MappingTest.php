@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Type;
 
 use Elastica\Document;
@@ -197,7 +196,7 @@ class MappingTest extends BaseTest
             array(
                 'note' => array(
                     'store' => 'yes', 'properties' => array(
-                        'titulo'  => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0),
+                        'titulo' => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0),
                         'contenido' => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0),
                     ),
                 ),
@@ -209,12 +208,12 @@ class MappingTest extends BaseTest
         $doc = new Document(1, array(
                 'note' => array(
                     array(
-                        'titulo'        => 'nota1',
-                        'contenido'        => 'contenido1',
+                        'titulo' => 'nota1',
+                        'contenido' => 'contenido1',
                     ),
                     array(
-                        'titulo'        => 'nota2',
-                        'contenido'        => 'contenido2',
+                        'titulo' => 'nota2',
+                        'contenido' => 'contenido2',
                     ),
                 ),
             )
@@ -230,24 +229,24 @@ class MappingTest extends BaseTest
      *
      * Test setting a dynamic template and validate whether the right mapping is applied after adding a document which
      * should match the dynamic template. The example is the template_1 from the Elasticsearch documentation.
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-root-object-type.html
      *
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-root-object-type.html
      */
     public function testDynamicTemplate()
     {
         $index = $this->_createIndex();
-        $type  = $index->getType('person');
+        $type = $index->getType('person');
 
         // set a dynamic template "template_1" which creates a multi field for multi* matches.
         $mapping = new Mapping($type);
         $mapping->setParam('dynamic_templates', array(
             array('template_1' => array(
-                'match'   => 'multi*',
+                'match' => 'multi*',
                 'mapping' => array(
-                    'type'   => 'multi_field',
+                    'type' => 'multi_field',
                     'fields' => array(
                         '{name}' => array('type' => '{dynamic_type}', 'index' => 'analyzed'),
-                        'org'    => array('type' => '{dynamic_type}', 'index' => 'not_analyzed'),
+                        'org' => array('type' => '{dynamic_type}', 'index' => 'not_analyzed'),
                     ),
                 ),
             )),
@@ -315,8 +314,8 @@ class MappingTest extends BaseTest
         );
         $mapping = new Mapping($type, $properties);
         $all = array(
-           "enabled" => true,
-           "store" => "yes",
+           'enabled' => true,
+           'store' => 'yes',
         );
         $mapping->setParam('_all', $all);
         $get_all = $mapping->getParam('_all');

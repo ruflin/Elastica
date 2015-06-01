@@ -1,65 +1,62 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Exception\JSONParseException;
 use Elastica\Exception\NotFoundException;
 
 /**
- * Elastica Response object
+ * Elastica Response object.
  *
  * Stores query time, and result array -> is given to result set, returned by ...
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Response
 {
     /**
-     * Query time
+     * Query time.
      *
      * @var float Query time
      */
     protected $_queryTime = null;
 
     /**
-     * Response string (json)
+     * Response string (json).
      *
      * @var string Response
      */
     protected $_responseString = '';
 
     /**
-     * Error
+     * Error.
      *
-     * @var boolean Error
+     * @var bool Error
      */
     protected $_error = false;
 
     /**
-     * Transfer info
+     * Transfer info.
      *
      * @var array transfer info
      */
     protected $_transferInfo = array();
 
     /**
-     * Response
+     * Response.
      *
      * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
     /**
-     * HTTP response status code
+     * HTTP response status code.
      *
      * @var int
      */
     protected $_status = null;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param string|array $responseString Response string (json)
      * @param int          $responseStatus http status code
@@ -75,7 +72,7 @@ class Response
     }
 
     /**
-     * Error message
+     * Error message.
      *
      * @return string Error message
      */
@@ -92,7 +89,7 @@ class Response
     }
 
     /**
-     * True if response has error
+     * True if response has error.
      *
      * @return bool True if response has error
      */
@@ -108,7 +105,7 @@ class Response
     }
 
     /**
-     * True if response has failed shards
+     * True if response has failed shards.
      *
      * @return bool True if response has failed shards
      */
@@ -124,7 +121,7 @@ class Response
     }
 
     /**
-     * Checks if the query returned ok
+     * Checks if the query returned ok.
      *
      * @return bool True if ok
      */
@@ -174,7 +171,7 @@ class Response
     }
 
     /**
-     * Response data array
+     * Response data array.
      *
      * @return array Response data array
      */
@@ -220,7 +217,8 @@ class Response
      * Sets the transfer info of the curl request. This function is called
      * from the \Elastica\Client::_callService .
      *
-     * @param  array $transferInfo The curl transfer information.
+     * @param array $transferInfo The curl transfer information.
+     *
      * @return $this
      */
     public function setTransferInfo(array $transferInfo)
@@ -231,7 +229,7 @@ class Response
     }
 
     /**
-     * This is only available if DEBUG constant is set to true
+     * This is only available if DEBUG constant is set to true.
      *
      * @return float Query time
      */
@@ -241,9 +239,10 @@ class Response
     }
 
     /**
-     * Sets the query time
+     * Sets the query time.
      *
-     * @param  float $queryTime Query time
+     * @param float $queryTime Query time
+     *
      * @return $this
      */
     public function setQueryTime($queryTime)
@@ -254,7 +253,7 @@ class Response
     }
 
     /**
-     * Time request took
+     * Time request took.
      *
      * @throws \Elastica\Exception\NotFoundException
      *
@@ -265,14 +264,14 @@ class Response
         $data = $this->getData();
 
         if (!isset($data['took'])) {
-            throw new NotFoundException("Unable to find the field [took]from the response");
+            throw new NotFoundException('Unable to find the field [took]from the response');
         }
 
         return $data['took'];
     }
 
     /**
-     * Get the _shard statistics for the response
+     * Get the _shard statistics for the response.
      *
      * @throws \Elastica\Exception\NotFoundException
      *
@@ -283,14 +282,14 @@ class Response
         $data = $this->getData();
 
         if (!isset($data['_shards'])) {
-            throw new NotFoundException("Unable to find the field [_shards] from the response");
+            throw new NotFoundException('Unable to find the field [_shards] from the response');
         }
 
         return $data['_shards'];
     }
 
     /**
-     * Get the _scroll value for the response
+     * Get the _scroll value for the response.
      *
      * @throws \Elastica\Exception\NotFoundException
      *
@@ -301,7 +300,7 @@ class Response
         $data = $this->getData();
 
         if (!isset($data['_scroll_id'])) {
-            throw new NotFoundException("Unable to find the field [_scroll_id] from the response");
+            throw new NotFoundException('Unable to find the field [_scroll_id] from the response');
         }
 
         return $data['_scroll_id'];

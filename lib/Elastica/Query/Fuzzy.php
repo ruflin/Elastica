@@ -1,21 +1,19 @@
 <?php
-
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
 
 /**
- * Fuzzy query
+ * Fuzzy query.
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html
  */
 class Fuzzy extends AbstractQuery
 {
     /**
-     * Construct a fuzzy query
+     * Construct a fuzzy query.
      *
      * @param string $fieldName Field name
      * @param string $value     String to search for
@@ -28,10 +26,11 @@ class Fuzzy extends AbstractQuery
     }
 
     /**
-     * Set field for fuzzy query
+     * Set field for fuzzy query.
      *
-     * @param  string $fieldName Field name
-     * @param  string $value     String to search for
+     * @param string $fieldName Field name
+     * @param string $value     String to search for
+     *
      * @return $this
      */
     public function setField($fieldName, $value)
@@ -47,10 +46,11 @@ class Fuzzy extends AbstractQuery
     }
 
     /**
-     * Set optional parameters on the existing query
+     * Set optional parameters on the existing query.
      *
-     * @param  string $param option name
-     * @param  mixed  $value Value of the parameter
+     * @param string $param option name
+     * @param mixed  $value Value of the parameter
+     *
      * @return $this
      */
     public function setFieldOption($param, $value)
@@ -68,6 +68,7 @@ class Fuzzy extends AbstractQuery
 
     /**
      * Deprecated method of setting a field.
+     *
      * @deprecated
      */
     public function addField($fieldName, $args)

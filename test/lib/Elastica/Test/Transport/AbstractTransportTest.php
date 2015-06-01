@@ -1,16 +1,14 @@
 <?php
-
 namespace Elastica\Test\Transport;
 
 use Elastica\Connection;
-use Elastica\Exception\InvalidException;
 use Elastica\Transport\AbstractTransport;
 use Elastica\Transport\Http;
 
 class AbstractTransportTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Return transport configuration and the expected HTTP method
+     * Return transport configuration and the expected HTTP method.
      *
      * @return array[]
      */

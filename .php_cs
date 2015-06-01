@@ -13,6 +13,12 @@ $config = Symfony\CS\Config\Config::create()
         'no_blank_lines_before_namespace',
         // [contrib] Ordering use statements.
         'ordered_use',
+        // [contrib] Annotations should be ordered so that param annotations come first, then throws annotations, then return annotations.
+        'phpdoc_order',
+        // [contrib] Arrays should use the long syntax.
+        'long_array_syntax',
+        // [contrib] Ensure there is no code on the same line as the PHP open tag.
+        'newline_after_open_tag',
     ))
     ->finder($finder);
 

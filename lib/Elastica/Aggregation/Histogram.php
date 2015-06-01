@@ -1,10 +1,9 @@
 <?php
-
 namespace Elastica\Aggregation;
 
 /**
- * Class Histogram
- * @package Elastica\Aggregation
+ * Class Histogram.
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html
  */
 class Histogram extends AbstractSimpleAggregation
@@ -22,33 +21,39 @@ class Histogram extends AbstractSimpleAggregation
     }
 
     /**
-     * Set the interval by which documents will be bucketed
-     * @param  int   $interval
+     * Set the interval by which documents will be bucketed.
+     *
+     * @param int $interval
+     *
      * @return $this
      */
     public function setInterval($interval)
     {
-        return $this->setParam("interval", $interval);
+        return $this->setParam('interval', $interval);
     }
 
     /**
-     * Set the bucket sort order
-     * @param  string $order     "_count", "_term", or the name of a sub-aggregation or sub-aggregation response field
-     * @param  string $direction "asc" or "desc"
+     * Set the bucket sort order.
+     *
+     * @param string $order     "_count", "_term", or the name of a sub-aggregation or sub-aggregation response field
+     * @param string $direction "asc" or "desc"
+     *
      * @return $this
      */
     public function setOrder($order, $direction)
     {
-        return $this->setParam("order", array($order => $direction));
+        return $this->setParam('order', array($order => $direction));
     }
 
     /**
-     * Set the minimum number of documents which must fall into a bucket in order for the bucket to be returned
-     * @param  int   $count set to 0 to include empty buckets
+     * Set the minimum number of documents which must fall into a bucket in order for the bucket to be returned.
+     *
+     * @param int $count set to 0 to include empty buckets
+     *
      * @return $this
      */
     public function setMinimumDocumentCount($count)
     {
-        return $this->setParam("min_doc_count", $count);
+        return $this->setParam('min_doc_count', $count);
     }
 }

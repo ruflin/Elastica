@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Transport;
 
 use Elastica\Exception\Connection\MemcacheException;
@@ -11,11 +10,10 @@ use Elastica\Request;
 use Elastica\Response;
 
 /**
- * Elastica Memcache Transport object
+ * Elastica Memcache Transport object.
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ *
  * @deprecated The memcached transport is deprecated as of ES 1.5, and will be removed in ES 2.0
  */
 class Memcache extends AbstractTransport
@@ -23,13 +21,14 @@ class Memcache extends AbstractTransport
     const MAX_KEY_LENGTH = 250;
 
     /**
-     * Makes calls to the elasticsearch server
+     * Makes calls to the elasticsearch server.
+     *
+     * @param \Elastica\Request $request
+     * @param array             $params  Host, Port, ...
      *
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\InvalidException
      *
-     * @param  \Elastica\Request  $request
-     * @param  array              $params  Host, Port, ...
      * @return \Elastica\Response Response object
      */
     public function exec(Request $request, array $params)
@@ -98,11 +97,11 @@ class Memcache extends AbstractTransport
     }
 
     /**
-     * Check if key that will be used dont exceed 250 symbols
-     *
-     * @throws Elastica\Exception\Connection\MemcacheException If key is too long
+     * Check if key that will be used dont exceed 250 symbols.
      *
      * @param string $key
+     *
+     * @throws Elastica\Exception\Connection\MemcacheException If key is too long
      */
     private function _checkKeyLength($key)
     {

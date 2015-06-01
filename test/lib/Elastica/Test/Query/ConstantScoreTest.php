@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -9,7 +8,6 @@ use Elastica\Index;
 use Elastica\Query\ConstantScore;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 
 class ConstantScoreTest extends BaseTest
 {
@@ -124,7 +122,6 @@ class ConstantScoreTest extends BaseTest
             new Document(2, array('id' => 2, 'email' => 'emil@test.com', 'username' => 'emil')),
             new Document(3, array('id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth')),
         ));
-
 
         // Refresh index
         $index->refresh();

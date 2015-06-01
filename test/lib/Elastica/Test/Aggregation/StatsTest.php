@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Stats;
@@ -29,12 +28,12 @@ class StatsTest extends BaseAggregationTest
      */
     public function testStatsAggregation()
     {
-        $agg = new Stats("stats");
-        $agg->setField("price");
+        $agg = new Stats('stats');
+        $agg->setField('price');
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("stats");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('stats');
 
         $this->assertEquals(4, $results['count']);
         $this->assertEquals(1, $results['min']);

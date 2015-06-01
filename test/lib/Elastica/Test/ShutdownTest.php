@@ -4,7 +4,7 @@ use Elastica\Test\Base as BaseTest;
 
 /**
  * These tests shuts down node/cluster, so can't be executed with rest testsuite
- * Please use `sudo service elasticsearch restart` after every run of these tests
+ * Please use `sudo service elasticsearch restart` after every run of these tests.
  */
 class ShutdownTest extends BaseTest
 {
@@ -27,7 +27,6 @@ class ShutdownTest extends BaseTest
         $portFound = false;
         // sayonara, wolverine, we'd never love you
         foreach ($nodes as $node) {
-
             if ((int) $node->getInfo()->getPort() === 9201) {
                 $portFound = true;
                 $node->shutdown('1s');

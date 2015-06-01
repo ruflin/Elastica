@@ -1,28 +1,26 @@
 <?php
-
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
 
 /**
- * QueryString query
+ * QueryString query.
  *
- * @category Xodoa
- * @package  Elastica
  * @author   Nicolas Ruflin <spam@ruflin.com>, Jasper van Wanrooy <jasper@vanwanrooy.net>
+ *
  * @link     http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
  */
 class QueryString extends AbstractQuery
 {
     /**
-     * Query string
+     * Query string.
      *
      * @var string Query string
      */
     protected $_queryString = '';
 
     /**
-     * Creates query string object. Calls setQuery with argument
+     * Creates query string object. Calls setQuery with argument.
      *
      * @param string $queryString OPTIONAL Query string for object
      */
@@ -32,11 +30,12 @@ class QueryString extends AbstractQuery
     }
 
     /**
-     * Sets a new query string for the object
+     * Sets a new query string for the object.
+     *
+     * @param string $query Query string
      *
      * @throws \Elastica\Exception\InvalidException If given parameter is not a string
      *
-     * @param  string $query Query string
      * @return $this
      */
     public function setQuery($query = '')
@@ -49,11 +48,12 @@ class QueryString extends AbstractQuery
     }
 
     /**
-     * Sets the default field
+     * Sets the default field.
      *
      * If no field is set, _all is chosen
      *
-     * @param  string $field Field
+     * @param string $field Field
+     *
      * @return $this
      */
     public function setDefaultField($field)
@@ -62,11 +62,12 @@ class QueryString extends AbstractQuery
     }
 
     /**
-     * Sets the default operator AND or OR
+     * Sets the default operator AND or OR.
      *
      * If no operator is set, OR is chosen
      *
-     * @param  string $operator Operator
+     * @param string $operator Operator
+     *
      * @return $this
      */
     public function setDefaultOperator($operator)
@@ -77,7 +78,8 @@ class QueryString extends AbstractQuery
     /**
      * Sets the analyzer to analyze the query with.
      *
-     * @param  string $analyzer Analyser to use
+     * @param string $analyzer Analyser to use
+     *
      * @return $this
      */
     public function setAnalyzer($analyzer)
@@ -90,7 +92,8 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to true.
      *
-     * @param  bool  $allow
+     * @param bool $allow
+     *
      * @return $this
      */
     public function setAllowLeadingWildcard($allow = true)
@@ -103,7 +106,8 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to true.
      *
-     * @param  bool  $enabled
+     * @param bool $enabled
+     *
      * @return $this
      */
     public function setEnablePositionIncrements($enabled = true)
@@ -116,7 +120,8 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to 0.
      *
-     * @param  int   $length
+     * @param int $length
+     *
      * @return $this
      */
     public function setFuzzyPrefixLength($length = 0)
@@ -129,7 +134,8 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to 0.5
      *
-     * @param  float $minSim
+     * @param float $minSim
+     *
      * @return $this
      */
     public function setFuzzyMinSim($minSim = 0.5)
@@ -143,7 +149,8 @@ class QueryString extends AbstractQuery
      * If zero, exact phrases are required.
      * If not set, defaults to zero.
      *
-     * @param  int   $phraseSlop
+     * @param int $phraseSlop
+     *
      * @return $this
      */
     public function setPhraseSlop($phraseSlop = 0)
@@ -156,7 +163,8 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to 1.0.
      *
-     * @param  float $boost
+     * @param float $boost
+     *
      * @return $this
      */
     public function setBoost($boost = 1.0)
@@ -169,7 +177,8 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to true
      *
-     * @param  bool  $analyze
+     * @param bool $analyze
+     *
      * @return $this
      */
     public function setAnalyzeWildcard($analyze = true)
@@ -182,7 +191,8 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to true.
      *
-     * @param  bool  $autoGenerate
+     * @param bool $autoGenerate
+     *
      * @return $this
      */
     public function setAutoGeneratePhraseQueries($autoGenerate = true)
@@ -191,11 +201,12 @@ class QueryString extends AbstractQuery
     }
 
     /**
-     * Sets the fields. If no fields are set, _all is chosen
+     * Sets the fields. If no fields are set, _all is chosen.
+     *
+     * @param array $fields Fields
      *
      * @throws \Elastica\Exception\InvalidException If given parameter is not an array
      *
-     * @param  array $fields Fields
      * @return $this
      */
     public function setFields(array $fields)
@@ -210,7 +221,8 @@ class QueryString extends AbstractQuery
     /**
      * Whether to use bool or dis_max queries to internally combine results for multi field search.
      *
-     * @param  bool  $value Determines whether to use
+     * @param bool $value Determines whether to use
+     *
      * @return $this
      */
     public function setUseDisMax($value = true)
@@ -223,7 +235,8 @@ class QueryString extends AbstractQuery
      *
      * If not set, defaults to 0.
      *
-     * @param  int   $tieBreaker
+     * @param int $tieBreaker
+     *
      * @return $this
      */
     public function setTieBreaker($tieBreaker = 0)
@@ -232,12 +245,13 @@ class QueryString extends AbstractQuery
     }
 
     /**
-     * Set a re-write condition. See https://github.com/elasticsearch/elasticsearch/issues/1186 for additional information
+     * Set a re-write condition. See https://github.com/elasticsearch/elasticsearch/issues/1186 for additional information.
      *
-     * @param  string $rewrite
+     * @param string $rewrite
+     *
      * @return $this
      */
-    public function setRewrite($rewrite = "")
+    public function setRewrite($rewrite = '')
     {
         return $this->setParam('rewrite', $rewrite);
     }
@@ -245,7 +259,8 @@ class QueryString extends AbstractQuery
     /**
      * Set timezone option.
      *
-     * @param  string $timezone
+     * @param string $timezone
+     *
      * @return $this
      */
     public function setTimezone($timezone)
@@ -254,9 +269,10 @@ class QueryString extends AbstractQuery
     }
 
     /**
-     * Converts query to array
+     * Converts query to array.
      *
      * @see \Elastica\Query\AbstractQuery::toArray()
+     *
      * @return array Query array
      */
     public function toArray()

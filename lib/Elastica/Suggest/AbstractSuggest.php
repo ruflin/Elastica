@@ -1,12 +1,10 @@
 <?php
-
 namespace Elastica\Suggest;
 
 use Elastica\Param;
 
 /**
- * Class AbstractSuggestion
- * @package Elastica\Suggest
+ * Class AbstractSuggestion.
  */
 abstract class AbstractSuggest extends Param
 {
@@ -31,8 +29,10 @@ abstract class AbstractSuggest extends Param
     }
 
     /**
-     * Suggest text must be set either globally or per suggestion
-     * @param  string $text
+     * Suggest text must be set either globally or per suggestion.
+     *
+     * @param string $text
+     *
      * @return $this
      */
     public function setText($text)
@@ -43,34 +43,38 @@ abstract class AbstractSuggest extends Param
     }
 
     /**
-     * @param  string $field
+     * @param string $field
+     *
      * @return $this
      */
     public function setField($field)
     {
-        return $this->setParam("field", $field);
+        return $this->setParam('field', $field);
     }
 
     /**
-     * @param  int   $size
+     * @param int $size
+     *
      * @return $this
      */
     public function setSize($size)
     {
-        return $this->setParam("size", $size);
+        return $this->setParam('size', $size);
     }
 
     /**
-     * @param  int   $size maximum number of suggestions to be retrieved from each shard
+     * @param int $size maximum number of suggestions to be retrieved from each shard
+     *
      * @return $this
      */
     public function setShardSize($size)
     {
-        return $this->setParam("shard_size", $size);
+        return $this->setParam('shard_size', $size);
     }
 
     /**
-     * Retrieve the name of this suggestion
+     * Retrieve the name of this suggestion.
+     *
      * @return string
      */
     public function getName()

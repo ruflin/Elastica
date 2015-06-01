@@ -1,10 +1,9 @@
 <?php
-
 namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Filter\AbstractFilter;
-use Elastica\Filter\BoolFilter;
 use Elastica\Filter\BoolAnd;
+use Elastica\Filter\BoolFilter;
 use Elastica\Filter\BoolNot;
 use Elastica\Filter\BoolOr;
 use Elastica\Filter\Exists;
@@ -36,16 +35,16 @@ use Elastica\Query\AbstractQuery;
 use Elastica\QueryBuilder\DSL;
 
 /**
- * elasticsearch filter DSL
+ * elasticsearch filter DSL.
  *
- * @package Elastica
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-filters.html
  */
 class Filter implements DSL
 {
     /**
-     * must return type for QueryBuilder usage
+     * must return type for QueryBuilder usage.
      *
      * @return string
      */
@@ -55,10 +54,12 @@ class Filter implements DSL
     }
 
     /**
-     * and filter
+     * and filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-and-filter.html
-     * @param  AbstractFilter[] $filters
+     *
+     * @param AbstractFilter[] $filters
+     *
      * @return BoolAnd
      */
     public function bool_and(array $filters)
@@ -70,9 +71,10 @@ class Filter implements DSL
     }
 
     /**
-     * bool filter
+     * bool filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-filter.html
+     *
      * @return \Elastica\Filter\Bool
      */
     public function bool()
@@ -81,10 +83,12 @@ class Filter implements DSL
     }
 
     /**
-     * exists filter
+     * exists filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-filter.html
-     * @param  string $field
+     *
+     * @param string $field
+     *
      * @return Exists
      */
     public function exists($field)
@@ -93,11 +97,13 @@ class Filter implements DSL
     }
 
     /**
-     * geo bounding box filter
+     * geo bounding box filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-filter.html
-     * @param  string         $field
-     * @param  array          $coordinates
+     *
+     * @param string $field
+     * @param array  $coordinates
+     *
      * @return GeoBoundingBox
      */
     public function geo_bounding_box($field, array $coordinates)
@@ -106,12 +112,14 @@ class Filter implements DSL
     }
 
     /**
-     * geo distance filter
+     * geo distance filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-filter.html
-     * @param  string       $key      Key
-     * @param  array|string $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
-     * @param  string       $distance Distance
+     *
+     * @param string       $key      Key
+     * @param array|string $location Location as array or geohash: array('lat' => 48.86, 'lon' => 2.35) OR 'drm3btev3e86'
+     * @param string       $distance Distance
+     *
      * @return GeoDistance
      */
     public function geo_distance($key, $location, $distance)
@@ -120,12 +128,14 @@ class Filter implements DSL
     }
 
     /**
-     * geo distance rangefilter
+     * geo distance rangefilter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-range-filter.html
-     * @param  string           $key
-     * @param  array|string     $location
-     * @param  array            $ranges
+     *
+     * @param string       $key
+     * @param array|string $location
+     * @param array        $ranges
+     *
      * @return GeoDistanceRange
      */
     public function geo_distance_range($key, $location, array $ranges = array())
@@ -134,11 +144,13 @@ class Filter implements DSL
     }
 
     /**
-     * geo polygon filter
+     * geo polygon filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-filter.html
-     * @param  string     $key    Key
-     * @param  array      $points Points making up polygon
+     *
+     * @param string $key    Key
+     * @param array  $points Points making up polygon
+     *
      * @return GeoPolygon
      */
     public function geo_polygon($key, array $points)
@@ -147,12 +159,14 @@ class Filter implements DSL
     }
 
     /**
-     * provided geo shape filter
+     * provided geo shape filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-filter.html#_provided_shape_definition
-     * @param  string           $path
-     * @param  array            $coordinates
-     * @param  string           $shapeType
+     *
+     * @param string $path
+     * @param array  $coordinates
+     * @param string $shapeType
+     *
      * @return GeoShapeProvided
      */
     public function geo_shape_provided($path, array $coordinates, $shapeType = GeoShapeProvided::TYPE_ENVELOPE)
@@ -161,14 +175,16 @@ class Filter implements DSL
     }
 
     /**
-     * pre indexed geo shape filter
+     * pre indexed geo shape filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-filter.html#_pre_indexed_shape
-     * @param  string             $path         The path/field of the shape searched
-     * @param  string             $indexedId    Id of the pre-indexed shape
-     * @param  string             $indexedType  Type of the pre-indexed shape
-     * @param  string             $indexedIndex Index of the pre-indexed shape
-     * @param  string             $indexedPath  Path of the pre-indexed shape
+     *
+     * @param string $path         The path/field of the shape searched
+     * @param string $indexedId    Id of the pre-indexed shape
+     * @param string $indexedType  Type of the pre-indexed shape
+     * @param string $indexedIndex Index of the pre-indexed shape
+     * @param string $indexedPath  Path of the pre-indexed shape
+     *
      * @return GeoShapePreIndexed
      */
     public function geo_shape_pre_indexed($path, $indexedId, $indexedType, $indexedIndex, $indexedPath)
@@ -177,13 +193,15 @@ class Filter implements DSL
     }
 
     /**
-     * geohash cell filter
+     * geohash cell filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geohash-cell-filter.html
-     * @param  string       $field     The field on which to filter
-     * @param  array|string $location  Location as coordinates array or geohash string ['lat' => 40.3, 'lon' => 45.2]
-     * @param  int|string   $precision length of geohash prefix or distance (3, or "50m")
-     * @param  bool         $neighbors If true, filters cells next to the given cell.
+     *
+     * @param string       $field     The field on which to filter
+     * @param array|string $location  Location as coordinates array or geohash string ['lat' => 40.3, 'lon' => 45.2]
+     * @param int|string   $precision length of geohash prefix or distance (3, or "50m")
+     * @param bool         $neighbors If true, filters cells next to the given cell.
+     *
      * @return GeohashCell
      */
     public function geohash_cell($field, $location, $precision = -1, $neighbors = false)
@@ -192,11 +210,13 @@ class Filter implements DSL
     }
 
     /**
-     * has child filter
+     * has child filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-filter.html
-     * @param  AbstractQuery|AbstractFilter $query
-     * @param  string                       $type
+     *
+     * @param AbstractQuery|AbstractFilter $query
+     * @param string                       $type
+     *
      * @return HasChild
      */
     public function has_child($query, $type)
@@ -205,11 +225,13 @@ class Filter implements DSL
     }
 
     /**
-     * has parent filter
+     * has parent filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-filter.html
-     * @param  AbstractQuery|AbstractFilter $query
-     * @param  string                       $type
+     *
+     * @param AbstractQuery|AbstractFilter $query
+     * @param string                       $type
+     *
      * @return HasParent
      */
     public function has_parent($query, $type)
@@ -218,11 +240,13 @@ class Filter implements DSL
     }
 
     /**
-     * ids filter
+     * ids filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-filter.html
-     * @param  string|\Elastica\Type $type
-     * @param  array                 $ids
+     *
+     * @param string|\Elastica\Type $type
+     * @param array                 $ids
+     *
      * @return Ids
      */
     public function ids($type, array $ids)
@@ -231,11 +255,13 @@ class Filter implements DSL
     }
 
     /**
-     * indices filter
+     * indices filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-indices-filter.html
-     * @param  AbstractFilter $filter  filter which will be applied to docs in the specified indices
-     * @param  string[]       $indices
+     *
+     * @param AbstractFilter $filter  filter which will be applied to docs in the specified indices
+     * @param string[]       $indices
+     *
      * @return Indices
      */
     public function indices(AbstractFilter $filter, array $indices)
@@ -244,10 +270,12 @@ class Filter implements DSL
     }
 
     /**
-     * limit filter
+     * limit filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-limit-filter.html
-     * @param  int   $limit Limit
+     *
+     * @param int $limit Limit
+     *
      * @return Limit
      */
     public function limit($limit)
@@ -256,9 +284,10 @@ class Filter implements DSL
     }
 
     /**
-     * match all filter
+     * match all filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-filter.html
+     *
      * @return MatchAll
      */
     public function match_all()
@@ -267,10 +296,12 @@ class Filter implements DSL
     }
 
     /**
-     * missing filter
+     * missing filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-missing-filter.html
-     * @param  string  $field
+     *
+     * @param string $field
+     *
      * @return Missing
      */
     public function missing($field)
@@ -279,9 +310,10 @@ class Filter implements DSL
     }
 
     /**
-     * nested filter
+     * nested filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-filter.html
+     *
      * @return Nested
      */
     public function nested()
@@ -290,10 +322,12 @@ class Filter implements DSL
     }
 
     /**
-     * not filter
+     * not filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-not-filter.html
-     * @param  AbstractFilter $filter
+     *
+     * @param AbstractFilter $filter
+     *
      * @return BoolNot
      */
     public function bool_not(AbstractFilter $filter)
@@ -302,9 +336,10 @@ class Filter implements DSL
     }
 
     /**
-     * numeric range filter
+     * numeric range filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-numeric-range-filter.html
+     *
      * @return NumericRange
      */
     public function numeric_range()
@@ -313,10 +348,12 @@ class Filter implements DSL
     }
 
     /**
-     * or filter
+     * or filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-or-filter.html
-     * @param  AbstractFilter[] $filters
+     *
+     * @param AbstractFilter[] $filters
+     *
      * @return BoolOr
      */
     public function bool_or($filters)
@@ -328,11 +365,13 @@ class Filter implements DSL
     }
 
     /**
-     * prefix filter
+     * prefix filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-filter.html
-     * @param  string $field
-     * @param  string $prefix
+     *
+     * @param string $field
+     * @param string $prefix
+     *
      * @return Prefix
      */
     public function prefix($field, $prefix)
@@ -341,10 +380,12 @@ class Filter implements DSL
     }
 
     /**
-     * query filter
+     * query filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-filter.html
-     * @param  AbstractQuery $query
+     *
+     * @param AbstractQuery $query
+     *
      * @return QueryFilter
      */
     public function query(AbstractQuery $query)
@@ -353,11 +394,13 @@ class Filter implements DSL
     }
 
     /**
-     * range filter
+     * range filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-filter.html
-     * @param  string $fieldName
-     * @param  array  $args
+     *
+     * @param string $fieldName
+     * @param array  $args
+     *
      * @return Range
      */
     public function range($fieldName, array $args)
@@ -366,11 +409,13 @@ class Filter implements DSL
     }
 
     /**
-     * regexp filter
+     * regexp filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-filter.html
-     * @param  string $field
-     * @param  string $regexp
+     *
+     * @param string $field
+     * @param string $regexp
+     *
      * @return Regexp
      */
     public function regexp($field, $regexp)
@@ -379,10 +424,12 @@ class Filter implements DSL
     }
 
     /**
-     * script filter
+     * script filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-filter.html
-     * @param  array|string|\Elastica\Script $script
+     *
+     * @param array|string|\Elastica\Script $script
+     *
      * @return Script
      */
     public function script($script)
@@ -391,10 +438,12 @@ class Filter implements DSL
     }
 
     /**
-     * term filter
+     * term filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-filter.html
-     * @param  array $term
+     *
+     * @param array $term
+     *
      * @return Term
      */
     public function term(array $term = array())
@@ -403,11 +452,13 @@ class Filter implements DSL
     }
 
     /**
-     * terms filter
+     * terms filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-filter.html
-     * @param  string $field
-     * @param  array  $terms
+     *
+     * @param string $field
+     * @param array  $terms
+     *
      * @return Terms
      */
     public function terms($field, array $terms)
@@ -416,10 +467,12 @@ class Filter implements DSL
     }
 
     /**
-     * type filter
+     * type filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-filter.html
-     * @param  string $type
+     *
+     * @param string $type
+     *
      * @return Type
      */
     public function type($type)

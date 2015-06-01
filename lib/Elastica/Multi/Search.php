@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Multi;
 
 use Elastica\Client;
@@ -8,11 +7,10 @@ use Elastica\Request;
 use Elastica\Search as BaseSearch;
 
 /**
- * Elastica multi search
+ * Elastica multi search.
  *
- * @category Xodoa
- * @package Elastica
  * @author munkie
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html
  */
 class Search
@@ -33,7 +31,7 @@ class Search
     protected $_client;
 
     /**
-     * Constructs search object
+     * Constructs search object.
      *
      * @param \Elastica\Client $client Client object
      */
@@ -51,7 +49,8 @@ class Search
     }
 
     /**
-     * @param  \Elastica\Client $client
+     * @param \Elastica\Client $client
+     *
      * @return $this
      */
     public function setClient(Client $client)
@@ -72,8 +71,9 @@ class Search
     }
 
     /**
-     * @param  \Elastica\Search $search
-     * @param  string           $key    Optional key
+     * @param \Elastica\Search $search
+     * @param string           $key    Optional key
+     *
      * @return $this
      */
     public function addSearch(BaseSearch $search, $key = null)
@@ -81,14 +81,15 @@ class Search
         if ($key) {
             $this->_searches[$key] = $search;
         } else {
-            $this->_searches[]     = $search;
+            $this->_searches[] = $search;
         }
 
         return $this;
     }
 
     /**
-     * @param  array|\Elastica\Search[] $searches
+     * @param array|\Elastica\Search[] $searches
+     *
      * @return $this
      */
     public function addSearches(array $searches)
@@ -101,7 +102,8 @@ class Search
     }
 
     /**
-     * @param  array|\Elastica\Search[] $searches
+     * @param array|\Elastica\Search[] $searches
+     *
      * @return $this
      */
     public function setSearches(array $searches)
@@ -121,7 +123,8 @@ class Search
     }
 
     /**
-     * @param  string $searchType
+     * @param string $searchType
+     *
      * @return $this
      */
     public function setSearchType($searchType)
@@ -162,7 +165,8 @@ class Search
     }
 
     /**
-     * @param  \Elastica\Search $search
+     * @param \Elastica\Search $search
+     *
      * @return string
      */
     protected function _getSearchData(BaseSearch $search)
@@ -178,7 +182,8 @@ class Search
     }
 
     /**
-     * @param  \Elastica\Search $search
+     * @param \Elastica\Search $search
+     *
      * @return array
      */
     protected function _getSearchDataHeader(BaseSearch $search)

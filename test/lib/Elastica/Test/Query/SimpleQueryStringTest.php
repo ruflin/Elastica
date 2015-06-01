@@ -1,9 +1,7 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Index;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Test\Base;
 
@@ -14,18 +12,18 @@ class SimpleQueryStringTest extends Base
      */
     public function testToArray()
     {
-        $string = "this is a test";
+        $string = 'this is a test';
         $fields = array('field1', 'field2');
         $query = new SimpleQueryString($string, $fields);
         $query->setDefaultOperator(SimpleQueryString::OPERATOR_OR);
-        $query->setAnalyzer("whitespace");
+        $query->setAnalyzer('whitespace');
 
         $expected = array(
-            "simple_query_string" => array(
-                "query" => $string,
-                "fields" => $fields,
-                "analyzer" => "whitespace",
-                "default_operator" => SimpleQueryString::OPERATOR_OR,
+            'simple_query_string' => array(
+                'query' => $string,
+                'fields' => $fields,
+                'analyzer' => 'whitespace',
+                'default_operator' => SimpleQueryString::OPERATOR_OR,
             ),
         );
 
@@ -45,15 +43,15 @@ class SimpleQueryStringTest extends Base
             new Document(4, array('make' => 'Gibson', 'model' => 'SG Faded')),
             new Document(5, array('make' => 'Fender', 'model' => 'Stratocaster')),
         );
-        $index->getType("guitars")->addDocuments($docs);
+        $index->getType('guitars')->addDocuments($docs);
         $index->refresh();
 
-        $query = new SimpleQueryString("gibson +sg +-faded", array("make", "model"));
+        $query = new SimpleQueryString('gibson +sg +-faded', array('make', 'model'));
         $results = $index->search($query);
 
         $this->assertEquals(2, $results->getTotalHits());
 
-        $query->setFields(array("model"));
+        $query->setFields(array('model'));
         $results = $index->search($query);
 
         // We should not get any hits, since the "make" field was not included in the query.

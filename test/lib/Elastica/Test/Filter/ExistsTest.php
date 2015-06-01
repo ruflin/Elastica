@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Filter;
 
 use Elastica\Filter\Exists;

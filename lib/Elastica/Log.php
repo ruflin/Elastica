@@ -1,34 +1,31 @@
 <?php
-
 namespace Elastica;
 
 use Psr\Log\AbstractLogger;
 
 /**
- * Elastica log object
+ * Elastica log object.
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Log extends AbstractLogger
 {
     /**
-     * Log path or true if enabled
+     * Log path or true if enabled.
      *
      * @var string|bool
      */
     protected $_log = true;
 
     /**
-     * Last logged message
+     * Last logged message.
      *
      * @var string Last logged message
      */
     protected $_lastMessage = '';
 
     /**
-     * Inits log object
+     * Inits log object.
      *
      * @param string|bool String to set a specific file for logging
      */
@@ -38,11 +35,12 @@ class Log extends AbstractLogger
     }
 
     /**
-     * Log a message
+     * Log a message.
      *
-     * @param  mixed     $level
-     * @param  string    $message
-     * @param  array     $context
+     * @param mixed  $level
+     * @param string $message
+     * @param array  $context
+     *
      * @return null|void
      */
     public function log($level, $message, array $context = array())
@@ -58,9 +56,10 @@ class Log extends AbstractLogger
     }
 
     /**
-     * Enable/disable log or set log path
+     * Enable/disable log or set log path.
      *
-     * @param  bool|string $log Enables log or sets log path
+     * @param bool|string $log Enables log or sets log path
+     *
      * @return $this
      */
     public function setLog($log)
@@ -71,7 +70,7 @@ class Log extends AbstractLogger
     }
 
     /**
-     * Return last logged message
+     * Return last logged message.
      *
      * @return string Last logged message
      */

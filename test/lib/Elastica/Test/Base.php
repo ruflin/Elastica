@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test;
 
 use Elastica\Client;
@@ -9,8 +8,9 @@ use Elastica\Index;
 class Base extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @param array $params Additional configuration params. Host and Port are already set
+     * @param array    $params   Additional configuration params. Host and Port are already set
      * @param callback $callback
+     *
      * @return Client
      */
     protected function _getClient(array $params = array(), $callback = null)
@@ -47,7 +47,8 @@ class Base extends \PHPUnit_Framework_TestCase
     protected function _getProxyUrl()
     {
         $proxyHost = getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
-        return 'http://' . $proxyHost . ':12345';
+
+        return 'http://'.$proxyHost.':12345';
     }
 
     /**
@@ -56,13 +57,15 @@ class Base extends \PHPUnit_Framework_TestCase
     protected function _getProxyUrl403()
     {
         $proxyHost = getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
-        return 'http://' . $proxyHost . ':12346';
+
+        return 'http://'.$proxyHost.':12346';
     }
 
     /**
-     * @param  string          $name   Index name
-     * @param  bool            $delete Delete index if it exists
-     * @param  int             $shards Number of shards to create
+     * @param string $name   Index name
+     * @param bool   $delete Delete index if it exists
+     * @param int    $shards Number of shards to create
+     *
      * @return \Elastica\Index
      */
     protected function _createIndex($name = null, $delete = true, $shards = 1)
@@ -138,11 +141,11 @@ class Base extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Skips test if debugging is not enabled or not set
+     * Skips test if debugging is not enabled or not set.
      */
-    protected static function _checkDebug() {
-
-        if (! \Elastica\Util::debugEnabled()) {
+    protected static function _checkDebug()
+    {
+        if (!\Elastica\Util::debugEnabled()) {
             self::markTestSkipped('The DEBUG constant must be set to true for this test to run');
         }
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Sum;
@@ -30,14 +29,14 @@ class ScriptTest extends BaseAggregationTest
      */
     public function testAggregationScript()
     {
-        $agg = new Sum("sum");
+        $agg = new Sum('sum');
         // x = (0..1) is groovy-specific syntax, to see if lang is recognized
-        $script = new Script("x = (0..1); return doc['price'].value", null, "groovy");
+        $script = new Script("x = (0..1); return doc['price'].value", null, 'groovy');
         $agg->setScript($script);
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("sum");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('sum');
 
         $this->assertEquals(5 + 8 + 1 + 3, $results['value']);
     }
@@ -47,12 +46,12 @@ class ScriptTest extends BaseAggregationTest
      */
     public function testAggregationScriptAsString()
     {
-        $agg = new Sum("sum");
+        $agg = new Sum('sum');
         $agg->setScript("doc['price'].value");
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("sum");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('sum');
 
         $this->assertEquals(5 + 8 + 1 + 3, $results['value']);
     }
@@ -62,13 +61,13 @@ class ScriptTest extends BaseAggregationTest
      */
     public function testSetScript()
     {
-        $aggregation = "sum";
+        $aggregation = 'sum';
         $string = "doc['price'].value";
         $params = array(
             'param1' => 'one',
             'param2' => 1,
         );
-        $lang = "groovy";
+        $lang = 'groovy';
 
         $agg = new Sum($aggregation);
         $script = new Script($string, $params, $lang);

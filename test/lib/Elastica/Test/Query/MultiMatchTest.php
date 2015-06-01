@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -182,11 +181,11 @@ class MultiMatchTest extends BaseTest
             'analysis' => array(
                 'analyzer' => array(
                     'noStops' => array(
-                        'type'      => 'standard',
+                        'type' => 'standard',
                         'stopwords' => '_none_',
                     ),
                     'stops' => array(
-                        'type'      => 'standard',
+                        'type' => 'standard',
                         'stopwords' => array('not'),
                     ),
                 ),
@@ -196,7 +195,7 @@ class MultiMatchTest extends BaseTest
         $type = $index->getType('test');
 
         $mapping = new Mapping($type, array(
-            'name'      => array('type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'),
+            'name' => array('type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'),
             'last_name' => array('type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'),
             'full_name' => array('type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'),
         ));

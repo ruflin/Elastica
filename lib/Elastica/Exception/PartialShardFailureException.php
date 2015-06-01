@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Exception;
 
 use Elastica\JSON;
@@ -7,16 +6,14 @@ use Elastica\Request;
 use Elastica\Response;
 
 /**
- * Partial shard failure exception
+ * Partial shard failure exception.
  *
- * @category Xodoa
- * @package Elastica
  * @author Ian Babrou <ibobrik@gmail.com>
  */
 class PartialShardFailureException extends ResponseException
 {
     /**
-     * Construct Exception
+     * Construct Exception.
      *
      * @param \Elastica\Request  $request
      * @param \Elastica\Response $response

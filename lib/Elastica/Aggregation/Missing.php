@@ -1,10 +1,9 @@
 <?php
-
 namespace Elastica\Aggregation;
 
 /**
- * Class Missing
- * @package Elastica\Aggregation
+ * Class Missing.
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-missing-aggregation.html
  */
 class Missing extends AbstractAggregation
@@ -20,8 +19,10 @@ class Missing extends AbstractAggregation
     }
 
     /**
-     * Set the field for this aggregation
-     * @param  string $field the name of the document field on which to perform this aggregation
+     * Set the field for this aggregation.
+     *
+     * @param string $field the name of the document field on which to perform this aggregation
+     *
      * @return $this
      */
     public function setField($field)

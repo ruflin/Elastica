@@ -1,23 +1,23 @@
 <?php
-
 namespace Elastica\Aggregation;
 
 use Elastica\Filter\AbstractFilter;
 
 /**
- * Class Filters
- * @package Elastica\Aggregation
+ * Class Filters.
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html
  */
 class Filters extends AbstractAggregation
 {
     /**
-     * Add a filter
+     * Add a filter.
      *
      * If a name is given, it will be added as a key, otherwise considered as an anonymous filter
      *
-     * @param  AbstractFilter $filter
-     * @param  string         $name
+     * @param AbstractFilter $filter
+     * @param string         $name
+     *
      * @return $this
      */
     public function addFilter(AbstractFilter $filter, $name = '')
@@ -36,7 +36,7 @@ class Filters extends AbstractAggregation
      */
     public function toArray()
     {
-        $array   = array();
+        $array = array();
         $filters = $this->getParam('filters');
 
         foreach ($filters as $filter) {

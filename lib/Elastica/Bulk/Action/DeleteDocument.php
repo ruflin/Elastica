@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Bulk\Action;
 
 use Elastica\AbstractUpdateAction;
@@ -12,7 +11,8 @@ class DeleteDocument extends AbstractDocument
     protected $_opType = self::OP_TYPE_DELETE;
 
     /**
-     * @param  \Elastica\AbstractUpdateAction $action
+     * @param \Elastica\AbstractUpdateAction $action
+     *
      * @return array
      */
     protected function _getMetadata(AbstractUpdateAction $action)

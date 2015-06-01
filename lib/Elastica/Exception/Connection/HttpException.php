@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Exception\Connection;
 
 use Elastica\Exception\ConnectionException;
@@ -7,23 +6,21 @@ use Elastica\Request;
 use Elastica\Response;
 
 /**
- * Connection exception
+ * Connection exception.
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class HttpException extends ConnectionException
 {
     /**
-     * Error code / message
+     * Error code / message.
      *
      * @var string Error code / message
      */
     protected $_error = 0;
 
     /**
-     * Construct Exception
+     * Construct Exception.
      *
      * @param string             $error    Error
      * @param \Elastica\Request  $request
@@ -39,22 +36,23 @@ class HttpException extends ConnectionException
 
     /**
      * Returns the error message corresponding to the error code
-     * cUrl error code reference can be found here {@link http://curl.haxx.se/libcurl/c/libcurl-errors.html}
+     * cUrl error code reference can be found here {@link http://curl.haxx.se/libcurl/c/libcurl-errors.html}.
      *
-     * @param  string $error Error code
+     * @param string $error Error code
+     *
      * @return string Error message
      */
     public function getErrorMessage($error)
     {
         switch ($error) {
             case CURLE_UNSUPPORTED_PROTOCOL:
-                $error = "Unsupported protocol";
+                $error = 'Unsupported protocol';
                 break;
             case CURLE_FAILED_INIT:
-                $error = "Internal cUrl error?";
+                $error = 'Internal cUrl error?';
                 break;
             case CURLE_URL_MALFORMAT:
-                $error = "Malformed URL";
+                $error = 'Malformed URL';
                 break;
             case CURLE_COULDNT_RESOLVE_PROXY:
                 $error = "Couldn't resolve proxy";
@@ -66,10 +64,10 @@ class HttpException extends ConnectionException
                 $error = "Couldn't connect to host, Elasticsearch down?";
                 break;
             case 28:
-                $error = "Operation timed out";
+                $error = 'Operation timed out';
                 break;
             default:
-                $error = "Unknown error:".$error;
+                $error = 'Unknown error:'.$error;
                 break;
         }
 
@@ -77,7 +75,7 @@ class HttpException extends ConnectionException
     }
 
     /**
-     * Return Error code / message
+     * Return Error code / message.
      *
      * @return string Error code / message
      */

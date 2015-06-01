@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file based on the
 - Guzzle Http dependency updated to 5.3.*
 - Remove NO_DEV builds from travis build matrix to speed up building. All builds include no dev packages.
 - Introduction of benchmark test group to make it easy to run benchmark tests.
+- Make the docker images directly [available](https://hub.docker.com/u/ruflin/) on the docker registry. This speeds up fetching of the images and automates the build of the images.
 
 ### Backward Compatibility Breaks
 - `Elastica\ScanAndScroll::$_lastScrollId` removed: `key()` now always returns the next scroll id [#842](https://github.com/ruflin/Elastica/issues/842/)

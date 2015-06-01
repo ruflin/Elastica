@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\ValueCount;
@@ -30,11 +29,11 @@ class ValueCountTest extends BaseAggregationTest
      */
     public function testValueCountAggregation()
     {
-        $agg = new ValueCount("count", "price");
+        $agg = new ValueCount('count', 'price');
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("count");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('count');
 
         $this->assertEquals(5, $results['value']);
     }

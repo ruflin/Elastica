@@ -1,12 +1,9 @@
 <?php
-
 namespace Elastica\Exception;
 
 /**
- * Elasticsearch exception
+ * Elasticsearch exception.
  *
- * @category Xodoa
- * @package Elastica
  * @author Ian Babrou <ibobrik@gmail.com>
  */
 class ElasticsearchException extends \Exception implements ExceptionInterface
@@ -24,7 +21,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     private $_isRemote = false;
 
     /**
-     * Constructs elasticsearch exception
+     * Constructs elasticsearch exception.
      *
      * @param int    $code  Error code
      * @param string $error Error message from elasticsearch
@@ -36,7 +33,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     }
 
     /**
-     * Parse error message from elasticsearch
+     * Parse error message from elasticsearch.
      *
      * @param string $error Error message
      */
@@ -57,9 +54,10 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     }
 
     /**
-     * Extract exception name from error response
+     * Extract exception name from error response.
      *
-     * @param  string      $error
+     * @param string $error
+     *
      * @return null|string
      */
     protected function _extractException($error)
@@ -72,7 +70,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     }
 
     /**
-     * Returns elasticsearch exception name
+     * Returns elasticsearch exception name.
      *
      * @return string|null
      */
@@ -82,7 +80,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     }
 
     /**
-     * Returns whether exception was local to server node or remote
+     * Returns whether exception was local to server node or remote.
      *
      * @return bool
      */

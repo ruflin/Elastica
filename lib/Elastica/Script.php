@@ -1,21 +1,19 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
 
 /**
- * Script objects, containing script internals
+ * Script objects, containing script internals.
  *
- * @category Xodoa
- * @package Elastica
  * @author avasilenko <aa.vasilenko@gmail.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html
  */
 class Script extends AbstractUpdateAction
 {
-    const LANG_MVEL   = 'mvel';
-    const LANG_JS     = 'js';
+    const LANG_MVEL = 'mvel';
+    const LANG_JS = 'js';
     const LANG_GROOVY = 'groovy';
     const LANG_PYTHON = 'python';
     const LANG_NATIVE = 'native';
@@ -53,7 +51,8 @@ class Script extends AbstractUpdateAction
     }
 
     /**
-     * @param  string $lang
+     * @param string $lang
+     *
      * @return $this
      */
     public function setLang($lang)
@@ -72,7 +71,8 @@ class Script extends AbstractUpdateAction
     }
 
     /**
-     * @param  string $script
+     * @param string $script
+     *
      * @return $this
      */
     public function setScript($script)
@@ -91,9 +91,10 @@ class Script extends AbstractUpdateAction
     }
 
     /**
+     * @param string|array|\Elastica\Script $data
+     *
      * @throws \Elastica\Exception\InvalidException
      *
-     * @param  string|array|\Elastica\Script $data
      * @return self
      */
     public static function create($data)
@@ -112,9 +113,10 @@ class Script extends AbstractUpdateAction
     }
 
     /**
+     * @param array $data
+     *
      * @throws \Elastica\Exception\InvalidException
      *
-     * @param  array $data
      * @return self
      */
     protected static function _createFromArray(array $data)

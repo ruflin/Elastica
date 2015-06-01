@@ -1,20 +1,20 @@
 <?php
-
 namespace Elastica\Connection\Strategy;
 
 use Elastica\Exception\InvalidException;
 
 /**
- * Description of StrategyFactory
+ * Description of StrategyFactory.
  *
  * @author chabior
  */
 class StrategyFactory
 {
     /**
+     * @param mixed|Closure|String|StrategyInterface $strategyName
+     *
      * @throws \Elastica\Exception\InvalidException
      *
-     * @param  mixed|Closure|String|StrategyInterface          $strategyName
      * @return \Elastica\Connection\Strategy\StrategyInterface
      */
     public static function create($strategyName)

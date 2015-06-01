@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Rescore;
 
 use Elastica\Param;
@@ -7,15 +6,14 @@ use Elastica\Param;
 /**
  * Abstract rescore object. Should be extended by all rescorers.
  *
- * @category Xodoa
- * @package Elastica
  * @author Jason Hu <mjhu91@gmail.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html
  */
 abstract class AbstractRescore extends Param
 {
     /**
-     * Overridden to return rescore as name
+     * Overridden to return rescore as name.
      *
      * @return string name
      */
@@ -25,9 +23,10 @@ abstract class AbstractRescore extends Param
     }
 
     /**
-     * Sets window_size
+     * Sets window_size.
      *
-     * @param  int   $size
+     * @param int $size
+     *
      * @return $this
      */
     public function setWindowSize($size)

@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Sum;
@@ -29,12 +28,12 @@ class SumTest extends BaseAggregationTest
      */
     public function testSumAggregation()
     {
-        $agg = new Sum("sum");
-        $agg->setField("price");
+        $agg = new Sum('sum');
+        $agg->setField('price');
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("sum");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('sum');
 
         $this->assertEquals(5 + 8 + 1 + 3, $results['value']);
     }

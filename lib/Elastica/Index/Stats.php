@@ -1,43 +1,41 @@
 <?php
-
 namespace Elastica\Index;
 
 use Elastica\Index as BaseIndex;
 use Elastica\Request;
 
 /**
- * Elastica index stats object
+ * Elastica index stats object.
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-stats.html
  */
 class Stats
 {
     /**
-     * Response
+     * Response.
      *
      * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
     /**
-     * Stats info
+     * Stats info.
      *
      * @var array Stats info
      */
     protected $_data = array();
 
     /**
-     * Index
+     * Index.
      *
      * @var \Elastica\Index Index object
      */
     protected $_index = null;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param \Elastica\Index $index Index object
      */
@@ -48,7 +46,7 @@ class Stats
     }
 
     /**
-     * Returns the raw stats info
+     * Returns the raw stats info.
      *
      * @return array Stats info
      */
@@ -79,7 +77,7 @@ class Stats
     }
 
     /**
-     * Returns the index object
+     * Returns the index object.
      *
      * @return \Elastica\Index Index object
      */
@@ -89,7 +87,7 @@ class Stats
     }
 
     /**
-     * Returns response object
+     * Returns response object.
      *
      * @return \Elastica\Response Response object
      */
@@ -99,7 +97,7 @@ class Stats
     }
 
     /**
-     * Reloads all status data of this object
+     * Reloads all status data of this object.
      */
     public function refresh()
     {

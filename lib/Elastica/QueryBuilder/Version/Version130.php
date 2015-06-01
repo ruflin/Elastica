@@ -1,14 +1,13 @@
 <?php
-
 namespace Elastica\QueryBuilder\Version;
 
 use Elastica\QueryBuilder\Version;
 
 /**
- * elasticsearch 1.3 DSL
+ * elasticsearch 1.3 DSL.
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/1.3/index.html
- * @package Elastica
+ *
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  */
 class Version130 extends Version

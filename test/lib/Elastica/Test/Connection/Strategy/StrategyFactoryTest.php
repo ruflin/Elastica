@@ -1,12 +1,11 @@
 <?php
-
 namespace Elastica\Test\Connection\Strategy;
 
 use Elastica\Connection\Strategy\StrategyFactory;
 use Elastica\Test\Base;
 
 /**
- * Description of StrategyFactoryTest
+ * Description of StrategyFactoryTest.
  *
  * @author chabior
  */

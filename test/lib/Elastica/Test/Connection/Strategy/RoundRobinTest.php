@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test\Connection\Strategy;
 
-use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Connection\Strategy\RoundRobin;
 use Elastica\Exception\ConnectionException;
@@ -10,13 +8,12 @@ use Elastica\Response;
 use Elastica\Test\Base;
 
 /**
- * Description of RoundRobinTest
+ * Description of RoundRobinTest.
  *
  * @author chabior
  */
 class RoundRobinTest extends Base
 {
-
     /**
      * @var int Number of seconds to wait before timeout is called. Is set low for tests to have fast tests.
      */

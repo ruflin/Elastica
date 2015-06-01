@@ -1,28 +1,27 @@
 <?php
-
 namespace Elastica\Filter;
 
 use Elastica\Exception\InvalidException;
 use Elastica\Query\AbstractQuery;
 
 /**
- * Query filter
+ * Query filter.
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-filter.html
  */
 class Query extends AbstractFilter
 {
     /**
-     * Query
+     * Query.
+     *
      * @var array
      */
     protected $_query;
 
     /**
-     * Construct query filter
+     * Construct query filter.
      *
      * @param array|\Elastica\Query\AbstractQuery $query
      */
@@ -34,16 +33,17 @@ class Query extends AbstractFilter
     }
 
     /**
-     * Set query
+     * Set query.
+     *
+     * @param array|\Elastica\Query\AbstractQuery $query
      *
      * @throws \Elastica\Exception\InvalidException If parameter is invalid
      *
-     * @param  array|\Elastica\Query\AbstractQuery $query
      * @return $this
      */
     public function setQuery($query)
     {
-        if (!$query instanceof AbstractQuery && ! is_array($query)) {
+        if (!$query instanceof AbstractQuery && !is_array($query)) {
             throw new InvalidException('expected an array or instance of Elastica\Query\AbstractQuery');
         }
 

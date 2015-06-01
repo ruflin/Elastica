@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test;
 
 use Elastica\Document;
@@ -12,7 +11,7 @@ use Elastica\Test\Base as BaseTest;
 class ScanAndScrollTest extends BaseTest
 {
     /**
-     * Full foreach test
+     * Full foreach test.
      *
      * @gropu functional
      */
@@ -34,7 +33,7 @@ class ScanAndScrollTest extends BaseTest
     }
 
     /**
-     * query size revert options
+     * query size revert options.
      *
      * @group functional
      */
@@ -53,7 +52,7 @@ class ScanAndScrollTest extends BaseTest
     }
 
     /**
-     * index: 12 docs, 2 shards
+     * index: 12 docs, 2 shards.
      *
      * @return Search
      */

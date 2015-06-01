@@ -1,19 +1,18 @@
 <?php
-
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
 
 /**
- * Class GeoDistance
- * @package Elastica\Aggregation
+ * Class GeoDistance.
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html
  */
 class GeoDistance extends AbstractAggregation
 {
-    const DISTANCE_TYPE_SLOPPY_ARC = "sloppy_arc";
-    const DISTANCE_TYPE_ARC = "arc";
-    const DISTANCE_TYPE_PLANE = "plane";
+    const DISTANCE_TYPE_SLOPPY_ARC = 'sloppy_arc';
+    const DISTANCE_TYPE_ARC = 'arc';
+    const DISTANCE_TYPE_PLANE = 'plane';
 
     /**
      * @param string       $name   the name if this aggregation
@@ -27,8 +26,10 @@ class GeoDistance extends AbstractAggregation
     }
 
     /**
-     * Set the field for this aggregation
-     * @param  string $field the name of the document field on which to perform this aggregation
+     * Set the field for this aggregation.
+     *
+     * @param string $field the name of the document field on which to perform this aggregation
+     *
      * @return $this
      */
     public function setField($field)
@@ -37,27 +38,31 @@ class GeoDistance extends AbstractAggregation
     }
 
     /**
-     * Set the origin point from which distances will be calculated
-     * @param  string|array $origin valid formats are array("lat" => 52.3760, "lon" => 4.894), "52.3760, 4.894", and array(4.894, 52.3760)
+     * Set the origin point from which distances will be calculated.
+     *
+     * @param string|array $origin valid formats are array("lat" => 52.3760, "lon" => 4.894), "52.3760, 4.894", and array(4.894, 52.3760)
+     *
      * @return $this
      */
     public function setOrigin($origin)
     {
-        return $this->setParam("origin", $origin);
+        return $this->setParam('origin', $origin);
     }
 
     /**
-     * Add a distance range to this aggregation
+     * Add a distance range to this aggregation.
+     *
+     * @param int $fromValue a distance
+     * @param int $toValue   a distance
+     *
      * @throws \Elastica\Exception\InvalidException
      *
-     * @param  int   $fromValue a distance
-     * @param  int   $toValue   a distance
      * @return $this
      */
     public function addRange($fromValue = null, $toValue = null)
     {
         if (is_null($fromValue) && is_null($toValue)) {
-            throw new InvalidException("Either fromValue or toValue must be set. Both cannot be null.");
+            throw new InvalidException('Either fromValue or toValue must be set. Both cannot be null.');
         }
 
         $range = array();
@@ -70,26 +75,30 @@ class GeoDistance extends AbstractAggregation
             $range['to'] = $toValue;
         }
 
-        return $this->addParam("ranges", $range);
+        return $this->addParam('ranges', $range);
     }
 
     /**
-     * Set the unit of distance measure for  this aggregation
-     * @param  string $unit defaults to km
+     * Set the unit of distance measure for  this aggregation.
+     *
+     * @param string $unit defaults to km
+     *
      * @return $this
      */
     public function setUnit($unit)
     {
-        return $this->setParam("unit", $unit);
+        return $this->setParam('unit', $unit);
     }
 
     /**
-     * Set the method by which distances will be calculated
-     * @param  string $distanceType see DISTANCE_TYPE_* constants for options. Defaults to sloppy_arc.
+     * Set the method by which distances will be calculated.
+     *
+     * @param string $distanceType see DISTANCE_TYPE_* constants for options. Defaults to sloppy_arc.
+     *
      * @return $this
      */
     public function setDistanceType($distanceType)
     {
-        return $this->setParam("distance_type", $distanceType);
+        return $this->setParam('distance_type', $distanceType);
     }
 }

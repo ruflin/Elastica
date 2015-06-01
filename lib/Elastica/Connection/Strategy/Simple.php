@@ -1,20 +1,20 @@
 <?php
-
 namespace Elastica\Connection\Strategy;
 
 use Elastica\Exception\ClientException;
 
 /**
- * Description of SimpleStrategy
+ * Description of SimpleStrategy.
  *
  * @author chabior
  */
 class Simple implements StrategyInterface
 {
     /**
+     * @param array|\Elastica\Connection[] $connections
+     *
      * @throws \Elastica\Exception\ClientException
      *
-     * @param  array|\Elastica\Connection[] $connections
      * @return \Elastica\Connection
      */
     public function getConnection($connections)

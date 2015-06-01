@@ -1,11 +1,10 @@
 <?php
-
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
 use Elastica\Filter\Terms;
-use Elastica\Test\Base as BaseTest;
 use Elastica\Query;
+use Elastica\Test\Base as BaseTest;
 
 class TermsTest extends BaseTest
 {

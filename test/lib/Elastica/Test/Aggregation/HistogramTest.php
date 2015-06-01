@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Histogram;
@@ -12,15 +11,15 @@ class HistogramTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType("test")->addDocuments(array(
-            new Document(1, array("price" => 5, "color" => "blue")),
-            new Document(2, array("price" => 8, "color" => "blue")),
-            new Document(3, array("price" => 1, "color" => "red")),
-            new Document(4, array("price" => 30, "color" => "green")),
-            new Document(5, array("price" => 40, "color" => "red")),
-            new Document(6, array("price" => 35, "color" => "green")),
-            new Document(7, array("price" => 42, "color" => "red")),
-            new Document(8, array("price" => 41, "color" => "blue")),
+        $index->getType('test')->addDocuments(array(
+            new Document(1, array('price' => 5, 'color' => 'blue')),
+            new Document(2, array('price' => 8, 'color' => 'blue')),
+            new Document(3, array('price' => 1, 'color' => 'red')),
+            new Document(4, array('price' => 30, 'color' => 'green')),
+            new Document(5, array('price' => 40, 'color' => 'red')),
+            new Document(6, array('price' => 35, 'color' => 'green')),
+            new Document(7, array('price' => 42, 'color' => 'red')),
+            new Document(8, array('price' => 41, 'color' => 'blue')),
         ));
 
         $index->refresh();
@@ -33,12 +32,12 @@ class HistogramTest extends BaseAggregationTest
      */
     public function testHistogramAggregation()
     {
-        $agg = new Histogram("hist", "price", 10);
+        $agg = new Histogram('hist', 'price', 10);
         $agg->setMinimumDocumentCount(0); // should return empty buckets
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("hist");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
 
         $buckets = $results['buckets'];
         $this->assertEquals(5, sizeof($buckets));

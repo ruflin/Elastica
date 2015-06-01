@@ -1,6 +1,4 @@
 <?php
-
-
 namespace Elastica\Test\Filter;
 
 use Elastica\Filter\AbstractGeoShape;
@@ -40,8 +38,8 @@ class GeoShapePreIndexedTest extends BaseTest
         // add type docs
         $type->addDocument(new \Elastica\Document('1', array(
             'location' => array(
-                "type"          => "envelope",
-                "coordinates"   => array(
+                'type' => 'envelope',
+                'coordinates' => array(
                     array(0.0, 50.0),
                     array(50.0, 0.0),
                 ),
@@ -51,8 +49,8 @@ class GeoShapePreIndexedTest extends BaseTest
         // add other type docs
         $otherType->addDocument(new \Elastica\Document('2', array(
             'location' => array(
-                "type"          => "envelope",
-                "coordinates"   => array(
+                'type' => 'envelope',
+                'coordinates' => array(
                     array(25.0, 75.0),
                     array(75.0, 25.0),
                 ),

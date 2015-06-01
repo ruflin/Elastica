@@ -1,18 +1,15 @@
 <?php
-
 namespace Elastica\Filter;
 
 /**
- * Returns child documents having parent docs matching the query
+ * Returns child documents having parent docs matching the query.
  *
- * @category Xodoa
- * @package Elastica
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-filter.html
  */
 class HasParent extends AbstractFilter
 {
     /**
-     * Construct HasParent filter
+     * Construct HasParent filter.
      *
      * @param string|\Elastica\Query|\Elastica\Filter\AbstractFilter $query Query string or a Query object or a filter
      * @param string|\Elastica\Type                                  $type  Parent document type
@@ -28,9 +25,10 @@ class HasParent extends AbstractFilter
     }
 
     /**
-     * Sets query object
+     * Sets query object.
      *
-     * @param  string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     *
      * @return $this
      */
     public function setQuery($query)
@@ -42,9 +40,10 @@ class HasParent extends AbstractFilter
     }
 
     /**
-     * Sets filter object
+     * Sets filter object.
      *
-     * @param  \Elastica\Filter\AbstractFilter $filter
+     * @param \Elastica\Filter\AbstractFilter $filter
+     *
      * @return $this
      */
     public function setFilter($filter)
@@ -53,9 +52,10 @@ class HasParent extends AbstractFilter
     }
 
     /**
-     * Set type of the parent document
+     * Set type of the parent document.
      *
-     * @param  string|\Elastica\Type $type Parent document type
+     * @param string|\Elastica\Type $type Parent document type
+     *
      * @return $this
      */
     public function setType($type)

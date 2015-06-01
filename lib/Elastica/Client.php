@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Bulk\Action;
@@ -9,16 +8,14 @@ use Elastica\Exception\RuntimeException;
 use Psr\Log\LoggerInterface;
 
 /**
- * Client to connect the the elasticsearch server
+ * Client to connect the the elasticsearch server.
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
 class Client
 {
     /**
-     * Config with defaults
+     * Config with defaults.
      *
      * log: Set to true, to enable logging, set a string to log to a specific file
      * retryOnConflict: Use in \Elastica\Client::updateDocument
@@ -26,17 +23,17 @@ class Client
      * @var array
      */
     protected $_config = array(
-        'host'            => null,
-        'port'            => null,
-        'path'            => null,
-        'url'             => null,
-        'proxy'           => null,
-        'transport'       => null,
-        'persistent'      => true,
-        'timeout'         => null,
-        'connections'     => array(), // host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers, url)
-        'roundRobin'      => false,
-        'log'             => false,
+        'host' => null,
+        'port' => null,
+        'path' => null,
+        'url' => null,
+        'proxy' => null,
+        'transport' => null,
+        'persistent' => true,
+        'timeout' => null,
+        'connections' => array(), // host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers, url)
+        'roundRobin' => false,
+        'log' => false,
         'retryOnConflict' => 0,
     );
 
@@ -60,13 +57,12 @@ class Client
      */
     protected $_logger = null;
     /**
-     *
      * @var Connection\ConnectionPool
      */
     protected $_connectionPool = null;
 
     /**
-     * Creates a new Elastica client
+     * Creates a new Elastica client.
      *
      * @param array    $config   OPTIONAL Additional config options
      * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
@@ -79,7 +75,7 @@ class Client
     }
 
     /**
-     * Inits the client connections
+     * Inits the client connections.
      */
     protected function _initConnections()
     {
@@ -116,7 +112,8 @@ class Client
     /**
      * Creates a Connection params array from a Client or server config array.
      *
-     * @param  array $config
+     * @param array $config
+     *
      * @return array
      */
     protected function _prepareConnectionParams(array $config)
@@ -135,9 +132,10 @@ class Client
     }
 
     /**
-     * Sets specific config values (updates and keeps default values)
+     * Sets specific config values (updates and keeps default values).
      *
-     * @param  array $config Params
+     * @param array $config Params
+     *
      * @return $this
      */
     public function setConfig(array $config)
@@ -151,11 +149,12 @@ class Client
 
     /**
      * Returns a specific config key or the whole
-     * config array if not set
+     * config array if not set.
+     *
+     * @param string $key Config key
      *
      * @throws \Elastica\Exception\InvalidException
      *
-     * @param  string       $key Config key
      * @return array|string Config value
      */
     public function getConfig($key = '')
@@ -172,10 +171,11 @@ class Client
     }
 
     /**
-     * Sets / overwrites a specific config value
+     * Sets / overwrites a specific config value.
      *
-     * @param  string $key   Key to set
-     * @param  mixed  $value Value
+     * @param string $key   Key to set
+     * @param mixed  $value Value
+     *
      * @return $this
      */
     public function setConfigValue($key, $value)
@@ -184,8 +184,9 @@ class Client
     }
 
     /**
-     * @param  array|string $keys    config key or path of config keys
-     * @param  mixed        $default default value will be returned if key was not found
+     * @param array|string $keys    config key or path of config keys
+     * @param mixed        $default default value will be returned if key was not found
+     *
      * @return mixed
      */
     public function getConfigValue($keys, $default = null)
@@ -203,9 +204,10 @@ class Client
     }
 
     /**
-     * Returns the index for the given connection
+     * Returns the index for the given connection.
      *
-     * @param  string          $name Index name to create connection to
+     * @param string $name Index name to create connection to
+     *
      * @return \Elastica\Index Index for the given name
      */
     public function getIndex($name)
@@ -214,12 +216,13 @@ class Client
     }
 
     /**
-     * Adds a HTTP Header
+     * Adds a HTTP Header.
+     *
+     * @param string $header      The HTTP Header
+     * @param string $headerValue The HTTP Header Value
      *
      * @throws \Elastica\Exception\InvalidException If $header or $headerValue is not a string
      *
-     * @param  string $header      The HTTP Header
-     * @param  string $headerValue The HTTP Header Value
      * @return $this
      */
     public function addHeader($header, $headerValue)
@@ -234,11 +237,12 @@ class Client
     }
 
     /**
-     * Remove a HTTP Header
+     * Remove a HTTP Header.
+     *
+     * @param string $header The HTTP Header to remove
      *
      * @throws \Elastica\Exception\InvalidException If $header is not a string
      *
-     * @param  string $header The HTTP Header to remove
      * @return $this
      */
     public function removeHeader($header)
@@ -255,16 +259,18 @@ class Client
     }
 
     /**
-     * Uses _bulk to send documents to the server
+     * Uses _bulk to send documents to the server.
      *
      * Array of \Elastica\Document as input. Index and type has to be
      * set inside the document, because for bulk settings documents,
      * documents can belong to any type and index
      *
-     * @throws \Elastica\Exception\InvalidException If docs is empty
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     *
+     * @throws \Elastica\Exception\InvalidException If docs is empty
+     *
      * @return \Elastica\Bulk\ResponseSet Response object
      */
     public function updateDocuments(array $docs)
@@ -281,16 +287,18 @@ class Client
     }
 
     /**
-     * Uses _bulk to send documents to the server
+     * Uses _bulk to send documents to the server.
      *
      * Array of \Elastica\Document as input. Index and type has to be
      * set inside the document, because for bulk settings documents,
      * documents can belong to any type and index
      *
-     * @throws \Elastica\Exception\InvalidException If docs is empty
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param  array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     *
+     * @throws \Elastica\Exception\InvalidException If docs is empty
+     *
      * @return \Elastica\Bulk\ResponseSet Response object
      */
     public function addDocuments(array $docs)
@@ -307,19 +315,21 @@ class Client
     }
 
     /**
-     * Update document, using update script. Requires elasticsearch >= 0.19.0
+     * Update document, using update script. Requires elasticsearch >= 0.19.0.
      *
-     * @param  int                                       $id      document id
-     * @param  array|\Elastica\Script|\Elastica\Document $data    raw data for request body
-     * @param  string                                    $index   index to update
-     * @param  string                                    $type    type of index to update
-     * @param  array                                     $options array of query params to use for query. For possible options check es api
+     * @param int                                       $id      document id
+     * @param array|\Elastica\Script|\Elastica\Document $data    raw data for request body
+     * @param string                                    $index   index to update
+     * @param string                                    $type    type of index to update
+     * @param array                                     $options array of query params to use for query. For possible options check es api
+     *
      * @return \Elastica\Response
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      */
     public function updateDocument($id, $data, $index, $type, array $options = array())
     {
-        $path =  $index.'/'.$type.'/'.$id.'/_update';
+        $path = $index.'/'.$type.'/'.$id.'/_update';
 
         if ($data instanceof Script) {
             $requestData = $data->toArray();
@@ -365,7 +375,7 @@ class Client
         }
 
         if (!isset($options['retry_on_conflict'])) {
-            $retryOnConflict = $this->getConfig("retryOnConflict");
+            $retryOnConflict = $this->getConfig('retryOnConflict');
             $options['retry_on_conflict'] = $retryOnConflict;
         }
 
@@ -414,11 +424,12 @@ class Client
     }
 
     /**
-     * Bulk deletes documents
+     * Bulk deletes documents.
+     *
+     * @param array|\Elastica\Document[] $docs
      *
      * @throws \Elastica\Exception\InvalidException
      *
-     * @param  array|\Elastica\Document[] $docs
      * @return \Elastica\Bulk\ResponseSet
      */
     public function deleteDocuments(array $docs)
@@ -434,7 +445,7 @@ class Client
     }
 
     /**
-     * Returns the status object for all indices
+     * Returns the status object for all indices.
      *
      * @return \Elastica\Status Status object
      */
@@ -444,7 +455,7 @@ class Client
     }
 
     /**
-     * Returns the current cluster
+     * Returns the current cluster.
      *
      * @return \Elastica\Cluster Cluster object
      */
@@ -454,7 +465,8 @@ class Client
     }
 
     /**
-     * @param  \Elastica\Connection $connection
+     * @param \Elastica\Connection $connection
+     *
      * @return $this
      */
     public function addConnection(Connection $connection)
@@ -501,7 +513,8 @@ class Client
     }
 
     /**
-     * @param  array|\Elastica\Connection[] $connections
+     * @param array|\Elastica\Connection[] $connections
+     *
      * @return $this
      */
     public function setConnections(array $connections)
@@ -512,15 +525,17 @@ class Client
     }
 
     /**
-     * Deletes documents with the given ids, index, type from the index
+     * Deletes documents with the given ids, index, type from the index.
      *
-     * @throws \Elastica\Exception\InvalidException
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param  array                      $ids     Document ids
-     * @param  string|\Elastica\Index     $index   Index name
-     * @param  string|\Elastica\Type      $type    Type of documents
-     * @param  string|false               $routing Optional routing key for all ids
+     * @param array                  $ids     Document ids
+     * @param string|\Elastica\Index $index   Index name
+     * @param string|\Elastica\Type  $type    Type of documents
+     * @param string|false           $routing Optional routing key for all ids
+     *
+     * @throws \Elastica\Exception\InvalidException
+     *
      * @return \Elastica\Bulk\ResponseSet Response  object
      */
     public function deleteIds(array $ids, $index, $type, $routing = false)
@@ -548,7 +563,7 @@ class Client
     }
 
     /**
-     * Bulk operation
+     * Bulk operation.
      *
      * Every entry in the params array has to exactly on array
      * of the bulk operation. An example param array would be:
@@ -559,11 +574,13 @@ class Client
      *         array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '2'))
      * );
      *
-     * @throws \Elastica\Exception\ResponseException
-     * @throws \Elastica\Exception\InvalidException
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param  array                      $params Parameter array
+     * @param array $params Parameter array
+     *
+     * @throws \Elastica\Exception\ResponseException
+     * @throws \Elastica\Exception\InvalidException
+     *
      * @return \Elastica\Bulk\ResponseSet Response object
      */
     public function bulk(array $params)
@@ -580,16 +597,17 @@ class Client
     }
 
     /**
-     * Makes calls to the elasticsearch server based on this index
+     * Makes calls to the elasticsearch server based on this index.
      *
      * It's possible to make any REST query directly over this method
      *
+     * @param string $path   Path to call
+     * @param string $method Rest method to use (GET, POST, DELETE, PUT)
+     * @param array  $data   OPTIONAL Arguments as array
+     * @param array  $query  OPTIONAL Query params
+     *
      * @throws Exception\ConnectionException|\Exception
      *
-     * @param  string             $path   Path to call
-     * @param  string             $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param  array              $data   OPTIONAL Arguments as array
-     * @param  array              $query  OPTIONAL Query params
      * @return \Elastica\Response Response object
      */
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
@@ -619,10 +637,12 @@ class Client
     }
 
     /**
-     * Optimizes all search indices
+     * Optimizes all search indices.
      *
-     * @param  array              $args OPTIONAL Optional arguments
+     * @param array $args OPTIONAL Optional arguments
+     *
      * @return \Elastica\Response Response object
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
     public function optimizeAll($args = array())
@@ -631,9 +651,10 @@ class Client
     }
 
     /**
-     * Refreshes all search indices
+     * Refreshes all search indices.
      *
      * @return \Elastica\Response Response object
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
      */
     public function refreshAll()
@@ -642,11 +663,11 @@ class Client
     }
 
     /**
-     * logging
-     *
-     * @throws Exception\RuntimeException
+     * logging.
      *
      * @param string|\Elastica\Request $context
+     *
+     * @throws Exception\RuntimeException
      */
     protected function _log($context)
     {
@@ -683,9 +704,10 @@ class Client
     }
 
     /**
-     * set Logger
+     * set Logger.
      *
-     * @param  LoggerInterface $logger
+     * @param LoggerInterface $logger
+     *
      * @return $this
      */
     public function setLogger(LoggerInterface $logger)

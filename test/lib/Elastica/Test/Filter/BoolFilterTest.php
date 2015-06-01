@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Filter;
 
 use Elastica\Document;
@@ -82,6 +81,7 @@ class BoolFilterTest extends BaseTest
     /**
      * @group unit
      * @dataProvider getTestToArrayData()
+     *
      * @param Bool  $bool
      * @param array $expectedArray
      */
@@ -147,7 +147,7 @@ class BoolFilterTest extends BaseTest
         foreach ($results as $result) {
             $ids[] = $result->getId();
         }
-        $this->assertEquals($ids, array("2", "4"), 'Bool filter with child Bool filters: result ID check');
+        $this->assertEquals($ids, array('2', '4'), 'Bool filter with child Bool filters: result ID check');
 
         $index->delete();
     }
@@ -183,13 +183,13 @@ class BoolFilterTest extends BaseTest
     }
 
     /**
-     * Small unit test to check if also the old object name works
+     * Small unit test to check if also the old object name works.
      *
      * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
-    public function testOldObject() {
-
+    public function testOldObject()
+    {
         if (version_compare(phpversion(), 7, '>=')) {
             self::markTestSkipped('These objects are not supported in PHP 7');
         }

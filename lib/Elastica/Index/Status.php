@@ -1,43 +1,41 @@
 <?php
-
 namespace Elastica\Index;
 
 use Elastica\Index as BaseIndex;
 use Elastica\Request;
 
 /**
- * Elastica index status object
+ * Elastica index status object.
  *
- * @category Xodoa
- * @package Elastica
  * @author Nicolas Ruflin <spam@ruflin.com>
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-status.html
  */
 class Status
 {
     /**
-     * Response
+     * Response.
      *
      * @var \Elastica\Response Response object
      */
     protected $_response = null;
 
     /**
-     * Stats info
+     * Stats info.
      *
      * @var array Stats info
      */
     protected $_data = array();
 
     /**
-     * Index
+     * Index.
      *
      * @var \Elastica\Index Index object
      */
     protected $_index = null;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param \Elastica\Index $index Index object
      */
@@ -48,7 +46,7 @@ class Status
     }
 
     /**
-     * Returns all status info
+     * Returns all status info.
      *
      * @return array Status info
      */
@@ -80,7 +78,7 @@ class Status
     }
 
     /**
-     * Returns all index aliases
+     * Returns all index aliases.
      *
      * @return array Aliases
      */
@@ -97,7 +95,7 @@ class Status
     }
 
     /**
-     * Returns all index settings
+     * Returns all index settings.
      *
      * @return array Index settings
      */
@@ -109,9 +107,10 @@ class Status
     }
 
     /**
-     * Checks if the index has the given alias
+     * Checks if the index has the given alias.
      *
-     * @param  string $name Alias name
+     * @param string $name Alias name
+     *
      * @return bool
      */
     public function hasAlias($name)
@@ -120,7 +119,7 @@ class Status
     }
 
     /**
-     * Returns the index object
+     * Returns the index object.
      *
      * @return \Elastica\Index Index object
      */
@@ -130,7 +129,7 @@ class Status
     }
 
     /**
-     * Returns response object
+     * Returns response object.
      *
      * @return \Elastica\Response Response object
      */
@@ -140,7 +139,7 @@ class Status
     }
 
     /**
-     * Reloads all status data of this object
+     * Reloads all status data of this object.
      */
     public function refresh()
     {

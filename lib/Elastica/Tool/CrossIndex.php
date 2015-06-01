@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Tool;
 
 use Elastica\Bulk;
@@ -10,14 +9,14 @@ use Elastica\Search;
 use Elastica\Type;
 
 /**
- * Functions to move documents and types between indices
+ * Functions to move documents and types between indices.
  *
  * @author Manuel Andreo Garcia <andreo.garcia@gmail.com>
  */
 class CrossIndex
 {
     /**
-     * Type option
+     * Type option.
      *
      * type: string | string[] | \Elastica\Type | \Elastica\Type[] | null
      * default: null (means all types)
@@ -25,7 +24,7 @@ class CrossIndex
     const OPTION_TYPE = 'type';
 
     /**
-     * Query option
+     * Query option.
      *
      * type: see \Elastica\Query::create()
      * default: Elastica\Query\MatchAll
@@ -33,7 +32,7 @@ class CrossIndex
     const OPTION_QUERY = 'query';
 
     /**
-     * Expiry time option
+     * Expiry time option.
      *
      * type: string (see Elastica\ScanAndScroll)
      * default: '1m'
@@ -41,7 +40,7 @@ class CrossIndex
     const OPTION_EXPIRY_TIME = 'expiryTime';
 
     /**
-     * Size per shard option
+     * Size per shard option.
      *
      * type: int (see Elastica\ScanAndScroll)
      * default: 1000
@@ -49,7 +48,7 @@ class CrossIndex
     const OPTION_SIZE_PER_SHARD = 'sizePerShard';
 
     /**
-     * Reindex documents from an old index to a new index
+     * Reindex documents from an old index to a new index.
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/guide/master/reindex.html
      *
@@ -112,7 +111,7 @@ class CrossIndex
     }
 
     /**
-     * Copies type mappings and documents from an old index to a new index
+     * Copies type mappings and documents from an old index to a new index.
      *
      * @see \Elastica\Tool\CrossIndex::reindex()
      *

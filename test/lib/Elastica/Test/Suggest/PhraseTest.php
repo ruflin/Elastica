@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Suggest;
 
 use Elastica\Document;
@@ -65,9 +64,9 @@ class PhraseTest extends BaseTest
     {
         $suggest = new Suggest();
         $phraseSuggest = new Phrase('suggest1', 'text');
-        $phraseSuggest->setText("elasticsearch is bansai coor");
-        $phraseSuggest->setAnalyzer("simple")->setHighlight("<suggest>", "</suggest>")->setStupidBackoffSmoothing(0.4);
-        $phraseSuggest->addCandidateGenerator(new DirectGenerator("text"));
+        $phraseSuggest->setText('elasticsearch is bansai coor');
+        $phraseSuggest->setAnalyzer('simple')->setHighlight('<suggest>', '</suggest>')->setStupidBackoffSmoothing(0.4);
+        $phraseSuggest->addCandidateGenerator(new DirectGenerator('text'));
         $suggest->addSuggestion($phraseSuggest);
 
         $index = $this->_getIndexForTest();
@@ -77,7 +76,7 @@ class PhraseTest extends BaseTest
         // 3 suggestions should be returned: One in which both misspellings are corrected, and two in which only one misspelling is corrected.
         $this->assertEquals(3, sizeof($suggests['suggest1'][0]['options']));
 
-        $this->assertEquals("elasticsearch is <suggest>bonsai cool</suggest>", $suggests['suggest1'][0]['options'][0]['highlighted']);
-        $this->assertEquals("elasticsearch is bonsai cool", $suggests['suggest1'][0]['options'][0]['text']);
+        $this->assertEquals('elasticsearch is <suggest>bonsai cool</suggest>', $suggests['suggest1'][0]['options'][0]['highlighted']);
+        $this->assertEquals('elasticsearch is bonsai cool', $suggests['suggest1'][0]['options'][0]['text']);
     }
 }

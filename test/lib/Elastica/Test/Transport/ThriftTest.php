@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test\Transport;
 
-use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Index;
@@ -131,7 +129,7 @@ class ThriftTest extends BaseTest
     {
         $nodes = $this->_getClient()->getCluster()->getNodes();
         if (!$nodes[0]->getInfo()->hasPlugin('transport-thrift')) {
-            $this->markTestSkipped("transport-thrift plugin not installed.");
+            $this->markTestSkipped('transport-thrift plugin not installed.');
         }
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Transport;
 
 use Elastica\Connection;
@@ -26,8 +25,7 @@ class HttpAdapter extends AbstractTransport
     private $_scheme = 'http';
 
     /**
-     * Construct transport
-     *
+     * Construct transport.
      */
     public function __construct(Connection $connection = null, HttpAdapterInterface $httpAdapter)
     {
@@ -36,16 +34,17 @@ class HttpAdapter extends AbstractTransport
     }
 
     /**
-     * Makes calls to the elasticsearch server
+     * Makes calls to the elasticsearch server.
      *
      * All calls that are made to the server are done through this function
+     *
+     * @param \Elastica\Request $elasticaRequest
+     * @param array             $params          Host, Port, ...
      *
      * @throws \Elastica\Exception\ConnectionException
      * @throws \Elastica\Exception\ResponseException
      * @throws \Elastica\Exception\Connection\HttpException
      *
-     * @param  \Elastica\Request  $elasticaRequest
-     * @param  array              $params          Host, Port, ...
      * @return \Elastica\Response Response object
      */
     public function exec(ElasticaRequest $elasticaRequest, array $params)

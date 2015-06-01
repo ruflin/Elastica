@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Nested;
@@ -16,43 +15,43 @@ class ReverseNestedTest extends BaseAggregationTest
         $index = $this->_createIndex();
         $mapping = new Mapping();
         $mapping->setProperties(array(
-            "comments" => array(
-                "type" => "nested",
-                "properties" => array(
-                    "name" => array("type" => "string"),
-                    "body" => array("type" => "string"),
+            'comments' => array(
+                'type' => 'nested',
+                'properties' => array(
+                    'name' => array('type' => 'string'),
+                    'body' => array('type' => 'string'),
                 ),
             ),
         ));
-        $type = $index->getType("test");
+        $type = $index->getType('test');
         $type->setMapping($mapping);
 
         $type->addDocuments(array(
             new Document(1, array(
-                "comments" => array(
+                'comments' => array(
                     array(
-                        "name" => "bob",
-                        "body" => "this is bobs comment",
+                        'name' => 'bob',
+                        'body' => 'this is bobs comment',
                     ),
                     array(
-                        "name" => "john",
-                        "body" => "this is johns comment",
+                        'name' => 'john',
+                        'body' => 'this is johns comment',
                     ),
                 ),
-                "tags" => array("foo", "bar"),
+                'tags' => array('foo', 'bar'),
             )),
             new Document(2, array(
-                 "comments" => array(
+                 'comments' => array(
                     array(
-                        "name" => "bob",
-                        "body" => "this is another comment from bob",
+                        'name' => 'bob',
+                        'body' => 'this is another comment from bob',
                     ),
                     array(
-                        "name" => "susan",
-                        "body" => "this is susans comment",
+                        'name' => 'susan',
+                        'body' => 'this is susans comment',
                     ),
                 ),
-                "tags" => array("foo", "baz"),
+                'tags' => array('foo', 'baz'),
             )),
         ));
 
@@ -84,14 +83,14 @@ class ReverseNestedTest extends BaseAggregationTest
      */
     public function testReverseNestedAggregation()
     {
-        $agg = new Nested("comments", "comments");
-        $names = new Terms("name");
-        $names->setField("comments.name");
+        $agg = new Nested('comments', 'comments');
+        $names = new Terms('name');
+        $names->setField('comments.name');
 
-        $tags = new Terms("tags");
-        $tags->setField("tags");
+        $tags = new Terms('tags');
+        $tags->setField('tags');
 
-        $reverseNested = new ReverseNested("main");
+        $reverseNested = new ReverseNested('main');
         $reverseNested->addAggregation($tags);
 
         $names->addAggregation($reverseNested);
@@ -100,7 +99,7 @@ class ReverseNestedTest extends BaseAggregationTest
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("comments");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('comments');
 
         $this->assertArrayHasKey('name', $results);
         $nameResults = $results['name'];

@@ -1,11 +1,9 @@
 <?php
-
 namespace Elastica\QueryBuilder;
 
 /**
- * DSL Interface
+ * DSL Interface.
  *
- * @package Elastica
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  */
 interface DSL
@@ -16,7 +14,7 @@ interface DSL
     const TYPE_SUGGEST = 'suggest';
 
     /**
-     * must return type for QueryBuilder usage
+     * must return type for QueryBuilder usage.
      *
      * @return string
      */

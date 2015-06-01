@@ -1,48 +1,47 @@
 <?php
-
 namespace Elastica\QueryBuilder;
 
 /**
- * Abstract Version class
+ * Abstract Version class.
  *
- * @package Elastica
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  */
 abstract class Version
 {
     /**
-     * supported query methods
+     * supported query methods.
      *
      * @var string[]
      */
     protected $queries = array();
 
     /**
-     * supported filter methods
+     * supported filter methods.
      *
      * @var string[]
      */
     protected $filters = array();
 
     /**
-     * supported aggregation methods
+     * supported aggregation methods.
      *
      * @var string[]
      */
     protected $aggregations = array();
 
     /**
-     * supported $suggester methods
+     * supported $suggester methods.
      *
      * @var string[]
      */
     protected $suggesters = array();
 
     /**
-     * returns true if $name is supported, false otherwise
+     * returns true if $name is supported, false otherwise.
      *
-     * @param  string $name
+     * @param string $name
      * @param $type
+     *
      * @return bool
      */
     public function supports($name, $type)

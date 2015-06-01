@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -38,8 +37,8 @@ class FuzzyLikeThisTest extends BaseTest
         $index->refresh();
 
         $fltQuery = new FuzzyLikeThis();
-        $fltQuery->setLikeText("sample gmail");
-        $fltQuery->addFields(array("email", "content"));
+        $fltQuery->setLikeText('sample gmail');
+        $fltQuery->addFields(array('email', 'content'));
         $fltQuery->setMinSimilarity(0.3);
         $fltQuery->setMaxQueryTerms(3);
         $resultSet = $type->search($fltQuery);
@@ -248,8 +247,8 @@ class FuzzyLikeThisTest extends BaseTest
         $index->refresh();
 
         $fltQuery = new FuzzyLikeThis();
-        $fltQuery->addFields(array("email", "content"));
-        $fltQuery->setLikeText("The");
+        $fltQuery->addFields(array('email', 'content'));
+        $fltQuery->setLikeText('The');
 
         $fltQuery->setMinSimilarity(0.1);
         $fltQuery->setMaxQueryTerms(3);
@@ -290,8 +289,8 @@ class FuzzyLikeThisTest extends BaseTest
         $index->refresh();
 
         $fltQuery = new FuzzyLikeThis();
-        $fltQuery->setLikeText("");
-        $fltQuery->addFields(array("email", "content"));
+        $fltQuery->setLikeText('');
+        $fltQuery->addFields(array('email', 'content'));
         $fltQuery->setMinSimilarity(0.3);
         $fltQuery->setMaxQueryTerms(3);
         $resultSet = $type->search($fltQuery);

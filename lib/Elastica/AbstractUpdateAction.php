@@ -1,13 +1,10 @@
 <?php
-
 namespace Elastica;
 
 /**
  * Base class for things that can be sent to the update api (Document and
  * Script).
  *
- * @category Xodoa
- * @package  Elastica
  * @author   Nik Everett <nik9000@gmail.com>
  */
 class AbstractUpdateAction extends Param
@@ -20,7 +17,8 @@ class AbstractUpdateAction extends Param
     /**
      * Sets the id of the document.
      *
-     * @param  string $id
+     * @param string $id
+     *
      * @return $this
      */
     public function setId($id)
@@ -29,7 +27,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Returns document id
+     * Returns document id.
      *
      * @return string|int Document id
      */
@@ -47,9 +45,10 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Sets lifetime of document
+     * Sets lifetime of document.
      *
-     * @param  string $ttl
+     * @param string $ttl
+     *
      * @return $this
      */
     public function setTtl($ttl)
@@ -74,9 +73,10 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Sets the document type name
+     * Sets the document type name.
      *
-     * @param  string $type Type name
+     * @param string $type Type name
+     *
      * @return $this
      */
     public function setType($type)
@@ -90,7 +90,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Return document type name
+     * Return document type name.
      *
      * @throws \Elastica\Exception\InvalidException
      *
@@ -102,9 +102,10 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Sets the document index name
+     * Sets the document index name.
      *
-     * @param  string $index Index name
+     * @param string $index Index name
+     *
      * @return $this
      */
     public function setIndex($index)
@@ -117,7 +118,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Get the document index name
+     * Get the document index name.
      *
      * @throws \Elastica\Exception\InvalidException
      *
@@ -129,10 +130,12 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Sets the version of a document for use with optimistic concurrency control
+     * Sets the version of a document for use with optimistic concurrency control.
      *
-     * @param  int   $version Document version
+     * @param int $version Document version
+     *
      * @return $this
+     *
      * @link https://www.elastic.co/blog/versioning
      */
     public function setVersion($version)
@@ -141,7 +144,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Returns document version
+     * Returns document version.
      *
      * @return string|int Document version
      */
@@ -160,9 +163,10 @@ class AbstractUpdateAction extends Param
 
     /**
      * Sets the version_type of a document
-     * Default in ES is internal, but you can set to external to use custom versioning
+     * Default in ES is internal, but you can set to external to use custom versioning.
      *
-     * @param  int   $versionType Document version type
+     * @param int $versionType Document version type
+     *
      * @return $this
      */
     public function setVersionType($versionType)
@@ -171,7 +175,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Returns document version type
+     * Returns document version type.
      *
      * @return string|int Document version type
      */
@@ -189,10 +193,12 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Sets parent document id
+     * Sets parent document id.
      *
-     * @param  string|int $parent Parent document id
+     * @param string|int $parent Parent document id
+     *
      * @return $this
+     *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html
      */
     public function setParent($parent)
@@ -201,7 +207,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Returns the parent document id
+     * Returns the parent document id.
      *
      * @return string|int Parent document id
      */
@@ -219,9 +225,10 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Set operation type
+     * Set operation type.
      *
-     * @param  string $opType Only accept create
+     * @param string $opType Only accept create
+     *
      * @return $this
      */
     public function setOpType($opType)
@@ -230,7 +237,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Get operation type
+     * Get operation type.
+     *
      * @return string
      */
     public function getOpType()
@@ -247,9 +255,10 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Set percolate query param
+     * Set percolate query param.
      *
-     * @param  string $value percolator filter
+     * @param string $value percolator filter
+     *
      * @return $this
      */
     public function setPercolate($value = '*')
@@ -258,7 +267,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Get percolate parameter
+     * Get percolate parameter.
      *
      * @return string
      */
@@ -276,9 +285,10 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Set routing query param
+     * Set routing query param.
      *
-     * @param  string $value routing
+     * @param string $value routing
+     *
      * @return $this
      */
     public function setRouting($value)
@@ -287,7 +297,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Get routing parameter
+     * Get routing parameter.
      *
      * @return string
      */
@@ -305,7 +315,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  array|string $fields
+     * @param array|string $fields
+     *
      * @return $this
      */
     public function setFields($fields)
@@ -342,7 +353,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  int   $num
+     * @param int $num
+     *
      * @return $this
      */
     public function setRetryOnConflict($num)
@@ -367,7 +379,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  string $timestamp
+     * @param string $timestamp
+     *
      * @return $this
      */
     public function setTimestamp($timestamp)
@@ -392,7 +405,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  bool  $refresh
+     * @param bool $refresh
+     *
      * @return $this
      */
     public function setRefresh($refresh = true)
@@ -417,7 +431,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  string $timeout
+     * @param string $timeout
+     *
      * @return $this
      */
     public function setTimeout($timeout)
@@ -442,7 +457,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  string $timeout
+     * @param string $timeout
+     *
      * @return $this
      */
     public function setConsistency($timeout)
@@ -467,7 +483,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  string $timeout
+     * @param string $timeout
+     *
      * @return $this
      */
     public function setReplication($timeout)
@@ -492,7 +509,8 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  \Elastica\Document|array $data
+     * @param \Elastica\Document|array $data
+     *
      * @return $this
      */
     public function setUpsert($data)
@@ -520,8 +538,9 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param  array $fields         if empty array all options will be returned, field names can be either with underscored either without, i.e. _percolate, routing
-     * @param  bool  $withUnderscore should option keys contain underscore prefix
+     * @param array $fields         if empty array all options will be returned, field names can be either with underscored either without, i.e. _percolate, routing
+     * @param bool  $withUnderscore should option keys contain underscore prefix
+     *
      * @return array
      */
     public function getOptions(array $fields = array(), $withUnderscore = false)

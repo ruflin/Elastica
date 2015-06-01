@@ -1,23 +1,21 @@
 <?php
-
 namespace Elastica\Facet;
 
 /**
  * Implements the Histogram facet.
  *
- * @category Xodoa
- * @package Elastica
  * @author Raul Martinez Jr  <juneym@gmail.com>
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-histogram-facet.html
  *
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets-histogram-facet.html
  * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
  */
 class Histogram extends AbstractFacet
 {
     /**
-     * Sets the field for histogram
+     * Sets the field for histogram.
      *
-     * @param  string $field The name of the field for the histogram
+     * @param string $field The name of the field for the histogram
+     *
      * @return $this
      */
     public function setField($field)
@@ -26,9 +24,10 @@ class Histogram extends AbstractFacet
     }
 
     /**
-     * Set the value for interval
+     * Set the value for interval.
      *
-     * @param  string $interval
+     * @param string $interval
+     *
      * @return $this
      */
     public function setInterval($interval)
@@ -37,10 +36,11 @@ class Histogram extends AbstractFacet
     }
 
     /**
-     * Set the fields for key_field and value_field
+     * Set the fields for key_field and value_field.
      *
-     * @param  string $keyField   Key field
-     * @param  string $valueField Value field
+     * @param string $keyField   Key field
+     * @param string $valueField Value field
+     *
      * @return $this
      */
     public function setKeyValueFields($keyField, $valueField)
@@ -51,8 +51,9 @@ class Histogram extends AbstractFacet
     /**
      * Sets the key and value for this facet by script.
      *
-     * @param  string $keyScript   Script to check whether it falls into the range.
-     * @param  string $valueScript Script to use for statistical calculations.
+     * @param string $keyScript   Script to check whether it falls into the range.
+     * @param string $valueScript Script to use for statistical calculations.
+     *
      * @return $this
      */
     public function setKeyValueScripts($keyScript, $valueScript)
@@ -62,9 +63,10 @@ class Histogram extends AbstractFacet
     }
 
     /**
-     * Set the "params" essential to the a script
+     * Set the "params" essential to the a script.
      *
-     * @param  array $params Associative array (key/value pair)
+     * @param array $params Associative array (key/value pair)
+     *
      * @return $this
      */
     public function setScriptParams(array $params)
@@ -77,13 +79,14 @@ class Histogram extends AbstractFacet
      * facet definition of the parent.
      *
      * @see \Elastica\Facet\AbstractFacet::toArray()
+     *
      * @throws \Elastica\Exception\InvalidException When the right fields haven't been set.
      *
      * @return array
      */
     public function toArray()
     {
-        /**
+        /*
          * Set the range in the abstract as param.
          */
         $this->_setFacetParam('histogram', $this->_params);

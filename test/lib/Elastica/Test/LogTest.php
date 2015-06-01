@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test;
 
-use Elastica\Client;
 use Elastica\Log;
 use Elastica\Test\Base as BaseTest;
 use Psr\Log\LogLevel;

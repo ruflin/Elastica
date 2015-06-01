@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -51,7 +50,7 @@ class BoolQueryTest extends BaseTest
     }
 
     /**
-     * Test to resolve the following issue
+     * Test to resolve the following issue.
      *
      * @link https://groups.google.com/forum/?fromgroups#!topic/elastica-php-client/zK_W_hClfvU
      *
@@ -123,31 +122,31 @@ class BoolQueryTest extends BaseTest
     /**
      * @group functional
      */
-	public function testEmptyBoolQuery() {
+    public function testEmptyBoolQuery()
+    {
         $index = $this->_createIndex();
-		$type = new Type($index, 'test');
+        $type = new Type($index, 'test');
 
-		$docNumber = 3;
-		for ($i = 0; $i < $docNumber; $i++) {
-        	$doc = new Document($i, array('email' => 'test@test.com'));
-			$type->addDocument($doc);
-		}
+        $docNumber = 3;
+        for ($i = 0; $i < $docNumber; $i++) {
+            $doc = new Document($i, array('email' => 'test@test.com'));
+            $type->addDocument($doc);
+        }
 
-		$index->refresh();
+        $index->refresh();
 
-		$boolQuery = new BoolQuery();
+        $boolQuery = new BoolQuery();
 
-		$resultSet = $type->search($boolQuery);
+        $resultSet = $type->search($boolQuery);
 
-		$this->assertEquals($resultSet->count(), $docNumber);
-	}
-
+        $this->assertEquals($resultSet->count(), $docNumber);
+    }
 
     /**
      * @group functional
      */
-    public function testOldObject() {
-
+    public function testOldObject()
+    {
         if (version_compare(phpversion(), 7, '>=')) {
             self::markTestSkipped('These objects are not supported in PHP 7');
         }

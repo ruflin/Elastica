@@ -1,15 +1,12 @@
 <?php
-
 namespace Elastica\Query;
 
 /**
- * Image query
+ * Image query.
  *
- * @category Xodoa
- * @package  Elastica
  * @author   Jacques Moati <jacques@moati.net>
- * @link     https://github.com/kzwang/elasticsearch-image
  *
+ * @link     https://github.com/kzwang/elasticsearch-image
  *
  * To use this feature you have to call the following command in the
  * elasticsearch directory:
@@ -18,7 +15,6 @@ namespace Elastica\Query;
  * </code>
  * This installs the image plugin. More infos
  * can be found here: {@link https://github.com/SibaTokyo/elasticsearch-image}
- *
  */
 class Image extends AbstractQuery
 {
@@ -28,11 +24,11 @@ class Image extends AbstractQuery
     }
 
     /**
-     * Sets a param for the given field
+     * Sets a param for the given field.
      *
-     * @param  string $field
-     * @param  string $key
-     * @param  string $value
+     * @param string $field
+     * @param string $key
+     * @param string $value
      *
      * @return $this
      */
@@ -48,58 +44,59 @@ class Image extends AbstractQuery
     }
 
     /**
-     * Set field boost value
+     * Set field boost value.
      *
      * If not set, defaults to 1.0.
      *
-     * @param  string $field
-     * @param  float  $boost
+     * @param string $field
+     * @param float  $boost
      *
      * @return $this
      */
     public function setFieldBoost($field, $boost = 1.0)
     {
-        return $this->setFieldParam($field, 'boost', (float)$boost);
+        return $this->setFieldParam($field, 'boost', (float) $boost);
     }
 
     /**
-     * Set field feature value
+     * Set field feature value.
      *
      * If not set, defaults CEDD.
      *
-     * @param  string $field
-     * @param  string $feature
+     * @param string $field
+     * @param string $feature
      *
      * @return $this
      */
-    public function setFieldFeature($field, $feature = "CEDD")
+    public function setFieldFeature($field, $feature = 'CEDD')
     {
         return $this->setFieldParam($field, 'feature', $feature);
     }
 
     /**
-     * Set field hash value
+     * Set field hash value.
      *
      * If not set, defaults BIT_SAMPLING.
      *
-     * @param  string $field
-     * @param  string $hash
+     * @param string $field
+     * @param string $hash
      *
      * @return $this
      */
-    public function setFieldHash($field, $hash = "BIT_SAMPLING")
+    public function setFieldHash($field, $hash = 'BIT_SAMPLING')
     {
         return $this->setFieldParam($field, 'hash', $hash);
     }
 
     /**
-     * Set field image value
+     * Set field image value.
      *
-     * @param  string $field
-     * @param  string $path File will be base64_encode
+     * @param string $field
+     * @param string $path  File will be base64_encode
+     *
+     * @throws \Exception
      *
      * @return $this
-     * @throws \Exception
      */
     public function setFieldImage($field, $path)
     {
@@ -111,10 +108,10 @@ class Image extends AbstractQuery
     }
 
     /**
-     * Set field index value
+     * Set field index value.
      *
-     * @param  string $field
-     * @param  string $index
+     * @param string $field
+     * @param string $index
      *
      * @return $this
      */
@@ -124,10 +121,10 @@ class Image extends AbstractQuery
     }
 
     /**
-     * Set field type value
+     * Set field type value.
      *
-     * @param  string $field
-     * @param  string $type
+     * @param string $field
+     * @param string $type
      *
      * @return $this
      */
@@ -137,10 +134,10 @@ class Image extends AbstractQuery
     }
 
     /**
-     * Set field id value
+     * Set field id value.
      *
-     * @param  string $field
-     * @param  string $id
+     * @param string $field
+     * @param string $id
      *
      * @return $this
      */
@@ -150,10 +147,10 @@ class Image extends AbstractQuery
     }
 
     /**
-     * Set field path value
+     * Set field path value.
      *
-     * @param  string $field
-     * @param  string $path
+     * @param string $field
+     * @param string $path
      *
      * @return $this
      */
@@ -163,15 +160,15 @@ class Image extends AbstractQuery
     }
 
     /**
-     * Define quickly a reference image already in your elasticsearch database
+     * Define quickly a reference image already in your elasticsearch database.
      *
      * If not set, path will be the same as $field.
      *
-     * @param  string $field
-     * @param  string $index
-     * @param  string $type
-     * @param  string $id
-     * @param string  $path
+     * @param string $field
+     * @param string $index
+     * @param string $type
+     * @param string $id
+     * @param string $path
      *
      * @return $this
      */

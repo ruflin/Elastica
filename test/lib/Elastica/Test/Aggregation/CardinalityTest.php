@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Cardinality;
@@ -12,11 +11,11 @@ class CardinalityTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType("test")->addDocuments(array(
-            new Document(1, array("color" => "blue")),
-            new Document(2, array("color" => "blue")),
-            new Document(3, array("color" => "red")),
-            new Document(4, array("color" => "green")),
+        $index->getType('test')->addDocuments(array(
+            new Document(1, array('color' => 'blue')),
+            new Document(2, array('color' => 'blue')),
+            new Document(3, array('color' => 'red')),
+            new Document(4, array('color' => 'green')),
         ));
 
         $index->refresh();
@@ -29,12 +28,12 @@ class CardinalityTest extends BaseAggregationTest
      */
     public function testCardinalityAggregation()
     {
-        $agg = new Cardinality("cardinality");
-        $agg->setField("color");
+        $agg = new Cardinality('cardinality');
+        $agg->setField('color');
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation("cardinality");
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('cardinality');
 
         $this->assertEquals(3, $results['value']);
     }
@@ -42,6 +41,7 @@ class CardinalityTest extends BaseAggregationTest
     /**
      * @dataProvider invalidPrecisionThresholdProvider
      * @expectedException \InvalidArgumentException
+     *
      * @param $threshold
      */
     public function testInvalidPrecisionThreshold($threshold)
@@ -52,6 +52,7 @@ class CardinalityTest extends BaseAggregationTest
 
     /**
      * @dataProvider validPrecisionThresholdProvider
+     *
      * @param $threshold
      */
     public function testPrecisionThreshold($threshold)
@@ -70,7 +71,7 @@ class CardinalityTest extends BaseAggregationTest
             'float' => array(7.8),
             'boolean' => array(true),
             'array' => array(array()),
-            'object' => array(new \StdClass),
+            'object' => array(new \StdClass()),
         );
     }
 
@@ -86,6 +87,7 @@ class CardinalityTest extends BaseAggregationTest
 
     /**
      * @dataProvider validRehashProvider
+     *
      * @param bool $rehash
      */
     public function testRehash($rehash)
@@ -100,6 +102,7 @@ class CardinalityTest extends BaseAggregationTest
     /**
      * @dataProvider invalidRehashProvider
      * @expectedException \InvalidArgumentException
+     *
      * @param mixed $rehash
      */
     public function testInvalidRehash($rehash)
@@ -115,7 +118,7 @@ class CardinalityTest extends BaseAggregationTest
             'int' => array(100),
             'float' => array(7.8),
             'array' => array(array()),
-            'object' => array(new \StdClass),
+            'object' => array(new \StdClass()),
         );
     }
 

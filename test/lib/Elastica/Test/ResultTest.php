@@ -1,8 +1,6 @@
 <?php
-
 namespace Elastica\Test;
 
-use Elastica\Client;
 use Elastica\Document;
 use Elastica\Result;
 use Elastica\Test\Base as BaseTest;
