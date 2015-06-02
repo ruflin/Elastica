@@ -499,9 +499,9 @@ class Query implements DSL
      *
      * @return Term
      */
-    public function term()
+    public function term(array $term = array())
     {
-        return new Term();
+        return new Term($term);
     }
 
     /**
