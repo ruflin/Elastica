@@ -13,6 +13,8 @@ RUN echo "extension=/usr/lib/php5/20131226/xsl.so" >> /usr/local/etc/php/conf.d/
 RUN apt-get install -y graphviz
 
 
+RUN echo "date.timezone=UTC" >> /usr/local/etc/php/conf.d/timezone.ini
+
 # Xdebug for coverage report
 RUN apt-get install -y php5-xdebug
 RUN echo "zend_extension=/usr/lib/php5/20131226/xdebug.so" >> /usr/local/etc/php/conf.d/xdebug.ini
