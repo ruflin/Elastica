@@ -17,15 +17,15 @@ class HttpTest extends BaseTest
     {
         return array(
             array(
-                array('transport' => 'Http'),
+                array('transport' => 'Http', 'curl' => array(CURLINFO_HEADER_OUT => true)),
                 'GET',
             ),
             array(
-                array('transport' => array('type' => 'Http', 'postWithRequestBody' => false)),
+                array('transport' => array('type' => 'Http', 'postWithRequestBody' => false, 'curl' => array(CURLINFO_HEADER_OUT => true))),
                 'GET',
             ),
             array(
-                array('transport' => array('type' => 'Http', 'postWithRequestBody' => true)),
+                array('transport' => array('type' => 'Http', 'postWithRequestBody' => true, 'curl' => array(CURLINFO_HEADER_OUT => true))),
                 'POST',
             ),
         );
@@ -37,8 +37,6 @@ class HttpTest extends BaseTest
      */
     public function testDynamicHttpMethodBasedOnConfigParameter(array $config, $httpMethod)
     {
-        self::_checkDebug();
-
         $client = $this->_getClient($config);
 
         $index = $client->getIndex('dynamic_http_method_test');
@@ -62,8 +60,6 @@ class HttpTest extends BaseTest
      */
     public function testDynamicHttpMethodOnlyAffectsRequestsWithBody(array $config, $httpMethod)
     {
-        self::_checkDebug();
-
         $client = $this->_getClient($config);
 
         $status = $client->getStatus();

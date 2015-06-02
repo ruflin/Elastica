@@ -127,11 +127,6 @@ class Http extends AbstractTransport
 
         curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $httpMethod);
 
-        if (\Elastica\Util::debugEnabled()) {
-            // Track request headers when in debug mode
-            curl_setopt($conn, CURLINFO_HEADER_OUT, true);
-        }
-
         $start = microtime(true);
 
         // cURL opt returntransfer leaks memory, therefore OB instead.
@@ -145,10 +140,7 @@ class Http extends AbstractTransport
         $errorNumber = curl_errno($conn);
 
         $response = new Response($responseString, $this->_curlGetInfo($conn, CURLINFO_HTTP_CODE));
-
-        if (\Elastica\Util::debugEnabled()) {
-            $response->setQueryTime($end - $start);
-        }
+        $response->setQueryTime($end - $start);
 
         $response->setTransferInfo($this->_curlGetInfo($conn));
 

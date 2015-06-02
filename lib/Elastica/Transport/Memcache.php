@@ -80,10 +80,7 @@ class Memcache extends AbstractTransport
         $end = microtime(true);
 
         $response = new Response($responseString);
-
-        if (\Elastica\Util::debugEnabled()) {
-            $response->setQueryTime($end - $start);
-        }
+        $response->setQueryTime($end - $start);
 
         if ($response->hasError()) {
             throw new ResponseException($request, $response);
