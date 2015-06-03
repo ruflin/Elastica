@@ -498,7 +498,7 @@ class Query implements DSL
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html
      *
      * @param array $term
-     * 
+     *
      * @return Term
      */
     public function term(array $term = array())

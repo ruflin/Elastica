@@ -70,17 +70,18 @@ class HasParentTest extends BaseTest
         $mapping->setParent('shop');
         $productType->setMapping($mapping);
 
-
-        $shopType->addDocument(new Document('zurich', array('brand' => 'google')));
-        $shopType->addDocument(new Document('london', array('brand' => 'apple')));
-
+        $shopType->addDocuments(
+            array(
+                new Document('zurich', array('brand' => 'google')),
+                new Document('london', array('brand' => 'apple')),
+            )
+        );
 
         $doc1 = new Document(1, array('device' => 'chromebook'));
         $doc1->setParent('zurich');
 
         $doc2 = new Document(2, array('device' => 'macmini'));
         $doc2->setParent('london');
-
 
         $productType->addDocument($doc1);
         $productType->addDocument($doc2);
@@ -92,7 +93,6 @@ class HasParentTest extends BaseTest
         $search = new Search($index->getClient());
         $results = $search->search($parentQuery);
         $this->assertEquals(2, $results->count());
-
 
         $match = new Match();
         $match->setField('brand', 'google');
