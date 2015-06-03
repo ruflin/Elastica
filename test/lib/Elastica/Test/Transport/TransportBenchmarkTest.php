@@ -14,11 +14,6 @@ class TransportBenchmarkTest extends BaseTest
 
     protected static $_results = array();
 
-    public static function setUpBeforeClass()
-    {
-        self::_checkDebug();
-    }
-
     public static function tearDownAfterClass()
     {
         self::printResults();

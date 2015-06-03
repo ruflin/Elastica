@@ -139,14 +139,4 @@ class Base extends \PHPUnit_Framework_TestCase
 
         return in_array('benchmark', $groups);
     }
-
-    /**
-     * Skips test if debugging is not enabled or not set.
-     */
-    protected static function _checkDebug()
-    {
-        if (!\Elastica\Util::debugEnabled()) {
-            self::markTestSkipped('The DEBUG constant must be set to true for this test to run');
-        }
-    }
 }

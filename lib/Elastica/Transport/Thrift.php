@@ -161,9 +161,7 @@ class Thrift extends AbstractTransport
             throw new ThriftException($e, $request, $response);
         }
 
-        if (\Elastica\Util::debugEnabled()) {
-            $response->setQueryTime($end - $start);
-        }
+        $response->setQueryTime($end - $start);
 
         if ($response->hasError()) {
             throw new ResponseException($request, $response);

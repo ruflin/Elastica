@@ -127,11 +127,6 @@ class Http extends AbstractTransport
 
         curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $httpMethod);
 
-        if (\Elastica\Util::debugEnabled()) {
-            // Track request headers when in debug mode
-            curl_setopt($conn, CURLINFO_HEADER_OUT, true);
-        }
-
         $start = microtime(true);
 
         // cURL opt returntransfer leaks memory, therefore OB instead.
@@ -144,13 +139,10 @@ class Http extends AbstractTransport
         // Checks if error exists
         $errorNumber = curl_errno($conn);
 
-        $response = new Response($responseString, curl_getinfo($this->_getConnection(), CURLINFO_HTTP_CODE));
+        $response = new Response($responseString, $this->_curlGetInfo($conn, CURLINFO_HTTP_CODE));
+        $response->setQueryTime($end - $start);
 
-        if (\Elastica\Util::debugEnabled()) {
-            $response->setQueryTime($end - $start);
-        }
-
-        $response->setTransferInfo(curl_getinfo($conn));
+        $response->setTransferInfo($this->_curlGetInfo($conn));
 
         if ($response->hasError()) {
             throw new ResponseException($request, $response);
@@ -195,5 +187,56 @@ class Http extends AbstractTransport
         }
 
         return self::$_curlConnection;
+    }
+
+    /**
+     * Return information about last request.
+     *
+     * @link https://github.com/ruflin/Elastica/issues/861
+     *
+     * @param resource $ch
+     * @param int      $opt
+     *
+     * @return array
+     */
+    protected function _curlGetInfo($ch, $opt = null)
+    {
+        if (!empty($opt)) {
+            return curl_getinfo($ch, $opt);
+        }
+
+        if (version_compare(phpversion(), 7, '<')) {
+            return curl_getinfo($ch);
+        }
+
+        return array(
+            'url' => curl_getinfo($ch, CURLINFO_EFFECTIVE_URL),
+            'content_type' => curl_getinfo($ch, CURLINFO_CONTENT_TYPE),
+            'http_code' => curl_getinfo($ch, CURLINFO_HTTP_CODE),
+            'header_size' => curl_getinfo($ch, CURLINFO_HEADER_SIZE),
+            'request_size' => curl_getinfo($ch, CURLINFO_REQUEST_SIZE),
+            'filetime' => curl_getinfo($ch, CURLINFO_FILETIME),
+            'ssl_verify_result' => curl_getinfo($ch, CURLINFO_SSL_VERIFYRESULT),
+            'redirect_count' => curl_getinfo($ch, CURLINFO_REDIRECT_COUNT),
+            'total_time' => curl_getinfo($ch, CURLINFO_TOTAL_TIME),
+            'namelookup_time' => curl_getinfo($ch, CURLINFO_NAMELOOKUP_TIME),
+            'connect_time' => curl_getinfo($ch, CURLINFO_CONNECT_TIME),
+            'pretransfer_time' => curl_getinfo($ch, CURLINFO_PRETRANSFER_TIME),
+            'size_upload' => curl_getinfo($ch, CURLINFO_SIZE_UPLOAD),
+            'size_download' => curl_getinfo($ch, CURLINFO_SIZE_DOWNLOAD),
+            'speed_download' => curl_getinfo($ch, CURLINFO_SPEED_DOWNLOAD),
+            'speed_upload' => curl_getinfo($ch, CURLINFO_SPEED_UPLOAD),
+            'download_content_length' => curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD),
+            'upload_content_length' => curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_UPLOAD),
+            'starttransfer_time' => curl_getinfo($ch, CURLINFO_STARTTRANSFER_TIME),
+            'redirect_time' => curl_getinfo($ch, CURLINFO_REDIRECT_TIME),
+            'certinfo' => curl_getinfo($ch, CURLINFO_CERTINFO),
+            'primary_ip' => curl_getinfo($ch, CURLINFO_PRIMARY_IP),
+            'primary_port' => curl_getinfo($ch, CURLINFO_PRIMARY_PORT),
+            'local_ip' => curl_getinfo($ch, CURLINFO_LOCAL_IP),
+            'local_port' => curl_getinfo($ch, CURLINFO_LOCAL_PORT),
+            'redirect_url' => curl_getinfo($ch, CURLINFO_REDIRECT_URL),
+            'request_header' => curl_getinfo($ch, CURLINFO_HEADER_OUT),
+        );
     }
 }

@@ -229,7 +229,7 @@ class Response
     }
 
     /**
-     * This is only available if DEBUG constant is set to true.
+     * Returns query execution time.
      *
      * @return float Query time
      */
