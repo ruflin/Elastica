@@ -3,12 +3,17 @@ All notable changes to this project will be documented in this file based on the
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.1.0...HEAD)
 
+
 ### Backward Compatibility Breaks
 - Usage of constant DEBUG and method Elastica\Util::debugEnabled is removed. [#868](https://github.com/ruflin/Elastica/pull/868)
 - Elastica\Response::getTransferInfo will not return "request_header" by default. [#868](https://github.com/ruflin/Elastica/pull/868)
 
 ### Bugfixes
 - Fixed segmentation fault in PHP7 [#868](https://github.com/ruflin/Elastica/pull/868)
+
+### Improvements
+- `CallbackStrategy` now will accept any `callable` as callback, not only instance of `Closure`. [#871](https://github.com/ruflin/Elastica/pull/871)
+
 
 ## [2.1.0](https://github.com/ruflin/Elastica/releases/tag/2.1.0) - 2015-06-01
 
