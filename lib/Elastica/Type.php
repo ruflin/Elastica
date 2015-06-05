@@ -474,7 +474,6 @@ class Type implements SearchableInterface
      * @return \Elastica\Response
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
-     * @deprecated Delete by Query api is deprecated as of ES 1.5, and will be removed in ES 2.0
      */
     public function deleteByQuery($query, array $options = array())
     {
