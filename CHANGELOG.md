@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 - Fixed segmentation fault in PHP7 [#868](https://github.com/ruflin/Elastica/pull/868)
+- Removed deprecation for Elastica\Type::deleteByQuery [875] https://github.com/ruflin/Elastica/pull/875
 
 ### Improvements
 - `CallbackStrategy` now will accept any `callable` as callback, not only instance of `Closure`. [#871](https://github.com/ruflin/Elastica/pull/871)
