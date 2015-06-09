@@ -27,7 +27,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Elastica\\": "lib/Elastica/",
+            "Elastica\\": "lib/Elastica/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Elastica\\Test\\": "test/lib/Elastica/Test/"
         }
     },
