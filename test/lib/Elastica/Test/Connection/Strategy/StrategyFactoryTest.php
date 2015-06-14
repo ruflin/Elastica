@@ -68,4 +68,17 @@ class StrategyFactoryTest extends Base
 
         StrategyFactory::create($strategy);
     }
+
+    /**
+     * @group unit
+     */
+    public function testNoCollisionWithGlobalNamespace()
+    {
+        // create collision
+        if (!class_exists('Simple')) {
+            class_alias('Elastica\Util', 'Simple');
+        }
+        $strategy = StrategyFactory::create('Simple');
+        $this->assertInstanceOf('Elastica\Connection\Strategy\Simple', $strategy);
+    }
 }

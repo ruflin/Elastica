@@ -19,24 +19,27 @@ class StrategyFactory
      */
     public static function create($strategyName)
     {
-        $strategy = null;
         if ($strategyName instanceof StrategyInterface) {
-            $strategy = $strategyName;
-        } elseif (CallbackStrategy::isValid($strategyName)) {
-            $strategy = new CallbackStrategy($strategyName);
-        } elseif (is_string($strategyName) && class_exists($strategyName)) {
-            $strategy = new $strategyName();
-        } elseif (is_string($strategyName)) {
-            $pathToStrategy = '\\Elastica\\Connection\\Strategy\\'.$strategyName;
-            if (class_exists($pathToStrategy)) {
-                $strategy = new $pathToStrategy();
+            return $strategyName;
+        }
+
+        if (CallbackStrategy::isValid($strategyName)) {
+            return new CallbackStrategy($strategyName);
+        }
+
+        if (is_string($strategyName)) {
+            $requiredInterface = '\\Elastica\\Connection\\Strategy\\StrategyInterface';
+            $predefinedStrategy = '\\Elastica\\Connection\\Strategy\\'.$strategyName;
+
+            if (class_exists($predefinedStrategy) && class_implements($predefinedStrategy, $requiredInterface)) {
+                return new $predefinedStrategy();
+            }
+
+            if (class_exists($strategyName) && class_implements($strategyName, $requiredInterface)) {
+                return new $strategyName();
             }
         }
 
-        if (!$strategy instanceof StrategyInterface) {
-            throw new InvalidException('Can\'t load strategy class');
-        }
-
-        return $strategy;
+        throw new InvalidException('Can\'t create strategy instance by given argument');
     }
 }
