@@ -15,6 +15,17 @@ class Match extends AbstractQuery
     const ZERO_TERM_ALL = 'all';
 
     /**
+     * @param string $field
+     * @param mixed  $values
+     */
+    public function __construct($field = null, $values = null)
+    {
+        if ($field !== null && $values !== null) {
+            $this->setParam($field, $values);
+        }
+    }
+
+    /**
      * Sets a param for the message array.
      *
      * @param string $field

@@ -49,6 +49,7 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'has_child', 'Elastica\Query\HasChild', array(new Match()));
         $this->_assertImplemented($queryDSL, 'has_parent', 'Elastica\Query\HasParent', array(new Match(), 'type'));
         $this->_assertImplemented($queryDSL, 'ids', 'Elastica\Query\Ids', array('type', array()));
+        $this->_assertImplemented($queryDSL, 'match', 'Elastica\Query\Match', array('field', 'values'));
         $this->_assertImplemented($queryDSL, 'match_all', 'Elastica\Query\MatchAll', array());
         $this->_assertImplemented($queryDSL, 'more_like_this', 'Elastica\Query\MoreLikeThis', array());
         $this->_assertImplemented($queryDSL, 'multi_match', 'Elastica\Query\MultiMatch', array());

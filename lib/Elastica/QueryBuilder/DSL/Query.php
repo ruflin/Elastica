@@ -56,21 +56,14 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
      *
-     * @param null|string $field
-     * @param null|string $value
+     * @param string $field
+     * @param mixed  $values
      *
      * @return Match
      */
-    public function match($field = null, $value = null)
+    public function match($field = null, $values = null)
     {
-        if ($field !== null && $value !== null) {
-            $match = new Match();
-            $match->setParam($field, $value);
-
-            return $match;
-        }
-
-        return new Match();
+        return new Match($field, $values);
     }
 
     /**
