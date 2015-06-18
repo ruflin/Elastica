@@ -83,4 +83,31 @@ class FilterTest extends BaseAggregationTest
 
         $this->assertEquals((5 + 8 + 1 + 3) / 4.0, $results);
     }
+
+    /**
+     * @group unit
+     */
+    public function testConstruct()
+    {
+        $agg = new Filter('foo', new Term(array('color' => 'blue')));
+
+        $expected = array(
+            'filter' => array(
+                'term' => array(
+                    'color' => 'blue',
+                ),
+            ),
+        );
+
+        $this->assertEquals($expected, $agg->toArray());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testConstructWithoutFilter()
+    {
+        $agg = new Filter('foo');
+        $this->assertEquals('foo', $agg->getName());
+    }
 }
