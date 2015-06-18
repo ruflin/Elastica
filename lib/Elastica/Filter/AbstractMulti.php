@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Filter;
 
 /**
@@ -21,7 +20,9 @@ abstract class AbstractMulti extends AbstractFilter
      */
     public function __construct(array $filters = array())
     {
-        $this->setFilters($filters);
+        if (!empty($filters)) {
+            $this->setFilters($filters);
+        }
     }
 
     /**
