@@ -43,4 +43,21 @@ class BoolOrTest extends BaseTest
 
         $this->assertEquals($expectedArray, $orFilter->toArray());
     }
+
+    /**
+     * @group unit
+     */
+    public function testConstruct()
+    {
+        $ids1 = new Ids('foo', array(1, 2));
+        $ids2 = new Ids('bar', array(3, 4));
+
+        $and1 = new BoolOr(array($ids1, $ids2));
+
+        $and2 = new BoolOr();
+        $and2->addFilter($ids1);
+        $and2->addFilter($ids2);
+
+        $this->assertEquals($and1->toArray(), $and2->toArray());
+    }
 }

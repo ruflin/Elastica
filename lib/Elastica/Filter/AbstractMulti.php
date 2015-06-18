@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Filter;
 
 /**
@@ -14,6 +15,14 @@ abstract class AbstractMulti extends AbstractFilter
      * @var array
      */
     protected $_filters = array();
+
+    /**
+     * @param \Elastica\Filter\AbstractFilter $filters
+     */
+    public function __construct(array $filters = array())
+    {
+        $this->setFilters($filters);
+    }
 
     /**
      * Add filter.
