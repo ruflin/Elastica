@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Filter;
 
 /**
@@ -20,12 +21,12 @@ class Type extends AbstractFilter
     /**
      * Construct Type Filter.
      *
-     * @param string $typeName Type name
+     * @param string $type Type name
      */
-    public function __construct($typeName = null)
+    public function __construct($type = null)
     {
-        if ($typeName) {
-            $this->setType($typeName);
+        if ($type) {
+            $this->setType($type);
         }
     }
 
