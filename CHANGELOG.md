@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 - `CallbackStrategy` now will accept any `callable` as callback, not only instance of `Closure`. [#871](https://github.com/ruflin/Elastica/pull/871)
 - `StrategyFactory` now will try to find predefined strategy before looking to global namespace. [#877](https://github.com/ruflin/Elastica/pull/877)
+- Update elasticsearch dependency to elasticsearch 1.6.0 https://www.elastic.co/downloads/past-releases/elasticsearch-1-6-0 
 
 
 ## [2.1.0](https://github.com/ruflin/Elastica/releases/tag/2.1.0) - 2015-06-01
