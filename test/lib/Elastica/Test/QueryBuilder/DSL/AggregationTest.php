@@ -3,9 +3,8 @@ namespace Elastica\Test\QueryBuilder\DSL;
 
 use Elastica\Filter\Exists;
 use Elastica\QueryBuilder\DSL;
-use Elastica\Test\Base as BaseTest;
 
-class AggregationTest extends BaseTest
+class AggregationTest extends AbstractDSLTest
 {
     /**
      * @group unit
@@ -21,64 +20,39 @@ class AggregationTest extends BaseTest
     /**
      * @group unit
      */
-    public function testAggregations()
+    public function testInterface()
     {
         $aggregationDSL = new DSL\Aggregation();
 
-        foreach ($this->_getAggregations() as $methodName => $arguments) {
-            $this->assertTrue(
-                method_exists($aggregationDSL, $methodName),
-                'method for aggregation "'.$methodName.'" not found'
-            );
+        $this->_assertImplemented($aggregationDSL, 'avg', 'Elastica\Aggregation\Avg', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'cardinality', 'Elastica\Aggregation\Cardinality', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'date_histogram', 'Elastica\Aggregation\DateHistogram', array('name', 'field', 1));
+        $this->_assertImplemented($aggregationDSL, 'date_range', 'Elastica\Aggregation\DateRange', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'extended_stats', 'Elastica\Aggregation\ExtendedStats', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'filter', 'Elastica\Aggregation\Filter', array('name', new Exists('field')));
+        $this->_assertImplemented($aggregationDSL, 'filters', 'Elastica\Aggregation\Filters', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'geo_distance', 'Elastica\Aggregation\GeoDistance', array('name', 'field', 'origin'));
+        $this->_assertImplemented($aggregationDSL, 'geohash_grid', 'Elastica\Aggregation\GeohashGrid', array('name', 'field'));
+        $this->_assertImplemented($aggregationDSL, 'global_agg', 'Elastica\Aggregation\GlobalAggregation', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'histogram', 'Elastica\Aggregation\Histogram', array('name', 'field', 1));
+        $this->_assertImplemented($aggregationDSL, 'ipv4_range', 'Elastica\Aggregation\IpRange', array('name', 'field'));
+        $this->_assertImplemented($aggregationDSL, 'max', 'Elastica\Aggregation\Max', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'min', 'Elastica\Aggregation\Min', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'missing', 'Elastica\Aggregation\Missing', array('name', 'field'));
+        $this->_assertImplemented($aggregationDSL, 'nested', 'Elastica\Aggregation\Nested', array('name', 'path'));
+        $this->_assertImplemented($aggregationDSL, 'percentiles', 'Elastica\Aggregation\Percentiles', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'range', 'Elastica\Aggregation\Range', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'reverse_nested', 'Elastica\Aggregation\ReverseNested', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'scripted_metric', 'Elastica\Aggregation\ScriptedMetric', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'significant_terms', 'Elastica\Aggregation\SignificantTerms', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'stats', 'Elastica\Aggregation\Stats', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'sum', 'Elastica\Aggregation\Sum', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'terms', 'Elastica\Aggregation\Terms', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'top_hits', 'Elastica\Aggregation\TopHits', array('name'));
+        $this->_assertImplemented($aggregationDSL, 'value_count', 'Elastica\Aggregation\ValueCount', array('name', 'field'));
 
-            try {
-                $return = call_user_func_array(array($aggregationDSL, $methodName), $arguments);
-                $this->assertInstanceOf('Elastica\Aggregation\AbstractAggregation', $return);
-            } catch (\Exception $exception) {
-                $this->assertInstanceOf(
-                    'Elastica\Exception\NotImplementedException',
-                    $exception,
-                    'breaking change in aggregation "'.$methodName.'" found: '.$exception->getMessage()
-                );
-            }
-        }
-    }
-
-    /**
-     * @return array
-     */
-    protected function _getAggregations()
-    {
-        return array(
-            'min' => array('name'),
-            'max' => array('name'),
-            'sum' => array('name'),
-            'avg' => array('name'),
-            'stats' => array('name'),
-            'extended_stats' => array('name'),
-            'value_count' => array('name', 'field'),
-            'percentiles' => array('name'),
-            'percentile_ranks' => array('name'),
-            'cardinality' => array('name'),
-            'geo_bounds' => array('name'),
-            'top_hits' => array('name'),
-            'scripted_metric' => array('name'),
-            'global_agg' => array('name'),
-            'filters' => array('name'),
-            'missing' => array('name', 'field'),
-            'nested' => array('name', 'path'),
-            'reverse_nested' => array('name'),
-            'children' => array('name'),
-            'terms' => array('name'),
-            'significant_terms' => array('name'),
-            'range' => array('name'),
-            'date_range' => array('name'),
-            'ipv4_range' => array('name', 'field'),
-            'histogram' => array('name', 'field', 1),
-            'date_histogram' => array('name', 'field', 1),
-            'geo_distance' => array('name', 'field', 'origin'),
-            'geohash_grid' => array('name', 'field'),
-            'filter' => array('name', new Exists('field')),
-        );
+        $this->_assertNotImplemented($aggregationDSL, 'children', array('name'));
+        $this->_assertNotImplemented($aggregationDSL, 'geo_bounds', array('name'));
+        $this->_assertNotImplemented($aggregationDSL, 'percentile_ranks', array('name'));
     }
 }
