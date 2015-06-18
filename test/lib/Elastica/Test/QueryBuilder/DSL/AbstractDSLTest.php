@@ -82,7 +82,7 @@ abstract class AbstractDSLTest extends BaseTest
      */
     protected function _getHintName(\ReflectionParameter $param)
     {
-        if ($param->isCallable()) {
+        if (version_compare(phpversion(), '5.4', '>=') && $param->isCallable()) {
             return 'callable';
         }
 
