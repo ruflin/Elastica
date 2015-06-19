@@ -30,6 +30,9 @@ processors: 1
 # All nodes will be called Elastica
 node.name: Elastica
 
+# Added for snapshot tests
+path.repo: ["/tmp/test_register", "/tmp/test_repository"]
+
 {% endblock %}
 
 {% block config %}
