@@ -14,7 +14,8 @@ bulk.udp.enabled: true
 bulk.udp.bulk_actions: 5
 
 # For script tests
-script.disable_dynamic: false
+script.inline: on
+script.indexed: on
 
 # Disable dynamic memory allocation
 bootstrap.mlockall: true
