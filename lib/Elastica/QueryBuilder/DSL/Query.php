@@ -56,21 +56,14 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
      *
-     * @param null|string $field
-     * @param null|string $value
+     * @param string $field
+     * @param mixed  $values
      *
      * @return Match
      */
-    public function match($field = null, $value = null)
+    public function match($field = null, $values = null)
     {
-        if ($field !== null && $value !== null) {
-            $match = new Match();
-            $match->setParam($field, $value);
-
-            return $match;
-        }
-
-        return new Match();
+        return new Match($field, $values);
     }
 
     /**
@@ -160,11 +153,13 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html
      *
+     * @param null|\Elastica\Filter\AbstractFilter|array $filter
+     *
      * @return ConstantScore
      */
-    public function constant_score()
+    public function constant_score($filter = null)
     {
-        return new ConstantScore();
+        return new ConstantScore($filter);
     }
 
     /**
@@ -199,7 +194,7 @@ class Query implements DSL
      *
      * @return Filtered
      */
-    public function filtered(AbstractQuery $query, AbstractFilter $filter)
+    public function filtered(AbstractQuery $query = null, AbstractFilter $filter = null)
     {
         return new Filtered($query, $filter);
     }
@@ -243,11 +238,14 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-fuzzy-query.html
      *
+     * @param string $fieldName Field name
+     * @param string $value     String to search for
+     *
      * @return Fuzzy
      */
-    public function fuzzy()
+    public function fuzzy($fieldName = null, $value = null)
     {
-        return new Fuzzy();
+        return new Fuzzy($fieldName, $value);
     }
 
     /**
@@ -265,12 +263,12 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
      *
-     * @param AbstractQuery $query
-     * @param null|string   $type
+     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string                                               $type  Parent document type
      *
      * @return HasChild
      */
-    public function has_child(AbstractQuery $query, $type = null)
+    public function has_child($query, $type = null)
     {
         return new HasChild($query, $type);
     }
@@ -280,12 +278,12 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
      *
-     * @param AbstractQuery $query
-     * @param string        $type
+     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string                                               $type  Parent document type
      *
      * @return HasParent
      */
-    public function has_parent(AbstractQuery $query, $type)
+    public function has_parent($query, $type)
     {
         return new HasParent($query, $type);
     }
@@ -300,7 +298,7 @@ class Query implements DSL
      *
      * @return Ids
      */
-    public function ids($type, array $ids)
+    public function ids($type = null, array $ids = array())
     {
         return new Ids($type, $ids);
     }
@@ -367,11 +365,13 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html
      *
+     * @param array $prefix Prefix array
+     *
      * @return Prefix
      */
-    public function prefix()
+    public function prefix(array $prefix = array())
     {
-        return new Prefix();
+        return new Prefix($prefix);
     }
 
     /**
@@ -379,11 +379,13 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html
      *
+     * @param string $queryString OPTIONAL Query string for object
+     *
      * @return QueryString
      */
-    public function query_string()
+    public function query_string($queryString = '')
     {
-        return new QueryString();
+        return new QueryString($queryString);
     }
 
     /**
@@ -411,7 +413,7 @@ class Query implements DSL
      *
      * @return Range
      */
-    public function range($fieldName, array $args)
+    public function range($fieldName = null, array $args = array())
     {
         return new Range($fieldName, $args);
     }
@@ -419,7 +421,7 @@ class Query implements DSL
     /**
      * regexp query.
      *
-     * @param string $fieldName
+     * @param string $key
      * @param string $value
      * @param float  $boost
      *
@@ -427,9 +429,9 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
      */
-    public function regexp($fieldName, $value, $boost)
+    public function regexp($key = '', $value = null, $boost = 1.0)
     {
-        return new Regexp($fieldName, $value, $boost);
+        return new Regexp($key, $value, $boost);
     }
 
     /**
@@ -511,14 +513,14 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html
      *
-     * @param string $field
+     * @param string $key
      * @param array  $terms
      *
      * @return Terms
      */
-    public function terms($field, array $terms)
+    public function terms($key = '', array $terms = array())
     {
-        return new Terms($field, $terms);
+        return new Terms($key, $terms);
     }
 
     /**
@@ -526,12 +528,12 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-top-children-query.html
      *
-     * @param AbstractQuery $query
-     * @param string        $type
+     * @param string|AbstractQuery|\Elastica\Query $query
+     * @param string                               $type
      *
      * @return TopChildren
      */
-    public function top_children(AbstractQuery $query, $type)
+    public function top_children($query, $type = null)
     {
         return new TopChildren($query, $type);
     }
@@ -541,11 +543,15 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html
      *
+     * @param string $key   OPTIONAL Wildcard key
+     * @param string $value OPTIONAL Wildcard value
+     * @param float  $boost OPTIONAL Boost value (default = 1)
+     *
      * @return Wildcard
      */
-    public function wildcard()
+    public function wildcard($key = '', $value = null, $boost = 1.0)
     {
-        return new Wildcard();
+        return new Wildcard($key, $value, $boost);
     }
 
     /**
