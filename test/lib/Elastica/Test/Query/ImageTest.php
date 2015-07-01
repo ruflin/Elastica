@@ -65,6 +65,7 @@ class ImageTest extends BaseTest
      */
     public function testFromReference()
     {
+		$this->markTestSkipped('Tests skipped as plugin not working properly with ES 1.6.0. See https://github.com/ruflin/Elastica/pull/881')
         $field = 'image';
 
         $client = $this->_getClient();
@@ -112,6 +113,8 @@ class ImageTest extends BaseTest
      */
     public function testFromImage()
     {
+		$this->markTestSkipped('Tests skipped as plugin not working properly with ES 1.6.0. See https://github.com/ruflin/Elastica/pull/881')
+		
         $field = 'image';
 
         $client = $this->_getClient();
