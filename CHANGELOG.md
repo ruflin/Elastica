@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 - Usage of constant DEBUG and method Elastica\Util::debugEnabled is removed. [#868](https://github.com/ruflin/Elastica/pull/868)
 - Elastica\Response::getTransferInfo will not return "request_header" by default. [#868](https://github.com/ruflin/Elastica/pull/868)
+- The Image Plugin is currently not compatible with Elasticearch 1.6.0
 
 ### Bugfixes
 - Fixed segmentation fault in PHP7 [#868](https://github.com/ruflin/Elastica/pull/868)

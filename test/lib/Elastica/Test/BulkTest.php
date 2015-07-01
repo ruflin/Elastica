@@ -28,7 +28,6 @@ class BulkTest extends BaseTest
         $newDocument3 = $type->createDocument(3, array('name' => 'The Human Torch'));
         $newDocument4 = $type->createDocument(null, array('name' => 'The Thing'));
 
-        $newDocument1->setPercolate('*');
         $newDocument3->setOpType(Document::OP_TYPE_CREATE);
 
         $documents = array(
@@ -63,7 +62,7 @@ class BulkTest extends BaseTest
         $data = $bulk->toArray();
 
         $expected = array(
-            array('index' => array('_index' => $indexName, '_type' => 'bulk_test', '_id' => 1, '_percolate' => '*')),
+            array('index' => array('_index' => $indexName, '_type' => 'bulk_test', '_id' => 1)),
             array('name' => 'Mister Fantastic'),
             array('index' => array('_id' => 2)),
             array('name' => 'Invisible Woman'),
@@ -74,7 +73,7 @@ class BulkTest extends BaseTest
         );
         $this->assertEquals($expected, $data);
 
-        $expected = '{"index":{"_index":"'.$indexName.'","_type":"bulk_test","_id":1,"_percolate":"*"}}
+        $expected = '{"index":{"_index":"'.$indexName.'","_type":"bulk_test","_id":1}}
 {"name":"Mister Fantastic"}
 {"index":{"_id":2}}
 {"name":"Invisible Woman"}
