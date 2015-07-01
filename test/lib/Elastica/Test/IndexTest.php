@@ -224,7 +224,11 @@ class IndexTest extends BaseTest
         $doc2->set('text', 'running in basel');
         $type->addDocument($doc2);
 
+		// Trying to make test more stable
+		sleep(1);
+		
         $index->optimize();
+		$index->refresh();
 
         $resultSet = $type->search('xodoa');
         $this->assertEquals(1, $resultSet->count());
