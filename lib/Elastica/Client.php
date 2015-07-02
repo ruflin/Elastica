@@ -505,7 +505,7 @@ class Client
     }
 
     /**
-     * @return \Connection\Strategy\StrategyInterface
+     * @return \Elastica\Connection\Strategy\StrategyInterface
      */
     public function getConnectionStrategy()
     {
