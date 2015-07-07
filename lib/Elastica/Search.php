@@ -22,6 +22,7 @@ class Search
     const OPTION_SIZE = 'size';
     const OPTION_SCROLL = 'scroll';
     const OPTION_SCROLL_ID = 'scroll_id';
+    const OPTION_QUERY_CACHE = 'query_cache';
 
     /*
      * Search types
@@ -284,6 +285,7 @@ class Search
             case self::OPTION_SCROLL_ID:
             case self::OPTION_SEARCH_TYPE_SUGGEST:
             case self::OPTION_SEARCH_IGNORE_UNAVAILABLE:
+            case self::OPTION_QUERY_CACHE:
                 return true;
         }
 
