@@ -1,6 +1,7 @@
 <?php
 namespace Elastica\Test\Filter;
 
+use Elastica\Document;
 use Elastica\Filter\BoolOr;
 use Elastica\Filter\Ids;
 use Elastica\Test\Base as BaseTest;
@@ -60,4 +61,31 @@ class BoolOrTest extends BaseTest
 
         $this->assertEquals($and1->toArray(), $and2->toArray());
     }
+
+    /**
+     * @group functional
+     */
+	public function testOrFilter() {
+
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+
+        $doc1 = new Document('', array('categoryId' => 1));
+        $doc2 = new Document('', array('categoryId' => 2));
+        $doc3 = new Document('', array('categoryId' => 3));
+
+        $type->addDocument($doc1);
+        $type->addDocument($doc2);
+        $type->addDocument($doc3);
+
+        $index->refresh();
+
+
+        $boolOr = new \Elastica\Filter\BoolOr();
+        $boolOr->addFilter(new \Elastica\Filter\Term(array('categoryId' => '1')));
+        $boolOr->addFilter(new \Elastica\Filter\Term(array('categoryId' => '2')));
+
+        $resultSet = $type->search($boolOr);
+        $this->assertEquals(2, $resultSet->count());
+	}
 }
