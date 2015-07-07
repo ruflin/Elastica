@@ -30,19 +30,19 @@ ENV PATH=/root/composer/vendor/bin:$PATH
 RUN composer self-update
 
 # Install development tools
-RUN composer global require "phpunit/phpunit"
-RUN composer global require "pdepend/pdepend=2.0.*"
-RUN composer global require "phpmd/phpmd"
-RUN composer global require "mayflower/php-codebrowser"
-RUN composer global require "sebastian/phpcpd"
-RUN composer global require "squizlabs/php_codesniffer"
-RUN composer global require "phploc/phploc"
+RUN composer global require "phpunit/phpunit=~4.7"
+RUN composer global require "pdepend/pdepend=~2.0"
+RUN composer global require "phpmd/phpmd=~2.2"
+RUN composer global require "mayflower/php-codebrowser=~1.1"
+RUN composer global require "sebastian/phpcpd=~2.0"
+RUN composer global require "squizlabs/php_codesniffer=~2.3"
+RUN composer global require "phploc/phploc=~2.1"
 RUN composer global require "fabpot/php-cs-fixer=1.8.1"
 
 
 # Documentor dependencies
-RUN composer global require "phpdocumentor/template-zend"
-RUN composer global require "phpdocumentor/phpdocumentor"
+RUN composer global require "phpdocumentor/template-zend=~1.3"
+RUN composer global require "phpdocumentor/phpdocumentor=~2.8"
 
 # Install depdencies
 WORKDIR /app
@@ -50,7 +50,7 @@ COPY composer.json /app/
 RUN composer install
 
 # Guzzle is not included composer.json because of PHP 5.3
-RUN composer require "guzzlehttp/guzzle"
+RUN composer require "guzzlehttp/guzzle=~6.0"
 
 ENTRYPOINT []
 
