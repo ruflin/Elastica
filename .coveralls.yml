@@ -1,6 +1,6 @@
 src_dir: .
 service_name: travis-ci
 coverage_clover:
-  - build/coverage/clover-functional.xml
-  - build/coverage/clover-shutdown.xml
-  - build/coverage/clover-unit.xml
+  - build/coverage/functional-coverage.xml
+  - build/coverage/shutdown-coverage.xml
+  - build/coverage/unit-coverage.xml
