@@ -162,7 +162,7 @@ class QueryStringTest extends BaseTest
     {
         $phraseSlop = 9;
 
-        $query = new QueryString("test");
+        $query = new QueryString('test');
         $query->setPhraseSlop($phraseSlop);
 
         $data = $query->toArray();
