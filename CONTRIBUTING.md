@@ -23,11 +23,27 @@ Commands
 --------
 To run the commands below, you must have docker-compose [installed](https://docs.docker.com/compose/install/). The first time the commands are run it takes some time to download all the partial images. Form then on the commands should run very fast. The advantage in using the commands below is that no local tools and libraries have to be installed and it is guaranteed that everytone is using the same tools.
 
+## Run Tests
+
+To run all tests inside the docker environment, run the following command:
+
+```
+make run RUN="make phpunit"
+```
+
+If you want to run just a specific test or a one specific file, run the following command by replacing your file with the existingpath:
+
+```
+ make run RUN="phpunit -c ./test lib/Elastica/Test/SearchTest.php"
+```
+
 ## Check style of your code
 This command will call php-cs-fixer with the predefined settings for the elastica project. No local setup of the tools is needed as everything will happen directly in the container.
 ```
 make run RUN="make lint"
 ```
+
+
 
 
 Coding
