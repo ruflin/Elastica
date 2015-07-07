@@ -12,7 +12,7 @@ elastica:
     - ES_HOST=elasticsearch
     - PROXY_HOST=nginx
 elasticsearch:
-#  build: ./env/elasticsearch/  # In case image must be built locally
+  #build: ./env/elasticsearch/  # In case image must be built locally
   image: ruflin/elasticsearch-elastica
 nginx:
   image: nginx

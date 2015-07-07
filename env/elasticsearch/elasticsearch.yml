@@ -13,7 +13,8 @@ bulk.udp.enabled: true
 bulk.udp.bulk_actions: 5
 
 # For script tests
-script.disable_dynamic: false
+script.inline: on
+script.indexed: on
 
 # Disable dynamic memory allocation
 bootstrap.mlockall: true
@@ -33,3 +34,6 @@ http.port: 9200
 transport.tcp.port: 9300
 thrift.port: 9500
 memcached.port: 11211
+
+# Added for snapshot tests
+path.repo: ["/tmp/test_register", "/tmp/test_repository"]
