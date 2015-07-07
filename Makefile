@@ -75,16 +75,16 @@ dependencies: prepare
 		${SOURCE}
 
 phpunit: prepare
-	phpunit -c test/ --coverage-clover build/coverage/clover-unit.xml --group unit
-	phpunit -c test/ --coverage-clover build/coverage/clover-functional.xml --group functional
-	phpunit -c test/ --coverage-clover build/coverage/clover-shutdown.xml --group shutdown
+	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
+	phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
+	phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
 
 doc: prepare
 	phpdoc run -d lib/ -t build/docs
 
 # Uses the preconfigured standards in .php_cs
 lint:
-	php-cs-fixer fix 
+	php-cs-fixer fix
 
 syntax-check:
 	php -lf ${SOURCE} **/*.php

@@ -154,4 +154,33 @@ class QueryStringTest extends BaseTest
         $this->assertEquals($expected, $query->toArray());
         $this->assertInstanceOf('Elastica\Query\QueryString', $query->setTimezone($timezone));
     }
+
+    /**
+     * @group unit
+     */
+    public function testSetPhraseSlop()
+    {
+        $phraseSlop = 9;
+
+        $query = new QueryString("test");
+        $query->setPhraseSlop($phraseSlop);
+
+        $data = $query->toArray();
+        $this->assertEquals($phraseSlop, $data['query_string']['phrase_slop']);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testSetBoost()
+    {
+
+        $index = $this->_createIndex();
+        $query = new QueryString('test');
+        $query->setBoost(1.0);
+
+        $resultSet = $index->search($query);
+
+        $this->assertEquals(0, $resultSet->count());
+    }
 }
