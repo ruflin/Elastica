@@ -65,8 +65,8 @@ class BoolOrTest extends BaseTest
     /**
      * @group functional
      */
-	public function testOrFilter() {
-
+    public function testOrFilter()
+    {
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
@@ -80,12 +80,11 @@ class BoolOrTest extends BaseTest
 
         $index->refresh();
 
-
         $boolOr = new \Elastica\Filter\BoolOr();
         $boolOr->addFilter(new \Elastica\Filter\Term(array('categoryId' => '1')));
         $boolOr->addFilter(new \Elastica\Filter\Term(array('categoryId' => '2')));
 
         $resultSet = $type->search($boolOr);
         $this->assertEquals(2, $resultSet->count());
-	}
+    }
 }
