@@ -11,6 +11,19 @@ use Elastica\Filter\AbstractFilter;
 class Filter extends AbstractAggregation
 {
     /**
+     * @param string         $name
+     * @param AbstractFilter $filter
+     */
+    public function __construct($name, AbstractFilter $filter = null)
+    {
+        parent::__construct($name);
+
+        if ($filter !== null) {
+            $this->setFilter($filter);
+        }
+    }
+
+    /**
      * Set the filter for this aggregation.
      *
      * @param AbstractFilter $filter

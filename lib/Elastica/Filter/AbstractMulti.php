@@ -16,6 +16,16 @@ abstract class AbstractMulti extends AbstractFilter
     protected $_filters = array();
 
     /**
+     * @param \Elastica\Filter\AbstractFilter $filters
+     */
+    public function __construct(array $filters = array())
+    {
+        if (!empty($filters)) {
+            $this->setFilters($filters);
+        }
+    }
+
+    /**
      * Add filter.
      *
      * @param \Elastica\Filter\AbstractFilter $filter

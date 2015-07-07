@@ -319,4 +319,21 @@ class MatchTest extends BaseTest
         $parameters = $query->getParam($field);
         $this->assertEquals($fuzziness, $parameters['fuzziness']);
     }
+
+    /**
+     * @group unit
+     */
+    public function testConstruct()
+    {
+        $match = new Match(null, 'values');
+        $this->assertEquals(array('match' => array()), $match->toArray());
+
+        $match = new Match('field', null);
+        $this->assertEquals(array('match' => array()), $match->toArray());
+
+        $match1 = new Match('field', 'values');
+        $match2 = new Match();
+        $match2->setField('field', 'values');
+        $this->assertEquals($match1->toArray(), $match2->toArray());
+    }
 }

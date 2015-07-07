@@ -258,12 +258,9 @@ class Aggregation implements DSL
      *
      * @return FilterAggregation
      */
-    public function filter($name, AbstractFilter $filter)
+    public function filter($name, AbstractFilter $filter = null)
     {
-        $filterAgg = new FilterAggregation($name);
-        $filterAgg->setFilter($filter);
-
-        return $filterAgg;
+        return new FilterAggregation($name, $filter);
     }
 
     /**
@@ -315,11 +312,12 @@ class Aggregation implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html
      *
-     * @param string $name
+     * @param string $name The name of this aggregation
+     * @param string $path Optional path to the nested object for this aggregation. Defaults to the root of the main document.
      *
      * @return ReverseNested
      */
-    public function reverse_nested($name)
+    public function reverse_nested($name, $path = null)
     {
         return new ReverseNested($name);
     }

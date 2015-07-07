@@ -18,6 +18,10 @@ All notable changes to this project will be documented in this file based on the
 - `StrategyFactory` now will try to find predefined strategy before looking to global namespace. [#877](https://github.com/ruflin/Elastica/pull/877)
 - Update elasticsearch dependency to elasticsearch 1.6.0 https://www.elastic.co/downloads/past-releases/elasticsearch-1-6-0 
 - All elasticsearch plugin dependencies were updated to the newest version.
+- Methods of classes in `QueryBuilder\DSL` namespace now have exact same signatures as corresponding constructors. [#878](https://github.com/ruflin/Elastica/pull/878)
+- Constructor of `Aggregation\Filter` now accepts filter as second parameter [#878](https://github.com/ruflin/Elastica/pull/878)
+- Constructor of `Filter\AbstractMulti` (`BoolAnd`, `BooldOr`) now accepts array of filters as parameter [#878](https://github.com/ruflin/Elastica/pull/878)
+- Constructor of `Query\Match` now accepts arguments [#878](https://github.com/ruflin/Elastica/pull/878)
 
 
 ## [2.1.0](https://github.com/ruflin/Elastica/releases/tag/2.1.0) - 2015-06-01
