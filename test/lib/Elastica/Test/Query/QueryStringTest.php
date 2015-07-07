@@ -174,13 +174,16 @@ class QueryStringTest extends BaseTest
      */
     public function testSetBoost()
     {
-
         $index = $this->_createIndex();
         $query = new QueryString('test');
-        $query->setBoost(1.0);
+        $query->setBoost(9.3);
+
+        $doc = new Document('', array('name' => 'test'));
+        $index->getType('test')->addDocument($doc);
+        $index->refresh();
 
         $resultSet = $index->search($query);
 
-        $this->assertEquals(0, $resultSet->count());
+        $this->assertEquals(1, $resultSet->count());
     }
 }
