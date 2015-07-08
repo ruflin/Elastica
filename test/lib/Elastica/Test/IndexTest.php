@@ -221,22 +221,21 @@ class IndexTest extends BaseTest
         $type->addDocument($doc1);
 
         $index->optimize();
-		$index->refresh();
-		
+        $index->refresh();
+
         $doc2 = new Document(2);
         $doc2->set('text', 'running in basel');
         $type->addDocument($doc2);
-		
-        $index->optimize();
-		$index->refresh();
 
-       
+        $index->optimize();
+        $index->refresh();
+
         $resultSet = $type->search('basel');
         $this->assertEquals(2, $resultSet->count());
 
         $resultSet = $type->search('ruflin');
         $this->assertEquals(0, $resultSet->count());
-		
+
         $resultSet = $type->search('xodoa');
         $this->assertEquals(1, $resultSet->count());
     }
