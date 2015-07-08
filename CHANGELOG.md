@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file based on the
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.2.0...HEAD)
 
+### Backward Compatibility Breaks
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
 
 ## [2.2.0](https://github.com/ruflin/Elastica/releases/tag/2.2.0) - 2015-07-08
 
@@ -26,7 +36,7 @@ All notable changes to this project will be documented in this file based on the
 - Constructor of `Filter\AbstractMulti` (`BoolAnd`, `BooldOr`) now accepts array of filters as parameter [#878](https://github.com/ruflin/Elastica/pull/878)
 - Constructor of `Query\Match` now accepts arguments [#878](https://github.com/ruflin/Elastica/pull/878)
 - Coverage Reporting improved with Codecov [#888](https://github.com/ruflin/Elastica/pull/888)
-- Added 'query_cache' option for search [#886](https://github.com/ruflin/Elastica/pull/888)
+- Added 'query_cache' option for search [#886](https://github.com/ruflin/Elastica/pull/886)
 
 ## [2.1.0](https://github.com/ruflin/Elastica/releases/tag/2.1.0) - 2015-06-01
 
