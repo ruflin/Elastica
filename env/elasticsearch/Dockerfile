@@ -1,4 +1,4 @@
-FROM elasticsearch:1.6.0
+FROM elasticsearch:1.7.0
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 # Dependencies

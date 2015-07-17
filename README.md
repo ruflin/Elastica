@@ -23,7 +23,7 @@ Dependencies
 ------------
 | Project | Version | Required |
 |---------|---------|----------|
-|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v1.6.0)|1.6.0|yes|
+|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v1.7.0)|1.7.0|yes|
 |[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.6.0)|2.6.0|no|
 |[Elasticsearch thrift transport plugin](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.6.0)|2.6.0|no|
 |[Elasticsearch memcached transport plugin](https://github.com/elastic/elasticsearch-transport-memcached/tree/v2.6.0)|2.6.0|no|
