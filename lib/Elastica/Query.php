@@ -396,7 +396,7 @@ class Query extends Param
     /**
      * Allows filtering of documents based on a minimum score.
      *
-     * @param int $minScore Minimum score to filter documents by
+     * @param float $minScore Minimum score to filter documents by
      *
      * @throws \Elastica\Exception\InvalidException
      *
