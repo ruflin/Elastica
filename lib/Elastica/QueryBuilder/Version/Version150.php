@@ -7,6 +7,8 @@ namespace Elastica\QueryBuilder\Version;
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/1.5/index.html
  *
  * @author Igor Denisenko <im.denisenko@yahoo.com>
+ *
+ * @deprecated deprecated in favor of Elastica\QueryBuilder\Version\Latest
  */
 class Version150 extends Version140
 {
