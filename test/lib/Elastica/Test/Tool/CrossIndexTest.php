@@ -10,6 +10,8 @@ class CrossIndexTest extends Base
 {
     /**
      * Test default reindex.
+     *
+     * @group functional
      */
     public function testReindex()
     {
@@ -28,6 +30,8 @@ class CrossIndexTest extends Base
 
     /**
      * Test reindex type option.
+     *
+     * @group functional
      */
     public function testReindexTypeOption()
     {
@@ -66,6 +70,8 @@ class CrossIndexTest extends Base
 
     /**
      * Test default copy.
+     *
+     * @group functional
      */
     public function testCopy()
     {
