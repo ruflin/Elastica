@@ -93,7 +93,7 @@ class ConnectionPoolTest extends BaseTest
         $params = array();
         $connections = array();
 
-        for ($i = 0; $i < $quantity; $i++) {
+        for ($i = 0; $i < $quantity; ++$i) {
             $connections[] = new Connection($params);
         }
 

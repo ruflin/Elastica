@@ -118,13 +118,13 @@ class Range extends AbstractFacet
          */
         $fieldTypesSet = 0;
         if (isset($this->_params['field'])) {
-            $fieldTypesSet++;
+            ++$fieldTypesSet;
         }
         if (isset($this->_params['key_field'])) {
-            $fieldTypesSet++;
+            ++$fieldTypesSet;
         }
         if (isset($this->_params['key_script'])) {
-            $fieldTypesSet++;
+            ++$fieldTypesSet;
         }
 
         if ($fieldTypesSet === 0) {

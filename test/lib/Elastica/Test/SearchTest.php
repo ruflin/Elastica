@@ -251,7 +251,7 @@ class SearchTest extends BaseTest
         $type = $index->getType('scrolltest');
 
         $docs = array();
-        for ($x = 1; $x <= 10; $x++) {
+        for ($x = 1; $x <= 10; ++$x) {
             $docs[] = new Document($x, array('id' => $x, 'testscroll' => 'jbafford'));
         }
 
@@ -355,7 +355,7 @@ class SearchTest extends BaseTest
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
         $docs = array();
-        for ($i = 0; $i < 11; $i++) {
+        for ($i = 0; $i < 11; ++$i) {
             $docs[] = new Document($i, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
         }
 

@@ -42,7 +42,7 @@ class CommonTest extends BaseTest
             new Document(3, array('body' => 'foo bar baz bat')),
         );
         //add documents to create common terms
-        for ($i = 4; $i < 24; $i++) {
+        for ($i = 4; $i < 24; ++$i) {
             $docs[] = new Document($i, array('body' => 'foo bar'));
         }
         $type->addDocuments($docs);
