@@ -19,7 +19,7 @@ class CallbackStrategyTest extends Base
         $count = 0;
 
         $callback = function ($connections) use (&$count) {
-            $count++;
+            ++$count;
         };
 
         $strategy = new CallbackStrategy($callback);

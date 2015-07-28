@@ -709,10 +709,10 @@ class BulkTest extends BaseTest
 
         $startMemory = memory_get_usage();
 
-        for ($n = 1; $n < 10; $n++) {
+        for ($n = 1; $n < 10; ++$n) {
             $docs = array();
 
-            for ($i = 1; $i <= 3000; $i++) {
+            for ($i = 1; $i <= 3000; ++$i) {
                 $docs[] = new Document(uniqid(), $data);
             }
 

@@ -46,7 +46,7 @@ class TransportBenchmarkTest extends BaseTest
         $index->create(array(), true);
 
         $times = array();
-        for ($i = 0; $i < $this->_max; $i++) {
+        for ($i = 0; $i < $this->_max; ++$i) {
             $data = $this->getData($i);
             $doc = new Document($i, $data);
             $result = $type->addDocument($doc);
@@ -73,7 +73,7 @@ class TransportBenchmarkTest extends BaseTest
         $type->search('test');
 
         $times = array();
-        for ($i = 0; $i < $this->_max; $i++) {
+        for ($i = 0; $i < $this->_max; ++$i) {
             $test = rand(1, $this->_max);
             $query = new Query();
             $query->setQuery(new \Elastica\Query\MatchAll());
@@ -95,9 +95,9 @@ class TransportBenchmarkTest extends BaseTest
         $type = $this->getType($config);
 
         $times = array();
-        for ($i = 0; $i < $this->_max; $i++) {
+        for ($i = 0; $i < $this->_max; ++$i) {
             $docs = array();
-            for ($j = 0; $j < 10; $j++) {
+            for ($j = 0; $j < 10; ++$j) {
                 $data = $this->getData($i.$j);
                 $docs[] = new Document($i, $data);
             }
@@ -142,7 +142,7 @@ class TransportBenchmarkTest extends BaseTest
         $index->refresh();
 
         $times = array();
-        for ($i = 0; $i < $this->_max; $i++) {
+        for ($i = 0; $i < $this->_max; ++$i) {
             $response = $type->request('_mapping', \Elastica\Request::GET);
             $times[] = $response->getQueryTime();
         }
@@ -195,7 +195,7 @@ class TransportBenchmarkTest extends BaseTest
             'test' => $test,
             'name' => array(),
         );
-        for ($i = 0; $i < $this->_maxData; $i++) {
+        for ($i = 0; $i < $this->_maxData; ++$i) {
             $data['name'][] = uniqid();
         }
 

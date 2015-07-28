@@ -34,7 +34,7 @@ class ReverseNested extends AbstractAggregation
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function toArray()
     {

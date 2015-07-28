@@ -49,7 +49,7 @@ class ScrollTest extends Base
                     $this->fail('too many iterations');
             }
 
-            $count++;
+            ++$count;
         }
     }
 
@@ -88,7 +88,7 @@ class ScrollTest extends Base
         $index->refresh();
 
         $docs = array();
-        for ($x = 1; $x <= 11; $x++) {
+        for ($x = 1; $x <= 11; ++$x) {
             $docs[] = new Document($x, array('id' => $x, 'key' => 'value'));
         }
 
