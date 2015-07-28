@@ -13,7 +13,7 @@ class ScanAndScrollTest extends BaseTest
     /**
      * Full foreach test.
      *
-     * @gropu functional
+     * @group functional
      */
     public function testForeach()
     {
