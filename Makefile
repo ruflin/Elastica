@@ -1,5 +1,7 @@
 #/bin/bash
 
+.PHONY: init prepare update clean build setup start stop destroy run checkstyle checkstyle-ci code-browser cpd messdetector messdetector-ci dependencies phpunit test doc lint syntax-check loc phploc gource 
+
 BASEDIR = $(shell pwd)
 SOURCE = "${BASEDIR}/lib"
 IMAGE = "elastica"
@@ -21,8 +23,6 @@ update: init
 
 clean:
 	rm -r -f ${BASEDIR}/build
-	#rm ${BASEDIR}/cache.properties
-
 
 # Handling virtual environment
 
