@@ -2,8 +2,7 @@
 
 .PHONY: init prepare update clean build setup start stop destroy run checkstyle checkstyle-ci code-browser cpd messdetector messdetector-ci dependencies phpunit test doc lint syntax-check loc phploc gource 
 
-BASEDIR = $(shell pwd)
-SOURCE = "${BASEDIR}/lib"
+SOURCE = "./lib"
 IMAGE = elastica
 
 DOCKER = docker-compose run ${IMAGE}
@@ -14,22 +13,21 @@ init: prepare
 	${DOCKER} composer install
 
 prepare:
-	${DOCKER} mkdir -p ${BASEDIR}/build/api
-	${DOCKER} mkdir -p ${BASEDIR}/build/code-browser
-	${DOCKER} mkdir -p ${BASEDIR}/build/coverage
-	${DOCKER} mkdir -p ${BASEDIR}/build/logs
-	${DOCKER} mkdir -p ${BASEDIR}/build/docs
-	${DOCKER} mkdir -p ${BASEDIR}/build/pdepend
+	${DOCKER} mkdir -p ./build/api
+	${DOCKER} mkdir -p ./build/code-browser
+	${DOCKER} mkdir -p ./build/coverage
+	${DOCKER} mkdir -p ./build/logs
+	${DOCKER} mkdir -p ./build/docs
+	${DOCKER} mkdir -p ./build/pdepend
 
 update: init
 
 clean:
-	${DOCKER} rm -r -f ${BASEDIR}/build
+	${DOCKER} rm -r -f ./build
 
 # Runs commands inside virtual environemnt. Example usage inside docker: make run RUN="make phpunit"
 run:
 	${DOCKER} $(RUN)
-
 
 ### Quality checks / development tools ###
 
@@ -37,25 +35,25 @@ checkstyle:
 	${DOCKER} phpcs --standard=PSR2 ${SOURCE}
 
 checkstyle-ci: prepare
-	${DOCKER} phpcs --report=checkstyle --report-file=${BASEDIR}/build/logs/checkstyle.xml --standard=PSR2 ${SOURCE} > /dev/null
+	${DOCKER} phpcs --report=checkstyle --report-file=./build/logs/checkstyle.xml --standard=PSR2 ${SOURCE} > /dev/null
 
 code-browser: prepare
-	${DOCKER} phpcb --log ${BASEDIR}/build/logs --source ${SOURCE} --output ${BASEDIR}/build/code-browser
+	${DOCKER} phpcb --log ./build/logs --source ${SOURCE} --output ./build/code-browser
 
 # Copy paste detector
 cpd: prepare
-	${DOCKER} phpcpd --log-pmd ${BASEDIR}/build/logs/pmd-cpd.xml ${SOURCE}
+	${DOCKER} phpcpd --log-pmd ./build/logs/pmd-cpd.xml ${SOURCE}
 
 messdetector: prepare
-	${DOCKER} phpmd ${SOURCE} text codesize,unusedcode,naming,design ${BASEDIR}/build/phpmd.xml
+	${DOCKER} phpmd ${SOURCE} text codesize,unusedcode,naming,design ./build/phpmd.xml
 
 messdetector-ci: prepare
-	${DOCKER} phpmd ${SOURCE} xml codesize,unusedcode,naming,design --reportfile ${BASEDIR}/build/logs/pmd.xml
+	${DOCKER} phpmd ${SOURCE} xml codesize,unusedcode,naming,design --reportfile ./build/logs/pmd.xml
 
 dependencies: prepare
-	${DOCKER} pdepend --jdepend-xml=${BASEDIR}/build/logs/jdepend.xml \
-		--jdepend-chart=${BASEDIR}/build/pdepend/dependencies.svg \
-		--overview-pyramid=${BASEDIR}/build/pdepend/overview-pyramid.svg \
+	${DOCKER} pdepend --jdepend-xml=./build/logs/jdepend.xml \
+		--jdepend-chart=./build/pdepend/dependencies.svg \
+		--overview-pyramid=./build/pdepend/overview-pyramid.svg \
 		${SOURCE}
 
 phpunit: prepare
@@ -72,14 +70,13 @@ lint:
 
 syntax-check:
 	${DOCKER} php -lf ${SOURCE} **/*.php
-	${DOCKER} php -lf ${BASEDIR}/test **/*.php
-
+	${DOCKER} php -lf ./test **/*.php
 
 loc:
 	${DOCKER} cloc --by-file --xml --exclude-dir=build -out=build/cloc.xml .
 
 phploc:
-	${DOCKER} phploc --log-csv $(BASEDIR)/build/logs/phploc.csv $(SOURCE)
+	${DOCKER} phploc --log-csv ./build/logs/phploc.csv ${SOURCE}
 
 # Handling virtual environment
 
