@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 - Update Elasticsearch dependency to 1.7.0 and update plugin dependencies
+- Update php-cs-fixer to 1.10 [#898](https://github.com/ruflin/Elastica/pull/898)
 
 ### Deprecated
 
