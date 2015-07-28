@@ -4,25 +4,82 @@
 
 BASEDIR = $(shell pwd)
 SOURCE = "${BASEDIR}/lib"
-IMAGE = "elastica"
+IMAGE = elastica
+
+DOCKER = docker-compose run ${IMAGE}
 
 
 ### Setups around project sources. These commands should run ###
 init: prepare
-	composer install
+	${DOCKER} composer install
 
 prepare:
-	mkdir -p ${BASEDIR}/build/api
-	mkdir -p ${BASEDIR}/build/code-browser
-	mkdir -p ${BASEDIR}/build/coverage
-	mkdir -p ${BASEDIR}/build/logs
-	mkdir -p ${BASEDIR}/build/docs
-	mkdir -p ${BASEDIR}/build/pdepend
+	${DOCKER} mkdir -p ${BASEDIR}/build/api
+	${DOCKER} mkdir -p ${BASEDIR}/build/code-browser
+	${DOCKER} mkdir -p ${BASEDIR}/build/coverage
+	${DOCKER} mkdir -p ${BASEDIR}/build/logs
+	${DOCKER} mkdir -p ${BASEDIR}/build/docs
+	${DOCKER} mkdir -p ${BASEDIR}/build/pdepend
 
 update: init
 
 clean:
-	rm -r -f ${BASEDIR}/build
+	${DOCKER} rm -r -f ${BASEDIR}/build
+
+# Runs commands inside virtual environemnt. Example usage inside docker: make run RUN="make phpunit"
+run:
+	${DOCKER} $(RUN)
+
+
+### Quality checks / development tools ###
+
+checkstyle:
+	${DOCKER} phpcs --standard=PSR2 ${SOURCE}
+
+checkstyle-ci: prepare
+	${DOCKER} phpcs --report=checkstyle --report-file=${BASEDIR}/build/logs/checkstyle.xml --standard=PSR2 ${SOURCE} > /dev/null
+
+code-browser: prepare
+	${DOCKER} phpcb --log ${BASEDIR}/build/logs --source ${SOURCE} --output ${BASEDIR}/build/code-browser
+
+# Copy paste detector
+cpd: prepare
+	${DOCKER} phpcpd --log-pmd ${BASEDIR}/build/logs/pmd-cpd.xml ${SOURCE}
+
+messdetector: prepare
+	${DOCKER} phpmd ${SOURCE} text codesize,unusedcode,naming,design ${BASEDIR}/build/phpmd.xml
+
+messdetector-ci: prepare
+	${DOCKER} phpmd ${SOURCE} xml codesize,unusedcode,naming,design --reportfile ${BASEDIR}/build/logs/pmd.xml
+
+dependencies: prepare
+	${DOCKER} pdepend --jdepend-xml=${BASEDIR}/build/logs/jdepend.xml \
+		--jdepend-chart=${BASEDIR}/build/pdepend/dependencies.svg \
+		--overview-pyramid=${BASEDIR}/build/pdepend/overview-pyramid.svg \
+		${SOURCE}
+
+phpunit: prepare
+	${DOCKER} phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
+	${DOCKER} phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
+	${DOCKER} phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
+
+doc: prepare
+	${DOCKER} phpdoc run -d lib/ -t build/docs
+
+# Uses the preconfigured standards in .php_cs
+lint:
+	${DOCKER} php-cs-fixer fix
+
+syntax-check:
+	${DOCKER} php -lf ${SOURCE} **/*.php
+	${DOCKER} php -lf ${BASEDIR}/test **/*.php
+
+
+loc:
+	${DOCKER} cloc --by-file --xml --exclude-dir=build -out=build/cloc.xml .
+
+phploc:
+	${DOCKER} phploc --log-csv $(BASEDIR)/build/logs/phploc.csv $(SOURCE)
 
 # Handling virtual environment
 
@@ -41,62 +98,6 @@ stop:
 destroy: clean
 	docker-compose kill
 	docker-compose rm
-
-# Runs commands inside virtual environemnt. Example usage inside docker: make run RUN="make phpunit"
-run:
-	docker-compose run elastica $(RUN)
-
-
-### Quality checks / development tools ###
-
-checkstyle:
-	phpcs --standard=PSR2 ${SOURCE}
-
-checkstyle-ci: prepare
-	phpcs --report=checkstyle --report-file=${BASEDIR}/build/logs/checkstyle.xml --standard=PSR2 ${SOURCE} > /dev/null
-
-code-browser: prepare
-	phpcb --log ${BASEDIR}/build/logs --source ${SOURCE} --output ${BASEDIR}/build/code-browser
-
-# Copy paste detector
-cpd: prepare
-	phpcpd --log-pmd ${BASEDIR}/build/logs/pmd-cpd.xml ${SOURCE}
-
-messdetector: prepare
-	phpmd ${SOURCE} text codesize,unusedcode,naming,design ${BASEDIR}/build/phpmd.xml
-
-messdetector-ci: prepare
-	phpmd ${SOURCE} xml codesize,unusedcode,naming,design --reportfile ${BASEDIR}/build/logs/pmd.xml
-
-dependencies: prepare
-	pdepend --jdepend-xml=${BASEDIR}/build/logs/jdepend.xml \
-		--jdepend-chart=${BASEDIR}/build/pdepend/dependencies.svg \
-		--overview-pyramid=${BASEDIR}/build/pdepend/overview-pyramid.svg \
-		${SOURCE}
-
-phpunit: prepare
-	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
-	phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
-	phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
-
-doc: prepare
-	phpdoc run -d lib/ -t build/docs
-
-# Uses the preconfigured standards in .php_cs
-lint:
-	php-cs-fixer fix
-
-syntax-check:
-	php -lf ${SOURCE} **/*.php
-	php -lf ${BASEDIR}/test **/*.php
-
-
-loc:
-	cloc --by-file --xml --exclude-dir=build -out=build/cloc.xml .
-
-phploc:
-	phploc --log-csv $(BASEDIR)/build/logs/phploc.csv $(SOURCE)
-
 
 
 # Visualise repo
