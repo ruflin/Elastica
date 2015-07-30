@@ -5,7 +5,8 @@
 SOURCE = "./lib"
 IMAGE = elastica
 
-DOCKER = docker-compose run ${IMAGE}
+DOCKER = docker run -it -v $(shell pwd):/app ruflin/${IMAGE}
+DOCKER_ENV = docker-compose run ${IMAGE}
 
 
 ### Setups around project sources. These commands should run ###
@@ -27,7 +28,7 @@ clean:
 
 # Runs commands inside virtual environemnt. Example usage inside docker: make run RUN="make phpunit"
 run:
-	${DOCKER} $(RUN)
+	${DOCKER_ENV} $(RUN)
 
 ### Quality checks / development tools ###
 
@@ -57,13 +58,13 @@ dependencies: prepare
 		${SOURCE}
 
 phpunit: prepare
-	${DOCKER} phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
-	${DOCKER} phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
-	${DOCKER} phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
+	${DOCKER_ENV} phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
+	${DOCKER_ENV} phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
+	${DOCKER_ENV} phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
 	
 # Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
 test:
-	${DOCKER} phpunit -c test/ test/lib/Elastica/Test/${TEST}
+	${DOCKER_ENV} phpunit -c test/ test/lib/Elastica/Test/${TEST}
 
 doc: prepare
 	${DOCKER} phpdoc run -d lib/ -t build/docs
