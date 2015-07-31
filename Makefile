@@ -5,7 +5,7 @@
 SOURCE = "./lib"
 IMAGE = elastica
 
-DOCKER = docker run -it -v $(shell pwd):/app ruflin/${IMAGE}
+DOCKER = docker run -v $(shell pwd):/app ruflin/${IMAGE}
 DOCKER_ENV = docker-compose run ${IMAGE}
 
 
