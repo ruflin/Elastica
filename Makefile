@@ -3,12 +3,6 @@
 .PHONY: init prepare update clean build setup start stop destroy run checkstyle checkstyle-ci code-browser cpd messdetector messdetector-ci dependencies phpunit test doc lint syntax-check loc phploc gource 
 
 SOURCE = "./lib"
-IMAGE = elastica
-
-#DOCKER = docker run -v $(shell pwd):/elastica ruflin/${IMAGE}
-DOCKER_ENV = docker-compose run ${IMAGE}
-DOCKER = docker-compose run ${IMAGE}
-
 
 ### Setups around project sources. These commands should run ###
 init: prepare
@@ -29,7 +23,7 @@ clean:
 
 # Runs commands inside virtual environemnt. Example usage inside docker: make run RUN="make phpunit"
 run:
-	${DOCKER_ENV} $(RUN)
+	docker-compose run elastica $(RUN)
 
 ### Quality checks / development tools ###
 
@@ -64,10 +58,6 @@ doc: prepare
 lint:
 	php-cs-fixer fix
 
-syntax-check:
-	php -lf ${SOURCE} **/*.php
-	php -lf ./test **/*.php
-
 loc: 
 	cloc --by-file --xml --exclude-dir=build -out=build/cloc.xml .
 
@@ -81,6 +71,7 @@ build:
 
 setup: build
 	docker-compose scale elasticsearch=3
+	# TODO: Makes the snapshot directory writable for all instances. Nicer solution needed.
 	docker-compose run elasticsearch chmod -R 777 /mount/
 
 start:
@@ -93,9 +84,11 @@ destroy: clean
 	docker-compose kill
 	docker-compose rm
 	
+# Starts a shell inside the elastica image
 shell:
 	docker run -v $(shell pwd):/elastica -ti ruflin/elastica /bin/bash
 
+# Starts a shell inside the elastica image with the full environment running
 env-shell:
 	docker-compose run elastica /bin/bash
 

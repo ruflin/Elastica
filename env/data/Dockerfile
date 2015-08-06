@@ -1,10 +1,10 @@
 # Data image
 FROM debian:jessie
 
-RUN mkdir -p /mount/backups/my_backup
-RUN mkdir -p /mount/longterm_backups/my_backup
+RUN mkdir -p /mount/backups/backup1
+RUN mkdir -p /mount/backups/backup2
 
-VOLUME /mount/backups/my_backup
-VOLUME /mount/longterm_backups/my_backup
+VOLUME /mount/backups/backup1
+VOLUME /mount/backups/backup2
 
 RUN chmod -R 777 /mount

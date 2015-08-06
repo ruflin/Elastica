@@ -38,6 +38,6 @@ push:
 	
 	
 destroy:
-	docker stop $(docker ps -a -q)
-	docker rm $(docker ps -a -q)
-	docker rmi $(docker images -q)
+	docker stop $(shell docker ps -a -q)
+	docker rm $(shell docker ps -a -q)
+	docker rmi $(shell docker images -q)

@@ -16,6 +16,8 @@ class SnapshotTest extends Base
      * @var Index
      */
     protected $_index;
+	
+	protected $_snapshotPath = '/mount/backups/';
 
     /**
      * @var Document[]
@@ -42,8 +44,8 @@ class SnapshotTest extends Base
      */
     public function testRegisterRepository()
     {
-        $repositoryName = 'my_backup';
-        $location = '/mount/longterm_backups/my_backup';
+        $repositoryName = 'testrepo';
+        $location = $this->_snapshotPath . 'backup1';
 
         $response = $this->_snapshot->registerRepository($repositoryName, 'fs', array('location' => $location));
         $this->assertTrue($response->isOk());
@@ -61,8 +63,8 @@ class SnapshotTest extends Base
      */
     public function testSnapshotAndRestore()
     {
-        $repositoryName = 'my_backup';
-        $location = '/mount/backups/my_backup';
+        $repositoryName = 'testrepo';
+        $location = $this->_snapshotPath . 'backup2';
 
         // register the repository
         $response = $this->_snapshot->registerRepository($repositoryName, 'fs', array('location' => $location));

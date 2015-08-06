@@ -22,8 +22,8 @@ RUN ${ES_PLUGIN_BIN} -install mobz/elasticsearch-head
 # Copy config files
 COPY *.yml /usr/share/elasticsearch/config/
 
-RUN mkdir -p /mount/backups/my_backup
-RUN mkdir -p /mount/longterm_backups/my_backup
+RUN mkdir -p /mount/backups/backup1
+RUN mkdir -p /mount/backups/backup2
 
 RUN chmod -R 777 /mount
 
