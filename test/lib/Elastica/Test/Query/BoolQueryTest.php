@@ -128,7 +128,7 @@ class BoolQueryTest extends BaseTest
         $type = new Type($index, 'test');
 
         $docNumber = 3;
-        for ($i = 0; $i < $docNumber; $i++) {
+        for ($i = 0; $i < $docNumber; ++$i) {
             $doc = new Document($i, array('email' => 'test@test.com'));
             $type->addDocument($doc);
         }
@@ -155,7 +155,7 @@ class BoolQueryTest extends BaseTest
         $type = new Type($index, 'test');
 
         $docNumber = 3;
-        for ($i = 0; $i < $docNumber; $i++) {
+        for ($i = 0; $i < $docNumber; ++$i) {
             $doc = new Document($i, array('email' => 'test@test.com'));
             $type->addDocument($doc);
         }

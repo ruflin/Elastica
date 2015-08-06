@@ -15,7 +15,7 @@ class SignificantTermsTest extends BaseAggregationTest
         $colors = array('blue', 'blue', 'red', 'red', 'green', 'yellow', 'white', 'cyan', 'magenta');
         $temperatures = array(1500, 1500, 1500, 1500, 2500, 3500, 4500, 5500, 6500, 7500, 7500, 8500, 9500);
         $docs = array();
-        for ($i = 0;$i < 250;$i++) {
+        for ($i = 0;$i < 250;++$i) {
             $docs[] = new Document($i, array('color' => $colors[$i % count($colors)], 'temperature' => $temperatures[$i % count($temperatures)]));
         }
         $index->getType('test')->addDocuments($docs);

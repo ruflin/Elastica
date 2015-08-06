@@ -15,14 +15,14 @@ class IdsTest extends BaseTest
 
         // Add documents to first type
         $docs = array();
-        for ($i = 1; $i < 100; $i++) {
+        for ($i = 1; $i < 100; ++$i) {
             $docs[] = new Document($i, array('name' => 'ruflin'));
         }
         $index->getType('helloworld1')->addDocuments($docs);
 
         // Add documents to second type
         $docs = array();
-        for ($i = 1; $i < 100; $i++) {
+        for ($i = 1; $i < 100; ++$i) {
             $docs[] = new Document($i, array('name' => 'ruflin'));
         }
         // This is a special id that will only be in the second type

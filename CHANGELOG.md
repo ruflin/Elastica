@@ -11,8 +11,11 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 - Update Elasticsearch dependency to 1.7.0 and update plugin dependencies
+- Update php-cs-fixer to 1.10 [#898](https://github.com/ruflin/Elastica/pull/898)
+- Elastica\QueryBuilder now uses Elastica\QueryBuilder\Version\Latest as default version to avoid empty version classes. [#897](https://github.com/ruflin/Elastica/pull/897)
 
 ### Deprecated
+- Elastica\QueryBuilder\Version\Version150 deprecated in favor of Elastica\QueryBuilder\Version\Latest
 
 
 ## [2.2.0](https://github.com/ruflin/Elastica/releases/tag/2.2.0) - 2015-07-08

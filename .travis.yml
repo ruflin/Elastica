@@ -27,7 +27,7 @@ before_script:
   - if $(phpenv version-name | grep -q '5.3'); then sudo composer update --no-dev; sudo composer dump-autoload; fi
 
 script:
-  - make phpunit DOCKER_ENV="" DOCKER=""
+  - make phpunit
 
 after_script:
   - cat /var/log/elasticsearch/*.log

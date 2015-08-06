@@ -10,6 +10,8 @@ class CrossIndexTest extends Base
 {
     /**
      * Test default reindex.
+     *
+     * @group functional
      */
     public function testReindex()
     {
@@ -28,6 +30,8 @@ class CrossIndexTest extends Base
 
     /**
      * Test reindex type option.
+     *
+     * @group functional
      */
     public function testReindexTypeOption()
     {
@@ -66,6 +70,8 @@ class CrossIndexTest extends Base
 
     /**
      * Test default copy.
+     *
+     * @group functional
      */
     public function testCopy()
     {
@@ -123,7 +129,7 @@ class CrossIndexTest extends Base
     private function _addDocs(Type $type, $docs)
     {
         $insert = array();
-        for ($i = 1; $i <= $docs; $i++) {
+        for ($i = 1; $i <= $docs; ++$i) {
             $insert[] = new Document($i, array('_id' => $i, 'key' => 'value'));
         }
 

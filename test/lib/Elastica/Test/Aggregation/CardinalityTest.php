@@ -41,6 +41,7 @@ class CardinalityTest extends BaseAggregationTest
     /**
      * @dataProvider invalidPrecisionThresholdProvider
      * @expectedException \InvalidArgumentException
+     * @group unit
      *
      * @param $threshold
      */
@@ -52,6 +53,7 @@ class CardinalityTest extends BaseAggregationTest
 
     /**
      * @dataProvider validPrecisionThresholdProvider
+     * @group unit
      *
      * @param $threshold
      */
@@ -87,6 +89,7 @@ class CardinalityTest extends BaseAggregationTest
 
     /**
      * @dataProvider validRehashProvider
+     * @group unit
      *
      * @param bool $rehash
      */
@@ -102,6 +105,7 @@ class CardinalityTest extends BaseAggregationTest
     /**
      * @dataProvider invalidRehashProvider
      * @expectedException \InvalidArgumentException
+     * @group unit
      *
      * @param mixed $rehash
      */

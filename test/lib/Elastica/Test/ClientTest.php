@@ -610,7 +610,7 @@ class ClientTest extends BaseTest
             $object->assertInstanceOf('Elastica\Exception\ConnectionException', $exception);
             $object->assertInstanceOf('Elastica\Client', $client);
             $object->assertFalse($connection->isEnabled());
-            $count++;
+            ++$count;
         };
 
         $client = $this->_getClient(array(), $callback);
@@ -993,7 +993,7 @@ class ClientTest extends BaseTest
     public function testAddDocumentsWithoutIds()
     {
         $docs = array();
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; ++$i) {
             $docs[] = new Document(null, array('pos' => $i));
         }
 
