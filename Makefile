@@ -5,26 +5,27 @@
 SOURCE = "./lib"
 IMAGE = elastica
 
-DOCKER = docker run -v $(shell pwd):/app ruflin/${IMAGE}
+#DOCKER = docker run -v $(shell pwd):/elastica ruflin/${IMAGE}
 DOCKER_ENV = docker-compose run ${IMAGE}
+DOCKER = docker-compose run ${IMAGE}
 
 
 ### Setups around project sources. These commands should run ###
 init: prepare
-	${DOCKER} composer install
+	composer install --prefer-source
 
-prepare:
-	${DOCKER} mkdir -p ./build/api
-	${DOCKER} mkdir -p ./build/code-browser
-	${DOCKER} mkdir -p ./build/coverage
-	${DOCKER} mkdir -p ./build/logs
-	${DOCKER} mkdir -p ./build/docs
-	${DOCKER} mkdir -p ./build/pdepend
+prepare: clean
+	mkdir -p ./build/api
+	mkdir -p ./build/code-browser
+	mkdir -p ./build/coverage
+	mkdir -p ./build/logs
+	mkdir -p ./build/docs
+	mkdir -p ./build/pdepend
 
 update: init
 
 clean:
-	${DOCKER} rm -r -f ./build
+	rm -r -f ./build
 
 # Runs commands inside virtual environemnt. Example usage inside docker: make run RUN="make phpunit"
 run:
@@ -33,34 +34,34 @@ run:
 ### Quality checks / development tools ###
 
 checkstyle:
-	${DOCKER} phpcs --standard=PSR2 ${SOURCE}
+	phpcs --standard=PSR2 ${SOURCE}
 
-checkstyle-ci: prepare
-	${DOCKER} phpcs --report=checkstyle --report-file=./build/logs/checkstyle.xml --standard=PSR2 ${SOURCE} > /dev/null
+checkstyle-ci:
+	phpcs --report=checkstyle --report-file=./build/logs/checkstyle.xml --standard=PSR2 ${SOURCE} > /dev/null
 
-code-browser: prepare
-	${DOCKER} phpcb --log ./build/logs --source ${SOURCE} --output ./build/code-browser
+code-browser:
+	phpcb --log ./build/logs --source ${SOURCE} --output ./build/code-browser
 
 # Copy paste detector
-cpd: prepare
-	${DOCKER} phpcpd --log-pmd ./build/logs/pmd-cpd.xml ${SOURCE}
+cpd:
+	phpcpd --log-pmd ./build/logs/pmd-cpd.xml ${SOURCE}
 
-messdetector: prepare
-	${DOCKER} phpmd ${SOURCE} text codesize,unusedcode,naming,design ./build/phpmd.xml
+messdetector:
+	phpmd ${SOURCE} text codesize,unusedcode,naming,design ./build/phpmd.xml
 
-messdetector-ci: prepare
-	${DOCKER} phpmd ${SOURCE} xml codesize,unusedcode,naming,design --reportfile ./build/logs/pmd.xml
+messdetector-ci:
+	phpmd ${SOURCE} xml codesize,unusedcode,naming,design --reportfile ./build/logs/pmd.xml
 
-dependencies: prepare
-	${DOCKER} pdepend --jdepend-xml=./build/logs/jdepend.xml \
+dependencies:
+	pdepend --jdepend-xml=./build/logs/jdepend.xml \
 		--jdepend-chart=./build/pdepend/dependencies.svg \
 		--overview-pyramid=./build/pdepend/overview-pyramid.svg \
 		${SOURCE}
 
-phpunit: prepare
-	${DOCKER_ENV} phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
-	${DOCKER_ENV} phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
-	${DOCKER_ENV} phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
+phpunit:
+	-phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
+	-phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
+	-phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
 	
 # Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
 test:
@@ -74,14 +75,14 @@ lint:
 	${DOCKER} php-cs-fixer fix
 
 syntax-check:
-	${DOCKER} php -lf ${SOURCE} **/*.php
-	${DOCKER} php -lf ./test **/*.php
+	php -lf ${SOURCE} **/*.php
+	php -lf ./test **/*.php
 
-loc:
-	${DOCKER} cloc --by-file --xml --exclude-dir=build -out=build/cloc.xml .
+loc: 
+	cloc --by-file --xml --exclude-dir=build -out=build/cloc.xml .
 
 phploc:
-	${DOCKER} phploc --log-csv ./build/logs/phploc.csv ${SOURCE}
+	phploc --log-csv ./build/logs/phploc.csv ${SOURCE}
 
 # Handling virtual environment
 
@@ -90,6 +91,7 @@ build:
 
 setup: build
 	docker-compose scale elasticsearch=3
+	docker-compose run elasticsearch chmod -R 777 /mount/
 
 start:
 	docker-compose up
@@ -100,7 +102,12 @@ stop:
 destroy: clean
 	docker-compose kill
 	docker-compose rm
+	
+shell:
+	docker run -v $(shell pwd):/elastica -ti ruflin/elastica /bin/bash
 
+env-shell:
+	docker-compose run elastica /bin/bash
 
 # Visualise repo
 gource:
@@ -109,3 +116,7 @@ gource:
 		--title 'Elastica (https://github.com/ruflin/Elastica)' \
 		--user-scale 1 \
 		--max-user-speed 50
+
+google-setup:
+	docker-machine create --driver google --google-project elastica-1024 --google-machine-type n1-standard-8 elastica
+	eval "$(docker-machine env elastica)"

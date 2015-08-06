@@ -42,13 +42,13 @@ class SnapshotTest extends Base
      */
     public function testRegisterRepository()
     {
-        $name = 'test_register';
-        $location = '/tmp/test_register';
+        $repositoryName = 'my_backup';
+        $location = '/mount/longterm_backups/my_backup';
 
-        $response = $this->_snapshot->registerRepository($name, 'fs', array('location' => $location));
+        $response = $this->_snapshot->registerRepository($repositoryName, 'fs', array('location' => $location));
         $this->assertTrue($response->isOk());
 
-        $response = $this->_snapshot->getRepository($name);
+        $response = $this->_snapshot->getRepository($repositoryName);
         $this->assertEquals($location, $response['settings']['location']);
 
         // attempt to retrieve a repository which does not exist
@@ -61,8 +61,8 @@ class SnapshotTest extends Base
      */
     public function testSnapshotAndRestore()
     {
-        $repositoryName = 'test_repository';
-        $location = "/tmp/{$repositoryName}";
+        $repositoryName = 'my_backup';
+        $location = "/mount/backups/my_backup";
 
         // register the repository
         $response = $this->_snapshot->registerRepository($repositoryName, 'fs', array('location' => $location));

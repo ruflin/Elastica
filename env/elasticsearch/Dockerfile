@@ -1,4 +1,4 @@
-FROM elasticsearch:1.7.0
+	FROM elasticsearch:1.7.0
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 # Dependencies
@@ -21,6 +21,11 @@ RUN ${ES_PLUGIN_BIN} -install mobz/elasticsearch-head
 
 # Copy config files
 COPY *.yml /usr/share/elasticsearch/config/
+
+RUN mkdir -p /mount/backups/my_backup
+RUN mkdir -p /mount/longterm_backups/my_backup
+
+RUN chmod -R 777 /mount
 
 # Expose standard ports, thrift, udp, memcache
 EXPOSE 9200 9300 9500 9700 9800 11211
