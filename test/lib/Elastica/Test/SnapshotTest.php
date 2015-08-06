@@ -62,7 +62,7 @@ class SnapshotTest extends Base
     public function testSnapshotAndRestore()
     {
         $repositoryName = 'my_backup';
-        $location = "/mount/backups/my_backup";
+        $location = '/mount/backups/my_backup';
 
         // register the repository
         $response = $this->_snapshot->registerRepository($repositoryName, 'fs', array('location' => $location));

@@ -14,7 +14,7 @@ DOCKER = docker-compose run ${IMAGE}
 init: prepare
 	composer install --prefer-source
 
-prepare: clean
+prepare:
 	mkdir -p ./build/api
 	mkdir -p ./build/code-browser
 	mkdir -p ./build/coverage
@@ -32,12 +32,6 @@ run:
 	${DOCKER_ENV} $(RUN)
 
 ### Quality checks / development tools ###
-
-checkstyle:
-	phpcs --standard=PSR2 ${SOURCE}
-
-checkstyle-ci:
-	phpcs --report=checkstyle --report-file=./build/logs/checkstyle.xml --standard=PSR2 ${SOURCE} > /dev/null
 
 code-browser:
 	phpcb --log ./build/logs --source ${SOURCE} --output ./build/code-browser
@@ -62,17 +56,13 @@ phpunit:
 	-phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
 	-phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
 	-phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
-	
-# Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
-test:
-	${DOCKER_ENV} phpunit -c test/ test/lib/Elastica/Test/${TEST}
 
 doc: prepare
-	${DOCKER} phpdoc run -d lib/ -t build/docs
+	phpdoc run -d lib/ -t build/docs
 
 # Uses the preconfigured standards in .php_cs
 lint:
-	${DOCKER} php-cs-fixer fix
+	php-cs-fixer fix
 
 syntax-check:
 	php -lf ${SOURCE} **/*.php
