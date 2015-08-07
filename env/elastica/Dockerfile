@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y \
 	php5-xsl
 	# XSL and Graphviz for PhpDocumentor
 	
+RUN rm -r /var/lib/apt/lists/*
+	
 # Xdebug for coverage report
 RUN pecl install xdebug
 

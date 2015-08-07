@@ -16,7 +16,8 @@ clean:
 
 # Runs commands inside virtual environemnt. Example usage inside docker: make run RUN="make phpunit"
 run:
-	docker-compose run elastica $(RUN)
+	docker run -v $(shell pwd):/elastica ruflin/elastica $(RUN)
+
 
 ### Quality checks / development tools ###
 
@@ -46,6 +47,8 @@ phpunit:
 	
 	
 tests:
+	# Rebuild image to copy changes files to the image
+	make elastica-image
 	make setup
 	docker-compose run elastica make phpunit
 	
@@ -66,7 +69,8 @@ loc:
 phploc:
 	${RUN_ENV} phploc --log-csv ./build/logs/phploc.csv ${SOURCE}
 
-# Handling virtual environment
+
+# VIRTUAL ENVIRONMENT
 
 build:
 	docker-compose build
@@ -85,6 +89,12 @@ stop:
 destroy: clean
 	docker-compose kill
 	docker-compose rm
+
+# Stops and removes all containers and removes all images
+destroy-environment:
+	docker stop $(shell docker ps -a -q)
+	docker rm $(shell docker ps -a -q)
+	docker rmi $(shell docker images -q)
 	
 # Starts a shell inside the elastica image
 shell:
@@ -101,6 +111,42 @@ gource:
 		--title 'Elastica (https://github.com/ruflin/Elastica)' \
 		--user-scale 1 \
 		--max-user-speed 50
+
+## DOCKER IMAGES
+
+
+# This creates the base image locally for local development. In case no local development is done anymore, make sure to remove this image.
+all: nginx-image elasticsearch-image elastica-dev-image elastica-image elastica-data
+	# elastica image has to be built after elastica-dev image as it depends on it. Otherwise the remote image is fetched.
+	
+elastica-image:
+	docker build -t ruflin/elastica .
+
+# Builds all image locally. This can be used to use local images if changes are made locally to the Dockerfiles
+build-images:
+	make elastica-image
+	docker build -t ruflin/elastica-dev-base env/elastica/
+	docker build -t ruflin/elasticsearch-elastica env/elasticsearch/
+	docker build -t ruflin/nginx-elastica env/nginx/
+	docker build -t ruflin/elastica-data env/data/
+
+# Removes all local images
+clean-images:
+	-docker rmi ruflin/elastica-dev-base
+	-docker rmi ruflin/elasticsearch-elastica
+	-docker rmi ruflin/nginx-elastica
+	-docker rmi ruflin/elastica
+	-docker rmi ruflin/elastica-data
+
+# Pushs images as latest to the docker registry. This is normally not needed as they are directly fetched and built from Github
+push-images: build-images
+	docker push ruflin/elastica-dev-base
+	docker push ruflin/elasticsearch-elastica
+	docker push ruflin/nginx-elastica
+	docker push ruflin/elastica
+
+
+## OTHER
 
 # google-setup:
 # 	docker-machine create --driver google --google-project elastica-1024 --google-machine-type n1-standard-8 elastica

@@ -3,8 +3,6 @@ elastica:
   image: ruflin/elastica
   ports:
     - "9200:9200"
-  #volumes:
-  #  - .:/elastica
   links:
     - nginx
     - elasticsearch
