@@ -78,7 +78,7 @@ build:
 setup: build
 	docker-compose scale elasticsearch=3
 	# TODO: Makes the snapshot directory writable for all instances. Nicer solution needed.
-	docker-compose run elasticsearch chmod -R 777 /tmp/
+	docker-compose run elasticsearch chmod -R 777 /tmp/backups/
 
 start:
 	docker-compose up

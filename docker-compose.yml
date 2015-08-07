@@ -23,5 +23,5 @@ nginx:
 data:
   image: ruflin/elastica-data
   volumes:
-    - "/mount/backups/backup1"
-    - "/mount/backups/backup2"
+    - "/tmp/backups/backup1"
+    - "/tmp/backups/backup2"
