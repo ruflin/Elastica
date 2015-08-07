@@ -22,10 +22,8 @@ RUN ${ES_PLUGIN_BIN} -install mobz/elasticsearch-head
 # Copy config files
 COPY *.yml /usr/share/elasticsearch/config/
 
-RUN mkdir -p /mount/backups/backup1
-RUN mkdir -p /mount/backups/backup2
-
-RUN chmod -R 777 /mount
+RUN mkdir -p /tmp/backups/backup1
+RUN mkdir -p /tmp/backups/backup2
 
 # Expose standard ports, thrift, udp, memcache
 EXPOSE 9200 9300 9500 9700 9800 11211

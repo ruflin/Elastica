@@ -17,7 +17,7 @@ class SnapshotTest extends Base
      */
     protected $_index;
 
-    protected $_snapshotPath = '/mount/backups/';
+    protected $_snapshotPath = '/tmp/backups/';
 
     /**
      * @var Document[]

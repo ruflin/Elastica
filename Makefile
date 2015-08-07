@@ -92,9 +92,9 @@ destroy: clean
 
 # Stops and removes all containers and removes all images
 destroy-environment:
-	docker stop $(shell docker ps -a -q)
-	docker rm $(shell docker ps -a -q)
-	docker rmi $(shell docker images -q)
+	-docker stop $(shell docker ps -a -q)
+	-docker rm $(shell docker ps -a -q)
+	-docker rmi $(shell docker images -q)
 	
 # Starts a shell inside the elastica image
 shell:
