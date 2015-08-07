@@ -23,7 +23,7 @@ class UtilTest extends BaseTest
             array('', ''),
             array('pragmatic banana', 'pragmatic banana'),
             array('oh yeah!', 'oh yeah\\!'),
-            // Seperate test below because phpunit seems to have some problems
+            // Separate test below because phpunit seems to have some problems
             //array('\\+-&&||!(){}[]^"~*?:', '\\\\\\+\\-\\&&\\||\\!\\(\\)\\{\\}\\[\\]\\^\\"\\~\\*\\?\\:'),
             array('some signs, can stay.', 'some signs, can stay.'),
         );

@@ -830,7 +830,7 @@ The changelog before version 2.0.0 was organised by date. All changes can be fou
 
 2012-01-08
 - Allow to set curl params over client config [#106](https://github.com/ruflin/Elastica/issues/106/) [#107](https://github.com/ruflin/Elastica/issues/107/)
-- Add the possiblity to add path or url in config for a request [#120](https://github.com/ruflin/Elastica/issues/120/)
+- Add the possibility to add path or url in config for a request [#120](https://github.com/ruflin/Elastica/issues/120/)
 
 2012-01-04
 - Elastica_Index::exists() and Elastica_Cluster::getIndexNames() added
