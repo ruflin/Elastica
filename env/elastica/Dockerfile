@@ -1,6 +1,7 @@
 # This image is the base image for the Elastica development and includes all parts which rarely change
 # PHP 6 Docker file with Composer installed
 FROM php:5.6
+MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 RUN apt-get update && apt-get install -y \
 	cloc \
