@@ -78,6 +78,10 @@ phpunit: prepare
 	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
 	phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
 	phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
+	
+# Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
+test:
+	${DOCKER} phpunit -c test/ test/lib/Elastica/Test/${TEST}
 
 doc: prepare
 	phpdoc run -d lib/ -t build/docs
