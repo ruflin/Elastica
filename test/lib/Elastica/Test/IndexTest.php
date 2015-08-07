@@ -236,7 +236,7 @@ class IndexTest extends BaseTest
         $resultSet = $type->search('ruflin');
         $this->assertEquals(0, $resultSet->count());
 
-        $resultSet = $type->search('xodoa');
+        $resultSet = $type->search('Xodoa');
         $this->assertEquals(1, $resultSet->count());
     }
 
