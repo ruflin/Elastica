@@ -78,7 +78,7 @@ build:
 setup: build
 	docker-compose scale elasticsearch=3
 	# TODO: Makes the snapshot directory writable for all instances. Nicer solution needed.
-	docker-compose run elasticsearch chmod -R 777 /mount/
+	docker-compose run elasticsearch chmod -R 777 /tmp/
 
 start:
 	docker-compose up
@@ -124,11 +124,11 @@ elastica-image:
 
 # Builds all image locally. This can be used to use local images if changes are made locally to the Dockerfiles
 build-images:
-	make elastica-image
 	docker build -t ruflin/elastica-dev-base env/elastica/
 	docker build -t ruflin/elasticsearch-elastica env/elasticsearch/
 	docker build -t ruflin/nginx-elastica env/nginx/
 	docker build -t ruflin/elastica-data env/data/
+	make elastica-image
 
 # Removes all local images
 clean-images:
