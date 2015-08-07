@@ -1,25 +1,18 @@
 #/bin/bash
 
-.PHONY: init prepare update clean build setup start stop destroy run checkstyle checkstyle-ci code-browser cpd messdetector messdetector-ci dependencies phpunit test doc lint syntax-check loc phploc gource 
+.PHONY: update clean build setup start stop destroy run checkstyle checkstyle-ci code-browser cpd messdetector messdetector-ci dependencies phpunit test tests doc lint syntax-check loc phploc gource 
 
 SOURCE = "./lib"
 
-### Setups around project sources. These commands should run ###
-init: prepare
-	composer install --prefer-source
-
-prepare:
-	mkdir -p ./build/api
-	mkdir -p ./build/code-browser
-	mkdir -p ./build/coverage
-	mkdir -p ./build/logs
-	mkdir -p ./build/docs
-	mkdir -p ./build/pdepend
-
-update: init
+# By default docker environment is used to run commands. To run without the predefined environment, set RUN_ENV=" " either as parameter or as environment variable
+ifndef RUN_ENV
+	RUN_ENV = docker run -v $(shell pwd):/elastica ruflin/elastica
+endif
 
 clean:
 	rm -r -f ./build
+	rm -r -f ./vendor
+	rm -r -f ./composer.lock
 
 # Runs commands inside virtual environemnt. Example usage inside docker: make run RUN="make phpunit"
 run:
@@ -28,45 +21,50 @@ run:
 ### Quality checks / development tools ###
 
 code-browser:
-	phpcb --log ./build/logs --source ${SOURCE} --output ./build/code-browser
+	${RUN_ENV} phpcb --log ./build/logs --source ${SOURCE} --output ./build/code-browser
 
 # Copy paste detector
 cpd:
-	phpcpd --log-pmd ./build/logs/pmd-cpd.xml ${SOURCE}
+	${RUN_ENV} phpcpd --log-pmd ./build/logs/pmd-cpd.xml ${SOURCE}
 
 messdetector:
-	phpmd ${SOURCE} text codesize,unusedcode,naming,design ./build/phpmd.xml
+	${RUN_ENV} phpmd ${SOURCE} text codesize,unusedcode,naming,design ./build/phpmd.xml
 
 messdetector-ci:
-	phpmd ${SOURCE} xml codesize,unusedcode,naming,design --reportfile ./build/logs/pmd.xml
+	${RUN_ENV} phpmd ${SOURCE} xml codesize,unusedcode,naming,design --reportfile ./build/logs/pmd.xml
 
 dependencies:
-	pdepend --jdepend-xml=./build/logs/jdepend.xml \
+	${RUN_ENV} pdepend --jdepend-xml=./build/logs/jdepend.xml \
 		--jdepend-chart=./build/pdepend/dependencies.svg \
 		--overview-pyramid=./build/pdepend/overview-pyramid.svg \
 		${SOURCE}
 
-phpunit: prepare
+phpunit:
 	-phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
 	-phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
 	-phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
+	
+	
+tests:
+	make setup
+	docker-compose run elastica make phpunit
 	
 # Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
 test:
 	${DOCKER} phpunit -c test/ test/lib/Elastica/Test/${TEST}
 
-doc: prepare
-	phpdoc run -d lib/ -t build/docs
+doc:
+	${RUN_ENV} phpdoc run -d lib/ -t build/docs
 
 # Uses the preconfigured standards in .php_cs
 lint:
-	php-cs-fixer fix
+	${RUN_ENV} php-cs-fixer fix
 
 loc: 
-	cloc --by-file --xml --exclude-dir=build -out=build/cloc.xml .
+	${RUN_ENV} cloc --by-file --xml --exclude-dir=build -out=build/cloc.xml .
 
 phploc:
-	phploc --log-csv ./build/logs/phploc.csv ${SOURCE}
+	${RUN_ENV} phploc --log-csv ./build/logs/phploc.csv ${SOURCE}
 
 # Handling virtual environment
 
@@ -104,6 +102,6 @@ gource:
 		--user-scale 1 \
 		--max-user-speed 50
 
-google-setup:
-	docker-machine create --driver google --google-project elastica-1024 --google-machine-type n1-standard-8 elastica
-	eval "$(docker-machine env elastica)"
+# google-setup:
+# 	docker-machine create --driver google --google-project elastica-1024 --google-machine-type n1-standard-8 elastica
+# 	eval "$(docker-machine env elastica)"

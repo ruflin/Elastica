@@ -14,14 +14,21 @@ COPY Makefile /elastica/
 
 ENV ELASTICA_DEV true
 
-RUN make init
+# Set empty environment so that Makefile commands inside container do not prepend the environment
+ENV RUN_ENV " "
+
+# Commands are taken from Makefile. Everytime the makefile is updated, this commands is rerun
+RUN mkdir -p \
+	./build/code-browser \
+	./build/docs \
+	./build/logs \
+	./build/pdepend \
+	./build/coverage
+	
+RUN composer install --prefer-source
 
 # Copy rest of the files, ignoring .dockerignore files
 COPY lib /elastica/lib
 COPY test /elastica/test
 
-RUN make clean
-RUN make 
-
 ENTRYPOINT []
-
