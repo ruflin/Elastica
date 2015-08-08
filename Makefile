@@ -54,7 +54,9 @@ tests:
 	
 # Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
 test:
-	${DOCKER} phpunit -c test/ test/lib/Elastica/Test/${TEST}
+	make elastica-image
+	make setup
+	docker-compose run elastica phpunit -c test/ ${TEST}
 
 doc:
 	${RUN_ENV} phpdoc run -d lib/ -t build/docs
@@ -92,9 +94,12 @@ destroy: clean
 
 # Stops and removes all containers and removes all images
 destroy-environment:
-	-docker stop $(shell docker ps -a -q)
-	-docker rm $(shell docker ps -a -q)
+	make remove-containers:
 	-docker rmi $(shell docker images -q)
+	
+remove-containers:
+	-docker stop $(shell docker ps -a -q)
+	-docker rm -v $(shell docker ps -a -q)
 	
 # Starts a shell inside the elastica image
 shell:

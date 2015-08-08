@@ -10,7 +10,6 @@ WORKDIR /elastica
 
 # Copy composer file first as this only changes rarely
 COPY composer.json /elastica/
-COPY Makefile /elastica/
 
 ENV ELASTICA_DEV true
 
@@ -30,5 +29,6 @@ RUN composer install --prefer-source
 # Copy rest of the files, ignoring .dockerignore files
 COPY lib /elastica/lib
 COPY test /elastica/test
+COPY Makefile /elastica/
 
 ENTRYPOINT []
