@@ -472,10 +472,10 @@ class BulkTest extends BaseTest
 
         $i = 0;
         $limit = 20;
-		
-		// adds 6 documents and checks if on average every document is added in less then 0.2 seconds
+
+        // adds 6 documents and checks if on average every document is added in less then 0.2 seconds
         do {
-            usleep(200000);	// 0.2 seconds
+            usleep(200000);    // 0.2 seconds
         } while ($type->count() < 6 && ++$i < $limit);
 
         if ($shouldFail) {
