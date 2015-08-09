@@ -1,0 +1,26 @@
+{
+    "name": "ruflin/elastica-base",
+    "description": "Elastica Base Dev Environment",
+    "keywords": ["search","client"],
+    "homepage": "http://elastica.io/",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolas Ruflin",
+            "homepage": "http://ruflin.com/"
+        }
+    ],
+    "require": {
+        "fabpot/php-cs-fixer":"1.10.*",
+        "mayflower/php-codebrowser":"~1.1",
+        "pdepend/pdepend":"~2.0",
+        "phploc/phploc":"~2.1",
+        "phpdocumentor/template-zend":"~1.3",
+        "phpdocumentor/phpdocumentor":"~2.8",
+        "phpmd/phpmd":"~2.2",
+        "phpunit/phpunit":"~4.7",
+        "sebastian/phpcpd":"~2.0",
+        "squizlabs/php_codesniffer":"~2.3"
+    }
+}

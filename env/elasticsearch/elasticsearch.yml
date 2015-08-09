@@ -36,4 +36,4 @@ thrift.port: 9500
 memcached.port: 11211
 
 # Added for snapshot tests
-path.repo: ["/tmp/test_register", "/tmp/test_repository"]
+path.repo: ["/tmp/backups"]

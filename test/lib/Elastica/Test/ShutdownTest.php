@@ -25,7 +25,8 @@ class ShutdownTest extends BaseTest
         }
 
         $portFound = false;
-        // sayonara, wolverine, we'd never love you
+
+        // Shuts down host on port 9201 in travis or vagrant environment where multiple instance run on one host
         foreach ($nodes as $node) {
             if ((int) $node->getInfo()->getPort() === 9201) {
                 $portFound = true;
@@ -34,8 +35,9 @@ class ShutdownTest extends BaseTest
             }
         }
 
+        // In case of docker environment, just shuts down the last node
         if (!$portFound) {
-            $this->markTestSkipped('This test was skipped as in the new docker environment all elasticsearch instances run on the same port');
+            end($nodes)->shutdown('1s');
         }
 
         // Wait until node is shutdown

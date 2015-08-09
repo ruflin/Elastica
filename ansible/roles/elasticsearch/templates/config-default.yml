@@ -31,7 +31,7 @@ processors: 1
 node.name: Elastica
 
 # Added for snapshot tests
-path.repo: ["/tmp/test_register", "/tmp/test_repository"]
+path.repo: ["/tmp/backups"]
 
 {% endblock %}
 
