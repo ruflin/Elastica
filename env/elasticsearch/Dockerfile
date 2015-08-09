@@ -26,4 +26,4 @@ RUN mkdir -p /tmp/backups/backup1
 RUN mkdir -p /tmp/backups/backup2
 
 # Expose standard ports, thrift, udp, memcache
-EXPOSE 9200 9300 9500 9700 9800 11211
+EXPOSE 9200 9300 9500 9700/udp 9800/udp 11211
