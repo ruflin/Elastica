@@ -2,15 +2,13 @@
 namespace Elastica\Test;
 
 use Elastica\Client;
-use Elastica\Index;
 use Elastica\IndexTemplate;
 use Elastica\Request;
 use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 
 /**
- * IndexTemplate class tests
+ * IndexTemplate class tests.
  *
  * @author Dmitry Balabka <dmitry.balabka@intexsys.lv>
  */
@@ -50,7 +48,7 @@ class IndexTemplateTest extends BaseTest
         $clientMock = $this->getMock('\Elastica\Client', array('request'));
         $clientMock->expects($this->once())
             ->method('request')
-            ->with('/_template/' . $name, Request::DELETE, array(), array())
+            ->with('/_template/'.$name, Request::DELETE, array(), array())
             ->willReturn($response);
         $indexTemplate = new IndexTemplate($clientMock, $name);
         $this->assertSame($response, $indexTemplate->delete());
@@ -68,7 +66,7 @@ class IndexTemplateTest extends BaseTest
         $clientMock = $this->getMock('\Elastica\Client', array('request'));
         $clientMock->expects($this->once())
             ->method('request')
-            ->with('/_template/' . $name, Request::PUT, $args, array())
+            ->with('/_template/'.$name, Request::PUT, $args, array())
             ->willReturn($response);
         $indexTemplate = new IndexTemplate($clientMock, $name);
         $this->assertSame($response, $indexTemplate->create($args));
@@ -86,7 +84,7 @@ class IndexTemplateTest extends BaseTest
         $clientMock = $this->getMock('\Elastica\Client', array('request'));
         $clientMock->expects($this->once())
             ->method('request')
-            ->with('/_template/' . $name, Request::HEAD, array(), array())
+            ->with('/_template/'.$name, Request::HEAD, array(), array())
             ->willReturn($response);
         $indexTemplate = new IndexTemplate($clientMock, $name);
         $this->assertTrue($indexTemplate->exists());
@@ -100,7 +98,7 @@ class IndexTemplateTest extends BaseTest
         $template = array(
             'template' => 'te*',
             'settings' => array(
-                'number_of_shards' => 1
+                'number_of_shards' => 1,
             ),
         );
         $name = 'index_template1';

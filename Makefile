@@ -94,7 +94,7 @@ destroy: clean
 
 # Stops and removes all containers and removes all images
 destroy-environment:
-	make remove-containers:
+	make remove-containers
 	-docker rmi $(shell docker images -q)
 	
 remove-containers:

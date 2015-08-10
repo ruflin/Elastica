@@ -7,6 +7,8 @@ use Elastica\Exception\InvalidException;
  * Elastica index template object.
  *
  * @author Dmitry Balabka <dmitry.balabka@gmail.com>
+ * 
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html
  */
 class IndexTemplate
 {
@@ -15,14 +17,14 @@ class IndexTemplate
      *
      * @var string Index pattern
      */
-    protected $name = '';
+    protected $_name = '';
 
     /**
      * Client object.
      *
      * @var \Elastica\Client Client object
      */
-    protected $client = null;
+    protected $_client = null;
 
     /**
      * Creates a new index template object.
@@ -34,12 +36,12 @@ class IndexTemplate
      */
     public function __construct(Client $client, $name)
     {
-        $this->client = $client;
+        $this->_client = $client;
 
         if (!is_scalar($name)) {
             throw new InvalidException('Index template should be a scalar type');
         }
-        $this->name = (string) $name;
+        $this->_name = (string) $name;
     }
 
     /**
@@ -59,7 +61,7 @@ class IndexTemplate
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html
      *
-     * @param array      $args    OPTIONAL Arguments to use
+     * @param array $args OPTIONAL Arguments to use
      *
      * @return \Elastica\Response
      */
@@ -88,7 +90,7 @@ class IndexTemplate
      */
     public function getName()
     {
-        return $this->name;
+        return $this->_name;
     }
 
     /**
@@ -98,7 +100,7 @@ class IndexTemplate
      */
     public function getClient()
     {
-        return $this->client;
+        return $this->_client;
     }
 
     /**
@@ -111,7 +113,7 @@ class IndexTemplate
      */
     public function request($method, $data = array())
     {
-        $path = '/_template/' . $this->getName();
+        $path = '/_template/'.$this->getName();
 
         return $this->getClient()->request($path, $method, $data);
     }

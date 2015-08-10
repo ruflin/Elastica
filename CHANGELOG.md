@@ -8,15 +8,17 @@ All notable changes to this project will be documented in this file based on the
 ### Bugfixes
 
 ### Added
+- Support for index template added [#905](https://github.com/ruflin/Elastica/pull/905)
 
 ### Improvements
-- Update Elasticsearch dependency to 1.7.1 and update plugin dependencies
+- Update Elasticsearch dependency to 1.7.1 and update plugin dependencies [#909](https://github.com/ruflin/Elastica/pull/909)
 - Update php-cs-fixer to 1.10 [#898](https://github.com/ruflin/Elastica/pull/898)
 - Elastica\QueryBuilder now uses Elastica\QueryBuilder\Version\Latest as default version to avoid empty version classes. [#897](https://github.com/ruflin/Elastica/pull/897)
 - Update elasticseach-image to work with ES 1.7.1 [#907](https://github.com/ruflin/Elastica/pull/907)
+- Local dev environment was refactored to fully work in docker environment. Running tests is now only one command: `make tests` [#901](https://github.com/ruflin/Elastica/pull/901)
 
 ### Deprecated
-- Elastica\QueryBuilder\Version\Version150 deprecated in favor of Elastica\QueryBuilder\Version\Latest
+- Elastica\QueryBuilder\Version\Version150 deprecated in favor of Elastica\QueryBuilder\Version\Latest [#897](https://github.com/ruflin/Elastica/pull/897)
 
 
 ## [2.2.0](https://github.com/ruflin/Elastica/releases/tag/2.2.0) - 2015-07-08
