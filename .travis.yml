@@ -20,7 +20,7 @@ branches:
     - master
 
 install:
-  - /bin/bash ansible/provision.sh
+  - /bin/bash env/ansible/provision.sh
 
 before_script:
   - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ] && [ "$TRAVIS_PHP_VERSION" != "7" ]; then echo "extension=memcache.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi;'
