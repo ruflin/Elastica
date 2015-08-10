@@ -1,11 +1,21 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/2.2.0...HEAD)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/2.2.1...HEAD)
 
 ### Backward Compatibility Breaks
 
 ### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+
+## [2.2.1](https://github.com/ruflin/Elastica/releases/tag/2.2.1) - 2015-08-10
+
 
 ### Added
 - Support for index template added [#905](https://github.com/ruflin/Elastica/pull/905)
