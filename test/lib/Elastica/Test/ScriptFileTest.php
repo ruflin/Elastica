@@ -1,17 +1,53 @@
 <?php
 namespace Elastica\Test;
 
+use Elastica\Document;
+use Elastica\Query;
 use Elastica\ScriptFile;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Type;
+use Elastica\Type\Mapping;
 
 class ScriptFileTest extends BaseTest
 {
+    /**
+     * @group functional
+     */
+    public function testSearch()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('test');
+
+        $type->setMapping(new Mapping(null, array(
+            'location' => array('type' => 'geo_point'),
+        )));
+
+        $type->addDocuments(array(
+            new Document(1, array('location' => array('lat' => 48.8825968, 'lon' => 2.3706111))),
+            new Document(2, array('location' => array('lat' => 48.9057932, 'lon' => 2.2739735))),
+        ));
+
+        $index->refresh();
+
+        $scriptFile = new ScriptFile('calculate-distance', array('lat' => 48.858859, 'lon' => 2.3470599));
+
+        $query = new Query();
+        $query->addScriptField('distance', $scriptFile);
+
+        $resultSet = $type->search($query);
+        $results = $resultSet->getResults();
+
+        $this->assertEquals(2, $resultSet->count());
+        $this->assertEquals(array(3.1494078652615), $results[0]->__get('distance'));
+        $this->assertEquals(array(7.4639825876924561), $results[1]->__get('distance'));
+    }
+
     /**
      * @group unit
      */
     public function testConstructor()
     {
-        $value = "calculate-distance.groovy";
+        $value = 'calculate-distance.groovy';
         $scriptFile = new ScriptFile($value);
 
         $expected = array(

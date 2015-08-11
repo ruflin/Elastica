@@ -33,6 +33,8 @@ node.name: Elastica
 # Added for snapshot tests
 path.repo: ["/tmp/test_register", "/tmp/test_repository"]
 
+script.engine.groovy.file: on
+
 {% endblock %}
 
 {% block config %}
