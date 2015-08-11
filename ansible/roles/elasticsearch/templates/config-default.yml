@@ -17,6 +17,8 @@ bulk.udp.bulk_actions: 5
 script.inline: on
 script.indexed: on
 
+script.engine.groovy.file: on
+
 # Disable dynamic memory allocation
 bootstrap.mlockall: true
 
@@ -32,6 +34,8 @@ node.name: Elastica
 
 # Added for snapshot tests
 path.repo: ["/tmp/backups"]
+
+script.engine.groovy.file: on
 
 {% endblock %}
 

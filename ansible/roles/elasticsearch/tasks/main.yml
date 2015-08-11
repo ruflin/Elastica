@@ -87,6 +87,14 @@
     - config-1.yml
     - logging.yml
   notify: restart elasticsearch
+  
+- name: Assures scripts dir exists
+  file: path=/etc/elasticsearch/scripts/ state=directory
+- name: create custom config scripts
+  template: >
+    dest=/etc/elasticsearch/scripts/
+    src=calculate-distance.groovy
+  notify: restart elasticsearch
 
 - name: create elasticsearch service script
   template: >

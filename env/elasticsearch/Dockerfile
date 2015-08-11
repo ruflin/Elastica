@@ -21,6 +21,8 @@ RUN ${ES_PLUGIN_BIN} -install mobz/elasticsearch-head
 
 # Copy config files
 COPY *.yml /usr/share/elasticsearch/config/
+COPY scripts/* /usr/share/elasticsearch/config/scripts/
+
 
 RUN mkdir -p /tmp/backups/backup1
 RUN mkdir -p /tmp/backups/backup2
