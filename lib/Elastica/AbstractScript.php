@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica;
 
 /**
@@ -13,7 +12,7 @@ abstract class AbstractScript extends AbstractUpdateAction
 {
     /**
      * @param array|null $params
-     * @param string $id
+     * @param string     $id
      */
     public function __construct(array $params = null, $id = null)
     {

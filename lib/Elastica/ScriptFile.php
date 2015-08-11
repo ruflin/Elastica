@@ -19,9 +19,9 @@ class ScriptFile extends AbstractScript
     private $_scriptFile;
 
     /**
-     * @param string $scriptFile
+     * @param string     $scriptFile
      * @param array|null $params
-     * @param null $id
+     * @param null       $id
      */
     public function __construct($scriptFile, array $params = null, $id = null)
     {

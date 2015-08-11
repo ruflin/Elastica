@@ -306,7 +306,7 @@ class Query extends Param
     /**
      * Adds a Script to the query.
      *
-     * @param string           $name
+     * @param string                   $name
      * @param \Elastica\AbstractScript $script Script object
      *
      * @return $this
