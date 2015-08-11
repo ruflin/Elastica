@@ -44,11 +44,7 @@ class Terms extends AbstractFacet
      */
     public function setScript($script)
     {
-        $script = Script::create($script);
-        foreach ($script->toArray() as $param => $value) {
-            $this->setParam($param, $value);
-        }
-
+        $this->setParam('script', Script::create($script));
         return $this;
     }
 
@@ -132,6 +128,12 @@ class Terms extends AbstractFacet
     {
         $this->_setFacetParam('terms', $this->_params);
 
-        return parent::toArray();
+        $array = parent::toArray();
+
+        if (isset($array[$this->_getBaseName()]['script'])) {
+            $array[$this->_getBaseName()]['script'] = $array[$this->_getBaseName()]['script']['script'];
+        }
+
+        return $array;
     }
 }

@@ -34,7 +34,7 @@ abstract class AbstractMulti extends AbstractFilter
      */
     public function addFilter(AbstractFilter $filter)
     {
-        $this->_filters[] = $filter->toArray();
+        $this->_filters[] = $filter;
 
         return $this;
     }
@@ -84,6 +84,6 @@ abstract class AbstractMulti extends AbstractFilter
 
         $data[$name] = $filterData;
 
-        return $data;
+        return $this->_convertArrayable($data);
     }
 }

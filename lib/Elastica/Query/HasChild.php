@@ -33,10 +33,7 @@ class HasChild extends AbstractQuery
      */
     public function setQuery($query)
     {
-        $query = BaseQuery::create($query);
-        $data = $query->toArray();
-
-        return $this->setParam('query', $data['query']);
+        return $this->setParam('query', BaseQuery::create($query));
     }
 
     /**
@@ -61,5 +58,16 @@ class HasChild extends AbstractQuery
     public function setScope($scope)
     {
         return $this->setParam('_scope', $scope);
+    }
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        if (isset($array[$this->_getBaseName()]['query'])) {
+            $array[$this->_getBaseName()]['query'] = $array[$this->_getBaseName()]['query']['query'];
+        }
+
+        return $array;
     }
 }

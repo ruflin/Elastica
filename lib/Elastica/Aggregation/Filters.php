@@ -23,9 +23,9 @@ class Filters extends AbstractAggregation
     public function addFilter(AbstractFilter $filter, $name = '')
     {
         if (empty($name)) {
-            $filterArray[] = $filter->toArray();
+            $filterArray[] = $filter;
         } else {
-            $filterArray[$name] = $filter->toArray();
+            $filterArray[$name] = $filter;
         }
 
         return $this->addParam('filters', $filterArray);
@@ -44,14 +44,14 @@ class Filters extends AbstractAggregation
             $key = key($filter);
 
             if (is_string($key)) {
-                $array['filters']['filters'][$key] = current($filter);
+                $array['filters']['filters'][$key] = current($filter)->toArray();
             } else {
-                $array['filters']['filters'][] = current($filter);
+                $array['filters']['filters'][] = current($filter)->toArray();
             }
         }
 
         if ($this->_aggs) {
-            $array['aggs'] = $this->_aggs;
+            $array['aggs'] = $this->_convertArrayable($this->_aggs);
         }
 
         return $array;

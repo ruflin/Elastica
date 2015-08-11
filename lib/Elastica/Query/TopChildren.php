@@ -33,10 +33,7 @@ class TopChildren extends AbstractQuery
      */
     public function setQuery($query)
     {
-        $query = BaseQuery::create($query);
-        $data = $query->toArray();
-
-        return $this->setParam('query', $data['query']);
+        return $this->setParam('query', BaseQuery::create($query));
     }
 
     /**

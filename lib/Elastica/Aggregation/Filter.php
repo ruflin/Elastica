@@ -32,7 +32,7 @@ class Filter extends AbstractAggregation
      */
     public function setFilter(AbstractFilter $filter)
     {
-        return $this->setParam('filter', $filter->toArray());
+        return $this->setParam('filter', $filter);
     }
 
     /**
@@ -41,11 +41,11 @@ class Filter extends AbstractAggregation
     public function toArray()
     {
         $array = array(
-            'filter' => $this->getParam('filter'),
+            'filter' => $this->getParam('filter')->toArray(),
         );
 
         if ($this->_aggs) {
-            $array['aggs'] = $this->_aggs;
+            $array['aggs'] = $this->_convertArrayable($this->_aggs);
         }
 
         return $array;

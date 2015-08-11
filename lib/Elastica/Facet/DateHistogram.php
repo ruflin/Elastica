@@ -53,6 +53,6 @@ class DateHistogram extends Histogram
          */
         $this->_setFacetParam('date_histogram', $this->_params);
 
-        return $this->_facet;
+        return $this->_convertArrayable($this->_facet);
     }
 }

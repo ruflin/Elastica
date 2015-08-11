@@ -155,10 +155,30 @@ class Phrase extends AbstractSuggest
      */
     public function addCandidateGenerator(AbstractCandidateGenerator $generator)
     {
-        $generator = $generator->toArray();
-        $keys = array_keys($generator);
-        $values = array_values($generator);
+        return $this->setParam('candidate_generator', $generator);
+    }
 
-        return $this->addParam($keys[0], $values[0]);
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        if (isset($array[$this->_getBaseName()]['candidate_generator'])) {
+            $generator = $array[$this->_getBaseName()]['candidate_generator'];
+            unset($array[$this->_getBaseName()]['candidate_generator']);
+
+            $keys = array_keys($generator);
+            $values = array_values($generator);
+
+            if (!isset($array[$this->_getBaseName()][$keys[0]])) {
+                $array[$this->_getBaseName()][$keys[0]] = array();
+            }
+
+            $array[$this->_getBaseName()][$keys[0]][] = $values[0];
+        }
+
+        return $array;
     }
 }

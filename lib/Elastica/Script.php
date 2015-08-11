@@ -145,7 +145,7 @@ class Script extends AbstractScript
         );
 
         if (!empty($this->_params)) {
-            $array['params'] = $this->_params;
+            $array['params'] = $this->_convertArrayable($this->_params);
         }
 
         if ($this->_lang) {

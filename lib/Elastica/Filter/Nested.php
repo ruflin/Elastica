@@ -33,7 +33,7 @@ class Nested extends AbstractFilter
      */
     public function setQuery(AbstractQuery $query)
     {
-        return $this->setParam('query', $query->toArray());
+        return $this->setParam('query', $query);
     }
 
     /**
@@ -45,7 +45,7 @@ class Nested extends AbstractFilter
      */
     public function setFilter(AbstractFilter $filter)
     {
-        return $this->setParam('filter', $filter->toArray());
+        return $this->setParam('filter', $filter);
     }
 
     /**

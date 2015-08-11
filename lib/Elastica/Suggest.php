@@ -42,7 +42,7 @@ class Suggest extends Param
      */
     public function addSuggestion(AbstractSuggest $suggestion)
     {
-        return $this->setParam($suggestion->getName(), $suggestion->toArray());
+        return $this->addParam('suggestion', $suggestion);
     }
 
     /**
@@ -61,5 +61,24 @@ class Suggest extends Param
                 return new self($suggestion);
         }
         throw new NotImplementedException();
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        if (isset($array[$this->_getBaseName()]['suggestion'])) {
+            $suggestion = $array[$this->_getBaseName()]['suggestion'];
+            unset($array[$this->_getBaseName()]['suggestion']);
+
+            foreach ($suggestion as $key => $value) {
+                $array[$this->_getBaseName()][$key] = $value;
+            }
+        }
+
+        return $array;
     }
 }

@@ -10,7 +10,7 @@ use Elastica\Exception\InvalidException;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Param
+class Param implements Arrayable
 {
     /**
      * Params.
@@ -41,7 +41,24 @@ class Param
             $data = array_merge($data, $this->_rawParams);
         }
 
-        return $data;
+        return $this->_convertArrayable($data);
+    }
+
+    protected function _convertArrayable(array $array)
+    {
+        $arr = array();
+
+        foreach ($array as $key => $value) {
+            if ($value instanceof Arrayable) {
+                $arr[$value instanceof Nameable ? $value->getName() : $key] = $value->toArray();
+            } elseif (is_array($value)) {
+                $arr[$key] = $this->_convertArrayable($value);
+            } else {
+                $arr[$key] = $value;
+            }
+        }
+
+        return $arr;
     }
 
     /**

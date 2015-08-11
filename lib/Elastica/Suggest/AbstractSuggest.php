@@ -1,12 +1,13 @@
 <?php
 namespace Elastica\Suggest;
 
+use Elastica\Nameable;
 use Elastica\Param;
 
 /**
  * Class AbstractSuggestion.
  */
-abstract class AbstractSuggest extends Param
+abstract class AbstractSuggest extends Param implements Nameable
 {
     /**
      * @var string the name of this suggestion

@@ -19,20 +19,20 @@ class ScriptFieldsTest extends BaseTest
         // addScript
         $scriptFields = new ScriptFields();
         $scriptFields->addScript('test', $script);
-        $this->assertEquals($scriptFields->getParam('test'), $script->toArray());
+        $this->assertSame($scriptFields->getParam('test'), $script);
 
         // setScripts
         $scriptFields = new ScriptFields();
         $scriptFields->setScripts(array(
             'test' => $script,
         ));
-        $this->assertEquals($scriptFields->getParam('test'), $script->toArray());
+        $this->assertSame($scriptFields->getParam('test'), $script);
 
         // Constructor
         $scriptFields = new ScriptFields(array(
             'test' => $script,
         ));
-        $this->assertEquals($scriptFields->getParam('test'), $script->toArray());
+        $this->assertSame($scriptFields->getParam('test'), $script);
     }
 
     /**
@@ -47,12 +47,12 @@ class ScriptFieldsTest extends BaseTest
             'test' => $script,
         ));
         $query->setScriptFields($scriptFields);
-        $this->assertEquals($query->getParam('script_fields'), $scriptFields->toArray());
+        $this->assertSame($query->getParam('script_fields'), $scriptFields);
 
         $query->setScriptFields(array(
             'test' => $script,
         ));
-        $this->assertEquals($query->getParam('script_fields'), $scriptFields->toArray());
+        $this->assertSame($query->getParam('script_fields')->getParam('test'), $script);
     }
 
     /**

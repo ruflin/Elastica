@@ -47,10 +47,6 @@ class Query extends AbstractFilter
             throw new InvalidException('expected an array or instance of Elastica\Query\AbstractQuery');
         }
 
-        if ($query instanceof AbstractQuery) {
-            $query = $query->toArray();
-        }
-
         $this->_query = $query;
 
         return $this;
@@ -86,6 +82,6 @@ class Query extends AbstractFilter
 
         $data[$name] = $filterData;
 
-        return $data;
+        return $this->_convertArrayable($data);
     }
 }

@@ -29,7 +29,7 @@ class BoolNot extends AbstractFilter
      */
     public function setFilter(AbstractFilter $filter)
     {
-        return $this->setParam('filter', $filter->toArray());
+        return $this->setParam('filter', $filter);
     }
 
     /**

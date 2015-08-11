@@ -35,10 +35,7 @@ class HasChild extends AbstractFilter
      */
     public function setQuery($query)
     {
-        $query = \Elastica\Query::create($query);
-        $data = $query->toArray();
-
-        return $this->setParam('query', $data['query']);
+        return $this->setParam('query', \Elastica\Query::create($query));
     }
 
     /**
@@ -50,7 +47,7 @@ class HasChild extends AbstractFilter
      */
     public function setFilter($filter)
     {
-        return $this->setParam('filter', $filter->toArray());
+        return $this->setParam('filter', $filter);
     }
 
     /**
@@ -91,5 +88,16 @@ class HasChild extends AbstractFilter
     public function setMaximumChildrenCount($count)
     {
         return $this->setParam('max_children', (int) $count);
+    }
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        if (isset($array[$this->_getBaseName()]['query'])) {
+            $array[$this->_getBaseName()]['query'] = $array[$this->_getBaseName()]['query']['query'];
+        }
+
+        return $array;
     }
 }
