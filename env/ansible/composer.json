@@ -1,0 +1,43 @@
+{
+    "name": "ruflin/elastica",
+    "description": "Elasticsearch Client",
+    "keywords": ["search","client"],
+    "homepage": "http://elastica.io/",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolas Ruflin",
+            "homepage": "http://ruflin.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "psr/log": "~1.0"
+    },
+    "require-dev": {
+        "munkie/elasticsearch-thrift-php": "1.4.*",
+        "guzzlehttp/guzzle": "5.3.*"
+    },
+    "suggest": {
+        "munkie/elasticsearch-thrift-php": "Allow using thrift transport",
+        "guzzlehttp/guzzle": "Allow using guzzle 5.3.x as the http transport (Requires php 5.4)",
+        "egeloen/http-adapter": "Allow using httpadapter transport",
+        "monolog/monolog": "Logging request"
+    },
+    "autoload": {
+        "psr-4": {
+            "Elastica\\": "lib/Elastica/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Elastica\\Test\\": "test/lib/Elastica/Test/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}
