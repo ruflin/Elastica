@@ -119,10 +119,6 @@ gource:
 
 ## DOCKER IMAGES
 
-
-# This creates the base image locally for local development. In case no local development is done anymore, make sure to remove this image.
-all: nginx-image elasticsearch-image elastica-dev-image elastica-image elastica-data
-	# elastica image has to be built after elastica-dev image as it depends on it. Otherwise the remote image is fetched.
 	
 elastica-image:
 	docker build -t ruflin/elastica .
