@@ -306,12 +306,12 @@ class Query extends Param
     /**
      * Adds a Script to the query.
      *
-     * @param string           $name
-     * @param \Elastica\Script $script Script object
+     * @param string                   $name
+     * @param \Elastica\AbstractScript $script Script object
      *
      * @return $this
      */
-    public function addScriptField($name, Script $script)
+    public function addScriptField($name, AbstractScript $script)
     {
         $this->_params['script_fields'][$name] = $script->toArray();
 
