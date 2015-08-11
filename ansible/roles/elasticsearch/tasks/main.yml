@@ -90,7 +90,7 @@
   
 - name: create custom configscripts
   template: >
-    dest=/etc/elasticsearch/scripts/{{ item }}
+    dest=/etc/elasticsearch/scripts/
     src=calculate-distance.groovy
     state=directory
   notify: restart elasticsearch
