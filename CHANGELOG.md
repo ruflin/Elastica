@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file based on the
 ### Bugfixes
 
 ### Added
+- Add Script File feature #902 #914
 
 ### Improvements
 
