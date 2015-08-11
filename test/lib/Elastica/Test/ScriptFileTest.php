@@ -1,7 +1,6 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Script;
 use Elastica\ScriptFile;
 use Elastica\Test\Base as BaseTest;
 
