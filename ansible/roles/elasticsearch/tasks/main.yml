@@ -87,6 +87,14 @@
     - config-1.yml
     - logging.yml
   notify: restart elasticsearch
+  
+- name: create custom configscripts
+  template: >
+    dest=/etc/elasticsearch/scripts/{{ item }}
+    src={{ item }}
+  with_items:
+    - calculate-distance.groovy
+  notify: restart elasticsearch
 
 - name: create elasticsearch service script
   template: >
