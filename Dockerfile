@@ -1,5 +1,6 @@
 # PHP 6 Docker file with Composer installed
 FROM ruflin/elastica-dev-base
+MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 # ENVIRONMENT Setup - Needed in this image?
 ENV ES_HOST elasticsearch
