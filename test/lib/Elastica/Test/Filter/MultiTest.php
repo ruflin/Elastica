@@ -45,7 +45,7 @@ class AbstractMultiTest extends BaseTest
         $stub->setFilters(array($filter));
 
         $expected = array(
-            $filter
+            $filter,
         );
 
         $this->assertSame($expected, $stub->getFilters());

@@ -74,4 +74,3 @@ class HasParent extends AbstractQuery
         return $array;
     }
 }
-

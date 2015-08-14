@@ -45,6 +45,7 @@ class Terms extends AbstractFacet
     public function setScript($script)
     {
         $this->setParam('script', Script::create($script));
+
         return $this;
     }
 

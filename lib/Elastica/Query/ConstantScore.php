@@ -2,7 +2,6 @@
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
-use Elastica\Filter\AbstractFilter;
 
 /**
  * Constant score query.

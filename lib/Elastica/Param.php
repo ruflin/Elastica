@@ -45,9 +45,10 @@ class Param implements ArrayableInterface
     }
 
     /**
-     * Cast objects to arrays
+     * Cast objects to arrays.
      *
      * @param array $array
+     *
      * @return array
      */
     protected function _convertArrayable(array $array)
