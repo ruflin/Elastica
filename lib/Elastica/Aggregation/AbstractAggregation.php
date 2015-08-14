@@ -2,10 +2,10 @@
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
-use Elastica\Nameable;
+use Elastica\NameableInterface;
 use Elastica\Param;
 
-abstract class AbstractAggregation extends Param implements Nameable
+abstract class AbstractAggregation extends Param implements NameableInterface
 {
     /**
      * @var string The name of this aggregation

@@ -3,7 +3,7 @@ namespace Elastica\Facet;
 
 use Elastica\Exception\InvalidException;
 use Elastica\Filter\AbstractFilter;
-use Elastica\Nameable;
+use Elastica\NameableInterface;
 use Elastica\Param;
 
 /**
@@ -14,7 +14,7 @@ use Elastica\Param;
  *
  * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
  */
-abstract class AbstractFacet extends Param implements Nameable
+abstract class AbstractFacet extends Param implements NameableInterface
 {
     /**
      * @var string Holds the name of the facet.

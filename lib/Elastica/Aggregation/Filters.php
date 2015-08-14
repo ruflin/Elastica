@@ -22,10 +22,12 @@ class Filters extends AbstractAggregation
      */
     public function addFilter(AbstractFilter $filter, $name = '')
     {
-        if (empty($name)) {
-            $filterArray[] = $filter;
-        } else {
+        $filterArray = array();
+
+        if (is_string($name)) {
             $filterArray[$name] = $filter;
+        } else {
+            $filterArray[] = $filter;
         }
 
         return $this->addParam('filters', $filterArray);
