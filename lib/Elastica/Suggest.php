@@ -70,12 +70,14 @@ class Suggest extends Param
     {
         $array = parent::toArray();
 
-        if (isset($array[$this->_getBaseName()]['suggestion'])) {
-            $suggestion = $array[$this->_getBaseName()]['suggestion'];
-            unset($array[$this->_getBaseName()]['suggestion']);
+        $baseName = $this->_getBaseName();
+
+        if (isset($array[$baseName]['suggestion'])) {
+            $suggestion = $array[$baseName]['suggestion'];
+            unset($array[$baseName]['suggestion']);
 
             foreach ($suggestion as $key => $value) {
-                $array[$this->_getBaseName()][$key] = $value;
+                $array[$baseName][$key] = $value;
             }
         }
 

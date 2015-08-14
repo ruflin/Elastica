@@ -36,12 +36,14 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
     {
         $array = parent::toArray();
 
-        if (isset($array[$this->_getBaseName()]['script']) && is_array($array[$this->_getBaseName()]['script'])) {
-            $script = $array[$this->_getBaseName()]['script'];
+        $baseName = $this->_getBaseName();
 
-            unset($array[$this->_getBaseName()]['script']);
+        if (isset($array[$baseName]['script']) && is_array($array[$baseName]['script'])) {
+            $script = $array[$baseName]['script'];
 
-            $array[$this->_getBaseName()] = array_merge($array[$this->_getBaseName()], $script);
+            unset($array[$baseName]['script']);
+
+            $array[$baseName] = array_merge($array[$baseName], $script);
         }
 
         return $array;

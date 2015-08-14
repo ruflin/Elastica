@@ -65,8 +65,10 @@ class HasParent extends AbstractQuery
     {
         $array = parent::toArray();
 
-        if (isset($array[$this->_getBaseName()]['query'])) {
-            $array[$this->_getBaseName()]['query'] = $array[$this->_getBaseName()]['query']['query'];
+        $baseName = $this->_getBaseName();
+
+        if (isset($array[$baseName]['query'])) {
+            $array[$baseName]['query'] = $array[$baseName]['query']['query'];
         }
 
         return $array;

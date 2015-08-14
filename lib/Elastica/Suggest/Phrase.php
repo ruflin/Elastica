@@ -165,18 +165,20 @@ class Phrase extends AbstractSuggest
     {
         $array = parent::toArray();
 
-        if (isset($array[$this->_getBaseName()]['candidate_generator'])) {
-            $generator = $array[$this->_getBaseName()]['candidate_generator'];
-            unset($array[$this->_getBaseName()]['candidate_generator']);
+        $baseName = $this->_getBaseName();
+
+        if (isset($array[$baseName]['candidate_generator'])) {
+            $generator = $array[$baseName]['candidate_generator'];
+            unset($array[$baseName]['candidate_generator']);
 
             $keys = array_keys($generator);
             $values = array_values($generator);
 
-            if (!isset($array[$this->_getBaseName()][$keys[0]])) {
-                $array[$this->_getBaseName()][$keys[0]] = array();
+            if (!isset($array[$baseName][$keys[0]])) {
+                $array[$baseName][$keys[0]] = array();
             }
 
-            $array[$this->_getBaseName()][$keys[0]][] = $values[0];
+            $array[$baseName][$keys[0]][] = $values[0];
         }
 
         return $array;

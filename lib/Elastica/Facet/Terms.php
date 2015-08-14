@@ -130,8 +130,10 @@ class Terms extends AbstractFacet
 
         $array = parent::toArray();
 
-        if (isset($array[$this->_getBaseName()]['script'])) {
-            $array[$this->_getBaseName()]['script'] = $array[$this->_getBaseName()]['script']['script'];
+        $baseName = $this->_getBaseName();
+
+        if (isset($array[$baseName]['script'])) {
+            $array[$baseName]['script'] = $array[$baseName]['script']['script'];
         }
 
         return $array;
