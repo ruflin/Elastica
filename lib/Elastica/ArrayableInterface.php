@@ -7,7 +7,7 @@ namespace Elastica;
  *
  * @author Evgeniy Sokolov <ewgraf@gmail.com>
  */
-interface Arrayable
+interface ArrayableInterface
 {
     /**
      * Converts the object to an array.

@@ -2,12 +2,14 @@
 namespace Elastica;
 
 /**
- * Interface for params.
+ * Interface for named objects.
  *
  *
  * @author Evgeniy Sokolov <ewgraf@gmail.com>
  */
-interface Nameable
+interface NameableInterface
 {
     public function getName();
+
+    public function setName($name);
 }
