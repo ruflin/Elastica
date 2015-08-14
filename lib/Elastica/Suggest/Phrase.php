@@ -159,7 +159,7 @@ class Phrase extends AbstractSuggest
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function toArray()
     {

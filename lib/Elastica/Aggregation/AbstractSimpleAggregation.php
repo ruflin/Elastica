@@ -30,7 +30,7 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function toArray()
     {

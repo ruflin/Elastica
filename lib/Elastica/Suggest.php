@@ -64,7 +64,7 @@ class Suggest extends Param
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function toArray()
     {

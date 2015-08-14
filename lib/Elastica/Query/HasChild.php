@@ -60,6 +60,9 @@ class HasChild extends AbstractQuery
         return $this->setParam('_scope', $scope);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function toArray()
     {
         $array = parent::toArray();

@@ -64,6 +64,9 @@ class HasParent extends AbstractFilter
         return $this->setParam('type', (string) $type);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function toArray()
     {
         $array = parent::toArray();

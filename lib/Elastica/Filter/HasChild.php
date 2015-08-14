@@ -90,6 +90,9 @@ class HasChild extends AbstractFilter
         return $this->setParam('max_children', (int) $count);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function toArray()
     {
         $array = parent::toArray();

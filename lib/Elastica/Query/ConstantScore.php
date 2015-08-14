@@ -42,6 +42,8 @@ class ConstantScore extends AbstractQuery
      *
      * @param array|\Elastica\Query\AbstractQuery $query
      *
+     * @throws InvalidException If query is not an array or instance of AbstractQuery
+     *
      * @return $this
      */
     public function setQuery($query)

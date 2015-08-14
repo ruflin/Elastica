@@ -136,7 +136,7 @@ class Script extends AbstractScript
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function toArray()
     {

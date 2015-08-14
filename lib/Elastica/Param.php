@@ -44,6 +44,12 @@ class Param implements ArrayableInterface
         return $this->_convertArrayable($data);
     }
 
+    /**
+     * Cast objects to arrays
+     *
+     * @param array $array
+     * @return array
+     */
     protected function _convertArrayable(array $array)
     {
         $arr = array();
