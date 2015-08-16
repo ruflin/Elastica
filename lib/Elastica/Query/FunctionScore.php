@@ -40,7 +40,7 @@ class FunctionScore extends AbstractQuery
      */
     public function setQuery(AbstractQuery $query)
     {
-        return $this->setParam('query', $query->toArray());
+        return $this->setParam('query', $query);
     }
 
     /**
@@ -50,7 +50,7 @@ class FunctionScore extends AbstractQuery
      */
     public function setFilter(AbstractFilter $filter)
     {
-        return $this->setParam('filter', $filter->toArray());
+        return $this->setParam('filter', $filter);
     }
 
     /**
@@ -69,7 +69,7 @@ class FunctionScore extends AbstractQuery
             $functionType => $functionParams,
         );
         if (!is_null($filter)) {
-            $function['filter'] = $filter->toArray();
+            $function['filter'] = $filter;
         }
         if ($weight !== null) {
             $function['weight'] = $weight;
@@ -91,7 +91,7 @@ class FunctionScore extends AbstractQuery
      */
     public function addScriptScoreFunction(Script $script, AbstractFilter $filter = null, $weight = null)
     {
-        return $this->addFunction('script_score', $script->toArray(), $filter, $weight);
+        return $this->addFunction('script_score', $script, $filter, $weight);
     }
 
     /**

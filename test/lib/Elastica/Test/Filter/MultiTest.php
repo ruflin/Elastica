@@ -28,10 +28,10 @@ class AbstractMultiTest extends BaseTest
         $stub->addFilter($filter);
 
         $expected = array(
-            $filter->toArray(),
+            $filter,
         );
 
-        $this->assertEquals($expected, $stub->getFilters());
+        $this->assertSame($expected, $stub->getFilters());
     }
 
     /**
@@ -45,10 +45,10 @@ class AbstractMultiTest extends BaseTest
         $stub->setFilters(array($filter));
 
         $expected = array(
-            $filter->toArray(),
+            $filter,
         );
 
-        $this->assertEquals($expected, $stub->getFilters());
+        $this->assertSame($expected, $stub->getFilters());
     }
 
     /**

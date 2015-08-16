@@ -22,6 +22,6 @@ class SignificantTerms extends AbstractTermsAggregation
      */
     public function setBackgroundFilter(AbstractFilter $filter)
     {
-        return $this->setParam('background_filter', $filter->toArray());
+        return $this->setParam('background_filter', $filter);
     }
 }

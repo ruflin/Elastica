@@ -22,6 +22,6 @@ class Filter extends AbstractFacet
      */
     public function setFilter(AbstractFilter $filter)
     {
-        return $this->_setFacetParam('filter', $filter->toArray());
+        return $this->_setFacetParam('filter', $filter);
     }
 }

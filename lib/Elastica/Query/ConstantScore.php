@@ -1,7 +1,7 @@
 <?php
 namespace Elastica\Query;
 
-use Elastica\Filter\AbstractFilter;
+use Elastica\Exception\InvalidException;
 
 /**
  * Constant score query.
@@ -33,10 +33,6 @@ class ConstantScore extends AbstractQuery
      */
     public function setFilter($filter)
     {
-        if ($filter instanceof AbstractFilter) {
-            $filter = $filter->toArray();
-        }
-
         return $this->setParam('filter', $filter);
     }
 
@@ -45,12 +41,14 @@ class ConstantScore extends AbstractQuery
      *
      * @param array|\Elastica\Query\AbstractQuery $query
      *
+     * @throws InvalidException If query is not an array or instance of AbstractQuery
+     *
      * @return $this
      */
     public function setQuery($query)
     {
-        if ($query instanceof AbstractQuery) {
-            $query = $query->toArray();
+        if (!is_array($query) && !($query instanceof AbstractQuery)) {
+            throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
         }
 
         return $this->setParam('query', $query);

@@ -31,7 +31,7 @@ class Nested extends AbstractQuery
      */
     public function setQuery(AbstractQuery $query)
     {
-        return $this->setParam('query', $query->toArray());
+        return $this->setParam('query', $query);
     }
 
     /**

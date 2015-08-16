@@ -61,7 +61,7 @@ class Indices extends AbstractFilter
      */
     public function setFilter(AbstractFilter $filter)
     {
-        return $this->setParam('filter', $filter->toArray());
+        return $this->setParam('filter', $filter);
     }
 
     /**
@@ -73,6 +73,6 @@ class Indices extends AbstractFilter
      */
     public function setNoMatchFilter(AbstractFilter $filter)
     {
-        return $this->setParam('no_match_filter', $filter->toArray());
+        return $this->setParam('no_match_filter', $filter);
     }
 }

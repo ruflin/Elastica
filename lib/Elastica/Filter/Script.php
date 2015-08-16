@@ -40,8 +40,20 @@ class Script extends AbstractFilter
      */
     public function setScript($script)
     {
-        $script = Elastica\Script::create($script);
+        return $this->setParam('script', Elastica\Script::create($script));
+    }
 
-        return $this->setParams($script->toArray());
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        if (isset($array['script'])) {
+            $array['script'] = $array['script']['script'];
+        }
+
+        return $array;
     }
 }

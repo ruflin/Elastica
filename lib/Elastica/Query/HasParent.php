@@ -31,10 +31,7 @@ class HasParent extends AbstractQuery
      */
     public function setQuery($query)
     {
-        $query = BaseQuery::create($query);
-        $data = $query->toArray();
-
-        return $this->setParam('query', $data['query']);
+        return $this->setParam('query', BaseQuery::create($query));
     }
 
     /**
@@ -59,5 +56,21 @@ class HasParent extends AbstractQuery
     public function setScope($scope)
     {
         return $this->setParam('_scope', $scope);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $baseName = $this->_getBaseName();
+
+        if (isset($array[$baseName]['query'])) {
+            $array[$baseName]['query'] = $array[$baseName]['query']['query'];
+        }
+
+        return $array;
     }
 }

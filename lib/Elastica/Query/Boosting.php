@@ -21,7 +21,7 @@ class Boosting extends AbstractQuery
      */
     public function setPositiveQuery(AbstractQuery $query)
     {
-        return $this->setParam('positive', $query->toArray());
+        return $this->setParam('positive', $query);
     }
 
     /**
@@ -33,7 +33,7 @@ class Boosting extends AbstractQuery
      */
     public function setNegativeQuery(AbstractQuery $query)
     {
-        return $this->setParam('negative', $query->toArray());
+        return $this->setParam('negative', $query);
     }
 
     /**
