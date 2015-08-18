@@ -35,9 +35,14 @@ class TermTest extends BaseTest
     public function testToArray()
     {
         $suggest = new Suggest();
+
         $suggest1 = new Term('suggest1', '_all');
+        $suggest1->setSort(Term::SORT_FREQUENCY);
+
         $suggest->addSuggestion($suggest1->setText('Foor'));
+
         $suggest2 = new Term('suggest2', '_all');
+        $suggest2->setSuggestMode(Term::SUGGEST_MODE_POPULAR);
         $suggest->addSuggestion($suggest2->setText('Girhub'));
 
         $expected = array(
@@ -45,12 +50,14 @@ class TermTest extends BaseTest
                 'suggest1' => array(
                     'term' => array(
                         'field' => '_all',
+                        'sort' => 'frequency',
                     ),
                     'text' => 'Foor',
                 ),
                 'suggest2' => array(
                     'term' => array(
                         'field' => '_all',
+                        'suggest_mode' => 'popular',
                     ),
                     'text' => 'Girhub',
                 ),
