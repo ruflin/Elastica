@@ -38,7 +38,13 @@ class Query extends AbstractRescore
             $data = array_merge($data, $this->_rawParams);
         }
 
-        return $data;
+        $array = $this->_convertArrayable($data);
+
+        if (isset($array['query']['rescore_query']['query'])) {
+            $array['query']['rescore_query'] = $array['query']['rescore_query']['query'];
+        }
+
+        return $array;
     }
 
     /**
@@ -50,11 +56,10 @@ class Query extends AbstractRescore
      */
     public function setRescoreQuery($rescoreQuery)
     {
-        $query = BaseQuery::create($rescoreQuery);
-        $data = $query->toArray();
+        $rescoreQuery = BaseQuery::create($rescoreQuery);
 
         $query = $this->getParam('query');
-        $query['rescore_query'] = $data['query'];
+        $query['rescore_query'] = $rescoreQuery;
 
         return $this->setParam('query', $query);
     }

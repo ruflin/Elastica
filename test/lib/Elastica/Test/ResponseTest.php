@@ -196,7 +196,7 @@ class ResponseTest extends BaseTest
         $index = $this->_createIndex();
 
         $response = $index->request(
-            'non-existant-type/_mapping',
+            'non-existent-type/_mapping',
             Request::GET
         )->getData();
 

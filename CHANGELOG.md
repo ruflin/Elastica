@@ -1,21 +1,37 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/2.2.0...HEAD)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/2.2.1...HEAD)
+- Lazy toArray [#916](https://github.com/ruflin/Elastica/pull/916)
 
 ### Backward Compatibility Breaks
+- Objects do not casts to arrays in setters and saved in params as objects. There is many side effects if you work with params on "low-level" or change your objects after you call setter with object as argument. [#916](https://github.com/ruflin/Elastica/pull/916)
 
 ### Bugfixes
 
 ### Added
+- Add Script File feature #902 #914
 
 ### Improvements
-- Update Elasticsearch dependency to 1.7.0 and update plugin dependencies
-- Update php-cs-fixer to 1.10 [#898](https://github.com/ruflin/Elastica/pull/898)
-- Elastica\QueryBuilder now uses Elastica\QueryBuilder\Version\Latest as default version to avoid empty version classes. [#897](https://github.com/ruflin/Elastica/pull/897)
 
 ### Deprecated
-- Elastica\QueryBuilder\Version\Version150 deprecated in favor of Elastica\QueryBuilder\Version\Latest
+
+
+## [2.2.1](https://github.com/ruflin/Elastica/releases/tag/2.2.1) - 2015-08-10
+
+
+### Added
+- Support for index template added [#905](https://github.com/ruflin/Elastica/pull/905)
+
+### Improvements
+- Update Elasticsearch dependency to 1.7.1 and update plugin dependencies [#909](https://github.com/ruflin/Elastica/pull/909)
+- Update php-cs-fixer to 1.10 [#898](https://github.com/ruflin/Elastica/pull/898)
+- Elastica\QueryBuilder now uses Elastica\QueryBuilder\Version\Latest as default version to avoid empty version classes. [#897](https://github.com/ruflin/Elastica/pull/897)
+- Update elasticseach-image to work with ES 1.7.1 [#907](https://github.com/ruflin/Elastica/pull/907)
+- Local dev environment was refactored to fully work in docker environment. Running tests is now only one command: `make tests` [#901](https://github.com/ruflin/Elastica/pull/901)
+
+### Deprecated
+- Elastica\QueryBuilder\Version\Version150 deprecated in favor of Elastica\QueryBuilder\Version\Latest [#897](https://github.com/ruflin/Elastica/pull/897)
 
 
 ## [2.2.0](https://github.com/ruflin/Elastica/releases/tag/2.2.0) - 2015-07-08
@@ -830,7 +846,7 @@ The changelog before version 2.0.0 was organised by date. All changes can be fou
 
 2012-01-08
 - Allow to set curl params over client config [#106](https://github.com/ruflin/Elastica/issues/106/) [#107](https://github.com/ruflin/Elastica/issues/107/)
-- Add the possiblity to add path or url in config for a request [#120](https://github.com/ruflin/Elastica/issues/120/)
+- Add the possibility to add path or url in config for a request [#120](https://github.com/ruflin/Elastica/issues/120/)
 
 2012-01-04
 - Elastica_Index::exists() and Elastica_Cluster::getIndexNames() added

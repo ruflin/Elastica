@@ -170,7 +170,7 @@ class Index implements SearchableInterface
         }
         $query = Query::create($query);
 
-        return $this->request('_query', Request::DELETE, array('query' => $query->getQuery()), $options);
+        return $this->request('_query', Request::DELETE, array('query' => $query->getQuery()->toArray()), $options);
     }
 
     /**

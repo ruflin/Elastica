@@ -60,11 +60,7 @@ class BoolQuery extends AbstractQuery
      */
     protected function _addQuery($type, $args)
     {
-        if ($args instanceof AbstractQuery) {
-            $args = $args->toArray();
-        }
-
-        if (!is_array($args)) {
+        if (!is_array($args) && !($args instanceof AbstractQuery)) {
             throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
         }
 

@@ -169,7 +169,7 @@ class Percolator
         // Add query to filter the percolator queries which are executed.
         if ($query) {
             $query = Query::create($query);
-            $data['query'] = $query->getQuery();
+            $data['query'] = $query->getQuery()->toArray();
         }
 
         $response = $this->getIndex()->getClient()->request($path, Request::GET, $data, $params);

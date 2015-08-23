@@ -185,7 +185,7 @@ class Response
                 try {
                     $response = JSON::parse($response);
                 } catch (JSONParseException $e) {
-                    // leave reponse as is if parse fails
+                    // leave response as is if parse fails
                 }
             }
 

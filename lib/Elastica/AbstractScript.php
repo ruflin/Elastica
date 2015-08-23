@@ -149,7 +149,7 @@ abstract class AbstractScript extends AbstractUpdateAction
         );
 
         if (!empty($this->getParams())) {
-            $array['params'] = $this->getParams();
+            $array['params'] = $this->_convertArrayable($this->_params);
         }
 
         if ($this->getLang()) {

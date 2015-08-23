@@ -1,10 +1,8 @@
 elastica:
-  #build: . # In case the image must be built locally
-  image: ruflin/elastica # comment out to build locally
+  #build: . 
+  image: ruflin/elastica
   ports:
     - "9200:9200"
-  volumes:
-    - .:/app
   links:
     - nginx
     - elasticsearch
@@ -12,16 +10,18 @@ elastica:
     - ES_HOST=elasticsearch
     - PROXY_HOST=nginx
 elasticsearch:
-  #build: ./env/elasticsearch/  # In case image must be built locally
+  #build: ./env/elasticsearch/ 
   image: ruflin/elasticsearch-elastica
+  volumes_from:
+    - data
 nginx:
-  image: nginx
-  volumes:
-    - ./env/nginx/nginx.conf:/etc/nginx/nginx.conf
-    - ./env/nginx/mime.types:/etc/nginx/mime.types
-  ports:
-    - "12345"
-    - "12346"
-    - "80"
+  #build: ./env/nginx/
+  image: ruflin/nginx-elastica
   links:
     - elasticsearch
+# data container to share data between elasticsearch nodes for snapshot testing
+data:
+  image: ruflin/elastica-data
+  volumes:
+    - "/tmp/backups/backup1"
+    - "/tmp/backups/backup2"
