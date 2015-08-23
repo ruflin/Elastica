@@ -728,4 +728,15 @@ class Client
     {
         return $this->request(sprintf('_scripts/%s/%s', $lang, $id), Request::POST, $script->toArray());
     }
+
+    /**
+     * @param $lang
+     * @param $id
+     *
+     * @return Response
+     */
+    public function getIndexedScript($lang, $id)
+    {
+        return $this->request(sprintf('_scripts/%s/%s', $lang, $id), Request::GET);
+    }
 }
