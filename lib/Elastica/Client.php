@@ -716,4 +716,16 @@ class Client
 
         return $this;
     }
+
+    /**
+     * @param Script $script
+     * @param $lang
+     * @param $id
+     *
+     * @return Response
+     */
+    public function addIndexedScript(Script $script, $lang, $id)
+    {
+        return $this->request(sprintf('_scripts/%s/%s', $lang, $id), Request::POST, $script->toArray());
+    }
 }
