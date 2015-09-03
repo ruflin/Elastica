@@ -3,9 +3,6 @@
 index.number_of_shards: 2
 index.number_of_replicas: 0
 
-# Dont write data to hdd in tests
-index.store.type: memory
-
 # Required plugins
 # plugin.mandatory: mapper-attachments, geocluster-facet, transport-thrift, transport-memcached, image
 
