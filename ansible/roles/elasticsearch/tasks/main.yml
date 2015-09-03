@@ -45,30 +45,30 @@
     state=present
     update_cache=no
 
-- name: install image plugin
-  command: >
-    creates=/usr/share/elasticsearch/plugins/image
-    /usr/share/elasticsearch/bin/plugin --url https://github.com/Jmoati/elasticsearch-image/releases/download/{{ ES_IMAGE_PLUGIN_VER }}/elasticsearch-image-{{ ES_IMAGE_PLUGIN_VER }}.zip -install image
+# - name: install image plugin
+#   command: >
+#     creates=/usr/share/elasticsearch/plugins/image
+#     /usr/share/elasticsearch/bin/plugin --url https://github.com/Jmoati/elasticsearch-image/releases/download/{{ ES_IMAGE_PLUGIN_VER }}/elasticsearch-image-{{ ES_IMAGE_PLUGIN_VER }}.zip -install image
 
-- name: install mapper-attachments plugin
-  command: >
-    creates=/usr/share/elasticsearch/plugins/mapper-attachments
-    /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/{{ ES_MAPPER_ATTACHMENTS_VER }}
+# - name: install mapper-attachments plugin
+#   command: >
+#     creates=/usr/share/elasticsearch/plugins/mapper-attachments
+#     /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-mapper-attachments/{{ ES_MAPPER_ATTACHMENTS_VER }}
 
-- name: install geocluster-facet plugin
-  command: >
-    creates=/usr/share/elasticsearch/plugins/geocluster-facet
-    /usr/share/elasticsearch/bin/plugin -install geocluster-facet --url https://github.com/zenobase/geocluster-facet/releases/download/{{ ES_GEOCLUSTER_FACET_VER }}/geocluster-facet-{{ ES_GEOCLUSTER_FACET_VER }}.jar
+# - name: install geocluster-facet plugin
+#   command: >
+#     creates=/usr/share/elasticsearch/plugins/geocluster-facet
+#     /usr/share/elasticsearch/bin/plugin -install geocluster-facet --url https://github.com/zenobase/geocluster-facet/releases/download/{{ ES_GEOCLUSTER_FACET_VER }}/geocluster-facet-{{ ES_GEOCLUSTER_FACET_VER }}.jar
 
-- name: install transport-thrift plugin
-  command: >
-    creates=/usr/share/elasticsearch/plugins/transport-thrift
-    /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/{{ ES_TRANSPORT_THRIFT_VER }}
+# - name: install transport-thrift plugin
+#   command: >
+#     creates=/usr/share/elasticsearch/plugins/transport-thrift
+#     /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/{{ ES_TRANSPORT_THRIFT_VER }}
 
-- name: install transport-memcached plugin
-  command: >
-    creates=/usr/share/elasticsearch/plugins/transport-memcached
-    /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-transport-memcached/{{ ES_TRANSPORT_MEMCACHED_VER }}
+# - name: install transport-memcached plugin
+#   command: >
+#     creates=/usr/share/elasticsearch/plugins/transport-memcached
+#     /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-transport-memcached/{{ ES_TRANSPORT_MEMCACHED_VER }}
 
 - name: remove default config
   file: >
@@ -87,7 +87,7 @@
     - config-1.yml
     - logging.yml
   notify: restart elasticsearch
-  
+
 - name: Assures scripts dir exists
   file: path=/etc/elasticsearch/scripts/ state=directory
 - name: create custom config scripts
