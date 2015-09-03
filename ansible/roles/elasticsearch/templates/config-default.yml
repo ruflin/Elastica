@@ -19,8 +19,8 @@ script.engine.groovy.file: on
 # Disable dynamic memory allocation
 bootstrap.mlockall: true
 
-# Dont accept connections not from localhost
-network.host: "127.0.0.1"
+# Accept any connection
+network.host: "0.0.0.0"
 
 # Limit threadpool by set number of available processors to 1
 # Without this, travis builds will be failed with OutOfMemory error
