@@ -14,7 +14,6 @@
     # - ES_IMAGE_PLUGIN_VER: "1.7.1"
     - ES_PROJECT_ROOT: "{{ lookup('env', 'ES_PROJECT_ROOT') }}"
   roles:
-    - base
     - elasticsearch
     - nginx
     - php
