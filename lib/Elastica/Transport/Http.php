@@ -118,7 +118,15 @@ class Http extends AbstractTransport
             // Escaping of / not necessary. Causes problems in base64 encoding of files
             $content = str_replace('\/', '/', $content);
 
-            curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
+            // An "Accept-Encoding" header containing all supported encoding types is sent
+            // Curl will decode the response automatically
+            curl_setopt($conn, CURLOPT_ENCODING, '');
+
+            // Let's precise that the request is also compressed
+            curl_setopt($conn, CURLOPT_HTTPHEADER, ['Content-Encoding: gzip']);
+
+            // Let's compress the request body
+            curl_setopt($conn, CURLOPT_POSTFIELDS, gzencode($content));
         } else {
             curl_setopt($conn, CURLOPT_POSTFIELDS, '');
         }
