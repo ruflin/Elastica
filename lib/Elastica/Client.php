@@ -35,6 +35,7 @@ class Client
         'roundRobin' => false,
         'log' => false,
         'retryOnConflict' => 0,
+        'compression' => false,
     );
 
     /**
