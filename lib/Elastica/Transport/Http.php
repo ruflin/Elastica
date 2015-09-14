@@ -118,7 +118,7 @@ class Http extends AbstractTransport
             // Escaping of / not necessary. Causes problems in base64 encoding of files
             $content = str_replace('\/', '/', $content);
 
-            if (true === $connection->getParam('compression')) {
+            if ($connection->hasCompression()) {
                 // An "Accept-Encoding" header containing all supported encoding types is sent
                 // Curl will decode the response automatically
                 curl_setopt($conn, CURLOPT_ENCODING, '');

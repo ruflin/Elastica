@@ -31,11 +31,10 @@ class Client
         'transport' => null,
         'persistent' => true,
         'timeout' => null,
-        'connections' => array(), // host, port, path, timeout, transport, persistent, timeout, config -> (curl, headers, url)
+        'connections' => array(), // host, port, path, timeout, transport, compression, persistent, timeout, config -> (curl, headers, url)
         'roundRobin' => false,
         'log' => false,
         'retryOnConflict' => 0,
-        'compression' => false,
     );
 
     /**
