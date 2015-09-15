@@ -5,7 +5,7 @@
   hosts: localhost
   sudo: true
   vars:
-    - ES_VER: "1.7.1"
+    - ES_VER: "1.7.2"
     - ES_SHORT_VER: "1.7"
     - ES_MAPPER_ATTACHMENTS_VER: "2.7.0"
     - ES_TRANSPORT_MEMCACHED_VER: "2.7.0"
