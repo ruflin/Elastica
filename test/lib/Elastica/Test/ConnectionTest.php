@@ -118,4 +118,37 @@ class ConnectionTest extends BaseTest
         $connection = new Connection();
         $connection->getConfig('url');
     }
+
+    /**
+     * @group unit
+     */
+    public function testCompression()
+    {
+        $connection = new Connection();
+
+        $this->assertFalse($connection->hasCompression());
+        $connection->setCompression(true);
+        $this->assertTrue($connection->hasCompression());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testCompressionDefaultWithClient()
+    {
+        $client = new \Elastica\Client();
+        $connection = $client->getConnection();
+        $this->assertFalse($connection->hasCompression());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testCompressionEnabledWithClient()
+    {
+        $client = new \Elastica\Client(array('connections' => array(array('compression' => true))));
+        $connection = $client->getConnection();
+
+        $this->assertTrue($connection->hasCompression());
+    }
 }

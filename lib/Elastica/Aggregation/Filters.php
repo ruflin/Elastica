@@ -45,7 +45,7 @@ class Filters extends AbstractAggregation
             // Detect between anonymous filters and named ones
             $key = key($filter);
 
-            if (is_string($key)) {
+            if (is_string($key) && !empty($key)) {
                 $array['filters']['filters'][$key] = current($filter)->toArray();
             } else {
                 $array['filters']['filters'][] = current($filter)->toArray();

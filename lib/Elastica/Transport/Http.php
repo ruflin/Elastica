@@ -124,7 +124,7 @@ class Http extends AbstractTransport
                 curl_setopt($conn, CURLOPT_ENCODING, '');
 
                 // Let's precise that the request is also compressed
-                curl_setopt($conn, CURLOPT_HTTPHEADER, ['Content-Encoding: gzip']);
+                curl_setopt($conn, CURLOPT_HTTPHEADER, array('Content-Encoding: gzip'));
 
                 // Let's compress the request body,
                 curl_setopt($conn, CURLOPT_POSTFIELDS, gzencode($content));
