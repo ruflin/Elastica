@@ -119,10 +119,11 @@ class ConnectionTest extends BaseTest
         $connection->getConfig('url');
     }
 
-     /**
-      * @group unit
-      */
-    public function testCompression() {
+    /**
+     * @group unit
+     */
+    public function testCompression()
+    {
         $connection = new Connection();
 
         $this->assertFalse($connection->hasCompression());
@@ -133,8 +134,8 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCompressionDefaultWithClient() {
-
+    public function testCompressionDefaultWithClient()
+    {
         $client = new \Elastica\Client();
         $connection = $client->getConnection();
         $this->assertFalse($connection->hasCompression());
@@ -143,13 +144,11 @@ class ConnectionTest extends BaseTest
     /**
      * @group unit
      */
-    public function testCompressionEnabledWithClient() {
-
+    public function testCompressionEnabledWithClient()
+    {
         $client = new \Elastica\Client(array('connections' => array(array('compression' => true))));
         $connection = $client->getConnection();
 
         $this->assertTrue($connection->hasCompression());
     }
 }
-
-
