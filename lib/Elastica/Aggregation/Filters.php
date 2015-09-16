@@ -20,7 +20,7 @@ class Filters extends AbstractAggregation
      *
      * @return $this
      */
-    public function addFilter(AbstractFilter $filter, $name = '')
+    public function addFilter(AbstractFilter $filter, $name = null)
     {
         $filterArray = array();
 
@@ -45,7 +45,7 @@ class Filters extends AbstractAggregation
             // Detect between anonymous filters and named ones
             $key = key($filter);
 
-            if (is_string($key) && !empty($key)) {
+            if (is_string($key)) {
                 $array['filters']['filters'][$key] = current($filter)->toArray();
             } else {
                 $array['filters']['filters'][] = current($filter)->toArray();
