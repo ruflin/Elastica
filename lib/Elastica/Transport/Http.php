@@ -70,6 +70,11 @@ class Http extends AbstractTransport
         curl_setopt($conn, CURLOPT_TIMEOUT, $connection->getTimeout());
         curl_setopt($conn, CURLOPT_FORBID_REUSE, 0);
 
+        // Tell ES that we support the compressed responses
+        // An "Accept-Encoding" header containing all supported encoding types is sent
+        // curl will decode the response automatically if the response is encoded
+        curl_setopt($conn, CURLOPT_ENCODING, '');
+
         /* @see Connection::setConnectTimeout() */
         $connectTimeout = $connection->getConnectTimeout();
         if ($connectTimeout > 0) {
@@ -119,15 +124,11 @@ class Http extends AbstractTransport
             $content = str_replace('\/', '/', $content);
 
             if ($connection->hasCompression()) {
-                // An "Accept-Encoding" header containing all supported encoding types is sent
-                // Curl will decode the response automatically
-                curl_setopt($conn, CURLOPT_ENCODING, '');
-
-                // Let's precise that the request is also compressed
-                curl_setopt($conn, CURLOPT_HTTPHEADER, array('Content-Encoding: gzip'));
-
-                // Let's compress the request body,
+                // Compress the body of the request ...
                 curl_setopt($conn, CURLOPT_POSTFIELDS, gzencode($content));
+
+                // ... and tell ES that it is compressed
+                curl_setopt($conn, CURLOPT_HTTPHEADER, array('Content-Encoding: gzip'));
             } else {
                 curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
             }
