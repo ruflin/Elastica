@@ -182,7 +182,9 @@ class MemcacheTest extends BaseTest
     {
         $memcache = new \Memcache();
 
-        if (!@$memcache->connect($this->_getHost(), 11211)) {
+        $client = $this->_getMemcacheClient();
+
+        if (!@$memcache->connect($client->getConnection()->getHost(), $client->getConnection()->getPort())) {
             $this->markTestSkipped('Couldn\'t connect to host, Memcache down?');
         }
 
