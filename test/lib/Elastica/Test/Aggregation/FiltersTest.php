@@ -34,6 +34,12 @@ class FiltersTest extends BaseAggregationTest
         $expected = array(
             'filters' => array(
                 'filters' => array(
+                    '' => array(
+                        'term' => array('color' => ''),
+                    ),
+                    '0' => array(
+                        'term' => array('color' => '0'),
+                    ),
                     'blue' => array(
                         'term' => array('color' => 'blue'),
                     ),
@@ -48,6 +54,8 @@ class FiltersTest extends BaseAggregationTest
         );
 
         $agg = new Filters('by_color');
+        $agg->addFilter(new Term(array('color' => '')), '');
+        $agg->addFilter(new Term(array('color' => '0')), '0');
         $agg->addFilter(new Term(array('color' => 'blue')), 'blue');
         $agg->addFilter(new Term(array('color' => 'red')), 'red');
 

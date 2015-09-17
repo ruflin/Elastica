@@ -2,10 +2,12 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.0...HEAD)
+- Filters aggregation: empty name is named bucket #935
 
 ### Backward Compatibility Breaks
 
 ### Bugfixes
+- Filters aggregation: empty name is named bucket #935
 
 ### Added
 
