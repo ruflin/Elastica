@@ -81,6 +81,32 @@ class Base extends \PHPUnit_Framework_TestCase
         return $index;
     }
 
+    protected function _checkPlugin($plugin)
+    {
+        $nodes = $this->_getClient()->getCluster()->getNodes();
+        if (!$nodes[0]->getInfo()->hasPlugin($plugin)) {
+            $this->markTestSkipped($plugin.' plugin not installed.');
+        }
+    }
+
+    protected function _checkVersion($version)
+    {
+        $installedVersion = $this->_getClient()->request('/')->getData()['version']['number'];
+
+        if (version_compare($installedVersion, $version) < 0) {
+            $this->markTestSkipped('Test require '.$version.'+ version of Elasticsearch');
+        }
+    }
+
+    protected function _checkConnection($host, $port)
+    {
+        $fp = @pfsockopen($host, $port);
+
+        if (!$fp) {
+            $this->markTestSkipped('Connection to '.$host.':'.$port.' failed');
+        }
+    }
+
     protected function _waitForAllocation(Index $index)
     {
         do {

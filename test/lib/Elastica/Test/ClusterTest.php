@@ -12,12 +12,20 @@ class ClusterTest extends BaseTest
     public function testGetNodeNames()
     {
         $client = $this->_getClient();
+        $data = $client->request('/')->getData();
 
         $cluster = new Cluster($client);
 
-        foreach ($cluster->getNodeNames() as $name) {
-            $this->assertEquals('Elastica', $name);
+        $data = $client->request('/_nodes')->getData();
+        $rawNodes = $data['nodes'];
+
+        $rawNodeNames = array();
+
+        foreach ($rawNodes as $rawNode) {
+            $rawNodeNames[] = $rawNode['name'];
         }
+
+        $this->assertEquals($rawNodeNames, $cluster->getNodeNames());
     }
 
     /**
