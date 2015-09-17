@@ -1,6 +1,7 @@
 <?php
 namespace Elastica\Aggregation;
 
+use Elastica\Exception\InvalidException;
 use Elastica\Filter\AbstractFilter;
 
 /**
@@ -10,6 +11,14 @@ use Elastica\Filter\AbstractFilter;
  */
 class Filters extends AbstractAggregation
 {
+    const NAMED_TYPE = 1;
+    const ANONYMOUS_TYPE = 2;
+
+    /**
+     * @var int Type of bucket keys - named, or anonymous
+     */
+    private $type = null;
+
     /**
      * Add a filter.
      *
@@ -22,13 +31,29 @@ class Filters extends AbstractAggregation
      */
     public function addFilter(AbstractFilter $filter, $name = null)
     {
+        if (null !== $name && !is_string($name)) {
+            throw new InvalidException('Name must be a string');
+        }
+
         $filterArray = array();
 
-        if (is_string($name)) {
-            $filterArray[$name] = $filter;
-        } else {
+        $type = self::NAMED_TYPE;
+
+        if (null === $name) {
             $filterArray[] = $filter;
+            $type = self::ANONYMOUS_TYPE;
+        } else {
+            $filterArray[$name] = $filter;
         }
+
+        if ($this->hasParam('filters')
+            && count($this->getParam('filters'))
+            && $this->type !== $type
+        ) {
+            throw new InvalidException('Mix named and anonymous keys are not allowed');
+        }
+
+        $this->type = $type;
 
         return $this->addParam('filters', $filterArray);
     }
@@ -42,10 +67,8 @@ class Filters extends AbstractAggregation
         $filters = $this->getParam('filters');
 
         foreach ($filters as $filter) {
-            // Detect between anonymous filters and named ones
-            $key = key($filter);
-
-            if (is_string($key)) {
+            if (self::NAMED_TYPE === $this->type) {
+                $key = key($filter);
                 $array['filters']['filters'][$key] = current($filter)->toArray();
             } else {
                 $array['filters']['filters'][] = current($filter)->toArray();

@@ -68,6 +68,30 @@ class FiltersTest extends BaseAggregationTest
 
     /**
      * @group unit
+     * @expectedException Elastica\Exception\InvalidException
+     * @expectedExceptionMessage Mix named and anonymous keys are not allowed
+     */
+    public function testMixNamedAndAnonymousFilters()
+    {
+        $agg = new Filters('by_color');
+        $agg->addFilter(new Term(array('color' => '0')), '0');
+        $agg->addFilter(new Term(array('color' => '0')));
+    }
+
+    /**
+     * @group unit
+     * @expectedException Elastica\Exception\InvalidException
+     * @expectedExceptionMessage Mix named and anonymous keys are not allowed
+     */
+    public function testMixAnonymousAndNamedFilters()
+    {
+        $agg = new Filters('by_color');
+        $agg->addFilter(new Term(array('color' => '0')));
+        $agg->addFilter(new Term(array('color' => '0')), '0');
+    }
+
+    /**
+     * @group unit
      */
     public function testToArrayUsingAnonymousFilters()
     {
