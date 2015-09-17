@@ -69,6 +69,17 @@ class FiltersTest extends BaseAggregationTest
     /**
      * @group unit
      * @expectedException Elastica\Exception\InvalidException
+     * @expectedExceptionMessage Name must be a string
+     */
+    public function testWrongName()
+    {
+        $agg = new Filters('by_color');
+        $agg->addFilter(new Term(array('color' => '0')), 0);
+    }
+
+    /**
+     * @group unit
+     * @expectedException Elastica\Exception\InvalidException
      * @expectedExceptionMessage Mix named and anonymous keys are not allowed
      */
     public function testMixNamedAndAnonymousFilters()
