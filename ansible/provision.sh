@@ -47,10 +47,10 @@ travis_retry() {
     $@ && return 0
 
     echo "The command $@ failed. Retrying, 2 of 3"
-    sleep 60s && $@ && return 0
+    sleep 20s && $@ && return 0
 
     echo "The command $@ failed. Retrying, 3 of 3"
-    sleep 60s && $@ && return 0
+    sleep 20s && $@ && return 0
 
     echo "The command $@ failed."
     return 1
@@ -59,5 +59,7 @@ travis_retry() {
 travis_retry install_ansible || exit 1
 
 travis_retry run_playbook || exit 1
+
+sudo bash $ES_PROJECT_ROOT/ansible/start-cluster.sh
 
 travis_retry check_cluster || exit 1
