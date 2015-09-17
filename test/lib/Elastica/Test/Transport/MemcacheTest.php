@@ -167,9 +167,6 @@ class MemcacheTest extends BaseTest
     {
         $this->checkMemcache();
 
-        $memcache = new \Memcache();
-        $memcache->connect($this->getConnection()->getHost(), $this->getConnection()->getPort());
-
         $client = $this->_getMemcacheClient();
         $index = $client->getIndex('memcache-test');
         $index->create();
