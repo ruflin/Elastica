@@ -136,6 +136,7 @@ class HttpTest extends BaseTest
      */
     public function testWithEnvironmentalProxy()
     {
+        $this->checkProxy($this->_getProxyUrl());
         putenv('http_proxy='.$this->_getProxyUrl().'/');
 
         $client = $this->_getClient();
@@ -154,6 +155,7 @@ class HttpTest extends BaseTest
      */
     public function testWithEnabledEnvironmentalProxy()
     {
+        $this->checkProxy($this->_getProxyUrl403());
         putenv('http_proxy='.$this->_getProxyUrl403().'/');
         $client = $this->_getClient();
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -170,6 +172,7 @@ class HttpTest extends BaseTest
      */
     public function testWithProxy()
     {
+        $this->checkProxy($this->_getProxyUrl());
         $client = $this->_getClient();
         $client->getConnection()->setProxy($this->_getProxyUrl());
 
@@ -236,6 +239,12 @@ class HttpTest extends BaseTest
         $tokens = $index->analyze('0');
 
         $this->assertNotEmpty($tokens);
+    }
+
+    protected function checkProxy($url)
+    {
+        $url = parse_url($url);
+        $this->_checkConnection($url['host'], $url['port']);
     }
 
     protected function tearDown()

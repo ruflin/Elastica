@@ -292,6 +292,8 @@ class FunctionScoreTest extends BaseTest
      */
     public function testSetMinScore()
     {
+        $this->_checkVersion('1.5');
+
         $expected = array(
             'function_score' => array(
                 'min_score' => 0.8,

@@ -448,7 +448,19 @@ class BulkTest extends BaseTest
         if (!function_exists('socket_create')) {
             $this->markTestSkipped('Function socket_create() does not exist.');
         }
+
         $client = $this->_getClient($clientConfig);
+
+        $data = $client->request('/_nodes')->getData();
+        $rawNode = array_pop($data['nodes']);
+
+        if (!isset($rawNode['settings']['bulk']['udp']['enabled'])
+            || !$rawNode['settings']['bulk']['udp']['enabled']
+            || 'false' === $rawNode['settings']['bulk']['udp']['enabled']
+        ) {
+            $this->markTestSkipped('Bulk udp not enabled?');
+        }
+
         $index = $client->getIndex('elastica_test');
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
         $type = $index->getType('udp_test');

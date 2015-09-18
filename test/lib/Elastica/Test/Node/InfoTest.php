@@ -39,10 +39,16 @@ class InfoTest extends BaseTest
         $node = $nodes[0];
         $info = $node->getInfo();
 
-        $pluginName = 'mapper-attachments';
-
-        $this->assertTrue($info->hasPlugin($pluginName));
         $this->assertFalse($info->hasPlugin('foo'));
+
+        $data = $client->request('/_nodes')->getData();
+        $rawNode = array_pop($data['nodes']);
+
+        if (count($rawNode['plugins']) == 0) {
+            $this->markTestIncomplete('No plugins installed, can\'t test hasPlugin');
+        }
+
+        $this->assertTrue($info->hasPlugin($rawNode['plugins'][0]['name']));
     }
 
     /**
@@ -70,10 +76,14 @@ class InfoTest extends BaseTest
     public function testGetName()
     {
         $client = $this->_getClient();
+
+        $data = $client->request('/_nodes')->getData();
+        $rawNodes = $data['nodes'];
+
         $nodes = $client->getCluster()->getNodes();
 
         foreach ($nodes as $node) {
-            $this->assertEquals('Elastica', $node->getInfo()->getName());
+            $this->assertEquals($rawNodes[$node->getId()]['name'], $node->getInfo()->getName());
         }
     }
 }

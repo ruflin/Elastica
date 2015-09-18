@@ -120,7 +120,7 @@ class IndexTest extends BaseTest
      */
     public function testAddPdfFile()
     {
-        $this->_checkAttachmentsPlugin();
+        $this->_checkPlugin('mapper-attachments');
         $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'));
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
@@ -162,7 +162,7 @@ class IndexTest extends BaseTest
      */
     public function testAddPdfFileContent()
     {
-        $this->_checkAttachmentsPlugin();
+        $this->_checkPlugin('mapper-attachments');
         $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'));
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
@@ -204,7 +204,7 @@ class IndexTest extends BaseTest
      */
     public function testAddWordxFile()
     {
-        $this->_checkAttachmentsPlugin();
+        $this->_checkPlugin('mapper-attachments');
         $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => 'no'));
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
@@ -245,7 +245,7 @@ class IndexTest extends BaseTest
      */
     public function testExcludeFileSource()
     {
-        $this->_checkAttachmentsPlugin();
+        $this->_checkPlugin('mapper-attachments');
         $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'yes'), 'text' => array('type' => 'string', 'store' => 'yes'),
             'title' => array('type' => 'string', 'store' => 'yes'),);
 
@@ -886,16 +886,5 @@ class IndexTest extends BaseTest
 
         $this->assertEquals('1', $index->getName());
         $this->assertInternalType('string', $index->getName());
-    }
-
-    /**
-     * Check for the presence of the mapper-attachments plugin and skip the current test if it is not found.
-     */
-    protected function _checkAttachmentsPlugin()
-    {
-        $nodes = $this->_getClient()->getCluster()->getNodes();
-        if (!$nodes[0]->getInfo()->hasPlugin('mapper-attachments')) {
-            $this->markTestSkipped('mapper-attachments plugin not installed');
-        }
     }
 }
