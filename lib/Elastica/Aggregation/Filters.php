@@ -17,7 +17,7 @@ class Filters extends AbstractAggregation
     /**
      * @var int Type of bucket keys - named, or anonymous
      */
-    private $type = null;
+    private $_type = null;
 
     /**
      * Add a filter.
@@ -48,12 +48,12 @@ class Filters extends AbstractAggregation
 
         if ($this->hasParam('filters')
             && count($this->getParam('filters'))
-            && $this->type !== $type
+            && $this->_type !== $type
         ) {
             throw new InvalidException('Mix named and anonymous keys are not allowed');
         }
 
-        $this->type = $type;
+        $this->_type = $type;
 
         return $this->addParam('filters', $filterArray);
     }
@@ -67,7 +67,7 @@ class Filters extends AbstractAggregation
         $filters = $this->getParam('filters');
 
         foreach ($filters as $filter) {
-            if (self::NAMED_TYPE === $this->type) {
+            if (self::NAMED_TYPE === $this->_type) {
                 $key = key($filter);
                 $array['filters']['filters'][$key] = current($filter)->toArray();
             } else {
