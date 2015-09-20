@@ -83,6 +83,14 @@ class MultiMatchTest extends BaseTest
         $resultSet = $this->_getResults($multiMatch);
 
         $this->assertEquals(0, $resultSet->count());
+
+        $multiMatch = new MultiMatch();
+        $multiMatch->setQuery('Tritsan'); // Misspell on purpose
+        $multiMatch->setFields(array('full_name', 'name'));
+        $multiMatch->setFuzziness(MultiMatch::FUZZINESS_AUTO);
+        $resultSet = $this->_getResults($multiMatch);
+
+        $this->assertEquals(1, $resultSet->count());
     }
 
     /**

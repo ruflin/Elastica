@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 - Function score query: corrected the `score_method` `average` to `avg` #975 
 
 ### Added
+- Elastica\Query\MultiMatch::setFuzziness now supports being set to `AUTO` with the const `MultiMatch::FUZZINESS_AUTO`
 
 ### Improvements
 
