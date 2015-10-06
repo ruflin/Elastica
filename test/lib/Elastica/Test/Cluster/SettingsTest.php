@@ -8,6 +8,11 @@ use Elastica\Test\Base as BaseTest;
 
 class SettingsTest extends BaseTest
 {
+    protected function setUp()
+    {
+        $this->es20();
+    }
+
     /**
      * @group functional
      */

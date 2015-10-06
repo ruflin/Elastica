@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 ### Improvements
+- Travis builds were moved to docker-compose setup. Ansible scripts and Vagrant files were removed
+
 
 ### Deprecated
 

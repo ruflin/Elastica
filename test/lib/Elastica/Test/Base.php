@@ -7,6 +7,12 @@ use Elastica\Index;
 
 class Base extends \PHPUnit_Framework_TestCase
 {
+
+    protected function es20() {
+        parent::setUp();
+        $this->markTestSkipped('Test skipped because of current incompatibility with ES 2.0');
+    }
+
     /**
      * @param array    $params   Additional configuration params. Host and Port are already set
      * @param callback $callback

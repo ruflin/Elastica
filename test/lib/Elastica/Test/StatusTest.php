@@ -7,6 +7,11 @@ use Elastica\Test\Base as BaseTest;
 
 class StatusTest extends BaseTest
 {
+    protected function setUp()
+    {
+        $this->es20();
+    }
+
     /**
      * @group functional
      */
