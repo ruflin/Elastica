@@ -94,43 +94,4 @@ class FuzzyTest extends BaseTest
         $query->setField('name', 'value');
         $query->setField('name1', 'value1');
     }
-
-    /**
-     * @group functional
-     */
-    public function testFuzzyWithFacets()
-    {
-        $index = $this->_createIndex();
-        $type = $index->getType('test');
-
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'Baden')),
-            new Document(4, array('name' => 'Baden Baden')),
-        ));
-
-        $index->refresh();
-
-        $field = 'name';
-
-        $fuzzyQuery = new Fuzzy();
-        $fuzzyQuery->setField($field, 'Baden');
-
-        $facet = new \Elastica\Facet\Terms('test');
-        $facet->setField('name');
-
-        $query = new \Elastica\Query($fuzzyQuery);
-        $query->addFacet($facet);
-
-        $resultSet = $index->search($query);
-
-        // Assert query worked ok
-        $this->assertEquals(2, $resultSet->count());
-
-        // Check Facets
-        $this->assertTrue($resultSet->hasFacets());
-        $facets = $resultSet->getFacets();
-        $this->assertEquals(2, $facets['test']['total']);
-    }
 }

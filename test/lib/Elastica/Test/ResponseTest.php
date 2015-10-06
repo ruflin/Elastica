@@ -2,7 +2,6 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
-use Elastica\Facet\DateHistogram;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Request;
@@ -12,16 +11,6 @@ use Elastica\Type\Mapping;
 
 class ResponseTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
-    public function testClassHierarchy()
-    {
-        $facet = new DateHistogram('dateHist1');
-        $this->assertInstanceOf('Elastica\Facet\Histogram', $facet);
-        $this->assertInstanceOf('Elastica\Facet\AbstractFacet', $facet);
-        unset($facet);
-    }
 
     /**
      * @group functional

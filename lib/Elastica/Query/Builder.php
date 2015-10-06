@@ -281,36 +281,6 @@ class Builder extends AbstractQuery
     }
 
     /**
-     * Open 'facets' block.
-     *
-     * Facets provide aggregated data based on a search query.
-     *
-     * In the simple case, a facet can return facet counts for various facet
-     * values for a specific field.
-     *
-     * Elasticsearch supports more advanced facet implementations, such as
-     * statistical or date histogram facets.
-     *
-     * @return $this
-     */
-    public function facets()
-    {
-        return $this->fieldOpen('facets');
-    }
-
-    /**
-     * Close a facets block.
-     *
-     * Alias of close() for ease of reading in source.
-     *
-     * @return $this
-     */
-    public function facetsClose()
-    {
-        return $this->close();
-    }
-
-    /**
      * Add a specific field / value entry.
      *
      * @param string $name  Field to add.

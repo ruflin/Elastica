@@ -15,7 +15,6 @@ class Percolator
     const EXTRA_SIZE = 'size';
     const EXTRA_TRACK_SCORES = 'track_scores';
     const EXTRA_SORT = 'sort';
-    const EXTRA_FACETS = 'facets';
     const EXTRA_AGGS = 'aggs';
     const EXTRA_HIGHLIGHT = 'highlight';
 
@@ -25,7 +24,6 @@ class Percolator
         self::EXTRA_SIZE,
         self::EXTRA_TRACK_SCORES,
         self::EXTRA_SORT,
-        self::EXTRA_FACETS,
         self::EXTRA_AGGS,
         self::EXTRA_HIGHLIGHT,
     );

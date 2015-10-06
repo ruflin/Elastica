@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.0...HEAD)
 
 ### Backward Compatibility Breaks
+- Removal of all facets and facet related code
 
 ### Bugfixes
 
