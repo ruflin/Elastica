@@ -555,7 +555,7 @@ class ClientTest extends BaseTest
 
         $client->setConnections(array($connection1, $connection2));
 
-        $client->request('_status', Request::GET);
+        $client->request('_stats', Request::GET);
 
         $connections = $client->getConnections();
 
@@ -580,7 +580,7 @@ class ClientTest extends BaseTest
         $client->setConnections(array($connection1, $connection2));
 
         try {
-            $client->request('_status', Request::GET);
+            $client->request('_stats', Request::GET);
             $this->fail('Should throw exception as no connection valid');
         } catch (HttpException $e) {
         }
@@ -624,7 +624,7 @@ class ClientTest extends BaseTest
         $this->assertEquals(0, $count);
 
         try {
-            $client->request('_status', Request::GET);
+            $client->request('_stats', Request::GET);
             $this->fail('Should throw exception as no connection valid');
         } catch (HttpException $e) {
             $this->assertTrue(true);
@@ -644,7 +644,7 @@ class ClientTest extends BaseTest
         // Url should overwrite invalid host
         $client = $this->_getClient(array('url' => $url, 'port' => '9101', 'timeout' => 2));
 
-        $response = $client->request('_status');
+        $response = $client->request('_stats');
         $this->assertInstanceOf('Elastica\Response', $response);
     }
 
@@ -914,14 +914,14 @@ class ClientTest extends BaseTest
     public function testLastRequestResponse()
     {
         $client = $this->_getClient();
-        $response = $client->request('_status');
+        $response = $client->request('_stats');
 
         $this->assertInstanceOf('Elastica\Response', $response);
 
         $lastRequest = $client->getLastRequest();
 
         $this->assertInstanceOf('Elastica\Request', $lastRequest);
-        $this->assertEquals('_status', $lastRequest->getPath());
+        $this->assertEquals('_stats', $lastRequest->getPath());
 
         $lastResponse = $client->getLastResponse();
         $this->assertInstanceOf('Elastica\Response', $lastResponse);

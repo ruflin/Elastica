@@ -143,7 +143,7 @@ class Status
      */
     public function refresh()
     {
-        $path = '_status';
+        $path = '_stats';
         $this->_response = $this->getIndex()->request($path, Request::GET);
         $this->_data = $this->getResponse()->getData();
     }

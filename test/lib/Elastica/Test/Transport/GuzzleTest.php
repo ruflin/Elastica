@@ -169,7 +169,7 @@ class GuzzleTest extends BaseTest
     public function testInvalidConnection()
     {
         $client = $this->_getClient(array('transport' => 'Guzzle', 'port' => 4500, 'persistent' => false));
-        $response = $client->request('_status', 'GET');
+        $response = $client->request('_stats', 'GET');
     }
 
     protected function tearDown()

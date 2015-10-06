@@ -13,7 +13,7 @@ class SettingsTest extends BaseTest
     {
         $this->es20();
     }
-    
+
     /**
      * @group functional
      */
