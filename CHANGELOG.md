@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file based on the
 - Removal of all facets and facet related code
 - Thrift transport removed
 - Memcache transport removed
+- UDP Bulk support removed
 
 ### Bugfixes
 

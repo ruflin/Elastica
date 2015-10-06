@@ -441,57 +441,6 @@ class BulkTest extends BaseTest
 
     /**
      * @group functional
-     * @dataProvider udpDataProvider
-     */
-    public function testUdp($clientConfig, $host, $port, $shouldFail = false)
-    {
-        if (!function_exists('socket_create')) {
-            $this->markTestSkipped('Function socket_create() does not exist.');
-        }
-        $client = $this->_getClient($clientConfig);
-        $index = $client->getIndex('elastica_test');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
-        $type = $index->getType('udp_test');
-        $client = $index->getClient();
-
-        $type->setMapping(array('name' => array('type' => 'string')));
-
-        $docs = array(
-            $type->createDocument(1, array('name' => 'Mister Fantastic')),
-            $type->createDocument(2, array('name' => 'Invisible Woman')),
-            $type->createDocument(3, array('name' => 'The Human Torch')),
-            $type->createDocument(4, array('name' => 'The Thing')),
-            $type->createDocument(5, array('name' => 'Mole Man')),
-            $type->createDocument(6, array('name' => 'The Skrulls')),
-        );
-
-        $bulk = new Bulk($client);
-        $bulk->addDocuments($docs);
-
-        $bulk->sendUdp($host, $port);
-
-        $i = 0;
-        $limit = 20;
-
-        // adds 6 documents and checks if on average every document is added in less then 0.2 seconds
-        do {
-            usleep(200000);    // 0.2 seconds
-        } while ($type->count() < 6 && ++$i < $limit);
-
-        if ($shouldFail) {
-            $this->assertEquals($limit, $i, 'Invalid udp connection data. Test should fail');
-        } else {
-            $this->assertLessThan($limit, $i, 'It took too much time waiting for UDP request result');
-
-            foreach ($docs as $doc) {
-                $getDoc = $type->getDocument($doc->getId());
-                $this->assertEquals($doc->getData(), $getDoc->getData());
-            }
-        }
-    }
-
-    /**
-     * @group functional
      */
     public function testUpdate()
     {
@@ -729,56 +678,4 @@ class BulkTest extends BaseTest
         $this->assertLessThan(1.3, $endMemory / $startMemory);
     }
 
-    public function udpDataProvider()
-    {
-        return array(
-            array(
-                array(),
-                $this->_getHost(),
-                9700,
-            ),
-            array(
-                array(),
-                $this->_getHost(),
-                9700,
-            ),
-            array(
-                array(
-                    'udp' => array(
-                        'host' => $this->_getHost(),
-                        'port' => 9700,
-                    ),
-                ),
-                null,
-                null,
-            ),
-            array(
-                array(
-                    'udp' => array(
-                        'host' => $this->_getHost(),
-                        'port' => 9800,
-                    ),
-                ),
-                $this->_getHost(),
-                9700,
-            ),
-            array(
-                array(
-                    'udp' => array(
-                        'host' => $this->_getHost(),
-                        'port' => 9800,
-                    ),
-                ),
-                null,
-                null,
-                true,
-            ),
-            array(
-                array(),
-                $this->_getHost(),
-                9800,
-                true,
-            ),
-        );
-    }
 }

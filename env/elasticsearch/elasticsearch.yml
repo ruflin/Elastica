@@ -5,10 +5,6 @@ index.number_of_replicas: 0
 # Required plugins
 # plugin.mandatory: mapper-attachments, geocluster-facet, image
 
-# For bulk tests
-bulk.udp.enabled: true
-bulk.udp.bulk_actions: 5
-
 # For script tests
 script.inline: on
 script.indexed: on
