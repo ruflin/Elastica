@@ -92,7 +92,6 @@ class Percolator
      *                                                                     Percolator::EXTRA_SIZE,
      *                                                                     Percolator::EXTRA_TRACK_SCORES,
      *                                                                     Percolator::EXTRA_SORT,
-     *                                                                     Percolator::EXTRA_FACETS,
      *                                                                     Percolator::EXTRA_AGGS,
      *                                                                     Percolator::EXTRA_HIGHLIGHT ]
      *
@@ -121,7 +120,6 @@ class Percolator
      *                                                                     Percolator::EXTRA_SIZE,
      *                                                                     Percolator::EXTRA_TRACK_SCORES,
      *                                                                     Percolator::EXTRA_SORT,
-     *                                                                     Percolator::EXTRA_FACETS,
      *                                                                     Percolator::EXTRA_AGGS,
      *                                                                     Percolator::EXTRA_HIGHLIGHT ]
      *

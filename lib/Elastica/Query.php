@@ -346,10 +346,6 @@ class Query extends Param
             $this->setQuery(new MatchAll());
         }
 
-        if (isset($this->_params['facets']) && 0 === count($this->_params['facets'])) {
-            unset($this->_params['facets']);
-        }
-
         if (isset($this->_params['post_filter']) && 0 === count($this->_params['post_filter'])) {
             unset($this->_params['post_filter']);
         }
