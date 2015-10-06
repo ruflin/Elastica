@@ -3,7 +3,7 @@ index.number_of_shards: 2
 index.number_of_replicas: 0
 
 # Required plugins
-# plugin.mandatory: mapper-attachments, geocluster-facet, transport-thrift, transport-memcached, image
+# plugin.mandatory: mapper-attachments, geocluster-facet, image
 
 # For bulk tests
 bulk.udp.enabled: true
@@ -31,8 +31,6 @@ node.name: Elastica
 # Ports config
 http.port: 9200
 transport.tcp.port: 9300
-thrift.port: 9500
-memcached.port: 11211
 
 # Added for snapshot tests
 path.repo: ["/tmp/backups"]

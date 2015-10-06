@@ -34,58 +34,6 @@ class TransportBenchmarkTest extends BaseTest
     }
 
     /**
-     * @dataProvider providerTransport
-     * @group benchmark
-     */
-    public function testAddDocument(array $config, $transport)
-    {
-        $this->_checkThrift($transport);
-
-        $type = $this->getType($config);
-        $index = $type->getIndex();
-        $index->create(array(), true);
-
-        $times = array();
-        for ($i = 0; $i < $this->_max; ++$i) {
-            $data = $this->getData($i);
-            $doc = new Document($i, $data);
-            $result = $type->addDocument($doc);
-            $times[] = $result->getQueryTime();
-            $this->assertTrue($result->isOk());
-        }
-
-        $index->refresh();
-
-        self::logResults('insert', $transport, $times);
-    }
-
-    /**
-     * @depends testAddDocument
-     * @dataProvider providerTransport
-     * @group benchmark
-     */
-    public function testRandomRead(array $config, $transport)
-    {
-        $this->_checkThrift($transport);
-
-        $type = $this->getType($config);
-
-        $type->search('test');
-
-        $times = array();
-        for ($i = 0; $i < $this->_max; ++$i) {
-            $test = rand(1, $this->_max);
-            $query = new Query();
-            $query->setQuery(new \Elastica\Query\MatchAll());
-            $query->setPostFilter(new \Elastica\Filter\Term(array('test' => $test)));
-            $result = $type->search($query);
-            $times[] = $result->getResponse()->getQueryTime();
-        }
-
-        self::logResults('random read', $transport, $times);
-    }
-
-    /**
      * @depends testAddDocument
      * @dataProvider providerTransport
      * @group benchmark
@@ -170,17 +118,6 @@ class TransportBenchmarkTest extends BaseTest
                 ),
                 'Http:Persistent',
             ),
-            array(
-                array(
-                    'transport' => 'Thrift',
-                    'host' => $this->_getHost(),
-                    'port' => 9500,
-                    'config' => array(
-                        'framedTransport' => false,
-                    ),
-                ),
-                'Thrift:Buffered',
-            ),
         );
     }
 
@@ -249,13 +186,6 @@ class TransportBenchmarkTest extends BaseTest
                 );
             }
             echo "\n";
-        }
-    }
-
-    protected function _checkThrift($transport)
-    {
-        if (strpos($transport, 'Thrift') !== false && !class_exists('Elasticsearch\\RestClient')) {
-            self::markTestSkipped('munkie/elasticsearch-thrift-php package should be installed to run thrift transport tests');
         }
     }
 }

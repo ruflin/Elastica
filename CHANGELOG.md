@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 - Removal of all facets and facet related code
+- Thrift transport removed
+- Memcache transport removed
 
 ### Bugfixes
 
