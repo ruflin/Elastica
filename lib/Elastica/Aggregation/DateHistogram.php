@@ -127,4 +127,39 @@ class DateHistogram extends Histogram
     {
         return $this->setParam('format', $format);
     }
+    
+    /**
+     * Set extended bounds option.
+     *
+     * @param  string
+     *
+     * @return $this
+     */
+    public function setExtendedBounds($min = '', $max = '')
+    {
+        $bounds = array();
+        $bounds['min'] = $min;
+        $bounds['max'] = $max;
+        // switch if min is higher then max
+        if (strtotime($min) > strtotime($max)) {
+            $bounds['min'] = $max;
+            $bounds['max'] = $min;
+        }
+        return $this->setParam('extended_bounds', $bounds);
+    }
+    /**
+     * Set minimal document count option.
+     *
+     * @param  string
+     *
+     * @return $this
+     */
+    public function setMinDocCount($count = 0)
+    {
+        // switch if min is higher then max
+        if (is_numeric($count)) {
+            return $this->setParam('min_doc_count', $count);
+        }
+        return $this;
+    }
 }
