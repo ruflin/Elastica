@@ -147,19 +147,4 @@ class DateHistogram extends Histogram
         }
         return $this->setParam('extended_bounds', $bounds);
     }
-    /**
-     * Set minimal document count option.
-     *
-     * @param  string
-     *
-     * @return $this
-     */
-    public function setMinDocCount($count = 0)
-    {
-        // switch if min is higher then max
-        if (is_numeric($count)) {
-            return $this->setParam('min_doc_count', $count);
-        }
-        return $this;
-    }
 }
