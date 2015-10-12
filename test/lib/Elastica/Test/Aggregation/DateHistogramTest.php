@@ -1,105 +1,166 @@
 <?php
-namespace Elastica\Test\Aggregation;
+namespace Elastica\Aggregation;
 
-use Elastica\Aggregation\DateHistogram;
-use Elastica\Document;
-use Elastica\Query;
-use Elastica\Type\Mapping;
-
-class DateHistogramTest extends BaseAggregationTest
+/**
+ * Class DateHistogram.
+ *
+ * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html
+ */
+class DateHistogram extends Histogram
 {
-    protected function _getIndexForTest()
+    /**
+     * Set pre-rounding based on interval.
+     *
+     * @deprecated Option "pre_zone" is deprecated as of ES 1.5. Use "time_zone" instead
+     *
+     * @param string $preZone
+     *
+     * @return $this
+     */
+    public function setPreZone($preZone)
     {
-        $index = $this->_createIndex();
-        $type = $index->getType('test');
-
-        $type->setMapping(new Mapping(null, array(
-            'created' => array('type' => 'date'),
-        )));
-
-        $type->addDocuments(array(
-            new Document(1, array('created' => '2014-01-29T00:20:00')),
-            new Document(2, array('created' => '2014-01-29T02:20:00')),
-            new Document(3, array('created' => '2014-01-29T03:20:00')),
-        ));
-
-        $index->refresh();
-
-        return $index;
+        return $this->setParam('pre_zone', $preZone);
     }
 
     /**
-     * @group functional
+     * Set post-rounding based on interval.
+     *
+     * @deprecated Option "post_zone" is deprecated as of ES 1.5. Use "time_zone" instead
+     *
+     * @param string $postZone
+     *
+     * @return $this
      */
-    public function testDateHistogramAggregation()
+    public function setPostZone($postZone)
     {
-        $agg = new DateHistogram('hist', 'created', '1h');
-
-        $query = new Query();
-        $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
-
-        $this->assertEquals(3, sizeof($results['buckets']));
+        return $this->setParam('post_zone', $postZone);
     }
 
     /**
-     * @group unit
+     * Set time_zone option.
+     *
+     * @param  string
+     *
+     * @return $this
      */
-    public function testSetOffset()
+    public function setTimezone($timezone)
     {
-        $agg = new DateHistogram('hist', 'created', '1h');
-
-        $agg->setOffset('3m');
-
-        $expected = array(
-            'date_histogram' => array(
-                'field' => 'created',
-                'interval' => '1h',
-                'offset' => '3m',
-            ),
-        );
-
-        $this->assertEquals($expected, $agg->toArray());
-
-        $this->assertInstanceOf('Elastica\Aggregation\DateHistogram', $agg->setOffset('3m'));
+        return $this->setParam('time_zone', $timezone);
     }
 
     /**
-     * @group functional
+     * Set pre-zone adjustment for larger time intervals (day and above).
+     *
+     * @deprecated Option "pre_zone_adjust_large_interval" is deprecated as of ES 1.5
+     *
+     * @param string $adjust
+     *
+     * @return $this
      */
-    public function testSetOffsetWorks()
+    public function setPreZoneAdjustLargeInterval($adjust)
     {
-        $this->_checkVersion('1.5');
-
-        $agg = new DateHistogram('hist', 'created', '1m');
-        $agg->setOffset('+40s');
-
-        $query = new Query();
-        $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
-
-        $this->assertEquals('2014-01-29T00:19:40.000Z', $results['buckets'][0]['key_as_string']);
+        return $this->setParam('pre_zone_adjust_large_interval', $adjust);
     }
 
     /**
-     * @group unit
+     * Adjust for granularity of date data.
+     *
+     * @param int $factor set to 1000 if date is stored in seconds rather than milliseconds
+     *
+     * @return $this
      */
-    public function testSetTimezone()
+    public function setFactor($factor)
     {
-        $agg = new DateHistogram('hist', 'created', '1h');
+        return $this->setParam('factor', $factor);
+    }
 
-        $agg->setTimezone('-02:30');
+    /**
+     * Set the offset for pre-rounding.
+     *
+     * @deprecated Option "pre_offset" is deprecated as of ES 1.5. Use "offset" instead
+     *
+     * @param string $offset "1d", for example
+     *
+     * @return $this
+     */
+    public function setPreOffset($offset)
+    {
+        return $this->setParam('pre_offset', $offset);
+    }
 
-        $expected = array(
-            'date_histogram' => array(
-                'field' => 'created',
-                'interval' => '1h',
-                'time_zone' => '-02:30',
-            ),
-        );
+    /**
+     * Set the offset for post-rounding.
+     *
+     * @deprecated Option "post_offset" is deprecated as of ES 1.5. Use "offset" instead
+     *
+     * @param string $offset "1d", for example
+     *
+     * @return $this
+     */
+    public function setPostOffset($offset)
+    {
+        return $this->setParam('post_offset', $offset);
+    }
 
-        $this->assertEquals($expected, $agg->toArray());
+    /**
+     * Set extended bounds option.
+     *
+     * @param  string
+     *
+     * @return $this
+     */
+    public function setExtendedBounds($min = '', $max = '')
+    {
+        $bounds = array();
+        $bounds['min'] = $min;
+        $bounds['max'] = $max;
+        // switch if min is higher then max
+        if (strtotime($min) > strtotime($max)) {
+            $bounds['min'] = $max;
+            $bounds['max'] = $min;
+        }
+        return $this->setParam('extended_bounds', $bounds);
+    }
 
-        $this->assertInstanceOf('Elastica\Aggregation\DateHistogram', $agg->setTimezone('-02:30'));
+    /**
+     * Set minimal document count option.
+     *
+     * @param  string
+     *
+     * @return $this
+     */
+    public function setMinDocCount($count = 0)
+    {
+        // switch if min is higher then max
+        if (is_numeric($count)) {
+            return $this->setParam('min_doc_count', $count);
+        }
+        return $this;
+    }
+
+    /**
+     * Set offset option.
+     *
+     * @param  string
+     *
+     * @return $this
+     */
+    public function setOffset($offset)
+    {
+        return $this->setParam('offset', $offset);
+    }
+
+    /**
+     * Set the format for returned bucket key_as_string values.
+     *
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern
+     *
+     * @param string $format see link for formatting options
+     *
+     * @return $this
+     */
+    public function setFormat($format)
+    {
+        return $this->setParam('format', $format);
     }
 }
