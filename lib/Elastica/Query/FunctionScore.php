@@ -29,6 +29,17 @@ class FunctionScore extends AbstractQuery
     const DECAY_EXPONENTIAL = 'exp';
     const DECAY_LINEAR = 'linear';
 
+    const FIELD_VALUE_FACTOR_MODIFIER_NONE = 'none';
+    const FIELD_VALUE_FACTOR_MODIFIER_LOG = 'log';
+    const FIELD_VALUE_FACTOR_MODIFIER_LOG1P = 'log1p';
+    const FIELD_VALUE_FACTOR_MODIFIER_LOG2P = 'log2p';
+    const FIELD_VALUE_FACTOR_MODIFIER_LN = 'ln';
+    const FIELD_VALUE_FACTOR_MODIFIER_LN1P = 'ln1p';
+    const FIELD_VALUE_FACTOR_MODIFIER_LN2P = 'ln2p';
+    const FIELD_VALUE_FACTOR_MODIFIER_SQUARE = 'square';
+    const FIELD_VALUE_FACTOR_MODIFIER_SQRT = 'sqrt';
+    const FIELD_VALUE_FACTOR_MODIFIER_RECIPROCAL = 'reciprocal';
+
     protected $_functions = array();
 
     /**
@@ -133,6 +144,33 @@ class FunctionScore extends AbstractQuery
         }
 
         return $this->addFunction($function, $functionParams, $filter, $weight);
+    }
+
+    public function addFieldValueFactorFunction(
+        $field,
+        $factor = null,
+        $modifier = null,
+        $missing = null,
+        $weight = null,
+        AbstractFilter $filter = null
+    ) {
+        $functionParams = array(
+            'field' => $field,
+        );
+
+        if (!is_null($factor)) {
+            $functionParams['factor'] = $factor;
+        }
+
+        if (!is_null($modifier)) {
+            $functionParams['modifier'] = $modifier;
+        }
+
+        if (!is_null($missing)) {
+            $functionParams['missing'] = $missing;
+        }
+
+        return $this->addFunction('field_value_factor', $functionParams, $filter, $weight);
     }
 
     /**
