@@ -27,7 +27,9 @@ interface SearchableInterface
      *
      * @param string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
      *
-     * @return \Elastica\ResultSet ResultSet with all results inside
+     * @param null $options
+     *
+     * @return \Elastica\ResultSet with all results inside
      */
     public function search($query = '', $options = null);
 
@@ -43,7 +45,7 @@ interface SearchableInterface
     public function count($query = '');
 
     /**
-     * @param \Elastica\Query $query
+     * @param \Elastica\Query|string $query
      * @param array           $options
      *
      * @return \Elastica\Search

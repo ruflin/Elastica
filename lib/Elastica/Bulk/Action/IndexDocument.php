@@ -26,7 +26,7 @@ class IndexDocument extends AbstractDocument
     }
 
     /**
-     * @param \Elastica\AbstractUpdateAction $source
+     * @param \Elastica\AbstractUpdateAction $action
      *
      * @return array
      */
