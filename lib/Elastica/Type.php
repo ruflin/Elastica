@@ -342,7 +342,7 @@ class Type implements SearchableInterface
      * @param string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
      * @param int|array                    $options OPTIONAL Limit or associative array of options (option=>value)
      *
-     * @return \Elastica\ResultSet ResultSet with all results inside
+     * @return \Elastica\ResultSet with all results inside
      *
      * @see \Elastica\SearchableInterface::search
      */
@@ -456,7 +456,7 @@ class Type implements SearchableInterface
      * Deletes the given list of ids from this type.
      *
      * @param array        $ids
-     * @param string|false $routing Optional routing key for all ids
+     * @param string|bool $routing Optional routing key for all ids
      *
      * @return \Elastica\Response Response  object
      */

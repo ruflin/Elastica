@@ -194,7 +194,7 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Script $data
+     * @param \Elastica\Script $script
      * @param string           $opType
      *
      * @return $this
@@ -222,7 +222,7 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Script|\Elastica\Document\array $data
+     * @param \Elastica\Script|\Elastica\Document|array $data
      * @param string                                    $opType
      *
      * @return $this

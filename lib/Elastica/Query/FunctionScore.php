@@ -103,7 +103,6 @@ class FunctionScore extends AbstractQuery
      * @param string         $scale       a scale to define the rate of decay for this function
      * @param string         $offset      If defined, this function will only be computed for documents with a distance from the origin greater than this value
      * @param float          $decay       optionally defines how documents are scored at the distance given by the $scale parameter
-     * @param float          $scaleWeight optional factor by which to multiply the score at the value provided by the $scale parameter
      * @param float          $weight      optional factor by which to multiply the score at the value provided by the $scale parameter
      * @param AbstractFilter $filter      a filter associated with this function
      *

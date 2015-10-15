@@ -99,8 +99,8 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
         }
     }
 
-    /**
-     *
+	/**
+     * @return void
      */
     public function next()
     {
@@ -124,7 +124,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     }
 
     /**
-     *
+     * @return void
      */
     public function rewind()
     {
