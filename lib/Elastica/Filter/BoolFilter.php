@@ -81,7 +81,7 @@ class BoolFilter extends AbstractFilter
      */
     protected function _addFilter($type, $args)
     {
-        if (!is_array($args) && !($args instanceof AbstractFilter)) {
+        if (!is_array($args) || !($args instanceof AbstractFilter)) {
             throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Filter');
         }
 
