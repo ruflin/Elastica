@@ -45,17 +45,17 @@ dependencies:
 		${SOURCE}
 .PHONY: phpunit
 phpunit:
-	-phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
-	-phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
-	-phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
-	
+	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
+	phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
+	phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
+
 .PHONY: tests
 tests:
 	# Rebuild image to copy changes files to the image
 	make elastica-image
 	make setup
 	docker-compose run elastica make phpunit
-	
+
 # Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
 .PHONY: test
 test:
@@ -73,7 +73,7 @@ lint:
 	${RUN_ENV} php-cs-fixer fix
 
 .PHONY: loc
-loc: 
+loc:
 	${RUN_ENV} cloc --by-file --xml --exclude-dir=build -out=build/cloc.xml .
 
 .PHONY: phploc
@@ -115,7 +115,7 @@ destroy-environment:
 remove-containers:
 	-docker stop $(shell docker ps -a -q)
 	-docker rm -v $(shell docker ps -a -q)
-	
+
 # Starts a shell inside the elastica image
 .PHONY: shell
 shell:
