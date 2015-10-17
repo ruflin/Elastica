@@ -2,7 +2,7 @@
 namespace Elastica\Test;
 
 use Elastica\Exception\NotImplementedException;
-use Elastica\Filter\Bool;
+use Elastica\Filter\BoolFilter;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
 
@@ -44,7 +44,7 @@ class SuggestTest extends BaseTest
     public function testCreateWithNonSuggest()
     {
         try {
-            Suggest::create(new Bool());
+            Suggest::create(new BoolFilter());
             $this->fail();
         } catch (NotImplementedException $e) {
         }
