@@ -81,6 +81,15 @@ class Base extends \PHPUnit_Framework_TestCase
         return $index;
     }
 
+    protected function _checkScriptInlineSetting() {
+        $scriptInline = $this->_getClient()->getCluster()->getNodes()[0]->getInfo()->get('settings', 'script', 'inline');
+
+        if ($scriptInline != 'on') {
+            $this->markTestSkipped('script.inline is not enabled. This is required for this test');
+
+        }
+    }
+
     protected function _checkPlugin($plugin)
     {
         $nodes = $this->_getClient()->getCluster()->getNodes();
