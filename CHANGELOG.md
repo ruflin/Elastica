@@ -3,13 +3,20 @@ All notable changes to this project will be documented in this file based on the
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.0...HEAD)
 - Filters aggregation: empty name is named bucket #935
+- Update elasticsearch dependency to elasticsearch 1.7.3 #957
+
 
 ### Backward Compatibility Breaks
 
 ### Bugfixes
 - Filters aggregation: empty name is named bucket #935
+- Prevent mix keys in filters (#936) #939
+- Fix empty string is not anonymous filter #935
 
 ### Added
+- Support for field_value_factor #953
+- Added setMinDocCount and setExtendedBounds options #947
+- Avoid environment dependecies in tests #938
 
 ### Improvements
 
