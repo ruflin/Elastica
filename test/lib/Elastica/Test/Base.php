@@ -100,7 +100,8 @@ class Base extends \PHPUnit_Framework_TestCase
 
     protected function _checkVersion($version)
     {
-        $installedVersion = $this->_getClient()->request('/')->getData()['version']['number'];
+        $data = $this->_getClient()->request('/')->getData();
+        $installedVersion = $data['version']['number'];
 
         if (version_compare($installedVersion, $version) < 0) {
             $this->markTestSkipped('Test require '.$version.'+ version of Elasticsearch');
