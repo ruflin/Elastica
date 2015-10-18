@@ -8,14 +8,13 @@ RUN apt-get update && apt-get install -y \
 	git \
 	graphviz \
 	nano \
-	php5-memcache \ 
 	php5-xsl
 	# XSL and Graphviz for PhpDocumentor
-	
+
 RUN docker-php-ext-install sockets
-	
+
 RUN rm -r /var/lib/apt/lists/*
-	
+
 # Xdebug for coverage report
 RUN pecl install xdebug
 
@@ -23,7 +22,6 @@ RUN pecl install xdebug
 
 RUN echo "memory_limit=1024M" >> /usr/local/etc/php/conf.d/memory-limit.ini
 RUN echo "date.timezone=UTC" >> /usr/local/etc/php/conf.d/timezone.ini
-RUN echo "extension=/usr/lib/php5/20131226/memcache.so" >> /usr/local/etc/php/conf.d/memcache.ini # Enable Memcache
 RUN echo "extension=/usr/lib/php5/20131226/xsl.so" >> /usr/local/etc/php/conf.d/xsl.ini # TODO: Debian is putting the xsl extension in a different directory, should be in: /usr/local/lib/php/extensions/no-debug-non-zts-20131226
 RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so" >> /usr/local/etc/php/conf.d/xdebug.ini
 

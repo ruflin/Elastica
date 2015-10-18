@@ -60,11 +60,6 @@
     creates=/usr/share/elasticsearch/plugins/geocluster-facet
     /usr/share/elasticsearch/bin/plugin -install geocluster-facet --url https://github.com/zenobase/geocluster-facet/releases/download/{{ ES_GEOCLUSTER_FACET_VER }}/geocluster-facet-{{ ES_GEOCLUSTER_FACET_VER }}.jar
 
-- name: install transport-memcached plugin
-  command: >
-    creates=/usr/share/elasticsearch/plugins/transport-memcached
-    /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-transport-memcached/{{ ES_TRANSPORT_MEMCACHED_VER }}
-
 - name: remove default config
   file: >
     path={{ item }}

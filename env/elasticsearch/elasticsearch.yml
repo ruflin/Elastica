@@ -6,7 +6,7 @@ index.number_of_replicas: 0
 index.store.type: memory
 
 # Required plugins
-plugin.mandatory: mapper-attachments, geocluster-facet, transport-memcached, image
+plugin.mandatory: mapper-attachments, geocluster-facet, image
 
 # For bulk tests
 bulk.udp.enabled: true
@@ -34,7 +34,6 @@ node.name: Elastica
 # Ports config
 http.port: 9200
 transport.tcp.port: 9300
-memcached.port: 11211
 
 # Added for snapshot tests
 path.repo: ["/tmp/backups"]

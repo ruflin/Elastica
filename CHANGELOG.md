@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 - Remove Thrift transport and everything related to it
+- Remove Memcache transport and everything related to it
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.0...HEAD)
 

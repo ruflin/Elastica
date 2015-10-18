@@ -4,6 +4,5 @@
 
 http.port: 9201
 transport.tcp.port: 9301
-memcached.port: 11212
 
 {% endblock %}

@@ -65,7 +65,7 @@ abstract class AbstractTransport extends Param
      *
      * The $transport parameter can be one of the following values:
      *
-     * * string: The short name of a transport. For instance "Http", "Memcache"
+     * * string: The short name of a transport. For instance "Http"
      * * object: An already instantiated instance of a transport
      * * array: An array with a "type" key which must be set to one of the two options. All other
      *          keys in the array will be set as parameters in the transport instance
