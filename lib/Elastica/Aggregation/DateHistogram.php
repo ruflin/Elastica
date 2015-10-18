@@ -134,7 +134,6 @@ class DateHistogram extends Histogram
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html#search-aggregations-bucket-histogram-aggregation-extended-bounds
      *
      * @param string $min see link for formatting options
-     *
      * @param string $max see link for formatting options
      *
      * @return $this
@@ -149,6 +148,7 @@ class DateHistogram extends Histogram
             $bounds['min'] = $max;
             $bounds['max'] = $min;
         }
+
         return $this->setParam('extended_bounds', $bounds);
     }
 }

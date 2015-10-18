@@ -150,7 +150,7 @@ class Result
     {
         if (isset($this->_hit['fields']) && !isset($this->_hit['_source'])) {
             return $this->getFields();
-        } else if (isset($this->_hit['fields']) && isset($this->_hit['_source'])) {
+        } elseif (isset($this->_hit['fields']) && isset($this->_hit['_source'])) {
             return array_merge($this->getFields(), $this->getSource());
         }
 

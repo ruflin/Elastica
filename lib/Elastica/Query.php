@@ -286,7 +286,7 @@ class Query extends Param
     }
 
     /**
-     * Sets the fields not stored to be returned by the search
+     * Sets the fields not stored to be returned by the search.
      *
      * @param array $fieldDataFields Fields not stored to be returned
      *
