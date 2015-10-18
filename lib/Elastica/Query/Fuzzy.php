@@ -73,6 +73,7 @@ class Fuzzy extends AbstractQuery
      *
      * @param $fieldName
      * @param $args
+     *
      * @return $this
      */
     public function addField($fieldName, $args)

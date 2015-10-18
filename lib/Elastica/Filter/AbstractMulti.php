@@ -15,7 +15,7 @@ abstract class AbstractMulti extends AbstractFilter
      */
     protected $_filters = array();
 
-	/**
+    /**
      * @param array $filters
      */
     public function __construct(array $filters = array())
