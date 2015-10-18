@@ -46,6 +46,7 @@ class TermsTest extends BaseTest
      */
     public function testFacetScript()
     {
+        $this->_checkScriptInlineSetting();
         $client = $this->_getClient();
         $index = $client->getIndex('test');
         $index->create(array(), true);

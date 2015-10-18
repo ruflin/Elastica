@@ -264,6 +264,7 @@ class FunctionScoreTest extends BaseTest
      */
     public function testScriptScore()
     {
+        $this->_checkScriptInlineSetting();
         $scriptString = "_score * doc['price'].value";
         $script = new Script($scriptString);
         $query = new FunctionScore();
