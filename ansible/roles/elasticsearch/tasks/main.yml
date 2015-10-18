@@ -60,11 +60,6 @@
     creates=/usr/share/elasticsearch/plugins/geocluster-facet
     /usr/share/elasticsearch/bin/plugin -install geocluster-facet --url https://github.com/zenobase/geocluster-facet/releases/download/{{ ES_GEOCLUSTER_FACET_VER }}/geocluster-facet-{{ ES_GEOCLUSTER_FACET_VER }}.jar
 
-- name: install transport-thrift plugin
-  command: >
-    creates=/usr/share/elasticsearch/plugins/transport-thrift
-    /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-transport-thrift/{{ ES_TRANSPORT_THRIFT_VER }}
-
 - name: install transport-memcached plugin
   command: >
     creates=/usr/share/elasticsearch/plugins/transport-memcached
@@ -87,7 +82,7 @@
     - config-1.yml
     - logging.yml
   notify: restart elasticsearch
-  
+
 - name: Assures scripts dir exists
   file: path=/etc/elasticsearch/scripts/ state=directory
 - name: create custom config scripts
