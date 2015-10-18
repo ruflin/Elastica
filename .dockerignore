@@ -1,0 +1,6 @@
+ansible
+build
+env
+vendor
+CHANGELOG.md
+Vagrantfile
