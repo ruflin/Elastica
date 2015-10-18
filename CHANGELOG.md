@@ -1,9 +1,21 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.0...HEAD)
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.1...HEAD)
 
 ### Backward Compatibility Breaks
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+
+## [2.3.1](https://github.com/ruflin/Elastica/releases/tag/2.3.1) - 2015-10-17
 
 ### Bugfixes
 - Filters aggregation: empty name is named bucket #935
@@ -21,6 +33,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Deprecated
 - Added exceptions of deprecated transports to deprecation list
+
 
 ## [2.3.0](https://github.com/ruflin/Elastica/releases/tag/2.3.0) - 2015-09-15
 
