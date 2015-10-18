@@ -455,7 +455,7 @@ class Type implements SearchableInterface
     /**
      * Deletes the given list of ids from this type.
      *
-     * @param array        $ids
+     * @param array       $ids
      * @param string|bool $routing Optional routing key for all ids
      *
      * @return \Elastica\Response Response  object
