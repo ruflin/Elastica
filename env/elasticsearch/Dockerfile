@@ -23,5 +23,5 @@ COPY scripts/* /usr/share/elasticsearch/config/scripts/
 RUN mkdir -p /tmp/backups/backup1
 RUN mkdir -p /tmp/backups/backup2
 
-# Expose standard ports, udp
-EXPOSE 9200 9300 9700/udp 9800/udp
+# Expose standard ports
+EXPOSE 9200 9300
