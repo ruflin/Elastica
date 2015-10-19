@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.1...HEAD)
 
 ### Backward Compatibility Breaks
+- Remove Thrift transport and everything related to it
+- Remove Memcache transport and everything related to it
+- Remove BulkUdp and everything related to it
+
+### Backward Compatibility Breaks
 
 ### Bugfixes
 

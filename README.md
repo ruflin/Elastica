@@ -25,7 +25,5 @@ Dependencies
 |---------|---------|----------|
 |[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v1.7.2)|1.7.2|yes|
 |[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.7.0)|2.7.0|no|
-|[Elasticsearch thrift transport plugin](https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.7.0)|2.7.0|no|
-|[Elasticsearch memcached transport plugin](https://github.com/elastic/elasticsearch-transport-memcached/tree/v2.7.0)|2.7.0|no|
 |[Elasticsearch geocluster facet plugin](https://github.com/zenobase/geocluster-facet/tree/0.0.12)|0.0.12|no|
 |[Elasticsearch image plugin](https://github.com/Jmoati/elasticsearch-image/releases/tag/1.7.1)|1.7.1|no|
