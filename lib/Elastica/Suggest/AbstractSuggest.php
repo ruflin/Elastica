@@ -78,7 +78,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      * Sets the name of the suggest. It is automatically set by
      * the constructor.
      *
-     * @param string $name The name of the facet.
+     * @param string $name The name of the suggest.
      *
      * @throws \Elastica\Exception\InvalidException If name is empty
      *

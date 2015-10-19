@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file based on the
 - Remove Thrift transport and everything related to it
 - Remove Memcache transport and everything related to it
 - Remove BulkUdp and everything related to it
+- Remove Facets and everything related to it
 
 ### Backward Compatibility Breaks
 

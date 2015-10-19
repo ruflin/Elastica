@@ -158,7 +158,7 @@ class Util
 
         $parts = explode('\\', $class);
         $last = array_pop($parts);
-        $last = preg_replace('/(Facet|Query|Filter)$/', '', $last);
+        $last = preg_replace('/(Query|Filter)$/', '', $last);
         $name = self::toSnakeCase($last);
 
         return $name;
