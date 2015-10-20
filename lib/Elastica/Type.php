@@ -299,6 +299,22 @@ class Type implements SearchableInterface
     }
 
     /**
+     * Sets value type mapping for this type with timestamp .
+     *
+     * @param \Elastica\Type\Mapping|array $mapping Elastica\Type\MappingType object or property array with all mappings
+     *
+     * @return \Elastica\Response
+     */
+    public function setMappingWithTimeStamp($mapping,$timestamp)
+    {
+        $mapping = Mapping::create($mapping);
+        $mapping->setType($this);
+        if(isset($timestamp) && is_array($timestamp))
+            $mapping->setTimestamp($timestamp);
+        return $mapping->send();
+    }
+
+    /**
      * Returns current mapping for the given type.
      *
      * @return array Current mapping
