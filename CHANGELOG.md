@@ -32,6 +32,7 @@ All notable changes to this project will be documented in this file based on the
 - Support for field_value_factor #953
 - Added setMinDocCount and setExtendedBounds options #947
 - Avoid environment dependecies in tests #938
+- Added support for intialise mapping with _timestamp, _ttl and other such metas #965
 
 ### Improvements
 - Update elasticsearch dependency to elasticsearch 1.7.3 #957

@@ -287,17 +287,22 @@ class Type implements SearchableInterface
      * Sets value type mapping for this type.
      *
      * @param \Elastica\Type\Mapping|array $mapping Elastica\Type\MappingType object or property array with all mappings
+     * @param argArray = array('_timestamp' => array('enabled' => true, 'store' => 'yes'), '_ttl' => array('enabled' => true));
      *
      * @return \Elastica\Response
      */
-    public function setMapping($mapping)
+    public function setMapping($mapping,$argArray = NULL)
     {
         $mapping = Mapping::create($mapping);
         $mapping->setType($this);
-
+        if(isset($argArray) && is_array($argArray)){
+            foreach ($argArray as $key => $valueArr) {
+                $mapping->setParam($key, $valueArr);    
+            }
+        }
         return $mapping->send();
     }
-
+    
     /**
      * Returns current mapping for the given type.
      *

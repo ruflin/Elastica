@@ -294,4 +294,5 @@ class Mapping
 
         return $mappingObject;
     }
+
 }
