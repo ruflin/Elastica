@@ -295,39 +295,4 @@ class Mapping
         return $mappingObject;
     }
 
-    /**
-     * Set _timestamp.
-     *
-     * @param array $params _timestamp Params (enabled, default, format, ignore_missing, path, store, index )
-     *
-     * @return $this
-     */
-    public function setTimestamp(array $params)
-    {
-        return $this->setParam('_timestamp', $params);
-    }
-
-    /**
-     * Enables _timestamp for all documents in this type.
-     *
-     * @param bool $enabled OPTIONAL (default = true)
-     *
-     * @return $this
-     */
-    public function enableTimestamp($enabled = true)
-    {
-        return $this->setTimestamp(array('enabled' => $enabled));
-    }
-
-    /**
-     * Enables and stores _timestamp for all documents in this type.
-     *
-     * @param string $store OPTIONAL (default = "yes")
-     *
-     * @return $this
-     */
-    public function storeTimestamp($store = "yes")
-    {
-        return $this->setTimestamp(array('enabled' => true, 'store' => $store));
-    }
 }
