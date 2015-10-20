@@ -291,7 +291,7 @@ class Type implements SearchableInterface
      *
      * @return \Elastica\Response
      */
-    public function setMapping($mapping,$argArray)
+    public function setMapping($mapping,$argArray = NULL)
     {
         $mapping = Mapping::create($mapping);
         $mapping->setType($this);
