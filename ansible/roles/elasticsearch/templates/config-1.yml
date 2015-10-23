@@ -1,8 +1,0 @@
-{% extends "config-default.yml" %}
-
-{% block config %}
-
-http.port: 9201
-transport.tcp.port: 9301
-
-{% endblock %}
