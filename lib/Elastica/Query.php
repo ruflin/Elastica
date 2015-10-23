@@ -285,6 +285,20 @@ class Query extends Param
     }
 
     /**
+     * Sets the fields not stored to be returned by the search.
+     *
+     * @param array $fieldDataFields Fields not stored to be returned
+     *
+     * @return $this
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fielddata-fields.html
+     */
+    public function setFieldDataFields(array $fieldDataFields)
+    {
+        return $this->setParam('fielddata_fields', $fieldDataFields);
+    }
+
+    /**
      * Set script fields.
      *
      * @param array|\Elastica\ScriptFields $scriptFields Script fields

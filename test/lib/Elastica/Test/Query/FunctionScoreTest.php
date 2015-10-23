@@ -21,6 +21,7 @@ class FunctionScoreTest extends BaseTest
             'name' => array('type' => 'string', 'index' => 'not_analyzed'),
             'location' => array('type' => 'geo_point'),
             'price' => array('type' => 'float'),
+            'popularity' => array('type' => 'integer'),
         ));
 
         $type->addDocuments(array(
@@ -28,11 +29,13 @@ class FunctionScoreTest extends BaseTest
                 'name' => "Mr. Frostie's",
                 'location' => array('lat' => 32.799605, 'lon' => -117.243027),
                 'price' => 4.5,
+                'popularity' => null,
             )),
             new Document(2, array(
                 'name' => "Miller's Field",
                 'location' => array('lat' => 32.795964, 'lon' => -117.255028),
                 'price' => 9.5,
+                'popularity' => 1,
             )),
         ));
 
@@ -261,6 +264,7 @@ class FunctionScoreTest extends BaseTest
      */
     public function testScriptScore()
     {
+        $this->_checkScriptInlineSetting();
         $scriptString = "_score * doc['price'].value";
         $script = new Script($scriptString);
         $query = new FunctionScore();
@@ -292,6 +296,8 @@ class FunctionScoreTest extends BaseTest
      */
     public function testSetMinScore()
     {
+        $this->_checkVersion('1.5');
+
         $expected = array(
             'function_score' => array(
                 'min_score' => 0.8,
@@ -320,5 +326,39 @@ class FunctionScoreTest extends BaseTest
 
         $this->assertCount(1, $results);
         $this->assertEquals(1, $results[0]->getId());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testFieldValueFactor()
+    {
+        $this->_checkVersion('1.6');
+
+        $expected = array(
+            'function_score' => array(
+                'functions' => array(
+                    array(
+                        'field_value_factor' => array(
+                            'field' => 'popularity',
+                            'factor' => 1.2,
+                            'modifier' => 'sqrt',
+                            'missing' => 0.1,    // available from >=1.6
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $query = new FunctionScore();
+        $query->addFieldValueFactorFunction('popularity', 1.2, FunctionScore::FIELD_VALUE_FACTOR_MODIFIER_SQRT, 0.1);
+
+        $this->assertEquals($expected, $query->toArray());
+
+        $response = $this->_getIndexForTest()->search($query);
+        $results = $response->getResults();
+
+        $this->assertCount(2, $results);
+        $this->assertEquals(2, $results[0]->getId());
     }
 }

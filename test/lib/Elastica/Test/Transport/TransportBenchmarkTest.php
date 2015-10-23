@@ -34,12 +34,66 @@ class TransportBenchmarkTest extends BaseTest
     }
 
     /**
+     * @dataProvider providerTransport
+     * @group benchmark
+     */
+    public function testAddDocument(array $config, $transport)
+    {
+        $this->_checkTransport($config, $transport);
+
+        $type = $this->getType($config);
+        $index = $type->getIndex();
+        $index->create(array(), true);
+
+        $times = array();
+        for ($i = 0; $i < $this->_max; ++$i) {
+            $data = $this->getData($i);
+            $doc = new Document($i, $data);
+            $result = $type->addDocument($doc);
+            $times[] = $result->getQueryTime();
+            $this->assertTrue($result->isOk());
+        }
+
+        $index->refresh();
+
+        self::logResults('insert', $transport, $times);
+    }
+
+    /**
+     * @depends testAddDocument
+     * @dataProvider providerTransport
+     * @group benchmark
+     */
+    public function testRandomRead(array $config, $transport)
+    {
+        $this->_checkTransport($config, $transport);
+
+        $type = $this->getType($config);
+
+        $type->search('test');
+
+        $times = array();
+        for ($i = 0; $i < $this->_max; ++$i) {
+            $test = rand(1, $this->_max);
+            $query = new Query();
+            $query->setQuery(new \Elastica\Query\MatchAll());
+            $query->setPostFilter(new \Elastica\Filter\Term(array('test' => $test)));
+            $result = $type->search($query);
+            $times[] = $result->getResponse()->getQueryTime();
+        }
+
+        self::logResults('random read', $transport, $times);
+    }
+
+    /**
      * @depends testAddDocument
      * @dataProvider providerTransport
      * @group benchmark
      */
     public function testBulk(array $config, $transport)
     {
+        $this->_checkTransport($config, $transport);
+
         $type = $this->getType($config);
 
         $times = array();
@@ -63,6 +117,8 @@ class TransportBenchmarkTest extends BaseTest
      */
     public function testGetMapping(array $config, $transport)
     {
+        $this->_checkTransport($config, $transport);
+
         $client = $this->_getClient($config);
         $index = $client->getIndex('benchmark');
         $index->create(array(), true);
@@ -173,7 +229,12 @@ class TransportBenchmarkTest extends BaseTest
             }
             $minMean = min($means);
             foreach ($values as $transport => $times) {
-                $perc = (($times['mean'] - $minMean) / $minMean) * 100;
+                $perc = 0;
+
+                if ($minMean != 0) {
+                    $perc = (($times['mean'] - $minMean) / $minMean) * 100;
+                }
+
                 echo sprintf(
                     "%-12s | %-20s | %-12d | %-12.2f | %-12.2f | %-12.2f | %+03.2f\n",
                     $name,
@@ -187,5 +248,10 @@ class TransportBenchmarkTest extends BaseTest
             }
             echo "\n";
         }
+    }
+
+    protected function _checkTransport(array $config, $transport)
+    {
+        $this->_checkConnection($config['host'], $config['port']);
     }
 }

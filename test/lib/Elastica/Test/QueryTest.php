@@ -251,6 +251,23 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
+    public function testNotCloneInnerObjects()
+    {
+        $query = new Query();
+        $termQuery = new Term();
+        $termQuery->setTerm('text', 'value');
+        $query->setQuery($termQuery);
+
+        $anotherQuery = clone $query;
+
+        $termQuery->setTerm('text', 'another value');
+
+        $this->assertEquals($query->toArray(), $anotherQuery->toArray());
+    }
+
+    /**
+     * @group unit
+     */
     public function testSetQueryToArrayChangeQuery()
     {
         $query = new Query();

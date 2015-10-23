@@ -24,4 +24,23 @@ class TermTest extends BaseTest
         $this->assertEquals($data['term'][$key]['value'], $value);
         $this->assertEquals($data['term'][$key]['boost'], $boost);
     }
+
+    /**
+     * @group unit
+     */
+    public function testDiacriticsValueToArray()
+    {
+        $query = new Term();
+        $key = 'name';
+        $value = 'diprè';
+        $boost = 2;
+        $query->setTerm($key, $value, $boost);
+
+        $data = $query->toArray();
+
+        $this->assertInternalType('array', $data['term']);
+        $this->assertInternalType('array', $data['term'][$key]);
+        $this->assertEquals($data['term'][$key]['value'], $value);
+        $this->assertEquals($data['term'][$key]['boost'], $boost);
+    }
 }

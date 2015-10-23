@@ -29,6 +29,17 @@ class FunctionScore extends AbstractQuery
     const DECAY_EXPONENTIAL = 'exp';
     const DECAY_LINEAR = 'linear';
 
+    const FIELD_VALUE_FACTOR_MODIFIER_NONE = 'none';
+    const FIELD_VALUE_FACTOR_MODIFIER_LOG = 'log';
+    const FIELD_VALUE_FACTOR_MODIFIER_LOG1P = 'log1p';
+    const FIELD_VALUE_FACTOR_MODIFIER_LOG2P = 'log2p';
+    const FIELD_VALUE_FACTOR_MODIFIER_LN = 'ln';
+    const FIELD_VALUE_FACTOR_MODIFIER_LN1P = 'ln1p';
+    const FIELD_VALUE_FACTOR_MODIFIER_LN2P = 'ln2p';
+    const FIELD_VALUE_FACTOR_MODIFIER_SQUARE = 'square';
+    const FIELD_VALUE_FACTOR_MODIFIER_SQRT = 'sqrt';
+    const FIELD_VALUE_FACTOR_MODIFIER_RECIPROCAL = 'reciprocal';
+
     protected $_functions = array();
 
     /**
@@ -97,15 +108,14 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a decay function to the query.
      *
-     * @param string         $function    see DECAY_* constants for valid options
-     * @param string         $field       the document field on which to perform the decay function
-     * @param string         $origin      the origin value for this decay function
-     * @param string         $scale       a scale to define the rate of decay for this function
-     * @param string         $offset      If defined, this function will only be computed for documents with a distance from the origin greater than this value
-     * @param float          $decay       optionally defines how documents are scored at the distance given by the $scale parameter
-     * @param float          $scaleWeight optional factor by which to multiply the score at the value provided by the $scale parameter
-     * @param float          $weight      optional factor by which to multiply the score at the value provided by the $scale parameter
-     * @param AbstractFilter $filter      a filter associated with this function
+     * @param string         $function see DECAY_* constants for valid options
+     * @param string         $field    the document field on which to perform the decay function
+     * @param string         $origin   the origin value for this decay function
+     * @param string         $scale    a scale to define the rate of decay for this function
+     * @param string         $offset   If defined, this function will only be computed for documents with a distance from the origin greater than this value
+     * @param float          $decay    optionally defines how documents are scored at the distance given by the $scale parameter
+     * @param float          $weight   optional factor by which to multiply the score at the value provided by the $scale parameter
+     * @param AbstractFilter $filter   a filter associated with this function
      *
      * @return $this
      */
@@ -133,6 +143,33 @@ class FunctionScore extends AbstractQuery
         }
 
         return $this->addFunction($function, $functionParams, $filter, $weight);
+    }
+
+    public function addFieldValueFactorFunction(
+        $field,
+        $factor = null,
+        $modifier = null,
+        $missing = null,
+        $weight = null,
+        AbstractFilter $filter = null
+    ) {
+        $functionParams = array(
+            'field' => $field,
+        );
+
+        if (!is_null($factor)) {
+            $functionParams['factor'] = $factor;
+        }
+
+        if (!is_null($modifier)) {
+            $functionParams['modifier'] = $modifier;
+        }
+
+        if (!is_null($missing)) {
+            $functionParams['missing'] = $missing;
+        }
+
+        return $this->addFunction('field_value_factor', $functionParams, $filter, $weight);
     }
 
     /**

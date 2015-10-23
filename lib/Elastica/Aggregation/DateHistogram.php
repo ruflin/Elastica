@@ -105,7 +105,7 @@ class DateHistogram extends Histogram
     /**
      * Set offset option.
      *
-     * @param  string
+     * @param string
      *
      * @return $this
      */
@@ -126,5 +126,29 @@ class DateHistogram extends Histogram
     public function setFormat($format)
     {
         return $this->setParam('format', $format);
+    }
+
+    /**
+     * Set extended bounds option.
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html#search-aggregations-bucket-histogram-aggregation-extended-bounds
+     *
+     * @param string $min see link for formatting options
+     * @param string $max see link for formatting options
+     *
+     * @return $this
+     */
+    public function setExtendedBounds($min = '', $max = '')
+    {
+        $bounds = array();
+        $bounds['min'] = $min;
+        $bounds['max'] = $max;
+        // switch if min is higher then max
+        if (strtotime($min) > strtotime($max)) {
+            $bounds['min'] = $max;
+            $bounds['max'] = $min;
+        }
+
+        return $this->setParam('extended_bounds', $bounds);
     }
 }

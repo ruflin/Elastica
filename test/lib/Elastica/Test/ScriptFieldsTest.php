@@ -70,7 +70,10 @@ class ScriptFieldsTest extends BaseTest
      */
     public function testQuery()
     {
+        $this->_checkScriptInlineSetting();
+
         $index = $this->_createIndex();
+
         $type = $index->getType('test');
 
         $doc = new Document(1, array('firstname' => 'guschti', 'lastname' => 'ruflin'));

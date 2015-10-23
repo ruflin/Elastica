@@ -2,6 +2,7 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Exception\ResponseException;
 use Elastica\Query;
 use Elastica\ScriptFile;
 use Elastica\Test\Base as BaseTest;
@@ -34,7 +35,16 @@ class ScriptFileTest extends BaseTest
         $query = new Query();
         $query->addScriptField('distance', $scriptFile);
 
-        $resultSet = $type->search($query);
+        try {
+            $resultSet = $type->search($query);
+        } catch (ResponseException $e) {
+            if (strpos($e->getMessage(), 'Unable to find on disk script') !== false) {
+                $this->markTestIncomplete('calculate-distance script not installed?');
+            }
+
+            throw $e;
+        }
+
         $results = $resultSet->getResults();
 
         $this->assertEquals(2, $resultSet->count());

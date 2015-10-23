@@ -82,6 +82,8 @@ class SimpleQueryStringTest extends Base
      */
     public function testSetMinimumShouldMatchWorks()
     {
+        $this->_checkVersion('1.5');
+
         $index = $this->_createIndex();
         $type = $index->getType('foobars');
         $type->addDocuments(array(

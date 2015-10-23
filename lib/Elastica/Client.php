@@ -532,7 +532,7 @@ class Client
      * @param array                  $ids     Document ids
      * @param string|\Elastica\Index $index   Index name
      * @param string|\Elastica\Type  $type    Type of documents
-     * @param string|false           $routing Optional routing key for all ids
+     * @param string|bool            $routing Optional routing key for all ids
      *
      * @throws \Elastica\Exception\InvalidException
      *

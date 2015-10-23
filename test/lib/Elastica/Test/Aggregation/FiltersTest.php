@@ -34,6 +34,12 @@ class FiltersTest extends BaseAggregationTest
         $expected = array(
             'filters' => array(
                 'filters' => array(
+                    '' => array(
+                        'term' => array('color' => ''),
+                    ),
+                    '0' => array(
+                        'term' => array('color' => '0'),
+                    ),
                     'blue' => array(
                         'term' => array('color' => 'blue'),
                     ),
@@ -48,6 +54,8 @@ class FiltersTest extends BaseAggregationTest
         );
 
         $agg = new Filters('by_color');
+        $agg->addFilter(new Term(array('color' => '')), '');
+        $agg->addFilter(new Term(array('color' => '0')), '0');
         $agg->addFilter(new Term(array('color' => 'blue')), 'blue');
         $agg->addFilter(new Term(array('color' => 'red')), 'red');
 
@@ -56,6 +64,41 @@ class FiltersTest extends BaseAggregationTest
         $agg->addAggregation($avg);
 
         $this->assertEquals($expected, $agg->toArray());
+    }
+
+    /**
+     * @group unit
+     * @expectedException Elastica\Exception\InvalidException
+     * @expectedExceptionMessage Name must be a string
+     */
+    public function testWrongName()
+    {
+        $agg = new Filters('by_color');
+        $agg->addFilter(new Term(array('color' => '0')), 0);
+    }
+
+    /**
+     * @group unit
+     * @expectedException Elastica\Exception\InvalidException
+     * @expectedExceptionMessage Mix named and anonymous keys are not allowed
+     */
+    public function testMixNamedAndAnonymousFilters()
+    {
+        $agg = new Filters('by_color');
+        $agg->addFilter(new Term(array('color' => '0')), '0');
+        $agg->addFilter(new Term(array('color' => '0')));
+    }
+
+    /**
+     * @group unit
+     * @expectedException Elastica\Exception\InvalidException
+     * @expectedExceptionMessage Mix named and anonymous keys are not allowed
+     */
+    public function testMixAnonymousAndNamedFilters()
+    {
+        $agg = new Filters('by_color');
+        $agg->addFilter(new Term(array('color' => '0')));
+        $agg->addFilter(new Term(array('color' => '0')), '0');
     }
 
     /**

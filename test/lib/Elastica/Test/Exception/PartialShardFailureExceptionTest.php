@@ -13,6 +13,7 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
      */
     public function testPartialFailure()
     {
+        $this->_checkScriptInlineSetting();
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_partial_failure');
         $index->create(array(

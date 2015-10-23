@@ -324,6 +324,7 @@ class TopHitsTest extends BaseAggregationTest
      */
     public function testAggregateWithScriptFields()
     {
+        $this->_checkScriptInlineSetting();
         $aggr = new TopHits('top_tag_hits');
         $aggr->setSize(1);
         $aggr->setScriptFields(array('three' => new Script('1 + 2')));

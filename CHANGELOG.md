@@ -1,7 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.0...HEAD)
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.1...HEAD)
+
+### Backward Compatibility Breaks
+- Remove Thrift transport and everything related to it
+- Remove Memcache transport and everything related to it
+- Remove BulkUdp and everything related to it
+- Remove Facets and everything related to it
 
 ### Backward Compatibility Breaks
 - Removal of all facets and facet related code
@@ -18,6 +25,27 @@ All notable changes to this project will be documented in this file based on the
 
 
 ### Deprecated
+
+
+## [2.3.1](https://github.com/ruflin/Elastica/releases/tag/2.3.1) - 2015-10-17
+
+### Bugfixes
+- Filters aggregation: empty name is named bucket #935
+- Prevent mix keys in filters (#936) #939
+- Fix empty string is not anonymous filter #935
+- Filters aggregation: empty name is named bucket #935
+
+### Added
+- Support for field_value_factor #953
+- Added setMinDocCount and setExtendedBounds options #947
+- Avoid environment dependecies in tests #938
+
+### Improvements
+- Update elasticsearch dependency to elasticsearch 1.7.3 #957
+
+### Deprecated
+- Added exceptions of deprecated transports to deprecation list
+
 
 ## [2.3.0](https://github.com/ruflin/Elastica/releases/tag/2.3.0) - 2015-09-15
 
