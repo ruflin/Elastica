@@ -3,7 +3,6 @@ namespace Elastica\Test;
 
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
-use Elastica\Facet\Terms;
 use Elastica\Query;
 use Elastica\Query\Builder;
 use Elastica\Query\Term;
@@ -234,26 +233,6 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetFacets()
-    {
-        $query = new Query();
-
-        $facet = new Terms('text');
-        $query->setFacets(array($facet));
-
-        $data = $query->toArray();
-
-        $this->assertArrayHasKey('facets', $data);
-        $this->assertEquals(array('text' => array('terms' => array())), $data['facets']);
-
-        $query->setFacets(array());
-
-        $this->assertArrayNotHasKey('facets', $query->toArray());
-    }
-
-    /**
-     * @group unit
-     */
     public function testSetQueryToArrayCast()
     {
         $query = new Query();
@@ -337,24 +316,6 @@ class QueryTest extends BaseTest
 
         $anotherQuery = new Query();
         $anotherQuery->addScriptField('script', $scriptField);
-
-        $this->assertEquals($query->toArray(), $anotherQuery->toArray());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testAddFacetToArrayCast()
-    {
-        $query = new Query();
-        $facet = new Terms('text');
-
-        $query->addFacet($facet);
-
-        $facet->setName('another text');
-
-        $anotherQuery = new Query();
-        $anotherQuery->addFacet($facet);
 
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }

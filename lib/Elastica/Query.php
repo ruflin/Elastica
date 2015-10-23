@@ -4,7 +4,6 @@ namespace Elastica;
 use Elastica\Aggregation\AbstractAggregation;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotImplementedException;
-use Elastica\Facet\AbstractFacet;
 use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MatchAll;
@@ -333,42 +332,6 @@ class Query extends Param
     }
 
     /**
-     * Sets all facets for this query object. Replaces existing facets.
-     *
-     * @param array $facets List of facet objects
-     *
-     * @return $this
-     *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-facets.html
-     * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
-     */
-    public function setFacets(array $facets)
-    {
-        $this->_params['facets'] = array();
-        foreach ($facets as $facet) {
-            $this->addFacet($facet);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Adds a Facet to the query.
-     *
-     * @param \Elastica\Facet\AbstractFacet $facet Facet object
-     *
-     * @return $this
-     *
-     * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
-     */
-    public function addFacet(AbstractFacet $facet)
-    {
-        $this->_params['facets'][] = $facet;
-
-        return $this;
-    }
-
-    /**
      * Adds an Aggregation to the query.
      *
      * @param AbstractAggregation $agg
@@ -395,10 +358,6 @@ class Query extends Param
     {
         if (!isset($this->_params['query']) && ($this->_suggest == 0)) {
             $this->setQuery(new MatchAll());
-        }
-
-        if (isset($this->_params['facets']) && 0 === count($this->_params['facets'])) {
-            unset($this->_params['facets']);
         }
 
         if (isset($this->_params['post_filter']) && 0 === count($this->_params['post_filter'])) {

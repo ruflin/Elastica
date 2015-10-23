@@ -96,7 +96,6 @@ class BuilderTest extends BaseTest
             array('bool', 'bool'),
             array('constantScore', 'constant_score'),
             array('disMax', 'dis_max'),
-            array('facets', 'facets'),
             array('filter', 'filter'),
             array('filteredQuery', 'filtered'),
             array('must', 'must'),
@@ -124,8 +123,6 @@ class BuilderTest extends BaseTest
      * @covers \Elastica\Query\Builder::constantScoreClose
      * @covers \Elastica\Query\Builder::disMax
      * @covers \Elastica\Query\Builder::disMaxClose
-     * @covers \Elastica\Query\Builder::facets
-     * @covers \Elastica\Query\Builder::facetsClose
      * @covers \Elastica\Query\Builder::filter
      * @covers \Elastica\Query\Builder::filterClose
      * @covers \Elastica\Query\Builder::filteredQuery

@@ -6,7 +6,7 @@ use Elastica\Exception\InvalidException;
 /**
  * Class to handle params.
  *
- * This function can be used to handle params for queries, filter, facets
+ * This function can be used to handle params for queries, filter
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
