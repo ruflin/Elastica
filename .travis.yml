@@ -1,31 +1,39 @@
-language: php
+sudo: required
+services:
+  - docker
 
-php:
-  - 5.6
-  - 5.5
-  - 5.4
-  - 5.3
-  - 7.0
-  - hhvm
+#language: php
 
-matrix:
-  allow_failures:
-    - php: 5.3
-    - php: hhvm
-  fast_finish: true
+#php:
+#  - 5.6
+#  - 5.5
+#  - 5.4
+#  - 5.3
+#  - 7.0
+#  - hhvm
+
+#matrix:
+#  allow_failures:
+#    - php: 5.3
+#    - php: hhvm
+#  fast_finish: true
 
 branches:
   only:
     - master
 
-install:
-  - /bin/bash ansible/provision.sh
+before_install:
+  # Docker-compose installation
+  - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
-before_script:
-  - if $(phpenv version-name | grep -q '5.3'); then sudo composer update --no-dev; sudo composer dump-autoload; fi
+
+#before_script:
+#  - if $(phpenv version-name | grep -q '5.3'); then sudo composer update --no-dev; sudo composer dump-autoload; fi
 
 script:
-  - make phpunit
+  - make tests
 
 after_script:
   - cat /var/log/elasticsearch/*.log

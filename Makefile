@@ -43,6 +43,7 @@ dependencies:
 		--jdepend-chart=./build/pdepend/dependencies.svg \
 		--overview-pyramid=./build/pdepend/overview-pyramid.svg \
 		${SOURCE}
+
 .PHONY: phpunit
 phpunit:
 	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
@@ -55,6 +56,7 @@ tests:
 	make elastica-image
 	make setup
 	docker-compose run elastica make phpunit
+	docker cp elastica10:/elastica/build/coverage/ $(shell pwd)/build/coverage
 
 # Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
 .PHONY: test
