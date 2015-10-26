@@ -1,6 +1,7 @@
 #/bin/bash
 
 SOURCE = "./lib"
+TARGET?=56
 
 # By default docker environment is used to run commands. To run without the predefined environment, set RUN_ENV=" " either as parameter or as environment variable
 ifndef RUN_ENV
@@ -55,7 +56,7 @@ tests:
 	# Rebuild image to copy changes files to the image
 	make elastica-image
 	make setup
-	mkdir build
+	mkdir -p build
 	docker-compose run elastica make phpunit
 	docker cp elastica_elastica_run_1:/elastica/build/coverage/ $(shell pwd)/build/coverage
 
@@ -142,12 +143,13 @@ gource:
 
 .PHONY: elastica-image
 elastica-image:
+	docker build -t ruflin/elastica-dev-base -f env/elastica/Docker${TARGET} env/elastica/
 	docker build -t ruflin/elastica .
 
 # Builds all image locally. This can be used to use local images if changes are made locally to the Dockerfiles
 .PHONY: build-images
 build-images:
-	docker build -t ruflin/elastica-dev-base env/elastica/
+	docker build -t ruflin/elastica-dev-base -f env/elastica/Docker${TARGET} env/elastica/
 	docker build -t ruflin/elasticsearch-elastica env/elasticsearch/
 	docker build -t ruflin/nginx-elastica env/nginx/
 	docker build -t ruflin/elastica-data env/data/

@@ -2,21 +2,12 @@ sudo: required
 services:
   - docker
 
-#language: php
 
-#php:
-#  - 5.6
-#  - 5.5
-#  - 5.4
-#  - 5.3
-#  - 7.0
-#  - hhvm
-
-#matrix:
-#  allow_failures:
-#    - php: 5.3
-#    - php: hhvm
-#  fast_finish: true
+env:
+  - TARGETS="54"
+  - TARGETS="55"
+  - TARGETS="56"
+  - TARGETS="70"
 
 branches:
   only:
@@ -33,7 +24,7 @@ before_install:
 #  - if $(phpenv version-name | grep -q '5.3'); then sudo composer update --no-dev; sudo composer dump-autoload; fi
 
 script:
-  - make tests
+  - make tests TARGET=$TARGET
 
 after_script:
   - cat /var/log/elasticsearch/*.log
