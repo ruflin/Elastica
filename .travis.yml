@@ -4,10 +4,10 @@ services:
 
 
 env:
-  - TARGETS="54"
-  - TARGETS="55"
-  - TARGETS="56"
-  - TARGETS="70"
+  - TARGET="54"
+  - TARGET="55"
+  - TARGET="56"
+  - TARGET="70"
 
 branches:
   only:
