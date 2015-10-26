@@ -55,8 +55,9 @@ tests:
 	# Rebuild image to copy changes files to the image
 	make elastica-image
 	make setup
+	mkdir build
 	docker-compose run elastica make phpunit
-	docker cp elastica10:/elastica/build/coverage/ $(shell pwd)/build/coverage
+	docker cp elastica_elastica_run_1:/elastica/build/coverage/ $(shell pwd)/build/coverage
 
 # Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
 .PHONY: test
