@@ -1,6 +1,0 @@
----
-
-- name: restart elasticsearch
-  service: >
-    name=elasticsearch
-    state=restarted

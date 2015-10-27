@@ -1,6 +1,6 @@
 elastica:
-  #build: . 
-  image: ruflin/elastica
+  build: .
+  #image: ruflin/elastica
   ports:
     - "9200:9200"
   links:
@@ -10,13 +10,13 @@ elastica:
     - ES_HOST=elasticsearch
     - PROXY_HOST=nginx
 elasticsearch:
-  #build: ./env/elasticsearch/ 
-  image: ruflin/elasticsearch-elastica
+  build: ./env/elasticsearch/
+  #image: ruflin/elasticsearch-elastica
   volumes_from:
     - data
 nginx:
-  #build: ./env/nginx/
-  image: ruflin/nginx-elastica
+  build: ./env/nginx/
+  #image: ruflin/nginx-elastica
   links:
     - elasticsearch
 # data container to share data between elasticsearch nodes for snapshot testing
