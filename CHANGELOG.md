@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file based on the
 - Remove Memcache transport and everything related to it
 - Remove BulkUdp and everything related to it
 - Remove Facets and everything related to it
+- Remove ansible scripts for tests setup and Vagrantfile as not needed anymore.
+  All is based on docker contaienrs now
 
 ### Backward Compatibility Breaks
 - Removal of all facets and facet related code
