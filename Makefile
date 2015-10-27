@@ -47,9 +47,9 @@ dependencies:
 
 .PHONY: phpunit
 phpunit:
-	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
-	phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
-	phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
+	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit; \
+	phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional; \
+	phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown;
 
 .PHONY: tests
 tests:

@@ -11,12 +11,7 @@ All notable changes to this project will be documented in this file based on the
 - Remove Facets and everything related to it
 - Remove ansible scripts for tests setup and Vagrantfile as not needed anymore.
   All is based on docker contaienrs now
-
-### Backward Compatibility Breaks
-- Removal of all facets and facet related code
-- Thrift transport removed
-- Memcache transport removed
-- UDP Bulk support removed
+- Support for PHP 5.3 removed
 
 ### Bugfixes
 

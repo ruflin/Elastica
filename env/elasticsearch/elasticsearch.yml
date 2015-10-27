@@ -3,7 +3,7 @@ index.number_of_shards: 2
 index.number_of_replicas: 0
 
 # Required plugins
-plugin.mandatory: mapper-attachments, image
+#plugin.mandatory: mapper-attachments, image
 
 # For script tests
 script.inline: on
