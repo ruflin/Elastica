@@ -25,7 +25,7 @@ class PercolatorTest extends BaseTest
         $response = $percolator->registerQuery($percolatorName, $query);
 
         $data = $response->getData();
-        
+
         $expectedArray = array(
             '_type' => '.percolator',
             '_index' => $index->getName(),
