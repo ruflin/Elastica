@@ -42,7 +42,8 @@ class Status
     public function __construct(BaseIndex $index)
     {
         $this->_index = $index;
-        $this->refresh();
+        // TODO: remove completely with es 2.0?
+        //$this->refresh();
     }
 
     /**
@@ -84,7 +85,7 @@ class Status
      */
     public function getAliases()
     {
-        $responseData = $this->getIndex()->request('_aliases', \Elastica\Request::GET)->getData();
+        $responseData = $this->getIndex()->request('_alias/*', \Elastica\Request::GET)->getData();
 
         $data = $responseData[$this->getIndex()->getName()];
         if (!empty($data['aliases'])) {
