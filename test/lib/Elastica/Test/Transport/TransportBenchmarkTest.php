@@ -8,6 +8,12 @@ use Elastica\Test\Base as BaseTest;
 
 class TransportBenchmarkTest extends BaseTest
 {
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->es20("Benchmarks currently skipped with es2.0");
+    }
+
     protected $_max = 1000;
 
     protected $_maxData = 20;

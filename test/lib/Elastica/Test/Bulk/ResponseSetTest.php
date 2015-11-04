@@ -39,8 +39,8 @@ class ResponseSetTest extends BaseTest
             $this->assertInstanceOf('Elastica\\Bulk\\ResponseSet', $responseSet);
 
             $this->assertTrue($responseSet->hasError());
-            $this->assertNotEquals('AnotherExceptionMessage', $responseSet->getError());
             $this->assertEquals('SomeExceptionMessage', $responseSet->getError());
+            $this->assertNotEquals('AnotherExceptionMessage', $responseSet->getError());
 
             $actionExceptions = $e->getActionExceptions();
             $this->assertEquals(2, count($actionExceptions));

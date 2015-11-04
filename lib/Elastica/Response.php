@@ -81,8 +81,8 @@ class Response
         $message = '';
         $response = $this->getData();
 
-        if (isset($response['error']['type'])) {
-            $message = $response['error']['type'];
+        if (isset($response['error'])) {
+            $message = $response['error'];
         }
 
         // Encoding needed as much more information inside now
