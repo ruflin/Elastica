@@ -13,8 +13,7 @@ class FuzzyLikeThisTest extends BaseTest
     protected function setUp()
     {
         parent::setUp();
-        // No fuzzy-like-this query anymore?
-        $this->es20();
+        $this->es20("No fuzzy-like-this query anymore?");
     }
 
     /**

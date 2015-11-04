@@ -103,6 +103,7 @@ class HasParentTest extends BaseTest
      */
     public function testQueryInsideHasParentSearch()
     {
+        $this->es20("Problems with the parent index? Syntax changed?");
         $index = $this->prepareSearchData();
 
         $f = new \Elastica\Query\Term();

@@ -9,6 +9,7 @@ use Elastica\Test\Base as BaseTest;
 
 class IdsTest extends BaseTest
 {
+
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
