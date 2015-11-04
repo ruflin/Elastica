@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file based on the
 - Elastica\Reponse::getError() now returns and array instead of a string
 - Move function \Elastica\Index\Status::getAliases() and hasAlias(...) to \Elastica\Index::getAliases()
 - Remove \Elastica\Index\Status object and related functions
+- \Elastica\Query\FuzzyLikeThis remove as not supported anymore
 
 ### Bugfixes
 
