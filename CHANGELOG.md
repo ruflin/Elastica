@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file based on the
 - Move function \Elastica\Index\Status::getAliases() and hasAlias(...) to \Elastica\Index::getAliases()
 - Remove \Elastica\Index\Status object and related functions
 - \Elastica\Query\FuzzyLikeThis remove as not supported anymore
+- Remove \Elastica\Status::getServerStatus() as the information was removed
 
 ### Bugfixes
 
