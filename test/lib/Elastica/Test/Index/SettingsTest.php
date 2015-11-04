@@ -9,11 +9,6 @@ use Elastica\Test\Base as BaseTest;
 
 class SettingsTest extends BaseTest
 {
-    protected function setUp()
-    {
-        $this->es20();
-    }
-
     /**
      * @group functional
      */
@@ -214,6 +209,7 @@ class SettingsTest extends BaseTest
      */
     public function testSetReadOnly()
     {
+        $this->es20("Skip tests currently as in case this one breaks, it breaks all other tests");
         $index = $this->_createIndex();
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
@@ -237,6 +233,8 @@ class SettingsTest extends BaseTest
             $this->fail('Should throw exception because of read only');
         } catch (ResponseException $e) {
             $message = $e->getMessage();
+            $error = $e->getResponse()->getError();
+            print_r($error);
             $this->assertContains('ClusterBlockException', $message);
             $this->assertContains('index write', $message);
         }
@@ -310,7 +308,10 @@ class SettingsTest extends BaseTest
 
         $this->assertFalse($settings->getBlocksMetadata());
 
+
+        $this->es20('skipping this test as it blocks the cluster afterwards. Error for next call is:  {"error":{"root_cause":[{"type":"cluster_block_exception","reason":"blocked by: [FORBIDDEN/9/index metadata (api)];"}],"type":"cluster_block_exception","reason":"blocked by: [FORBIDDEN/9/index metadata (api)];"},"status":403}');
         $settings->setBlocksMetadata(true);
+
         $this->assertTrue($settings->getBlocksMetadata());
 
         $settings->setBlocksMetadata(false);
@@ -336,8 +337,8 @@ class SettingsTest extends BaseTest
             $settings = $index->getSettings()->get();
             $this->fail('Should throw exception because of index not found');
         } catch (ResponseException $e) {
-            $message = $e->getMessage();
-            $this->assertContains('IndexMissingException', $message);
+            $error = $e->getResponse()->getError();
+            $this->assertContains('index_not_found_exception', $error['type']);
         }
     }
 }
