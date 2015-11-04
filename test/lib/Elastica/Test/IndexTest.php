@@ -353,6 +353,7 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryString()
     {
+        $this->es20("how does delete by query work under 2.0?");
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
@@ -387,6 +388,7 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQuery()
     {
+        $this->es20("how does delete by query work under 2.0?");
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
@@ -421,6 +423,8 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryAndOptions()
     {
+        $this->es20("how does delete by query work under 2.0?");
+
         $index = $this->_createIndex(null, true, 2);
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
@@ -852,6 +856,8 @@ class IndexTest extends BaseTest
         $index->optimize();
         sleep(2);
         $returnedTokens = $index->analyze('foo');
+
+        $this->es20("Seems like analyze puts the token now under a different position. Is this ok?");
 
         $tokens = array(
             array(

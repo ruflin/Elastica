@@ -127,10 +127,12 @@ class Base extends \PHPUnit_Framework_TestCase
     protected function _waitForAllocation(Index $index)
     {
         do {
-            $settings = $index->getStatus()->get();
+            $state = $index->getClient()->getCluster()->getState();
+            $indexState = $state['routing_table']['indices'][$index->getName()];
+
             $allocated = true;
-            foreach ($settings['shards'] as $shard) {
-                if ($shard[0]['routing']['state'] != 'STARTED') {
+            foreach ($indexState['shards'] as $shard) {
+                if ($shard[0]['state'] != 'STARTED') {
                     $allocated = false;
                 }
             }
