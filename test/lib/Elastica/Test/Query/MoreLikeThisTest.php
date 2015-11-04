@@ -51,6 +51,7 @@ class MoreLikeThisTest extends BaseTest
         $query->setFields(array('email', 'content'));
         $query->setQuery($mltQuery);
 
+        $this->es20("this returns now 1 instaed of 2. what did change in the more like this?");
         $resultSet = $type->search($query);
         $resultSet->getResponse()->getData();
         $this->assertEquals(2, $resultSet->count());

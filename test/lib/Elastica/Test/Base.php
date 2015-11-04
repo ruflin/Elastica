@@ -8,9 +8,9 @@ use Elastica\Index;
 class Base extends \PHPUnit_Framework_TestCase
 {
 
-    protected function es20() {
+    protected function es20($message = "") {
         parent::setUp();
-        $this->markTestSkipped('Test skipped because of current incompatibility with ES 2.0');
+        $this->markTestSkipped($message . ' - Test skipped because of current incompatibility with ES 2.0');
     }
 
     /**
