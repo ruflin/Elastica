@@ -13,6 +13,9 @@ class HighlightTest extends BaseTest
      */
     public function testHightlightSearch()
     {
+        // TODO: Highlighting seems to have changed a little bit
+        $this->es20();
+
         $index = $this->_createIndex();
         $type = $index->getType('helloworld');
 
