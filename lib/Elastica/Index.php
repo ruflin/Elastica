@@ -5,7 +5,6 @@ use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
-use Elastica\Index\Status as IndexStatus;
 
 /**
  * Elastica index object.
@@ -60,16 +59,6 @@ class Index implements SearchableInterface
     public function getType($type)
     {
         return new Type($this, $type);
-    }
-
-    /**
-     * Returns the current status of the index.
-     *
-     * @return \Elastica\Index\Status Index status
-     */
-    public function getStatus()
-    {
-        return new IndexStatus($this);
     }
 
     /**
