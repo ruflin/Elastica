@@ -10,6 +10,13 @@ use Elastica\Type\Mapping;
 
 class FuzzyLikeThisTest extends BaseTest
 {
+    protected function setUp()
+    {
+        parent::setUp();
+        // No fuzzy-like-this query anymore?
+        $this->es20();
+    }
+
     /**
      * @group functional
      */
