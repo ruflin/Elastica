@@ -178,3 +178,10 @@ push-images: build-images
 # google-setup:
 # 	docker-machine create --driver google --google-project elastica-1024 --google-machine-type n1-standard-8 elastica
 # 	eval "$(docker-machine env elastica)"
+
+
+tmp:
+	make elastica-image
+	make setup
+	mkdir -p build
+	docker-compose run elastica phpunit -c test/ test/lib/Elastica/Test/Query/

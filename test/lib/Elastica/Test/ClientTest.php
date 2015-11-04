@@ -294,6 +294,8 @@ class ClientTest extends BaseTest
      */
     public function testDeleteIdsIdxStringTypeString()
     {
+        $this->es20();
+
         $data = array('username' => 'hans');
         $userSearch = 'username:hans';
 
