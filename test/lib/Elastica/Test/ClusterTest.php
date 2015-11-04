@@ -6,11 +6,6 @@ use Elastica\Test\Base as BaseTest;
 
 class ClusterTest extends BaseTest
 {
-    protected function setUp()
-    {
-        $this->es20();
-    }
-
     /**
      * @group functional
      */
