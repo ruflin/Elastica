@@ -8,6 +8,12 @@ use Elastica\Type;
 
 class CrossIndexTest extends Base
 {
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->setUp("Skipping cross index tests");
+    }
+
     /**
      * Test default reindex.
      *
