@@ -67,7 +67,6 @@ class QueryTest extends AbstractDSLTest
         $this->_assertNotImplemented($queryDSL, 'custom_filters_score', array());
         $this->_assertNotImplemented($queryDSL, 'custom_score', array());
         $this->_assertNotImplemented($queryDSL, 'field', array());
-        $this->_assertNotImplemented($queryDSL, 'fuzzy_like_this_field', array());
         $this->_assertNotImplemented($queryDSL, 'geo_shape', array());
         $this->_assertNotImplemented($queryDSL, 'indices', array());
         $this->_assertNotImplemented($queryDSL, 'minimum_should_match', array());

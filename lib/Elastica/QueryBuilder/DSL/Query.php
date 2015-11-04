@@ -199,16 +199,6 @@ class Query implements DSL
     }
 
     /**
-     * fuzzy like this field query.
-     *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-flt-field-query.html
-     */
-    public function fuzzy_like_this_field()
-    {
-        throw new NotImplementedException();
-    }
-
-    /**
      * function score query.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
