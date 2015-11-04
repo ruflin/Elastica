@@ -74,19 +74,28 @@ class Response
     /**
      * Error message.
      *
-     * @return string Error message
+     * @return array Error object
      */
     public function getError()
     {
-        $message = '';
+        $error = array();
         $response = $this->getData();
 
         if (isset($response['error'])) {
-            $message = $response['error'];
+            $error = $response['error'];
         }
+        return $error;
+    }
 
-        // Encoding needed as much more information inside now
-        if (!is_string($message)) {
+    /**
+     * @return string Error string based on the error object
+     */
+    public function getErrorMessage() {
+        $error = $this->getError();
+
+        $message = "";
+
+        if (!is_string($error)) {
             $message = json_encode($message);
         }
 

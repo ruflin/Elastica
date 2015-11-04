@@ -17,7 +17,8 @@ class ResponseExceptionTest extends AbstractExceptionTest
             $this->_createIndex('woo', false);
             $this->fail('Index created when it should fail');
         } catch (ResponseException $ex) {
-            $this->assertEquals('IndexAlreadyExistsException', $ex->getElasticsearchException()->getExceptionName());
+            $error = $ex->getResponse()->getError();
+            $this->assertEquals('index_already_exists_exception', $error['type']);
             $this->assertEquals(400, $ex->getElasticsearchException()->getCode());
         }
     }
@@ -42,7 +43,8 @@ class ResponseExceptionTest extends AbstractExceptionTest
             )));
             $this->fail('Indexing with wrong type should fail');
         } catch (ResponseException $ex) {
-            $this->assertEquals('MapperParsingException', $ex->getElasticsearchException()->getExceptionName());
+            $error = $ex->getResponse()->getError();
+            $this->assertEquals('mapper_parsing_exception', $error['type']);
             $this->assertEquals(400, $ex->getElasticsearchException()->getCode());
         }
     }
@@ -58,7 +60,8 @@ class ResponseExceptionTest extends AbstractExceptionTest
         try {
             $index->search();
         } catch (ResponseException $ex) {
-            $this->assertEquals('IndexMissingException', $ex->getElasticsearchException()->getExceptionName());
+            $error = $ex->getResponse()->getError();
+            $this->assertEquals('index_not_found_exception', $error['type']);
             $this->assertEquals(404, $ex->getElasticsearchException()->getCode());
         }
     }

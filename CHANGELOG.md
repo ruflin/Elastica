@@ -12,10 +12,12 @@ All notable changes to this project will be documented in this file based on the
 - Remove ansible scripts for tests setup and Vagrantfile as not needed anymore.
   All is based on docker contaienrs now
 - Support for PHP 5.3 removed
+- Elastica\Reponse::getError() now returns and array instead of a string
 
 ### Bugfixes
 
 ### Added
+- Elastica\Reponse::getErrorMessage was added as getError is now an object
 
 ### Improvements
 - Travis builds were moved to docker-compose setup. Ansible scripts and Vagrant files were removed
