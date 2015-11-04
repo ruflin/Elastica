@@ -50,14 +50,12 @@ class StatusTest extends BaseTest
         $index = $client->getIndex($indexName);
         $index->create(array(), true);
 
-        $status = new IndexStatus($index);
-
-        $this->assertFalse($status->hasAlias($aliasName));
+        $this->assertFalse($index->hasAlias($aliasName));
 
         $index->addAlias($aliasName);
-        $status->refresh();
+        $index->refresh();
 
-        $this->assertTrue($status->hasAlias($aliasName));
+        $this->assertTrue($index->hasAlias($aliasName));
     }
 
     /**

@@ -436,6 +436,35 @@ class Index implements SearchableInterface
     }
 
     /**
+     * Returns all index aliases.
+     *
+     * @return array Aliases
+     */
+    public function getAliases()
+    {
+        $responseData = $this->request('_alias/*', \Elastica\Request::GET)->getData();
+
+        $data = $responseData[$this->getName()];
+        if (!empty($data['aliases'])) {
+            return array_keys($data['aliases']);
+        }
+
+        return array();
+    }
+
+    /**
+     * Checks if the index has the given alias.
+     *
+     * @param string $name Alias name
+     *
+     * @return bool
+     */
+    public function hasAlias($name)
+    {
+        return in_array($name, $this->getAliases());
+    }
+
+    /**
      * Clears the cache of an index.
      *
      * @return \Elastica\Response Response object

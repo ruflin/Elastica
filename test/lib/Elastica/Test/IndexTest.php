@@ -522,12 +522,12 @@ class IndexTest extends BaseTest
         $this->assertTrue($status->indexExists($indexName2));
 
         $this->assertTrue($status->aliasExists($aliasName));
-        $this->assertTrue($index1->getStatus()->hasAlias($aliasName));
-        $this->assertFalse($index2->getStatus()->hasAlias($aliasName));
+        $this->assertTrue($index1->hasAlias($aliasName));
+        $this->assertFalse($index2->hasAlias($aliasName));
 
         $index2->addAlias($aliasName);
-        $this->assertTrue($index1->getStatus()->hasAlias($aliasName));
-        $this->assertTrue($index2->getStatus()->hasAlias($aliasName));
+        $this->assertTrue($index1->hasAlias($aliasName));
+        $this->assertTrue($index2->hasAlias($aliasName));
     }
 
     /**
@@ -555,12 +555,12 @@ class IndexTest extends BaseTest
         $this->assertTrue($status->indexExists($indexName1));
         $this->assertTrue($status->indexExists($indexName2));
         $this->assertTrue($status->aliasExists($aliasName));
-        $this->assertTrue($index1->getStatus()->hasAlias($aliasName));
-        $this->assertFalse($index2->getStatus()->hasAlias($aliasName));
+        $this->assertTrue($index1->hasAlias($aliasName));
+        $this->assertFalse($index2->hasAlias($aliasName));
 
         $index2->addAlias($aliasName, true);
-        $this->assertFalse($index1->getStatus()->hasAlias($aliasName));
-        $this->assertTrue($index2->getStatus()->hasAlias($aliasName));
+        $this->assertFalse($index1->hasAlias($aliasName));
+        $this->assertTrue($index2->hasAlias($aliasName));
     }
 
     /**

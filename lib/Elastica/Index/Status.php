@@ -78,22 +78,6 @@ class Status
         return $data;
     }
 
-    /**
-     * Returns all index aliases.
-     *
-     * @return array Aliases
-     */
-    public function getAliases()
-    {
-        $responseData = $this->getIndex()->request('_alias/*', \Elastica\Request::GET)->getData();
-
-        $data = $responseData[$this->getIndex()->getName()];
-        if (!empty($data['aliases'])) {
-            return array_keys($data['aliases']);
-        }
-
-        return array();
-    }
 
     /**
      * Returns all index settings.
@@ -105,18 +89,6 @@ class Status
         $responseData = $this->getIndex()->request('_settings', \Elastica\Request::GET)->getData();
 
         return $responseData[$this->getIndex()->getName()]['settings'];
-    }
-
-    /**
-     * Checks if the index has the given alias.
-     *
-     * @param string $name Alias name
-     *
-     * @return bool
-     */
-    public function hasAlias($name)
-    {
-        return in_array($name, $this->getAliases());
     }
 
     /**

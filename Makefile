@@ -184,4 +184,4 @@ tmp:
 	make elastica-image
 	make setup
 	mkdir -p build
-	docker-compose run elastica phpunit -c test/ test/lib/Elastica/Test/
+	docker-compose run elastica phpunit -c test/ test/lib/Elastica/Test/IndexTest.php
