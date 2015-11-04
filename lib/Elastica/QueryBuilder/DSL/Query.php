@@ -12,7 +12,6 @@ use Elastica\Query\DisMax;
 use Elastica\Query\Filtered;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\Fuzzy;
-use Elastica\Query\FuzzyLikeThis;
 use Elastica\Query\HasChild;
 use Elastica\Query\HasParent;
 use Elastica\Query\Ids;
@@ -197,18 +196,6 @@ class Query implements DSL
     public function filtered(AbstractQuery $query = null, AbstractFilter $filter = null)
     {
         return new Filtered($query, $filter);
-    }
-
-    /**
-     * fuzzy like this query.
-     *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-flt-query.html
-     *
-     * @return FuzzyLikeThis
-     */
-    public function fuzzy_like_this()
-    {
-        return new FuzzyLikeThis();
     }
 
     /**

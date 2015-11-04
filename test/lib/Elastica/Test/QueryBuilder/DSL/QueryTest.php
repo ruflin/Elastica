@@ -45,7 +45,6 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'filtered', 'Elastica\Query\Filtered', array(new Match(), new Exists('field')));
         $this->_assertImplemented($queryDSL, 'function_score', 'Elastica\Query\FunctionScore', array());
         $this->_assertImplemented($queryDSL, 'fuzzy', 'Elastica\Query\Fuzzy', array('field', 'type'));
-        $this->_assertImplemented($queryDSL, 'fuzzy_like_this', 'Elastica\Query\FuzzyLikeThis', array());
         $this->_assertImplemented($queryDSL, 'has_child', 'Elastica\Query\HasChild', array(new Match()));
         $this->_assertImplemented($queryDSL, 'has_parent', 'Elastica\Query\HasParent', array(new Match(), 'type'));
         $this->_assertImplemented($queryDSL, 'ids', 'Elastica\Query\Ids', array('type', array()));
