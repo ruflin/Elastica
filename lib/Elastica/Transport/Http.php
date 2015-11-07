@@ -154,6 +154,9 @@ class Http extends AbstractTransport
         $response = new Response($responseString, curl_getinfo($conn, CURLINFO_HTTP_CODE));
         $response->setQueryTime($end - $start);
         $response->setTransferInfo(curl_getinfo($conn));
+        if ($connection->hasConfig('bigintConversion')) {
+            $response->setJsonBigintConversion($connection->getConfig('bigintConversion'));
+        }
 
         if ($response->hasError()) {
             throw new ResponseException($request, $response);
