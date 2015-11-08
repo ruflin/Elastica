@@ -64,8 +64,8 @@ class GeoShapeProvided extends AbstractGeoShape
                     'shape' => array(
                         'type' => $this->_shapeType,
                         'coordinates' => $this->_coordinates,
+                        'relation' => $this->_relation,
                     ),
-                    'relation' => $this->_relation,
                 ),
             ),
         );
