@@ -16,7 +16,7 @@ RUN docker-php-ext-install sockets
 RUN rm -r /var/lib/apt/lists/*
 
 # Xdebug for coverage report
-RUN pecl install xdebug
+RUN pecl install xdebug-2.3.2
 
 ## PHP Configuration
 
