@@ -8,6 +8,7 @@ ENV ES_PLUGIN_BIN /usr/share/elasticsearch/bin/plugin
 
 # Install Plugins
 RUN ${ES_PLUGIN_BIN} install elasticsearch/elasticsearch-mapper-attachments/${ES_MAPPER_ATTACHMENTS_VER}
+RUN ${ES_PLUGIN_BIN} install delete-by-query
 #RUN ${ES_PLUGIN_BIN} install image --url https://github.com/Jmoati/elasticsearch-image/releases/download/${ES_IMAGE_PLUGIN_VER}/elasticsearch-image-${ES_IMAGE_PLUGIN_VER}.zip
 
 # Debug interface

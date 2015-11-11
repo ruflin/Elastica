@@ -198,6 +198,19 @@ class Query implements DSL
         return new Filtered($query, $filter);
     }
 
+
+    /**
+     * fuzzy like this query.
+     *
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-flt-query.html
+     *
+     * @return FuzzyLikeThis
+     */
+    public function fuzzy_like_this()
+    {
+        throw new NotImplementedException("Removed in elasticsearch 2.0");
+    }
+
     /**
      * function score query.
      *

@@ -353,7 +353,7 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryString()
     {
-        $this->es20("how does delete by query work under 2.0?");
+        //$this->es20("how does delete by query work under 2.0?");
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
