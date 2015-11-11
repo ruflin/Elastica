@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file based on the
 - Remove \Elastica\Index\Status object and related functions
 - \Elastica\Query\FuzzyLikeThis remove as not supported anymore
 - Remove \Elastica\Status::getServerStatus() as the information was removed
+- DeleteByQuery now requires the delete-by-query plugin isntalled
 
 ### Bugfixes
 
