@@ -209,7 +209,7 @@ class SettingsTest extends BaseTest
      */
     public function testSetReadOnly()
     {
-        $this->es20("Skip tests currently as in case this one breaks, it breaks all other tests");
+        $this->es20('Skip tests currently as in case this one breaks, it breaks all other tests');
         $index = $this->_createIndex();
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
@@ -307,7 +307,6 @@ class SettingsTest extends BaseTest
         $settings = $index->getSettings();
 
         $this->assertFalse($settings->getBlocksMetadata());
-
 
         $this->es20('skipping this test as it blocks the cluster afterwards. Error for next call is:  {"error":{"root_cause":[{"type":"cluster_block_exception","reason":"blocked by: [FORBIDDEN/9/index metadata (api)];"}],"type":"cluster_block_exception","reason":"blocked by: [FORBIDDEN/9/index metadata (api)];"},"status":403}');
         $settings->setBlocksMetadata(true);

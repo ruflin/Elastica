@@ -629,8 +629,7 @@ class SearchTest extends BaseTest
         $statsData = $index->getStats()->getData();
         $queryCache = $statsData['_all']['primaries']['query_cache'];
 
-
-        $this->es20("memory_size_in_bytes seems to have changed and is not increaseing anymore.");
+        $this->es20('memory_size_in_bytes seems to have changed and is not increaseing anymore.');
         $this->assertNotEquals(0, $queryCache['memory_size_in_bytes']);
         $this->assertEquals(0, $queryCache['evictions']);
         $this->assertEquals(0, $queryCache['hit_count']);

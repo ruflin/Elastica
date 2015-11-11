@@ -43,9 +43,9 @@ class DateHistogramTest extends BaseAggregationTest
         $nonDocCount = 0;
         foreach ($results['buckets'] as $bucket) {
             if ($bucket['doc_count'] == 1) {
-                $docCount++;
+                ++$docCount;
             } else {
-                $nonDocCount++;
+                ++$nonDocCount;
             }
         }
         // 3 Documents that were added

@@ -11,7 +11,7 @@ class CrossIndexTest extends Base
     protected function setUp()
     {
         parent::setUp();
-        $this->es20("Skipping cross index tests");
+        $this->es20('Skipping cross index tests');
     }
 
     /**

@@ -96,7 +96,7 @@ class NestedTest extends BaseTest
         $search->addIndex($this->_getIndexForTest());
         $resultSet = $search->search($filter);
 
-        $this->es20("Failed asserting that 0 matches expected 1");
+        $this->es20('Failed asserting that 0 matches expected 1');
         $this->assertEquals(1, $resultSet->getTotalHits());
 
         $filter = new Nested();

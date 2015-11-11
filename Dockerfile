@@ -24,7 +24,7 @@ RUN mkdir -p \
 	./build/logs \
 	./build/pdepend \
 	./build/coverage
-	
+
 RUN composer install --prefer-source
 
 # Copy rest of the files, ignoring .dockerignore files
@@ -33,4 +33,4 @@ COPY test /elastica/test
 COPY Makefile /elastica/
 COPY docker-entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+#ENTRYPOINT ["/entrypoint.sh"]

@@ -198,7 +198,6 @@ class Query implements DSL
         return new Filtered($query, $filter);
     }
 
-
     /**
      * fuzzy like this query.
      *
@@ -208,7 +207,17 @@ class Query implements DSL
      */
     public function fuzzy_like_this()
     {
-        throw new NotImplementedException("Removed in elasticsearch 2.0");
+        throw new NotImplementedException('Removed in elasticsearch 2.0');
+    }
+
+    /**
+     * fuzzy like this field query.
+     *
+     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-flt-field-query.html
+     */
+    public function fuzzy_like_this_field()
+    {
+        throw new NotImplementedException('Removed in elasticsearch 2.0');
     }
 
     /**

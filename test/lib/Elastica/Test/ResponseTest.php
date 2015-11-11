@@ -11,7 +11,6 @@ use Elastica\Type\Mapping;
 
 class ResponseTest extends BaseTest
 {
-
     /**
      * @group functional
      */

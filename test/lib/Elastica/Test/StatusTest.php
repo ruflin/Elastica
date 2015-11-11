@@ -7,7 +7,6 @@ use Elastica\Test\Base as BaseTest;
 
 class StatusTest extends BaseTest
 {
-
     /**
      * @group functional
      */

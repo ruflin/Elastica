@@ -28,7 +28,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     /**
      * Constructs elasticsearch exception.
      *
-     * @param int    $code  Error code
+     * @param int   $code  Error code
      * @param array $error Error object from elasticsearch
      */
     public function __construct($code, $error)
@@ -99,7 +99,8 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     /**
      * @return array Error array
      */
-    public function getError() {
+    public function getError()
+    {
         return $this->_error;
     }
 }

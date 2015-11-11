@@ -7,10 +7,10 @@ use Elastica\Index;
 
 class Base extends \PHPUnit_Framework_TestCase
 {
-
-    protected function es20($message = "") {
+    protected function es20($message = '')
+    {
         parent::setUp();
-        $this->markTestIncomplete($message . "\nTest skipped because of current incompatibility with ES 2.0");
+        $this->markTestIncomplete($message."\nTest skipped because of current incompatibility with ES 2.0");
     }
 
     /**

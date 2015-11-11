@@ -8,7 +8,6 @@ use Elastica\Test\Base as BaseTest;
 
 class SettingsTest extends BaseTest
 {
-
     /**
      * @group functional
      */

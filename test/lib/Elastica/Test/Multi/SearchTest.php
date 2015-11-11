@@ -353,7 +353,7 @@ class SearchTest extends BaseTest
         $this->assertSame(0, $resultSets[1]->getTotalHits());
         $this->assertCount(0, $resultSets[1]);
 
-        $this->es20("No error but should have error -> error object problem?");
+        $this->es20('No error but should have error -> error object problem?');
         $this->assertTrue($resultSets[1]->getResponse()->hasError());
 
         $this->assertTrue($multiResultSet->hasError());
@@ -403,7 +403,7 @@ class SearchTest extends BaseTest
         $this->assertSame(0, $resultSets[0]->getTotalHits());
         $this->assertCount(0, $resultSets[0]);
 
-        $this->es20("No error but should have error -> error object problem?");
+        $this->es20('No error but should have error -> error object problem?');
         $this->assertTrue($resultSets[0]->getResponse()->hasError());
 
         $this->assertTrue($multiResultSet->hasError());

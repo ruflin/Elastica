@@ -35,8 +35,8 @@ class PercolatorTest extends BaseTest
             '_shards' => array(
                 'total' => 1,
                 'successful' => 1,
-                'failed' => 0
-            )
+                'failed' => 0,
+            ),
         );
 
         $this->assertEquals($expectedArray, $data);
