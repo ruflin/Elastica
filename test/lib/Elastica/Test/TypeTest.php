@@ -375,7 +375,6 @@ class TypeTest extends BaseTest
         $response = $index->search('nicolas');
         $this->assertEquals(1, $response->count());
 
-        $this->es20('Delete by query does not work anymore as expected -> plugin needed?');
         // Delete first document
         $response = $type->deleteByQuery('nicolas');
         $this->assertTrue($response->isOk());
@@ -407,7 +406,6 @@ class TypeTest extends BaseTest
         $response = $index->search('nicolas');
         $this->assertEquals(1, $response->count());
 
-        $this->es20('Delete by query does not work anymore as expected -> plugin needed?');
         // Delete first document
         $response = $type->deleteByQuery(new SimpleQueryString('nicolas'));
         $this->assertTrue($response->isOk());
@@ -439,7 +437,6 @@ class TypeTest extends BaseTest
         $response = $index->search('nicolas');
         $this->assertEquals(1, $response->count());
 
-        $this->es20('Delete by query does not work anymore as expected -> plugin needed?');
         // Route to the wrong document id; should not delete
         $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => '2'));
         $this->assertTrue($response->isOk());

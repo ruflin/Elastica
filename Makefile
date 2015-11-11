@@ -5,7 +5,7 @@ TARGET?=56
 
 # By default docker environment is used to run commands. To run without the predefined environment, set RUN_ENV=" " either as parameter or as environment variable
 ifndef RUN_ENV
-	RUN_ENV = docker run --entrypoint="" -v $(shell pwd):/elastica  ruflin/elastica
+	RUN_ENV = docker run --entrypoint="" -v $(shell pwd):/elastica ruflin/elastica
 endif
 
 .PHONY: clean
