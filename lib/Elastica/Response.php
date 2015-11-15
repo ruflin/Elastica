@@ -95,13 +95,11 @@ class Response
     {
         $error = $this->getError();
 
-        $message = '';
-
         if (!is_string($error)) {
-            $message = json_encode($message);
+            $error = json_encode($error);
         }
 
-        return $message;
+        return $error;
     }
 
     /**
