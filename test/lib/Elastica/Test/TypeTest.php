@@ -363,6 +363,8 @@ class TypeTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryString()
     {
+        $this->_checkPlugin('delete-by-query');
+
         $index = $this->_createIndex();
         $type = new Type($index, 'test');
         $type->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
@@ -394,6 +396,8 @@ class TypeTest extends BaseTest
      */
     public function testDeleteByQueryWithQuery()
     {
+        $this->_checkPlugin('delete-by-query');
+
         $index = $this->_createIndex();
         $type = new Type($index, 'test');
         $type->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
@@ -425,6 +429,8 @@ class TypeTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryAndOptions()
     {
+        $this->_checkPlugin('delete-by-query');
+
         $index = $this->_createIndex(null, true, 2);
         $type = new Type($index, 'test');
         $type->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
