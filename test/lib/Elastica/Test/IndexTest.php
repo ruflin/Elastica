@@ -428,22 +428,34 @@ class IndexTest extends BaseTest
         $this->_checkPlugin('delete-by-query');
 
         $index = $this->_createIndex(null, true, 2);
-        $type1 = new Type($index, 'test1');
-        $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
-        $type1->addDocument(new Document(2, array('name' => 'ruflin')));
-        $type2 = new Type($index, 'test2');
-        $type2->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
-        $type2->addDocument(new Document(2, array('name' => 'ruflin')));
+
+        $routing1 = 'first_routing';
+        $routing2 = 'second_routing';
+
+        for ($i=1; $i<=2; $i++) {
+            $type = new Type($index, 'test'.$i);
+            $doc = new Document(1, array('name' => 'ruflin nicolas'));
+            $doc->setRouting($routing1);
+            $type->addDocument($doc);
+
+            $doc = new Document(2, array('name' => 'ruflin'));
+            $doc->setRouting($routing1);
+            $type->addDocument($doc);
+        }
+
         $index->refresh();
 
         $response = $index->search('ruflin*');
         $this->assertEquals(4, $response->count());
 
+        $response = $index->search('ruflin*', array('routing' => $routing2));
+        $this->assertEquals(0, $response->count());
+
         $response = $index->search('nicolas');
         $this->assertEquals(2, $response->count());
 
         // Route to the wrong document id; should not delete
-        $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => '2'));
+        $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => $routing2));
         $this->assertTrue($response->isOk());
 
         $index->refresh();
@@ -455,7 +467,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(2, $response->count());
 
         // Delete first document
-        $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => '1'));
+        $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => $routing1));
         $this->assertTrue($response->isOk());
 
         $index->refresh();
