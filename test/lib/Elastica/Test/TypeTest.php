@@ -427,18 +427,25 @@ class TypeTest extends BaseTest
     {
         $index = $this->_createIndex(null, true, 2);
         $type = new Type($index, 'test');
-        $type->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
-        $type->addDocument(new Document(2, array('name' => 'ruflin')));
+        $doc = new Document(1, array('name' => 'ruflin nicolas'));
+        $doc->setRouting('first_routing');
+        $type->addDocument($doc);
+        $doc = new Document(2, array('name' => 'ruflin'));
+        $doc->setRouting('second_routing');
+        $type->addDocument($doc);
         $index->refresh();
 
         $response = $index->search('ruflin*');
         $this->assertEquals(2, $response->count());
 
+        $response = $index->search('ruflin*', array('routing' => 'first_routing'));
+        $this->assertEquals(1, $response->count());
+
         $response = $index->search('nicolas');
         $this->assertEquals(1, $response->count());
 
         // Route to the wrong document id; should not delete
-        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => '2'));
+        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => 'second_routing'));
         $this->assertTrue($response->isOk());
 
         $index->refresh();
@@ -450,7 +457,7 @@ class TypeTest extends BaseTest
         $this->assertEquals(1, $response->count());
 
         // Delete first document
-        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => '1'));
+        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => 'first_routing'));
         $this->assertTrue($response->isOk());
 
         $index->refresh();
