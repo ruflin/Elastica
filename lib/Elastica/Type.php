@@ -501,30 +501,6 @@ class Type implements SearchableInterface
     }
 
     /**
-     * More like this query based on the given object.
-     *
-     * The id in the given object has to be set
-     *
-     * @param \Elastica\Document           $doc    Document to query for similar objects
-     * @param array                        $params OPTIONAL Additional arguments for the query
-     * @param string|array|\Elastica\Query $query  OPTIONAL Query to filter the moreLikeThis results
-     *
-     * @return \Elastica\ResultSet ResultSet with all results inside
-     *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-more-like-this.html
-     */
-    public function moreLikeThis(Document $doc, $params = array(), $query = array())
-    {
-        $path = $doc->getId().'/_mlt';
-
-        $query = Query::create($query);
-
-        $response = $this->request($path, Request::GET, $query->toArray(), $params);
-
-        return ResultSet::create($response, $query);
-    }
-
-    /**
      * Makes calls to the elasticsearch server based on this type.
      *
      * @param string $path   Path to call

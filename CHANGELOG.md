@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.1...HEAD)
 
 ### Backward Compatibility Breaks
+- MoreLikeThis::setLikeText deprecated from ES 2.0, use setLike instead, but there is a difference - setLike haven't trim magic inside for strings
+- Type::moreLikeThis API was removed from ES 2.0, use MoreLikeThis query instead
 - Remove Thrift transport and everything related to it
 - Remove Memcache transport and everything related to it
 - Remove BulkUdp and everything related to it
@@ -23,12 +25,15 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 - Elastica\Reponse::getErrorMessage was added as getError is now an object
+- Elastica\Query\MoreLikeThis::setLike
 
 ### Improvements
 - Travis builds were moved to docker-compose setup. Ansible scripts and Vagrant files were removed
 
 
 ### Deprecated
+- Elastica\Query\MoreLikeThis::setLikeText is deprecated
+- Elastica\Query\MoreLikeThis::setIds is deprecated
 
 
 ## [2.3.1](https://github.com/ruflin/Elastica/releases/tag/2.3.1) - 2015-10-17

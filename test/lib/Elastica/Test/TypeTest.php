@@ -562,44 +562,6 @@ class TypeTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMoreLikeThisApi()
-    {
-        $client = $this->_getClient(array('persistent' => false));
-        $index = $client->getIndex('elastica_test');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
-
-        $type = new Type($index, 'mlt_test');
-        $type->addDocuments(array(
-            new Document(1, array('visible' => true, 'name' => 'bruce wayne batman')),
-            new Document(2, array('visible' => true, 'name' => 'bruce wayne')),
-            new Document(3, array('visible' => false, 'name' => 'bruce wayne')),
-            new Document(4, array('visible' => true, 'name' => 'batman')),
-            new Document(5, array('visible' => false, 'name' => 'batman')),
-            new Document(6, array('visible' => true, 'name' => 'superman')),
-            new Document(7, array('visible' => true, 'name' => 'spiderman')),
-        ));
-        $index->refresh();
-
-        $document = $type->getDocument(1);
-
-        $this->es20('More like this does not match the results as expected (0 vs 4 results)');
-        // Return all similar
-        $resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'));
-        $this->assertEquals(4, $resultSet->count());
-
-        // Return just the visible similar
-        $query = new Query();
-        $filterTerm = new Term();
-        $filterTerm->setTerm('visible', true);
-        $query->setPostFilter($filterTerm);
-
-        $resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'), $query);
-        $this->assertEquals(2, $resultSet->count());
-    }
-
-    /**
-     * @group functional
-     */
     public function testUpdateDocument()
     {
         $this->_checkScriptInlineSetting();
