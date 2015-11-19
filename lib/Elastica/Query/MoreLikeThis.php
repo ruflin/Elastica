@@ -1,5 +1,6 @@
 <?php
 namespace Elastica\Query;
+use Elastica\Document;
 
 /**
  * More Like This query.
@@ -27,6 +28,8 @@ class MoreLikeThis extends AbstractQuery
      *
      * @param array $ids Document ids
      *
+     * @deprecated Option "ids" deprecated as of ES 2.0.0-beta1 Use "like" instead.
+
      * @return \Elastica\Query\MoreLikeThis Current object
      */
     public function setIds(array $ids)
@@ -35,10 +38,24 @@ class MoreLikeThis extends AbstractQuery
     }
 
     /**
+     * Set the "like" value.
+     *
+     * @param string|Document $like
+     *
+     * @return $this
+     */
+    public function setLike($like)
+    {
+        return $this->setParam('like', $like);
+    }
+
+    /**
      * Set the "like_text" value.
      *
      * @param string $likeText
      *
+     * @deprecated Option "like_text" deprecated as of ES 2.0.0-beta1 Use "like" instead.
+
      * @return $this
      */
     public function setLikeText($likeText)
@@ -194,5 +211,18 @@ class MoreLikeThis extends AbstractQuery
     public function setMinimumShouldMatch($minimumShouldMatch)
     {
         return $this->setParam('minimum_should_match', $minimumShouldMatch);
+    }
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        if (isset($array['more_like_this']['like']['_id'])) {
+            $doc = $array['more_like_this']['like'];
+            $doc = array_intersect_key($doc, array('_index' => 1, '_type' => 1, '_id' => 1));
+            $array['more_like_this']['like'] = $doc;
+        }
+
+        return $array;
     }
 }

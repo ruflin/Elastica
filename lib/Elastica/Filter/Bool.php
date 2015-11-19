@@ -8,6 +8,8 @@ namespace Elastica\Filter;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
+ * @deprecated Use BoolFilter instead. From PHP7 bool is reserved word.
+ *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-filter.html
  */
 class Bool extends BoolFilter
