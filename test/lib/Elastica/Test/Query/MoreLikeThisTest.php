@@ -2,7 +2,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Filter\Bool;
+use Elastica\Filter\BoolFilter;
 use Elastica\Filter\Term;
 use Elastica\Index;
 use Elastica\Query;
@@ -104,7 +104,7 @@ class MoreLikeThisTest extends BaseTest
 
         $query = new Query\Filtered($mltQuery);
         // Return just the visible similar
-        $filter = new Bool();
+        $filter = new BoolFilter();
         $filterTerm = new Term();
         $filterTerm->setTerm('visible', true);
         $filter->addMust($filterTerm);
