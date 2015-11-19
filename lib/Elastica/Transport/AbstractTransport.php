@@ -89,6 +89,17 @@ abstract class AbstractTransport extends Param
         }
 
         if (is_string($transport)) {
+            $specialTransports = array(
+                'httpadapter' => 'HttpAdapter',
+                'nulltransport' => 'NullTransport',
+            );
+
+            if (isset($specialTransports[strtolower($transport)])) {
+                $transport = $specialTransports[strtolower($transport)];
+            } else {
+                $transport = ucfirst($transport);
+            }
+
             $className = 'Elastica\\Transport\\'.$transport;
 
             if (!class_exists($className)) {
