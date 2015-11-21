@@ -1,5 +1,6 @@
 <?php
 namespace Elastica\Aggregation;
+use Elastica\Exception\DeprecatedException;
 
 /**
  * Class DateHistogram.
@@ -11,7 +12,7 @@ class DateHistogram extends Histogram
     /**
      * Set pre-rounding based on interval.
      *
-     * @deprecated Option "pre_zone" is deprecated as of ES 1.5. Use "time_zone" instead
+     * @deprecated Option "pre_zone" is deprecated as of ES 1.5 and will be removed in Elastica 4.0. Use "time_zone" instead
      *
      * @param string $preZone
      *
@@ -19,13 +20,13 @@ class DateHistogram extends Histogram
      */
     public function setPreZone($preZone)
     {
-        return $this->setParam('pre_zone', $preZone);
+        throw new DeprecatedException('Option "pre_zone" is deprecated as of ES 1.5 and will be removed in Elastica 4.0. Use "time_zone" instead.');
     }
 
     /**
      * Set post-rounding based on interval.
      *
-     * @deprecated Option "post_zone" is deprecated as of ES 1.5. Use "time_zone" instead
+     * @deprecated Option "post_zone" is deprecated as of ES 1.5 and will be removed in Elastica 4.0. Use "time_zone" instead.
      *
      * @param string $postZone
      *
@@ -33,7 +34,7 @@ class DateHistogram extends Histogram
      */
     public function setPostZone($postZone)
     {
-        return $this->setParam('post_zone', $postZone);
+        throw new DeprecatedException('Option "post_zone" is deprecated as of ES 1.5 and will be removed in Elastica 4.0. Use "time_zone" instead.');
     }
 
     /**
@@ -51,7 +52,7 @@ class DateHistogram extends Histogram
     /**
      * Set pre-zone adjustment for larger time intervals (day and above).
      *
-     * @deprecated Option "pre_zone_adjust_large_interval" is deprecated as of ES 1.5
+     * @deprecated Option "pre_zone_adjust_large_interval" is deprecated as of ES 1.5 and will be removed in Elastica 4.0. Use "time_zone" instead.
      *
      * @param string $adjust
      *
@@ -59,7 +60,7 @@ class DateHistogram extends Histogram
      */
     public function setPreZoneAdjustLargeInterval($adjust)
     {
-        return $this->setParam('pre_zone_adjust_large_interval', $adjust);
+        throw new DeprecatedException('Option "pre_zone_adjust_large_interval" is deprecated as of ES 1.5 and will be removed in Elastica 4.0. Use "time_zone" instead.');
     }
 
     /**
@@ -77,7 +78,7 @@ class DateHistogram extends Histogram
     /**
      * Set the offset for pre-rounding.
      *
-     * @deprecated Option "pre_offset" is deprecated as of ES 1.5. Use "offset" instead
+     * @deprecated Option "pre_offset" is deprecated as of ES 1.5 and will be removed in Elastica 4.0. Use "offset" instead.
      *
      * @param string $offset "1d", for example
      *
@@ -85,13 +86,13 @@ class DateHistogram extends Histogram
      */
     public function setPreOffset($offset)
     {
-        return $this->setParam('pre_offset', $offset);
+        throw new DeprecatedException('Option "pre_offset" is deprecated as of ES 1.5 and will be removed in Elastica 4.0. Use "offset" instead.');
     }
 
     /**
      * Set the offset for post-rounding.
      *
-     * @deprecated Option "post_offset" is deprecated as of ES 1.5. Use "offset" instead
+     * @deprecated Option "post_offset" is deprecated as of ES 1.5 and will be removed in Elastica 4.0. Use "offset" instead.
      *
      * @param string $offset "1d", for example
      *
@@ -99,7 +100,7 @@ class DateHistogram extends Histogram
      */
     public function setPostOffset($offset)
     {
-        return $this->setParam('post_offset', $offset);
+        throw new DeprecatedException('Option "post_offset" is deprecated as of ES 1.5 and will be removed in Elastica 4.0. Use "offset" instead.');
     }
 
     /**

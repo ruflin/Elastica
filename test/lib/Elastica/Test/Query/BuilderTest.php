@@ -13,10 +13,21 @@ class BuilderTest extends BaseTest
      */
     public function testFactory()
     {
+        $err = array();
+
+        set_error_handler(function () use (&$err) {
+            $err[] = func_get_args();
+        });
+
         $this->assertInstanceOf(
             'Elastica\Query\Builder',
             Builder::factory('some string')
         );
+
+        restore_error_handler();
+
+        $this->assertCount(1, $err);
+        $this->assertEquals(E_USER_DEPRECATED, $err[0][0]);
     }
 
     public function getQueryData()

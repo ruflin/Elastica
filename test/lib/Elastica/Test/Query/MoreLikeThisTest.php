@@ -130,15 +130,13 @@ class MoreLikeThisTest extends BaseTest
 
     /**
      * @group unit
+     * @expectedException \Elastica\Exception\DeprecatedException
      */
     public function testSetIds()
     {
         $query = new MoreLikeThis();
         $ids = array(1, 2, 3);
         $query->setIds($ids);
-
-        $data = $query->toArray();
-        $this->assertEquals($ids, $data['more_like_this']['ids']);
     }
 
     /**
@@ -155,14 +153,12 @@ class MoreLikeThisTest extends BaseTest
 
     /**
      * @group unit
+     * @expectedException \Elastica\Exception\DeprecatedException
      */
     public function testSetLikeText()
     {
         $query = new MoreLikeThis();
         $query->setLikeText(' hello world');
-
-        $data = $query->toArray();
-        $this->assertEquals('hello world', $data['more_like_this']['like_text']);
     }
 
     /**
@@ -193,6 +189,7 @@ class MoreLikeThisTest extends BaseTest
 
     /**
      * @group unit
+     * @expectedException \Elastica\Exception\DeprecatedException
      */
     public function testSetPercentTermsToMatch()
     {
@@ -200,8 +197,6 @@ class MoreLikeThisTest extends BaseTest
 
         $match = 0.8;
         $query->setPercentTermsToMatch($match);
-
-        $this->assertEquals($match, $query->getParam('percent_terms_to_match'));
     }
 
     /**

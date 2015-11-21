@@ -149,13 +149,42 @@ class FunctionScoreTest extends BaseTest
     }
 
     /**
+     * @group unit
+     */
+    public function testAddBoostFactorFunction()
+    {
+        $filter = new Term(array('price' => 4.5));
+        $query = new FunctionScore();
+        $query->addWeightFunction(5.0, $filter);
+
+        $sameFilter = new Term(array('price' => 4.5));
+        $sameQuery = new FunctionScore();
+
+        $err = array();
+
+        set_error_handler(function () use (&$err) {
+            $err[] = func_get_args();
+        });
+
+        $sameQuery->addBoostFactorFunction(5.0, $sameFilter);
+
+        restore_error_handler();
+
+        $this->assertCount(1, $err);
+        $this->assertEquals(E_USER_DEPRECATED, $err[0][0]);
+
+
+        $this->assertEquals($query->toArray(), $sameQuery->toArray());
+    }
+
+    /**
      * @group functional
      */
     public function testWeight()
     {
         $filter = new Term(array('price' => 4.5));
         $query = new FunctionScore();
-        $query->addBoostFactorFunction(5.0, $filter);
+        $query->addWeightFunction(5.0, $filter);
         $expected = array(
             'function_score' => array(
                 'functions' => array(

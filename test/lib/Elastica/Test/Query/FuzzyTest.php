@@ -10,10 +10,40 @@ class FuzzyTest extends BaseTest
     /**
      * @group unit
      */
+    public function testAddField()
+    {
+        $fuzzy = new Fuzzy();
+
+        $err = array();
+
+        set_error_handler(function () use (&$err) {
+            $err[] = func_get_args();
+        });
+
+        $fuzzy->addField('user', array('value' => 'Nicolas', 'boost' => 1.0));
+
+        restore_error_handler();
+
+        $this->assertCount(1, $err);
+        $this->assertEquals(E_USER_DEPRECATED, $err[0][0]);
+
+        $sameFuzzy = new Fuzzy();
+        $sameFuzzy->setField('user', 'Nicolas');
+        $sameFuzzy->setFieldOption('boost', 1.0);
+
+        $this->assertEquals($sameFuzzy->toArray(), $fuzzy->toArray());
+    }
+
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $fuzzy = new Fuzzy();
-        $fuzzy->addField('user', array('value' => 'Nicolas', 'boost' => 1.0));
+
+        $fuzzy->setField('user', 'Nicolas');
+        $fuzzy->setFieldOption('boost', 1.0);
+
         $expectedArray = array(
             'fuzzy' => array(
                 'user' => array(
@@ -83,7 +113,19 @@ class FuzzyTest extends BaseTest
     {
         $this->setExpectedException('Elastica\Exception\InvalidException');
         $query = new Fuzzy();
+
+        $err = array();
+
+        set_error_handler(function () use (&$err) {
+            $err[] = func_get_args();
+        });
+
         $query->addField('name', array(array('value' => 'Baden')));
+
+        restore_error_handler();
+
+        $this->assertCount(1, $err);
+        $this->assertEquals(E_USER_DEPRECATED, $err[0][0]);
 
         $this->setExpectedException('Elastica\Exception\InvalidException');
         $query = new Fuzzy();
