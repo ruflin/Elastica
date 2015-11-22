@@ -24,6 +24,10 @@ All notable changes to this project will be documented in this file based on the
 
 ### Deprecated
 
+## [2.3.2](https://github.com/ruflin/Elastica/releases/tag/2.3.2) - 2015-11-14
+
+### Bugfixes
+ - Function score query: corrected the `score_method` `average` to `avg` #975 
 
 ## [2.3.1](https://github.com/ruflin/Elastica/releases/tag/2.3.1) - 2015-10-17
 
