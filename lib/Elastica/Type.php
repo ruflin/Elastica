@@ -1,6 +1,7 @@
 <?php
 namespace Elastica;
 
+use Elastica\Exception\DeprecatedException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\RuntimeException;
@@ -491,13 +492,12 @@ class Type implements SearchableInterface
     /**
      * Deletes the index type.
      *
-     * @return \Elastica\Response
+     * @deprecated It is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings. This method will be removed in further Elastica releases.
+     * @throws DeprecatedException It is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings. This method will be removed in further Elastica releases.
      */
     public function delete()
     {
-        $response = $this->request('', Request::DELETE);
-
-        return $response;
+        throw new DeprecatedException('It is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings. This method will be removed in further Elastica releases.');
     }
 
     /**

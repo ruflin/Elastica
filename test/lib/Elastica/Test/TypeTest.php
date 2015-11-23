@@ -2,9 +2,9 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Exception\DeprecatedException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
-use Elastica\Filter\Term;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
@@ -535,28 +535,19 @@ class TypeTest extends BaseTest
     }
 
     /**
-     * Test Delete of index type.  After delete will check for type mapping.
+     * Test that Delete of index type throw deprecated exception.
      *
-     * @group functional
+     * @group unit
+     * @expectedException \Elastica\Exception\DeprecatedException
      */
     public function testDeleteType()
     {
-        $index = $this->_createIndex();
-        $type = new Type($index, 'test');
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'ruflin nicolas')),
-            new Document(2, array('name' => 'ruflin')),
-        ));
-        $index->refresh();
-
-        // sleep a moment to be sure that all nodes in cluster has new type
-        sleep(5);
+        $type = new Type(
+            $this->getMockBuilder('Elastica\Index')->disableOriginalConstructor()->getMock(),
+            'test'
+        );
 
         $type->delete();
-        $index->optimize();
-
-        $this->es20('Type does not seem to be deleted as expected');
-        $this->assertFalse($type->exists());
     }
 
     /**

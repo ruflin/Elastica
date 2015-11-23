@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.1...HEAD)
 
 ### Backward Compatibility Breaks
+- Elastica\Type::delete now throw DeprecatedException, it is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings
 - MoreLikeThis::setLikeText deprecated from ES 2.0, use setLike instead, but there is a difference - setLike haven't trim magic inside for strings
 - Elastica\Document, methods: setScript, getScript, hasScript now throw DeprecatedException.
 - MoreLikeThis, methods: setLikeText, setIds, setPercentTermsToMatch now throw DeprecatedException.
@@ -43,6 +44,7 @@ All notable changes to this project will be documented in this file based on the
 - DeprecatedException will be thrown, if there is a call of method that not support BC
 
 ### Deprecated
+- Elastica\Type::delete is deprecated
 - Elastica\Filter\Bool is deprecated
 - Elastica\Query\Bool is deprecated
 - Elastica\Query\MoreLikeThis::setLikeText is deprecated
