@@ -20,7 +20,13 @@ class IndexDocument extends AbstractDocument
     {
         parent::setDocument($document);
 
-        $this->setSource($document->getData());
+        $data = $document->getData();
+
+        if (is_array($data)) {
+            unset($data['_id']);
+        }
+
+        $this->setSource($data);
 
         return $this;
     }
