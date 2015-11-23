@@ -13,7 +13,8 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "psr/log": "~1.0"
+        "psr/log": "~1.0",
+        "elasticsearch/elasticsearch": "~2.0"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "5.3.*"

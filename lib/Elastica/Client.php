@@ -2,10 +2,14 @@
 namespace Elastica;
 
 use Elastica\Bulk\Action;
-use Elastica\Exception\ConnectionException;
+use Elastica\Adapter\Elasticsearch\TransportAdapter;
+use Elastica\Exception\Factory\ConnectionExceptionFactory;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\RuntimeException;
+use Elasticsearch\ClientBuilder;
+use Elasticsearch\Common\Exceptions\NoNodesAvailableException;
 use Psr\Log\LoggerInterface;
+use Elasticsearch\Client as BaseClient;
 
 /**
  * Client to connect the the elasticsearch server.
@@ -64,6 +68,11 @@ class Client
     protected $_connectionPool = null;
 
     /**
+     * @var BaseClient
+     */
+    protected $_elasticsearchClient;
+
+    /**
      * Creates a new Elastica client.
      *
      * @param array    $config   OPTIONAL Additional config options
@@ -74,6 +83,7 @@ class Client
         $this->setConfig($config);
         $this->_callback = $callback;
         $this->_initConnections();
+        $this->_elasticsearchClient = ClientBuilder::create()->build();
     }
 
     /**
@@ -614,24 +624,25 @@ class Client
      */
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
     {
+        $transportAdapter = new TransportAdapter($this->_elasticsearchClient->transport);
         $connection = $this->getConnection();
+
         try {
             $request = new Request($path, $method, $data, $query, $connection);
 
             $this->_log($request);
 
-            $response = $request->send();
+            $response = new Response($transportAdapter->performRequest($request));
 
             $this->_lastRequest = $request;
             $this->_lastResponse = $response;
 
             return $response;
-        } catch (ConnectionException $e) {
+        } catch (NoNodesAvailableException $e) {
             $this->_connectionPool->onFail($connection, $e, $this);
 
-            // In case there is no valid connection left, throw exception which caused the disabling of the connection.
             if (!$this->hasConnection()) {
-                throw $e;
+                throw ConnectionExceptionFactory::getConcreteConnectionException($this->getConnection()->getTransportObject());
             }
 
             return $this->request($path, $method, $data, $query);
