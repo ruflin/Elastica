@@ -151,7 +151,7 @@ class Document extends AbstractUpdateAction
     /**
      * Adds the given key/value pair to the document.
      *
-     * @deprecated Will be removed in Elastica 4.0. Use Elastica\Document::set instead
+     * @deprecated Will be removed in further Elastica releases. Use Elastica\Document::set instead
      *
      * @param string $key   Document entry key
      * @param mixed  $value Document entry value
@@ -160,7 +160,7 @@ class Document extends AbstractUpdateAction
      */
     public function add($key, $value)
     {
-        trigger_error('Deprecated: Elastica\Document::add is deprecated and will be removed in Elastica 4.0. Use Elastica\Document::set instead.', E_USER_DEPRECATED);
+        trigger_error('Deprecated: Elastica\Document::add is deprecated and will be removed in further Elastica releases. Use Elastica\Document::set instead.', E_USER_DEPRECATED);
 
         return $this->set($key, $value);
     }
@@ -255,7 +255,7 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @deprecated setScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate. This method will be removed in Elastica 4.0
+     * @deprecated setScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate. This method will be removed in further Elastica releases
 
      *
      * @param \Elastica\Script $data
@@ -270,7 +270,7 @@ class Document extends AbstractUpdateAction
     /**
      * @throws NotImplementedException
      *
-     * @deprecated getScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate. This method will be removed in Elastica 4.0
+     * @deprecated getScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate. This method will be removed in further Elastica releases
      */
     public function getScript()
     {
@@ -280,7 +280,7 @@ class Document extends AbstractUpdateAction
     /**
      * @throws NotImplementedException
      *
-     * @deprecated hasScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate. This method will be removed in Elastica 4.0
+     * @deprecated hasScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate. This method will be removed in further Elastica releases
      */
     public function hasScript()
     {

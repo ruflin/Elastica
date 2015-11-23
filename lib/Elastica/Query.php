@@ -136,11 +136,11 @@ class Query extends Param
      * @return $this
      *
      * @link    https://github.com/elasticsearch/elasticsearch/issues/7422
-     * @deprecated Use Elastica\Query::setPostFilter() instead, this method will be removed in Elastica 4.0
+     * @deprecated Use Elastica\Query::setPostFilter() instead, this method will be removed in further Elastica releases
      */
     public function setFilter(AbstractFilter $filter)
     {
-        trigger_error('Deprecated: Elastica\Query::setFilter() is deprecated and will be removed in Elastica 4.0. Use Elastica\Query::setPostFilter() instead.', E_USER_DEPRECATED);
+        trigger_error('Deprecated: Elastica\Query::setFilter() is deprecated and will be removed in further Elastica releases. Use Elastica\Query::setPostFilter() instead.', E_USER_DEPRECATED);
 
         return $this->setPostFilter($filter);
     }
@@ -229,7 +229,7 @@ class Query extends Param
     /**
      * Alias for setSize.
      *
-     * @deprecated Use the setSize() method, this method will be removed in Elastica 4.0
+     * @deprecated Use the setSize() method, this method will be removed in further Elastica releases
      *
      * @param int $limit OPTIONAL Maximal number of results for query (default = 10)
      *
@@ -237,7 +237,7 @@ class Query extends Param
      */
     public function setLimit($limit = 10)
     {
-        trigger_error('Deprecated: Elastica\Query::setLimit() is deprecated. Use setSize method instead. This method will be removed in Elastica 4.0.', E_USER_DEPRECATED);
+        trigger_error('Deprecated: Elastica\Query::setLimit() is deprecated. Use setSize method instead. This method will be removed in further Elastica releases.', E_USER_DEPRECATED);
         return $this->setSize($limit);
     }
 

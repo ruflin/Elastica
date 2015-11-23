@@ -178,11 +178,11 @@ class FunctionScore extends AbstractQuery
      * @param float          $boostFactor the boost factor value
      * @param AbstractFilter $filter      a filter associated with this function
      *
-     * @deprecated Use addWeightFunction instead. This method will be removed in Elastica 4.0
+     * @deprecated Use addWeightFunction instead. This method will be removed in further Elastica releases
      */
     public function addBoostFactorFunction($boostFactor, AbstractFilter $filter = null)
     {
-        trigger_error('Query\FunctionScore::addBoostFactorFunction is deprecated. Use addWeightFunction instead. This method will be removed in Elastica 4.0', E_USER_DEPRECATED);
+        trigger_error('Query\FunctionScore::addBoostFactorFunction is deprecated. Use addWeightFunction instead. This method will be removed in further Elastica releases', E_USER_DEPRECATED);
         $this->addWeightFunction($boostFactor, $filter);
     }
 
