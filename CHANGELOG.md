@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 - MoreLikeThis::setLikeText deprecated from ES 2.0, use setLike instead, but there is a difference - setLike haven't trim magic inside for strings
+- Elastica\Document, methods: setScript, getScript, hasScript now throw DeprecatedException.
+- MoreLikeThis, methods: setLikeText, setIds, setPercentTermsToMatch now throw DeprecatedException.
+- Elastica\Aggregation\DateHistogram, methods: setPreZone, setPostZone, setPreZoneAdjustLargeInterval, setPreOffset, setPostOffset now throw DeprecatedException.
+- Elastica\Query\Builder trigger E_USER_DEPRECATED error when you try use it.
+- Elastica\Filter\Bool and Elastica\Query\Bool trigger E_USER_DEPRECATED error when you try use them.
+- Elastica\Query\Fuzzy:addField method trigger E_USER_DEPRECATED error
+- Elastica\Query\FunctionScore:addBoostFactorFunction method trigger E_USER_DEPRECATED error
+- Elastica\Query:setLimit method trigger E_USER_DEPRECATED error
+- Elastica\Document:add method trigger E_USER_DEPRECATED error
 - Type::moreLikeThis API was removed from ES 2.0, use MoreLikeThis query instead
 - Remove Thrift transport and everything related to it
 - Remove Memcache transport and everything related to it
@@ -26,15 +35,18 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 - Elastica\Reponse::getErrorMessage was added as getError is now an object
 - Elastica\Query\MoreLikeThis::setLike
+- \Elastica\Exception\DeprecatedException
 
 ### Improvements
 - Travis builds were moved to docker-compose setup. Ansible scripts and Vagrant files were removed
-
+- trigger_error with E_USER_DEPRECATE added to deprecated places
+- DeprecatedException will be thrown, if there is a call of method that not support BC
 
 ### Deprecated
+- Elastica\Filter\Bool is deprecated
+- Elastica\Query\Bool is deprecated
 - Elastica\Query\MoreLikeThis::setLikeText is deprecated
 - Elastica\Query\MoreLikeThis::setIds is deprecated
-
 
 ## [2.3.1](https://github.com/ruflin/Elastica/releases/tag/2.3.1) - 2015-10-17
 

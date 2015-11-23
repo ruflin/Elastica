@@ -69,7 +69,7 @@ class Fuzzy extends AbstractQuery
     /**
      * Deprecated method of setting a field.
      *
-     * @deprecated
+     * @deprecated Use setField and setFieldOption instead. This method will be removed in Elastica 4.0
      *
      * @param $fieldName
      * @param $args
@@ -78,6 +78,8 @@ class Fuzzy extends AbstractQuery
      */
     public function addField($fieldName, $args)
     {
+        trigger_error('Query\Fuzzy::addField is deprecated. Use setField and setFieldOption instead. This method will be removed in Elastica 4.0', E_USER_DEPRECATED);
+
         if (!array_key_exists('value', $args)) {
             throw new InvalidException('Fuzzy query can only support a single field.');
         }
