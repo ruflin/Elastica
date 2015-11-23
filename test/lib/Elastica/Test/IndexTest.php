@@ -121,7 +121,7 @@ class IndexTest extends BaseTest
     public function testAddPdfFile()
     {
         $this->_checkPlugin('elasticsearch-mapper-attachments');
-        $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'));
+        $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => false));
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
 
@@ -163,7 +163,7 @@ class IndexTest extends BaseTest
     public function testAddPdfFileContent()
     {
         $this->_checkPlugin('elasticsearch-mapper-attachments');
-        $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'no'), 'text' => array('type' => 'string', 'store' => 'no'));
+        $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => false));
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
 
@@ -246,8 +246,8 @@ class IndexTest extends BaseTest
     public function testExcludeFileSource()
     {
         $this->_checkPlugin('elasticsearch-mapper-attachments');
-        $indexMapping = array('file' => array('type' => 'attachment', 'store' => 'yes'), 'text' => array('type' => 'string', 'store' => 'yes'),
-            'title' => array('type' => 'string', 'store' => 'yes'),);
+        $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => true),
+            'title' => array('type' => 'string', 'store' => true),);
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
 
@@ -668,8 +668,8 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $mapping = array('id' => array('type' => 'integer', 'store' => true), 'email' => array('type' => 'string', 'store' => 'no'),
-            'username' => array('type' => 'string', 'store' => 'no'), 'test' => array('type' => 'integer', 'store' => 'no'),);
+        $mapping = array('id' => array('type' => 'integer', 'store' => true), 'email' => array('type' => 'string', 'store' => false),
+            'username' => array('type' => 'string', 'store' => false), 'test' => array('type' => 'integer', 'store' => false),);
 
         $type->setMapping($mapping);
         $index->refresh();
