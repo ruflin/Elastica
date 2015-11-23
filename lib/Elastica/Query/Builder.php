@@ -5,7 +5,7 @@ use Elastica\Exception\InvalidException;
 use Elastica\Exception\JSONParseException;
 use Elastica\JSON;
 
-trigger_error('This builder is deprecated and will be removed in Elastica 4.0. Use new Elastica\QueryBuilder instead.', E_USER_DEPRECATED);
+trigger_error('This builder is deprecated and will be removed in further Elastica releases. Use new Elastica\QueryBuilder instead.', E_USER_DEPRECATED);
 
 /**
  * Query Builder.
@@ -13,7 +13,7 @@ trigger_error('This builder is deprecated and will be removed in Elastica 4.0. U
  * @author Chris Gedrim <chris@gedr.im>
  *
  * @link http://www.elastic.co/
- * @deprecated This builder is deprecated and will be removed in Elastica 4.0. Use new Elastica\QueryBuilder instead.
+ * @deprecated This builder is deprecated and will be removed in further Elastica releases. Use new Elastica\QueryBuilder instead.
  **/
 class Builder extends AbstractQuery
 {
