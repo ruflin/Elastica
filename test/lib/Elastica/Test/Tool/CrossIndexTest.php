@@ -11,7 +11,6 @@ class CrossIndexTest extends Base
     protected function setUp()
     {
         parent::setUp();
-        $this->es20('Skipping cross index tests');
     }
 
     /**
@@ -136,7 +135,7 @@ class CrossIndexTest extends Base
     {
         $insert = array();
         for ($i = 1; $i <= $docs; ++$i) {
-            $insert[] = new Document($i, array('_id' => $i, 'key' => 'value'));
+            $insert[] = new Document($i, array('id' => $i, 'key' => 'value'));
         }
 
         $type->addDocuments($insert);
