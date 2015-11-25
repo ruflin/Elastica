@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.1...HEAD)
 
 ### Backward Compatibility Breaks
+- Elastica\AbstractUpdateAction::setPercolate now throw DeprecatedException, user Percolator instead
+- Elastica\AbstractUpdateAction::getPercolate now throw DeprecatedException, user Percolator instead
+- Elastica\AbstractUpdateAction::hasPercolate now throw DeprecatedException, user Percolator instead
 - Elastica\Type::delete now throw DeprecatedException, it is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings
 - MoreLikeThis::setLikeText deprecated from ES 2.0, use setLike instead, but there is a difference - setLike haven't trim magic inside for strings
 - Elastica\Document, methods: setScript, getScript, hasScript now throw DeprecatedException.

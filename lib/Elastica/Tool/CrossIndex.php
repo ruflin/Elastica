@@ -97,8 +97,7 @@ class CrossIndex
                 $action = new Bulk\Action();
                 $action->setType($result->getType());
                 $action->setId($result->getId());
-                $data = $result->getData();
-                $action->setSource($data);
+                $action->setSource($result->getData());
 
                 $bulk->addAction($action);
             }

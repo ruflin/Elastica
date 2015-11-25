@@ -2,7 +2,6 @@
 namespace Elastica\Bulk;
 
 use Elastica\Bulk;
-use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\JSON;
 use Elastica\Type;
@@ -101,16 +100,11 @@ class Action
 
     /**
      * @param array $source
-     * @throws InvalidException If there is a metadata field, that cannot be added inside document
      *
      * @return $this
      */
     public function setSource($source)
     {
-        if (isset($source['_id'])) {
-            throw new InvalidException('Field [_id] is a metadata field and cannot be added inside a document. Use Action::setId for set id.');
-        }
-
         $this->_source = $source;
 
         return $this;

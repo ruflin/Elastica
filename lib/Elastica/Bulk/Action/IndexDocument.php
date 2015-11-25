@@ -20,13 +20,7 @@ class IndexDocument extends AbstractDocument
     {
         parent::setDocument($document);
 
-        $data = $document->getData();
-
-        if (is_array($data)) {
-            unset($data['_id']);
-        }
-
-        $this->setSource($data);
+        $this->setSource($document->getData());
 
         return $this;
     }
@@ -45,7 +39,6 @@ class IndexDocument extends AbstractDocument
             'version',
             'version_type',
             'routing',
-            'percolate',
             'parent',
             'ttl',
             'timestamp',

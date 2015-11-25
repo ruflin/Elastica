@@ -149,7 +149,7 @@ class CrossIndexTest extends Base
     {
         $insert = array();
         for ($i = 1; $i <= $docs; ++$i) {
-            $insert[] = new Document($i, array('_id' => $i, 'key' => 'value'));
+            $insert[] = new Document($i, array('key' => 'value'));;
         }
 
         $type->addDocuments($insert);
