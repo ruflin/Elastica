@@ -19,6 +19,7 @@ class Client
      *
      * log: Set to true, to enable logging, set a string to log to a specific file
      * retryOnConflict: Use in \Elastica\Client::updateDocument
+     * bigintConversion: Set to true to enable the JSON bigint to string conversion option (see issue #717)
      *
      * @var array
      */
@@ -35,6 +36,7 @@ class Client
         'roundRobin' => false,
         'log' => false,
         'retryOnConflict' => 0,
+        'bigintConversion' => false,
     );
 
     /**

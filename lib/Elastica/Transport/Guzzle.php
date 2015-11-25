@@ -103,6 +103,9 @@ class Guzzle extends AbstractTransport
 
         $response = new Response((string) $res->getBody(), $res->getStatusCode());
         $response->setQueryTime($end - $start);
+        if ($connection->hasConfig('bigintConversion')) {
+            $response->setJsonBigintConversion($connection->getConfig('bigintConversion'));
+        }
 
         $response->setTransferInfo(
             array(

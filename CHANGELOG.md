@@ -33,11 +33,13 @@ All notable changes to this project will be documented in this file based on the
 - Remove \Elastica\Filter\Nested as it is replaced by \Elastica\Query\Nested
 
 ### Bugfixes
+- Fixed GeoShapeProvided relation parameter position
 
 ### Added
 - Elastica\Reponse::getErrorMessage was added as getError is now an object
 - Elastica\Query\MoreLikeThis::setLike
 - \Elastica\Exception\DeprecatedException
+- Connection option to convert JSON bigint results to strings can now be set [#717](https://github.com/ruflin/Elastica/issues/717)
 
 ### Improvements
 - Travis builds were moved to docker-compose setup. Ansible scripts and Vagrant files were removed
