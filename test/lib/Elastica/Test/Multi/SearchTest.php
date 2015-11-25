@@ -328,7 +328,7 @@ class SearchTest extends BaseTest
 
         $searchBad = new Search($client);
         $searchBadQuery = new Range();
-        $searchBadQuery->addField('bad', array('from' => 0));
+        $searchBadQuery->addField('bad', array('_id' => 0));
         $searchBadQuery->setParam('_cache', true);
         $searchBad->setQuery($searchBadQuery);
         $searchBad->addIndex($index)->addType($type);
@@ -353,7 +353,6 @@ class SearchTest extends BaseTest
         $this->assertSame(0, $resultSets[1]->getTotalHits());
         $this->assertCount(0, $resultSets[1]);
 
-        $this->es20('No error but should have error -> error object problem?');
         $this->assertTrue($resultSets[1]->getResponse()->hasError());
 
         $this->assertTrue($multiResultSet->hasError());
@@ -378,7 +377,7 @@ class SearchTest extends BaseTest
 
         $searchBad = new Search($client);
         $searchBadQuery = new Range();
-        $searchBadQuery->addField('bad', array('from' => 0));
+        $searchBadQuery->addField('bad', array('_id' => 0));
         $searchBadQuery->setParam('_cache', true);
         $searchBad->setQuery($searchBadQuery);
         $searchBad->addIndex($index)->addType($type);
@@ -403,7 +402,6 @@ class SearchTest extends BaseTest
         $this->assertSame(0, $resultSets[0]->getTotalHits());
         $this->assertCount(0, $resultSets[0]);
 
-        $this->es20('No error but should have error -> error object problem?');
         $this->assertTrue($resultSets[0]->getResponse()->hasError());
 
         $this->assertTrue($multiResultSet->hasError());
