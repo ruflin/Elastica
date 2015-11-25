@@ -8,11 +8,6 @@ use Elastica\Type;
 
 class CrossIndexTest extends Base
 {
-    protected function setUp()
-    {
-        parent::setUp();
-    }
-
     /**
      * Test default reindex.
      *
@@ -149,7 +144,7 @@ class CrossIndexTest extends Base
     {
         $insert = array();
         for ($i = 1; $i <= $docs; ++$i) {
-            $insert[] = new Document($i, array('key' => 'value'));
+            $insert[] = new Document($i, array('id' => $i, 'key' => 'value'));
         }
 
         $type->addDocuments($insert);
