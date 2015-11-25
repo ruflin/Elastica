@@ -13,9 +13,6 @@ class HighlightTest extends BaseTest
      */
     public function testHightlightSearch()
     {
-        // TODO: Highlighting seems to have changed a little bit
-        $this->es20();
-
         $index = $this->_createIndex();
         $type = $index->getType('helloworld');
 
@@ -26,8 +23,8 @@ class HighlightTest extends BaseTest
             new Document(2, array('id' => 2, 'phrase' => $phrase, 'username' => 'peter', 'test' => array('2', '3', '5'))),
         ));
 
-        $queryString = new QueryString('rufl*');
-        $query = new Query($queryString);
+        $matchQuery = new Query\MatchPhrase('phrase', 'ruflin');
+        $query = new Query($matchQuery);
         $query->setHighlight(array(
             'pre_tags' => array('<em class="highlight">'),
             'post_tags' => array('</em>'),
@@ -42,6 +39,7 @@ class HighlightTest extends BaseTest
         $index->refresh();
 
         $resultSet = $type->search($query);
+
         foreach ($resultSet as $result) {
             $highlight = $result->getHighlights();
             $this->assertEquals(array('phrase' => array(0 => 'My name is <em class="highlight">ruflin</em>')), $highlight);

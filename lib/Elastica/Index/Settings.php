@@ -188,7 +188,7 @@ class Settings
         // TODO will have to be replace by block.metadata.write once https://github.com/elasticsearch/elasticsearch/pull/9203 has been fixed
         // the try/catch will have to be remove too
         try {
-            return (bool) $this->get('blocks.metadata');
+            return (bool) $this->get('blocks.write');
         } catch (ResponseException $e) {
             if (strpos($e->getMessage(), 'ClusterBlockException') !== false) {
                 // hacky way to test if the metadata is blocked since bug 9203 is not fixed
@@ -206,10 +206,8 @@ class Settings
      */
     public function setBlocksMetadata($state = true)
     {
-        // TODO will have to be replace by block.metadata.write once https://github.com/elasticsearch/elasticsearch/pull/9203 has been fixed
         $state = $state ? 1 : 0;
-
-        return $this->set(array('blocks.metadata' => $state));
+        return $this->set(array('blocks.write' => $state));
     }
 
     /**

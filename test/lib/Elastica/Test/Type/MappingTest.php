@@ -157,16 +157,7 @@ class MappingTest extends BaseTest
      */
     public function testParentMapping()
     {
-        $this->es20("can't add a _parent field that points to an already existing type");
         $index = $this->_createIndex();
-        $parenttype = new Type($index, 'parenttype');
-        $parentmapping = new Mapping($parenttype,
-            array(
-                'name' => array('type' => 'string', 'store' => true),
-            )
-        );
-
-        $parenttype->setMapping($parentmapping);
 
         $childtype = new Type($index, 'childtype');
         $childmapping = new Mapping($childtype,
@@ -181,7 +172,15 @@ class MappingTest extends BaseTest
         $data = $childmapping->toArray();
         $this->assertEquals('parenttype', $data[$childtype->getName()]['_parent']['type']);
 
-        $index->delete();
+
+        $parenttype = new Type($index, 'parenttype');
+        $parentmapping = new Mapping($parenttype,
+            array(
+                'name' => array('type' => 'string', 'store' => true),
+            )
+        );
+
+        $parenttype->setMapping($parentmapping);
     }
 
     /**

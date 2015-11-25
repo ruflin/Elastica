@@ -53,8 +53,8 @@ class GeoShapeProvidedTest extends BaseTest
                     'shape' => array(
                         'type' => GeoShapeProvided::TYPE_ENVELOPE,
                         'coordinates' => $envelope,
+                        'relation' => AbstractGeoShape::RELATION_INTERSECT,
                     ),
-                    'relation' => AbstractGeoShape::RELATION_INTERSECT,
                 ),
             ),
         );
@@ -81,8 +81,8 @@ class GeoShapeProvidedTest extends BaseTest
                     'shape' => array(
                         'type' => GeoShapeProvided::TYPE_POLYGON,
                         'coordinates' => $polygon,
+                        'relation' => $gsp->getRelation(),
                     ),
-                    'relation' => $gsp->getRelation(),
                 ),
             ),
         );

@@ -867,11 +867,8 @@ class IndexTest extends BaseTest
     public function testAnalyze()
     {
         $index = $this->_createIndex();
-        $index->optimize();
-        sleep(2);
+        $index->refresh();
         $returnedTokens = $index->analyze('foo');
-
-        $this->es20('Seems like analyze puts the token now under a different position. Is this ok?');
 
         $tokens = array(
             array(
@@ -879,7 +876,7 @@ class IndexTest extends BaseTest
                 'start_offset' => 0,
                 'end_offset' => 3,
                 'type' => '<ALPHANUM>',
-                'position' => 1,
+                'position' => 0,
             ),
         );
 

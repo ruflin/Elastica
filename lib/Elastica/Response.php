@@ -56,6 +56,13 @@ class Response
     protected $_status = null;
 
     /**
+     * Whether or not to convert bigint results to string (see issue #717)
+     *
+     * @var bool
+     */
+    protected $_jsonBigintConversion = false;
+
+    /**
      * Construct.
      *
      * @param string|array $responseString Response string (json)
@@ -197,7 +204,11 @@ class Response
                 $this->_error = true;
             } else {
                 try {
-                    $response = JSON::parse($response);
+                    if ($this->getJsonBigintConversion()) {
+                        $response = JSON::parse($response, false, 512, JSON_BIGINT_AS_STRING);
+                    } else {
+                        $response = JSON::parse($response);
+                    }
                 } catch (JSONParseException $e) {
                     // leave response as is if parse fails
                 }
@@ -318,5 +329,25 @@ class Response
         }
 
         return $data['_scroll_id'];
+    }
+
+    /**
+     * Sets whether or not to apply bigint conversion on the JSON result.
+     *
+     * @param bool $jsonBigintConversion
+     */
+    public function setJsonBigintConversion($jsonBigintConversion)
+    {
+        $this->_jsonBigintConversion = $jsonBigintConversion;
+    }
+
+    /**
+     * Gets whether or not to apply bigint conversion on the JSON result.
+     *
+     * @return boolean
+     */
+    public function getJsonBigintConversion()
+    {
+        return $this->_jsonBigintConversion;
     }
 }
