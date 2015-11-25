@@ -294,8 +294,6 @@ class ClientTest extends BaseTest
      */
     public function testDeleteIdsIdxStringTypeString()
     {
-        $this->es20();
-
         $data = array('username' => 'hans');
         $userSearch = 'username:hans';
 
@@ -331,6 +329,8 @@ class ClientTest extends BaseTest
         // Try to delete doc with a routing value which hashes to
         // a different shard then the id.
         $resp = $index->getClient()->deleteIds($ids, $index, $type, 2);
+
+        $this->es20("even though document is deleted from a different shard then added, it is deleted afterwards. This should not be the case, see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html#delete-routing");
 
         // Refresh the index
         $index->refresh();
