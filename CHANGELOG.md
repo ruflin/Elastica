@@ -34,6 +34,7 @@ All notable changes to this project will be documented in this file based on the
 - Remove \Elastica\Status::getServerStatus() as the information was removed
 - DeleteByQuery now requires the delete-by-query plugin isntalled
 - Remove \Elastica\Filter\Nested as it is replaced by \Elastica\Query\Nested
+- Require at least PHP 5.4
 
 ### Bugfixes
 - Fixed GeoShapeProvided relation parameter position
