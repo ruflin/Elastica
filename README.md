@@ -23,6 +23,6 @@ Dependencies
 ------------
 | Project | Version | Required |
 |---------|---------|----------|
-|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v1.7.2)|1.7.2|yes|
-|[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.7.0)|2.7.0|no|
+|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v2.0.0)|2.0.0|yes|
+|[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v3.0.2)|3.0.2|no|
 |[Elasticsearch image plugin](https://github.com/Jmoati/elasticsearch-image/releases/tag/1.7.1)|1.7.1|no|
