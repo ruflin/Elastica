@@ -8,11 +8,6 @@ use Elastica\Type;
 
 class CrossIndexTest extends Base
 {
-    protected function setUp()
-    {
-        parent::setUp();
-    }
-
     /**
      * Test default reindex.
      *
@@ -31,6 +26,20 @@ class CrossIndexTest extends Base
         );
 
         $this->assertEquals(10, $newIndex->count());
+
+        $oldResult = array();
+
+        foreach ($oldIndex->search()->getResults() as $result) {
+            $oldResult[] = $result->getData();
+        }
+
+        $newResult = array();
+
+        foreach ($newIndex->search()->getResults() as $result) {
+            $newResult[] = $result->getData();
+        }
+
+        $this->assertEquals($oldResult, $newResult);
     }
 
     /**
