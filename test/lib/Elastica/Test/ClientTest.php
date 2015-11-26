@@ -305,7 +305,7 @@ class ClientTest extends BaseTest
 
         // Adds 1 document to the index
         $doc = new Document(null, $data);
-        $doc->setRouting(1);
+        $doc->setRouting('first_routing');
         $result = $type->addDocument($doc);
 
         // Refresh index
@@ -328,9 +328,7 @@ class ClientTest extends BaseTest
 
         // Try to delete doc with a routing value which hashes to
         // a different shard then the id.
-        $resp = $index->getClient()->deleteIds($ids, $index, $type, 2);
-
-        $this->es20("even though document is deleted from a different shard then added, it is deleted afterwards. This should not be the case, see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html#delete-routing");
+        $resp = $index->getClient()->deleteIds($ids, $index, $type, 'second_routing');
 
         // Refresh the index
         $index->refresh();
@@ -342,7 +340,7 @@ class ClientTest extends BaseTest
 
         // Using the existing $index and $type variables which
         // are \Elastica\Index and \Elastica\Type objects respectively
-        $resp = $index->getClient()->deleteIds($ids, $index, $type, 1);
+        $resp = $index->getClient()->deleteIds($ids, $index, $type, 'first_routing');
 
         // Refresh the index to clear out deleted ID information
         $index->refresh();
