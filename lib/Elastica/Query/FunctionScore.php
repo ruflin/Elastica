@@ -14,7 +14,7 @@ class FunctionScore extends AbstractQuery
     const BOOST_MODE_MULTIPLY = 'multiply';
     const BOOST_MODE_REPLACE = 'replace';
     const BOOST_MODE_SUM = 'sum';
-    const BOOST_MODE_AVERAGE = 'average';
+    const BOOST_MODE_AVERAGE = 'avg';
     const BOOST_MODE_MAX = 'max';
     const BOOST_MODE_MIN = 'min';
 
