@@ -194,7 +194,19 @@ class BoolFilterTest extends BaseTest
             self::markTestSkipped('These objects are not supported in PHP 7');
         }
 
+        $err = array();
+
+        set_error_handler(function () use (&$err) {
+            $err[] = func_get_args();
+        });
+
         $filter = new \Elastica\Filter\Bool();
+
+        restore_error_handler();
+
+        $this->assertCount(1, $err);
+        $this->assertEquals(E_USER_DEPRECATED, $err[0][0]);
+
         $filter->addShould('fail!');
     }
 }

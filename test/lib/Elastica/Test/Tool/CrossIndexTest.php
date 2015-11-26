@@ -26,6 +26,20 @@ class CrossIndexTest extends Base
         );
 
         $this->assertEquals(10, $newIndex->count());
+
+        $oldResult = array();
+
+        foreach ($oldIndex->search()->getResults() as $result) {
+            $oldResult[] = $result->getData();
+        }
+
+        $newResult = array();
+
+        foreach ($newIndex->search()->getResults() as $result) {
+            $newResult[] = $result->getData();
+        }
+
+        $this->assertEquals($oldResult, $newResult);
     }
 
     /**
@@ -130,7 +144,7 @@ class CrossIndexTest extends Base
     {
         $insert = array();
         for ($i = 1; $i <= $docs; ++$i) {
-            $insert[] = new Document($i, array('_id' => $i, 'key' => 'value'));
+            $insert[] = new Document($i, array('id' => $i, 'key' => 'value'));
         }
 
         $type->addDocuments($insert);

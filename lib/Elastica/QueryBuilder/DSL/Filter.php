@@ -1,6 +1,7 @@
 <?php
 namespace Elastica\QueryBuilder\DSL;
 
+use Elastica\Exception\DeprecatedException;
 use Elastica\Filter\AbstractFilter;
 use Elastica\Filter\BoolAnd;
 use Elastica\Filter\BoolFilter;
@@ -21,7 +22,6 @@ use Elastica\Filter\Indices;
 use Elastica\Filter\Limit;
 use Elastica\Filter\MatchAll;
 use Elastica\Filter\Missing;
-use Elastica\Filter\Nested;
 use Elastica\Filter\NumericRange;
 use Elastica\Filter\Prefix;
 use Elastica\Filter\Query as QueryFilter;
@@ -315,7 +315,7 @@ class Filter implements DSL
      */
     public function nested()
     {
-        return new Nested();
+        throw new DeprecatedException('Removed in ES 2.0');
     }
 
     /**

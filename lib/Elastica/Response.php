@@ -56,7 +56,7 @@ class Response
     protected $_status = null;
 
     /**
-     * Whether or not to convert bigint results to string (see issue #717)
+     * Whether or not to convert bigint results to string (see issue #717).
      *
      * @var bool
      */
@@ -81,18 +81,32 @@ class Response
     /**
      * Error message.
      *
-     * @return string Error message
+     * @return array Error object
      */
     public function getError()
     {
-        $message = '';
+        $error = array();
         $response = $this->getData();
 
         if (isset($response['error'])) {
-            $message = $response['error'];
+            $error = $response['error'];
         }
 
-        return $message;
+        return $error;
+    }
+
+    /**
+     * @return string Error string based on the error object
+     */
+    public function getErrorMessage()
+    {
+        $error = $this->getError();
+
+        if (!is_string($error)) {
+            $error = json_encode($error);
+        }
+
+        return $error;
     }
 
     /**
@@ -330,7 +344,7 @@ class Response
     /**
      * Gets whether or not to apply bigint conversion on the JSON result.
      *
-     * @return boolean
+     * @return bool
      */
     public function getJsonBigintConversion()
     {

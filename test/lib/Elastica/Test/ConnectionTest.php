@@ -44,7 +44,7 @@ class ConnectionTest extends BaseTest
     {
         $connection = new Connection(array('port' => 9999));
 
-        $request = new Request('_status', Request::GET);
+        $request = new Request('_stats', Request::GET);
         $request->setConnection($connection);
 
         // Throws exception because no valid connection

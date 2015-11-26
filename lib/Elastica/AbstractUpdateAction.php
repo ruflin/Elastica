@@ -1,6 +1,8 @@
 <?php
 namespace Elastica;
 
+use Elastica\Exception\DeprecatedException;
+
 /**
  * Base class for things that can be sent to the update api (Document and
  * Script).
@@ -259,29 +261,35 @@ class AbstractUpdateAction extends Param
      *
      * @param string $value percolator filter
      *
+     * @deprecated Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.
+     *
      * @return $this
      */
     public function setPercolate($value = '*')
     {
-        return $this->setParam('_percolate', $value);
+        throw new DeprecatedException('Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.');
     }
 
     /**
      * Get percolate parameter.
      *
+     * @deprecated Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.
+     *
      * @return string
      */
     public function getPercolate()
     {
-        return $this->getParam('_percolate');
+        throw new DeprecatedException('Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.');
     }
 
     /**
+     * @deprecated Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.
+     *
      * @return bool
      */
     public function hasPercolate()
     {
-        return $this->hasParam('_percolate');
+        throw new DeprecatedException('Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.');
     }
 
     /**

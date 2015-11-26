@@ -1,4 +1,5 @@
 sudo: required
+
 services:
   - docker
 
@@ -9,19 +10,11 @@ env:
   - TARGET="56"
   - TARGET="70"
 
-branches:
-  only:
-    - master
-
 before_install:
   # Docker-compose installation
   - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-
-
-#before_script:
-#  - if $(phpenv version-name | grep -q '5.3'); then sudo composer update --no-dev; sudo composer dump-autoload; fi
 
 script:
   - make tests TARGET=$TARGET
@@ -30,7 +23,7 @@ after_script:
   - cat /var/log/elasticsearch/*.log
   - cat /var/log/nginx/*.log
   - sudo rm composer.lock && sudo composer require satooshi/php-coveralls dev-master --no-ansi --no-progress --no-interaction
-  - vendor/bin/coveralls -v
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - vendor/bin/coveralls -v

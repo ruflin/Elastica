@@ -5,7 +5,6 @@ use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
-use Elastica\Index\Status as IndexStatus;
 
 /**
  * Elastica index object.
@@ -60,16 +59,6 @@ class Index implements SearchableInterface
     public function getType($type)
     {
         return new Type($this, $type);
-    }
-
-    /**
-     * Returns the current status of the index.
-     *
-     * @return \Elastica\Index\Status Index status
-     */
-    public function getStatus()
-    {
-        return new IndexStatus($this);
     }
 
     /**
@@ -433,6 +422,35 @@ class Index implements SearchableInterface
         $data = array('actions' => array(array('remove' => array('index' => $this->getName(), 'alias' => $name))));
 
         return $this->getClient()->request($path, Request::POST, $data);
+    }
+
+    /**
+     * Returns all index aliases.
+     *
+     * @return array Aliases
+     */
+    public function getAliases()
+    {
+        $responseData = $this->request('_alias/*', \Elastica\Request::GET)->getData();
+
+        $data = $responseData[$this->getName()];
+        if (!empty($data['aliases'])) {
+            return array_keys($data['aliases']);
+        }
+
+        return array();
+    }
+
+    /**
+     * Checks if the index has the given alias.
+     *
+     * @param string $name Alias name
+     *
+     * @return bool
+     */
+    public function hasAlias($name)
+    {
+        return in_array($name, $this->getAliases());
     }
 
     /**

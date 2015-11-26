@@ -45,7 +45,6 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'filtered', 'Elastica\Query\Filtered', array(new Match(), new Exists('field')));
         $this->_assertImplemented($queryDSL, 'function_score', 'Elastica\Query\FunctionScore', array());
         $this->_assertImplemented($queryDSL, 'fuzzy', 'Elastica\Query\Fuzzy', array('field', 'type'));
-        $this->_assertImplemented($queryDSL, 'fuzzy_like_this', 'Elastica\Query\FuzzyLikeThis', array());
         $this->_assertImplemented($queryDSL, 'has_child', 'Elastica\Query\HasChild', array(new Match()));
         $this->_assertImplemented($queryDSL, 'has_parent', 'Elastica\Query\HasParent', array(new Match(), 'type'));
         $this->_assertImplemented($queryDSL, 'ids', 'Elastica\Query\Ids', array('type', array()));
@@ -68,7 +67,6 @@ class QueryTest extends AbstractDSLTest
         $this->_assertNotImplemented($queryDSL, 'custom_filters_score', array());
         $this->_assertNotImplemented($queryDSL, 'custom_score', array());
         $this->_assertNotImplemented($queryDSL, 'field', array());
-        $this->_assertNotImplemented($queryDSL, 'fuzzy_like_this_field', array());
         $this->_assertNotImplemented($queryDSL, 'geo_shape', array());
         $this->_assertNotImplemented($queryDSL, 'indices', array());
         $this->_assertNotImplemented($queryDSL, 'minimum_should_match', array());

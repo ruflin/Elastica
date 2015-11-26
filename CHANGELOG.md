@@ -5,25 +5,56 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.1...HEAD)
 
 ### Backward Compatibility Breaks
+- Elastica\AbstractUpdateAction::setPercolate now throw DeprecatedException, user Percolator instead
+- Elastica\AbstractUpdateAction::getPercolate now throw DeprecatedException, user Percolator instead
+- Elastica\AbstractUpdateAction::hasPercolate now throw DeprecatedException, user Percolator instead
+- Elastica\Type::delete now throw DeprecatedException, it is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings
+- MoreLikeThis::setLikeText deprecated from ES 2.0, use setLike instead, but there is a difference - setLike haven't trim magic inside for strings
+- Elastica\Document, methods: setScript, getScript, hasScript now throw DeprecatedException.
+- MoreLikeThis, methods: setLikeText, setIds, setPercentTermsToMatch now throw DeprecatedException.
+- Elastica\Aggregation\DateHistogram, methods: setPreZone, setPostZone, setPreZoneAdjustLargeInterval, setPreOffset, setPostOffset now throw DeprecatedException.
+- Elastica\Query\Builder trigger E_USER_DEPRECATED error when you try use it.
+- Elastica\Filter\Bool and Elastica\Query\Bool trigger E_USER_DEPRECATED error when you try use them.
+- Elastica\Query\Fuzzy:addField method trigger E_USER_DEPRECATED error
+- Elastica\Query\FunctionScore:addBoostFactorFunction method trigger E_USER_DEPRECATED error
+- Elastica\Query:setLimit method trigger E_USER_DEPRECATED error
+- Elastica\Document:add method trigger E_USER_DEPRECATED error
+- Type::moreLikeThis API was removed from ES 2.0, use MoreLikeThis query instead
 - Remove Thrift transport and everything related to it
 - Remove Memcache transport and everything related to it
 - Remove BulkUdp and everything related to it
 - Remove Facets and everything related to it
 - Remove ansible scripts for tests setup and Vagrantfile as not needed anymore.
   All is based on docker contaienrs now
-
-### Backward Compatibility Breaks
+- Support for PHP 5.3 removed
+- Elastica\Reponse::getError() now returns and array instead of a string
+- Move function \Elastica\Index\Status::getAliases() and hasAlias(...) to \Elastica\Index::getAliases()
+- Remove \Elastica\Index\Status object and related functions
+- \Elastica\Query\FuzzyLikeThis remove as not supported anymore
+- Remove \Elastica\Status::getServerStatus() as the information was removed
+- DeleteByQuery now requires the delete-by-query plugin isntalled
+- Remove \Elastica\Filter\Nested as it is replaced by \Elastica\Query\Nested
 
 ### Bugfixes
 - Fixed GeoShapeProvided relation parameter position
 
 ### Added
+- Elastica\Reponse::getErrorMessage was added as getError is now an object
+- Elastica\Query\MoreLikeThis::setLike
+- \Elastica\Exception\DeprecatedException
 - Connection option to convert JSON bigint results to strings can now be set [#717](https://github.com/ruflin/Elastica/issues/717)
 
 ### Improvements
+- Travis builds were moved to docker-compose setup. Ansible scripts and Vagrant files were removed
+- trigger_error with E_USER_DEPRECATE added to deprecated places
+- DeprecatedException will be thrown, if there is a call of method that not support BC
 
 ### Deprecated
-
+- Elastica\Type::delete is deprecated
+- Elastica\Filter\Bool is deprecated
+- Elastica\Query\Bool is deprecated
+- Elastica\Query\MoreLikeThis::setLikeText is deprecated
+- Elastica\Query\MoreLikeThis::setIds is deprecated
 
 ## [2.3.1](https://github.com/ruflin/Elastica/releases/tag/2.3.1) - 2015-10-17
 

@@ -2,7 +2,6 @@
 namespace Elastica;
 
 use Elastica\Exception\ResponseException;
-use Elastica\Index\Status as IndexStatus;
 
 /**
  * Elastica general status.
@@ -53,22 +52,6 @@ class Status
     public function getData()
     {
         return $this->_data;
-    }
-
-    /**
-     * Returns status objects of all indices.
-     *
-     * @return array|\Elastica\Index\Status[] List of Elastica\Client\Index objects
-     */
-    public function getIndexStatuses()
-    {
-        $statuses = array();
-        foreach ($this->getIndexNames() as $name) {
-            $index = new Index($this->_client, $name);
-            $statuses[] = new IndexStatus($index);
-        }
-
-        return $statuses;
     }
 
     /**
@@ -159,19 +142,8 @@ class Status
      */
     public function refresh()
     {
-        $path = '_status';
+        $path = '_stats';
         $this->_response = $this->_client->request($path, Request::GET);
         $this->_data = $this->getResponse()->getData();
-    }
-
-    /**
-     * Refresh serverStatus object.
-     */
-    public function getServerStatus()
-    {
-        $path = '';
-        $response = $this->_client->request($path, Request::GET);
-
-        return  $response->getData();
     }
 }

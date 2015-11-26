@@ -21,15 +21,22 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     private $_isRemote = false;
 
     /**
+     * @var array Error array
+     */
+    protected $_error = array();
+
+    /**
      * Constructs elasticsearch exception.
      *
-     * @param int    $code  Error code
-     * @param string $error Error message from elasticsearch
+     * @param int   $code  Error code
+     * @param array $error Error object from elasticsearch
      */
     public function __construct($code, $error)
     {
-        $this->_parseError($error);
-        parent::__construct($error, $code);
+        $this->_error = $error;
+        // TODO: es2 improve as now an array
+        $this->_parseError(json_encode($error));
+        parent::__construct(json_encode($error), $code);
     }
 
     /**
@@ -87,5 +94,13 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     public function isRemoteTransportException()
     {
         return $this->_isRemote;
+    }
+
+    /**
+     * @return array Error array
+     */
+    public function getError()
+    {
+        return $this->_error;
     }
 }

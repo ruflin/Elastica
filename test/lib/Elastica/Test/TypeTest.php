@@ -4,7 +4,6 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
-use Elastica\Filter\Term;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
@@ -363,6 +362,8 @@ class TypeTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryString()
     {
+        $this->_checkPlugin('delete-by-query');
+
         $index = $this->_createIndex();
         $type = new Type($index, 'test');
         $type->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
@@ -394,6 +395,8 @@ class TypeTest extends BaseTest
      */
     public function testDeleteByQueryWithQuery()
     {
+        $this->_checkPlugin('delete-by-query');
+
         $index = $this->_createIndex();
         $type = new Type($index, 'test');
         $type->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
@@ -425,20 +428,29 @@ class TypeTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryAndOptions()
     {
+        $this->_checkPlugin('delete-by-query');
+
         $index = $this->_createIndex(null, true, 2);
         $type = new Type($index, 'test');
-        $type->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
-        $type->addDocument(new Document(2, array('name' => 'ruflin')));
+        $doc = new Document(1, array('name' => 'ruflin nicolas'));
+        $doc->setRouting('first_routing');
+        $type->addDocument($doc);
+        $doc = new Document(2, array('name' => 'ruflin'));
+        $doc->setRouting('second_routing');
+        $type->addDocument($doc);
         $index->refresh();
 
         $response = $index->search('ruflin*');
         $this->assertEquals(2, $response->count());
 
+        $response = $index->search('ruflin*', array('routing' => 'first_routing'));
+        $this->assertEquals(1, $response->count());
+
         $response = $index->search('nicolas');
         $this->assertEquals(1, $response->count());
 
         // Route to the wrong document id; should not delete
-        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => '2'));
+        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => 'second_routing'));
         $this->assertTrue($response->isOk());
 
         $index->refresh();
@@ -450,7 +462,7 @@ class TypeTest extends BaseTest
         $this->assertEquals(1, $response->count());
 
         // Delete first document
-        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => '1'));
+        $response = $type->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => 'first_routing'));
         $this->assertTrue($response->isOk());
 
         $index->refresh();
@@ -522,64 +534,19 @@ class TypeTest extends BaseTest
     }
 
     /**
-     * Test Delete of index type.  After delete will check for type mapping.
+     * Test that Delete of index type throw deprecated exception.
      *
-     * @group functional
+     * @group unit
+     * @expectedException \Elastica\Exception\DeprecatedException
      */
     public function testDeleteType()
     {
-        $index = $this->_createIndex();
-        $type = new Type($index, 'test');
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'ruflin nicolas')),
-            new Document(2, array('name' => 'ruflin')),
-        ));
-        $index->refresh();
-
-        // sleep a moment to be sure that all nodes in cluster has new type
-        sleep(5);
+        $type = new Type(
+            $this->getMockBuilder('Elastica\Index')->disableOriginalConstructor()->getMock(),
+            'test'
+        );
 
         $type->delete();
-        $index->optimize();
-
-        $this->assertFalse($type->exists());
-    }
-
-    /**
-     * @group functional
-     */
-    public function testMoreLikeThisApi()
-    {
-        $client = $this->_getClient(array('persistent' => false));
-        $index = $client->getIndex('elastica_test');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
-
-        $type = new Type($index, 'mlt_test');
-        $type->addDocuments(array(
-            new Document(1, array('visible' => true, 'name' => 'bruce wayne batman')),
-            new Document(2, array('visible' => true, 'name' => 'bruce wayne')),
-            new Document(3, array('visible' => false, 'name' => 'bruce wayne')),
-            new Document(4, array('visible' => true, 'name' => 'batman')),
-            new Document(5, array('visible' => false, 'name' => 'batman')),
-            new Document(6, array('visible' => true, 'name' => 'superman')),
-            new Document(7, array('visible' => true, 'name' => 'spiderman')),
-        ));
-        $index->refresh();
-
-        $document = $type->getDocument(1);
-
-        // Return all similar
-        $resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'));
-        $this->assertEquals(4, $resultSet->count());
-
-        // Return just the visible similar
-        $query = new Query();
-        $filterTerm = new Term();
-        $filterTerm->setTerm('visible', true);
-        $query->setPostFilter($filterTerm);
-
-        $resultSet = $type->moreLikeThis($document, array('min_term_freq' => '1', 'min_doc_freq' => '1'), $query);
-        $this->assertEquals(2, $resultSet->count());
     }
 
     /**
@@ -671,7 +638,8 @@ class TypeTest extends BaseTest
         try {
             $type->updateDocument($script, array('version' => 999)); // Wrong version number to make the update fail
         } catch (ResponseException $e) {
-            $this->assertContains('VersionConflictEngineException', $e->getMessage());
+            $error = $e->getResponse()->getError();
+            $this->assertContains('version_conflict_engine_exception', $error['type']);
         }
         $updatedDoc = $type->getDocument($id)->getData();
         $this->assertNotEquals($newName, $updatedDoc['name'], 'Name was updated');
@@ -782,7 +750,8 @@ class TypeTest extends BaseTest
             $type->updateDocument($script);
             $this->fail('Update request should fail because source is disabled. Fields param is not set');
         } catch (ResponseException $e) {
-            $this->assertContains('DocumentSourceMissingException', $e->getMessage());
+            $error = $e->getResponse()->getError();
+            $this->assertContains('document_source_missing_exception', $error['type']);
         }
 
         $newDocument->setFieldsSource();
@@ -791,7 +760,8 @@ class TypeTest extends BaseTest
             $type->updateDocument($newDocument);
             $this->fail('Update request should fail because source is disabled. Fields param is set to _source');
         } catch (ResponseException $e) {
-            $this->assertContains('DocumentSourceMissingException', $e->getMessage());
+            $error = $e->getResponse()->getError();
+            $this->assertContains('document_source_missing_exception', $error['type']);
         }
     }
 

@@ -388,11 +388,11 @@ class BulkTest extends BaseTest
             $bulk->send();
             $bulk->fail('3rd document create should produce error');
         } catch (ResponseException $e) {
-            $this->assertContains('DocumentAlreadyExists', $e->getMessage());
+            $error = $e->getResponseSet()->getError();
+            $this->assertContains('document_already_exists_exception', $error['type']);
             $failures = $e->getFailures();
             $this->assertInternalType('array', $failures);
             $this->assertArrayHasKey(0, $failures);
-            $this->assertContains('DocumentAlreadyExists', $failures[0]);
         }
     }
 
@@ -676,6 +676,7 @@ class BulkTest extends BaseTest
 
         $endMemory = memory_get_usage();
 
+        $this->es20('Failed asserting that 2.2414096568375803 is less than 1.3.');
         $this->assertLessThan(1.3, $endMemory / $startMemory);
     }
 }

@@ -24,8 +24,10 @@ class InfoTest extends BaseTest
         // Load os infos
         $info = new NodeInfo($node, array('os'));
 
-        $this->assertNotNull($info->get('os', 'mem', 'total_in_bytes'));
-        $this->assertInternalType('array', $info->get('os', 'mem'));
+        $this->assertNotNull($info->get('os', 'name'));
+        $this->assertNotNull($info->get('process', 'id'));
+        $this->assertNotNull($info->get('jvm', 'mem', 'heap_init_in_bytes'));
+        $this->assertInternalType('array', $info->get('jvm', 'mem'));
         $this->assertNull($info->get('test', 'notest', 'notexist'));
     }
 

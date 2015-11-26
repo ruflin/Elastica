@@ -23,7 +23,7 @@ class MappingTest extends BaseTest
 
         $mapping = new Mapping($type,
             array(
-                'firstname' => array('type' => 'string', 'store' => 'yes'),
+                'firstname' => array('type' => 'string', 'store' => true),
                 // default is store => no expected
                 'lastname' => array('type' => 'string'),
             )
@@ -116,16 +116,15 @@ class MappingTest extends BaseTest
         $index->create(array(), true);
         $type = $index->getType('test');
 
-        //$this->markTestIncomplete('nested mapping is not set right yet');
         $mapping = new Mapping($type,
             array(
                 'test' => array(
-                    'type' => 'object', 'store' => 'yes', 'properties' => array(
+                    'type' => 'object', 'properties' => array(
                         'user' => array(
                             'properties' => array(
-                                'firstname' => array('type' => 'string', 'store' => 'yes'),
-                                'lastname' => array('type' => 'string', 'store' => 'yes'),
-                                'age' => array('type' => 'integer', 'store' => 'yes'),
+                                'firstname' => array('type' => 'string', 'store' => true),
+                                'lastname' => array('type' => 'string', 'store' => true),
+                                'age' => array('type' => 'integer', 'store' => true),
                             ),
                         ),
                     ),
@@ -159,19 +158,11 @@ class MappingTest extends BaseTest
     public function testParentMapping()
     {
         $index = $this->_createIndex();
-        $parenttype = new Type($index, 'parenttype');
-        $parentmapping = new Mapping($parenttype,
-            array(
-                'name' => array('type' => 'string', 'store' => 'yes'),
-            )
-        );
-
-        $parenttype->setMapping($parentmapping);
 
         $childtype = new Type($index, 'childtype');
         $childmapping = new Mapping($childtype,
             array(
-                'name' => array('type' => 'string', 'store' => 'yes'),
+                'name' => array('type' => 'string', 'store' => true),
             )
         );
         $childmapping->setParent('parenttype');
@@ -181,7 +172,14 @@ class MappingTest extends BaseTest
         $data = $childmapping->toArray();
         $this->assertEquals('parenttype', $data[$childtype->getName()]['_parent']['type']);
 
-        $index->delete();
+        $parenttype = new Type($index, 'parenttype');
+        $parentmapping = new Mapping($parenttype,
+            array(
+                'name' => array('type' => 'string', 'store' => true),
+            )
+        );
+
+        $parenttype->setMapping($parentmapping);
     }
 
     /**
@@ -195,7 +193,7 @@ class MappingTest extends BaseTest
         $mapping = new Mapping($type,
             array(
                 'note' => array(
-                    'store' => 'yes', 'properties' => array(
+                    'properties' => array(
                         'titulo' => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0),
                         'contenido' => array('type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0),
                     ),
@@ -289,7 +287,7 @@ class MappingTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
         $mapping = new Mapping($type, array(
-            'firstname' => array('type' => 'string', 'store' => 'yes'),
+            'firstname' => array('type' => 'string', 'store' => true),
             'lastname' => array('type' => 'string'),
         ));
         $mapping->setMeta(array('class' => 'test'));
@@ -309,13 +307,13 @@ class MappingTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
         $properties = array(
-            'firstname' => array('type' => 'string', 'store' => 'yes'),
+            'firstname' => array('type' => 'string', 'store' => true),
             'lastname' => array('type' => 'string'),
         );
         $mapping = new Mapping($type, $properties);
         $all = array(
            'enabled' => true,
-           'store' => 'yes',
+           'store' => true,
         );
         $mapping->setParam('_all', $all);
         $get_all = $mapping->getParam('_all');

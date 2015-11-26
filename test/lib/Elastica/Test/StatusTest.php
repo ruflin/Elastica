@@ -20,23 +20,6 @@ class StatusTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetIndexStatuses()
-    {
-        $index = $this->_createIndex();
-
-        $status = new Status($index->getClient());
-        $statuses = $status->getIndexStatuses();
-
-        $this->assertInternalType('array', $statuses);
-
-        foreach ($statuses as $indexStatus) {
-            $this->assertInstanceOf('Elastica\Index\Status', $indexStatus);
-        }
-    }
-
-    /**
-     * @group functional
-     */
     public function testGetIndexNames()
     {
         $indexName = 'test';
@@ -110,24 +93,5 @@ class StatusTest extends BaseTest
             function ($index) {
                 return $index->getName();
             }, $indicesWithAlias));
-    }
-
-    /**
-     * @group functional
-     */
-    public function testServerStatus()
-    {
-        $client = $this->_getClient();
-        $status = $client->getStatus();
-        $serverStatus = $status->getServerStatus();
-
-        $this->assertTrue(!empty($serverStatus));
-        $this->assertTrue('array' == gettype($serverStatus));
-        $this->assertArrayHasKey('status', $serverStatus);
-        $this->assertTrue($serverStatus['status'] == 200);
-        $this->assertArrayHasKey('version', $serverStatus);
-
-        $versionInfo = $serverStatus['version'];
-        $this->assertArrayHasKey('number', $versionInfo);
     }
 }

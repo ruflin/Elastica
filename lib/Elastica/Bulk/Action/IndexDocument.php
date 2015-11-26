@@ -39,7 +39,6 @@ class IndexDocument extends AbstractDocument
             'version',
             'version_type',
             'routing',
-            'percolate',
             'parent',
             'ttl',
             'timestamp',

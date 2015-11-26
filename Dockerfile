@@ -24,7 +24,7 @@ RUN mkdir -p \
 	./build/logs \
 	./build/pdepend \
 	./build/coverage
-	
+
 RUN composer install --prefer-source
 
 # Copy rest of the files, ignoring .dockerignore files

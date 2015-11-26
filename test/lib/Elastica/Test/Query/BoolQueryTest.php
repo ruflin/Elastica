@@ -162,7 +162,18 @@ class BoolQueryTest extends BaseTest
 
         $index->refresh();
 
+        $err = array();
+
+        set_error_handler(function () use (&$err) {
+            $err[] = func_get_args();
+        });
+
         $boolQuery = new \Elastica\Query\Bool();
+
+        restore_error_handler();
+
+        $this->assertCount(1, $err);
+        $this->assertEquals(E_USER_DEPRECATED, $err[0][0]);
 
         $resultSet = $type->search($boolQuery);
 

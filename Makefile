@@ -5,7 +5,7 @@ TARGET?=56
 
 # By default docker environment is used to run commands. To run without the predefined environment, set RUN_ENV=" " either as parameter or as environment variable
 ifndef RUN_ENV
-	RUN_ENV = docker run -v $(shell pwd):/elastica ruflin/elastica
+	RUN_ENV = docker run --entrypoint="" -v $(shell pwd):/elastica ruflin/elastica
 endif
 
 .PHONY: clean
@@ -47,9 +47,9 @@ dependencies:
 
 .PHONY: phpunit
 phpunit:
-	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
-	phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
-	phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
+	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit; \
+	phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional; \
+	phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown;
 
 .PHONY: tests
 tests:
@@ -65,6 +65,7 @@ tests:
 test:
 	make elastica-image
 	make setup
+	mkdir -p build
 	docker-compose run elastica phpunit -c test/ ${TEST}
 
 .PHONY: doc

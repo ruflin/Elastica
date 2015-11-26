@@ -1,6 +1,7 @@
 <?php
 namespace Elastica\QueryBuilder\DSL;
 
+use Elastica\Exception\DeprecatedException;
 use Elastica\Exception\NotImplementedException;
 use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
@@ -12,7 +13,6 @@ use Elastica\Query\DisMax;
 use Elastica\Query\Filtered;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\Fuzzy;
-use Elastica\Query\FuzzyLikeThis;
 use Elastica\Query\HasChild;
 use Elastica\Query\HasParent;
 use Elastica\Query\Ids;
@@ -208,7 +208,7 @@ class Query implements DSL
      */
     public function fuzzy_like_this()
     {
-        return new FuzzyLikeThis();
+        throw new NotImplementedException('Removed in elasticsearch 2.0');
     }
 
     /**
@@ -218,7 +218,7 @@ class Query implements DSL
      */
     public function fuzzy_like_this_field()
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException('Removed in elasticsearch 2.0');
     }
 
     /**
@@ -341,11 +341,11 @@ class Query implements DSL
      * more_like_this_field query.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/1.4/query-dsl-mlt-field-query.html
-     * @deprecated More Like This Field query is deprecated as of ES 1.4 and will be removed in ES 2.0
+     * @deprecated More Like This Field query is deprecated as of ES 1.4 and will be removed in ES 2.0. Use MoreLikeThis query instead. This method will be removed in further Elastica releases
      */
     public function more_like_this_field()
     {
-        throw new NotImplementedException();
+        throw new DeprecatedException('More Like This Field query is deprecated as of ES 1.4 and will be removed in ES 2.0. Use MoreLikeThis query instead. This method will be removed in further Elastica releases');
     }
 
     /**
