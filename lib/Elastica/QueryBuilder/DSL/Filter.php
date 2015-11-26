@@ -315,7 +315,7 @@ class Filter implements DSL
      */
     public function nested()
     {
-        throw new DeprecatedException("Removed in ES 2.0");
+        throw new DeprecatedException('Removed in ES 2.0');
     }
 
     /**

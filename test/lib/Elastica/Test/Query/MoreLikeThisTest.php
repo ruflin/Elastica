@@ -314,14 +314,13 @@ class MoreLikeThisTest extends BaseTest
         $data = $query->toArray();
 
         $this->assertEquals(
-            array('more_like_this' =>
-                array(
+            array('more_like_this' => array(
                     'like' => array(
                         '_id' => 1,
                         '_type' => 'type',
-                        '_index' => 'index'
-                    )
-                )
+                        '_index' => 'index',
+                    ),
+                ),
             ),
             $data
         );

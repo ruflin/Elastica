@@ -1,5 +1,6 @@
 <?php
 namespace Elastica\Aggregation;
+
 use Elastica\Exception\DeprecatedException;
 
 /**

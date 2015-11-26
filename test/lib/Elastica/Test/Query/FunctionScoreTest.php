@@ -173,7 +173,6 @@ class FunctionScoreTest extends BaseTest
         $this->assertCount(1, $err);
         $this->assertEquals(E_USER_DEPRECATED, $err[0][0]);
 
-
         $this->assertEquals($query->toArray(), $sameQuery->toArray());
     }
 

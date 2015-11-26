@@ -207,6 +207,7 @@ class Settings
     public function setBlocksMetadata($state = true)
     {
         $state = $state ? 1 : 0;
+
         return $this->set(array('blocks.write' => $state));
     }
 

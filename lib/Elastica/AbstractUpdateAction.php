@@ -1,5 +1,6 @@
 <?php
 namespace Elastica;
+
 use Elastica\Exception\DeprecatedException;
 
 /**

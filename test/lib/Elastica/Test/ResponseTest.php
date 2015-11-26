@@ -134,7 +134,7 @@ class ResponseTest extends BaseTest
     public function testArrayErrorMessage()
     {
         $response = new Response(json_encode(array(
-            'error' => array('a', 'b')
+            'error' => array('a', 'b'),
         )));
 
         $this->assertEquals(json_encode(array('a', 'b')), $response->getErrorMessage());
@@ -146,7 +146,7 @@ class ResponseTest extends BaseTest
     public function testStringErrorMessage()
     {
         $response = new Response(json_encode(array(
-            'error' => 'a'
+            'error' => 'a',
         )));
 
         $this->assertEquals('a', $response->getErrorMessage());

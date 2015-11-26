@@ -172,7 +172,6 @@ class MappingTest extends BaseTest
         $data = $childmapping->toArray();
         $this->assertEquals('parenttype', $data[$childtype->getName()]['_parent']['type']);
 
-
         $parenttype = new Type($index, 'parenttype');
         $parentmapping = new Mapping($parenttype,
             array(

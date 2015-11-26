@@ -432,7 +432,7 @@ class IndexTest extends BaseTest
         $routing1 = 'first_routing';
         $routing2 = 'second_routing';
 
-        for ($i=1; $i<=2; $i++) {
+        for ($i = 1; $i <= 2; ++$i) {
             $type = new Type($index, 'test'.$i);
             $doc = new Document(1, array('name' => 'ruflin nicolas'));
             $doc->setRouting($routing1);

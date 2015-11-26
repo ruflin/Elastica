@@ -238,6 +238,7 @@ class Query extends Param
     public function setLimit($limit = 10)
     {
         trigger_error('Deprecated: Elastica\Query::setLimit() is deprecated. Use setSize method instead. This method will be removed in further Elastica releases.', E_USER_DEPRECATED);
+
         return $this->setSize($limit);
     }
 

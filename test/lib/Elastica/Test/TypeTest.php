@@ -2,7 +2,6 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
-use Elastica\Exception\DeprecatedException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;

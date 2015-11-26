@@ -3,7 +3,6 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Query;
-use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
 
 class HighlightTest extends BaseTest

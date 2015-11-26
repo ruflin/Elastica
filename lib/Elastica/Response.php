@@ -56,7 +56,7 @@ class Response
     protected $_status = null;
 
     /**
-     * Whether or not to convert bigint results to string (see issue #717)
+     * Whether or not to convert bigint results to string (see issue #717).
      *
      * @var bool
      */
@@ -344,7 +344,7 @@ class Response
     /**
      * Gets whether or not to apply bigint conversion on the JSON result.
      *
-     * @return boolean
+     * @return bool
      */
     public function getJsonBigintConversion()
     {

@@ -11,7 +11,6 @@ trigger_error('Elastica\Query\Bool is deprecated. Use BoolQuery instead. From PH
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
  * @deprecated Use BoolQuery instead. From PHP7 bool is reserved word and this class will be removed in further Elastica releases
- *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
  */
 class Bool extends BoolQuery

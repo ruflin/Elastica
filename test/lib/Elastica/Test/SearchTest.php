@@ -1,7 +1,6 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Aggregation;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;

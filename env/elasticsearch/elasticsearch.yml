@@ -30,3 +30,6 @@ transport.tcp.port: 9300
 
 # Added for snapshot tests
 path.repo: ["/tmp/backups"]
+
+discovery.zen.ping.unicast.enabled: true
+discovery.zen.ping.multicast.enabled: true
