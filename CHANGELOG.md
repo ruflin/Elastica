@@ -2,7 +2,21 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.1...HEAD)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/3.0.0-beta1...HEAD)
+
+### Backward Compatibility Breaks
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+
+
+## [3.0.0-beta1](https://github.com/ruflin/Elastica/compare/2.3.1...3.0.0-beta1)
 
 ### Backward Compatibility Breaks
 - Elastica\AbstractUpdateAction::setPercolate now throw DeprecatedException, user Percolator instead
