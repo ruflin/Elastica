@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Build Elastica Project - Elastica</title>
+  <meta name="author" content="ruflin">
+
+  
+  <meta name="description" content="Build Elastica Project To build the complete project (running tests, creating documentation and other metrics) just run ant inside the top directory &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Elastica.io/contribute/build.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-10160648-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Elastica</a></h1>
+  
+    <h2>A PHP client for elasticsearch.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Elastica.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/examples/">Examples</a></li>
+  <li><a href="/api/">Api</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/faq/">FAQ</a></li>
+</ul>
+
+</nav>
+  <a href="https://github.com/ruflin/Elastica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Build Elastica Project</h1>
+    
+  </header>
+  
+  <p>To build the complete project (running tests, creating documentation and other metrics) just run ant inside the top directory:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ant
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>gource</h1>
+
+<p>To run the gource visualization, first the <a href="http://code.google.com/p/gource/">gource</a> package has to be installed. Then the following command can be run inside the Elastica project directory:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ant gource
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After a few seconds, the visualization should start.</p>
+
+<p>To build the complete project (running tests, creating documentation and other metrics) just run ant inside the top directory:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ant
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>gource</h2>
+
+<p>To run the gource visualization, first the <a href="http://code.google.com/p/gource/">gource</a> package has to be installed. Then the following command can be run inside the Elastica project directory:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ant gource
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After a few seconds, the visualization should start.</p>
+
+<p>To run the tests, all you need is PHPUnit and the newest version of elasticsearch. More details on installing PHPUnit you can find here: [[<a href="http://www.phpunit.de/manual/3.5/en/index.html">http://www.phpunit.de/manual/3.5/en/index.html</a>]]</p>
+
+<p>Be sure to get all PHPUnit dependencies installed:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo pear install --alldeps --force phpunit/phpunit
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have ant installed, you can also run <code>sudo ant setup</code> inside the Elastica folder. This installs all necessary libraries like phpunit and codesniffer.</p>
+
+<p>To run the tests, you have to have running one or multiple instances of elasticsearch.</p>
+
+<p>To run the test you have two options:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">cd test</span>
+</span><span class='line'>phpunit
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>or</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ant phpunit
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To run the codesniffer you can use the command <code>ant codesniffer</code>. This will show you more details on where your code does not follow the coding guidelines.</p>
+
+<p>To successfully pass all tests the attachment plugin has to be installed. To install the plugin run the follwing command inside your elasticsearch folder:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>./bin/plugin install mapper-attachments
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I hope that in feature versions of elasticsearch a check for the plugin can be implemented to just skip the test if the plugin is not installed.</p>
+
+<h1>Build Documentation</h1>
+
+<p>To create the documentation without running all the tests and so on run the following in the project folder:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>phpdoc
+</span></code></pre></td></tr></table></div></figure>
+
+
+  
+    <footer>
+      
+      
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/contribute/build.html" data-via="" data-counturl="http://Elastica.io/contribute/build.html" >Tweet</a>
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/10/18/release-2-dot-3-1/">Release 2.3.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation/">Elastica 2.3.0 Broken Backward Compatibility Explanation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/09/15/release-2-dot-3-0/">Release 2.3.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/08/10/release-2-dot-2-1/">Release 2.2.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/07/08/release-2-dot-2-0/">Release 2.2.0</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/116483615197289019288?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - ruflin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

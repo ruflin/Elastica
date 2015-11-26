@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Elastica vs elasticsearch-php - Elastica</title>
+  <meta name="author" content="ruflin">
+
+  
+  <meta name="description" content="Elastica vs Elasticsearch-php One of the more frequent question is how do Elastica and the official elasticsearch-php client compare. This page is &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Elastica.io/elastica-vs-elasticsearch-php">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-10160648-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Elastica</a></h1>
+  
+    <h2>A PHP client for elasticsearch.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Elastica.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/examples/">Examples</a></li>
+  <li><a href="/api/">Api</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/faq/">FAQ</a></li>
+</ul>
+
+</nav>
+  <a href="https://github.com/ruflin/Elastica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Elastica vs Elasticsearch-php</h1>
+    
+  </header>
+  
+  <p>One of the more frequent question is how do <a href="https://github.com/ruflin/Elastica">Elastica</a> and the official <a href="https://github.com/elastic/elasticsearch-php">elasticsearch-php</a> client compare. This page is here to give some insights about the differences of the two clients and should support you in which one to pick.</p>
+
+<p>For more details also have a look at the linked blog posts and discussions below.</p>
+
+<h1>Comparison Table</h1>
+
+<p>The following table should give a brief overview how Elastica and elasticsearch-php compare.</p>
+
+<table>
+<thead>
+<tr>
+<th>                           </th>
+<th> <strong>Elastica</strong>      </th>
+<th> <strong>elasticsearch-php</strong> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> <strong>Active Development</strong>    </td>
+<td> yes               </td>
+<td> yes                   </td>
+</tr>
+<tr>
+<td> <strong>Documentation</strong>         </td>
+<td> low               </td>
+<td> good                  </td>
+</tr>
+<tr>
+<td> <strong>IDE Autocomplete</strong>      </td>
+<td> yes               </td>
+<td> no                    </td>
+</tr>
+<tr>
+<td> <strong>Performance</strong>           </td>
+<td> good              </td>
+<td> good                  </td>
+</tr>
+<tr>
+<td> <strong>Code size</strong>             </td>
+<td> medium            </td>
+<td> low                   </td>
+</tr>
+<tr>
+<td> <strong>Paid Developers</strong>       </td>
+<td> no                </td>
+<td> yes                   </td>
+</tr>
+<tr>
+<td> <strong>Http Client</strong>           </td>
+<td> Selectable        </td>
+<td> guzzle3               </td>
+</tr>
+</tbody>
+</table>
+
+
+<h1>Code Snippets</h1>
+
+<p>List of code snippets that compare the two clients:</p>
+
+<h2>Add Document</h2>
+
+<p>Elastica:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Client</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$index</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getIndex</span><span class="p">(</span><span class="s1">&#39;indexName&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$type</span> <span class="o">=</span> <span class="nv">$index</span><span class="o">-&gt;</span><span class="na">getType</span><span class="p">(</span><span class="s1">&#39;typeName&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$doc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Document</span><span class="p">(</span><span class="s1">&#39;myId&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ruflin&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$respone</span> <span class="o">=</span> <span class="nv">$type</span><span class="o">-&gt;</span><span class="na">addDocument</span><span class="p">(</span><span class="nv">$doc</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>elasticsearch-php:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Elasticsearch\Client</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$params</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$params</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ruflin&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$params</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;indexName&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$params</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">&#39;typeName&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$params</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="s1">&#39;myId&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$respone</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">index</span><span class="p">(</span><span class="nv">$params</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>History</h1>
+
+<p>Elastica was in 2010 one of the first PHP clients for elasticsearch and was initially built for elasticsearch v0.16.0 and before. Since then a lot of things have changed in the elasticsearch API. Filter, facets, aggregations and more were added which also added complexity on the client side.</p>
+
+<p>In 2013 elasticsearch decided to unify all its elasticsearch client to have a common base and started to build elasticsearch-php. Since then, both clients are developen in parallel.</p>
+
+<h1>Elastica</h1>
+
+<p>As this is the Elastica page, here also some points that are specific to Elastica.</p>
+
+<h2>DSL Mapping</h2>
+
+<p>Elastica maps the Elasticsearch DSL to objects. The advantage of this is that in an IDE autocomplete can be used to write the queries. This makes it possible that the engineers has to less think about how many open arrays and what the exact syntax of elasticsearch is. In addition, it makes it possible the Elastica can notify engineers by marking specific functions deprecated, that these functions will disappear with a future elasticsearch release or even map the changes, so the code stays the same. But this also adds complexity to the code of Elastica and means the code has to changed and adapted with every release of elasticsearch.</p>
+
+<h2>Raw Queries</h2>
+
+<p>Is Elastica used with raw queries, then the usage is very similar to the elasticsearch-php client and allows all flexibility. More details can be found here: <a href="http://elastica.io/example/raw-array-query.html">http://elastica.io/example/raw-array-query.html</a></p>
+
+<h1>Links</h1>
+
+<ul>
+<li><a href="https://groups.google.com/forum/#!searchin/elasticsearch/ruflin/elasticsearch/kDWc8lOHV7s/NgmrtChmkrMJ">Zachary Tong explaining the difference</a></li>
+</ul>
+
+
+<h1>Thoughts</h1>
+
+<p>Potentially Elastica could be a layer on top of the elasticsearch-php client to offer the extensive API. Like this Elastica would profit from the development of the elasticsearch-php client and the speed improvements, but could offer the layer on top.</p>
+
+  
+    <footer>
+      
+      
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/elastica-vs-elasticsearch-php/index.html" data-via="" data-counturl="http://Elastica.io/elastica-vs-elasticsearch-php/index.html" >Tweet</a>
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/10/18/release-2-dot-3-1/">Release 2.3.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation/">Elastica 2.3.0 Broken Backward Compatibility Explanation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/09/15/release-2-dot-3-0/">Release 2.3.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/08/10/release-2-dot-2-1/">Release 2.2.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/07/08/release-2-dot-2-0/">Release 2.2.0</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/116483615197289019288?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - ruflin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

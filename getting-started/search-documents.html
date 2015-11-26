@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>search-documents - Elastica</title>
+  <meta name="author" content="ruflin">
+
+  
+  <meta name="description" content="Search-documents Search
+Query
+Retrieve results Search documents With some documents in the index we can start searching. A basic search is executing &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Elastica.io/getting-started/search-documents.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-10160648-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Elastica</a></h1>
+  
+    <h2>A PHP client for elasticsearch.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Elastica.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/examples/">Examples</a></li>
+  <li><a href="/api/">Api</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/faq/">FAQ</a></li>
+</ul>
+
+</nav>
+  <a href="https://github.com/ruflin/Elastica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Search-documents</h1>
+    
+  </header>
+  
+  <ul>
+<li><a href="#section-search">Search</a></li>
+<li><a href="#section-query">Query</a></li>
+<li><a href="#section-retrieve">Retrieve results</a></li>
+</ul>
+
+
+<h2>Search documents</h2>
+
+
+<p>With some documents in the index we can start searching. A basic search is executing a query against elasticsearch. The result of a query then can be filtered by defining some filters. Additionally you can aggregate Documents to create metadata or graphs based on filters. For further information check out the <a href="http://www.elasticsearch.org/guide/reference/query-dsl/">Query DSL</a> and the <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations.html">Aggregations</a> reference. In this example we don&rsquo;t use all possible options to keep it simple.</p>
+
+<h3 id="section-search">Search</h3>
+
+
+<p>The <a href="http://elastica.io/api/classes/Elastica.Search.html"><code>Search</code></a> class is one of most flexible entry points in Elastica to query elasticsearch form your PHP application. Other classes which can execute queries are: <a href="http://elastica.io/api/classes/Elastica.Index.html"><code>Index</code></a>, <a href="http://elastica.io/api/classes/Elastica.Type.html"><code>Type</code></a>, <a href="http://elastica.io/api/classes/Elastica.Bulk.html"><code>Bulk</code></a> and even <a href="http://elastica.io/api/classes/Elastica.Client.html"><code>Client</code></a> for raw queries.</p>
+
+<p><code>Search</code> class provides useful methods and constants to configure your search query.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$search</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Elastica\Search</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add indices and types</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$search</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">addIndex</span><span class="p">(</span><span class="s1">&#39;GB&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">addIndex</span><span class="p">(</span><span class="nv">$indexUS</span><span class="p">)</span> <span class="c1">// $indexUS instanceof Elastica\Index</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">addType</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">addType</span><span class="p">(</span><span class="nv">$typeTweet</span><span class="p">);</span> <span class="c1">// $typeTweet instanceof Elastica\Type</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add <a href="http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_search_options.html">search options</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$search</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setOption</span><span class="p">(</span><span class="nx">Search</span><span class="o">::</span><span class="na">OPTION_TIMEOUT</span><span class="p">,</span> <span class="s1">&#39;100ms&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setOption</span><span class="p">(</span><span class="nx">Search</span><span class="o">::</span><span class="na">OPTION_ROUTING</span><span class="p">,</span> <span class="s1">&#39;user_1,user2&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h3 id="section-query">Query</h3>
+
+
+<p>You may have noticed that the most important part of a search query is actually missing: the query. Because this is the most complicated (and fun) part of elasticsearch, Elastica provides a bunch of classes to help you creating that part of your search query.</p>
+
+<p><a href="http://elastica.io/api/classes/Elastica.Query.html"><code>Query</code></a> is dedicated to the &ldquo;body&rdquo; of <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-body.html">request body search</a>. It provides a method for every configuration field:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Elastica\Query</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setFrom</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setSize</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setSort</span><span class="p">([</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;asc&#39;</span><span class="p">])</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setSource</span><span class="p">([</span><span class="s1">&#39;obj1.*&#39;</span><span class="p">,</span> <span class="s1">&#39;obj2.&#39;</span><span class="p">])</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setFields</span><span class="p">([</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;created&#39;</span><span class="p">])</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setScriptFields</span><span class="p">(</span><span class="nv">$scriptFields</span><span class="p">)</span> <span class="c1">// $scriptFields instanceof Elastica\ScriptFields</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setHighlight</span><span class="p">([</span><span class="s1">&#39;fields&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;content&#39;</span><span class="p">])</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setRescore</span><span class="p">(</span><span class="nv">$rescoreQuery</span><span class="p">)</span> <span class="c1">// $rescoreQuery instanceof Elastica\Rescore\AbstractRescore</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setExplain</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setVersion</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setPostFilter</span><span class="p">(</span><span class="nv">$filterTerm</span><span class="p">)</span> <span class="c1">// $$filterTerm instanceof Elastica\Filter\AbstractFilter</span>
+</span><span class='line'>    <span class="o">-&gt;</span><span class="na">setMinScore</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$search</span><span class="o">-&gt;</span><span class="na">setQuery</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<h4>QueryBuilder</h4>
+
+
+<p>In order to set <code>query</code>, <code>aggregation</code>, <code>suggest</code> and <code>facet</code> query parts, you can create the corresponding classes like</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">setQuery</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Elastica\Query\MatchAll</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">addAggregation</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Elastica\Aggregation\Range</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">setSuggest</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Elastica\Suggest</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Elastica\Suggest\Term</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;field&#39;</span><span class="p">)));</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">setFacets</span><span class="p">([</span><span class="k">new</span> <span class="nx">\Elastica\Facet\Range</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to create more complex queries use <a href="http://elastica.io/api/classes/Elastica.Query.Builder.html">QueryBuilder</a> to construct all of the different parts of your query. <code>QueryBuilder</code> is going to check, whether the method you want to use is available in your current elasticsearch version or not.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// version checks against latest DSL version</span>
+</span><span class='line'><span class="nv">$qb</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\QueryBuilder</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// version checks against 1.3 DSL version</span>
+</span><span class='line'><span class="nv">$qb</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\QueryBuilder</span><span class="p">(</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nx">\Elastica\QueryBuilder\Version\Version130</span><span class="p">()</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now just start to write your query as you would write the raw JSON. If your IDE is configured correctly you should experience a handy way to access all available methods in elasticsearch.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">setQuery</span><span class="p">(</span>
+</span><span class='line'>    <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">filtered</span><span class="p">(</span>
+</span><span class='line'>        <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">match_all</span><span class="p">(),</span>
+</span><span class='line'>        <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">bool</span><span class="p">()</span>
+</span><span class='line'>            <span class="o">-&gt;</span><span class="na">addMust</span><span class="p">(</span>
+</span><span class='line'>                <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">term</span><span class="p">([</span><span class="s1">&#39;field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;term&#39;</span><span class="p">])</span>
+</span><span class='line'>            <span class="p">)</span>
+</span><span class='line'>            <span class="o">-&gt;</span><span class="na">addMustNot</span><span class="p">(</span>
+</span><span class='line'>                <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">exists</span><span class="p">(</span><span class="s1">&#39;field1&#39;</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">)</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">addAggregation</span><span class="p">(</span>
+</span><span class='line'>    <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">aggregation</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">date_histogram</span><span class="p">(</span><span class="s1">&#39;histogram&#39;</span><span class="p">,</span> <span class="s1">&#39;date_field&#39;</span><span class="p">,</span> <span class="s1">&#39;interval&#39;</span><span class="p">)</span>
+</span><span class='line'>        <span class="o">-&gt;</span><span class="na">addAggregation</span><span class="p">(</span>
+</span><span class='line'>            <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">aggregation</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">sum</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+</span><span class='line'>                <span class="o">-&gt;</span><span class="na">setField</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">)</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">setSuggest</span><span class="p">(</span><span class="k">new</span> <span class="nx">Suggest</span><span class="p">(</span>
+</span><span class='line'>    <span class="nv">$qb</span><span class="o">-&gt;</span><span class="na">suggest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">term</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;field&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Facets are not supported by QueryBuilder. You should really have a look into aggregations, they are much powerful then facets!</p>
+
+<h3 id="section-retrieve">Retrieve results</h3>
+
+
+<p>To execute your search query just choose one of the following methods:</p>
+
+<p><strong>count <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-count.html">API</a></strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$numberOfEntries</span> <span class="o">=</span> <span class="nv">$search</span><span class="o">-&gt;</span><span class="na">count</span><span class="p">();</span> <span class="c1">// returns int </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>search <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-body.html">API</a></strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$resultSet</span> <span class="o">=</span> <span class="nv">$search</span><span class="o">-&gt;</span><span class="na">search</span><span class="p">();</span> <span class="c1">// returns Elastica\ResultSet</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>scan and scroll <a href="http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/scan-scroll.html">API</a></strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$search</span><span class="o">-&gt;</span><span class="na">scanAndScroll</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$scrollId</span> <span class="o">=&gt;</span> <span class="nv">$resultSet</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// ... handle Elastica\ResultSet</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In <code>$resultSet</code> all the resulting documents are stored. You can get them together with some statistics easily.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$results</span> <span class="o">=</span> <span class="nv">$resultSet</span><span class="o">-&gt;</span><span class="na">getResults</span><span class="p">();</span>
+</span><span class='line'><span class="nv">$totalResults</span> <span class="o">=</span> <span class="nv">$resultSet</span><span class="o">-&gt;</span><span class="na">getTotalHits</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$results</span> <span class="k">as</span> <span class="nv">$result</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// $result instanceof Elastica\Result</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>or process aggregation result</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// Get aggregations from the result of the search query</span>
+</span><span class='line'><span class="nv">$aggregations</span> <span class="o">=</span> <span class="nv">$resultSet</span><span class="o">-&gt;</span><span class="na">getAggregations</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Notice, that &quot;range&quot; is the same name you chose</span>
+</span><span class='line'><span class="c1">// when the aggregation was defined.</span>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$aggregations</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">][</span><span class="s1">&#39;buckets&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$bucket</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// ... handle array $bucket </span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+  
+    <footer>
+      
+      
+        <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/getting-started/search-documents.html" data-via="" data-counturl="http://Elastica.io/getting-started/search-documents.html" >Tweet</a>
+  
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2015/10/18/release-2-dot-3-1/">Release 2.3.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation/">Elastica 2.3.0 Broken Backward Compatibility Explanation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/09/15/release-2-dot-3-0/">Release 2.3.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/08/10/release-2-dot-2-1/">Release 2.2.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2015/07/08/release-2-dot-2-0/">Release 2.2.0</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/116483615197289019288?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - ruflin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
