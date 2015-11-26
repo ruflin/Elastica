@@ -39,7 +39,7 @@ All notable changes to this project will be documented in this file based on the
 - Remove BulkUdp and everything related to it
 - Remove Facets and everything related to it
 - Remove ansible scripts for tests setup and Vagrantfile as not needed anymore.
-  All is based on docker contaienrs now
+  All is based on docker containers now
 - Support for PHP 5.3 removed
 - Elastica\Reponse::getError() now returns and array instead of a string
 - Move function \Elastica\Index\Status::getAliases() and hasAlias(...) to \Elastica\Index::getAliases()
