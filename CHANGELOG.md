@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 
 ### Bugfixes
+- Function score query: corrected the `score_method` `average` to `avg` #975 
 
 ### Added
 
@@ -52,7 +53,6 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 - Fixed GeoShapeProvided relation parameter position
-- Function score query: corrected the `score_method` `average` to `avg` #975 
 
 ### Added
 - Elastica\Reponse::getErrorMessage was added as getError is now an object
