@@ -3,6 +3,9 @@ sudo: required
 services:
   - docker
 
+branches:
+  only:
+    - master
 
 env:
   - TARGET="54"
