@@ -51,14 +51,14 @@ class NestedTest extends BaseAggregationTest
     {
         $agg = new Nested('resellers', 'resellers');
         $min = new Min('min_price');
-        $min->setField('price');
+        $min->setField('resellers.price');
         $agg->addAggregation($min);
 
         $query = new Query();
         $query->addAggregation($agg);
+
         $results = $this->_getIndexForTest()->search($query)->getAggregation('resellers');
 
-        $this->es20('Failed asserting that null matches expected 4.9800000000000004.');
         $this->assertEquals(4.98, $results['min_price']['value']);
     }
 }
