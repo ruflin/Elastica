@@ -7,12 +7,13 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 
 ### Bugfixes
-- Function score query: corrected the `score_method` `average` to `avg` #975 
+- Function score query: corrected the `score_method` `average` to `avg` #975
 
 ### Added
 - Elastica\Query\MultiMatch::setFuzziness now supports being set to `AUTO` with the const `MultiMatch::FUZZINESS_AUTO`
 
 ### Improvements
+- Update build dependency to elasticsearch 2.1.0 #997
 
 ### Deprecated
 
