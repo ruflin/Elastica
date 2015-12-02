@@ -24,6 +24,8 @@ class MultiMatch extends AbstractQuery
     const ZERO_TERM_NONE = 'none';
     const ZERO_TERM_ALL = 'all';
 
+    const FUZZINESS_AUTO = 'AUTO';
+
     /**
      * Sets the query.
      *
@@ -143,13 +145,13 @@ class MultiMatch extends AbstractQuery
     /**
      * Set fuzziness.
      *
-     * @param float $fuzziness
+     * @param float|string $fuzziness
      *
      * @return $this
      */
     public function setFuzziness($fuzziness)
     {
-        return $this->setParam('fuzziness', (float) $fuzziness);
+        return $this->setParam('fuzziness', $fuzziness);
     }
 
     /**
