@@ -69,6 +69,13 @@ class Search
     protected $_client;
 
     /**
+     * Only return suggest result.
+     *
+     * @var boolean
+     */
+    protected $_onlySuggest;
+
+    /**
      * Constructs search object.
      *
      * @param \Elastica\Client $client Client object
@@ -418,6 +425,10 @@ class Search
             $path .= '/'.implode(',', $types);
         }
 
+        if (true == $this->_onlySuggest) {
+            return $path.= '/_suggest';
+        }
+
         // Add full path based on indices and types -> could be all
         return $path.'/_search';
     }
@@ -447,6 +458,10 @@ class Search
             unset($params[self::OPTION_SCROLL_ID]);
         } else {
             $data = $query->toArray();
+        }
+
+        if (true == $this->_onlySuggest) {
+            $data = $data['suggest'];
         }
 
         $response = $this->getClient()->request(
@@ -520,6 +535,15 @@ class Search
     public function setSuggest(Suggest $suggest)
     {
         return $this->setOptionsAndQuery(array(self::OPTION_SEARCH_TYPE_SUGGEST => 'suggest'), $suggest);
+    }
+
+    /**
+     * @param boolean $onlySuggest
+     */
+    public function onlySuggest($onlySuggest = false)
+    {
+        $this->_onlySuggest = $onlySuggest;
+        return $this;
     }
 
     /**
