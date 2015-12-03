@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file based on the
 - Elastica\Query\MultiMatch::setFuzziness now supports being set to `AUTO` with the const `MultiMatch::FUZZINESS_AUTO`
 
 ### Improvements
+- More info on Elastica\Exception\PartialShardFailureException. Not just number of failed shards.
 
 ### Deprecated
 

@@ -3,6 +3,7 @@ namespace Elastica\Test\Exception;
 
 use Elastica\Document;
 use Elastica\Exception\PartialShardFailureException;
+use Elastica\JSON;
 use Elastica\Query;
 use Elastica\ResultSet;
 
@@ -50,6 +51,10 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
         } catch (PartialShardFailureException $e) {
             $resultSet = new ResultSet($e->getResponse(), $query);
             $this->assertEquals(0, count($resultSet->getResults()));
+
+            $message = JSON::parse($e->getMessage());
+            $this->assertTrue(isset($message['failures']), 'Failures are absent');
+            $this->assertGreaterThan(0, count($message['failures']), 'Failures are empty');
         }
     }
 }
