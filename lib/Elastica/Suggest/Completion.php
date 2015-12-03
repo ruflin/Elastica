@@ -23,4 +23,16 @@ class Completion extends AbstractSuggest
     {
         return $this->setParam('fuzzy', $fuzzy);
     }
+
+    /**
+     * Set Context parameter
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/suggester-context.html
+     *
+     * @param array @category
+     */
+    public function setContext(array $category)
+    {
+        return $this->setParam('context', $category);
+    }
 }
