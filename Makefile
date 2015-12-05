@@ -47,11 +47,7 @@ dependencies:
 
 .PHONY: phpunit
 phpunit:
-	EXIT_STATUS=0 ; \
-	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit || EXIT_STATUS=$$? ; \
-	phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional || EXIT_STATUS=$$? ; \
-	phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown || EXIT_STATUS=$$? ; \
-	exit $$EXIT_STATUS
+	phpunit -c test/ --coverage-clover build/coverage/coverage.xml --group unit,functional,shutdown
 
 .PHONY: tests
 tests:
