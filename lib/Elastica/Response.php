@@ -205,7 +205,7 @@ class Response
             } else {
                 try {
                     if ($this->getJsonBigintConversion()) {
-                        $response = JSON::parse($response, false, 512, JSON_BIGINT_AS_STRING);
+                        $response = JSON::parse($response, true, 512, JSON_BIGINT_AS_STRING);
                     } else {
                         $response = JSON::parse($response);
                     }

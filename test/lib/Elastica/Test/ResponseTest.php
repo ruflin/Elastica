@@ -201,6 +201,23 @@ class ResponseTest extends BaseTest
     }
 
     /**
+     * @group unit
+     */
+    public function testDecodeResponseWithBigIntSetToTrue()
+    {
+        $response = new Response(json_encode(array(
+            'took' => 213,
+            'items' => array(
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200)),
+                array('index' => array('_index' => 'rohlik', '_type' => 'grocery', '_id' => '707893', '_version' => 4, 'status' => 200)),
+            ),
+        )));
+        $response->setJsonBigintConversion(true);
+
+        $this->assertTrue(is_array($response->getData()));
+    }
+
+    /**
      * @group functional
      */
     public function testGetDataEmpty()

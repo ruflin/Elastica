@@ -123,7 +123,7 @@ class Client
         $params = array();
         $params['config'] = array();
         foreach ($config as $key => $value) {
-            if (in_array($key, array('curl', 'headers', 'url'))) {
+            if (in_array($key, array('bigintConversion', 'curl', 'headers', 'url'))) {
                 $params['config'][$key] = $value;
             } else {
                 $params[$key] = $value;
