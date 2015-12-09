@@ -261,13 +261,14 @@ class Mapping
     /**
      * Submits the mapping and sends it to the server.
      *
+     * @param array $query Query string parameters to send with mapping
      * @return \Elastica\Response Response object
      */
-    public function send()
+    public function send(array $query = array())
     {
         $path = '_mapping';
 
-        return $this->getType()->request($path, Request::PUT, $this->toArray());
+        return $this->getType()->request($path, Request::PUT, $this->toArray(), $query);
     }
 
     /**

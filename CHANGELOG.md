@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 - Elastica\Query\MultiMatch::setFuzziness now supports being set to `AUTO` with the const `MultiMatch::FUZZINESS_AUTO`
+- Elastica\Type\Mapping::send now accepts query string parameters to send along with the mapping request
 
 ### Improvements
 
