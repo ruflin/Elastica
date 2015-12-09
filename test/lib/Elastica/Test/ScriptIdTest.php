@@ -2,14 +2,15 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
 use Elastica\Query;
+use Elastica\Script;
 use Elastica\ScriptFile;
+use Elastica\ScriptId;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 use Elastica\Type\Mapping;
 
-class ScriptFileTest extends BaseTest
+class ScriptIdTest extends BaseTest
 {
     /**
      * @group functional
@@ -17,6 +18,10 @@ class ScriptFileTest extends BaseTest
     public function testSearch()
     {
         $index = $this->_createIndex();
+
+        $script = new Script("doc['location'].arcDistanceInKm(lat,lon)");
+        $index->getClient()->addIndexedScript($script, 'groovy', 'indexedCalculateDistance');
+
         $type = $index->getType('test');
 
         $type->setMapping(new Mapping(null, array(
@@ -30,21 +35,12 @@ class ScriptFileTest extends BaseTest
 
         $index->refresh();
 
-        $scriptFile = new ScriptFile('calculate-distance', array('lat' => 48.858859, 'lon' => 2.3470599));
+        $scriptId = new ScriptId('indexedCalculateDistance', array('lat' => 48.858859, 'lon' => 2.3470599));
 
         $query = new Query();
-        $query->addScriptField('distance', $scriptFile);
+        $query->addScriptField('distance', $scriptId);
 
-        try {
-            $resultSet = $type->search($query);
-        } catch (ResponseException $e) {
-            if (strpos($e->getMessage(), 'Unable to find on disk script') !== false) {
-                $this->markTestIncomplete('calculate-distance script not installed?');
-            }
-
-            throw $e;
-        }
-
+        $resultSet = $type->search($query);
         $results = $resultSet->getResults();
 
         $this->assertEquals(2, $resultSet->count());
@@ -57,30 +53,30 @@ class ScriptFileTest extends BaseTest
      */
     public function testConstructor()
     {
-        $value = 'calculate-distance.groovy';
-        $scriptFile = new ScriptFile($value);
+        $value = 'indexedCalculateDistance';
+        $scriptId = new ScriptId($value);
 
         $expected = array(
-            'script_file' => $value,
+            'script_id' => $value,
         );
-        $this->assertEquals($value, $scriptFile->getScript());
-        $this->assertEquals($expected, $scriptFile->toArray());
+        $this->assertEquals($value, $scriptId->getScript());
+        $this->assertEquals($expected, $scriptId->toArray());
 
         $params = array(
             'param1' => 'one',
             'param2' => 10,
         );
 
-        $scriptFile = new ScriptFile($value, $params);
+        $scriptId = new ScriptId($value, $params);
 
         $expected = array(
-            'script_file' => $value,
+            'script_id' => $value,
             'params' => $params,
         );
 
-        $this->assertEquals($value, $scriptFile->getScript());
-        $this->assertEquals($params, $scriptFile->getParams());
-        $this->assertEquals($expected, $scriptFile->toArray());
+        $this->assertEquals($value, $scriptId->getScript());
+        $this->assertEquals($params, $scriptId->getParams());
+        $this->assertEquals($expected, $scriptId->toArray());
     }
 
     /**
@@ -88,17 +84,17 @@ class ScriptFileTest extends BaseTest
      */
     public function testCreateString()
     {
-        $string = 'calculate-distance.groovy';
-        $scriptFile = ScriptFile::create($string);
+        $string = 'indexedCalculateDistance';
+        $scriptId = ScriptId::create($string);
 
-        $this->assertInstanceOf('Elastica\ScriptFile', $scriptFile);
+        $this->assertInstanceOf('Elastica\ScriptId', $scriptId);
 
-        $this->assertEquals($string, $scriptFile->getScript());
+        $this->assertEquals($string, $scriptId->getScript());
 
         $expected = array(
-            'script_file' => $string,
+            'script_id' => $string,
         );
-        $this->assertEquals($expected, $scriptFile->toArray());
+        $this->assertEquals($expected, $scriptId->toArray());
     }
 
     /**
@@ -106,12 +102,12 @@ class ScriptFileTest extends BaseTest
      */
     public function testCreateScriptFile()
     {
-        $data = new ScriptFile('calculate-distance.groovy');
+        $data = new ScriptId('indexedCalculateDistance');
 
-        $scriptFile = ScriptFile::create($data);
+        $scriptId = ScriptId::create($data);
 
-        $this->assertInstanceOf('Elastica\ScriptFile', $scriptFile);
-        $this->assertSame($data, $scriptFile);
+        $this->assertInstanceOf('Elastica\ScriptId', $scriptId);
+        $this->assertSame($data, $scriptId);
     }
 
     /**
@@ -119,24 +115,24 @@ class ScriptFileTest extends BaseTest
      */
     public function testCreateArray()
     {
-        $string = 'calculate-distance.groovy';
+        $string = 'indexedCalculateDistance';
         $params = array(
             'param1' => 'one',
             'param2' => 1,
         );
         $array = array(
-            'script_file' => $string,
+            'script_id' => $string,
             'params' => $params,
         );
 
-        $scriptFile = ScriptFile::create($array);
+        $scriptId = ScriptId::create($array);
 
-        $this->assertInstanceOf('Elastica\ScriptFile', $scriptFile);
+        $this->assertInstanceOf('Elastica\ScriptId', $scriptId);
 
-        $this->assertEquals($string, $scriptFile->getScript());
-        $this->assertEquals($params, $scriptFile->getParams());
+        $this->assertEquals($string, $scriptId->getScript());
+        $this->assertEquals($params, $scriptId->getParams());
 
-        $this->assertEquals($array, $scriptFile->toArray());
+        $this->assertEquals($array, $scriptId->toArray());
     }
 
     /**
@@ -172,12 +168,12 @@ class ScriptFileTest extends BaseTest
      */
     public function testSetScript()
     {
-        $scriptFile = new ScriptFile('foo');
-        $this->assertEquals('foo', $scriptFile->getScript());
+        $scriptId = new ScriptId('foo');
+        $this->assertEquals('foo', $scriptId->getScript());
 
-        $scriptFile->setScript('bar');
-        $this->assertEquals('bar', $scriptFile->getScript());
+        $scriptId->setScript('bar');
+        $this->assertEquals('bar', $scriptId->getScript());
 
-        $this->assertInstanceOf('Elastica\ScriptFile', $scriptFile->setScript('foo'));
+        $this->assertInstanceOf('Elastica\ScriptId', $scriptId->setScript('foo'));
     }
 }

@@ -2,12 +2,12 @@
 namespace Elastica;
 
 /**
- * Script objects, containing script internals.
+ * Script objects, containing script id.
  *
- * @author avasilenko <aa.vasilenko@gmail.com>
+ * @author Nicolas Assing <nicolas.assing@gmail.com>
  *
  * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html
  */
-class Script extends AbstractScript
+class ScriptId extends AbstractScript
 {
 }

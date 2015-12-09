@@ -1160,4 +1160,19 @@ class ClientTest extends BaseTest
         } catch (InvalidException $ex) {
         }
     }
+
+    /**
+     * @group unit
+     */
+    public function testAddIndexedScript()
+    {
+        $client = $this->_getClient();
+        $script = new Script('my_script');
+        $client->addIndexedScript($script, 'groovy', 'indexedScriptId');
+        $response = $client->getIndexedScript('groovy', 'indexedScriptId');
+        $data = $response->getData();
+        $this->assertEquals($data['lang'], 'groovy');
+        $this->assertEquals($data['_id'], 'indexedScriptId');
+        $this->assertEquals($data['script'], 'my_script');
+    }
 }
