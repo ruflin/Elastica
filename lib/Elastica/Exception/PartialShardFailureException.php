@@ -23,6 +23,6 @@ class PartialShardFailureException extends ResponseException
         parent::__construct($request, $response);
 
         $shardsStatistics = $response->getShardsStatistics();
-        $this->message = JSON::stringify($shardsStatistics['failed']);
+        $this->message = JSON::stringify($shardsStatistics);
     }
 }

@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file based on the
 - Elastica\Type\Mapping::send now accepts query string parameters to send along with the mapping request
 
 ### Improvements
+- More info on Elastica\Exception\PartialShardFailureException. Not just number of failed shards.
 
 ### Deprecated
 
