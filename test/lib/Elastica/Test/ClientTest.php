@@ -1,6 +1,7 @@
 <?php
 namespace Elastica\Test;
 
+use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\Connection\HttpException;
@@ -1159,5 +1160,15 @@ class ClientTest extends BaseTest
             $this->fail('Header name is not a string but exception not thrown');
         } catch (InvalidException $ex) {
         }
+    }
+
+    /**
+     * @group unit
+     */
+    public function testPassBigIntSettingsToConnectionConfig()
+    {
+        $client = new Client(['bigintConversion' => true]);
+
+        $this->assertTrue($client->getConnection()->getConfig('bigintConversion'));
     }
 }
