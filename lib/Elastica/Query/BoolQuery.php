@@ -2,6 +2,7 @@
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
+use Elastica\Filter\AbstractFilter;
 
 /**
  * Bool query.
@@ -46,6 +47,18 @@ class BoolQuery extends AbstractQuery
     public function addMustNot($args)
     {
         return $this->_addQuery('must_not', $args);
+    }
+
+    /**
+     * Sets the filter.
+     *
+     * @param \Elastica\Filter\AbstractFilter $filter Filter object
+     *
+     * @return $this
+    */
+    public function addFilter(AbstractFilter $filter)
+    {
+        return $this->addParam('filter', $filter);
     }
 
     /**

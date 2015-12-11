@@ -102,13 +102,14 @@ class MoreLikeThisTest extends BaseTest
 
         $mltQuery->setLike($doc);
 
-        $query = new Query\Filtered($mltQuery);
+        $query = new Query\BoolQuery();
+        $query->addMust($mltQuery);
         // Return just the visible similar
         $filter = new BoolFilter();
         $filterTerm = new Term();
         $filterTerm->setTerm('visible', true);
         $filter->addMust($filterTerm);
-        $query->setFilter($filter);
+        $query->addFilter($filter);
 
         $resultSet = $type->search($query);
         $this->assertEquals(2, $resultSet->count());

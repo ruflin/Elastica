@@ -4,8 +4,7 @@ namespace Elastica\Test\Filter;
 use Elastica\Document;
 use Elastica\Filter\AbstractGeoShape;
 use Elastica\Filter\GeoShapeProvided;
-use Elastica\Query\Filtered;
-use Elastica\Query\MatchAll;
+use Elastica\Query\BoolQuery;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type\Mapping;
 
@@ -61,7 +60,8 @@ class GeoShapeProvidedTest extends BaseTest
 
         $this->assertEquals($expected, $gsp->toArray());
 
-        $query = new Filtered(new MatchAll(), $gsp);
+        $query = new BoolQuery();
+        $query->addFilter($gsp);
         $results = $type->search($query);
 
         $this->assertEquals(1, $results->count());

@@ -14,11 +14,14 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 - Elastica\Query\MultiMatch::setFuzziness now supports being set to `AUTO` with the const `MultiMatch::FUZZINESS_AUTO`
 - Elastica\Type\Mapping::send now accepts query string parameters to send along with the mapping request
+- Elastica\Query\BoolQuery::addFilter
 
 ### Improvements
 - More info on Elastica\Exception\PartialShardFailureException. Not just number of failed shards.
 
 ### Deprecated
+- Elastica\Query\Filtered triggers E_USER_DEPRECATED error because filtered query is deprecated since ES 2.0.0-beta1. Use BoolQuery instead.
+- Elastica\QueryBuilder\DSL\Query::filtered() triggers E_USER_DEPRECATED error because filtered query is deprecated since ES 2.0.0-beta1. Use bool() instead.
 
 
 

@@ -9,6 +9,28 @@ use Elastica\Test\Base as BaseTest;
 
 class FilteredTest extends BaseTest
 {
+
+    private $errors = [];
+
+    private function setErrorHandler()
+    {
+        set_error_handler(function () {
+            $this->errors[] = func_get_args();
+        });
+    }
+
+    private function restoreErrorHandler()
+    {
+        restore_error_handler();
+
+        if (count($this->errors) > 0) {
+            $this->assertCount(1, $this->errors);
+            $this->assertEquals(E_USER_DEPRECATED, $this->errors[0][0]);
+            $this->assertEquals('Use BoolQuery instead. Filtered query is deprecated since ES 2.0.0-beta1 and this class will be removed in further Elastica releases.', $this->errors[0][1]);
+            $this->errors = [];
+        }
+    }
+
     /**
      * @group functional
      */
@@ -22,6 +44,8 @@ class FilteredTest extends BaseTest
             new Document(2, array('id' => 2, 'email' => 'test@test.com', 'username' => 'peter', 'test' => array('2', '3', '5'))),
         ));
 
+        $index->refresh();
+
         $queryString = new QueryString('test*');
 
         $filter1 = new Term();
@@ -30,9 +54,10 @@ class FilteredTest extends BaseTest
         $filter2 = new Term();
         $filter2->setTerm('username', 'qwerqwer');
 
+        $this->setErrorHandler();
         $query1 = new Filtered($queryString, $filter1);
+        $this->restoreErrorHandler();
         $query2 = new Filtered($queryString, $filter2);
-        $index->refresh();
 
         $resultSet = $type->search($queryString);
         $this->assertEquals(2, $resultSet->count());
@@ -57,7 +82,9 @@ class FilteredTest extends BaseTest
         $filter2 = new Term();
         $filter2->setTerm('username', 'qwerqwer');
 
+        $this->setErrorHandler();
         $query1 = new Filtered($queryString, $filter1);
+        $this->restoreErrorHandler();
         $query2 = new Filtered($queryString, $filter2);
 
         $this->assertEquals($query1->getQuery(), $queryString);
@@ -94,7 +121,9 @@ class FilteredTest extends BaseTest
         $filter = new Term();
         $filter->setTerm('username', 'peter');
 
+        $this->setErrorHandler();
         $query = new Filtered(null, $filter);
+        $this->restoreErrorHandler();
 
         $resultSet = $type->search($query);
         $this->assertEquals(1, $resultSet->count());
@@ -113,10 +142,13 @@ class FilteredTest extends BaseTest
         $doc = new Document(2, array('id' => 2, 'email' => 'test@test.com', 'username' => 'peter', 'test' => array('2', '3', '5')));
         $type->addDocument($doc);
 
+        $index->refresh();
+
         $queryString = new QueryString('hans*');
 
+        $this->setErrorHandler();
         $query = new Filtered($queryString);
-        $index->refresh();
+        $this->restoreErrorHandler();
 
         $resultSet = $type->search($query);
         $this->assertEquals(1, $resultSet->count());

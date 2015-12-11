@@ -3,8 +3,7 @@ namespace Elastica\Test\Filter;
 
 use Elastica\Filter\AbstractGeoShape;
 use Elastica\Filter\GeoShapePreIndexed;
-use Elastica\Query\Filtered;
-use Elastica\Query\MatchAll;
+use Elastica\Query\BoolQuery;
 use Elastica\Test\Base as BaseTest;
 
 class GeoShapePreIndexedTest extends BaseTest
@@ -81,7 +80,8 @@ class GeoShapePreIndexedTest extends BaseTest
 
         $this->assertEquals($expected, $gsp->toArray());
 
-        $query = new Filtered(new MatchAll(), $gsp);
+        $query = new BoolQuery();
+        $query->addFilter($gsp);
         $results = $index->getType('type')->search($query);
 
         $this->assertEquals(1, $results->count());
