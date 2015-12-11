@@ -4,7 +4,7 @@ namespace Elastica\Aggregation;
 /**
  * Class Terms.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
  */
 class Terms extends AbstractTermsAggregation
 {

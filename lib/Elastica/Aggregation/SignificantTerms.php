@@ -6,7 +6,7 @@ use Elastica\Filter\AbstractFilter;
 /**
  * Class SignificantTerms.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html
  */
 class SignificantTerms extends AbstractTermsAggregation
 {

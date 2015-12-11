@@ -4,7 +4,7 @@ namespace Elastica\Aggregation;
 /**
  * Class ValueCount.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html
  */
 class ValueCount extends AbstractAggregation
 {

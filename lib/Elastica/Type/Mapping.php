@@ -10,7 +10,7 @@ use Elastica\Type;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html
  */
 class Mapping
 {
@@ -89,7 +89,7 @@ class Mapping
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-meta.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-meta.html
      */
     public function setMeta(array $meta)
     {
@@ -116,7 +116,7 @@ class Mapping
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-source-field.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-source-field.html
      */
     public function setSource(array $source)
     {

@@ -8,7 +8,7 @@ use Elastica\Exception\InvalidException;
  *
  * @author Hung Tran <oohnoitz@gmail.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html
  */
 class DisMax extends AbstractQuery
 {

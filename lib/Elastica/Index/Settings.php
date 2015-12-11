@@ -9,14 +9,14 @@ use Elastica\Request;
 /**
  * Elastica index settings object.
  *
- * All settings listed in the update settings API (http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html)
- * can be changed on a running indices. To make changes like the merge policy (http://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html)
+ * All settings listed in the update settings API (https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html)
+ * can be changed on a running indices. To make changes like the merge policy (https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html)
  * the index has to be closed first and reopened after the call
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
  */
 class Settings
 {
@@ -63,7 +63,7 @@ class Settings
      *
      * @return array|string|null Settings data
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
      */
     public function get($setting = '')
     {
@@ -261,7 +261,7 @@ class Settings
      *
      * @return \Elastica\Response Response object
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
     public function setMergePolicyType($type)
     {
@@ -282,7 +282,7 @@ class Settings
      *
      * @return \Elastica\Response
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
     public function setMergePolicy($key, $value)
     {
@@ -300,7 +300,7 @@ class Settings
      *
      * @return string Refresh interval
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
     public function getMergePolicy($key)
     {

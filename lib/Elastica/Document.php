@@ -217,7 +217,7 @@ class Document extends AbstractUpdateAction
      * @param float  $latitude  Latitude value
      * @param float  $longitude Longitude value
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html
      *
      * @return $this
      */

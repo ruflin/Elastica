@@ -8,7 +8,7 @@ use Elastica\Query as BaseQuery;
  *
  * @author Fabian Vogler <fabian@equivalence.ch>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
  */
 class HasChild extends AbstractQuery
 {

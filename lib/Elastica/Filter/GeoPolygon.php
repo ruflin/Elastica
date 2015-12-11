@@ -6,7 +6,7 @@ namespace Elastica\Filter;
  *
  * @author Michael Maclean <mgdm@php.net>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-filter.html
  */
 class GeoPolygon extends AbstractFilter
 {

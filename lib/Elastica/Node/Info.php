@@ -9,7 +9,7 @@ use Elastica\Request;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-status.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-status.html
  */
 class Info
 {
@@ -113,7 +113,7 @@ class Info
      *
      * @return array plugin data
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      */
     public function getPlugins()
     {

@@ -6,7 +6,7 @@ namespace Elastica\Filter;
  *
  * @author Timothy Lamb <trash80@gmail.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-filter.html
  */
 class Regexp extends AbstractFilter
 {

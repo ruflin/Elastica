@@ -8,7 +8,7 @@ use Elastica\Exception\InvalidException;
  *
  * @author Fabian Vogler <fabian@equivalence.ch>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-bounding-box-filter.html
  */
 class GeoBoundingBox extends AbstractFilter
 {

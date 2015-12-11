@@ -110,7 +110,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Bulk\ResponseSet
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function updateDocuments(array $docs)
     {
@@ -128,7 +128,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Bulk\ResponseSet
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function addDocuments(array $docs)
     {
@@ -147,7 +147,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Response
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      */
     public function deleteByQuery($query, array $options = array())
     {
@@ -181,7 +181,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Bulk\ResponseSet
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function deleteDocuments(array $docs)
     {
@@ -201,7 +201,7 @@ class Index implements SearchableInterface
      *
      * @return array Server response
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
     public function optimize($args = array())
     {
@@ -213,7 +213,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Response Response object
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
      */
     public function refresh()
     {
@@ -223,7 +223,7 @@ class Index implements SearchableInterface
     /**
      * Creates a new index with the given arguments.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
      *
      * @param array      $args    OPTIONAL Arguments to use
      * @param bool|array $options OPTIONAL
@@ -339,7 +339,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Response Response object
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html
      */
     public function open()
     {
@@ -351,7 +351,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Response Response object
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html
      */
     public function close()
     {
@@ -386,7 +386,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Response Response
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html
      */
     public function addAlias($name, $replace = false)
     {
@@ -413,7 +413,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Response Response
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html
      */
     public function removeAlias($name)
     {
@@ -458,7 +458,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Response Response object
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-clearcache.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-clearcache.html
      */
     public function clearCache()
     {
@@ -474,7 +474,7 @@ class Index implements SearchableInterface
      *
      * @return Response Response object
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-flush.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-flush.html
      */
     public function flush($refresh = false)
     {
@@ -490,7 +490,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Response Response object
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
      */
     public function setSettings(array $data)
     {
@@ -524,7 +524,7 @@ class Index implements SearchableInterface
      *
      * @return array Server response
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html
      */
     public function analyze($text, $args = array())
     {

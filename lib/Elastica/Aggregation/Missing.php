@@ -4,7 +4,7 @@ namespace Elastica\Aggregation;
 /**
  * Class Missing.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-missing-aggregation.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-missing-aggregation.html
  */
 class Missing extends AbstractAggregation
 {

@@ -6,7 +6,7 @@ use Elastica\Index as ElasticaIndex;
 /**
  * Class Indices.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-indices-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-indices-filter.html
  */
 class Indices extends AbstractFilter
 {

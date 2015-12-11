@@ -7,7 +7,7 @@ use Elastica\Script;
 /**
  * Class FunctionScore.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
  */
 class FunctionScore extends AbstractQuery
 {

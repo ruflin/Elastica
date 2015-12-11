@@ -6,7 +6,7 @@ namespace Elastica\Filter;
  *
  * @author Lee Parker, Nicolas Ruflin <spam@ruflin.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-not-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-not-filter.html
  */
 class BoolNot extends AbstractFilter
 {

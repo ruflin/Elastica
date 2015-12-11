@@ -36,7 +36,7 @@ use Elastica\QueryBuilder\DSL;
  *
  * @author Manuel Andreo Garcia <andreo.garcia@googlemail.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations.html
  */
 class Aggregation implements DSL
 {
@@ -53,7 +53,7 @@ class Aggregation implements DSL
     /**
      * min aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-min-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-min-aggregation.html
      *
      * @param string $name
      *
@@ -67,7 +67,7 @@ class Aggregation implements DSL
     /**
      * max aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-max-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-max-aggregation.html
      *
      * @param string $name
      *
@@ -81,7 +81,7 @@ class Aggregation implements DSL
     /**
      * sum aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html
      *
      * @param string $name
      *
@@ -95,7 +95,7 @@ class Aggregation implements DSL
     /**
      * avg aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html
      *
      * @param string $name
      *
@@ -109,7 +109,7 @@ class Aggregation implements DSL
     /**
      * stats aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html
      *
      * @param string $name
      *
@@ -123,7 +123,7 @@ class Aggregation implements DSL
     /**
      * extended stats aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-extendedstats-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-extendedstats-aggregation.html
      *
      * @param string $name
      *
@@ -137,7 +137,7 @@ class Aggregation implements DSL
     /**
      * value count aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html
      *
      * @param string $name
      * @param string $field
@@ -152,7 +152,7 @@ class Aggregation implements DSL
     /**
      * percentiles aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html
      *
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
@@ -167,7 +167,7 @@ class Aggregation implements DSL
     /**
      * percentile ranks aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-rank-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-rank-aggregation.html
      *
      * @param string $name
      */
@@ -179,7 +179,7 @@ class Aggregation implements DSL
     /**
      * cardinality aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html
      *
      * @param string $name
      *
@@ -193,7 +193,7 @@ class Aggregation implements DSL
     /**
      * geo bounds aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html
      *
      * @param string $name
      */
@@ -205,7 +205,7 @@ class Aggregation implements DSL
     /**
      * top hits aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
      *
      * @param string $name
      *
@@ -219,7 +219,7 @@ class Aggregation implements DSL
     /**
      * scripted metric aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-scripted-metric-aggregation.html
      *
      * @param string      $name
      * @param string|null $initScript
@@ -237,7 +237,7 @@ class Aggregation implements DSL
     /**
      * global aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html
      *
      * @param string $name
      *
@@ -251,7 +251,7 @@ class Aggregation implements DSL
     /**
      * filter aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
      *
      * @param string         $name
      * @param AbstractFilter $filter
@@ -266,7 +266,7 @@ class Aggregation implements DSL
     /**
      * filters aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filters-aggregation.html
      *
      * @param string $name
      *
@@ -280,7 +280,7 @@ class Aggregation implements DSL
     /**
      * missing aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-missing-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-missing-aggregation.html
      *
      * @param string $name
      * @param string $field
@@ -295,7 +295,7 @@ class Aggregation implements DSL
     /**
      * nested aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-nested-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-nested-aggregation.html
      *
      * @param string $name
      * @param string $path the nested path for this aggregation
@@ -310,7 +310,7 @@ class Aggregation implements DSL
     /**
      * reverse nested aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html
      *
      * @param string $name The name of this aggregation
      * @param string $path Optional path to the nested object for this aggregation. Defaults to the root of the main document.
@@ -325,7 +325,7 @@ class Aggregation implements DSL
     /**
      * children aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-children-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-children-aggregation.html
      *
      * @param string $name
      */
@@ -337,7 +337,7 @@ class Aggregation implements DSL
     /**
      * terms aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
      *
      * @param string $name
      *
@@ -351,7 +351,7 @@ class Aggregation implements DSL
     /**
      * significant terms aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html
      *
      * @param string $name
      *
@@ -365,7 +365,7 @@ class Aggregation implements DSL
     /**
      * range aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-range-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-range-aggregation.html
      *
      * @param string $name
      *
@@ -379,7 +379,7 @@ class Aggregation implements DSL
     /**
      * date range aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html
      *
      * @param string $name
      *
@@ -393,7 +393,7 @@ class Aggregation implements DSL
     /**
      * ipv4 range aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html
      *
      * @param string $name
      * @param string $field
@@ -408,7 +408,7 @@ class Aggregation implements DSL
     /**
      * histogram aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html
      *
      * @param string $name     the name of this aggregation
      * @param string $field    the name of the field on which to perform the aggregation
@@ -424,7 +424,7 @@ class Aggregation implements DSL
     /**
      * date histogram aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html
      *
      * @param string $name     the name of this aggregation
      * @param string $field    the name of the field on which to perform the aggregation
@@ -440,7 +440,7 @@ class Aggregation implements DSL
     /**
      * geo distance aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html
      *
      * @param string       $name   the name if this aggregation
      * @param string       $field  the field on which to perform this aggregation
@@ -456,7 +456,7 @@ class Aggregation implements DSL
     /**
      * geohash grid aggregation.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html
      *
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation

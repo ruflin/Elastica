@@ -6,7 +6,7 @@ namespace Elastica;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-percolate.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-percolate.html
  */
 class Percolator
 {

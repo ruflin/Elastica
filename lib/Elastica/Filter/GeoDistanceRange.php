@@ -8,7 +8,7 @@ use Elastica\Exception\InvalidException;
  *
  * @author munkie
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-range-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-range-filter.html
  */
 class GeoDistanceRange extends AbstractGeoDistance
 {
