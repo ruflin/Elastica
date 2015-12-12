@@ -62,6 +62,7 @@ class StatusTest extends BaseTest
         $this->assertFalse($status->indexExists($indexName));
         $index->create();
 
+        usleep(10000);
         $status->refresh();
         $this->assertTrue($status->indexExists($indexName));
     }
