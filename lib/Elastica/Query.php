@@ -17,7 +17,7 @@ use Elastica\Suggest\AbstractSuggest;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
  */
 class Query extends Param
 {
@@ -165,7 +165,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
     public function setSort(array $sortArgs)
     {
@@ -179,7 +179,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
     public function addSort($sort)
     {
@@ -193,7 +193,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      */
     public function setHighlight(array $highlightArgs)
     {
@@ -207,7 +207,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      */
     public function addHighlight($highlight)
     {
@@ -249,7 +249,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-explain.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-explain.html
      */
     public function setExplain($explain = true)
     {
@@ -263,7 +263,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-version.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-version.html
      */
     public function setVersion($version = true)
     {
@@ -279,7 +279,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fields.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fields.html
      */
     public function setFields(array $fields)
     {
@@ -307,7 +307,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
      */
     public function setScriptFields($scriptFields)
     {
@@ -438,7 +438,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link   http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
+     * @link   https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
      */
     public function setSource($params)
     {
@@ -452,7 +452,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html
      */
     public function setPostFilter($filter)
     {

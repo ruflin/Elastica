@@ -6,7 +6,7 @@ namespace Elastica\Query;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
  */
 class Nested extends AbstractQuery
 {

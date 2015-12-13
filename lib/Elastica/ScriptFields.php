@@ -8,7 +8,7 @@ use Elastica\Exception\InvalidException;
  *
  * @author Sebastien Lavoie <github@lavoie.sl>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
  */
 class ScriptFields extends Param
 {

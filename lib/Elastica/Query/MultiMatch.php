@@ -8,7 +8,7 @@ namespace Elastica\Query;
  * @author Wong Wing Lun <luiges90@gmail.com>
  * @author Tristan Maindron <tmaindron@gmail.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
  */
 class MultiMatch extends AbstractQuery
 {

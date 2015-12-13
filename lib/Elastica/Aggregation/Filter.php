@@ -7,7 +7,7 @@ use Elastica\Filter\AbstractFilter;
 /**
  * Class Filter.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
  */
 class Filter extends AbstractAggregation
 {

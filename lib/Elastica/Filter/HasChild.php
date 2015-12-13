@@ -6,7 +6,7 @@ namespace Elastica\Filter;
  *
  * @author Fabian Vogler <fabian@equivalence.ch>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-filter.html
  */
 class HasChild extends AbstractFilter
 {

@@ -267,7 +267,7 @@ class Client
      * set inside the document, because for bulk settings documents,
      * documents can belong to any type and index
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
      *
@@ -295,7 +295,7 @@ class Client
      * set inside the document, because for bulk settings documents,
      * documents can belong to any type and index
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
      *
@@ -327,7 +327,7 @@ class Client
      *
      * @return \Elastica\Response
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      */
     public function updateDocument($id, $data, $index, $type, array $options = array())
     {
@@ -529,7 +529,7 @@ class Client
     /**
      * Deletes documents with the given ids, index, type from the index.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array                  $ids     Document ids
      * @param string|\Elastica\Index $index   Index name
@@ -576,7 +576,7 @@ class Client
      *         array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '2'))
      * );
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array $params Parameter array
      *
@@ -645,7 +645,7 @@ class Client
      *
      * @return \Elastica\Response Response object
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
     public function optimizeAll($args = array())
     {
@@ -657,7 +657,7 @@ class Client
      *
      * @return \Elastica\Response Response object
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
      */
     public function refreshAll()
     {

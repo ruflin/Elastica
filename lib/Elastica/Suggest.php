@@ -7,7 +7,7 @@ use Elastica\Suggest\AbstractSuggest;
 /**
  * Class Suggest.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
  */
 class Suggest extends Param
 {

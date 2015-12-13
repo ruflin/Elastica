@@ -6,7 +6,7 @@ namespace Elastica\Filter;
  *
  * @author Jasper van Wanrooy <jasper@vanwanrooy.net>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-filter.html
  */
 class Prefix extends AbstractFilter
 {

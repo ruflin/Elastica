@@ -201,7 +201,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html
      */
     public function setParent($parent)
     {

@@ -131,7 +131,7 @@ class Type implements SearchableInterface
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      *
      * @param \Elastica\Document|\Elastica\Script $data    Document with update data
      * @param array                               $options array of query params to use for query. For possible options check es api
@@ -168,7 +168,7 @@ class Type implements SearchableInterface
      *
      * @return \Elastica\Bulk\ResponseSet
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function updateDocuments(array $docs)
     {
@@ -186,7 +186,7 @@ class Type implements SearchableInterface
      *
      * @return \Elastica\Bulk\ResponseSet
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function addDocuments(array $docs)
     {
@@ -204,7 +204,7 @@ class Type implements SearchableInterface
      *
      * @return \Elastica\Bulk\ResponseSet
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function addObjects(array $objects)
     {
@@ -410,7 +410,7 @@ class Type implements SearchableInterface
      *
      * @return \Elastica\Bulk\ResponseSet
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function deleteDocuments(array $docs)
     {
@@ -424,7 +424,7 @@ class Type implements SearchableInterface
     /**
      * Deletes an entry by its unique identifier.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
      *
      * @param int|string $id      Document id
      * @param array      $options
@@ -474,7 +474,7 @@ class Type implements SearchableInterface
      *
      * @return \Elastica\Response
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      */
     public function deleteByQuery($query, array $options = array())
     {

@@ -4,7 +4,7 @@ namespace Elastica\Filter;
 /**
  * Returns child documents having parent docs matching the query.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-filter.html
  */
 class HasParent extends AbstractFilter
 {

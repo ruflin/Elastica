@@ -9,7 +9,7 @@ use Elastica\Exception\DeprecatedException;
  *
  * @author Raul Martinez, Jr <juneym@gmail.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html
  */
 class MoreLikeThis extends AbstractQuery
 {
@@ -31,7 +31,7 @@ class MoreLikeThis extends AbstractQuery
      * @param array $ids Document ids
      *
      * @deprecated Option "ids" deprecated as of ES 2.0.0-beta1 and will be removed in further Elastica releases. Use "like" instead.
-     
+
      * @return \Elastica\Query\MoreLikeThis Current object
      */
     public function setIds(array $ids)
@@ -57,7 +57,7 @@ class MoreLikeThis extends AbstractQuery
      * @param string $likeText
      *
      * @deprecated Option "like_text" deprecated as of ES 2.0.0-beta1 and will be removed at further Elastica releases. Use "like" instead.
-     
+
      * @return $this
      */
     public function setLikeText($likeText)

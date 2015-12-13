@@ -8,7 +8,7 @@ namespace Elastica\Filter;
  *
  * @author Bennie Krijger <benniekrijger@gmail.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-filter.html
  */
 class GeoShapePreIndexed extends AbstractGeoShape
 {

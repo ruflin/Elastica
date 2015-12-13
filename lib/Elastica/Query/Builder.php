@@ -12,7 +12,7 @@ trigger_error('This builder is deprecated and will be removed in further Elastic
  *
  * @author Chris Gedrim <chris@gedr.im>
  *
- * @link http://www.elastic.co/
+ * @link https://www.elastic.co/
  * @deprecated This builder is deprecated and will be removed in further Elastica releases. Use new Elastica\QueryBuilder instead.
  **/
 class Builder extends AbstractQuery
