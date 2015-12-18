@@ -353,7 +353,7 @@ class Bulk
         $path = $this->getPath();
         $data = $this->toString();
 
-        $response = $this->_client->request($path, Request::PUT, $data, $this->_requestParams);
+        $response = $this->_client->request($path, Request::POST, $data, $this->_requestParams);
 
         return $this->_processResponse($response);
     }
