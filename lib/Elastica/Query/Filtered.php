@@ -4,8 +4,12 @@ namespace Elastica\Query;
 use Elastica\Exception\InvalidException;
 use Elastica\Filter\AbstractFilter;
 
+trigger_error('Use BoolQuery instead. Filtered query is deprecated since ES 2.0.0-beta1 and this class will be removed in further Elastica releases.', E_USER_DEPRECATED);
+
 /**
  * Filtered query. Needs a query and a filter.
+ *
+ * @deprecated Use BoolQuery instead. Filtered query is deprecated since ES 2.0.0-beta1 and this class will be removed in further Elastica releases.
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

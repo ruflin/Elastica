@@ -42,7 +42,20 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'common_terms', 'Elastica\Query\Common', array('field', 'query', 0.001));
         $this->_assertImplemented($queryDSL, 'constant_score', 'Elastica\Query\ConstantScore', array(new Match()));
         $this->_assertImplemented($queryDSL, 'dis_max', 'Elastica\Query\DisMax', array());
+
+        $errors = array();
+        set_error_handler(function () use (&$errors) {
+            $errors[] = func_get_args();
+        });
+
         $this->_assertImplemented($queryDSL, 'filtered', 'Elastica\Query\Filtered', array(new Match(), new Exists('field')));
+
+        restore_error_handler();
+
+        $this->assertGreaterThanOrEqual(1, count($errors));
+        $this->assertEquals(E_USER_DEPRECATED, $errors[0][0]);
+        $this->assertEquals('Use bool() instead. Filtered query is deprecated since ES 2.0.0-beta1 and this method will be removed in further Elastica releases.', $errors[0][1]);
+
         $this->_assertImplemented($queryDSL, 'function_score', 'Elastica\Query\FunctionScore', array());
         $this->_assertImplemented($queryDSL, 'fuzzy', 'Elastica\Query\Fuzzy', array('field', 'type'));
         $this->_assertImplemented($queryDSL, 'has_child', 'Elastica\Query\HasChild', array(new Match()));
