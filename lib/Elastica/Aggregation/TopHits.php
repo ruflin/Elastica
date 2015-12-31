@@ -66,13 +66,13 @@ class TopHits extends AbstractAggregation
     /**
      * Allows to control how the _source field is returned with every hit.
      *
-     * @param array $fields
+     * @param array|bool $params Fields to be returned or false to disable source
      *
      * @return $this
      */
-    public function setSource(array $fields)
+    public function setSource($params)
     {
-        return $this->setParam('_source', $fields);
+        return $this->setParam('_source', $params);
     }
 
     /**
