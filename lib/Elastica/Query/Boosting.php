@@ -39,7 +39,7 @@ class Boosting extends AbstractQuery
     /**
      * Set the negative_boost parameter for this Boosting Query.
      *
-     * @param Float $negativeBoost
+     * @param float $negativeBoost
      *
      * @return $this
      */

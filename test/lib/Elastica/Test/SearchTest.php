@@ -578,7 +578,7 @@ class SearchTest extends BaseTest
         } catch (ResponseException $e) {
             $exception = $e;
         }
-        $error = $exception->getResponse()->getError();
+        $error = $exception->getResponse()->getFullError();
         $this->assertEquals('index_not_found_exception', $error['type']);
 
         $results = $search->search($query, array(Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true));

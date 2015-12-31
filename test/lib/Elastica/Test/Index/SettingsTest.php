@@ -231,7 +231,7 @@ class SettingsTest extends BaseTest
             $type->addDocument($doc2);
             $this->fail('Should throw exception because of read only');
         } catch (ResponseException $e) {
-            $error = $e->getResponse()->getError();
+            $error = $e->getResponse()->getFullError();
 
             $this->assertContains('cluster_block_exception', $error['type']);
             $this->assertContains('index write', $error['reason']);
@@ -333,7 +333,7 @@ class SettingsTest extends BaseTest
             $settings = $index->getSettings()->get();
             $this->fail('Should throw exception because of index not found');
         } catch (ResponseException $e) {
-            $error = $e->getResponse()->getError();
+            $error = $e->getResponse()->getFullError();
             $this->assertContains('index_not_found_exception', $error['type']);
         }
     }

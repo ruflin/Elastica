@@ -7,10 +7,11 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 
 ### Bugfixes
-- Function score query: corrected the `score_method` `average` to `avg` #975 
+- Function score query: corrected the `score_method` `average` to `avg` #975
 - Set `json_decode()` assoc parameter to true in `Elastica\Response` #1005
 - Add `bigintConversion` to keys passed to connection config in `Elastica\Client` #1005
 - Use POST instead of PUT to send bulk requests #1010
+- Revert getError changes in Response object and make it better BC compatible. See comment [here](https://github.com/ruflin/Elastica/commit/41a7a2075837320bc9bd3bca4150e05a1ec9a115#commitcomment-15136374).
 
 ### Added
 - Elastica\Query\MultiMatch::setFuzziness now supports being set to `AUTO` with the const `MultiMatch::FUZZINESS_AUTO`

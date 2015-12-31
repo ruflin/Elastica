@@ -9,8 +9,7 @@ use Elastica\Test\Base as BaseTest;
 
 class FilteredTest extends BaseTest
 {
-
-    private $errors = [];
+    private $errors = array();
 
     private function setErrorHandler()
     {
@@ -27,7 +26,7 @@ class FilteredTest extends BaseTest
             $this->assertCount(1, $this->errors);
             $this->assertEquals(E_USER_DEPRECATED, $this->errors[0][0]);
             $this->assertEquals('Use BoolQuery instead. Filtered query is deprecated since ES 2.0.0-beta1 and this class will be removed in further Elastica releases.', $this->errors[0][1]);
-            $this->errors = [];
+            $this->errors = array();
         }
     }
 

@@ -82,7 +82,7 @@ class BoolFilterTest extends BaseTest
      * @group unit
      * @dataProvider getTestToArrayData()
      *
-     * @param Bool  $bool
+     * @param bool  $bool
      * @param array $expectedArray
      */
     public function testToArray(BoolFilter $bool, $expectedArray)
