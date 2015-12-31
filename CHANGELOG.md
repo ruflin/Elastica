@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 
 ### Bugfixes
-- Function score query: corrected the `score_method` `average` to `avg` #975 
+- Function score query: corrected the `score_method` `average` to `avg` #975
 - Set `json_decode()` assoc parameter to true in `Elastica\Response` #1005
 - Add `bigintConversion` to keys passed to connection config in `Elastica\Client` #1005
 - Use POST instead of PUT to send bulk requests #1010
@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 - More info on Elastica\Exception\PartialShardFailureException. Not just number of failed shards.
+- Allow bool in TopHits::setSource function #1012
 
 ### Deprecated
 - Elastica\Query\Filtered triggers E_USER_DEPRECATED error because filtered query is deprecated since ES 2.0.0-beta1. Use BoolQuery instead.
