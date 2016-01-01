@@ -331,8 +331,7 @@ class Type implements SearchableInterface
      */
     public function createSearch($query = '', $options = null)
     {
-        $search = new Search($this->getIndex()->getClient());
-        $search->addIndex($this->getIndex());
+        $search = $this->getIndex()->createSearch();
         $search->addType($this);
         $search->setOptionsAndQuery($options, $query);
 

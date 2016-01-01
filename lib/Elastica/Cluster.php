@@ -7,7 +7,7 @@ use Elastica\Cluster\Settings;
 use Elastica\Exception\NotImplementedException;
 
 /**
- * Cluster informations for elasticsearch.
+ * Cluster information for elasticsearch.
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *

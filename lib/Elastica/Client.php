@@ -6,6 +6,8 @@ use Elastica\Bulk\Action;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\RuntimeException;
+use Elastica\ResultSet\Builder;
+use Elastica\ResultSet\BuilderInterface;
 use Elastica\Script\AbstractScript;
 use Psr\Log\LoggerInterface;
 
@@ -49,6 +51,11 @@ class Client
     protected $_callback = null;
 
     /**
+     * @var Connection\ConnectionPool
+     */
+    protected $_connectionPool = null;
+
+    /**
      * @var \Elastica\Request
      */
     protected $_lastRequest;
@@ -62,19 +69,23 @@ class Client
      * @var LoggerInterface
      */
     protected $_logger = null;
+
     /**
-     * @var Connection\ConnectionPool
+     * @var BuilderInterface
      */
-    protected $_connectionPool = null;
+    private $_resultSetBuilder;
 
     /**
      * Creates a new Elastica client.
      *
-     * @param array    $config   OPTIONAL Additional config options
+     * @param array $config OPTIONAL Additional config options
      * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
+     * @param BuilderInterface $resultSetBuilder
      */
-    public function __construct(array $config = array(), $callback = null)
+    public function __construct(array $config = array(), $callback = null, BuilderInterface $resultSetBuilder = null)
     {
+        $this->_resultSetBuilder = $resultSetBuilder ?: new Builder();
+
         $this->setConfig($config);
         $this->_callback = $callback;
         $this->_initConnections();
@@ -218,7 +229,7 @@ class Client
      */
     public function getIndex($name)
     {
-        return new Index($this, $name);
+        return new Index($this, $name, $this->_resultSetBuilder);
     }
 
     /**
@@ -721,5 +732,13 @@ class Client
         $this->_logger = $logger;
 
         return $this;
+    }
+
+    /**
+     * @return BuilderInterface
+     */
+    public function getResultSetBuilder()
+    {
+        return $this->_resultSetBuilder;
     }
 }

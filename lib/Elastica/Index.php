@@ -36,9 +36,7 @@ class Index implements SearchableInterface
      * All the communication to and from an index goes of this object
      *
      * @param \Elastica\Client $client Client object
-     * @param string           $name   Index name
-     *
-     * @throws \Elastica\Exception\InvalidException
+     * @param string $name Index name
      */
     public function __construct(Client $client, $name)
     {

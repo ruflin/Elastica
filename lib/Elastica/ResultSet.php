@@ -15,117 +15,45 @@ use Elastica\Exception\InvalidException;
 class ResultSet implements \Iterator, \Countable, \ArrayAccess
 {
     /**
-     * Class for the static create method to use.
-     *
-     * @var string
-     */
-    protected static $_class = 'Elastica\\ResultSet';
-
-    /**
      * Results.
      *
-     * @var array Results
+     * @var Result[] Results
      */
-    protected $_results = array();
+    private $_results = array();
 
     /**
      * Current position.
      *
      * @var int Current position
      */
-    protected $_position = 0;
+    private $_position = 0;
 
     /**
      * Response.
      *
      * @var \Elastica\Response Response object
      */
-    protected $_response = null;
+    private $_response;
 
     /**
      * Query.
      *
      * @var \Elastica\Query Query object
      */
-    protected $_query;
-
-    /**
-     * @var int
-     */
-    protected $_took = 0;
-
-    /**
-     * @var bool
-     */
-    protected $_timedOut = false;
-
-    /**
-     * @var int
-     */
-    protected $_totalHits = 0;
-
-    /**
-     * @var float
-     */
-    protected $_maxScore = 0;
+    private $_query;
 
     /**
      * Constructs ResultSet object.
      *
-     * @param \Elastica\Response $response Response object
-     * @param \Elastica\Query    $query    Query object
+     * @param Response $response Response object
+     * @param Query $query Query object
+     * @param Result[] $results
      */
-    public function __construct(Response $response, Query $query)
+    public function __construct(Response $response, Query $query, $results)
     {
-        $this->rewind();
-        $this->_init($response);
         $this->_query = $query;
-    }
-
-    /**
-     * Creates a new ResultSet object. Can be configured to return a different
-     * implementation of the ResultSet class.
-     *
-     * @param Response $response
-     * @param Query    $query
-     *
-     * @return ResultSet
-     */
-    public static function create(Response $response, Query $query)
-    {
-        $class = static::$_class;
-
-        return new $class($response, $query);
-    }
-
-    /**
-     * Sets the class to be used for the static create method.
-     *
-     * @param string $class
-     */
-    public static function setClass($class)
-    {
-        static::$_class = $class;
-    }
-
-    /**
-     * Loads all data into the results object (initialisation).
-     *
-     * @param \Elastica\Response $response Response object
-     */
-    protected function _init(Response $response)
-    {
         $this->_response = $response;
-        $result = $response->getData();
-        $this->_totalHits = isset($result['hits']['total']) ? $result['hits']['total'] : 0;
-        $this->_maxScore = isset($result['hits']['max_score']) ? $result['hits']['max_score'] : 0;
-        $this->_took = isset($result['took']) ? $result['took'] : 0;
-        $this->_timedOut = !empty($result['timed_out']);
-        if (isset($result['hits']['hits'])) {
-            foreach ($result['hits']['hits'] as $hit) {
-                $this->_results[] = new Result($hit);
-            }
-        }
+        $this->_results = $results;
     }
 
     /**
@@ -227,7 +155,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getTotalHits()
     {
-        return (int) $this->_totalHits;
+        return isset($result['hits']['total']) ? (int) $result['hits']['total'] : 0;
     }
 
     /**
@@ -237,7 +165,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getMaxScore()
     {
-        return (float) $this->_maxScore;
+        return isset($result['hits']['max_score']) ? (float) $result['hits']['max_score'] : 0;
     }
 
     /**
@@ -247,17 +175,17 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getTotalTime()
     {
-        return (int) $this->_took;
+        return isset($result['took']) ? $result['took'] : 0;
     }
 
     /**
-     * Returns true iff the query has timed out.
+     * Returns true if the query has timed out.
      *
      * @return bool Timed out
      */
     public function hasTimedOut()
     {
-        return (bool) $this->_timedOut;
+        return !empty($result['timed_out']);
     }
 
     /**
