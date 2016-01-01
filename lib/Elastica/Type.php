@@ -6,6 +6,7 @@ use Elastica\Exception\DeprecatedException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\RuntimeException;
+use Elastica\ResultSet\BuilderInterface;
 use Elastica\Script\AbstractScript;
 use Elastica\Type\Mapping;
 
@@ -324,17 +325,16 @@ class Type implements SearchableInterface
     /**
      * Create search object.
      *
-     * @param string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
-     * @param int|array                    $options OPTIONAL Limit or associative array of options (option=>value)
+     * @param string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
+     * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
+     * @param BuilderInterface $builder
      *
-     * @return \Elastica\Search
+     * @return Search
      */
-    public function createSearch($query = '', $options = null)
+    public function createSearch($query = '', $options = null, BuilderInterface $builder = null)
     {
-        $search = new Search($this->getIndex()->getClient());
-        $search->addIndex($this->getIndex());
+        $search = $this->getIndex()->createSearch($query, $options, $builder);
         $search->addType($this);
-        $search->setOptionsAndQuery($options, $query);
 
         return $search;
     }

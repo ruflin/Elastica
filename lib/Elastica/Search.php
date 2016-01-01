@@ -4,6 +4,8 @@ namespace Elastica;
 
 use Elastica\Exception\InvalidException;
 use Elastica\Filter\AbstractFilter;
+use Elastica\ResultSet\Builder;
+use Elastica\ResultSet\BuilderInterface;
 
 /**
  * Elastica search object.
@@ -40,6 +42,11 @@ class Search
     const OPTION_SEARCH_IGNORE_UNAVAILABLE = 'ignore_unavailable';
 
     /**
+     * @var BuilderInterface
+     */
+    private $_builder;
+
+    /**
      * Array of indices.
      *
      * @var array
@@ -74,9 +81,11 @@ class Search
      * Constructs search object.
      *
      * @param \Elastica\Client $client Client object
+     * @param BuilderInterface $builder
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, BuilderInterface $builder = null)
     {
+        $this->_builder = $builder ?: new Builder();
         $this->_client = $client;
     }
 
@@ -462,7 +471,7 @@ class Search
             $params
         );
 
-        return ResultSet::create($response, $query);
+        return $this->_builder->buildResultSet($response, $query);
     }
 
     /**
@@ -484,7 +493,7 @@ class Search
             $query->toArray(),
             array(self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_COUNT)
         );
-        $resultSet = ResultSet::create($response, $query);
+        $resultSet = $this->_builder->buildResultSet($response, $query);
 
         return $fullResult ? $resultSet : $resultSet->getTotalHits();
     }
@@ -555,5 +564,13 @@ class Search
     public function scanAndScroll($expiryTime = '1m', $sizePerShard = 1000)
     {
         return new ScanAndScroll($this, $expiryTime, $sizePerShard);
+    }
+
+    /**
+     * @return BuilderInterface
+     */
+    public function getResultSetBuilder()
+    {
+        return $this->_builder;
     }
 }

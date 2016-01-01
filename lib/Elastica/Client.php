@@ -49,6 +49,11 @@ class Client
     protected $_callback;
 
     /**
+     * @var Connection\ConnectionPool
+     */
+    protected $_connectionPool;
+
+    /**
      * @var \Elastica\Request
      */
     protected $_lastRequest;
@@ -62,11 +67,6 @@ class Client
      * @var LoggerInterface
      */
     protected $_logger;
-
-    /**
-     * @var Connection\ConnectionPool
-     */
-    protected $_connectionPool;
 
     /**
      * Creates a new Elastica client.
