@@ -84,7 +84,7 @@ class SettingsTest extends BaseTest
             $index1->getType('test')->addDocument($doc3);
             $this->fail('should throw read only exception');
         } catch (ResponseException $e) {
-            $error = $e->getResponse()->getError();
+            $error = $e->getResponse()->getFullError();
             $this->assertContains('cluster_block_exception', $error['type']);
             $this->assertContains('cluster read-only', $error['reason']);
         }
@@ -93,7 +93,7 @@ class SettingsTest extends BaseTest
             $index2->getType('test')->addDocument($doc4);
             $this->fail('should throw read only exception');
         } catch (ResponseException $e) {
-            $error = $e->getResponse()->getError();
+            $error = $e->getResponse()->getFullError();
             $this->assertContains('cluster_block_exception', $error['type']);
             $this->assertContains('cluster read-only', $error['reason']);
         }

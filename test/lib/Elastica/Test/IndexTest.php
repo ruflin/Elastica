@@ -26,7 +26,7 @@ class IndexTest extends BaseTest
         $type = $index->getType('test');
 
         $mapping = array('id' => array('type' => 'integer', 'store' => true), 'email' => array('type' => 'string', 'store' => 'no'),
-            'username' => array('type' => 'string', 'store' => 'no'), 'test' => array('type' => 'integer', 'store' => 'no'),);
+            'username' => array('type' => 'string', 'store' => 'no'), 'test' => array('type' => 'integer', 'store' => 'no'), );
         $type->setMapping($mapping);
 
         $type->addDocument($doc);
@@ -247,7 +247,7 @@ class IndexTest extends BaseTest
     {
         $this->_checkPlugin('elasticsearch-mapper-attachments');
         $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => true),
-            'title' => array('type' => 'string', 'store' => true),);
+            'title' => array('type' => 'string', 'store' => true), );
 
         $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
 
@@ -669,7 +669,7 @@ class IndexTest extends BaseTest
         $type = $index->getType('test');
 
         $mapping = array('id' => array('type' => 'integer', 'store' => true), 'email' => array('type' => 'string', 'store' => false),
-            'username' => array('type' => 'string', 'store' => false), 'test' => array('type' => 'integer', 'store' => false),);
+            'username' => array('type' => 'string', 'store' => false), 'test' => array('type' => 'integer', 'store' => false), );
 
         $type->setMapping($mapping);
         $index->refresh();

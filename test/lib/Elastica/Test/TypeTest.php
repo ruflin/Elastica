@@ -638,7 +638,7 @@ class TypeTest extends BaseTest
         try {
             $type->updateDocument($script, array('version' => 999)); // Wrong version number to make the update fail
         } catch (ResponseException $e) {
-            $error = $e->getResponse()->getError();
+            $error = $e->getResponse()->getFullError();
             $this->assertContains('version_conflict_engine_exception', $error['type']);
         }
         $updatedDoc = $type->getDocument($id)->getData();
@@ -750,7 +750,7 @@ class TypeTest extends BaseTest
             $type->updateDocument($script);
             $this->fail('Update request should fail because source is disabled. Fields param is not set');
         } catch (ResponseException $e) {
-            $error = $e->getResponse()->getError();
+            $error = $e->getResponse()->getFullError();
             $this->assertContains('document_source_missing_exception', $error['type']);
         }
 
@@ -760,7 +760,7 @@ class TypeTest extends BaseTest
             $type->updateDocument($newDocument);
             $this->fail('Update request should fail because source is disabled. Fields param is set to _source');
         } catch (ResponseException $e) {
-            $error = $e->getResponse()->getError();
+            $error = $e->getResponse()->getFullError();
             $this->assertContains('document_source_missing_exception', $error['type']);
         }
     }

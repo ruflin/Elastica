@@ -1167,7 +1167,7 @@ class ClientTest extends BaseTest
      */
     public function testPassBigIntSettingsToConnectionConfig()
     {
-        $client = new Client(['bigintConversion' => true]);
+        $client = new Client(array('bigintConversion' => true));
 
         $this->assertTrue($client->getConnection()->getConfig('bigintConversion'));
     }

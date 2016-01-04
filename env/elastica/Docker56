@@ -8,10 +8,11 @@ RUN apt-get update && apt-get install -y \
 	git \
 	graphviz \
 	nano \
-	php5-xsl
+	php5-xsl \
+	zlib1g-dev
 	# XSL and Graphviz for PhpDocumentor
 
-RUN docker-php-ext-install sockets
+RUN docker-php-ext-install sockets zip
 
 RUN rm -r /var/lib/apt/lists/*
 
@@ -35,4 +36,4 @@ ENV PATH=/root/composer/vendor/bin:$PATH
 COPY composer.json /root/composer/
 
 # Install development tools
-RUN composer global install --prefer-source
+RUN composer global install #--prefer-source

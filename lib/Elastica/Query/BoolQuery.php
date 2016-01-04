@@ -55,7 +55,7 @@ class BoolQuery extends AbstractQuery
      * @param \Elastica\Filter\AbstractFilter $filter Filter object
      *
      * @return $this
-    */
+     */
     public function addFilter(AbstractFilter $filter)
     {
         return $this->addParam('filter', $filter);

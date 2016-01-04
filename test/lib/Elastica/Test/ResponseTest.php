@@ -131,18 +131,6 @@ class ResponseTest extends BaseTest
     /**
      * @group unit
      */
-    public function testArrayErrorMessage()
-    {
-        $response = new Response(json_encode(array(
-            'error' => array('a', 'b'),
-        )));
-
-        $this->assertEquals(json_encode(array('a', 'b')), $response->getErrorMessage());
-    }
-
-    /**
-     * @group unit
-     */
     public function testStringErrorMessage()
     {
         $response = new Response(json_encode(array(
@@ -151,6 +139,20 @@ class ResponseTest extends BaseTest
 
         $this->assertEquals('a', $response->getErrorMessage());
     }
+
+    /**
+     * @group unit
+     */
+    public function testArrayErrorMessage()
+    {
+        $response = new Response(json_encode(array(
+            'error' => array('a', 'b'),
+        )));
+
+        $this->assertEquals(array('a', 'b'), $response->getFullError());
+    }
+
+
 
     /**
      * @group unit

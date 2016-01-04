@@ -12,15 +12,14 @@
         }
     ],
     "require": {
-        "fabpot/php-cs-fixer":"1.10.*",
-        "mayflower/php-codebrowser":"~1.1",
-        "pdepend/pdepend":"~2.0",
-        "phploc/phploc":"~2.1",
-        "phpdocumentor/template-zend":"~1.3",
         "phpdocumentor/phpdocumentor":"~2.8",
-        "phpmd/phpmd":"~2.2",
-        "phpunit/phpunit":"~4.7",
+        "fabpot/php-cs-fixer":"1.11.*",
+        "mayflower/php-codebrowser":"~1.1",
+        "pdepend/pdepend":"~2.2",
+        "phploc/phploc":"~2.1",
+        "phpmd/phpmd":"~2.3",
+        "phpunit/phpunit":"~4.8",
         "sebastian/phpcpd":"~2.0",
-        "squizlabs/php_codesniffer":"~2.3"
+        "squizlabs/php_codesniffer":"~2.5"
     }
 }
