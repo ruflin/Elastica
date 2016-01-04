@@ -16,10 +16,10 @@
         "psr/log": "~1.0"
     },
     "require-dev": {
-        "guzzlehttp/guzzle": "5.3.*"
+        "guzzlehttp/guzzle": "~6.0"
     },
     "suggest": {
-        "guzzlehttp/guzzle": "Allow using guzzle 5.3.x as the http transport (Requires php 5.4)",
+        "guzzlehttp/guzzle": "Allow using guzzle 6 as the http transport (Requires php 5.5)",
         "egeloen/http-adapter": "Allow using httpadapter transport",
         "monolog/monolog": "Logging request"
     },
