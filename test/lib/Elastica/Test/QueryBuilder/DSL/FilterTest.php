@@ -44,6 +44,7 @@ class FilterTest extends AbstractDSLTest
         $this->_assertImplemented($filterDSL, 'limit', 'Elastica\Filter\Limit', array(1));
         $this->_assertImplemented($filterDSL, 'match_all', 'Elastica\Filter\MatchAll', array());
         $this->_assertImplemented($filterDSL, 'missing', 'Elastica\Filter\Missing', array('field'));
+        $this->_assertImplemented($filterDSL, 'nested', 'Elastica\Filter\Nested', array());
         $this->_assertImplemented($filterDSL, 'numeric_range', 'Elastica\Filter\NumericRange', array());
         $this->_assertImplemented($filterDSL, 'prefix', 'Elastica\Filter\Prefix', array('field', 'prefix'));
         $this->_assertImplemented($filterDSL, 'query', 'Elastica\Filter\Query', array(new Match()));

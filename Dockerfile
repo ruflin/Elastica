@@ -25,7 +25,8 @@ RUN mkdir -p \
 	./build/pdepend \
 	./build/coverage
 
-RUN composer install --prefer-source
+# Prefer source removed as automatic fallback now
+RUN composer install
 
 # Copy rest of the files, ignoring .dockerignore files
 COPY lib /elastica/lib

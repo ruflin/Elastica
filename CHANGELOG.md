@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 - Update build dependency to elasticsearch 2.1.1 #997
+- Readd \Elastica\Filter\Nested. See https://github.com/ruflin/Elastica/issues/1001
 
 ### Deprecated
 

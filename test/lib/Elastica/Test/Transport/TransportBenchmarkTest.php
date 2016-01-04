@@ -11,7 +11,7 @@ class TransportBenchmarkTest extends BaseTest
     protected function setUp()
     {
         parent::setUp();
-        $this->es20('Benchmarks currently skipped with es2.0');
+        $this->markTestIncomplete('Benchmarks currently skipped with es2.0. Has to be reworked');
     }
 
     protected $_max = 1000;
