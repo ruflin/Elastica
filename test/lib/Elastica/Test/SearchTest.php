@@ -3,6 +3,7 @@ namespace Elastica\Test;
 
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
+use Elastica\Filter\Exists;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\FunctionScore;
@@ -15,6 +16,31 @@ use Elastica\Type;
 
 class SearchTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
+    public function testSetQueryWithLegacyFilterDeprecated()
+    {
+        $this->hideDeprecated();
+        $existsFilter = new Exists('test');
+        $this->showDeprecated();
+
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $errorsCollector = $this->startCollectErrors();
+        $search->setQuery($existsFilter);
+        $this->finishCollectErrors();
+
+        $errorsCollector->assertOnlyDeprecatedErrors(
+            array(
+                'Deprecated: Elastica\Search::setQuery() passing AbstractFilter is deprecated. Create query and use setPostFilter with AbstractQuery instead.',
+                'Deprecated: Elastica\Query::create() passing filter is deprecated. Create query and use setPostFilter with AbstractQuery instead.',
+                'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.'
+            )
+        );
+    }
+
     /**
      * @group unit
      */

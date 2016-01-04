@@ -1,12 +1,16 @@
 <?php
 namespace Elastica\Filter;
 
+trigger_error('Deprecated: Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html', E_USER_DEPRECATED);
+
 /**
  * Geo polygon filter.
  *
  * @author Michael Maclean <mgdm@php.net>
  *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-polygon-filter.html
+ *
+ * @deprecated Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html
  */
 class GeoPolygon extends AbstractFilter
 {

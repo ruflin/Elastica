@@ -54,7 +54,9 @@ class NestedFilterWithSetFilterTest extends BaseTest
      */
     public function testToArray()
     {
+        $this->hideDeprecated();
         $filter = new Nested();
+        $this->showDeprecated();
         $this->assertEquals(array('nested' => array()), $filter->toArray());
         $query = new Terms();
         $query->setTerms('hobby', array('guitar'));
@@ -78,6 +80,8 @@ class NestedFilterWithSetFilterTest extends BaseTest
      */
     public function testShouldReturnTheRightNumberOfResult()
     {
+        $this->hideDeprecated();
+
         $filter = new Nested();
         $this->assertEquals(array('nested' => array()), $filter->toArray());
         $query = new Terms();
@@ -105,6 +109,8 @@ class NestedFilterWithSetFilterTest extends BaseTest
         $index = $this->_getIndexForTest();
         $search->addIndex($index);
         $resultSet = $search->search($filter);
+
+        $this->showDeprecated();
 
         $this->assertEquals(2, $resultSet->getTotalHits());
     }

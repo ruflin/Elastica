@@ -6,7 +6,7 @@ use Elastica\Query;
 use Elastica\QueryBuilder;
 use Elastica\Suggest;
 
-class QueryBuilderTest extends \PHPUnit_Framework_TestCase
+class QueryBuilderTest extends Base
 {
     /**
      * @group unit
@@ -40,7 +40,9 @@ class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 
         // test one example QueryBuilder flow for each default DSL type
         $this->assertInstanceOf('Elastica\Query\AbstractQuery', $qb->query()->match());
+        $this->hideDeprecated();
         $this->assertInstanceOf('Elastica\Filter\AbstractFilter', $qb->filter()->bool());
+        $this->showDeprecated();
         $this->assertInstanceOf('Elastica\Aggregation\AbstractAggregation', $qb->aggregation()->avg('name'));
         $this->assertInstanceOf('Elastica\Suggest\AbstractSuggest', $qb->suggest()->term('name', 'field'));
     }

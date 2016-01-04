@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 - Update Guzzle transport to use Guzzle 6
+- Elastica\Query\FunctionScore::setFilter - deprecated and will throw DeprecatedException since not supported by Elasticsearch. Use setQuery instead.
 
 ### Bugfixes
 
@@ -17,7 +18,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Deprecated
 - Elastica\AbstractScript|Script|ScriptFile|ScriptFields deprecated in favor of Elastica\Script|AbstractScript|Script|ScriptFile|ScriptFields [#1028](https://github.com/ruflin/Elastica/pull/1028)
-
+- Elastica\Filter\* are deprecated. You can use proper queries instead. Backward compatibility layer provided, but will be removed in next Elastica releases. See https://www.elastic.co/blog/better-query-execution-coming-elasticsearch-2-0 and https://github.com/ruflin/Elastica/issues/1001
 
 ## [3.0.1](https://github.com/ruflin/Elastica/compare/3.0.0...3.0.1)
 

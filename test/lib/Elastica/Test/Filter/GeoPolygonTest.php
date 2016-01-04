@@ -5,10 +5,19 @@ use Elastica\Document;
 use Elastica\Filter\GeoPolygon;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
-use Elastica\Test\Base as BaseTest;
+use Elastica\Test\DeprecatedClassBase as BaseTest;
 
 class GeoPolygonTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
+    public function testDeprecated()
+    {
+        $reflection = new \ReflectionClass(new GeoPolygon('location', array(array(16, 16))));
+        $this->assertFileDeprecated($reflection->getFileName(), 'Deprecated: Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html');
+    }
+
     /**
      * @group functional
      */

@@ -1,12 +1,16 @@
 <?php
 namespace Elastica\Filter;
 
+trigger_error('Deprecated: Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html', E_USER_DEPRECATED);
+
 /**
  * Missing Filter.
  *
  * @author Maciej Wiercinski <maciej@wiercinski.net>
  *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-missing-filter.html
+ *
+ * @deprecated Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html
  */
 class Missing extends AbstractFilter
 {

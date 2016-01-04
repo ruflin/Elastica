@@ -27,12 +27,78 @@ class PostFilterTest extends BaseTest
     /**
      * @group unit
      */
+    public function testArrayDeprecated()
+    {
+        $errorsCollector = $this->startCollectErrors();
+
+        $query = new Query();
+        $query->setPostFilter(array("a"));
+
+        $this->finishCollectErrors();
+
+        $errorsCollector->assertOnlyDeprecatedErrors(
+            array(
+                'Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractQuery instead.'
+            )
+        );
+    }
+
+    /**
+     * @group unit
+     */
+    public function testFilterDeprecated()
+    {
+        $errorsCollector = $this->startCollectErrors();
+
+        $query = new Query();
+        $query->setPostFilter(new Term());
+
+        $this->finishCollectErrors();
+
+        $errorsCollector->assertOnlyDeprecatedErrors(
+            array(
+                'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.'
+            )
+        );
+    }
+
+    /**
+     * @group unit
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testFilterInvalid()
+    {
+        $query = new Query();
+        $query->setPostFilter($this);
+    }
+
+    /**
+     * @group unit
+     */
     public function testToArray()
     {
         $query = new Query();
 
+        $post_filter = new Query\Term(array('color' => 'green'));
+        $query->setPostFilter($post_filter);
+
+        $data = $query->toArray();
+
+        $this->assertArrayHasKey('post_filter', $data);
+        $this->assertEquals(array('term' => array('color' => 'green')), $data['post_filter']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testToArrayWithLegacyFilter()
+    {
+        $query = new Query();
+
+        $this->hideDeprecated();
         $post_filter = new Term(array('color' => 'green'));
         $query->setPostFilter($post_filter);
+        $this->showDeprecated();
 
         $data = $query->toArray();
 
@@ -52,11 +118,33 @@ class PostFilterTest extends BaseTest
 
         $query->setQuery($match);
 
+        $filter = new Query\Term();
+        $filter->setTerm('color', 'green');
+
+        $query->setPostFilter($filter);
+        $results = $this->_getTestIndex()->search($query);
+
+        $this->assertEquals(1, $results->getTotalHits());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testQueryWithLegacyFilter()
+    {
+        $query = new Query();
+
+        $match = new Match();
+        $match->setField('make', 'ford');
+
+        $query->setQuery($match);
+
+        $this->hideDeprecated();
         $filter = new Term();
         $filter->setTerm('color', 'green');
 
         $query->setPostFilter($filter);
-
+        $this->showDeprecated();
         $results = $this->_getTestIndex()->search($query);
 
         $this->assertEquals(1, $results->getTotalHits());

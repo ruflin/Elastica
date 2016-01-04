@@ -72,9 +72,9 @@ class Query extends Param
             case $query instanceof AbstractQuery:
                 return new self($query);
             case $query instanceof AbstractFilter:
+                trigger_error('Deprecated: Elastica\Query::create() passing filter is deprecated. Create query and use setPostFilter with AbstractQuery instead.', E_USER_DEPRECATED);
                 $newQuery = new self();
                 $newQuery->setPostFilter($query);
-
                 return $newQuery;
             case empty($query):
                 return new self(new MatchAll());
@@ -133,15 +133,21 @@ class Query extends Param
     /**
      * Set Filter.
      *
-     * @param \Elastica\Filter\AbstractFilter $filter Filter object
+     * @param \Elastica\Query\AbstractQuery $filter Filter object
      *
      * @return $this
      *
      * @link    https://github.com/elasticsearch/elasticsearch/issues/7422
      * @deprecated Use Elastica\Query::setPostFilter() instead, this method will be removed in further Elastica releases
      */
-    public function setFilter(AbstractFilter $filter)
+    public function setFilter($filter)
     {
+        if ($filter instanceof AbstractFilter) {
+            trigger_error('Deprecated: Elastica\Query::setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.', E_USER_DEPRECATED);
+        } elseif (!($filter instanceof AbstractQuery)) {
+            throw new InvalidException('Filter must be instance of AbstractQuery');
+        }
+
         trigger_error('Deprecated: Elastica\Query::setFilter() is deprecated and will be removed in further Elastica releases. Use Elastica\Query::setPostFilter() instead.', E_USER_DEPRECATED);
 
         return $this->setPostFilter($filter);
@@ -450,7 +456,7 @@ class Query extends Param
     /**
      * Sets post_filter argument for the query. The filter is applied after the query has executed.
      *
-     * @param array|\Elastica\Filter\AbstractFilter $filter
+     * @param array|\Elastica\Query\AbstractQuery $filter
      *
      * @return $this
      *
@@ -458,8 +464,12 @@ class Query extends Param
      */
     public function setPostFilter($filter)
     {
-        if (!($filter instanceof AbstractFilter)) {
-            trigger_error('Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractFilter instead.', E_USER_DEPRECATED);
+        if (is_array($filter)) {
+            trigger_error('Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractQuery instead.', E_USER_DEPRECATED);
+        } elseif ($filter instanceof AbstractFilter) {
+            trigger_error('Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.', E_USER_DEPRECATED);
+        } elseif (!($filter instanceof AbstractQuery)) {
+            throw new InvalidException('Filter must be instance of AbstractQuery');
         }
 
         return $this->setParam('post_filter', $filter);
