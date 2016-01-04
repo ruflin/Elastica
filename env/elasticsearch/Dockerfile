@@ -1,8 +1,8 @@
-FROM elasticsearch:2.0.0
+FROM elasticsearch:2.1.1
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 # Dependencies
-ENV ES_MAPPER_ATTACHMENTS_VER 3.0.2
+ENV ES_MAPPER_ATTACHMENTS_VER 3.1.1
 ENV ES_IMAGE_PLUGIN_VER 1.7.1
 ENV ES_PLUGIN_BIN /usr/share/elasticsearch/bin/plugin
 
