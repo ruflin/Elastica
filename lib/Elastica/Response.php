@@ -121,8 +121,6 @@ class Response
         if (isset($response['error'])) {
             return $response['error'];
         }
-
-        return;
     }
 
     /**
