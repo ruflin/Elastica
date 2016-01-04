@@ -152,8 +152,6 @@ class ResponseTest extends BaseTest
         $this->assertEquals(array('a', 'b'), $response->getFullError());
     }
 
-
-
     /**
      * @group unit
      */
