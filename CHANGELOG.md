@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/3.0.0...HEAD)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/3.0.1...HEAD)
 
 ### Backward Compatibility Breaks
 
@@ -11,10 +11,15 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 ### Improvements
-- Update build dependency to elasticsearch 2.1.1 #997
-- Readd \Elastica\Filter\Nested. See https://github.com/ruflin/Elastica/issues/1001
 
 ### Deprecated
+
+
+## [3.0.1](https://github.com/ruflin/Elastica/compare/3.0.0...3.0.1)
+
+### Improvements
+- Update build dependency to elasticsearch 2.1.1 #1022
+- Readd \Elastica\Filter\Nested. See https://github.com/ruflin/Elastica/issues/1001 #1020
 
 
 ## [3.0.0](https://github.com/ruflin/Elastica/compare/3.0.0-beta1...3.0.0)
