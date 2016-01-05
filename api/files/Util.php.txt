@@ -36,7 +36,7 @@ class Util
      * Escapes the following terms (because part of the query language)
      * + - && || ! ( ) { } [ ] ^ " ~ * ? : \ < >.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#_reserved_characters
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#_reserved_characters
      *
      * @param string $term Query term to escape
      *
@@ -158,7 +158,7 @@ class Util
 
         $parts = explode('\\', $class);
         $last = array_pop($parts);
-        $last = preg_replace('/(Facet|Query|Filter)$/', '', $last);
+        $last = preg_replace('/(Query|Filter)$/', '', $last);
         $name = self::toSnakeCase($last);
 
         return $name;

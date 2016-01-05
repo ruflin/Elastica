@@ -8,14 +8,13 @@ use Elastica\Query as BaseQuery;
  *
  * @author Jason Hu <mjhu91@gmail.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html
  */
 class Query extends AbstractRescore
 {
     /**
      * Constructor.
      *
-     * @param string|\Elastica\Query\AbstractQuery $rescoreQuery
      * @param string|\Elastica\Query\AbstractQuery $query
      */
     public function __construct($query = null)
@@ -38,23 +37,28 @@ class Query extends AbstractRescore
             $data = array_merge($data, $this->_rawParams);
         }
 
-        return $data;
+        $array = $this->_convertArrayable($data);
+
+        if (isset($array['query']['rescore_query']['query'])) {
+            $array['query']['rescore_query'] = $array['query']['rescore_query']['query'];
+        }
+
+        return $array;
     }
 
     /**
      * Sets rescoreQuery object.
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $rescoreQuery
      *
      * @return $this
      */
     public function setRescoreQuery($rescoreQuery)
     {
-        $query = BaseQuery::create($rescoreQuery);
-        $data = $query->toArray();
+        $rescoreQuery = BaseQuery::create($rescoreQuery);
 
         $query = $this->getParam('query');
-        $query['rescore_query'] = $data['query'];
+        $query['rescore_query'] = $rescoreQuery;
 
         return $this->setParam('query', $query);
     }
@@ -77,7 +81,7 @@ class Query extends AbstractRescore
     /**
      * Sets rescore_query_weight.
      *
-     * @param float $size
+     * @param float $weight
      *
      * @return $this
      */

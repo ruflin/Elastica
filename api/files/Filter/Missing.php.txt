@@ -6,7 +6,7 @@ namespace Elastica\Filter;
  *
  * @author Maciej Wiercinski <maciej@wiercinski.net>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-missing-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-missing-filter.html
  */
 class Missing extends AbstractFilter
 {

@@ -2,18 +2,18 @@
 namespace Elastica\Suggest;
 
 /**
- * Comletion suggester.
+ * Completion suggester.
  *
  * @author Igor Denisenko <im.denisenko@yahoo.com>
  *
- * @link   http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html
+ * @link   https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html
  */
 class Completion extends AbstractSuggest
 {
     /**
      * Set fuzzy parameter.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html#fuzzy
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html#fuzzy
      *
      * @param array $fuzzy
      *

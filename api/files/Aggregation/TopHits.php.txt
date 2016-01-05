@@ -7,7 +7,7 @@ use Elastica\ScriptFields;
 /**
  * Class TopHits.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
  */
 class TopHits extends AbstractAggregation
 {
@@ -66,13 +66,13 @@ class TopHits extends AbstractAggregation
     /**
      * Allows to control how the _source field is returned with every hit.
      *
-     * @param array $fields
+     * @param array|bool $params Fields to be returned or false to disable source
      *
      * @return $this
      */
-    public function setSource(array $fields)
+    public function setSource($params)
     {
-        return $this->setParam('_source', $fields);
+        return $this->setParam('_source', $params);
     }
 
     /**
@@ -112,7 +112,7 @@ class TopHits extends AbstractAggregation
             $scriptFields = new ScriptFields($scriptFields);
         }
 
-        return $this->setParam('script_fields', $scriptFields->toArray());
+        return $this->setParam('script_fields', $scriptFields);
     }
 
     /**
@@ -125,7 +125,11 @@ class TopHits extends AbstractAggregation
      */
     public function addScriptField($name, Script $script)
     {
-        $this->_params['script_fields'][$name] = $script->toArray();
+        if (!isset($this->_params['script_fields'])) {
+            $this->_params['script_fields'] = new ScriptFields();
+        }
+
+        $this->_params['script_fields']->addScript($name, $script);
 
         return $this;
     }

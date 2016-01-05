@@ -103,7 +103,7 @@ class Node
     /**
      * Return stats object of the current node.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
      *
      * @return \Elastica\Node\Stats Node stats
      */
@@ -119,7 +119,7 @@ class Node
     /**
      * Return info object of the current node.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      *
      * @return \Elastica\Node\Info Node info object
      */
@@ -150,7 +150,7 @@ class Node
      *
      * @return \Elastica\Response
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-shutdown.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-shutdown.html
      */
     public function shutdown($delay = '1s')
     {

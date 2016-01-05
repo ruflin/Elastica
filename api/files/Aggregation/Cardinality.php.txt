@@ -4,7 +4,7 @@ namespace Elastica\Aggregation;
 /**
  * Class Cardinality.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html
  */
 class Cardinality extends AbstractSimpleAggregation
 {

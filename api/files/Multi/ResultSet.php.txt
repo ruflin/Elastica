@@ -128,7 +128,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
      */
     public function next()
     {
-        $this->_position++;
+        ++$this->_position;
     }
 
     /**

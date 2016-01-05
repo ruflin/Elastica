@@ -26,6 +26,9 @@ class HttpAdapter extends AbstractTransport
 
     /**
      * Construct transport.
+     *
+     * @param Connection           $connection
+     * @param HttpAdapterInterface $httpAdapter
      */
     public function __construct(Connection $connection = null, HttpAdapterInterface $httpAdapter)
     {

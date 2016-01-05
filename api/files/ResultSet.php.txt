@@ -162,20 +162,6 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
-     * Returns whether facets exist.
-     *
-     * @return bool Facet existence
-     *
-     * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
-     */
-    public function hasFacets()
-    {
-        $data = $this->_response->getData();
-
-        return isset($data['facets']);
-    }
-
-    /**
      * Returns whether aggregations exist.
      *
      * @return bool Aggregation existence
@@ -216,20 +202,6 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
             return $data['aggregations'][$name];
         }
         throw new InvalidException("This result set does not contain an aggregation named {$name}.");
-    }
-
-    /**
-     * Returns all facets results.
-     *
-     * @return array Facet results
-     *
-     * @deprecated Facets are deprecated and will be removed in a future release. You are encouraged to migrate to aggregations instead.
-     */
-    public function getFacets()
-    {
-        $data = $this->_response->getData();
-
-        return isset($data['facets']) ? $data['facets'] : array();
     }
 
     /**
@@ -329,7 +301,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function next()
     {
-        $this->_position++;
+        ++$this->_position;
 
         return $this->current();
     }

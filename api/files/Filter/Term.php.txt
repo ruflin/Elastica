@@ -6,7 +6,7 @@ namespace Elastica\Filter;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-filter.html
  */
 class Term extends AbstractFilter
 {

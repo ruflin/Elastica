@@ -6,7 +6,7 @@ namespace Elastica\Filter;
  *
  * @author Oleg Cherniy <oleg.cherniy@gmail.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-filter.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-filter.html
  */
 class Exists extends AbstractFilter
 {

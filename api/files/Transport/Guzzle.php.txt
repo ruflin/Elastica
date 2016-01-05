@@ -103,6 +103,9 @@ class Guzzle extends AbstractTransport
 
         $response = new Response((string) $res->getBody(), $res->getStatusCode());
         $response->setQueryTime($end - $start);
+        if ($connection->hasConfig('bigintConversion')) {
+            $response->setJsonBigintConversion($connection->getConfig('bigintConversion'));
+        }
 
         $response->setTransferInfo(
             array(
@@ -142,6 +145,8 @@ class Guzzle extends AbstractTransport
      * Builds the base url for the guzzle connection.
      *
      * @param \Elastica\Connection $connection
+     *
+     * @return string
      */
     protected function _getBaseUrl(Connection $connection)
     {
@@ -161,6 +166,8 @@ class Guzzle extends AbstractTransport
      * Builds the action path url for each request.
      *
      * @param \Elastica\Request $request
+     *
+     * @return string
      */
     protected function _getActionPath(Request $request)
     {

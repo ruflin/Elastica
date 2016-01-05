@@ -10,7 +10,7 @@ use Elastica\Exception\NotImplementedException;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html
  */
 class Cluster
 {
@@ -88,7 +88,7 @@ class Cluster
      *
      * @return array State array
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-state.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-state.html
      */
     public function getState()
     {
@@ -141,7 +141,7 @@ class Cluster
     /**
      * Returns the cluster information (not implemented yet).
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      *
      * @param array $args Additional arguments
      *
@@ -155,7 +155,7 @@ class Cluster
     /**
      * Return Cluster health.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
      *
      * @return \Elastica\Cluster\Health
      */
@@ -177,7 +177,7 @@ class Cluster
     /**
      * Shuts down the complete cluster.
      *
-     * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-shutdown.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-shutdown.html
      *
      * @param string $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
      *

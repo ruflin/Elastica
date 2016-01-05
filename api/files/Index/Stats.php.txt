@@ -9,7 +9,7 @@ use Elastica\Request;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-stats.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-stats.html
  */
 class Stats
 {

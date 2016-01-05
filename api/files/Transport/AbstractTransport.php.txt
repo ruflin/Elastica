@@ -65,7 +65,7 @@ abstract class AbstractTransport extends Param
      *
      * The $transport parameter can be one of the following values:
      *
-     * * string: The short name of a transport. For instance "Http", "Memcache" or "Thrift"
+     * * string: The short name of a transport. For instance "Http"
      * * object: An already instantiated instance of a transport
      * * array: An array with a "type" key which must be set to one of the two options. All other
      *          keys in the array will be set as parameters in the transport instance
@@ -89,6 +89,17 @@ abstract class AbstractTransport extends Param
         }
 
         if (is_string($transport)) {
+            $specialTransports = array(
+                'httpadapter' => 'HttpAdapter',
+                'nulltransport' => 'NullTransport',
+            );
+
+            if (isset($specialTransports[strtolower($transport)])) {
+                $transport = $specialTransports[strtolower($transport)];
+            } else {
+                $transport = ucfirst($transport);
+            }
+
             $className = 'Elastica\\Transport\\'.$transport;
 
             if (!class_exists($className)) {

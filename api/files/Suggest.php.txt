@@ -7,7 +7,7 @@ use Elastica\Suggest\AbstractSuggest;
 /**
  * Class Suggest.
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
  */
 class Suggest extends Param
 {
@@ -42,7 +42,7 @@ class Suggest extends Param
      */
     public function addSuggestion(AbstractSuggest $suggestion)
     {
-        return $this->setParam($suggestion->getName(), $suggestion->toArray());
+        return $this->addParam('suggestion', $suggestion);
     }
 
     /**
@@ -61,6 +61,27 @@ class Suggest extends Param
                 return new self($suggestion);
         }
         throw new NotImplementedException();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $baseName = $this->_getBaseName();
+
+        if (isset($array[$baseName]['suggestion'])) {
+            $suggestion = $array[$baseName]['suggestion'];
+            unset($array[$baseName]['suggestion']);
+
+            foreach ($suggestion as $key => $value) {
+                $array[$baseName][$key] = $value;
+            }
+        }
+
+        return $array;
     }
 }
 

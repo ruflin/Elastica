@@ -5,13 +5,15 @@ use Elastica\Exception\InvalidException;
 use Elastica\Exception\JSONParseException;
 use Elastica\JSON;
 
+trigger_error('This builder is deprecated and will be removed in further Elastica releases. Use new Elastica\QueryBuilder instead.', E_USER_DEPRECATED);
+
 /**
  * Query Builder.
  *
  * @author Chris Gedrim <chris@gedr.im>
  *
- * @link http://www.elastic.co/
- * @deprecated This builder is deprecated and will be removed. Use new Elastica\QueryBuilder instead.
+ * @link https://www.elastic.co/
+ * @deprecated This builder is deprecated and will be removed in further Elastica releases. Use new Elastica\QueryBuilder instead.
  **/
 class Builder extends AbstractQuery
 {
@@ -278,36 +280,6 @@ class Builder extends AbstractQuery
     public function explain($value = true)
     {
         return $this->field('explain', $value);
-    }
-
-    /**
-     * Open 'facets' block.
-     *
-     * Facets provide aggregated data based on a search query.
-     *
-     * In the simple case, a facet can return facet counts for various facet
-     * values for a specific field.
-     *
-     * Elasticsearch supports more advanced facet implementations, such as
-     * statistical or date histogram facets.
-     *
-     * @return $this
-     */
-    public function facets()
-    {
-        return $this->fieldOpen('facets');
-    }
-
-    /**
-     * Close a facets block.
-     *
-     * Alias of close() for ease of reading in source.
-     *
-     * @return $this
-     */
-    public function facetsClose()
-    {
-        return $this->close();
     }
 
     /**

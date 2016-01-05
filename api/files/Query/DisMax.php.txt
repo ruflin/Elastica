@@ -8,7 +8,7 @@ use Elastica\Exception\InvalidException;
  *
  * @author Hung Tran <oohnoitz@gmail.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html
  */
 class DisMax extends AbstractQuery
 {
@@ -23,11 +23,7 @@ class DisMax extends AbstractQuery
      */
     public function addQuery($args)
     {
-        if ($args instanceof AbstractQuery) {
-            $args = $args->toArray();
-        }
-
-        if (!is_array($args)) {
+        if (!is_array($args) && !($args instanceof AbstractQuery)) {
             throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
         }
 

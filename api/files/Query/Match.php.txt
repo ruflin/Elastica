@@ -7,7 +7,7 @@ namespace Elastica\Query;
  * @author F21
  * @author WONG Wing Lun <luiges90@gmail.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
  */
 class Match extends AbstractQuery
 {
@@ -133,7 +133,7 @@ class Match extends AbstractQuery
      *
      * @return $this
      *
-     * @link Possible values for minimum_should_match http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
+     * @link Possible values for minimum_should_match https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
     public function setFieldMinimumShouldMatch($field, $minimumShouldMatch)
     {
