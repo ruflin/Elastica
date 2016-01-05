@@ -1,5 +1,5 @@
 # This image is the base image for the Elastica development and includes all parts which rarely change
-# PHP 6 Docker file with Composer installed
+# PHP 7 Docker file with Composer installed
 FROM php:7.0
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
@@ -35,5 +35,5 @@ ENV PATH=/root/composer/vendor/bin:$PATH
 
 COPY composer.json /root/composer/
 
-# Install development tools
-RUN composer global install --prefer-source
+# Install development tools, prefer source removed as automatic fallback now
+RUN composer global install
