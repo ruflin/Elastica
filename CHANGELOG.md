@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/3.0.1...HEAD)
 
 ### Backward Compatibility Breaks
+- Update Guzzle transport to use Guzzle 6
 
 ### Bugfixes
 
