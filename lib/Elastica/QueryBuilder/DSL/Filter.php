@@ -426,7 +426,7 @@ class Filter implements DSL
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-filter.html
      *
-     * @param array|string|\Elastica\Script $script
+     * @param array|string|\Elastica\Script\Script $script
      *
      * @return Script
      */

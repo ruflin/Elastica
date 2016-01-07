@@ -22,7 +22,7 @@ class Script extends AbstractFilter
     /**
      * Construct script filter.
      *
-     * @param array|string|\Elastica\AbstractScript $script OPTIONAL Script
+     * @param array|string|\Elastica\Script\AbstractScript $script OPTIONAL Script
      */
     public function __construct($script = null)
     {
@@ -34,13 +34,13 @@ class Script extends AbstractFilter
     /**
      * Sets script object.
      *
-     * @param \Elastica\Script|string|array $script
+     * @param \Elastica\Script\Script|string|array $script
      *
      * @return $this
      */
     public function setScript($script)
     {
-        return $this->setParam('script', Elastica\Script::create($script));
+        return $this->setParam('script', Elastica\Script\Script::create($script));
     }
 
     /**

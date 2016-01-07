@@ -5,6 +5,7 @@ use Elastica\Bulk\Action;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Exception\RuntimeException;
+use Elastica\Script\AbstractScript;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -319,11 +320,11 @@ class Client
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0.
      *
-     * @param int                                               $id      document id
-     * @param array|\Elastica\AbstractScript|\Elastica\Document $data    raw data for request body
-     * @param string                                            $index   index to update
-     * @param string                                            $type    type of index to update
-     * @param array                                             $options array of query params to use for query. For possible options check es api
+     * @param int                                                      $id      document id
+     * @param array|\Elastica\Script\AbstractScript|\Elastica\Document $data    raw data for request body
+     * @param string                                                   $index   index to update
+     * @param string                                                   $type    type of index to update
+     * @param array                                                    $options array of query params to use for query. For possible options check es api
      *
      * @return \Elastica\Response
      *

@@ -1,7 +1,7 @@
 <?php
 namespace Elastica\Bulk\Action;
 
-use Elastica\AbstractScript;
+use Elastica\Script\AbstractScript;
 use Elastica\AbstractUpdateAction;
 use Elastica\Bulk\Action;
 use Elastica\Document;
@@ -9,12 +9,12 @@ use Elastica\Document;
 abstract class AbstractDocument extends Action
 {
     /**
-     * @var \Elastica\Document|\Elastica\AbstractScript
+     * @var \Elastica\Document|\Elastica\Script\AbstractScript
      */
     protected $_data;
 
     /**
-     * @param \Elastica\Document|\Elastica\AbstractScript $document
+     * @param \Elastica\Document|\Elastica\Script\AbstractScript $document
      */
     public function __construct($document)
     {
@@ -38,7 +38,7 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param \Elastica\AbstractScript $script
+     * @param \Elastica\Script\AbstractScript $script
      *
      * @return $this
      */
@@ -57,7 +57,7 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param \Elastica\AbstractScript|\Elastica\Document $data
+     * @param \Elastica\Script\AbstractScript|\Elastica\Document $data
      *
      * @throws \InvalidArgumentException
      *
@@ -93,7 +93,7 @@ abstract class AbstractDocument extends Action
     /**
      * Note: This is for backwards compatibility.
      *
-     * @return \Elastica\AbstractScript|null
+     * @return \Elastica\Script\AbstractScript|null
      */
     public function getScript()
     {
@@ -105,7 +105,7 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @return \Elastica\Document|\Elastica\AbstractScript
+     * @return \Elastica\Document|\Elastica\Script\AbstractScript
      */
     public function getData()
     {
@@ -120,8 +120,8 @@ abstract class AbstractDocument extends Action
     abstract protected function _getMetadata(AbstractUpdateAction $source);
 
     /**
-     * @param \Elastica\Document|\Elastica\AbstractScript $data
-     * @param string                                      $opType
+     * @param \Elastica\Document|\Elastica\Script\AbstractScript $data
+     * @param string                                             $opType
      *
      * @return static
      */

@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Aggregation;
 
-use Elastica\AbstractScript;
-use Elastica\ScriptFields;
+use Elastica\Script\AbstractScript;
+use Elastica\Script\ScriptFields;
 
 /**
  * Class TopHits.
@@ -102,7 +102,7 @@ class TopHits extends AbstractAggregation
     /**
      * Set script fields.
      *
-     * @param array|\Elastica\ScriptFields $scriptFields
+     * @param array|\Elastica\Script\ScriptFields $scriptFields
      *
      * @return $this
      */
@@ -118,8 +118,8 @@ class TopHits extends AbstractAggregation
     /**
      * Adds a Script to the aggregation.
      *
-     * @param string                   $name
-     * @param \Elastica\AbstractScript $script
+     * @param string                          $name
+     * @param \Elastica\Script\AbstractScript $script
      *
      * @return $this
      */

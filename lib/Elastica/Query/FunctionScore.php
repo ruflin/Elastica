@@ -1,7 +1,7 @@
 <?php
 namespace Elastica\Query;
 
-use Elastica\AbstractScript;
+use Elastica\Script\AbstractScript;
 use Elastica\Filter\AbstractFilter;
 
 /**
@@ -94,9 +94,9 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a script_score function to the query.
      *
-     * @param AbstractScript    $script a Script object
-     * @param AbstractFilter    $filter an optional filter to apply to the function
-     * @param float             $weight the weight of the function
+     * @param \Elastica\Script\AbstractScript    $script a Script object
+     * @param AbstractFilter                     $filter an optional filter to apply to the function
+     * @param float                              $weight the weight of the function
      *
      * @return $this
      */

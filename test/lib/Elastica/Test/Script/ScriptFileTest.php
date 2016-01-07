@@ -4,7 +4,7 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Query;
-use Elastica\ScriptFile;
+use Elastica\Script\ScriptFile;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 use Elastica\Type\Mapping;
@@ -91,7 +91,7 @@ class ScriptFileTest extends BaseTest
         $string = 'calculate-distance.groovy';
         $scriptFile = ScriptFile::create($string);
 
-        $this->assertInstanceOf('Elastica\ScriptFile', $scriptFile);
+        $this->assertInstanceOf('Elastica\Script\ScriptFile', $scriptFile);
 
         $this->assertEquals($string, $scriptFile->getScriptFile());
 
@@ -110,7 +110,7 @@ class ScriptFileTest extends BaseTest
 
         $scriptFile = ScriptFile::create($data);
 
-        $this->assertInstanceOf('Elastica\ScriptFile', $scriptFile);
+        $this->assertInstanceOf('Elastica\Script\ScriptFile', $scriptFile);
         $this->assertSame($data, $scriptFile);
     }
 
@@ -131,7 +131,7 @@ class ScriptFileTest extends BaseTest
 
         $scriptFile = ScriptFile::create($array);
 
-        $this->assertInstanceOf('Elastica\ScriptFile', $scriptFile);
+        $this->assertInstanceOf('Elastica\Script\ScriptFile', $scriptFile);
 
         $this->assertEquals($string, $scriptFile->getScriptFile());
         $this->assertEquals($params, $scriptFile->getParams());
@@ -178,6 +178,6 @@ class ScriptFileTest extends BaseTest
         $scriptFile->setScriptFile('bar');
         $this->assertEquals('bar', $scriptFile->getScriptFile());
 
-        $this->assertInstanceOf('Elastica\ScriptFile', $scriptFile->setScriptFile('foo'));
+        $this->assertInstanceOf('Elastica\Script\ScriptFile', $scriptFile->setScriptFile('foo'));
     }
 }

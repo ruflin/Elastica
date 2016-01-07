@@ -3,8 +3,8 @@ namespace Elastica\Test;
 
 use Elastica\Document;
 use Elastica\Query;
-use Elastica\Script;
-use Elastica\ScriptFields;
+use Elastica\Script\Script;
+use Elastica\Script\ScriptFields;
 use Elastica\Test\Base as BaseTest;
 
 class ScriptFieldsTest extends BaseTest

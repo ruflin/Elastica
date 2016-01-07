@@ -7,8 +7,8 @@ use Elastica\Document;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Query\SimpleQueryString;
-use Elastica\Script;
-use Elastica\ScriptFields;
+use Elastica\Script\Script;
+use Elastica\Script\ScriptFields;
 
 class TopHitsTest extends BaseAggregationTest
 {
