@@ -24,13 +24,13 @@ class ScriptFields extends Param
 
     /**
      * @param string           $name   Name of the Script field
-     * @param \Elastica\Script $script
+     * @param \Elastica\AbstractScript $script
      *
      * @throws \Elastica\Exception\InvalidException
      *
      * @return $this
      */
-    public function addScript($name, Script $script)
+    public function addScript($name, AbstractScript $script)
     {
         if (!is_string($name) || !strlen($name)) {
             throw new InvalidException('The name of a Script is required and must be a string');

@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Bulk\Action;
 
+use Elastica\AbstractScript;
 use Elastica\Document;
-use Elastica\Script;
 
 class UpdateDocument extends IndexDocument
 {
@@ -40,11 +40,11 @@ class UpdateDocument extends IndexDocument
     }
 
     /**
-     * @param \Elastica\Script $script
+     * @param \Elastica\AbstractScript $script
      *
      * @return $this
      */
-    public function setScript(Script $script)
+    public function setScript(AbstractScript $script)
     {
         parent::setScript($script);
 

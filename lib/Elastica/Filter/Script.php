@@ -22,7 +22,7 @@ class Script extends AbstractFilter
     /**
      * Construct script filter.
      *
-     * @param array|string|\Elastica\Script $script OPTIONAL Script
+     * @param array|string|\Elastica\AbstractScript $script OPTIONAL Script
      */
     public function __construct($script = null)
     {

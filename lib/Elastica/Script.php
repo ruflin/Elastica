@@ -32,6 +32,7 @@ class Script extends AbstractScript
      * @param string      $script
      * @param array|null  $params
      * @param string|null $lang
+     * @param null        $id
      */
     public function __construct($script, array $params = null, $lang = null, $id = null)
     {

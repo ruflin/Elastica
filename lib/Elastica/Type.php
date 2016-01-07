@@ -133,8 +133,8 @@ class Type implements SearchableInterface
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      *
-     * @param \Elastica\Document|\Elastica\Script $data    Document with update data
-     * @param array                               $options array of query params to use for query. For possible options check es api
+     * @param \Elastica\Document|\Elastica\AbstractScript   $data    Document with update data
+     * @param array                                         $options array of query params to use for query. For possible options check es api
      *
      * @throws \Elastica\Exception\InvalidException
      *
@@ -142,7 +142,7 @@ class Type implements SearchableInterface
      */
     public function updateDocument($data, array $options = array())
     {
-        if (!($data instanceof Document) && !($data instanceof Script)) {
+        if (!($data instanceof Document) && !($data instanceof AbstractScript)) {
             throw new \InvalidArgumentException('Data should be a Document or Script');
         }
 

@@ -11,7 +11,7 @@ use Elastica\Exception\InvalidException;
  *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html
  */
-class ScriptFile extends AbstractScript
+class ScriptFile extends Script
 {
     /**
      * @var string
@@ -25,7 +25,7 @@ class ScriptFile extends AbstractScript
      */
     public function __construct($scriptFile, array $params = null, $id = null)
     {
-        parent::__construct($params, $id);
+        parent::__construct(null, $params, null, $id);
 
         $this->setScriptFile($scriptFile);
     }
@@ -51,7 +51,7 @@ class ScriptFile extends AbstractScript
     }
 
     /**
-     * @param string|array|\Elastica\Script $data
+     * @param string|array|\Elastica\ScriptFile $data
      *
      * @throws \Elastica\Exception\InvalidException
      *
