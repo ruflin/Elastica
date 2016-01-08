@@ -7,6 +7,7 @@ use Elastica\Bulk\Response as BulkResponse;
 use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
 use Elastica\Exception\InvalidException;
+use Elastica\Script\AbstractScript;
 
 class Bulk
 {
@@ -190,12 +191,12 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Script $script
-     * @param string           $opType
+     * @param \Elastica\Script\AbstractScript $script
+     * @param string                          $opType
      *
      * @return $this
      */
-    public function addScript(Script $script, $opType = null)
+    public function addScript(AbstractScript $script, $opType = null)
     {
         $action = AbstractDocumentAction::create($script, $opType);
 
@@ -218,8 +219,8 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Script|\Elastica\Document|array $data
-     * @param string                                    $opType
+     * @param \Elastica\Script\AbstractScript|\Elastica\Document|array $data
+     * @param string                                                   $opType
      *
      * @return $this
      */
@@ -230,7 +231,7 @@ class Bulk
         }
 
         foreach ($data as $actionData) {
-            if ($actionData instanceof Script) {
+            if ($actionData instanceof AbstractScript) {
                 $this->addScript($actionData, $opType);
             } elseif ($actionData instanceof Document) {
                 $this->addDocument($actionData, $opType);

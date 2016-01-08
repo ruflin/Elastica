@@ -8,7 +8,7 @@ use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Query\SimpleQueryString;
-use Elastica\Script;
+use Elastica\Script\Script;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;

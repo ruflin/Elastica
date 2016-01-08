@@ -8,7 +8,7 @@ use Elastica\Exception\Connection\HttpException;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Request;
-use Elastica\Script;
+use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 

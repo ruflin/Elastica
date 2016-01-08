@@ -5,7 +5,7 @@ use Elastica\Document;
 use Elastica\Filter\Term;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
-use Elastica\Script;
+use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 
 class FunctionScoreTest extends BaseTest

@@ -484,7 +484,7 @@ class BulkTest extends BaseTest
         $this->assertEquals('The Walrus', $docData['name']);
 
         //test updating via script
-        $script = new \Elastica\Script('ctx._source.name += param1;', array('param1' => ' was Paul'), null, 2);
+        $script = new \Elastica\Script\Script('ctx._source.name += param1;', array('param1' => ' was Paul'), null, 2);
         $doc2 = new Document();
         $script->setUpsert($doc2);
         $updateAction = Action\AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
@@ -502,7 +502,7 @@ class BulkTest extends BaseTest
         $this->assertEquals('The Walrus was Paul', $doc2->name);
 
         //test upsert
-        $script = new \Elastica\Script('ctx._scource.counter += count', array('count' => 1), null, 5);
+        $script = new \Elastica\Script\Script('ctx._scource.counter += count', array('count' => 1), null, 5);
         $doc = new Document('', array('counter' => 1));
         $script->setUpsert($doc);
         $updateAction = Action\AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
@@ -616,7 +616,7 @@ class BulkTest extends BaseTest
         $metadata = $actions[0]->getMetadata();
         $this->assertEquals(5, $metadata[ '_retry_on_conflict' ]);
 
-        $script = new \Elastica\Script('');
+        $script = new \Elastica\Script\Script('');
         $script->setRetryOnConflict(5);
 
         $bulk = new Bulk($client);

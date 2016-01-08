@@ -8,6 +8,8 @@ use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
+use Elastica\Script\AbstractScript;
+use Elastica\Script\ScriptFields;
 use Elastica\Suggest\AbstractSuggest;
 
 /**
@@ -303,7 +305,7 @@ class Query extends Param
     /**
      * Set script fields.
      *
-     * @param array|\Elastica\ScriptFields $scriptFields Script fields
+     * @param array|\Elastica\Script\ScriptFields $scriptFields Script fields
      *
      * @return $this
      *
@@ -321,8 +323,8 @@ class Query extends Param
     /**
      * Adds a Script to the query.
      *
-     * @param string                   $name
-     * @param \Elastica\AbstractScript $script Script object
+     * @param string                          $name
+     * @param \Elastica\Script\AbstractScript $script Script object
      *
      * @return $this
      */

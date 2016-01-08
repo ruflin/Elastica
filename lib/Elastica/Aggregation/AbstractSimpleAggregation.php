@@ -1,8 +1,6 @@
 <?php
 namespace Elastica\Aggregation;
 
-use Elastica\Script;
-
 abstract class AbstractSimpleAggregation extends AbstractAggregation
 {
     /**
@@ -20,7 +18,7 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
     /**
      * Set a script for this aggregation.
      *
-     * @param string|Script $script
+     * @param string|\Elastica\Script\AbstractScript $script
      *
      * @return $this
      */

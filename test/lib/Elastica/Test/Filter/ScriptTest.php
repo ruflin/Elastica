@@ -2,7 +2,7 @@
 namespace Elastica\Test\Filter;
 
 use Elastica\Filter\Script as ScriptFilter;
-use Elastica\Script;
+use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 
 class ScriptTest extends BaseTest

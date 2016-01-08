@@ -1,7 +1,7 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Script;
+use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 
 class ScriptTest extends BaseTest
@@ -60,7 +60,7 @@ class ScriptTest extends BaseTest
         $string = '_score * 2.0';
         $script = Script::create($string);
 
-        $this->assertInstanceOf('Elastica\Script', $script);
+        $this->assertInstanceOf('Elastica\Script\Script', $script);
 
         $this->assertEquals($string, $script->getScript());
 
@@ -79,7 +79,7 @@ class ScriptTest extends BaseTest
 
         $script = Script::create($data);
 
-        $this->assertInstanceOf('Elastica\Script', $script);
+        $this->assertInstanceOf('Elastica\Script\Script', $script);
         $this->assertSame($data, $script);
     }
 
@@ -102,7 +102,7 @@ class ScriptTest extends BaseTest
 
         $script = Script::create($array);
 
-        $this->assertInstanceOf('Elastica\Script', $script);
+        $this->assertInstanceOf('Elastica\Script\Script', $script);
 
         $this->assertEquals($string, $script->getScript());
         $this->assertEquals($params, $script->getParams());
@@ -150,7 +150,7 @@ class ScriptTest extends BaseTest
         $script->setLang(Script::LANG_PYTHON);
         $this->assertEquals(Script::LANG_PYTHON, $script->getLang());
 
-        $this->assertInstanceOf('Elastica\Script', $script->setLang(Script::LANG_PYTHON));
+        $this->assertInstanceOf('Elastica\Script\Script', $script->setLang(Script::LANG_PYTHON));
     }
 
     /**
@@ -164,6 +164,6 @@ class ScriptTest extends BaseTest
         $script->setScript('bar');
         $this->assertEquals('bar', $script->getScript());
 
-        $this->assertInstanceOf('Elastica\Script', $script->setScript('foo'));
+        $this->assertInstanceOf('Elastica\Script\Script', $script->setScript('foo'));
     }
 }
