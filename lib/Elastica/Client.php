@@ -38,6 +38,8 @@ class Client
         'log' => false,
         'retryOnConflict' => 0,
         'bigintConversion' => false,
+        'username' => null,
+        'password' => null,
     );
 
     /**

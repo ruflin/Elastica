@@ -92,6 +92,13 @@ class Http extends AbstractTransport
             curl_setopt($conn, CURLOPT_PROXY, $proxy);
         }
 
+        $username = $connection->getUsername();
+        $password = $connection->getPassword();
+        if (!is_null($username) and !is_null($password)) {
+            curl_setopt($conn, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+            curl_setopt($conn, CURLOPT_USERPWD, "$username:$password");
+        }
+
         $this->_setupCurl($conn);
 
         $headersConfig = $connection->hasConfig('headers') ? $connection->getConfig('headers') : array();

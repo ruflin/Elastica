@@ -151,4 +151,26 @@ class ConnectionTest extends BaseTest
 
         $this->assertTrue($connection->hasCompression());
     }
+
+    /**
+     * @group unit
+     */
+    public function testUsernameFromClient()
+    {
+        $username = 'foo';
+        $client = new \Elastica\Client(array('username' => $username));
+
+        $this->assertEquals($username, $client->getConnection()->getUsername('username'));
+    }
+
+    /**
+     * @group unit
+     */
+    public function testPasswordFromClient()
+    {
+        $password = 'bar';
+        $client = new \Elastica\Client(array('password' => $password));
+
+        $this->assertEquals($password, $client->getConnection()->getPassword('password'));
+    }
 }

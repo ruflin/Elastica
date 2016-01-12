@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 ### Improvements
+- Add username and password params to connection
 
 ### Deprecated
 - Elastica\AbstractScript|Script|ScriptFile|ScriptFields deprecated in favor of Elastica\Script|AbstractScript|Script|ScriptFile|ScriptFields [#1028](https://github.com/ruflin/Elastica/pull/1028)
