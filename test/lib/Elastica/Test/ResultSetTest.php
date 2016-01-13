@@ -83,6 +83,7 @@ class ResultSetTest extends BaseTest
         $this->assertInstanceOf('Elastica\Document', $documents[1]);
         $this->assertInstanceOf('Elastica\Document', $documents[2]);
         $this->assertFalse(isset($documents[3]));
+        $this->assertEquals('elastica search', $documents[0]->get('name'));
     }
 
     /**
