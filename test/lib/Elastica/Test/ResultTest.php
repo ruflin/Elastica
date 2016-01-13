@@ -34,6 +34,7 @@ class ResultTest extends BaseTest
         $result = $resultSet->current();
 
         $this->assertInstanceOf('Elastica\Result', $result);
+        $this->assertInstanceOf('Elastica\Document', $result->getDocument());
         $this->assertEquals($index->getName(), $result->getIndex());
         $this->assertEquals($typeName, $result->getType());
         $this->assertEquals($docId, $result->getId());
