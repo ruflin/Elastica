@@ -186,6 +186,21 @@ class Result
     {
         return $this->getParam('_explanation');
     }
+    
+    /**
+     * Returns Document
+     * 
+     * @return \Elastica\Document
+     */
+    public function getDocument()
+    {
+        $doc = new \Elastica\Document();
+        $doc->setData($this->getSource());
+        $hit = $this->getHit();
+        unset($hit['_source']);
+        $doc->setParams($hit);
+        return $doc;
+    }
 
     /**
      * Magic function to directly access keys inside the result.
