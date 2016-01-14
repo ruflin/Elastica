@@ -197,9 +197,9 @@ class Result
         $doc = new \Elastica\Document();
         $doc->setData($this->getSource());
         $hit = $this->getHit();
-        $this->hasParam('_source') unset($hit['_source']);
-        $this->hasParam('_explanation') unset($hit['_explanation']);
-        $this->hasParam('highlight') unset($hit['highlight']);
+        if($this->hasParam('_source')) unset($hit['_source']);
+        if($this->hasParam('_explanation')) unset($hit['_explanation']);
+        if($this->hasParam('highlight')) unset($hit['highlight']);
         $doc->setParams($hit);
         return $doc;
     }
