@@ -450,19 +450,14 @@ class SearchTest extends BaseTest
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
         $type = $index->getType('zeroType');
-        $type->addDocuments(array(
-            new Document(1,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(2,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(3,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(4,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(5,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(6,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-            new Document(7,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-            new Document(8,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-            new Document(9,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-            new Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-            new Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-        ));
+        
+        $docs = array();
+        for ($i = 0; $i < 11; ++$i) {
+            $doc = new Document($i, array('id' => 1, 'email' => 'test@test.com', 'username' => (($i<5) ? 'farrelley' : 'marley')));
+            $doc->setRouting((($i<5) ? 'r1' : 'r2'));
+            $docs[] = $doc
+        }
+        $type->addDocuments($docs);
         $index->refresh();
 
         $search->addIndex($index)->addType($type);
@@ -479,14 +474,22 @@ class SearchTest extends BaseTest
         $count = $search->count(new MatchAll());
         $this->assertEquals(11, $count);
 
+        $count = $search->count('bunny');
+        $this->assertEquals(0, $count);
+
         //Count with routing
         $search->setOption(Search::OPTION_ROUTING, 'r1,r2');
         $count = $search->count(new MatchAll());
-        $this->assertEquals(10, $count);
+        $this->assertEquals(11, $count);
 
-        $count = $search->count('bunny');
-        $this->assertEquals(0, $count);
-    
+        $search->setOption(Search::OPTION_ROUTING, 'r1');
+        $count = $search->count(new MatchAll());
+        $this->assertEquals(5, $count);
+
+        $search->setOption(Search::OPTION_ROUTING, 'r2');
+        $count = $search->count(new MatchAll());
+        $this->assertEquals(6, $count);
+
     }
 
     /**
