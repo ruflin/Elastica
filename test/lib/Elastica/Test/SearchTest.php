@@ -480,7 +480,8 @@ class SearchTest extends BaseTest
         $this->assertEquals(11, $count);
 
         //Count with routing
-        $count = $search->count(new MatchAll(), array('routing' => 'r1,r2'));
+        $search->setOption(Search::OPTION_ROUTING, 'r1,r2');
+        $count = $search->count(new MatchAll());
         $this->assertEquals(10, $count);
 
         $count = $search->count('bunny');
