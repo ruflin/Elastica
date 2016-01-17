@@ -136,6 +136,20 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         return $this->_results;
     }
+    
+    /**
+     * Returns all Documents.
+     *
+     * @return array Documents \Elastica\Document
+     */
+    public function getDocuments()
+    {
+        $documents = [];
+        foreach($this->_results as $doc) {
+            $documents[] = $doc->getDocument();
+        }
+        return $documents;
+    }
 
     /**
      * Returns true if the response contains suggestion results; false otherwise.
