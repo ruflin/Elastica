@@ -479,8 +479,13 @@ class SearchTest extends BaseTest
         $count = $search->count(new MatchAll());
         $this->assertEquals(11, $count);
 
+        //Count with routing
+        $count = $search->count(new MatchAll(), array('routing' => 'r1,r2'));
+        $this->assertEquals(10, $count);
+
         $count = $search->count('bunny');
         $this->assertEquals(0, $count);
+    
     }
 
     /**
