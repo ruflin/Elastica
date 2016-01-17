@@ -476,19 +476,11 @@ class SearchTest extends BaseTest
         $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
         $type = $index->getType('zeroType');
-        $type->addDocuments([
-            new Document(1,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(2,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(3,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(4,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(5,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(6,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(7,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(8,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(9,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-        ]);
+        $docs = [];
+        for ($i = 1; $i <= 11; ++$i) {
+            $docs[] = new Document($i, ['id' => $i, 'email' => 'test@test.com', 'username' => (($i < 5) ? 'farrelley' : 'marley')]);
+        }
+        $type->addDocuments($docs);
         $index->refresh();
 
         $search->addIndex($index)->addType($type);
@@ -609,5 +601,59 @@ class SearchTest extends BaseTest
 
         $results = $search->search($query, [Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true]);
         $this->assertInstanceOf('\Elastica\ResultSet', $results);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testCountRouting()
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+        $index = $client->getIndex('zero');
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $type = $index->getType('zeroType');
+        $mapping = new Mapping($type,
+            [
+                'id' => ['type' => 'long'],
+                'email' => ['type' => 'string'],
+                'username' => ['type' => 'string'],
+            ]
+        );
+        $mapping->setParent('zeroParent');
+        $type->setMapping($mapping);
+        $docs = [];
+        for ($i = 1; $i < 11; ++$i) {
+            $doc = new Document($i, ['id' => $i, 'email' => 'test@test.com', 'username' => (($i < 6) ? 'farrelley' : 'marley')]);
+            $doc->setParent((($i < 6) ? 'farrelley' : 'marley'));
+            $doc->setRouting((($i < 6) ? 'farrelley' : 'marley'));
+            $docs[] = $doc;
+        }
+        $type->addDocuments($docs);
+        $index->refresh();
+        $search->addIndex($index)->addType($type);
+        $all = $type->search(new MatchAll(), [Search::OPTION_ROUTING => 'farrelley,marley']);
+        $this->assertInstanceOf('Elastica\ResultSet', $all);
+        $this->assertCount(10, $all);
+        $this->assertEquals(10, $all->getTotalHits());
+        $r1 = $type->search(new MatchAll(), [Search::OPTION_ROUTING => 'farrelley']);
+        $this->assertInstanceOf('Elastica\ResultSet', $r1);
+        $this->assertCount(5, $r1);
+        $this->assertEquals(5, $r1->getTotalHits());
+        $r2 = $type->search(new MatchAll(), [Search::OPTION_ROUTING => 'marley']);
+        $this->assertInstanceOf('Elastica\ResultSet', $r2);
+        $this->assertCount(5, $r2);
+        $this->assertEquals(5, $r2->getTotalHits());
+
+        //Count with routing
+        $search->setOption(Search::OPTION_ROUTING, 'farrelley,marley');
+        $count = $search->count(new MatchAll());
+        $this->assertEquals(10, $count);
+        $search->setOption(Search::OPTION_ROUTING, 'farrelley');
+        $count = $search->count(new MatchAll());
+        $this->assertEquals(5, $count);
+        $search->setOption(Search::OPTION_ROUTING, 'marley');
+        $count = $search->count(new MatchAll());
+        $this->assertEquals(5, $count);
     }
 }
