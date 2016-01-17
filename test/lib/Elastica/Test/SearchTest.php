@@ -12,6 +12,7 @@ use Elastica\Script\Script;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
+use Elastica\Type\Mapping;
 
 class SearchTest extends BaseTest
 {
@@ -450,10 +451,10 @@ class SearchTest extends BaseTest
         $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
 
         $type = $index->getType('zeroType');
-        
+
         $docs = array();
         for ($i = 0; $i < 11; ++$i) {
-            $doc = new Document($i, array('id' => 1, 'email' => 'test@test.com', 'username' => (($i<5) ? 'farrelley' : 'marley')));
+            $doc = new Document($i, array('id' => $i, 'email' => 'test@test.com', 'username' => (($i<5) ? 'farrelley' : 'marley')));
             $doc->setRouting((($i<5) ? 'r1' : 'r2'));
             $docs[] = $doc;
         }
@@ -477,19 +478,69 @@ class SearchTest extends BaseTest
         $count = $search->count('bunny');
         $this->assertEquals(0, $count);
 
-        //Count with routing
-        $search->setOption(Search::OPTION_ROUTING, 'r1,r2');
-        $count = $search->count(new MatchAll());
-        $this->assertEquals(11, $count);
+    }
 
-        $search->setOption(Search::OPTION_ROUTING, 'r1');
+    /**
+     * @group functional
+     */
+    public function testCountRouting()
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+        $index = $client->getIndex('zero');
+        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+
+        $type = $index->getType('zeroType');
+        $mapping = new Mapping($type,
+            array(
+                'id' => array('type' => 'long'),
+                'email' => array('type' => 'string'),
+                'username' => array('type' => 'string'),
+            )
+        );
+        $mapping->setParent('zeroParent');
+        $type->setMapping($mapping);
+
+
+        $docs = array();
+        for ($i = 1; $i < 11; ++$i) {
+            $doc = new Document($i, array('id' => $i, 'email' => 'test@test.com', 'username' => (($i < 6) ? 'farrelley' : 'marley')));
+            $doc->setParent((($i < 6) ? 'farrelley' : 'marley'));
+            $doc->setRouting((($i < 6) ? 'farrelley' : 'marley'));
+            $docs[] = $doc;
+        }
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $search->addIndex($index)->addType($type);
+
+        $all = $type->search(new MatchAll(), array(Search::OPTION_ROUTING => 'farrelley,marley'));
+        $this->assertInstanceOf('Elastica\ResultSet', $all);
+        $this->assertCount(10, $all);
+        $this->assertEquals(10, $all->getTotalHits());
+
+        $r1 = $type->search(new MatchAll(), array(Search::OPTION_ROUTING => 'farrelley'));
+        $this->assertInstanceOf('Elastica\ResultSet', $r1);
+        $this->assertCount(5, $r1);
+        $this->assertEquals(5, $r1->getTotalHits());
+
+        $r2 = $type->search(new MatchAll(), array(Search::OPTION_ROUTING => 'marley'));
+        $this->assertInstanceOf('Elastica\ResultSet', $r2);
+        $this->assertCount(5, $r2);
+        $this->assertEquals(5, $r2->getTotalHits());
+
+        //Count with routing
+        $search->setOption(Search::OPTION_ROUTING, 'farrelley,marley');
+        $count = $search->count(new MatchAll());
+        $this->assertEquals(10, $count);
+
+        $search->setOption(Search::OPTION_ROUTING, 'farrelley');
         $count = $search->count(new MatchAll());
         $this->assertEquals(5, $count);
 
-        $search->setOption(Search::OPTION_ROUTING, 'r2');
+        $search->setOption(Search::OPTION_ROUTING, 'marley');
         $count = $search->count(new MatchAll());
-        $this->assertEquals(6, $count);
-
+        $this->assertEquals(5, $count);
     }
 
     /**
