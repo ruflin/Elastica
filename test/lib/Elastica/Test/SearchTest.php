@@ -454,9 +454,7 @@ class SearchTest extends BaseTest
 
         $docs = array();
         for ($i = 0; $i < 11; ++$i) {
-            $doc = new Document($i, array('id' => $i, 'email' => 'test@test.com', 'username' => (($i<5) ? 'farrelley' : 'marley')));
-            $doc->setRouting((($i<5) ? 'r1' : 'r2'));
-            $docs[] = $doc;
+            $docs[] = new Document($i, array('id' => $i, 'email' => 'test@test.com', 'username' => (($i<5) ? 'farrelley' : 'marley')));
         }
         $type->addDocuments($docs);
         $index->refresh();
