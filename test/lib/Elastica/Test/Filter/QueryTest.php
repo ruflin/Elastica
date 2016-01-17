@@ -3,10 +3,19 @@ namespace Elastica\Test\Filter;
 
 use Elastica\Filter\Query;
 use Elastica\Query\QueryString;
-use Elastica\Test\Base as BaseTest;
+use Elastica\Test\DeprecatedClassBase as BaseTest;
 
 class QueryTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
+    public function testDeprecated()
+    {
+        $reflection = new \ReflectionClass(new Query());
+        $this->assertFileDeprecated($reflection->getFileName(), 'Deprecated: Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html');
+    }
+
     /**
      * @group unit
      */

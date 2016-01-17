@@ -4,11 +4,20 @@ namespace Elastica\Test\Filter;
 use Elastica\Document;
 use Elastica\Filter\GeohashCell;
 use Elastica\Query;
-use Elastica\Test\Base as BaseTest;
+use Elastica\Test\DeprecatedClassBase as BaseTest;
 use Elastica\Type\Mapping;
 
 class GeohashCellTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
+    public function testDeprecated()
+    {
+        $reflection = new \ReflectionClass(new GeohashCell('pin', array('lat' => 37.789018, 'lon' => -122.391506), '50m'));
+        $this->assertFileDeprecated($reflection->getFileName(), 'Deprecated: Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html');
+    }
+
     /**
      * @group unit
      */

@@ -2,6 +2,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Filter\Exists;
 use Elastica\Filter\Ids;
 use Elastica\Filter\Term;
 use Elastica\Index;
@@ -11,11 +12,82 @@ use Elastica\Test\Base as BaseTest;
 
 class ConstantScoreTest extends BaseTest
 {
+    /**
+     * @group unit
+     */
+    public function testArrayConstruct()
+    {
+        $query = new ConstantScore(array('test'));
+        $this->assertSame($query->getParam('filter'), array('test'));
+    }
+
+    /**
+     * @group unit
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testConstructInvalid()
+    {
+        new ConstantScore($this);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testConstructWithLegacyFilterDeprecated()
+    {
+        $this->hideDeprecated();
+        $existsFilter = new Exists('test');
+        $this->showDeprecated();
+
+        $errorsCollector = $this->startCollectErrors();
+        new ConstantScore($existsFilter);
+        $this->finishCollectErrors();
+
+        $errorsCollector->assertOnlyDeprecatedErrors(
+            array(
+                'Deprecated: Elastica\Query\ConstantScore passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
+                'Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+            )
+        );
+    }
+
+    /**
+     * @group unit
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testSetFilterInvalid()
+    {
+        $query = new ConstantScore();
+        $query->setFilter($this);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testSetFilterWithLegacyFilterDeprecated()
+    {
+        $this->hideDeprecated();
+        $existsFilter = new Exists('test');
+        $this->showDeprecated();
+
+        $query = new ConstantScore();
+
+        $errorsCollector = $this->startCollectErrors();
+        $query->setFilter($existsFilter);
+        $this->finishCollectErrors();
+
+        $errorsCollector->assertOnlyDeprecatedErrors(
+            array(
+                'Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+            )
+        );
+    }
+
     public function dataProviderSampleQueries()
     {
         return array(
             array(
-                new Term(array('foo', 'bar')),
+                new \Elastica\Query\Term(array('foo', 'bar')),
                 array(
                     'constant_score' => array(
                         'filter' => array(
@@ -52,6 +124,7 @@ class ConstantScoreTest extends BaseTest
             ),
         );
     }
+
     /**
      * @group unit
      * @dataProvider dataProviderSampleQueries
@@ -59,7 +132,49 @@ class ConstantScoreTest extends BaseTest
     public function testSimple($filter, $expected)
     {
         $query = new ConstantScore();
+
         $query->setFilter($filter);
+
+        if (is_string($expected)) {
+            $expected = json_decode($expected, true);
+        }
+        $this->assertEquals($expected, $query->toArray());
+    }
+
+    public function dataProviderSampleQueriesWithLegacyFilter()
+    {
+        $this->hideDeprecated();
+        $legacyFilter = new Term(array('foo', 'bar'));
+        $this->showDeprecated();
+
+        return array(
+            array(
+                $legacyFilter,
+                array(
+                    'constant_score' => array(
+                        'filter' => array(
+                            'term' => array(
+                                'foo',
+                                'bar',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+    }
+
+    /**
+     * @group unit
+     * @dataProvider dataProviderSampleQueriesWithLegacyFilter
+     */
+    public function testSimpleWithLegacyFilter($filter, $expected)
+    {
+        $query = new ConstantScore();
+        $this->hideDeprecated();
+        $query->setFilter($filter);
+        $this->showDeprecated();
+
         if (is_string($expected)) {
             $expected = json_decode($expected, true);
         }
@@ -74,10 +189,34 @@ class ConstantScoreTest extends BaseTest
         $query = new ConstantScore();
 
         $boost = 1.2;
+        $filter = new \Elastica\Query\Ids();
+        $filter->setIds(array(1));
+        $query->setFilter($filter);
+        $query->setBoost($boost);
+
+        $expectedArray = array(
+            'constant_score' => array(
+                'filter' => $filter->toArray(),
+                'boost' => $boost,
+            ),
+        );
+
+        $this->assertEquals($expectedArray, $query->toArray());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testToArrayWithLegacyFilter()
+    {
+        $query = new ConstantScore();
+
+        $boost = 1.2;
+        $this->hideDeprecated();
         $filter = new Ids();
         $filter->setIds(array(1));
-
         $query->setFilter($filter);
+        $this->showDeprecated();
         $query->setBoost($boost);
 
         $expectedArray = array(
@@ -95,10 +234,31 @@ class ConstantScoreTest extends BaseTest
      */
     public function testConstruct()
     {
-        $filter = new Ids();
+        $filter = new \Elastica\Query\Ids();
         $filter->setIds(array(1));
 
         $query = new ConstantScore($filter);
+
+        $expectedArray = array(
+            'constant_score' => array(
+                'filter' => $filter->toArray(),
+            ),
+        );
+
+        $this->assertEquals($expectedArray, $query->toArray());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testConstructWithLegacyFilter()
+    {
+        $filter = new Ids();
+        $filter->setIds(array(1));
+
+        $this->hideDeprecated();
+        $query = new ConstantScore($filter);
+        $this->showDeprecated();
 
         $expectedArray = array(
             'constant_score' => array(

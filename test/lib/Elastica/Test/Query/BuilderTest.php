@@ -8,26 +8,27 @@ class BuilderTest extends BaseTest
 {
     /**
      * @group unit
+     */
+    public function testDeprecated()
+    {
+        $this->hideDeprecated();
+        $reflection = new \ReflectionClass(new Builder());
+        $this->showDeprecated();
+
+        $this->assertFileDeprecated($reflection->getFileName(), 'This builder is deprecated and will be removed in further Elastica releases. Use new Elastica\QueryBuilder instead.');
+    }
+
+    /**
+     * @group unit
      * @covers \Elastica\Query\Builder::factory
      * @covers \Elastica\Query\Builder::__construct
      */
     public function testFactory()
     {
-        $err = array();
-
-        set_error_handler(function () use (&$err) {
-            $err[] = func_get_args();
-        });
-
         $this->assertInstanceOf(
             'Elastica\Query\Builder',
             Builder::factory('some string')
         );
-
-        restore_error_handler();
-
-        $this->assertCount(1, $err);
-        $this->assertEquals(E_USER_DEPRECATED, $err[0][0]);
     }
 
     public function getQueryData()

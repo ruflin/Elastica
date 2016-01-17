@@ -2,6 +2,7 @@
 namespace Elastica\Test\QueryBuilder\DSL;
 
 use Elastica\Filter\Exists;
+use Elastica\Query\Term;
 use Elastica\QueryBuilder\DSL;
 
 class AggregationTest extends AbstractDSLTest
@@ -19,6 +20,16 @@ class AggregationTest extends AbstractDSLTest
 
     /**
      * @group unit
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testFilteredInvalid()
+    {
+        $queryDSL = new DSL\Aggregation();
+        $queryDSL->filter(null, $this);
+    }
+
+    /**
+     * @group unit
      */
     public function testInterface()
     {
@@ -29,7 +40,12 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'date_histogram', 'Elastica\Aggregation\DateHistogram', array('name', 'field', 1));
         $this->_assertImplemented($aggregationDSL, 'date_range', 'Elastica\Aggregation\DateRange', array('name'));
         $this->_assertImplemented($aggregationDSL, 'extended_stats', 'Elastica\Aggregation\ExtendedStats', array('name'));
+        $this->hideDeprecated();
         $this->_assertImplemented($aggregationDSL, 'filter', 'Elastica\Aggregation\Filter', array('name', new Exists('field')));
+        $this->showDeprecated();
+
+        $this->_assertImplemented($aggregationDSL, 'filter', 'Elastica\Aggregation\Filter', array('name', new Term()));
+
         $this->_assertImplemented($aggregationDSL, 'filters', 'Elastica\Aggregation\Filters', array('name'));
         $this->_assertImplemented($aggregationDSL, 'geo_distance', 'Elastica\Aggregation\GeoDistance', array('name', 'field', 'origin'));
         $this->_assertImplemented($aggregationDSL, 'geohash_grid', 'Elastica\Aggregation\GeohashGrid', array('name', 'field'));

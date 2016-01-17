@@ -1,7 +1,9 @@
 <?php
 namespace Elastica\Query;
 
+use Elastica\Exception\DeprecatedException;
 use Elastica\Script\AbstractScript;
+use Elastica\Exception\InvalidException;
 use Elastica\Filter\AbstractFilter;
 
 /**
@@ -56,12 +58,13 @@ class FunctionScore extends AbstractQuery
 
     /**
      * @param AbstractFilter $filter
+     * @deprecated Elastica\Query\FunctionScore::setFilter is deprecated. Use setQuery instead
      *
      * @return $this
      */
     public function setFilter(AbstractFilter $filter)
     {
-        return $this->setParam('filter', $filter);
+        throw new DeprecatedException('Deprecated: Elastica\Query\FunctionScore::setFilter is deprecated. Use setQuery instead.');
     }
 
     /**
@@ -69,19 +72,27 @@ class FunctionScore extends AbstractQuery
      *
      * @param string         $functionType   valid values are DECAY_* constants and script_score
      * @param array|float    $functionParams the body of the function. See documentation for proper syntax.
-     * @param AbstractFilter $filter         optional filter to apply to the function
+     * @param AbstractQuery  $filter         optional filter to apply to the function
      * @param float          $weight         function weight
      *
      * @return $this
      */
-    public function addFunction($functionType, $functionParams, AbstractFilter $filter = null, $weight = null)
+    public function addFunction($functionType, $functionParams, $filter = null, $weight = null)
     {
         $function = array(
             $functionType => $functionParams,
         );
+
         if (!is_null($filter)) {
+            if ($filter instanceof AbstractFilter) {
+                trigger_error('Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
+            } elseif (!($filter instanceof AbstractQuery)) {
+                throw new InvalidException('Filter must be instance of AbstractQuery');
+            }
+
             $function['filter'] = $filter;
         }
+
         if ($weight !== null) {
             $function['weight'] = $weight;
         }
@@ -95,13 +106,21 @@ class FunctionScore extends AbstractQuery
      * Add a script_score function to the query.
      *
      * @param \Elastica\Script\AbstractScript    $script a Script object
-     * @param AbstractFilter                     $filter an optional filter to apply to the function
-     * @param float                              $weight the weight of the function
+     * @param AbstractQuery  $filter an optional filter to apply to the function
+     * @param float          $weight the weight of the function
      *
      * @return $this
      */
-    public function addScriptScoreFunction(AbstractScript $script, AbstractFilter $filter = null, $weight = null)
+    public function addScriptScoreFunction(AbstractScript $script, $filter = null, $weight = null)
     {
+        if (null !== $filter) {
+            if ($filter instanceof AbstractFilter) {
+                trigger_error('Deprecated: Elastica\Query\FunctionScore::addScriptScoreFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
+            } elseif (!($filter instanceof AbstractQuery)) {
+                throw new InvalidException('Filter must be instance of AbstractQuery');
+            }
+        }
+
         return $this->addFunction('script_score', $script, $filter, $weight);
     }
 
@@ -115,7 +134,7 @@ class FunctionScore extends AbstractQuery
      * @param string         $offset   If defined, this function will only be computed for documents with a distance from the origin greater than this value
      * @param float          $decay    optionally defines how documents are scored at the distance given by the $scale parameter
      * @param float          $weight   optional factor by which to multiply the score at the value provided by the $scale parameter
-     * @param AbstractFilter $filter   a filter associated with this function
+     * @param AbstractQuery  $filter   a filter associated with this function
      *
      * @return $this
      */
@@ -127,8 +146,16 @@ class FunctionScore extends AbstractQuery
         $offset = null,
         $decay = null,
         $weight = null,
-        AbstractFilter $filter = null
+        $filter = null
     ) {
+        if (null !== $filter) {
+            if ($filter instanceof AbstractFilter) {
+                trigger_error('Deprecated: Elastica\Query\FunctionScore::addDecayFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
+            } elseif (!($filter instanceof AbstractQuery)) {
+                throw new InvalidException('Filter must be instance of AbstractQuery');
+            }
+        }
+
         $functionParams = array(
             $field => array(
                 'origin' => $origin,
@@ -151,8 +178,16 @@ class FunctionScore extends AbstractQuery
         $modifier = null,
         $missing = null,
         $weight = null,
-        AbstractFilter $filter = null
+        $filter = null
     ) {
+        if (null !== $filter) {
+            if ($filter instanceof AbstractFilter) {
+                trigger_error('Deprecated: Elastica\Query\FunctionScore::addFieldValueFactorFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
+            } elseif (!($filter instanceof AbstractQuery)) {
+                throw new InvalidException('Filter must be instance of AbstractQuery');
+            }
+        }
+
         $functionParams = array(
             'field' => $field,
         );
@@ -176,22 +211,38 @@ class FunctionScore extends AbstractQuery
      * Add a boost_factor function to the query.
      *
      * @param float          $boostFactor the boost factor value
-     * @param AbstractFilter $filter      a filter associated with this function
+     * @param AbstractQuery  $filter      a filter associated with this function
      *
      * @deprecated Use addWeightFunction instead. This method will be removed in further Elastica releases
      */
-    public function addBoostFactorFunction($boostFactor, AbstractFilter $filter = null)
+    public function addBoostFactorFunction($boostFactor, $filter = null)
     {
+        if (null !== $filter) {
+            if ($filter instanceof AbstractFilter) {
+                trigger_error('Deprecated: Elastica\Query\FunctionScore::addBoostFactorFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
+            } elseif (!($filter instanceof AbstractQuery)) {
+                throw new InvalidException('Filter must be instance of AbstractQuery');
+            }
+        }
+
         trigger_error('Query\FunctionScore::addBoostFactorFunction is deprecated. Use addWeightFunction instead. This method will be removed in further Elastica releases', E_USER_DEPRECATED);
         $this->addWeightFunction($boostFactor, $filter);
     }
 
     /**
      * @param float          $weight the weight of the function
-     * @param AbstractFilter $filter a filter associated with this function
+     * @param AbstractQuery  $filter a filter associated with this function
      */
-    public function addWeightFunction($weight, AbstractFilter $filter = null)
+    public function addWeightFunction($weight, $filter = null)
     {
+        if (null !== $filter) {
+            if ($filter instanceof AbstractFilter) {
+                trigger_error('Deprecated: Elastica\Query\FunctionScore::addWeightFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
+            } elseif (!($filter instanceof AbstractQuery)) {
+                throw new InvalidException('Filter must be instance of AbstractQuery');
+            }
+        }
+
         $this->addFunction('weight', $weight, $filter);
     }
 
@@ -199,11 +250,19 @@ class FunctionScore extends AbstractQuery
      * Add a random_score function to the query.
      *
      * @param number         $seed   the seed value
-     * @param AbstractFilter $filter a filter associated with this function
+     * @param AbstractQuery  $filter a filter associated with this function
      * @param float          $weight an optional boost value associated with this function
      */
-    public function addRandomScoreFunction($seed, AbstractFilter $filter = null, $weight = null)
+    public function addRandomScoreFunction($seed, $filter = null, $weight = null)
     {
+        if (null !== $filter) {
+            if ($filter instanceof AbstractFilter) {
+                trigger_error('Deprecated: Elastica\Query\FunctionScore::addRandomScoreFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
+            } elseif (!($filter instanceof AbstractQuery)) {
+                throw new InvalidException('Filter must be instance of AbstractQuery');
+            }
+        }
+
         $this->addFunction('random_score', array('seed' => $seed), $filter, $weight);
     }
 

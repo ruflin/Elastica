@@ -3,6 +3,7 @@ namespace Elastica\Test\QueryBuilder\DSL;
 
 use Elastica\Filter\Exists;
 use Elastica\Query\Match;
+use Elastica\Query\Term;
 use Elastica\QueryBuilder\DSL;
 
 class QueryTest extends AbstractDSLTest
@@ -32,6 +33,59 @@ class QueryTest extends AbstractDSLTest
 
     /**
      * @group unit
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testConstantScoreFilterInvalid()
+    {
+        $queryDSL = new DSL\Query();
+        $queryDSL->constant_score($this);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testConstantScoreWithLegacyFilterDeprecated()
+    {
+        $this->hideDeprecated();
+        $existsFilter = new Exists('test');
+        $this->showDeprecated();
+
+        $queryDSL = new DSL\Query();
+
+        $errorsCollector = $this->startCollectErrors();
+        $queryDSL->constant_score($existsFilter);
+        $this->finishCollectErrors();
+
+        $errorsCollector->assertOnlyDeprecatedErrors(
+            array(
+                'Deprecated: Elastica\Query\ConstantScore passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
+                'Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+            )
+        );
+    }
+
+    /**
+     * @group unit
+     */
+    public function testFilteredDeprecated()
+    {
+        $errorsCollector = $this->startCollectErrors();
+
+        $queryDSL = new DSL\Query();
+        $queryDSL->filtered(null, new Exists('term'));
+        $this->finishCollectErrors();
+
+        $errorsCollector->assertOnlyDeprecatedErrors(
+            array(
+                'Use bool() instead. Filtered query is deprecated since ES 2.0.0-beta1 and this method will be removed in further Elastica releases.',
+                'Deprecated: Elastica\Query\Filtered passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
+                'Deprecated: Elastica\Query\Filtered::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+            )
+        );
+    }
+
+    /**
+     * @group unit
      */
     public function testInterface()
     {
@@ -43,18 +97,10 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'constant_score', 'Elastica\Query\ConstantScore', array(new Match()));
         $this->_assertImplemented($queryDSL, 'dis_max', 'Elastica\Query\DisMax', array());
 
-        $errors = array();
-        set_error_handler(function () use (&$errors) {
-            $errors[] = func_get_args();
-        });
-
+        $this->hideDeprecated();
         $this->_assertImplemented($queryDSL, 'filtered', 'Elastica\Query\Filtered', array(new Match(), new Exists('field')));
-
-        restore_error_handler();
-
-        $this->assertGreaterThanOrEqual(1, count($errors));
-        $this->assertEquals(E_USER_DEPRECATED, $errors[0][0]);
-        $this->assertEquals('Use bool() instead. Filtered query is deprecated since ES 2.0.0-beta1 and this method will be removed in further Elastica releases.', $errors[0][1]);
+        $this->_assertImplemented($queryDSL, 'filtered', 'Elastica\Query\Filtered', array(new Match(), new Term()));
+        $this->showDeprecated();
 
         $this->_assertImplemented($queryDSL, 'function_score', 'Elastica\Query\FunctionScore', array());
         $this->_assertImplemented($queryDSL, 'fuzzy', 'Elastica\Query\Fuzzy', array('field', 'type'));

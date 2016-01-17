@@ -14,18 +14,9 @@ class FuzzyTest extends BaseTest
     {
         $fuzzy = new Fuzzy();
 
-        $err = array();
-
-        set_error_handler(function () use (&$err) {
-            $err[] = func_get_args();
-        });
-
+        $this->hideDeprecated();
         $fuzzy->addField('user', array('value' => 'Nicolas', 'boost' => 1.0));
-
-        restore_error_handler();
-
-        $this->assertCount(1, $err);
-        $this->assertEquals(E_USER_DEPRECATED, $err[0][0]);
+        $this->showDeprecated();
 
         $sameFuzzy = new Fuzzy();
         $sameFuzzy->setField('user', 'Nicolas');
@@ -114,18 +105,9 @@ class FuzzyTest extends BaseTest
         $this->setExpectedException('Elastica\Exception\InvalidException');
         $query = new Fuzzy();
 
-        $err = array();
-
-        set_error_handler(function () use (&$err) {
-            $err[] = func_get_args();
-        });
-
+        $this->hideDeprecated();
         $query->addField('name', array(array('value' => 'Baden')));
-
-        restore_error_handler();
-
-        $this->assertCount(1, $err);
-        $this->assertEquals(E_USER_DEPRECATED, $err[0][0]);
+        $this->showDeprecated();
 
         $this->setExpectedException('Elastica\Exception\InvalidException');
         $query = new Fuzzy();
@@ -135,5 +117,18 @@ class FuzzyTest extends BaseTest
         $query = new Fuzzy();
         $query->setField('name', 'value');
         $query->setField('name1', 'value1');
+    }
+
+    /**
+     * @group unit
+     */
+    public function testAddFieldDeprecated()
+    {
+        $query = new Fuzzy();
+        $errorCollector = $this->startCollectErrors();
+        $query->addField('user', array('value' => 'Nicolas', 'boost' => 1.0));
+        $this->finishCollectErrors();
+
+        $errorCollector->assertOnlyOneDeprecatedError('Query\Fuzzy::addField is deprecated. Use setField and setFieldOption instead. This method will be removed in further Elastica releases');
     }
 }
