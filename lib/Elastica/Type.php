@@ -360,13 +360,14 @@ class Type implements SearchableInterface
      *
      * @param string|array|\Elastica\Query $query       Array with all query data inside or a Elastica\Query object
      * @param ResultSet                    $fullResult (default = false) By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned.
+     * 
      * @return int number of documents matching the query|ResultSet
      *
      * @see \Elastica\SearchableInterface::count
      */
     public function count($query = '', $fullResult = false)
     {
-        $search = $this->createSearch($query);
+        $search = $this->createSearch();
 
         return $search->count($query, $fullResult);
     }
