@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 - `Elastica\Result->getDocument` and `Elastica\ResultSet->getDocuments` for return `\Elastica\Document`. https://github.com/ruflin/Elastica/issues/960
+- Added `fullResult` parameter to `Elastica\Type->count()`. https://github.com/ruflin/Elastica/issues/719
 
 ### Improvements
 - Add username and password params to connection
