@@ -938,4 +938,39 @@ class TypeTest extends BaseTest
             $client->getIndex($aliasName)->getType($typeName)->getMapping()
         );
     }
+
+    /**
+     * @Testing count
+     */
+    public function testCount()
+    {
+        $index = $this->_createIndex();
+
+        $type = new Type($index, 'user');
+
+        // Adds a list of documents with _bulk upload to the index
+        $docs = array();
+        $docs[] = new Document(2,
+            array('username' => 'rolf', 'test' => array('1', '3', '6'))
+        );
+        $docs[] = new Document(3,
+            array('username' => 'rolf', 'test' => array('2', '3', '7'))
+        );
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $resultSet = $type->search('rolf');
+        $this->assertEquals(2, $resultSet->count());
+
+        $count = $type->count('rolf');
+        $this->assertEquals(2, $count);
+
+        $resultSet = $type->count('rolf', true);
+        $this->assertEquals(2, $resultSet->count());
+
+        // Test if source is returned
+        $result = $resultSet->current();
+        $data = $result->getData();
+        $this->assertEquals('rolf', $data['username']);
+    }
 }
