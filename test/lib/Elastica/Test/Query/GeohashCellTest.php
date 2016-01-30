@@ -2,8 +2,8 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\GeohashCell;
 use Elastica\Query;
+use Elastica\Query\GeohashCell;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type\Mapping;
 

@@ -53,7 +53,7 @@ class FiltersTest extends BaseAggregationTest
 
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
-                'Deprecated: Elastica\Aggregation\Filters\addFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.'
+                'Deprecated: Elastica\Aggregation\Filters\addFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
             )
         );
     }

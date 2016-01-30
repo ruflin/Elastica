@@ -136,7 +136,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         return $this->_results;
     }
-    
+
     /**
      * Returns all Documents.
      *
@@ -144,10 +144,11 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getDocuments()
     {
-        $documents = [];
-        foreach($this->_results as $doc) {
+        $documents = array();
+        foreach ($this->_results as $doc) {
             $documents[] = $doc->getDocument();
         }
+
         return $documents;
     }
 

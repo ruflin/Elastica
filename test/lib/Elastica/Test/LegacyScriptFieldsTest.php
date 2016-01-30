@@ -11,6 +11,6 @@ class LegacyScriptFieldsTest extends BaseTest
      */
     public function testParent()
     {
-        $this->assertInstanceOf('Elastica\Script\ScriptFields', new LegacyScriptFields([]));
+        $this->assertInstanceOf('Elastica\Script\ScriptFields', new LegacyScriptFields(array()));
     }
 }

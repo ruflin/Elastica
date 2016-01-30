@@ -87,7 +87,7 @@ class FunctionScoreTest extends BaseTest
 
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
-                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }
@@ -120,7 +120,7 @@ class FunctionScoreTest extends BaseTest
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
                 'Deprecated: Elastica\Query\FunctionScore::addDecayFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }
@@ -153,7 +153,7 @@ class FunctionScoreTest extends BaseTest
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
                 'Deprecated: Elastica\Query\FunctionScore::addScriptScoreFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }
@@ -186,7 +186,7 @@ class FunctionScoreTest extends BaseTest
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
                 'Deprecated: Elastica\Query\FunctionScore::addFieldValueFactorFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }
@@ -221,7 +221,7 @@ class FunctionScoreTest extends BaseTest
                 'Deprecated: Elastica\Query\FunctionScore::addBoostFactorFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
                 'Query\FunctionScore::addBoostFactorFunction is deprecated. Use addWeightFunction instead. This method will be removed in further Elastica releases',
                 'Deprecated: Elastica\Query\FunctionScore::addWeightFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }
@@ -254,7 +254,7 @@ class FunctionScoreTest extends BaseTest
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
                 'Deprecated: Elastica\Query\FunctionScore::addWeightFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }
@@ -287,7 +287,7 @@ class FunctionScoreTest extends BaseTest
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
                 'Deprecated: Elastica\Query\FunctionScore::addRandomScoreFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }

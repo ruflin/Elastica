@@ -7,9 +7,9 @@ use Elastica\Document;
 use Elastica\Filter\Exists;
 use Elastica\Filter\Range;
 use Elastica\Filter\Term;
+use Elastica\Query;
 use Elastica\Query\Range as RangeQuery;
 use Elastica\Query\Term as TermQuery;
-use Elastica\Query;
 
 class FilterTest extends BaseAggregationTest
 {
@@ -54,7 +54,7 @@ class FilterTest extends BaseAggregationTest
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
                 'Deprecated: Elastica\Aggregation\Filter passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-                'Deprecated: Elastica\Aggregation\Filter\setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.'
+                'Deprecated: Elastica\Aggregation\Filter\setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
             )
         );
     }
@@ -86,7 +86,7 @@ class FilterTest extends BaseAggregationTest
 
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
-                'Deprecated: Elastica\Aggregation\Filter\setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.'
+                'Deprecated: Elastica\Aggregation\Filter\setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
             )
         );
     }

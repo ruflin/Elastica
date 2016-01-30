@@ -2,8 +2,8 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Query\AbstractGeoShape;
-use Elastica\Query\GeoShapePreIndexed;
 use Elastica\Query\BoolQuery;
+use Elastica\Query\GeoShapePreIndexed;
 use Elastica\Test\Base as BaseTest;
 
 class GeoShapePreIndexedTest extends BaseTest

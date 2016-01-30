@@ -74,11 +74,11 @@ class ResultSetTest extends BaseTest
         $resultSet = $type->search('elastica search');
 
         $this->assertInstanceOf('Elastica\ResultSet', $resultSet);
-        
+
         $documents = $resultSet->getDocuments();
 
         $this->assertInternalType('array', $documents);
-        $this->assertEquals(3, count($documents));        
+        $this->assertEquals(3, count($documents));
         $this->assertInstanceOf('Elastica\Document', $documents[0]);
         $this->assertInstanceOf('Elastica\Document', $documents[1]);
         $this->assertInstanceOf('Elastica\Document', $documents[2]);

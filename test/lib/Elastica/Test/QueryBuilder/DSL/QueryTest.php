@@ -59,7 +59,7 @@ class QueryTest extends AbstractDSLTest
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
                 'Deprecated: Elastica\Query\ConstantScore passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-                'Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }
@@ -79,7 +79,7 @@ class QueryTest extends AbstractDSLTest
             array(
                 'Use bool() instead. Filtered query is deprecated since ES 2.0.0-beta1 and this method will be removed in further Elastica releases.',
                 'Deprecated: Elastica\Query\Filtered passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-                'Deprecated: Elastica\Query\Filtered::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\Filtered::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }

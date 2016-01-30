@@ -20,7 +20,7 @@ class Base extends \PHPUnit_Framework_TestCase
     protected function assertFileDeprecated($file, $deprecationMessage)
     {
         $content = file_get_contents($file);
-        $content = preg_replace('/^(abstract class|class) ([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+)/m', '${1} ${2}' . uniqid(), $content);
+        $content = preg_replace('/^(abstract class|class) ([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+)/m', '${1} ${2}'.uniqid(), $content);
         $newFile = tempnam(sys_get_temp_dir(), 'elastica-test-');
         file_put_contents($newFile, $content);
 

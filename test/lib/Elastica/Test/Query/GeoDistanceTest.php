@@ -2,8 +2,8 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\GeoDistance;
 use Elastica\Query;
+use Elastica\Query\GeoDistance;
 use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 

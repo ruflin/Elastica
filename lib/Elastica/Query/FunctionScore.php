@@ -2,9 +2,9 @@
 namespace Elastica\Query;
 
 use Elastica\Exception\DeprecatedException;
-use Elastica\Script\AbstractScript;
 use Elastica\Exception\InvalidException;
 use Elastica\Filter\AbstractFilter;
+use Elastica\Script\AbstractScript;
 
 /**
  * Class FunctionScore.
@@ -58,6 +58,7 @@ class FunctionScore extends AbstractQuery
 
     /**
      * @param AbstractFilter $filter
+     *
      * @deprecated Elastica\Query\FunctionScore::setFilter is deprecated. Use setQuery instead
      *
      * @return $this
@@ -70,10 +71,10 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a function to the function_score query.
      *
-     * @param string         $functionType   valid values are DECAY_* constants and script_score
-     * @param array|float    $functionParams the body of the function. See documentation for proper syntax.
-     * @param AbstractQuery  $filter         optional filter to apply to the function
-     * @param float          $weight         function weight
+     * @param string        $functionType   valid values are DECAY_* constants and script_score
+     * @param array|float   $functionParams the body of the function. See documentation for proper syntax.
+     * @param AbstractQuery $filter         optional filter to apply to the function
+     * @param float         $weight         function weight
      *
      * @return $this
      */
@@ -105,9 +106,9 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a script_score function to the query.
      *
-     * @param \Elastica\Script\AbstractScript    $script a Script object
-     * @param AbstractQuery  $filter an optional filter to apply to the function
-     * @param float          $weight the weight of the function
+     * @param \Elastica\Script\AbstractScript $script a Script object
+     * @param AbstractQuery                   $filter an optional filter to apply to the function
+     * @param float                           $weight the weight of the function
      *
      * @return $this
      */
@@ -127,14 +128,14 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a decay function to the query.
      *
-     * @param string         $function see DECAY_* constants for valid options
-     * @param string         $field    the document field on which to perform the decay function
-     * @param string         $origin   the origin value for this decay function
-     * @param string         $scale    a scale to define the rate of decay for this function
-     * @param string         $offset   If defined, this function will only be computed for documents with a distance from the origin greater than this value
-     * @param float          $decay    optionally defines how documents are scored at the distance given by the $scale parameter
-     * @param float          $weight   optional factor by which to multiply the score at the value provided by the $scale parameter
-     * @param AbstractQuery  $filter   a filter associated with this function
+     * @param string        $function see DECAY_* constants for valid options
+     * @param string        $field    the document field on which to perform the decay function
+     * @param string        $origin   the origin value for this decay function
+     * @param string        $scale    a scale to define the rate of decay for this function
+     * @param string        $offset   If defined, this function will only be computed for documents with a distance from the origin greater than this value
+     * @param float         $decay    optionally defines how documents are scored at the distance given by the $scale parameter
+     * @param float         $weight   optional factor by which to multiply the score at the value provided by the $scale parameter
+     * @param AbstractQuery $filter   a filter associated with this function
      *
      * @return $this
      */
@@ -210,8 +211,8 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a boost_factor function to the query.
      *
-     * @param float          $boostFactor the boost factor value
-     * @param AbstractQuery  $filter      a filter associated with this function
+     * @param float         $boostFactor the boost factor value
+     * @param AbstractQuery $filter      a filter associated with this function
      *
      * @deprecated Use addWeightFunction instead. This method will be removed in further Elastica releases
      */
@@ -230,8 +231,8 @@ class FunctionScore extends AbstractQuery
     }
 
     /**
-     * @param float          $weight the weight of the function
-     * @param AbstractQuery  $filter a filter associated with this function
+     * @param float         $weight the weight of the function
+     * @param AbstractQuery $filter a filter associated with this function
      */
     public function addWeightFunction($weight, $filter = null)
     {
@@ -249,9 +250,9 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a random_score function to the query.
      *
-     * @param number         $seed   the seed value
-     * @param AbstractQuery  $filter a filter associated with this function
-     * @param float          $weight an optional boost value associated with this function
+     * @param number        $seed   the seed value
+     * @param AbstractQuery $filter a filter associated with this function
+     * @param float         $weight an optional boost value associated with this function
      */
     public function addRandomScoreFunction($seed, $filter = null, $weight = null)
     {

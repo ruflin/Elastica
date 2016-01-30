@@ -2,13 +2,24 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/3.0.1...HEAD)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/3.1.0...HEAD)
+
+### Backward Compatibility Breaks
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+
+## [3.1.0](https://github.com/ruflin/Elastica/compare/3.0.1...3.1.0)
 
 ### Backward Compatibility Breaks
 - Update Guzzle transport to use Guzzle 6
 - Elastica\Query\FunctionScore::setFilter - deprecated and will throw DeprecatedException since not supported by Elasticsearch. Use setQuery instead.
-
-### Bugfixes
 
 ### Added
 - `Elastica\Result->getDocument` and `Elastica\ResultSet->getDocuments` for return `\Elastica\Document`. https://github.com/ruflin/Elastica/issues/960

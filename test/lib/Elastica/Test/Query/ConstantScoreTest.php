@@ -46,7 +46,7 @@ class ConstantScoreTest extends BaseTest
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
                 'Deprecated: Elastica\Query\ConstantScore passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-                'Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }
@@ -78,7 +78,7 @@ class ConstantScoreTest extends BaseTest
 
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
-                'Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }

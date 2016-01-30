@@ -35,7 +35,6 @@ class ErrorsCollector
         $this->testCase->assertSame(1, $this->getCount());
         $this->testCase->assertSame(1, $this->getDeprecatedCount());
         $this->testCase->assertSame($deprecationMessage, $this->getMessage(0));
-
     }
 
     public function assertOnlyDeprecatedErrors(array $deprecationMessages)
@@ -54,7 +53,7 @@ class ErrorsCollector
 
         foreach ($this->errors as $error) {
             if (E_USER_DEPRECATED === $error[0]) {
-                $count++;
+                ++$count;
             }
         }
 

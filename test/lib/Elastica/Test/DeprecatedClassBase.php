@@ -2,7 +2,7 @@
 namespace Elastica\Test;
 
 /**
- * Base test for test deprecated classes. Supress deprecated error during run test case
+ * Base test for test deprecated classes. Supress deprecated error during run test case.
  *
  * @author Evgeniy Sokolov <ewgraf@gmail.com>
  */

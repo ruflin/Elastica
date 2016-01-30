@@ -13,7 +13,7 @@ use Elastica\Query\AbstractQuery;
 class Filter extends AbstractAggregation
 {
     /**
-     * @param string         $name
+     * @param string        $name
      * @param AbstractQuery $filter
      */
     public function __construct($name, $filter = null)

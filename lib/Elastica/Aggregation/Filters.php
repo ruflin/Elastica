@@ -26,7 +26,7 @@ class Filters extends AbstractAggregation
      * If a name is given, it will be added as a key, otherwise considered as an anonymous filter
      *
      * @param AbstractQuery $filter
-     * @param string         $name
+     * @param string        $name
      *
      * @return $this
      */
