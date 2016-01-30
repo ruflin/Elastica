@@ -107,7 +107,7 @@ class Guzzle extends AbstractTransport
     }
 
     /**
-     * @param Request $request
+     * @param Request    $request
      * @param Connection $connection
      *
      * @return Psr7\Request
@@ -119,7 +119,7 @@ class Guzzle extends AbstractTransport
             $this->_getActionPath($request),
             $connection->hasConfig('headers') && is_array($connection->getConfig('headers'))
                 ? $connection->getConfig('headers')
-                : []
+                : array()
         );
 
         $data = $request->getData();
@@ -175,12 +175,12 @@ class Guzzle extends AbstractTransport
         if (!empty($url)) {
             $baseUri = $url;
         } else {
-            $baseUri = (string) Uri::fromParts([
+            $baseUri = (string) Uri::fromParts(array(
                 'scheme' => $this->_scheme,
                 'host' => $connection->getHost(),
                 'port' => $connection->getPort(),
                 'path' => ltrim('/', $connection->getPath()),
-            ]);
+            ));
         }
 
         return rtrim($baseUri, '/');

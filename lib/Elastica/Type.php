@@ -134,8 +134,8 @@ class Type implements SearchableInterface
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      *
-     * @param \Elastica\Document|\Elastica\Script\AbstractScript   $data    Document with update data
-     * @param array                                                $options array of query params to use for query. For possible options check es api
+     * @param \Elastica\Document|\Elastica\Script\AbstractScript $data    Document with update data
+     * @param array                                              $options array of query params to use for query. For possible options check es api
      *
      * @throws \Elastica\Exception\InvalidException
      *

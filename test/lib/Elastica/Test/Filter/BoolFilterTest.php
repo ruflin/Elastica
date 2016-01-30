@@ -88,6 +88,7 @@ class BoolFilterTest extends BaseTest
         $out[] = array($bool, $expected);
 
         $this->showDeprecated();
+
         return $out;
     }
 

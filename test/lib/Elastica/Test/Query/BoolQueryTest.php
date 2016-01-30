@@ -7,8 +7,8 @@ use Elastica\Filter\Term as TermFilter;
 use Elastica\Index;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Ids;
-use Elastica\Query\Term as TermQuery;
 use Elastica\Query\Term;
+use Elastica\Query\Term as TermQuery;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 
@@ -41,7 +41,7 @@ class BoolQueryTest extends BaseTest
 
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
-                'Deprecated: Elastica\Query\BoolQuery::addFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.'
+                'Deprecated: Elastica\Query\BoolQuery::addFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
             )
         );
     }

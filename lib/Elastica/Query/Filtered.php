@@ -20,7 +20,7 @@ class Filtered extends AbstractQuery
     /**
      * Constructs a filtered query.
      *
-     * @param \Elastica\Query\AbstractQuery   $query  OPTIONAL Query object
+     * @param \Elastica\Query\AbstractQuery $query  OPTIONAL Query object
      * @param \Elastica\Query\AbstractQuery $filter OPTIONAL Filter object
      */
     public function __construct(AbstractQuery $query = null, $filter = null)

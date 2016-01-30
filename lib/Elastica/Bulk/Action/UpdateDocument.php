@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Bulk\Action;
 
-use Elastica\Script\AbstractScript;
 use Elastica\Document;
+use Elastica\Script\AbstractScript;
 
 class UpdateDocument extends IndexDocument
 {

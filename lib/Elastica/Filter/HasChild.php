@@ -9,7 +9,6 @@ trigger_error('Deprecated: Filters are deprecated. Use queries in filter context
  * @author Fabian Vogler <fabian@equivalence.ch>
  *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-filter.html
- *
  * @deprecated Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html
  */
 class HasChild extends AbstractFilter

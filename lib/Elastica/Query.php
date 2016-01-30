@@ -75,6 +75,7 @@ class Query extends Param
                 trigger_error('Deprecated: Elastica\Query::create() passing filter is deprecated. Create query and use setPostFilter with AbstractQuery instead.', E_USER_DEPRECATED);
                 $newQuery = new self();
                 $newQuery->setPostFilter($query);
+
                 return $newQuery;
             case empty($query):
                 return new self(new MatchAll());

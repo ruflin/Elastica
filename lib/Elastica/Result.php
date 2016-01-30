@@ -186,9 +186,9 @@ class Result
     {
         return $this->getParam('_explanation');
     }
-    
+
     /**
-     * Returns Document
+     * Returns Document.
      * 
      * @return \Elastica\Document
      */
@@ -197,11 +197,20 @@ class Result
         $doc = new \Elastica\Document();
         $doc->setData($this->getSource());
         $hit = $this->getHit();
-        if($this->hasParam('_source')) unset($hit['_source']);
-        if($this->hasParam('_explanation')) unset($hit['_explanation']);
-        if($this->hasParam('highlight')) unset($hit['highlight']);
-        if($this->hasParam('_score')) unset($hit['_score']);
+        if ($this->hasParam('_source')) {
+            unset($hit['_source']);
+        }
+        if ($this->hasParam('_explanation')) {
+            unset($hit['_explanation']);
+        }
+        if ($this->hasParam('highlight')) {
+            unset($hit['highlight']);
+        }
+        if ($this->hasParam('_score')) {
+            unset($hit['_score']);
+        }
         $doc->setParams($hit);
+
         return $doc;
     }
 

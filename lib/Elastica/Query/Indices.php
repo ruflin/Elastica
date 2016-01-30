@@ -11,8 +11,8 @@ use Elastica\Index as ElasticaIndex;
 class Indices extends AbstractQuery
 {
     /**
-     * @param AbstractQuery $query  Query which will be applied to docs in the specified indices
-     * @param mixed[]        $indices
+     * @param AbstractQuery $query   Query which will be applied to docs in the specified indices
+     * @param mixed[]       $indices
      */
     public function __construct(AbstractQuery $query, array $indices)
     {

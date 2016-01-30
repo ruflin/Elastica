@@ -32,13 +32,13 @@ class PostFilterTest extends BaseTest
         $errorsCollector = $this->startCollectErrors();
 
         $query = new Query();
-        $query->setPostFilter(array("a"));
+        $query->setPostFilter(array('a'));
 
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
-                'Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractQuery instead.'
+                'Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractQuery instead.',
             )
         );
     }
@@ -57,7 +57,7 @@ class PostFilterTest extends BaseTest
 
         $errorsCollector->assertOnlyDeprecatedErrors(
             array(
-                'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.'
+                'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
             )
         );
     }
