@@ -415,6 +415,7 @@ class QueryTest extends BaseTest
     {
         $query = new Query();
         $aggregation = new \Elastica\Aggregation\Terms('text');
+        $aggregation->setField('field');
 
         $query->addAggregation($aggregation);
 

@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 ### Improvements
+- `Elastica\Exception\InvalidException` will be thrown if you try using an
+  `Elastica\Aggregation\AbstractSimpleAggregation` without setting either the
+  `field` or `script` param.
 
 ### Deprecated
 
