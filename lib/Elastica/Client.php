@@ -380,8 +380,9 @@ class Client
         }
 
         if (!isset($options['retry_on_conflict'])) {
-            $retryOnConflict = $this->getConfig('retryOnConflict');
-            $options['retry_on_conflict'] = $retryOnConflict;
+            if ($retryOnConflict = $this->getConfig('retryOnConflict')) {
+                $options['retry_on_conflict'] = $retryOnConflict;
+            }
         }
 
         $response = $this->request($path, Request::POST, $requestData, $options);
