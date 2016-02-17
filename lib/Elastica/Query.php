@@ -122,9 +122,9 @@ class Query extends Param
     }
 
     /**
-     * Gets the query array.
+     * Gets the query object.
      *
-     * @return array
+     * @return \Elastica\Query\AbstractQuery
      **/
     public function getQuery()
     {
