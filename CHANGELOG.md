@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file based on the
 - `Elastica\Exception\InvalidException` will be thrown if you try using an
   `Elastica\Aggregation\AbstractSimpleAggregation` without setting either the
   `field` or `script` param.
+- `Elastica\Index->deleteByQuery($query, $options)` $query param can be a query `array` again
 
 ### Deprecated
 

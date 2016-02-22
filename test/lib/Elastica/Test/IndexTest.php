@@ -423,6 +423,42 @@ class IndexTest extends BaseTest
     /**
      * @group functional
      */
+    public function testDeleteByQueryWithArrayQuery()
+    {
+        $this->_checkPlugin('delete-by-query');
+
+        $index = $this->_createIndex();
+        $type1 = new Type($index, 'test1');
+        $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
+        $type1->addDocument(new Document(2, array('name' => 'ruflin')));
+        $type2 = new Type($index, 'test2');
+        $type2->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
+        $type2->addDocument(new Document(2, array('name' => 'ruflin')));
+        $index->refresh();
+
+        $response = $index->search('ruflin*');
+        $this->assertEquals(4, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(2, $response->count());
+
+        // Delete first document
+        $response = $index->deleteByQuery(array('query' => array('query_string' => array('query' => 'nicolas'))));
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+
+        // Makes sure, document is deleted
+        $response = $index->search('ruflin*');
+        $this->assertEquals(2, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(0, $response->count());
+    }
+
+    /**
+     * @group functional
+     */
     public function testDeleteByQueryWithQueryAndOptions()
     {
         $this->_checkPlugin('delete-by-query');
