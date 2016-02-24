@@ -142,8 +142,8 @@ class Index implements SearchableInterface
     /**
      * Deletes entries in the db based on a query.
      *
-     * @param \Elastica\Query|string $query   Query object
-     * @param array                  $options Optional params
+     * @param \Elastica\Query|string|array $query   Query object or array
+     * @param array                        $options Optional params
      *
      * @return \Elastica\Response
      *
@@ -157,9 +157,9 @@ class Index implements SearchableInterface
 
             return $this->request('_query', Request::DELETE, array(), $options);
         }
-        $query = Query::create($query);
+        $query = Query::create($query)->getQuery();
 
-        return $this->request('_query', Request::DELETE, array('query' => $query->getQuery()->toArray()), $options);
+        return $this->request('_query', Request::DELETE, array('query' => is_array($query) ? $query : $query->toArray()), $options);
     }
 
     /**
