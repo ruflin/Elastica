@@ -329,7 +329,7 @@ class MoreLikeThisTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToArray()
+    public function testToArrayForId()
     {
         $query = new MoreLikeThis();
         $query->setLike(new Document(1, array(), 'type', 'index'));
@@ -338,12 +338,37 @@ class MoreLikeThisTest extends BaseTest
 
         $this->assertEquals(
             array('more_like_this' => array(
-                    'like' => array(
-                        '_id' => 1,
-                        '_type' => 'type',
-                        '_index' => 'index',
+                'like' => array(
+                    '_id' => 1,
+                    '_type' => 'type',
+                    '_index' => 'index',
+                ),
+            ),
+            ),
+            $data
+        );
+    }
+
+    /**
+     * @group unit
+     */
+    public function testToArrayForSource()
+    {
+        $query = new MoreLikeThis();
+        $query->setLike(new Document('', array('Foo' => 'Bar'), 'type', 'index'));
+
+        $data = $query->toArray();
+
+        $this->assertEquals(
+            array('more_like_this' => array(
+                'like' => array(
+                    '_type' => 'type',
+                    '_index' => 'index',
+                    'doc' => array(
+                        'Foo' => 'Bar'
                     ),
                 ),
+            ),
             ),
             $data
         );
