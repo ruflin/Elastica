@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file based on the
   `Elastica\Aggregation\AbstractSimpleAggregation` without setting either the
   `field` or `script` param.
 - `Elastica\Index->deleteByQuery($query, $options)` $query param can be a query `array` again
+- `Elastica\Query\MoreLikeThis->toArray()` now supports providing a non-indexed document as an input to perform the comparison.
 
 ### Deprecated
 
