@@ -82,7 +82,7 @@ class MoreLikeThisTest extends BaseTest
 
         $doc = $type->getDocument(1);
 
-        // Return all similar
+        // Return all similar from id
         $mltQuery = new MoreLikeThis();
 
         $mltQuery->setMinTermFrequency(1);
@@ -105,7 +105,8 @@ class MoreLikeThisTest extends BaseTest
         $query = new Query\BoolQuery();
         $query->addMust($mltQuery);
         $this->hideDeprecated();
-        // Return just the visible similar
+
+        // Return just the visible similar from id
         $filter = new Query\BoolQuery();
         $filterTerm = new Query\Term();
         $filterTerm->setTerm('visible', true);
@@ -114,6 +115,22 @@ class MoreLikeThisTest extends BaseTest
         $this->showDeprecated();
         $resultSet = $type->search($query);
         $this->assertEquals(2, $resultSet->count());
+
+        // Return all similar from source
+        $mltQuery = new MoreLikeThis();
+
+        $mltQuery->setMinTermFrequency(1);
+        $mltQuery->setMinDocFrequency(1);
+        $mltQuery->setMinimumShouldMatch(90);
+
+        $mltQuery->setLike(
+            $type->getDocument(1)->setId('')
+        );
+
+        $query = new Query($mltQuery);
+
+        $resultSet = $type->search($query);
+        $this->assertEquals(1, $resultSet->count());
 
         // Legacy test with filter
         $mltQuery = new MoreLikeThis();
