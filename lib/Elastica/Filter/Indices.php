@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Filter;
 
 use Elastica\Index as ElasticaIndex;

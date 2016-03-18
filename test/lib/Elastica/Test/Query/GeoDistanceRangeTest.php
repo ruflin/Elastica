@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -60,7 +61,7 @@ class GeoDistanceRangeTest extends BaseTest
         $geoQuery = new GeoDistanceRange(
             'point',
             array('lat' => 30, 'lon' => 40),
-            array('gte' => '0km', 'lte' => '40000km')
+            array('gte' => '0km', 'lte' => '4000km')
         );
         $query = new Query(new MatchAll());
         $query->setPostFilter($geoQuery);

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Connection;
 
 use Elastica\Connection;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Bulk\Action;
 
 class CreateDocument extends IndexDocument

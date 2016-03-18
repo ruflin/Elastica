@@ -1,8 +1,6 @@
 <?php
-namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\AbstractSimpleAggregation;
-use Elastica\Exception\InvalidException;
+namespace Elastica\Test\Aggregation;
 
 class AbstractSimpleAggregationTest extends BaseAggregationTest
 {
@@ -10,7 +8,7 @@ class AbstractSimpleAggregationTest extends BaseAggregationTest
     {
         $this->aggregation = $this->getMockForAbstractClass(
             'Elastica\Aggregation\AbstractSimpleAggregation',
-            ['whatever']
+            array('whatever')
         );
     }
 

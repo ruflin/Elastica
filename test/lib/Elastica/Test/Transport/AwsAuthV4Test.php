@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Transport;
 
 use Elastica\Exception\Connection\GuzzleException;
@@ -35,7 +36,7 @@ class AwsAuthV4Test extends GuzzleTest
             if ($guzzleException instanceof RequestException) {
                 $request = $guzzleException->getRequest();
                 $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
-                    . date('Ymd') . '/us-east-1/es/aws4_request, ';
+                    .date('Ymd').'/us-east-1/es/aws4_request, ';
                 $this->assertStringStartsWith(
                     $expected,
                     $request->getHeaderLine('Authorization')
@@ -69,7 +70,7 @@ class AwsAuthV4Test extends GuzzleTest
             if ($guzzleException instanceof RequestException) {
                 $request = $guzzleException->getRequest();
                 $expected = 'AWS4-HMAC-SHA256 Credential=foo/'
-                    . date('Ymd') . '/us-east-1/es/aws4_request, ';
+                    .date('Ymd').'/us-east-1/es/aws4_request, ';
                 $this->assertStringStartsWith(
                     $expected,
                     $request->getHeaderLine('Authorization')

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Cluster\Health;
 
 use Elastica\Cluster\Health\Shard as HealthShard;

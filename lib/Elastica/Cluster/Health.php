@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Cluster;
 
 use Elastica\Client;

@@ -1,4 +1,5 @@
 <?php
+
 namespace lib\Elastica\Test;
 
 use Elastica\ScriptFields as LegacyScriptFields;

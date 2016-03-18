@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Rescore;
 
 use Elastica\Param;

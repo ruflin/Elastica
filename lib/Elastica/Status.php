@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Exception\ResponseException;
@@ -53,6 +54,7 @@ class Status
         if (is_null($this->_data)) {
             $this->refresh();
         }
+
         return $this->_data;
     }
 
@@ -64,6 +66,7 @@ class Status
     public function getIndexNames()
     {
         $data = $this->getData();
+
         return array_keys($data['indices']);
     }
 
@@ -130,6 +133,7 @@ class Status
         if (is_null($this->_response)) {
             $this->refresh();
         }
+
         return $this->_response;
     }
 
@@ -141,6 +145,7 @@ class Status
     public function getShards()
     {
         $data = $this->getData();
+
         return $data['shards'];
     }
 

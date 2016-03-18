@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Connection\Strategy;
 
 use Elastica\Exception\InvalidException;
