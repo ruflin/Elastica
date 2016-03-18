@@ -13,16 +13,7 @@ class ChildrenTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        // add company type - parent
-        $companyType = $index->getType('company');
-        $companyMapping = new Mapping($companyType,
-            array(
-                'name' => array('type' => 'string'),
-            )
-        );
-        $companyType->setMapping($companyMapping);
-
-        // add employee type - child
+        // add employee type - child - needs to be added first since ES 2.0* https://discuss.elastic.co/t/adding-child-types-in-2-0/33267
         $employeeType = $index->getType('employee');
         $employeeMapping = new Mapping($employeeType,
             array(
@@ -31,6 +22,15 @@ class ChildrenTest extends BaseAggregationTest
         );
         $employeeMapping->setParent('company');
         $employeeType->setMapping($employeeMapping);
+
+        // add company type - parent
+        $companyType = $index->getType('company');
+        $companyMapping = new Mapping($companyType,
+            array(
+                'name' => array('type' => 'string'),
+            )
+        );
+        $companyType->setMapping($companyMapping);
 
         // add company documents
         $companyType->addDocuments(array(
