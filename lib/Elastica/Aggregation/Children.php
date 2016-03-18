@@ -7,7 +7,7 @@ namespace Elastica\Aggregation;
  *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/1.7/search-aggregations-bucket-children-aggregation.html
  */
-class Children extends AbstractSimpleAggregation
+class Children extends AbstractAggregation
 {
     /**
      * Set the type for this aggregation.
