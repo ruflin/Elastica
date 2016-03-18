@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Document;
@@ -48,8 +49,8 @@ class ScriptFileTest extends BaseTest
         $results = $resultSet->getResults();
 
         $this->assertEquals(2, $resultSet->count());
-        $this->assertEquals(array(3.1494078652615), $results[0]->__get('distance'));
-        $this->assertEquals(array(7.4639825876924561), $results[1]->__get('distance'));
+        $this->assertEquals(array(3.149406767298327), $results[0]->__get('distance'));
+        $this->assertEquals(array(7.4639790751755726), $results[1]->__get('distance'));
     }
 
     /**

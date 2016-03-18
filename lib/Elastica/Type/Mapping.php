@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Type;
 
 use Elastica\Exception\InvalidException;

@@ -1,15 +1,24 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-
-## [Unreleased](https://github.com/ruflin/Elastica/compare/3.1.0...HEAD)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/3.1.1...HEAD)
 
 ### Backward Compatibility Breaks
 
 ### Bugfixes
 
 ### Added
-- Add an "AwsAuthV4" transport that automatically signs requests using credentials from the environment or from the client config. This allows using Elastica with Amazon ElasticSearch Service domains that are restricted to IAM roles or policies.
+
+### Improvements
+
+### Deprecated
+
+
+## [3.1.1](https://github.com/ruflin/Elastica/compare/3.1.0...3.1.1)
+
+### Added
+- Add an "AwsAuthV4" transport that automatically signs requests using credentials from the environment or from the client config. This allows using Elastica with Amazon ElasticSearch Service domains that are restricted to IAM roles or policies. https://github.com/ruflin/Elastica/pull/1056
+- Update elasticsearch build dependency to elasticsearch 2.2.1
 
 ### Improvements
 - `Elastica\Exception\InvalidException` will be thrown if you try using an
@@ -17,9 +26,7 @@ All notable changes to this project will be documented in this file based on the
   `field` or `script` param.
 - `Elastica\Index->deleteByQuery($query, $options)` $query param can be a query `array` again
 - `Elastica\Query\MoreLikeThis->toArray()` now supports providing a non-indexed document as an input to perform the comparison.
-- `Elastica\Status` will lazy load the `_stats` at when it is needed.
-
-### Deprecated
+- `Elastica\Status` will lazy load the `_stats` at when it is needed. https://github.com/ruflin/Elastica/pull/1058
 
 
 ## [3.1.0](https://github.com/ruflin/Elastica/compare/3.0.1...3.1.0)

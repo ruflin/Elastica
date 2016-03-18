@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\QueryBuilder;
 
 use Elastica\Exception\QueryBuilderException;

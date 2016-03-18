@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Suggest;
 
 use Elastica\Exception\InvalidException;

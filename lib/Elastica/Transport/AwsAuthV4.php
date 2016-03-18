@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Transport;
 
 use Aws\Credentials\CredentialProvider;
@@ -19,10 +20,10 @@ class AwsAuthV4 extends Guzzle
             $stack = HandlerStack::create(GuzzleHttp\choose_handler());
             $stack->push($this->getSigningMiddleware(), 'sign');
 
-            self::$_guzzleClientConnection = new Client([
+            self::$_guzzleClientConnection = new Client(array(
                 'base_uri' => $baseUrl,
                 'handler' => $stack,
-            ]);
+            ));
         }
 
         return self::$_guzzleClientConnection;

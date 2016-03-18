@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Filter\AbstractFilter;

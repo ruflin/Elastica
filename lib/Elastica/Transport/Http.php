@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Transport;
 
 use Elastica\Exception\Connection\HttpException;

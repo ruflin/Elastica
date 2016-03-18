@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Exception\NotImplementedException;

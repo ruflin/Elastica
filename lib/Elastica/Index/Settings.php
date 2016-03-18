@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Index;
 
 use Elastica\Exception\NotFoundException;

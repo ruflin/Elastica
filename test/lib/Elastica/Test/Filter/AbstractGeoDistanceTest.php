@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Filter;
 
 use Elastica\Test\DeprecatedClassBase as BaseTest;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Node;
 
 use Elastica\Node as BaseNode;

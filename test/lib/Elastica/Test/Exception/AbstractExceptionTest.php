@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Exception;
 
 use Elastica\Test\Base as BaseTest;

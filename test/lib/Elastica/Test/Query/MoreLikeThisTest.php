@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -382,7 +383,7 @@ class MoreLikeThisTest extends BaseTest
                     '_type' => 'type',
                     '_index' => 'index',
                     'doc' => array(
-                        'Foo' => 'Bar'
+                        'Foo' => 'Bar',
                     ),
                 ),
             ),
