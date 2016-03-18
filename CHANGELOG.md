@@ -1201,3 +1201,6 @@ The changelog before version 2.0.0 was organised by date. All changes can be fou
 - getResponse in Elastica_Response renamed to getData. getResponse now deprecated
 - Index status objects added
 - getIndexName in Elastica_Index renamed to getName. getIndexName is deprecated
+
+2011-03-18
+- ChildrenAggregation added - https://www.elastic.co/guide/en/elasticsearch/guide/current/children-agg.html
