@@ -196,7 +196,7 @@ class Query implements DSL
      *
      * @return Filtered
      */
-    public function filtered(AbstractQuery $query = null, AbstractFilter $filter = null)
+    public function filtered(AbstractQuery $query = null, $filter = null)
     {
         trigger_error('Use bool() instead. Filtered query is deprecated since ES 2.0.0-beta1 and this method will be removed in further Elastica releases.', E_USER_DEPRECATED);
 

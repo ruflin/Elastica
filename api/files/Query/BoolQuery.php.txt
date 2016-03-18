@@ -52,12 +52,18 @@ class BoolQuery extends AbstractQuery
     /**
      * Sets the filter.
      *
-     * @param \Elastica\Filter\AbstractFilter $filter Filter object
+     * @param \Elastica\Query\AbstractQuery $filter Filter object
      *
      * @return $this
      */
-    public function addFilter(AbstractFilter $filter)
+    public function addFilter($filter)
     {
+        if ($filter instanceof AbstractFilter) {
+            trigger_error('Deprecated: Elastica\Query\BoolQuery::addFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
+        } elseif (!($filter instanceof AbstractQuery)) {
+            throw new InvalidException('Filter must be instance of AbstractQuery');
+        }
+
         return $this->addParam('filter', $filter);
     }
 

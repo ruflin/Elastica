@@ -1,7 +1,7 @@
 <?php
 namespace Elastica\Filter;
 
-trigger_error('Use BoolFilter instead. From PHP7 bool is reserved word and this class will be removed in further Elastica releases', E_USER_DEPRECATED);
+trigger_error('Deprecated: Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html', E_USER_DEPRECATED);
 
 /**
  * Bool Filter.

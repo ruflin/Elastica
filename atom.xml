@@ -4,7 +4,7 @@
   <title><![CDATA[Elastica]]></title>
   <link href="http://Elastica.io/atom.xml" rel="self"/>
   <link href="http://Elastica.io/"/>
-  <updated>2016-03-18T08:03:27+01:00</updated>
+  <updated>2016-03-18T08:57:55+01:00</updated>
   <id>http://Elastica.io/</id>
   <author>
     <name><![CDATA[ruflin]]></name>
@@ -40,36 +40,6 @@
 <li><code>Elastica\Query\MoreLikeThis-&gt;toArray()</code> now supports providing a non-indexed document as an input to perform the comparison.</li>
 <li><code>Elastica\Status</code> will lazy load the <code>_stats</code> at when it is needed. <a href="https://github.com/ruflin/Elastica/pull/1058">https://github.com/ruflin/Elastica/pull/1058</a></li>
 </ul>
-
-
-<h2>Dependencies</h2>
-
-<table>
-<thead>
-<tr>
-<th> Project </th>
-<th> Version </th>
-<th> Required </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v2.2.1">Elasticsearch</a></td>
-<td>2.2.1</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v3.1.2">Elasticsearch mapper attachments plugin</a></td>
-<td>3.1.2</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/Jmoati/elasticsearch-image/releases/tag/1.7.1">Elasticsearch image plugin</a></td>
-<td>1.7.1</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
 
 ]]></content>
   </entry>

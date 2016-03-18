@@ -257,7 +257,7 @@ class Document extends AbstractUpdateAction
     /**
      * @deprecated setScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate. This method will be removed in further Elastica releases
      *
-     * @param \Elastica\Script $data
+     * @param \Elastica\Script\Script $data
      *
      * @throws NotImplementedException
      */

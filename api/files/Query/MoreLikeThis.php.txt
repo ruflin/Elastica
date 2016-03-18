@@ -217,9 +217,17 @@ class MoreLikeThis extends AbstractQuery
     {
         $array = parent::toArray();
 
-        if (isset($array['more_like_this']['like']['_id'])) {
+        // If _id is provided, perform MLT on an existing document from the index
+        // If _source is provided, perform MLT on a document provided as an input
+        if (!empty($array['more_like_this']['like']['_id'])) {
             $doc = $array['more_like_this']['like'];
             $doc = array_intersect_key($doc, array('_index' => 1, '_type' => 1, '_id' => 1));
+            $array['more_like_this']['like'] = $doc;
+        } elseif (!empty($array['more_like_this']['like']['_source'])) {
+            $doc = $array['more_like_this']['like'];
+            $doc['doc'] = $array['more_like_this']['like']['_source'];
+            unset($doc['_id']);
+            unset($doc['_source']);
             $array['more_like_this']['like'] = $doc;
         }
 

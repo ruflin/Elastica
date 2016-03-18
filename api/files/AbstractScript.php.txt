@@ -1,28 +1,14 @@
 <?php
 namespace Elastica;
 
-/**
- * Base class for Script object.
- *
- * @author Nicolas Assing <nicolas.assing@gmail.com>
- *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html
- */
-abstract class AbstractScript extends AbstractUpdateAction
-{
-    /**
-     * @param array|null $params
-     * @param string     $id
-     */
-    public function __construct(array $params = null, $id = null)
-    {
-        if ($params) {
-            $this->setParams($params);
-        }
+use Elastica\Script\AbstractScript as BaseAbstractScript;
 
-        if ($id) {
-            $this->setId($id);
-        }
-    }
+/**
+ * Kept for BC reasons.
+ *
+ * @deprecated Use \Elastica\Script\AbstractScript instead.
+ */
+abstract class AbstractScript extends BaseAbstractScript
+{
 }
 
