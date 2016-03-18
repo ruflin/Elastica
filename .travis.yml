@@ -17,6 +17,7 @@ matrix:
 branches:
   only:
     - master
+    - release-2.3
 
 install:
   - /bin/bash ansible/provision.sh
