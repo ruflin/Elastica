@@ -429,6 +429,10 @@ class Search
             $data = $query->toArray();
         }
 
+        if (isset($_COOKIE['esLogging']) && isset($_COOKIE['PHPSESSID'])) {
+            $this->logToMemcache($data);
+        }
+
         $response = $this->getClient()->request(
             $path,
             Request::GET,
@@ -437,6 +441,29 @@ class Search
         );
 
         return new ResultSet($response, $query);
+    }
+
+    /**
+     * Log all the search queries to memcache for debugging purposes
+     *
+     * @param array $data
+     */
+    protected function logToMemcache($data) {
+        if (! in_array('log_event', $this->getTypes())) {
+            $expiryTime = time()+60*60;
+            $path = 'http://' . $this->getClient()->getConnection()->getHost() . ':' . $this->getClient()->getConnection()->getPort() . '/' . $this->getPath();
+            $output[] = ['index' => $this->getIndices(), 'type' => $this->getTypes(), 'path' => $path, 'query' => $data];
+            $memcacheServerInfo = json_decode($_COOKIE['esLogging'], true);
+            $memcached = new \Memcached();
+            $memcached->addServer($memcacheServerInfo['host'], $memcacheServerInfo['port']);
+            $key = 'elastica_log_' . $_COOKIE['PHPSESSID'];
+            $existingData = $memcached->get($key);
+            if ($existingData) {
+                array_unshift($existingData, reset($output));
+                $output = $existingData;
+            }
+            $memcached->set($key, $output, $expiryTime);
+        }
     }
 
     /**
