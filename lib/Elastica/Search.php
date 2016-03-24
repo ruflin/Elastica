@@ -4,6 +4,7 @@ namespace Elastica;
 
 use Elastica\Exception\InvalidException;
 use Elastica\Filter\AbstractFilter;
+use Elastica\ResultSet\BuilderInterface;
 
 /**
  * Elastica search object.
@@ -462,7 +463,7 @@ class Search
             $params
         );
 
-        return ResultSet::create($response, $query);
+        return $this->_client->getResultSetBuilder()->buildResultSet($response, $query);
     }
 
     /**
@@ -484,7 +485,7 @@ class Search
             $query->toArray(),
             array(self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_COUNT)
         );
-        $resultSet = ResultSet::create($response, $query);
+        $resultSet = $this->_client->getResultSetBuilder()->buildResultSet($response, $query);
 
         return $fullResult ? $resultSet : $resultSet->getTotalHits();
     }
