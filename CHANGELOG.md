@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 - `Elastica\Type->deleteByQuery($query, $options)` $query param can be a query `array` again https://github.com/ruflin/Elastica/issues/1072
 - `Elastica\Client->connect()` allows to establish a connection to ES server when the config was set using method `Elastica\Client->setConfigValue()` https://github.com/ruflin/Elastica/issues/1076
+- Elastica\Client constructor now accepts a LoggerInterface and will log both successful and failed requests. #1069
 
 ### Deprecated
 
