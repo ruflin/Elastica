@@ -488,7 +488,7 @@ class Type implements SearchableInterface
         }
         $query = Query::create($query);
 
-        return $this->request('_query', Request::DELETE, array('query' => $query->getQuery()->toArray()), $options);
+        return $this->request('_query', Request::DELETE, array('query' => is_array($query) ? $query : $query->toArray()), $options);
     }
 
     /**
