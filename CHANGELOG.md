@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 
 ### Bugfixes
+- Fix count with options request in Elastica\Type and Elastica\Search [#1038](https://github.com/ruflin/Elastica/pull/1038)
 
 ### Added
 
