@@ -471,6 +471,14 @@ class Client
     }
 
     /**
+     * Establishes the client connections
+     */
+    public function connect()
+    {
+        return $this->_initConnections();
+    }
+
+    /**
      * @param \Elastica\Connection $connection
      *
      * @return $this
