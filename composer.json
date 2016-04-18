@@ -22,9 +22,10 @@
     },
     "suggest": {
         "munkie/elasticsearch-thrift-php": "Allow using thrift transport",
-        "guzzlehttp/guzzle": "Allow using guzzle 4.x as the http transport (requires php 5.4)",
+        "guzzlehttp/guzzle": "Allow using guzzle 6.x",
         "psr/log": "for logging",
-        "monolog/monolog": "Logging request"
+        "monolog/monolog": "Logging request",
+        "icicleio/icicle": "This is for guzzle transport which supports async"
     },
     "autoload": {
         "psr-0": {

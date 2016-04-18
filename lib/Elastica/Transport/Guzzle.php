@@ -2,11 +2,9 @@
 
 namespace Elastica\Transport;
 
-use Elastica\Exception\Connection\HttpException;
 use Elastica\Exception\Connection\GuzzleException;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
-use Elastica\Exception\InvalidException;
 use Elastica\Connection;
 use Elastica\Request;
 use Elastica\Response;
@@ -14,6 +12,7 @@ use Elastica\JSON;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Stream\Stream;
 
 /**
@@ -34,7 +33,7 @@ class Guzzle extends AbstractTransport
     /**
      * Curl resource to reuse
      *
-     * @var resource Guzzle resource to reuse
+     * @var Client
      */
     protected static $_guzzleClientConnection = null;
 
@@ -55,6 +54,7 @@ class Guzzle extends AbstractTransport
         $connection = $this->getConnection();
 
         try {
+            /** @var Client $client */
             $client = $this->_getGuzzleClient($this->_getBaseUrl($connection), $connection->isPersistent());
 
             $options = array();
@@ -66,19 +66,17 @@ class Guzzle extends AbstractTransport
                 $options['proxy'] = $connection->getProxy();
             }
 
-            $req = $client->createRequest($request->getMethod(), $this->_getActionPath($request), $options);
-            $req->setHeaders($connection->hasConfig('headers') ?: array());
-
+            $requestMethod = $request->getMethod();
             $data = $request->getData();
             if (isset($data) && !empty($data)) {
-
-                if ($req->getMethod() == Request::GET) {
-                    $req->setMethod(Request::POST);
+                // if there's any post data, set the request method to be post
+                if ($request->getMethod() == Request::GET) {
+                    $requestMethod = Request::POST;
                 }
 
                 if ($this->hasParam('postWithRequestBody') && $this->getParam('postWithRequestBody') == true) {
                     $request->setMethod(Request::POST);
-                    $req->setMethod(Request::POST);
+                    $requestMethod = Request::POST;
                 }
 
                 if (is_array($data)) {
@@ -86,11 +84,21 @@ class Guzzle extends AbstractTransport
                 } else {
                     $content = $data;
                 }
-                $req->setBody(Stream::factory($content));
+                $options['body'] = $content;
             }
+            $options['headers'] = $connection->hasConfig('headers') ? $connection->getConfig('headers'): array();
 
             $start = microtime(true);
-            $res = $client->send($req);
+            $coRoutine = \Icicle\Coroutine\create(function() use ($client, $requestMethod, $connection, $request, $options) {
+                try {
+                    /** @var Promise $promise */
+                    $promise = (yield \Icicle\Awaitable\resolve($client->requestAsync($requestMethod, $this->_getBaseUrl($connection) . $this->_getActionPath($request), $options)));
+                    yield \Icicle\Awaitable\resolve($promise->wait(true));
+                } catch (\Exception $e) {
+                    yield \Icicle\Awaitable\reject($e);
+                }
+            });
+            $res = $coRoutine->wait();
             $end = microtime(true);
 
             $response = new Response((string)$res->getBody(), $res->getStatusCode());
@@ -121,7 +129,6 @@ class Guzzle extends AbstractTransport
         } catch (TransferException $e) {
             throw new GuzzleException($e, $request, new Response($e->getMessage()));
         }
-
     }
 
     /**
@@ -132,11 +139,11 @@ class Guzzle extends AbstractTransport
      */
     protected function _getGuzzleClient($baseUrl, $persistent = true)
     {
-        if (!$persistent || !self::$_guzzleClientConnection) {
-            self::$_guzzleClientConnection = new Client(array('base_url' => $baseUrl));
-        }
-
         return self::$_guzzleClientConnection;
+    }
+
+    public function setGuzzleClient($client) {
+        self::$_guzzleClientConnection = $client;
     }
 
     /**
