@@ -941,4 +941,22 @@ class IndexTest extends BaseTest
         $this->assertEquals('1', $index->getName());
         $this->assertInternalType('string', $index->getName());
     }
+
+    /**
+     * @group functional
+     */
+    public function testGetEmptyAliases()
+    {
+        $indexName = 'test-getaliases';
+
+        $client = $this->_getClient();
+        $index = $client->getIndex($indexName);
+
+        $index->create(array(), true);
+        $this->_waitForAllocation($index);
+        $index->refresh();
+        $index->optimize();
+
+        $this->assertEquals(array(), $index->getAliases());
+    }
 }

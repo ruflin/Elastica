@@ -434,6 +434,10 @@ class Index implements SearchableInterface
     {
         $responseData = $this->request('_alias/*', \Elastica\Request::GET)->getData();
 
+        if (!isset($responseData[$this->getName()])) {
+            return array();
+        }
+
         $data = $responseData[$this->getName()];
         if (!empty($data['aliases'])) {
             return array_keys($data['aliases']);

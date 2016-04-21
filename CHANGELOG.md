@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 
 ### Bugfixes
+- Fix php notice on `\Elastica\Index::getAliases()` if index has no aliases #1078
 
 ### Added
 
