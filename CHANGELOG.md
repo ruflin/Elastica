@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file based on the
 - Elastica\Client constructor now accepts a LoggerInterface and will log both successful and failed requests. #1069
 
 ### Deprecated
-
+- Configuring the logger in \Elastica\Client $config constructor is deprecated and will be removed. Use the $logger argument instead.
 
 ## [3.1.1](https://github.com/ruflin/Elastica/compare/3.1.0...3.1.1)
 
