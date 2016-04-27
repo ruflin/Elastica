@@ -5,9 +5,9 @@ namespace Elastica;
 use Elastica\Bulk\Action;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\RuntimeException;
 use Elastica\Script\AbstractScript;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Client to connect the the elasticsearch server.
@@ -46,7 +46,7 @@ class Client
     /**
      * @var callback
      */
-    protected $_callback = null;
+    protected $_callback;
 
     /**
      * @var \Elastica\Request
@@ -61,22 +61,30 @@ class Client
     /**
      * @var LoggerInterface
      */
-    protected $_logger = null;
+    protected $_logger;
+
     /**
      * @var Connection\ConnectionPool
      */
-    protected $_connectionPool = null;
+    protected $_connectionPool;
 
     /**
      * Creates a new Elastica client.
      *
-     * @param array    $config   OPTIONAL Additional config options
+     * @param array $config OPTIONAL Additional config options
      * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
+     * @param LoggerInterface $logger
      */
-    public function __construct(array $config = array(), $callback = null)
+    public function __construct(array $config = array(), $callback = null, LoggerInterface $logger = null)
     {
-        $this->setConfig($config);
         $this->_callback = $callback;
+
+        if (!$logger && isset($config['log']) && $config['log']) {
+            $logger = new Log($config['log']);
+        }
+        $this->_logger = $logger ?: new NullLogger();
+
+        $this->setConfig($config);
         $this->_initConnections();
     }
 
@@ -622,24 +630,20 @@ class Client
      *
      * @throws Exception\ConnectionException|\Exception
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
     {
         $connection = $this->getConnection();
+        $request = $this->_lastRequest = new Request($path, $method, $data, $query, $connection);
+        $this->_lastResponse = null;
+
         try {
-            $request = new Request($path, $method, $data, $query, $connection);
-
-            $this->_log($request);
-
-            $response = $request->send();
-
-            $this->_lastRequest = $request;
-            $this->_lastResponse = $response;
-
-            return $response;
+            $response = $this->_lastResponse = $request->send();
         } catch (ConnectionException $e) {
             $this->_connectionPool->onFail($connection, $e, $this);
+
+            $this->_log($e);
 
             // In case there is no valid connection left, throw exception which caused the disabling of the connection.
             if (!$this->hasConnection()) {
@@ -648,6 +652,44 @@ class Client
 
             return $this->request($path, $method, $data, $query);
         }
+
+        $this->_log($request, $response);
+
+        return $response;
+    }
+
+    /**
+     * logging.
+     *
+     * @deprecated Overwriting Client->_log is deprecated. Handle logging functionality by using a custom LoggerInterface.
+     *
+     * @param mixed $context
+     */
+    protected function _log($context)
+    {
+        if ($context instanceof ConnectionException) {
+            $this->_logger->error('Elastica Request Failure', [
+                'exception' => $context,
+                'request' => $context->getRequest()->toArray(),
+                'retry' => $this->hasConnection()
+            ]);
+
+            return;
+        }
+
+        if ($context instanceof Request) {
+            $this->_logger->debug('Elastica Request', [
+                'request' => $context->toArray(),
+                'response' => $this->_lastResponse ? $this->_lastResponse->getData() : null,
+                'responseStatus' => $this->_lastResponse ? $this->_lastResponse->getStatus() : null
+            ]);
+
+            return;
+        }
+
+        $this->_logger->debug('Elastica Request', [
+            'message' => $context
+        ]);
     }
 
     /**
@@ -677,32 +719,7 @@ class Client
     }
 
     /**
-     * logging.
-     *
-     * @param string|\Elastica\Request $context
-     *
-     * @throws Exception\RuntimeException
-     */
-    protected function _log($context)
-    {
-        $log = $this->getConfig('log');
-        if ($log && !class_exists('Psr\Log\AbstractLogger')) {
-            throw new RuntimeException('Class Psr\Log\AbstractLogger not found');
-        } elseif (!$this->_logger && $log) {
-            $this->setLogger(new Log($this->getConfig('log')));
-        }
-        if ($this->_logger) {
-            if ($context instanceof Request) {
-                $data = $context->toArray();
-            } else {
-                $data = array('message' => $context);
-            }
-            $this->_logger->debug('logging Request', $data);
-        }
-    }
-
-    /**
-     * @return \Elastica\Request
+     * @return Request
      */
     public function getLastRequest()
     {
@@ -710,7 +727,7 @@ class Client
     }
 
     /**
-     * @return \Elastica\Response
+     * @return Response
      */
     public function getLastResponse()
     {
@@ -718,7 +735,7 @@ class Client
     }
 
     /**
-     * set Logger.
+     * Replace the existing logger.
      *
      * @param LoggerInterface $logger
      *

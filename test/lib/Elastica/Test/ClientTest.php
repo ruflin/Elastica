@@ -1180,7 +1180,7 @@ class ClientTest extends BaseTest
     {
         $client = new Client();
         $client->setConfigValue('host', $this->_getHost());
-        $client->setConfigValue('port',$this->_getPort());
+        $client->setConfigValue('port', $this->_getPort());
 
         $client->connect();
         $this->assertTrue($client->hasConnection());
@@ -1189,5 +1189,53 @@ class ClientTest extends BaseTest
         $this->assertInstanceOf('\Elastica\Connection', $connection);
         $this->assertEquals($this->_getHost(), $connection->getHost());
         $this->assertEquals($this->_getPort(), $connection->getPort());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testLogger()
+    {
+        $logger = $this->getMock('Psr\\Log\\LoggerInterface');
+        $client = $this->_getClient([], null, $logger);
+
+        $logger->expects($this->once())
+            ->method('debug')
+            ->with(
+                'Elastica Request',
+                $this->logicalAnd(
+                    $this->arrayHasKey('request'),
+                    $this->arrayHasKey('response'),
+                    $this->arrayHasKey('responseStatus')
+                )
+            );
+
+        $client->request('_stats', Request::GET);
+    }
+
+    /**
+     * @expectedException \Elastica\Exception\Connection\HttpException
+     * @group functional
+     */
+    public function testLoggerOnFailure()
+    {
+        $logger = $this->getMock('Psr\\Log\\LoggerInterface');
+        $client = $this->_getClient(array('connections' => array(
+            array('host' => $this->_getHost(), 'port' => 9201),
+        )), null, $logger);
+
+        $logger->expects($this->once())
+            ->method('error')
+            ->with(
+                'Elastica Request Failure',
+                $this->logicalAnd(
+                    $this->arrayHasKey('exception'),
+                    $this->arrayHasKey('request'),
+                    $this->arrayHasKey('retry'),
+                    $this->logicalNot($this->arrayHasKey('response'))
+                )
+            );
+
+        $client->request('_stats', Request::GET);
     }
 }
