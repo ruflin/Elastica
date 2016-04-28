@@ -653,7 +653,7 @@ class Client
             return $this->request($path, $method, $data, $query);
         }
 
-        $this->_log($request, $response);
+        $this->_log($request);
 
         return $response;
     }
