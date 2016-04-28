@@ -30,6 +30,8 @@ All notable changes to this project will be documented in this file based on the
 ### Deprecated
 - All properties in the \Elastica\ResultSet class will be moved to private in 4.0. To manipulate the creation of a ResultSet, implement the \Elastica\ResultSet\BuilderInterface and pass your new Builder to the \Elastica\Search instances. #1065
 
+- All properties in the \Elastica\ResultSet class will be moved to private in 4.0. To manipulate the creation of a ResultSet, implement the \Elastica\ResultSet\BuilderInterface and pass your new Builder to the \Elastica\Search instances.
+- Methods addConnection, hasConnection, getConnection, getConnections, getConnectionStrategy and setConnections \Elastica\Client have been deprecated and will be removed in 4.0. Access these methods directly on the ConnectionPool
 
 ## [3.1.1](https://github.com/ruflin/Elastica/compare/3.1.0...3.1.1)
 

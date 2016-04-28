@@ -487,6 +487,8 @@ class Client
     }
 
     /**
+     * @deprecated Use $client->getConnectionPool()->addConnection()
+     *
      * @param \Elastica\Connection $connection
      *
      * @return $this
@@ -499,6 +501,8 @@ class Client
     }
 
     /**
+     * @deprecated Use $client->getConnectionPool()->hasConnection()
+     *
      * Determines whether a valid connection is available for use.
      *
      * @return bool
@@ -509,6 +513,8 @@ class Client
     }
 
     /**
+     * @deprecated Use $client->getConnectionPool()->getConnection()
+     *
      * @throws \Elastica\Exception\ClientException
      *
      * @return \Elastica\Connection
@@ -519,6 +525,8 @@ class Client
     }
 
     /**
+     * @deprecated Use $client->getConnectionPool()->getConnections()
+     *
      * @return \Elastica\Connection[]
      */
     public function getConnections()
@@ -527,6 +535,8 @@ class Client
     }
 
     /**
+     * @deprecated Use $client->getConnectionPool()->getConnectionStrategy()
+     *
      * @return \Elastica\Connection\Strategy\StrategyInterface
      */
     public function getConnectionStrategy()
@@ -535,6 +545,8 @@ class Client
     }
 
     /**
+     * @deprecated Use $client->getConnectionPool()->setConnections()
+     *
      * @param array|\Elastica\Connection[] $connections
      *
      * @return $this
@@ -634,7 +646,7 @@ class Client
      */
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
     {
-        $connection = $this->getConnection();
+        $connection = $this->_connectionPool->getConnection();
         $request = $this->_lastRequest = new Request($path, $method, $data, $query, $connection);
         $this->_lastResponse = null;
 
