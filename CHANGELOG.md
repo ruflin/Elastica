@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file based on the
 - Fix php notice on `\Elastica\Index::getAliases()` if index has no aliases #1078
 
 ### Added
+- Update elasticsearch build dependency to elasticsearch 2.3.2
 
 ### Improvements
 - `Elastica\Type->deleteByQuery($query, $options)` $query param can be a query `array` again https://github.com/ruflin/Elastica/issues/1072
