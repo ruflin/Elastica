@@ -10,6 +10,14 @@ use Elastica\Transport\TransportInterface;
 interface ConnectionInterface
 {
     /**
+     * Adds a HTTP Header.
+     *
+     * @param string $header      The HTTP Header
+     * @param string $headerValue The HTTP Header Value
+     */
+    public function addHeader($header, $headerValue);
+
+    /**
      * @return TransportInterface
      */
     public function getTransportObject();
@@ -20,6 +28,13 @@ interface ConnectionInterface
      * @return bool True if enabled
      */
     public function isEnabled();
+
+    /**
+     * Remove a HTTP Header.
+     *
+     * @param string $header The HTTP Header to remove
+     */
+    public function removeHeader($header);
 
     /**
      * Set if the connection is enabled or not.

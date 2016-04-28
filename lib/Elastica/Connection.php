@@ -63,8 +63,27 @@ class Connection extends Param implements ConnectionInterface
 
         // Set empty config param if not exists
         if (!$this->hasParam('config')) {
-            $this->setParam('config', array());
+            $this->setParam('config', [
+                'headers' => []
+            ]);
         }
+    }
+
+    /**
+     * Adds a HTTP Header.
+     *
+     * @param string $header      The HTTP Header
+     * @param string $headerValue The HTTP Header Value
+     *
+     * @throws \Elastica\Exception\InvalidException If $header or $headerValue is not a string
+     */
+    public function addHeader($header, $headerValue)
+    {
+        if (!is_string($header) || !is_string($headerValue)) {
+            throw new InvalidException('Header must be a string');
+        }
+
+        $this->_params['config']['headers'][$header] = $headerValue;
     }
 
     /**
@@ -360,5 +379,23 @@ class Connection extends Param implements ConnectionInterface
     public function getPassword()
     {
         return $this->hasParam('password') ? $this->getParam('password') : null;
+    }
+
+    /**
+     * Remove a HTTP Header.
+     *
+     * @param string $header The HTTP Header to remove
+     *
+     * @throws \Elastica\Exception\InvalidException If $header is not a string
+     */
+    public function removeHeader($header)
+    {
+        if (!is_string($header)) {
+            throw new InvalidException('Header must be a string');
+        }
+
+        if (array_key_exists($header, $this->_params['config']['headers'])) {
+            unset($this->_params['config']['headers'][$header]);
+        }
     }
 }

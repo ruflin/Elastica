@@ -3,6 +3,8 @@
 namespace Elastica;
 
 use Elastica\Bulk\Action;
+use Elastica\Connection\ConnectionPoolInterface;
+use Elastica\Connection\PoolBuilder;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Script\AbstractScript;
@@ -17,36 +19,9 @@ use Psr\Log\NullLogger;
 class Client
 {
     /**
-     * Config with defaults.
-     *
-     * log: Set to true, to enable logging, set a string to log to a specific file
-     * retryOnConflict: Use in \Elastica\Client::updateDocument
-     * bigintConversion: Set to true to enable the JSON bigint to string conversion option (see issue #717)
-     *
-     * @var array
+     * @var bool
      */
-    protected $_config = array(
-        'host' => null,
-        'port' => null,
-        'path' => null,
-        'url' => null,
-        'proxy' => null,
-        'transport' => null,
-        'persistent' => true,
-        'timeout' => null,
-        'connections' => array(), // host, port, path, timeout, transport, compression, persistent, timeout, config -> (curl, headers, url)
-        'roundRobin' => false,
-        'log' => false,
-        'retryOnConflict' => 0,
-        'bigintConversion' => false,
-        'username' => null,
-        'password' => null,
-    );
-
-    /**
-     * @var callback
-     */
-    protected $_callback;
+    private $_autoPopulate = false;
 
     /**
      * @var Connection\ConnectionPool
@@ -69,152 +44,34 @@ class Client
     protected $_logger;
 
     /**
+     * If the updateDocument call should retry on conflicts.
+     *
+     * @var bool
+     */
+    private $_retryOnConflict = false;
+
+    /**
      * Creates a new Elastica client.
      *
-     * @param array $config OPTIONAL Additional config options
+     * @param ConnectionPoolInterface|array $config A ConnectionPoolInterface or $config array for configuring connections
      * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      * @param LoggerInterface $logger
      */
-    public function __construct(array $config = array(), $callback = null, LoggerInterface $logger = null)
+    public function __construct($config = array(), $callback = null, LoggerInterface $logger = null)
     {
-        $this->_callback = $callback;
-
         if (!$logger && isset($config['log']) && $config['log']) {
             $logger = new Log($config['log']);
         }
         $this->_logger = $logger ?: new NullLogger();
 
-        $this->setConfig($config);
-        $this->_initConnections();
-    }
+        if (!$config instanceof ConnectionPoolInterface) {
+            $this->_retryOnConflict = isset($config['retryOnConflict']) ? $config['retryOnConflict'] : false;
 
-    /**
-     * Inits the client connections.
-     */
-    protected function _initConnections()
-    {
-        $connections = array();
-
-        foreach ($this->getConfig('connections') as $connection) {
-            $connections[] = Connection::create($this->_prepareConnectionParams($connection));
+            $builder = new PoolBuilder();
+            $config = $builder->buildPool($config, $callback);
         }
 
-        if (isset($this->_config['servers'])) {
-            foreach ($this->getConfig('servers') as $server) {
-                $connections[] = Connection::create($this->_prepareConnectionParams($server));
-            }
-        }
-
-        // If no connections set, create default connection
-        if (empty($connections)) {
-            $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
-        }
-
-        if (!isset($this->_config['connectionStrategy'])) {
-            if ($this->getConfig('roundRobin') === true) {
-                $this->setConfigValue('connectionStrategy', 'RoundRobin');
-            } else {
-                $this->setConfigValue('connectionStrategy', 'Simple');
-            }
-        }
-
-        $strategy = Connection\Strategy\StrategyFactory::create($this->getConfig('connectionStrategy'));
-
-        $this->_connectionPool = new Connection\ConnectionPool($connections, $strategy, $this->_callback);
-    }
-
-    /**
-     * Creates a Connection params array from a Client or server config array.
-     *
-     * @param array $config
-     *
-     * @return array
-     */
-    protected function _prepareConnectionParams(array $config)
-    {
-        $params = array();
-        $params['config'] = array();
-        foreach ($config as $key => $value) {
-            if (in_array($key, array('bigintConversion', 'curl', 'headers', 'url'))) {
-                $params['config'][$key] = $value;
-            } else {
-                $params[$key] = $value;
-            }
-        }
-
-        return $params;
-    }
-
-    /**
-     * Sets specific config values (updates and keeps default values).
-     *
-     * @param array $config Params
-     *
-     * @return $this
-     */
-    public function setConfig(array $config)
-    {
-        foreach ($config as $key => $value) {
-            $this->_config[$key] = $value;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Returns a specific config key or the whole
-     * config array if not set.
-     *
-     * @param string $key Config key
-     *
-     * @throws \Elastica\Exception\InvalidException
-     *
-     * @return array|string Config value
-     */
-    public function getConfig($key = '')
-    {
-        if (empty($key)) {
-            return $this->_config;
-        }
-
-        if (!array_key_exists($key, $this->_config)) {
-            throw new InvalidException('Config key is not set: '.$key);
-        }
-
-        return $this->_config[$key];
-    }
-
-    /**
-     * Sets / overwrites a specific config value.
-     *
-     * @param string $key   Key to set
-     * @param mixed  $value Value
-     *
-     * @return $this
-     */
-    public function setConfigValue($key, $value)
-    {
-        return $this->setConfig(array($key => $value));
-    }
-
-    /**
-     * @param array|string $keys    config key or path of config keys
-     * @param mixed        $default default value will be returned if key was not found
-     *
-     * @return mixed
-     */
-    public function getConfigValue($keys, $default = null)
-    {
-        $value = $this->_config;
-        foreach ((array) $keys as $key) {
-            if (isset($value[$key])) {
-                $value = $value[$key];
-            } else {
-                return $default;
-            }
-        }
-
-        return $value;
+        $this->_connectionPool = $config;
     }
 
     /**
@@ -232,6 +89,8 @@ class Client
     /**
      * Adds a HTTP Header.
      *
+     * @deprecated Use ConnectionPool::addHeader.
+     *
      * @param string $header      The HTTP Header
      * @param string $headerValue The HTTP Header Value
      *
@@ -241,10 +100,8 @@ class Client
      */
     public function addHeader($header, $headerValue)
     {
-        if (is_string($header) && is_string($headerValue)) {
-            $this->_config['headers'][$header] = $headerValue;
-        } else {
-            throw new InvalidException('Header must be a string');
+        foreach ($this->_connectionPool->getConnections() as $connection) {
+            $connection->addHeader($header, $headerValue);
         }
 
         return $this;
@@ -252,6 +109,8 @@ class Client
 
     /**
      * Remove a HTTP Header.
+     *
+     * @deprecated Use ConnectionPool::removeHeader.
      *
      * @param string $header The HTTP Header to remove
      *
@@ -261,12 +120,8 @@ class Client
      */
     public function removeHeader($header)
     {
-        if (is_string($header)) {
-            if (array_key_exists($header, $this->_config['headers'])) {
-                unset($this->_config['headers'][$header]);
-            }
-        } else {
-            throw new InvalidException('Header must be a string');
+        foreach ($this->_connectionPool->getConnections() as $connection) {
+            $connection->removeHeader($header);
         }
 
         return $this;
@@ -371,8 +226,8 @@ class Client
             );
             $options += $docOptions;
             // set fields param to source only if options was not set before
-            if ($data instanceof Document && ($data->isAutoPopulate()
-                || $this->getConfigValue(array('document', 'autoPopulate'), false))
+            if ($data instanceof Document
+                && ($data->isAutoPopulate() || $this->_autoPopulate)
                 && !isset($options['fields'])
             ) {
                 $options['fields'] = '_source';
@@ -389,15 +244,14 @@ class Client
         }
 
         if (!isset($options['retry_on_conflict'])) {
-            $retryOnConflict = $this->getConfig('retryOnConflict');
-            $options['retry_on_conflict'] = $retryOnConflict;
+            $options['retry_on_conflict'] = $this->_retryOnConflict;
         }
 
         $response = $this->request($path, Request::POST, $requestData, $options);
 
         if ($response->isOk()
             && $data instanceof Document
-            && ($data->isAutoPopulate() || $this->getConfigValue(array('document', 'autoPopulate'), false))
+            && ($data->isAutoPopulate() || $this->_autoPopulate)
         ) {
             $responseData = $response->getData();
             if (isset($responseData['_version'])) {
