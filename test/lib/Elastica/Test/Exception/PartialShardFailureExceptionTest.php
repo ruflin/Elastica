@@ -50,7 +50,8 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
 
             $this->fail('PartialShardFailureException should have been thrown');
         } catch (PartialShardFailureException $e) {
-            $resultSet = new ResultSet($e->getResponse(), $query);
+            $builder = new ResultSet\Builder();
+            $resultSet = $builder->buildResultSet($e->getResponse(), $query);
             $this->assertEquals(0, count($resultSet->getResults()));
 
             $message = JSON::parse($e->getMessage());

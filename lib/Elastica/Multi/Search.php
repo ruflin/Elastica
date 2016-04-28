@@ -17,14 +17,9 @@ use Elastica\Search as BaseSearch;
 class Search
 {
     /**
-     * @var array|\Elastica\Search[]
+     * @var MultiBuilderInterface
      */
-    protected $_searches = array();
-
-    /**
-     * @var array
-     */
-    protected $_options = array();
+    private $_builder;
 
     /**
      * @var \Elastica\Client
@@ -32,13 +27,25 @@ class Search
     protected $_client;
 
     /**
+     * @var array
+     */
+    protected $_options = array();
+
+    /**
+     * @var array|\Elastica\Search[]
+     */
+    protected $_searches = array();
+
+    /**
      * Constructs search object.
      *
      * @param \Elastica\Client $client Client object
+     * @param MultiBuilderInterface $builder
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, MultiBuilderInterface $builder = null)
     {
-        $this->setClient($client);
+        $this->_builder = $builder ?: new MultiBuilder();
+        $this->_client = $client;
     }
 
     /**
@@ -47,18 +54,6 @@ class Search
     public function getClient()
     {
         return $this->_client;
-    }
-
-    /**
-     * @param \Elastica\Client $client
-     *
-     * @return $this
-     */
-    public function setClient(Client $client)
-    {
-        $this->_client = $client;
-
-        return $this;
     }
 
     /**
@@ -149,7 +144,7 @@ class Search
             $this->_options
         );
 
-        return new ResultSet($response, $this->getSearches());
+        return $this->_builder->buildMultiResultSet($response, $this->getSearches());
     }
 
     /**

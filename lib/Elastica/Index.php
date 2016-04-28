@@ -6,6 +6,7 @@ use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
+use Elastica\ResultSet\BuilderInterface;
 
 /**
  * Elastica index object.
@@ -36,9 +37,7 @@ class Index implements SearchableInterface
      * All the communication to and from an index goes of this object
      *
      * @param \Elastica\Client $client Client object
-     * @param string           $name   Index name
-     *
-     * @throws \Elastica\Exception\InvalidException
+     * @param string $name Index name
      */
     public function __construct(Client $client, $name)
     {
@@ -289,13 +288,14 @@ class Index implements SearchableInterface
 
     /**
      * @param string|array|\Elastica\Query $query
-     * @param int|array                    $options
+     * @param int|array $options
+     * @param BuilderInterface $builder
      *
-     * @return \Elastica\Search
+     * @return Search
      */
-    public function createSearch($query = '', $options = null)
+    public function createSearch($query = '', $options = null, BuilderInterface $builder = null)
     {
-        $search = new Search($this->getClient());
+        $search = new Search($this->getClient(), $builder);
         $search->addIndex($this);
         $search->setOptionsAndQuery($options, $query);
 

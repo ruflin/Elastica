@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/3.1.1...HEAD)
 
 ### Backward Compatibility Breaks
+- Method \Elastica\ResultSet::create and property \Elastica\ResultSet::$class were removed. To change the ResultSet class, implement your own ResultSet Builder. #1065
+- Properties on \Elastica\ResultSet _totalHits, _maxScore, _took and _timedOut that were originally set on object construction are now accessed by the getters on the ResultSet.
 
 ### Bugfixes
 - Fix php notice on `\Elastica\Index::getAliases()` if index has no aliases #1078
@@ -17,6 +19,10 @@ All notable changes to this project will be documented in this file based on the
 
 ### Deprecated
 - Configuring the logger in \Elastica\Client $config constructor is deprecated and will be removed. Use the $logger argument instead.
+- Extracted creation of ResultSet objects to a new dedicated ResultSet\Builder implementation. #1065
+
+### Deprecated
+- All properties in the \Elastica\ResultSet class will be moved to private in 4.0. To manipulate the creation of a ResultSet, implement the \Elastica\ResultSet\BuilderInterface and pass your new Builder to the \Elastica\Search instances.
 
 ## [3.1.1](https://github.com/ruflin/Elastica/compare/3.1.0...3.1.1)
 
