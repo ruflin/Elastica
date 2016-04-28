@@ -12,7 +12,7 @@ use Elastica\Request;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-abstract class AbstractTransport extends Param
+abstract class AbstractTransport extends Param implements TransportInterface
 {
     /**
      * @var \Elastica\Connection

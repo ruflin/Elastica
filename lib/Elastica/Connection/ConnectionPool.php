@@ -12,15 +12,15 @@ use Exception;
  *
  * @author chabior
  */
-class ConnectionPool
+class ConnectionPool implements ConnectionPoolInterface
 {
     /**
-     * @var array|\Elastica\Connection[] Connections array
+     * @var ConnectionInterface
      */
     protected $_connections;
 
     /**
-     * @var \Elastica\Connection\Strategy\StrategyInterface Strategy for connection
+     * @var StrategyInterface
      */
     protected $_strategy;
 
@@ -30,25 +30,23 @@ class ConnectionPool
     protected $_callback;
 
     /**
-     * @param array                                           $connections
-     * @param \Elastica\Connection\Strategy\StrategyInterface $strategy
-     * @param callback                                        $callback
+     * @param ConnectionInterface[] $connections
+     * @param StrategyInterface $strategy
+     * @param callback $callback
      */
     public function __construct(array $connections, StrategyInterface $strategy, $callback = null)
     {
-        $this->_connections = $connections;
-
-        $this->_strategy = $strategy;
-
         $this->_callback = $callback;
+        $this->_connections = $connections;
+        $this->_strategy = $strategy;
     }
 
     /**
-     * @param \Elastica\Connection $connection
+     * @param ConnectionInterface $connection
      *
      * @return $this
      */
-    public function addConnection(Connection $connection)
+    public function addConnection(ConnectionInterface $connection)
     {
         $this->_connections[] = $connection;
 
@@ -56,7 +54,7 @@ class ConnectionPool
     }
 
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param ConnectionInterface[] $connections
      *
      * @return $this
      */
@@ -82,7 +80,7 @@ class ConnectionPool
     }
 
     /**
-     * @return array
+     * @return ConnectionInterface[]
      */
     public function getConnections()
     {
@@ -92,7 +90,7 @@ class ConnectionPool
     /**
      * @throws \Elastica\Exception\ClientException
      *
-     * @return \Elastica\Connection
+     * @return ConnectionInterface
      */
     public function getConnection()
     {
@@ -100,11 +98,11 @@ class ConnectionPool
     }
 
     /**
-     * @param \Elastica\Connection $connection
+     * @param ConnectionInterface $connection
      * @param \Exception           $e
      * @param Client               $client
      */
-    public function onFail(Connection $connection, Exception $e, Client $client)
+    public function onFail(ConnectionInterface $connection, Exception $e, Client $client)
     {
         $connection->setEnabled(false);
 
@@ -114,7 +112,7 @@ class ConnectionPool
     }
 
     /**
-     * @return \Elastica\Connection\Strategy\StrategyInterface
+     * @return StrategyInterface
      */
     public function getStrategy()
     {

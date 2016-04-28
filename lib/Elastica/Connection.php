@@ -2,15 +2,17 @@
 
 namespace Elastica;
 
+use Elastica\Connection\ConnectionInterface;
 use Elastica\Exception\InvalidException;
 use Elastica\Transport\AbstractTransport;
+use Elastica\Transport\TransportInterface;
 
 /**
  * Elastica connection instance to an elasticasearch node.
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
-class Connection extends Param
+class Connection extends Param implements ConnectionInterface
 {
     /**
      * Default elastic search port.
@@ -246,7 +248,7 @@ class Connection extends Param
      *
      * @throws \Elastica\Exception\InvalidException If invalid transport type
      *
-     * @return \Elastica\Transport\AbstractTransport Transport object
+     * @return TransportInterface
      */
     public function getTransportObject()
     {
