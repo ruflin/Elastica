@@ -334,10 +334,12 @@ class Client
 
     /**
      * Establishes the client connections
+     *
+     * @deprecated
      */
     public function connect()
     {
-        return $this->_initConnections();
+        // noop
     }
 
     /**
