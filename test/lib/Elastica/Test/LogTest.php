@@ -30,44 +30,6 @@ class LogTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetLogConfigPath()
-    {
-        $logPath = '/tmp/php.log';
-        $client = $this->_getClient(array('log' => $logPath));
-        $this->assertEquals($logPath, $client->getConfig('log'));
-    }
-
-    /**
-     * @group unit
-     */
-    public function testSetLogConfigEnable()
-    {
-        $client = $this->_getClient(array('log' => true));
-        $this->assertTrue($client->getConfig('log'));
-    }
-
-    /**
-     * @group unit
-     */
-    public function testSetLogConfigEnable1()
-    {
-        $client = $this->_getClient();
-        $client->setLogger(new Log());
-        $this->assertFalse($client->getConfig('log'));
-    }
-
-    /**
-     * @group unit
-     */
-    public function testEmptyLogConfig()
-    {
-        $client = $this->_getClient();
-        $this->assertEmpty($client->getConfig('log'));
-    }
-
-    /**
-     * @group unit
-     */
     public function testGetLastMessage()
     {
         $log = new Log('/tmp/php.log');

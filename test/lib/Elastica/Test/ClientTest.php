@@ -1022,35 +1022,6 @@ class ClientTest extends BaseTest
     }
 
     /**
-     * @group unit
-     */
-    public function testConfigValue()
-    {
-        $config = array(
-            'level1' => array(
-                'level2' => array(
-                    'level3' => 'value3',
-                ),
-                'level21' => 'value21',
-            ),
-            'level11' => 'value11',
-        );
-        $client = $this->_getClient($config);
-
-        $this->assertNull($client->getConfigValue('level12'));
-        $this->assertFalse($client->getConfigValue('level12', false));
-        $this->assertEquals(10, $client->getConfigValue('level12', 10));
-
-        $this->assertEquals('value11', $client->getConfigValue('level11'));
-        $this->assertNotNull($client->getConfigValue('level11'));
-        $this->assertNotEquals(false, $client->getConfigValue('level11', false));
-        $this->assertNotEquals(10, $client->getConfigValue('level11', 10));
-
-        $this->assertEquals('value3', $client->getConfigValue(array('level1', 'level2', 'level3')));
-        $this->assertInternalType('array', $client->getConfigValue(array('level1', 'level2')));
-    }
-
-    /**
      * @group functional
      */
     public function testArrayQuery()
@@ -1100,67 +1071,6 @@ class ClientTest extends BaseTest
         $responseArray = $response->getData();
 
         $this->assertEquals(1, $responseArray['hits']['total']);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testAddHeader()
-    {
-        $client = $this->_getClient();
-
-        // add one header
-        $client->addHeader('foo', 'bar');
-        $this->assertEquals(array('foo' => 'bar'), $client->getConfigValue('headers'));
-
-        // check class
-        $this->assertInstanceOf('Elastica\Client', $client->addHeader('foo', 'bar'));
-
-        // check invalid parameters
-        try {
-            $client->addHeader(new \stdClass(), 'foo');
-            $this->fail('Header name is not a string but exception not thrown');
-        } catch (InvalidException $ex) {
-        }
-
-        try {
-            $client->addHeader('foo', new \stdClass());
-            $this->fail('Header value is not a string but exception not thrown');
-        } catch (InvalidException $ex) {
-        }
-    }
-
-    /**
-     * @group unit
-     */
-    public function testRemoveHeader()
-    {
-        $client = $this->_getClient();
-
-        // set headers
-        $headers = array(
-            'first' => 'first value',
-            'second' => 'second value',
-        );
-        foreach ($headers as $key => $value) {
-            $client->addHeader($key, $value);
-        }
-        $this->assertEquals($headers, $client->getConfigValue('headers'));
-
-        // remove one
-        $client->removeHeader('first');
-        unset($headers['first']);
-        $this->assertEquals($headers, $client->getConfigValue('headers'));
-
-        // check class
-        $this->assertInstanceOf('Elastica\Client', $client->removeHeader('second'));
-
-        // check invalid parameter
-        try {
-            $client->removeHeader(new \stdClass());
-            $this->fail('Header name is not a string but exception not thrown');
-        } catch (InvalidException $ex) {
-        }
     }
 
     /**
