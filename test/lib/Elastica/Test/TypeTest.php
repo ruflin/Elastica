@@ -689,7 +689,7 @@ class TypeTest extends BaseTest
         $index = $client->getIndex('elastica_test');
         $type = $index->getType('update_type');
 
-        $client->setConfigValue('document', array('autoPopulate' => true));
+        $client->setAutoPopulate(true);
 
         $newDocument = new Document(null, array('counter' => 5, 'name' => 'Batman'));
 

@@ -1009,7 +1009,7 @@ class ClientTest extends BaseTest
         $index = $this->_createIndex();
 
         $client = $index->getClient();
-        $client->setConfigValue('document', array('autoPopulate' => true));
+        $client->setAutoPopulate(true);
 
         $type = $index->getType('pos');
         $type->addDocuments($docs);
@@ -1081,24 +1081,6 @@ class ClientTest extends BaseTest
         $client = new Client(array('bigintConversion' => true));
 
         $this->assertTrue($client->getConnection()->getConfig('bigintConversion'));
-    }
-
-    /**
-     * @group unit
-     */
-    public function testClientConnectWithConfigSetByMethod()
-    {
-        $client = new Client();
-        $client->setConfigValue('host', $this->_getHost());
-        $client->setConfigValue('port', $this->_getPort());
-
-        $client->connect();
-        $this->assertTrue($client->hasConnection());
-
-        $connection = $client->getConnection();
-        $this->assertInstanceOf('\Elastica\Connection', $connection);
-        $this->assertEquals($this->_getHost(), $connection->getHost());
-        $this->assertEquals($this->_getPort(), $connection->getPort());
     }
 
     /**

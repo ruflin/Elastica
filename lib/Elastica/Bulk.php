@@ -390,7 +390,7 @@ class Bulk
                 if ($action instanceof AbstractDocumentAction) {
                     $data = $action->getData();
                     if ($data instanceof Document && $data->isAutoPopulate()
-                        || $this->_client->getConfigValue(array('document', 'autoPopulate'), false)
+                        || $this->_client->isAutoPopulate()
                     ) {
                         if (!$data->hasId() && isset($bulkResponseData['_id'])) {
                             $data->setId($bulkResponseData['_id']);

@@ -615,4 +615,20 @@ class Client
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isAutoPopulate()
+    {
+        return $this->_autoPopulate;
+    }
+
+    /**
+     * @param $autoPopulate
+     */
+    public function setAutoPopulate($autoPopulate)
+    {
+        $this->_autoPopulate = $autoPopulate;
+    }
 }
