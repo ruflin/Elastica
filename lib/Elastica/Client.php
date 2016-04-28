@@ -65,6 +65,7 @@ class Client
         $this->_logger = $logger ?: new NullLogger();
 
         if (!$config instanceof ConnectionPoolInterface) {
+            $this->_autoPopulate = isset($config['document']['autoPopulate']) ? $config['document']['autoPopulate'] : false;
             $this->_retryOnConflict = isset($config['retryOnConflict']) ? $config['retryOnConflict'] : false;
 
             $builder = new PoolBuilder();
