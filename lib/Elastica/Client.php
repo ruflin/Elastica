@@ -515,7 +515,7 @@ class Client
             $this->_log($e);
 
             // In case there is no valid connection left, throw exception which caused the disabling of the connection.
-            if (!$this->hasConnection()) {
+            if (!$this->_connectionPool->hasConnection()) {
                 throw $e;
             }
 
