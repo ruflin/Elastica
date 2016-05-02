@@ -1,29 +1,32 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/3.1.1...HEAD)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/3.2.0...HEAD)
+
+## [3.2.0](https://github.com/ruflin/Elastica/compare/3.1.1...3.2.0)
 
 ### Backward Compatibility Breaks
 - Method \Elastica\ResultSet::create and property \Elastica\ResultSet::$class were removed. To change the ResultSet class, implement your own ResultSet Builder. #1065
-- Properties on \Elastica\ResultSet _totalHits, _maxScore, _took and _timedOut that were originally set on object construction are now accessed by the getters on the ResultSet.
+- Properties on \Elastica\ResultSet _totalHits, _maxScore, _took and _timedOut that were originally set on object construction are now accessed by the getters on the ResultSet. #1065
 
 ### Bugfixes
 - Fix php notice on `\Elastica\Index::getAliases()` if index has no aliases #1078
 
 ### Added
-- Update elasticsearch build dependency to elasticsearch 2.3.2
+- Update elasticsearch build dependency to elasticsearch 2.3.2 #1084
 
 ### Improvements
-- `Elastica\Type->deleteByQuery($query, $options)` $query param can be a query `array` again https://github.com/ruflin/Elastica/issues/1072
-- `Elastica\Client->connect()` allows to establish a connection to ES server when the config was set using method `Elastica\Client->setConfigValue()` https://github.com/ruflin/Elastica/issues/1076
+- `Elastica\Type->deleteByQuery($query, $options)` $query param can be a query `array` again https://github.com/ruflin/Elastica/issues/1072 #1073
+- `Elastica\Client->connect()` allows to establish a connection to ES server when the config was set using method `Elastica\Client->setConfigValue()` https://github.com/ruflin/Elastica/issues/1076 #1077
 - Elastica\Client constructor now accepts a LoggerInterface and will log both successful and failed requests. #1069
 
 ### Deprecated
-- Configuring the logger in \Elastica\Client $config constructor is deprecated and will be removed. Use the $logger argument instead.
+- Configuring the logger in \Elastica\Client $config constructor is deprecated and will be removed. Use the $logger argument instead. #1069
 - Extracted creation of ResultSet objects to a new dedicated ResultSet\Builder implementation. #1065
 
 ### Deprecated
-- All properties in the \Elastica\ResultSet class will be moved to private in 4.0. To manipulate the creation of a ResultSet, implement the \Elastica\ResultSet\BuilderInterface and pass your new Builder to the \Elastica\Search instances.
+- All properties in the \Elastica\ResultSet class will be moved to private in 4.0. To manipulate the creation of a ResultSet, implement the \Elastica\ResultSet\BuilderInterface and pass your new Builder to the \Elastica\Search instances. #1065
+
 
 ## [3.1.1](https://github.com/ruflin/Elastica/compare/3.1.0...3.1.1)
 
