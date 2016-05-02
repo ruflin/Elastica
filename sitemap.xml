@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://Elastica.io/2016/05/02/release-3-dot-2-0/</loc>
+    <lastmod>2016-05-02T08:11:13+02:00</lastmod>
+  </url>
+  <url>
     <loc>http://Elastica.io/2016/03/18/release-3-dot-1-1/</loc>
     <lastmod>2016-03-18T07:58:25+01:00</lastmod>
   </url>
@@ -136,16 +140,28 @@
     <loc>http://Elastica.io/release/how-to-create-an-elastica-release.html</loc>
   </url>
   <url>
-    <loc>http://Elastica.io/blog/archives/</loc>
-  </url>
-  <url>
     <loc>http://Elastica.io/blog/</loc>
   </url>
   <url>
-    <loc>http://Elastica.io/getting-started/</loc>
+    <loc>http://Elastica.io/blog/archives/</loc>
+  </url>
+  <url>
+    <loc>http://Elastica.io/references/</loc>
+  </url>
+  <url>
+    <loc>http://Elastica.io/examples/</loc>
   </url>
   <url>
     <loc>http://Elastica.io/faq/</loc>
+  </url>
+  <url>
+    <loc>http://Elastica.io/contribute/</loc>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/</loc>
+  </url>
+  <url>
+    <loc>http://Elastica.io/getting-started/</loc>
   </url>
   <url>
     <loc>http://Elastica.io/projects/</loc>
@@ -155,15 +171,6 @@
   </url>
   <url>
     <loc>http://Elastica.io/migrations/</loc>
-  </url>
-  <url>
-    <loc>http://Elastica.io/examples/</loc>
-  </url>
-  <url>
-    <loc>http://Elastica.io/contribute/</loc>
-  </url>
-  <url>
-    <loc>http://Elastica.io/references/</loc>
   </url>
   <url>
     <loc>http://Elastica.io/releases/</loc>
@@ -205,1935 +212,3867 @@
     <loc>http://Elastica.io/migration/0.90.2/upsert.html</loc>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.AbstractScript.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.AbstractScript.html</loc>
     <lastmod>2016-03-18T08:14:39+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.AbstractUpdateAction.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.AbstractUpdateAction.html</loc>
     <lastmod>2016-03-18T08:14:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.AbstractAggregation.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.AbstractAggregation.html</loc>
     <lastmod>2016-03-18T08:14:46+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.AbstractSimpleAggregation.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.AbstractSimpleAggregation.html</loc>
     <lastmod>2016-03-18T08:14:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.AbstractTermsAggregation.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.AbstractTermsAggregation.html</loc>
     <lastmod>2016-03-18T08:13:59+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Avg.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Avg.html</loc>
     <lastmod>2016-03-18T08:14:37+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Cardinality.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Cardinality.html</loc>
     <lastmod>2016-03-18T08:14:47+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.DateHistogram.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.DateHistogram.html</loc>
     <lastmod>2016-03-18T08:14:55+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.DateRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.DateRange.html</loc>
     <lastmod>2016-03-18T08:13:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.ExtendedStats.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.ExtendedStats.html</loc>
     <lastmod>2016-03-18T08:13:54+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Filter.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Filter.html</loc>
     <lastmod>2016-03-18T08:14:33+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Filters.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Filters.html</loc>
     <lastmod>2016-03-18T08:14:48+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.GeoDistance.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.GeoDistance.html</loc>
     <lastmod>2016-03-18T08:14:56+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.GeohashGrid.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.GeohashGrid.html</loc>
     <lastmod>2016-03-18T08:14:39+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.GlobalAggregation.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.GlobalAggregation.html</loc>
     <lastmod>2016-03-18T08:14:39+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Histogram.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Histogram.html</loc>
     <lastmod>2016-03-18T08:14:52+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.IpRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.IpRange.html</loc>
     <lastmod>2016-03-18T08:14:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Max.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Max.html</loc>
     <lastmod>2016-03-18T08:13:48+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Min.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Min.html</loc>
     <lastmod>2016-03-18T08:14:01+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Missing.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Missing.html</loc>
     <lastmod>2016-03-18T08:14:52+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Nested.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Nested.html</loc>
     <lastmod>2016-03-18T08:14:37+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Percentiles.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Percentiles.html</loc>
     <lastmod>2016-03-18T08:13:46+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Range.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Range.html</loc>
     <lastmod>2016-03-18T08:14:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.ReverseNested.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.ReverseNested.html</loc>
     <lastmod>2016-03-18T08:14:16+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.ScriptedMetric.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.ScriptedMetric.html</loc>
     <lastmod>2016-03-18T08:14:47+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.SignificantTerms.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.SignificantTerms.html</loc>
     <lastmod>2016-03-18T08:14:39+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Stats.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Stats.html</loc>
     <lastmod>2016-03-18T08:14:35+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Sum.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Sum.html</loc>
     <lastmod>2016-03-18T08:14:31+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.Terms.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.Terms.html</loc>
     <lastmod>2016-03-18T08:14:31+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.TopHits.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.TopHits.html</loc>
     <lastmod>2016-03-18T08:14:38+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Aggregation.ValueCount.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Aggregation.ValueCount.html</loc>
     <lastmod>2016-03-18T08:14:34+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.ArrayableInterface.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.ArrayableInterface.html</loc>
     <lastmod>2016-03-18T08:14:57+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Bulk.Action.AbstractDocument.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Bulk.Action.AbstractDocument.html</loc>
     <lastmod>2016-03-18T08:13:48+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Bulk.Action.CreateDocument.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Bulk.Action.CreateDocument.html</loc>
     <lastmod>2016-03-18T08:14:16+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Bulk.Action.DeleteDocument.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Bulk.Action.DeleteDocument.html</loc>
     <lastmod>2016-03-18T08:14:17+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Bulk.Action.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Bulk.Action.html</loc>
     <lastmod>2016-03-18T08:14:49+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Bulk.Action.IndexDocument.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Bulk.Action.IndexDocument.html</loc>
     <lastmod>2016-03-18T08:14:33+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Bulk.Action.UpdateDocument.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Bulk.Action.UpdateDocument.html</loc>
     <lastmod>2016-03-18T08:14:30+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Bulk.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Bulk.html</loc>
     <lastmod>2016-03-18T08:14:48+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Bulk.Response.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Bulk.Response.html</loc>
     <lastmod>2016-03-18T08:14:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Bulk.ResponseSet.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Bulk.ResponseSet.html</loc>
     <lastmod>2016-03-18T08:14:38+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Client.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Client.html</loc>
     <lastmod>2016-03-18T08:14:49+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Cluster.Health.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Cluster.Health.html</loc>
     <lastmod>2016-03-18T08:13:45+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Cluster.Health.Index.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Cluster.Health.Index.html</loc>
     <lastmod>2016-03-18T08:14:40+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Cluster.Health.Shard.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Cluster.Health.Shard.html</loc>
     <lastmod>2016-03-18T08:14:56+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Cluster.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Cluster.html</loc>
     <lastmod>2016-03-18T08:14:18+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Cluster.Settings.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Cluster.Settings.html</loc>
     <lastmod>2016-03-18T08:14:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Connection.ConnectionPool.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Connection.ConnectionPool.html</loc>
     <lastmod>2016-03-18T08:14:07+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Connection.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Connection.html</loc>
     <lastmod>2016-03-18T08:14:27+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Connection.Strategy.CallbackStrategy.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Connection.Strategy.CallbackStrategy.html</loc>
     <lastmod>2016-03-18T08:14:45+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Connection.Strategy.RoundRobin.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Connection.Strategy.RoundRobin.html</loc>
     <lastmod>2016-03-18T08:14:32+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Connection.Strategy.Simple.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Connection.Strategy.Simple.html</loc>
     <lastmod>2016-03-18T08:14:45+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Connection.Strategy.StrategyFactory.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Connection.Strategy.StrategyFactory.html</loc>
     <lastmod>2016-03-18T08:14:54+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Connection.Strategy.StrategyInterface.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Connection.Strategy.StrategyInterface.html</loc>
     <lastmod>2016-03-18T08:14:57+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Document.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Document.html</loc>
     <lastmod>2016-03-18T08:14:38+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.Bulk.Response.ActionException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.Bulk.Response.ActionException.html</loc>
     <lastmod>2016-03-18T08:14:30+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.Bulk.ResponseException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.Bulk.ResponseException.html</loc>
     <lastmod>2016-03-18T08:14:01+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.BulkException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.BulkException.html</loc>
     <lastmod>2016-03-18T08:14:46+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.ClientException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.ClientException.html</loc>
     <lastmod>2016-03-18T08:13:47+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.Connection.GuzzleException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.Connection.GuzzleException.html</loc>
     <lastmod>2016-03-18T08:13:54+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.Connection.HttpException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.Connection.HttpException.html</loc>
     <lastmod>2016-03-18T08:14:35+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.ConnectionException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.ConnectionException.html</loc>
     <lastmod>2016-03-18T08:14:23+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.DeprecatedException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.DeprecatedException.html</loc>
     <lastmod>2016-03-18T08:13:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.ElasticsearchException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.ElasticsearchException.html</loc>
     <lastmod>2016-03-18T08:14:20+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.ExceptionInterface.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.ExceptionInterface.html</loc>
     <lastmod>2016-03-18T08:14:57+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.InvalidException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.InvalidException.html</loc>
     <lastmod>2016-03-18T08:14:15+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.JSONParseException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.JSONParseException.html</loc>
     <lastmod>2016-03-18T08:13:45+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.NotFoundException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.NotFoundException.html</loc>
     <lastmod>2016-03-18T08:13:59+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.NotImplementedException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.NotImplementedException.html</loc>
     <lastmod>2016-03-18T08:14:35+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.PartialShardFailureException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.PartialShardFailureException.html</loc>
     <lastmod>2016-03-18T08:14:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.QueryBuilderException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.QueryBuilderException.html</loc>
     <lastmod>2016-03-18T08:14:13+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.ResponseException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.ResponseException.html</loc>
     <lastmod>2016-03-18T08:14:22+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Exception.RuntimeException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Exception.RuntimeException.html</loc>
     <lastmod>2016-03-18T08:14:55+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.AbstractFilter.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.AbstractFilter.html</loc>
     <lastmod>2016-03-18T08:13:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.AbstractGeoDistance.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.AbstractGeoDistance.html</loc>
     <lastmod>2016-03-18T08:14:23+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.AbstractGeoShape.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.AbstractGeoShape.html</loc>
     <lastmod>2016-03-18T08:14:22+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.AbstractMulti.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.AbstractMulti.html</loc>
     <lastmod>2016-03-18T08:14:52+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Bool.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Bool.html</loc>
     <lastmod>2016-03-18T08:14:25+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.BoolAnd.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.BoolAnd.html</loc>
     <lastmod>2016-03-18T08:14:37+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.BoolFilter.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.BoolFilter.html</loc>
     <lastmod>2016-03-18T08:14:20+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.BoolNot.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.BoolNot.html</loc>
     <lastmod>2016-03-18T08:14:43+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.BoolOr.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.BoolOr.html</loc>
     <lastmod>2016-03-18T08:14:39+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Exists.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Exists.html</loc>
     <lastmod>2016-03-18T08:14:43+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.GeoBoundingBox.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.GeoBoundingBox.html</loc>
     <lastmod>2016-03-18T08:14:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.GeoDistance.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.GeoDistance.html</loc>
     <lastmod>2016-03-18T08:14:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.GeoDistanceRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.GeoDistanceRange.html</loc>
     <lastmod>2016-03-18T08:13:52+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.GeohashCell.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.GeohashCell.html</loc>
     <lastmod>2016-03-18T08:13:49+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.GeoPolygon.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.GeoPolygon.html</loc>
     <lastmod>2016-03-18T08:14:28+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.GeoShapePreIndexed.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.GeoShapePreIndexed.html</loc>
     <lastmod>2016-03-18T08:14:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.GeoShapeProvided.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.GeoShapeProvided.html</loc>
     <lastmod>2016-03-18T08:14:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.HasChild.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.HasChild.html</loc>
     <lastmod>2016-03-18T08:14:29+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.HasParent.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.HasParent.html</loc>
     <lastmod>2016-03-18T08:14:31+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Ids.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Ids.html</loc>
     <lastmod>2016-03-18T08:14:31+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Indices.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Indices.html</loc>
     <lastmod>2016-03-18T08:14:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Limit.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Limit.html</loc>
     <lastmod>2016-03-18T08:14:27+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.MatchAll.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.MatchAll.html</loc>
     <lastmod>2016-03-18T08:14:00+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Missing.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Missing.html</loc>
     <lastmod>2016-03-18T08:14:55+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Nested.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Nested.html</loc>
     <lastmod>2016-03-18T08:14:26+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.NumericRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.NumericRange.html</loc>
     <lastmod>2016-03-18T08:14:21+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Prefix.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Prefix.html</loc>
     <lastmod>2016-03-18T08:14:36+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Query.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Query.html</loc>
     <lastmod>2016-03-18T08:14:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Range.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Range.html</loc>
     <lastmod>2016-03-18T08:14:28+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Regexp.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Regexp.html</loc>
     <lastmod>2016-03-18T08:14:41+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Script.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Script.html</loc>
     <lastmod>2016-03-18T08:13:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Term.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Term.html</loc>
     <lastmod>2016-03-18T08:14:15+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Terms.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Terms.html</loc>
     <lastmod>2016-03-18T08:14:30+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Filter.Type.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Filter.Type.html</loc>
     <lastmod>2016-03-18T08:14:04+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Index.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Index.html</loc>
     <lastmod>2016-03-18T08:14:22+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Index.Settings.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Index.Settings.html</loc>
     <lastmod>2016-03-18T08:14:04+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Index.Stats.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Index.Stats.html</loc>
     <lastmod>2016-03-18T08:14:33+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.IndexTemplate.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.IndexTemplate.html</loc>
     <lastmod>2016-03-18T08:14:24+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.JSON.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.JSON.html</loc>
     <lastmod>2016-03-18T08:14:22+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Log.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Log.html</loc>
     <lastmod>2016-03-18T08:14:36+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Multi.ResultSet.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Multi.ResultSet.html</loc>
     <lastmod>2016-03-18T08:14:00+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Multi.Search.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Multi.Search.html</loc>
     <lastmod>2016-03-18T08:13:56+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.NameableInterface.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.NameableInterface.html</loc>
     <lastmod>2016-03-18T08:14:57+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Node.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Node.html</loc>
     <lastmod>2016-03-18T08:14:41+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Node.Info.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Node.Info.html</loc>
     <lastmod>2016-03-18T08:14:47+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Node.Stats.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Node.Stats.html</loc>
     <lastmod>2016-03-18T08:14:19+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Param.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Param.html</loc>
     <lastmod>2016-03-18T08:14:54+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Percolator.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Percolator.html</loc>
     <lastmod>2016-03-18T08:13:47+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.AbstractGeoDistance.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.AbstractGeoDistance.html</loc>
     <lastmod>2016-03-18T08:14:25+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.AbstractGeoShape.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.AbstractGeoShape.html</loc>
     <lastmod>2016-03-18T08:13:58+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.AbstractQuery.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.AbstractQuery.html</loc>
     <lastmod>2016-03-18T08:14:49+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Bool.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Bool.html</loc>
     <lastmod>2016-03-18T08:14:56+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.BoolQuery.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.BoolQuery.html</loc>
     <lastmod>2016-03-18T08:13:47+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Boosting.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Boosting.html</loc>
     <lastmod>2016-03-18T08:13:57+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Builder.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Builder.html</loc>
     <lastmod>2016-03-18T08:14:46+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Common.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Common.html</loc>
     <lastmod>2016-03-18T08:14:32+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.ConstantScore.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.ConstantScore.html</loc>
     <lastmod>2016-03-18T08:14:23+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.DisMax.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.DisMax.html</loc>
     <lastmod>2016-03-18T08:13:55+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Exists.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Exists.html</loc>
     <lastmod>2016-03-18T08:14:29+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Filtered.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Filtered.html</loc>
     <lastmod>2016-03-18T08:14:54+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.FunctionScore.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.FunctionScore.html</loc>
     <lastmod>2016-03-18T08:14:49+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Fuzzy.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Fuzzy.html</loc>
     <lastmod>2016-03-18T08:14:26+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.GeoBoundingBox.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.GeoBoundingBox.html</loc>
     <lastmod>2016-03-18T08:14:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.GeoDistance.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.GeoDistance.html</loc>
     <lastmod>2016-03-18T08:14:48+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.GeoDistanceRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.GeoDistanceRange.html</loc>
     <lastmod>2016-03-18T08:14:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.GeohashCell.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.GeohashCell.html</loc>
     <lastmod>2016-03-18T08:14:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.GeoPolygon.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.GeoPolygon.html</loc>
     <lastmod>2016-03-18T08:14:32+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.GeoShapePreIndexed.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.GeoShapePreIndexed.html</loc>
     <lastmod>2016-03-18T08:13:55+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.GeoShapeProvided.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.GeoShapeProvided.html</loc>
     <lastmod>2016-03-18T08:13:49+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.HasChild.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.HasChild.html</loc>
     <lastmod>2016-03-18T08:14:02+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.HasParent.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.HasParent.html</loc>
     <lastmod>2016-03-18T08:14:37+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.html</loc>
     <lastmod>2016-03-18T08:14:18+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Ids.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Ids.html</loc>
     <lastmod>2016-03-18T08:14:10+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Image.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Image.html</loc>
     <lastmod>2016-03-18T08:14:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Indices.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Indices.html</loc>
     <lastmod>2016-03-18T08:14:41+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Limit.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Limit.html</loc>
     <lastmod>2016-03-18T08:13:58+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Match.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Match.html</loc>
     <lastmod>2016-03-18T08:14:45+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.MatchAll.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.MatchAll.html</loc>
     <lastmod>2016-03-18T08:14:54+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.MatchPhrase.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.MatchPhrase.html</loc>
     <lastmod>2016-03-18T08:14:46+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.MatchPhrasePrefix.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.MatchPhrasePrefix.html</loc>
     <lastmod>2016-03-18T08:14:11+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Missing.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Missing.html</loc>
     <lastmod>2016-03-18T08:14:32+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.MoreLikeThis.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.MoreLikeThis.html</loc>
     <lastmod>2016-03-18T08:14:47+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.MultiMatch.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.MultiMatch.html</loc>
     <lastmod>2016-03-18T08:14:43+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Nested.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Nested.html</loc>
     <lastmod>2016-03-18T08:14:14+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.NumericRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.NumericRange.html</loc>
     <lastmod>2016-03-18T08:14:21+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Prefix.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Prefix.html</loc>
     <lastmod>2016-03-18T08:14:43+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.QueryString.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.QueryString.html</loc>
     <lastmod>2016-03-18T08:14:29+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Range.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Range.html</loc>
     <lastmod>2016-03-18T08:14:25+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Regexp.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Regexp.html</loc>
     <lastmod>2016-03-18T08:14:54+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Script.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Script.html</loc>
     <lastmod>2016-03-18T08:14:24+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Simple.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Simple.html</loc>
     <lastmod>2016-03-18T08:14:48+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.SimpleQueryString.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.SimpleQueryString.html</loc>
     <lastmod>2016-03-18T08:14:45+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Term.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Term.html</loc>
     <lastmod>2016-03-18T08:14:30+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Terms.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Terms.html</loc>
     <lastmod>2016-03-18T08:14:19+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.TopChildren.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.TopChildren.html</loc>
     <lastmod>2016-03-18T08:13:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Type.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Type.html</loc>
     <lastmod>2016-03-18T08:14:03+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Query.Wildcard.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Query.Wildcard.html</loc>
     <lastmod>2016-03-18T08:14:33+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.DSL.Aggregation.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.DSL.Aggregation.html</loc>
     <lastmod>2016-03-18T08:14:03+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.DSL.Filter.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.DSL.Filter.html</loc>
     <lastmod>2016-03-18T08:14:35+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.DSL.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.DSL.html</loc>
     <lastmod>2016-03-18T08:14:56+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.DSL.Query.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.DSL.Query.html</loc>
     <lastmod>2016-03-18T08:14:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.DSL.Suggest.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.DSL.Suggest.html</loc>
     <lastmod>2016-03-18T08:14:52+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.Facade.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.Facade.html</loc>
     <lastmod>2016-03-18T08:14:20+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.html</loc>
     <lastmod>2016-03-18T08:14:21+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.Version.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.Version.html</loc>
     <lastmod>2016-03-18T08:14:36+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.Version.Latest.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.Version.Latest.html</loc>
     <lastmod>2016-03-18T08:14:40+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.Version.Version090.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.Version.Version090.html</loc>
     <lastmod>2016-03-18T08:13:57+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.Version.Version100.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.Version.Version100.html</loc>
     <lastmod>2016-03-18T08:14:23+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.Version.Version110.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.Version.Version110.html</loc>
     <lastmod>2016-03-18T08:14:15+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.Version.Version120.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.Version.Version120.html</loc>
     <lastmod>2016-03-18T08:14:36+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.Version.Version130.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.Version.Version130.html</loc>
     <lastmod>2016-03-18T08:14:17+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.Version.Version140.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.Version.Version140.html</loc>
     <lastmod>2016-03-18T08:14:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.QueryBuilder.Version.Version150.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.QueryBuilder.Version.Version150.html</loc>
     <lastmod>2016-03-18T08:14:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Request.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Request.html</loc>
     <lastmod>2016-03-18T08:14:15+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Rescore.AbstractRescore.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Rescore.AbstractRescore.html</loc>
     <lastmod>2016-03-18T08:14:20+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Rescore.Query.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Rescore.Query.html</loc>
     <lastmod>2016-03-18T08:14:27+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Response.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Response.html</loc>
     <lastmod>2016-03-18T08:13:56+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Result.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Result.html</loc>
     <lastmod>2016-03-18T08:13:46+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.ResultSet.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.ResultSet.html</loc>
     <lastmod>2016-03-18T08:14:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.ScanAndScroll.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.ScanAndScroll.html</loc>
     <lastmod>2016-03-18T08:14:28+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Script.AbstractScript.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Script.AbstractScript.html</loc>
     <lastmod>2016-03-18T08:13:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Script.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Script.html</loc>
     <lastmod>2016-03-18T08:14:41+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Script.Script.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Script.Script.html</loc>
     <lastmod>2016-03-18T08:14:26+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Script.ScriptFields.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Script.ScriptFields.html</loc>
     <lastmod>2016-03-18T08:14:17+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Script.ScriptFile.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Script.ScriptFile.html</loc>
     <lastmod>2016-03-18T08:14:49+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.ScriptFields.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.ScriptFields.html</loc>
     <lastmod>2016-03-18T08:14:02+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.ScriptFile.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.ScriptFile.html</loc>
     <lastmod>2016-03-18T08:14:33+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Scroll.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Scroll.html</loc>
     <lastmod>2016-03-18T08:14:32+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Search.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Search.html</loc>
     <lastmod>2016-03-18T08:14:36+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.SearchableInterface.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.SearchableInterface.html</loc>
     <lastmod>2016-03-18T08:14:57+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Snapshot.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Snapshot.html</loc>
     <lastmod>2016-03-18T08:14:38+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Status.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Status.html</loc>
     <lastmod>2016-03-18T08:14:18+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Suggest.AbstractSuggest.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Suggest.AbstractSuggest.html</loc>
     <lastmod>2016-03-18T08:13:57+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Suggest.CandidateGenerator.AbstractCandidateGenerator.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Suggest.CandidateGenerator.AbstractCandidateGenerator.html</loc>
     <lastmod>2016-03-18T08:14:56+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Suggest.CandidateGenerator.DirectGenerator.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Suggest.CandidateGenerator.DirectGenerator.html</loc>
     <lastmod>2016-03-18T08:14:24+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Suggest.Completion.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Suggest.Completion.html</loc>
     <lastmod>2016-03-18T08:14:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Suggest.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Suggest.html</loc>
     <lastmod>2016-03-18T08:14:40+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Suggest.Phrase.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Suggest.Phrase.html</loc>
     <lastmod>2016-03-18T08:14:29+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Suggest.Term.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Suggest.Term.html</loc>
     <lastmod>2016-03-18T08:14:16+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Tool.CrossIndex.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Tool.CrossIndex.html</loc>
     <lastmod>2016-03-18T08:14:40+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Transport.AbstractTransport.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Transport.AbstractTransport.html</loc>
     <lastmod>2016-03-18T08:14:34+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Transport.AwsAuthV4.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Transport.AwsAuthV4.html</loc>
     <lastmod>2016-03-18T08:14:55+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Transport.Guzzle.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Transport.Guzzle.html</loc>
     <lastmod>2016-03-18T08:14:09+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Transport.Http.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Transport.Http.html</loc>
     <lastmod>2016-03-18T08:14:05+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Transport.HttpAdapter.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Transport.HttpAdapter.html</loc>
     <lastmod>2016-03-18T08:14:34+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Transport.Https.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Transport.Https.html</loc>
     <lastmod>2016-03-18T08:14:05+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Transport.Null.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Transport.Null.html</loc>
     <lastmod>2016-03-18T08:14:00+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Transport.NullTransport.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Transport.NullTransport.html</loc>
     <lastmod>2016-03-18T08:13:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Type.AbstractType.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Type.AbstractType.html</loc>
     <lastmod>2016-03-18T08:14:21+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Type.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Type.html</loc>
     <lastmod>2016-03-18T08:14:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Type.Mapping.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Type.Mapping.html</loc>
     <lastmod>2016-03-18T08:14:14+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/classes/Elastica.Util.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/classes/Elastica.Util.html</loc>
     <lastmod>2016-03-18T08:14:46+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/AbstractScript.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/AbstractScript.html</loc>
     <lastmod>2016-03-18T08:15:23+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/AbstractUpdateAction.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/AbstractUpdateAction.html</loc>
     <lastmod>2016-03-18T08:15:29+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.AbstractAggregation.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.AbstractAggregation.html</loc>
     <lastmod>2016-03-18T08:15:34+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.AbstractSimpleAggregation.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.AbstractSimpleAggregation.html</loc>
     <lastmod>2016-03-18T08:15:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.AbstractTermsAggregation.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.AbstractTermsAggregation.html</loc>
     <lastmod>2016-03-18T08:15:03+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Avg.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Avg.html</loc>
     <lastmod>2016-03-18T08:15:22+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Cardinality.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Cardinality.html</loc>
     <lastmod>2016-03-18T08:15:39+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.DateHistogram.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.DateHistogram.html</loc>
     <lastmod>2016-03-18T08:15:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.DateRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.DateRange.html</loc>
     <lastmod>2016-03-18T08:15:00+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.ExtendedStats.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.ExtendedStats.html</loc>
     <lastmod>2016-03-18T08:15:01+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Filter.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Filter.html</loc>
     <lastmod>2016-03-18T08:15:19+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Filters.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Filters.html</loc>
     <lastmod>2016-03-18T08:15:39+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.GeoDistance.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.GeoDistance.html</loc>
     <lastmod>2016-03-18T08:15:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.GeohashGrid.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.GeohashGrid.html</loc>
     <lastmod>2016-03-18T08:15:24+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.GlobalAggregation.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.GlobalAggregation.html</loc>
     <lastmod>2016-03-18T08:15:24+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Histogram.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Histogram.html</loc>
     <lastmod>2016-03-18T08:15:49+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.IpRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.IpRange.html</loc>
     <lastmod>2016-03-18T08:15:47+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Max.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Max.html</loc>
     <lastmod>2016-03-18T08:14:59+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Min.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Min.html</loc>
     <lastmod>2016-03-18T08:15:04+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Missing.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Missing.html</loc>
     <lastmod>2016-03-18T08:15:49+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Nested.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Nested.html</loc>
     <lastmod>2016-03-18T08:15:22+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Percentiles.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Percentiles.html</loc>
     <lastmod>2016-03-18T08:14:58+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Range.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Range.html</loc>
     <lastmod>2016-03-18T08:15:26+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.ReverseNested.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.ReverseNested.html</loc>
     <lastmod>2016-03-18T08:15:08+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.ScriptedMetric.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.ScriptedMetric.html</loc>
     <lastmod>2016-03-18T08:15:37+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.SignificantTerms.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.SignificantTerms.html</loc>
     <lastmod>2016-03-18T08:15:24+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Stats.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Stats.html</loc>
     <lastmod>2016-03-18T08:15:21+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Sum.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Sum.html</loc>
     <lastmod>2016-03-18T08:15:17+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.Terms.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.Terms.html</loc>
     <lastmod>2016-03-18T08:15:17+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.TopHits.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.TopHits.html</loc>
     <lastmod>2016-03-18T08:15:22+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Aggregation.ValueCount.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Aggregation.ValueCount.html</loc>
     <lastmod>2016-03-18T08:15:20+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/ArrayableInterface.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/ArrayableInterface.html</loc>
     <lastmod>2016-03-18T08:15:46+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Bulk.Action.AbstractDocument.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Bulk.Action.AbstractDocument.html</loc>
     <lastmod>2016-03-18T08:14:59+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Bulk.Action.CreateDocument.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Bulk.Action.CreateDocument.html</loc>
     <lastmod>2016-03-18T08:15:08+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Bulk.Action.DeleteDocument.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Bulk.Action.DeleteDocument.html</loc>
     <lastmod>2016-03-18T08:15:08+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Bulk.Action.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Bulk.Action.html</loc>
     <lastmod>2016-03-18T08:15:43+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Bulk.Action.IndexDocument.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Bulk.Action.IndexDocument.html</loc>
     <lastmod>2016-03-18T08:15:19+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Bulk.Action.UpdateDocument.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Bulk.Action.UpdateDocument.html</loc>
     <lastmod>2016-03-18T08:15:16+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Bulk.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Bulk.html</loc>
     <lastmod>2016-03-18T08:15:41+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Bulk.Response.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Bulk.Response.html</loc>
     <lastmod>2016-03-18T08:15:45+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Bulk.ResponseSet.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Bulk.ResponseSet.html</loc>
     <lastmod>2016-03-18T08:15:23+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Client.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Client.html</loc>
     <lastmod>2016-03-18T08:15:43+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Cluster.Health.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Cluster.Health.html</loc>
     <lastmod>2016-03-18T08:14:58+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Cluster.Health.Index.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Cluster.Health.Index.html</loc>
     <lastmod>2016-03-18T08:15:24+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Cluster.Health.Shard.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Cluster.Health.Shard.html</loc>
     <lastmod>2016-03-18T08:15:54+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Cluster.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Cluster.html</loc>
     <lastmod>2016-03-18T08:15:09+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Cluster.Settings.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Cluster.Settings.html</loc>
     <lastmod>2016-03-18T08:15:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Connection.ConnectionPool.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Connection.ConnectionPool.html</loc>
     <lastmod>2016-03-18T08:15:06+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Connection.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Connection.html</loc>
     <lastmod>2016-03-18T08:15:15+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Connection.Strategy.CallbackStrategy.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Connection.Strategy.CallbackStrategy.html</loc>
     <lastmod>2016-03-18T08:15:33+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Connection.Strategy.RoundRobin.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Connection.Strategy.RoundRobin.html</loc>
     <lastmod>2016-03-18T08:15:18+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Connection.Strategy.Simple.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Connection.Strategy.Simple.html</loc>
     <lastmod>2016-03-18T08:15:32+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Connection.Strategy.StrategyFactory.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Connection.Strategy.StrategyFactory.html</loc>
     <lastmod>2016-03-18T08:15:52+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Connection.Strategy.StrategyInterface.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Connection.Strategy.StrategyInterface.html</loc>
     <lastmod>2016-03-18T08:15:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Document.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Document.html</loc>
     <lastmod>2016-03-18T08:15:23+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.Bulk.Response.ActionException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.Bulk.Response.ActionException.html</loc>
     <lastmod>2016-03-18T08:15:16+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.Bulk.ResponseException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.Bulk.ResponseException.html</loc>
     <lastmod>2016-03-18T08:15:04+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.BulkException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.BulkException.html</loc>
     <lastmod>2016-03-18T08:15:35+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.ClientException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.ClientException.html</loc>
     <lastmod>2016-03-18T08:14:58+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.Connection.GuzzleException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.Connection.GuzzleException.html</loc>
     <lastmod>2016-03-18T08:15:01+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.Connection.HttpException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.Connection.HttpException.html</loc>
     <lastmod>2016-03-18T08:15:20+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.ConnectionException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.ConnectionException.html</loc>
     <lastmod>2016-03-18T08:15:12+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.DeprecatedException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.DeprecatedException.html</loc>
     <lastmod>2016-03-18T08:15:00+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.ElasticsearchException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.ElasticsearchException.html</loc>
     <lastmod>2016-03-18T08:15:10+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.ExceptionInterface.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.ExceptionInterface.html</loc>
     <lastmod>2016-03-18T08:15:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.InvalidException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.InvalidException.html</loc>
     <lastmod>2016-03-18T08:15:07+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.JSONParseException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.JSONParseException.html</loc>
     <lastmod>2016-03-18T08:14:58+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.NotFoundException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.NotFoundException.html</loc>
     <lastmod>2016-03-18T08:15:03+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.NotImplementedException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.NotImplementedException.html</loc>
     <lastmod>2016-03-18T08:15:21+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.PartialShardFailureException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.PartialShardFailureException.html</loc>
     <lastmod>2016-03-18T08:15:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.QueryBuilderException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.QueryBuilderException.html</loc>
     <lastmod>2016-03-18T08:15:06+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.ResponseException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.ResponseException.html</loc>
     <lastmod>2016-03-18T08:15:11+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Exception.RuntimeException.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Exception.RuntimeException.html</loc>
     <lastmod>2016-03-18T08:15:52+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.AbstractFilter.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.AbstractFilter.html</loc>
     <lastmod>2016-03-18T08:15:00+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.AbstractGeoDistance.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.AbstractGeoDistance.html</loc>
     <lastmod>2016-03-18T08:15:12+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.AbstractGeoShape.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.AbstractGeoShape.html</loc>
     <lastmod>2016-03-18T08:15:11+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.AbstractMulti.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.AbstractMulti.html</loc>
     <lastmod>2016-03-18T08:15:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Bool.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Bool.html</loc>
     <lastmod>2016-03-18T08:15:13+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.BoolAnd.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.BoolAnd.html</loc>
     <lastmod>2016-03-18T08:15:22+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.BoolFilter.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.BoolFilter.html</loc>
     <lastmod>2016-03-18T08:15:10+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.BoolNot.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.BoolNot.html</loc>
     <lastmod>2016-03-18T08:15:28+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.BoolOr.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.BoolOr.html</loc>
     <lastmod>2016-03-18T08:15:23+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Exists.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Exists.html</loc>
     <lastmod>2016-03-18T08:15:26+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.GeoBoundingBox.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.GeoBoundingBox.html</loc>
     <lastmod>2016-03-18T08:15:45+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.GeoDistance.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.GeoDistance.html</loc>
     <lastmod>2016-03-18T08:15:26+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.GeoDistanceRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.GeoDistanceRange.html</loc>
     <lastmod>2016-03-18T08:15:00+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.GeohashCell.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.GeohashCell.html</loc>
     <lastmod>2016-03-18T08:14:59+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.GeoPolygon.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.GeoPolygon.html</loc>
     <lastmod>2016-03-18T08:15:15+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.GeoShapePreIndexed.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.GeoShapePreIndexed.html</loc>
     <lastmod>2016-03-18T08:15:26+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.GeoShapeProvided.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.GeoShapeProvided.html</loc>
     <lastmod>2016-03-18T08:15:49+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.HasChild.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.HasChild.html</loc>
     <lastmod>2016-03-18T08:15:15+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.HasParent.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.HasParent.html</loc>
     <lastmod>2016-03-18T08:15:17+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Ids.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Ids.html</loc>
     <lastmod>2016-03-18T08:15:17+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Indices.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Indices.html</loc>
     <lastmod>2016-03-18T08:15:31+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Limit.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Limit.html</loc>
     <lastmod>2016-03-18T08:15:14+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.MatchAll.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.MatchAll.html</loc>
     <lastmod>2016-03-18T08:15:03+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Missing.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Missing.html</loc>
     <lastmod>2016-03-18T08:15:52+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Nested.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Nested.html</loc>
     <lastmod>2016-03-18T08:15:14+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.NumericRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.NumericRange.html</loc>
     <lastmod>2016-03-18T08:15:11+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Prefix.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Prefix.html</loc>
     <lastmod>2016-03-18T08:15:21+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Query.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Query.html</loc>
     <lastmod>2016-03-18T08:15:30+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Range.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Range.html</loc>
     <lastmod>2016-03-18T08:15:15+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Regexp.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Regexp.html</loc>
     <lastmod>2016-03-18T08:15:25+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Script.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Script.html</loc>
     <lastmod>2016-03-18T08:15:00+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Term.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Term.html</loc>
     <lastmod>2016-03-18T08:15:07+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Terms.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Terms.html</loc>
     <lastmod>2016-03-18T08:15:16+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Filter.Type.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Filter.Type.html</loc>
     <lastmod>2016-03-18T08:15:05+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Index.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Index.html</loc>
     <lastmod>2016-03-18T08:15:11+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Index.Settings.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Index.Settings.html</loc>
     <lastmod>2016-03-18T08:15:05+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Index.Stats.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Index.Stats.html</loc>
     <lastmod>2016-03-18T08:15:19+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/IndexTemplate.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/IndexTemplate.html</loc>
     <lastmod>2016-03-18T08:15:13+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/JSON.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/JSON.html</loc>
     <lastmod>2016-03-18T08:15:12+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Log.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Log.html</loc>
     <lastmod>2016-03-18T08:15:21+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Multi.ResultSet.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Multi.ResultSet.html</loc>
     <lastmod>2016-03-18T08:15:04+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Multi.Search.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Multi.Search.html</loc>
     <lastmod>2016-03-18T08:15:02+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/NameableInterface.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/NameableInterface.html</loc>
     <lastmod>2016-03-18T08:15:18+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Node.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Node.html</loc>
     <lastmod>2016-03-18T08:15:25+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Node.Info.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Node.Info.html</loc>
     <lastmod>2016-03-18T08:15:38+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Node.Stats.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Node.Stats.html</loc>
     <lastmod>2016-03-18T08:15:09+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Param.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Param.html</loc>
     <lastmod>2016-03-18T08:15:52+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Percolator.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Percolator.html</loc>
     <lastmod>2016-03-18T08:14:59+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.AbstractGeoDistance.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.AbstractGeoDistance.html</loc>
     <lastmod>2016-03-18T08:15:13+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.AbstractGeoShape.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.AbstractGeoShape.html</loc>
     <lastmod>2016-03-18T08:15:03+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.AbstractQuery.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.AbstractQuery.html</loc>
     <lastmod>2016-03-18T08:15:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Bool.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Bool.html</loc>
     <lastmod>2016-03-18T08:15:54+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.BoolQuery.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.BoolQuery.html</loc>
     <lastmod>2016-03-18T08:14:58+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Boosting.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Boosting.html</loc>
     <lastmod>2016-03-18T08:15:02+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Builder.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Builder.html</loc>
     <lastmod>2016-03-18T08:15:34+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Common.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Common.html</loc>
     <lastmod>2016-03-18T08:15:18+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.ConstantScore.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.ConstantScore.html</loc>
     <lastmod>2016-03-18T08:15:12+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.DisMax.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.DisMax.html</loc>
     <lastmod>2016-03-18T08:15:01+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Exists.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Exists.html</loc>
     <lastmod>2016-03-18T08:15:16+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Filtered.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Filtered.html</loc>
     <lastmod>2016-03-18T08:15:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.FunctionScore.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.FunctionScore.html</loc>
     <lastmod>2016-03-18T08:15:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Fuzzy.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Fuzzy.html</loc>
     <lastmod>2016-03-18T08:15:14+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.GeoBoundingBox.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.GeoBoundingBox.html</loc>
     <lastmod>2016-03-18T08:15:29+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.GeoDistance.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.GeoDistance.html</loc>
     <lastmod>2016-03-18T08:15:40+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.GeoDistanceRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.GeoDistanceRange.html</loc>
     <lastmod>2016-03-18T08:15:26+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.GeohashCell.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.GeohashCell.html</loc>
     <lastmod>2016-03-18T08:15:48+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.GeoPolygon.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.GeoPolygon.html</loc>
     <lastmod>2016-03-18T08:15:18+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.GeoShapePreIndexed.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.GeoShapePreIndexed.html</loc>
     <lastmod>2016-03-18T08:15:01+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.GeoShapeProvided.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.GeoShapeProvided.html</loc>
     <lastmod>2016-03-18T08:14:59+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.HasChild.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.HasChild.html</loc>
     <lastmod>2016-03-18T08:15:04+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.HasParent.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.HasParent.html</loc>
     <lastmod>2016-03-18T08:15:22+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.html</loc>
     <lastmod>2016-03-18T08:15:09+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Ids.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Ids.html</loc>
     <lastmod>2016-03-18T08:15:06+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Image.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Image.html</loc>
     <lastmod>2016-03-18T08:15:46+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Indices.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Indices.html</loc>
     <lastmod>2016-03-18T08:15:25+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Limit.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Limit.html</loc>
     <lastmod>2016-03-18T08:15:03+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Match.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Match.html</loc>
     <lastmod>2016-03-18T08:15:33+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.MatchAll.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.MatchAll.html</loc>
     <lastmod>2016-03-18T08:15:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.MatchPhrase.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.MatchPhrase.html</loc>
     <lastmod>2016-03-18T08:15:36+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.MatchPhrasePrefix.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.MatchPhrasePrefix.html</loc>
     <lastmod>2016-03-18T08:15:06+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Missing.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Missing.html</loc>
     <lastmod>2016-03-18T08:15:17+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.MoreLikeThis.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.MoreLikeThis.html</loc>
     <lastmod>2016-03-18T08:15:37+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.MultiMatch.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.MultiMatch.html</loc>
     <lastmod>2016-03-18T08:15:27+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Nested.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Nested.html</loc>
     <lastmod>2016-03-18T08:15:07+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.NumericRange.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.NumericRange.html</loc>
     <lastmod>2016-03-18T08:15:10+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Prefix.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Prefix.html</loc>
     <lastmod>2016-03-18T08:15:28+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.QueryString.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.QueryString.html</loc>
     <lastmod>2016-03-18T08:15:15+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Range.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Range.html</loc>
     <lastmod>2016-03-18T08:15:13+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Regexp.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Regexp.html</loc>
     <lastmod>2016-03-18T08:15:52+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Script.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Script.html</loc>
     <lastmod>2016-03-18T08:15:13+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Simple.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Simple.html</loc>
     <lastmod>2016-03-18T08:15:39+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.SimpleQueryString.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.SimpleQueryString.html</loc>
     <lastmod>2016-03-18T08:15:31+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Term.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Term.html</loc>
     <lastmod>2016-03-18T08:15:16+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Terms.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Terms.html</loc>
     <lastmod>2016-03-18T08:15:09+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.TopChildren.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.TopChildren.html</loc>
     <lastmod>2016-03-18T08:15:01+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Type.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Type.html</loc>
     <lastmod>2016-03-18T08:15:05+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Query.Wildcard.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Query.Wildcard.html</loc>
     <lastmod>2016-03-18T08:15:19+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.DSL.Aggregation.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.DSL.Aggregation.html</loc>
     <lastmod>2016-03-18T08:15:05+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.DSL.Filter.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.DSL.Filter.html</loc>
     <lastmod>2016-03-18T08:15:20+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.DSL.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.DSL.html</loc>
     <lastmod>2016-03-18T08:15:13+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.DSL.Query.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.DSL.Query.html</loc>
     <lastmod>2016-03-18T08:15:30+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.DSL.Suggest.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.DSL.Suggest.html</loc>
     <lastmod>2016-03-18T08:15:50+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.Facade.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.Facade.html</loc>
     <lastmod>2016-03-18T08:15:10+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.html</loc>
     <lastmod>2016-03-18T08:15:11+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.Version.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.Version.html</loc>
     <lastmod>2016-03-18T08:15:21+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.Version.Latest.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.Version.Latest.html</loc>
     <lastmod>2016-03-18T08:15:25+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.Version.Version090.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.Version.Version090.html</loc>
     <lastmod>2016-03-18T08:15:02+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.Version.Version100.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.Version.Version100.html</loc>
     <lastmod>2016-03-18T08:15:12+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.Version.Version110.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.Version.Version110.html</loc>
     <lastmod>2016-03-18T08:15:07+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.Version.Version120.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.Version.Version120.html</loc>
     <lastmod>2016-03-18T08:15:22+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.Version.Version130.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.Version.Version130.html</loc>
     <lastmod>2016-03-18T08:15:08+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.Version.Version140.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.Version.Version140.html</loc>
     <lastmod>2016-03-18T08:15:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/QueryBuilder.Version.Version150.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/QueryBuilder.Version.Version150.html</loc>
     <lastmod>2016-03-18T08:15:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Request.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Request.html</loc>
     <lastmod>2016-03-18T08:15:07+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Rescore.AbstractRescore.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Rescore.AbstractRescore.html</loc>
     <lastmod>2016-03-18T08:15:10+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Rescore.Query.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Rescore.Query.html</loc>
     <lastmod>2016-03-18T08:15:14+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Response.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Response.html</loc>
     <lastmod>2016-03-18T08:15:02+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Result.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Result.html</loc>
     <lastmod>2016-03-18T08:14:58+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/ResultSet.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/ResultSet.html</loc>
     <lastmod>2016-03-18T08:15:51+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/ScanAndScroll.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/ScanAndScroll.html</loc>
     <lastmod>2016-03-18T08:15:15+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Script.AbstractScript.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Script.AbstractScript.html</loc>
     <lastmod>2016-03-18T08:15:01+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Script.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Script.html</loc>
     <lastmod>2016-03-18T08:15:25+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Script.Script.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Script.Script.html</loc>
     <lastmod>2016-03-18T08:15:14+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Script.ScriptFields.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Script.ScriptFields.html</loc>
     <lastmod>2016-03-18T08:15:09+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Script.ScriptFile.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Script.ScriptFile.html</loc>
     <lastmod>2016-03-18T08:15:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/ScriptFields.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/ScriptFields.html</loc>
     <lastmod>2016-03-18T08:15:04+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/ScriptFile.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/ScriptFile.html</loc>
     <lastmod>2016-03-18T08:15:19+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Scroll.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Scroll.html</loc>
     <lastmod>2016-03-18T08:15:18+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Search.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Search.html</loc>
     <lastmod>2016-03-18T08:15:21+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/SearchableInterface.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/SearchableInterface.html</loc>
     <lastmod>2016-03-18T08:15:18+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Snapshot.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Snapshot.html</loc>
     <lastmod>2016-03-18T08:15:23+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Status.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Status.html</loc>
     <lastmod>2016-03-18T08:15:09+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Suggest.AbstractSuggest.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Suggest.AbstractSuggest.html</loc>
     <lastmod>2016-03-18T08:15:02+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Suggest.CandidateGenerator.AbstractCandidateGenerator.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Suggest.CandidateGenerator.AbstractCandidateGenerator.html</loc>
     <lastmod>2016-03-18T08:15:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Suggest.CandidateGenerator.DirectGenerator.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Suggest.CandidateGenerator.DirectGenerator.html</loc>
     <lastmod>2016-03-18T08:15:12+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Suggest.Completion.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Suggest.Completion.html</loc>
     <lastmod>2016-03-18T08:15:49+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Suggest.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Suggest.html</loc>
     <lastmod>2016-03-18T08:15:24+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Suggest.Phrase.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Suggest.Phrase.html</loc>
     <lastmod>2016-03-18T08:15:16+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Suggest.Term.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Suggest.Term.html</loc>
     <lastmod>2016-03-18T08:15:08+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Tool.CrossIndex.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Tool.CrossIndex.html</loc>
     <lastmod>2016-03-18T08:15:24+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Transport.AbstractTransport.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Transport.AbstractTransport.html</loc>
     <lastmod>2016-03-18T08:15:20+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Transport.AwsAuthV4.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Transport.AwsAuthV4.html</loc>
     <lastmod>2016-03-18T08:15:53+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Transport.Guzzle.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Transport.Guzzle.html</loc>
     <lastmod>2016-03-18T08:15:06+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Transport.Http.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Transport.Http.html</loc>
     <lastmod>2016-03-18T08:15:05+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Transport.HttpAdapter.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Transport.HttpAdapter.html</loc>
     <lastmod>2016-03-18T08:15:20+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Transport.Https.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Transport.Https.html</loc>
     <lastmod>2016-03-18T08:15:05+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Transport.Null.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Transport.Null.html</loc>
     <lastmod>2016-03-18T08:15:04+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Transport.NullTransport.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Transport.NullTransport.html</loc>
     <lastmod>2016-03-18T08:15:00+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Type.AbstractType.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Type.AbstractType.html</loc>
     <lastmod>2016-03-18T08:15:10+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Type.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Type.html</loc>
     <lastmod>2016-03-18T08:15:48+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Type.Mapping.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Type.Mapping.html</loc>
     <lastmod>2016-03-18T08:15:07+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/files/Util.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/files/Util.html</loc>
     <lastmod>2016-03-18T08:15:36+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/graphs/class.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/graphs/class.html</loc>
     <lastmod>2016-03-18T08:15:57+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/index.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/index.html</loc>
     <lastmod>2016-03-18T08:13:40+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/default.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/default.html</loc>
     <lastmod>2016-03-18T08:13:40+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Aggregation.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Aggregation.html</loc>
     <lastmod>2016-03-18T08:13:41+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Bulk.Action.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Bulk.Action.html</loc>
     <lastmod>2016-03-18T08:13:41+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Bulk.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Bulk.html</loc>
     <lastmod>2016-03-18T08:13:41+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Cluster.Health.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Cluster.Health.html</loc>
     <lastmod>2016-03-18T08:13:45+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Cluster.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Cluster.html</loc>
     <lastmod>2016-03-18T08:13:40+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Connection.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Connection.html</loc>
     <lastmod>2016-03-18T08:13:43+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Connection.Strategy.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Connection.Strategy.html</loc>
     <lastmod>2016-03-18T08:13:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Exception.Bulk.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Exception.Bulk.html</loc>
     <lastmod>2016-03-18T08:13:43+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Exception.Bulk.Response.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Exception.Bulk.Response.html</loc>
     <lastmod>2016-03-18T08:13:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Exception.Connection.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Exception.Connection.html</loc>
     <lastmod>2016-03-18T08:13:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Exception.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Exception.html</loc>
     <lastmod>2016-03-18T08:13:40+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Filter.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Filter.html</loc>
     <lastmod>2016-03-18T08:13:41+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.html</loc>
     <lastmod>2016-03-18T08:13:40+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Index.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Index.html</loc>
     <lastmod>2016-03-18T08:13:43+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Multi.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Multi.html</loc>
     <lastmod>2016-03-18T08:13:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Node.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Node.html</loc>
     <lastmod>2016-03-18T08:13:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Query.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Query.html</loc>
     <lastmod>2016-03-18T08:13:41+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.QueryBuilder.DSL.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.QueryBuilder.DSL.html</loc>
     <lastmod>2016-03-18T08:13:43+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.QueryBuilder.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.QueryBuilder.html</loc>
     <lastmod>2016-03-18T08:13:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.QueryBuilder.Version.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.QueryBuilder.Version.html</loc>
     <lastmod>2016-03-18T08:13:43+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Rescore.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Rescore.html</loc>
     <lastmod>2016-03-18T08:13:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Script.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Script.html</loc>
     <lastmod>2016-03-18T08:13:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Suggest.CandidateGenerator.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Suggest.CandidateGenerator.html</loc>
     <lastmod>2016-03-18T08:13:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Suggest.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Suggest.html</loc>
     <lastmod>2016-03-18T08:13:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Tool.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Tool.html</loc>
     <lastmod>2016-03-18T08:13:45+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Transport.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Transport.html</loc>
     <lastmod>2016-03-18T08:13:42+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/namespaces/Elastica.Type.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/namespaces/Elastica.Type.html</loc>
     <lastmod>2016-03-18T08:13:44+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/reports/deprecated.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/reports/deprecated.html</loc>
     <lastmod>2016-03-18T08:15:56+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/reports/errors.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/reports/errors.html</loc>
     <lastmod>2016-03-18T08:15:56+01:00</lastmod>
   </url>
   <url>
-    <loc>http://Elastica.io/api/reports/markers.html</loc>
+    <loc>http://Elastica.io/api/2.3.1/reports/markers.html</loc>
+    <lastmod>2016-03-18T08:15:56+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.AbstractScript.html</loc>
+    <lastmod>2016-03-18T08:14:39+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.AbstractUpdateAction.html</loc>
+    <lastmod>2016-03-18T08:14:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.AbstractAggregation.html</loc>
+    <lastmod>2016-03-18T08:14:46+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.AbstractSimpleAggregation.html</loc>
+    <lastmod>2016-03-18T08:14:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.AbstractTermsAggregation.html</loc>
+    <lastmod>2016-03-18T08:13:59+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Avg.html</loc>
+    <lastmod>2016-03-18T08:14:37+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Cardinality.html</loc>
+    <lastmod>2016-03-18T08:14:47+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.DateHistogram.html</loc>
+    <lastmod>2016-03-18T08:14:55+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.DateRange.html</loc>
+    <lastmod>2016-03-18T08:13:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.ExtendedStats.html</loc>
+    <lastmod>2016-03-18T08:13:54+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Filter.html</loc>
+    <lastmod>2016-03-18T08:14:33+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Filters.html</loc>
+    <lastmod>2016-03-18T08:14:48+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.GeoDistance.html</loc>
+    <lastmod>2016-03-18T08:14:56+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.GeohashGrid.html</loc>
+    <lastmod>2016-03-18T08:14:39+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.GlobalAggregation.html</loc>
+    <lastmod>2016-03-18T08:14:39+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Histogram.html</loc>
+    <lastmod>2016-03-18T08:14:52+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.IpRange.html</loc>
+    <lastmod>2016-03-18T08:14:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Max.html</loc>
+    <lastmod>2016-03-18T08:13:48+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Min.html</loc>
+    <lastmod>2016-03-18T08:14:01+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Missing.html</loc>
+    <lastmod>2016-03-18T08:14:52+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Nested.html</loc>
+    <lastmod>2016-03-18T08:14:37+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Percentiles.html</loc>
+    <lastmod>2016-03-18T08:13:46+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Range.html</loc>
+    <lastmod>2016-03-18T08:14:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.ReverseNested.html</loc>
+    <lastmod>2016-03-18T08:14:16+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.ScriptedMetric.html</loc>
+    <lastmod>2016-03-18T08:14:47+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.SignificantTerms.html</loc>
+    <lastmod>2016-03-18T08:14:39+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Stats.html</loc>
+    <lastmod>2016-03-18T08:14:35+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Sum.html</loc>
+    <lastmod>2016-03-18T08:14:31+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.Terms.html</loc>
+    <lastmod>2016-03-18T08:14:31+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.TopHits.html</loc>
+    <lastmod>2016-03-18T08:14:38+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Aggregation.ValueCount.html</loc>
+    <lastmod>2016-03-18T08:14:34+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.ArrayableInterface.html</loc>
+    <lastmod>2016-03-18T08:14:57+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Bulk.Action.AbstractDocument.html</loc>
+    <lastmod>2016-03-18T08:13:48+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Bulk.Action.CreateDocument.html</loc>
+    <lastmod>2016-03-18T08:14:16+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Bulk.Action.DeleteDocument.html</loc>
+    <lastmod>2016-03-18T08:14:17+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Bulk.Action.html</loc>
+    <lastmod>2016-03-18T08:14:49+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Bulk.Action.IndexDocument.html</loc>
+    <lastmod>2016-03-18T08:14:33+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Bulk.Action.UpdateDocument.html</loc>
+    <lastmod>2016-03-18T08:14:30+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Bulk.html</loc>
+    <lastmod>2016-03-18T08:14:48+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Bulk.Response.html</loc>
+    <lastmod>2016-03-18T08:14:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Bulk.ResponseSet.html</loc>
+    <lastmod>2016-03-18T08:14:38+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Client.html</loc>
+    <lastmod>2016-03-18T08:14:49+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Cluster.Health.html</loc>
+    <lastmod>2016-03-18T08:13:45+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Cluster.Health.Index.html</loc>
+    <lastmod>2016-03-18T08:14:40+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Cluster.Health.Shard.html</loc>
+    <lastmod>2016-03-18T08:14:56+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Cluster.html</loc>
+    <lastmod>2016-03-18T08:14:18+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Cluster.Settings.html</loc>
+    <lastmod>2016-03-18T08:14:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Connection.ConnectionPool.html</loc>
+    <lastmod>2016-03-18T08:14:07+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Connection.html</loc>
+    <lastmod>2016-03-18T08:14:27+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Connection.Strategy.CallbackStrategy.html</loc>
+    <lastmod>2016-03-18T08:14:45+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Connection.Strategy.RoundRobin.html</loc>
+    <lastmod>2016-03-18T08:14:32+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Connection.Strategy.Simple.html</loc>
+    <lastmod>2016-03-18T08:14:45+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Connection.Strategy.StrategyFactory.html</loc>
+    <lastmod>2016-03-18T08:14:54+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Connection.Strategy.StrategyInterface.html</loc>
+    <lastmod>2016-03-18T08:14:57+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Document.html</loc>
+    <lastmod>2016-03-18T08:14:38+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.Bulk.Response.ActionException.html</loc>
+    <lastmod>2016-03-18T08:14:30+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.Bulk.ResponseException.html</loc>
+    <lastmod>2016-03-18T08:14:01+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.BulkException.html</loc>
+    <lastmod>2016-03-18T08:14:46+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.ClientException.html</loc>
+    <lastmod>2016-03-18T08:13:47+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.Connection.GuzzleException.html</loc>
+    <lastmod>2016-03-18T08:13:54+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.Connection.HttpException.html</loc>
+    <lastmod>2016-03-18T08:14:35+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.ConnectionException.html</loc>
+    <lastmod>2016-03-18T08:14:23+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.DeprecatedException.html</loc>
+    <lastmod>2016-03-18T08:13:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.ElasticsearchException.html</loc>
+    <lastmod>2016-03-18T08:14:20+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.ExceptionInterface.html</loc>
+    <lastmod>2016-03-18T08:14:57+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.InvalidException.html</loc>
+    <lastmod>2016-03-18T08:14:15+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.JSONParseException.html</loc>
+    <lastmod>2016-03-18T08:13:45+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.NotFoundException.html</loc>
+    <lastmod>2016-03-18T08:13:59+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.NotImplementedException.html</loc>
+    <lastmod>2016-03-18T08:14:35+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.PartialShardFailureException.html</loc>
+    <lastmod>2016-03-18T08:14:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.QueryBuilderException.html</loc>
+    <lastmod>2016-03-18T08:14:13+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.ResponseException.html</loc>
+    <lastmod>2016-03-18T08:14:22+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Exception.RuntimeException.html</loc>
+    <lastmod>2016-03-18T08:14:55+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.AbstractFilter.html</loc>
+    <lastmod>2016-03-18T08:13:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.AbstractGeoDistance.html</loc>
+    <lastmod>2016-03-18T08:14:23+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.AbstractGeoShape.html</loc>
+    <lastmod>2016-03-18T08:14:22+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.AbstractMulti.html</loc>
+    <lastmod>2016-03-18T08:14:52+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Bool.html</loc>
+    <lastmod>2016-03-18T08:14:25+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.BoolAnd.html</loc>
+    <lastmod>2016-03-18T08:14:37+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.BoolFilter.html</loc>
+    <lastmod>2016-03-18T08:14:20+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.BoolNot.html</loc>
+    <lastmod>2016-03-18T08:14:43+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.BoolOr.html</loc>
+    <lastmod>2016-03-18T08:14:39+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Exists.html</loc>
+    <lastmod>2016-03-18T08:14:43+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.GeoBoundingBox.html</loc>
+    <lastmod>2016-03-18T08:14:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.GeoDistance.html</loc>
+    <lastmod>2016-03-18T08:14:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.GeoDistanceRange.html</loc>
+    <lastmod>2016-03-18T08:13:52+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.GeohashCell.html</loc>
+    <lastmod>2016-03-18T08:13:49+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.GeoPolygon.html</loc>
+    <lastmod>2016-03-18T08:14:28+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.GeoShapePreIndexed.html</loc>
+    <lastmod>2016-03-18T08:14:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.GeoShapeProvided.html</loc>
+    <lastmod>2016-03-18T08:14:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.HasChild.html</loc>
+    <lastmod>2016-03-18T08:14:29+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.HasParent.html</loc>
+    <lastmod>2016-03-18T08:14:31+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Ids.html</loc>
+    <lastmod>2016-03-18T08:14:31+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Indices.html</loc>
+    <lastmod>2016-03-18T08:14:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Limit.html</loc>
+    <lastmod>2016-03-18T08:14:27+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.MatchAll.html</loc>
+    <lastmod>2016-03-18T08:14:00+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Missing.html</loc>
+    <lastmod>2016-03-18T08:14:55+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Nested.html</loc>
+    <lastmod>2016-03-18T08:14:26+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.NumericRange.html</loc>
+    <lastmod>2016-03-18T08:14:21+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Prefix.html</loc>
+    <lastmod>2016-03-18T08:14:36+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Query.html</loc>
+    <lastmod>2016-03-18T08:14:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Range.html</loc>
+    <lastmod>2016-03-18T08:14:28+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Regexp.html</loc>
+    <lastmod>2016-03-18T08:14:41+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Script.html</loc>
+    <lastmod>2016-03-18T08:13:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Term.html</loc>
+    <lastmod>2016-03-18T08:14:15+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Terms.html</loc>
+    <lastmod>2016-03-18T08:14:30+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Filter.Type.html</loc>
+    <lastmod>2016-03-18T08:14:04+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Index.html</loc>
+    <lastmod>2016-03-18T08:14:22+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Index.Settings.html</loc>
+    <lastmod>2016-03-18T08:14:04+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Index.Stats.html</loc>
+    <lastmod>2016-03-18T08:14:33+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.IndexTemplate.html</loc>
+    <lastmod>2016-03-18T08:14:24+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.JSON.html</loc>
+    <lastmod>2016-03-18T08:14:22+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Log.html</loc>
+    <lastmod>2016-03-18T08:14:36+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Multi.ResultSet.html</loc>
+    <lastmod>2016-03-18T08:14:00+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Multi.Search.html</loc>
+    <lastmod>2016-03-18T08:13:56+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.NameableInterface.html</loc>
+    <lastmod>2016-03-18T08:14:57+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Node.html</loc>
+    <lastmod>2016-03-18T08:14:41+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Node.Info.html</loc>
+    <lastmod>2016-03-18T08:14:47+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Node.Stats.html</loc>
+    <lastmod>2016-03-18T08:14:19+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Param.html</loc>
+    <lastmod>2016-03-18T08:14:54+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Percolator.html</loc>
+    <lastmod>2016-03-18T08:13:47+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.AbstractGeoDistance.html</loc>
+    <lastmod>2016-03-18T08:14:25+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.AbstractGeoShape.html</loc>
+    <lastmod>2016-03-18T08:13:58+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.AbstractQuery.html</loc>
+    <lastmod>2016-03-18T08:14:49+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Bool.html</loc>
+    <lastmod>2016-03-18T08:14:56+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.BoolQuery.html</loc>
+    <lastmod>2016-03-18T08:13:47+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Boosting.html</loc>
+    <lastmod>2016-03-18T08:13:57+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Builder.html</loc>
+    <lastmod>2016-03-18T08:14:46+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Common.html</loc>
+    <lastmod>2016-03-18T08:14:32+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.ConstantScore.html</loc>
+    <lastmod>2016-03-18T08:14:23+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.DisMax.html</loc>
+    <lastmod>2016-03-18T08:13:55+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Exists.html</loc>
+    <lastmod>2016-03-18T08:14:29+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Filtered.html</loc>
+    <lastmod>2016-03-18T08:14:54+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.FunctionScore.html</loc>
+    <lastmod>2016-03-18T08:14:49+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Fuzzy.html</loc>
+    <lastmod>2016-03-18T08:14:26+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.GeoBoundingBox.html</loc>
+    <lastmod>2016-03-18T08:14:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.GeoDistance.html</loc>
+    <lastmod>2016-03-18T08:14:48+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.GeoDistanceRange.html</loc>
+    <lastmod>2016-03-18T08:14:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.GeohashCell.html</loc>
+    <lastmod>2016-03-18T08:14:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.GeoPolygon.html</loc>
+    <lastmod>2016-03-18T08:14:32+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.GeoShapePreIndexed.html</loc>
+    <lastmod>2016-03-18T08:13:55+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.GeoShapeProvided.html</loc>
+    <lastmod>2016-03-18T08:13:49+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.HasChild.html</loc>
+    <lastmod>2016-03-18T08:14:02+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.HasParent.html</loc>
+    <lastmod>2016-03-18T08:14:37+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.html</loc>
+    <lastmod>2016-03-18T08:14:18+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Ids.html</loc>
+    <lastmod>2016-03-18T08:14:10+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Image.html</loc>
+    <lastmod>2016-03-18T08:14:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Indices.html</loc>
+    <lastmod>2016-03-18T08:14:41+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Limit.html</loc>
+    <lastmod>2016-03-18T08:13:58+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Match.html</loc>
+    <lastmod>2016-03-18T08:14:45+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.MatchAll.html</loc>
+    <lastmod>2016-03-18T08:14:54+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.MatchPhrase.html</loc>
+    <lastmod>2016-03-18T08:14:46+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.MatchPhrasePrefix.html</loc>
+    <lastmod>2016-03-18T08:14:11+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Missing.html</loc>
+    <lastmod>2016-03-18T08:14:32+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.MoreLikeThis.html</loc>
+    <lastmod>2016-03-18T08:14:47+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.MultiMatch.html</loc>
+    <lastmod>2016-03-18T08:14:43+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Nested.html</loc>
+    <lastmod>2016-03-18T08:14:14+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.NumericRange.html</loc>
+    <lastmod>2016-03-18T08:14:21+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Prefix.html</loc>
+    <lastmod>2016-03-18T08:14:43+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.QueryString.html</loc>
+    <lastmod>2016-03-18T08:14:29+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Range.html</loc>
+    <lastmod>2016-03-18T08:14:25+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Regexp.html</loc>
+    <lastmod>2016-03-18T08:14:54+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Script.html</loc>
+    <lastmod>2016-03-18T08:14:24+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Simple.html</loc>
+    <lastmod>2016-03-18T08:14:48+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.SimpleQueryString.html</loc>
+    <lastmod>2016-03-18T08:14:45+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Term.html</loc>
+    <lastmod>2016-03-18T08:14:30+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Terms.html</loc>
+    <lastmod>2016-03-18T08:14:19+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.TopChildren.html</loc>
+    <lastmod>2016-03-18T08:13:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Type.html</loc>
+    <lastmod>2016-03-18T08:14:03+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Query.Wildcard.html</loc>
+    <lastmod>2016-03-18T08:14:33+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.DSL.Aggregation.html</loc>
+    <lastmod>2016-03-18T08:14:03+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.DSL.Filter.html</loc>
+    <lastmod>2016-03-18T08:14:35+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.DSL.html</loc>
+    <lastmod>2016-03-18T08:14:56+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.DSL.Query.html</loc>
+    <lastmod>2016-03-18T08:14:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.DSL.Suggest.html</loc>
+    <lastmod>2016-03-18T08:14:52+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.Facade.html</loc>
+    <lastmod>2016-03-18T08:14:20+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.html</loc>
+    <lastmod>2016-03-18T08:14:21+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.Version.html</loc>
+    <lastmod>2016-03-18T08:14:36+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.Version.Latest.html</loc>
+    <lastmod>2016-03-18T08:14:40+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.Version.Version090.html</loc>
+    <lastmod>2016-03-18T08:13:57+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.Version.Version100.html</loc>
+    <lastmod>2016-03-18T08:14:23+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.Version.Version110.html</loc>
+    <lastmod>2016-03-18T08:14:15+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.Version.Version120.html</loc>
+    <lastmod>2016-03-18T08:14:36+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.Version.Version130.html</loc>
+    <lastmod>2016-03-18T08:14:17+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.Version.Version140.html</loc>
+    <lastmod>2016-03-18T08:14:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.QueryBuilder.Version.Version150.html</loc>
+    <lastmod>2016-03-18T08:14:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Request.html</loc>
+    <lastmod>2016-03-18T08:14:15+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Rescore.AbstractRescore.html</loc>
+    <lastmod>2016-03-18T08:14:20+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Rescore.Query.html</loc>
+    <lastmod>2016-03-18T08:14:27+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Response.html</loc>
+    <lastmod>2016-03-18T08:13:56+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Result.html</loc>
+    <lastmod>2016-03-18T08:13:46+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.ResultSet.html</loc>
+    <lastmod>2016-03-18T08:14:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.ScanAndScroll.html</loc>
+    <lastmod>2016-03-18T08:14:28+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Script.AbstractScript.html</loc>
+    <lastmod>2016-03-18T08:13:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Script.html</loc>
+    <lastmod>2016-03-18T08:14:41+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Script.Script.html</loc>
+    <lastmod>2016-03-18T08:14:26+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Script.ScriptFields.html</loc>
+    <lastmod>2016-03-18T08:14:17+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Script.ScriptFile.html</loc>
+    <lastmod>2016-03-18T08:14:49+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.ScriptFields.html</loc>
+    <lastmod>2016-03-18T08:14:02+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.ScriptFile.html</loc>
+    <lastmod>2016-03-18T08:14:33+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Scroll.html</loc>
+    <lastmod>2016-03-18T08:14:32+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Search.html</loc>
+    <lastmod>2016-03-18T08:14:36+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.SearchableInterface.html</loc>
+    <lastmod>2016-03-18T08:14:57+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Snapshot.html</loc>
+    <lastmod>2016-03-18T08:14:38+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Status.html</loc>
+    <lastmod>2016-03-18T08:14:18+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Suggest.AbstractSuggest.html</loc>
+    <lastmod>2016-03-18T08:13:57+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Suggest.CandidateGenerator.AbstractCandidateGenerator.html</loc>
+    <lastmod>2016-03-18T08:14:56+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Suggest.CandidateGenerator.DirectGenerator.html</loc>
+    <lastmod>2016-03-18T08:14:24+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Suggest.Completion.html</loc>
+    <lastmod>2016-03-18T08:14:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Suggest.html</loc>
+    <lastmod>2016-03-18T08:14:40+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Suggest.Phrase.html</loc>
+    <lastmod>2016-03-18T08:14:29+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Suggest.Term.html</loc>
+    <lastmod>2016-03-18T08:14:16+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Tool.CrossIndex.html</loc>
+    <lastmod>2016-03-18T08:14:40+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Transport.AbstractTransport.html</loc>
+    <lastmod>2016-03-18T08:14:34+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Transport.AwsAuthV4.html</loc>
+    <lastmod>2016-03-18T08:14:55+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Transport.Guzzle.html</loc>
+    <lastmod>2016-03-18T08:14:09+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Transport.Http.html</loc>
+    <lastmod>2016-03-18T08:14:05+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Transport.HttpAdapter.html</loc>
+    <lastmod>2016-03-18T08:14:34+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Transport.Https.html</loc>
+    <lastmod>2016-03-18T08:14:05+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Transport.Null.html</loc>
+    <lastmod>2016-03-18T08:14:00+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Transport.NullTransport.html</loc>
+    <lastmod>2016-03-18T08:13:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Type.AbstractType.html</loc>
+    <lastmod>2016-03-18T08:14:21+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Type.html</loc>
+    <lastmod>2016-03-18T08:14:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Type.Mapping.html</loc>
+    <lastmod>2016-03-18T08:14:14+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/classes/Elastica.Util.html</loc>
+    <lastmod>2016-03-18T08:14:46+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/AbstractScript.html</loc>
+    <lastmod>2016-03-18T08:15:23+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/AbstractUpdateAction.html</loc>
+    <lastmod>2016-03-18T08:15:29+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.AbstractAggregation.html</loc>
+    <lastmod>2016-03-18T08:15:34+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.AbstractSimpleAggregation.html</loc>
+    <lastmod>2016-03-18T08:15:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.AbstractTermsAggregation.html</loc>
+    <lastmod>2016-03-18T08:15:03+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Avg.html</loc>
+    <lastmod>2016-03-18T08:15:22+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Cardinality.html</loc>
+    <lastmod>2016-03-18T08:15:39+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.DateHistogram.html</loc>
+    <lastmod>2016-03-18T08:15:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.DateRange.html</loc>
+    <lastmod>2016-03-18T08:15:00+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.ExtendedStats.html</loc>
+    <lastmod>2016-03-18T08:15:01+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Filter.html</loc>
+    <lastmod>2016-03-18T08:15:19+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Filters.html</loc>
+    <lastmod>2016-03-18T08:15:39+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.GeoDistance.html</loc>
+    <lastmod>2016-03-18T08:15:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.GeohashGrid.html</loc>
+    <lastmod>2016-03-18T08:15:24+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.GlobalAggregation.html</loc>
+    <lastmod>2016-03-18T08:15:24+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Histogram.html</loc>
+    <lastmod>2016-03-18T08:15:49+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.IpRange.html</loc>
+    <lastmod>2016-03-18T08:15:47+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Max.html</loc>
+    <lastmod>2016-03-18T08:14:59+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Min.html</loc>
+    <lastmod>2016-03-18T08:15:04+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Missing.html</loc>
+    <lastmod>2016-03-18T08:15:49+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Nested.html</loc>
+    <lastmod>2016-03-18T08:15:22+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Percentiles.html</loc>
+    <lastmod>2016-03-18T08:14:58+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Range.html</loc>
+    <lastmod>2016-03-18T08:15:26+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.ReverseNested.html</loc>
+    <lastmod>2016-03-18T08:15:08+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.ScriptedMetric.html</loc>
+    <lastmod>2016-03-18T08:15:37+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.SignificantTerms.html</loc>
+    <lastmod>2016-03-18T08:15:24+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Stats.html</loc>
+    <lastmod>2016-03-18T08:15:21+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Sum.html</loc>
+    <lastmod>2016-03-18T08:15:17+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.Terms.html</loc>
+    <lastmod>2016-03-18T08:15:17+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.TopHits.html</loc>
+    <lastmod>2016-03-18T08:15:22+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Aggregation.ValueCount.html</loc>
+    <lastmod>2016-03-18T08:15:20+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/ArrayableInterface.html</loc>
+    <lastmod>2016-03-18T08:15:46+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Bulk.Action.AbstractDocument.html</loc>
+    <lastmod>2016-03-18T08:14:59+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Bulk.Action.CreateDocument.html</loc>
+    <lastmod>2016-03-18T08:15:08+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Bulk.Action.DeleteDocument.html</loc>
+    <lastmod>2016-03-18T08:15:08+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Bulk.Action.html</loc>
+    <lastmod>2016-03-18T08:15:43+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Bulk.Action.IndexDocument.html</loc>
+    <lastmod>2016-03-18T08:15:19+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Bulk.Action.UpdateDocument.html</loc>
+    <lastmod>2016-03-18T08:15:16+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Bulk.html</loc>
+    <lastmod>2016-03-18T08:15:41+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Bulk.Response.html</loc>
+    <lastmod>2016-03-18T08:15:45+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Bulk.ResponseSet.html</loc>
+    <lastmod>2016-03-18T08:15:23+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Client.html</loc>
+    <lastmod>2016-03-18T08:15:43+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Cluster.Health.html</loc>
+    <lastmod>2016-03-18T08:14:58+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Cluster.Health.Index.html</loc>
+    <lastmod>2016-03-18T08:15:24+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Cluster.Health.Shard.html</loc>
+    <lastmod>2016-03-18T08:15:54+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Cluster.html</loc>
+    <lastmod>2016-03-18T08:15:09+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Cluster.Settings.html</loc>
+    <lastmod>2016-03-18T08:15:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Connection.ConnectionPool.html</loc>
+    <lastmod>2016-03-18T08:15:06+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Connection.html</loc>
+    <lastmod>2016-03-18T08:15:15+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Connection.Strategy.CallbackStrategy.html</loc>
+    <lastmod>2016-03-18T08:15:33+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Connection.Strategy.RoundRobin.html</loc>
+    <lastmod>2016-03-18T08:15:18+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Connection.Strategy.Simple.html</loc>
+    <lastmod>2016-03-18T08:15:32+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Connection.Strategy.StrategyFactory.html</loc>
+    <lastmod>2016-03-18T08:15:52+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Connection.Strategy.StrategyInterface.html</loc>
+    <lastmod>2016-03-18T08:15:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Document.html</loc>
+    <lastmod>2016-03-18T08:15:23+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.Bulk.Response.ActionException.html</loc>
+    <lastmod>2016-03-18T08:15:16+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.Bulk.ResponseException.html</loc>
+    <lastmod>2016-03-18T08:15:04+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.BulkException.html</loc>
+    <lastmod>2016-03-18T08:15:35+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.ClientException.html</loc>
+    <lastmod>2016-03-18T08:14:58+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.Connection.GuzzleException.html</loc>
+    <lastmod>2016-03-18T08:15:01+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.Connection.HttpException.html</loc>
+    <lastmod>2016-03-18T08:15:20+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.ConnectionException.html</loc>
+    <lastmod>2016-03-18T08:15:12+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.DeprecatedException.html</loc>
+    <lastmod>2016-03-18T08:15:00+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.ElasticsearchException.html</loc>
+    <lastmod>2016-03-18T08:15:10+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.ExceptionInterface.html</loc>
+    <lastmod>2016-03-18T08:15:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.InvalidException.html</loc>
+    <lastmod>2016-03-18T08:15:07+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.JSONParseException.html</loc>
+    <lastmod>2016-03-18T08:14:58+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.NotFoundException.html</loc>
+    <lastmod>2016-03-18T08:15:03+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.NotImplementedException.html</loc>
+    <lastmod>2016-03-18T08:15:21+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.PartialShardFailureException.html</loc>
+    <lastmod>2016-03-18T08:15:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.QueryBuilderException.html</loc>
+    <lastmod>2016-03-18T08:15:06+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.ResponseException.html</loc>
+    <lastmod>2016-03-18T08:15:11+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Exception.RuntimeException.html</loc>
+    <lastmod>2016-03-18T08:15:52+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.AbstractFilter.html</loc>
+    <lastmod>2016-03-18T08:15:00+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.AbstractGeoDistance.html</loc>
+    <lastmod>2016-03-18T08:15:12+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.AbstractGeoShape.html</loc>
+    <lastmod>2016-03-18T08:15:11+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.AbstractMulti.html</loc>
+    <lastmod>2016-03-18T08:15:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Bool.html</loc>
+    <lastmod>2016-03-18T08:15:13+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.BoolAnd.html</loc>
+    <lastmod>2016-03-18T08:15:22+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.BoolFilter.html</loc>
+    <lastmod>2016-03-18T08:15:10+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.BoolNot.html</loc>
+    <lastmod>2016-03-18T08:15:28+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.BoolOr.html</loc>
+    <lastmod>2016-03-18T08:15:23+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Exists.html</loc>
+    <lastmod>2016-03-18T08:15:26+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.GeoBoundingBox.html</loc>
+    <lastmod>2016-03-18T08:15:45+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.GeoDistance.html</loc>
+    <lastmod>2016-03-18T08:15:26+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.GeoDistanceRange.html</loc>
+    <lastmod>2016-03-18T08:15:00+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.GeohashCell.html</loc>
+    <lastmod>2016-03-18T08:14:59+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.GeoPolygon.html</loc>
+    <lastmod>2016-03-18T08:15:15+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.GeoShapePreIndexed.html</loc>
+    <lastmod>2016-03-18T08:15:26+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.GeoShapeProvided.html</loc>
+    <lastmod>2016-03-18T08:15:49+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.HasChild.html</loc>
+    <lastmod>2016-03-18T08:15:15+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.HasParent.html</loc>
+    <lastmod>2016-03-18T08:15:17+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Ids.html</loc>
+    <lastmod>2016-03-18T08:15:17+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Indices.html</loc>
+    <lastmod>2016-03-18T08:15:31+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Limit.html</loc>
+    <lastmod>2016-03-18T08:15:14+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.MatchAll.html</loc>
+    <lastmod>2016-03-18T08:15:03+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Missing.html</loc>
+    <lastmod>2016-03-18T08:15:52+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Nested.html</loc>
+    <lastmod>2016-03-18T08:15:14+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.NumericRange.html</loc>
+    <lastmod>2016-03-18T08:15:11+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Prefix.html</loc>
+    <lastmod>2016-03-18T08:15:21+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Query.html</loc>
+    <lastmod>2016-03-18T08:15:30+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Range.html</loc>
+    <lastmod>2016-03-18T08:15:15+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Regexp.html</loc>
+    <lastmod>2016-03-18T08:15:25+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Script.html</loc>
+    <lastmod>2016-03-18T08:15:00+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Term.html</loc>
+    <lastmod>2016-03-18T08:15:07+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Terms.html</loc>
+    <lastmod>2016-03-18T08:15:16+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Filter.Type.html</loc>
+    <lastmod>2016-03-18T08:15:05+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Index.html</loc>
+    <lastmod>2016-03-18T08:15:11+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Index.Settings.html</loc>
+    <lastmod>2016-03-18T08:15:05+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Index.Stats.html</loc>
+    <lastmod>2016-03-18T08:15:19+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/IndexTemplate.html</loc>
+    <lastmod>2016-03-18T08:15:13+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/JSON.html</loc>
+    <lastmod>2016-03-18T08:15:12+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Log.html</loc>
+    <lastmod>2016-03-18T08:15:21+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Multi.ResultSet.html</loc>
+    <lastmod>2016-03-18T08:15:04+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Multi.Search.html</loc>
+    <lastmod>2016-03-18T08:15:02+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/NameableInterface.html</loc>
+    <lastmod>2016-03-18T08:15:18+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Node.html</loc>
+    <lastmod>2016-03-18T08:15:25+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Node.Info.html</loc>
+    <lastmod>2016-03-18T08:15:38+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Node.Stats.html</loc>
+    <lastmod>2016-03-18T08:15:09+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Param.html</loc>
+    <lastmod>2016-03-18T08:15:52+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Percolator.html</loc>
+    <lastmod>2016-03-18T08:14:59+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.AbstractGeoDistance.html</loc>
+    <lastmod>2016-03-18T08:15:13+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.AbstractGeoShape.html</loc>
+    <lastmod>2016-03-18T08:15:03+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.AbstractQuery.html</loc>
+    <lastmod>2016-03-18T08:15:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Bool.html</loc>
+    <lastmod>2016-03-18T08:15:54+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.BoolQuery.html</loc>
+    <lastmod>2016-03-18T08:14:58+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Boosting.html</loc>
+    <lastmod>2016-03-18T08:15:02+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Builder.html</loc>
+    <lastmod>2016-03-18T08:15:34+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Common.html</loc>
+    <lastmod>2016-03-18T08:15:18+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.ConstantScore.html</loc>
+    <lastmod>2016-03-18T08:15:12+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.DisMax.html</loc>
+    <lastmod>2016-03-18T08:15:01+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Exists.html</loc>
+    <lastmod>2016-03-18T08:15:16+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Filtered.html</loc>
+    <lastmod>2016-03-18T08:15:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.FunctionScore.html</loc>
+    <lastmod>2016-03-18T08:15:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Fuzzy.html</loc>
+    <lastmod>2016-03-18T08:15:14+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.GeoBoundingBox.html</loc>
+    <lastmod>2016-03-18T08:15:29+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.GeoDistance.html</loc>
+    <lastmod>2016-03-18T08:15:40+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.GeoDistanceRange.html</loc>
+    <lastmod>2016-03-18T08:15:26+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.GeohashCell.html</loc>
+    <lastmod>2016-03-18T08:15:48+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.GeoPolygon.html</loc>
+    <lastmod>2016-03-18T08:15:18+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.GeoShapePreIndexed.html</loc>
+    <lastmod>2016-03-18T08:15:01+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.GeoShapeProvided.html</loc>
+    <lastmod>2016-03-18T08:14:59+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.HasChild.html</loc>
+    <lastmod>2016-03-18T08:15:04+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.HasParent.html</loc>
+    <lastmod>2016-03-18T08:15:22+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.html</loc>
+    <lastmod>2016-03-18T08:15:09+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Ids.html</loc>
+    <lastmod>2016-03-18T08:15:06+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Image.html</loc>
+    <lastmod>2016-03-18T08:15:46+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Indices.html</loc>
+    <lastmod>2016-03-18T08:15:25+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Limit.html</loc>
+    <lastmod>2016-03-18T08:15:03+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Match.html</loc>
+    <lastmod>2016-03-18T08:15:33+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.MatchAll.html</loc>
+    <lastmod>2016-03-18T08:15:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.MatchPhrase.html</loc>
+    <lastmod>2016-03-18T08:15:36+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.MatchPhrasePrefix.html</loc>
+    <lastmod>2016-03-18T08:15:06+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Missing.html</loc>
+    <lastmod>2016-03-18T08:15:17+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.MoreLikeThis.html</loc>
+    <lastmod>2016-03-18T08:15:37+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.MultiMatch.html</loc>
+    <lastmod>2016-03-18T08:15:27+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Nested.html</loc>
+    <lastmod>2016-03-18T08:15:07+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.NumericRange.html</loc>
+    <lastmod>2016-03-18T08:15:10+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Prefix.html</loc>
+    <lastmod>2016-03-18T08:15:28+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.QueryString.html</loc>
+    <lastmod>2016-03-18T08:15:15+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Range.html</loc>
+    <lastmod>2016-03-18T08:15:13+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Regexp.html</loc>
+    <lastmod>2016-03-18T08:15:52+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Script.html</loc>
+    <lastmod>2016-03-18T08:15:13+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Simple.html</loc>
+    <lastmod>2016-03-18T08:15:39+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.SimpleQueryString.html</loc>
+    <lastmod>2016-03-18T08:15:31+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Term.html</loc>
+    <lastmod>2016-03-18T08:15:16+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Terms.html</loc>
+    <lastmod>2016-03-18T08:15:09+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.TopChildren.html</loc>
+    <lastmod>2016-03-18T08:15:01+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Type.html</loc>
+    <lastmod>2016-03-18T08:15:05+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Query.Wildcard.html</loc>
+    <lastmod>2016-03-18T08:15:19+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.DSL.Aggregation.html</loc>
+    <lastmod>2016-03-18T08:15:05+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.DSL.Filter.html</loc>
+    <lastmod>2016-03-18T08:15:20+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.DSL.html</loc>
+    <lastmod>2016-03-18T08:15:13+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.DSL.Query.html</loc>
+    <lastmod>2016-03-18T08:15:30+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.DSL.Suggest.html</loc>
+    <lastmod>2016-03-18T08:15:50+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.Facade.html</loc>
+    <lastmod>2016-03-18T08:15:10+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.html</loc>
+    <lastmod>2016-03-18T08:15:11+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.Version.html</loc>
+    <lastmod>2016-03-18T08:15:21+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.Version.Latest.html</loc>
+    <lastmod>2016-03-18T08:15:25+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.Version.Version090.html</loc>
+    <lastmod>2016-03-18T08:15:02+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.Version.Version100.html</loc>
+    <lastmod>2016-03-18T08:15:12+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.Version.Version110.html</loc>
+    <lastmod>2016-03-18T08:15:07+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.Version.Version120.html</loc>
+    <lastmod>2016-03-18T08:15:22+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.Version.Version130.html</loc>
+    <lastmod>2016-03-18T08:15:08+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.Version.Version140.html</loc>
+    <lastmod>2016-03-18T08:15:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/QueryBuilder.Version.Version150.html</loc>
+    <lastmod>2016-03-18T08:15:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Request.html</loc>
+    <lastmod>2016-03-18T08:15:07+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Rescore.AbstractRescore.html</loc>
+    <lastmod>2016-03-18T08:15:10+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Rescore.Query.html</loc>
+    <lastmod>2016-03-18T08:15:14+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Response.html</loc>
+    <lastmod>2016-03-18T08:15:02+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Result.html</loc>
+    <lastmod>2016-03-18T08:14:58+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/ResultSet.html</loc>
+    <lastmod>2016-03-18T08:15:51+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/ScanAndScroll.html</loc>
+    <lastmod>2016-03-18T08:15:15+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Script.AbstractScript.html</loc>
+    <lastmod>2016-03-18T08:15:01+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Script.html</loc>
+    <lastmod>2016-03-18T08:15:25+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Script.Script.html</loc>
+    <lastmod>2016-03-18T08:15:14+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Script.ScriptFields.html</loc>
+    <lastmod>2016-03-18T08:15:09+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Script.ScriptFile.html</loc>
+    <lastmod>2016-03-18T08:15:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/ScriptFields.html</loc>
+    <lastmod>2016-03-18T08:15:04+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/ScriptFile.html</loc>
+    <lastmod>2016-03-18T08:15:19+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Scroll.html</loc>
+    <lastmod>2016-03-18T08:15:18+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Search.html</loc>
+    <lastmod>2016-03-18T08:15:21+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/SearchableInterface.html</loc>
+    <lastmod>2016-03-18T08:15:18+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Snapshot.html</loc>
+    <lastmod>2016-03-18T08:15:23+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Status.html</loc>
+    <lastmod>2016-03-18T08:15:09+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Suggest.AbstractSuggest.html</loc>
+    <lastmod>2016-03-18T08:15:02+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Suggest.CandidateGenerator.AbstractCandidateGenerator.html</loc>
+    <lastmod>2016-03-18T08:15:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Suggest.CandidateGenerator.DirectGenerator.html</loc>
+    <lastmod>2016-03-18T08:15:12+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Suggest.Completion.html</loc>
+    <lastmod>2016-03-18T08:15:49+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Suggest.html</loc>
+    <lastmod>2016-03-18T08:15:24+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Suggest.Phrase.html</loc>
+    <lastmod>2016-03-18T08:15:16+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Suggest.Term.html</loc>
+    <lastmod>2016-03-18T08:15:08+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Tool.CrossIndex.html</loc>
+    <lastmod>2016-03-18T08:15:24+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Transport.AbstractTransport.html</loc>
+    <lastmod>2016-03-18T08:15:20+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Transport.AwsAuthV4.html</loc>
+    <lastmod>2016-03-18T08:15:53+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Transport.Guzzle.html</loc>
+    <lastmod>2016-03-18T08:15:06+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Transport.Http.html</loc>
+    <lastmod>2016-03-18T08:15:05+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Transport.HttpAdapter.html</loc>
+    <lastmod>2016-03-18T08:15:20+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Transport.Https.html</loc>
+    <lastmod>2016-03-18T08:15:05+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Transport.Null.html</loc>
+    <lastmod>2016-03-18T08:15:04+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Transport.NullTransport.html</loc>
+    <lastmod>2016-03-18T08:15:00+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Type.AbstractType.html</loc>
+    <lastmod>2016-03-18T08:15:10+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Type.html</loc>
+    <lastmod>2016-03-18T08:15:48+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Type.Mapping.html</loc>
+    <lastmod>2016-03-18T08:15:07+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/files/Util.html</loc>
+    <lastmod>2016-03-18T08:15:36+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/graphs/class.html</loc>
+    <lastmod>2016-03-18T08:15:57+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/index.html</loc>
+    <lastmod>2016-03-18T08:13:40+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/default.html</loc>
+    <lastmod>2016-03-18T08:13:40+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Aggregation.html</loc>
+    <lastmod>2016-03-18T08:13:41+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Bulk.Action.html</loc>
+    <lastmod>2016-03-18T08:13:41+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Bulk.html</loc>
+    <lastmod>2016-03-18T08:13:41+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Cluster.Health.html</loc>
+    <lastmod>2016-03-18T08:13:45+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Cluster.html</loc>
+    <lastmod>2016-03-18T08:13:40+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Connection.html</loc>
+    <lastmod>2016-03-18T08:13:43+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Connection.Strategy.html</loc>
+    <lastmod>2016-03-18T08:13:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Exception.Bulk.html</loc>
+    <lastmod>2016-03-18T08:13:43+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Exception.Bulk.Response.html</loc>
+    <lastmod>2016-03-18T08:13:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Exception.Connection.html</loc>
+    <lastmod>2016-03-18T08:13:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Exception.html</loc>
+    <lastmod>2016-03-18T08:13:40+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Filter.html</loc>
+    <lastmod>2016-03-18T08:13:41+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.html</loc>
+    <lastmod>2016-03-18T08:13:40+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Index.html</loc>
+    <lastmod>2016-03-18T08:13:43+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Multi.html</loc>
+    <lastmod>2016-03-18T08:13:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Node.html</loc>
+    <lastmod>2016-03-18T08:13:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Query.html</loc>
+    <lastmod>2016-03-18T08:13:41+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.QueryBuilder.DSL.html</loc>
+    <lastmod>2016-03-18T08:13:43+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.QueryBuilder.html</loc>
+    <lastmod>2016-03-18T08:13:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.QueryBuilder.Version.html</loc>
+    <lastmod>2016-03-18T08:13:43+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Rescore.html</loc>
+    <lastmod>2016-03-18T08:13:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Script.html</loc>
+    <lastmod>2016-03-18T08:13:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Suggest.CandidateGenerator.html</loc>
+    <lastmod>2016-03-18T08:13:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Suggest.html</loc>
+    <lastmod>2016-03-18T08:13:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Tool.html</loc>
+    <lastmod>2016-03-18T08:13:45+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Transport.html</loc>
+    <lastmod>2016-03-18T08:13:42+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/namespaces/Elastica.Type.html</loc>
+    <lastmod>2016-03-18T08:13:44+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/reports/deprecated.html</loc>
+    <lastmod>2016-03-18T08:15:56+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/reports/errors.html</loc>
+    <lastmod>2016-03-18T08:15:56+01:00</lastmod>
+  </url>
+  <url>
+    <loc>http://Elastica.io/api/latest/reports/markers.html</loc>
     <lastmod>2016-03-18T08:15:56+01:00</lastmod>
   </url>
 </urlset>
