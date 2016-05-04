@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file based on the
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/3.2.0...HEAD)
 
+### Bugfixes
+- Fix fatal error on `Query::addScriptField()` if scripts were already set via `setScriptFields()` #1086
+
 ## [3.2.0](https://github.com/ruflin/Elastica/compare/3.1.1...3.2.0)
 
 ### Backward Compatibility Breaks
