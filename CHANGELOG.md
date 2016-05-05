@@ -5,14 +5,25 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 - Fix fatal error on `Query::addScriptField()` if scripts were already set via `setScriptFields()` #1086
+### Backward Compatibility Breaks
+- Elastica Configuration can no longer be set or adjusted after Client creation. Pass the final configuration array to the Elastica\Client constructor. #1070
+- The `\Elastica\Client` constructor's $config array is no longer type-hinted as an array as it now accepts a ConnectionPoolInterface.
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+- Methods addConnection, hasConnection, getConnection, getConnections, getConnectionStrategy and setConnections \Elastica\Client have been deprecated and will be removed in 4.0. Access these methods directly on the ConnectionPool
+- Client::connect() is now a noop and will be removed in 4.0
 
 ## [3.2.0](https://github.com/ruflin/Elastica/compare/3.1.1...3.2.0)
 
 ### Backward Compatibility Breaks
 - Method \Elastica\ResultSet::create and property \Elastica\ResultSet::$class were removed. To change the ResultSet class, implement your own ResultSet Builder. #1065
 - Properties on \Elastica\ResultSet _totalHits, _maxScore, _took and _timedOut that were originally set on object construction are now accessed by the getters on the ResultSet. #1065
-- Properties on \Elastica\ResultSet _totalHits, _maxScore, _took and _timedOut that were originally set on object construction are now accessed by the getters on the ResultSet.
-- Connection parameters can no longer be set or adjusted after Client creation. Configure connections in the Client constructor.
 
 ### Bugfixes
 - Fix php notice on `\Elastica\Index::getAliases()` if index has no aliases #1078
@@ -28,13 +39,7 @@ All notable changes to this project will be documented in this file based on the
 ### Deprecated
 - Configuring the logger in \Elastica\Client $config constructor is deprecated and will be removed. Use the $logger argument instead. #1069
 - Extracted creation of ResultSet objects to a new dedicated ResultSet\Builder implementation. #1065
-
-### Deprecated
 - All properties in the \Elastica\ResultSet class will be moved to private in 4.0. To manipulate the creation of a ResultSet, implement the \Elastica\ResultSet\BuilderInterface and pass your new Builder to the \Elastica\Search instances. #1065
-
-- All properties in the \Elastica\ResultSet class will be moved to private in 4.0. To manipulate the creation of a ResultSet, implement the \Elastica\ResultSet\BuilderInterface and pass your new Builder to the \Elastica\Search instances.
-- Methods addConnection, hasConnection, getConnection, getConnections, getConnectionStrategy and setConnections \Elastica\Client have been deprecated and will be removed in 4.0. Access these methods directly on the ConnectionPool
-- Client::connect() is now a noop and will be removed in 4.0
 
 ## [3.1.1](https://github.com/ruflin/Elastica/compare/3.1.0...3.1.1)
 
