@@ -338,7 +338,11 @@ class Query extends Param
      */
     public function addScriptField($name, AbstractScript $script)
     {
-        $this->_params['script_fields'][$name] = $script;
+        if (isset($this->_params['script_fields'])) {
+            $this->_params['script_fields']->addScript($name, $script);
+        } else {
+            $this->setScriptFields(array($name => $script));
+        }
 
         return $this;
     }
