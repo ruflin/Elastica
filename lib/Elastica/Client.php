@@ -25,7 +25,7 @@ class Client
      *
      * @var array
      */
-    protected $_config = array(
+    protected $_config = [
         'host' => null,
         'port' => null,
         'path' => null,
@@ -41,7 +41,7 @@ class Client
         'bigintConversion' => false,
         'username' => null,
         'password' => null,
-    );
+    ];
 
     /**
      * @var callback
@@ -93,7 +93,7 @@ class Client
      */
     protected function _initConnections()
     {
-        $connections = array();
+        $connections = [];
 
         foreach ($this->getConfig('connections') as $connection) {
             $connections[] = Connection::create($this->_prepareConnectionParams($connection));
@@ -132,10 +132,12 @@ class Client
      */
     protected function _prepareConnectionParams(array $config)
     {
-        $params = array();
-        $params['config'] = array();
+        $params = [
+            'config' => [],
+        ];
+        $keys = ['bigintConversion', 'curl', 'headers', 'url'];
         foreach ($config as $key => $value) {
-            if (in_array($key, array('bigintConversion', 'curl', 'headers', 'url'))) {
+            if (in_array($key, $keys)) {
                 $params['config'][$key] = $value;
             } else {
                 $params[$key] = $value;
@@ -177,11 +179,11 @@ class Client
             return $this->_config;
         }
 
-        if (!array_key_exists($key, $this->_config)) {
-            throw new InvalidException('Config key is not set: '.$key);
+        if (array_key_exists($key, $this->_config)) {
+            return $this->_config[$key];
         }
 
-        return $this->_config[$key];
+        throw new InvalidException('Config key is not set: '.$key);
     }
 
     /**
@@ -194,7 +196,7 @@ class Client
      */
     public function setConfigValue($key, $value)
     {
-        return $this->setConfig(array($key => $value));
+        return $this->setConfig([$key => $value]);
     }
 
     /**
@@ -243,11 +245,11 @@ class Client
     {
         if (is_string($header) && is_string($headerValue)) {
             $this->_config['headers'][$header] = $headerValue;
-        } else {
-            throw new InvalidException('Header must be a string');
+
+            return $this;
         }
 
-        return $this;
+        throw new InvalidException('Header must be a string');
     }
 
     /**
@@ -265,11 +267,11 @@ class Client
             if (array_key_exists($header, $this->_config['headers'])) {
                 unset($this->_config['headers'][$header]);
             }
-        } else {
-            throw new InvalidException('Header must be a string');
+
+            return $this;
         }
 
-        return $this;
+        throw new InvalidException('Header must be a string');
     }
 
     /**
@@ -348,14 +350,14 @@ class Client
         if ($data instanceof AbstractScript) {
             $requestData = $data->toArray();
         } elseif ($data instanceof Document) {
-            $requestData = array('doc' => $data->getData());
+            $requestData = ['doc' => $data->getData()];
 
             if ($data->getDocAsUpsert()) {
                 $requestData['doc_as_upsert'] = true;
             }
 
             $docOptions = $data->getOptions(
-                array(
+                [
                     'version',
                     'version_type',
                     'routing',
@@ -367,7 +369,7 @@ class Client
                     'replication',
                     'refresh',
                     'timeout',
-                )
+                ]
             );
             $options += $docOptions;
             // set fields param to source only if options was not set before
