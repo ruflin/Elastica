@@ -53,15 +53,13 @@ class Settings
         $data = $this->get();
         $settings = $data['persistent'];
 
-        if (!empty($setting)) {
-            if (isset($settings[$setting])) {
-                return $settings[$setting];
-            } else {
-                return;
-            }
+        if (empty($setting)) {
+            return $settings;
         }
 
-        return $settings;
+        if (isset($settings[$setting])) {
+            return $settings[$setting];
+        }
     }
 
     /**
@@ -78,29 +76,27 @@ class Settings
         $data = $this->get();
         $settings = $data['transient'];
 
-        if (!empty($setting)) {
-            if (isset($settings[$setting])) {
-                return $settings[$setting];
-            } else {
-                if (strpos($setting, '.') !== false) {
-                    // convert dot notation to nested arrays
-                    $keys = explode('.', $setting);
-                    foreach ($keys as $key) {
-                        if (isset($settings[$key])) {
-                            $settings = $settings[$key];
-                        } else {
-                            return;
-                        }
-                    }
-
-                    return $settings;
-                }
-
-                return;
-            }
+        if (empty($setting)) {
+            return $settings;
         }
 
-        return $settings;
+        if (isset($settings[$setting])) {
+            return $settings[$setting];
+        }
+
+        if (strpos($setting, '.') !== false) {
+            // convert dot notation to nested arrays
+            $keys = explode('.', $setting);
+            foreach ($keys as $key) {
+                if (isset($settings[$key])) {
+                    $settings = $settings[$key];
+                } else {
+                    return;
+                }
+            }
+
+            return $settings;
+        }
     }
 
     /**
@@ -114,11 +110,11 @@ class Settings
     public function setPersistent($key, $value)
     {
         return $this->set(
-            array(
-                'persistent' => array(
+            [
+                'persistent' => [
                     $key => $value,
-                ),
-            )
+                ],
+            ]
         );
     }
 
@@ -133,11 +129,11 @@ class Settings
     public function setTransient($key, $value)
     {
         return $this->set(
-            array(
-                'transient' => array(
+            [
+                'transient' => [
                     $key => $value,
-                ),
-            )
+                ],
+            ]
         );
     }
 
@@ -155,13 +151,9 @@ class Settings
     {
         $key = 'cluster.blocks.read_only';
 
-        if ($persistent) {
-            $response = $this->setPersistent($key, $readOnly);
-        } else {
-            $response = $this->setTransient($key, $readOnly);
-        }
-
-        return $response;
+        return $persistent
+            ? $this->setPersistent($key, $readOnly)
+            : $this->setTransient($key, $readOnly);
     }
 
     /**
@@ -194,7 +186,7 @@ class Settings
      *
      * @return \Elastica\Response Response object
      */
-    public function request(array $data = array(), $method = Request::GET)
+    public function request(array $data = [], $method = Request::GET)
     {
         $path = '_cluster/settings';
 
