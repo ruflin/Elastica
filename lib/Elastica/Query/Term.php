@@ -45,6 +45,6 @@ class Term extends AbstractQuery
      */
     public function setTerm($key, $value, $boost = 1.0)
     {
-        return $this->setRawTerm(array($key => array('value' => $value, 'boost' => $boost)));
+        return $this->setRawTerm([$key => ['value' => $value, 'boost' => $boost]]);
     }
 }

@@ -53,8 +53,8 @@ class Type extends AbstractQuery
      */
     public function toArray()
     {
-        return array(
-            'type' => array('value' => $this->_type),
-        );
+        return [
+            'type' => ['value' => $this->_type],
+        ];
     }
 }
