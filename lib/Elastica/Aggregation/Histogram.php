@@ -43,7 +43,7 @@ class Histogram extends AbstractSimpleAggregation
      */
     public function setOrder($order, $direction)
     {
-        return $this->setParam('order', array($order => $direction));
+        return $this->setParam('order', [$order => $direction]);
     }
 
     /**

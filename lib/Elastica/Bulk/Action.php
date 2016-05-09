@@ -187,7 +187,7 @@ class Action
      */
     public function toArray()
     {
-        $data[] = $this->getActionMetadata();
+        $data = [$this->getActionMetadata()];
         if ($this->hasSource()) {
             $data[] = $this->getSource();
         }
