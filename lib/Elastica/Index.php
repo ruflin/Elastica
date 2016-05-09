@@ -90,7 +90,7 @@ class Index implements SearchableInterface
             return $mapping['mappings'];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -149,17 +149,17 @@ class Index implements SearchableInterface
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      */
-    public function deleteByQuery($query, array $options = array())
+    public function deleteByQuery($query, array $options = [])
     {
         if (is_string($query)) {
             // query_string queries are not supported for delete by query operations
             $options['q'] = $query;
 
-            return $this->request('_query', Request::DELETE, array(), $options);
+            return $this->request('_query', Request::DELETE, [], $options);
         }
         $query = Query::create($query)->getQuery();
 
-        return $this->request('_query', Request::DELETE, array('query' => is_array($query) ? $query : $query->toArray()), $options);
+        return $this->request('_query', Request::DELETE, ['query' => is_array($query) ? $query : $query->toArray()], $options);
     }
 
     /**
@@ -203,9 +203,9 @@ class Index implements SearchableInterface
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
-    public function optimize($args = array())
+    public function optimize($args = [])
     {
-        return $this->request('_optimize', Request::POST, array(), $args);
+        return $this->request('_optimize', Request::POST, [], $args);
     }
 
     /**
@@ -217,7 +217,7 @@ class Index implements SearchableInterface
      */
     public function refresh()
     {
-        return $this->request('_refresh', Request::POST, array());
+        return $this->request('_refresh', Request::POST, []);
     }
 
     /**
@@ -235,36 +235,27 @@ class Index implements SearchableInterface
      *
      * @return array Server response
      */
-    public function create(array $args = array(), $options = null)
+    public function create(array $args = [], $options = null)
     {
         $path = '';
-        $query = array();
+        $query = [];
 
         if (is_bool($options)) {
             if ($options) {
-                try {
-                    $this->delete();
-                } catch (ResponseException $e) {
-                    // Table can't be deleted, because doesn't exist
-                }
+                $this->silenceDelete();
             }
         } else {
             if (is_array($options)) {
                 foreach ($options as $key => $value) {
                     switch ($key) {
                         case 'recreate' :
-                            try {
-                                $this->delete();
-                            } catch (ResponseException $e) {
-                                // Table can't be deleted, because doesn't exist
-                            }
+                            $this->silenceDelete();
                             break;
                         case 'routing' :
-                            $query = array('routing' => $value);
+                            $query = ['routing' => $value];
                             break;
                         default:
                             throw new InvalidException('Invalid option '.$key);
-                            break;
                     }
                 }
             }
@@ -283,7 +274,7 @@ class Index implements SearchableInterface
         $response = $this->getClient()->request($this->getName(), Request::HEAD);
         $info = $response->getTransferInfo();
 
-        return (bool) ($info['http_code'] == 200);
+        return $info['http_code'] == 200;
     }
 
     /**
@@ -393,18 +384,20 @@ class Index implements SearchableInterface
     {
         $path = '_aliases';
 
-        $data = array('actions' => array());
+        $actions = [];
 
         if ($replace) {
             $status = new Status($this->getClient());
             foreach ($status->getIndicesWithAlias($name) as $index) {
-                $data['actions'][] = array('remove' => array('index' => $index->getName(), 'alias' => $name));
+                $actions[] = ['remove' => ['index' => $index->getName(), 'alias' => $name]];
             }
         }
 
-        $data['actions'][] = array('add' => array('index' => $this->getName(), 'alias' => $name));
+        $actions[] = ['add' => ['index' => $this->getName(), 'alias' => $name]];
 
-        return $this->getClient()->request($path, Request::POST, $data);
+        return $this->getClient()->request($path, Request::POST, [
+            'actions' => $actions
+        ]);
     }
 
     /**
@@ -420,7 +413,7 @@ class Index implements SearchableInterface
     {
         $path = '_aliases';
 
-        $data = array('actions' => array(array('remove' => array('index' => $this->getName(), 'alias' => $name))));
+        $data = ['actions' => [['remove' => ['index' => $this->getName(), 'alias' => $name]]]];
 
         return $this->getClient()->request($path, Request::POST, $data);
     }
@@ -435,7 +428,7 @@ class Index implements SearchableInterface
         $responseData = $this->request('_alias/*', \Elastica\Request::GET)->getData();
 
         if (!isset($responseData[$this->getName()])) {
-            return array();
+            return [];
         }
 
         $data = $responseData[$this->getName()];
@@ -443,7 +436,7 @@ class Index implements SearchableInterface
             return array_keys($data['aliases']);
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -485,7 +478,7 @@ class Index implements SearchableInterface
     {
         $path = '_flush';
 
-        return $this->request($path, Request::POST, array(), array('refresh' => $refresh));
+        return $this->request($path, Request::POST, [], ['refresh' => $refresh]);
     }
 
     /**
@@ -512,7 +505,7 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Response Response object
      */
-    public function request($path, $method, $data = array(), array $query = array())
+    public function request($path, $method, $data = [], array $query = [])
     {
         $path = $this->getName().'/'.$path;
 
@@ -531,10 +524,19 @@ class Index implements SearchableInterface
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html
      */
-    public function analyze($text, $args = array())
+    public function analyze($text, $args = [])
     {
         $data = $this->request('_analyze', Request::POST, $text, $args)->getData();
 
         return $data['tokens'];
+    }
+
+    private function silenceDelete()
+    {
+        try {
+            $this->delete();
+        } catch (ResponseException $e) {
+            // Table can't be deleted, because doesn't exist
+        }
     }
 }
