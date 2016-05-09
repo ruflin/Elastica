@@ -84,22 +84,20 @@ class Settings
 
         if (isset($settings[$setting])) {
             return $settings[$setting];
-        } else {
-            if (strpos($setting, '.') !== false) {
-                // translate old dot-notation settings to nested arrays
-                $keys = explode('.', $setting);
-                foreach ($keys as $key) {
-                    if (isset($settings[$key])) {
-                        $settings = $settings[$key];
-                    } else {
-                        return;
-                    }
-                }
+        }
 
-                return $settings;
+        if (strpos($setting, '.') !== false) {
+            // translate old dot-notation settings to nested arrays
+            $keys = explode('.', $setting);
+            foreach ($keys as $key) {
+                if (isset($settings[$key])) {
+                    $settings = $settings[$key];
+                } else {
+                    return;
+                }
             }
 
-            return;
+            return $settings;
         }
     }
 
@@ -112,11 +110,7 @@ class Settings
      */
     public function setNumberOfReplicas($replicas)
     {
-        $replicas = (int) $replicas;
-
-        $data = array('number_of_replicas' => $replicas);
-
-        return $this->set($data);
+        return $this->set(['number_of_replicas' => (int)$replicas]);
     }
 
     /**
@@ -194,9 +188,9 @@ class Settings
             if (strpos($e->getMessage(), 'ClusterBlockException') !== false) {
                 // hacky way to test if the metadata is blocked since bug 9203 is not fixed
                 return true;
-            } else {
-                throw $e;
             }
+
+            throw $e;
         }
     }
 
