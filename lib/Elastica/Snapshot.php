@@ -34,12 +34,12 @@ class Snapshot
      *
      * @return Response
      */
-    public function registerRepository($name, $type, $settings = array())
+    public function registerRepository($name, $type, $settings = [])
     {
-        $data = array(
+        $data = [
             'type' => $type,
             'settings' => $settings,
-        );
+        ];
 
         return $this->request($name, Request::PUT, $data);
     }

@@ -16,7 +16,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
     /**
      * @var array Subaggregations belonging to this aggregation
      */
-    protected $_aggs = array();
+    protected $_aggs = [];
 
     /**
      * @param string $name the name of this aggregation
