@@ -16,7 +16,7 @@ class Result
      *
      * @var array Hit array
      */
-    protected $_hit = array();
+    protected $_hit = [];
 
     /**
      * Constructs a single results object.
@@ -45,7 +45,7 @@ class Result
             return $this->_hit[$name];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -149,10 +149,10 @@ class Result
      */
     public function getData()
     {
-        if (isset($this->_hit['fields']) && !isset($this->_hit['_source'])) {
-            return $this->getFields();
-        } elseif (isset($this->_hit['fields']) && isset($this->_hit['_source'])) {
-            return array_merge($this->getFields(), $this->getSource());
+        if (isset($this->_hit['fields'])) {
+            return isset($this->_hit['_source'])
+                ? array_merge($this->getFields(), $this->getSource())
+                : $this->getFields();
         }
 
         return $this->getSource();
