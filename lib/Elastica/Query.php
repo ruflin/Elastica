@@ -349,10 +349,6 @@ class Query extends Param
      */
     public function addAggregation(AbstractAggregation $agg)
     {
-        if (!array_key_exists('aggs', $this->_params)) {
-            $this->_params['aggs'] = array();
-        }
-
         $this->_params['aggs'][] = $agg;
 
         return $this;
@@ -393,11 +389,11 @@ class Query extends Param
      */
     public function setMinScore($minScore)
     {
-        if (!is_numeric($minScore)) {
-            throw new InvalidException('has to be numeric param');
+        if (is_numeric($minScore)) {
+            return $this->setParam('min_score', $minScore);
         }
 
-        return $this->setParam('min_score', $minScore);
+        throw new InvalidException('has to be numeric param');
     }
 
     /**
@@ -426,10 +422,10 @@ class Query extends Param
     public function setRescore($rescore)
     {
         if (is_array($rescore)) {
-            $buffer = array();
+            $buffer = [];
 
             foreach ($rescore as $rescoreQuery) {
-                $buffer [] = $rescoreQuery;
+                $buffer[] = $rescoreQuery;
             }
         } else {
             $buffer = $rescore;
