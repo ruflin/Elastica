@@ -331,17 +331,15 @@ class Connection extends Param
      */
     public static function create($params = [])
     {
-        $connection = null;
-
-        if ($params instanceof self) {
-            $connection = $params;
-        } elseif (is_array($params)) {
-            $connection = new self($params);
-        } else {
-            throw new InvalidException('Invalid data type');
+        if (is_array($params)) {
+            return new self($params);
         }
 
-        return $connection;
+        if ($params instanceof self) {
+            return $params;
+        }
+
+        throw new InvalidException('Invalid data type');
     }
 
     /**
