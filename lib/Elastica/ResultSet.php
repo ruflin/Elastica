@@ -21,7 +21,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @var Result[] Results
      */
-    protected $_results = array();
+    protected $_results = [];
 
     /**
      * Current position.
