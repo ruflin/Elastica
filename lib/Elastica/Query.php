@@ -334,7 +334,7 @@ class Query extends Param
         if (isset($this->_params['script_fields'])) {
             $this->_params['script_fields']->addScript($name, $script);
         } else {
-            $this->setScriptFields(array($name => $script));
+            $this->setScriptFields([$name => $script]);
         }
 
         return $this;
