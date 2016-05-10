@@ -93,12 +93,14 @@ class Settings
                 if (isset($settings[$key])) {
                     $settings = $settings[$key];
                 } else {
-                    return;
+                    return null;
                 }
             }
 
             return $settings;
         }
+
+        return null;
     }
 
     /**
