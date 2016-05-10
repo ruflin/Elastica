@@ -32,12 +32,12 @@ class Action
     /**
      * @var array
      */
-    protected $_metadata = array();
+    protected $_metadata = [];
 
     /**
      * @var array
      */
-    protected $_source = array();
+    protected $_source = [];
 
     /**
      * @param string $opType

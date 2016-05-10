@@ -143,7 +143,7 @@ class Type implements SearchableInterface
      *
      * @return \Elastica\Response
      */
-    public function updateDocument($data, array $options = array())
+    public function updateDocument($data, array $options = [])
     {
         if (!($data instanceof Document) && !($data instanceof AbstractScript)) {
             throw new \InvalidArgumentException('Data should be a Document or Script');

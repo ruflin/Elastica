@@ -43,7 +43,7 @@ class Filters extends AbstractAggregation
             throw new InvalidException('Name must be a string');
         }
 
-        $filterArray = array();
+        $filterArray = [];
 
         $type = self::NAMED_TYPE;
 
