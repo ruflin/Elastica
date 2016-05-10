@@ -161,7 +161,7 @@ class Percolator
      *
      * @return array
      */
-    protected function _percolate($path, $query, $data = array(), $params = array())
+    protected function _percolate($path, $query, $data = [], $params = [])
     {
         // Add query to filter the percolator queries which are executed.
         if ($query) {
@@ -172,11 +172,7 @@ class Percolator
         $response = $this->getIndex()->getClient()->request($path, Request::GET, $data, $params);
         $data = $response->getData();
 
-        if (isset($data['matches'])) {
-            return $data['matches'];
-        }
-
-        return array();
+        return isset($data['matches']) ? $data['matches'] : [];
     }
 
     /**
