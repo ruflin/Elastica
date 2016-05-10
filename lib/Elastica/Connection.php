@@ -54,14 +54,14 @@ class Connection extends Param
      *
      * @param array $params OPTIONAL Connection params: host, port, transport, timeout. All are optional
      */
-    public function __construct(array $params = array())
+    public function __construct(array $params = [])
     {
         $this->setParams($params);
         $this->setEnabled(true);
 
         // Set empty config param if not exists
         if (!$this->hasParam('config')) {
-            $this->setParam('config', array());
+            $this->setParam('config', []);
         }
     }
 
@@ -329,7 +329,7 @@ class Connection extends Param
      *
      * @return self
      */
-    public static function create($params = array())
+    public static function create($params = [])
     {
         $connection = null;
 
