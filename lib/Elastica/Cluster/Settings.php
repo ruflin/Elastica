@@ -57,9 +57,7 @@ class Settings
             return $settings;
         }
 
-        if (isset($settings[$setting])) {
-            return $settings[$setting];
-        }
+        return isset($settings[$setting]) ? $settings[$setting] : null;
     }
 
     /**
@@ -76,6 +74,9 @@ class Settings
         $data = $this->get();
         $settings = $data['transient'];
 
+        /**
+         * TODO: full copy-past from \Elastica\Index\Settings::getTransient
+         */
         if (empty($setting)) {
             return $settings;
         }
@@ -91,12 +92,14 @@ class Settings
                 if (isset($settings[$key])) {
                     $settings = $settings[$key];
                 } else {
-                    return;
+                    return null;
                 }
             }
 
             return $settings;
         }
+
+        return null;
     }
 
     /**

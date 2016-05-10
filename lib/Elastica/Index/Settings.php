@@ -77,8 +77,10 @@ class Settings
         }
         $settings = $data['settings']['index'];
 
-        if (!$setting) {
-            // return all array
+        /**
+         * TODO: full copy-past from \Elastica\Cluster\Settings::getTransient
+         */
+        if (empty($setting)) {
             return $settings;
         }
 
