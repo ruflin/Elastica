@@ -26,7 +26,7 @@ class Info
      *
      * @var array stats data
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
      * Node.
@@ -40,7 +40,7 @@ class Info
      *
      * @var array
      */
-    protected $_params = array();
+    protected $_params = [];
 
     /**
      * Create new info object for node.
@@ -48,7 +48,7 @@ class Info
      * @param \Elastica\Node $node   Node object
      * @param array          $params List of params to return. Can be: settings, os, process, jvm, thread_pool, network, transport, http
      */
-    public function __construct(BaseNode $node, array $params = array())
+    public function __construct(BaseNode $node, array $params = [])
     {
         $this->_node = $node;
         $this->refresh($params);

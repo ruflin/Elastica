@@ -222,7 +222,7 @@ class Settings
      */
     public function setRefreshInterval($interval)
     {
-        return $this->set(array('refresh_interval' => $interval));
+        return $this->set(['refresh_interval' => $interval]);
     }
 
     /**
@@ -265,7 +265,7 @@ class Settings
     public function setMergePolicyType($type)
     {
         $this->getIndex()->close();
-        $response = $this->set(array('merge.policy.type' => $type));
+        $response = $this->set(['merge.policy.type' => $type]);
         $this->getIndex()->open();
 
         return $response;
@@ -351,7 +351,7 @@ class Settings
      *
      * @return \Elastica\Response Response object
      */
-    public function request(array $data = array(), $method = Request::GET)
+    public function request(array $data = [], $method = Request::GET)
     {
         $path = '_settings';
 
