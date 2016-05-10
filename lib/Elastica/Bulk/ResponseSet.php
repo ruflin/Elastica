@@ -9,7 +9,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @var \Elastica\Bulk\Response[]
      */
-    protected $_bulkResponses = array();
+    protected $_bulkResponses = [];
 
     /**
      * @var int

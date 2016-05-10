@@ -89,9 +89,9 @@ class Snapshot
      *
      * @return Response
      */
-    public function createSnapshot($repository, $name, $options = array(), $waitForCompletion = false)
+    public function createSnapshot($repository, $name, $options = [], $waitForCompletion = false)
     {
-        return $this->request($repository.'/'.$name, Request::PUT, $options, array('wait_for_completion' => $waitForCompletion));
+        return $this->request($repository.'/'.$name, Request::PUT, $options, ['wait_for_completion' => $waitForCompletion]);
     }
 
     /**

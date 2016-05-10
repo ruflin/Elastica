@@ -26,7 +26,7 @@ class GeoPolygon extends AbstractFilter
      *
      * @var array Points making up polygon
      */
-    protected $_points = array();
+    protected $_points = [];
 
     /**
      * Construct polygon filter.
@@ -49,12 +49,12 @@ class GeoPolygon extends AbstractFilter
      */
     public function toArray()
     {
-        return array(
-            'geo_polygon' => array(
-                $this->_key => array(
+        return [
+            'geo_polygon' => [
+                $this->_key => [
                     'points' => $this->_points,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 }

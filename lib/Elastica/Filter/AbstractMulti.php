@@ -18,12 +18,12 @@ abstract class AbstractMulti extends AbstractFilter
      *
      * @var array
      */
-    protected $_filters = array();
+    protected $_filters = [];
 
     /**
      * @param array $filters
      */
-    public function __construct(array $filters = array())
+    public function __construct(array $filters = [])
     {
         if (!empty($filters)) {
             $this->setFilters($filters);
@@ -53,7 +53,7 @@ abstract class AbstractMulti extends AbstractFilter
      */
     public function setFilters(array $filters)
     {
-        $this->_filters = array();
+        $this->_filters = [];
 
         foreach ($filters as $filter) {
             $this->addFilter($filter);

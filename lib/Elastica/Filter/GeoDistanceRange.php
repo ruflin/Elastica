@@ -29,7 +29,7 @@ class GeoDistanceRange extends AbstractGeoDistance
     /**
      * @var array
      */
-    protected $_ranges = array();
+    protected $_ranges = [];
 
     /**
      * @param string       $key
@@ -38,7 +38,7 @@ class GeoDistanceRange extends AbstractGeoDistance
      *
      * @internal param string $distance
      */
-    public function __construct($key, $location, array $ranges = array())
+    public function __construct($key, $location, array $ranges = [])
     {
         parent::__construct($key, $location);
 
@@ -54,7 +54,7 @@ class GeoDistanceRange extends AbstractGeoDistance
      */
     public function setRanges(array $ranges)
     {
-        $this->_ranges = array();
+        $this->_ranges = [];
 
         foreach ($ranges as $key => $value) {
             $this->setRange($key, $value);

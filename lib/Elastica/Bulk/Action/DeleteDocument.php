@@ -18,7 +18,7 @@ class DeleteDocument extends AbstractDocument
      */
     protected function _getMetadata(AbstractUpdateAction $action)
     {
-        $params = array(
+        $params = [
             'index',
             'type',
             'id',
@@ -26,7 +26,7 @@ class DeleteDocument extends AbstractDocument
             'version_type',
             'routing',
             'parent',
-        );
+        ];
         $metadata = $action->getOptions($params, true);
 
         return $metadata;
