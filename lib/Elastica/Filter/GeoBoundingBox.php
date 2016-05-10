@@ -39,15 +39,15 @@ class GeoBoundingBox extends AbstractFilter
      */
     public function addCoordinates($key, array $coordinates)
     {
-        if (isset($coordinates[0], $coordinates[1])) {
-            $this->setParam($key, [
-                'top_left' => $coordinates[0],
-                'bottom_right' => $coordinates[1],
-            ]);
-
-            return $this;
+        if (!isset($coordinates[0]) || !isset($coordinates[1])) {
+            throw new InvalidException('expected $coordinates to be an array with two elements');
         }
 
-        throw new InvalidException('expected $coordinates to be an array with two elements');
+        $this->setParam($key, [
+            'top_left' => $coordinates[0],
+            'bottom_right' => $coordinates[1],
+        ]);
+
+        return $this;
     }
 }
