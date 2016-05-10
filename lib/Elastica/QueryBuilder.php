@@ -22,7 +22,7 @@ class QueryBuilder
     /**
      * @var Facade[]
      */
-    private $_facades = array();
+    private $_facades = [];
 
     /**
      * Constructor.
@@ -51,11 +51,11 @@ class QueryBuilder
      */
     public function __call($dsl, array $arguments)
     {
-        if (false === isset($this->_facades[$dsl])) {
-            throw new QueryBuilderException('DSL "'.$dsl.'" not supported');
+        if (isset($this->_facades[$dsl])) {
+            return $this->_facades[$dsl];
         }
 
-        return $this->_facades[$dsl];
+        throw new QueryBuilderException('DSL "'.$dsl.'" not supported');
     }
 
     /**
