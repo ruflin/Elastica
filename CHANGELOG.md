@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 - Method \Elastica\ResultSet::create and property \Elastica\ResultSet::$class were removed. To change the ResultSet class, implement your own ResultSet Builder. #1065
 - Properties on \Elastica\ResultSet _totalHits, _maxScore, _took and _timedOut that were originally set on object construction are now accessed by the getters on the ResultSet. #1065
+- Use short array [] - so PHP 5.3 deprecated
 
 ### Bugfixes
 - Fix php notice on `\Elastica\Index::getAliases()` if index has no aliases #1078
