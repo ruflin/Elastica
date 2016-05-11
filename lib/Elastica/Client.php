@@ -76,6 +76,16 @@ class Client
     }
 
     /**
+     * Returns the ConnectionPool used for making requests.
+     *
+     * @return ConnectionPoolInterface
+     */
+    public function getConnectionPool()
+    {
+        return $this->_connectionPool;
+    }
+
+    /**
      * Returns the index for the given connection.
      *
      * @param string $name Index name to create connection to

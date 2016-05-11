@@ -3,6 +3,7 @@
 namespace Elastica\Connection;
 
 use Elastica\Client;
+use Elastica\Connection\Strategy\StrategyInterface;
 use Exception;
 
 interface ConnectionPoolInterface
@@ -15,6 +16,13 @@ interface ConnectionPoolInterface
      * @return ConnectionInterface
      */
     public function getConnection();
+
+    /**
+     * Returns the connection strategy used by the pool.
+     *
+     * @return StrategyInterface
+     */
+    public function getStrategy();
 
     /**
      * To be called when a connection fails allowing a ConnectionPool to manage
