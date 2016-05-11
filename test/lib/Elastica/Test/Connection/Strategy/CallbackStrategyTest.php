@@ -85,14 +85,12 @@ class CallbackStrategyTest extends Base
        });
 
         $client = $this->_getClient($config);
-        $response = $client->request('/_aliases');
 
-        $this->assertEquals(1, $count);
-
-        $this->assertTrue($response->isOk());
-
-        $strategy = $client->getConnectionStrategy();
-
+        $strategy = $client->getConnectionPool()->getStrategy();
         $this->assertInstanceOf('Elastica\Connection\Strategy\CallbackStrategy', $strategy);
+
+        $response = $client->request('/_aliases');
+        $this->assertEquals(1, $count);
+        $this->assertTrue($response->isOk());
     }
 }
