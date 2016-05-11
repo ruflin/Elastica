@@ -38,9 +38,9 @@ class PoolBuilder
     {
         $strategy = isset($config['connectionStrategy'])
             ? $config['connectionStrategy']
-            : isset($config['roundRobin'])
+            : (isset($config['roundRobin'])
                 ? 'RoundRobin'
-                : 'Simple';
+                : 'Simple');
 
         $connections = [];
         if (isset($config['connections'])) {
