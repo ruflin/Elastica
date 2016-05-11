@@ -75,7 +75,7 @@ class Client
      * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      * @param LoggerInterface $logger
      */
-    public function __construct(array $config = array(), $callback = null, LoggerInterface $logger = null)
+    public function __construct(array $config = [], $callback = null, LoggerInterface $logger = null)
     {
         $this->_callback = $callback;
 
@@ -343,7 +343,7 @@ class Client
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      */
-    public function updateDocument($id, $data, $index, $type, array $options = array())
+    public function updateDocument($id, $data, $index, $type, array $options = [])
     {
         $path = $index.'/'.$type.'/'.$id.'/_update';
 
@@ -374,7 +374,7 @@ class Client
             $options += $docOptions;
             // set fields param to source only if options was not set before
             if ($data instanceof Document && ($data->isAutoPopulate()
-                || $this->getConfigValue(array('document', 'autoPopulate'), false))
+                || $this->getConfigValue(['document', 'autoPopulate'], false))
                 && !isset($options['fields'])
             ) {
                 $options['fields'] = '_source';
@@ -399,7 +399,7 @@ class Client
 
         if ($response->isOk()
             && $data instanceof Document
-            && ($data->isAutoPopulate() || $this->getConfigValue(array('document', 'autoPopulate'), false))
+            && ($data->isAutoPopulate() || $this->getConfigValue(['document', 'autoPopulate'], false))
         ) {
             $responseData = $response->getData();
             if (isset($responseData['_version'])) {
@@ -634,7 +634,7 @@ class Client
      *
      * @return Response Response object
      */
-    public function request($path, $method = Request::GET, $data = array(), array $query = array())
+    public function request($path, $method = Request::GET, $data = [], array $query = [])
     {
         $connection = $this->getConnection();
         $request = $this->_lastRequest = new Request($path, $method, $data, $query, $connection);
@@ -703,9 +703,9 @@ class Client
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
-    public function optimizeAll($args = array())
+    public function optimizeAll($args = [])
     {
-        return $this->request('_optimize', Request::POST, array(), $args);
+        return $this->request('_optimize', Request::POST, [], $args);
     }
 
     /**

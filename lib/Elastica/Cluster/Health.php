@@ -176,7 +176,7 @@ class Health
      */
     public function getIndices()
     {
-        $indices = array();
+        $indices = [];
         foreach ($this->_data['indices'] as $indexName => $index) {
             $indices[] = new Index($indexName, $index);
         }

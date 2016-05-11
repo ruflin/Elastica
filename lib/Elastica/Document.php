@@ -43,7 +43,7 @@ class Document extends AbstractUpdateAction
      * @param string       $type  OPTIONAL Type name
      * @param string       $index OPTIONAL Index name
      */
-    public function __construct($id = '', $data = array(), $type = '', $index = '')
+    public function __construct($id = '', $data = [], $type = '', $index = '')
     {
         $this->setId($id);
         $this->setData($data);

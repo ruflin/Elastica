@@ -18,14 +18,14 @@ class Param implements ArrayableInterface
      *
      * @var array
      */
-    protected $_params = array();
+    protected $_params = [];
 
     /**
      * Raw Params.
      *
      * @var array
      */
-    protected $_rawParams = array();
+    protected $_rawParams = [];
 
     /**
      * Converts the params to an array. A default implementation exist to create
@@ -36,7 +36,7 @@ class Param implements ArrayableInterface
      */
     public function toArray()
     {
-        $data = array($this->_getBaseName() => $this->getParams());
+        $data = [$this->_getBaseName() => $this->getParams()];
 
         if (!empty($this->_rawParams)) {
             $data = array_merge($data, $this->_rawParams);
@@ -54,7 +54,7 @@ class Param implements ArrayableInterface
      */
     protected function _convertArrayable(array $array)
     {
-        $arr = array();
+        $arr = [];
 
         foreach ($array as $key => $value) {
             if ($value instanceof ArrayableInterface) {
@@ -138,8 +138,11 @@ class Param implements ArrayableInterface
     public function addParam($key, $value)
     {
         if ($key != null) {
+            /**
+             * TODO: delete in PHP 5.5+
+             */
             if (!isset($this->_params[$key])) {
-                $this->_params[$key] = array();
+                $this->_params[$key] = [];
             }
 
             $this->_params[$key][] = $value;
@@ -161,11 +164,11 @@ class Param implements ArrayableInterface
      */
     public function getParam($key)
     {
-        if (!$this->hasParam($key)) {
-            throw new InvalidException('Param '.$key.' does not exist');
+        if ($this->hasParam($key)) {
+            return $this->_params[$key];
         }
 
-        return $this->_params[$key];
+        throw new InvalidException('Param '.$key.' does not exist');
     }
 
     /**
