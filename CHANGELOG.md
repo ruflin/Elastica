@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file based on the
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/3.2.0...HEAD)
 
+### Backward Compatibility Fixes
+- Reintroduced properties in ResultSet removed in 3.2.0 as deprecated properties to be removed in 4.0
+
 ### Bugfixes
 - Fix fatal error on `Query::addScriptField()` if scripts were already set via `setScriptFields()` #1086
 
