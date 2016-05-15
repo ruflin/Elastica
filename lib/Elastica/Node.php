@@ -17,33 +17,33 @@ class Node
      *
      * @var \Elastica\Client
      */
-    protected $_client = null;
+    protected $_client;
 
     /**
      * @var string Unique node id
      */
-    protected $_id = '';
+    protected $_id;
 
     /**
      * Node name.
      *
      * @var string Node name
      */
-    protected $_name = '';
+    protected $_name;
 
     /**
      * Node stats.
      *
      * @var \Elastica\Node\Stats Node Stats
      */
-    protected $_stats = null;
+    protected $_stats;
 
     /**
      * Node info.
      *
      * @var \Elastica\Node\Info Node info
      */
-    protected $_info = null;
+    protected $_info;
 
     /**
      * Create a new node object.

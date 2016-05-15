@@ -18,7 +18,7 @@ class Terms extends AbstractQuery
      *
      * @var array Terms
      */
-    protected $_terms = array();
+    protected $_terms;
 
     /**
      * Params.
@@ -32,7 +32,7 @@ class Terms extends AbstractQuery
      *
      * @var string Terms key
      */
-    protected $_key = '';
+    protected $_key;
 
     /**
      * Construct terms query.

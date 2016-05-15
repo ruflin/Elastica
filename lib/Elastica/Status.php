@@ -18,21 +18,21 @@ class Status
      *
      * @var \Elastica\Response Response object
      */
-    protected $_response = null;
+    protected $_response;
 
     /**
      * Data.
      *
      * @var array Data
      */
-    protected $_data = null;
+    protected $_data;
 
     /**
      * Client object.
      *
      * @var \Elastica\Client Client object
      */
-    protected $_client = null;
+    protected $_client;
 
     /**
      * Constructs Status object.

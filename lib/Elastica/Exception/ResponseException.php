@@ -15,12 +15,12 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     /**
      * @var \Elastica\Request Request object
      */
-    protected $_request = null;
+    protected $_request;
 
     /**
      * @var \Elastica\Response Response object
      */
-    protected $_response = null;
+    protected $_response;
 
     /**
      * Construct Exception.
