@@ -8,8 +8,6 @@ use Elastica\Connection\Strategy\StrategyInterface;
 use Exception;
 
 /**
- * Description of ConnectionPool.
- *
  * @author chabior
  */
 class ConnectionPool implements ConnectionPoolInterface
@@ -42,30 +40,6 @@ class ConnectionPool implements ConnectionPoolInterface
     }
 
     /**
-     * @param ConnectionInterface $connection
-     *
-     * @return $this
-     */
-    public function addConnection(ConnectionInterface $connection)
-    {
-        $this->_connections[] = $connection;
-
-        return $this;
-    }
-
-    /**
-     * @param ConnectionInterface[] $connections
-     *
-     * @return $this
-     */
-    public function setConnections(array $connections)
-    {
-        $this->_connections = $connections;
-
-        return $this;
-    }
-
-    /**
      * @return bool
      */
     public function hasConnection()
@@ -80,21 +54,13 @@ class ConnectionPool implements ConnectionPoolInterface
     }
 
     /**
-     * @return ConnectionInterface[]
-     */
-    public function getConnections()
-    {
-        return $this->_connections;
-    }
-
-    /**
      * @throws \Elastica\Exception\ClientException
      *
      * @return ConnectionInterface
      */
     public function getConnection()
     {
-        return $this->_strategy->getConnection($this->getConnections());
+        return $this->_strategy->getConnection($this->_connections);
     }
 
     /**

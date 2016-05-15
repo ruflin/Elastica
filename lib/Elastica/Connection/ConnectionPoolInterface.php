@@ -25,6 +25,13 @@ interface ConnectionPoolInterface
     public function getStrategy();
 
     /**
+     * If a connection is available.
+     *
+     * @return bool
+     */
+    public function hasConnection();
+
+    /**
      * To be called when a connection fails allowing a ConnectionPool to manage
      * its connections.
      *

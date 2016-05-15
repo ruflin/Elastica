@@ -5,7 +5,7 @@ namespace Elastica\Connection;
 use Elastica\Connection;
 use Elastica\Connection\Strategy\StrategyFactory;
 
-class PoolBuilder
+class Builder
 {
     /**
      * Creates a ConnectionPool from a $config array.
@@ -16,52 +16,56 @@ class PoolBuilder
      */
     public function buildPool(array $config, $callback)
     {
-        $config = $this->_prepareConfig($config);
+        $connections = $this->getConnectionsFromConfig($config);
+        $strategy = $this->getStrategyFromConfig($config);
 
-        $connections = [];
-        foreach ($config['connections'] as $connection) {
-            $connections[] = Connection::create($connection);
-        }
-
-        $connectionStrategy = StrategyFactory::create($config['connectionStrategy']);
-
-        return new ConnectionPool($connections, $connectionStrategy, $callback);
+        return new ConnectionPool($connections, $strategy, $callback);
     }
 
     /**
-     * Prepares a $config array for processing.
+     * Builds an array of connections from the legacy $config array.
      *
      * @param array $config
-     * @return array
+     * @return ConnectionInterface[]
      */
-    private function _prepareConfig(array $config)
+    public function getConnectionsFromConfig(array $config)
     {
-        $strategy = isset($config['connectionStrategy'])
-            ? $config['connectionStrategy']
-            : (isset($config['roundRobin'])
-                ? 'RoundRobin'
-                : 'Simple');
-
         $connections = [];
         if (isset($config['connections'])) {
             foreach ($config['connections'] as $connection) {
-                $connections[] = $this->_prepareConnectionParams($connection);
+                $connections[] = Connection::create($this->_prepareConnectionParams($connection));
             }
         }
         if (isset($config['servers'])) {
             foreach ($config['servers'] as $connection) {
-                $connections[] = $this->_prepareConnectionParams($connection);
+                $connections[] = Connection::create($this->_prepareConnectionParams($connection));
             }
         }
 
         if (!$connections) {
-            $connections[] = $this->_prepareConnectionParams($config);
+            $connections[] = Connection::create($this->_prepareConnectionParams($config));
         }
 
-        return [
-            'connections' => $connections,
-            'connectionStrategy' => $strategy
-        ];
+        return $connections;
+    }
+
+    /**
+     * Returns the StrategyInterface from the legacy $config array.
+     *
+     * @param array $config
+     * @return Connection\Strategy\StrategyInterface
+     */
+    public function getStrategyFromConfig(array $config)
+    {
+        if (isset($config['connectionStrategy'])) {
+            return StrategyFactory::create($config['connectionStrategy']);
+        }
+
+        if (isset($config['roundRobin'])) {
+            return StrategyFactory::create('RoundRobin');
+        }
+
+        return StrategyFactory::create('Simple');
     }
 
     /**

@@ -4,8 +4,10 @@ namespace Elastica;
 
 use Elastica\Bulk\Action;
 use Elastica\Connection\ConnectionPoolInterface;
-use Elastica\Connection\PoolBuilder;
+use Elastica\Connection\LegacyConnectionPool;
+use Elastica\Connection\Builder;
 use Elastica\Exception\ConnectionException;
+use Elastica\Exception\DeprecatedException;
 use Elastica\Exception\InvalidException;
 use Elastica\Script\AbstractScript;
 use Psr\Log\LoggerInterface;
@@ -24,7 +26,7 @@ class Client
     private $_autoPopulate = false;
 
     /**
-     * @var Connection\ConnectionPool
+     * @var Connection\ConnectionPoolInterface
      */
     protected $_connectionPool;
 
@@ -68,8 +70,7 @@ class Client
             $this->_autoPopulate = isset($config['document']['autoPopulate']) ? $config['document']['autoPopulate'] : false;
             $this->_retryOnConflict = isset($config['retryOnConflict']) ? $config['retryOnConflict'] : false;
 
-            $builder = new PoolBuilder();
-            $config = $builder->buildPool($config, $callback);
+            $config = new LegacyConnectionPool($config, new Builder(), $callback);
         }
 
         $this->_connectionPool = $config;
@@ -100,7 +101,7 @@ class Client
     /**
      * Adds a HTTP Header.
      *
-     * @deprecated Use ConnectionPool::addHeader.
+     * @deprecated Headers must be manipulated on a per connection basis.
      *
      * @param string $header      The HTTP Header
      * @param string $headerValue The HTTP Header Value
@@ -111,7 +112,7 @@ class Client
      */
     public function addHeader($header, $headerValue)
     {
-        foreach ($this->_connectionPool->getConnections() as $connection) {
+        foreach ($this->getLegacyConnectionPool(__METHOD__)->getConnections() as $connection) {
             $connection->addHeader($header, $headerValue);
         }
 
@@ -121,7 +122,7 @@ class Client
     /**
      * Remove a HTTP Header.
      *
-     * @deprecated Use ConnectionPool::removeHeader.
+     * @deprecated Headers must be manipulated on a per connection basis.
      *
      * @param string $header The HTTP Header to remove
      *
@@ -131,7 +132,7 @@ class Client
      */
     public function removeHeader($header)
     {
-        foreach ($this->_connectionPool->getConnections() as $connection) {
+        foreach ($this->getLegacyConnectionPool(__METHOD__)->getConnections() as $connection) {
             $connection->removeHeader($header);
         }
 
@@ -344,17 +345,7 @@ class Client
     }
 
     /**
-     * Establishes the client connections
-     *
-     * @deprecated
-     */
-    public function connect()
-    {
-        // noop
-    }
-
-    /**
-     * @deprecated Use $client->getConnectionPool()->addConnection()
+     * @deprecated Use $client->getConnectionPool()->addConnection(). Only available on LegacyConnectionPool.
      *
      * @param \Elastica\Connection $connection
      *
@@ -362,7 +353,7 @@ class Client
      */
     public function addConnection(Connection $connection)
     {
-        $this->_connectionPool->addConnection($connection);
+        $this->getLegacyConnectionPool(__METHOD__)->addConnection($connection);
 
         return $this;
     }
@@ -392,13 +383,13 @@ class Client
     }
 
     /**
-     * @deprecated Use $client->getConnectionPool()->getConnections()
+     * @deprecated Use $client->getConnectionPool()->getConnections(). Only available on LegacyConnectionPool.
      *
      * @return \Elastica\Connection[]
      */
     public function getConnections()
     {
-        return $this->_connectionPool->getConnections();
+        return $this->getLegacyConnectionPool(__METHOD__)->getConnections();
     }
 
     /**
@@ -412,7 +403,7 @@ class Client
     }
 
     /**
-     * @deprecated Use $client->getConnectionPool()->setConnections()
+     * @deprecated Use $client->getConnectionPool()->setConnections(). Only available on LegacyConnectionPool.
      *
      * @param array|\Elastica\Connection[] $connections
      *
@@ -420,7 +411,7 @@ class Client
      */
     public function setConnections(array $connections)
     {
-        $this->_connectionPool->setConnections($connections);
+        $this->getLegacyConnectionPool(__METHOD__)->setConnections($connections);
 
         return $this;
     }
@@ -641,5 +632,108 @@ class Client
     public function setAutoPopulate($autoPopulate)
     {
         $this->_autoPopulate = $autoPopulate;
+    }
+
+    /**
+     * Sets specific config values (updates and keeps default values).
+     *
+     * @deprecated To be removed. Dynamic config updates are no longer supported.
+     *
+     * @param array $config Params
+     *
+     * @return $this
+     */
+    public function setConfig(array $config)
+    {
+        if (isset($config['document']['autoPopulate'])) {
+            $this->_autoPopulate = $config['document']['autoPopulate'];
+        }
+        if (isset($config['retryOnConflict'])) {
+            $this->_autoPopulate = $config['retryOnConflict'];
+        }
+
+        $this->getLegacyConnectionPool(__METHOD__)->setConfig($config);
+
+        return $this;
+    }
+
+    /**
+     * Returns a specific config key or the whole
+     * config array if not set.
+     *
+     * @deprecated To be removed. Dynamic config updates are no longer supported.
+     *
+     * @param string $key Config key
+     *
+     * @throws \Elastica\Exception\InvalidException
+     *
+     * @return array|string Config value
+     */
+    public function getConfig($key = '')
+    {
+        return $this->getLegacyConnectionPool(__METHOD__)->getConfig($key);
+    }
+
+    /**
+     * Sets / overwrites a specific config value.
+     *
+     * @deprecated To be removed. Dynamic config updates are no longer supported.
+     *
+     * @param string $key   Key to set
+     * @param mixed  $value Value
+     *
+     * @return $this
+     */
+    public function setConfigValue($key, $value)
+    {
+        $this->getLegacyConnectionPool(__METHOD__)->setConfigValue($key, $value);
+
+        return $this;
+    }
+
+    /**
+     * @deprecated To be removed. Dynamic config updates are no longer supported.
+     *
+     * @param array|string $keys    config key or path of config keys
+     * @param mixed        $default default value will be returned if key was not found
+     *
+     * @return mixed
+     */
+    public function getConfigValue($keys, $default = null)
+    {
+        if (['document', 'autoPopulate'] === $keys) {
+            return $this->_autoPopulate;
+        }
+        if (['retryOnConflict'] === (array) $keys) {
+            return $this->_retryOnConflict;
+        }
+
+        return $this->getLegacyConnectionPool(__METHOD__)->getConfigValue($keys, $default);
+    }
+
+    /**
+     * @deprecated Call LegacyConnectionPool->init() directly
+     *
+     * Establishes the client connections
+     */
+    public function connect()
+    {
+        return $this->getLegacyConnectionPool(__METHOD__)->init();
+    }
+
+    /**
+     * @param string $method
+     * @return LegacyConnectionPool
+     */
+    private function getLegacyConnectionPool($method)
+    {
+        if (!$this->_connectionPool instanceof LegacyConnectionPool) {
+            throw new DeprecatedException(sprintf(
+                'Client::%s is only available when using a LegacyConnectionPool',
+                $method
+            ));
+        }
+
+        return $this->_connectionPool;
     }
 }
