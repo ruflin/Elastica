@@ -15,7 +15,7 @@ class Node
     /**
      * Client.
      *
-     * @var \Elastica\Client
+     * @var ClientInterface
      */
     protected $_client = null;
 
@@ -49,9 +49,9 @@ class Node
      * Create a new node object.
      *
      * @param string           $id     Node id or name
-     * @param \Elastica\Client $client Node object
+     * @param ClientInterface $client Node object
      */
-    public function __construct($id, Client $client)
+    public function __construct($id, ClientInterface $client)
     {
         $this->_client = $client;
         $this->setId($id);
@@ -73,8 +73,7 @@ class Node
     public function setId($id)
     {
         $this->_id = $id;
-
-        return $this->refresh();
+        $this->refresh();
     }
 
     /**
@@ -94,7 +93,7 @@ class Node
     /**
      * Returns the current client object.
      *
-     * @return \Elastica\Client Client
+     * @return ClientInterface Client
      */
     public function getClient()
     {

@@ -2,7 +2,7 @@
 
 namespace Elastica\Cluster;
 
-use Elastica\Client;
+use Elastica\ClientInterface;
 use Elastica\Request;
 
 /**
@@ -15,16 +15,16 @@ use Elastica\Request;
 class Settings
 {
     /**
-     * @var \Elastica\Client Client object
+     * @var ClientInterface Client object
      */
     protected $_client = null;
 
     /**
      * Creates a cluster object.
      *
-     * @param \Elastica\Client $client Connection client object
+     * @param ClientInterface $client Connection client object
      */
-    public function __construct(Client $client)
+    public function __construct(ClientInterface $client)
     {
         $this->_client = $client;
     }

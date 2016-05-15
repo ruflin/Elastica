@@ -15,7 +15,7 @@ class Bulk
     const DELIMITER = "\n";
 
     /**
-     * @var \Elastica\Client
+     * @var \Elastica\ClientInterface
      */
     protected $_client;
 
@@ -40,9 +40,9 @@ class Bulk
     protected $_requestParams = array();
 
     /**
-     * @param \Elastica\Client $client
+     * @param \Elastica\ClientInterface $client
      */
-    public function __construct(Client $client)
+    public function __construct(ClientInterface $client)
     {
         $this->_client = $client;
     }

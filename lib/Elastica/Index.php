@@ -27,7 +27,7 @@ class Index implements SearchableInterface
     /**
      * Client object.
      *
-     * @var \Elastica\Client Client object
+     * @var ClientInterface Client object
      */
     protected $_client = null;
 
@@ -36,10 +36,10 @@ class Index implements SearchableInterface
      *
      * All the communication to and from an index goes of this object
      *
-     * @param \Elastica\Client $client Client object
+     * @param ClientInterface $client Client object
      * @param string $name Index name
      */
-    public function __construct(Client $client, $name)
+    public function __construct(ClientInterface $client, $name)
     {
         $this->_client = $client;
 
@@ -372,7 +372,7 @@ class Index implements SearchableInterface
     /**
      * Returns index client.
      *
-     * @return \Elastica\Client Index client object
+     * @return ClientInterface Index client object
      */
     public function getClient()
     {

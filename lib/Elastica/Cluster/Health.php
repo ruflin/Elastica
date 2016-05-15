@@ -2,7 +2,7 @@
 
 namespace Elastica\Cluster;
 
-use Elastica\Client;
+use Elastica\ClientInterface;
 use Elastica\Cluster\Health\Index;
 use Elastica\Request;
 
@@ -16,7 +16,7 @@ use Elastica\Request;
 class Health
 {
     /**
-     * @var \Elastica\Client Client object.
+     * @var ClientInterface Client object.
      */
     protected $_client = null;
 
@@ -26,9 +26,9 @@ class Health
     protected $_data = null;
 
     /**
-     * @param \Elastica\Client $client The Elastica client.
+     * @param ClientInterface $client The Elastica client.
      */
-    public function __construct(Client $client)
+    public function __construct(ClientInterface $client)
     {
         $this->_client = $client;
         $this->refresh();

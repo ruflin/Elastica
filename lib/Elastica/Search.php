@@ -73,17 +73,17 @@ class Search
     /**
      * Client object.
      *
-     * @var \Elastica\Client
+     * @var ClientInterface
      */
     protected $_client;
 
     /**
      * Constructs search object.
      *
-     * @param \Elastica\Client $client Client object
+     * @param ClientInterface $client Client object
      * @param BuilderInterface $builder
      */
-    public function __construct(Client $client, BuilderInterface $builder = null)
+    public function __construct(ClientInterface $client, BuilderInterface $builder = null)
     {
         $this->_builder = $builder ?: new DefaultBuilder();
         $this->_client = $client;
@@ -310,7 +310,7 @@ class Search
     /**
      * Return client object.
      *
-     * @return \Elastica\Client Client object
+     * @return ClientInterface Client object
      */
     public function getClient()
     {

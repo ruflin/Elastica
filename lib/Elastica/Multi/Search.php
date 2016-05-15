@@ -2,7 +2,7 @@
 
 namespace Elastica\Multi;
 
-use Elastica\Client;
+use Elastica\ClientInterface;
 use Elastica\JSON;
 use Elastica\Request;
 use Elastica\Search as BaseSearch;
@@ -39,17 +39,17 @@ class Search
     /**
      * Constructs search object.
      *
-     * @param \Elastica\Client $client Client object
+     * @param ClientInterface $client Client object
      * @param MultiBuilderInterface $builder
      */
-    public function __construct(Client $client, MultiBuilderInterface $builder = null)
+    public function __construct(ClientInterface $client, MultiBuilderInterface $builder = null)
     {
         $this->_builder = $builder ?: new MultiBuilder();
         $this->_client = $client;
     }
 
     /**
-     * @return \Elastica\Client
+     * @return ClientInterface
      */
     public function getClient()
     {

@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Client
+class Client implements ClientInterface
 {
     /**
      * Config with defaults.

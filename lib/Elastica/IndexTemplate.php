@@ -23,19 +23,19 @@ class IndexTemplate
     /**
      * Client object.
      *
-     * @var \Elastica\Client Client object
+     * @var ClientInterface Client object
      */
     protected $_client = null;
 
     /**
      * Creates a new index template object.
      *
-     * @param \Elastica\Client $client Client object
+     * @param ClientInterface $client Client object
      * @param string           $name   Index template name
      *
      * @throws \Elastica\Exception\InvalidException
      */
-    public function __construct(Client $client, $name)
+    public function __construct(ClientInterface $client, $name)
     {
         $this->_client = $client;
 
@@ -97,7 +97,7 @@ class IndexTemplate
     /**
      * Returns index template client.
      *
-     * @return \Elastica\Client Index client object
+     * @return ClientInterface Index client object
      */
     public function getClient()
     {

@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file based on the
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/3.2.0...HEAD)
 
+### Backward Compatibility Breaks
+- All classes that depend on \Elastica\Client by typehint have been updated to accept a ClientInterface. Any classes that extend Elastica classes that depend on this typehint will need to be updated.
+
 ### Backward Compatibility Fixes
 - Reintroduced properties in ResultSet removed in 3.2.0 as deprecated properties to be removed in 4.0
 
@@ -11,6 +14,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 - Added the concept of ResultSet Transformers. The Transformer adds more information to a Result, for example the original object or data that created the Result. #1066
+- \Elastica\Client now implements ClientInterface and all Elastica classes accept any implementation of ClientInterface
 
 ## [3.2.0](https://github.com/ruflin/Elastica/compare/3.1.1...3.2.0)
 

@@ -13,14 +13,14 @@ use Elastica\Exception\ResponseException;
 class Snapshot
 {
     /**
-     * @var Client
+     * @var ClientInterface
      */
     protected $_client;
 
     /**
-     * @param Client $client
+     * @param ClientInterface $client
      */
-    public function __construct(Client $client)
+    public function __construct(ClientInterface $client)
     {
         $this->_client = $client;
     }

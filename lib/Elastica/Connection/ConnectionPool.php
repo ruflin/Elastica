@@ -2,7 +2,7 @@
 
 namespace Elastica\Connection;
 
-use Elastica\Client;
+use Elastica\ClientInterface;
 use Elastica\Connection;
 use Elastica\Connection\Strategy\StrategyInterface;
 use Exception;
@@ -102,9 +102,9 @@ class ConnectionPool
     /**
      * @param \Elastica\Connection $connection
      * @param \Exception           $e
-     * @param Client               $client
+     * @param ClientInterface $client
      */
-    public function onFail(Connection $connection, Exception $e, Client $client)
+    public function onFail(Connection $connection, Exception $e, ClientInterface $client)
     {
         $connection->setEnabled(false);
 

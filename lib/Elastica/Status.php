@@ -30,16 +30,16 @@ class Status
     /**
      * Client object.
      *
-     * @var \Elastica\Client Client object
+     * @var ClientInterface Client object
      */
     protected $_client = null;
 
     /**
      * Constructs Status object.
      *
-     * @param \Elastica\Client $client Client object
+     * @param ClientInterface $client Client object
      */
-    public function __construct(Client $client)
+    public function __construct(ClientInterface $client)
     {
         $this->_client = $client;
     }

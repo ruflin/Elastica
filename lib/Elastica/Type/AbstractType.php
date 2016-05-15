@@ -3,6 +3,7 @@
 namespace Elastica\Type;
 
 use Elastica\Client;
+use Elastica\ClientInterface;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\SearchableInterface;
@@ -48,7 +49,7 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Client.
      *
-     * @var \Elastica\Client Client object
+     * @var ClientInterface Client object
      */
     protected $_client = null;
 
@@ -93,11 +94,11 @@ abstract class AbstractType implements SearchableInterface
      * Reads index and type name from protected vars _indexName and _typeName.
      * Has to be set in child class
      *
-     * @param \Elastica\Client $client OPTIONAL Client object
+     * @param ClientInterface $client OPTIONAL Client object
      *
      * @throws \Elastica\Exception\InvalidException
      */
-    public function __construct(Client $client = null)
+    public function __construct(ClientInterface $client = null)
     {
         if (!$client) {
             $client = new Client();
@@ -112,8 +113,8 @@ abstract class AbstractType implements SearchableInterface
         }
 
         $this->_client = $client;
-        $this->_index = new Index($this->_client, $this->_indexName);
-        $this->_type = new BaseType($this->_index, $this->_typeName);
+        $this->_index = $client->getIndex($this->_indexName);
+        $this->_type = $this->_index->getType($this->_typeName);
     }
 
     /**
