@@ -19,7 +19,7 @@ class Stats
      *
      * @var \Elastica\Response Response object
      */
-    protected $_response = null;
+    protected $_response;
 
     /**
      * Stats info.
@@ -33,7 +33,7 @@ class Stats
      *
      * @var \Elastica\Index Index object
      */
-    protected $_index = null;
+    protected $_index;
 
     /**
      * Construct.

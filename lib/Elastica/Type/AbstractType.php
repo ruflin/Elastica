@@ -36,35 +36,35 @@ abstract class AbstractType implements SearchableInterface
      *
      * @var string Index name
      */
-    protected $_indexName = '';
+    protected $_indexName;
 
     /**
      * Index name.
      *
      * @var string Index name
      */
-    protected $_typeName = '';
+    protected $_typeName;
 
     /**
      * Client.
      *
      * @var \Elastica\Client Client object
      */
-    protected $_client = null;
+    protected $_client;
 
     /**
      * Index.
      *
      * @var \Elastica\Index Index object
      */
-    protected $_index = null;
+    protected $_index;
 
     /**
      * Type.
      *
      * @var \Elastica\Type Type object
      */
-    protected $_type = null;
+    protected $_type;
 
     /**
      * Mapping.

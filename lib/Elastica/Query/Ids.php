@@ -16,13 +16,6 @@ use Elastica\Type;
 class Ids extends AbstractQuery
 {
     /**
-     * Params.
-     *
-     * @var array Params
-     */
-    protected $_params = array();
-
-    /**
      * Creates filter object.
      *
      * @param string|\Elastica\Type $type Type to filter on

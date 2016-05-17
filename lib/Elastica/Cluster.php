@@ -20,7 +20,7 @@ class Cluster
      *
      * @var \Elastica\Client Client object
      */
-    protected $_client = null;
+    protected $_client;
 
     /**
      * Cluster state response.

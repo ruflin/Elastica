@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 - Added the concept of ResultSet Transformers. The Transformer adds more information to a Result, for example the original object or data that created the Result. #1066
+- Tidied property initialisation in classes where it was duplicated
 
 ## [3.2.0](https://github.com/ruflin/Elastica/compare/3.1.1...3.2.0)
 
