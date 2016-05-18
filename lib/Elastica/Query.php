@@ -359,9 +359,9 @@ class Query extends Param
         /**
          * TODO: delete in PHP 5.5+
          */
-        if (!isset($this->_params['aggs'])) {
-            $this->_params['aggs'] = [];
-        }
+//        if (!isset($this->_params['aggs'])) {
+//            $this->_params['aggs'] = [];
+//        }
 
         $this->_params['aggs'][] = $agg;
 
