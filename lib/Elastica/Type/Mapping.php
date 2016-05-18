@@ -27,7 +27,7 @@ class Mapping
      *
      * @var \Elastica\Type Type object
      */
-    protected $_type = null;
+    protected $_type;
 
     /**
      * Construct Mapping.

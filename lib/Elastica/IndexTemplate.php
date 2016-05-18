@@ -18,14 +18,14 @@ class IndexTemplate
      *
      * @var string Index pattern
      */
-    protected $_name = '';
+    protected $_name;
 
     /**
      * Client object.
      *
      * @var \Elastica\Client Client object
      */
-    protected $_client = null;
+    protected $_client;
 
     /**
      * Creates a new index template object.

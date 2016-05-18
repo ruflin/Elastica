@@ -34,7 +34,7 @@ class Percolator
      *
      * @var \Elastica\Index
      */
-    protected $_index = null;
+    protected $_index;
 
     /**
      * Construct new percolator.

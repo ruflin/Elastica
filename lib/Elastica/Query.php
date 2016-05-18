@@ -25,13 +25,6 @@ use Elastica\Suggest\AbstractSuggest;
 class Query extends Param
 {
     /**
-     * Params.
-     *
-     * @var array Params
-     */
-    protected $_params = [];
-
-    /**
      * Suggest query or not.
      *
      * @var int Suggest

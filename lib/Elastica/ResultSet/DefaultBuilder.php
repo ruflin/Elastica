@@ -7,7 +7,7 @@ use Elastica\Response;
 use Elastica\Result;
 use Elastica\ResultSet;
 
-class Builder implements BuilderInterface
+class DefaultBuilder implements BuilderInterface
 {
     /**
      * Builds a ResultSet for a given Response.

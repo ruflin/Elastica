@@ -19,7 +19,7 @@ class Filters extends AbstractAggregation
     /**
      * @var int Type of bucket keys - named, or anonymous
      */
-    private $_type = null;
+    private $_type;
 
     /**
      * Add a filter.

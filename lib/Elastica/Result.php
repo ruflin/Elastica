@@ -191,11 +191,11 @@ class Result
     /**
      * Returns Document.
      * 
-     * @return \Elastica\Document
+     * @return Document
      */
     public function getDocument()
     {
-        $doc = new \Elastica\Document();
+        $doc = new Document();
         $doc->setData($this->getSource());
         $hit = $this->getHit();
         if ($this->hasParam('_source')) {
@@ -213,6 +213,17 @@ class Result
         $doc->setParams($hit);
 
         return $doc;
+    }
+
+    /**
+     * Sets a parameter on the hit.
+     *
+     * @param string $param
+     * @param mixed $value
+     */
+    public function setParam($param, $value)
+    {
+        $this->_hit[$param] = $value;
     }
 
     /**

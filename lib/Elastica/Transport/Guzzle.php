@@ -33,7 +33,7 @@ class Guzzle extends AbstractTransport
      *
      * @var Client Guzzle client to reuse
      */
-    protected static $_guzzleClientConnection = null;
+    protected static $_guzzleClientConnection;
 
     /**
      * Makes calls to the elasticsearch server.
@@ -148,6 +148,7 @@ class Guzzle extends AbstractTransport
     /**
      * Return Guzzle resource.
      *
+     * @param string $baseUrl
      * @param bool $persistent False if not persistent connection
      *
      * @return Client

@@ -4,7 +4,7 @@ namespace Elastica;
 
 use Elastica\Exception\InvalidException;
 use Elastica\Filter\AbstractFilter;
-use Elastica\ResultSet\Builder;
+use Elastica\ResultSet\DefaultBuilder;
 use Elastica\ResultSet\BuilderInterface;
 
 /**
@@ -85,7 +85,7 @@ class Search
      */
     public function __construct(Client $client, BuilderInterface $builder = null)
     {
-        $this->_builder = $builder ?: new Builder();
+        $this->_builder = $builder ?: new DefaultBuilder();
         $this->_client = $client;
     }
 

@@ -27,12 +27,12 @@ class Bulk
     /**
      * @var string
      */
-    protected $_index = '';
+    protected $_index;
 
     /**
      * @var string
      */
-    protected $_type = '';
+    protected $_type;
 
     /**
      * @var array request parameters to the bulk api

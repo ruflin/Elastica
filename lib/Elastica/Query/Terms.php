@@ -18,21 +18,14 @@ class Terms extends AbstractQuery
      *
      * @var array Terms
      */
-    protected $_terms = array();
-
-    /**
-     * Params.
-     *
-     * @var array Params
-     */
-    protected $_params = array();
+    protected $_terms;
 
     /**
      * Terms key.
      *
      * @var string Terms key
      */
-    protected $_key = '';
+    protected $_key;
 
     /**
      * Construct terms query.

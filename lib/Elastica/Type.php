@@ -26,14 +26,14 @@ class Type implements SearchableInterface
      *
      * @var \Elastica\Index Index object
      */
-    protected $_index = null;
+    protected $_index;
 
     /**
      * Type name.
      *
      * @var string Type name
      */
-    protected $_name = '';
+    protected $_name;
 
     /**
      * @var array|string A callable that serializes an object passed to it

@@ -24,13 +24,6 @@ class Terms extends AbstractFilter
     protected $_terms = array();
 
     /**
-     * Params.
-     *
-     * @var array Params
-     */
-    protected $_params = array();
-
-    /**
      * Terms key.
      *
      * @var string Terms key

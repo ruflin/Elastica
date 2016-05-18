@@ -15,40 +15,64 @@ use Elastica\Exception\InvalidException;
 class ResultSet implements \Iterator, \Countable, \ArrayAccess
 {
     /**
-     * Results.
-     *
-     * @deprecated Accessing this property in an extended class is deprecated. The method will become private in 4.0. Modify results by implementing BuilderInterface and passing a new Builder to your \Elastica\Search instances.
-     *
-     * @var Result[] Results
+     * @deprecated This property is deprecated. Use ResultSet->getMaxScore() instead. The property will become removed in 4.0.
+     * @var float
      */
-    protected $_results = [];
+    protected $_maxScore;
 
     /**
      * Current position.
      *
-     * @deprecated Accessing this property in an extended class is deprecated. The method will become private in 4.0.
+     * @deprecated Accessing this property in an extended class is deprecated. The property will become private in 4.0.
      *
      * @var int Current position
      */
     protected $_position = 0;
 
     /**
+     * Query.
+     *
+     * @deprecated Accessing this property in an extended class is deprecated. The property will become private in 4.0. Access the response by calling getQuery
+     *
+     * @var Query Query object
+     */
+    protected $_query;
+
+    /**
      * Response.
      *
-     * @deprecated Accessing this property in an extended class is deprecated. The method will become private in 4.0. Access the response by calling getResponse
+     * @deprecated Accessing this property in an extended class is deprecated. The property will become private in 4.0. Access the response by calling getResponse
      *
      * @var Response Response object
      */
     protected $_response;
 
     /**
-     * Query.
+     * Results.
      *
-     * @deprecated Accessing this property in an extended class is deprecated. The method will become private in 4.0. Access the response by calling getQuery
+     * @deprecated Accessing this property in an extended class is deprecated. The property will become private in 4.0. Modify results by implementing BuilderInterface and passing a new Builder to your \Elastica\Search instances.
      *
-     * @var Query Query object
+     * @var Result[] Results
      */
-    protected $_query;
+    protected $_results = array();
+
+    /**
+     * @deprecated This property is deprecated. Use ResultSet->hasTimedOut() instead. The property will become removed in 4.0.
+     * @var bool
+     */
+    protected $_timedOut = false;
+
+    /**
+     * @deprecated This property is deprecated. Use ResultSet->getTotalTime() instead. The property will become removed in 4.0.
+     * @var int
+     */
+    protected $_took;
+
+    /**
+     * @deprecated This property is deprecated. Use ResultSet->getTotalHits() instead. The property will become removed in 4.0.
+     * @var int
+     */
+    protected $_totalHits;
 
     /**
      * Constructs ResultSet object.
@@ -62,6 +86,12 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
         $this->_query = $query;
         $this->_response = $response;
         $this->_results = $results;
+
+        $data = $response->getData();
+        $this->_maxScore = isset($data['hits']['max_score']) ? (float) $data['hits']['max_score'] : 0;
+        $this->_timedOut = !empty($data['timed_out']);
+        $this->_took = isset($data['took']) ? $data['took'] : 0;
+        $this->_totalHits = isset($data['hits']['total']) ? (int) $data['hits']['total'] : 0;
     }
 
     /**
@@ -163,9 +193,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getTotalHits()
     {
-        $data = $this->_response->getData();
-
-        return isset($data['hits']['total']) ? (int) $data['hits']['total'] : 0;
+        return $this->_totalHits;
     }
 
     /**
@@ -175,9 +203,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getMaxScore()
     {
-        $data = $this->_response->getData();
-
-        return isset($data['hits']['max_score']) ? (float) $data['hits']['max_score'] : 0;
+        return $this->_maxScore;
     }
 
     /**
@@ -187,9 +213,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getTotalTime()
     {
-        $data = $this->_response->getData();
-
-        return isset($data['took']) ? $data['took'] : 0;
+        return $this->_took;
     }
 
     /**
@@ -199,9 +223,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function hasTimedOut()
     {
-        $data = $this->_response->getData();
-
-        return !empty($data['timed_out']);
+        return $this->_timedOut;
     }
 
     /**

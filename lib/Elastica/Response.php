@@ -19,7 +19,7 @@ class Response
      *
      * @var float Query time
      */
-    protected $_queryTime = null;
+    protected $_queryTime;
 
     /**
      * Response string (json).
@@ -47,14 +47,14 @@ class Response
      *
      * @var \Elastica\Response Response object
      */
-    protected $_response = null;
+    protected $_response;
 
     /**
      * HTTP response status code.
      *
      * @var int
      */
-    protected $_status = null;
+    protected $_status;
 
     /**
      * Whether or not to convert bigint results to string (see issue #717).
