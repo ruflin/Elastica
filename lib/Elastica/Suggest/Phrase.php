@@ -178,9 +178,9 @@ class Phrase extends AbstractSuggest
             /**
              * TODO: delete in PHP 5.5+
              */
-            if (!isset($array[$baseName][$keys[0]])) {
-                $array[$baseName][$keys[0]] = [];
-            }
+//            if (!isset($array[$baseName][$keys[0]])) {
+//                $array[$baseName][$keys[0]] = [];
+//            }
 
             $array[$baseName][$keys[0]][] = $values[0];
         }

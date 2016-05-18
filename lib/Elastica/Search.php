@@ -198,9 +198,9 @@ class Search
         /**
          * TODO: delete in PHP 5.5+
          */
-        if (!isset($this->_options[$key])) {
-            $this->_options[$key] = [];
-        }
+//        if (!isset($this->_options[$key])) {
+//            $this->_options[$key] = [];
+//        }
 
         $this->_options[$key] = $value;
 

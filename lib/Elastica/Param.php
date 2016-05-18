@@ -141,9 +141,9 @@ class Param implements ArrayableInterface
             /**
              * TODO: delete in PHP 5.5+
              */
-            if (!isset($this->_params[$key])) {
-                $this->_params[$key] = [];
-            }
+//            if (!isset($this->_params[$key])) {
+//                $this->_params[$key] = [];
+//            }
 
             $this->_params[$key][] = $value;
         } else {
