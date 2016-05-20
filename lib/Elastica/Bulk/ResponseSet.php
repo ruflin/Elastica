@@ -9,7 +9,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @var \Elastica\Bulk\Response[]
      */
-    protected $_bulkResponses = array();
+    protected $_bulkResponses = [];
 
     /**
      * @var int
@@ -42,16 +42,13 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
      */
     public function getError()
     {
-        $error = '';
-
         foreach ($this->getBulkResponses() as $bulkResponse) {
             if ($bulkResponse->hasError()) {
-                $error = $bulkResponse->getError();
-                break;
+                return $bulkResponse->getError();
             }
         }
 
-        return $error;
+        return '';
     }
 
     /**
@@ -61,16 +58,13 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
      */
     public function getFullError()
     {
-        $error = '';
-
         foreach ($this->getBulkResponses() as $bulkResponse) {
             if ($bulkResponse->hasError()) {
-                $error = $bulkResponse->getFullError();
-                break;
+                return $bulkResponse->getFullError();
             }
         }
 
-        return $error;
+        return '';
     }
 
     /**
@@ -78,16 +72,13 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
      */
     public function isOk()
     {
-        $return = true;
-
         foreach ($this->getBulkResponses() as $bulkResponse) {
             if (!$bulkResponse->isOk()) {
-                $return = false;
-                break;
+                return false;
             }
         }
 
-        return $return;
+        return true;
     }
 
     /**
@@ -95,16 +86,13 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
      */
     public function hasError()
     {
-        $return = false;
-
         foreach ($this->getBulkResponses() as $bulkResponse) {
             if ($bulkResponse->hasError()) {
-                $return = true;
-                break;
+                return true;
             }
         }
 
-        return $return;
+        return false;
     }
 
     /**
@@ -112,11 +100,9 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
      */
     public function current()
     {
-        if ($this->valid()) {
-            return $this->_bulkResponses[$this->key()];
-        } else {
-            return false;
-        }
+        return $this->valid()
+            ? $this->_bulkResponses[$this->key()]
+            : false;
     }
 
     /**

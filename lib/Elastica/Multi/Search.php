@@ -29,12 +29,12 @@ class Search
     /**
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
      * @var array|\Elastica\Search[]
      */
-    protected $_searches = array();
+    protected $_searches = [];
 
     /**
      * Constructs search object.
@@ -61,7 +61,7 @@ class Search
      */
     public function clearSearches()
     {
-        $this->_searches = array();
+        $this->_searches = [];
 
         return $this;
     }

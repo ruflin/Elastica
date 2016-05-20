@@ -38,7 +38,7 @@ class Scroll implements \Iterator
      *
      * @var array
      */
-    protected $_options = array(null, null, null);
+    protected $_options = [null, null, null];
 
     /**
      * Constructor.
@@ -117,7 +117,7 @@ class Scroll implements \Iterator
     {
         // reset state
         $this->_nextScrollId = null;
-        $this->_options = array(null, null, null);
+        $this->_options = [null, null, null];
 
         // initial search
         $this->_saveOptions();

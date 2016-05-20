@@ -552,10 +552,10 @@ class AbstractUpdateAction extends Param
      *
      * @return array
      */
-    public function getOptions(array $fields = array(), $withUnderscore = false)
+    public function getOptions(array $fields = [], $withUnderscore = false)
     {
         if (!empty($fields)) {
-            $data = array();
+            $data = [];
             foreach ($fields as $field) {
                 $key = '_'.ltrim($field, '_');
                 if ($this->hasParam($key) && '' !== (string) $this->getParam($key)) {

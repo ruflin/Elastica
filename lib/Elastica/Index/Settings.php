@@ -77,30 +77,32 @@ class Settings
         }
         $settings = $data['settings']['index'];
 
-        if (!$setting) {
-            // return all array
+        /**
+         * TODO: full copy-past from \Elastica\Cluster\Settings::getTransient
+         */
+        if (empty($setting)) {
             return $settings;
         }
 
         if (isset($settings[$setting])) {
             return $settings[$setting];
-        } else {
-            if (strpos($setting, '.') !== false) {
-                // translate old dot-notation settings to nested arrays
-                $keys = explode('.', $setting);
-                foreach ($keys as $key) {
-                    if (isset($settings[$key])) {
-                        $settings = $settings[$key];
-                    } else {
-                        return;
-                    }
-                }
+        }
 
-                return $settings;
+        if (strpos($setting, '.') !== false) {
+            // translate old dot-notation settings to nested arrays
+            $keys = explode('.', $setting);
+            foreach ($keys as $key) {
+                if (isset($settings[$key])) {
+                    $settings = $settings[$key];
+                } else {
+                    return null;
+                }
             }
 
-            return;
+            return $settings;
         }
+
+        return null;
     }
 
     /**
@@ -112,11 +114,7 @@ class Settings
      */
     public function setNumberOfReplicas($replicas)
     {
-        $replicas = (int) $replicas;
-
-        $data = array('number_of_replicas' => $replicas);
-
-        return $this->set($data);
+        return $this->set(['number_of_replicas' => (int)$replicas]);
     }
 
     /**
@@ -194,9 +192,9 @@ class Settings
             if (strpos($e->getMessage(), 'ClusterBlockException') !== false) {
                 // hacky way to test if the metadata is blocked since bug 9203 is not fixed
                 return true;
-            } else {
-                throw $e;
             }
+
+            throw $e;
         }
     }
 
@@ -224,7 +222,7 @@ class Settings
      */
     public function setRefreshInterval($interval)
     {
-        return $this->set(array('refresh_interval' => $interval));
+        return $this->set(['refresh_interval' => $interval]);
     }
 
     /**
@@ -267,7 +265,7 @@ class Settings
     public function setMergePolicyType($type)
     {
         $this->getIndex()->close();
-        $response = $this->set(array('merge.policy.type' => $type));
+        $response = $this->set(['merge.policy.type' => $type]);
         $this->getIndex()->open();
 
         return $response;
@@ -353,7 +351,7 @@ class Settings
      *
      * @return \Elastica\Response Response object
      */
-    public function request(array $data = array(), $method = Request::GET)
+    public function request(array $data = [], $method = Request::GET)
     {
         $path = '_settings';
 
