@@ -680,4 +680,30 @@ class BulkTest extends BaseTest
         $this->markTestIncomplete('Failed asserting that 2.2414096568375803 is less than 1.3.');
         $this->assertLessThan(1.3, $endMemory / $startMemory);
     }
+
+    /**
+     * @group unit
+     */
+    public function testHasIndex()
+    {
+        $client = $this->_getClient();
+        $bulk = new Bulk($client);
+
+        $this->assertFalse($bulk->hasIndex());
+        $bulk->setIndex('unittest');
+        $this->assertTrue($bulk->hasIndex());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testHasType()
+    {
+        $client = $this->_getClient();
+        $bulk = new Bulk($client);
+
+        $this->assertFalse($bulk->hasType());
+        $bulk->setType('unittest');
+        $this->assertTrue($bulk->hasType());
+    }
 }
