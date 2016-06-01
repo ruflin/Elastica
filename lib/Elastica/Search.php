@@ -433,6 +433,10 @@ class Search
             $path .= '/'.implode(',', $types);
         }
 
+        if (isset($this->_options[self::OPTION_SEARCH_TYPE_SUGGEST])) {
+            return $path.'/_suggest';
+        }
+
         // Add full path based on indices and types -> could be all
         return $path.'/_search';
     }
@@ -460,6 +464,10 @@ class Search
         if ('_search/scroll' == $path) {
             $data = $params[self::OPTION_SCROLL_ID];
             unset($params[self::OPTION_SCROLL_ID]);
+        } elseif ('_suggest' == substr($path, -8)) {
+            $data = $query->toArray();
+            $data = $data[self::OPTION_SEARCH_TYPE_SUGGEST];
+            unset($params[self::OPTION_SEARCH_TYPE_SUGGEST]);
         } else {
             $data = $query->toArray();
         }
