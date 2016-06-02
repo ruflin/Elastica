@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 - Fix fatal error on `Query::addScriptField()` if scripts were already set via `setScriptFields()` #1086
+- Fix namespace collision of `Type` in `Query\Ids` #1104
 
 ### Added
 - Added the concept of ResultSet Transformers. The Transformer adds more information to a Result, for example the original object or data that created the Result. #1066
