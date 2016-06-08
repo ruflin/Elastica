@@ -21,7 +21,7 @@ class Document extends AbstractUpdateAction
      *
      * @var array Document data
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
      * Whether to use this document to upsert if the document does not exist.
@@ -43,7 +43,7 @@ class Document extends AbstractUpdateAction
      * @param string       $type  OPTIONAL Type name
      * @param string       $index OPTIONAL Index name
      */
-    public function __construct($id = '', $data = array(), $type = '', $index = '')
+    public function __construct($id = '', $data = [], $type = '', $index = '')
     {
         $this->setId($id);
         $this->setData($data);
@@ -97,11 +97,11 @@ class Document extends AbstractUpdateAction
      */
     public function get($key)
     {
-        if (!$this->has($key)) {
-            throw new InvalidException("Field {$key} does not exist");
+        if ($this->has($key)) {
+            return $this->_data[$key];
         }
 
-        return $this->_data[$key];
+        throw new InvalidException("Field {$key} does not exist");
     }
 
     /**
@@ -114,12 +114,13 @@ class Document extends AbstractUpdateAction
      */
     public function set($key, $value)
     {
-        if (!is_array($this->_data)) {
-            throw new InvalidException('Document data is serialized data. Data creation is forbidden.');
-        }
-        $this->_data[$key] = $value;
+        if (is_array($this->_data)) {
+            $this->_data[$key] = $value;
 
-        return $this;
+            return $this;
+        }
+
+        throw new InvalidException('Document data is serialized data. Data creation is forbidden.');
     }
 
     /**
@@ -141,12 +142,13 @@ class Document extends AbstractUpdateAction
      */
     public function remove($key)
     {
-        if (!$this->has($key)) {
-            throw new InvalidException("Field {$key} does not exist");
-        }
-        unset($this->_data[$key]);
+        if ($this->has($key)) {
+            unset($this->_data[$key]);
 
-        return $this;
+            return $this;
+        }
+
+        throw new InvalidException("Field {$key} does not exist");
     }
 
     /**
@@ -188,7 +190,7 @@ class Document extends AbstractUpdateAction
         $value = base64_encode(file_get_contents($filepath));
 
         if (!empty($mimeType)) {
-            $value = array('_content_type' => $mimeType, '_name' => $filepath, '_content' => $value);
+            $value = ['_content_type' => $mimeType, '_name' => $filepath, '_content' => $value];
         }
 
         $this->set($key, $value);
@@ -224,7 +226,7 @@ class Document extends AbstractUpdateAction
      */
     public function addGeoPoint($key, $latitude, $longitude)
     {
-        $value = array('lat' => $latitude, 'lon' => $longitude);
+        $value = ['lat' => $latitude, 'lon' => $longitude];
 
         $this->set($key, $value);
 
@@ -351,10 +353,12 @@ class Document extends AbstractUpdateAction
     {
         if ($data instanceof self) {
             return $data;
-        } elseif (is_array($data)) {
-            return new self('', $data);
-        } else {
-            throw new InvalidException('Failed to create document. Invalid data passed.');
         }
+
+        if (is_array($data)) {
+            return new self('', $data);
+        }
+
+        throw new InvalidException('Failed to create document. Invalid data passed.');
     }
 }

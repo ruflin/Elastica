@@ -76,7 +76,7 @@ class Cluster
     {
         $metaData = $this->_data['metadata']['indices'];
 
-        $indices = array();
+        $indices = [];
         foreach ($metaData as $key => $value) {
             $indices[] = $key;
         }
@@ -104,7 +104,7 @@ class Cluster
     public function getNodeNames()
     {
         $data = $this->getState();
-        $nodeNames = array();
+        $nodeNames = [];
         foreach ($data['nodes'] as $node) {
             $nodeNames[] = $node['name'];
         }
@@ -119,7 +119,7 @@ class Cluster
      */
     public function getNodes()
     {
-        $nodes = array();
+        $nodes = [];
         $data = $this->getState();
 
         foreach ($data['nodes'] as $id => $name) {

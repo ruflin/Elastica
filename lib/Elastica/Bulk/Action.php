@@ -17,12 +17,12 @@ class Action
     /**
      * @var array
      */
-    public static $opTypes = array(
+    public static $opTypes = [
         self::OP_TYPE_CREATE,
         self::OP_TYPE_INDEX,
         self::OP_TYPE_DELETE,
         self::OP_TYPE_UPDATE,
-    );
+    ];
 
     /**
      * @var string
@@ -32,19 +32,19 @@ class Action
     /**
      * @var array
      */
-    protected $_metadata = array();
+    protected $_metadata = [];
 
     /**
      * @var array
      */
-    protected $_source = array();
+    protected $_source = [];
 
     /**
      * @param string $opType
      * @param array  $metadata
      * @param array  $source
      */
-    public function __construct($opType = self::OP_TYPE_INDEX, array $metadata = array(), array $source = array())
+    public function __construct($opType = self::OP_TYPE_INDEX, array $metadata = [], array $source = [])
     {
         $this->setOpType($opType);
         $this->setMetadata($metadata);
@@ -187,7 +187,7 @@ class Action
      */
     public function toArray()
     {
-        $data[] = $this->getActionMetadata();
+        $data = [$this->getActionMetadata()];
         if ($this->hasSource()) {
             $data[] = $this->getSource();
         }
