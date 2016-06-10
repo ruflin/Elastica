@@ -19,7 +19,7 @@ class Percolator
     const EXTRA_AGGS = 'aggs';
     const EXTRA_HIGHLIGHT = 'highlight';
 
-    private $_extraRequestBodyOptions = array(
+    private $_extraRequestBodyOptions = [
         self::EXTRA_FILTER,
         self::EXTRA_QUERY,
         self::EXTRA_SIZE,
@@ -27,7 +27,7 @@ class Percolator
         self::EXTRA_SORT,
         self::EXTRA_AGGS,
         self::EXTRA_HIGHLIGHT,
-    );
+    ];
 
     /**
      * Index object.
@@ -56,7 +56,7 @@ class Percolator
      *
      * @return \Elastica\Response
      */
-    public function registerQuery($name, $query, $fields = array())
+    public function registerQuery($name, $query, $fields = [])
     {
         $path = $this->_index->getName().'/.percolator/'.$name;
         $query = Query::create($query);
@@ -98,10 +98,10 @@ class Percolator
      *
      * @return array With matching registered queries.
      */
-    public function matchDoc(Document $doc, $query = null, $type = 'type', $params = array())
+    public function matchDoc(Document $doc, $query = null, $type = 'type', $params = [])
     {
         $path = $this->_index->getName().'/'.$type.'/_percolate';
-        $data = array('doc' => $doc->getData());
+        $data = ['doc' => $doc->getData()];
 
         $this->_applyAdditionalRequestBodyOptions($params, $data);
 
@@ -126,12 +126,12 @@ class Percolator
      *
      * @return array With matching registered queries.
      */
-    public function matchExistingDoc($id, $type, $query = null, $params = array())
+    public function matchExistingDoc($id, $type, $query = null, $params = [])
     {
         $id = urlencode($id);
         $path = $this->_index->getName().'/'.$type.'/'.$id.'/_percolate';
 
-        $data = array();
+        $data = [];
         $this->_applyAdditionalRequestBodyOptions($params, $data);
 
         return $this->_percolate($path, $query, $data, $params);
@@ -161,7 +161,7 @@ class Percolator
      *
      * @return array
      */
-    protected function _percolate($path, $query, $data = array(), $params = array())
+    protected function _percolate($path, $query, $data = [], $params = [])
     {
         // Add query to filter the percolator queries which are executed.
         if ($query) {
@@ -172,11 +172,7 @@ class Percolator
         $response = $this->getIndex()->getClient()->request($path, Request::GET, $data, $params);
         $data = $response->getData();
 
-        if (isset($data['matches'])) {
-            return $data['matches'];
-        }
-
-        return array();
+        return isset($data['matches']) ? $data['matches'] : [];
     }
 
     /**

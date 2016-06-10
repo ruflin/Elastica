@@ -66,7 +66,7 @@ class IndexTemplate
      *
      * @return \Elastica\Response
      */
-    public function create(array $args = array())
+    public function create(array $args = [])
     {
         return $this->request(Request::PUT, $args);
     }
@@ -81,7 +81,7 @@ class IndexTemplate
         $response = $this->request(Request::HEAD);
         $info = $response->getTransferInfo();
 
-        return (bool) ($info['http_code'] == 200);
+        return $info['http_code'] == 200;
     }
 
     /**
@@ -112,7 +112,7 @@ class IndexTemplate
      *
      * @return \Elastica\Response Response object
      */
-    public function request($method, $data = array())
+    public function request($method, $data = [])
     {
         $path = '/_template/'.$this->getName();
 
