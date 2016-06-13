@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 - Fix fatal error on `Query::addScriptField()` if scripts were already set via `setScriptFields()` #1086
+- Set HTTP headers on each request preventing server error if persistent connection is enabled and compression enabled and later disabled for the same connection. https://github.com/ruflin/Elastica/pull/1106 #1106
 
 ### Added
 - Added the concept of ResultSet Transformers. The Transformer adds more information to a Result, for example the original object or data that created the Result. #1066
