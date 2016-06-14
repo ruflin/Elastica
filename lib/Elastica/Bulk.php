@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Bulk\Action;
@@ -76,7 +75,7 @@ class Bulk
      */
     public function hasIndex()
     {
-		return null !== $this->getIndex() && '' !== $this->getIndex();
+        return null !== $this->getIndex() && '' !== $this->getIndex();
     }
 
     /**
@@ -109,7 +108,7 @@ class Bulk
      */
     public function hasType()
     {
-		return null !== $this->getType() && '' !== $this->getType();
+        return null !== $this->getType() && '' !== $this->getType();
     }
 
     /**

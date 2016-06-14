@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Multi;
 
 use Elastica\Client;
@@ -39,7 +38,7 @@ class Search
     /**
      * Constructs search object.
      *
-     * @param \Elastica\Client $client Client object
+     * @param \Elastica\Client      $client  Client object
      * @param MultiBuilderInterface $builder
      */
     public function __construct(Client $client, MultiBuilderInterface $builder = null)

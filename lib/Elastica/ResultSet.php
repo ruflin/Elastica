@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
@@ -16,6 +15,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 {
     /**
      * @deprecated This property is deprecated. Use ResultSet->getMaxScore() instead. The property will become removed in 4.0.
+     *
      * @var float
      */
     protected $_maxScore;
@@ -58,18 +58,21 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
 
     /**
      * @deprecated This property is deprecated. Use ResultSet->hasTimedOut() instead. The property will become removed in 4.0.
+     *
      * @var bool
      */
     protected $_timedOut = false;
 
     /**
      * @deprecated This property is deprecated. Use ResultSet->getTotalTime() instead. The property will become removed in 4.0.
+     *
      * @var int
      */
     protected $_took;
 
     /**
      * @deprecated This property is deprecated. Use ResultSet->getTotalHits() instead. The property will become removed in 4.0.
+     *
      * @var int
      */
     protected $_totalHits;
@@ -78,7 +81,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      * Constructs ResultSet object.
      *
      * @param Response $response Response object
-     * @param Query $query Query object
+     * @param Query    $query    Query object
      * @param Result[] $results
      */
     public function __construct(Response $response, Query $query, $results)

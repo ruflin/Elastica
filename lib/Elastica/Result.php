@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica;
 
 /**
@@ -219,7 +218,7 @@ class Result
      * Sets a parameter on the hit.
      *
      * @param string $param
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function setParam($param, $value)
     {

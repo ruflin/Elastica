@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Connection\Strategy;
 
 use Elastica\Exception\ClientException;

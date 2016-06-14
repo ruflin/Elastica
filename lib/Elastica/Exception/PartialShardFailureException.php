@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Exception;
 
 use Elastica\JSON;

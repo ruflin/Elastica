@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Connection\Strategy;
 
 use Elastica\Connection\Strategy\StrategyInterface;
