@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 - Set PHP 7.0 as default development version
+- Get the root reason from Elasticsearch's error JSON, when available [#1111](https://github.com/ruflin/Elastica/pull/1111)
 
 ## [3.2.1](https://github.com/ruflin/Elastica/compare/3.2.0...3.2.1)
 
