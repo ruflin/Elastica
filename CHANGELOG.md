@@ -10,40 +10,42 @@ All notable changes to this project will be documented in this file based on the
 - Fix fatal error on `Query::addScriptField()` if scripts were already set via `setScriptFields()` #1086
 - Set HTTP headers on each request preventing server error if persistent connection is enabled and compression enabled and later disabled for the same connection. https://github.com/ruflin/Elastica/pull/1106 #1106
 - Fix namespace collision of `Type` in `Query\Ids` #1104
+- Fix fatal error on `Query::addScriptField()` if scripts were already set via `setScriptFields()` [#1086](https://github.com/ruflin/Elastica/pull/1086)
+- Fix namespace collision of `Type` in `Query\Ids` [#1104](https://github.com/ruflin/Elastica/pull/1104)
 
 ### Added
-- Added the concept of ResultSet Transformers. The Transformer adds more information to a Result, for example the original object or data that created the Result. #1066
+- Added the concept of ResultSet Transformers. The Transformer adds more information to a Result, for example the original object or data that created the Result. [#1066](https://github.com/ruflin/Elastica/pull/1066)
 - Tidied property initialisation in classes where it was duplicated
 
 ## [3.2.0](https://github.com/ruflin/Elastica/compare/3.1.1...3.2.0)
 
 ### Backward Compatibility Breaks
-- Method \Elastica\ResultSet::create and property \Elastica\ResultSet::$class were removed. To change the ResultSet class, implement your own ResultSet Builder. #1065
-- Properties on \Elastica\ResultSet _totalHits, _maxScore, _took and _timedOut that were originally set on object construction are now accessed by the getters on the ResultSet. #1065
+- Method \Elastica\ResultSet::create and property \Elastica\ResultSet::$class were removed. To change the ResultSet class, implement your own ResultSet Builder. [#1065](https://github.com/ruflin/Elastica/pull/1065)
+- Properties on \Elastica\ResultSet _totalHits, _maxScore, _took and _timedOut that were originally set on object construction are now accessed by the getters on the ResultSet. [#1065](https://github.com/ruflin/Elastica/pull/1065)
 
 ### Bugfixes
-- Fix php notice on `\Elastica\Index::getAliases()` if index has no aliases #1078
+- Fix php notice on `\Elastica\Index::getAliases()` if index has no aliases [#1078](https://github.com/ruflin/Elastica/issues/1078)
 
 ### Added
-- Update elasticsearch build dependency to elasticsearch 2.3.2 #1084
+- Update elasticsearch build dependency to elasticsearch 2.3.2 [#1084](https://github.com/ruflin/Elastica/pull/1084)
 
 ### Improvements
-- `Elastica\Type->deleteByQuery($query, $options)` $query param can be a query `array` again https://github.com/ruflin/Elastica/issues/1072 #1073
-- `Elastica\Client->connect()` allows to establish a connection to ES server when the config was set using method `Elastica\Client->setConfigValue()` https://github.com/ruflin/Elastica/issues/1076 #1077
-- Elastica\Client constructor now accepts a LoggerInterface and will log both successful and failed requests. #1069
+- `Elastica\Type->deleteByQuery($query, $options)` $query param can be a query `array` again https://github.com/ruflin/Elastica/issues/1072 [#1073](https://github.com/ruflin/Elastica/pull/1073)
+- `Elastica\Client->connect()` allows to establish a connection to ES server when the config was set using method `Elastica\Client->setConfigValue()` https://github.com/ruflin/Elastica/issues/1076 [#1077](https://github.com/ruflin/Elastica/pull/1077)
+- Elastica\Client constructor now accepts a LoggerInterface and will log both successful and failed requests. [#1069](https://github.com/ruflin/Elastica/pull/1069)
 
 ### Deprecated
-- Configuring the logger in \Elastica\Client $config constructor is deprecated and will be removed. Use the $logger argument instead. #1069
-- Extracted creation of ResultSet objects to a new dedicated ResultSet\Builder implementation. #1065
+- Configuring the logger in \Elastica\Client $config constructor is deprecated and will be removed. Use the $logger argument instead. [#1069](https://github.com/ruflin/Elastica/pull/1069)
+- Extracted creation of ResultSet objects to a new dedicated ResultSet\Builder implementation. [#1065](https://github.com/ruflin/Elastica/pull/1065)
 
 ### Deprecated
-- All properties in the \Elastica\ResultSet class will be moved to private in 4.0. To manipulate the creation of a ResultSet, implement the \Elastica\ResultSet\BuilderInterface and pass your new Builder to the \Elastica\Search instances. #1065
+- All properties in the \Elastica\ResultSet class will be moved to private in 4.0. To manipulate the creation of a ResultSet, implement the \Elastica\ResultSet\BuilderInterface and pass your new Builder to the \Elastica\Search instances. [#1065](https://github.com/ruflin/Elastica/pull/1065)
 
 
 ## [3.1.1](https://github.com/ruflin/Elastica/compare/3.1.0...3.1.1)
 
 ### Added
-- Add an "AwsAuthV4" transport that automatically signs requests using credentials from the environment or from the client config. This allows using Elastica with Amazon ElasticSearch Service domains that are restricted to IAM roles or policies. https://github.com/ruflin/Elastica/pull/1056
+- Add an "AwsAuthV4" transport that automatically signs requests using credentials from the environment or from the client config. This allows using Elastica with Amazon ElasticSearch Service domains that are restricted to IAM roles or policies. [#1056](https://github.com/ruflin/Elastica/pull/1056)
 - Update elasticsearch build dependency to elasticsearch 2.2.1
 
 ### Improvements
@@ -74,8 +76,8 @@ All notable changes to this project will be documented in this file based on the
 ## [3.0.1](https://github.com/ruflin/Elastica/compare/3.0.0...3.0.1)
 
 ### Improvements
-- Update build dependency to elasticsearch 2.1.1 #1022
-- Readd \Elastica\Filter\Nested. See https://github.com/ruflin/Elastica/issues/1001 #1020
+- Update build dependency to elasticsearch 2.1.1 [#1022](https://github.com/ruflin/Elastica/pull/1022)
+- Readd \Elastica\Filter\Nested. See https://github.com/ruflin/Elastica/issues/1001 [#1020](https://github.com/ruflin/Elastica/pull/1020)
 
 
 ## [3.0.0](https://github.com/ruflin/Elastica/compare/3.0.0-beta1...3.0.0)
@@ -84,10 +86,10 @@ All notable changes to this project will be documented in this file based on the
 - Revert getError changes in Response object and make it better BC compatible. See comment [here](https://github.com/ruflin/Elastica/commit/41a7a2075837320bc9bd3bca4150e05a1ec9a115#commitcomment-15136374).
 
 ### Bugfixes
-- Function score query: corrected the `score_method` `average` to `avg` #975
-- Set `json_decode()` assoc parameter to true in `Elastica\Response` #1005
-- Add `bigintConversion` to keys passed to connection config in `Elastica\Client` #1005
-- Use POST instead of PUT to send bulk requests #1010
+- Function score query: corrected the `score_method` `average` to `avg` [#975](https://github.com/ruflin/Elastica/pull/975)
+- Set `json_decode()` assoc parameter to true in `Elastica\Response` [#1005](https://github.com/ruflin/Elastica/pull/1005)
+- Add `bigintConversion` to keys passed to connection config in `Elastica\Client` [#1005](https://github.com/ruflin/Elastica/pull/1005)
+- Use POST instead of PUT to send bulk requests [#1010](https://github.com/ruflin/Elastica/issues/1010)
 
 ### Added
 - Elastica\Query\MultiMatch::setFuzziness now supports being set to `AUTO` with the const `MultiMatch::FUZZINESS_AUTO`
@@ -96,7 +98,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 - More info on Elastica\Exception\PartialShardFailureException. Not just number of failed shards.
-- Allow bool in TopHits::setSource function #1012
+- Allow bool in TopHits::setSource function [#1012](https://github.com/ruflin/Elastica/issues/1012)
 
 ### Deprecated
 - Elastica\Query\Filtered triggers E_USER_DEPRECATED error because filtered query is deprecated since ES 2.0.0-beta1. Use BoolQuery instead.
@@ -162,18 +164,18 @@ All notable changes to this project will be documented in this file based on the
 ## [2.3.1](https://github.com/ruflin/Elastica/releases/tag/2.3.1) - 2015-10-17
 
 ### Bugfixes
-- Filters aggregation: empty name is named bucket #935
-- Prevent mix keys in filters (#936) #939
-- Fix empty string is not anonymous filter #935
-- Filters aggregation: empty name is named bucket #935
+- Filters aggregation: empty name is named bucket [#935](https://github.com/ruflin/Elastica/pull/935)
+- Prevent mix keys in filters ([#936](https://github.com/ruflin/Elastica/pull/936)) [#939](https://github.com/ruflin/Elastica/pull/939)
+- Fix empty string is not anonymous filter [#935](https://github.com/ruflin/Elastica/pull/935)
+- Filters aggregation: empty name is named bucket [#935](https://github.com/ruflin/Elastica/pull/935)
 
 ### Added
-- Support for field_value_factor #953
-- Added setMinDocCount and setExtendedBounds options #947
-- Avoid environment dependecies in tests #938
+- Support for field_value_factor [#953](https://github.com/ruflin/Elastica/pull/953)
+- Added setMinDocCount and setExtendedBounds options [#947](https://github.com/ruflin/Elastica/pull/947)
+- Avoid environment dependecies in tests [#938](https://github.com/ruflin/Elastica/pull/938)
 
 ### Improvements
-- Update elasticsearch dependency to elasticsearch 1.7.3 #957
+- Update elasticsearch dependency to elasticsearch 1.7.3 [#957](https://github.com/ruflin/Elastica/pull/957)
 
 ### Deprecated
 - Added exceptions of deprecated transports to deprecation list
@@ -188,10 +190,10 @@ All notable changes to this project will be documented in this file based on the
   as argument. [#916](https://github.com/ruflin/Elastica/pull/916)
 
 ### Added
-- Add Script File feature #902 #914
+- Add Script File feature [#902](https://github.com/ruflin/Elastica/pull/902) [#914](https://github.com/ruflin/Elastica/pull/914)
 
 ### Improvements
-- Support the http.compression in the Http transport adapter #515
+- Support the http.compression in the Http transport adapter [#515](https://github.com/ruflin/Elastica/issues/515)
 - Introduction of Lazy toArray [#916](https://github.com/ruflin/Elastica/pull/916)
 - Update Elasticsearch dependency to 1.7.2 [#929](https://github.com/ruflin/Elastica/pull/929)
 
@@ -245,17 +247,17 @@ All notable changes to this project will be documented in this file based on the
 - Support for a custom connection timeout through a connectTimeout parameter. [#841](https://github.com/ruflin/Elastica/issues/841/)
 - SignificantTerms Aggregation [#847](https://github.com/ruflin/Elastica/issues/847/)
 - Support for 'precision_threshold' and 'rehash' options for the Cardinality Aggregation [#851]
-- Support for retrieving id node #852
+- Support for retrieving id node [#852](https://github.com/ruflin/Elastica/pull/852)
 - Scroll Iterator [#842](https://github.com/ruflin/Elastica/issues/842/)
 - Gitter Elastica Chat Room add for Elastica discussions: https://gitter.im/ruflin/Elastica
-- Introduce PHP7 compatibility and tests. #837
+- Introduce PHP7 compatibility and tests. [#837](https://github.com/ruflin/Elastica/pull/837)
 - `Tool\CrossIndex` for reindexing and copying data and mapping between indices [#853](https://github.com/ruflin/Elastica/pull/853)
-- CONTIRUBTING.md file added for contributor guidelines. #854
+- CONTIRUBTING.md file added for contributor guidelines. [#854](https://github.com/ruflin/Elastica/pull/854)
 
 ### Improvements
 - Introduction of Changelog standard based on http://keepachangelog.com/. changes.txt moved to CHANGELOG.md [#844](https://github.com/ruflin/Elastica/issues/844/)
-- Make host for all tests dynamic to prepare it for a more dynamic test environment #846
-- Node information is retrieved based on id instead of name as multiple nodes can have the same name. #852
+- Make host for all tests dynamic to prepare it for a more dynamic test environment [#846](https://github.com/ruflin/Elastica/pull/846)
+- Node information is retrieved based on id instead of name as multiple nodes can have the same name. [#852](https://github.com/ruflin/Elastica/pull/852)
 - Guzzle Http dependency updated to 5.3.*
 - Remove NO_DEV builds from travis build matrix to speed up building. All builds include no dev packages.
 - Introduction of benchmark test group to make it easy to run benchmark tests.
@@ -268,7 +270,7 @@ All notable changes to this project will be documented in this file based on the
 ### Deprecated
 - Facets are deprecated. You are encouraged to migrate to aggregations instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
 - Elastica\Query\Builder is deprecated. Use new Elastica\QueryBuilder instead. [#855](https://github.com/ruflin/Elastica/pull/855/)
-- For PHP 7 compatibility Elastica\Query\Bool was renamed to *\BoolQuery, Elastica\Filter\Bool was renamed to BoolFilter, Elastica\Transport\Null was renamed to NullTransport as Null and Bool are reserved phrases in PHP 7. Proxy objects for all three exist to keep backward compatibility. It is recommended to start using the new objects as the proxy classes will be deprecated as soon as PHP 7 is stable. #837
+- For PHP 7 compatibility Elastica\Query\Bool was renamed to *\BoolQuery, Elastica\Filter\Bool was renamed to BoolFilter, Elastica\Transport\Null was renamed to NullTransport as Null and Bool are reserved phrases in PHP 7. Proxy objects for all three exist to keep backward compatibility. It is recommended to start using the new objects as the proxy classes will be deprecated as soon as PHP 7 is stable. [#837](https://github.com/ruflin/Elastica/pull/837)
 
 
 
