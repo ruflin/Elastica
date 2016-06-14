@@ -9,12 +9,19 @@ use Elastica\Query\MatchAll;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
+use Elastica\Type\Mapping;
 
 class TopHitsTest extends BaseAggregationTest
 {
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
+
+        $mapping = new Mapping($index->getType('test'), [
+            'tags' => ['type' => 'keyword'],
+            'title' => ['type' => 'keyword'],
+        ]);
+        $index->getType('test')->setMapping($mapping);
 
         $index->getType('questions')->addDocuments([
             new Document(1, [

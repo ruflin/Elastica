@@ -140,11 +140,11 @@ class HttpTest extends BaseTest
         putenv('http_proxy='.$this->_getProxyUrl().'/');
 
         $client = $this->_getClient();
-        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $transferInfo = $client->request('_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
 
         $client->getConnection()->setProxy(null); // will not change anything
-        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $transferInfo = $client->request('_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
 
         putenv('http_proxy=');
@@ -158,11 +158,11 @@ class HttpTest extends BaseTest
         $this->checkProxy($this->_getProxyUrl403());
         putenv('http_proxy='.$this->_getProxyUrl403().'/');
         $client = $this->_getClient();
-        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $transferInfo = $client->request('_nodes')->getTransferInfo();
         $this->assertEquals(403, $transferInfo['http_code']);
         $client = $this->_getClient();
         $client->getConnection()->setProxy('');
-        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $transferInfo = $client->request('_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
         putenv('http_proxy=');
     }
@@ -176,7 +176,7 @@ class HttpTest extends BaseTest
         $client = $this->_getClient();
         $client->getConnection()->setProxy($this->_getProxyUrl());
 
-        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $transferInfo = $client->request('_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
     }
 
@@ -188,7 +188,7 @@ class HttpTest extends BaseTest
         $client = $this->_getClient();
         $client->getConnection()->setProxy('');
 
-        $transferInfo = $client->request('/_nodes')->getTransferInfo();
+        $transferInfo = $client->request('_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
     }
 

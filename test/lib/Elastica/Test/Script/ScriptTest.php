@@ -14,9 +14,9 @@ class ScriptTest extends BaseTest
         $value = "_score * doc['my_numeric_field'].value";
         $script = new Script($value);
 
-        $expected = [
-            'script' => $value,
-        ];
+        $expected = ['script' => [
+            'inline' => $value,
+        ]];
         $this->assertEquals($value, $script->getScript());
         $this->assertEquals($expected, $script->toArray());
 
@@ -27,10 +27,10 @@ class ScriptTest extends BaseTest
 
         $script = new Script($value, $params);
 
-        $expected = [
-            'script' => $value,
+        $expected = ['script' => [
+            'inline' => $value,
             'params' => $params,
-        ];
+        ]];
 
         $this->assertEquals($value, $script->getScript());
         $this->assertEquals($params, $script->getParams());
@@ -40,16 +40,16 @@ class ScriptTest extends BaseTest
 
         $script = new Script($value, $params, $lang);
 
-        $expected = [
-            'script' => $value,
+        $expected = ['script' => [
+            'inline' => $value,
             'params' => $params,
             'lang' => $lang,
-        ];
+        ]];
 
+        $this->assertEquals($expected, $script->toArray());
         $this->assertEquals($value, $script->getScript());
         $this->assertEquals($params, $script->getParams());
         $this->assertEquals($lang, $script->getLang());
-        $this->assertEquals($expected, $script->toArray());
     }
 
     /**
@@ -64,9 +64,9 @@ class ScriptTest extends BaseTest
 
         $this->assertEquals($string, $script->getScript());
 
-        $expected = [
-            'script' => $string,
-        ];
+        $expected = ['script' => [
+            'inline' => $string,
+        ]];
         $this->assertEquals($expected, $script->toArray());
     }
 
@@ -95,7 +95,7 @@ class ScriptTest extends BaseTest
             'param2' => 1,
         ];
         $array = [
-            'script' => $string,
+            'inline' => $string,
             'lang' => $lang,
             'params' => $params,
         ];
@@ -103,12 +103,11 @@ class ScriptTest extends BaseTest
         $script = Script::create($array);
 
         $this->assertInstanceOf('Elastica\Script\Script', $script);
+        $this->assertEquals(['script' => $array], $script->toArray());
 
         $this->assertEquals($string, $script->getScript());
         $this->assertEquals($params, $script->getParams());
         $this->assertEquals($lang, $script->getLang());
-
-        $this->assertEquals($array, $script->toArray());
     }
 
     /**

@@ -48,7 +48,7 @@ class IndexTemplateTest extends BaseTest
         $clientMock = $this->getMock('\Elastica\Client', ['request']);
         $clientMock->expects($this->once())
             ->method('request')
-            ->with('/_template/'.$name, Request::DELETE, [], [])
+            ->with('_template/'.$name, Request::DELETE, [], [])
             ->willReturn($response);
         $indexTemplate = new IndexTemplate($clientMock, $name);
         $this->assertSame($response, $indexTemplate->delete());
@@ -66,7 +66,7 @@ class IndexTemplateTest extends BaseTest
         $clientMock = $this->getMock('\Elastica\Client', ['request']);
         $clientMock->expects($this->once())
             ->method('request')
-            ->with('/_template/'.$name, Request::PUT, $args, [])
+            ->with('_template/'.$name, Request::PUT, $args, [])
             ->willReturn($response);
         $indexTemplate = new IndexTemplate($clientMock, $name);
         $this->assertSame($response, $indexTemplate->create($args));
@@ -84,7 +84,7 @@ class IndexTemplateTest extends BaseTest
         $clientMock = $this->getMock('\Elastica\Client', ['request']);
         $clientMock->expects($this->once())
             ->method('request')
-            ->with('/_template/'.$name, Request::HEAD, [], [])
+            ->with('_template/'.$name, Request::HEAD, [], [])
             ->willReturn($response);
         $indexTemplate = new IndexTemplate($clientMock, $name);
         $this->assertTrue($indexTemplate->exists());

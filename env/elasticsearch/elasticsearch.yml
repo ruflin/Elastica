@@ -1,21 +1,18 @@
 
-index.number_of_shards: 2
-index.number_of_replicas: 0
+#index.number_of_shards: 2
+#index.number_of_replicas: 0
 
 # Required plugins
-plugin.mandatory: mapper-attachments, delete-by-query #, image
+plugin.mandatory: mapper-attachments
 
 # For script tests
 script.inline: on
-script.indexed: on
+#script.indexed: on
 
 script.engine.groovy.file: on
 
-# Disable dynamic memory allocation
-bootstrap.mlockall: true
-
-# Accept any connection
-network.host: "0.0.0.0"
+# Accept any connection - disable checks
+http.host: 0.0.0.0
 
 # Limit threadpool by set number of available processors to 1
 # Without this, travis builds will be failed with OutOfMemory error
@@ -31,5 +28,5 @@ transport.tcp.port: 9300
 # Added for snapshot tests
 path.repo: ["/tmp/backups"]
 
-discovery.zen.ping.unicast.enabled: true
-discovery.zen.ping.multicast.enabled: true
+#discovery.zen.ping.unicast.enabled: true
+#discovery.zen.ping.multicast.enabled: true

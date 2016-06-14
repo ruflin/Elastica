@@ -211,9 +211,9 @@ class Info
         $path = '_nodes/'.$this->getNode()->getId();
 
         if (!empty($params)) {
-            $path .= '?';
+            $path .= '/';
             foreach ($params as $param) {
-                $path .= $param.'=true&';
+                $path .= $param.',';
             }
         }
 

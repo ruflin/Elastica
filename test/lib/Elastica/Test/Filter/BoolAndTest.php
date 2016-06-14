@@ -71,6 +71,7 @@ class BoolAndTest extends BaseTest
         $index->refresh();
         $and->setCached(true);
 
+        $this->_markSkipped50('no [query] registered for [and]');
         $resultSet = $type->search($and);
 
         $this->assertEquals(1, $resultSet->count());

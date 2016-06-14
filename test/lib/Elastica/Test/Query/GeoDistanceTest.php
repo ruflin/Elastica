@@ -53,6 +53,7 @@ class GeoDistanceTest extends BaseTest
 
         // Both points should be inside
         $query = new Query();
+        $this->_markSkipped50('[geo_distance_range] queries are no longer supported for geo_point field types. Use geo_distance sort or aggregations');
         $geoQuery = new GeoDistance('point', ['lat' => 30, 'lon' => 40], '40000km');
         $query = new Query(new MatchAll());
         $query->setPostFilter($geoQuery);

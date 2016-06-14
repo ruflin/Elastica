@@ -17,7 +17,7 @@ class ChildrenTest extends BaseAggregationTest
         $employeeType = $index->getType('employee');
         $employeeMapping = new Mapping($employeeType,
             [
-                'name' => ['type' => 'string'],
+                'name' => ['type' => 'keyword'],
             ]
         );
         $employeeMapping->setParent('company');
@@ -27,7 +27,7 @@ class ChildrenTest extends BaseAggregationTest
         $companyType = $index->getType('company');
         $companyMapping = new Mapping($companyType,
             [
-                'name' => ['type' => 'string'],
+                'name' => ['type' => 'keyword'],
             ]
         );
         $companyType->setMapping($companyMapping);

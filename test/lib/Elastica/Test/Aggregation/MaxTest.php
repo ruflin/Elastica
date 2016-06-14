@@ -32,9 +32,11 @@ class MaxTest extends BaseAggregationTest
         $expected = [
             'max' => [
                 'field' => 'price',
-                'script' => '_value * conversion_rate',
-                'params' => [
-                    'conversion_rate' => 1.2,
+                'script' => [
+                    'inline' => '_value * conversion_rate',
+                    'params' => [
+                        'conversion_rate' => 1.2,
+                    ],
                 ],
             ],
             'aggs' => [

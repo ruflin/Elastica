@@ -70,6 +70,7 @@ class IndicesTest extends BaseTest
 
         // search over the alias
         $index = $this->_getClient()->getIndex('indices_filter');
+        $this->_markSkipped50('[indices] query does not support [filter]');
         $results = $index->search($query);
 
         // ensure that the proper docs have been filtered out for each index

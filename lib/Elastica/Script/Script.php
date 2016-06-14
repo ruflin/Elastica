@@ -119,11 +119,11 @@ class Script extends AbstractScript
      */
     protected static function _createFromArray(array $data)
     {
-        if (!isset($data['script'])) {
-            throw new InvalidException("\$data['script'] is required");
+        if (!isset($data['inline'])) {
+            throw new InvalidException("\$data['inline'] is required");
         }
 
-        $script = new self($data['script']);
+        $script = new self($data['inline']);
 
         if (isset($data['lang'])) {
             $script->setLang($data['lang']);
@@ -145,7 +145,7 @@ class Script extends AbstractScript
     public function toArray()
     {
         $array = [
-            'script' => $this->_script,
+            'inline' => $this->_script,
         ];
 
         if (!empty($this->_params)) {
@@ -156,6 +156,6 @@ class Script extends AbstractScript
             $array['lang'] = $this->_lang;
         }
 
-        return $array;
+        return ['script' => $array];
     }
 }

@@ -5,7 +5,6 @@ use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Filter\Exists;
 use Elastica\Query;
-use Elastica\Query\Builder;
 use Elastica\Query\Term;
 use Elastica\Query\Text;
 use Elastica\Script\Script;
@@ -106,47 +105,6 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testStringConversion()
-    {
-        $queryString = '{
-            "query" : {
-                "filtered" : {
-                "filter" : {
-                    "range" : {
-                    "due" : {
-                        "gte" : "2011-07-18 00:00:00",
-                        "lt" : "2011-07-25 00:00:00"
-                    }
-                    }
-                },
-                "query" : {
-                    "text_phrase" : {
-                    "title" : "Call back request"
-                    }
-                }
-                }
-            },
-            "sort" : {
-                "due" : {
-                "reverse" : true
-                }
-            },
-            "fields" : [
-                "created", "assigned_to"
-            ]
-            }';
-
-        $query = new Builder($queryString);
-        $queryArray = $query->toArray();
-
-        $this->assertInternalType('array', $queryArray);
-
-        $this->assertEquals('2011-07-18 00:00:00', $queryArray['query']['filtered']['filter']['range']['due']['gte']);
-    }
-
-    /**
-     * @group unit
-     */
     public function testRawQuery()
     {
         $textQuery = new Term(['title' => 'test']);
@@ -218,6 +176,14 @@ class QueryTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
+        $mapping = new Type\Mapping($type,
+            [
+                'firstname' => ['type' => 'text', 'fielddata' => true],
+                'lastname' => ['type' => 'text', 'fielddata' => true],
+            ]
+        );
+        $type->setMapping($mapping);
+
         $type->addDocuments([
             new Document(1, ['name' => 'hello world']),
             new Document(2, ['firstname' => 'guschti', 'lastname' => 'ruflin']),
@@ -282,19 +248,19 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetFields()
+    public function testSetStoredFields()
     {
         $query = new Query();
 
         $params = ['query' => 'test'];
 
-        $query->setFields(['firstname', 'lastname']);
+        $query->setStoredFields(['firstname', 'lastname']);
 
         $data = $query->toArray();
 
-        $this->assertContains('firstname', $data['fields']);
-        $this->assertContains('lastname', $data['fields']);
-        $this->assertCount(2, $data['fields']);
+        $this->assertContains('firstname', $data['stored_fields']);
+        $this->assertContains('lastname', $data['stored_fields']);
+        $this->assertCount(2, $data['stored_fields']);
     }
 
     /**

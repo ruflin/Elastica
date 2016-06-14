@@ -4,7 +4,7 @@ namespace Elastica\Tool;
 use Elastica\Bulk;
 use Elastica\Index;
 use Elastica\Query\MatchAll;
-use Elastica\ScanAndScroll;
+use Elastica\Scroll;
 use Elastica\Search;
 use Elastica\Type;
 
@@ -83,10 +83,9 @@ class CrossIndex
         $search->setQuery($options[self::OPTION_QUERY]);
 
         // search on old index and bulk insert in new index
-        $scanAndScroll = new ScanAndScroll(
+        $scanAndScroll = new Scroll(
             $search,
-            $options[self::OPTION_EXPIRY_TIME],
-            $options[self::OPTION_SIZE_PER_SHARD]
+            $options[self::OPTION_EXPIRY_TIME]
         );
         foreach ($scanAndScroll as $resultSet) {
             $bulk = new Bulk($newIndex->getClient());

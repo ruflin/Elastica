@@ -283,9 +283,9 @@ class Query extends Param
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fields.html
      */
-    public function setFields(array $fields)
+    public function setStoredFields(array $fields)
     {
-        return $this->setParam('fields', $fields);
+        return $this->setParam('stored_fields', $fields);
     }
 
     /**

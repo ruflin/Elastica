@@ -93,6 +93,8 @@ class NestedFilterWithSetFilterTest extends BaseTest
         $search = new Search($client);
         $index = $this->_getIndexForTest();
         $search->addIndex($index);
+
+        $this->_markSkipped50('[nested] query does not support [filter]');
         $resultSet = $search->search($filter);
 
         $this->assertEquals(1, $resultSet->getTotalHits());

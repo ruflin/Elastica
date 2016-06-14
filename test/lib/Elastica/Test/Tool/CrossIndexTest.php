@@ -95,7 +95,7 @@ class CrossIndexTest extends Base
         $oldType = $oldIndex->getType('copy_test');
         $oldMapping = [
             'name' => [
-                'type' => 'string',
+                'type' => 'text',
                 'store' => true,
             ],
         ];

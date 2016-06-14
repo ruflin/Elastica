@@ -365,6 +365,7 @@ class InnerHitsTest extends BaseTest
         $innerHits = new InnerHits();
         $innerHits->setSource(['name']);
 
+        $this->_markSkipped50("[inner_hits] _source doesn't support values of type: START_ARRAY");
         $results = $this->getNestedQuery($matchAll, $innerHits);
 
         foreach ($results as $row) {
@@ -405,6 +406,7 @@ class InnerHitsTest extends BaseTest
         $innerHits = new InnerHits();
         $innerHits->setSort(['answer' => 'asc']);
 
+        $this->_markSkipped50('Set fielddata=true on [answer] in order to load fielddata in memory');
         $results = $this->getParentChildQuery($queryString, $innerHits);
         $firstResult = current($results->getResults());
 
@@ -510,6 +512,8 @@ class InnerHitsTest extends BaseTest
     {
         $queryString = new SimpleQueryString('question simon', ['title', 'users.name']);
         $innerHits = new InnerHits();
+
+        $this->_markSkipped50('Set fielddata=true on [answer] in order to load fielddata in memory');
         $innerHits->setFieldDataFields(['users.name']);
 
         $results = $this->getNestedQuery($queryString, $innerHits);

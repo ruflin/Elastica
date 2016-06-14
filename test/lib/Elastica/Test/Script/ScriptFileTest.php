@@ -35,6 +35,7 @@ class ScriptFileTest extends BaseTest
         $query = new Query();
         $query->addScriptField('distance', $scriptFile);
 
+        $this->_markSkipped50('Unknown key for a VALUE_STRING in [script_file].');
         try {
             $resultSet = $type->search($query);
         } catch (ResponseException $e) {

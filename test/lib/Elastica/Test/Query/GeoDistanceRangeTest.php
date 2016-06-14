@@ -53,6 +53,7 @@ class GeoDistanceRangeTest extends BaseTest
 
         $query = new Query(new MatchAll());
         $query->setPostFilter($geoQuery);
+        $this->_markSkipped50('[geo_distance_range] queries are no longer supported for geo_point field types. Use geo_distance sort or aggregations ');
         $this->assertEquals(1, $type->search($query)->count());
 
         // Both points should be inside

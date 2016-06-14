@@ -7,7 +7,7 @@ use Elastica\Exception\InvalidException;
  * Elastica index template object.
  *
  * @author Dmitry Balabka <dmitry.balabka@gmail.com>
- * 
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html
  */
 class IndexTemplate
@@ -113,7 +113,7 @@ class IndexTemplate
      */
     public function request($method, $data = [])
     {
-        $path = '/_template/'.$this->getName();
+        $path = '_template/'.$this->getName();
 
         return $this->getClient()->request($path, $method, $data);
     }

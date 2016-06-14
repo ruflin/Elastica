@@ -11,6 +11,11 @@ use Elastica\Type;
 
 class PercolatorTest extends BaseTest
 {
+    public function setUp()
+    {
+        $this->_markSkipped50('Percolator has been replaced by percolate query: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-percolate-query.html');
+    }
+
     /**
      * @group functional
      */

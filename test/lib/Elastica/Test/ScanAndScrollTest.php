@@ -10,6 +10,11 @@ use Elastica\Test\Base as BaseTest;
 
 class ScanAndScrollTest extends BaseTest
 {
+    public function setUp()
+    {
+        $this->_markSkipped50('No search type for [scan]');
+    }
+
     /**
      * Full foreach test.
      *
