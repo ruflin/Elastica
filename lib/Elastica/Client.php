@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Bulk\Action;
@@ -71,8 +70,8 @@ class Client
     /**
      * Creates a new Elastica client.
      *
-     * @param array $config OPTIONAL Additional config options
-     * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
+     * @param array           $config   OPTIONAL Additional config options
+     * @param callback        $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      * @param LoggerInterface $logger
      */
     public function __construct(array $config = array(), $callback = null, LoggerInterface $logger = null)
@@ -479,7 +478,7 @@ class Client
     }
 
     /**
-     * Establishes the client connections
+     * Establishes the client connections.
      */
     public function connect()
     {
@@ -668,28 +667,28 @@ class Client
     protected function _log($context)
     {
         if ($context instanceof ConnectionException) {
-            $this->_logger->error('Elastica Request Failure', [
+            $this->_logger->error('Elastica Request Failure', array(
                 'exception' => $context,
                 'request' => $context->getRequest()->toArray(),
-                'retry' => $this->hasConnection()
-            ]);
+                'retry' => $this->hasConnection(),
+            ));
 
             return;
         }
 
         if ($context instanceof Request) {
-            $this->_logger->debug('Elastica Request', [
+            $this->_logger->debug('Elastica Request', array(
                 'request' => $context->toArray(),
                 'response' => $this->_lastResponse ? $this->_lastResponse->getData() : null,
-                'responseStatus' => $this->_lastResponse ? $this->_lastResponse->getStatus() : null
-            ]);
+                'responseStatus' => $this->_lastResponse ? $this->_lastResponse->getStatus() : null,
+            ));
 
             return;
         }
 
-        $this->_logger->debug('Elastica Request', [
-            'message' => $context
-        ]);
+        $this->_logger->debug('Elastica Request', array(
+            'message' => $context,
+        ));
     }
 
     /**

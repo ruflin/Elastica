@@ -1,9 +1,7 @@
 <?php
-
 namespace Elastica\Test\Multi;
 
 use Elastica\Multi\MultiBuilder;
-use Elastica\Query;
 use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\ResultSet\BuilderInterface;
@@ -38,8 +36,8 @@ class MultiBuilderTest extends BaseTest
         $this->builder->expects($this->never())
             ->method('buildResultSet');
 
-        $response = new Response([]);
-        $searches = [];
+        $response = new Response(array());
+        $searches = array();
 
         $result = $this->multiBuilder->buildMultiResultSet($response, $searches);
 
@@ -48,27 +46,26 @@ class MultiBuilderTest extends BaseTest
 
     public function testBuildMultiResultSet()
     {
-        $response = new Response([
-            'responses' => [
-                [],
-                []
-            ]
-        ]);
-        $searches = [
+        $response = new Response(array(
+            'responses' => array(
+                array(),
+                array(),
+            ),
+        ));
+        $searches = array(
             $s1 = new Search($this->_getClient(), $this->builder),
-            $s2 = new Search($this->_getClient(), $this->builder)
-        ];
-        $resultSet1 = new ResultSet(new Response([]), $s1->getQuery(), []);
-        $resultSet2 = new ResultSet(new Response([]), $s2->getQuery(), []);
+            $s2 = new Search($this->_getClient(), $this->builder),
+        );
+        $resultSet1 = new ResultSet(new Response(array()), $s1->getQuery(), array());
+        $resultSet2 = new ResultSet(new Response(array()), $s2->getQuery(), array());
 
         $this->builder->expects($this->exactly(2))
             ->method('buildResultSet')
             ->withConsecutive(
-                [$this->isInstanceOf('Elastica\\Response'), $s1->getQuery()],
-                [$this->isInstanceOf('Elastica\\Response'), $s2->getQuery()]
+                array($this->isInstanceOf('Elastica\\Response'), $s1->getQuery()),
+                array($this->isInstanceOf('Elastica\\Response'), $s2->getQuery())
             )
             ->willReturnOnConsecutiveCalls($resultSet1, $resultSet2);
-
 
         $result = $this->multiBuilder->buildMultiResultSet($response, $searches);
 

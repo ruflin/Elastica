@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica;
 
 use Psr\Log\AbstractLogger;

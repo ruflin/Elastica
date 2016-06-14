@@ -1,11 +1,10 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
 use Elastica\Filter\AbstractFilter;
-use Elastica\ResultSet\DefaultBuilder;
 use Elastica\ResultSet\BuilderInterface;
+use Elastica\ResultSet\DefaultBuilder;
 
 /**
  * Elastica search object.
@@ -80,7 +79,7 @@ class Search
     /**
      * Constructs search object.
      *
-     * @param \Elastica\Client $client Client object
+     * @param \Elastica\Client $client  Client object
      * @param BuilderInterface $builder
      */
     public function __construct(Client $client, BuilderInterface $builder = null)

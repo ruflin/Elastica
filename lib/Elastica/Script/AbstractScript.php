@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Script;
 
 use Elastica\AbstractUpdateAction;

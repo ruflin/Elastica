@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Exception\Connection;
 
 use Elastica\Exception\ConnectionException;

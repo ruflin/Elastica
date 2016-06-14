@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test;
 
 use Elastica\Script as LegacyScript;

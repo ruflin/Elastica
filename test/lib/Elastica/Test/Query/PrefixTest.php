@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Query\Prefix;

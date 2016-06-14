@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Aggregation;
 
 class AbstractSimpleAggregationTest extends BaseAggregationTest

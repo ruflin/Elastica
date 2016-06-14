@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Script\AbstractScript as BaseAbstractScript;

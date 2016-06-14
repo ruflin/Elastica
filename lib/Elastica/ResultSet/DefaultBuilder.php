@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\ResultSet;
 
 use Elastica\Query;
@@ -13,7 +12,8 @@ class DefaultBuilder implements BuilderInterface
      * Builds a ResultSet for a given Response.
      *
      * @param Response $response
-     * @param Query $query
+     * @param Query    $query
+     *
      * @return ResultSet
      */
     public function buildResultSet(Response $response, Query $query)
@@ -28,12 +28,13 @@ class DefaultBuilder implements BuilderInterface
      * Builds individual result objects.
      *
      * @param Response $response
+     *
      * @return Result[]
      */
     private function buildResults(Response $response)
     {
         $data = $response->getData();
-        $results = [];
+        $results = array();
 
         if (!isset($data['hits']['hits'])) {
             return $results;
