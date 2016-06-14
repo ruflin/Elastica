@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;

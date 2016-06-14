@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Node;
 
 use Elastica\Node;

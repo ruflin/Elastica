@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\Transport;
 
 use Elastica\Document;

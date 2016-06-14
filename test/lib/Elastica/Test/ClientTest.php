@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test;
 
 use Elastica\Client;
@@ -1197,7 +1196,7 @@ class ClientTest extends BaseTest
     public function testLogger()
     {
         $logger = $this->getMock('Psr\\Log\\LoggerInterface');
-        $client = $this->_getClient([], null, $logger);
+        $client = $this->_getClient(array(), null, $logger);
 
         $logger->expects($this->once())
             ->method('debug')

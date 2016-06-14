@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\Terms;
 use Elastica\Aggregation\Children;
+use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Type\Mapping;

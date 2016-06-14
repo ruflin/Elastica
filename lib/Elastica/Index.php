@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
@@ -37,7 +36,7 @@ class Index implements SearchableInterface
      * All the communication to and from an index goes of this object
      *
      * @param \Elastica\Client $client Client object
-     * @param string $name Index name
+     * @param string           $name   Index name
      */
     public function __construct(Client $client, $name)
     {
@@ -288,8 +287,8 @@ class Index implements SearchableInterface
 
     /**
      * @param string|array|\Elastica\Query $query
-     * @param int|array $options
-     * @param BuilderInterface $builder
+     * @param int|array                    $options
+     * @param BuilderInterface             $builder
      *
      * @return Search
      */

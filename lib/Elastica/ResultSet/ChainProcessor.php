@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\ResultSet;
 
 use Elastica\ResultSet;
@@ -24,7 +23,7 @@ class ChainProcessor implements ProcessorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function process(ResultSet $resultSet)
     {

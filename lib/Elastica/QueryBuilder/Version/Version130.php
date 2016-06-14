@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\QueryBuilder\Version;
 
 use Elastica\QueryBuilder\Version;

@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test;
 
 use Elastica\Client;
@@ -55,8 +54,8 @@ class Base extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param array $params Additional configuration params. Host and Port are already set
-     * @param callback $callback
+     * @param array           $params   Additional configuration params. Host and Port are already set
+     * @param callback        $callback
      * @param LoggerInterface $logger
      *
      * @return Client
