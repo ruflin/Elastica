@@ -4,7 +4,7 @@
   <title><![CDATA[Elastica]]></title>
   <link href="http://Elastica.io/atom.xml" rel="self"/>
   <link href="http://Elastica.io/"/>
-  <updated>2016-05-02T08:43:58+02:00</updated>
+  <updated>2016-06-15T08:20:03+02:00</updated>
   <id>http://Elastica.io/</id>
   <author>
     <name><![CDATA[ruflin]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release 3.2.1]]></title>
+    <link href="http://Elastica.io/2016/06/15/release-3-dot-2-1/"/>
+    <updated>2016-06-15T08:18:56+02:00</updated>
+    <id>http://Elastica.io/2016/06/15/release-3-dot-2-1</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/3.2.1">Elastica 3.2.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/3.2.1">download</a>).</p>
+
+<p>This release is compatible with Elasticsearch 2.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/release-notes-2.3.2.html">elasticsearch 2.3.2</a>.</p>
+
+<h2>Backward Compatibility Fixes</h2>
+
+<ul>
+<li>Reintroduced properties in ResultSet removed in 3.2.0 as deprecated properties to be removed in 4.0</li>
+</ul>
+
+
+<h2>Bugfixes</h2>
+
+<ul>
+<li>Fix fatal error on <code>Query::addScriptField()</code> if scripts were already set via <code>setScriptFields()</code> <a href="https://github.com/ruflin/Elastica/pull/1086">#1086</a></li>
+<li>Fix namespace collision of <code>Type</code> in <code>Query\Ids</code> <a href="https://github.com/ruflin/Elastica/pull/1104">#1104</a></li>
+</ul>
+
+
+<h2>Added</h2>
+
+<ul>
+<li>Added the concept of ResultSet Transformers. The Transformer adds more information to a Result, for example the original object or data that created the Result. <a href="https://github.com/ruflin/Elastica/pull/1066">#1066</a></li>
+<li>Tidied property initialisation in classes where it was duplicated</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Release 3.2.0]]></title>
@@ -1484,65 +1518,6 @@ as argument. <a href="https://github.com/ruflin/Elastica/pull/916">#916</a></li>
 <li>Handling of HasChild type parsing bug #585</li>
 <li>Consolidate Index getMapping tests #591</li>
 <li>Fix Type::getMapping when using an aliased index #588</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Release v1.1.1.0]]></title>
-    <link href="http://Elastica.io/2014/04/19/release-v1-dot-1-1-dot-0/"/>
-    <updated>2014-04-19T17:13:36+02:00</updated>
-    <id>http://Elastica.io/2014/04/19/release-v1-dot-1-1-dot-0</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/v1.1.1.0">Elastica v1.1.1.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/v1.1.1.0">download</a>). This release is compatible with elasticsearch 1.1.1.</p>
-
-<h2>Dependencies</h2>
-
-<table>
-<thead>
-<tr>
-<th> Project </th>
-<th> Version </th>
-<th> Required </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.1.1">Elasticsearch</a></td>
-<td> 1.1.1 </td>
-<td> yes</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1">Elasticsearch mapper attachments plugin</a></td>
-<td>2.0.0.RC1</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC2">Elasticsearch thrift transport plugin</a></td>
-<td>2.0.0.RC2</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.10">Elasticsearch geocluster facet plugin</a></td>
-<td>0.0.10</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
-
-
-<h2>Release Notes (changes.txt)</h2>
-
-<ul>
-<li>Update to elasticsearch 1.1.1 <a href="http://www.elasticsearch.org/downloads/1-1-1/">http://www.elasticsearch.org/downloads/1-1-1/</a></li>
-<li>Remove CustomFiltersScore and CustomScore query as removed in elasticsearch 1.1.0 <a href="https://github.com/elasticsearch/elasticsearch/pull/5076/files">https://github.com/elasticsearch/elasticsearch/pull/5076/files</a></li>
-<li>Update Node Info to use plugins instead of plugin (<a href="https://github.com/elasticsearch/elasticsearch/pull/5072">https://github.com/elasticsearch/elasticsearch/pull/5072</a>)</li>
-<li>Fix mapping issue for aliases #588</li>
-<li>Only trap real JSON parse errors in Response class #586</li>
-<li>Added Cardinality aggregation #581</li>
-<li>Support for Terms filter lookup options #579</li>
-<li>Update to elasticsearch 1.1.0 <a href="http://www.elasticsearch.org/downloads/1-1-0/">http://www.elasticsearch.org/downloads/1-1-0/</a></li>
-<li>Fixed Query\Match Fuzziness parameter type #576</li>
 </ul>
 
 ]]></content>
