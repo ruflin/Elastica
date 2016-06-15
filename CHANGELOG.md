@@ -10,8 +10,9 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 ### Improvements
+- Set PHP 7.0 as default development version
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/3.2.0...3.2.1)
+## [3.2.1](https://github.com/ruflin/Elastica/compare/3.2.0...3.2.1)
 
 ### Backward Compatibility Fixes
 - Reintroduced properties in ResultSet removed in 3.2.0 as deprecated properties to be removed in 4.0
