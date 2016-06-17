@@ -44,7 +44,7 @@ class Response
     /**
      * Response.
      *
-     * @var \Elastica\Response Response object
+     * @var array|null Response data array
      */
     protected $_response;
 
