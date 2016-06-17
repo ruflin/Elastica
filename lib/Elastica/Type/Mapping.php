@@ -19,7 +19,7 @@ class Mapping
      *
      * @var array Mapping
      */
-    protected $_mapping = array();
+    protected $_mapping = [];
 
     /**
      * Type.
@@ -34,7 +34,7 @@ class Mapping
      * @param \Elastica\Type $type       OPTIONAL Type object
      * @param array          $properties OPTIONAL Properties
      */
-    public function __construct(Type $type = null, array $properties = array())
+    public function __construct(Type $type = null, array $properties = [])
     {
         if ($type) {
             $this->setType($type);
@@ -201,7 +201,7 @@ class Mapping
      */
     public function enableAllField($enabled = true)
     {
-        return $this->setAllField(array('enabled' => $enabled));
+        return $this->setAllField(['enabled' => $enabled]);
     }
 
     /**
@@ -225,7 +225,7 @@ class Mapping
      */
     public function enableTtl($enabled = true)
     {
-        return $this->setTTL(array('enabled' => $enabled));
+        return $this->setTTL(['enabled' => $enabled]);
     }
 
     /**
@@ -265,7 +265,7 @@ class Mapping
      *
      * @return \Elastica\Response Response object
      */
-    public function send(array $query = array())
+    public function send(array $query = [])
     {
         $path = '_mapping';
 
@@ -286,14 +286,13 @@ class Mapping
         if (is_array($mapping)) {
             $mappingObject = new self();
             $mappingObject->setProperties($mapping);
-        } else {
-            $mappingObject = $mapping;
+            return $mappingObject;
         }
 
-        if (!$mappingObject instanceof self) {
-            throw new InvalidException('Invalid object type');
+        if ($mapping instanceof self) {
+            return $mapping;
         }
 
-        return $mappingObject;
+        throw new InvalidException('Invalid object type');
     }
 }

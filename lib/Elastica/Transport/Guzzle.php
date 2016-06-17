@@ -119,7 +119,7 @@ class Guzzle extends AbstractTransport
             $this->_getActionPath($request),
             $connection->hasConfig('headers') && is_array($connection->getConfig('headers'))
                 ? $connection->getConfig('headers')
-                : array()
+                : []
         );
 
         $data = $request->getData();

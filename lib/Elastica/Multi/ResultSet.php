@@ -17,7 +17,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
      *
      * @var array|\Elastica\ResultSet[] Result Sets
      */
-    protected $_resultSets = array();
+    protected $_resultSets = [];
 
     /**
      * Current position.
@@ -84,11 +84,9 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
      */
     public function current()
     {
-        if ($this->valid()) {
-            return $this->_resultSets[$this->key()];
-        } else {
-            return false;
-        }
+        return $this->valid()
+            ? $this->_resultSets[$this->key()]
+            : false;
     }
 
     /**

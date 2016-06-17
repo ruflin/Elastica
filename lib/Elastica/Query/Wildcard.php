@@ -35,6 +35,6 @@ class Wildcard extends AbstractQuery
      */
     public function setValue($key, $value, $boost = 1.0)
     {
-        return $this->setParam($key, array('value' => $value, 'boost' => $boost));
+        return $this->setParam($key, ['value' => $value, 'boost' => $boost]);
     }
 }

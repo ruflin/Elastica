@@ -25,7 +25,7 @@ class Stats
      *
      * @var array stats data
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
      * Node.
