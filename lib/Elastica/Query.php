@@ -348,13 +348,6 @@ class Query extends Param
      */
     public function addAggregation(AbstractAggregation $agg)
     {
-        /**
-         * TODO: delete in PHP 5.5+ (or in PHP 5.4 after pass tests)
-         */
-//        if (!isset($this->_params['aggs'])) {
-//            $this->_params['aggs'] = [];
-//        }
-
         $this->_params['aggs'][] = $agg;
 
         return $this;

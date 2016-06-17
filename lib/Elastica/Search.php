@@ -194,13 +194,6 @@ class Search
     {
         $this->_validateOption($key);
 
-        /**
-         * TODO: delete in PHP 5.5+ (or in PHP 5.4 after pass tests)
-         */
-//        if (!isset($this->_options[$key])) {
-//            $this->_options[$key] = [];
-//        }
-
         $this->_options[$key] = $value;
 
         return $this;
@@ -242,12 +235,6 @@ class Search
     {
         $this->_validateOption($key);
 
-        /**
-         * TODO: delete in PHP 5.5+ (or in PHP 5.4 after pass tests)
-         */
-//        if (!isset($this->_options[$key])) {
-//            $this->_options[$key] = array();
-//        }
         $this->_options[$key][] = $value;
 
         return $this;

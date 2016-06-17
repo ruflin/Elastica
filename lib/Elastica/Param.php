@@ -137,13 +137,6 @@ class Param implements ArrayableInterface
     public function addParam($key, $value)
     {
         if ($key != null) {
-            /**
-             * TODO: delete in PHP 5.5+ (or in PHP 5.4 after pass tests)
-             */
-//            if (!isset($this->_params[$key])) {
-//                $this->_params[$key] = [];
-//            }
-
             $this->_params[$key][] = $value;
         } else {
             $this->_params = $value;

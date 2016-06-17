@@ -174,13 +174,6 @@ class Phrase extends AbstractSuggest
             $keys = array_keys($generator);
             $values = array_values($generator);
 
-            /**
-             * TODO: delete in PHP 5.5+ (or in PHP 5.4 after pass tests)
-             */
-//            if (!isset($array[$baseName][$keys[0]])) {
-//                $array[$baseName][$keys[0]] = [];
-//            }
-
             $array[$baseName][$keys[0]][] = $values[0];
         }
 
