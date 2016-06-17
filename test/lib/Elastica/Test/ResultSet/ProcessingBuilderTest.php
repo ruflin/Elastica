@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\ResultSet;
 
 use Elastica\Query;
@@ -42,7 +41,7 @@ class ProcessingBuilderTest extends BaseTest
     {
         $response = new Response('');
         $query = new Query();
-        $resultSet = new ResultSet($response, $query, []);
+        $resultSet = new ResultSet($response, $query, array());
 
         $this->innerBuilder->expects($this->once())
             ->method('buildResultSet')

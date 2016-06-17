@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Filter;
 
 use Elastica\Exception\InvalidException;

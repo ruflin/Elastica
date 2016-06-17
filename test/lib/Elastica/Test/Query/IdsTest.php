@@ -1,9 +1,9 @@
 <?php
-
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Query\Ids;
+use Elastica\Query\Type;
 use Elastica\Test\Base as BaseTest;
 
 class IdsTest extends BaseTest
@@ -184,5 +184,18 @@ class IdsTest extends BaseTest
         $resultSet = $this->_index->search($query);
 
         $this->assertEquals(1, $resultSet->count());
+    }
+
+    public function testQueryTypeAndTypeCollision()
+    {
+        // This test ensures that Elastica\Type and Elastica\Query\Type
+        // do not collide when used together, which at one point
+        // happened because of a use statement in Elastica\Query\Ids
+        // Test goal is to make sure a Fatal Error is not triggered
+        //
+        // adapted fix for Elastica\Filter\Type
+        // see https://github.com/ruflin/Elastica/pull/438
+        $queryType = new Type();
+        $filter = new Ids();
     }
 }

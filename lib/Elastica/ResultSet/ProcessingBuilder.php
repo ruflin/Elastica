@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\ResultSet;
 
 use Elastica\Query;
@@ -19,7 +18,7 @@ class ProcessingBuilder implements BuilderInterface
     private $processor;
 
     /**
-     * @param BuilderInterface $builder
+     * @param BuilderInterface   $builder
      * @param ProcessorInterface $processor
      */
     public function __construct(BuilderInterface $builder, ProcessorInterface $processor)
@@ -34,7 +33,8 @@ class ProcessingBuilder implements BuilderInterface
      * data into each Result.
      *
      * @param Response $response
-     * @param Query $query
+     * @param Query    $query
+     *
      * @return ResultSet
      */
     public function buildResultSet(Response $response, Query $query)

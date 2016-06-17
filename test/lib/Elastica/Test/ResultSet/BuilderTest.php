@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Test\ResultSet;
 
 use Elastica\Query;
@@ -38,15 +37,15 @@ class BuilderTest extends BaseTest
 
     public function testResponse()
     {
-        $response = new Response([
-            'hits' => [
-                'hits' => [
-                    ['test' => 1],
-                    ['test' => 2],
-                    ['test' => 3],
-                ]
-            ]
-        ]);
+        $response = new Response(array(
+            'hits' => array(
+                'hits' => array(
+                    array('test' => 1),
+                    array('test' => 2),
+                    array('test' => 3),
+                ),
+            ),
+        ));
         $query = new Query();
 
         $resultSet = $this->builder->buildResultSet($response, $query);

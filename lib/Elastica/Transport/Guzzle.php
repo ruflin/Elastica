@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Transport;
 
 use Elastica\Connection;
@@ -149,7 +148,7 @@ class Guzzle extends AbstractTransport
      * Return Guzzle resource.
      *
      * @param string $baseUrl
-     * @param bool $persistent False if not persistent connection
+     * @param bool   $persistent False if not persistent connection
      *
      * @return Client
      */

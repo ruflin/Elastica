@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica;
 
 use Elastica\Exception\JSONParseException;
@@ -96,13 +95,18 @@ class Response
             return $error;
         }
 
+        $rootError = $error;
         if (isset($error['root_cause'][0])) {
-            $error = $error['root_cause'][0];
+            $rootError = $error['root_cause'][0];
         }
 
-        $message = $error['reason'];
-        if (isset($error['index'])) {
-            $message .= ' [index: '.$error['index'].']';
+        $message = $rootError['reason'];
+        if (isset($rootError['index'])) {
+            $message .= ' [index: '.$rootError['index'].']';
+        }
+
+        if (isset($error['reason']) && $rootError['reason'] != $error['reason']) {
+            $message .= ' [reason: '.$error['reason'].']';
         }
 
         return $message;
