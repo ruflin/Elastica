@@ -235,10 +235,6 @@ class Search
     {
         $this->_validateOption($key);
 
-        if (!isset($this->_options[$key])) {
-            $this->_options[$key] = array();
-        }
-
         $this->_options[$key][] = $value;
 
         return $this;
