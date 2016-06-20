@@ -154,13 +154,9 @@ class Settings
     {
         $key = 'cluster.blocks.read_only';
 
-        if ($persistent) {
-            $response = $this->setPersistent($key, $readOnly);
-        } else {
-            $response = $this->setTransient($key, $readOnly);
-        }
-
-        return $response;
+        return $persistent
+            ? $this->setPersistent($key, $readOnly)
+            : $this->setTransient($key, $readOnly);
     }
 
     /**
