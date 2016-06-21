@@ -103,7 +103,7 @@ Add documents Storing and indexing documents To add data to the index you can ju
 
 <p>For more information and all the possibilities elasticsearch provides, take a look at the <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/">Analysis</a> and the <a href="http://www.elasticsearch.org/guide/reference/mapping/">Mapping</a> reference.</p>
 
-<p>The documents in elasticsearch are organized in indexes. Each index contains one or more types which contains the documents. So to put our data in elasticsearch, we first have to define how the index and the type will look like.</p>
+<p>The documents in elasticsearch are organized in indices. Each index contains one or more types which contains the documents. So to put our data in elasticsearch, we first have to define how the index and the type will look like.</p>
 
 <h3 id="section-analysis">Define Analysis</h3>
 
@@ -112,7 +112,7 @@ Add documents Storing and indexing documents To add data to the index you can ju
 
 <p>Data in elasticsearch is analyzed at two different times. Once, when you index a document it&rsquo;s analyzed and this information is put in the index. The other time is when you do a search. Elasticsearch analyzes the search query and looks up the gained information in the index. To see all possible analyzers and filter check out the <a href="http://www.elasticsearch.org/guide/reference/index-modules/analysis/">Analysis</a> reference.</p>
 
-<p>Let&rsquo;s create an index called twitter! We&rsquo;ll include two analyzers. Let&rsquo;s call them <code>indexAnalyzer</code> and <code>searchAnalyzer</code>, but you can use any name. <code>indexAnalyzer</code> defines how the data will be analyzed when it&rsquo;s indexed and <code>searchAnalyzer</code> defines how elasticsearch will analyze the search query. We&rsquo;ll reference these when we create the Mapping below. In this example we&rsquo;ll also use a custom snowball filter for the data.</p>
+<p>Let&rsquo;s create an index called twitter! We&rsquo;ll include two analyzers. The indices names are IMPORTANT because they decide when the analyzer will be used. The analyzer named &ldquo;default_index&rdquo; will be the analyzer used at index-time. The analyzer named &ldquo;default_search&rdquo; will be used when searching, if a custom analyzer is not provided in the query. <code>default_index</code> defines how the data will be analyzed when it&rsquo;s indexed and <code>default_search</code> defines how elasticsearch will analyze the search query. You can create analyzers with a random name, you can use these by referencing them in your query as the analyzer to use. In this example we&rsquo;ll also use a custom snowball filter for the data.</p>
 
 <p>The second argument of <code>\Elastica\Index</code> is an OPTIONAL bool=> (true) Deletes index first if already exists (default = false)</p>
 
@@ -157,12 +157,12 @@ Add documents Storing and indexing documents To add data to the index you can ju
 </span><span class='line'>        <span class="s1">&#39;number_of_replicas&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
 </span><span class='line'>        <span class="s1">&#39;analysis&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
 </span><span class='line'>            <span class="s1">&#39;analyzer&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>                <span class="s1">&#39;indexAnalyzer&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>                <span class="s1">&#39;default_index&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
 </span><span class='line'>                    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;custom&#39;</span><span class="p">,</span>
 </span><span class='line'>                    <span class="s1">&#39;tokenizer&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;standard&#39;</span><span class="p">,</span>
 </span><span class='line'>                    <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;lowercase&#39;</span><span class="p">,</span> <span class="s1">&#39;mySnowball&#39;</span><span class="p">)</span>
 </span><span class='line'>                <span class="p">),</span>
-</span><span class='line'>                <span class="s1">&#39;searchAnalyzer&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>                <span class="s1">&#39;default_search&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
 </span><span class='line'>                    <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;custom&#39;</span><span class="p">,</span>
 </span><span class='line'>                    <span class="s1">&#39;tokenizer&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;standard&#39;</span><span class="p">,</span>
 </span><span class='line'>                    <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span> <span class="s1">&#39;lowercase&#39;</span><span class="p">,</span> <span class="s1">&#39;mySnowball&#39;</span><span class="p">)</span>
@@ -188,9 +188,9 @@ Add documents Storing and indexing documents To add data to the index you can ju
 
 <p>The Mapping defines what kind of data is in which field. If no mapping is defined, elasticsearch will guess the kind of the data and map it automatically. To see all of the possibilities, check out the <a href="http://www.elasticsearch.org/guide/reference/mapping/">Mapping</a> reference.</p></p>
 
-<p>If you aren&rsquo;t going to define a mapping, you should probably change the name of the analyzers we defined above to <code>default_index</code> and <code>default_search</code>. These will be used automatically when no analyzer is specified. An analyzer named <code>default</code> can be used for both searching and indexing.</p>
+<p>In newer versions of ElasticSearch you can not use the mapping anymore to give your custom analyzers a function. You will have to provide 2 analyzers with the default names.</p>
 
-<p>In our example, we will create an type called tweet which is in our index twitter. So first we create that type and afterwards we define the mapping. Note that it is possible to boost data in elasticsearch. You can either boost a specific field or you can boost a complete document. To boost a document, we&rsquo;ll use the field <code>_boost</code>. If we boost a field it&rsquo;s defined just like the kind of the field.</p>
+<p>In our example, we will create an type called tweet which is in our index twitter. So first we create that type and afterwards we define the mapping. Note that it is possible to boost data in elasticsearch. You can boost a specific field like &lsquo;title&rsquo; to have more importance over normal content. If we boost a field it&rsquo;s defined just like the kind of the field. In this example we boost the importance of the &lsquo;fullname&rsquo; of the user by a factor of 2.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -216,23 +216,12 @@ Add documents Storing and indexing documents To add data to the index you can ju
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
 </pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">//Create a type</span>
 </span><span class='line'><span class="nv">$elasticaType</span> <span class="o">=</span> <span class="nv">$elasticaIndex</span><span class="o">-&gt;</span><span class="na">getType</span><span class="p">(</span><span class="s1">&#39;tweet&#39;</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// Define mapping</span>
 </span><span class='line'><span class="nv">$mapping</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Type\Mapping</span><span class="p">();</span>
 </span><span class='line'><span class="nv">$mapping</span><span class="o">-&gt;</span><span class="na">setType</span><span class="p">(</span><span class="nv">$elasticaType</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$mapping</span><span class="o">-&gt;</span><span class="na">setParam</span><span class="p">(</span><span class="s1">&#39;index_analyzer&#39;</span><span class="p">,</span> <span class="s1">&#39;indexAnalyzer&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$mapping</span><span class="o">-&gt;</span><span class="na">setParam</span><span class="p">(</span><span class="s1">&#39;search_analyzer&#39;</span><span class="p">,</span> <span class="s1">&#39;searchAnalyzer&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// Define boost field</span>
-</span><span class='line'><span class="nv">$mapping</span><span class="o">-&gt;</span><span class="na">setParam</span><span class="p">(</span><span class="s1">&#39;_boost&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;_boost&#39;</span><span class="p">,</span> <span class="s1">&#39;null_value&#39;</span> <span class="o">=&gt;</span> <span class="mf">1.0</span><span class="p">));</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// Set mapping</span>
 </span><span class='line'><span class="nv">$mapping</span><span class="o">-&gt;</span><span class="na">setProperties</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
@@ -241,13 +230,12 @@ Add documents Storing and indexing documents To add data to the index you can ju
 </span><span class='line'>        <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span>
 </span><span class='line'>        <span class="s1">&#39;properties&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
 </span><span class='line'>            <span class="s1">&#39;name&#39;</span>      <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">TRUE</span><span class="p">),</span>
-</span><span class='line'>            <span class="s1">&#39;fullName&#39;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">TRUE</span><span class="p">)</span>
+</span><span class='line'>            <span class="s1">&#39;fullName&#39;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">&#39;boost&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">)</span>
 </span><span class='line'>        <span class="p">),</span>
 </span><span class='line'>    <span class="p">),</span>
 </span><span class='line'>    <span class="s1">&#39;msg&#39;</span>     <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">TRUE</span><span class="p">),</span>
 </span><span class='line'>    <span class="s1">&#39;tstamp&#39;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">FALSE</span><span class="p">),</span>
-</span><span class='line'>    <span class="s1">&#39;location&#39;</span><span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;geo_point&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">FALSE</span><span class="p">),</span>
-</span><span class='line'>    <span class="s1">&#39;_boost&#39;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">FALSE</span><span class="p">)</span>
+</span><span class='line'>    <span class="s1">&#39;location&#39;</span><span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;geo_point&#39;</span><span class="p">,</span> <span class="s1">&#39;include_in_all&#39;</span> <span class="o">=&gt;</span> <span class="k">FALSE</span><span class="p">)</span>
 </span><span class='line'><span class="p">));</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1">// Send mapping to type</span>
@@ -286,7 +274,6 @@ Add documents Storing and indexing documents To add data to the index you can ju
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
-<span class='line-number'>23</span>
 </pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// The Id of the document</span>
 </span><span class='line'><span class="nv">$id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span><span class='line'>
@@ -299,8 +286,7 @@ Add documents Storing and indexing documents To add data to the index you can ju
 </span><span class='line'>    <span class="p">),</span>
 </span><span class='line'>    <span class="s1">&#39;msg&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;Me wish there were expression for cookies like there is for apples. &quot;A cookie a day make the doctor diagnose you with diabetes&quot; not catchy.&#39;</span><span class="p">,</span>
 </span><span class='line'>    <span class="s1">&#39;tstamp&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;1238081389&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;location&#39;</span><span class="o">=&gt;</span> <span class="s1">&#39;41.12,-71.34&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="s1">&#39;_boost&#39;</span>  <span class="o">=&gt;</span> <span class="mf">1.0</span>
+</span><span class='line'>    <span class="s1">&#39;location&#39;</span><span class="o">=&gt;</span> <span class="s1">&#39;41.12,-71.34&#39;</span>
 </span><span class='line'><span class="p">);</span>
 </span><span class='line'><span class="c1">// First parameter is the id of document.</span>
 </span><span class='line'><span class="nv">$tweetDocument</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Document</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$tweet</span><span class="p">);</span>
