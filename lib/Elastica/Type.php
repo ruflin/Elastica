@@ -545,6 +545,6 @@ class Type implements SearchableInterface
         $response = $this->getIndex()->request($this->getName(), Request::HEAD);
         $info = $response->getTransferInfo();
 
-        return (bool) ($info['http_code'] == 200);
+        return $info['http_code'] == 200;
     }
 }

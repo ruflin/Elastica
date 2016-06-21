@@ -348,10 +348,6 @@ class Query extends Param
      */
     public function addAggregation(AbstractAggregation $agg)
     {
-        if (!array_key_exists('aggs', $this->_params)) {
-            $this->_params['aggs'] = array();
-        }
-
         $this->_params['aggs'][] = $agg;
 
         return $this;

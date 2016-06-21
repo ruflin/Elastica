@@ -84,11 +84,9 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
      */
     public function current()
     {
-        if ($this->valid()) {
-            return $this->_resultSets[$this->key()];
-        } else {
-            return false;
-        }
+        return $this->valid()
+            ? $this->_resultSets[$this->key()]
+            : false;
     }
 
     /**
