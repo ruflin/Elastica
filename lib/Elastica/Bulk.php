@@ -21,7 +21,7 @@ class Bulk
     /**
      * @var \Elastica\Bulk\Action[]
      */
-    protected $_actions = array();
+    protected $_actions = [];
 
     /**
      * @var string|null
@@ -36,7 +36,7 @@ class Bulk
     /**
      * @var array request parameters to the bulk api
      */
-    protected $_requestParams = array();
+    protected $_requestParams = [];
 
     /**
      * @param \Elastica\Client $client
@@ -227,7 +227,7 @@ class Bulk
     public function addData($data, $opType = null)
     {
         if (!is_array($data)) {
-            $data = array($data);
+            $data = [$data];
         }
 
         foreach ($data as $actionData) {
@@ -336,7 +336,7 @@ class Bulk
      */
     public function toArray()
     {
-        $data = array();
+        $data = [];
         foreach ($this->getActions() as $action) {
             foreach ($action->toArray() as $row) {
                 $data[] = $row;
@@ -373,7 +373,7 @@ class Bulk
 
         $actions = $this->getActions();
 
-        $bulkResponses = array();
+        $bulkResponses = [];
 
         if (isset($responseData['items']) && is_array($responseData['items'])) {
             foreach ($responseData['items'] as $key => $item) {
@@ -389,7 +389,7 @@ class Bulk
                 if ($action instanceof AbstractDocumentAction) {
                     $data = $action->getData();
                     if ($data instanceof Document && $data->isAutoPopulate()
-                        || $this->_client->getConfigValue(array('document', 'autoPopulate'), false)
+                        || $this->_client->getConfigValue(['document', 'autoPopulate'], false)
                     ) {
                         if (!$data->hasId() && isset($bulkResponseData['_id'])) {
                             $data->setId($bulkResponseData['_id']);

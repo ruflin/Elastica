@@ -52,15 +52,11 @@ class Settings
         $data = $this->get();
         $settings = $data['persistent'];
 
-        if (!empty($setting)) {
-            if (isset($settings[$setting])) {
-                return $settings[$setting];
-            } else {
-                return;
-            }
+        if (empty($setting)) {
+            return $settings;
         }
 
-        return $settings;
+        return isset($settings[$setting]) ? $settings[$setting] : null;
     }
 
     /**
@@ -77,29 +73,32 @@ class Settings
         $data = $this->get();
         $settings = $data['transient'];
 
-        if (!empty($setting)) {
-            if (isset($settings[$setting])) {
-                return $settings[$setting];
-            } else {
-                if (strpos($setting, '.') !== false) {
-                    // convert dot notation to nested arrays
-                    $keys = explode('.', $setting);
-                    foreach ($keys as $key) {
-                        if (isset($settings[$key])) {
-                            $settings = $settings[$key];
-                        } else {
-                            return;
-                        }
-                    }
-
-                    return $settings;
-                }
-
-                return;
-            }
+        /**
+         * TODO: full copy-past from \Elastica\Index\Settings::getTransient
+         */
+        if (empty($setting)) {
+            return $settings;
         }
 
-        return $settings;
+        if (isset($settings[$setting])) {
+            return $settings[$setting];
+        }
+
+        if (strpos($setting, '.') !== false) {
+            // convert dot notation to nested arrays
+            $keys = explode('.', $setting);
+            foreach ($keys as $key) {
+                if (isset($settings[$key])) {
+                    $settings = $settings[$key];
+                } else {
+                    return null;
+                }
+            }
+
+            return $settings;
+        }
+
+        return null;
     }
 
     /**
@@ -113,11 +112,11 @@ class Settings
     public function setPersistent($key, $value)
     {
         return $this->set(
-            array(
-                'persistent' => array(
+            [
+                'persistent' => [
                     $key => $value,
-                ),
-            )
+                ],
+            ]
         );
     }
 
@@ -132,11 +131,11 @@ class Settings
     public function setTransient($key, $value)
     {
         return $this->set(
-            array(
-                'transient' => array(
+            [
+                'transient' => [
                     $key => $value,
-                ),
-            )
+                ],
+            ]
         );
     }
 
@@ -189,7 +188,7 @@ class Settings
      *
      * @return \Elastica\Response Response object
      */
-    public function request(array $data = array(), $method = Request::GET)
+    public function request(array $data = [], $method = Request::GET)
     {
         $path = '_cluster/settings';
 

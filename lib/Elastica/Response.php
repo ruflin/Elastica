@@ -39,7 +39,7 @@ class Response
      *
      * @var array transfer info
      */
-    protected $_transferInfo = array();
+    protected $_transferInfo = [];
 
     /**
      * Response.
@@ -151,11 +151,7 @@ class Response
     {
         $response = $this->getData();
 
-        if (isset($response['error'])) {
-            return true;
-        }
-
-        return false;
+        return isset($response['error']);
     }
 
     /**
@@ -185,11 +181,7 @@ class Response
 
         // Bulk insert checks. Check every item
         if (isset($data['status'])) {
-            if ($data['status'] >= 200 && $data['status'] <= 300) {
-                return true;
-            }
-
-            return false;
+            return $data['status'] >= 200 && $data['status'] <= 300;
         }
 
         if (isset($data['items'])) {
@@ -200,7 +192,9 @@ class Response
             foreach ($data['items'] as $item) {
                 if (isset($item['index']['ok']) && false == $item['index']['ok']) {
                     return false;
-                } elseif (isset($item['index']['status']) && ($item['index']['status'] < 200 || $item['index']['status'] >= 300)) {
+                }
+
+                if (isset($item['index']['status']) && ($item['index']['status'] < 200 || $item['index']['status'] >= 300)) {
                     return false;
                 }
             }
@@ -248,11 +242,9 @@ class Response
             }
 
             if (empty($response)) {
-                $response = array();
-            }
-
-            if (is_string($response)) {
-                $response = array('message' => $response);
+                $response = [];
+            } elseif (is_string($response)) {
+                $response = ['message' => $response];
             }
 
             $this->_response = $response;
@@ -321,11 +313,11 @@ class Response
     {
         $data = $this->getData();
 
-        if (!isset($data['took'])) {
-            throw new NotFoundException('Unable to find the field [took]from the response');
+        if (isset($data['took'])) {
+            return $data['took'];
         }
 
-        return $data['took'];
+        throw new NotFoundException('Unable to find the field [took]from the response');
     }
 
     /**
@@ -339,11 +331,11 @@ class Response
     {
         $data = $this->getData();
 
-        if (!isset($data['_shards'])) {
-            throw new NotFoundException('Unable to find the field [_shards] from the response');
+        if (isset($data['_shards'])) {
+            return $data['_shards'];
         }
 
-        return $data['_shards'];
+        throw new NotFoundException('Unable to find the field [_shards] from the response');
     }
 
     /**
@@ -357,11 +349,11 @@ class Response
     {
         $data = $this->getData();
 
-        if (!isset($data['_scroll_id'])) {
-            throw new NotFoundException('Unable to find the field [_scroll_id] from the response');
+        if (isset($data['_scroll_id'])) {
+            return $data['_scroll_id'];
         }
 
-        return $data['_scroll_id'];
+        throw new NotFoundException('Unable to find the field [_scroll_id] from the response');
     }
 
     /**

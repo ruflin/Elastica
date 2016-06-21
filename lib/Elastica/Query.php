@@ -333,7 +333,7 @@ class Query extends Param
         if (isset($this->_params['script_fields'])) {
             $this->_params['script_fields']->addScript($name, $script);
         } else {
-            $this->setScriptFields(array($name => $script));
+            $this->setScriptFields([$name => $script]);
         }
 
         return $this;
@@ -388,11 +388,11 @@ class Query extends Param
      */
     public function setMinScore($minScore)
     {
-        if (!is_numeric($minScore)) {
-            throw new InvalidException('has to be numeric param');
+        if (is_numeric($minScore)) {
+            return $this->setParam('min_score', $minScore);
         }
 
-        return $this->setParam('min_score', $minScore);
+        throw new InvalidException('has to be numeric param');
     }
 
     /**
@@ -421,10 +421,10 @@ class Query extends Param
     public function setRescore($rescore)
     {
         if (is_array($rescore)) {
-            $buffer = array();
+            $buffer = [];
 
             foreach ($rescore as $rescoreQuery) {
-                $buffer [] = $rescoreQuery;
+                $buffer[] = $rescoreQuery;
             }
         } else {
             $buffer = $rescore;

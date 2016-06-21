@@ -23,7 +23,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     /**
      * @var array Error array
      */
-    protected $_error = array();
+    protected $_error = [];
 
     /**
      * Constructs elasticsearch exception.
@@ -69,11 +69,9 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      */
     protected function _extractException($error)
     {
-        if (preg_match('/^(\w+)\[.*\]/', $error, $matches)) {
-            return $matches[1];
-        } else {
-            return;
-        }
+        return preg_match('/^(\w+)\[.*\]/', $error, $matches)
+            ? $matches[1]
+            : null;
     }
 
     /**

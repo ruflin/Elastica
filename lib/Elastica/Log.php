@@ -43,7 +43,7 @@ class Log extends AbstractLogger
      *
      * @return null|void
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $context['error_message'] = $message;
         $this->_lastMessage = JSON::stringify($context);

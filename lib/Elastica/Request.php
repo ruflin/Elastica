@@ -32,7 +32,7 @@ class Request extends Param
      *
      * @return \Elastica\Request OPTIONAL Connection object
      */
-    public function __construct($path, $method = self::GET, $data = array(), array $query = array(), Connection $connection = null)
+    public function __construct($path, $method = self::GET, $data = [], array $query = [], Connection $connection = null)
     {
         $this->setPath($path);
         $this->setMethod($method);
@@ -125,7 +125,7 @@ class Request extends Param
      *
      * @return $this
      */
-    public function setQuery(array $query = array())
+    public function setQuery(array $query = [])
     {
         return $this->setParam('query', $query);
     }

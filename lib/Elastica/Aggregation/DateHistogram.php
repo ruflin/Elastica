@@ -142,14 +142,16 @@ class DateHistogram extends Histogram
      */
     public function setExtendedBounds($min = '', $max = '')
     {
-        $bounds = array();
-        $bounds['min'] = $min;
-        $bounds['max'] = $max;
         // switch if min is higher then max
-        if (strtotime($min) > strtotime($max)) {
-            $bounds['min'] = $max;
-            $bounds['max'] = $min;
-        }
+        $bounds = strtotime($min) > strtotime($max)
+            ? [
+                'min' => $max,
+                'max' => $min,
+            ]
+            : [
+                'min' => $min,
+                'max' => $max,
+            ];
 
         return $this->setParam('extended_bounds', $bounds);
     }

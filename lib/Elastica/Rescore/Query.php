@@ -19,7 +19,7 @@ class Query extends AbstractRescore
      */
     public function __construct($query = null)
     {
-        $this->setParam('query', array());
+        $this->setParam('query', []);
         $this->setRescoreQuery($query);
     }
 

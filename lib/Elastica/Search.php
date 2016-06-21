@@ -50,14 +50,14 @@ class Search
      *
      * @var array
      */
-    protected $_indices = array();
+    protected $_indices = [];
 
     /**
      * Array of types.
      *
      * @var array
      */
-    protected $_types = array();
+    protected $_types = [];
 
     /**
      * @var \Elastica\Query
@@ -67,7 +67,7 @@ class Search
     /**
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
      * Client object.
@@ -119,7 +119,7 @@ class Search
      *
      * @return $this
      */
-    public function addIndices(array $indices = array())
+    public function addIndices(array $indices = [])
     {
         foreach ($indices as $index) {
             $this->addIndex($index);
@@ -159,7 +159,7 @@ class Search
      *
      * @return $this
      */
-    public function addTypes(array $types = array())
+    public function addTypes(array $types = [])
     {
         foreach ($types as $type) {
             $this->addType($type);
@@ -220,7 +220,7 @@ class Search
      */
     public function clearOptions()
     {
-        $this->_options = array();
+        $this->_options = [];
 
         return $this;
     }
@@ -259,11 +259,11 @@ class Search
      */
     public function getOption($key)
     {
-        if (!$this->hasOption($key)) {
-            throw new InvalidException('Option '.$key.' does not exist');
+        if ($this->hasOption($key)) {
+            return $this->_options[$key];
         }
 
-        return $this->_options[$key];
+        throw new InvalidException('Option '.$key.' does not exist');
     }
 
     /**
@@ -486,7 +486,7 @@ class Search
             $path,
             Request::GET,
             $query->toArray(),
-            array(self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_COUNT)
+            [self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_COUNT]
         );
         $resultSet = $this->_builder->buildResultSet($response, $query);
 
