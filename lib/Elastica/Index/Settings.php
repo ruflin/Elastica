@@ -193,9 +193,9 @@ class Settings
             if (strpos($e->getMessage(), 'ClusterBlockException') !== false) {
                 // hacky way to test if the metadata is blocked since bug 9203 is not fixed
                 return true;
-            } else {
-                throw $e;
             }
+
+            throw $e;
         }
     }
 
