@@ -171,11 +171,6 @@ class Phrase extends AbstractSuggest
             $generator = $array[$baseName]['candidate_generator'];
             unset($array[$baseName]['candidate_generator']);
 
-            /**
-             * TODO: if covers - try use `key($generator)` and `current($generator)`
-             * think will be better:
-             * $array[$baseName][key($generator)][] = current($generator);
-             */
             $keys = array_keys($generator);
             $values = array_values($generator);
 
