@@ -350,10 +350,12 @@ class Document extends AbstractUpdateAction
     {
         if ($data instanceof self) {
             return $data;
-        } elseif (is_array($data)) {
-            return new self('', $data);
-        } else {
-            throw new InvalidException('Failed to create document. Invalid data passed.');
         }
+
+        if (is_array($data)) {
+            return new self('', $data);
+        }
+
+        throw new InvalidException('Failed to create document. Invalid data passed.');
     }
 }

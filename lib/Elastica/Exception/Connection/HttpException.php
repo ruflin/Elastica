@@ -46,32 +46,22 @@ class HttpException extends ConnectionException
     {
         switch ($error) {
             case CURLE_UNSUPPORTED_PROTOCOL:
-                $error = 'Unsupported protocol';
-                break;
+                return 'Unsupported protocol';
             case CURLE_FAILED_INIT:
-                $error = 'Internal cUrl error?';
-                break;
+                return 'Internal cUrl error?';
             case CURLE_URL_MALFORMAT:
-                $error = 'Malformed URL';
-                break;
+                return 'Malformed URL';
             case CURLE_COULDNT_RESOLVE_PROXY:
-                $error = "Couldn't resolve proxy";
-                break;
+                return "Couldn't resolve proxy";
             case CURLE_COULDNT_RESOLVE_HOST:
-                $error = "Couldn't resolve host";
-                break;
+                return "Couldn't resolve host";
             case CURLE_COULDNT_CONNECT:
-                $error = "Couldn't connect to host, Elasticsearch down?";
-                break;
+                return "Couldn't connect to host, Elasticsearch down?";
             case 28:
-                $error = 'Operation timed out';
-                break;
-            default:
-                $error = 'Unknown error:'.$error;
-                break;
+                return 'Operation timed out';
         }
 
-        return $error;
+        return 'Unknown error:' . $error;
     }
 
     /**

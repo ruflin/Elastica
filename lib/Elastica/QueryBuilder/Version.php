@@ -48,23 +48,17 @@ abstract class Version
     {
         switch ($type) {
             case DSL::TYPE_QUERY:
-                $supports = in_array($name, $this->queries);
-                break;
+                return in_array($name, $this->queries);
             case DSL::TYPE_FILTER:
-                $supports = in_array($name, $this->filters);
-                break;
+                return in_array($name, $this->filters);
             case DSL::TYPE_AGGREGATION:
-                $supports = in_array($name, $this->aggregations);
-                break;
+                return in_array($name, $this->aggregations);
             case DSL::TYPE_SUGGEST:
-                $supports = in_array($name, $this->suggesters);
-                break;
-            default:
-                // disables version check in Facade for custom DSL objects
-                $supports = true;
+                return in_array($name, $this->suggesters);
         }
 
-        return $supports;
+        // disables version check in Facade for custom DSL objects
+        return true;
     }
 
     /**
