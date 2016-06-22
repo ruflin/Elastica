@@ -286,14 +286,13 @@ class Mapping
         if (is_array($mapping)) {
             $mappingObject = new self();
             $mappingObject->setProperties($mapping);
-        } else {
-            $mappingObject = $mapping;
+            return $mappingObject;
         }
 
-        if (!$mappingObject instanceof self) {
-            throw new InvalidException('Invalid object type');
+        if ($mapping instanceof self) {
+            return $mapping;
         }
 
-        return $mappingObject;
+        throw new InvalidException('Invalid object type');
     }
 }
