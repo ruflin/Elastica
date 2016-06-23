@@ -103,13 +103,13 @@ class Http extends AbstractTransport
 
         $headersConfig = $connection->hasConfig('headers') ? $connection->getConfig('headers') : array();
 
+        $headers = [];
+
         if (!empty($headersConfig)) {
             $headers = array();
             while (list($header, $headerValue) = each($headersConfig)) {
                 array_push($headers, $header.': '.$headerValue);
             }
-
-            curl_setopt($conn, CURLOPT_HTTPHEADER, $headers);
         }
 
         // TODO: REFACTOR
@@ -135,13 +135,15 @@ class Http extends AbstractTransport
                 curl_setopt($conn, CURLOPT_POSTFIELDS, gzencode($content));
 
                 // ... and tell ES that it is compressed
-                curl_setopt($conn, CURLOPT_HTTPHEADER, array('Content-Encoding: gzip'));
+                array_push($headers, 'Content-Encoding: gzip');
             } else {
                 curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
             }
         } else {
             curl_setopt($conn, CURLOPT_POSTFIELDS, '');
         }
+
+        curl_setopt($conn, CURLOPT_HTTPHEADER, $headers);
 
         curl_setopt($conn, CURLOPT_NOBODY, $httpMethod == 'HEAD');
 
