@@ -192,7 +192,9 @@ class Response
             foreach ($data['items'] as $item) {
                 if (isset($item['index']['ok']) && false == $item['index']['ok']) {
                     return false;
-                } elseif (isset($item['index']['status']) && ($item['index']['status'] < 200 || $item['index']['status'] >= 300)) {
+                }
+
+                if (isset($item['index']['status']) && ($item['index']['status'] < 200 || $item['index']['status'] >= 300)) {
                     return false;
                 }
             }
