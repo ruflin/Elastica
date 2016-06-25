@@ -20,7 +20,7 @@ class Fuzzy extends AbstractQuery
      */
     public function __construct($fieldName = null, $value = null)
     {
-        if ($fieldName and $value) {
+        if ($fieldName && $value) {
             $this->setField($fieldName, $value);
         }
     }
