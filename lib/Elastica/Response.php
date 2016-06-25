@@ -181,11 +181,7 @@ class Response
 
         // Bulk insert checks. Check every item
         if (isset($data['status'])) {
-            if ($data['status'] >= 200 && $data['status'] <= 300) {
-                return true;
-            }
-
-            return false;
+            return $data['status'] >= 200 && $data['status'] <= 300;
         }
 
         if (isset($data['items'])) {
