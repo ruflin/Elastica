@@ -73,14 +73,7 @@ class Cluster
      */
     public function getIndexNames()
     {
-        $metaData = $this->_data['metadata']['indices'];
-
-        $indices = array();
-        foreach ($metaData as $key => $value) {
-            $indices[] = $key;
-        }
-
-        return $indices;
+        return array_keys($this->_data['metadata']['indices']);
     }
 
     /**
