@@ -151,11 +151,7 @@ class Response
     {
         $response = $this->getData();
 
-        if (isset($response['error'])) {
-            return true;
-        }
-
-        return false;
+        return isset($response['error']);
     }
 
     /**
