@@ -77,7 +77,7 @@ class Ids extends AbstractQuery
             return $this;
         }
 
-        $this->_params['type'] = is_array($type) ? $type : [$type];
+        $this->_params['type'] = (array)$type;
 
         return $this;
     }
@@ -91,7 +91,7 @@ class Ids extends AbstractQuery
      */
     public function setIds($ids)
     {
-        $this->_params['values'] = is_array($ids) ? $ids : [$ids];
+        $this->_params['values'] = (array)$ids;
 
         return $this;
     }
