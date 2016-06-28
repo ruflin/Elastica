@@ -151,11 +151,7 @@ class Response
     {
         $response = $this->getData();
 
-        if (isset($response['error'])) {
-            return true;
-        }
-
-        return false;
+        return isset($response['error']);
     }
 
     /**
@@ -185,11 +181,7 @@ class Response
 
         // Bulk insert checks. Check every item
         if (isset($data['status'])) {
-            if ($data['status'] >= 200 && $data['status'] <= 300) {
-                return true;
-            }
-
-            return false;
+            return $data['status'] >= 200 && $data['status'] <= 300;
         }
 
         if (isset($data['items'])) {
@@ -200,7 +192,9 @@ class Response
             foreach ($data['items'] as $item) {
                 if (isset($item['index']['ok']) && false == $item['index']['ok']) {
                     return false;
-                } elseif (isset($item['index']['status']) && ($item['index']['status'] < 200 || $item['index']['status'] >= 300)) {
+                }
+
+                if (isset($item['index']['status']) && ($item['index']['status'] < 200 || $item['index']['status'] >= 300)) {
                     return false;
                 }
             }
