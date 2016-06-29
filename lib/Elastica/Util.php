@@ -108,7 +108,7 @@ class Util
      *
      * This is the lucene date format
      *
-     * @param int $date Date input (could be string etc.) -> must be supported by strtotime
+     * @param int|string $date Date input (could be string etc.) -> must be supported by strtotime
      *
      * @return string Converted date string
      */

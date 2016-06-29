@@ -26,9 +26,9 @@ class Image extends AbstractQuery
     /**
      * Sets a param for the given field.
      *
-     * @param string $field
-     * @param string $key
-     * @param string $value
+     * @param string           $field
+     * @param string           $key
+     * @param string|int|float $value
      *
      * @return $this
      */

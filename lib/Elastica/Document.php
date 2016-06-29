@@ -39,8 +39,8 @@ class Document extends AbstractUpdateAction
      *
      * @param int|string   $id    OPTIONAL $id Id is create if empty
      * @param array|string $data  OPTIONAL Data array
-     * @param string       $type  OPTIONAL Type name
-     * @param string       $index OPTIONAL Index name
+     * @param Type|string  $type  OPTIONAL Type name
+     * @param Index|string $index OPTIONAL Index name
      */
     public function __construct($id = '', $data = array(), $type = '', $index = '')
     {

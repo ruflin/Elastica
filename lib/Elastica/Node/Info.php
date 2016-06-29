@@ -42,6 +42,13 @@ class Info
     protected $_params = array();
 
     /**
+     * Unique node id
+     *
+     * @var string
+     */
+    protected $_id;
+
+    /**
      * Create new info object for node.
      *
      * @param \Elastica\Node $node   Node object

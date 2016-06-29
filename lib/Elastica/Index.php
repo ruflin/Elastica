@@ -198,7 +198,7 @@ class Index implements SearchableInterface
      *
      * @param array $args OPTIONAL Additional arguments
      *
-     * @return array Server response
+     * @return \Elastica\Response Server response
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
@@ -232,7 +232,7 @@ class Index implements SearchableInterface
      * @throws \Elastica\Exception\InvalidException
      * @throws \Elastica\Exception\ResponseException
      *
-     * @return array Server response
+     * @return \Elastica\Response Server response
      */
     public function create(array $args = array(), $options = null)
     {
@@ -504,10 +504,10 @@ class Index implements SearchableInterface
     /**
      * Makes calls to the elasticsearch server based on this index.
      *
-     * @param string $path   Path to call
-     * @param string $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param array  $data   OPTIONAL Arguments as array
-     * @param array  $query  OPTIONAL Query params
+     * @param string        $path   Path to call
+     * @param string        $method Rest method to use (GET, POST, DELETE, PUT)
+     * @param array|string  $data   OPTIONAL Arguments as array or encoded string
+     * @param array         $query  OPTIONAL Query params
      *
      * @return \Elastica\Response Response object
      */

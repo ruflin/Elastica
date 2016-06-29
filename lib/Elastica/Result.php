@@ -36,7 +36,7 @@ class Result
      *
      * @param string $name Param name
      *
-     * @return array Result data
+     * @return mixed Result data
      */
     public function getParam($name)
     {
