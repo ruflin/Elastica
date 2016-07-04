@@ -167,7 +167,7 @@ class AbstractUpdateAction extends Param
      * Sets the version_type of a document
      * Default in ES is internal, but you can set to external to use custom versioning.
      *
-     * @param int $versionType Document version type
+     * @param string $versionType Document version type
      *
      * @return $this
      */
