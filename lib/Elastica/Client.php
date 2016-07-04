@@ -53,12 +53,12 @@ class Client
     protected $_connectionPool;
 
     /**
-     * @var \Elastica\Request
+     * @var \Elastica\Request|null
      */
     protected $_lastRequest;
 
     /**
-     * @var \Elastica\Response
+     * @var \Elastica\Response|null
      */
     protected $_lastResponse;
 
@@ -330,7 +330,7 @@ class Client
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0.
      *
-     * @param int                                                      $id      document id
+     * @param int|string                                               $id      document id
      * @param array|\Elastica\Script\AbstractScript|\Elastica\Document $data    raw data for request body
      * @param string                                                   $index   index to update
      * @param string                                                   $type    type of index to update
@@ -622,10 +622,10 @@ class Client
      *
      * It's possible to make any REST query directly over this method
      *
-     * @param string $path   Path to call
-     * @param string $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param array  $data   OPTIONAL Arguments as array
-     * @param array  $query  OPTIONAL Query params
+     * @param string        $path   Path to call
+     * @param string        $method Rest method to use (GET, POST, DELETE, PUT)
+     * @param array|string  $data   OPTIONAL Arguments as array or pre-encoded string
+     * @param array         $query  OPTIONAL Query params
      *
      * @throws Exception\ConnectionException|\Exception
      *
@@ -718,7 +718,7 @@ class Client
     }
 
     /**
-     * @return Request
+     * @return Request|null
      */
     public function getLastRequest()
     {
@@ -726,7 +726,7 @@ class Client
     }
 
     /**
-     * @return Response
+     * @return Response|null
      */
     public function getLastResponse()
     {

@@ -15,14 +15,14 @@ class HttpException extends ConnectionException
     /**
      * Error code / message.
      *
-     * @var string Error code / message
+     * @var int|string Error code / message
      */
     protected $_error = 0;
 
     /**
      * Construct Exception.
      *
-     * @param string             $error    Error
+     * @param int|string         $error    Error
      * @param \Elastica\Request  $request
      * @param \Elastica\Response $response
      */

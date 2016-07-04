@@ -33,14 +33,14 @@ class Node
     /**
      * Node stats.
      *
-     * @var \Elastica\Node\Stats Node Stats
+     * @var \Elastica\Node\Stats|null Node Stats
      */
     protected $_stats;
 
     /**
      * Node info.
      *
-     * @var \Elastica\Node\Info Node info
+     * @var \Elastica\Node\Info|null Node info
      */
     protected $_info;
 

@@ -44,7 +44,7 @@ class Response
     /**
      * Response.
      *
-     * @var array|null Response data array
+     * @var array|null
      */
     protected $_response;
 

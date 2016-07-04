@@ -77,7 +77,7 @@ class AbstractUpdateAction extends Param
     /**
      * Sets the document type name.
      *
-     * @param string $type Type name
+     * @param Type|string $type Type name
      *
      * @return $this
      */
@@ -106,7 +106,7 @@ class AbstractUpdateAction extends Param
     /**
      * Sets the document index name.
      *
-     * @param string $index Index name
+     * @param Index|string $index Index name
      *
      * @return $this
      */
@@ -457,7 +457,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @return string
+     * @return bool
      */
     public function hasTimeout()
     {
@@ -483,7 +483,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @return string
+     * @return bool
      */
     public function hasConsistency()
     {
