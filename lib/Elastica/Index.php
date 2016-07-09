@@ -431,18 +431,11 @@ class Index implements SearchableInterface
      */
     public function getAliases()
     {
-        $responseData = $this->request('_alias/*', \Elastica\Request::GET)->getData();
+        $data = $this->request('_alias/*', \Elastica\Request::GET)->getData();
 
-        if (!isset($responseData[$this->getName()])) {
-            return array();
-        }
-
-        $data = $responseData[$this->getName()];
-        if (!empty($data['aliases'])) {
-            return array_keys($data['aliases']);
-        }
-
-        return array();
+        return empty($data[$this->getName()]['aliases'])
+            ? []
+            : array_keys($data[$this->getName()]['aliases']);
     }
 
     /**
