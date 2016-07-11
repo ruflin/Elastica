@@ -24,13 +24,13 @@ class QueryTest extends BaseTest
         $query = new QueryString('foo bar');
         $filter = new Query($query);
 
-        $expected = array(
-            'query' => array(
-                'query_string' => array(
+        $expected = [
+            'query' => [
+                'query_string' => [
                     'query' => 'foo bar',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $filter->toArray());
     }
@@ -44,16 +44,16 @@ class QueryTest extends BaseTest
         $filter = new Query($query);
         $filter->setCached(true);
 
-        $expected = array(
-            'fquery' => array(
-                'query' => array(
-                    'query_string' => array(
+        $expected = [
+            'fquery' => [
+                'query' => [
+                    'query_string' => [
                         'query' => 'foo bar',
-                    ),
-                ),
+                    ],
+                ],
                 '_cache' => true,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expected, $filter->toArray());
     }

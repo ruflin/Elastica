@@ -52,7 +52,7 @@ class ActionTest extends BaseTest
         $expected = '{"index":{"_index":"index2","_type":"type2","_id":1,"_routing":1}}'."\n";
         $this->assertEquals($expected, $action->toString());
 
-        $action->setSource(array('user' => 'name'));
+        $action->setSource(['user' => 'name']);
 
         $expected = '{"index":{"_index":"index2","_type":"type2","_id":1,"_routing":1}}'."\n";
         $expected .= '{"user":"name"}'."\n";

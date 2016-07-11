@@ -38,7 +38,7 @@ class MultiBuilder implements MultiBuilderInterface
      */
     private function buildResultSets(Response $response, $searches)
     {
-        $resultSets = array();
+        $resultSets = [];
 
         $data = $response->getData();
         if (!isset($data['responses']) || !is_array($data['responses'])) {

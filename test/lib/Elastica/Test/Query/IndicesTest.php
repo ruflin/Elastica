@@ -15,19 +15,19 @@ class IndicesTest extends BaseTest
      */
     public function testToArray()
     {
-        $expected = array(
-            'indices' => array(
-                'indices' => array('index1', 'index2'),
-                'query' => array(
-                    'term' => array('tag' => 'wow'),
-                ),
-                'no_match_query' => array(
-                    'term' => array('tag' => 'such filter'),
-                ),
-            ),
-        );
-        $query = new Indices(new Term(array('tag' => 'wow')), array('index1', 'index2'));
-        $query->setNoMatchQuery(new Term(array('tag' => 'such filter')));
+        $expected = [
+            'indices' => [
+                'indices' => ['index1', 'index2'],
+                'query' => [
+                    'term' => ['tag' => 'wow'],
+                ],
+                'no_match_query' => [
+                    'term' => ['tag' => 'such filter'],
+                ],
+            ],
+        ];
+        $query = new Indices(new Term(['tag' => 'wow']), ['index1', 'index2']);
+        $query->setNoMatchQuery(new Term(['tag' => 'such filter']));
         $this->assertEquals($expected, $query->toArray());
     }
 
@@ -36,12 +36,12 @@ class IndicesTest extends BaseTest
      */
     public function testIndicesQuery()
     {
-        $docs = array(
-            new Document(1, array('color' => 'blue')),
-            new Document(2, array('color' => 'green')),
-            new Document(3, array('color' => 'blue')),
-            new Document(4, array('color' => 'yellow')),
-        );
+        $docs = [
+            new Document(1, ['color' => 'blue']),
+            new Document(2, ['color' => 'green']),
+            new Document(3, ['color' => 'blue']),
+            new Document(4, ['color' => 'yellow']),
+        ];
 
         $index1 = $this->_createIndex();
         $index1->addAlias('indices_query');
@@ -54,12 +54,12 @@ class IndicesTest extends BaseTest
         $index2->refresh();
 
         $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMustNot(new Term(array('color' => 'blue')));
+        $boolQuery->addMustNot(new Term(['color' => 'blue']));
 
-        $indicesQuery = new Indices($boolQuery, array($index1->getName()));
+        $indicesQuery = new Indices($boolQuery, [$index1->getName()]);
 
         $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMustNot(new Term(array('color' => 'yellow')));
+        $boolQuery->addMustNot(new Term(['color' => 'yellow']));
         $indicesQuery->setNoMatchQuery($boolQuery);
 
         $query = new Query();
@@ -91,16 +91,16 @@ class IndicesTest extends BaseTest
         $index1 = $client->getIndex('index1');
         $index2 = $client->getIndex('index2');
 
-        $indices = array('one', 'two');
-        $query = new Indices(new Term(array('color' => 'blue')), $indices);
+        $indices = ['one', 'two'];
+        $query = new Indices(new Term(['color' => 'blue']), $indices);
         $this->assertEquals($indices, $query->getParam('indices'));
 
         $indices[] = 'three';
         $query->setIndices($indices);
         $this->assertEquals($indices, $query->getParam('indices'));
 
-        $query->setIndices(array($index1, $index2));
-        $expected = array($index1->getName(), $index2->getName());
+        $query->setIndices([$index1, $index2]);
+        $expected = [$index1->getName(), $index2->getName()];
         $this->assertEquals($expected, $query->getParam('indices'));
 
         $returnValue = $query->setIndices($indices);
@@ -115,14 +115,14 @@ class IndicesTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('someindex');
 
-        $query = new Indices(new Term(array('color' => 'blue')), array());
+        $query = new Indices(new Term(['color' => 'blue']), []);
 
         $query->addIndex($index);
-        $expected = array($index->getName());
+        $expected = [$index->getName()];
         $this->assertEquals($expected, $query->getParam('indices'));
 
         $query->addIndex('foo');
-        $expected = array($index->getName(), 'foo');
+        $expected = [$index->getName(), 'foo'];
         $this->assertEquals($expected, $query->getParam('indices'));
 
         $returnValue = $query->addIndex('bar');

@@ -23,10 +23,10 @@ class SuggestTest extends AbstractDSLTest
     {
         $suggestDSL = new DSL\Suggest();
 
-        $this->_assertImplemented($suggestDSL, 'completion', 'Elastica\Suggest\Completion', array('name', 'field'));
-        $this->_assertImplemented($suggestDSL, 'phrase', 'Elastica\Suggest\Phrase', array('name', 'field'));
-        $this->_assertImplemented($suggestDSL, 'term', 'Elastica\Suggest\Term', array('name', 'field'));
+        $this->_assertImplemented($suggestDSL, 'completion', 'Elastica\Suggest\Completion', ['name', 'field']);
+        $this->_assertImplemented($suggestDSL, 'phrase', 'Elastica\Suggest\Phrase', ['name', 'field']);
+        $this->_assertImplemented($suggestDSL, 'term', 'Elastica\Suggest\Term', ['name', 'field']);
 
-        $this->_assertNotImplemented($suggestDSL, 'context', array());
+        $this->_assertNotImplemented($suggestDSL, 'context', []);
     }
 }

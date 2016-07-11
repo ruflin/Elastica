@@ -14,7 +14,7 @@ class HealthTest extends BaseTest
     {
         parent::setUp();
 
-        $data = array(
+        $data = [
             'cluster_name' => 'test_cluster',
             'status' => 'green',
             'timed_out' => false,
@@ -25,18 +25,18 @@ class HealthTest extends BaseTest
             'relocating_shards' => 2,
             'initializing_shards' => 7,
             'unassigned_shards' => 5,
-            'indices' => array(
-                'index_one' => array(
-                ),
-                'index_two' => array(
-                ),
-            ),
-        );
+            'indices' => [
+                'index_one' => [
+                ],
+                'index_two' => [
+                ],
+            ],
+        ];
 
         $health = $this
             ->getMockBuilder('Elastica\Cluster\Health')
-            ->setConstructorArgs(array($this->_getClient()))
-            ->setMethods(array('_retrieveHealthData'))
+            ->setConstructorArgs([$this->_getClient()])
+            ->setMethods(['_retrieveHealthData'])
             ->getMock();
 
         $health

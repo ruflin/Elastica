@@ -17,42 +17,42 @@ class CompletionTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('song');
 
-        $type->setMapping(array(
-            'fieldName' => array(
+        $type->setMapping([
+            'fieldName' => [
                 'type' => 'completion',
                 'payloads' => true,
-            ),
-        ));
+            ],
+        ]);
 
-        $type->addDocuments(array(
-            new Document(1, array(
-                'fieldName' => array(
-                    'input' => array('Nevermind', 'Nirvana'),
+        $type->addDocuments([
+            new Document(1, [
+                'fieldName' => [
+                    'input' => ['Nevermind', 'Nirvana'],
                     'output' => 'Nevermind - Nirvana',
-                    'payload' => array(
+                    'payload' => [
                         'year' => 1991,
-                    ),
-                ),
-            )),
-            new Document(2, array(
-                'fieldName' => array(
-                    'input' => array('Bleach', 'Nirvana'),
+                    ],
+                ],
+            ]),
+            new Document(2, [
+                'fieldName' => [
+                    'input' => ['Bleach', 'Nirvana'],
                     'output' => 'Bleach - Nirvana',
-                    'payload' => array(
+                    'payload' => [
                         'year' => 1989,
-                    ),
-                ),
-            )),
-            new Document(3, array(
-                'fieldName' => array(
-                    'input' => array('Incesticide', 'Nirvana'),
+                    ],
+                ],
+            ]),
+            new Document(3, [
+                'fieldName' => [
+                    'input' => ['Incesticide', 'Nirvana'],
                     'output' => 'Incesticide - Nirvana',
-                    'payload' => array(
+                    'payload' => [
                         'year' => 1992,
-                    ),
-                ),
-            )),
-        ));
+                    ],
+                ],
+            ]),
+        ]);
 
         $index->refresh();
 
@@ -67,13 +67,13 @@ class CompletionTest extends BaseTest
         $suggest = new Completion('suggestName', 'fieldName');
         $suggest->setText('foo');
         $suggest->setSize(10);
-        $expected = array(
+        $expected = [
             'text' => 'foo',
-            'completion' => array(
+            'completion' => [
                 'size' => 10,
                 'field' => 'fieldName',
-            ),
-        );
+            ],
+        ];
         $this->assertEquals($expected, $suggest->toArray());
     }
 
@@ -104,7 +104,7 @@ class CompletionTest extends BaseTest
     public function testFuzzySuggestWorks()
     {
         $suggest = new Completion('suggestName', 'fieldName');
-        $suggest->setFuzzy(array('fuzziness' => 2));
+        $suggest->setFuzzy(['fuzziness' => 2]);
         $suggest->setText('Neavermint');
 
         $index = $this->_getIndexForTest();
@@ -126,10 +126,10 @@ class CompletionTest extends BaseTest
     {
         $suggest = new Completion('suggestName', 'fieldName');
 
-        $fuzzy = array(
+        $fuzzy = [
             'unicode_aware' => true,
             'fuzziness' => 3,
-        );
+        ];
 
         $suggest->setFuzzy($fuzzy);
 

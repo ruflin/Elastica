@@ -42,7 +42,7 @@ class FunctionScore extends AbstractQuery
     const FIELD_VALUE_FACTOR_MODIFIER_SQRT = 'sqrt';
     const FIELD_VALUE_FACTOR_MODIFIER_RECIPROCAL = 'reciprocal';
 
-    protected $_functions = array();
+    protected $_functions = [];
 
     /**
      * Set the child query for this function_score query.
@@ -80,9 +80,9 @@ class FunctionScore extends AbstractQuery
      */
     public function addFunction($functionType, $functionParams, $filter = null, $weight = null)
     {
-        $function = array(
+        $function = [
             $functionType => $functionParams,
-        );
+        ];
 
         if (!is_null($filter)) {
             if ($filter instanceof AbstractFilter) {
@@ -157,12 +157,12 @@ class FunctionScore extends AbstractQuery
             }
         }
 
-        $functionParams = array(
-            $field => array(
+        $functionParams = [
+            $field => [
                 'origin' => $origin,
                 'scale' => $scale,
-            ),
-        );
+            ],
+        ];
         if (!is_null($offset)) {
             $functionParams[$field]['offset'] = $offset;
         }
@@ -189,9 +189,9 @@ class FunctionScore extends AbstractQuery
             }
         }
 
-        $functionParams = array(
+        $functionParams = [
             'field' => $field,
-        );
+        ];
 
         if (!is_null($factor)) {
             $functionParams['factor'] = $factor;
@@ -264,7 +264,7 @@ class FunctionScore extends AbstractQuery
             }
         }
 
-        $this->addFunction('random_score', array('seed' => $seed), $filter, $weight);
+        $this->addFunction('random_score', ['seed' => $seed], $filter, $weight);
     }
 
     /**

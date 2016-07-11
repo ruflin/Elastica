@@ -113,11 +113,11 @@ class Settings
     public function setPersistent($key, $value)
     {
         return $this->set(
-            array(
-                'persistent' => array(
+            [
+                'persistent' => [
                     $key => $value,
-                ),
-            )
+                ],
+            ]
         );
     }
 
@@ -132,11 +132,11 @@ class Settings
     public function setTransient($key, $value)
     {
         return $this->set(
-            array(
-                'transient' => array(
+            [
+                'transient' => [
                     $key => $value,
-                ),
-            )
+                ],
+            ]
         );
     }
 
@@ -189,7 +189,7 @@ class Settings
      *
      * @return \Elastica\Response Response object
      */
-    public function request(array $data = array(), $method = Request::GET)
+    public function request(array $data = [], $method = Request::GET)
     {
         $path = '_cluster/settings';
 

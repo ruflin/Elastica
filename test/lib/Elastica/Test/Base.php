@@ -60,12 +60,12 @@ class Base extends \PHPUnit_Framework_TestCase
      *
      * @return Client
      */
-    protected function _getClient(array $params = array(), $callback = null, LoggerInterface $logger = null)
+    protected function _getClient(array $params = [], $callback = null, LoggerInterface $logger = null)
     {
-        $config = array(
+        $config = [
             'host' => $this->_getHost(),
             'port' => $this->_getPort(),
-        );
+        ];
 
         $config = array_merge($config, $params);
 
@@ -123,7 +123,7 @@ class Base extends \PHPUnit_Framework_TestCase
 
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_'.$name);
-        $index->create(array('index' => array('number_of_shards' => $shards, 'number_of_replicas' => 0)), $delete);
+        $index->create(['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 0]], $delete);
 
         return $index;
     }

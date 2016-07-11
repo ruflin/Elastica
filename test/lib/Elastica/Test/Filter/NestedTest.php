@@ -25,40 +25,40 @@ class NestedTest extends BaseTest
         $type = $index->getType('user');
         $mapping = new Mapping();
         $mapping->setProperties(
-            array(
-                'firstname' => array('type' => 'string', 'store' => 'yes'),
+            [
+                'firstname' => ['type' => 'string', 'store' => 'yes'],
                 // default is store => no expected
-                'lastname' => array('type' => 'string'),
-                'hobbies' => array(
+                'lastname' => ['type' => 'string'],
+                'hobbies' => [
                     'type' => 'nested',
                     'include_in_parent' => true,
-                    'properties' => array('hobby' => array('type' => 'string')),
-                ),
-            )
+                    'properties' => ['hobby' => ['type' => 'string']],
+                ],
+            ]
         );
         $type->setMapping($mapping);
 
-        $response = $type->addDocuments(array(
+        $response = $type->addDocuments([
             new Document(1,
-                array(
+                [
                     'firstname' => 'Nicolas',
                     'lastname' => 'Ruflin',
-                    'hobbies' => array(
-                        array('hobby' => 'opensource'),
-                    ),
-                )
+                    'hobbies' => [
+                        ['hobby' => 'opensource'],
+                    ],
+                ]
             ),
             new Document(2,
-                array(
+                [
                     'firstname' => 'Nicolas',
                     'lastname' => 'Ippolito',
-                    'hobbies' => array(
-                        array('hobby' => 'opensource'),
-                        array('hobby' => 'guitar'),
-                    ),
-                )
+                    'hobbies' => [
+                        ['hobby' => 'opensource'],
+                        ['hobby' => 'guitar'],
+                    ],
+                ]
             ),
-        ));
+        ]);
 
         $index->refresh();
 
@@ -71,20 +71,20 @@ class NestedTest extends BaseTest
     public function testToArray()
     {
         $filter = new Nested();
-        $this->assertEquals(array('nested' => array()), $filter->toArray());
+        $this->assertEquals(['nested' => []], $filter->toArray());
         $query = new Terms();
-        $query->setTerms('hobby', array('guitar'));
+        $query->setTerms('hobby', ['guitar']);
         $filter->setPath('hobbies');
         $filter->setQuery($query);
 
-        $expectedArray = array(
-            'nested' => array(
+        $expectedArray = [
+            'nested' => [
                 'path' => 'hobbies',
-                'query' => array('terms' => array(
-                    'hobby' => array('guitar'),
-                )),
-            ),
-        );
+                'query' => ['terms' => [
+                    'hobby' => ['guitar'],
+                ]],
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $filter->toArray());
     }
@@ -95,9 +95,9 @@ class NestedTest extends BaseTest
     public function testShouldReturnTheRightNumberOfResult()
     {
         $filter = new Nested();
-        $this->assertEquals(array('nested' => array()), $filter->toArray());
+        $this->assertEquals(['nested' => []], $filter->toArray());
         $query = new Terms();
-        $query->setTerms('hobbies.hobby', array('guitar'));
+        $query->setTerms('hobbies.hobby', ['guitar']);
         $filter->setPath('hobbies');
         $filter->setQuery($query);
 
@@ -108,9 +108,9 @@ class NestedTest extends BaseTest
         $this->assertEquals(1, $resultSet->getTotalHits());
 
         $filter = new Nested();
-        $this->assertEquals(array('nested' => array()), $filter->toArray());
+        $this->assertEquals(['nested' => []], $filter->toArray());
         $query = new Terms();
-        $query->setTerms('hobbies.hobby', array('opensource'));
+        $query->setTerms('hobbies.hobby', ['opensource']);
         $filter->setPath('hobbies');
         $filter->setQuery($query);
 

@@ -19,44 +19,44 @@ class GeoShapeProvidedTest extends BaseTest
         $type = $index->getType('test');
 
         // create mapping
-        $mapping = new Mapping($type, array(
-            'location' => array(
+        $mapping = new Mapping($type, [
+            'location' => [
                 'type' => 'geo_shape',
-            ),
-        ));
+            ],
+        ]);
         $type->setMapping($mapping);
 
         // add docs
-        $type->addDocument(new Document(1, array(
-            'location' => array(
+        $type->addDocument(new Document(1, [
+            'location' => [
                 'type' => 'envelope',
-                'coordinates' => array(
-                    array(-50.0, 50.0),
-                    array(50.0, -50.0),
-                ),
-            ),
-        )));
+                'coordinates' => [
+                    [-50.0, 50.0],
+                    [50.0, -50.0],
+                ],
+            ],
+        ]));
 
         $index->optimize();
         $index->refresh();
 
-        $envelope = array(
-            array(25.0, 75.0),
-            array(75.0, 25.0),
-        );
+        $envelope = [
+            [25.0, 75.0],
+            [75.0, 25.0],
+        ];
         $gsp = new GeoShapeProvided('location', $envelope);
 
-        $expected = array(
-            'geo_shape' => array(
-                'location' => array(
-                    'shape' => array(
+        $expected = [
+            'geo_shape' => [
+                'location' => [
+                    'shape' => [
                         'type' => GeoShapeProvided::TYPE_ENVELOPE,
                         'coordinates' => $envelope,
                         'relation' => AbstractGeoShape::RELATION_INTERSECT,
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $gsp->toArray());
 
@@ -72,20 +72,20 @@ class GeoShapeProvidedTest extends BaseTest
      */
     public function testConstructPolygon()
     {
-        $polygon = array(array(102.0, 2.0), array(103.0, 2.0), array(103.0, 3.0), array(103.0, 3.0), array(102.0, 2.0));
+        $polygon = [[102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [103.0, 3.0], [102.0, 2.0]];
         $gsp = new GeoShapeProvided('location', $polygon, GeoShapeProvided::TYPE_POLYGON);
 
-        $expected = array(
-            'geo_shape' => array(
-                'location' => array(
-                    'shape' => array(
+        $expected = [
+            'geo_shape' => [
+                'location' => [
+                    'shape' => [
                         'type' => GeoShapeProvided::TYPE_POLYGON,
                         'coordinates' => $polygon,
                         'relation' => $gsp->getRelation(),
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $gsp->toArray());
     }
@@ -95,7 +95,7 @@ class GeoShapeProvidedTest extends BaseTest
      */
     public function testSetRelation()
     {
-        $gsp = new GeoShapeProvided('location', array(array(25.0, 75.0), array(75.0, 25.0)));
+        $gsp = new GeoShapeProvided('location', [[25.0, 75.0], [75.0, 25.0]]);
         $gsp->setRelation(AbstractGeoShape::RELATION_INTERSECT);
         $this->assertEquals(AbstractGeoShape::RELATION_INTERSECT, $gsp->getRelation());
         $this->assertInstanceOf('Elastica\Query\GeoShapeProvided', $gsp->setRelation(AbstractGeoShape::RELATION_INTERSECT));

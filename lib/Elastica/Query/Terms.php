@@ -32,7 +32,7 @@ class Terms extends AbstractQuery
      * @param string $key   OPTIONAL Terms key
      * @param array  $terms OPTIONAL Terms list
      */
-    public function __construct($key = '', array $terms = array())
+    public function __construct($key = '', array $terms = [])
     {
         $this->setTerms($key, $terms);
     }

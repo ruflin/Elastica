@@ -14,25 +14,25 @@ class RangeTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('age' => 16, 'height' => 140)),
-            new Document(2, array('age' => 21, 'height' => 155)),
-            new Document(3, array('age' => 33, 'height' => 160)),
-            new Document(4, array('age' => 68, 'height' => 160)),
-        ));
+        $type->addDocuments([
+            new Document(1, ['age' => 16, 'height' => 140]),
+            new Document(2, ['age' => 21, 'height' => 155]),
+            new Document(3, ['age' => 33, 'height' => 160]),
+            new Document(4, ['age' => 68, 'height' => 160]),
+        ]);
 
         $index->optimize();
         $index->refresh();
 
-        $query = new Range('age', array('from' => 10, 'to' => 20));
+        $query = new Range('age', ['from' => 10, 'to' => 20]);
         $result = $type->search($query)->count();
         $this->assertEquals(1, $result);
 
         $query = new Range();
-        $query->addField('height', array('gte' => 160));
+        $query->addField('height', ['gte' => 160]);
 
         $result = $type->search($query)->count();
         $this->assertEquals(2, $result);
@@ -45,14 +45,14 @@ class RangeTest extends BaseTest
     {
         $range = new Range();
 
-        $field = array('from' => 20, 'to' => 40);
+        $field = ['from' => 20, 'to' => 40];
         $range->addField('age', $field);
 
-        $expectedArray = array(
-            'range' => array(
+        $expectedArray = [
+            'range' => [
                 'age' => $field,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $range->toArray());
     }
@@ -62,17 +62,17 @@ class RangeTest extends BaseTest
      */
     public function testConstruct()
     {
-        $ranges = array('from' => 20, 'to' => 40);
+        $ranges = ['from' => 20, 'to' => 40];
         $range = new Range(
             'age',
             $ranges
         );
 
-        $expectedArray = array(
-            'range' => array(
+        $expectedArray = [
+            'range' => [
                 'age' => $ranges,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $range->toArray());
     }

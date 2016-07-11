@@ -15,7 +15,7 @@ class FuzzyTest extends BaseTest
         $fuzzy = new Fuzzy();
 
         $this->hideDeprecated();
-        $fuzzy->addField('user', array('value' => 'Nicolas', 'boost' => 1.0));
+        $fuzzy->addField('user', ['value' => 'Nicolas', 'boost' => 1.0]);
         $this->showDeprecated();
 
         $sameFuzzy = new Fuzzy();
@@ -35,36 +35,36 @@ class FuzzyTest extends BaseTest
         $fuzzy->setField('user', 'Nicolas');
         $fuzzy->setFieldOption('boost', 1.0);
 
-        $expectedArray = array(
-            'fuzzy' => array(
-                'user' => array(
+        $expectedArray = [
+            'fuzzy' => [
+                'user' => [
                     'value' => 'Nicolas',
                     'boost' => 1.0,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
         $this->assertEquals($expectedArray, $fuzzy->toArray(), 'Deprecated method failed');
 
         $fuzzy = new Fuzzy('user', 'Nicolas');
-        $expectedArray = array(
-            'fuzzy' => array(
-                'user' => array(
+        $expectedArray = [
+            'fuzzy' => [
+                'user' => [
                     'value' => 'Nicolas',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
         $this->assertEquals($expectedArray, $fuzzy->toArray());
 
         $fuzzy = new Fuzzy();
         $fuzzy->setField('user', 'Nicolas')->setFieldOption('boost', 1.0);
-        $expectedArray = array(
-            'fuzzy' => array(
-                'user' => array(
+        $expectedArray = [
+            'fuzzy' => [
+                'user' => [
                     'value' => 'Nicolas',
                     'boost' => 1.0,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
         $this->assertEquals($expectedArray, $fuzzy->toArray());
     }
 
@@ -75,15 +75,15 @@ class FuzzyTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'Baden')),
-            new Document(4, array('name' => 'Baden Baden')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'Baden']),
+            new Document(4, ['name' => 'Baden Baden']),
+        ]);
 
         $index->refresh();
 
@@ -106,12 +106,12 @@ class FuzzyTest extends BaseTest
         $query = new Fuzzy();
 
         $this->hideDeprecated();
-        $query->addField('name', array(array('value' => 'Baden')));
+        $query->addField('name', [['value' => 'Baden']]);
         $this->showDeprecated();
 
         $this->setExpectedException('Elastica\Exception\InvalidException');
         $query = new Fuzzy();
-        $query->setField('name', array());
+        $query->setField('name', []);
 
         $this->setExpectedException('Elastica\Exception\InvalidException');
         $query = new Fuzzy();
@@ -126,7 +126,7 @@ class FuzzyTest extends BaseTest
     {
         $query = new Fuzzy();
         $errorCollector = $this->startCollectErrors();
-        $query->addField('user', array('value' => 'Nicolas', 'boost' => 1.0));
+        $query->addField('user', ['value' => 'Nicolas', 'boost' => 1.0]);
         $this->finishCollectErrors();
 
         $errorCollector->assertOnlyOneDeprecatedError('Query\Fuzzy::addField is deprecated. Use setField and setFieldOption instead. This method will be removed in further Elastica releases');

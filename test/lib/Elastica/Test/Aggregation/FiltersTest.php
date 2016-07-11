@@ -14,12 +14,12 @@ class FiltersTest extends BaseAggregationTest
     {
         $index = $this->_createIndex('filter');
 
-        $index->getType('test')->addDocuments(array(
-            new Document(1, array('price' => 5, 'color' => 'blue')),
-            new Document(2, array('price' => 8, 'color' => 'blue')),
-            new Document(3, array('price' => 1, 'color' => 'red')),
-            new Document(4, array('price' => 3, 'color' => 'green')),
-        ));
+        $index->getType('test')->addDocuments([
+            new Document(1, ['price' => 5, 'color' => 'blue']),
+            new Document(2, ['price' => 8, 'color' => 'blue']),
+            new Document(3, ['price' => 1, 'color' => 'red']),
+            new Document(4, ['price' => 3, 'color' => 'green']),
+        ]);
 
         $index->refresh();
 
@@ -52,9 +52,9 @@ class FiltersTest extends BaseAggregationTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Aggregation\Filters\addFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -63,34 +63,34 @@ class FiltersTest extends BaseAggregationTest
      */
     public function testToArrayUsingNamedFilters()
     {
-        $expected = array(
-            'filters' => array(
-                'filters' => array(
-                    '' => array(
-                        'term' => array('color' => ''),
-                    ),
-                    '0' => array(
-                        'term' => array('color' => '0'),
-                    ),
-                    'blue' => array(
-                        'term' => array('color' => 'blue'),
-                    ),
-                    'red' => array(
-                        'term' => array('color' => 'red'),
-                    ),
-                ),
-            ),
-            'aggs' => array(
-                'avg_price' => array('avg' => array('field' => 'price')),
-            ),
-        );
+        $expected = [
+            'filters' => [
+                'filters' => [
+                    '' => [
+                        'term' => ['color' => ''],
+                    ],
+                    '0' => [
+                        'term' => ['color' => '0'],
+                    ],
+                    'blue' => [
+                        'term' => ['color' => 'blue'],
+                    ],
+                    'red' => [
+                        'term' => ['color' => 'red'],
+                    ],
+                ],
+            ],
+            'aggs' => [
+                'avg_price' => ['avg' => ['field' => 'price']],
+            ],
+        ];
 
         $agg = new Filters('by_color');
 
-        $agg->addFilter(new Query\Term(array('color' => '')), '');
-        $agg->addFilter(new Query\Term(array('color' => '0')), '0');
-        $agg->addFilter(new Query\Term(array('color' => 'blue')), 'blue');
-        $agg->addFilter(new Query\Term(array('color' => 'red')), 'red');
+        $agg->addFilter(new Query\Term(['color' => '']), '');
+        $agg->addFilter(new Query\Term(['color' => '0']), '0');
+        $agg->addFilter(new Query\Term(['color' => 'blue']), 'blue');
+        $agg->addFilter(new Query\Term(['color' => 'red']), 'red');
 
         $avg = new Avg('avg_price');
         $avg->setField('price');
@@ -104,35 +104,35 @@ class FiltersTest extends BaseAggregationTest
      */
     public function testToArrayUsingNamedFiltersWithLegacyFilters()
     {
-        $expected = array(
-            'filters' => array(
-                'filters' => array(
-                    '' => array(
-                        'term' => array('color' => ''),
-                    ),
-                    '0' => array(
-                        'term' => array('color' => '0'),
-                    ),
-                    'blue' => array(
-                        'term' => array('color' => 'blue'),
-                    ),
-                    'red' => array(
-                        'term' => array('color' => 'red'),
-                    ),
-                ),
-            ),
-            'aggs' => array(
-                'avg_price' => array('avg' => array('field' => 'price')),
-            ),
-        );
+        $expected = [
+            'filters' => [
+                'filters' => [
+                    '' => [
+                        'term' => ['color' => ''],
+                    ],
+                    '0' => [
+                        'term' => ['color' => '0'],
+                    ],
+                    'blue' => [
+                        'term' => ['color' => 'blue'],
+                    ],
+                    'red' => [
+                        'term' => ['color' => 'red'],
+                    ],
+                ],
+            ],
+            'aggs' => [
+                'avg_price' => ['avg' => ['field' => 'price']],
+            ],
+        ];
 
         $agg = new Filters('by_color');
 
         $this->hideDeprecated();
-        $agg->addFilter(new Term(array('color' => '')), '');
-        $agg->addFilter(new Term(array('color' => '0')), '0');
-        $agg->addFilter(new Term(array('color' => 'blue')), 'blue');
-        $agg->addFilter(new Term(array('color' => 'red')), 'red');
+        $agg->addFilter(new Term(['color' => '']), '');
+        $agg->addFilter(new Term(['color' => '0']), '0');
+        $agg->addFilter(new Term(['color' => 'blue']), 'blue');
+        $agg->addFilter(new Term(['color' => 'red']), 'red');
         $this->showDeprecated();
 
         $avg = new Avg('avg_price');
@@ -151,7 +151,7 @@ class FiltersTest extends BaseAggregationTest
     {
         $agg = new Filters('by_color');
         $this->hideDeprecated();
-        $agg->addFilter(new Query\Term(array('color' => '0')), 0);
+        $agg->addFilter(new Query\Term(['color' => '0']), 0);
         $this->showDeprecated();
     }
 
@@ -164,7 +164,7 @@ class FiltersTest extends BaseAggregationTest
     {
         $agg = new Filters('by_color');
         $this->hideDeprecated();
-        $agg->addFilter(new Term(array('color' => '0')), 0);
+        $agg->addFilter(new Term(['color' => '0']), 0);
         $this->showDeprecated();
     }
 
@@ -176,8 +176,8 @@ class FiltersTest extends BaseAggregationTest
     public function testMixNamedAndAnonymousFilters()
     {
         $agg = new Filters('by_color');
-        $agg->addFilter(new Query\Term(array('color' => '0')), '0');
-        $agg->addFilter(new Query\Term(array('color' => '0')));
+        $agg->addFilter(new Query\Term(['color' => '0']), '0');
+        $agg->addFilter(new Query\Term(['color' => '0']));
     }
 
     /**
@@ -189,8 +189,8 @@ class FiltersTest extends BaseAggregationTest
     {
         $agg = new Filters('by_color');
         $this->hideDeprecated();
-        $agg->addFilter(new Term(array('color' => '0')), '0');
-        $agg->addFilter(new Term(array('color' => '0')));
+        $agg->addFilter(new Term(['color' => '0']), '0');
+        $agg->addFilter(new Term(['color' => '0']));
         $this->showDeprecated();
     }
 
@@ -203,8 +203,8 @@ class FiltersTest extends BaseAggregationTest
     {
         $agg = new Filters('by_color');
 
-        $agg->addFilter(new Query\Term(array('color' => '0')));
-        $agg->addFilter(new Query\Term(array('color' => '0')), '0');
+        $agg->addFilter(new Query\Term(['color' => '0']));
+        $agg->addFilter(new Query\Term(['color' => '0']), '0');
     }
 
     /**
@@ -217,8 +217,8 @@ class FiltersTest extends BaseAggregationTest
         $agg = new Filters('by_color');
 
         $this->hideDeprecated();
-        $agg->addFilter(new Term(array('color' => '0')));
-        $agg->addFilter(new Term(array('color' => '0')), '0');
+        $agg->addFilter(new Term(['color' => '0']));
+        $agg->addFilter(new Term(['color' => '0']), '0');
         $this->showDeprecated();
     }
 
@@ -227,26 +227,26 @@ class FiltersTest extends BaseAggregationTest
      */
     public function testToArrayUsingAnonymousFilters()
     {
-        $expected = array(
-            'filters' => array(
-                'filters' => array(
-                    array(
-                        'term' => array('color' => 'blue'),
-                    ),
-                    array(
-                        'term' => array('color' => 'red'),
-                    ),
-                ),
-            ),
-            'aggs' => array(
-                'avg_price' => array('avg' => array('field' => 'price')),
-            ),
-        );
+        $expected = [
+            'filters' => [
+                'filters' => [
+                    [
+                        'term' => ['color' => 'blue'],
+                    ],
+                    [
+                        'term' => ['color' => 'red'],
+                    ],
+                ],
+            ],
+            'aggs' => [
+                'avg_price' => ['avg' => ['field' => 'price']],
+            ],
+        ];
 
         $agg = new Filters('by_color');
 
-        $agg->addFilter(new Query\Term(array('color' => 'blue')));
-        $agg->addFilter(new Query\Term(array('color' => 'red')));
+        $agg->addFilter(new Query\Term(['color' => 'blue']));
+        $agg->addFilter(new Query\Term(['color' => 'red']));
 
         $avg = new Avg('avg_price');
         $avg->setField('price');
@@ -260,27 +260,27 @@ class FiltersTest extends BaseAggregationTest
      */
     public function testToArrayUsingAnonymousFiltersWithLegacyFilters()
     {
-        $expected = array(
-            'filters' => array(
-                'filters' => array(
-                    array(
-                        'term' => array('color' => 'blue'),
-                    ),
-                    array(
-                        'term' => array('color' => 'red'),
-                    ),
-                ),
-            ),
-            'aggs' => array(
-                'avg_price' => array('avg' => array('field' => 'price')),
-            ),
-        );
+        $expected = [
+            'filters' => [
+                'filters' => [
+                    [
+                        'term' => ['color' => 'blue'],
+                    ],
+                    [
+                        'term' => ['color' => 'red'],
+                    ],
+                ],
+            ],
+            'aggs' => [
+                'avg_price' => ['avg' => ['field' => 'price']],
+            ],
+        ];
 
         $agg = new Filters('by_color');
 
         $this->hideDeprecated();
-        $agg->addFilter(new Term(array('color' => 'blue')));
-        $agg->addFilter(new Term(array('color' => 'red')));
+        $agg->addFilter(new Term(['color' => 'blue']));
+        $agg->addFilter(new Term(['color' => 'red']));
         $this->showDeprecated();
 
         $avg = new Avg('avg_price');
@@ -296,8 +296,8 @@ class FiltersTest extends BaseAggregationTest
     public function testFilterAggregation()
     {
         $agg = new Filters('by_color');
-        $agg->addFilter(new Query\Term(array('color' => 'blue')), 'blue');
-        $agg->addFilter(new Query\Term(array('color' => 'red')), 'red');
+        $agg->addFilter(new Query\Term(['color' => 'blue']), 'blue');
+        $agg->addFilter(new Query\Term(['color' => 'red']), 'red');
 
         $avg = new Avg('avg_price');
         $avg->setField('price');
@@ -325,8 +325,8 @@ class FiltersTest extends BaseAggregationTest
     {
         $agg = new Filters('by_color');
         $this->hideDeprecated();
-        $agg->addFilter(new Term(array('color' => 'blue')), 'blue');
-        $agg->addFilter(new Term(array('color' => 'red')), 'red');
+        $agg->addFilter(new Term(['color' => 'blue']), 'blue');
+        $agg->addFilter(new Term(['color' => 'red']), 'red');
         $this->showDeprecated();
 
         $avg = new Avg('avg_price');

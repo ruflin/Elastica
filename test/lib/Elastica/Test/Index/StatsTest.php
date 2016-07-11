@@ -14,7 +14,7 @@ class StatsTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create(array(), true);
+        $index->create([], true);
         $stats = $index->getStats();
         $this->assertInstanceOf('Elastica\Index\Stats', $stats);
 

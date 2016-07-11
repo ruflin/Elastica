@@ -20,7 +20,7 @@ class Terms extends AbstractFilter
      *
      * @var array Terms
      */
-    protected $_terms = array();
+    protected $_terms = [];
 
     /**
      * Terms key.
@@ -35,7 +35,7 @@ class Terms extends AbstractFilter
      * @param string $key   Terms key
      * @param array  $terms Terms values
      */
-    public function __construct($key = '', array $terms = array())
+    public function __construct($key = '', array $terms = [])
     {
         $this->setTerms($key, $terms);
     }
@@ -67,17 +67,17 @@ class Terms extends AbstractFilter
      *
      * @return $this
      */
-    public function setLookup($key, $type, $id, $path, $options = array())
+    public function setLookup($key, $type, $id, $path, $options = [])
     {
         $this->_key = $key;
         if ($type instanceof \Elastica\Type) {
             $type = $type->getName();
         }
-        $this->_terms = array(
+        $this->_terms = [
             'type' => $type,
             'id' => $id,
             'path' => $path,
-        );
+        ];
 
         $index = $options;
         if (is_array($options)) {
@@ -128,7 +128,7 @@ class Terms extends AbstractFilter
         }
         $this->_params[$this->_key] = $this->_terms;
 
-        return array('terms' => $this->_params);
+        return ['terms' => $this->_params];
     }
 
     /**

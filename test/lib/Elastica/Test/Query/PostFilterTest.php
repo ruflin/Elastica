@@ -12,12 +12,12 @@ class PostFilterTest extends BaseTest
     protected function _getTestIndex()
     {
         $index = $this->_createIndex();
-        $docs = array(
-            new Document(1, array('color' => 'green', 'make' => 'ford')),
-            new Document(2, array('color' => 'blue', 'make' => 'volvo')),
-            new Document(3, array('color' => 'red', 'make' => 'ford')),
-            new Document(4, array('color' => 'green', 'make' => 'renault')),
-        );
+        $docs = [
+            new Document(1, ['color' => 'green', 'make' => 'ford']),
+            new Document(2, ['color' => 'blue', 'make' => 'volvo']),
+            new Document(3, ['color' => 'red', 'make' => 'ford']),
+            new Document(4, ['color' => 'green', 'make' => 'renault']),
+        ];
         $index->getType('test')->addDocuments($docs);
         $index->refresh();
 
@@ -32,14 +32,14 @@ class PostFilterTest extends BaseTest
         $errorsCollector = $this->startCollectErrors();
 
         $query = new Query();
-        $query->setPostFilter(array('a'));
+        $query->setPostFilter(['a']);
 
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -56,9 +56,9 @@ class PostFilterTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -79,13 +79,13 @@ class PostFilterTest extends BaseTest
     {
         $query = new Query();
 
-        $post_filter = new Query\Term(array('color' => 'green'));
+        $post_filter = new Query\Term(['color' => 'green']);
         $query->setPostFilter($post_filter);
 
         $data = $query->toArray();
 
         $this->assertArrayHasKey('post_filter', $data);
-        $this->assertEquals(array('term' => array('color' => 'green')), $data['post_filter']);
+        $this->assertEquals(['term' => ['color' => 'green']], $data['post_filter']);
     }
 
     /**
@@ -96,14 +96,14 @@ class PostFilterTest extends BaseTest
         $query = new Query();
 
         $this->hideDeprecated();
-        $post_filter = new Term(array('color' => 'green'));
+        $post_filter = new Term(['color' => 'green']);
         $query->setPostFilter($post_filter);
         $this->showDeprecated();
 
         $data = $query->toArray();
 
         $this->assertArrayHasKey('post_filter', $data);
-        $this->assertEquals(array('term' => array('color' => 'green')), $data['post_filter']);
+        $this->assertEquals(['term' => ['color' => 'green']], $data['post_filter']);
     }
 
     /**

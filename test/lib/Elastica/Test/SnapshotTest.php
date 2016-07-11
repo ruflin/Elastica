@@ -31,11 +31,11 @@ class SnapshotTest extends Base
         $this->_snapshot = new Snapshot($this->_getClient());
 
         $this->_index = $this->_createIndex();
-        $this->_docs = array(
-            new Document('1', array('city' => 'San Diego')),
-            new Document('2', array('city' => 'San Luis Obispo')),
-            new Document('3', array('city' => 'San Francisco')),
-        );
+        $this->_docs = [
+            new Document('1', ['city' => 'San Diego']),
+            new Document('2', ['city' => 'San Luis Obispo']),
+            new Document('3', ['city' => 'San Francisco']),
+        ];
         $this->_index->getType('test')->addDocuments($this->_docs);
         $this->_index->refresh();
     }
@@ -48,7 +48,7 @@ class SnapshotTest extends Base
         $repositoryName = 'testrepo';
         $location = $this->_snapshotPath.'backup1';
 
-        $response = $this->_snapshot->registerRepository($repositoryName, 'fs', array('location' => $location));
+        $response = $this->_snapshot->registerRepository($repositoryName, 'fs', ['location' => $location]);
         $this->assertTrue($response->isOk());
 
         $response = $this->_snapshot->getRepository($repositoryName);
@@ -68,12 +68,12 @@ class SnapshotTest extends Base
         $location = $this->_snapshotPath.'backup2';
 
         // register the repository
-        $response = $this->_snapshot->registerRepository($repositoryName, 'fs', array('location' => $location));
+        $response = $this->_snapshot->registerRepository($repositoryName, 'fs', ['location' => $location]);
         $this->assertTrue($response->isOk());
 
         // create a snapshot of our test index
         $snapshotName = 'test_snapshot_1';
-        $response = $this->_snapshot->createSnapshot($repositoryName, $snapshotName, array('indices' => $this->_index->getName()), true);
+        $response = $this->_snapshot->createSnapshot($repositoryName, $snapshotName, ['indices' => $this->_index->getName()], true);
 
         // ensure that the snapshot was created properly
         $this->assertTrue($response->isOk());
@@ -91,7 +91,7 @@ class SnapshotTest extends Base
         $this->_index->delete();
 
         // restore the index from our snapshot
-        $response = $this->_snapshot->restoreSnapshot($repositoryName, $snapshotName, array(), true);
+        $response = $this->_snapshot->restoreSnapshot($repositoryName, $snapshotName, [], true);
         $this->assertTrue($response->isOk());
 
         $this->_index->refresh();

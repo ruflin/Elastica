@@ -55,8 +55,8 @@ class Type extends AbstractFilter
      */
     public function toArray()
     {
-        return array(
-            'type' => array('value' => $this->_type),
-        );
+        return [
+            'type' => ['value' => $this->_type],
+        ];
     }
 }

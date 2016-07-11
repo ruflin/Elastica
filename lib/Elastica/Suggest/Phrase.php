@@ -89,10 +89,10 @@ class Phrase extends AbstractSuggest
      */
     public function setHighlight($preTag, $postTag)
     {
-        return $this->setParam('highlight', array(
+        return $this->setParam('highlight', [
             'pre_tag' => $preTag,
             'post_tag' => $postTag,
-        ));
+        ]);
     }
 
     /**
@@ -102,9 +102,9 @@ class Phrase extends AbstractSuggest
      */
     public function setStupidBackoffSmoothing($discount = 0.4)
     {
-        return $this->setSmoothingModel('stupid_backoff', array(
+        return $this->setSmoothingModel('stupid_backoff', [
             'discount' => $discount,
-        ));
+        ]);
     }
 
     /**
@@ -114,9 +114,9 @@ class Phrase extends AbstractSuggest
      */
     public function setLaplaceSmoothing($alpha = 0.5)
     {
-        return $this->setSmoothingModel('laplace', array(
+        return $this->setSmoothingModel('laplace', [
             'alpha' => $alpha,
-        ));
+        ]);
     }
 
     /**
@@ -128,11 +128,11 @@ class Phrase extends AbstractSuggest
      */
     public function setLinearInterpolationSmoothing($trigramLambda, $bigramLambda, $unigramLambda)
     {
-        return $this->setSmoothingModel('linear_interpolation', array(
+        return $this->setSmoothingModel('linear_interpolation', [
             'trigram_lambda' => $trigramLambda,
             'bigram_lambda' => $bigramLambda,
             'unigram_lambda' => $unigramLambda,
-        ));
+        ]);
     }
 
     /**
@@ -143,9 +143,9 @@ class Phrase extends AbstractSuggest
      */
     public function setSmoothingModel($model, array $params)
     {
-        return $this->setParam('smoothing', array(
+        return $this->setParam('smoothing', [
             $model => $params,
-        ));
+        ]);
     }
 
     /**

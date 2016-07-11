@@ -14,12 +14,12 @@ class MultiMatchTest extends BaseTest
     private $index;
     private $multiMatch;
 
-    private static $data = array(
-        array('id' => 1, 'name' => 'Rodolfo', 'last_name' => 'Moraes',   'full_name' => 'Rodolfo Moraes'),
-        array('id' => 2, 'name' => 'Tristan', 'last_name' => 'Maindron', 'full_name' => 'Tristan Maindron'),
-        array('id' => 3, 'name' => 'Monique', 'last_name' => 'Maindron', 'full_name' => 'Monique Maindron'),
-        array('id' => 4, 'name' => 'John',    'last_name' => 'not Doe',  'full_name' => 'John not Doe'),
-    );
+    private static $data = [
+        ['id' => 1, 'name' => 'Rodolfo', 'last_name' => 'Moraes',   'full_name' => 'Rodolfo Moraes'],
+        ['id' => 2, 'name' => 'Tristan', 'last_name' => 'Maindron', 'full_name' => 'Tristan Maindron'],
+        ['id' => 3, 'name' => 'Monique', 'last_name' => 'Maindron', 'full_name' => 'Monique Maindron'],
+        ['id' => 4, 'name' => 'John',    'last_name' => 'not Doe',  'full_name' => 'John not Doe'],
+    ];
 
     /**
      * @group functional
@@ -28,7 +28,7 @@ class MultiMatchTest extends BaseTest
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Tristan Maindron');
-        $multiMatch->setFields(array('full_name', 'name'));
+        $multiMatch->setFields(['full_name', 'name']);
         $multiMatch->setMinimumShouldMatch('2<100%');
         $resultSet = $this->_getResults($multiMatch);
 
@@ -42,7 +42,7 @@ class MultiMatchTest extends BaseTest
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Monique Maindron');
-        $multiMatch->setFields(array('full_name', 'name'));
+        $multiMatch->setFields(['full_name', 'name']);
         $multiMatch->setOperator(MultiMatch::OPERATOR_AND);
         $resultSet = $this->_getResults($multiMatch);
 
@@ -56,7 +56,7 @@ class MultiMatchTest extends BaseTest
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Trist');
-        $multiMatch->setFields(array('full_name', 'name'));
+        $multiMatch->setFields(['full_name', 'name']);
         $multiMatch->setType(MultiMatch::TYPE_PHRASE_PREFIX);
         $resultSet = $this->_getResults($multiMatch);
 
@@ -70,7 +70,7 @@ class MultiMatchTest extends BaseTest
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Tritsan'); // Misspell on purpose
-        $multiMatch->setFields(array('full_name', 'name'));
+        $multiMatch->setFields(['full_name', 'name']);
         $multiMatch->setFuzziness(2);
         $resultSet = $this->_getResults($multiMatch);
 
@@ -78,7 +78,7 @@ class MultiMatchTest extends BaseTest
 
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Tritsan'); // Misspell on purpose
-        $multiMatch->setFields(array('full_name', 'name'));
+        $multiMatch->setFields(['full_name', 'name']);
         $multiMatch->setFuzziness(0);
         $resultSet = $this->_getResults($multiMatch);
 
@@ -86,7 +86,7 @@ class MultiMatchTest extends BaseTest
 
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Tritsan'); // Misspell on purpose
-        $multiMatch->setFields(array('full_name', 'name'));
+        $multiMatch->setFields(['full_name', 'name']);
         $multiMatch->setFuzziness(MultiMatch::FUZZINESS_AUTO);
         $resultSet = $this->_getResults($multiMatch);
 
@@ -102,7 +102,7 @@ class MultiMatchTest extends BaseTest
         // on the first 6 letters.
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Tritsan'); // Misspell on purpose
-        $multiMatch->setFields(array('full_name', 'name'));
+        $multiMatch->setFields(['full_name', 'name']);
         $multiMatch->setFuzziness(2);
         $multiMatch->setPrefixLength(6);
         $resultSet = $this->_getResults($multiMatch);
@@ -120,7 +120,7 @@ class MultiMatchTest extends BaseTest
         // If MaxExpansion was set to 2, we could hit "Maindron" too.
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('M');
-        $multiMatch->setFields(array('name'));
+        $multiMatch->setFields(['name']);
         $multiMatch->setType(MultiMatch::TYPE_PHRASE_PREFIX);
         $multiMatch->setPrefixLength(0);
         $multiMatch->setMaxExpansions(1);
@@ -136,7 +136,7 @@ class MultiMatchTest extends BaseTest
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('not'); // This is a stopword.
-        $multiMatch->setFields(array('full_name', 'last_name'));
+        $multiMatch->setFields(['full_name', 'last_name']);
         $multiMatch->setZeroTermsQuery(MultiMatch::ZERO_TERM_NONE);
         $multiMatch->setAnalyzer('stops');
         $resultSet = $this->_getResults($multiMatch);
@@ -156,14 +156,14 @@ class MultiMatchTest extends BaseTest
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Rodolfo');
-        $multiMatch->setFields(array('name', 'last_name'));
+        $multiMatch->setFields(['name', 'last_name']);
         $resultSet = $this->_getResults($multiMatch);
 
         $this->assertEquals(1, $resultSet->count());
 
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery('Moraes');
-        $multiMatch->setFields(array('name', 'last_name'));
+        $multiMatch->setFields(['name', 'last_name']);
         $resultSet = $this->_getResults($multiMatch);
 
         $this->assertEquals(1, $resultSet->count());
@@ -185,28 +185,28 @@ class MultiMatchTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
 
-        $index->create(array(
-            'analysis' => array(
-                'analyzer' => array(
-                    'noStops' => array(
+        $index->create([
+            'analysis' => [
+                'analyzer' => [
+                    'noStops' => [
                         'type' => 'standard',
                         'stopwords' => '_none_',
-                    ),
-                    'stops' => array(
+                    ],
+                    'stops' => [
                         'type' => 'standard',
-                        'stopwords' => array('not'),
-                    ),
-                ),
-            ),
-        ), true);
+                        'stopwords' => ['not'],
+                    ],
+                ],
+            ],
+        ], true);
 
         $type = $index->getType('test');
 
-        $mapping = new Mapping($type, array(
-            'name' => array('type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'),
-            'last_name' => array('type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'),
-            'full_name' => array('type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'),
-        ));
+        $mapping = new Mapping($type, [
+            'name' => ['type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'],
+            'last_name' => ['type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'],
+            'full_name' => ['type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'],
+        ]);
 
         $type->setMapping($mapping);
 

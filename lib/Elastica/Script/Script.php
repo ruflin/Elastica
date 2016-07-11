@@ -143,9 +143,9 @@ class Script extends AbstractScript
      */
     public function toArray()
     {
-        $array = array(
+        $array = [
             'script' => $this->_script,
-        );
+        ];
 
         if (!empty($this->_params)) {
             $array['params'] = $this->_convertArrayable($this->_params);

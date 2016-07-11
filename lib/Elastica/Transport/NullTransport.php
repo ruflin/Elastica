@@ -25,21 +25,21 @@ class NullTransport extends AbstractTransport
      */
     public function exec(Request $request, array $params)
     {
-        $response = array(
+        $response = [
             'took' => 0,
             'timed_out' => false,
-            '_shards' => array(
+            '_shards' => [
                 'total' => 0,
                 'successful' => 0,
                 'failed' => 0,
-            ),
-            'hits' => array(
+            ],
+            'hits' => [
                 'total' => 0,
                 'max_score' => null,
-                'hits' => array(),
-            ),
+                'hits' => [],
+            ],
             'params' => $params,
-        );
+        ];
 
         return new Response(JSON::stringify($response));
     }

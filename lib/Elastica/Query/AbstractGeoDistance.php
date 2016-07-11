@@ -159,7 +159,7 @@ abstract class AbstractGeoDistance extends AbstractQuery
     protected function _getLocationData()
     {
         if ($this->_locationType === self::LOCATION_TYPE_LATLON) { // Latitude/longitude
-            $location = array();
+            $location = [];
 
             if (isset($this->_latitude)) { // Latitude
                 $location['lat'] = $this->_latitude;

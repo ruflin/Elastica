@@ -12,7 +12,7 @@ use Elastica\QueryBuilder\Version;
  */
 class Version100 extends Version
 {
-    protected $queries = array(
+    protected $queries = [
         'match',
         'multi_match',
         'bool',
@@ -57,9 +57,9 @@ class Version100 extends Version
         // 'custom_filters_score'
         // 'custom_score'
         // 'custom_boost_factor'
-    );
+    ];
 
-    protected $filters = array(
+    protected $filters = [
         'bool_and', // original: bool
         'bool',
         'exists',
@@ -91,9 +91,9 @@ class Version100 extends Version
 
         // removed in 1.0.0
         // 'numeric_range'
-    );
+    ];
 
-    protected $aggregations = array(
+    protected $aggregations = [
         'min',
         'max',
         'sum',
@@ -113,11 +113,11 @@ class Version100 extends Version
         'date_histogram',
         'geo_distance',
         'geohash_grid',
-    );
+    ];
 
-    protected $suggesters = array(
+    protected $suggesters = [
         'term',
         'phrase',
         'completion',
-    );
+    ];
 }

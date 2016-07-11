@@ -47,7 +47,7 @@ class IpRange extends AbstractAggregation
         if (is_null($fromValue) && is_null($toValue)) {
             throw new InvalidException('Either fromValue or toValue must be set. Both cannot be null.');
         }
-        $range = array();
+        $range = [];
         if (!is_null($fromValue)) {
             $range['from'] = $fromValue;
         }
@@ -67,6 +67,6 @@ class IpRange extends AbstractAggregation
      */
     public function addMaskRange($mask)
     {
-        return $this->addParam('ranges', array('mask' => $mask));
+        return $this->addParam('ranges', ['mask' => $mask]);
     }
 }

@@ -22,7 +22,7 @@ class InfoTest extends BaseTest
         $this->assertNull($info->get('os', 'mem', 'total'));
 
         // Load os infos
-        $info = new NodeInfo($node, array('os'));
+        $info = new NodeInfo($node, ['os']);
 
         $this->assertNotNull($info->get('os', 'name'));
         $this->assertNotNull($info->get('process', 'id'));
@@ -61,7 +61,7 @@ class InfoTest extends BaseTest
         $client = $this->_getClient();
         $nodes = $client->getCluster()->getNodes();
 
-        $ids = array();
+        $ids = [];
 
         foreach ($nodes as $node) {
             $id = $node->getInfo()->getId();

@@ -8,7 +8,7 @@ namespace Elastica\Test;
  */
 class ErrorsCollector
 {
-    private $errors = array();
+    private $errors = [];
 
     /**
      * @var \PHPUnit_Framework_TestCase

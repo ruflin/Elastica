@@ -61,9 +61,9 @@ class ScanAndScrollTest extends BaseTest
         $index = $this->_createIndex('', true, 2);
         $index->refresh();
 
-        $docs = array();
+        $docs = [];
         for ($x = 1; $x <= 12; ++$x) {
-            $docs[] = new Document($x, array('id' => $x, 'key' => 'value'));
+            $docs[] = new Document($x, ['id' => $x, 'key' => 'value']);
         }
 
         $type = $index->getType('scanAndScrollTest');

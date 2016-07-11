@@ -20,23 +20,23 @@ class MoreLikeThisTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = new Index($client, 'test');
-        $index->create(array(), true);
+        $index->create([], true);
         $index->getSettings()->setNumberOfReplicas(0);
         //$index->getSettings()->setNumberOfShards(1);
 
         $type = new Type($index, 'helloworldmlt');
-        $mapping = new Mapping($type, array(
-            'email' => array('store' => 'yes', 'type' => 'string', 'index' => 'analyzed'),
-            'content' => array('store' => 'yes', 'type' => 'string',  'index' => 'analyzed'),
-        ));
+        $mapping = new Mapping($type, [
+            'email' => ['store' => 'yes', 'type' => 'string', 'index' => 'analyzed'],
+            'content' => ['store' => 'yes', 'type' => 'string',  'index' => 'analyzed'],
+        ]);
 
-        $mapping->setSource(array('enabled' => false));
+        $mapping->setSource(['enabled' => false]);
         $type->setMapping($mapping);
 
-        $doc = new Document(1000, array('email' => 'testemail@gmail.com', 'content' => 'This is a sample post. Hello World Fuzzy Like This!'));
+        $doc = new Document(1000, ['email' => 'testemail@gmail.com', 'content' => 'This is a sample post. Hello World Fuzzy Like This!']);
         $type->addDocument($doc);
 
-        $doc = new Document(1001, array('email' => 'nospam@gmail.com', 'content' => 'This is a fake nospam email address for gmail'));
+        $doc = new Document(1001, ['email' => 'nospam@gmail.com', 'content' => 'This is a fake nospam email address for gmail']);
         $type->addDocument($doc);
 
         // Refresh index
@@ -44,7 +44,7 @@ class MoreLikeThisTest extends BaseTest
 
         $mltQuery = new MoreLikeThis();
         $mltQuery->setLike('fake gmail sample');
-        $mltQuery->setFields(array('email', 'content'));
+        $mltQuery->setFields(['email', 'content']);
         $mltQuery->setMaxQueryTerms(3);
         $mltQuery->setMinDocFrequency(1);
         $mltQuery->setMinTermFrequency(1);
@@ -62,21 +62,21 @@ class MoreLikeThisTest extends BaseTest
      */
     public function testSearchByDocument()
     {
-        $client = $this->_getClient(array('persistent' => false));
+        $client = $this->_getClient(['persistent' => false]);
         $index = $client->getIndex('elastica_test');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
         $type = new Type($index, 'mlt_test');
 
-        $type->addDocuments(array(
-            new Document(1, array('visible' => true, 'name' => 'bruce wayne batman')),
-            new Document(2, array('visible' => true, 'name' => 'bruce wayne')),
-            new Document(3, array('visible' => false, 'name' => 'bruce wayne')),
-            new Document(4, array('visible' => true, 'name' => 'batman')),
-            new Document(5, array('visible' => false, 'name' => 'batman')),
-            new Document(6, array('visible' => true, 'name' => 'superman')),
-            new Document(7, array('visible' => true, 'name' => 'spiderman')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['visible' => true, 'name' => 'bruce wayne batman']),
+            new Document(2, ['visible' => true, 'name' => 'bruce wayne']),
+            new Document(3, ['visible' => false, 'name' => 'bruce wayne']),
+            new Document(4, ['visible' => true, 'name' => 'batman']),
+            new Document(5, ['visible' => false, 'name' => 'batman']),
+            new Document(6, ['visible' => true, 'name' => 'superman']),
+            new Document(7, ['visible' => true, 'name' => 'spiderman']),
+        ]);
 
         $index->refresh();
 
@@ -161,7 +161,7 @@ class MoreLikeThisTest extends BaseTest
     {
         $query = new MoreLikeThis();
 
-        $fields = array('firstname', 'lastname');
+        $fields = ['firstname', 'lastname'];
         $query->setFields($fields);
 
         $data = $query->toArray();
@@ -175,7 +175,7 @@ class MoreLikeThisTest extends BaseTest
     public function testSetIds()
     {
         $query = new MoreLikeThis();
-        $ids = array(1, 2, 3);
+        $ids = [1, 2, 3];
         $query->setIds($ids);
     }
 
@@ -337,7 +337,7 @@ class MoreLikeThisTest extends BaseTest
     {
         $query = new MoreLikeThis();
 
-        $stopWords = array('no', 'yes', 'test');
+        $stopWords = ['no', 'yes', 'test'];
         $query->setStopWords($stopWords);
 
         $this->assertEquals($stopWords, $query->getParam('stop_words'));
@@ -349,19 +349,19 @@ class MoreLikeThisTest extends BaseTest
     public function testToArrayForId()
     {
         $query = new MoreLikeThis();
-        $query->setLike(new Document(1, array(), 'type', 'index'));
+        $query->setLike(new Document(1, [], 'type', 'index'));
 
         $data = $query->toArray();
 
         $this->assertEquals(
-            array('more_like_this' => array(
-                'like' => array(
+            ['more_like_this' => [
+                'like' => [
                     '_id' => 1,
                     '_type' => 'type',
                     '_index' => 'index',
-                ),
-            ),
-            ),
+                ],
+            ],
+            ],
             $data
         );
     }
@@ -372,21 +372,21 @@ class MoreLikeThisTest extends BaseTest
     public function testToArrayForSource()
     {
         $query = new MoreLikeThis();
-        $query->setLike(new Document('', array('Foo' => 'Bar'), 'type', 'index'));
+        $query->setLike(new Document('', ['Foo' => 'Bar'], 'type', 'index'));
 
         $data = $query->toArray();
 
         $this->assertEquals(
-            array('more_like_this' => array(
-                'like' => array(
+            ['more_like_this' => [
+                'like' => [
                     '_type' => 'type',
                     '_index' => 'index',
-                    'doc' => array(
+                    'doc' => [
                         'Foo' => 'Bar',
-                    ),
-                ),
-            ),
-            ),
+                    ],
+                ],
+            ],
+            ],
             $data
         );
     }

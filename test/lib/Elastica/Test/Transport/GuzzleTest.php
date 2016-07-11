@@ -22,20 +22,20 @@ class GuzzleTest extends BaseTest
      */
     public function getConfig()
     {
-        return array(
-            array(
-                array('persistent' => false, 'transport' => 'Guzzle'),
+        return [
+            [
+                ['persistent' => false, 'transport' => 'Guzzle'],
                 'GET',
-            ),
-            array(
-                array('persistent' => false, 'transport' => array('type' => 'Guzzle', 'postWithRequestBody' => false)),
+            ],
+            [
+                ['persistent' => false, 'transport' => ['type' => 'Guzzle', 'postWithRequestBody' => false]],
                 'GET',
-            ),
-            array(
-                array('persistent' => false, 'transport' => array('type' => 'Guzzle', 'postWithRequestBody' => true)),
+            ],
+            [
+                ['persistent' => false, 'transport' => ['type' => 'Guzzle', 'postWithRequestBody' => true]],
                 'POST',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -47,9 +47,9 @@ class GuzzleTest extends BaseTest
         $client = $this->_getClient($config);
 
         $index = $client->getIndex('dynamic_http_method_test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
-        $type->addDocument(new Document(1, array('test' => 'test')));
+        $type->addDocument(new Document(1, ['test' => 'test']));
         $index->refresh();
         $resultSet = $index->search('test');
         $info = $resultSet->getResponse()->getTransferInfo();
@@ -77,7 +77,7 @@ class GuzzleTest extends BaseTest
         $this->checkProxy($this->_getProxyUrl());
         putenv('http_proxy='.$this->_getProxyUrl().'/');
 
-        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
 
@@ -96,11 +96,11 @@ class GuzzleTest extends BaseTest
         $this->checkProxy($this->_getProxyUrl403());
         putenv('http_proxy='.$this->_getProxyUrl403().'/');
 
-        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(403, $transferInfo['http_code']);
 
-        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $client->getConnection()->setProxy('');
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
@@ -114,7 +114,7 @@ class GuzzleTest extends BaseTest
     public function testWithProxy()
     {
         $this->checkProxy($this->_getProxyUrl());
-        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $client->getConnection()->setProxy($this->_getProxyUrl());
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -126,7 +126,7 @@ class GuzzleTest extends BaseTest
      */
     public function testWithoutProxy()
     {
-        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $client->getConnection()->setProxy('');
 
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -138,30 +138,30 @@ class GuzzleTest extends BaseTest
      */
     public function testBodyReuse()
     {
-        $client = $this->_getClient(array('transport' => 'Guzzle', 'persistent' => false));
+        $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $index = $client->getIndex('elastica_body_reuse_test');
-        $index->create(array(), true);
+        $index->create([], true);
         $this->_waitForAllocation($index);
 
         $type = $index->getType('test');
-        $type->addDocument(new Document(1, array('test' => 'test')));
+        $type->addDocument(new Document(1, ['test' => 'test']));
 
         $index->refresh();
 
-        $resultSet = $index->search(array(
-            'query' => array(
-                'query_string' => array(
+        $resultSet = $index->search([
+            'query' => [
+                'query_string' => [
                     'query' => 'pew pew pew',
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
 
         $this->assertEquals(0, $resultSet->getTotalHits());
 
         $response = $index->request('/_search', 'POST');
 
         $builder = new ResultSet\DefaultBuilder();
-        $resultSet = $builder->buildResultSet($response, Query::create(array()));
+        $resultSet = $builder->buildResultSet($response, Query::create([]));
 
         $this->assertEquals(1, $resultSet->getTotalHits());
     }
@@ -172,7 +172,7 @@ class GuzzleTest extends BaseTest
      */
     public function testInvalidConnection()
     {
-        $client = $this->_getClient(array('transport' => 'Guzzle', 'port' => 4500, 'persistent' => false));
+        $client = $this->_getClient(['transport' => 'Guzzle', 'port' => 4500, 'persistent' => false]);
         $response = $client->request('_stats', 'GET');
         $client->request('_status', 'GET');
     }

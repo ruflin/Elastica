@@ -23,15 +23,15 @@ class ScriptFieldsTest extends BaseTest
 
         // setScripts
         $scriptFields = new ScriptFields();
-        $scriptFields->setScripts(array(
+        $scriptFields->setScripts([
             'test' => $script,
-        ));
+        ]);
         $this->assertSame($scriptFields->getParam('test'), $script);
 
         // Constructor
-        $scriptFields = new ScriptFields(array(
+        $scriptFields = new ScriptFields([
             'test' => $script,
-        ));
+        ]);
         $this->assertSame($scriptFields->getParam('test'), $script);
     }
 
@@ -43,15 +43,15 @@ class ScriptFieldsTest extends BaseTest
         $query = new Query();
         $script = new Script('1 + 2');
 
-        $scriptFields = new ScriptFields(array(
+        $scriptFields = new ScriptFields([
             'test' => $script,
-        ));
+        ]);
         $query->setScriptFields($scriptFields);
         $this->assertSame($query->getParam('script_fields'), $scriptFields);
 
-        $query->setScriptFields(array(
+        $query->setScriptFields([
             'test' => $script,
-        ));
+        ]);
         $this->assertSame($query->getParam('script_fields')->getParam('test'), $script);
     }
 
@@ -62,7 +62,7 @@ class ScriptFieldsTest extends BaseTest
     public function testNameException()
     {
         $script = new Script('1 + 2');
-        $scriptFields = new ScriptFields(array($script));
+        $scriptFields = new ScriptFields([$script]);
     }
 
     /**
@@ -76,15 +76,15 @@ class ScriptFieldsTest extends BaseTest
 
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('firstname' => 'guschti', 'lastname' => 'ruflin'));
+        $doc = new Document(1, ['firstname' => 'guschti', 'lastname' => 'ruflin']);
         $type->addDocument($doc);
         $index->refresh();
 
         $query = new Query();
         $script = new Script('1 + 2');
-        $scriptFields = new ScriptFields(array(
+        $scriptFields = new ScriptFields([
             'test' => $script,
-        ));
+        ]);
         $query->setScriptFields($scriptFields);
 
         $resultSet = $type->search($query);

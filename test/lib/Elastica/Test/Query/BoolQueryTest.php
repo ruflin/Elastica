@@ -40,9 +40,9 @@ class BoolQueryTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\BoolQuery::addFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -79,16 +79,16 @@ class BoolQueryTest extends BaseTest
         $query->addFilter($filter1);
         $query->addFilter($filter2);
 
-        $expectedArray = array(
-            'bool' => array(
-                'must' => array($idsQuery1->toArray()),
-                'should' => array($idsQuery3->toArray()),
-                'filter' => array($filter1->toArray(), $filter2->toArray()),
+        $expectedArray = [
+            'bool' => [
+                'must' => [$idsQuery1->toArray()],
+                'should' => [$idsQuery3->toArray()],
+                'filter' => [$filter1->toArray(), $filter2->toArray()],
                 'minimum_number_should_match' => $minMatch,
-                'must_not' => array($idsQuery2->toArray()),
+                'must_not' => [$idsQuery2->toArray()],
                 'boost' => $boost,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
@@ -131,16 +131,16 @@ class BoolQueryTest extends BaseTest
         $query->addFilter($filter2);
         $this->showDeprecated();
 
-        $expectedArray = array(
-            'bool' => array(
-                'must' => array($idsQuery1->toArray()),
-                'should' => array($idsQuery3->toArray()),
-                'filter' => array($filter1->toArray(), $filter2->toArray()),
+        $expectedArray = [
+            'bool' => [
+                'must' => [$idsQuery1->toArray()],
+                'should' => [$idsQuery3->toArray()],
+                'filter' => [$filter1->toArray(), $filter2->toArray()],
                 'minimum_number_should_match' => $minMatch,
-                'must_not' => array($idsQuery2->toArray()),
+                'must_not' => [$idsQuery2->toArray()],
                 'boost' => $boost,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
@@ -175,48 +175,48 @@ class BoolQueryTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = new Index($client, 'test');
-        $index->create(array(), true);
+        $index->create([], true);
 
         $type = new Type($index, 'helloworld');
 
-        $doc = new Document(1, array('id' => 1, 'email' => 'hans@test.com', 'username' => 'hans', 'test' => array('2', '4', '5')));
+        $doc = new Document(1, ['id' => 1, 'email' => 'hans@test.com', 'username' => 'hans', 'test' => ['2', '4', '5']]);
         $type->addDocument($doc);
-        $doc = new Document(2, array('id' => 2, 'email' => 'emil@test.com', 'username' => 'emil', 'test' => array('1', '3', '6')));
+        $doc = new Document(2, ['id' => 2, 'email' => 'emil@test.com', 'username' => 'emil', 'test' => ['1', '3', '6']]);
         $type->addDocument($doc);
-        $doc = new Document(3, array('id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth', 'test' => array('2', '3', '7')));
+        $doc = new Document(3, ['id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth', 'test' => ['2', '3', '7']]);
         $type->addDocument($doc);
-        $doc = new Document(4, array('id' => 4, 'email' => 'john@test.com', 'username' => 'john', 'test' => array('2', '4', '8')));
+        $doc = new Document(4, ['id' => 4, 'email' => 'john@test.com', 'username' => 'john', 'test' => ['2', '4', '8']]);
         $type->addDocument($doc);
 
         // Refresh index
         $index->refresh();
 
         $boolQuery = new BoolQuery();
-        $termQuery1 = new TermQuery(array('test' => '2'));
+        $termQuery1 = new TermQuery(['test' => '2']);
         $boolQuery->addMust($termQuery1);
         $resultSet = $type->search($boolQuery);
 
         $this->assertEquals(3, $resultSet->count());
 
-        $termFilter = new Term(array('test' => '4'));
+        $termFilter = new Term(['test' => '4']);
         $boolQuery->addFilter($termFilter);
         $resultSet = $type->search($boolQuery);
 
         $this->assertEquals(2, $resultSet->count());
 
-        $termQuery2 = new TermQuery(array('test' => '5'));
+        $termQuery2 = new TermQuery(['test' => '5']);
         $boolQuery->addMust($termQuery2);
         $resultSet = $type->search($boolQuery);
 
         $this->assertEquals(1, $resultSet->count());
 
-        $termQuery3 = new TermQuery(array('username' => 'hans'));
+        $termQuery3 = new TermQuery(['username' => 'hans']);
         $boolQuery->addMust($termQuery3);
         $resultSet = $type->search($boolQuery);
 
         $this->assertEquals(1, $resultSet->count());
 
-        $termQuery4 = new TermQuery(array('username' => 'emil'));
+        $termQuery4 = new TermQuery(['username' => 'emil']);
         $boolQuery->addMust($termQuery4);
         $resultSet = $type->search($boolQuery);
 
@@ -230,31 +230,31 @@ class BoolQueryTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = new Index($client, 'test');
-        $index->create(array(), true);
+        $index->create([], true);
 
         $type = new Type($index, 'helloworld');
 
-        $doc = new Document(1, array('id' => 1, 'email' => 'hans@test.com', 'username' => 'hans', 'test' => array('2', '4', '5')));
+        $doc = new Document(1, ['id' => 1, 'email' => 'hans@test.com', 'username' => 'hans', 'test' => ['2', '4', '5']]);
         $type->addDocument($doc);
-        $doc = new Document(2, array('id' => 2, 'email' => 'emil@test.com', 'username' => 'emil', 'test' => array('1', '3', '6')));
+        $doc = new Document(2, ['id' => 2, 'email' => 'emil@test.com', 'username' => 'emil', 'test' => ['1', '3', '6']]);
         $type->addDocument($doc);
-        $doc = new Document(3, array('id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth', 'test' => array('2', '3', '7')));
+        $doc = new Document(3, ['id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth', 'test' => ['2', '3', '7']]);
         $type->addDocument($doc);
-        $doc = new Document(4, array('id' => 4, 'email' => 'john@test.com', 'username' => 'john', 'test' => array('2', '4', '8')));
+        $doc = new Document(4, ['id' => 4, 'email' => 'john@test.com', 'username' => 'john', 'test' => ['2', '4', '8']]);
         $type->addDocument($doc);
 
         // Refresh index
         $index->refresh();
 
         $boolQuery = new BoolQuery();
-        $termQuery1 = new TermQuery(array('test' => '2'));
+        $termQuery1 = new TermQuery(['test' => '2']);
         $boolQuery->addMust($termQuery1);
         $resultSet = $type->search($boolQuery);
 
         $this->assertEquals(3, $resultSet->count());
 
         $this->hideDeprecated();
-        $termFilter = new TermFilter(array('test' => '4'));
+        $termFilter = new TermFilter(['test' => '4']);
         $boolQuery->addFilter($termFilter);
         $this->showDeprecated();
         $resultSet = $type->search($boolQuery);
@@ -272,7 +272,7 @@ class BoolQueryTest extends BaseTest
 
         $docNumber = 3;
         for ($i = 0; $i < $docNumber; ++$i) {
-            $doc = new Document($i, array('email' => 'test@test.com'));
+            $doc = new Document($i, ['email' => 'test@test.com']);
             $type->addDocument($doc);
         }
 
@@ -299,7 +299,7 @@ class BoolQueryTest extends BaseTest
 
         $docNumber = 3;
         for ($i = 0; $i < $docNumber; ++$i) {
-            $doc = new Document($i, array('email' => 'test@test.com'));
+            $doc = new Document($i, ['email' => 'test@test.com']);
             $type->addDocument($doc);
         }
 

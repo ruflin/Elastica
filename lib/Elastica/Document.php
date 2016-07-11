@@ -20,7 +20,7 @@ class Document extends AbstractUpdateAction
      *
      * @var array Document data
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
      * Whether to use this document to upsert if the document does not exist.
@@ -42,7 +42,7 @@ class Document extends AbstractUpdateAction
      * @param Type|string  $type  OPTIONAL Type name
      * @param Index|string $index OPTIONAL Index name
      */
-    public function __construct($id = '', $data = array(), $type = '', $index = '')
+    public function __construct($id = '', $data = [], $type = '', $index = '')
     {
         $this->setId($id);
         $this->setData($data);
@@ -187,7 +187,7 @@ class Document extends AbstractUpdateAction
         $value = base64_encode(file_get_contents($filepath));
 
         if (!empty($mimeType)) {
-            $value = array('_content_type' => $mimeType, '_name' => $filepath, '_content' => $value);
+            $value = ['_content_type' => $mimeType, '_name' => $filepath, '_content' => $value];
         }
 
         $this->set($key, $value);
@@ -223,7 +223,7 @@ class Document extends AbstractUpdateAction
      */
     public function addGeoPoint($key, $latitude, $longitude)
     {
-        $value = array('lat' => $latitude, 'lon' => $longitude);
+        $value = ['lat' => $latitude, 'lon' => $longitude];
 
         $this->set($key, $value);
 

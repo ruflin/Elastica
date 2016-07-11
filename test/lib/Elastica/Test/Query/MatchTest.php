@@ -38,9 +38,9 @@ class MatchTest extends BaseTest
         $query->setFieldPrefixLength($field, $prefixLength);
         $query->setFieldMaxExpansions($field, $maxExpansions);
 
-        $expectedArray = array(
-            'match' => array(
-                $field => array(
+        $expectedArray = [
+            'match' => [
+                $field => [
                     'query' => $testQuery,
                     'type' => $type,
                     'operator' => $operator,
@@ -51,9 +51,9 @@ class MatchTest extends BaseTest
                     'fuzzy_rewrite' => $fuzzyRewrite,
                     'prefix_length' => $prefixLength,
                     'max_expansions' => $maxExpansions,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
@@ -65,15 +65,15 @@ class MatchTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'New Hampshire')),
-            new Document(4, array('name' => 'Basel Land')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'New Hampshire']),
+            new Document(4, ['name' => 'Basel Land']),
+        ]);
 
         $index->refresh();
 
@@ -96,15 +96,15 @@ class MatchTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'New Hampshire')),
-            new Document(4, array('name' => 'Basel Land')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'New Hampshire']),
+            new Document(4, ['name' => 'Basel Land']),
+        ]);
 
         $index->refresh();
 
@@ -128,15 +128,15 @@ class MatchTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'New Hampshire')),
-            new Document(4, array('name' => 'Basel Land')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'New Hampshire']),
+            new Document(4, ['name' => 'Basel Land']),
+        ]);
 
         $index->refresh();
 
@@ -160,13 +160,13 @@ class MatchTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+        ]);
 
         $index->refresh();
 
@@ -186,15 +186,15 @@ class MatchTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'New Hampshire')),
-            new Document(4, array('name' => 'Basel Land')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'New Hampshire']),
+            new Document(4, ['name' => 'Basel Land']),
+        ]);
 
         $index->refresh();
 
@@ -217,15 +217,15 @@ class MatchTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'New Hampshire')),
-            new Document(4, array('name' => 'Basel Land')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'New Hampshire']),
+            new Document(4, ['name' => 'Basel Land']),
+        ]);
 
         $index->refresh();
 
@@ -246,15 +246,15 @@ class MatchTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'New Hampshire')),
-            new Document(4, array('name' => 'Basel Land')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'New Hampshire']),
+            new Document(4, ['name' => 'Basel Land']),
+        ]);
 
         $index->refresh();
 
@@ -277,15 +277,15 @@ class MatchTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'New Hampshire')),
-            new Document(4, array('name' => 'Basel Land')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'New Hampshire']),
+            new Document(4, ['name' => 'Basel Land']),
+        ]);
 
         $index->refresh();
 
@@ -326,10 +326,10 @@ class MatchTest extends BaseTest
     public function testConstruct()
     {
         $match = new Match(null, 'values');
-        $this->assertEquals(array('match' => array()), $match->toArray());
+        $this->assertEquals(['match' => []], $match->toArray());
 
         $match = new Match('field', null);
-        $this->assertEquals(array('match' => array()), $match->toArray());
+        $this->assertEquals(['match' => []], $match->toArray());
 
         $match1 = new Match('field', 'values');
         $match2 = new Match();

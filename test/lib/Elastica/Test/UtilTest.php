@@ -19,14 +19,14 @@ class UtilTest extends BaseTest
 
     public function getEscapeTermPairs()
     {
-        return array(
-            array('', ''),
-            array('pragmatic banana', 'pragmatic banana'),
-            array('oh yeah!', 'oh yeah\\!'),
+        return [
+            ['', ''],
+            ['pragmatic banana', 'pragmatic banana'],
+            ['oh yeah!', 'oh yeah\\!'],
             // Separate test below because phpunit seems to have some problems
             //array('\\+-&&||!(){}[]^"~*?:', '\\\\\\+\\-\\&&\\||\\!\\(\\)\\{\\}\\[\\]\\^\\"\\~\\*\\?\\:'),
-            array('some signs, can stay.', 'some signs, can stay.'),
-        );
+            ['some signs, can stay.', 'some signs, can stay.'],
+        ];
     }
 
     /**
@@ -40,14 +40,14 @@ class UtilTest extends BaseTest
 
     public function getReplaceBooleanWordsPairs()
     {
-        return array(
-            array('to be OR not to be', 'to be || not to be'),
-            array('ORIGINAL GIFTS', 'ORIGINAL GIFTS'),
-            array('Black AND White', 'Black && White'),
-            array('TIMBERLAND Men`s', 'TIMBERLAND Men`s'),
-            array('hello NOT kitty', 'hello !kitty'),
-            array('SEND NOTIFICATION', 'SEND NOTIFICATION'),
-        );
+        return [
+            ['to be OR not to be', 'to be || not to be'],
+            ['ORIGINAL GIFTS', 'ORIGINAL GIFTS'],
+            ['Black AND White', 'Black && White'],
+            ['TIMBERLAND Men`s', 'TIMBERLAND Men`s'],
+            ['hello NOT kitty', 'hello !kitty'],
+            ['SEND NOTIFICATION', 'SEND NOTIFICATION'],
+        ];
     }
 
     /**
@@ -92,8 +92,8 @@ class UtilTest extends BaseTest
     {
         $path = 'test';
         $method = Request::POST;
-        $query = array('no' => 'params');
-        $data = array('key' => 'value');
+        $query = ['no' => 'params'];
+        $data = ['key' => 'value'];
 
         $connection = new Connection();
         $connection->setHost($this->_getHost());

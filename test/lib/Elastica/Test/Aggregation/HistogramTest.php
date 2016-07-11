@@ -11,16 +11,16 @@ class HistogramTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('test')->addDocuments(array(
-            new Document(1, array('price' => 5, 'color' => 'blue')),
-            new Document(2, array('price' => 8, 'color' => 'blue')),
-            new Document(3, array('price' => 1, 'color' => 'red')),
-            new Document(4, array('price' => 30, 'color' => 'green')),
-            new Document(5, array('price' => 40, 'color' => 'red')),
-            new Document(6, array('price' => 35, 'color' => 'green')),
-            new Document(7, array('price' => 42, 'color' => 'red')),
-            new Document(8, array('price' => 41, 'color' => 'blue')),
-        ));
+        $index->getType('test')->addDocuments([
+            new Document(1, ['price' => 5, 'color' => 'blue']),
+            new Document(2, ['price' => 8, 'color' => 'blue']),
+            new Document(3, ['price' => 1, 'color' => 'red']),
+            new Document(4, ['price' => 30, 'color' => 'green']),
+            new Document(5, ['price' => 40, 'color' => 'red']),
+            new Document(6, ['price' => 35, 'color' => 'green']),
+            new Document(7, ['price' => 42, 'color' => 'red']),
+            new Document(8, ['price' => 41, 'color' => 'blue']),
+        ]);
 
         $index->refresh();
 

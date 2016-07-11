@@ -15,7 +15,7 @@ class SimpleQueryString extends AbstractQuery
      * @param string $query
      * @param array  $fields
      */
-    public function __construct($query, array $fields = array())
+    public function __construct($query, array $fields = [])
     {
         $this->setQuery($query);
         if (count($fields)) {
