@@ -610,6 +610,15 @@ class Client
                 throw $e;
             }
             return $this->request($path, $method, $data, $query);
+        } catch (ResponseException $e) {
+            if (! strpos($e->getMessage(), 'VersionConflictEngineException')) {
+                $message = "responseException: {$e->getMessage()}";
+                if ($request = $e->getRequest()) {
+                    $message .= "\nRequest: path: {$request->getPath()}, meth: {$request->getMethod()}, data: " . json_encode($request->getData());
+                }
+                error_log($message);
+            }
+            throw $e;
         }
     }
 
