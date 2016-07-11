@@ -57,7 +57,7 @@ class Fuzzy extends AbstractQuery
     {
         //Retrieve the single existing field for alteration.
         $params = $this->getParams();
-        if (count($params) < 1) {
+        if (empty($params)) {
             throw new InvalidException('No field has been set');
         }
         $keyArray = array_keys($params);

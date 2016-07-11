@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/3.2.1...HEAD)
 
 ### Backward Compatibility Fixes
+- Use short array syntax `[]` instead of long `array()`
 
 ### Bugfixes
 - Set HTTP headers on each request preventing server error if persistent connection is enabled and compression enabled and later disabled for the same connection.

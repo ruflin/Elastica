@@ -64,7 +64,7 @@ class Ids extends AbstractQuery
     /**
      * Set type.
      *
-     * @param string|\Elastica\Type $type Type name or object
+     * @param array|string|\Elastica\Type $type Type name or object
      *
      * @return $this
      */
@@ -77,7 +77,7 @@ class Ids extends AbstractQuery
             return $this;
         }
 
-        $this->_params['type'] = $type;
+        $this->_params['type'] = (array)$type;
 
         return $this;
     }
@@ -91,11 +91,7 @@ class Ids extends AbstractQuery
      */
     public function setIds($ids)
     {
-        if (is_array($ids)) {
-            $this->_params['values'] = $ids;
-        } else {
-            $this->_params['values'] = array($ids);
-        }
+        $this->_params['values'] = (array)$ids;
 
         return $this;
     }
