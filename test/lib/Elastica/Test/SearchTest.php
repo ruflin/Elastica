@@ -33,11 +33,11 @@ class SearchTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Search::setQuery() passing AbstractFilter is deprecated. Create query and use setPostFilter with AbstractQuery instead.',
                 'Deprecated: Elastica\Query::create() passing filter is deprecated. Create query and use setPostFilter with AbstractQuery instead.',
                 'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -93,7 +93,7 @@ class SearchTest extends BaseTest
         $client = $this->_getClient();
         $search = new Search($client);
 
-        $indices = array();
+        $indices = [];
         $indices[] = $client->getIndex('elastica_test1');
         $indices[] = $client->getIndex('elastica_test2');
 
@@ -115,7 +115,7 @@ class SearchTest extends BaseTest
         $type1 = $index->getType('type1');
         $type2 = $index->getType('type2');
 
-        $this->assertEquals(array(), $search->getTypes());
+        $this->assertEquals([], $search->getTypes());
 
         $search->addType($type1);
         $types = $search->getTypes();
@@ -148,7 +148,7 @@ class SearchTest extends BaseTest
 
         $index = $client->getIndex('foo');
 
-        $types = array();
+        $types = [];
         $types[] = $index->getType('type1');
         $types[] = $index->getType('type2');
 
@@ -246,22 +246,22 @@ class SearchTest extends BaseTest
 
         $type1 = $index1->getType('hello1');
 
-        $result = $search1->search(array());
+        $result = $search1->search([]);
         $this->assertFalse($result->getResponse()->hasError());
 
         $search1->addIndex($index1);
 
-        $result = $search1->search(array());
+        $result = $search1->search([]);
         $this->assertFalse($result->getResponse()->hasError());
 
         $search1->addIndex($index2);
 
-        $result = $search1->search(array());
+        $result = $search1->search([]);
         $this->assertFalse($result->getResponse()->hasError());
 
         $search1->addType($type1);
 
-        $result = $search1->search(array());
+        $result = $search1->search([]);
         $this->assertFalse($result->getResponse()->hasError());
     }
 
@@ -275,9 +275,9 @@ class SearchTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('scrolltest');
 
-        $docs = array();
+        $docs = [];
         for ($x = 1; $x <= 10; ++$x) {
-            $docs[] = new Document($x, array('id' => $x, 'testscroll' => 'jbafford'));
+            $docs[] = new Document($x, ['id' => $x, 'testscroll' => 'jbafford']);
         }
 
         $type->addDocuments($docs);
@@ -285,11 +285,11 @@ class SearchTest extends BaseTest
 
         $search = new Search($client);
         $search->addIndex($index)->addType($type);
-        $result = $search->search(array(), array(
+        $result = $search->search([], [
             Search::OPTION_SEARCH_TYPE => Search::OPTION_SEARCH_TYPE_SCAN,
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SIZE => 5,
-        ));
+        ]);
         $this->assertFalse($result->getResponse()->hasError());
 
         $scrollId = $result->getResponse()->getScrollId();
@@ -299,28 +299,28 @@ class SearchTest extends BaseTest
         //So we should get two results of 5 items, and then no items
         //We should also have sent the raw scroll_id as the HTTP request body
         $search = new Search($client);
-        $result = $search->search(array(), array(
+        $result = $search->search([], [
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SCROLL_ID => $scrollId,
-        ));
+        ]);
         $this->assertFalse($result->getResponse()->hasError());
         $this->assertEquals(5, count($result->getResults()));
         $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
         $this->assertEquals($scrollId, $search->getClient()->getLastRequest()->getData());
 
-        $result = $search->search(array(), array(
+        $result = $search->search([], [
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SCROLL_ID => $scrollId,
-        ));
+        ]);
         $this->assertFalse($result->getResponse()->hasError());
         $this->assertEquals(5, count($result->getResults()));
         $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
         $this->assertEquals($scrollId, $search->getClient()->getLastRequest()->getData());
 
-        $result = $search->search(array(), array(
+        $result = $search->search([], [
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SCROLL_ID => $scrollId,
-        ));
+        ]);
         $this->assertFalse($result->getResponse()->hasError());
         $this->assertEquals(0, count($result->getResults()));
         $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
@@ -338,22 +338,22 @@ class SearchTest extends BaseTest
         $search = new Search($client);
 
         $index = $client->getIndex('zero');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
         $type = $index->getType('zeroType');
-        $type->addDocuments(array(
-            new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+        ]);
         $index->refresh();
 
         $search->addIndex($index)->addType($type);
@@ -377,11 +377,11 @@ class SearchTest extends BaseTest
         $search = new Search($client);
 
         $index = $client->getIndex('zero');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
-        $docs = array();
+        $docs = [];
         for ($i = 0; $i < 11; ++$i) {
-            $docs[] = new Document($i, array('id' => 1, 'email' => 'test@test.com', 'username' => 'test'));
+            $docs[] = new Document($i, ['id' => 1, 'email' => 'test@test.com', 'username' => 'test']);
         }
 
         $type = $index->getType('zeroType');
@@ -399,31 +399,31 @@ class SearchTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
 
         //Array with limit
-        $resultSet = $search->search('test', array('limit' => 2));
+        $resultSet = $search->search('test', ['limit' => 2]);
         $this->assertEquals(2, $resultSet->count());
 
         //Array with size
-        $resultSet = $search->search('test', array('size' => 2));
+        $resultSet = $search->search('test', ['size' => 2]);
         $this->assertEquals(2, $resultSet->count());
 
         //Array with from
-        $resultSet = $search->search('test', array('from' => 10));
+        $resultSet = $search->search('test', ['from' => 10]);
         $this->assertEquals(10, $resultSet->current()->getId());
 
         //Array with routing
-        $resultSet = $search->search('test', array('routing' => 'r1,r2'));
+        $resultSet = $search->search('test', ['routing' => 'r1,r2']);
         $this->assertEquals(10, $resultSet->count());
 
         //Array with limit and routing
-        $resultSet = $search->search('test', array('limit' => 5, 'routing' => 'r1,r2'));
+        $resultSet = $search->search('test', ['limit' => 5, 'routing' => 'r1,r2']);
         $this->assertEquals(5, $resultSet->count());
 
         //Search types
-        $resultSet = $search->search('test', array('limit' => 5, 'search_type' => 'count'));
+        $resultSet = $search->search('test', ['limit' => 5, 'search_type' => 'count']);
         $this->assertTrue(($resultSet->count() === 0) && $resultSet->getTotalHits() === 11);
 
         //Timeout - this one is a bit more tricky to test
-        $mockResponse = new \Elastica\Response(json_encode(array('timed_out' => true)));
+        $mockResponse = new \Elastica\Response(json_encode(['timed_out' => true]));
         $client = $this->getMockBuilder('Elastica\\Client')
             ->disableOriginalConstructor()
             ->getMock();
@@ -433,11 +433,11 @@ class SearchTest extends BaseTest
         $script = new Script('Thread.sleep(100); return _score;');
         $query = new FunctionScore();
         $query->addScriptScoreFunction($script);
-        $resultSet = $search->search($query, array('timeout' => 50));
+        $resultSet = $search->search($query, ['timeout' => 50]);
         $this->assertTrue($resultSet->hasTimedOut());
 
         // Throws InvalidException
-        $resultSet = $search->search('test', array('invalid_option' => 'invalid_option_value'));
+        $resultSet = $search->search('test', ['invalid_option' => 'invalid_option_value']);
     }
 
     /**
@@ -446,7 +446,7 @@ class SearchTest extends BaseTest
     public function testSearchWithVersionOption()
     {
         $index = $this->_createIndex();
-        $doc = new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin'));
+        $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
         $index->getType('test')->addDocument($doc);
         $index->refresh();
 
@@ -456,10 +456,10 @@ class SearchTest extends BaseTest
         // Version param should not be inside by default
         $results = $search->search(new MatchAll());
         $hit = $results->current();
-        $this->assertEquals(array(), $hit->getParam('_version'));
+        $this->assertEquals([], $hit->getParam('_version'));
 
         // Added version param to result
-        $results = $search->search(new MatchAll(), array('version' => true));
+        $results = $search->search(new MatchAll(), ['version' => true]);
         $hit = $results->current();
         $this->assertEquals(1, $hit->getParam('_version'));
     }
@@ -473,22 +473,22 @@ class SearchTest extends BaseTest
         $search = new Search($client);
 
         $index = $client->getIndex('zero');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
         $type = $index->getType('zeroType');
-        $type->addDocuments(array(
-            new Document(1,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(2,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(3,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(4,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(5,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(6,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-            new Document(7,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-            new Document(8,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-            new Document(9,  array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-            new Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-            new Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'marley')),
-        ));
+        $type->addDocuments([
+            new Document(1,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(2,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(3,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(4,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(5,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(6,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(7,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(8,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(9,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+        ]);
         $index->refresh();
 
         $search->addIndex($index)->addType($type);
@@ -518,21 +518,21 @@ class SearchTest extends BaseTest
         $search = new Search($client);
 
         $index = $client->getIndex('zero');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
         $type = $index->getType('zeroType');
-        $type->addDocuments(array(
-            new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley')),
-            new Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny')),
-            new Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny')),
-            new Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny')),
-            new Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
+            new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
+            new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
+            new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']),
+        ]);
         $index->refresh();
 
         $search->addIndex($index)->addType($type);
@@ -561,7 +561,7 @@ class SearchTest extends BaseTest
         $search = new Search($index->getClient());
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('id' => 1, 'username' => 'ruflin'));
+        $doc = new Document(1, ['id' => 1, 'username' => 'ruflin']);
 
         $type->addDocument($doc);
         $index->refresh();
@@ -607,7 +607,7 @@ class SearchTest extends BaseTest
         $error = $exception->getResponse()->getFullError();
         $this->assertEquals('index_not_found_exception', $error['type']);
 
-        $results = $search->search($query, array(Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true));
+        $results = $search->search($query, [Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true]);
         $this->assertInstanceOf('\Elastica\ResultSet', $results);
     }
 }

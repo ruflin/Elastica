@@ -11,7 +11,7 @@ class SimpleTest extends BaseTest
      */
     public function testToArray()
     {
-        $testQuery = array('hello' => array('world'), 'name' => 'ruflin');
+        $testQuery = ['hello' => ['world'], 'name' => 'ruflin'];
         $query = new Simple($testQuery);
 
         $this->assertEquals($testQuery, $query->toArray());

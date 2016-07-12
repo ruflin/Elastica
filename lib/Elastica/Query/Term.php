@@ -15,7 +15,7 @@ class Term extends AbstractQuery
      *
      * @param array $term OPTIONAL Calls setTerm with the given $term array
      */
-    public function __construct(array $term = array())
+    public function __construct(array $term = [])
     {
         $this->setRawTerm($term);
     }
@@ -44,6 +44,6 @@ class Term extends AbstractQuery
      */
     public function setTerm($key, $value, $boost = 1.0)
     {
-        return $this->setRawTerm(array($key => array('value' => $value, 'boost' => $boost)));
+        return $this->setRawTerm([$key => ['value' => $value, 'boost' => $boost]]);
     }
 }

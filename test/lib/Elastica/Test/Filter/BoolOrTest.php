@@ -44,12 +44,12 @@ class BoolOrTest extends BaseTest
         $orFilter->addFilter($filter1);
         $orFilter->addFilter($filter2);
 
-        $expectedArray = array(
-            'or' => array(
+        $expectedArray = [
+            'or' => [
                     $filter1->toArray(),
                     $filter2->toArray(),
-                ),
-            );
+                ],
+            ];
 
         $this->assertEquals($expectedArray, $orFilter->toArray());
     }
@@ -59,10 +59,10 @@ class BoolOrTest extends BaseTest
      */
     public function testConstruct()
     {
-        $ids1 = new Ids('foo', array(1, 2));
-        $ids2 = new Ids('bar', array(3, 4));
+        $ids1 = new Ids('foo', [1, 2]);
+        $ids2 = new Ids('bar', [3, 4]);
 
-        $and1 = new BoolOr(array($ids1, $ids2));
+        $and1 = new BoolOr([$ids1, $ids2]);
 
         $and2 = new BoolOr();
         $and2->addFilter($ids1);
@@ -79,9 +79,9 @@ class BoolOrTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $doc1 = new Document('', array('categoryId' => 1));
-        $doc2 = new Document('', array('categoryId' => 2));
-        $doc3 = new Document('', array('categoryId' => 3));
+        $doc1 = new Document('', ['categoryId' => 1]);
+        $doc2 = new Document('', ['categoryId' => 2]);
+        $doc3 = new Document('', ['categoryId' => 3]);
 
         $type->addDocument($doc1);
         $type->addDocument($doc2);
@@ -90,8 +90,8 @@ class BoolOrTest extends BaseTest
         $index->refresh();
 
         $boolOr = new \Elastica\Filter\BoolOr();
-        $boolOr->addFilter(new \Elastica\Filter\Term(array('categoryId' => '1')));
-        $boolOr->addFilter(new \Elastica\Filter\Term(array('categoryId' => '2')));
+        $boolOr->addFilter(new \Elastica\Filter\Term(['categoryId' => '1']));
+        $boolOr->addFilter(new \Elastica\Filter\Term(['categoryId' => '2']));
 
         $resultSet = $type->search($boolOr);
         $this->assertEquals(2, $resultSet->count());

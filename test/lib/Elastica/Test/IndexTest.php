@@ -21,12 +21,12 @@ class IndexTest extends BaseTest
     public function testMapping()
     {
         $index = $this->_createIndex();
-        $doc = new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
+        $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => ['2', '3', '5']]);
 
         $type = $index->getType('test');
 
-        $mapping = array('id' => array('type' => 'integer', 'store' => true), 'email' => array('type' => 'string', 'store' => 'no'),
-            'username' => array('type' => 'string', 'store' => 'no'), 'test' => array('type' => 'integer', 'store' => 'no'), );
+        $mapping = ['id' => ['type' => 'integer', 'store' => true], 'email' => ['type' => 'string', 'store' => 'no'],
+            'username' => ['type' => 'string', 'store' => 'no'], 'test' => ['type' => 'integer', 'store' => 'no'], ];
         $type->setMapping($mapping);
 
         $type->addDocument($doc);
@@ -55,9 +55,9 @@ class IndexTest extends BaseTest
         $index->addAlias($aliasName);
 
         $type = new Type($index, 'test');
-        $mapping = new Mapping($type, array(
-                'id' => array('type' => 'integer', 'store' => 'yes'),
-            ));
+        $mapping = new Mapping($type, [
+                'id' => ['type' => 'integer', 'store' => 'yes'],
+            ]);
         $type->setMapping($mapping);
 
         $client = $index->getClient();
@@ -87,7 +87,7 @@ class IndexTest extends BaseTest
         $typeComment = new Type($index, 'comment');
 
         $mapping = new Mapping();
-        $mapping->setParam('_parent', array('type' => 'blog'));
+        $mapping->setParam('_parent', ['type' => 'blog']);
         $typeComment->setMapping($mapping);
 
         $entry1 = new Document(1);
@@ -112,7 +112,7 @@ class IndexTest extends BaseTest
         $query = new HasChild('Max', 'comment');
         $resultSet = $typeBlog->search($query);
         $this->assertEquals(1, $resultSet->count());
-        $this->assertEquals(array('title' => 'Foo bar'), $resultSet->current()->getData());
+        $this->assertEquals(['title' => 'Foo bar'], $resultSet->current()->getData());
     }
 
     /**
@@ -121,9 +121,9 @@ class IndexTest extends BaseTest
     public function testAddPdfFile()
     {
         $this->_checkPlugin('elasticsearch-mapper-attachments');
-        $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => false));
+        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => false]];
 
-        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
+        $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
 
         $index = $this->_createIndex();
         $type = new Type($index, 'test');
@@ -163,9 +163,9 @@ class IndexTest extends BaseTest
     public function testAddPdfFileContent()
     {
         $this->_checkPlugin('elasticsearch-mapper-attachments');
-        $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => false));
+        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => false]];
 
-        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
+        $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
 
         $index = $this->_createIndex();
         $type = new Type($index, 'test');
@@ -205,9 +205,9 @@ class IndexTest extends BaseTest
     public function testAddWordxFile()
     {
         $this->_checkPlugin('elasticsearch-mapper-attachments');
-        $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => 'no'));
+        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => 'no']];
 
-        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
+        $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
 
         $index = $this->_createIndex();
         $type = new Type($index, 'content');
@@ -246,16 +246,16 @@ class IndexTest extends BaseTest
     public function testExcludeFileSource()
     {
         $this->_checkPlugin('elasticsearch-mapper-attachments');
-        $indexMapping = array('file' => array('type' => 'attachment'), 'text' => array('type' => 'string', 'store' => true),
-            'title' => array('type' => 'string', 'store' => true), );
+        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => true],
+            'title' => ['type' => 'string', 'store' => true], ];
 
-        $indexParams = array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0));
+        $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
 
         $index = $this->_createIndex();
         $type = new Type($index, 'content');
 
         $mapping = Mapping::create($indexMapping);
-        $mapping->setSource(array('excludes' => array('file')));
+        $mapping->setSource(['excludes' => ['file']]);
 
         $mapping->setType($type);
 
@@ -294,9 +294,9 @@ class IndexTest extends BaseTest
         $typeName = 'test';
 
         $index = $client->getIndex($indexName1);
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
-        $doc = new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin'));
+        $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
 
         $type = $index->getType($typeName);
         $type->addDocument($doc);
@@ -329,8 +329,8 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
 
         // Add document to normal index
-        $doc1 = new Document(null, array('name' => 'ruflin'));
-        $doc2 = new Document(null, array('name' => 'nicolas'));
+        $doc1 = new Document(null, ['name' => 'ruflin']);
+        $doc2 = new Document(null, ['name' => 'nicolas']);
 
         $type = $index->getType('test');
         $type->addDocument($doc1);
@@ -357,11 +357,11 @@ class IndexTest extends BaseTest
 
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
-        $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
-        $type1->addDocument(new Document(2, array('name' => 'ruflin')));
+        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
+        $type1->addDocument(new Document(2, ['name' => 'ruflin']));
         $type2 = new Type($index, 'test2');
-        $type2->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
-        $type2->addDocument(new Document(2, array('name' => 'ruflin')));
+        $type2->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
+        $type2->addDocument(new Document(2, ['name' => 'ruflin']));
         $index->refresh();
 
         $response = $index->search('ruflin*');
@@ -393,11 +393,11 @@ class IndexTest extends BaseTest
 
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
-        $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
-        $type1->addDocument(new Document(2, array('name' => 'ruflin')));
+        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
+        $type1->addDocument(new Document(2, ['name' => 'ruflin']));
         $type2 = new Type($index, 'test2');
-        $type2->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
-        $type2->addDocument(new Document(2, array('name' => 'ruflin')));
+        $type2->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
+        $type2->addDocument(new Document(2, ['name' => 'ruflin']));
         $index->refresh();
 
         $response = $index->search('ruflin*');
@@ -429,11 +429,11 @@ class IndexTest extends BaseTest
 
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
-        $type1->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
-        $type1->addDocument(new Document(2, array('name' => 'ruflin')));
+        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
+        $type1->addDocument(new Document(2, ['name' => 'ruflin']));
         $type2 = new Type($index, 'test2');
-        $type2->addDocument(new Document(1, array('name' => 'ruflin nicolas')));
-        $type2->addDocument(new Document(2, array('name' => 'ruflin')));
+        $type2->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
+        $type2->addDocument(new Document(2, ['name' => 'ruflin']));
         $index->refresh();
 
         $response = $index->search('ruflin*');
@@ -443,7 +443,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(2, $response->count());
 
         // Delete first document
-        $response = $index->deleteByQuery(array('query' => array('query_string' => array('query' => 'nicolas'))));
+        $response = $index->deleteByQuery(['query' => ['query_string' => ['query' => 'nicolas']]]);
         $this->assertTrue($response->isOk());
 
         $index->refresh();
@@ -470,11 +470,11 @@ class IndexTest extends BaseTest
 
         for ($i = 1; $i <= 2; ++$i) {
             $type = new Type($index, 'test'.$i);
-            $doc = new Document(1, array('name' => 'ruflin nicolas'));
+            $doc = new Document(1, ['name' => 'ruflin nicolas']);
             $doc->setRouting($routing1);
             $type->addDocument($doc);
 
-            $doc = new Document(2, array('name' => 'ruflin'));
+            $doc = new Document(2, ['name' => 'ruflin']);
             $doc->setRouting($routing1);
             $type->addDocument($doc);
         }
@@ -484,14 +484,14 @@ class IndexTest extends BaseTest
         $response = $index->search('ruflin*');
         $this->assertEquals(4, $response->count());
 
-        $response = $index->search('ruflin*', array('routing' => $routing2));
+        $response = $index->search('ruflin*', ['routing' => $routing2]);
         $this->assertEquals(0, $response->count());
 
         $response = $index->search('nicolas');
         $this->assertEquals(2, $response->count());
 
         // Route to the wrong document id; should not delete
-        $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => $routing2));
+        $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing2]);
         $this->assertTrue($response->isOk());
 
         $index->refresh();
@@ -503,7 +503,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(2, $response->count());
 
         // Delete first document
-        $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), array('routing' => $routing1));
+        $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing1]);
         $this->assertTrue($response->isOk());
 
         $index->refresh();
@@ -527,7 +527,7 @@ class IndexTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
 
-        $index->create(array(), true);
+        $index->create([], true);
         $index->addAlias($aliasName);
 
         $status = new Status($client);
@@ -555,10 +555,10 @@ class IndexTest extends BaseTest
         $index1 = $client->getIndex($indexName1);
         $index2 = $client->getIndex($indexName2);
 
-        $index1->create(array(), true);
+        $index1->create([], true);
         $this->_waitForAllocation($index1);
         $index1->addAlias($aliasName);
-        $index2->create(array(), true);
+        $index2->create([], true);
         $this->_waitForAllocation($index2);
 
         $index1->refresh();
@@ -593,9 +593,9 @@ class IndexTest extends BaseTest
         $index1 = $client->getIndex($indexName1);
         $index2 = $client->getIndex($indexName2);
 
-        $index1->create(array(), true);
+        $index1->create([], true);
         $index1->addAlias($aliasName);
-        $index2->create(array(), true);
+        $index2->create([], true);
 
         $index1->refresh();
         $index2->refresh();
@@ -620,7 +620,7 @@ class IndexTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = new Type($index, 'test');
 
         $doc1 = new Document(1);
@@ -704,8 +704,8 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $mapping = array('id' => array('type' => 'integer', 'store' => true), 'email' => array('type' => 'string', 'store' => false),
-            'username' => array('type' => 'string', 'store' => false), 'test' => array('type' => 'integer', 'store' => false), );
+        $mapping = ['id' => ['type' => 'integer', 'store' => true], 'email' => ['type' => 'string', 'store' => false],
+            'username' => ['type' => 'string', 'store' => false], 'test' => ['type' => 'integer', 'store' => false], ];
 
         $type->setMapping($mapping);
         $index->refresh();
@@ -740,21 +740,21 @@ class IndexTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('zero');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
-        $docs = array();
+        $docs = [];
 
-        $docs[] = new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
+        $docs[] = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
 
         $type = $index->getType('zeroType');
         $type->addDocuments($docs);
@@ -781,21 +781,21 @@ class IndexTest extends BaseTest
 
         //Testing recreate (backward compatibility)
         $index = $client->getIndex($indexName);
-        $index->create(array(), true);
+        $index->create([], true);
         $this->_waitForAllocation($index);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
 
         //Testing create index with array options
-        $opts = array('recreate' => true, 'routing' => 'r1,r2');
-        $index->create(array(), $opts);
+        $opts = ['recreate' => true, 'routing' => 'r1,r2'];
+        $index->create([], $opts);
         $this->_waitForAllocation($index);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
 
         //Testing invalid options
-        $opts = array('recreate' => true, 'routing' => 'r1,r2', 'testing_invalid_option' => true);
-        $index->create(array(), $opts);
+        $opts = ['recreate' => true, 'routing' => 'r1,r2', 'testing_invalid_option' => true];
+        $index->create([], $opts);
         $this->_waitForAllocation($index);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
@@ -814,20 +814,20 @@ class IndexTest extends BaseTest
 
         $search = $index->createSearch($query, $options);
 
-        $expected = array(
-            'query' => array(
-                'query_string' => array(
+        $expected = [
+            'query' => [
+                'query_string' => [
                     'query' => 'test',
-                ),
-            ),
+                ],
+            ],
             'size' => 5,
-        );
+        ];
         $this->assertEquals($expected, $search->getQuery()->toArray());
-        $this->assertEquals(array('test'), $search->getIndices());
+        $this->assertEquals(['test'], $search->getIndices());
         $this->assertTrue($search->hasIndices());
         $this->assertTrue($search->hasIndex('test'));
         $this->assertTrue($search->hasIndex($index));
-        $this->assertEquals(array(), $search->getTypes());
+        $this->assertEquals([], $search->getTypes());
         $this->assertFalse($search->hasTypes());
         $this->assertFalse($search->hasType('test_type'));
 
@@ -844,10 +844,10 @@ class IndexTest extends BaseTest
 
         $type = new Type($index, 'user');
 
-        $docs = array();
-        $docs[] = new Document(1, array('username' => 'hans', 'test' => array('2', '3', '5')));
-        $docs[] = new Document(2, array('username' => 'john', 'test' => array('1', '3', '6')));
-        $docs[] = new Document(3, array('username' => 'rolf', 'test' => array('2', '3', '7')));
+        $docs = [];
+        $docs[] = new Document(1, ['username' => 'hans', 'test' => ['2', '3', '5']]);
+        $docs[] = new Document(2, ['username' => 'john', 'test' => ['1', '3', '6']]);
+        $docs[] = new Document(3, ['username' => 'rolf', 'test' => ['2', '3', '7']]);
         $type->addDocuments($docs);
         $index->refresh();
 
@@ -876,9 +876,9 @@ class IndexTest extends BaseTest
 
         $type = new Type($index, 'optimize');
 
-        $docs = array();
-        $docs[] = new Document(1, array('foo' => 'bar'));
-        $docs[] = new Document(2, array('foo' => 'bar'));
+        $docs = [];
+        $docs[] = new Document(1, ['foo' => 'bar']);
+        $docs[] = new Document(2, ['foo' => 'bar']);
         $type->addDocuments($docs);
         $index->refresh();
 
@@ -891,7 +891,7 @@ class IndexTest extends BaseTest
         $stats = $index->getStats()->getData();
         $this->assertEquals(1, $stats['_all']['primaries']['docs']['deleted']);
 
-        $index->optimize(array('max_num_segments' => 1));
+        $index->optimize(['max_num_segments' => 1]);
 
         $stats = $index->getStats()->getData();
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
@@ -906,15 +906,15 @@ class IndexTest extends BaseTest
         $index->refresh();
         $returnedTokens = $index->analyze('foo');
 
-        $tokens = array(
-            array(
+        $tokens = [
+            [
                 'token' => 'foo',
                 'start_offset' => 0,
                 'end_offset' => 3,
                 'type' => '<ALPHANUM>',
                 'position' => 0,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($tokens, $returnedTokens);
     }
@@ -951,11 +951,11 @@ class IndexTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
 
-        $index->create(array(), true);
+        $index->create([], true);
         $this->_waitForAllocation($index);
         $index->refresh();
         $index->optimize();
 
-        $this->assertEquals(array(), $index->getAliases());
+        $this->assertEquals([], $index->getAliases());
     }
 }

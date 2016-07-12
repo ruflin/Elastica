@@ -21,17 +21,17 @@ class MissingTest extends BaseTest
     public function testToArray()
     {
         $filter = new Missing('field_name');
-        $expectedArray = array('missing' => array('field' => 'field_name'));
+        $expectedArray = ['missing' => ['field' => 'field_name']];
         $this->assertEquals($expectedArray, $filter->toArray());
 
         $filter = new Missing('field_name');
         $filter->setExistence(true);
-        $expectedArray = array('missing' => array('field' => 'field_name', 'existence' => true));
+        $expectedArray = ['missing' => ['field' => 'field_name', 'existence' => true]];
         $this->assertEquals($expectedArray, $filter->toArray());
 
         $filter = new Missing('field_name');
         $filter->setNullValue(true);
-        $expectedArray = array('missing' => array('field' => 'field_name', 'null_value' => true));
+        $expectedArray = ['missing' => ['field' => 'field_name', 'null_value' => true]];
         $this->assertEquals($expectedArray, $filter->toArray());
     }
 

@@ -11,12 +11,12 @@ class CardinalityTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('test')->addDocuments(array(
-            new Document(1, array('color' => 'blue')),
-            new Document(2, array('color' => 'blue')),
-            new Document(3, array('color' => 'red')),
-            new Document(4, array('color' => 'green')),
-        ));
+        $index->getType('test')->addDocuments([
+            new Document(1, ['color' => 'blue']),
+            new Document(2, ['color' => 'blue']),
+            new Document(3, ['color' => 'red']),
+            new Document(4, ['color' => 'green']),
+        ]);
 
         $index->refresh();
 
@@ -68,23 +68,23 @@ class CardinalityTest extends BaseAggregationTest
 
     public function invalidPrecisionThresholdProvider()
     {
-        return array(
-            'string' => array('100'),
-            'float' => array(7.8),
-            'boolean' => array(true),
-            'array' => array(array()),
-            'object' => array(new \StdClass()),
-        );
+        return [
+            'string' => ['100'],
+            'float' => [7.8],
+            'boolean' => [true],
+            'array' => [[]],
+            'object' => [new \StdClass()],
+        ];
     }
 
     public function validPrecisionThresholdProvider()
     {
-        return array(
-            'negative-int' => array(-140),
-            'zero' => array(0),
-            'positive-int' => array(150),
-            'more-than-max' => array(40001),
-        );
+        return [
+            'negative-int' => [-140],
+            'zero' => [0],
+            'positive-int' => [150],
+            'more-than-max' => [40001],
+        ];
     }
 
     /**
@@ -117,20 +117,20 @@ class CardinalityTest extends BaseAggregationTest
 
     public function invalidRehashProvider()
     {
-        return array(
-            'string' => array('100'),
-            'int' => array(100),
-            'float' => array(7.8),
-            'array' => array(array()),
-            'object' => array(new \StdClass()),
-        );
+        return [
+            'string' => ['100'],
+            'int' => [100],
+            'float' => [7.8],
+            'array' => [[]],
+            'object' => [new \StdClass()],
+        ];
     }
 
     public function validRehashProvider()
     {
-        return array(
-            'true' => array(true),
-            'false' => array(false),
-        );
+        return [
+            'true' => [true],
+            'false' => [false],
+        ];
     }
 }

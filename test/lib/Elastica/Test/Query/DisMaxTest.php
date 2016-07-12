@@ -34,17 +34,17 @@ class DisMaxTest extends BaseTest
         $query->addQuery($idsQuery2);
         $query->addQuery($idsQuery3->toArray());
 
-        $expectedArray = array(
-            'dis_max' => array(
+        $expectedArray = [
+            'dis_max' => [
                 'tie_breaker' => $tieBreaker,
                 'boost' => $boost,
-                'queries' => array(
+                'queries' => [
                     $idsQuery1->toArray(),
                     $idsQuery2->toArray(),
                     $idsQuery3->toArray(),
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
@@ -57,12 +57,12 @@ class DisMaxTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'Baden')),
-            new Document(4, array('name' => 'Baden Baden')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'Baden']),
+            new Document(4, ['name' => 'Baden Baden']),
+        ]);
 
         $index->refresh();
 

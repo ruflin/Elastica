@@ -16,7 +16,7 @@ class IndicesTest extends BaseTest
      */
     public function testDeprecated()
     {
-        $reflection = new \ReflectionClass(new Indices(new Term(), array()));
+        $reflection = new \ReflectionClass(new Indices(new Term(), []));
         $this->assertFileDeprecated($reflection->getFileName(), 'Deprecated: Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html');
     }
 
@@ -25,19 +25,19 @@ class IndicesTest extends BaseTest
      */
     public function testToArray()
     {
-        $expected = array(
-            'indices' => array(
-                'indices' => array('index1', 'index2'),
-                'filter' => array(
-                    'term' => array('tag' => 'wow'),
-                ),
-                'no_match_filter' => array(
-                    'term' => array('tag' => 'such filter'),
-                ),
-            ),
-        );
-        $filter = new Indices(new Term(array('tag' => 'wow')), array('index1', 'index2'));
-        $filter->setNoMatchFilter(new Term(array('tag' => 'such filter')));
+        $expected = [
+            'indices' => [
+                'indices' => ['index1', 'index2'],
+                'filter' => [
+                    'term' => ['tag' => 'wow'],
+                ],
+                'no_match_filter' => [
+                    'term' => ['tag' => 'such filter'],
+                ],
+            ],
+        ];
+        $filter = new Indices(new Term(['tag' => 'wow']), ['index1', 'index2']);
+        $filter->setNoMatchFilter(new Term(['tag' => 'such filter']));
         $this->assertEquals($expected, $filter->toArray());
     }
 
@@ -46,12 +46,12 @@ class IndicesTest extends BaseTest
      */
     public function testIndicesFilter()
     {
-        $docs = array(
-            new Document(1, array('color' => 'blue')),
-            new Document(2, array('color' => 'green')),
-            new Document(3, array('color' => 'blue')),
-            new Document(4, array('color' => 'yellow')),
-        );
+        $docs = [
+            new Document(1, ['color' => 'blue']),
+            new Document(2, ['color' => 'green']),
+            new Document(3, ['color' => 'blue']),
+            new Document(4, ['color' => 'yellow']),
+        ];
 
         $index1 = $this->_createIndex();
         $index1->addAlias('indices_filter');
@@ -63,8 +63,8 @@ class IndicesTest extends BaseTest
         $index2->getType('test')->addDocuments($docs);
         $index2->refresh();
 
-        $filter = new Indices(new BoolNot(new Term(array('color' => 'blue'))), array($index1->getName()));
-        $filter->setNoMatchFilter(new BoolNot(new Term(array('color' => 'yellow'))));
+        $filter = new Indices(new BoolNot(new Term(['color' => 'blue'])), [$index1->getName()]);
+        $filter->setNoMatchFilter(new BoolNot(new Term(['color' => 'yellow'])));
         $query = new Query();
         $query->setPostFilter($filter);
 
@@ -94,16 +94,16 @@ class IndicesTest extends BaseTest
         $index1 = $client->getIndex('index1');
         $index2 = $client->getIndex('index2');
 
-        $indices = array('one', 'two');
-        $filter = new Indices(new Term(array('color' => 'blue')), $indices);
+        $indices = ['one', 'two'];
+        $filter = new Indices(new Term(['color' => 'blue']), $indices);
         $this->assertEquals($indices, $filter->getParam('indices'));
 
         $indices[] = 'three';
         $filter->setIndices($indices);
         $this->assertEquals($indices, $filter->getParam('indices'));
 
-        $filter->setIndices(array($index1, $index2));
-        $expected = array($index1->getName(), $index2->getName());
+        $filter->setIndices([$index1, $index2]);
+        $expected = [$index1->getName(), $index2->getName()];
         $this->assertEquals($expected, $filter->getParam('indices'));
 
         $returnValue = $filter->setIndices($indices);
@@ -118,14 +118,14 @@ class IndicesTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('someindex');
 
-        $filter = new Indices(new Term(array('color' => 'blue')), array());
+        $filter = new Indices(new Term(['color' => 'blue']), []);
 
         $filter->addIndex($index);
-        $expected = array($index->getName());
+        $expected = [$index->getName()];
         $this->assertEquals($expected, $filter->getParam('indices'));
 
         $filter->addIndex('foo');
-        $expected = array($index->getName(), 'foo');
+        $expected = [$index->getName(), 'foo'];
         $this->assertEquals($expected, $filter->getParam('indices'));
 
         $returnValue = $filter->addIndex('bar');

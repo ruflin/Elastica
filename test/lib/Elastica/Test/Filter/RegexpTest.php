@@ -27,11 +27,11 @@ class RegexpTest extends BaseTest
 
         $filter = new Regexp($field, $regexp);
 
-        $expectedArray = array(
-            'regexp' => array(
+        $expectedArray = [
+            'regexp' => [
                 $field => $regexp,
-            ),
-        );
+            ],
+        ];
 
         $this->assertequals($expectedArray, $filter->toArray());
     }
@@ -43,20 +43,20 @@ class RegexpTest extends BaseTest
     {
         $field = 'name';
         $regexp = 'ruf';
-        $options = array(
+        $options = [
             'flags' => 'ALL',
-        );
+        ];
 
         $filter = new Regexp($field, $regexp, $options);
 
-        $expectedArray = array(
-            'regexp' => array(
-                $field => array(
+        $expectedArray = [
+            'regexp' => [
+                $field => [
                     'value' => $regexp,
                     'flags' => 'ALL',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertequals($expectedArray, $filter->toArray());
     }
@@ -69,21 +69,21 @@ class RegexpTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
 
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
 
-        $mapping = new Mapping($type, array(
-                'name' => array('type' => 'string', 'store' => 'no', 'index' => 'not_analyzed'),
-            )
+        $mapping = new Mapping($type, [
+                'name' => ['type' => 'string', 'store' => 'no', 'index' => 'not_analyzed'],
+            ]
         );
         $type->setMapping($mapping);
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'Baden')),
-            new Document(4, array('name' => 'Baden Baden')),
-            new Document(5, array('name' => 'New Orleans')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'Baden']),
+            new Document(4, ['name' => 'Baden Baden']),
+            new Document(5, ['name' => 'New Orleans']),
+        ]);
 
         $index->refresh();
 
@@ -117,33 +117,33 @@ class RegexpTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
 
-        $indexParams = array(
-            'analysis' => array(
-                'analyzer' => array(
-                    'lw' => array(
+        $indexParams = [
+            'analysis' => [
+                'analyzer' => [
+                    'lw' => [
                         'type' => 'custom',
                         'tokenizer' => 'keyword',
-                        'filter' => array('lowercase'),
-                    ),
-                ),
-            ),
-        );
+                        'filter' => ['lowercase'],
+                    ],
+                ],
+            ],
+        ];
 
         $index->create($indexParams, true);
         $type = $index->getType('test');
 
-        $mapping = new Mapping($type, array(
-                'name' => array('type' => 'string', 'store' => 'no', 'analyzer' => 'lw'),
-            )
+        $mapping = new Mapping($type, [
+                'name' => ['type' => 'string', 'store' => 'no', 'analyzer' => 'lw'],
+            ]
         );
         $type->setMapping($mapping);
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'Basel-Stadt')),
-            new Document(2, array('name' => 'New York')),
-            new Document(3, array('name' => 'Baden')),
-            new Document(4, array('name' => 'Baden Baden')),
-            new Document(5, array('name' => 'New Orleans')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'Baden']),
+            new Document(4, ['name' => 'Baden Baden']),
+            new Document(5, ['name' => 'New Orleans']),
+        ]);
 
         $index->refresh();
 

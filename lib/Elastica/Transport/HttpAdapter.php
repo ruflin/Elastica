@@ -68,10 +68,10 @@ class HttpAdapter extends AbstractTransport
         $elasticaResponse->setQueryTime($end - $start);
 
         $elasticaResponse->setTransferInfo(
-            array(
+            [
                 'request_header' => $httpAdapterRequest->getMethod(),
                 'http_code' => $httpAdapterResponse->getStatusCode(),
-            )
+            ]
         );
 
         if ($elasticaResponse->hasError()) {
@@ -106,7 +106,7 @@ class HttpAdapter extends AbstractTransport
         $data = $elasticaRequest->getData();
         $body = null;
         $method = $elasticaRequest->getMethod();
-        $headers = $connection->hasConfig('headers') ?: array();
+        $headers = $connection->hasConfig('headers') ?: [];
         if (!empty($data) || '0' === $data) {
             if ($method == ElasticaRequest::GET) {
                 $method = ElasticaRequest::POST;

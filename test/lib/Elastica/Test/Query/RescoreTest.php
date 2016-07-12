@@ -24,27 +24,27 @@ class RescoreTest extends BaseTest
         $query->setRescore($queryRescore);
         $data = $query->toArray();
 
-        $expected = array(
-            'query' => array(
-                'match' => array(
-                    'test1' => array(
+        $expected = [
+            'query' => [
+                'match' => [
+                    'test1' => [
                         'query' => 'foo',
-                    ),
-                ),
-            ),
-            'rescore' => array(
-                'query' => array(
-                    'rescore_query' => array(
-                        'term' => array(
-                            'test2' => array(
+                    ],
+                ],
+            ],
+            'rescore' => [
+                'query' => [
+                    'rescore_query' => [
+                        'term' => [
+                            'test2' => [
                                 'value' => 'bar',
                                 'boost' => 2,
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $data);
     }
@@ -65,28 +65,28 @@ class RescoreTest extends BaseTest
         $query->setRescore($queryRescore);
         $data = $query->toArray();
 
-        $expected = array(
-            'query' => array(
-                'match' => array(
-                    'test1' => array(
+        $expected = [
+            'query' => [
+                'match' => [
+                    'test1' => [
                         'query' => 'foo',
-                    ),
-                ),
-            ),
-            'rescore' => array(
+                    ],
+                ],
+            ],
+            'rescore' => [
                 'window_size' => 50,
-                'query' => array(
-                    'rescore_query' => array(
-                        'term' => array(
-                            'test2' => array(
+                'query' => [
+                    'rescore_query' => [
+                        'term' => [
+                            'test2' => [
                                 'value' => 'bar',
                                 'boost' => 2,
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $data);
     }
@@ -109,30 +109,30 @@ class RescoreTest extends BaseTest
         $query->setRescore($queryRescore);
         $data = $query->toArray();
 
-        $expected = array(
-            'query' => array(
-                'match' => array(
-                    'test1' => array(
+        $expected = [
+            'query' => [
+                'match' => [
+                    'test1' => [
                         'query' => 'foo',
-                    ),
-                ),
-            ),
-            'rescore' => array(
+                    ],
+                ],
+            ],
+            'rescore' => [
                 'window_size' => 50,
-                'query' => array(
-                    'rescore_query' => array(
-                        'term' => array(
-                            'test2' => array(
+                'query' => [
+                    'rescore_query' => [
+                        'term' => [
+                            'test2' => [
                                 'value' => 'bar',
                                 'boost' => 2,
-                            ),
-                        ),
-                    ),
+                            ],
+                        ],
+                    ],
                     'query_weight' => 0.7,
                     'rescore_query_weight' => 1.2,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $data);
     }
@@ -157,44 +157,44 @@ class RescoreTest extends BaseTest
         $rescoreQuery2->setRescoreQuery($secQuery2);
 
         $query->setQuery($mainQuery);
-        $query->setRescore(array($rescoreQuery1, $rescoreQuery2));
+        $query->setRescore([$rescoreQuery1, $rescoreQuery2]);
         $data = $query->toArray();
 
-        $expected = array(
-            'query' => array(
-                'match' => array(
-                    'test1' => array(
+        $expected = [
+            'query' => [
+                'match' => [
+                    'test1' => [
                         'query' => 'foo',
-                    ),
-                ),
-            ),
-            'rescore' => array(
-                array(
-                    'query' => array(
-                        'rescore_query' => array(
-                            'term' => array(
-                                'test2' => array(
+                    ],
+                ],
+            ],
+            'rescore' => [
+                [
+                    'query' => [
+                        'rescore_query' => [
+                            'term' => [
+                                'test2' => [
                                     'value' => 'bar',
                                     'boost' => 1,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                array(
-                    'query' => array(
-                        'rescore_query' => array(
-                            'term' => array(
-                                'test2' => array(
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                [
+                    'query' => [
+                        'rescore_query' => [
+                            'term' => [
+                                'test2' => [
                                     'value' => 'tom',
                                     'boost' => 2,
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $data);
 

@@ -15,7 +15,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
     /**
      * @var array Subaggregations belonging to this aggregation
      */
-    protected $_aggs = array();
+    protected $_aggs = [];
 
     /**
      * @param string $name the name of this aggregation
@@ -88,7 +88,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
 
         if (array_key_exists('global_aggregation', $array)) {
             // compensate for class name GlobalAggregation
-            $array = array('global' => new \stdClass());
+            $array = ['global' => new \stdClass()];
         }
         if (sizeof($this->_aggs)) {
             $array['aggs'] = $this->_convertArrayable($this->_aggs);

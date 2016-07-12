@@ -17,32 +17,32 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
         $this->_checkScriptInlineSetting();
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_partial_failure');
-        $index->create(array(
-            'index' => array(
+        $index->create([
+            'index' => [
                 'number_of_shards' => 5,
                 'number_of_replicas' => 0,
-            ),
-        ), true);
+            ],
+        ], true);
 
         $type = $index->getType('folks');
 
-        $type->addDocument(new Document('', array('name' => 'ruflin')));
-        $type->addDocument(new Document('', array('name' => 'bobrik')));
-        $type->addDocument(new Document('', array('name' => 'kimchy')));
+        $type->addDocument(new Document('', ['name' => 'ruflin']));
+        $type->addDocument(new Document('', ['name' => 'bobrik']));
+        $type->addDocument(new Document('', ['name' => 'kimchy']));
 
         $index->refresh();
 
-        $query = Query::create(array(
-            'query' => array(
-                'filtered' => array(
-                    'filter' => array(
-                        'script' => array(
+        $query = Query::create([
+            'query' => [
+                'filtered' => [
+                    'filter' => [
+                        'script' => [
                             'script' => 'doc["undefined"] > 8', // compiles, but doesn't work
-                        ),
-                    ),
-                ),
-            ),
-        ));
+                        ],
+                    ],
+                ],
+            ],
+        ]);
 
         try {
             $index->search($query);

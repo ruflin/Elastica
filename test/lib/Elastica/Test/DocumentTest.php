@@ -39,7 +39,7 @@ class DocumentTest extends BaseTest
     public function testSetData()
     {
         $doc = new Document();
-        $returnValue = $doc->setData(array('data'));
+        $returnValue = $doc->setData(['data']);
         $this->assertInstanceOf('Elastica\Document', $returnValue);
     }
 
@@ -49,13 +49,13 @@ class DocumentTest extends BaseTest
     public function testToArray()
     {
         $id = 17;
-        $data = array('hello' => 'world');
+        $data = ['hello' => 'world'];
         $type = 'testtype';
         $index = 'textindex';
 
         $doc = new Document($id, $data, $type, $index);
 
-        $result = array('_index' => $index, '_type' => $type, '_id' => $id, '_source' => $data);
+        $result = ['_index' => $index, '_type' => $type, '_id' => $id, '_source' => $data];
         $this->assertEquals($result, $doc->toArray());
     }
 
@@ -127,7 +127,7 @@ class DocumentTest extends BaseTest
         $document->setParent('2');
         $document->setId(1);
 
-        $options = $document->getOptions(array('index', 'type', 'id', 'parent'));
+        $options = $document->getOptions(['index', 'type', 'id', 'parent']);
 
         $this->assertInternalType('array', $options);
         $this->assertEquals(3, count($options));
@@ -143,7 +143,7 @@ class DocumentTest extends BaseTest
         $this->assertArrayNotHasKey('_id', $options);
         $this->assertArrayNotHasKey('_parent', $options);
 
-        $options = $document->getOptions(array('parent', 'op_type', 'percolate'), true);
+        $options = $document->getOptions(['parent', 'op_type', 'percolate'], true);
 
         $this->assertInternalType('array', $options);
         $this->assertEquals(2, count($options));
@@ -161,7 +161,7 @@ class DocumentTest extends BaseTest
      */
     public function testGetSetHasRemove()
     {
-        $document = new Document(1, array('field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null));
+        $document = new Document(1, ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
 
         $this->assertEquals('value1', $document->get('field1'));
         $this->assertEquals('value2', $document->get('field2'));
@@ -215,7 +215,7 @@ class DocumentTest extends BaseTest
      */
     public function testDataPropertiesOverloading()
     {
-        $document = new Document(1, array('field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null));
+        $document = new Document(1, ['field1' => 'value1', 'field2' => 'value2', 'field3' => 'value3', 'field4' => null]);
 
         $this->assertEquals('value1', $document->field1);
         $this->assertEquals('value2', $document->field2);
@@ -325,7 +325,7 @@ class DocumentTest extends BaseTest
         $document = new Document();
 
         $upsert = new Document();
-        $upsert->setData(array('someproperty' => 'somevalue'));
+        $upsert->setData(['someproperty' => 'somevalue']);
 
         $this->assertFalse($document->hasUpsert());
 

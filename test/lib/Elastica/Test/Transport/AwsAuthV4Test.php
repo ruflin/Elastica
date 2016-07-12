@@ -18,14 +18,14 @@ class AwsAuthV4Test extends GuzzleTest
      */
     public function testSignsWithProvidedCredentials()
     {
-        $config = array(
+        $config = [
             'persistent' => false,
             'transport' => 'AwsAuthV4',
             'aws_access_key_id' => 'foo',
             'aws_secret_access_key' => 'bar',
             'aws_session_token' => 'baz',
             'aws_region' => 'us-east-1',
-        );
+        ];
 
         $client = $this->_getClient($config);
         try {
@@ -52,10 +52,10 @@ class AwsAuthV4Test extends GuzzleTest
 
     public function testSignsWithEnvironmentalCredentials()
     {
-        $config = array(
+        $config = [
             'persistent' => false,
             'transport' => 'AwsAuthV4',
-        );
+        ];
         putenv('AWS_REGION=us-east-1');
         putenv('AWS_ACCESS_KEY_ID=foo');
         putenv('AWS_SECRET_ACCESS_KEY=bar');

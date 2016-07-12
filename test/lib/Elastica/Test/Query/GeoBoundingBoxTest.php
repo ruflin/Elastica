@@ -12,11 +12,11 @@ class GeoBoundingBoxTest extends BaseTest
     public function testAddCoordinates()
     {
         $key = 'pin.location';
-        $coords = array('40.73, -74.1', '40.01, -71.12');
-        $query = new GeoBoundingBox($key, array('1,2', '3,4'));
+        $coords = ['40.73, -74.1', '40.01, -71.12'];
+        $query = new GeoBoundingBox($key, ['1,2', '3,4']);
 
         $query->addCoordinates($key, $coords);
-        $expectedArray = array('top_left' => $coords[0], 'bottom_right' => $coords[1]);
+        $expectedArray = ['top_left' => $coords[0], 'bottom_right' => $coords[1]];
         $this->assertEquals($expectedArray, $query->getParam($key));
 
         $returnValue = $query->addCoordinates($key, $coords);
@@ -29,7 +29,7 @@ class GeoBoundingBoxTest extends BaseTest
      */
     public function testAddCoordinatesInvalidException()
     {
-        $query = new GeoBoundingBox('foo', array());
+        $query = new GeoBoundingBox('foo', []);
     }
 
     /**
@@ -38,17 +38,17 @@ class GeoBoundingBoxTest extends BaseTest
     public function testToArray()
     {
         $key = 'pin.location';
-        $coords = array('40.73, -74.1', '40.01, -71.12');
+        $coords = ['40.73, -74.1', '40.01, -71.12'];
         $query = new GeoBoundingBox($key, $coords);
 
-        $expectedArray = array(
-            'geo_bounding_box' => array(
-                $key => array(
+        $expectedArray = [
+            'geo_bounding_box' => [
+                $key => [
                     'top_left' => $coords[0],
                     'bottom_right' => $coords[1],
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }

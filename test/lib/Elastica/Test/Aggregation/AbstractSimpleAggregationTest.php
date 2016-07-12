@@ -7,7 +7,7 @@ class AbstractSimpleAggregationTest extends BaseAggregationTest
     {
         $this->aggregation = $this->getMockForAbstractClass(
             'Elastica\Aggregation\AbstractSimpleAggregation',
-            array('whatever')
+            ['whatever']
         );
     }
 

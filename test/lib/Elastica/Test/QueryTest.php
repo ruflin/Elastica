@@ -30,10 +30,10 @@ class QueryTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query::create() passing filter is deprecated. Create query and use setPostFilter with AbstractQuery instead.',
                 'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -63,11 +63,11 @@ class QueryTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query::setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
                 'Deprecated: Elastica\Query::setFilter() is deprecated and will be removed in further Elastica releases. Use Elastica\Query::setPostFilter() instead.',
                 'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -97,9 +97,9 @@ class QueryTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -149,12 +149,12 @@ class QueryTest extends BaseTest
      */
     public function testRawQuery()
     {
-        $textQuery = new Term(array('title' => 'test'));
+        $textQuery = new Term(['title' => 'test']);
 
         $query1 = Query::create($textQuery);
 
         $query2 = new Query();
-        $query2->setRawQuery(array('query' => array('term' => array('title' => 'test'))));
+        $query2->setRawQuery(['query' => ['term' => ['title' => 'test']]]);
 
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }
@@ -194,18 +194,18 @@ class QueryTest extends BaseTest
      */
     public function testArrayQuery()
     {
-        $query = array(
-            'query' => array(
-                'text' => array(
+        $query = [
+            'query' => [
+                'text' => [
                     'title' => 'test',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $query1 = Query::create($query);
 
         $query2 = new Query();
-        $query2->setRawQuery(array('query' => array('text' => array('title' => 'test'))));
+        $query2->setRawQuery(['query' => ['text' => ['title' => 'test']]]);
 
         $this->assertEquals($query1->toArray(), $query2->toArray());
     }
@@ -218,11 +218,11 @@ class QueryTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'hello world')),
-            new Document(2, array('firstname' => 'guschti', 'lastname' => 'ruflin')),
-            new Document(3, array('firstname' => 'nicolas', 'lastname' => 'ruflin')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'hello world']),
+            new Document(2, ['firstname' => 'guschti', 'lastname' => 'ruflin']),
+            new Document(3, ['firstname' => 'nicolas', 'lastname' => 'ruflin']),
+        ]);
 
         $queryTerm = new Term();
         $queryTerm->setTerm('lastname', 'ruflin');
@@ -232,7 +232,7 @@ class QueryTest extends BaseTest
         $query = Query::create($queryTerm);
 
         // ASC order
-        $query->setSort(array(array('firstname' => array('order' => 'asc'))));
+        $query->setSort([['firstname' => ['order' => 'asc']]]);
         $resultSet = $type->search($query);
         $this->assertEquals(2, $resultSet->count());
 
@@ -243,7 +243,7 @@ class QueryTest extends BaseTest
         $this->assertEquals('nicolas', $second['firstname']);
 
         // DESC order
-        $query->setSort(array('firstname' => array('order' => 'desc')));
+        $query->setSort(['firstname' => ['order' => 'desc']]);
         $resultSet = $type->search($query);
         $this->assertEquals(2, $resultSet->count());
 
@@ -260,10 +260,10 @@ class QueryTest extends BaseTest
     public function testAddSort()
     {
         $query = new Query();
-        $sortParam = array('firstname' => array('order' => 'asc'));
+        $sortParam = ['firstname' => ['order' => 'asc']];
         $query->addSort($sortParam);
 
-        $this->assertEquals($query->getParam('sort'), array($sortParam));
+        $this->assertEquals($query->getParam('sort'), [$sortParam]);
     }
 
     /**
@@ -273,7 +273,7 @@ class QueryTest extends BaseTest
     {
         $query = new Query();
 
-        $params = array('query' => 'test');
+        $params = ['query' => 'test'];
         $query->setRawQuery($params);
 
         $this->assertEquals($params, $query->toArray());
@@ -286,9 +286,9 @@ class QueryTest extends BaseTest
     {
         $query = new Query();
 
-        $params = array('query' => 'test');
+        $params = ['query' => 'test'];
 
-        $query->setFields(array('firstname', 'lastname'));
+        $query->setFields(['firstname', 'lastname']);
 
         $data = $query->toArray();
 
@@ -497,10 +497,10 @@ class QueryTest extends BaseTest
     {
         $query = new Query();
         $postFilter = new \Elastica\Query\Terms();
-        $postFilter->setTerms('key', array('term'));
+        $postFilter->setTerms('key', ['term']);
         $query->setPostFilter($postFilter);
 
-        $postFilter->setTerms('another key', array('another term'));
+        $postFilter->setTerms('another key', ['another term']);
 
         $anotherQuery = new Query();
         $anotherQuery->setPostFilter($postFilter);
@@ -517,10 +517,10 @@ class QueryTest extends BaseTest
 
         $query = new Query();
         $postFilter = new \Elastica\Filter\Terms();
-        $postFilter->setTerms('key', array('term'));
+        $postFilter->setTerms('key', ['term']);
         $query->setPostFilter($postFilter);
 
-        $postFilter->setTerms('another key', array('another term'));
+        $postFilter->setTerms('another key', ['another term']);
 
         $anotherQuery = new Query();
         $anotherQuery->setPostFilter($postFilter);
@@ -540,7 +540,7 @@ class QueryTest extends BaseTest
 
         // Adds 1 document to the index
         $doc1 = new Document(1,
-            array('username' => 'ruflin', 'test' => array('2', '3', '5'))
+            ['username' => 'ruflin', 'test' => ['2', '3', '5']]
         );
         $type->addDocument($doc1);
 

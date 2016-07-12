@@ -13,28 +13,28 @@ abstract class Version
      *
      * @var string[]
      */
-    protected $queries = array();
+    protected $queries = [];
 
     /**
      * supported filter methods.
      *
      * @var string[]
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * supported aggregation methods.
      *
      * @var string[]
      */
-    protected $aggregations = array();
+    protected $aggregations = [];
 
     /**
      * supported $suggester methods.
      *
      * @var string[]
      */
-    protected $suggesters = array();
+    protected $suggesters = [];
 
     /**
      * returns true if $name is supported, false otherwise.

@@ -16,14 +16,14 @@ class TermTest extends BaseTest
     {
         $index = $this->_createIndex();
         $type = $index->getType('testSuggestType');
-        $type->addDocuments(array(
-            new Document(1, array('id' => 1, 'text' => 'GitHub')),
-            new Document(2, array('id' => 1, 'text' => 'Elastic')),
-            new Document(3, array('id' => 1, 'text' => 'Search')),
-            new Document(4, array('id' => 1, 'text' => 'Food')),
-            new Document(5, array('id' => 1, 'text' => 'Flood')),
-            new Document(6, array('id' => 1, 'text' => 'Folks')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['id' => 1, 'text' => 'GitHub']),
+            new Document(2, ['id' => 1, 'text' => 'Elastic']),
+            new Document(3, ['id' => 1, 'text' => 'Search']),
+            new Document(4, ['id' => 1, 'text' => 'Food']),
+            new Document(5, ['id' => 1, 'text' => 'Flood']),
+            new Document(6, ['id' => 1, 'text' => 'Folks']),
+        ]);
         $index->refresh();
 
         return $index;
@@ -45,24 +45,24 @@ class TermTest extends BaseTest
         $suggest2->setSuggestMode(Term::SUGGEST_MODE_POPULAR);
         $suggest->addSuggestion($suggest2->setText('Girhub'));
 
-        $expected = array(
-            'suggest' => array(
-                'suggest1' => array(
-                    'term' => array(
+        $expected = [
+            'suggest' => [
+                'suggest1' => [
+                    'term' => [
                         'field' => '_all',
                         'sort' => 'frequency',
-                    ),
+                    ],
                     'text' => 'Foor',
-                ),
-                'suggest2' => array(
-                    'term' => array(
+                ],
+                'suggest2' => [
+                    'term' => [
                         'field' => '_all',
                         'suggest_mode' => 'popular',
-                    ),
+                    ],
                     'text' => 'Girhub',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $suggest->toArray());
     }

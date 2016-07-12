@@ -54,7 +54,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @var Result[] Results
      */
-    protected $_results = array();
+    protected $_results = [];
 
     /**
      * @deprecated This property is deprecated. Use ResultSet->hasTimedOut() instead. The property will become removed in 4.0.
@@ -114,7 +114,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function getDocuments()
     {
-        $documents = array();
+        $documents = [];
         foreach ($this->_results as $doc) {
             $documents[] = $doc->getDocument();
         }
@@ -143,7 +143,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         $data = $this->_response->getData();
 
-        return isset($data['suggest']) ? $data['suggest'] : array();
+        return isset($data['suggest']) ? $data['suggest'] : [];
     }
 
     /**
@@ -167,7 +167,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         $data = $this->_response->getData();
 
-        return isset($data['aggregations']) ? $data['aggregations'] : array();
+        return isset($data['aggregations']) ? $data['aggregations'] : [];
     }
 
     /**

@@ -20,21 +20,21 @@ class BoolFilter extends AbstractFilter
      *
      * @var array
      */
-    protected $_must = array();
+    protected $_must = [];
 
     /**
      * Should.
      *
      * @var array
      */
-    protected $_should = array();
+    protected $_should = [];
 
     /**
      * Must not.
      *
      * @var array
      */
-    protected $_mustNot = array();
+    protected $_mustNot = [];
 
     /**
      * Adds should filter.
@@ -89,7 +89,7 @@ class BoolFilter extends AbstractFilter
         }
 
         if (is_array($args)) {
-            $parsedArgs = array();
+            $parsedArgs = [];
 
             foreach ($args as $filter) {
                 if ($filter instanceof AbstractFilter) {
@@ -115,7 +115,7 @@ class BoolFilter extends AbstractFilter
      */
     public function toArray()
     {
-        $args = array();
+        $args = [];
 
         if (!empty($this->_must)) {
             $args['bool']['must'] = $this->_must;

@@ -70,14 +70,14 @@ abstract class AbstractType implements SearchableInterface
      *
      * @var array Mapping
      */
-    protected $_mapping = array();
+    protected $_mapping = [];
 
     /**
      * Index params.
      *
      * @var array Index  params
      */
-    protected $_indexParams = array();
+    protected $_indexParams = [];
 
     /**
      * Source.
@@ -126,7 +126,7 @@ abstract class AbstractType implements SearchableInterface
 
         $mapping = new Mapping($this->getType());
         $mapping->setProperties($this->_mapping);
-        $mapping->setSource(array('enabled' => $this->_source));
+        $mapping->setSource(['enabled' => $this->_source]);
         $mapping->send();
     }
 

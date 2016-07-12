@@ -13,7 +13,7 @@ class Prefix extends AbstractQuery
      *
      * @param array $prefix OPTIONAL Calls setRawPrefix with the given $prefix array
      */
-    public function __construct(array $prefix = array())
+    public function __construct(array $prefix = [])
     {
         $this->setRawPrefix($prefix);
     }
@@ -42,6 +42,6 @@ class Prefix extends AbstractQuery
      */
     public function setPrefix($key, $value, $boost = 1.0)
     {
-        return $this->setRawPrefix(array($key => array('value' => $value, 'boost' => $boost)));
+        return $this->setRawPrefix([$key => ['value' => $value, 'boost' => $boost]]);
     }
 }

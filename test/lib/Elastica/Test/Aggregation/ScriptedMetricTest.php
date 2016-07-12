@@ -13,16 +13,16 @@ class ScriptedMetricTest extends BaseAggregationTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->setMapping(new Mapping(null, array(
-            'start' => array('type' => 'long'),
-            'end' => array('type' => 'long'),
-        )));
+        $type->setMapping(new Mapping(null, [
+            'start' => ['type' => 'long'],
+            'end' => ['type' => 'long'],
+        ]));
 
-        $type->addDocuments(array(
-            new Document(1, array('start' => 100, 'end' => 200)),
-            new Document(2, array('start' => 200, 'end' => 250)),
-            new Document(3, array('start' => 300, 'end' => 450)),
-        ));
+        $type->addDocuments([
+            new Document(1, ['start' => 100, 'end' => 200]),
+            new Document(2, ['start' => 200, 'end' => 250]),
+            new Document(3, ['start' => 300, 'end' => 450]),
+        ]);
 
         $index->refresh();
 
@@ -46,6 +46,6 @@ class ScriptedMetricTest extends BaseAggregationTest
         $query->addAggregation($agg);
         $results = $this->_getIndexForTest()->search($query)->getAggregation('scripted');
 
-        $this->assertEquals(array(100, 50, 150), $results['value'][0]);
+        $this->assertEquals([100, 50, 150], $results['value'][0]);
     }
 }

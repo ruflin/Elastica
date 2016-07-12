@@ -36,7 +36,7 @@ class CallbackStrategy implements StrategyInterface
      */
     public function getConnection($connections)
     {
-        return call_user_func_array($this->_callback, array($connections));
+        return call_user_func_array($this->_callback, [$connections]);
     }
 
     /**

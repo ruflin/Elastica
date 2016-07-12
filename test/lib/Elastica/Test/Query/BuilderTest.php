@@ -33,38 +33,38 @@ class BuilderTest extends BaseTest
 
     public function getQueryData()
     {
-        return array(
-            array('allowLeadingWildcard', false, '{"allow_leading_wildcard":"false"}'),
-            array('allowLeadingWildcard', true, '{"allow_leading_wildcard":"true"}'),
-            array('analyzeWildcard', false, '{"analyze_wildcard":"false"}'),
-            array('analyzeWildcard', true, '{"analyze_wildcard":"true"}'),
-            array('analyzer', 'someAnalyzer', '{"analyzer":"someAnalyzer"}'),
-            array('autoGeneratePhraseQueries', true, '{"auto_generate_phrase_queries":"true"}'),
-            array('autoGeneratePhraseQueries', false, '{"auto_generate_phrase_queries":"false"}'),
-            array('boost', 2, '{"boost":"2"}'),
-            array('boost', 4.2, '{"boost":"4.2"}'),
-            array('defaultField', 'fieldName', '{"default_field":"fieldName"}'),
-            array('defaultOperator', 'OR', '{"default_operator":"OR"}'),
-            array('defaultOperator', 'AND', '{"default_operator":"AND"}'),
-            array('enablePositionIncrements', true, '{"enable_position_increments":"true"}'),
-            array('enablePositionIncrements', false, '{"enable_position_increments":"false"}'),
-            array('explain', true, '{"explain":"true"}'),
-            array('explain', false, '{"explain":"false"}'),
-            array('from', 42, '{"from":"42"}'),
-            array('fuzzyMinSim', 4.2, '{"fuzzy_min_sim":"4.2"}'),
-            array('fuzzyPrefixLength', 2, '{"fuzzy_prefix_length":"2"}'),
-            array('gt', 10, '{"gt":"10"}'),
-            array('gte', 11, '{"gte":"11"}'),
-            array('lowercaseExpandedTerms', true, '{"lowercase_expanded_terms":"true"}'),
-            array('lt', 10, '{"lt":"10"}'),
-            array('lte', 11, '{"lte":"11"}'),
-            array('minimumNumberShouldMatch', 21, '{"minimum_number_should_match":"21"}'),
-            array('phraseSlop', 6, '{"phrase_slop":"6"}'),
-            array('size', 7, '{"size":"7"}'),
-            array('tieBreakerMultiplier', 7, '{"tie_breaker_multiplier":"7"}'),
-            array('matchAll', 1.1, '{"match_all":{"boost":"1.1"}}'),
-            array('fields', array('age', 'sex', 'location'), '{"fields":["age","sex","location"]}'),
-        );
+        return [
+            ['allowLeadingWildcard', false, '{"allow_leading_wildcard":"false"}'],
+            ['allowLeadingWildcard', true, '{"allow_leading_wildcard":"true"}'],
+            ['analyzeWildcard', false, '{"analyze_wildcard":"false"}'],
+            ['analyzeWildcard', true, '{"analyze_wildcard":"true"}'],
+            ['analyzer', 'someAnalyzer', '{"analyzer":"someAnalyzer"}'],
+            ['autoGeneratePhraseQueries', true, '{"auto_generate_phrase_queries":"true"}'],
+            ['autoGeneratePhraseQueries', false, '{"auto_generate_phrase_queries":"false"}'],
+            ['boost', 2, '{"boost":"2"}'],
+            ['boost', 4.2, '{"boost":"4.2"}'],
+            ['defaultField', 'fieldName', '{"default_field":"fieldName"}'],
+            ['defaultOperator', 'OR', '{"default_operator":"OR"}'],
+            ['defaultOperator', 'AND', '{"default_operator":"AND"}'],
+            ['enablePositionIncrements', true, '{"enable_position_increments":"true"}'],
+            ['enablePositionIncrements', false, '{"enable_position_increments":"false"}'],
+            ['explain', true, '{"explain":"true"}'],
+            ['explain', false, '{"explain":"false"}'],
+            ['from', 42, '{"from":"42"}'],
+            ['fuzzyMinSim', 4.2, '{"fuzzy_min_sim":"4.2"}'],
+            ['fuzzyPrefixLength', 2, '{"fuzzy_prefix_length":"2"}'],
+            ['gt', 10, '{"gt":"10"}'],
+            ['gte', 11, '{"gte":"11"}'],
+            ['lowercaseExpandedTerms', true, '{"lowercase_expanded_terms":"true"}'],
+            ['lt', 10, '{"lt":"10"}'],
+            ['lte', 11, '{"lte":"11"}'],
+            ['minimumNumberShouldMatch', 21, '{"minimum_number_should_match":"21"}'],
+            ['phraseSlop', 6, '{"phrase_slop":"6"}'],
+            ['size', 7, '{"size":"7"}'],
+            ['tieBreakerMultiplier', 7, '{"tie_breaker_multiplier":"7"}'],
+            ['matchAll', 1.1, '{"match_all":{"boost":"1.1"}}'],
+            ['fields', ['age', 'sex', 'location'], '{"fields":["age","sex","location"]}'],
+        ];
     }
 
     /**
@@ -104,24 +104,24 @@ class BuilderTest extends BaseTest
 
     public function getQueryTypes()
     {
-        return array(
-            array('bool', 'bool'),
-            array('constantScore', 'constant_score'),
-            array('disMax', 'dis_max'),
-            array('filter', 'filter'),
-            array('filteredQuery', 'filtered'),
-            array('must', 'must'),
-            array('mustNot', 'must_not'),
-            array('prefix', 'prefix'),
-            array('query', 'query'),
-            array('queryString', 'query_string'),
-            array('range', 'range'),
-            array('should', 'should'),
-            array('sort', 'sort'),
-            array('term', 'term'),
-            array('textPhrase', 'text_phrase'),
-            array('wildcard', 'wildcard'),
-        );
+        return [
+            ['bool', 'bool'],
+            ['constantScore', 'constant_score'],
+            ['disMax', 'dis_max'],
+            ['filter', 'filter'],
+            ['filteredQuery', 'filtered'],
+            ['must', 'must'],
+            ['mustNot', 'must_not'],
+            ['prefix', 'prefix'],
+            ['query', 'query'],
+            ['queryString', 'query_string'],
+            ['range', 'range'],
+            ['should', 'should'],
+            ['sort', 'sort'],
+            ['term', 'term'],
+            ['textPhrase', 'text_phrase'],
+            ['wildcard', 'wildcard'],
+        ];
     }
 
     /**
@@ -203,7 +203,7 @@ class BuilderTest extends BaseTest
     public function testSortFields()
     {
         $builder = new Builder();
-        $this->assertSame($builder, $builder->sortFields(array('field1' => 'asc', 'field2' => 'desc', 'field3' => 'asc')));
+        $this->assertSame($builder, $builder->sortFields(['field1' => 'asc', 'field2' => 'desc', 'field3' => 'asc']));
         $this->assertSame('{"sort":[{"field1":"asc"},{"field2":"desc"},{"field3":"asc"}]}', (string) $builder);
     }
 
@@ -213,7 +213,7 @@ class BuilderTest extends BaseTest
      */
     public function testQueries()
     {
-        $queries = array();
+        $queries = [];
 
         $builder = new Builder();
         $b1 = clone $builder;
@@ -228,13 +228,13 @@ class BuilderTest extends BaseTest
 
     public function getFieldData()
     {
-        return array(
-            array('name', 'value', '{"name":"value"}'),
-            array('name', true, '{"name":"true"}'),
-            array('name', false, '{"name":"false"}'),
-            array('name', array(1, 2, 3), '{"name":["1","2","3"]}'),
-            array('name', array('foo', 'bar', 'baz'), '{"name":["foo","bar","baz"]}'),
-        );
+        return [
+            ['name', 'value', '{"name":"value"}'],
+            ['name', true, '{"name":"true"}'],
+            ['name', false, '{"name":"false"}'],
+            ['name', [1, 2, 3], '{"name":["1","2","3"]}'],
+            ['name', ['foo', 'bar', 'baz'], '{"name":["foo","bar","baz"]}'],
+        ];
     }
 
     /**
@@ -269,14 +269,14 @@ class BuilderTest extends BaseTest
     public function testToArray()
     {
         $builder = new Builder();
-        $builder->query()->term()->field('category.id', array(1, 2, 3))->termClose()->queryClose();
-        $expected = array(
-            'query' => array(
-                'term' => array(
-                    'category.id' => array(1, 2, 3),
-                ),
-            ),
-        );
+        $builder->query()->term()->field('category.id', [1, 2, 3])->termClose()->queryClose();
+        $expected = [
+            'query' => [
+                'term' => [
+                    'category.id' => [1, 2, 3],
+                ],
+            ],
+        ];
         $this->assertEquals($expected, $builder->toArray());
     }
 }

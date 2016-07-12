@@ -109,12 +109,12 @@ class Status
             $transferInfo = $e->getResponse()->getTransferInfo();
             // 404 means the index alias doesn't exist which means no indexes have it.
             if ($transferInfo['http_code'] === 404) {
-                return array();
+                return [];
             }
             // If we don't have a 404 then this is still unexpected so rethrow the exception.
             throw $e;
         }
-        $indices = array();
+        $indices = [];
         foreach ($response->getData() as $name => $unused) {
             $indices[] = new Index($this->_client, $name);
         }

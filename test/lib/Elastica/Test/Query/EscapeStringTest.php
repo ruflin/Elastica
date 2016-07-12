@@ -20,8 +20,8 @@ class EscapeStringTest extends BaseTest
 
         $type = new Type($index, 'helloworld');
 
-        $doc = new Document(1, array(
-            'email' => 'test@test.com', 'username' => 'test 7/6 123', 'test' => array('2', '3', '5'), )
+        $doc = new Document(1, [
+            'email' => 'test@test.com', 'username' => 'test 7/6 123', 'test' => ['2', '3', '5'], ]
         );
         $type->addDocument($doc);
 

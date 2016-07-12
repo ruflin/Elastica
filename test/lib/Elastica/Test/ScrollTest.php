@@ -87,9 +87,9 @@ class ScrollTest extends Base
         $index = $this->_createIndex();
         $index->refresh();
 
-        $docs = array();
+        $docs = [];
         for ($x = 1; $x <= 11; ++$x) {
-            $docs[] = new Document($x, array('id' => $x, 'key' => 'value'));
+            $docs[] = new Document($x, ['id' => $x, 'key' => 'value']);
         }
 
         $type = $index->getType('scrollTest');

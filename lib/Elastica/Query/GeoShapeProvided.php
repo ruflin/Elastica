@@ -58,16 +58,16 @@ class GeoShapeProvided extends AbstractGeoShape
      */
     public function toArray()
     {
-        return array(
-            'geo_shape' => array(
-                $this->_path => array(
-                    'shape' => array(
+        return [
+            'geo_shape' => [
+                $this->_path => [
+                    'shape' => [
                         'type' => $this->_shapeType,
                         'coordinates' => $this->_coordinates,
                         'relation' => $this->_relation,
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
     }
 }

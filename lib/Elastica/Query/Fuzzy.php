@@ -42,7 +42,7 @@ class Fuzzy extends AbstractQuery
             throw new InvalidException('Fuzzy query can only support a single field.');
         }
 
-        return $this->setParam($fieldName, array('value' => $value));
+        return $this->setParam($fieldName, ['value' => $value]);
     }
 
     /**

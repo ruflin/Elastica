@@ -15,11 +15,11 @@ class ResultSetTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'elastica search')),
-            new Document(2, array('name' => 'elastica library')),
-            new Document(3, array('name' => 'elastica test')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'elastica search']),
+            new Document(2, ['name' => 'elastica library']),
+            new Document(3, ['name' => 'elastica test']),
+        ]);
         $index->refresh();
 
         $resultSet = $type->search('elastica search');
@@ -39,11 +39,11 @@ class ResultSetTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'elastica search')),
-            new Document(2, array('name' => 'elastica library')),
-            new Document(3, array('name' => 'elastica test')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'elastica search']),
+            new Document(2, ['name' => 'elastica library']),
+            new Document(3, ['name' => 'elastica test']),
+        ]);
         $index->refresh();
 
         $resultSet = $type->search('elastica search');
@@ -64,11 +64,11 @@ class ResultSetTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'elastica search')),
-            new Document(2, array('name' => 'elastica library')),
-            new Document(3, array('name' => 'elastica test')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'elastica search']),
+            new Document(2, ['name' => 'elastica library']),
+            new Document(3, ['name' => 'elastica test']),
+        ]);
         $index->refresh();
 
         $resultSet = $type->search('elastica search');
@@ -95,13 +95,13 @@ class ResultSetTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'elastica search'));
+        $doc = new Document(1, ['name' => 'elastica search']);
         $type->addDocument($doc);
         $index->refresh();
 
         $resultSet = $type->search('elastica search');
 
-        $result = new Result(array('_id' => 'fakeresult'));
+        $result = new Result(['_id' => 'fakeresult']);
         $resultSet[1] = $result;
     }
 
@@ -114,7 +114,7 @@ class ResultSetTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('name' => 'elastica search'));
+        $doc = new Document(1, ['name' => 'elastica search']);
         $type->addDocument($doc);
         $index->refresh();
 

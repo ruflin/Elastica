@@ -19,20 +19,20 @@ class SearchTest extends BaseTest
         $client = $this->_getClient();
 
         $index = $client->getIndex('zero');
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
-        $docs = array();
-        $docs[] = new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(2, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(3, array('id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley'));
-        $docs[] = new Document(4, array('id' => 1, 'email' => 'test@test.com', 'username' => 'kate'));
-        $docs[] = new Document(5, array('id' => 1, 'email' => 'test@test.com', 'username' => 'kate'));
-        $docs[] = new Document(6, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
-        $docs[] = new Document(7, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
-        $docs[] = new Document(8, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
-        $docs[] = new Document(9, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
-        $docs[] = new Document(10, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
-        $docs[] = new Document(11, array('id' => 1, 'email' => 'test@test.com', 'username' => 'bunny'));
+        $docs = [];
+        $docs[] = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
+        $docs[] = new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'kate']);
+        $docs[] = new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'kate']);
+        $docs[] = new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
+        $docs[] = new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
         $type = $index->getType('zeroType');
         $type->addDocuments($docs);
         $index->refresh();
@@ -64,7 +64,7 @@ class SearchTest extends BaseTest
         $search2 = new Search($client);
         $search3 = new Search($client);
 
-        $multiSearch->setSearches(array($search1, $search2, $search3));
+        $multiSearch->setSearches([$search1, $search2, $search3]);
 
         $searches = $multiSearch->getSearches();
 
@@ -96,7 +96,7 @@ class SearchTest extends BaseTest
         $search2 = new Search($client);
         $search3 = new Search($client);
 
-        $multiSearch->setSearches(array('search1' => $search1, 'search2' => $search2, $search3));
+        $multiSearch->setSearches(['search1' => $search1, 'search2' => $search2, $search3]);
 
         $searches = $multiSearch->getSearches();
 
@@ -328,7 +328,7 @@ class SearchTest extends BaseTest
 
         $searchBad = new Search($client);
         $searchBadQuery = new Range();
-        $searchBadQuery->addField('bad', array('_id' => 0));
+        $searchBadQuery->addField('bad', ['_id' => 0]);
         $searchBadQuery->setParam('_cache', true);
         $searchBad->setQuery($searchBadQuery);
         $searchBad->addIndex($index)->addType($type);
@@ -377,7 +377,7 @@ class SearchTest extends BaseTest
 
         $searchBad = new Search($client);
         $searchBadQuery = new Range();
-        $searchBadQuery->addField('bad', array('_id' => 0));
+        $searchBadQuery->addField('bad', ['_id' => 0]);
         $searchBadQuery->setParam('_cache', true);
         $searchBad->setQuery($searchBadQuery);
         $searchBad->addIndex($index)->addType($type);

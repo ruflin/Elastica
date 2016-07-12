@@ -19,18 +19,18 @@ class ScriptFileTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->setMapping(new Mapping(null, array(
-            'location' => array('type' => 'geo_point'),
-        )));
+        $type->setMapping(new Mapping(null, [
+            'location' => ['type' => 'geo_point'],
+        ]));
 
-        $type->addDocuments(array(
-            new Document(1, array('location' => array('lat' => 48.8825968, 'lon' => 2.3706111))),
-            new Document(2, array('location' => array('lat' => 48.9057932, 'lon' => 2.2739735))),
-        ));
+        $type->addDocuments([
+            new Document(1, ['location' => ['lat' => 48.8825968, 'lon' => 2.3706111]]),
+            new Document(2, ['location' => ['lat' => 48.9057932, 'lon' => 2.2739735]]),
+        ]);
 
         $index->refresh();
 
-        $scriptFile = new ScriptFile('calculate-distance', array('lat' => 48.858859, 'lon' => 2.3470599));
+        $scriptFile = new ScriptFile('calculate-distance', ['lat' => 48.858859, 'lon' => 2.3470599]);
 
         $query = new Query();
         $query->addScriptField('distance', $scriptFile);
@@ -48,8 +48,8 @@ class ScriptFileTest extends BaseTest
         $results = $resultSet->getResults();
 
         $this->assertEquals(2, $resultSet->count());
-        $this->assertEquals(array(3.149406767298327), $results[0]->__get('distance'));
-        $this->assertEquals(array(7.4639790751755726), $results[1]->__get('distance'));
+        $this->assertEquals([3.149406767298327], $results[0]->__get('distance'));
+        $this->assertEquals([7.4639790751755726], $results[1]->__get('distance'));
     }
 
     /**
@@ -60,23 +60,23 @@ class ScriptFileTest extends BaseTest
         $value = 'calculate-distance.groovy';
         $scriptFile = new ScriptFile($value);
 
-        $expected = array(
+        $expected = [
             'script_file' => $value,
-        );
+        ];
         $this->assertEquals($value, $scriptFile->getScriptFile());
         $this->assertEquals($expected, $scriptFile->toArray());
 
-        $params = array(
+        $params = [
             'param1' => 'one',
             'param2' => 10,
-        );
+        ];
 
         $scriptFile = new ScriptFile($value, $params);
 
-        $expected = array(
+        $expected = [
             'script_file' => $value,
             'params' => $params,
-        );
+        ];
 
         $this->assertEquals($value, $scriptFile->getScriptFile());
         $this->assertEquals($params, $scriptFile->getParams());
@@ -95,9 +95,9 @@ class ScriptFileTest extends BaseTest
 
         $this->assertEquals($string, $scriptFile->getScriptFile());
 
-        $expected = array(
+        $expected = [
             'script_file' => $string,
-        );
+        ];
         $this->assertEquals($expected, $scriptFile->toArray());
     }
 
@@ -120,14 +120,14 @@ class ScriptFileTest extends BaseTest
     public function testCreateArray()
     {
         $string = 'calculate-distance.groovy';
-        $params = array(
+        $params = [
             'param1' => 'one',
             'param2' => 1,
-        );
-        $array = array(
+        ];
+        $array = [
             'script_file' => $string,
             'params' => $params,
-        );
+        ];
 
         $scriptFile = ScriptFile::create($array);
 
@@ -154,17 +154,17 @@ class ScriptFileTest extends BaseTest
      */
     public function dataProviderCreateInvalid()
     {
-        return array(
-            array(
+        return [
+            [
                 new \stdClass(),
-            ),
-            array(
-                array('params' => array('param1' => 'one')),
-            ),
-            array(
-                array('script' => 'calculate-distance.groovy', 'params' => 'param'),
-            ),
-        );
+            ],
+            [
+                ['params' => ['param1' => 'one']],
+            ],
+            [
+                ['script' => 'calculate-distance.groovy', 'params' => 'param'],
+            ],
+        ];
     }
 
     /**

@@ -17,8 +17,8 @@ class ConstantScoreTest extends BaseTest
      */
     public function testArrayConstruct()
     {
-        $query = new ConstantScore(array('test'));
-        $this->assertSame($query->getParam('filter'), array('test'));
+        $query = new ConstantScore(['test']);
+        $this->assertSame($query->getParam('filter'), ['test']);
     }
 
     /**
@@ -44,10 +44,10 @@ class ConstantScoreTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\ConstantScore passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
                 'Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -77,52 +77,52 @@ class ConstantScoreTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
     public function dataProviderSampleQueries()
     {
-        return array(
-            array(
-                new \Elastica\Query\Term(array('foo', 'bar')),
-                array(
-                    'constant_score' => array(
-                        'filter' => array(
-                            'term' => array(
+        return [
+            [
+                new \Elastica\Query\Term(['foo', 'bar']),
+                [
+                    'constant_score' => [
+                        'filter' => [
+                            'term' => [
                                 'foo',
                                 'bar',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            array(
-                array(
-                    'and' => array(
-                        array(
-                            'query' => array(
-                                'query_string' => array(
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                [
+                    'and' => [
+                        [
+                            'query' => [
+                                'query_string' => [
                                     'query' => 'foo',
                                     'default_field' => 'something',
-                                ),
-                            ),
-                        ),
-                        array(
-                            'query' => array(
-                                'query_string' => array(
+                                ],
+                            ],
+                        ],
+                        [
+                            'query' => [
+                                'query_string' => [
                                     'query' => 'bar',
                                     'default_field' => 'something',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
                 '{"constant_score":{"filter":{"and":[{"query":{"query_string":{"query":"foo","default_field":"something"}}},{"query":{"query_string":{"query":"bar","default_field":"something"}}}]}}}',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -144,24 +144,24 @@ class ConstantScoreTest extends BaseTest
     public function dataProviderSampleQueriesWithLegacyFilter()
     {
         $this->hideDeprecated();
-        $legacyFilter = new Term(array('foo', 'bar'));
+        $legacyFilter = new Term(['foo', 'bar']);
         $this->showDeprecated();
 
-        return array(
-            array(
+        return [
+            [
                 $legacyFilter,
-                array(
-                    'constant_score' => array(
-                        'filter' => array(
-                            'term' => array(
+                [
+                    'constant_score' => [
+                        'filter' => [
+                            'term' => [
                                 'foo',
                                 'bar',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
     }
 
     /**
@@ -190,16 +190,16 @@ class ConstantScoreTest extends BaseTest
 
         $boost = 1.2;
         $filter = new \Elastica\Query\Ids();
-        $filter->setIds(array(1));
+        $filter->setIds([1]);
         $query->setFilter($filter);
         $query->setBoost($boost);
 
-        $expectedArray = array(
-            'constant_score' => array(
+        $expectedArray = [
+            'constant_score' => [
                 'filter' => $filter->toArray(),
                 'boost' => $boost,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
@@ -214,17 +214,17 @@ class ConstantScoreTest extends BaseTest
         $boost = 1.2;
         $this->hideDeprecated();
         $filter = new Ids();
-        $filter->setIds(array(1));
+        $filter->setIds([1]);
         $query->setFilter($filter);
         $this->showDeprecated();
         $query->setBoost($boost);
 
-        $expectedArray = array(
-            'constant_score' => array(
+        $expectedArray = [
+            'constant_score' => [
                 'filter' => $filter->toArray(),
                 'boost' => $boost,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
@@ -235,15 +235,15 @@ class ConstantScoreTest extends BaseTest
     public function testConstruct()
     {
         $filter = new \Elastica\Query\Ids();
-        $filter->setIds(array(1));
+        $filter->setIds([1]);
 
         $query = new ConstantScore($filter);
 
-        $expectedArray = array(
-            'constant_score' => array(
+        $expectedArray = [
+            'constant_score' => [
                 'filter' => $filter->toArray(),
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
@@ -254,17 +254,17 @@ class ConstantScoreTest extends BaseTest
     public function testConstructWithLegacyFilter()
     {
         $filter = new Ids();
-        $filter->setIds(array(1));
+        $filter->setIds([1]);
 
         $this->hideDeprecated();
         $query = new ConstantScore($filter);
         $this->showDeprecated();
 
-        $expectedArray = array(
-            'constant_score' => array(
+        $expectedArray = [
+            'constant_score' => [
                 'filter' => $filter->toArray(),
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
@@ -277,11 +277,11 @@ class ConstantScoreTest extends BaseTest
         $index = $this->_createIndex();
 
         $type = $index->getType('constant_score');
-        $type->addDocuments(array(
-            new Document(1, array('id' => 1, 'email' => 'hans@test.com', 'username' => 'hans')),
-            new Document(2, array('id' => 2, 'email' => 'emil@test.com', 'username' => 'emil')),
-            new Document(3, array('id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['id' => 1, 'email' => 'hans@test.com', 'username' => 'hans']),
+            new Document(2, ['id' => 2, 'email' => 'emil@test.com', 'username' => 'emil']),
+            new Document(3, ['id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth']),
+        ]);
 
         // Refresh index
         $index->refresh();
@@ -293,12 +293,12 @@ class ConstantScoreTest extends BaseTest
         $query->setQuery($query_match);
         $query->setBoost($boost);
 
-        $expectedArray = array(
-            'constant_score' => array(
+        $expectedArray = [
+            'constant_score' => [
                 'query' => $query_match->toArray(),
                 'boost' => $boost,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
         $resultSet = $type->search($query);
@@ -315,7 +315,7 @@ class ConstantScoreTest extends BaseTest
     public function testConstructEmpty()
     {
         $query = new ConstantScore();
-        $expectedArray = array('constant_score' => array());
+        $expectedArray = ['constant_score' => []];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }

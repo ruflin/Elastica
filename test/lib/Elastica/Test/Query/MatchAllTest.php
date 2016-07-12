@@ -15,7 +15,7 @@ class MatchAllTest extends BaseTest
     {
         $query = new MatchAll();
 
-        $expectedArray = array('match_all' => new \stdClass());
+        $expectedArray = ['match_all' => new \stdClass()];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
@@ -33,8 +33,8 @@ class MatchAllTest extends BaseTest
         $search1 = new Search($client);
         $resultSet1 = $search1->search(new MatchAll());
 
-        $doc1 = new Document(1, array('name' => 'ruflin'));
-        $doc2 = new Document(1, array('name' => 'ruflin'));
+        $doc1 = new Document(1, ['name' => 'ruflin']);
+        $doc2 = new Document(1, ['name' => 'ruflin']);
         $index1->getType('test')->addDocument($doc1);
         $index2->getType('test')->addDocument($doc2);
 

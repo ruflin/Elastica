@@ -23,7 +23,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     /**
      * @var array Error array
      */
-    protected $_error = array();
+    protected $_error = [];
 
     /**
      * Constructs elasticsearch exception.

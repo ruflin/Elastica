@@ -32,10 +32,10 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
             return $this->setParam('include', $pattern);
         }
 
-        return $this->setParam('include', array(
+        return $this->setParam('include', [
             'pattern' => $pattern,
             'flags' => $flags,
-        ));
+        ]);
     }
 
     /**
@@ -52,10 +52,10 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
             return $this->setParam('exclude', $pattern);
         }
 
-        return $this->setParam('exclude', array(
+        return $this->setParam('exclude', [
             'pattern' => $pattern,
             'flags' => $flags,
-        ));
+        ]);
     }
 
     /**

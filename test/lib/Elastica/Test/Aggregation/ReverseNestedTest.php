@@ -14,46 +14,46 @@ class ReverseNestedTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
         $mapping = new Mapping();
-        $mapping->setProperties(array(
-            'comments' => array(
+        $mapping->setProperties([
+            'comments' => [
                 'type' => 'nested',
-                'properties' => array(
-                    'name' => array('type' => 'string'),
-                    'body' => array('type' => 'string'),
-                ),
-            ),
-        ));
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'body' => ['type' => 'string'],
+                ],
+            ],
+        ]);
         $type = $index->getType('test');
         $type->setMapping($mapping);
 
-        $type->addDocuments(array(
-            new Document(1, array(
-                'comments' => array(
-                    array(
+        $type->addDocuments([
+            new Document(1, [
+                'comments' => [
+                    [
                         'name' => 'bob',
                         'body' => 'this is bobs comment',
-                    ),
-                    array(
+                    ],
+                    [
                         'name' => 'john',
                         'body' => 'this is johns comment',
-                    ),
-                ),
-                'tags' => array('foo', 'bar'),
-            )),
-            new Document(2, array(
-                 'comments' => array(
-                    array(
+                    ],
+                ],
+                'tags' => ['foo', 'bar'],
+            ]),
+            new Document(2, [
+                 'comments' => [
+                    [
                         'name' => 'bob',
                         'body' => 'this is another comment from bob',
-                    ),
-                    array(
+                    ],
+                    [
                         'name' => 'susan',
                         'body' => 'this is susans comment',
-                    ),
-                ),
-                'tags' => array('foo', 'baz'),
-            )),
-        ));
+                    ],
+                ],
+                'tags' => ['foo', 'baz'],
+            ]),
+        ]);
 
         $index->refresh();
 
@@ -108,27 +108,27 @@ class ReverseNestedTest extends BaseAggregationTest
 
         // bob
         $this->assertEquals('bob', $nameResults['buckets'][0]['key']);
-        $tags = array(
-            array('key' => 'foo', 'doc_count' => 2),
-            array('key' => 'bar', 'doc_count' => 1),
-            array('key' => 'baz', 'doc_count' => 1),
-        );
+        $tags = [
+            ['key' => 'foo', 'doc_count' => 2],
+            ['key' => 'bar', 'doc_count' => 1],
+            ['key' => 'baz', 'doc_count' => 1],
+        ];
         $this->assertEquals($tags, $nameResults['buckets'][0]['main']['tags']['buckets']);
 
         // john
         $this->assertEquals('john', $nameResults['buckets'][1]['key']);
-        $tags = array(
-            array('key' => 'bar', 'doc_count' => 1),
-            array('key' => 'foo', 'doc_count' => 1),
-        );
+        $tags = [
+            ['key' => 'bar', 'doc_count' => 1],
+            ['key' => 'foo', 'doc_count' => 1],
+        ];
         $this->assertEquals($tags, $nameResults['buckets'][1]['main']['tags']['buckets']);
 
         // susan
         $this->assertEquals('susan', $nameResults['buckets'][2]['key']);
-        $tags = array(
-            array('key' => 'baz', 'doc_count' => 1),
-            array('key' => 'foo', 'doc_count' => 1),
-        );
+        $tags = [
+            ['key' => 'baz', 'doc_count' => 1],
+            ['key' => 'foo', 'doc_count' => 1],
+        ];
         $this->assertEquals($tags, $nameResults['buckets'][2]['main']['tags']['buckets']);
     }
 }
