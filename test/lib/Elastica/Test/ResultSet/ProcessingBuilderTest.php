@@ -41,7 +41,7 @@ class ProcessingBuilderTest extends BaseTest
     {
         $response = new Response('');
         $query = new Query();
-        $resultSet = new ResultSet($response, $query, array());
+        $resultSet = new ResultSet($response, $query, []);
 
         $this->innerBuilder->expects($this->once())
             ->method('buildResultSet')

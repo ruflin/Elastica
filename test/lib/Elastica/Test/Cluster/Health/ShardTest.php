@@ -15,14 +15,14 @@ class ShardTest extends BaseTest
     {
         parent::setUp();
 
-        $shardData = array(
+        $shardData = [
             'status' => 'red',
             'primary_active' => true,
             'active_shards' => 1,
             'relocating_shards' => 0,
             'initializing_shards' => 0,
             'unassigned_shards' => 1,
-        );
+        ];
 
         $this->_shard = new HealthShard(2, $shardData);
     }

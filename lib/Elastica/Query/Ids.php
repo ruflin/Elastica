@@ -20,7 +20,7 @@ class Ids extends AbstractQuery
      * @param string|\Elastica\Type $type Type to filter on
      * @param array                 $ids  List of ids
      */
-    public function __construct($type = null, array $ids = array())
+    public function __construct($type = null, array $ids = [])
     {
         $this->setType($type);
         $this->setIds($ids);
@@ -94,7 +94,7 @@ class Ids extends AbstractQuery
         if (is_array($ids)) {
             $this->_params['values'] = $ids;
         } else {
-            $this->_params['values'] = array($ids);
+            $this->_params['values'] = [$ids];
         }
 
         return $this;
@@ -109,6 +109,6 @@ class Ids extends AbstractQuery
      */
     public function toArray()
     {
-        return array('ids' => $this->_params);
+        return ['ids' => $this->_params];
     }
 }

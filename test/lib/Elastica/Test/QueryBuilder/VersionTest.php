@@ -12,14 +12,14 @@ class VersionTest extends BaseTest
      */
     public function testVersions()
     {
-        $dsl = array(
+        $dsl = [
             new DSL\Query(),
             new DSL\Filter(),
             new DSL\Aggregation(),
             new DSL\Suggest(),
-        );
+        ];
 
-        $versions = array(
+        $versions = [
             new Version\Version090(),
             new Version\Version100(),
             new Version\Version110(),
@@ -28,7 +28,7 @@ class VersionTest extends BaseTest
             new Version\Version140(),
             new Version\Version150(),
             new Version\Latest(),
-        );
+        ];
 
         foreach ($versions as $version) {
             $this->assertVersions($version, $dsl);

@@ -17,13 +17,13 @@ class PhraseTest extends BaseTest
     {
         $index = $this->_createIndex();
         $type = $index->getType('testSuggestType');
-        $type->addDocuments(array(
-            new Document(1, array('text' => 'Github is pretty cool')),
-            new Document(2, array('text' => 'Elasticsearch is bonsai cool')),
-            new Document(3, array('text' => 'This is a test phrase')),
-            new Document(4, array('text' => 'Another sentence for testing')),
-            new Document(5, array('text' => 'Some more words here')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['text' => 'Github is pretty cool']),
+            new Document(2, ['text' => 'Elasticsearch is bonsai cool']),
+            new Document(3, ['text' => 'This is a test phrase']),
+            new Document(4, ['text' => 'Another sentence for testing']),
+            new Document(5, ['text' => 'Some more words here']),
+        ]);
         $index->refresh();
 
         return $index;
@@ -41,18 +41,18 @@ class PhraseTest extends BaseTest
         $suggest->addSuggestion($phraseSuggest);
         $suggest->setGlobalText('global!');
 
-        $expected = array(
-            'suggest' => array(
+        $expected = [
+            'suggest' => [
                 'text' => 'global!',
-                'suggest1' => array(
+                'suggest1' => [
                     'text' => 'elasticsearch is bansai coor',
-                    'phrase' => array(
+                    'phrase' => [
                         'field' => 'text',
                         'analyzer' => 'simple',
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $suggest->toArray());
     }

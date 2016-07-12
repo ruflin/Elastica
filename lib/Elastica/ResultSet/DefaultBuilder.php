@@ -34,7 +34,7 @@ class DefaultBuilder implements BuilderInterface
     private function buildResults(Response $response)
     {
         $data = $response->getData();
-        $results = array();
+        $results = [];
 
         if (!isset($data['hits']['hits'])) {
             return $results;

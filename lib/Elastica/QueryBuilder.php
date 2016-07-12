@@ -21,7 +21,7 @@ class QueryBuilder
     /**
      * @var Facade[]
      */
-    private $_facades = array();
+    private $_facades = [];
 
     /**
      * Constructor.

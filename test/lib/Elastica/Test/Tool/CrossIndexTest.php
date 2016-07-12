@@ -27,13 +27,13 @@ class CrossIndexTest extends Base
 
         $this->assertEquals(10, $newIndex->count());
 
-        $oldResult = array();
+        $oldResult = [];
 
         foreach ($oldIndex->search()->getResults() as $result) {
             $oldResult[] = $result->getData();
         }
 
-        $newResult = array();
+        $newResult = [];
 
         foreach ($newIndex->search()->getResults() as $result) {
             $newResult[] = $result->getData();
@@ -59,26 +59,26 @@ class CrossIndexTest extends Base
         $newIndex = $this->_createIndex(null, true, 2);
 
         // \Elastica\Type
-        CrossIndex::reindex($oldIndex, $newIndex, array(
+        CrossIndex::reindex($oldIndex, $newIndex, [
             CrossIndex::OPTION_TYPE => $type1,
-        ));
+        ]);
         $this->assertEquals(10, $newIndex->count());
         $newIndex->deleteDocuments($docs1);
 
         // string
-        CrossIndex::reindex($oldIndex, $newIndex, array(
+        CrossIndex::reindex($oldIndex, $newIndex, [
             CrossIndex::OPTION_TYPE => 'crossIndexTest_2',
-        ));
+        ]);
         $this->assertEquals(10, $newIndex->count());
         $newIndex->deleteDocuments($docs2);
 
         // array
-        CrossIndex::reindex($oldIndex, $newIndex, array(
-            CrossIndex::OPTION_TYPE => array(
+        CrossIndex::reindex($oldIndex, $newIndex, [
+            CrossIndex::OPTION_TYPE => [
                 'crossIndexTest_1',
                 $type2,
-            ),
-        ));
+            ],
+        ]);
         $this->assertEquals(20, $newIndex->count());
     }
 
@@ -93,12 +93,12 @@ class CrossIndexTest extends Base
         $newIndex = $this->_createIndex(null, true, 2);
 
         $oldType = $oldIndex->getType('copy_test');
-        $oldMapping = array(
-            'name' => array(
+        $oldMapping = [
+            'name' => [
                 'type' => 'string',
                 'store' => true,
-            ),
-        );
+            ],
+        ];
         $oldType->setMapping($oldMapping);
         $docs = $this->_addDocs($oldType, 10);
 
@@ -126,9 +126,9 @@ class CrossIndexTest extends Base
         $ignoredType = $oldIndex->getType('copy_test_1');
         $this->_addDocs($ignoredType, 10);
 
-        CrossIndex::copy($oldIndex, $newIndex, array(
+        CrossIndex::copy($oldIndex, $newIndex, [
             CrossIndex::OPTION_TYPE => $oldType,
-        ));
+        ]);
 
         $this->assertFalse($newIndex->getType($ignoredType->getName())->exists());
         $this->assertEquals(10, $newIndex->count());
@@ -142,9 +142,9 @@ class CrossIndexTest extends Base
      */
     private function _addDocs(Type $type, $docs)
     {
-        $insert = array();
+        $insert = [];
         for ($i = 1; $i <= $docs; ++$i) {
-            $insert[] = new Document($i, array('id' => $i, 'key' => 'value'));
+            $insert[] = new Document($i, ['id' => $i, 'key' => 'value']);
         }
 
         $type->addDocuments($insert);

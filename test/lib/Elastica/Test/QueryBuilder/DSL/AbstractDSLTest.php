@@ -19,7 +19,7 @@ abstract class AbstractDSLTest extends BaseTest
         $this->assertTrue(method_exists($dsl, $methodName));
 
         // Check returned value
-        $return = call_user_func_array(array($dsl, $methodName), $arguments);
+        $return = call_user_func_array([$dsl, $methodName], $arguments);
         $this->assertTrue(class_exists($className), 'Class not exists but NotImplementedException is not thrown');
         $this->assertInstanceOf($className, $return);
 
@@ -40,7 +40,7 @@ abstract class AbstractDSLTest extends BaseTest
     protected function _assertNotImplemented(DSL $dsl, $methodName, $arguments)
     {
         try {
-            call_user_func(array($dsl, $methodName), $arguments);
+            call_user_func([$dsl, $methodName], $arguments);
             $this->fail('NotImplementedException is not thrown');
         } catch (NotImplementedException $ex) {
             // expected

@@ -22,12 +22,12 @@ class HasParentTest extends BaseTest
 
         $query = new HasParent($q, $type);
 
-        $expectedArray = array(
-            'has_parent' => array(
+        $expectedArray = [
+            'has_parent' => [
                 'query' => $q->toArray(),
                 'type' => $type,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
@@ -46,13 +46,13 @@ class HasParentTest extends BaseTest
         $query = new HasParent($q, $type);
         $query->setScope($scope);
 
-        $expectedArray = array(
-            'has_parent' => array(
+        $expectedArray = [
+            'has_parent' => [
                 'query' => $q->toArray(),
                 'type' => $type,
                 '_scope' => $scope,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
@@ -71,16 +71,16 @@ class HasParentTest extends BaseTest
         $productType->setMapping($mapping);
 
         $shopType->addDocuments(
-            array(
-                new Document('zurich', array('brand' => 'google')),
-                new Document('london', array('brand' => 'apple')),
-            )
+            [
+                new Document('zurich', ['brand' => 'google']),
+                new Document('london', ['brand' => 'apple']),
+            ]
         );
 
-        $doc1 = new Document(1, array('device' => 'chromebook'));
+        $doc1 = new Document(1, ['device' => 'chromebook']);
         $doc1->setParent('zurich');
 
-        $doc2 = new Document(2, array('device' => 'macmini'));
+        $doc2 = new Document(2, ['device' => 'macmini']);
         $doc2->setParent('london');
 
         $productType->addDocument($doc1);

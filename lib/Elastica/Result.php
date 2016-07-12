@@ -15,7 +15,7 @@ class Result
      *
      * @var array Hit array
      */
-    protected $_hit = array();
+    protected $_hit = [];
 
     /**
      * Constructs a single results object.
@@ -44,7 +44,7 @@ class Result
             return $this->_hit[$name];
         }
 
-        return array();
+        return [];
     }
 
     /**

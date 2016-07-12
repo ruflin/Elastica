@@ -13,11 +13,11 @@ class SignificantTermsTest extends BaseAggregationTest
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
-        $colors = array('blue', 'blue', 'red', 'red', 'green', 'yellow', 'white', 'cyan', 'magenta');
-        $temperatures = array(1500, 1500, 1500, 1500, 2500, 3500, 4500, 5500, 6500, 7500, 7500, 8500, 9500);
-        $docs = array();
+        $colors = ['blue', 'blue', 'red', 'red', 'green', 'yellow', 'white', 'cyan', 'magenta'];
+        $temperatures = [1500, 1500, 1500, 1500, 2500, 3500, 4500, 5500, 6500, 7500, 7500, 8500, 9500];
+        $docs = [];
         for ($i = 0;$i < 250;++$i) {
-            $docs[] = new Document($i, array('color' => $colors[$i % count($colors)], 'temperature' => $temperatures[$i % count($temperatures)]));
+            $docs[] = new Document($i, ['color' => $colors[$i % count($colors)], 'temperature' => $temperatures[$i % count($temperatures)]]);
         }
         $index->getType('test')->addDocuments($docs);
         $index->refresh();
@@ -51,9 +51,9 @@ class SignificantTermsTest extends BaseAggregationTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Aggregation\SignificantTerms::setBackgroundFilter passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -67,7 +67,7 @@ class SignificantTermsTest extends BaseAggregationTest
         $agg->setSize(1);
 
         $termsQuery = new Terms();
-        $termsQuery->setTerms('color', array('blue', 'red', 'green', 'yellow', 'white'));
+        $termsQuery->setTerms('color', ['blue', 'red', 'green', 'yellow', 'white']);
 
         $query = new Query($termsQuery);
         $query->addAggregation($agg);
@@ -88,11 +88,11 @@ class SignificantTermsTest extends BaseAggregationTest
         $agg->setField('temperature');
         $agg->setSize(1);
         $termsFilter = new Terms();
-        $termsFilter->setTerms('color', array('blue', 'red', 'green', 'yellow'));
+        $termsFilter->setTerms('color', ['blue', 'red', 'green', 'yellow']);
         $agg->setBackgroundFilter($termsFilter);
 
         $termsQuery = new Terms();
-        $termsQuery->setTerms('color', array('blue', 'red', 'green', 'yellow', 'white'));
+        $termsQuery->setTerms('color', ['blue', 'red', 'green', 'yellow', 'white']);
 
         $query = new Query($termsQuery);
         $query->addAggregation($agg);
@@ -114,11 +114,11 @@ class SignificantTermsTest extends BaseAggregationTest
         $agg->setField('temperature');
         $agg->setSize(1);
         $termsFilter = new TermsFilter();
-        $termsFilter->setTerms('color', array('blue', 'red', 'green', 'yellow'));
+        $termsFilter->setTerms('color', ['blue', 'red', 'green', 'yellow']);
         $agg->setBackgroundFilter($termsFilter);
 
         $termsQuery = new Terms();
-        $termsQuery->setTerms('color', array('blue', 'red', 'green', 'yellow', 'white'));
+        $termsQuery->setTerms('color', ['blue', 'red', 'green', 'yellow', 'white']);
 
         $query = new Query($termsQuery);
         $query->addAggregation($agg);

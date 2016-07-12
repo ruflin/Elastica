@@ -15,13 +15,13 @@ class QueryStringTest extends BaseTest
         $str = md5(rand());
         $query = new QueryString($str);
 
-        $expected = array(
+        $expected = [
             'query' => $str,
-        );
+        ];
 
-        $this->assertEquals(array('query_string' => $expected), $query->toArray());
+        $this->assertEquals(['query_string' => $expected], $query->toArray());
 
-        $fields = array();
+        $fields = [];
         $max = rand() % 10 + 1;
         for ($i = 0; $i <  $max; ++$i) {
             $fields[] = md5(rand());
@@ -29,13 +29,13 @@ class QueryStringTest extends BaseTest
 
         $query->setFields($fields);
         $expected['fields'] = $fields;
-        $this->assertEquals(array('query_string' => $expected), $query->toArray());
+        $this->assertEquals(['query_string' => $expected], $query->toArray());
 
-        foreach (array(false, true) as $val) {
+        foreach ([false, true] as $val) {
             $query->setUseDisMax($val);
             $expected['use_dis_max'] = $val;
 
-            $this->assertEquals(array('query_string' => $expected), $query->toArray());
+            $this->assertEquals(['query_string' => $expected], $query->toArray());
         }
     }
 
@@ -48,7 +48,7 @@ class QueryStringTest extends BaseTest
         $index->getSettings()->setNumberOfReplicas(0);
         $type = $index->getType('helloworld');
 
-        $doc = new Document(1, array('email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
+        $doc = new Document(1, ['email' => 'test@test.com', 'username' => 'hanswurst', 'test' => ['2', '3', '5']]);
         $type->addDocument($doc);
         $index->refresh();
 
@@ -68,14 +68,14 @@ class QueryStringTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $doc = new Document(1, array('title' => 'hello world', 'firstname' => 'nicolas', 'lastname' => 'ruflin', 'price' => '102', 'year' => '2012'));
+        $doc = new Document(1, ['title' => 'hello world', 'firstname' => 'nicolas', 'lastname' => 'ruflin', 'price' => '102', 'year' => '2012']);
         $type->addDocument($doc);
         $index->refresh();
 
         $query = new QueryString();
         $query = $query->setQuery('ruf*');
         $query = $query->setDefaultField('title');
-        $query = $query->setFields(array('title', 'firstname', 'lastname', 'price', 'year'));
+        $query = $query->setFields(['title', 'firstname', 'lastname', 'price', 'year']);
 
         $resultSet = $type->search($query);
         $this->assertEquals(1, $resultSet->count());
@@ -130,7 +130,7 @@ class QueryStringTest extends BaseTest
     public function testSetQueryInvalid()
     {
         $query = new QueryString();
-        $query->setQuery(array());
+        $query->setQuery([]);
     }
 
     /**
@@ -144,12 +144,12 @@ class QueryStringTest extends BaseTest
         $query = new QueryString($text);
         $query->setTimezone($timezone);
 
-        $expected = array(
-            'query_string' => array(
+        $expected = [
+            'query_string' => [
                 'query' => $text,
                 'time_zone' => $timezone,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expected, $query->toArray());
         $this->assertInstanceOf('Elastica\Query\QueryString', $query->setTimezone($timezone));
@@ -178,7 +178,7 @@ class QueryStringTest extends BaseTest
         $query = new QueryString('test');
         $query->setBoost(9.3);
 
-        $doc = new Document('', array('name' => 'test'));
+        $doc = new Document('', ['name' => 'test']);
         $index->getType('test')->addDocument($doc);
         $index->refresh();
 

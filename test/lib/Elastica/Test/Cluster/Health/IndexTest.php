@@ -15,7 +15,7 @@ class IndexTest extends BaseTest
     {
         parent::setUp();
 
-        $data = array(
+        $data = [
             'status' => 'yellow',
             'number_of_shards' => 1,
             'number_of_replicas' => 2,
@@ -24,33 +24,33 @@ class IndexTest extends BaseTest
             'relocating_shards' => 5,
             'initializing_shards' => 6,
             'unassigned_shards' => 7,
-            'shards' => array(
-                '0' => array(
+            'shards' => [
+                '0' => [
                     'status' => 'yellow',
                     'primary_active' => false,
                     'active_shards' => 0,
                     'relocating_shards' => 1,
                     'initializing_shards' => 0,
                     'unassigned_shards' => 1,
-                ),
-                '1' => array(
+                ],
+                '1' => [
                     'status' => 'yellow',
                     'primary_active' => true,
                     'active_shards' => 1,
                     'relocating_shards' => 0,
                     'initializing_shards' => 0,
                     'unassigned_shards' => 1,
-                ),
-                '2' => array(
+                ],
+                '2' => [
                     'status' => 'green',
                     'primary_active' => true,
                     'active_shards' => 1,
                     'relocating_shards' => 0,
                     'initializing_shards' => 0,
                     'unassigned_shards' => 0,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->_index = new HealthIndex('test', $data);
     }

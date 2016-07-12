@@ -34,7 +34,7 @@ class Settings
      *
      * @var array Stats info
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
      * Index.
@@ -113,7 +113,7 @@ class Settings
     {
         $replicas = (int) $replicas;
 
-        $data = array('number_of_replicas' => $replicas);
+        $data = ['number_of_replicas' => $replicas];
 
         return $this->set($data);
     }
@@ -127,7 +127,7 @@ class Settings
      */
     public function setReadOnly($readOnly = true)
     {
-        return $this->set(array('blocks.write' => $readOnly));
+        return $this->set(['blocks.write' => $readOnly]);
     }
 
     /**
@@ -157,7 +157,7 @@ class Settings
     {
         $state = $state ? 1 : 0;
 
-        return $this->set(array('blocks.read' => $state));
+        return $this->set(['blocks.read' => $state]);
     }
 
     /**
@@ -177,7 +177,7 @@ class Settings
     {
         $state = $state ? 1 : 0;
 
-        return $this->set(array('blocks.write' => $state));
+        return $this->set(['blocks.write' => $state]);
     }
 
     /**
@@ -208,7 +208,7 @@ class Settings
     {
         $state = $state ? 1 : 0;
 
-        return $this->set(array('blocks.write' => $state));
+        return $this->set(['blocks.write' => $state]);
     }
 
     /**
@@ -223,7 +223,7 @@ class Settings
      */
     public function setRefreshInterval($interval)
     {
-        return $this->set(array('refresh_interval' => $interval));
+        return $this->set(['refresh_interval' => $interval]);
     }
 
     /**
@@ -266,7 +266,7 @@ class Settings
     public function setMergePolicyType($type)
     {
         $this->getIndex()->close();
-        $response = $this->set(array('merge.policy.type' => $type));
+        $response = $this->set(['merge.policy.type' => $type]);
         $this->getIndex()->open();
 
         return $response;
@@ -287,7 +287,7 @@ class Settings
     public function setMergePolicy($key, $value)
     {
         $this->getIndex()->close();
-        $response = $this->set(array('merge.policy.'.$key => $value));
+        $response = $this->set(['merge.policy.'.$key => $value]);
         $this->getIndex()->open();
 
         return $response;
@@ -352,12 +352,12 @@ class Settings
      *
      * @return \Elastica\Response Response object
      */
-    public function request(array $data = array(), $method = Request::GET)
+    public function request(array $data = [], $method = Request::GET)
     {
         $path = '_settings';
 
         if (!empty($data)) {
-            $data = array('index' => $data);
+            $data = ['index' => $data];
         }
 
         return $this->getIndex()->request($path, $method, $data);

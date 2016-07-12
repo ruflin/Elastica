@@ -104,9 +104,9 @@ class ScriptFile extends Script
      */
     public function toArray()
     {
-        $array = array(
+        $array = [
             'script_file' => $this->_scriptFile,
-        );
+        ];
 
         if (!empty($this->_params)) {
             $array['params'] = $this->_params;

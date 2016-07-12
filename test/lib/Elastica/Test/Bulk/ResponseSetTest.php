@@ -123,10 +123,10 @@ class ResponseSetTest extends BaseTest
     {
         list($responseData, $actions) = $this->_getFixture();
 
-        $return = array();
-        $return[] = array($responseData, $actions, true);
+        $return = [];
+        $return[] = [$responseData, $actions, true];
         $responseData['items'][2]['index']['ok'] = false;
-        $return[] = array($responseData, $actions, false);
+        $return[] = [$responseData, $actions, false];
 
         return $return;
     }
@@ -139,7 +139,7 @@ class ResponseSetTest extends BaseTest
      */
     protected function _createResponseSet(array $responseData, array $actions)
     {
-        $client = $this->getMock('Elastica\\Client', array('request'));
+        $client = $this->getMock('Elastica\\Client', ['request']);
 
         $client->expects($this->once())
             ->method('request')
@@ -157,44 +157,44 @@ class ResponseSetTest extends BaseTest
      */
     protected function _getFixture()
     {
-        $responseData = array(
+        $responseData = [
             'took' => 5,
-            'items' => array(
-                array(
-                    'index' => array(
+            'items' => [
+                [
+                    'index' => [
                         '_index' => 'index',
                         '_type' => 'type',
                         '_id' => '1',
                         '_version' => 1,
                         'ok' => true,
-                    ),
-                ),
-                array(
-                    'index' => array(
+                    ],
+                ],
+                [
+                    'index' => [
                         '_index' => 'index',
                         '_type' => 'type',
                         '_id' => '2',
                         '_version' => 1,
                         'ok' => true,
-                    ),
-                ),
-                array(
-                    'index' => array(
+                    ],
+                ],
+                [
+                    'index' => [
                         '_index' => 'index',
                         '_type' => 'type',
                         '_id' => '3',
                         '_version' => 1,
                         'ok' => true,
-                    ),
-                ),
-            ),
-        );
-        $bulkResponses = array(
+                    ],
+                ],
+            ],
+        ];
+        $bulkResponses = [
             new Action(),
             new Action(),
             new Action(),
-        );
+        ];
 
-        return array($responseData, $bulkResponses);
+        return [$responseData, $bulkResponses];
     }
 }

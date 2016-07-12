@@ -19,10 +19,10 @@ class AwsAuthV4 extends Guzzle
             $stack = HandlerStack::create(GuzzleHttp\choose_handler());
             $stack->push($this->getSigningMiddleware(), 'sign');
 
-            self::$_guzzleClientConnection = new Client(array(
+            self::$_guzzleClientConnection = new Client([
                 'base_uri' => $baseUrl,
                 'handler' => $stack,
-            ));
+            ]);
         }
 
         return self::$_guzzleClientConnection;

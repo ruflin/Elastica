@@ -46,10 +46,10 @@ class FilteredTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\Filtered passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
                 'Deprecated: Elastica\Query\Filtered::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -79,9 +79,9 @@ class FilteredTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\Filtered::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -93,10 +93,10 @@ class FilteredTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('helloworld');
 
-        $type->addDocuments(array(
-            new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5'))),
-            new Document(2, array('id' => 2, 'email' => 'test@test.com', 'username' => 'peter', 'test' => array('2', '3', '5'))),
-        ));
+        $type->addDocuments([
+            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => ['2', '3', '5']]),
+            new Document(2, ['id' => 2, 'email' => 'test@test.com', 'username' => 'peter', 'test' => ['2', '3', '5']]),
+        ]);
 
         $index->refresh();
 
@@ -161,10 +161,10 @@ class FilteredTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('helloworld');
 
-        $type->addDocuments(array(
-            new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5'))),
-            new Document(2, array('id' => 2, 'email' => 'test@test.com', 'username' => 'peter', 'test' => array('2', '3', '5'))),
-        ));
+        $type->addDocuments([
+            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => ['2', '3', '5']]),
+            new Document(2, ['id' => 2, 'email' => 'test@test.com', 'username' => 'peter', 'test' => ['2', '3', '5']]),
+        ]);
 
         $index->refresh();
 
@@ -185,9 +185,9 @@ class FilteredTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('helloworld');
 
-        $doc = new Document(1, array('id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => array('2', '3', '5')));
+        $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => ['2', '3', '5']]);
         $type->addDocument($doc);
-        $doc = new Document(2, array('id' => 2, 'email' => 'test@test.com', 'username' => 'peter', 'test' => array('2', '3', '5')));
+        $doc = new Document(2, ['id' => 2, 'email' => 'test@test.com', 'username' => 'peter', 'test' => ['2', '3', '5']]);
         $type->addDocument($doc);
 
         $index->refresh();

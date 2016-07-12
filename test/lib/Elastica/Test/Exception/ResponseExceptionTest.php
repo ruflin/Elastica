@@ -31,16 +31,16 @@ class ResponseExceptionTest extends AbstractExceptionTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->setMapping(array(
-            'num' => array(
+        $type->setMapping([
+            'num' => [
                 'type' => 'long',
-            ),
-        ));
+            ],
+        ]);
 
         try {
-            $type->addDocument(new Document('', array(
+            $type->addDocument(new Document('', [
                 'num' => 'not number at all',
-            )));
+            ]));
             $this->fail('Indexing with wrong type should fail');
         } catch (ResponseException $ex) {
             $error = $ex->getResponse()->getFullError();

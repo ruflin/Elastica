@@ -13,15 +13,15 @@ class IpRangeTest extends BaseAggregationTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->setMapping(new Mapping(null, array(
-            'address' => array('type' => 'ip'),
-        )));
+        $type->setMapping(new Mapping(null, [
+            'address' => ['type' => 'ip'],
+        ]));
 
-        $type->addDocuments(array(
-            new Document(1, array('address' => '192.168.1.100')),
-            new Document(2, array('address' => '192.168.1.150')),
-            new Document(3, array('address' => '192.168.1.200')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['address' => '192.168.1.100']),
+            new Document(2, ['address' => '192.168.1.150']),
+            new Document(3, ['address' => '192.168.1.200']),
+        ]);
 
         $index->refresh();
 

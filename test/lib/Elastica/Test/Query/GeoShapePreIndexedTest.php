@@ -19,42 +19,42 @@ class GeoShapePreIndexedTest extends BaseTest
         $otherType = $index->getType('other_type');
 
         // create mapping
-        $mapping = new \Elastica\Type\Mapping($type, array(
-            'location' => array(
+        $mapping = new \Elastica\Type\Mapping($type, [
+            'location' => [
                 'type' => 'geo_shape',
-            ),
-        ));
+            ],
+        ]);
         $type->setMapping($mapping);
 
         // create other type mapping
-        $otherMapping = new \Elastica\Type\Mapping($type, array(
-            'location' => array(
+        $otherMapping = new \Elastica\Type\Mapping($type, [
+            'location' => [
                 'type' => 'geo_shape',
-            ),
-        ));
+            ],
+        ]);
         $otherType->setMapping($otherMapping);
 
         // add type docs
-        $type->addDocument(new \Elastica\Document('1', array(
-            'location' => array(
+        $type->addDocument(new \Elastica\Document('1', [
+            'location' => [
                 'type' => 'envelope',
-                'coordinates' => array(
-                    array(0.0, 50.0),
-                    array(50.0, 0.0),
-                ),
-            ),
-        )));
+                'coordinates' => [
+                    [0.0, 50.0],
+                    [50.0, 0.0],
+                ],
+            ],
+        ]));
 
         // add other type docs
-        $otherType->addDocument(new \Elastica\Document('2', array(
-            'location' => array(
+        $otherType->addDocument(new \Elastica\Document('2', [
+            'location' => [
                 'type' => 'envelope',
-                'coordinates' => array(
-                    array(25.0, 75.0),
-                    array(75.0, 25.0),
-                ),
-            ),
-        )));
+                'coordinates' => [
+                    [25.0, 75.0],
+                    [75.0, 25.0],
+                ],
+            ],
+        ]));
 
         $index->optimize();
         $index->refresh();
@@ -64,19 +64,19 @@ class GeoShapePreIndexedTest extends BaseTest
         );
         $gsp->setRelation(AbstractGeoShape::RELATION_INTERSECT);
 
-        $expected = array(
-            'geo_shape' => array(
-                'location' => array(
-                    'indexed_shape' => array(
+        $expected = [
+            'geo_shape' => [
+                'location' => [
+                    'indexed_shape' => [
                         'id' => '1',
                         'type' => 'type',
                         'index' => $indexName,
                         'path' => 'location',
-                    ),
+                    ],
                     'relation' => $gsp->getRelation(),
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $gsp->toArray());
 

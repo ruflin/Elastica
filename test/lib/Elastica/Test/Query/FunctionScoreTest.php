@@ -18,27 +18,27 @@ class FunctionScoreTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->setMapping(array(
-            'name' => array('type' => 'string', 'index' => 'not_analyzed'),
-            'location' => array('type' => 'geo_point'),
-            'price' => array('type' => 'float'),
-            'popularity' => array('type' => 'integer'),
-        ));
+        $type->setMapping([
+            'name' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'location' => ['type' => 'geo_point'],
+            'price' => ['type' => 'float'],
+            'popularity' => ['type' => 'integer'],
+        ]);
 
-        $type->addDocuments(array(
-            new Document(1, array(
+        $type->addDocuments([
+            new Document(1, [
                 'name' => "Mr. Frostie's",
-                'location' => array('lat' => 32.799605, 'lon' => -117.243027),
+                'location' => ['lat' => 32.799605, 'lon' => -117.243027],
                 'price' => 4.5,
                 'popularity' => null,
-            )),
-            new Document(2, array(
+            ]),
+            new Document(2, [
                 'name' => "Miller's Field",
-                'location' => array('lat' => 32.795964, 'lon' => -117.255028),
+                'location' => ['lat' => 32.795964, 'lon' => -117.255028],
                 'price' => 9.5,
                 'popularity' => 1,
-            )),
-        ));
+            ]),
+        ]);
 
         $index->refresh();
 
@@ -86,9 +86,9 @@ class FunctionScoreTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -118,10 +118,10 @@ class FunctionScoreTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\FunctionScore::addDecayFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
                 'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -151,10 +151,10 @@ class FunctionScoreTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\FunctionScore::addScriptScoreFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
                 'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -184,10 +184,10 @@ class FunctionScoreTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\FunctionScore::addFieldValueFactorFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
                 'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -217,12 +217,12 @@ class FunctionScoreTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\FunctionScore::addBoostFactorFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
                 'Query\FunctionScore::addBoostFactorFunction is deprecated. Use addWeightFunction instead. This method will be removed in further Elastica releases',
                 'Deprecated: Elastica\Query\FunctionScore::addWeightFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
                 'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -252,10 +252,10 @@ class FunctionScoreTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\FunctionScore::addWeightFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
                 'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -285,10 +285,10 @@ class FunctionScoreTest extends BaseTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Query\FunctionScore::addRandomScoreFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
                 'Deprecated: Elastica\Query\FunctionScore::addFunction passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -305,29 +305,29 @@ class FunctionScoreTest extends BaseTest
         $query->setQuery($childQuery);
         $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'location', $this->locationOrigin, $locationScale);
         $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', $priceOrigin, $priceScale);
-        $expected = array(
-            'function_score' => array(
+        $expected = [
+            'function_score' => [
                 'query' => $childQuery->toArray(),
-                'functions' => array(
-                    array(
-                        'gauss' => array(
-                            'location' => array(
+                'functions' => [
+                    [
+                        'gauss' => [
+                            'location' => [
                                 'origin' => $this->locationOrigin,
                                 'scale' => $locationScale,
-                            ),
-                        ),
-                    ),
-                    array(
-                        'gauss' => array(
-                            'price' => array(
+                            ],
+                        ],
+                    ],
+                    [
+                        'gauss' => [
+                            'price' => [
                                 'origin' => $priceOrigin,
                                 'scale' => $priceScale,
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
         $this->assertEquals($expected, $query->toArray());
     }
 
@@ -352,31 +352,31 @@ class FunctionScoreTest extends BaseTest
             .5
         );
         $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', $priceOrigin, $priceScale, null, null, 2);
-        $expected = array(
-            'function_score' => array(
+        $expected = [
+            'function_score' => [
                 'query' => $childQuery->toArray(),
-                'functions' => array(
-                    array(
-                        'gauss' => array(
-                            'location' => array(
+                'functions' => [
+                    [
+                        'gauss' => [
+                            'location' => [
                                 'origin' => $this->locationOrigin,
                                 'scale' => $locationScale,
-                            ),
-                        ),
+                            ],
+                        ],
                         'weight' => .5,
-                    ),
-                    array(
-                        'gauss' => array(
-                            'price' => array(
+                    ],
+                    [
+                        'gauss' => [
+                            'price' => [
                                 'origin' => $priceOrigin,
                                 'scale' => $priceScale,
-                            ),
-                        ),
+                            ],
+                        ],
                         'weight' => 2,
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
         $this->assertEquals($expected, $query->toArray());
     }
 
@@ -401,11 +401,11 @@ class FunctionScoreTest extends BaseTest
      */
     public function testAddBoostFactorFunction()
     {
-        $filter = new \Elastica\Query\Term(array('price' => 4.5));
+        $filter = new \Elastica\Query\Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addWeightFunction(5.0, $filter);
 
-        $sameFilter = new \Elastica\Query\Term(array('price' => 4.5));
+        $sameFilter = new \Elastica\Query\Term(['price' => 4.5]);
         $sameQuery = new FunctionScore();
         $this->hideDeprecated();
         $sameQuery->addBoostFactorFunction(5.0, $sameFilter);
@@ -421,13 +421,13 @@ class FunctionScoreTest extends BaseTest
     {
         $query = new FunctionScore();
         $this->hideDeprecated();
-        $filter = new Term(array('price' => 4.5));
+        $filter = new Term(['price' => 4.5]);
         $query->addWeightFunction(5.0, $filter);
         $this->showDeprecated();
 
         $sameQuery = new FunctionScore();
         $this->hideDeprecated();
-        $sameFilter = new Term(array('price' => 4.5));
+        $sameFilter = new Term(['price' => 4.5]);
         $sameQuery->addBoostFactorFunction(5.0, $sameFilter);
         $this->showDeprecated();
 
@@ -439,24 +439,24 @@ class FunctionScoreTest extends BaseTest
      */
     public function testWeight()
     {
-        $filter = new \Elastica\Query\Term(array('price' => 4.5));
+        $filter = new \Elastica\Query\Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addWeightFunction(5.0, $filter);
 
-        $expected = array(
-            'function_score' => array(
-                'functions' => array(
-                    array(
+        $expected = [
+            'function_score' => [
+                'functions' => [
+                    [
                         'weight' => 5.0,
-                        'filter' => array(
-                            'term' => array(
+                        'filter' => [
+                            'term' => [
                                 'price' => 4.5,
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $query->toArray());
 
@@ -474,25 +474,25 @@ class FunctionScoreTest extends BaseTest
     public function testWeightWithLegacyFilter()
     {
         $this->hideDeprecated();
-        $filter = new Term(array('price' => 4.5));
+        $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addWeightFunction(5.0, $filter);
         $this->showDeprecated();
 
-        $expected = array(
-            'function_score' => array(
-                'functions' => array(
-                    array(
+        $expected = [
+            'function_score' => [
+                'functions' => [
+                    [
                         'weight' => 5.0,
-                        'filter' => array(
-                            'term' => array(
+                        'filter' => [
+                            'term' => [
                                 'price' => 4.5,
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $query->toArray());
 
@@ -509,26 +509,26 @@ class FunctionScoreTest extends BaseTest
      */
     public function testRandomScore()
     {
-        $filter = new \Elastica\Query\Term(array('price' => 4.5));
+        $filter = new \Elastica\Query\Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addRandomScoreFunction(2, $filter);
 
-        $expected = array(
-            'function_score' => array(
-                'functions' => array(
-                    array(
-                        'random_score' => array(
+        $expected = [
+            'function_score' => [
+                'functions' => [
+                    [
+                        'random_score' => [
                             'seed' => 2,
-                        ),
-                        'filter' => array(
-                            'term' => array(
+                        ],
+                        'filter' => [
+                            'term' => [
                                 'price' => 4.5,
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $query->toArray());
 
@@ -547,27 +547,27 @@ class FunctionScoreTest extends BaseTest
     public function testRandomScoreWithLegacyFilter()
     {
         $this->hideDeprecated();
-        $filter = new Term(array('price' => 4.5));
+        $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addRandomScoreFunction(2, $filter);
         $this->showDeprecated();
 
-        $expected = array(
-            'function_score' => array(
-                'functions' => array(
-                    array(
-                        'random_score' => array(
+        $expected = [
+            'function_score' => [
+                'functions' => [
+                    [
+                        'random_score' => [
                             'seed' => 2,
-                        ),
-                        'filter' => array(
-                            'term' => array(
+                        ],
+                        'filter' => [
+                            'term' => [
                                 'price' => 4.5,
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $query->toArray());
 
@@ -585,27 +585,27 @@ class FunctionScoreTest extends BaseTest
      */
     public function testRandomScoreWeight()
     {
-        $filter = new \Elastica\Query\Term(array('price' => 4.5));
+        $filter = new \Elastica\Query\Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addRandomScoreFunction(2, $filter, 2);
 
-        $expected = array(
-            'function_score' => array(
-                'functions' => array(
-                    array(
-                        'random_score' => array(
+        $expected = [
+            'function_score' => [
+                'functions' => [
+                    [
+                        'random_score' => [
                             'seed' => 2,
-                        ),
-                        'filter' => array(
-                            'term' => array(
+                        ],
+                        'filter' => [
+                            'term' => [
                                 'price' => 4.5,
-                            ),
-                        ),
+                            ],
+                        ],
                         'weight' => 2,
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $query->toArray());
     }
@@ -616,28 +616,28 @@ class FunctionScoreTest extends BaseTest
     public function testRandomScoreWeightWithLegacyFilter()
     {
         $this->hideDeprecated();
-        $filter = new Term(array('price' => 4.5));
+        $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addRandomScoreFunction(2, $filter, 2);
         $this->showDeprecated();
 
-        $expected = array(
-            'function_score' => array(
-                'functions' => array(
-                    array(
-                        'random_score' => array(
+        $expected = [
+            'function_score' => [
+                'functions' => [
+                    [
+                        'random_score' => [
                             'seed' => 2,
-                        ),
-                        'filter' => array(
-                            'term' => array(
+                        ],
+                        'filter' => [
+                            'term' => [
                                 'price' => 4.5,
-                            ),
-                        ),
+                            ],
+                        ],
                         'weight' => 2,
-                    ),
-                ),
-            ),
-        );
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $query->toArray());
     }
@@ -665,17 +665,17 @@ class FunctionScoreTest extends BaseTest
         $script = new Script($scriptString);
         $query = new FunctionScore();
         $query->addScriptScoreFunction($script);
-        $expected = array(
-            'function_score' => array(
-                'functions' => array(
-                    array(
-                        'script_score' => array(
+        $expected = [
+            'function_score' => [
+                'functions' => [
+                    [
+                        'script_score' => [
                             'script' => $scriptString,
-                        ),
-                    ),
-                ),
-            ),
-        );
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $query->toArray());
 
@@ -694,21 +694,21 @@ class FunctionScoreTest extends BaseTest
     {
         $this->_checkVersion('1.5');
 
-        $expected = array(
-            'function_score' => array(
+        $expected = [
+            'function_score' => [
                 'min_score' => 0.8,
-                'functions' => array(
-                    array(
-                        'gauss' => array(
-                            'price' => array(
+                'functions' => [
+                    [
+                        'gauss' => [
+                            'price' => [
                                 'origin' => 0,
                                 'scale' => 10,
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $query = new FunctionScore();
         $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', 0, 10);
@@ -731,20 +731,20 @@ class FunctionScoreTest extends BaseTest
     {
         $this->_checkVersion('1.6');
 
-        $expected = array(
-            'function_score' => array(
-                'functions' => array(
-                    array(
-                        'field_value_factor' => array(
+        $expected = [
+            'function_score' => [
+                'functions' => [
+                    [
+                        'field_value_factor' => [
                             'field' => 'popularity',
                             'factor' => 1.2,
                             'modifier' => 'sqrt',
                             'missing' => 0.1,    // available from >=1.6
-                        ),
-                    ),
-                ),
-            ),
-        );
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $query = new FunctionScore();
         $query->addFieldValueFactorFunction('popularity', 1.2, FunctionScore::FIELD_VALUE_FACTOR_MODIFIER_SQRT, 0.1);

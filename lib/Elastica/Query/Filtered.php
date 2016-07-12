@@ -99,7 +99,7 @@ class Filtered extends AbstractQuery
      */
     public function toArray()
     {
-        $filtered = array();
+        $filtered = [];
 
         if ($this->hasParam('query') && $this->getParam('query') instanceof AbstractQuery) {
             $filtered['query'] = $this->getParam('query')->toArray();
@@ -113,6 +113,6 @@ class Filtered extends AbstractQuery
             throw new InvalidException('A query and/or filter is required');
         }
 
-        return array('filtered' => $filtered);
+        return ['filtered' => $filtered];
     }
 }

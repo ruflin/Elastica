@@ -39,7 +39,7 @@ class Response
      *
      * @var array transfer info
      */
-    protected $_transferInfo = array();
+    protected $_transferInfo = [];
 
     /**
      * Response.
@@ -242,11 +242,11 @@ class Response
             }
 
             if (empty($response)) {
-                $response = array();
+                $response = [];
             }
 
             if (is_string($response)) {
-                $response = array('message' => $response);
+                $response = ['message' => $response];
             }
 
             $this->_response = $response;

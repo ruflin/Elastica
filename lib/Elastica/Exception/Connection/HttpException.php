@@ -61,7 +61,7 @@ class HttpException extends ConnectionException
                 return 'Operation timed out';
         }
 
-        return 'Unknown error:' . $error;
+        return 'Unknown error:'.$error;
     }
 
     /**

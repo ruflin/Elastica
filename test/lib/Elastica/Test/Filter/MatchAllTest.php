@@ -22,7 +22,7 @@ class MatchAllTest extends BaseTest
     {
         $filter = new MatchAll();
 
-        $expectedArray = array('match_all' => new \stdClass());
+        $expectedArray = ['match_all' => new \stdClass()];
 
         $this->assertEquals($expectedArray, $filter->toArray());
     }

@@ -18,7 +18,7 @@ class Range extends AbstractFilter
      *
      * @var array Fields
      */
-    protected $_fields = array();
+    protected $_fields = [];
 
     /**
      * Construct range filter.
@@ -26,7 +26,7 @@ class Range extends AbstractFilter
      * @param string $fieldName Field name
      * @param array  $args      Field arguments
      */
-    public function __construct($fieldName = '', array $args = array())
+    public function __construct($fieldName = '', array $args = [])
     {
         if ($fieldName) {
             $this->addField($fieldName, $args);

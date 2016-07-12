@@ -14,23 +14,23 @@ class ScriptTest extends BaseTest
         $value = "_score * doc['my_numeric_field'].value";
         $script = new Script($value);
 
-        $expected = array(
+        $expected = [
             'script' => $value,
-        );
+        ];
         $this->assertEquals($value, $script->getScript());
         $this->assertEquals($expected, $script->toArray());
 
-        $params = array(
+        $params = [
             'param1' => 'one',
             'param2' => 10,
-        );
+        ];
 
         $script = new Script($value, $params);
 
-        $expected = array(
+        $expected = [
             'script' => $value,
             'params' => $params,
-        );
+        ];
 
         $this->assertEquals($value, $script->getScript());
         $this->assertEquals($params, $script->getParams());
@@ -40,11 +40,11 @@ class ScriptTest extends BaseTest
 
         $script = new Script($value, $params, $lang);
 
-        $expected = array(
+        $expected = [
             'script' => $value,
             'params' => $params,
             'lang' => $lang,
-        );
+        ];
 
         $this->assertEquals($value, $script->getScript());
         $this->assertEquals($params, $script->getParams());
@@ -64,9 +64,9 @@ class ScriptTest extends BaseTest
 
         $this->assertEquals($string, $script->getScript());
 
-        $expected = array(
+        $expected = [
             'script' => $string,
-        );
+        ];
         $this->assertEquals($expected, $script->toArray());
     }
 
@@ -90,15 +90,15 @@ class ScriptTest extends BaseTest
     {
         $string = '_score * 2.0';
         $lang = 'mvel';
-        $params = array(
+        $params = [
             'param1' => 'one',
             'param2' => 1,
-        );
-        $array = array(
+        ];
+        $array = [
             'script' => $string,
             'lang' => $lang,
             'params' => $params,
-        );
+        ];
 
         $script = Script::create($array);
 
@@ -126,17 +126,17 @@ class ScriptTest extends BaseTest
      */
     public function dataProviderCreateInvalid()
     {
-        return array(
-            array(
+        return [
+            [
                 new \stdClass(),
-            ),
-            array(
-                array('params' => array('param1' => 'one')),
-            ),
-            array(
-                array('script' => '_score * 2.0', 'params' => 'param'),
-            ),
-        );
+            ],
+            [
+                ['params' => ['param1' => 'one']],
+            ],
+            [
+                ['script' => '_score * 2.0', 'params' => 'param'],
+            ],
+        ];
     }
 
     /**
@@ -144,7 +144,7 @@ class ScriptTest extends BaseTest
      */
     public function testSetLang()
     {
-        $script = new Script('foo', array(), Script::LANG_GROOVY);
+        $script = new Script('foo', [], Script::LANG_GROOVY);
         $this->assertEquals(Script::LANG_GROOVY, $script->getLang());
 
         $script->setLang(Script::LANG_PYTHON);

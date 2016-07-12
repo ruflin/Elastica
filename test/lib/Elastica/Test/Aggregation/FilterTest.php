@@ -17,12 +17,12 @@ class FilterTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('test')->addDocuments(array(
-            new Document(1, array('price' => 5, 'color' => 'blue')),
-            new Document(2, array('price' => 8, 'color' => 'blue')),
-            new Document(3, array('price' => 1, 'color' => 'red')),
-            new Document(4, array('price' => 3, 'color' => 'green')),
-        ));
+        $index->getType('test')->addDocuments([
+            new Document(1, ['price' => 5, 'color' => 'blue']),
+            new Document(2, ['price' => 8, 'color' => 'blue']),
+            new Document(3, ['price' => 1, 'color' => 'red']),
+            new Document(4, ['price' => 3, 'color' => 'green']),
+        ]);
 
         $index->refresh();
 
@@ -52,10 +52,10 @@ class FilterTest extends BaseAggregationTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Aggregation\Filter passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
                 'Deprecated: Elastica\Aggregation\Filter\setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -85,9 +85,9 @@ class FilterTest extends BaseAggregationTest
         $this->finishCollectErrors();
 
         $errorsCollector->assertOnlyDeprecatedErrors(
-            array(
+            [
                 'Deprecated: Elastica\Aggregation\Filter\setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            )
+            ]
         );
     }
 
@@ -96,15 +96,15 @@ class FilterTest extends BaseAggregationTest
      */
     public function testToArray()
     {
-        $expected = array(
-            'filter' => array('range' => array('stock' => array('gt' => 0))),
-            'aggs' => array(
-                'avg_price' => array('avg' => array('field' => 'price')),
-            ),
-        );
+        $expected = [
+            'filter' => ['range' => ['stock' => ['gt' => 0]]],
+            'aggs' => [
+                'avg_price' => ['avg' => ['field' => 'price']],
+            ],
+        ];
 
         $agg = new Filter('in_stock_products');
-        $agg->setFilter(new RangeQuery('stock', array('gt' => 0)));
+        $agg->setFilter(new RangeQuery('stock', ['gt' => 0]));
         $avg = new Avg('avg_price');
         $avg->setField('price');
         $agg->addAggregation($avg);
@@ -117,16 +117,16 @@ class FilterTest extends BaseAggregationTest
      */
     public function testToArrayWithLegacy()
     {
-        $expected = array(
-            'filter' => array('range' => array('stock' => array('gt' => 0))),
-            'aggs' => array(
-                'avg_price' => array('avg' => array('field' => 'price')),
-            ),
-        );
+        $expected = [
+            'filter' => ['range' => ['stock' => ['gt' => 0]]],
+            'aggs' => [
+                'avg_price' => ['avg' => ['field' => 'price']],
+            ],
+        ];
 
         $agg = new Filter('in_stock_products');
         $this->hideDeprecated();
-        $agg->setFilter(new Range('stock', array('gt' => 0)));
+        $agg->setFilter(new Range('stock', ['gt' => 0]));
         $this->showDeprecated();
         $avg = new Avg('avg_price');
         $avg->setField('price');
@@ -141,7 +141,7 @@ class FilterTest extends BaseAggregationTest
     public function testFilterAggregation()
     {
         $agg = new Filter('filter');
-        $agg->setFilter(new TermQuery(array('color' => 'blue')));
+        $agg->setFilter(new TermQuery(['color' => 'blue']));
         $avg = new Avg('price');
         $avg->setField('price');
         $agg->addAggregation($avg);
@@ -162,7 +162,7 @@ class FilterTest extends BaseAggregationTest
     {
         $agg = new Filter('filter');
         $this->hideDeprecated();
-        $agg->setFilter(new Term(array('color' => 'blue')));
+        $agg->setFilter(new Term(['color' => 'blue']));
         $this->showDeprecated();
         $avg = new Avg('price');
         $avg->setField('price');
@@ -199,15 +199,15 @@ class FilterTest extends BaseAggregationTest
      */
     public function testConstruct()
     {
-        $agg = new Filter('foo', new TermQuery(array('color' => 'blue')));
+        $agg = new Filter('foo', new TermQuery(['color' => 'blue']));
 
-        $expected = array(
-            'filter' => array(
-                'term' => array(
+        $expected = [
+            'filter' => [
+                'term' => [
                     'color' => 'blue',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $agg->toArray());
     }
@@ -218,16 +218,16 @@ class FilterTest extends BaseAggregationTest
     public function testConstructWithLegacyFilter()
     {
         $this->hideDeprecated();
-        $agg = new Filter('foo', new Term(array('color' => 'blue')));
+        $agg = new Filter('foo', new Term(['color' => 'blue']));
         $this->showDeprecated();
 
-        $expected = array(
-            'filter' => array(
-                'term' => array(
+        $expected = [
+            'filter' => [
+                'term' => [
                     'color' => 'blue',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $this->assertEquals($expected, $agg->toArray());
     }

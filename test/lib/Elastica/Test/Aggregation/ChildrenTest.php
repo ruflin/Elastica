@@ -16,9 +16,9 @@ class ChildrenTest extends BaseAggregationTest
         // add employee type - child
         $employeeType = $index->getType('employee');
         $employeeMapping = new Mapping($employeeType,
-            array(
-                'name' => array('type' => 'string'),
-            )
+            [
+                'name' => ['type' => 'string'],
+            ]
         );
         $employeeMapping->setParent('company');
         $employeeType->setMapping($employeeMapping);
@@ -26,42 +26,42 @@ class ChildrenTest extends BaseAggregationTest
         // add company type - parent
         $companyType = $index->getType('company');
         $companyMapping = new Mapping($companyType,
-            array(
-                'name' => array('type' => 'string'),
-            )
+            [
+                'name' => ['type' => 'string'],
+            ]
         );
         $companyType->setMapping($companyMapping);
 
         // add company documents
-        $companyType->addDocuments(array(
-            new Document(1, array('name' => 'Company1')),
-            new Document(2, array('name' => 'Company2')),
-        ));
+        $companyType->addDocuments([
+            new Document(1, ['name' => 'Company1']),
+            new Document(2, ['name' => 'Company2']),
+        ]);
 
-        $employee1 = new Document(1, array(
+        $employee1 = new Document(1, [
             'name' => 'foo',
-        ));
-        $employee2 = new Document(2, array(
+        ]);
+        $employee2 = new Document(2, [
             'name' => 'bar',
-        ));
-        $employee3 = new Document(3, array(
+        ]);
+        $employee3 = new Document(3, [
             'name' => 'foo',
-        ));
-        $employee4 = new Document(4, array(
+        ]);
+        $employee4 = new Document(4, [
             'name' => 'baz',
-        ));
-        $employee5 = new Document(5, array(
+        ]);
+        $employee5 = new Document(5, [
             'name' => 'foo',
-        ));
+        ]);
 
         // add employee documents and set parent
-        $employeeType->addDocuments(array(
+        $employeeType->addDocuments([
             $employee1->setParent(1),
             $employee2->setParent(1),
             $employee3->setParent(1),
             $employee4->setParent(2),
             $employee5->setParent(2),
-        ));
+        ]);
         $index->refresh();
 
         return $index;
@@ -96,11 +96,11 @@ class ChildrenTest extends BaseAggregationTest
         $this->assertCount(3, $childrenAggregations['name']['buckets']);
 
         // check names aggregation works inside children aggregation
-        $names = array(
-            array('key' => 'foo', 'doc_count' => 3),
-            array('key' => 'bar', 'doc_count' => 1),
-            array('key' => 'baz', 'doc_count' => 1),
-        );
+        $names = [
+            ['key' => 'foo', 'doc_count' => 3],
+            ['key' => 'bar', 'doc_count' => 1],
+            ['key' => 'baz', 'doc_count' => 1],
+        ];
         $this->assertEquals($names, $childrenAggregations['name']['buckets']);
     }
 }

@@ -101,12 +101,12 @@ class Http extends AbstractTransport
 
         $this->_setupCurl($conn);
 
-        $headersConfig = $connection->hasConfig('headers') ? $connection->getConfig('headers') : array();
+        $headersConfig = $connection->hasConfig('headers') ? $connection->getConfig('headers') : [];
 
         $headers = [];
 
         if (!empty($headersConfig)) {
-            $headers = array();
+            $headers = [];
             while (list($header, $headerValue) = each($headersConfig)) {
                 array_push($headers, $header.': '.$headerValue);
             }

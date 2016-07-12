@@ -21,23 +21,23 @@ class PercolatorTest extends BaseTest
 
         $percolator = new Percolator($index);
 
-        $query = new Term(array('field1' => 'value1'));
+        $query = new Term(['field1' => 'value1']);
         $response = $percolator->registerQuery($percolatorName, $query);
 
         $data = $response->getData();
 
-        $expectedArray = array(
+        $expectedArray = [
             '_type' => '.percolator',
             '_index' => $index->getName(),
             '_id' => $percolatorName,
             '_version' => 1,
             'created' => true,
-            '_shards' => array(
+            '_shards' => [
                 'total' => 1,
                 'successful' => 1,
                 'failed' => 0,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $data);
 
@@ -55,7 +55,7 @@ class PercolatorTest extends BaseTest
 
         $percolatorName = $index->getName();
 
-        $query = new Term(array('name' => 'ruflin'));
+        $query = new Term(['name' => 'ruflin']);
         $response = $percolator->registerQuery($percolatorName, $query);
 
         $this->assertTrue($response->isOk());
@@ -96,8 +96,8 @@ class PercolatorTest extends BaseTest
         // step one: register create index and setup the percolator query from the ES documentation.
         $index = $this->_createIndex();
         $percolator = new Percolator($index);
-        $baseQuery = new Term(array('field1' => 'value1'));
-        $fields = array('color' => 'blue');
+        $baseQuery = new Term(['field1' => 'value1']);
+        $fields = ['color' => 'blue'];
 
         $response = $percolator->registerQuery('kuku', $baseQuery, $fields);
 
@@ -111,12 +111,12 @@ class PercolatorTest extends BaseTest
         $doc = new Document();
         $doc->set('field1', 'value1');
 
-        $matches = $percolator->matchDoc($doc, new Term(array('color' => 'blue')));
+        $matches = $percolator->matchDoc($doc, new Term(['color' => 'blue']));
         $this->assertCount(1, $matches, 'No or too much registered query matched.');
         $this->assertEquals('kuku', $matches[0]['_id'], 'A wrong registered query has matched.');
 
         // step three: validate that using a different color, no registered query matches.
-        $matches = $percolator->matchDoc($doc, new Term(array('color' => 'green')));
+        $matches = $percolator->matchDoc($doc, new Term(['color' => 'green']));
         $this->assertCount(0, $matches, 'A registered query matched, although nothing should match at all.');
 
         $index->delete();
@@ -132,8 +132,8 @@ class PercolatorTest extends BaseTest
         // step one: register create index and setup the percolator query from the ES documentation.
         $index = $this->_createIndex();
         $percolator = new Percolator($index);
-        $baseQuery = new Term(array('field1' => 'value1'));
-        $fields = array('color' => 'blue');
+        $baseQuery = new Term(['field1' => 'value1']);
+        $fields = ['color' => 'blue'];
 
         $response = $percolator->registerQuery('kuku', $baseQuery, $fields);
 
@@ -147,12 +147,12 @@ class PercolatorTest extends BaseTest
         $doc = new Document();
         $doc->set('field1', 'value1');
 
-        $matches = $percolator->matchDoc($doc, new Term(array('color' => 'blue')));
+        $matches = $percolator->matchDoc($doc, new Term(['color' => 'blue']));
         $this->assertCount(1, $matches, 'No or too much registered query matched.');
         $this->assertEquals('kuku', $matches[0]['_id'], 'A wrong registered query has matched.');
 
         // step three: validate that using a different color, no registered query matches.
-        $matches = $percolator->matchDoc($doc, new Term(array('color' => 'green')));
+        $matches = $percolator->matchDoc($doc, new Term(['color' => 'green']));
         $this->assertCount(0, $matches, 'A registered query matched, although nothing should match at all.');
 
         // unregister percolator query
@@ -164,7 +164,7 @@ class PercolatorTest extends BaseTest
         // refreshing is required in order to ensure the query is really ready for execution.
         $index->refresh();
 
-        $matches = $percolator->matchDoc($doc, new Term(array('color' => 'blue')));
+        $matches = $percolator->matchDoc($doc, new Term(['color' => 'blue']));
         $this->assertCount(0, $matches, 'Percolator query did not get deleted.');
 
         $index->delete();
@@ -175,8 +175,8 @@ class PercolatorTest extends BaseTest
         $index = $this->_createIndex();
         $percolator = new Percolator($index);
 
-        $query = new Term(array('name' => 'foobar'));
-        $percolator->registerQuery($percolatorName, $query, array('field1' => array('tag1', 'tag2')));
+        $query = new Term(['name' => 'foobar']);
+        $percolator->registerQuery($percolatorName, $query, ['field1' => ['tag1', 'tag2']]);
 
         return $percolator;
     }
@@ -184,10 +184,10 @@ class PercolatorTest extends BaseTest
     protected function _addDefaultDocuments($index, $type = 'testing')
     {
         $type = $index->getType('testing');
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'foobar')),
-            new Document(2, array('name' => 'barbaz')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'foobar']),
+            new Document(2, ['name' => 'barbaz']),
+        ]);
         $index->refresh();
 
         return $type;
@@ -218,7 +218,7 @@ class PercolatorTest extends BaseTest
         $index = $percolator->getIndex();
         $type = $this->_addDefaultDocuments($index);
 
-        $parameter = array('percolate_format' => 'ids');
+        $parameter = ['percolate_format' => 'ids'];
         $matches = $percolator->matchExistingDoc(1, $type->getName(), null, $parameter);
 
         $this->assertCount(1, $matches);
@@ -238,7 +238,7 @@ class PercolatorTest extends BaseTest
         // id with whitespace, should be urlencoded
         $id = 'foo bar 1';
 
-        $type->addDocument(new Document($id, array('name' => 'foobar')));
+        $type->addDocument(new Document($id, ['name' => 'foobar']));
         $index->refresh();
 
         $matches = $percolator->matchExistingDoc($id, $type->getName());
@@ -255,14 +255,14 @@ class PercolatorTest extends BaseTest
         $index = $this->_createIndex();
         $percolator = new Percolator($index);
 
-        $query = new Term(array('name' => 'foo'));
-        $response = $percolator->registerQuery('percotest', $query, array('field1' => array('tag1', 'tag2')));
+        $query = new Term(['name' => 'foo']);
+        $response = $percolator->registerQuery('percotest', $query, ['field1' => ['tag1', 'tag2']]);
 
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
 
-        $query = new Term(array('name' => 'foo'));
-        $response = $percolator->registerQuery('percotest1', $query, array('field1' => array('tag2')));
+        $query = new Term(['name' => 'foo']);
+        $response = $percolator->registerQuery('percotest1', $query, ['field1' => ['tag2']]);
 
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
@@ -272,13 +272,13 @@ class PercolatorTest extends BaseTest
 
         $index->refresh();
 
-        $options = array(
+        $options = [
             'track_scores' => true,
-            'sort' => array('_score' => 'desc'),
+            'sort' => ['_score' => 'desc'],
             'size' => 1,
-        );
+        ];
 
-        $matches = $percolator->matchDoc($doc1, new Term(array('field1' => 'tag2')), 'type', $options);
+        $matches = $percolator->matchDoc($doc1, new Term(['field1' => 'tag2']), 'type', $options);
 
         $this->assertCount(1, $matches);
         $this->assertEquals('percotest1', $matches[0]['_id']);
@@ -293,19 +293,19 @@ class PercolatorTest extends BaseTest
         $percolatorName = 'existingDoc';
         $percolator = $this->_getDefaultPercolator($percolatorName);
 
-        $query = new Term(array('name' => 'foobar'));
-        $percolator->registerQuery($percolatorName.'1', $query, array('field1' => array('tag2')));
+        $query = new Term(['name' => 'foobar']);
+        $percolator->registerQuery($percolatorName.'1', $query, ['field1' => ['tag2']]);
 
         $index = $percolator->getIndex();
         $type = $this->_addDefaultDocuments($index);
 
-        $options = array(
+        $options = [
             'track_scores' => true,
-            'sort' => array('_score' => 'desc'),
+            'sort' => ['_score' => 'desc'],
             'size' => 1,
-        );
+        ];
 
-        $matches = $percolator->matchExistingDoc(1, $type->getName(), new Term(array('field1' => 'tag2')), $options);
+        $matches = $percolator->matchExistingDoc(1, $type->getName(), new Term(['field1' => 'tag2']), $options);
 
         $this->assertCount(1, $matches);
         $this->assertEquals('existingDoc1', $matches[0]['_id']);
@@ -319,10 +319,10 @@ class PercolatorTest extends BaseTest
         $type = $index->getType('.percolator');
 
         $mapping = new Type\Mapping($type,
-            array(
-                'name' => array('type' => 'string'),
-                'field1' => array('type' => 'string'),
-            )
+            [
+                'name' => ['type' => 'string'],
+                'field1' => ['type' => 'string'],
+            ]
         );
         $mapping->disableSource();
 

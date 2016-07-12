@@ -302,7 +302,7 @@ class Query implements DSL
      *
      * @return Ids
      */
-    public function ids($type = null, array $ids = array())
+    public function ids($type = null, array $ids = [])
     {
         return new Ids($type, $ids);
     }
@@ -373,7 +373,7 @@ class Query implements DSL
      *
      * @return Prefix
      */
-    public function prefix(array $prefix = array())
+    public function prefix(array $prefix = [])
     {
         return new Prefix($prefix);
     }
@@ -402,7 +402,7 @@ class Query implements DSL
      *
      * @return SimpleQueryString
      */
-    public function simple_query_string($query, array $fields = array())
+    public function simple_query_string($query, array $fields = [])
     {
         return new SimpleQueryString($query, $fields);
     }
@@ -417,7 +417,7 @@ class Query implements DSL
      *
      * @return Range
      */
-    public function range($fieldName = null, array $args = array())
+    public function range($fieldName = null, array $args = [])
     {
         return new Range($fieldName, $args);
     }
@@ -507,7 +507,7 @@ class Query implements DSL
      *
      * @return Term
      */
-    public function term(array $term = array())
+    public function term(array $term = [])
     {
         return new Term($term);
     }
@@ -522,7 +522,7 @@ class Query implements DSL
      *
      * @return Terms
      */
-    public function terms($key = '', array $terms = array())
+    public function terms($key = '', array $terms = [])
     {
         return new Terms($key, $terms);
     }

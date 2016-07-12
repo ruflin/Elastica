@@ -19,13 +19,13 @@ class GeoDistanceTest extends BaseTest
         $type = $index->getType('test');
 
         // Set mapping
-        $type->setMapping(array('point' => array('type' => 'geo_point')));
+        $type->setMapping(['point' => ['type' => 'geo_point']]);
 
         // Add doc 1
         $doc1 = new Document(1,
-            array(
+            [
                 'name' => 'ruflin',
-            )
+            ]
         );
 
         $doc1->addGeoPoint('point', 17, 19);
@@ -33,9 +33,9 @@ class GeoDistanceTest extends BaseTest
 
         // Add doc 2
         $doc2 = new Document(2,
-            array(
+            [
                 'name' => 'ruflin',
-            )
+            ]
         );
 
         $doc2->addGeoPoint('point', 30, 40);
@@ -45,7 +45,7 @@ class GeoDistanceTest extends BaseTest
         $index->refresh();
 
         // Only one point should be in radius
-        $geoQuery = new GeoDistance('point', array('lat' => 30, 'lon' => 40), '1km');
+        $geoQuery = new GeoDistance('point', ['lat' => 30, 'lon' => 40], '1km');
 
         $query = new Query(new MatchAll());
         $query->setPostFilter($geoQuery);
@@ -53,7 +53,7 @@ class GeoDistanceTest extends BaseTest
 
         // Both points should be inside
         $query = new Query();
-        $geoQuery = new GeoDistance('point', array('lat' => 30, 'lon' => 40), '40000km');
+        $geoQuery = new GeoDistance('point', ['lat' => 30, 'lon' => 40], '40000km');
         $query = new Query(new MatchAll());
         $query->setPostFilter($geoQuery);
         $index->refresh();
@@ -67,20 +67,20 @@ class GeoDistanceTest extends BaseTest
     public function testConstructLatlon()
     {
         $key = 'location';
-        $location = array(
+        $location = [
             'lat' => 48.86,
             'lon' => 2.35,
-        );
+        ];
         $distance = '10km';
 
         $query = new GeoDistance($key, $location, $distance);
 
-        $expected = array(
-            'geo_distance' => array(
+        $expected = [
+            'geo_distance' => [
                 $key => $location,
                 'distance' => $distance,
-            ),
-        );
+            ],
+        ];
 
         $data = $query->toArray();
 
@@ -98,12 +98,12 @@ class GeoDistanceTest extends BaseTest
 
         $query = new GeoDistance($key, $location, $distance);
 
-        $expected = array(
-            'geo_distance' => array(
+        $expected = [
+            'geo_distance' => [
                 $key => $location,
                 'distance' => $distance,
-            ),
-        );
+            ],
+        ];
 
         $data = $query->toArray();
 
@@ -115,7 +115,7 @@ class GeoDistanceTest extends BaseTest
      */
     public function testSetDistanceType()
     {
-        $query = new GeoDistance('location', array('lat' => 48.86, 'lon' => 2.35), '10km');
+        $query = new GeoDistance('location', ['lat' => 48.86, 'lon' => 2.35], '10km');
         $distanceType = GeoDistance::DISTANCE_TYPE_ARC;
         $query->setDistanceType($distanceType);
 
@@ -129,7 +129,7 @@ class GeoDistanceTest extends BaseTest
      */
     public function testSetOptimizeBbox()
     {
-        $query = new GeoDistance('location', array('lat' => 48.86, 'lon' => 2.35), '10km');
+        $query = new GeoDistance('location', ['lat' => 48.86, 'lon' => 2.35], '10km');
         $optimizeBbox = GeoDistance::OPTIMIZE_BBOX_MEMORY;
         $query->setOptimizeBbox($optimizeBbox);
 

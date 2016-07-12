@@ -13,19 +13,19 @@ class SimpleQueryStringTest extends Base
     public function testToArray()
     {
         $string = 'this is a test';
-        $fields = array('field1', 'field2');
+        $fields = ['field1', 'field2'];
         $query = new SimpleQueryString($string, $fields);
         $query->setDefaultOperator(SimpleQueryString::OPERATOR_OR);
         $query->setAnalyzer('whitespace');
 
-        $expected = array(
-            'simple_query_string' => array(
+        $expected = [
+            'simple_query_string' => [
                 'query' => $string,
                 'fields' => $fields,
                 'analyzer' => 'whitespace',
                 'default_operator' => SimpleQueryString::OPERATOR_OR,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expected, $query->toArray());
     }
@@ -36,22 +36,22 @@ class SimpleQueryStringTest extends Base
     public function testQuery()
     {
         $index = $this->_createIndex();
-        $docs = array(
-            new Document(1, array('make' => 'Gibson', 'model' => 'Les Paul')),
-            new Document(2, array('make' => 'Gibson', 'model' => 'SG Standard')),
-            new Document(3, array('make' => 'Gibson', 'model' => 'SG Supreme')),
-            new Document(4, array('make' => 'Gibson', 'model' => 'SG Faded')),
-            new Document(5, array('make' => 'Fender', 'model' => 'Stratocaster')),
-        );
+        $docs = [
+            new Document(1, ['make' => 'Gibson', 'model' => 'Les Paul']),
+            new Document(2, ['make' => 'Gibson', 'model' => 'SG Standard']),
+            new Document(3, ['make' => 'Gibson', 'model' => 'SG Supreme']),
+            new Document(4, ['make' => 'Gibson', 'model' => 'SG Faded']),
+            new Document(5, ['make' => 'Fender', 'model' => 'Stratocaster']),
+        ];
         $index->getType('guitars')->addDocuments($docs);
         $index->refresh();
 
-        $query = new SimpleQueryString('gibson +sg +-faded', array('make', 'model'));
+        $query = new SimpleQueryString('gibson +sg +-faded', ['make', 'model']);
         $results = $index->search($query);
 
         $this->assertEquals(2, $results->getTotalHits());
 
-        $query->setFields(array('model'));
+        $query->setFields(['model']);
         $results = $index->search($query);
 
         // We should not get any hits, since the "make" field was not included in the query.
@@ -63,12 +63,12 @@ class SimpleQueryStringTest extends Base
      */
     public function testSetMinimumShouldMatch()
     {
-        $expected = array(
-            'simple_query_string' => array(
+        $expected = [
+            'simple_query_string' => [
                 'query' => 'DONT PANIC',
                 'minimum_should_match' => '75%',
-            ),
-        );
+            ],
+        ];
 
         $query = new SimpleQueryString($expected['simple_query_string']['query']);
         $query->setMinimumShouldMatch($expected['simple_query_string']['minimum_should_match']);
@@ -86,12 +86,12 @@ class SimpleQueryStringTest extends Base
 
         $index = $this->_createIndex();
         $type = $index->getType('foobars');
-        $type->addDocuments(array(
-            new Document(1, array('body' => 'foo')),
-            new Document(2, array('body' => 'bar')),
-            new Document(3, array('body' => 'foo bar')),
-            new Document(4, array('body' => 'foo baz bar')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['body' => 'foo']),
+            new Document(2, ['body' => 'bar']),
+            new Document(3, ['body' => 'foo bar']),
+            new Document(4, ['body' => 'foo baz bar']),
+        ]);
         $index->refresh();
 
         $query = new SimpleQueryString('foo bar');

@@ -12,12 +12,12 @@ class MaxTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('test')->addDocuments(array(
-            new Document(1, array('price' => 5)),
-            new Document(2, array('price' => 8)),
-            new Document(3, array('price' => 1)),
-            new Document(4, array('price' => 3)),
-        ));
+        $index->getType('test')->addDocuments([
+            new Document(1, ['price' => 5]),
+            new Document(2, ['price' => 8]),
+            new Document(3, ['price' => 1]),
+            new Document(4, ['price' => 3]),
+        ]);
 
         $index->refresh();
 
@@ -29,22 +29,22 @@ class MaxTest extends BaseAggregationTest
      */
     public function testToArray()
     {
-        $expected = array(
-            'max' => array(
+        $expected = [
+            'max' => [
                 'field' => 'price',
                 'script' => '_value * conversion_rate',
-                'params' => array(
+                'params' => [
                     'conversion_rate' => 1.2,
-                ),
-            ),
-            'aggs' => array(
-                'subagg' => array('max' => array('field' => 'foo')),
-            ),
-        );
+                ],
+            ],
+            'aggs' => [
+                'subagg' => ['max' => ['field' => 'foo']],
+            ],
+        ];
 
         $agg = new Max('min_price_in_euros');
         $agg->setField('price');
-        $agg->setScript(new Script('_value * conversion_rate', array('conversion_rate' => 1.2)));
+        $agg->setScript(new Script('_value * conversion_rate', ['conversion_rate' => 1.2]));
         $max = new Max('subagg');
         $max->setField('foo');
         $agg->addAggregation($max);
@@ -70,7 +70,7 @@ class MaxTest extends BaseAggregationTest
         $this->assertEquals(8, $results['value']);
 
         // test using a script
-        $agg->setScript(new Script('_value * conversion_rate', array('conversion_rate' => 1.2)));
+        $agg->setScript(new Script('_value * conversion_rate', ['conversion_rate' => 1.2]));
         $query = new Query();
         $query->addAggregation($agg);
         $results = $index->search($query)->getAggregation('min_price');

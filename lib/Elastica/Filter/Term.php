@@ -18,7 +18,7 @@ class Term extends AbstractFilter
      *
      * @param array $term Term array
      */
-    public function __construct(array $term = array())
+    public function __construct(array $term = [])
     {
         $this->setRawTerm($term);
     }
@@ -45,6 +45,6 @@ class Term extends AbstractFilter
      */
     public function setTerm($key, $value)
     {
-        return $this->setRawTerm(array($key => $value));
+        return $this->setRawTerm([$key => $value]);
     }
 }

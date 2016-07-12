@@ -16,12 +16,12 @@ class AbstractTransportTest extends \PHPUnit_Framework_TestCase
     {
         $connection = new Connection();
 
-        return array(
-            array('Http'),
-            array(array('type' => 'Http')),
-            array(array('type' => new Http())),
-            array(new Http()),
-        );
+        return [
+            ['Http'],
+            [['type' => 'Http']],
+            [['type' => new Http()]],
+            [new Http()],
+        ];
     }
 
     /**
@@ -31,7 +31,7 @@ class AbstractTransportTest extends \PHPUnit_Framework_TestCase
     public function testCanCreateTransportInstances($transport)
     {
         $connection = new Connection();
-        $params = array();
+        $params = [];
         $transport = AbstractTransport::create($transport, $connection, $params);
         $this->assertInstanceOf('Elastica\Transport\AbstractTransport', $transport);
         $this->assertSame($connection, $transport->getConnection());
@@ -39,10 +39,10 @@ class AbstractTransportTest extends \PHPUnit_Framework_TestCase
 
     public function getInvalidDefinitions()
     {
-        return array(
-            array(array('transport' => 'Http')),
-            array('InvalidTransport'),
-        );
+        return [
+            [['transport' => 'Http']],
+            ['InvalidTransport'],
+        ];
     }
 
     /**
@@ -62,16 +62,16 @@ class AbstractTransportTest extends \PHPUnit_Framework_TestCase
     public function testCanInjectParamsWhenUsingArray()
     {
         $connection = new Connection();
-        $params = array(
+        $params = [
             'param1' => 'some value',
             'param3' => 'value3',
-        );
+        ];
 
-        $transport = AbstractTransport::create(array(
+        $transport = AbstractTransport::create([
             'type' => 'Http',
             'param1' => 'value1',
             'param2' => 'value2',
-        ), $connection, $params);
+        ], $connection, $params);
 
         $this->assertSame('value1', $transport->getParam('param1'));
         $this->assertSame('value2', $transport->getParam('param2'));
