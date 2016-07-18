@@ -94,7 +94,7 @@ class Http extends AbstractTransport
 
         $username = $connection->getUsername();
         $password = $connection->getPassword();
-        if (!is_null($username) and !is_null($password)) {
+        if (!is_null($username) && !is_null($password)) {
             curl_setopt($conn, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_setopt($conn, CURLOPT_USERPWD, "$username:$password");
         }
