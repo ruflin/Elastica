@@ -13,6 +13,7 @@ use Elastica\Query\DisMax;
 use Elastica\Query\Filtered;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\Fuzzy;
+use Elastica\Query\GeoDistance;
 use Elastica\Query\HasChild;
 use Elastica\Query\HasParent;
 use Elastica\Query\Ids;
@@ -586,5 +587,19 @@ class Query implements DSL
     public function template()
     {
         throw new NotImplementedException();
+    }
+
+    /**
+     * geo distance query.
+     *
+     * @param string $key
+     * @param array|string $location
+     * @param string $distance
+     *
+     * @return GeoDistance
+     */
+    public function geo_distance($key, $location, $distance)
+    {
+        return new GeoDistance($key, $location, $distance);
     }
 }
