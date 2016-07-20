@@ -121,6 +121,12 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'terms', 'Elastica\Query\Terms', ['field', []]);
         $this->_assertImplemented($queryDSL, 'top_children', 'Elastica\Query\TopChildren', [new Match(), 'type']);
         $this->_assertImplemented($queryDSL, 'wildcard', 'Elastica\Query\Wildcard', []);
+        $this->_assertImplemented(
+            $queryDSL,
+            'geo_distance',
+            'Elastica\Query\GeoDistance',
+            ['key', ['lat' => 1, 'lon' => 0], 'distance']
+        );
 
         $this->_assertNotImplemented($queryDSL, 'custom_boost_factor', []);
         $this->_assertNotImplemented($queryDSL, 'custom_filters_score', []);
