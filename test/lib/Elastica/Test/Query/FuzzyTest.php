@@ -69,6 +69,17 @@ class FuzzyTest extends BaseTest
     }
 
     /**
+     * @group unit
+     */
+    public function testNeedSetFieldBeforeOption()
+    {
+        $this->setExpectedException('Elastica\Exception\InvalidException', 'No field has been set');
+        $fuzzy = new Fuzzy();
+
+        $fuzzy->setFieldOption('boost', 1.0);
+    }
+
+    /**
      * @group functional
      */
     public function testQuery()
