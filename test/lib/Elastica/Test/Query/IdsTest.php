@@ -159,6 +159,22 @@ class IdsTest extends BaseTest
     /**
      * @group functional
      */
+    public function testSetTypeAndAddType()
+    {
+        $query = new Ids();
+
+        $query->setIds(['1', '4']);
+        $query->setType('helloworld1');
+        $query->addType('helloworld2');
+
+        $resultSet = $this->_index->search($query);
+
+        $this->assertEquals(2, $resultSet->count());
+    }
+
+    /**
+     * @group functional
+     */
     public function testSetTypeArraySearchArray()
     {
         $query = new Ids();
