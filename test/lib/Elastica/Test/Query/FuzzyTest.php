@@ -109,7 +109,6 @@ class FuzzyTest extends BaseTest
         $query->addField('name', [['value' => 'Baden']]);
         $this->showDeprecated();
 
-        $this->setExpectedException('Elastica\Exception\InvalidException');
         $query = new Fuzzy();
         $query->setField('name', 'value');
         $query->setField('name1', 'value1');
