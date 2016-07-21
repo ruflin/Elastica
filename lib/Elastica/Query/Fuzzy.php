@@ -60,10 +60,10 @@ class Fuzzy extends AbstractQuery
         if (count($params) < 1) {
             throw new InvalidException('No field has been set');
         }
-        $keyArray = array_keys($params);
-        $params[$keyArray[0]][$option] = $value;
+        $key = key($params);
+        $params[$key][$option] = $value;
 
-        return $this->setParam($keyArray[0], $params[$keyArray[0]]);
+        return $this->setParam($key, $params[$key]);
     }
 
     /**
