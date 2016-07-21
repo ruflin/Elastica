@@ -111,12 +111,28 @@ class FuzzyTest extends BaseTest
 
         $this->setExpectedException('Elastica\Exception\InvalidException');
         $query = new Fuzzy();
-        $query->setField('name', []);
-
-        $this->setExpectedException('Elastica\Exception\InvalidException');
-        $query = new Fuzzy();
         $query->setField('name', 'value');
         $query->setField('name1', 'value1');
+    }
+
+    /**
+     * @group unit
+     */
+    public function testFieldNameMustBeString()
+    {
+        $this->setExpectedException('Elastica\Exception\InvalidException', 'The field and value arguments must be of type string.');
+        $query = new Fuzzy();
+        $query->setField(['name'], 'value');
+    }
+
+    /**
+     * @group unit
+     */
+    public function testValueMustBeString()
+    {
+        $this->setExpectedException('Elastica\Exception\InvalidException', 'The field and value arguments must be of type string.');
+        $query = new Fuzzy();
+        $query->setField('name', ['value']);
     }
 
     /**
