@@ -102,7 +102,7 @@ class FuzzyTest extends BaseTest
      */
     public function testBadArguments()
     {
-        $this->setExpectedException('Elastica\Exception\InvalidException');
+        $this->setExpectedException('Elastica\Exception\InvalidException', 'Fuzzy query can only support a single field.');
         $query = new Fuzzy();
 
         $this->hideDeprecated();
