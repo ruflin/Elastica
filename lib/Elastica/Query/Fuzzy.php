@@ -48,12 +48,12 @@ class Fuzzy extends AbstractQuery
     /**
      * Set optional parameters on the existing query.
      *
-     * @param string $param option name
+     * @param string $option option name
      * @param mixed  $value Value of the parameter
      *
      * @return $this
      */
-    public function setFieldOption($param, $value)
+    public function setFieldOption($option, $value)
     {
         //Retrieve the single existing field for alteration.
         $params = $this->getParams();
@@ -61,7 +61,7 @@ class Fuzzy extends AbstractQuery
             throw new InvalidException('No field has been set');
         }
         $keyArray = array_keys($params);
-        $params[$keyArray[0]][$param] = $value;
+        $params[$keyArray[0]][$option] = $value;
 
         return $this->setParam($keyArray[0], $params[$keyArray[0]]);
     }
