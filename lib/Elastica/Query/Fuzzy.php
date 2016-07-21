@@ -38,7 +38,7 @@ class Fuzzy extends AbstractQuery
         if (!is_string($value) || !is_string($fieldName)) {
             throw new InvalidException('The field and value arguments must be of type string.');
         }
-        if (count($this->getParams()) > 0 && array_shift(array_keys($this->getParams())) != $fieldName) {
+        if (count($this->getParams()) > 0 && key($this->getParams()) !== $fieldName) {
             throw new InvalidException('Fuzzy query can only support a single field.');
         }
 

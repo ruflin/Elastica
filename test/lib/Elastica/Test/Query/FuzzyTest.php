@@ -100,7 +100,7 @@ class FuzzyTest extends BaseTest
     /**
      * @group unit
      */
-    public function testBadArguments()
+    public function testAddSingleField()
     {
         $this->setExpectedException('Elastica\Exception\InvalidException', 'Fuzzy query can only support a single field.');
         $query = new Fuzzy();
@@ -108,7 +108,24 @@ class FuzzyTest extends BaseTest
         $this->hideDeprecated();
         $query->addField('name', [['value' => 'Baden']]);
         $this->showDeprecated();
+    }
 
+    /**
+     * @group unit
+     */
+    public function testResetSingleField()
+    {
+        $query = new Fuzzy();
+        $query->setField('name', 'value');
+        $query->setField('name', 'value1');
+    }
+
+    /**
+     * @group unit
+     */
+    public function testOnlySetSingleField()
+    {
+        $this->setExpectedException('Elastica\Exception\InvalidException', 'Fuzzy query can only support a single field.');
         $query = new Fuzzy();
         $query->setField('name', 'value');
         $query->setField('name1', 'value1');
