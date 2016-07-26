@@ -69,6 +69,16 @@ class FuzzyTest extends BaseTest
     }
 
     /**
+     * @group unit
+     */
+    public function testNeedSetFieldBeforeOption()
+    {
+        $fuzzy = new Fuzzy();
+        $this->setExpectedException('Elastica\Exception\InvalidException', 'No field has been set');
+        $fuzzy->setFieldOption('boost', 1.0);
+    }
+
+    /**
      * @group functional
      */
     public function testQuery()
@@ -89,10 +99,10 @@ class FuzzyTest extends BaseTest
 
         $field = 'name';
 
-        $query = new Fuzzy();
-        $query->setField($field, 'Baden');
+        $fuzzy = new Fuzzy();
+        $fuzzy->setField($field, 'Baden');
 
-        $resultSet = $index->search($query);
+        $resultSet = $index->search($fuzzy);
 
         $this->assertEquals(2, $resultSet->count());
     }
@@ -100,23 +110,63 @@ class FuzzyTest extends BaseTest
     /**
      * @group unit
      */
-    public function testBadArguments()
+    public function testAddSingleField()
     {
-        $this->setExpectedException('Elastica\Exception\InvalidException');
-        $query = new Fuzzy();
+        $this->setExpectedException('Elastica\Exception\InvalidException', 'Fuzzy query can only support a single field.');
+        $fuzzy = new Fuzzy();
 
         $this->hideDeprecated();
-        $query->addField('name', [['value' => 'Baden']]);
+        $fuzzy->addField('name', [['value' => 'Baden']]);
         $this->showDeprecated();
+    }
 
-        $this->setExpectedException('Elastica\Exception\InvalidException');
-        $query = new Fuzzy();
-        $query->setField('name', []);
+    /**
+     * @group unit
+     */
+    public function testResetSingleField()
+    {
+        $fuzzy = new Fuzzy();
+        $fuzzy->setField('name', 'value');
+        $fuzzy->setField('name', 'other');
+        $expected = [
+            'fuzzy' => [
+                'name' => [
+                    'value' => 'other',
+                ],
+            ],
+        ];
+        $this->assertEquals($expected, $fuzzy->toArray());
+    }
 
-        $this->setExpectedException('Elastica\Exception\InvalidException');
-        $query = new Fuzzy();
-        $query->setField('name', 'value');
-        $query->setField('name1', 'value1');
+    /**
+     * @group unit
+     */
+    public function testOnlySetSingleField()
+    {
+        $fuzzy = new Fuzzy();
+        $fuzzy->setField('name', 'value');
+        $this->setExpectedException('Elastica\Exception\InvalidException', 'Fuzzy query can only support a single field.');
+        $fuzzy->setField('name1', 'value1');
+    }
+
+    /**
+     * @group unit
+     */
+    public function testFieldNameMustBeString()
+    {
+        $fuzzy = new Fuzzy();
+        $this->setExpectedException('Elastica\Exception\InvalidException', 'The field and value arguments must be of type string.');
+        $fuzzy->setField(['name'], 'value');
+    }
+
+    /**
+     * @group unit
+     */
+    public function testValueMustBeString()
+    {
+        $fuzzy = new Fuzzy();
+        $this->setExpectedException('Elastica\Exception\InvalidException', 'The field and value arguments must be of type string.');
+        $fuzzy->setField('name', ['value']);
     }
 
     /**
@@ -124,9 +174,9 @@ class FuzzyTest extends BaseTest
      */
     public function testAddFieldDeprecated()
     {
-        $query = new Fuzzy();
+        $fuzzy = new Fuzzy();
         $errorCollector = $this->startCollectErrors();
-        $query->addField('user', ['value' => 'Nicolas', 'boost' => 1.0]);
+        $fuzzy->addField('user', ['value' => 'Nicolas', 'boost' => 1.0]);
         $this->finishCollectErrors();
 
         $errorCollector->assertOnlyOneDeprecatedError('Query\Fuzzy::addField is deprecated. Use setField and setFieldOption instead. This method will be removed in further Elastica releases');
