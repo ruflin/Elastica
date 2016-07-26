@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file based on the
 ### Bugfixes
 
 ### Added
-
+- `Elastica\Aggregations\GeoCentroid`
 ### Improvements
 - `Elastica\Exception\InvalidException` will be thrown if you try using an
   `Elastica\Aggregation\AbstractSimpleAggregation` without setting either the
