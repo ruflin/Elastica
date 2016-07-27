@@ -26,6 +26,16 @@ class ClientTest extends BaseTest
     /**
      * @group functional
      */
+    public function testGetVersion()
+    {
+        $client = $this->_getClient();
+        $this->assertNotEmpty($version = $client->getVersion());
+        $this->assertSame($version, $client->getVersion());
+    }
+
+    /**
+     * @group functional
+     */
     public function testConnectionsArray()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
