@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 - Elastica\QueryBuilder\DSL\Query::geo_distance
-- Elastica\Aggregation\GeoCentroid
+- Elastica\Aggregation\GeoCentroid [#1150](https://github.com/ruflin/Elastica/pull/1150)
 
 ### Improvements
 - Set PHP 7.0 as default development version
@@ -39,7 +39,6 @@ All notable changes to this project will be documented in this file based on the
 - Fix php notice on `\Elastica\Index::getAliases()` if index has no aliases [#1078](https://github.com/ruflin/Elastica/issues/1078)
 
 ### Added
-- `Elastica\Aggregations\GeoCentroid`
 - Update elasticsearch build dependency to elasticsearch 2.3.2 [#1084](https://github.com/ruflin/Elastica/pull/1084)
 
 ### Improvements
