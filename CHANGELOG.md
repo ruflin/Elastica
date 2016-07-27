@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 - Elastica\QueryBuilder\DSL\Query::geo_distance
+- Elastica\Aggregation\GeoCentroid [#1150](https://github.com/ruflin/Elastica/pull/1150)
 
 ### Improvements
 - Set PHP 7.0 as default development version
