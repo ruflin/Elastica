@@ -27,15 +27,15 @@ class TermsTest extends BaseTest
         $type2 = $index->getType('bands');
 
         //index some test data
-        $type1->addDocuments(array(
-            new Document(1, array('name' => 'robert', 'lastName' => 'plant')),
-            new Document(2, array('name' => 'jimmy', 'lastName' => 'page')),
-            new Document(3, array('name' => 'john paul', 'lastName' => 'jones')),
-            new Document(4, array('name' => 'john', 'lastName' => 'bonham')),
-            new Document(5, array('name' => 'jimi', 'lastName' => 'hendrix')),
-        ));
+        $type1->addDocuments([
+            new Document(1, ['name' => 'robert', 'lastName' => 'plant']),
+            new Document(2, ['name' => 'jimmy', 'lastName' => 'page']),
+            new Document(3, ['name' => 'john paul', 'lastName' => 'jones']),
+            new Document(4, ['name' => 'john', 'lastName' => 'bonham']),
+            new Document(5, ['name' => 'jimi', 'lastName' => 'hendrix']),
+        ]);
 
-        $type2->addDocument(new Document('led zeppelin', array('members' => array('plant', 'page', 'jones', 'bonham'))));
+        $type2->addDocument(new Document('led zeppelin', ['members' => ['plant', 'page', 'jones', 'bonham']]));
         $index->refresh();
 
         //use the terms lookup feature to query for some data
@@ -58,7 +58,7 @@ class TermsTest extends BaseTest
         $this->assertEquals($results->count(), 4, 'Terms lookup with index as string');
 
         //Query with array of options
-        $termsFilter->setLookup('lastName', $type2, 'led zeppelin', 'members', array('index' => $index));
+        $termsFilter->setLookup('lastName', $type2, 'led zeppelin', 'members', ['index' => $index]);
         $query->setPostFilter($termsFilter);
         $results = $index->search($query);
         $this->assertEquals($results->count(), 4, 'Terms lookup with options array');
@@ -71,7 +71,7 @@ class TermsTest extends BaseTest
      */
     public function testSetExecution()
     {
-        $filter = new Terms('color', array('blue', 'green'));
+        $filter = new Terms('color', ['blue', 'green']);
 
         $filter->setExecution('bool');
         $this->assertEquals('bool', $filter->getParam('execution'));
@@ -86,11 +86,11 @@ class TermsTest extends BaseTest
     public function testSetTerms()
     {
         $field = 'color';
-        $terms = array('blue', 'green');
+        $terms = ['blue', 'green'];
 
         $filter = new Terms();
         $filter->setTerms($field, $terms);
-        $expected = array('terms' => array($field => $terms));
+        $expected = ['terms' => [$field => $terms]];
         $this->assertEquals($expected, $filter->toArray());
 
         $returnValue = $filter->setTerms($field, $terms);
@@ -102,10 +102,10 @@ class TermsTest extends BaseTest
      */
     public function testAddTerm()
     {
-        $filter = new Terms('color', array('blue'));
+        $filter = new Terms('color', ['blue']);
 
         $filter->addTerm('green');
-        $expected = array('terms' => array('color' => array('blue', 'green')));
+        $expected = ['terms' => ['color' => ['blue', 'green']]];
         $this->assertEquals($expected, $filter->toArray());
 
         $returnValue = $filter->addTerm('cyan');
@@ -117,12 +117,12 @@ class TermsTest extends BaseTest
      */
     public function testToArray()
     {
-        $filter = new Terms('color', array());
-        $expected = array('terms' => array('color' => array()));
+        $filter = new Terms('color', []);
+        $expected = ['terms' => ['color' => []]];
         $this->assertEquals($expected, $filter->toArray());
 
-        $filter = new Terms('color', array('cyan'));
-        $expected = array('terms' => array('color' => array('cyan')));
+        $filter = new Terms('color', ['cyan']);
+        $expected = ['terms' => ['color' => ['cyan']]];
         $this->assertEquals($expected, $filter->toArray());
     }
 

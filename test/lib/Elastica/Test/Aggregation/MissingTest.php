@@ -11,12 +11,12 @@ class MissingTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('test')->addDocuments(array(
-            new Document(1, array('price' => 5, 'color' => 'blue')),
-            new Document(2, array('price' => 8, 'color' => 'blue')),
-            new Document(3, array('price' => 1)),
-            new Document(4, array('price' => 3, 'color' => 'green')),
-        ));
+        $index->getType('test')->addDocuments([
+            new Document(1, ['price' => 5, 'color' => 'blue']),
+            new Document(2, ['price' => 8, 'color' => 'blue']),
+            new Document(3, ['price' => 1]),
+            new Document(4, ['price' => 3, 'color' => 'green']),
+        ]);
 
         $index->refresh();
 

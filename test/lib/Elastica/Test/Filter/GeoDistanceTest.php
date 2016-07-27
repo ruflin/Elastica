@@ -14,7 +14,7 @@ class GeoDistanceTest extends BaseTest
      */
     public function testDeprecated()
     {
-        $reflection = new \ReflectionClass(new GeoDistance('point', array('lat' => 30, 'lon' => 40), '40000km'));
+        $reflection = new \ReflectionClass(new GeoDistance('point', ['lat' => 30, 'lon' => 40], '40000km'));
         $this->assertFileDeprecated($reflection->getFileName(), 'Deprecated: Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html');
     }
 
@@ -28,13 +28,13 @@ class GeoDistanceTest extends BaseTest
         $type = $index->getType('test');
 
         // Set mapping
-        $type->setMapping(array('point' => array('type' => 'geo_point')));
+        $type->setMapping(['point' => ['type' => 'geo_point']]);
 
         // Add doc 1
         $doc1 = new Document(1,
-            array(
+            [
                 'name' => 'ruflin',
-            )
+            ]
         );
 
         $doc1->addGeoPoint('point', 17, 19);
@@ -42,9 +42,9 @@ class GeoDistanceTest extends BaseTest
 
         // Add doc 2
         $doc2 = new Document(2,
-            array(
+            [
                 'name' => 'ruflin',
-            )
+            ]
         );
 
         $doc2->addGeoPoint('point', 30, 40);
@@ -55,7 +55,7 @@ class GeoDistanceTest extends BaseTest
 
         // Only one point should be in radius
         $query = new Query();
-        $geoFilter = new GeoDistance('point', array('lat' => 30, 'lon' => 40), '1km');
+        $geoFilter = new GeoDistance('point', ['lat' => 30, 'lon' => 40], '1km');
 
         $query = new Query(new MatchAll());
         $query->setPostFilter($geoFilter);
@@ -63,7 +63,7 @@ class GeoDistanceTest extends BaseTest
 
         // Both points should be inside
         $query = new Query();
-        $geoFilter = new GeoDistance('point', array('lat' => 30, 'lon' => 40), '40000km');
+        $geoFilter = new GeoDistance('point', ['lat' => 30, 'lon' => 40], '40000km');
         $query = new Query(new MatchAll());
         $query->setPostFilter($geoFilter);
         $index->refresh();
@@ -77,20 +77,20 @@ class GeoDistanceTest extends BaseTest
     public function testConstructLatlon()
     {
         $key = 'location';
-        $location = array(
+        $location = [
             'lat' => 48.86,
             'lon' => 2.35,
-        );
+        ];
         $distance = '10km';
 
         $filter = new GeoDistance($key, $location, $distance);
 
-        $expected = array(
-            'geo_distance' => array(
+        $expected = [
+            'geo_distance' => [
                 $key => $location,
                 'distance' => $distance,
-            ),
-        );
+            ],
+        ];
 
         $data = $filter->toArray();
 
@@ -108,12 +108,12 @@ class GeoDistanceTest extends BaseTest
 
         $filter = new GeoDistance($key, $location, $distance);
 
-        $expected = array(
-            'geo_distance' => array(
+        $expected = [
+            'geo_distance' => [
                 $key => $location,
                 'distance' => $distance,
-            ),
-        );
+            ],
+        ];
 
         $data = $filter->toArray();
 
@@ -125,7 +125,7 @@ class GeoDistanceTest extends BaseTest
      */
     public function testSetDistanceType()
     {
-        $filter = new GeoDistance('location', array('lat' => 48.86, 'lon' => 2.35), '10km');
+        $filter = new GeoDistance('location', ['lat' => 48.86, 'lon' => 2.35], '10km');
         $distanceType = GeoDistance::DISTANCE_TYPE_ARC;
         $filter->setDistanceType($distanceType);
 
@@ -139,7 +139,7 @@ class GeoDistanceTest extends BaseTest
      */
     public function testSetOptimizeBbox()
     {
-        $filter = new GeoDistance('location', array('lat' => 48.86, 'lon' => 2.35), '10km');
+        $filter = new GeoDistance('location', ['lat' => 48.86, 'lon' => 2.35], '10km');
         $optimizeBbox = GeoDistance::OPTIMIZE_BBOX_MEMORY;
         $filter->setOptimizeBbox($optimizeBbox);
 

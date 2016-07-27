@@ -1,10 +1,8 @@
 <?php
 namespace Elastica\Multi;
 
-use Elastica\Exception\InvalidException;
 use Elastica\Response;
 use Elastica\ResultSet as BaseResultSet;
-use Elastica\Search as BaseSearch;
 
 /**
  * Elastica multi search result set
@@ -19,7 +17,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
      *
      * @var array|\Elastica\ResultSet[] Result Sets
      */
-    protected $_resultSets = array();
+    protected $_resultSets = [];
 
     /**
      * Current position.
@@ -38,44 +36,13 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * Constructs ResultSet object.
      *
-     * @param \Elastica\Response       $response
-     * @param array|\Elastica\Search[] $searches
+     * @param \Elastica\Response $response
+     * @param BaseResultSet[]
      */
-    public function __construct(Response $response, array $searches)
-    {
-        $this->rewind();
-        $this->_init($response, $searches);
-    }
-
-    /**
-     * @param \Elastica\Response       $response
-     * @param array|\Elastica\Search[] $searches
-     *
-     * @throws \Elastica\Exception\InvalidException
-     */
-    protected function _init(Response $response, array $searches)
+    public function __construct(Response $response, $resultSets)
     {
         $this->_response = $response;
-        $responseData = $response->getData();
-
-        if (isset($responseData['responses']) && is_array($responseData['responses'])) {
-            reset($searches);
-            foreach ($responseData['responses'] as $key => $responseData) {
-                $currentSearch = each($searches);
-
-                if ($currentSearch === false) {
-                    throw new InvalidException('No result found for search #'.$key);
-                } elseif (!$currentSearch['value'] instanceof BaseSearch) {
-                    throw new InvalidException('Invalid object for search #'.$key.' provided. Should be Elastica\Search');
-                }
-
-                $search = $currentSearch['value'];
-                $query = $search->getQuery();
-
-                $response = new Response($responseData);
-                $this->_resultSets[$currentSearch['key']] = new BaseResultSet($response, $query);
-            }
-        }
+        $this->_resultSets = $resultSets;
     }
 
     /**
@@ -117,11 +84,9 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
      */
     public function current()
     {
-        if ($this->valid()) {
-            return $this->_resultSets[$this->key()];
-        } else {
-            return false;
-        }
+        return $this->valid()
+            ? $this->_resultSets[$this->key()]
+            : false;
     }
 
     /**

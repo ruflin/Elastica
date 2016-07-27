@@ -27,7 +27,7 @@ class Http extends AbstractTransport
      *
      * @var resource Curl resource to reuse
      */
-    protected static $_curlConnection = null;
+    protected static $_curlConnection;
 
     /**
      * Makes calls to the elasticsearch server.
@@ -94,22 +94,22 @@ class Http extends AbstractTransport
 
         $username = $connection->getUsername();
         $password = $connection->getPassword();
-        if (!is_null($username) and !is_null($password)) {
+        if (!is_null($username) && !is_null($password)) {
             curl_setopt($conn, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
             curl_setopt($conn, CURLOPT_USERPWD, "$username:$password");
         }
 
         $this->_setupCurl($conn);
 
-        $headersConfig = $connection->hasConfig('headers') ? $connection->getConfig('headers') : array();
+        $headersConfig = $connection->hasConfig('headers') ? $connection->getConfig('headers') : [];
+
+        $headers = [];
 
         if (!empty($headersConfig)) {
-            $headers = array();
+            $headers = [];
             while (list($header, $headerValue) = each($headersConfig)) {
                 array_push($headers, $header.': '.$headerValue);
             }
-
-            curl_setopt($conn, CURLOPT_HTTPHEADER, $headers);
         }
 
         // TODO: REFACTOR
@@ -135,13 +135,15 @@ class Http extends AbstractTransport
                 curl_setopt($conn, CURLOPT_POSTFIELDS, gzencode($content));
 
                 // ... and tell ES that it is compressed
-                curl_setopt($conn, CURLOPT_HTTPHEADER, array('Content-Encoding: gzip'));
+                array_push($headers, 'Content-Encoding: gzip');
             } else {
                 curl_setopt($conn, CURLOPT_POSTFIELDS, $content);
             }
         } else {
             curl_setopt($conn, CURLOPT_POSTFIELDS, '');
         }
+
+        curl_setopt($conn, CURLOPT_HTTPHEADER, $headers);
 
         curl_setopt($conn, CURLOPT_NOBODY, $httpMethod == 'HEAD');
 

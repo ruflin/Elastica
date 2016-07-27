@@ -16,7 +16,7 @@ class ScriptFields extends Param
     /**
      * @param \Elastica\Script\Script[]|array $scripts OPTIONAL
      */
-    public function __construct(array $scripts = array())
+    public function __construct(array $scripts = [])
     {
         if ($scripts) {
             $this->setScripts($scripts);
@@ -48,7 +48,7 @@ class ScriptFields extends Param
      */
     public function setScripts(array $scripts)
     {
-        $this->_params = array();
+        $this->_params = [];
         foreach ($scripts as $name => $script) {
             $this->addScript($name, $script);
         }

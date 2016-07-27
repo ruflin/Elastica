@@ -14,30 +14,30 @@ class NestedTest extends BaseAggregationTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->setMapping(new Mapping(null, array(
-            'resellers' => array(
+        $type->setMapping(new Mapping(null, [
+            'resellers' => [
                 'type' => 'nested',
-                'properties' => array(
-                    'name' => array('type' => 'string'),
-                    'price' => array('type' => 'double'),
-                ),
-            ),
-        )));
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                    'price' => ['type' => 'double'],
+                ],
+            ],
+        ]));
 
-        $type->addDocuments(array(
-            new Document(1, array(
-                'resellers' => array(
+        $type->addDocuments([
+            new Document(1, [
+                'resellers' => [
                     'name' => 'spacely sprockets',
                     'price' => 5.55,
-                ),
-            )),
-            new Document(2, array(
-                'resellers' => array(
+                ],
+            ]),
+            new Document(2, [
+                'resellers' => [
                     'name' => 'cogswell cogs',
                     'price' => 4.98,
-                ),
-            )),
-        ));
+                ],
+            ]),
+        ]);
 
         $index->refresh();
 

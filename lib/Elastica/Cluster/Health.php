@@ -17,12 +17,12 @@ class Health
     /**
      * @var \Elastica\Client Client object.
      */
-    protected $_client = null;
+    protected $_client;
 
     /**
      * @var array The cluster health data.
      */
-    protected $_data = null;
+    protected $_data;
 
     /**
      * @param \Elastica\Client $client The Elastica client.
@@ -175,7 +175,7 @@ class Health
      */
     public function getIndices()
     {
-        $indices = array();
+        $indices = [];
         foreach ($this->_data['indices'] as $indexName => $index) {
             $indices[] = new Index($indexName, $index);
         }

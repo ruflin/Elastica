@@ -4,9 +4,9 @@ namespace Elastica;
 use Elastica\Bulk\Action;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\RuntimeException;
 use Elastica\Script\AbstractScript;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Client to connect the the elasticsearch server.
@@ -24,7 +24,7 @@ class Client
      *
      * @var array
      */
-    protected $_config = array(
+    protected $_config = [
         'host' => null,
         'port' => null,
         'path' => null,
@@ -33,49 +33,57 @@ class Client
         'transport' => null,
         'persistent' => true,
         'timeout' => null,
-        'connections' => array(), // host, port, path, timeout, transport, compression, persistent, timeout, config -> (curl, headers, url)
+        'connections' => [], // host, port, path, timeout, transport, compression, persistent, timeout, config -> (curl, headers, url)
         'roundRobin' => false,
         'log' => false,
         'retryOnConflict' => 0,
         'bigintConversion' => false,
         'username' => null,
         'password' => null,
-    );
+    ];
 
     /**
      * @var callback
      */
-    protected $_callback = null;
+    protected $_callback;
 
     /**
-     * @var \Elastica\Request
+     * @var Connection\ConnectionPool
+     */
+    protected $_connectionPool;
+
+    /**
+     * @var \Elastica\Request|null
      */
     protected $_lastRequest;
 
     /**
-     * @var \Elastica\Response
+     * @var \Elastica\Response|null
      */
     protected $_lastResponse;
 
     /**
      * @var LoggerInterface
      */
-    protected $_logger = null;
-    /**
-     * @var Connection\ConnectionPool
-     */
-    protected $_connectionPool = null;
+    protected $_logger;
 
     /**
      * Creates a new Elastica client.
      *
-     * @param array    $config   OPTIONAL Additional config options
-     * @param callback $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
+     * @param array           $config   OPTIONAL Additional config options
+     * @param callback        $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
+     * @param LoggerInterface $logger
      */
-    public function __construct(array $config = array(), $callback = null)
+    public function __construct(array $config = [], $callback = null, LoggerInterface $logger = null)
     {
-        $this->setConfig($config);
         $this->_callback = $callback;
+
+        if (!$logger && isset($config['log']) && $config['log']) {
+            $logger = new Log($config['log']);
+        }
+        $this->_logger = $logger ?: new NullLogger();
+
+        $this->setConfig($config);
         $this->_initConnections();
     }
 
@@ -84,7 +92,7 @@ class Client
      */
     protected function _initConnections()
     {
-        $connections = array();
+        $connections = [];
 
         foreach ($this->getConfig('connections') as $connection) {
             $connections[] = Connection::create($this->_prepareConnectionParams($connection));
@@ -123,10 +131,10 @@ class Client
      */
     protected function _prepareConnectionParams(array $config)
     {
-        $params = array();
-        $params['config'] = array();
+        $params = [];
+        $params['config'] = [];
         foreach ($config as $key => $value) {
-            if (in_array($key, array('bigintConversion', 'curl', 'headers', 'url'))) {
+            if (in_array($key, ['bigintConversion', 'curl', 'headers', 'url'])) {
                 $params['config'][$key] = $value;
             } else {
                 $params[$key] = $value;
@@ -185,7 +193,7 @@ class Client
      */
     public function setConfigValue($key, $value)
     {
-        return $this->setConfig(array($key => $value));
+        return $this->setConfig([$key => $value]);
     }
 
     /**
@@ -322,7 +330,7 @@ class Client
     /**
      * Update document, using update script. Requires elasticsearch >= 0.19.0.
      *
-     * @param int                                                      $id      document id
+     * @param int|string                                               $id      document id
      * @param array|\Elastica\Script\AbstractScript|\Elastica\Document $data    raw data for request body
      * @param string                                                   $index   index to update
      * @param string                                                   $type    type of index to update
@@ -332,21 +340,21 @@ class Client
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      */
-    public function updateDocument($id, $data, $index, $type, array $options = array())
+    public function updateDocument($id, $data, $index, $type, array $options = [])
     {
         $path = $index.'/'.$type.'/'.$id.'/_update';
 
         if ($data instanceof AbstractScript) {
             $requestData = $data->toArray();
         } elseif ($data instanceof Document) {
-            $requestData = array('doc' => $data->getData());
+            $requestData = ['doc' => $data->getData()];
 
             if ($data->getDocAsUpsert()) {
                 $requestData['doc_as_upsert'] = true;
             }
 
             $docOptions = $data->getOptions(
-                array(
+                [
                     'version',
                     'version_type',
                     'routing',
@@ -358,12 +366,12 @@ class Client
                     'replication',
                     'refresh',
                     'timeout',
-                )
+                ]
             );
             $options += $docOptions;
             // set fields param to source only if options was not set before
             if ($data instanceof Document && ($data->isAutoPopulate()
-                || $this->getConfigValue(array('document', 'autoPopulate'), false))
+                || $this->getConfigValue(['document', 'autoPopulate'], false))
                 && !isset($options['fields'])
             ) {
                 $options['fields'] = '_source';
@@ -388,7 +396,7 @@ class Client
 
         if ($response->isOk()
             && $data instanceof Document
-            && ($data->isAutoPopulate() || $this->getConfigValue(array('document', 'autoPopulate'), false))
+            && ($data->isAutoPopulate() || $this->getConfigValue(['document', 'autoPopulate'], false))
         ) {
             $responseData = $response->getData();
             if (isset($responseData['_version'])) {
@@ -467,6 +475,14 @@ class Client
     public function getCluster()
     {
         return new Cluster($this);
+    }
+
+    /**
+     * Establishes the client connections.
+     */
+    public function connect()
+    {
+        return $this->_initConnections();
     }
 
     /**
@@ -606,31 +622,27 @@ class Client
      *
      * It's possible to make any REST query directly over this method
      *
-     * @param string $path   Path to call
-     * @param string $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param array  $data   OPTIONAL Arguments as array
-     * @param array  $query  OPTIONAL Query params
+     * @param string       $path   Path to call
+     * @param string       $method Rest method to use (GET, POST, DELETE, PUT)
+     * @param array|string $data   OPTIONAL Arguments as array or pre-encoded string
+     * @param array        $query  OPTIONAL Query params
      *
      * @throws Exception\ConnectionException|\Exception
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function request($path, $method = Request::GET, $data = array(), array $query = array())
+    public function request($path, $method = Request::GET, $data = [], array $query = [])
     {
         $connection = $this->getConnection();
+        $request = $this->_lastRequest = new Request($path, $method, $data, $query, $connection);
+        $this->_lastResponse = null;
+
         try {
-            $request = new Request($path, $method, $data, $query, $connection);
-
-            $this->_log($request);
-
-            $response = $request->send();
-
-            $this->_lastRequest = $request;
-            $this->_lastResponse = $response;
-
-            return $response;
+            $response = $this->_lastResponse = $request->send();
         } catch (ConnectionException $e) {
             $this->_connectionPool->onFail($connection, $e, $this);
+
+            $this->_log($e);
 
             // In case there is no valid connection left, throw exception which caused the disabling of the connection.
             if (!$this->hasConnection()) {
@@ -639,6 +651,44 @@ class Client
 
             return $this->request($path, $method, $data, $query);
         }
+
+        $this->_log($request);
+
+        return $response;
+    }
+
+    /**
+     * logging.
+     *
+     * @deprecated Overwriting Client->_log is deprecated. Handle logging functionality by using a custom LoggerInterface.
+     *
+     * @param mixed $context
+     */
+    protected function _log($context)
+    {
+        if ($context instanceof ConnectionException) {
+            $this->_logger->error('Elastica Request Failure', [
+                'exception' => $context,
+                'request' => $context->getRequest()->toArray(),
+                'retry' => $this->hasConnection(),
+            ]);
+
+            return;
+        }
+
+        if ($context instanceof Request) {
+            $this->_logger->debug('Elastica Request', [
+                'request' => $context->toArray(),
+                'response' => $this->_lastResponse ? $this->_lastResponse->getData() : null,
+                'responseStatus' => $this->_lastResponse ? $this->_lastResponse->getStatus() : null,
+            ]);
+
+            return;
+        }
+
+        $this->_logger->debug('Elastica Request', [
+            'message' => $context,
+        ]);
     }
 
     /**
@@ -650,9 +700,9 @@ class Client
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
-    public function optimizeAll($args = array())
+    public function optimizeAll($args = [])
     {
-        return $this->request('_optimize', Request::POST, array(), $args);
+        return $this->request('_optimize', Request::POST, [], $args);
     }
 
     /**
@@ -668,32 +718,7 @@ class Client
     }
 
     /**
-     * logging.
-     *
-     * @param string|\Elastica\Request $context
-     *
-     * @throws Exception\RuntimeException
-     */
-    protected function _log($context)
-    {
-        $log = $this->getConfig('log');
-        if ($log && !class_exists('Psr\Log\AbstractLogger')) {
-            throw new RuntimeException('Class Psr\Log\AbstractLogger not found');
-        } elseif (!$this->_logger && $log) {
-            $this->setLogger(new Log($this->getConfig('log')));
-        }
-        if ($this->_logger) {
-            if ($context instanceof Request) {
-                $data = $context->toArray();
-            } else {
-                $data = array('message' => $context);
-            }
-            $this->_logger->debug('logging Request', $data);
-        }
-    }
-
-    /**
-     * @return \Elastica\Request
+     * @return Request|null
      */
     public function getLastRequest()
     {
@@ -701,7 +726,7 @@ class Client
     }
 
     /**
-     * @return \Elastica\Response
+     * @return Response|null
      */
     public function getLastResponse()
     {
@@ -709,7 +734,7 @@ class Client
     }
 
     /**
-     * set Logger.
+     * Replace the existing logger.
      *
      * @param LoggerInterface $logger
      *

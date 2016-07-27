@@ -32,6 +32,6 @@ class TermTest extends BaseTest
         $data = $query->toArray();
 
         $this->assertInternalType('array', $data['term']);
-        $this->assertEquals(array($key => $value), $data['term']);
+        $this->assertEquals([$key => $value], $data['term']);
     }
 }

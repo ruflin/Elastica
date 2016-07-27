@@ -47,7 +47,7 @@ class PercentilesTest extends BaseAggregationTest
      */
     public function testSetPercents()
     {
-        $percents = array(1, 2, 3);
+        $percents = [1, 2, 3];
         $aggr = new Percentiles('price_percentile');
         $aggr->setPercents($percents);
         $this->assertEquals($percents, $aggr->getParam('percents'));
@@ -59,7 +59,7 @@ class PercentilesTest extends BaseAggregationTest
      */
     public function testAddPercent()
     {
-        $percents = array(1, 2, 3);
+        $percents = [1, 2, 3];
         $aggr = new Percentiles('price_percentile');
         $aggr->setPercents($percents);
         $this->assertEquals($percents, $aggr->getParam('percents'));
@@ -89,18 +89,18 @@ class PercentilesTest extends BaseAggregationTest
         // prepare
         $index = $this->_createIndex();
         $type = $index->getType('offer');
-        $type->addDocuments(array(
-            new Document(1, array('price' => 100)),
-            new Document(2, array('price' => 200)),
-            new Document(3, array('price' => 300)),
-            new Document(4, array('price' => 400)),
-            new Document(5, array('price' => 500)),
-            new Document(6, array('price' => 600)),
-            new Document(7, array('price' => 700)),
-            new Document(8, array('price' => 800)),
-            new Document(9, array('price' => 900)),
-            new Document(10, array('price' => 1000)),
-        ));
+        $type->addDocuments([
+            new Document(1, ['price' => 100]),
+            new Document(2, ['price' => 200]),
+            new Document(3, ['price' => 300]),
+            new Document(4, ['price' => 400]),
+            new Document(5, ['price' => 500]),
+            new Document(6, ['price' => 600]),
+            new Document(7, ['price' => 700]),
+            new Document(8, ['price' => 800]),
+            new Document(9, ['price' => 900]),
+            new Document(10, ['price' => 1000]),
+        ]);
         $index->refresh();
 
         // execute

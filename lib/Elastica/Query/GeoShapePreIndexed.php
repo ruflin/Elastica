@@ -67,18 +67,18 @@ class GeoShapePreIndexed extends AbstractGeoShape
      */
     public function toArray()
     {
-        return array(
-            'geo_shape' => array(
-                $this->_path => array(
-                    'indexed_shape' => array(
+        return [
+            'geo_shape' => [
+                $this->_path => [
+                    'indexed_shape' => [
                         'id' => $this->_indexedId,
                         'type' => $this->_indexedType,
                         'index' => $this->_indexedIndex,
                         'path' => $this->_indexedPath,
-                    ),
+                    ],
                     'relation' => $this->_relation,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 }

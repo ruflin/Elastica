@@ -5,6 +5,7 @@ use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
+use Elastica\ResultSet\BuilderInterface;
 
 /**
  * Elastica index object.
@@ -20,14 +21,14 @@ class Index implements SearchableInterface
      *
      * @var string Index name
      */
-    protected $_name = '';
+    protected $_name;
 
     /**
      * Client object.
      *
      * @var \Elastica\Client Client object
      */
-    protected $_client = null;
+    protected $_client;
 
     /**
      * Creates a new index object.
@@ -36,8 +37,6 @@ class Index implements SearchableInterface
      *
      * @param \Elastica\Client $client Client object
      * @param string           $name   Index name
-     *
-     * @throws \Elastica\Exception\InvalidException
      */
     public function __construct(Client $client, $name)
     {
@@ -90,7 +89,7 @@ class Index implements SearchableInterface
             return $mapping['mappings'];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -149,17 +148,17 @@ class Index implements SearchableInterface
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      */
-    public function deleteByQuery($query, array $options = array())
+    public function deleteByQuery($query, array $options = [])
     {
         if (is_string($query)) {
             // query_string queries are not supported for delete by query operations
             $options['q'] = $query;
 
-            return $this->request('_query', Request::DELETE, array(), $options);
+            return $this->request('_query', Request::DELETE, [], $options);
         }
         $query = Query::create($query)->getQuery();
 
-        return $this->request('_query', Request::DELETE, array('query' => is_array($query) ? $query : $query->toArray()), $options);
+        return $this->request('_query', Request::DELETE, ['query' => is_array($query) ? $query : $query->toArray()], $options);
     }
 
     /**
@@ -199,13 +198,13 @@ class Index implements SearchableInterface
      *
      * @param array $args OPTIONAL Additional arguments
      *
-     * @return array Server response
+     * @return \Elastica\Response Server response
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
-    public function optimize($args = array())
+    public function optimize($args = [])
     {
-        return $this->request('_optimize', Request::POST, array(), $args);
+        return $this->request('_optimize', Request::POST, [], $args);
     }
 
     /**
@@ -217,7 +216,7 @@ class Index implements SearchableInterface
      */
     public function refresh()
     {
-        return $this->request('_refresh', Request::POST, array());
+        return $this->request('_refresh', Request::POST, []);
     }
 
     /**
@@ -233,12 +232,12 @@ class Index implements SearchableInterface
      * @throws \Elastica\Exception\InvalidException
      * @throws \Elastica\Exception\ResponseException
      *
-     * @return array Server response
+     * @return \Elastica\Response Server response
      */
-    public function create(array $args = array(), $options = null)
+    public function create(array $args = [], $options = null)
     {
         $path = '';
-        $query = array();
+        $query = [];
 
         if (is_bool($options)) {
             if ($options) {
@@ -260,7 +259,7 @@ class Index implements SearchableInterface
                             }
                             break;
                         case 'routing' :
-                            $query = array('routing' => $value);
+                            $query = ['routing' => $value];
                             break;
                         default:
                             throw new InvalidException('Invalid option '.$key);
@@ -289,12 +288,13 @@ class Index implements SearchableInterface
     /**
      * @param string|array|\Elastica\Query $query
      * @param int|array                    $options
+     * @param BuilderInterface             $builder
      *
-     * @return \Elastica\Search
+     * @return Search
      */
-    public function createSearch($query = '', $options = null)
+    public function createSearch($query = '', $options = null, BuilderInterface $builder = null)
     {
-        $search = new Search($this->getClient());
+        $search = new Search($this->getClient(), $builder);
         $search->addIndex($this);
         $search->setOptionsAndQuery($options, $query);
 
@@ -392,16 +392,16 @@ class Index implements SearchableInterface
     {
         $path = '_aliases';
 
-        $data = array('actions' => array());
+        $data = ['actions' => []];
 
         if ($replace) {
             $status = new Status($this->getClient());
             foreach ($status->getIndicesWithAlias($name) as $index) {
-                $data['actions'][] = array('remove' => array('index' => $index->getName(), 'alias' => $name));
+                $data['actions'][] = ['remove' => ['index' => $index->getName(), 'alias' => $name]];
             }
         }
 
-        $data['actions'][] = array('add' => array('index' => $this->getName(), 'alias' => $name));
+        $data['actions'][] = ['add' => ['index' => $this->getName(), 'alias' => $name]];
 
         return $this->getClient()->request($path, Request::POST, $data);
     }
@@ -419,7 +419,7 @@ class Index implements SearchableInterface
     {
         $path = '_aliases';
 
-        $data = array('actions' => array(array('remove' => array('index' => $this->getName(), 'alias' => $name))));
+        $data = ['actions' => [['remove' => ['index' => $this->getName(), 'alias' => $name]]]];
 
         return $this->getClient()->request($path, Request::POST, $data);
     }
@@ -433,12 +433,16 @@ class Index implements SearchableInterface
     {
         $responseData = $this->request('_alias/*', \Elastica\Request::GET)->getData();
 
+        if (!isset($responseData[$this->getName()])) {
+            return [];
+        }
+
         $data = $responseData[$this->getName()];
         if (!empty($data['aliases'])) {
             return array_keys($data['aliases']);
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -480,7 +484,7 @@ class Index implements SearchableInterface
     {
         $path = '_flush';
 
-        return $this->request($path, Request::POST, array(), array('refresh' => $refresh));
+        return $this->request($path, Request::POST, [], ['refresh' => $refresh]);
     }
 
     /**
@@ -500,14 +504,14 @@ class Index implements SearchableInterface
     /**
      * Makes calls to the elasticsearch server based on this index.
      *
-     * @param string $path   Path to call
-     * @param string $method Rest method to use (GET, POST, DELETE, PUT)
-     * @param array  $data   OPTIONAL Arguments as array
-     * @param array  $query  OPTIONAL Query params
+     * @param string       $path   Path to call
+     * @param string       $method Rest method to use (GET, POST, DELETE, PUT)
+     * @param array|string $data   OPTIONAL Arguments as array or encoded string
+     * @param array        $query  OPTIONAL Query params
      *
      * @return \Elastica\Response Response object
      */
-    public function request($path, $method, $data = array(), array $query = array())
+    public function request($path, $method, $data = [], array $query = [])
     {
         $path = $this->getName().'/'.$path;
 
@@ -526,7 +530,7 @@ class Index implements SearchableInterface
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html
      */
-    public function analyze($text, $args = array())
+    public function analyze($text, $args = [])
     {
         $data = $this->request('_analyze', Request::POST, $text, $args)->getData();
 

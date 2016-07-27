@@ -19,7 +19,7 @@ class Common extends AbstractQuery
     /**
      * @var array
      */
-    protected $_queryParams = array();
+    protected $_queryParams = [];
 
     /**
      * @param string $field           the field on which to query

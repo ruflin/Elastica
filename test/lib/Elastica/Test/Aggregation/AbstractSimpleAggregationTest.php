@@ -1,9 +1,6 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\AbstractSimpleAggregation;
-use Elastica\Exception\InvalidException;
-
 class AbstractSimpleAggregationTest extends BaseAggregationTest
 {
     public function setUp()

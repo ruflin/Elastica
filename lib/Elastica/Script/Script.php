@@ -95,16 +95,18 @@ class Script extends AbstractScript
     public static function create($data)
     {
         if ($data instanceof self) {
-            $script = $data;
-        } elseif (is_array($data)) {
-            $script = self::_createFromArray($data);
-        } elseif (is_string($data)) {
-            $script = new self($data);
-        } else {
-            throw new InvalidException('Failed to create script. Invalid data passed.');
+            return $data;
         }
 
-        return $script;
+        if (is_array($data)) {
+            return self::_createFromArray($data);
+        }
+
+        if (is_string($data)) {
+            return new self($data);
+        }
+
+        throw new InvalidException('Failed to create script. Invalid data passed.');
     }
 
     /**
@@ -141,9 +143,9 @@ class Script extends AbstractScript
      */
     public function toArray()
     {
-        $array = array(
+        $array = [
             'script' => $this->_script,
-        );
+        ];
 
         if (!empty($this->_params)) {
             $array['params'] = $this->_convertArrayable($this->_params);

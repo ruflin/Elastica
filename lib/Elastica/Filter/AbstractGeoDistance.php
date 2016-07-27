@@ -26,35 +26,35 @@ abstract class AbstractGeoDistance extends AbstractFilter
      *
      * @var string
      */
-    protected $_locationType = null;
+    protected $_locationType;
 
     /**
      * Key.
      *
      * @var string
      */
-    protected $_key = null;
+    protected $_key;
 
     /**
      * Latitude.
      *
      * @var float
      */
-    protected $_latitude = null;
+    protected $_latitude;
 
     /**
      * Longitude.
      *
      * @var float
      */
-    protected $_longitude = null;
+    protected $_longitude;
 
     /**
      * Geohash.
      *
      * @var string
      */
-    protected $_geohash = null;
+    protected $_geohash;
 
     /**
      * Create GeoDistance object.
@@ -66,7 +66,6 @@ abstract class AbstractGeoDistance extends AbstractFilter
      */
     public function __construct($key, $location)
     {
-        // Key
         $this->setKey($key);
         $this->setLocation($location);
     }
@@ -163,7 +162,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
     protected function _getLocationData()
     {
         if ($this->_locationType === self::LOCATION_TYPE_LATLON) { // Latitude/longitude
-            $location = array();
+            $location = [];
 
             if (isset($this->_latitude)) { // Latitude
                 $location['lat'] = $this->_latitude;

@@ -18,7 +18,7 @@ class TransportBenchmarkTest extends BaseTest
 
     protected $_maxData = 20;
 
-    protected static $_results = array();
+    protected static $_results = [];
 
     public static function tearDownAfterClass()
     {
@@ -34,7 +34,7 @@ class TransportBenchmarkTest extends BaseTest
     {
         $client = $this->_getClient($config);
         $index = $client->getIndex('benchmark'.uniqid());
-        $index->create(array('index' => array('number_of_shards' => 1, 'number_of_replicas' => 0)), true);
+        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
         return $index->getType('benchmark');
     }
@@ -49,9 +49,9 @@ class TransportBenchmarkTest extends BaseTest
 
         $type = $this->getType($config);
         $index = $type->getIndex();
-        $index->create(array(), true);
+        $index->create([], true);
 
-        $times = array();
+        $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
             $data = $this->getData($i);
             $doc = new Document($i, $data);
@@ -78,12 +78,12 @@ class TransportBenchmarkTest extends BaseTest
 
         $type->search('test');
 
-        $times = array();
+        $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
             $test = rand(1, $this->_max);
             $query = new Query();
             $query->setQuery(new \Elastica\Query\MatchAll());
-            $query->setPostFilter(new \Elastica\Filter\Term(array('test' => $test)));
+            $query->setPostFilter(new \Elastica\Filter\Term(['test' => $test]));
             $result = $type->search($query);
             $times[] = $result->getResponse()->getQueryTime();
         }
@@ -102,9 +102,9 @@ class TransportBenchmarkTest extends BaseTest
 
         $type = $this->getType($config);
 
-        $times = array();
+        $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
-            $docs = array();
+            $docs = [];
             for ($j = 0; $j < 10; ++$j) {
                 $data = $this->getData($i.$j);
                 $docs[] = new Document($i, $data);
@@ -127,31 +127,31 @@ class TransportBenchmarkTest extends BaseTest
 
         $client = $this->_getClient($config);
         $index = $client->getIndex('benchmark');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('mappingTest');
 
         // Define mapping
         $mapping = new \Elastica\Type\Mapping();
-        $mapping->setParam('_boost', array('name' => '_boost', 'null_value' => 1.0));
-        $mapping->setProperties(array(
-            'id' => array('type' => 'integer', 'include_in_all' => false),
-            'user' => array(
+        $mapping->setParam('_boost', ['name' => '_boost', 'null_value' => 1.0]);
+        $mapping->setProperties([
+            'id' => ['type' => 'integer', 'include_in_all' => false],
+            'user' => [
                 'type' => 'object',
-                'properties' => array(
-                    'name' => array('type' => 'string', 'include_in_all' => true),
-                    'fullName' => array('type' => 'string', 'include_in_all' => true),
-                ),
-            ),
-            'msg' => array('type' => 'string', 'include_in_all' => true),
-            'tstamp' => array('type' => 'date', 'include_in_all' => false),
-            'location' => array('type' => 'geo_point', 'include_in_all' => false),
-            '_boost' => array('type' => 'float', 'include_in_all' => false),
-        ));
+                'properties' => [
+                    'name' => ['type' => 'string', 'include_in_all' => true],
+                    'fullName' => ['type' => 'string', 'include_in_all' => true],
+                ],
+            ],
+            'msg' => ['type' => 'string', 'include_in_all' => true],
+            'tstamp' => ['type' => 'date', 'include_in_all' => false],
+            'location' => ['type' => 'geo_point', 'include_in_all' => false],
+            '_boost' => ['type' => 'float', 'include_in_all' => false],
+        ]);
 
         $type->setMapping($mapping);
         $index->refresh();
 
-        $times = array();
+        $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
             $response = $type->request('_mapping', \Elastica\Request::GET);
             $times[] = $response->getQueryTime();
@@ -161,26 +161,26 @@ class TransportBenchmarkTest extends BaseTest
 
     public function providerTransport()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'transport' => 'Http',
                     'host' => $this->_getHost(),
                     'port' => $this->_getPort(),
                     'persistent' => false,
-                ),
+                ],
                 'Http:NotPersistent',
-            ),
-            array(
-                array(
+            ],
+            [
+                [
                     'transport' => 'Http',
                     'host' => $this->_getHost(),
                     'port' => $this->_getPort(),
                     'persistent' => true,
-                ),
+                ],
                 'Http:Persistent',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -190,10 +190,10 @@ class TransportBenchmarkTest extends BaseTest
      */
     protected function getData($test)
     {
-        $data = array(
+        $data = [
             'test' => $test,
-            'name' => array(),
-        );
+            'name' => [],
+        ];
         for ($i = 0; $i < $this->_maxData; ++$i) {
             $data['name'][] = uniqid();
         }
@@ -208,12 +208,12 @@ class TransportBenchmarkTest extends BaseTest
      */
     protected static function logResults($name, $transport, array $times)
     {
-        self::$_results[$name][$transport] = array(
+        self::$_results[$name][$transport] = [
             'count' => count($times),
             'max' => max($times) * 1000,
             'min' => min($times) * 1000,
             'mean' => (array_sum($times) / count($times)) * 1000,
-        );
+        ];
     }
 
     protected static function printResults()
@@ -229,7 +229,7 @@ class TransportBenchmarkTest extends BaseTest
             '%'
         );
         foreach (self::$_results as $name => $values) {
-            $means = array();
+            $means = [];
             foreach ($values as $times) {
                 $means[] = $times['mean'];
             }

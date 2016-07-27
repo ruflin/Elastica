@@ -13,15 +13,15 @@ class DateRangeTest extends BaseAggregationTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $type->setMapping(new Mapping(null, array(
-            'created' => array('type' => 'date'),
-        )));
+        $type->setMapping(new Mapping(null, [
+            'created' => ['type' => 'date'],
+        ]));
 
-        $type->addDocuments(array(
-            new Document(1, array('created' => 1390962135000)),
-            new Document(2, array('created' => 1390965735000)),
-            new Document(3, array('created' => 1390954935000)),
-        ));
+        $type->addDocuments([
+            new Document(1, ['created' => 1390962135000]),
+            new Document(2, ['created' => 1390965735000]),
+            new Document(3, ['created' => 1390954935000]),
+        ]);
 
         $index->refresh();
 

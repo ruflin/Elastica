@@ -28,12 +28,12 @@ class HasParentTest extends BaseTest
 
         $filter = new HasParent($q, $type);
 
-        $expectedArray = array(
-            'has_parent' => array(
+        $expectedArray = [
+            'has_parent' => [
                 'query' => $q->toArray(),
                 'type' => $type,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $filter->toArray());
     }
@@ -74,12 +74,12 @@ class HasParentTest extends BaseTest
 
         $filter = new HasParent($f, $type);
 
-        $expectedArray = array(
-            'has_parent' => array(
+        $expectedArray = [
+            'has_parent' => [
                 'filter' => $f->toArray(),
                 'type' => $type,
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $filter->toArray());
     }
@@ -102,7 +102,7 @@ class HasParentTest extends BaseTest
         $this->assertEquals(1, $searchResults->count());
 
         $result = $searchResults->current()->getData();
-        $expected = array('id' => 'child1', 'user' => 'child1', 'email' => 'child1@test.com');
+        $expected = ['id' => 'child1', 'user' => 'child1', 'email' => 'child1@test.com'];
 
         $this->assertEquals($expected, $result);
     }
@@ -125,7 +125,7 @@ class HasParentTest extends BaseTest
         $this->assertEquals(1, $searchResults->count());
 
         $result = $searchResults->current()->getData();
-        $expected = array('id' => 'child1', 'user' => 'child1', 'email' => 'child1@test.com');
+        $expected = ['id' => 'child1', 'user' => 'child1', 'email' => 'child1@test.com'];
 
         $this->assertEquals($expected, $result);
     }
@@ -134,7 +134,7 @@ class HasParentTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('has_parent_test');
-        $index->create(array(), true);
+        $index->create([], true);
 
         $parentType = $index->getType('parent');
 
@@ -143,15 +143,15 @@ class HasParentTest extends BaseTest
         $childMapping->setParent('parent');
         $childMapping->send();
 
-        $parent1 = new Document('parent1', array('id' => 'parent1', 'user' => 'parent1', 'email' => 'parent1@test.com'));
+        $parent1 = new Document('parent1', ['id' => 'parent1', 'user' => 'parent1', 'email' => 'parent1@test.com']);
         $parentType->addDocument($parent1);
-        $parent2 = new Document('parent2', array('id' => 'parent2', 'user' => 'parent2', 'email' => 'parent2@test.com'));
+        $parent2 = new Document('parent2', ['id' => 'parent2', 'user' => 'parent2', 'email' => 'parent2@test.com']);
         $parentType->addDocument($parent2);
 
-        $child1 = new Document('child1', array('id' => 'child1', 'user' => 'child1', 'email' => 'child1@test.com'));
+        $child1 = new Document('child1', ['id' => 'child1', 'user' => 'child1', 'email' => 'child1@test.com']);
         $child1->setParent('parent1');
         $childType->addDocument($child1);
-        $child2 = new Document('child2', array('id' => 'child2', 'user' => 'child2', 'email' => 'child2@test.com'));
+        $child2 = new Document('child2', ['id' => 'child2', 'user' => 'child2', 'email' => 'child2@test.com']);
         $child2->setParent('parent2');
         $childType->addDocument($child2);
 

@@ -20,7 +20,7 @@ class Fuzzy extends AbstractQuery
      */
     public function __construct($fieldName = null, $value = null)
     {
-        if ($fieldName and $value) {
+        if ($fieldName && $value) {
             $this->setField($fieldName, $value);
         }
     }
@@ -35,35 +35,35 @@ class Fuzzy extends AbstractQuery
      */
     public function setField($fieldName, $value)
     {
-        if (!is_string($value) or !is_string($fieldName)) {
+        if (!is_string($value) || !is_string($fieldName)) {
             throw new InvalidException('The field and value arguments must be of type string.');
         }
-        if (count($this->getParams()) > 0 and array_shift(array_keys($this->getParams())) != $fieldName) {
+        if (count($this->getParams()) > 0 && key($this->getParams()) !== $fieldName) {
             throw new InvalidException('Fuzzy query can only support a single field.');
         }
 
-        return $this->setParam($fieldName, array('value' => $value));
+        return $this->setParam($fieldName, ['value' => $value]);
     }
 
     /**
      * Set optional parameters on the existing query.
      *
-     * @param string $param option name
+     * @param string $option option name
      * @param mixed  $value Value of the parameter
      *
      * @return $this
      */
-    public function setFieldOption($param, $value)
+    public function setFieldOption($option, $value)
     {
         //Retrieve the single existing field for alteration.
         $params = $this->getParams();
         if (count($params) < 1) {
             throw new InvalidException('No field has been set');
         }
-        $keyArray = array_keys($params);
-        $params[$keyArray[0]][$param] = $value;
+        $key = key($params);
+        $params[$key][$option] = $value;
 
-        return $this->setParam($keyArray[0], $params[$keyArray[0]]);
+        return $this->setParam($key, $params[$key]);
     }
 
     /**

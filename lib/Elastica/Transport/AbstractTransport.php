@@ -78,7 +78,7 @@ abstract class AbstractTransport extends Param
      *
      * @return AbstractTransport
      */
-    public static function create($transport, Connection $connection, array $params = array())
+    public static function create($transport, Connection $connection, array $params = [])
     {
         if (is_array($transport) && isset($transport['type'])) {
             $transportParams = $transport;
@@ -89,10 +89,10 @@ abstract class AbstractTransport extends Param
         }
 
         if (is_string($transport)) {
-            $specialTransports = array(
+            $specialTransports = [
                 'httpadapter' => 'HttpAdapter',
                 'nulltransport' => 'NullTransport',
-            );
+            ];
 
             if (isset($specialTransports[strtolower($transport)])) {
                 $transport = $specialTransports[strtolower($transport)];

@@ -46,7 +46,7 @@ class Util
     {
         $result = $term;
         // \ escaping has to be first, otherwise escaped later once again
-        $chars = array('\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '/', '<', '>');
+        $chars = ['\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '/', '<', '>'];
 
         foreach ($chars as $char) {
             $result = str_replace($char, '\\'.$char, $result);
@@ -67,7 +67,7 @@ class Util
      */
     public static function replaceBooleanWords($term)
     {
-        $replacementMap = array(' AND ' => ' && ', ' OR ' => ' || ', ' NOT ' => ' !');
+        $replacementMap = [' AND ' => ' && ', ' OR ' => ' || ', ' NOT ' => ' !'];
         $result = strtr($term, $replacementMap);
 
         return $result;
@@ -108,7 +108,7 @@ class Util
      *
      * This is the lucene date format
      *
-     * @param int $date Date input (could be string etc.) -> must be supported by strtotime
+     * @param int|string $date Date input (could be string etc.) -> must be supported by strtotime
      *
      * @return string Converted date string
      */

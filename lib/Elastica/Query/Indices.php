@@ -28,7 +28,7 @@ class Indices extends AbstractQuery
      */
     public function setIndices(array $indices)
     {
-        $this->setParam('indices', array());
+        $this->setParam('indices', []);
         foreach ($indices as $index) {
             $this->addIndex($index);
         }

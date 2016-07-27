@@ -13,13 +13,6 @@ use Elastica;
 class Script extends AbstractQuery
 {
     /**
-     * Query object.
-     *
-     * @var array|AbstractQuery
-     */
-    protected $_query = null;
-
-    /**
      * Construct script query.
      *
      * @param array|string|\Elastica\Script\AbstractScript $script OPTIONAL Script

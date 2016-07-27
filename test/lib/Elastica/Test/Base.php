@@ -4,6 +4,7 @@ namespace Elastica\Test;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Index;
+use Psr\Log\LoggerInterface;
 
 class Base extends \PHPUnit_Framework_TestCase
 {
@@ -53,21 +54,22 @@ class Base extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param array    $params   Additional configuration params. Host and Port are already set
-     * @param callback $callback
+     * @param array           $params   Additional configuration params. Host and Port are already set
+     * @param callback        $callback
+     * @param LoggerInterface $logger
      *
      * @return Client
      */
-    protected function _getClient(array $params = array(), $callback = null)
+    protected function _getClient(array $params = [], $callback = null, LoggerInterface $logger = null)
     {
-        $config = array(
+        $config = [
             'host' => $this->_getHost(),
             'port' => $this->_getPort(),
-        );
+        ];
 
         $config = array_merge($config, $params);
 
-        return new Client($config, $callback);
+        return new Client($config, $callback, $logger);
     }
 
     /**
@@ -121,7 +123,7 @@ class Base extends \PHPUnit_Framework_TestCase
 
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_'.$name);
-        $index->create(array('index' => array('number_of_shards' => $shards, 'number_of_replicas' => 0)), $delete);
+        $index->create(['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 0]], $delete);
 
         return $index;
     }

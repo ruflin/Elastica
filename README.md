@@ -14,14 +14,20 @@ If you have questions, don't hesitate to ask them on [Stackoverflow](http://stac
 in our [Gitter](https://gitter.im/ruflin/Elastica) channel.
 All library issues should go to the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
 
+
+Compatibility
+-------------
+This release is compatible with all elasticsearch 2.x releases. It was tested with version 2.3.2
+
+
 Contributing
 ------------
 Contributions are always welcome. For details on how to contribute, check the [CONTRIBUTING](https://github.com/ruflin/Elastica/blob/master/CONTRIBUTING.md) file.
+
 
 Dependencies
 ------------
 | Project | Version | Required |
 |---------|---------|----------|
-|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v2.1.1)|2.1.1|yes|
-|[Elasticsearch mapper attachments plugin](https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v3.1.1)|3.1.1|no|
+|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v2.3.2)|2.3.2|yes|
 |[Elasticsearch image plugin](https://github.com/Jmoati/elasticsearch-image/releases/tag/1.7.1)|1.7.1|no|

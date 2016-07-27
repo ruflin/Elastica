@@ -32,7 +32,7 @@ class Guzzle extends AbstractTransport
      *
      * @var Client Guzzle client to reuse
      */
-    protected static $_guzzleClientConnection = null;
+    protected static $_guzzleClientConnection;
 
     /**
      * Makes calls to the elasticsearch server.
@@ -54,9 +54,9 @@ class Guzzle extends AbstractTransport
 
         $client = $this->_getGuzzleClient($this->_getBaseUrl($connection), $connection->isPersistent());
 
-        $options = array(
+        $options = [
             'exceptions' => false, // 4xx and 5xx is expected and NOT an exceptions in this context
-        );
+        ];
         if ($connection->getTimeout()) {
             $options['timeout'] = $connection->getTimeout();
         }
@@ -89,10 +89,10 @@ class Guzzle extends AbstractTransport
         }
 
         $response->setTransferInfo(
-            array(
+            [
                 'request_header' => $request->getMethod(),
                 'http_code' => $res->getStatusCode(),
-            )
+            ]
         );
 
         if ($response->hasError()) {
@@ -119,7 +119,7 @@ class Guzzle extends AbstractTransport
             $this->_getActionPath($request),
             $connection->hasConfig('headers') && is_array($connection->getConfig('headers'))
                 ? $connection->getConfig('headers')
-                : array()
+                : []
         );
 
         $data = $request->getData();
@@ -147,14 +147,15 @@ class Guzzle extends AbstractTransport
     /**
      * Return Guzzle resource.
      *
-     * @param bool $persistent False if not persistent connection
+     * @param string $baseUrl
+     * @param bool   $persistent False if not persistent connection
      *
      * @return Client
      */
     protected function _getGuzzleClient($baseUrl, $persistent = true)
     {
         if (!$persistent || !self::$_guzzleClientConnection) {
-            self::$_guzzleClientConnection = new Client(array('base_uri' => $baseUrl));
+            self::$_guzzleClientConnection = new Client(['base_uri' => $baseUrl]);
         }
 
         return self::$_guzzleClientConnection;
@@ -175,12 +176,12 @@ class Guzzle extends AbstractTransport
         if (!empty($url)) {
             $baseUri = $url;
         } else {
-            $baseUri = (string) Uri::fromParts(array(
+            $baseUri = (string) Uri::fromParts([
                 'scheme' => $this->_scheme,
                 'host' => $connection->getHost(),
                 'port' => $connection->getPort(),
                 'path' => ltrim('/', $connection->getPath()),
-            ));
+            ]);
         }
 
         return rtrim($baseUri, '/');

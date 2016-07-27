@@ -21,8 +21,8 @@ class NullTransportTest extends BaseTest
     {
         // Creates a client with any destination, and verify it returns a response object when executed
         $client = $this->_getClient();
-        $connection = new Connection(array('transport' => 'NullTransport'));
-        $client->setConnections(array($connection));
+        $connection = new Connection(['transport' => 'NullTransport']);
+        $client->setConnections([$connection]);
 
         $index = $client->getIndex('elasticaNullTransportTest1');
 
@@ -64,7 +64,7 @@ class NullTransportTest extends BaseTest
     public function testExec()
     {
         $request = new Request('/test');
-        $params = array('name' => 'ruflin');
+        $params = ['name' => 'ruflin'];
         $transport = new NullTransport();
         $response = $transport->exec($request, $params);
 
@@ -84,7 +84,7 @@ class NullTransportTest extends BaseTest
         }
 
         $request = new Request('/test');
-        $params = array('name' => 'ruflin');
+        $params = ['name' => 'ruflin'];
         $transport = new \Elastica\Transport\Null();
         $response = $transport->exec($request, $params);
 

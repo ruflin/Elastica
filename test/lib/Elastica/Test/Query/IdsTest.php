@@ -3,6 +3,7 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Query\Ids;
+use Elastica\Query\Type;
 use Elastica\Test\Base as BaseTest;
 
 class IdsTest extends BaseTest
@@ -19,16 +20,16 @@ class IdsTest extends BaseTest
         $type1 = $index->getType('helloworld1');
         $type2 = $index->getType('helloworld2');
 
-        $doc = new Document(1, array('name' => 'hello world'));
+        $doc = new Document(1, ['name' => 'hello world']);
         $type1->addDocument($doc);
 
-        $doc = new Document(2, array('name' => 'nicolas ruflin'));
+        $doc = new Document(2, ['name' => 'nicolas ruflin']);
         $type1->addDocument($doc);
 
-        $doc = new Document(3, array('name' => 'ruflin'));
+        $doc = new Document(3, ['name' => 'ruflin']);
         $type1->addDocument($doc);
 
-        $doc = new Document(4, array('name' => 'hello world again'));
+        $doc = new Document(4, ['name' => 'hello world again']);
         $type2->addDocument($doc);
 
         $index->refresh();
@@ -56,7 +57,7 @@ class IdsTest extends BaseTest
     public function testSetIdsSearchArray()
     {
         $query = new Ids();
-        $query->setIds(array('1', '2'));
+        $query->setIds(['1', '2']);
 
         $resultSet = $this->_type->search($query);
 
@@ -83,7 +84,7 @@ class IdsTest extends BaseTest
     {
         $query = new Ids();
 
-        $query->setIds(array('1', '2'));
+        $query->setIds(['1', '2']);
         $query->addId('3');
 
         $resultSet = $this->_type->search($query);
@@ -113,7 +114,7 @@ class IdsTest extends BaseTest
     {
         $query = new Ids();
 
-        $query->setIds(array('1', '2'));
+        $query->setIds(['1', '2']);
         $query->setType('helloworld1');
 
         $resultSet = $this->_index->search($query);
@@ -146,7 +147,7 @@ class IdsTest extends BaseTest
         $query = new Ids();
 
         // Doc 4 is in the second type...
-        $query->setIds(array('1', '4'));
+        $query->setIds(['1', '4']);
         $query->setType('helloworld1');
 
         $resultSet = $this->_index->search($query);
@@ -162,8 +163,8 @@ class IdsTest extends BaseTest
     {
         $query = new Ids();
 
-        $query->setIds(array('1', '4'));
-        $query->setType(array('helloworld1', 'helloworld2'));
+        $query->setIds(['1', '4']);
+        $query->setType(['helloworld1', 'helloworld2']);
 
         $resultSet = $this->_index->search($query);
 
@@ -178,10 +179,23 @@ class IdsTest extends BaseTest
         $query = new Ids();
 
         $query->setIds('4');
-        $query->setType(array('helloworld1', 'helloworld2'));
+        $query->setType(['helloworld1', 'helloworld2']);
 
         $resultSet = $this->_index->search($query);
 
         $this->assertEquals(1, $resultSet->count());
+    }
+
+    public function testQueryTypeAndTypeCollision()
+    {
+        // This test ensures that Elastica\Type and Elastica\Query\Type
+        // do not collide when used together, which at one point
+        // happened because of a use statement in Elastica\Query\Ids
+        // Test goal is to make sure a Fatal Error is not triggered
+        //
+        // adapted fix for Elastica\Filter\Type
+        // see https://github.com/ruflin/Elastica/pull/438
+        $queryType = new Type();
+        $filter = new Ids();
     }
 }

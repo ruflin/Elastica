@@ -18,7 +18,7 @@ class Response
      *
      * @var float Query time
      */
-    protected $_queryTime = null;
+    protected $_queryTime;
 
     /**
      * Response string (json).
@@ -39,21 +39,21 @@ class Response
      *
      * @var array transfer info
      */
-    protected $_transferInfo = array();
+    protected $_transferInfo = [];
 
     /**
      * Response.
      *
-     * @var \Elastica\Response Response object
+     * @var array|null
      */
-    protected $_response = null;
+    protected $_response;
 
     /**
      * HTTP response status code.
      *
      * @var int
      */
-    protected $_status = null;
+    protected $_status;
 
     /**
      * Whether or not to convert bigint results to string (see issue #717).
@@ -95,13 +95,18 @@ class Response
             return $error;
         }
 
+        $rootError = $error;
         if (isset($error['root_cause'][0])) {
-            $error = $error['root_cause'][0];
+            $rootError = $error['root_cause'][0];
         }
 
-        $message = $error['reason'];
-        if (isset($error['index'])) {
-            $message .= ' [index: '.$error['index'].']';
+        $message = $rootError['reason'];
+        if (isset($rootError['index'])) {
+            $message .= ' [index: '.$rootError['index'].']';
+        }
+
+        if (isset($error['reason']) && $rootError['reason'] != $error['reason']) {
+            $message .= ' [reason: '.$error['reason'].']';
         }
 
         return $message;
@@ -146,11 +151,7 @@ class Response
     {
         $response = $this->getData();
 
-        if (isset($response['error'])) {
-            return true;
-        }
-
-        return false;
+        return isset($response['error']);
     }
 
     /**
@@ -180,11 +181,7 @@ class Response
 
         // Bulk insert checks. Check every item
         if (isset($data['status'])) {
-            if ($data['status'] >= 200 && $data['status'] <= 300) {
-                return true;
-            }
-
-            return false;
+            return $data['status'] >= 200 && $data['status'] <= 300;
         }
 
         if (isset($data['items'])) {
@@ -195,7 +192,9 @@ class Response
             foreach ($data['items'] as $item) {
                 if (isset($item['index']['ok']) && false == $item['index']['ok']) {
                     return false;
-                } elseif (isset($item['index']['status']) && ($item['index']['status'] < 200 || $item['index']['status'] >= 300)) {
+                }
+
+                if (isset($item['index']['status']) && ($item['index']['status'] < 200 || $item['index']['status'] >= 300)) {
                     return false;
                 }
             }
@@ -243,11 +242,11 @@ class Response
             }
 
             if (empty($response)) {
-                $response = array();
+                $response = [];
             }
 
             if (is_string($response)) {
-                $response = array('message' => $response);
+                $response = ['message' => $response];
             }
 
             $this->_response = $response;

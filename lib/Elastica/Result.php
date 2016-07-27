@@ -15,7 +15,7 @@ class Result
      *
      * @var array Hit array
      */
-    protected $_hit = array();
+    protected $_hit = [];
 
     /**
      * Constructs a single results object.
@@ -36,7 +36,7 @@ class Result
      *
      * @param string $name Param name
      *
-     * @return array Result data
+     * @return mixed Result data
      */
     public function getParam($name)
     {
@@ -44,7 +44,7 @@ class Result
             return $this->_hit[$name];
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -148,10 +148,10 @@ class Result
      */
     public function getData()
     {
-        if (isset($this->_hit['fields']) && !isset($this->_hit['_source'])) {
-            return $this->getFields();
-        } elseif (isset($this->_hit['fields']) && isset($this->_hit['_source'])) {
-            return array_merge($this->getFields(), $this->getSource());
+        if (isset($this->_hit['fields'])) {
+            return isset($this->_hit['_source'])
+                ? array_merge($this->getFields(), $this->getSource())
+                : $this->getFields();
         }
 
         return $this->getSource();
@@ -190,28 +190,31 @@ class Result
     /**
      * Returns Document.
      * 
-     * @return \Elastica\Document
+     * @return Document
      */
     public function getDocument()
     {
-        $doc = new \Elastica\Document();
+        $doc = new Document();
         $doc->setData($this->getSource());
         $hit = $this->getHit();
-        if ($this->hasParam('_source')) {
-            unset($hit['_source']);
-        }
-        if ($this->hasParam('_explanation')) {
-            unset($hit['_explanation']);
-        }
-        if ($this->hasParam('highlight')) {
-            unset($hit['highlight']);
-        }
-        if ($this->hasParam('_score')) {
-            unset($hit['_score']);
-        }
+        unset($hit['_source']);
+        unset($hit['_explanation']);
+        unset($hit['highlight']);
+        unset($hit['_score']);
         $doc->setParams($hit);
 
         return $doc;
+    }
+
+    /**
+     * Sets a parameter on the hit.
+     *
+     * @param string $param
+     * @param mixed  $value
+     */
+    public function setParam($param, $value)
+    {
+        $this->_hit[$param] = $value;
     }
 
     /**

@@ -14,7 +14,7 @@ class ParamTest extends BaseTest
     {
         $param = new Param();
         $this->assertInstanceOf('Elastica\Param', $param);
-        $this->assertEquals(array($this->_getFilterName($param) => array()), $param->toArray());
+        $this->assertEquals([$this->_getFilterName($param) => []], $param->toArray());
     }
 
     /**
@@ -23,11 +23,11 @@ class ParamTest extends BaseTest
     public function testSetParams()
     {
         $param = new Param();
-        $params = array('hello' => 'word', 'nicolas' => 'ruflin');
+        $params = ['hello' => 'word', 'nicolas' => 'ruflin'];
         $param->setParams($params);
 
         $this->assertInstanceOf('Elastica\Param', $param);
-        $this->assertEquals(array($this->_getFilterName($param) => $params), $param->toArray());
+        $this->assertEquals([$this->_getFilterName($param) => $params], $param->toArray());
     }
 
     /**
@@ -40,7 +40,7 @@ class ParamTest extends BaseTest
         $key = 'name';
         $value = 'nicolas ruflin';
 
-        $params = array($key => $value);
+        $params = [$key => $value];
         $param->setParam($key, $value);
 
         $this->assertEquals($params, $param->getParams());
@@ -59,8 +59,8 @@ class ParamTest extends BaseTest
 
         $param->addParam($key, $value);
 
-        $this->assertEquals(array($key => array($value)), $param->getParams());
-        $this->assertEquals(array($value), $param->getParam($key));
+        $this->assertEquals([$key => [$value]], $param->getParams());
+        $this->assertEquals([$value], $param->getParam($key));
     }
 
     /**
@@ -77,8 +77,8 @@ class ParamTest extends BaseTest
         $param->addParam($key, $value1);
         $param->addParam($key, $value2);
 
-        $this->assertEquals(array($key => array($value1, $value2)), $param->getParams());
-        $this->assertEquals(array($value1, $value2), $param->getParam($key));
+        $this->assertEquals([$key => [$value1, $value2]], $param->getParams());
+        $this->assertEquals([$value1, $value2], $param->getParam($key));
     }
 
     /**

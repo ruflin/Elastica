@@ -11,12 +11,12 @@ class TermsTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('test')->addDocuments(array(
-            new Document(1, array('color' => 'blue')),
-            new Document(2, array('color' => 'blue')),
-            new Document(3, array('color' => 'red')),
-            new Document(4, array('color' => 'green')),
-        ));
+        $index->getType('test')->addDocuments([
+            new Document(1, ['color' => 'blue']),
+            new Document(2, ['color' => 'blue']),
+            new Document(3, ['color' => 'red']),
+            new Document(4, ['color' => 'green']),
+        ]);
 
         $index->refresh();
 

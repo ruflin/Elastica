@@ -14,8 +14,8 @@ class RequestTest extends BaseTest
     {
         $path = 'test';
         $method = Request::POST;
-        $query = array('no' => 'params');
-        $data = array('key' => 'value');
+        $query = ['no' => 'params'];
+        $data = ['key' => 'value'];
 
         $request = new Request($path, $method, $data, $query);
 
@@ -44,7 +44,7 @@ class RequestTest extends BaseTest
         $connection->setHost($this->_getHost());
         $connection->setPort('9200');
 
-        $request = new Request('_stats', Request::GET, array(), array(), $connection);
+        $request = new Request('_stats', Request::GET, [], [], $connection);
 
         $response = $request->send();
 
@@ -58,8 +58,8 @@ class RequestTest extends BaseTest
     {
         $path = 'test';
         $method = Request::POST;
-        $query = array('no' => 'params');
-        $data = array('key' => 'value');
+        $query = ['no' => 'params'];
+        $data = ['key' => 'value'];
 
         $connection = new Connection();
         $connection->setHost($this->_getHost());

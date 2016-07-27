@@ -70,31 +70,31 @@ class ImageTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
 
         $type = $index->getType('test');
 
-        $mapping = new Mapping($type, array(
-                $field => array(
+        $mapping = new Mapping($type, [
+                $field => [
                     'type' => 'image',
                     'store' => false,
                     'include_in_all' => false,
-                    'feature' => array(
-                        'CEDD' => array(
+                    'feature' => [
+                        'CEDD' => [
                             'hash' => 'BIT_SAMPLING',
-                        ),
-                    ),
-                ),
-            )
+                        ],
+                    ],
+                ],
+            ]
         );
 
         $type->setMapping($mapping);
 
-        $type->addDocuments(array(
-            new Document(1, array($field => $this->_testFileContent)),
-            new Document(2, array($field => $this->_testFileContent)),
-            new Document(3, array($field => $this->_testFileContent)),
-        ));
+        $type->addDocuments([
+            new Document(1, [$field => $this->_testFileContent]),
+            new Document(2, [$field => $this->_testFileContent]),
+            new Document(3, [$field => $this->_testFileContent]),
+        ]);
 
         $index->refresh();
 
@@ -119,31 +119,31 @@ class ImageTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
 
         $type = $index->getType('test');
 
-        $mapping = new Mapping($type, array(
-                $field => array(
+        $mapping = new Mapping($type, [
+                $field => [
                     'type' => 'image',
                     'store' => false,
                     'include_in_all' => false,
-                    'feature' => array(
-                        'CEDD' => array(
+                    'feature' => [
+                        'CEDD' => [
                             'hash' => 'BIT_SAMPLING',
-                        ),
-                    ),
-                ),
-            )
+                        ],
+                    ],
+                ],
+            ]
         );
 
         $type->setMapping($mapping);
 
-        $type->addDocuments(array(
-            new Document(1, array($field => $this->_testFileContent)),
-            new Document(2, array($field => $this->_testFileContent)),
-            new Document(3, array($field => $this->_testFileContent)),
-        ));
+        $type->addDocuments([
+            new Document(1, [$field => $this->_testFileContent]),
+            new Document(2, [$field => $this->_testFileContent]),
+            new Document(3, [$field => $this->_testFileContent]),
+        ]);
 
         $index->refresh();
 

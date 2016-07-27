@@ -60,16 +60,18 @@ class ScriptFile extends Script
     public static function create($data)
     {
         if ($data instanceof self) {
-            $scriptFile = $data;
-        } elseif (is_array($data)) {
-            $scriptFile = self::_createFromArray($data);
-        } elseif (is_string($data)) {
-            $scriptFile = new self($data);
-        } else {
-            throw new InvalidException('Failed to create scriptFile. Invalid data passed.');
+            return $data;
         }
 
-        return $scriptFile;
+        if (is_array($data)) {
+            return self::_createFromArray($data);
+        }
+
+        if (is_string($data)) {
+            return new self($data);
+        }
+
+        throw new InvalidException('Failed to create scriptFile. Invalid data passed.');
     }
 
     /**
@@ -102,9 +104,9 @@ class ScriptFile extends Script
      */
     public function toArray()
     {
-        $array = array(
+        $array = [
             'script_file' => $this->_scriptFile,
-        );
+        ];
 
         if (!empty($this->_params)) {
             $array['params'] = $this->_params;

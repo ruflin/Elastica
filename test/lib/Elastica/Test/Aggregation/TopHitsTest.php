@@ -16,33 +16,33 @@ class TopHitsTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('questions')->addDocuments(array(
-            new Document(1, array(
-                'tags' => array('linux'),
+        $index->getType('questions')->addDocuments([
+            new Document(1, [
+                'tags' => ['linux'],
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about linux #1',
-            )),
-            new Document(2, array(
-                'tags' => array('linux'),
+            ]),
+            new Document(2, [
+                'tags' => ['linux'],
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about linux #2',
-            )),
-            new Document(3, array(
-                'tags' => array('windows'),
+            ]),
+            new Document(3, [
+                'tags' => ['windows'],
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about windows #1',
-            )),
-            new Document(4, array(
-                'tags' => array('windows'),
+            ]),
+            new Document(4, [
+                'tags' => ['windows'],
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about windows #2',
-            )),
-            new Document(5, array(
-                'tags' => array('osx', 'apple'),
+            ]),
+            new Document(5, [
+                'tags' => ['osx', 'apple'],
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about osx',
-            )),
-        ));
+            ]),
+        ]);
 
         $index->refresh();
 
@@ -76,7 +76,7 @@ class TopHitsTest extends BaseAggregationTest
      */
     public function testSetSort()
     {
-        $sort = array('last_activity_date' => array('order' => 'desc'));
+        $sort = ['last_activity_date' => ['order' => 'desc']];
         $agg = new TopHits('agg_name');
         $returnValue = $agg->setSort($sort);
         $this->assertEquals($sort, $agg->getParam('sort'));
@@ -88,7 +88,7 @@ class TopHitsTest extends BaseAggregationTest
      */
     public function testSetSource()
     {
-        $fields = array('title', 'tags');
+        $fields = ['title', 'tags'];
         $agg = new TopHits('agg_name');
         $returnValue = $agg->setSource($fields);
         $this->assertEquals($fields, $agg->getParam('_source'));
@@ -128,11 +128,11 @@ class TopHitsTest extends BaseAggregationTest
      */
     public function testSetHighlight()
     {
-        $highlight = array(
-            'fields' => array(
+        $highlight = [
+            'fields' => [
                 'title',
-            ),
-        );
+            ],
+        ];
         $agg = new TopHits('agg_name');
         $returnValue = $agg->setHighlight($highlight);
         $this->assertEquals($highlight, $agg->getParam('highlight'));
@@ -144,7 +144,7 @@ class TopHitsTest extends BaseAggregationTest
      */
     public function testSetFieldDataFields()
     {
-        $fields = array('title', 'tags');
+        $fields = ['title', 'tags'];
         $agg = new TopHits('agg_name');
         $returnValue = $agg->setFieldDataFields($fields);
         $this->assertEquals($fields, $agg->getParam('fielddata_fields'));
@@ -157,7 +157,7 @@ class TopHitsTest extends BaseAggregationTest
     public function testSetScriptFields()
     {
         $script = new Script('1 + 2');
-        $scriptFields = new ScriptFields(array('three' => $script));
+        $scriptFields = new ScriptFields(['three' => $script]);
 
         $agg = new TopHits('agg_name');
         $returnValue = $agg->setScriptFields($scriptFields);
@@ -173,7 +173,7 @@ class TopHitsTest extends BaseAggregationTest
         $script = new Script('2+3');
         $agg = new TopHits('agg_name');
         $returnValue = $agg->addScriptField('five', $script);
-        $this->assertEquals(array('five' => $script->toArray()), $agg->getParam('script_fields')->toArray());
+        $this->assertEquals(['five' => $script->toArray()], $agg->getParam('script_fields')->toArray());
         $this->assertInstanceOf('Elastica\Aggregation\TopHits', $returnValue);
     }
 
@@ -197,16 +197,16 @@ class TopHitsTest extends BaseAggregationTest
     {
         $aggr = new TopHits('top_tag_hits');
         $aggr->setSize(1);
-        $aggr->setSort(array('last_activity_date' => array('order' => 'desc')));
+        $aggr->setSort(['last_activity_date' => ['order' => 'desc']]);
 
-        $resultDocs = array();
+        $resultDocs = [];
         $outerAggrResult = $this->getOuterAggregationResult($aggr);
         foreach ($outerAggrResult['buckets'] as $bucket) {
             foreach ($bucket['top_tag_hits']['hits']['hits'] as $doc) {
                 $resultDocs[] = $doc['_id'];
             }
         }
-        $this->assertEquals(array(1, 3), $resultDocs);
+        $this->assertEquals([1, 3], $resultDocs);
     }
 
     /**
@@ -216,16 +216,16 @@ class TopHitsTest extends BaseAggregationTest
     {
         $aggr = new TopHits('top_tag_hits');
         $aggr->setSize(1);
-        $aggr->setSort(array('last_activity_date' => array('order' => 'asc')));
+        $aggr->setSort(['last_activity_date' => ['order' => 'asc']]);
 
-        $resultDocs = array();
+        $resultDocs = [];
         $outerAggrResult = $this->getOuterAggregationResult($aggr);
         foreach ($outerAggrResult['buckets'] as $bucket) {
             foreach ($bucket['top_tag_hits']['hits']['hits'] as $doc) {
                 $resultDocs[] = $doc['_id'];
             }
         }
-        $this->assertEquals(array(2, 4), $resultDocs);
+        $this->assertEquals([2, 4], $resultDocs);
     }
 
     /**
@@ -236,14 +236,14 @@ class TopHitsTest extends BaseAggregationTest
         $aggr = new TopHits('top_tag_hits');
         $aggr->setSize(2);
 
-        $resultDocs = array();
+        $resultDocs = [];
         $outerAggrResult = $this->getOuterAggregationResult($aggr);
         foreach ($outerAggrResult['buckets'] as $bucket) {
             foreach ($bucket['top_tag_hits']['hits']['hits'] as $doc) {
                 $resultDocs[] = $doc['_id'];
             }
         }
-        $this->assertEquals(array(1, 2, 3, 4), $resultDocs);
+        $this->assertEquals([1, 2, 3, 4], $resultDocs);
     }
 
     /**
@@ -254,16 +254,16 @@ class TopHitsTest extends BaseAggregationTest
         $aggr = new TopHits('top_tag_hits');
         $aggr->setSize(2);
         $aggr->setFrom(1);
-        $aggr->setSort(array('last_activity_date' => array('order' => 'desc')));
+        $aggr->setSort(['last_activity_date' => ['order' => 'desc']]);
 
-        $resultDocs = array();
+        $resultDocs = [];
         $outerAggrResult = $this->getOuterAggregationResult($aggr);
         foreach ($outerAggrResult['buckets'] as $bucket) {
             foreach ($bucket['top_tag_hits']['hits']['hits'] as $doc) {
                 $resultDocs[] = $doc['_id'];
             }
         }
-        $this->assertEquals(array(2, 4), $resultDocs);
+        $this->assertEquals([2, 4], $resultDocs);
     }
 
     /**
@@ -272,9 +272,9 @@ class TopHitsTest extends BaseAggregationTest
     public function testAggregateWithLimitedSource()
     {
         $aggr = new TopHits('top_tag_hits');
-        $aggr->setSource(array('title'));
+        $aggr->setSource(['title']);
 
-        $resultDocs = array();
+        $resultDocs = [];
         $outerAggrResult = $this->getOuterAggregationResult($aggr);
         foreach ($outerAggrResult['buckets'] as $bucket) {
             foreach ($bucket['top_tag_hits']['hits']['hits'] as $doc) {
@@ -293,7 +293,7 @@ class TopHitsTest extends BaseAggregationTest
         $aggr = new TopHits('top_tag_hits');
         $aggr->setVersion(true);
 
-        $resultDocs = array();
+        $resultDocs = [];
         $outerAggrResult = $this->getOuterAggregationResult($aggr);
         foreach ($outerAggrResult['buckets'] as $bucket) {
             foreach ($bucket['top_tag_hits']['hits']['hits'] as $doc) {
@@ -310,7 +310,7 @@ class TopHitsTest extends BaseAggregationTest
         $aggr = new TopHits('top_tag_hits');
         $aggr->setExplain(true);
 
-        $resultDocs = array();
+        $resultDocs = [];
         $outerAggrResult = $this->getOuterAggregationResult($aggr);
         foreach ($outerAggrResult['buckets'] as $bucket) {
             foreach ($bucket['top_tag_hits']['hits']['hits'] as $doc) {
@@ -327,10 +327,10 @@ class TopHitsTest extends BaseAggregationTest
         $this->_checkScriptInlineSetting();
         $aggr = new TopHits('top_tag_hits');
         $aggr->setSize(1);
-        $aggr->setScriptFields(array('three' => new Script('1 + 2')));
+        $aggr->setScriptFields(['three' => new Script('1 + 2')]);
         $aggr->addScriptField('five', new Script('3 + 2'));
 
-        $resultDocs = array();
+        $resultDocs = [];
         $outerAggrResult = $this->getOuterAggregationResult($aggr);
         foreach ($outerAggrResult['buckets'] as $bucket) {
             foreach ($bucket['top_tag_hits']['hits']['hits'] as $doc) {
@@ -345,10 +345,10 @@ class TopHitsTest extends BaseAggregationTest
      */
     public function testAggregateWithHighlight()
     {
-        $queryString = new SimpleQueryString('linux', array('title'));
+        $queryString = new SimpleQueryString('linux', ['title']);
 
         $aggr = new TopHits('top_tag_hits');
-        $aggr->setHighlight(array('fields' => array('title' => new \stdClass())));
+        $aggr->setHighlight(['fields' => ['title' => new \stdClass()]]);
 
         $query = new Query($queryString);
         $query->addAggregation($aggr);
@@ -368,7 +368,7 @@ class TopHitsTest extends BaseAggregationTest
     public function testAggregateWithFieldData()
     {
         $aggr = new TopHits('top_tag_hits');
-        $aggr->setFieldDataFields(array('title'));
+        $aggr->setFieldDataFields(['title']);
 
         $query = new Query(new MatchAll());
         $query->addAggregation($aggr);

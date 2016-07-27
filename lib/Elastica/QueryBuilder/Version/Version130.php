@@ -12,7 +12,7 @@ use Elastica\QueryBuilder\Version;
  */
 class Version130 extends Version
 {
-    protected $queries = array(
+    protected $queries = [
         'match',
         'multi_match',
         'bool',
@@ -60,9 +60,9 @@ class Version130 extends Version
 
         // new in 1.1.0
         'template',
-    );
+    ];
 
-    protected $filters = array(
+    protected $filters = [
         'bool_and', // original: bool
         'bool',
         'exists',
@@ -94,9 +94,9 @@ class Version130 extends Version
 
         // removed in 1.0.0
         // 'numeric_range'
-    );
+    ];
 
-    protected $aggregations = array(
+    protected $aggregations = [
         'min',
         'max',
         'sum',
@@ -129,14 +129,14 @@ class Version130 extends Version
         'percentile_ranks',
         'geo_bounds',
         'top_hits',
-    );
+    ];
 
-    protected $suggesters = array(
+    protected $suggesters = [
         'term',
         'phrase',
         'completion',
 
         // new in 1.2.0
         'context',
-    );
+    ];
 }

@@ -63,12 +63,12 @@ class SettingsTest extends BaseTest
         $index1 = $this->_createIndex();
         $index2 = $this->_createIndex();
 
-        $doc1 = new Document(null, array('hello' => 'world'));
-        $doc2 = new Document(null, array('hello' => 'world'));
-        $doc3 = new Document(null, array('hello' => 'world'));
-        $doc4 = new Document(null, array('hello' => 'world'));
-        $doc5 = new Document(null, array('hello' => 'world'));
-        $doc6 = new Document(null, array('hello' => 'world'));
+        $doc1 = new Document(null, ['hello' => 'world']);
+        $doc2 = new Document(null, ['hello' => 'world']);
+        $doc3 = new Document(null, ['hello' => 'world']);
+        $doc4 = new Document(null, ['hello' => 'world']);
+        $doc5 = new Document(null, ['hello' => 'world']);
+        $doc6 = new Document(null, ['hello' => 'world']);
 
         // Check that adding documents work
         $index1->getType('test')->addDocument($doc1);

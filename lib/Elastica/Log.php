@@ -15,14 +15,14 @@ class Log extends AbstractLogger
      *
      * @var string|bool
      */
-    protected $_log = true;
+    protected $_log;
 
     /**
      * Last logged message.
      *
      * @var string Last logged message
      */
-    protected $_lastMessage = '';
+    protected $_lastMessage;
 
     /**
      * Inits log object.
@@ -43,7 +43,7 @@ class Log extends AbstractLogger
      *
      * @return null|void
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $context['error_message'] = $message;
         $this->_lastMessage = JSON::stringify($context);

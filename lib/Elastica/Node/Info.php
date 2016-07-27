@@ -18,28 +18,35 @@ class Info
      *
      * @var \Elastica\Response Response object
      */
-    protected $_response = null;
+    protected $_response;
 
     /**
      * Stats data.
      *
      * @var array stats data
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
      * Node.
      *
      * @var \Elastica\Node Node object
      */
-    protected $_node = null;
+    protected $_node;
 
     /**
      * Query parameters.
      *
      * @var array
      */
-    protected $_params = array();
+    protected $_params = [];
+
+    /**
+     * Unique node id.
+     *
+     * @var string
+     */
+    protected $_id;
 
     /**
      * Create new info object for node.
@@ -47,7 +54,7 @@ class Info
      * @param \Elastica\Node $node   Node object
      * @param array          $params List of params to return. Can be: settings, os, process, jvm, thread_pool, network, transport, http
      */
-    public function __construct(BaseNode $node, array $params = array())
+    public function __construct(BaseNode $node, array $params = [])
     {
         $this->_node = $node;
         $this->refresh($params);
@@ -197,7 +204,7 @@ class Info
      *
      * @return \Elastica\Response Response object
      */
-    public function refresh(array $params = array())
+    public function refresh(array $params = [])
     {
         $this->_params = $params;
 

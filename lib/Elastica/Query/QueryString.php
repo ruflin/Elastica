@@ -17,7 +17,7 @@ class QueryString extends AbstractQuery
      *
      * @var string Query string
      */
-    protected $_queryString = '';
+    protected $_queryString;
 
     /**
      * Creates query string object. Calls setQuery with argument.
@@ -277,6 +277,6 @@ class QueryString extends AbstractQuery
      */
     public function toArray()
     {
-        return array('query_string' => array_merge(array('query' => $this->_queryString), $this->getParams()));
+        return ['query_string' => array_merge(['query' => $this->_queryString], $this->getParams())];
     }
 }

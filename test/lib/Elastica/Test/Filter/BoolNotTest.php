@@ -26,11 +26,11 @@ class BoolNotTest extends BaseTest
         $idsFilter->setIds(12);
         $filter = new BoolNot($idsFilter);
 
-        $expectedArray = array(
-            'not' => array(
+        $expectedArray = [
+            'not' => [
                 'filter' => $idsFilter->toArray(),
-            ),
-        );
+            ],
+        ];
 
         $this->assertEquals($expectedArray, $filter->toArray());
     }

@@ -18,7 +18,7 @@ namespace Elastica\Query;
  */
 class Image extends AbstractQuery
 {
-    public function __construct(array $image = array())
+    public function __construct(array $image = [])
     {
         $this->setParams($image);
     }
@@ -26,16 +26,16 @@ class Image extends AbstractQuery
     /**
      * Sets a param for the given field.
      *
-     * @param string $field
-     * @param string $key
-     * @param string $value
+     * @param string           $field
+     * @param string           $key
+     * @param string|int|float $value
      *
      * @return $this
      */
     public function setFieldParam($field, $key, $value)
     {
         if (!isset($this->_params[$field])) {
-            $this->_params[$field] = array();
+            $this->_params[$field] = [];
         }
 
         $this->_params[$field][$key] = $value;

@@ -42,10 +42,10 @@ class GeoBoundingBox extends AbstractFilter
             throw new InvalidException('expected $coordinates to be an array with two elements');
         }
 
-        $this->setParam($key, array(
+        $this->setParam($key, [
             'top_left' => $coordinates[0],
             'bottom_right' => $coordinates[1],
-        ));
+        ]);
 
         return $this;
     }

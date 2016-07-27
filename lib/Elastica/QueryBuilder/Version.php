@@ -13,28 +13,28 @@ abstract class Version
      *
      * @var string[]
      */
-    protected $queries = array();
+    protected $queries = [];
 
     /**
      * supported filter methods.
      *
      * @var string[]
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * supported aggregation methods.
      *
      * @var string[]
      */
-    protected $aggregations = array();
+    protected $aggregations = [];
 
     /**
      * supported $suggester methods.
      *
      * @var string[]
      */
-    protected $suggesters = array();
+    protected $suggesters = [];
 
     /**
      * returns true if $name is supported, false otherwise.
@@ -48,23 +48,17 @@ abstract class Version
     {
         switch ($type) {
             case DSL::TYPE_QUERY:
-                $supports = in_array($name, $this->queries);
-                break;
+                return in_array($name, $this->queries);
             case DSL::TYPE_FILTER:
-                $supports = in_array($name, $this->filters);
-                break;
+                return in_array($name, $this->filters);
             case DSL::TYPE_AGGREGATION:
-                $supports = in_array($name, $this->aggregations);
-                break;
+                return in_array($name, $this->aggregations);
             case DSL::TYPE_SUGGEST:
-                $supports = in_array($name, $this->suggesters);
-                break;
-            default:
-                // disables version check in Facade for custom DSL objects
-                $supports = true;
+                return in_array($name, $this->suggesters);
         }
 
-        return $supports;
+        // disables version check in Facade for custom DSL objects
+        return true;
     }
 
     /**

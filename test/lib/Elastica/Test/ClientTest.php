@@ -29,25 +29,25 @@ class ClientTest extends BaseTest
     public function testConnectionsArray()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = $this->_getClient(array('connections' => array(array('host' => $this->_getHost(), 'port' => 9200))));
+        $client = $this->_getClient(['connections' => [['host' => $this->_getHost(), 'port' => 9200]]]);
         $index = $client->getIndex('elastica_test1');
-        $index->create(array(), true);
+        $index->create([], true);
 
         $type = $index->getType('user');
 
         // Adds 1 document to the index
         $doc1 = new Document(1,
-            array('username' => 'hans', 'test' => array('2', '3', '5'))
+            ['username' => 'hans', 'test' => ['2', '3', '5']]
         );
         $type->addDocument($doc1);
 
         // Adds a list of documents with _bulk upload to the index
-        $docs = array();
+        $docs = [];
         $docs[] = new Document(2,
-            array('username' => 'john', 'test' => array('1', '3', '6'))
+            ['username' => 'john', 'test' => ['1', '3', '6']]
         );
         $docs[] = new Document(3,
-            array('username' => 'rolf', 'test' => array('2', '3', '7'))
+            ['username' => 'rolf', 'test' => ['2', '3', '7']]
         );
         $type->addDocuments($docs);
 
@@ -63,28 +63,28 @@ class ClientTest extends BaseTest
     public function testTwoServersSame()
     {
         // Creates a new index 'xodoa' and a type 'user' inside this index
-        $client = $this->_getClient(array('connections' => array(
-            array('host' => $this->_getHost(), 'port' => 9200),
-            array('host' => $this->_getHost(), 'port' => 9200),
-        )));
+        $client = $this->_getClient(['connections' => [
+            ['host' => $this->_getHost(), 'port' => 9200],
+            ['host' => $this->_getHost(), 'port' => 9200],
+        ]]);
         $index = $client->getIndex('elastica_test1');
-        $index->create(array(), true);
+        $index->create([], true);
 
         $type = $index->getType('user');
 
         // Adds 1 document to the index
         $doc1 = new Document(1,
-            array('username' => 'hans', 'test' => array('2', '3', '5'))
+            ['username' => 'hans', 'test' => ['2', '3', '5']]
         );
         $type->addDocument($doc1);
 
         // Adds a list of documents with _bulk upload to the index
-        $docs = array();
+        $docs = [];
         $docs[] = new Document(2,
-            array('username' => 'john', 'test' => array('1', '3', '6'))
+            ['username' => 'john', 'test' => ['1', '3', '6']]
         );
         $docs[] = new Document(3,
-            array('username' => 'rolf', 'test' => array('2', '3', '7'))
+            ['username' => 'rolf', 'test' => ['2', '3', '7']]
         );
         $type->addDocuments($docs);
 
@@ -100,7 +100,7 @@ class ClientTest extends BaseTest
     public function testConnectionParamsArePreparedForConnectionsOption()
     {
         $url = 'https://'.$this->_getHost().':9200';
-        $client = $this->_getClient(array('connections' => array(array('url' => $url))));
+        $client = $this->_getClient(['connections' => [['url' => $url]]]);
         $connection = $client->getConnection();
 
         $this->assertEquals($url, $connection->getConfig('url'));
@@ -112,7 +112,7 @@ class ClientTest extends BaseTest
     public function testConnectionParamsArePreparedForServersOption()
     {
         $url = 'https://'.$this->_getHost().':9200';
-        $client = $this->_getClient(array('servers' => array(array('url' => $url))));
+        $client = $this->_getClient(['servers' => [['url' => $url]]]);
         $connection = $client->getConnection();
 
         $this->assertEquals($url, $connection->getConfig('url'));
@@ -124,7 +124,7 @@ class ClientTest extends BaseTest
     public function testConnectionParamsArePreparedForDefaultOptions()
     {
         $url = 'https://'.$this->_getHost().':9200';
-        $client = $this->_getClient(array('url' => $url));
+        $client = $this->_getClient(['url' => $url]);
         $connection = $client->getConnection();
 
         $this->assertEquals($url, $connection->getConfig('url'));
@@ -137,12 +137,12 @@ class ClientTest extends BaseTest
     {
         $client = $this->_getClient();
 
-        $params = array(
-            array('index' => array('_index' => 'test', '_type' => 'user', '_id' => '1')),
-            array('user' => array('name' => 'hans')),
-            array('index' => array('_index' => 'test', '_type' => 'user', '_id' => '2')),
-            array('user' => array('name' => 'peter')),
-        );
+        $params = [
+            ['index' => ['_index' => 'test', '_type' => 'user', '_id' => '1']],
+            ['user' => ['name' => 'hans']],
+            ['index' => ['_index' => 'test', '_type' => 'user', '_id' => '2']],
+            ['user' => ['name' => 'peter']],
+        ];
 
         $client->bulk($params);
     }
@@ -165,7 +165,7 @@ class ClientTest extends BaseTest
     public function testAddDocumentsEmpty()
     {
         $client = $this->_getClient();
-        $client->addDocuments(array());
+        $client->addDocuments([]);
     }
 
     /**
@@ -177,24 +177,24 @@ class ClientTest extends BaseTest
     {
         $index = $this->_getClient()->getIndex('cryptocurrencies');
 
-        $anonCoin = new Document(1, array('name' => 'anoncoin'), 'altcoin');
-        $ixCoin = new Document(2, array('name' => 'ixcoin'), 'altcoin');
+        $anonCoin = new Document(1, ['name' => 'anoncoin'], 'altcoin');
+        $ixCoin = new Document(2, ['name' => 'ixcoin'], 'altcoin');
 
-        $index->addDocuments(array($anonCoin, $ixCoin));
+        $index->addDocuments([$anonCoin, $ixCoin]);
 
         $this->assertEquals('anoncoin', $index->getType('altcoin')->getDocument(1)->get('name'));
         $this->assertEquals('ixcoin', $index->getType('altcoin')->getDocument(2)->get('name'));
 
-        $index->updateDocuments(array(
-            new Document(1, array('name' => 'AnonCoin'), 'altcoin'),
-            new Document(2, array('name' => 'iXcoin'), 'altcoin'),
-        ));
+        $index->updateDocuments([
+            new Document(1, ['name' => 'AnonCoin'], 'altcoin'),
+            new Document(2, ['name' => 'iXcoin'], 'altcoin'),
+        ]);
 
         $this->assertEquals('AnonCoin', $index->getType('altcoin')->getDocument(1)->get('name'));
         $this->assertEquals('iXcoin', $index->getType('altcoin')->getDocument(2)->get('name'));
 
         $ixCoin->setIndex(null);  // Make sure the index gets set properly if missing
-        $index->deleteDocuments(array($anonCoin, $ixCoin));
+        $index->deleteDocuments([$anonCoin, $ixCoin]);
 
         $this->setExpectedException('Elastica\Exception\NotFoundException');
         $index->getType('altcoin')->getDocument(1);
@@ -210,24 +210,24 @@ class ClientTest extends BaseTest
     {
         $type = $this->_getClient()->getIndex('cryptocurrencies')->getType('altcoin');
 
-        $liteCoin = new Document(1, array('name' => 'litecoin'));
-        $nameCoin = new Document(2, array('name' => 'namecoin'));
+        $liteCoin = new Document(1, ['name' => 'litecoin']);
+        $nameCoin = new Document(2, ['name' => 'namecoin']);
 
-        $type->addDocuments(array($liteCoin, $nameCoin));
+        $type->addDocuments([$liteCoin, $nameCoin]);
 
         $this->assertEquals('litecoin', $type->getDocument(1)->get('name'));
         $this->assertEquals('namecoin', $type->getDocument(2)->get('name'));
 
-        $type->updateDocuments(array(
-            new Document(1, array('name' => 'LiteCoin')),
-            new Document(2, array('name' => 'NameCoin')),
-        ));
+        $type->updateDocuments([
+            new Document(1, ['name' => 'LiteCoin']),
+            new Document(2, ['name' => 'NameCoin']),
+        ]);
 
         $this->assertEquals('LiteCoin', $type->getDocument(1)->get('name'));
         $this->assertEquals('NameCoin', $type->getDocument(2)->get('name'));
 
         $nameCoin->setType(null);  // Make sure the type gets set properly if missing
-        $type->deleteDocuments(array($liteCoin, $nameCoin));
+        $type->deleteDocuments([$liteCoin, $nameCoin]);
 
         $this->setExpectedException('Elastica\Exception\NotFoundException');
         $type->getDocument(1);
@@ -250,17 +250,17 @@ class ClientTest extends BaseTest
 
         $doc1 = new Document(
             1,
-            array('name' => 'hans', 'age' => $initialValue),
+            ['name' => 'hans', 'age' => $initialValue],
             $typeName,
             $indexName
         );
         $doc2 = new Document(
             2,
-            array('name' => 'anna', 'age' => $initialValue),
+            ['name' => 'anna', 'age' => $initialValue],
             $typeName,
             $indexName
         );
-        $data = array($doc1, $doc2);
+        $data = [$doc1, $doc2];
         $client->addDocuments($data);
 
         foreach ($data as $i => $doc) {
@@ -295,13 +295,13 @@ class ClientTest extends BaseTest
      */
     public function testDeleteIdsIdxStringTypeString()
     {
-        $data = array('username' => 'hans');
+        $data = ['username' => 'hans'];
         $userSearch = 'username:hans';
 
         $index = $this->_createIndex(null, true, 2);
 
         // Create the index, deleting it first if it already exists
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('user');
 
         // Adds 1 document to the index
@@ -313,7 +313,7 @@ class ClientTest extends BaseTest
         $index->refresh();
 
         $resultData = $result->getData();
-        $ids = array($resultData['_id']);
+        $ids = [$resultData['_id']];
 
         // Check to make sure the document is in the index
         $resultSet = $type->search($userSearch);
@@ -373,13 +373,13 @@ class ClientTest extends BaseTest
      */
     public function testDeleteIdsIdxStringTypeObject()
     {
-        $data = array('username' => 'hans');
+        $data = ['username' => 'hans'];
         $userSearch = 'username:hans';
 
         $index = $this->_createIndex();
 
         // Create the index, deleting it first if it already exists
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('user');
 
         // Adds 1 document to the index
@@ -390,7 +390,7 @@ class ClientTest extends BaseTest
         $index->refresh();
 
         $resultData = $result->getData();
-        $ids = array($resultData['_id']);
+        $ids = [$resultData['_id']];
 
         // Check to make sure the document is in the index
         $resultSet = $type->search($userSearch);
@@ -437,13 +437,13 @@ class ClientTest extends BaseTest
      */
     public function testDeleteIdsIdxObjectTypeString()
     {
-        $data = array('username' => 'hans');
+        $data = ['username' => 'hans'];
         $userSearch = 'username:hans';
 
         $index = $this->_createIndex();
 
         // Create the index, deleting it first if it already exists
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('user');
 
         // Adds 1 document to the index
@@ -454,7 +454,7 @@ class ClientTest extends BaseTest
         $index->refresh();
 
         $resultData = $result->getData();
-        $ids = array($resultData['_id']);
+        $ids = [$resultData['_id']];
 
         // Check to make sure the document is in the index
         $resultSet = $type->search($userSearch);
@@ -501,13 +501,13 @@ class ClientTest extends BaseTest
      */
     public function testDeleteIdsIdxObjectTypeObject()
     {
-        $data = array('username' => 'hans');
+        $data = ['username' => 'hans'];
         $userSearch = 'username:hans';
 
         $index = $this->_createIndex();
 
         // Create the index, deleting it first if it already exists
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('user');
 
         // Adds 1 document to the index
@@ -518,7 +518,7 @@ class ClientTest extends BaseTest
         $index->refresh();
 
         $resultData = $result->getData();
-        $ids = array($resultData['_id']);
+        $ids = [$resultData['_id']];
 
         // Check to make sure the document is in the index
         $resultSet = $type->search($userSearch);
@@ -551,10 +551,10 @@ class ClientTest extends BaseTest
         $client = $this->_getClient();
 
         // First connection work, second should not work
-        $connection1 = new Connection(array('port' => '9100', 'timeout' => 2, 'host' => $this->_getHost()));
-        $connection2 = new Connection(array('port' => '9200', 'timeout' => 2, 'host' => $this->_getHost()));
+        $connection1 = new Connection(['port' => '9100', 'timeout' => 2, 'host' => $this->_getHost()]);
+        $connection2 = new Connection(['port' => '9200', 'timeout' => 2, 'host' => $this->_getHost()]);
 
-        $client->setConnections(array($connection1, $connection2));
+        $client->setConnections([$connection1, $connection2]);
 
         $client->request('_stats', Request::GET);
 
@@ -575,10 +575,10 @@ class ClientTest extends BaseTest
         $client = $this->_getClient();
 
         // First connection work, second should not work
-        $connection1 = new Connection(array('port' => '9101', 'timeout' => 2));
-        $connection2 = new Connection(array('port' => '9102', 'timeout' => 2));
+        $connection1 = new Connection(['port' => '9101', 'timeout' => 2]);
+        $connection2 = new Connection(['port' => '9102', 'timeout' => 2]);
 
-        $client->setConnections(array($connection1, $connection2));
+        $client->setConnections([$connection1, $connection2]);
 
         try {
             $client->request('_stats', Request::GET);
@@ -614,13 +614,13 @@ class ClientTest extends BaseTest
             ++$count;
         };
 
-        $client = $this->_getClient(array(), $callback);
+        $client = $this->_getClient([], $callback);
 
         // First connection work, second should not work
-        $connection1 = new Connection(array('port' => '9101', 'timeout' => 2));
-        $connection2 = new Connection(array('port' => '9102', 'timeout' => 2));
+        $connection1 = new Connection(['port' => '9101', 'timeout' => 2]);
+        $connection2 = new Connection(['port' => '9102', 'timeout' => 2]);
 
-        $client->setConnections(array($connection1, $connection2));
+        $client->setConnections([$connection1, $connection2]);
 
         $this->assertEquals(0, $count);
 
@@ -643,7 +643,7 @@ class ClientTest extends BaseTest
         $url = 'http://'.$this->_getHost().':9200/';
 
         // Url should overwrite invalid host
-        $client = $this->_getClient(array('url' => $url, 'port' => '9101', 'timeout' => 2));
+        $client = $this->_getClient(['url' => $url, 'port' => '9101', 'timeout' => 2]);
 
         $response = $client->request('_stats');
         $this->assertInstanceOf('Elastica\Response', $response);
@@ -658,10 +658,10 @@ class ClientTest extends BaseTest
         $type = $index->getType('test');
         $client = $index->getClient();
 
-        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 'value2'));
+        $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
         $type->addDocument($newDocument);
 
-        $updateDocument = new Document(1, array('field2' => 'value2changed', 'field3' => 'value3added'));
+        $updateDocument = new Document(1, ['field2' => 'value2changed', 'field3' => 'value3added']);
         $client->updateDocument(1, $updateDocument, $index->getName(), $type->getName());
 
         $document = $type->getDocument(1);
@@ -686,7 +686,7 @@ class ClientTest extends BaseTest
         $type = $index->getType('test');
         $client = $index->getClient();
 
-        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'should be changed'));
+        $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'should be changed']);
         $type->addDocument($newDocument);
 
         $script = new Script('ctx._source.field2 += 5; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
@@ -717,10 +717,10 @@ class ClientTest extends BaseTest
 
         $script = new Script('ctx._source.field2 += count; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
         $script->setParam('count', 5);
-        $script->setUpsert(array('field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4'));
+        $script->setUpsert(['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4']);
 
         // should use document fields because document does not exist, script is avoided
-        $client->updateDocument(1, $script, $index->getName(), $type->getName(), array('fields' => '_source'));
+        $client->updateDocument(1, $script, $index->getName(), $type->getName(), ['fields' => '_source']);
 
         $document = $type->getDocument(1);
 
@@ -736,7 +736,7 @@ class ClientTest extends BaseTest
         $this->assertEquals('value4', $data['field4']);
 
         // should use script because document exists, document values are ignored
-        $client->updateDocument(1, $script, $index->getName(), $type->getName(), array('fields' => '_source'));
+        $client->updateDocument(1, $script, $index->getName(), $type->getName(), ['fields' => '_source']);
 
         $document = $type->getDocument(1);
 
@@ -760,16 +760,16 @@ class ClientTest extends BaseTest
         $type = $index->getType('test');
         $client = $index->getClient();
 
-        $newDocument = new Document(1, array('field1' => 'value1'));
+        $newDocument = new Document(1, ['field1' => 'value1']);
         $type->addDocument($newDocument);
 
-        $rawData = array(
-            'doc' => array(
+        $rawData = [
+            'doc' => [
                 'field2' => 'value2',
-            ),
-        );
+            ],
+        ];
 
-        $response = $client->updateDocument(1, $rawData, $index->getName(), $type->getName(), array('retry_on_conflict' => 1));
+        $response = $client->updateDocument(1, $rawData, $index->getName(), $type->getName(), ['retry_on_conflict' => 1]);
         $this->assertTrue($response->isOk());
 
         $document = $type->getDocument(1);
@@ -791,10 +791,10 @@ class ClientTest extends BaseTest
         $type = $index->getType('test');
         $client = $index->getClient();
 
-        $newDocument = new Document(1, array('field1' => 'value1updated', 'field2' => 'value2updated'));
-        $upsert = new Document(1, array('field1' => 'value1', 'field2' => 'value2'));
+        $newDocument = new Document(1, ['field1' => 'value1updated', 'field2' => 'value2updated']);
+        $upsert = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
         $newDocument->setUpsert($upsert);
-        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), ['fields' => '_source']);
 
         $document = $type->getDocument(1);
         $this->assertInstanceOf('Elastica\Document', $document);
@@ -805,7 +805,7 @@ class ClientTest extends BaseTest
         $this->assertEquals('value2', $data['field2']);
 
         // should use update document because document exists, upsert document values are ignored
-        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), ['fields' => '_source']);
 
         $document = $type->getDocument(1);
         $this->assertInstanceOf('Elastica\Document', $document);
@@ -833,9 +833,9 @@ class ClientTest extends BaseTest
             //Ignore the exception because we expect the document to not exist.
         }
 
-        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 'value2'));
+        $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
         $newDocument->setDocAsUpsert(true);
-        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), array('fields' => '_source'));
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), ['fields' => '_source']);
 
         $document = $type->getDocument(1);
         $this->assertInstanceOf('Elastica\Document', $document);
@@ -875,11 +875,11 @@ class ClientTest extends BaseTest
         $type = $index->getType('test');
         $client = $index->getClient();
 
-        $docs = array(
-            new Document(1, array('field' => 'value1'), $type, $index),
-            new Document(2, array('field' => 'value2'), $type, $index),
-            new Document(3, array('field' => 'value3'), $type, $index),
-        );
+        $docs = [
+            new Document(1, ['field' => 'value1'], $type, $index),
+            new Document(2, ['field' => 'value2'], $type, $index),
+            new Document(3, ['field' => 'value3'], $type, $index),
+        ];
 
         $response = $client->addDocuments($docs);
 
@@ -893,10 +893,10 @@ class ClientTest extends BaseTest
 
         $this->assertEquals(3, $type->count());
 
-        $deleteDocs = array(
+        $deleteDocs = [
             $docs[0],
             $docs[2],
-        );
+        ];
 
         $response = $client->deleteDocuments($deleteDocs);
 
@@ -941,7 +941,7 @@ class ClientTest extends BaseTest
         $type = $index->getType('test');
         $client = $index->getClient();
 
-        $newDocument = new Document(1, array('field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4'));
+        $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4']);
         $newDocument->setAutoPopulate();
         $type->addDocument($newDocument);
 
@@ -954,7 +954,7 @@ class ClientTest extends BaseTest
             $script,
             $index->getName(),
             $type->getName(),
-            array('fields' => '_source')
+            ['fields' => '_source']
         );
 
         $data = $type->getDocument(1)->getData();
@@ -976,7 +976,7 @@ class ClientTest extends BaseTest
             $script,
             $index->getName(),
             $type->getName(),
-            array('fields' => 'field2,field4')
+            ['fields' => 'field2,field4']
         );
 
         $document = $type->getDocument(1);
@@ -996,9 +996,9 @@ class ClientTest extends BaseTest
      */
     public function testAddDocumentsWithoutIds()
     {
-        $docs = array();
+        $docs = [];
         for ($i = 0; $i < 10; ++$i) {
-            $docs[] = new Document(null, array('pos' => $i));
+            $docs[] = new Document(null, ['pos' => $i]);
         }
 
         foreach ($docs as $doc) {
@@ -1008,7 +1008,7 @@ class ClientTest extends BaseTest
         $index = $this->_createIndex();
 
         $client = $index->getClient();
-        $client->setConfigValue('document', array('autoPopulate' => true));
+        $client->setConfigValue('document', ['autoPopulate' => true]);
 
         $type = $index->getType('pos');
         $type->addDocuments($docs);
@@ -1025,15 +1025,15 @@ class ClientTest extends BaseTest
      */
     public function testConfigValue()
     {
-        $config = array(
-            'level1' => array(
-                'level2' => array(
+        $config = [
+            'level1' => [
+                'level2' => [
                     'level3' => 'value3',
-                ),
+                ],
                 'level21' => 'value21',
-            ),
+            ],
             'level11' => 'value11',
-        );
+        ];
         $client = $this->_getClient($config);
 
         $this->assertNull($client->getConfigValue('level12'));
@@ -1045,8 +1045,8 @@ class ClientTest extends BaseTest
         $this->assertNotEquals(false, $client->getConfigValue('level11', false));
         $this->assertNotEquals(10, $client->getConfigValue('level11', 10));
 
-        $this->assertEquals('value3', $client->getConfigValue(array('level1', 'level2', 'level3')));
-        $this->assertInternalType('array', $client->getConfigValue(array('level1', 'level2')));
+        $this->assertEquals('value3', $client->getConfigValue(['level1', 'level2', 'level3']));
+        $this->assertInternalType('array', $client->getConfigValue(['level1', 'level2']));
     }
 
     /**
@@ -1057,18 +1057,18 @@ class ClientTest extends BaseTest
         $client = $this->_getClient();
 
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
-        $type->addDocument(new Document(1, array('username' => 'ruflin')));
+        $type->addDocument(new Document(1, ['username' => 'ruflin']));
         $index->refresh();
 
-        $query = array(
-            'query' => array(
-                'query_string' => array(
+        $query = [
+            'query' => [
+                'query_string' => [
                     'query' => 'ruflin',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
         $path = $index->getName().'/'.$type->getName().'/_search';
 
@@ -1086,9 +1086,9 @@ class ClientTest extends BaseTest
         $client = $this->_getClient();
 
         $index = $client->getIndex('test');
-        $index->create(array(), true);
+        $index->create([], true);
         $type = $index->getType('test');
-        $type->addDocument(new Document(1, array('username' => 'ruflin')));
+        $type->addDocument(new Document(1, ['username' => 'ruflin']));
         $index->refresh();
 
         $query = '{"query":{"query_string":{"query":"ruflin"}}}';
@@ -1110,7 +1110,7 @@ class ClientTest extends BaseTest
 
         // add one header
         $client->addHeader('foo', 'bar');
-        $this->assertEquals(array('foo' => 'bar'), $client->getConfigValue('headers'));
+        $this->assertEquals(['foo' => 'bar'], $client->getConfigValue('headers'));
 
         // check class
         $this->assertInstanceOf('Elastica\Client', $client->addHeader('foo', 'bar'));
@@ -1137,10 +1137,10 @@ class ClientTest extends BaseTest
         $client = $this->_getClient();
 
         // set headers
-        $headers = array(
+        $headers = [
             'first' => 'first value',
             'second' => 'second value',
-        );
+        ];
         foreach ($headers as $key => $value) {
             $client->addHeader($key, $value);
         }
@@ -1167,8 +1167,74 @@ class ClientTest extends BaseTest
      */
     public function testPassBigIntSettingsToConnectionConfig()
     {
-        $client = new Client(array('bigintConversion' => true));
+        $client = new Client(['bigintConversion' => true]);
 
         $this->assertTrue($client->getConnection()->getConfig('bigintConversion'));
+    }
+
+    /**
+     * @group unit
+     */
+    public function testClientConnectWithConfigSetByMethod()
+    {
+        $client = new Client();
+        $client->setConfigValue('host', $this->_getHost());
+        $client->setConfigValue('port', $this->_getPort());
+
+        $client->connect();
+        $this->assertTrue($client->hasConnection());
+
+        $connection = $client->getConnection();
+        $this->assertInstanceOf('\Elastica\Connection', $connection);
+        $this->assertEquals($this->_getHost(), $connection->getHost());
+        $this->assertEquals($this->_getPort(), $connection->getPort());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testLogger()
+    {
+        $logger = $this->getMock('Psr\\Log\\LoggerInterface');
+        $client = $this->_getClient([], null, $logger);
+
+        $logger->expects($this->once())
+            ->method('debug')
+            ->with(
+                'Elastica Request',
+                $this->logicalAnd(
+                    $this->arrayHasKey('request'),
+                    $this->arrayHasKey('response'),
+                    $this->arrayHasKey('responseStatus')
+                )
+            );
+
+        $client->request('_stats', Request::GET);
+    }
+
+    /**
+     * @expectedException \Elastica\Exception\Connection\HttpException
+     * @group functional
+     */
+    public function testLoggerOnFailure()
+    {
+        $logger = $this->getMock('Psr\\Log\\LoggerInterface');
+        $client = $this->_getClient(['connections' => [
+            ['host' => $this->_getHost(), 'port' => 9201],
+        ]], null, $logger);
+
+        $logger->expects($this->once())
+            ->method('error')
+            ->with(
+                'Elastica Request Failure',
+                $this->logicalAnd(
+                    $this->arrayHasKey('exception'),
+                    $this->arrayHasKey('request'),
+                    $this->arrayHasKey('retry'),
+                    $this->logicalNot($this->arrayHasKey('response'))
+                )
+            );
+
+        $client->request('_stats', Request::GET);
     }
 }

@@ -16,11 +16,13 @@
         "psr/log": "~1.0"
     },
     "require-dev": {
+        "aws/aws-sdk-php": "~3.0",
         "guzzlehttp/guzzle": "~6.0"
     },
     "suggest": {
-        "guzzlehttp/guzzle": "Allow using guzzle 6 as the http transport (Requires php 5.5)",
+        "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
         "egeloen/http-adapter": "Allow using httpadapter transport",
+        "guzzlehttp/guzzle": "Allow using guzzle 6 as the http transport (Requires php 5.5)",
         "monolog/monolog": "Logging request"
     },
     "autoload": {
@@ -35,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.1.x-dev"
+            "dev-master": "3.2.x-dev"
         }
     }
 }

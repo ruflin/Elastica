@@ -15,14 +15,14 @@ class TermsTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('helloworld');
 
-        $type->addDocuments(array(
-            new Document(1, array('name' => 'hello world')),
-            new Document(2, array('name' => 'nicolas ruflin')),
-            new Document(3, array('name' => 'ruflin')),
-        ));
+        $type->addDocuments([
+            new Document(1, ['name' => 'hello world']),
+            new Document(2, ['name' => 'nicolas ruflin']),
+            new Document(3, ['name' => 'ruflin']),
+        ]);
 
         $query = new Terms();
-        $query->setTerms('name', array('nicolas', 'hello'));
+        $query->setTerms('name', ['nicolas', 'hello']);
 
         $index->refresh();
 
@@ -42,7 +42,7 @@ class TermsTest extends BaseTest
     public function testSetMinimum()
     {
         $key = 'name';
-        $terms = array('nicolas', 'ruflin');
+        $terms = ['nicolas', 'ruflin'];
         $minimum = 2;
 
         $query = new Terms($key, $terms);

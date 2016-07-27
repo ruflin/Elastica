@@ -18,7 +18,7 @@ class SettingsTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create(array(), true);
+        $index->create([], true);
         $index->refresh();
         $settings = $index->getSettings();
 
@@ -40,7 +40,7 @@ class SettingsTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create(array(), true);
+        $index->create([], true);
         $index->refresh();
 
         $index->addAlias($aliasName);
@@ -64,7 +64,7 @@ class SettingsTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create(array(), true);
+        $index->create([], true);
         $settings = $index->getSettings();
 
         $settings->setNumberOfReplicas(2);
@@ -87,7 +87,7 @@ class SettingsTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create(array(), true);
+        $index->create([], true);
 
         $settings = $index->getSettings();
 
@@ -111,7 +111,7 @@ class SettingsTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create(array(), true);
+        $index->create([], true);
 
         $settings = $index->getSettings();
 
@@ -135,7 +135,7 @@ class SettingsTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create(array(), true);
+        $index->create([], true);
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
 
@@ -159,7 +159,7 @@ class SettingsTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create(array(), true);
+        $index->create([], true);
 
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
@@ -186,7 +186,7 @@ class SettingsTest extends BaseTest
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
-        $index->create(array(), true);
+        $index->create([], true);
 
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
@@ -215,9 +215,9 @@ class SettingsTest extends BaseTest
         $index->getSettings()->setReadOnly(false);
 
         // Add document to normal index
-        $doc1 = new Document(null, array('hello' => 'world'));
-        $doc2 = new Document(null, array('hello' => 'world'));
-        $doc3 = new Document(null, array('hello' => 'world'));
+        $doc1 = new Document(null, ['hello' => 'world']);
+        $doc2 = new Document(null, ['hello' => 'world']);
+        $doc3 = new Document(null, ['hello' => 'world']);
 
         $type = $index->getType('test');
         $type->addDocument($doc1);

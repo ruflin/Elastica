@@ -37,7 +37,7 @@ class SimpleTest extends Base
      */
     public function testFailConnection()
     {
-        $config = array('host' => '255.255.255.0', 'timeout' => $this->_timeout);
+        $config = ['host' => '255.255.255.0', 'timeout' => $this->_timeout];
         $client = $this->_getClient($config);
 
         $this->_checkStrategy($client);
@@ -50,17 +50,17 @@ class SimpleTest extends Base
      */
     public function testWithOneFailConnection()
     {
-        $connections = array(
-            new Connection(array('host' => '255.255.255.0', 'timeout' => $this->_timeout)),
-            new Connection(array('host' => $this->_getHost(), 'timeout' => $this->_timeout)),
-        );
+        $connections = [
+            new Connection(['host' => '255.255.255.0', 'timeout' => $this->_timeout]),
+            new Connection(['host' => $this->_getHost(), 'timeout' => $this->_timeout]),
+        ];
 
         $count = 0;
         $callback = function ($connection, $exception, $client) use (&$count) {
             ++$count;
         };
 
-        $client = $this->_getClient(array(), $callback);
+        $client = $this->_getClient([], $callback);
         $client->setConnections($connections);
 
         $response = $client->request('/_aliases');
@@ -78,14 +78,14 @@ class SimpleTest extends Base
      */
     public function testWithNoValidConnection()
     {
-        $connections = array(
-            new Connection(array('host' => '255.255.255.0', 'timeout' => $this->_timeout)),
-            new Connection(array('host' => '45.45.45.45', 'port' => '80', 'timeout' => $this->_timeout)),
-            new Connection(array('host' => '10.123.213.123', 'timeout' => $this->_timeout)),
-        );
+        $connections = [
+            new Connection(['host' => '255.255.255.0', 'timeout' => $this->_timeout]),
+            new Connection(['host' => '45.45.45.45', 'port' => '80', 'timeout' => $this->_timeout]),
+            new Connection(['host' => '10.123.213.123', 'timeout' => $this->_timeout]),
+        ];
 
         $count = 0;
-        $client = $this->_getClient(array(), function () use (&$count) {
+        $client = $this->_getClient([], function () use (&$count) {
             ++$count;
         });
 

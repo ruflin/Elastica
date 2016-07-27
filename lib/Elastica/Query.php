@@ -24,13 +24,6 @@ use Elastica\Suggest\AbstractSuggest;
 class Query extends Param
 {
     /**
-     * Params.
-     *
-     * @var array Params
-     */
-    protected $_params = array();
-
-    /**
      * Suggest query or not.
      *
      * @var int Suggest
@@ -337,7 +330,11 @@ class Query extends Param
      */
     public function addScriptField($name, AbstractScript $script)
     {
-        $this->_params['script_fields'][$name] = $script;
+        if (isset($this->_params['script_fields'])) {
+            $this->_params['script_fields']->addScript($name, $script);
+        } else {
+            $this->setScriptFields([$name => $script]);
+        }
 
         return $this;
     }
@@ -351,10 +348,6 @@ class Query extends Param
      */
     public function addAggregation(AbstractAggregation $agg)
     {
-        if (!array_key_exists('aggs', $this->_params)) {
-            $this->_params['aggs'] = array();
-        }
-
         $this->_params['aggs'][] = $agg;
 
         return $this;
@@ -428,7 +421,7 @@ class Query extends Param
     public function setRescore($rescore)
     {
         if (is_array($rescore)) {
-            $buffer = array();
+            $buffer = [];
 
             foreach ($rescore as $rescoreQuery) {
                 $buffer [] = $rescoreQuery;
