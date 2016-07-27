@@ -36,14 +36,38 @@ class TermsTest extends BaseTest
         $this->assertEquals(3, $resultSet->count());
     }
 
+    public function provideMinimumArguments()
+    {
+        return [
+            [
+                3
+            ],
+            [
+                -2
+            ],
+            [
+                '75%'
+            ],
+            [
+                '-25%'
+            ],
+            [
+                '3<90%'
+            ],
+            [
+                '2<-25% 9<-3'
+            ]
+        ];
+    }
+
     /**
      * @group unit
+     * @dataProvider provideMinimumArguments
      */
-    public function testSetMinimum()
+    public function testSetMinimum($minimum)
     {
         $key = 'name';
         $terms = ['nicolas', 'ruflin'];
-        $minimum = 2;
 
         $query = new Terms($key, $terms);
         $query->setMinimumMatch($minimum);
