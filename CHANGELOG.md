@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 - Set HTTP headers on each request preventing server error if persistent connection is enabled and compression enabled and later disabled for the same connection.
+- Removed `int` type hinting in `setMinimumMatch` (`Terms` Query): it should also allow `string`. [#1151](https://github.com/ruflin/Elastica/pull/1151)  
 
 ### Added
 - Elastica\QueryBuilder\DSL\Query::geo_distance
