@@ -192,7 +192,7 @@ class Http extends AbstractTransport
     {
         if ($this->getConnection()->hasConfig('curl')) {
             foreach ($this->getConnection()->getConfig('curl') as $key => $param) {
-                curl_setopt($curlConnection, $key, $param);
+                curl_setopt($curlConnection, constant($key), $param);
             }
         }
     }
