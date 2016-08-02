@@ -42,6 +42,12 @@ class FunctionScore extends AbstractQuery
     const FIELD_VALUE_FACTOR_MODIFIER_SQRT = 'sqrt';
     const FIELD_VALUE_FACTOR_MODIFIER_RECIPROCAL = 'reciprocal';
 
+    const MULTI_VALUE_MODE_MIN = 'min';
+    const MULTI_VALUE_MODE_MAX = 'max';
+    const MULTI_VALUE_MODE_AVG = 'avg';
+    const MULTI_VALUE_MODE_SUM = 'sum';
+
+
     protected $_functions = [];
 
     /**
