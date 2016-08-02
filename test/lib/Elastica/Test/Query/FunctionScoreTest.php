@@ -353,7 +353,17 @@ class FunctionScoreTest extends BaseTest
             null,
             FunctionScore::MULTI_VALUE_MODE_AVG
         );
-        $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'price', $priceOrigin, $priceScale, null, null, 2, null, FunctionScore::MULTI_VALUE_MODE_MAX);
+        $query->addDecayFunction(
+            FunctionScore::DECAY_GAUSS,
+            'price',
+            $priceOrigin,
+            $priceScale,
+            null,
+            null,
+            2,
+            null,
+            FunctionScore::MULTI_VALUE_MODE_MAX
+        );
         $expected = [
             'function_score' => [
                 'query' => $childQuery->toArray(),
@@ -406,7 +416,17 @@ class FunctionScoreTest extends BaseTest
     public function testGaussMultiValue()
     {
         $query = new FunctionScore();
-        $query->addDecayFunction(FunctionScore::DECAY_GAUSS, 'location', $this->locationOrigin, '4mi', null, null, null, null, FunctionScore::MULTI_VALUE_MODE_SUM);
+        $query->addDecayFunction(
+            FunctionScore::DECAY_GAUSS,
+            'location',
+            $this->locationOrigin,
+            '4mi',
+            null,
+            null,
+            null,
+            null,
+            FunctionScore::MULTI_VALUE_MODE_SUM
+        );
         $response = $this->_getIndexForTest()->search($query);
         $results = $response->getResults();
 
