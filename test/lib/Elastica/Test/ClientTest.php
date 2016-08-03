@@ -29,8 +29,8 @@ class ClientTest extends BaseTest
     public function testGetVersion()
     {
         $client = $this->_getClient();
-        $this->assertNotEmpty($version = $client->getVersion());
-        $this->assertSame($version, $client->getVersion());
+        $this->assertNotEmpty($client->getVersion());
+        $this->assertTrue(version_compare($client->getVersion(), $_SERVER['ELASTICSEARCH_VERSION'], '>='));
     }
 
     /**
