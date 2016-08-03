@@ -42,6 +42,12 @@ class FunctionScore extends AbstractQuery
     const FIELD_VALUE_FACTOR_MODIFIER_SQRT = 'sqrt';
     const FIELD_VALUE_FACTOR_MODIFIER_RECIPROCAL = 'reciprocal';
 
+    const MULTI_VALUE_MODE_MIN = 'min';
+    const MULTI_VALUE_MODE_MAX = 'max';
+    const MULTI_VALUE_MODE_AVG = 'avg';
+    const MULTI_VALUE_MODE_SUM = 'sum';
+
+
     protected $_functions = [];
 
     /**
@@ -136,6 +142,7 @@ class FunctionScore extends AbstractQuery
      * @param float         $decay    optionally defines how documents are scored at the distance given by the $scale parameter
      * @param float         $weight   optional factor by which to multiply the score at the value provided by the $scale parameter
      * @param AbstractQuery $filter   a filter associated with this function
+     * @param string        $multiValueMode see MULTI_VALUE_MODE_* constants for valid options
      *
      * @return $this
      */
@@ -147,7 +154,8 @@ class FunctionScore extends AbstractQuery
         $offset = null,
         $decay = null,
         $weight = null,
-        $filter = null
+        $filter = null,
+        $multiValueMode = null
     ) {
         if (null !== $filter) {
             if ($filter instanceof AbstractFilter) {
@@ -168,6 +176,10 @@ class FunctionScore extends AbstractQuery
         }
         if (!is_null($decay)) {
             $functionParams[$field]['decay'] = (float) $decay;
+        }
+
+        if (null !== $multiValueMode) {
+            $functionParams['multi_value_mode'] = $multiValueMode;
         }
 
         return $this->addFunction($function, $functionParams, $filter, $weight);
