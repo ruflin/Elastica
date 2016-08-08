@@ -68,6 +68,11 @@ class Client
     protected $_logger;
 
     /**
+     * @var string
+     */
+    protected $_version;
+
+    /**
      * Creates a new Elastica client.
      *
      * @param array           $config   OPTIONAL Additional config options
@@ -85,6 +90,21 @@ class Client
 
         $this->setConfig($config);
         $this->_initConnections();
+    }
+
+    /**
+     * Get current version
+     *
+     * @return string
+     */
+    public function getVersion()
+    {
+        if ($this->_version) {
+            return $this->_version;
+        }
+
+        $data = $this->request('/')->getData();
+        return $this->_version = $data['version']['number'];
     }
 
     /**

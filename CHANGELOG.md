@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file based on the
 - Elastica\QueryBuilder\DSL\Query::geo_distance
 - Elastica\Aggregation\GeoCentroid [#1150](https://github.com/ruflin/Elastica/pull/1150)
 - [Multi value field](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#_multi_values_fields) param for decay function.
+- Elastica\Client::getVersion [#1152](https://github.com/ruflin/Elastica/pull/1152)
 
 ### Improvements
 - Set PHP 7.0 as default development version
