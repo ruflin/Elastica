@@ -18,6 +18,10 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 - Set PHP 7.0 as default development version
 - Get the root reason from Elasticsearch's error JSON, when available [#1111](https://github.com/ruflin/Elastica/pull/1111)
+- Optimize memory usage for Http Adapter [#1161](https://github.com/ruflin/Elastica/pull/1161)
+
+### Changed
+- Remove JSON_ELASTICSEARCH constant as not needed anymore
 
 ## [3.2.1](https://github.com/ruflin/Elastica/compare/3.2.0...3.2.1)
 
@@ -52,8 +56,6 @@ All notable changes to this project will be documented in this file based on the
 ### Deprecated
 - Configuring the logger in \Elastica\Client $config constructor is deprecated and will be removed. Use the $logger argument instead. [#1069](https://github.com/ruflin/Elastica/pull/1069)
 - Extracted creation of ResultSet objects to a new dedicated ResultSet\Builder implementation. [#1065](https://github.com/ruflin/Elastica/pull/1065)
-
-### Deprecated
 - All properties in the \Elastica\ResultSet class will be moved to private in 4.0. To manipulate the creation of a ResultSet, implement the \Elastica\ResultSet\BuilderInterface and pass your new Builder to the \Elastica\Search instances. [#1065](https://github.com/ruflin/Elastica/pull/1065)
 
 

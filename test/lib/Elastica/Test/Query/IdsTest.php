@@ -186,6 +186,9 @@ class IdsTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
     }
 
+    /**
+     * @group unit
+     */
     public function testQueryTypeAndTypeCollision()
     {
         // This test ensures that Elastica\Type and Elastica\Query\Type

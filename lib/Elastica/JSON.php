@@ -55,11 +55,6 @@ class JSON
         // extract arguments
         $args = func_get_args();
 
-        // allow special options value for Elasticsearch compatibility
-        if (count($args) > 1 && $args[1] === 'JSON_ELASTICSEARCH') {
-            $args[1] = JSON_UNESCAPED_UNICODE;
-        }
-
         // run encode and output
         return call_user_func_array('json_encode', $args);
     }
