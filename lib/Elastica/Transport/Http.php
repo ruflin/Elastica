@@ -122,13 +122,13 @@ class Http extends AbstractTransport
             }
 
             if (is_array($data)) {
-                $content = JSON::stringify($data, 'JSON_ELASTICSEARCH');
+                $content = JSON::stringify($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             } else {
                 $content = $data;
-            }
 
-            // Escaping of / not necessary. Causes problems in base64 encoding of files
-            $content = str_replace('\/', '/', $content);
+                // Escaping of / not necessary. Causes problems in base64 encoding of files
+                $content = str_replace('\/', '/', $content);
+            }
 
             if ($connection->hasCompression()) {
                 // Compress the body of the request ...
