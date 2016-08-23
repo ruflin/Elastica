@@ -49,7 +49,7 @@ class Fuzzy extends AbstractQuery
      * Set optional parameters on the existing query.
      *
      * @param string $option option name
-     * @param mixed  $value Value of the parameter
+     * @param mixed  $value  Value of the parameter
      *
      * @return $this
      */

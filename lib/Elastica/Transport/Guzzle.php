@@ -135,7 +135,7 @@ class Guzzle extends AbstractTransport
 
             $req = $req->withBody(
                 Psr7\stream_for(is_array($data)
-                    ? JSON::stringify($data, 'JSON_ELASTICSEARCH')
+                    ? JSON::stringify($data, JSON_UNESCAPED_UNICODE)
                     : $data
                 )
             );

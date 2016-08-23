@@ -592,9 +592,9 @@ class Query implements DSL
     /**
      * geo distance query.
      *
-     * @param string $key
+     * @param string       $key
      * @param array|string $location
-     * @param string $distance
+     * @param string       $distance
      *
      * @return GeoDistance
      */

@@ -93,7 +93,7 @@ class Client
     }
 
     /**
-     * Get current version
+     * Get current version.
      *
      * @return string
      */
@@ -104,6 +104,7 @@ class Client
         }
 
         $data = $this->request('/')->getData();
+
         return $this->_version = $data['version']['number'];
     }
 

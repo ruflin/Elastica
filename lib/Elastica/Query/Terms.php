@@ -72,7 +72,8 @@ class Terms extends AbstractQuery
      * Sets the minimum matching values.
      *
      * @param int|string $minimum Minimum value
-     * @return  $this
+     *
+     * @return $this
      */
     public function setMinimumMatch($minimum)
     {

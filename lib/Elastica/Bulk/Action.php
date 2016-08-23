@@ -208,7 +208,7 @@ class Action
                 $docAsUpsert = (isset($source['doc_as_upsert'])) ? ', "doc_as_upsert": '.$source['doc_as_upsert'] : '';
                 $string .= '{"doc": '.$source['doc'].$docAsUpsert.'}';
             } else {
-                $string .= JSON::stringify($source, 'JSON_ELASTICSEARCH');
+                $string .= JSON::stringify($source, JSON_UNESCAPED_UNICODE);
             }
             $string .= Bulk::DELIMITER;
         }
