@@ -374,7 +374,7 @@ class FunctionScoreTest extends BaseTest
                                 'origin' => $this->locationOrigin,
                                 'scale' => $locationScale,
                             ],
-                            'multi_value_mode'=>FunctionScore::MULTI_VALUE_MODE_AVG,
+                            'multi_value_mode' => FunctionScore::MULTI_VALUE_MODE_AVG,
                         ],
                         'weight' => .5,
                     ],
@@ -384,7 +384,7 @@ class FunctionScoreTest extends BaseTest
                                 'origin' => $priceOrigin,
                                 'scale' => $priceScale,
                             ],
-                            'multi_value_mode'=>FunctionScore::MULTI_VALUE_MODE_MAX
+                            'multi_value_mode' => FunctionScore::MULTI_VALUE_MODE_MAX,
                         ],
                         'weight' => 2,
                     ],
