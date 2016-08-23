@@ -13,6 +13,7 @@ use Elastica\Script\Script;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
+use Elastica\Type\Mapping;
 
 class SearchTest extends BaseTest
 {
@@ -478,7 +479,7 @@ class SearchTest extends BaseTest
         $type = $index->getType('zeroType');
         $docs = [];
         for ($i = 1; $i <= 11; ++$i) {
-            $docs[] = new Document($i, ['id' => $i, 'email' => 'test@test.com', 'username' => (($i < 5) ? 'farrelley' : 'marley')]);
+            $docs[] = new Document($i, ['id' => $i, 'email' => 'test@test.com', 'username' => (($i <= 5) ? 'farrelley' : 'marley')]);
         }
         $type->addDocuments($docs);
         $index->refresh();
@@ -632,14 +633,17 @@ class SearchTest extends BaseTest
         $type->addDocuments($docs);
         $index->refresh();
         $search->addIndex($index)->addType($type);
+
         $all = $type->search(new MatchAll(), [Search::OPTION_ROUTING => 'farrelley,marley']);
         $this->assertInstanceOf('Elastica\ResultSet', $all);
         $this->assertCount(10, $all);
         $this->assertEquals(10, $all->getTotalHits());
+
         $r1 = $type->search(new MatchAll(), [Search::OPTION_ROUTING => 'farrelley']);
         $this->assertInstanceOf('Elastica\ResultSet', $r1);
         $this->assertCount(5, $r1);
         $this->assertEquals(5, $r1->getTotalHits());
+
         $r2 = $type->search(new MatchAll(), [Search::OPTION_ROUTING => 'marley']);
         $this->assertInstanceOf('Elastica\ResultSet', $r2);
         $this->assertCount(5, $r2);

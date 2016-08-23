@@ -77,7 +77,7 @@ class Ids extends AbstractQuery
             return $this;
         }
 
-        $this->_params['type'] = (array)$type;
+        $this->_params['type'] = (array) $type;
 
         return $this;
     }

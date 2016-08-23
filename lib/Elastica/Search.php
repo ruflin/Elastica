@@ -484,6 +484,8 @@ class Search
         $params = $this->getOptions();
         $params[self::OPTION_SEARCH_TYPE] = self::OPTION_SEARCH_TYPE_COUNT;
 
+        print_r($params);
+
         $response = $this->getClient()->request(
             $path,
             Request::GET,
