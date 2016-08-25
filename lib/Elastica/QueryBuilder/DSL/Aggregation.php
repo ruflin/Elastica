@@ -27,6 +27,8 @@ use Elastica\Aggregation\Sum;
 use Elastica\Aggregation\Terms;
 use Elastica\Aggregation\TopHits;
 use Elastica\Aggregation\ValueCount;
+use Elastica\Aggregation\BucketScript;
+use Elastica\Aggregation\SerialDiff;
 use Elastica\Exception\NotImplementedException;
 use Elastica\Filter\AbstractFilter;
 use Elastica\QueryBuilder\DSL;
@@ -466,5 +468,36 @@ class Aggregation implements DSL
     public function geohash_grid($name, $field)
     {
         return new GeohashGrid($name, $field);
+    }
+
+    /**
+     * bucket script aggregation.
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html
+     *
+     * @param string $name
+     * @param array|null $bucketsPath
+     * @param string|null $script
+     *
+     * @return BucketScript
+     */
+    public function bucket_script($name, $bucketsPath = null, $script = null)
+    {
+        return new BucketScript($name, $bucketsPath, $script);
+    }
+
+    /**
+     * serial diff aggregation.
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html
+     *
+     * @param string $name
+     * @param string|null $bucketsPath
+     *
+     * @return SerialDiff
+     */
+    public function serial_diff($name, $bucketsPath = null)
+    {
+        return new SerialDiff($name, $bucketsPath);
     }
 }

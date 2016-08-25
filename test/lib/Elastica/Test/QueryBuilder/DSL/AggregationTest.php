@@ -66,6 +66,8 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'terms', 'Elastica\Aggregation\Terms', ['name']);
         $this->_assertImplemented($aggregationDSL, 'top_hits', 'Elastica\Aggregation\TopHits', ['name']);
         $this->_assertImplemented($aggregationDSL, 'value_count', 'Elastica\Aggregation\ValueCount', ['name', 'field']);
+        $this->_assertImplemented($aggregationDSL, 'bucket_script', 'Elastica\Aggregation\BucketScript', ['name']);
+        $this->_assertImplemented($aggregationDSL, 'serial_diff', 'Elastica\Aggregation\SerialDiff', ['name']);
 
         $this->_assertNotImplemented($aggregationDSL, 'children', ['name']);
         $this->_assertNotImplemented($aggregationDSL, 'geo_bounds', ['name']);

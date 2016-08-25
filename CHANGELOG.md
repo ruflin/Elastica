@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file based on the
 ### Bugfixes
 
 ### Added
+- Elastica\Aggregation\BucketScript
+- Elastica\Aggregation\SerialDiff
 
 ### Improvements
 
