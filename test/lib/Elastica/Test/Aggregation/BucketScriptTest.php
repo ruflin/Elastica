@@ -55,4 +55,57 @@ class BucketScriptTest extends BaseAggregationTest
         $this->assertEquals(2.4, $results['buckets'][1]['result']['value']);
         $this->assertEquals(3.1, $results['buckets'][2]['result']['value']);
     }
+
+    /**
+     * @group unit
+     */
+    public function testConstructThroughSetters()
+    {
+        $serialDiffAgg = new BucketScript('bucket_scripted');
+
+        $serialDiffAgg
+            ->setScript('x / y * z')
+            ->setBucketsPath([
+                'x' => 'agg_max',
+                'y' => 'agg_sum',
+                'z' => 'agg_min',
+            ])
+            ->setFormat('test_format')
+            ->setGapPolicy(10);
+
+        $expected = [
+            'bucket_script' => [
+                'script' => 'x / y * z',
+                'buckets_path' => [
+                    'x' => 'agg_max',
+                    'y' => 'agg_sum',
+                    'z' => 'agg_min',
+                ],
+                'format' => 'test_format',
+                'gap_policy' => 10,
+            ],
+        ];
+
+        $this->assertEquals($expected, $serialDiffAgg->toArray());
+    }
+
+    /**
+     * @group unit
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testToArrayInvalidBucketsPath()
+    {
+        $serialDiffAgg = new BucketScript('bucket_scripted');
+        $serialDiffAgg->toArray();
+    }
+
+    /**
+     * @group unit
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testToArrayInvalidScript()
+    {
+        $serialDiffAgg = new BucketScript('bucket_scripted', ['path' => 'agg']);
+        $serialDiffAgg->toArray();
+    }
 }

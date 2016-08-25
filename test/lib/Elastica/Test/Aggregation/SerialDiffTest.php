@@ -52,4 +52,39 @@ class SerialDiffTest extends BaseAggregationTest
         $this->assertEquals(84, $results['buckets'][2]['result']['value']);
         $this->assertEquals(121, $results['buckets'][3]['result']['value']);
     }
+
+    /**
+     * @group unit
+     */
+    public function testConstructThroughSetters()
+    {
+        $serialDiffAgg = new SerialDiff('difference');
+
+        $serialDiffAgg
+            ->setBucketsPath('nested_agg')
+            ->setFormat('test_format')
+            ->setGapPolicy(10)
+            ->setLag(5);
+
+        $expected = [
+            'serial_diff' => [
+                'buckets_path' => 'nested_agg',
+                'format' => 'test_format',
+                'gap_policy' => 10,
+                'lag' => 5,
+            ],
+        ];
+
+        $this->assertEquals($expected, $serialDiffAgg->toArray());
+    }
+
+    /**
+     * @group unit
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testToArrayInvalidBucketsPath()
+    {
+        $serialDiffAgg = new SerialDiff('difference');
+        $serialDiffAgg->toArray();
+    }
 }
