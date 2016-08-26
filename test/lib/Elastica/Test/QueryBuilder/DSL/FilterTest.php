@@ -31,7 +31,7 @@ class FilterTest extends AbstractDSLTest
         $this->_assertImplemented($filterDSL, 'bool_not', 'Elastica\Filter\BoolNot', [new Exists('field')]);
         $this->_assertImplemented($filterDSL, 'bool_or', 'Elastica\Filter\BoolOr', [[new Exists('field')]]);
         $this->_assertImplemented($filterDSL, 'exists', 'Elastica\Filter\Exists', ['field']);
-        $this->_assertImplemented($filterDSL, 'geo_bounding_box', 'Elastica\Filter\GeoBoundingBox', ['field', [1, 2]]);
+        $this->_assertImplemented($filterDSL, 'geo_bounding_box', 'Elastica\Filter\GeoBoundingBox', ['field', [1, 2]], ['top_left', 'bottom_right']);
         $this->_assertImplemented($filterDSL, 'geo_distance', 'Elastica\Filter\GeoDistance', ['key', 'location', 'distance']);
         $this->_assertImplemented($filterDSL, 'geo_distance_range', 'Elastica\Filter\GeoDistanceRange', ['key', 'location']);
         $this->_assertImplemented($filterDSL, 'geo_polygon', 'Elastica\Filter\GeoPolygon', ['key', []]);
