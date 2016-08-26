@@ -38,7 +38,7 @@ class GeoBoundingBox extends AbstractFilter
      *
      * @return $this
      */
-    public function addCoordinates($key, array $coordinates, array $positions)
+    public function addCoordinates($key, array $coordinates, array $positions  = ['top_left', 'bottom_right'])
     {
         if (!isset($coordinates[0]) || !isset($coordinates[1])) {
             throw new InvalidException('expected $coordinates to be an array with two elements');
