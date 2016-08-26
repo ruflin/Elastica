@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 - Set PHP 7.0 as default development version
 - Get the root reason from Elasticsearch's error JSON, when available [#1111](https://github.com/ruflin/Elastica/pull/1111)
-
+- Allows the GeoBoundingBox filter to set the positions of the BoundingBox GeoBoundBox($key, array $coordinates, array $positions = ['top_left', 'bottom_right']) or $geo->addCoordinates($key, array $coordinates, array $positions  = ['top_left', 'bottom_right']) [#1160](https://github.com/ruflin/Elastica/pull/1160)
 ## [3.2.1](https://github.com/ruflin/Elastica/compare/3.2.0...3.2.1)
 
 ### Backward Compatibility Fixes
