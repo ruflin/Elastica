@@ -28,8 +28,14 @@ class GeoBoundingBoxTest extends BaseTest
         $expectedArray = ['top_left' => $coords[0], 'bottom_right' => $coords[1]];
         $this->assertEquals($expectedArray, $filter->getParam($key));
 
+
+
         $returnValue = $filter->addCoordinates($key, $coords);
         $this->assertInstanceOf('Elastica\Filter\GeoBoundingBox', $returnValue);
+
+        $filter->addCoordinates($key, $coords, ['top_right', 'bottom_left']);
+        $expectedArray = ['top_right' => $coords[0], 'bottom_left' => $coords[1]];
+        $this->assertEquals($expectedArray, $filter->getParam($key));
     }
 
     /**
@@ -48,6 +54,7 @@ class GeoBoundingBoxTest extends BaseTest
     {
         $key = 'pin.location';
         $coords = ['40.73, -74.1', '40.01, -71.12'];
+        $positions = ['top_right', 'bottom_left'];
         $filter = new GeoBoundingBox($key, $coords);
 
         $expectedArray = [
@@ -60,5 +67,19 @@ class GeoBoundingBoxTest extends BaseTest
         ];
 
         $this->assertEquals($expectedArray, $filter->toArray());
+
+        $expectedArray = [
+            'geo_bounding_box' => [
+                $key => [
+                    'top_right' => $coords[0],
+                    'bottom_left' => $coords[1],
+                ],
+            ],
+        ];
+
+        $filter = new GeoBoundingBox($key, $coords, $positions);
+
+        $this->assertEquals($expectedArray, $filter->toArray());
+
     }
 }
