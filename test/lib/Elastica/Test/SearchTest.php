@@ -369,7 +369,6 @@ class SearchTest extends BaseTest
 
     /**
      * @group functional
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testArrayConfigSearch()
     {
@@ -418,6 +417,10 @@ class SearchTest extends BaseTest
         $resultSet = $search->search('test', ['limit' => 5, 'routing' => 'r1,r2']);
         $this->assertEquals(5, $resultSet->count());
 
+        //Array with terminate_after
+        $resultSet = $search->search('test', array('terminate_after' => 100));
+        $this->assertEquals(10, $resultSet->count());
+
         //Search types
         $resultSet = $search->search('test', ['limit' => 5, 'search_type' => 'count']);
         $this->assertTrue(($resultSet->count() === 0) && $resultSet->getTotalHits() === 11);
@@ -435,7 +438,16 @@ class SearchTest extends BaseTest
         $query->addScriptScoreFunction($script);
         $resultSet = $search->search($query, ['timeout' => 50]);
         $this->assertTrue($resultSet->hasTimedOut());
+		}
 
+    /**
+     * @group functional
+     * @expectedException \Elastica\Exception\InvalidException
+     */
+    public function testInvalidConfigSearch()
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
         // Throws InvalidException
         $resultSet = $search->search('test', ['invalid_option' => 'invalid_option_value']);
     }
