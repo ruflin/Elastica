@@ -99,14 +99,13 @@ abstract class AbstractTransport extends Param
             } else {
                 $transport = ucfirst($transport);
             }
-
-            $className = 'Elastica\\Transport\\'.$transport;
-
-            if (!class_exists($className)) {
-                throw new InvalidException('Invalid transport');
+            $classNames = ["Elastica\\Transport\\$transport", $transport];
+            foreach ($classNames as $className) {
+                if (class_exists($className)) {
+                    $transport = new $className();
+                    break;
+                }
             }
-
-            $transport = new $className();
         }
 
         if ($transport instanceof self) {

@@ -21,6 +21,7 @@ class AbstractTransportTest extends \PHPUnit_Framework_TestCase
             [['type' => 'Http']],
             [['type' => new Http()]],
             [new Http()],
+            ['Elastica\Test\Transport\DummyTransport'],
         ];
     }
 
