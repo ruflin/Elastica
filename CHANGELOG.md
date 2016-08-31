@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file based on the
 - Set HTTP headers on each request preventing server error if persistent connection is enabled and compression enabled and later disabled for the same connection.
 
 ### Added
+- Added support for terminate_after parameter in search queries [#1168](https://github.com/ruflin/Elastica/pull/1168)
 
 ### Improvements
 - Set PHP 7.0 as default development version
