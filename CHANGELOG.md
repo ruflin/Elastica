@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file based on the
 - Elastica\Aggregation\SerialDiff
 
 ### Improvements
+- Elastica\Client constructor now accepts a transport of fully qualified name. [#1169](https://github.com/ruflin/Elastica/pull/1169)
 
 ## Deprecated
 
