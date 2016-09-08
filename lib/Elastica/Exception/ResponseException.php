@@ -31,7 +31,7 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     {
         $this->_request = $request;
         $this->_response = $response;
-        parent::__construct($response->getErrorMessage()['reason'], 500);
+        parent::__construct($response->getErrorMessage(), 500);
     }
 
     /**
