@@ -117,16 +117,12 @@ class InnerHits extends AbstractQuery
     /**
      * Set script fields.
      *
-     * @param array|\Elastica\Script\ScriptFields $scriptFields
+     * @param \Elastica\Script\ScriptFields $scriptFields
      *
      * @return $this
      */
-    public function setScriptFields($scriptFields)
+    public function setScriptFields(ScriptFields $scriptFields)
     {
-        if (is_array($scriptFields)) {
-            $scriptFields = new ScriptFields($scriptFields);
-        }
-
         return $this->setParam('script_fields', $scriptFields);
     }
 
