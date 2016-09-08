@@ -467,8 +467,10 @@ class InnerHitsTest extends BaseTest
         $matchAll = new MatchAll();
         $innerHits = new InnerHits();
         $innerHits->setSize(1);
-        $innerHits->setScriptFields(['three' => new Script('1 + 2')]);
-        $innerHits->addScriptField('five', new Script('3 + 2'));
+        $scriptFields = new ScriptFields();
+        $scriptFields->addScript('three', new Script('1 + 2'));
+        $scriptFields->addScript('five', new Script('3 + 2'));
+        $innerHits->setScriptFields($scriptFields);
 
         $results = $this->getNestedQuery($matchAll, $innerHits);
 
