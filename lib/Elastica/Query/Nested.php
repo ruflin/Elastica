@@ -45,4 +45,16 @@ class Nested extends AbstractQuery
     {
         return $this->setParam('score_mode', $scoreMode);
     }
+
+    /**
+     * Set inner hits
+     *
+     * @param InnerHits $innerHits
+     *
+     * @return $this
+     */
+    public function setInnerHits(InnerHits $innerHits)
+    {
+        return $this->setParam('inner_hits', $innerHits);
+    }
 }

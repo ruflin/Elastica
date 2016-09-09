@@ -61,6 +61,18 @@ class HasChild extends AbstractQuery
     }
 
     /**
+     * Set inner hits
+     *
+     * @param InnerHits $innerHits
+     *
+     * @return $this
+     */
+    public function setInnerHits(InnerHits $innerHits)
+    {
+        return $this->setParam('inner_hits', $innerHits);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function toArray()

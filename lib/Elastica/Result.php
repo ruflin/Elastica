@@ -140,6 +140,26 @@ class Result
     }
 
     /**
+     * Returns inner hits.
+     *
+     * @return array Fields list
+     */
+    public function getInnerHits()
+    {
+        return $this->getParam('inner_hits');
+    }
+
+    /**
+     * Returns whether result has inner hits.
+     *
+     * @return bool
+     */
+    public function hasInnerHits()
+    {
+        return $this->hasParam('inner_hits');
+    }
+
+    /**
      * Returns result data.
      *
      * Checks for partial result data with getFields, falls back to getSource or both
@@ -189,7 +209,7 @@ class Result
 
     /**
      * Returns Document.
-     * 
+     *
      * @return Document
      */
     public function getDocument()
