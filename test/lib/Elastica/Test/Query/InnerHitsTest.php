@@ -1,16 +1,16 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Test\Base as BaseTest;
-use Elastica\Query\InnerHits;
-use Elastica\Script\Script;
-use Elastica\Script\ScriptFields;
 use Elastica\Document;
-use Elastica\Type\Mapping;
 use Elastica\Query;
+use Elastica\Query\InnerHits;
+use Elastica\Query\MatchAll;
 use Elastica\Query\SimpleQueryString;
 use Elastica\QueryBuilder;
-use Elastica\Query\MatchAll;
+use Elastica\Script\Script;
+use Elastica\Script\ScriptFields;
+use Elastica\Test\Base as BaseTest;
+use Elastica\Type\Mapping;
 
 class InnerHitsTest extends BaseTest
 {
@@ -23,16 +23,16 @@ class InnerHitsTest extends BaseTest
         $mapping->setType($type);
 
         // Set mapping
-        $mapping->setProperties(array(
-            'users'    => array(
+        $mapping->setProperties([
+            'users' => [
                 'type' => 'nested',
-                'properties' => array(
-                    'name'      => array('type' => 'string')
-                ),
-            ),
-            'title'     => array('type' => 'string'),
-            'last_activity_date' => array('type' => 'date')
-        ));
+                'properties' => [
+                    'name' => ['type' => 'string'],
+                ],
+            ],
+            'title' => ['type' => 'string'],
+            'last_activity_date' => ['type' => 'date'],
+        ]);
 
         // Send mapping to type
         $mapping->send();
@@ -41,7 +41,7 @@ class InnerHitsTest extends BaseTest
             new Document(1, [
                 'users' => [
                     ['name' => 'John Smith', 'last_activity_date' => '2015-01-05'],
-                    ['name' => 'Conan', 'last_activity_date' => '2015-01-05']
+                    ['name' => 'Conan', 'last_activity_date' => '2015-01-05'],
                 ],
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about linux #1',
@@ -49,7 +49,7 @@ class InnerHitsTest extends BaseTest
             new Document(2, [
                 'users' => [
                     ['name' => 'John Doe', 'last_activity_date' => '2015-01-05'],
-                    ['name' => 'Simon', 'last_activity_date' => '2015-01-05']
+                    ['name' => 'Simon', 'last_activity_date' => '2015-01-05'],
                 ],
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about linux #2',
@@ -57,7 +57,7 @@ class InnerHitsTest extends BaseTest
             new Document(3, [
                 'users' => [
                     ['name' => 'Simon', 'last_activity_date' => '2015-01-05'],
-                    ['name' => 'Garfunkel', 'last_activity_date' => '2015-01-05']
+                    ['name' => 'Garfunkel', 'last_activity_date' => '2015-01-05'],
                 ],
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about windows #1',
@@ -66,7 +66,7 @@ class InnerHitsTest extends BaseTest
                 'users' => [
                     ['name' => 'Einstein'],
                     ['name' => 'Newton'],
-                    ['name' => 'Maxwell']
+                    ['name' => 'Maxwell'],
                 ],
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about windows #2',
@@ -75,7 +75,7 @@ class InnerHitsTest extends BaseTest
                 'users' => [
                     ['name' => 'Faraday'],
                     ['name' => 'Leibniz'],
-                    ['name' => 'Descartes']
+                    ['name' => 'Descartes'],
                 ],
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about osx',
@@ -98,10 +98,10 @@ class InnerHitsTest extends BaseTest
         $mappingQuestion->setType($questionType);
 
         // Set mapping
-        $mappingQuestion->setProperties(array(
-            'title'     => array('type' => 'string'),
-            'last_activity_date' => array('type' => 'date')
-        ));
+        $mappingQuestion->setProperties([
+            'title' => ['type' => 'string'],
+            'last_activity_date' => ['type' => 'date'],
+        ]);
 
         // Children
         $mappingResponse = new Mapping();
@@ -109,10 +109,10 @@ class InnerHitsTest extends BaseTest
         $mappingResponse->setType($responseType);
 
         // Set mapping
-        $mappingResponse->setProperties(array(
-            'answer'     => array('type' => 'string'),
-            'last_activity_date' => array('type' => 'date')
-        ));
+        $mappingResponse->setProperties([
+            'answer' => ['type' => 'string'],
+            'last_activity_date' => ['type' => 'date'],
+        ]);
         $mappingResponse->send();
         $mappingQuestion->send();
 
@@ -403,7 +403,7 @@ class InnerHitsTest extends BaseTest
     {
         $queryString = new SimpleQueryString('linux cool');
         $innerHits = new InnerHits();
-        $innerHits->setSort(array('answer' => 'asc'));
+        $innerHits->setSort(['answer' => 'asc']);
 
         $results = $this->getParentChildQuery($queryString, $innerHits);
         $firstResult = current($results->getResults());

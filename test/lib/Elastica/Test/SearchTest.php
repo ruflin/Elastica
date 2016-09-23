@@ -418,7 +418,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(5, $resultSet->count());
 
         //Array with terminate_after
-        $resultSet = $search->search('test', array('terminate_after' => 100));
+        $resultSet = $search->search('test', ['terminate_after' => 100]);
         $this->assertEquals(10, $resultSet->count());
 
         //Search types
@@ -438,7 +438,7 @@ class SearchTest extends BaseTest
         $query->addScriptScoreFunction($script);
         $resultSet = $search->search($query, ['timeout' => 50]);
         $this->assertTrue($resultSet->hasTimedOut());
-		}
+    }
 
     /**
      * @group functional

@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\SerialDiff;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\Max;
+use Elastica\Aggregation\SerialDiff;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Type\Mapping;

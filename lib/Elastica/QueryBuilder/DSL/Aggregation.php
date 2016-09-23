@@ -2,6 +2,7 @@
 namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Aggregation\Avg;
+use Elastica\Aggregation\BucketScript;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\DateRange;
@@ -21,14 +22,13 @@ use Elastica\Aggregation\Percentiles;
 use Elastica\Aggregation\Range;
 use Elastica\Aggregation\ReverseNested;
 use Elastica\Aggregation\ScriptedMetric;
+use Elastica\Aggregation\SerialDiff;
 use Elastica\Aggregation\SignificantTerms;
 use Elastica\Aggregation\Stats;
 use Elastica\Aggregation\Sum;
 use Elastica\Aggregation\Terms;
 use Elastica\Aggregation\TopHits;
 use Elastica\Aggregation\ValueCount;
-use Elastica\Aggregation\BucketScript;
-use Elastica\Aggregation\SerialDiff;
 use Elastica\Exception\NotImplementedException;
 use Elastica\Filter\AbstractFilter;
 use Elastica\QueryBuilder\DSL;
@@ -475,8 +475,8 @@ class Aggregation implements DSL
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html
      *
-     * @param string $name
-     * @param array|null $bucketsPath
+     * @param string      $name
+     * @param array|null  $bucketsPath
      * @param string|null $script
      *
      * @return BucketScript
@@ -491,7 +491,7 @@ class Aggregation implements DSL
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html
      *
-     * @param string $name
+     * @param string      $name
      * @param string|null $bucketsPath
      *
      * @return SerialDiff
