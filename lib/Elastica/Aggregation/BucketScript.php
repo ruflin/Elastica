@@ -11,8 +11,8 @@ use Elastica\Exception\InvalidException;
 class BucketScript extends AbstractAggregation
 {
     /**
-     * @param string $name
-     * @param array|null $bucketsPath
+     * @param string      $name
+     * @param array|null  $bucketsPath
      * @param string|null $script
      */
     public function __construct($name, $bucketsPath = null, $script = null)
@@ -77,8 +77,9 @@ class BucketScript extends AbstractAggregation
     }
 
     /**
-     * @return array
      * @throws InvalidException If buckets path or script is not set
+     *
+     * @return array
      */
     public function toArray()
     {

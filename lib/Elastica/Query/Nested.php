@@ -47,7 +47,7 @@ class Nested extends AbstractQuery
     }
 
     /**
-     * Set inner hits
+     * Set inner hits.
      *
      * @param InnerHits $innerHits
      *

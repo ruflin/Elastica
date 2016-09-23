@@ -1,8 +1,8 @@
-FROM elasticsearch:2.3.2
+FROM elasticsearch:2.4.0
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 # Dependencies
-ENV ELASTICSEARCH_VERSION 2.3.2
+ENV ELASTICSEARCH_VERSION 2.4.0
 ENV ES_IMAGE_PLUGIN_VER 1.7.1
 ENV ES_PLUGIN_BIN /usr/share/elasticsearch/bin/plugin
 

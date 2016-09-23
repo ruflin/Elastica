@@ -2,8 +2,8 @@
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\BucketScript;
-use Elastica\Aggregation\Max;
 use Elastica\Aggregation\Histogram;
+use Elastica\Aggregation\Max;
 use Elastica\Document;
 use Elastica\Query;
 

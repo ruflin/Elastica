@@ -11,7 +11,7 @@ use Elastica\Exception\InvalidException;
 class SerialDiff extends AbstractAggregation
 {
     /**
-     * @param string $name
+     * @param string      $name
      * @param string|null $bucketsPath
      */
     public function __construct($name, $bucketsPath = null)
@@ -72,8 +72,9 @@ class SerialDiff extends AbstractAggregation
     }
 
     /**
-     * @return array
      * @throws InvalidException If buckets path is not set
+     *
+     * @return array
      */
     public function toArray()
     {
