@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 - Elastica\Client constructor now accepts a transport of fully qualified name. [#1169](https://github.com/ruflin/Elastica/pull/1169)
+- Update Elasticsearch dependency to 2.4.0
 
 
 ## [3.2.2](https://github.com/ruflin/Elastica/compare/3.2.1...3.2.2)
