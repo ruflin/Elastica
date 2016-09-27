@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 ### Improvements
+- Add a constant for the expression language.
 
 ## Deprecated
 
