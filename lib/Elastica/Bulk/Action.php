@@ -5,6 +5,7 @@ use Elastica\Bulk;
 use Elastica\Index;
 use Elastica\JSON;
 use Elastica\Type;
+use Elastica\Exception\InvalidException;
 
 class Action
 {
@@ -208,7 +209,14 @@ class Action
                 $docAsUpsert = (isset($source['doc_as_upsert'])) ? ', "doc_as_upsert": '.$source['doc_as_upsert'] : '';
                 $string .= '{"doc": '.$source['doc'].$docAsUpsert.'}';
             } else {
-                $string .= JSON::stringify($source, JSON_UNESCAPED_UNICODE);
+                $data = JSON::stringify($source, 'JSON_ELASTICSEARCH');
+				if ($data === false) {
+					throw new InvalidException(sprintf(
+												   'Invalid utf-8 data provided : "%s"',
+												   print_r($source, true)
+											   ));
+				}
+				$string .= $data;
             }
             $string .= Bulk::DELIMITER;
         }
