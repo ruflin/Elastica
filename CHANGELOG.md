@@ -15,7 +15,7 @@ All notable changes to this project will be documented in this file based on the
 ## Deprecated
 
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/3.2.2...3.2.3)
+## [3.2.3](https://github.com/ruflin/Elastica/compare/3.2.2...3.2.3)
 
 ### Bugfixes
 - Query builder is now compatible with Elasticsearch 2.X
