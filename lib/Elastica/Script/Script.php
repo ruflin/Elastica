@@ -17,6 +17,7 @@ class Script extends AbstractScript
     const LANG_GROOVY = 'groovy';
     const LANG_PYTHON = 'python';
     const LANG_NATIVE = 'native';
+    const LANG_EXPRESSION = 'expression';
 
     /**
      * @var string
