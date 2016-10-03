@@ -211,10 +211,7 @@ class Action
             } else {
                 $data = JSON::stringify($source, JSON_UNESCAPED_UNICODE);
 				if ($data === false) {
-					throw new InvalidException(sprintf(
-												   'Invalid utf-8 data provided: "%s"',
-												   print_r($source, true)
-											   ));
+					throw new InvalidException(sprintf('Invalid utf-8 data provided: "%s"', print_r($source, true)));
 				}
 				$string .= $data;
             }
