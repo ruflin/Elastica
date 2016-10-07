@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 - Add a constant for the expression language.
+- Composer installations will no longer include tests and other development files. 
 
 ## Deprecated
 
