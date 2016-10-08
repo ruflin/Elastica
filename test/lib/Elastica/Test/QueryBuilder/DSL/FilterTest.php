@@ -53,7 +53,6 @@ class FilterTest extends AbstractDSLTest
         $this->_assertImplemented($filterDSL, 'regexp', 'Elastica\Filter\Regexp', ['field', 'regex']);
         $this->_assertImplemented($filterDSL, 'script', 'Elastica\Filter\Script', ['script']);
         $this->_assertImplemented($filterDSL, 'term', 'Elastica\Filter\Term', []);
-        $this->_assertImplemented($filterDSL, 'terms', 'Elastica\Filter\Terms', ['field', []]);
         $this->_assertImplemented($filterDSL, 'type', 'Elastica\Filter\Type', ['type']);
         $this->showDeprecated();
     }

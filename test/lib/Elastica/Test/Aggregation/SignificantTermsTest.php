@@ -4,7 +4,6 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\SignificantTerms;
 use Elastica\Document;
 use Elastica\Filter\Exists;
-use Elastica\Filter\Terms as TermsFilter;
 use Elastica\Query;
 use Elastica\Query\Terms;
 
@@ -113,7 +112,7 @@ class SignificantTermsTest extends BaseAggregationTest
         $agg = new SignificantTerms('significantTerms');
         $agg->setField('temperature');
         $agg->setSize(1);
-        $termsFilter = new TermsFilter();
+        $termsFilter = new Terms();
         $termsFilter->setTerms('color', ['blue', 'red', 'green', 'yellow']);
         $agg->setBackgroundFilter($termsFilter);
 

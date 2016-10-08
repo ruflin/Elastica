@@ -5,7 +5,6 @@ use Elastica\Document;
 use Elastica\Filter\BoolFilter;
 use Elastica\Filter\Ids;
 use Elastica\Filter\Term;
-use Elastica\Filter\Terms;
 use Elastica\Query;
 use Elastica\Test\DeprecatedClassBase as BaseTest;
 
@@ -67,19 +66,21 @@ class BoolFilterTest extends BaseTest
 
         // case #1 _cache parameter should be supported
         $bool = new BoolFilter();
-        $terms = new Terms('field1', ['value1', 'value2']);
-        $termsNot = new Terms('field2', ['value1', 'value2']);
-        $bool->addMust($terms);
-        $bool->addMustNot($termsNot);
+        $term = new Term();
+        $term->setTerm('field1', 'value1');
+        $termNot = new Term();
+        $termNot->setTerm('field2', 'value1');
+        $bool->addMust($term);
+        $bool->addMustNot($termNot);
         $bool->setCached(true);
         $bool->setCacheKey('my-cache-key');
         $expected = [
             'bool' => [
                 'must' => [
-                    $terms->toArray(),
+                    $term->toArray(),
                 ],
                 'must_not' => [
-                    $termsNot->toArray(),
+                    $termNot->toArray(),
                 ],
                 '_cache' => true,
                 '_cache_key' => 'my-cache-key',

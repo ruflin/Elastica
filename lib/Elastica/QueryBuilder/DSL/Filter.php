@@ -29,7 +29,6 @@ use Elastica\Filter\Range;
 use Elastica\Filter\Regexp;
 use Elastica\Filter\Script;
 use Elastica\Filter\Term;
-use Elastica\Filter\Terms;
 use Elastica\Filter\Type;
 use Elastica\Query\AbstractQuery;
 use Elastica\QueryBuilder\DSL;
@@ -447,21 +446,6 @@ class Filter implements DSL
     public function term(array $term = [])
     {
         return new Term($term);
-    }
-
-    /**
-     * terms filter.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-filter.html
-     *
-     * @param string $key
-     * @param array  $terms
-     *
-     * @return Terms
-     */
-    public function terms($key = '', array $terms = [])
-    {
-        return new Terms($key, $terms);
     }
 
     /**
