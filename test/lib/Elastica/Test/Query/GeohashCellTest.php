@@ -42,6 +42,9 @@ class GeohashCellTest extends BaseTest
                 'geohash_prefix' => true,
             ],
         ]);
+
+        $this->_markSkipped50('Mapping definition for [pin] has unsupported parameters:  [geohash : true] [geohash_prefix : true]');
+
         $type->setMapping($mapping);
 
         $type->addDocument(new Document(1, ['pin' => '9q8yyzm0zpw8']));

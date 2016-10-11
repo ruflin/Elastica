@@ -18,10 +18,11 @@ class ReverseNestedTest extends BaseAggregationTest
             'comments' => [
                 'type' => 'nested',
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => ['type' => 'keyword'],
                     'body' => ['type' => 'string'],
                 ],
             ],
+            'tags' => ['type' => 'keyword'],
         ]);
         $type = $index->getType('test');
         $type->setMapping($mapping);

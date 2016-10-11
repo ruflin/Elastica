@@ -79,9 +79,11 @@ class ScriptTest extends BaseAggregationTest
 
         $expected = [
             $aggregation => [
-                'script' => $string,
-                'params' => $params,
-                'lang' => $lang,
+                'script' => [
+                    'inline' => $string,
+                    'params' => $params,
+                    'lang' => $lang,
+                ],
             ],
         ];
         $this->assertEquals($expected, $array);

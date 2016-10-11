@@ -17,6 +17,7 @@ class CompletionTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('song');
 
+        $this->_markSkipped50('Mapping definition for [fieldName] has unsupported parameters:  [payloads : true]');
         $type->setMapping([
             'fieldName' => [
                 'type' => 'completion',

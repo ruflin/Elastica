@@ -128,6 +128,11 @@ class Base extends \PHPUnit_Framework_TestCase
         return $index;
     }
 
+    protected function _markSkipped50($message)
+    {
+        $this->markTestSkipped('Skipped because of 5.0: '.$message);
+    }
+
     protected function _checkScriptInlineSetting()
     {
         $nodes = $this->_getClient()->getCluster()->getNodes();

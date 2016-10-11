@@ -36,8 +36,8 @@ class IndexTest extends BaseTest
 
         $this->assertEquals($storedMapping['test']['properties']['id']['type'], 'integer');
         $this->assertEquals($storedMapping['test']['properties']['id']['store'], true);
-        $this->assertEquals($storedMapping['test']['properties']['email']['type'], 'string');
-        $this->assertEquals($storedMapping['test']['properties']['username']['type'], 'string');
+        $this->assertEquals($storedMapping['test']['properties']['email']['type'], 'text');
+        $this->assertEquals($storedMapping['test']['properties']['username']['type'], 'text');
         $this->assertEquals($storedMapping['test']['properties']['test']['type'], 'integer');
 
         $result = $type->search('hanswurst');
@@ -713,8 +713,8 @@ class IndexTest extends BaseTest
 
         $this->assertEquals($indexMappings['test']['properties']['id']['type'], 'integer');
         $this->assertEquals($indexMappings['test']['properties']['id']['store'], true);
-        $this->assertEquals($indexMappings['test']['properties']['email']['type'], 'string');
-        $this->assertEquals($indexMappings['test']['properties']['username']['type'], 'string');
+        $this->assertEquals($indexMappings['test']['properties']['email']['type'], 'text');
+        $this->assertEquals($indexMappings['test']['properties']['username']['type'], 'text');
         $this->assertEquals($indexMappings['test']['properties']['test']['type'], 'integer');
     }
 
@@ -776,6 +776,8 @@ class IndexTest extends BaseTest
      */
     public function testCreateArray()
     {
+        $this->_markSkipped50('Routing options have changed');
+
         $client = $this->_getClient();
         $indexName = 'test';
 

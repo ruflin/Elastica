@@ -93,6 +93,7 @@ class BoolOrTest extends BaseTest
         $boolOr->addFilter(new \Elastica\Filter\Term(['categoryId' => '1']));
         $boolOr->addFilter(new \Elastica\Filter\Term(['categoryId' => '2']));
 
+        $this->_markSkipped50('[or] query malformed, no start_object after query name');
         $resultSet = $type->search($boolOr);
         $this->assertEquals(2, $resultSet->count());
     }

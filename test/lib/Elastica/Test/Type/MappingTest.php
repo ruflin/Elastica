@@ -23,9 +23,9 @@ class MappingTest extends BaseTest
 
         $mapping = new Mapping($type,
             [
-                'firstname' => ['type' => 'string', 'store' => true],
+                'firstname' => ['type' => 'text', 'store' => true],
                 // default is store => no expected
-                'lastname' => ['type' => 'string'],
+                'lastname' => ['type' => 'text'],
             ]
         );
         $mapping->disableSource();
@@ -45,7 +45,7 @@ class MappingTest extends BaseTest
         $index->refresh();
         $queryString = new QueryString('ruflin');
         $query = Query::create($queryString);
-        $query->setFields(['*']);
+        $query->setStoredFields(['*']);
 
         $resultSet = $type->search($query);
         $result = $resultSet->current();
@@ -194,8 +194,8 @@ class MappingTest extends BaseTest
             [
                 'note' => [
                     'properties' => [
-                        'titulo' => ['type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0],
-                        'contenido' => ['type' => 'string', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0],
+                        'titulo' => ['type' => 'text', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0],
+                        'contenido' => ['type' => 'text', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0],
                     ],
                 ],
             ]
@@ -234,6 +234,8 @@ class MappingTest extends BaseTest
     {
         $index = $this->_createIndex();
         $type = $index->getType('person');
+
+        $this->_markSkipped50('multi_field is not available anymore');
 
         // set a dynamic template "template_1" which creates a multi field for multi* matches.
         $mapping = new Mapping($type);

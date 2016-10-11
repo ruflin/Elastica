@@ -185,6 +185,8 @@ class SearchTest extends BaseTest
 
         $this->assertFalse($multiResultSet->hasError());
 
+        $this->_markSkipped50('No search type for [count]');
+
         $search1->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_COUNT);
         $search2->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_COUNT);
 
@@ -283,6 +285,8 @@ class SearchTest extends BaseTest
 
         $this->assertFalse($multiResultSet->hasError());
 
+        $this->_markSkipped50('No search type for [count]');
+
         $search1->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_COUNT);
         $search2->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_COUNT);
 
@@ -335,6 +339,7 @@ class SearchTest extends BaseTest
 
         $multiSearch->addSearch($searchBad);
 
+        $this->_markSkipped50('[range] query does not support [_id]');
         $multiResultSet = $multiSearch->search();
 
         $this->assertInstanceOf('Elastica\Multi\ResultSet', $multiResultSet);
@@ -384,6 +389,7 @@ class SearchTest extends BaseTest
 
         $multiSearch->addSearch($searchBad);
 
+        $this->_markSkipped50('[range] query does not support [_id]');
         $multiResultSet = $multiSearch->search();
 
         $this->assertInstanceOf('Elastica\Multi\ResultSet', $multiResultSet);
@@ -442,6 +448,7 @@ class SearchTest extends BaseTest
 
         $multiSearch->addSearch($search2);
 
+        $this->_markSkipped50('No search type for [count]');
         $multiSearch->setSearchType(Search::OPTION_SEARCH_TYPE_COUNT);
 
         $multiResultSet = $multiSearch->search();
@@ -526,6 +533,7 @@ class SearchTest extends BaseTest
 
         $multiSearch->addSearch($search2);
 
+        $this->_markSkipped50('No search type for [count]');
         $multiSearch->setSearchType(Search::OPTION_SEARCH_TYPE_COUNT);
 
         $multiResultSet = $multiSearch->search();

@@ -389,7 +389,7 @@ class BulkTest extends BaseTest
             $bulk->fail('3rd document create should produce error');
         } catch (ResponseException $e) {
             $error = $e->getResponseSet()->getFullError();
-            $this->assertContains('document_already_exists_exception', $error['type']);
+            $this->assertContains('version_conflict_engine_exception', $error['type']);
             $failures = $e->getFailures();
             $this->assertInternalType('array', $failures);
             $this->assertArrayHasKey(0, $failures);

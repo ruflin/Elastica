@@ -17,7 +17,7 @@ All library issues should go to the [issue tracker from github](https://github.c
 
 Compatibility
 -------------
-This release is compatible with all elasticsearch 2.x releases. It was tested with version 2.4.0
+This release is compatible with all elasticsearch 5.x releases. It was tested with version 5.0.0-rc1
 
 
 Contributing
@@ -29,5 +29,4 @@ Dependencies
 ------------
 | Project | Version | Required |
 |---------|---------|----------|
-|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/v2.4.0)|2.4.0|yes|
-|[Elasticsearch image plugin](https://github.com/Jmoati/elasticsearch-image/releases/tag/1.7.1)|1.7.1|no|
+|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/5.0)|5.0|yes|

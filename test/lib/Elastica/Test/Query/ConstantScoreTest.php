@@ -306,7 +306,7 @@ class ConstantScoreTest extends BaseTest
         $results = $resultSet->getResults();
 
         $this->assertEquals($resultSet->count(), 3);
-        $this->assertEquals($results[1]->getScore(), 1);
+        $this->assertEquals($results[1]->getScore(), 1.3);
     }
 
     /**

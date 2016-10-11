@@ -22,7 +22,7 @@ class InfoTest extends BaseTest
         $this->assertNull($info->get('os', 'mem', 'total'));
 
         // Load os infos
-        $info = new NodeInfo($node, ['os']);
+        $info = new NodeInfo($node, ['os', 'process', 'jvm']);
 
         $this->assertNotNull($info->get('os', 'name'));
         $this->assertNotNull($info->get('process', 'id'));
@@ -43,10 +43,10 @@ class InfoTest extends BaseTest
 
         $this->assertFalse($info->hasPlugin('foo'));
 
-        $data = $client->request('/_nodes')->getData();
+        $data = $client->request('_nodes/stats')->getData();
         $rawNode = array_pop($data['nodes']);
 
-        if (count($rawNode['plugins']) == 0) {
+        if (!array_key_exists('plugins', $rawNode) || count($rawNode['plugins']) == 0) {
             $this->markTestIncomplete('No plugins installed, can\'t test hasPlugin');
         }
 
@@ -79,7 +79,7 @@ class InfoTest extends BaseTest
     {
         $client = $this->_getClient();
 
-        $data = $client->request('/_nodes')->getData();
+        $data = $client->request('_nodes/stats')->getData();
         $rawNodes = $data['nodes'];
 
         $nodes = $client->getCluster()->getNodes();

@@ -482,13 +482,14 @@ class Search
         $this->setOptionsAndQuery(null, $query);
 
         $query = $this->getQuery();
+        $query->setSize(0);
         $path = $this->getPath();
 
         $response = $this->getClient()->request(
             $path,
             Request::GET,
             $query->toArray(),
-            [self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_COUNT]
+            [self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_QUERY_THEN_FETCH]
         );
         $resultSet = $this->_builder->buildResultSet($response, $query);
 

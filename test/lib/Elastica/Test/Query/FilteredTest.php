@@ -114,6 +114,7 @@ class FilteredTest extends BaseTest
         $resultSet = $type->search($queryString);
         $this->assertEquals(2, $resultSet->count());
 
+        $this->_markSkipped50('no [query] registered for [filtered]');
         $resultSet = $type->search($query1);
         $this->assertEquals(1, $resultSet->count());
 
@@ -173,6 +174,7 @@ class FilteredTest extends BaseTest
 
         $query = new Filtered(null, $filter);
 
+        $this->_markSkipped50('no [query] registered for [filtered]');
         $resultSet = $type->search($query);
         $this->assertEquals(1, $resultSet->count());
     }
@@ -196,6 +198,7 @@ class FilteredTest extends BaseTest
 
         $query = new Filtered($queryString);
 
+        $this->_markSkipped50('no [query] registered for [filtered]');
         $resultSet = $type->search($query);
         $this->assertEquals(1, $resultSet->count());
     }

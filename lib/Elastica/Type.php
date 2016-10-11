@@ -479,15 +479,9 @@ class Type implements SearchableInterface
      */
     public function deleteByQuery($query, array $options = [])
     {
-        if (is_string($query)) {
-            // query_string queries are not supported for delete by query operations
-            $options['q'] = $query;
-
-            return $this->request('_query', Request::DELETE, [], $options);
-        }
         $query = Query::create($query);
 
-        return $this->request('_query', Request::DELETE, ['query' => is_array($query) ? $query : $query->toArray()], $options);
+        return $this->request('_delete_by_query', Request::POST, is_array($query) ? $query : $query->toArray(), $options);
     }
 
     /**

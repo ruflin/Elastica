@@ -166,6 +166,7 @@ class SettingsTest extends BaseTest
 
         $settings = $index->getSettings();
 
+        $this->_markSkipped50('unknown setting [index.merge.policy.merge_factor] did you mean [index.merge.policy.max_merge_at_once]');
         $response = $settings->setMergePolicy('merge_factor', 15);
         $this->assertEquals(15, $settings->getMergePolicy('merge_factor'));
         $this->assertInstanceOf('Elastica\Response', $response);
@@ -193,6 +194,7 @@ class SettingsTest extends BaseTest
 
         $settings = $index->getSettings();
 
+        $this->_markSkipped50('unknown setting [index.merge.policy.type] please check that any required plugins are installed,');
         $settings->setMergePolicyType('log_byte_size');
         $this->assertEquals('log_byte_size', $settings->getMergePolicyType());
 

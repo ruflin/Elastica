@@ -16,7 +16,7 @@ class ClusterTest extends BaseTest
 
         $cluster = new Cluster($client);
 
-        $data = $client->request('/_nodes')->getData();
+        $data = $client->request('_nodes')->getData();
         $rawNodes = $data['nodes'];
 
         $rawNodeNames = [];

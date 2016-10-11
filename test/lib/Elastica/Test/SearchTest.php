@@ -285,6 +285,7 @@ class SearchTest extends BaseTest
 
         $search = new Search($client);
         $search->addIndex($index)->addType($type);
+        $this->_markSkipped50(' No search type for [scan]');
         $result = $search->search([], [
             Search::OPTION_SEARCH_TYPE => Search::OPTION_SEARCH_TYPE_SCAN,
             Search::OPTION_SCROLL => '5m',
@@ -422,6 +423,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(10, $resultSet->count());
 
         //Search types
+        $this->_markSkipped50('No search type for [count]');
         $resultSet = $search->search('test', ['limit' => 5, 'search_type' => 'count']);
         $this->assertTrue(($resultSet->count() === 0) && $resultSet->getTotalHits() === 11);
 

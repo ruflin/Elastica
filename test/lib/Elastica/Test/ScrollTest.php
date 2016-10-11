@@ -64,7 +64,6 @@ class ScrollTest extends Base
 
         $search->setOption(Search::OPTION_SCROLL, 'must');
         $search->setOption(Search::OPTION_SCROLL_ID, 'not');
-        $search->setOption(Search::OPTION_SEARCH_TYPE, 'change');
         $old = $search->getOptions();
 
         $scroll = new Scroll($search);

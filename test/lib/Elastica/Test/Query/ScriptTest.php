@@ -21,7 +21,9 @@ class ScriptTest extends BaseTest
 
         $expected = [
             'script' => [
-                'script' => $string,
+                'script' => [
+                    'inline' => $string,
+                ],
             ],
         ];
         $this->assertEquals($expected, $array);
@@ -47,9 +49,11 @@ class ScriptTest extends BaseTest
 
         $expected = [
             'script' => [
-                'script' => $string,
-                'params' => $params,
-                'lang' => $lang,
+                'script' => [
+                    'inline' => $string,
+                    'params' => $params,
+                    'lang' => $lang,
+                ],
             ],
         ];
         $this->assertEquals($expected, $array);
