@@ -12,6 +12,8 @@ All notable changes to this project will be documented in this file based on the
 ### Bugfixes
 
 ### Added
+- Elastica\QueryBuilder\DSL\Query::exists
+- Elastica\QueryBuilder\DSL\Query::type
 
 ### Improvements
 - Add a constant for the expression language.

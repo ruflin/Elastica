@@ -127,6 +127,9 @@ class QueryTest extends AbstractDSLTest
             'Elastica\Query\GeoDistance',
             ['key', ['lat' => 1, 'lon' => 0], 'distance']
         );
+        $this->_assertImplemented($queryDSL, 'exists', 'Elastica\Query\Exists', ['field']);
+        $this->_assertImplemented($queryDSL, 'type', 'Elastica\Query\Type', []);
+        $this->_assertImplemented($queryDSL, 'type', 'Elastica\Query\Type', ['type']);
 
         $this->_assertNotImplemented($queryDSL, 'custom_boost_factor', []);
         $this->_assertNotImplemented($queryDSL, 'custom_filters_score', []);
