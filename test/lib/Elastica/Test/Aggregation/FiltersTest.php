@@ -4,8 +4,6 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\Filters;
 use Elastica\Document;
-use Elastica\Filter\Exists;
-use Elastica\Filter\Term;
 use Elastica\Query;
 
 class FiltersTest extends BaseAggregationTest
@@ -24,38 +22,6 @@ class FiltersTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testAddFilterInvalid()
-    {
-        $filters = new Filters('test');
-        $filters->addFilter($this);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testSetFilterWithLegacyFilterDeprecated()
-    {
-        $this->hideDeprecated();
-        $existsFilter = new Exists('test');
-        $this->showDeprecated();
-
-        $agg = new Filters('test');
-
-        $errorsCollector = $this->startCollectErrors();
-        $agg->addFilter($existsFilter);
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Aggregation\Filters\addFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            ]
-        );
     }
 
     /**
@@ -129,10 +95,10 @@ class FiltersTest extends BaseAggregationTest
         $agg = new Filters('by_color');
 
         $this->hideDeprecated();
-        $agg->addFilter(new Term(['color' => '']), '');
-        $agg->addFilter(new Term(['color' => '0']), '0');
-        $agg->addFilter(new Term(['color' => 'blue']), 'blue');
-        $agg->addFilter(new Term(['color' => 'red']), 'red');
+        $agg->addFilter(new Query\Term(['color' => '']), '');
+        $agg->addFilter(new Query\Term(['color' => '0']), '0');
+        $agg->addFilter(new Query\Term(['color' => 'blue']), 'blue');
+        $agg->addFilter(new Query\Term(['color' => 'red']), 'red');
         $this->showDeprecated();
 
         $avg = new Avg('avg_price');
@@ -164,7 +130,7 @@ class FiltersTest extends BaseAggregationTest
     {
         $agg = new Filters('by_color');
         $this->hideDeprecated();
-        $agg->addFilter(new Term(['color' => '0']), 0);
+        $agg->addFilter(new Query\Term(['color' => '0']), 0);
         $this->showDeprecated();
     }
 
@@ -189,8 +155,8 @@ class FiltersTest extends BaseAggregationTest
     {
         $agg = new Filters('by_color');
         $this->hideDeprecated();
-        $agg->addFilter(new Term(['color' => '0']), '0');
-        $agg->addFilter(new Term(['color' => '0']));
+        $agg->addFilter(new Query\Term(['color' => '0']), '0');
+        $agg->addFilter(new Query\Term(['color' => '0']));
         $this->showDeprecated();
     }
 
@@ -217,8 +183,8 @@ class FiltersTest extends BaseAggregationTest
         $agg = new Filters('by_color');
 
         $this->hideDeprecated();
-        $agg->addFilter(new Term(['color' => '0']));
-        $agg->addFilter(new Term(['color' => '0']), '0');
+        $agg->addFilter(new Query\Term(['color' => '0']));
+        $agg->addFilter(new Query\Term(['color' => '0']), '0');
         $this->showDeprecated();
     }
 
@@ -279,8 +245,8 @@ class FiltersTest extends BaseAggregationTest
         $agg = new Filters('by_color');
 
         $this->hideDeprecated();
-        $agg->addFilter(new Term(['color' => 'blue']));
-        $agg->addFilter(new Term(['color' => 'red']));
+        $agg->addFilter(new Query\Term(['color' => 'blue']));
+        $agg->addFilter(new Query\Term(['color' => 'red']));
         $this->showDeprecated();
 
         $avg = new Avg('avg_price');
@@ -325,8 +291,8 @@ class FiltersTest extends BaseAggregationTest
     {
         $agg = new Filters('by_color');
         $this->hideDeprecated();
-        $agg->addFilter(new Term(['color' => 'blue']), 'blue');
-        $agg->addFilter(new Term(['color' => 'red']), 'red');
+        $agg->addFilter(new Query\Term(['color' => 'blue']), 'blue');
+        $agg->addFilter(new Query\Term(['color' => 'red']), 'red');
         $this->showDeprecated();
 
         $avg = new Avg('avg_price');

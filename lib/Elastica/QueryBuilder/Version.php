@@ -49,8 +49,6 @@ abstract class Version
         switch ($type) {
             case DSL::TYPE_QUERY:
                 return in_array($name, $this->queries);
-            case DSL::TYPE_FILTER:
-                return in_array($name, $this->filters);
             case DSL::TYPE_AGGREGATION:
                 return in_array($name, $this->aggregations);
             case DSL::TYPE_SUGGEST:
@@ -67,14 +65,6 @@ abstract class Version
     public function getAggregations()
     {
         return $this->aggregations;
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getFilters()
-    {
-        return $this->filters;
     }
 
     /**

@@ -33,7 +33,6 @@ class QueryBuilder
         $this->_version = $version ?: new Version\Latest();
 
         $this->addDSL(new DSL\Query());
-        $this->addDSL(new DSL\Filter());
         $this->addDSL(new DSL\Aggregation());
         $this->addDSL(new DSL\Suggest());
     }
@@ -84,7 +83,7 @@ class QueryBuilder
     /**
      * Filter DSL.
      *
-     * @return DSL\Filter
+     * @return DSL\Query
      */
     public function filter()
     {

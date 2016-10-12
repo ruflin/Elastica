@@ -2,9 +2,9 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Filter\Term;
 use Elastica\Query;
 use Elastica\Query\Match;
+use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 
 class PostFilterTest extends BaseTest
@@ -22,54 +22,6 @@ class PostFilterTest extends BaseTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group unit
-     */
-    public function testArrayDeprecated()
-    {
-        $errorsCollector = $this->startCollectErrors();
-
-        $query = new Query();
-        $query->setPostFilter(['a']);
-
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractQuery instead.',
-            ]
-        );
-    }
-
-    /**
-     * @group unit
-     */
-    public function testFilterDeprecated()
-    {
-        $errorsCollector = $this->startCollectErrors();
-
-        $query = new Query();
-        $query->setPostFilter(new Term());
-
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            ]
-        );
-    }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testFilterInvalid()
-    {
-        $query = new Query();
-        $query->setPostFilter($this);
     }
 
     /**

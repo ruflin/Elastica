@@ -2,89 +2,13 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Filter\Exists;
-use Elastica\Filter\Term;
 use Elastica\Query\Filtered;
 use Elastica\Query\QueryString;
+use Elastica\Query\Term;
 use Elastica\Test\DeprecatedClassBase as BaseTest;
 
 class FilteredTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
-    public function testDeprecated()
-    {
-        $reflection = new \ReflectionClass(get_class(new Filtered()));
-
-        $this->assertFileDeprecated(
-            $reflection->getFileName(),
-            'Use BoolQuery instead. Filtered query is deprecated since ES 2.0.0-beta1 and this class will be removed in further Elastica releases.'
-        );
-    }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testConstructInvalid()
-    {
-        new Filtered(null, $this);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testConstructWithLegacyFilterDeprecated()
-    {
-        $this->hideDeprecated();
-        $existsFilter = new Exists('test');
-        $this->showDeprecated();
-
-        $errorsCollector = $this->startCollectErrors();
-        new Filtered(null, $existsFilter);
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Query\Filtered passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-                'Deprecated: Elastica\Query\Filtered::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            ]
-        );
-    }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testSetFilterInvalid()
-    {
-        $query = new Filtered();
-        $query->setFilter($this);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testSetFilterWithLegacyFilterDeprecated()
-    {
-        $this->hideDeprecated();
-        $existsFilter = new Exists('test');
-        $this->showDeprecated();
-
-        $query = new Filtered();
-
-        $errorsCollector = $this->startCollectErrors();
-        $query->setFilter($existsFilter);
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Query\Filtered::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            ]
-        );
-    }
-
     /**
      * @group functional
      */

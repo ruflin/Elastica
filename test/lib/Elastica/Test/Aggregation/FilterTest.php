@@ -4,11 +4,9 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\Filter;
 use Elastica\Document;
-use Elastica\Filter\Exists;
-use Elastica\Filter\Range;
-use Elastica\Filter\Term;
 use Elastica\Query;
 use Elastica\Query\Range as RangeQuery;
+use Elastica\Query\Term;
 use Elastica\Query\Term as TermQuery;
 
 class FilterTest extends BaseAggregationTest
@@ -31,68 +29,6 @@ class FilterTest extends BaseAggregationTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testConstructorFilterInvalid()
-    {
-        new Filter('test', $this);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testConstructorWithLegacyFilterDeprecated()
-    {
-        $this->hideDeprecated();
-        $existsFilter = new Exists('test');
-        $this->showDeprecated();
-
-        $errorsCollector = $this->startCollectErrors();
-        new Filter('test', $existsFilter);
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Aggregation\Filter passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-                'Deprecated: Elastica\Aggregation\Filter\setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            ]
-        );
-    }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testSetFilterInvalid()
-    {
-        $agg = new Filter('test');
-        $agg->setFilter($this);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testSetFilterWithLegacyFilterDeprecated()
-    {
-        $this->hideDeprecated();
-        $existsFilter = new Exists('test');
-        $this->showDeprecated();
-
-        $agg = new Filter('test');
-
-        $errorsCollector = $this->startCollectErrors();
-        $agg->setFilter($existsFilter);
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Aggregation\Filter\setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            ]
-        );
-    }
-
-    /**
-     * @group unit
      */
     public function testToArray()
     {
@@ -105,29 +41,6 @@ class FilterTest extends BaseAggregationTest
 
         $agg = new Filter('in_stock_products');
         $agg->setFilter(new RangeQuery('stock', ['gt' => 0]));
-        $avg = new Avg('avg_price');
-        $avg->setField('price');
-        $agg->addAggregation($avg);
-
-        $this->assertEquals($expected, $agg->toArray());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testToArrayWithLegacy()
-    {
-        $expected = [
-            'filter' => ['range' => ['stock' => ['gt' => 0]]],
-            'aggs' => [
-                'avg_price' => ['avg' => ['field' => 'price']],
-            ],
-        ];
-
-        $agg = new Filter('in_stock_products');
-        $this->hideDeprecated();
-        $agg->setFilter(new Range('stock', ['gt' => 0]));
-        $this->showDeprecated();
         $avg = new Avg('avg_price');
         $avg->setField('price');
         $agg->addAggregation($avg);

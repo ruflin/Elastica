@@ -14,19 +14,12 @@ class VersionTest extends BaseTest
     {
         $dsl = [
             new DSL\Query(),
-            new DSL\Filter(),
             new DSL\Aggregation(),
             new DSL\Suggest(),
         ];
 
         $versions = [
-            new Version\Version090(),
-            new Version\Version100(),
-            new Version\Version110(),
-            new Version\Version120(),
-            new Version\Version130(),
-            new Version\Version140(),
-            new Version\Version150(),
+            new Version\Version240(),
             new Version\Latest(),
         ];
 
@@ -44,23 +37,16 @@ class VersionTest extends BaseTest
             );
         }
 
-        foreach ($version->getFilters() as $filter) {
-            $this->assertTrue(
-                method_exists($dsl[1], $filter),
-                'filter "'.$filter.'" in '.get_class($version).' must be defined in '.get_class($dsl[1])
-            );
-        }
-
         foreach ($version->getAggregations() as $aggregation) {
             $this->assertTrue(
-                method_exists($dsl[2], $aggregation),
+                method_exists($dsl[1], $aggregation),
                 'aggregation "'.$aggregation.'" in '.get_class($version).' must be defined in '.get_class($dsl[2])
             );
         }
 
         foreach ($version->getSuggesters() as $suggester) {
             $this->assertTrue(
-                method_exists($dsl[3], $suggester),
+                method_exists($dsl[2], $suggester),
                 'suggester "'.$suggester.'" in '.get_class($version).' must be defined in '.get_class($dsl[3])
             );
         }

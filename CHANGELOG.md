@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file based on the
 - Composer installations will no longer include tests and other development files. 
 - Replace flush refresh param with a options array
 - Rename Mapping::setFields to Mapping::setStoredFields
+- Removing all deprecated filters including tests. Use queries instead.
+- Remove deprecated Elastica\Script*.php classes. Use Elastica\Script\* instead.
 
 ### Bugfixes
 
