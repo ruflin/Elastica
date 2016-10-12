@@ -3,6 +3,8 @@ namespace Elastica\Filter;
 
 trigger_error('Deprecated: Filters are deprecated. Use queries in filter context. See https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-filters.html', E_USER_DEPRECATED);
 
+use Elastica\Exception\InvalidException;
+
 /**
  * Range Filter.
  *
@@ -53,11 +55,11 @@ class Range extends AbstractFilter
      *
      * @param string $execution Options: "index" or "fielddata"
      *
-     * @return $this
+     * @throws \Elastica\Exception\InvalidException If you call this method.
      */
     public function setExecution($execution)
     {
-        return $this->setParam('execution', (string) $execution);
+        throw new InvalidException('The "execution" option for "range filter" was removed since Elasticsearch 2.0.');
     }
 
     /**
