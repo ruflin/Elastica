@@ -3,7 +3,7 @@ namespace Elastica\Test\Filter;
 
 use Elastica\Document;
 use Elastica\Filter\Nested;
-use Elastica\Filter\Terms;
+use Elastica\Filter\Term;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type\Mapping;
@@ -58,16 +58,16 @@ class NestedFilterWithSetFilterTest extends BaseTest
         $filter = new Nested();
         $this->showDeprecated();
         $this->assertEquals(['nested' => []], $filter->toArray());
-        $query = new Terms();
-        $query->setTerms('hobby', ['guitar']);
+        $query = new Term();
+        $query->setTerm('hobby', 'guitar');
         $filter->setPath('hobbies');
         $filter->setFilter($query);
 
         $expectedArray = [
             'nested' => [
                 'path' => 'hobbies',
-                'filter' => ['terms' => [
-                    'hobby' => ['guitar'],
+                'filter' => ['term' => [
+                    'hobby' => 'guitar',
                 ]],
             ],
         ];
@@ -84,8 +84,8 @@ class NestedFilterWithSetFilterTest extends BaseTest
 
         $filter = new Nested();
         $this->assertEquals(['nested' => []], $filter->toArray());
-        $query = new Terms();
-        $query->setTerms('hobbies.hobby', ['guitar']);
+        $query = new Term();
+        $query->setTerm('hobbies.hobby', 'guitar');
         $filter->setPath('hobbies');
         $filter->setFilter($query);
 
@@ -101,8 +101,8 @@ class NestedFilterWithSetFilterTest extends BaseTest
 
         $filter = new Nested();
         $this->assertEquals(['nested' => []], $filter->toArray());
-        $query = new Terms();
-        $query->setTerms('hobbies.hobby', ['opensource']);
+        $query = new Term();
+        $query->setTerm('hobbies.hobby', 'opensource');
         $filter->setPath('hobbies');
         $filter->setFilter($query);
 

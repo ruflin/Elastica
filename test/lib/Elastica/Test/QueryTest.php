@@ -6,6 +6,7 @@ use Elastica\Exception\InvalidException;
 use Elastica\Filter\Exists;
 use Elastica\Query;
 use Elastica\Query\Term;
+use Elastica\Query\Terms;
 use Elastica\Query\Text;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
@@ -482,7 +483,7 @@ class QueryTest extends BaseTest
         $this->hideDeprecated();
 
         $query = new Query();
-        $postFilter = new \Elastica\Filter\Terms();
+        $postFilter = new Terms();
         $postFilter->setTerms('key', ['term']);
         $query->setPostFilter($postFilter);
 
