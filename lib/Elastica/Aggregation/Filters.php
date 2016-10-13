@@ -2,7 +2,6 @@
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
-use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
 
 /**
@@ -30,14 +29,8 @@ class Filters extends AbstractAggregation
      *
      * @return $this
      */
-    public function addFilter($filter, $name = null)
+    public function addFilter(AbstractQuery $filter, $name = null)
     {
-        if ($filter instanceof AbstractFilter) {
-            trigger_error('Deprecated: Elastica\Aggregation\Filters\addFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.', E_USER_DEPRECATED);
-        } elseif (!($filter instanceof AbstractQuery)) {
-            throw new InvalidException('Filter must be instance of AbstractQuery');
-        }
-
         if (null !== $name && !is_string($name)) {
             throw new InvalidException('Name must be a string');
         }

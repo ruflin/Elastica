@@ -3,7 +3,6 @@ namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Exception\DeprecatedException;
 use Elastica\Exception\NotImplementedException;
-use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Boosting;
@@ -11,7 +10,6 @@ use Elastica\Query\Common;
 use Elastica\Query\ConstantScore;
 use Elastica\Query\DisMax;
 use Elastica\Query\Exists;
-use Elastica\Query\Filtered;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\Fuzzy;
 use Elastica\Query\GeoDistance;
@@ -156,7 +154,7 @@ class Query implements DSL
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html
      *
-     * @param null|\Elastica\Filter\AbstractFilter|array $filter
+     * @param null|\Elastica\Query\AbstractQuery|array $filter
      *
      * @return ConstantScore
      */
@@ -185,25 +183,6 @@ class Query implements DSL
     public function field()
     {
         throw new NotImplementedException();
-    }
-
-    /**
-     * filtered query.
-     *
-     * @deprecated Use bool() instead. Filtered query is deprecated since ES 2.0.0-beta1 and this method will be removed in further Elastica releases.
-     *
-     * @param AbstractFilter $filter
-     * @param AbstractQuery  $query
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-filtered-query.html
-     *
-     * @return Filtered
-     */
-    public function filtered(AbstractQuery $query = null, $filter = null)
-    {
-        trigger_error('Use bool() instead. Filtered query is deprecated since ES 2.0.0-beta1 and this method will be removed in further Elastica releases.', E_USER_DEPRECATED);
-
-        return new Filtered($query, $filter);
     }
 
     /**

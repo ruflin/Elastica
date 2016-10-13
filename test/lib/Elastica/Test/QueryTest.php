@@ -3,7 +3,6 @@ namespace Elastica\Test;
 
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
-use Elastica\Filter\Exists;
 use Elastica\Query;
 use Elastica\Query\Term;
 use Elastica\Query\Text;
@@ -15,93 +14,6 @@ use Elastica\Type;
 
 class QueryTest extends BaseTest
 {
-    /**
-     * @group unit
-     */
-    public function testCreateWithLegacyFilterDeprecated()
-    {
-        $this->hideDeprecated();
-        $existsFilter = new Exists('test');
-        $this->showDeprecated();
-
-        $errorsCollector = $this->startCollectErrors();
-        Query::create($existsFilter);
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Query::create() passing filter is deprecated. Create query and use setPostFilter with AbstractQuery instead.',
-                'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            ]
-        );
-    }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testSetFilterInvalid()
-    {
-        $query = new Query();
-        $query->setFilter($this);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testSetFilterWithLegacyFilterDeprecated()
-    {
-        $this->hideDeprecated();
-        $existsFilter = new Exists('test');
-        $this->showDeprecated();
-
-        $query = new Query();
-
-        $errorsCollector = $this->startCollectErrors();
-        $query->setFilter($existsFilter);
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Query::setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-                'Deprecated: Elastica\Query::setFilter() is deprecated and will be removed in further Elastica releases. Use Elastica\Query::setPostFilter() instead.',
-                'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            ]
-        );
-    }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testSetPostFilterInvalid()
-    {
-        $query = new Query();
-        $query->setPostFilter($this);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testSetPostFilterWithLegacyFilterDeprecated()
-    {
-        $this->hideDeprecated();
-        $existsFilter = new Exists('test');
-        $this->showDeprecated();
-
-        $query = new Query();
-
-        $errorsCollector = $this->startCollectErrors();
-        $query->setPostFilter($existsFilter);
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Query::setPostFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            ]
-        );
-    }
-
     /**
      * @group unit
      */
@@ -471,27 +383,6 @@ class QueryTest extends BaseTest
         $anotherQuery = new Query();
         $anotherQuery->setPostFilter($postFilter);
 
-        $this->assertEquals($query->toArray(), $anotherQuery->toArray());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testLegacySetPostFilterToArrayCast()
-    {
-        $this->hideDeprecated();
-
-        $query = new Query();
-        $postFilter = new \Elastica\Filter\Terms();
-        $postFilter->setTerms('key', ['term']);
-        $query->setPostFilter($postFilter);
-
-        $postFilter->setTerms('another key', ['another term']);
-
-        $anotherQuery = new Query();
-        $anotherQuery->setPostFilter($postFilter);
-
-        $this->showDeprecated();
         $this->assertEquals($query->toArray(), $anotherQuery->toArray());
     }
 

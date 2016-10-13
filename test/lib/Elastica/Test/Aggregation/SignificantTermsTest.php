@@ -3,10 +3,9 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\SignificantTerms;
 use Elastica\Document;
-use Elastica\Filter\Exists;
-use Elastica\Filter\Terms as TermsFilter;
 use Elastica\Query;
 use Elastica\Query\Terms;
+use Elastica\Query\Terms as TermsQuery;
 use Elastica\Type\Mapping;
 
 class SignificantTermsTest extends BaseAggregationTest
@@ -31,38 +30,6 @@ class SignificantTermsTest extends BaseAggregationTest
         $index->refresh();
 
         return $index;
-    }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testSetBackgroundFilterInvalid()
-    {
-        $agg = new SignificantTerms('test');
-        $agg->setBackgroundFilter($this);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testSetBackgroundFilterWithLegacyFilterDeprecated()
-    {
-        $this->hideDeprecated();
-        $existsFilter = new Exists('test');
-        $this->showDeprecated();
-
-        $agg = new SignificantTerms('test');
-
-        $errorsCollector = $this->startCollectErrors();
-        $agg->setBackgroundFilter($existsFilter);
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Aggregation\SignificantTerms::setBackgroundFilter passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.',
-            ]
-        );
     }
 
     /**
@@ -121,7 +88,7 @@ class SignificantTermsTest extends BaseAggregationTest
         $agg = new SignificantTerms('significantTerms');
         $agg->setField('temperature');
         $agg->setSize(1);
-        $termsFilter = new TermsFilter();
+        $termsFilter = new TermsQuery();
         $termsFilter->setTerms('color', ['blue', 'red', 'green', 'yellow']);
         $agg->setBackgroundFilter($termsFilter);
 

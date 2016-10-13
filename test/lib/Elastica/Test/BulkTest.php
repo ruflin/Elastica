@@ -7,7 +7,7 @@ use Elastica\Bulk\Action\AbstractDocument;
 use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\NotFoundException;
-use Elastica\Filter\Script;
+use Elastica\Query\Script;
 use Elastica\Test\Base as BaseTest;
 
 class BulkTest extends BaseTest

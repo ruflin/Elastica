@@ -2,7 +2,6 @@
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
-use Elastica\Filter\AbstractFilter;
 
 /**
  * Bool query.
@@ -56,14 +55,8 @@ class BoolQuery extends AbstractQuery
      *
      * @return $this
      */
-    public function addFilter($filter)
+    public function addFilter(AbstractQuery $filter)
     {
-        if ($filter instanceof AbstractFilter) {
-            trigger_error('Deprecated: Elastica\Query\BoolQuery::addFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
-        } elseif (!($filter instanceof AbstractQuery)) {
-            throw new InvalidException('Filter must be instance of AbstractQuery');
-        }
-
         return $this->addParam('filter', $filter);
     }
 

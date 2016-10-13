@@ -2,8 +2,6 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Filter\Exists;
-use Elastica\Filter\Term as TermFilter;
 use Elastica\Index;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Ids;
@@ -14,38 +12,6 @@ use Elastica\Type;
 
 class BoolQueryTest extends BaseTest
 {
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testAddFilterInvalid()
-    {
-        $query = new BoolQuery();
-        $query->addFilter($this);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testAddFilterWithLegacyFilterDeprecated()
-    {
-        $this->hideDeprecated();
-        $existsFilter = new Exists('test');
-        $this->showDeprecated();
-
-        $query = new BoolQuery('test');
-
-        $errorsCollector = $this->startCollectErrors();
-        $query->addFilter($existsFilter);
-        $this->finishCollectErrors();
-
-        $errorsCollector->assertOnlyDeprecatedErrors(
-            [
-                'Deprecated: Elastica\Query\BoolQuery::addFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.',
-            ]
-        );
-    }
-
     /**
      * @group unit
      */
@@ -110,10 +76,10 @@ class BoolQueryTest extends BaseTest
         $idsQuery3->setIds(3);
 
         $this->hideDeprecated();
-        $filter1 = new TermFilter();
+        $filter1 = new Term();
         $filter1->setTerm('test', '1');
 
-        $filter2 = new TermFilter();
+        $filter2 = new Term();
         $filter2->setTerm('username', 'ruth');
         $this->showDeprecated();
 
@@ -254,7 +220,7 @@ class BoolQueryTest extends BaseTest
         $this->assertEquals(3, $resultSet->count());
 
         $this->hideDeprecated();
-        $termFilter = new TermFilter(['test' => '4']);
+        $termFilter = new Term(['test' => '4']);
         $boolQuery->addFilter($termFilter);
         $this->showDeprecated();
         $resultSet = $type->search($boolQuery);

@@ -2,7 +2,6 @@
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
-use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
 
 /**
@@ -16,17 +15,11 @@ class Filter extends AbstractAggregation
      * @param string        $name
      * @param AbstractQuery $filter
      */
-    public function __construct($name, $filter = null)
+    public function __construct($name, AbstractQuery $filter = null)
     {
         parent::__construct($name);
 
         if ($filter !== null) {
-            if ($filter instanceof AbstractFilter) {
-                trigger_error('Deprecated: Elastica\Aggregation\Filter passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.', E_USER_DEPRECATED);
-            } elseif (!($filter instanceof AbstractQuery)) {
-                throw new InvalidException('Filter must be instance of AbstractQuery');
-            }
-
             $this->setFilter($filter);
         }
     }
@@ -38,14 +31,8 @@ class Filter extends AbstractAggregation
      *
      * @return $this
      */
-    public function setFilter($filter)
+    public function setFilter(AbstractQuery $filter)
     {
-        if ($filter instanceof AbstractFilter) {
-            trigger_error('Deprecated: Elastica\Aggregation\Filter\setFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.', E_USER_DEPRECATED);
-        } elseif (!($filter instanceof AbstractQuery)) {
-            throw new InvalidException('Filter must be instance of AbstractQuery');
-        }
-
         return $this->setParam('filter', $filter);
     }
 

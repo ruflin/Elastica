@@ -1,7 +1,7 @@
 <?php
 namespace Elastica\Test\QueryBuilder\DSL;
 
-use Elastica\Filter\Exists;
+use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\QueryBuilder\DSL;
 
@@ -16,16 +16,6 @@ class AggregationTest extends AbstractDSLTest
 
         $this->assertInstanceOf('Elastica\QueryBuilder\DSL', $aggregationDSL);
         $this->assertEquals(DSL::TYPE_AGGREGATION, $aggregationDSL->getType());
-    }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testFilteredInvalid()
-    {
-        $queryDSL = new DSL\Aggregation();
-        $queryDSL->filter(null, $this);
     }
 
     /**
