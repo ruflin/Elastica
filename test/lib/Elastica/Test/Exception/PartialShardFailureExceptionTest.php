@@ -34,7 +34,7 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
 
         $query = Query::create([
             'query' => [
-                'filtered' => [
+                'bool' => [
                     'filter' => [
                         'script' => [
                             'script' => 'doc["undefined"] > 8', // compiles, but doesn't work
