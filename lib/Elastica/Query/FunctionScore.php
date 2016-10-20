@@ -177,10 +177,12 @@ class FunctionScore extends AbstractQuery
     /**
      * @param float         $weight the weight of the function
      * @param AbstractQuery $filter a filter associated with this function
+     *
+     * @return $this
      */
     public function addWeightFunction($weight, AbstractQuery $filter = null)
     {
-        $this->addFunction('weight', $weight, $filter);
+        return $this->addFunction('weight', $weight, $filter);
     }
 
     /**
@@ -189,10 +191,12 @@ class FunctionScore extends AbstractQuery
      * @param number        $seed   the seed value
      * @param AbstractQuery $filter a filter associated with this function
      * @param float         $weight an optional boost value associated with this function
+     *
+     * @return $this
      */
     public function addRandomScoreFunction($seed, AbstractQuery $filter = null, $weight = null)
     {
-        $this->addFunction('random_score', ['seed' => $seed], $filter, $weight);
+        return $this->addFunction('random_score', ['seed' => $seed], $filter, $weight);
     }
 
     /**
