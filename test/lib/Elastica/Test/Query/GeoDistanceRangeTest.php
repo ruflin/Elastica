@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -40,34 +41,24 @@ class GeoDistanceRangeTest extends BaseTest
         $doc2->addGeoPoint('point', 30, 40);
         $type->addDocument($doc2);
 
-        $index->optimize();
         $index->refresh();
-
-        // Only one point should be in radius
-        $query = new Query();
-        $geoQuery = new GeoDistanceRange(
-            'point',
-            ['lat' => 30, 'lon' => 40],
-            ['from' => '0km', 'to' => '2km']
-        );
+        // Set geo distance sorting with coordinates near to first doc.
+        $geoSort =
+            ['_geo_distance' => [
+                'point' => [
+                    'lat' => 15,
+                    'lon' => 20,
+                ],
+                'order' => 'asc',
+                'unit' => 'km',
+                'distance_type' => 'plane',
+            ]];
 
         $query = new Query(new MatchAll());
-        $query->setPostFilter($geoQuery);
-        $this->_markSkipped50('[geo_distance_range] queries are no longer supported for geo_point field types. Use geo_distance sort or aggregations ');
-        $this->assertEquals(1, $type->search($query)->count());
-
-        // Both points should be inside
-        $query = new Query();
-        $geoQuery = new GeoDistanceRange(
-            'point',
-            ['lat' => 30, 'lon' => 40],
-            ['gte' => '0km', 'lte' => '4000km']
-        );
-        $query = new Query(new MatchAll());
-        $query->setPostFilter($geoQuery);
-        $index->refresh();
-
-        $this->assertEquals(2, $type->search($query)->count());
+        $query->setSort($geoSort);
+        //doc #1 are the nearest to sorting point and must be first in result
+        $this->assertEquals(1, $type->search($query)->current()->getId());
+        $this->assertEquals(2, $type->search($query)->next()->getId());
     }
 
     /**
