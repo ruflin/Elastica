@@ -385,28 +385,6 @@ class Builder extends AbstractQuery
     }
 
     /**
-     *  Query.
-     *
-     * @return $this
-     */
-    public function filteredQuery()
-    {
-        return $this->fieldOpen('filtered');
-    }
-
-    /**
-     * Close a 'filtered_query' block.
-     *
-     * Alias of close() for ease of reading in source.
-     *
-     * @return $this
-     */
-    public function filteredQueryClose()
-    {
-        return $this->fieldClose();
-    }
-
-    /**
      * Set the from parameter (offset).
      *
      * @param int $value Result number to start from.

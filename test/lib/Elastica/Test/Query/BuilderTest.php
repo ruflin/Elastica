@@ -109,7 +109,6 @@ class BuilderTest extends BaseTest
             ['constantScore', 'constant_score'],
             ['disMax', 'dis_max'],
             ['filter', 'filter'],
-            ['filteredQuery', 'filtered'],
             ['must', 'must'],
             ['mustNot', 'must_not'],
             ['prefix', 'prefix'],
@@ -137,8 +136,6 @@ class BuilderTest extends BaseTest
      * @covers \Elastica\Query\Builder::disMaxClose
      * @covers \Elastica\Query\Builder::filter
      * @covers \Elastica\Query\Builder::filterClose
-     * @covers \Elastica\Query\Builder::filteredQuery
-     * @covers \Elastica\Query\Builder::filteredQueryClose
      * @covers \Elastica\Query\Builder::must
      * @covers \Elastica\Query\Builder::mustClose
      * @covers \Elastica\Query\Builder::mustNot
