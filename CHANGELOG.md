@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file based on the
 - Remove deprecated Elastica\Script*.php classes. Use Elastica\Script\* instead.
 - Remove Elastica/Query/Image.php and test/Elastica/Query/ImageTest.php, no more support for image-plugin.
 - Remove Elastica/Query/Filtered.php and test/Elastica/Query/FilteredTest.php and all uses from code.
+- Remove index.merge.policy.merge_factor, and set/get MergePolicy as it looks deprecated from ES 1.6
 
 ### Bugfixes
 
