@@ -177,7 +177,7 @@ class Health
     {
         $indices = [];
         foreach ($this->_data['indices'] as $indexName => $index) {
-            $indices[] = new Index($indexName, $index);
+            $indices[$indexName] = new Index($indexName, $index);
         }
 
         return $indices;

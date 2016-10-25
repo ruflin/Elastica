@@ -139,6 +139,8 @@ class HealthTest extends BaseTest
 
         $this->assertInternalType('array', $indices);
         $this->assertEquals(2, count($indices));
+        $this->assertArrayHasKey('index_one', $indices);
+        $this->assertArrayHasKey('index_two', $indices);
 
         foreach ($indices as $index) {
             $this->assertInstanceOf('Elastica\Cluster\Health\Index', $index);
