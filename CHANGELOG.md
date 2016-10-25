@@ -21,6 +21,13 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 - Add a constant for the expression language.
+- `Health::getIndices` returns key=>value result, where key === $indexName.
+```
+$cluster->getHealth()->getIndices()[$indexName]
+// or
+$indices = $cluster->getHealth()->getIndices();
+$indices[$indexName]
+```
 
 ## Deprecated
 
