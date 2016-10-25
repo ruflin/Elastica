@@ -153,7 +153,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetMergeFactor()
+    public function testSetMaxMergeAtOnce()
     {
         $indexName = 'test';
 
@@ -166,42 +166,13 @@ class SettingsTest extends BaseTest
 
         $settings = $index->getSettings();
 
-        $this->_markSkipped50('unknown setting [index.merge.policy.merge_factor] did you mean [index.merge.policy.max_merge_at_once]');
-        $response = $settings->setMergePolicy('merge_factor', 15);
-        $this->assertEquals(15, $settings->getMergePolicy('merge_factor'));
+        $response = $settings->setMergePolicy('max_merge_at_once', 15);
+        $this->assertEquals(15, $settings->getMergePolicy('max_merge_at_once'));
         $this->assertInstanceOf('Elastica\Response', $response);
         $this->assertTrue($response->isOk());
 
-        $settings->setMergePolicy('merge_factor', 10);
-        $this->assertEquals(10, $settings->getMergePolicy('merge_factor'));
-
-        $index->delete();
-    }
-
-    /**
-     * @group functional
-     */
-    public function testSetMergePolicyType()
-    {
-        $indexName = 'test';
-
-        $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
-        $index->create([], true);
-
-        //wait for the shards to be allocated
-        $this->_waitForAllocation($index);
-
-        $settings = $index->getSettings();
-
-        $this->_markSkipped50('unknown setting [index.merge.policy.type] please check that any required plugins are installed,');
-        $settings->setMergePolicyType('log_byte_size');
-        $this->assertEquals('log_byte_size', $settings->getMergePolicyType());
-
-        $response = $settings->setMergePolicy('merge_factor', 15);
-        $this->assertEquals(15, $settings->getMergePolicy('merge_factor'));
-        $this->assertInstanceOf('Elastica\Response', $response);
-        $this->assertTrue($response->isOk());
+        $settings->setMergePolicy('max_merge_at_once', 10);
+        $this->assertEquals(10, $settings->getMergePolicy('max_merge_at_once'));
 
         $index->delete();
     }

@@ -245,34 +245,6 @@ class Settings
     }
 
     /**
-     * Return merge policy.
-     *
-     * @return string Merge policy type
-     */
-    public function getMergePolicyType()
-    {
-        return $this->get('merge.policy.type');
-    }
-
-    /**
-     * Sets merge policy.
-     *
-     * @param string $type Merge policy type
-     *
-     * @return \Elastica\Response Response object
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
-     */
-    public function setMergePolicyType($type)
-    {
-        $this->getIndex()->close();
-        $response = $this->set(['merge.policy.type' => $type]);
-        $this->getIndex()->open();
-
-        return $response;
-    }
-
-    /**
      * Sets the specific merge policies.
      *
      * To have this changes made the index has to be closed and reopened
