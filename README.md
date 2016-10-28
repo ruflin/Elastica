@@ -17,7 +17,7 @@ All library issues should go to the [issue tracker from github](https://github.c
 
 Compatibility
 -------------
-This release is compatible with all elasticsearch 5.x releases. It was tested with version 5.0.0-rc1
+This release is compatible with all elasticsearch 5.x releases. It was tested with version 5.0.0
 
 
 Contributing

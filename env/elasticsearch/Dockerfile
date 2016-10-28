@@ -1,7 +1,7 @@
 FROM java:8-jre
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
-ENV VERSION 5.0.0-rc1
+ENV VERSION 5.0.0
 
 ENV URL https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${VERSION}.tar.gz
 
