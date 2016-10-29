@@ -30,7 +30,7 @@ class IndexTest extends BaseTest
         $type->setMapping($mapping);
 
         $type->addDocument($doc);
-        $index->optimize();
+        $index->forcemerge();
 
         $storedMapping = $index->getMapping();
 
@@ -107,7 +107,7 @@ class IndexTest extends BaseTest
         $comment->setParent(2); // Entry Foo bar
         $typeComment->addDocument($comment);
 
-        $index->optimize();
+        $index->forcemerge();
 
         $query = new HasChild('Max', 'comment');
         $resultSet = $typeBlog->search($query);
@@ -140,7 +140,7 @@ class IndexTest extends BaseTest
         $doc2->set('text', 'running in basel');
         $type->addDocument($doc2);
 
-        $index->optimize();
+        $index->forcemerge();
 
         $resultSet = $type->search('xodoa');
         $this->assertEquals(1, $resultSet->count());
@@ -182,7 +182,7 @@ class IndexTest extends BaseTest
         $doc2->set('text', 'running in basel');
         $type->addDocument($doc2);
 
-        $index->optimize();
+        $index->forcemerge();
 
         $resultSet = $type->search('xodoa');
         $this->assertEquals(1, $resultSet->count());
@@ -220,14 +220,14 @@ class IndexTest extends BaseTest
         $doc1->set('text', 'basel world');
         $type->addDocument($doc1);
 
-        $index->optimize();
+        $index->forcemerge();
         $index->refresh();
 
         $doc2 = new Document(2);
         $doc2->set('text', 'running in basel');
         $type->addDocument($doc2);
 
-        $index->optimize();
+        $index->forcemerge();
         $index->refresh();
 
         $resultSet = $type->search('basel');
@@ -273,7 +273,7 @@ class IndexTest extends BaseTest
         $type->addDocument($doc1);
 
         // Optimization necessary, as otherwise source still in realtime get
-        $index->optimize();
+        $index->forcemerge();
 
         $data = $type->getDocument($docId)->getData();
         $this->assertEquals($data['title'], $title);
@@ -563,8 +563,8 @@ class IndexTest extends BaseTest
 
         $index1->refresh();
         $index2->refresh();
-        $index1->optimize();
-        $index2->optimize();
+        $index1->forcemerge();
+        $index2->forcemerge();
 
         $status = new Status($client);
 
@@ -893,7 +893,7 @@ class IndexTest extends BaseTest
         $stats = $index->getStats()->getData();
         $this->assertEquals(1, $stats['_all']['primaries']['docs']['deleted']);
 
-        $index->optimize(['max_num_segments' => 1]);
+        $index->forcemerge(['max_num_segments' => 1]);
 
         $stats = $index->getStats()->getData();
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
@@ -956,7 +956,7 @@ class IndexTest extends BaseTest
         $index->create([], true);
         $this->_waitForAllocation($index);
         $index->refresh();
-        $index->optimize();
+        $index->forcemerge();
 
         $this->assertEquals([], $index->getAliases());
     }

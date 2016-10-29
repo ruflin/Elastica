@@ -171,17 +171,6 @@ class MoreLikeThisTest extends BaseTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\DeprecatedException
-     */
-    public function testSetIds()
-    {
-        $query = new MoreLikeThis();
-        $ids = [1, 2, 3];
-        $query->setIds($ids);
-    }
-
-    /**
-     * @group unit
      */
     public function testSetLike()
     {
@@ -190,16 +179,6 @@ class MoreLikeThisTest extends BaseTest
 
         $data = $query->toArray();
         $this->assertEquals(' hello world', $data['more_like_this']['like']);
-    }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\DeprecatedException
-     */
-    public function testSetLikeText()
-    {
-        $query = new MoreLikeThis();
-        $query->setLikeText(' hello world');
     }
 
     /**
@@ -226,18 +205,6 @@ class MoreLikeThisTest extends BaseTest
         $query->setMaxQueryTerms($max);
 
         $this->assertEquals($max, $query->getParam('max_query_terms'));
-    }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\DeprecatedException
-     */
-    public function testSetPercentTermsToMatch()
-    {
-        $query = new MoreLikeThis();
-
-        $match = 0.8;
-        $query->setPercentTermsToMatch($match);
     }
 
     /**

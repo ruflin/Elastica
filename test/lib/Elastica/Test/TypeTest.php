@@ -559,22 +559,6 @@ class TypeTest extends BaseTest
     }
 
     /**
-     * Test that Delete of index type throw deprecated exception.
-     *
-     * @group unit
-     * @expectedException \Elastica\Exception\DeprecatedException
-     */
-    public function testDeleteType()
-    {
-        $type = new Type(
-            $this->getMockBuilder('Elastica\Index')->disableOriginalConstructor()->getMock(),
-            'test'
-        );
-
-        $type->delete();
-    }
-
-    /**
      * @group functional
      */
     public function testUpdateDocument()
@@ -905,7 +889,7 @@ class TypeTest extends BaseTest
         $this->assertFalse($type->exists());
 
         $type->addDocument(new Document(1, ['name' => 'test name']));
-        $index->optimize();
+        $index->forcemerge();
 
         // sleep a moment to be sure that all nodes in cluster has new type
         sleep(5);

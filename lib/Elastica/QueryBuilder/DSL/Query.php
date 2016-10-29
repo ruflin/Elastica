@@ -2,7 +2,6 @@
 
 namespace Elastica\QueryBuilder\DSL;
 
-use Elastica\Exception\DeprecatedException;
 use Elastica\Exception\NotImplementedException;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
@@ -323,17 +322,6 @@ class Query implements DSL
     public function more_like_this()
     {
         return new MoreLikeThis();
-    }
-
-    /**
-     * more_like_this_field query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/1.4/query-dsl-mlt-field-query.html
-     * @deprecated More Like This Field query is deprecated as of ES 1.4 and will be removed in ES 2.0. Use MoreLikeThis query instead. This method will be removed in further Elastica releases
-     */
-    public function more_like_this_field()
-    {
-        throw new DeprecatedException('More Like This Field query is deprecated as of ES 1.4 and will be removed in ES 2.0. Use MoreLikeThis query instead. This method will be removed in further Elastica releases');
     }
 
     /**

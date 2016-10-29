@@ -14,6 +14,33 @@ All notable changes to this project will be documented in this file based on the
 - Remove Elastica/Query/Filtered.php and test/Elastica/Query/FilteredTest.php and all uses from code.
 - Remove index.merge.policy.merge_factor, and set/get MergePolicy as it looks deprecated from ES 1.6
 - Add new "Percolate query" functionality and tests
+- removed in Elastica\AbstractUpdateAction Option "percolate", getter and setter as deprecated as of ES 1.3. Use Percolator instead.
+- removed in Elastica\Aggregation\DateHistogram Option "pre_zone" is deprecated as of ES 1.5. Use "time_zone" instead
+- removed in Elastica\Aggregation\DateHistogram Option "post_zone" is deprecated as of ES 1.5. Use "time_zone" instead.
+- removed in Elastica\Aggregation\DateHistogram Option "pre_zone_adjust_large_interval" is deprecated as of ES 1.5. Use "time_zone" instead.
+- removed in Elastica\Aggregation\DateHistogram Option "pre_offset" is deprecated as of ES 1.5. Use "offset" instead.
+- removed in Elastica\Aggregation\DateHistogram Option "post_offset" is deprecated as of ES 1.5. Use "offset" instead.
+- removed Elastica\Document::set as deprecated. Use Elastica\Document::set instead
+- removed Elastica\Document::setScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
+- removed Elastica\Document::getScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
+- removed Elastica\Document::hasScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
+- removed Elastica/Query::setLimit as deprecated. Use the Elastica/Query::setSize() method
+- removed Elastica\Query\Builder
+- removed Elastica\Query\Fuzzy::addField as deprecated. Use Elastica\Query\Fuzzy::setField and Elastica\Query\FuzzysetFieldOption instead.
+- removed Elastica\Query::setIds as deprecated. Use Elastica\Query::like instead.
+- removed Elastica\Query::setLikeText as deprecated. Use Elastica\Query::like instead.
+- removed Elastica\Query Option "percent_terms_to_match" is deprecated as of ES 1.5. Use "minimum_should_match" instead.
+- removed Elastica\QueryBuilder\DSL\Query "More Like This Field" query is deprecated as of ES 1.4. Use MoreLikeThis query instead.
+- changed visibility from protected to private Elastica\ResultSet::$_position as accessing this property in an extended class is deprecated.
+- changed visibility from protected to private Elastica\ResultSet::$_response as accessing this property in an extended class is deprecated.
+- changed visibility from protected to private Elastica\ResultSet::$_query as accessing this property in an extended class is deprecated.
+- changed visibility from protected to private Elastica\ResultSet::$_results as accessing this property in an extended class is deprecated.
+- removed Elastica\ResultSet::$_timedOut as deprecated. Use ResultSet->hasTimedOut() instead.
+- removed Elastica\ResultSet::$_took as deprecated. Use ResultSet->hasTimedOut() instead.
+- removed Elastica\ResultSet::$_totalHits as deprecated. Use ResultSet->hasTimedOut() instead.
+- removed Elastica\Type::delete() It is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings.
+- removed Elastica\Query\Builder as deprecated. Use new Elastica\QueryBuilder instead.
+
 
 ### Bugfixes
 

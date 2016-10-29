@@ -200,7 +200,7 @@ class RescoreTest extends BaseTest
 
         $index = $this->_createIndex();
         $index->refresh();
-        $index->optimize();
+        $index->forcemerge();
 
         $results = $index->search($query);
         $response = $results->getResponse();
@@ -229,7 +229,7 @@ class RescoreTest extends BaseTest
 
         $index = $this->_createIndex();
         $index->refresh();
-        $index->optimize();
+        $index->forcemerge();
 
         $results = $index->search($query);
         $response = $results->getResponse();

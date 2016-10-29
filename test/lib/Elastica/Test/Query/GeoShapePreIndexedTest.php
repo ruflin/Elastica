@@ -56,7 +56,7 @@ class GeoShapePreIndexedTest extends BaseTest
             ],
         ]));
 
-        $index->optimize();
+        $index->forcemerge();
         $index->refresh();
 
         $gsp = new GeoShapePreIndexed(

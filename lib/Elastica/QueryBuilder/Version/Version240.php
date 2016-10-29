@@ -35,7 +35,6 @@ class Version240 extends Version
         'indices',
         'match_all',
         'more_like_this',
-        'more_like_this_field',
         'nested',
         'prefix',
         'query_string',

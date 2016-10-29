@@ -24,7 +24,7 @@ class RangeTest extends BaseTest
             new Document(4, ['age' => 68, 'height' => 160]),
         ]);
 
-        $index->optimize();
+        $index->forcemerge();
         $index->refresh();
 
         $query = new Range('age', ['from' => 10, 'to' => 20]);
