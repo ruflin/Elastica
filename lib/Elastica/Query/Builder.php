@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
@@ -13,7 +14,7 @@ trigger_error('This builder is deprecated and will be removed in further Elastic
  * @author Chris Gedrim <chris@gedr.im>
  *
  * @link https://www.elastic.co/
- * @deprecated This builder is deprecated and will be removed in further Elastica releases. Use new Elastica\QueryBuilder instead.
+ * @deprecated This builder is deprecated and will be removed in further Elastica releases. Use new Elastica\QueryBuilder instead
  **/
 class Builder extends AbstractQuery
 {
@@ -27,7 +28,7 @@ class Builder extends AbstractQuery
     /**
      * Factory method.
      *
-     * @param string $string JSON encoded string to use as query.
+     * @param string $string JSON encoded string to use as query
      *
      * @return self
      */
@@ -39,7 +40,7 @@ class Builder extends AbstractQuery
     /**
      * Constructor.
      *
-     * @param string $string JSON encoded string to use as query.
+     * @param string $string JSON encoded string to use as query
      */
     public function __construct($string = null)
     {
@@ -76,7 +77,7 @@ class Builder extends AbstractQuery
     /**
      * Allow wildcards (*, ?) as the first character in a query.
      *
-     * @param bool $bool Defaults to true.
+     * @param bool $bool Defaults to true
      *
      * @return $this
      */
@@ -88,7 +89,7 @@ class Builder extends AbstractQuery
     /**
      * Enable best effort analysis of wildcard terms.
      *
-     * @param bool $bool Defaults to true.
+     * @param bool $bool Defaults to true
      *
      * @return $this
      */
@@ -100,7 +101,7 @@ class Builder extends AbstractQuery
     /**
      * Set the analyzer name used to analyze the query string.
      *
-     * @param string $analyzer Analyzer to use.
+     * @param string $analyzer Analyzer to use
      *
      * @return $this
      */
@@ -112,7 +113,7 @@ class Builder extends AbstractQuery
     /**
      * Autogenerate phrase queries.
      *
-     * @param bool $bool Defaults to true.
+     * @param bool $bool Defaults to true
      *
      * @return $this
      */
@@ -155,7 +156,7 @@ class Builder extends AbstractQuery
     /**
      * Sets the boost value of the query.
      *
-     * @param float $boost Defaults to 1.0.
+     * @param float $boost Defaults to 1.0
      *
      * @return $this
      */
@@ -206,7 +207,7 @@ class Builder extends AbstractQuery
     /**
      * The default field for query terms if no prefix field is specified.
      *
-     * @param string $field Defaults to _all.
+     * @param string $field Defaults to _all
      *
      * @return $this
      */
@@ -222,7 +223,7 @@ class Builder extends AbstractQuery
      * is translated to "capital OR of OR Hungary", and with default operator of
      * AND, the same query is translated to "capital AND of AND Hungary".
      *
-     * @param string $operator Defaults to OR.
+     * @param string $operator Defaults to OR
      *
      * @return $this
      */
@@ -261,7 +262,7 @@ class Builder extends AbstractQuery
     /**
      * Enable position increments in result queries.
      *
-     * @param bool $bool Defaults to true.
+     * @param bool $bool Defaults to true
      *
      * @return $this
      */
@@ -273,7 +274,7 @@ class Builder extends AbstractQuery
     /**
      * Enables explanation for each hit on how its score was computed.
      *
-     * @param bool $value Turn on / off explain.
+     * @param bool $value Turn on / off explain
      *
      * @return $this
      */
@@ -285,8 +286,8 @@ class Builder extends AbstractQuery
     /**
      * Add a specific field / value entry.
      *
-     * @param string $name  Field to add.
-     * @param mixed  $value Value to set.
+     * @param string $name  Field to add
+     * @param mixed  $value Value to set
      *
      * @return $this
      */
@@ -332,7 +333,7 @@ class Builder extends AbstractQuery
     /**
      * Open a node for the specified name.
      *
-     * @param string $name Field name.
+     * @param string $name Field name
      *
      * @return $this
      */
@@ -347,7 +348,7 @@ class Builder extends AbstractQuery
     /**
      * Explicitly define fields to return.
      *
-     * @param array $fields Array of fields to return.
+     * @param array $fields Array of fields to return
      *
      * @return $this
      */
@@ -387,7 +388,7 @@ class Builder extends AbstractQuery
     /**
      * Set the from parameter (offset).
      *
-     * @param int $value Result number to start from.
+     * @param int $value Result number to start from
      *
      * @return $this
      */
@@ -399,7 +400,7 @@ class Builder extends AbstractQuery
     /**
      * Set the minimum similarity for fuzzy queries.
      *
-     * @param float $value Defaults to 0.5.
+     * @param float $value Defaults to 0.5
      *
      * @return $this
      */
@@ -411,7 +412,7 @@ class Builder extends AbstractQuery
     /**
      * Set the prefix length for fuzzy queries.
      *
-     * @param int $value Defaults to 0.
+     * @param int $value Defaults to 0
      *
      * @return $this
      */
@@ -425,7 +426,7 @@ class Builder extends AbstractQuery
      *
      * Used in range blocks.
      *
-     * @param mixed $value Value to be gt.
+     * @param mixed $value Value to be gt
      *
      * @return $this
      */
@@ -439,7 +440,7 @@ class Builder extends AbstractQuery
      *
      * Used in range blocks.
      *
-     * @param mixed $value Value to be gte to.
+     * @param mixed $value Value to be gte to
      *
      * @return $this
      */
@@ -451,7 +452,7 @@ class Builder extends AbstractQuery
     /**
      * Automatically lower-case terms of wildcard, prefix, fuzzy, and range queries.
      *
-     * @param bool $bool Defaults to true.
+     * @param bool $bool Defaults to true
      *
      * @return $this
      */
@@ -465,7 +466,7 @@ class Builder extends AbstractQuery
      *
      * Used in range blocks.
      *
-     * @param mixed $value Value to be lt.
+     * @param mixed $value Value to be lt
      *
      * @return $this
      */
@@ -479,7 +480,7 @@ class Builder extends AbstractQuery
      *
      * Used in range blocks.
      *
-     * @param mixed $value Value to be lte to.
+     * @param mixed $value Value to be lte to
      *
      * @return $this
      */
@@ -495,7 +496,7 @@ class Builder extends AbstractQuery
      *
      * Maps to Lucene MatchAllDocsQuery.
      *
-     * @param float $boost Boost to use.
+     * @param float $boost Boost to use
      *
      * @return $this
      */
@@ -513,7 +514,7 @@ class Builder extends AbstractQuery
     /**
      * The minimum number of should clauses to match.
      *
-     * @param int $minimum Minimum number that should match.
+     * @param int $minimum Minimum number that should match
      *
      * @return $this
      */
@@ -586,7 +587,7 @@ class Builder extends AbstractQuery
      *
      * If zero, then exact phrase matches are required.
      *
-     * @param int $value Defaults to 0.
+     * @param int $value Defaults to 0
      *
      * @return $this
      */
@@ -620,7 +621,7 @@ class Builder extends AbstractQuery
     /**
      * Queries to run within a dis_max query.
      *
-     * @param array $queries Array of queries.
+     * @param array $queries Array of queries
      *
      * @return $this
      */
@@ -733,7 +734,7 @@ class Builder extends AbstractQuery
     /**
      * Set the size parameter (number of records to return).
      *
-     * @param int $value Number of records to return.
+     * @param int $value Number of records to return
      *
      * @return $this
      */
@@ -767,8 +768,8 @@ class Builder extends AbstractQuery
     /**
      * Add a field to sort on.
      *
-     * @param string $name    Field to sort.
-     * @param bool   $reverse Reverse direction.
+     * @param string $name    Field to sort
+     * @param bool   $reverse Reverse direction
      *
      * @return $this
      */
@@ -852,7 +853,7 @@ class Builder extends AbstractQuery
     /**
      * When using dis_max, the disjunction max tie breaker.
      *
-     * @param float $multiplier Multiplier to use.
+     * @param float $multiplier Multiplier to use
      *
      * @return $this
      */
@@ -879,6 +880,28 @@ class Builder extends AbstractQuery
      * @return $this
      */
     public function wildcardClose()
+    {
+        return $this->fieldClose();
+    }
+
+    /**
+     *  Query.
+     *
+     * @return $this
+     */
+    public function percolate()
+    {
+        return $this->fieldOpen('percolate');
+    }
+
+    /**
+     * Close a 'percolate' block.
+     *
+     * Alias of close() for ease of reading in source.
+     *
+     * @return $this
+     */
+    public function percolateClose()
     {
         return $this->fieldClose();
     }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Query;
 
 use Elastica\Query\Builder;
@@ -120,6 +121,7 @@ class BuilderTest extends BaseTest
             ['term', 'term'],
             ['textPhrase', 'text_phrase'],
             ['wildcard', 'wildcard'],
+            ['percolate', 'percolate'],
         ];
     }
 
@@ -158,6 +160,7 @@ class BuilderTest extends BaseTest
      * @covers \Elastica\Query\Builder::textPhraseClose
      * @covers \Elastica\Query\Builder::wildcard
      * @covers \Elastica\Query\Builder::wildcardClose
+     * @covers \Elastica\Query\Builder::percolate
      */
     public function testQueryTypes($method, $queryType)
     {
