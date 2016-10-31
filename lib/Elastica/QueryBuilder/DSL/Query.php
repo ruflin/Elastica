@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Exception\DeprecatedException;
@@ -21,6 +22,7 @@ use Elastica\Query\MatchAll;
 use Elastica\Query\MoreLikeThis;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Nested;
+use Elastica\Query\Percolate;
 use Elastica\Query\Prefix;
 use Elastica\Query\QueryString;
 use Elastica\Query\Range;
@@ -612,5 +614,17 @@ class Query implements DSL
     public function type($type = null)
     {
         return new Type($type);
+    }
+
+    /**
+     * type query.
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-percolate-query.html
+     *
+     * @return Percolate
+     */
+    public function percolate()
+    {
+        return new Percolate();
     }
 }
