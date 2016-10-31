@@ -205,6 +205,8 @@ class Index implements SearchableInterface
      */
     public function optimize($args = [])
     {
+        trigger_error('Deprecated: Elastica\Index::optimize() is deprecated and will be removed in further Elastica releases. Use Elastica\Query::forcemerge() instead.', E_USER_DEPRECATED);
+
         return $this->forcemerge($args);
     }
 

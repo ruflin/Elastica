@@ -76,7 +76,6 @@ class QueryTest extends AbstractDSLTest
         $this->_assertNotImplemented($queryDSL, 'geo_shape', []);
         $this->_assertNotImplemented($queryDSL, 'indices', []);
         $this->_assertNotImplemented($queryDSL, 'minimum_should_match', []);
-        $this->_assertNotImplemented($queryDSL, 'more_like_this_field', []);
         $this->_assertNotImplemented($queryDSL, 'span_first', []);
         $this->_assertNotImplemented($queryDSL, 'span_multi_term', []);
         $this->_assertNotImplemented($queryDSL, 'span_near', []);

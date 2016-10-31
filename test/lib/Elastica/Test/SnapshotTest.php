@@ -95,7 +95,7 @@ class SnapshotTest extends Base
         $this->assertTrue($response->isOk());
 
         $this->_index->refresh();
-        $this->_index->optimize();
+        $this->_index->forcemerge();
 
         // ensure that the index has been restored
         $count = $this->_index->getType('test')->count();

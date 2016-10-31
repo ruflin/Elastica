@@ -27,6 +27,9 @@ class ResultSetTest extends BaseTest
         $this->assertInstanceOf('Elastica\ResultSet', $resultSet);
         $this->assertEquals(3, $resultSet->getTotalHits());
         $this->assertGreaterThan(0, $resultSet->getMaxScore());
+        $this->assertNotTrue($resultSet->hasTimedOut());
+        $this->assertNotTrue($resultSet->hasAggregations());
+        $this->assertNotTrue($resultSet->hasSuggests());
         $this->assertInternalType('array', $resultSet->getResults());
         $this->assertEquals(3, count($resultSet));
     }

@@ -33,7 +33,11 @@ class AvgTest extends BaseAggregationTest
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregations();
+
+        $resultSet = $this->_getIndexForTest()->search($query);
+        $results = $resultSet->getAggregations();
+
+        $this->assertTrue($resultSet->hasAggregations());
         $this->assertEquals((5 + 8 + 1 + 3) / 4.0, $results['avg']['value']);
     }
 }

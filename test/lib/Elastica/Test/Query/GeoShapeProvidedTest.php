@@ -37,7 +37,7 @@ class GeoShapeProvidedTest extends BaseTest
             ],
         ]));
 
-        $index->optimize();
+        $index->forcemerge();
         $index->refresh();
 
         $envelope = [

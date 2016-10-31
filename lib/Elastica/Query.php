@@ -118,21 +118,6 @@ class Query extends Param
     }
 
     /**
-     * Set Filter.
-     *
-     * @param \Elastica\Query\AbstractQuery $filter Filter object
-     *
-     * @return $this
-     *
-     * @link    https://github.com/elasticsearch/elasticsearch/issues/7422
-     * @deprecated Use Elastica\Query::setPostFilter() instead, this method will be removed in further Elastica releases
-     */
-    public function setFilter(AbstractQuery $filter)
-    {
-        return $this->setPostFilter($filter);
-    }
-
-    /**
      * Sets the start from which the search results should be returned.
      *
      * @param int $from
@@ -211,22 +196,6 @@ class Query extends Param
     public function setSize($size = 10)
     {
         return $this->setParam('size', $size);
-    }
-
-    /**
-     * Alias for setSize.
-     *
-     * @deprecated Use the setSize() method, this method will be removed in further Elastica releases
-     *
-     * @param int $limit OPTIONAL Maximal number of results for query (default = 10)
-     *
-     * @return $this
-     */
-    public function setLimit($limit = 10)
-    {
-        trigger_error('Deprecated: Elastica\Query::setLimit() is deprecated. Use setSize method instead. This method will be removed in further Elastica releases.', E_USER_DEPRECATED);
-
-        return $this->setSize($limit);
     }
 
     /**

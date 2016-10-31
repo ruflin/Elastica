@@ -41,7 +41,7 @@ class GeoDistanceTest extends BaseTest
         $doc2->addGeoPoint('point', 30, 40);
         $type->addDocument($doc2);
 
-        $index->optimize();
+        $index->forcemerge();
         $index->refresh();
 
         // Only one point should be in radius
