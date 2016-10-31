@@ -40,6 +40,7 @@ All notable changes to this project will be documented in this file based on the
 - removed Elastica\ResultSet::$_totalHits as deprecated. Use ResultSet->hasTimedOut() instead.
 - removed Elastica\Type::delete() It is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings.
 - removed Elastica\Query\Builder as deprecated. Use new Elastica\QueryBuilder instead.
+- removed Elastica\Percolator as deprecated. Use new Elastica\Query\Percolate instead.
 
 
 ### Bugfixes
