@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Document;
@@ -120,7 +121,6 @@ class IndexTest extends BaseTest
      */
     public function testAddPdfFile()
     {
-        $this->_checkPlugin('elasticsearch-mapper-attachments');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => false]];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
@@ -162,7 +162,6 @@ class IndexTest extends BaseTest
      */
     public function testAddPdfFileContent()
     {
-        $this->_checkPlugin('elasticsearch-mapper-attachments');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => false]];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
@@ -204,7 +203,6 @@ class IndexTest extends BaseTest
      */
     public function testAddWordxFile()
     {
-        $this->_checkPlugin('elasticsearch-mapper-attachments');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => 'no']];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
@@ -245,7 +243,6 @@ class IndexTest extends BaseTest
      */
     public function testExcludeFileSource()
     {
-        $this->_checkPlugin('elasticsearch-mapper-attachments');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => true],
             'title' => ['type' => 'string', 'store' => true], ];
 
