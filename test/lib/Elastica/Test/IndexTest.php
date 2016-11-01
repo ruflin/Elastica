@@ -350,8 +350,6 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryString()
     {
-        $this->_checkPlugin('delete-by-query');
-
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
@@ -386,8 +384,6 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQuery()
     {
-        $this->_checkPlugin('delete-by-query');
-
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
@@ -422,8 +418,6 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithArrayQuery()
     {
-        $this->_checkPlugin('delete-by-query');
-
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
@@ -458,8 +452,6 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryAndOptions()
     {
-        $this->_checkPlugin('delete-by-query');
-
         $index = $this->_createIndex(null, true, 2);
 
         $routing1 = 'first_routing';
