@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Document;
@@ -120,7 +121,6 @@ class IndexTest extends BaseTest
      */
     public function testAddPdfFile()
     {
-        $this->_checkPlugin('elasticsearch-mapper-attachments');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => false]];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
@@ -162,7 +162,6 @@ class IndexTest extends BaseTest
      */
     public function testAddPdfFileContent()
     {
-        $this->_checkPlugin('elasticsearch-mapper-attachments');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => false]];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
@@ -204,7 +203,6 @@ class IndexTest extends BaseTest
      */
     public function testAddWordxFile()
     {
-        $this->_checkPlugin('elasticsearch-mapper-attachments');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => 'no']];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
@@ -245,7 +243,6 @@ class IndexTest extends BaseTest
      */
     public function testExcludeFileSource()
     {
-        $this->_checkPlugin('elasticsearch-mapper-attachments');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => true],
             'title' => ['type' => 'string', 'store' => true], ];
 
@@ -353,8 +350,6 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryString()
     {
-        $this->_checkPlugin('delete-by-query');
-
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
@@ -389,8 +384,6 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQuery()
     {
-        $this->_checkPlugin('delete-by-query');
-
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
@@ -425,8 +418,6 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithArrayQuery()
     {
-        $this->_checkPlugin('delete-by-query');
-
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
@@ -461,8 +452,6 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryAndOptions()
     {
-        $this->_checkPlugin('delete-by-query');
-
         $index = $this->_createIndex(null, true, 2);
 
         $routing1 = 'first_routing';

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
@@ -146,19 +147,13 @@ class Index implements SearchableInterface
      *
      * @return \Elastica\Response
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/5.0/docs-delete-by-query.html
      */
     public function deleteByQuery($query, array $options = [])
     {
-        if (is_string($query)) {
-            // query_string queries are not supported for delete by query operations
-            $options['q'] = $query;
-
-            return $this->request('_query', Request::DELETE, [], $options);
-        }
         $query = Query::create($query)->getQuery();
 
-        return $this->request('_query', Request::DELETE, ['query' => is_array($query) ? $query : $query->toArray()], $options);
+        return $this->request('_delete_by_query', Request::POST, ['query' => is_array($query) ? $query : $query->toArray()], $options);
     }
 
     /**
@@ -270,14 +265,14 @@ class Index implements SearchableInterface
             if (is_array($options)) {
                 foreach ($options as $key => $value) {
                     switch ($key) {
-                        case 'recreate' :
+                        case 'recreate':
                             try {
                                 $this->delete();
                             } catch (ResponseException $e) {
                                 // Table can't be deleted, because doesn't exist
                             }
                             break;
-                        case 'routing' :
+                        case 'routing':
                             $query = ['routing' => $value];
                             break;
                         default:

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Node;
 
 use Elastica\Node;
@@ -42,15 +43,7 @@ class InfoTest extends BaseTest
         $info = $node->getInfo();
 
         $this->assertFalse($info->hasPlugin('foo'));
-
-        $data = $client->request('_nodes/stats')->getData();
-        $rawNode = array_pop($data['nodes']);
-
-        if (!array_key_exists('plugins', $rawNode) || count($rawNode['plugins']) == 0) {
-            $this->markTestIncomplete('No plugins installed, can\'t test hasPlugin');
-        }
-
-        $this->assertTrue($info->hasPlugin($rawNode['plugins'][0]['name']));
+        $this->assertTrue($info->hasPlugin('mapper-attachments'));
     }
 
     /**
