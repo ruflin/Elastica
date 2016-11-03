@@ -6,7 +6,7 @@
 plugin.mandatory: mapper-attachments
 
 # For script tests
-script.inline: on
+script.inline: true
 #script.indexed: on
 
 script.engine.groovy.file: on

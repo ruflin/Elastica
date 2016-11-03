@@ -138,7 +138,7 @@ class Base extends \PHPUnit_Framework_TestCase
         $nodes = $this->_getClient()->getCluster()->getNodes();
         $scriptInline = $nodes[0]->getInfo()->get('settings', 'script', 'inline');
 
-        if ($scriptInline != 'on') {
+        if ($scriptInline != 'true') {
             $this->markTestSkipped('script.inline is not enabled. This is required for this test');
         }
     }
