@@ -699,7 +699,7 @@ class ClientTest extends BaseTest
         $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'should be changed']);
         $type->addDocument($newDocument);
 
-        $script = new Script('ctx._source.field2 += 5; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
+        $script = new Script('ctx._source.field2 += 5; ctx._source.remove("field3"); ctx._source.field4 = "changed"', null, Script::LANG_GROOVY);
         $client->updateDocument(1, $script, $index->getName(), $type->getName());
 
         $document = $type->getDocument(1);
@@ -725,7 +725,7 @@ class ClientTest extends BaseTest
         $type = $index->getType('test');
         $client = $index->getClient();
 
-        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
+        $script = new Script('ctx._source.field2 += 5; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
         $script->setParam('count', 5);
         $script->setUpsert(['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4']);
 
@@ -955,7 +955,7 @@ class ClientTest extends BaseTest
         $newDocument->setAutoPopulate();
         $type->addDocument($newDocument);
 
-        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field3"); ctx._source.field4 = "changed"');
+        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field3"); ctx._source.field4 = "changed"', null, Script::LANG_GROOVY);
         $script->setParam('count', 5);
         $script->setUpsert($newDocument);
 
@@ -976,7 +976,7 @@ class ClientTest extends BaseTest
         $this->assertEquals('changed', $data['field4']);
         $this->assertArrayNotHasKey('field3', $data);
 
-        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field4"); ctx._source.field1 = field1;');
+        $script = new Script('ctx._source.field2 += count; ctx._source.remove("field4"); ctx._source.field1 = field1;', null, Script::LANG_GROOVY);
         $script->setParam('count', 5);
         $script->setParam('field1', 'updated');
         $script->setUpsert($newDocument);

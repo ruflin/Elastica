@@ -38,8 +38,8 @@ ENV ES_JAVA_OPTS="-Xms512m -Xmx512m"
 RUN ${ES_PLUGIN_BIN} install mapper-attachments
 
 # Copy config files
-COPY *.yml /usr/share/elasticsearch/config/
-COPY scripts/* /usr/share/elasticsearch/config/scripts/
+COPY elasticsearch.yml /opt/elasticsearch-${VERSION}/config/elasticsearch.yml
+COPY scripts/* /opt/elasticsearch-${VERSION}/config/scripts/
 
 COPY docker-entrypoint.sh /
 

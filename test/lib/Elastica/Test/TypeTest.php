@@ -149,9 +149,9 @@ class TypeTest extends BaseTest
 
         $type = new Type($index, 'user');
         $mapping = new Mapping($type, [
-                'id' => ['type' => 'integer', 'store' => 'yes'],
-                'username' => ['type' => 'string', 'store' => 'no'],
-            ]);
+            'id' => ['type' => 'integer', 'store' => 'yes'],
+            'username' => ['type' => 'string', 'store' => 'no'],
+        ]);
         $mapping->setSource(['enabled' => false]);
         $type->setMapping($mapping);
 
@@ -578,7 +578,7 @@ class TypeTest extends BaseTest
                 'name' => $newName,
                 'count' => 2,
             ],
-            null,
+            Script::LANG_GROOVY,
             $id
         );
         $script->setUpsert($document);
@@ -609,7 +609,7 @@ class TypeTest extends BaseTest
                 'name' => $newName,
                 'count' => 2,
             ],
-            null,
+            Script::LANG_GROOVY,
             $id
         );
         $script->setUpsert($document);
@@ -639,7 +639,7 @@ class TypeTest extends BaseTest
                 'name' => $newName,
                 'count' => 2,
             ],
-            null,
+            Script::LANG_GROOVY,
             $id
         );
         $script->setUpsert($document);
@@ -681,7 +681,7 @@ class TypeTest extends BaseTest
 
         $this->assertTrue($newDocument->hasId());
 
-        $script = new Script('ctx._source.counter += count; ctx._source.realName = realName');
+        $script = new Script('ctx._source.counter += count; ctx._source.realName = realName', null, Script::LANG_GROOVY);
         $script->setId($newDocument->getId());
         $script->setParam('count', 7);
         $script->setParam('realName', 'Bruce Wayne');

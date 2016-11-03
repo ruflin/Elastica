@@ -42,6 +42,27 @@ All notable changes to this project will be documented in this file based on the
 - removed Elastica\Query\Builder as deprecated. Use new Elastica\QueryBuilder instead.
 - removed Elastica\Percolator as deprecated. Use new Elastica\Query\Percolate instead.
 - changed Elastica\Index::deleteByQuery() to use new API https://www.elastic.co/guide/en/elasticsearch/reference/5.0/docs-delete-by-query.html
+- updated Dockerfile and elasticsearch.yml to allow inline.script: true
+- updated some Script function to use groovy as now default scripting is painless
+    - Elastica\Test\Aggregation\ScriptTest::testAggregationScript
+    - Elastica\Test\Aggregation\ScriptTest::testAggregationScriptAsString
+    - Elastica\Test\Query\FunctionScoreTest::testScriptScore
+    - Elastica\Test\BulkTest::testUpdate
+    - Elastica\Test\ClientTest::testUpdateDocumentByScript
+    - Elastica\Test\ClientTest::testUpdateDocumentByScriptWithUpsert
+    - Elastica\Test\ClientTest::testUpdateDocumentPopulateFields
+    - Elastica\Test\ClientTest::testUpdateDocumentPopulateFields
+    - Elastica\Test\TypeTest::testUpdateDocument
+    - Elastica\Test\TypeTest::testUpdateDocumentWithIdForwardSlashes
+    - Elastica\Test\TypeTest::testUpdateDocumentWithParameter
+    - Elastica\Test\TypeTest::testUpdateDocumentWithFieldsSource
+- linted some files: 
+    - Elastica\Index.php
+    - Elastica\Query\Percolate.php
+    - Elastica\QueryBuilder\DSL\Query.php
+    - Elastica\Test\IndexTest.php
+    - Elastica\Test\Node\InfoTest.php
+    - Elastica\Test\Query\PercolateTest.php
 
 
 ### Bugfixes

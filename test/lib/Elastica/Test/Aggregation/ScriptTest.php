@@ -32,7 +32,7 @@ class ScriptTest extends BaseAggregationTest
         $this->_checkScriptInlineSetting();
         $agg = new Sum('sum');
         // x = (0..1) is groovy-specific syntax, to see if lang is recognized
-        $script = new Script("x = (0..1); return doc['price'].value", null, 'groovy');
+        $script = new Script("x = (0..1); return doc['price'].value", null, Script::LANG_GROOVY);
         $agg->setScript($script);
 
         $query = new Query();
@@ -49,7 +49,7 @@ class ScriptTest extends BaseAggregationTest
     {
         $this->_checkScriptInlineSetting();
         $agg = new Sum('sum');
-        $agg->setScript("doc['price'].value");
+        $agg->setScript(new Script("doc['price'].value", null, Script::LANG_GROOVY));
 
         $query = new Query();
         $query->addAggregation($agg);
