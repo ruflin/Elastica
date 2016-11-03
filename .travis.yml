@@ -12,10 +12,11 @@ env:
   - TARGET="55"
   - TARGET="56"
   - TARGET="70"
+  - TARGET="71"
 
 before_install:
   # Docker-compose installation
-  - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.8.1/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
