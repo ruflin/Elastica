@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Fixes
 - Update elasticsearch dependency to 5.0
-- Composer installations will no longer include tests and other development files. 
+- Composer installations will no longer include tests and other development files.
 - Replace flush refresh param with a options array
 - Rename Mapping::setFields to Mapping::setStoredFields
 - Removing all deprecated filters including tests. Use queries instead.
@@ -56,7 +56,7 @@ All notable changes to this project will be documented in this file based on the
     - Elastica\Test\TypeTest::testUpdateDocumentWithIdForwardSlashes
     - Elastica\Test\TypeTest::testUpdateDocumentWithParameter
     - Elastica\Test\TypeTest::testUpdateDocumentWithFieldsSource
-- linted some files: 
+- linted some files:
     - Elastica\Index.php
     - Elastica\Query\Percolate.php
     - Elastica\QueryBuilder\DSL\Query.php
@@ -64,6 +64,8 @@ All notable changes to this project will be documented in this file based on the
     - Elastica\Test\Node\InfoTest.php
     - Elastica\Test\Query\PercolateTest.php
 - removed Elastica\ScanAndScroll and test, Scan search type is removed from ElasticSearch 5.0.
+- Remove upport for PHP 5.4 and 5.5. Require at least PHP 5.6 #1202
+
 
 
 ### Bugfixes

@@ -8,8 +8,6 @@ branches:
     - master
 
 env:
-  - TARGET="54"
-  - TARGET="55"
   - TARGET="56"
   - TARGET="70"
   - TARGET="71"

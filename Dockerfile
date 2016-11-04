@@ -26,7 +26,7 @@ RUN mkdir -p \
 	./build/coverage
 
 # Prefer source removed as automatic fallback now
-RUN if php -r 'exit(version_compare(PHP_VERSION, "5.5.0", ">=") ? 0 : 1);'; then composer install; else composer install --no-dev; fi
+RUN composer install
 RUN composer dump-autoload
 
 # Copy rest of the files, ignoring .dockerignore files
