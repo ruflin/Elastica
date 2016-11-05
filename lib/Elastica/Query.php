@@ -159,6 +159,20 @@ class Query extends Param
     }
 
     /**
+     * Keep track of the scores when sorting results.
+     *
+     * @param bool $trackScores
+     *
+     * @return $this
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html#_track_scores
+     */
+    public function setTrackScores($trackScores = true)
+    {
+        return $this->setParam('track_scores', (bool) $trackScores);
+    }
+
+    /**
      * Sets highlight arguments for the query.
      *
      * @param array $highlightArgs Set all highlight arguments
