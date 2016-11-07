@@ -30,7 +30,7 @@ class Search
     /*
      * Search types
      */
-    const OPTION_SEARCH_TYPE_COUNT = 'count';
+
     const OPTION_SEARCH_TYPE_DFS_QUERY_THEN_FETCH = 'dfs_query_then_fetch';
     const OPTION_SEARCH_TYPE_DFS_QUERY_AND_FETCH = 'dfs_query_and_fetch';
     const OPTION_SEARCH_TYPE_QUERY_THEN_FETCH = 'query_then_fetch';
