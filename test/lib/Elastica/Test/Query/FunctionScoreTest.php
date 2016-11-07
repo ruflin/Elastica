@@ -453,7 +453,7 @@ class FunctionScoreTest extends BaseTest
     {
         $this->_checkScriptInlineSetting();
         $scriptString = "_score * doc['price'].value";
-        $script = new Script($scriptString, null, Script::LANG_GROOVY);
+        $script = new Script($scriptString, null, Script::LANG_PAINLESS);
         $query = new FunctionScore();
         $query->addScriptScoreFunction($script);
         $expected = [
@@ -463,7 +463,7 @@ class FunctionScoreTest extends BaseTest
                         'script_score' => [
                             'script' => [
                                 'inline' => $scriptString,
-                                'lang' => Script::LANG_GROOVY,
+                                'lang' => Script::LANG_PAINLESS,
                             ],
                         ],
                     ],

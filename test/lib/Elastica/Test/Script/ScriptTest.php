@@ -143,13 +143,13 @@ class ScriptTest extends BaseTest
      */
     public function testSetLang()
     {
-        $script = new Script('foo', [], Script::LANG_GROOVY);
+        $script = new Script('foo', [], Script::LANG_PAINLESS);
+        $this->assertEquals(Script::LANG_PAINLESS, $script->getLang());
+
+        $script->setLang(Script::LANG_GROOVY);
         $this->assertEquals(Script::LANG_GROOVY, $script->getLang());
 
-        $script->setLang(Script::LANG_PYTHON);
-        $this->assertEquals(Script::LANG_PYTHON, $script->getLang());
-
-        $this->assertInstanceOf('Elastica\Script\Script', $script->setLang(Script::LANG_PYTHON));
+        $this->assertInstanceOf('Elastica\Script\Script', $script->setLang(Script::LANG_GROOVY));
     }
 
     /**

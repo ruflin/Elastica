@@ -65,6 +65,8 @@ All notable changes to this project will be documented in this file based on the
     - Elastica\Test\Query\PercolateTest.php
 - removed Elastica\ScanAndScroll and test, Scan search type is removed from ElasticSearch 5.0.
 
+- removed groovy as default scripting language
+- implemented painless as default scripting language in tests
 
 ### Bugfixes
 

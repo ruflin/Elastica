@@ -573,12 +573,12 @@ class TypeTest extends BaseTest
 
         $document = new Document();
         $script = new Script(
-            'ctx._source.name = name; ctx._source.counter += count',
+            'ctx._source.name = params.name; ctx._source.counter += params.count',
             [
                 'name' => $newName,
                 'count' => 2,
             ],
-            Script::LANG_GROOVY,
+            Script::LANG_PAINLESS,
             $id
         );
         $script->setUpsert($document);
@@ -604,12 +604,12 @@ class TypeTest extends BaseTest
 
         $document = new Document();
         $script = new Script(
-            'ctx._source.name = name; ctx._source.counter += count',
+            'ctx._source.name = params.name; ctx._source.counter += params.count',
             [
                 'name' => $newName,
                 'count' => 2,
             ],
-            Script::LANG_GROOVY,
+            Script::LANG_PAINLESS,
             $id
         );
         $script->setUpsert($document);
@@ -634,12 +634,12 @@ class TypeTest extends BaseTest
 
         $document = new Document();
         $script = new Script(
-            'ctx._source.name = name; ctx._source.counter += count',
+            'ctx._source.name = params.name; ctx._source.counter += params.count',
             [
                 'name' => $newName,
                 'count' => 2,
             ],
-            Script::LANG_GROOVY,
+            Script::LANG_PAINLESS,
             $id
         );
         $script->setUpsert($document);
@@ -681,7 +681,7 @@ class TypeTest extends BaseTest
 
         $this->assertTrue($newDocument->hasId());
 
-        $script = new Script('ctx._source.counter += count; ctx._source.realName = realName', null, Script::LANG_GROOVY);
+        $script = new Script('ctx._source.counter += params.count; ctx._source.realName = params.realName', null, Script::LANG_PAINLESS);
         $script->setId($newDocument->getId());
         $script->setParam('count', 7);
         $script->setParam('realName', 'Bruce Wayne');
