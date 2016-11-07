@@ -185,11 +185,8 @@ class SearchTest extends BaseTest
 
         $this->assertFalse($multiResultSet->hasError());
 
-        $this->_markSkipped50('No search type for [count]');
-
-        $search1->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_COUNT);
-        $search2->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_COUNT);
-
+        $search1->getQuery()->setSize(0);
+        $search2->getQuery()->setSize(0);
         $multiResultSet = $multiSearch->search();
 
         $this->assertInstanceOf('Elastica\Multi\ResultSet', $multiResultSet);
@@ -285,11 +282,8 @@ class SearchTest extends BaseTest
 
         $this->assertFalse($multiResultSet->hasError());
 
-        $this->_markSkipped50('No search type for [count]');
-
-        $search1->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_COUNT);
-        $search2->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_COUNT);
-
+        $search1->getQuery()->setSize(0);
+        $search2->getQuery()->setSize(0);
         $multiResultSet = $multiSearch->search();
 
         $this->assertInstanceOf('Elastica\Multi\ResultSet', $multiResultSet);
@@ -448,9 +442,8 @@ class SearchTest extends BaseTest
 
         $multiSearch->addSearch($search2);
 
-        $this->_markSkipped50('No search type for [count]');
-        $multiSearch->setSearchType(Search::OPTION_SEARCH_TYPE_COUNT);
-
+        $search1->getQuery()->setSize(0);
+        $search2->getQuery()->setSize(0);
         $multiResultSet = $multiSearch->search();
 
         $this->assertInstanceOf('Elastica\Multi\ResultSet', $multiResultSet);
@@ -487,7 +480,7 @@ class SearchTest extends BaseTest
 
         $this->assertArrayHasKey(0, $resultSets);
         $this->assertInstanceOf('Elastica\ResultSet', $resultSets[0]);
-        $this->assertCount(2, $resultSets[0]);
+        $this->assertCount(0, $resultSets[0]);
         $this->assertSame($query1, $resultSets[0]->getQuery());
         $this->assertEquals(3, $resultSets[0]->getTotalHits());
 
@@ -533,8 +526,8 @@ class SearchTest extends BaseTest
 
         $multiSearch->addSearch($search2);
 
-        $this->_markSkipped50('No search type for [count]');
-        $multiSearch->setSearchType(Search::OPTION_SEARCH_TYPE_COUNT);
+        $search1->getQuery()->setSize(0);
+        $search2->getQuery()->setSize(0);
 
         $multiResultSet = $multiSearch->search();
 
@@ -572,7 +565,7 @@ class SearchTest extends BaseTest
 
         $this->assertArrayHasKey(0, $resultSets);
         $this->assertInstanceOf('Elastica\ResultSet', $resultSets[0]);
-        $this->assertCount(2, $resultSets[0]);
+        $this->assertCount(0, $resultSets[0]);
         $this->assertSame($query1, $resultSets[0]->getQuery());
         $this->assertEquals(3, $resultSets[0]->getTotalHits());
 

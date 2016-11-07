@@ -259,6 +259,7 @@ class SearchTest extends BaseTest
 
         $search = new Search($client);
         $search->addIndex($index)->addType($type);
+        $search->setOption('size', 0);
         $result = $search->search([], [
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SIZE => 5,
@@ -386,9 +387,7 @@ class SearchTest extends BaseTest
         $resultSet = $search->search('test', ['terminate_after' => 100]);
         $this->assertEquals(10, $resultSet->count());
 
-        //Search types
-        $this->_markSkipped50('No search type for [count]');
-        $resultSet = $search->search('test', ['limit' => 5, 'search_type' => 'count']);
+        $resultSet = $search->search('test', ['limit' => 0]);
         $this->assertTrue(($resultSet->count() === 0) && $resultSet->getTotalHits() === 11);
 
         //Timeout - this one is a bit more tricky to test
