@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
@@ -31,13 +32,11 @@ class Search
      * Search types
      */
     const OPTION_SEARCH_TYPE_COUNT = 'count';
-    const OPTION_SEARCH_TYPE_SCAN = 'scan';
     const OPTION_SEARCH_TYPE_DFS_QUERY_THEN_FETCH = 'dfs_query_then_fetch';
     const OPTION_SEARCH_TYPE_DFS_QUERY_AND_FETCH = 'dfs_query_and_fetch';
     const OPTION_SEARCH_TYPE_QUERY_THEN_FETCH = 'query_then_fetch';
     const OPTION_SEARCH_TYPE_QUERY_AND_FETCH = 'query_and_fetch';
     const OPTION_SEARCH_TYPE_SUGGEST = 'suggest';
-    const OPTION_SEARCH_TYPE_SCROLL = 'scroll';
     const OPTION_SEARCH_IGNORE_UNAVAILABLE = 'ignore_unavailable';
 
     /**
@@ -468,7 +467,7 @@ class Search
 
     /**
      * @param mixed $query
-     * @param $fullResult (default = false) By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned.
+     * @param $fullResult (default = false) By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned
      *
      * @return int|ResultSet
      */
@@ -542,21 +541,6 @@ class Search
     public function scroll($expiryTime = '1m')
     {
         return new Scroll($this, $expiryTime);
-    }
-
-    /**
-     * Returns the ScanAndScroll Iterator.
-     *
-     * @see Elastica\ScanAndScroll
-     *
-     * @param string $expiryTime
-     * @param int    $sizePerShard
-     *
-     * @return ScanAndScroll
-     */
-    public function scanAndScroll($expiryTime = '1m', $sizePerShard = 1000)
-    {
-        return new ScanAndScroll($this, $expiryTime, $sizePerShard);
     }
 
     /**

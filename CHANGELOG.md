@@ -63,6 +63,7 @@ All notable changes to this project will be documented in this file based on the
     - Elastica\Test\IndexTest.php
     - Elastica\Test\Node\InfoTest.php
     - Elastica\Test\Query\PercolateTest.php
+- removed Elastica\ScanAndScroll and test, Scan search type is removed from ElasticSearch 5.0.
 
 
 ### Bugfixes
