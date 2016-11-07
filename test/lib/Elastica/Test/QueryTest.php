@@ -147,6 +147,18 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
+    public function testSetTrackScores()
+    {
+        $query = new Query();
+        $param = false;
+        $query->setTrackScores($param);
+
+        $this->assertEquals($param, $query->getParam('track_scores'));
+    }
+
+    /**
+     * @group unit
+     */
     public function testSetRawQuery()
     {
         $query = new Query();

@@ -81,6 +81,7 @@ $cluster->getHealth()->getIndices()[$indexName]
 $indices = $cluster->getHealth()->getIndices();
 $indices[$indexName]
 ```
+- Added a `Query::setTrackScores` method 
 
 ## Deprecated
 
