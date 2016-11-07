@@ -155,6 +155,6 @@ class TopHits extends AbstractAggregation
      */
     public function setFieldDataFields(array $fields)
     {
-        return $this->setParam('fielddata_fields', $fields);
+        return $this->setParam('docvalue_fields', $fields);
     }
 }

@@ -69,6 +69,7 @@ All notable changes to this project will be documented in this file based on the
 - implemented painless as default scripting language in tests
 - removed search_type=count is removed in Elasticsearch 5.0
 - removed logging.yml as now ES 5.0 uses log4j2.properties (leaving defaults)
+- removed fielddata_fields has been deprecated in ES5, use parameter docvalue_fields instead
 
 ### Bugfixes
 

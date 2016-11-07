@@ -267,7 +267,7 @@ class Query extends Param
      */
     public function setFieldDataFields(array $fieldDataFields)
     {
-        return $this->setParam('fielddata_fields', $fieldDataFields);
+        return $this->setParam('docvalue_fields', $fieldDataFields);
     }
 
     /**

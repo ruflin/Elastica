@@ -262,7 +262,7 @@ class InnerHitsTest extends BaseTest
         $fields = ['title', 'tags'];
         $innerHits = new InnerHits();
         $returnValue = $innerHits->setFieldDataFields($fields);
-        $this->assertEquals($fields, $innerHits->getParam('fielddata_fields'));
+        $this->assertEquals($fields, $innerHits->getParam('docvalue_fields'));
         $this->assertInstanceOf('Elastica\Query\InnerHits', $returnValue);
     }
 

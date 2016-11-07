@@ -154,7 +154,7 @@ class TopHitsTest extends BaseAggregationTest
         $fields = ['title', 'tags'];
         $agg = new TopHits('agg_name');
         $returnValue = $agg->setFieldDataFields($fields);
-        $this->assertEquals($fields, $agg->getParam('fielddata_fields'));
+        $this->assertEquals($fields, $agg->getParam('docvalue_fields'));
         $this->assertInstanceOf('Elastica\Aggregation\TopHits', $returnValue);
     }
 
