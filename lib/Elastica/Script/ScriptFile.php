@@ -83,17 +83,17 @@ class ScriptFile extends Script
      */
     protected static function _createFromArray(array $data)
     {
-        if (!isset($data['script_file'])) {
-            throw new InvalidException("\$data['script_file'] is required");
+        if (!isset($data['script']['file'])) {
+            throw new InvalidException("\$data['script']['file'] is required");
         }
 
-        $scriptFile = new self($data['script_file']);
+        $scriptFile = new self($data['script']['file']);
 
-        if (isset($data['params'])) {
-            if (!is_array($data['params'])) {
-                throw new InvalidException("\$data['params'] should be array");
+        if (isset($data['script']['params'])) {
+            if (!is_array($data['script']['params'])) {
+                throw new InvalidException("\$data['script']['params'] should be array");
             }
-            $scriptFile->setParams($data['params']);
+            $scriptFile->setParams($data['script']['params']);
         }
 
         return $scriptFile;
@@ -105,11 +105,13 @@ class ScriptFile extends Script
     public function toArray()
     {
         $array = [
-            'script_file' => $this->_scriptFile,
+            'script' => [
+                'file' => $this->_scriptFile,
+            ],
         ];
 
         if (!empty($this->_params)) {
-            $array['params'] = $this->_params;
+            $array['script']['params'] = $this->_params;
         }
 
         return $array;

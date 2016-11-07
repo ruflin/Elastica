@@ -18,6 +18,7 @@ class Script extends AbstractScript
     const LANG_PYTHON = 'python';
     const LANG_NATIVE = 'native';
     const LANG_EXPRESSION = 'expression';
+    const LANG_PAINLESS = 'painless';
 
     /**
      * @var string

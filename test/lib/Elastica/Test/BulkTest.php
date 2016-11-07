@@ -484,7 +484,7 @@ class BulkTest extends BaseTest
         $this->assertEquals('The Walrus', $docData['name']);
 
         //test updating via script
-        $script = new \Elastica\Script\Script('ctx._source.name += param1;', ['param1' => ' was Paul'], null, \Elastica\Script\Script::LANG_GROOVY);
+        $script = new \Elastica\Script\Script('ctx._source.name += params.param1;', ['param1' => ' was Paul'], null, \Elastica\Script\Script::LANG_PAINLESS);
         $doc2 = new Document();
         $script->setUpsert($doc2);
         $updateAction = Action\AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
@@ -503,7 +503,7 @@ class BulkTest extends BaseTest
         $this->assertEquals('The Walrus was Paul', $doc2->name);
 
         //test upsert
-        $script = new \Elastica\Script\Script('ctx._scource.counter += count', ['count' => 1], null, \Elastica\Script\Script::LANG_GROOVY);
+        $script = new \Elastica\Script\Script('ctx._scource.counter += params.count', ['count' => 1], null, \Elastica\Script\Script::LANG_PAINLESS);
         $doc = new Document('', ['counter' => 1]);
         $script->setUpsert($doc);
         $updateAction = Action\AbstractDocument::create($script, Action::OP_TYPE_UPDATE);

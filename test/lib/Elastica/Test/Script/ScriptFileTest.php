@@ -35,7 +35,6 @@ class ScriptFileTest extends BaseTest
         $query = new Query();
         $query->addScriptField('distance', $scriptFile);
 
-        $this->_markSkipped50('Unknown key for a VALUE_STRING in [script_file].');
         try {
             $resultSet = $type->search($query);
         } catch (ResponseException $e) {
@@ -49,8 +48,8 @@ class ScriptFileTest extends BaseTest
         $results = $resultSet->getResults();
 
         $this->assertEquals(2, $resultSet->count());
-        $this->assertEquals([3.149406767298327], $results[0]->__get('distance'));
-        $this->assertEquals([7.4639790751755726], $results[1]->__get('distance'));
+        $this->assertEquals([3151.855706373115], $results[0]->__get('distance'));
+        $this->assertEquals([7469.7862256855769], $results[1]->__get('distance'));
     }
 
     /**
@@ -58,11 +57,13 @@ class ScriptFileTest extends BaseTest
      */
     public function testConstructor()
     {
-        $value = 'calculate-distance.groovy';
+        $value = 'calculate-distance.painless';
         $scriptFile = new ScriptFile($value);
 
         $expected = [
-            'script_file' => $value,
+            'script' => [
+                'file' => $value,
+            ],
         ];
         $this->assertEquals($value, $scriptFile->getScriptFile());
         $this->assertEquals($expected, $scriptFile->toArray());
@@ -75,8 +76,10 @@ class ScriptFileTest extends BaseTest
         $scriptFile = new ScriptFile($value, $params);
 
         $expected = [
-            'script_file' => $value,
-            'params' => $params,
+            'script' => [
+                'file' => $value,
+                'params' => $params,
+            ],
         ];
 
         $this->assertEquals($value, $scriptFile->getScriptFile());
@@ -89,7 +92,7 @@ class ScriptFileTest extends BaseTest
      */
     public function testCreateString()
     {
-        $string = 'calculate-distance.groovy';
+        $string = 'calculate-distance.painless';
         $scriptFile = ScriptFile::create($string);
 
         $this->assertInstanceOf('Elastica\Script\ScriptFile', $scriptFile);
@@ -97,7 +100,9 @@ class ScriptFileTest extends BaseTest
         $this->assertEquals($string, $scriptFile->getScriptFile());
 
         $expected = [
-            'script_file' => $string,
+            'script' => [
+                'file' => $string,
+            ],
         ];
         $this->assertEquals($expected, $scriptFile->toArray());
     }
@@ -107,7 +112,7 @@ class ScriptFileTest extends BaseTest
      */
     public function testCreateScriptFile()
     {
-        $data = new ScriptFile('calculate-distance.groovy');
+        $data = new ScriptFile('calculate-distance.painless');
 
         $scriptFile = ScriptFile::create($data);
 
@@ -120,14 +125,16 @@ class ScriptFileTest extends BaseTest
      */
     public function testCreateArray()
     {
-        $string = 'calculate-distance.groovy';
+        $string = 'calculate-distance.painless';
         $params = [
             'param1' => 'one',
             'param2' => 1,
         ];
         $array = [
-            'script_file' => $string,
-            'params' => $params,
+            'script' => [
+                'file' => $string,
+                'params' => $params,
+            ],
         ];
 
         $scriptFile = ScriptFile::create($array);
@@ -163,7 +170,7 @@ class ScriptFileTest extends BaseTest
                 ['params' => ['param1' => 'one']],
             ],
             [
-                ['script' => 'calculate-distance.groovy', 'params' => 'param'],
+                ['script' => 'calculate-distance.painless', 'params' => 'param'],
             ],
         ];
     }
