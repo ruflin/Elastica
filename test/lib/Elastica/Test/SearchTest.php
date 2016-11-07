@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Document;
@@ -259,9 +260,7 @@ class SearchTest extends BaseTest
 
         $search = new Search($client);
         $search->addIndex($index)->addType($type);
-        $this->_markSkipped50(' No search type for [scan]');
         $result = $search->search([], [
-            Search::OPTION_SEARCH_TYPE => Search::OPTION_SEARCH_TYPE_SCAN,
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SIZE => 5,
         ]);
@@ -269,20 +268,12 @@ class SearchTest extends BaseTest
 
         $scrollId = $result->getResponse()->getScrollId();
         $this->assertNotEmpty($scrollId);
+        $this->assertEquals(5, count($result->getResults()));
 
         //There are 10 items, and we're scrolling with a size of 5
         //So we should get two results of 5 items, and then no items
         //We should also have sent the raw scroll_id as the HTTP request body
         $search = new Search($client);
-        $result = $search->search([], [
-            Search::OPTION_SCROLL => '5m',
-            Search::OPTION_SCROLL_ID => $scrollId,
-        ]);
-        $this->assertFalse($result->getResponse()->hasError());
-        $this->assertEquals(5, count($result->getResults()));
-        $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
-        $this->assertEquals($scrollId, $search->getClient()->getLastRequest()->getData());
-
         $result = $search->search([], [
             Search::OPTION_SCROLL => '5m',
             Search::OPTION_SCROLL_ID => $scrollId,
@@ -563,15 +554,6 @@ class SearchTest extends BaseTest
         $result2 = $search->count(new \Elastica\Query\MatchAll(), true);
         $this->assertInstanceOf('\Elastica\ResultSet', $result2);
         $this->assertEquals(1, $result2->getTotalHits());
-    }
-
-    /**
-     * @group functional
-     */
-    public function testScanAndScroll()
-    {
-        $search = new Search($this->_getClient());
-        $this->assertInstanceOf('Elastica\ScanAndScroll', $search->scanAndScroll());
     }
 
     /**

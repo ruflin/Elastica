@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Tool;
 
 use Elastica\Bulk;
@@ -34,7 +35,7 @@ class CrossIndex
     /**
      * Expiry time option.
      *
-     * type: string (see Elastica\ScanAndScroll)
+     * type: string (see Elastica\Scroll)
      * default: '1m'
      */
     const OPTION_EXPIRY_TIME = 'expiryTime';
@@ -42,7 +43,7 @@ class CrossIndex
     /**
      * Size per shard option.
      *
-     * type: int (see Elastica\ScanAndScroll)
+     * type: int (see Elastica\Scroll)
      * default: 1000
      */
     const OPTION_SIZE_PER_SHARD = 'sizePerShard';
@@ -83,11 +84,11 @@ class CrossIndex
         $search->setQuery($options[self::OPTION_QUERY]);
 
         // search on old index and bulk insert in new index
-        $scanAndScroll = new Scroll(
+        $scroll = new Scroll(
             $search,
             $options[self::OPTION_EXPIRY_TIME]
         );
-        foreach ($scanAndScroll as $resultSet) {
+        foreach ($scroll as $resultSet) {
             $bulk = new Bulk($newIndex->getClient());
             $bulk->setIndex($newIndex);
 
