@@ -1205,7 +1205,7 @@ class ClientTest extends BaseTest
      */
     public function testLogger()
     {
-        $logger = $this->getMock('Psr\\Log\\LoggerInterface');
+        $logger = $this->createMock('Psr\\Log\\LoggerInterface');
         $client = $this->_getClient([], null, $logger);
 
         $logger->expects($this->once())
@@ -1228,7 +1228,7 @@ class ClientTest extends BaseTest
      */
     public function testLoggerOnFailure()
     {
-        $logger = $this->getMock('Psr\\Log\\LoggerInterface');
+        $logger = $this->createMock('Psr\\Log\\LoggerInterface');
         $client = $this->_getClient(['connections' => [
             ['host' => $this->_getHost(), 'port' => 9201],
         ]], null, $logger);

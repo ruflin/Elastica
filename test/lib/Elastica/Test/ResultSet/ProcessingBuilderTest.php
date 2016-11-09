@@ -31,8 +31,8 @@ class ProcessingBuilderTest extends BaseTest
     {
         parent::setUp();
 
-        $this->innerBuilder = $this->getMock('Elastica\\ResultSet\\BuilderInterface');
-        $this->processor = $this->getMock('Elastica\\ResultSet\\ProcessorInterface');
+        $this->innerBuilder = $this->createMock('Elastica\\ResultSet\\BuilderInterface');
+        $this->processor = $this->createMock('Elastica\\ResultSet\\ProcessorInterface');
 
         $this->builder = new ResultSet\ProcessingBuilder($this->innerBuilder, $this->processor);
     }

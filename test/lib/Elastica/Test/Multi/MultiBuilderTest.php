@@ -27,7 +27,7 @@ class MultiBuilderTest extends BaseTest
     {
         parent::setUp();
 
-        $this->builder = $this->getMock('Elastica\\ResultSet\\BuilderInterface');
+        $this->builder = $this->createMock('Elastica\\ResultSet\\BuilderInterface');
         $this->multiBuilder = new MultiBuilder($this->builder);
     }
 
