@@ -4,7 +4,7 @@
   <title><![CDATA[Elastica]]></title>
   <link href="http://Elastica.io/atom.xml" rel="self"/>
   <link href="http://Elastica.io/"/>
-  <updated>2016-09-23T12:37:47+02:00</updated>
+  <updated>2016-11-09T22:19:12+01:00</updated>
   <id>http://Elastica.io/</id>
   <author>
     <name><![CDATA[ruflin]]></name>
@@ -12,6 +12,118 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release 5.0.0-beta1]]></title>
+    <link href="http://Elastica.io/2016/11/09/release-5-dot-0-0-beta1/"/>
+    <updated>2016-11-09T22:11:31+01:00</updated>
+    <id>http://Elastica.io/2016/11/09/release-5-dot-0-0-beta1</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/5.0.0-beta1">Elastica 5.0.0-beta1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.0.0-beta1">download</a>).</p>
+
+<p>This is the first major release of the Elastica 5.x series. Elastica is now compatible with <a href="(https://www.elastic.co/guide/en/elasticsearch/reference/5.0/release-notes-5.0.0.html">Elasticsearch 5.0</a>). For all the major changes in Elasticsearch 5.0 check this <a href="https://www.elastic.co/blog/elasticsearch-5-0-0-released">blog post</a>.</p>
+
+<p>Lots of major changes and breaking changes have gone into this release. Please test this release with Elasticsearch 5.0 and report any issues on Github. A special thank you goes to <a href="https://github.com/p365labs">@p365labs</a> and <a href="https://github.com/Zyqsempai">@Zyqsempai</a> that helped to make this release possible.</p>
+
+<h2>Backward Compatibility Breaks</h2>
+
+<ul>
+<li>Update elasticsearch dependency to 5.0</li>
+<li>Replace flush refresh param with a options array</li>
+<li>Rename Mapping::setFields to Mapping::setStoredFields</li>
+<li>Removing all deprecated filters including tests. Use queries instead.</li>
+<li>Remove deprecated Elastica\Script*.php classes. Use Elastica\Script* instead.</li>
+<li>Remove Elastica/Query/Image.php and test/Elastica/Query/ImageTest.php, no more support for image-plugin.</li>
+<li>Remove Elastica/Query/Filtered.php and test/Elastica/Query/FilteredTest.php and all uses from code.</li>
+<li>Remove index.merge.policy.merge_factor, and set/get MergePolicy as it looks deprecated from ES 1.6</li>
+<li>Add new &ldquo;Percolate query&rdquo; functionality and tests</li>
+<li>Remove in Elastica\AbstractUpdateAction Option &ldquo;percolate&rdquo;, getter and setter as deprecated as of ES 1.3. Use Percolator instead.</li>
+<li>Remove in Elastica\Aggregation\DateHistogram Option &ldquo;pre_zone&rdquo; is deprecated as of ES 1.5. Use &ldquo;time_zone&rdquo; instead</li>
+<li>Remove in Elastica\Aggregation\DateHistogram Option &ldquo;post_zone&rdquo; is deprecated as of ES 1.5. Use &ldquo;time_zone&rdquo; instead.</li>
+<li>Remove in Elastica\Aggregation\DateHistogram Option &ldquo;pre_zone_adjust_large_interval&rdquo; is deprecated as of ES 1.5. Use &ldquo;time_zone&rdquo; instead.</li>
+<li>Remove in Elastica\Aggregation\DateHistogram Option &ldquo;pre_offset&rdquo; is deprecated as of ES 1.5. Use &ldquo;offset&rdquo; instead.</li>
+<li>Remove in Elastica\Aggregation\DateHistogram Option &ldquo;post_offset&rdquo; is deprecated as of ES 1.5. Use &ldquo;offset&rdquo; instead.</li>
+<li>Remove Elastica\Document::set as deprecated. Use Elastica\Document::set instead</li>
+<li>Remove Elastica\Document::setScript() is no longer available as of 0.90.2. See <a href="http://elastica.io/migration/0.90.2/upsert.html">http://elastica.io/migration/0.90.2/upsert.html</a> to migrate.</li>
+<li>Remove Elastica\Document::getScript() is no longer available as of 0.90.2. See <a href="http://elastica.io/migration/0.90.2/upsert.html">http://elastica.io/migration/0.90.2/upsert.html</a> to migrate.</li>
+<li>Remove Elastica\Document::hasScript() is no longer available as of 0.90.2. See <a href="http://elastica.io/migration/0.90.2/upsert.html">http://elastica.io/migration/0.90.2/upsert.html</a> to migrate.</li>
+<li>Remove Elastica/Query::setLimit as deprecated. Use the Elastica/Query::setSize() method</li>
+<li>Remove Elastica\Query\Builder</li>
+<li>Remove Elastica\Query\Fuzzy::addField as deprecated. Use Elastica\Query\Fuzzy::setField and Elastica\Query\FuzzysetFieldOption instead.</li>
+<li>Remove Elastica\Query::setIds as deprecated. Use Elastica\Query::like instead.</li>
+<li>Remove Elastica\Query::setLikeText as deprecated. Use Elastica\Query::like instead.</li>
+<li>Remove Elastica\Query Option &ldquo;percent_terms_to_match&rdquo; is deprecated as of ES 1.5. Use &ldquo;minimum_should_match&rdquo; instead.</li>
+<li>Remove Elastica\QueryBuilder\DSL\Query &ldquo;More Like This Field&rdquo; query is deprecated as of ES 1.4. Use MoreLikeThis query instead.</li>
+<li>Changed visibility from protected to private Elastica\ResultSet::$_position as accessing this property in an extended class is deprecated.</li>
+<li>Changed visibility from protected to private Elastica\ResultSet::$_response as accessing this property in an extended class is deprecated.</li>
+<li>Changed visibility from protected to private Elastica\ResultSet::$_query as accessing this property in an extended class is deprecated.</li>
+<li>Changed visibility from protected to private Elastica\ResultSet::$_results as accessing this property in an extended class is deprecated.</li>
+<li>Removed Elastica\ResultSet::$_timedOut as deprecated. Use ResultSet->hasTimedOut() instead.</li>
+<li>Removed Elastica\ResultSet::$_took as deprecated. Use ResultSet->hasTimedOut() instead.</li>
+<li>Removed Elastica\ResultSet::$_totalHits as deprecated. Use ResultSet->hasTimedOut() instead.</li>
+<li>Removed Elastica\Type::delete() It is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings.</li>
+<li>Removed Elastica\Query\Builder as deprecated. Use new Elastica\QueryBuilder instead.</li>
+<li>Removed Elastica\Percolator as deprecated. Use new Elastica\Query\Percolate instead.</li>
+<li>Changed Elastica\Index::deleteByQuery() to use new API <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/docs-delete-by-query.html">https://www.elastic.co/guide/en/elasticsearch/reference/5.0/docs-delete-by-query.html</a></li>
+<li>Remove Elastica\ScanAndScroll and test, Scan search type is removed from ElasticSearch 5.0.</li>
+<li>Remove support for PHP 5.4 and 5.5. Require at least PHP 5.6 #1202</li>
+<li>Remove groovy as default scripting language</li>
+<li>Remove search_type=count as it is removed in Elasticsearch 5.0</li>
+<li>Remove fielddata_fields as it has been deprecated in ES5, use parameter docvalue_fields instead</li>
+</ul>
+
+
+<h2>Added</h2>
+
+<ul>
+<li>Elastica\QueryBuilder\DSL\Query::exists</li>
+<li>Elastica\QueryBuilder\DSL\Query::type</li>
+</ul>
+
+
+<h2>Improvements</h2>
+
+<ul>
+<li>Add a constant for the expression language.</li>
+<li><code>Health::getIndices</code> returns key=>value result, where key === $indexName.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$cluster-&gt;getHealth()-&gt;getIndices()[$indexName]
+</span><span class='line'>// or
+</span><span class='line'>$indices = $cluster-&gt;getHealth()-&gt;getIndices();
+</span><span class='line'>$indices[$indexName]</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Added a <code>Query::setTrackScores</code> method</li>
+<li>Implemented painless as default scripting language in tests</li>
+<li>Updated Dockerfile and elasticsearch.yml to allow inline.script: true</li>
+<li>Updated some Script function to use groovy as now default scripting is painless
+
+<ul>
+<li>Elastica\Test\Aggregation\ScriptTest::testAggregationScript</li>
+<li>Elastica\Test\Aggregation\ScriptTest::testAggregationScriptAsString</li>
+<li>Elastica\Test\Query\FunctionScoreTest::testScriptScore</li>
+<li>Elastica\Test\BulkTest::testUpdate</li>
+<li>Elastica\Test\ClientTest::testUpdateDocumentByScript</li>
+<li>Elastica\Test\ClientTest::testUpdateDocumentByScriptWithUpsert</li>
+<li>Elastica\Test\ClientTest::testUpdateDocumentPopulateFields</li>
+<li>Elastica\Test\ClientTest::testUpdateDocumentPopulateFields</li>
+<li>Elastica\Test\TypeTest::testUpdateDocument</li>
+<li>Elastica\Test\TypeTest::testUpdateDocumentWithIdForwardSlashes</li>
+<li>Elastica\Test\TypeTest::testUpdateDocumentWithParameter</li>
+<li>Elastica\Test\TypeTest::testUpdateDocumentWithFieldsSource</li>
+<li>Composer installations will no longer include tests and other development files.</li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Release 3.2.3]]></title>
@@ -1413,62 +1525,6 @@ as argument. <a href="https://github.com/ruflin/Elastica/pull/916">#916</a></li>
 <li>Deprecated: Elastica\Query::setPostFilter() passing filter as array is deprecated. Pass instance of AbstractFilter instead. #669</li>
 <li>Fixed escaping of / character in Elastica\Util::escapeTerm(), removed usage of JSON_UNESCAPED_SLASHES in Elastica\JSON #660</li>
 <li>Add connection pool and connection strategy #661</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Release v1.3.0.0]]></title>
-    <link href="http://Elastica.io/2014/07/27/release-v1-dot-3-0-dot-0/"/>
-    <updated>2014-07-27T15:39:20+02:00</updated>
-    <id>http://Elastica.io/2014/07/27/release-v1-dot-3-0-dot-0</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/v1.3.0.0">Elastica v1.3.0.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/v1.3.0.0">download</a>). This release is compatible with elasticsearch 1.3.0.</p>
-
-<h2>Dependencies</h2>
-
-<table>
-<thead>
-<tr>
-<th> Project </th>
-<th> Version </th>
-<th> Required </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.3.0">Elasticsearch</a></td>
-<td> 1.3.0 </td>
-<td> yes</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.0.0.RC1">Elasticsearch mapper attachments plugin</a></td>
-<td>2.0.0.RC1</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.0.0.RC2">Elasticsearch thrift transport plugin</a></td>
-<td>2.0.0.RC2</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.10">Elasticsearch geocluster facet plugin</a></td>
-<td>0.0.10</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
-
-
-<h2>Release Notes (changes.txt)</h2>
-
-<ul>
-<li>Update to elasticsearch version 1.3.0 <a href="http://www.elasticsearch.org/downloads/1-3-0/">http://www.elasticsearch.org/downloads/1-3-0/</a></li>
-<li>Add setQuery() method to Elastica\Query\ConstantScore #653</li>
-<li>Be able to configure ES host/port via ENV var in test env #652</li>
-<li>Fix FunstionScore Query random_score without seed bug. #647</li>
-<li>Add setPostFilter method to Elastica\Query (<a href="http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_filtering_queries_and_aggregations.html#_post_filter">http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/_filtering_queries_and_aggregations.html#_post_filter</a>) #645</li>
-<li>Add Reverse Nested aggregation (<a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-reverse-nested-aggregation.html</a>). #642</li>
 </ul>
 
 ]]></content>
