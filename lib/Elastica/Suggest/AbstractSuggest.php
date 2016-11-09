@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Suggest;
 
 use Elastica\Exception\InvalidException;
@@ -16,9 +17,14 @@ abstract class AbstractSuggest extends Param implements NameableInterface
     protected $_name;
 
     /**
-     * @var string the text for this suggestion
+     * @var string the prefix for this suggestion
      */
-    protected $_text;
+    protected $_prefix;
+
+    /**
+     * @var string the regex for this suggestion
+     */
+    protected $_regex;
 
     /**
      * @param string $name
@@ -31,15 +37,29 @@ abstract class AbstractSuggest extends Param implements NameableInterface
     }
 
     /**
-     * Suggest text must be set either globally or per suggestion.
+     * Suggest prefix must be set either globally or per suggestion.
      *
-     * @param string $text
+     * @param string $prefix
      *
      * @return $this
      */
-    public function setText($text)
+    public function setPrefix($prefix)
     {
-        $this->_text = $text;
+        $this->_prefix = $prefix;
+
+        return $this;
+    }
+
+    /**
+     * Suggest regex must be set either globally or per suggestion.
+     *
+     * @param string $regex
+     *
+     * @return $this
+     */
+    public function setRegex($regex)
+    {
+        $this->_regex = $regex;
 
         return $this;
     }
@@ -65,6 +85,19 @@ abstract class AbstractSuggest extends Param implements NameableInterface
     }
 
     /**
+     * Expects one of the next params: max_determinized_states - defaults to 10000,
+     * flags are ALL (default), ANYSTRING, COMPLEMENT, EMPTY, INTERSECTION, INTERVAL, or NONE.
+     *
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setRegexOptions(array $value)
+    {
+        return $this->setParam('regex', $value);
+    }
+
+    /**
      * @param int $size maximum number of suggestions to be retrieved from each shard
      *
      * @return $this
@@ -78,7 +111,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      * Sets the name of the suggest. It is automatically set by
      * the constructor.
      *
-     * @param string $name The name of the suggest.
+     * @param string $name The name of the suggest
      *
      * @throws \Elastica\Exception\InvalidException If name is empty
      *
@@ -110,8 +143,14 @@ abstract class AbstractSuggest extends Param implements NameableInterface
     public function toArray()
     {
         $array = parent::toArray();
+        if (isset($this->_prefix)) {
+            $array['prefix'] = $this->_prefix;
+        }
         if (isset($this->_text)) {
             $array['text'] = $this->_text;
+        }
+        if (isset($this->_regex)) {
+            $array['regex'] = $this->_regex;
         }
 
         return $array;

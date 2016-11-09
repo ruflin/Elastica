@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Suggest;
 
 use Elastica\Document;
@@ -36,7 +37,7 @@ class PhraseTest extends BaseTest
     {
         $suggest = new Suggest();
         $phraseSuggest = new Phrase('suggest1', 'text');
-        $phraseSuggest->setText('elasticsearch is bansai coor');
+        $phraseSuggest->setPrefix('elasticsearch is bansai coor');
         $phraseSuggest->setAnalyzer('simple');
         $suggest->addSuggestion($phraseSuggest);
         $suggest->setGlobalText('global!');
@@ -45,7 +46,7 @@ class PhraseTest extends BaseTest
             'suggest' => [
                 'text' => 'global!',
                 'suggest1' => [
-                    'text' => 'elasticsearch is bansai coor',
+                    'prefix' => 'elasticsearch is bansai coor',
                     'phrase' => [
                         'field' => 'text',
                         'analyzer' => 'simple',
@@ -64,7 +65,7 @@ class PhraseTest extends BaseTest
     {
         $suggest = new Suggest();
         $phraseSuggest = new Phrase('suggest1', 'text');
-        $phraseSuggest->setText('elasticsearch is bansai coor');
+        $phraseSuggest->setPrefix('elasticsearch is bansai coor');
         $phraseSuggest->setAnalyzer('simple')->setHighlight('<suggest>', '</suggest>')->setStupidBackoffSmoothing(0.4);
         $phraseSuggest->addCandidateGenerator(new DirectGenerator('text'));
         $suggest->addSuggestion($phraseSuggest);
