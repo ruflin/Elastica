@@ -1,11 +1,23 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/3.2.3...HEAD)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.0.0-beta1...master)
 
 ### Backward Compatibility Fixes
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+## Deprecated
+
+
+## [5.0.0-beta1](https://github.com/ruflin/Elastica/compare/3.2.3...5.0.0-beta1)
+
+### Backward Compatibility Breaks
 - Update elasticsearch dependency to 5.0
-- Composer installations will no longer include tests and other development files.
 - Replace flush refresh param with a options array
 - Rename Mapping::setFields to Mapping::setStoredFields
 - Removing all deprecated filters including tests. Use queries instead.
@@ -14,65 +26,39 @@ All notable changes to this project will be documented in this file based on the
 - Remove Elastica/Query/Filtered.php and test/Elastica/Query/FilteredTest.php and all uses from code.
 - Remove index.merge.policy.merge_factor, and set/get MergePolicy as it looks deprecated from ES 1.6
 - Add new "Percolate query" functionality and tests
-- removed in Elastica\AbstractUpdateAction Option "percolate", getter and setter as deprecated as of ES 1.3. Use Percolator instead.
-- removed in Elastica\Aggregation\DateHistogram Option "pre_zone" is deprecated as of ES 1.5. Use "time_zone" instead
-- removed in Elastica\Aggregation\DateHistogram Option "post_zone" is deprecated as of ES 1.5. Use "time_zone" instead.
-- removed in Elastica\Aggregation\DateHistogram Option "pre_zone_adjust_large_interval" is deprecated as of ES 1.5. Use "time_zone" instead.
-- removed in Elastica\Aggregation\DateHistogram Option "pre_offset" is deprecated as of ES 1.5. Use "offset" instead.
-- removed in Elastica\Aggregation\DateHistogram Option "post_offset" is deprecated as of ES 1.5. Use "offset" instead.
-- removed Elastica\Document::set as deprecated. Use Elastica\Document::set instead
-- removed Elastica\Document::setScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
-- removed Elastica\Document::getScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
-- removed Elastica\Document::hasScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
-- removed Elastica/Query::setLimit as deprecated. Use the Elastica/Query::setSize() method
-- removed Elastica\Query\Builder
-- removed Elastica\Query\Fuzzy::addField as deprecated. Use Elastica\Query\Fuzzy::setField and Elastica\Query\FuzzysetFieldOption instead.
-- removed Elastica\Query::setIds as deprecated. Use Elastica\Query::like instead.
-- removed Elastica\Query::setLikeText as deprecated. Use Elastica\Query::like instead.
-- removed Elastica\Query Option "percent_terms_to_match" is deprecated as of ES 1.5. Use "minimum_should_match" instead.
-- removed Elastica\QueryBuilder\DSL\Query "More Like This Field" query is deprecated as of ES 1.4. Use MoreLikeThis query instead.
-- changed visibility from protected to private Elastica\ResultSet::$_position as accessing this property in an extended class is deprecated.
-- changed visibility from protected to private Elastica\ResultSet::$_response as accessing this property in an extended class is deprecated.
-- changed visibility from protected to private Elastica\ResultSet::$_query as accessing this property in an extended class is deprecated.
-- changed visibility from protected to private Elastica\ResultSet::$_results as accessing this property in an extended class is deprecated.
-- removed Elastica\ResultSet::$_timedOut as deprecated. Use ResultSet->hasTimedOut() instead.
-- removed Elastica\ResultSet::$_took as deprecated. Use ResultSet->hasTimedOut() instead.
-- removed Elastica\ResultSet::$_totalHits as deprecated. Use ResultSet->hasTimedOut() instead.
-- removed Elastica\Type::delete() It is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings.
-- removed Elastica\Query\Builder as deprecated. Use new Elastica\QueryBuilder instead.
-- removed Elastica\Percolator as deprecated. Use new Elastica\Query\Percolate instead.
-- changed Elastica\Index::deleteByQuery() to use new API https://www.elastic.co/guide/en/elasticsearch/reference/5.0/docs-delete-by-query.html
-- updated Dockerfile and elasticsearch.yml to allow inline.script: true
-- updated some Script function to use groovy as now default scripting is painless
-    - Elastica\Test\Aggregation\ScriptTest::testAggregationScript
-    - Elastica\Test\Aggregation\ScriptTest::testAggregationScriptAsString
-    - Elastica\Test\Query\FunctionScoreTest::testScriptScore
-    - Elastica\Test\BulkTest::testUpdate
-    - Elastica\Test\ClientTest::testUpdateDocumentByScript
-    - Elastica\Test\ClientTest::testUpdateDocumentByScriptWithUpsert
-    - Elastica\Test\ClientTest::testUpdateDocumentPopulateFields
-    - Elastica\Test\ClientTest::testUpdateDocumentPopulateFields
-    - Elastica\Test\TypeTest::testUpdateDocument
-    - Elastica\Test\TypeTest::testUpdateDocumentWithIdForwardSlashes
-    - Elastica\Test\TypeTest::testUpdateDocumentWithParameter
-    - Elastica\Test\TypeTest::testUpdateDocumentWithFieldsSource
-- linted some files:
-    - Elastica\Index.php
-    - Elastica\Query\Percolate.php
-    - Elastica\QueryBuilder\DSL\Query.php
-    - Elastica\Test\IndexTest.php
-    - Elastica\Test\Node\InfoTest.php
-    - Elastica\Test\Query\PercolateTest.php
-- removed Elastica\ScanAndScroll and test, Scan search type is removed from ElasticSearch 5.0.
+- Remove in Elastica\AbstractUpdateAction Option "percolate", getter and setter as deprecated as of ES 1.3. Use Percolator instead.
+- Remove in Elastica\Aggregation\DateHistogram Option "pre_zone" is deprecated as of ES 1.5. Use "time_zone" instead
+- Remove in Elastica\Aggregation\DateHistogram Option "post_zone" is deprecated as of ES 1.5. Use "time_zone" instead.
+- Remove in Elastica\Aggregation\DateHistogram Option "pre_zone_adjust_large_interval" is deprecated as of ES 1.5. Use "time_zone" instead.
+- Remove in Elastica\Aggregation\DateHistogram Option "pre_offset" is deprecated as of ES 1.5. Use "offset" instead.
+- Remove in Elastica\Aggregation\DateHistogram Option "post_offset" is deprecated as of ES 1.5. Use "offset" instead.
+- Remove Elastica\Document::set as deprecated. Use Elastica\Document::set instead
+- Remove Elastica\Document::setScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
+- Remove Elastica\Document::getScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
+- Remove Elastica\Document::hasScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
+- Remove Elastica/Query::setLimit as deprecated. Use the Elastica/Query::setSize() method
+- Remove Elastica\Query\Builder
+- Remove Elastica\Query\Fuzzy::addField as deprecated. Use Elastica\Query\Fuzzy::setField and Elastica\Query\FuzzysetFieldOption instead.
+- Remove Elastica\Query::setIds as deprecated. Use Elastica\Query::like instead.
+- Remove Elastica\Query::setLikeText as deprecated. Use Elastica\Query::like instead.
+- Remove Elastica\Query Option "percent_terms_to_match" is deprecated as of ES 1.5. Use "minimum_should_match" instead.
+- Remove Elastica\QueryBuilder\DSL\Query "More Like This Field" query is deprecated as of ES 1.4. Use MoreLikeThis query instead.
+- Changed visibility from protected to private Elastica\ResultSet::$_position as accessing this property in an extended class is deprecated.
+- Changed visibility from protected to private Elastica\ResultSet::$_response as accessing this property in an extended class is deprecated.
+- Changed visibility from protected to private Elastica\ResultSet::$_query as accessing this property in an extended class is deprecated.
+- Changed visibility from protected to private Elastica\ResultSet::$_results as accessing this property in an extended class is deprecated.
+- Removed Elastica\ResultSet::$_timedOut as deprecated. Use ResultSet->hasTimedOut() instead.
+- Removed Elastica\ResultSet::$_took as deprecated. Use ResultSet->hasTimedOut() instead.
+- Removed Elastica\ResultSet::$_totalHits as deprecated. Use ResultSet->hasTimedOut() instead.
+- Removed Elastica\Type::delete() It is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings.
+- Removed Elastica\Query\Builder as deprecated. Use new Elastica\QueryBuilder instead.
+- Removed Elastica\Percolator as deprecated. Use new Elastica\Query\Percolate instead.
+- Changed Elastica\Index::deleteByQuery() to use new API https://www.elastic.co/guide/en/elasticsearch/reference/5.0/docs-delete-by-query.html
+- Remove Elastica\ScanAndScroll and test, Scan search type is removed from ElasticSearch 5.0.
 - Remove support for PHP 5.4 and 5.5. Require at least PHP 5.6 #1202
-- removed groovy as default scripting language
-- implemented painless as default scripting language in tests
-- removed search_type=count is removed in Elasticsearch 5.0
-- removed logging.yml as now ES 5.0 uses log4j2.properties (leaving defaults)
-- removed fielddata_fields has been deprecated in ES5, use parameter docvalue_fields instead
-- Fielddata is disabled on text fields by default in this ES release, enabled on tests Elastica\Test\Query\InnerHitsTest.php::testInnerHitsWithSort and Elastica\Test\Query\InnerHitsTest.php::testInnerHitsWithFieldData 
-
-### Bugfixes
+- Remove groovy as default scripting language
+- Remove search_type=count as it is removed in Elasticsearch 5.0
+- Remove fielddata_fields as it has been deprecated in ES5, use parameter docvalue_fields instead
 
 ### Added
 - Elastica\QueryBuilder\DSL\Query::exists
@@ -87,9 +73,23 @@ $cluster->getHealth()->getIndices()[$indexName]
 $indices = $cluster->getHealth()->getIndices();
 $indices[$indexName]
 ```
-- Added a `Query::setTrackScores` method 
-
-## Deprecated
+- Added a `Query::setTrackScores` method
+- Implemented painless as default scripting language in tests
+- Updated Dockerfile and elasticsearch.yml to allow inline.script: true
+- Updated some Script function to use groovy as now default scripting is painless
+    - Elastica\Test\Aggregation\ScriptTest::testAggregationScript
+    - Elastica\Test\Aggregation\ScriptTest::testAggregationScriptAsString
+    - Elastica\Test\Query\FunctionScoreTest::testScriptScore
+    - Elastica\Test\BulkTest::testUpdate
+    - Elastica\Test\ClientTest::testUpdateDocumentByScript
+    - Elastica\Test\ClientTest::testUpdateDocumentByScriptWithUpsert
+    - Elastica\Test\ClientTest::testUpdateDocumentPopulateFields
+    - Elastica\Test\ClientTest::testUpdateDocumentPopulateFields
+    - Elastica\Test\TypeTest::testUpdateDocument
+    - Elastica\Test\TypeTest::testUpdateDocumentWithIdForwardSlashes
+    - Elastica\Test\TypeTest::testUpdateDocumentWithParameter
+    - Elastica\Test\TypeTest::testUpdateDocumentWithFieldsSource
+  - Composer installations will no longer include tests and other development files.
 
 
 ## [3.2.3](https://github.com/ruflin/Elastica/compare/3.2.2...3.2.3)
