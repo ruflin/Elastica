@@ -27,7 +27,7 @@ class InnerHitsTest extends BaseTest
             'users' => [
                 'type' => 'nested',
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => ['type' => 'string', 'fielddata' => 'true'],
                 ],
             ],
             'title' => ['type' => 'string'],
@@ -110,7 +110,7 @@ class InnerHitsTest extends BaseTest
 
         // Set mapping
         $mappingResponse->setProperties([
-            'answer' => ['type' => 'string'],
+            'answer' => ['type' => 'string', 'fielddata' => 'true'],
             'last_activity_date' => ['type' => 'date'],
         ]);
         $mappingResponse->send();
@@ -262,7 +262,7 @@ class InnerHitsTest extends BaseTest
         $fields = ['title', 'tags'];
         $innerHits = new InnerHits();
         $returnValue = $innerHits->setFieldDataFields($fields);
-        $this->assertEquals($fields, $innerHits->getParam('fielddata_fields'));
+        $this->assertEquals($fields, $innerHits->getParam('docvalue_fields'));
         $this->assertInstanceOf('Elastica\Query\InnerHits', $returnValue);
     }
 
@@ -406,7 +406,6 @@ class InnerHitsTest extends BaseTest
         $innerHits = new InnerHits();
         $innerHits->setSort(['answer' => 'asc']);
 
-        $this->_markSkipped50('Set fielddata=true on [answer] in order to load fielddata in memory');
         $results = $this->getParentChildQuery($queryString, $innerHits);
         $firstResult = current($results->getResults());
 
@@ -513,7 +512,6 @@ class InnerHitsTest extends BaseTest
         $queryString = new SimpleQueryString('question simon', ['title', 'users.name']);
         $innerHits = new InnerHits();
 
-        $this->_markSkipped50('Set fielddata=true on [answer] in order to load fielddata in memory');
         $innerHits->setFieldDataFields(['users.name']);
 
         $results = $this->getNestedQuery($queryString, $innerHits);
