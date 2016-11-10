@@ -17,40 +17,29 @@ class CompletionTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('song');
 
-        $this->_markSkipped50('Mapping definition for [fieldName] has unsupported parameters:  [payloads : true]');
         $type->setMapping([
             'fieldName' => [
                 'type' => 'completion',
-                'payloads' => true,
             ],
         ]);
 
         $type->addDocuments([
             new Document(1, [
-                'fieldName' => [
-                    'input' => ['Nevermind', 'Nirvana'],
-                    'output' => 'Nevermind - Nirvana',
-                    'payload' => [
-                        'year' => 1991,
-                    ],
+                'fieldName'  => [
+                    'input'  => ['Nevermind', 'Nirvana'],
+                    'weight' => 5
                 ],
             ]),
             new Document(2, [
-                'fieldName' => [
-                    'input' => ['Bleach', 'Nirvana'],
-                    'output' => 'Bleach - Nirvana',
-                    'payload' => [
-                        'year' => 1989,
-                    ],
+                'fieldName'  => [
+                    'input'  => ['Bleach', 'Nirvana'],
+                    'weight' => 2
                 ],
             ]),
             new Document(3, [
-                'fieldName' => [
-                    'input' => ['Incesticide', 'Nirvana'],
-                    'output' => 'Incesticide - Nirvana',
-                    'payload' => [
-                        'year' => 1992,
-                    ],
+                'fieldName'  => [
+                    'input'  => ['Incesticide', 'Nirvana'],
+                    'weight' => 7
                 ],
             ]),
         ]);
@@ -95,8 +84,7 @@ class CompletionTest extends BaseTest
         $options = $suggests['suggestName'][0]['options'];
 
         $this->assertCount(1, $options);
-        $this->assertEquals('Nevermind - Nirvana', $options[0]['text']);
-        $this->assertEquals(1991, $options[0]['payload']['year']);
+        $this->assertEquals('Nevermind', $options[0]['text']);
     }
 
     /**
@@ -117,7 +105,7 @@ class CompletionTest extends BaseTest
         $options = $suggests['suggestName'][0]['options'];
 
         $this->assertCount(1, $options);
-        $this->assertEquals('Nevermind - Nirvana', $options[0]['text']);
+        $this->assertEquals('Nevermind', $options[0]['text']);
     }
 
     /**

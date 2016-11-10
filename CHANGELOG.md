@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/5.0.0-beta1...master)
 
 ### Backward Compatibility Fixes
+- Updated Elastica\Test\Suggest\CompletionTest now payload and output are removed
 
 ### Bugfixes
 
@@ -89,7 +90,7 @@ $indices[$indexName]
     - Elastica\Test\TypeTest::testUpdateDocumentWithIdForwardSlashes
     - Elastica\Test\TypeTest::testUpdateDocumentWithParameter
     - Elastica\Test\TypeTest::testUpdateDocumentWithFieldsSource
-  - Composer installations will no longer include tests and other development files.
+- Composer installations will no longer include tests and other development files.
 
 
 ## [3.2.3](https://github.com/ruflin/Elastica/compare/3.2.2...3.2.3)
