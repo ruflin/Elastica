@@ -507,9 +507,25 @@ class TypeTest extends BaseTest
      */
     public function testGetDocumentWithFieldsSelection()
     {
-        $this->_markSkipped50('Currently seems like stored_fields does not work as expected -> requires mapping?');
         $index = $this->_createIndex();
+
         $type = new Type($index, 'test');
+        $mapping = new Mapping();
+        $mapping->setProperties([
+            'name' => [
+                'type' => 'string',
+                'store' => 'yes', ],
+            'email' => [
+                'type' => 'string',
+                'store' => 'yes', ],
+            'country' => [
+                'type' => 'string'
+            ]
+        ]);
+
+        $mapping->disableSource();
+        $type->setMapping($mapping);
+
         $type->addDocument(new Document(1, ['name' => 'loris', 'country' => 'FR', 'email' => 'test@test.com']));
         $index->refresh();
 
