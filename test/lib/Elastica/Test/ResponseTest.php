@@ -20,8 +20,8 @@ class ResponseTest extends BaseTest
         $type = $index->getType('helloworld');
 
         $mapping = new Mapping($type, [
-            'name' => ['type' => 'string', 'store' => 'no'],
-            'dtmPosted' => ['type' => 'date', 'store' => 'no', 'format' => 'yyyy-MM-dd HH:mm:ss'],
+            'name' => ['type' => 'text'],
+            'dtmPosted' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
         ]);
         $type->setMapping($mapping);
 

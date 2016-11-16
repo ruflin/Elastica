@@ -18,7 +18,7 @@ class NestedTest extends BaseAggregationTest
             'resellers' => [
                 'type' => 'nested',
                 'properties' => [
-                    'name' => ['type' => 'string'],
+                    'name' => ['type' => 'text'],
                     'price' => ['type' => 'double'],
                 ],
             ],

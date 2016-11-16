@@ -19,7 +19,7 @@ class ReverseNestedTest extends BaseAggregationTest
                 'type' => 'nested',
                 'properties' => [
                     'name' => ['type' => 'keyword'],
-                    'body' => ['type' => 'string'],
+                    'body' => ['type' => 'text'],
                 ],
             ],
             'tags' => ['type' => 'keyword'],

@@ -18,7 +18,7 @@ class FunctionScoreTest extends BaseTest
         $type = $index->getType('test');
 
         $type->setMapping([
-            'name' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'name' => ['type' => 'text', 'index' => 'not_analyzed'],
             'location' => ['type' => 'geo_point'],
             'price' => ['type' => 'float'],
             'popularity' => ['type' => 'integer'],

@@ -64,7 +64,7 @@ class WildcardTest extends BaseTest
         $type = $index->getType('test');
 
         $mapping = new Mapping($type, [
-                'name' => ['type' => 'string', 'store' => 'no', 'analyzer' => 'lw'],
+                'name' => ['type' => 'text', 'analyzer' => 'lw'],
             ]
         );
         $type->setMapping($mapping);
