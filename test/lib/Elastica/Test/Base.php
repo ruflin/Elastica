@@ -189,8 +189,8 @@ class Base extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $hasGroup = $this->_isUnitGroup() || $this->_isFunctionalGroup() || $this->_isShutdownGroup() || $this->_isBenchmarkGroup();
-        $this->assertTrue($hasGroup, 'Every test must have one of "unit", "functional", "shutdown" or "benchmark" group');
+        $hasGroup = $this->_isUnitGroup() || $this->_isFunctionalGroup() || $this->_isBenchmarkGroup();
+        $this->assertTrue($hasGroup, 'Every test must have one of "unit", "functional", "benchmark" group');
         $this->showDeprecated();
     }
 
@@ -216,13 +216,6 @@ class Base extends \PHPUnit_Framework_TestCase
         $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
 
         return in_array('functional', $groups);
-    }
-
-    protected function _isShutdownGroup()
-    {
-        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
-
-        return in_array('shutdown', $groups);
     }
 
     protected function _isBenchmarkGroup()

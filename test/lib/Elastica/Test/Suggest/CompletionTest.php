@@ -25,21 +25,21 @@ class CompletionTest extends BaseTest
 
         $type->addDocuments([
             new Document(1, [
-                'fieldName'  => [
-                    'input'  => ['Nevermind', 'Nirvana'],
-                    'weight' => 5
+                'fieldName' => [
+                    'input' => ['Nevermind', 'Nirvana'],
+                    'weight' => 5,
                 ],
             ]),
             new Document(2, [
-                'fieldName'  => [
-                    'input'  => ['Bleach', 'Nirvana'],
-                    'weight' => 2
+                'fieldName' => [
+                    'input' => ['Bleach', 'Nirvana'],
+                    'weight' => 2,
                 ],
             ]),
             new Document(3, [
-                'fieldName'  => [
-                    'input'  => ['Incesticide', 'Nirvana'],
-                    'weight' => 7
+                'fieldName' => [
+                    'input' => ['Incesticide', 'Nirvana'],
+                    'weight' => 7,
                 ],
             ]),
         ]);

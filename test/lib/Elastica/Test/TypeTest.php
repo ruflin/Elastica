@@ -519,8 +519,8 @@ class TypeTest extends BaseTest
                 'type' => 'string',
                 'store' => 'yes', ],
             'country' => [
-                'type' => 'string'
-            ]
+                'type' => 'string',
+            ],
         ]);
 
         $mapping->disableSource();
