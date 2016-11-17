@@ -138,11 +138,11 @@ class TransportBenchmarkTest extends BaseTest
             'user' => [
                 'type' => 'object',
                 'properties' => [
-                    'name' => ['type' => 'string', 'include_in_all' => true],
-                    'fullName' => ['type' => 'string', 'include_in_all' => true],
+                    'name' => ['type' => 'text', 'include_in_all' => true],
+                    'fullName' => ['type' => 'text', 'include_in_all' => true],
                 ],
             ],
-            'msg' => ['type' => 'string', 'include_in_all' => true],
+            'msg' => ['type' => 'text', 'include_in_all' => true],
             'tstamp' => ['type' => 'date', 'include_in_all' => false],
             'location' => ['type' => 'geo_point', 'include_in_all' => false],
             '_boost' => ['type' => 'float', 'include_in_all' => false],

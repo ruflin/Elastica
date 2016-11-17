@@ -150,7 +150,7 @@ class TypeTest extends BaseTest
         $type = new Type($index, 'user');
         $mapping = new Mapping($type, [
             'id' => ['type' => 'integer', 'store' => 'yes'],
-            'username' => ['type' => 'string', 'store' => 'no'],
+            'username' => ['type' => 'text'],
         ]);
         $mapping->setSource(['enabled' => false]);
         $type->setMapping($mapping);
@@ -747,11 +747,10 @@ class TypeTest extends BaseTest
         $mapping = new Mapping();
         $mapping->setProperties([
             'name' => [
-                'type' => 'string',
-                'store' => 'yes', ],
+                'type' => 'text',
+                'store' => 'true', ],
             'counter' => [
                 'type' => 'integer',
-                'store' => 'no',
             ],
         ]);
         $mapping->disableSource();

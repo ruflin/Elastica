@@ -25,8 +25,8 @@ class IndexTest extends BaseTest
 
         $type = $index->getType('test');
 
-        $mapping = ['id' => ['type' => 'integer', 'store' => true], 'email' => ['type' => 'string', 'store' => 'no'],
-            'username' => ['type' => 'string', 'store' => 'no'], 'test' => ['type' => 'integer', 'store' => 'no'], ];
+        $mapping = ['id' => ['type' => 'integer', 'store' => true], 'email' => ['type' => 'text'],
+            'username' => ['type' => 'text'], 'test' => ['type' => 'integer'], ];
         $type->setMapping($mapping);
 
         $type->addDocument($doc);
@@ -56,7 +56,7 @@ class IndexTest extends BaseTest
 
         $type = new Type($index, 'test');
         $mapping = new Mapping($type, [
-                'id' => ['type' => 'integer', 'store' => 'yes'],
+                'id' => ['type' => 'integer', 'store' => 'true'],
             ]);
         $type->setMapping($mapping);
 
@@ -120,7 +120,7 @@ class IndexTest extends BaseTest
      */
     public function testAddPdfFile()
     {
-        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => false]];
+        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'text']];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
 
@@ -161,7 +161,7 @@ class IndexTest extends BaseTest
      */
     public function testAddPdfFileContent()
     {
-        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => false]];
+        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'text']];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
 
@@ -202,7 +202,7 @@ class IndexTest extends BaseTest
      */
     public function testAddWordxFile()
     {
-        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => 'no']];
+        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'text']];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
 
@@ -242,8 +242,8 @@ class IndexTest extends BaseTest
      */
     public function testExcludeFileSource()
     {
-        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'string', 'store' => true],
-            'title' => ['type' => 'string', 'store' => true], ];
+        $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'text', 'store' => true],
+            'title' => ['type' => 'text', 'store' => true], ];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
 
@@ -692,8 +692,8 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $mapping = ['id' => ['type' => 'integer', 'store' => true], 'email' => ['type' => 'string', 'store' => false],
-            'username' => ['type' => 'string', 'store' => false], 'test' => ['type' => 'integer', 'store' => false], ];
+        $mapping = ['id' => ['type' => 'integer', 'store' => true], 'email' => ['type' => 'text'],
+            'username' => ['type' => 'text'], 'test' => ['type' => 'integer'], ];
 
         $type->setMapping($mapping);
         $index->refresh();

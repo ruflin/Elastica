@@ -122,8 +122,8 @@ class MappingTest extends BaseTest
                     'type' => 'object', 'properties' => [
                         'user' => [
                             'properties' => [
-                                'firstname' => ['type' => 'string', 'store' => true],
-                                'lastname' => ['type' => 'string', 'store' => true],
+                                'firstname' => ['type' => 'text', 'store' => true],
+                                'lastname' => ['type' => 'text', 'store' => true],
                                 'age' => ['type' => 'integer', 'store' => true],
                             ],
                         ],
@@ -162,7 +162,7 @@ class MappingTest extends BaseTest
         $childtype = new Type($index, 'childtype');
         $childmapping = new Mapping($childtype,
             [
-                'name' => ['type' => 'string', 'store' => true],
+                'name' => ['type' => 'text', 'store' => true],
             ]
         );
         $childmapping->setParent('parenttype');
@@ -175,7 +175,7 @@ class MappingTest extends BaseTest
         $parenttype = new Type($index, 'parenttype');
         $parentmapping = new Mapping($parenttype,
             [
-                'name' => ['type' => 'string', 'store' => true],
+                'name' => ['type' => 'text', 'store' => true],
             ]
         );
 
@@ -194,8 +194,8 @@ class MappingTest extends BaseTest
             [
                 'note' => [
                     'properties' => [
-                        'titulo' => ['type' => 'text', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0],
-                        'contenido' => ['type' => 'text', 'store' => 'no', 'include_in_all' => true, 'boost' => 1.0],
+                        'titulo' => ['type' => 'text', 'include_in_all' => true, 'boost' => 1.0],
+                        'contenido' => ['type' => 'text', 'include_in_all' => true, 'boost' => 1.0],
                     ],
                 ],
             ]
@@ -289,8 +289,8 @@ class MappingTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
         $mapping = new Mapping($type, [
-            'firstname' => ['type' => 'string', 'store' => true],
-            'lastname' => ['type' => 'string'],
+            'firstname' => ['type' => 'text', 'store' => true],
+            'lastname' => ['type' => 'text'],
         ]);
         $mapping->setMeta(['class' => 'test']);
         $type->setMapping($mapping);
@@ -309,8 +309,8 @@ class MappingTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
         $properties = [
-            'firstname' => ['type' => 'string', 'store' => true],
-            'lastname' => ['type' => 'string'],
+            'firstname' => ['type' => 'text', 'store' => true],
+            'lastname' => ['type' => 'text'],
         ];
         $mapping = new Mapping($type, $properties);
         $all = [

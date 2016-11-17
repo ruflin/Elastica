@@ -203,9 +203,9 @@ class MultiMatchTest extends BaseTest
         $type = $index->getType('test');
 
         $mapping = new Mapping($type, [
-            'name' => ['type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'],
-            'last_name' => ['type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'],
-            'full_name' => ['type' => 'string', 'store' => 'no', 'analyzer' => 'noStops'],
+            'name' => ['type' => 'text', 'analyzer' => 'noStops'],
+            'last_name' => ['type' => 'text', 'analyzer' => 'noStops'],
+            'full_name' => ['type' => 'text', 'analyzer' => 'noStops'],
         ]);
 
         $type->setMapping($mapping);

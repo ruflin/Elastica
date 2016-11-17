@@ -27,10 +27,10 @@ class InnerHitsTest extends BaseTest
             'users' => [
                 'type' => 'nested',
                 'properties' => [
-                    'name' => ['type' => 'string', 'fielddata' => 'true'],
+                    'name' => ['type' => 'text', 'fielddata' => 'true'],
                 ],
             ],
-            'title' => ['type' => 'string'],
+            'title' => ['type' => 'text'],
             'last_activity_date' => ['type' => 'date'],
         ]);
 
@@ -99,7 +99,7 @@ class InnerHitsTest extends BaseTest
 
         // Set mapping
         $mappingQuestion->setProperties([
-            'title' => ['type' => 'string'],
+            'title' => ['type' => 'text'],
             'last_activity_date' => ['type' => 'date'],
         ]);
 
@@ -110,7 +110,7 @@ class InnerHitsTest extends BaseTest
 
         // Set mapping
         $mappingResponse->setProperties([
-            'answer' => ['type' => 'string', 'fielddata' => 'true'],
+            'answer' => ['type' => 'text', 'fielddata' => 'true'],
             'last_activity_date' => ['type' => 'date'],
         ]);
         $mappingResponse->send();

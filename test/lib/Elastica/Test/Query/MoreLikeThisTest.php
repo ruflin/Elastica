@@ -26,8 +26,8 @@ class MoreLikeThisTest extends BaseTest
 
         $type = new Type($index, 'helloworldmlt');
         $mapping = new Mapping($type, [
-            'email' => ['store' => 'yes', 'type' => 'string', 'index' => 'analyzed'],
-            'content' => ['store' => 'yes', 'type' => 'string',  'index' => 'analyzed'],
+            'email' => ['store' => 'true', 'type' => 'text', 'index' => 'analyzed'],
+            'content' => ['store' => 'true', 'type' => 'text',  'index' => 'analyzed'],
         ]);
 
         $mapping->setSource(['enabled' => false]);

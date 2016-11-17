@@ -24,7 +24,7 @@ class BoostingTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
         $type->setMapping([
-            'name' => ['type' => 'string', 'index' => 'analyzed'],
+            'name' => ['type' => 'text', 'index' => 'analyzed'],
             'price' => ['type' => 'float'],
         ]);
         $docs = [];
