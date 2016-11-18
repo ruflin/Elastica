@@ -166,20 +166,4 @@ class Cluster
     {
         return new Settings($this->getClient());
     }
-
-    /**
-     * Shuts down the complete cluster.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-shutdown.html
-     *
-     * @param string $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
-     *
-     * @return \Elastica\Response
-     */
-    public function shutdown($delay = '1s')
-    {
-        $path = '_shutdown?delay='.$delay;
-
-        return $this->_client->request($path, Request::POST);
-    }
 }

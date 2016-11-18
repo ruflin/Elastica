@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Fixes
 - Updated Elastica\Test\Suggest\CompletionTest now payload and output are removed
 - Updated Elastica\Test\TypeTest::testGetDocumentWithFieldsSelection The stored_fields parameter will only return stored fields — it will no longer extract values from the _source
+- remove _shutdown for Node and Cluster as deprecated
 
 ### Bugfixes
 
