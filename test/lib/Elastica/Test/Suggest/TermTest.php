@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Suggest;
 
 use Elastica\Document;
@@ -39,11 +40,11 @@ class TermTest extends BaseTest
         $suggest1 = new Term('suggest1', '_all');
         $suggest1->setSort(Term::SORT_FREQUENCY);
 
-        $suggest->addSuggestion($suggest1->setText('Foor'));
+        $suggest->addSuggestion($suggest1->setPrefix('Foor'));
 
         $suggest2 = new Term('suggest2', '_all');
         $suggest2->setSuggestMode(Term::SUGGEST_MODE_POPULAR);
-        $suggest->addSuggestion($suggest2->setText('Girhub'));
+        $suggest->addSuggestion($suggest2->setPrefix('Girhub'));
 
         $expected = [
             'suggest' => [
@@ -52,14 +53,14 @@ class TermTest extends BaseTest
                         'field' => '_all',
                         'sort' => 'frequency',
                     ],
-                    'text' => 'Foor',
+                    'prefix' => 'Foor',
                 ],
                 'suggest2' => [
                     'term' => [
                         'field' => '_all',
                         'suggest_mode' => 'popular',
                     ],
-                    'text' => 'Girhub',
+                    'prefix' => 'Girhub',
                 ],
             ],
         ];
@@ -74,9 +75,9 @@ class TermTest extends BaseTest
     {
         $suggest = new Suggest();
         $suggest1 = new Term('suggest1', '_all');
-        $suggest->addSuggestion($suggest1->setText('Foor seach'));
+        $suggest->addSuggestion($suggest1->setPrefix('Foor seach'));
         $suggest2 = new Term('suggest2', '_all');
-        $suggest->addSuggestion($suggest2->setText('Girhub'));
+        $suggest->addSuggestion($suggest2->setPrefix('Girhub'));
 
         $index = $this->_getIndexForTest();
         $result = $index->search($suggest);
@@ -98,7 +99,7 @@ class TermTest extends BaseTest
     public function testSuggestNoResults()
     {
         $termSuggest = new Term('suggest1', '_all');
-        $termSuggest->setText('Foobar')->setSize(4);
+        $termSuggest->setPrefix('Foobar')->setSize(4);
 
         $index = $this->_getIndexForTest();
         $result = $index->search($termSuggest);
