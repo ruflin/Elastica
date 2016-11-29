@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file based on the
 ### Bugfixes
 
 ### Added
+- Added regex option form suggest completions https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html#regex
 
 ### Improvements
 - `\Elastica\JSON` throws exception with readable message instead of errno

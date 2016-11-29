@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Suggest;
 
 use Elastica\Document;
@@ -55,10 +56,10 @@ class CompletionTest extends BaseTest
     public function testToArray()
     {
         $suggest = new Completion('suggestName', 'fieldName');
-        $suggest->setText('foo');
+        $suggest->setPrefix('foo');
         $suggest->setSize(10);
         $expected = [
-            'text' => 'foo',
+            'prefix' => 'foo',
             'completion' => [
                 'size' => 10,
                 'field' => 'fieldName',
@@ -73,7 +74,7 @@ class CompletionTest extends BaseTest
     public function testSuggestWorks()
     {
         $suggest = new Completion('suggestName', 'fieldName');
-        $suggest->setText('Never');
+        $suggest->setPrefix('Never');
 
         $index = $this->_getIndexForTest();
         $resultSet = $index->search(Query::create($suggest));
@@ -94,7 +95,7 @@ class CompletionTest extends BaseTest
     {
         $suggest = new Completion('suggestName', 'fieldName');
         $suggest->setFuzzy(['fuzziness' => 2]);
-        $suggest->setText('Neavermint');
+        $suggest->setPrefix('Neavermint');
 
         $index = $this->_getIndexForTest();
         $resultSet = $index->search(Query::create($suggest));
@@ -125,5 +126,21 @@ class CompletionTest extends BaseTest
         $this->assertEquals($fuzzy, $suggest->getParam('fuzzy'));
 
         $this->assertInstanceOf('Elastica\\Suggest\\Completion', $suggest->setFuzzy($fuzzy));
+    }
+
+    /**
+     * @group functional
+     */
+    public function testRegexSuggestWorks()
+    {
+        $suggest = new Completion('suggestName', 'fieldName');
+        $suggest->setRegex('n[ever|i]r');
+        $suggest->setRegexOptions(['flags' => 'ANYSTRING', 'max_determinized_states' => 20000]);
+        $index = $this->_getIndexForTest();
+        $resultSet = $index->search(Query::create($suggest));
+        $this->assertTrue($resultSet->hasSuggests());
+        $suggests = $resultSet->getSuggests();
+        $options = $suggests['suggestName'][0]['options'];
+        $this->assertCount(3, $options);
     }
 }
