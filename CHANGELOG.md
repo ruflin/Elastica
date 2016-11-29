@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 ### Improvements
+- `\Elastica\JSON` throws exception with readable message instead of errno
+- `\Elastica\JSON::stringify` throws `\Elastica\Exception\JSONParseException` on error
 
 ## Deprecated
 
