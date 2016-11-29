@@ -16,6 +16,11 @@ use Elastica\Search as BaseSearch;
 class Search
 {
     /**
+     * @const string[] valid header options
+     */
+    private static $HEADER_OPTIONS = ['index', 'types', 'search_type',
+                                      'routing', 'preference', ];
+    /**
      * @var MultiBuilderInterface
      */
     private $_builder;
@@ -167,11 +172,15 @@ class Search
     protected function _getSearchData(BaseSearch $search)
     {
         $header = $this->_getSearchDataHeader($search);
+
         $header = (empty($header)) ? new \stdClass() : $header;
         $query = $search->getQuery();
 
+        // Keep other query options as part of the search body
+        $queryOptions = array_diff_key($search->getOptions(), array_flip(self::$HEADER_OPTIONS));
+
         $data = JSON::stringify($header)."\n";
-        $data .= JSON::stringify($query->toArray())."\n";
+        $data .= JSON::stringify($query->toArray() + $queryOptions)."\n";
 
         return $data;
     }
@@ -193,6 +202,7 @@ class Search
             $header['types'] = $search->getTypes();
         }
 
-        return $header;
+        // Filter options accepted in the "header"
+        return array_intersect_key($header, array_flip(self::$HEADER_OPTIONS));
     }
 }

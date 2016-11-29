@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file based on the
 - remove _shutdown for Node and Cluster as deprecated
 
 ### Bugfixes
+- Query options such as "timeout" or "terminate_after" should not be ignored when using Multi\Search
 
 ### Added
 - Added regex option form suggest completions https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html#regex
