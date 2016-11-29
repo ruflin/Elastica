@@ -134,14 +134,4 @@ abstract class AbstractSuggest extends Param implements NameableInterface
     {
         return $this->_name;
     }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        $array = parent::toArray();
-
-        return $array;
-    }
 }
