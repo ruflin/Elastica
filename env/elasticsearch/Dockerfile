@@ -1,4 +1,4 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:latest
+FROM docker.elastic.co/elasticsearch/elasticsearch:5.0.2
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install mapper-attachments
