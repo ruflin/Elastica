@@ -2,7 +2,7 @@
 namespace Elastica;
 
 /**
- * JSONTest
+ * JSONTest.
  *
  * @author Oleg Andreyev <oleg.andreyev@intexsys.lv>
  */
@@ -10,7 +10,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 {
     public function testStringifyMustNotThrowExceptionOnValid()
     {
-        JSON::stringify(array());
+        JSON::stringify([]);
     }
 
     /**
@@ -19,7 +19,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringifyMustThrowExceptionNanOrInf()
     {
-        $arr = array(NAN, INF);
+        $arr = [NAN, INF];
         JSON::stringify($arr);
     }
 
@@ -29,7 +29,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     public function testStringifyMustThrowExceptionMaximumDepth()
     {
-        $arr = array(array(array()));
+        $arr = [[[]]];
         JSON::stringify($arr, 0, 0);
     }
 }
