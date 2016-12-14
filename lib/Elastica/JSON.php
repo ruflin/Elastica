@@ -72,7 +72,7 @@ class JSON
     }
 
     /**
-     * Get Json Last Error
+     * Get Json Last Error.
      *
      * @link http://php.net/manual/en/function.json-last-error.php
      * @link http://php.net/manual/en/function.json-last-error-msg.php
