@@ -1,7 +1,19 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/5.0.0-beta1...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.0.0...master)
+
+### Backward Compatibility Fixes
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+## [5.0.0](https://github.com/ruflin/Elastica/compare/5.0.0-beta1...5.0.0)
 
 ### Backward Compatibility Fixes
 - Updated Elastica\Test\Suggest\CompletionTest now payload and output are removed
@@ -17,8 +29,6 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 - `\Elastica\JSON` throws exception with readable message instead of errno
 - `\Elastica\JSON::stringify` throws `\Elastica\Exception\JSONParseException` on error
-
-## Deprecated
 
 
 ## [5.0.0-beta1](https://github.com/ruflin/Elastica/compare/3.2.3...5.0.0-beta1)
