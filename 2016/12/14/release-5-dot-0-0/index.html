@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Migrations - Elastica</title>
+  <title>Release 5.0.0 - Elastica</title>
   <meta name="author" content="ruflin">
 
   
-  <meta name="description" content="Migrations This is a list of notes and examples for migrating to newer versions when there is a BC break. 0.90.2 Upsert Tweet Recent Posts Release 5 &hellip;">
+  <meta name="description" content="Elastica 5.0.0 (download). This is the first GA release of the Elastica 5.x series. Elastica is now compatible with Elasticsearch 5.0). For all the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Elastica.io/migrations">
+  <link rel="canonical" href="http://Elastica.io/2016/12/14/release-5-dot-0-0">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
@@ -80,40 +80,109 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Migrations</h1>
+    
+      <h1 class="entry-title">Release 5.0.0</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-12-14T09:58:44+01:00" pubdate data-updated="true"></time>
+        
+      </p>
     
   </header>
-  
-  <p>This is a list of notes and examples for migrating to newer versions when there is a BC break.</p>
+
+
+<div class="entry-content"><p><a href="https://github.com/ruflin/Elastica/tree/5.0.0">Elastica 5.0.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.0.0">download</a>).</p>
+
+<p>This is the first GA release of the Elastica 5.x series. Elastica is now compatible with <a href="(https://www.elastic.co/guide/en/elasticsearch/reference/5.0/release-notes-5.0.0.html">Elasticsearch 5.0</a>). For all the backward compatibility changes also check <a href="http://elastica.io/2016/11/09/release-5-dot-0-0-beta1/">5.0.0-beta1 release notes</a>. For all the major changes in Elasticsearch 5.0 check this <a href="https://www.elastic.co/blog/elasticsearch-5-0-0-released">blog post</a>.</p>
+
+<h2>Backward Compatibility Fixes</h2>
 
 <ul>
-<li>0.90.2
+<li>remove _shutdown for Node and Cluster as deprecated</li>
+</ul>
+
+
+<h2>Bugfixes</h2>
 
 <ul>
-<li><a href="/migration/0.90.2/upsert.html">Upsert</a></li>
-</ul>
-</li>
+<li>Query options such as &ldquo;timeout&rdquo; or &ldquo;terminate_after&rdquo; should not be ignored when using Multi\Search</li>
 </ul>
 
 
-  
-    <footer>
+<h2>Added</h2>
+
+<ul>
+<li>Added regex option form suggest completions <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html#regex">https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html#regex</a></li>
+</ul>
+
+
+<h2>Improvements</h2>
+
+<ul>
+<li><code>\Elastica\JSON</code> throws exception with readable message instead of errno</li>
+<li><code>\Elastica\JSON::stringify</code> throws <code>\Elastica\Exception\JSONParseException</code> on error</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-      
-        <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/migrations/index.html" data-via="" data-counturl="http://Elastica.io/migrations/index.html" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="http://github.com/ruflin">ruflin</a></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-12-14T09:58:44+01:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/2016/12/14/release-5-dot-0-0/" data-via="" data-counturl="http://Elastica.io/2016/12/14/release-5-dot-0-0/" >Tweet</a>
   
   
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/2016/11/09/release-5-dot-0-0-beta1/" title="Previous Post: Release 5.0.0-beta1">&laquo; Release 5.0.0-beta1</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
