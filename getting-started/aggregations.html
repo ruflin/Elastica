@@ -5,15 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Getting Started - Elastica</title>
+  <title>aggregations - Elastica</title>
   <meta name="author" content="ruflin">
 
   
-  <meta name="description" content="Getting Started Installation
-Storing and indexing documents
-Search documents
-Aggregations
-Logging Tweet Recent Posts Release 5.0.0 Release 5.0.0- &hellip;">
+  <meta name="description" content="Aggregations Elasticsearch provides a way to aggregate data which is mapped by accordingly
+classes that can be added to the query. Adding &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +19,7 @@ Logging Tweet Recent Posts Release 5.0.0 Release 5.0.0- &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Elastica.io/getting-started">
+  <link rel="canonical" href="http://Elastica.io/getting-started/aggregations.html">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
@@ -87,18 +84,40 @@ Logging Tweet Recent Posts Release 5.0.0 Release 5.0.0- &hellip;">
 <article role="article">
   
   <header>
-    <h1 class="entry-title">Getting Started</h1>
+    <h1 class="entry-title">Aggregations</h1>
     
   </header>
   
-  <ul>
-<li><a href="/getting-started/installation.html">Installation</a></li>
-<li><a href="/getting-started/storing-and-indexing-documents.html">Storing and indexing documents</a></li>
-<li><a href="/getting-started/search-documents.html">Search documents</a></li>
-<li><a href="/getting-started/aggregations.html">Aggregations</a></li>
-<li><a href="/getting-started/logging.html">Logging</a></li>
-</ul>
+  <p>Elasticsearch provides a way to aggregate data which is mapped by accordingly
+classes that can be added to the query.</p>
 
+<h2>Adding aggregations to query</h2>
+
+
+<p>New aggregations can be created and added to the query afterwards:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$facet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Aggregation\Terms</span><span class="p">(</span><span class="s1">&#39;Some label&#39;</span><span class="p">,</span> <span class="s1">&#39;fieldName&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$facet</span><span class="o">-&gt;</span><span class="na">setField</span><span class="p">(</span><span class="s1">&#39;fieldName&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">addAggregation</span><span class="p">(</span><span class="nv">$facet</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$facet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Aggregation\DateHistogram</span><span class="p">(</span><span class="s1">&#39;Some label again&#39;</span><span class="p">,</span> <span class="s1">&#39;fieldName&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">addAggregation</span><span class="p">(</span><span class="nv">$facet</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For further information check out the different
+<a href="/api/latest/namespaces/Elastica.Aggregation.html">classes</a> and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/search-aggregations.html">official Documentation</a>.</p>
+
+<h2>Accessing Aggregations in result</h2>
+
+
+<p>Returned aggregations are available at <code>$searchResult-&gt;getAggregations();</code>.</p>
 
   
     <footer>
@@ -106,7 +125,7 @@ Logging Tweet Recent Posts Release 5.0.0 Release 5.0.0- &hellip;">
       
         <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/getting-started/index.html" data-via="" data-counturl="http://Elastica.io/getting-started/index.html" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/getting-started/aggregations.html" data-via="" data-counturl="http://Elastica.io/getting-started/aggregations.html" >Tweet</a>
   
   
   

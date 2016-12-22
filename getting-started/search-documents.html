@@ -187,6 +187,39 @@ Retrieve results Search documents With some documents in the index we can start 
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>Also it&rsquo;s possible to provide an array to create a new search. This array
+follows Elasticsearch request structure, e.g.:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Query</span><span class="p">([</span>
+</span><span class='line'>    <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span><span class='line'>        <span class="s1">&#39;term&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;_all&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;search term&#39;</span><span class="p">],</span>
+</span><span class='line'>    <span class="p">],</span>
+</span><span class='line'><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$search</span><span class="o">-&gt;</span><span class="na">setQuery</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For further information check out the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.0/search-request-body.html">official documentation</a>.</p>
+
+<p>And for very basic searches it&rsquo;s also possible to just search for a term:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Query</span><span class="p">(</span><span class="s1">&#39;search term&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$search</span><span class="o">-&gt;</span><span class="na">setQuery</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 
 
 <h4>QueryBuilder</h4>
