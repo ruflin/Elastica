@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 
+- `\Elastica\Query\HasParent` to use `parent_type` instead of `type`. Fixes warning due to field being deprecated.
+
 ### Deprecated
 
 ## [5.0.0](https://github.com/ruflin/Elastica/compare/5.0.0-beta1...5.0.0)

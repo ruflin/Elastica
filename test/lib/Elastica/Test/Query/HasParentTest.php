@@ -25,7 +25,7 @@ class HasParentTest extends BaseTest
         $expectedArray = [
             'has_parent' => [
                 'query' => $q->toArray(),
-                'type' => $type,
+                'parent_type' => $type,
             ],
         ];
 
@@ -49,7 +49,7 @@ class HasParentTest extends BaseTest
         $expectedArray = [
             'has_parent' => [
                 'query' => $q->toArray(),
-                'type' => $type,
+                'parent_type' => $type,
                 '_scope' => $scope,
             ],
         ];
