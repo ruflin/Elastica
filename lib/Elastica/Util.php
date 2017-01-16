@@ -40,7 +40,8 @@ class Util
      */
     public static function escapeDateMath($requestUri)
     {
-        if (empty($requestUri)) {
+        // No need to escape if a second slash is not present
+        if (empty($requestUri) || false === strpos($requestUri, '/', 1)) {
             return $requestUri;
         }
 
