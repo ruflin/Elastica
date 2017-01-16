@@ -10,6 +10,59 @@ class UtilTest extends BaseTest
 {
     /**
      * @group unit
+     * @dataProvider getIsDateMathEscapedPairs
+     */
+    public function testIsDateMathEscaped($requestUri, $expectedIsEscaped)
+    {
+        $this->assertEquals($expectedIsEscaped, Util::isDateMathEscaped($requestUri));
+    }
+
+    public function getIsDateMathEscapedPairs()
+    {
+        return [
+            ['', false],
+            ['/', false],
+            ['/<log-{now/d}>/type/_search', false],
+            ['/<log-{now%2Fd}>/type/_search', true],
+            ['/<logstash-{now/d-2d}>,<logstash-{now/d-1d}>,<logstash-{now/d}>/_search', false],
+            ['/%3Clogstash-%7Bnow%2Fd-2d%7D%3E%2C%3Clogstash-%7Bnow%2Fd-1d%7D%3E%2C%3Clogstash-%7Bnow%2Fd%7D%3E/_search', true]
+        ];
+    }
+
+    /**
+     * @group unit
+     * @dataProvider getEscapeDateMathPairs
+     */
+    public function testEscapeDateMath($requestUri, $expectedEscapedRequestUri)
+    {
+        $this->assertEquals($expectedEscapedRequestUri, Util::escapeDateMath($requestUri));
+    }
+
+    public function getEscapeDateMathPairs()
+    {
+        return [
+            ['', ''],
+            ['/', '/'],
+            ['/_bulk', '/_bulk'],
+            ['/bulk', '/bulk'],
+            ['/index/type/id/_create', '/index/type/id/_create'],
+            ['/index/_warmer', '/index/_warmer'],
+            ['/index/type/id/_percolate/count', '/index/type/id/_percolate/count'],
+            ['/<logstash-{now/d}>/_search', '/%3Clogstash-%7Bnow%2Fd%7D%3E/_search'],
+            ['/<log-{now/d}>,log-2011.12.01/log/_refresh', '/%3Clog-%7Bnow%2Fd%7D%3E%2Clog-2011.12.01/log/_refresh'],
+            [
+                '/<logstash-{now/d-2d}>,<logstash-{now/d-1d}>,<logstash-{now/d}>/_search',
+                '/%3Clogstash-%7Bnow%2Fd-2d%7D%3E%2C%3Clogstash-%7Bnow%2Fd-1d%7D%3E%2C%3Clogstash-%7Bnow%2Fd%7D%3E/_search'
+            ],
+            [
+                '/<elastic\\\\{ON\\\\}-{now/M}>', // <elastic\\{ON\\}-{now/M}>
+                '/%3Celastic\\\\{ON\\\\}-%7Bnow%2FM%7D%3E',
+            ],
+        ];
+    }
+
+    /**
+     * @group unit
      * @dataProvider getEscapeTermPairs
      */
     public function testEscapeTerm($unescaped, $escaped)
