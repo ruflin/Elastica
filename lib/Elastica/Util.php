@@ -51,11 +51,11 @@ class Util
         }
 
         // Find the position up to which we should escape.
-        // Should be next slash '/' after last '>' E.g. <log-{now/d}>,log-2011.12.01/log/_refresh
+        // Should be next slash '/' after last '>' E.g. /<log-{now/d}>,log-2011.12.01/log/_refresh
         $pos2 = strpos($requestUri, '/', $pos1);
         $pos2 = false !== $pos2 ? $pos2 : strlen($requestUri);
 
-        // Cut out the bit we need to escape: <log-{now/d}>,log-2011.12.01
+        // Cut out the bit we need to escape: /<log-{now/d}>,log-2011.12.01
         $uriSegment = substr($requestUri, 1, $pos2 - 1);
 
         // Escape using character map
