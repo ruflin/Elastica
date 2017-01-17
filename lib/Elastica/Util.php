@@ -40,8 +40,7 @@ class Util
      */
     public static function escapeDateMath($requestUri)
     {
-        // No need to escape if a second slash is not present
-        if (empty($requestUri) || false === strpos($requestUri, '/', 1)) {
+        if (empty($requestUri)) {
             return $requestUri;
         }
 
@@ -51,18 +50,13 @@ class Util
             return $requestUri;
         }
 
-        // Trim leading slash if present
-        if ($startsWithSlash = '/' === $requestUri[0]) {
-            $requestUri = ltrim($requestUri, '/');
-        }
-
         // Find the position up to which we should escape.
         // Should be next slash '/' after last '>' E.g. <log-{now/d}>,log-2011.12.01/log/_refresh
         $pos2 = strpos($requestUri, '/', $pos1);
         $pos2 = false !== $pos2 ? $pos2 : strlen($requestUri);
 
         // Cut out the bit we need to escape: <log-{now/d}>,log-2011.12.01
-        $uriSegment = substr($requestUri, 0, $pos2);
+        $uriSegment = substr($requestUri, 1, $pos2 - 1);
 
         // Escape using character map
         $escapedUriSegment = str_replace(static::$dateMathSymbols, static::$escapedDateMathSymbols, $uriSegment);
@@ -73,9 +67,7 @@ class Util
         }
 
         // Replace part of the string. E.g. /%3Clog-%7Bnow%2Fd%7D%3E%2Clog-2011.12.01/log/_refresh
-        $requestUri = substr_replace($requestUri, $escapedUriSegment, 0, $pos2);
-
-        return ($startsWithSlash ? '/' : '').$requestUri;
+        return substr_replace($requestUri, $escapedUriSegment, 1, $pos2 - 1);
     }
 
     /**
