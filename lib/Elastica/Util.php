@@ -27,7 +27,7 @@ class Util
     public static function isDateMathEscaped($requestUri)
     {
         // In practice, the only symbol that really needs to be escaped in URI is '/' => '%2F'
-        return false !== strpos($requestUri, '%2F');
+        return false !== strpos(strtoupper($requestUri), '%2F');
     }
 
     /**
