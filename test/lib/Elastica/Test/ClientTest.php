@@ -1252,7 +1252,7 @@ class ClientTest extends BaseTest
     /**
      * @group functional
      */
-    public function testDateMathEscaping()
+    public function testDateMathEscapingWithMixedRequestTypes()
     {
         $client = $this->_getClient();
 
@@ -1278,5 +1278,22 @@ class ClientTest extends BaseTest
         $bulk->addDocuments([$doc1, $doc2]);
         // Should be sent successfully without exceptions
         $bulk->send();
+    }
+
+    /**
+     * @group functional
+     */
+    public function testDateMathEscapingWithEscapedPath()
+    {
+        $client = $this->_getClient();
+
+        $now = new \DateTime();
+
+        // e.g. test-2018.01.01
+        $staticIndex = $client->getIndex('test-'.$now->format('Y.m.d'));
+        $staticIndex->create();
+
+        // It should not double escape the index name, since it came already escaped.
+        $client->request('<test-{now%2Fd}>/_refresh');
     }
 }
