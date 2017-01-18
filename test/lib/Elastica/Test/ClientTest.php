@@ -1,6 +1,7 @@
 <?php
 namespace Elastica\Test;
 
+use Elastica\Bulk;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
@@ -1246,5 +1247,36 @@ class ClientTest extends BaseTest
             );
 
         $client->request('_stats', Request::GET);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testDateMathEscaping()
+    {
+        $client = $this->_getClient();
+
+        $now = new \DateTime();
+
+        // e.g. test-2018.01.01
+        $staticIndex = $client->getIndex('test-'.$now->format('Y.m.d'));
+        $staticIndex->create();
+
+        $dynamicIndex = $client->getIndex('<test-{now/d}>');
+
+        // Index name goes through URI, should be escaped
+        // Also, index should exist (matches $staticIndex)
+        $dynamicIndex->refresh();
+
+        $type = $dynamicIndex->getType('some_type');
+        $doc1 = $type->createDocument(1, ['name' => 'one']);
+        $doc2 = $type->createDocument(2, ['name' => 'two']);
+
+        // Index name goes through JSON body, should remain unescaped
+        $bulk = new Bulk($client);
+        $bulk->setType($type);
+        $bulk->addDocuments([$doc1, $doc2]);
+        // Should be sent successfully without exceptions
+        $bulk->send();
     }
 }
