@@ -56,7 +56,7 @@ class Util
         $pos2 = false !== $pos2 ? $pos2 : strlen($requestUri);
 
         // Cut out the bit we need to escape: /<log-{now/d}>,log-2011.12.01
-        $uriSegment = substr($requestUri, 1, $pos2 - 1);
+        $uriSegment = substr($requestUri, 0, $pos2);
 
         // Escape using character map
         $escapedUriSegment = str_replace(static::$dateMathSymbols, static::$escapedDateMathSymbols, $uriSegment);
@@ -67,7 +67,7 @@ class Util
         }
 
         // Replace part of the string. E.g. /%3Clog-%7Bnow%2Fd%7D%3E%2Clog-2011.12.01/log/_refresh
-        return substr_replace($requestUri, $escapedUriSegment, 1, $pos2 - 1);
+        return substr_replace($requestUri, $escapedUriSegment, 0, $pos2);
     }
 
     /**
