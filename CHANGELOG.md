@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file based on the
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/5.0.0...master)
 
+- Date math in index names is now escaped in URI
+- Added a check for paths that already have date math escaped
+
 ### Backward Compatibility Fixes
 
 ### Bugfixes

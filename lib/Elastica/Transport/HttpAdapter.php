@@ -7,6 +7,7 @@ use Elastica\Exception\ResponseException;
 use Elastica\JSON;
 use Elastica\Request as ElasticaRequest;
 use Elastica\Response as ElasticaResponse;
+use Elastica\Util;
 use Ivory\HttpAdapter\HttpAdapterInterface;
 use Ivory\HttpAdapter\Message\Request as HttpAdapterRequest;
 use Ivory\HttpAdapter\Message\Response as HttpAdapterResponse;
@@ -146,7 +147,12 @@ class HttpAdapter extends AbstractTransport
             $baseUri = $this->_scheme.'://'.$connection->getHost().':'.$connection->getPort().'/'.$connection->getPath();
         }
 
-        $baseUri .= $request->getPath();
+        $requestPath = $request->getPath();
+        if (!Util::isDateMathEscaped($requestPath)) {
+            $requestPath = Util::escapeDateMath($requestPath);
+        }
+
+        $baseUri .= $requestPath;
 
         $query = $request->getQuery();
 
