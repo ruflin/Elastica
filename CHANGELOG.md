@@ -54,7 +54,7 @@ All notable changes to this project will be documented in this file based on the
 - Remove in Elastica\Aggregation\DateHistogram Option "pre_zone_adjust_large_interval" is deprecated as of ES 1.5. Use "time_zone" instead.
 - Remove in Elastica\Aggregation\DateHistogram Option "pre_offset" is deprecated as of ES 1.5. Use "offset" instead.
 - Remove in Elastica\Aggregation\DateHistogram Option "post_offset" is deprecated as of ES 1.5. Use "offset" instead.
-- Remove Elastica\Document::set as deprecated. Use Elastica\Document::set instead
+- Remove Elastica\Document::add as deprecated. Use Elastica\Document::set instead
 - Remove Elastica\Document::setScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
 - Remove Elastica\Document::getScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
 - Remove Elastica\Document::hasScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
