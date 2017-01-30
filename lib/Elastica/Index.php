@@ -487,13 +487,13 @@ class Index implements SearchableInterface
     /**
      * Flushes the index to storage.
      *
-     * @param bool $refresh
+     * @param array $options
      *
      * @return Response Response object
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-flush.html
      */
-    public function flush($options = [])
+    public function flush(array $options = [])
     {
         $path = '_flush';
 
