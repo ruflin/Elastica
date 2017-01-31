@@ -87,27 +87,6 @@ class MappingTest extends BaseTest
     /**
      * @group functional
      */
-    public function testEnableTtl()
-    {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test');
-
-        $index->create([], true);
-        $type = $index->getType('test');
-
-        $mapping = new Mapping($type, []);
-
-        $mapping->enableTtl();
-
-        $data = $mapping->toArray();
-        $this->assertTrue($data[$type->getName()]['_ttl']['enabled']);
-
-        $index->delete();
-    }
-
-    /**
-     * @group functional
-     */
     public function testNestedMapping()
     {
         $client = $this->_getClient();
@@ -254,7 +233,7 @@ class MappingTest extends BaseTest
 
         $mapping->send();
 
-        // when running the tests, the mapping sometimes isn't available yet. Optimize index to enforce reload mapping.
+        // when running the tests, the mapping sometimes isn't available yet. Force merge index to enforce reload mapping.
         $index->forcemerge();
 
         // create a document which should create a mapping for the field: multiname.

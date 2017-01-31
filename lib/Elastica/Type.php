@@ -75,8 +75,6 @@ class Type implements SearchableInterface
                 'routing',
                 'percolate',
                 'parent',
-                'ttl',
-                'timestamp',
                 'op_type',
                 'consistency',
                 'replication',

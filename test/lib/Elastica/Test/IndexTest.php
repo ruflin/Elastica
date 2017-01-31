@@ -860,7 +860,7 @@ class IndexTest extends BaseTest
     /**
      * @group functional
      */
-    public function testOptimize()
+    public function testForcemerge()
     {
         $index = $this->_createIndex();
 

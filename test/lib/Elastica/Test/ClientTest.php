@@ -161,10 +161,10 @@ class ClientTest extends BaseTest
     /**
      * @group functional
      */
-    public function testOptimizeAll()
+    public function testForcemergeAll()
     {
         $client = $this->_getClient();
-        $response = $client->optimizeAll();
+        $response = $client->forcemergeAll();
 
         $this->assertFalse($response->hasError());
     }
