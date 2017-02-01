@@ -441,16 +441,6 @@ class Query implements DSL
     }
 
     /**
-     * minimum should match query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
-     */
-    public function minimum_should_match()
-    {
-        throw new NotImplementedException();
-    }
-
-    /**
      * geo distance query.
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html

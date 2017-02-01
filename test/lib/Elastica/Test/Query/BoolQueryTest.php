@@ -38,7 +38,7 @@ class BoolQueryTest extends BaseTest
         $minMatch = 2;
 
         $query->setBoost($boost);
-        $query->setMinimumNumberShouldMatch($minMatch);
+        $query->setMinimumShouldMatch($minMatch);
         $query->addMust($idsQuery1);
         $query->addMustNot($idsQuery2);
         $query->addShould($idsQuery3->toArray());
@@ -50,7 +50,7 @@ class BoolQueryTest extends BaseTest
                 'must' => [$idsQuery1->toArray()],
                 'should' => [$idsQuery3->toArray()],
                 'filter' => [$filter1->toArray(), $filter2->toArray()],
-                'minimum_number_should_match' => $minMatch,
+                'minimum_should_match' => $minMatch,
                 'must_not' => [$idsQuery2->toArray()],
                 'boost' => $boost,
             ],
@@ -62,7 +62,7 @@ class BoolQueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToArrayWithLegacyFilter()
+    public function testToArrayWithLegacyMinimumNumberShouldMatch()
     {
         $query = new BoolQuery();
 
@@ -87,14 +87,14 @@ class BoolQueryTest extends BaseTest
         $minMatch = 2;
 
         $query->setBoost($boost);
-        $query->setMinimumNumberShouldMatch($minMatch);
+
         $query->addMust($idsQuery1);
         $query->addMustNot($idsQuery2);
         $query->addShould($idsQuery3->toArray());
-
-        $this->hideDeprecated();
         $query->addFilter($filter1);
         $query->addFilter($filter2);
+        $this->hideDeprecated();
+        $query->setMinimumNumberShouldMatch($minMatch);
         $this->showDeprecated();
 
         $expectedArray = [
