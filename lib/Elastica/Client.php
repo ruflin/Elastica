@@ -719,6 +719,7 @@ class Client
      *
      * @return \Elastica\Response Response object
      *
+     * @deprecated Replaced by forcemergeAll
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
     public function optimizeAll($args = [])
