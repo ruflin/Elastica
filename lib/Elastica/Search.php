@@ -26,6 +26,7 @@ class Search
     const OPTION_SCROLL_ID = 'scroll_id';
     const OPTION_QUERY_CACHE = 'query_cache';
     const OPTION_TERMINATE_AFTER = 'terminate_after';
+    const OPTION_SHARD_REQUEST_CACHE = 'request_cache';
 
     /*
      * Search types
@@ -291,6 +292,7 @@ class Search
             case self::OPTION_SEARCH_IGNORE_UNAVAILABLE:
             case self::OPTION_QUERY_CACHE:
             case self::OPTION_TERMINATE_AFTER:
+            case self::OPTION_SHARD_REQUEST_CACHE:    
                 return true;
         }
 
