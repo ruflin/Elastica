@@ -4,7 +4,6 @@ namespace Elastica\Test\Multi;
 use Elastica\Document;
 use Elastica\Multi\Search as MultiSearch;
 use Elastica\Query;
-use Elastica\Query\Range;
 use Elastica\Query\Term;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
@@ -325,15 +324,11 @@ class SearchTest extends BaseTest
         $multiSearch->addSearch($searchGood);
 
         $searchBad = new Search($client);
-        $searchBadQuery = new Range();
-        $searchBadQuery->addField('bad', ['_id' => 0]);
-        $searchBadQuery->setParam('_cache', true);
-        $searchBad->setQuery($searchBadQuery);
+        $searchBad->setOption(Search::OPTION_SIZE, -2);
         $searchBad->addIndex($index)->addType($type);
 
         $multiSearch->addSearch($searchBad);
 
-        $this->_markSkipped50('[range] query does not support [_id]');
         $multiResultSet = $multiSearch->search();
 
         $this->assertInstanceOf('Elastica\Multi\ResultSet', $multiResultSet);
@@ -375,15 +370,11 @@ class SearchTest extends BaseTest
         $multiSearch->addSearch($searchGood, 'search1');
 
         $searchBad = new Search($client);
-        $searchBadQuery = new Range();
-        $searchBadQuery->addField('bad', ['_id' => 0]);
-        $searchBadQuery->setParam('_cache', true);
-        $searchBad->setQuery($searchBadQuery);
+        $searchBad->setOption(Search::OPTION_SIZE, -2);
         $searchBad->addIndex($index)->addType($type);
 
         $multiSearch->addSearch($searchBad);
 
-        $this->_markSkipped50('[range] query does not support [_id]');
         $multiResultSet = $multiSearch->search();
 
         $this->assertInstanceOf('Elastica\Multi\ResultSet', $multiResultSet);
