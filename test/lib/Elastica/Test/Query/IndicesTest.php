@@ -2,13 +2,12 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Indices;
 use Elastica\Query\Term;
-use Elastica\Test\Base as BaseTest;
+use Elastica\Test\DeprecatedClassBase;
 
-class IndicesTest extends BaseTest
+class IndicesTest extends DeprecatedClassBase
 {
     /**
      * @group unit
