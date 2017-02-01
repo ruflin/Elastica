@@ -205,27 +205,23 @@ class MappingTest extends BaseTest
      * @group functional
      *
      * Test setting a dynamic template and validate whether the right mapping is applied after adding a document which
-     * should match the dynamic template. The example is the template_1 from the Elasticsearch documentation.
+     * should match the dynamic template.
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-root-object-type.html
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic-templates.html
      */
     public function testDynamicTemplate()
     {
         $index = $this->_createIndex();
         $type = $index->getType('person');
 
-        $this->_markSkipped50('multi_field is not available anymore');
-
-        // set a dynamic template "template_1" which creates a multi field for multi* matches.
         $mapping = new Mapping($type);
         $mapping->setParam('dynamic_templates', [
             ['template_1' => [
                 'match' => 'multi*',
                 'mapping' => [
-                    'type' => 'multi_field',
+                    'type' => '{dynamic_type}',
                     'fields' => [
-                        '{name}' => ['type' => '{dynamic_type}', 'index' => 'analyzed'],
-                        'org' => ['type' => '{dynamic_type}', 'index' => 'not_analyzed'],
+                        'raw' => ['type' => 'keyword', 'include_in_all' => false],
                     ],
                 ],
             ]],
@@ -239,23 +235,29 @@ class MappingTest extends BaseTest
         // create a document which should create a mapping for the field: multiname.
         $testDoc = new Document('person1', ['multiname' => 'Jasper van Wanrooy'], $type);
         $index->addDocuments([$testDoc]);
-        sleep(1);   //sleep 1 to ensure that the test passes every time
+        $index->refresh();
 
-        // read the mapping from Elasticsearch and assert that the multiname.org field is "not_analyzed"
         $newMapping = $type->getMapping();
-        $this->assertArrayHasKey('person', $newMapping,
-            'Person type not available in mapping from ES. Mapping set at all?');
-        $this->assertArrayHasKey('properties', $newMapping['person'],
-            'Person type doesnt have any properties. Document properly added?');
-        $this->assertArrayHasKey('multiname', $newMapping['person']['properties'],
-            'The multiname property is not added to the mapping. Document properly added?');
-        $this->assertArrayHasKey('fields', $newMapping['person']['properties']['multiname'],
-            'The multiname field of the Person type is presumably not a multi_field type. Dynamic mapping not applied?');
-        $this->assertArrayHasKey('org', $newMapping['person']['properties']['multiname']['fields'],
-            'The multi* matcher did not create a mapping for the multiname.org property when indexing the document.');
-        $this->assertArrayHasKey('index', $newMapping['person']['properties']['multiname']['fields']['org'],
-            'Indexing status of the multiname.org not available. Dynamic mapping not fully applied!');
-        $this->assertEquals('not_analyzed', $newMapping['person']['properties']['multiname']['fields']['org']['index']);
+        $this->assertArraySubset(
+            [
+                'person' => [
+                    'properties' => [
+                        'multiname' => [
+                            'type' => 'text',
+                            'fields' => [
+                                'raw' => [
+                                    'type' => 'keyword',
+                                    'include_in_all' => false,
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            $newMapping,
+            'Mapping of dynamic "multiname" field should have been created with the type "{dynamic_type}" resolved to "text". '.
+            'The "multiname.raw" sub-field should be of type "keyword".'
+        );
 
         $index->delete();
     }
