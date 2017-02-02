@@ -203,9 +203,9 @@ class Util
 
     /**
      * Tries to guess the name of the param, based on its class
-     * Example: \Elastica\Filter\HasChildFilter => has_child.
+     * Example: \Elastica\Query\MatchAll => match_all.
      *
-     * @param string|object Class or Class name
+     * @param string|object Object or class name
      *
      * @return string parameter name
      */
@@ -217,10 +217,9 @@ class Util
 
         $parts = explode('\\', $class);
         $last = array_pop($parts);
-        $last = preg_replace('/(Query|Filter)$/', '', $last);
-        $name = self::toSnakeCase($last);
+        $last = preg_replace('/Query$/', '', $last); // for BoolQuery
 
-        return $name;
+        return self::toSnakeCase($last);
     }
 
     /**
