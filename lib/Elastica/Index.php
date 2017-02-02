@@ -249,40 +249,30 @@ class Index implements SearchableInterface
      */
     public function create(array $args = [], $options = null)
     {
-        $path = '';
-        $query = [];
-
-        if (is_bool($options)) {
-            if ($options) {
-                try {
-                    $this->delete();
-                } catch (ResponseException $e) {
-                    // Table can't be deleted, because doesn't exist
-                }
+        if (is_bool($options) && $options) {
+            try {
+                $this->delete();
+            } catch (ResponseException $e) {
+                // Table can't be deleted, because doesn't exist
             }
-        } else {
-            if (is_array($options)) {
-                foreach ($options as $key => $value) {
-                    switch ($key) {
-                        case 'recreate':
-                            try {
-                                $this->delete();
-                            } catch (ResponseException $e) {
-                                // Table can't be deleted, because doesn't exist
-                            }
-                            break;
-                        case 'routing':
-                            $query = ['routing' => $value];
-                            break;
-                        default:
-                            throw new InvalidException('Invalid option '.$key);
-                            break;
-                    }
+        } elseif (is_array($options)) {
+            foreach ($options as $key => $value) {
+                switch ($key) {
+                    case 'recreate':
+                        try {
+                            $this->delete();
+                        } catch (ResponseException $e) {
+                            // Table can't be deleted, because doesn't exist
+                        }
+                        break;
+                    default:
+                        throw new InvalidException('Invalid option '.$key);
+                        break;
                 }
             }
         }
 
-        return $this->request($path, Request::PUT, $args, $query);
+        return $this->request('', Request::PUT, $args);
     }
 
     /**
