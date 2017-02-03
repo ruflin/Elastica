@@ -4,10 +4,11 @@ namespace Elastica\Test;
 use Elastica\Bulk;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\Action\AbstractDocument;
+use Elastica\Bulk\Action\UpdateDocument;
 use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\NotFoundException;
-use Elastica\Query\Script;
+use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 
 class BulkTest extends BaseTest
@@ -341,30 +342,6 @@ class BulkTest extends BaseTest
     }
 
     /**
-     * @group unit
-     */
-    public function testCreateAbstractDocumentWithInvalidData()
-    {
-        //Wrong class type
-        try {
-            $badDocument = new \stdClass();
-            AbstractDocument::create($badDocument);
-            $this->fail('Tried to create an abstract document with an object that is not a Document or Script, but no exception was thrown');
-        } catch (\Exception $e) {
-            //Excepted exception was thrown.
-        }
-
-        //Try to create document with a script
-        try {
-            $script = new Script();
-            AbstractDocument::create($script, AbstractDocument::OP_TYPE_CREATE);
-            $this->fail('Tried to create an abstract document with a Script, but no exception was thrown');
-        } catch (\Exception $e) {
-            //Excepted exception was thrown.
-        }
-    }
-
-    /**
      * @group functional
      */
     public function testErrorRequest()
@@ -470,7 +447,7 @@ class BulkTest extends BaseTest
         $doc2 = $type->createDocument(2, ['name' => 'The Walrus']);
         $bulk = new Bulk($client);
         $bulk->setType($type);
-        $updateAction = new \Elastica\Bulk\Action\UpdateDocument($doc2);
+        $updateAction = new UpdateDocument($doc2);
         $bulk->addAction($updateAction);
         $response = $bulk->send();
 
@@ -484,14 +461,11 @@ class BulkTest extends BaseTest
         $this->assertEquals('The Walrus', $docData['name']);
 
         //test updating via script
-        $script = new \Elastica\Script\Script('ctx._source.name += params.param1;', ['param1' => ' was Paul'], null, \Elastica\Script\Script::LANG_PAINLESS);
-        $doc2 = new Document();
-        $script->setUpsert($doc2);
-        $updateAction = Action\AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
+        $script = new Script('ctx._source.name += params.param1;', ['param1' => ' was Paul'], Script::LANG_PAINLESS, 2);
+        $updateAction = AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
         $bulk = new Bulk($client);
         $bulk->setType($type);
         $bulk->addAction($updateAction);
-        $this->_markSkipped50('Update a document via script fail');
         $response = $bulk->send();
 
         $this->assertTrue($response->isOk());
@@ -503,10 +477,10 @@ class BulkTest extends BaseTest
         $this->assertEquals('The Walrus was Paul', $doc2->name);
 
         //test upsert
-        $script = new \Elastica\Script\Script('ctx._scource.counter += params.count', ['count' => 1], null, \Elastica\Script\Script::LANG_PAINLESS);
+        $script = new Script('', [], null, 5);
         $doc = new Document('', ['counter' => 1]);
         $script->setUpsert($doc);
-        $updateAction = Action\AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
+        $updateAction = AbstractDocument::create($script, Action::OP_TYPE_UPDATE);
         $bulk = new Bulk($client);
         $bulk->setType($type);
         $bulk->addAction($updateAction);
@@ -520,9 +494,9 @@ class BulkTest extends BaseTest
         $this->assertEquals(1, $doc->counter);
 
         //test doc_as_upsert
-        $doc = new \Elastica\Document(6, ['test' => 'test']);
+        $doc = new Document(6, ['test' => 'test']);
         $doc->setDocAsUpsert(true);
-        $updateAction = Action\AbstractDocument::create($doc, Action::OP_TYPE_UPDATE);
+        $updateAction = AbstractDocument::create($doc, Action::OP_TYPE_UPDATE);
         $bulk = new Bulk($client);
         $bulk->setType($type);
         $bulk->addAction($updateAction);
@@ -536,14 +510,14 @@ class BulkTest extends BaseTest
         $this->assertEquals('test', $doc->test);
 
         //test doc_as_upsert with set of documents (use of addDocuments)
-        $doc1 = new \Elastica\Document(7, ['test' => 'test1']);
+        $doc1 = new Document(7, ['test' => 'test1']);
         $doc1->setDocAsUpsert(true);
-        $doc2 = new \Elastica\Document(8, ['test' => 'test2']);
+        $doc2 = new Document(8, ['test' => 'test2']);
         $doc2->setDocAsUpsert(true);
         $docs = [$doc1, $doc2];
         $bulk = new Bulk($client);
         $bulk->setType($type);
-        $bulk->addDocuments($docs, \Elastica\Bulk\Action::OP_TYPE_UPDATE);
+        $bulk->addDocuments($docs, Action::OP_TYPE_UPDATE);
         $response = $bulk->send();
 
         $this->assertTrue($response->isOk());
@@ -560,7 +534,7 @@ class BulkTest extends BaseTest
         $bulk = new Bulk($client);
         $bulk->setType($type);
         $doc3->setData('{"name" : "Paul it is"}');
-        $updateAction = new \Elastica\Bulk\Action\UpdateDocument($doc3);
+        $updateAction = new UpdateDocument($doc3);
         $bulk->addAction($updateAction);
         $response = $bulk->send();
 
@@ -617,7 +591,7 @@ class BulkTest extends BaseTest
         $metadata = $actions[0]->getMetadata();
         $this->assertEquals(5, $metadata[ '_retry_on_conflict' ]);
 
-        $script = new \Elastica\Script\Script('');
+        $script = new Script('');
         $script->setRetryOnConflict(5);
 
         $bulk = new Bulk($client);
