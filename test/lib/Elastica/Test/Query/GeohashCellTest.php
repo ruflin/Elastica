@@ -2,9 +2,9 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Query\GeohashCell;
-use Elastica\Test\Base as BaseTest;
+use Elastica\Test\DeprecatedClassBase;
 
-class GeohashCellTest extends BaseTest
+class GeohashCellTest extends DeprecatedClassBase
 {
     /**
      * @group unit

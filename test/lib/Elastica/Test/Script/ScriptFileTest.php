@@ -11,6 +11,8 @@ use Elastica\Type\Mapping;
 
 class ScriptFileTest extends BaseTest
 {
+    const SCRIPT_FILE = 'calculate-distance';
+
     /**
      * @group functional
      */
@@ -30,7 +32,7 @@ class ScriptFileTest extends BaseTest
 
         $index->refresh();
 
-        $scriptFile = new ScriptFile('calculate-distance', ['lat' => 48.858859, 'lon' => 2.3470599]);
+        $scriptFile = new ScriptFile(self::SCRIPT_FILE, ['lat' => 48.858859, 'lon' => 2.3470599]);
 
         $query = new Query();
         $query->addScriptField('distance', $scriptFile);
@@ -57,15 +59,14 @@ class ScriptFileTest extends BaseTest
      */
     public function testConstructor()
     {
-        $value = 'calculate-distance.painless';
-        $scriptFile = new ScriptFile($value);
+        $scriptFile = new ScriptFile(self::SCRIPT_FILE);
 
         $expected = [
             'script' => [
-                'file' => $value,
+                'file' => self::SCRIPT_FILE,
             ],
         ];
-        $this->assertEquals($value, $scriptFile->getScriptFile());
+        $this->assertEquals(self::SCRIPT_FILE, $scriptFile->getScriptFile());
         $this->assertEquals($expected, $scriptFile->toArray());
 
         $params = [
@@ -73,16 +74,16 @@ class ScriptFileTest extends BaseTest
             'param2' => 10,
         ];
 
-        $scriptFile = new ScriptFile($value, $params);
+        $scriptFile = new ScriptFile(self::SCRIPT_FILE, $params);
 
         $expected = [
             'script' => [
-                'file' => $value,
+                'file' => self::SCRIPT_FILE,
                 'params' => $params,
             ],
         ];
 
-        $this->assertEquals($value, $scriptFile->getScriptFile());
+        $this->assertEquals(self::SCRIPT_FILE, $scriptFile->getScriptFile());
         $this->assertEquals($params, $scriptFile->getParams());
         $this->assertEquals($expected, $scriptFile->toArray());
     }
@@ -92,16 +93,15 @@ class ScriptFileTest extends BaseTest
      */
     public function testCreateString()
     {
-        $string = 'calculate-distance.painless';
-        $scriptFile = ScriptFile::create($string);
+        $scriptFile = ScriptFile::create(self::SCRIPT_FILE);
 
         $this->assertInstanceOf('Elastica\Script\ScriptFile', $scriptFile);
 
-        $this->assertEquals($string, $scriptFile->getScriptFile());
+        $this->assertEquals(self::SCRIPT_FILE, $scriptFile->getScriptFile());
 
         $expected = [
             'script' => [
-                'file' => $string,
+                'file' => self::SCRIPT_FILE,
             ],
         ];
         $this->assertEquals($expected, $scriptFile->toArray());
@@ -112,7 +112,7 @@ class ScriptFileTest extends BaseTest
      */
     public function testCreateScriptFile()
     {
-        $data = new ScriptFile('calculate-distance.painless');
+        $data = new ScriptFile(self::SCRIPT_FILE);
 
         $scriptFile = ScriptFile::create($data);
 
@@ -125,14 +125,13 @@ class ScriptFileTest extends BaseTest
      */
     public function testCreateArray()
     {
-        $string = 'calculate-distance.painless';
         $params = [
             'param1' => 'one',
             'param2' => 1,
         ];
         $array = [
             'script' => [
-                'file' => $string,
+                'file' => self::SCRIPT_FILE,
                 'params' => $params,
             ],
         ];
@@ -140,8 +139,9 @@ class ScriptFileTest extends BaseTest
         $scriptFile = ScriptFile::create($array);
 
         $this->assertInstanceOf('Elastica\Script\ScriptFile', $scriptFile);
+        $this->assertEquals($array, $scriptFile->toArray());
 
-        $this->assertEquals($string, $scriptFile->getScriptFile());
+        $this->assertEquals(self::SCRIPT_FILE, $scriptFile->getScriptFile());
         $this->assertEquals($params, $scriptFile->getParams());
 
         $this->assertEquals($array, $scriptFile->toArray());
@@ -180,12 +180,9 @@ class ScriptFileTest extends BaseTest
      */
     public function testSetScriptFile()
     {
-        $scriptFile = new ScriptFile('foo');
-        $this->assertEquals('foo', $scriptFile->getScriptFile());
+        $scriptFile = new ScriptFile(self::SCRIPT_FILE);
 
-        $scriptFile->setScriptFile('bar');
+        $this->assertSame($scriptFile, $scriptFile->setScriptFile('bar'));
         $this->assertEquals('bar', $scriptFile->getScriptFile());
-
-        $this->assertInstanceOf('Elastica\Script\ScriptFile', $scriptFile->setScriptFile('foo'));
     }
 }
