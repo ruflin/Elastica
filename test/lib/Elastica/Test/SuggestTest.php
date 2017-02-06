@@ -4,6 +4,7 @@ namespace Elastica\Test;
 use Elastica\Exception\NotImplementedException;
 use Elastica\Query\BoolQuery;
 use Elastica\Suggest;
+use Elastica\Suggest\Term;
 use Elastica\Test\Base as BaseTest;
 
 class SuggestTest extends BaseTest
@@ -29,7 +30,7 @@ class SuggestTest extends BaseTest
      */
     public function testCreateWithSuggest()
     {
-        $suggest1 = new Suggest\Term('suggest1', '_all');
+        $suggest1 = new Term('suggest1', '_all');
 
         $suggest = Suggest::create($suggest1);
 

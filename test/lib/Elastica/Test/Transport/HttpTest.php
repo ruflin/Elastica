@@ -4,6 +4,7 @@ namespace Elastica\Test\Transport;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\ResultSet;
+use Elastica\ResultSet\DefaultBuilder;
 use Elastica\Test\Base as BaseTest;
 
 class HttpTest extends BaseTest
@@ -83,7 +84,7 @@ class HttpTest extends BaseTest
 
         $id = 1;
         $data = ['id' => $id, 'name' => 'Item 1'];
-        $doc = new \Elastica\Document($id, $data);
+        $doc = new Document($id, $data);
 
         $type->addDocument($doc);
 
@@ -118,7 +119,7 @@ class HttpTest extends BaseTest
             Послушай: далеко, далеко, на озере Чад /
             Изысканный бродит жираф.'];
 
-        $doc = new \Elastica\Document($id, $data);
+        $doc = new Document($id, $data);
 
         $type->addDocument($doc);
 
@@ -220,7 +221,7 @@ class HttpTest extends BaseTest
 
         $response = $index->request('/_search', 'POST');
 
-        $builder = new ResultSet\DefaultBuilder();
+        $builder = new DefaultBuilder();
         $resultSet = $builder->buildResultSet($response, Query::create([]));
 
         $this->assertEquals(1, $resultSet->getTotalHits());

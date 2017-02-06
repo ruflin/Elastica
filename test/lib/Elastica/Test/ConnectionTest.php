@@ -1,6 +1,7 @@
 <?php
 namespace Elastica\Test;
 
+use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
@@ -136,7 +137,7 @@ class ConnectionTest extends BaseTest
      */
     public function testCompressionDefaultWithClient()
     {
-        $client = new \Elastica\Client();
+        $client = new Client();
         $connection = $client->getConnection();
         $this->assertFalse($connection->hasCompression());
     }
@@ -146,7 +147,7 @@ class ConnectionTest extends BaseTest
      */
     public function testCompressionEnabledWithClient()
     {
-        $client = new \Elastica\Client(['connections' => [['compression' => true]]]);
+        $client = new Client(['connections' => [['compression' => true]]]);
         $connection = $client->getConnection();
 
         $this->assertTrue($connection->hasCompression());
@@ -158,7 +159,7 @@ class ConnectionTest extends BaseTest
     public function testUsernameFromClient()
     {
         $username = 'foo';
-        $client = new \Elastica\Client(['username' => $username]);
+        $client = new Client(['username' => $username]);
 
         $this->assertEquals($username, $client->getConnection()->getUsername('username'));
     }
@@ -169,7 +170,7 @@ class ConnectionTest extends BaseTest
     public function testPasswordFromClient()
     {
         $password = 'bar';
-        $client = new \Elastica\Client(['password' => $password]);
+        $client = new Client(['password' => $password]);
 
         $this->assertEquals($password, $client->getConnection()->getPassword('password'));
     }

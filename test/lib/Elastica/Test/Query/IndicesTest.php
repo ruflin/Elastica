@@ -3,6 +3,7 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Query;
+use Elastica\Query\BoolQuery;
 use Elastica\Query\Indices;
 use Elastica\Query\Term;
 use Elastica\Test\DeprecatedClassBase;
@@ -52,12 +53,12 @@ class IndicesTest extends DeprecatedClassBase
         $index2->getType('test')->addDocuments($docs);
         $index2->refresh();
 
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery->addMustNot(new Term(['color' => 'blue']));
 
         $indicesQuery = new Indices($boolQuery, [$index1->getName()]);
 
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery->addMustNot(new Term(['color' => 'yellow']));
         $indicesQuery->setNoMatchQuery($boolQuery);
 

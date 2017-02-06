@@ -315,7 +315,7 @@ class Client
 
         $bulk = new Bulk($this);
 
-        $bulk->addDocuments($docs, \Elastica\Bulk\Action::OP_TYPE_UPDATE);
+        $bulk->addDocuments($docs, Action::OP_TYPE_UPDATE);
 
         return $bulk->send();
     }

@@ -7,6 +7,7 @@ use Elastica\Query\AbstractQuery;
 use Elastica\Query\HasChild;
 use Elastica\Query\InnerHits;
 use Elastica\Query\MatchAll;
+use Elastica\Query\Nested;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
@@ -295,7 +296,7 @@ class InnerHitsTest extends BaseTest
 
     private function getNestedQuery(AbstractQuery $query, InnerHits $innerHits)
     {
-        $nested = (new Query\Nested())
+        $nested = (new Nested())
             ->setInnerHits($innerHits)
             ->setPath('users')
             ->setQuery($query);

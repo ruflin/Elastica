@@ -192,15 +192,13 @@ class FunctionScoreTest extends BaseTest
      */
     public function testAddWeightFunction()
     {
-        $filter = new \Elastica\Query\Term(['price' => 4.5]);
+        $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addWeightFunction(5.0, $filter);
 
-        $sameFilter = new \Elastica\Query\Term(['price' => 4.5]);
+        $sameFilter = new Term(['price' => 4.5]);
         $sameQuery = new FunctionScore();
-        $this->hideDeprecated();
         $sameQuery->addWeightFunction(5.0, $sameFilter);
-        $this->showDeprecated();
 
         $this->assertEquals($query->toArray(), $sameQuery->toArray());
     }
@@ -211,16 +209,12 @@ class FunctionScoreTest extends BaseTest
     public function testLegacyFilterAddWeightFunction()
     {
         $query = new FunctionScore();
-        $this->hideDeprecated();
         $filter = new Term(['price' => 4.5]);
         $query->addWeightFunction(5.0, $filter);
-        $this->showDeprecated();
 
         $sameQuery = new FunctionScore();
-        $this->hideDeprecated();
         $sameFilter = new Term(['price' => 4.5]);
         $sameQuery->addWeightFunction(5.0, $sameFilter);
-        $this->showDeprecated();
 
         $this->assertEquals($query->toArray(), $sameQuery->toArray());
     }
@@ -230,7 +224,7 @@ class FunctionScoreTest extends BaseTest
      */
     public function testWeight()
     {
-        $filter = new \Elastica\Query\Term(['price' => 4.5]);
+        $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addWeightFunction(5.0, $filter);
 
@@ -264,11 +258,9 @@ class FunctionScoreTest extends BaseTest
      */
     public function testWeightWithLegacyFilter()
     {
-        $this->hideDeprecated();
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addWeightFunction(5.0, $filter);
-        $this->showDeprecated();
 
         $expected = [
             'function_score' => [
@@ -300,7 +292,7 @@ class FunctionScoreTest extends BaseTest
      */
     public function testRandomScore()
     {
-        $filter = new \Elastica\Query\Term(['price' => 4.5]);
+        $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addRandomScoreFunction(2, $filter);
 
@@ -337,11 +329,9 @@ class FunctionScoreTest extends BaseTest
      */
     public function testRandomScoreWithLegacyFilter()
     {
-        $this->hideDeprecated();
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addRandomScoreFunction(2, $filter);
-        $this->showDeprecated();
 
         $expected = [
             'function_score' => [
@@ -376,7 +366,7 @@ class FunctionScoreTest extends BaseTest
      */
     public function testRandomScoreWeight()
     {
-        $filter = new \Elastica\Query\Term(['price' => 4.5]);
+        $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addRandomScoreFunction(2, $filter, 2);
 
@@ -406,11 +396,9 @@ class FunctionScoreTest extends BaseTest
      */
     public function testRandomScoreWeightWithLegacyFilter()
     {
-        $this->hideDeprecated();
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
         $query->addRandomScoreFunction(2, $filter, 2);
-        $this->showDeprecated();
 
         $expected = [
             'function_score' => [

@@ -8,12 +8,12 @@ use Psr\Log\LoggerInterface;
 
 class Base extends \PHPUnit_Framework_TestCase
 {
-    public static function hideDeprecated()
+    protected static function hideDeprecated()
     {
         error_reporting(error_reporting() & ~E_USER_DEPRECATED);
     }
 
-    public static function showDeprecated()
+    protected static function showDeprecated()
     {
         error_reporting(error_reporting() | E_USER_DEPRECATED);
     }

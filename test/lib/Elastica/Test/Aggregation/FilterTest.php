@@ -5,9 +5,8 @@ use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\Filter;
 use Elastica\Document;
 use Elastica\Query;
-use Elastica\Query\Range as RangeQuery;
+use Elastica\Query\Range;
 use Elastica\Query\Term;
-use Elastica\Query\Term as TermQuery;
 
 class FilterTest extends BaseAggregationTest
 {
@@ -40,7 +39,7 @@ class FilterTest extends BaseAggregationTest
         ];
 
         $agg = new Filter('in_stock_products');
-        $agg->setFilter(new RangeQuery('stock', ['gt' => 0]));
+        $agg->setFilter(new Range('stock', ['gt' => 0]));
         $avg = new Avg('avg_price');
         $avg->setField('price');
         $agg->addAggregation($avg);
@@ -54,29 +53,7 @@ class FilterTest extends BaseAggregationTest
     public function testFilterAggregation()
     {
         $agg = new Filter('filter');
-        $agg->setFilter(new TermQuery(['color' => 'blue']));
-        $avg = new Avg('price');
-        $avg->setField('price');
-        $agg->addAggregation($avg);
-
-        $query = new Query();
-        $query->addAggregation($agg);
-
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('filter');
-        $results = $results['price']['value'];
-
-        $this->assertEquals((5 + 8) / 2.0, $results);
-    }
-
-    /**
-     * @group functional
-     */
-    public function testFilterAggregationWithLegacyFilter()
-    {
-        $agg = new Filter('filter');
-        $this->hideDeprecated();
         $agg->setFilter(new Term(['color' => 'blue']));
-        $this->showDeprecated();
         $avg = new Avg('price');
         $avg->setField('price');
         $agg->addAggregation($avg);
@@ -112,27 +89,7 @@ class FilterTest extends BaseAggregationTest
      */
     public function testConstruct()
     {
-        $agg = new Filter('foo', new TermQuery(['color' => 'blue']));
-
-        $expected = [
-            'filter' => [
-                'term' => [
-                    'color' => 'blue',
-                ],
-            ],
-        ];
-
-        $this->assertEquals($expected, $agg->toArray());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testConstructWithLegacyFilter()
-    {
-        $this->hideDeprecated();
         $agg = new Filter('foo', new Term(['color' => 'blue']));
-        $this->showDeprecated();
 
         $expected = [
             'filter' => [

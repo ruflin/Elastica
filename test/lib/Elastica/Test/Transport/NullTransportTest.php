@@ -85,7 +85,9 @@ class NullTransportTest extends BaseTest
 
         $request = new Request('/test');
         $params = ['name' => 'ruflin'];
+        $this->hideDeprecated();
         $transport = new \Elastica\Transport\Null();
+        $this->showDeprecated();
         $response = $transport->exec($request, $params);
 
         $this->assertInstanceOf('\Elastica\Response', $response);

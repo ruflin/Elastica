@@ -11,6 +11,7 @@ use Elastica\Script\ScriptFields;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
+use Elastica\Type\Mapping;
 
 class QueryTest extends BaseTest
 {
@@ -88,7 +89,7 @@ class QueryTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $mapping = new Type\Mapping($type,
+        $mapping = new Mapping($type,
             [
                 'firstname' => ['type' => 'text', 'fielddata' => true],
                 'lastname' => ['type' => 'text', 'fielddata' => true],

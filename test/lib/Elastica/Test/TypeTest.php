@@ -7,6 +7,7 @@ use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
+use Elastica\Query\QueryString;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Script\Script;
 use Elastica\Search;
@@ -64,7 +65,7 @@ class TypeTest extends BaseTest
         $index = new Index($client, 'test_index');
         $type = new Type($index, 'test_type');
 
-        $query = new Query\QueryString('test');
+        $query = new QueryString('test');
         $options = [
             'limit' => 5,
             'explain' => true,
