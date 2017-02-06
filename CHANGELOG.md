@@ -6,17 +6,37 @@ All notable changes to this project will be documented in this file based on the
 - Date math in index names is now escaped in URI
 - Added a check for paths that already have date math escaped
 
-### Backward Compatibility Fixes
+### Backward Compatibility Breaks
+
+- `\Elastica\Script\AbstractScript` added the script language as constructor argument and sub-classes must implement `getScriptTypeArray`
 
 ### Bugfixes
 
+- Removed features that do not exist in Elasticsearch 5.0 anymore:
+  - `ttl` and `timestamp` logic: setters and getters in documents and mapping
+  - `\Elastica\Query\Missing`: negate `\Elastica\Query\Exists` instead
+  - `\Elastica\Query\TopChildren`
+- `\Elastica\Query\MatchPhrase` and `\Elastica\Query\MatchPhrasePrefix` do not extend `\Elastica\Query\Match` anymore because they do not share exactly the same options
+- Removed the `routing` option in `\Elastica\Index::create` because there is no routing param when creating an index. So that option was doing nothing so far but fails in Elasticearch 5.0 because the non-existing query param is validated.
+
 ### Added
+
+- added `\Elastica\Script\ScriptId` to reference stored scripts by ID
 
 ### Improvements
 
 - `\Elastica\Query\HasParent` to use `parent_type` instead of `type`. Fixes warning due to field being deprecated.
 
 ### Deprecated
+
+- Deprecated functionality that is also deprecated in Elasticsearch 5.0:
+  - `\Elastica\Client::optimizeAll` in favor of `\Elastica\Client::forcemergeAll`
+  - `\Elastica\Query\BoolQuery::setMinimumNumberShouldMatch` in favor of `\Elastica\Query\BoolQuery::setMinimumShouldMatch`
+  - `\Elastica\Query\GeoDistanceRange`: use distance aggregations or sorting instead
+  - `\Elastica\Query\GeohashCell`
+  - `\Elastica\Query\Indices`: search on the `_index` field instead
+  - `\Elastica\Query\Match::setFieldType`: use `\Elastica\Query\MatchPhrase` and `\Elastica\Query\MatchPhrasePrefix` instead
+- `\Elastica\Transport\Null` is deprecated because null is a reserved class name in PHP 7. Use `\Elastica\Transport\NullTransport` instead.
 
 ## [5.0.0](https://github.com/ruflin/Elastica/compare/5.0.0-beta1...5.0.0)
 
