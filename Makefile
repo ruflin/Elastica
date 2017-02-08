@@ -72,7 +72,7 @@ test:
 
 .PHONY: doc
 doc:
-	${RUN_ENV} phpdoc run -d lib/ -t build/docs
+	${RUN_ENV} phpdoc run -d lib/ -t build/docs --template=/root/composer/vendor/phpdocumentor/phpdocumentor/data/templates/clean
 
 # Uses the preconfigured standards in .php_cs
 .PHONY: lint

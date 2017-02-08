@@ -9,6 +9,7 @@ elastica:
   environment:
     - ES_HOST=elasticsearch
     - PROXY_HOST=nginx
+
 elasticsearch:
   build: ./env/elasticsearch/
   #image: ruflin/elasticsearch-elastica
