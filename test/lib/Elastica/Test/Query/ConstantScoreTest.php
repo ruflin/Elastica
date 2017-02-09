@@ -18,34 +18,9 @@ class ConstantScoreTest extends BaseTest
         $query = new ConstantScore();
 
         $boost = 1.2;
-        $filter = new \Elastica\Query\Ids();
-        $filter->setIds([1]);
-        $query->setFilter($filter);
-        $query->setBoost($boost);
-
-        $expectedArray = [
-            'constant_score' => [
-                'filter' => $filter->toArray(),
-                'boost' => $boost,
-            ],
-        ];
-
-        $this->assertEquals($expectedArray, $query->toArray());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testToArrayWithLegacyFilter()
-    {
-        $query = new ConstantScore();
-
-        $boost = 1.2;
-        $this->hideDeprecated();
         $filter = new Ids();
         $filter->setIds([1]);
         $query->setFilter($filter);
-        $this->showDeprecated();
         $query->setBoost($boost);
 
         $expectedArray = [
@@ -63,31 +38,10 @@ class ConstantScoreTest extends BaseTest
      */
     public function testConstruct()
     {
-        $filter = new \Elastica\Query\Ids();
-        $filter->setIds([1]);
-
-        $query = new ConstantScore($filter);
-
-        $expectedArray = [
-            'constant_score' => [
-                'filter' => $filter->toArray(),
-            ],
-        ];
-
-        $this->assertEquals($expectedArray, $query->toArray());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testConstructWithLegacyFilter()
-    {
         $filter = new Ids();
         $filter->setIds([1]);
 
-        $this->hideDeprecated();
         $query = new ConstantScore($filter);
-        $this->showDeprecated();
 
         $expectedArray = [
             'constant_score' => [

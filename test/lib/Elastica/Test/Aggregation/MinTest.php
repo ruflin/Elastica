@@ -7,6 +7,8 @@ use Elastica\Query;
 
 class MinTest extends BaseAggregationTest
 {
+    const MIN_PRICE = 1;
+
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
@@ -14,7 +16,7 @@ class MinTest extends BaseAggregationTest
         $index->getType('test')->addDocuments([
             new Document(1, ['price' => 5]),
             new Document(2, ['price' => 8]),
-            new Document(3, ['price' => 1]),
+            new Document(3, ['price' => self::MIN_PRICE]),
             new Document(4, ['price' => 3]),
         ]);
 
@@ -35,6 +37,6 @@ class MinTest extends BaseAggregationTest
         $query->addAggregation($agg);
         $results = $this->_getIndexForTest()->search($query)->getAggregation('min_price');
 
-        $this->assertEquals(1, $results['value']);
+        $this->assertEquals(self::MIN_PRICE, $results['value']);
     }
 }

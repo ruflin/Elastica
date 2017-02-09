@@ -8,6 +8,7 @@ use Elastica\Query;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
+use Elastica\Response;
 use Elastica\Script\Script;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
@@ -391,7 +392,7 @@ class SearchTest extends BaseTest
         $this->assertTrue(($resultSet->count() === 0) && $resultSet->getTotalHits() === 11);
 
         //Timeout - this one is a bit more tricky to test
-        $mockResponse = new \Elastica\Response(json_encode(['timed_out' => true]));
+        $mockResponse = new Response(json_encode(['timed_out' => true]));
         $client = $this->getMockBuilder('Elastica\\Client')
             ->disableOriginalConstructor()
             ->getMock();
@@ -546,10 +547,10 @@ class SearchTest extends BaseTest
         $search->addIndex($index);
         $search->addType($type);
 
-        $result1 = $search->count(new \Elastica\Query\MatchAll());
+        $result1 = $search->count(new MatchAll());
         $this->assertEquals(1, $result1);
 
-        $result2 = $search->count(new \Elastica\Query\MatchAll(), true);
+        $result2 = $search->count(new MatchAll(), true);
         $this->assertInstanceOf('\Elastica\ResultSet', $result2);
         $this->assertEquals(1, $result2->getTotalHits());
     }

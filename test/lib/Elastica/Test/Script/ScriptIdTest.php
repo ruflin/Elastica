@@ -1,23 +1,24 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Script\Script;
+use Elastica\Script\ScriptId;
 use Elastica\Test\Base as BaseTest;
 
-class ScriptTest extends BaseTest
+class ScriptIdTest extends BaseTest
 {
-    const SCRIPT = "_score * doc['my_numeric_field'].value";
+    const SCRIPT_ID = 'my_script';
+
     /**
      * @group unit
      */
     public function testConstructor()
     {
-        $script = new Script(self::SCRIPT);
+        $script = new ScriptId(self::SCRIPT_ID);
 
         $expected = ['script' => [
-            'inline' => self::SCRIPT,
+            'id' => self::SCRIPT_ID,
         ]];
-        $this->assertEquals(self::SCRIPT, $script->getScript());
+        $this->assertEquals(self::SCRIPT_ID, $script->getScriptId());
         $this->assertEquals($expected, $script->toArray());
 
         $params = [
@@ -25,29 +26,29 @@ class ScriptTest extends BaseTest
             'param2' => 10,
         ];
 
-        $script = new Script(self::SCRIPT, $params);
+        $script = new ScriptId(self::SCRIPT_ID, $params);
 
         $expected = ['script' => [
-            'inline' => self::SCRIPT,
+            'id' => self::SCRIPT_ID,
             'params' => $params,
         ]];
 
-        $this->assertEquals(self::SCRIPT, $script->getScript());
+        $this->assertEquals(self::SCRIPT_ID, $script->getScriptId());
         $this->assertEquals($params, $script->getParams());
         $this->assertEquals($expected, $script->toArray());
 
-        $script = new Script(self::SCRIPT, $params, Script::LANG_PAINLESS);
+        $script = new ScriptId(self::SCRIPT_ID, $params, ScriptId::LANG_PAINLESS);
 
         $expected = ['script' => [
-            'inline' => self::SCRIPT,
+            'id' => self::SCRIPT_ID,
             'params' => $params,
-            'lang' => Script::LANG_PAINLESS,
+            'lang' => ScriptId::LANG_PAINLESS,
         ]];
 
         $this->assertEquals($expected, $script->toArray());
-        $this->assertEquals(self::SCRIPT, $script->getScript());
+        $this->assertEquals(self::SCRIPT_ID, $script->getScriptId());
         $this->assertEquals($params, $script->getParams());
-        $this->assertEquals(Script::LANG_PAINLESS, $script->getLang());
+        $this->assertEquals(ScriptId::LANG_PAINLESS, $script->getLang());
     }
 
     /**
@@ -55,14 +56,14 @@ class ScriptTest extends BaseTest
      */
     public function testCreateString()
     {
-        $script = Script::create(self::SCRIPT);
+        $script = ScriptId::create(self::SCRIPT_ID);
 
-        $this->assertInstanceOf('Elastica\Script\Script', $script);
+        $this->assertInstanceOf('Elastica\Script\ScriptId', $script);
 
-        $this->assertEquals(self::SCRIPT, $script->getScript());
+        $this->assertEquals(self::SCRIPT_ID, $script->getScriptId());
 
         $expected = ['script' => [
-            'inline' => self::SCRIPT,
+            'id' => self::SCRIPT_ID,
         ]];
         $this->assertEquals($expected, $script->toArray());
     }
@@ -72,11 +73,11 @@ class ScriptTest extends BaseTest
      */
     public function testCreateScript()
     {
-        $data = new Script(self::SCRIPT);
+        $data = new ScriptId(self::SCRIPT_ID);
 
-        $script = Script::create($data);
+        $script = ScriptId::create($data);
 
-        $this->assertInstanceOf('Elastica\Script\Script', $script);
+        $this->assertInstanceOf('Elastica\Script\ScriptId', $script);
         $this->assertSame($data, $script);
     }
 
@@ -91,20 +92,20 @@ class ScriptTest extends BaseTest
         ];
         $array = [
             'script' => [
-                'inline' => self::SCRIPT,
-                'lang' => Script::LANG_PAINLESS,
+                'id' => self::SCRIPT_ID,
+                'lang' => ScriptId::LANG_PAINLESS,
                 'params' => $params,
             ],
         ];
 
-        $script = Script::create($array);
+        $script = ScriptId::create($array);
 
-        $this->assertInstanceOf('Elastica\Script\Script', $script);
+        $this->assertInstanceOf('Elastica\Script\ScriptId', $script);
         $this->assertEquals($array, $script->toArray());
 
-        $this->assertEquals(self::SCRIPT, $script->getScript());
+        $this->assertEquals(self::SCRIPT_ID, $script->getScriptId());
         $this->assertEquals($params, $script->getParams());
-        $this->assertEquals(Script::LANG_PAINLESS, $script->getLang());
+        $this->assertEquals(ScriptId::LANG_PAINLESS, $script->getLang());
     }
 
     /**
@@ -114,7 +115,7 @@ class ScriptTest extends BaseTest
      */
     public function testCreateInvalid($data)
     {
-        Script::create($data);
+        ScriptId::create($data);
     }
 
     /**
@@ -140,20 +141,20 @@ class ScriptTest extends BaseTest
      */
     public function testSetLang()
     {
-        $script = new Script(self::SCRIPT, [], Script::LANG_PAINLESS);
+        $script = new ScriptId(self::SCRIPT_ID, [], ScriptId::LANG_PAINLESS);
 
-        $this->assertSame($script, $script->setLang(Script::LANG_GROOVY));
-        $this->assertEquals(Script::LANG_GROOVY, $script->getLang());
+        $this->assertSame($script, $script->setLang(ScriptId::LANG_GROOVY));
+        $this->assertEquals(ScriptId::LANG_GROOVY, $script->getLang());
     }
 
     /**
      * @group unit
      */
-    public function testSetScript()
+    public function testSetScriptId()
     {
-        $script = new Script(self::SCRIPT);
+        $script = new ScriptId(self::SCRIPT_ID);
 
-        $this->assertSame($script, $script->setScript('bar'));
-        $this->assertEquals('bar', $script->getScript());
+        $this->assertSame($script, $script->setScriptId('other_script'));
+        $this->assertEquals('other_script', $script->getScriptId());
     }
 }

@@ -4,6 +4,7 @@ namespace Elastica\Test\Transport;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\ResultSet;
+use Elastica\ResultSet\DefaultBuilder;
 use Elastica\Test\Base as BaseTest;
 
 class GuzzleTest extends BaseTest
@@ -160,7 +161,7 @@ class GuzzleTest extends BaseTest
 
         $response = $index->request('/_search', 'POST');
 
-        $builder = new ResultSet\DefaultBuilder();
+        $builder = new DefaultBuilder();
         $resultSet = $builder->buildResultSet($response, Query::create([]));
 
         $this->assertEquals(1, $resultSet->getTotalHits());

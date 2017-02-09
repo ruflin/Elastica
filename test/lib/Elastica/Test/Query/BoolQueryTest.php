@@ -6,7 +6,6 @@ use Elastica\Index;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Ids;
 use Elastica\Query\Term;
-use Elastica\Query\Term as TermQuery;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 
@@ -38,7 +37,7 @@ class BoolQueryTest extends BaseTest
         $minMatch = 2;
 
         $query->setBoost($boost);
-        $query->setMinimumNumberShouldMatch($minMatch);
+        $query->setMinimumShouldMatch($minMatch);
         $query->addMust($idsQuery1);
         $query->addMustNot($idsQuery2);
         $query->addShould($idsQuery3->toArray());
@@ -50,7 +49,7 @@ class BoolQueryTest extends BaseTest
                 'must' => [$idsQuery1->toArray()],
                 'should' => [$idsQuery3->toArray()],
                 'filter' => [$filter1->toArray(), $filter2->toArray()],
-                'minimum_number_should_match' => $minMatch,
+                'minimum_should_match' => $minMatch,
                 'must_not' => [$idsQuery2->toArray()],
                 'boost' => $boost,
             ],
@@ -62,7 +61,7 @@ class BoolQueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testToArrayWithLegacyFilter()
+    public function testToArrayWithLegacyMinimumNumberShouldMatch()
     {
         $query = new BoolQuery();
 
@@ -87,14 +86,14 @@ class BoolQueryTest extends BaseTest
         $minMatch = 2;
 
         $query->setBoost($boost);
-        $query->setMinimumNumberShouldMatch($minMatch);
+
         $query->addMust($idsQuery1);
         $query->addMustNot($idsQuery2);
         $query->addShould($idsQuery3->toArray());
-
-        $this->hideDeprecated();
         $query->addFilter($filter1);
         $query->addFilter($filter2);
+        $this->hideDeprecated();
+        $query->setMinimumNumberShouldMatch($minMatch);
         $this->showDeprecated();
 
         $expectedArray = [
@@ -122,10 +121,10 @@ class BoolQueryTest extends BaseTest
     {
         $boolQuery = new BoolQuery();
 
-        $term1 = new TermQuery();
+        $term1 = new Term();
         $term1->setParam('interests', 84);
 
-        $term2 = new TermQuery();
+        $term2 = new Term();
         $term2->setParam('interests', 92);
 
         $boolQuery->addShould($term1)->addShould($term2);
@@ -158,7 +157,7 @@ class BoolQueryTest extends BaseTest
         $index->refresh();
 
         $boolQuery = new BoolQuery();
-        $termQuery1 = new TermQuery(['test' => '2']);
+        $termQuery1 = new Term(['test' => '2']);
         $boolQuery->addMust($termQuery1);
         $resultSet = $type->search($boolQuery);
 
@@ -170,62 +169,23 @@ class BoolQueryTest extends BaseTest
 
         $this->assertEquals(2, $resultSet->count());
 
-        $termQuery2 = new TermQuery(['test' => '5']);
+        $termQuery2 = new Term(['test' => '5']);
         $boolQuery->addMust($termQuery2);
         $resultSet = $type->search($boolQuery);
 
         $this->assertEquals(1, $resultSet->count());
 
-        $termQuery3 = new TermQuery(['username' => 'hans']);
+        $termQuery3 = new Term(['username' => 'hans']);
         $boolQuery->addMust($termQuery3);
         $resultSet = $type->search($boolQuery);
 
         $this->assertEquals(1, $resultSet->count());
 
-        $termQuery4 = new TermQuery(['username' => 'emil']);
+        $termQuery4 = new Term(['username' => 'emil']);
         $boolQuery->addMust($termQuery4);
         $resultSet = $type->search($boolQuery);
 
         $this->assertEquals(0, $resultSet->count());
-    }
-
-    /**
-     * @group functional
-     */
-    public function testSearchWithLegacyFilter()
-    {
-        $client = $this->_getClient();
-        $index = new Index($client, 'test');
-        $index->create([], true);
-
-        $type = new Type($index, 'helloworld');
-
-        $doc = new Document(1, ['id' => 1, 'email' => 'hans@test.com', 'username' => 'hans', 'test' => ['2', '4', '5']]);
-        $type->addDocument($doc);
-        $doc = new Document(2, ['id' => 2, 'email' => 'emil@test.com', 'username' => 'emil', 'test' => ['1', '3', '6']]);
-        $type->addDocument($doc);
-        $doc = new Document(3, ['id' => 3, 'email' => 'ruth@test.com', 'username' => 'ruth', 'test' => ['2', '3', '7']]);
-        $type->addDocument($doc);
-        $doc = new Document(4, ['id' => 4, 'email' => 'john@test.com', 'username' => 'john', 'test' => ['2', '4', '8']]);
-        $type->addDocument($doc);
-
-        // Refresh index
-        $index->refresh();
-
-        $boolQuery = new BoolQuery();
-        $termQuery1 = new TermQuery(['test' => '2']);
-        $boolQuery->addMust($termQuery1);
-        $resultSet = $type->search($boolQuery);
-
-        $this->assertEquals(3, $resultSet->count());
-
-        $this->hideDeprecated();
-        $termFilter = new Term(['test' => '4']);
-        $boolQuery->addFilter($termFilter);
-        $this->showDeprecated();
-        $resultSet = $type->search($boolQuery);
-
-        $this->assertEquals(2, $resultSet->count());
     }
 
     /**

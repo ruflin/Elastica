@@ -5,6 +5,7 @@ use Elastica\Query;
 use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\ResultSet\BuilderInterface;
+use Elastica\ResultSet\ProcessingBuilder;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -13,7 +14,7 @@ use Elastica\Test\Base as BaseTest;
 class ProcessingBuilderTest extends BaseTest
 {
     /**
-     * @var ResultSet\ProcessingBuilder
+     * @var ProcessingBuilder
      */
     private $builder;
 
@@ -34,7 +35,7 @@ class ProcessingBuilderTest extends BaseTest
         $this->innerBuilder = $this->createMock('Elastica\\ResultSet\\BuilderInterface');
         $this->processor = $this->createMock('Elastica\\ResultSet\\ProcessorInterface');
 
-        $this->builder = new ResultSet\ProcessingBuilder($this->innerBuilder, $this->processor);
+        $this->builder = new ProcessingBuilder($this->innerBuilder, $this->processor);
     }
 
     public function testProcessors()

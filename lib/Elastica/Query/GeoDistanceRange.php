@@ -3,6 +3,8 @@ namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
 
+trigger_error('Elastica\Query\GeoDistanceRange is deprecated. Use distance aggregations or sorting instead.', E_USER_DEPRECATED);
+
 /**
  * Geo distance query.
  *

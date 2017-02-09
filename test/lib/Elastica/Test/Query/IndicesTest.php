@@ -2,13 +2,13 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Index;
 use Elastica\Query;
+use Elastica\Query\BoolQuery;
 use Elastica\Query\Indices;
 use Elastica\Query\Term;
-use Elastica\Test\Base as BaseTest;
+use Elastica\Test\DeprecatedClassBase;
 
-class IndicesTest extends BaseTest
+class IndicesTest extends DeprecatedClassBase
 {
     /**
      * @group unit
@@ -53,12 +53,12 @@ class IndicesTest extends BaseTest
         $index2->getType('test')->addDocuments($docs);
         $index2->refresh();
 
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery->addMustNot(new Term(['color' => 'blue']));
 
         $indicesQuery = new Indices($boolQuery, [$index1->getName()]);
 
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery->addMustNot(new Term(['color' => 'yellow']));
         $indicesQuery->setNoMatchQuery($boolQuery);
 

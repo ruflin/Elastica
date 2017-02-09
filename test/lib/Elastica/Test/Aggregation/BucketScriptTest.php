@@ -37,7 +37,7 @@ class BucketScriptTest extends BaseAggregationTest
                 'divisor' => 'max_weight',
                 'dividend' => 'max_height',
             ],
-            'dividend / divisor'
+            'params.dividend / params.divisor'
         );
 
         $histogramAggregation = new Histogram('age_groups', 'age', 10);
@@ -49,7 +49,6 @@ class BucketScriptTest extends BaseAggregationTest
 
         $query = Query::create([])->addAggregation($histogramAggregation);
 
-        $this->_markSkipped50('With ES 5.0 ResponseException: [reduce] this test is failing');
         $results = $this->_getIndexForTest()->search($query)->getAggregation('age_groups');
 
         $this->assertEquals(3, $results['buckets'][0]['result']['value']);

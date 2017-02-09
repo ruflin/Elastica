@@ -37,14 +37,14 @@ class ScriptedMetricTest extends BaseAggregationTest
         $this->_checkScriptInlineSetting();
         $agg = new ScriptedMetric(
             'scripted',
-            "_agg['durations'] = [:]",
-            "key = doc['start'].value+ \":\"+ doc['end'].value; _agg.durations[key] = doc['end'].value - doc['start'].value;",
-            'values = []; for (item in _agg.durations) { values.add(item.value) }; return values'
+            "params._agg.durations = []",
+            'params._agg.durations.add(doc.end.value - doc.start.value)',
+            'return params._agg.durations'
         );
 
         $query = new Query();
+        $query->setSize(0);
         $query->addAggregation($agg);
-        $this->_markSkipped50('compile error [reason: all shards failed]');
         $results = $this->_getIndexForTest()->search($query)->getAggregation('scripted');
 
         $this->assertEquals([100, 50, 150], $results['value'][0]);

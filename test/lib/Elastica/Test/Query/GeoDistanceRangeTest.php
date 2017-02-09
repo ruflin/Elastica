@@ -1,65 +1,11 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
-use Elastica\Query;
 use Elastica\Query\GeoDistanceRange;
-use Elastica\Query\MatchAll;
-use Elastica\Test\Base as BaseTest;
+use Elastica\Test\DeprecatedClassBase;
 
-class GeoDistanceRangeTest extends BaseTest
+class GeoDistanceRangeTest extends DeprecatedClassBase
 {
-    /**
-     * @group functional
-     */
-    public function testGeoPoint()
-    {
-        $index = $this->_createIndex();
-        $type = $index->getType('test');
-
-        // Set mapping
-        $type->setMapping(['point' => ['type' => 'geo_point']]);
-
-        // Add doc 1
-        $doc1 = new Document(1,
-            [
-                'name' => 'ruflin',
-            ]
-        );
-
-        $doc1->addGeoPoint('point', 17, 19);
-        $type->addDocument($doc1);
-
-        // Add doc 2
-        $doc2 = new Document(2,
-            [
-                'name' => 'ruflin',
-            ]
-        );
-
-        $doc2->addGeoPoint('point', 30, 40);
-        $type->addDocument($doc2);
-
-        $index->refresh();
-        // Set geo distance sorting with coordinates near to first doc.
-        $geoSort =
-            ['_geo_distance' => [
-                'point' => [
-                    'lat' => 15,
-                    'lon' => 20,
-                ],
-                'order' => 'asc',
-                'unit' => 'km',
-                'distance_type' => 'plane',
-            ]];
-
-        $query = new Query(new MatchAll());
-        $query->setSort($geoSort);
-        //doc #1 are the nearest to sorting point and must be first in result
-        $this->assertEquals(1, $type->search($query)->current()->getId());
-        $this->assertEquals(2, $type->search($query)->next()->getId());
-    }
-
     /**
      * @group unit
      * @expectedException \Elastica\Exception\InvalidException

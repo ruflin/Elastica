@@ -2,10 +2,10 @@
 namespace Elastica\Tool;
 
 use Elastica\Bulk;
+use Elastica\Bulk\Action;
 use Elastica\Index;
 use Elastica\Query\MatchAll;
 use Elastica\Scroll;
-use Elastica\Search;
 use Elastica\Type;
 
 /**
@@ -92,7 +92,7 @@ class CrossIndex
             $bulk->setIndex($newIndex);
 
             foreach ($resultSet as $result) {
-                $action = new Bulk\Action();
+                $action = new Action();
                 $action->setType($result->getType());
                 $action->setId($result->getId());
                 $action->setSource($result->getData());

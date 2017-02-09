@@ -57,7 +57,6 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'simple_query_string', 'Elastica\Query\SimpleQueryString', ['query']);
         $this->_assertImplemented($queryDSL, 'term', 'Elastica\Query\Term', []);
         $this->_assertImplemented($queryDSL, 'terms', 'Elastica\Query\Terms', ['field', []]);
-        $this->_assertImplemented($queryDSL, 'top_children', 'Elastica\Query\TopChildren', [new Match(), 'type']);
         $this->_assertImplemented($queryDSL, 'wildcard', 'Elastica\Query\Wildcard', []);
         $this->_assertImplemented(
             $queryDSL,
@@ -69,20 +68,12 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'type', 'Elastica\Query\Type', []);
         $this->_assertImplemented($queryDSL, 'type', 'Elastica\Query\Type', ['type']);
 
-        $this->_assertNotImplemented($queryDSL, 'custom_boost_factor', []);
-        $this->_assertNotImplemented($queryDSL, 'custom_filters_score', []);
-        $this->_assertNotImplemented($queryDSL, 'custom_score', []);
-        $this->_assertNotImplemented($queryDSL, 'field', []);
         $this->_assertNotImplemented($queryDSL, 'geo_shape', []);
-        $this->_assertNotImplemented($queryDSL, 'indices', []);
-        $this->_assertNotImplemented($queryDSL, 'minimum_should_match', []);
         $this->_assertNotImplemented($queryDSL, 'span_first', []);
         $this->_assertNotImplemented($queryDSL, 'span_multi_term', []);
         $this->_assertNotImplemented($queryDSL, 'span_near', []);
         $this->_assertNotImplemented($queryDSL, 'span_not', []);
         $this->_assertNotImplemented($queryDSL, 'span_or', []);
         $this->_assertNotImplemented($queryDSL, 'span_term', []);
-        $this->_assertNotImplemented($queryDSL, 'template', []);
-        $this->_assertNotImplemented($queryDSL, 'text', []);
     }
 }

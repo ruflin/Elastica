@@ -22,22 +22,12 @@ class GeoDistanceTest extends BaseTest
         $type->setMapping(['point' => ['type' => 'geo_point']]);
 
         // Add doc 1
-        $doc1 = new Document(1,
-            [
-                'name' => 'ruflin',
-            ]
-        );
-
+        $doc1 = new Document(1);
         $doc1->addGeoPoint('point', 17, 19);
         $type->addDocument($doc1);
 
         // Add doc 2
-        $doc2 = new Document(2,
-            [
-                'name' => 'ruflin',
-            ]
-        );
-
+        $doc2 = new Document(2);
         $doc2->addGeoPoint('point', 30, 40);
         $type->addDocument($doc2);
 
@@ -46,20 +36,17 @@ class GeoDistanceTest extends BaseTest
 
         // Only one point should be in radius
         $geoQuery = new GeoDistance('point', ['lat' => 30, 'lon' => 40], '1km');
-
-        $query = new Query(new MatchAll());
+        $query = new Query();
         $query->setPostFilter($geoQuery);
-        $this->assertEquals(1, $type->search($query)->count());
+
+        $this->assertEquals(1, $type->count($query));
 
         // Both points should be inside
-        $query = new Query();
-        $this->_markSkipped50('[geo_distance_range] queries are no longer supported for geo_point field types. Use geo_distance sort or aggregations');
         $geoQuery = new GeoDistance('point', ['lat' => 30, 'lon' => 40], '40000km');
-        $query = new Query(new MatchAll());
+        $query = new Query();
         $query->setPostFilter($geoQuery);
-        $index->refresh();
 
-        $this->assertEquals(2, $type->search($query)->count());
+        $this->assertEquals(2, $type->count($query));
     }
 
     /**

@@ -2,11 +2,11 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Filter\BoolFilter;
-use Elastica\Filter\Term;
 use Elastica\Index;
 use Elastica\Query;
+use Elastica\Query\BoolQuery;
 use Elastica\Query\MoreLikeThis;
+use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 use Elastica\Type\Mapping;
@@ -84,75 +84,36 @@ class MoreLikeThisTest extends BaseTest
 
         // Return all similar from id
         $mltQuery = new MoreLikeThis();
-
         $mltQuery->setMinTermFrequency(1);
         $mltQuery->setMinDocFrequency(1);
-
         $mltQuery->setLike($doc);
 
-        $query = new Query($mltQuery);
-
-        $resultSet = $type->search($query);
-        $this->assertEquals(4, $resultSet->count());
+        $this->assertEquals(4, $type->count($mltQuery));
 
         $mltQuery = new MoreLikeThis();
-
         $mltQuery->setMinTermFrequency(1);
         $mltQuery->setMinDocFrequency(1);
-
         $mltQuery->setLike($doc);
 
-        $query = new Query\BoolQuery();
-        $query->addMust($mltQuery);
-        $this->hideDeprecated();
-
+        $bool = new BoolQuery();
+        $bool->addMust($mltQuery);
         // Return just the visible similar from id
-        $filter = new Query\BoolQuery();
-        $filterTerm = new Query\Term();
+        $filterTerm = new Term();
         $filterTerm->setTerm('visible', true);
-        $filter->addMust($filterTerm);
-        $query->addFilter($filter);
-        $this->showDeprecated();
-        $resultSet = $type->search($query);
-        $this->assertEquals(2, $resultSet->count());
+        $bool->addFilter($filterTerm);
+
+        $this->assertEquals(2, $type->count($bool));
 
         // Return all similar from source
         $mltQuery = new MoreLikeThis();
-
         $mltQuery->setMinTermFrequency(1);
         $mltQuery->setMinDocFrequency(1);
-        $mltQuery->setMinimumShouldMatch(90);
-
+        $mltQuery->setMinimumShouldMatch('100%');
         $mltQuery->setLike(
             $type->getDocument(1)->setId('')
         );
 
-        $query = new Query($mltQuery);
-
-        $resultSet = $type->search($query);
-        $this->_markSkipped50('Currently hits 0 results');
-        $this->assertEquals(1, $resultSet->count());
-
-        // Legacy test with filter
-        $mltQuery = new MoreLikeThis();
-
-        $mltQuery->setMinTermFrequency(1);
-        $mltQuery->setMinDocFrequency(1);
-
-        $mltQuery->setLike($doc);
-
-        $query = new Query\BoolQuery();
-        $query->addMust($mltQuery);
-        $this->hideDeprecated();
-        // Return just the visible similar
-        $filter = new BoolFilter();
-        $filterTerm = new Term();
-        $filterTerm->setTerm('visible', true);
-        $filter->addMust($filterTerm);
-        $query->addFilter($filter);
-        $this->showDeprecated();
-        $resultSet = $type->search($query);
-        $this->assertEquals(2, $resultSet->count());
+        $this->assertEquals(1, $type->count($mltQuery));
     }
 
     /**

@@ -81,16 +81,6 @@ class QueryBuilder
     }
 
     /**
-     * Filter DSL.
-     *
-     * @return DSL\Query
-     */
-    public function filter()
-    {
-        return $this->_facades[DSL::TYPE_FILTER];
-    }
-
-    /**
      * Aggregation DSL.
      *
      * @return DSL\Aggregation

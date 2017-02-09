@@ -3,6 +3,7 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Query;
+use Elastica\Query\MatchPhrase;
 use Elastica\Test\Base as BaseTest;
 
 class HighlightTest extends BaseTest
@@ -22,7 +23,7 @@ class HighlightTest extends BaseTest
             new Document(2, ['id' => 2, 'phrase' => $phrase, 'username' => 'peter', 'test' => ['2', '3', '5']]),
         ]);
 
-        $matchQuery = new Query\MatchPhrase('phrase', 'ruflin');
+        $matchQuery = new MatchPhrase('phrase', 'ruflin');
         $query = new Query($matchQuery);
         $query->setHighlight([
             'pre_tags' => ['<em class="highlight">'],

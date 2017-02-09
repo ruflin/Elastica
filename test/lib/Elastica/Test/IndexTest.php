@@ -758,14 +758,10 @@ class IndexTest extends BaseTest
     }
 
     /**
-     * @expectedException \Elastica\Exception\InvalidException
-     *
      * @group functional
      */
-    public function testCreateArray()
+    public function testCreate()
     {
-        $this->_markSkipped50('Routing options have changed');
-
         $client = $this->_getClient();
         $indexName = 'test';
 
@@ -777,18 +773,26 @@ class IndexTest extends BaseTest
         $this->assertTrue($status->indexExists($indexName));
 
         //Testing create index with array options
-        $opts = ['recreate' => true, 'routing' => 'r1,r2'];
+        $opts = ['recreate' => true];
         $index->create([], $opts);
         $this->_waitForAllocation($index);
         $status = new Status($client);
         $this->assertTrue($status->indexExists($indexName));
+    }
 
-        //Testing invalid options
-        $opts = ['recreate' => true, 'routing' => 'r1,r2', 'testing_invalid_option' => true];
+    /**
+     * @expectedException \Elastica\Exception\InvalidException
+     *
+     * @group unit
+     */
+    public function testCreateWithInvalidOption()
+    {
+        $client = $this->_getClient();
+        $indexName = 'test';
+        $index = $client->getIndex($indexName);
+
+        $opts = ['testing_invalid_option' => true];
         $index->create([], $opts);
-        $this->_waitForAllocation($index);
-        $status = new Status($client);
-        $this->assertTrue($status->indexExists($indexName));
     }
 
     /**
@@ -860,7 +864,7 @@ class IndexTest extends BaseTest
     /**
      * @group functional
      */
-    public function testOptimize()
+    public function testForcemerge()
     {
         $index = $this->_createIndex();
 

@@ -8,12 +8,12 @@ use Psr\Log\LoggerInterface;
 
 class Base extends \PHPUnit_Framework_TestCase
 {
-    public static function hideDeprecated()
+    protected static function hideDeprecated()
     {
         error_reporting(error_reporting() & ~E_USER_DEPRECATED);
     }
 
-    public static function showDeprecated()
+    protected static function showDeprecated()
     {
         error_reporting(error_reporting() | E_USER_DEPRECATED);
     }
@@ -126,11 +126,6 @@ class Base extends \PHPUnit_Framework_TestCase
         $index->create(['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 0]], $delete);
 
         return $index;
-    }
-
-    protected function _markSkipped50($message)
-    {
-        $this->markTestSkipped('Skipped because of 5.0: '.$message);
     }
 
     protected function _checkScriptInlineSetting()

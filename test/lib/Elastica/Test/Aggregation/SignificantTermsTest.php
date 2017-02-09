@@ -5,7 +5,6 @@ use Elastica\Aggregation\SignificantTerms;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Query\Terms;
-use Elastica\Query\Terms as TermsQuery;
 use Elastica\Type\Mapping;
 
 class SignificantTermsTest extends BaseAggregationTest
@@ -83,12 +82,10 @@ class SignificantTermsTest extends BaseAggregationTest
      */
     public function testSignificantTermsAggregationWithBackgroundFilterWithLegacyFilter()
     {
-        $this->hideDeprecated();
-
         $agg = new SignificantTerms('significantTerms');
         $agg->setField('temperature');
         $agg->setSize(1);
-        $termsFilter = new TermsQuery();
+        $termsFilter = new Terms();
         $termsFilter->setTerms('color', ['blue', 'red', 'green', 'yellow']);
         $agg->setBackgroundFilter($termsFilter);
 
@@ -98,8 +95,6 @@ class SignificantTermsTest extends BaseAggregationTest
         $query = new Query($termsQuery);
         $query->addAggregation($agg);
         $results = $this->_getIndexForTest()->search($query)->getAggregation('significantTerms');
-
-        $this->showDeprecated();
 
         $this->assertEquals(15, $results['buckets'][0]['doc_count']);
         $this->assertEquals(12, $results['buckets'][0]['bg_count']);

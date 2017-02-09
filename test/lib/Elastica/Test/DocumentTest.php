@@ -265,29 +265,6 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetTtl()
-    {
-        $document = new Document();
-
-        $this->assertFalse($document->hasTtl());
-        $options = $document->getOptions();
-        $this->assertArrayNotHasKey('ttl', $options);
-
-        $document->setTtl('1d');
-
-        $newOptions = $document->getOptions();
-
-        $this->assertArrayHasKey('ttl', $newOptions);
-        $this->assertEquals('1d', $newOptions['ttl']);
-        $this->assertNotEquals($options, $newOptions);
-
-        $this->assertTrue($document->hasTtl());
-        $this->assertEquals('1d', $document->getTtl());
-    }
-
-    /**
-     * @group unit
-     */
     public function testSerializedData()
     {
         $data = '{"user":"rolf"}';

@@ -2,42 +2,41 @@
 namespace Elastica\Script;
 
 /**
- * Inline script.
+ * Stored script referenced by ID.
  *
- * @author avasilenko <aa.vasilenko@gmail.com>
  * @author Tobias Schultze <http://tobion.de>
  * @author Martin Janser <martin.janser@liip.ch>
  *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html
  */
-class Script extends AbstractScript
+class ScriptId extends AbstractScript
 {
     /**
      * @var string
      */
-    private $_scriptCode;
+    private $_scriptId;
 
     /**
-     * @param string      $scriptCode Script source code
+     * @param string      $scriptId   Script ID
      * @param array|null  $params
      * @param string|null $lang
      * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
      */
-    public function __construct($scriptCode, array $params = null, $lang = null, $documentId = null)
+    public function __construct($scriptId, array $params = null, $lang = null, $documentId = null)
     {
         parent::__construct($params, $lang, $documentId);
 
-        $this->setScript($scriptCode);
+        $this->setScriptId($scriptId);
     }
 
     /**
-     * @param string $scriptCode
+     * @param string $scriptId
      *
      * @return $this
      */
-    public function setScript($scriptCode)
+    public function setScriptId($scriptId)
     {
-        $this->_scriptCode = $scriptCode;
+        $this->_scriptId = $scriptId;
 
         return $this;
     }
@@ -45,9 +44,9 @@ class Script extends AbstractScript
     /**
      * @return string
      */
-    public function getScript()
+    public function getScriptId()
     {
-        return $this->_scriptCode;
+        return $this->_scriptId;
     }
 
     /**
@@ -55,6 +54,6 @@ class Script extends AbstractScript
      */
     protected function getScriptTypeArray()
     {
-        return ['inline' => $this->_scriptCode];
+        return ['id' => $this->_scriptId];
     }
 }

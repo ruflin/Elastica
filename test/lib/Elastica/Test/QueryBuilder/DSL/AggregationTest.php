@@ -30,12 +30,7 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'date_histogram', 'Elastica\Aggregation\DateHistogram', ['name', 'field', 1]);
         $this->_assertImplemented($aggregationDSL, 'date_range', 'Elastica\Aggregation\DateRange', ['name']);
         $this->_assertImplemented($aggregationDSL, 'extended_stats', 'Elastica\Aggregation\ExtendedStats', ['name']);
-        $this->hideDeprecated();
         $this->_assertImplemented($aggregationDSL, 'filter', 'Elastica\Aggregation\Filter', ['name', new Exists('field')]);
-        $this->showDeprecated();
-
-        $this->_assertImplemented($aggregationDSL, 'filter', 'Elastica\Aggregation\Filter', ['name', new Term()]);
-
         $this->_assertImplemented($aggregationDSL, 'filters', 'Elastica\Aggregation\Filters', ['name']);
         $this->_assertImplemented($aggregationDSL, 'geo_distance', 'Elastica\Aggregation\GeoDistance', ['name', 'field', 'origin']);
         $this->_assertImplemented($aggregationDSL, 'geohash_grid', 'Elastica\Aggregation\GeohashGrid', ['name', 'field']);

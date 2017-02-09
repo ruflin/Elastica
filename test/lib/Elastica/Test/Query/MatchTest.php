@@ -3,8 +3,6 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Query\Match;
-use Elastica\Query\MatchPhrase;
-use Elastica\Query\MatchPhrasePrefix;
 use Elastica\Test\Base as BaseTest;
 
 class MatchTest extends BaseTest
@@ -28,7 +26,9 @@ class MatchTest extends BaseTest
 
         $query = new Match();
         $query->setFieldQuery($field, $testQuery);
+        $this->hideDeprecated();
         $query->setFieldType($field, $type);
+        $this->showDeprecated();
         $query->setFieldOperator($field, $operator);
         $query->setFieldAnalyzer($field, $analyzer);
         $query->setFieldBoost($field, $boost);
@@ -182,7 +182,7 @@ class MatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMatchPhrase()
+    public function testMatchPhraseType()
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
@@ -203,7 +203,9 @@ class MatchTest extends BaseTest
 
         $query = new Match();
         $query->setFieldQuery($field, 'New York');
+        $this->hideDeprecated();
         $query->setFieldType($field, $type);
+        $this->showDeprecated();
 
         $resultSet = $index->search($query);
 
@@ -213,36 +215,7 @@ class MatchTest extends BaseTest
     /**
      * @group functional
      */
-    public function testMatchPhraseAlias()
-    {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test');
-        $index->create([], true);
-        $type = $index->getType('test');
-
-        $type->addDocuments([
-            new Document(1, ['name' => 'Basel-Stadt']),
-            new Document(2, ['name' => 'New York']),
-            new Document(3, ['name' => 'New Hampshire']),
-            new Document(4, ['name' => 'Basel Land']),
-        ]);
-
-        $index->refresh();
-
-        $field = 'name';
-
-        $query = new MatchPhrase();
-        $query->setFieldQuery($field, 'New York');
-
-        $resultSet = $index->search($query);
-
-        $this->assertEquals(1, $resultSet->count());
-    }
-
-    /**
-     * @group functional
-     */
-    public function testMatchPhrasePrefix()
+    public function testMatchPhrasePrefixType()
     {
         $client = $this->_getClient();
         $index = $client->getIndex('test');
@@ -263,41 +236,15 @@ class MatchTest extends BaseTest
 
         $query = new Match();
         $query->setFieldQuery($field, 'New');
+        $this->hideDeprecated();
         $query->setFieldType($field, $type);
+        $this->showDeprecated();
 
         $resultSet = $index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
     }
 
-    /**
-     * @group functional
-     */
-    public function testMatchPhrasePrefixAlias()
-    {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test');
-        $index->create([], true);
-        $type = $index->getType('test');
-
-        $type->addDocuments([
-            new Document(1, ['name' => 'Basel-Stadt']),
-            new Document(2, ['name' => 'New York']),
-            new Document(3, ['name' => 'New Hampshire']),
-            new Document(4, ['name' => 'Basel Land']),
-        ]);
-
-        $index->refresh();
-
-        $field = 'name';
-
-        $query = new MatchPhrasePrefix();
-        $query->setFieldQuery($field, 'New');
-
-        $resultSet = $index->search($query);
-
-        $this->assertEquals(2, $resultSet->count());
-    }
 
     /**
      * @group unit

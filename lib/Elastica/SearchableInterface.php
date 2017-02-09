@@ -11,12 +11,11 @@ interface SearchableInterface
     /**
      * Searches results for a query.
      *
-     * TODO: Improve sample code
      * {
      *     "from" : 0,
      *     "size" : 10,
      *     "sort" : {
-     *          "postDate" : {"reverse" : true},
+     *          "postDate" : {"order" : "desc"},
      *          "user" : { },
      *          "_score" : { }
      *      },

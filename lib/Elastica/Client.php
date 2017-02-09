@@ -315,7 +315,7 @@ class Client
 
         $bulk = new Bulk($this);
 
-        $bulk->addDocuments($docs, \Elastica\Bulk\Action::OP_TYPE_UPDATE);
+        $bulk->addDocuments($docs, Action::OP_TYPE_UPDATE);
 
         return $bulk->send();
     }
@@ -719,11 +719,28 @@ class Client
      *
      * @return \Elastica\Response Response object
      *
+     * @deprecated Replaced by forcemergeAll
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
     public function optimizeAll($args = [])
     {
-        return $this->request('_optimize', Request::POST, [], $args);
+        trigger_error('Deprecated: Elastica\Client::optimizeAll() is deprecated and will be removed in further Elastica releases. Use Elastica\Client::forcemergeAll() instead.', E_USER_DEPRECATED);
+
+        return $this->forcemergeAll($args);
+    }
+
+    /**
+     * Force merges all search indices.
+     *
+     * @param array $args OPTIONAL Optional arguments
+     *
+     * @return \Elastica\Response Response object
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-forcemerge.html
+     */
+    public function forcemergeAll($args = [])
+    {
+        return $this->request('_forcemerge', Request::POST, [], $args);
     }
 
     /**

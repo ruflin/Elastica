@@ -2,7 +2,6 @@
 namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Exception\NotImplementedException;
-use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Boosting;
 use Elastica\Query\Common;
@@ -28,7 +27,6 @@ use Elastica\Query\Regexp;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
-use Elastica\Query\TopChildren;
 use Elastica\Query\Type;
 use Elastica\Query\Wildcard;
 use Elastica\QueryBuilder\DSL;
@@ -120,36 +118,6 @@ class Query implements DSL
     }
 
     /**
-     * custom filters score query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-custom-filters-score-query.html
-     */
-    public function custom_filters_score()
-    {
-        throw new NotImplementedException();
-    }
-
-    /**
-     * custom score query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-custom-score-query.html
-     */
-    public function custom_score()
-    {
-        throw new NotImplementedException();
-    }
-
-    /**
-     * custom boost factor query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-custom-boost-factor-query.html
-     */
-    public function custom_boost_factor()
-    {
-        throw new NotImplementedException();
-    }
-
-    /**
      * constant score query.
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html
@@ -173,38 +141,6 @@ class Query implements DSL
     public function dis_max()
     {
         return new DisMax();
-    }
-
-    /**
-     * field query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-field-query.html
-     */
-    public function field()
-    {
-        throw new NotImplementedException();
-    }
-
-    /**
-     * fuzzy like this query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-flt-query.html
-     *
-     * @return FuzzyLikeThis
-     */
-    public function fuzzy_like_this()
-    {
-        throw new NotImplementedException('Removed in elasticsearch 2.0');
-    }
-
-    /**
-     * fuzzy like this field query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-flt-field-query.html
-     */
-    public function fuzzy_like_this_field()
-    {
-        throw new NotImplementedException('Removed in elasticsearch 2.0');
     }
 
     /**
@@ -287,16 +223,6 @@ class Query implements DSL
     public function ids($type = null, array $ids = [])
     {
         return new Ids($type, $ids);
-    }
-
-    /**
-     * indices query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-indices-query.html
-     */
-    public function indices()
-    {
-        throw new NotImplementedException();
     }
 
     /**
@@ -499,21 +425,6 @@ class Query implements DSL
     }
 
     /**
-     * top children query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-top-children-query.html
-     *
-     * @param string|AbstractQuery|\Elastica\Query $query
-     * @param string                               $type
-     *
-     * @return TopChildren
-     */
-    public function top_children($query, $type = null)
-    {
-        return new TopChildren($query, $type);
-    }
-
-    /**
      * wildcard query.
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-wildcard-query.html
@@ -527,36 +438,6 @@ class Query implements DSL
     public function wildcard($key = '', $value = null, $boost = 1.0)
     {
         return new Wildcard($key, $value, $boost);
-    }
-
-    /**
-     * text query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/0.90/query-dsl-text-query.html
-     */
-    public function text()
-    {
-        throw new NotImplementedException();
-    }
-
-    /**
-     * minimum should match query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
-     */
-    public function minimum_should_match()
-    {
-        throw new NotImplementedException();
-    }
-
-    /**
-     * template query.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-template-query.html
-     */
-    public function template()
-    {
-        throw new NotImplementedException();
     }
 
     /**

@@ -3,10 +3,12 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Query;
+use Elastica\Query\AbstractQuery;
+use Elastica\Query\HasChild;
 use Elastica\Query\InnerHits;
 use Elastica\Query\MatchAll;
+use Elastica\Query\Nested;
 use Elastica\Query\SimpleQueryString;
-use Elastica\QueryBuilder;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
 use Elastica\Test\Base as BaseTest;
@@ -14,7 +16,7 @@ use Elastica\Type\Mapping;
 
 class InnerHitsTest extends BaseTest
 {
-    protected function _getIndexForNestedTest()
+    private function _getIndexForNestedTest()
     {
         $index = $this->_createIndex();
         $type = $index->getType('questions');
@@ -27,7 +29,7 @@ class InnerHitsTest extends BaseTest
             'users' => [
                 'type' => 'nested',
                 'properties' => [
-                    'name' => ['type' => 'text', 'fielddata' => 'true'],
+                    'name' => ['type' => 'text', 'fielddata' => true],
                 ],
             ],
             'title' => ['type' => 'text'],
@@ -87,7 +89,7 @@ class InnerHitsTest extends BaseTest
         return $index;
     }
 
-    protected function _getIndexForParentChildrenTest()
+    private function _getIndexForParentChildrenTest()
     {
         $index = $this->_createIndex();
         $questionType = $index->getType('questions');
@@ -110,7 +112,7 @@ class InnerHitsTest extends BaseTest
 
         // Set mapping
         $mappingResponse->setProperties([
-            'answer' => ['type' => 'text', 'fielddata' => 'true'],
+            'answer' => ['type' => 'text', 'fielddata' => true],
             'last_activity_date' => ['type' => 'date'],
         ]);
         $mappingResponse->send();
@@ -292,27 +294,21 @@ class InnerHitsTest extends BaseTest
         $this->assertInstanceOf('Elastica\Query\InnerHits', $returnValue);
     }
 
-    protected function getNestedQuery($queryString, $innerHits)
+    private function getNestedQuery(AbstractQuery $query, InnerHits $innerHits)
     {
-        $queryBuilder = new QueryBuilder();
-
-        $query = $queryBuilder->query()->nested()
+        $nested = (new Nested())
             ->setInnerHits($innerHits)
             ->setPath('users')
-            ->setQuery($queryString);
+            ->setQuery($query);
 
-        return $this->_getIndexForNestedTest()->search($query);
+        return $this->_getIndexForNestedTest()->search($nested);
     }
 
-    protected function getParentChildQuery($queryString, $innerHits)
+    private function getParentChildQuery(AbstractQuery $query, InnerHits $innerHits)
     {
-        $queryBuilder = new QueryBuilder();
+        $child = (new HasChild($query, 'responses'))->setInnerHits($innerHits);
 
-        $query = $queryBuilder->query()->has_child($queryString)
-            ->setInnerHits($innerHits)
-            ->setType('responses');
-
-        return $this->_getIndexForParentChildrenTest()->getType('questions')->search($query);
+        return $this->_getIndexForParentChildrenTest()->getType('questions')->search($child);
     }
 
     /**
@@ -361,18 +357,18 @@ class InnerHitsTest extends BaseTest
      */
     public function testInnerHitsLimitedSource()
     {
-        $matchAll = new MatchAll();
-        $innerHits = new InnerHits();
-        $innerHits->setSource(['name']);
+        $this->markTestSkipped('Source filtering on inner hits is bugged. See https://github.com/elastic/elasticsearch/issues/21312');
 
-        $this->_markSkipped50("[inner_hits] _source doesn't support values of type: START_ARRAY");
-        $results = $this->getNestedQuery($matchAll, $innerHits);
+        $innerHits = new InnerHits();
+        $innerHits->setSource(['includes' => ['name'], 'excludes' => ['last_activity_date']]);
+
+        $results = $this->getNestedQuery(new MatchAll(), $innerHits);
 
         foreach ($results as $row) {
             $innerHitsResult = $row->getInnerHits();
             foreach ($innerHitsResult['users']['hits']['hits'] as $doc) {
-                $this->assertArrayHasKey('name', $doc['_source']);
-                $this->assertArrayNotHasKey('last_activity_date', $doc['_source']);
+                $this->assertArrayHasKey('name', $doc['_source']['users']);
+                $this->assertArrayNotHasKey('last_activity_date', $doc['_source']['users']);
             }
         }
     }

@@ -6,6 +6,7 @@ use Elastica\Exception\PartialShardFailureException;
 use Elastica\JSON;
 use Elastica\Query;
 use Elastica\ResultSet;
+use Elastica\ResultSet\DefaultBuilder;
 
 class PartialShardFailureExceptionTest extends AbstractExceptionTest
 {
@@ -49,7 +50,7 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
 
             $this->fail('PartialShardFailureException should have been thrown');
         } catch (PartialShardFailureException $e) {
-            $builder = new ResultSet\DefaultBuilder();
+            $builder = new DefaultBuilder();
             $resultSet = $builder->buildResultSet($e->getResponse(), $query);
             $this->assertEquals(0, count($resultSet->getResults()));
 
