@@ -2,7 +2,6 @@
 namespace Elastica\Test\QueryBuilder\DSL;
 
 use Elastica\Query\Exists;
-use Elastica\Query\Term;
 use Elastica\QueryBuilder\DSL;
 
 class AggregationTest extends AbstractDSLTest

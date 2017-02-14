@@ -2,7 +2,6 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\MatchPhrase;
 use Elastica\Query\MatchPhrasePrefix;
 use Elastica\Test\Base as BaseTest;
 
@@ -38,7 +37,6 @@ class MatchPhrasePrefixTest extends BaseTest
 
         $this->assertEquals($expectedArray, $query->toArray());
     }
-
 
     /**
      * @group functional

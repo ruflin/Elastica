@@ -245,7 +245,6 @@ class MatchTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
     }
 
-
     /**
      * @group unit
      */

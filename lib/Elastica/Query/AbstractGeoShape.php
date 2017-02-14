@@ -23,7 +23,7 @@ abstract class AbstractGeoShape extends AbstractQuery
     const RELATION_CONTAINS = 'contains';
 
     /**
-     * Elasticsearch path of the geo_shape field
+     * Elasticsearch path of the geo_shape field.
      *
      * @var string
      */
