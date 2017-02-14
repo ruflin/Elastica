@@ -32,6 +32,7 @@ class Util
 
     /**
      * Escapes date math symbols within request URI.
+     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.x/date-math-index-names.html
      *
      * @param string $requestUri

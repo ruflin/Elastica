@@ -248,11 +248,11 @@ class MappingTest extends BaseTest
                                 'raw' => [
                                     'type' => 'keyword',
                                     'include_in_all' => false,
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
             ],
             $newMapping,
             'Mapping of dynamic "multiname" field should have been created with the type "{dynamic_type}" resolved to "text". '.

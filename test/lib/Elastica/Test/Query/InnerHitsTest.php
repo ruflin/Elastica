@@ -2,7 +2,6 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\HasChild;
 use Elastica\Query\InnerHits;

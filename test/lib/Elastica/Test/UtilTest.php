@@ -52,7 +52,7 @@ class UtilTest extends BaseTest
             ['<log-{now/d}>,log-2011.12.01/log/_refresh', '%3Clog-%7Bnow%2Fd%7D%3E%2Clog-2011.12.01/log/_refresh'],
             [
                 '<logstash-{now/d-2d}>,<logstash-{now/d-1d}>,<logstash-{now/d}>/_search',
-                '%3Clogstash-%7Bnow%2Fd-2d%7D%3E%2C%3Clogstash-%7Bnow%2Fd-1d%7D%3E%2C%3Clogstash-%7Bnow%2Fd%7D%3E/_search'
+                '%3Clogstash-%7Bnow%2Fd-2d%7D%3E%2C%3Clogstash-%7Bnow%2Fd-1d%7D%3E%2C%3Clogstash-%7Bnow%2Fd%7D%3E/_search',
             ],
             [
                 '<elastic\\\\{ON\\\\}-{now/M}>', // <elastic\\{ON\\}-{now/M}>

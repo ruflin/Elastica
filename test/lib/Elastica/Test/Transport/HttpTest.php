@@ -3,7 +3,6 @@ namespace Elastica\Test\Transport;
 
 use Elastica\Document;
 use Elastica\Query;
-use Elastica\ResultSet;
 use Elastica\ResultSet\DefaultBuilder;
 use Elastica\Test\Base as BaseTest;
 

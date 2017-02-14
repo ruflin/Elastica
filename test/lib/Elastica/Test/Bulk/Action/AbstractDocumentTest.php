@@ -1,9 +1,7 @@
 <?php
 namespace Elastica\Test\Bulk\Action;
 
-use Elastica\Bulk\Action;
 use Elastica\Bulk\Action\AbstractDocument;
-use Elastica\Index;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;

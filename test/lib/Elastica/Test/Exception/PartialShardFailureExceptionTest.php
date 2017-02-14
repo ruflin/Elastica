@@ -5,7 +5,6 @@ use Elastica\Document;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\JSON;
 use Elastica\Query;
-use Elastica\ResultSet;
 use Elastica\ResultSet\DefaultBuilder;
 
 class PartialShardFailureExceptionTest extends AbstractExceptionTest
