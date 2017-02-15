@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://elastica.io/2017/02/15/release-5-dot-1-0/</loc>
+<lastmod>2017-02-15T12:23:04+01:00</lastmod>
+</url>
+<url>
 <loc>http://elastica.io/2016/12/14/release-5-dot-0-0/</loc>
 <lastmod>2016-12-14T09:58:44+01:00</lastmod>
 </url>
