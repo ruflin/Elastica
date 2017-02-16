@@ -118,7 +118,7 @@ class Settings
     {
         $data = $this->get($setting);
 
-        return 'true' === $data | '1' === $data | 'on' === $data | 'yes' === $data;
+        return 'true' === $data || '1' === $data || 'on' === $data || 'yes' === $data;
     }
 
     /**
