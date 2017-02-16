@@ -107,8 +107,8 @@ class Settings
      *
      * One can use a real bool, int(0), int(1) to set bool settings.
      * But Elasticsearch stores and returns all settings as strings and does
-     * not normalize bool values. This method ensures a bool is returned
-     * for whichever bool string is used: 'true', '1', 'on', 'yes'
+     * not normalize bool values. This method ensures a bool is returned for
+     * whichever string representation is used like 'true', '1', 'on', 'yes'.
      *
      * @param string $setting Setting name to return
      *

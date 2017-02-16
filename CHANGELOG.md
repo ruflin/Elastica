@@ -7,12 +7,17 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 
+- Fix reading bool index settings like `\Elastica\Index\Settings::getBlocksWrite`. Elasticsearch returns all settings as strings and does not normalize bool values.
+  The getters now return the right bool value for whichever string representation is used like 'true', '1', 'on', 'yes'.
+
 ### Added
 
 ### Improvements
 
 ### Deprecated
 
+- Deprecated `\Elastica\Exception\ElasticsearchException` which is irrelevant since Elasticsearch now exposes the errors as a structured array instead of a single string.
+  Use `\Elastica\Exception\ResponseException::getResponse::getFullError` instead.
 
 ## [5.1.0](https://github.com/ruflin/Elastica/compare/5.0.0...5.1.0)
 
