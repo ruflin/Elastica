@@ -283,9 +283,8 @@ class Index implements SearchableInterface
     public function exists()
     {
         $response = $this->getClient()->request($this->getName(), Request::HEAD);
-        $info = $response->getTransferInfo();
 
-        return (bool) ($info['http_code'] == 200);
+        return $response->getStatus() === 200;
     }
 
     /**
