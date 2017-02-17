@@ -95,7 +95,7 @@ class ScriptFileTest extends BaseTest
     {
         $scriptFile = ScriptFile::create(self::SCRIPT_FILE);
 
-        $this->assertInstanceOf('Elastica\Script\ScriptFile', $scriptFile);
+        $this->assertInstanceOf(ScriptFile::class, $scriptFile);
 
         $this->assertEquals(self::SCRIPT_FILE, $scriptFile->getScriptFile());
 
@@ -116,7 +116,7 @@ class ScriptFileTest extends BaseTest
 
         $scriptFile = ScriptFile::create($data);
 
-        $this->assertInstanceOf('Elastica\Script\ScriptFile', $scriptFile);
+        $this->assertInstanceOf(ScriptFile::class, $scriptFile);
         $this->assertSame($data, $scriptFile);
     }
 
@@ -138,7 +138,7 @@ class ScriptFileTest extends BaseTest
 
         $scriptFile = ScriptFile::create($array);
 
-        $this->assertInstanceOf('Elastica\Script\ScriptFile', $scriptFile);
+        $this->assertInstanceOf(ScriptFile::class, $scriptFile);
         $this->assertEquals($array, $scriptFile->toArray());
 
         $this->assertEquals(self::SCRIPT_FILE, $scriptFile->getScriptFile());

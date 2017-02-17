@@ -1,13 +1,13 @@
 <?php
 namespace Elastica\Test\Cluster\Health;
 
-use Elastica\Cluster\Health\Shard as HealthShard;
+use Elastica\Cluster\Health\Shard;
 use Elastica\Test\Base as BaseTest;
 
 class ShardTest extends BaseTest
 {
     /**
-     * @var \Elastica\Cluster\Health\Shard
+     * @var Shard
      */
     protected $_shard;
 
@@ -24,7 +24,7 @@ class ShardTest extends BaseTest
             'unassigned_shards' => 1,
         ];
 
-        $this->_shard = new HealthShard(2, $shardData);
+        $this->_shard = new Shard(2, $shardData);
     }
 
     /**

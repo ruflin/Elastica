@@ -74,7 +74,7 @@ class SimpleQueryStringTest extends Base
         $query->setMinimumShouldMatch($expected['simple_query_string']['minimum_should_match']);
 
         $this->assertEquals($expected, $query->toArray());
-        $this->assertInstanceOf('Elastica\Query\SimpleQueryString', $query->setMinimumShouldMatch('75%'));
+        $this->assertInstanceOf(SimpleQueryString::class, $query->setMinimumShouldMatch('75%'));
     }
 
     /**

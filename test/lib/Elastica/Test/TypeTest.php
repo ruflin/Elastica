@@ -5,7 +5,6 @@ use Elastica\Document;
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
-use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
 use Elastica\Query\SimpleQueryString;
@@ -834,7 +833,7 @@ class TypeTest extends BaseTest
         $this->assertTrue($document->hasId());
 
         $foundDoc = $type->getDocument($document->getId());
-        $this->assertInstanceOf('Elastica\Document', $foundDoc);
+        $this->assertInstanceOf(Document::class, $foundDoc);
         $this->assertEquals($document->getId(), $foundDoc->getId());
         $data = $foundDoc->getData();
         $this->assertArrayHasKey('name', $data);
@@ -890,7 +889,7 @@ class TypeTest extends BaseTest
         $index = $this->_getClient()->getIndex('foo');
         $type = $index->getType('user');
         $ret = $type->setSerializer('get_object_vars');
-        $this->assertInstanceOf('Elastica\Type', $ret);
+        $this->assertInstanceOf(Type::class, $ret);
     }
 
     /**

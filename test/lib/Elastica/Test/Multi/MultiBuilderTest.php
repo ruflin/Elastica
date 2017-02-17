@@ -2,6 +2,7 @@
 namespace Elastica\Test\Multi;
 
 use Elastica\Multi\MultiBuilder;
+use Elastica\Multi\ResultSet as MultiResultSet;
 use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\ResultSet\BuilderInterface;
@@ -27,7 +28,7 @@ class MultiBuilderTest extends BaseTest
     {
         parent::setUp();
 
-        $this->builder = $this->createMock('Elastica\\ResultSet\\BuilderInterface');
+        $this->builder = $this->createMock(BuilderInterface::class);
         $this->multiBuilder = new MultiBuilder($this->builder);
     }
 
@@ -41,7 +42,7 @@ class MultiBuilderTest extends BaseTest
 
         $result = $this->multiBuilder->buildMultiResultSet($response, $searches);
 
-        $this->assertInstanceOf('Elastica\\Multi\\ResultSet', $result);
+        $this->assertInstanceOf(MultiResultSet::class, $result);
     }
 
     public function testBuildMultiResultSet()
@@ -62,14 +63,14 @@ class MultiBuilderTest extends BaseTest
         $this->builder->expects($this->exactly(2))
             ->method('buildResultSet')
             ->withConsecutive(
-                [$this->isInstanceOf('Elastica\\Response'), $s1->getQuery()],
-                [$this->isInstanceOf('Elastica\\Response'), $s2->getQuery()]
+                [$this->isInstanceOf(Response::class), $s1->getQuery()],
+                [$this->isInstanceOf(Response::class), $s2->getQuery()]
             )
             ->willReturnOnConsecutiveCalls($resultSet1, $resultSet2);
 
         $result = $this->multiBuilder->buildMultiResultSet($response, $searches);
 
-        $this->assertInstanceOf('Elastica\\Multi\\ResultSet', $result);
+        $this->assertInstanceOf(MultiResultSet::class, $result);
         $this->assertSame($resultSet1, $result[0]);
         $this->assertSame($resultSet2, $result[1]);
     }

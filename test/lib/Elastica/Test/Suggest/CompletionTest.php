@@ -124,7 +124,7 @@ class CompletionTest extends BaseTest
 
         $this->assertEquals($fuzzy, $suggest->getParam('fuzzy'));
 
-        $this->assertInstanceOf('Elastica\\Suggest\\Completion', $suggest->setFuzzy($fuzzy));
+        $this->assertInstanceOf(Completion::class, $suggest->setFuzzy($fuzzy));
     }
 
     /**

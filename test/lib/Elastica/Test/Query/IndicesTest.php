@@ -104,7 +104,7 @@ class IndicesTest extends DeprecatedClassBase
         $this->assertEquals($expected, $query->getParam('indices'));
 
         $returnValue = $query->setIndices($indices);
-        $this->assertInstanceOf('Elastica\Query\Indices', $returnValue);
+        $this->assertInstanceOf(Indices::class, $returnValue);
     }
 
     /**
@@ -126,6 +126,6 @@ class IndicesTest extends DeprecatedClassBase
         $this->assertEquals($expected, $query->getParam('indices'));
 
         $returnValue = $query->addIndex('bar');
-        $this->assertInstanceOf('Elastica\Query\Indices', $returnValue);
+        $this->assertInstanceOf(Indices::class, $returnValue);
     }
 }

@@ -2,6 +2,7 @@
 namespace Elastica\Test\Connection\Strategy;
 
 use Elastica\Connection;
+use Elastica\Connection\Strategy\Simple;
 use Elastica\Exception\ConnectionException;
 use Elastica\Test\Base;
 
@@ -24,7 +25,6 @@ class SimpleTest extends Base
     {
         $client = $this->_getClient();
         $response = $client->request('/_aliases');
-        /* @var $response \Elastica\Response */
 
         $this->_checkResponse($response);
 
@@ -103,7 +103,7 @@ class SimpleTest extends Base
     {
         $strategy = $client->getConnectionStrategy();
 
-        $this->assertInstanceOf('Elastica\Connection\Strategy\Simple', $strategy);
+        $this->assertInstanceOf(Simple::class, $strategy);
     }
 
     protected function _checkResponse($response)

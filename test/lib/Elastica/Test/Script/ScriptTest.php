@@ -57,7 +57,7 @@ class ScriptTest extends BaseTest
     {
         $script = Script::create(self::SCRIPT);
 
-        $this->assertInstanceOf('Elastica\Script\Script', $script);
+        $this->assertInstanceOf(Script::class, $script);
 
         $this->assertEquals(self::SCRIPT, $script->getScript());
 
@@ -76,7 +76,7 @@ class ScriptTest extends BaseTest
 
         $script = Script::create($data);
 
-        $this->assertInstanceOf('Elastica\Script\Script', $script);
+        $this->assertInstanceOf(Script::class, $script);
         $this->assertSame($data, $script);
     }
 
@@ -99,7 +99,7 @@ class ScriptTest extends BaseTest
 
         $script = Script::create($array);
 
-        $this->assertInstanceOf('Elastica\Script\Script', $script);
+        $this->assertInstanceOf(Script::class, $script);
         $this->assertEquals($array, $script->toArray());
 
         $this->assertEquals(self::SCRIPT, $script->getScript());

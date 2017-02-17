@@ -6,6 +6,7 @@ use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\ResultSet\ProcessingBuilder;
+use Elastica\ResultSet\ProcessorInterface;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -19,12 +20,12 @@ class ProcessingBuilderTest extends BaseTest
     private $builder;
 
     /**
-     * @var BuilderInterface
+     * @var BuilderInterface|\PHPUnit_Framework_MockObject_MockObject
      */
     private $innerBuilder;
 
     /**
-     * @var ResultSet\ProcessorInterface
+     * @var ProcessorInterface|PHPUnit_Framework_MockObject_MockObject
      */
     private $processor;
 
@@ -32,8 +33,8 @@ class ProcessingBuilderTest extends BaseTest
     {
         parent::setUp();
 
-        $this->innerBuilder = $this->createMock('Elastica\\ResultSet\\BuilderInterface');
-        $this->processor = $this->createMock('Elastica\\ResultSet\\ProcessorInterface');
+        $this->innerBuilder = $this->createMock(BuilderInterface::class);
+        $this->processor = $this->createMock(ProcessorInterface::class);
 
         $this->builder = new ProcessingBuilder($this->innerBuilder, $this->processor);
     }

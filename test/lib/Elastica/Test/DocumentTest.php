@@ -20,7 +20,7 @@ class DocumentTest extends BaseTest
         }
         $doc = new Document();
         $returnValue = $doc->addFile('key', $fileName);
-        $this->assertInstanceOf('Elastica\Document', $returnValue);
+        $this->assertInstanceOf(Document::class, $returnValue);
     }
 
     /**
@@ -30,7 +30,7 @@ class DocumentTest extends BaseTest
     {
         $doc = new Document();
         $returnValue = $doc->addGeoPoint('point', 38.89859, -77.035971);
-        $this->assertInstanceOf('Elastica\Document', $returnValue);
+        $this->assertInstanceOf(Document::class, $returnValue);
     }
 
     /**
@@ -40,7 +40,7 @@ class DocumentTest extends BaseTest
     {
         $doc = new Document();
         $returnValue = $doc->setData(['data']);
-        $this->assertInstanceOf('Elastica\Document', $returnValue);
+        $this->assertInstanceOf(Document::class, $returnValue);
     }
 
     /**
@@ -192,9 +192,9 @@ class DocumentTest extends BaseTest
         $this->assertNull($data['field4']);
 
         $returnValue = $document->set('field1', 'changed1');
-        $this->assertInstanceOf('Elastica\Document', $returnValue);
+        $this->assertInstanceOf(Document::class, $returnValue);
         $returnValue = $document->remove('field3');
-        $this->assertInstanceOf('Elastica\Document', $returnValue);
+        $this->assertInstanceOf(Document::class, $returnValue);
         try {
             $document->remove('field5');
             $this->fail('Undefined field unset should throw exception');

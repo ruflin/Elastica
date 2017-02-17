@@ -14,7 +14,7 @@ class LimitTest extends BaseTest
         $query = new Limit(10);
         $this->assertEquals(10, $query->getParam('value'));
 
-        $this->assertInstanceOf('Elastica\Query\Limit', $query->setLimit(20));
+        $this->assertInstanceOf(Limit::class, $query->setLimit(20));
         $this->assertEquals(20, $query->getParam('value'));
     }
 

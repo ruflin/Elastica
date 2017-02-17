@@ -2,6 +2,8 @@
 namespace Elastica\Test;
 
 use Elastica\Node;
+use Elastica\Node\Info;
+use Elastica\Node\Stats;
 use Elastica\Test\Base as BaseTest;
 
 class NodeTest extends BaseTest
@@ -16,7 +18,7 @@ class NodeTest extends BaseTest
         $name = reset($names);
 
         $node = new Node($name, $client);
-        $this->assertInstanceOf('Elastica\Node', $node);
+        $this->assertInstanceOf(Node::class, $node);
     }
 
     /**
@@ -32,7 +34,7 @@ class NodeTest extends BaseTest
 
         $info = $node->getInfo();
 
-        $this->assertInstanceOf('Elastica\Node\Info', $info);
+        $this->assertInstanceOf(Info::class, $info);
     }
 
     /**
@@ -48,7 +50,7 @@ class NodeTest extends BaseTest
 
         $stats = $node->getStats();
 
-        $this->assertInstanceOf('Elastica\Node\Stats', $stats);
+        $this->assertInstanceOf(Stats::class, $stats);
     }
 
     /**

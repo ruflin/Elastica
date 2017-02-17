@@ -497,7 +497,7 @@ class FunctionScoreTest extends BaseTest
         $returnedValue = $query->setMinScore(0.8);
 
         $this->assertEquals($expected, $query->toArray());
-        $this->assertInstanceOf('Elastica\Query\FunctionScore', $returnedValue);
+        $this->assertInstanceOf(FunctionScore::class, $returnedValue);
 
         $response = $this->_getIndexForTest()->search($query);
         $results = $response->getResults();

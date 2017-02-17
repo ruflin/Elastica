@@ -13,7 +13,7 @@ class NumericRangeTest extends BaseTest
     {
         $rangeQuery = new NumericRange();
         $returnValue = $rangeQuery->addField('fieldName', ['to' => 'value']);
-        $this->assertInstanceOf('Elastica\Query\NumericRange', $returnValue);
+        $this->assertInstanceOf(NumericRange::class, $returnValue);
     }
 
     /**

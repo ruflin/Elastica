@@ -4,7 +4,11 @@ namespace Elastica\Test;
 use Elastica\Bulk;
 use Elastica\Bulk\Action;
 use Elastica\Bulk\Action\AbstractDocument;
+use Elastica\Bulk\Action\CreateDocument;
+use Elastica\Bulk\Action\IndexDocument;
 use Elastica\Bulk\Action\UpdateDocument;
+use Elastica\Bulk\Response;
+use Elastica\Bulk\ResponseSet;
 use Elastica\Document;
 use Elastica\Exception\Bulk\ResponseException;
 use Elastica\Exception\NotFoundException;
@@ -44,19 +48,19 @@ class BulkTest extends BaseTest
 
         $actions = $bulk->getActions();
 
-        $this->assertInstanceOf('Elastica\Bulk\Action\IndexDocument', $actions[0]);
+        $this->assertInstanceOf(IndexDocument::class, $actions[0]);
         $this->assertEquals('index', $actions[0]->getOpType());
         $this->assertSame($newDocument1, $actions[0]->getDocument());
 
-        $this->assertInstanceOf('Elastica\Bulk\Action\IndexDocument', $actions[1]);
+        $this->assertInstanceOf(IndexDocument::class, $actions[1]);
         $this->assertEquals('index', $actions[1]->getOpType());
         $this->assertSame($newDocument2, $actions[1]->getDocument());
 
-        $this->assertInstanceOf('Elastica\Bulk\Action\CreateDocument', $actions[2]);
+        $this->assertInstanceOf(CreateDocument::class, $actions[2]);
         $this->assertEquals('create', $actions[2]->getOpType());
         $this->assertSame($newDocument3, $actions[2]->getDocument());
 
-        $this->assertInstanceOf('Elastica\Bulk\Action\IndexDocument', $actions[3]);
+        $this->assertInstanceOf(IndexDocument::class, $actions[3]);
         $this->assertEquals('index', $actions[3]->getOpType());
         $this->assertSame($newDocument4, $actions[3]->getDocument());
 
@@ -89,13 +93,13 @@ class BulkTest extends BaseTest
 
         $response = $bulk->send();
 
-        $this->assertInstanceOf('Elastica\Bulk\ResponseSet', $response);
+        $this->assertInstanceOf(ResponseSet::class, $response);
 
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
 
         foreach ($response as $i => $bulkResponse) {
-            $this->assertInstanceOf('Elastica\Bulk\Response', $bulkResponse);
+            $this->assertInstanceOf(Response::class, $bulkResponse);
             $this->assertTrue($bulkResponse->isOk());
             $this->assertFalse($bulkResponse->hasError());
             $this->assertSame($actions[$i], $bulkResponse->getAction());
@@ -259,29 +263,29 @@ class BulkTest extends BaseTest
         $this->assertInternalType('array', $actions);
         $this->assertEquals(5, count($actions));
 
-        $this->assertInstanceOf('Elastica\Bulk\Action', $actions[0]);
+        $this->assertInstanceOf(Action::class, $actions[0]);
         $this->assertEquals('index', $actions[0]->getOpType());
         $this->assertEquals($rawData[0]['index'], $actions[0]->getMetadata());
         $this->assertTrue($actions[0]->hasSource());
         $this->assertEquals($rawData[1], $actions[0]->getSource());
 
-        $this->assertInstanceOf('Elastica\Bulk\Action', $actions[1]);
+        $this->assertInstanceOf(Action::class, $actions[1]);
         $this->assertEquals('delete', $actions[1]->getOpType());
         $this->assertEquals($rawData[2]['delete'], $actions[1]->getMetadata());
         $this->assertFalse($actions[1]->hasSource());
 
-        $this->assertInstanceOf('Elastica\Bulk\Action', $actions[2]);
+        $this->assertInstanceOf(Action::class, $actions[2]);
         $this->assertEquals('delete', $actions[2]->getOpType());
         $this->assertEquals($rawData[3]['delete'], $actions[2]->getMetadata());
         $this->assertFalse($actions[2]->hasSource());
 
-        $this->assertInstanceOf('Elastica\Bulk\Action', $actions[3]);
+        $this->assertInstanceOf(Action::class, $actions[3]);
         $this->assertEquals('create', $actions[3]->getOpType());
         $this->assertEquals($rawData[4]['create'], $actions[3]->getMetadata());
         $this->assertTrue($actions[3]->hasSource());
         $this->assertEquals($rawData[5], $actions[3]->getSource());
 
-        $this->assertInstanceOf('Elastica\Bulk\Action', $actions[4]);
+        $this->assertInstanceOf(Action::class, $actions[4]);
         $this->assertEquals('delete', $actions[4]->getOpType());
         $this->assertEquals($rawData[6]['delete'], $actions[4]->getMetadata());
         $this->assertFalse($actions[4]->hasSource());
@@ -609,7 +613,7 @@ class BulkTest extends BaseTest
     public function testSetShardTimeout()
     {
         $bulk = new Bulk($this->_getClient());
-        $this->assertInstanceOf('Elastica\Bulk', $bulk->setShardTimeout(10));
+        $this->assertInstanceOf(Bulk::class, $bulk->setShardTimeout(10));
     }
 
     /**
@@ -618,7 +622,7 @@ class BulkTest extends BaseTest
     public function testSetRequestParam()
     {
         $bulk = new Bulk($this->_getClient());
-        $this->assertInstanceOf('Elastica\Bulk', $bulk->setRequestParam('key', 'value'));
+        $this->assertInstanceOf(Bulk::class, $bulk->setRequestParam('key', 'value'));
     }
 
     /**

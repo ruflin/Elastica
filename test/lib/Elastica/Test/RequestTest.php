@@ -3,6 +3,7 @@ namespace Elastica\Test;
 
 use Elastica\Connection;
 use Elastica\Request;
+use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
 
 class RequestTest extends BaseTest
@@ -48,7 +49,7 @@ class RequestTest extends BaseTest
 
         $response = $request->send();
 
-        $this->assertInstanceOf('Elastica\Response', $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     /**

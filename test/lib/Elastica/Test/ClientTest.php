@@ -2,13 +2,17 @@
 namespace Elastica\Test;
 
 use Elastica\Bulk;
+use Elastica\Bulk\ResponseSet;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\Connection\HttpException;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\NotFoundException;
 use Elastica\Index;
 use Elastica\Request;
+use Elastica\Response;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
@@ -207,7 +211,7 @@ class ClientTest extends BaseTest
         $ixCoin->setIndex(null);  // Make sure the index gets set properly if missing
         $index->deleteDocuments([$anonCoin, $ixCoin]);
 
-        $this->setExpectedException('Elastica\Exception\NotFoundException');
+        $this->expectException(NotFoundException::class);
         $index->getType('altcoin')->getDocument(1);
         $index->getType('altcoin')->getDocument(2);
     }
@@ -240,7 +244,7 @@ class ClientTest extends BaseTest
         $nameCoin->setType(null);  // Make sure the type gets set properly if missing
         $type->deleteDocuments([$liteCoin, $nameCoin]);
 
-        $this->setExpectedException('Elastica\Exception\NotFoundException');
+        $this->expectException(NotFoundException::class);
         $type->getDocument(1);
         $type->getDocument(2);
     }
@@ -412,7 +416,7 @@ class ClientTest extends BaseTest
         // deleteIds are the type we are testing for
         $idxString = $index->getName();
         $this->assertTrue(is_string($idxString));
-        $this->assertInstanceOf('Elastica\Type', $type);
+        $this->assertInstanceOf(Type::class, $type);
 
         // Using the existing $index and $type variables which
         // are \Elastica\Index and \Elastica\Type objects respectively
@@ -475,7 +479,7 @@ class ClientTest extends BaseTest
         // And verify that the variables we are doing to send to
         // deleteIds are the type we are testing for
         $typeString = $type->getName();
-        $this->assertInstanceOf('Elastica\Index', $index);
+        $this->assertInstanceOf(Index::class, $index);
         $this->assertTrue(is_string($typeString));
 
         // Using the existing $index and $type variables which
@@ -538,8 +542,8 @@ class ClientTest extends BaseTest
 
         // And verify that the variables we are doing to send to
         // deleteIds are the type we are testing for
-        $this->assertInstanceOf('Elastica\Index', $index);
-        $this->assertInstanceOf('Elastica\Type', $type);
+        $this->assertInstanceOf(Index::class, $index);
+        $this->assertInstanceOf(Type::class, $type);
 
         // Using the existing $index and $type variables which
         // are \Elastica\Index and \Elastica\Type objects respectively
@@ -618,9 +622,9 @@ class ClientTest extends BaseTest
 
         // Callback function which verifies that disabled connection objects are returned
         $callback = function ($connection, $exception, $client) use (&$object, &$count) {
-            $object->assertInstanceOf('Elastica\Connection', $connection);
-            $object->assertInstanceOf('Elastica\Exception\ConnectionException', $exception);
-            $object->assertInstanceOf('Elastica\Client', $client);
+            $object->assertInstanceOf(Connection::class, $connection);
+            $object->assertInstanceOf(ConnectionException::class, $exception);
+            $object->assertInstanceOf(Client::class, $client);
             $object->assertFalse($connection->isEnabled());
             ++$count;
         };
@@ -657,7 +661,7 @@ class ClientTest extends BaseTest
         $client = $this->_getClient(['url' => $url, 'port' => '9101', 'timeout' => 2]);
 
         $response = $client->request('_stats');
-        $this->assertInstanceOf('Elastica\Response', $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     /**
@@ -677,7 +681,7 @@ class ClientTest extends BaseTest
 
         $document = $type->getDocument(1);
 
-        $this->assertInstanceOf('Elastica\Document', $document);
+        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
@@ -705,7 +709,7 @@ class ClientTest extends BaseTest
 
         $document = $type->getDocument(1);
 
-        $this->assertInstanceOf('Elastica\Document', $document);
+        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
@@ -735,7 +739,7 @@ class ClientTest extends BaseTest
 
         $document = $type->getDocument(1);
 
-        $this->assertInstanceOf('Elastica\Document', $document);
+        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
@@ -751,7 +755,7 @@ class ClientTest extends BaseTest
 
         $document = $type->getDocument(1);
 
-        $this->assertInstanceOf('Elastica\Document', $document);
+        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
@@ -785,7 +789,7 @@ class ClientTest extends BaseTest
 
         $document = $type->getDocument(1);
 
-        $this->assertInstanceOf('Elastica\Document', $document);
+        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
@@ -808,7 +812,7 @@ class ClientTest extends BaseTest
         $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), ['fields' => '_source']);
 
         $document = $type->getDocument(1);
-        $this->assertInstanceOf('Elastica\Document', $document);
+        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
@@ -819,7 +823,7 @@ class ClientTest extends BaseTest
         $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), ['fields' => '_source']);
 
         $document = $type->getDocument(1);
-        $this->assertInstanceOf('Elastica\Document', $document);
+        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1updated', $data['field1']);
@@ -849,7 +853,7 @@ class ClientTest extends BaseTest
         $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), ['fields' => '_source']);
 
         $document = $type->getDocument(1);
-        $this->assertInstanceOf('Elastica\Document', $document);
+        $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
@@ -894,7 +898,7 @@ class ClientTest extends BaseTest
 
         $response = $client->addDocuments($docs);
 
-        $this->assertInstanceOf('Elastica\Bulk\ResponseSet', $response);
+        $this->assertInstanceOf(ResponseSet::class, $response);
         $this->assertEquals(3, count($response));
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
@@ -911,7 +915,7 @@ class ClientTest extends BaseTest
 
         $response = $client->deleteDocuments($deleteDocs);
 
-        $this->assertInstanceOf('Elastica\Bulk\ResponseSet', $response);
+        $this->assertInstanceOf(ResponseSet::class, $response);
         $this->assertEquals(2, count($response));
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
@@ -930,15 +934,15 @@ class ClientTest extends BaseTest
         $client = $this->_getClient();
         $response = $client->request('_stats');
 
-        $this->assertInstanceOf('Elastica\Response', $response);
+        $this->assertInstanceOf(Response::class, $response);
 
         $lastRequest = $client->getLastRequest();
 
-        $this->assertInstanceOf('Elastica\Request', $lastRequest);
+        $this->assertInstanceOf(Request::class, $lastRequest);
         $this->assertEquals('_stats', $lastRequest->getPath());
 
         $lastResponse = $client->getLastResponse();
-        $this->assertInstanceOf('Elastica\Response', $lastResponse);
+        $this->assertInstanceOf(Response::class, $lastResponse);
         $this->assertSame($response, $lastResponse);
     }
 
@@ -1124,7 +1128,7 @@ class ClientTest extends BaseTest
         $this->assertEquals(['foo' => 'bar'], $client->getConfigValue('headers'));
 
         // check class
-        $this->assertInstanceOf('Elastica\Client', $client->addHeader('foo', 'bar'));
+        $this->assertInstanceOf(Client::class, $client->addHeader('foo', 'bar'));
 
         // check invalid parameters
         try {
@@ -1163,7 +1167,7 @@ class ClientTest extends BaseTest
         $this->assertEquals($headers, $client->getConfigValue('headers'));
 
         // check class
-        $this->assertInstanceOf('Elastica\Client', $client->removeHeader('second'));
+        $this->assertInstanceOf(Client::class, $client->removeHeader('second'));
 
         // check invalid parameter
         try {
@@ -1196,7 +1200,7 @@ class ClientTest extends BaseTest
         $this->assertTrue($client->hasConnection());
 
         $connection = $client->getConnection();
-        $this->assertInstanceOf('\Elastica\Connection', $connection);
+        $this->assertInstanceOf(Connection::class, $connection);
         $this->assertEquals($this->_getHost(), $connection->getHost());
         $this->assertEquals($this->_getPort(), $connection->getPort());
     }

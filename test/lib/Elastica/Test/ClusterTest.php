@@ -2,6 +2,8 @@
 namespace Elastica\Test;
 
 use Elastica\Cluster;
+use Elastica\Cluster\Health;
+use Elastica\Node;
 use Elastica\Test\Base as BaseTest;
 
 class ClusterTest extends BaseTest
@@ -39,7 +41,7 @@ class ClusterTest extends BaseTest
         $nodes = $cluster->getNodes();
 
         foreach ($nodes as $node) {
-            $this->assertInstanceOf('Elastica\Node', $node);
+            $this->assertInstanceOf(Node::class, $node);
         }
 
         $this->assertGreaterThan(0, count($nodes));
@@ -86,6 +88,6 @@ class ClusterTest extends BaseTest
     public function testGetHealth()
     {
         $client = $this->_getClient();
-        $this->assertInstanceOf('Elastica\Cluster\Health', $client->getCluster()->getHealth());
+        $this->assertInstanceOf(Health::class, $client->getCluster()->getHealth());
     }
 }

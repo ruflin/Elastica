@@ -5,6 +5,7 @@ use Elastica\Query;
 use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\ResultSet\ChainProcessor;
+use Elastica\ResultSet\ProcessorInterface;
 use Elastica\Test\Base as BaseTest;
 
 /**
@@ -15,8 +16,8 @@ class ChainProcessorTest extends BaseTest
     public function testProcessor()
     {
         $processor = new ChainProcessor([
-            $processor1 = $this->createMock('Elastica\\ResultSet\\ProcessorInterface'),
-            $processor2 = $this->createMock('Elastica\\ResultSet\\ProcessorInterface'),
+            $processor1 = $this->createMock(ProcessorInterface::class),
+            $processor2 = $this->createMock(ProcessorInterface::class),
         ]);
         $resultSet = new ResultSet(new Response(''), new Query(), []);
 

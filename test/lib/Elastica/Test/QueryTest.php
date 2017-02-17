@@ -1,11 +1,14 @@
 <?php
 namespace Elastica\Test;
 
+use Elastica\Aggregation\Terms as TermsAggregation;
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Query;
 use Elastica\Query\Term;
+use Elastica\Query\Terms;
 use Elastica\Query\Text;
+use Elastica\Rescore\Query as RescoreQuery;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
 use Elastica\Suggest;
@@ -57,7 +60,7 @@ class QueryTest extends BaseTest
     {
         $query = new Query();
         $suggest = new Suggest();
-        $this->assertInstanceOf('Elastica\Query', $query->setSuggest($suggest));
+        $this->assertInstanceOf(Query::class, $query->setSuggest($suggest));
     }
 
     /**
@@ -330,7 +333,7 @@ class QueryTest extends BaseTest
     public function testAddAggregationToArrayCast()
     {
         $query = new Query();
-        $aggregation = new \Elastica\Aggregation\Terms('text');
+        $aggregation = new TermsAggregation('text');
         $aggregation->setField('field');
 
         $query->addAggregation($aggregation);
@@ -368,7 +371,7 @@ class QueryTest extends BaseTest
     public function testSetRescoreToArrayCast()
     {
         $query = new Query();
-        $rescore = new \Elastica\Rescore\Query();
+        $rescore = new RescoreQuery();
         $rescore->setQueryWeight(1);
 
         $query->setRescore($rescore);
@@ -387,7 +390,7 @@ class QueryTest extends BaseTest
     public function testSetPostFilterToArrayCast()
     {
         $query = new Query();
-        $postFilter = new \Elastica\Query\Terms();
+        $postFilter = new Terms();
         $postFilter->setTerms('key', ['term']);
         $query->setPostFilter($postFilter);
 

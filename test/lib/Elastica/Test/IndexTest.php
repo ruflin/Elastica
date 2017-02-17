@@ -8,6 +8,7 @@ use Elastica\Query\HasChild;
 use Elastica\Query\QueryString;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
+use Elastica\Request;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
@@ -678,7 +679,7 @@ class IndexTest extends BaseTest
             $response = $error->getResponse();
             $this->assertTrue($response->hasError());
             $request = $error->getRequest();
-            $this->assertInstanceOf('Elastica\Request', $request);
+            $this->assertInstanceOf(Request::class, $request);
         }
     }
 

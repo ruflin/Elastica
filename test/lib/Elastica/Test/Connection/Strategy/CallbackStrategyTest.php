@@ -42,11 +42,11 @@ class CallbackStrategyTest extends Base
         $this->assertTrue($isValid);
 
         // static method as string
-        $isValid = CallbackStrategy::isValid('Elastica\Test\Connection\Strategy\CallbackStrategyTestHelper::getFirstConnectionStatic');
+        $isValid = CallbackStrategy::isValid(CallbackStrategyTestHelper::class.'::getFirstConnectionStatic');
         $this->assertTrue($isValid);
 
         // static method as array
-        $isValid = CallbackStrategy::isValid(['Elastica\Test\Connection\Strategy\CallbackStrategyTestHelper', 'getFirstConnectionStatic']);
+        $isValid = CallbackStrategy::isValid([CallbackStrategyTestHelper::class, 'getFirstConnectionStatic']);
         $this->assertTrue($isValid);
 
         // object method
@@ -92,6 +92,6 @@ class CallbackStrategyTest extends Base
 
         $strategy = $client->getConnectionStrategy();
 
-        $this->assertInstanceOf('Elastica\Connection\Strategy\CallbackStrategy', $strategy);
+        $this->assertInstanceOf(CallbackStrategy::class, $strategy);
     }
 }

@@ -2,6 +2,7 @@
 namespace Elastica\Test\Tool;
 
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Test\Base;
 use Elastica\Tool\CrossIndex;
 use Elastica\Type;
@@ -21,7 +22,7 @@ class CrossIndexTest extends Base
         $newIndex = $this->_createIndex(null, true, 2);
 
         $this->assertInstanceOf(
-            'Elastica\Index',
+            Index::class,
             CrossIndex::reindex($oldIndex, $newIndex)
         );
 
@@ -104,7 +105,7 @@ class CrossIndexTest extends Base
 
         // mapping
         $this->assertInstanceOf(
-            'Elastica\Index',
+            Index::class,
             CrossIndex::copy($oldIndex, $newIndex)
         );
 

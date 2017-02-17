@@ -1,6 +1,7 @@
 <?php
 namespace Elastica\Test;
 
+use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
@@ -9,6 +10,7 @@ use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
 use Elastica\Response;
+use Elastica\ResultSet;
 use Elastica\Script\Script;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
@@ -24,7 +26,6 @@ class SearchTest extends BaseTest
         $client = $this->_getClient();
         $search = new Search($client);
 
-        $this->assertInstanceOf('Elastica\Search', $search);
         $this->assertSame($client, $search->getClient());
     }
 
@@ -393,9 +394,7 @@ class SearchTest extends BaseTest
 
         //Timeout - this one is a bit more tricky to test
         $mockResponse = new Response(json_encode(['timed_out' => true]));
-        $client = $this->getMockBuilder('Elastica\\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = $this->createMock(Client::class);
         $client->method('request')
             ->will($this->returnValue($mockResponse));
         $search = new Search($client);
@@ -515,7 +514,7 @@ class SearchTest extends BaseTest
 
         $search->addIndex($index)->addType($type);
         $resultSet = $search->search();
-        $this->assertInstanceOf('Elastica\ResultSet', $resultSet);
+        $this->assertInstanceOf(ResultSet::class, $resultSet);
         $this->assertCount(10, $resultSet);
         $this->assertEquals(11, $resultSet->getTotalHits());
 
@@ -551,7 +550,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(1, $result1);
 
         $result2 = $search->count(new MatchAll(), true);
-        $this->assertInstanceOf('\Elastica\ResultSet', $result2);
+        $this->assertInstanceOf(ResultSet::class, $result2);
         $this->assertEquals(1, $result2->getTotalHits());
     }
 
@@ -577,6 +576,6 @@ class SearchTest extends BaseTest
         $this->assertEquals('index_not_found_exception', $error['type']);
 
         $results = $search->search($query, [Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true]);
-        $this->assertInstanceOf('\Elastica\ResultSet', $results);
+        $this->assertInstanceOf(ResultSet::class, $results);
     }
 }

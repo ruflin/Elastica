@@ -13,7 +13,7 @@ class TypeTest extends BaseTest
     {
         $typeQuery = new Type();
         $returnValue = $typeQuery->setType('type_name');
-        $this->assertInstanceOf('Elastica\Query\Type', $returnValue);
+        $this->assertInstanceOf(Type::class, $returnValue);
     }
 
     /**

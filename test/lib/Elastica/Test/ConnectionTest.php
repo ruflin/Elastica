@@ -5,6 +5,8 @@ use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Transport\AbstractTransport;
+use Elastica\Transport\Http;
 
 class ConnectionTest extends BaseTest
 {
@@ -17,7 +19,7 @@ class ConnectionTest extends BaseTest
         $this->assertEquals(Connection::DEFAULT_HOST, $connection->getHost());
         $this->assertEquals(Connection::DEFAULT_PORT, $connection->getPort());
         $this->assertEquals(Connection::DEFAULT_TRANSPORT, $connection->getTransport());
-        $this->assertInstanceOf('Elastica\Transport\AbstractTransport', $connection->getTransportObject());
+        $this->assertInstanceOf(AbstractTransport::class, $connection->getTransportObject());
         $this->assertEquals(Connection::TIMEOUT, $connection->getTimeout());
         $this->assertEquals(Connection::CONNECT_TIMEOUT, $connection->getConnectTimeout());
         $this->assertEquals([], $connection->getConfig());
@@ -58,14 +60,14 @@ class ConnectionTest extends BaseTest
     public function testCreate()
     {
         $connection = Connection::create();
-        $this->assertInstanceOf('Elastica\Connection', $connection);
+        $this->assertInstanceOf(Connection::class, $connection);
 
         $connection = Connection::create([]);
-        $this->assertInstanceOf('Elastica\Connection', $connection);
+        $this->assertInstanceOf(Connection::class, $connection);
 
         $port = 9999;
         $connection = Connection::create(['port' => $port]);
-        $this->assertInstanceOf('Elastica\Connection', $connection);
+        $this->assertInstanceOf(Connection::class, $connection);
         $this->assertEquals($port, $connection->getPort());
     }
 
@@ -96,12 +98,12 @@ class ConnectionTest extends BaseTest
     public function testGetConfigWithArrayUsedForTransport()
     {
         $connection = new Connection(['transport' => ['type' => 'Http']]);
-        $this->assertInstanceOf('Elastica\Transport\Http', $connection->getTransportObject());
+        $this->assertInstanceOf(Http::class, $connection->getTransportObject());
     }
 
     /**
      * @group unit
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      * @expectedExceptionMessage Invalid transport
      */
     public function testGetInvalidConfigWithArrayUsedForTransport()
