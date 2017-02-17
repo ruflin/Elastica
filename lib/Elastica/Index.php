@@ -132,7 +132,11 @@ class Index implements SearchableInterface
     public function addDocuments(array $docs)
     {
         foreach ($docs as $doc) {
-            $doc->setIndex($this->getName());
+            if (isset($doc->toArray()['_source']['createdAt'])) {
+                $doc->setIndex($this->getName() . '_' . (new \DateTime($doc->toArray()['_source']['createdAt']))->format('Y_m'));
+            } else {
+                $doc->setIndex($this->getName());
+            }
         }
 
         return $this->getClient()->addDocuments($docs);
