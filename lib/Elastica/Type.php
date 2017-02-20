@@ -522,8 +522,7 @@ class Type implements SearchableInterface
     public function exists()
     {
         $response = $this->getIndex()->request($this->getName(), Request::HEAD);
-        $info = $response->getTransferInfo();
 
-        return $info['http_code'] == 200;
+        return $response->getStatus() === 200;
     }
 }

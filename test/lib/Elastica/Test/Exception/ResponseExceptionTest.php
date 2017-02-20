@@ -19,7 +19,7 @@ class ResponseExceptionTest extends AbstractExceptionTest
         } catch (ResponseException $ex) {
             $error = $ex->getResponse()->getFullError();
             $this->assertEquals('index_already_exists_exception', $error['type']);
-            $this->assertEquals(400, $ex->getElasticsearchException()->getCode());
+            $this->assertEquals(400, $ex->getResponse()->getStatus());
         }
     }
 
@@ -45,7 +45,7 @@ class ResponseExceptionTest extends AbstractExceptionTest
         } catch (ResponseException $ex) {
             $error = $ex->getResponse()->getFullError();
             $this->assertEquals('mapper_parsing_exception', $error['type']);
-            $this->assertEquals(400, $ex->getElasticsearchException()->getCode());
+            $this->assertEquals(400, $ex->getResponse()->getStatus());
         }
     }
 
@@ -62,7 +62,7 @@ class ResponseExceptionTest extends AbstractExceptionTest
         } catch (ResponseException $ex) {
             $error = $ex->getResponse()->getFullError();
             $this->assertEquals('index_not_found_exception', $error['type']);
-            $this->assertEquals(404, $ex->getElasticsearchException()->getCode());
+            $this->assertEquals(404, $ex->getResponse()->getStatus());
         }
     }
 }

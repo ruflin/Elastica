@@ -199,6 +199,7 @@ class SettingsTest extends BaseTest
         // Try to add doc to read only index
         $index->getSettings()->setReadOnly(true);
         $this->assertTrue($index->getSettings()->getReadOnly());
+        $this->assertTrue($index->exists());
 
         try {
             $type->addDocument($doc2);
@@ -207,7 +208,7 @@ class SettingsTest extends BaseTest
             $error = $e->getResponse()->getFullError();
 
             $this->assertContains('cluster_block_exception', $error['type']);
-            $this->assertContains('index write', $error['reason']);
+            $this->assertContains('read-only', $error['reason']);
         }
 
         // Remove read only, add document

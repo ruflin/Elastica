@@ -106,9 +106,8 @@ class Status
         try {
             $response = $this->_client->request('/_alias/'.$alias);
         } catch (ResponseException $e) {
-            $transferInfo = $e->getResponse()->getTransferInfo();
             // 404 means the index alias doesn't exist which means no indexes have it.
-            if ($transferInfo['http_code'] === 404) {
+            if ($e->getResponse()->getStatus() === 404) {
                 return [];
             }
             // If we don't have a 404 then this is still unexpected so rethrow the exception.
