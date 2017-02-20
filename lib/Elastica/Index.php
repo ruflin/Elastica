@@ -537,6 +537,12 @@ class Index implements SearchableInterface
     {
         $data = $this->request('_analyze', Request::POST, $text, $args)->getData();
 
+        // Support for "Explain" parameter, that returns a different response structure from Elastic
+        // @see: https://www.elastic.co/guide/en/elasticsearch/reference/current/_explain_analyze.html
+        if (isset($args['explain']) && $args['explain']) {
+            return $data['detail'];
+        }
+
         return $data['tokens'];
     }
 }

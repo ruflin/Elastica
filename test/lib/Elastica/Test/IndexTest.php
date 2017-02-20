@@ -914,6 +914,18 @@ class IndexTest extends BaseTest
     }
 
     /**
+     * @group functional
+     */
+    public function testAnalyzeExplain()
+    {
+        $index = $this->_createIndex();
+        $index->refresh();
+        $data = $index->analyze('foo', ['explain' => true]);
+
+        $this->assertArrayHasKey('custom_analyzer', $data);
+    }
+
+    /**
      * @group unit
      * @expectedException \Elastica\Exception\InvalidException
      */
