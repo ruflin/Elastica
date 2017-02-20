@@ -6,7 +6,7 @@ use Elastica\Exception\InvalidException;
 
 class AbstractSimpleAggregationTest extends BaseAggregationTest
 {
-    public function setUp()
+    protected function setUp()
     {
         $this->aggregation = $this->getMockForAbstractClass(
             AbstractSimpleAggregation::class,

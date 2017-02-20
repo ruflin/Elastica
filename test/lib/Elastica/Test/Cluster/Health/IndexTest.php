@@ -12,7 +12,7 @@ class IndexTest extends BaseTest
      */
     protected $_index;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
