@@ -5,6 +5,7 @@ use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Index\Settings as IndexSettings;
+use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
 
 class SettingsTest extends BaseTest
@@ -168,7 +169,7 @@ class SettingsTest extends BaseTest
 
         $response = $settings->setMergePolicy('max_merge_at_once', 15);
         $this->assertEquals(15, $settings->getMergePolicy('max_merge_at_once'));
-        $this->assertInstanceOf('Elastica\Response', $response);
+        $this->assertInstanceOf(Response::class, $response);
         $this->assertTrue($response->isOk());
 
         $settings->setMergePolicy('max_merge_at_once', 10);

@@ -168,7 +168,7 @@ class GuzzleTest extends BaseTest
 
     /**
      * @group unit
-     * @expectedException Elastica\Exception\Connection\GuzzleException
+     * @expectedException \Elastica\Exception\Connection\GuzzleException
      */
     public function testInvalidConnection()
     {

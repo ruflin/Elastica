@@ -4,6 +4,7 @@ namespace Elastica\Test\Transport;
 use Elastica\Connection;
 use Elastica\Query;
 use Elastica\Request;
+use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Transport\NullTransport;
 
@@ -68,7 +69,7 @@ class NullTransportTest extends BaseTest
         $transport = new NullTransport();
         $response = $transport->exec($request, $params);
 
-        $this->assertInstanceOf('\Elastica\Response', $response);
+        $this->assertInstanceOf(Response::class, $response);
 
         $data = $response->getData();
         $this->assertEquals($params, $data['params']);
@@ -90,7 +91,7 @@ class NullTransportTest extends BaseTest
         $this->showDeprecated();
         $response = $transport->exec($request, $params);
 
-        $this->assertInstanceOf('\Elastica\Response', $response);
+        $this->assertInstanceOf(Response::class, $response);
 
         $data = $response->getData();
         $this->assertEquals($params, $data['params']);

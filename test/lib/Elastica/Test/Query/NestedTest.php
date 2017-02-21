@@ -16,8 +16,8 @@ class NestedTest extends BaseTest
         $path = 'test1';
 
         $queryString = new QueryString('test');
-        $this->assertInstanceOf('Elastica\Query\Nested', $nested->setQuery($queryString));
-        $this->assertInstanceOf('Elastica\Query\Nested', $nested->setPath($path));
+        $this->assertInstanceOf(Nested::class, $nested->setQuery($queryString));
+        $this->assertInstanceOf(Nested::class, $nested->setPath($path));
         $expected = [
             'nested' => [
                 'query' => $queryString->toArray(),

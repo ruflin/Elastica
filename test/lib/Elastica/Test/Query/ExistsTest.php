@@ -29,7 +29,7 @@ class ExistsTest extends BaseTest
         $this->assertEquals($field, $query->getParam('field'));
 
         $newField = 'hello world';
-        $this->assertInstanceOf('Elastica\Query\Exists', $query->setField($newField));
+        $this->assertInstanceOf(Exists::class, $query->setField($newField));
 
         $this->assertEquals($newField, $query->getParam('field'));
     }

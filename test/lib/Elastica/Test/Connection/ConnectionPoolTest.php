@@ -34,7 +34,7 @@ class ConnectionPoolTest extends BaseTest
 
         $this->assertEquals($connections, $pool->getConnections());
 
-        $this->assertInstanceOf('Elastica\Connection\ConnectionPool', $pool->setConnections($connections));
+        $this->assertInstanceOf(ConnectionPool::class, $pool->setConnections($connections));
     }
 
     /**
@@ -53,7 +53,7 @@ class ConnectionPoolTest extends BaseTest
 
         $this->assertEquals($connections, $pool->getConnections());
 
-        $this->assertInstanceOf('Elastica\Connection\ConnectionPool', $pool->addConnection($connections[0]));
+        $this->assertInstanceOf(ConnectionPool::class, $pool->addConnection($connections[0]));
     }
 
     /**
@@ -85,7 +85,7 @@ class ConnectionPoolTest extends BaseTest
     {
         $pool = $this->createPool();
 
-        $this->assertInstanceOf('Elastica\Connection', $pool->getConnection());
+        $this->assertInstanceOf(Connection::class, $pool->getConnection());
     }
 
     protected function getConnections($quantity = 1)

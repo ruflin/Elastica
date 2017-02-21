@@ -73,7 +73,7 @@ class DateHistogramTest extends BaseAggregationTest
 
         $this->assertEquals($expected, $agg->toArray());
 
-        $this->assertInstanceOf('Elastica\Aggregation\DateHistogram', $agg->setOffset('3m'));
+        $this->assertInstanceOf(DateHistogram::class, $agg->setOffset('3m'));
     }
 
     /**
@@ -112,6 +112,6 @@ class DateHistogramTest extends BaseAggregationTest
 
         $this->assertEquals($expected, $agg->toArray());
 
-        $this->assertInstanceOf('Elastica\Aggregation\DateHistogram', $agg->setTimezone('-02:30'));
+        $this->assertInstanceOf(DateHistogram::class, $agg->setTimezone('-02:30'));
     }
 }

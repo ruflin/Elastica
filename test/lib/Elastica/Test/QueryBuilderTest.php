@@ -1,10 +1,11 @@
 <?php
 namespace Elastica\Test;
 
+use Elastica\Aggregation\AbstractAggregation;
 use Elastica\Exception\QueryBuilderException;
-use Elastica\Query;
+use Elastica\Query\AbstractQuery;
 use Elastica\QueryBuilder;
-use Elastica\Suggest;
+use Elastica\Suggest\AbstractSuggest;
 
 class QueryBuilderTest extends Base
 {
@@ -39,9 +40,9 @@ class QueryBuilderTest extends Base
         $qb = new QueryBuilder();
 
         // test one example QueryBuilder flow for each default DSL type
-        $this->assertInstanceOf('Elastica\Query\AbstractQuery', $qb->query()->match());
-        $this->assertInstanceOf('Elastica\Aggregation\AbstractAggregation', $qb->aggregation()->avg('name'));
-        $this->assertInstanceOf('Elastica\Suggest\AbstractSuggest', $qb->suggest()->term('name', 'field'));
+        $this->assertInstanceOf(AbstractQuery::class, $qb->query()->match());
+        $this->assertInstanceOf(AbstractAggregation::class, $qb->aggregation()->avg('name'));
+        $this->assertInstanceOf(AbstractSuggest::class, $qb->suggest()->term('name', 'field'));
     }
 }
 

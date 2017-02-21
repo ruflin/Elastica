@@ -2,6 +2,7 @@
 namespace Elastica\Test;
 
 use Elastica\Exception\ResponseException;
+use Elastica\Response;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
 
@@ -14,7 +15,7 @@ class StatusTest extends BaseTest
     {
         $index = $this->_createIndex();
         $status = new Status($index->getClient());
-        $this->assertInstanceOf('Elastica\Response', $status->getResponse());
+        $this->assertInstanceOf(Response::class, $status->getResponse());
     }
 
     /**

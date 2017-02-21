@@ -21,7 +21,7 @@ class AbstractTransportTest extends \PHPUnit_Framework_TestCase
             [['type' => 'Http']],
             [['type' => new Http()]],
             [new Http()],
-            ['Elastica\Test\Transport\DummyTransport'],
+            [DummyTransport::class],
         ];
     }
 
@@ -34,7 +34,7 @@ class AbstractTransportTest extends \PHPUnit_Framework_TestCase
         $connection = new Connection();
         $params = [];
         $transport = AbstractTransport::create($transport, $connection, $params);
-        $this->assertInstanceOf('Elastica\Transport\AbstractTransport', $transport);
+        $this->assertInstanceOf(AbstractTransport::class, $transport);
         $this->assertSame($connection, $transport->getConnection());
     }
 
@@ -49,7 +49,7 @@ class AbstractTransportTest extends \PHPUnit_Framework_TestCase
     /**
      * @group unit
      * @dataProvider getInvalidDefinitions
-     * @expectedException Elastica\Exception\InvalidException
+     * @expectedException \Elastica\Exception\InvalidException
      * @expectedExceptionMessage Invalid transport
      */
     public function testThrowsExecptionOnInvalidTransportDefinition($transport)

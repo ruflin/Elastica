@@ -118,7 +118,7 @@ class RoundRobinTest extends Base
     {
         $strategy = $client->getConnectionStrategy();
 
-        $this->assertInstanceOf('Elastica\Connection\Strategy\RoundRobin', $strategy);
+        $this->assertInstanceOf(RoundRobin::class, $strategy);
     }
 
     protected function _checkResponse($response)

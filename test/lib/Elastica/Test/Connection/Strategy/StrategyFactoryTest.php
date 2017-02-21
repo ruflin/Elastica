@@ -1,6 +1,8 @@
 <?php
 namespace Elastica\Test\Connection\Strategy;
 
+use Elastica\Connection\Strategy\CallbackStrategy;
+use Elastica\Connection\Strategy\Simple;
 use Elastica\Connection\Strategy\StrategyFactory;
 use Elastica\Test\Base;
 
@@ -21,7 +23,7 @@ class StrategyFactoryTest extends Base
 
         $strategy = StrategyFactory::create($callback);
 
-        $this->assertInstanceOf('Elastica\Connection\Strategy\CallbackStrategy', $strategy);
+        $this->assertInstanceOf(CallbackStrategy::class, $strategy);
     }
 
     /**
@@ -33,7 +35,7 @@ class StrategyFactoryTest extends Base
 
         $strategy = StrategyFactory::create($strategyName);
 
-        $this->assertInstanceOf('Elastica\Connection\Strategy\Simple', $strategy);
+        $this->assertInstanceOf(Simple::class, $strategy);
     }
 
     /**
@@ -51,11 +53,9 @@ class StrategyFactoryTest extends Base
      */
     public function testCreateByClassName()
     {
-        $strategyName = '\\Elastica\Test\Connection\Strategy\\EmptyStrategy';
+        $strategy = StrategyFactory::create(EmptyStrategy::class);
 
-        $strategy = StrategyFactory::create($strategyName);
-
-        $this->assertInstanceOf($strategyName, $strategy);
+        $this->assertInstanceOf(EmptyStrategy::class, $strategy);
     }
 
     /**
@@ -79,6 +79,6 @@ class StrategyFactoryTest extends Base
             class_alias('Elastica\Util', 'Simple');
         }
         $strategy = StrategyFactory::create('Simple');
-        $this->assertInstanceOf('Elastica\Connection\Strategy\Simple', $strategy);
+        $this->assertInstanceOf(Simple::class, $strategy);
     }
 }

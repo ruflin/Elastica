@@ -45,7 +45,7 @@ class IndexTemplateTest extends BaseTest
         $name = 'index_template1';
         $response = new Response('');
         /** @var \PHPUnit_Framework_MockObject_MockObject|Client $clientMock */
-        $clientMock = $this->createMock('\Elastica\Client');
+        $clientMock = $this->createMock(Client::class);
         $clientMock->expects($this->once())
             ->method('request')
             ->with('_template/'.$name, Request::DELETE, [], [])
@@ -63,7 +63,7 @@ class IndexTemplateTest extends BaseTest
         $response = new Response('');
         $name = 'index_template1';
         /** @var \PHPUnit_Framework_MockObject_MockObject|Client $clientMock */
-        $clientMock = $this->createMock('\Elastica\Client');
+        $clientMock = $this->createMock(Client::class);
         $clientMock->expects($this->once())
             ->method('request')
             ->with('_template/'.$name, Request::PUT, $args, [])
@@ -80,7 +80,7 @@ class IndexTemplateTest extends BaseTest
         $name = 'index_template1';
         $response = new Response('', 200);
         /** @var \PHPUnit_Framework_MockObject_MockObject|Client $clientMock */
-        $clientMock = $this->createMock('\Elastica\Client');
+        $clientMock = $this->createMock(Client::class);
         $clientMock->expects($this->once())
             ->method('request')
             ->with('_template/'.$name, Request::HEAD, [], [])

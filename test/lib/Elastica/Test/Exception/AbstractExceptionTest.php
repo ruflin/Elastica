@@ -1,6 +1,7 @@
 <?php
 namespace Elastica\Test\Exception;
 
+use Elastica\Exception\ExceptionInterface;
 use Elastica\Test\Base as BaseTest;
 
 abstract class AbstractExceptionTest extends BaseTest
@@ -25,7 +26,7 @@ abstract class AbstractExceptionTest extends BaseTest
     {
         $className = $this->_getExceptionClass();
         $reflection = new \ReflectionClass($className);
-        $this->assertTrue($reflection->isSubclassOf('Exception'));
-        $this->assertTrue($reflection->implementsInterface('Elastica\Exception\ExceptionInterface'));
+        $this->assertTrue($reflection->isSubclassOf(\Exception::class));
+        $this->assertTrue($reflection->implementsInterface(ExceptionInterface::class));
     }
 }

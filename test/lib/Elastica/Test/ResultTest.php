@@ -33,8 +33,8 @@ class ResultTest extends BaseTest
 
         $result = $resultSet->current();
 
-        $this->assertInstanceOf('Elastica\Result', $result);
-        $this->assertInstanceOf('Elastica\Document', $result->getDocument());
+        $this->assertInstanceOf(Result::class, $result);
+        $this->assertInstanceOf(Document::class, $result->getDocument());
         $this->assertEquals($index->getName(), $result->getIndex());
         $this->assertEquals($typeName, $result->getType());
         $this->assertEquals($docId, $result->getId());
@@ -77,7 +77,7 @@ class ResultTest extends BaseTest
         $result = $resultSet->current();
 
         $this->assertEquals([], $result->getSource());
-        $this->assertInstanceOf('Elastica\Result', $result);
+        $this->assertInstanceOf(Result::class, $result);
         $this->assertEquals($indexName, $result->getIndex());
         $this->assertEquals($typeName, $result->getType());
         $this->assertEquals($docId, $result->getId());

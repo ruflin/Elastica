@@ -20,7 +20,7 @@ class GeoBoundingBoxTest extends BaseTest
         $this->assertEquals($expectedArray, $query->getParam($key));
 
         $returnValue = $query->addCoordinates($key, $coords);
-        $this->assertInstanceOf('Elastica\Query\GeoBoundingBox', $returnValue);
+        $this->assertInstanceOf(GeoBoundingBox::class, $returnValue);
     }
 
     /**

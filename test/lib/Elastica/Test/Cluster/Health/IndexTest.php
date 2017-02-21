@@ -1,17 +1,18 @@
 <?php
 namespace Elastica\Test\Cluster\Health;
 
-use Elastica\Cluster\Health\Index as HealthIndex;
+use Elastica\Cluster\Health\Index;
+use Elastica\Cluster\Health\Shard;
 use Elastica\Test\Base as BaseTest;
 
 class IndexTest extends BaseTest
 {
     /**
-     * @var \Elastica\Cluster\Health\Index
+     * @var Index
      */
     protected $_index;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
@@ -52,7 +53,7 @@ class IndexTest extends BaseTest
             ],
         ];
 
-        $this->_index = new HealthIndex('test', $data);
+        $this->_index = new Index('test', $data);
     }
 
     /**
@@ -138,7 +139,7 @@ class IndexTest extends BaseTest
         $this->assertEquals(3, count($shards));
 
         foreach ($shards as $shard) {
-            $this->assertInstanceOf('Elastica\Cluster\Health\Shard', $shard);
+            $this->assertInstanceOf(Shard::class, $shard);
         }
     }
 }

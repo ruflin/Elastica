@@ -28,7 +28,7 @@ class PercentilesTest extends BaseAggregationTest
         $aggr->setField('price');
 
         $this->assertEquals('price', $aggr->getParam('field'));
-        $this->assertInstanceOf('Elastica\Aggregation\Percentiles', $aggr->setField('price'));
+        $this->assertInstanceOf(Percentiles::class, $aggr->setField('price'));
     }
 
     /**
@@ -39,7 +39,7 @@ class PercentilesTest extends BaseAggregationTest
         $aggr = new Percentiles('price_percentile');
         $aggr->setCompression(200);
         $this->assertEquals(200, $aggr->getParam('compression'));
-        $this->assertInstanceOf('Elastica\Aggregation\Percentiles', $aggr->setCompression(200));
+        $this->assertInstanceOf(Percentiles::class, $aggr->setCompression(200));
     }
 
     /**
@@ -51,7 +51,7 @@ class PercentilesTest extends BaseAggregationTest
         $aggr = new Percentiles('price_percentile');
         $aggr->setPercents($percents);
         $this->assertEquals($percents, $aggr->getParam('percents'));
-        $this->assertInstanceOf('Elastica\Aggregation\Percentiles', $aggr->setPercents($percents));
+        $this->assertInstanceOf(Percentiles::class, $aggr->setPercents($percents));
     }
 
     /**
@@ -66,7 +66,7 @@ class PercentilesTest extends BaseAggregationTest
         $aggr->addPercent(4);
         $percents[] = 4;
         $this->assertEquals($percents, $aggr->getParam('percents'));
-        $this->assertInstanceOf('Elastica\Aggregation\Percentiles', $aggr->addPercent(4));
+        $this->assertInstanceOf(Percentiles::class, $aggr->addPercent(4));
     }
 
     /**
@@ -78,7 +78,7 @@ class PercentilesTest extends BaseAggregationTest
         $aggr = new Percentiles('price_percentile');
         $aggr->setScript($script);
         $this->assertEquals($script, $aggr->getParam('script'));
-        $this->assertInstanceOf('Elastica\Aggregation\Percentiles', $aggr->setScript($script));
+        $this->assertInstanceOf(Percentiles::class, $aggr->setScript($script));
     }
 
     /**

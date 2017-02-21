@@ -152,7 +152,7 @@ class QueryStringTest extends BaseTest
         ];
 
         $this->assertEquals($expected, $query->toArray());
-        $this->assertInstanceOf('Elastica\Query\QueryString', $query->setTimezone($timezone));
+        $this->assertInstanceOf(QueryString::class, $query->setTimezone($timezone));
     }
 
     /**

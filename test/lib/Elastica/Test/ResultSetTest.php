@@ -3,6 +3,7 @@ namespace Elastica\Test;
 
 use Elastica\Document;
 use Elastica\Result;
+use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
 
 class ResultSetTest extends BaseTest
@@ -24,7 +25,7 @@ class ResultSetTest extends BaseTest
 
         $resultSet = $type->search('elastica search');
 
-        $this->assertInstanceOf('Elastica\ResultSet', $resultSet);
+        $this->assertInstanceOf(ResultSet::class, $resultSet);
         $this->assertEquals(3, $resultSet->getTotalHits());
         $this->assertGreaterThan(0, $resultSet->getMaxScore());
         $this->assertNotTrue($resultSet->hasTimedOut());
@@ -51,10 +52,10 @@ class ResultSetTest extends BaseTest
 
         $resultSet = $type->search('elastica search');
 
-        $this->assertInstanceOf('Elastica\ResultSet', $resultSet);
-        $this->assertInstanceOf('Elastica\Result', $resultSet[0]);
-        $this->assertInstanceOf('Elastica\Result', $resultSet[1]);
-        $this->assertInstanceOf('Elastica\Result', $resultSet[2]);
+        $this->assertInstanceOf(ResultSet::class, $resultSet);
+        $this->assertInstanceOf(Result::class, $resultSet[0]);
+        $this->assertInstanceOf(Result::class, $resultSet[1]);
+        $this->assertInstanceOf(Result::class, $resultSet[2]);
 
         $this->assertFalse(isset($resultSet[3]));
     }
@@ -76,15 +77,15 @@ class ResultSetTest extends BaseTest
 
         $resultSet = $type->search('elastica search');
 
-        $this->assertInstanceOf('Elastica\ResultSet', $resultSet);
+        $this->assertInstanceOf(ResultSet::class, $resultSet);
 
         $documents = $resultSet->getDocuments();
 
         $this->assertInternalType('array', $documents);
         $this->assertEquals(3, count($documents));
-        $this->assertInstanceOf('Elastica\Document', $documents[0]);
-        $this->assertInstanceOf('Elastica\Document', $documents[1]);
-        $this->assertInstanceOf('Elastica\Document', $documents[2]);
+        $this->assertInstanceOf(Document::class, $documents[0]);
+        $this->assertInstanceOf(Document::class, $documents[1]);
+        $this->assertInstanceOf(Document::class, $documents[2]);
         $this->assertFalse(isset($documents[3]));
         $this->assertEquals('elastica search', $documents[0]->get('name'));
     }
