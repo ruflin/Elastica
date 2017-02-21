@@ -139,7 +139,7 @@ class ResponseSetTest extends BaseTest
      */
     protected function _createResponseSet(array $responseData, array $actions)
     {
-        $client = $this->createMock('Elastica\\Client', ['request']);
+        $client = $this->getMock('Elastica\\Client', ['request']);
 
         $client->expects($this->once())
             ->method('request')
