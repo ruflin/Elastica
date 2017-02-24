@@ -8,9 +8,7 @@ branches:
     - master
 
 env:
-  - TARGET="56"
-  - TARGET="70"
-  - TARGET="71"
+  - TARGET="55"
 
 before_install:
   # Docker-compose installation

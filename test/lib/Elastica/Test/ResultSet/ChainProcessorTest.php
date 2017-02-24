@@ -15,8 +15,8 @@ class ChainProcessorTest extends BaseTest
     public function testProcessor()
     {
         $processor = new ChainProcessor([
-            $processor1 = $this->createMock('Elastica\\ResultSet\\ProcessorInterface'),
-            $processor2 = $this->createMock('Elastica\\ResultSet\\ProcessorInterface'),
+            $processor1 = $this->getMock('Elastica\\ResultSet\\ProcessorInterface'),
+            $processor2 = $this->getMock('Elastica\\ResultSet\\ProcessorInterface'),
         ]);
         $resultSet = new ResultSet(new Response(''), new Query(), []);
 
