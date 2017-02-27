@@ -6,6 +6,7 @@ services:
 branches:
   only:
     - master
+    - 5.1-php55
 
 env:
   - TARGET="55"
