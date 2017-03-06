@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file based on the
 - `\Elastica\Query\MatchPhrase` and `\Elastica\Query\MatchPhrasePrefix` do not extend `\Elastica\Query\Match` anymore because they do not share exactly the same options
 - Removed the `routing` option in `\Elastica\Index::create` because there is no routing param when creating an index. So that option was doing nothing so far but fails in Elasticearch 5.0 because the non-existing query param is validated.
 - Fix `relation` property of `\Elastica\Query\GeoShapeProvided`
+- repoint `\Elastica\Type::exists` from the deprecated /{index}/{type} endpoint to /{index}/_mapping/{type}
 
 ### Added
 

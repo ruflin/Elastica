@@ -521,7 +521,8 @@ class Type implements SearchableInterface
      */
     public function exists()
     {
-        $response = $this->getIndex()->request($this->getName(), Request::HEAD);
+        $path = '_mapping/' . $this->getName();
+        $response = $this->getIndex()->request($path, Request::HEAD);
 
         return $response->getStatus() === 200;
     }
