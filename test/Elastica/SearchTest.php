@@ -578,4 +578,20 @@ class SearchTest extends BaseTest
         $results = $search->search($query, [Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true]);
         $this->assertInstanceOf(ResultSet::class, $results);
     }
+
+    /**
+     * @group functional
+     */
+    public function testQuerySizeAfterCount()
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $query = new Query(new MatchAll());
+        $query->setSize(25);
+
+        $search->count($query);
+
+        $this->assertEquals(25, $query->getParam('size'));
+    }
 }
