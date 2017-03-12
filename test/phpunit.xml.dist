@@ -18,7 +18,7 @@
   </filter>
   <testsuites>
     <testsuite name="default">
-      <directory>./lib/Elastica/</directory>
+      <directory>./Elastica/</directory>
     </testsuite>
   </testsuites>
 </phpunit>

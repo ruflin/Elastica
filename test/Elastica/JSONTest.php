@@ -1,5 +1,5 @@
 <?php
-namespace Elastica;
+namespace Elastica\Test;
 
 /**
  * JSONTest.
