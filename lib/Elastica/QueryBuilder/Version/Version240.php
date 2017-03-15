@@ -44,6 +44,9 @@ class Version240 extends Version
         'terms',
         'wildcard',
         'geo_distance',
+        'exists',
+        'type',
+        'percolate',
     ];
 
     protected $aggregations = [
