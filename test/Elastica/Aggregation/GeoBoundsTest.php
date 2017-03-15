@@ -8,7 +8,7 @@ use Elastica\Type\Mapping;
 
 class GeoBoundsTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
+    private function getIndexForTest()
     {
         $index = $this->_createIndex();
         $type = $index->getType('test');
@@ -37,7 +37,7 @@ class GeoBoundsTest extends BaseAggregationTest
 
         $query = new Query();
         $query->addAggregation($agg);
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('viewport');
+        $results = $this->getIndexForTest()->search($query)->getAggregation('viewport');
 
         $this->assertEquals(37.782438984141, $results['bounds']['top_left']['lat']);
         $this->assertEquals(-122.39256000146, $results['bounds']['top_left']['lon']);
