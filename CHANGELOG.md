@@ -45,6 +45,7 @@ All notable changes to this project will be documented in this file based on the
 - added `\Elastica\Query\AbstractGeoShape::RELATION_WITHIN`
 - Date math in index names is now escaped in URI
 - Added a check for paths that already have date math escaped
+- added `\Elastica\Aggregation\GeoBounds` to retrieve viewport with geo_points on it
 
 ### Improvements
 
