@@ -16,6 +16,9 @@ use Elastica\Response;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
+use Elasticsearch\Endpoints\Get;
+use Elasticsearch\Endpoints\Indices\Stats;
+use Elasticsearch\Endpoints\Search;
 
 class ClientTest extends BaseTest
 {
@@ -1299,5 +1302,79 @@ class ClientTest extends BaseTest
 
         // It should not double escape the index name, since it came already escaped.
         $client->request('<test-{now%2Fd}>/_refresh');
+    }
+
+    /**
+     * @group functional
+     */
+    public function testEndpointParamsRequest()
+    {
+        $index = $this->_createIndex();
+        $client = $index->getClient();
+        $type = $index->getType('test');
+        $doc = new Document(null, ['foo' => 'bar']);
+        $doc->setRouting('first_routing');
+        $type->addDocument($doc);
+
+        $type2 = $index->getType('foobar');
+        $doc = new Document(null, ['foo2' => 'bar2']);
+        $doc->setRouting('second_routing');
+        $type2->addDocument($doc);
+
+        $index->refresh();
+
+        $endpoint = new Stats();
+        $endpoint->setIndex($index->getName());
+        $endpoint->setMetric('indexing');
+        $endpoint->setParams(['types' => [$type->getName()]]);
+        $response = $client->requestEndpoint($endpoint);
+
+        $this->assertTrue(isset($response->getData()['indices'][$index->getName()]['total']['indexing']['types']));
+
+        $this->assertEquals(
+            ['test'],
+            array_keys($response->getData()['indices'][$index->getName()]['total']['indexing']['types'])
+        );
+    }
+
+    /**
+     * @group functional
+     * @dataProvider endpointQueryRequestDataProvider
+     */
+    public function testEndpointQueryRequest($query, $totalHits)
+    {
+        $client = $this->_getClient();
+
+        $index = $client->getIndex('test');
+        $index->create([], true);
+        $type = $index->getType('test');
+        $type->addDocument(new Document(1, ['username' => 'ruflin']));
+        $index->refresh();
+
+        $query = [
+            'query' => [
+                'query_string' => [
+                    'query' => $query,
+                ],
+            ],
+        ];
+
+        $endpoint = new Search();
+        $endpoint->setIndex($index->getName());
+        $endpoint->setType($type->getName());
+        $endpoint->setBody($query);
+
+        $response = $client->requestEndpoint($endpoint);
+        $responseArray = $response->getData();
+
+        $this->assertEquals($totalHits, $responseArray['hits']['total']);
+    }
+
+    public function endpointQueryRequestDataProvider()
+    {
+        return [
+            ['ruflin', 1],
+            ['ruflin2', 0],
+        ];
     }
 }

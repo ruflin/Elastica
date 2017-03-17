@@ -2,6 +2,7 @@
 namespace Elastica;
 
 use Elastica\Exception\ResponseException;
+use Elasticsearch\Endpoints\Indices\Stats;
 
 /**
  * Elastica general status.
@@ -152,8 +153,7 @@ class Status
      */
     public function refresh()
     {
-        $path = '_stats';
-        $this->_response = $this->_client->request($path, Request::GET);
+        $this->_response = $this->_client->requestEndpoint(new Stats());
         $this->_data = $this->getResponse()->getData();
     }
 }
