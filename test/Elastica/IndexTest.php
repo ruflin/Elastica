@@ -13,6 +13,7 @@ use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 use Elastica\Type\Mapping;
+use Elasticsearch\Endpoints\Indices\Analyze;
 
 class IndexTest extends BaseTest
 {
@@ -900,6 +901,31 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
         $index->refresh();
         $returnedTokens = $index->analyze('foo');
+
+        $tokens = [
+            [
+                'token' => 'foo',
+                'start_offset' => 0,
+                'end_offset' => 3,
+                'type' => '<ALPHANUM>',
+                'position' => 0,
+            ],
+        ];
+
+        $this->assertEquals($tokens, $returnedTokens);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testRequestEndpoint()
+    {
+        $index = $this->_createIndex();
+        $index->refresh();
+        $endpoint = new Analyze();
+        $endpoint->setIndex("fooIndex");
+        $endpoint->setBody("foo");
+        $returnedTokens = $index->requestEndpoint($endpoint)->getData()['tokens'];
 
         $tokens = [
             [

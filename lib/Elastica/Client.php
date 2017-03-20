@@ -680,6 +680,12 @@ class Client
         return $response;
     }
 
+    /**
+     * Makes calls to the elasticsearch server with usage official client Endpoint
+     *
+     * @param AbstractEndpoint $endpoint
+     * @return Response
+     */
     public function requestEndpoint(AbstractEndpoint $endpoint)
     {
         return $this->request(

@@ -13,6 +13,7 @@ use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
 use Elastica\Type\Mapping;
+use Elasticsearch\Endpoints\Indices\Mapping\Get;
 
 class TypeTest extends BaseTest
 {
@@ -960,6 +961,33 @@ class TypeTest extends BaseTest
         $this->assertEquals(
             ['test-alias-type' => ['properties' => $expect]],
             $client->getIndex($aliasName)->getType($typeName)->getMapping()
+        );
+    }
+
+    /**
+     * @group functional
+     */
+    public function testRequestEndpoint()
+    {
+        $index = $this->_createIndex();
+        $type = new Type($index, "foo");
+
+        $mapping = new Mapping($type, $expect = [
+            'id' => ['type' => 'integer', 'store' => true],
+        ]);
+        $type->setMapping($mapping);
+
+        $endpoint = new Get();
+        $endpoint->setIndex("nonExistsIndex");
+        $endpoint->setType("nonExistsType");
+
+        $response = $type->requestEndpoint($endpoint);
+        $data = $response->getData();
+        $mapping = array_shift($data);
+
+        $this->assertEquals(
+            ['foo' => ['properties' => $expect]],
+            $mapping['mappings']
         );
     }
 }
