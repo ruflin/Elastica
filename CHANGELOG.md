@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file based on the
 - added support for the "explain" flag of AnalyzeAPI [#1254](https://github.com/ruflin/Elastica/pull/1254)
 - added support for the "request_cache" search option [#1243](https://github.com/ruflin/Elastica/pull/1243)
 - skip sending "retry_on_conflict=0" default query param to improve compatibility with Amazon Elasticsearch [#1047](https://github.com/ruflin/Elastica/pull/1047)
+- optimized `\Elastica\Scroll` to avoid one request [#1273](https://github.com/ruflin/Elastica/pull/1273)
 
 ### Deprecated
 
