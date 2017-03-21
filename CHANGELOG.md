@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 
+- Added `\Elastica\Client::requestEndpoint`, `\Elastica\Index::requestEndpoint`, `\Elastica\Type::requestEndpoint` that allow make requests with official client Endpoint usage. [#1275](https://github.com/ruflin/Elastica/pull/1275)
 - Added `\Elastica\Aggregation\GeoBounds` that computes the bounding box containing all geo_point values for a field. [#1271](https://github.com/ruflin/Elastica/pull/1271)
 
 ### Improvements
