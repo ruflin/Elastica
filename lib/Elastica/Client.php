@@ -5,6 +5,7 @@ use Elastica\Bulk\Action;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Script\AbstractScript;
+use Elasticsearch\Endpoints\AbstractEndpoint;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -677,6 +678,22 @@ class Client
         $this->_log($request);
 
         return $response;
+    }
+
+    /**
+     * Makes calls to the elasticsearch server with usage official client Endpoint
+     *
+     * @param AbstractEndpoint $endpoint
+     * @return Response
+     */
+    public function requestEndpoint(AbstractEndpoint $endpoint)
+    {
+        return $this->request(
+            ltrim($endpoint->getURI(), '/'),
+            $endpoint->getMethod(),
+            null === $endpoint->getBody() ? [] : $endpoint->getBody(),
+            $endpoint->getParams()
+        );
     }
 
     /**
