@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 - Fix reading bool index settings like `\Elastica\Index\Settings::getBlocksWrite`. Elasticsearch returns all settings as strings and does not normalize bool values.
   The getters now return the right bool value for whichever string representation is used like 'true', '1', 'on', 'yes'.
 - Fix for QueryBuilder version check `\Elastica\QueryBuilder\Version\Version240.php` added all new query types to queries array.
+- Do not modify the original query in `\Elastica\Search::count`.
 
 ### Added
 
