@@ -475,7 +475,8 @@ class Search
     {
         $this->setOptionsAndQuery(null, $query);
 
-        $query = $this->getQuery();
+        // Clone the object as we do not want to modify the original query.
+        $query = clone $this->getQuery();
         $query->setSize(0);
         $path = $this->getPath();
 
