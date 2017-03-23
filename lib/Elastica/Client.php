@@ -6,6 +6,9 @@ use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Script\AbstractScript;
 use Elasticsearch\Endpoints\AbstractEndpoint;
+use Elasticsearch\Endpoints\Indices\ForceMerge;
+use Elasticsearch\Endpoints\Indices\Refresh;
+use Elasticsearch\Endpoints\Update;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -364,7 +367,10 @@ class Client
      */
     public function updateDocument($id, $data, $index, $type, array $options = [])
     {
-        $path = $index.'/'.$type.'/'.$id.'/_update';
+        $endpoint = new Update();
+        $endpoint->setID($id);
+        $endpoint->setIndex($index);
+        $endpoint->setType($type);
 
         if ($data instanceof AbstractScript) {
             $requestData = $data->toArray();
@@ -415,7 +421,10 @@ class Client
             }
         }
 
-        $response = $this->request($path, Request::POST, $requestData, $options);
+        $endpoint->setBody($requestData);
+        $endpoint->setParams($options);
+
+        $response = $this->requestEndpoint($endpoint);
 
         if ($response->isOk()
             && $data instanceof Document
@@ -680,16 +689,6 @@ class Client
         return $response;
     }
 
-    public function requestEndpoint(AbstractEndpoint $endpoint)
-    {
-        return $this->request(
-            ltrim($endpoint->getURI(), '/'),
-            $endpoint->getMethod(),
-            null === $endpoint->getBody() ? [] : $endpoint->getBody(),
-            $endpoint->getParams()
-        );
-    }
-
     /**
      * Makes calls to the elasticsearch server with usage official client Endpoint
      *
@@ -768,7 +767,10 @@ class Client
      */
     public function forcemergeAll($args = [])
     {
-        return $this->request('_forcemerge', Request::POST, [], $args);
+        $endpoint = new ForceMerge();
+        $endpoint->setParams($args);
+
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
@@ -780,7 +782,7 @@ class Client
      */
     public function refreshAll()
     {
-        return $this->request('_refresh', Request::POST);
+        return $this->requestEndpoint(new Refresh());
     }
 
     /**

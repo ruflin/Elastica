@@ -208,16 +208,14 @@ class Info
     {
         $this->_params = $params;
 
-        $path = '_nodes/'.$this->getNode()->getId();
+        $endpoint = new \Elasticsearch\Endpoints\Cluster\Nodes\Info();
+        $endpoint->setNodeID($this->getNode()->getId());
 
         if (!empty($params)) {
-            $path .= '/';
-            foreach ($params as $param) {
-                $path .= $param.',';
-            }
+            $endpoint->setMetric(join(',', $params));
         }
 
-        $this->_response = $this->getNode()->getClient()->request($path, Request::GET);
+        $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
         $data = $this->getResponse()->getData();
 
         $this->_data = reset($data['nodes']);

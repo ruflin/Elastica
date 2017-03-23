@@ -3,6 +3,7 @@ namespace Elastica\Cluster;
 
 use Elastica\Client;
 use Elastica\Request;
+use Elasticsearch\Endpoints\Cluster\Settings\Get;
 
 /**
  * Cluster settings.

@@ -4,6 +4,7 @@ namespace Elastica\Type;
 use Elastica\Exception\InvalidException;
 use Elastica\Request;
 use Elastica\Type;
+use Elasticsearch\Endpoints\Indices\Mapping\Put;
 
 /**
  * Elastica Mapping object.
@@ -244,8 +245,12 @@ class Mapping
     public function send(array $query = [])
     {
         $path = '_mapping';
-
         return $this->getType()->request($path, Request::PUT, $this->toArray(), $query);
+        $endpoint = new Put();
+        $endpoint->setBody($this->toArray());
+        $endpoint->setParams($query);
+
+        return $this->getType()->requestEndpoint($endpoint);
     }
 
     /**
