@@ -3,6 +3,7 @@ namespace Elastica;
 
 use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
+use Elasticsearch\Endpoints\Snapshot\Restore;
 
 /**
  * Class Snapshot.
@@ -156,7 +157,13 @@ class Snapshot
      */
     public function restoreSnapshot($repository, $name, $options = [], $waitForCompletion = false)
     {
-        return $this->request($repository.'/'.$name.'/_restore', Request::POST, $options, ['wait_for_completion' => $waitForCompletion]);
+        $endpoint = new Restore();
+        $endpoint->setRepository($repository);
+        $endpoint->setSnapshot($name);
+        $endpoint->setBody($options);
+        $endpoint->setParams(['wait_for_completion' => $waitForCompletion]);
+
+        return $this->_client->requestEndpoint($endpoint);
     }
 
     /**

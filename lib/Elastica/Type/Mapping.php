@@ -244,8 +244,6 @@ class Mapping
      */
     public function send(array $query = [])
     {
-        $path = '_mapping';
-        return $this->getType()->request($path, Request::PUT, $this->toArray(), $query);
         $endpoint = new Put();
         $endpoint->setBody($this->toArray());
         $endpoint->setParams($query);
