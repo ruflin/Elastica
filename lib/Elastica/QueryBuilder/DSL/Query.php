@@ -16,6 +16,7 @@ use Elastica\Query\HasParent;
 use Elastica\Query\Ids;
 use Elastica\Query\Match;
 use Elastica\Query\MatchAll;
+use Elastica\Query\MatchNone;
 use Elastica\Query\MoreLikeThis;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Nested;
@@ -235,6 +236,18 @@ class Query implements DSL
     public function match_all()
     {
         return new MatchAll();
+    }
+
+    /**
+     * match none query.
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-all-query.html#query-dsl-match-none-query
+     *
+     * @return MatchNone
+     */
+    public function match_none()
+    {
+        return new MatchNone();
     }
 
     /**
