@@ -691,6 +691,22 @@ class Client
     }
 
     /**
+     * Makes calls to the elasticsearch server with usage official client Endpoint
+     *
+     * @param AbstractEndpoint $endpoint
+     * @return Response
+     */
+    public function requestEndpoint(AbstractEndpoint $endpoint)
+    {
+        return $this->request(
+            ltrim($endpoint->getURI(), '/'),
+            $endpoint->getMethod(),
+            null === $endpoint->getBody() ? [] : $endpoint->getBody(),
+            $endpoint->getParams()
+        );
+    }
+
+    /**
      * logging.
      *
      * @deprecated Overwriting Client->_log is deprecated. Handle logging functionality by using a custom LoggerInterface.

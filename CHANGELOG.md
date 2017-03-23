@@ -10,9 +10,11 @@ All notable changes to this project will be documented in this file based on the
 - Fix reading bool index settings like `\Elastica\Index\Settings::getBlocksWrite`. Elasticsearch returns all settings as strings and does not normalize bool values.
   The getters now return the right bool value for whichever string representation is used like 'true', '1', 'on', 'yes'.
 - Fix for QueryBuilder version check `\Elastica\QueryBuilder\Version\Version240.php` added all new query types to queries array.
+- Do not modify the original query in `\Elastica\Search::count`.
 
 ### Added
 
+- Added `\Elastica\Client::requestEndpoint`, `\Elastica\Index::requestEndpoint`, `\Elastica\Type::requestEndpoint` that allow make requests with official client Endpoint usage. [#1275](https://github.com/ruflin/Elastica/pull/1275)
 - Added `\Elastica\Aggregation\GeoBounds` that computes the bounding box containing all geo_point values for a field. [#1271](https://github.com/ruflin/Elastica/pull/1271)
 
 ### Improvements
@@ -20,6 +22,7 @@ All notable changes to this project will be documented in this file based on the
 - added support for the "explain" flag of AnalyzeAPI [#1254](https://github.com/ruflin/Elastica/pull/1254)
 - added support for the "request_cache" search option [#1243](https://github.com/ruflin/Elastica/pull/1243)
 - skip sending "retry_on_conflict=0" default query param to improve compatibility with Amazon Elasticsearch [#1047](https://github.com/ruflin/Elastica/pull/1047)
+- optimized `\Elastica\Scroll` to avoid one request [#1273](https://github.com/ruflin/Elastica/pull/1273)
 
 ### Deprecated
 

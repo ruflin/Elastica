@@ -6,6 +6,7 @@ use Elastica\Exception\ResponseException;
 use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
 use Elastica\ResultSet\BuilderInterface;
+use Elasticsearch\Endpoints\AbstractEndpoint;
 
 /**
  * Elastica index object.
@@ -518,6 +519,19 @@ class Index implements SearchableInterface
         $path = $this->getName().'/'.$path;
 
         return $this->getClient()->request($path, $method, $data, $query);
+    }
+
+    /**
+     * Makes calls to the elasticsearch server with usage official client Endpoint based on this index
+     *
+     * @param AbstractEndpoint $endpoint
+     * @return Response
+     */
+    public function requestEndpoint(AbstractEndpoint $endpoint)
+    {
+        $cloned = clone $endpoint;
+        $cloned->setIndex($this->getName());
+        return $this->getClient()->requestEndpoint($cloned);
     }
 
     /**

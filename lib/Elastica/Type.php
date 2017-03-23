@@ -7,6 +7,7 @@ use Elastica\Exception\RuntimeException;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\Script\AbstractScript;
 use Elastica\Type\Mapping;
+use Elasticsearch\Endpoints\AbstractEndpoint;
 
 /**
  * Elastica type object.
@@ -496,6 +497,19 @@ class Type implements SearchableInterface
         $path = $this->getName().'/'.$path;
 
         return $this->getIndex()->request($path, $method, $data, $query);
+    }
+
+    /**
+     * Makes calls to the elasticsearch server with usage official client Endpoint based on this type
+     *
+     * @param AbstractEndpoint $endpoint
+     * @return Response
+     */
+    public function requestEndpoint(AbstractEndpoint $endpoint)
+    {
+        $cloned = clone $endpoint;
+        $cloned->setType($this->getName());
+        return $this->getIndex()->requestEndpoint($cloned);
     }
 
     /**
