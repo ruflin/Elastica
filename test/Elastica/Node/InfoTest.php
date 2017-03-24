@@ -80,4 +80,18 @@ class InfoTest extends BaseTest
             $this->assertEquals($rawNodes[$node->getId()]['name'], $node->getInfo()->getName());
         }
     }
+
+    /**
+     * @group functional
+     */
+    public function testParams()
+    {
+        $client = $this->_getClient();
+
+        $info = $client->getCluster()->getNodes()[0]->getInfo();
+
+        $this->assertTrue(isset($info->getData()['plugins']));
+        $info->refresh(['jvm']);
+        $this->assertFalse(isset($info->getData()['plugins']));
+    }
 }

@@ -212,7 +212,7 @@ class Info
         $endpoint->setNodeID($this->getNode()->getId());
 
         if (!empty($params)) {
-            $endpoint->setMetric(join(',', $params));
+            $endpoint->setMetric($params);
         }
 
         $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
