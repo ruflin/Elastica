@@ -48,6 +48,7 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'ids', Query\Ids::class, ['type', []]);
         $this->_assertImplemented($queryDSL, 'match', Match::class, ['field', 'values']);
         $this->_assertImplemented($queryDSL, 'match_all', Query\MatchAll::class, []);
+        $this->_assertImplemented($queryDSL, 'match_none', Query\MatchNone::class, []);
         $this->_assertImplemented($queryDSL, 'more_like_this', Query\MoreLikeThis::class, []);
         $this->_assertImplemented($queryDSL, 'multi_match', Query\MultiMatch::class, []);
         $this->_assertImplemented($queryDSL, 'nested', Query\Nested::class, []);
