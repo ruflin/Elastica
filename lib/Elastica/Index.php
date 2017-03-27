@@ -7,6 +7,20 @@ use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
 use Elastica\ResultSet\BuilderInterface;
 use Elasticsearch\Endpoints\AbstractEndpoint;
+use Elasticsearch\Endpoints\Cluster\Settings\Put;
+use Elasticsearch\Endpoints\DeleteByQuery;
+use Elasticsearch\Endpoints\Indices\Aliases\Update;
+use Elasticsearch\Endpoints\Indices\Analyze;
+use Elasticsearch\Endpoints\Indices\Cache\Clear;
+use Elasticsearch\Endpoints\Indices\Close;
+use Elasticsearch\Endpoints\Indices\Create;
+use Elasticsearch\Endpoints\Indices\Delete;
+use Elasticsearch\Endpoints\Indices\Exists;
+use Elasticsearch\Endpoints\Indices\Flush;
+use Elasticsearch\Endpoints\Indices\ForceMerge;
+use Elasticsearch\Endpoints\Indices\Mapping\Get;
+use Elasticsearch\Endpoints\Indices\Open;
+use Elasticsearch\Endpoints\Indices\Refresh;
 
 /**
  * Elastica index object.
@@ -78,9 +92,7 @@ class Index implements SearchableInterface
      */
     public function getMapping()
     {
-        $path = '_mapping';
-
-        $response = $this->request($path, Request::GET);
+        $response = $this->requestEndpoint(new Get());
         $data = $response->getData();
 
         // Get first entry as if index is an Alias, the name of the mapping is the real name and not alias name
@@ -153,7 +165,11 @@ class Index implements SearchableInterface
     {
         $query = Query::create($query)->getQuery();
 
-        return $this->request('_delete_by_query', Request::POST, ['query' => is_array($query) ? $query : $query->toArray()], $options);
+        $endpoint = new DeleteByQuery();
+        $endpoint->setBody(['query' => is_array($query) ? $query : $query->toArray()]);
+        $endpoint->setParams($options);
+
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
@@ -163,9 +179,7 @@ class Index implements SearchableInterface
      */
     public function delete()
     {
-        $response = $this->request('', Request::DELETE);
-
-        return $response;
+        return $this->requestEndpoint(new Delete());
     }
 
     /**
@@ -212,13 +226,16 @@ class Index implements SearchableInterface
      *
      * @param array $args OPTIONAL Additional arguments
      *
-     * @return array Server response
+     * @return Response
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-forcemerge.html
      */
     public function forcemerge($args = [])
     {
-        return $this->request('_forcemerge', Request::POST, [], $args);
+        $endpoint = new ForceMerge();
+        $endpoint->setParams($args);
+
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
@@ -230,7 +247,7 @@ class Index implements SearchableInterface
      */
     public function refresh()
     {
-        return $this->request('_refresh', Request::POST, []);
+        return $this->requestEndpoint(new Refresh());
     }
 
     /**
@@ -273,7 +290,10 @@ class Index implements SearchableInterface
             }
         }
 
-        return $this->request('', Request::PUT, $args);
+        $endpoint = new Create();
+        $endpoint->setBody($args);
+
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
@@ -283,7 +303,7 @@ class Index implements SearchableInterface
      */
     public function exists()
     {
-        $response = $this->getClient()->request($this->getName(), Request::HEAD);
+        $response = $this->requestEndpoint(new Exists());
 
         return $response->getStatus() === 200;
     }
@@ -346,7 +366,7 @@ class Index implements SearchableInterface
      */
     public function open()
     {
-        return $this->request('_open', Request::POST);
+        return $this->requestEndpoint(new Open());
     }
 
     /**
@@ -358,7 +378,7 @@ class Index implements SearchableInterface
      */
     public function close()
     {
-        return $this->request('_close', Request::POST);
+        return $this->requestEndpoint(new Close());
     }
 
     /**
@@ -393,8 +413,6 @@ class Index implements SearchableInterface
      */
     public function addAlias($name, $replace = false)
     {
-        $path = '_aliases';
-
         $data = ['actions' => []];
 
         if ($replace) {
@@ -406,7 +424,10 @@ class Index implements SearchableInterface
 
         $data['actions'][] = ['add' => ['index' => $this->getName(), 'alias' => $name]];
 
-        return $this->getClient()->request($path, Request::POST, $data);
+        $endpoint = new Update();
+        $endpoint->setBody($data);
+
+        return $this->getClient()->requestEndpoint($endpoint);
     }
 
     /**
@@ -420,11 +441,10 @@ class Index implements SearchableInterface
      */
     public function removeAlias($name)
     {
-        $path = '_aliases';
+        $endpoint = new \Elasticsearch\Endpoints\Indices\Alias\Delete();
+        $endpoint->setName($name);
 
-        $data = ['actions' => [['remove' => ['index' => $this->getName(), 'alias' => $name]]]];
-
-        return $this->getClient()->request($path, Request::POST, $data);
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
@@ -434,7 +454,10 @@ class Index implements SearchableInterface
      */
     public function getAliases()
     {
-        $responseData = $this->request('_alias/*', Request::GET)->getData();
+        $endpoint = new \Elasticsearch\Endpoints\Indices\Alias\Get();
+        $endpoint->setName('*');
+
+        $responseData = $this->requestEndpoint($endpoint)->getData();
 
         if (!isset($responseData[$this->getName()])) {
             return [];
@@ -469,9 +492,8 @@ class Index implements SearchableInterface
      */
     public function clearCache()
     {
-        $path = '_cache/clear';
         // TODO: add additional cache clean arguments
-        return $this->request($path, Request::POST);
+        return $this->requestEndpoint(new Clear());
     }
 
     /**
@@ -485,9 +507,10 @@ class Index implements SearchableInterface
      */
     public function flush(array $options = [])
     {
-        $path = '_flush';
+        $endpoint = new Flush();
+        $endpoint->setParams($options);
 
-        return $this->request($path, Request::POST, [], $options);
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
@@ -501,7 +524,9 @@ class Index implements SearchableInterface
      */
     public function setSettings(array $data)
     {
-        return $this->request('_settings', Request::PUT, $data);
+        $endpoint = new Put();
+        $endpoint->setBody($data);
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
@@ -548,7 +573,11 @@ class Index implements SearchableInterface
      */
     public function analyze($text, $args = [])
     {
-        $data = $this->request('_analyze', Request::POST, $text, $args)->getData();
+        $endpoint = new Analyze();
+        $endpoint->setBody($text);
+        $endpoint->setParams($args);
+
+        $data = $this->requestEndpoint($endpoint)->getData();
 
         // Support for "Explain" parameter, that returns a different response structure from Elastic
         // @see: https://www.elastic.co/guide/en/elasticsearch/reference/current/_explain_analyze.html

@@ -105,8 +105,10 @@ class Stats
      */
     public function refresh()
     {
-        $path = '_nodes/'.$this->getNode()->getName().'/stats';
-        $this->_response = $this->getNode()->getClient()->request($path, Request::GET);
+        $endpoint = new \Elasticsearch\Endpoints\Cluster\Nodes\Stats();
+        $endpoint->setNodeID($this->getNode()->getName());
+
+        $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
         $data = $this->getResponse()->getData();
         $this->_data = reset($data['nodes']);
     }
