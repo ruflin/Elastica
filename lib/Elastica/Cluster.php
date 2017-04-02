@@ -4,6 +4,7 @@ namespace Elastica;
 use Elastica\Cluster\Health;
 use Elastica\Cluster\Settings;
 use Elastica\Exception\NotImplementedException;
+use Elasticsearch\Endpoints\Cluster\State;
 
 /**
  * Cluster information for elasticsearch.
@@ -51,8 +52,7 @@ class Cluster
      */
     public function refresh()
     {
-        $path = '_cluster/state';
-        $this->_response = $this->_client->request($path, Request::GET);
+        $this->_response = $this->_client->requestEndpoint(new State());
         $this->_data = $this->getResponse()->getData();
     }
 

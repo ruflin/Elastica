@@ -40,8 +40,6 @@ class IndexDocument extends AbstractDocument
             'version_type',
             'routing',
             'parent',
-            'ttl',
-            'timestamp',
             'retry_on_conflict',
         ];
 

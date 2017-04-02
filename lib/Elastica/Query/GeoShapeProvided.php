@@ -2,7 +2,7 @@
 namespace Elastica\Query;
 
 /**
- * geo_shape query or provided shapes.
+ * geo_shape query for provided shapes.
  *
  * Query provided shape definitions
  *
@@ -64,8 +64,8 @@ class GeoShapeProvided extends AbstractGeoShape
                     'shape' => [
                         'type' => $this->_shapeType,
                         'coordinates' => $this->_coordinates,
-                        'relation' => $this->_relation,
                     ],
+                    'relation' => $this->_relation,
                 ],
             ],
         ];

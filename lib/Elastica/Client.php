@@ -5,6 +5,10 @@ use Elastica\Bulk\Action;
 use Elastica\Exception\ConnectionException;
 use Elastica\Exception\InvalidException;
 use Elastica\Script\AbstractScript;
+use Elasticsearch\Endpoints\AbstractEndpoint;
+use Elasticsearch\Endpoints\Indices\ForceMerge;
+use Elasticsearch\Endpoints\Indices\Refresh;
+use Elasticsearch\Endpoints\Update;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -315,7 +319,7 @@ class Client
 
         $bulk = new Bulk($this);
 
-        $bulk->addDocuments($docs, \Elastica\Bulk\Action::OP_TYPE_UPDATE);
+        $bulk->addDocuments($docs, Action::OP_TYPE_UPDATE);
 
         return $bulk->send();
     }
@@ -363,7 +367,10 @@ class Client
      */
     public function updateDocument($id, $data, $index, $type, array $options = [])
     {
-        $path = $index.'/'.$type.'/'.$id.'/_update';
+        $endpoint = new Update();
+        $endpoint->setID($id);
+        $endpoint->setIndex($index);
+        $endpoint->setType($type);
 
         if ($data instanceof AbstractScript) {
             $requestData = $data->toArray();
@@ -409,11 +416,15 @@ class Client
         }
 
         if (!isset($options['retry_on_conflict'])) {
-            $retryOnConflict = $this->getConfig('retryOnConflict');
-            $options['retry_on_conflict'] = $retryOnConflict;
+            if ($retryOnConflict = $this->getConfig('retryOnConflict')) {
+                $options['retry_on_conflict'] = $retryOnConflict;
+            }
         }
 
-        $response = $this->request($path, Request::POST, $requestData, $options);
+        $endpoint->setBody($requestData);
+        $endpoint->setParams($options);
+
+        $response = $this->requestEndpoint($endpoint);
 
         if ($response->isOk()
             && $data instanceof Document
@@ -679,6 +690,22 @@ class Client
     }
 
     /**
+     * Makes calls to the elasticsearch server with usage official client Endpoint
+     *
+     * @param AbstractEndpoint $endpoint
+     * @return Response
+     */
+    public function requestEndpoint(AbstractEndpoint $endpoint)
+    {
+        return $this->request(
+            ltrim($endpoint->getURI(), '/'),
+            $endpoint->getMethod(),
+            null === $endpoint->getBody() ? [] : $endpoint->getBody(),
+            $endpoint->getParams()
+        );
+    }
+
+    /**
      * logging.
      *
      * @deprecated Overwriting Client->_log is deprecated. Handle logging functionality by using a custom LoggerInterface.
@@ -719,11 +746,31 @@ class Client
      *
      * @return \Elastica\Response Response object
      *
+     * @deprecated Replaced by forcemergeAll
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
     public function optimizeAll($args = [])
     {
-        return $this->request('_optimize', Request::POST, [], $args);
+        trigger_error('Deprecated: Elastica\Client::optimizeAll() is deprecated and will be removed in further Elastica releases. Use Elastica\Client::forcemergeAll() instead.', E_USER_DEPRECATED);
+
+        return $this->forcemergeAll($args);
+    }
+
+    /**
+     * Force merges all search indices.
+     *
+     * @param array $args OPTIONAL Optional arguments
+     *
+     * @return \Elastica\Response Response object
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-forcemerge.html
+     */
+    public function forcemergeAll($args = [])
+    {
+        $endpoint = new ForceMerge();
+        $endpoint->setParams($args);
+
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
@@ -735,7 +782,7 @@ class Client
      */
     public function refreshAll()
     {
-        return $this->request('_refresh', Request::POST);
+        return $this->requestEndpoint(new Refresh());
     }
 
     /**

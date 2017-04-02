@@ -28,19 +28,19 @@ To run the commands below, you must have docker-compose [installed](https://docs
 To run all tests inside the docker environment, run the following command:
 
 ```
-make run RUN="make phpunit"
+make tests
 ```
 
 If you want to run just a specific test or a one specific file, run the following command by replacing your file with the existingpath:
 
 ```
- make run RUN="phpunit -c ./test lib/Elastica/Test/SearchTest.php"
+make test TEST="test/lib/Elastica/Test/SearchTest.php"
 ```
 
 ## Check style of your code
 This command will call php-cs-fixer with the predefined settings for the elastica project. No local setup of the tools is needed as everything will happen directly in the container.
 ```
-make run RUN="make lint"
+make lint
 ```
 
 

@@ -40,8 +40,10 @@ class Health
      */
     protected function _retrieveHealthData()
     {
-        $path = '_cluster/health?level=shards';
-        $response = $this->_client->request($path, Request::GET);
+        $endpoint = new \Elasticsearch\Endpoints\Cluster\Health();
+        $endpoint->setParams(['level' => 'shards']);
+
+        $response = $this->_client->requestEndpoint($endpoint);
 
         return $response->getData();
     }

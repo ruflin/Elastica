@@ -8,6 +8,7 @@ use Elastica\Exception\ResponseException;
 use Elastica\JSON;
 use Elastica\Request;
 use Elastica\Response;
+use Elastica\Util;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7;
@@ -200,6 +201,11 @@ class Guzzle extends AbstractTransport
         if ($action) {
             $action = '/'.ltrim($action, '/');
         }
+
+        if (!Util::isDateMathEscaped($action)) {
+            $action = Util::escapeDateMath($action);
+        }
+
         $query = $request->getQuery();
 
         if (!empty($query)) {

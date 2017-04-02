@@ -26,11 +26,11 @@ class Search
     const OPTION_SCROLL_ID = 'scroll_id';
     const OPTION_QUERY_CACHE = 'query_cache';
     const OPTION_TERMINATE_AFTER = 'terminate_after';
+    const OPTION_SHARD_REQUEST_CACHE = 'request_cache';
 
     /*
      * Search types
      */
-
     const OPTION_SEARCH_TYPE_DFS_QUERY_THEN_FETCH = 'dfs_query_then_fetch';
     const OPTION_SEARCH_TYPE_DFS_QUERY_AND_FETCH = 'dfs_query_and_fetch';
     const OPTION_SEARCH_TYPE_QUERY_THEN_FETCH = 'query_then_fetch';
@@ -291,6 +291,7 @@ class Search
             case self::OPTION_SEARCH_IGNORE_UNAVAILABLE:
             case self::OPTION_QUERY_CACHE:
             case self::OPTION_TERMINATE_AFTER:
+            case self::OPTION_SHARD_REQUEST_CACHE:    
                 return true;
         }
 
@@ -474,7 +475,8 @@ class Search
     {
         $this->setOptionsAndQuery(null, $query);
 
-        $query = $this->getQuery();
+        // Clone the object as we do not want to modify the original query.
+        $query = clone $this->getQuery();
         $query->setSize(0);
         $path = $this->getPath();
 

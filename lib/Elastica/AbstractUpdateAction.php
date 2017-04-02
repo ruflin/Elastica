@@ -45,34 +45,6 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Sets lifetime of document.
-     *
-     * @param string $ttl
-     *
-     * @return $this
-     */
-    public function setTtl($ttl)
-    {
-        return $this->setParam('_ttl', $ttl);
-    }
-
-    /**
-     * @return string
-     */
-    public function getTtl()
-    {
-        return $this->getParam('_ttl');
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasTtl()
-    {
-        return $this->hasParam('_ttl');
-    }
-
-    /**
      * Sets the document type name.
      *
      * @param Type|string $type Type name
@@ -346,32 +318,6 @@ class AbstractUpdateAction extends Param
     public function hasRetryOnConflict()
     {
         return $this->hasParam('_retry_on_conflict');
-    }
-
-    /**
-     * @param string $timestamp
-     *
-     * @return $this
-     */
-    public function setTimestamp($timestamp)
-    {
-        return $this->setParam('_timestamp', $timestamp);
-    }
-
-    /**
-     * @return int
-     */
-    public function getTimestamp()
-    {
-        return $this->getParam('_timestamp');
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasTimestamp()
-    {
-        return $this->hasParam('_timestamp');
     }
 
     /**
