@@ -151,6 +151,7 @@ class Phrase extends AbstractSuggest
 
     /**
      * @param Query $query
+     *
      * @return $this
      */
     public function setCollate(Query $query)
