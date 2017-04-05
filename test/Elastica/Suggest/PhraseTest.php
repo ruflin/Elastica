@@ -3,6 +3,7 @@ namespace Elastica\Test\Suggest;
 
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Query;
 use Elastica\Suggest;
 use Elastica\Suggest\CandidateGenerator\DirectGenerator;
 use Elastica\Suggest\Phrase;
@@ -78,5 +79,39 @@ class PhraseTest extends BaseTest
 
         $this->assertEquals('elasticsearch is <suggest>bonsai cool</suggest>', $suggests['suggest1'][0]['options'][0]['highlighted']);
         $this->assertEquals('elasticsearch is bonsai cool', $suggests['suggest1'][0]['options'][0]['text']);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testPhraseSuggestCollate()
+    {
+        $collateQuery = [
+            'query' => [
+                'inline' => [
+                    'match_phrase' => [
+                        '{{field_name}}' => '{{suggestion}}'
+                    ]
+                ]
+            ],
+            'params' => ['field_name' => 'text'],
+            'prune' => true
+        ];
+
+        $collateQuery = new Query($collateQuery);
+
+        $suggest = new Suggest();
+        $phraseSuggest = new Phrase('suggest1', 'text');
+        $phraseSuggest->setText('Gihub is pretty bonsai');
+        $phraseSuggest->setCollate($collateQuery);
+
+        $suggest->addSuggestion($phraseSuggest);
+
+        $index = $this->_getIndexForTest();
+        $result = $index->search($suggest);
+        $suggests = $result->getSuggests();
+
+        $this->assertArrayHasKey('collate_match', $suggests['suggest1'][0]['options'][0]);
+        $this->assertFalse($suggests['suggest1'][0]['options'][0]['collate_match']);
     }
 }
