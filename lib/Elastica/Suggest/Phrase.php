@@ -1,6 +1,7 @@
 <?php
 namespace Elastica\Suggest;
 
+use Elastica\Query;
 use Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator;
 
 /**
@@ -146,6 +147,15 @@ class Phrase extends AbstractSuggest
         return $this->setParam('smoothing', [
             $model => $params,
         ]);
+    }
+
+    /**
+     * @param Query $query
+     * @return $this
+     */
+    public function setCollate(Query $query)
+    {
+        return $this->setParam('collate', $query);
     }
 
     /**
