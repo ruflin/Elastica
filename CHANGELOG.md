@@ -29,6 +29,8 @@ All notable changes to this project will be documented in this file based on the
 
 - Deprecated `\Elastica\Exception\ElasticsearchException` which is irrelevant since Elasticsearch now exposes the errors as a structured array instead of a single string.
   Use `\Elastica\Exception\ResponseException::getResponse::getFullError` instead.
+- Deprecated both `prefix_len` & `min_word_len` fields in `Elastica\Suggest\CandidateGenerator\DirectGenerator` as these now return errors when using the phrase suggester to querying terms.
+  Use `prefix_length` & `min_word_length` instead [#1282](https://github.com/ruflin/Elastica/pull/1282)
 
 ## [5.1.0](https://github.com/ruflin/Elastica/compare/5.0.0...5.1.0)
 
