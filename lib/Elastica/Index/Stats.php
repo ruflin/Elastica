@@ -2,7 +2,6 @@
 namespace Elastica\Index;
 
 use Elastica\Index as BaseIndex;
-use Elastica\Request;
 
 /**
  * Elastica index stats object.
