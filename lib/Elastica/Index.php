@@ -526,6 +526,7 @@ class Index implements SearchableInterface
     {
         $endpoint = new Put();
         $endpoint->setBody($data);
+
         return $this->requestEndpoint($endpoint);
     }
 
@@ -547,15 +548,17 @@ class Index implements SearchableInterface
     }
 
     /**
-     * Makes calls to the elasticsearch server with usage official client Endpoint based on this index
+     * Makes calls to the elasticsearch server with usage official client Endpoint based on this index.
      *
      * @param AbstractEndpoint $endpoint
+     *
      * @return Response
      */
     public function requestEndpoint(AbstractEndpoint $endpoint)
     {
         $cloned = clone $endpoint;
         $cloned->setIndex($this->getName());
+
         return $this->getClient()->requestEndpoint($cloned);
     }
 
