@@ -690,9 +690,10 @@ class Client
     }
 
     /**
-     * Makes calls to the elasticsearch server with usage official client Endpoint
+     * Makes calls to the elasticsearch server with usage official client Endpoint.
      *
      * @param AbstractEndpoint $endpoint
+     *
      * @return Response
      */
     public function requestEndpoint(AbstractEndpoint $endpoint)

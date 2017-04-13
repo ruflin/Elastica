@@ -2,7 +2,6 @@
 namespace Elastica\Type;
 
 use Elastica\Exception\InvalidException;
-use Elastica\Request;
 use Elastica\Type;
 use Elasticsearch\Endpoints\Indices\Mapping\Put;
 

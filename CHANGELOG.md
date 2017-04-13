@@ -1,9 +1,20 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/5.1.0...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.2.0...master)
 
 ### Backward Compatibility Breaks
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.1.0...5.2.0)
 
 ### Bugfixes
 

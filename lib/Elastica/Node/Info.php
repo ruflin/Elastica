@@ -2,7 +2,6 @@
 namespace Elastica\Node;
 
 use Elastica\Node as BaseNode;
-use Elastica\Request;
 
 /**
  * Elastica cluster node object.

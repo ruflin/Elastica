@@ -3,7 +3,6 @@ namespace Elastica\Cluster;
 
 use Elastica\Client;
 use Elastica\Cluster\Health\Index;
-use Elastica\Request;
 
 /**
  * Elastic cluster health.

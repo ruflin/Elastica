@@ -32,7 +32,7 @@ class Scroll implements \Iterator
 
     /**
      * 0: scroll<br>
-     * 1: scroll id
+     * 1: scroll id.
      *
      * @var array
      */
@@ -142,7 +142,7 @@ class Scroll implements \Iterator
     protected function _setScrollId(ResultSet $resultSet)
     {
         $this->_currentResultSet = $resultSet;
-        $this->currentPage++;
+        ++$this->currentPage;
         $this->totalPages = $resultSet->count() > 0 ? ceil($resultSet->getTotalHits() / $resultSet->count()) : 0;
         $this->_nextScrollId = $resultSet->getResponse()->isOk() ? $resultSet->getResponse()->getScrollId() : null;
     }
