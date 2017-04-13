@@ -221,7 +221,7 @@ class MappingTest extends BaseTest
                 'mapping' => [
                     'type' => '{dynamic_type}',
                     'fields' => [
-                        'raw' => ['type' => 'keyword', 'include_in_all' => false],
+                        'raw' => ['type' => 'keyword'],
                     ],
                 ],
             ]],
@@ -247,7 +247,6 @@ class MappingTest extends BaseTest
                             'fields' => [
                                 'raw' => [
                                     'type' => 'keyword',
-                                    'include_in_all' => false,
                                 ],
                             ],
                         ],
