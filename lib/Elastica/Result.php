@@ -266,4 +266,20 @@ class Result
 
         return array_key_exists($key, $source) && $source[$key] !== null;
     }
+    
+    /**
+     * Magic function is triggered when invoking inaccessible methods in an object context.
+     *
+     * Returns null if key does not exist
+     *
+     * @param string $key Key name
+     * @param array $arguments enumerated array containing the parameters passed to the $key method
+     * @return mixed  Key value
+     */
+    public function __call($key, $arguments)
+    {
+        $source = $this->getData();
+
+        return array_key_exists($key, $source) ? $source[$key] : null;
+    }
 }
