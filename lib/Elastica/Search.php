@@ -293,6 +293,7 @@ class Search
             case self::OPTION_QUERY_CACHE:
             case self::OPTION_TERMINATE_AFTER:
             case self::OPTION_SHARD_REQUEST_CACHE:
+            case self::OPTION_FILTER_PATH:
                 return true;
         }
 
