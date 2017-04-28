@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file based on the
 ### Bugfixes
 
 ### Added
-
+ - Parameter `filter_path` for response filtering (e.g. `$index->search($query, ['filter_path' => 'hits.hits._source'])`)
 ### Improvements
 
 ### Deprecated

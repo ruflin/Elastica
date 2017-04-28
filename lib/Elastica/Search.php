@@ -27,6 +27,7 @@ class Search
     const OPTION_QUERY_CACHE = 'query_cache';
     const OPTION_TERMINATE_AFTER = 'terminate_after';
     const OPTION_SHARD_REQUEST_CACHE = 'request_cache';
+    const OPTION_FILTER_PATH = 'filter_path';
 
     /*
      * Search types
@@ -292,6 +293,7 @@ class Search
             case self::OPTION_QUERY_CACHE:
             case self::OPTION_TERMINATE_AFTER:
             case self::OPTION_SHARD_REQUEST_CACHE:
+            case self::OPTION_FILTER_PATH:
                 return true;
         }
 
