@@ -7,7 +7,7 @@ use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
 use Elastica\ResultSet\BuilderInterface;
 use Elasticsearch\Endpoints\AbstractEndpoint;
-use Elasticsearch\Endpoints\Cluster\Settings\Put;
+use Elasticsearch\Endpoints\Indices\Settings\Put;
 use Elasticsearch\Endpoints\DeleteByQuery;
 use Elasticsearch\Endpoints\Indices\Aliases\Update;
 use Elasticsearch\Endpoints\Indices\Analyze;
