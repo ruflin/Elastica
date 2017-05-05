@@ -312,4 +312,38 @@ class SettingsTest extends BaseTest
             $this->assertContains('index_not_found_exception', $error['type']);
         }
     }
+
+    /**
+     * @group functional
+     */
+    public function testSetMultiple()
+    {
+        $indexName = 'test';
+
+        $client = $this->_getClient();
+        $index = $client->getIndex($indexName);
+        $index->create([], true);
+
+        $settings = $index->getSettings();
+
+        $index->setSettings([
+            'number_of_replicas' => 2,
+            'refresh_interval' => '2s',
+        ]);
+
+        $index->refresh();
+        $this->assertEquals(2, $settings->get('number_of_replicas'));
+        $this->assertEquals('2s', $settings->get('refresh_interval'));
+
+        $index->setSettings([
+            'number_of_replicas' => 5,
+            'refresh_interval' => '5s',
+        ]);
+
+        $index->refresh();
+        $this->assertEquals(5, $settings->get('number_of_replicas'));
+        $this->assertEquals('5s', $settings->get('refresh_interval'));
+
+        $index->delete();
+    }
 }
