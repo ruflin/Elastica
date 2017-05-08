@@ -392,6 +392,12 @@ class SearchTest extends BaseTest
         $resultSet = $search->search('test', ['limit' => 0]);
         $this->assertTrue(($resultSet->count() === 0) && $resultSet->getTotalHits() === 11);
 
+        //test with filter_path
+        $resultSet = $search->search('test', [Search::OPTION_FILTER_PATH => 'hits.hits._source']);
+        $filteredData = $resultSet->getResponse()->getData();
+        $this->assertArrayNotHasKey('took', $filteredData);
+        $this->assertArrayNotHasKey('max_score', $filteredData['hits']);
+
         //Timeout - this one is a bit more tricky to test
         $mockResponse = new Response(json_encode(['timed_out' => true]));
         $client = $this->createMock(Client::class);

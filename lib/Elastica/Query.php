@@ -3,7 +3,6 @@ namespace Elastica;
 
 use Elastica\Aggregation\AbstractAggregation;
 use Elastica\Exception\InvalidException;
-use Elastica\Exception\NotImplementedException;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;

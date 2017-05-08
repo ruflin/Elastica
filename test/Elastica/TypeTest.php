@@ -970,7 +970,7 @@ class TypeTest extends BaseTest
     public function testRequestEndpoint()
     {
         $index = $this->_createIndex();
-        $type = new Type($index, "foo");
+        $type = new Type($index, 'foo');
 
         $mapping = new Mapping($type, $expect = [
             'id' => ['type' => 'integer', 'store' => true],
@@ -978,8 +978,8 @@ class TypeTest extends BaseTest
         $type->setMapping($mapping);
 
         $endpoint = new Get();
-        $endpoint->setIndex("nonExistsIndex");
-        $endpoint->setType("nonExistsType");
+        $endpoint->setIndex('nonExistsIndex');
+        $endpoint->setType('nonExistsType');
 
         $response = $type->requestEndpoint($endpoint);
         $data = $response->getData();

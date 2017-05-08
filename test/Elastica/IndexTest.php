@@ -923,8 +923,8 @@ class IndexTest extends BaseTest
         $index = $this->_createIndex();
         $index->refresh();
         $endpoint = new Analyze();
-        $endpoint->setIndex("fooIndex");
-        $endpoint->setBody("foo");
+        $endpoint->setIndex('fooIndex');
+        $endpoint->setBody('foo');
         $returnedTokens = $index->requestEndpoint($endpoint)->getData()['tokens'];
 
         $tokens = [

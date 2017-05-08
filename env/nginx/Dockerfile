@@ -1,4 +1,4 @@
-FROM nginx:1.9
+FROM nginx:1.13
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 # Copy config files

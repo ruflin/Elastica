@@ -508,15 +508,17 @@ class Type implements SearchableInterface
     }
 
     /**
-     * Makes calls to the elasticsearch server with usage official client Endpoint based on this type
+     * Makes calls to the elasticsearch server with usage official client Endpoint based on this type.
      *
      * @param AbstractEndpoint $endpoint
+     *
      * @return Response
      */
     public function requestEndpoint(AbstractEndpoint $endpoint)
     {
         $cloned = clone $endpoint;
         $cloned->setType($this->getName());
+
         return $this->getIndex()->requestEndpoint($cloned);
     }
 

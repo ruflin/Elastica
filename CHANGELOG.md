@@ -1,22 +1,35 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/5.0.0...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.2.0...master)
 
 ### Backward Compatibility Breaks
 
 ### Bugfixes
 
+- Fix updating settings of an index. [#1296](https://github.com/ruflin/Elastica/pull/1296)
+
+### Added
+ - Parameter `filter_path` for response filtering (e.g. `$index->search($query, ['filter_path' => 'hits.hits._source'])`)
+### Improvements
+
+### Deprecated
+
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.1.0...5.2.0)
+
+### Bugfixes
+
 - Fix reading bool index settings like `\Elastica\Index\Settings::getBlocksWrite`. Elasticsearch returns all settings as strings and does not normalize bool values.
-  The getters now return the right bool value for whichever string representation is used like 'true', '1', 'on', 'yes'.
-- Fix for QueryBuilder version check `\Elastica\QueryBuilder\Version\Version240.php` added all new query types to queries array.
-- Do not modify the original query in `\Elastica\Search::count`.
+  The getters now return the right bool value for whichever string representation is used like 'true', '1', 'on', 'yes'. [#1251](https://github.com/ruflin/Elastica/pull/1251)
+- Fix for QueryBuilder version check `\Elastica\QueryBuilder\Version\Version240.php` added all new query types to queries array. [#1266](https://github.com/ruflin/Elastica/pull/1266) [#1269](https://github.com/ruflin/Elastica/pull/1269)
+- Do not modify the original query in `\Elastica\Search::count`. [#1276](https://github.com/ruflin/Elastica/pull/1276)
 
 ### Added
 
 - Added `\Elastica\Client::requestEndpoint`, `\Elastica\Index::requestEndpoint`, `\Elastica\Type::requestEndpoint` that allow make requests with official client Endpoint usage. [#1275](https://github.com/ruflin/Elastica/pull/1275)
 - Added `\Elastica\Aggregation\GeoBounds` that computes the bounding box containing all geo_point values for a field. [#1271](https://github.com/ruflin/Elastica/pull/1271)
-- Added `\Elastica\Query\MatchNone` the inverse of MatchAll.
+- Added `\Elastica\Query\MatchNone` the inverse of MatchAll. [#1276](https://github.com/ruflin/Elastica/pull/1276)
 
 ### Improvements
 
@@ -24,11 +37,16 @@ All notable changes to this project will be documented in this file based on the
 - added support for the "request_cache" search option [#1243](https://github.com/ruflin/Elastica/pull/1243)
 - skip sending "retry_on_conflict=0" default query param to improve compatibility with Amazon Elasticsearch [#1047](https://github.com/ruflin/Elastica/pull/1047)
 - optimized `\Elastica\Scroll` to avoid one request [#1273](https://github.com/ruflin/Elastica/pull/1273)
+- Update elasticsearch-php dependency to 5.2.0 [#1245](https://github.com/ruflin/Elastica/pull/1245)
+- Update elasticsearch testing dependency to 5.2.2 [#1245](https://github.com/ruflin/Elastica/pull/1245)
 
 ### Deprecated
 
 - Deprecated `\Elastica\Exception\ElasticsearchException` which is irrelevant since Elasticsearch now exposes the errors as a structured array instead of a single string.
   Use `\Elastica\Exception\ResponseException::getResponse::getFullError` instead.
+- Deprecated both `prefix_len` & `min_word_len` fields in `Elastica\Suggest\CandidateGenerator\DirectGenerator` as these now return errors when using the phrase suggester to querying terms.
+  Use `prefix_length` & `min_word_length` instead [#1282](https://github.com/ruflin/Elastica/pull/1282)
+  Use `\Elastica\Exception\ResponseException::getResponse::getFullError` instead. [#1251](https://github.com/ruflin/Elastica/pull/1251)
 
 ## [5.1.0](https://github.com/ruflin/Elastica/compare/5.0.0...5.1.0)
 
