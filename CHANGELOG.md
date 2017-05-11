@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 
+- Fix elastic 5.3.x deprecation warning related to Content-Type not being set.
 - Fix updating settings of an index. [#1296](https://github.com/ruflin/Elastica/pull/1296)
 
 ### Added
