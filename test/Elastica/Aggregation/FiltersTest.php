@@ -162,4 +162,31 @@ class FiltersTest extends BaseAggregationTest
         $this->assertEquals((5 + 8) / 2, $resultsForBlue['avg_price']['value']);
         $this->assertEquals(1, $resultsForRed['avg_price']['value']);
     }
+
+    /**
+     * @group unit
+     */
+    public function testOtherBucket()
+    {
+        $expected = [
+            'filters' => [
+                'filters' => [
+                    [
+                        'term' => ['color' => 'blue'],
+                    ],
+                ],
+                'other_bucket' => true,
+                'other_bucket_key' => 'other',
+            ],
+        ];
+
+        $agg = new Filters('by_color');
+
+        $agg->addFilter(new Term(['color' => 'blue']));
+
+        $agg->setOtherBucket(true);
+        $agg->setOtherBucketKey('other');
+
+        $this->assertEquals($expected, $agg->toArray());
+    }
 }

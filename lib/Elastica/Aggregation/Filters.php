@@ -59,6 +59,30 @@ class Filters extends AbstractAggregation
     }
 
     /**
+     * @param bool $other_bucket
+     *
+     * @return $this
+     */
+    public function setOtherBucket($other_bucket)
+    {
+        if (!is_bool($other_bucket)) {
+            throw new \InvalidArgumentException('other_bucket only supports boolean values');
+        }
+
+        return $this->setParam('other_bucket', $other_bucket);
+    }
+
+    /**
+     * @param string $other_bucket_key
+     *
+     * @return $this
+     */
+    public function setOtherBucketKey($other_bucket_key)
+    {
+        return $this->setParam('other_bucket_key', $other_bucket_key);
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -73,6 +97,14 @@ class Filters extends AbstractAggregation
             } else {
                 $array['filters']['filters'][] = current($filter)->toArray();
             }
+        }
+
+        if ($this->hasParam('other_bucket')) {
+            $array['filters']['other_bucket'] = $this->getParam('other_bucket');
+        }
+
+        if ($this->hasParam('other_bucket_key')) {
+            $array['filters']['other_bucket_key'] = $this->getParam('other_bucket_key');
         }
 
         if ($this->_aggs) {
