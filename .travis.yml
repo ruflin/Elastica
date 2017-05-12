@@ -13,10 +13,23 @@ env:
   - TARGET="71"
 
 before_install:
-  # Docker-compose installation
-  - curl -L https://github.com/docker/compose/releases/download/1.8.1/docker-compose-`uname -s`-`uname -m` > docker-compose
+  # list docker-engine versions, usefull to update the docker engine on travis and trusty
+  #- apt-cache madison docker-engine
+
+  # update docker engine to the desired version
+  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=1.13.1-0~ubuntu-trusty
+
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+
+  # check running "docker engine" and "docker-compose" version on travis
+  - docker --version
+  - docker-compose --version
+
+before_script:
+  - sudo sysctl -w vm.max_map_count=262144
 
 script:
   - make tests TARGET=$TARGET
