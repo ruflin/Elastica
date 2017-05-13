@@ -21,7 +21,12 @@ network.host: 0.0.0.0
 discovery.zen.minimum_master_nodes: 2
 discovery.zen.ping.unicast.hosts: ["elasticsearch"]
 
+# at the moment it's not possible to remove the x-pack plugin from the official ES docker image
+# https://github.com/elastic/elasticsearch-docker/issues/36
+# they've solved on 5.4, I will wait that version to remove the plugin correctly
+# and remove the following two lines
 xpack.security.enabled: false
+xpack.monitoring.enabled: false
 
 # Added for snapshot tests
 path.repo: ["/usr/share/elasticsearch/data"]
