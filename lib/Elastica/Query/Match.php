@@ -11,8 +11,13 @@ namespace Elastica\Query;
  */
 class Match extends AbstractQuery
 {
+    const OPERATOR_OR = 'or';
+    const OPERATOR_AND = 'and';
+
     const ZERO_TERM_NONE = 'none';
     const ZERO_TERM_ALL = 'all';
+
+    const FUZZINESS_AUTO = 'AUTO';
 
     /**
      * @param string $field
@@ -96,7 +101,7 @@ class Match extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldOperator($field, $operator)
+    public function setFieldOperator($field, $operator = self::OPERATOR_OR)
     {
         return $this->setFieldParam($field, 'operator', $operator);
     }
@@ -206,7 +211,7 @@ class Match extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldZeroTermsQuery($field, $zeroTermQuery = 'none')
+    public function setFieldZeroTermsQuery($field, $zeroTermQuery = self::ZERO_TERM_NONE)
     {
         return $this->setFieldParam($field, 'zero_terms_query', $zeroTermQuery);
     }
