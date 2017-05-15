@@ -11,8 +11,12 @@ All notable changes to this project will be documented in this file based on the
 - Fix updating settings of an index. [#1296](https://github.com/ruflin/Elastica/pull/1296)
 
 ### Added
+
  - Parameter `filter_path` for response filtering (e.g. `$index->search($query, ['filter_path' => 'hits.hits._source'])`)
+
 ### Improvements
+
+ - Added support for `other_bucket` and `other_bucket_key` paramters on `Elastica\Aggregation\Filters`
 
 ### Deprecated
 
