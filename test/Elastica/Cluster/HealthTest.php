@@ -27,6 +27,12 @@ class HealthTest extends BaseTest
             'relocating_shards' => 2,
             'initializing_shards' => 7,
             'unassigned_shards' => 5,
+            'delayed_unassigned_shards' => 4,
+            'number_of_pending_tasks' => 1,
+            'number_of_in_flight_fetch' =>  2,
+            'task_max_waiting_in_queue_millis' => 634,
+            'active_shards_percent_as_number' => 50.0,
+
             'indices' => [
                 'index_one' => [
                 ],
@@ -130,6 +136,46 @@ class HealthTest extends BaseTest
     public function testGetUnassignedShards()
     {
         $this->assertEquals(5, $this->_health->getUnassignedShards());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testGetDelayedUnassignedShards()
+    {
+        $this->assertEquals(4, $this->_health->getDelayedUnassignedShards());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testNumberOfPendingTasks()
+    {
+        $this->assertEquals(1, $this->_health->getNumberOfPendingTasks());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testNumberOfInFlightFetch()
+    {
+        $this->assertEquals(2, $this->_health->getNumberOfInFlightFetch());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testTaskMaxWaitingInQueueMillis()
+    {
+        $this->assertEquals(634, $this->_health->getTaskMaxWaitingInQueueMillis());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testActiveShardsPercentAsNumber()
+    {
+        $this->assertEquals(50, $this->_health->getActiveShardsPercentAsNumber());
     }
 
     /**

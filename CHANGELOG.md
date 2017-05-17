@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
  - Parameter `filter_path` for response filtering (e.g. `$index->search($query, ['filter_path' => 'hits.hits._source'])`)
+ - Add support for Health parameters for Cluster\Health endpoint (new prop : delayed_unassigned_shards, number_of_pending_tasks, number_of_in_flight_fetch, task_max_waiting_in_queue_millis, active_shards_percent_as_number)
 
 ### Improvements
 
