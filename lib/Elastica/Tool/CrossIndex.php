@@ -12,6 +12,8 @@ use Elastica\Type;
  * Functions to move documents and types between indices.
  *
  * @author Manuel Andreo Garcia <andreo.garcia@gmail.com>
+ *
+ * @deprecated use Reindex instead. This class will be removed in further Elastica releases.
  */
 class CrossIndex
 {
