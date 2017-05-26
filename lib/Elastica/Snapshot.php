@@ -178,6 +178,6 @@ class Snapshot
      */
     public function request($path, $method = Request::GET, $data = [], array $query = [])
     {
-        return $this->_client->request('/_snapshot/'.$path, $method, $data, $query);
+        return $this->_client->request('_snapshot/'.$path, $method, $data, $query);
     }
 }

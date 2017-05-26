@@ -18,7 +18,7 @@ class SnapshotTest extends Base
      */
     protected $_index;
 
-    protected $_snapshotPath = '/tmp/backups/';
+    protected $_snapshotPath = '/usr/share/elasticsearch/data/';
 
     /**
      * @var Document[]
@@ -27,7 +27,6 @@ class SnapshotTest extends Base
 
     protected function setUp()
     {
-        $this->markTestSkipped('Snapshot tests currently skipped because not working on Travis');
         parent::setUp();
         $this->_snapshot = new Snapshot($this->_getClient());
 
@@ -48,6 +47,7 @@ class SnapshotTest extends Base
     {
         $repositoryName = 'testrepo';
         $location = $this->_snapshotPath.'backup1';
+
 
         $response = $this->_snapshot->registerRepository($repositoryName, 'fs', ['location' => $location]);
         $this->assertTrue($response->isOk());

@@ -136,6 +136,7 @@ class Http extends AbstractTransport
                 $content = str_replace('\/', '/', $content);
             }
 
+            array_push($headers, sprintf('Content-Type: %s', $request->getContentType()));
             if ($connection->hasCompression()) {
                 // Compress the body of the request ...
                 curl_setopt($conn, CURLOPT_POSTFIELDS, gzencode($content));

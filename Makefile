@@ -10,6 +10,7 @@ endif
 
 .PHONY: clean
 clean:
+	docker-compose down -v
 	rm -r -f ./build
 	rm -r -f ./vendor
 	rm -r -f ./composer.lock
@@ -57,16 +58,16 @@ phpunit:
 tests:
 	# Rebuild image to copy changes files to the image
 	make elastica-image
-	make setup
+	make start
 	mkdir -p build
-	docker-compose run elastica make phpunit
-	docker cp elastica_elastica_run_1:/elastica/build/coverage/ $(shell pwd)/build/coverage
+	docker run --network=elastica_esnet elastica_elastica  make phpunit
+	docker cp elastica:/elastica/build/coverage/ $(shell pwd)/build/coverage
 
 # Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
 .PHONY: test
 test:
 	make elastica-image
-	make setup
+	make start
 	mkdir -p build
 	docker-compose run elastica phpunit -c test/ ${TEST}
 
@@ -93,15 +94,9 @@ phploc:
 build:
 	docker-compose build
 
-.PHONY: setup
-setup: build
-	#docker-compose scale elasticsearch=3
-	# TODO: Makes the snapshot directory writable for all instances. Nicer solution needed.
-	#docker-compose run elasticsearch chmod -R 777 /tmp/backups/
-
 .PHONY: start
 start:
-	docker-compose up
+	docker-compose up -d --build
 
 .PHONY: stop
 stop:
@@ -155,7 +150,6 @@ build-images:
 	docker build -t ruflin/elastica-dev-base -f env/elastica/Docker${TARGET} env/elastica/
 	docker build -t ruflin/elasticsearch-elastica env/elasticsearch/
 	docker build -t ruflin/nginx-elastica env/nginx/
-	docker build -t ruflin/elastica-data env/data/
 	make elastica-image
 
 # Removes all local images
@@ -165,7 +159,6 @@ clean-images:
 	-docker rmi ruflin/elasticsearch-elastica
 	-docker rmi ruflin/nginx-elastica
 	-docker rmi ruflin/elastica
-	-docker rmi ruflin/elastica-data
 
 # Pushs images as latest to the docker registry. This is normally not needed as they are directly fetched and built from Github
 .PHONY: push-images

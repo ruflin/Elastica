@@ -123,7 +123,7 @@ class Base extends \PHPUnit_Framework_TestCase
 
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_'.$name);
-        $index->create(['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 0]], $delete);
+        $index->create(['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 1]], $delete);
 
         return $index;
     }

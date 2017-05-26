@@ -170,6 +170,48 @@ class Health
     }
 
     /**
+     * get the number of delayed unassined shards
+     *
+     * @return int
+     */
+    public function getDelayedUnassignedShards()
+    {
+        return $this->_data['delayed_unassigned_shards'];
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberOfPendingTasks()
+    {
+        return $this->_data['number_of_pending_tasks'];
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberOfInFlightFetch()
+    {
+        return $this->_data['number_of_in_flight_fetch'];
+    }
+
+    /**
+     * @return int
+     */
+    public function getTaskMaxWaitingInQueueMillis()
+    {
+        return $this->_data['task_max_waiting_in_queue_millis'];
+    }
+
+    /**
+     * @return int
+     */
+    public function getActiveShardsPercentAsNumber()
+    {
+        return $this->_data['active_shards_percent_as_number'];
+    }
+
+    /**
      * Gets the status of the indices.
      *
      * @return \Elastica\Cluster\Health\Index[]
