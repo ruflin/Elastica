@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Marek Hernik <marek.hernik@ix3soft.com>
- * Date: 26.05.17
- * Time: 14:06
- */
-
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
@@ -35,6 +28,8 @@ class SpanNear extends SpanQuery
     protected $clauses = [];
 
     /**
+     * Constructs a SpanNear query object.
+     *
      * @param SpanQuery[] $clauses OPTIONAL
      * @param int $slop OPTIONAL maximum proximity
      * @param bool $inOrder OPTIONAL true if order of searched clauses is important

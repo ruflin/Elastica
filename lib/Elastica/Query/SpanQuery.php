@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Marek Hernik <marek.hernik@ix3soft.com>
- * Date: 26.05.17
- * Time: 19:26
- */
-
 namespace Elastica\Query;
 
 /**

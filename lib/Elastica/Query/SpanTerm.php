@@ -15,7 +15,7 @@ class SpanTerm extends SpanQuery
      *
      * @param string $field
      * @param string $value
-     * @param float  $boost OPTIONAL Boost value (default = 1)
+     * @param float $boost OPTIONAL Boost value (default = 1)
      */
     public function __construct($field, $value, $boost = 1.0)
     {
@@ -27,7 +27,7 @@ class SpanTerm extends SpanQuery
      *
      * @param string $field
      * @param string $value
-     * @param float  $boost
+     * @param float $boost
      *
      * @return $this
      */

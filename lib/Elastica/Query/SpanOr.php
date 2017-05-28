@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
@@ -19,6 +18,8 @@ class SpanOr extends SpanQuery
     protected $clauses = [];
 
     /**
+     * Constructs a SpanOr query object.
+     *
      * @param SpanQuery[] $clauses OPTIONAL
      */
     public function __construct(array $clauses = [])
