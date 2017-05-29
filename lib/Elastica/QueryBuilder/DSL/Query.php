@@ -26,6 +26,10 @@ use Elastica\Query\QueryString;
 use Elastica\Query\Range;
 use Elastica\Query\Regexp;
 use Elastica\Query\SimpleQueryString;
+use Elastica\Query\SpanMulti;
+use Elastica\Query\SpanNear;
+use Elastica\Query\SpanOr;
+use Elastica\Query\SpanTerm;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
 use Elastica\Query\Type;
@@ -365,17 +369,23 @@ class Query implements DSL
      */
     public function span_multi_term()
     {
-        throw new NotImplementedException();
+        return new SpanMulti();
     }
 
     /**
      * span near query.
      *
+     * @param array $clauses
+     * @param int $slop
+     * @param bool $inOrder
+     *
+     * @return SpanNear
+     *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-near-query.html
      */
-    public function span_near()
+    public function span_near($clauses = [], $slop = 1, $inOrder = false)
     {
-        throw new NotImplementedException();
+        return new SpanNear($clauses, $slop, $inOrder);
     }
 
     /**
@@ -389,23 +399,33 @@ class Query implements DSL
     }
 
     /**
-     * span or query.
+     * span_or query.
+     *
+     * @param array $clauses
+     *
+     * @return SpanOr
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-or-query.html
      */
-    public function span_or()
+    public function span_or($clauses = [])
     {
-        throw new NotImplementedException();
+        return new SpanOr($clauses);
     }
 
     /**
-     * span term query.
+     * span_term query.
+     *
+     * @param string $key
+     * @param string $value
+     * @param float $boost
+     *
+     * @return SpanTerm
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
      */
-    public function span_term()
+    public function span_term($key = '', $value = null, $boost = 1.0)
     {
-        throw new NotImplementedException();
+        return new SpanTerm($key, $value, $boost);
     }
 
     /**
