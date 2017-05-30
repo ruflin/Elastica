@@ -119,6 +119,30 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
+    public function testGetSetHasRefresh()
+    {
+        $document = new Document();
+        $this->assertFalse($document->hasRefresh());
+
+        try {
+            $document->getRefresh();
+            $this->fail('Undefined refresh option should throw exception');
+        } catch (InvalidException $e) {
+            $this->assertTrue(true);
+        }
+
+        $document->setRefresh(false);
+        $this->assertTrue($document->hasRefresh());
+        $this->assertFalse($document->getRefresh());
+
+        $document->setRefresh(true);
+        $this->assertTrue($document->hasRefresh());
+        $this->assertTrue($document->getRefresh());
+    }
+
+    /**
+     * @group unit
+     */
     public function testGetOptions()
     {
         $document = new Document();

@@ -327,7 +327,7 @@ class AbstractUpdateAction extends Param
      */
     public function setRefresh($refresh = true)
     {
-        return $this->setParam('_refresh', (bool) $refresh);
+        return $this->setParam('_refresh', (bool) $refresh ? 'true' : 'false');
     }
 
     /**
@@ -335,7 +335,7 @@ class AbstractUpdateAction extends Param
      */
     public function getRefresh()
     {
-        return $this->getParam('_refresh');
+        return 'true' === $this->getParam('_refresh');
     }
 
     /**
