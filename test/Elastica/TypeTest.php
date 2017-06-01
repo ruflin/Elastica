@@ -266,27 +266,6 @@ class TypeTest extends BaseTest
             $this->assertTrue(true);
         }
 
-        try {
-            $type->deleteById('*');
-            $this->fail('Delete request should fail because of invalid id: *');
-        } catch (NotFoundException $e) {
-            $this->assertTrue(true);
-        }
-
-        try {
-            $type->deleteById('*:*');
-            $this->fail('Delete request should fail because document with id *.* does not exist');
-        } catch (NotFoundException $e) {
-            $this->assertTrue(true);
-        }
-
-        try {
-            $type->deleteById('!');
-            $this->fail('Delete request should fail because document with id ! does not exist');
-        } catch (NotFoundException $e) {
-            $this->assertTrue(true);
-        }
-
         $index->refresh();
 
         // rolf should no longer be there
