@@ -20,7 +20,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 
- - Added support for `other_bucket` and `other_bucket_key` paramters on `Elastica\Aggregation\Filters`
+ - Added support for `other_bucket` and `other_bucket_key` parameters on `Elastica\Aggregation\Filters`
+ - Removed NotFoundException thrown in `\Elastica\Type::deleteById` [#565](https://github.com/ruflin/Elastica/issues/565)
 
 ### Deprecated
  - Deprecated `Tool\CrossIndex` use `\Elastica\Reindex` instead [#1311](https://github.com/ruflin/Elastica/issues/1311)
