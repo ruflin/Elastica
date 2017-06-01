@@ -58,6 +58,11 @@ class ActionException extends BulkException
         if (isset($data['_id'])) {
             $path .= '/'.$data['_id'];
         }
+
+        if (is_array($error)) {
+            $error = print_r($error, true);
+        }
+
         $message = "$opType: $path caused $error";
 
         return $message;
