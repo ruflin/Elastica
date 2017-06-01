@@ -4,37 +4,55 @@ namespace Elastica\Query;
 use Elastica\Exception\InvalidException;
 
 /**
- * SpanMulti query.
+ * SpanFirst query.
  *
- * @author Marek Hernik <marek.hernik@gmail.com>
  * @author Alessandro Chitolina <alekitto@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
  */
-class SpanMulti extends AbstractSpanQuery
+class SpanFirst extends AbstractSpanQuery
 {
     /**
-     * Constructs a SpanMulti query object.
+     * Constructs a SpanFirst query object.
      *
      * @param \Elastica\Query\AbstractQuery|array $match OPTIONAL
+     * @param int $end OPTIONAL
      */
-    public function __construct($match = null)
+    public function __construct($match = null, $end = null)
     {
         if (null !== $match) {
             $this->setMatch($match);
+        }
+
+        if (null !== $end) {
+            $this->setEnd($end);
         }
     }
 
     /**
      * Set the query to be wrapped into the span multi query.
      *
-     * @param \Elastica\Query\AbstractQuery|array $args Matching query
+     * @param \Elastica\Query\AbstractSpanQuery|array $args Matching query
      *
      * @return $this
      */
     public function setMatch($args)
     {
         return $this->_addQuery('match', $args);
+    }
+
+    /**
+     * Set the maximum end position for the match query.
+     *
+     * @param int $end
+     *
+     * @return $this
+     */
+    public function setEnd($end)
+    {
+        $this->setParam('end', $end);
+
+        return $this;
     }
 
     /**
@@ -49,8 +67,8 @@ class SpanMulti extends AbstractSpanQuery
      */
     protected function _addQuery($type, $args)
     {
-        if (!is_array($args) && !($args instanceof AbstractQuery)) {
-            throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
+        if (!is_array($args) && !($args instanceof AbstractSpanQuery)) {
+            throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractSpanQuery');
         }
 
         return $this->setParam($type, $args);

@@ -14,15 +14,6 @@ class SpanMultiTest extends BaseTest
 {
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testConstructWrongTypeInvalid()
-    {
-        $spanMultiQuery = new SpanMulti(new Term());
-    }
-
-    /**
-     * @group unit
      */
     public function testConstructValid()
     {

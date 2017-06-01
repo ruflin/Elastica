@@ -26,8 +26,8 @@ class SpanOrTest extends BaseTest
     public function testConstructValid()
     {
         $field = 'name';
-        $spanTermQuery1 = new SpanTerm($field, 'marek', 1.5);
-        $spanTermQuery2 = new SpanTerm($field, 'nicolas');
+        $spanTermQuery1 = new SpanTerm([$field => ['value' => 'marek', 'boost' => 1.5]]);
+        $spanTermQuery2 = new SpanTerm([$field => 'nicolas']);
 
         $spanOrQuery = new SpanOr([$spanTermQuery1, $spanTermQuery2]);
 
@@ -44,10 +44,7 @@ class SpanOrTest extends BaseTest
                     ],
                     [
                         'span_term' => [
-                            'name' => [
-                                'value' => 'nicolas',
-                                'boost' => 1,
-                            ],
+                            'name' => 'nicolas',
                         ],
                     ],
 
@@ -79,15 +76,15 @@ class SpanOrTest extends BaseTest
         $index->refresh();
 
         //all 3 docs match
-        $spanTermQuery1 = new SpanTerm($field, 'lorem');
-        $spanTermQuery2 = new SpanTerm($field, 'ipsum');
+        $spanTermQuery1 = new SpanTerm([$field => 'lorem']);
+        $spanTermQuery2 = new SpanTerm([$field => 'ipsum']);
         $spanOrQuery = new SpanOr([$spanTermQuery1, $spanTermQuery2]);
         $resultSet = $type->search($spanOrQuery);
         $this->assertEquals(3, $resultSet->count());
 
         //only 1 match hit
-        $spanTermQuery1 = new SpanTerm($field, 'amet');
-        $spanTermQuery2 = new SpanTerm($field, 'sit');
+        $spanTermQuery1 = new SpanTerm([$field => 'amet']);
+        $spanTermQuery2 = new SpanTerm([$field => 'sit']);
         $spanOrQuery = new SpanOr([$spanTermQuery1, $spanTermQuery2]);
         $resultSet = $type->search($spanOrQuery);
         $this->assertEquals(1, $resultSet->count());

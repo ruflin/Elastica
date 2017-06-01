@@ -2,7 +2,6 @@
 namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Exception\NotImplementedException;
-use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Boosting;
 use Elastica\Query\Common;
@@ -27,6 +26,7 @@ use Elastica\Query\QueryString;
 use Elastica\Query\Range;
 use Elastica\Query\Regexp;
 use Elastica\Query\SimpleQueryString;
+use Elastica\Query\SpanFirst;
 use Elastica\Query\SpanMulti;
 use Elastica\Query\SpanNear;
 use Elastica\Query\SpanOr;
@@ -356,23 +356,28 @@ class Query implements DSL
     /**
      * span first query.
      *
+     * @param \Elastica\Query\AbstractQuery|array $match
+     * @param int $end
+     *
+     * @return SpanFirst
+     *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
      */
-    public function span_first()
+    public function span_first($match = null, $end = null)
     {
-        throw new NotImplementedException();
+        return new SpanFirst($match, $end);
     }
 
     /**
      * span multi term query.
      *
-     * @param AbstractQuery $match
+     * @param \Elastica\Query\AbstractQuery|array $match
      *
      * @return SpanMulti
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html
      */
-    public function span_multi_term(AbstractQuery $match = null)
+    public function span_multi_term($match = null)
     {
         return new SpanMulti($match);
     }
@@ -420,17 +425,15 @@ class Query implements DSL
     /**
      * span_term query.
      *
-     * @param string $field
-     * @param string $value
-     * @param float $boost OPTIONAL
+     * @param array $term
      *
      * @return SpanTerm
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
      */
-    public function span_term($field, $value, $boost = 1.0)
+    public function span_term(array $term = [])
     {
-        return new SpanTerm($field, $value, $boost);
+        return new SpanTerm($term);
     }
 
     /**

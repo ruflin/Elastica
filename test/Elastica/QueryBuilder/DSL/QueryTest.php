@@ -69,13 +69,13 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'exists', Query\Exists::class, ['field']);
         $this->_assertImplemented($queryDSL, 'type', Query\Type::class, []);
         $this->_assertImplemented($queryDSL, 'type', Query\Type::class, ['type']);
-        $this->_assertImplemented($queryDSL, 'span_term', Query\SpanTerm::class, ['field', 'value', 1.0]);
+        $this->_assertImplemented($queryDSL, 'span_term', Query\SpanTerm::class, []);
         $this->_assertImplemented($queryDSL, 'span_multi_term', Query\SpanMulti::class, []);
         $this->_assertImplemented($queryDSL, 'span_near', Query\SpanNear::class, []);
         $this->_assertImplemented($queryDSL, 'span_or', Query\SpanOr::class, []);
+        $this->_assertImplemented($queryDSL, 'span_first', Query\SpanFirst::class, []);
 
         $this->_assertNotImplemented($queryDSL, 'geo_shape', []);
-        $this->_assertNotImplemented($queryDSL, 'span_first', []);
         $this->_assertNotImplemented($queryDSL, 'span_not', []);
 
     }
