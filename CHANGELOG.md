@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file based on the
  - Add support for querystring in Type. this allow to use `update_all_types` in type mapping in order to resolve conflicts between fields in different types. [Conflicts between fields in different types](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-put-mapping.html#merging-conflicts) 
  - Added `\Elastica\Query\ParentId` to avoid join with parent documents [#1287](https://github.com/ruflin/Elastica/issues/1287)
  - Added `\Elastica\Reindex` for reindexing between indices [#1311](https://github.com/ruflin/Elastica/issues/1311)
- - Added `\Elastica\Span` for proximity searches [#304](https://github.com/ruflin/Elastica/issues/304)
+ - Added `\Elastica\Query\Span*` for proximity searches [#304](https://github.com/ruflin/Elastica/issues/304)
 
 ### Improvements
 
