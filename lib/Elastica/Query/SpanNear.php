@@ -13,21 +13,6 @@ use Elastica\Exception\InvalidException;
 class SpanNear extends SpanQuery
 {
     /**
-     * @var int
-     */
-    protected $slop;
-
-    /**
-     * @var bool
-     */
-    protected $inOrder = false;
-
-    /**
-     * @var SpanQuery[]
-     */
-    protected $clauses = [];
-
-    /**
      * Constructs a SpanNear query object.
      *
      * @param SpanQuery[] $clauses OPTIONAL

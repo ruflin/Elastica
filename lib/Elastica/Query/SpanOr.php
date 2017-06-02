@@ -13,11 +13,6 @@ use Elastica\Exception\InvalidException;
 class SpanOr extends SpanQuery
 {
     /**
-     * @var SpanQuery[]
-     */
-    protected $clauses = [];
-
-    /**
      * Constructs a SpanOr query object.
      *
      * @param SpanQuery[] $clauses OPTIONAL
