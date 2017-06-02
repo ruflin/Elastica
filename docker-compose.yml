@@ -16,7 +16,7 @@ services:
     privileged: true
     environment:
       - bootstrap.memory_lock=true
-      - network.host=172.33.0.4
+      - network.host=172.18.0.4
       - xpack.security.enabled=false
       - xpack.monitoring.enabled=false
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -37,13 +37,13 @@ services:
       - 9200:9200
     networks:
       esnet:
-        ipv4_address: 172.33.0.4
+        ipv4_address: 172.18.0.4
   elasticsearch2:
     build: ./env/elasticsearch/
     privileged: true
     environment:
       - bootstrap.memory_lock=true
-      - network.host=172.33.0.3
+      - network.host=172.18.0.3
       - xpack.security.enabled=false
       - xpack.monitoring.enabled=false
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -62,13 +62,13 @@ services:
       - esdata1:/usr/share/elasticsearch/data
     networks:
       esnet:
-        ipv4_address: 172.33.0.3
+        ipv4_address: 172.18.0.3
 
   nginx:
     build: ./env/nginx/
     networks:
       esnet:
-        ipv4_address: 172.33.0.5
+        ipv4_address: 172.18.0.5
 
 
 volumes:
@@ -80,5 +80,5 @@ networks:
     driver: bridge
     ipam:
      config:
-       - subnet: 172.33.0.0/16
-         gateway: 172.33.0.1
+       - subnet: 172.18.0.0/16
+         gateway: 172.18.0.1
