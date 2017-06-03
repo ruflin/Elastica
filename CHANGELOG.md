@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 
  - Added support for `other_bucket` and `other_bucket_key` paramters on `Elastica\Aggregation\Filters`
+ - Update elasticsearch testing dependency to 5.4.1
 
 ### Deprecated
 
