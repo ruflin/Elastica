@@ -15,6 +15,8 @@ class Request extends Param
     const PUT = 'PUT';
     const GET = 'GET';
     const DELETE = 'DELETE';
+    const DEFAULT_CONTENT_TYPE = 'application/json';
+    const NDJSON_CONTENT_TYPE = 'application/x-ndjson';
 
     /**
      * @var \Elastica\Connection
@@ -29,10 +31,11 @@ class Request extends Param
      * @param array      $data       OPTIONAL Data array
      * @param array      $query      OPTIONAL Query params
      * @param Connection $connection
+     * @param string     $contentType Content-Type sent with this request
      *
      * @return \Elastica\Request OPTIONAL Connection object
      */
-    public function __construct($path, $method = self::GET, $data = [], array $query = [], Connection $connection = null)
+    public function __construct($path, $method = self::GET, $data = [], array $query = [], Connection $connection = null, $contentType = self::DEFAULT_CONTENT_TYPE )
     {
         $this->setPath($path);
         $this->setMethod($method);
@@ -42,6 +45,7 @@ class Request extends Param
         if ($connection) {
             $this->setConnection($connection);
         }
+        $this->setContentType($contentType);
     }
 
     /**
@@ -156,6 +160,23 @@ class Request extends Param
         }
 
         return $this->_connection;
+    }
+
+    /**
+     * Set the Content-Type of this request
+     * @param string $contentType
+     */
+    public function setContentType($contentType)
+    {
+        return $this->setParam('contentType', $contentType);
+    }
+
+    /**
+     * Get the Content-Type of this request
+     */
+    public function getContentType()
+    {
+        return $this->getParam('contentType');
     }
 
     /**

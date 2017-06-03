@@ -59,27 +59,27 @@ class Filters extends AbstractAggregation
     }
 
     /**
-     * @param bool $other_bucket
+     * @param bool $otherBucket
      *
      * @return $this
      */
-    public function setOtherBucket($other_bucket)
+    public function setOtherBucket($otherBucket)
     {
-        if (!is_bool($other_bucket)) {
+        if (!is_bool($otherBucket)) {
             throw new \InvalidArgumentException('other_bucket only supports boolean values');
         }
 
-        return $this->setParam('other_bucket', $other_bucket);
+        return $this->setParam('other_bucket', $otherBucket);
     }
 
     /**
-     * @param string $other_bucket_key
+     * @param string $otherBucketKey
      *
      * @return $this
      */
-    public function setOtherBucketKey($other_bucket_key)
+    public function setOtherBucketKey($otherBucketKey)
     {
-        return $this->setParam('other_bucket_key', $other_bucket_key);
+        return $this->setParam('other_bucket_key', $otherBucketKey);
     }
 
     /**

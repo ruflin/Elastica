@@ -354,7 +354,7 @@ class Bulk
         $path = $this->getPath();
         $data = $this->toString();
 
-        $response = $this->_client->request($path, Request::POST, $data, $this->_requestParams);
+        $response = $this->_client->request($path, Request::POST, $data, $this->_requestParams, Request::NDJSON_CONTENT_TYPE);
 
         return $this->_processResponse($response);
     }

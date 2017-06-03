@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
 	graphviz \
 	nano \
 	php5-xsl \
+	libpcre3-dev \
 	zlib1g-dev
 	# XSL and Graphviz for PhpDocumentor
 

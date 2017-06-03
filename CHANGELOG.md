@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 
+- Fix elastic 5.3.x deprecation warning related to Content-Type not being set.
 - Fix updating settings of an index. [#1296](https://github.com/ruflin/Elastica/pull/1296)
 - Remove `Elastica\Search::OPTION_SEARCH_TYPE_DFS_QUERY_AND_FETCH` and `Elastica\Search::OPTION_SEARCH_TYPE_QUERY_AND_FETCH` as no longer supported as of 5.3.0
 
@@ -15,6 +16,8 @@ All notable changes to this project will be documented in this file based on the
  - Parameter `filter_path` for response filtering (e.g. `$index->search($query, ['filter_path' => 'hits.hits._source'])`)
 
 ### Improvements
+
+ - Added support for `other_bucket` and `other_bucket_key` paramters on `Elastica\Aggregation\Filters`
 
 ### Deprecated
 

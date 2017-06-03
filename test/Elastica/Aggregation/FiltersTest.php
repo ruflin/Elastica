@@ -136,6 +136,33 @@ class FiltersTest extends BaseAggregationTest
     }
 
     /**
+     * @group unit
+     */
+    public function testToArrayUsingOtherBucket()
+    {
+        $expected = [
+            'filters' => [
+                'filters' => [
+                    [
+                        'term' => ['color' => 'blue'],
+                    ],
+                ],
+                'other_bucket' => true,
+                'other_bucket_key' => 'other',
+            ],
+        ];
+
+        $agg = new Filters('by_color');
+
+        $agg->addFilter(new Term(['color' => 'blue']));
+
+        $agg->setOtherBucket(true);
+        $agg->setOtherBucketKey('other');
+
+        $this->assertEquals($expected, $agg->toArray());
+    }
+
+    /**
      * @group functional
      */
     public function testFilterAggregation()
@@ -164,29 +191,59 @@ class FiltersTest extends BaseAggregationTest
     }
 
     /**
-     * @group unit
+     * @group functional
      */
-    public function testOtherBucket()
+    public function testSetOtherBucket()
     {
-        $expected = [
-            'filters' => [
-                'filters' => [
-                    [
-                        'term' => ['color' => 'blue'],
-                    ],
-                ],
-                'other_bucket' => true,
-                'other_bucket_key' => 'other',
-            ],
-        ];
-
         $agg = new Filters('by_color');
-
-        $agg->addFilter(new Term(['color' => 'blue']));
-
+        $agg->addFilter(new Term(['color' => 'red']), 'red');
         $agg->setOtherBucket(true);
-        $agg->setOtherBucketKey('other');
 
-        $this->assertEquals($expected, $agg->toArray());
+        $avg = new Avg('avg_price');
+        $avg->setField('price');
+        $agg->addAggregation($avg);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('by_color');
+
+        $resultsForRed = $results['buckets']['red'];
+        $resultsForOtherBucket = $results['buckets']['_other_'];
+
+        $this->assertEquals(1, $resultsForRed['doc_count']);
+        $this->assertEquals(3, $resultsForOtherBucket['doc_count']);
+
+        $this->assertEquals(1, $resultsForRed['avg_price']['value']);
+        $this->assertEquals((5 + 8 + 3) / 3, $resultsForOtherBucket['avg_price']['value']);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testSetOtherBucketKey()
+    {
+        $agg = new Filters('by_color');
+        $agg->addFilter(new Term(['color' => 'red']), 'red');
+        $agg->setOtherBucket(true);
+        $agg->setOtherBucketKey('other_colors');
+
+        $avg = new Avg('avg_price');
+        $avg->setField('price');
+        $agg->addAggregation($avg);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('by_color');
+
+        $resultsForRed = $results['buckets']['red'];
+        $resultsForOtherBucket = $results['buckets']['other_colors'];
+
+        $this->assertEquals(1, $resultsForRed['doc_count']);
+        $this->assertEquals(3, $resultsForOtherBucket['doc_count']);
+
+        $this->assertEquals(1, $resultsForRed['avg_price']['value']);
+        $this->assertEquals((5 + 8 + 3) / 3, $resultsForOtherBucket['avg_price']['value']);
     }
 }
