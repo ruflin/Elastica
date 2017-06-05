@@ -10,18 +10,18 @@ use Elastica\Exception\InvalidException;
  *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
  */
-class SpanOr extends SpanQuery
+class SpanOr extends AbstractSpanQuery
 {
     /**
      * Constructs a SpanOr query object.
      *
-     * @param SpanQuery[] $clauses OPTIONAL
+     * @param AbstractSpanQuery[] $clauses OPTIONAL
      */
-    public function __construct(array $clauses = [])
+    public function __construct($clauses = [])
     {
         if (!empty($clauses)) {
             foreach ($clauses as $clause) {
-                if (!is_subclass_of($clause, SpanQuery::class)) {
+                if (!is_subclass_of($clause, AbstractSpanQuery::class)) {
                     throw new InvalidException(
                         'Invalid parameter. Has to be array or instance of Elastica\Query\SpanQuery'
                     );
@@ -34,7 +34,7 @@ class SpanOr extends SpanQuery
     /**
      * Add clause part to query.
      *
-     * @param SpanQuery $clause
+     * @param AbstractSpanQuery $clause
      *
      * @throws InvalidException If not valid query
      *
@@ -42,7 +42,7 @@ class SpanOr extends SpanQuery
      */
     public function addClause($clause)
     {
-        if (!is_subclass_of($clause, SpanQuery::class)) {
+        if (!is_subclass_of($clause, AbstractSpanQuery::class)) {
             throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\SpanQuery');
         }
 

@@ -7,40 +7,52 @@ use Elastica\Exception\InvalidException;
  * SpanMulti query.
  *
  * @author Marek Hernik <marek.hernik@gmail.com>
+ * @author Alessandro Chitolina <alekitto@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-near-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html
  */
-class SpanMulti extends SpanQuery
+class SpanMulti extends AbstractSpanQuery
 {
     /**
      * Constructs a SpanMulti query object.
      *
-     * @param AbstractQuery $match OPTIONAL
+     * @param \Elastica\Query\AbstractQuery|array $match OPTIONAL
      */
-    public function __construct(AbstractQuery $match = null)
+    public function __construct($match = null)
     {
-        if ($match) {
+        if (null !== $match) {
             $this->setMatch($match);
         }
     }
 
     /**
-     * Set match part to query.
+     * Set the query to be wrapped into the span multi query.
      *
-     * @param AbstractQuery $match
-     *
-     * @throws InvalidException
+     * @param \Elastica\Query\AbstractQuery|array $args Matching query
      *
      * @return $this
      */
-    public function setMatch(AbstractQuery $match)
+    public function setMatch($args)
     {
-        if (!in_array(get_class($match), [Wildcard::class, Fuzzy::class, Prefix::class, Regexp::class])) {
-            throw new InvalidException(
-                'Invalid parameter. Has to be instance of WildcardQuery or FuzzyQuery or PrefixQuery od RegexpQuery'
-            );
+        return $this->_setQuery('match', $args);
+    }
+
+    /**
+     * Sets a query to the current object.
+     *
+     * @param string                              $type Query type
+     * @param \Elastica\Query\AbstractQuery|array $args Query
+     *
+     * @throws \Elastica\Exception\InvalidException If not valid query
+     *
+     * @return $this
+     */
+    protected function _setQuery($type, $args)
+    {
+        if (!is_array($args) && !($args instanceof AbstractQuery)) {
+            throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
         }
 
-        return $this->setParams(['match' => $match]);
+        return $this->setParam($type, $args);
     }
 }

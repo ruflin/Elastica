@@ -26,8 +26,8 @@ class SpanNearTest extends BaseTest
     public function testConstructValid()
     {
         $field = 'name';
-        $spanTermQuery1 = new SpanTerm($field, 'marek', 1.5);
-        $spanTermQuery2 = new SpanTerm($field, 'nicolas');
+        $spanTermQuery1 = new SpanTerm([$field => ['value' => 'marek', 'boost' => 1.5]]);
+        $spanTermQuery2 = new SpanTerm([$field => 'nicolas']);
 
         $spanNearQuery = new SpanNear([$spanTermQuery1, $spanTermQuery2], 5, true);
 
@@ -44,10 +44,7 @@ class SpanNearTest extends BaseTest
                     ],
                     [
                         'span_term' => [
-                            'name' => [
-                                'value' => 'nicolas',
-                                'boost' => 1,
-                            ],
+                            'name' => 'nicolas',
                         ],
                     ],
 
@@ -76,8 +73,8 @@ class SpanNearTest extends BaseTest
         $type->addDocument($doc);
         $index->refresh();
 
-        $spanTermQuery1 = new SpanTerm($field, 'adipiscing');
-        $spanTermQuery2 = new SpanTerm($field, 'lorem');
+        $spanTermQuery1 = new SpanTerm([$field => 'adipiscing']);
+        $spanTermQuery2 = new SpanTerm([$field => 'lorem']);
 
         //slop range 4 won't match
         $spanNearQuery = new SpanNear([$spanTermQuery1, $spanTermQuery2], 4);
@@ -94,7 +91,7 @@ class SpanNearTest extends BaseTest
         $resultSet = $type->search($spanNearQuery);
         $this->assertEquals(0, $resultSet->count());
 
-        $spanNearQuery->addClause(new SpanTerm($field, 'consectetur'));
+        $spanNearQuery->addClause(new SpanTerm([$field => 'consectetur']));
         $spanNearQuery->setInOrder(false);
         $resultSet = $type->search($spanNearQuery);
         $this->assertEquals(1, $resultSet->count());

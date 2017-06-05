@@ -26,6 +26,7 @@ use Elastica\Query\QueryString;
 use Elastica\Query\Range;
 use Elastica\Query\Regexp;
 use Elastica\Query\SimpleQueryString;
+use Elastica\Query\SpanFirst;
 use Elastica\Query\SpanMulti;
 use Elastica\Query\SpanNear;
 use Elastica\Query\SpanOr;
@@ -355,21 +356,30 @@ class Query implements DSL
     /**
      * span first query.
      *
+     * @param \Elastica\Query\AbstractQuery|array $match
+     * @param int $end
+     *
+     * @return SpanFirst
+     *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
      */
-    public function span_first()
+    public function span_first($match = null, $end = null)
     {
-        throw new NotImplementedException();
+        return new SpanFirst($match, $end);
     }
 
     /**
      * span multi term query.
      *
+     * @param \Elastica\Query\AbstractQuery|array $match
+     *
+     * @return SpanMulti
+     *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html
      */
-    public function span_multi_term()
+    public function span_multi_term($match = null)
     {
-        return new SpanMulti();
+        return new SpanMulti($match);
     }
 
     /**
@@ -415,17 +425,15 @@ class Query implements DSL
     /**
      * span_term query.
      *
-     * @param string $key
-     * @param string $value
-     * @param float $boost
+     * @param array $term
      *
      * @return SpanTerm
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
      */
-    public function span_term($key = '', $value = null, $boost = 1.0)
+    public function span_term(array $term = [])
     {
-        return new SpanTerm($key, $value, $boost);
+        return new SpanTerm($term);
     }
 
     /**

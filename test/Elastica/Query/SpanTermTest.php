@@ -14,14 +14,11 @@ class SpanTermTest extends BaseTest
     {
         $field = 'name';
         $value = 'marek';
-        $query = new SpanTerm($field, $value);
+        $query = new SpanTerm([$field => $value]);
 
         $expectedArray = [
             'span_term' => [
-                $field => [
-                    'value' => $value,
-                    'boost' => 1.0
-                ],
+                $field => $value,
             ],
         ];
 
@@ -47,7 +44,7 @@ class SpanTermTest extends BaseTest
         $type->addDocuments([$doc1, $doc2]);
         $index->refresh();
 
-        $query = new SpanTerm($field, $value);
+        $query = new SpanTerm([$field => $value]);
         $resultSet = $type->search($query);
         $results = $resultSet->getResults();
         $hitData = reset($results)->getData();
