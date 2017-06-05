@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file based on the
 
 - Fix elastic 5.3.x deprecation warning related to Content-Type not being set.
 - Fix updating settings of an index. [#1296](https://github.com/ruflin/Elastica/pull/1296)
+- Fix bad parameter value to refresh document [#1318](https://github.com/rufli/Elastica/pull/1318)
 
 ### Added
  - Added `\Elastica\Query\Span*` for proximity searches [#304](https://github.com/ruflin/Elastica/issues/304)
