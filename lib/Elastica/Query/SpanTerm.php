@@ -8,7 +8,7 @@ namespace Elastica\Query;
  *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
  */
-class SpanTerm extends SpanQuery
+class SpanTerm extends AbstractSpanQuery
 {
     /**
      * Constructs the SpanTerm query object.

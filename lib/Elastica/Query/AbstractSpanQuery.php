@@ -2,13 +2,13 @@
 namespace Elastica\Query;
 
 /**
- * Span query.
+ * Abstract span query. Should be extended by all span query types.
  *
  * @author Marek Hernik <marek.hernik@gmail.com>
  *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/span-queries.html
  */
-class SpanQuery extends AbstractQuery
+abstract class AbstractSpanQuery extends AbstractQuery
 {
 
 }

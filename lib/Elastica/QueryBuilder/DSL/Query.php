@@ -2,6 +2,7 @@
 namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Exception\NotImplementedException;
+use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Boosting;
 use Elastica\Query\Common;
@@ -365,11 +366,15 @@ class Query implements DSL
     /**
      * span multi term query.
      *
+     * @param AbstractQuery $match
+     *
+     * @return SpanMulti
+     *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html
      */
-    public function span_multi_term()
+    public function span_multi_term(AbstractQuery $match = null)
     {
-        return new SpanMulti();
+        return new SpanMulti($match);
     }
 
     /**
@@ -415,17 +420,17 @@ class Query implements DSL
     /**
      * span_term query.
      *
-     * @param string $key
+     * @param string $field
      * @param string $value
-     * @param float $boost
+     * @param float $boost OPTIONAL
      *
      * @return SpanTerm
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
      */
-    public function span_term($key = '', $value = null, $boost = 1.0)
+    public function span_term($field, $value, $boost = 1.0)
     {
-        return new SpanTerm($key, $value, $boost);
+        return new SpanTerm($field, $value, $boost);
     }
 
     /**
