@@ -15,7 +15,7 @@ class Request extends Param
     const PUT = 'PUT';
     const GET = 'GET';
     const DELETE = 'DELETE';
-    const DEFAULT_CONTENT_TYPE = 'application/json';
+    const DEFAULT_CONTENT_TYPE = 'text/plain';
     const NDJSON_CONTENT_TYPE = 'application/x-ndjson';
 
     /**
