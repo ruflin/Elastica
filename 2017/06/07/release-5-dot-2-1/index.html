@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>404 - Elastica</title>
+  <title>Release 5.2.1 - Elastica</title>
   <meta name="author" content="ruflin">
 
   
-  <meta name="description" content=" 404 Tweet Recent Posts Release 5.2.1 Release 5.2.0 Release 5.1.0 Release 5.0.0 Release 5.0.0-beta1 Google+ ">
+  <meta name="description" content="Elastica 5.2.1 (download). This release is compatible with Elasticsearch 5.x and was tested with elasticsearch 5.2.2. Bugfixes Fix elastic 5.3.x &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Elastica.io/404.html">
+  <link rel="canonical" href="http://Elastica.io/2017/06/07/release-5-dot-2-1">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
@@ -80,32 +80,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">404</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-20T22:09:00+02:00" pubdate data-updated="true"></time></p>
-  </header>
-  
-  
-
-  
-    <footer>
+    
+      <h1 class="entry-title">Release 5.2.1</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -117,21 +100,94 @@
   
 
 
-<time datetime="2013-05-20T22:09:00+02:00" pubdate data-updated="true"></time>
+<time datetime="2017-06-07T14:59:05+02:00" pubdate data-updated="true"></time>
         
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="https://github.com/ruflin/Elastica/tree/5.2.1">Elastica 5.2.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.2.1">download</a>).</p>
+
+<p>This release is compatible with Elasticsearch 5.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.2/release-notes-5.2.2.html">elasticsearch 5.2.2</a>.</p>
+
+<h2>Bugfixes</h2>
+
+<ul>
+<li>Fix elastic 5.3.x deprecation warning related to Content-Type not being set.</li>
+<li>Fix updating settings of an index. <a href="https://github.com/ruflin/Elastica/pull/1296">#1296</a></li>
+<li>Fix bad parameter value to refresh document <a href="https://github.com/rufli/Elastica/pull/1318">#1318</a></li>
+</ul>
+
+
+<h2>Added</h2>
+
+<ul>
+<li>Parameter <code>filter_path</code> for response filtering (e.g. <code>$index-&gt;search($query, ['filter_path' =&gt; 'hits.hits._source'])</code>)</li>
+<li>Add support for Health parameters for Cluster\Health endpoint (new prop : delayed_unassigned_shards, number_of_pending_tasks, number_of_in_flight_fetch, task_max_waiting_in_queue_millis, active_shards_percent_as_number)</li>
+<li>Add support for querystring in Type. this allow to use <code>update_all_types</code> in type mapping in order to resolve conflicts between fields in different types. <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-put-mapping.html#merging-conflicts">Conflicts between fields in different types</a></li>
+<li>Added <code>\Elastica\Query\ParentId</code> to avoid join with parent documents <a href="https://github.com/ruflin/Elastica/issues/1287">#1287</a></li>
+<li>Added <code>\Elastica\Reindex</code> for reindexing between indices <a href="https://github.com/ruflin/Elastica/issues/1311">#1311</a></li>
+</ul>
+
+
+<h2>Improvements</h2>
+
+<ul>
+<li>Added support for <code>other_bucket</code> and <code>other_bucket_key</code> paramters on <code>Elastica\Aggregation\Filters</code></li>
+</ul>
+
+
+<h2>Deprecated</h2>
+
+<ul>
+<li>Deprecated <code>Tool\CrossIndex</code> use <code>\Elastica\Reindex</code> instead <a href="https://github.com/ruflin/Elastica/issues/1311">#1311</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/404.html" data-via="" data-counturl="http://Elastica.io/404.html" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="http://github.com/ruflin">ruflin</a></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-06-07T14:59:05+02:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/2017/06/07/release-5-dot-2-1/" data-via="" data-counturl="http://Elastica.io/2017/06/07/release-5-dot-2-1/" >Tweet</a>
   
   
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/2017/04/13/release-5-dot-2-0/" title="Previous Post: Release 5.2.0">&laquo; Release 5.2.0</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

@@ -4,7 +4,7 @@
   <title><![CDATA[Elastica]]></title>
   <link href="http://Elastica.io/atom.xml" rel="self"/>
   <link href="http://Elastica.io/"/>
-  <updated>2017-04-13T11:09:02+02:00</updated>
+  <updated>2017-06-07T15:02:01+02:00</updated>
   <id>http://Elastica.io/</id>
   <author>
     <name><![CDATA[ruflin]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release 5.2.1]]></title>
+    <link href="http://Elastica.io/2017/06/07/release-5-dot-2-1/"/>
+    <updated>2017-06-07T14:59:05+02:00</updated>
+    <id>http://Elastica.io/2017/06/07/release-5-dot-2-1</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/5.2.1">Elastica 5.2.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.2.1">download</a>).</p>
+
+<p>This release is compatible with Elasticsearch 5.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.2/release-notes-5.2.2.html">elasticsearch 5.2.2</a>.</p>
+
+<h2>Bugfixes</h2>
+
+<ul>
+<li>Fix elastic 5.3.x deprecation warning related to Content-Type not being set.</li>
+<li>Fix updating settings of an index. <a href="https://github.com/ruflin/Elastica/pull/1296">#1296</a></li>
+<li>Fix bad parameter value to refresh document <a href="https://github.com/rufli/Elastica/pull/1318">#1318</a></li>
+</ul>
+
+
+<h2>Added</h2>
+
+<ul>
+<li>Parameter <code>filter_path</code> for response filtering (e.g. <code>$index-&gt;search($query, ['filter_path' =&gt; 'hits.hits._source'])</code>)</li>
+<li>Add support for Health parameters for Cluster\Health endpoint (new prop : delayed_unassigned_shards, number_of_pending_tasks, number_of_in_flight_fetch, task_max_waiting_in_queue_millis, active_shards_percent_as_number)</li>
+<li>Add support for querystring in Type. this allow to use <code>update_all_types</code> in type mapping in order to resolve conflicts between fields in different types. <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-put-mapping.html#merging-conflicts">Conflicts between fields in different types</a></li>
+<li>Added <code>\Elastica\Query\ParentId</code> to avoid join with parent documents <a href="https://github.com/ruflin/Elastica/issues/1287">#1287</a></li>
+<li>Added <code>\Elastica\Reindex</code> for reindexing between indices <a href="https://github.com/ruflin/Elastica/issues/1311">#1311</a></li>
+</ul>
+
+
+<h2>Improvements</h2>
+
+<ul>
+<li>Added support for <code>other_bucket</code> and <code>other_bucket_key</code> paramters on <code>Elastica\Aggregation\Filters</code></li>
+</ul>
+
+
+<h2>Deprecated</h2>
+
+<ul>
+<li>Deprecated <code>Tool\CrossIndex</code> use <code>\Elastica\Reindex</code> instead <a href="https://github.com/ruflin/Elastica/issues/1311">#1311</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Release 5.2.0]]></title>
@@ -1390,103 +1435,6 @@ as argument. <a href="https://github.com/ruflin/Elastica/pull/916">#916</a></li>
 </tr>
 </tbody>
 </table>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Release 2.0.0]]></title>
-    <link href="http://Elastica.io/2015/05/13/release-2-dot-0-0/"/>
-    <updated>2015-05-13T00:00:00+02:00</updated>
-    <id>http://Elastica.io/2015/05/13/release-2-dot-0-0</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/2.0.0">Elastica 2.0.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/2.0.0">download</a>). This release is compatible with elasticsearch 1.5.2.</p>
-
-<h2>Release Notes</h2>
-
-<p>With this release Elastica moves to its own independent semantic versioning. It starts with the jump from Elastica v1.4.3.0 to 2.0.0. The compatible elasticsearch version will be linked with every release. This changes makes it possible to better indicate major branches to previous Elastica versions without being dependent on elasticsearch release version numbering. The v in front of the version was dropped.</p>
-
-<p>Release 2.0.0 has only minor backward compatibility breaks (see below), but lots of improvements and additions. All BC changes are related to changes in elasticsearch 1.5.*. Migration from v1.4.3.0 to 2.0.0 should not be an issue in most cases even though it is a big step concerning version number.</p>
-
-<p>The goal is also to improve on the release notes to make it easier to see what changes and what are the backward compatible changes. More details can be found <a href="https://github.com/ruflin/Elastica/issues/833">here</a></p>
-
-<h2>Dependencies</h2>
-
-<table>
-<thead>
-<tr>
-<th> Project </th>
-<th> Version </th>
-<th> Required </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.5.2">Elasticsearch</a></td>
-<td> 1.5.2 </td>
-<td> yes</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.5.0">Elasticsearch mapper attachments plugin</a></td>
-<td>2.5.0</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.5.0">Elasticsearch thrift transport plugin</a></td>
-<td>2.5.0</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.12">Elasticsearch geocluster facet plugin</a></td>
-<td>0.0.12</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
-
-
-<h2>Changes</h2>
-
-<h3>Backward Compatibility Breaks</h3>
-
-<ul>
-<li>Elastica\Query\QueryString::setLowercaseExpandedTerms removed #813</li>
-<li>Update Elasticsearch version to 1.5 #813</li>
-<li>Added deprecation notice to Elastica\Transport\Thrift, Elastica\Transport\Memcached and Elastica\Type::deleteByQuery  #817</li>
-<li>Escape new symbols in Util::escapeTerm #795</li>
-</ul>
-
-
-<h3>Bugfixes</h3>
-
-<ul>
-<li>Fix empty bool query to act as match all query #817</li>
-<li>Fixed short match construction in query DSL #796</li>
-<li>Index optimize method to return Response object. #797</li>
-<li>Fix fluent interface inconsistency #788</li>
-</ul>
-
-
-<h3>Improvements</h3>
-
-<ul>
-<li>Add testing on PHP 7 on Travis #826</li>
-<li>Allow bool in Query::setSource function #818 <a href="http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html">http://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html</a></li>
-<li>deleteByQuery() implemented in Elastica\Index #816</li>
-<li>Add MLT query against documents #814</li>
-<li>Added Elastica\Query\SimpleQueryString::setMinimumShouldMatch #813</li>
-<li>Added Elastica\Query\FunctionScore::setMinScore #813</li>
-<li>Added Elastica\Query\MoreLikeThis::setMinimumShouldMatch #813</li>
-<li>Added new methods to Elastica\Aggregation\DateHistogram: setOffset, setTimezone #813</li>
-<li>Following methods in Elastica\Aggregation\DateHistogram marked as deprecated: setPreOffset, setPostOffset, setPreZone, setPostZone, setPreZoneAdjustLargeInterval #813</li>
-<li>Add Elastica\Facet\DateHistogram::setFactor() #806</li>
-<li>Added Elastica\Query\QueryString::setTimezone #813</li>
-<li>Add .editorconfig #807</li>
-<li>Added Elastica\Suggest\Completion #808</li>
-<li>Fix elasticsearch links to elastic domain #809</li>
-<li>Added Elastica\Query\Image #787</li>
-<li>Add Scrutinizer Code Quality status badge</li>
-<li>Added support for percentiles aggregation #786</li>
-</ul>
 
 ]]></content>
   </entry>
