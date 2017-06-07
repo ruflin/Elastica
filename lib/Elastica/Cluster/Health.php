@@ -170,7 +170,7 @@ class Health
     }
 
     /**
-     * get the number of delayed unassined shards
+     * get the number of delayed unassined shards.
      *
      * @return int
      */

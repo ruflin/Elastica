@@ -292,7 +292,7 @@ class Type implements SearchableInterface
      * Sets value type mapping for this type.
      *
      * @param \Elastica\Type\Mapping|array $mapping Elastica\Type\MappingType object or property array with all mappings
-     * @param array $query querystring when put mapping (for example update_all_types)
+     * @param array                        $query   querystring when put mapping (for example update_all_types)
      *
      * @return \Elastica\Response
      */

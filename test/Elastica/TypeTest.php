@@ -1016,7 +1016,6 @@ class TypeTest extends BaseTest
 
     /**
      * @group functional
-     *
      */
     public function testMappingOnFieldsWithSameName()
     {

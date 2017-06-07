@@ -48,7 +48,6 @@ class SnapshotTest extends Base
         $repositoryName = 'testrepo';
         $location = $this->_snapshotPath.'backup1';
 
-
         $response = $this->_snapshot->registerRepository($repositoryName, 'fs', ['location' => $location]);
         $this->assertTrue($response->isOk());
 
