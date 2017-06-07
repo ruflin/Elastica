@@ -44,6 +44,7 @@ class Client
         'bigintConversion' => false,
         'username' => null,
         'password' => null,
+        'servers' => null,
     ];
 
     /**
