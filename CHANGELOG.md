@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file based on the
 ### Bugfixes
 
 ### Added
+ - Added getNumberOfReplicas() for index settings [PR#1324](https://github.com/ruflin/Elastica/pull/1324)
 
 ### Improvements
 

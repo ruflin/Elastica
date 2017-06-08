@@ -22,6 +22,8 @@ class Settings
 {
     const DEFAULT_REFRESH_INTERVAL = '1s';
 
+    const DEFAULT_NUMBER_OF_REPLICAS = 1;
+
     /**
      * Response.
      *
@@ -131,6 +133,24 @@ class Settings
     public function setNumberOfReplicas($replicas)
     {
         return $this->set(['number_of_replicas' => (int) $replicas]);
+    }
+
+    /**
+     * Returns the number of replicas.
+     *
+     * If no number of replicas is set, the default number is returned
+     *
+     * @return int The number of replicas
+     */
+    public function getNumberOfReplicas()
+    {
+        $replicas = $this->get('number_of_replicas');
+
+        if (empty($replicas)) {
+            $replicas = self::DEFAULT_NUMBER_OF_REPLICAS;
+        }
+
+        return $replicas;
     }
 
     /**
