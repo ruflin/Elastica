@@ -7,6 +7,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 
+- Send the `scroll_id` inside a json body instead of plain text [#1325](https://github.com/ruflin/Elastica/pull/1325)
+
 ### Added
 
 ### Improvements

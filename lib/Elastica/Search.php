@@ -451,7 +451,7 @@ class Search
 
         // Send scroll_id via raw HTTP body to handle cases of very large (> 4kb) ids.
         if ('_search/scroll' == $path) {
-            $data = $params[self::OPTION_SCROLL_ID];
+            $data = [ self::OPTION_SCROLL_ID => $params[self::OPTION_SCROLL_ID] ];
             unset($params[self::OPTION_SCROLL_ID]);
         } else {
             $data = $query->toArray();
