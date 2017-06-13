@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 - Send the `scroll_id` inside a json body instead of plain text [#1325](https://github.com/ruflin/Elastica/pull/1325)
 
 ### Added
+ - Added getNumberOfReplicas() for index settings [PR#1324](https://github.com/ruflin/Elastica/pull/1324)
 
 ### Improvements
 
