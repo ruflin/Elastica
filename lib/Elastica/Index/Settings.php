@@ -146,7 +146,7 @@ class Settings
     {
         $replicas = $this->get('number_of_replicas');
 
-        if (empty($replicas)) {
+        if (null === $replicas) {
             $replicas = self::DEFAULT_NUMBER_OF_REPLICAS;
         }
 

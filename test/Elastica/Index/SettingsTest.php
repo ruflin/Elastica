@@ -59,7 +59,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testSetNumberOfReplicas()
+    public function testSetGetNumberOfReplicas()
     {
         $indexName = 'test';
 
@@ -68,13 +68,17 @@ class SettingsTest extends BaseTest
         $index->create([], true);
         $settings = $index->getSettings();
 
-        $settings->setNumberOfReplicas(2);
+        // Check for zero replicas
+        $settings->setNumberOfReplicas(0);
         $index->refresh();
-        $this->assertEquals(2, $settings->get('number_of_replicas'));
+        $this->assertEquals(0, $settings->get('number_of_replicas'));
+        $this->assertEquals(0, $settings->getNumberOfReplicas());
 
+        // Check with 3 replicas
         $settings->setNumberOfReplicas(3);
         $index->refresh();
         $this->assertEquals(3, $settings->get('number_of_replicas'));
+        $this->assertEquals(3, $settings->getNumberOfReplicas());
 
         $index->delete();
     }
@@ -82,7 +86,7 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
-    public function testGetNumberOfShards()
+    public function testGetNumberOfReplicas()
     {
         $indexName = 'test';
 
@@ -92,13 +96,9 @@ class SettingsTest extends BaseTest
 
         $settings = $index->getSettings();
 
+        // Test with default number of replicas
+        $this->assertEquals(IndexSettings::DEFAULT_NUMBER_OF_REPLICAS, $settings->get('number_of_replicas'));
         $this->assertEquals(IndexSettings::DEFAULT_NUMBER_OF_REPLICAS, $settings->getNumberOfReplicas());
-
-        $replicas = '2';
-        $settings->setNumberOfReplicas($replicas);
-        $index->refresh();
-        $this->assertEquals($replicas, $settings->getNumberOfReplicas());
-        $this->assertEquals($replicas, $settings->get('number_of_replicas'));
 
         $index->delete();
     }
