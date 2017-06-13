@@ -1,6 +1,8 @@
 <?php
 namespace Elastica\Test;
 
+use Elastica\JSON;
+
 /**
  * JSONTest.
  *

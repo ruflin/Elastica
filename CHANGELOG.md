@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file based on the
 
 - Fix elastic 5.3.x deprecation warning related to Content-Type not being set.
 - Fix updating settings of an index. [#1296](https://github.com/ruflin/Elastica/pull/1296)
+- Remove `Elastica\Search::OPTION_SEARCH_TYPE_DFS_QUERY_AND_FETCH` and `Elastica\Search::OPTION_SEARCH_TYPE_QUERY_AND_FETCH` as no longer supported as of 5.3.0
 - Fix bad parameter value to refresh document [#1318](https://github.com/rufli/Elastica/pull/1318)
 
 ### Added
@@ -36,6 +37,7 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 
  - Added support for `other_bucket` and `other_bucket_key` paramters on `Elastica\Aggregation\Filters`
+ - Update elasticsearch testing dependency to 5.4.1
 
 ### Deprecated
  - Deprecated `Tool\CrossIndex` use `\Elastica\Reindex` instead [#1311](https://github.com/ruflin/Elastica/issues/1311)

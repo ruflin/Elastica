@@ -577,7 +577,7 @@ class Index implements SearchableInterface
     public function analyze($text, $args = [])
     {
         $endpoint = new Analyze();
-        $endpoint->setBody($text);
+        $endpoint->setBody(['text' => $text]);
         $endpoint->setParams($args);
 
         $data = $this->requestEndpoint($endpoint)->getData();

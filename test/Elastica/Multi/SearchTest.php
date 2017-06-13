@@ -459,7 +459,7 @@ class SearchTest extends BaseTest
         $this->assertSame($query2, $resultSets[1]->getQuery());
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
 
-        $search1->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_QUERY_AND_FETCH);
+        $search1->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_DFS_QUERY_THEN_FETCH);
 
         $multiResultSet = $multiSearch->search();
 
@@ -544,7 +544,7 @@ class SearchTest extends BaseTest
         $this->assertSame($query2, $resultSets[1]->getQuery());
         $this->assertEquals(6, $resultSets[1]->getTotalHits());
 
-        $search1->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_QUERY_AND_FETCH);
+        $search1->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_DFS_QUERY_THEN_FETCH);
 
         $multiResultSet = $multiSearch->search();
 
