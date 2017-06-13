@@ -26,16 +26,16 @@ class Request extends Param
     /**
      * Construct.
      *
-     * @param string     $path       Request path
-     * @param string     $method     OPTIONAL Request method (use const's) (default = self::GET)
-     * @param array      $data       OPTIONAL Data array
-     * @param array      $query      OPTIONAL Query params
+     * @param string     $path        Request path
+     * @param string     $method      OPTIONAL Request method (use const's) (default = self::GET)
+     * @param array      $data        OPTIONAL Data array
+     * @param array      $query       OPTIONAL Query params
      * @param Connection $connection
      * @param string     $contentType Content-Type sent with this request
      *
      * @return \Elastica\Request OPTIONAL Connection object
      */
-    public function __construct($path, $method = self::GET, $data = [], array $query = [], Connection $connection = null, $contentType = self::DEFAULT_CONTENT_TYPE )
+    public function __construct($path, $method = self::GET, $data = [], array $query = [], Connection $connection = null, $contentType = self::DEFAULT_CONTENT_TYPE)
     {
         $this->setPath($path);
         $this->setMethod($method);
@@ -163,7 +163,8 @@ class Request extends Param
     }
 
     /**
-     * Set the Content-Type of this request
+     * Set the Content-Type of this request.
+     *
      * @param string $contentType
      */
     public function setContentType($contentType)
@@ -172,7 +173,7 @@ class Request extends Param
     }
 
     /**
-     * Get the Content-Type of this request
+     * Get the Content-Type of this request.
      */
     public function getContentType()
     {

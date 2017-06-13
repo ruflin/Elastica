@@ -146,7 +146,7 @@ class Search
             Request::POST,
             $data,
             $this->_options,
-	    Request::NDJSON_CONTENT_TYPE
+        Request::NDJSON_CONTENT_TYPE
         );
 
         return $this->_builder->buildMultiResultSet($response, $this->getSearches());

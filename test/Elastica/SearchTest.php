@@ -283,7 +283,7 @@ class SearchTest extends BaseTest
         $this->assertFalse($result->getResponse()->hasError());
         $this->assertEquals(5, count($result->getResults()));
         $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
-        $this->assertEquals($scrollId, $search->getClient()->getLastRequest()->getData());
+        $this->assertEquals( [ Search::OPTION_SCROLL_ID => $scrollId ], $search->getClient()->getLastRequest()->getData());
 
         $result = $search->search([], [
             Search::OPTION_SCROLL => '5m',
@@ -292,7 +292,7 @@ class SearchTest extends BaseTest
         $this->assertFalse($result->getResponse()->hasError());
         $this->assertEquals(0, count($result->getResults()));
         $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
-        $this->assertEquals($scrollId, $search->getClient()->getLastRequest()->getData());
+        $this->assertEquals( [ Search::OPTION_SCROLL_ID => $scrollId ], $search->getClient()->getLastRequest()->getData());
     }
 
     /**

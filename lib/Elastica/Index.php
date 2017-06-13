@@ -7,7 +7,6 @@ use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
 use Elastica\ResultSet\BuilderInterface;
 use Elasticsearch\Endpoints\AbstractEndpoint;
-use Elasticsearch\Endpoints\Indices\Settings\Put;
 use Elasticsearch\Endpoints\DeleteByQuery;
 use Elasticsearch\Endpoints\Indices\Aliases\Update;
 use Elasticsearch\Endpoints\Indices\Analyze;
@@ -21,6 +20,7 @@ use Elasticsearch\Endpoints\Indices\ForceMerge;
 use Elasticsearch\Endpoints\Indices\Mapping\Get;
 use Elasticsearch\Endpoints\Indices\Open;
 use Elasticsearch\Endpoints\Indices\Refresh;
+use Elasticsearch\Endpoints\Indices\Settings\Put;
 
 /**
  * Elastica index object.

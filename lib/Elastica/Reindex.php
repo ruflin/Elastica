@@ -55,7 +55,7 @@ class Reindex
     {
         $body = array_merge([
             'source' => $this->_getSourcePartBody($oldIndex, $options),
-            'dest' => $this->_getDestPartBody($newIndex, $options)
+            'dest' => $this->_getDestPartBody($newIndex, $options),
         ], $this->_resolveBodyOptions($options));
 
         return $body;
@@ -114,6 +114,7 @@ class Reindex
         if (isset($sourceBody[self::QUERY]) && $sourceBody[self::QUERY] instanceof AbstractQuery) {
             $sourceBody[self::QUERY] = $sourceBody[self::QUERY]->toArray();
         }
+
         return $sourceBody;
     }
 
@@ -132,8 +133,9 @@ class Reindex
                 if ($type instanceof Type) {
                     $sourceBody[self::TYPE][$key] = $type->getName();
                 }
-           }
+            }
         }
+
         return $sourceBody;
     }
 }

@@ -29,7 +29,7 @@ class HealthTest extends BaseTest
             'unassigned_shards' => 5,
             'delayed_unassigned_shards' => 4,
             'number_of_pending_tasks' => 1,
-            'number_of_in_flight_fetch' =>  2,
+            'number_of_in_flight_fetch' => 2,
             'task_max_waiting_in_queue_millis' => 634,
             'active_shards_percent_as_number' => 50.0,
 
