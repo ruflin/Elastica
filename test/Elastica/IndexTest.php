@@ -924,7 +924,7 @@ class IndexTest extends BaseTest
         $index->refresh();
         $endpoint = new Analyze();
         $endpoint->setIndex('fooIndex');
-        $endpoint->setBody('foo');
+        $endpoint->setBody(['text' => 'foo']);
         $returnedTokens = $index->requestEndpoint($endpoint)->getData()['tokens'];
 
         $tokens = [
