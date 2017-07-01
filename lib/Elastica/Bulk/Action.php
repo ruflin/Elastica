@@ -213,7 +213,9 @@ class Action
 				if ($data === false) {
 					echo '--------------Exception-------------';
 					throw new InvalidException(sprintf('Invalid utf-8 data provided: "%s"', print_r($source, true)));
-				}
+				} else {
+                     echo '--------------NoException-------------';
+                }
 				$string .= $data;
             }
             $string .= Bulk::DELIMITER;
