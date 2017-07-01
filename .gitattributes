@@ -1,1 +1,15 @@
-CHANGELOG.md  merge=union
+/.coveralls.yml export-ignore
+/.dockerignore export-ignore
+/.editorconfig export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.php_cs export-ignore
+/.travis.yml export-ignore
+/CHANGELOG.md merge=union
+/CONTRIBUTING.md export-ignore
+/Dockerfile export-ignore
+/docker-compose.yml export-ignore
+/docker-entrypoint.sh export-ignore
+/env export-ignore
+/phpdoc.dist.xml export-ignore
+/test export-ignore

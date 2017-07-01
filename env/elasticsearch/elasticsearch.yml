@@ -1,35 +1,35 @@
-
-index.number_of_shards: 2
-index.number_of_replicas: 0
+#Set Cluster name
+cluster.name: "docker-cluster-elastica"
 
 # Required plugins
-plugin.mandatory: mapper-attachments, delete-by-query #, image
+plugin.mandatory: mapper-attachments
 
 # For script tests
-script.inline: on
-script.indexed: on
+script.inline: true
 
 script.engine.groovy.file: on
-
-# Disable dynamic memory allocation
-bootstrap.mlockall: true
-
-# Accept any connection
-network.host: "0.0.0.0"
 
 # Limit threadpool by set number of available processors to 1
 # Without this, travis builds will be failed with OutOfMemory error
 processors: 1
 
-# All nodes will be called Elastica
-node.name: Elastica
+network.host: 0.0.0.0
 
-# Ports config
-http.port: 9200
-transport.tcp.port: 9300
+# minimum_master_nodes need to be explicitly set when bound on a public IP
+# set to 1 to allow single node clusters
+# Details: https://github.com/elastic/elasticsearch/pull/17288
+discovery.zen.minimum_master_nodes: 2
+discovery.zen.ping.unicast.hosts: ["elasticsearch"]
+
+# at the moment it's not possible to remove the x-pack plugin from the official ES docker image
+# https://github.com/elastic/elasticsearch-docker/issues/36
+# they've solved on 5.4, I will wait that version to remove the plugin correctly
+# and remove the following two lines
+xpack.security.enabled: false
+xpack.monitoring.enabled: false
 
 # Added for snapshot tests
-path.repo: ["/tmp/backups"]
+path.repo: ["/usr/share/elasticsearch/data"]
+node.max_local_storage_nodes: 2
 
-discovery.zen.ping.unicast.enabled: true
-discovery.zen.ping.multicast.enabled: true
+

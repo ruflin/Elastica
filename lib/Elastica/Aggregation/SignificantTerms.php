@@ -1,8 +1,6 @@
 <?php
 namespace Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
 
 /**
@@ -22,14 +20,8 @@ class SignificantTerms extends AbstractTermsAggregation
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html#_custom_background_context
      */
-    public function setBackgroundFilter($filter)
+    public function setBackgroundFilter(AbstractQuery $filter)
     {
-        if ($filter instanceof AbstractFilter) {
-            trigger_error('Deprecated: Elastica\Aggregation\SignificantTerms::setBackgroundFilter passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.', E_USER_DEPRECATED);
-        } elseif (!($filter instanceof AbstractQuery)) {
-            throw new InvalidException('Filter must be instance of AbstractQuery');
-        }
-
         return $this->setParam('background_filter', $filter);
     }
 }

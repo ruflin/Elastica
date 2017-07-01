@@ -33,9 +33,12 @@ class ScriptedMetric extends AbstractAggregation
     }
 
     /**
-     * Set the field for this aggregation.
+     * Executed once on each shard after document collection is complete.
      *
-     * @param string $script the name of the document field on which to perform this aggregation
+     * Allows the aggregation to consolidate the state returned from each shard.
+     * If a combine_script is not provided the combine phase will return the aggregation variable.
+     *
+     * @param string $script
      *
      * @return $this
      */
@@ -45,9 +48,11 @@ class ScriptedMetric extends AbstractAggregation
     }
 
     /**
-     * Set the field for this aggregation.
+     * Executed prior to any collection of documents.
      *
-     * @param string $script the name of the document field on which to perform this aggregation
+     * Allows the aggregation to set up any initial state.
+     *
+     * @param string $script
      *
      * @return $this
      */
@@ -57,9 +62,12 @@ class ScriptedMetric extends AbstractAggregation
     }
 
     /**
-     * Set the field for this aggregation.
+     * Executed once per document collected.
      *
-     * @param string $script the name of the document field on which to perform this aggregation
+     * This is the only required script. If no combine_script is specified, the resulting state needs to be stored in
+     * an object named _agg.
+     *
+     * @param string $script
      *
      * @return $this
      */
@@ -69,9 +77,12 @@ class ScriptedMetric extends AbstractAggregation
     }
 
     /**
-     * Set the field for this aggregation.
+     * Executed once on the coordinating node after all shards have returned their results.
      *
-     * @param string $script the name of the document field on which to perform this aggregation
+     * The script is provided with access to a variable _aggs which is an array of the result of the combine_script on
+     * each shard. If a reduce_script is not provided the reduce phase will return the _aggs variable.
+     *
+     * @param string $script
      *
      * @return $this
      */

@@ -4,6 +4,7 @@ namespace Elastica;
 use Elastica\Cluster\Health;
 use Elastica\Cluster\Settings;
 use Elastica\Exception\NotImplementedException;
+use Elasticsearch\Endpoints\Cluster\State;
 
 /**
  * Cluster information for elasticsearch.
@@ -51,8 +52,7 @@ class Cluster
      */
     public function refresh()
     {
-        $path = '_cluster/state';
-        $this->_response = $this->_client->request($path, Request::GET);
+        $this->_response = $this->_client->requestEndpoint(new State());
         $this->_data = $this->getResponse()->getData();
     }
 
@@ -165,21 +165,5 @@ class Cluster
     public function getSettings()
     {
         return new Settings($this->getClient());
-    }
-
-    /**
-     * Shuts down the complete cluster.
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-shutdown.html
-     *
-     * @param string $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
-     *
-     * @return \Elastica\Response
-     */
-    public function shutdown($delay = '1s')
-    {
-        $path = '_shutdown?delay='.$delay;
-
-        return $this->_client->request($path, Request::POST);
     }
 }

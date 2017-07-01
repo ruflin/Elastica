@@ -22,6 +22,8 @@ class Settings
 {
     const DEFAULT_REFRESH_INTERVAL = '1s';
 
+    const DEFAULT_NUMBER_OF_REPLICAS = 1;
+
     /**
      * Response.
      *
@@ -103,6 +105,25 @@ class Settings
     }
 
     /**
+     * Returns a setting interpreted as a bool.
+     *
+     * One can use a real bool, int(0), int(1) to set bool settings.
+     * But Elasticsearch stores and returns all settings as strings and does
+     * not normalize bool values. This method ensures a bool is returned for
+     * whichever string representation is used like 'true', '1', 'on', 'yes'.
+     *
+     * @param string $setting Setting name to return
+     *
+     * @return bool
+     */
+    public function getBool($setting)
+    {
+        $data = $this->get($setting);
+
+        return 'true' === $data || '1' === $data || 'on' === $data || 'yes' === $data;
+    }
+
+    /**
      * Sets the number of replicas.
      *
      * @param int $replicas Number of replicas
@@ -111,11 +132,25 @@ class Settings
      */
     public function setNumberOfReplicas($replicas)
     {
-        $replicas = (int) $replicas;
+        return $this->set(['number_of_replicas' => (int) $replicas]);
+    }
 
-        $data = ['number_of_replicas' => $replicas];
+    /**
+     * Returns the number of replicas.
+     *
+     * If no number of replicas is set, the default number is returned
+     *
+     * @return int The number of replicas
+     */
+    public function getNumberOfReplicas()
+    {
+        $replicas = $this->get('number_of_replicas');
 
-        return $this->set($data);
+        if (null === $replicas) {
+            $replicas = self::DEFAULT_NUMBER_OF_REPLICAS;
+        }
+
+        return $replicas;
     }
 
     /**
@@ -127,17 +162,15 @@ class Settings
      */
     public function setReadOnly($readOnly = true)
     {
-        return $this->set(['blocks.write' => $readOnly]);
+        return $this->set(['blocks.read_only' => $readOnly]);
     }
 
     /**
-     * getReadOnly.
-     *
      * @return bool
      */
     public function getReadOnly()
     {
-        return $this->get('blocks.write') === 'true'; // ES returns a string for this setting
+        return $this->getBool('blocks.read_only');
     }
 
     /**
@@ -145,7 +178,7 @@ class Settings
      */
     public function getBlocksRead()
     {
-        return (bool) $this->get('blocks.read');
+        return $this->getBool('blocks.read');
     }
 
     /**
@@ -155,8 +188,6 @@ class Settings
      */
     public function setBlocksRead($state = true)
     {
-        $state = $state ? 1 : 0;
-
         return $this->set(['blocks.read' => $state]);
     }
 
@@ -165,7 +196,7 @@ class Settings
      */
     public function getBlocksWrite()
     {
-        return (bool) $this->get('blocks.write');
+        return $this->getBool('blocks.write');
     }
 
     /**
@@ -175,8 +206,6 @@ class Settings
      */
     public function setBlocksWrite($state = true)
     {
-        $state = $state ? 1 : 0;
-
         return $this->set(['blocks.write' => $state]);
     }
 
@@ -185,13 +214,12 @@ class Settings
      */
     public function getBlocksMetadata()
     {
-        // TODO will have to be replace by block.metadata.write once https://github.com/elasticsearch/elasticsearch/pull/9203 has been fixed
-        // the try/catch will have to be remove too
+        // When blocks.metadata is enabled, reading the settings is not possible anymore.
+        // So when a cluster_block_exception happened it must be enabled.
         try {
-            return (bool) $this->get('blocks.write');
+            return $this->getBool('blocks.metadata');
         } catch (ResponseException $e) {
-            if (strpos($e->getMessage(), 'ClusterBlockException') !== false) {
-                // hacky way to test if the metadata is blocked since bug 9203 is not fixed
+            if ($e->getResponse()->getFullError()['type'] === 'cluster_block_exception') {
                 return true;
             }
 
@@ -200,15 +228,15 @@ class Settings
     }
 
     /**
+     * Set to true to disable index metadata reads and writes.
+     *
      * @param bool $state OPTIONAL (default = true)
      *
      * @return \Elastica\Response
      */
     public function setBlocksMetadata($state = true)
     {
-        $state = $state ? 1 : 0;
-
-        return $this->set(['blocks.write' => $state]);
+        return $this->set(['blocks.metadata' => $state]);
     }
 
     /**
@@ -242,34 +270,6 @@ class Settings
         }
 
         return $interval;
-    }
-
-    /**
-     * Return merge policy.
-     *
-     * @return string Merge policy type
-     */
-    public function getMergePolicyType()
-    {
-        return $this->get('merge.policy.type');
-    }
-
-    /**
-     * Sets merge policy.
-     *
-     * @param string $type Merge policy type
-     *
-     * @return \Elastica\Response Response object
-     *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
-     */
-    public function setMergePolicyType($type)
-    {
-        $this->getIndex()->close();
-        $response = $this->set(['merge.policy.type' => $type]);
-        $this->getIndex()->open();
-
-        return $response;
     }
 
     /**

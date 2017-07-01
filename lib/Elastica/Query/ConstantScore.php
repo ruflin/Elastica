@@ -2,7 +2,6 @@
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
-use Elastica\Filter\AbstractFilter;
 
 /**
  * Constant score query.
@@ -16,17 +15,11 @@ class ConstantScore extends AbstractQuery
     /**
      * Construct constant score query.
      *
-     * @param null|\Elastica\Query\AbstractQuery|array $filter
+     * @param null|AbstractQuery|array $filter
      */
-    public function __construct($filter = null)
+    public function __construct(AbstractQuery $filter = null)
     {
         if (!is_null($filter)) {
-            if ($filter instanceof AbstractFilter) {
-                trigger_error('Deprecated: Elastica\Query\ConstantScore passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
-            } elseif (!is_array($filter) && !($filter instanceof AbstractQuery)) {
-                throw new InvalidException('Filter must be instance of AbstractQuery');
-            }
-
             $this->setFilter($filter);
         }
     }
@@ -34,25 +27,19 @@ class ConstantScore extends AbstractQuery
     /**
      * Set filter.
      *
-     * @param array|\Elastica\Query\AbstractQuery $filter
+     * @param array|AbstractQuery $filter
      *
      * @return $this
      */
-    public function setFilter($filter)
+    public function setFilter(AbstractQuery $filter)
     {
-        if ($filter instanceof AbstractFilter) {
-            trigger_error('Deprecated: Elastica\Query\ConstantScore::setFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
-        } elseif (!is_array($filter) && !($filter instanceof AbstractQuery)) {
-            throw new InvalidException('Filter must be instance of AbstractQuery or array');
-        }
-
         return $this->setParam('filter', $filter);
     }
 
     /**
      * Set query.
      *
-     * @param array|\Elastica\Query\AbstractQuery $query
+     * @param array|AbstractQuery $query
      *
      * @throws InvalidException If query is not an array or instance of AbstractQuery
      *

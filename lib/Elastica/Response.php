@@ -28,13 +28,6 @@ class Response
     protected $_responseString = '';
 
     /**
-     * Error.
-     *
-     * @var bool Error
-     */
-    protected $_error = false;
-
-    /**
      * Transfer info.
      *
      * @var array transfer info
@@ -113,11 +106,11 @@ class Response
     }
 
     /**
-     * A keyed array representing any errors that occured.
+     * A keyed array representing any errors that occurred.
      *
      * In case of http://localhost:9200/_alias/test the error is a string
      *
-     * @return array|string Error data
+     * @return array|string|null Error data or null if there is no error
      */
     public function getFullError()
     {
@@ -133,13 +126,7 @@ class Response
      */
     public function getErrorMessage()
     {
-        $error = $this->getError();
-
-        if (!is_string($error)) {
-            $error = json_encode($error);
-        }
-
-        return $error;
+        return $this->getError();
     }
 
     /**
@@ -227,18 +214,15 @@ class Response
     {
         if ($this->_response == null) {
             $response = $this->_responseString;
-            if ($response === false) {
-                $this->_error = true;
-            } else {
-                try {
-                    if ($this->getJsonBigintConversion()) {
-                        $response = JSON::parse($response, true, 512, JSON_BIGINT_AS_STRING);
-                    } else {
-                        $response = JSON::parse($response);
-                    }
-                } catch (JSONParseException $e) {
-                    // leave response as is if parse fails
+
+            try {
+                if ($this->getJsonBigintConversion()) {
+                    $response = JSON::parse($response, true, 512, JSON_BIGINT_AS_STRING);
+                } else {
+                    $response = JSON::parse($response);
                 }
+            } catch (JSONParseException $e) {
+                // leave response as is if parse fails
             }
 
             if (empty($response)) {

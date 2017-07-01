@@ -1,27 +1,84 @@
-elastica:
-  build: .
-  #image: ruflin/elastica
-  ports:
-    - "9200:9200"
-  links:
-    - nginx
-    - elasticsearch
-  environment:
-    - ES_HOST=elasticsearch
-    - PROXY_HOST=nginx
-elasticsearch:
-  build: ./env/elasticsearch/
-  #image: ruflin/elasticsearch-elastica
-  volumes_from:
-    - data
-nginx:
-  build: ./env/nginx/
-  #image: ruflin/nginx-elastica
-  links:
-    - elasticsearch
-# data container to share data between elasticsearch nodes for snapshot testing
-data:
-  image: ruflin/elastica-data
-  volumes:
-    - "/tmp/backups/backup1"
-    - "/tmp/backups/backup2"
+version: '2.0'
+
+services:
+  elastica:
+    build: .
+    container_name: elastica
+    environment:
+      - ES_HOST=elasticsearch
+      - PROXY_HOST=nginx
+    networks:
+      - esnet
+
+  elasticsearch1:
+    build: ./env/elasticsearch/
+    container_name: elasticsearch
+    privileged: true
+    environment:
+      - bootstrap.memory_lock=true
+      - network.host=172.18.0.4
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    mem_limit: 1g
+    cap_add:
+      - ALL
+      - IPC_LOCK
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      esnet:
+        ipv4_address: 172.18.0.4
+  elasticsearch2:
+    build: ./env/elasticsearch/
+    privileged: true
+    environment:
+      - bootstrap.memory_lock=true
+      - network.host=172.18.0.3
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    mem_limit: 1g
+    cap_add:
+      - ALL
+      - IPC_LOCK
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    networks:
+      esnet:
+        ipv4_address: 172.18.0.3
+
+  nginx:
+    build: ./env/nginx/
+    networks:
+      esnet:
+        ipv4_address: 172.18.0.5
+
+
+volumes:
+  esdata1:
+    driver: local
+
+networks:
+  esnet:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.18.0.0/16
+         gateway: 172.18.0.1

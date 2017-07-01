@@ -65,30 +65,4 @@ class Fuzzy extends AbstractQuery
 
         return $this->setParam($key, $params[$key]);
     }
-
-    /**
-     * Deprecated method of setting a field.
-     *
-     * @deprecated Use setField and setFieldOption instead. This method will be removed in further Elastica releases
-     *
-     * @param $fieldName
-     * @param $args
-     *
-     * @return $this
-     */
-    public function addField($fieldName, $args)
-    {
-        trigger_error('Query\Fuzzy::addField is deprecated. Use setField and setFieldOption instead. This method will be removed in further Elastica releases', E_USER_DEPRECATED);
-
-        if (!array_key_exists('value', $args)) {
-            throw new InvalidException('Fuzzy query can only support a single field.');
-        }
-        $this->setField($fieldName, $args['value']);
-        unset($args['value']);
-        foreach ($args as $param => $value) {
-            $this->setFieldOption($param, $value);
-        }
-
-        return $this;
-    }
 }

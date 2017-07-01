@@ -2,7 +2,6 @@
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
-use Elastica\Filter\AbstractFilter;
 
 /**
  * Bool query.
@@ -56,14 +55,8 @@ class BoolQuery extends AbstractQuery
      *
      * @return $this
      */
-    public function addFilter($filter)
+    public function addFilter(AbstractQuery $filter)
     {
-        if ($filter instanceof AbstractFilter) {
-            trigger_error('Deprecated: Elastica\Query\BoolQuery::addFilter passing AbstractFilter is deprecated. Pass AbstractQuery instead.', E_USER_DEPRECATED);
-        } elseif (!($filter instanceof AbstractQuery)) {
-            throw new InvalidException('Filter must be instance of AbstractQuery');
-        }
-
         return $this->addParam('filter', $filter);
     }
 
@@ -104,10 +97,26 @@ class BoolQuery extends AbstractQuery
      * @param int $minimumNumberShouldMatch Should match minimum
      *
      * @return $this
+     *
+     * @deprecated Replaced by setMinimumShouldMatch
      */
     public function setMinimumNumberShouldMatch($minimumNumberShouldMatch)
     {
+        trigger_error('Deprecated: Elastica\Query::setMinimumNumberShouldMatch() is deprecated and will be removed in further Elastica releases. Use Elastica\Query::setMinimumShouldMatch() instead.', E_USER_DEPRECATED);
+
         return $this->setParam('minimum_number_should_match', $minimumNumberShouldMatch);
+    }
+
+    /**
+     * Sets the minimum number of should clauses to match.
+     *
+     * @param int|string $minimum Minimum value
+     *
+     * @return $this
+     */
+    public function setMinimumShouldMatch($minimum)
+    {
+        return $this->setParam('minimum_should_match', $minimum);
     }
 
     /**

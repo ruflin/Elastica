@@ -1,20 +1,215 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/3.2.3...HEAD)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.2.1...master)
 
-### Backward Compatibility Fixes
+### Backward Compatibility Breaks
 
 ### Bugfixes
 
+- Send the `scroll_id` inside a json body instead of plain text [#1325](https://github.com/ruflin/Elastica/pull/1325)
+
 ### Added
+ - Added getNumberOfReplicas() for index settings [PR#1324](https://github.com/ruflin/Elastica/pull/1324)
 
 ### Improvements
 
-## Deprecated
+### Deprecated
 
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/3.2.2...3.2.3)
+## [5.2.1](https://github.com/ruflin/Elastica/compare/5.2.0...5.2.1)
+
+### Bugfixes
+
+- Fix elastic 5.3.x deprecation warning related to Content-Type not being set.
+- Fix updating settings of an index. [#1296](https://github.com/ruflin/Elastica/pull/1296)
+- Remove `Elastica\Search::OPTION_SEARCH_TYPE_DFS_QUERY_AND_FETCH` and `Elastica\Search::OPTION_SEARCH_TYPE_QUERY_AND_FETCH` as no longer supported as of 5.3.0
+- Fix bad parameter value to refresh document [#1318](https://github.com/rufli/Elastica/pull/1318)
+
+### Added
+
+ - Parameter `filter_path` for response filtering (e.g. `$index->search($query, ['filter_path' => 'hits.hits._source'])`)
+ - Add support for Health parameters for Cluster\Health endpoint (new prop : delayed_unassigned_shards, number_of_pending_tasks, number_of_in_flight_fetch, task_max_waiting_in_queue_millis, active_shards_percent_as_number)
+ - Add support for querystring in Type. this allow to use `update_all_types` in type mapping in order to resolve conflicts between fields in different types. [Conflicts between fields in different types](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-put-mapping.html#merging-conflicts)
+ - Added `\Elastica\Query\ParentId` to avoid join with parent documents [#1287](https://github.com/ruflin/Elastica/issues/1287)
+ - Added `\Elastica\Reindex` for reindexing between indices [#1311](https://github.com/ruflin/Elastica/issues/1311)
+
+### Improvements
+
+ - Added support for `other_bucket` and `other_bucket_key` paramters on `Elastica\Aggregation\Filters`
+ - Update elasticsearch testing dependency to 5.4.1
+
+### Deprecated
+ - Deprecated `Tool\CrossIndex` use `\Elastica\Reindex` instead [#1311](https://github.com/ruflin/Elastica/issues/1311)
+
+## [5.2.0](https://github.com/ruflin/Elastica/compare/5.1.0...5.2.0)
+
+### Bugfixes
+
+- Fix reading bool index settings like `\Elastica\Index\Settings::getBlocksWrite`. Elasticsearch returns all settings as strings and does not normalize bool values.
+  The getters now return the right bool value for whichever string representation is used like 'true', '1', 'on', 'yes'. [#1251](https://github.com/ruflin/Elastica/pull/1251)
+- Fix for QueryBuilder version check `\Elastica\QueryBuilder\Version\Version240.php` added all new query types to queries array. [#1266](https://github.com/ruflin/Elastica/pull/1266) [#1269](https://github.com/ruflin/Elastica/pull/1269)
+- Do not modify the original query in `\Elastica\Search::count`. [#1276](https://github.com/ruflin/Elastica/pull/1276)
+
+### Added
+
+- Added `\Elastica\Client::requestEndpoint`, `\Elastica\Index::requestEndpoint`, `\Elastica\Type::requestEndpoint` that allow make requests with official client Endpoint usage. [#1275](https://github.com/ruflin/Elastica/pull/1275)
+- Added `\Elastica\Aggregation\GeoBounds` that computes the bounding box containing all geo_point values for a field. [#1271](https://github.com/ruflin/Elastica/pull/1271)
+- Added `\Elastica\Query\MatchNone` the inverse of MatchAll. [#1276](https://github.com/ruflin/Elastica/pull/1276)
+
+### Improvements
+
+- added support for the "explain" flag of AnalyzeAPI [#1254](https://github.com/ruflin/Elastica/pull/1254)
+- added support for the "request_cache" search option [#1243](https://github.com/ruflin/Elastica/pull/1243)
+- skip sending "retry_on_conflict=0" default query param to improve compatibility with Amazon Elasticsearch [#1047](https://github.com/ruflin/Elastica/pull/1047)
+- optimized `\Elastica\Scroll` to avoid one request [#1273](https://github.com/ruflin/Elastica/pull/1273)
+- Update elasticsearch-php dependency to 5.2.0 [#1245](https://github.com/ruflin/Elastica/pull/1245)
+- Update elasticsearch testing dependency to 5.2.2 [#1245](https://github.com/ruflin/Elastica/pull/1245)
+
+### Deprecated
+
+- Deprecated `\Elastica\Exception\ElasticsearchException` which is irrelevant since Elasticsearch now exposes the errors as a structured array instead of a single string.
+  Use `\Elastica\Exception\ResponseException::getResponse::getFullError` instead.
+- Deprecated both `prefix_len` & `min_word_len` fields in `Elastica\Suggest\CandidateGenerator\DirectGenerator` as these now return errors when using the phrase suggester to querying terms.
+  Use `prefix_length` & `min_word_length` instead [#1282](https://github.com/ruflin/Elastica/pull/1282)
+  Use `\Elastica\Exception\ResponseException::getResponse::getFullError` instead. [#1251](https://github.com/ruflin/Elastica/pull/1251)
+
+## [5.1.0](https://github.com/ruflin/Elastica/compare/5.0.0...5.1.0)
+
+### Backward Compatibility Breaks
+
+- `\Elastica\Script\AbstractScript` added the script language as constructor argument and sub-classes must implement `getScriptTypeArray`
+
+### Bugfixes
+
+- Removed features that do not exist in Elasticsearch 5.0 anymore:
+  - `ttl` and `timestamp` logic: setters and getters in documents and mapping
+  - `\Elastica\Query\Missing`: negate `\Elastica\Query\Exists` instead
+  - `\Elastica\Query\TopChildren`
+- `\Elastica\Query\MatchPhrase` and `\Elastica\Query\MatchPhrasePrefix` do not extend `\Elastica\Query\Match` anymore because they do not share exactly the same options
+- Removed the `routing` option in `\Elastica\Index::create` because there is no routing param when creating an index. So that option was doing nothing so far but fails in Elasticearch 5.0 because the non-existing query param is validated.
+- Fix `relation` property of `\Elastica\Query\GeoShapeProvided`
+- repoint `\Elastica\Type::exists` from the deprecated /{index}/{type} endpoint to /{index}/_mapping/{type}
+
+### Added
+
+- added `\Elastica\Script\ScriptId` to reference stored scripts by ID
+- added `\Elastica\Query\AbstractGeoShape::RELATION_WITHIN`
+- Date math in index names is now escaped in URI
+- Added a check for paths that already have date math escaped
+
+### Improvements
+
+- `\Elastica\Query\HasParent` to use `parent_type` instead of `type`. Fixes warning due to field being deprecated.
+
+### Deprecated
+
+- Deprecated functionality that is also deprecated in Elasticsearch 5.0:
+  - `\Elastica\Client::optimizeAll` in favor of `\Elastica\Client::forcemergeAll`
+  - `\Elastica\Query\BoolQuery::setMinimumNumberShouldMatch` in favor of `\Elastica\Query\BoolQuery::setMinimumShouldMatch`
+  - `\Elastica\Query\GeoDistanceRange`: use distance aggregations or sorting instead
+  - `\Elastica\Query\GeohashCell`
+  - `\Elastica\Query\Indices`: search on the `_index` field instead
+  - `\Elastica\Query\Match::setFieldType`: use `\Elastica\Query\MatchPhrase` and `\Elastica\Query\MatchPhrasePrefix` instead
+- `\Elastica\Transport\Null` is deprecated because null is a reserved class name in PHP 7. Use `\Elastica\Transport\NullTransport` instead.
+
+## [5.0.0](https://github.com/ruflin/Elastica/compare/5.0.0-beta1...5.0.0)
+
+### Backward Compatibility Fixes
+- Updated Elastica\Test\Suggest\CompletionTest now payload and output are removed
+- Updated Elastica\Test\TypeTest::testGetDocumentWithFieldsSelection The stored_fields parameter will only return stored fields — it will no longer extract values from the _source
+- remove _shutdown for Node and Cluster as deprecated
+
+### Bugfixes
+- Query options such as "timeout" or "terminate_after" should not be ignored when using Multi\Search
+
+### Added
+- Added regex option form suggest completions https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html#regex
+
+### Improvements
+- `\Elastica\JSON` throws exception with readable message instead of errno
+- `\Elastica\JSON::stringify` throws `\Elastica\Exception\JSONParseException` on error
+
+
+## [5.0.0-beta1](https://github.com/ruflin/Elastica/compare/3.2.3...5.0.0-beta1)
+
+### Backward Compatibility Breaks
+- Update elasticsearch dependency to 5.0
+- Replace flush refresh param with a options array
+- Rename Mapping::setFields to Mapping::setStoredFields
+- Removing all deprecated filters including tests. Use queries instead.
+- Remove deprecated Elastica\Script*.php classes. Use Elastica\Script\* instead.
+- Remove Elastica/Query/Image.php and test/Elastica/Query/ImageTest.php, no more support for image-plugin.
+- Remove Elastica/Query/Filtered.php and test/Elastica/Query/FilteredTest.php and all uses from code.
+- Remove index.merge.policy.merge_factor, and set/get MergePolicy as it looks deprecated from ES 1.6
+- Add new "Percolate query" functionality and tests
+- Remove in Elastica\AbstractUpdateAction Option "percolate", getter and setter as deprecated as of ES 1.3. Use Percolator instead.
+- Remove in Elastica\Aggregation\DateHistogram Option "pre_zone" is deprecated as of ES 1.5. Use "time_zone" instead
+- Remove in Elastica\Aggregation\DateHistogram Option "post_zone" is deprecated as of ES 1.5. Use "time_zone" instead.
+- Remove in Elastica\Aggregation\DateHistogram Option "pre_zone_adjust_large_interval" is deprecated as of ES 1.5. Use "time_zone" instead.
+- Remove in Elastica\Aggregation\DateHistogram Option "pre_offset" is deprecated as of ES 1.5. Use "offset" instead.
+- Remove in Elastica\Aggregation\DateHistogram Option "post_offset" is deprecated as of ES 1.5. Use "offset" instead.
+- Remove Elastica\Document::add as deprecated. Use Elastica\Document::set instead
+- Remove Elastica\Document::setScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
+- Remove Elastica\Document::getScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
+- Remove Elastica\Document::hasScript() is no longer available as of 0.90.2. See http://elastica.io/migration/0.90.2/upsert.html to migrate.
+- Remove Elastica/Query::setLimit as deprecated. Use the Elastica/Query::setSize() method
+- Remove Elastica\Query\Builder
+- Remove Elastica\Query\Fuzzy::addField as deprecated. Use Elastica\Query\Fuzzy::setField and Elastica\Query\FuzzysetFieldOption instead.
+- Remove Elastica\Query::setIds as deprecated. Use Elastica\Query::like instead.
+- Remove Elastica\Query::setLikeText as deprecated. Use Elastica\Query::like instead.
+- Remove Elastica\Query Option "percent_terms_to_match" is deprecated as of ES 1.5. Use "minimum_should_match" instead.
+- Remove Elastica\QueryBuilder\DSL\Query "More Like This Field" query is deprecated as of ES 1.4. Use MoreLikeThis query instead.
+- Changed visibility from protected to private Elastica\ResultSet::$_position as accessing this property in an extended class is deprecated.
+- Changed visibility from protected to private Elastica\ResultSet::$_response as accessing this property in an extended class is deprecated.
+- Changed visibility from protected to private Elastica\ResultSet::$_query as accessing this property in an extended class is deprecated.
+- Changed visibility from protected to private Elastica\ResultSet::$_results as accessing this property in an extended class is deprecated.
+- Removed Elastica\ResultSet::$_timedOut as deprecated. Use ResultSet->hasTimedOut() instead.
+- Removed Elastica\ResultSet::$_took as deprecated. Use ResultSet->hasTimedOut() instead.
+- Removed Elastica\ResultSet::$_totalHits as deprecated. Use ResultSet->hasTimedOut() instead.
+- Removed Elastica\Type::delete() It is no longer possible to delete the mapping for a type. Instead you should delete the index and recreate it with the new mappings.
+- Removed Elastica\Query\Builder as deprecated. Use new Elastica\QueryBuilder instead.
+- Removed Elastica\Percolator as deprecated. Use new Elastica\Query\Percolate instead.
+- Changed Elastica\Index::deleteByQuery() to use new API https://www.elastic.co/guide/en/elasticsearch/reference/5.0/docs-delete-by-query.html
+- Remove Elastica\ScanAndScroll and test, Scan search type is removed from ElasticSearch 5.0.
+- Remove support for PHP 5.4 and 5.5. Require at least PHP 5.6 #1202
+- Remove groovy as default scripting language
+- Remove search_type=count as it is removed in Elasticsearch 5.0
+- Remove fielddata_fields as it has been deprecated in ES5, use parameter docvalue_fields instead
+
+### Added
+- Elastica\QueryBuilder\DSL\Query::exists
+- Elastica\QueryBuilder\DSL\Query::type
+
+### Improvements
+- Add a constant for the expression language.
+- `Health::getIndices` returns key=>value result, where key === $indexName.
+```
+$cluster->getHealth()->getIndices()[$indexName]
+// or
+$indices = $cluster->getHealth()->getIndices();
+$indices[$indexName]
+```
+- Added a `Query::setTrackScores` method
+- Implemented painless as default scripting language in tests
+- Updated Dockerfile and elasticsearch.yml to allow inline.script: true
+- Updated some Script function to use groovy as now default scripting is painless
+    - Elastica\Test\Aggregation\ScriptTest::testAggregationScript
+    - Elastica\Test\Aggregation\ScriptTest::testAggregationScriptAsString
+    - Elastica\Test\Query\FunctionScoreTest::testScriptScore
+    - Elastica\Test\BulkTest::testUpdate
+    - Elastica\Test\ClientTest::testUpdateDocumentByScript
+    - Elastica\Test\ClientTest::testUpdateDocumentByScriptWithUpsert
+    - Elastica\Test\ClientTest::testUpdateDocumentPopulateFields
+    - Elastica\Test\ClientTest::testUpdateDocumentPopulateFields
+    - Elastica\Test\TypeTest::testUpdateDocument
+    - Elastica\Test\TypeTest::testUpdateDocumentWithIdForwardSlashes
+    - Elastica\Test\TypeTest::testUpdateDocumentWithParameter
+    - Elastica\Test\TypeTest::testUpdateDocumentWithFieldsSource
+- Composer installations will no longer include tests and other development files.
+
+
+## [3.2.3](https://github.com/ruflin/Elastica/compare/3.2.2...3.2.3)
 
 ### Bugfixes
 - Query builder is now compatible with Elasticsearch 2.X

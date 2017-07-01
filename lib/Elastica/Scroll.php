@@ -32,12 +32,14 @@ class Scroll implements \Iterator
 
     /**
      * 0: scroll<br>
-     * 1: scroll id<br>
-     * 2: search type.
+     * 1: scroll id.
      *
      * @var array
      */
-    protected $_options = [null, null, null];
+    protected $_options = [null, null];
+
+    private $totalPages = 0;
+    private $currentPage = 0;
 
     /**
      * Constructor.
@@ -70,14 +72,21 @@ class Scroll implements \Iterator
      */
     public function next()
     {
-        $this->_saveOptions();
+        if ($this->currentPage < $this->totalPages) {
+            $this->_saveOptions();
 
-        $this->_search->setOption(Search::OPTION_SCROLL, $this->expiryTime);
-        $this->_search->setOption(Search::OPTION_SCROLL_ID, $this->_nextScrollId);
-        $this->_search->setOption(Search::OPTION_SEARCH_TYPE, Search::OPTION_SEARCH_TYPE_SCROLL);
-        $this->_setScrollId($this->_search->search());
+            $this->_search->setOption(Search::OPTION_SCROLL, $this->expiryTime);
+            $this->_search->setOption(Search::OPTION_SCROLL_ID, $this->_nextScrollId);
 
-        $this->_revertOptions();
+            $this->_setScrollId($this->_search->search());
+
+            $this->_revertOptions();
+        } else {
+            // If there are no pages left, we do not need to query ES.
+            // Reset scroll ID so valid() returns false.
+            $this->_nextScrollId = null;
+            $this->_currentResultSet = null;
+        }
     }
 
     /**
@@ -101,10 +110,7 @@ class Scroll implements \Iterator
      */
     public function valid()
     {
-        return
-            $this->_nextScrollId !== null
-            && $this->_currentResultSet !== null
-            && $this->_currentResultSet->count() > 0;
+        return $this->_nextScrollId !== null;
     }
 
     /**
@@ -115,15 +121,14 @@ class Scroll implements \Iterator
     public function rewind()
     {
         // reset state
-        $this->_nextScrollId = null;
-        $this->_options = [null, null, null];
+        $this->_options = [null, null];
+        $this->currentPage = 0;
 
         // initial search
         $this->_saveOptions();
 
         $this->_search->setOption(Search::OPTION_SCROLL, $this->expiryTime);
         $this->_search->setOption(Search::OPTION_SCROLL_ID, null);
-        $this->_search->setOption(Search::OPTION_SEARCH_TYPE, null);
         $this->_setScrollId($this->_search->search());
 
         $this->_revertOptions();
@@ -137,11 +142,9 @@ class Scroll implements \Iterator
     protected function _setScrollId(ResultSet $resultSet)
     {
         $this->_currentResultSet = $resultSet;
-
-        $this->_nextScrollId = null;
-        if ($resultSet->getResponse()->isOk()) {
-            $this->_nextScrollId = $resultSet->getResponse()->getScrollId();
-        }
+        ++$this->currentPage;
+        $this->totalPages = $resultSet->count() > 0 ? ceil($resultSet->getTotalHits() / $resultSet->count()) : 0;
+        $this->_nextScrollId = $resultSet->getResponse()->isOk() ? $resultSet->getResponse()->getScrollId() : null;
     }
 
     /**
@@ -156,10 +159,6 @@ class Scroll implements \Iterator
         if ($this->_search->hasOption(Search::OPTION_SCROLL_ID)) {
             $this->_options[1] = $this->_search->getOption(Search::OPTION_SCROLL_ID);
         }
-
-        if ($this->_search->hasOption(Search::OPTION_SEARCH_TYPE)) {
-            $this->_options[2] = $this->_search->getOption(Search::OPTION_SEARCH_TYPE);
-        }
     }
 
     /**
@@ -169,6 +168,5 @@ class Scroll implements \Iterator
     {
         $this->_search->setOption(Search::OPTION_SCROLL, $this->_options[0]);
         $this->_search->setOption(Search::OPTION_SCROLL_ID, $this->_options[1]);
-        $this->_search->setOption(Search::OPTION_SEARCH_TYPE, $this->_options[2]);
     }
 }

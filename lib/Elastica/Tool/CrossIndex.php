@@ -2,16 +2,18 @@
 namespace Elastica\Tool;
 
 use Elastica\Bulk;
+use Elastica\Bulk\Action;
 use Elastica\Index;
 use Elastica\Query\MatchAll;
-use Elastica\ScanAndScroll;
-use Elastica\Search;
+use Elastica\Scroll;
 use Elastica\Type;
 
 /**
  * Functions to move documents and types between indices.
  *
  * @author Manuel Andreo Garcia <andreo.garcia@gmail.com>
+ *
+ * @deprecated use Reindex instead. This class will be removed in further Elastica releases.
  */
 class CrossIndex
 {
@@ -34,7 +36,7 @@ class CrossIndex
     /**
      * Expiry time option.
      *
-     * type: string (see Elastica\ScanAndScroll)
+     * type: string (see Elastica\Scroll)
      * default: '1m'
      */
     const OPTION_EXPIRY_TIME = 'expiryTime';
@@ -42,7 +44,7 @@ class CrossIndex
     /**
      * Size per shard option.
      *
-     * type: int (see Elastica\ScanAndScroll)
+     * type: int (see Elastica\Scroll)
      * default: 1000
      */
     const OPTION_SIZE_PER_SHARD = 'sizePerShard';
@@ -83,17 +85,16 @@ class CrossIndex
         $search->setQuery($options[self::OPTION_QUERY]);
 
         // search on old index and bulk insert in new index
-        $scanAndScroll = new ScanAndScroll(
+        $scroll = new Scroll(
             $search,
-            $options[self::OPTION_EXPIRY_TIME],
-            $options[self::OPTION_SIZE_PER_SHARD]
+            $options[self::OPTION_EXPIRY_TIME]
         );
-        foreach ($scanAndScroll as $resultSet) {
+        foreach ($scroll as $resultSet) {
             $bulk = new Bulk($newIndex->getClient());
             $bulk->setIndex($newIndex);
 
             foreach ($resultSet as $result) {
-                $action = new Bulk\Action();
+                $action = new Action();
                 $action->setType($result->getType());
                 $action->setId($result->getId());
                 $action->setSource($result->getData());

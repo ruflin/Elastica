@@ -11,6 +11,66 @@ namespace Elastica;
  */
 class Util
 {
+    /** @var array */
+    protected static $dateMathSymbols = ['<', '>', '/', '{', '}', '|', '+', ':', ','];
+
+    /** @var array */
+    protected static $escapedDateMathSymbols = ['%3C', '%3E', '%2F', '%7B', '%7D', '%7C', '%2B', '%3A', '%2C'];
+
+    /**
+     * Checks if date math is already escaped within request URI.
+     *
+     * @param string $requestUri
+     *
+     * @return bool
+     */
+    public static function isDateMathEscaped($requestUri)
+    {
+        // In practice, the only symbol that really needs to be escaped in URI is '/' => '%2F'
+        return false !== strpos(strtoupper($requestUri), '%2F');
+    }
+
+    /**
+     * Escapes date math symbols within request URI.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.x/date-math-index-names.html
+     *
+     * @param string $requestUri
+     *
+     * @return string
+     */
+    public static function escapeDateMath($requestUri)
+    {
+        if (empty($requestUri)) {
+            return $requestUri;
+        }
+
+        // Check if date math if used at all. Find last '>'. E.g. /<log-{now/d}>,log-2011.12.01/log/_refresh
+        $pos1 = strrpos($requestUri, '>');
+        if (false === $pos1) {
+            return $requestUri;
+        }
+
+        // Find the position up to which we should escape.
+        // Should be next slash '/' after last '>' E.g. /<log-{now/d}>,log-2011.12.01/log/_refresh
+        $pos2 = strpos($requestUri, '/', $pos1);
+        $pos2 = false !== $pos2 ? $pos2 : strlen($requestUri);
+
+        // Cut out the bit we need to escape: /<log-{now/d}>,log-2011.12.01
+        $uriSegment = substr($requestUri, 0, $pos2);
+
+        // Escape using character map
+        $escapedUriSegment = str_replace(static::$dateMathSymbols, static::$escapedDateMathSymbols, $uriSegment);
+
+        // '\\{' and '\\}' should not be escaped
+        if (false !== strpos($uriSegment, '\\\\')) {
+            $escapedUriSegment = str_replace(['\\\\%7B', '\\\\%7D'], ['\\\\{', '\\\\}'], $escapedUriSegment);
+        }
+
+        // Replace part of the string. E.g. /%3Clog-%7Bnow%2Fd%7D%3E%2Clog-2011.12.01/log/_refresh
+        return substr_replace($requestUri, $escapedUriSegment, 0, $pos2);
+    }
+
     /**
      * Replace the following reserved words: AND OR NOT
      * and
@@ -144,9 +204,9 @@ class Util
 
     /**
      * Tries to guess the name of the param, based on its class
-     * Example: \Elastica\Filter\HasChildFilter => has_child.
+     * Example: \Elastica\Query\MatchAll => match_all.
      *
-     * @param string|object Class or Class name
+     * @param string|object Object or class name
      *
      * @return string parameter name
      */
@@ -158,10 +218,9 @@ class Util
 
         $parts = explode('\\', $class);
         $last = array_pop($parts);
-        $last = preg_replace('/(Query|Filter)$/', '', $last);
-        $name = self::toSnakeCase($last);
+        $last = preg_replace('/Query$/', '', $last); // for BoolQuery
 
-        return $name;
+        return self::toSnakeCase($last);
     }
 
     /**

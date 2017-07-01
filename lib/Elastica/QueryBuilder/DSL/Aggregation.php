@@ -30,7 +30,7 @@ use Elastica\Aggregation\Terms;
 use Elastica\Aggregation\TopHits;
 use Elastica\Aggregation\ValueCount;
 use Elastica\Exception\NotImplementedException;
-use Elastica\Filter\AbstractFilter;
+use Elastica\Query\AbstractQuery;
 use Elastica\QueryBuilder\DSL;
 
 /**
@@ -255,12 +255,12 @@ class Aggregation implements DSL
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
      *
-     * @param string         $name
-     * @param AbstractFilter $filter
+     * @param string        $name
+     * @param AbstractQuery $filter
      *
      * @return FilterAggregation
      */
-    public function filter($name, $filter = null)
+    public function filter($name, AbstractQuery $filter = null)
     {
         return new FilterAggregation($name, $filter);
     }

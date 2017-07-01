@@ -1,10 +1,12 @@
 <?php
 namespace Elastica\Query;
 
+trigger_error('Elastica\Query\GeohashCell is deprecated.', E_USER_DEPRECATED);
+
 /**
  * Class GeohashCell.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geohash-cell-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-geohash-cell-query.html
  */
 class GeohashCell extends AbstractGeoDistance
 {

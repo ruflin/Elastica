@@ -14,11 +14,13 @@ class JSON
      * @link http://php.net/manual/en/function.json-decode.php
      * @link http://php.net/manual/en/function.json-last-error.php
      *
-     * @param string $json JSON string to parse
+     * @param string $args,... JSON string to parse
+     *
+     * @throws JSONParseException
      *
      * @return array PHP array representation of JSON string
      */
-    public static function parse(/* inherit from json_decode */)
+    public static function parse($args/* inherit from json_decode */)
     {
         // extract arguments
         $args = func_get_args();
@@ -32,8 +34,7 @@ class JSON
         $array = call_user_func_array('json_decode', $args);
 
         // turn errors into exceptions for easier catching
-        $error = json_last_error();
-        if ($error !== JSON_ERROR_NONE) {
+        if ($error = self::getJsonLastErrorMsg()) {
             throw new JSONParseException($error);
         }
 
@@ -45,17 +46,42 @@ class JSON
      * Convert input to JSON string with standard options.
      *
      * @link http://php.net/manual/en/function.json-encode.php
+     * @link http://php.net/manual/en/function.json-last-error.php
      *
-     * @param  mixed check args for PHP function json_encode
+     * @param mixed $args,... Target to stringify
+     *
+     * @throws JSONParseException
      *
      * @return string Valid JSON representation of $input
      */
-    public static function stringify(/* inherit from json_encode */)
+    public static function stringify($args/* inherit from json_encode */)
     {
         // extract arguments
         $args = func_get_args();
 
         // run encode and output
-        return call_user_func_array('json_encode', $args);
+        $string = call_user_func_array('json_encode', $args);
+
+        // turn errors into exceptions for easier catching
+        if ($error = self::getJsonLastErrorMsg()) {
+            throw new JSONParseException($error);
+        }
+
+        // output
+        return $string;
+    }
+
+    /**
+     * Get Json Last Error.
+     *
+     * @link http://php.net/manual/en/function.json-last-error.php
+     * @link http://php.net/manual/en/function.json-last-error-msg.php
+     * @link https://github.com/php/php-src/blob/master/ext/json/json.c#L308
+     *
+     * @return string
+     */
+    private static function getJsonLastErrorMsg()
+    {
+        return JSON_ERROR_NONE !== json_last_error() ? json_last_error_msg() : false;
     }
 }

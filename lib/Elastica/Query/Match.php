@@ -11,8 +11,13 @@ namespace Elastica\Query;
  */
 class Match extends AbstractQuery
 {
+    const OPERATOR_OR = 'or';
+    const OPERATOR_AND = 'and';
+
     const ZERO_TERM_NONE = 'none';
     const ZERO_TERM_ALL = 'all';
+
+    const FUZZINESS_AUTO = 'AUTO';
 
     /**
      * @param string $field
@@ -78,9 +83,13 @@ class Match extends AbstractQuery
      * @param string $type
      *
      * @return $this
+     *
+     * @deprecated Replaced by Elastica\Query\MatchPhrase and Elastica\Query\MatchPhrasePrefix
      */
     public function setFieldType($field, $type)
     {
+        trigger_error('Deprecated: Elastica\Query\Match::setFieldType() is deprecated and will be removed in further Elastica releases. Use Elastica\Query\MatchPhrase and Elastica\Query\MatchPhrasePrefix instead.', E_USER_DEPRECATED);
+
         return $this->setFieldParam($field, 'type', $type);
     }
 
@@ -92,7 +101,7 @@ class Match extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldOperator($field, $operator)
+    public function setFieldOperator($field, $operator = self::OPERATOR_OR)
     {
         return $this->setFieldParam($field, 'operator', $operator);
     }
@@ -202,7 +211,7 @@ class Match extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldZeroTermsQuery($field, $zeroTermQuery = 'none')
+    public function setFieldZeroTermsQuery($field, $zeroTermQuery = self::ZERO_TERM_NONE)
     {
         return $this->setFieldParam($field, 'zero_terms_query', $zeroTermQuery);
     }

@@ -1,8 +1,6 @@
 <?php
 namespace Elastica;
 
-use Elastica\Exception\DeprecatedException;
-
 /**
  * Base class for things that can be sent to the update api (Document and
  * Script).
@@ -44,34 +42,6 @@ class AbstractUpdateAction extends Param
     public function hasId()
     {
         return '' !== (string) $this->getId();
-    }
-
-    /**
-     * Sets lifetime of document.
-     *
-     * @param string $ttl
-     *
-     * @return $this
-     */
-    public function setTtl($ttl)
-    {
-        return $this->setParam('_ttl', $ttl);
-    }
-
-    /**
-     * @return string
-     */
-    public function getTtl()
-    {
-        return $this->getParam('_ttl');
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasTtl()
-    {
-        return $this->hasParam('_ttl');
     }
 
     /**
@@ -257,42 +227,6 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Set percolate query param.
-     *
-     * @param string $value percolator filter
-     *
-     * @deprecated Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.
-     *
-     * @return $this
-     */
-    public function setPercolate($value = '*')
-    {
-        throw new DeprecatedException('Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.');
-    }
-
-    /**
-     * Get percolate parameter.
-     *
-     * @deprecated Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.
-     *
-     * @return string
-     */
-    public function getPercolate()
-    {
-        throw new DeprecatedException('Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.');
-    }
-
-    /**
-     * @deprecated Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.
-     *
-     * @return bool
-     */
-    public function hasPercolate()
-    {
-        throw new DeprecatedException('Option "percolate" deprecated as of ES 1.3 and will be removed in further Elastica releases. Use Percolator instead.');
-    }
-
-    /**
      * Set routing query param.
      *
      * @param string $value routing
@@ -387,39 +321,13 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param string $timestamp
-     *
-     * @return $this
-     */
-    public function setTimestamp($timestamp)
-    {
-        return $this->setParam('_timestamp', $timestamp);
-    }
-
-    /**
-     * @return int
-     */
-    public function getTimestamp()
-    {
-        return $this->getParam('_timestamp');
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasTimestamp()
-    {
-        return $this->hasParam('_timestamp');
-    }
-
-    /**
      * @param bool $refresh
      *
      * @return $this
      */
     public function setRefresh($refresh = true)
     {
-        return $this->setParam('_refresh', (bool) $refresh);
+        return $this->setParam('_refresh', (bool) $refresh ? 'true' : 'false');
     }
 
     /**
@@ -427,7 +335,7 @@ class AbstractUpdateAction extends Param
      */
     public function getRefresh()
     {
-        return $this->getParam('_refresh');
+        return 'true' === $this->getParam('_refresh');
     }
 
     /**

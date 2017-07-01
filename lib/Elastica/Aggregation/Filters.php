@@ -2,7 +2,6 @@
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
-use Elastica\Filter\AbstractFilter;
 use Elastica\Query\AbstractQuery;
 
 /**
@@ -30,14 +29,8 @@ class Filters extends AbstractAggregation
      *
      * @return $this
      */
-    public function addFilter($filter, $name = null)
+    public function addFilter(AbstractQuery $filter, $name = null)
     {
-        if ($filter instanceof AbstractFilter) {
-            trigger_error('Deprecated: Elastica\Aggregation\Filters\addFilter() passing filter as AbstractFilter is deprecated. Pass instance of AbstractQuery instead.', E_USER_DEPRECATED);
-        } elseif (!($filter instanceof AbstractQuery)) {
-            throw new InvalidException('Filter must be instance of AbstractQuery');
-        }
-
         if (null !== $name && !is_string($name)) {
             throw new InvalidException('Name must be a string');
         }
@@ -66,6 +59,30 @@ class Filters extends AbstractAggregation
     }
 
     /**
+     * @param bool $otherBucket
+     *
+     * @return $this
+     */
+    public function setOtherBucket($otherBucket)
+    {
+        if (!is_bool($otherBucket)) {
+            throw new \InvalidArgumentException('other_bucket only supports boolean values');
+        }
+
+        return $this->setParam('other_bucket', $otherBucket);
+    }
+
+    /**
+     * @param string $otherBucketKey
+     *
+     * @return $this
+     */
+    public function setOtherBucketKey($otherBucketKey)
+    {
+        return $this->setParam('other_bucket_key', $otherBucketKey);
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -80,6 +97,14 @@ class Filters extends AbstractAggregation
             } else {
                 $array['filters']['filters'][] = current($filter)->toArray();
             }
+        }
+
+        if ($this->hasParam('other_bucket')) {
+            $array['filters']['other_bucket'] = $this->getParam('other_bucket');
+        }
+
+        if ($this->hasParam('other_bucket_key')) {
+            $array['filters']['other_bucket_key'] = $this->getParam('other_bucket_key');
         }
 
         if ($this->_aggs) {

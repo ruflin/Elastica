@@ -4,33 +4,41 @@ namespace Elastica\Query;
 /**
  * geo_shape query.
  *
- * Query pre-indexed shape definitions
- *
  * @author Bennie Krijger <benniekrijger@gmail.com>
  *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-shape-query.html
  */
 abstract class AbstractGeoShape extends AbstractQuery
 {
+    /** Return all documents whose geo_shape field intersects the query geometry. (default behavior) */
     const RELATION_INTERSECT = 'intersects';
+
+    /** Return all documents whose geo_shape field has nothing in common with the query geometry. */
     const RELATION_DISJOINT = 'disjoint';
-    const RELATION_CONTAINS = 'within';
+
+    /** Return all documents whose geo_shape field is within the query geometry. */
+    const RELATION_WITHIN = 'within';
+
+    /** Return all documents whose geo_shape field contains the query geometry. */
+    const RELATION_CONTAINS = 'contains';
 
     /**
-     * @var string
+     * Elasticsearch path of the geo_shape field.
      *
-     * elasticsearch path of the pre-indexed shape
+     * @var string
      */
     protected $_path;
 
     /**
      * @var string
-     *
-     * the relation of the 2 shaped: intersects, disjoint, within
      */
     protected $_relation = self::RELATION_INTERSECT;
 
     /**
+     * Sets the relation of the geo_shape field and the query geometry.
+     *
+     * Possible values: intersects, disjoint, within, contains (see constants).
+     *
      * @param string $relation
      *
      * @return $this
@@ -43,6 +51,8 @@ abstract class AbstractGeoShape extends AbstractQuery
     }
 
     /**
+     * Gets the relation of the geo_shape field and the query geometry.
+     *
      * @return string
      */
     public function getRelation()

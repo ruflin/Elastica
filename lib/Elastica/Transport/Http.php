@@ -7,6 +7,7 @@ use Elastica\Exception\ResponseException;
 use Elastica\JSON;
 use Elastica\Request;
 use Elastica\Response;
+use Elastica\Util;
 
 /**
  * Elastica Http Transport object.
@@ -58,7 +59,12 @@ class Http extends AbstractTransport
             $baseUri = $this->_scheme.'://'.$connection->getHost().':'.$connection->getPort().'/'.$connection->getPath();
         }
 
-        $baseUri .= $request->getPath();
+        $requestPath = $request->getPath();
+        if (!Util::isDateMathEscaped($requestPath)) {
+            $requestPath = Util::escapeDateMath($requestPath);
+        }
+
+        $baseUri .= $requestPath;
 
         $query = $request->getQuery();
 
@@ -130,6 +136,7 @@ class Http extends AbstractTransport
                 $content = str_replace('\/', '/', $content);
             }
 
+            array_push($headers, sprintf('Content-Type: %s', $request->getContentType()));
             if ($connection->hasCompression()) {
                 // Compress the body of the request ...
                 curl_setopt($conn, CURLOPT_POSTFIELDS, gzencode($content));
