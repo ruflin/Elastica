@@ -209,13 +209,11 @@ class Action
                 $docAsUpsert = (isset($source['doc_as_upsert'])) ? ', "doc_as_upsert": '.$source['doc_as_upsert'] : '';
                 $string .= '{"doc": '.$source['doc'].$docAsUpsert.'}';
             } else {
-                $data = JSON::stringify($source, JSON_UNESCAPED_UNICODE);
+                $data = JSON::stringify($source);
 				if ($data === false) {
-					echo '--------------Exception-------------';
 					throw new InvalidException(sprintf('Invalid utf-8 data provided: "%s"', print_r($source, true)));
-				} else {
-                     echo '--------------NoException-------------';
-                }
+				}
+
 				$string .= $data;
             }
             $string .= Bulk::DELIMITER;
