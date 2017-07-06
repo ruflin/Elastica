@@ -24,7 +24,6 @@ RUN pecl install xdebug-2.4.0
 
 RUN echo "memory_limit=1024M" >> /usr/local/etc/php/conf.d/memory-limit.ini
 RUN echo "date.timezone=UTC" >> /usr/local/etc/php/conf.d/timezone.ini
-RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 # Install and setup composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

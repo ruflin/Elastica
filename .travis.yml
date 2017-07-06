@@ -1,5 +1,7 @@
 sudo: required
-group: deprecated-2017Q2
+dist: trusty
+
+group: edge
 
 
 services:
@@ -19,7 +21,7 @@ before_install:
   #- apt-cache madison docker-engine
 
   # update docker engine to the desired version
-  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=1.13.1-0~ubuntu-trusty
+  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-ce=17.03.1~ce-0~ubuntu-trusty
 
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m` > docker-compose
