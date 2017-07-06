@@ -106,6 +106,46 @@ class SettingsTest extends BaseTest
     /**
      * @group functional
      */
+    public function testGetNumberOfShards()
+    {
+        $indexName = 'test';
+
+        $client = $this->_getClient();
+        $index = $client->getIndex($indexName);
+        $index->create(['index' => ['number_of_shards' => 1]], true);
+
+        $settings = $index->getSettings();
+
+        // Test with default number of replicas
+        $this->assertEquals(1, $settings->get('number_of_shards'));
+        $this->assertEquals(1, $settings->getNumberOfShards());
+
+        $index->delete();
+    }
+
+    /**
+     * @group functional
+     */
+    public function testGetDefaultNumberOfShards()
+    {
+        $indexName = 'test';
+
+        $client = $this->_getClient();
+        $index = $client->getIndex($indexName);
+        $index->create([], true);
+
+        $settings = $index->getSettings();
+
+        // Test with default number of shards
+        $this->assertEquals(IndexSettings::DEFAULT_NUMBER_OF_SHARDS, $settings->get('number_of_shards'));
+        $this->assertEquals(IndexSettings::DEFAULT_NUMBER_OF_SHARDS, $settings->getNumberOfShards());
+
+        $index->delete();
+    }
+
+    /**
+     * @group functional
+     */
     public function testSetRefreshInterval()
     {
         $indexName = 'test';

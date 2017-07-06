@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
  - Added getNumberOfReplicas() for index settings [PR#1324](https://github.com/ruflin/Elastica/pull/1324)
+ - Added getNumberOfShards() for index settings [PR#1321](https://github.com/ruflin/Elastica/pull/1331)
 
 ### Improvements
 
