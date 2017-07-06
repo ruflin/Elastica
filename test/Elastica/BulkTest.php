@@ -345,7 +345,7 @@ class BulkTest extends BaseTest
             [
                 [
                     ['index' => ['_index' => 'test', '_type' => 'user', '_id' => '1']],
-                    ['user' => ['name' => "\xe2\x82\x28"]],
+                    ['user' => ['name' => utf8_decode('\xe2\x82\x28')]],
                     ['delete' => ['_index' => 'test', '_type' => 'user', '_id' => '2']],
                 ],
                 'Invalid UTF-8 data',
