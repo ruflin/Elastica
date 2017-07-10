@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 
+ - Removed `Query\NumericRange`, use `Query\Range` instead [#1334](https://github.com/ruflin/Elastica/pull/1334)
+ 
 ### Bugfixes
 
 - Send the `scroll_id` inside a json body instead of plain text [#1325](https://github.com/ruflin/Elastica/pull/1325)
@@ -15,7 +17,6 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 
 ### Deprecated
- - Removed `Query\NumericRange`, use `Query\Range` instead [#1334](https://github.com/ruflin/Elastica/pull/1334)
 
 ## [5.2.1](https://github.com/ruflin/Elastica/compare/5.2.0...5.2.1)
 
