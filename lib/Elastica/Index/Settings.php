@@ -24,6 +24,8 @@ class Settings
 
     const DEFAULT_NUMBER_OF_REPLICAS = 1;
 
+    const DEFAULT_NUMBER_OF_SHARDS = 5;
+
     /**
      * Response.
      *
@@ -151,6 +153,24 @@ class Settings
         }
 
         return $replicas;
+    }
+
+    /**
+     * Returns the number of shards.
+     *
+     * If no number of shards is set, the default number is returned
+     *
+     * @return int The number of shards
+     */
+    public function getNumberOfShards()
+    {
+        $shards = $this->get('number_of_shards');
+
+        if (null === $shards) {
+            $shards = self::DEFAULT_NUMBER_OF_SHARDS;
+        }
+
+        return $shards;
     }
 
     /**
