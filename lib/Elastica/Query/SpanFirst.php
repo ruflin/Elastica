@@ -20,11 +20,11 @@ class SpanFirst extends AbstractSpanQuery
      */
     public function __construct($match = null, $end = null)
     {
-        if (null !== $match) {
+        if (!is_null($match)) {
             $this->setMatch($match);
         }
 
-        if (null !== $end) {
+        if (!is_null($match)) {
             $this->setEnd($end);
         }
     }
@@ -34,11 +34,13 @@ class SpanFirst extends AbstractSpanQuery
      *
      * @param \Elastica\Query\AbstractSpanQuery|array $args Matching query
      *
+     * @throws \Elastica\Exception\InvalidException If not valid query
+     *
      * @return $this
      */
     public function setMatch($args)
     {
-        return $this->_addQuery('match', $args);
+        return $this->_setQuery('match', $args);
     }
 
     /**
@@ -56,7 +58,7 @@ class SpanFirst extends AbstractSpanQuery
     }
 
     /**
-     * Adds a query to the current object.
+     * Sets a query to the current object.
      *
      * @param string                              $type Query type
      * @param \Elastica\Query\AbstractQuery|array $args Query
@@ -65,7 +67,7 @@ class SpanFirst extends AbstractSpanQuery
      *
      * @return $this
      */
-    protected function _addQuery($type, $args)
+    protected function _setQuery($type, $args)
     {
         if (!is_array($args) && !($args instanceof AbstractSpanQuery)) {
             throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractSpanQuery');
