@@ -16,8 +16,8 @@ class SpanNear extends AbstractSpanQuery
      * Constructs a SpanNear query object.
      *
      * @param AbstractSpanQuery[] $clauses OPTIONAL
-     * @param int $slop OPTIONAL maximum proximity
-     * @param bool $inOrder OPTIONAL true if order of searched clauses is important
+     * @param int                 $slop    OPTIONAL maximum proximity
+     * @param bool                $inOrder OPTIONAL true if order of searched clauses is important
      */
     public function __construct($clauses = [], $slop = 1, $inOrder = false)
     {

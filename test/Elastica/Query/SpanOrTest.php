@@ -88,6 +88,5 @@ class SpanOrTest extends BaseTest
         $spanOrQuery = new SpanOr([$spanTermQuery1, $spanTermQuery2]);
         $resultSet = $type->search($spanOrQuery);
         $this->assertEquals(1, $resultSet->count());
-
     }
 }

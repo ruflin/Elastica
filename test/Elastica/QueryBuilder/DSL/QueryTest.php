@@ -77,6 +77,5 @@ class QueryTest extends AbstractDSLTest
 
         $this->_assertNotImplemented($queryDSL, 'geo_shape', []);
         $this->_assertNotImplemented($queryDSL, 'span_not', []);
-
     }
 }

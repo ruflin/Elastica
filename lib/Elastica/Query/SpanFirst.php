@@ -16,7 +16,7 @@ class SpanFirst extends AbstractSpanQuery
      * Constructs a SpanFirst query object.
      *
      * @param \Elastica\Query\AbstractQuery|array $match OPTIONAL
-     * @param int $end OPTIONAL
+     * @param int                                 $end   OPTIONAL
      */
     public function __construct($match = null, $end = null)
     {

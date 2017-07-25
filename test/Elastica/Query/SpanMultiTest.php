@@ -6,7 +6,6 @@ use Elastica\Query\Fuzzy;
 use Elastica\Query\Prefix;
 use Elastica\Query\Regexp;
 use Elastica\Query\SpanMulti;
-use Elastica\Query\Term;
 use Elastica\Query\Wildcard;
 use Elastica\Test\Base as BaseTest;
 
@@ -30,7 +29,7 @@ class SpanMultiTest extends BaseTest
                             'boost' => 0.7,
                         ],
                     ],
-                ]
+                ],
             ],
         ];
 
@@ -43,10 +42,10 @@ class SpanMultiTest extends BaseTest
                 'match' => [
                     'fuzzy' => [
                         $field => [
-                            'value' => $value
+                            'value' => $value,
                         ],
                     ],
-                ]
+                ],
             ],
         ];
 
@@ -77,7 +76,7 @@ class SpanMultiTest extends BaseTest
         ]);
         $index->refresh();
 
-        $spanMultiQuery= new SpanMulti();
+        $spanMultiQuery = new SpanMulti();
 
         //multi with prefix will match 3
         $prefixQuery = new Prefix([$field => ['value' => 'conse']]);

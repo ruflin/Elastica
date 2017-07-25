@@ -357,7 +357,7 @@ class Query implements DSL
      * span first query.
      *
      * @param \Elastica\Query\AbstractQuery|array $match
-     * @param int $end
+     * @param int                                 $end
      *
      * @return SpanFirst
      *
@@ -386,8 +386,8 @@ class Query implements DSL
      * span near query.
      *
      * @param array $clauses
-     * @param int $slop
-     * @param bool $inOrder
+     * @param int   $slop
+     * @param bool  $inOrder
      *
      * @return SpanNear
      *

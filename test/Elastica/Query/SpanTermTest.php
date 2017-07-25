@@ -36,7 +36,7 @@ class SpanTermTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
-        $docMisData =  [$field => 'mismatch', 'email' => 'test2@test.com'];
+        $docMisData = [$field => 'mismatch', 'email' => 'test2@test.com'];
         $docHitData = [$field => $value, 'email' => 'test@test.com'];
 
         $doc1 = new Document(1, $docMisData);
