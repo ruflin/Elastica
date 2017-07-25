@@ -26,6 +26,11 @@ use Elastica\Query\QueryString;
 use Elastica\Query\Range;
 use Elastica\Query\Regexp;
 use Elastica\Query\SimpleQueryString;
+use Elastica\Query\SpanFirst;
+use Elastica\Query\SpanMulti;
+use Elastica\Query\SpanNear;
+use Elastica\Query\SpanOr;
+use Elastica\Query\SpanTerm;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
 use Elastica\Query\Type;
@@ -351,31 +356,46 @@ class Query implements DSL
     /**
      * span first query.
      *
+     * @param \Elastica\Query\AbstractQuery|array $match
+     * @param int $end
+     *
+     * @return SpanFirst
+     *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
      */
-    public function span_first()
+    public function span_first($match = null, $end = null)
     {
-        throw new NotImplementedException();
+        return new SpanFirst($match, $end);
     }
 
     /**
      * span multi term query.
      *
+     * @param \Elastica\Query\AbstractQuery|array $match
+     *
+     * @return SpanMulti
+     *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html
      */
-    public function span_multi_term()
+    public function span_multi_term($match = null)
     {
-        throw new NotImplementedException();
+        return new SpanMulti($match);
     }
 
     /**
      * span near query.
      *
+     * @param array $clauses
+     * @param int $slop
+     * @param bool $inOrder
+     *
+     * @return SpanNear
+     *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-near-query.html
      */
-    public function span_near()
+    public function span_near($clauses = [], $slop = 1, $inOrder = false)
     {
-        throw new NotImplementedException();
+        return new SpanNear($clauses, $slop, $inOrder);
     }
 
     /**
@@ -389,23 +409,31 @@ class Query implements DSL
     }
 
     /**
-     * span or query.
+     * span_or query.
+     *
+     * @param array $clauses
+     *
+     * @return SpanOr
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-or-query.html
      */
-    public function span_or()
+    public function span_or($clauses = [])
     {
-        throw new NotImplementedException();
+        return new SpanOr($clauses);
     }
 
     /**
-     * span term query.
+     * span_term query.
+     *
+     * @param array $term
+     *
+     * @return SpanTerm
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
      */
-    public function span_term()
+    public function span_term(array $term = [])
     {
-        throw new NotImplementedException();
+        return new SpanTerm($term);
     }
 
     /**
