@@ -29,4 +29,4 @@ Dependencies
 ------------
 | Project | Version | Required |
 |---------|---------|----------|
-|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/5.2)|5.2|yes|
+|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/5.3)|5.3|yes|

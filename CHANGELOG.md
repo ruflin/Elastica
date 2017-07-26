@@ -1,11 +1,23 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/5.2.1...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.0...master)
+
+### Backward Compatibility Breaks
+ 
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+## [5.3.0](https://github.com/ruflin/Elastica/compare/5.3.0...master)
 
 ### Backward Compatibility Breaks
 
- - Removed `Query\NumericRange`, use `Query\Range` instead [#1334](https://github.com/ruflin/Elastica/pull/1334)
+- Removed `Query\NumericRange`, use `Query\Range` instead [#1334](https://github.com/ruflin/Elastica/pull/1334)
  
 ### Bugfixes
 
@@ -15,9 +27,6 @@ All notable changes to this project will be documented in this file based on the
  - Added getNumberOfReplicas() for index settings [PR#1324](https://github.com/ruflin/Elastica/pull/1324)
  - Added getNumberOfShards() for index settings [PR#1321](https://github.com/ruflin/Elastica/pull/1331)
 
-### Improvements
-
-### Deprecated
 
 ## [5.2.1](https://github.com/ruflin/Elastica/compare/5.2.0...5.2.1)
 
