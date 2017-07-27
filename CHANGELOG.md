@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Deprecated
 
-## [5.3.0](https://github.com/ruflin/Elastica/compare/5.3.0...master)
+## [5.3.0](https://github.com/ruflin/Elastica/compare/5.2.1...5.3.0)
 
 ### Backward Compatibility Breaks
 
@@ -26,6 +26,7 @@ All notable changes to this project will be documented in this file based on the
 ### Added
  - Added getNumberOfReplicas() for index settings [PR#1324](https://github.com/ruflin/Elastica/pull/1324)
  - Added getNumberOfShards() for index settings [PR#1321](https://github.com/ruflin/Elastica/pull/1331)
+ - Added `\Elastica\Query\Span*` for proximity searches [#304](https://github.com/ruflin/Elastica/issues/304)
 
 
 ## [5.2.1](https://github.com/ruflin/Elastica/compare/5.2.0...5.2.1)
@@ -39,7 +40,6 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 
- - Added `\Elastica\Query\Span*` for proximity searches [#304](https://github.com/ruflin/Elastica/issues/304)
  - Parameter `filter_path` for response filtering (e.g. `$index->search($query, ['filter_path' => 'hits.hits._source'])`)
  - Add support for Health parameters for Cluster\Health endpoint (new prop : delayed_unassigned_shards, number_of_pending_tasks, number_of_in_flight_fetch, task_max_waiting_in_queue_millis, active_shards_percent_as_number)
  - Add support for querystring in Type. this allow to use `update_all_types` in type mapping in order to resolve conflicts between fields in different types. [Conflicts between fields in different types](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-put-mapping.html#merging-conflicts)
