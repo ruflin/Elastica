@@ -37,18 +37,22 @@ class SpanNear extends AbstractSpanQuery
 
     /**
      * @param int $slop
+     *
+     * @return $this
      */
     public function setSlop($slop)
     {
-        $this->setParam('slop', $slop);
+        return $this->setParam('slop', $slop);
     }
 
     /**
      * @param bool $inOrder
+     *
+     * @return $this
      */
     public function setInOrder($inOrder)
     {
-        $this->setParam('in_order', $inOrder);
+        return $this->setParam('in_order', $inOrder);
     }
 
     /**

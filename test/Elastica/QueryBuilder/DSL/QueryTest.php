@@ -74,8 +74,10 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'span_near', Query\SpanNear::class, []);
         $this->_assertImplemented($queryDSL, 'span_or', Query\SpanOr::class, []);
         $this->_assertImplemented($queryDSL, 'span_first', Query\SpanFirst::class, []);
+        $this->_assertImplemented($queryDSL, 'span_containing', Query\SpanContaining::class, []);
+        $this->_assertImplemented($queryDSL, 'span_within', Query\SpanWithin::class, []);
+        $this->_assertImplemented($queryDSL, 'span_not', Query\SpanNot::class, []);
 
         $this->_assertNotImplemented($queryDSL, 'geo_shape', []);
-        $this->_assertNotImplemented($queryDSL, 'span_not', []);
     }
 }
