@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 
+- Added `Query\SpanContaining`, `Query\SpanWithin` and `Query\SpanNot` [#1319](https://github.com/ruflin/Elastica/pull/1319)
+
 ### Improvements
 
 ### Deprecated
