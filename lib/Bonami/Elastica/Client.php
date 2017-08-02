@@ -18,7 +18,7 @@ class Client
      * Config with defaults.
      *
      * log: Set to true, to enable logging, set a string to log to a specific file
-     * retryOnConflict: Use in \Elastica\Client::updateDocument
+     * retryOnConflict: Use in \Bonami\Elastica\Client::updateDocument
      *
      * @var array
      */
@@ -43,12 +43,12 @@ class Client
     protected $_callback = null;
 
     /**
-     * @var \Elastica\Request
+     * @var \Bonami\Elastica\Request
      */
     protected $_lastRequest;
 
     /**
-     * @var \Elastica\Response
+     * @var \Bonami\Elastica\Response
      */
     protected $_lastResponse;
 
@@ -153,7 +153,7 @@ class Client
      *
      * @param string $key Config key
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return array|string Config value
      */
@@ -208,7 +208,7 @@ class Client
      *
      * @param string $name Index name to create connection to
      *
-     * @return \Elastica\Index Index for the given name
+     * @return \Bonami\Elastica\Index Index for the given name
      */
     public function getIndex($name)
     {
@@ -221,7 +221,7 @@ class Client
      * @param string $header      The HTTP Header
      * @param string $headerValue The HTTP Header Value
      *
-     * @throws \Elastica\Exception\InvalidException If $header or $headerValue is not a string
+     * @throws \Bonami\Elastica\Exception\InvalidException If $header or $headerValue is not a string
      *
      * @return $this
      */
@@ -241,7 +241,7 @@ class Client
      *
      * @param string $header The HTTP Header to remove
      *
-     * @throws \Elastica\Exception\InvalidException If $header is not a string
+     * @throws \Bonami\Elastica\Exception\InvalidException If $header is not a string
      *
      * @return $this
      */
@@ -261,17 +261,17 @@ class Client
     /**
      * Uses _bulk to send documents to the server.
      *
-     * Array of \Elastica\Document as input. Index and type has to be
+     * Array of \Bonami\Elastica\Document as input. Index and type has to be
      * set inside the document, because for bulk settings documents,
      * documents can belong to any type and index
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|\Bonami\Elastica\Document[] $docs Array of Bonami\Elastica\Document
      *
-     * @throws \Elastica\Exception\InvalidException If docs is empty
+     * @throws \Bonami\Elastica\Exception\InvalidException If docs is empty
      *
-     * @return \Elastica\Bulk\ResponseSet Response object
+     * @return \Bonami\Elastica\Bulk\ResponseSet Response object
      */
     public function updateDocuments(array $docs)
     {
@@ -281,7 +281,7 @@ class Client
 
         $bulk = new Bulk($this);
 
-        $bulk->addDocuments($docs, \Elastica\Bulk\Action::OP_TYPE_UPDATE);
+        $bulk->addDocuments($docs, \Bonami\Elastica\Bulk\Action::OP_TYPE_UPDATE);
 
         return $bulk->send();
     }
@@ -289,17 +289,17 @@ class Client
     /**
      * Uses _bulk to send documents to the server.
      *
-     * Array of \Elastica\Document as input. Index and type has to be
+     * Array of \Bonami\Elastica\Document as input. Index and type has to be
      * set inside the document, because for bulk settings documents,
      * documents can belong to any type and index
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|\Bonami\Elastica\Document[] $docs Array ofBonami\Elastica\Document
      *
-     * @throws \Elastica\Exception\InvalidException If docs is empty
+     * @throws \Bonami\Elastica\Exception\InvalidException If docs is empty
      *
-     * @return \Elastica\Bulk\ResponseSet Response object
+     * @return \Bonami\Elastica\Bulk\ResponseSet Response object
      */
     public function addDocuments(array $docs)
     {
@@ -318,12 +318,12 @@ class Client
      * Update document, using update script. Requires elasticsearch >= 0.19.0.
      *
      * @param int                                       $id      document id
-     * @param array|\Elastica\Script|\Elastica\Document $data    raw data for request body
+     * @param array|\Bonami\Elastica\Script|\Elastica\Document $data    raw data for request body
      * @param string                                    $index   index to update
      * @param string                                    $type    type of index to update
      * @param array                                     $options array of query params to use for query. For possible options check es api
      *
-     * @return \Elastica\Response
+     * @return \Bonami\Elastica\Response
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      */
@@ -398,8 +398,8 @@ class Client
     }
 
     /**
-     * @param \Elastica\Response $response
-     * @param \Elastica\Document $document
+     * @param \Bonami\Elastica\Response $response
+     * @param \Bonami\Elastica\Document $document
      * @param string             $fields   Array of field names to be populated or '_source' if whole document data should be updated
      */
     protected function _populateDocumentFieldsFromResponse(Response $response, Document $document, $fields)
@@ -426,11 +426,11 @@ class Client
     /**
      * Bulk deletes documents.
      *
-     * @param array|\Elastica\Document[] $docs
+     * @param array|\Bonami\Elastica\Document[] $docs
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
-     * @return \Elastica\Bulk\ResponseSet
+     * @return \Bonami\Elastica\Bulk\ResponseSet
      */
     public function deleteDocuments(array $docs)
     {
@@ -447,7 +447,7 @@ class Client
     /**
      * Returns the status object for all indices.
      *
-     * @return \Elastica\Status Status object
+     * @return \Bonami\Elastica\Status Status object
      */
     public function getStatus()
     {
@@ -457,7 +457,7 @@ class Client
     /**
      * Returns the current cluster.
      *
-     * @return \Elastica\Cluster Cluster object
+     * @return \Bonami\Elastica\Cluster Cluster object
      */
     public function getCluster()
     {
@@ -465,7 +465,7 @@ class Client
     }
 
     /**
-     * @param \Elastica\Connection $connection
+     * @param \Bonami\Elastica\Connection $connection
      *
      * @return $this
      */
@@ -487,9 +487,9 @@ class Client
     }
 
     /**
-     * @throws \Elastica\Exception\ClientException
+     * @throws \Bonami\Elastica\Exception\ClientException
      *
-     * @return \Elastica\Connection
+     * @return \Bonami\Elastica\Connection
      */
     public function getConnection()
     {
@@ -497,7 +497,7 @@ class Client
     }
 
     /**
-     * @return \Elastica\Connection[]
+     * @return \Bonami\Elastica\Connection[]
      */
     public function getConnections()
     {
@@ -505,7 +505,7 @@ class Client
     }
 
     /**
-     * @return \Elastica\Connection\Strategy\StrategyInterface
+     * @return \Bonami\Elastica\Connection\Strategy\StrategyInterface
      */
     public function getConnectionStrategy()
     {
@@ -513,7 +513,7 @@ class Client
     }
 
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|\Bonami\Elastica\Connection[] $connections
      *
      * @return $this
      */
@@ -530,13 +530,13 @@ class Client
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array                  $ids     Document ids
-     * @param string|\Elastica\Index $index   Index name
-     * @param string|\Elastica\Type  $type    Type of documents
+     * @param string|\Bonami\Elastica\Index $index   Index name
+     * @param string|\Bonami\Elastica\Type  $type    Type of documents
      * @param string|bool            $routing Optional routing key for all ids
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
-     * @return \Elastica\Bulk\ResponseSet Response  object
+     * @return \Bonami\Elastica\Bulk\ResponseSet Response  object
      */
     public function deleteIds(array $ids, $index, $type, $routing = false)
     {
@@ -578,10 +578,10 @@ class Client
      *
      * @param array $params Parameter array
      *
-     * @throws \Elastica\Exception\ResponseException
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\ResponseException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
-     * @return \Elastica\Bulk\ResponseSet Response object
+     * @return \Bonami\Elastica\Bulk\ResponseSet Response object
      */
     public function bulk(array $params)
     {
@@ -608,7 +608,7 @@ class Client
      *
      * @throws Exception\ConnectionException|\Exception
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function request($path, $method = Request::GET, $data = array(), array $query = array())
     {
@@ -641,7 +641,7 @@ class Client
      *
      * @param array $args OPTIONAL Optional arguments
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
@@ -653,7 +653,7 @@ class Client
     /**
      * Refreshes all search indices.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
      */
@@ -665,7 +665,7 @@ class Client
     /**
      * logging.
      *
-     * @param string|\Elastica\Request $context
+     * @param string|\Bonami\Elastica\Request $context
      *
      * @throws Exception\RuntimeException
      */
@@ -688,7 +688,7 @@ class Client
     }
 
     /**
-     * @return \Elastica\Request
+     * @return \Bonami\Elastica\Request
      */
     public function getLastRequest()
     {
@@ -696,7 +696,7 @@ class Client
     }
 
     /**
-     * @return \Elastica\Response
+     * @return \Bonami\Elastica\Response
      */
     public function getLastResponse()
     {

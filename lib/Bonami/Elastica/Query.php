@@ -39,7 +39,7 @@ class Query extends Param
     /**
      * Creates a query object.
      *
-     * @param array|\Elastica\Query\AbstractQuery $query OPTIONAL Query object (default = null)
+     * @param array|\Bonami\Elastica\Query\AbstractQuery $query OPTIONAL Query object (default = null)
      */
     public function __construct($query = null)
     {
@@ -59,7 +59,7 @@ class Query extends Param
      *
      * @param mixed $query
      *
-     * @throws \Elastica\Exception\NotImplementedException
+     * @throws \Bonami\Elastica\Exception\NotImplementedException
      *
      * @return self
      */
@@ -110,7 +110,7 @@ class Query extends Param
     /**
      * Sets the query.
      *
-     * @param \Elastica\Query\AbstractQuery $query Query object
+     * @param \Bonami\Elastica\Query\AbstractQuery $query Query object
      *
      * @return $this
      */
@@ -132,7 +132,7 @@ class Query extends Param
     /**
      * Set Filter.
      *
-     * @param \Elastica\Filter\AbstractFilter $filter Filter object
+     * @param \Bonami\Elastica\Filter\AbstractFilter $filter Filter object
      *
      * @return $this
      *
@@ -302,7 +302,7 @@ class Query extends Param
     /**
      * Set script fields.
      *
-     * @param array|\Elastica\ScriptFields $scriptFields Script fields
+     * @param array|\Bonami\Elastica\ScriptFields $scriptFields Script fields
      *
      * @return $this
      *
@@ -321,7 +321,7 @@ class Query extends Param
      * Adds a Script to the query.
      *
      * @param string                   $name
-     * @param \Elastica\AbstractScript $script Script object
+     * @param \Bonami\Elastica\AbstractScript $script Script object
      *
      * @return $this
      */
@@ -355,7 +355,7 @@ class Query extends Param
     /**
      * Adds a Facet to the query.
      *
-     * @param \Elastica\Facet\AbstractFacet $facet Facet object
+     * @param \Bonami\Elastica\Facet\AbstractFacet $facet Facet object
      *
      * @return $this
      *
@@ -419,7 +419,7 @@ class Query extends Param
      *
      * @param float $minScore Minimum score to filter documents by
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -435,7 +435,7 @@ class Query extends Param
     /**
      * Add a suggest term.
      *
-     * @param \Elastica\Suggest $suggest suggestion object
+     * @param \Bonami\Elastica\Suggest $suggest suggestion object
      *
      * @return $this
      */
@@ -487,7 +487,7 @@ class Query extends Param
     /**
      * Sets post_filter argument for the query. The filter is applied after the query has executed.
      *
-     * @param array|\Elastica\Filter\AbstractFilter $filter
+     * @param array|\Bonami\Elastica\Filter\AbstractFilter $filter
      *
      * @return $this
      *

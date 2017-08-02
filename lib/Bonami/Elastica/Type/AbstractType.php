@@ -47,21 +47,21 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Client.
      *
-     * @var \Elastica\Client Client object
+     * @var \Bonami\Elastica\Client Client object
      */
     protected $_client = null;
 
     /**
      * Index.
      *
-     * @var \Elastica\Index Index object
+     * @var \Bonami\Elastica\Index Index object
      */
     protected $_index = null;
 
     /**
      * Type.
      *
-     * @var \Elastica\Type Type object
+     * @var \Bonami\Elastica\Type Type object
      */
     protected $_type = null;
 
@@ -92,9 +92,9 @@ abstract class AbstractType implements SearchableInterface
      * Reads index and type name from protected vars _indexName and _typeName.
      * Has to be set in child class
      *
-     * @param \Elastica\Client $client OPTIONAL Client object
+     * @param \Bonami\Elastica\Client $client OPTIONAL Client object
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      */
     public function __construct(Client $client = null)
     {
@@ -131,10 +131,10 @@ abstract class AbstractType implements SearchableInterface
     }
 
     /**
-     * @param string|\Elastica\Query $query
+     * @param string|\Bonami\Elastica\Query $query
      * @param array|int              $options
      *
-     * @return \Elastica\Search
+     * @return \Bonami\Elastica\Search
      */
     public function createSearch($query = '', $options = null)
     {
@@ -144,12 +144,12 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Search on the type.
      *
-     * @param string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
+     * @param string|array|\Bonami\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
      * @param null                         $options
      *
-     * @return \Elastica\ResultSet with all results inside
+     * @return \Bonami\Elastica\ResultSet with all results inside
      *
-     * @see \Elastica\SearchableInterface::search
+     * @see \Bonami\Elastica\SearchableInterface::search
      */
     public function search($query = '', $options = null)
     {
@@ -159,11 +159,11 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Count docs in the type based on query.
      *
-     * @param string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
+     * @param string|array|\Bonami\Elastica\Query $query Array with all query data inside or a Elastica\Query object
      *
      * @return int number of documents matching the query
      *
-     * @see \Elastica\SearchableInterface::count
+     * @see \Bonami\Elastica\SearchableInterface::count
      */
     public function count($query = '')
     {
@@ -173,7 +173,7 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Returns the search index.
      *
-     * @return \Elastica\Index Index object
+     * @return \Bonami\Elastica\Index Index object
      */
     public function getIndex()
     {
@@ -183,7 +183,7 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Returns type object.
      *
-     * @return \Elastica\Type Type object
+     * @return \Bonami\Elastica\Type Type object
      */
     public function getType()
     {

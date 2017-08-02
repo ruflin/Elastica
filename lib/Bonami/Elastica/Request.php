@@ -17,7 +17,7 @@ class Request extends Param
     const DELETE = 'DELETE';
 
     /**
-     * @var \Elastica\Connection
+     * @var \Bonami\Elastica\Connection
      */
     protected $_connection;
 
@@ -30,7 +30,7 @@ class Request extends Param
      * @param array      $query      OPTIONAL Query params
      * @param Connection $connection
      *
-     * @return \Elastica\Request OPTIONAL Connection object
+     * @return \Bonami\Elastica\Request OPTIONAL Connection object
      */
     public function __construct($path, $method = self::GET, $data = array(), array $query = array(), Connection $connection = null)
     {
@@ -131,7 +131,7 @@ class Request extends Param
     }
 
     /**
-     * @param \Elastica\Connection $connection
+     * @param \Bonami\Elastica\Connection $connection
      *
      * @return $this
      */
@@ -147,7 +147,7 @@ class Request extends Param
      *
      * @throws Exception\InvalidException If no valid connection was setted
      *
-     * @return \Elastica\Connection
+     * @return \Bonami\Elastica\Connection
      */
     public function getConnection()
     {
@@ -161,7 +161,7 @@ class Request extends Param
     /**
      * Sends request to server.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function send()
     {

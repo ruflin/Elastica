@@ -23,8 +23,8 @@ class HttpException extends ConnectionException
      * Construct Exception.
      *
      * @param string             $error    Error
-     * @param \Elastica\Request  $request
-     * @param \Elastica\Response $response
+     * @param \Bonami\Elastica\Request  $request
+     * @param \Bonami\Elastica\Response $response
      */
     public function __construct($error, Request $request = null, Response $response = null)
     {

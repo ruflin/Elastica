@@ -85,9 +85,9 @@ class Script extends AbstractScript
     }
 
     /**
-     * @param string|array|\Elastica\Script $data
+     * @param string|array|\Bonami\Elastica\Script $data
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return self
      */
@@ -109,7 +109,7 @@ class Script extends AbstractScript
     /**
      * @param array $data
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return self
      */

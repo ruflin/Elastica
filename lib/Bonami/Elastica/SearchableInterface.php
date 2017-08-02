@@ -25,10 +25,10 @@ interface SearchableInterface
      *      }
      * }
      *
-     * @param string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
+     * @param string|array|\Bonami\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
      * @param null                         $options
      *
-     * @return \Elastica\ResultSet with all results inside
+     * @return \Bonami\Elastica\ResultSet with all results inside
      */
     public function search($query = '', $options = null);
 
@@ -37,17 +37,17 @@ interface SearchableInterface
      *
      * If no query is set, matchall query is created
      *
-     * @param string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
+     * @param string|array|\Bonami\Elastica\Query $query Array with all query data inside or a Elastica\Query object
      *
      * @return int number of documents matching the query
      */
     public function count($query = '');
 
     /**
-     * @param \Elastica\Query|string $query
+     * @param \Bonami\Elastica\Query|string $query
      * @param array                  $options
      *
-     * @return \Elastica\Search
+     * @return \Bonami\Elastica\Search
      */
     public function createSearch($query = '', $options = null);
 }

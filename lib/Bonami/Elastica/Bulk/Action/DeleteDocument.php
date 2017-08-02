@@ -11,7 +11,7 @@ class DeleteDocument extends AbstractDocument
     protected $_opType = self::OP_TYPE_DELETE;
 
     /**
-     * @param \Elastica\AbstractUpdateAction $action
+     * @param \Bonami\Elastica\AbstractUpdateAction $action
      *
      * @return array
      */

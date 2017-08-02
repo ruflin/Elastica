@@ -71,7 +71,7 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
      *
-     * @return \Elastica\Query\MultiMatch
+     * @return \Bonami\Elastica\Query\MultiMatch
      */
     public function multi_match()
     {
@@ -83,7 +83,7 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
      *
-     * @return \Elastica\Query\BoolQuery
+     * @return \Bonami\Elastica\Query\BoolQuery
      */
     public function bool()
     {
@@ -153,7 +153,7 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html
      *
-     * @param null|\Elastica\Filter\AbstractFilter|array $filter
+     * @param null|\Bonami\Elastica\Filter\AbstractFilter|array $filter
      *
      * @return ConstantScore
      */
@@ -263,7 +263,7 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-child-query.html
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|\Bonami\Elastica\Query|\Elastica\Query\AbstractQuery $query
      * @param string                                               $type  Parent document type
      *
      * @return HasChild
@@ -278,7 +278,7 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|\Bonami\Elastica\Query|\Elastica\Query\AbstractQuery $query
      * @param string                                               $type  Parent document type
      *
      * @return HasParent
@@ -293,7 +293,7 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html
      *
-     * @param array|string|\Elastica\Type $type
+     * @param array|string|\Bonami\Elastica\Type $type
      * @param array                       $ids
      *
      * @return Ids
@@ -528,7 +528,7 @@ class Query implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-top-children-query.html
      *
-     * @param string|AbstractQuery|\Elastica\Query $query
+     * @param string|AbstractQuery|\Bonami\Elastica\Query $query
      * @param string                               $type
      *
      * @return TopChildren

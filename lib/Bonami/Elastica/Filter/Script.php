@@ -15,14 +15,14 @@ class Script extends AbstractFilter
     /**
      * Query object.
      *
-     * @var array|\Elastica\Query\AbstractQuery
+     * @var array|\Bonami\Elastica\Query\AbstractQuery
      */
     protected $_query = null;
 
     /**
      * Construct script filter.
      *
-     * @param array|string|\Elastica\Script $script OPTIONAL Script
+     * @param array|string|\Bonami\Elastica\Script $script OPTIONAL Script
      */
     public function __construct($script = null)
     {
@@ -34,7 +34,7 @@ class Script extends AbstractFilter
     /**
      * Sets script object.
      *
-     * @param \Elastica\Script|string|array $script
+     * @param \Bonami\Elastica\Script|string|array $script
      *
      * @return $this
      */

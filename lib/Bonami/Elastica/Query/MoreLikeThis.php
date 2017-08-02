@@ -15,7 +15,7 @@ class MoreLikeThis extends AbstractQuery
      *
      * @param array $fields Field names
      *
-     * @return \Elastica\Query\MoreLikeThis Current object
+     * @return \Bonami\Elastica\Query\MoreLikeThis Current object
      */
     public function setFields(array $fields)
     {
@@ -27,7 +27,7 @@ class MoreLikeThis extends AbstractQuery
      *
      * @param array $ids Document ids
      *
-     * @return \Elastica\Query\MoreLikeThis Current object
+     * @return \Bonami\Elastica\Query\MoreLikeThis Current object
      */
     public function setIds(array $ids)
     {

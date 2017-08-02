@@ -17,14 +17,14 @@ class Cluster
     /**
      * Client.
      *
-     * @var \Elastica\Client Client object
+     * @var \Bonami\Elastica\Client Client object
      */
     protected $_client = null;
 
     /**
      * Cluster state response.
      *
-     * @var \Elastica\Response
+     * @var \Bonami\Elastica\Response
      */
     protected $_response;
 
@@ -38,7 +38,7 @@ class Cluster
     /**
      * Creates a cluster object.
      *
-     * @param \Elastica\Client $client Connection client object
+     * @param \Bonami\Elastica\Client $client Connection client object
      */
     public function __construct(Client $client)
     {
@@ -59,7 +59,7 @@ class Cluster
     /**
      * Returns the response object.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -114,7 +114,7 @@ class Cluster
     /**
      * Returns all nodes of the cluster.
      *
-     * @return \Elastica\Node[]
+     * @return \Bonami\Elastica\Node[]
      */
     public function getNodes()
     {
@@ -131,7 +131,7 @@ class Cluster
     /**
      * Returns the client object.
      *
-     * @return \Elastica\Client Client object
+     * @return \Bonami\Elastica\Client Client object
      */
     public function getClient()
     {
@@ -145,7 +145,7 @@ class Cluster
      *
      * @param array $args Additional arguments
      *
-     * @throws \Elastica\Exception\NotImplementedException
+     * @throws \Bonami\Elastica\Exception\NotImplementedException
      */
     public function getInfo(array $args)
     {
@@ -157,7 +157,7 @@ class Cluster
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
      *
-     * @return \Elastica\Cluster\Health
+     * @return \Bonami\Elastica\Cluster\Health
      */
     public function getHealth()
     {
@@ -167,7 +167,7 @@ class Cluster
     /**
      * Return Cluster settings.
      *
-     * @return \Elastica\Cluster\Settings
+     * @return \Bonami\Elastica\Cluster\Settings
      */
     public function getSettings()
     {
@@ -181,7 +181,7 @@ class Cluster
      *
      * @param string $delay OPTIONAL Seconds to shutdown cluster after (default = 1s)
      *
-     * @return \Elastica\Response
+     * @return \Bonami\Elastica\Response
      */
     public function shutdown($delay = '1s')
     {

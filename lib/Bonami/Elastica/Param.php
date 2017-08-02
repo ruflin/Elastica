@@ -154,7 +154,7 @@ class Param implements ArrayableInterface
      *
      * @param string $key Key to return
      *
-     * @throws \Elastica\Exception\InvalidException If requested key is not set
+     * @throws \Bonami\Elastica\Exception\InvalidException If requested key is not set
      *
      * @return mixed Key value
      */

@@ -7,12 +7,12 @@ use Bonami\Elastica\Exception\BulkException;
 class ActionException extends BulkException
 {
     /**
-     * @var \Elastica\Response
+     * @var \Bonami\Elastica\Response
      */
     protected $_response;
 
     /**
-     * @param \Elastica\Bulk\Response $response
+     * @param \Bonami\Elastica\Bulk\Response $response
      */
     public function __construct(Response $response)
     {
@@ -22,7 +22,7 @@ class ActionException extends BulkException
     }
 
     /**
-     * @return \Elastica\Bulk\Action
+     * @return \Bonami\Elastica\Bulk\Action
      */
     public function getAction()
     {
@@ -30,7 +30,7 @@ class ActionException extends BulkException
     }
 
     /**
-     * @return \Elastica\Bulk\Response
+     * @return \Bonami\Elastica\Bulk\Response
      */
     public function getResponse()
     {
@@ -38,7 +38,7 @@ class ActionException extends BulkException
     }
 
     /**
-     * @param \Elastica\Bulk\Response $response
+     * @param \Bonami\Elastica\Bulk\Response $response
      *
      * @return string
      */

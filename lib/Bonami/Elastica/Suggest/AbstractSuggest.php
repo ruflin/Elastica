@@ -80,7 +80,7 @@ abstract class AbstractSuggest extends Param implements NameableInterface
      *
      * @param string $name The name of the facet.
      *
-     * @throws \Elastica\Exception\InvalidException If name is empty
+     * @throws \Bonami\Elastica\Exception\InvalidException If name is empty
      *
      * @return $this
      */

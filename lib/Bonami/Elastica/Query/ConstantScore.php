@@ -15,7 +15,7 @@ class ConstantScore extends AbstractQuery
     /**
      * Construct constant score query.
      *
-     * @param null|\Elastica\Filter\AbstractFilter|array $filter
+     * @param null|\Bonami\Elastica\Filter\AbstractFilter|array $filter
      */
     public function __construct($filter = null)
     {
@@ -27,7 +27,7 @@ class ConstantScore extends AbstractQuery
     /**
      * Set filter.
      *
-     * @param array|\Elastica\Filter\AbstractFilter $filter
+     * @param array|\Bonami\Elastica\Filter\AbstractFilter $filter
      *
      * @return $this
      */
@@ -39,7 +39,7 @@ class ConstantScore extends AbstractQuery
     /**
      * Set query.
      *
-     * @param array|\Elastica\Query\AbstractQuery $query
+     * @param array|\Bonami\Elastica\Query\AbstractQuery $query
      *
      * @throws InvalidException If query is not an array or instance of AbstractQuery
      *

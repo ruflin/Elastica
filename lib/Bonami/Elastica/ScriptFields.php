@@ -13,7 +13,7 @@ use Bonami\Elastica\Exception\InvalidException;
 class ScriptFields extends Param
 {
     /**
-     * @param \Elastica\Script[]|array $scripts OPTIONAL
+     * @param \Bonami\Elastica\Script[]|array $scripts OPTIONAL
      */
     public function __construct(array $scripts = array())
     {
@@ -24,9 +24,9 @@ class ScriptFields extends Param
 
     /**
      * @param string           $name   Name of the Script field
-     * @param \Elastica\Script $script
+     * @param \Bonami\Elastica\Script $script
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -41,7 +41,7 @@ class ScriptFields extends Param
     }
 
     /**
-     * @param \Elastica\Script[]|array $scripts Associative array of string => Elastica\Script
+     * @param \Bonami\Elastica\Script[]|array $scripts Associative array of string => Elastica\Script
      *
      * @return $this
      */

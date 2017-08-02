@@ -18,7 +18,7 @@ class CallbackStrategy implements StrategyInterface
     /**
      * @param callable $callback
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      */
     public function __construct($callback)
     {
@@ -30,9 +30,9 @@ class CallbackStrategy implements StrategyInterface
     }
 
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|\Bonami\Elastica\Connection[] $connections
      *
-     * @return \Elastica\Connection
+     * @return \Bonami\Elastica\Connection
      */
     public function getConnection($connections)
     {

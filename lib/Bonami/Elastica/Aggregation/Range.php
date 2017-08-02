@@ -17,7 +17,7 @@ class Range extends AbstractSimpleAggregation
      * @param int|float $toValue   high end of this range, exclusive (less than)
      * @param string    $key       customized key value
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */

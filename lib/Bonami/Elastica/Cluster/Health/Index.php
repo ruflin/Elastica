@@ -123,7 +123,7 @@ class Index
     /**
      * Gets the health of the shards in this index.
      *
-     * @return \Elastica\Cluster\Health\Shard[]
+     * @return \Bonami\Elastica\Cluster\Health\Shard[]
      */
     public function getShards()
     {

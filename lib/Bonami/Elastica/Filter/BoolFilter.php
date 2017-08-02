@@ -36,7 +36,7 @@ class BoolFilter extends AbstractFilter
     /**
      * Adds should filter.
      *
-     * @param array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @param array|\Bonami\Elastica\Filter\AbstractFilter $args Filter data
      *
      * @return $this
      */
@@ -48,7 +48,7 @@ class BoolFilter extends AbstractFilter
     /**
      * Adds must filter.
      *
-     * @param array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @param array|\Bonami\Elastica\Filter\AbstractFilter $args Filter data
      *
      * @return $this
      */
@@ -60,7 +60,7 @@ class BoolFilter extends AbstractFilter
     /**
      * Adds mustNot filter.
      *
-     * @param array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @param array|\Bonami\Elastica\Filter\AbstractFilter $args Filter data
      *
      * @return $this
      */
@@ -73,16 +73,16 @@ class BoolFilter extends AbstractFilter
      * Adds general filter based on type.
      *
      * @param string                                $type Filter type
-     * @param array|\Elastica\Filter\AbstractFilter $args Filter data
+     * @param array|\Bonami\Elastica\Filter\AbstractFilter $args Filter data
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */
     protected function _addFilter($type, $args)
     {
         if (!is_array($args) && !($args instanceof AbstractFilter)) {
-            throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Filter');
+            throw new InvalidException('Invalid parameter. Has to be array or instance of Bonami\Elastica\Filter');
         }
 
         if (is_array($args)) {
@@ -106,7 +106,7 @@ class BoolFilter extends AbstractFilter
     /**
      * Converts bool filter to array.
      *
-     * @see \Elastica\Filter\AbstractFilter::toArray()
+     * @see \Bonami\Elastica\Filter\AbstractFilter::toArray()
      *
      * @return array Filter array
      */

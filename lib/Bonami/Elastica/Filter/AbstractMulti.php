@@ -28,7 +28,7 @@ abstract class AbstractMulti extends AbstractFilter
     /**
      * Add filter.
      *
-     * @param \Elastica\Filter\AbstractFilter $filter
+     * @param \Bonami\Elastica\Filter\AbstractFilter $filter
      *
      * @return $this
      */
@@ -66,7 +66,7 @@ abstract class AbstractMulti extends AbstractFilter
     }
 
     /**
-     * @see \Elastica\Param::toArray()
+     * @see \Bonami\Elastica\Param::toArray()
      *
      * @return array
      */

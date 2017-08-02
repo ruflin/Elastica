@@ -17,7 +17,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * Result Sets.
      *
-     * @var array|\Elastica\ResultSet[] Result Sets
+     * @var array|\Bonami\Elastica\ResultSet[] Result Sets
      */
     protected $_resultSets = array();
 
@@ -31,15 +31,15 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * Response.
      *
-     * @var \Elastica\Response Response object
+     * @var \Bonami\Elastica\Response Response object
      */
     protected $_response;
 
     /**
      * Constructs ResultSet object.
      *
-     * @param \Elastica\Response       $response
-     * @param array|\Elastica\Search[] $searches
+     * @param \Bonami\Elastica\Response       $response
+     * @param array|\Bonami\Elastica\Search[] $searches
      */
     public function __construct(Response $response, array $searches)
     {
@@ -48,10 +48,10 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param \Elastica\Response       $response
-     * @param array|\Elastica\Search[] $searches
+     * @param \Bonami\Elastica\Response       $response
+     * @param array|\Bonami\Elastica\Search[] $searches
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      */
     protected function _init(Response $response, array $searches)
     {
@@ -79,7 +79,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @return array|\Elastica\ResultSet[]
+     * @return array|\Bonami\Elastica\ResultSet[]
      */
     public function getResultSets()
     {
@@ -89,7 +89,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -113,7 +113,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @return bool|\Elastica\ResultSet
+     * @return bool|\Bonami\Elastica\ResultSet
      */
     public function current()
     {

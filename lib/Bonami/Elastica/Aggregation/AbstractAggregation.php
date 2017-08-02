@@ -64,7 +64,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
      *
      * @param AbstractAggregation $aggregation
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */

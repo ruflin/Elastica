@@ -22,17 +22,17 @@ class IndexTemplate
     /**
      * Client object.
      *
-     * @var \Elastica\Client Client object
+     * @var \Bonami\Elastica\Client Client object
      */
     protected $_client = null;
 
     /**
      * Creates a new index template object.
      *
-     * @param \Elastica\Client $client Client object
+     * @param \Bonami\Elastica\Client $client Client object
      * @param string           $name   Index template name
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      */
     public function __construct(Client $client, $name)
     {
@@ -47,7 +47,7 @@ class IndexTemplate
     /**
      * Deletes the index template.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function delete()
     {
@@ -63,7 +63,7 @@ class IndexTemplate
      *
      * @param array $args OPTIONAL Arguments to use
      *
-     * @return \Elastica\Response
+     * @return \Bonami\Elastica\Response
      */
     public function create(array $args = array())
     {
@@ -96,7 +96,7 @@ class IndexTemplate
     /**
      * Returns index template client.
      *
-     * @return \Elastica\Client Index client object
+     * @return \Bonami\Elastica\Client Index client object
      */
     public function getClient()
     {
@@ -109,7 +109,7 @@ class IndexTemplate
      * @param string $method Rest method to use (GET, POST, DELETE, PUT)
      * @param array  $data   OPTIONAL Arguments as array
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function request($method, $data = array())
     {

@@ -6,7 +6,7 @@ use Bonami\Elastica\Response as BaseResponse;
 class ResponseSet extends BaseResponse implements \Iterator, \Countable
 {
     /**
-     * @var \Elastica\Bulk\Response[]
+     * @var \Bonami\Elastica\Bulk\Response[]
      */
     protected $_bulkResponses = array();
 
@@ -16,8 +16,8 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     protected $_position = 0;
 
     /**
-     * @param \Elastica\Response        $response
-     * @param \Elastica\Bulk\Response[] $bulkResponses
+     * @param \Bonami\Elastica\Response        $response
+     * @param \Bonami\Elastica\Bulk\Response[] $bulkResponses
      */
     public function __construct(BaseResponse $response, array $bulkResponses)
     {
@@ -27,7 +27,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     }
 
     /**
-     * @return \Elastica\Bulk\Response[]
+     * @return \Bonami\Elastica\Bulk\Response[]
      */
     public function getBulkResponses()
     {
@@ -88,7 +88,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     }
 
     /**
-     * @return bool|\Elastica\Bulk\Response
+     * @return bool|\Bonami\Elastica\Bulk\Response
      */
     public function current()
     {

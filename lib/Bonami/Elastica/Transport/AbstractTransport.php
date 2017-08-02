@@ -14,14 +14,14 @@ use Bonami\Elastica\Request;
 abstract class AbstractTransport extends Param
 {
     /**
-     * @var \Elastica\Connection
+     * @var \Bonami\Elastica\Connection
      */
     protected $_connection;
 
     /**
      * Construct transport.
      *
-     * @param \Elastica\Connection $connection Connection object
+     * @param \Bonami\Elastica\Connection $connection Connection object
      */
     public function __construct(Connection $connection = null)
     {
@@ -31,7 +31,7 @@ abstract class AbstractTransport extends Param
     }
 
     /**
-     * @return \Elastica\Connection Connection object
+     * @return \Bonami\Elastica\Connection Connection object
      */
     public function getConnection()
     {
@@ -39,7 +39,7 @@ abstract class AbstractTransport extends Param
     }
 
     /**
-     * @param \Elastica\Connection $connection Connection object
+     * @param \Bonami\Elastica\Connection $connection Connection object
      *
      * @return $this
      */
@@ -53,10 +53,10 @@ abstract class AbstractTransport extends Param
     /**
      * Executes the transport request.
      *
-     * @param \Elastica\Request $request Request object
+     * @param \Bonami\Elastica\Request $request Request object
      * @param array             $params  Hostname, port, path, ...
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     abstract public function exec(Request $request, array $params);
 
@@ -71,10 +71,10 @@ abstract class AbstractTransport extends Param
      *          keys in the array will be set as parameters in the transport instance
      *
      * @param mixed                $transport  A transport definition
-     * @param \Elastica\Connection $connection A connection instance
+     * @param \Bonami\Elastica\Connection $connection A connection instance
      * @param array                $params     Parameters for the transport class
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return AbstractTransport
      */

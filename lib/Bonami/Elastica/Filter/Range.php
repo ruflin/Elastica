@@ -60,7 +60,7 @@ class Range extends AbstractFilter
     /**
      * Converts object to array.
      *
-     * @see \Elastica\Filter\AbstractFilter::toArray()
+     * @see \Bonami\Elastica\Filter\AbstractFilter::toArray()
      *
      * @return array Filter array
      */

@@ -24,14 +24,14 @@ class Mapping
     /**
      * Type.
      *
-     * @var \Elastica\Type Type object
+     * @var \Bonami\Elastica\Type Type object
      */
     protected $_type = null;
 
     /**
      * Construct Mapping.
      *
-     * @param \Elastica\Type $type       OPTIONAL Type object
+     * @param \Bonami\Elastica\Type $type       OPTIONAL Type object
      * @param array          $properties OPTIONAL Properties
      */
     public function __construct(Type $type = null, array $properties = array())
@@ -49,7 +49,7 @@ class Mapping
      * Sets the mapping type
      * Enter description here ...
      *
-     * @param \Elastica\Type $type Type object
+     * @param \Bonami\Elastica\Type $type Type object
      *
      * @return $this
      */
@@ -99,7 +99,7 @@ class Mapping
     /**
      * Returns mapping type.
      *
-     * @return \Elastica\Type Type
+     * @return \Bonami\Elastica\Type Type
      */
     public function getType()
     {
@@ -243,7 +243,7 @@ class Mapping
     /**
      * Converts the mapping to an array.
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return array Mapping as array
      */
@@ -261,7 +261,7 @@ class Mapping
     /**
      * Submits the mapping and sends it to the server.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function send()
     {
@@ -273,9 +273,9 @@ class Mapping
     /**
      * Creates a mapping object.
      *
-     * @param array|\Elastica\Type\Mapping $mapping Mapping object or properties array
+     * @param array|\Bonami\Elastica\Type\Mapping $mapping Mapping object or properties array
      *
-     * @throws \Elastica\Exception\InvalidException If invalid type
+     * @throws \Bonami\Elastica\Exception\InvalidException If invalid type
      *
      * @return self
      */

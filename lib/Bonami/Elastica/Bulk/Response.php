@@ -6,7 +6,7 @@ use Bonami\Elastica\Response as BaseResponse;
 class Response extends BaseResponse
 {
     /**
-     * @var \Elastica\Bulk\Action
+     * @var \Bonami\Elastica\Bulk\Action
      */
     protected $_action;
 
@@ -17,7 +17,7 @@ class Response extends BaseResponse
 
     /**
      * @param array|string          $responseData
-     * @param \Elastica\Bulk\Action $action
+     * @param \Bonami\Elastica\Bulk\Action $action
      * @param string                $opType
      */
     public function __construct($responseData, Action $action, $opType)
@@ -29,7 +29,7 @@ class Response extends BaseResponse
     }
 
     /**
-     * @return \Elastica\Bulk\Action
+     * @return \Bonami\Elastica\Bulk\Action
      */
     public function getAction()
     {

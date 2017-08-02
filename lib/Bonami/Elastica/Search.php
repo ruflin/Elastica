@@ -52,7 +52,7 @@ class Search
     protected $_types = array();
 
     /**
-     * @var \Elastica\Query
+     * @var \Bonami\Elastica\Query
      */
     protected $_query;
 
@@ -64,14 +64,14 @@ class Search
     /**
      * Client object.
      *
-     * @var \Elastica\Client
+     * @var \Bonami\Elastica\Client
      */
     protected $_client;
 
     /**
      * Constructs search object.
      *
-     * @param \Elastica\Client $client Client object
+     * @param \Bonami\Elastica\Client $client Client object
      */
     public function __construct(Client $client)
     {
@@ -81,9 +81,9 @@ class Search
     /**
      * Adds a index to the list.
      *
-     * @param \Elastica\Index|string $index Index object or string
+     * @param \Bonami\Elastica\Index|string $index Index object or string
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -121,9 +121,9 @@ class Search
     /**
      * Adds a type to the current search.
      *
-     * @param \Elastica\Type|string $type Type name or object
+     * @param \Bonami\Elastica\Type|string $type Type name or object
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -159,7 +159,7 @@ class Search
     }
 
     /**
-     * @param string|array|\Elastica\Query|\Elastica\Suggest|\Elastica\Query\AbstractQuery|\Elastica\Filter\AbstractFilter $query|
+     * @param string|array|\Bonami\Elastica\Query|\Elastica\Suggest|\Elastica\Query\AbstractQuery|\Elastica\Filter\AbstractFilter $query|
      *
      * @return $this
      */
@@ -243,7 +243,7 @@ class Search
     /**
      * @param string $key
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return mixed
      */
@@ -267,7 +267,7 @@ class Search
     /**
      * @param string $key
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return bool
      */
@@ -295,7 +295,7 @@ class Search
     /**
      * Return client object.
      *
-     * @return \Elastica\Client Client object
+     * @return \Bonami\Elastica\Client Client object
      */
     public function getClient()
     {
@@ -353,7 +353,7 @@ class Search
     }
 
     /**
-     * @param \Elastica\Type|string $type
+     * @param \Bonami\Elastica\Type|string $type
      *
      * @return bool
      */
@@ -367,7 +367,7 @@ class Search
     }
 
     /**
-     * @return \Elastica\Query
+     * @return \Bonami\Elastica\Query
      */
     public function getQuery()
     {
@@ -381,7 +381,7 @@ class Search
     /**
      * Creates new search object.
      *
-     * @param \Elastica\SearchableInterface $searchObject
+     * @param \Bonami\Elastica\SearchableInterface $searchObject
      *
      * @return Search
      */
@@ -428,9 +428,9 @@ class Search
      * @param mixed     $query
      * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
-     * @return \Elastica\ResultSet
+     * @return \Bonami\Elastica\ResultSet
      */
     public function search($query = '', $options = null)
     {
@@ -485,7 +485,7 @@ class Search
 
     /**
      * @param array|int                    $options
-     * @param string|array|\Elastica\Query $query
+     * @param string|array|\Bonami\Elastica\Query $query
      *
      * @return $this
      */
@@ -525,7 +525,7 @@ class Search
     /**
      * Returns the Scroll Iterator.
      *
-     * @see Elastica\Scroll
+     * @see Bonami\Elastica\Scroll
      *
      * @param string $expiryTime
      *
@@ -539,7 +539,7 @@ class Search
     /**
      * Returns the ScanAndScroll Iterator.
      *
-     * @see Elastica\ScanAndScroll
+     * @see Bonami\Elastica\ScanAndScroll
      *
      * @param string $expiryTime
      * @param int    $sizePerShard

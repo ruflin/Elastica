@@ -41,14 +41,14 @@ class HttpAdapter extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param \Elastica\Request $elasticaRequest
+     * @param \Bonami\Elastica\Request $elasticaRequest
      * @param array             $params          Host, Port, ...
      *
-     * @throws \Elastica\Exception\ConnectionException
-     * @throws \Elastica\Exception\ResponseException
-     * @throws \Elastica\Exception\Connection\HttpException
+     * @throws \Bonami\Elastica\Exception\ConnectionException
+     * @throws \Bonami\Elastica\Exception\ResponseException
+     * @throws \Bonami\Elastica\Exception\Connection\HttpException
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function exec(ElasticaRequest $elasticaRequest, array $params)
     {
@@ -132,7 +132,7 @@ class HttpAdapter extends AbstractTransport
 
     /**
      * @param ElasticaRequest      $request
-     * @param \Elastica\Connection $connection
+     * @param \Bonami\Elastica\Connection $connection
      *
      * @return string
      */

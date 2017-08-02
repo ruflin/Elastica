@@ -16,7 +16,7 @@ use Bonami\Elastica\Search as BaseSearch;
 class Search
 {
     /**
-     * @var array|\Elastica\Search[]
+     * @var array|\Bonami\Elastica\Search[]
      */
     protected $_searches = array();
 
@@ -26,14 +26,14 @@ class Search
     protected $_options = array();
 
     /**
-     * @var \Elastica\Client
+     * @var \Bonami\Elastica\Client
      */
     protected $_client;
 
     /**
      * Constructs search object.
      *
-     * @param \Elastica\Client $client Client object
+     * @param \Bonami\Elastica\Client $client Client object
      */
     public function __construct(Client $client)
     {
@@ -41,7 +41,7 @@ class Search
     }
 
     /**
-     * @return \Elastica\Client
+     * @return \Bonami\Elastica\Client
      */
     public function getClient()
     {
@@ -49,7 +49,7 @@ class Search
     }
 
     /**
-     * @param \Elastica\Client $client
+     * @param \Bonami\Elastica\Client $client
      *
      * @return $this
      */
@@ -71,7 +71,7 @@ class Search
     }
 
     /**
-     * @param \Elastica\Search $search
+     * @param \Bonami\Elastica\Search $search
      * @param string           $key    Optional key
      *
      * @return $this
@@ -88,7 +88,7 @@ class Search
     }
 
     /**
-     * @param array|\Elastica\Search[] $searches
+     * @param array|\Bonami\Elastica\Search[] $searches
      *
      * @return $this
      */
@@ -102,7 +102,7 @@ class Search
     }
 
     /**
-     * @param array|\Elastica\Search[] $searches
+     * @param array|\Bonami\Elastica\Search[] $searches
      *
      * @return $this
      */
@@ -115,7 +115,7 @@ class Search
     }
 
     /**
-     * @return array|\Elastica\Search[]
+     * @return array|\Bonami\Elastica\Search[]
      */
     public function getSearches()
     {
@@ -135,7 +135,7 @@ class Search
     }
 
     /**
-     * @return \Elastica\Multi\ResultSet
+     * @return \Bonami\Elastica\Multi\ResultSet
      */
     public function search()
     {
@@ -165,7 +165,7 @@ class Search
     }
 
     /**
-     * @param \Elastica\Search $search
+     * @param \Bonami\Elastica\Search $search
      *
      * @return string
      */
@@ -182,7 +182,7 @@ class Search
     }
 
     /**
-     * @param \Elastica\Search $search
+     * @param \Bonami\Elastica\Search $search
      *
      * @return array
      */

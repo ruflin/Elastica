@@ -11,8 +11,8 @@ class HasParent extends AbstractFilter
     /**
      * Construct HasParent filter.
      *
-     * @param string|\Elastica\Query|\Elastica\Filter\AbstractFilter $query Query string or a Query object or a filter
-     * @param string|\Elastica\Type                                  $type  Parent document type
+     * @param string|\Bonami\Elastica\Query|\Elastica\Filter\AbstractFilter $query Query string or a Query object or a filter
+     * @param string|\Bonami\Elastica\Type                                  $type  Parent document type
      */
     public function __construct($query, $type)
     {
@@ -27,19 +27,19 @@ class HasParent extends AbstractFilter
     /**
      * Sets query object.
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|\Bonami\Elastica\Query|\Elastica\Query\AbstractQuery $query
      *
      * @return $this
      */
     public function setQuery($query)
     {
-        return $this->setParam('query', \Elastica\Query::create($query));
+        return $this->setParam('query', \Bonami\Elastica\Query::create($query));
     }
 
     /**
      * Sets filter object.
      *
-     * @param \Elastica\Filter\AbstractFilter $filter
+     * @param \Bonami\Elastica\Filter\AbstractFilter $filter
      *
      * @return $this
      */
@@ -51,13 +51,13 @@ class HasParent extends AbstractFilter
     /**
      * Set type of the parent document.
      *
-     * @param string|\Elastica\Type $type Parent document type
+     * @param string|\Bonami\Elastica\Type $type Parent document type
      *
      * @return $this
      */
     public function setType($type)
     {
-        if ($type instanceof \Elastica\Type) {
+        if ($type instanceof\Bonami\Elastica\Type) {
             $type = $type->getName();
         }
 

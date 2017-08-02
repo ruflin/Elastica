@@ -9,9 +9,9 @@ namespace Bonami\Elastica\Connection\Strategy;
 interface StrategyInterface
 {
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|\Bonami\Elastica\Connection[] $connections
      *
-     * @return \Elastica\Connection
+     * @return \Bonami\Elastica\Connection
      */
     public function getConnection($connections);
 }

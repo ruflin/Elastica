@@ -33,14 +33,14 @@ class Percolator
     /**
      * Index object.
      *
-     * @var \Elastica\Index
+     * @var \Bonami\Elastica\Index
      */
     protected $_index = null;
 
     /**
      * Construct new percolator.
      *
-     * @param \Elastica\Index $index
+     * @param \Bonami\Elastica\Index $index
      */
     public function __construct(Index $index)
     {
@@ -51,11 +51,11 @@ class Percolator
      * Registers a percolator query, with optional extra fields to include in the registered query.
      *
      * @param string                                               $name   Query name
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query  Query to add
+     * @param string|\Bonami\Elastica\Query|\Elastica\Query\AbstractQuery $query  Query to add
      * @param array                                                $fields Extra fields to include in the registered query
      *                                                                     and can be used to filter executed queries.
      *
-     * @return \Elastica\Response
+     * @return \Bonami\Elastica\Response
      */
     public function registerQuery($name, $query, $fields = array())
     {
@@ -72,7 +72,7 @@ class Percolator
      *
      * @param string $name query name
      *
-     * @return \Elastica\Response
+     * @return \Bonami\Elastica\Response
      */
     public function unregisterQuery($name)
     {
@@ -84,8 +84,8 @@ class Percolator
     /**
      * Match a document to percolator queries.
      *
-     * @param \Elastica\Document                                   $doc
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query  Query to filter the percolator queries which
+     * @param \Bonami\Elastica\Document                                   $doc
+     * @param string|\Bonami\Elastica\Query|\Elastica\Query\AbstractQuery $query  Query to filter the percolator queries which
      *                                                                     are executed.
      * @param string                                               $type
      * @param array                                                $params Supports setting additional request body options to the percolate request.
@@ -115,7 +115,7 @@ class Percolator
      *
      * @param string                                               $id
      * @param string                                               $type
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query  Query to filter the percolator queries which
+     * @param string|\Bonami\Elastica\Query|\Elastica\Query\AbstractQuery $query  Query to filter the percolator queries which
      *                                                                     are executed.
      * @param array                                                $params Supports setting additional request body options to the percolate request.
      *                                                                     [ Percolator::EXTRA_FILTER,
@@ -158,7 +158,7 @@ class Percolator
 
     /**
      * @param string                                               $path
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query] $query  [description]
+     * @param string|\Bonami\Elastica\Query|\Elastica\Query\AbstractQuery $query] $query  [description]
      * @param array                                                $data
      * @param array                                                $params
      *
@@ -185,7 +185,7 @@ class Percolator
     /**
      * Return index object.
      *
-     * @return \Elastica\Index
+     * @return \Bonami\Elastica\Index
      */
     public function getIndex()
     {

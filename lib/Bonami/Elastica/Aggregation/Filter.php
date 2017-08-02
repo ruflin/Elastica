@@ -37,7 +37,7 @@ class Filter extends AbstractAggregation
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException If filter is not set
+     * @throws \Bonami\Elastica\Exception\InvalidException If filter is not set
      *
      * @return array
      */

@@ -72,7 +72,7 @@ class Filter implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-filter.html
      *
-     * @return \Elastica\Filter\Bool
+     * @return \Bonami\Elastica\Filter\Bool
      */
     public function bool()
     {
@@ -241,7 +241,7 @@ class Filter implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-filter.html
      *
-     * @param string|\Elastica\Type $type
+     * @param string|\Bonami\Elastica\Type $type
      * @param array                 $ids
      *
      * @return Ids
@@ -426,7 +426,7 @@ class Filter implements DSL
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-filter.html
      *
-     * @param array|string|\Elastica\Script $script
+     * @param array|string|\Bonami\Elastica\Script $script
      *
      * @return Script
      */

@@ -144,7 +144,7 @@ class Util
 
     /**
      * Tries to guess the name of the param, based on its class
-     * Example: \Elastica\Filter\HasChildFilter => has_child.
+     * Example: \Bonami\Elastica\Filter\HasChildFilter => has_child.
      *
      * @param string|object Class or Class name
      *

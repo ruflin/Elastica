@@ -13,7 +13,7 @@ class BoolNot extends AbstractFilter
     /**
      * Creates Not filter query.
      *
-     * @param \Elastica\Filter\AbstractFilter $filter Filter object
+     * @param \Bonami\Elastica\Filter\AbstractFilter $filter Filter object
      */
     public function __construct(AbstractFilter $filter)
     {
@@ -23,7 +23,7 @@ class BoolNot extends AbstractFilter
     /**
      * Set filter.
      *
-     * @param \Elastica\Filter\AbstractFilter $filter
+     * @param \Bonami\Elastica\Filter\AbstractFilter $filter
      *
      * @return $this
      */

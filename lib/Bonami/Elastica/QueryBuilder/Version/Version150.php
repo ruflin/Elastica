@@ -8,7 +8,7 @@ namespace Bonami\Elastica\QueryBuilder\Version;
  *
  * @author Igor Denisenko <im.denisenko@yahoo.com>
  *
- * @deprecated deprecated in favor of Elastica\QueryBuilder\Version\Latest
+ * @deprecated deprecated in favor of Bonami\Elastica\QueryBuilder\Version\Latest
  */
 class Version150 extends Version140
 {

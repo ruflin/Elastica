@@ -89,7 +89,7 @@ class Document extends AbstractUpdateAction
     /**
      * @param string $key
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return mixed
      */
@@ -106,7 +106,7 @@ class Document extends AbstractUpdateAction
      * @param string $key
      * @param mixed  $value
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -133,7 +133,7 @@ class Document extends AbstractUpdateAction
     /**
      * @param string $key
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -254,7 +254,7 @@ class Document extends AbstractUpdateAction
     /**
      * @deprecated
      *
-     * @param \Elastica\Script $data
+     * @param \Bonami\Elastica\Script $data
      *
      * @throws NotImplementedException
      */
@@ -337,9 +337,9 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param array|\Elastica\Document $data
+     * @param array|\Bonami\Elastica\Document $data
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return self
      */

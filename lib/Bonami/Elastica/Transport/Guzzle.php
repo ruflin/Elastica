@@ -38,14 +38,14 @@ class Guzzle extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param \Elastica\Request $request
+     * @param \Bonami\Elastica\Request $request
      * @param array             $params  Host, Port, ...
      *
-     * @throws \Elastica\Exception\ConnectionException
-     * @throws \Elastica\Exception\ResponseException
-     * @throws \Elastica\Exception\Connection\HttpException
+     * @throws \Bonami\Elastica\Exception\ConnectionException
+     * @throws \Bonami\Elastica\Exception\ResponseException
+     * @throws \Bonami\Elastica\Exception\Connection\HttpException
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function exec(Request $request, array $params)
     {
@@ -141,7 +141,7 @@ class Guzzle extends AbstractTransport
     /**
      * Builds the base url for the guzzle connection.
      *
-     * @param \Elastica\Connection $connection
+     * @param \Bonami\Elastica\Connection $connection
      *
      * @return string
      */
@@ -162,7 +162,7 @@ class Guzzle extends AbstractTransport
     /**
      * Builds the action path url for each request.
      *
-     * @param \Elastica\Request $request
+     * @param \Bonami\Elastica\Request $request
      *
      * @return string
      */

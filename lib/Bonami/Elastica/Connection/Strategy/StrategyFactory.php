@@ -13,9 +13,9 @@ class StrategyFactory
     /**
      * @param mixed|callable|string|StrategyInterface $strategyName
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
-     * @return \Elastica\Connection\Strategy\StrategyInterface
+     * @return \Bonami\Elastica\Connection\Strategy\StrategyInterface
      */
     public static function create($strategyName)
     {

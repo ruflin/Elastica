@@ -14,12 +14,12 @@ use Exception;
 class ConnectionPool
 {
     /**
-     * @var array|\Elastica\Connection[] Connections array
+     * @var array|\Bonami\Elastica\Connection[] Connections array
      */
     protected $_connections;
 
     /**
-     * @var \Elastica\Connection\Strategy\StrategyInterface Strategy for connection
+     * @var \Bonami\Elastica\Connection\Strategy\StrategyInterface Strategy for connection
      */
     protected $_strategy;
 
@@ -30,7 +30,7 @@ class ConnectionPool
 
     /**
      * @param array                                           $connections
-     * @param \Elastica\Connection\Strategy\StrategyInterface $strategy
+     * @param \Bonami\Elastica\Connection\Strategy\StrategyInterface $strategy
      * @param callback                                        $callback
      */
     public function __construct(array $connections, StrategyInterface $strategy, $callback = null)
@@ -43,7 +43,7 @@ class ConnectionPool
     }
 
     /**
-     * @param \Elastica\Connection $connection
+     * @param \Bonami\Elastica\Connection $connection
      *
      * @return $this
      */
@@ -55,7 +55,7 @@ class ConnectionPool
     }
 
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|\Bonami\Elastica\Connection[] $connections
      *
      * @return $this
      */
@@ -89,9 +89,9 @@ class ConnectionPool
     }
 
     /**
-     * @throws \Elastica\Exception\ClientException
+     * @throws \Bonami\Elastica\Exception\ClientException
      *
-     * @return \Elastica\Connection
+     * @return \Bonami\Elastica\Connection
      */
     public function getConnection()
     {
@@ -99,7 +99,7 @@ class ConnectionPool
     }
 
     /**
-     * @param \Elastica\Connection $connection
+     * @param \Bonami\Elastica\Connection $connection
      * @param \Exception           $e
      * @param Client               $client
      */
@@ -113,7 +113,7 @@ class ConnectionPool
     }
 
     /**
-     * @return \Elastica\Connection\Strategy\StrategyInterface
+     * @return \Bonami\Elastica\Connection\Strategy\StrategyInterface
      */
     public function getStrategy()
     {

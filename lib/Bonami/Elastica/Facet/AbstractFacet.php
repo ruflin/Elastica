@@ -42,7 +42,7 @@ abstract class AbstractFacet extends Param implements NameableInterface
      *
      * @param string $name The name of the facet.
      *
-     * @throws \Elastica\Exception\InvalidException If name is empty
+     * @throws \Bonami\Elastica\Exception\InvalidException If name is empty
      *
      * @return $this
      */
@@ -69,7 +69,7 @@ abstract class AbstractFacet extends Param implements NameableInterface
     /**
      * Sets a filter for this facet.
      *
-     * @param \Elastica\Filter\AbstractFilter $filter A filter to apply on the facet.
+     * @param \Bonami\Elastica\Filter\AbstractFilter $filter A filter to apply on the facet.
      *
      * @return $this
      */

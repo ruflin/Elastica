@@ -34,7 +34,7 @@ class QueryString extends AbstractQuery
      *
      * @param string $query Query string
      *
-     * @throws \Elastica\Exception\InvalidException If given parameter is not a string
+     * @throws \Bonami\Elastica\Exception\InvalidException If given parameter is not a string
      *
      * @return $this
      */
@@ -205,7 +205,7 @@ class QueryString extends AbstractQuery
      *
      * @param array $fields Fields
      *
-     * @throws \Elastica\Exception\InvalidException If given parameter is not an array
+     * @throws \Bonami\Elastica\Exception\InvalidException If given parameter is not an array
      *
      * @return $this
      */
@@ -271,7 +271,7 @@ class QueryString extends AbstractQuery
     /**
      * Converts query to array.
      *
-     * @see \Elastica\Query\AbstractQuery::toArray()
+     * @see \Bonami\Elastica\Query\AbstractQuery::toArray()
      *
      * @return array Query array
      */

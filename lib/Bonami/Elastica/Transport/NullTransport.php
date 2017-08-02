@@ -18,10 +18,10 @@ class NullTransport extends AbstractTransport
     /**
      * Null transport.
      *
-     * @param \Elastica\Request $request
+     * @param \Bonami\Elastica\Request $request
      * @param array             $params  Hostname, port, path, ...
      *
-     * @return \Elastica\Response Response empty object
+     * @return \Bonami\Elastica\Response Response empty object
      */
     public function exec(Request $request, array $params)
     {

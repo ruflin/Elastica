@@ -37,14 +37,14 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Response.
      *
-     * @var \Elastica\Response Response object
+     * @var \Bonami\Elastica\Response Response object
      */
     protected $_response = null;
 
     /**
      * Query.
      *
-     * @var \Elastica\Query Query object
+     * @var \Bonami\Elastica\Query Query object
      */
     protected $_query;
 
@@ -71,8 +71,8 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Constructs ResultSet object.
      *
-     * @param \Elastica\Response $response Response object
-     * @param \Elastica\Query    $query    Query object
+     * @param \Bonami\Elastica\Response $response Response object
+     * @param \Bonami\Elastica\Query    $query    Query object
      */
     public function __construct(Response $response, Query $query)
     {
@@ -110,7 +110,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Loads all data into the results object (initialisation).
      *
-     * @param \Elastica\Response $response Response object
+     * @param \Bonami\Elastica\Response $response Response object
      */
     protected function _init(Response $response)
     {
@@ -275,7 +275,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -283,7 +283,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     }
 
     /**
-     * @return \Elastica\Query
+     * @return \Bonami\Elastica\Query
      */
     public function getQuery()
     {
@@ -313,7 +313,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Returns the current object of the set.
      *
-     * @return \Elastica\Result|bool Set object or false if not valid (no more entries)
+     * @return \Bonami\Elastica\Result|bool Set object or false if not valid (no more entries)
      */
     public function current()
     {

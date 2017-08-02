@@ -18,7 +18,7 @@ class CrossIndex
     /**
      * Type option.
      *
-     * type: string | string[] | \Elastica\Type | \Elastica\Type[] | null
+     * type: string | string[] | \Bonami\Elastica\Type | \Bonami\Elastica\Type[] | null
      * default: null (means all types)
      */
     const OPTION_TYPE = 'type';
@@ -26,15 +26,15 @@ class CrossIndex
     /**
      * Query option.
      *
-     * type: see \Elastica\Query::create()
-     * default: Elastica\Query\MatchAll
+     * type: see \Bonami\Elastica\Query::create()
+     * default: Bonami\Elastica\Query\MatchAll
      */
     const OPTION_QUERY = 'query';
 
     /**
      * Expiry time option.
      *
-     * type: string (see Elastica\ScanAndScroll)
+     * type: string (see Bonami\Elastica\ScanAndScroll)
      * default: '1m'
      */
     const OPTION_EXPIRY_TIME = 'expiryTime';
@@ -42,7 +42,7 @@ class CrossIndex
     /**
      * Size per shard option.
      *
-     * type: int (see Elastica\ScanAndScroll)
+     * type: int (see Bonami\Elastica\ScanAndScroll)
      * default: 1000
      */
     const OPTION_SIZE_PER_SHARD = 'sizePerShard';
@@ -52,11 +52,11 @@ class CrossIndex
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/guide/master/reindex.html
      *
-     * @param \Elastica\Index $oldIndex
-     * @param \Elastica\Index $newIndex
+     * @param \Bonami\Elastica\Index $oldIndex
+     * @param \Bonami\Elastica\Index $newIndex
      * @param array           $options  keys: CrossIndex::OPTION_* constants
      *
-     * @return \Elastica\Index The new index object
+     * @return \Bonami\Elastica\Index The new index object
      */
     public static function reindex(
         Index $oldIndex,
@@ -113,13 +113,13 @@ class CrossIndex
     /**
      * Copies type mappings and documents from an old index to a new index.
      *
-     * @see \Elastica\Tool\CrossIndex::reindex()
+     * @see \Bonami\Elastica\Tool\CrossIndex::reindex()
      *
-     * @param \Elastica\Index $oldIndex
-     * @param \Elastica\Index $newIndex
+     * @param \Bonami\Elastica\Index $oldIndex
+     * @param \Bonami\Elastica\Index $newIndex
      * @param array           $options  keys: CrossIndex::OPTION_* constants
      *
-     * @return \Elastica\Index The new index object
+     * @return \Bonami\Elastica\Index The new index object
      */
     public static function copy(
         Index $oldIndex,

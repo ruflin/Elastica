@@ -39,7 +39,7 @@ class GeoPolygon extends AbstractFilter
     /**
      * Converts filter to array.
      *
-     * @see \Elastica\Filter\AbstractFilter::toArray()
+     * @see \Bonami\Elastica\Filter\AbstractFilter::toArray()
      *
      * @return array
      */

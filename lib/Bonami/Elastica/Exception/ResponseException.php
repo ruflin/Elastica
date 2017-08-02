@@ -12,20 +12,20 @@ use Bonami\Elastica\Response;
 class ResponseException extends \RuntimeException implements ExceptionInterface
 {
     /**
-     * @var \Elastica\Request Request object
+     * @var \Bonami\Elastica\Request Request object
      */
     protected $_request = null;
 
     /**
-     * @var \Elastica\Response Response object
+     * @var \Bonami\Elastica\Response Response object
      */
     protected $_response = null;
 
     /**
      * Construct Exception.
      *
-     * @param \Elastica\Request  $request
-     * @param \Elastica\Response $response
+     * @param \Bonami\Elastica\Request  $request
+     * @param \Bonami\Elastica\Response $response
      */
     public function __construct(Request $request, Response $response)
     {
@@ -37,7 +37,7 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     /**
      * Returns request object.
      *
-     * @return \Elastica\Request Request object
+     * @return \Bonami\Elastica\Request Request object
      */
     public function getRequest()
     {
@@ -47,7 +47,7 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function getResponse()
     {

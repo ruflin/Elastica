@@ -15,7 +15,7 @@ class BoolQuery extends AbstractQuery
     /**
      * Add should part to query.
      *
-     * @param \Elastica\Query\AbstractQuery|array $args Should query
+     * @param \Bonami\Elastica\Query\AbstractQuery|array $args Should query
      *
      * @return $this
      */
@@ -27,7 +27,7 @@ class BoolQuery extends AbstractQuery
     /**
      * Add must part to query.
      *
-     * @param \Elastica\Query\AbstractQuery|array $args Must query
+     * @param \Bonami\Elastica\Query\AbstractQuery|array $args Must query
      *
      * @return $this
      */
@@ -39,7 +39,7 @@ class BoolQuery extends AbstractQuery
     /**
      * Add must not part to query.
      *
-     * @param \Elastica\Query\AbstractQuery|array $args Must not query
+     * @param \Bonami\Elastica\Query\AbstractQuery|array $args Must not query
      *
      * @return $this
      */
@@ -52,9 +52,9 @@ class BoolQuery extends AbstractQuery
      * Adds a query to the current object.
      *
      * @param string                              $type Query type
-     * @param \Elastica\Query\AbstractQuery|array $args Query
+     * @param \Bonami\Elastica\Query\AbstractQuery|array $args Query
      *
-     * @throws \Elastica\Exception\InvalidException If not valid query
+     * @throws \Bonami\Elastica\Exception\InvalidException If not valid query
      *
      * @return $this
      */

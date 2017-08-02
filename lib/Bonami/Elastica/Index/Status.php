@@ -16,7 +16,7 @@ class Status
     /**
      * Response.
      *
-     * @var \Elastica\Response Response object
+     * @var \Bonami\Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -30,14 +30,14 @@ class Status
     /**
      * Index.
      *
-     * @var \Elastica\Index Index object
+     * @var \Bonami\Elastica\Index Index object
      */
     protected $_index = null;
 
     /**
      * Construct.
      *
-     * @param \Elastica\Index $index Index object
+     * @param \Bonami\Elastica\Index $index Index object
      */
     public function __construct(BaseIndex $index)
     {
@@ -84,7 +84,7 @@ class Status
      */
     public function getAliases()
     {
-        $responseData = $this->getIndex()->request('_aliases', \Elastica\Request::GET)->getData();
+        $responseData = $this->getIndex()->request('_aliases',\Bonami\Elastica\Request::GET)->getData();
 
         $data = $responseData[$this->getIndex()->getName()];
         if (!empty($data['aliases'])) {
@@ -101,7 +101,7 @@ class Status
      */
     public function getSettings()
     {
-        $responseData = $this->getIndex()->request('_settings', \Elastica\Request::GET)->getData();
+        $responseData = $this->getIndex()->request('_settings', \Bonami\Elastica\Request::GET)->getData();
 
         return $responseData[$this->getIndex()->getName()]['settings'];
     }
@@ -121,7 +121,7 @@ class Status
     /**
      * Returns the index object.
      *
-     * @return \Elastica\Index Index object
+     * @return \Bonami\Elastica\Index Index object
      */
     public function getIndex()
     {
@@ -131,7 +131,7 @@ class Status
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function getResponse()
     {

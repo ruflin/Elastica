@@ -63,7 +63,7 @@ class GeoDistanceRange extends AbstractGeoDistance
      * @param string $key
      * @param mixed  $value
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */

@@ -25,7 +25,7 @@ class Nested extends AbstractQuery
     /**
      * Sets nested query.
      *
-     * @param \Elastica\Query\AbstractQuery $query
+     * @param \Bonami\Elastica\Query\AbstractQuery $query
      *
      * @return $this
      */

@@ -14,7 +14,7 @@ class UpdateDocument extends IndexDocument
     /**
      * Set the document for this bulk update action.
      *
-     * @param \Elastica\Document $document
+     * @param \Bonami\Elastica\Document $document
      *
      * @return $this
      */
@@ -40,7 +40,7 @@ class UpdateDocument extends IndexDocument
     }
 
     /**
-     * @param \Elastica\Script $script
+     * @param \Bonami\Elastica\Script $script
      *
      * @return $this
      */

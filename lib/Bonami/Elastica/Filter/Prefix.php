@@ -67,7 +67,7 @@ class Prefix extends AbstractFilter
     /**
      * Converts object to an array.
      *
-     * @see \Elastica\Filter\AbstractFilter::toArray()
+     * @see \Bonami\Elastica\Filter\AbstractFilter::toArray()
      *
      * @return array data array
      */

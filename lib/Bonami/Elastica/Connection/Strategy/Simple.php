@@ -11,11 +11,11 @@ use Bonami\Elastica\Exception\ClientException;
 class Simple implements StrategyInterface
 {
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|\Bonami\Elastica\Connection[] $connections
      *
-     * @throws \Elastica\Exception\ClientException
+     * @throws \Bonami\Elastica\Exception\ClientException
      *
-     * @return \Elastica\Connection
+     * @return \Bonami\Elastica\Connection
      */
     public function getConnection($connections)
     {

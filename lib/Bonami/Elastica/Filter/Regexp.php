@@ -38,7 +38,7 @@ class Regexp extends AbstractFilter
      * @param string $regexp  Regular expression
      * @param array  $options Regular expression options
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      */
     public function __construct($field = '', $regexp = '', $options = array())
     {
@@ -92,7 +92,7 @@ class Regexp extends AbstractFilter
     /**
      * Converts object to an array.
      *
-     * @see \Elastica\Filter\AbstractFilter::toArray()
+     * @see \Bonami\Elastica\Filter\AbstractFilter::toArray()
      *
      * @return array data array
      */

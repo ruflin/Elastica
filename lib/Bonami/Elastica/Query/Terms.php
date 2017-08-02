@@ -89,9 +89,9 @@ class Terms extends AbstractQuery
     /**
      * Converts the terms object to an array.
      *
-     * @see \Elastica\Query\AbstractQuery::toArray()
+     * @see \Bonami\Elastica\Query\AbstractQuery::toArray()
      *
-     * @throws \Elastica\Exception\InvalidException If term key is empty
+     * @throws \Bonami\Elastica\Exception\InvalidException If term key is empty
      *
      * @return array Query array
      */

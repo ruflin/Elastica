@@ -14,7 +14,7 @@ class Node
     /**
      * Client.
      *
-     * @var \Elastica\Client
+     * @var \Bonami\Elastica\Client
      */
     protected $_client = null;
 
@@ -33,14 +33,14 @@ class Node
     /**
      * Node stats.
      *
-     * @var \Elastica\Node\Stats Node Stats
+     * @var \Bonami\Elastica\Node\Stats Node Stats
      */
     protected $_stats = null;
 
     /**
      * Node info.
      *
-     * @var \Elastica\Node\Info Node info
+     * @var \Bonami\Elastica\Node\Info Node info
      */
     protected $_info = null;
 
@@ -48,7 +48,7 @@ class Node
      * Create a new node object.
      *
      * @param string           $id     Node id or name
-     * @param \Elastica\Client $client Node object
+     * @param \Bonami\Elastica\Client $client Node object
      */
     public function __construct($id, Client $client)
     {
@@ -93,7 +93,7 @@ class Node
     /**
      * Returns the current client object.
      *
-     * @return \Elastica\Client Client
+     * @return \Bonami\Elastica\Client Client
      */
     public function getClient()
     {
@@ -105,7 +105,7 @@ class Node
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
      *
-     * @return \Elastica\Node\Stats Node stats
+     * @return \Bonami\Elastica\Node\Stats Node stats
      */
     public function getStats()
     {
@@ -121,7 +121,7 @@ class Node
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      *
-     * @return \Elastica\Node\Info Node info object
+     * @return \Bonami\Elastica\Node\Info Node info object
      */
     public function getInfo()
     {
@@ -148,7 +148,7 @@ class Node
      *
      * @param string $delay OPTIONAL Delay after which node is shut down (default = 1s)
      *
-     * @return \Elastica\Response
+     * @return \Bonami\Elastica\Response
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-shutdown.html
      */

@@ -16,8 +16,8 @@ class Filtered extends AbstractQuery
     /**
      * Constructs a filtered query.
      *
-     * @param \Elastica\Query\AbstractQuery   $query  OPTIONAL Query object
-     * @param \Elastica\Filter\AbstractFilter $filter OPTIONAL Filter object
+     * @param \Bonami\Elastica\Query\AbstractQuery   $query  OPTIONAL Query object
+     * @param \Bonami\Elastica\Filter\AbstractFilter $filter OPTIONAL Filter object
      */
     public function __construct(AbstractQuery $query = null, AbstractFilter $filter = null)
     {
@@ -28,7 +28,7 @@ class Filtered extends AbstractQuery
     /**
      * Sets a query.
      *
-     * @param \Elastica\Query\AbstractQuery $query Query object
+     * @param \Bonami\Elastica\Query\AbstractQuery $query Query object
      *
      * @return $this
      */
@@ -40,7 +40,7 @@ class Filtered extends AbstractQuery
     /**
      * Sets the filter.
      *
-     * @param \Elastica\Filter\AbstractFilter $filter Filter object
+     * @param \Bonami\Elastica\Filter\AbstractFilter $filter Filter object
      *
      * @return $this
      */
@@ -52,7 +52,7 @@ class Filtered extends AbstractQuery
     /**
      * Gets the filter.
      *
-     * @return \Elastica\Filter\AbstractFilter
+     * @return \Bonami\Elastica\Filter\AbstractFilter
      */
     public function getFilter()
     {
@@ -62,7 +62,7 @@ class Filtered extends AbstractQuery
     /**
      * Gets the query.
      *
-     * @return \Elastica\Query\AbstractQuery
+     * @return \Bonami\Elastica\Query\AbstractQuery
      */
     public function getQuery()
     {
@@ -74,7 +74,7 @@ class Filtered extends AbstractQuery
      *
      * @return array Query array
      *
-     * @see \Elastica\Query\AbstractQuery::toArray()
+     * @see \Bonami\Elastica\Query\AbstractQuery::toArray()
      */
     public function toArray()
     {

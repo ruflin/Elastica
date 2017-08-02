@@ -55,7 +55,7 @@ class GeoDistance extends AbstractAggregation
      * @param int $fromValue a distance
      * @param int $toValue   a distance
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */

@@ -27,7 +27,7 @@ class Nested extends AbstractFilter
     /**
      * Sets nested query.
      *
-     * @param \Elastica\Query\AbstractQuery $query
+     * @param \Bonami\Elastica\Query\AbstractQuery $query
      *
      * @return $this
      */
@@ -39,7 +39,7 @@ class Nested extends AbstractFilter
     /**
      * Sets nested filter.
      *
-     * @param \Elastica\Filter\AbstractFilter $filter
+     * @param \Bonami\Elastica\Filter\AbstractFilter $filter
      *
      * @return $this
      */

@@ -15,7 +15,7 @@ class TopChildren extends AbstractQuery
     /**
      * Construct topChildren query.
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|\Bonami\Elastica\Query|\Elastica\Query\AbstractQuery $query
      * @param string                                               $type  Parent document type
      */
     public function __construct($query, $type = null)
@@ -27,7 +27,7 @@ class TopChildren extends AbstractQuery
     /**
      * Sets query object.
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|\Bonami\Elastica\Query|\Elastica\Query\AbstractQuery $query
      *
      * @return $this
      */

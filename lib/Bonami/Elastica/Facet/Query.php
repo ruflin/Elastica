@@ -16,7 +16,7 @@ class Query extends AbstractFacet
     /**
      * Set the query for the facet.
      *
-     * @param \Elastica\Query\AbstractQuery $query
+     * @param \Bonami\Elastica\Query\AbstractQuery $query
      *
      * @return $this
      */

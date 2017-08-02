@@ -11,7 +11,7 @@ use Bonami\Elastica\JSON;
  * @author Chris Gedrim <chris@gedr.im>
  *
  * @link http://www.elastic.co/
- * @deprecated This builder is deprecated and will be removed. Use new Elastica\QueryBuilder instead.
+ * @deprecated This builder is deprecated and will be removed. Use new Bonami\Elastica\QueryBuilder instead.
  **/
 class Builder extends AbstractQuery
 {

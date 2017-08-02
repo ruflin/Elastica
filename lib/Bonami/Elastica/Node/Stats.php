@@ -16,7 +16,7 @@ class Stats
     /**
      * Response.
      *
-     * @var \Elastica\Response Response object
+     * @var \Bonami\Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -30,14 +30,14 @@ class Stats
     /**
      * Node.
      *
-     * @var \Elastica\Node Node object
+     * @var \Bonami\Elastica\Node Node object
      */
     protected $_node = null;
 
     /**
      * Create new stats for node.
      *
-     * @param \Elastica\Node $node Elastica node object
+     * @param \Bonami\Elastica\Node $node Elastica node object
      */
     public function __construct(BaseNode $node)
     {
@@ -81,7 +81,7 @@ class Stats
     /**
      * Returns node object.
      *
-     * @return \Elastica\Node Node object
+     * @return \Bonami\Elastica\Node Node object
      */
     public function getNode()
     {
@@ -91,7 +91,7 @@ class Stats
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function getResponse()
     {
@@ -101,7 +101,7 @@ class Stats
     /**
      * Reloads all nodes information. Has to be called if informations changed.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function refresh()
     {

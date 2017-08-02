@@ -10,7 +10,7 @@ namespace Bonami\Elastica;
 class AbstractUpdateAction extends Param
 {
     /**
-     * @var \Elastica\Document
+     * @var  \Bonami\Elastica\Document
      */
     protected $_upsert;
 
@@ -92,7 +92,7 @@ class AbstractUpdateAction extends Param
     /**
      * Return document type name.
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return string Document type name
      */
@@ -120,7 +120,7 @@ class AbstractUpdateAction extends Param
     /**
      * Get the document index name.
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return string Index name
      */
@@ -509,7 +509,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param \Elastica\Document|array $data
+     * @param \Bonami\Elastica\Document|array $data
      *
      * @return $this
      */
@@ -522,7 +522,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @return \Elastica\Document
+     * @return \Bonami\Elastica\Document
      */
     public function getUpsert()
     {

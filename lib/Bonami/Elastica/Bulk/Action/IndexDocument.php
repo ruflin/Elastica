@@ -12,7 +12,7 @@ class IndexDocument extends AbstractDocument
     protected $_opType = self::OP_TYPE_INDEX;
 
     /**
-     * @param \Elastica\Document $document
+     * @param \Bonami\Elastica\Document $document
      *
      * @return $this
      */
@@ -26,7 +26,7 @@ class IndexDocument extends AbstractDocument
     }
 
     /**
-     * @param \Elastica\AbstractUpdateAction $action
+     * @param \Bonami\Elastica\AbstractUpdateAction $action
      *
      * @return array
      */

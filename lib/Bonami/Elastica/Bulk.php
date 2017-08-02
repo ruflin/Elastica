@@ -17,12 +17,12 @@ class Bulk
     const UDP_DEFAULT_PORT = 9700;
 
     /**
-     * @var \Elastica\Client
+     * @var \Bonami\Elastica\Client
      */
     protected $_client;
 
     /**
-     * @var \Elastica\Bulk\Action[]
+     * @var \Bonami\Elastica\Bulk\Action[]
      */
     protected $_actions = array();
 
@@ -42,7 +42,7 @@ class Bulk
     protected $_requestParams = array();
 
     /**
-     * @param \Elastica\Client $client
+     * @param \Bonami\Elastica\Client $client
      */
     public function __construct(Client $client)
     {
@@ -50,7 +50,7 @@ class Bulk
     }
 
     /**
-     * @param string|\Elastica\Index $index
+     * @param string|\Bonami\Elastica\Index $index
      *
      * @return $this
      */
@@ -82,7 +82,7 @@ class Bulk
     }
 
     /**
-     * @param string|\Elastica\Type $type
+     * @param string|\Bonami\Elastica\Type $type
      *
      * @return $this
      */
@@ -132,7 +132,7 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Bulk\Action $action
+     * @param \Bonami\Elastica\Bulk\Action $action
      *
      * @return $this
      */
@@ -144,7 +144,7 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Bulk\Action[] $actions
+     * @param \Bonami\Elastica\Bulk\Action[] $actions
      *
      * @return $this
      */
@@ -158,7 +158,7 @@ class Bulk
     }
 
     /**
-     * @return \Elastica\Bulk\Action[]
+     * @return \Bonami\Elastica\Bulk\Action[]
      */
     public function getActions()
     {
@@ -166,7 +166,7 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Document $document
+     * @param \Bonami\Elastica\Document $document
      * @param string             $opType
      *
      * @return $this
@@ -179,7 +179,7 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Document[] $documents
+     * @param \Bonami\Elastica\Document[] $documents
      * @param string               $opType
      *
      * @return $this
@@ -194,7 +194,7 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Script $script
+     * @param \Bonami\Elastica\Script $script
      * @param string           $opType
      *
      * @return $this
@@ -207,7 +207,7 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Document[] $scripts
+     * @param \Bonami\Elastica\Document[] $scripts
      * @param string               $opType
      *
      * @return $this
@@ -222,7 +222,7 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Script|\Elastica\Document|array $data
+     * @param \Bonami\Elastica\Script|\Elastica\Document|array $data
      * @param string                                    $opType
      *
      * @return $this
@@ -249,7 +249,7 @@ class Bulk
     /**
      * @param array $data
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -350,7 +350,7 @@ class Bulk
     }
 
     /**
-     * @return \Elastica\Bulk\ResponseSet
+     * @return \Bonami\Elastica\Bulk\ResponseSet
      */
     public function send()
     {
@@ -363,12 +363,12 @@ class Bulk
     }
 
     /**
-     * @param \Elastica\Response $response
+     * @param \Bonami\Elastica\Response $response
      *
-     * @throws \Elastica\Exception\Bulk\ResponseException
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\Bulk\ResponseException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
-     * @return \Elastica\Bulk\ResponseSet
+     * @return \Bonami\Elastica\Bulk\ResponseSet
      */
     protected function _processResponse(Response $response)
     {
@@ -420,7 +420,7 @@ class Bulk
      * @param string $host
      * @param int    $port
      *
-     * @throws \Elastica\Exception\Bulk\UdpException
+     * @throws \Bonami\Elastica\Exception\Bulk\UdpException
      */
     public function sendUdp($host = null, $port = null)
     {

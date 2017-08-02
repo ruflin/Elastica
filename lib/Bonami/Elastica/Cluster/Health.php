@@ -15,7 +15,7 @@ use Bonami\Elastica\Request;
 class Health
 {
     /**
-     * @var \Elastica\Client Client object.
+     * @var \Bonami\Elastica\Client Client object.
      */
     protected $_client = null;
 
@@ -25,7 +25,7 @@ class Health
     protected $_data = null;
 
     /**
-     * @param \Elastica\Client $client The Elastica client.
+     * @param \Bonami\Elastica\Client $client The Elastica client.
      */
     public function __construct(Client $client)
     {
@@ -171,7 +171,7 @@ class Health
     /**
      * Gets the status of the indices.
      *
-     * @return \Elastica\Cluster\Health\Index[]
+     * @return \Bonami\Elastica\Cluster\Health\Index[]
      */
     public function getIndices()
     {

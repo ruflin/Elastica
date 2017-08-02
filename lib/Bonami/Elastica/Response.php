@@ -44,7 +44,7 @@ class Response
     /**
      * Response.
      *
-     * @var \Elastica\Response Response object
+     * @var \Bonami\Elastica\Response Response object
      */
     protected $_response = null;
 
@@ -215,7 +215,7 @@ class Response
 
     /**
      * Sets the transfer info of the curl request. This function is called
-     * from the \Elastica\Client::_callService .
+     * from the \Bonami\Elastica\Client::_callService .
      *
      * @param array $transferInfo The curl transfer information.
      *
@@ -255,7 +255,7 @@ class Response
     /**
      * Time request took.
      *
-     * @throws \Elastica\Exception\NotFoundException
+     * @throws \Bonami\Elastica\Exception\NotFoundException
      *
      * @return int Time request took
      */
@@ -273,7 +273,7 @@ class Response
     /**
      * Get the _shard statistics for the response.
      *
-     * @throws \Elastica\Exception\NotFoundException
+     * @throws \Bonami\Elastica\Exception\NotFoundException
      *
      * @return array
      */
@@ -291,7 +291,7 @@ class Response
     /**
      * Get the _scroll value for the response.
      *
-     * @throws \Elastica\Exception\NotFoundException
+     * @throws \Bonami\Elastica\Exception\NotFoundException
      *
      * @return string
      */

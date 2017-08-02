@@ -83,7 +83,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
     /**
      * @param array|string $location
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return $this
      */
@@ -153,7 +153,7 @@ abstract class AbstractGeoDistance extends AbstractFilter
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return array|string
      */
@@ -183,9 +183,9 @@ abstract class AbstractGeoDistance extends AbstractFilter
     }
 
     /**
-     * @see \Elastica\Param::toArray()
+     * @see \Bonami\Elastica\Param::toArray()
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws \Bonami\Elastica\Exception\InvalidException
      *
      * @return array
      */

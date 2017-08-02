@@ -11,19 +11,19 @@ use Bonami\Elastica\Exception\BulkException;
 class ResponseException extends BulkException
 {
     /**
-     * @var \Elastica\Bulk\ResponseSet ResponseSet object
+     * @var \Bonami\Elastica\Bulk\ResponseSet ResponseSet object
      */
     protected $_responseSet;
 
     /**
-     * @var \Elastica\Exception\Bulk\Response\ActionException[]
+     * @var \Bonami\Elastica\Exception\Bulk\Response\ActionException[]
      */
     protected $_actionExceptions = array();
 
     /**
      * Construct Exception.
      *
-     * @param \Elastica\Bulk\ResponseSet $responseSet
+     * @param \Bonami\Elastica\Bulk\ResponseSet $responseSet
      */
     public function __construct(ResponseSet $responseSet)
     {
@@ -36,7 +36,7 @@ class ResponseException extends BulkException
     }
 
     /**
-     * @param \Elastica\Bulk\ResponseSet $responseSet
+     * @param \Bonami\Elastica\Bulk\ResponseSet $responseSet
      */
     protected function _init(ResponseSet $responseSet)
     {
@@ -52,7 +52,7 @@ class ResponseException extends BulkException
     /**
      * Returns bulk response set object.
      *
-     * @return \Elastica\Bulk\ResponseSet
+     * @return \Bonami\Elastica\Bulk\ResponseSet
      */
     public function getResponseSet()
     {
@@ -76,7 +76,7 @@ class ResponseException extends BulkException
     }
 
     /**
-     * @return \Elastica\Exception\Bulk\Response\ActionException[]
+     * @return \Bonami\Elastica\Exception\Bulk\Response\ActionException[]
      */
     public function getActionExceptions()
     {

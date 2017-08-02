@@ -13,7 +13,7 @@ class HasParent extends AbstractQuery
     /**
      * Construct HasChild Query.
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|\Bonami\Elastica\Query|\Elastica\Query\AbstractQuery $query
      * @param string                                               $type  Parent document type
      */
     public function __construct($query, $type)
@@ -25,7 +25,7 @@ class HasParent extends AbstractQuery
     /**
      * Sets query object.
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|\Bonami\Elastica\Query|\Elastica\Query\AbstractQuery $query
      *
      * @return $this
      */

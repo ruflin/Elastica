@@ -20,8 +20,8 @@ class GuzzleException extends ConnectionException
 
     /**
      * @param \GuzzleHttp\Exception\TransferException $guzzleException
-     * @param \Elastica\Request                       $request
-     * @param \Elastica\Response                      $response
+     * @param \Bonami\Elastica\Request                       $request
+     * @param \Bonami\Elastica\Response                      $response
      */
     public function __construct(TransferException $guzzleException, Request $request = null, Response $response = null)
     {

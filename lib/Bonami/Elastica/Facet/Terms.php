@@ -80,7 +80,7 @@ class Terms extends AbstractFacet
      *
      * @param string $type The order type to set use for sorting of the terms.
      *
-     * @throws \Elastica\Exception\InvalidException When an invalid order type was set.
+     * @throws \Bonami\Elastica\Exception\InvalidException When an invalid order type was set.
      *
      * @return $this
      */
@@ -121,7 +121,7 @@ class Terms extends AbstractFacet
      * Creates the full facet definition, which includes the basic
      * facet definition of the parent.
      *
-     * @see \Elastica\Facet\AbstractFacet::toArray()
+     * @see \Bonami\Elastica\Facet\AbstractFacet::toArray()
      *
      * @return array
      */

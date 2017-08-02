@@ -30,7 +30,7 @@ abstract class AbstractFilter extends Param
      *
      * @param string $cacheKey Cache key
      *
-     * @throws \Elastica\Exception\InvalidException If given key is empty
+     * @throws \Bonami\Elastica\Exception\InvalidException If given key is empty
      *
      * @return $this
      */

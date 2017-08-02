@@ -15,9 +15,9 @@ class DisMax extends AbstractQuery
     /**
      * Adds a query to the current object.
      *
-     * @param \Elastica\Query\AbstractQuery|array $args Query
+     * @param \Bonami\Elastica\Query\AbstractQuery|array $args Query
      *
-     * @throws \Elastica\Exception\InvalidException If not valid query
+     * @throws \Bonami\Elastica\Exception\InvalidException If not valid query
      *
      * @return $this
      */

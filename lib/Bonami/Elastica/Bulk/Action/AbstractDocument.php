@@ -9,12 +9,12 @@ use Bonami\Elastica\Script;
 abstract class AbstractDocument extends Action
 {
     /**
-     * @var \Elastica\Document|\Elastica\Script
+     * @var \Bonami\Elastica\Document|\Elastica\Script
      */
     protected $_data;
 
     /**
-     * @param \Elastica\Document|\Elastica\Script $document
+     * @param \Bonami\Elastica\Document|\Elastica\Script $document
      */
     public function __construct($document)
     {
@@ -22,7 +22,7 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param \Elastica\Document $document
+     * @param \Bonami\Elastica\Document $document
      *
      * @return $this
      */
@@ -38,7 +38,7 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param \Elastica\Script $script
+     * @param \Bonami\Elastica\Script $script
      *
      * @return $this
      */
@@ -57,7 +57,7 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param \Elastica\Script|\Elastica\Document $data
+     * @param \Bonami\Elastica\Script|\Elastica\Document $data
      *
      * @throws \InvalidArgumentException
      *
@@ -79,7 +79,7 @@ abstract class AbstractDocument extends Action
     /**
      * Note: This is for backwards compatibility.
      *
-     * @return \Elastica\Document|null
+     * @return \Bonami\Elastica\Document|null
      */
     public function getDocument()
     {
@@ -93,7 +93,7 @@ abstract class AbstractDocument extends Action
     /**
      * Note: This is for backwards compatibility.
      *
-     * @return \Elastica\Script|null
+     * @return \Bonami\Elastica\Script|null
      */
     public function getScript()
     {
@@ -105,7 +105,7 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @return \Elastica\Document|\Elastica\Script
+     * @return \Bonami\Elastica\Document|\Elastica\Script
      */
     public function getData()
     {
@@ -113,14 +113,14 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param \Elastica\AbstractUpdateAction $source
+     * @param \Bonami\Elastica\AbstractUpdateAction $source
      *
      * @return array
      */
     abstract protected function _getMetadata(AbstractUpdateAction $source);
 
     /**
-     * @param \Elastica\Document|\Elastica\Script $data
+     * @param \Bonami\Elastica\Document|\Elastica\Script $data
      * @param string                              $opType
      *
      * @return static

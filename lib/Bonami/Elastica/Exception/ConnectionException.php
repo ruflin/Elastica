@@ -12,12 +12,12 @@ use Bonami\Elastica\Response;
 class ConnectionException extends \RuntimeException implements ExceptionInterface
 {
     /**
-     * @var \Elastica\Request Request object
+     * @var \Bonami\Elastica\Request Request object
      */
     protected $_request;
 
     /**
-     * @var \Elastica\Response Response object
+     * @var \Bonami\Elastica\Response Response object
      */
     protected $_response;
 
@@ -25,8 +25,8 @@ class ConnectionException extends \RuntimeException implements ExceptionInterfac
      * Construct Exception.
      *
      * @param string             $message  Message
-     * @param \Elastica\Request  $request
-     * @param \Elastica\Response $response
+     * @param \Bonami\Elastica\Request  $request
+     * @param \Bonami\Elastica\Response $response
      */
     public function __construct($message, Request $request = null, Response $response = null)
     {
@@ -39,7 +39,7 @@ class ConnectionException extends \RuntimeException implements ExceptionInterfac
     /**
      * Returns request object.
      *
-     * @return \Elastica\Request Request object
+     * @return \Bonami\Elastica\Request Request object
      */
     public function getRequest()
     {
@@ -49,7 +49,7 @@ class ConnectionException extends \RuntimeException implements ExceptionInterfac
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function getResponse()
     {

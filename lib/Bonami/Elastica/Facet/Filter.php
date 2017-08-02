@@ -16,7 +16,7 @@ class Filter extends AbstractFacet
     /**
      * Set the filter for the facet.
      *
-     * @param \Elastica\Filter\AbstractFilter $filter
+     * @param \Bonami\Elastica\Filter\AbstractFilter $filter
      *
      * @return $this
      */

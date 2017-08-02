@@ -36,9 +36,9 @@ class Thrift extends AbstractTransport
     /**
      * Construct transport.
      *
-     * @param \Elastica\Connection $connection Connection object
+     * @param \Bonami\Elastica\Connection $connection Connection object
      *
-     * @throws \Elastica\Exception\RuntimeException
+     * @throws \Bonami\Elastica\Exception\RuntimeException
      */
     public function __construct(Connection $connection = null)
     {
@@ -105,13 +105,13 @@ class Thrift extends AbstractTransport
     /**
      * Makes calls to the elasticsearch server.
      *
-     * @param \Elastica\Request $request
+     * @param \Bonami\Elastica\Request $request
      * @param array             $params  Host, Port, ...
      *
-     * @throws \Elastica\Exception\Connection\ThriftException
-     * @throws \Elastica\Exception\ResponseException
+     * @throws \Bonami\Elastica\Exception\Connection\ThriftException
+     * @throws \Bonami\Elastica\Exception\ResponseException
      *
-     * @return \Elastica\Response Response object
+     * @return \Bonami\Elastica\Response Response object
      */
     public function exec(Request $request, array $params)
     {
