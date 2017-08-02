@@ -1,0 +1,8 @@
+parameters:
+	excludes_analyse:
+		- %rootDir%/../../../lib/Bonami/Elastica/Filter/Bool.php
+		- %rootDir%/../../../lib/Bonami/Elastica/Query/Bool.php
+		- %rootDir%/../../../lib/Bonami/Elastica/Transport/Null.php
+		- %rootDir%/../../../test/lib/Bonami/Elastica/Test/Query/BoolQueryTest.php
+		- %rootDir%/../../../test/lib/Bonami/Elastica/Test/Filter/BoolFilterTest.php
+
