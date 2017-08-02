@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Index;
 
-use Elastica\Document;
-use Elastica\Exception\ResponseException;
-use Elastica\Index;
-use Elastica\Index\Settings as IndexSettings;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Index\Settings as IndexSettings;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class SettingsTest extends BaseTest
 {

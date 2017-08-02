@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\Min;
-use Elastica\Aggregation\Nested;
-use Elastica\Document;
-use Elastica\Query;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Aggregation\Min;
+use Bonami\Elastica\Aggregation\Nested;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Type\Mapping;
 
 class NestedTest extends BaseAggregationTest
 {

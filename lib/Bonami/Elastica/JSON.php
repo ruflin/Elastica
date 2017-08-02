@@ -1,7 +1,7 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Exception\JSONParseException;
+use Bonami\Elastica\Exception\JSONParseException;
 
 /**
  * Elastica JSON tools.

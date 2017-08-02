@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Document;
-use Elastica\Query;
-use Elastica\Script;
-use Elastica\ScriptFields;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Script;
+use Bonami\Elastica\ScriptFields;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class ScriptFieldsTest extends BaseTest
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
 /**
  * Percolator class.

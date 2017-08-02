@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\GeoBoundingBox;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Filter\GeoBoundingBox;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class GeoBoundingBoxTest extends BaseTest
 {

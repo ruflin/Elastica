@@ -1,9 +1,9 @@
 <?php
 namespace Bonami\Elastica\Query;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Exception\JSONParseException;
-use Elastica\JSON;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\JSONParseException;
+use Bonami\Elastica\JSON;
 
 /**
  * Query Builder.

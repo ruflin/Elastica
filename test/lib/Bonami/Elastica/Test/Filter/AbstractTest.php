@@ -1,7 +1,7 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class AbstractTest extends BaseTest
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Elastica\Test\Exception;
 
-use Elastica\Exception\NotImplementedException;
+use Bonami\Elastica\Exception\NotImplementedException;
 
 class NotImplementedExceptionTest extends AbstractExceptionTest
 {

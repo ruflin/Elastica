@@ -1,9 +1,9 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Cluster\Health;
-use Elastica\Cluster\Settings;
-use Elastica\Exception\NotImplementedException;
+use Bonami\Elastica\Cluster\Health;
+use Bonami\Elastica\Cluster\Settings;
+use Bonami\Elastica\Exception\NotImplementedException;
 
 /**
  * Cluster informations for elasticsearch.

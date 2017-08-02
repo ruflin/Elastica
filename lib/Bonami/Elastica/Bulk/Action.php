@@ -1,10 +1,10 @@
 <?php
 namespace Bonami\Elastica\Bulk;
 
-use Elastica\Bulk;
-use Elastica\Index;
-use Elastica\JSON;
-use Elastica\Type;
+use Bonami\Elastica\Bulk;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\JSON;
+use Bonami\Elastica\Type;
 
 class Action
 {

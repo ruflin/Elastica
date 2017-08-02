@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Query;
 
-use Elastica\Query as BaseQuery;
+use Bonami\Elastica\Query as BaseQuery;
 
 /**
  * Returns parent documents having child docs matching the query.

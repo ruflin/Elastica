@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Query;
 
-use Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\InvalidException;
 
 /**
  * DisMax query.

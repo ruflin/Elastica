@@ -1,12 +1,12 @@
 <?php
 namespace Bonami\Elastica\Type;
 
-use Elastica\Client;
-use Elastica\Exception\InvalidException;
-use Elastica\Index;
-use Elastica\SearchableInterface;
-use Elastica\Type as BaseType;
-use Elastica\Util;
+use Bonami\Elastica\Client;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\SearchableInterface;
+use Bonami\Elastica\Type as BaseType;
+use Bonami\Elastica\Util;
 
 /**
  * Abstract helper class to implement search indices based on models.

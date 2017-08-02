@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\GeoDistance;
-use Elastica\Document;
-use Elastica\Query;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Aggregation\GeoDistance;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Type\Mapping;
 
 class GeoDistanceTest extends BaseAggregationTest
 {

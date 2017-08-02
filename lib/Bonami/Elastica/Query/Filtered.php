@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Query;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Filter\AbstractFilter;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Filter\AbstractFilter;
 
 /**
  * Filtered query. Needs a query and a filter.

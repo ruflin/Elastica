@@ -1,10 +1,10 @@
 <?php
 namespace Bonami\Elastica\Multi;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Response;
-use Elastica\ResultSet as BaseResultSet;
-use Elastica\Search as BaseSearch;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Response;
+use Bonami\Elastica\ResultSet as BaseResultSet;
+use Bonami\Elastica\Search as BaseSearch;
 
 /**
  * Elastica multi search result set

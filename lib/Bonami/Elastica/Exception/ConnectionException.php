@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Exception;
 
-use Elastica\Request;
-use Elastica\Response;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Response;
 
 /**
  * Connection exception.

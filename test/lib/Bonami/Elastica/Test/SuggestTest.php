@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Exception\NotImplementedException;
-use Elastica\Filter\BoolFilter;
-use Elastica\Suggest;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Exception\NotImplementedException;
+use Bonami\Elastica\Filter\BoolFilter;
+use Bonami\Elastica\Suggest;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class SuggestTest extends BaseTest
 {

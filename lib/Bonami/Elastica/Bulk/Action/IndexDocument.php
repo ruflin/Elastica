@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Bulk\Action;
 
-use Elastica\AbstractUpdateAction;
-use Elastica\Document;
+use Bonami\Elastica\AbstractUpdateAction;
+use Bonami\Elastica\Document;
 
 class IndexDocument extends AbstractDocument
 {

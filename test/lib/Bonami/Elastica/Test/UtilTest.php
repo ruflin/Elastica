@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Connection;
-use Elastica\Request;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Util;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Util;
 
 class UtilTest extends BaseTest
 {

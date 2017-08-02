@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Rescore;
 
-use Elastica\Param;
+use Bonami\Elastica\Param;
 
 /**
  * Abstract rescore object. Should be extended by all rescorers.

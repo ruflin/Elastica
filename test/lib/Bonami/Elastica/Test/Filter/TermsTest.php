@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Document;
-use Elastica\Filter\Terms;
-use Elastica\Query;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Filter\Terms;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class TermsTest extends BaseTest
 {

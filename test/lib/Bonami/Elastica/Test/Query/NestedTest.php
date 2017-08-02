@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Query\Nested;
-use Elastica\Query\QueryString;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Query\Nested;
+use Bonami\Elastica\Query\QueryString;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class NestedTest extends BaseTest
 {

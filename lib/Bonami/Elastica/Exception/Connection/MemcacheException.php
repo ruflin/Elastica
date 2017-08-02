@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Exception\Connection;
 
-use Elastica\Exception\ConnectionException;
+use Bonami\Elastica\Exception\ConnectionException;
 
 /**
  * Transport exception.

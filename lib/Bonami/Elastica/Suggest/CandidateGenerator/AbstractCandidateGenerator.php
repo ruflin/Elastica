@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Suggest\CandidateGenerator;
 
-use Elastica\Param;
+use Bonami\Elastica\Param;
 
 class AbstractCandidateGenerator extends Param
 {

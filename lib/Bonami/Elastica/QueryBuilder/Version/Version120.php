@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\QueryBuilder\Version;
 
-use Elastica\QueryBuilder\Version;
+use Bonami\Elastica\QueryBuilder\Version;
 
 /**
  * elasticsearch 1.2 DSL.

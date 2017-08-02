@@ -1,13 +1,13 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
-use Elastica\Filter\Ids;
-use Elastica\Filter\Term;
-use Elastica\Index;
-use Elastica\Query\ConstantScore;
-use Elastica\Query\MatchAll;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Filter\Ids;
+use Bonami\Elastica\Filter\Term;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Query\ConstantScore;
+use Bonami\Elastica\Query\MatchAll;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class ConstantScoreTest extends BaseTest
 {

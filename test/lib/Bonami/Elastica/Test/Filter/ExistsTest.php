@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\Exists;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Filter\Exists;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class ExistsTest extends BaseTest
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Bulk;
 
-use Elastica\Response as BaseResponse;
+use Bonami\Elastica\Response as BaseResponse;
 
 class Response extends BaseResponse
 {

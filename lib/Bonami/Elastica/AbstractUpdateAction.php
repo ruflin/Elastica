@@ -1,5 +1,5 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
 /**
  * Base class for things that can be sent to the update api (Document and

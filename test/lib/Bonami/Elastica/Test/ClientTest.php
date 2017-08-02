@@ -1,15 +1,15 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Connection;
-use Elastica\Document;
-use Elastica\Exception\Connection\HttpException;
-use Elastica\Exception\InvalidException;
-use Elastica\Index;
-use Elastica\Request;
-use Elastica\Script;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Exception\Connection\HttpException;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Script;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type;
 
 class ClientTest extends BaseTest
 {

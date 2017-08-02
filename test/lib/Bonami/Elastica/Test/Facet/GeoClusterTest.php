@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Facet;
 
-use Elastica\Document;
-use Elastica\Facet\GeoCluster;
-use Elastica\Query;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Facet\GeoCluster;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type\Mapping;
 
 class GeoClusterTest extends BaseTest
 {

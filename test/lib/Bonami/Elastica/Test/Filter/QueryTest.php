@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\Query;
-use Elastica\Query\QueryString;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Filter\Query;
+use Bonami\Elastica\Query\QueryString;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class QueryTest extends BaseTest
 {

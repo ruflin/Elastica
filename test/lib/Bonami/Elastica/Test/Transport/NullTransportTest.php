@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Transport;
 
-use Elastica\Connection;
-use Elastica\Query;
-use Elastica\Request;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Transport\NullTransport;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Transport\NullTransport;
 
 /**
  * Elastica Null Transport Test.

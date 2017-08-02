@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\MatchAll;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Filter\MatchAll;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class MatchAllTest extends BaseTest
 {

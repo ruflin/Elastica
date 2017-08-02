@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Filter;
 
-use Elastica;
+use Bonami\Elastica;
 
 /**
  * Script filter.

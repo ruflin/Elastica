@@ -1,7 +1,7 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\InvalidException;
 
 /**
  * Elastica Request object.

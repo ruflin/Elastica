@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\ValueCount;
-use Elastica\Document;
-use Elastica\Query;
+use Bonami\Elastica\Aggregation\ValueCount;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query;
 
 class ValueCountTest extends BaseAggregationTest
 {

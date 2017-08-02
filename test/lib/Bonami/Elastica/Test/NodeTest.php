@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Node;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Node;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class NodeTest extends BaseTest
 {

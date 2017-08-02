@@ -1,13 +1,13 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Document;
-use Elastica\Exception\ResponseException;
-use Elastica\Query;
-use Elastica\ScriptFile;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\ScriptFile;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type;
+use Bonami\Elastica\Type\Mapping;
 
 class ScriptFileTest extends BaseTest
 {

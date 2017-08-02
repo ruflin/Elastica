@@ -1,10 +1,10 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Bulk\Action;
-use Elastica\Exception\ConnectionException;
-use Elastica\Exception\InvalidException;
-use Elastica\Exception\RuntimeException;
+use Bonami\Elastica\Bulk\Action;
+use Bonami\Elastica\Exception\ConnectionException;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\RuntimeException;
 use Psr\Log\LoggerInterface;
 
 /**

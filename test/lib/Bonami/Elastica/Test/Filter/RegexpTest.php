@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Document;
-use Elastica\Filter\Regexp;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Filter\Regexp;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type\Mapping;
 
 class RegexpTest extends BaseTest
 {

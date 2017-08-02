@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Facet;
 
-use Elastica\Document;
-use Elastica\Facet\Query as FacetQuery;
-use Elastica\Query;
-use Elastica\Query\Term;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Facet\Query as FacetQuery;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Query\Term;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class QueryTest extends BaseTest
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Cluster\Health;
 
-use Elastica\Cluster\Health\Index as HealthIndex;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Cluster\Health\Index as HealthIndex;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class IndexTest extends BaseTest
 {

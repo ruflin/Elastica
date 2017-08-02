@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Param;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Util;
+use Bonami\Elastica\Param;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Util;
 
 class ParamTest extends BaseTest
 {

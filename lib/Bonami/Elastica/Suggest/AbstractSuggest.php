@@ -1,9 +1,9 @@
 <?php
 namespace Bonami\Elastica\Suggest;
 
-use Elastica\Exception\InvalidException;
-use Elastica\NameableInterface;
-use Elastica\Param;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\NameableInterface;
+use Bonami\Elastica\Param;
 
 /**
  * Class AbstractSuggestion.

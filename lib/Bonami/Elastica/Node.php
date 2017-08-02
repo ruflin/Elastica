@@ -1,8 +1,8 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Node\Info;
-use Elastica\Node\Stats;
+use Bonami\Elastica\Node\Info;
+use Bonami\Elastica\Node\Stats;
 
 /**
  * Elastica cluster node object.

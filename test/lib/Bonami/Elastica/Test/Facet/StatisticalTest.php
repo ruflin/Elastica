@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Facet;
 
-use Elastica\Document;
-use Elastica\Facet\Statistical;
-use Elastica\Query;
-use Elastica\Query\MatchAll;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Facet\Statistical;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Query\MatchAll;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 /**
  * @todo Add test for Statistical with setScript

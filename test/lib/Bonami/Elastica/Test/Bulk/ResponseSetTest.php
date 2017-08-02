@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Bulk;
 
-use Elastica\Bulk;
-use Elastica\Bulk\Action;
-use Elastica\Exception\Bulk\ResponseException;
-use Elastica\Response;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Bulk;
+use Bonami\Elastica\Bulk\Action;
+use Bonami\Elastica\Exception\Bulk\ResponseException;
+use Bonami\Elastica\Response;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class ResponseSetTest extends BaseTest
 {

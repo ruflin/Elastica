@@ -1,8 +1,8 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Exception\NotFoundException;
-use Elastica\Exception\ResponseException;
+use Bonami\Elastica\Exception\NotFoundException;
+use Bonami\Elastica\Exception\ResponseException;
 
 /**
  * Class Snapshot.

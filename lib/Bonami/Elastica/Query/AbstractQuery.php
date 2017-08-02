@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Query;
 
-use Elastica\Param;
+use Bonami\Elastica\Param;
 
 /**
  * Abstract query object. Should be extended by all query types.

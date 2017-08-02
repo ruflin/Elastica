@@ -1,9 +1,9 @@
 <?php
 namespace Bonami\Elastica\Exception\Connection;
 
-use Elastica\Exception\ConnectionException;
-use Elastica\Request;
-use Elastica\Response;
+use Bonami\Elastica\Exception\ConnectionException;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Response;
 use GuzzleHttp\Exception\TransferException;
 
 /**

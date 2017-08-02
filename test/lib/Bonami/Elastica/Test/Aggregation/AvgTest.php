@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\Avg;
-use Elastica\Document;
-use Elastica\Query;
+use Bonami\Elastica\Aggregation\Avg;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query;
 
 class AvgTest extends BaseAggregationTest
 {

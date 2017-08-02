@@ -1,10 +1,10 @@
 <?php
 namespace Bonami\Elastica\Transport;
 
-use Elastica\Connection;
-use Elastica\Exception\InvalidException;
-use Elastica\Param;
-use Elastica\Request;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Param;
+use Bonami\Elastica\Request;
 
 /**
  * Elastica Abstract Transport object.

@@ -1,11 +1,11 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Exception\ResponseException;
-use Elastica\Index\Settings as IndexSettings;
-use Elastica\Index\Stats as IndexStats;
-use Elastica\Index\Status as IndexStatus;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\Index\Settings as IndexSettings;
+use Bonami\Elastica\Index\Stats as IndexStats;
+use Bonami\Elastica\Index\Status as IndexStatus;
 
 /**
  * Elastica index object.

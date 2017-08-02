@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Facet;
 
-use Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\InvalidException;
 
 /**
  * Implements the statistical facet on a per term basis.

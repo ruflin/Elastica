@@ -1,8 +1,8 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Transport\AbstractTransport;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Transport\AbstractTransport;
 
 /**
  * Elastica connection instance to an elasticasearch node.

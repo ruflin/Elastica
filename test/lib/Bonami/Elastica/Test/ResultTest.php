@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Document;
-use Elastica\Result;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Result;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type\Mapping;
 
 class ResultTest extends BaseTest
 {

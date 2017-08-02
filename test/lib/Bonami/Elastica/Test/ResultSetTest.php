@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Document;
-use Elastica\Result;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Result;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class ResultSetTest extends BaseTest
 {

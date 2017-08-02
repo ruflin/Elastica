@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
-use Elastica\Query\Boosting;
-use Elastica\Query\Term;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query\Boosting;
+use Bonami\Elastica\Query\Term;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class BoostingTest extends BaseTest
 {

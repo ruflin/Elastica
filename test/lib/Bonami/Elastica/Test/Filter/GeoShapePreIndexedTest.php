@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\AbstractGeoShape;
-use Elastica\Filter\GeoShapePreIndexed;
-use Elastica\Query\Filtered;
-use Elastica\Query\MatchAll;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Filter\AbstractGeoShape;
+use Bonami\Elastica\Filter\GeoShapePreIndexed;
+use Bonami\Elastica\Query\Filtered;
+use Bonami\Elastica\Query\MatchAll;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class GeoShapePreIndexedTest extends BaseTest
 {

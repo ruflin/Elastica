@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Cluster;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Cluster;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class ClusterTest extends BaseTest
 {

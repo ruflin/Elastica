@@ -1,14 +1,14 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Document;
-use Elastica\Facet\DateHistogram;
-use Elastica\Query;
-use Elastica\Query\MatchAll;
-use Elastica\Request;
-use Elastica\Response;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Facet\DateHistogram;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Query\MatchAll;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Response;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type\Mapping;
 
 class ResponseTest extends BaseTest
 {

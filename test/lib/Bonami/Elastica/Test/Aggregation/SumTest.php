@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\Sum;
-use Elastica\Document;
-use Elastica\Query;
+use Bonami\Elastica\Aggregation\Sum;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query;
 
 class SumTest extends BaseAggregationTest
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Filter;
 
-use Elastica\Query\AbstractQuery;
+use Bonami\Elastica\Query\AbstractQuery;
 
 /**
  * Nested filter.

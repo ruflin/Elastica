@@ -1,9 +1,9 @@
 <?php
 namespace Bonami\Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
-use Elastica\NameableInterface;
-use Elastica\Param;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\NameableInterface;
+use Bonami\Elastica\Param;
 
 abstract class AbstractAggregation extends Param implements NameableInterface
 {

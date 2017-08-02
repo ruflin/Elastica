@@ -1,12 +1,12 @@
 <?php
 namespace Bonami\Elastica\Tool;
 
-use Elastica\Bulk;
-use Elastica\Index;
-use Elastica\Query\MatchAll;
-use Elastica\ScanAndScroll;
-use Elastica\Search;
-use Elastica\Type;
+use Bonami\Elastica\Bulk;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Query\MatchAll;
+use Bonami\Elastica\ScanAndScroll;
+use Bonami\Elastica\Search;
+use Bonami\Elastica\Type;
 
 /**
  * Functions to move documents and types between indices.

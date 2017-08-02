@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Connection\Strategy;
 
-use Elastica\Exception\ClientException;
+use Bonami\Elastica\Exception\ClientException;
 
 /**
  * Description of SimpleStrategy.

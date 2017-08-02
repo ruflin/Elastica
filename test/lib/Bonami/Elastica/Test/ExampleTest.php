@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Document;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 /**
  * Tests the example code.

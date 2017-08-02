@@ -1,14 +1,14 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Bulk;
-use Elastica\Bulk\Action;
-use Elastica\Bulk\Action\AbstractDocument;
-use Elastica\Document;
-use Elastica\Exception\Bulk\ResponseException;
-use Elastica\Exception\NotFoundException;
-use Elastica\Filter\Script;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Bulk;
+use Bonami\Elastica\Bulk\Action;
+use Bonami\Elastica\Bulk\Action\AbstractDocument;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Exception\Bulk\ResponseException;
+use Bonami\Elastica\Exception\NotFoundException;
+use Bonami\Elastica\Filter\Script;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class BulkTest extends BaseTest
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Cluster;
 
-use Elastica\Client;
-use Elastica\Request;
+use Bonami\Elastica\Client;
+use Bonami\Elastica\Request;
 
 /**
  * Cluster settings.

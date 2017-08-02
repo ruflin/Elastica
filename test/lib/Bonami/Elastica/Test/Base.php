@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Client;
-use Elastica\Connection;
-use Elastica\Index;
+use Bonami\Elastica\Client;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Index;
 
 class Base extends \PHPUnit_Framework_TestCase
 {

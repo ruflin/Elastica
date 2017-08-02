@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Index;
 
-use Elastica\Index as BaseIndex;
-use Elastica\Request;
+use Bonami\Elastica\Index as BaseIndex;
+use Bonami\Elastica\Request;
 
 /**
  * Elastica index stats object.

@@ -1,14 +1,14 @@
 <?php
 namespace Bonami\Elastica\Transport;
 
-use Elastica\Connection;
-use Elastica\Exception\Connection\ThriftException;
-use Elastica\Exception\PartialShardFailureException;
-use Elastica\Exception\ResponseException;
-use Elastica\Exception\RuntimeException;
-use Elastica\JSON;
-use Elastica\Request;
-use Elastica\Response;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Exception\Connection\ThriftException;
+use Bonami\Elastica\Exception\PartialShardFailureException;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\Exception\RuntimeException;
+use Bonami\Elastica\JSON;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Response;
 use Elasticsearch\Method;
 use Elasticsearch\RestClient;
 use Elasticsearch\RestRequest;

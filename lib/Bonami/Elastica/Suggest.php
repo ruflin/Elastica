@@ -1,8 +1,8 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Exception\NotImplementedException;
-use Elastica\Suggest\AbstractSuggest;
+use Bonami\Elastica\Exception\NotImplementedException;
+use Bonami\Elastica\Suggest\AbstractSuggest;
 
 /**
  * Class Suggest.

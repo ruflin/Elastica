@@ -1,7 +1,7 @@
 <?php
 namespace Elastica\Test\Exception;
 
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 abstract class AbstractExceptionTest extends BaseTest
 {

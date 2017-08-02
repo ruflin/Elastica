@@ -1,12 +1,12 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
-use Elastica\Index;
-use Elastica\Query\QueryString;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
-use Elastica\Util;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Query\QueryString;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type;
+use Bonami\Elastica\Util;
 
 class EscapeStringTest extends BaseTest
 {

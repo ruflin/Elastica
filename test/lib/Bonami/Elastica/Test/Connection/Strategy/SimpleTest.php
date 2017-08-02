@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Connection\Strategy;
 
-use Elastica\Connection;
-use Elastica\Exception\ConnectionException;
-use Elastica\Test\Base;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Exception\ConnectionException;
+use Bonami\Elastica\Test\Base;
 
 /**
  * Description of SimplyTest.

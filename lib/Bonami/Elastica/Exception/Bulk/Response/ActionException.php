@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Exception\Bulk\Response;
 
-use Elastica\Bulk\Response;
-use Elastica\Exception\BulkException;
+use Bonami\Elastica\Bulk\Response;
+use Bonami\Elastica\Exception\BulkException;
 
 class ActionException extends BulkException
 {

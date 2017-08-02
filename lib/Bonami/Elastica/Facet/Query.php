@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Facet;
 
-use Elastica\Query\AbstractQuery;
+use Bonami\Elastica\Query\AbstractQuery;
 
 /**
  * Query facet.

@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Client;
-use Elastica\IndexTemplate;
-use Elastica\Request;
-use Elastica\Response;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Client;
+use Bonami\Elastica\IndexTemplate;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Response;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 /**
  * IndexTemplate class tests.

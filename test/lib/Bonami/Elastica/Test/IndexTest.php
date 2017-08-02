@@ -1,17 +1,17 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Document;
-use Elastica\Exception\ResponseException;
-use Elastica\Index;
-use Elastica\Query\HasChild;
-use Elastica\Query\QueryString;
-use Elastica\Query\SimpleQueryString;
-use Elastica\Query\Term;
-use Elastica\Status;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Query\HasChild;
+use Bonami\Elastica\Query\QueryString;
+use Bonami\Elastica\Query\SimpleQueryString;
+use Bonami\Elastica\Query\Term;
+use Bonami\Elastica\Status;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type;
+use Bonami\Elastica\Type\Mapping;
 
 class IndexTest extends BaseTest
 {

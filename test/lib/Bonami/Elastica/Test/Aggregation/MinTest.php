@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\Min;
-use Elastica\Document;
-use Elastica\Query;
+use Bonami\Elastica\Aggregation\Min;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query;
 
 class MinTest extends BaseAggregationTest
 {

@@ -1,9 +1,9 @@
 <?php
 namespace Bonami\Elastica\Cluster;
 
-use Elastica\Client;
-use Elastica\Cluster\Health\Index;
-use Elastica\Request;
+use Bonami\Elastica\Client;
+use Bonami\Elastica\Cluster\Health\Index;
+use Bonami\Elastica\Request;
 
 /**
  * Elastic cluster health.

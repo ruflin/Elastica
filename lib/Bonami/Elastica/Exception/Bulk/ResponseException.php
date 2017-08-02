@@ -1,9 +1,9 @@
 <?php
 namespace Bonami\Elastica\Exception\Bulk;
 
-use Elastica\Bulk\ResponseSet;
-use Elastica\Exception\Bulk\Response\ActionException;
-use Elastica\Exception\BulkException;
+use Bonami\Elastica\Bulk\ResponseSet;
+use Bonami\Elastica\Exception\Bulk\Response\ActionException;
+use Bonami\Elastica\Exception\BulkException;
 
 /**
  * Bulk Response exception.

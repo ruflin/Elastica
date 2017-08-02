@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\Cardinality;
-use Elastica\Document;
-use Elastica\Query;
+use Bonami\Elastica\Aggregation\Cardinality;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query;
 
 class CardinalityTest extends BaseAggregationTest
 {

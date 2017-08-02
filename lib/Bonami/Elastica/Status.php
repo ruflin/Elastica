@@ -1,8 +1,8 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Exception\ResponseException;
-use Elastica\Index\Status as IndexStatus;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\Index\Status as IndexStatus;
 
 /**
  * Elastica general status.

@@ -1,13 +1,13 @@
 <?php
 namespace Bonami\Elastica\Transport;
 
-use Elastica\Exception\Connection\MemcacheException;
-use Elastica\Exception\InvalidException;
-use Elastica\Exception\PartialShardFailureException;
-use Elastica\Exception\ResponseException;
-use Elastica\JSON;
-use Elastica\Request;
-use Elastica\Response;
+use Bonami\Elastica\Exception\Connection\MemcacheException;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\PartialShardFailureException;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\JSON;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Response;
 
 /**
  * Elastica Memcache Transport object.

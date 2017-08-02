@@ -1,12 +1,12 @@
 <?php
 namespace Bonami\Elastica\Transport;
 
-use Elastica\Exception\Connection\HttpException;
-use Elastica\Exception\PartialShardFailureException;
-use Elastica\Exception\ResponseException;
-use Elastica\JSON;
-use Elastica\Request;
-use Elastica\Response;
+use Bonami\Elastica\Exception\Connection\HttpException;
+use Bonami\Elastica\Exception\PartialShardFailureException;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\JSON;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Response;
 
 /**
  * Elastica Http Transport object.

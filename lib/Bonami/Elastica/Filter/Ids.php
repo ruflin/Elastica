@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Filter;
 
-use Elastica\Type as ElasticaType;
+use Bonami\Elastica\Type as ElasticaType;
 
 /**
  * Ids Filter.

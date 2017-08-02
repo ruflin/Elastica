@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Log;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Log;
+use Bonami\Elastica\Test\Base as BaseTest;
 use Psr\Log\LogLevel;
 
 class LogTest extends BaseTest

@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Bulk\Action;
 
-use Elastica\AbstractUpdateAction;
+use Bonami\Elastica\AbstractUpdateAction;
 
 class DeleteDocument extends AbstractDocument
 {

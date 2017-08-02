@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test\Tool;
 
-use Elastica\Document;
-use Elastica\Test\Base;
-use Elastica\Tool\CrossIndex;
-use Elastica\Type;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Test\Base;
+use Bonami\Elastica\Tool\CrossIndex;
+use Bonami\Elastica\Type;
 
 class CrossIndexTest extends Base
 {

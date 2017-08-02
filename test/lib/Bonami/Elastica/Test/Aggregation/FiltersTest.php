@@ -1,12 +1,12 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\Avg;
-use Elastica\Aggregation\Filter;
-use Elastica\Aggregation\Filters;
-use Elastica\Document;
-use Elastica\Filter\Term;
-use Elastica\Query;
+use Bonami\Elastica\Aggregation\Avg;
+use Bonami\Elastica\Aggregation\Filter;
+use Bonami\Elastica\Aggregation\Filters;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Filter\Term;
+use Bonami\Elastica\Query;
 
 class FiltersTest extends BaseAggregationTest
 {

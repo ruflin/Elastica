@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test\Bulk;
 
-use Elastica\Bulk\Action;
-use Elastica\Index;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
+use Bonami\Elastica\Bulk\Action;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type;
 
 class ActionTest extends BaseTest
 {

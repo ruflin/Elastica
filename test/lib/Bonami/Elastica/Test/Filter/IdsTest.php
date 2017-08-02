@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Document;
-use Elastica\Filter\Ids;
-use Elastica\Filter\Type;
-use Elastica\Query;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Filter\Ids;
+use Bonami\Elastica\Filter\Type;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class IdsTest extends BaseTest
 {

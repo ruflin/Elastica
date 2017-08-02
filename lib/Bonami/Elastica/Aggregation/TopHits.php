@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Aggregation;
 
-use Elastica\Script;
-use Elastica\ScriptFields;
+use Bonami\Elastica\Script;
+use Bonami\Elastica\ScriptFields;
 
 /**
  * Class TopHits.

@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Suggest;
 
-use Elastica\Document;
-use Elastica\Index;
-use Elastica\Query;
-use Elastica\Suggest\Completion;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Suggest\Completion;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class CompletionTest extends BaseTest
 {

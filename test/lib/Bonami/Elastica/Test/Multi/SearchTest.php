@@ -1,13 +1,13 @@
 <?php
 namespace Elastica\Test\Multi;
 
-use Elastica\Document;
-use Elastica\Multi\Search as MultiSearch;
-use Elastica\Query;
-use Elastica\Query\Range;
-use Elastica\Query\Term;
-use Elastica\Search;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Multi\Search as MultiSearch;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Query\Range;
+use Bonami\Elastica\Query\Term;
+use Bonami\Elastica\Search;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class SearchTest extends BaseTest
 {

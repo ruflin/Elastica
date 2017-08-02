@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Bulk;
 
-use Elastica\Response as BaseResponse;
+use Bonami\Elastica\Response as BaseResponse;
 
 class ResponseSet extends BaseResponse implements \Iterator, \Countable
 {

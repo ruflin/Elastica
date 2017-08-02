@@ -1,10 +1,10 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Exception\QueryBuilderException;
-use Elastica\QueryBuilder\DSL;
-use Elastica\QueryBuilder\Facade;
-use Elastica\QueryBuilder\Version;
+use Bonami\Elastica\Exception\QueryBuilderException;
+use Bonami\Elastica\QueryBuilder\DSL;
+use Bonami\Elastica\QueryBuilder\Facade;
+use Bonami\Elastica\QueryBuilder\Version;
 
 /**
  * Query Builder.

@@ -1,12 +1,12 @@
 <?php
 namespace Bonami\Elastica\Transport;
 
-use Elastica\Connection;
-use Elastica\Exception\PartialShardFailureException;
-use Elastica\Exception\ResponseException;
-use Elastica\JSON;
-use Elastica\Request as ElasticaRequest;
-use Elastica\Response as ElasticaResponse;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Exception\PartialShardFailureException;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\JSON;
+use Bonami\Elastica\Request as ElasticaRequest;
+use Bonami\Elastica\Response as ElasticaResponse;
 use Ivory\HttpAdapter\HttpAdapterInterface;
 use Ivory\HttpAdapter\Message\Request as HttpAdapterRequest;
 use Ivory\HttpAdapter\Message\Response as HttpAdapterResponse;

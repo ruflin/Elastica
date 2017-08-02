@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Filter;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Param;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Param;
 
 /**
  * Abstract filter object. Should be extended by all filter types.

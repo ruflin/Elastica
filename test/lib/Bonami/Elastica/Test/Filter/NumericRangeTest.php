@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\NumericRange;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Filter\NumericRange;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class NumericRangeTest extends BaseTest
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Connection\Strategy;
 
-use Elastica\Connection\Strategy\StrategyFactory;
-use Elastica\Test\Base;
+use Bonami\Elastica\Connection\Strategy\StrategyFactory;
+use Bonami\Elastica\Test\Base;
 
 /**
  * Description of StrategyFactoryTest.

@@ -1,6 +1,6 @@
 <?php
 
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 /**
  * These tests shuts down node/cluster, so can't be executed with rest testsuite

@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\Term;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Filter\Term;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class TermTest extends BaseTest
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Query\Regexp;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Query\Regexp;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class RegexpTest extends BaseTest
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Facet;
 
-use Elastica\Filter\AbstractFilter;
+use Bonami\Elastica\Filter\AbstractFilter;
 
 /**
  * Filter facet.

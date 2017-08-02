@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\Max;
-use Elastica\Document;
-use Elastica\Query;
-use Elastica\Script;
+use Bonami\Elastica\Aggregation\Max;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Script;
 
 class MaxTest extends BaseAggregationTest
 {

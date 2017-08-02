@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\Limit;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Filter\Limit;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class LimitTest extends BaseTest
 {

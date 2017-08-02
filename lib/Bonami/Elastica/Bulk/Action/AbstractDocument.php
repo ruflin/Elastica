@@ -1,10 +1,10 @@
 <?php
 namespace Bonami\Elastica\Bulk\Action;
 
-use Elastica\AbstractUpdateAction;
-use Elastica\Bulk\Action;
-use Elastica\Document;
-use Elastica\Script;
+use Bonami\Elastica\AbstractUpdateAction;
+use Bonami\Elastica\Bulk\Action;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Script;
 
 abstract class AbstractDocument extends Action
 {

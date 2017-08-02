@@ -1,13 +1,13 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Bulk\Action;
-use Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
-use Elastica\Bulk\Response as BulkResponse;
-use Elastica\Bulk\ResponseSet;
-use Elastica\Exception\Bulk\ResponseException as BulkResponseException;
-use Elastica\Exception\Bulk\UdpException;
-use Elastica\Exception\InvalidException;
+use Bonami\Elastica\Bulk\Action;
+use Bonami\Elastica\Bulk\Action\AbstractDocument as AbstractDocumentAction;
+use Bonami\Elastica\Bulk\Response as BulkResponse;
+use Bonami\Elastica\Bulk\ResponseSet;
+use Bonami\Elastica\Exception\Bulk\ResponseException as BulkResponseException;
+use Bonami\Elastica\Exception\Bulk\UdpException;
+use Bonami\Elastica\Exception\InvalidException;
 
 class Bulk
 {

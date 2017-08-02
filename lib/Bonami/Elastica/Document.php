@@ -1,9 +1,9 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Bulk\Action;
-use Elastica\Exception\InvalidException;
-use Elastica\Exception\NotImplementedException;
+use Bonami\Elastica\Bulk\Action;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\NotImplementedException;
 
 /**
  * Single document stored in elastic search.

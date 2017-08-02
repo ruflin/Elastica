@@ -1,36 +1,36 @@
 <?php
 namespace Bonami\Elastica\QueryBuilder\DSL;
 
-use Elastica\Exception\NotImplementedException;
-use Elastica\Filter\AbstractFilter;
-use Elastica\Query\AbstractQuery;
-use Elastica\Query\BoolQuery;
-use Elastica\Query\Boosting;
-use Elastica\Query\Common;
-use Elastica\Query\ConstantScore;
-use Elastica\Query\DisMax;
-use Elastica\Query\Filtered;
-use Elastica\Query\FunctionScore;
-use Elastica\Query\Fuzzy;
-use Elastica\Query\FuzzyLikeThis;
-use Elastica\Query\HasChild;
-use Elastica\Query\HasParent;
-use Elastica\Query\Ids;
-use Elastica\Query\Match;
-use Elastica\Query\MatchAll;
-use Elastica\Query\MoreLikeThis;
-use Elastica\Query\MultiMatch;
-use Elastica\Query\Nested;
-use Elastica\Query\Prefix;
-use Elastica\Query\QueryString;
-use Elastica\Query\Range;
-use Elastica\Query\Regexp;
-use Elastica\Query\SimpleQueryString;
-use Elastica\Query\Term;
-use Elastica\Query\Terms;
-use Elastica\Query\TopChildren;
-use Elastica\Query\Wildcard;
-use Elastica\QueryBuilder\DSL;
+use Bonami\Elastica\Exception\NotImplementedException;
+use Bonami\Elastica\Filter\AbstractFilter;
+use Bonami\Elastica\Query\AbstractQuery;
+use Bonami\Elastica\Query\BoolQuery;
+use Bonami\Elastica\Query\Boosting;
+use Bonami\Elastica\Query\Common;
+use Bonami\Elastica\Query\ConstantScore;
+use Bonami\Elastica\Query\DisMax;
+use Bonami\Elastica\Query\Filtered;
+use Bonami\Elastica\Query\FunctionScore;
+use Bonami\Elastica\Query\Fuzzy;
+use Bonami\Elastica\Query\FuzzyLikeThis;
+use Bonami\Elastica\Query\HasChild;
+use Bonami\Elastica\Query\HasParent;
+use Bonami\Elastica\Query\Ids;
+use Bonami\Elastica\Query\Match;
+use Bonami\Elastica\Query\MatchAll;
+use Bonami\Elastica\Query\MoreLikeThis;
+use Bonami\Elastica\Query\MultiMatch;
+use Bonami\Elastica\Query\Nested;
+use Bonami\Elastica\Query\Prefix;
+use Bonami\Elastica\Query\QueryString;
+use Bonami\Elastica\Query\Range;
+use Bonami\Elastica\Query\Regexp;
+use Bonami\Elastica\Query\SimpleQueryString;
+use Bonami\Elastica\Query\Term;
+use Bonami\Elastica\Query\Terms;
+use Bonami\Elastica\Query\TopChildren;
+use Bonami\Elastica\Query\Wildcard;
+use Bonami\Elastica\QueryBuilder\DSL;
 
 /**
  * elasticsearch query DSL.

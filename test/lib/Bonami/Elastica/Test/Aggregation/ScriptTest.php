@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\Sum;
-use Elastica\Document;
-use Elastica\Query;
-use Elastica\Script;
+use Bonami\Elastica\Aggregation\Sum;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Script;
 
 class ScriptTest extends BaseAggregationTest
 {

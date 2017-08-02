@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Document;
-use Elastica\Index;
-use Elastica\Snapshot;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Snapshot;
 
 class SnapshotTest extends Base
 {

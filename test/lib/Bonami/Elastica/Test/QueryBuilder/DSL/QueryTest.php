@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\QueryBuilder\DSL;
 
-use Elastica\Filter\Exists;
-use Elastica\Query\Match;
-use Elastica\QueryBuilder\DSL;
+use Bonami\Elastica\Filter\Exists;
+use Bonami\Elastica\Query\Match;
+use Bonami\Elastica\QueryBuilder\DSL;
 
 class QueryTest extends AbstractDSLTest
 {

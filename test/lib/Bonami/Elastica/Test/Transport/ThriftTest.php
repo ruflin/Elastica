@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test\Transport;
 
-use Elastica\Connection;
-use Elastica\Document;
-use Elastica\Index;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class ThriftTest extends BaseTest
 {

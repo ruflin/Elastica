@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Filter;
 
-use Elastica\Index as ElasticaIndex;
+use Bonami\Elastica\Index as ElasticaIndex;
 
 /**
  * Class Indices.

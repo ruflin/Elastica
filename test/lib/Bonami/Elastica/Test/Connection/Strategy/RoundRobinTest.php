@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Connection\Strategy;
 
-use Elastica\Connection;
-use Elastica\Connection\Strategy\RoundRobin;
-use Elastica\Exception\ConnectionException;
-use Elastica\Response;
-use Elastica\Test\Base;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Connection\Strategy\RoundRobin;
+use Bonami\Elastica\Exception\ConnectionException;
+use Bonami\Elastica\Response;
+use Bonami\Elastica\Test\Base;
 
 /**
  * Description of RoundRobinTest.

@@ -1,10 +1,10 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Exception\NotFoundException;
-use Elastica\Exception\RuntimeException;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\NotFoundException;
+use Bonami\Elastica\Exception\RuntimeException;
+use Bonami\Elastica\Type\Mapping;
 
 /**
  * Elastica type object.

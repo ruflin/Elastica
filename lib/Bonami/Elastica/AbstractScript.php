@@ -1,5 +1,5 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
 /**
  * Base class for Script object.

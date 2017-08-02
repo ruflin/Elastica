@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\InvalidException;
 
 /**
  * Class GeoDistance.

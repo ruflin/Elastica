@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\QueryBuilder\DSL;
 
-use Elastica\Filter\Exists;
-use Elastica\QueryBuilder\DSL;
+use Bonami\Elastica\Filter\Exists;
+use Bonami\Elastica\QueryBuilder\DSL;
 
 class AggregationTest extends AbstractDSLTest
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Aggregation;
 
-use Elastica\Script;
+use Bonami\Elastica\Script;
 
 abstract class AbstractSimpleAggregation extends AbstractAggregation
 {

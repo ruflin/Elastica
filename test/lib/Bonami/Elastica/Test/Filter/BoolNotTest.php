@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\BoolNot;
-use Elastica\Filter\Ids;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Filter\BoolNot;
+use Bonami\Elastica\Filter\Ids;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class BoolNotTest extends BaseTest
 {

@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
-use Elastica\Query\Terms;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query\Terms;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class TermsTest extends BaseTest
 {

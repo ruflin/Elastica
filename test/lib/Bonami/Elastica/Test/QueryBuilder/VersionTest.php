@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\QueryBuilder;
 
-use Elastica\QueryBuilder\DSL;
-use Elastica\QueryBuilder\Version;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\QueryBuilder\DSL;
+use Bonami\Elastica\QueryBuilder\Version;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class VersionTest extends BaseTest
 {

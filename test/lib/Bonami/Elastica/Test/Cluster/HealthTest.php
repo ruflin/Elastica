@@ -1,7 +1,7 @@
 <?php
 namespace Elastica\Test\Cluster;
 
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class HealthTest extends BaseTest
 {

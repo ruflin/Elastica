@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\Script as ScriptFilter;
-use Elastica\Script;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Filter\Script as ScriptFilter;
+use Bonami\Elastica\Script;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class ScriptTest extends BaseTest
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Connection\Strategy;
 
-use Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\InvalidException;
 
 /**
  * Description of StrategyFactory.

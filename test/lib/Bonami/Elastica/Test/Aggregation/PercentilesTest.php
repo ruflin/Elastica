@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\Percentiles;
-use Elastica\Document;
-use Elastica\Query;
+use Bonami\Elastica\Aggregation\Percentiles;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query;
 
 class PercentilesTest extends BaseAggregationTest
 {

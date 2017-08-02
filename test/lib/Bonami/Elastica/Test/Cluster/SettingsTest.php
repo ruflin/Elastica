@@ -1,10 +1,10 @@
 <?php
 namespace Elastica\Test\Cluster;
 
-use Elastica\Cluster\Settings;
-use Elastica\Document;
-use Elastica\Exception\ResponseException;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Cluster\Settings;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class SettingsTest extends BaseTest
 {

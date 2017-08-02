@@ -1,9 +1,9 @@
 <?php
 namespace Bonami\Elastica\Type;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Request;
-use Elastica\Type;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Type;
 
 /**
  * Elastica Mapping object.

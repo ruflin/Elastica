@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Query;
 
-use Elastica\Type;
+use Bonami\Elastica\Type;
 
 /**
  * Ids Query.

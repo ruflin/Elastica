@@ -1,15 +1,15 @@
 <?php
-namespace Elastica;
+namespace Bonami\Elastica;
 
-use Elastica\Aggregation\AbstractAggregation;
-use Elastica\Exception\InvalidException;
-use Elastica\Exception\NotImplementedException;
-use Elastica\Facet\AbstractFacet;
-use Elastica\Filter\AbstractFilter;
-use Elastica\Query\AbstractQuery;
-use Elastica\Query\MatchAll;
-use Elastica\Query\QueryString;
-use Elastica\Suggest\AbstractSuggest;
+use Bonami\Elastica\Aggregation\AbstractAggregation;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\NotImplementedException;
+use Bonami\Elastica\Facet\AbstractFacet;
+use Bonami\Elastica\Filter\AbstractFilter;
+use Bonami\Elastica\Query\AbstractQuery;
+use Bonami\Elastica\Query\MatchAll;
+use Bonami\Elastica\Query\QueryString;
+use Bonami\Elastica\Suggest\AbstractSuggest;
 
 /**
  * Elastica query object.
@@ -141,7 +141,7 @@ class Query extends Param
      */
     public function setFilter(AbstractFilter $filter)
     {
-        trigger_error('Deprecated: Elastica\Query::setFilter() is deprecated. Use Elastica\Query::setPostFilter() instead.', E_USER_DEPRECATED);
+        trigger_error('Deprecated: Elastica\Query::setFilter() is deprecated. use Bonami\Elastica\Query::setPostFilter() instead.', E_USER_DEPRECATED);
 
         return $this->setPostFilter($filter);
     }

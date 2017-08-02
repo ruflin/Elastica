@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Facet;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Script;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Script;
 
 /**
  * Implements the terms facet.

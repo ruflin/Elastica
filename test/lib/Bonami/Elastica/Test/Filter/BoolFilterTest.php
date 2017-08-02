@@ -1,13 +1,13 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Document;
-use Elastica\Filter\BoolFilter;
-use Elastica\Filter\Ids;
-use Elastica\Filter\Term;
-use Elastica\Filter\Terms;
-use Elastica\Query;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Filter\BoolFilter;
+use Bonami\Elastica\Filter\Ids;
+use Bonami\Elastica\Filter\Term;
+use Bonami\Elastica\Filter\Terms;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class BoolFilterTest extends BaseTest
 {

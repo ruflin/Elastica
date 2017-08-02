@@ -1,13 +1,13 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
-use Elastica\Index;
-use Elastica\Query\BoolQuery;
-use Elastica\Query\Ids;
-use Elastica\Query\Term;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Query\BoolQuery;
+use Bonami\Elastica\Query\Ids;
+use Bonami\Elastica\Query\Term;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type;
 
 class BoolQueryTest extends BaseTest
 {

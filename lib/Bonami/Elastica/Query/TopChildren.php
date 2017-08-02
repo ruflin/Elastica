@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Query;
 
-use Elastica\Query as BaseQuery;
+use Bonami\Elastica\Query as BaseQuery;
 
 /**
  * Runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs.

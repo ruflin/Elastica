@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Bulk\Action;
 
-use Elastica\Document;
-use Elastica\Script;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Script;
 
 class UpdateDocument extends IndexDocument
 {

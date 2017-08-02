@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Index;
 
-use Elastica\Index\Status as IndexStatus;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Index\Status as IndexStatus;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class StatusTest extends BaseTest
 {

@@ -1,13 +1,13 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
-use Elastica\Index;
-use Elastica\Query;
-use Elastica\Query\MoreLikeThis;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Query\MoreLikeThis;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type;
+use Bonami\Elastica\Type\Mapping;
 
 class MoreLikeThisTest extends BaseTest
 {

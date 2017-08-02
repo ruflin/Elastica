@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Query;
 
-use Elastica\Filter\AbstractFilter;
-use Elastica\Script;
+use Bonami\Elastica\Filter\AbstractFilter;
+use Bonami\Elastica\Script;
 
 /**
  * Class FunctionScore.

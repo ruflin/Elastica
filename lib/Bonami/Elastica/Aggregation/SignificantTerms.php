@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Aggregation;
 
-use Elastica\Filter\AbstractFilter;
+use Bonami\Elastica\Filter\AbstractFilter;
 
 /**
  * Class SignificantTerms.

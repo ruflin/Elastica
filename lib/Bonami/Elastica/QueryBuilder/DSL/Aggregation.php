@@ -1,35 +1,35 @@
 <?php
 namespace Bonami\Elastica\QueryBuilder\DSL;
 
-use Elastica\Aggregation\Avg;
-use Elastica\Aggregation\Cardinality;
-use Elastica\Aggregation\DateHistogram;
-use Elastica\Aggregation\DateRange;
-use Elastica\Aggregation\ExtendedStats;
-use Elastica\Aggregation\Filter as FilterAggregation;
-use Elastica\Aggregation\Filters;
-use Elastica\Aggregation\GeoDistance;
-use Elastica\Aggregation\GeohashGrid;
-use Elastica\Aggregation\GlobalAggregation;
-use Elastica\Aggregation\Histogram;
-use Elastica\Aggregation\IpRange;
-use Elastica\Aggregation\Max;
-use Elastica\Aggregation\Min;
-use Elastica\Aggregation\Missing;
-use Elastica\Aggregation\Nested;
-use Elastica\Aggregation\Percentiles;
-use Elastica\Aggregation\Range;
-use Elastica\Aggregation\ReverseNested;
-use Elastica\Aggregation\ScriptedMetric;
-use Elastica\Aggregation\SignificantTerms;
-use Elastica\Aggregation\Stats;
-use Elastica\Aggregation\Sum;
-use Elastica\Aggregation\Terms;
-use Elastica\Aggregation\TopHits;
-use Elastica\Aggregation\ValueCount;
-use Elastica\Exception\NotImplementedException;
-use Elastica\Filter\AbstractFilter;
-use Elastica\QueryBuilder\DSL;
+use Bonami\Elastica\Aggregation\Avg;
+use Bonami\Elastica\Aggregation\Cardinality;
+use Bonami\Elastica\Aggregation\DateHistogram;
+use Bonami\Elastica\Aggregation\DateRange;
+use Bonami\Elastica\Aggregation\ExtendedStats;
+use Bonami\Elastica\Aggregation\Filter as FilterAggregation;
+use Bonami\Elastica\Aggregation\Filters;
+use Bonami\Elastica\Aggregation\GeoDistance;
+use Bonami\Elastica\Aggregation\GeohashGrid;
+use Bonami\Elastica\Aggregation\GlobalAggregation;
+use Bonami\Elastica\Aggregation\Histogram;
+use Bonami\Elastica\Aggregation\IpRange;
+use Bonami\Elastica\Aggregation\Max;
+use Bonami\Elastica\Aggregation\Min;
+use Bonami\Elastica\Aggregation\Missing;
+use Bonami\Elastica\Aggregation\Nested;
+use Bonami\Elastica\Aggregation\Percentiles;
+use Bonami\Elastica\Aggregation\Range;
+use Bonami\Elastica\Aggregation\ReverseNested;
+use Bonami\Elastica\Aggregation\ScriptedMetric;
+use Bonami\Elastica\Aggregation\SignificantTerms;
+use Bonami\Elastica\Aggregation\Stats;
+use Bonami\Elastica\Aggregation\Sum;
+use Bonami\Elastica\Aggregation\Terms;
+use Bonami\Elastica\Aggregation\TopHits;
+use Bonami\Elastica\Aggregation\ValueCount;
+use Bonami\Elastica\Exception\NotImplementedException;
+use Bonami\Elastica\Filter\AbstractFilter;
+use Bonami\Elastica\QueryBuilder\DSL;
 
 /**
  * elasticsearch aggregation DSL.

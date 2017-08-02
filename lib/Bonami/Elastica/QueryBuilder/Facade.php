@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\QueryBuilder;
 
-use Elastica\Exception\QueryBuilderException;
+use Bonami\Elastica\Exception\QueryBuilderException;
 
 /**
  * Facade for a specific DSL object.

@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Suggest;
 
-use Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator;
+use Bonami\Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator;
 
 /**
  * Class Phrase.

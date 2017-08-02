@@ -1,13 +1,13 @@
 <?php
 namespace Bonami\Elastica\Transport;
 
-use Elastica\Connection;
-use Elastica\Exception\Connection\GuzzleException;
-use Elastica\Exception\PartialShardFailureException;
-use Elastica\Exception\ResponseException;
-use Elastica\JSON;
-use Elastica\Request;
-use Elastica\Response;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Exception\Connection\GuzzleException;
+use Bonami\Elastica\Exception\PartialShardFailureException;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\JSON;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Stream\Stream;

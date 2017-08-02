@@ -1,8 +1,8 @@
 <?php
 namespace Bonami\Elastica\Node;
 
-use Elastica\Node as BaseNode;
-use Elastica\Request;
+use Bonami\Elastica\Node as BaseNode;
+use Bonami\Elastica\Request;
 
 /**
  * Elastica cluster node object.

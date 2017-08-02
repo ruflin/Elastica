@@ -1,18 +1,18 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Document;
-use Elastica\Exception\InvalidException;
-use Elastica\Facet\Terms;
-use Elastica\Query;
-use Elastica\Query\Builder;
-use Elastica\Query\Term;
-use Elastica\Query\Text;
-use Elastica\Script;
-use Elastica\ScriptFields;
-use Elastica\Suggest;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Facet\Terms;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Query\Builder;
+use Bonami\Elastica\Query\Term;
+use Bonami\Elastica\Query\Text;
+use Bonami\Elastica\Script;
+use Bonami\Elastica\ScriptFields;
+use Bonami\Elastica\Suggest;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type;
 
 class QueryTest extends BaseTest
 {

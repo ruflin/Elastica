@@ -1,10 +1,10 @@
 <?php
 namespace Bonami\Elastica\Multi;
 
-use Elastica\Client;
-use Elastica\JSON;
-use Elastica\Request;
-use Elastica\Search as BaseSearch;
+use Bonami\Elastica\Client;
+use Bonami\Elastica\JSON;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Search as BaseSearch;
 
 /**
  * Elastica multi search.

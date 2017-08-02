@@ -1,9 +1,9 @@
 <?php
 namespace Bonami\Elastica\Connection;
 
-use Elastica\Client;
-use Elastica\Connection;
-use Elastica\Connection\Strategy\StrategyInterface;
+use Bonami\Elastica\Client;
+use Bonami\Elastica\Connection;
+use Bonami\Elastica\Connection\Strategy\StrategyInterface;
 use Exception;
 
 /**

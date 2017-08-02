@@ -1,11 +1,11 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Document;
-use Elastica\Filter\GeoDistanceRange;
-use Elastica\Query;
-use Elastica\Query\MatchAll;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Filter\GeoDistanceRange;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Query\MatchAll;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class GeoDistanceRangeTest extends BaseTest
 {

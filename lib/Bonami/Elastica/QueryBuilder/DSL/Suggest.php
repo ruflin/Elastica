@@ -1,11 +1,11 @@
 <?php
 namespace Bonami\Elastica\QueryBuilder\DSL;
 
-use Elastica\Exception\NotImplementedException;
-use Elastica\QueryBuilder\DSL;
-use Elastica\Suggest\Completion;
-use Elastica\Suggest\Phrase;
-use Elastica\Suggest\Term;
+use Bonami\Elastica\Exception\NotImplementedException;
+use Bonami\Elastica\QueryBuilder\DSL;
+use Bonami\Elastica\Suggest\Completion;
+use Bonami\Elastica\Suggest\Phrase;
+use Bonami\Elastica\Suggest\Term;
 
 /**
  * elasticsearch suggesters DSL.

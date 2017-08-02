@@ -1,19 +1,19 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Document;
-use Elastica\Exception\NotFoundException;
-use Elastica\Exception\ResponseException;
-use Elastica\Filter\Term;
-use Elastica\Index;
-use Elastica\Query;
-use Elastica\Query\MatchAll;
-use Elastica\Query\SimpleQueryString;
-use Elastica\Script;
-use Elastica\Search;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Exception\NotFoundException;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\Filter\Term;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Query\MatchAll;
+use Bonami\Elastica\Query\SimpleQueryString;
+use Bonami\Elastica\Script;
+use Bonami\Elastica\Search;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type;
+use Bonami\Elastica\Type\Mapping;
 
 class TypeTest extends BaseTest
 {

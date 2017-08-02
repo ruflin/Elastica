@@ -1,18 +1,18 @@
 <?php
 namespace Elastica\Test;
 
-use Elastica\Aggregation;
-use Elastica\Document;
-use Elastica\Exception\ResponseException;
-use Elastica\Index;
-use Elastica\Query;
-use Elastica\Query\FunctionScore;
-use Elastica\Query\MatchAll;
-use Elastica\Query\QueryString;
-use Elastica\Script;
-use Elastica\Search;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
+use Bonami\Elastica\Aggregation;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\Index;
+use Bonami\Elastica\Query;
+use Bonami\Elastica\Query\FunctionScore;
+use Bonami\Elastica\Query\MatchAll;
+use Bonami\Elastica\Query\QueryString;
+use Bonami\Elastica\Script;
+use Bonami\Elastica\Search;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type;
 
 class SearchTest extends BaseTest
 {

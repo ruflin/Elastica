@@ -1,10 +1,10 @@
 <?php
 namespace Bonami\Elastica\Index;
 
-use Elastica\Exception\NotFoundException;
-use Elastica\Exception\ResponseException;
-use Elastica\Index as BaseIndex;
-use Elastica\Request;
+use Bonami\Elastica\Exception\NotFoundException;
+use Bonami\Elastica\Exception\ResponseException;
+use Bonami\Elastica\Index as BaseIndex;
+use Bonami\Elastica\Request;
 
 /**
  * Elastica index settings object.

@@ -1,9 +1,9 @@
 <?php
 namespace Bonami\Elastica\Exception;
 
-use Elastica\JSON;
-use Elastica\Request;
-use Elastica\Response;
+use Bonami\Elastica\JSON;
+use Bonami\Elastica\Request;
+use Bonami\Elastica\Response;
 
 /**
  * Partial shard failure exception.

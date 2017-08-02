@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Query\Simple;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Query\Simple;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class SimpleTest extends BaseTest
 {

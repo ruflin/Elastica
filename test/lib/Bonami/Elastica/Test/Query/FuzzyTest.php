@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
-use Elastica\Query\Fuzzy;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Query\Fuzzy;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class FuzzyTest extends BaseTest
 {

@@ -1,10 +1,10 @@
 <?php
 namespace Bonami\Elastica\Facet;
 
-use Elastica\Exception\InvalidException;
-use Elastica\Filter\AbstractFilter;
-use Elastica\NameableInterface;
-use Elastica\Param;
+use Bonami\Elastica\Exception\InvalidException;
+use Bonami\Elastica\Filter\AbstractFilter;
+use Bonami\Elastica\NameableInterface;
+use Bonami\Elastica\Param;
 
 /**
  * Abstract facet object. Should be extended by all facet types.

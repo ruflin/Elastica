@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Filter;
 
-use Elastica\Exception\InvalidException;
+use Bonami\Elastica\Exception\InvalidException;
 
 /**
  * Bool Filter.

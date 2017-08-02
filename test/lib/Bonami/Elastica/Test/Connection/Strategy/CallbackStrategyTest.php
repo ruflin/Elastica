@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Connection\Strategy;
 
-use Elastica\Connection\Strategy\CallbackStrategy;
-use Elastica\Test\Base;
+use Bonami\Elastica\Connection\Strategy\CallbackStrategy;
+use Bonami\Elastica\Test\Base;
 
 /**
  * Description of CallbackStrategyTest.

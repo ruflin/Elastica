@@ -1,7 +1,7 @@
 <?php
 namespace Bonami\Elastica\Rescore;
 
-use Elastica\Query as BaseQuery;
+use Bonami\Elastica\Query as BaseQuery;
 
 /**
  * Query Rescore.

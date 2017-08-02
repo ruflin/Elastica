@@ -1,12 +1,12 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Document;
-use Elastica\Filter\Nested;
-use Elastica\Query\Terms;
-use Elastica\Search;
-use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
+use Bonami\Elastica\Document;
+use Bonami\Elastica\Filter\Nested;
+use Bonami\Elastica\Query\Terms;
+use Bonami\Elastica\Search;
+use Bonami\Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Type\Mapping;
 
 class NestedTest extends BaseTest
 {

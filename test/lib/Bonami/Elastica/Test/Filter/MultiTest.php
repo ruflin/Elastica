@@ -1,9 +1,9 @@
 <?php
 namespace Elastica\Test\Filter;
 
-use Elastica\Filter\AbstractMulti;
-use Elastica\Filter\MatchAll;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Filter\AbstractMulti;
+use Bonami\Elastica\Filter\MatchAll;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class AbstractMultiTest extends BaseTest
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Query\Builder;
-use Elastica\Test\Base as BaseTest;
+use Bonami\Elastica\Query\Builder;
+use Bonami\Elastica\Test\Base as BaseTest;
 
 class BuilderTest extends BaseTest
 {
