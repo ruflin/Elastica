@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Elastica\\": "lib/Elastica/"
+            "Bonami\\Elastica\\": "lib/Bonami/Elastica/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Elastica\\Test\\": "test/lib/Elastica/Test/"
+            "Bonami\\Elastica\\Test\\": "test/lib/Bonami/Elastica/Test/"
         }
     },
     "extra": {
