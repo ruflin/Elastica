@@ -71,8 +71,6 @@ class Filter implements DSL
      * bool filter.
      *
      * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-filter.html
-     *
-     * @return \Bonami\Elastica\Filter\Bool
      */
     public function bool()
     {
