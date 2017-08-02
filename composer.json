@@ -17,7 +17,8 @@
     },
     "require-dev": {
         "munkie/elasticsearch-thrift-php": "1.4.*",
-        "guzzlehttp/guzzle": "5.3.*"
+        "guzzlehttp/guzzle": "5.3.*",
+        "phpstan/phpstan": "0.8"
     },
     "suggest": {
         "munkie/elasticsearch-thrift-php": "Allow using thrift transport",
