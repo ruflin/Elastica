@@ -18,6 +18,8 @@ class ScriptFileTest extends BaseTest
      */
     public function testSearch()
     {
+        $this->markTestSkipped('ES6 update: [script] unknown field [file], parser not found');
+
         $index = $this->_createIndex();
         $type = $index->getType('test');
 

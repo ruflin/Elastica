@@ -68,6 +68,8 @@ class MappingTest extends BaseTest
      */
     public function testEnableAllField()
     {
+        $this->markTestSkipped('ES6 update: [_all] is disabled in 6.0. As a replacement, you can use an [copy_to] on mapping fields to create your own catch all field.');
+
         $index = $this->_createIndex();
         $type = $index->getType('test');
 
@@ -136,6 +138,8 @@ class MappingTest extends BaseTest
      */
     public function testParentMapping()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $index = $this->_createIndex();
 
         $childtype = new Type($index, 'childtype');
@@ -166,6 +170,8 @@ class MappingTest extends BaseTest
      */
     public function testMappingExample()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $index = $this->_createIndex();
         $type = $index->getType('notes');
 

@@ -22,6 +22,7 @@ class BulkTest extends BaseTest
      */
     public function testSend()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
         $index = $this->_createIndex();
         $indexName = $index->getName();
         $type = $index->getType('bulk_test');

@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
 	nano \
 	php5-xsl \
 	libpcre3-dev \
-	zlib1g-dev
+	zlib1g-dev \
+	wget
 	# XSL and Graphviz for PhpDocumentor
 
 RUN docker-php-ext-install sockets zip

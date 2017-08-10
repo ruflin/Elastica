@@ -1,7 +1,8 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:5.4.1
+FROM docker.elastic.co/elasticsearch/elasticsearch:6.0.0-beta1
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
-RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install mapper-attachments
+RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
+
 
 # Copy config files
 COPY elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml

@@ -25,10 +25,10 @@ readParams() {
 # Wait for elasticsearch to start. It requires that the status be either
 # green or yellow.
 waitForElasticsearch() {
-  echo -n "Waiting on elasticsearch(${ES_HOST}:${ES_PORT}) to start."
-  for ((i=1;i<=60;i++))
+  echo -n "Waiting on $1($1:${ES_PORT}) to start."
+  for ((i=1;i<=300;i++))
   do
-    health=$(curl --silent "http://${ES_HOST}:${ES_PORT}/_cat/health" | awk '{print $4}')
+    health=$(curl --silent "http://$1:${ES_PORT}/_cat/health" | awk '{print $4}')
     if [[ "$health" == "green" ]] || [[ "$health" == "yellow" ]]
     then
       echo
@@ -50,5 +50,5 @@ waitForElasticsearch() {
 
 # Main
 readParams
-waitForElasticsearch
+waitForElasticsearch $ES_HOST
 exec "$@"

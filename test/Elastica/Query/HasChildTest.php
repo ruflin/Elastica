@@ -62,6 +62,8 @@ class HasChildTest extends BaseTest
      */
     public function testTypeInsideHasChildSearch()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $index = $this->_getTestIndex();
 
         $f = new Match();

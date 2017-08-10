@@ -1,19 +1,15 @@
 #Set Cluster name
 cluster.name: "docker-cluster-elastica"
 
-# Required plugins
-plugin.mandatory: mapper-attachments
-
-# For script tests
-script.inline: true
-
-script.engine.groovy.file: on
-
 # Limit threadpool by set number of available processors to 1
 # Without this, travis builds will be failed with OutOfMemory error
 processors: 1
 
-network.host: 0.0.0.0
+#network.host: 0.0.0.0
+
+#script.allowed_types: inline, stored
+#script.allowed_contexts: search, update, aggs
+
 
 # minimum_master_nodes need to be explicitly set when bound on a public IP
 # set to 1 to allow single node clusters
@@ -31,5 +27,3 @@ xpack.monitoring.enabled: false
 # Added for snapshot tests
 path.repo: ["/usr/share/elasticsearch/data"]
 node.max_local_storage_nodes: 2
-
-

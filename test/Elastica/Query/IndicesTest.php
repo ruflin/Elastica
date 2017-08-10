@@ -36,6 +36,8 @@ class IndicesTest extends DeprecatedClassBase
      */
     public function testIndicesQuery()
     {
+        $this->markTestSkipped('ES6 update: no [query] registered for [indices]');
+
         $docs = [
             new Document(1, ['color' => 'blue']),
             new Document(2, ['color' => 'green']),

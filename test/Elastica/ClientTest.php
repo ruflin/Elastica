@@ -1309,6 +1309,7 @@ class ClientTest extends BaseTest
      */
     public function testEndpointParamsRequest()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
         $index = $this->_createIndex();
         $client = $index->getClient();
         $type = $index->getType('test');

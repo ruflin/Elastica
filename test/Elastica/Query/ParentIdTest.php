@@ -33,6 +33,8 @@ class ParentIdTest extends BaseTest
      */
     public function testParentId()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $index = $this->_createIndex();
 
         $shopType = $index->getType('shop');

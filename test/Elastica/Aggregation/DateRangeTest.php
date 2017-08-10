@@ -55,7 +55,7 @@ class DateRangeTest extends BaseAggregationTest
      */
     public function testDateRangeSetFormat()
     {
-        $agg = new DateRange('date');
+        $this->markTestSkipped('ES6 update: numeric to and from parameters in date_range aggregation are interpreted according to format');        $agg = new DateRange('date');
         $agg->setField('created');
         $agg->addRange(1390958535000)->addRange(null, 1390958535000);
         $agg->setFormat('m-y-d');
