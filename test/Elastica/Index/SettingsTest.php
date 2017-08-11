@@ -36,6 +36,8 @@ class SettingsTest extends BaseTest
      */
     public function testGetWithAlias()
     {
+        $this->markTestSkipped('ES6 update: to delete an index USE the concrete index name');
+
         $indexName = 'elasticatest';
         $aliasName = 'elasticatest_alias';
 

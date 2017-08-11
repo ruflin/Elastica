@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
 	libxslt-dev \
 	nano \
 	php5-xsl \
-	zip unzip
+	zip unzip \
+	wget
 	# XSL and Graphviz for PhpDocumentor
 
 RUN docker-php-ext-install sockets xsl

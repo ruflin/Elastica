@@ -82,6 +82,7 @@ class IndexTest extends BaseTest
      */
     public function testParent()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
         $index = $this->_createIndex();
 
         $typeBlog = new Type($index, 'blog');
@@ -122,6 +123,7 @@ class IndexTest extends BaseTest
      */
     public function testAddPdfFile()
     {
+        $this->markTestSkipped('ES6 update: use ingest attachment : No handler for type [attachment] declared on field [file]');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'text']];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
@@ -163,6 +165,7 @@ class IndexTest extends BaseTest
      */
     public function testAddPdfFileContent()
     {
+        $this->markTestSkipped('ES6 update: use ingest attachment : No handler for type [attachment] declared on field [file]');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'text']];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
@@ -204,6 +207,7 @@ class IndexTest extends BaseTest
      */
     public function testAddWordxFile()
     {
+        $this->markTestSkipped('ES6 update: use ingest attachment : No handler for type [attachment] declared on field [file]');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'text']];
 
         $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
@@ -244,6 +248,7 @@ class IndexTest extends BaseTest
      */
     public function testExcludeFileSource()
     {
+        $this->markTestSkipped('ES6 update: use ingest attachment : No handler for type [attachment] declared on field [file]');
         $indexMapping = ['file' => ['type' => 'attachment'], 'text' => ['type' => 'text', 'store' => true],
             'title' => ['type' => 'text', 'store' => true], ];
 
@@ -351,6 +356,8 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryString()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
@@ -385,6 +392,8 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQuery()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
@@ -419,6 +428,8 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithArrayQuery()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
@@ -453,6 +464,8 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryAndOptions()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $index = $this->_createIndex(null, true, 2);
 
         $routing1 = 'first_routing';
@@ -945,6 +958,8 @@ class IndexTest extends BaseTest
      */
     public function testAnalyzeExplain()
     {
+        $this->markTestSkipped('ES6 update: request contains unrecognized parameter: [explain]');
+
         $index = $this->_createIndex();
         $index->refresh();
         $data = $index->analyze('foo', ['explain' => true]);

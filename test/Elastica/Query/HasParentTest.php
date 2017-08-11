@@ -62,6 +62,8 @@ class HasParentTest extends BaseTest
      */
     public function testHasParent()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $index = $this->_createIndex();
 
         $shopType = $index->getType('shop');

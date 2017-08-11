@@ -72,6 +72,7 @@ class ChildrenTest extends BaseAggregationTest
      */
     public function testChildrenAggregation()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
         $agg = new Children('children');
         $agg->setType('employee');
 

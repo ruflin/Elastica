@@ -332,6 +332,8 @@ class InnerHitsTest extends BaseTest
      */
     public function testInnerHitsParentChildren()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $queryString = new SimpleQueryString('linux cool');
         $innerHits = new InnerHits();
 
@@ -377,6 +379,8 @@ class InnerHitsTest extends BaseTest
      */
     public function testInnerHitsWithOffset()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $queryString = new SimpleQueryString('linux cool');
         $innerHits = new InnerHits();
         $innerHits->setFrom(2);
@@ -397,6 +401,8 @@ class InnerHitsTest extends BaseTest
      */
     public function testInnerHitsWithSort()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $queryString = new SimpleQueryString('linux cool');
         $innerHits = new InnerHits();
         $innerHits->setSort(['answer' => 'asc']);

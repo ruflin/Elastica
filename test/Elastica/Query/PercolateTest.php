@@ -21,6 +21,8 @@ class PercolateTest extends BaseTest
      */
     public function testPercolateQueryOnNewDocument()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $this->_prepareIndexForPercolate();
         //Register a query in the percolator:
         $queryDoc = new Document(1, ['query' => ['match' => ['message' => 'bonsai tree']]]);
@@ -61,6 +63,8 @@ class PercolateTest extends BaseTest
      */
     public function testPercolateQueryOnExistingDocument()
     {
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+
         $this->_prepareIndexForPercolate();
         //Register a query in the percolator:
         $queryDoc = new Document(1, ['query' => ['match' => ['message' => 'bonsai tree']]]);

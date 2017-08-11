@@ -10,16 +10,17 @@ services:
     networks:
       - esnet
 
-  elasticsearch1:
+  #SETUP ELASTICSEARCH 6.0-beta1
+  elasticsearch6_1:
     build: ./env/elasticsearch/
     container_name: elasticsearch
     privileged: true
     environment:
       - bootstrap.memory_lock=true
-      - network.host=172.18.0.4
+      - network.host=172.18.0.15
       - xpack.security.enabled=false
       - xpack.monitoring.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
     ulimits:
       memlock:
         soft: -1
@@ -34,19 +35,19 @@ services:
     volumes:
       - esdata1:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
+      - 19200:19200
     networks:
       esnet:
-        ipv4_address: 172.18.0.4
-  elasticsearch2:
+        ipv4_address: 172.18.0.15
+  elasticsearch6_2:
     build: ./env/elasticsearch/
     privileged: true
     environment:
       - bootstrap.memory_lock=true
-      - network.host=172.18.0.3
+      - network.host=172.18.0.16
       - xpack.security.enabled=false
       - xpack.monitoring.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
     ulimits:
       memlock:
         soft: -1
@@ -62,7 +63,7 @@ services:
       - esdata1:/usr/share/elasticsearch/data
     networks:
       esnet:
-        ipv4_address: 172.18.0.3
+        ipv4_address: 172.18.0.16
 
   nginx:
     build: ./env/nginx/
@@ -73,6 +74,8 @@ services:
 
 volumes:
   esdata1:
+    driver: local
+  esdata6_1:
     driver: local
 
 networks:

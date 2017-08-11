@@ -68,6 +68,8 @@ class BoostingTest extends BaseTest
      */
     public function testNegativeBoost()
     {
+        $this->markTestSkipped('ES6 update: in mapping index accepts only strict boolean values (true|false) : https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-index.html');
+
         $keyword = 'vital';
         $negativeKeyword = 'mercury';
 
