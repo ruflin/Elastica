@@ -35,7 +35,7 @@ services:
     volumes:
       - esdata1:/usr/share/elasticsearch/data
     ports:
-      - 19200:19200
+      - 9200:9200
     networks:
       esnet:
         ipv4_address: 172.18.0.15
