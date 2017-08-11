@@ -3,6 +3,7 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\DateRange;
 use Elastica\Document;
+use Elastica\Exception\ResponseException;
 use Elastica\Query;
 use Elastica\Type\Mapping;
 
@@ -14,7 +15,7 @@ class DateRangeTest extends BaseAggregationTest
         $type = $index->getType('test');
 
         $type->setMapping(new Mapping(null, [
-            'created' => ['type' => 'date'],
+            'created' => ['type' => 'date', "format" => "epoch_millis"],
         ]));
 
         $type->addDocuments([
@@ -55,15 +56,40 @@ class DateRangeTest extends BaseAggregationTest
      */
     public function testDateRangeSetFormat()
     {
-        $this->markTestSkipped('ES6 update: numeric to and from parameters in date_range aggregation are interpreted according to format');        $agg = new DateRange('date');
+        $agg = new DateRange('date');
         $agg->setField('created');
         $agg->addRange(1390958535000)->addRange(null, 1390958535000);
-        $agg->setFormat('m-y-d');
+        $agg->setFormat('epoch_millis');
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('date');
+
+        $this->assertEquals('1390958535000', $results['buckets'][0]['to_as_string']);
+    }
+
+    /**
+     * @group functional
+     *
+     */
+    public function testDateRangeSetFormatAccordingToFormatTargetField()
+    {
+        $agg = new DateRange('date');
+        $agg->setField('created');
+        $agg->addRange(1390958535000)->addRange(null, 1390958535000);
+        $agg->setFormat('m-d-y');
 
         $query = new Query();
         $query->addAggregation($agg);
 
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('date');
-        $this->assertEquals('22-2014-29', $results['buckets'][0]['to_as_string']);
+        try {
+            $results = $this->_getIndexForTest()->search($query)->getAggregation('date');
+            $this->fail('Should throw exception to and from parameters in date_range aggregation are interpreted according of the target field');
+        } catch (ResponseException $e) {
+            $error = $e->getResponse()->getFullError();
+
+            $this->assertContains('search_phase_execution_exception', $error['type']);
+            $this->assertContains('failed to parse date field', $error['root_cause'][0]['reason']);
+        }
     }
 }

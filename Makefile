@@ -60,8 +60,7 @@ tests:
 	make elastica-image
 	make start
 	mkdir -p build
-	#docker run --name=nginx -e "ES_HOST=elasticsearch" --network=elastica_esnet elastica_nginx nginx
-	#Elasticsearch 6.0.0-beta1
+
 	docker run -e "ES_HOST=elasticsearch" --network=elastica_esnet elastica_elastica  make phpunit
 	docker cp elastica:/elastica/build/coverage/ $(shell pwd)/build/coverage
 

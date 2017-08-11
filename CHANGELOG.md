@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.0...master)
 
 ### Backward Compatibility Breaks
- 
+- Numeric to and from parameters in [date_range aggregation](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_aggregations_changes.html#_numeric_literal_to_literal_and_literal_from_literal_parameters_in_literal_date_range_literal_aggregation_are_interpreted_according_to_literal_format_literal_now) are interpreted according to format of the target field 
 ### Bugfixes
 
 ### Added
