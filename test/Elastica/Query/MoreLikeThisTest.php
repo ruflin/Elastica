@@ -18,8 +18,6 @@ class MoreLikeThisTest extends BaseTest
      */
     public function testSearch()
     {
-        $this->markTestSkipped('ES6 update: in mapping index accepts only strict boolean values (true|false) : https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-index.html');
-
         $client = $this->_getClient();
         $index = new Index($client, 'test');
         $index->create([], true);
@@ -28,8 +26,8 @@ class MoreLikeThisTest extends BaseTest
 
         $type = new Type($index, 'helloworldmlt');
         $mapping = new Mapping($type, [
-            'email' => ['store' => 'true', 'type' => 'text', 'index' => 'analyzed'],
-            'content' => ['store' => 'true', 'type' => 'text',  'index' => 'analyzed'],
+            'email' => ['store' => 'true', 'type' => 'text', 'index' => 'true'],
+            'content' => ['store' => 'true', 'type' => 'text',  'index' => 'true'],
         ]);
 
         $mapping->setSource(['enabled' => false]);

@@ -16,7 +16,7 @@ class BoostingTest extends BaseTest
         ['name' => 'Vital Match', 'price' => 2.1],
         ['name' => 'Mercury Vital', 'price' => 7.5],
         ['name' => 'Fist Mercury', 'price' => 3.8],
-        ['name' => 'Lama Vital 2nd', 'price' => 3.2],
+        ['name' => 'Lama Vital 2nd', 'price' => 1.2],
     ];
 
     protected function _getTestIndex()
@@ -24,7 +24,7 @@ class BoostingTest extends BaseTest
         $index = $this->_createIndex();
         $type = $index->getType('test');
         $type->setMapping([
-            'name' => ['type' => 'text', 'index' => 'analyzed'],
+            'name' => ['type' => 'text', 'index' => 'true'],
             'price' => ['type' => 'float'],
         ]);
         $docs = [];
@@ -68,7 +68,7 @@ class BoostingTest extends BaseTest
      */
     public function testNegativeBoost()
     {
-        $this->markTestSkipped('ES6 update: in mapping index accepts only strict boolean values (true|false) : https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-index.html');
+        $this->markTestSkipped('ES6 update: it looks like that boosting changes in ES6.0. did not find at the moment some docs on it. Results in 5.0 and 6.0 are differents.');
 
         $keyword = 'vital';
         $negativeKeyword = 'mercury';
