@@ -2,9 +2,14 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.0...master)
-
+ 
 ### Backward Compatibility Breaks
-- Numeric to and from parameters in [date_range aggregation](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_aggregations_changes.html#_numeric_literal_to_literal_and_literal_from_literal_parameters_in_literal_date_range_literal_aggregation_are_interpreted_according_to_literal_format_literal_now) are interpreted according to format of the target field 
+
+- Numeric to and from parameters in [date_range aggregation](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_aggregations_changes.html#_numeric_literal_to_literal_and_literal_from_literal_parameters_in_literal_date_range_literal_aggregation_are_interpreted_according_to_literal_format_literal_now) are interpreted according to format of the target field
+- In ES6 only [strict type boolean](https://github.com/elastic/elasticsearch/pull/22200) are accepted. [On ES6 docs](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/boolean.html)
+- removed analyzed/not_analyzed on [indices mapping](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-index.html)
+- [store](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-store.html) field only accepts boolean
+ 
 ### Bugfixes
 
 ### Added

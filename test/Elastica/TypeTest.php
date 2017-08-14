@@ -146,13 +146,11 @@ class TypeTest extends BaseTest
      */
     public function testNoSource()
     {
-        $this->markTestSkipped('ES6 update: in mapping store accepts only strict boolean values (true|false) : https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-store.html');
-
         $index = $this->_createIndex();
 
         $type = new Type($index, 'user');
         $mapping = new Mapping($type, [
-            'id' => ['type' => 'integer', 'store' => 'yes'],
+            'id' => ['type' => 'integer', 'store' => 'true'],
             'username' => ['type' => 'text'],
         ]);
         $mapping->setSource(['enabled' => false]);
