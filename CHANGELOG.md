@@ -9,7 +9,8 @@ All notable changes to this project will be documented in this file based on the
 - In ES6 only [strict type boolean](https://github.com/elastic/elasticsearch/pull/22200) are accepted. [On ES6 docs](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/boolean.html)
 - removed analyzed/not_analyzed on [indices mapping](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-index.html)
 - [store](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-store.html) field only accepts boolean
- 
+- Replace IndexAlreadyExistsException with [ResourceAlreadyExistsException](https://github.com/elastic/elasticsearch/pull/21494) [#1350](https://github.com/ruflin/Elastica/pull/1350)
+   
 ### Bugfixes
 
 ### Added
