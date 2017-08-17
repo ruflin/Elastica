@@ -2,6 +2,7 @@
 namespace Elastica\Test;
 
 use Elastica\Client;
+use Elastica\Exception\ResponseException;
 use Elastica\IndexTemplate;
 use Elastica\Request;
 use Elastica\Response;
@@ -106,5 +107,30 @@ class IndexTemplateTest extends BaseTest
         $this->assertTrue($indexTemplate->exists());
         $indexTemplate->delete();
         $this->assertFalse($indexTemplate->exists());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testCreateAlreadyExistsTemplateException()
+    {
+        $template = [
+            'template' => 'te*',
+            'settings' => [
+                'number_of_shards' => 1,
+            ],
+        ];
+        $name = 'index_template1';
+        $indexTemplate = new IndexTemplate($this->_getClient(), $name);
+        $indexTemplate->create($template);
+        try {
+            $indexTemplate->create($template);
+        } catch (ResponseException $ex) {
+            $error = $ex->getResponse()->getFullError();
+
+            $this->assertNotEquals('index_template_already_exists_exception', $error['type']);
+            $this->assertEquals('resource_already_exists_exception', $error['type']);
+            $this->assertEquals(400, $ex->getResponse()->getStatus());
+        }
     }
 }

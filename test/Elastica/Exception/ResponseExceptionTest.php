@@ -11,8 +11,6 @@ class ResponseExceptionTest extends AbstractExceptionTest
      */
     public function testCreateExistingIndex()
     {
-        $this->markTestSkipped('ES6 update: looks like now ES6 returns a different exception --> resource_already_exists_exception ');
-
         $this->_createIndex('woo', true);
 
         try {
@@ -20,7 +18,9 @@ class ResponseExceptionTest extends AbstractExceptionTest
             $this->fail('Index created when it should fail');
         } catch (ResponseException $ex) {
             $error = $ex->getResponse()->getFullError();
-            $this->assertEquals('index_already_exists_exception', $error['type']);
+
+            $this->assertNotEquals('index_already_exists_exception', $error['type']);
+            $this->assertEquals('resource_already_exists_exception', $error['type']);
             $this->assertEquals(400, $ex->getResponse()->getStatus());
         }
     }
