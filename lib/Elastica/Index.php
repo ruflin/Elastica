@@ -201,25 +201,6 @@ class Index implements SearchableInterface
     }
 
     /**
-     * Optimizes search index.
-     *
-     * Detailed arguments can be found here in the link
-     *
-     * @param array $args OPTIONAL Additional arguments
-     *
-     * @return array Server response
-     *
-     * @deprecated Replaced by forcemerge
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
-     */
-    public function optimize($args = [])
-    {
-        trigger_error('Deprecated: Elastica\Index::optimize() is deprecated and will be removed in further Elastica releases. Use Elastica\Index::forcemerge() instead.', E_USER_DEPRECATED);
-
-        return $this->forcemerge($args);
-    }
-
-    /**
      * Force merges index.
      *
      * Detailed arguments can be found here in the link
