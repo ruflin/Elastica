@@ -12,7 +12,8 @@ All notable changes to this project will be documented in this file based on the
 - Replace IndexAlreadyExistsException with [ResourceAlreadyExistsException](https://github.com/elastic/elasticsearch/pull/21494) [#1350](https://github.com/ruflin/Elastica/pull/1350)
    
 ### Bugfixes
-
+- Enforce [Content-Type requirement on the layer Rest](https://github.com/elastic/elasticsearch/pull/23146), a [PR on Elastica #1301](https://github.com/ruflin/Elastica/issues/1301) solved it (it has been implemented only in the HTTP Transport), but it was not implemented in the Guzzle Transport. [#1349](https://github.com/ruflin/Elastica/pull/1349)
+  
 ### Added
 
 - Added `Query\SpanContaining`, `Query\SpanWithin` and `Query\SpanNot` [#1319](https://github.com/ruflin/Elastica/pull/1319)
