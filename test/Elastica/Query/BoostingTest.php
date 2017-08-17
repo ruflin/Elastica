@@ -16,7 +16,7 @@ class BoostingTest extends BaseTest
         ['name' => 'Vital Match', 'price' => 2.1],
         ['name' => 'Mercury Vital', 'price' => 7.5],
         ['name' => 'Fist Mercury', 'price' => 3.8],
-        ['name' => 'Lama Vital 2nd', 'price' => 1.2],
+        ['name' => 'Lama Vital 2nd', 'price' => 3.2],
     ];
 
     protected function _getTestIndex()
