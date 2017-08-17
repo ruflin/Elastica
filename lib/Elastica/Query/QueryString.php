@@ -49,6 +49,7 @@ class QueryString extends AbstractQuery
 
     /**
      * Sets the default field.
+     * You cannot set fields and default_field
      *
      * If no field is set, _all is chosen
      *
@@ -202,6 +203,7 @@ class QueryString extends AbstractQuery
 
     /**
      * Sets the fields. If no fields are set, _all is chosen.
+     * You cannot set fields and default_field
      *
      * @param array $fields Fields
      *
