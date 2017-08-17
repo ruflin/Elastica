@@ -36,8 +36,6 @@ class SettingsTest extends BaseTest
      */
     public function testGetWithAlias()
     {
-        $this->markTestSkipped('ES6 update: to delete an index USE the concrete index name');
-
         $indexName = 'elasticatest';
         $aliasName = 'elasticatest_alias';
 
@@ -55,7 +53,37 @@ class SettingsTest extends BaseTest
         $this->assertNotNull($settings->get('number_of_shards'));
         $this->assertNull($settings->get('kjqwerjlqwer'));
 
+        $index = $client->getIndex($indexName);
         $index->delete();
+    }
+
+
+    /**
+     * @group functional
+     *
+     */
+    public function testDeleteAliasWithException()
+    {
+        $indexName = 'deletetestaliasexception';
+        $aliasName = 'deletetestaliasexception_alias';
+        $client = $this->_getClient();
+        $index = $client->getIndex($indexName);
+        $index->create([], true);
+        $index->refresh();
+
+        $index->addAlias($aliasName);
+
+        $indexAlias = $client->getIndex($aliasName);
+
+        try {
+            $indexAlias->delete();
+            $this->fail('Should throw exception because you should delete the concrete index and not the alias');
+        } catch (ResponseException $e) {
+            $error = $e->getResponse()->getFullError();
+
+            $this->assertContains('illegal_argument_exception', $error['type']);
+            $this->assertContains('specify the corresponding concrete indices instead.', $error['reason']);
+        }
     }
 
     /**

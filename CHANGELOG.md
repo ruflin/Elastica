@@ -10,7 +10,8 @@ All notable changes to this project will be documented in this file based on the
 - removed analyzed/not_analyzed on [indices mapping](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-index.html)
 - [store](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-store.html) field only accepts boolean
 - Replace IndexAlreadyExistsException with [ResourceAlreadyExistsException](https://github.com/elastic/elasticsearch/pull/21494) [#1350](https://github.com/ruflin/Elastica/pull/1350)
-   
+- in order to delete an index you should not delete by its alias now you should delete using the [concrete index name](https://github.com/elastic/elasticsearch/blob/6.0/core/src/test/java/org/elasticsearch/aliases/IndexAliasesIT.java#L445) [#1348](https://github.com/ruflin/Elastica/pull/1348)
+ 
 ### Bugfixes
 - Enforce [Content-Type requirement on the layer Rest](https://github.com/elastic/elasticsearch/pull/23146), a [PR on Elastica #1301](https://github.com/ruflin/Elastica/issues/1301) solved it (it has been implemented only in the HTTP Transport), but it was not implemented in the Guzzle Transport. [#1349](https://github.com/ruflin/Elastica/pull/1349)
   
