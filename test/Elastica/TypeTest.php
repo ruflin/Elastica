@@ -509,21 +509,19 @@ class TypeTest extends BaseTest
      */
     public function testGetDocumentWithFieldsSelection()
     {
-        $this->markTestSkipped('ES6 update: No handler for type [string] declared on field [name]');
-
         $index = $this->_createIndex();
 
         $type = new Type($index, 'test');
         $mapping = new Mapping();
         $mapping->setProperties([
             'name' => [
-                'type' => 'string',
-                'store' => 'yes', ],
+                'type' => 'text',
+                'store' => true, ],
             'email' => [
-                'type' => 'string',
-                'store' => 'yes', ],
+                'type' => 'text',
+                'store' => true, ],
             'country' => [
-                'type' => 'string',
+                'type' => 'text',
             ],
         ]);
 
