@@ -450,7 +450,7 @@ class Type implements SearchableInterface
 
         $responseData = $response->getData();
 
-        if (isset($responseData['found']) && false == $responseData['found']) {
+        if (isset($responseData['result']) && 'not_found' == $responseData['result']) {
             throw new NotFoundException('Doc id '.$id.' not found and can not be deleted');
         }
 

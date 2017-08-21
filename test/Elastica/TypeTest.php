@@ -266,7 +266,6 @@ class TypeTest extends BaseTest
             $this->assertTrue(true);
         }
 
-        $this->markTestSkipped('ES6 update: Removed deprecated created and found from index, delete and bulk');
         try {
             $type->deleteById('*');
             $this->fail('Delete request should fail because of invalid id: *');
