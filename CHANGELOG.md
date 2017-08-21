@@ -14,7 +14,8 @@ All notable changes to this project will be documented in this file based on the
 - Removed ```optimize``` from Index class as it has been deprecated in ES 2.1 and removed in [ES 5.x+](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/indices-optimize.html) use forcemerge [#1351](https://github.com/ruflin/Elastica/pull/1350)
 - In QueryString is not allowed to use fields parameters in conjunction with default_field parameter. This is not well documented, it's possibile to understand from [Elasticsearch tests :  QueryStringQueryBuilderTests.java](https://github.com/elastic/elasticsearch/blob/6.0/core/src/test/java/org/elasticsearch/index/query/QueryStringQueryBuilderTests.java#L917) [#1352](https://github.com/ruflin/Elastica/pull/1352)   
 - Index mapping field of type [*'string'*](https://www.elastic.co/guide/en/elasticsearch/reference/5.5/string.html) has been removed from Elasticsearch 6.0 codebase [#1353](https://github.com/ruflin/Elastica/pull/1353)
-
+- The [created and found](https://github.com/elastic/elasticsearch/pull/25516) fields in index and delete responses became obsolete after the introduction of the result field in index, update and delete responses [#1354](https://github.com/ruflin/Elastica/pull/1354) 
+ 
 ### Bugfixes
 - Enforce [Content-Type requirement on the layer Rest](https://github.com/elastic/elasticsearch/pull/23146), a [PR on Elastica #1301](https://github.com/ruflin/Elastica/issues/1301) solved it (it has been implemented only in the HTTP Transport), but it was not implemented in the Guzzle Transport. [#1349](https://github.com/ruflin/Elastica/pull/1349)
   
