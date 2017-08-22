@@ -24,11 +24,9 @@ class RoundRobinTest extends Base
      */
     public function testConnection()
     {
-        $this->markTestSkipped('ES6 update: Incorrect HTTP method for uri [//_aliases] and method [GET], allowed: [PUT]');
-
         $config = ['connectionStrategy' => 'RoundRobin'];
         $client = $this->_getClient($config);
-        $response = $client->request('/_aliases');
+        $response = $client->request('_aliases');
         /* @var $response Response */
 
         $this->_checkResponse($response);
@@ -58,7 +56,7 @@ class RoundRobinTest extends Base
 
         $this->_checkStrategy($client);
 
-        $client->request('/_aliases');
+        $client->request('_aliases');
     }
 
     /**
@@ -66,8 +64,6 @@ class RoundRobinTest extends Base
      */
     public function testWithOneFailConnection()
     {
-        $this->markTestSkipped('ES6 update: Incorrect HTTP method for uri [//_aliases] and method [GET], allowed: [PUT]');
-
         $connections = [
             new Connection(['host' => '255.255.255.0', 'timeout' => $this->_timeout]),
             new Connection(['host' => $this->_getHost(), 'timeout' => $this->_timeout]),
@@ -81,7 +77,7 @@ class RoundRobinTest extends Base
         $client = $this->_getClient(['connectionStrategy' => 'RoundRobin'], $callback);
         $client->setConnections($connections);
 
-        $response = $client->request('/_aliases');
+        $response = $client->request('_aliases');
         /* @var $response Response */
 
         $this->_checkResponse($response);
@@ -110,7 +106,7 @@ class RoundRobinTest extends Base
         $client->setConnections($connections);
 
         try {
-            $client->request('/_aliases');
+            $client->request('_aliases');
             $this->fail('Should throw exception as no connection valid');
         } catch (ConnectionException $e) {
             $this->assertEquals(count($connections), $count);
