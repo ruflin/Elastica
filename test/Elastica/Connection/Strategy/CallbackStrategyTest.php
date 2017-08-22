@@ -75,8 +75,6 @@ class CallbackStrategyTest extends Base
      */
     public function testConnection()
     {
-        $this->markTestSkipped('ES6 update: Incorrect HTTP method for uri [//_aliases] and method [GET], allowed: [PUT]');
-
         $count = 0;
 
         $config = ['connectionStrategy' => function ($connections) use (&$count) {
@@ -86,7 +84,7 @@ class CallbackStrategyTest extends Base
        }];
 
         $client = $this->_getClient($config);
-        $response = $client->request('/_aliases');
+        $response = $client->request('_aliases');
 
         $this->assertEquals(1, $count);
 
