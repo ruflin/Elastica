@@ -661,14 +661,17 @@ class TypeTest extends BaseTest
         );
         $script->setUpsert($document);
 
-        $this->markTestSkipped('ES6 update: upsert request and version are no more allowed : https://github.com/elastic/elasticsearch/blob/6.0/core/src/test/java/org/elasticsearch/action/update/UpdateRequestTests.java#L501');
         try {
-            $type->updateDocument($script, ['version' => 999]); // Wrong version number to make the update fail
+            $type->updateDocument($script, ['version' => 999]);
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
-            $this->assertContains('version_conflict_engine_exception', $error['type']);
+
+            $this->assertContains('action_request_validation_exception', $error['type']);
+            $this->assertContains('can\'t provide version in upsert request', $error['reason']);
+            $this->assertContains('can\'t provide both upsert request and a version', $error['reason']);
         }
         $updatedDoc = $type->getDocument($id)->getData();
+        var_dump($updatedDoc);
         $this->assertNotEquals($newName, $updatedDoc['name'], 'Name was updated');
         $this->assertNotEquals(3, $updatedDoc['counter'], 'Counter was incremented');
     }
