@@ -64,8 +64,6 @@ class SnapshotTest extends Base
      */
     public function testSnapshotAndRestore()
     {
-        $this->markTestSkipped('ES6 update: Failed to parse value [1] as only [true] or [false] are allowed.');
-
         $repositoryName = 'testrepo';
         $location = $this->_snapshotPath.'backup2';
 

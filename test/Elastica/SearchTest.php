@@ -428,8 +428,6 @@ class SearchTest extends BaseTest
      */
     public function testSearchWithVersionOption()
     {
-        $this->markTestSkipped('ES6 update: Failed to parse value [1] as only [true] or [false] are allowed.');
-
         $index = $this->_createIndex();
         $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
         $index->getType('test')->addDocument($doc);

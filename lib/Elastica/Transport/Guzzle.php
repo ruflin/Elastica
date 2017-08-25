@@ -215,7 +215,9 @@ class Guzzle extends AbstractTransport
         $query = $request->getQuery();
 
         if (!empty($query)) {
-            $action .= '?'.http_build_query($query);
+            $action .= '?'.http_build_query(
+                $this->sanityzeQueryStringBool($query)
+                );
         }
 
         return $action;
