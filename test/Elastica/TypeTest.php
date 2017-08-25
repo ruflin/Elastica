@@ -671,7 +671,7 @@ class TypeTest extends BaseTest
             $this->assertContains('can\'t provide both upsert request and a version', $error['reason']);
         }
         $updatedDoc = $type->getDocument($id)->getData();
-        var_dump($updatedDoc);
+
         $this->assertNotEquals($newName, $updatedDoc['name'], 'Name was updated');
         $this->assertNotEquals(3, $updatedDoc['counter'], 'Counter was incremented');
     }

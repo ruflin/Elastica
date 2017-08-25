@@ -61,6 +61,23 @@ abstract class AbstractTransport extends Param
     abstract public function exec(Request $request, array $params);
 
     /**
+     * BOOL values true|false should be sanityzed and passed to Elasticsearch
+     * as string.
+     *
+     * @param string $query
+     * @return mixed
+     */
+    public function sanityzeQueryStringBool($query)
+    {
+        foreach ($query as $key => $value) {
+            if (is_bool($value)) {
+                $query[$key] = ($value) ? 'true' : 'false';
+            }
+        }
+        return $query;
+    }
+
+    /**
      * Create a transport.
      *
      * The $transport parameter can be one of the following values:
