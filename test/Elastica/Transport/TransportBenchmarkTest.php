@@ -137,18 +137,19 @@ class TransportBenchmarkTest extends BaseTest
         $mapping = new Mapping();
         $mapping->setParam('_boost', ['name' => '_boost', 'null_value' => 1.0]);
         $mapping->setProperties([
-            'id' => ['type' => 'integer', 'include_in_all' => false],
+            'id' => ['type' => 'integer'],
             'user' => [
                 'type' => 'object',
                 'properties' => [
-                    'name' => ['type' => 'text', 'include_in_all' => true],
-                    'fullName' => ['type' => 'text', 'include_in_all' => true],
+                    'name' => ['type' => 'text', 'copy_to' => 'allincluded'],
+                    'fullName' => ['type' => 'text', 'copy_to' => 'allincluded'],
                 ],
             ],
-            'msg' => ['type' => 'text', 'include_in_all' => true],
-            'tstamp' => ['type' => 'date', 'include_in_all' => false],
-            'location' => ['type' => 'geo_point', 'include_in_all' => false],
-            '_boost' => ['type' => 'float', 'include_in_all' => false],
+            'msg' => ['type' => 'text', 'copy_to' => 'allincluded'],
+            'tstamp' => ['type' => 'date'],
+            'location' => ['type' => 'geo_point'],
+            '_boost' => ['type' => 'float'],
+            'allincluded' => ['type' => 'text'],
         ]);
 
         $type->setMapping($mapping);

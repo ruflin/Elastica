@@ -138,7 +138,7 @@ class MappingTest extends BaseTest
      */
     public function testParentMapping()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type, TEST USING JOIN FIELDS');
 
         $index = $this->_createIndex();
 
@@ -170,8 +170,6 @@ class MappingTest extends BaseTest
      */
     public function testMappingExample()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $index = $this->_createIndex();
         $type = $index->getType('notes');
 
@@ -179,8 +177,9 @@ class MappingTest extends BaseTest
             [
                 'note' => [
                     'properties' => [
-                        'titulo' => ['type' => 'text', 'include_in_all' => true, 'boost' => 1.0],
-                        'contenido' => ['type' => 'text', 'include_in_all' => true, 'boost' => 1.0],
+                        'titulo' => ['type' => 'text', 'copy_to' => 'testall', 'boost' => 1.0],
+                        'contenido' => ['type' => 'text', 'copy_to' => 'testall', 'boost' => 1.0],
+                        'testall' => ['type' => 'text',  'boost' => 1.0],
                     ],
                 ],
             ]

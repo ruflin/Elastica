@@ -22,11 +22,11 @@ class BulkTest extends BaseTest
      */
     public function testSend()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
         $index = $this->_createIndex();
+        $index2 = $this->_createIndex();
         $indexName = $index->getName();
         $type = $index->getType('bulk_test');
-        $type2 = $index->getType('bulk_test2');
+        $type2 = $index2->getType('bulk_test2');
         $client = $index->getClient();
 
         $newDocument1 = $type->createDocument(1, ['name' => 'Mister Fantastic']);
@@ -125,6 +125,7 @@ class BulkTest extends BaseTest
         $bulk->send();
 
         $type->getIndex()->refresh();
+        $type2->getIndex()->refresh();
 
         $this->assertEquals(2, $type->count());
 
@@ -142,8 +143,9 @@ class BulkTest extends BaseTest
     public function testUnicodeBulkSend()
     {
         $index = $this->_createIndex();
+        $index2 = $this->_createIndex();
         $type = $index->getType('bulk_test');
-        $type2 = $index->getType('bulk_test2');
+        $type2 = $index2->getType('bulk_test2');
         $client = $index->getClient();
 
         $newDocument1 = $type->createDocument(1, ['name' => 'Сегодня, я вижу, особенно грустен твой взгляд,']);

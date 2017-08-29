@@ -356,22 +356,17 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryString()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
         $type1->addDocument(new Document(2, ['name' => 'ruflin']));
-        $type2 = new Type($index, 'test2');
-        $type2->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
-        $type2->addDocument(new Document(2, ['name' => 'ruflin']));
         $index->refresh();
 
         $response = $index->search('ruflin*');
-        $this->assertEquals(4, $response->count());
+        $this->assertEquals(2, $response->count());
 
         $response = $index->search('nicolas');
-        $this->assertEquals(2, $response->count());
+        $this->assertEquals(1, $response->count());
 
         // Delete first document
         $response = $index->deleteByQuery('nicolas');
@@ -381,7 +376,7 @@ class IndexTest extends BaseTest
 
         // Makes sure, document is deleted
         $response = $index->search('ruflin*');
-        $this->assertEquals(2, $response->count());
+        $this->assertEquals(1, $response->count());
 
         $response = $index->search('nicolas');
         $this->assertEquals(0, $response->count());
@@ -392,22 +387,17 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQuery()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
         $type1->addDocument(new Document(2, ['name' => 'ruflin']));
-        $type2 = new Type($index, 'test2');
-        $type2->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
-        $type2->addDocument(new Document(2, ['name' => 'ruflin']));
         $index->refresh();
 
         $response = $index->search('ruflin*');
-        $this->assertEquals(4, $response->count());
+        $this->assertEquals(2, $response->count());
 
         $response = $index->search('nicolas');
-        $this->assertEquals(2, $response->count());
+        $this->assertEquals(1, $response->count());
 
         // Delete first document
         $response = $index->deleteByQuery(new SimpleQueryString('nicolas'));
@@ -417,7 +407,7 @@ class IndexTest extends BaseTest
 
         // Makes sure, document is deleted
         $response = $index->search('ruflin*');
-        $this->assertEquals(2, $response->count());
+        $this->assertEquals(1, $response->count());
 
         $response = $index->search('nicolas');
         $this->assertEquals(0, $response->count());
@@ -428,22 +418,17 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithArrayQuery()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test1');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
         $type1->addDocument(new Document(2, ['name' => 'ruflin']));
-        $type2 = new Type($index, 'test2');
-        $type2->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
-        $type2->addDocument(new Document(2, ['name' => 'ruflin']));
         $index->refresh();
 
         $response = $index->search('ruflin*');
-        $this->assertEquals(4, $response->count());
+        $this->assertEquals(2, $response->count());
 
         $response = $index->search('nicolas');
-        $this->assertEquals(2, $response->count());
+        $this->assertEquals(1, $response->count());
 
         // Delete first document
         $response = $index->deleteByQuery(['query' => ['query_string' => ['query' => 'nicolas']]]);
@@ -453,7 +438,7 @@ class IndexTest extends BaseTest
 
         // Makes sure, document is deleted
         $response = $index->search('ruflin*');
-        $this->assertEquals(2, $response->count());
+        $this->assertEquals(1, $response->count());
 
         $response = $index->search('nicolas');
         $this->assertEquals(0, $response->count());
@@ -464,58 +449,88 @@ class IndexTest extends BaseTest
      */
     public function testDeleteByQueryWithQueryAndOptions()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $index = $this->_createIndex(null, true, 2);
+        $index2 = $this->_createIndex(null, true, 2);
 
         $routing1 = 'first_routing';
         $routing2 = 'second_routing';
 
-        for ($i = 1; $i <= 2; ++$i) {
-            $type = new Type($index, 'test'.$i);
-            $doc = new Document(1, ['name' => 'ruflin nicolas']);
-            $doc->setRouting($routing1);
-            $type->addDocument($doc);
 
-            $doc = new Document(2, ['name' => 'ruflin']);
-            $doc->setRouting($routing1);
-            $type->addDocument($doc);
-        }
+        $type = new Type($index, 'test');
+        $doc = new Document(1, ['name' => 'ruflin nicolas']);
+        $doc->setRouting($routing1);
+        $type->addDocument($doc);
+
+        $doc = new Document(2, ['name' => 'ruflin']);
+        $doc->setRouting($routing1);
+        $type->addDocument($doc);
+
+        $type = new Type($index2, 'test');
+        $doc = new Document(1, ['name' => 'ruflin nicolas']);
+        $doc->setRouting($routing1);
+        $type->addDocument($doc);
+
+        $doc = new Document(2, ['name' => 'ruflin']);
+        $doc->setRouting($routing1);
+        $type->addDocument($doc);
 
         $index->refresh();
+        $index2->refresh();
 
         $response = $index->search('ruflin*');
-        $this->assertEquals(4, $response->count());
+        $this->assertEquals(2, $response->count());
+        $response = $index2->search('ruflin*');
+        $this->assertEquals(2, $response->count());
 
         $response = $index->search('ruflin*', ['routing' => $routing2]);
         $this->assertEquals(0, $response->count());
+        $response = $index2->search('ruflin*', ['routing' => $routing2]);
+        $this->assertEquals(0, $response->count());
 
         $response = $index->search('nicolas');
-        $this->assertEquals(2, $response->count());
+        $this->assertEquals(1, $response->count());
+        $response = $index2->search('nicolas');
+        $this->assertEquals(1, $response->count());
 
         // Route to the wrong document id; should not delete
         $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing2]);
         $this->assertTrue($response->isOk());
 
+        // Route to the wrong document id; should not delete
+        $response = $index2->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing2]);
+        $this->assertTrue($response->isOk());
+
         $index->refresh();
+        $index2->refresh();
 
         $response = $index->search('ruflin*');
-        $this->assertEquals(4, $response->count());
+        $this->assertEquals(2, $response->count());
+        $response = $index2->search('ruflin*');
+        $this->assertEquals(2, $response->count());
 
         $response = $index->search('nicolas');
-        $this->assertEquals(2, $response->count());
+        $this->assertEquals(1, $response->count());
+        $response = $index2->search('nicolas');
+        $this->assertEquals(1, $response->count());
 
         // Delete first document
         $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing1]);
         $this->assertTrue($response->isOk());
+        $response = $index2->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing1]);
+        $this->assertTrue($response->isOk());
 
         $index->refresh();
+        $index2->refresh();
 
         // Makes sure, document is deleted
         $response = $index->search('ruflin*');
-        $this->assertEquals(2, $response->count());
+        $this->assertEquals(1, $response->count());
+        $response = $index2->search('ruflin*');
+        $this->assertEquals(1, $response->count());
 
         $response = $index->search('nicolas');
+        $this->assertEquals(0, $response->count());
+        $response = $index2->search('nicolas');
         $this->assertEquals(0, $response->count());
     }
 

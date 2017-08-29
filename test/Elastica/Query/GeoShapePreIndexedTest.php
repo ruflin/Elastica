@@ -15,12 +15,12 @@ class GeoShapePreIndexedTest extends BaseTest
      */
     public function testSearch()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $index = $this->_createIndex();
+        $index2 = $this->_createIndex();
         $indexName = $index->getName();
+        $indexName2 = $index2->getName();
         $type = $index->getType('type');
-        $otherType = $index->getType('other_type');
+        $otherType = $index2->getType('other_type');
 
         // create mapping
         $mapping = new Mapping($type, [
@@ -31,7 +31,7 @@ class GeoShapePreIndexedTest extends BaseTest
         $type->setMapping($mapping);
 
         // create other type mapping
-        $otherMapping = new Mapping($type, [
+        $otherMapping = new Mapping($otherType, [
             'location' => [
                 'type' => 'geo_shape',
             ],
@@ -61,19 +61,21 @@ class GeoShapePreIndexedTest extends BaseTest
         ]));
 
         $index->forcemerge();
+        $index2->forcemerge();
         $index->refresh();
+        $index2->refresh();
 
         $gsp = new GeoShapePreIndexed(
-            'location', '2', 'other_type', $indexName, 'location'
+            'location', '2', 'other_type', $indexName2, 'location'
         );
 
         $query = new BoolQuery();
         $query->addFilter($gsp);
 
-        $this->assertEquals(1, $type->count($query));
+        $this->assertEquals(1, $otherType->count($query));
 
         $gsp->setRelation(AbstractGeoShape::RELATION_DISJOINT);
-        $this->assertEquals(0, $type->count($query), 'Changing the relation should take effect');
+        $this->assertEquals(0, $otherType->count($query), 'Changing the relation should take effect');
 
         $index->delete();
     }

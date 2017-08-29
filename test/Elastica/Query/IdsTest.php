@@ -13,13 +13,11 @@ class IdsTest extends BaseTest
 
     protected function setUp()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
         parent::setUp();
 
         $index = $this->_createIndex();
 
         $type1 = $index->getType('helloworld1');
-        $type2 = $index->getType('helloworld2');
 
         $doc = new Document(1, ['name' => 'hello world']);
         $type1->addDocument($doc);
@@ -30,8 +28,6 @@ class IdsTest extends BaseTest
         $doc = new Document(3, ['name' => 'ruflin']);
         $type1->addDocument($doc);
 
-        $doc = new Document(4, ['name' => 'hello world again']);
-        $type2->addDocument($doc);
 
         $index->refresh();
 
@@ -44,8 +40,6 @@ class IdsTest extends BaseTest
      */
     public function testSetIdsSearchSingle()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $query = new Ids();
         $query->setIds('1');
 
@@ -59,8 +53,6 @@ class IdsTest extends BaseTest
      */
     public function testSetIdsSearchArray()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $query = new Ids();
         $query->setIds(['1', '2']);
 
@@ -74,8 +66,6 @@ class IdsTest extends BaseTest
      */
     public function testAddIdsSearchSingle()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $query = new Ids();
         $query->addId('3');
 
@@ -89,8 +79,6 @@ class IdsTest extends BaseTest
      */
     public function testComboIdsSearchArray()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $query = new Ids();
 
         $query->setIds(['1', '2']);
@@ -106,8 +94,6 @@ class IdsTest extends BaseTest
      */
     public function testSetTypeSingleSearchSingle()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $query = new Ids();
 
         $query->setIds('1');
@@ -123,8 +109,6 @@ class IdsTest extends BaseTest
      */
     public function testSetTypeSingleSearchArray()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $query = new Ids();
 
         $query->setIds(['1', '2']);
@@ -140,8 +124,6 @@ class IdsTest extends BaseTest
      */
     public function testSetTypeSingleSearchSingleDocInOtherType()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $query = new Ids();
 
         // Doc 4 is in the second type...
@@ -159,8 +141,6 @@ class IdsTest extends BaseTest
      */
     public function testSetTypeSingleSearchArrayDocInOtherType()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $query = new Ids();
 
         // Doc 4 is in the second type...
@@ -174,63 +154,10 @@ class IdsTest extends BaseTest
     }
 
     /**
-     * @group functional
-     */
-    public function testSetTypeAndAddType()
-    {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
-        $query = new Ids();
-
-        $query->setIds(['1', '4']);
-        $query->setType('helloworld1');
-        $query->addType('helloworld2');
-
-        $resultSet = $this->_index->search($query);
-
-        $this->assertEquals(2, $resultSet->count());
-    }
-
-    /**
-     * @group functional
-     */
-    public function testSetTypeArraySearchArray()
-    {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
-        $query = new Ids();
-
-        $query->setIds(['1', '4']);
-        $query->setType(['helloworld1', 'helloworld2']);
-
-        $resultSet = $this->_index->search($query);
-
-        $this->assertEquals(2, $resultSet->count());
-    }
-
-    /**
-     * @group functional
-     */
-    public function testSetTypeArraySearchSingle()
-    {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
-        $query = new Ids();
-
-        $query->setIds('4');
-        $query->setType(['helloworld1', 'helloworld2']);
-
-        $resultSet = $this->_index->search($query);
-
-        $this->assertEquals(1, $resultSet->count());
-    }
-
-    /**
      * @group unit
      */
     public function testQueryTypeAndTypeCollision()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
         // This test ensures that Elastica\Type and Elastica\Query\Type
         // do not collide when used together, which at one point
         // happened because of a use statement in Elastica\Query\Ids
