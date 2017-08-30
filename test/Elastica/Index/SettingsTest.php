@@ -91,10 +91,7 @@ class SettingsTest extends BaseTest
      */
     public function testSetGetNumberOfReplicas()
     {
-        $indexName = 'test';
-
-        $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
+        $index = $this->_createIndex();
         $index->create([], true);
         $settings = $index->getSettings();
 
@@ -118,10 +115,7 @@ class SettingsTest extends BaseTest
      */
     public function testGetNumberOfReplicas()
     {
-        $indexName = 'test';
-
-        $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
+        $index = $this->_createIndex();
         $index->create([], true);
 
         $settings = $index->getSettings();
@@ -138,10 +132,7 @@ class SettingsTest extends BaseTest
      */
     public function testGetNumberOfShards()
     {
-        $indexName = 'test';
-
-        $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
+        $index = $this->_createIndex();
         $index->create(['index' => ['number_of_shards' => 1]], true);
 
         $settings = $index->getSettings();
@@ -158,10 +149,7 @@ class SettingsTest extends BaseTest
      */
     public function testGetDefaultNumberOfShards()
     {
-        $indexName = 'test';
-
-        $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
+        $index = $this->_createIndex();
         $index->create([], true);
 
         $settings = $index->getSettings();
@@ -178,10 +166,7 @@ class SettingsTest extends BaseTest
      */
     public function testSetRefreshInterval()
     {
-        $indexName = 'test';
-
-        $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
+        $index = $this->_createIndex();
         $index->create([], true);
 
         $settings = $index->getSettings();
@@ -202,10 +187,7 @@ class SettingsTest extends BaseTest
      */
     public function testGetRefreshInterval()
     {
-        $indexName = 'test';
-
-        $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
+        $index = $this->_createIndex();
         $index->create([], true);
 
         $settings = $index->getSettings();
@@ -226,10 +208,7 @@ class SettingsTest extends BaseTest
      */
     public function testSetMergePolicy()
     {
-        $indexName = 'test';
-
-        $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
+        $index = $this->_createIndex();
         $index->create([], true);
         //wait for the shards to be allocated
         $this->_waitForAllocation($index);
@@ -250,10 +229,7 @@ class SettingsTest extends BaseTest
      */
     public function testSetMaxMergeAtOnce()
     {
-        $indexName = 'test';
-
-        $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
+        $index = $this->_createIndex();
         $index->create([], true);
 
         //wait for the shards to be allocated
@@ -412,10 +388,7 @@ class SettingsTest extends BaseTest
      */
     public function testSetMultiple()
     {
-        $indexName = 'test';
-
-        $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
+        $index = $this->_createIndex();
         $index->create([], true);
 
         $settings = $index->getSettings();

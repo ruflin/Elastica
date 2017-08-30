@@ -998,9 +998,8 @@ class TypeTest extends BaseTest
     /**
      * @group functional
      *
-     * @expectedException \Elastica\Exception\ResponseException
      */
-    public function testExceptionMappingOnFieldsWithSameName()
+    public function testExceptionWithTwoMappingType()
     {
         $index = $this->_createIndex();
         $type1 = new Type($index, 'foo');
@@ -1010,35 +1009,14 @@ class TypeTest extends BaseTest
             'text' => ['type' => 'text', 'analyzer' => 'standard'],
         ]);
         $type1->setMapping($mapping);
-        $type2->setMapping($mapping);
 
-        $mapping2 = new Mapping($type1, $expect = [
-            'text' => ['type' => 'text', 'analyzer' => 'standard', 'search_analyzer' => 'whitespace'],
-        ]);
-        $type1->setMapping($mapping2);
-    }
-
-    /**
-     * @group functional
-     */
-    public function testMappingOnFieldsWithSameName()
-    {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
-        $index = $this->_createIndex();
-        $type1 = new Type($index, 'foo');
-        $type2 = new Type($index, 'bar');
-
-        $mapping = new Mapping(null, $expect = [
-            'text' => ['type' => 'text', 'analyzer' => 'standard'],
-        ]);
-        $type1->setMapping($mapping);
-        $type2->setMapping($mapping);
-
-        $mapping2 = new Mapping($type1, $expect = [
-            'text' => ['type' => 'text', 'analyzer' => 'standard', 'search_analyzer' => 'whitespace'],
-        ]);
-        $type1->setMapping($mapping2, ['update_all_types' => 'update_all_types']);
-        $this->assertTrue(true);
+        try {
+            $type2->setMapping($mapping);
+        } catch (ResponseException $e) {
+            $error = $e->getResponse()->getFullError();
+            $this->assertEquals('illegal_argument_exception', $error['type']);
+            $this->assertContains('Rejecting mapping update to', $error['reason']);
+            $this->assertContains('as the final mapping would have more than 1 type', $error['reason']);
+        }
     }
 }
