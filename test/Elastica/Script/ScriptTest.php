@@ -142,8 +142,8 @@ class ScriptTest extends BaseTest
     {
         $script = new Script(self::SCRIPT, [], Script::LANG_PAINLESS);
 
-        $this->assertSame($script, $script->setLang(Script::LANG_GROOVY));
-        $this->assertEquals(Script::LANG_GROOVY, $script->getLang());
+        $this->assertSame($script, $script->setLang(Script::LANG_PAINLESS));
+        $this->assertEquals(Script::LANG_PAINLESS, $script->getLang());
     }
 
     /**

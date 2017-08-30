@@ -17,11 +17,7 @@ use Elastica\Exception\InvalidException;
  */
 abstract class AbstractScript extends AbstractUpdateAction
 {
-    const LANG_MVEL = 'mvel';
-    const LANG_JS = 'js';
-    const LANG_GROOVY = 'groovy';
-    const LANG_PYTHON = 'python';
-    const LANG_NATIVE = 'native';
+    const LANG_MOUSTACHE = 'moustache';
     const LANG_EXPRESSION = 'expression';
     const LANG_PAINLESS = 'painless';
 
@@ -37,7 +33,7 @@ abstract class AbstractScript extends AbstractUpdateAction
      *
      * @throws InvalidException
      *
-     * @return Script|ScriptFile|ScriptId
+     * @return Script|ScriptId
      */
     public static function create($data)
     {
@@ -70,14 +66,6 @@ abstract class AbstractScript extends AbstractUpdateAction
         if (isset($data['script']['inline'])) {
             return new Script(
                 $data['script']['inline'],
-                $params,
-                $lang
-            );
-        }
-
-        if (isset($data['script']['file'])) {
-            return new ScriptFile(
-                $data['script']['file'],
                 $params,
                 $lang
             );

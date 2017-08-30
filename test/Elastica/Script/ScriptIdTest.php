@@ -143,8 +143,8 @@ class ScriptIdTest extends BaseTest
     {
         $script = new ScriptId(self::SCRIPT_ID, [], ScriptId::LANG_PAINLESS);
 
-        $this->assertSame($script, $script->setLang(ScriptId::LANG_GROOVY));
-        $this->assertEquals(ScriptId::LANG_GROOVY, $script->getLang());
+        $this->assertSame($script, $script->setLang(ScriptId::LANG_PAINLESS));
+        $this->assertEquals(ScriptId::LANG_PAINLESS, $script->getLang());
     }
 
     /**
