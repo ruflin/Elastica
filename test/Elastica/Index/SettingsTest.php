@@ -151,6 +151,7 @@ class SettingsTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->create([], true);
+        $index->refresh();
 
         $settings = $index->getSettings();
 
