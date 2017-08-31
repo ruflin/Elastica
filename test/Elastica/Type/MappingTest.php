@@ -66,29 +66,6 @@ class MappingTest extends BaseTest
     /**
      * @group functional
      */
-    public function testEnableAllField()
-    {
-        $this->markTestSkipped('ES6 update: [_all] is disabled in 6.0. As a replacement, you can use an [copy_to] on mapping fields to create your own catch all field.');
-
-        $index = $this->_createIndex();
-        $type = $index->getType('test');
-
-        $mapping = new Mapping($type, []);
-
-        $mapping->enableAllField();
-
-        $data = $mapping->toArray();
-        $this->assertTrue($data[$type->getName()]['_all']['enabled']);
-
-        $response = $mapping->send();
-        $this->assertTrue($response->isOk());
-
-        $index->delete();
-    }
-
-    /**
-     * @group functional
-     */
     public function testNestedMapping()
     {
         $client = $this->_getClient();

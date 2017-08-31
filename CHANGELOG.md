@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file based on the
 - Removed [groovy script](https://github.com/elastic/elasticsearch/pull/21607) [#1364](https://github.com/ruflin/Elastica/pull/1364)
 - Removed [native script](https://github.com/elastic/elasticsearch/pull/24726) [#1364](https://github.com/ruflin/Elastica/pull/1364)
 - Removed old / removed script language support : javascript, python, mvel [#1364](https://github.com/ruflin/Elastica/pull/1364)
+- Disable [_all](https://github.com/elastic/elasticsearch/pull/22144) by default, disallow configuring _all on 6.0+ indices [#1365](https://github.com/ruflin/Elastica/pull/1365)
 
 ### Bugfixes
 - Enforce [Content-Type requirement on the layer Rest](https://github.com/elastic/elasticsearch/pull/23146), a [PR on Elastica #1301](https://github.com/ruflin/Elastica/issues/1301) solved it (it has been implemented only in the HTTP Transport), but it was not implemented in the Guzzle Transport. [#1349](https://github.com/ruflin/Elastica/pull/1349)

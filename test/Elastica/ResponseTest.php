@@ -2,6 +2,7 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Exception\ResponseException;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Request;
@@ -222,14 +223,19 @@ class ResponseTest extends BaseTest
      */
     public function testGetDataEmpty()
     {
-        $this->markTestSkipped('ES6 update: type[[non-existent-type]] missing [index: _all]');
-
         $index = $this->_createIndex();
 
-        $response = $index->request(
-            'non-existent-type/_mapping',
-            Request::GET
-        )->getData();
+        try {
+            $response = $index->request(
+                'non-existent-type/_mapping',
+                Request::GET
+            )->getData();
+        } catch (ResponseException $e) {
+            $error = $e->getResponse()->getFullError();
+            $this->assertEquals('type_missing_exception', $error['type']);
+            $this->assertContains('non-existent-type', $error['reason']);
+        }
+
 
         $this->assertEquals(0, count($response));
     }
