@@ -145,7 +145,6 @@ class Mapping
      * _id
      * _type
      * _source
-     * _all
      * _analyzer
      * _boost
      * _parent
@@ -178,30 +177,6 @@ class Mapping
     public function getParam($key)
     {
         return isset($this->_mapping[$key]) ? $this->_mapping[$key] : null;
-    }
-
-    /**
-     * Sets params for the "_all" field.
-     *
-     * @param array $params _all Params (enabled, store, term_vector, analyzer)
-     *
-     * @return $this
-     */
-    public function setAllField(array $params)
-    {
-        return $this->setParam('_all', $params);
-    }
-
-    /**
-     * Enables the "_all" field.
-     *
-     * @param bool $enabled OPTIONAL (default = true)
-     *
-     * @return $this
-     */
-    public function enableAllField($enabled = true)
-    {
-        return $this->setAllField(['enabled' => $enabled]);
     }
 
     /**
