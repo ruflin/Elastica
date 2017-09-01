@@ -73,9 +73,9 @@ class TermTest extends BaseTest
     public function testSuggestResults()
     {
         $suggest = new Suggest();
-        $suggest1 = new Term('suggest1', '_all');
+        $suggest1 = new Term('suggest1', 'text');
         $suggest->addSuggestion($suggest1->setText('Foor seach'));
-        $suggest2 = new Term('suggest2', '_all');
+        $suggest2 = new Term('suggest2', 'text');
         $suggest->addSuggestion($suggest2->setText('Girhub'));
 
         $index = $this->_getIndexForTest();
@@ -88,7 +88,6 @@ class TermTest extends BaseTest
         // Ensure that two suggestion results are returned for suggest1
         $this->assertEquals(2, sizeof($suggests['suggest1']));
 
-        $this->markTestSkipped('ES6 update: problem with suggester, we should check and update it');
         $this->assertEquals('github', $suggests['suggest2'][0]['options'][0]['text']);
         $this->assertEquals('food', $suggests['suggest1'][0]['options'][0]['text']);
     }
@@ -98,7 +97,7 @@ class TermTest extends BaseTest
      */
     public function testSuggestNoResults()
     {
-        $termSuggest = new Term('suggest1', '_all');
+        $termSuggest = new Term('suggest1', 'text');
         $termSuggest->setText('Foobar')->setSize(4);
 
         $index = $this->_getIndexForTest();

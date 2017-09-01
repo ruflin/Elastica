@@ -565,8 +565,6 @@ class SearchTest extends BaseTest
      */
     public function testIgnoreUnavailableOption()
     {
-        $this->markTestSkipped('ES6 update: Could not convert [ignore_unavailable] to boolean');
-
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_7086b4c2ee585bbb6740ece5ed7ece01');
         $query = new MatchAll();
@@ -577,11 +575,13 @@ class SearchTest extends BaseTest
         $exception = null;
         try {
             $search->search($query);
+            $this->fail('Should raise an Index not found exception');
         } catch (ResponseException $e) {
-            $exception = $e;
+            $error = $e->getResponse()->getFullError();
+
+            $this->assertEquals('index_not_found_exception', $error['type']);
+            $this->assertEquals('no such index', $error['reason']);
         }
-        $error = $exception->getResponse()->getFullError();
-        $this->assertEquals('index_not_found_exception', $error['type']);
 
         $results = $search->search($query, [Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true]);
         $this->assertInstanceOf(ResultSet::class, $results);

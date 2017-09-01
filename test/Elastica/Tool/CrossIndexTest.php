@@ -16,8 +16,6 @@ class CrossIndexTest extends Base
      */
     public function testReindex()
     {
-        $this->markTestSkipped('ES6 update: request body is required');
-
         $oldIndex = $this->_createIndex(null, true, 2);
         $this->_addDocs($oldIndex->getType('crossIndexTest'), 10);
 
@@ -52,14 +50,10 @@ class CrossIndexTest extends Base
      */
     public function testReindexTypeOption()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $oldIndex = $this->_createIndex('', true, 2);
         $type1 = $oldIndex->getType('crossIndexTest_1');
-        $type2 = $oldIndex->getType('crossIndexTest_2');
 
         $docs1 = $this->_addDocs($type1, 10);
-        $docs2 = $this->_addDocs($type2, 10);
 
         $newIndex = $this->_createIndex(null, true, 2);
 
@@ -72,19 +66,19 @@ class CrossIndexTest extends Base
 
         // string
         CrossIndex::reindex($oldIndex, $newIndex, [
-            CrossIndex::OPTION_TYPE => 'crossIndexTest_2',
+            CrossIndex::OPTION_TYPE => 'crossIndexTest_1',
         ]);
         $this->assertEquals(10, $newIndex->count());
-        $newIndex->deleteDocuments($docs2);
+        $newIndex->deleteDocuments($docs1);
 
         // array
         CrossIndex::reindex($oldIndex, $newIndex, [
             CrossIndex::OPTION_TYPE => [
                 'crossIndexTest_1',
-                $type2,
+                $type1,
             ],
         ]);
-        $this->assertEquals(20, $newIndex->count());
+        $this->assertEquals(10, $newIndex->count());
     }
 
     /**
@@ -94,8 +88,6 @@ class CrossIndexTest extends Base
      */
     public function testCopy()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $oldIndex = $this->_createIndex(null, true, 2);
         $newIndex = $this->_createIndex(null, true, 2);
 
@@ -129,15 +121,6 @@ class CrossIndexTest extends Base
         $this->assertEquals(10, $newIndex->count());
         $newIndex->deleteDocuments($docs);
 
-        // ignore mapping
-        $ignoredType = $oldIndex->getType('copy_test_1');
-        $this->_addDocs($ignoredType, 10);
-
-        CrossIndex::copy($oldIndex, $newIndex, [
-            CrossIndex::OPTION_TYPE => $oldType,
-        ]);
-
-        $this->assertFalse($newIndex->getType($ignoredType->getName())->exists());
         $this->assertEquals(10, $newIndex->count());
     }
 
