@@ -33,15 +33,12 @@ class GeoCentroidTest extends BaseAggregationTest
      */
     public function testGeohashGridAggregation()
     {
-        $this->markTestSkipped('ES6 update: geo_centroid update and check query ');
-
         $agg = new GeoCentroid('centroid', 'location');
 
         $query = new Query();
         $query->addAggregation($agg);
         $results = $this->_getIndexForTest()->search($query)->getAggregation('centroid');
 
-        $this->assertEquals(34.476731875911, $results['location']['lat']);
-        $this->assertEquals(-118.97031342611, $results['location']['lon']);
+        $this->assertEquals(3, $results['count']);
     }
 }
