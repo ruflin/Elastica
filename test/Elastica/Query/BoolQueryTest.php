@@ -59,58 +59,6 @@ class BoolQueryTest extends BaseTest
     }
 
     /**
-     * @group unit
-     */
-    public function testToArrayWithLegacyMinimumNumberShouldMatch()
-    {
-        $query = new BoolQuery();
-
-        $idsQuery1 = new Ids();
-        $idsQuery1->setIds(1);
-
-        $idsQuery2 = new Ids();
-        $idsQuery2->setIds(2);
-
-        $idsQuery3 = new Ids();
-        $idsQuery3->setIds(3);
-
-        $this->hideDeprecated();
-        $filter1 = new Term();
-        $filter1->setTerm('test', '1');
-
-        $filter2 = new Term();
-        $filter2->setTerm('username', 'ruth');
-        $this->showDeprecated();
-
-        $boost = 1.2;
-        $minMatch = 2;
-
-        $query->setBoost($boost);
-
-        $query->addMust($idsQuery1);
-        $query->addMustNot($idsQuery2);
-        $query->addShould($idsQuery3->toArray());
-        $query->addFilter($filter1);
-        $query->addFilter($filter2);
-        $this->hideDeprecated();
-        $query->setMinimumNumberShouldMatch($minMatch);
-        $this->showDeprecated();
-
-        $expectedArray = [
-            'bool' => [
-                'must' => [$idsQuery1->toArray()],
-                'should' => [$idsQuery3->toArray()],
-                'filter' => [$filter1->toArray(), $filter2->toArray()],
-                'minimum_number_should_match' => $minMatch,
-                'must_not' => [$idsQuery2->toArray()],
-                'boost' => $boost,
-            ],
-        ];
-
-        $this->assertEquals($expectedArray, $query->toArray());
-    }
-
-    /**
      * Test to resolve the following issue.
      *
      * @link https://groups.google.com/forum/?fromgroups#!topic/elastica-php-client/zK_W_hClfvU

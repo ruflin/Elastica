@@ -21,7 +21,11 @@ All notable changes to this project will be documented in this file based on the
 - Removed old / removed script language support : javascript, python, mvel [#1364](https://github.com/ruflin/Elastica/pull/1364)
 - Disable [_all](https://github.com/elastic/elasticsearch/pull/22144) by default, disallow configuring _all on 6.0+ indices [#1365](https://github.com/ruflin/Elastica/pull/1365)
 - [Unfiltered nested source](https://github.com/elastic/elasticsearch/pull/26102) should keep its full path [#1366](https://github.com/ruflin/Elastica/pull/1366)
-
+- The deprecated minimum_number_should_match parameter in the bool query has been removed, use minimum_should_match instead. [#1369](https://github.com/ruflin/Elastica/pull/1369)
+- For geo_distance queries, sorting, and aggregations the sloppy_arc option has been removed from the distance_type parameter. [#1369](https://github.com/ruflin/Elastica/pull/1369)
+- The geo_distance_range query, which was deprecated in 5.0, has been removed. [#1369](https://github.com/ruflin/Elastica/pull/1369)
+- The optimize_bbox parameter has been removed from geo_distance queries. [#1369](https://github.com/ruflin/Elastica/pull/1369)
+- The disable_coord parameter of the bool and common_terms queries has been removed. If provided, it will be ignored and issue a deprecation warning. [#1369](https://github.com/ruflin/Elastica/pull/1369)
 ### Bugfixes
 - Enforce [Content-Type requirement on the layer Rest](https://github.com/elastic/elasticsearch/pull/23146), a [PR on Elastica #1301](https://github.com/ruflin/Elastica/issues/1301) solved it (it has been implemented only in the HTTP Transport), but it was not implemented in the Guzzle Transport. [#1349](https://github.com/ruflin/Elastica/pull/1349)
 - Scroll no longer does an extra iteration both on an empty result and on searches where the last page has a significantly smaller number of results than the pages before it.

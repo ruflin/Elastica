@@ -134,20 +134,6 @@ class PercolateTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetDocumentType()
-    {
-        $type = 'type';
-        $query = new Percolate();
-        $query->setDocumentType($type);
-
-        $data = $query->toArray();
-
-        $this->assertEquals($data['percolate']['document_type'], $type);
-    }
-
-    /**
-     * @group unit
-     */
     public function testSetDocument()
     {
         $query = new Percolate();

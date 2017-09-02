@@ -110,18 +110,4 @@ class GeoDistanceTest extends BaseTest
 
         $this->assertEquals($distanceType, $data['geo_distance']['distance_type']);
     }
-
-    /**
-     * @group unit
-     */
-    public function testSetOptimizeBbox()
-    {
-        $query = new GeoDistance('location', ['lat' => 48.86, 'lon' => 2.35], '10km');
-        $optimizeBbox = GeoDistance::OPTIMIZE_BBOX_MEMORY;
-        $query->setOptimizeBbox($optimizeBbox);
-
-        $data = $query->toArray();
-
-        $this->assertEquals($optimizeBbox, $data['geo_distance']['optimize_bbox']);
-    }
 }

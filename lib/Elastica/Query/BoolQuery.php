@@ -92,22 +92,6 @@ class BoolQuery extends AbstractQuery
     }
 
     /**
-     * Set the minimum number of of should match.
-     *
-     * @param int $minimumNumberShouldMatch Should match minimum
-     *
-     * @return $this
-     *
-     * @deprecated Replaced by setMinimumShouldMatch
-     */
-    public function setMinimumNumberShouldMatch($minimumNumberShouldMatch)
-    {
-        trigger_error('Deprecated: Elastica\Query::setMinimumNumberShouldMatch() is deprecated and will be removed in further Elastica releases. Use Elastica\Query::setMinimumShouldMatch() instead.', E_USER_DEPRECATED);
-
-        return $this->setParam('minimum_number_should_match', $minimumNumberShouldMatch);
-    }
-
-    /**
      * Sets the minimum number of should clauses to match.
      *
      * @param int|string $minimum Minimum value

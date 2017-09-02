@@ -134,18 +134,6 @@ class Common extends AbstractQuery
     }
 
     /**
-     * Enable / disable computation of score factor based on the fraction of all query terms contained in the document.
-     *
-     * @param bool $disable disable_coord is false by default
-     *
-     * @return $this
-     */
-    public function setDisableCoord($disable = true)
-    {
-        return $this->setQueryParam('disable_coord', (bool) $disable);
-    }
-
-    /**
      * Set a parameter in the body of this query.
      *
      * @param string $key   parameter key
