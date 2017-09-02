@@ -428,7 +428,6 @@ class BulkTest extends BaseTest
      */
     public function testUpdate()
     {
-        $this->_checkScriptInlineSetting();
         $index = $this->_createIndex();
         $type = $index->getType('bulk_test');
         $client = $index->getClient();

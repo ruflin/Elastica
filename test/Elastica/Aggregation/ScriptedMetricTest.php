@@ -34,7 +34,6 @@ class ScriptedMetricTest extends BaseAggregationTest
      */
     public function testScriptedMetricAggregation()
     {
-        $this->_checkScriptInlineSetting();
         $agg = new ScriptedMetric(
             'scripted',
             'params._agg.durations = []',
