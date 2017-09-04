@@ -29,8 +29,6 @@ class BucketScriptTest extends BaseAggregationTest
      */
     public function testBucketScriptAggregation()
     {
-        $this->_checkScriptInlineSetting();
-
         $bucketScriptAggregation = new BucketScript(
             'result',
             [

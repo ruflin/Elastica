@@ -61,7 +61,6 @@ class MaxTest extends BaseAggregationTest
      */
     public function testMaxAggregation()
     {
-        $this->_checkScriptInlineSetting();
         $index = $this->_getIndexForTest();
 
         $agg = new Max('max_price');

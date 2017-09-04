@@ -29,7 +29,6 @@ class ScriptTest extends BaseAggregationTest
      */
     public function testAggregationScript()
     {
-        $this->_checkScriptInlineSetting();
         $agg = new Sum('sum');
         $script = new Script("return doc['price'].value", null, Script::LANG_PAINLESS);
         $agg->setScript($script);
@@ -46,7 +45,6 @@ class ScriptTest extends BaseAggregationTest
      */
     public function testAggregationScriptAsString()
     {
-        $this->_checkScriptInlineSetting();
         $agg = new Sum('sum');
         $agg->setScript(new Script("doc['price'].value", null, Script::LANG_PAINLESS));
 

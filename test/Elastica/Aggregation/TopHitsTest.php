@@ -339,7 +339,6 @@ class TopHitsTest extends BaseAggregationTest
     public function testAggregateWithScriptFields()
     {
         $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-        $this->_checkScriptInlineSetting();
         $aggr = new TopHits('top_tag_hits');
         $aggr->setSize(1);
         $aggr->setScriptFields(['three' => new Script('1 + 2')]);

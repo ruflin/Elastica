@@ -70,8 +70,6 @@ class ScriptFieldsTest extends BaseTest
      */
     public function testQuery()
     {
-        $this->_checkScriptInlineSetting();
-
         $index = $this->_createIndex();
 
         $type = $index->getType('test');
