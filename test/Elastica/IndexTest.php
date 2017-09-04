@@ -928,7 +928,7 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->refresh();
-        $returnedTokens = $index->analyze('foo');
+        $returnedTokens = $index->analyze(['text' => 'foo']);
 
         $tokens = [
             [
@@ -973,11 +973,9 @@ class IndexTest extends BaseTest
      */
     public function testAnalyzeExplain()
     {
-        $this->markTestSkipped('ES6 update: request contains unrecognized parameter: [explain]');
-
         $index = $this->_createIndex();
         $index->refresh();
-        $data = $index->analyze('foo', ['explain' => true]);
+        $data = $index->analyze(['text' => 'foo', 'explain' => true], []);
 
         $this->assertArrayHasKey('custom_analyzer', $data);
     }

@@ -548,24 +548,24 @@ class Index implements SearchableInterface
      *
      * Detailed arguments can be found here in the link
      *
-     * @param string $text String to be analyzed
+     * @param array $body String to be analyzed
      * @param array  $args OPTIONAL Additional arguments
      *
      * @return array Server response
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html
      */
-    public function analyze($text, $args = [])
+    public function analyze(array $body, $args = [])
     {
         $endpoint = new Analyze();
-        $endpoint->setBody(['text' => $text]);
+        $endpoint->setBody($body);
         $endpoint->setParams($args);
 
         $data = $this->requestEndpoint($endpoint)->getData();
 
         // Support for "Explain" parameter, that returns a different response structure from Elastic
         // @see: https://www.elastic.co/guide/en/elasticsearch/reference/current/_explain_analyze.html
-        if (isset($args['explain']) && $args['explain']) {
+        if (isset($body['explain']) && $body['explain']) {
             return $data['detail'];
         }
 
