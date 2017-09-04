@@ -38,18 +38,6 @@ class Percolate extends AbstractQuery
     }
 
     /**
-     * The type / mapping of the document being percolated. This is a required parameter.
-     *
-     * @param $documentType
-     *
-     * @return $this
-     */
-    public function setDocumentType($documentType)
-    {
-        return $this->setParam('document_type', $documentType);
-    }
-
-    /**
      * The index the document resides in.
      *
      * @param $index
