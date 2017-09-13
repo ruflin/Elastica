@@ -4,7 +4,7 @@ namespace Elastica\Test;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Index;
-use Elastica\Snapshot;
+use Elastica\Pipeline;
 use Psr\Log\LoggerInterface;
 
 class Base extends \PHPUnit_Framework_TestCase

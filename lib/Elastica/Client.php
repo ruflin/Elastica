@@ -306,12 +306,13 @@ class Client
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array $requestParams
      *
      * @throws \Elastica\Exception\InvalidException If docs is empty
      *
      * @return \Elastica\Bulk\ResponseSet Response object
      */
-    public function updateDocuments(array $docs)
+    public function updateDocuments(array $docs, array $requestParams = [])
     {
         if (empty($docs)) {
             throw new InvalidException('Array has to consist of at least one element');
@@ -320,6 +321,9 @@ class Client
         $bulk = new Bulk($this);
 
         $bulk->addDocuments($docs, Action::OP_TYPE_UPDATE);
+        foreach ($requestParams as $key => $value) {
+            $bulk->setRequestParam($key, $value);
+        }
 
         return $bulk->send();
     }
@@ -334,12 +338,13 @@ class Client
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array $requestParams
      *
      * @throws \Elastica\Exception\InvalidException If docs is empty
      *
      * @return \Elastica\Bulk\ResponseSet Response object
      */
-    public function addDocuments(array $docs)
+    public function addDocuments(array $docs, array $requestParams = [])
     {
         if (empty($docs)) {
             throw new InvalidException('Array has to consist of at least one element');
@@ -348,6 +353,10 @@ class Client
         $bulk = new Bulk($this);
 
         $bulk->addDocuments($docs);
+
+        foreach ($requestParams as $key => $value) {
+            $bulk->setRequestParam($key, $value);
+        }
 
         return $bulk->send();
     }

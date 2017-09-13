@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 - Added `Query\SpanContaining`, `Query\SpanWithin` and `Query\SpanNot` [#1319](https://github.com/ruflin/Elastica/pull/1319)
+- Implemented [Pipeline](https://www.elastic.co/guide/en/elasticsearch/reference/current/pipeline.html) and [Processors](https://www.elastic.co/guide/en/elasticsearch/reference/current/ingest-processors.html). [#1373](https://github.com/ruflin/Elastica/pull/1373)
 
 ### Improvements
 
