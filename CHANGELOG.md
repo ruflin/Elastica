@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file based on the
 - The disable_coord parameter of the bool and common_terms queries has been removed. If provided, it will be ignored and issue a deprecation warning. [#1369](https://github.com/ruflin/Elastica/pull/1369)
 - [Unfiltered nested source](https://github.com/elastic/elasticsearch/pull/26102) should keep its full path [#1366](https://github.com/ruflin/Elastica/pull/1366) 
 - [Analyze Explain](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/_explain_analyze.html) no more support [request parameters](https://www.elastic.co/guide/en/elasticsearch/reference/5.5/indices-analyze.html), use request body instead. [#1370](https://github.com/ruflin/Elastica/pull/1370) 
+- [Mapper Attachment plugin has been removed](https://github.com/elastic/elasticsearch/pull/20416) Use Ingest-attachment plugin and attachment processors with pipeline to ingest new documents. [#1375](https://github.com/ruflin/Elastica/pull/1375)
 
 ### Bugfixes
 - Enforce [Content-Type requirement on the layer Rest](https://github.com/elastic/elasticsearch/pull/23146), a [PR on Elastica #1301](https://github.com/ruflin/Elastica/issues/1301) solved it (it has been implemented only in the HTTP Transport), but it was not implemented in the Guzzle Transport. [#1349](https://github.com/ruflin/Elastica/pull/1349)
