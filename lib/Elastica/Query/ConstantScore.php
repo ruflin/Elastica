@@ -37,24 +37,6 @@ class ConstantScore extends AbstractQuery
     }
 
     /**
-     * Set query.
-     *
-     * @param array|AbstractQuery $query
-     *
-     * @throws InvalidException If query is not an array or instance of AbstractQuery
-     *
-     * @return $this
-     */
-    public function setQuery($query)
-    {
-        if (!is_array($query) && !($query instanceof AbstractQuery)) {
-            throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
-        }
-
-        return $this->setParam('query', $query);
-    }
-
-    /**
      * Set boost.
      *
      * @param float $boost

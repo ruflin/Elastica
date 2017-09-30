@@ -14,7 +14,6 @@ class MatchTest extends BaseTest
     {
         $field = 'test';
         $testQuery = 'Nicolas Ruflin';
-        $type = 'phrase';
         $operator = 'and';
         $analyzer = 'myanalyzer';
         $boost = 2.0;
@@ -27,7 +26,6 @@ class MatchTest extends BaseTest
         $query = new Match();
         $query->setFieldQuery($field, $testQuery);
         $this->hideDeprecated();
-        $query->setFieldType($field, $type);
         $this->showDeprecated();
         $query->setFieldOperator($field, $operator);
         $query->setFieldAnalyzer($field, $analyzer);
@@ -42,7 +40,6 @@ class MatchTest extends BaseTest
             'match' => [
                 $field => [
                     'query' => $testQuery,
-                    'type' => $type,
                     'operator' => $operator,
                     'analyzer' => $analyzer,
                     'boost' => $boost,
@@ -173,72 +170,6 @@ class MatchTest extends BaseTest
         $query = new Match();
         $query->setFieldQuery('name', '');
         $query->setFieldZeroTermsQuery('name', Match::ZERO_TERM_ALL);
-
-        $resultSet = $index->search($query);
-
-        $this->assertEquals(2, $resultSet->count());
-    }
-
-    /**
-     * @group functional
-     */
-    public function testMatchPhraseType()
-    {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test');
-        $index->create([], true);
-        $type = $index->getType('test');
-
-        $type->addDocuments([
-            new Document(1, ['name' => 'Basel-Stadt']),
-            new Document(2, ['name' => 'New York']),
-            new Document(3, ['name' => 'New Hampshire']),
-            new Document(4, ['name' => 'Basel Land']),
-        ]);
-
-        $index->refresh();
-
-        $field = 'name';
-        $type = 'phrase';
-
-        $query = new Match();
-        $query->setFieldQuery($field, 'New York');
-        $this->hideDeprecated();
-        $query->setFieldType($field, $type);
-        $this->showDeprecated();
-
-        $resultSet = $index->search($query);
-
-        $this->assertEquals(1, $resultSet->count());
-    }
-
-    /**
-     * @group functional
-     */
-    public function testMatchPhrasePrefixType()
-    {
-        $client = $this->_getClient();
-        $index = $client->getIndex('test');
-        $index->create([], true);
-        $type = $index->getType('test');
-
-        $type->addDocuments([
-            new Document(1, ['name' => 'Basel-Stadt']),
-            new Document(2, ['name' => 'New York']),
-            new Document(3, ['name' => 'New Hampshire']),
-            new Document(4, ['name' => 'Basel Land']),
-        ]);
-
-        $index->refresh();
-
-        $field = 'name';
-        $type = 'phrase_prefix';
-
-        $query = new Match();
-        $query->setFieldQuery($field, 'New');
-        $this->hideDeprecated();
-        $query->setFieldType($field, $type);
-        $this->showDeprecated();
 
         $resultSet = $index->search($query);
 

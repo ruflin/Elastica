@@ -17,12 +17,10 @@ class Ids extends AbstractQuery
     /**
      * Creates filter object.
      *
-     * @param string|\Elastica\Type $type Type to filter on
      * @param array                 $ids  List of ids
      */
-    public function __construct($type = null, array $ids = [])
+    public function __construct(array $ids = [])
     {
-        $this->setType($type);
         $this->setIds($ids);
     }
 
@@ -36,48 +34,6 @@ class Ids extends AbstractQuery
     public function addId($id)
     {
         $this->_params['values'][] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Adds one more type to query.
-     *
-     * @param string|\Elastica\Type $type Type name or object
-     *
-     * @return $this
-     */
-    public function addType($type)
-    {
-        if ($type instanceof ElasticaType) {
-            $type = $type->getName();
-        } elseif (empty($type) && !is_numeric($type)) {
-            // A type can be 0, but cannot be empty
-            return $this;
-        }
-
-        $this->_params['type'][] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Set type.
-     *
-     * @param array|string|\Elastica\Type $type Type name or object
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        if ($type instanceof ElasticaType) {
-            $type = $type->getName();
-        } elseif (empty($type) && !is_numeric($type)) {
-            // A type can be 0, but cannot be empty
-            return $this;
-        }
-
-        $this->_params['type'] = (array) $type;
 
         return $this;
     }

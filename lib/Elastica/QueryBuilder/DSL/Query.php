@@ -225,14 +225,13 @@ class Query implements DSL
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html
      *
-     * @param array|string|\Elastica\Type $type
      * @param array                       $ids
      *
      * @return Ids
      */
-    public function ids($type = null, array $ids = [])
+    public function ids(array $ids = [])
     {
-        return new Ids($type, $ids);
+        return new Ids($ids);
     }
 
     /**

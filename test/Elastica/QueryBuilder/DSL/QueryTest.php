@@ -45,7 +45,7 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'fuzzy', Query\Fuzzy::class, ['field', 'type']);
         $this->_assertImplemented($queryDSL, 'has_child', Query\HasChild::class, [new Match()]);
         $this->_assertImplemented($queryDSL, 'has_parent', Query\HasParent::class, [new Match(), 'type']);
-        $this->_assertImplemented($queryDSL, 'ids', Query\Ids::class, ['type', []]);
+        $this->_assertImplemented($queryDSL, 'ids', Query\Ids::class, [[]]);
         $this->_assertImplemented($queryDSL, 'match', Match::class, ['field', 'values']);
         $this->_assertImplemented($queryDSL, 'match_all', Query\MatchAll::class, []);
         $this->_assertImplemented($queryDSL, 'match_none', Query\MatchNone::class, []);

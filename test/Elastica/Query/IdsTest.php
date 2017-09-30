@@ -97,7 +97,6 @@ class IdsTest extends BaseTest
         $query = new Ids();
 
         $query->setIds('1');
-        $query->setType('helloworld1');
 
         $resultSet = $this->_index->search($query);
 
@@ -112,7 +111,6 @@ class IdsTest extends BaseTest
         $query = new Ids();
 
         $query->setIds(['1', '2']);
-        $query->setType('helloworld1');
 
         $resultSet = $this->_index->search($query);
 
@@ -128,7 +126,6 @@ class IdsTest extends BaseTest
 
         // Doc 4 is in the second type...
         $query->setIds('4');
-        $query->setType('helloworld1');
 
         $resultSet = $this->_index->search($query);
 
@@ -145,7 +142,6 @@ class IdsTest extends BaseTest
 
         // Doc 4 is in the second type...
         $query->setIds(['1', '4']);
-        $query->setType('helloworld1');
 
         $resultSet = $this->_index->search($query);
 
