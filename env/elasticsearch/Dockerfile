@@ -1,4 +1,4 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:6.0.0-beta2
+FROM docker.elastic.co/elasticsearch/elasticsearch:6.0.0-rc1
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
