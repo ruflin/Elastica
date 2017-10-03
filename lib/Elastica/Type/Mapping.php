@@ -147,7 +147,6 @@ class Mapping
      * _source
      * _analyzer
      * _boost
-     * _parent
      * _routing
      * _index
      * _size
@@ -177,18 +176,6 @@ class Mapping
     public function getParam($key)
     {
         return isset($this->_mapping[$key]) ? $this->_mapping[$key] : null;
-    }
-
-    /**
-     * Set parent type.
-     *
-     * @param string $type Parent type
-     *
-     * @return $this
-     */
-    public function setParent($type)
-    {
-        return $this->setParam('_parent', ['type' => $type]);
     }
 
     /**

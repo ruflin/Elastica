@@ -52,14 +52,10 @@ class ReindexTest extends Base
      */
     public function testReindexTypeOption()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $oldIndex = $this->_createIndex('', true, 2);
         $type1 = $oldIndex->getType('crossIndexTest_1');
-        $type2 = $oldIndex->getType('crossIndexTest_2');
 
-        $docs1 = $this->_addDocs($type1, 10);
-        $docs2 = $this->_addDocs($type2, 10);
+        $this->_addDocs($type1, 10);
 
         $newIndex = $this->_createIndex(null, true, 2);
 
@@ -69,25 +65,6 @@ class ReindexTest extends Base
         $reindex->run();
 
         $this->assertEquals(10, $newIndex->count());
-        $newIndex->deleteDocuments($docs1);
-
-        // string
-        $reindex = new Reindex($oldIndex, $newIndex, [
-            Reindex::TYPE => 'crossIndexTest_2',
-        ]);
-        $reindex->run();
-        $this->assertEquals(10, $newIndex->count());
-        $newIndex->deleteDocuments($docs2);
-
-        // array
-        $reindex = new Reindex($oldIndex, $newIndex, [
-            Reindex::TYPE => [
-                $type1,
-                'crossIndexTest_2',
-            ],
-        ]);
-        $reindex->run();
-        $this->assertEquals(20, $newIndex->count());
     }
 
     /**

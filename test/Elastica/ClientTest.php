@@ -1307,17 +1307,11 @@ class ClientTest extends BaseTest
     public function testEndpointParamsRequest()
     {
         $index = $this->_createIndex();
-        $index2 = $this->_createIndex();
         $client = $index->getClient();
         $type = $index->getType('test');
         $doc = new Document(null, ['foo' => 'bar']);
         $doc->setRouting('first_routing');
         $type->addDocument($doc);
-
-        $type2 = $index2->getType('foobar');
-        $doc2 = new Document(null, ['foo2' => 'bar2']);
-        $doc->setRouting('second_routing');
-        $type2->addDocument($doc2);
 
         $index->refresh();
 

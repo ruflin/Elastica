@@ -79,47 +79,6 @@ class IndexTest extends BaseTest
 
     /**
      * @group functional
-     */
-    public function testParent()
-    {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-        $index = $this->_createIndex();
-
-        $typeBlog = new Type($index, 'blog');
-
-        $typeComment = new Type($index, 'comment');
-
-        $mapping = new Mapping();
-        $mapping->setParam('_parent', ['type' => 'blog']);
-        $typeComment->setMapping($mapping);
-
-        $entry1 = new Document(1);
-        $entry1->set('title', 'Hello world');
-        $typeBlog->addDocument($entry1);
-
-        $entry2 = new Document(2);
-        $entry2->set('title', 'Foo bar');
-        $typeBlog->addDocument($entry2);
-
-        $entry3 = new Document(3);
-        $entry3->set('title', 'Till dawn');
-        $typeBlog->addDocument($entry3);
-
-        $comment = new Document(1);
-        $comment->set('author', 'Max');
-        $comment->setParent(2); // Entry Foo bar
-        $typeComment->addDocument($comment);
-
-        $index->forcemerge();
-
-        $query = new HasChild('Max', 'comment');
-        $resultSet = $typeBlog->search($query);
-        $this->assertEquals(1, $resultSet->count());
-        $this->assertEquals(['title' => 'Foo bar'], $resultSet->current()->getData());
-    }
-
-    /**
-     * @group functional
      * @expectedException \Elastica\Exception\ResponseException
      */
     public function testAddRemoveAlias()
