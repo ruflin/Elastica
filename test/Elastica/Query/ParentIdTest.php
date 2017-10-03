@@ -33,40 +33,100 @@ class ParentIdTest extends BaseTest
      */
     public function testParentId()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+        $client = $this->_getClient();
+        $index = $client->getIndex('testparentid');
+        $index->create([], true);
+        $type = $index->getType('test');
 
-        $index = $this->_createIndex();
-
-        $shopType = $index->getType('shop');
-        $productType = $index->getType('product');
         $mapping = new Mapping();
-        $mapping->setParent('shop');
-        $productType->setMapping($mapping);
+        $mapping->setType($type);
 
-        $shopType->addDocuments(
-            [
-                new Document('zurich', ['brand' => 'google']),
-                new Document('london', ['brand' => 'apple']),
+        $mapping = new Mapping($type, [
+            'firstname' => ['type' => 'text', 'store' => true],
+            'lastname' => ['type' => 'text'],
+            'my_join_field' => [
+                'type' => 'join',
+                'relations' => [
+                    'question' => 'answer'
+                ]
             ]
-        );
+        ]);
 
-        $doc1 = new Document(1, ['device' => 'chromebook']);
-        $doc1->setParent('zurich');
+        $type->setMapping($mapping);
 
-        $doc2 = new Document(2, ['device' => 'macmini']);
-        $doc2->setParent('london');
+        $expected = [
+            'test' => [
+                'properties' => [
+                    'firstname' => ['type' => 'text', 'store' => true],
+                    'lastname' => ['type' => 'text'],
+                    'my_join_field' => [
+                        'type' => 'join',
+                        'relations' => [
+                            'question' => 'answer'
+                        ]
+                    ]
+                ]
+            ]
+        ];
 
-        $productType->addDocument($doc1);
-        $productType->addDocument($doc2);
-
+        $this->assertEquals($expected, $mapping->toArray());
         $index->refresh();
 
-        $parentQuery = new ParentId($productType->getName(), 'zurich');
+        $doc1 = new Document(1, [
+            'text' => 'this is the 1st question',
+            'my_join_field' => [
+                'name' => 'question'
+            ]
+        ], 'test');
+
+        $doc2 = new Document(2, [
+            'text' => 'this is the 2nd question',
+            'my_join_field' => [
+                'name' => 'question'
+            ]
+        ], 'test');
+
+        $index->addDocuments([$doc1, $doc2]);
+
+        $doc3 = new Document(3, [
+            'text' => 'this is an answer, the 1st',
+            'my_join_field' =>  [
+                'name' => 'answer',
+                'parent' => 1
+            ]
+        ], 'test', 'testparentid');
+
+        $doc4 = new Document(4, [
+            'text' => 'this is an answer, the 2nd',
+            'my_join_field' =>  [
+                'name' => 'answer',
+                'parent' => 2
+            ]
+        ], 'test', 'testparentid');
+
+        $doc5 = new Document(5, [
+            'text' => 'this is an answer, the 3rd',
+            'my_join_field' =>  [
+                'name' => 'answer',
+                'parent' => 2
+            ]
+        ], 'test', 'testparentid');
+
+        $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
+        $index->refresh();
+
+        $parentQuery = new ParentId('answer', 1, true);
         $search = new Search($index->getClient());
         $results = $search->search($parentQuery);
         $this->assertEquals(1, $results->count());
+
         $result = $results->current();
         $data = $result->getData();
-        $this->assertEquals($data['device'], 'chromebook');
+        $this->assertEquals($data['text'], 'this is an answer, the 1st');
+
+        $parentQuery = new ParentId('answer', 2, true);
+        $search = new Search($index->getClient());
+        $results = $search->search($parentQuery);
+        $this->assertEquals(2, $results->count());
     }
 }

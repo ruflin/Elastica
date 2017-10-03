@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file based on the
 - Remove deprecated [type and slop](https://github.com/elastic/elasticsearch/pull/26720) field in match query [#1382](https://github.com/ruflin/Elastica/pull/1382)
 - Remove [several parse field](https://github.com/elastic/elasticsearch/pull/26711) deprecations in query builders [#1382](https://github.com/ruflin/Elastica/pull/1382)
 - Remove [deprecated parameters](https://github.com/elastic/elasticsearch/pull/26508) from ids_query [#1382](https://github.com/ruflin/Elastica/pull/1382)
+- Implemented [join-datatype](https://www.elastic.co/guide/en/elasticsearch/reference/current/parent-join.html) is a special field that creates parent/child relation within documents of the same index. [#1383](https://github.com/ruflin/Elastica/pull/1383)
 
 ### Bugfixes
 - Enforce [Content-Type requirement on the layer Rest](https://github.com/elastic/elasticsearch/pull/23146), a [PR on Elastica #1301](https://github.com/ruflin/Elastica/issues/1301) solved it (it has been implemented only in the HTTP Transport), but it was not implemented in the Guzzle Transport. [#1349](https://github.com/ruflin/Elastica/pull/1349)

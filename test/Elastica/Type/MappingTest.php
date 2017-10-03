@@ -113,33 +113,86 @@ class MappingTest extends BaseTest
     /**
      * @group functional
      */
-    public function testParentMapping()
+    public function testJoinMapping()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type, TEST USING JOIN FIELDS');
+        $client = $this->_getClient();
+        $index = $client->getIndex('testjoinparentid');
+        $index->create([], true);
+        $type = $index->getType('test');
 
-        $index = $this->_createIndex();
+        $mapping = new Mapping();
+        $mapping->setType($type);
 
-        $childtype = new Type($index, 'childtype');
-        $childmapping = new Mapping($childtype,
-            [
-                'name' => ['type' => 'text', 'store' => true],
+        $mapping = new Mapping($type, [
+            'firstname' => ['type' => 'text', 'store' => true],
+            'lastname' => ['type' => 'text'],
+            'my_join_field' => [
+                'type' => 'join',
+                'relations' => [
+                    'question' => 'answer'
+                ]
             ]
-        );
-        $childmapping->setParent('parenttype');
+        ]);
 
-        $childtype->setMapping($childmapping);
-
-        $data = $childmapping->toArray();
-        $this->assertEquals('parenttype', $data[$childtype->getName()]['_parent']['type']);
-
-        $parenttype = new Type($index, 'parenttype');
-        $parentmapping = new Mapping($parenttype,
-            [
-                'name' => ['type' => 'text', 'store' => true],
+        $expected = [
+            'test' => [
+                'properties' => [
+                    'firstname' => ['type' => 'text', 'store' => true],
+                    'lastname' => ['type' => 'text'],
+                    'my_join_field' => [
+                        'type' => 'join',
+                        'relations' => [
+                            'question' => 'answer'
+                        ]
+                    ]
+                ]
             ]
-        );
+        ];
 
-        $parenttype->setMapping($parentmapping);
+        $this->assertEquals($expected, $mapping->toArray());
+        $index->refresh();
+
+        $doc1 = new Document(1, [
+            'text' => 'this is the 1st question',
+            'my_join_field' => [
+                'name' => 'question'
+            ]
+        ], 'test');
+
+        $doc2 = new Document(2, [
+            'text' => 'this is the 2nd question',
+            'my_join_field' => [
+                'name' => 'question'
+            ]
+        ], 'test');
+
+        $index->addDocuments([$doc1, $doc2]);
+
+        $doc3 = new Document(3, [
+            'text' => 'this is an answer, the 1st',
+            'my_join_field' =>  [
+                'name' => 'answer',
+                'parent' => 1
+            ]
+        ], 'test');
+
+        $doc4 = new Document(4, [
+            'text' => 'this is an answer, the 2nd',
+            'my_join_field' =>  [
+                'name' => 'answer',
+                'parent' => 2
+            ]
+        ], 'test');
+
+        $index->addDocuments([$doc3, $doc4]);
+        $index->refresh();
+
+        $results = $index->search([])->getResults();
+
+        $this->assertCount(4, $results);
+        foreach ($results as $result) {
+            $this->assertArrayHasKey('my_join_field', $result->getData());
+        }
     }
 
     /**

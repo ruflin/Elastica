@@ -62,49 +62,77 @@ class HasParentTest extends BaseTest
      */
     public function testHasParent()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
+        $client = $this->_getClient();
+        $index = $client->getIndex('testhasparentjoin');
+        $index->create([], true);
+        $type = $index->getType('test');
 
-        $index = $this->_createIndex();
-
-        $shopType = $index->getType('shop');
-        $productType = $index->getType('product');
         $mapping = new Mapping();
-        $mapping->setParent('shop');
-        $productType->setMapping($mapping);
+        $mapping->setType($type);
 
-        $shopType->addDocuments(
-            [
-                new Document('zurich', ['brand' => 'google']),
-                new Document('london', ['brand' => 'apple']),
+        $mapping = new Mapping($type, [
+            'text' => ['type' => 'keyword'],
+            'name' => ['type' => 'keyword'],
+            'my_join_field' => [
+                'type' => 'join',
+                'relations' => [
+                    'question' => 'answer'
+                ]
             ]
-        );
+        ]);
 
-        $doc1 = new Document(1, ['device' => 'chromebook']);
-        $doc1->setParent('zurich');
-
-        $doc2 = new Document(2, ['device' => 'macmini']);
-        $doc2->setParent('london');
-
-        $productType->addDocument($doc1);
-        $productType->addDocument($doc2);
-
+        $type->setMapping($mapping);
         $index->refresh();
 
-        // All documents
-        $parentQuery = new HasParent(new MatchAll(), $shopType->getName());
+        $doc1 = new Document(1, [
+            'text' => 'this is the 1st question',
+            'my_join_field' => [
+                'name' => 'question'
+            ]
+        ], 'test');
+
+        $doc2 = new Document(2, [
+            'text' => 'this is the 2nd question',
+            'my_join_field' => [
+                'name' => 'question'
+            ]
+        ], 'test');
+
+        $index->addDocuments([$doc1, $doc2]);
+
+        $doc3 = new Document(3, [
+            'text' => 'this is an answer, the 1st',
+            'name' => 'rico',
+            'my_join_field' =>  [
+                'name' => 'answer',
+                'parent' => 1
+            ]
+        ], 'test', 'testhasparentjoin');
+
+        $doc4 = new Document(4, [
+            'text' => 'this is an answer, the 2nd',
+            'name' => 'fede',
+            'my_join_field' =>  [
+                'name' => 'answer',
+                'parent' => 2
+            ]
+        ], 'test', 'testhasparentjoin');
+
+        $doc5 = new Document(5, [
+            'text' => 'this is an answer, the 3rd',
+            'name' => 'fede',
+            'my_join_field' =>  [
+                'name' => 'answer',
+                'parent' => 2
+            ]
+        ], 'test', 'testhasparentjoin');
+
+        $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
+        $index->refresh();
+
+        $parentQuery = new HasParent(new MatchAll(), 'question');
         $search = new Search($index->getClient());
         $results = $search->search($parentQuery);
-        $this->assertEquals(2, $results->count());
-
-        $match = new Match();
-        $match->setField('brand', 'google');
-
-        $parentQuery = new HasParent($match, $shopType->getName());
-        $search = new Search($index->getClient());
-        $results = $search->search($parentQuery);
-        $this->assertEquals(1, $results->count());
-        $result = $results->current();
-        $data = $result->getData();
-        $this->assertEquals($data['device'], 'chromebook');
+        $this->assertEquals(3, $results->count());
     }
 }

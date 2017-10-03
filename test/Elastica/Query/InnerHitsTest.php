@@ -92,7 +92,6 @@ class InnerHitsTest extends BaseTest
     {
         $index = $this->_createIndex();
         $questionType = $index->getType('questions');
-        $responseType = $index->getType('responses');
 
         // Parent
         $mappingQuestion = new Mapping();
@@ -101,64 +100,84 @@ class InnerHitsTest extends BaseTest
         // Set mapping
         $mappingQuestion->setProperties([
             'title' => ['type' => 'text'],
-            'last_activity_date' => ['type' => 'date'],
-        ]);
-
-        // Children
-        $mappingResponse = new Mapping();
-        $mappingResponse->setParent('questions');
-        $mappingResponse->setType($responseType);
-
-        // Set mapping
-        $mappingResponse->setProperties([
             'answer' => ['type' => 'text', 'fielddata' => true],
             'last_activity_date' => ['type' => 'date'],
+            'my_join_field' => [
+                'type' => 'join',
+                'relations' => [
+                    'questions' => 'answers'
+                ]
+            ]
         ]);
-        $mappingResponse->send();
+
         $mappingQuestion->send();
 
         $questionType->addDocuments([
             new Document(1, [
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about linux #1',
-            ]),
+                'my_join_field' => [
+                    'name' => 'questions'
+                ]
+            ], 'questions'),
             new Document(2, [
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about linux #2',
-            ]),
+                'my_join_field' => [
+                    'name' => 'questions'
+                ]
+            ], 'questions'),
             new Document(3, [
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about windows #1',
-            ]),
+                'my_join_field' => [
+                    'name' => 'questions'
+                ]
+            ], 'questions'),
             new Document(4, [
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about windows #2',
-            ]),
+                'my_join_field' => [
+                    'name' => 'questions'
+                ]
+            ], 'questions'),
             new Document(5, [
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about osx',
-            ]),
+                'my_join_field' => [
+                    'name' => 'questions'
+                ]
+            ], 'questions')
         ]);
 
-        $documentResponse1 = new Document(1, [
+        $documentResponse1 = new Document(6, [
             'answer' => 'linux is cool',
             'last_activity_date' => '2016-01-05',
-        ]);
-        $documentResponse1->setParent(1);
+            'my_join_field' =>  [
+                'name' => 'answers',
+                'parent' => 1
+            ]
+        ], 'questions', $index->getName());
 
-        $documentResponse2 = new Document(2, [
+        $documentResponse2 = new Document(7, [
             'answer' => 'linux is bad',
             'last_activity_date' => '2005-01-05',
-        ]);
-        $documentResponse2->setParent(1);
+            'my_join_field' =>  [
+                'name' => 'answers',
+                'parent' => 1
+            ]
+        ], 'questions', $index->getName());
 
-        $documentResponse3 = new Document(3, [
+        $documentResponse3 = new Document(8, [
             'answer' => 'windows was cool',
             'last_activity_date' => '2005-01-05',
-        ]);
-        $documentResponse3->setParent(1);
+            'my_join_field' =>  [
+                'name' => 'answers',
+                'parent' => 2
+            ]
+        ], 'questions', $index->getName());
 
-        $responseType->addDocuments([$documentResponse1, $documentResponse2, $documentResponse3]);
+        $this->_getClient()->addDocuments([$documentResponse1, $documentResponse2, $documentResponse3], ['routing' => 1]);
 
         $index->refresh();
 
@@ -305,7 +324,7 @@ class InnerHitsTest extends BaseTest
 
     private function getParentChildQuery(AbstractQuery $query, InnerHits $innerHits)
     {
-        $child = (new HasChild($query, 'responses'))->setInnerHits($innerHits);
+        $child = (new HasChild($query, 'answers'))->setInnerHits($innerHits);
 
         return $this->_getIndexForParentChildrenTest()->getType('questions')->search($child);
     }
@@ -332,8 +351,6 @@ class InnerHitsTest extends BaseTest
      */
     public function testInnerHitsParentChildren()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $queryString = new SimpleQueryString('linux cool');
         $innerHits = new InnerHits();
 
@@ -342,7 +359,7 @@ class InnerHitsTest extends BaseTest
 
         $innerHits = $firstResult->getInnerHits();
 
-        $responses = $innerHits['responses']['hits']['hits'];
+        $responses = $innerHits['answers']['hits']['hits'];
         $responsesId = [];
 
         foreach ($responses as $response) {
@@ -350,7 +367,7 @@ class InnerHitsTest extends BaseTest
         }
 
         $this->assertEquals($firstResult->getId(), 1);
-        $this->assertEquals([1, 3, 2], $responsesId);
+        $this->assertEquals([6,7], $responsesId);
     }
 
     /**
@@ -379,21 +396,19 @@ class InnerHitsTest extends BaseTest
      */
     public function testInnerHitsWithOffset()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $queryString = new SimpleQueryString('linux cool');
         $innerHits = new InnerHits();
-        $innerHits->setFrom(2);
+        $innerHits->setFrom(1);
 
         $results = $this->getParentChildQuery($queryString, $innerHits);
         $firstResult = current($results->getResults());
 
         $innerHits = $firstResult->getInnerHits();
 
-        $responses = $innerHits['responses']['hits']['hits'];
+        $responses = $innerHits['answers']['hits']['hits'];
 
         $this->assertEquals(count($responses), 1);
-        $this->assertEquals(2, $responses[0]['_id']);
+        $this->assertEquals(7, $responses[0]['_id']);
     }
 
     /**
@@ -401,8 +416,6 @@ class InnerHitsTest extends BaseTest
      */
     public function testInnerHitsWithSort()
     {
-        $this->markTestSkipped('ES6 update: the final mapping would have more than 1 type');
-
         $queryString = new SimpleQueryString('linux cool');
         $innerHits = new InnerHits();
         $innerHits->setSort(['answer' => 'asc']);
@@ -412,7 +425,7 @@ class InnerHitsTest extends BaseTest
 
         $innerHits = $firstResult->getInnerHits();
 
-        $responses = $innerHits['responses']['hits']['hits'];
+        $responses = $innerHits['answers']['hits']['hits'];
         $responsesId = [];
 
         foreach ($responses as $response) {
@@ -420,7 +433,7 @@ class InnerHitsTest extends BaseTest
         }
 
         $this->assertEquals($firstResult->getId(), 1);
-        $this->assertEquals([2, 1, 3], $responsesId);
+        $this->assertEquals([7,6], $responsesId);
     }
 
     /**
