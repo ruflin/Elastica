@@ -265,7 +265,7 @@ class Settings
      * Value can be for example 3s for 3 seconds or
      * 5m for 5 minutes. -1 refreshing is disabled.
      *
-     * @param int $interval Number of milliseconds
+     * @param string $interval Duration of the refresh interval
      *
      * @return \Elastica\Response Response object
      */
