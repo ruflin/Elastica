@@ -1,8 +1,22 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.0...master)
- 
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/6.0.0-beta1...master)
+
+### Backward Compatibility Breaks
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+
+## [6.0.0-beta1](https://github.com/ruflin/Elastica/compare/5.3.0...6.0.0-beta1)
+
 ### Backward Compatibility Breaks
 
 - Numeric to and from parameters in [date_range aggregation](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_aggregations_changes.html#_numeric_literal_to_literal_and_literal_from_literal_parameters_in_literal_date_range_literal_aggregation_are_interpreted_according_to_literal_format_literal_now) are interpreted according to format of the target field
@@ -10,11 +24,11 @@ All notable changes to this project will be documented in this file based on the
 - removed analyzed/not_analyzed on [indices mapping](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-index.html)
 - [store](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-store.html) field only accepts boolean
 - Replace IndexAlreadyExistsException with [ResourceAlreadyExistsException](https://github.com/elastic/elasticsearch/pull/21494) [#1350](https://github.com/ruflin/Elastica/pull/1350)
-- in order to delete an index you should not delete by its alias now you should delete using the [concrete index name](https://github.com/elastic/elasticsearch/blob/6.0/core/src/test/java/org/elasticsearch/aliases/IndexAliasesIT.java#L445) [#1348](https://github.com/ruflin/Elastica/pull/1348) 
+- in order to delete an index you should not delete by its alias now you should delete using the [concrete index name](https://github.com/elastic/elasticsearch/blob/6.0/core/src/test/java/org/elasticsearch/aliases/IndexAliasesIT.java#L445) [#1348](https://github.com/ruflin/Elastica/pull/1348)
 - Removed ```optimize``` from Index class as it has been deprecated in ES 2.1 and removed in [ES 5.x+](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/indices-optimize.html) use forcemerge [#1351](https://github.com/ruflin/Elastica/pull/1350)
-- In QueryString is not allowed to use fields parameters in conjunction with default_field parameter. This is not well documented, it's possibile to understand from [Elasticsearch tests :  QueryStringQueryBuilderTests.java](https://github.com/elastic/elasticsearch/blob/6.0/core/src/test/java/org/elasticsearch/index/query/QueryStringQueryBuilderTests.java#L917) [#1352](https://github.com/ruflin/Elastica/pull/1352)   
+- In QueryString is not allowed to use fields parameters in conjunction with default_field parameter. This is not well documented, it's possibile to understand from [Elasticsearch tests :  QueryStringQueryBuilderTests.java](https://github.com/elastic/elasticsearch/blob/6.0/core/src/test/java/org/elasticsearch/index/query/QueryStringQueryBuilderTests.java#L917) [#1352](https://github.com/ruflin/Elastica/pull/1352)
 - Index mapping field of type [*'string'*](https://www.elastic.co/guide/en/elasticsearch/reference/5.5/string.html) has been removed from Elasticsearch 6.0 codebase [#1353](https://github.com/ruflin/Elastica/pull/1353)
-- The [created and found](https://github.com/elastic/elasticsearch/pull/25516) fields in index and delete responses became obsolete after the introduction of the result field in index, update and delete responses [#1354](https://github.com/ruflin/Elastica/pull/1354) 
+- The [created and found](https://github.com/elastic/elasticsearch/pull/25516) fields in index and delete responses became obsolete after the introduction of the result field in index, update and delete responses [#1354](https://github.com/ruflin/Elastica/pull/1354)
 - Removed file scripts [#24627](https://github.com/elastic/elasticsearch/pull/24627) [#1364](https://github.com/ruflin/Elastica/pull/1364)
 - Removed [groovy script](https://github.com/elastic/elasticsearch/pull/21607) [#1364](https://github.com/ruflin/Elastica/pull/1364)
 - Removed [native script](https://github.com/elastic/elasticsearch/pull/24726) [#1364](https://github.com/ruflin/Elastica/pull/1364)
@@ -26,8 +40,8 @@ All notable changes to this project will be documented in this file based on the
 - The geo_distance_range query, which was deprecated in 5.0, has been removed. [#1369](https://github.com/ruflin/Elastica/pull/1369)
 - The optimize_bbox parameter has been removed from geo_distance queries. [#1369](https://github.com/ruflin/Elastica/pull/1369)
 - The disable_coord parameter of the bool and common_terms queries has been removed. If provided, it will be ignored and issue a deprecation warning. [#1369](https://github.com/ruflin/Elastica/pull/1369)
-- [Unfiltered nested source](https://github.com/elastic/elasticsearch/pull/26102) should keep its full path [#1366](https://github.com/ruflin/Elastica/pull/1366) 
-- [Analyze Explain](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/_explain_analyze.html) no more support [request parameters](https://www.elastic.co/guide/en/elasticsearch/reference/5.5/indices-analyze.html), use request body instead. [#1370](https://github.com/ruflin/Elastica/pull/1370) 
+- [Unfiltered nested source](https://github.com/elastic/elasticsearch/pull/26102) should keep its full path [#1366](https://github.com/ruflin/Elastica/pull/1366)
+- [Analyze Explain](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/_explain_analyze.html) no more support [request parameters](https://www.elastic.co/guide/en/elasticsearch/reference/5.5/indices-analyze.html), use request body instead. [#1370](https://github.com/ruflin/Elastica/pull/1370)
 - [Mapper Attachment plugin has been removed](https://github.com/elastic/elasticsearch/pull/20416) Use Ingest-attachment plugin and attachment processors with pipeline to ingest new documents. [#1375](https://github.com/ruflin/Elastica/pull/1375)
 - [Indices](https://github.com/elastic/elasticsearch/pull/21837) Query has been removed in Elasticsearch 6.0 [#1376](https://github.com/ruflin/Elastica/pull/1376)
 - Remove deprecated [type and slop](https://github.com/elastic/elasticsearch/pull/26720) field in match query [#1382](https://github.com/ruflin/Elastica/pull/1382)
@@ -44,17 +58,13 @@ All notable changes to this project will be documented in this file based on the
 - Added `Query\SpanContaining`, `Query\SpanWithin` and `Query\SpanNot` [#1319](https://github.com/ruflin/Elastica/pull/1319)
 - Implemented [Pipeline](https://www.elastic.co/guide/en/elasticsearch/reference/current/pipeline.html) and [Processors](https://www.elastic.co/guide/en/elasticsearch/reference/current/ingest-processors.html). [#1373](https://github.com/ruflin/Elastica/pull/1373)
 
-### Improvements
-
-### Deprecated
-
 
 ## [5.3.0](https://github.com/ruflin/Elastica/compare/5.2.1...5.3.0)
 
 ### Backward Compatibility Breaks
 
 - Removed `Query\NumericRange`, use `Query\Range` instead [#1334](https://github.com/ruflin/Elastica/pull/1334)
- 
+
 ### Bugfixes
 
 - Send the `scroll_id` inside a json body instead of plain text [#1325](https://github.com/ruflin/Elastica/pull/1325)
