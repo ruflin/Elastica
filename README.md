@@ -17,7 +17,7 @@ All library issues should go to the [issue tracker from github](https://github.c
 
 Compatibility
 -------------
-This release is compatible with all elasticsearch 5.x releases. It was tested with version 5.4.1.
+This release is compatible with all Elasticsearch 6.x releases. It was tested with version 6.0.0-rc1.
 
 
 Contributing
@@ -29,4 +29,4 @@ Dependencies
 ------------
 | Project | Version | Required |
 |---------|---------|----------|
-|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/5.3)|5.3|yes|
+|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/6.0)|6.0|yes|
