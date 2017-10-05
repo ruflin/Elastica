@@ -23,9 +23,9 @@ class TopHitsTest extends BaseAggregationTest
             'my_join_field' => [
                 'type' => 'join',
                 'relations' => [
-                    'question' => 'answer'
-                ]
-            ]
+                    'question' => 'answer',
+                ],
+            ],
         ]);
         $index->getType('questions')->setMapping($mapping);
 

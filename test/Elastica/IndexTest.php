@@ -4,7 +4,6 @@ namespace Elastica\Test;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
-use Elastica\Query\HasChild;
 use Elastica\Query\QueryString;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
@@ -247,7 +246,6 @@ class IndexTest extends BaseTest
 
         $routing1 = 'first_routing';
         $routing2 = 'second_routing';
-
 
         $type = new Type($index, 'test');
         $doc = new Document(1, ['name' => 'ruflin nicolas']);

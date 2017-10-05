@@ -19,8 +19,8 @@ class SplitTest extends BasePipelineTest
         $expected = [
             'split' => [
                 'field' => 'joined_array_field',
-                'separator' => '-'
-            ]
+                'separator' => '-',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -38,8 +38,8 @@ class SplitTest extends BasePipelineTest
             'split' => [
                 'field' => 'joined_array_field',
                 'separator' => '-',
-                'ignore_missing' => true
-            ]
+                'ignore_missing' => true,
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -66,7 +66,7 @@ class SplitTest extends BasePipelineTest
         $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1
+            $doc1,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 

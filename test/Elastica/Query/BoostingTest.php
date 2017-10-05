@@ -1,7 +1,6 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
 use Elastica\Query\Boosting;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;

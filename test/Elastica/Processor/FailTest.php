@@ -18,8 +18,8 @@ class FailTest extends BasePipelineTest
 
         $expected = [
             'fail' => [
-                'message' => 'This is a custom fail message for processor'
-            ]
+                'message' => 'This is a custom fail message for processor',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());

@@ -19,8 +19,8 @@ class SetTest extends BasePipelineTest
         $expected = [
             'set' => [
                 'field' => 'field1',
-                'value' => 582.1
-            ]
+                'value' => 582.1,
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -38,8 +38,8 @@ class SetTest extends BasePipelineTest
             'set' => [
                 'field' => 'field1',
                 'value' => 582.1,
-                'override' => false
-            ]
+                'override' => false,
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -67,7 +67,7 @@ class SetTest extends BasePipelineTest
         $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1, $doc2
+            $doc1, $doc2,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 
@@ -79,8 +79,7 @@ class SetTest extends BasePipelineTest
 
         $this->assertEquals(2, count($result->getResults()));
 
-        foreach ($result->getResults() as $rx)
-        {
+        foreach ($result->getResults() as $rx) {
             $value = $rx->getData();
             $this->assertSame('Elastica', $value['package']);
         }

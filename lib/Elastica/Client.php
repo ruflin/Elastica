@@ -305,8 +305,8 @@ class Client
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
-     * @param array $requestParams
+     * @param array|\Elastica\Document[] $docs          Array of Elastica\Document
+     * @param array                      $requestParams
      *
      * @throws \Elastica\Exception\InvalidException If docs is empty
      *
@@ -337,8 +337,8 @@ class Client
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
-     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
-     * @param array $requestParams
+     * @param array|\Elastica\Document[] $docs          Array of Elastica\Document
+     * @param array                      $requestParams
      *
      * @throws \Elastica\Exception\InvalidException If docs is empty
      *

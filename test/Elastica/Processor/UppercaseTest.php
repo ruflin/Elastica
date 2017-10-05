@@ -18,8 +18,8 @@ class UppercaseTest extends BasePipelineTest
 
         $expected = [
             'uppercase' => [
-                'field' => 'foo'
-            ]
+                'field' => 'foo',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -47,7 +47,7 @@ class UppercaseTest extends BasePipelineTest
         $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1, $doc2
+            $doc1, $doc2,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 

@@ -19,8 +19,8 @@ class RenameTest extends BasePipelineTest
         $expected = [
             'rename' => [
                 'field' => 'foo',
-                'target_field' => 'foobar'
-            ]
+                'target_field' => 'foobar',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -38,8 +38,8 @@ class RenameTest extends BasePipelineTest
             'rename' => [
                 'field' => 'foo',
                 'target_field' => 'foobar',
-                'ignore_missing' => true
-            ]
+                'ignore_missing' => true,
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -66,7 +66,7 @@ class RenameTest extends BasePipelineTest
         $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1
+            $doc1,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 

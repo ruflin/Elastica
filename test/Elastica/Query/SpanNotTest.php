@@ -2,7 +2,6 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query\SpanContaining;
 use Elastica\Query\SpanNear;
 use Elastica\Query\SpanNot;
 use Elastica\Query\SpanTerm;

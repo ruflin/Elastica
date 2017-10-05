@@ -24,8 +24,8 @@ class AwsAuthV4 extends Guzzle
                 'base_uri' => $baseUrl,
                 'handler' => $stack,
                 'headers' => [
-                    'Content-Type' => $request->getContentType()
-                ]
+                    'Content-Type' => $request->getContentType(),
+                ],
             ]);
         }
 

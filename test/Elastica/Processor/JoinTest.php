@@ -19,8 +19,8 @@ class JoinTest extends BasePipelineTest
         $expected = [
             'join' => [
                 'field' => 'joined_array_field',
-                'separator' => '-'
-            ]
+                'separator' => '-',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());

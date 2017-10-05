@@ -148,9 +148,9 @@ class Guzzle extends AbstractTransport
     /**
      * Return Guzzle resource.
      *
-     * @param string $baseUrl
-     * @param bool   $persistent False if not persistent connection
-     * @param Request $request Elastica Request Object
+     * @param string  $baseUrl
+     * @param bool    $persistent False if not persistent connection
+     * @param Request $request    Elastica Request Object
      *
      * @return Client
      */
@@ -160,8 +160,8 @@ class Guzzle extends AbstractTransport
             self::$_guzzleClientConnection = new Client([
                 'base_uri' => $baseUrl,
                 'headers' => [
-                    'Content-Type' => $request->getContentType()
-                ]
+                    'Content-Type' => $request->getContentType(),
+                ],
             ]);
         }
 

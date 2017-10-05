@@ -16,8 +16,8 @@ class DateIndexNameTest extends BasePipelineTest
         $expected = [
             'date_index_name' => [
                 'field' => 'date1',
-                'date_rounding' => 'M'
-            ]
+                'date_rounding' => 'M',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -34,7 +34,6 @@ class DateIndexNameTest extends BasePipelineTest
         $processor->setIndexNamePrefix('myindex-');
         $processor->setDateFormats(['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS']);
 
-
         $expected = [
             'date_index_name' => [
                 'field' => 'date1',
@@ -42,8 +41,8 @@ class DateIndexNameTest extends BasePipelineTest
                 'timezone' => 'Europe/Rome',
                 'locale' => 'ITALIAN',
                 'date_formats' => ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS'],
-                'index_name_prefix' => 'myindex-'
-            ]
+                'index_name_prefix' => 'myindex-',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());

@@ -5,6 +5,7 @@ namespace Elastica\Processor;
  * Elastica Append Processor.
  *
  * @author   Federico Panini <fpanini@gmail.com>
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/append-processor.html
  */
 class Append extends AbstractProcessor
@@ -12,7 +13,7 @@ class Append extends AbstractProcessor
     /**
      * Append constructor.
      *
-     * @param string $field field name
+     * @param string       $field field name
      * @param string|array $value field values to append
      */
     public function __construct(string $field, $value)
@@ -34,7 +35,7 @@ class Append extends AbstractProcessor
     }
 
     /**
-     * Set field value
+     * Set field value.
      *
      * @param string|array $value
      *

@@ -18,8 +18,8 @@ class JsonTest extends BasePipelineTest
 
         $expected = [
             'json' => [
-                'field' => 'string_source'
-            ]
+                'field' => 'string_source',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -38,8 +38,8 @@ class JsonTest extends BasePipelineTest
             'json' => [
                 'field' => 'string_source',
                 'target_field' => 'json_target',
-                'add_to_root' => true   
-            ]
+                'add_to_root' => true,
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -78,11 +78,10 @@ class JsonTest extends BasePipelineTest
         $this->assertEquals(1, count($result->getResults()));
 
         $resultExpected = [
-            'foo' => 2000
+            'foo' => 2000,
         ];
 
-        foreach ($result->getResults() as $rx)
-        {
+        foreach ($result->getResults() as $rx) {
             $value = $rx->getData();
             $this->assertEquals($resultExpected, $value['realname']);
         }

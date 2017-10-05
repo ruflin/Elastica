@@ -18,8 +18,8 @@ class DotExpanderTest extends BasePipelineTest
 
         $expected = [
             'dot_expander' => [
-                'field' => 'foo.bar'
-            ]
+                'field' => 'foo.bar',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -58,8 +58,8 @@ class DotExpanderTest extends BasePipelineTest
 
         $expect = [
             'foo' => [
-                'bar' => 'value'
-            ]
+                'bar' => 'value',
+            ],
         ];
         $results = $result->getResults();
         $this->assertEquals($expect, ($results[0]->getHit())['_source']);

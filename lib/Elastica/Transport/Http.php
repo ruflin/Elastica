@@ -69,12 +69,10 @@ class Http extends AbstractTransport
         $query = $request->getQuery();
 
         if (!empty($query)) {
-
             $baseUri .= '?'.http_build_query(
                 $this->sanityzeQueryStringBool($query)
                 );
         }
-
 
         curl_setopt($conn, CURLOPT_URL, $baseUri);
         curl_setopt($conn, CURLOPT_TIMEOUT, $connection->getTimeout());

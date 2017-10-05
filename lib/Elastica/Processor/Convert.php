@@ -5,6 +5,7 @@ namespace Elastica\Processor;
  * Elastica Convert Processor.
  *
  * @author   Federico Panini <fpanini@gmail.com>
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/append-processor.html
  */
 class Convert extends AbstractProcessor

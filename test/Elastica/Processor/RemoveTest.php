@@ -18,8 +18,8 @@ class RemoveTest extends BasePipelineTest
 
         $expected = [
             'remove' => [
-                'field' => 'foo'
-            ]
+                'field' => 'foo',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -34,8 +34,8 @@ class RemoveTest extends BasePipelineTest
 
         $expected = [
             'remove' => [
-                'field' => ['foo', 'bar']
-            ]
+                'field' => ['foo', 'bar'],
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -46,7 +46,7 @@ class RemoveTest extends BasePipelineTest
      */
     public function testRemoveField()
     {
-        $remove = new Remove(['es_version' , 'package']);
+        $remove = new Remove(['es_version', 'package']);
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Remove');
         $pipeline->addProcessor($remove)->create();
@@ -64,7 +64,7 @@ class RemoveTest extends BasePipelineTest
 
         $bulk->addDocuments([
             $doc1,
-            $doc2
+            $doc2,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 
@@ -76,8 +76,7 @@ class RemoveTest extends BasePipelineTest
 
         $this->assertEquals(2, count($result->getResults()));
 
-        foreach ($result->getResults() as $rx)
-        {
+        foreach ($result->getResults() as $rx) {
             $value = $rx->getData();
             $this->assertArrayNotHasKey('package', $value);
             $this->assertArrayNotHasKey('es_version', $value);

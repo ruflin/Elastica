@@ -19,8 +19,8 @@ class ConvertTest extends BasePipelineTest
         $expected = [
             'convert' => [
                 'field' => 'foo',
-                'type' => 'integer'
-            ]
+                'type' => 'integer',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -38,8 +38,8 @@ class ConvertTest extends BasePipelineTest
             'convert' => [
                 'field' => 'foo',
                 'type' => 'integer',
-                'ignore_missing' => true
-            ]
+                'ignore_missing' => true,
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -51,8 +51,8 @@ class ConvertTest extends BasePipelineTest
                 'field' => 'foo',
                 'type' => 'integer',
                 'ignore_missing' => true,
-                'target_field' => 'field2'
-            ]
+                'target_field' => 'field2',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -80,7 +80,7 @@ class ConvertTest extends BasePipelineTest
         $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1, $doc2
+            $doc1, $doc2,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 
@@ -93,12 +93,10 @@ class ConvertTest extends BasePipelineTest
         $this->assertEquals(2, count($result->getResults()));
 
         $results = $result->getResults();
-        foreach ($results as $result)
-        {
+        foreach ($results as $result) {
             $value = $result->getData();
             $this->assertInternalType('float', $value['foo']);
         }
-
 
         $this->assertSame(5.290, ($results[0]->getHit())['_source']['foo']);
         $this->assertSame(6.908, ($results[1]->getHit())['_source']['foo']);

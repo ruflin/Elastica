@@ -18,8 +18,8 @@ class SortTest extends BasePipelineTest
 
         $expected = [
             'sort' => [
-                'field' => 'field_to_sort'
-            ]
+                'field' => 'field_to_sort',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -36,8 +36,8 @@ class SortTest extends BasePipelineTest
         $expected = [
             'sort' => [
                 'field' => 'field_to_sort',
-                'order' => 'desc'
-            ]
+                'order' => 'desc',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -57,7 +57,7 @@ class SortTest extends BasePipelineTest
         $type = $index->getType('bulk_test');
 
         // Add document to normal index
-        $doc1 = new Document(null, ['name' => [10,9,8,7,6,5,4,3,2,1]]);
+        $doc1 = new Document(null, ['name' => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]]);
 
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
@@ -75,6 +75,6 @@ class SortTest extends BasePipelineTest
         $this->assertEquals(1, count($result->getResults()));
 
         $results = $result->getResults();
-        $this->assertSame([1,2,3,4,5,6,7,8,9,10], ($results[0]->getHit())['_source']['name']);
+        $this->assertSame([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], ($results[0]->getHit())['_source']['name']);
     }
 }

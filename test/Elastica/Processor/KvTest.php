@@ -17,8 +17,8 @@ class KvTest extends BasePipelineTest
             'kv' => [
                 'field' => 'message',
                 'field_split' => ' ',
-                'value_split' => '='
-            ]
+                'value_split' => '=',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -43,8 +43,8 @@ class KvTest extends BasePipelineTest
                 'target_field' => 'target_field',
                 'include_keys' => ['l1', 'l2'],
                 'exclude_keys' => ['l4', 'l5'],
-                'ignore_missing' => true
-            ]
+                'ignore_missing' => true,
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());

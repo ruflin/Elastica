@@ -10,6 +10,7 @@ class ParentId extends AbstractQuery
 {
     /**
      * ParentId constructor.
+     *
      * @param $type
      * @param $id
      * @param bool $ignoreUnmapped

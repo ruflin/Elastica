@@ -108,7 +108,6 @@ class QueryStringTest extends BaseTest
             $this->assertContains('query_shard_exception', $error['root_cause'][0]['type']);
             $this->assertContains('failed to create query', $error['root_cause'][0]['reason']);
 
-
             $this->assertContains('query_validation_exception', $error);
             $this->assertContains('[fields] parameter in conjunction with [default_field]', $error['failed_shards'][0]['reason']['caused_by']['reason']);
 

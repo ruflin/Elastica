@@ -1,11 +1,8 @@
 <?php
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
-use Elastica\Index;
 use Elastica\Query\ConstantScore;
 use Elastica\Query\Ids;
-use Elastica\Query\MatchAll;
 use Elastica\Test\Base as BaseTest;
 
 class ConstantScoreTest extends BaseTest

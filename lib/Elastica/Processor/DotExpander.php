@@ -5,6 +5,7 @@ namespace Elastica\Processor;
  * Elastica Rename Processor.
  *
  * @author   Federico Panini <fpanini@gmail.com>
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/dot-expand-processor.html
  */
 class DotExpander extends AbstractProcessor

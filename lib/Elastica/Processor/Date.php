@@ -5,6 +5,7 @@ namespace Elastica\Processor;
  * Elastica Date Processor.
  *
  * @author   Federico Panini <fpanini@gmail.com>
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/date-processor.html
  */
 class Date extends AbstractProcessor
@@ -13,7 +14,7 @@ class Date extends AbstractProcessor
      * Date constructor.
      *
      * @param string $field
-     * @param array $formats
+     * @param array  $formats
      */
     public function __construct(string $field, array $formats)
     {

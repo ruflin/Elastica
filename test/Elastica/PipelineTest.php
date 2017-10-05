@@ -17,7 +17,7 @@ class PipelineTest extends BasePipeline
     public function testProcessor()
     {
         $trim = new Trim('field1');
-        $rename = new Rename('foo','target.field');
+        $rename = new Rename('foo', 'target.field');
         $set = new Set('field4', 324);
 
         $processors = new Pipeline($this->_getClient());
@@ -30,17 +30,17 @@ class PipelineTest extends BasePipeline
             'description' => 'this is a new pipeline',
             'processors' => [[
                 'trim' => [
-                    'field' => 'field1'
+                    'field' => 'field1',
                 ],
                 'rename' => [
                     'field' => 'foo',
-                    'target_field' => 'target.field'
+                    'target_field' => 'target.field',
                 ],
                 'set' => [
                     'field' => 'field4',
-                    'value' => 324
-                ]
-            ]]
+                    'value' => 324,
+                ],
+            ]],
         ];
 
         $this->assertEquals($expected, $processors->toArray());
@@ -53,7 +53,7 @@ class PipelineTest extends BasePipeline
     {
         $set = new Set('field4', 333);
         $trim = new Trim('field1');
-        $rename = new Rename('foo','target.field');
+        $rename = new Rename('foo', 'target.field');
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Set');
         $pipeline->addProcessor($set);
@@ -99,7 +99,7 @@ class PipelineTest extends BasePipeline
         $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1, $doc2
+            $doc1, $doc2,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 
@@ -111,12 +111,10 @@ class PipelineTest extends BasePipeline
 
         $this->assertEquals(2, count($result->getResults()));
 
-        foreach ($result->getResults() as $rx)
-        {
+        foreach ($result->getResults() as $rx) {
             $value = $rx->getData();
             $this->assertEquals(333, $value['foo']);
         }
-
     }
 
     /**

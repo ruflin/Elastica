@@ -18,8 +18,8 @@ class AttachmentTest extends BasePipelineTest
 
         $expected = [
             'attachment' => [
-                'field' => 'data'
-            ]
+                'field' => 'data',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -42,8 +42,8 @@ class AttachmentTest extends BasePipelineTest
                 'indexed_chars' => 1000,
                 'properties' => ['content', 'title', 'language'],
                 'target_field' => 'attachment-new-name',
-                'ignore_missing' => true
-            ]
+                'ignore_missing' => true,
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -72,7 +72,7 @@ class AttachmentTest extends BasePipelineTest
         $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
 
         $bulk->addDocuments([
-            $doc1, $doc2
+            $doc1, $doc2,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline_attachment');
 
@@ -119,7 +119,7 @@ class AttachmentTest extends BasePipelineTest
         $doc2->set('text', 'running in basel');
 
         $bulk->addDocuments([
-            $doc1, $doc2
+            $doc1, $doc2,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline_attachment');
 
@@ -165,7 +165,7 @@ class AttachmentTest extends BasePipelineTest
         $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
 
         $bulk->addDocuments([
-            $doc1, $doc2
+            $doc1, $doc2,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline_attachment');
 
@@ -226,7 +226,7 @@ class AttachmentTest extends BasePipelineTest
         $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1
+            $doc1,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline_attachment');
 

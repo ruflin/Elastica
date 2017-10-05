@@ -5,6 +5,7 @@ namespace Elastica\Processor;
  * Elastica Join Processor.
  *
  * @author   Federico Panini <fpanini@gmail.com>
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/join-processor.html
  */
 class Join extends AbstractProcessor

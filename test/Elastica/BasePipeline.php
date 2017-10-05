@@ -28,7 +28,7 @@ class BasePipeline extends BaseTest
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function tearDown()
     {
