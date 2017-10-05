@@ -4,7 +4,7 @@
   <title><![CDATA[Elastica]]></title>
   <link href="http://Elastica.io/atom.xml" rel="self"/>
   <link href="http://Elastica.io/"/>
-  <updated>2017-07-26T14:17:54+02:00</updated>
+  <updated>2017-10-05T13:05:33+02:00</updated>
   <id>http://Elastica.io/</id>
   <author>
     <name><![CDATA[ruflin]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release 6.0.0-beta1]]></title>
+    <link href="http://Elastica.io/2017/10/05/release-6-dot-0-0-beta1/"/>
+    <updated>2017-10-05T12:56:41+02:00</updated>
+    <id>http://Elastica.io/2017/10/05/release-6-dot-0-0-beta1</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/6.0.0-beta1">Elastica 6.0.0-beta1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/6.0.0-beta1">download</a>).</p>
+
+<p>This release is compatible with Elasticsearch 6.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/release-notes-6.0.0-rc1.html">elasticsearch 6.0.0-rc1</a>.</p>
+
+<h2>Backward Compatibility Breaks</h2>
+
+<ul>
+<li>Numeric to and from parameters in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/breaking_60_aggregations_changes.html#_numeric_literal_to_literal_and_literal_from_literal_parameters_in_literal_date_range_literal_aggregation_are_interpreted_according_to_literal_format_literal_now">date_range aggregation</a> are interpreted according to format of the target field</li>
+<li>In ES6 only <a href="https://github.com/elastic/elasticsearch/pull/22200">strict type boolean</a> are accepted. <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/boolean.html">On ES6 docs</a></li>
+<li>removed analyzed/not_analyzed on <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-index.html">indices mapping</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/mapping-store.html">store</a> field only accepts boolean</li>
+<li>Replace IndexAlreadyExistsException with <a href="https://github.com/elastic/elasticsearch/pull/21494">ResourceAlreadyExistsException</a> <a href="https://github.com/ruflin/Elastica/pull/1350">#1350</a></li>
+<li>in order to delete an index you should not delete by its alias now you should delete using the <a href="https://github.com/elastic/elasticsearch/blob/6.0/core/src/test/java/org/elasticsearch/aliases/IndexAliasesIT.java#L445">concrete index name</a> <a href="https://github.com/ruflin/Elastica/pull/1348">#1348</a></li>
+<li>Removed <code>optimize</code> from Index class as it has been deprecated in ES 2.1 and removed in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.4/indices-optimize.html">ES 5.x+</a> use forcemerge <a href="https://github.com/ruflin/Elastica/pull/1350">#1351</a></li>
+<li>In QueryString is not allowed to use fields parameters in conjunction with default_field parameter. This is not well documented, it&rsquo;s possibile to understand from <a href="https://github.com/elastic/elasticsearch/blob/6.0/core/src/test/java/org/elasticsearch/index/query/QueryStringQueryBuilderTests.java#L917">Elasticsearch tests :  QueryStringQueryBuilderTests.java</a> <a href="https://github.com/ruflin/Elastica/pull/1352">#1352</a></li>
+<li>Index mapping field of type <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/string.html"><em>&lsquo;string&rsquo;</em></a> has been removed from Elasticsearch 6.0 codebase <a href="https://github.com/ruflin/Elastica/pull/1353">#1353</a></li>
+<li>The <a href="https://github.com/elastic/elasticsearch/pull/25516">created and found</a> fields in index and delete responses became obsolete after the introduction of the result field in index, update and delete responses <a href="https://github.com/ruflin/Elastica/pull/1354">#1354</a></li>
+<li>Removed file scripts <a href="https://github.com/elastic/elasticsearch/pull/24627">#24627</a> <a href="https://github.com/ruflin/Elastica/pull/1364">#1364</a></li>
+<li>Removed <a href="https://github.com/elastic/elasticsearch/pull/21607">groovy script</a> <a href="https://github.com/ruflin/Elastica/pull/1364">#1364</a></li>
+<li>Removed <a href="https://github.com/elastic/elasticsearch/pull/24726">native script</a> <a href="https://github.com/ruflin/Elastica/pull/1364">#1364</a></li>
+<li>Removed old / removed script language support : javascript, python, mvel <a href="https://github.com/ruflin/Elastica/pull/1364">#1364</a></li>
+<li>Disable <a href="https://github.com/elastic/elasticsearch/pull/22144">_all</a> by default, disallow configuring _all on 6.0+ indices <a href="https://github.com/ruflin/Elastica/pull/1365">#1365</a></li>
+<li><a href="https://github.com/elastic/elasticsearch/pull/26102">Unfiltered nested source</a> should keep its full path <a href="https://github.com/ruflin/Elastica/pull/1366">#1366</a></li>
+<li>The deprecated minimum_number_should_match parameter in the bool query has been removed, use minimum_should_match instead. <a href="https://github.com/ruflin/Elastica/pull/1369">#1369</a></li>
+<li>For geo_distance queries, sorting, and aggregations the sloppy_arc option has been removed from the distance_type parameter. <a href="https://github.com/ruflin/Elastica/pull/1369">#1369</a></li>
+<li>The geo_distance_range query, which was deprecated in 5.0, has been removed. <a href="https://github.com/ruflin/Elastica/pull/1369">#1369</a></li>
+<li>The optimize_bbox parameter has been removed from geo_distance queries. <a href="https://github.com/ruflin/Elastica/pull/1369">#1369</a></li>
+<li>The disable_coord parameter of the bool and common_terms queries has been removed. If provided, it will be ignored and issue a deprecation warning. <a href="https://github.com/ruflin/Elastica/pull/1369">#1369</a></li>
+<li><a href="https://github.com/elastic/elasticsearch/pull/26102">Unfiltered nested source</a> should keep its full path <a href="https://github.com/ruflin/Elastica/pull/1366">#1366</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/_explain_analyze.html">Analyze Explain</a> no more support <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.5/indices-analyze.html">request parameters</a>, use request body instead. <a href="https://github.com/ruflin/Elastica/pull/1370">#1370</a></li>
+<li><a href="https://github.com/elastic/elasticsearch/pull/20416">Mapper Attachment plugin has been removed</a> Use Ingest-attachment plugin and attachment processors with pipeline to ingest new documents. <a href="https://github.com/ruflin/Elastica/pull/1375">#1375</a></li>
+<li><a href="https://github.com/elastic/elasticsearch/pull/21837">Indices</a> Query has been removed in Elasticsearch 6.0 <a href="https://github.com/ruflin/Elastica/pull/1376">#1376</a></li>
+<li>Remove deprecated <a href="https://github.com/elastic/elasticsearch/pull/26720">type and slop</a> field in match query <a href="https://github.com/ruflin/Elastica/pull/1382">#1382</a></li>
+<li>Remove <a href="https://github.com/elastic/elasticsearch/pull/26711">several parse field</a> deprecations in query builders <a href="https://github.com/ruflin/Elastica/pull/1382">#1382</a></li>
+<li>Remove <a href="https://github.com/elastic/elasticsearch/pull/26508">deprecated parameters</a> from ids_query <a href="https://github.com/ruflin/Elastica/pull/1382">#1382</a></li>
+<li>Implemented <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/parent-join.html">join-datatype</a> is a special field that creates parent/child relation within documents of the same index. <a href="https://github.com/ruflin/Elastica/pull/1383">#1383</a></li>
+</ul>
+
+
+<h2>Bugfixes</h2>
+
+<ul>
+<li>Enforce <a href="https://github.com/elastic/elasticsearch/pull/23146">Content-Type requirement on the layer Rest</a>, a <a href="https://github.com/ruflin/Elastica/issues/1301">PR on Elastica #1301</a> solved it (it has been implemented only in the HTTP Transport), but it was not implemented in the Guzzle Transport. <a href="https://github.com/ruflin/Elastica/pull/1349">#1349</a></li>
+<li>Scroll no longer does an extra iteration both on an empty result and on searches where the last page has a significantly smaller number of results than the pages before it.</li>
+</ul>
+
+
+<h2>Added</h2>
+
+<ul>
+<li>Added <code>Query\SpanContaining</code>, <code>Query\SpanWithin</code> and <code>Query\SpanNot</code> <a href="https://github.com/ruflin/Elastica/pull/1319">#1319</a></li>
+<li>Implemented <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/pipeline.html">Pipeline</a> and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ingest-processors.html">Processors</a>. <a href="https://github.com/ruflin/Elastica/pull/1373">#1373</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Release 5.3.0]]></title>
@@ -41,6 +103,7 @@
 <ul>
 <li>Added getNumberOfReplicas() for index settings <a href="https://github.com/ruflin/Elastica/pull/1324">PR#1324</a></li>
 <li>Added getNumberOfShards() for index settings <a href="https://github.com/ruflin/Elastica/pull/1331">PR#1321</a></li>
+<li>Added <code>\Elastica\Query\Span*</code> for proximity searches <a href="https://github.com/ruflin/Elastica/issues/304">#304</a></li>
 </ul>
 
 ]]></content>
@@ -1278,93 +1341,6 @@ as argument. <a href="https://github.com/ruflin/Elastica/pull/916">#916</a></li>
 <tr>
 <td><a href="https://github.com/Jmoati/elasticsearch-image/releases/tag/1.7.1">Elasticsearch image plugin</a></td>
 <td>1.7.1</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Release 2.2.0]]></title>
-    <link href="http://Elastica.io/2015/07/08/release-2-dot-2-0/"/>
-    <updated>2015-07-08T07:28:30+02:00</updated>
-    <id>http://Elastica.io/2015/07/08/release-2-dot-2-0</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/2.2.0">Elastica 2.2.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/2.2.0">download</a>). This release is compatible with elasticsearch 1.6.0.</p>
-
-<h2>Backward Compatibility Breaks</h2>
-
-<ul>
-<li>Usage of constant DEBUG and method Elastica\Util::debugEnabled is removed. <a href="https://github.com/ruflin/Elastica/pull/868">#868</a></li>
-<li>Elastica\Response::getTransferInfo will not return &ldquo;request_header&rdquo; by default. <a href="https://github.com/ruflin/Elastica/pull/868">#868</a></li>
-<li>The Image Plugin is currently not compatible with Elasticearch 1.6.0</li>
-</ul>
-
-
-<h2>Bugfixes</h2>
-
-<ul>
-<li>Fixed segmentation fault in PHP7 <a href="https://github.com/ruflin/Elastica/pull/868">#868</a></li>
-<li>Removed deprecation for Elastica\Type::deleteByQuery <a href="https://github.com/ruflin/Elastica/pull/875">#875</a></li>
-</ul>
-
-
-<h2>Improvements</h2>
-
-<ul>
-<li><code>CallbackStrategy</code> now will accept any <code>callable</code> as callback, not only instance of <code>Closure</code>. <a href="https://github.com/ruflin/Elastica/pull/871">#871</a></li>
-<li><code>StrategyFactory</code> now will try to find predefined strategy before looking to global namespace. <a href="https://github.com/ruflin/Elastica/pull/877">#877</a></li>
-<li>Update elasticsearch dependency to elasticsearch 1.6.0 <a href="https://www.elastic.co/downloads/past-releases/elasticsearch-1-6-0">https://www.elastic.co/downloads/past-releases/elasticsearch-1-6-0</a></li>
-<li>All elasticsearch plugin dependencies were updated to the newest version.</li>
-<li>Methods of classes in <code>QueryBuilder\DSL</code> namespace now have exact same signatures as corresponding constructors. <a href="https://github.com/ruflin/Elastica/pull/878">#878</a></li>
-<li>Constructor of <code>Aggregation\Filter</code> now accepts filter as second parameter <a href="https://github.com/ruflin/Elastica/pull/878">#878</a></li>
-<li>Constructor of <code>Filter\AbstractMulti</code> (<code>BoolAnd</code>, <code>BooldOr</code>) now accepts array of filters as parameter <a href="https://github.com/ruflin/Elastica/pull/878">#878</a></li>
-<li>Constructor of <code>Query\Match</code> now accepts arguments <a href="https://github.com/ruflin/Elastica/pull/878">#878</a></li>
-<li>Coverage Reporting improved with Codecov <a href="https://github.com/ruflin/Elastica/pull/888">#888</a></li>
-<li>Added &lsquo;query_cache&rsquo; option for search <a href="https://github.com/ruflin/Elastica/pull/886">#886</a></li>
-</ul>
-
-
-<h2>Dependencies</h2>
-
-<table>
-<thead>
-<tr>
-<th> Project </th>
-<th> Version </th>
-<th> Required </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.6.0">Elasticsearch</a></td>
-<td>1.6.0</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.6.0">Elasticsearch mapper attachments plugin</a></td>
-<td>2.6.0</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.6.0">Elasticsearch thrift transport plugin</a></td>
-<td>2.6.0</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elastic/elasticsearch-transport-memcached/tree/v2.6.0">Elasticsearch memcached transport plugin</a></td>
-<td>2.6.0</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.12">Elasticsearch geocluster facet plugin</a></td>
-<td>0.0.12</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/SibaTokyo/elasticsearch-image/tree/1.4.0">Elasticsearch image plugin</a></td>
-<td>1.4.0</td>
 <td>no</td>
 </tr>
 </tbody>
