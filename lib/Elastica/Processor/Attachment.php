@@ -50,7 +50,7 @@ class Attachment extends AbstractProcessor
     }
 
     /**
-     * Set properties. Default all properties. Can be content, title, name, author, keywords, date, content_type, content_length, language
+     * Set properties. Default all properties. Can be content, title, name, author, keywords, date, content_type, content_length, language.
      *
      * @param array $properties
      *

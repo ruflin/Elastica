@@ -1,8 +1,6 @@
 <?php
 namespace Elastica\Query;
 
-use Elastica\Type as ElasticaType;
-
 /**
  * Ids Query.
  *
@@ -17,7 +15,7 @@ class Ids extends AbstractQuery
     /**
      * Creates filter object.
      *
-     * @param array                 $ids  List of ids
+     * @param array $ids List of ids
      */
     public function __construct(array $ids = [])
     {

@@ -19,8 +19,8 @@ class DateTest extends BasePipelineTest
         $expected = [
             'date' => [
                 'field' => 'initial_date',
-                'formats' => ['dd/MM/yyyy hh:mm:ss']
-            ]
+                'formats' => ['dd/MM/yyyy hh:mm:ss'],
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -30,8 +30,8 @@ class DateTest extends BasePipelineTest
         $expected = [
             'date' => [
                 'field' => 'initial_date',
-                'formats' => ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS']
-            ]
+                'formats' => ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS'],
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -53,8 +53,8 @@ class DateTest extends BasePipelineTest
                 'formats' => ['dd/MM/yyyy hh:mm:ss', 'ISO8601', 'UNIX', 'UNIX_MS'],
                 'target_field' => 'timestamp',
                 'timezone' => 'Europe/Rome',
-                'locale' => 'ITALIAN'
-            ]
+                'locale' => 'ITALIAN',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -65,7 +65,7 @@ class DateTest extends BasePipelineTest
      */
     public function testDateField()
     {
-        $date = new Date('date_field',["yyyy dd MM hh:mm:ss"]);
+        $date = new Date('date_field', ['yyyy dd MM hh:mm:ss']);
         $date->setTargetField('date_parsed');
         $date->setTimezone('Europe/Rome');
         $date->setLocale('IT');

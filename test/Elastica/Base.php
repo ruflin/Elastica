@@ -4,7 +4,6 @@ namespace Elastica\Test;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Index;
-use Elastica\Pipeline;
 use Psr\Log\LoggerInterface;
 
 class Base extends \PHPUnit_Framework_TestCase
@@ -95,6 +94,7 @@ class Base extends \PHPUnit_Framework_TestCase
     protected function _getProxyUrl()
     {
         $proxyHost = getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
+
         return 'http://'.$proxyHost.':12345';
     }
 
@@ -104,6 +104,7 @@ class Base extends \PHPUnit_Framework_TestCase
     protected function _getProxyUrl403()
     {
         $proxyHost = getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
+
         return 'http://'.$proxyHost.':12346';
     }
 
@@ -141,6 +142,7 @@ class Base extends \PHPUnit_Framework_TestCase
     protected function _getVersion()
     {
         $data = $this->_getClient()->request('/')->getData();
+
         return substr($data['version']['number'], 0, 1);
     }
 

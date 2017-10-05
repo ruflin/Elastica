@@ -5,6 +5,7 @@ namespace Elastica\Processor;
  * Elastica Set Processor.
  *
  * @author   Federico Panini <fpanini@gmail.com>
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/ingest-processors.html
  */
 class Set extends AbstractProcessor
@@ -34,7 +35,7 @@ class Set extends AbstractProcessor
     }
 
     /**
-     * Set field value
+     * Set field value.
      *
      * @param string $value
      *

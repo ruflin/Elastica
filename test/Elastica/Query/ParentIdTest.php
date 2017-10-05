@@ -47,9 +47,9 @@ class ParentIdTest extends BaseTest
             'my_join_field' => [
                 'type' => 'join',
                 'relations' => [
-                    'question' => 'answer'
-                ]
-            ]
+                    'question' => 'answer',
+                ],
+            ],
         ]);
 
         $type->setMapping($mapping);
@@ -62,11 +62,11 @@ class ParentIdTest extends BaseTest
                     'my_join_field' => [
                         'type' => 'join',
                         'relations' => [
-                            'question' => 'answer'
-                        ]
-                    ]
-                ]
-            ]
+                            'question' => 'answer',
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $this->assertEquals($expected, $mapping->toArray());
@@ -75,41 +75,41 @@ class ParentIdTest extends BaseTest
         $doc1 = new Document(1, [
             'text' => 'this is the 1st question',
             'my_join_field' => [
-                'name' => 'question'
-            ]
+                'name' => 'question',
+            ],
         ], 'test');
 
         $doc2 = new Document(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
-                'name' => 'question'
-            ]
+                'name' => 'question',
+            ],
         ], 'test');
 
         $index->addDocuments([$doc1, $doc2]);
 
         $doc3 = new Document(3, [
             'text' => 'this is an answer, the 1st',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answer',
-                'parent' => 1
-            ]
+                'parent' => 1,
+            ],
         ], 'test', 'testparentid');
 
         $doc4 = new Document(4, [
             'text' => 'this is an answer, the 2nd',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answer',
-                'parent' => 2
-            ]
+                'parent' => 2,
+            ],
         ], 'test', 'testparentid');
 
         $doc5 = new Document(5, [
             'text' => 'this is an answer, the 3rd',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answer',
-                'parent' => 2
-            ]
+                'parent' => 2,
+            ],
         ], 'test', 'testparentid');
 
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);

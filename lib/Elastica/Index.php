@@ -549,7 +549,7 @@ class Index implements SearchableInterface
      * Detailed arguments can be found here in the link
      *
      * @param array $body String to be analyzed
-     * @param array  $args OPTIONAL Additional arguments
+     * @param array $args OPTIONAL Additional arguments
      *
      * @return array Server response
      *

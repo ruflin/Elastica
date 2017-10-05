@@ -57,10 +57,8 @@ class SettingsTest extends BaseTest
         $index->delete();
     }
 
-
     /**
      * @group functional
-     *
      */
     public function testDeleteAliasWithException()
     {

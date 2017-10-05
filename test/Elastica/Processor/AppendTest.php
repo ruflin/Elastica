@@ -19,8 +19,8 @@ class AppendTest extends BasePipelineTest
         $expected = [
             'append' => [
                 'field' => 'field1',
-                'value' => 'item2'
-            ]
+                'value' => 'item2',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -36,8 +36,8 @@ class AppendTest extends BasePipelineTest
         $expected = [
             'append' => [
                 'field' => 'field1',
-                'value' => ['item2', 'item3', 'item4']
-            ]
+                'value' => ['item2', 'item3', 'item4'],
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -65,7 +65,7 @@ class AppendTest extends BasePipelineTest
         $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1, $doc2
+            $doc1, $doc2,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 
@@ -77,8 +77,7 @@ class AppendTest extends BasePipelineTest
 
         $this->assertEquals(2, count($result->getResults()));
 
-        foreach ($result->getResults() as $rx)
-        {
+        foreach ($result->getResults() as $rx) {
             $value = $rx->getData();
             $this->assertEquals(4, count($value['foo']));
             $this->assertNull($value['foo'][0]);

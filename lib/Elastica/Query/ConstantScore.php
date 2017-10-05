@@ -1,8 +1,6 @@
 <?php
 namespace Elastica\Query;
 
-use Elastica\Exception\InvalidException;
-
 /**
  * Constant score query.
  *

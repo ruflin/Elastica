@@ -15,12 +15,13 @@ use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
  * Handles Pipeline management & definition.
  *
  * @author   Federico Panini <fpanini@gmail.com>
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/ingest-processors.html
  */
 class Pipeline extends Param
 {
     /**
-     * @var string $id name of the pipeline
+     * @var string name of the pipeline
      */
     protected $id;
 
@@ -32,9 +33,9 @@ class Pipeline extends Param
     protected $_client;
 
     /**
-     * Processors array
+     * Processors array.
      *
-     * @var array $_processors
+     * @var array
      */
     protected $_processors = [];
 
@@ -42,7 +43,6 @@ class Pipeline extends Param
      * Create a new Pipeline Object.
      *
      * @param Client $client
-     *
      */
     public function __construct(Client $client)
     {
@@ -53,6 +53,7 @@ class Pipeline extends Param
      * Create a Pipeline.
      *
      * @return Response
+     *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/put-pipeline-api.html
      */
     public function create()
@@ -78,7 +79,9 @@ class Pipeline extends Param
 
     /**
      * Get a Pipeline Object.
+     *
      * @param string $id Pipeline name
+     *
      * @return Response
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/get-pipeline-api.html
@@ -95,6 +98,7 @@ class Pipeline extends Param
      * Delete a Pipeline.
      *
      * @param string $id Pipeline name
+     *
      * @return Response
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-pipeline-api.html
@@ -118,7 +122,7 @@ class Pipeline extends Param
     /**
      * Sets query as raw array. Will overwrite all already set arguments.
      *
-     * @param array $processors  array
+     * @param array $processors array
      *
      * @return $this
      */
@@ -192,6 +196,7 @@ class Pipeline extends Param
     public function toArray()
     {
         $this->_params['processors'] = [$this->_processors['processors']];
+
         return $this->getParams();
     }
 

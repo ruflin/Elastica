@@ -105,9 +105,9 @@ class InnerHitsTest extends BaseTest
             'my_join_field' => [
                 'type' => 'join',
                 'relations' => [
-                    'questions' => 'answers'
-                ]
-            ]
+                    'questions' => 'answers',
+                ],
+            ],
         ]);
 
         $mappingQuestion->send();
@@ -117,64 +117,64 @@ class InnerHitsTest extends BaseTest
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about linux #1',
                 'my_join_field' => [
-                    'name' => 'questions'
-                ]
+                    'name' => 'questions',
+                ],
             ], 'questions'),
             new Document(2, [
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about linux #2',
                 'my_join_field' => [
-                    'name' => 'questions'
-                ]
+                    'name' => 'questions',
+                ],
             ], 'questions'),
             new Document(3, [
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about windows #1',
                 'my_join_field' => [
-                    'name' => 'questions'
-                ]
+                    'name' => 'questions',
+                ],
             ], 'questions'),
             new Document(4, [
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about windows #2',
                 'my_join_field' => [
-                    'name' => 'questions'
-                ]
+                    'name' => 'questions',
+                ],
             ], 'questions'),
             new Document(5, [
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about osx',
                 'my_join_field' => [
-                    'name' => 'questions'
-                ]
-            ], 'questions')
+                    'name' => 'questions',
+                ],
+            ], 'questions'),
         ]);
 
         $documentResponse1 = new Document(6, [
             'answer' => 'linux is cool',
             'last_activity_date' => '2016-01-05',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answers',
-                'parent' => 1
-            ]
+                'parent' => 1,
+            ],
         ], 'questions', $index->getName());
 
         $documentResponse2 = new Document(7, [
             'answer' => 'linux is bad',
             'last_activity_date' => '2005-01-05',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answers',
-                'parent' => 1
-            ]
+                'parent' => 1,
+            ],
         ], 'questions', $index->getName());
 
         $documentResponse3 = new Document(8, [
             'answer' => 'windows was cool',
             'last_activity_date' => '2005-01-05',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answers',
-                'parent' => 2
-            ]
+                'parent' => 2,
+            ],
         ], 'questions', $index->getName());
 
         $this->_getClient()->addDocuments([$documentResponse1, $documentResponse2, $documentResponse3], ['routing' => 1]);
@@ -367,7 +367,7 @@ class InnerHitsTest extends BaseTest
         }
 
         $this->assertEquals($firstResult->getId(), 1);
-        $this->assertEquals([6,7], $responsesId);
+        $this->assertEquals([6, 7], $responsesId);
     }
 
     /**
@@ -433,7 +433,7 @@ class InnerHitsTest extends BaseTest
         }
 
         $this->assertEquals($firstResult->getId(), 1);
-        $this->assertEquals([7,6], $responsesId);
+        $this->assertEquals([7, 6], $responsesId);
     }
 
     /**

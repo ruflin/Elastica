@@ -18,8 +18,8 @@ class LowercaseTest extends BasePipelineTest
 
         $expected = [
             'lowercase' => [
-                'field' => 'foo'
-            ]
+                'field' => 'foo',
+            ],
         ];
 
         $this->assertEquals($expected, $processor->toArray());
@@ -47,7 +47,7 @@ class LowercaseTest extends BasePipelineTest
         $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1, $doc2
+            $doc1, $doc2,
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 

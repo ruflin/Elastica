@@ -65,6 +65,7 @@ abstract class AbstractTransport extends Param
      * as string.
      *
      * @param string $query
+     *
      * @return mixed
      */
     public function sanityzeQueryStringBool($query)
@@ -74,6 +75,7 @@ abstract class AbstractTransport extends Param
                 $query[$key] = ($value) ? 'true' : 'false';
             }
         }
+
         return $query;
     }
 

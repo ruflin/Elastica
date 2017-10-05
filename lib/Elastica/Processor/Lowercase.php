@@ -5,6 +5,7 @@ namespace Elastica\Processor;
  * Elastica Lowercase Processor.
  *
  * @author   Federico Panini <fpanini@gmail.com>
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/lowercase-processor.html
  */
 class Lowercase extends AbstractProcessor

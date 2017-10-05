@@ -28,7 +28,6 @@ class IdsTest extends BaseTest
         $doc = new Document(3, ['name' => 'ruflin']);
         $type1->addDocument($doc);
 
-
         $index->refresh();
 
         $this->_type = $type1;

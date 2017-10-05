@@ -15,7 +15,7 @@ class DateRangeTest extends BaseAggregationTest
         $type = $index->getType('test');
 
         $type->setMapping(new Mapping(null, [
-            'created' => ['type' => 'date', "format" => "epoch_millis"],
+            'created' => ['type' => 'date', 'format' => 'epoch_millis'],
         ]));
 
         $type->addDocuments([
@@ -70,7 +70,6 @@ class DateRangeTest extends BaseAggregationTest
 
     /**
      * @group functional
-     *
      */
     public function testDateRangeSetFormatAccordingToFormatTargetField()
     {

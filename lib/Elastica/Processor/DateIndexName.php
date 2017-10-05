@@ -5,6 +5,7 @@ namespace Elastica\Processor;
  * Elastica DateIndexName Processor.
  *
  * @author   Federico Panini <fpanini@gmail.com>
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/date-index-name-processor.html
  */
 class DateIndexName extends AbstractProcessor
@@ -70,7 +71,7 @@ class DateIndexName extends AbstractProcessor
     }
 
     /**
-     * Set format to be used when printing parsed date. An valid Joda pattern is expected here. Default yyyy-MM-dd
+     * Set format to be used when printing parsed date. An valid Joda pattern is expected here. Default yyyy-MM-dd.
      *
      * @param string $indexNameFormat
      *

@@ -4,7 +4,6 @@ namespace Elastica\Test\Query;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Query\HasChild;
-use Elastica\Query\Match;
 use Elastica\Query\MatchAll;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
@@ -77,9 +76,9 @@ class HasChildTest extends BaseTest
             'my_join_field' => [
                 'type' => 'join',
                 'relations' => [
-                    'question' => 'answer'
-                ]
-            ]
+                    'question' => 'answer',
+                ],
+            ],
         ]);
 
         $type->setMapping($mapping);
@@ -88,15 +87,15 @@ class HasChildTest extends BaseTest
         $doc1 = new Document(1, [
             'text' => 'this is the 1st question',
             'my_join_field' => [
-                'name' => 'question'
-            ]
+                'name' => 'question',
+            ],
         ], 'test');
 
         $doc2 = new Document(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
-                'name' => 'question'
-            ]
+                'name' => 'question',
+            ],
         ], 'test');
 
         $index->addDocuments([$doc1, $doc2]);
@@ -104,28 +103,28 @@ class HasChildTest extends BaseTest
         $doc3 = new Document(3, [
             'text' => 'this is an answer, the 1st',
             'name' => 'rico',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answer',
-                'parent' => 1
-            ]
+                'parent' => 1,
+            ],
         ], 'test', 'testhaschild');
 
         $doc4 = new Document(4, [
             'text' => 'this is an answer, the 2nd',
             'name' => 'fede',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answer',
-                'parent' => 2
-            ]
+                'parent' => 2,
+            ],
         ], 'test', 'testhaschild');
 
         $doc5 = new Document(5, [
             'text' => 'this is an answer, the 3rd',
             'name' => 'fede',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answer',
-                'parent' => 2
-            ]
+                'parent' => 2,
+            ],
         ], 'test', 'testhaschild');
 
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);

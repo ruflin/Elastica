@@ -5,12 +5,14 @@ namespace Elastica\Processor;
  * Elastica Fail Processor.
  *
  * @author   Federico Panini <fpanini@gmail.com>
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/fail-processor.html
  */
 class Fail extends AbstractProcessor
 {
     /**
      * Fail constructor.
+     *
      * @param string $message
      */
     public function __construct(string $message)

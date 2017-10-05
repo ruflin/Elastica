@@ -5,6 +5,7 @@ namespace Elastica\Processor;
  * Elastica Json Processor.
  *
  * @author   Federico Panini <fpanini@gmail.com>
+ *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/json-processor.html
  */
 class Json extends AbstractProcessor

@@ -5,9 +5,9 @@ use Elastica\Connection;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Search;
+use Elastica\Test\Base as BaseTest;
 use Elastica\Transport\AbstractTransport;
 use Elastica\Transport\Http;
-use Elastica\Test\Base as BaseTest;
 
 class AbstractTransportTest extends BaseTest
 {
@@ -20,11 +20,11 @@ class AbstractTransportTest extends BaseTest
     {
         return [
             [
-                ['transport' => 'Http', 'curl' => [CURLINFO_HEADER_OUT => true]]
+                ['transport' => 'Http', 'curl' => [CURLINFO_HEADER_OUT => true]],
             ],
             [
-                ['transport' => 'Guzzle', 'curl' => [CURLINFO_HEADER_OUT => true]]
-            ]
+                ['transport' => 'Guzzle', 'curl' => [CURLINFO_HEADER_OUT => true]],
+            ],
         ];
     }
 
@@ -103,7 +103,7 @@ class AbstractTransportTest extends BaseTest
     /**
      * This test check that boolean values in the querystring
      * are passed as string (true|false) and not with other values
-     * due to boolean strict type in ES
+     * due to boolean strict type in ES.
      *
      * @group functional
      * @dataProvider getTransport
@@ -127,7 +127,6 @@ class AbstractTransportTest extends BaseTest
         } catch (ResponseException $e) {
             $this->fail('Failed to parse value [1] as only [true] or [false] are allowed.');
         }
-
 
         if ($transport['transport'] == 'Http') {
             $info = $results->getResponse()->getTransferInfo();

@@ -25,9 +25,9 @@ class ChildrenTest extends BaseAggregationTest
             'my_join_field' => [
                 'type' => 'join',
                 'relations' => [
-                    'question' => 'answer'
-                ]
-            ]
+                    'question' => 'answer',
+                ],
+            ],
         ]);
 
         $type->setMapping($mapping);
@@ -36,15 +36,15 @@ class ChildrenTest extends BaseAggregationTest
         $doc1 = new Document(1, [
             'text' => 'this is the 1st question',
             'my_join_field' => [
-                'name' => 'question'
-            ]
+                'name' => 'question',
+            ],
         ], 'test');
 
         $doc2 = new Document(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
-                'name' => 'question'
-            ]
+                'name' => 'question',
+            ],
         ], 'test');
 
         $index->addDocuments([$doc1, $doc2]);
@@ -52,32 +52,33 @@ class ChildrenTest extends BaseAggregationTest
         $doc3 = new Document(3, [
             'text' => 'this is an top answer, the 1st',
             'name' => 'rico',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answer',
-                'parent' => 1
-            ]
+                'parent' => 1,
+            ],
         ], 'test', 'testaggregationchildren');
 
         $doc4 = new Document(4, [
             'text' => 'this is an top answer, the 2nd',
             'name' => 'fede',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answer',
-                'parent' => 2
-            ]
+                'parent' => 2,
+            ],
         ], 'test', 'testaggregationchildren');
 
         $doc5 = new Document(5, [
             'text' => 'this is an answer, the 3rd',
             'name' => 'fede',
-            'my_join_field' =>  [
+            'my_join_field' => [
                 'name' => 'answer',
-                'parent' => 2
-            ]
+                'parent' => 2,
+            ],
         ], 'test', 'testaggregationchildren');
 
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
         $index->refresh();
+
         return $index;
     }
 
