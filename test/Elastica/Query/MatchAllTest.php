@@ -26,20 +26,17 @@ class MatchAllTest extends BaseTest
     public function testMatchAllIndicesTypes()
     {
         $index1 = $this->_createIndex();
-        $index2 = $this->_createIndex();
 
         $client = $index1->getClient();
 
         $search1 = new Search($client);
         $resultSet1 = $search1->search(new MatchAll());
 
-        $doc1 = new Document(1, ['name' => 'ruflin']);
-        $doc2 = new Document(1, ['name' => 'ruflin']);
-        $index1->getType('test')->addDocument($doc1);
-        $index2->getType('test')->addDocument($doc2);
+        $doc1 = new Document(1, ['name' => 'kimchy']);
+        $doc2 = new Document(2, ['name' => 'ruflin']);
+        $index1->getType('test')->addDocuments([$doc1, $doc2]);
 
         $index1->refresh();
-        $index2->refresh();
 
         $search2 = new Search($client);
         $resultSet2 = $search2->search(new MatchAll());

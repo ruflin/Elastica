@@ -216,10 +216,7 @@ class SearchTest extends BaseTest
     {
         $client = $this->_getClient();
         $search1 = new Search($client);
-
         $index1 = $this->_createIndex();
-        $index2 = $this->_createIndex();
-
         $type1 = $index1->getType('hello1');
 
         $result = $search1->search([]);
@@ -229,8 +226,6 @@ class SearchTest extends BaseTest
 
         $result = $search1->search([]);
         $this->assertFalse($result->getResponse()->hasError());
-
-        $search1->addIndex($index2);
 
         $result = $search1->search([]);
         $this->assertFalse($result->getResponse()->hasError());

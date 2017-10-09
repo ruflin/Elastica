@@ -13,8 +13,11 @@ class ChildrenTest extends BaseAggregationTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testaggregationchildren');
-        $index->create([], true);
-        $type = $index->getType('test');
+        $index->create(['index' => ['number_of_shards' => 2, 'number_of_replicas' => 1]], true);
+
+        $type = $index->getType(strtolower(
+            'typechildren'.uniqid()
+        ));
 
         $mapping = new Mapping();
         $mapping->setType($type);
@@ -38,14 +41,14 @@ class ChildrenTest extends BaseAggregationTest
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], 'test');
+        ], $type->getName());
 
         $doc2 = new Document(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], 'test');
+        ], $type->getName());
 
         $index->addDocuments([$doc1, $doc2]);
 
@@ -56,7 +59,7 @@ class ChildrenTest extends BaseAggregationTest
                 'name' => 'answer',
                 'parent' => 1,
             ],
-        ], 'test', 'testaggregationchildren');
+        ], $type->getName(), $index->getName());
 
         $doc4 = new Document(4, [
             'text' => 'this is an top answer, the 2nd',
@@ -65,7 +68,7 @@ class ChildrenTest extends BaseAggregationTest
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], 'test', 'testaggregationchildren');
+        ], $type->getName(), $index->getName());
 
         $doc5 = new Document(5, [
             'text' => 'this is an answer, the 3rd',
@@ -74,7 +77,7 @@ class ChildrenTest extends BaseAggregationTest
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], 'test', 'testaggregationchildren');
+        ], $type->getName(), $index->getName());
 
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
         $index->refresh();
@@ -115,8 +118,6 @@ class ChildrenTest extends BaseAggregationTest
      */
     public function testChildrenAggregationCount()
     {
-        $this->markTestSkipped('weird behaviour executing a single test or the whole test suite');
-
         $agg = new Children('answer');
         $agg->setType('answer');
 

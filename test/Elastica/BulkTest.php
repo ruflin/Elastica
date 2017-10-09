@@ -23,7 +23,6 @@ class BulkTest extends BaseTest
     public function testSend()
     {
         $index = $this->_createIndex();
-        $index2 = $this->_createIndex();
         $indexName = $index->getName();
         $type = $index->getType('bulk_test');
         $client = $index->getClient();
