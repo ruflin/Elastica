@@ -16,19 +16,8 @@ class GeoShapePreIndexedTest extends BaseTest
     public function testSearch()
     {
         $index = $this->_createIndex();
-        $index2 = $this->_createIndex();
         $indexName = $index->getName();
-        $indexName2 = $index2->getName();
-        $type = $index->getType('type');
-        $otherType = $index2->getType('other_type');
-
-        // create mapping
-        $mapping = new Mapping($type, [
-            'location' => [
-                'type' => 'geo_shape',
-            ],
-        ]);
-        $type->setMapping($mapping);
+        $otherType = $index->getType('other_type');
 
         // create other type mapping
         $otherMapping = new Mapping($otherType, [
@@ -37,17 +26,6 @@ class GeoShapePreIndexedTest extends BaseTest
             ],
         ]);
         $otherType->setMapping($otherMapping);
-
-        // add type docs
-        $type->addDocument(new Document('1', [
-            'location' => [
-                'type' => 'envelope',
-                'coordinates' => [
-                    [0.0, 50.0],
-                    [50.0, 0.0],
-                ],
-            ],
-        ]));
 
         // add other type docs
         $otherType->addDocument(new Document('2', [
@@ -61,12 +39,10 @@ class GeoShapePreIndexedTest extends BaseTest
         ]));
 
         $index->forcemerge();
-        $index2->forcemerge();
         $index->refresh();
-        $index2->refresh();
 
         $gsp = new GeoShapePreIndexed(
-            'location', '2', 'other_type', $indexName2, 'location'
+            'location', '2', 'other_type', $indexName, 'location'
         );
 
         $query = new BoolQuery();
@@ -76,8 +52,6 @@ class GeoShapePreIndexedTest extends BaseTest
 
         $gsp->setRelation(AbstractGeoShape::RELATION_DISJOINT);
         $this->assertEquals(0, $otherType->count($query), 'Changing the relation should take effect');
-
-        $index->delete();
     }
 
     /**

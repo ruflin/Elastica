@@ -61,7 +61,6 @@ class SettingsTest extends BaseTest
         $settings = new Settings($this->_getClient());
         $settings->setReadOnly(false);
         $index1 = $this->_createIndex();
-        $index2 = $this->_createIndex();
 
         $doc1 = new Document(null, ['hello' => 'world']);
         $doc2 = new Document(null, ['hello' => 'world']);
@@ -72,7 +71,6 @@ class SettingsTest extends BaseTest
 
         // Check that adding documents work
         $index1->getType('test')->addDocument($doc1);
-        $index2->getType('test')->addDocument($doc2);
 
         $response = $settings->setReadOnly(true);
         $this->assertFalse($response->hasError());
@@ -89,15 +87,6 @@ class SettingsTest extends BaseTest
             $this->assertContains('cluster read-only', $error['reason']);
         }
 
-        try {
-            $index2->getType('test')->addDocument($doc4);
-            $this->fail('should throw read only exception');
-        } catch (ResponseException $e) {
-            $error = $e->getResponse()->getFullError();
-            $this->assertContains('cluster_block_exception', $error['type']);
-            $this->assertContains('cluster read-only', $error['reason']);
-        }
-
         $response = $settings->setReadOnly(false);
         $this->assertFalse($response->hasError());
         $setting = $settings->getTransient('cluster.blocks.read_only');
@@ -105,13 +94,10 @@ class SettingsTest extends BaseTest
 
         // Check that adding documents works again
         $index1->getType('test')->addDocument($doc5);
-        $index2->getType('test')->addDocument($doc6);
 
         $index1->refresh();
-        $index2->refresh();
 
         // 2 docs should be in each index
         $this->assertEquals(2, $index1->count());
-        $this->assertEquals(2, $index2->count());
     }
 }

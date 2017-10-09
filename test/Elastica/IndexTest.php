@@ -104,12 +104,6 @@ class IndexTest extends BaseTest
         $data = $index->addAlias($aliasName, true)->getData();
         $this->assertTrue($data['acknowledged']);
 
-        $index2 = $client->getIndex($aliasName);
-        $type2 = $index2->getType($typeName);
-
-        $resultSet2 = $type2->search('ruflin');
-        $this->assertEquals(1, $resultSet2->count());
-
         $response = $index->removeAlias($aliasName)->getData();
         $this->assertTrue($response['acknowledged']);
 
@@ -242,7 +236,6 @@ class IndexTest extends BaseTest
     public function testDeleteByQueryWithQueryAndOptions()
     {
         $index = $this->_createIndex(null, true, 2);
-        $index2 = $this->_createIndex(null, true, 2);
 
         $routing1 = 'first_routing';
         $routing2 = 'second_routing';
@@ -256,72 +249,45 @@ class IndexTest extends BaseTest
         $doc->setRouting($routing1);
         $type->addDocument($doc);
 
-        $type = new Type($index2, 'test');
-        $doc = new Document(1, ['name' => 'ruflin nicolas']);
-        $doc->setRouting($routing1);
-        $type->addDocument($doc);
 
         $doc = new Document(2, ['name' => 'ruflin']);
         $doc->setRouting($routing1);
         $type->addDocument($doc);
 
         $index->refresh();
-        $index2->refresh();
 
         $response = $index->search('ruflin*');
-        $this->assertEquals(2, $response->count());
-        $response = $index2->search('ruflin*');
         $this->assertEquals(2, $response->count());
 
         $response = $index->search('ruflin*', ['routing' => $routing2]);
         $this->assertEquals(0, $response->count());
-        $response = $index2->search('ruflin*', ['routing' => $routing2]);
-        $this->assertEquals(0, $response->count());
 
         $response = $index->search('nicolas');
-        $this->assertEquals(1, $response->count());
-        $response = $index2->search('nicolas');
         $this->assertEquals(1, $response->count());
 
         // Route to the wrong document id; should not delete
         $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing2]);
         $this->assertTrue($response->isOk());
 
-        // Route to the wrong document id; should not delete
-        $response = $index2->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing2]);
-        $this->assertTrue($response->isOk());
-
         $index->refresh();
-        $index2->refresh();
 
         $response = $index->search('ruflin*');
         $this->assertEquals(2, $response->count());
-        $response = $index2->search('ruflin*');
-        $this->assertEquals(2, $response->count());
 
         $response = $index->search('nicolas');
-        $this->assertEquals(1, $response->count());
-        $response = $index2->search('nicolas');
         $this->assertEquals(1, $response->count());
 
         // Delete first document
         $response = $index->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing1]);
         $this->assertTrue($response->isOk());
-        $response = $index2->deleteByQuery(new SimpleQueryString('nicolas'), ['routing' => $routing1]);
-        $this->assertTrue($response->isOk());
 
         $index->refresh();
-        $index2->refresh();
 
         // Makes sure, document is deleted
         $response = $index->search('ruflin*');
         $this->assertEquals(1, $response->count());
-        $response = $index2->search('ruflin*');
-        $this->assertEquals(1, $response->count());
 
         $response = $index->search('nicolas');
-        $this->assertEquals(0, $response->count());
-        $response = $index2->search('nicolas');
         $this->assertEquals(0, $response->count());
     }
 
@@ -357,36 +323,24 @@ class IndexTest extends BaseTest
     public function testAddAliasTwoIndices()
     {
         $indexName1 = 'test1';
-        $indexName2 = 'test2';
         $aliasName = 'test-alias';
 
         $client = $this->_getClient();
         $index1 = $client->getIndex($indexName1);
-        $index2 = $client->getIndex($indexName2);
 
         $index1->create([], true);
         $this->_waitForAllocation($index1);
         $index1->addAlias($aliasName);
-        $index2->create([], true);
-        $this->_waitForAllocation($index2);
 
         $index1->refresh();
-        $index2->refresh();
         $index1->forcemerge();
-        $index2->forcemerge();
 
         $status = new Status($client);
 
         $this->assertTrue($status->indexExists($indexName1));
-        $this->assertTrue($status->indexExists($indexName2));
 
         $this->assertTrue($status->aliasExists($aliasName));
         $this->assertTrue($index1->hasAlias($aliasName));
-        $this->assertFalse($index2->hasAlias($aliasName));
-
-        $index2->addAlias($aliasName);
-        $this->assertTrue($index1->hasAlias($aliasName));
-        $this->assertTrue($index2->hasAlias($aliasName));
     }
 
     /**
@@ -395,31 +349,21 @@ class IndexTest extends BaseTest
     public function testReplaceAlias()
     {
         $indexName1 = 'test1';
-        $indexName2 = 'test2';
         $aliasName = 'test-alias';
 
         $client = $this->_getClient();
         $index1 = $client->getIndex($indexName1);
-        $index2 = $client->getIndex($indexName2);
 
         $index1->create([], true);
         $index1->addAlias($aliasName);
-        $index2->create([], true);
 
         $index1->refresh();
-        $index2->refresh();
 
         $status = new Status($client);
 
         $this->assertTrue($status->indexExists($indexName1));
-        $this->assertTrue($status->indexExists($indexName2));
         $this->assertTrue($status->aliasExists($aliasName));
         $this->assertTrue($index1->hasAlias($aliasName));
-        $this->assertFalse($index2->hasAlias($aliasName));
-
-        $index2->addAlias($aliasName, true);
-        $this->assertFalse($index1->hasAlias($aliasName));
-        $this->assertTrue($index2->hasAlias($aliasName));
     }
 
     /**
