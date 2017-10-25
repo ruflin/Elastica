@@ -1,6 +1,7 @@
 <?php
 namespace Elastica\Test;
 
+use Elastica\Client;
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\ResultSet;
@@ -16,12 +17,16 @@ class ScrollTest extends Base
      */
     public function testForeach()
     {
-        $scroll = new Scroll($this->_prepareSearch());
+        $search = $this->_prepareSearch();
+        $scroll = new Scroll($search);
         $count = 1;
+
+        $this->_assertOpenSearchContexts($search->getClient(), 0);
 
         /** @var ResultSet $resultSet */
         foreach ($scroll as $scrollId => $resultSet) {
             $this->assertNotEmpty($scrollId);
+            $this->_assertOpenSearchContexts($search->getClient(), 1);
 
             $results = $resultSet->getResults();
             switch (true) {
@@ -51,6 +56,8 @@ class ScrollTest extends Base
 
             ++$count;
         }
+
+        $this->_assertOpenSearchContexts($search->getClient(), 0);
     }
 
     /**
@@ -100,5 +107,17 @@ class ScrollTest extends Base
         $search->getQuery()->setSize(5);
 
         return $search;
+    }
+
+    /**
+     * Tests the number of open search contexts on ES.
+     *
+     * @param Client $client
+     * @param int    $count
+     */
+    private function _assertOpenSearchContexts(Client $client, $count)
+    {
+        $stats = $client->getStatus()->getData();
+        $this->assertSame($count, $stats['_all']['total']['search']['open_contexts'], 'Open search contexts should match');
     }
 }

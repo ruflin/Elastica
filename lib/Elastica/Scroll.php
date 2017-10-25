@@ -83,9 +83,7 @@ class Scroll implements \Iterator
             $this->_revertOptions();
         } else {
             // If there are no pages left, we do not need to query ES.
-            // Reset scroll ID so valid() returns false.
-            $this->_nextScrollId = null;
-            $this->_currentResultSet = null;
+            $this->clear();
         }
     }
 
@@ -132,6 +130,24 @@ class Scroll implements \Iterator
         $this->_setScrollId($this->_search->search());
 
         $this->_revertOptions();
+    }
+
+    /**
+     * Cleares the search context on ES and marks this Scroll instance as finished.
+     */
+    public function clear()
+    {
+        if (null !== $this->_nextScrollId) {
+            $this->_search->getClient()->request(
+                '_search/scroll',
+                Request::DELETE,
+                [Search::OPTION_SCROLL_ID => [$this->_nextScrollId]]
+            );
+
+            // Reset scroll ID so valid() returns false.
+            $this->_nextScrollId = null;
+            $this->_currentResultSet = null;
+        }
     }
 
     /**
