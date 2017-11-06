@@ -343,7 +343,7 @@ class InnerHitsTest extends BaseTest
         $innerHitsResults = $firstResult->getInnerHits();
 
         $this->assertEquals($firstResult->getId(), 4);
-        $this->assertEquals($innerHitsResults['users']['hits']['hits'][0]['_source']['users']['name'], 'Newton');
+        $this->assertEquals($innerHitsResults['users']['hits']['hits'][0]['_source']['name'], 'Newton');
     }
 
     /**

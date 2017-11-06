@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/6.0.0-beta1...master)
 
 ### Backward Compatibility Breaks
+- Return the [_source of inner hit nested](https://github.com/elastic/elasticsearch/pull/26982) as is without wrapping it into its full path context [#1398](https://github.com/ruflin/Elastica/pull/1398)
 
 ### Bugfixes
 
