@@ -11,7 +11,11 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 
+- Added clear() to `Scroll` for closing search context on ES manually
+
 ### Improvements
+
+- Clear search context on ES after usage in `Scroll`
 
 ### Deprecated
 
