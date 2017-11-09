@@ -80,14 +80,4 @@ class StatsBucketTest extends BaseAggregationTest
         $serialDiffAgg = new StatsBucket('bucket_part');
         $serialDiffAgg->toArray();
     }
-
-    /**
-     * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     */
-    public function testToArrayInvalidScript()
-    {
-        $serialDiffAgg = new StatsBucket('bucket_part', 'age_groups>max_weight');
-        $serialDiffAgg->toArray();
-    }
 }
