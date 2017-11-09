@@ -27,10 +27,8 @@ class StatsBucketTest extends BaseAggregationTest
     /**
      * @group functional
      */
-    public function testBucketScriptAggregation()
+    public function testStatBucketAggregation()
     {
-        $this->_checkScriptInlineSetting();
-
         $bucketScriptAggregation = new StatsBucket('result', 'age_groups>max_weight');
 
         $histogramAggregation = new Histogram('age_groups', 'age', 10);
