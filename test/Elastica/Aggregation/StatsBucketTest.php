@@ -34,10 +34,11 @@ class StatsBucketTest extends BaseAggregationTest
         $histogramAggregation = new Histogram('age_groups', 'age', 10);
 
         $histogramAggregation
-            ->addAggregation((new Max('max_weight'))->setField('weight'))
-            ->addAggregation($bucketScriptAggregation);
+            ->addAggregation((new Max('max_weight'))->setField('weight'));
 
-        $query = Query::create([])->addAggregation($histogramAggregation);
+        $query = Query::create([])
+            ->addAggregation($histogramAggregation)
+            ->addAggregation($bucketScriptAggregation);
 
         $results = $this->_getIndexForTest()->search($query)->getAggregation('result');
 
