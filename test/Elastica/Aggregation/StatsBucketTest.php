@@ -88,7 +88,7 @@ class StatsBucketTest extends BaseAggregationTest
      */
     public function testToArrayInvalidScript()
     {
-        $serialDiffAgg = new StatsBucket('bucket_part', ['path' => 'agg']);
+        $serialDiffAgg = new StatsBucket('bucket_part', 'age_groups>max_weight');
         $serialDiffAgg->toArray();
     }
 }
