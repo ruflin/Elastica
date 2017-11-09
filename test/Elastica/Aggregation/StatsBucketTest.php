@@ -42,11 +42,11 @@ class StatsBucketTest extends BaseAggregationTest
 
         $results = $this->_getIndexForTest()->search($query)->getAggregation('result');
 
-        $this->assertEquals(3, $results['result']['count']);
-        $this->assertEquals(50, $results['result']['min']);
-        $this->assertEquals(70, $results['result']['max']);
-        $this->assertEquals(60, $results['result']['avg']);
-        $this->assertEquals(180, $results['result']['sum']);
+        $this->assertEquals(3, $results['count']);
+        $this->assertEquals(50, $results['min']);
+        $this->assertEquals(70, $results['max']);
+        $this->assertEquals(60, $results['avg']);
+        $this->assertEquals(180, $results['sum']);
     }
 
     /**
