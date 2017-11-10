@@ -62,6 +62,7 @@ All notable changes to this project will be documented in this file based on the
 
 - Added `Query\SpanContaining`, `Query\SpanWithin` and `Query\SpanNot` [#1319](https://github.com/ruflin/Elastica/pull/1319)
 - Implemented [Pipeline](https://www.elastic.co/guide/en/elasticsearch/reference/current/pipeline.html) and [Processors](https://www.elastic.co/guide/en/elasticsearch/reference/current/ingest-processors.html). [#1373](https://github.com/ruflin/Elastica/pull/1373)
+- In PHP 7.2 count() now raises a warning when an invalid parameter is passed. Only arrays and objects implementing the Countable interface should be passed. [#1378](https://github.com/ruflin/Elastica/pull/1378)
 
 
 ## [5.3.0](https://github.com/ruflin/Elastica/compare/5.2.1...5.3.0)

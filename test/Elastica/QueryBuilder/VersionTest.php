@@ -47,7 +47,7 @@ class VersionTest extends BaseTest
         foreach ($version->getSuggesters() as $suggester) {
             $this->assertTrue(
                 method_exists($dsl[2], $suggester),
-                'suggester "'.$suggester.'" in '.get_class($version).' must be defined in '.get_class($dsl[3])
+                'suggester "'.$suggester.'" in '.get_class($version).' must be defined in '.get_class($dsl[2])
             );
         }
     }

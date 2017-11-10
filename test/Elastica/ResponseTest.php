@@ -236,6 +236,6 @@ class ResponseTest extends BaseTest
             $this->assertContains('non-existent-type', $error['reason']);
         }
 
-        $this->assertEquals(0, count($response));
+        $this->assertNull($response);
     }
 }
