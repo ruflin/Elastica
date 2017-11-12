@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 - Added clear() to `Scroll` for closing search context on ES manually
+- Added Elastica\Aggregation\StatsBucket
 
 ### Improvements
 
