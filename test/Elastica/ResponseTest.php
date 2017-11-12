@@ -229,6 +229,6 @@ class ResponseTest extends BaseTest
             Request::GET
         )->getData();
 
-        $this->assertEquals(0, count($response));
+        $this->assertNull($response);
     }
 }
