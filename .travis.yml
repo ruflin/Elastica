@@ -15,6 +15,7 @@ env:
   - TARGET="56"
   - TARGET="70"
   - TARGET="71"
+  - TARGET="72"
 
 before_install:
   # list docker-engine versions, usefull to update the docker engine on travis and trusty
