@@ -1,5 +1,4 @@
 <?php
-
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
@@ -12,7 +11,7 @@ use Elastica\Exception\InvalidException;
 class StatsBucket extends AbstractAggregation
 {
     /**
-     * @param string     $name
+     * @param string      $name
      * @param string|null $bucketsPath
      */
     public function __construct($name, $bucketsPath = null)

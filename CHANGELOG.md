@@ -2,13 +2,24 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/6.0.0-beta1...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/6.0.0...master)
+
+### Backward Compatibility Breaks
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+
+## [6.0.0](https://github.com/ruflin/Elastica/compare/6.0.0-beta1...6.0.0)
 
 ### Backward Compatibility Breaks
 - Return the [_source of inner hit nested](https://github.com/elastic/elasticsearch/pull/26982) as is without wrapping it into its full path context [#1398](https://github.com/ruflin/Elastica/pull/1398)
 - Removed CrossIndex Class as from now use Reindex. [#1411](https://github.com/ruflin/Elastica/pull/1411)
-
-### Bugfixes
 
 ### Added
 
@@ -18,8 +29,6 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 
 - Clear search context on ES after usage in `Scroll`
-
-### Deprecated
 
 
 ## [6.0.0-beta1](https://github.com/ruflin/Elastica/compare/5.3.0...6.0.0-beta1)

@@ -249,7 +249,6 @@ class IndexTest extends BaseTest
         $doc->setRouting($routing1);
         $type->addDocument($doc);
 
-
         $doc = new Document(2, ['name' => 'ruflin']);
         $doc->setRouting($routing1);
         $type->addDocument($doc);
