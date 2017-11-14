@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 - Return the [_source of inner hit nested](https://github.com/elastic/elasticsearch/pull/26982) as is without wrapping it into its full path context [#1398](https://github.com/ruflin/Elastica/pull/1398)
+- Removed CrossIndex Class as from now use Reindex. [#1411](https://github.com/ruflin/Elastica/pull/1411)
 
 ### Bugfixes
 
