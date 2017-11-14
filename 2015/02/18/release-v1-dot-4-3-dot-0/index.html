@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Release v1.4.3.0 - Elastica</title>
+  <meta name="author" content="ruflin">
+
+  
+  <meta name="description" content="Elastica v1.4.3.0 (download). This release is compatible with elasticsearch 1.4.3. Dependencies Project Version Required Elasticsearch 1.4.3 yes &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://elastica.io/Elastica/2015/02/18/release-v1-dot-4-3-dot-0">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-10160648-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Elastica</a></h1>
+  
+    <h2>A PHP client for elasticsearch.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:elastica.io/Elastica" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/examples/">Examples</a></li>
+  <li><a href="/api/latest/">Api</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/faq/">FAQ</a></li>
+</ul>
+
+</nav>
+  <a href="https://github.com/ruflin/Elastica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Release v1.4.3.0</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-18T05:47:20+11:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="https://github.com/ruflin/Elastica/tree/v1.4.3.0">Elastica v1.4.3.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/v1.4.3.0">download</a>). This release is compatible with elasticsearch 1.4.3.</p>
+
+<h2>Dependencies</h2>
+
+<table>
+<thead>
+<tr>
+<th> Project </th>
+<th> Version </th>
+<th> Required </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.4.3">Elasticsearch</a></td>
+<td> 1.4.3 </td>
+<td> yes</td>
+</tr>
+<tr>
+<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.4.2">Elasticsearch mapper attachments plugin</a></td>
+<td>2.4.2</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.4.1">Elasticsearch thrift transport plugin</a></td>
+<td>2.4.1</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.12">Elasticsearch geocluster facet plugin</a></td>
+<td>0.0.12</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Release Notes (changes.txt)</h2>
+
+<ul>
+<li>Added Elastica\Query\MatchPhrase #599</li>
+<li>Added Elastica\Query\MatchPhrasePrefix #599</li>
+<li>Reset PHP 5.3 tests and enable compatibility for PHP 5.3 again</li>
+<li>Update elasticsearch compatibility to 1.4.3 #782</li>
+<li>Add support for scripted metric aggrations #780</li>
+<li>Added availability to specify regexp options in \Elastica\Filters\Regexp #583 #777</li>
+<li>Add HHVM as build in travis #649</li>
+<li>Fixed issue with OutOfMemory exception in travis builds #775</li>
+<li>Add support for filters aggregation #773</li>
+<li>Housekeeping, coding standard #764</li>
+<li>Exception\ElasticsearchException now can be catched like all other exceptions as Exception\ExceptionInterface #762</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="http://github.com/ruflin">ruflin</a></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-18T05:47:20+11:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://elastica.io/Elastica/2015/02/18/release-v1-dot-4-3-dot-0/" data-via="" data-counturl="http://elastica.io/Elastica/2015/02/18/release-v1-dot-4-3-dot-0/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2015/01/26/release-v1-dot-4-2-dot-0/" title="Previous Post: Release v1.4.2.0">&laquo; Release v1.4.2.0</a>
+      
+      
+        <a class="basic-alignment right" href="/2015/05/13/release-2-dot-0-0/" title="Next Post: Release 2.0.0">Release 2.0.0 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2017/11/15/release-6-dot-0-0/">Release 6.0.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/10/05/release-6-dot-0-0-beta1/">Release 6.0.0-beta1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/07/26/release-5-dot-3-0/">Release 5.3.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/06/07/release-5-dot-2-1/">Release 5.2.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2017/04/13/release-5-dot-2-0/">Release 5.2.0</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/116483615197289019288?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - ruflin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
