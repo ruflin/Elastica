@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Elastica]]></title>
-  <link href="http://elastica.io/Elastica/atom.xml" rel="self"/>
-  <link href="http://elastica.io/Elastica/"/>
-  <updated>2017-11-15T10:42:15+11:00</updated>
-  <id>http://elastica.io/Elastica/</id>
+  <link href="http://Elastica.io/atom.xml" rel="self"/>
+  <link href="http://Elastica.io/"/>
+  <updated>2017-11-15T10:51:31+11:00</updated>
+  <id>http://Elastica.io/</id>
   <author>
     <name><![CDATA[ruflin]]></name>
     
@@ -15,14 +15,14 @@
   
   <entry>
     <title type="html"><![CDATA[Release 6.0.0]]></title>
-    <link href="http://elastica.io/Elastica/2017/11/15/release-6-dot-0-0/"/>
+    <link href="http://Elastica.io/2017/11/15/release-6-dot-0-0/"/>
     <updated>2017-11-15T10:27:37+11:00</updated>
-    <id>http://elastica.io/Elastica/2017/11/15/release-6-dot-0-0</id>
+    <id>http://Elastica.io/2017/11/15/release-6-dot-0-0</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/6.0.0">Elastica 6.0.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/6.0.0">download</a>).</p>
 
 <p>This is the firts GA release of the 6.x release cycle. The release is compatible with Elasticsearch 6.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/release-notes-6.0.0.html">Elasticsearch 6.0.0</a>.</p>
 
-<p>For previous breaking changes in 6.0 make sure to also have a look at the <a href="http://elastica.io/Elastica/2017/10/05/release-6-dot-0-0-beta1/">breaking changes in 6.0.0-beta1</a> release.</p>
+<p>For previous breaking changes in 6.0 make sure to also have a look at the <a href="http://Elastica.io/2017/10/05/release-6-dot-0-0-beta1/">breaking changes in 6.0.0-beta1</a> release.</p>
 
 <h3>Backward Compatibility Breaks</h3>
 
@@ -51,9 +51,9 @@
   
   <entry>
     <title type="html"><![CDATA[Release 6.0.0-beta1]]></title>
-    <link href="http://elastica.io/Elastica/2017/10/05/release-6-dot-0-0-beta1/"/>
+    <link href="http://Elastica.io/2017/10/05/release-6-dot-0-0-beta1/"/>
     <updated>2017-10-05T21:56:41+11:00</updated>
-    <id>http://elastica.io/Elastica/2017/10/05/release-6-dot-0-0-beta1</id>
+    <id>http://Elastica.io/2017/10/05/release-6-dot-0-0-beta1</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/6.0.0-beta1">Elastica 6.0.0-beta1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/6.0.0-beta1">download</a>).</p>
 
 <p>This is the first pre release of the 6.x release cycle. The release is compatible with Elasticsearch 6.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/release-notes-6.0.0-rc1.html">Elasticsearch 6.0.0-rc1</a>.</p>
@@ -113,9 +113,9 @@
   
   <entry>
     <title type="html"><![CDATA[Release 5.3.0]]></title>
-    <link href="http://elastica.io/Elastica/2017/07/26/release-5-dot-3-0/"/>
+    <link href="http://Elastica.io/2017/07/26/release-5-dot-3-0/"/>
     <updated>2017-07-26T22:11:19+10:00</updated>
-    <id>http://elastica.io/Elastica/2017/07/26/release-5-dot-3-0</id>
+    <id>http://Elastica.io/2017/07/26/release-5-dot-3-0</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/5.3.0">Elastica 5.3.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.3.0">download</a>).</p>
 
 <p>This release is compatible with Elasticsearch 5.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.4/release-notes-5.4.1.html">elasticsearch 5.4.1</a>.</p>
@@ -147,9 +147,9 @@
   
   <entry>
     <title type="html"><![CDATA[Release 5.2.1]]></title>
-    <link href="http://elastica.io/Elastica/2017/06/07/release-5-dot-2-1/"/>
+    <link href="http://Elastica.io/2017/06/07/release-5-dot-2-1/"/>
     <updated>2017-06-07T22:59:05+10:00</updated>
-    <id>http://elastica.io/Elastica/2017/06/07/release-5-dot-2-1</id>
+    <id>http://Elastica.io/2017/06/07/release-5-dot-2-1</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/5.2.1">Elastica 5.2.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.2.1">download</a>).</p>
 
 <p>This release is compatible with Elasticsearch 5.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.2/release-notes-5.2.2.html">elasticsearch 5.2.2</a>.</p>
@@ -192,9 +192,9 @@
   
   <entry>
     <title type="html"><![CDATA[Release 5.2.0]]></title>
-    <link href="http://elastica.io/Elastica/2017/04/13/release-5-dot-2-0/"/>
+    <link href="http://Elastica.io/2017/04/13/release-5-dot-2-0/"/>
     <updated>2017-04-13T19:04:37+10:00</updated>
-    <id>http://elastica.io/Elastica/2017/04/13/release-5-dot-2-0</id>
+    <id>http://Elastica.io/2017/04/13/release-5-dot-2-0</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/5.2.0">Elastica 5.2.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.2.0">download</a>).</p>
 
 <p>This release is compatible with Elasticsearch 5.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.2/release-notes-5.2.2.html">elasticsearch 5.2.2</a>.</p>
@@ -247,9 +247,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 5.1.0]]></title>
-    <link href="http://elastica.io/Elastica/2017/02/15/release-5-dot-1-0/"/>
+    <link href="http://Elastica.io/2017/02/15/release-5-dot-1-0/"/>
     <updated>2017-02-15T22:23:04+11:00</updated>
-    <id>http://elastica.io/Elastica/2017/02/15/release-5-dot-1-0</id>
+    <id>http://Elastica.io/2017/02/15/release-5-dot-1-0</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/5.1.0">Elastica 5.1.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.1.0">download</a>).</p>
 
 <p>This release is compatible with Elasticsearch 5.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.1/release-notes-5.1.2.html">elasticsearch 5.1.2</a>.</p>
@@ -317,9 +317,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 5.0.0]]></title>
-    <link href="http://elastica.io/Elastica/2016/12/14/release-5-dot-0-0/"/>
+    <link href="http://Elastica.io/2016/12/14/release-5-dot-0-0/"/>
     <updated>2016-12-14T19:58:44+11:00</updated>
-    <id>http://elastica.io/Elastica/2016/12/14/release-5-dot-0-0</id>
+    <id>http://Elastica.io/2016/12/14/release-5-dot-0-0</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/5.0.0">Elastica 5.0.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.0.0">download</a>).</p>
 
 <p>This is the first GA release of the Elastica 5.x series. Elastica is now compatible with <a href="(https://www.elastic.co/guide/en/elasticsearch/reference/5.0/release-notes-5.0.0.html">Elasticsearch 5.0</a>). For all the backward compatibility changes also check <a href="http://elastica.io/2016/11/09/release-5-dot-0-0-beta1/">5.0.0-beta1 release notes</a>. For all the major changes in Elasticsearch 5.0 check this <a href="https://www.elastic.co/blog/elasticsearch-5-0-0-released">blog post</a>.</p>
@@ -357,9 +357,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 5.0.0-beta1]]></title>
-    <link href="http://elastica.io/Elastica/2016/11/10/release-5-dot-0-0-beta1/"/>
+    <link href="http://Elastica.io/2016/11/10/release-5-dot-0-0-beta1/"/>
     <updated>2016-11-10T08:11:31+11:00</updated>
-    <id>http://elastica.io/Elastica/2016/11/10/release-5-dot-0-0-beta1</id>
+    <id>http://Elastica.io/2016/11/10/release-5-dot-0-0-beta1</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/5.0.0-beta1">Elastica 5.0.0-beta1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.0.0-beta1">download</a>).</p>
 
 <p>This is the first major release of the Elastica 5.x series. Elastica is now compatible with <a href="(https://www.elastic.co/guide/en/elasticsearch/reference/5.0/release-notes-5.0.0.html">Elasticsearch 5.0</a>). For all the major changes in Elasticsearch 5.0 check this <a href="https://www.elastic.co/blog/elasticsearch-5-0-0-released">blog post</a>.</p>
@@ -469,9 +469,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 3.2.3]]></title>
-    <link href="http://elastica.io/Elastica/2016/09/23/release-3-dot-2-3/"/>
+    <link href="http://Elastica.io/2016/09/23/release-3-dot-2-3/"/>
     <updated>2016-09-23T20:26:28+10:00</updated>
-    <id>http://elastica.io/Elastica/2016/09/23/release-3-dot-2-3</id>
+    <id>http://Elastica.io/2016/09/23/release-3-dot-2-3</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/3.2.3">Elastica 3.2.3</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/3.2.3">download</a>).</p>
 
 <p>This release is compatible with Elasticsearch 2.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.4/release-notes-2.4.0.html">elasticsearch 2.4.0</a>.</p>
@@ -504,9 +504,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 3.2.2]]></title>
-    <link href="http://elastica.io/Elastica/2016/08/23/release-3-dot-2-2/"/>
+    <link href="http://Elastica.io/2016/08/23/release-3-dot-2-2/"/>
     <updated>2016-08-23T22:45:27+10:00</updated>
-    <id>http://elastica.io/Elastica/2016/08/23/release-3-dot-2-2</id>
+    <id>http://Elastica.io/2016/08/23/release-3-dot-2-2</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/3.2.2">Elastica 3.2.2</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/3.2.2">download</a>).</p>
 
 <p>This release is compatible with Elasticsearch 2.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/release-notes-2.3.2.html">elasticsearch 2.3.2</a>.</p>
@@ -549,9 +549,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 3.2.1]]></title>
-    <link href="http://elastica.io/Elastica/2016/06/15/release-3-dot-2-1/"/>
+    <link href="http://Elastica.io/2016/06/15/release-3-dot-2-1/"/>
     <updated>2016-06-15T16:18:56+10:00</updated>
-    <id>http://elastica.io/Elastica/2016/06/15/release-3-dot-2-1</id>
+    <id>http://Elastica.io/2016/06/15/release-3-dot-2-1</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/3.2.1">Elastica 3.2.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/3.2.1">download</a>).</p>
 
 <p>This release is compatible with Elasticsearch 2.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/release-notes-2.3.2.html">elasticsearch 2.3.2</a>.</p>
@@ -583,9 +583,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 3.2.0]]></title>
-    <link href="http://elastica.io/Elastica/2016/05/02/release-3-dot-2-0/"/>
+    <link href="http://Elastica.io/2016/05/02/release-3-dot-2-0/"/>
     <updated>2016-05-02T16:11:13+10:00</updated>
-    <id>http://elastica.io/Elastica/2016/05/02/release-3-dot-2-0</id>
+    <id>http://Elastica.io/2016/05/02/release-3-dot-2-0</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/3.2.0">Elastica 3.2.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/3.2.0">download</a>).</p>
 
 <p>This release is compatible with Elasticsearch 2.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/release-notes-2.3.2.html">elasticsearch 2.3.2</a>.</p>
@@ -642,9 +642,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 3.1.1]]></title>
-    <link href="http://elastica.io/Elastica/2016/03/18/release-3-dot-1-1/"/>
+    <link href="http://Elastica.io/2016/03/18/release-3-dot-1-1/"/>
     <updated>2016-03-18T17:58:25+11:00</updated>
-    <id>http://elastica.io/Elastica/2016/03/18/release-3-dot-1-1</id>
+    <id>http://Elastica.io/2016/03/18/release-3-dot-1-1</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/3.1.1">Elastica 3.1.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/3.1.1">download</a>).</p>
 
 <p>This release is compatible with Elasticsearch 2.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.2/release-notes-2.2.1.html">elasticsearch 2.2.1</a>.</p>
@@ -673,9 +673,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 3.1.0]]></title>
-    <link href="http://elastica.io/Elastica/2016/01/31/release-3-dot-1-0/"/>
+    <link href="http://Elastica.io/2016/01/31/release-3-dot-1-0/"/>
     <updated>2016-01-31T07:23:56+11:00</updated>
-    <id>http://elastica.io/Elastica/2016/01/31/release-3-dot-1-0</id>
+    <id>http://Elastica.io/2016/01/31/release-3-dot-1-0</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/3.1.0">Elastica 3.1.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/3.1.0">download</a>). This release is compatible with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.1/release-notes-2.1.1.html">elasticsearch 2.1.1</a>.</p>
 
 <h2>Backward Compatibility Breaks</h2>
@@ -742,9 +742,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 3.0.1]]></title>
-    <link href="http://elastica.io/Elastica/2016/01/06/release-3-dot-0-1/"/>
+    <link href="http://Elastica.io/2016/01/06/release-3-dot-0-1/"/>
     <updated>2016-01-06T00:38:19+11:00</updated>
-    <id>http://elastica.io/Elastica/2016/01/06/release-3-dot-0-1</id>
+    <id>http://Elastica.io/2016/01/06/release-3-dot-0-1</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/3.0.1">Elastica 3.0.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/3.0.1">download</a>). This release is compatible with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.1/release-notes-2.1.1.html">elasticsearch 2.1.1</a>.</p>
 
 <p>Elastica 3.0.1 is a bugfix release. Nested filters were readded. More details for the 3.0.0 release can be found under <a href="http://elastica.io/2016/01/04/release-3-dot-0-0/">Release 3.0.0</a>.</p>
@@ -791,9 +791,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 3.0.0]]></title>
-    <link href="http://elastica.io/Elastica/2016/01/05/release-3-dot-0-0/"/>
+    <link href="http://Elastica.io/2016/01/05/release-3-dot-0-0/"/>
     <updated>2016-01-05T02:11:26+11:00</updated>
-    <id>http://elastica.io/Elastica/2016/01/05/release-3-dot-0-0</id>
+    <id>http://Elastica.io/2016/01/05/release-3-dot-0-0</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/3.0.0">Elastica 3.0.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/3.0.0">download</a>). This release is compatible with <a href="https://www.elastic.co/blog/elasticsearch-2-0-0-released">elasticsearch 2.0.0</a>.</p>
 
 <p>Elastica 3.0.0 is a major release. It is compatible with elasticsearch 2.0 which means also bringing lots of compatibility break. Switch to Elastica 3.0.0-beta1 does not only mean you have to adapt your code but also migrate to elasticsearch 2.0. For the migration to elasticsearch 2.0 check the following two blog posts:</p>
@@ -882,9 +882,9 @@ Use <code>\Elastica\Exception\ResponseException::getResponse::getFullError</code
   
   <entry>
     <title type="html"><![CDATA[Release 3.0.0-beta1]]></title>
-    <link href="http://elastica.io/Elastica/2015/11/27/release-3-dot-0-0-beta1/"/>
+    <link href="http://Elastica.io/2015/11/27/release-3-dot-0-0-beta1/"/>
     <updated>2015-11-27T08:58:49+11:00</updated>
-    <id>http://elastica.io/Elastica/2015/11/27/release-3-dot-0-0-beta1</id>
+    <id>http://Elastica.io/2015/11/27/release-3-dot-0-0-beta1</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/3.0.0-beta1">Elastica 3.0.0-beta1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/3.0.0-beta1">download</a>). This release is compatible with <a href="https://www.elastic.co/blog/elasticsearch-2-0-0-released">elasticsearch 2.0.0</a>.</p>
 
 <p>Elastica 3.0.0-beta1 is a major release. It is compatible with elasticsearch 2.0 which means also bringing lots of compatibility break. Switch to Elastica 3.0.0-beta1 does not only mean you have to adapt your code but also migrate to elasticsearch 2.0. We tried to make the migration as easy as possible by adding deprecated messages and exceptions for the stuff that was or will be removed. Make sure to test your application with the newest version.</p>
@@ -1002,9 +1002,9 @@ All is based on docker contaienrs now</li>
   
   <entry>
     <title type="html"><![CDATA[Release 2.3.1]]></title>
-    <link href="http://elastica.io/Elastica/2015/10/18/release-2-dot-3-1/"/>
+    <link href="http://Elastica.io/2015/10/18/release-2-dot-3-1/"/>
     <updated>2015-10-18T12:40:33+11:00</updated>
-    <id>http://elastica.io/Elastica/2015/10/18/release-2-dot-3-1</id>
+    <id>http://Elastica.io/2015/10/18/release-2-dot-3-1</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/2.3.1">Elastica 2.3.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/2.3.1">download</a>). This release is compatible with elasticsearch 1.7.3.</p>
 
 <h3>Bugfixes</h3>
@@ -1089,10 +1089,10 @@ All is based on docker contaienrs now</li>
   
   <entry>
     <title type="html"><![CDATA[Elastica 2.3.0 broken backward compatibility explanation]]></title>
-    <link href="http://elastica.io/Elastica/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation/"/>
+    <link href="http://Elastica.io/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation/"/>
     <updated>2015-09-22T16:23:43+10:00</updated>
-    <id>http://elastica.io/Elastica/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation</id>
-    <content type="html"><![CDATA[<p><a href="http://elastica.io/Elastica/2015/09/15/release-2-dot-3-0/">Elastica 2.3.0</a> is out and introduced lazy toArray, that broke backward compatibility. Lets talk about this change in details and answer on some questions, that developers, who use Elastica can have.</p>
+    <id>http://Elastica.io/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation</id>
+    <content type="html"><![CDATA[<p><a href="http://Elastica.io/2015/09/15/release-2-dot-3-0/">Elastica 2.3.0</a> is out and introduced lazy toArray, that broke backward compatibility. Lets talk about this change in details and answer on some questions, that developers, who use Elastica can have.</p>
 
 <h2>What has changed?</h2>
 
@@ -1221,18 +1221,18 @@ All is based on docker contaienrs now</li>
 
 <h2>Summary</h2>
 
-<p>That are all cases, which can be broken in your projects after the migration to <a href="http://elastica.io/Elastica/2015/09/15/release-2-dot-3-0/">Elastica 2.3.0+</a>. This latest change now gives you the freedom to develop more complex solutions without low-level tricks. Only a very small amount of developers should be affected by the above mentioned issues. In case you have some questions about the changes above, drop us a line on <a href="https://gitter.im/ruflin/Elastica">Gitter</a> so we can help you out.</p>
+<p>That are all cases, which can be broken in your projects after the migration to <a href="http://Elastica.io/2015/09/15/release-2-dot-3-0/">Elastica 2.3.0+</a>. This latest change now gives you the freedom to develop more complex solutions without low-level tricks. Only a very small amount of developers should be affected by the above mentioned issues. In case you have some questions about the changes above, drop us a line on <a href="https://gitter.im/ruflin/Elastica">Gitter</a> so we can help you out.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Release 2.3.0]]></title>
-    <link href="http://elastica.io/Elastica/2015/09/16/release-2-dot-3-0/"/>
+    <link href="http://Elastica.io/2015/09/16/release-2-dot-3-0/"/>
     <updated>2015-09-16T06:11:47+10:00</updated>
-    <id>http://elastica.io/Elastica/2015/09/16/release-2-dot-3-0</id>
+    <id>http://Elastica.io/2015/09/16/release-2-dot-3-0</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/2.3.0">Elastica 2.3.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/2.3.0">download</a>). This release is compatible with elasticsearch 1.7.2.</p>
 
-<p>As this release breaks backward compatibility, a detailed explanation about the breaking changes can be found <a href="http://elastica.io/Elastica/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation/">here</a></p>
+<p>As this release breaks backward compatibility, a detailed explanation about the breaking changes can be found <a href="http://Elastica.io/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation/">here</a></p>
 
 <h3>Backward Compatibility Breaks</h3>
 

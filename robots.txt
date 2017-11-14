@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://elastica.io/Elastica/sitemap.xml 
+Sitemap: http://Elastica.io/sitemap.xml 
