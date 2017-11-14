@@ -12,9 +12,13 @@ branches:
     - master
 
 env:
-  - TARGET="70"
-  - TARGET="71"
-  - TARGET="72"
+  global:
+    - DOCKER_VERSION=17.09.0
+    - DOCKER_COMPOSE_VERSION=1.17.1
+  matrix:
+    - TARGET="70"
+    - TARGET="71"
+    - TARGET="72"
 
 before_install:
   # check running "docker engine" and "docker-compose" version on travis
@@ -25,10 +29,10 @@ before_install:
 #  - sudo apt-cache madison docker-engine
 
   # update docker engine to the desired version
-  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-ce=17.09.0~ce-0~ubuntu
+  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-ce=${DOCKER_VERSION}~ce-0~ubuntu --allow-downgrades
 
   - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
