@@ -25,7 +25,7 @@ before_install:
 #  - sudo apt-cache madison docker-engine
 
   # update docker engine to the desired version
-  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-ce=17.07.0~ce-0~ubuntu
+  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-ce=17.09.0~ce-0~ubuntu
 
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` > docker-compose
