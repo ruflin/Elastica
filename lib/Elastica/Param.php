@@ -182,7 +182,7 @@ class Param implements ArrayableInterface, \Countable
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @return int
      */
