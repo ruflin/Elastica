@@ -19,8 +19,8 @@
         "pdepend/pdepend":"~2.2",
         "phploc/phploc":"~2.1",
         "phpmd/phpmd":"~2.3",
-        "phpunit/phpunit":"~5.6",
         "sebastian/phpcpd":"~2.0",
+        "phpunit/phpunit":"~6.5",
         "squizlabs/php_codesniffer":"~2.5"
     }
 }
