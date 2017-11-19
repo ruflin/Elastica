@@ -112,6 +112,9 @@ class Http extends AbstractTransport
         $headersConfig = $connection->hasConfig('headers') ? $connection->getConfig('headers') : [];
 
         $headers = [];
+        
+        $headers[] = 'Accept: application/json';
+        $headers[] = 'Content-Type: application/json';
 
         if (!empty($headersConfig)) {
             $headers = [];
