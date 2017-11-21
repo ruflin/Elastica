@@ -106,10 +106,18 @@ class Util
     {
         $result = $term;
         // \ escaping has to be first, otherwise escaped later once again
-        $chars = ['\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '/', '<', '>'];
+        $escapableChars = ['\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '/'];
 
-        foreach ($chars as $char) {
+        foreach ($escapableChars as $char) {
             $result = str_replace($char, '\\'.$char, $result);
+        }
+        
+        // < and > cannot be escaped, so they should be removed
+        // @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#_reserved_characters
+        $nonEscapableChars = ['<', '>'];
+
+        foreach ($nonEscapableChars as $char) {
+            $result = str_replace($char, '', $result);
         }
 
         return $result;
