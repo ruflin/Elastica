@@ -72,12 +72,12 @@ class Util
     }
 
     /**
-     * Replace the following reserved words: AND OR NOT
+     * Replace known reserved words (e.g. AND OR NOT)
      * and
-     * escapes the following terms: + - && || ! ( ) { } [ ] ^ " ~ * ? : \.
+     * escape known special characters (e.g. + - && || ! ( ) { } [ ] ^ " ~ * ? : etc.)
      *
-     * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators
-     * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Escaping%20Special%20Characters
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/5.1/query-dsl-query-string-query.html#_boolean_operators
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/5.1/query-dsl-query-string-query.html#_reserved_characters
      *
      * @param string $term Query term to replace and escape
      *
