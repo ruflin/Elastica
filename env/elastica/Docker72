@@ -1,6 +1,6 @@
 # This image is the base image for the Elastica development and includes all parts which rarely change
 # PHP 7 Docker file with Composer installed
-FROM php:7.2-rc
+FROM php:7.2
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 RUN apt-get update && apt-get install -y \
