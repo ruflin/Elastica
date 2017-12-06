@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 
+* Added request parameters to `Client->deleteDocuments()`. [#1419](https://github.com/ruflin/Elastica/pull/1419)
+
 ### Improvements
 
 ### Deprecated
