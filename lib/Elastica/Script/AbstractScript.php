@@ -56,8 +56,8 @@ abstract class AbstractScript extends AbstractUpdateAction
 
     private static function _createFromArray(array $data)
     {
-        $params = isset($data['script']['params']) ? $data['script']['params'] : [];
-        $lang = isset($data['script']['lang']) ? $data['script']['lang'] : null;
+        $params = $data['script']['params'] ?? [];
+        $lang = $data['script']['lang'] ?? null;
 
         if (!is_array($params)) {
             throw new InvalidException('Script params must be an array');
