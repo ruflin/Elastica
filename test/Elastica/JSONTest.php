@@ -2,13 +2,14 @@
 namespace Elastica\Test;
 
 use Elastica\JSON;
+use PHPUnit\Framework\TestCase;
 
 /**
  * JSONTest.
  *
  * @author Oleg Andreyev <oleg.andreyev@intexsys.lv>
  */
-class JSONTest extends \PHPUnit_Framework_TestCase
+class JSONTest extends TestCase
 {
     public function testStringifyMustNotThrowExceptionOnValid()
     {

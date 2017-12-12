@@ -4,9 +4,11 @@ namespace Elastica\Test;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Index;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Util\Test;
 use Psr\Log\LoggerInterface;
 
-class Base extends \PHPUnit_Framework_TestCase
+class Base extends TestCase
 {
     protected static function hideDeprecated()
     {
@@ -201,21 +203,21 @@ class Base extends \PHPUnit_Framework_TestCase
 
     protected function _isUnitGroup()
     {
-        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+        $groups = Test::getGroups(get_class($this), $this->getName(false));
 
         return in_array('unit', $groups);
     }
 
     protected function _isFunctionalGroup()
     {
-        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+        $groups = Test::getGroups(get_class($this), $this->getName(false));
 
         return in_array('functional', $groups);
     }
 
     protected function _isBenchmarkGroup()
     {
-        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+        $groups = Test::getGroups(get_class($this), $this->getName(false));
 
         return in_array('benchmark', $groups);
     }
