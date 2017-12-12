@@ -101,7 +101,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         $data = $this->_response->getData();
 
-        return isset($data['suggest']) ? $data['suggest'] : [];
+        return $data['suggest'] ?? [];
     }
 
     /**
@@ -125,7 +125,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         $data = $this->_response->getData();
 
-        return isset($data['aggregations']) ? $data['aggregations'] : [];
+        return $data['aggregations'] ?? [];
     }
 
     /**
@@ -156,7 +156,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         $data = $this->_response->getData();
 
-        return isset($data['hits']['total']) ? (int) $data['hits']['total'] : 0;
+        return (int) ($data['hits']['total'] ?? 0);
     }
 
     /**
@@ -168,7 +168,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         $data = $this->_response->getData();
 
-        return isset($data['hits']['max_score']) ? (float) $data['hits']['max_score'] : 0;
+        return (float) ($data['hits']['max_score'] ?? 0);
     }
 
     /**
@@ -180,7 +180,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         $data = $this->_response->getData();
 
-        return isset($data['took']) ? $data['took'] : 0;
+        return $data['took'] ?? 0;
     }
 
     /**

@@ -175,7 +175,7 @@ class Mapping
      */
     public function getParam($key)
     {
-        return isset($this->_mapping[$key]) ? $this->_mapping[$key] : null;
+        return $this->_mapping[$key] ?? null;
     }
 
     /**

@@ -144,7 +144,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
      */
     public function offsetGet($offset)
     {
-        return isset($this->_resultSets[$offset]) ? $this->_resultSets[$offset] : null;
+        return $this->_resultSets[$offset] ?? null;
     }
 
     /**
