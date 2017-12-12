@@ -158,49 +158,4 @@ class BoolQueryTest extends BaseTest
 
         $this->assertEquals($resultSet->count(), $docNumber);
     }
-
-    /**
-     * @group functional
-     */
-    public function testOldObject()
-    {
-        if (version_compare(phpversion(), 7, '>=')) {
-            self::markTestSkipped('These objects are not supported in PHP 7');
-        }
-
-        $index = $this->_createIndex();
-        $type = new Type($index, 'test');
-
-        $docNumber = 3;
-        for ($i = 0; $i < $docNumber; ++$i) {
-            $doc = new Document($i, ['email' => 'test@test.com']);
-            $type->addDocument($doc);
-        }
-
-        $index->refresh();
-
-        $this->hideDeprecated();
-        $boolQuery = new \Elastica\Query\Bool();
-        $this->showDeprecated();
-
-        $resultSet = $type->search($boolQuery);
-
-        $this->assertEquals($resultSet->count(), $docNumber);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testOldObjectDeprecated()
-    {
-        if (version_compare(phpversion(), 7, '>=')) {
-            self::markTestSkipped('These objects are not supported in PHP 7');
-        }
-
-        $this->hideDeprecated();
-        $reflection = new \ReflectionClass(new \Elastica\Query\Bool());
-        $this->showDeprecated();
-
-        $this->assertFileDeprecated($reflection->getFileName(), 'Elastica\Query\Bool is deprecated. Use BoolQuery instead. From PHP7 bool is reserved word and this class will be removed in further Elastica releases');
-    }
 }

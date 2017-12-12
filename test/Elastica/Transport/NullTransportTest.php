@@ -74,26 +74,4 @@ class NullTransportTest extends BaseTest
         $data = $response->getData();
         $this->assertEquals($params, $data['params']);
     }
-
-    /**
-     * @group functional
-     */
-    public function testOldObject()
-    {
-        if (version_compare(phpversion(), 7, '>=')) {
-            self::markTestSkipped('These objects are not supported in PHP 7');
-        }
-
-        $request = new Request('/test');
-        $params = ['name' => 'ruflin'];
-        $this->hideDeprecated();
-        $transport = new \Elastica\Transport\Null();
-        $this->showDeprecated();
-        $response = $transport->exec($request, $params);
-
-        $this->assertInstanceOf(Response::class, $response);
-
-        $data = $response->getData();
-        $this->assertEquals($params, $data['params']);
-    }
 }

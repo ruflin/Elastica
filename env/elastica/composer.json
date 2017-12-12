@@ -12,6 +12,7 @@
         }
     ],
     "require": {
+        "php": "^7.0",
         "phpdocumentor/phpdocumentor":"~2.8",
         "fabpot/php-cs-fixer":"1.11.*",
         "mayflower/php-codebrowser":"~1.1",
