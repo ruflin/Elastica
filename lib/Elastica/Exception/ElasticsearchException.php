@@ -71,9 +71,9 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     {
         if (preg_match('/^(\w+)\[.*\]/', $error, $matches)) {
             return $matches[1];
-        } else {
-            return;
         }
+
+        return;
     }
 
     /**
