@@ -113,7 +113,7 @@ class Http extends AbstractTransport
 
         if (!empty($headersConfig)) {
             $headers = [];
-            while (list($header, $headerValue) = each($headersConfig)) {
+            foreach ($headersConfig as $header => $headerValue) {
                 array_push($headers, $header.': '.$headerValue);
             }
         }

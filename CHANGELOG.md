@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 
 ### Bugfixes
+- Remove [`each()`](http://www.php.net/each) usage to fix PHP 7.2 compatibility
 
 ### Added
 
