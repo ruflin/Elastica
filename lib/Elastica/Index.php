@@ -119,36 +119,38 @@ class Index implements SearchableInterface
      * Uses _bulk to send documents to the server.
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array                      $options Array of query params to use for query. For possible options check es api
      *
      * @return \Elastica\Bulk\ResponseSet
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
-    public function updateDocuments(array $docs)
+    public function updateDocuments(array $docs, array $options = [])
     {
         foreach ($docs as $doc) {
             $doc->setIndex($this->getName());
         }
 
-        return $this->getClient()->updateDocuments($docs);
+        return $this->getClient()->updateDocuments($docs, $options);
     }
 
     /**
      * Uses _bulk to send documents to the server.
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array                      $options Array of query params to use for query. For possible options check es api
      *
      * @return \Elastica\Bulk\ResponseSet
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
-    public function addDocuments(array $docs)
+    public function addDocuments(array $docs, array $options = [])
     {
         foreach ($docs as $doc) {
             $doc->setIndex($this->getName());
         }
 
-        return $this->getClient()->addDocuments($docs);
+        return $this->getClient()->addDocuments($docs, $options);
     }
 
     /**
