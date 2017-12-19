@@ -55,9 +55,9 @@ class Settings
         if (!empty($setting)) {
             if (isset($settings[$setting])) {
                 return $settings[$setting];
-            } else {
-                return;
             }
+
+            return;
         }
 
         return $settings;
@@ -80,23 +80,23 @@ class Settings
         if (!empty($setting)) {
             if (isset($settings[$setting])) {
                 return $settings[$setting];
-            } else {
-                if (strpos($setting, '.') !== false) {
-                    // convert dot notation to nested arrays
-                    $keys = explode('.', $setting);
-                    foreach ($keys as $key) {
-                        if (isset($settings[$key])) {
-                            $settings = $settings[$key];
-                        } else {
-                            return;
-                        }
-                    }
+            }
 
-                    return $settings;
+            if (strpos($setting, '.') !== false) {
+                // convert dot notation to nested arrays
+                $keys = explode('.', $setting);
+                foreach ($keys as $key) {
+                    if (isset($settings[$key])) {
+                        $settings = $settings[$key];
+                    } else {
+                        return;
+                    }
                 }
 
-                return;
+                return $settings;
             }
+
+            return;
         }
 
         return $settings;

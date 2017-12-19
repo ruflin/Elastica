@@ -242,9 +242,9 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         if ($this->valid()) {
             return $this->_results[$this->key()];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -314,9 +314,9 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         if ($this->offsetExists($offset)) {
             return $this->_results[$offset];
-        } else {
-            throw new InvalidException('Offset does not exist.');
         }
+
+        throw new InvalidException('Offset does not exist.');
     }
 
     /**
