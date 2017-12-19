@@ -204,9 +204,9 @@ class Type implements SearchableInterface
      * Uses _bulk to send documents to the server.
      *
      * @param objects[] $objects
+     * @param array     $options Array of query params to use for query. For possible options check es api
      *
-     * @return \Elastica\Bulk\ResponseSet
-     *
+     * @return Bulk\ResponseSet
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
     public function addObjects(array $objects, array $options = [])
