@@ -167,48 +167,49 @@ class Type implements SearchableInterface
      * Uses _bulk to send documents to the server.
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array                      $options Array of query params to use for query. For possible options check es api
      *
      * @return \Elastica\Bulk\ResponseSet
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
-    public function updateDocuments(array $docs)
+    public function updateDocuments(array $docs, array $options = [])
     {
         foreach ($docs as $doc) {
             $doc->setType($this->getName());
         }
 
-        return $this->getIndex()->updateDocuments($docs);
+        return $this->getIndex()->updateDocuments($docs, $options);
     }
 
     /**
      * Uses _bulk to send documents to the server.
      *
      * @param array|\Elastica\Document[] $docs Array of Elastica\Document
-     *
+     * @param array                      $options Array of query params to use for query. For possible options check es api
      * @return \Elastica\Bulk\ResponseSet
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
-    public function addDocuments(array $docs)
+    public function addDocuments(array $docs, array $options = [])
     {
         foreach ($docs as $doc) {
             $doc->setType($this->getName());
         }
 
-        return $this->getIndex()->addDocuments($docs);
+        return $this->getIndex()->addDocuments($docs, $options);
     }
 
     /**
      * Uses _bulk to send documents to the server.
      *
      * @param objects[] $objects
+     * @param array     $options Array of query params to use for query. For possible options check es api
      *
-     * @return \Elastica\Bulk\ResponseSet
-     *
+     * @return Bulk\ResponseSet
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
-    public function addObjects(array $objects)
+    public function addObjects(array $objects, array $options = [])
     {
         if (!isset($this->_serializer)) {
             throw new RuntimeException('No serializer defined');
@@ -223,7 +224,7 @@ class Type implements SearchableInterface
             $docs[] = $doc;
         }
 
-        return $this->getIndex()->addDocuments($docs);
+        return $this->getIndex()->addDocuments($docs, $options);
     }
 
     /**
