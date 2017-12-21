@@ -19,6 +19,10 @@ $config = Symfony\CS\Config\Config::create()
         'short_array_syntax',
         // [contrib] Ensure there is no code on the same line as the PHP open tag.
         'newline_after_open_tag',
+        // [contrib] Use null coalescing operator ?? where possible
+        'ternary_to_null_coalescing',
+        //  [contrib] There should not be useless else cases.
+        'no_useless_else',
     ))
     ->finder($finder);
 
