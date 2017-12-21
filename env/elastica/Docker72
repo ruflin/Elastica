@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y \
 	graphviz \
 	libxslt-dev \
 	nano \
-
 	zip unzip \
 	wget
 	# XSL and Graphviz for PhpDocumentor
