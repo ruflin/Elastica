@@ -62,9 +62,9 @@ abstract class AbstractFilter extends Param
      * @inheritdoc
      */
     public function toArray() {
-        if (! $this->hasParam('_cache') && $this->isSupportingCache()) {
-            $this->setCached(false);
-        }
+//        if (! $this->hasParam('_cache') && $this->isSupportingCache()) {
+//            $this->setCached(false);
+//        }
 
         return parent::toArray();
     }
