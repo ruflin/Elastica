@@ -78,7 +78,7 @@ class Term extends AbstractSuggest
      */
     public function setPrefixLength($length)
     {
-        return $this->setParam('prefix_len', (int) $length);
+        return $this->setParam('prefix_length', (int) $length);
     }
 
     /**
@@ -125,5 +125,17 @@ class Term extends AbstractSuggest
     public function setMaxTermFrequency($max)
     {
         return $this->setParam('max_term_freq', $max);
+    }
+
+    /**
+     * Set the number of distance which implementation to use for comparing how similar suggested terms are.
+     *
+     * @param int $distance
+     *
+     * @return $this
+     */
+    public function setMaxTermFrequency($distance)
+    {
+        return $this->setParam('string_distance', $distance);
     }
 }
