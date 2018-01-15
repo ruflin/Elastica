@@ -134,7 +134,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setMaxTermFrequency($distance)
+    public function setStringDistance($distance)
     {
         return $this->setParam('string_distance', $distance);
     }
