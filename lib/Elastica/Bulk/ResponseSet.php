@@ -54,6 +54,25 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     }
 
     /**
+     * Returns first found error (full array).
+     *
+     * @return array|string
+     */
+    public function getFullError()
+    {
+        $error = '';
+
+        foreach ($this->getBulkResponses() as $bulkResponse) {
+            if ($bulkResponse->hasError()) {
+                $error = $bulkResponse->getFullError();
+                break;
+            }
+        }
+
+        return $error;
+    }
+
+    /**
      * @return bool
      */
     public function isOk()
