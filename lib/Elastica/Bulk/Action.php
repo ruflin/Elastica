@@ -205,7 +205,11 @@ class Action
             if (is_string($source)) {
                 $string .= $source;
             } elseif (is_array($source) && array_key_exists('doc', $source) && is_string($source['doc'])) {
-                $docAsUpsert = (isset($source['doc_as_upsert'])) ? ', "doc_as_upsert": '.$source['doc_as_upsert'] : '';
+                if (isset($source['doc_as_upsert'])) {
+                    $docAsUpsert = ', "doc_as_upsert": ' . ($source['doc_as_upsert'] ? 'true' : 'false' );
+                } else {
+                    $docAsUpsert = '';
+                }
                 $string .= '{"doc": '.$source['doc'].$docAsUpsert.'}';
             } else {
                 $string .= JSON::stringify($source, JSON_UNESCAPED_UNICODE);
