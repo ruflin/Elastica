@@ -4,15 +4,10 @@ All notable changes to this project will be documented in this file based on the
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.1...HEAD)
 
-### Backward Compatibility Breaks
-
-### Bugfixes
-
-### Added
-
 ### Improvements
 
-### Deprecated
+- Introduce getFullError() for ResponseSet
+- Use the above to improve the output of getError() on Response
 
 
 ## [2.3.1](https://github.com/ruflin/Elastica/releases/tag/2.3.1) - 2015-10-17
