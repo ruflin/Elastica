@@ -2,6 +2,7 @@
 namespace Elastica\QueryBuilder\DSL;
 
 use Elastica\Aggregation\Avg;
+use Elastica\Aggregation\AvgBucket;
 use Elastica\Aggregation\BucketScript;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\DateHistogram;
@@ -26,6 +27,7 @@ use Elastica\Aggregation\SerialDiff;
 use Elastica\Aggregation\SignificantTerms;
 use Elastica\Aggregation\Stats;
 use Elastica\Aggregation\Sum;
+use Elastica\Aggregation\SumBucket;
 use Elastica\Aggregation\Terms;
 use Elastica\Aggregation\TopHits;
 use Elastica\Aggregation\ValueCount;
@@ -95,6 +97,21 @@ class Aggregation implements DSL
     }
 
     /**
+     * sum bucket aggregation.
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-sum-bucket-aggregation.html
+     *
+     * @param string $name
+     * @param array|null  $bucketsPath
+     *
+     * @return SumBucket
+     */
+    public function sum_bucket($name, $bucketsPath = null)
+    {
+        return new SumBucket($name, $bucketsPath);
+    }
+
+    /**
      * avg aggregation.
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html
@@ -106,6 +123,21 @@ class Aggregation implements DSL
     public function avg($name)
     {
         return new Avg($name);
+    }
+
+     /**
+     * avg bucket aggregation.
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-avg-bucket-aggregation.html
+     *
+     * @param string $name
+     * @param array|null  $bucketsPath
+     *
+     * @return AvgBucket
+     */
+    public function avg_bucket($name, $bucketsPath = null)
+    {
+        return new AvgBucket($name, $bucketsPath);
     }
 
     /**
