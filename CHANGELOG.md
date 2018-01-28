@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.0...master)
 
 ### Backward Compatibility Breaks
- 
+
 ### Bugfixes
 
 ### Added
@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 
 - Removed `Query\NumericRange`, use `Query\Range` instead [#1334](https://github.com/ruflin/Elastica/pull/1334)
- 
+
 ### Bugfixes
 
 - Send the `scroll_id` inside a json body instead of plain text [#1325](https://github.com/ruflin/Elastica/pull/1325)
@@ -31,6 +31,7 @@ All notable changes to this project will be documented in this file based on the
 ### Added
  - Added getNumberOfReplicas() for index settings [PR#1324](https://github.com/ruflin/Elastica/pull/1324)
  - Added getNumberOfShards() for index settings [PR#1321](https://github.com/ruflin/Elastica/pull/1331)
+ - Added avg_bucket() and sum_bucket() in aggregations [PR#1443](https://github.com/ruflin/Elastica/pull/1443) - (https://github.com/ruflin/Elastica/issues/1279)
 
 
 ## [5.2.1](https://github.com/ruflin/Elastica/compare/5.2.0...5.2.1)
