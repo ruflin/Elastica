@@ -78,14 +78,43 @@ class Response
      */
     public function getError()
     {
-        $message = '';
-        $response = $this->getData();
+        $error = $this->getFullError();
+        if (!$error) {
+            return '';
+        }
 
-        if (isset($response['error'])) {
-            $message = $response['error'];
+        if (is_string($error)) {
+            return $error;
+        }
+
+        if (isset($error['root_cause'][0])) {
+            $error = $error['root_cause'][0];
+        }
+
+        $message = $error['reason'];
+        if (isset($error['index'])) {
+            $message .= ' [index: '.$error['index'].']';
         }
 
         return $message;
+    }
+
+    /**
+     * A keyed array representing any errors that occured.
+     *
+     * In case of http://localhost:9200/_alias/test the error is a string
+     *
+     * @return array|string Error data
+     */
+    public function getFullError()
+    {
+        $response = $this->getData();
+
+        if (isset($response['error'])) {
+            return $response['error'];
+        }
+
+        return;
     }
 
     /**
