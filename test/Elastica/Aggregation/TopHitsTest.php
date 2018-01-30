@@ -279,13 +279,22 @@ class TopHitsTest extends BaseAggregationTest
         $this->assertEquals([2, 4], $resultDocs);
     }
 
+    public function limitedSourceProvider()
+    {
+        return [
+            'string source' => ['title'],
+            'array source' => [['title']],
+        ];
+    }
+
     /**
      * @group functional
+     * @dataProvider limitedSourceProvider
      */
-    public function testAggregateWithLimitedSource()
+    public function testAggregateWithLimitedSource($source)
     {
         $aggr = new TopHits('top_tag_hits');
-        $aggr->setSource(['title']);
+        $aggr->setSource($source);
 
         $resultDocs = [];
         $outerAggrResult = $this->getOuterAggregationResult($aggr);
