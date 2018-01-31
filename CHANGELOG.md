@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file based on the
 ### Bugfixes
 - Characters "<" and ">" will be removed when a query term is passed to [`Util::escapeTerm`](https://github.com/ruflin/Elastica/pull/1415/files). Since v5.1 the [documentation](https://www.elastic.co/guide/en/elasticsearch/reference/5.1/query-dsl-query-string-query.html#_reserved_characters) states that these symbols cannot be escaped ever.
 - Remove [`each()`](http://www.php.net/each) usage to fix PHP 7.2 compatibility
+- Fix [#1435](https://github.com/ruflin/Elastica/issues/1435) forcing `doc_as_upsert` to be boolean, acording [Elastic doc-update documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html#_literal_doc_as_upsert_literal)
 
 ### Added
 

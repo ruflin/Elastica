@@ -550,6 +550,51 @@ class BulkTest extends BaseTest
     }
 
     /**
+     * @group functional
+     */
+    public function testUpsert()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('bulk_test');
+        $client = $index->getClient();
+
+        $doc1 = $type->createDocument(1, ['name' => 'Pele']);
+        $doc2 = $type->createDocument(2, ['name' => 'Beckenbauer']);
+        $doc3 = $type->createDocument(3, ['name' => 'Baggio']);
+        $doc4 = $type->createDocument(4, ['name' => 'Cruyff']);
+        $documents = array_map(function($d){ $d->setDocAsUpsert(true); return $d;}, [$doc1, $doc2, $doc3, $doc4]);
+
+        //index some documents
+        $bulk = new Bulk($client);
+        $bulk->setType($type);
+        $bulk->addDocuments($documents);
+        $response = $bulk->send();
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        $index->refresh();
+
+        //test updating via document
+        $doc1 = $type->createDocument(1, ['name' => 'Maradona']);
+        $doc1->setDocAsUpsert(true);
+        $bulk = new Bulk($client);
+        $bulk->setType($type);
+        $updateAction = new UpdateDocument($doc1);
+        $bulk->addAction($updateAction);
+        $response = $bulk->send();
+
+        $this->assertTrue($response->isOk());
+        $this->assertFalse($response->hasError());
+
+        $index->refresh();
+
+        $doc = $type->getDocument(1);
+        $docData = $doc->getData();
+        $this->assertEquals('Maradona', $docData['name']);
+    }
+
+    /**
      * @group unit
      */
     public function testGetPath()
