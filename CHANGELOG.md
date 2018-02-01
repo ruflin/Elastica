@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 
+- Removed deprecated `min_word_len` field in `Elastica\Suggest\Term`.
+  Use `min_word_length` instead.
+
 ### Added
 
 - Added clear() to `Scroll` for closing search context on ES manually
