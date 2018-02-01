@@ -90,7 +90,7 @@ class Term extends AbstractSuggest
      */
     public function setMinWordLength($length)
     {
-        return $this->setParam('min_word_len', (int) $length);
+        return $this->setParam('min_word_length', (int) $length);
     }
 
     /**
