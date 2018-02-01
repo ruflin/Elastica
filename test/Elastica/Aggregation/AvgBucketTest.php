@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\AvgBucket;
 use Elastica\Aggregation\Avg;
+use Elastica\Aggregation\AvgBucket;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Query;
@@ -31,25 +31,27 @@ class AvgBucketTest extends BaseAggregationTest
     {
         $this->_checkScriptInlineSetting();
 
-        $avgBucketAggregation = new AvgBucket(
-            'avg_likes_by_page',
-            'pages > avg_likes'
-        );
+        $query = Query::create([])
+            ->addAggregation(
+                (new Terms('pages'))
+                    ->setField('page')
+                    ->setSize(2)
+                    ->addAggregation(
+                        (new Avg('avg_likes'))
+                            ->setField('likes')
+                    )
+            )
+            ->addAggregation(
+                (new AvgBucket('avg_likes_by_page'))
+                    ->setBucketsPath('pages>avg_likes')
+            )
+        ;
 
-        $sumLikes = new Avg('avg_likes');
-        $sumLikes->setField('likes');
+        $results = $this->_getIndexForTest()->search($query)->getAggregations();
 
-        $groupByPage = new Terms('pages');
-        $groupByPage
-            ->setField('page')
-            ->setSize(2)
-            ->addAggregation($sumLikes);
-
-        $query = Query::create([])->addAggregation($groupByPage)->addAggregation($avgBucketAggregation);
-
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('avg_likes_by_page');
-
-        $this->assertEquals(161.5, $results['value']);
+        $this->assertEquals(168, $results['pages']['buckets'][0]['avg_likes']['value']);
+        $this->assertEquals(155, $results['pages']['buckets'][1]['avg_likes']['value']);
+        $this->assertEquals(161.5, $results['avg_likes_by_page']['value']);
     }
 
     /**
@@ -60,13 +62,13 @@ class AvgBucketTest extends BaseAggregationTest
         $serialDiffAgg = new AvgBucket('avg_bucket');
 
         $serialDiffAgg
-            ->setBucketsPath('pages > avg_likes_by_page')
+            ->setBucketsPath('pages>avg_likes_by_page')
             ->setFormat('test_format')
             ->setGapPolicy(10);
 
         $expected = [
             'avg_bucket' => [
-                'buckets_path' => 'pages > avg_likes_by_page',
+                'buckets_path' => 'pages>avg_likes_by_page',
                 'format' => 'test_format',
                 'gap_policy' => 10,
             ],
