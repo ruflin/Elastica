@@ -1,8 +1,8 @@
 <?php
 namespace Elastica\Test\Aggregation;
 
-use Elastica\Aggregation\SumBucket;
 use Elastica\Aggregation\Sum;
+use Elastica\Aggregation\SumBucket;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Query;
@@ -31,25 +31,27 @@ class SumBucketTest extends BaseAggregationTest
     {
         $this->_checkScriptInlineSetting();
 
-        $sumBucketAggregation = new SumBucket(
-            'sum_likes_by_page',
-            'pages > sum_likes'
-        );
+        $query = Query::create([])
+            ->addAggregation(
+                (new Terms('pages'))
+                    ->setField('page')
+                    ->setSize(2)
+                    ->addAggregation(
+                        (new Sum('sum_likes'))
+                            ->setField('likes')
+                    )
+            )
+            ->addAggregation(
+                (new SumBucket('sum_likes_by_page'))
+                    ->setBucketsPath('pages>sum_likes')
+            )
+        ;
 
-        $sumLikes = new Sum('sum_likes');
-        $sumLikes->setField('likes');
+        $results = $this->_getIndexForTest()->search($query)->getAggregations();
 
-        $groupByPage = new Terms('pages');
-        $groupByPage
-            ->setField('page')
-            ->setSize(2)
-            ->addAggregation($sumLikes);
-
-        $query = Query::create([])->addAggregation($groupByPage)->addAggregation($sumBucketAggregation);
-
-        $results = $this->_getIndexForTest()->search($query)->getAggregation('sum_likes_by_page');
-
-        $this->assertEquals(491, $results['value']);
+        $this->assertEquals(336, $results['pages']['buckets'][0]['sum_likes']['value']);
+        $this->assertEquals(155, $results['pages']['buckets'][1]['sum_likes']['value']);
+        $this->assertEquals(491, $results['sum_likes_by_page']['value']);
     }
 
     /**
@@ -60,13 +62,13 @@ class SumBucketTest extends BaseAggregationTest
         $serialDiffAgg = new SumBucket('sum_bucket');
 
         $serialDiffAgg
-            ->setBucketsPath('pages > sum_likes_by_page')
+            ->setBucketsPath('pages>sum_likes_by_page')
             ->setFormat('test_format')
             ->setGapPolicy(10);
 
         $expected = [
             'sum_bucket' => [
-                'buckets_path' => 'pages > sum_likes_by_page',
+                'buckets_path' => 'pages>sum_likes_by_page',
                 'format' => 'test_format',
                 'gap_policy' => 10,
             ],
