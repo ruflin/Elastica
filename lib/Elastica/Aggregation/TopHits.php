@@ -66,7 +66,7 @@ class TopHits extends AbstractAggregation
     /**
      * Allows to control how the _source field is returned with every hit.
      *
-     * @param array|bool $params Fields to be returned or false to disable source
+     * @param array|string|bool $params Fields to be returned or false to disable source
      *
      * @return $this
      */
