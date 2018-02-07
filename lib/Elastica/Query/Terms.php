@@ -55,6 +55,22 @@ class Terms extends AbstractQuery
     }
 
     /**
+     * Sets key and terms lookup for the query.
+     *
+     * @param string $key         Terms key
+     * @param array  $termsLookup Terms lookup for the query.
+     *
+     * @return $this
+     */
+    public function setTermsLookup($key, array $termsLookup)
+    {
+        $this->_key = $key;
+        $this->_terms = $termsLookup;
+
+        return $this;
+    }
+
+    /**
      * Adds a single term to the list.
      *
      * @param string $term Term
