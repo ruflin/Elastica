@@ -36,6 +36,43 @@ class TermsTest extends BaseTest
         $this->assertEquals(3, $resultSet->count());
     }
 
+    /**
+     * @group functional
+     */
+    public function testFilteredSearchWithLookup()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('helloworld');
+
+        $lookupIndex = $this->_createIndex('lookup_index');
+        $lookupType = $lookupIndex->getType('user');
+
+        $lookupType->addDocuments([
+            new Document(1, ['terms' => ['ruflin', 'nicolas']])
+        ]);
+
+        $type->addDocuments([
+            new Document(1, ['name' => 'hello world']),
+            new Document(2, ['name' => 'nicolas ruflin']),
+            new Document(3, ['name' => 'ruflin']),
+        ]);
+
+        $query = new Terms();
+
+        $query->setTermsLookup('name', [
+            'index' => $lookupIndex->getName(),
+            'type' => $lookupType->getName(),
+            'id' => '1',
+            'path' => 'terms'
+        ]);
+        $index->refresh();
+        $lookupIndex->refresh();
+
+        $resultSet = $type->search($query);
+
+        $this->assertEquals(2, $resultSet->count());
+    }
+
     public function provideMinimumArguments()
     {
         return [
@@ -74,6 +111,26 @@ class TermsTest extends BaseTest
 
         $data = $query->toArray();
         $this->assertEquals($minimum, $data['terms']['minimum_match']);
+    }
+
+
+    /**
+     * @group unit
+     */
+    public function testSetTermsLookup()
+    {
+        $key = 'name';
+        $terms = [
+            'index' => 'index_name',
+            'type' => 'type_name',
+             'id' => '1',
+            'path' => 'terms'
+        ];
+
+        $query = new Terms;
+        $query->setTermsLookup($key, $terms);
+        $data = $query->toArray();
+        $this->assertEquals($terms, $data['terms'][$key]);
     }
 
     /**

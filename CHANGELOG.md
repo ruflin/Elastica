@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file based on the
 * Added request parameters to `Client->deleteDocuments()`. [#1419](https://github.com/ruflin/Elastica/pull/1419)
 * Added request parameters to `Type->updateDocuments()`, `Type->addDocuments()`, `Type->addObjects()`, `Index->addDocuments()`, `Index->updateDocuments()`. [#1427](https://github.com/ruflin/Elastica/pull/1427)
 * Added avg_bucket() and sum_bucket() in aggregations [PR#1443](https://github.com/ruflin/Elastica/pull/1443) - (https://github.com/ruflin/Elastica/issues/1279)
+* Added support for [terms lookup mechanism](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html#query-dsl-terms-lookup) on terms query [#1452](https://github.com/ruflin/Elastica/pull/1452)
 
 ### Improvements
 
