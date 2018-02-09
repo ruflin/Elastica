@@ -21,7 +21,7 @@ Elastica uses docker for it's development environment. To use the docker environ
 
 Commands
 --------
-To run the commands below, you must have docker-compose [installed](https://docs.docker.com/compose/install/). The first time the commands are run it takes some time to download all the partial images. From then on the commands should run very fast. The advantage in using the commands below is that no local tools and libraries have to be installed and it is guaranteed that everytone is using the same tools.
+To run the commands below, you must have docker-compose [installed](https://docs.docker.com/compose/install/). The first time the commands are run it takes some time to download all the partial images. From then on the commands should run very fast. The advantage in using the commands below is that no local tools and libraries have to be installed and it is guaranteed that everyone is using the same tools.
 
 ## Run Tests
 

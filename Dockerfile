@@ -6,7 +6,7 @@ MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 ENV ES_HOST elasticsearch
 ENV PROXY_HOST nginx
 
-# Install depdencies
+# Install dependencies
 WORKDIR /elastica
 
 # Copy composer file first as this only changes rarely
