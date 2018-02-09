@@ -82,6 +82,7 @@ class Type implements SearchableInterface
                 'replication',
                 'refresh',
                 'timeout',
+                'pipeline',
             ]
         );
 

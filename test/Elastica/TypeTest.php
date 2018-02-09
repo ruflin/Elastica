@@ -844,6 +844,30 @@ class TypeTest extends BaseTest
 
     /**
      * @group functional
+     */
+    public function testAddDocumentPipeline()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('elastica_type');
+        $this->_createRenamePipeline();
+
+        $document = new Document();
+        $document->setAutoPopulate();
+        $document->set('old', 'ruflin');
+        $document->setPipeline('renaming');
+
+        $type->addDocument($document);
+
+        $foundDoc = $type->getDocument($document->getId());
+        $this->assertInstanceOf(Document::class, $foundDoc);
+        $this->assertEquals($document->getId(), $foundDoc->getId());
+        $data = $foundDoc->getData();
+        $this->assertArrayHasKey('new', $data);
+        $this->assertEquals('ruflin', $data['new']);
+    }
+
+    /**
+     * @group functional
      * @expectedException \Elastica\Exception\RuntimeException
      */
     public function testAddDocumentWithoutSerializer()
