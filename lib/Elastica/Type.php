@@ -203,7 +203,7 @@ class Type implements SearchableInterface
     /**
      * Uses _bulk to send documents to the server.
      *
-     * @param objects[] $objects
+     * @param object[] $objects
      * @param array     $options Array of query params to use for query. For possible options check es api
      *
      * @return Bulk\ResponseSet
