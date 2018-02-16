@@ -18,8 +18,7 @@
     },
     "require-dev": {
         "aws/aws-sdk-php": "~3.0",
-        "guzzlehttp/guzzle": "~6.0",
-        "phpunit/phpunit": "^5.0"
+        "guzzlehttp/guzzle": "~6.0"
     },
     "suggest": {
         "aws/aws-sdk-php": "Allow using IAM authentication with Amazon ElasticSearch Service",
