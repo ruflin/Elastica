@@ -28,6 +28,7 @@ class AwsAuthV4Test extends GuzzleTest
         ];
 
         $client = $this->_getClient($config);
+
         try {
             $client->request('_status', 'GET');
         } catch (GuzzleException $e) {
@@ -46,6 +47,56 @@ class AwsAuthV4Test extends GuzzleTest
                 );
             } else {
                 throw $e;
+            }
+        }
+    }
+
+    public function testUseHttpAsDefaultProtocol()
+    {
+        $config = [
+            'persistent' => false,
+            'transport' => 'AwsAuthV4',
+            'aws_access_key_id' => 'foo',
+            'aws_secret_access_key' => 'bar',
+            'aws_session_token' => 'baz',
+            'aws_region' => 'us-east-1',
+        ];
+        $client = $this->_getClient($config);
+
+        try {
+            $client->request('_status', 'GET');
+
+            $this->assertEquals(80, $client->getLastRequest()->toArray()['port']);
+        } catch (GuzzleException $e) {
+            $guzzleException = $e->getGuzzleException();
+            if ($guzzleException instanceof RequestException) {
+                $request = $guzzleException->getRequest();
+            }
+        }
+    }
+
+    public function testSetHttpsIfItIsRequired()
+    {
+        $config = [
+            'persistent' => false,
+            'transport' => 'AwsAuthV4',
+            'aws_access_key_id' => 'foo',
+            'aws_secret_access_key' => 'bar',
+            'aws_session_token' => 'baz',
+            'aws_region' => 'us-east-1',
+            'ssl' => true
+        ];
+        $client = $this->_getClient($config);
+
+        try {
+            $client->request('_status', 'GET');
+
+        } catch (GuzzleException $e) {
+            $guzzleException = $e->getGuzzleException();
+            if ($guzzleException instanceof RequestException) {
+                $request = $guzzleException->getRequest();
+
+                $this->assertEquals('https', $request->getUri()->getScheme());
             }
         }
     }
