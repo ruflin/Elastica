@@ -74,7 +74,7 @@ class AwsAuthV4 extends Guzzle
     private function initializePortAndScheme()
     {
         $connection = $this->getConnection();
-        if (true === $this->getConfig($connection, 'ssl')) {
+        if (true === $this->isSslRequired($connection)) {
             $this->_scheme = 'https';
             $connection->setPort(443);
         } else {
@@ -83,10 +83,16 @@ class AwsAuthV4 extends Guzzle
         }
     }
 
-    private function getConfig(Connection $conn, $key, $default = null)
+    /**
+     * @param Connection $conn
+     * @param bool       $default
+     *
+     * @return bool
+     */
+    private function isSslRequired(Connection $conn, $default = false)
     {
-        return $conn->hasConfig($key)
-            ? $conn->getConfig($key)
+        return $conn->hasParam('ssl')
+            ? (bool) $conn->getParam('ssl')
             : $default;
     }
 }
