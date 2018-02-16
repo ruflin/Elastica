@@ -144,6 +144,102 @@ class QueryStringTest extends BaseTest
     }
 
     /**
+     * @group
+     */
+    public function testSetAnalyzer()
+    {
+        $value = 'test';
+        $query = new QueryString('test');
+        $query->setAnalyzer($value);
+
+        $this->assertEquals($value, $query->toArray()['query_string']['analyzer']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testSetAllowLeadingWildcard()
+    {
+        $value = true;
+        $query = new QueryString('test');
+        $query->setAllowLeadingWildcard($value);
+
+        $this->assertEquals($value, $query->toArray()['query_string']['allow_leading_wildcard']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testSetEnablePositionIncrements()
+    {
+        $value = true;
+        $query = new QueryString('test');
+        $query->setEnablePositionIncrements($value);
+
+        $this->assertEquals($value, $query->toArray()['query_string']['enable_position_increments']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testSetFuzzyPrefixLength()
+    {
+        $value = 1;
+        $query = new QueryString('test');
+        $query->setFuzzyPrefixLength($value);
+
+        $this->assertEquals($value, $query->toArray()['query_string']['fuzzy_prefix_length']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testSetFuzzyMinSim()
+    {
+        $value = 0.1;
+        $query = new QueryString('test');
+        $query->setFuzzyMinSim($value);
+
+        $this->assertEquals($value, $query->toArray()['query_string']['fuzzy_min_sim']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testSetAnalyzeWildcard()
+    {
+        $value = true;
+        $query = new QueryString('test');
+        $query->setAnalyzeWildcard($value);
+
+        $this->assertEquals($value, $query->toArray()['query_string']['analyze_wildcard']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testSetAutoGeneratePhraseQueries()
+    {
+        $value = true;
+        $query = new QueryString('test');
+        $query->setAutoGeneratePhraseQueries($value);
+
+        $this->assertEquals($value, $query->toArray()['query_string']['auto_generate_phrase_queries']);
+    }
+
+    /**
+     * @group
+     */
+    public function testSetTieBreaker()
+    {
+        $value = 0.2;
+        $query = new QueryString('test');
+        $query->setTieBreaker($value);
+
+        $this->assertEquals($value, $query->toArray()['query_string']['tie_breaker']);
+    }
+
+    /**
      * @group unit
      */
     public function testSetRewrite()

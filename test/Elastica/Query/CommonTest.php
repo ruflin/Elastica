@@ -60,4 +60,52 @@ class CommonTest extends BaseTest
         //only the document containing both low frequency terms should match
         $this->assertEquals(1, $results->count());
     }
+
+    /**
+     * @group unit
+     */
+    public function testSetHighFrequencyOperator()
+    {
+        $value = 'OPERATOR_TEST';
+        $query = new Common('body', 'test query', .001);
+        $query->setHighFrequencyOperator($value);
+
+        $this->assertEquals($value, $query->toArray()['common']['body']['high_frequency_operator']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testSetBoost()
+    {
+        $value = .02;
+        $query = new Common('body', 'test query', .001);
+        $query->setBoost($value);
+
+        $this->assertEquals($value, $query->toArray()['common']['body']['boost']);
+    }
+
+    /**
+     * @group
+     */
+    public function testSetAnalyzer()
+    {
+        $value = 'test';
+        $query = new Common('body', 'test query', .001);
+        $query->setBoost($value);
+
+        $this->assertEquals($value, $query->toArray()['common']['body']['analyzer']);
+    }
+
+    /**
+     * @group
+     */
+    public function testSetDisableCoord()
+    {
+        $value = true;
+        $query = new Common('body', 'test query', .001);
+        $query->setDisableCoord($value);
+
+        $this->assertEquals($value, $query->toArray()['common']['body']['disable_coord']);
+    }
 }
