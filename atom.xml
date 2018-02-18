@@ -4,7 +4,7 @@
   <title><![CDATA[Elastica]]></title>
   <link href="http://Elastica.io/atom.xml" rel="self"/>
   <link href="http://Elastica.io/"/>
-  <updated>2017-11-15T10:51:31+11:00</updated>
+  <updated>2018-02-19T07:50:24+11:00</updated>
   <id>http://Elastica.io/</id>
   <author>
     <name><![CDATA[ruflin]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release 5.3.1]]></title>
+    <link href="http://Elastica.io/2018/02/19/release-5-dot-3-1/"/>
+    <updated>2018-02-19T07:46:55+11:00</updated>
+    <id>http://Elastica.io/2018/02/19/release-5-dot-3-1</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/5.3.1">Elastica 5.3.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.3.1">download</a>).</p>
+
+<h3>Bugfixes</h3>
+
+<ul>
+<li>Removed deprecated <code>min_word_len</code> field in <code>Elastica\Suggest\Term</code>.
+Use <code>min_word_length</code> instead.</li>
+</ul>
+
+
+<h3>Added</h3>
+
+<ul>
+<li>Added clear() to <code>Scroll</code> for closing search context on ES manually</li>
+<li>In PHP 7.2 count() now raises a warning when an invalid parameter is passed. Only arrays and objects implementing the Countable interface should be passed. <a href="https://github.com/ruflin/Elastica/pull/1378">#1378</a></li>
+</ul>
+
+
+<h3>Improvements</h3>
+
+<ul>
+<li>Clear search context on ES after usage in <code>Scroll</code></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Release 6.0.0]]></title>
@@ -1222,87 +1254,6 @@ All is based on docker contaienrs now</li>
 <h2>Summary</h2>
 
 <p>That are all cases, which can be broken in your projects after the migration to <a href="http://Elastica.io/2015/09/15/release-2-dot-3-0/">Elastica 2.3.0+</a>. This latest change now gives you the freedom to develop more complex solutions without low-level tricks. Only a very small amount of developers should be affected by the above mentioned issues. In case you have some questions about the changes above, drop us a line on <a href="https://gitter.im/ruflin/Elastica">Gitter</a> so we can help you out.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Release 2.3.0]]></title>
-    <link href="http://Elastica.io/2015/09/16/release-2-dot-3-0/"/>
-    <updated>2015-09-16T06:11:47+10:00</updated>
-    <id>http://Elastica.io/2015/09/16/release-2-dot-3-0</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/2.3.0">Elastica 2.3.0</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/2.3.0">download</a>). This release is compatible with elasticsearch 1.7.2.</p>
-
-<p>As this release breaks backward compatibility, a detailed explanation about the breaking changes can be found <a href="http://Elastica.io/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation/">here</a></p>
-
-<h3>Backward Compatibility Breaks</h3>
-
-<ul>
-<li>Objects do not casts to arrays in setters and saved in params as objects. There is many side effects if
-you work with params on &ldquo;low-level&rdquo; or change your objects after you call setter with object
-as argument. <a href="https://github.com/ruflin/Elastica/pull/916">#916</a></li>
-</ul>
-
-
-<h3>Added</h3>
-
-<ul>
-<li>Add Script File feature #902 #914</li>
-</ul>
-
-
-<h3>Improvements</h3>
-
-<ul>
-<li>Support the http.compression in the Http transport adapter #515</li>
-<li>Introduction of Lazy toArray <a href="https://github.com/ruflin/Elastica/pull/916">#916</a></li>
-<li>Update Elasticsearch dependency to 1.7.2 <a href="https://github.com/ruflin/Elastica/pull/929">#929</a></li>
-</ul>
-
-
-<h2>Dependencies</h2>
-
-<table>
-<thead>
-<tr>
-<th> Project </th>
-<th> Version </th>
-<th> Required </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch/tree/v1.7.2">Elasticsearch</a></td>
-<td>1.7.2</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch-mapper-attachments/tree/v2.7.0">Elasticsearch mapper attachments plugin</a></td>
-<td>2.7.0</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elasticsearch/elasticsearch-transport-thrift/tree/v2.7.0">Elasticsearch thrift transport plugin</a></td>
-<td>2.7.0</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/elastic/elasticsearch-transport-memcached/tree/v2.7.0">Elasticsearch memcached transport plugin</a></td>
-<td>2.7.0</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/zenobase/geocluster-facet/tree/0.0.12">Elasticsearch geocluster facet plugin</a></td>
-<td>0.0.12</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="https://github.com/Jmoati/elasticsearch-image/releases/tag/1.7.1">Elasticsearch image plugin</a></td>
-<td>1.7.1</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
-
 ]]></content>
   </entry>
   
