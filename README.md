@@ -17,7 +17,7 @@ All library issues should go to the [issue tracker from github](https://github.c
 
 Compatibility
 -------------
-This release is compatible with all Elasticsearch 6.x releases. It was tested with version 6.0.0.
+This release is compatible with all Elasticsearch 6.x releases. It was tested with version 6.2.1.
 
 
 Contributing
