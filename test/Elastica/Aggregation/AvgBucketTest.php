@@ -42,8 +42,7 @@ class AvgBucketTest extends BaseAggregationTest
             ->addAggregation(
                 (new AvgBucket('avg_likes_by_page'))
                     ->setBucketsPath('pages>avg_likes')
-            )
-        ;
+            );
 
         $results = $this->_getIndexForTest()->search($query)->getAggregations();
 

@@ -84,13 +84,12 @@ class AwsAuthV4Test extends GuzzleTest
             'aws_secret_access_key' => 'bar',
             'aws_session_token' => 'baz',
             'aws_region' => 'us-east-1',
-            'ssl' => true
+            'ssl' => true,
         ];
         $client = $this->_getClient($config);
 
         try {
             $client->request('_status', 'GET');
-
         } catch (GuzzleException $e) {
             $guzzleException = $e->getGuzzleException();
             if ($guzzleException instanceof RequestException) {

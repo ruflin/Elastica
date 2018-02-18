@@ -562,7 +562,9 @@ class BulkTest extends BaseTest
         $doc2 = $type->createDocument(2, ['name' => 'Beckenbauer']);
         $doc3 = $type->createDocument(3, ['name' => 'Baggio']);
         $doc4 = $type->createDocument(4, ['name' => 'Cruyff']);
-        $documents = array_map(function($d){ $d->setDocAsUpsert(true); return $d;}, [$doc1, $doc2, $doc3, $doc4]);
+        $documents = array_map(function ($d) { $d->setDocAsUpsert(true);
+
+return $d;}, [$doc1, $doc2, $doc3, $doc4]);
 
         //index some documents
         $bulk = new Bulk($client);

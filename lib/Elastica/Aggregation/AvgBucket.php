@@ -12,7 +12,7 @@ class AvgBucket extends AbstractAggregation
 {
     /**
      * @param string      $name
-     * @param string|null  $bucketsPath
+     * @param string|null $bucketsPath
      */
     public function __construct($name, $bucketsPath = null)
     {
