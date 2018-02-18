@@ -1,9 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.0...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.1...master)
 
 ### Backward Compatibility Breaks
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+
+## [5.3.1](https://github.com/ruflin/Elastica/compare/5.3.0...5.3.1)
 
 ### Bugfixes
 
@@ -19,7 +28,6 @@ All notable changes to this project will be documented in this file based on the
 
 - Clear search context on ES after usage in `Scroll`
 
-### Deprecated
 
 ## [5.3.0](https://github.com/ruflin/Elastica/compare/5.3.0...master)
 

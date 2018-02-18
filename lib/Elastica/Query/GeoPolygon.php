@@ -55,7 +55,7 @@ class GeoPolygon extends AbstractQuery
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @return int
      */
@@ -63,5 +63,4 @@ class GeoPolygon extends AbstractQuery
     {
         return count($this->_key);
     }
-
 }

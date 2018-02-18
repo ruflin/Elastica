@@ -101,8 +101,8 @@ class Aggregation implements DSL
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-sum-bucket-aggregation.html
      *
-     * @param string $name
-     * @param string|null  $bucketsPath
+     * @param string      $name
+     * @param string|null $bucketsPath
      *
      * @return SumBucket
      */
@@ -125,13 +125,13 @@ class Aggregation implements DSL
         return new Avg($name);
     }
 
-     /**
+    /**
      * avg bucket aggregation.
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-avg-bucket-aggregation.html
      *
-     * @param string $name
-     * @param string|null  $bucketsPath
+     * @param string      $name
+     * @param string|null $bucketsPath
      *
      * @return AvgBucket
      */
