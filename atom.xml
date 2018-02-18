@@ -4,7 +4,7 @@
   <title><![CDATA[Elastica]]></title>
   <link href="http://Elastica.io/atom.xml" rel="self"/>
   <link href="http://Elastica.io/"/>
-  <updated>2018-02-19T07:50:24+11:00</updated>
+  <updated>2018-02-19T08:00:59+11:00</updated>
   <id>http://Elastica.io/</id>
   <author>
     <name><![CDATA[ruflin]]></name>
@@ -14,11 +14,44 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Release 6.0.1]]></title>
+    <link href="http://Elastica.io/2018/02/19/release-6-dot-0-1/"/>
+    <updated>2018-02-19T07:57:06+11:00</updated>
+    <id>http://Elastica.io/2018/02/19/release-6-dot-0-1</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/6.0.1">Elastica 6.0.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/6.0.1">download</a>).</p>
+
+<p>This release is compatible with Elasticsearch 6.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/release-notes-6.0.0.html">elasticsearch 6.0.0</a>.</p>
+
+<h3>Bugfixes</h3>
+
+<ul>
+<li>Characters &ldquo;&lt;&rdquo; and &ldquo;>&rdquo; will be removed when a query term is passed to <a href="https://github.com/ruflin/Elastica/pull/1415/files"><code>Util::escapeTerm</code></a>. Since v5.1 the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.1/query-dsl-query-string-query.html#_reserved_characters">documentation</a> states that these symbols cannot be escaped ever.</li>
+<li>Remove <a href="http://www.php.net/each"><code>each()</code></a> usage to fix PHP 7.2 compatibility</li>
+<li>Fix <a href="https://github.com/ruflin/Elastica/issues/1435">#1435</a> forcing <code>doc_as_upsert</code> to be boolean, acording <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html#_literal_doc_as_upsert_literal">Elastic doc-update documentation</a></li>
+<li>Fix <a href="https://github.com/ruflin/Elastica/issues/1456">#1456</a> set SSL as connection scheme if it is required</li>
+</ul>
+
+
+<h3>Added</h3>
+
+<ul>
+<li>Added request parameters to <code>Client-&gt;deleteDocuments()</code>. <a href="https://github.com/ruflin/Elastica/pull/1419">#1419</a></li>
+<li>Added request parameters to <code>Type-&gt;updateDocuments()</code>, <code>Type-&gt;addDocuments()</code>, <code>Type-&gt;addObjects()</code>, <code>Index-&gt;addDocuments()</code>, <code>Index-&gt;updateDocuments()</code>. <a href="https://github.com/ruflin/Elastica/pull/1427">#1427</a></li>
+<li>Added avg_bucket() and sum_bucket() in aggregations <a href="https://github.com/ruflin/Elastica/pull/1443">PR#1443</a> - (<a href="https://github.com/ruflin/Elastica/issues/1279">https://github.com/ruflin/Elastica/issues/1279</a>)</li>
+<li>Added support for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html#query-dsl-terms-lookup">terms lookup mechanism</a> on terms query <a href="https://github.com/ruflin/Elastica/pull/1452">#1452</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Release 5.3.1]]></title>
     <link href="http://Elastica.io/2018/02/19/release-5-dot-3-1/"/>
     <updated>2018-02-19T07:46:55+11:00</updated>
     <id>http://Elastica.io/2018/02/19/release-5-dot-3-1</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/ruflin/Elastica/tree/5.3.1">Elastica 5.3.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.3.1">download</a>).</p>
+
+<p>This release is compatible with Elasticsearch 5.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.4/release-notes-5.4.1.html">elasticsearch 5.4.1</a>.</p>
 
 <h3>Bugfixes</h3>
 
@@ -1116,144 +1149,6 @@ All is based on docker contaienrs now</li>
 </tbody>
 </table>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Elastica 2.3.0 broken backward compatibility explanation]]></title>
-    <link href="http://Elastica.io/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation/"/>
-    <updated>2015-09-22T16:23:43+10:00</updated>
-    <id>http://Elastica.io/2015/09/22/elastica-2-dot-3-0-broken-backward-compatibility-explanation</id>
-    <content type="html"><![CDATA[<p><a href="http://Elastica.io/2015/09/15/release-2-dot-3-0/">Elastica 2.3.0</a> is out and introduced lazy toArray, that broke backward compatibility. Lets talk about this change in details and answer on some questions, that developers, who use Elastica can have.</p>
-
-<h2>What has changed?</h2>
-
-<p>Lets say we have the following code:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$query = new Query();
-</span><span class='line'>$termQuery = new Term();
-</span><span class='line'>$termQuery-&gt;setTerm('text', 'value');
-</span><span class='line'>$query-&gt;setQuery($termQuery);</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In this example we set the Term object to query. Before version 2.3.0, if you try</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>var_dump($query-&gt;getQuery());</span></code></pre></td></tr></table></div></figure>
-
-
-<p>you will see, that in the result you have an array. This happens, because every objects in setters immediately will be converted to an array and stored as array:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public function setQuery(AbstractQuery $query)
-</span><span class='line'>{
-</span><span class='line'>    return $this-&gt;setParam('query', $query-&gt;toArray());
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Elastica 2.3.0 broke this behaviour and introduce lazy toArray. This means, that objects always will be stored as is and toArray will be only called when needed. In Elastica&rsquo;s case, this is when performing the request to Elasticsearch. You can rely on, that also after calling toArray - objects will be still be stored as objects.</p>
-
-<h2>Why it was this change made?</h2>
-
-<p>There are a several reasons.</p>
-
-<ul>
-<li>In the OOP world, usually what we set is what we get. Now we set objects - and get objects.</li>
-<li>In the OOP world we very often extends objects one from another. Code, that is responsible for select objects by Elastica also can extend, and queries will be built step by step from common to specific logic in many places. In this case code will need access to the original query objects, and when they are converted in arrays at setters, query can&rsquo;t be changed without low-level tricks with arrays. After 2.3.0 Elastica changes this behaviour and you always have access to the original objects. You can change query object through the standard usage of Elastica classes.</li>
-</ul>
-
-
-<h2>Is my code broken?</h2>
-
-<p>In most cases if you just used Elastica functions the answer is &ldquo;no&rdquo;. If you answer at least on one of the following question with &ldquo;yes&rdquo;, than your code could be broken:</p>
-
-<ul>
-<li>Did you work with Elastica objects on &ldquo;low-level&rdquo;?</li>
-<li>Did you change Elastica objects after you set it to another objects?</li>
-<li>Did you clone Elastica objects?</li>
-</ul>
-
-
-<p>Lets discuss these question in details.</p>
-
-<h3>Did you work with Elastica objects on &ldquo;low-level&rdquo;?</h3>
-
-<p>When we talk about low-level working with Elastica objects, we are talking about the direct work with Elastica object params, like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$termQuery = $query-&gt;getQuery();
-</span><span class='line'>$termQuery['term']['text']['value'] = 'another value';
-</span><span class='line'>$query-&gt;setParam('query', $termQuery);</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Your code will be broken, because getQuery now will return an object instead of array. Remember, it is always bad idea, to work with Elastica params directly if not really necessary.</p>
-
-<h3>Did you change Elastica objects after you set it to another objects?</h3>
-
-<p>Lets say we have the following code:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$termQuery = new Term();
-</span><span class='line'>$termQuery-&gt;setTerm('text', 'value');
-</span><span class='line'>
-</span><span class='line'>$query = new Query();
-</span><span class='line'>$query-&gt;setQuery($termQuery);
-</span><span class='line'>
-</span><span class='line'>$termQuery-&gt;setTerm('text', 'another value');
-</span><span class='line'>
-</span><span class='line'>$anotherQuery = new Query();
-</span><span class='line'>$anotherQuery-&gt;setQuery($termQuery);</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Before 2.3.0 <code>$query-&gt;toArray()</code> and <code>$anotherQuery-&gt;toArray()</code> will not be equal, because we call <code>$query-&gt;setQuery($termQuery)</code>, <code>$termQuery</code> will be stored as an array and changing this object later will no change the array, that is stored in <code>$query</code>.</p>
-
-<p>After 2.3.0 <code>$query-&gt;toArray()</code> and <code>$anotherQuery-&gt;toArray()</code> will be equal, because <code>$termQuery</code> will be stored as object in <code>$query</code>, and if it will be changed somewhere, the result of <code>toArray()</code> will have this changes too.</p>
-
-<h3>Did you clone Elastica objects?</h3>
-
-<p>Lets say we have the following code:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$termQuery = new Term();
-</span><span class='line'>$termQuery-&gt;setTerm('text', 'value');
-</span><span class='line'>
-</span><span class='line'>$query = new Query();
-</span><span class='line'>$query-&gt;setQuery($termQuery);
-</span><span class='line'>$cloned = clone $query;
-</span><span class='line'>$termQuery-&gt;setTerm('text', 'another value');</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Before 2.3.0, <code>$cloned-&gt;toArray()</code> will have a term query with the key <code>text</code> and value <code>value</code> because the <code>$termQuery</code> will be stored as an array and the array will be cloned also.</p>
-
-<p>After 2.3.0 the <code>$termQuery</code> will be stored as object. When clone is called on <code>$query</code>, only the <code>$query</code> object will be cloned, but objects, that are stored will not be cloned. As a result <code>$cloned-&gt;toArray()</code> will have a term query with the value <code>another value</code>.</p>
-
-<h2>Summary</h2>
-
-<p>That are all cases, which can be broken in your projects after the migration to <a href="http://Elastica.io/2015/09/15/release-2-dot-3-0/">Elastica 2.3.0+</a>. This latest change now gives you the freedom to develop more complex solutions without low-level tricks. Only a very small amount of developers should be affected by the above mentioned issues. In case you have some questions about the changes above, drop us a line on <a href="https://gitter.im/ruflin/Elastica">Gitter</a> so we can help you out.</p>
 ]]></content>
   </entry>
   
