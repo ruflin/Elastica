@@ -44,8 +44,7 @@ class SumBucketTest extends BaseAggregationTest
             ->addAggregation(
                 (new SumBucket('sum_likes_by_page'))
                     ->setBucketsPath('pages>sum_likes')
-            )
-        ;
+            );
 
         $results = $this->_getIndexForTest()->search($query)->getAggregations();
 
