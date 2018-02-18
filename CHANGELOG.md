@@ -7,6 +7,17 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 
 ### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+
+## [6.0.1](https://github.com/ruflin/Elastica/compare/6.0.0...6.0.1)
+
+### Bugfixes
 - Characters "<" and ">" will be removed when a query term is passed to [`Util::escapeTerm`](https://github.com/ruflin/Elastica/pull/1415/files). Since v5.1 the [documentation](https://www.elastic.co/guide/en/elasticsearch/reference/5.1/query-dsl-query-string-query.html#_reserved_characters) states that these symbols cannot be escaped ever.
 - Remove [`each()`](http://www.php.net/each) usage to fix PHP 7.2 compatibility
 - Fix [#1435](https://github.com/ruflin/Elastica/issues/1435) forcing `doc_as_upsert` to be boolean, acording [Elastic doc-update documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html#_literal_doc_as_upsert_literal)
@@ -18,10 +29,6 @@ All notable changes to this project will be documented in this file based on the
 * Added request parameters to `Type->updateDocuments()`, `Type->addDocuments()`, `Type->addObjects()`, `Index->addDocuments()`, `Index->updateDocuments()`. [#1427](https://github.com/ruflin/Elastica/pull/1427)
 * Added avg_bucket() and sum_bucket() in aggregations [PR#1443](https://github.com/ruflin/Elastica/pull/1443) - (https://github.com/ruflin/Elastica/issues/1279)
 * Added support for [terms lookup mechanism](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html#query-dsl-terms-lookup) on terms query [#1452](https://github.com/ruflin/Elastica/pull/1452)
-
-### Improvements
-
-### Deprecated
 
 
 ## [6.0.0](https://github.com/ruflin/Elastica/compare/6.0.0-beta1...6.0.0)

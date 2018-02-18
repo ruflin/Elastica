@@ -74,7 +74,7 @@ class Util
     /**
      * Replace known reserved words (e.g. AND OR NOT)
      * and
-     * escape known special characters (e.g. + - && || ! ( ) { } [ ] ^ " ~ * ? : etc.)
+     * escape known special characters (e.g. + - && || ! ( ) { } [ ] ^ " ~ * ? : etc.).
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/5.1/query-dsl-query-string-query.html#_boolean_operators
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/5.1/query-dsl-query-string-query.html#_reserved_characters
@@ -111,7 +111,7 @@ class Util
         foreach ($escapableChars as $char) {
             $result = str_replace($char, '\\'.$char, $result);
         }
-        
+
         // < and > cannot be escaped, so they should be removed
         // @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#_reserved_characters
         $nonEscapableChars = ['<', '>'];

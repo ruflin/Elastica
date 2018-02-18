@@ -48,7 +48,7 @@ class TermsTest extends BaseTest
         $lookupType = $lookupIndex->getType('user');
 
         $lookupType->addDocuments([
-            new Document(1, ['terms' => ['ruflin', 'nicolas']])
+            new Document(1, ['terms' => ['ruflin', 'nicolas']]),
         ]);
 
         $type->addDocuments([
@@ -63,7 +63,7 @@ class TermsTest extends BaseTest
             'index' => $lookupIndex->getName(),
             'type' => $lookupType->getName(),
             'id' => '1',
-            'path' => 'terms'
+            'path' => 'terms',
         ]);
         $index->refresh();
         $lookupIndex->refresh();
@@ -113,7 +113,6 @@ class TermsTest extends BaseTest
         $this->assertEquals($minimum, $data['terms']['minimum_match']);
     }
 
-
     /**
      * @group unit
      */
@@ -124,10 +123,10 @@ class TermsTest extends BaseTest
             'index' => 'index_name',
             'type' => 'type_name',
              'id' => '1',
-            'path' => 'terms'
+            'path' => 'terms',
         ];
 
-        $query = new Terms;
+        $query = new Terms();
         $query->setTermsLookup($key, $terms);
         $data = $query->toArray();
         $this->assertEquals($terms, $data['terms'][$key]);
