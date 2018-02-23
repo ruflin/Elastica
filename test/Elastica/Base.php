@@ -4,6 +4,7 @@ namespace Elastica\Test;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Index;
+use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
 use Psr\Log\LoggerInterface;
 
 class Base extends \PHPUnit_Framework_TestCase
@@ -126,6 +127,27 @@ class Base extends \PHPUnit_Framework_TestCase
         $index->create(['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 1]], $delete);
 
         return $index;
+    }
+
+    protected function _createRenamePipeline()
+    {
+        $client = $this->_getClient();
+
+        $endpoint = new Put();
+        $endpoint->setID('renaming');
+        $endpoint->setBody(array(
+            'description' => 'Rename field',
+            'processors' => array(
+                array(
+                    'rename' => array(
+                        'field' => 'old',
+                        'target_field' => 'new',
+                    ),
+                ),
+            ),
+        ));
+
+        $client->requestEndpoint($endpoint);
     }
 
     protected function _checkScriptInlineSetting()
