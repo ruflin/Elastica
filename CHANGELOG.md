@@ -2,13 +2,15 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/6.0.0...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/6.0.1...master)
 
 ### Backward Compatibility Breaks
 
 ### Bugfixes
 
 ### Added
+
+* Added support for pipeline when indexing document. [#1455](https://github.com/ruflin/Elastica/pull/1455)
 
 ### Improvements
 

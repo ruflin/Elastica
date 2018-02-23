@@ -276,6 +276,34 @@ class Document extends AbstractUpdateAction
     }
 
     /**
+     * Sets pipeline
+     *
+     * @param string $pipeline
+     *
+     * @return $this
+     */
+    public function setPipeline($pipeline)
+    {
+        return $this->setParam('_pipeline', $pipeline);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPipeline()
+    {
+        return $this->getParam('_pipeline');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPipeline()
+    {
+        return $this->hasParam('_pipeline');
+    }
+
+    /**
      * Returns the document as an array.
      *
      * @return array

@@ -1079,6 +1079,34 @@ class ClientTest extends BaseTest
     }
 
     /**
+     * @group functional
+     */
+    public function testAddDocumentsPipeline()
+    {
+        $docs = [];
+        for ($i = 0; $i < 10; ++$i) {
+            $docs[] = new Document(null, ['old' => $i]);
+        }
+
+        $index = $this->_createIndex();
+        $this->_createRenamePipeline();
+
+        $client = $index->getClient();
+        $client->setConfigValue('document', ['autoPopulate' => true]);
+
+        $type = $index->getType('test');
+        $type->addDocuments($docs, ['pipeline' => 'renaming']);
+
+        foreach ($docs as $i => $doc) {
+            $foundDoc = $type->getDocument($doc->getId());
+            $this->assertInstanceOf(Document::class, $foundDoc);
+            $data = $foundDoc->getData();
+            $this->assertArrayHasKey('new', $data);
+            $this->assertEquals($i, $data['new']);
+        }
+    }
+
+    /**
      * @group unit
      */
     public function testConfigValue()
