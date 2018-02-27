@@ -689,7 +689,7 @@ class Client
         } catch (ConnectionException $e) {
             $this->_connectionPool->onFail($connection, $e, $this);
 
-            $this->_log($e);
+            $this->_logger->error($e);
 
             // In case there is no valid connection left, throw exception which caused the disabling of the connection.
             if (!$this->hasConnection()) {
@@ -699,7 +699,7 @@ class Client
             return $this->request($path, $method, $data, $query);
         }
 
-        $this->_log($request);
+        $this->_logger->error($response);
 
         return $response;
     }
@@ -719,57 +719,6 @@ class Client
             null === $endpoint->getBody() ? [] : $endpoint->getBody(),
             $endpoint->getParams()
         );
-    }
-
-    /**
-     * logging.
-     *
-     * @deprecated Overwriting Client->_log is deprecated. Handle logging functionality by using a custom LoggerInterface.
-     *
-     * @param mixed $context
-     */
-    protected function _log($context)
-    {
-        if ($context instanceof ConnectionException) {
-            $this->_logger->error('Elastica Request Failure', [
-                'exception' => $context,
-                'request' => $context->getRequest()->toArray(),
-                'retry' => $this->hasConnection(),
-            ]);
-
-            return;
-        }
-
-        if ($context instanceof Request) {
-            $this->_logger->debug('Elastica Request', [
-                'request' => $context->toArray(),
-                'response' => $this->_lastResponse ? $this->_lastResponse->getData() : null,
-                'responseStatus' => $this->_lastResponse ? $this->_lastResponse->getStatus() : null,
-            ]);
-
-            return;
-        }
-
-        $this->_logger->debug('Elastica Request', [
-            'message' => $context,
-        ]);
-    }
-
-    /**
-     * Optimizes all search indices.
-     *
-     * @param array $args OPTIONAL Optional arguments
-     *
-     * @return \Elastica\Response Response object
-     *
-     * @deprecated Replaced by forcemergeAll
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
-     */
-    public function optimizeAll($args = [])
-    {
-        trigger_error('Deprecated: Elastica\Client::optimizeAll() is deprecated and will be removed in further Elastica releases. Use Elastica\Client::forcemergeAll() instead.', E_USER_DEPRECATED);
-
-        return $this->forcemergeAll($args);
     }
 
     /**
