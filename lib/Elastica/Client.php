@@ -37,7 +37,7 @@ class Client
         'transport' => null,
         'persistent' => true,
         'timeout' => null,
-        'connections' => [], // host, port, path, timeout, transport, compression, persistent, timeout, config -> (curl, headers, url)
+        'connections' => [], // host, port, path, timeout, transport, compression, persistent, timeout, username, password, config -> (curl, headers, url)
         'roundRobin' => false,
         'log' => false,
         'retryOnConflict' => 0,
