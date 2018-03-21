@@ -327,7 +327,14 @@ class AbstractUpdateAction extends Param
      */
     public function setRefresh($refresh = true)
     {
-        return $this->setParam('_refresh', (bool) $refresh ? 'true' : 'false');
+        if (is_string($refresh) && strlen($refresh) == 0) {
+          $refresh = True;
+        }
+        if ($refresh != 'wait_for') {
+          $refresh = $refresh ? 'true' : 'false';
+        }
+
+        return $this->setParam('_refresh', $refresh);
     }
 
     /**
