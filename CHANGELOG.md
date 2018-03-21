@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Bugfixes
 - Remove [`each()`](http://www.php.net/each) usage to fix PHP 7.2 compatibility
+- Fix [#1435](https://github.com/ruflin/Elastica/issues/1435) forcing `doc_as_upsert` to be boolean, acording [Elastic doc-update documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html#_literal_doc_as_upsert_literal)
 
 ### Added
 
