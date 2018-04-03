@@ -674,7 +674,7 @@ class Client
      * @param array        $query       OPTIONAL Query params
      * @param string       $contentType Content-Type sent with this request
      *
-     * @throws Exception\ConnectionException|\Exception
+     * @throws Exception\ConnectionException|Exception\ClientException
      *
      * @return Response Response object
      */
