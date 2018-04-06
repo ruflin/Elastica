@@ -276,7 +276,7 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * Sets pipeline
+     * Sets pipeline.
      *
      * @param string $pipeline
      *
