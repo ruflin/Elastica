@@ -60,4 +60,25 @@ class TermsTest extends BaseAggregationTest
 
         $this->assertEquals('blue', $results['buckets'][2]['key']);
     }
+
+    /**
+     * @group functional
+     */
+    public function testTermsSetOrders()
+    {
+        $agg = new Terms('terms');
+        $agg->setField('color');
+        $agg->setOrders([
+            ['_count' => 'asc'], // 1. red,   2. green, 3. blue
+            ['_key' => 'asc'],   // 1. green, 2. red,   3. blue
+        ]);
+
+        $query = new Query();
+        $query->addAggregation($agg);
+        $results = $this->_getIndexForTest()->search($query)->getAggregation('terms');
+
+        $this->assertSame('green', $results['buckets'][0]['key']);
+        $this->assertSame('red', $results['buckets'][1]['key']);
+        $this->assertSame('blue', $results['buckets'][2]['key']);
+    }
 }
