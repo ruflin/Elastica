@@ -20,4 +20,16 @@ class Terms extends AbstractTermsAggregation
     {
         return $this->setParam('order', [$order => $direction]);
     }
+
+    /**
+     * Sets a list of bucket sort orders.
+     *
+     * @param array $orders A list of [<aggregationField>|"_count"|"_term" => <direction>] definitions.
+     *
+     * @return $this
+     */
+    public function setOrders(array $orders)
+    {
+        return $this->setParam('order', $orders);
+    }
 }
