@@ -72,7 +72,7 @@ class SortTest extends BasePipelineTest
         /** @var ResultSet $result */
         $result = $index->search('*');
 
-        $this->assertEquals(1, count($result->getResults()));
+        $this->assertCount(1, $result->getResults());
 
         $results = $result->getResults();
         $this->assertSame([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], ($results[0]->getHit())['_source']['name']);

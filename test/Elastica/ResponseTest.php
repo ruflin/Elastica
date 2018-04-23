@@ -43,7 +43,7 @@ class ResponseTest extends BaseTest
         $shardsStats = $resultSet->getResponse()->getShardsStatistics();
 
         $this->assertInternalType('int', $engineTime);
-        $this->assertTrue(is_array($shardsStats));
+        $this->assertInternalType('array', $shardsStats);
         $this->assertArrayHasKey('total', $shardsStats);
         $this->assertArrayHasKey('successful', $shardsStats);
     }
@@ -215,7 +215,7 @@ class ResponseTest extends BaseTest
         ]));
         $response->setJsonBigintConversion(true);
 
-        $this->assertTrue(is_array($response->getData()));
+        $this->assertInternalType('array', $response->getData());
     }
 
     /**

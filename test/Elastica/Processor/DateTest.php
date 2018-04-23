@@ -92,7 +92,7 @@ class DateTest extends BasePipelineTest
         /** @var ResultSet $result */
         $result = $index->search('*');
 
-        $this->assertEquals(1, count($result->getResults()));
+        $this->assertCount(1, $result->getResults());
 
         $results = $result->getResults();
         $this->assertEquals('2010-06-12T11:05:15.000+02:00', ($results[0]->getHit())['_source']['date_parsed']);

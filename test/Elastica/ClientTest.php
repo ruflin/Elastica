@@ -342,8 +342,8 @@ class ClientTest extends BaseTest
         // deleteIds are the type we are testing for
         $idxString = $index->getName();
         $typeString = $type->getName();
-        $this->assertTrue(is_string($idxString));
-        $this->assertTrue(is_string($typeString));
+        $this->assertInternalType('string', $idxString);
+        $this->assertInternalType('string', $typeString);
 
         // Try to delete doc with a routing value which hashes to
         // a different shard then the id.
@@ -418,7 +418,7 @@ class ClientTest extends BaseTest
         // And verify that the variables we are doing to send to
         // deleteIds are the type we are testing for
         $idxString = $index->getName();
-        $this->assertTrue(is_string($idxString));
+        $this->assertInternalType('string', $idxString);
         $this->assertInstanceOf(Type::class, $type);
 
         // Using the existing $index and $type variables which
@@ -483,7 +483,7 @@ class ClientTest extends BaseTest
         // deleteIds are the type we are testing for
         $typeString = $type->getName();
         $this->assertInstanceOf(Index::class, $index);
-        $this->assertTrue(is_string($typeString));
+        $this->assertInternalType('string', $typeString);
 
         // Using the existing $index and $type variables which
         // are \Elastica\Index and \Elastica\Type objects respectively
@@ -579,7 +579,7 @@ class ClientTest extends BaseTest
         $connections = $client->getConnections();
 
         // two connections are setup
-        $this->assertEquals(2, count($connections));
+        $this->assertCount(2, $connections);
 
         // One connection has to be disabled
         $this->assertTrue($connections[0]->isEnabled() == false || $connections[1]->isEnabled() == false);
@@ -607,7 +607,7 @@ class ClientTest extends BaseTest
         $connections = $client->getConnections();
 
         // two connections are setup
-        $this->assertEquals(2, count($connections));
+        $this->assertCount(2, $connections);
 
         // One connection has to be disabled
         $this->assertTrue($connections[0]->isEnabled() == false || $connections[1]->isEnabled() == false);
@@ -900,7 +900,7 @@ class ClientTest extends BaseTest
         $response = $client->addDocuments($docs);
 
         $this->assertInstanceOf(ResponseSet::class, $response);
-        $this->assertEquals(3, count($response));
+        $this->assertCount(3, $response);
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
         $this->assertEquals('', $response->getError());
@@ -917,7 +917,7 @@ class ClientTest extends BaseTest
         $response = $client->deleteDocuments($deleteDocs);
 
         $this->assertInstanceOf(ResponseSet::class, $response);
-        $this->assertEquals(2, count($response));
+        $this->assertCount(2, $response);
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
         $this->assertEquals('', $response->getError());
@@ -945,7 +945,7 @@ class ClientTest extends BaseTest
         $response = $client->addDocuments($docs);
 
         $this->assertInstanceOf(ResponseSet::class, $response);
-        $this->assertEquals(3, count($response));
+        $this->assertCount(3, $response);
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
         $this->assertEquals('', $response->getError());
@@ -962,7 +962,7 @@ class ClientTest extends BaseTest
         $response = $client->deleteDocuments($deleteDocs, ['refresh' => true]);
 
         $this->assertInstanceOf(ResponseSet::class, $response);
-        $this->assertEquals(2, count($response));
+        $this->assertCount(2, $response);
         $this->assertTrue($response->isOk());
         $this->assertFalse($response->hasError());
         $this->assertEquals('', $response->getError());
@@ -1392,7 +1392,7 @@ class ClientTest extends BaseTest
         $endpoint->setParams(['types' => [$type->getName()]]);
         $response = $client->requestEndpoint($endpoint);
 
-        $this->assertTrue(isset($response->getData()['indices'][$index->getName()]['total']['indexing']['types']));
+        $this->assertArrayHasKey('types', $response->getData()['indices'][$index->getName()]['total']['indexing']);
 
         $this->assertEquals(
             ['test'],

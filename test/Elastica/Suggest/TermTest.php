@@ -86,7 +86,7 @@ class TermTest extends BaseTest
         $suggests = $result->getSuggests();
 
         // Ensure that two suggestion results are returned for suggest1
-        $this->assertEquals(2, sizeof($suggests['suggest1']));
+        $this->assertCount(2, $suggests['suggest1']);
 
         $this->assertEquals('github', $suggests['suggest2'][0]['options'][0]['text']);
         $this->assertEquals('food', $suggests['suggest1'][0]['options'][0]['text']);
@@ -107,6 +107,6 @@ class TermTest extends BaseTest
 
         // Assert that no suggestions were returned
         $suggests = $result->getSuggests();
-        $this->assertEquals(0, sizeof($suggests['suggest1'][0]['options']));
+        $this->assertCount(0, $suggests['suggest1'][0]['options']);
     }
 }

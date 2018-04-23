@@ -186,7 +186,7 @@ class HealthTest extends BaseTest
         $indices = $this->_health->getIndices();
 
         $this->assertInternalType('array', $indices);
-        $this->assertEquals(2, count($indices));
+        $this->assertCount(2, $indices);
         $this->assertArrayHasKey('index_one', $indices);
         $this->assertArrayHasKey('index_two', $indices);
 

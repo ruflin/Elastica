@@ -53,7 +53,7 @@ abstract class AbstractDSLTest extends BaseTest
      */
     protected function _assertParametersEquals($left, $right)
     {
-        $this->assertEquals(count($left), count($right), 'Parameters count mismatch');
+        $this->assertCount(count($left), $right, 'Parameters count mismatch');
 
         for ($i = 0; $i < count($left); ++$i) {
             $this->assertEquals($left[$i]->getName(), $right[$i]->getName(), 'Parameters names mismatch');

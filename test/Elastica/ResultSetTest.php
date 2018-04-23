@@ -32,7 +32,7 @@ class ResultSetTest extends BaseTest
         $this->assertNotTrue($resultSet->hasAggregations());
         $this->assertNotTrue($resultSet->hasSuggests());
         $this->assertInternalType('array', $resultSet->getResults());
-        $this->assertEquals(3, count($resultSet));
+        $this->assertCount(3, $resultSet);
     }
 
     /**
@@ -57,7 +57,7 @@ class ResultSetTest extends BaseTest
         $this->assertInstanceOf(Result::class, $resultSet[1]);
         $this->assertInstanceOf(Result::class, $resultSet[2]);
 
-        $this->assertFalse(isset($resultSet[3]));
+        $this->assertArrayNotHasKey(3, $resultSet);
     }
 
     /**
@@ -82,11 +82,11 @@ class ResultSetTest extends BaseTest
         $documents = $resultSet->getDocuments();
 
         $this->assertInternalType('array', $documents);
-        $this->assertEquals(3, count($documents));
+        $this->assertCount(3, $documents);
         $this->assertInstanceOf(Document::class, $documents[0]);
         $this->assertInstanceOf(Document::class, $documents[1]);
         $this->assertInstanceOf(Document::class, $documents[2]);
-        $this->assertFalse(isset($documents[3]));
+        $this->assertArrayNotHasKey(3, $documents);
         $this->assertEquals('elastica search', $documents[0]->get('name'));
     }
 

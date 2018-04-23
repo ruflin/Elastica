@@ -237,6 +237,6 @@ class AttachmentTest extends BasePipelineTest
         $data = $type->getDocument($docId)->getData();
         $this->assertEquals($data['title'], $title);
         $this->assertEquals($data['text'], $text);
-        $this->assertFalse(isset($data['file']));
+        $this->assertArrayNotHasKey('file', $data);
     }
 }

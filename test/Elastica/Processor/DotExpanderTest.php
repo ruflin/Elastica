@@ -54,7 +54,7 @@ class DotExpanderTest extends BasePipelineTest
         /** @var ResultSet $result */
         $result = $index->search('*');
 
-        $this->assertEquals(1, count($result->getResults()));
+        $this->assertCount(1, $result->getResults());
 
         $expect = [
             'foo' => [

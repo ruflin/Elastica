@@ -55,7 +55,7 @@ class JoinTest extends BasePipelineTest
         /** @var ResultSet $result */
         $result = $index->search('*');
 
-        $this->assertEquals(1, count($result->getResults()));
+        $this->assertCount(1, $result->getResults());
 
         $results = $result->getResults();
         $this->assertSame('abc-def-ghij', ($results[0]->getHit())['_source']['name']);
