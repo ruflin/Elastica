@@ -59,7 +59,7 @@ class InfoTest extends BaseTest
             $id = $node->getInfo()->getId();
 
             // Checks that the ids are unique
-            $this->assertFalse(in_array($id, $ids));
+            $this->assertNotContains($id, $ids);
             $ids[] = $id;
         }
     }
@@ -90,8 +90,8 @@ class InfoTest extends BaseTest
 
         $info = $client->getCluster()->getNodes()[0]->getInfo();
 
-        $this->assertTrue(isset($info->getData()['plugins']));
+        $this->assertArrayHasKey('plugins', $info->getData());
         $info->refresh(['jvm']);
-        $this->assertFalse(isset($info->getData()['plugins']));
+        $this->assertArrayNotHasKey('plugins', $info->getData());
     }
 }

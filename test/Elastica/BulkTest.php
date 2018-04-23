@@ -257,7 +257,7 @@ class BulkTest extends BaseTest
         $actions = $bulk->getActions();
 
         $this->assertInternalType('array', $actions);
-        $this->assertEquals(5, count($actions));
+        $this->assertCount(5, $actions);
 
         $this->assertInstanceOf(Action::class, $actions[0]);
         $this->assertEquals('index', $actions[0]->getOpType());
@@ -412,7 +412,7 @@ class BulkTest extends BaseTest
 
         foreach (['Mister', 'Invisible', 'Torch'] as $name) {
             $result = $type->search($name);
-            $this->assertEquals(1, count($result->getResults()));
+            $this->assertCount(1, $result->getResults());
         }
     }
 

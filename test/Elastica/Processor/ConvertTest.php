@@ -90,7 +90,7 @@ class ConvertTest extends BasePipelineTest
         /** @var ResultSet $result */
         $result = $index->search('elastica');
 
-        $this->assertEquals(2, count($result->getResults()));
+        $this->assertCount(2, $result->getResults());
 
         $results = $result->getResults();
         foreach ($results as $result) {

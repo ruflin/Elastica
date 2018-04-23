@@ -75,7 +75,7 @@ class JsonTest extends BasePipelineTest
         /** @var ResultSet $result */
         $result = $index->search('*');
 
-        $this->assertEquals(1, count($result->getResults()));
+        $this->assertCount(1, $result->getResults());
 
         $resultExpected = [
             'foo' => 2000,

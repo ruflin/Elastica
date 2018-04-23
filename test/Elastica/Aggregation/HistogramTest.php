@@ -40,7 +40,7 @@ class HistogramTest extends BaseAggregationTest
         $results = $this->_getIndexForTest()->search($query)->getAggregation('hist');
 
         $buckets = $results['buckets'];
-        $this->assertEquals(5, sizeof($buckets));
+        $this->assertCount(5, $buckets);
         $this->assertEquals(30, $buckets[3]['key']);
         $this->assertEquals(2, $buckets[3]['doc_count']);
     }

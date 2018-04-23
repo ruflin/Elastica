@@ -53,7 +53,7 @@ class MappingTest extends BaseTest
 
         $this->assertEquals($firstname, $fields['firstname'][0]);
         $this->assertArrayNotHasKey('lastname', $fields);
-        $this->assertEquals(1, count($fields));
+        $this->assertCount(1, $fields);
 
         $index->flush();
         $document = $type->getDocument(1);

@@ -74,7 +74,7 @@ class RemoveTest extends BasePipelineTest
         /** @var ResultSet $result */
         $result = $index->search('*');
 
-        $this->assertEquals(2, count($result->getResults()));
+        $this->assertCount(2, $result->getResults());
 
         foreach ($result->getResults() as $rx) {
             $value = $rx->getData();

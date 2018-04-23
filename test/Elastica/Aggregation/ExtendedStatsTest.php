@@ -40,6 +40,6 @@ class ExtendedStatsTest extends BaseAggregationTest
         $this->assertEquals(8, $results['max']);
         $this->assertEquals((5 + 8 + 1 + 3) / 4.0, $results['avg']);
         $this->assertEquals((5 + 8 + 1 + 3), $results['sum']);
-        $this->assertTrue(array_key_exists('sum_of_squares', $results));
+        $this->assertArrayHasKey('sum_of_squares', $results);
     }
 }

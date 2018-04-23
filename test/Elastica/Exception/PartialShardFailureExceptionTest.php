@@ -50,10 +50,10 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
         } catch (PartialShardFailureException $e) {
             $builder = new DefaultBuilder();
             $resultSet = $builder->buildResultSet($e->getResponse(), $query);
-            $this->assertEquals(0, count($resultSet->getResults()));
+            $this->assertCount(0, $resultSet->getResults());
 
             $message = JSON::parse($e->getMessage());
-            $this->assertTrue(isset($message['failures']), 'Failures are absent');
+            $this->assertArrayHasKey('failures', $message, 'Failures are absent');
             $this->assertGreaterThan(0, count($message['failures']), 'Failures are empty');
         }
     }

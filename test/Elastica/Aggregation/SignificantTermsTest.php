@@ -47,7 +47,7 @@ class SignificantTermsTest extends BaseAggregationTest
         $query->addAggregation($agg);
         $results = $this->_getIndexForTest()->search($query)->getAggregation('significantTerms');
 
-        $this->assertEquals(1, count($results['buckets']));
+        $this->assertCount(1, $results['buckets']);
         $this->assertEquals(63, $results['buckets'][0]['doc_count']);
         $this->assertEquals(79, $results['buckets'][0]['bg_count']);
         $this->assertEquals('1500', $results['buckets'][0]['key']);

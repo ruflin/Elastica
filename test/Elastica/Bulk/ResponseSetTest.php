@@ -46,7 +46,7 @@ class ResponseSetTest extends BaseTest
             $this->assertNotEquals('AnotherExceptionMessage', $responseSet->getError());
 
             $actionExceptions = $e->getActionExceptions();
-            $this->assertEquals(2, count($actionExceptions));
+            $this->assertCount(2, $actionExceptions);
 
             $this->assertInstanceOf(ActionException::class, $actionExceptions[0]);
             $this->assertSame($actions[1], $actionExceptions[0]->getAction());
@@ -71,7 +71,7 @@ class ResponseSetTest extends BaseTest
 
         $bulkResponses = $responseSet->getBulkResponses();
         $this->assertInternalType('array', $bulkResponses);
-        $this->assertEquals(3, count($bulkResponses));
+        $this->assertCount(3, $bulkResponses);
 
         foreach ($bulkResponses as $i => $bulkResponse) {
             $this->assertInstanceOf(Bulk\Response::class, $bulkResponse);
@@ -93,7 +93,7 @@ class ResponseSetTest extends BaseTest
 
         $responseSet = $this->_createResponseSet($responseData, $actions);
 
-        $this->assertEquals(3, count($responseSet));
+        $this->assertCount(3, $responseSet);
 
         foreach ($responseSet as $i => $bulkResponse) {
             $this->assertInstanceOf(Bulk\Response::class, $bulkResponse);

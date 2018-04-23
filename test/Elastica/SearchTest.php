@@ -43,22 +43,22 @@ class SearchTest extends BaseTest
         $search->addIndex($index1);
         $indices = $search->getIndices();
 
-        $this->assertEquals(1, count($indices));
+        $this->assertCount(1, $indices);
 
         $search->addIndex($index2);
         $indices = $search->getIndices();
 
-        $this->assertEquals(2, count($indices));
+        $this->assertCount(2, $indices);
 
-        $this->assertTrue(in_array($index1->getName(), $indices));
-        $this->assertTrue(in_array($index2->getName(), $indices));
+        $this->assertContains($index1->getName(), $indices);
+        $this->assertContains($index2->getName(), $indices);
 
         // Add string
         $search->addIndex('test3');
         $indices = $search->getIndices();
 
-        $this->assertEquals(3, count($indices));
-        $this->assertTrue(in_array('test3', $indices));
+        $this->assertCount(3, $indices);
+        $this->assertContains('test3', $indices);
     }
 
     /**
@@ -75,7 +75,7 @@ class SearchTest extends BaseTest
 
         $search->addIndices($indices);
 
-        $this->assertEquals(2, count($search->getIndices()));
+        $this->assertCount(2, $search->getIndices());
     }
 
     /**
@@ -96,22 +96,22 @@ class SearchTest extends BaseTest
         $search->addType($type1);
         $types = $search->getTypes();
 
-        $this->assertEquals(1, count($types));
+        $this->assertCount(1, $types);
 
         $search->addType($type2);
         $types = $search->getTypes();
 
-        $this->assertEquals(2, count($types));
+        $this->assertCount(2, $types);
 
-        $this->assertTrue(in_array($type1->getName(), $types));
-        $this->assertTrue(in_array($type2->getName(), $types));
+        $this->assertContains($type1->getName(), $types);
+        $this->assertContains($type2->getName(), $types);
 
         // Add string
         $search->addType('test3');
         $types = $search->getTypes();
 
-        $this->assertEquals(3, count($types));
-        $this->assertTrue(in_array('test3', $types));
+        $this->assertCount(3, $types);
+        $this->assertContains('test3', $types);
     }
 
     /**
@@ -130,7 +130,7 @@ class SearchTest extends BaseTest
 
         $search->addTypes($types);
 
-        $this->assertEquals(2, count($search->getTypes()));
+        $this->assertCount(2, $search->getTypes());
     }
 
     /**
@@ -265,7 +265,7 @@ class SearchTest extends BaseTest
 
         $scrollId = $result->getResponse()->getScrollId();
         $this->assertNotEmpty($scrollId);
-        $this->assertEquals(5, count($result->getResults()));
+        $this->assertCount(5, $result->getResults());
 
         //There are 10 items, and we're scrolling with a size of 5
         //So we should get two results of 5 items, and then no items
@@ -276,7 +276,7 @@ class SearchTest extends BaseTest
             Search::OPTION_SCROLL_ID => $scrollId,
         ]);
         $this->assertFalse($result->getResponse()->hasError());
-        $this->assertEquals(5, count($result->getResults()));
+        $this->assertCount(5, $result->getResults());
         $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
         $this->assertEquals([Search::OPTION_SCROLL_ID => $scrollId], $search->getClient()->getLastRequest()->getData());
 
@@ -285,7 +285,7 @@ class SearchTest extends BaseTest
             Search::OPTION_SCROLL_ID => $scrollId,
         ]);
         $this->assertFalse($result->getResponse()->hasError());
-        $this->assertEquals(0, count($result->getResults()));
+        $this->assertCount(0, $result->getResults());
         $this->assertArrayNotHasKey(Search::OPTION_SCROLL_ID, $search->getClient()->getLastRequest()->getQuery());
         $this->assertEquals([Search::OPTION_SCROLL_ID => $scrollId], $search->getClient()->getLastRequest()->getData());
     }

@@ -52,7 +52,7 @@ class CommonTest extends BaseTest
         $results = $type->search($query)->getResults();
 
         //documents containing only common words should not be returned
-        $this->assertEquals(3, sizeof($results));
+        $this->assertCount(3, $results);
 
         $query->setMinimumShouldMatch(2);
         $results = $type->search($query);

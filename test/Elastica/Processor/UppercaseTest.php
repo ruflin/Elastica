@@ -57,7 +57,7 @@ class UppercaseTest extends BasePipelineTest
         /** @var ResultSet $result */
         $result = $index->search('*');
 
-        $this->assertEquals(2, count($result->getResults()));
+        $this->assertCount(2, $result->getResults());
 
         $results = $result->getResults();
         $this->assertSame('RUFLIN', ($results[0]->getHit())['_source']['name']);

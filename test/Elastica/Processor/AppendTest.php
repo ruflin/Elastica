@@ -75,11 +75,11 @@ class AppendTest extends BasePipelineTest
         /** @var ResultSet $result */
         $result = $index->search('*');
 
-        $this->assertEquals(2, count($result->getResults()));
+        $this->assertCount(2, $result->getResults());
 
         foreach ($result->getResults() as $rx) {
             $value = $rx->getData();
-            $this->assertEquals(4, count($value['foo']));
+            $this->assertCount(4, $value['foo']);
             $this->assertNull($value['foo'][0]);
             $this->assertEquals('item2', $value['foo'][1]);
             $this->assertEquals('item3', $value['foo'][2]);
