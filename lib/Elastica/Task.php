@@ -52,10 +52,10 @@ class Task extends Param
      * @param string $id
      * @return mixed
      */
-    public function isCompleted(string $id): array
+    public function isCompleted(string $id): bool
     {
         $task = $this->get($id);
-        return $task->getData()['completed'];
+        return $task['completed'];
     }
 
     /**

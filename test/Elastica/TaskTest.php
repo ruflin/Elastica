@@ -29,12 +29,7 @@ class TaskTest extends Base
      */
     public function testGet()
     {
-        $index = $this->_createIndex();
-        $type1 = new Type($index, 'test');
-        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
-        $type1->addDocument(new Document(2, ['name' => 'p10']));
-        $index->refresh();
-
+        $index = $this->createIndexWithDocument();
         // Delete first document
         $response = $index->deleteByQuery('ruflin', ['wait_for_completion' => 'false']);
         $id = $response->getData()['task'];
@@ -62,8 +57,28 @@ class TaskTest extends Base
     /**
      * @group functional
      */
-    public function test()
+    public function testIsComplete()
     {
+        $index = $this->createIndexWithDocument();
+        $response = $index->deleteByQuery('ruflin', ['wait_for_completion' => 'false']);
+        $id = $response->getData()['task'];
 
+        while(!$this->sut->isCompleted($id)) {
+            usleep(500);
+        }
+
+        $this->assertTrue($this->sut->isCompleted($id));
+    }
+
+    /**
+     * @return \Elastica\Index
+     */
+    protected function createIndexWithDocument(): \Elastica\Index
+    {
+        $index = $this->_createIndex();
+        $type1 = new Type($index, 'test');
+        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
+        $index->refresh();
+        return $index;
     }
 }
