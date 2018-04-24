@@ -1,13 +1,15 @@
 <?php
 namespace Elastica\Test;
 
+use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Response;
 use Elastica\Status;
 use Elastica\Task;
-use Elastica\Test\Base as BaseTest;
+use Elastica\Test\Base;
+use Elastica\Type;
 
-class TaskTest extends BaseTest
+class TaskTest extends Base
 {
     /**
      * @var Task
@@ -21,21 +23,47 @@ class TaskTest extends BaseTest
         parent::setUp();
         $this->sut = new Task($this->_getClient());
     }
+
+    /**
+     * @group functional
+     */
+    public function testGet()
+    {
+        $index = $this->_createIndex();
+        $type1 = new Type($index, 'test');
+        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
+        $type1->addDocument(new Document(2, ['name' => 'p10']));
+        $index->refresh();
+
+        // Delete first document
+        $response = $index->deleteByQuery('ruflin', ['wait_for_completion' => 'false']);
+        $id = $response->getData()['task'];
+        $task = $this->sut->get($id);
+        $this->assertTrue(is_array($task));
+        $this->assertNotEmpty($task);
+        $this->assertEquals($id, sprintf("%s:%s", $task['task']['node'], $task['task']['id']));
+    }
+
     /**
      * @group functional
      */
     public function testGetList()
     {
-        file_put_contents('log.txt', var_export($this->tasks, false));
         $indexName = 'test';
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
         $index->create([], true);
         $index = $this->_createIndex();
-        $index->refresh();
-        $index->forcemerge();
         $this->tasks = $this->sut->getTasks();
-        $this->assertTrue(is_array($this->tasks));
+        $tasks = array_column($this->tasks['nodes'], 'tasks')[0];
+        $this->assertTrue(!empty($tasks));
     }
 
+    /**
+     * @group functional
+     */
+    public function test()
+    {
+
+    }
 }
