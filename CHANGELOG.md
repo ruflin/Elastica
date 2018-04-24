@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file based on the
 
 * Added support for pipeline when indexing document. [#1455](https://github.com/ruflin/Elastica/pull/1455)
 * Added support for multiple bucket sort orders for aggregations. [#1480](https://github.com/ruflin/Elastica/pull/1480)
+* Added basic support for the Elasticsearch Task Api
 
 ### Improvements
 

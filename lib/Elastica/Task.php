@@ -20,9 +20,6 @@ class Task extends Param
     /** @var Cancel */
     protected $_endpointCancel;
 
-    /** @var TasksList */
-    protected $_endpointTaskLists;
-
     public function __construct(Client $client)
     {
         $this->_client = $client;
@@ -56,28 +53,6 @@ class Task extends Param
     {
         $task = $this->get($id);
         return $task['completed'];
-    }
-
-    /**
-     * @param string $type
-     * @return Response
-     */
-    public function getByType(string $type): array
-    {
-        $getEndpoint = $this->retriveEndpointGet();
-        $getEndpoint->setType($type);
-        return $this->request($getEndpoint)->getData();
-    }
-
-    /**
-     * @param string $id
-     * @return Response
-     */
-    public function cancel(string $id): Response
-    {
-        $cancelEndpoint = $this->retrieveEndpointCancel();
-        $cancelEndpoint->setTaskId($id);
-        return $this->request($cancelEndpoint);
     }
 
     public function getTasks(): array
