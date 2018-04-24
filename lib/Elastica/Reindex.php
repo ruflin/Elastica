@@ -16,8 +16,13 @@ class Reindex extends Param
     const TYPE = 'type';
     const SIZE = 'size';
     const QUERY = 'query';
+    const REFRESH = 'refresh';
     const WAIT_FOR_COMPLETION = 'wait_for_completion';
     const WAIT_FOR_COMPLETION_FALSE = 'false';
+    const WAIT_FOR_ACTIVE_SHARDS = 'wait_for_active_shards';
+    const TIMEOUT = 'timeout';
+    const SCROLL = 'scroll';
+    const REQUESTS_PER_SECOND = 'requests_per_second';
 
     /**
      * @var Index
@@ -70,7 +75,7 @@ class Reindex extends Param
 
         $body = array_merge_recursive($body, [
             'source' => ['index' => $oldIndex->getName()],
-            'dest'   => ['index' => $newIndex->getName()],
+            'dest' => ['index' => $newIndex->getName()],
         ]);
 
         return $body;
@@ -80,7 +85,7 @@ class Reindex extends Param
     {
         $params = array_merge([
             'source' => $this->_getSourcePartBody($options),
-            'dest'   => $this->_getDestPartBody($options),
+            'dest' => $this->_getDestPartBody($options),
         ], $this->_resolveBodyOptions($options));
 
         return $params;
@@ -162,8 +167,49 @@ class Reindex extends Param
     private function _getEndpointParams(array $params)
     {
         return array_intersect_key($params, [
+            self::REFRESH => null,
             self::WAIT_FOR_COMPLETION => null,
+            self::WAIT_FOR_ACTIVE_SHARDS => null,
+            self::TIMEOUT => null,
+            self::SCROLL => null,
+            self::REQUESTS_PER_SECOND => null,
         ]);
+    }
+
+    public function setWaitForCompletion($value)
+    {
+        is_bool($value) && $value = $value ? 'true' : 'false';
+        $this->setParam(self::WAIT_FOR_COMPLETION, $value);
+    }
+
+    public function setWaitForActiveShards($value)
+    {
+        $this->setParam(self::WAIT_FOR_ACTIVE_SHARDS, $value);
+    }
+
+    public function setTimeout($value)
+    {
+        $this->setParam(self::TIMEOUT, $value);
+    }
+
+    public function setScroll($value)
+    {
+        $this->setParam(self::SCROLL, $value);
+    }
+
+    public function setRequestsPerSecond($value)
+    {
+        $this->setParam(self::REQUESTS_PER_SECOND, $value);
+    }
+
+    public function setSourceParam(string $key, $value)
+    {
+        $this->_params['source'][$key] = $value;
+    }
+
+    public function setDestParam(string $key, $value)
+    {
+        $this->_params['dest'][$key] = $value;
     }
 
     public function getTaskId()
@@ -174,10 +220,5 @@ class Reindex extends Param
         }
 
         return $taskId;
-    }
-
-    public function setWaitForCompletion($value)
-    {
-        $this->setParam(self::WAIT_FOR_COMPLETION, $value);
     }
 }
