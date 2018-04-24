@@ -4,7 +4,7 @@ namespace Elastica;
 
 use Elastica\Query\AbstractQuery;
 
-class Reindex
+class Reindex extends Param
 {
     const VERSION_TYPE = 'version_type';
     const VERSION_TYPE_INTERNAL = 'internal';
@@ -16,6 +16,8 @@ class Reindex
     const TYPE = 'type';
     const SIZE = 'size';
     const QUERY = 'query';
+    const WAIT_FOR_COMPLETION = 'wait_for_completion';
+    const WAIT_FOR_COMPLETION_FALSE = 'false';
 
     /**
      * @var Index
@@ -32,53 +34,70 @@ class Reindex
      */
     protected $_options;
 
+    /**
+     * @var Response|null
+     */
+    protected $_lastResponse;
+
+    /**
+     * @param array $options - deprecated because not compatible with complete Reindex API
+     */
     public function __construct(Index $oldIndex, Index $newIndex, array $options = [])
     {
         $this->_oldIndex = $oldIndex;
         $this->_newIndex = $newIndex;
-        $this->_options = $options;
+        $this->_params = $this->resolveOptions($options);
     }
 
     public function run()
     {
-        $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->_options);
+        $params = $this->_getEndpointParams($this->_params);
+        $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->_params);
 
         $reindexEndpoint = new \Elasticsearch\Endpoints\Reindex();
+        $reindexEndpoint->setParams($params);
         $reindexEndpoint->setBody($body);
 
-        $this->_oldIndex->getClient()->requestEndpoint($reindexEndpoint);
+        $this->lastResponse = $this->_oldIndex->getClient()->requestEndpoint($reindexEndpoint);
         $this->_newIndex->refresh();
 
         return $this->_newIndex;
     }
 
-    protected function _getBody($oldIndex, $newIndex, $options)
+    protected function _getBody($oldIndex, $newIndex, $params)
     {
-        $body = \array_merge([
-            'source' => $this->_getSourcePartBody($oldIndex, $options),
-            'dest' => $this->_getDestPartBody($newIndex, $options),
-        ], $this->_resolveBodyOptions($options));
+        $body = array_diff_key($params, $this->_getEndpointParams($params));
+
+        $body = array_merge_recursive($body, [
+            'source' => ['index' => $oldIndex->getName()],
+            'dest'   => ['index' => $newIndex->getName()],
+        ]);
 
         return $body;
     }
 
-    protected function _getSourcePartBody(Index $index, array $options)
+    protected function resolveOptions(array $options)
     {
-        $sourceBody = \array_merge([
-            'index' => $index->getName(),
-        ], $this->_resolveSourceOptions($options));
+        $params = array_merge([
+            'source' => $this->_getSourcePartBody($options),
+            'dest'   => $this->_getDestPartBody($options),
+        ], $this->_resolveBodyOptions($options));
 
+        return $params;
+    }
+
+    protected function _getSourcePartBody($options)
+    {
+        $sourceBody = $this->_resolveSourceOptions($options);
         $sourceBody = $this->_setSourceQuery($sourceBody);
         $sourceBody = $this->_setSourceType($sourceBody);
 
         return $sourceBody;
     }
 
-    protected function _getDestPartBody(Index $index, array $options)
+    protected function _getDestPartBody(array $options)
     {
-        return \array_merge([
-            'index' => $index->getName(),
-        ], $this->_resolveDestOptions($options));
+        return $this->_resolveDestOptions($options);
     }
 
     private function _resolveSourceOptions(array $options)
@@ -138,5 +157,27 @@ class Reindex
         }
 
         return $sourceBody;
+    }
+
+    private function _getEndpointParams(array $params)
+    {
+        return array_intersect_key($params, [
+            self::WAIT_FOR_COMPLETION => null,
+        ]);
+    }
+
+    public function getTaskId()
+    {
+        $taskId = null;
+        if ($this->lastResponse instanceof Response) {
+            $taskId = $this->lastResponse->getData()['task'] ?? null;
+        }
+
+        return $taskId;
+    }
+
+    public function setWaitForCompletion($value)
+    {
+        $this->setParam(self::WAIT_FOR_COMPLETION, $value);
     }
 }
