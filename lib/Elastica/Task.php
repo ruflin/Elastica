@@ -31,30 +31,30 @@ class Task extends Param
     /**
      * @param string $id
      * @param bool $waitForCompletion
-     * @return Response
+     * @return array
      */
-    public function get($id, $waitForCompletion = false)
+    public function get(string $id, bool $waitForCompletion = false): array
     {
         $getEndpoint = $this->retrieveEndpointGet();
         $getEndpoint->setTaskId($id);
-        $getEndpoint->setParams(['wait_for_completion' => $waitForCompletion]);
+        $getEndpoint->setParams(['wait_for_completion' => $waitForCompletion ? 'true' : 'false']);
 
         $response = $this->request($getEndpoint);
 
         if(empty($response)) {
-            return $null;
+            return [];
         }
 
-        return $response;
+        return $response->getData();
     }
 
     /**
      * @param string $id
      * @return mixed
      */
-    public function isCompleted($id)
+    public function isCompleted(string $id): array
     {
-        $task = $this->fetchById($id);
+        $task = $this->get($id);
         return $task->getData()['completed'];
     }
 
@@ -62,31 +62,35 @@ class Task extends Param
      * @param string $type
      * @return Response
      */
-    public function getByType($type)
+    public function getByType(string $type): array
     {
         $getEndpoint = $this->retriveEndpointGet();
         $getEndpoint->setType($type);
-        return $this->request($getEndpoint);
+        return $this->request($getEndpoint)->getData();
     }
 
     /**
      * @param string $id
      * @return Response
      */
-    public function cancel($id)
+    public function cancel(string $id): Response
     {
         $cancelEndpoint = $this->retrieveEndpointCancel();
         $cancelEndpoint->setTaskId($id);
         return $this->request($cancelEndpoint);
     }
 
-    public function getTasks()
+    public function getTasks(): array
     {
-        $this->_params;
-
+        $getEndpoint = $this->retrieveEndpointGet();
+        return $this->request($getEndpoint)->getData();
     }
 
-    private function request(AbstractEndpoint $endpoint)
+    /**
+     * @param AbstractEndpoint $endpoint
+     * @return Response
+     */
+    private function request(AbstractEndpoint $endpoint): Response
     {
         try {
             return $this->_client->requestEndpoint($endpoint);
@@ -94,7 +98,7 @@ class Task extends Param
             if($exception->getResponse()->getStatus() === 404) {
                 return $exception->getResponse();
             }
-            throw $e;
+            throw $exception;
         }
     }
 
