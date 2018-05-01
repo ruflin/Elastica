@@ -64,6 +64,31 @@ class TaskTest extends Base
     }
 
     /**
+     * @group unit
+     *
+     * @expectedException \Exception
+     * @expectedExceptionMessage No task id given
+     */
+    public function testCancelThrowsExceptionWithEmptyTaskId()
+    {
+        $task = new Task ($this->_getClient(), '');
+        $task->cancel();
+    }
+
+    /**
+     * @group functional
+     */
+    public function testCancelDoesntCancelCompletedTasks()
+    {
+        $task = $this->_createTask();
+        $task->refresh([Task::WAIT_FOR_COMPLETION => Task::WAIT_FOR_COMPLETION_TRUE]);
+        $response = $task->cancel();
+
+        $task->refresh();
+        $this->assertArrayNothasKey('canceled', $task->getData());
+    }
+
+    /**
      * Creates a task by issuing delete-by-query on an index
      *
      * @return Task Task object

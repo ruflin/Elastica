@@ -123,6 +123,18 @@ class Task extends Param
         return $data['completed'] === true;
     }
 
+    public function cancel(): Response
+    {
+        if (empty($this->_id)) {
+            throw new \Exception('No task id given');
+        }
+
+        $endpoint = $this->retrieveEndpointCancel();
+        $endpoint->setTaskId($this->_id);
+
+        return $this->_client->requestEndpoint($endpoint);
+    }
+
     /**
      * Returns the injected endpoint or creates a default one.
      *
