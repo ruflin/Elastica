@@ -12,46 +12,27 @@ use Elastica\Type;
 class TaskTest extends Base
 {
     /**
-     * @var Task
+     * @group functional
      */
-    protected $sut;
-
-    protected $tasks;
-
-    public function setUp()
+    public function testGetData()
     {
-        parent::setUp();
-        $this->sut = new Task($this->_getClient());
+        $task = $this->_createTask();
+        $data = $task->getData();
+
+        $this->assertTrue(is_array($data));
+        $this->assertNotEmpty($data);
     }
 
     /**
      * @group functional
      */
-    public function testGet()
+    public function testGetId()
     {
-        $index = $this->createIndexWithDocument();
-        // Delete first document
-        $response = $index->deleteByQuery('ruflin', ['wait_for_completion' => 'false']);
-        $id = $response->getData()['task'];
-        $task = $this->sut->get($id);
-        $this->assertTrue(is_array($task));
-        $this->assertNotEmpty($task);
-        $this->assertEquals($id, sprintf("%s:%s", $task['task']['node'], $task['task']['id']));
-    }
+        $task = $this->_createTask();
+        $data = $task->getData();
 
-    /**
-     * @group functional
-     */
-    public function testGetList()
-    {
-        $indexName = 'test';
-        $client = $this->_getClient();
-        $index = $client->getIndex($indexName);
-        $index->create([], true);
-        $index = $this->_createIndex();
-        $this->tasks = $this->sut->getTasks();
-        $tasks = array_column($this->tasks['nodes'], 'tasks')[0];
-        $this->assertTrue(!empty($tasks));
+        $this->assertNotEmpty($task->getId());
+        $this->assertEquals($task->getId(), sprintf("%s:%s", $data['task']['node'], $data['task']['id']));
     }
 
     /**
@@ -59,21 +40,51 @@ class TaskTest extends Base
      */
     public function testIsComplete()
     {
-        $index = $this->createIndexWithDocument();
+        $task = $this->_createTask();
+
+        for ($i = 0; $i < 5; $i ++) {
+            if ($task->isCompleted()) {
+                break;
+            }
+            sleep(1); // wait for task to complete
+            $task->refresh();
+        }
+
+        $this->assertTrue($task->isCompleted());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testRefreshWithOptionsContainingOnWaitForResponseTrue()
+    {
+        $task = $this->_createTask();
+        $task->refresh([Task::WAIT_FOR_COMPLETION => Task::WAIT_FOR_COMPLETION_TRUE]);
+        $this->assertTrue($task->isCompleted());
+    }
+
+    /**
+     * Creates a task by issuing delete-by-query on an index
+     *
+     * @return Task Task object
+     */
+    protected function _createTask(): Task
+    {
+        $index = $this->_createIndexWithDocument();
+
+        // Create delete-by-query task
         $response = $index->deleteByQuery('ruflin', ['wait_for_completion' => 'false']);
         $id = $response->getData()['task'];
 
-        while(!$this->sut->isCompleted($id)) {
-            usleep(500);
-        }
+        $this->assertNotEmpty($id, 'Failed to create task');
 
-        $this->assertTrue($this->sut->isCompleted($id));
+        return new Task($this->_getClient(), $id);
     }
 
     /**
      * @return \Elastica\Index
      */
-    protected function createIndexWithDocument(): \Elastica\Index
+    protected function _createIndexWithDocument(): \Elastica\Index
     {
         $index = $this->_createIndex();
         $type1 = new Type($index, 'test');
