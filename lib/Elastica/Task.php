@@ -2,10 +2,11 @@
 
 namespace Elastica;
 
-use Elastica\Exception\ResponseException;
-use Elastica\Query\AbstractQuery;
-use Elasticsearch\Endpoints\AbstractEndpoint;
-
+/**
+ * Represents elasticsearch task
+ *
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/tasks.html
+ */
 class Task extends Param
 {
     const WAIT_FOR_COMPLETION = 'wait_for_completion';
@@ -39,20 +40,6 @@ class Task extends Param
      * @var \Elastica\Client Client object
      */
     protected $_client;
-
-    /**
-     * Endpoint object for task getting.
-     *
-     * @var \Elasticsearch\Endpoints\Tasks\Get
-     */
-    protected $_endpointGet;
-
-    /**
-     * Endpoint object for task canceling.
-     *
-     * @var \Elasticsearch\Endpoints\Tasks\Cancel
-     */
-    protected $_endpointCancel;
 
     public function __construct(Client $client, string $id)
     {
@@ -105,7 +92,7 @@ class Task extends Param
      */
     public function refresh(array $options = [])
     {
-        $endpoint = $this->retrieveEndpointGet();
+        $endpoint = new \Elasticsearch\Endpoints\Tasks\Get();
         $endpoint->setTaskId($this->_id);
         $endpoint->setParams($options);
 
@@ -129,56 +116,9 @@ class Task extends Param
             throw new \Exception('No task id given');
         }
 
-        $endpoint = $this->retrieveEndpointCancel();
+        $endpoint = new \Elasticsearch\Endpoints\Tasks\Cancel();
         $endpoint->setTaskId($this->_id);
 
         return $this->_client->requestEndpoint($endpoint);
-    }
-
-    /**
-     * Returns the injected endpoint or creates a default one.
-     *
-     * @return \Elasticsearch\Endpoints\Tasks\Get Task getting endpoint object
-     */
-    private function retrieveEndpointGet()
-    {
-        if (empty($this->_endpointGet)) {
-            // TODO clone?
-            $this->_endpointGet = new \Elasticsearch\Endpoints\Tasks\Get();
-        }
-        return $this->_endpointGet;
-    }
-
-    /**
-     * Returns the injected endpoint or creates a default one.
-     *
-     * @return Cancel Task cancelation endpoint object
-     */
-    private function retrieveEndpointCancel()
-    {
-        if (empty($this->_endpointCancel)) {
-            $this->_endpointCancel = new \Elasticsearch\Endpoints\Tasks\Cancel();
-        }
-        return $this->_endpointCancel;
-    }
-
-    /**
-     * @param \Elasticsearch\Endpoints\Tasks\Get $endpointGet
-     * @return Task
-     */
-    public function setEndpointGet(\Elasticsearch\Endpoints\Tasks\Get $endpointGet)
-    {
-        $this->_endpointGet = $endpointGet;
-        return $this;
-    }
-
-    /**
-     * @param \Elasticsearch\Endpoints\Tasks\Cancel $endpointCancel
-     * @return Task
-     */
-    public function setEndpointCancel(\Elasticsearch\Endpoints\Tasks\Cancel $endpointCancel)
-    {
-        $this->_endpointCancel = $endpointCancel;
-        return $this;
     }
 }
