@@ -55,6 +55,6 @@ class Script extends AbstractScript
      */
     protected function getScriptTypeArray()
     {
-        return ['inline' => $this->_scriptCode];
+        return ['source' => $this->_scriptCode];
     }
 }

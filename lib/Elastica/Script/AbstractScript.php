@@ -63,9 +63,9 @@ abstract class AbstractScript extends AbstractUpdateAction
             throw new InvalidException('Script params must be an array');
         }
 
-        if (isset($data['script']['inline'])) {
+        if (isset($data['script']['source'])) {
             return new Script(
-                $data['script']['inline'],
+                $data['script']['source'],
                 $params,
                 $lang
             );

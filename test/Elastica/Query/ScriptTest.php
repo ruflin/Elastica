@@ -22,7 +22,7 @@ class ScriptTest extends BaseTest
         $expected = [
             'script' => [
                 'script' => [
-                    'inline' => $string,
+                    'source' => $string,
                 ],
             ],
         ];
@@ -50,7 +50,7 @@ class ScriptTest extends BaseTest
         $expected = [
             'script' => [
                 'script' => [
-                    'inline' => $string,
+                    'source' => $string,
                     'params' => $params,
                     'lang' => $lang,
                 ],

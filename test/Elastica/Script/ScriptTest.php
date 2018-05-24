@@ -15,7 +15,7 @@ class ScriptTest extends BaseTest
         $script = new Script(self::SCRIPT);
 
         $expected = ['script' => [
-            'inline' => self::SCRIPT,
+            'source' => self::SCRIPT,
         ]];
         $this->assertEquals(self::SCRIPT, $script->getScript());
         $this->assertEquals($expected, $script->toArray());
@@ -28,7 +28,7 @@ class ScriptTest extends BaseTest
         $script = new Script(self::SCRIPT, $params);
 
         $expected = ['script' => [
-            'inline' => self::SCRIPT,
+            'source' => self::SCRIPT,
             'params' => $params,
         ]];
 
@@ -39,7 +39,7 @@ class ScriptTest extends BaseTest
         $script = new Script(self::SCRIPT, $params, Script::LANG_PAINLESS);
 
         $expected = ['script' => [
-            'inline' => self::SCRIPT,
+            'source' => self::SCRIPT,
             'params' => $params,
             'lang' => Script::LANG_PAINLESS,
         ]];
@@ -62,7 +62,7 @@ class ScriptTest extends BaseTest
         $this->assertEquals(self::SCRIPT, $script->getScript());
 
         $expected = ['script' => [
-            'inline' => self::SCRIPT,
+            'source' => self::SCRIPT,
         ]];
         $this->assertEquals($expected, $script->toArray());
     }
@@ -91,7 +91,7 @@ class ScriptTest extends BaseTest
         ];
         $array = [
             'script' => [
-                'inline' => self::SCRIPT,
+                'source' => self::SCRIPT,
                 'lang' => Script::LANG_PAINLESS,
                 'params' => $params,
             ],

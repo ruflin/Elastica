@@ -35,7 +35,7 @@ class MaxTest extends BaseAggregationTest
             'max' => [
                 'field' => 'price',
                 'script' => [
-                    'inline' => '_value * params.conversion_rate',
+                    'source' => '_value * params.conversion_rate',
                     'params' => [
                         'conversion_rate' => 1.2,
                     ],

@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 
+* Use `source` script field instead of deprecated (since ES 5.6) `inline` field. [#1497](https://github.com/ruflin/Elastica/pull/1497)
+
 ### Deprecated
 
 
