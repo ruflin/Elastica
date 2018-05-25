@@ -8,6 +8,7 @@ use Elastica\Query\QueryString;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
 use Elastica\Request;
+use Elastica\Script\Script;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
@@ -285,6 +286,74 @@ class IndexTest extends BaseTest
         // Makes sure, document is deleted
         $response = $index->search('ruflin*');
         $this->assertEquals(1, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(0, $response->count());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testUpdateByQueryWithQueryString()
+    {
+        $index = $this->_createIndex();
+        $type1 = new Type($index, 'test1');
+        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
+        $type1->addDocument(new Document(2, ['name' => 'ruflin']));
+        $index->refresh();
+
+        $response = $index->search('ruflin*');
+        $this->assertEquals(2, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(1, $response->count());
+
+        // Update the element, searched by specific word. Should match first one
+        $response = $index->updateByQuery('nicolas', new Script('ctx._source.name = "marc"'));
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+
+        // Makes sure first element is updated and renamed to marc. Should match only second
+        $response = $index->search('ruflin*');
+        $this->assertEquals(1, $response->count());
+
+        $response = $index->search('marc*');
+        $this->assertEquals(1, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(0, $response->count());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testUpdateByQueryAll()
+    {
+        $index = $this->_createIndex();
+        $type1 = new Type($index, 'test1');
+        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
+        $type1->addDocument(new Document(2, ['name' => 'ruflin']));
+        $index->refresh();
+
+        $response = $index->search('ruflin*');
+        $this->assertEquals(2, $response->count());
+
+        $response = $index->search('nicolas');
+        $this->assertEquals(1, $response->count());
+
+        // Update all elements to name "marc"
+        $response = $index->updateByQuery('*', new Script('ctx._source.name = "marc"'));
+        $this->assertTrue($response->isOk());
+
+        $index->refresh();
+
+        // Because all documents have changed to marc, searching by "ruflin*" should match 0
+        $response = $index->search('ruflin*');
+        $this->assertEquals(0, $response->count());
+
+        $response = $index->search('marc');
+        $this->assertEquals(2, $response->count());
 
         $response = $index->search('nicolas');
         $this->assertEquals(0, $response->count());
