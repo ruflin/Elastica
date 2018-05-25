@@ -449,7 +449,7 @@ class FunctionScoreTest extends BaseTest
                     [
                         'script_score' => [
                             'script' => [
-                                'inline' => $scriptString,
+                                'source' => $scriptString,
                                 'lang' => Script::LANG_PAINLESS,
                             ],
                         ],

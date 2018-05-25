@@ -77,7 +77,7 @@ class ScriptTest extends BaseAggregationTest
         $expected = [
             $aggregation => [
                 'script' => [
-                    'inline' => $string,
+                    'source' => $string,
                     'params' => $params,
                     'lang' => $lang,
                 ],
