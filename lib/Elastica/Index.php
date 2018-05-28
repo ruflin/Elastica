@@ -6,6 +6,7 @@ use Elastica\Exception\ResponseException;
 use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
 use Elastica\ResultSet\BuilderInterface;
+use Elastica\Script\AbstractScript;
 use Elasticsearch\Endpoints\AbstractEndpoint;
 use Elasticsearch\Endpoints\DeleteByQuery;
 use Elasticsearch\Endpoints\Indices\Aliases\Update;
@@ -21,6 +22,7 @@ use Elasticsearch\Endpoints\Indices\Mapping\Get;
 use Elasticsearch\Endpoints\Indices\Open;
 use Elasticsearch\Endpoints\Indices\Refresh;
 use Elasticsearch\Endpoints\Indices\Settings\Put;
+use Elasticsearch\Endpoints\UpdateByQuery;
 
 /**
  * Elastica index object.
@@ -132,6 +134,33 @@ class Index implements SearchableInterface
         }
 
         return $this->getClient()->updateDocuments($docs, $options);
+    }
+
+    /**
+     * Update entries in the db based on a query.
+     *
+     * @param \Elastica\Query|string|array $query   Query object or array
+     * @param AbstractScript $script Script
+     * @param array                        $options Optional params
+     *
+     * @return \Elastica\Response
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
+     */
+    public function updateByQuery($query, AbstractScript $script , array $options = [])
+    {
+        $query = Query::create($query)->getQuery();
+
+        $endpoint = new UpdateByQuery();
+        $body = ['query' => is_array($query)
+            ? $query
+            : $query->toArray()];
+
+        $body['script'] = $script->toArray()['script'];
+        $endpoint->setBody($body);
+        $endpoint->setParams($options);
+
+        return $this->requestEndpoint($endpoint);
     }
 
     /**
