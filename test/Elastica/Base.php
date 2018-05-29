@@ -138,17 +138,17 @@ class Base extends \PHPUnit_Framework_TestCase
 
         $endpoint = new Put();
         $endpoint->setID('renaming');
-        $endpoint->setBody(array(
+        $endpoint->setBody([
             'description' => 'Rename field',
-            'processors' => array(
-                array(
-                    'rename' => array(
+            'processors' => [
+                [
+                    'rename' => [
                         'field' => 'old',
                         'target_field' => 'new',
-                    ),
-                ),
-            ),
-        ));
+                    ],
+                ],
+            ],
+        ]);
 
         $client->requestEndpoint($endpoint);
     }

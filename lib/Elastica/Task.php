@@ -1,9 +1,8 @@
 <?php
-
 namespace Elastica;
 
 /**
- * Represents elasticsearch task
+ * Represents elasticsearch task.
  *
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/tasks.html
  */
@@ -14,7 +13,7 @@ class Task extends Param
     const WAIT_FOR_COMPLETION_TRUE = 'true';
 
     /**
-     * Task id, e.g. in form of nodeNumber:taskId
+     * Task id, e.g. in form of nodeNumber:taskId.
      *
      * @var string
      */
@@ -72,7 +71,7 @@ class Task extends Param
     }
 
     /**
-     * Returns response object
+     * Returns response object.
      *
      * @return \Elastica\Response
      */
@@ -86,7 +85,7 @@ class Task extends Param
     }
 
     /**
-     * Refresh task status
+     * Refresh task status.
      *
      * @param array $options Options for endpoint
      */
