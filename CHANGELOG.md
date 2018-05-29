@@ -1,12 +1,20 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-
-## [Unreleased](https://github.com/ruflin/Elastica/compare/6.0.1...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/6.0.2...master)
 
 ### Backward Compatibility Breaks
 
 ### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+
+## [6.0.2](https://github.com/ruflin/Elastica/compare/6.0.1...6.0.2)
 
 ### Added
 
@@ -19,8 +27,6 @@ All notable changes to this project will be documented in this file based on the
 
 * Use `source` script field instead of deprecated (since ES 5.6) `inline` field. [#1497](https://github.com/ruflin/Elastica/pull/1497)
 * Updated Elasticsearch testing version to 6.2.4. [#1501](https://github.com/ruflin/Elastica/pull/1501)
-
-### Deprecated
 
 
 ## [6.0.1](https://github.com/ruflin/Elastica/compare/6.0.0...6.0.1)
