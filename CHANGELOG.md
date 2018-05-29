@@ -1,9 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.1...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.2...master)
 
 ### Backward Compatibility Breaks
+
+### Bugfixes
+
+### Added
+
+### Improvements
+
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.1...5.3.2)
 
 ### Bugfixes
 - Remove [`each()`](http://www.php.net/each) usage to fix PHP 7.2 compatibility
@@ -12,8 +21,6 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 * Added support for multiple bucket sort orders for aggregations.
-
-### Improvements
 
 
 ## [5.3.1](https://github.com/ruflin/Elastica/compare/5.3.0...5.3.1)

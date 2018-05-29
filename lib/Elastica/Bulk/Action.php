@@ -206,7 +206,7 @@ class Action
                 $string .= $source;
             } elseif (is_array($source) && array_key_exists('doc', $source) && is_string($source['doc'])) {
                 if (isset($source['doc_as_upsert'])) {
-                    $docAsUpsert = ', "doc_as_upsert": ' . ($source['doc_as_upsert'] ? 'true' : 'false' );
+                    $docAsUpsert = ', "doc_as_upsert": '.($source['doc_as_upsert'] ? 'true' : 'false');
                 } else {
                     $docAsUpsert = '';
                 }
