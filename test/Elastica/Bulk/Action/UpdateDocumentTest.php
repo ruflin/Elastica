@@ -2,12 +2,12 @@
 namespace Elastica\Test\BulkAction;
 
 use Elastica\Bulk\Action\UpdateDocument;
+use Elastica\Document;
 use Elastica\Index;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
-use Elastica\Document;
 
-class ActionTest extends BaseTest
+class UpdateDocumentTest extends BaseTest
 {
     /**
      * @group unit
@@ -61,7 +61,6 @@ class ActionTest extends BaseTest
         $expected = '{"update":{"_index":"index2","_type":"type2","_id":1,"_routing":1}}'."\n";
         $expected .= $docExpected;
         $this->assertEquals($expected, $action->toString());
-
     }
 
     /**
@@ -77,7 +76,7 @@ class ActionTest extends BaseTest
         $this->assertTrue($action->hasSource());
 
         $expected = '{"update":{"_index":"index","_type":"type","_id":1}}'."\n"
-                . '{"doc":{"foo":"bar"},"doc_as_upsert":true}'."\n";
+                .'{"doc":{"foo":"bar"},"doc_as_upsert":true}'."\n";
         $this->assertEquals($expected, $action->toString());
 
         $document->setDocAsUpsert(1);
@@ -87,7 +86,7 @@ class ActionTest extends BaseTest
         $document->setDocAsUpsert(false);
         $action->setDocument($document);
         $expected = '{"update":{"_index":"index","_type":"type","_id":1}}'."\n"
-                . '{"doc":{"foo":"bar"}}'."\n";
+                .'{"doc":{"foo":"bar"}}'."\n";
         $this->assertEquals($expected, $action->toString());
 
         $document->setDocAsUpsert(0);
