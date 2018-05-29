@@ -2,11 +2,7 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
-use Elastica\Exception\ResponseException;
-use Elastica\Response;
-use Elastica\Status;
 use Elastica\Task;
-use Elastica\Test\Base;
 use Elastica\Type;
 
 class TaskTest extends Base
@@ -32,7 +28,7 @@ class TaskTest extends Base
         $data = $task->getData();
 
         $this->assertNotEmpty($task->getId());
-        $this->assertEquals($task->getId(), sprintf("%s:%s", $data['task']['node'], $data['task']['id']));
+        $this->assertEquals($task->getId(), sprintf('%s:%s', $data['task']['node'], $data['task']['id']));
     }
 
     /**
@@ -42,7 +38,7 @@ class TaskTest extends Base
     {
         $task = $this->_createTask();
 
-        for ($i = 0; $i < 5; $i ++) {
+        for ($i = 0; $i < 5; ++$i ) {
             if ($task->isCompleted()) {
                 break;
             }
@@ -71,7 +67,7 @@ class TaskTest extends Base
      */
     public function testCancelThrowsExceptionWithEmptyTaskId()
     {
-        $task = new Task ($this->_getClient(), '');
+        $task = new Task($this->_getClient(), '');
         $task->cancel();
     }
 
@@ -89,7 +85,7 @@ class TaskTest extends Base
     }
 
     /**
-     * Creates a task by issuing delete-by-query on an index
+     * Creates a task by issuing delete-by-query on an index.
      *
      * @return Task Task object
      */
@@ -115,6 +111,7 @@ class TaskTest extends Base
         $type1 = new Type($index, 'test');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
         $index->refresh();
+
         return $index;
     }
 }

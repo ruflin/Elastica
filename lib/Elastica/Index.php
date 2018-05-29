@@ -140,21 +140,21 @@ class Index implements SearchableInterface
      * Update entries in the db based on a query.
      *
      * @param \Elastica\Query|string|array $query   Query object or array
-     * @param AbstractScript $script Script
+     * @param AbstractScript               $script  Script
      * @param array                        $options Optional params
      *
      * @return \Elastica\Response
      *
      * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
      */
-    public function updateByQuery($query, AbstractScript $script , array $options = [])
+    public function updateByQuery($query, AbstractScript $script, array $options = [])
     {
         $query = Query::create($query)->getQuery();
 
         $endpoint = new UpdateByQuery();
         $body = ['query' => is_array($query)
             ? $query
-            : $query->toArray()];
+            : $query->toArray(), ];
 
         $body['script'] = $script->toArray()['script'];
         $endpoint->setBody($body);
