@@ -27,7 +27,7 @@ class ClusterTest extends BaseTest
             $rawNodeNames[] = $rawNode['name'];
         }
 
-        $this->assertEquals($rawNodeNames, $cluster->getNodeNames());
+        $this->assertEquals($rawNodeNames, $cluster->getNodeNames(), true);
     }
 
     /**
