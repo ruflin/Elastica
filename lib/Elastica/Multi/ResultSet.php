@@ -2,7 +2,6 @@
 namespace Elastica\Multi;
 
 use Elastica\Response;
-use Elastica\ResultSet as BaseResultSet;
 
 /**
  * Elastica multi search result set
@@ -36,8 +35,8 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * Constructs ResultSet object.
      *
-     * @param \Elastica\Response $response
-     * @param BaseResultSet[]
+     * @param \Elastica\Response    $response
+     * @param \Elastica\ResultSet[] $resultSets
      */
     public function __construct(Response $response, $resultSets)
     {
@@ -80,13 +79,11 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @return bool|\Elastica\ResultSet
+     * @return \Elastica\ResultSet
      */
     public function current()
     {
-        return $this->valid()
-            ? $this->_resultSets[$this->key()]
-            : false;
+        return $this->_resultSets[$this->key()];
     }
 
     /**
