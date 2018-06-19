@@ -236,15 +236,11 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Returns the current object of the set.
      *
-     * @return \Elastica\Result|bool Set object or false if not valid (no more entries)
+     * @return \Elastica\Result Set object
      */
     public function current()
     {
-        if ($this->valid()) {
-            return $this->_results[$this->key()];
-        }
-
-        return false;
+        return $this->_results[$this->key()];
     }
 
     /**
@@ -253,8 +249,6 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     public function next()
     {
         ++$this->_position;
-
-        return $this->current();
     }
 
     /**
@@ -308,7 +302,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      *
      * @throws Exception\InvalidException If offset doesn't exist
      *
-     * @return Result|null
+     * @return Result
      */
     public function offsetGet($offset)
     {
