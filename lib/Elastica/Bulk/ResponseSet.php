@@ -95,13 +95,11 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     }
 
     /**
-     * @return bool|\Elastica\Bulk\Response
+     * @return \Elastica\Bulk\Response
      */
     public function current()
     {
-        return $this->valid()
-            ? $this->_bulkResponses[$this->key()]
-            : false;
+        return $this->_bulkResponses[$this->key()];
     }
 
     /**
