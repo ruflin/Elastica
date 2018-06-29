@@ -401,7 +401,7 @@ class Query extends Param
             unset($this->_params['facets']);
         }
 
-        if (isset($this->_params['post_filter']) && 0 === count($this->_params['post_filter'])) {
+        if (isset($this->_params['post_filter']) && 0 === count(($this->_params['post_filter'])->toArray())) {
             unset($this->_params['post_filter']);
         }
 
