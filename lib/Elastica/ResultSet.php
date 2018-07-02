@@ -297,7 +297,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
      */
     public function count()
     {
-        return sizeof($this->_results);
+        return count($this->_results);
     }
 
     /**
