@@ -25,8 +25,14 @@ Contributing
 Contributions are always welcome. For details on how to contribute, check the [CONTRIBUTING](https://github.com/ruflin/Elastica/blob/master/CONTRIBUTING.md) file.
 
 
-Dependencies
+Versions & Dependencies
 ------------
-| Project | Version | Required |
-|---------|---------|----------|
-|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/6.0)|6.0|yes|
+This project tries to follow Elasticsearch in terms of [End of Life](https://www.elastic.co/support/eol) and maintenance since 5.x
+
+| Elastica                                                                                | ElasticSearch | elasticsearch-php | PHP      |
+| --------------------------------------------------------------------------------------- | ------------- | ----------------- | -------- |
+| [6.x](https://github.com/ruflin/Elastica/tree/master)                                   | 6.x           | ^6.0              | ^7.0     |
+| [5.x](https://github.com/ruflin/Elastica/tree/5.x)                                      | 5.x           | ^5.0              | \>=5.6   |
+| [3.2.3](https://github.com/ruflin/Elastica/tree/3.2.3) (unmaintained)                   | 2.4.0         | no                | \>=5.4   |
+| [2.x](https://github.com/ruflin/Elastica/tree/2.x) (unmaintained)                       | 1.7.2         | no                | \>=5.3.3 |
+------------
