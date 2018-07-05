@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.1...5.3.2)
+## [5.3.2](https://github.com/ruflin/Elastica/compare/5.3.1...5.3.2)
 
 ### Bugfixes
 - Remove [`each()`](http://www.php.net/each) usage to fix PHP 7.2 compatibility
