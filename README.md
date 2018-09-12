@@ -15,6 +15,10 @@ in our [Gitter](https://gitter.im/ruflin/Elastica) channel.
 All library issues should go to the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
 
 
+Installing
+-------------
+composer require ruflin/Elastica
+
 Compatibility
 -------------
 This release is compatible with all Elasticsearch 6.x releases. It was tested with version 6.2.4.
