@@ -294,7 +294,7 @@ class FunctionScoreTest extends BaseTest
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
-        $query->addRandomScoreFunction(2, $filter);
+        $query->addRandomScoreFunction(2, $filter, null, '_id');
 
         $expected = [
             'function_score' => [
@@ -302,6 +302,7 @@ class FunctionScoreTest extends BaseTest
                     [
                         'random_score' => [
                             'seed' => 2,
+                            'field' => '_id',
                         ],
                         'filter' => [
                             'term' => [
@@ -331,7 +332,7 @@ class FunctionScoreTest extends BaseTest
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
-        $query->addRandomScoreFunction(2, $filter);
+        $query->addRandomScoreFunction(2, $filter, null, '_id');
 
         $expected = [
             'function_score' => [
@@ -339,6 +340,7 @@ class FunctionScoreTest extends BaseTest
                     [
                         'random_score' => [
                             'seed' => 2,
+                            'field' => '_id',
                         ],
                         'filter' => [
                             'term' => [
@@ -368,7 +370,7 @@ class FunctionScoreTest extends BaseTest
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
-        $query->addRandomScoreFunction(2, $filter, 2);
+        $query->addRandomScoreFunction(2, $filter, 2, '_id');
 
         $expected = [
             'function_score' => [
@@ -376,6 +378,7 @@ class FunctionScoreTest extends BaseTest
                     [
                         'random_score' => [
                             'seed' => 2,
+                            'field' => '_id',
                         ],
                         'filter' => [
                             'term' => [
@@ -398,7 +401,7 @@ class FunctionScoreTest extends BaseTest
     {
         $filter = new Term(['price' => 4.5]);
         $query = new FunctionScore();
-        $query->addRandomScoreFunction(2, $filter, 2);
+        $query->addRandomScoreFunction(2, $filter, 2, '_id');
 
         $expected = [
             'function_score' => [
@@ -406,6 +409,7 @@ class FunctionScoreTest extends BaseTest
                     [
                         'random_score' => [
                             'seed' => 2,
+                            'field' => '_id',
                         ],
                         'filter' => [
                             'term' => [
@@ -432,6 +436,43 @@ class FunctionScoreTest extends BaseTest
         $response = $this->_getIndexForTest()->search($query);
 
         $this->assertEquals(2, $response->count());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testRandomScoreWithoutField()
+    {
+        $filter = new Term(['price' => 4.5]);
+        $query = new FunctionScore();
+        $query->addRandomScoreFunction(2, $filter);
+
+        $expected = [
+            'function_score' => [
+                'functions' => [
+                    [
+                        'random_score' => [
+                            'seed' => 2,
+                        ],
+                        'filter' => [
+                            'term' => [
+                                'price' => 4.5,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $query->toArray());
+
+        $response = $this->_getIndexForTest()->search($query);
+        $results = $response->getResults();
+
+        // the document with the random score should have a score > 1, means it is the first result
+        $result0 = $results[0]->getData();
+
+        $this->assertEquals("Miller's Field", $result0['name']);
     }
 
     /**
