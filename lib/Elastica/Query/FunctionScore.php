@@ -44,6 +44,9 @@ class FunctionScore extends AbstractQuery
     const MULTI_VALUE_MODE_AVG = 'avg';
     const MULTI_VALUE_MODE_SUM = 'sum';
 
+    const RANDOM_SCORE_FIELD_ID = '_id';
+    const RANDOM_SCORE_FIELD_SEQ_NO = '_seq_no';
+
     protected $_functions = [];
 
     /**
@@ -191,12 +194,21 @@ class FunctionScore extends AbstractQuery
      * @param number        $seed   the seed value
      * @param AbstractQuery $filter a filter associated with this function
      * @param float         $weight an optional boost value associated with this function
+     * @param string        $field  the field to be used for random number generation
      *
      * @return $this
      */
-    public function addRandomScoreFunction($seed, AbstractQuery $filter = null, $weight = null)
+    public function addRandomScoreFunction($seed, AbstractQuery $filter = null, $weight = null, $field = null)
     {
-        return $this->addFunction('random_score', ['seed' => $seed], $filter, $weight);
+        $functionParams = [
+            'seed' => $seed,
+        ];
+
+        if (null !== $field) {
+            $functionParams['field'] = $field;
+        }
+
+        return $this->addFunction('random_score', $functionParams, $filter, $weight);
     }
 
     /**
