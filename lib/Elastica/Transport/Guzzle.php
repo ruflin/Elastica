@@ -53,7 +53,7 @@ class Guzzle extends AbstractTransport
     {
         $connection = $this->getConnection();
 
-        $client = $this->_getGuzzleClient($this->_getBaseUrl($connection), $connection->isPersistent(), $request);
+        $client = $this->_getGuzzleClient($this->_getBaseUrl($connection), $connection->isPersistent());
 
         $options = [
             'exceptions' => false, // 4xx and 5xx is expected and NOT an exceptions in this context
@@ -115,12 +115,14 @@ class Guzzle extends AbstractTransport
      */
     protected function _createPsr7Request(Request $request, Connection $connection)
     {
+        $headers = $connection->hasConfig('headers') && \is_array($connection->getConfig('headers'))
+            ? $connection->getConfig('headers')
+            : [];
+
         $req = new Psr7\Request(
             $request->getMethod(),
             $this->_getActionPath($request),
-            $connection->hasConfig('headers') && is_array($connection->getConfig('headers'))
-                ? $connection->getConfig('headers')
-                : []
+            \array_merge($headers, ['Content-Type' => $request->getContentType()])
         );
 
         $data = $request->getData();
@@ -150,18 +152,14 @@ class Guzzle extends AbstractTransport
      *
      * @param string  $baseUrl
      * @param bool    $persistent False if not persistent connection
-     * @param Request $request    Elastica Request Object
      *
      * @return Client
      */
-    protected function _getGuzzleClient($baseUrl, $persistent = true, Request $request)
+    protected function _getGuzzleClient($baseUrl, $persistent = true)
     {
         if (!$persistent || !self::$_guzzleClientConnection) {
             self::$_guzzleClientConnection = new Client([
                 'base_uri' => $baseUrl,
-                'headers' => [
-                    'Content-Type' => $request->getContentType(),
-                ],
             ]);
         }
 
