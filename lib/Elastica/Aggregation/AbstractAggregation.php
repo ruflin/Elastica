@@ -13,6 +13,11 @@ abstract class AbstractAggregation extends Param implements NameableInterface
     protected $_name;
 
     /**
+     * @var array Aggregation metadata
+     */
+    protected $_metas = [];
+
+    /**
      * @var array Subaggregations belonging to this aggregation
      */
     protected $_aggs = [];
@@ -47,6 +52,92 @@ abstract class AbstractAggregation extends Param implements NameableInterface
     public function getName()
     {
         return $this->_name;
+    }
+
+    /**
+     * Sets (overwrites) the value at the given key.
+     *
+     * @param string $key   Key to set
+     * @param mixed  $value Key Value
+     *
+     * @return $this
+     */
+    public function setMeta($key, $value)
+    {
+        $this->_metas[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Sets (overwrites) all metas of this object.
+     *
+     * @param array $metas Meta list
+     *
+     * @return $this
+     */
+    public function setMetas(array $metas)
+    {
+        $this->_metas = $metas;
+
+        return $this;
+    }
+
+    /**
+     * Adds a meta to the list.
+     *
+     * This function can be used to add an array of metas
+     *
+     * @param string $key   Meta key
+     * @param mixed  $value Value to set
+     *
+     * @return $this
+     */
+    public function addMeta($key, $value)
+    {
+        $this->_metas[$key][] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Returns a specific meta.
+     *
+     * @param string $key Key to return
+     *
+     * @throws \Elastica\Exception\InvalidException If requested key is not set
+     *
+     * @return mixed Key value
+     */
+    public function getMeta($key)
+    {
+        if (!$this->hasMeta($key)) {
+            throw new InvalidException('Meta '.$key.' does not exist');
+        }
+
+        return $this->_metas[$key];
+    }
+
+    /**
+     * Test if a meta is set.
+     *
+     * @param string $key Key to test
+     *
+     * @return bool True if the meta is set, false otherwise
+     */
+    public function hasMeta($key)
+    {
+        return isset($this->_metas[$key]);
+    }
+
+    /**
+     * Returns the metas array.
+     *
+     * @return array Metas
+     */
+    public function getMetas()
+    {
+        return $this->_metas;
     }
 
     /**
@@ -89,6 +180,9 @@ abstract class AbstractAggregation extends Param implements NameableInterface
         if (array_key_exists('global_aggregation', $array)) {
             // compensate for class name GlobalAggregation
             $array = ['global' => new \stdClass()];
+        }
+        if (sizeof($this->_metas)) {
+            $array['meta'] = $this->_convertArrayable($this->_metas);
         }
         if (sizeof($this->_aggs)) {
             $array['aggs'] = $this->_convertArrayable($this->_aggs);

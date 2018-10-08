@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 * [Field](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random) param for `Elastica\Query\FunctionScore::addRandomScoreFunction`
+* Added support for [aggregations metadata](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/agg-metadata.html).
 
 ### Improvements
 
