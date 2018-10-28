@@ -119,7 +119,8 @@ class QueryTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
 
         $first = $resultSet->current()->getData();
-        $second = $resultSet->next()->getData();
+        $resultSet->next();
+        $second = $resultSet->current()->getData();
 
         $this->assertEquals('guschti', $first['firstname']);
         $this->assertEquals('nicolas', $second['firstname']);
@@ -130,7 +131,8 @@ class QueryTest extends BaseTest
         $this->assertEquals(2, $resultSet->count());
 
         $first = $resultSet->current()->getData();
-        $second = $resultSet->next()->getData();
+        $resultSet->next();
+        $second = $resultSet->current()->getData();
 
         $this->assertEquals('nicolas', $first['firstname']);
         $this->assertEquals('guschti', $second['firstname']);
