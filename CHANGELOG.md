@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 
 ### Deprecated
+- In PHP 7.2 count() now raises a warning when an invalid parameter is passed. Only arrays and objects implementing the Countable interface should be passed. Backported from [#1378](https://github.com/ruflin/Elastica/pull/1378)
 
 
 ## [2.3.1](https://github.com/ruflin/Elastica/releases/tag/2.3.1) - 2015-10-17

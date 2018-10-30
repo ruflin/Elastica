@@ -50,7 +50,8 @@ class GeoPolygonTest extends BaseTest
 
         $query = new Query(new MatchAll());
         $query->setPostFilter($geoFilter);
-        $this->assertEquals(1, $type->search($query)->count());
+        $a = $type->search($query);
+        $this->assertEquals(1, $a->count());
 
         // Both points should be inside
         $query = new Query();

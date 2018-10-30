@@ -53,4 +53,14 @@ class GeoPolygon extends AbstractFilter
             ),
         );
     }
+
+    /**
+     * @inheritdoc
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->_key);
+    }
 }
