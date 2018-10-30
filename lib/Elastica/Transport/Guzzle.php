@@ -83,7 +83,8 @@ class Guzzle extends AbstractTransport
             throw new GuzzleException($ex, $request, new Response($ex->getMessage()));
         }
 
-        $response = new Response((string) $res->getBody(), $res->getStatusCode());
+        $responseBody = (string) $res->getBody();
+        $response = new Response($responseBody, $res->getStatusCode());
         $response->setQueryTime($end - $start);
         if ($connection->hasConfig('bigintConversion')) {
             $response->setJsonBigintConversion($connection->getConfig('bigintConversion'));
@@ -93,6 +94,7 @@ class Guzzle extends AbstractTransport
             [
                 'request_header' => $request->getMethod(),
                 'http_code' => $res->getStatusCode(),
+                'body' => $responseBody,
             ]
         );
 
