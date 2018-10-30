@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 
+* Made result sets adhere to `\Iterator` interface definition that they implement. Specifically, you need to call `valid()` on the result set before calling `current()`. When using `foreach` this is done by PHP automatically. When `valid` returns false, the return value of `current` is undefined instead of false. 
+  * `\Elastica\ResultSet::next` returns `void` instead of `\Elastica\Result|false`
+  * `\Elastica\Bulk\ResponseSet::current` returns `\Elastica\Bulk\Response` instead of `\Elastica\Bulk\Response|false`
+  * `\Elastica\Multi\ResultSet::current` returns `\Elastica\ResultSet` instead of `\Elastica\ResultSet|false`
+
 ### Bugfixes
 
 ### Added
