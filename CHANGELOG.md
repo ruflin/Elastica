@@ -13,8 +13,6 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 
 ### Deprecated
-- Introduce getFullError() for ResponseSet
-- Use the above to improve the output of getError() on Response
 - In PHP 7.2 count() now raises a warning when an invalid parameter is passed. Only arrays and objects implementing the Countable interface should be passed. Backported from [#1378](https://github.com/ruflin/Elastica/pull/1378)
 
 
