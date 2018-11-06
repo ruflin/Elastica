@@ -1,4 +1,4 @@
-version: '2.0'
+version: '3.4'
 
 services:
   elastica:
@@ -10,25 +10,20 @@ services:
     networks:
       - esnet
 
-  #SETUP ELASTICSEARCH 6.0-beta1
   elasticsearch6_1:
     build: ./env/elasticsearch/
     container_name: elasticsearch
     privileged: true
     environment:
       - bootstrap.memory_lock=true
-      - network.host=172.18.0.15
+      - network.host=10.10.10.15
       - xpack.security.enabled=false
       - xpack.monitoring.enabled=false
-      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
         soft: -1
         hard: -1
-      nofile:
-        soft: 65536
-        hard: 65536
-    mem_limit: 1g
     cap_add:
       - ALL
       - IPC_LOCK
@@ -38,24 +33,20 @@ services:
       - 9200:9200
     networks:
       esnet:
-        ipv4_address: 172.18.0.15
+        ipv4_address: 10.10.10.15
   elasticsearch6_2:
     build: ./env/elasticsearch/
     privileged: true
     environment:
       - bootstrap.memory_lock=true
-      - network.host=172.18.0.16
+      - network.host=10.10.10.16
       - xpack.security.enabled=false
       - xpack.monitoring.enabled=false
-      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
         soft: -1
         hard: -1
-      nofile:
-        soft: 65536
-        hard: 65536
-    mem_limit: 1g
     cap_add:
       - ALL
       - IPC_LOCK
@@ -63,13 +54,13 @@ services:
       - esdata1:/usr/share/elasticsearch/data
     networks:
       esnet:
-        ipv4_address: 172.18.0.16
+        ipv4_address: 10.10.10.16
 
   nginx:
     build: ./env/nginx/
     networks:
       esnet:
-        ipv4_address: 172.18.0.5
+        ipv4_address: 10.10.10.5
 
 
 volumes:
@@ -82,6 +73,6 @@ networks:
   esnet:
     driver: bridge
     ipam:
-     config:
-       - subnet: 172.18.0.0/16
-         gateway: 172.18.0.1
+      driver: default
+      config:
+      - subnet: 10.10.10.0/24
