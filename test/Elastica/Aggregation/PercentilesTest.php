@@ -86,6 +86,7 @@ class PercentilesTest extends BaseAggregationTest
      */
     public function testActualWork()
     {
+
         // prepare
         $index = $this->_createIndex();
         $type = $index->getType('offer');
@@ -113,13 +114,12 @@ class PercentilesTest extends BaseAggregationTest
         $resultSet = $type->search($query);
         $aggrResult = $resultSet->getAggregation('price_percentile');
 
-        // hope it's ok to hardcode results...
-        $this->assertEquals(109.0, $aggrResult['values']['1.0']);
-        $this->assertEquals(145.0, $aggrResult['values']['5.0']);
-        $this->assertEquals(325.0, $aggrResult['values']['25.0']);
+        $this->assertEquals(100.0, $aggrResult['values']['1.0']);
+        $this->assertEquals(100.0, $aggrResult['values']['5.0']);
+        $this->assertEquals(300.0, $aggrResult['values']['25.0']);
         $this->assertEquals(550.0, $aggrResult['values']['50.0']);
-        $this->assertEquals(775.0, $aggrResult['values']['75.0']);
-        $this->assertEquals(955.0, $aggrResult['values']['95.0']);
-        $this->assertEquals(991.0, $aggrResult['values']['99.0']);
+        $this->assertEquals(800.0, $aggrResult['values']['75.0']);
+        $this->assertEquals(1000.0, $aggrResult['values']['95.0']);
+        $this->assertEquals(1000.0, $aggrResult['values']['99.0']);
     }
 }

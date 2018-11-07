@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file based on the
   * `\Elastica\ResultSet::next` returns `void` instead of `\Elastica\Result|false`
   * `\Elastica\Bulk\ResponseSet::current` returns `\Elastica\Bulk\Response` instead of `\Elastica\Bulk\Response|false`
   * `\Elastica\Multi\ResultSet::current` returns `\Elastica\ResultSet` instead of `\Elastica\ResultSet|false`
+* Aggreation\Percentiles updated to a newer version of the Algorithm (T-Digest 3.2) and Percentiles results changed a bit Have a [look at here](https://github.com/elastic/elasticsearch/pull/28305), so updated tests in order not to fail. [#1531]([#1352](https://github.com/ruflin/Elastica/pull/1531))
 
 ### Bugfixes
 
