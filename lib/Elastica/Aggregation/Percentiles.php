@@ -26,11 +26,40 @@ class Percentiles extends AbstractSimpleAggregation
      *
      * @param float $value
      *
-     * @return $this
+     * @return Percentiles $this
      */
-    public function setCompression($value)
+    public function setCompression(float $value): Percentiles
     {
-        return $this->setParam('compression', (float) $value);
+        $compression = array('compression' => $value);
+        return $this->setParam('tdigest', $compression);
+    }
+
+    /**
+     * Set hdr parameter.
+     *
+     * @param string $key
+     * @param float $value
+     *
+     * @return Percentiles $this
+     */
+    public function setHdr(string $key, float $value): Percentiles
+    {
+        $compression = array($key => $value);
+        return $this->setParam('hdr', $compression);
+    }
+
+    /**
+     * the keyed flag is set to true which associates a unique string
+     * key with each bucket and returns the ranges as a hash
+     * rather than an array
+     *
+     * @param bool $keyed
+     *
+     * @return Percentiles $this
+     */
+    public function setKeyed(bool $keyed = true): Percentiles
+    {
+        return $this->setParam('keyed', $keyed);
     }
 
     /**
@@ -38,9 +67,9 @@ class Percentiles extends AbstractSimpleAggregation
      *
      * @param float[] $percents
      *
-     * @return $this
+     * @return Percentiles $this
      */
-    public function setPercents(array $percents)
+    public function setPercents(array $percents): Percentiles
     {
         return $this->setParam('percents', $percents);
     }
@@ -50,10 +79,23 @@ class Percentiles extends AbstractSimpleAggregation
      *
      * @param float $percent
      *
-     * @return $this
+     * @return Percentiles $this
      */
-    public function addPercent($percent)
+    public function addPercent(float $percent): Percentiles
     {
-        return $this->addParam('percents', (float) $percent);
+        return $this->addParam('percents', $percent);
+    }
+
+    /**
+     * Defines how documents that are missing a value should
+     * be treated
+     *
+     * @param float $missing
+     *
+     * @return Percentiles
+     */
+    public function setMissing(float $missing): Percentiles
+    {
+        return $this->setParam('missing', $missing);
     }
 }

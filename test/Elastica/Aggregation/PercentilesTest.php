@@ -32,16 +32,51 @@ class PercentilesTest extends BaseAggregationTest
     }
 
     /**
-     * @group functional
+     * @group unit
      */
-    public function testSetCompression()
+    public function testCompression()
     {
+        $expected = [
+            'percentiles' => [
+                'field' => 'price',
+                'keyed' => false,
+                'tdigest' => [
+                    'compression' => 100
+                ]
+            ]
+
+        ];
         $aggr = new Percentiles('price_percentile');
-        $aggr->setCompression(200);
-        $this->assertEquals(200, $aggr->getParam('compression'));
-        $this->assertInstanceOf(Percentiles::class, $aggr->setCompression(200));
+        $aggr->setField('price');
+        $aggr->setKeyed(false);
+        $aggr->setCompression(100);
+
+        $this->assertEquals($expected, $aggr->toArray());
     }
 
+    /**
+     * @group unit
+     */
+    public function testHdr()
+    {
+        $expected = [
+            'percentiles' => [
+                'field' => 'price',
+                'keyed' => false,
+                'hdr' => [
+                    'number_of_significant_value_digits' => 2.0
+                ]
+            ]
+
+        ];
+        $aggr = new Percentiles('price_percentile');
+        $aggr->setField('price');
+        $aggr->setKeyed(false);
+        $aggr->setHdr('number_of_significant_value_digits', 2);
+
+        $this->assertEquals($expected, $aggr->toArray());
+    }
+    
     /**
      * @group functional
      */
@@ -86,7 +121,6 @@ class PercentilesTest extends BaseAggregationTest
      */
     public function testActualWork()
     {
-
         // prepare
         $index = $this->_createIndex();
         $type = $index->getType('offer');
@@ -121,5 +155,99 @@ class PercentilesTest extends BaseAggregationTest
         $this->assertEquals(800.0, $aggrResult['values']['75.0']);
         $this->assertEquals(1000.0, $aggrResult['values']['95.0']);
         $this->assertEquals(1000.0, $aggrResult['values']['99.0']);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testKeyed()
+    {
+        $expected = [
+            'values' => [
+                [
+                    'key' => 1,
+                    'value' => 100
+                ],
+                [
+                    'key' => 5,
+                    'value' => 100
+                ],
+                [
+                    'key' => 25,
+                    'value' => 300
+                ],
+                [
+                    'key' => 50,
+                    'value' => 550
+                ],
+                [
+                    'key' => 75,
+                    'value' => 800
+                ],
+                [
+                    'key' => 95,
+                    'value' => 1000
+                ],
+                [
+                    'key' => 99,
+                    'value' => 1000
+                ]
+            ]
+        ];
+
+        // prepare
+        $index = $this->_createIndex();
+        $type = $index->getType('offer');
+        $type->addDocuments([
+            new Document(1, ['price' => 100]),
+            new Document(2, ['price' => 200]),
+            new Document(3, ['price' => 300]),
+            new Document(4, ['price' => 400]),
+            new Document(5, ['price' => 500]),
+            new Document(6, ['price' => 600]),
+            new Document(7, ['price' => 700]),
+            new Document(8, ['price' => 800]),
+            new Document(9, ['price' => 900]),
+            new Document(10, ['price' => 1000]),
+        ]);
+        $index->refresh();
+
+        // execute
+        $aggr = new Percentiles('price_percentile');
+        $aggr->setField('price');
+        $aggr->setKeyed(false);
+
+        $query = new Query();
+        $query->addAggregation($aggr);
+
+        $resultSet = $type->search($query);
+        $aggrResult = $resultSet->getAggregation('price_percentile');
+
+        $this->assertEquals($expected, $aggrResult);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testMissing()
+    {
+        $expected = [
+            'percentiles' => [
+                'field' => 'price',
+                'keyed' => false,
+                'hdr' => [
+                    'number_of_significant_value_digits' => 2.0
+                ],
+                'missing' => 10
+            ]
+
+        ];
+        $aggr = new Percentiles('price_percentile');
+        $aggr->setField('price');
+        $aggr->setKeyed(false);
+        $aggr->setHdr('number_of_significant_value_digits', 2);
+        $aggr->setMissing(10);
+
+        $this->assertEquals($expected, $aggr->toArray());
     }
 }
