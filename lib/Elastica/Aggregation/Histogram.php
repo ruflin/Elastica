@@ -11,7 +11,7 @@ class Histogram extends AbstractSimpleAggregation
     /**
      * @param string $name     the name of this aggregation
      * @param string $field    the name of the field on which to perform the aggregation
-     * @param int    $interval the interval by which documents will be bucketed
+     * @param int|string    $interval the interval by which documents will be bucketed
      */
     public function __construct($name, $field, $interval)
     {
