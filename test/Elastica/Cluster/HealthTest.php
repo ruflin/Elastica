@@ -189,9 +189,6 @@ class HealthTest extends BaseTest
         $this->assertCount(2, $indices);
         $this->assertArrayHasKey('index_one', $indices);
         $this->assertArrayHasKey('index_two', $indices);
-
-        foreach ($indices as $index) {
-            $this->assertInstanceOf(Index::class, $index);
-        }
+        $this->assertContainsOnlyInstancesOf(Index::class, $indices);
     }
 }

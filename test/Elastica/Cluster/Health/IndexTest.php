@@ -137,9 +137,6 @@ class IndexTest extends BaseTest
 
         $this->assertInternalType('array', $shards);
         $this->assertCount(3, $shards);
-
-        foreach ($shards as $shard) {
-            $this->assertInstanceOf(Shard::class, $shard);
-        }
+        $this->assertContainsOnlyInstancesOf(Shard::class, $shards);
     }
 }
