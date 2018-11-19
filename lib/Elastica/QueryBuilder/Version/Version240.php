@@ -29,6 +29,7 @@ class Version240 extends Version
         'match_all',
         'more_like_this',
         'nested',
+        'parent_id',
         'prefix',
         'query_string',
         'simple_query_string',
