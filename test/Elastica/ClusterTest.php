@@ -40,10 +40,7 @@ class ClusterTest extends BaseTest
 
         $nodes = $cluster->getNodes();
 
-        foreach ($nodes as $node) {
-            $this->assertInstanceOf(Node::class, $node);
-        }
-
+        $this->assertContainsOnlyInstancesOf(Node::class, $nodes);
         $this->assertGreaterThan(0, count($nodes));
     }
 
