@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file based on the
 
 * Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
 * [Field](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random) param for `Elastica\Query\FunctionScore::addRandomScoreFunction`
+* [Index Recovery](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-recovery.html) : the indices recovery API provides insight into on-going index shard recoveries. It was never been implemented into Elastica. [#1537](https://github.com/ruflin/Elastica/pull/1537)
 
 ### Improvements
 
