@@ -86,26 +86,16 @@ class CommonTest extends BaseTest
     }
 
     /**
-     * @group
+     * @group unit
+
      */
     public function testSetAnalyzer()
     {
-        $value = 'test';
+        $value = 'standard';
         $query = new Common('body', 'test query', .001);
         $query->setBoost($value);
+        $query->setAnalyzer('standard');
 
         $this->assertEquals($value, $query->toArray()['common']['body']['analyzer']);
-    }
-
-    /**
-     * @group
-     */
-    public function testSetDisableCoord()
-    {
-        $value = true;
-        $query = new Common('body', 'test query', .001);
-        $query->setDisableCoord($value);
-
-        $this->assertEquals($value, $query->toArray()['common']['body']['disable_coord']);
     }
 }
