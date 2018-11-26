@@ -5,6 +5,7 @@ use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
+use Elastica\Index\Recovery as IndexRecovery;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\Script\AbstractScript;
 use Elasticsearch\Endpoints\AbstractEndpoint;
@@ -85,6 +86,16 @@ class Index implements SearchableInterface
     public function getStats()
     {
         return new IndexStats($this);
+    }
+
+    /**
+     * Return Index Recovery.
+     *
+     * @return \Elastica\Index\Recovery
+     */
+    public function getRecovery()
+    {
+        return new IndexRecovery($this);
     }
 
     /**
