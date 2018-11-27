@@ -9,7 +9,26 @@ All notable changes to this project will be documented in this file based on the
   * `\Elastica\ResultSet::next` returns `void` instead of `\Elastica\Result|false`
   * `\Elastica\Bulk\ResponseSet::current` returns `\Elastica\Bulk\Response` instead of `\Elastica\Bulk\Response|false`
   * `\Elastica\Multi\ResultSet::current` returns `\Elastica\ResultSet` instead of `\Elastica\ResultSet|false`
-* Aggreation\Percentiles updated to a newer version of the Algorithm (T-Digest 3.2) and Percentiles results changed a bit Have a [look at here](https://github.com/elastic/elasticsearch/pull/28305), so updated tests in order not to fail. [#1531]([#1352](https://github.com/ruflin/Elastica/pull/1531))
+* `Aggreation\Percentiles` updated to a newer version of the Algorithm (T-Digest 3.2) and Percentiles results changed a bit Have a [look at here](https://github.com/elastic/elasticsearch/pull/28305), so updated tests in order not to fail. [#1531]([#1352](https://github.com/ruflin/Elastica/pull/1531))
+* `Aggregation\Percentiles` have been updated since [Elasticsearch 2.3](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-aggregations-metrics-percentile-aggregation.html). In this version `compression, HDR histogram` changed their implementations. The `missing` field has never been implemented. [#1532](https://github.com/ruflin/Elastica/pull/1532)
+  
+  Before 
+  ```json
+    "compression" : 200,
+    "method" : "hdr", 
+    "number_of_significant_value_digits" : 3
+  ```
+
+  Now 
+  ```json
+    "tdigest": {
+      "compression" : 200 
+    },
+    "hdr": { 
+      "number_of_significant_value_digits" : 3 
+    }
+  ```
+* Never implemented the method *Missing* on [`Aggregation\Percentiles`](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-aggregations-metrics-percentile-aggregation.html)
 
 ### Bugfixes
 
