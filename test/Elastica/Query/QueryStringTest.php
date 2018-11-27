@@ -144,7 +144,7 @@ class QueryStringTest extends BaseTest
     }
 
     /**
-     * @group
+     * @group unit
      */
     public function testSetAnalyzer()
     {
@@ -228,7 +228,7 @@ class QueryStringTest extends BaseTest
     }
 
     /**
-     * @group
+     * @group unit
      */
     public function testSetTieBreaker()
     {
