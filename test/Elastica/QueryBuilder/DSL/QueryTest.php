@@ -52,6 +52,7 @@ class QueryTest extends AbstractDSLTest
         $this->_assertImplemented($queryDSL, 'more_like_this', Query\MoreLikeThis::class, []);
         $this->_assertImplemented($queryDSL, 'multi_match', Query\MultiMatch::class, []);
         $this->_assertImplemented($queryDSL, 'nested', Query\Nested::class, []);
+        $this->_assertImplemented($queryDSL, 'parent_id', Query\ParentId::class, ['test', 1]);
         $this->_assertImplemented($queryDSL, 'prefix', Query\Prefix::class, []);
         $this->_assertImplemented($queryDSL, 'query_string', Query\QueryString::class, []);
         $this->_assertImplemented($queryDSL, 'range', Query\Range::class, ['field', []]);

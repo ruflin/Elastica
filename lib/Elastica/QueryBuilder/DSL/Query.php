@@ -21,6 +21,7 @@ use Elastica\Query\MatchNone;
 use Elastica\Query\MoreLikeThis;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Nested;
+use Elastica\Query\ParentId;
 use Elastica\Query\Percolate;
 use Elastica\Query\Prefix;
 use Elastica\Query\QueryString;
@@ -280,6 +281,18 @@ class Query implements DSL
     public function nested()
     {
         return new Nested();
+    }
+
+    /**
+     * @param $type
+     * @param $id
+     * @param $ignoreUnmapped
+     *
+     * @return ParentId ParentId
+     */
+    public function parent_id($type, $id, $ignoreUnmapped = false)
+    {
+        return new ParentId($type, $id, $ignoreUnmapped);
     }
 
     /**
