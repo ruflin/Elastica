@@ -15,7 +15,7 @@ class DeleteDocument extends AbstractDocument
      *
      * @return array
      */
-    protected function _getMetadata(AbstractUpdateAction $action)
+    protected function _getMetadata(AbstractUpdateAction $action): array
     {
         $params = [
             'index',

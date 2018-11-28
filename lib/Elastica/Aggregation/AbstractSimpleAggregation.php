@@ -12,7 +12,7 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
      *
      * @return $this
      */
-    public function setField($field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -24,7 +24,7 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
      *
      * @return $this
      */
-    public function setScript($script)
+    public function setScript($script): self
     {
         return $this->setParam('script', $script);
     }
@@ -32,7 +32,7 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         if (!$this->hasParam('field') && !$this->hasParam('script')) {
             throw new InvalidException(

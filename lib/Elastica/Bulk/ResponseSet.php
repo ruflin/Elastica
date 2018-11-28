@@ -29,7 +29,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return \Elastica\Bulk\Response[]
      */
-    public function getBulkResponses()
+    public function getBulkResponses(): array
     {
         return $this->_bulkResponses;
     }
@@ -39,7 +39,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
      *
      * @return string
      */
-    public function getError()
+    public function getError(): string
     {
         foreach ($this->getBulkResponses() as $bulkResponse) {
             if ($bulkResponse->hasError()) {
@@ -69,7 +69,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return bool
      */
-    public function isOk()
+    public function isOk(): bool
     {
         foreach ($this->getBulkResponses() as $bulkResponse) {
             if (!$bulkResponse->isOk()) {
@@ -83,7 +83,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return bool
      */
-    public function hasError()
+    public function hasError(): bool
     {
         foreach ($this->getBulkResponses() as $bulkResponse) {
             if ($bulkResponse->hasError()) {
@@ -97,12 +97,13 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return \Elastica\Bulk\Response
      */
-    public function current()
+    public function current(): Response
     {
         return $this->_bulkResponses[$this->key()];
     }
 
     /**
+     * {@inheritdoc}
      */
     public function next()
     {
@@ -120,7 +121,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return bool
      */
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->_bulkResponses[$this->key()]);
     }
@@ -135,7 +136,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->_bulkResponses);
     }

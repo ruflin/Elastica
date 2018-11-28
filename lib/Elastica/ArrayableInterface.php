@@ -14,5 +14,5 @@ interface ArrayableInterface
      *
      * @return array Object as array
      */
-    public function toArray();
+    public function toArray(): array;
 }

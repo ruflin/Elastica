@@ -13,5 +13,5 @@ interface StrategyInterface
      *
      * @return \Elastica\Connection
      */
-    public function getConnection($connections);
+    public function getConnection(array $connections);
 }

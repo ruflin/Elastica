@@ -43,7 +43,7 @@ class Action
      * @param array  $metadata
      * @param array  $source
      */
-    public function __construct($opType = self::OP_TYPE_INDEX, array $metadata = [], array $source = [])
+    public function __construct(string $opType = self::OP_TYPE_INDEX, array $metadata = [], array $source = [])
     {
         $this->setOpType($opType);
         $this->setMetadata($metadata);
@@ -55,7 +55,7 @@ class Action
      *
      * @return $this
      */
-    public function setOpType($type)
+    public function setOpType(string $type): self
     {
         $this->_opType = $type;
 
@@ -65,7 +65,7 @@ class Action
     /**
      * @return string
      */
-    public function getOpType()
+    public function getOpType(): string
     {
         return $this->_opType;
     }
@@ -75,7 +75,7 @@ class Action
      *
      * @return $this
      */
-    public function setMetadata(array $metadata)
+    public function setMetadata(array $metadata): self
     {
         $this->_metadata = $metadata;
 
@@ -85,7 +85,7 @@ class Action
     /**
      * @return array
      */
-    public function getMetadata()
+    public function getMetadata(): array
     {
         return $this->_metadata;
     }
@@ -93,7 +93,7 @@ class Action
     /**
      * @return array
      */
-    public function getActionMetadata()
+    public function getActionMetadata(): array
     {
         return [$this->_opType => $this->getMetadata()];
     }
@@ -103,7 +103,7 @@ class Action
      *
      * @return $this
      */
-    public function setSource($source)
+    public function setSource(array $source): self
     {
         $this->_source = $source;
 
@@ -113,7 +113,7 @@ class Action
     /**
      * @return array
      */
-    public function getSource()
+    public function getSource(): array
     {
         return $this->_source;
     }
@@ -121,7 +121,7 @@ class Action
     /**
      * @return bool
      */
-    public function hasSource()
+    public function hasSource(): bool
     {
         return !empty($this->_source);
     }
@@ -131,7 +131,7 @@ class Action
      *
      * @return $this
      */
-    public function setIndex($index)
+    public function setIndex($index): self
     {
         if ($index instanceof Index) {
             $index = $index->getName();
@@ -146,7 +146,7 @@ class Action
      *
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): self
     {
         if ($type instanceof Type) {
             $this->setIndex($type->getIndex()->getName());
@@ -162,7 +162,7 @@ class Action
      *
      * @return $this
      */
-    public function setId($id)
+    public function setId(string $id): self
     {
         $this->_metadata['_id'] = $id;
 
@@ -174,7 +174,7 @@ class Action
      *
      * @return $this
      */
-    public function setRouting($routing)
+    public function setRouting(string $routing): self
     {
         $this->_metadata['_routing'] = $routing;
 
@@ -184,7 +184,7 @@ class Action
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $data[] = $this->getActionMetadata();
         if ($this->hasSource()) {
@@ -197,7 +197,7 @@ class Action
     /**
      * @return string
      */
-    public function toString()
+    public function toString(): string
     {
         $string = JSON::stringify($this->getActionMetadata(), JSON_FORCE_OBJECT).Bulk::DELIMITER;
         if ($this->hasSource()) {
@@ -225,7 +225,7 @@ class Action
      *
      * @return bool
      */
-    public static function isValidOpType($opType)
+    public static function isValidOpType(string $opType): bool
     {
         return in_array($opType, self::$opTypes);
     }

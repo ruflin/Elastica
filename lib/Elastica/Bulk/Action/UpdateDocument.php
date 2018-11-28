@@ -18,7 +18,7 @@ class UpdateDocument extends IndexDocument
      *
      * @return $this
      */
-    public function setDocument(Document $document)
+    public function setDocument(Document $document): AbstractDocument
     {
         parent::setDocument($document);
 
@@ -44,7 +44,7 @@ class UpdateDocument extends IndexDocument
      *
      * @return $this
      */
-    public function setScript(AbstractScript $script)
+    public function setScript(AbstractScript $script): AbstractDocument
     {
         parent::setScript($script);
 

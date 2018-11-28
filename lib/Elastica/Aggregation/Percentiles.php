@@ -12,7 +12,7 @@ class Percentiles extends AbstractSimpleAggregation
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
      */
-    public function __construct($name, $field = null)
+    public function __construct(string $name, string $field = null)
     {
         parent::__construct($name);
 
@@ -26,9 +26,9 @@ class Percentiles extends AbstractSimpleAggregation
      *
      * @param float $value
      *
-     * @return Percentiles $this
+     * @return $this
      */
-    public function setCompression(float $value): Percentiles
+    public function setCompression(float $value): self
     {
         $compression = array('compression' => $value);
         return $this->setParam('tdigest', $compression);
@@ -40,9 +40,9 @@ class Percentiles extends AbstractSimpleAggregation
      * @param string $key
      * @param float $value
      *
-     * @return Percentiles $this
+     * @return $this
      */
-    public function setHdr(string $key, float $value): Percentiles
+    public function setHdr(string $key, float $value): self
     {
         $compression = array($key => $value);
         return $this->setParam('hdr', $compression);
@@ -55,9 +55,9 @@ class Percentiles extends AbstractSimpleAggregation
      *
      * @param bool $keyed
      *
-     * @return Percentiles $this
+     * @return $this
      */
-    public function setKeyed(bool $keyed = true): Percentiles
+    public function setKeyed(bool $keyed = true): self
     {
         return $this->setParam('keyed', $keyed);
     }
@@ -67,9 +67,9 @@ class Percentiles extends AbstractSimpleAggregation
      *
      * @param float[] $percents
      *
-     * @return Percentiles $this
+     * @return $this
      */
-    public function setPercents(array $percents): Percentiles
+    public function setPercents(array $percents): self
     {
         return $this->setParam('percents', $percents);
     }
@@ -79,9 +79,9 @@ class Percentiles extends AbstractSimpleAggregation
      *
      * @param float $percent
      *
-     * @return Percentiles $this
+     * @return $this
      */
-    public function addPercent(float $percent): Percentiles
+    public function addPercent(float $percent): self
     {
         return $this->addParam('percents', $percent);
     }
@@ -92,9 +92,9 @@ class Percentiles extends AbstractSimpleAggregation
      *
      * @param float $missing
      *
-     * @return Percentiles
+     * @return $this
      */
-    public function setMissing(float $missing): Percentiles
+    public function setMissing(float $missing): self
     {
         return $this->setParam('missing', $missing);
     }

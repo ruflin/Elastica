@@ -21,7 +21,7 @@ class Range extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function addRange($fromValue = null, $toValue = null, $key = null)
+    public function addRange($fromValue = null, $toValue = null, string $key = null)
     {
         if (is_null($fromValue) && is_null($toValue)) {
             throw new InvalidException('Either fromValue or toValue must be set. Both cannot be null.');
@@ -51,8 +51,8 @@ class Range extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setKeyedResponse($keyed = true)
+    public function setKeyedResponse(bool $keyed = true)
     {
-        return $this->setParam('keyed', (bool) $keyed);
+        return $this->setParam('keyed', $keyed);
     }
 }

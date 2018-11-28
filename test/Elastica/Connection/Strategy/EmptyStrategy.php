@@ -10,8 +10,7 @@ use Elastica\Connection\Strategy\StrategyInterface;
  */
 class EmptyStrategy implements StrategyInterface
 {
-    public function getConnection($connections)
+    public function getConnection(array $connections)
     {
-        return;
     }
 }

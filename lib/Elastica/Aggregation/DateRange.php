@@ -15,7 +15,7 @@ class DateRange extends Range
      *
      * @return $this
      */
-    public function setFormat($format)
+    public function setFormat(string $format): self
     {
         return $this->setParam('format', $format);
     }

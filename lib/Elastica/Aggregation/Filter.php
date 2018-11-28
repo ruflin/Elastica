@@ -15,7 +15,7 @@ class Filter extends AbstractAggregation
      * @param string        $name
      * @param AbstractQuery $filter
      */
-    public function __construct($name, AbstractQuery $filter = null)
+    public function __construct(string $name, AbstractQuery $filter = null)
     {
         parent::__construct($name);
 
@@ -41,7 +41,7 @@ class Filter extends AbstractAggregation
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         if (!$this->hasParam('filter')) {
             throw new InvalidException('Filter is required');

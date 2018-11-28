@@ -33,7 +33,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return array Filter array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $data = [$this->_getBaseName() => $this->getParams()];
 
@@ -51,7 +51,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return array
      */
-    protected function _convertArrayable(array $array)
+    protected function _convertArrayable(array $array): array
     {
         $arr = [];
 
@@ -75,7 +75,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return string name
      */
-    protected function _getBaseName()
+    protected function _getBaseName(): string
     {
         return Util::getParamName($this);
     }
@@ -88,7 +88,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return $this
      */
-    protected function _setRawParam($key, $value)
+    protected function _setRawParam(string $key, $value): self
     {
         $this->_rawParams[$key] = $value;
 
@@ -103,7 +103,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return $this
      */
-    public function setParam($key, $value)
+    public function setParam(string $key, $value): self
     {
         $this->_params[$key] = $value;
 
@@ -117,7 +117,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return $this
      */
-    public function setParams(array $params)
+    public function setParams(array $params): self
     {
         $this->_params = $params;
 
@@ -134,7 +134,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return $this
      */
-    public function addParam($key, $value)
+    public function addParam(string $key, $value): self
     {
         $this->_params[$key][] = $value;
 
@@ -150,7 +150,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return mixed Key value
      */
-    public function getParam($key)
+    public function getParam(string $key)
     {
         if (!$this->hasParam($key)) {
             throw new InvalidException('Param '.$key.' does not exist');
@@ -166,7 +166,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return bool True if the param is set, false otherwise
      */
-    public function hasParam($key)
+    public function hasParam(string $key): bool
     {
         return isset($this->_params[$key]);
     }
@@ -176,7 +176,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return array Params
      */
-    public function getParams()
+    public function getParams(): array
     {
         return $this->_params;
     }
@@ -186,7 +186,7 @@ class Param implements ArrayableInterface, \Countable
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->_params);
     }

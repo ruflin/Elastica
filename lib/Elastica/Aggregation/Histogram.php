@@ -13,7 +13,7 @@ class Histogram extends AbstractSimpleAggregation
      * @param string $field    the name of the field on which to perform the aggregation
      * @param int|string    $interval the interval by which documents will be bucketed
      */
-    public function __construct($name, $field, $interval)
+    public function __construct(string $name, string $field, $interval)
     {
         parent::__construct($name);
         $this->setField($field);
@@ -23,11 +23,11 @@ class Histogram extends AbstractSimpleAggregation
     /**
      * Set the interval by which documents will be bucketed.
      *
-     * @param int $interval
+     * @param int|string $interval
      *
      * @return $this
      */
-    public function setInterval($interval)
+    public function setInterval($interval): self
     {
         return $this->setParam('interval', $interval);
     }
@@ -40,7 +40,7 @@ class Histogram extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setOrder($order, $direction)
+    public function setOrder(string $order, string $direction): self
     {
         return $this->setParam('order', [$order => $direction]);
     }
@@ -52,7 +52,7 @@ class Histogram extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setMinimumDocumentCount($count)
+    public function setMinimumDocumentCount(int $count): self
     {
         return $this->setParam('min_doc_count', $count);
     }

@@ -29,48 +29,6 @@ class CallbackStrategyTest extends Base
     }
 
     /**
-     * @group unit
-     */
-    public function testIsValid()
-    {
-        // closure is valid
-        $isValid = CallbackStrategy::isValid(function () {});
-        $this->assertTrue($isValid);
-
-        // object implementing __invoke
-        $isValid = CallbackStrategy::isValid(new CallbackStrategyTestHelper());
-        $this->assertTrue($isValid);
-
-        // static method as string
-        $isValid = CallbackStrategy::isValid(CallbackStrategyTestHelper::class.'::getFirstConnectionStatic');
-        $this->assertTrue($isValid);
-
-        // static method as array
-        $isValid = CallbackStrategy::isValid([CallbackStrategyTestHelper::class, 'getFirstConnectionStatic']);
-        $this->assertTrue($isValid);
-
-        // object method
-        $isValid = CallbackStrategy::isValid([new CallbackStrategyTestHelper(), 'getFirstConnectionStatic']);
-        $this->assertTrue($isValid);
-
-        // function name
-        $isValid = CallbackStrategy::isValid('array_pop');
-        $this->assertTrue($isValid);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testFailIsValid()
-    {
-        $isValid = CallbackStrategy::isValid(new \stdClass());
-        $this->assertFalse($isValid);
-
-        $isValid = CallbackStrategy::isValid('array_pop_pop_pop_pop_pop_pop');
-        $this->assertFalse($isValid);
-    }
-
-    /**
      * @group functional
      */
     public function testConnection()

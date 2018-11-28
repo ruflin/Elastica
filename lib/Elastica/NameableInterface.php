@@ -14,7 +14,7 @@ interface NameableInterface
      *
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * Set the name of this object.
@@ -23,5 +23,5 @@ interface NameableInterface
      *
      * @return $this
      */
-    public function setName($name);
+    public function setName(string $name): self;
 }

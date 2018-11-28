@@ -12,7 +12,7 @@ class GeohashGrid extends AbstractAggregation
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
      */
-    public function __construct($name, $field)
+    public function __construct(string $name, string $field)
     {
         parent::__construct($name);
         $this->setField($field);
@@ -25,7 +25,7 @@ class GeohashGrid extends AbstractAggregation
      *
      * @return $this
      */
-    public function setField($field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -37,7 +37,7 @@ class GeohashGrid extends AbstractAggregation
      *
      * @return $this
      */
-    public function setPrecision($precision)
+    public function setPrecision(int $precision): self
     {
         return $this->setParam('precision', $precision);
     }
@@ -49,7 +49,7 @@ class GeohashGrid extends AbstractAggregation
      *
      * @return $this
      */
-    public function setSize($size)
+    public function setSize(int $size): self
     {
         return $this->setParam('size', $size);
     }
@@ -61,7 +61,7 @@ class GeohashGrid extends AbstractAggregation
      *
      * @return $this
      */
-    public function setShardSize($shardSize)
+    public function setShardSize(int $shardSize): self
     {
         return $this->setParam('shard_size', $shardSize);
     }

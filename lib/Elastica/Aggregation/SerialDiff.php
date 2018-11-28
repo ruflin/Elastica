@@ -14,7 +14,7 @@ class SerialDiff extends AbstractAggregation
      * @param string      $name
      * @param string|null $bucketsPath
      */
-    public function __construct($name, $bucketsPath = null)
+    public function __construct(string $name, string $bucketsPath = null)
     {
         parent::__construct($name);
 
@@ -30,7 +30,7 @@ class SerialDiff extends AbstractAggregation
      *
      * @return $this
      */
-    public function setBucketsPath($bucketsPath)
+    public function setBucketsPath(string $bucketsPath): self
     {
         return $this->setParam('buckets_path', $bucketsPath);
     }
@@ -42,7 +42,7 @@ class SerialDiff extends AbstractAggregation
      *
      * @return $this
      */
-    public function setLag($lag)
+    public function setLag(int $lag): self
     {
         return $this->setParam('lag', $lag);
     }
@@ -54,7 +54,7 @@ class SerialDiff extends AbstractAggregation
      *
      * @return $this
      */
-    public function setGapPolicy($gapPolicy)
+    public function setGapPolicy(string $gapPolicy): self
     {
         return $this->setParam('gap_policy', $gapPolicy);
     }
@@ -66,7 +66,7 @@ class SerialDiff extends AbstractAggregation
      *
      * @return $this
      */
-    public function setFormat($format)
+    public function setFormat(string $format): self
     {
         return $this->setParam('format', $format);
     }
@@ -76,7 +76,7 @@ class SerialDiff extends AbstractAggregation
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): self
     {
         if (!$this->hasParam('buckets_path')) {
             throw new InvalidException('Buckets path is required');

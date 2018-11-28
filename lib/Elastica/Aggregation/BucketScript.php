@@ -15,7 +15,7 @@ class BucketScript extends AbstractAggregation
      * @param array|null  $bucketsPath
      * @param string|null $script
      */
-    public function __construct($name, $bucketsPath = null, $script = null)
+    public function __construct(string $name, string $bucketsPath = null, string $script = null)
     {
         parent::__construct($name);
 
@@ -35,7 +35,7 @@ class BucketScript extends AbstractAggregation
      *
      * @return $this
      */
-    public function setBucketsPath($bucketsPath)
+    public function setBucketsPath(array $bucketsPath): self
     {
         return $this->setParam('buckets_path', $bucketsPath);
     }
@@ -47,7 +47,7 @@ class BucketScript extends AbstractAggregation
      *
      * @return $this
      */
-    public function setScript($script)
+    public function setScript(string $script): self
     {
         return $this->setParam('script', $script);
     }
@@ -59,7 +59,7 @@ class BucketScript extends AbstractAggregation
      *
      * @return $this
      */
-    public function setGapPolicy($gapPolicy)
+    public function setGapPolicy(string $gapPolicy): self
     {
         return $this->setParam('gap_policy', $gapPolicy);
     }
@@ -71,7 +71,7 @@ class BucketScript extends AbstractAggregation
      *
      * @return $this
      */
-    public function setFormat($format)
+    public function setFormat(string $format): self
     {
         return $this->setParam('format', $format);
     }
@@ -81,7 +81,7 @@ class BucketScript extends AbstractAggregation
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         if (!$this->hasParam('buckets_path')) {
             throw new InvalidException('Buckets path is required');

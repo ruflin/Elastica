@@ -16,7 +16,7 @@ class IndexDocument extends AbstractDocument
      *
      * @return $this
      */
-    public function setDocument(Document $document)
+    public function setDocument(Document $document): AbstractDocument
     {
         parent::setDocument($document);
 
@@ -30,7 +30,7 @@ class IndexDocument extends AbstractDocument
      *
      * @return array
      */
-    protected function _getMetadata(AbstractUpdateAction $action)
+    protected function _getMetadata(AbstractUpdateAction $action): array
     {
         $params = [
             'index',

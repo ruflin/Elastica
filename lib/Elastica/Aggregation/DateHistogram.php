@@ -11,11 +11,11 @@ class DateHistogram extends Histogram
     /**
      * Set time_zone option.
      *
-     * @param  string
+     * @param string $timezone
      *
      * @return $this
      */
-    public function setTimezone($timezone)
+    public function setTimezone(string $timezone): self
     {
         return $this->setParam('time_zone', $timezone);
     }
@@ -27,7 +27,7 @@ class DateHistogram extends Histogram
      *
      * @return $this
      */
-    public function setFactor($factor)
+    public function setFactor(int $factor): self
     {
         return $this->setParam('factor', $factor);
     }
@@ -35,11 +35,11 @@ class DateHistogram extends Histogram
     /**
      * Set offset option.
      *
-     * @param string
+     * @param string $offset
      *
      * @return $this
      */
-    public function setOffset($offset)
+    public function setOffset(string $offset): self
     {
         return $this->setParam('offset', $offset);
     }
@@ -53,7 +53,7 @@ class DateHistogram extends Histogram
      *
      * @return $this
      */
-    public function setFormat($format)
+    public function setFormat(string $format): self
     {
         return $this->setParam('format', $format);
     }
@@ -68,7 +68,7 @@ class DateHistogram extends Histogram
      *
      * @return $this
      */
-    public function setExtendedBounds($min = '', $max = '')
+    public function setExtendedBounds(string $min = '', string $max = ''): self
     {
         $bounds = [];
         $bounds['min'] = $min;

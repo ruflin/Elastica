@@ -26,7 +26,7 @@ abstract class AbstractDocument extends Action
      *
      * @return $this
      */
-    public function setDocument(Document $document)
+    public function setDocument(Document $document): self
     {
         $this->_data = $document;
 
@@ -42,7 +42,7 @@ abstract class AbstractDocument extends Action
      *
      * @return $this
      */
-    public function setScript(AbstractScript $script)
+    public function setScript(AbstractScript $script): self
     {
         if (!($this instanceof UpdateDocument)) {
             throw new \BadMethodCallException('setScript() can only be used for UpdateDocument');
@@ -63,7 +63,7 @@ abstract class AbstractDocument extends Action
      *
      * @return $this
      */
-    public function setData($data)
+    public function setData($data): self
     {
         if ($data instanceof AbstractScript) {
             $this->setScript($data);
@@ -83,11 +83,11 @@ abstract class AbstractDocument extends Action
      */
     public function getDocument()
     {
-        if ($this->_data instanceof Document) {
-            return $this->_data;
+        if (!$this->_data instanceof Document) {
+            return null;
         }
 
-        return;
+        return $this->_data;
     }
 
     /**
@@ -97,11 +97,11 @@ abstract class AbstractDocument extends Action
      */
     public function getScript()
     {
-        if ($this->_data instanceof AbstractScript) {
-            return $this->_data;
+        if (!$this->_data instanceof AbstractScript) {
+            return null;
         }
 
-        return;
+        return $this->_data;
     }
 
     /**
@@ -117,7 +117,7 @@ abstract class AbstractDocument extends Action
      *
      * @return array
      */
-    abstract protected function _getMetadata(AbstractUpdateAction $source);
+    abstract protected function _getMetadata(AbstractUpdateAction $source): array;
 
     /**
      * Creates a bulk action for a document or a script.
@@ -129,7 +129,7 @@ abstract class AbstractDocument extends Action
      *
      * @return static
      */
-    public static function create($data, $opType = null)
+    public static function create($data, $opType = null): self
     {
         //Check type
         if (!($data instanceof Document) && !($data instanceof AbstractScript)) {
@@ -144,7 +144,7 @@ abstract class AbstractDocument extends Action
         if ($data instanceof AbstractScript) {
             if ($opType === null) {
                 $opType = self::OP_TYPE_UPDATE;
-            } elseif ($opType != self::OP_TYPE_UPDATE) {
+            } elseif ($opType !== self::OP_TYPE_UPDATE) {
                 throw new \InvalidArgumentException('Scripts can only be used with the update operation type.');
             }
         }
