@@ -24,7 +24,7 @@ class Index
      * @param string $name The name of the index.
      * @param array  $data The index health data.
      */
-    public function __construct($name, $data)
+    public function __construct(string $name, array $data)
     {
         $this->_name = $name;
         $this->_data = $data;
@@ -35,7 +35,7 @@ class Index
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->_name;
     }
@@ -45,7 +45,7 @@ class Index
      *
      * @return string green, yellow or red.
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->_data['status'];
     }
@@ -55,7 +55,7 @@ class Index
      *
      * @return int
      */
-    public function getNumberOfShards()
+    public function getNumberOfShards(): int
     {
         return $this->_data['number_of_shards'];
     }
@@ -65,7 +65,7 @@ class Index
      *
      * @return int
      */
-    public function getNumberOfReplicas()
+    public function getNumberOfReplicas(): int
     {
         return $this->_data['number_of_replicas'];
     }
@@ -75,7 +75,7 @@ class Index
      *
      * @return int
      */
-    public function getActivePrimaryShards()
+    public function getActivePrimaryShards(): int
     {
         return $this->_data['active_primary_shards'];
     }
@@ -85,7 +85,7 @@ class Index
      *
      * @return int
      */
-    public function getActiveShards()
+    public function getActiveShards(): int
     {
         return $this->_data['active_shards'];
     }
@@ -95,7 +95,7 @@ class Index
      *
      * @return int
      */
-    public function getRelocatingShards()
+    public function getRelocatingShards(): int
     {
         return $this->_data['relocating_shards'];
     }
@@ -105,7 +105,7 @@ class Index
      *
      * @return int
      */
-    public function getInitializingShards()
+    public function getInitializingShards(): int
     {
         return $this->_data['initializing_shards'];
     }
@@ -115,7 +115,7 @@ class Index
      *
      * @return int
      */
-    public function getUnassignedShards()
+    public function getUnassignedShards(): int
     {
         return $this->_data['unassigned_shards'];
     }
@@ -125,7 +125,7 @@ class Index
      *
      * @return \Elastica\Cluster\Health\Shard[]
      */
-    public function getShards()
+    public function getShards(): array
     {
         $shards = [];
         foreach ($this->_data['shards'] as $shardNumber => $shard) {

@@ -3,6 +3,7 @@ namespace Elastica\Cluster;
 
 use Elastica\Client;
 use Elastica\Cluster\Health\Index;
+use Elasticsearch\Endpoints\Cluster\Health as ClusterHealth;
 
 /**
  * Elastic cluster health.
@@ -14,7 +15,7 @@ use Elastica\Cluster\Health\Index;
 class Health
 {
     /**
-     * @var \Elastica\Client Client object.
+     * @var Client Client object.
      */
     protected $_client;
 
@@ -24,7 +25,7 @@ class Health
     protected $_data;
 
     /**
-     * @param \Elastica\Client $client The Elastica client.
+     * @param Client $client The Elastica client.
      */
     public function __construct(Client $client)
     {
@@ -37,9 +38,9 @@ class Health
      *
      * @return array
      */
-    protected function _retrieveHealthData()
+    protected function _retrieveHealthData(): array
     {
-        $endpoint = new \Elasticsearch\Endpoints\Cluster\Health();
+        $endpoint = new ClusterHealth();
         $endpoint->setParams(['level' => 'shards']);
 
         $response = $this->_client->requestEndpoint($endpoint);
@@ -52,7 +53,7 @@ class Health
      *
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->_data;
     }
@@ -62,7 +63,7 @@ class Health
      *
      * @return $this
      */
-    public function refresh()
+    public function refresh(): self
     {
         $this->_data = $this->_retrieveHealthData();
 
@@ -74,7 +75,7 @@ class Health
      *
      * @return string
      */
-    public function getClusterName()
+    public function getClusterName(): string
     {
         return $this->_data['cluster_name'];
     }
@@ -84,7 +85,7 @@ class Health
      *
      * @return string green, yellow or red.
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->_data['status'];
     }
@@ -94,7 +95,7 @@ class Health
      *
      * @return bool
      */
-    public function getTimedOut()
+    public function getTimedOut(): bool
     {
         return $this->_data['timed_out'];
     }
@@ -104,7 +105,7 @@ class Health
      *
      * @return int
      */
-    public function getNumberOfNodes()
+    public function getNumberOfNodes(): int
     {
         return $this->_data['number_of_nodes'];
     }
@@ -114,7 +115,7 @@ class Health
      *
      * @return int
      */
-    public function getNumberOfDataNodes()
+    public function getNumberOfDataNodes(): int
     {
         return $this->_data['number_of_data_nodes'];
     }
@@ -124,7 +125,7 @@ class Health
      *
      * @return int
      */
-    public function getActivePrimaryShards()
+    public function getActivePrimaryShards(): int
     {
         return $this->_data['active_primary_shards'];
     }
@@ -134,7 +135,7 @@ class Health
      *
      * @return int
      */
-    public function getActiveShards()
+    public function getActiveShards(): int
     {
         return $this->_data['active_shards'];
     }
@@ -144,7 +145,7 @@ class Health
      *
      * @return int
      */
-    public function getRelocatingShards()
+    public function getRelocatingShards(): int
     {
         return $this->_data['relocating_shards'];
     }
@@ -154,7 +155,7 @@ class Health
      *
      * @return int
      */
-    public function getInitializingShards()
+    public function getInitializingShards(): int
     {
         return $this->_data['initializing_shards'];
     }
@@ -164,7 +165,7 @@ class Health
      *
      * @return int
      */
-    public function getUnassignedShards()
+    public function getUnassignedShards(): int
     {
         return $this->_data['unassigned_shards'];
     }
@@ -174,7 +175,7 @@ class Health
      *
      * @return int
      */
-    public function getDelayedUnassignedShards()
+    public function getDelayedUnassignedShards(): int
     {
         return $this->_data['delayed_unassigned_shards'];
     }
@@ -182,7 +183,7 @@ class Health
     /**
      * @return int
      */
-    public function getNumberOfPendingTasks()
+    public function getNumberOfPendingTasks(): int
     {
         return $this->_data['number_of_pending_tasks'];
     }
@@ -190,7 +191,7 @@ class Health
     /**
      * @return int
      */
-    public function getNumberOfInFlightFetch()
+    public function getNumberOfInFlightFetch(): int
     {
         return $this->_data['number_of_in_flight_fetch'];
     }
@@ -198,7 +199,7 @@ class Health
     /**
      * @return int
      */
-    public function getTaskMaxWaitingInQueueMillis()
+    public function getTaskMaxWaitingInQueueMillis(): int
     {
         return $this->_data['task_max_waiting_in_queue_millis'];
     }
@@ -206,7 +207,7 @@ class Health
     /**
      * @return int
      */
-    public function getActiveShardsPercentAsNumber()
+    public function getActiveShardsPercentAsNumber(): int
     {
         return $this->_data['active_shards_percent_as_number'];
     }
@@ -214,9 +215,9 @@ class Health
     /**
      * Gets the status of the indices.
      *
-     * @return \Elastica\Cluster\Health\Index[]
+     * @return Index[]
      */
-    public function getIndices()
+    public function getIndices(): array
     {
         $indices = [];
         foreach ($this->_data['indices'] as $indexName => $index) {
