@@ -126,4 +126,23 @@ class Term extends AbstractSuggest
     {
         return $this->setParam('max_term_freq', $max);
     }
+
+    /**
+     * Which string distance implementation to use for comparing how similar suggested terms are.
+     * Five possible values can be specified:
+     *
+     * - internal
+     * - damerau_levenshtein
+     * - levenshtein
+     * - jaro_winkler
+     * - ngram
+     *
+     * @param string $distanceAlgrorithm
+     *
+     * @return $this
+     */
+    public function setStringDistanceAlgorithm($distanceAlgorithm)
+    {
+        return $this->setParam('string_distance', $distanceAlgorithm);
+    }
 }

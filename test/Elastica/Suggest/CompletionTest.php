@@ -4,6 +4,7 @@ namespace Elastica\Test\Suggest;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
+use Elastica\Suggest;
 use Elastica\Suggest\Completion;
 use Elastica\Test\Base as BaseTest;
 
@@ -19,6 +20,9 @@ class CompletionTest extends BaseTest
 
         $type->setMapping([
             'fieldName' => [
+                'type' => 'completion',
+            ],
+            'fieldName2' => [
                 'type' => 'completion',
             ],
         ]);
@@ -42,6 +46,19 @@ class CompletionTest extends BaseTest
                     'weight' => 7,
                 ],
             ]),
+            new Document(4, [
+                'fieldName2' => [
+                    'input' => ['Bleach', 'Nirvana'],
+                    'weight' => 3,
+                ],
+            ]),
+            new Document(5, [
+                'fieldName2' => [
+                    'input' => ['Incesticide', 'Nirvana'],
+                    'weight' => 3,
+                ],
+            ]),
+
         ]);
 
         $index->refresh();
@@ -106,6 +123,50 @@ class CompletionTest extends BaseTest
 
         $this->assertCount(1, $options);
         $this->assertEquals('Nevermind', $options[0]['text']);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testCompletion()
+    {
+        $suggest = new Completion('suggestName1', 'fieldName');
+        $suggest->setPrefix('Neavermint');
+
+        $suggest2 = new Completion('suggestName2', 'fieldName2');
+        $suggest2->setPrefix('Neverdint');
+
+
+        $sug = new Suggest();
+        $sug->addSuggestion($suggest);
+        $sug->addSuggestion($suggest2);
+        $index = $this->_getIndexForTest();
+        $query = Query::create($sug);
+
+        $expectedSuggestions = [
+          'suggestName1' => [
+              0 => [
+                  'text' => 'Neavermint',
+                  'offset' => 0,
+                  'length' => 10,
+                  'options' => []
+                  ]
+          ],
+            'suggestName2' => [
+                0 => [
+                    'text' => 'Neverdint',
+                    'offset' => 0,
+                    'length' => 9,
+                    'options' => []
+                    ]
+            ]
+        ];
+
+
+        $resultSet = $index->search($query);
+
+        $this->assertTrue($resultSet->hasSuggests());
+        $this->assertEquals($expectedSuggestions, $resultSet->getSuggests());
     }
 
     /**
