@@ -1,6 +1,9 @@
 <?php
 namespace Elastica\Connection\Strategy;
 
+use Elastica\Connection;
+use Elastica\Exception\ClientException;
+
 /**
  * Description of RoundRobin.
  *
@@ -9,13 +12,13 @@ namespace Elastica\Connection\Strategy;
 class RoundRobin extends Simple
 {
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|Connection[] $connections
      *
-     * @throws \Elastica\Exception\ClientException
+     * @throws ClientException
      *
-     * @return \Elastica\Connection
+     * @return Connection
      */
-    public function getConnection(array $connections)
+    public function getConnection(array $connections): Connection
     {
         shuffle($connections);
 

@@ -12,13 +12,13 @@ use Elastica\Exception\ClientException;
 class Simple implements StrategyInterface
 {
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|Connection[] $connections
      *
-     * @throws \Elastica\Exception\ClientException
+     * @throws ClientException
      *
-     * @return \Elastica\Connection
+     * @return Connection
      */
-    public function getConnection(array $connections)
+    public function getConnection(array $connections): Connection
     {
         foreach ($connections as $connection) {
             if ($connection->isEnabled()) {

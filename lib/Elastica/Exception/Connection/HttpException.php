@@ -13,20 +13,20 @@ use Elastica\Response;
 class HttpException extends ConnectionException
 {
     /**
-     * Error code / message.
+     * Error code
      *
-     * @var int|string Error code / message
+     * @var int
      */
-    protected $_error = 0;
+    protected $_error;
 
     /**
      * Construct Exception.
      *
-     * @param int|string         $error    Error
-     * @param \Elastica\Request  $request
-     * @param \Elastica\Response $response
+     * @param int      $error
+     * @param Request  $request
+     * @param Response $response
      */
-    public function __construct($error, Request $request = null, Response $response = null)
+    public function __construct(int $error, Request $request = null, Response $response = null)
     {
         $this->_error = $error;
 
@@ -38,11 +38,11 @@ class HttpException extends ConnectionException
      * Returns the error message corresponding to the error code
      * cUrl error code reference can be found here {@link http://curl.haxx.se/libcurl/c/libcurl-errors.html}.
      *
-     * @param string $error Error code
+     * @param int $error Error code
      *
      * @return string Error message
      */
-    public function getErrorMessage($error)
+    public function getErrorMessage(int $error): string
     {
         switch ($error) {
             case CURLE_UNSUPPORTED_PROTOCOL:
@@ -65,11 +65,11 @@ class HttpException extends ConnectionException
     }
 
     /**
-     * Return Error code / message.
+     * Returns Error code.
      *
-     * @return string Error code / message
+     * @return int
      */
-    public function getError()
+    public function getError(): int
     {
         return $this->_error;
     }

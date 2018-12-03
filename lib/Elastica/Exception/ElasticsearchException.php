@@ -20,12 +20,12 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     /**
      * @var bool Whether exception was local to server node or remote
      */
-    private $_isRemote = false;
+    private $_isRemote;
 
     /**
      * @var array Error array
      */
-    protected $_error = [];
+    protected $_error;
 
     /**
      * Constructs elasticsearch exception.
@@ -33,8 +33,11 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      * @param int    $code  Error code
      * @param string $error Error message from elasticsearch
      */
-    public function __construct($code, $error)
+    public function __construct(int $code, string $error)
     {
+        $this->_isRemote = false;
+        $this->_error = [];
+
         $this->_parseError($error);
         parent::__construct($error, $code);
     }
@@ -44,14 +47,14 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      *
      * @param string $error Error message
      */
-    protected function _parseError($error)
+    protected function _parseError(string $error)
     {
         $errors = explode(']; nested: ', $error);
 
-        if (count($errors) == 1) {
+        if (1 === \count($errors)) {
             $this->_exception = $this->_extractException($errors[0]);
         } else {
-            if ($this->_extractException($errors[0]) == self::REMOTE_TRANSPORT_EXCEPTION) {
+            if (self::REMOTE_TRANSPORT_EXCEPTION === $this->_extractException($errors[0])) {
                 $this->_isRemote = true;
                 $this->_exception = $this->_extractException($errors[1]);
             } else {
@@ -73,7 +76,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
             return $matches[1];
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -91,7 +94,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      *
      * @return bool
      */
-    public function isRemoteTransportException()
+    public function isRemoteTransportException(): bool
     {
         return $this->_isRemote;
     }
@@ -99,7 +102,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     /**
      * @return array Error array
      */
-    public function getError()
+    public function getError(): array
     {
         return $this->_error;
     }

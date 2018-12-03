@@ -11,19 +11,19 @@ use Elastica\Exception\BulkException;
 class ResponseException extends BulkException
 {
     /**
-     * @var \Elastica\Bulk\ResponseSet ResponseSet object
+     * @var ResponseSet ResponseSet object
      */
     protected $_responseSet;
 
     /**
-     * @var \Elastica\Exception\Bulk\Response\ActionException[]
+     * @var ActionException[]
      */
     protected $_actionExceptions = [];
 
     /**
      * Construct Exception.
      *
-     * @param \Elastica\Bulk\ResponseSet $responseSet
+     * @param ResponseSet $responseSet
      */
     public function __construct(ResponseSet $responseSet)
     {
@@ -36,7 +36,7 @@ class ResponseException extends BulkException
     }
 
     /**
-     * @param \Elastica\Bulk\ResponseSet $responseSet
+     * @param ResponseSet $responseSet
      */
     protected function _init(ResponseSet $responseSet)
     {
@@ -52,9 +52,9 @@ class ResponseException extends BulkException
     /**
      * Returns bulk response set object.
      *
-     * @return \Elastica\Bulk\ResponseSet
+     * @return ResponseSet
      */
-    public function getResponseSet()
+    public function getResponseSet(): ResponseSet
     {
         return $this->_responseSet;
     }
@@ -62,9 +62,9 @@ class ResponseException extends BulkException
     /**
      * Returns array of failed actions.
      *
-     * @return array Array of failed actions
+     * @return string[] Array of failed actions
      */
-    public function getFailures()
+    public function getFailures(): array
     {
         $errors = [];
 
@@ -76,9 +76,9 @@ class ResponseException extends BulkException
     }
 
     /**
-     * @return \Elastica\Exception\Bulk\Response\ActionException[]
+     * @return ActionException[]
      */
-    public function getActionExceptions()
+    public function getActionExceptions(): array
     {
         return $this->_actionExceptions;
     }
@@ -86,7 +86,7 @@ class ResponseException extends BulkException
     /**
      * @return string
      */
-    public function getActionExceptionsAsString()
+    public function getActionExceptionsAsString(): string
     {
         $message = '';
         foreach ($this->getActionExceptions() as $actionException) {

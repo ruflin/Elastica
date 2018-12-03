@@ -4,7 +4,7 @@ namespace Elastica\Connection;
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Connection\Strategy\StrategyInterface;
-use Exception;
+use Elastica\Exception\ClientException;
 
 /**
  * Description of ConnectionPool.
@@ -14,12 +14,12 @@ use Exception;
 class ConnectionPool
 {
     /**
-     * @var array|\Elastica\Connection[] Connections array
+     * @var Connection[] Connections array
      */
     protected $_connections;
 
     /**
-     * @var \Elastica\Connection\Strategy\StrategyInterface Strategy for connection
+     * @var StrategyInterface Strategy for connection
      */
     protected $_strategy;
 
@@ -29,25 +29,23 @@ class ConnectionPool
     protected $_callback;
 
     /**
-     * @param array                                           $connections
-     * @param \Elastica\Connection\Strategy\StrategyInterface $strategy
-     * @param callback                                        $callback
+     * @param Connection[]      $connections
+     * @param StrategyInterface $strategy
+     * @param callable          $callback
      */
-    public function __construct(array $connections, StrategyInterface $strategy, $callback = null)
+    public function __construct(array $connections, StrategyInterface $strategy, callable $callback = null)
     {
         $this->_connections = $connections;
-
         $this->_strategy = $strategy;
-
         $this->_callback = $callback;
     }
 
     /**
-     * @param \Elastica\Connection $connection
+     * @param Connection $connection
      *
      * @return $this
      */
-    public function addConnection(Connection $connection)
+    public function addConnection(Connection $connection): self
     {
         $this->_connections[] = $connection;
 
@@ -55,11 +53,11 @@ class ConnectionPool
     }
 
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|Connection[] $connections
      *
      * @return $this
      */
-    public function setConnections(array $connections)
+    public function setConnections(array $connections): self
     {
         $this->_connections = $connections;
 
@@ -69,7 +67,7 @@ class ConnectionPool
     /**
      * @return bool
      */
-    public function hasConnection()
+    public function hasConnection(): bool
     {
         foreach ($this->_connections as $connection) {
             if ($connection->isEnabled()) {
@@ -81,29 +79,29 @@ class ConnectionPool
     }
 
     /**
-     * @return array
+     * @return Connection[]
      */
-    public function getConnections()
+    public function getConnections(): array
     {
         return $this->_connections;
     }
 
     /**
-     * @throws \Elastica\Exception\ClientException
+     * @return Connection
      *
-     * @return \Elastica\Connection
+     * @throws ClientException
      */
-    public function getConnection()
+    public function getConnection(): Connection
     {
         return $this->_strategy->getConnection($this->getConnections());
     }
 
     /**
-     * @param \Elastica\Connection $connection
-     * @param \Exception           $e
-     * @param Client               $client
+     * @param Connection $connection
+     * @param \Throwable $e
+     * @param Client     $client
      */
-    public function onFail(Connection $connection, Exception $e, Client $client)
+    public function onFail(Connection $connection, \Throwable $e, Client $client)
     {
         $connection->setEnabled(false);
 
@@ -113,9 +111,9 @@ class ConnectionPool
     }
 
     /**
-     * @return \Elastica\Connection\Strategy\StrategyInterface
+     * @return StrategyInterface
      */
-    public function getStrategy()
+    public function getStrategy(): StrategyInterface
     {
         return $this->_strategy;
     }

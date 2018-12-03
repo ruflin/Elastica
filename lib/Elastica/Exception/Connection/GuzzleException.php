@@ -19,9 +19,9 @@ class GuzzleException extends ConnectionException
     protected $_guzzleException;
 
     /**
-     * @param \GuzzleHttp\Exception\TransferException $guzzleException
-     * @param \Elastica\Request                       $request
-     * @param \Elastica\Response                      $response
+     * @param TransferException $guzzleException
+     * @param Request           $request
+     * @param Response          $response
      */
     public function __construct(TransferException $guzzleException, Request $request = null, Response $response = null)
     {
@@ -31,11 +31,11 @@ class GuzzleException extends ConnectionException
     }
 
     /**
-     * @param \GuzzleHttp\Exception\TransferException $guzzleException
+     * @param TransferException $guzzleException
      *
      * @return string
      */
-    public function getErrorMessage(TransferException $guzzleException)
+    public function getErrorMessage(TransferException $guzzleException): string
     {
         return $guzzleException->getMessage();
     }
@@ -43,7 +43,7 @@ class GuzzleException extends ConnectionException
     /**
      * @return TransferException
      */
-    public function getGuzzleException()
+    public function getGuzzleException(): TransferException
     {
         return $this->_guzzleException;
     }

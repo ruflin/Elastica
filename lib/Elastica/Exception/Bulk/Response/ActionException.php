@@ -1,20 +1,22 @@
 <?php
 namespace Elastica\Exception\Bulk\Response;
 
-use Elastica\Bulk\Response;
+use Elastica\Bulk\Action;
+use Elastica\Bulk\Response as BulkResponse;
 use Elastica\Exception\BulkException;
+use Elastica\Response;
 
 class ActionException extends BulkException
 {
     /**
-     * @var \Elastica\Response
+     * @var Response
      */
     protected $_response;
 
     /**
-     * @param \Elastica\Bulk\Response $response
+     * @param BulkResponse $response
      */
-    public function __construct(Response $response)
+    public function __construct(BulkResponse $response)
     {
         $this->_response = $response;
 
@@ -22,27 +24,27 @@ class ActionException extends BulkException
     }
 
     /**
-     * @return \Elastica\Bulk\Action
+     * @return Action
      */
-    public function getAction()
+    public function getAction(): Action
     {
         return $this->getResponse()->getAction();
     }
 
     /**
-     * @return \Elastica\Bulk\Response
+     * @return BulkResponse
      */
-    public function getResponse()
+    public function getResponse(): BulkResponse
     {
         return $this->_response;
     }
 
     /**
-     * @param \Elastica\Bulk\Response $response
+     * @param BulkResponse $response
      *
      * @return string
      */
-    public function getErrorMessage(Response $response)
+    public function getErrorMessage(BulkResponse $response): string
     {
         $error = $response->getError();
         $opType = $response->getOpType();
@@ -58,8 +60,7 @@ class ActionException extends BulkException
         if (isset($data['_id'])) {
             $path .= '/'.$data['_id'];
         }
-        $message = "$opType: $path caused $error";
 
-        return $message;
+        return "$opType: $path caused $error";
     }
 }

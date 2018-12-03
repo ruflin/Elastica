@@ -1,6 +1,8 @@
 <?php
 namespace Elastica\Connection\Strategy;
 
+use Elastica\Connection;
+
 /**
  * Description of AbstractStrategy.
  *
@@ -9,9 +11,9 @@ namespace Elastica\Connection\Strategy;
 interface StrategyInterface
 {
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|Connection[] $connections
      *
-     * @return \Elastica\Connection
+     * @return Connection
      */
-    public function getConnection(array $connections);
+    public function getConnection(array $connections): Connection;
 }

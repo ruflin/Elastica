@@ -1,6 +1,9 @@
 <?php
 namespace Elastica\Connection\Strategy;
 
+use Elastica\Connection;
+use Elastica\Exception\InvalidException;
+
 /**
  * Description of CallbackStrategy.
  *
@@ -15,8 +18,6 @@ class CallbackStrategy implements StrategyInterface
 
     /**
      * @param callable $callback
-     *
-     * @throws \Elastica\Exception\InvalidException
      */
     public function __construct(callable $callback)
     {
@@ -24,11 +25,13 @@ class CallbackStrategy implements StrategyInterface
     }
 
     /**
-     * @param array|\Elastica\Connection[] $connections
+     * @param array|Connection[] $connections
      *
-     * @return \Elastica\Connection
+     * @return Connection
+     *
+     * @throws InvalidException
      */
-    public function getConnection(array $connections)
+    public function getConnection(array $connections): Connection
     {
         return call_user_func_array($this->_callback, [$connections]);
     }
