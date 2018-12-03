@@ -68,6 +68,47 @@ class TermTest extends BaseTest
     }
 
     /**
+     * @group unit
+     */
+    public function testDistanceAlgorithm()
+    {
+        $suggest = new Suggest();
+
+        $suggest1 = new Term('suggest1', '_all');
+        $suggest1->setSort(Term::SORT_FREQUENCY);
+
+        $suggest->addSuggestion($suggest1->setText('Foor'));
+
+        $suggest2 = new Term('suggest2', '_all');
+        $suggest2->setSuggestMode(Term::SUGGEST_MODE_POPULAR);
+        $suggest2->setStringDistanceAlgorithm('jaro_winkler');
+        $suggest->addSuggestion($suggest2->setText('Girhub'));
+
+        $expected = [
+            'suggest' => [
+                'suggest1' => [
+                    'term' => [
+                        'field' => '_all',
+                        'sort' => 'frequency',
+                    ],
+                    'text' => 'Foor',
+                ],
+                'suggest2' => [
+                    'term' => [
+                        'field' => '_all',
+                        'suggest_mode' => 'popular',
+                        'string_distance' => 'jaro_winkler'
+                    ],
+                    'text' => 'Girhub',
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected, $suggest->toArray());
+
+    }
+
+    /**
      * @group functional
      */
     public function testSuggestResults()
@@ -77,6 +118,7 @@ class TermTest extends BaseTest
         $suggest->addSuggestion($suggest1->setText('Foor seach'));
         $suggest2 = new Term('suggest2', 'text');
         $suggest->addSuggestion($suggest2->setText('Girhub'));
+        $suggest2->setStringDistanceAlgorithm('jaro_winkler');
 
         $index = $this->_getIndexForTest();
         $result = $index->search($suggest);
