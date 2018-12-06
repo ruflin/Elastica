@@ -16,7 +16,6 @@ use Elastica\Transport\NullTransport;
  */
 class NullTransportTest extends BaseTest
 {
-
     /** @var NullTransport NullTransport */
     protected $transport;
 
@@ -102,7 +101,7 @@ class NullTransportTest extends BaseTest
      */
     public function testGenerateDefaultResponse()
     {
-        $params = [ 'blah' => 123 ];
+        $params = ['blah' => 123];
         $response = $this->transport->generateDefaultResponse($params);
         $this->assertEquals([], $response->getTransferInfo());
 

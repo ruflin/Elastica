@@ -17,14 +17,14 @@ use Elastica\Response;
 class NullTransport extends AbstractTransport
 {
     /**
-     * Response you want to get from the transport
+     * Response you want to get from the transport.
      *
      * @var Response Response
      */
     protected $_response = null;
 
     /**
-     * Set response object the transport returns
+     * Set response object the transport returns.
      *
      * @param \Elastica\Response $response
      *
@@ -36,7 +36,7 @@ class NullTransport extends AbstractTransport
     }
 
     /**
-     * Set response object the transport returns
+     * Set response object the transport returns.
      *
      * @param \Elastica\Response $response
      *
@@ -45,13 +45,14 @@ class NullTransport extends AbstractTransport
     public function setResponse(Response $response)
     {
         $this->_response = $response;
+
         return $this->_response;
     }
 
     /**
-     * Generate an example response object
+     * Generate an example response object.
      *
-     * @param array             $params  Hostname, port, path, ...
+     * @param array $params Hostname, port, path, ...
      *
      * @return \Elastica\Response $response
      */
@@ -72,6 +73,7 @@ class NullTransport extends AbstractTransport
             ],
             'params' => $params,
         ];
+
         return new Response(JSON::stringify($response));
     }
 
