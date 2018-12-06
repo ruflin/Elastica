@@ -33,6 +33,36 @@ class ClientTest extends BaseTest
 
     /**
      * @group functional
+     * @expectedException Elastica\Exception\Connection\HttpException
+     */
+    public function testConnectionErrors()
+    {
+        $client = $this->_getClient(['host' => 'foo.bar', 'port' => '9201']);
+        $client->getVersion();
+    }
+
+    /**
+     * @group functional
+     * @expectedException Elastica\Exception\Connection\HttpException
+     */
+    public function testClientBadHost()
+    {
+        $client = $this->_getClient(['host' => 'localhost', 'port' => '9201']);
+        $client->getVersion();
+    }
+
+    /**
+     * @group functional
+     * @expectedException Elastica\Exception\Connection\HttpException
+     */
+    public function testClientBadHostWithtimeout()
+    {
+        $client = $this->_getClient(['host' => 'foo.bar', 'timeout' => 10]);
+        $client->getVersion();
+    }
+
+    /**
+     * @group functional
      */
     public function testGetVersion()
     {
