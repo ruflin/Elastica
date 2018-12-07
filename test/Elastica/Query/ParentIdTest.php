@@ -213,12 +213,10 @@ class ParentIdTest extends BaseTest
         $data = $result->getData();
         $this->assertEquals($data['text'], 'this is an answer, the 1st');
 
-
         $parentId = $queryDSL->parent_id('answer', 2, true);
         $search = new Search($index->getClient());
         $results = $search->search($parentId);
 
         $this->assertEquals(2, $results->count());
-
     }
 }

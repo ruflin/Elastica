@@ -41,9 +41,9 @@ class PercentilesTest extends BaseAggregationTest
                 'field' => 'price',
                 'keyed' => false,
                 'tdigest' => [
-                    'compression' => 100
-                ]
-            ]
+                    'compression' => 100,
+                ],
+            ],
 
         ];
         $aggr = new Percentiles('price_percentile');
@@ -64,9 +64,9 @@ class PercentilesTest extends BaseAggregationTest
                 'field' => 'price',
                 'keyed' => false,
                 'hdr' => [
-                    'number_of_significant_value_digits' => 2.0
-                ]
-            ]
+                    'number_of_significant_value_digits' => 2.0,
+                ],
+            ],
 
         ];
         $aggr = new Percentiles('price_percentile');
@@ -76,7 +76,7 @@ class PercentilesTest extends BaseAggregationTest
 
         $this->assertEquals($expected, $aggr->toArray());
     }
-    
+
     /**
      * @group functional
      */
@@ -166,33 +166,33 @@ class PercentilesTest extends BaseAggregationTest
             'values' => [
                 [
                     'key' => 1,
-                    'value' => 100
+                    'value' => 100,
                 ],
                 [
                     'key' => 5,
-                    'value' => 100
+                    'value' => 100,
                 ],
                 [
                     'key' => 25,
-                    'value' => 300
+                    'value' => 300,
                 ],
                 [
                     'key' => 50,
-                    'value' => 550
+                    'value' => 550,
                 ],
                 [
                     'key' => 75,
-                    'value' => 800
+                    'value' => 800,
                 ],
                 [
                     'key' => 95,
-                    'value' => 1000
+                    'value' => 1000,
                 ],
                 [
                     'key' => 99,
-                    'value' => 1000
-                ]
-            ]
+                    'value' => 1000,
+                ],
+            ],
         ];
 
         // prepare
@@ -236,10 +236,10 @@ class PercentilesTest extends BaseAggregationTest
                 'field' => 'price',
                 'keyed' => false,
                 'hdr' => [
-                    'number_of_significant_value_digits' => 2.0
+                    'number_of_significant_value_digits' => 2.0,
                 ],
-                'missing' => 10
-            ]
+                'missing' => 10,
+            ],
 
         ];
         $aggr = new Percentiles('price_percentile');

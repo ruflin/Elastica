@@ -38,7 +38,7 @@ class TaskTest extends Base
     {
         $task = $this->_createTask();
 
-        for ($i = 0; $i < 5; ++$i ) {
+        for ($i = 0; $i < 5; ++$i) {
             if ($task->isCompleted()) {
                 break;
             }

@@ -97,7 +97,7 @@ class TermTest extends BaseTest
                     'term' => [
                         'field' => '_all',
                         'suggest_mode' => 'popular',
-                        'string_distance' => 'jaro_winkler'
+                        'string_distance' => 'jaro_winkler',
                     ],
                     'text' => 'Girhub',
                 ],
@@ -105,7 +105,6 @@ class TermTest extends BaseTest
         ];
 
         $this->assertEquals($expected, $suggest->toArray());
-
     }
 
     /**
