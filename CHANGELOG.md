@@ -29,6 +29,10 @@ All notable changes to this project will be documented in this file based on the
 * [Index Recovery](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-recovery.html) : the indices recovery API provides insight into on-going index shard recoveries. It was never been implemented into Elastica. [#1537](https://github.com/ruflin/Elastica/pull/1537)
 * add parent_id (reference [#1518](https://github.com/ruflin/Elastica/issues/1518)) in QueryBuilder. [#1533]([#1518](https://github.com/ruflin/Elastica/issues/1533))
 * implemented ```string_distance``` option in Term Suggestion [#1543](https://github.com/ruflin/Elastica/pull/1543)
+
+### Improvements
+
+* Using `Elastica\Query\FunctionScore::addRandomScoreFunction` without `$field` parameter is deprecated since ES 6.0 and will fail since ES 7.0 [#1522](https://github.com/ruflin/Elastica/pull/1522)
 * `Aggreation\Percentiles` updated to a newer version of the Algorithm (T-Digest 3.2) and Percentiles results changed a bit Have a [look at here](https://github.com/elastic/elasticsearch/pull/28305), so updated tests in order not to fail. [#1531]([#1352](https://github.com/ruflin/Elastica/pull/1531))
 * `Aggregation\Percentiles` have been updated since [Elasticsearch 2.3](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-aggregations-metrics-percentile-aggregation.html). In this version `compression, HDR histogram` changed their implementations. The `missing` field has never been implemented. [#1532](https://github.com/ruflin/Elastica/pull/1532)
 
@@ -49,11 +53,6 @@ All notable changes to this project will be documented in this file based on the
     }
   ```
 * Never implemented the method *Missing* on [`Aggregation\Percentiles`](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-aggregations-metrics-percentile-aggregation.html) [#1532](https://github.com/ruflin/Elastica/pull/1532)
-
-### Improvements
-
-* Using `Elastica\Query\FunctionScore::addRandomScoreFunction` without `$field` parameter is deprecated since ES 6.0 and will fail since ES 7.0 [#1522](https://github.com/ruflin/Elastica/pull/1522)
-
 
 ## [6.0.2](https://github.com/ruflin/Elastica/compare/6.0.1...6.0.2)
 
