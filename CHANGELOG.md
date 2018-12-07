@@ -21,6 +21,14 @@ All notable changes to this project will be documented in this file based on the
   * `\Elastica\ResultSet::next` returns `void` instead of `\Elastica\Result|false`
   * `\Elastica\Bulk\ResponseSet::current` returns `\Elastica\Bulk\Response` instead of `\Elastica\Bulk\Response|false`
   * `\Elastica\Multi\ResultSet::current` returns `\Elastica\ResultSet` instead of `\Elastica\ResultSet|false`
+
+### Added
+
+* Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
+* [Field](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random) param for `Elastica\Query\FunctionScore::addRandomScoreFunction` [#1529](https://github.com/ruflin/Elastica/pull/1529)
+* [Index Recovery](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-recovery.html) : the indices recovery API provides insight into on-going index shard recoveries. It was never been implemented into Elastica. [#1537](https://github.com/ruflin/Elastica/pull/1537)
+* add parent_id (reference [#1518](https://github.com/ruflin/Elastica/issues/1518)) in QueryBuilder. [#1533]([#1518](https://github.com/ruflin/Elastica/issues/1533))
+* implemented ```string_distance``` option in Term Suggestion [#1543](https://github.com/ruflin/Elastica/pull/1543)
 * `Aggreation\Percentiles` updated to a newer version of the Algorithm (T-Digest 3.2) and Percentiles results changed a bit Have a [look at here](https://github.com/elastic/elasticsearch/pull/28305), so updated tests in order not to fail. [#1531]([#1352](https://github.com/ruflin/Elastica/pull/1531))
 * `Aggregation\Percentiles` have been updated since [Elasticsearch 2.3](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-aggregations-metrics-percentile-aggregation.html). In this version `compression, HDR histogram` changed their implementations. The `missing` field has never been implemented. [#1532](https://github.com/ruflin/Elastica/pull/1532)
 
@@ -41,14 +49,6 @@ All notable changes to this project will be documented in this file based on the
     }
   ```
 * Never implemented the method *Missing* on [`Aggregation\Percentiles`](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-aggregations-metrics-percentile-aggregation.html) [#1532](https://github.com/ruflin/Elastica/pull/1532)
-
-### Added
-
-* Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
-* [Field](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random) param for `Elastica\Query\FunctionScore::addRandomScoreFunction` [#1529](https://github.com/ruflin/Elastica/pull/1529)
-* [Index Recovery](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-recovery.html) : the indices recovery API provides insight into on-going index shard recoveries. It was never been implemented into Elastica. [#1537](https://github.com/ruflin/Elastica/pull/1537)
-* add parent_id (reference [#1518](https://github.com/ruflin/Elastica/issues/1518)) in QueryBuilder. [#1533]([#1518](https://github.com/ruflin/Elastica/issues/1533))
-* implemented ```string_distance``` option in Term Suggestion [#1543](https://github.com/ruflin/Elastica/pull/1543)
 
 ### Improvements
 
