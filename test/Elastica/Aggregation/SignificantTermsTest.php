@@ -4,13 +4,14 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\SignificantTerms;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Terms;
 use Elastica\Type\Mapping;
 
 class SignificantTermsTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
         $colors = ['blue', 'blue', 'red', 'red', 'green', 'yellow', 'white', 'cyan', 'magenta'];

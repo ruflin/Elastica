@@ -9,17 +9,15 @@ namespace Elastica\Aggregation;
  */
 class Cardinality extends AbstractSimpleAggregation
 {
+    const DEFAULT_PRECISION_THRESHOLD_VALUE = 3000;
+
     /**
      * @param int $precisionThreshold
      *
      * @return $this
      */
-    public function setPrecisionThreshold($precisionThreshold)
+    public function setPrecisionThreshold(int $precisionThreshold): self
     {
-        if (!is_int($precisionThreshold)) {
-            throw new \InvalidArgumentException('precision_threshold only supports integer values');
-        }
-
         return $this->setParam('precision_threshold', $precisionThreshold);
     }
 
@@ -28,12 +26,8 @@ class Cardinality extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setRehash($rehash)
+    public function setRehash(bool $rehash): self
     {
-        if (!is_bool($rehash)) {
-            throw new \InvalidArgumentException('rehash only supports boolean values');
-        }
-
         return $this->setParam('rehash', $rehash);
     }
 }

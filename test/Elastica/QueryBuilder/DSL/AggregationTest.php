@@ -57,7 +57,7 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'avg_bucket', Aggregation\AvgBucket::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'sum_bucket', Aggregation\SumBucket::class, ['name']);
 
-        $this->_assertNotImplemented($aggregationDSL, 'children', ['name']);
+        $this->_assertNotImplemented($aggregationDSL, 'children', 'name');
         $this->_assertNotImplemented($aggregationDSL, 'geo_bounds', ['name']);
         $this->_assertNotImplemented($aggregationDSL, 'percentile_ranks', ['name']);
     }

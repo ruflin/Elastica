@@ -14,12 +14,15 @@ class GeoDistance extends AbstractAggregation
     const DISTANCE_TYPE_ARC = 'arc';
     const DISTANCE_TYPE_PLANE = 'plane';
 
+    const DEFAULT_DISTANCE_TYPE_VALUE = self::DISTANCE_TYPE_ARC;
+    const DEFAULT_UNIT_VALUE = 'm';
+
     /**
      * @param string       $name   the name if this aggregation
      * @param string       $field  the field on which to perform this aggregation
      * @param string|array $origin the point from which distances will be calculated
      */
-    public function __construct($name, $field, $origin)
+    public function __construct(string $name, string $field, $origin)
     {
         parent::__construct($name);
         $this->setField($field)->setOrigin($origin);
@@ -32,7 +35,7 @@ class GeoDistance extends AbstractAggregation
      *
      * @return $this
      */
-    public function setField($field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -44,7 +47,7 @@ class GeoDistance extends AbstractAggregation
      *
      * @return $this
      */
-    public function setOrigin($origin)
+    public function setOrigin($origin): self
     {
         return $this->setParam('origin', $origin);
     }
@@ -59,19 +62,19 @@ class GeoDistance extends AbstractAggregation
      *
      * @return $this
      */
-    public function addRange($fromValue = null, $toValue = null)
+    public function addRange(int $fromValue = null, int $toValue = null): self
     {
-        if (is_null($fromValue) && is_null($toValue)) {
+        if (null === $fromValue && null === $toValue) {
             throw new InvalidException('Either fromValue or toValue must be set. Both cannot be null.');
         }
 
         $range = [];
 
-        if (!is_null($fromValue)) {
+        if (null !== $fromValue) {
             $range['from'] = $fromValue;
         }
 
-        if (!is_null($toValue)) {
+        if (null !== $toValue) {
             $range['to'] = $toValue;
         }
 
@@ -79,13 +82,13 @@ class GeoDistance extends AbstractAggregation
     }
 
     /**
-     * Set the unit of distance measure for  this aggregation.
+     * Set the unit of distance measure for this aggregation.
      *
-     * @param string $unit defaults to km
+     * @param string $unit defaults to m
      *
      * @return $this
      */
-    public function setUnit($unit)
+    public function setUnit(string $unit): self
     {
         return $this->setParam('unit', $unit);
     }
@@ -97,7 +100,7 @@ class GeoDistance extends AbstractAggregation
      *
      * @return $this
      */
-    public function setDistanceType($distanceType)
+    public function setDistanceType(string $distanceType): self
     {
         return $this->setParam('distance_type', $distanceType);
     }

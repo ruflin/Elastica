@@ -15,7 +15,7 @@ class TopHits extends AbstractAggregation
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = parent::toArray();
 
@@ -35,7 +35,7 @@ class TopHits extends AbstractAggregation
      *
      * @return $this
      */
-    public function setSize($size)
+    public function setSize(int $size): self
     {
         return $this->setParam('size', (int) $size);
     }
@@ -47,7 +47,7 @@ class TopHits extends AbstractAggregation
      *
      * @return $this
      */
-    public function setFrom($from)
+    public function setFrom(int $from): self
     {
         return $this->setParam('from', (int) $from);
     }
@@ -59,7 +59,7 @@ class TopHits extends AbstractAggregation
      *
      * @return $this
      */
-    public function setSort(array $sortArgs)
+    public function setSort(array $sortArgs): self
     {
         return $this->setParam('sort', $sortArgs);
     }
@@ -71,7 +71,7 @@ class TopHits extends AbstractAggregation
      *
      * @return $this
      */
-    public function setSource($params)
+    public function setSource($params): self
     {
         return $this->setParam('_source', $params);
     }
@@ -83,9 +83,9 @@ class TopHits extends AbstractAggregation
      *
      * @return $this
      */
-    public function setVersion($version)
+    public function setVersion(bool $version): self
     {
-        return $this->setParam('version', (bool) $version);
+        return $this->setParam('version', $version);
     }
 
     /**
@@ -95,9 +95,9 @@ class TopHits extends AbstractAggregation
      *
      * @return $this
      */
-    public function setExplain($explain)
+    public function setExplain(bool $explain): self
     {
-        return $this->setParam('explain', (bool) $explain);
+        return $this->setParam('explain', $explain);
     }
 
     /**
@@ -107,7 +107,7 @@ class TopHits extends AbstractAggregation
      *
      * @return $this
      */
-    public function setScriptFields($scriptFields)
+    public function setScriptFields($scriptFields): self
     {
         if (is_array($scriptFields)) {
             $scriptFields = new ScriptFields($scriptFields);
@@ -124,7 +124,7 @@ class TopHits extends AbstractAggregation
      *
      * @return $this
      */
-    public function addScriptField($name, AbstractScript $script)
+    public function addScriptField(string $name, AbstractScript $script): self
     {
         if (!isset($this->_params['script_fields'])) {
             $this->_params['script_fields'] = new ScriptFields();
@@ -142,7 +142,7 @@ class TopHits extends AbstractAggregation
      *
      * @return $this
      */
-    public function setHighlight(array $highlightArgs)
+    public function setHighlight(array $highlightArgs): self
     {
         return $this->setParam('highlight', $highlightArgs);
     }
@@ -154,7 +154,7 @@ class TopHits extends AbstractAggregation
      *
      * @return $this
      */
-    public function setFieldDataFields(array $fields)
+    public function setFieldDataFields(array $fields): self
     {
         return $this->setParam('docvalue_fields', $fields);
     }

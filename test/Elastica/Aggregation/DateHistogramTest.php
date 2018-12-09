@@ -4,12 +4,13 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Type\Mapping;
 
 class DateHistogramTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
         $type = $index->getType('_doc');

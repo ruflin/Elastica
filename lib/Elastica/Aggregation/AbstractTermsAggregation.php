@@ -14,7 +14,7 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setMinimumDocumentCount($count)
+    public function setMinimumDocumentCount(int $count): self
     {
         return $this->setParam('min_doc_count', $count);
     }
@@ -27,9 +27,9 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setInclude($pattern, $flags = null)
+    public function setInclude(string $pattern, string $flags = null): self
     {
-        if (is_null($flags)) {
+        if (null === $flags) {
             return $this->setParam('include', $pattern);
         }
 
@@ -47,9 +47,9 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setExclude($pattern, $flags = null)
+    public function setExclude(string $pattern, string $flags = null): self
     {
-        if (is_null($flags)) {
+        if (null === $flags) {
             return $this->setParam('exclude', $pattern);
         }
 
@@ -66,7 +66,7 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setSize($size)
+    public function setSize(int $size): self
     {
         return $this->setParam('size', $size);
     }
@@ -74,13 +74,13 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
     /**
      * Sets how many terms the coordinating node will request from each shard.
      *
-     * @param int $shard_size the amount of terms to be returned
+     * @param int $shardSize the amount of terms to be returned
      *
      * @return $this
      */
-    public function setShardSize($shard_size)
+    public function setShardSize(int $shardSize): self
     {
-        return $this->setParam('shard_size', $shard_size);
+        return $this->setParam('shard_size', $shardSize);
     }
 
     /**
@@ -91,7 +91,7 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setExecutionHint($hint)
+    public function setExecutionHint(string $hint): self
     {
         return $this->setParam('execution_hint', $hint);
     }

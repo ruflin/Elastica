@@ -6,11 +6,12 @@ use Elastica\Aggregation\Sum;
 use Elastica\Aggregation\SumBucket;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 
 class SumBucketTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 

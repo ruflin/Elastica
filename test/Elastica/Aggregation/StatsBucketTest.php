@@ -6,11 +6,12 @@ use Elastica\Aggregation\Histogram;
 use Elastica\Aggregation\Max;
 use Elastica\Aggregation\StatsBucket;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 
 class StatsBucketTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 

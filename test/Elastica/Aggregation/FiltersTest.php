@@ -5,12 +5,13 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\Filters;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Term;
 
 class FiltersTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex('filter');
 

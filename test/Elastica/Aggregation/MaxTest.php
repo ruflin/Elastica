@@ -4,6 +4,7 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Max;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Script\Script;
 
@@ -11,7 +12,7 @@ class MaxTest extends BaseAggregationTest
 {
     const MAX_PRICE = 8;
 
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 

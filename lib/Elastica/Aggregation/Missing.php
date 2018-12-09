@@ -13,7 +13,7 @@ class Missing extends AbstractAggregation
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
      */
-    public function __construct($name, $field)
+    public function __construct(string $name, string $field)
     {
         parent::__construct($name);
         $this->setField($field);
@@ -26,7 +26,7 @@ class Missing extends AbstractAggregation
      *
      * @return $this
      */
-    public function setField($field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
