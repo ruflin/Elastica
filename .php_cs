@@ -1,32 +1,30 @@
 <?php
 
-$finder = Symfony\CS\Finder\DefaultFinder::create()
-    ->in(['lib', 'test']);
+$finder = PhpCsFixer\Finder::create()
+    ->in([__DIR__])
+    ->exclude(['vendor', 'var'])
+    ->notPath('/cache/')
+;
 
-$config = Symfony\CS\Config\Config::create()
-    ->setUsingCache(true)
-    ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
-    ->fixers([
-        // [contrib] Multi-line whitespace before closing semicolon are prohibited.
-        'multiline_spaces_before_semicolon',
-        // [contrib] There should be no blank lines before a namespace declaration.
-        'no_blank_lines_before_namespace',
-        // [contrib] Ordering use statements.
-        'ordered_use',
-        // [contrib] Annotations should be ordered so that param annotations come first, then throws annotations, then return annotations.
-        'phpdoc_order',
-        // [contrib] Arrays should use the short syntax.
-        'short_array_syntax',
-        // [contrib] Ensure there is no code on the same line as the PHP open tag.
-        'newline_after_open_tag',
-        // [contrib] Use null coalescing operator ?? where possible
-        'ternary_to_null_coalescing',
-        // [contrib] There should not be useless else cases.
-        'no_useless_else',
-        // [contrib] Use dedicated PHPUnit assertions for better error messages.
-        '@PHPUnit60Migration:risky' => true,
-        //'php_unit_dedicate_assert' => ['target' => 'newest'],
+return PhpCsFixer\Config::create()
+    ->setFinder($finder)
+    ->setRules([
+        '@PSR2' => true,
+        '@Symfony' => true,
+        'psr0' => false,
+        'array_syntax' => ['syntax' => 'short'],
+        'concat_space' => ['spacing' => 'one'],
+        'blank_line_after_opening_tag' => false,
+        'lowercase_cast' => true,
+        'lowercase_constants' => true,
+        'lowercase_keywords' => true,
+        'no_trailing_comma_in_singleline_array' => true,
+        'no_unused_imports' => true,
+        'ordered_imports' => true,
+        'native_function_invocation' => true,
+        'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
+        'php_unit_dedicate_assert' => ['target' => 'newest'],
+        'ternary_to_null_coalescing' => true,
+        'phpdoc_order' => true,
     ])
-    ->finder($finder);
-
-return $config;
+;
