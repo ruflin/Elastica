@@ -27,7 +27,7 @@ abstract class AbstractDocument extends Action
      *
      * @return $this
      */
-    public function setDocument(Document $document)
+    public function setDocument(Document $document): self
     {
         $this->_data = $document;
 
@@ -43,9 +43,9 @@ abstract class AbstractDocument extends Action
      *
      * @return $this
      */
-    public function setScript(AbstractScript $script)
+    public function setScript(AbstractScript $script): self
     {
-        if (!($this instanceof UpdateDocument)) {
+        if (!$this instanceof UpdateDocument) {
             throw new \BadMethodCallException('setScript() can only be used for UpdateDocument');
         }
 
@@ -64,7 +64,7 @@ abstract class AbstractDocument extends Action
      *
      * @return $this
      */
-    public function setData($data)
+    public function setData($data): self
     {
         if ($data instanceof AbstractScript) {
             $this->setScript($data);
@@ -84,11 +84,11 @@ abstract class AbstractDocument extends Action
      */
     public function getDocument()
     {
-        if ($this->_data instanceof Document) {
-            return $this->_data;
+        if (!$this->_data instanceof Document) {
+            return null;
         }
 
-        return;
+        return $this->_data;
     }
 
     /**
@@ -98,11 +98,11 @@ abstract class AbstractDocument extends Action
      */
     public function getScript()
     {
-        if ($this->_data instanceof AbstractScript) {
-            return $this->_data;
+        if (!$this->_data instanceof AbstractScript) {
+            return null;
         }
 
-        return;
+        return $this->_data;
     }
 
     /**
@@ -114,11 +114,11 @@ abstract class AbstractDocument extends Action
     }
 
     /**
-     * @param \Elastica\AbstractUpdateAction $source
+     * @param AbstractUpdateAction $source
      *
      * @return array
      */
-    abstract protected function _getMetadata(AbstractUpdateAction $source);
+    abstract protected function _getMetadata(AbstractUpdateAction $source): array;
 
     /**
      * Creates a bulk action for a document or a script.
@@ -130,10 +130,10 @@ abstract class AbstractDocument extends Action
      *
      * @return static
      */
-    public static function create($data, $opType = null)
+    public static function create($data, string $opType = null): self
     {
         //Check type
-        if (!($data instanceof Document) && !($data instanceof AbstractScript)) {
+        if (!$data instanceof Document && !$data instanceof AbstractScript) {
             throw new \InvalidArgumentException('The data needs to be a Document or a Script.');
         }
 
@@ -145,7 +145,7 @@ abstract class AbstractDocument extends Action
         if ($data instanceof AbstractScript) {
             if (null === $opType) {
                 $opType = self::OP_TYPE_UPDATE;
-            } elseif (self::OP_TYPE_UPDATE != $opType) {
+            } elseif (self::OP_TYPE_UPDATE !== $opType) {
                 throw new \InvalidArgumentException('Scripts can only be used with the update operation type.');
             }
         }
@@ -154,12 +154,15 @@ abstract class AbstractDocument extends Action
             case self::OP_TYPE_DELETE:
                 $action = new DeleteDocument($data);
                 break;
+
             case self::OP_TYPE_CREATE:
                 $action = new CreateDocument($data);
                 break;
+
             case self::OP_TYPE_UPDATE:
                 $action = new UpdateDocument($data);
                 break;
+
             case self::OP_TYPE_INDEX:
             default:
                 $action = new IndexDocument($data);
