@@ -87,7 +87,7 @@ class Recovery
     }
 
     /**
-     * Retrieve the Recovery data
+     * Retrieve the Recovery data.
      *
      * @return $this
      */

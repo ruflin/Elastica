@@ -30,7 +30,8 @@ class Percentiles extends AbstractSimpleAggregation
      */
     public function setCompression(float $value): Percentiles
     {
-        $compression = array('compression' => $value);
+        $compression = ['compression' => $value];
+
         return $this->setParam('tdigest', $compression);
     }
 
@@ -38,20 +39,21 @@ class Percentiles extends AbstractSimpleAggregation
      * Set hdr parameter.
      *
      * @param string $key
-     * @param float $value
+     * @param float  $value
      *
      * @return Percentiles $this
      */
     public function setHdr(string $key, float $value): Percentiles
     {
-        $compression = array($key => $value);
+        $compression = [$key => $value];
+
         return $this->setParam('hdr', $compression);
     }
 
     /**
      * the keyed flag is set to true which associates a unique string
      * key with each bucket and returns the ranges as a hash
-     * rather than an array
+     * rather than an array.
      *
      * @param bool $keyed
      *
@@ -88,7 +90,7 @@ class Percentiles extends AbstractSimpleAggregation
 
     /**
      * Defines how documents that are missing a value should
-     * be treated
+     * be treated.
      *
      * @param float $missing
      *

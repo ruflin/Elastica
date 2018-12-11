@@ -25,7 +25,7 @@ $config = Symfony\CS\Config\Config::create()
         'no_useless_else',
         // [contrib] Use dedicated PHPUnit assertions for better error messages.
         '@PHPUnit60Migration:risky' => true,
-        'php_unit_dedicate_assert' => ['target' => 'newest'],
+        //'php_unit_dedicate_assert' => ['target' => 'newest'],
     ])
     ->finder($finder);
 

@@ -87,7 +87,6 @@ class CommonTest extends BaseTest
 
     /**
      * @group unit
-
      */
     public function testSetAnalyzer()
     {

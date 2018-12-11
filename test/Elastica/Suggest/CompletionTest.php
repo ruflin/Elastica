@@ -136,7 +136,6 @@ class CompletionTest extends BaseTest
         $suggest2 = new Completion('suggestName2', 'fieldName2');
         $suggest2->setPrefix('Neverdint');
 
-
         $sug = new Suggest();
         $sug->addSuggestion($suggest);
         $sug->addSuggestion($suggest2);
@@ -149,19 +148,18 @@ class CompletionTest extends BaseTest
                   'text' => 'Neavermint',
                   'offset' => 0,
                   'length' => 10,
-                  'options' => []
-                  ]
+                  'options' => [],
+                  ],
           ],
             'suggestName2' => [
                 0 => [
                     'text' => 'Neverdint',
                     'offset' => 0,
                     'length' => 9,
-                    'options' => []
-                    ]
-            ]
+                    'options' => [],
+                    ],
+            ],
         ];
-
 
         $resultSet = $index->search($query);
 

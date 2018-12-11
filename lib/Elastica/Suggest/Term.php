@@ -129,7 +129,7 @@ class Term extends AbstractSuggest
 
     /**
      * Which string distance implementation to use for comparing how similar suggested terms are.
-     * Five possible values can be specified:
+     * Five possible values can be specified:.
      *
      * - internal
      * - damerau_levenshtein
