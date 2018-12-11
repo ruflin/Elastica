@@ -14,22 +14,22 @@ class StrategyFactory
     /**
      * @param mixed|callable|string|StrategyInterface $strategyName
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
-     * @return \Elastica\Connection\Strategy\StrategyInterface
+     * @return StrategyInterface
      */
-    public static function create($strategyName)
+    public static function create($strategyName): StrategyInterface
     {
         if ($strategyName instanceof StrategyInterface) {
             return $strategyName;
         }
 
-        if (CallbackStrategy::isValid($strategyName)) {
+        if (\is_callable($strategyName)) {
             return new CallbackStrategy($strategyName);
         }
 
         if (is_string($strategyName)) {
-            $requiredInterface = '\\Elastica\\Connection\\Strategy\\StrategyInterface';
+            $requiredInterface = StrategyInterface::class;
             $predefinedStrategy = '\\Elastica\\Connection\\Strategy\\'.$strategyName;
 
             if (class_exists($predefinedStrategy) && class_implements($predefinedStrategy, $requiredInterface)) {

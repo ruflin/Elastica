@@ -2,6 +2,7 @@
 
 namespace Elastica\Test\Connection\Strategy;
 
+use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Connection\Strategy\RoundRobin;
 use Elastica\Exception\ConnectionException;
@@ -38,7 +39,7 @@ class RoundRobinTest extends Base
     /**
      * @group unit
      */
-    public function testOldStrategySetted()
+    public function testOldStrategySet()
     {
         $config = ['roundRobin' => true];
         $client = $this->_getClient($config);
@@ -116,14 +117,14 @@ class RoundRobinTest extends Base
         }
     }
 
-    protected function _checkStrategy($client)
+    protected function _checkStrategy(Client $client)
     {
         $strategy = $client->getConnectionStrategy();
 
         $this->assertInstanceOf(RoundRobin::class, $strategy);
     }
 
-    protected function _checkResponse($response)
+    protected function _checkResponse(Response $response)
     {
         $this->assertTrue($response->isOk());
     }

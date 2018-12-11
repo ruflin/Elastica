@@ -79,17 +79,7 @@ class ConnectionPoolTest extends BaseTest
         $this->assertFalse($pool->hasConnection());
     }
 
-    /**
-     * @group unit
-     */
-    public function testGetConnection()
-    {
-        $pool = $this->createPool();
-
-        $this->assertInstanceOf(Connection::class, $pool->getConnection());
-    }
-
-    protected function getConnections($quantity = 1)
+    protected function getConnections(int $quantity = 1): array
     {
         $params = [];
         $connections = [];
@@ -101,13 +91,11 @@ class ConnectionPoolTest extends BaseTest
         return $connections;
     }
 
-    protected function createPool()
+    protected function createPool(): ConnectionPool
     {
         $connections = $this->getConnections();
         $strategy = StrategyFactory::create('Simple');
 
-        $pool = new ConnectionPool($connections, $strategy);
-
-        return $pool;
+        return new ConnectionPool($connections, $strategy);
     }
 }

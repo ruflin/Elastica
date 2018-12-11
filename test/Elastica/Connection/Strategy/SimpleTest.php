@@ -2,9 +2,11 @@
 
 namespace Elastica\Test\Connection\Strategy;
 
+use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Connection\Strategy\Simple;
 use Elastica\Exception\ConnectionException;
+use Elastica\Response;
 use Elastica\Test\Base;
 
 /**
@@ -101,14 +103,14 @@ class SimpleTest extends Base
         }
     }
 
-    protected function _checkStrategy($client)
+    protected function _checkStrategy(Client $client)
     {
         $strategy = $client->getConnectionStrategy();
 
         $this->assertInstanceOf(Simple::class, $strategy);
     }
 
-    protected function _checkResponse($response)
+    protected function _checkResponse(Response $response)
     {
         $this->assertTrue($response->isOk());
     }
