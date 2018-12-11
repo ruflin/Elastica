@@ -1,31 +1,55 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/6.0.2...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.0...master)
 
 ### Backward Compatibility Breaks
 
-* Made result sets adhere to `\Iterator` interface definition that they implement. Specifically, you need to call `valid()` on the result set before calling `current()`. When using `foreach` this is done by PHP automatically. When `valid` returns false, the return value of `current` is undefined instead of false. 
+### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+## [6.1.0](https://github.com/ruflin/Elastica/compare/6.0.2...6.1.0)
+
+### Backward Compatibility Breaks
+
+* Made result sets adhere to `\Iterator` interface definition that they implement. Specifically, you need to call `valid()` on the result set before calling `current()`. When using `foreach` this is done by PHP automatically. When `valid` returns false, the return value of `current` is undefined instead of false. [#1506](https://github.com/ruflin/Elastica/pull/1506)
   * `\Elastica\ResultSet::next` returns `void` instead of `\Elastica\Result|false`
   * `\Elastica\Bulk\ResponseSet::current` returns `\Elastica\Bulk\Response` instead of `\Elastica\Bulk\Response|false`
   * `\Elastica\Multi\ResultSet::current` returns `\Elastica\ResultSet` instead of `\Elastica\ResultSet|false`
+
+### Added
+
+* Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
+* [Field](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random) param for `Elastica\Query\FunctionScore::addRandomScoreFunction` [#1529](https://github.com/ruflin/Elastica/pull/1529)
+* [Index Recovery](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-recovery.html) : the indices recovery API provides insight into on-going index shard recoveries. It was never been implemented into Elastica. [#1537](https://github.com/ruflin/Elastica/pull/1537)
+* add parent_id (reference [#1518](https://github.com/ruflin/Elastica/issues/1518)) in QueryBuilder. [#1533]([#1518](https://github.com/ruflin/Elastica/issues/1533))
+* implemented ```string_distance``` option in Term Suggestion [#1543](https://github.com/ruflin/Elastica/pull/1543)
+
+### Improvements
+
+* Using `Elastica\Query\FunctionScore::addRandomScoreFunction` without `$field` parameter is deprecated since ES 6.0 and will fail since ES 7.0 [#1522](https://github.com/ruflin/Elastica/pull/1522)
 * `Aggreation\Percentiles` updated to a newer version of the Algorithm (T-Digest 3.2) and Percentiles results changed a bit Have a [look at here](https://github.com/elastic/elasticsearch/pull/28305), so updated tests in order not to fail. [#1531]([#1352](https://github.com/ruflin/Elastica/pull/1531))
 * `Aggregation\Percentiles` have been updated since [Elasticsearch 2.3](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-aggregations-metrics-percentile-aggregation.html). In this version `compression, HDR histogram` changed their implementations. The `missing` field has never been implemented. [#1532](https://github.com/ruflin/Elastica/pull/1532)
-  
-  Before 
+
+  Before
   ```json
     "compression" : 200,
-    "method" : "hdr", 
+    "method" : "hdr",
     "number_of_significant_value_digits" : 3
   ```
 
-  Now 
+  Now
   ```json
     "tdigest": {
-      "compression" : 200 
+      "compression" : 200
     },
-    "hdr": { 
-      "number_of_significant_value_digits" : 3 
+    "hdr": {
+      "number_of_significant_value_digits" : 3
     }
   ```
 * Never implemented the method *Missing* on [`Aggregation\Percentiles`](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-aggregations-metrics-percentile-aggregation.html)
@@ -47,6 +71,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Deprecated
 
+* Never implemented the method *Missing* on [`Aggregation\Percentiles`](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-aggregations-metrics-percentile-aggregation.html) [#1532](https://github.com/ruflin/Elastica/pull/1532)
 
 ## [6.0.2](https://github.com/ruflin/Elastica/compare/6.0.1...6.0.2)
 

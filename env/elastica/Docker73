@@ -1,6 +1,6 @@
 # This image is the base image for the Elastica development and includes all parts which rarely change
 # PHP 7 Docker file with Composer installed
-FROM php:7.0
+FROM php:7.3
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 RUN apt-get update && apt-get install -y \
@@ -17,10 +17,8 @@ RUN docker-php-ext-install sockets xsl
 
 RUN rm -r /var/lib/apt/lists/*
 
-# Xdebug for coverage report
-RUN pecl install xdebug-2.6.1
-
 ## PHP Configuration
+RUN pecl install xdebug-2.7.0beta1
 
 RUN echo "memory_limit=1024M" >> /usr/local/etc/php/conf.d/memory-limit.ini
 RUN echo "date.timezone=UTC" >> /usr/local/etc/php/conf.d/timezone.ini

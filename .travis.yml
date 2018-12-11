@@ -19,6 +19,7 @@ env:
     - TARGET="70"
     - TARGET="71"
     - TARGET="72"
+    - TARGET="73"
 
 before_install:
   # check running "docker engine" and "docker-compose" version on travis

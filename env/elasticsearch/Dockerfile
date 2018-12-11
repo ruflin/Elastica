@@ -1,5 +1,5 @@
 #https://www.docker.elastic.co/
-FROM docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+FROM docker.elastic.co/elasticsearch/elasticsearch:6.5.2
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch ingest-attachment
