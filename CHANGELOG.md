@@ -39,6 +39,7 @@ All notable changes to this project will be documented in this file based on the
 * [Index Recovery](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-recovery.html) : the indices recovery API provides insight into on-going index shard recoveries. It was never been implemented into Elastica. [#1537](https://github.com/ruflin/Elastica/pull/1537)
 * add parent_id (reference [#1518](https://github.com/ruflin/Elastica/issues/1518)) in QueryBuilder. [#1533]([#1518](https://github.com/ruflin/Elastica/issues/1533))
 * implemented ```string_distance``` option in Term Suggestion [#1543](https://github.com/ruflin/Elastica/pull/1543) 
+* Added `BucketSelector` aggregation [#1554](https://github.com/ruflin/Elastica/pull/1554)
 
 ### Improvements
 
