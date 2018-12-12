@@ -186,18 +186,20 @@ class MultiMatchTest extends BaseTest
         $index = $client->getIndex('test');
 
         $index->create([
-            'analysis' => [
-                'analyzer' => [
-                    'noStops' => [
-                        'type' => 'standard',
-                        'stopwords' => '_none_',
-                    ],
-                    'stops' => [
-                        'type' => 'standard',
-                        'stopwords' => ['not'],
+            'settings' => [
+                'analysis' => [
+                    'analyzer' => [
+                        'noStops' => [
+                            'type' => 'standard',
+                            'stopwords' => '_none_',
+                        ],
+                        'stops' => [
+                            'type' => 'standard',
+                            'stopwords' => ['not'],
+                        ],
                     ],
                 ],
-            ],
+            ]
         ], true);
 
         $type = $index->getType('_doc');

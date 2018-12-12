@@ -92,7 +92,7 @@ class IndexTest extends BaseTest
         $typeName = 'test';
 
         $index = $client->getIndex($indexName1);
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
         $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
 
@@ -563,7 +563,7 @@ class IndexTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('zero');
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
         $docs = [];
 

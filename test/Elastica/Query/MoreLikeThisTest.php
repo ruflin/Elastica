@@ -65,7 +65,7 @@ class MoreLikeThisTest extends BaseTest
     {
         $client = $this->_getClient(['persistent' => false]);
         $index = $client->getIndex('elastica_test');
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
         $type = new Type($index, '_doc');
 

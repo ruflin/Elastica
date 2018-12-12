@@ -26,7 +26,7 @@ class Settings
 
     const DEFAULT_NUMBER_OF_REPLICAS = 1;
 
-    const DEFAULT_NUMBER_OF_SHARDS = 5;
+    const DEFAULT_NUMBER_OF_SHARDS = 1;
 
     /**
      * Response.

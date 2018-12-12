@@ -23,7 +23,7 @@ class SearchTest extends BaseTest
         $client = $this->_getClient();
 
         $index = $client->getIndex('zero');
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
         $docs = [];
         $docs[] = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
