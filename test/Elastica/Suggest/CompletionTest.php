@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Suggest;
 
 use Elastica\Document;
@@ -58,7 +59,6 @@ class CompletionTest extends BaseTest
                     'weight' => 3,
                 ],
             ]),
-
         ]);
 
         $index->refresh();

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Exception\Bulk;
 
 use Elastica\Bulk\ResponseSet;

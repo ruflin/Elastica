@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\BucketSelector;
@@ -81,7 +82,7 @@ class BucketSelectorTest extends BaseAggregationTest
 
         $dateHistogramAggResult = $index->search($query)->getAggregation('histogram_agg')['buckets'];
 
-        $this->assertEquals(4, count($dateHistogramAggResult));
+        $this->assertCount(4, $dateHistogramAggResult);
         $this->assertEquals(6, $dateHistogramAggResult[0]['max_agg']['value']);
         $this->assertEquals(9, $dateHistogramAggResult[1]['max_agg']['value']);
         $this->assertEquals(11, $dateHistogramAggResult[2]['max_agg']['value']);

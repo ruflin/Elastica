@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Avg;
@@ -68,22 +69,24 @@ class FiltersTest extends BaseAggregationTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     * @expectedExceptionMessage Name must be a string
      */
     public function testWrongName()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectExceptionMessage('Name must be a string');
+
         $agg = new Filters('by_color');
         $agg->addFilter(new Term(['color' => '0']), 0);
     }
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     * @expectedExceptionMessage Mix named and anonymous keys are not allowed
      */
     public function testMixNamedAndAnonymousFilters()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectExceptionMessage('Mix named and anonymous keys are not allowed');
+
         $agg = new Filters('by_color');
         $agg->addFilter(new Term(['color' => '0']), '0');
         $agg->addFilter(new Term(['color' => '0']));
@@ -91,11 +94,12 @@ class FiltersTest extends BaseAggregationTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
-     * @expectedExceptionMessage Mix named and anonymous keys are not allowed
      */
     public function testMixAnonymousAndNamedFilters()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectExceptionMessage('Mix named and anonymous keys are not allowed');
+
         $agg = new Filters('by_color');
 
         $agg->addFilter(new Term(['color' => '0']));

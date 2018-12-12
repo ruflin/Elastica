@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Percentiles;
@@ -44,7 +45,6 @@ class PercentilesTest extends BaseAggregationTest
                     'compression' => 100,
                 ],
             ],
-
         ];
         $aggr = new Percentiles('price_percentile');
         $aggr->setField('price');
@@ -67,7 +67,6 @@ class PercentilesTest extends BaseAggregationTest
                     'number_of_significant_value_digits' => 2.0,
                 ],
             ],
-
         ];
         $aggr = new Percentiles('price_percentile');
         $aggr->setField('price');
@@ -240,7 +239,6 @@ class PercentilesTest extends BaseAggregationTest
                 ],
                 'missing' => 10,
             ],
-
         ];
         $aggr = new Percentiles('price_percentile');
         $aggr->setField('price');

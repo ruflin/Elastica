@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Bulk;
 
 use Elastica\Bulk;

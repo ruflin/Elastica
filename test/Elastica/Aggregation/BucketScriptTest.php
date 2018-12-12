@@ -1,10 +1,12 @@
 <?php
+
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\BucketScript;
 use Elastica\Aggregation\Histogram;
 use Elastica\Aggregation\Max;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Query;
 
 class BucketScriptTest extends BaseAggregationTest
@@ -89,20 +91,22 @@ class BucketScriptTest extends BaseAggregationTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testToArrayInvalidBucketsPath()
     {
+        $this->expectException(InvalidException::class);
+
         $serialDiffAgg = new BucketScript('bucket_scripted');
         $serialDiffAgg->toArray();
     }
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testToArrayInvalidScript()
     {
+        $this->expectException(InvalidException::class);
+
         $serialDiffAgg = new BucketScript('bucket_scripted', ['path' => 'agg']);
         $serialDiffAgg->toArray();
     }

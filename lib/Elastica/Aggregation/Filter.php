@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
@@ -7,7 +8,7 @@ use Elastica\Query\AbstractQuery;
 /**
  * Class Filter.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html
  */
 class Filter extends AbstractAggregation
 {
@@ -19,7 +20,7 @@ class Filter extends AbstractAggregation
     {
         parent::__construct($name);
 
-        if ($filter !== null) {
+        if (null !== $filter) {
             $this->setFilter($filter);
         }
     }

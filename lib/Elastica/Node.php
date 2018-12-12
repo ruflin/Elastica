@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Node\Info;
@@ -103,7 +104,7 @@ class Node
     /**
      * Return stats object of the current node.
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
      *
      * @return \Elastica\Node\Stats Node stats
      */
@@ -119,7 +120,7 @@ class Node
     /**
      * Return info object of the current node.
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      *
      * @return \Elastica\Node\Info Node info object
      */

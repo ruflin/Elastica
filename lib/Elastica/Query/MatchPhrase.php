@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 /**
@@ -7,7 +8,7 @@ namespace Elastica\Query;
  * @author Jacques Moati <jacques@moati.net>
  * @author Tobias Schultze <http://tobion.de>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase.html
  */
 class MatchPhrase extends AbstractQuery
 {
@@ -17,7 +18,7 @@ class MatchPhrase extends AbstractQuery
      */
     public function __construct($field = null, $values = null)
     {
-        if ($field !== null && $values !== null) {
+        if (null !== $field && null !== $values) {
             $this->setParam($field, $values);
         }
     }

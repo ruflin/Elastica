@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Node;
 
 use Elastica\Node as BaseNode;
@@ -8,7 +9,7 @@ use Elastica\Node as BaseNode;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-status.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-status.html
  */
 class Stats
 {

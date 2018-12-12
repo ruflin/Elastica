@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
@@ -16,7 +17,7 @@ use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
  *
  * @author   Federico Panini <fpanini@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/ingest-processors.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ingest-processors.html
  */
 class Pipeline extends Param
 {
@@ -54,7 +55,7 @@ class Pipeline extends Param
      *
      * @return Response
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/put-pipeline-api.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/put-pipeline-api.html
      */
     public function create()
     {
@@ -84,7 +85,7 @@ class Pipeline extends Param
      *
      * @return Response
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/get-pipeline-api.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-pipeline-api.html
      */
     public function getPipeline(string $id)
     {
@@ -101,7 +102,7 @@ class Pipeline extends Param
      *
      * @return Response
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-pipeline-api.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-pipeline-api.html
      */
     public function deletePipeline(string $id)
     {

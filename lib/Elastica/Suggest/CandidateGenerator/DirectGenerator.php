@@ -1,10 +1,11 @@
 <?php
+
 namespace Elastica\Suggest\CandidateGenerator;
 
 /**
  * Class DirectGenerator.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html#_direct_generators
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-phrase.html#_direct_generators
  */
 class DirectGenerator extends AbstractCandidateGenerator
 {

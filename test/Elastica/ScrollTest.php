@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Client;
@@ -29,19 +30,19 @@ class ScrollTest extends Base
 
             $results = $resultSet->getResults();
             switch (true) {
-                case $count === 1:
+                case 1 === $count:
                     // hits: 1 - 5
                     $this->assertEquals(5, $resultSet->count());
                     $this->assertEquals('1', $results[0]->getId());
                     $this->assertEquals('5', $results[4]->getId());
                     break;
-                case $count === 2:
+                case 2 === $count:
                     // hits: 6 - 10
                     $this->assertEquals(5, $resultSet->count());
                     $this->assertEquals('6', $results[0]->getId());
                     $this->assertEquals('10', $results[4]->getId());
                     break;
-                case $count === 3:
+                case 3 === $count:
                     // hit: 11
                     $this->assertEquals(1, $resultSet->count());
                     $this->assertEquals('11', $results[0]->getId());

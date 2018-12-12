@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Transformer;
 
 use Elastica\Query;

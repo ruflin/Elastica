@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Transport;
 
 use Elastica\Document;
@@ -241,7 +242,7 @@ class TransportBenchmarkTest extends BaseTest
             foreach ($values as $transport => $times) {
                 $perc = 0;
 
-                if ($minMean != 0) {
+                if (0 != $minMean) {
                     $perc = (($times['mean'] - $minMean) / $minMean) * 100;
                 }
 

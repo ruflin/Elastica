@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Bulk\Action;
 
 use Elastica\AbstractUpdateAction;
@@ -142,9 +143,9 @@ abstract class AbstractDocument extends Action
 
         //Check that scripts can only be used for updates
         if ($data instanceof AbstractScript) {
-            if ($opType === null) {
+            if (null === $opType) {
                 $opType = self::OP_TYPE_UPDATE;
-            } elseif ($opType != self::OP_TYPE_UPDATE) {
+            } elseif (self::OP_TYPE_UPDATE != $opType) {
                 throw new \InvalidArgumentException('Scripts can only be used with the update operation type.');
             }
         }

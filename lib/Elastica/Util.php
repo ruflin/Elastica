@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 /**
@@ -76,8 +77,8 @@ class Util
      * and
      * escape known special characters (e.g. + - && || ! ( ) { } [ ] ^ " ~ * ? : etc.).
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/5.1/query-dsl-query-string-query.html#_boolean_operators
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/5.1/query-dsl-query-string-query.html#_reserved_characters
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.1/query-dsl-query-string-query.html#_boolean_operators
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.1/query-dsl-query-string-query.html#_reserved_characters
      *
      * @param string $term Query term to replace and escape
      *
@@ -96,7 +97,7 @@ class Util
      * Escapes the following terms (because part of the query language)
      * + - && || ! ( ) { } [ ] ^ " ~ * ? : \ < >.
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#_reserved_characters
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#_reserved_characters
      *
      * @param string $term Query term to escape
      *
@@ -127,7 +128,7 @@ class Util
      * Replace the following reserved words (because part of the query language)
      * AND OR NOT.
      *
-     * @link http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators
+     * @see http://lucene.apache.org/java/2_4_0/queryparsersyntax.html#Boolean%20operators
      *
      * @param string $term Query term to replace
      *
@@ -204,7 +205,7 @@ class Util
      */
     public static function convertDateTimeObject(\DateTime $dateTime, $includeTimezone = true)
     {
-        $formatString = 'Y-m-d\TH:i:s'.($includeTimezone === true ? 'P' : '\Z');
+        $formatString = 'Y-m-d\TH:i:s'.(true === $includeTimezone ? 'P' : '\Z');
         $string = $dateTime->format($formatString);
 
         return $string;

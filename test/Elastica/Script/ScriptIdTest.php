@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Script\ScriptId;
@@ -111,10 +112,11 @@ class ScriptIdTest extends BaseTest
     /**
      * @group unit
      * @dataProvider dataProviderCreateInvalid
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testCreateInvalid($data)
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         ScriptId::create($data);
     }
 

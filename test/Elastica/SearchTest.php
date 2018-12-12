@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Client;
@@ -135,10 +136,11 @@ class SearchTest extends BaseTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddTypeInvalid()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $client = $this->_getClient();
         $search = new Search($client);
 
@@ -147,10 +149,11 @@ class SearchTest extends BaseTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddIndexInvalid()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $client = $this->_getClient();
         $search = new Search($client);
 
@@ -385,7 +388,7 @@ class SearchTest extends BaseTest
         $this->assertEquals(10, $resultSet->count());
 
         $resultSet = $search->search('test', ['limit' => 0]);
-        $this->assertTrue(($resultSet->count() === 0) && $resultSet->getTotalHits() === 11);
+        $this->assertTrue((0 === $resultSet->count()) && 11 === $resultSet->getTotalHits());
 
         //test with filter_path
         $resultSet = $search->search('test', [Search::OPTION_FILTER_PATH => 'hits.hits._source']);
@@ -408,10 +411,11 @@ class SearchTest extends BaseTest
 
     /**
      * @group functional
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testInvalidConfigSearch()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $client = $this->_getClient();
         $search = new Search($client);
         // Throws InvalidException
@@ -455,15 +459,15 @@ class SearchTest extends BaseTest
 
         $type = $index->getType('_doc');
         $type->addDocuments([
-            new Document(1,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(2,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(3,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(4,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(5,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
-            new Document(6,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(7,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(8,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
-            new Document(9,  ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
             new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
             new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
         ]);

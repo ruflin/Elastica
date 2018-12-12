@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 trigger_error('Elastica\Query\GeohashCell is deprecated.', E_USER_DEPRECATED);
@@ -6,7 +7,7 @@ trigger_error('Elastica\Query\GeohashCell is deprecated.', E_USER_DEPRECATED);
 /**
  * Class GeohashCell.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-geohash-cell-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-geohash-cell-query.html
  */
 class GeohashCell extends AbstractGeoDistance
 {
@@ -14,7 +15,7 @@ class GeohashCell extends AbstractGeoDistance
      * @param string       $key       The field on which to query
      * @param array|string $location  Location as coordinates array or geohash string ['lat' => 40.3, 'lon' => 45.2]
      * @param string|int   $precision Integer length of geohash prefix or distance (3, or "50m")
-     * @param bool         $neighbors If true, queries cells next to the given cell.
+     * @param bool         $neighbors if true, queries cells next to the given cell
      */
     public function __construct($key, $location, $precision = -1, $neighbors = false)
     {
@@ -38,7 +39,7 @@ class GeohashCell extends AbstractGeoDistance
     /**
      * Set the neighbors option for this query.
      *
-     * @param bool $neighbors If true, queries cells next to the given cell.
+     * @param bool $neighbors if true, queries cells next to the given cell
      *
      * @return $this
      */

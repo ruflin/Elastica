@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Multi;
 
 use Elastica\Response;
@@ -86,8 +87,6 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
         return $this->_resultSets[$this->key()];
     }
 
-    /**
-     */
     public function next()
     {
         ++$this->_position;
@@ -109,8 +108,6 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
         return isset($this->_resultSets[$this->key()]);
     }
 
-    /**
-     */
     public function rewind()
     {
         $this->_position = 0;
@@ -127,7 +124,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * @param string|int $offset
      *
-     * @return bool true on success or false on failure.
+     * @return bool true on success or false on failure
      */
     public function offsetExists($offset)
     {
@@ -137,7 +134,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * @param mixed $offset
      *
-     * @return mixed Can return all value types.
+     * @return mixed can return all value types
      */
     public function offsetGet($offset)
     {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 /**
@@ -6,7 +7,7 @@ namespace Elastica\Query;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
  */
 class Nested extends AbstractQuery
 {
@@ -37,7 +38,7 @@ class Nested extends AbstractQuery
     /**
      * Set score method.
      *
-     * @param string $scoreMode Options: avg, total, max and none.
+     * @param string $scoreMode options: avg, total, max and none
      *
      * @return $this
      */

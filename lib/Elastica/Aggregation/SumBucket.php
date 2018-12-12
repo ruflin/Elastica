@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
@@ -6,7 +7,7 @@ use Elastica\Exception\InvalidException;
 /**
  * Class SumBucket.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-sum-bucket-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-sum-bucket-aggregation.html
  */
 class SumBucket extends AbstractAggregation
 {
@@ -18,7 +19,7 @@ class SumBucket extends AbstractAggregation
     {
         parent::__construct($name);
 
-        if ($bucketsPath !== null) {
+        if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
         }
     }

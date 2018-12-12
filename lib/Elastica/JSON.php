@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Exception\JSONParseException;
@@ -11,8 +12,8 @@ class JSON
     /**
      * Parse JSON string to an array.
      *
-     * @link http://php.net/manual/en/function.json-decode.php
-     * @link http://php.net/manual/en/function.json-last-error.php
+     * @see http://php.net/manual/en/function.json-decode.php
+     * @see http://php.net/manual/en/function.json-last-error.php
      *
      * @param string $args,... JSON string to parse
      *
@@ -26,7 +27,7 @@ class JSON
         $args = func_get_args();
 
         // default to decoding into an assoc array
-        if (count($args) === 1) {
+        if (1 === count($args)) {
             $args[] = true;
         }
 
@@ -45,8 +46,8 @@ class JSON
     /**
      * Convert input to JSON string with standard options.
      *
-     * @link http://php.net/manual/en/function.json-encode.php
-     * @link http://php.net/manual/en/function.json-last-error.php
+     * @see http://php.net/manual/en/function.json-encode.php
+     * @see http://php.net/manual/en/function.json-last-error.php
      *
      * @param mixed $args,... Target to stringify
      *
@@ -74,9 +75,9 @@ class JSON
     /**
      * Get Json Last Error.
      *
-     * @link http://php.net/manual/en/function.json-last-error.php
-     * @link http://php.net/manual/en/function.json-last-error-msg.php
-     * @link https://github.com/php/php-src/blob/master/ext/json/json.c#L308
+     * @see http://php.net/manual/en/function.json-last-error.php
+     * @see http://php.net/manual/en/function.json-last-error-msg.php
+     * @see https://github.com/php/php-src/blob/master/ext/json/json.c#L308
      *
      * @return string
      */

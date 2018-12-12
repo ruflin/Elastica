@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 /**
@@ -6,7 +7,7 @@ namespace Elastica\Query;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-limit-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-limit-query.html
  */
 class Limit extends AbstractQuery
 {

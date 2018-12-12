@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
@@ -6,7 +7,7 @@ use Elastica\Exception\InvalidException;
 /**
  * Class SerialDiff.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-serialdiff-aggregation.html
  */
 class SerialDiff extends AbstractAggregation
 {
@@ -18,7 +19,7 @@ class SerialDiff extends AbstractAggregation
     {
         parent::__construct($name);
 
-        if ($bucketsPath !== null) {
+        if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
         }
     }

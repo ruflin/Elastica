@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -329,6 +330,7 @@ class InnerHitsTest extends BaseTest
         $ind = $this->_getIndexForParentChildrenTest();
         $t = $ind->getType('_doc');
         $r = $t->search($child);
+
         return $this->_getIndexForParentChildrenTest()->getType('_doc')->search($child);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 /**
@@ -108,7 +109,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/blog/versioning
+     * @see https://www.elastic.co/blog/versioning
      */
     public function setVersion($version)
     {
@@ -171,7 +172,7 @@ class AbstractUpdateAction extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html
      */
     public function setParent($parent)
     {

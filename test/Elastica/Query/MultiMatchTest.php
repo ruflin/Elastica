@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -6,7 +7,6 @@ use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\MultiMatch;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 use Elastica\Type\Mapping;
 
 class MultiMatchTest extends BaseTest

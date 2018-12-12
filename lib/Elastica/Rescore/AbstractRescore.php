@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Rescore;
 
 use Elastica\Param;
@@ -8,7 +9,7 @@ use Elastica\Param;
  *
  * @author Jason Hu <mjhu91@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html
  */
 abstract class AbstractRescore extends Param
 {

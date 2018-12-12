@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Histogram;
@@ -73,10 +74,11 @@ class StatsBucketTest extends BaseAggregationTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testToArrayInvalidBucketsPath()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $serialDiffAgg = new StatsBucket('bucket_part');
         $serialDiffAgg->toArray();
     }

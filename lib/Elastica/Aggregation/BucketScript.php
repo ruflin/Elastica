@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Aggregation;
 
 use Elastica\Exception\InvalidException;
@@ -6,7 +7,7 @@ use Elastica\Exception\InvalidException;
 /**
  * Class BucketScript.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-script-aggregation.html
  */
 class BucketScript extends AbstractAggregation
 {
@@ -19,11 +20,11 @@ class BucketScript extends AbstractAggregation
     {
         parent::__construct($name);
 
-        if ($bucketsPath !== null) {
+        if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
         }
 
-        if ($script !== null) {
+        if (null !== $script) {
             $this->setScript($script);
         }
     }

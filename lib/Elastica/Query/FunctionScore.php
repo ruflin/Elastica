@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 use Elastica\Script\AbstractScript;
@@ -6,7 +7,7 @@ use Elastica\Script\AbstractScript;
 /**
  * Class FunctionScore.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
  */
 class FunctionScore extends AbstractQuery
 {
@@ -81,7 +82,7 @@ class FunctionScore extends AbstractQuery
             $function['filter'] = $filter;
         }
 
-        if ($weight !== null) {
+        if (null !== $weight) {
             $function['weight'] = $weight;
         }
 
@@ -250,7 +251,7 @@ class FunctionScore extends AbstractQuery
     /**
      * If set, this query will return results in random order.
      *
-     * @param int $seed Set a seed value to return results in the same random order for consistent pagination.
+     * @param int $seed set a seed value to return results in the same random order for consistent pagination
      *
      * @return $this
      */

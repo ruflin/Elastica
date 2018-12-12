@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Aggregation\AbstractAggregation;
@@ -17,7 +18,7 @@ use Elastica\Suggest\AbstractSuggest;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
  */
 class Query extends Param
 {
@@ -73,7 +74,6 @@ class Query extends Param
 
             case $query instanceof Suggest:
                 return new self($query);
-
         }
 
         throw new InvalidException('Unexpected argument to create a query for.');
@@ -135,7 +135,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
     public function setSort(array $sortArgs)
     {
@@ -149,7 +149,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
     public function addSort($sort)
     {
@@ -163,7 +163,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html#_track_scores
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html#_track_scores
      */
     public function setTrackScores($trackScores = true)
     {
@@ -177,7 +177,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      */
     public function setHighlight(array $highlightArgs)
     {
@@ -191,7 +191,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      */
     public function addHighlight($highlight)
     {
@@ -217,7 +217,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-explain.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-explain.html
      */
     public function setExplain($explain = true)
     {
@@ -231,7 +231,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-version.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-version.html
      */
     public function setVersion($version = true)
     {
@@ -247,7 +247,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fields.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fields.html
      */
     public function setStoredFields(array $fields)
     {
@@ -261,7 +261,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fielddata-fields.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fielddata-fields.html
      */
     public function setFieldDataFields(array $fieldDataFields)
     {
@@ -275,7 +275,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
      */
     public function setScriptFields($scriptFields)
     {
@@ -326,7 +326,7 @@ class Query extends Param
      */
     public function toArray()
     {
-        if (!isset($this->_params['query']) && ($this->_suggest == 0)) {
+        if (!isset($this->_params['query']) && (0 == $this->_suggest)) {
             $this->setQuery(new MatchAll());
         }
 
@@ -390,7 +390,7 @@ class Query extends Param
             $buffer = [];
 
             foreach ($rescore as $rescoreQuery) {
-                $buffer [] = $rescoreQuery;
+                $buffer[] = $rescoreQuery;
             }
         } else {
             $buffer = $rescore;
@@ -406,7 +406,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link   https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
+     * @see   https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
      */
     public function setSource($params)
     {
@@ -420,7 +420,7 @@ class Query extends Param
      *
      * @return $this
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html
      */
     public function setPostFilter(AbstractQuery $filter)
     {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Script;
 
 use Elastica\AbstractUpdateAction;
@@ -13,7 +14,7 @@ use Elastica\Exception\InvalidException;
  * @author Tobias Schultze <http://tobion.de>
  * @author Martin Janser <martin.janser@liip.ch>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html
  */
 abstract class AbstractScript extends AbstractUpdateAction
 {

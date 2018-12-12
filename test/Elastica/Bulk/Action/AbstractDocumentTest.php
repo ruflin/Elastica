@@ -1,30 +1,32 @@
 <?php
+
 namespace Elastica\Test\Bulk\Action;
 
 use Elastica\Bulk\Action\AbstractDocument;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 
 class AbstractDocumentTest extends BaseTest
 {
     /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The data needs to be a Document or a Script.
      * @group unit
      */
     public function testCreateAbstractDocumentWithInvalidParameter()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The data needs to be a Document or a Script.');
+
         AbstractDocument::create(new \stdClass());
     }
 
     /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Scripts can only be used with the update operation type.
      * @group unit
      */
     public function testCreateAbstractDocumentWithScript()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Scripts can only be used with the update operation type.');
+
         AbstractDocument::create(new Script('foobar'), AbstractDocument::OP_TYPE_CREATE);
     }
 }

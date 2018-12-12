@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Rescore;
 
 use Elastica\Query as BaseQuery;
@@ -8,7 +9,7 @@ use Elastica\Query as BaseQuery;
  *
  * @author Jason Hu <mjhu91@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html
  */
 class Query extends AbstractRescore
 {

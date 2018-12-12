@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Exception;
 
 trigger_error('Elastica\Exception\ElasticsearchException is deprecated. Use Elastica\Exception\ResponseException::getResponse::getFullError instead.', E_USER_DEPRECATED);
@@ -48,10 +49,10 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     {
         $errors = explode(']; nested: ', $error);
 
-        if (count($errors) == 1) {
+        if (1 == count($errors)) {
             $this->_exception = $this->_extractException($errors[0]);
         } else {
-            if ($this->_extractException($errors[0]) == self::REMOTE_TRANSPORT_EXCEPTION) {
+            if (self::REMOTE_TRANSPORT_EXCEPTION == $this->_extractException($errors[0])) {
                 $this->_isRemote = true;
                 $this->_exception = $this->_extractException($errors[1]);
             } else {

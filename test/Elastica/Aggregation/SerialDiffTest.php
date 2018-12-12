@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\DateHistogram;
@@ -80,10 +81,11 @@ class SerialDiffTest extends BaseAggregationTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testToArrayInvalidBucketsPath()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $serialDiffAgg = new SerialDiff('difference');
         $serialDiffAgg->toArray();
     }

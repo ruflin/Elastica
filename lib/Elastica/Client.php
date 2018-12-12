@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Bulk\Action;
@@ -135,7 +136,7 @@ class Client
         }
 
         if (!isset($this->_config['connectionStrategy'])) {
-            if ($this->getConfig('roundRobin') === true) {
+            if (true === $this->getConfig('roundRobin')) {
                 $this->setConfigValue('connectionStrategy', 'RoundRobin');
             } else {
                 $this->setConfigValue('connectionStrategy', 'Simple');
@@ -303,7 +304,7 @@ class Client
      * set inside the document, because for bulk settings documents,
      * documents can belong to any type and index
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array|\Elastica\Document[] $docs          Array of Elastica\Document
      * @param array                      $requestParams
@@ -335,7 +336,7 @@ class Client
      * set inside the document, because for bulk settings documents,
      * documents can belong to any type and index
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array|\Elastica\Document[] $docs          Array of Elastica\Document
      * @param array                      $requestParams
@@ -372,7 +373,7 @@ class Client
      *
      * @return \Elastica\Response
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      */
     public function updateDocument($id, $data, $index, $type, array $options = [])
     {
@@ -594,7 +595,7 @@ class Client
     /**
      * Deletes documents with the given ids, index, type from the index.
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array                  $ids     Document ids
      * @param string|\Elastica\Index $index   Index name
@@ -641,7 +642,7 @@ class Client
      *         array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '2'))
      * );
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
      * @param array $params Parameter array
      *
@@ -763,7 +764,7 @@ class Client
      * @return \Elastica\Response Response object
      *
      * @deprecated Replaced by forcemergeAll
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
      */
     public function optimizeAll($args = [])
     {
@@ -779,7 +780,7 @@ class Client
      *
      * @return \Elastica\Response Response object
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-forcemerge.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-forcemerge.html
      */
     public function forcemergeAll($args = [])
     {
@@ -794,7 +795,7 @@ class Client
      *
      * @return \Elastica\Response Response object
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
      */
     public function refreshAll()
     {

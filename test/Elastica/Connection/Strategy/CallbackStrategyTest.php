@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Connection\Strategy;
 
 use Elastica\Connection\Strategy\CallbackStrategy;
@@ -81,7 +82,7 @@ class CallbackStrategyTest extends Base
             ++$count;
 
             return current($connections);
-       }];
+        }];
 
         $client = $this->_getClient($config);
         $response = $client->request('_aliases');

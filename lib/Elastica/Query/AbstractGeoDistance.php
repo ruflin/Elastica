@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
@@ -8,7 +9,7 @@ use Elastica\Exception\InvalidException;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html
  */
 abstract class AbstractGeoDistance extends AbstractQuery
 {
@@ -158,7 +159,7 @@ abstract class AbstractGeoDistance extends AbstractQuery
      */
     protected function _getLocationData()
     {
-        if ($this->_locationType === self::LOCATION_TYPE_LATLON) { // Latitude/longitude
+        if (self::LOCATION_TYPE_LATLON === $this->_locationType) { // Latitude/longitude
             $location = [];
 
             if (isset($this->_latitude)) { // Latitude
@@ -172,7 +173,7 @@ abstract class AbstractGeoDistance extends AbstractQuery
             } else {
                 throw new InvalidException('Longitude has to be set');
             }
-        } elseif ($this->_locationType === self::LOCATION_TYPE_GEOHASH) { // Geohash
+        } elseif (self::LOCATION_TYPE_GEOHASH === $this->_locationType) { // Geohash
             $location = $this->_geohash;
         } else { // Invalid location type
             throw new InvalidException('Invalid location type');

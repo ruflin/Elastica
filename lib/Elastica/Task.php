@@ -1,10 +1,11 @@
 <?php
+
 namespace Elastica;
 
 /**
  * Represents elasticsearch task.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/tasks.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/tasks.html
  */
 class Task extends Param
 {
@@ -106,7 +107,7 @@ class Task extends Param
     {
         $data = $this->getData();
 
-        return $data['completed'] === true;
+        return true === $data['completed'];
     }
 
     public function cancel(): Response

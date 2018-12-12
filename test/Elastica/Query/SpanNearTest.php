@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -11,10 +12,11 @@ class SpanNearTest extends BaseTest
 {
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testConstructWrongTypeInvalid()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $term1 = new Term(['name' => 'marek']);
         $term2 = new Term(['name' => 'nicolas']);
         $spanNearQuery = new SpanNear([$term1, $term2]);
@@ -47,7 +49,6 @@ class SpanNearTest extends BaseTest
                             'name' => 'nicolas',
                         ],
                     ],
-
                 ],
                 'slop' => 5,
                 'in_order' => true,

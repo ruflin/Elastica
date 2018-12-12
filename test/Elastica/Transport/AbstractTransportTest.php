@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Transport;
 
 use Elastica\Connection;
@@ -70,11 +71,12 @@ class AbstractTransportTest extends BaseTest
     /**
      * @group unit
      * @dataProvider getInvalidDefinitions
-     * @expectedException \Elastica\Exception\InvalidException
-     * @expectedExceptionMessage Invalid transport
      */
     public function testThrowsExecptionOnInvalidTransportDefinition($transport)
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectExceptionMessage('Invalid transport');
+
         AbstractTransport::create($transport, new Connection());
     }
 
@@ -128,7 +130,7 @@ class AbstractTransportTest extends BaseTest
             $this->fail('Failed to parse value [1] as only [true] or [false] are allowed.');
         }
 
-        if ($transport['transport'] == 'Http') {
+        if ('Http' == $transport['transport']) {
             $info = $results->getResponse()->getTransferInfo();
             $url = $info['url'];
             $this->assertStringEndsWith('version=true', $url);

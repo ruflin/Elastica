@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Aggregation\Terms as TermsAggregation;
@@ -7,7 +8,6 @@ use Elastica\Exception\InvalidException;
 use Elastica\Query;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
-use Elastica\Query\Text;
 use Elastica\Rescore\Query as RescoreQuery;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
@@ -274,11 +274,11 @@ class QueryTest extends BaseTest
     {
         $query = new Query();
         $scriptFields = new ScriptFields();
-        $scriptFields->addScript('script',  new Script('script'));
+        $scriptFields->addScript('script', new Script('script'));
 
         $query->setScriptFields($scriptFields);
 
-        $scriptFields->addScript('another script',  new Script('another script'));
+        $scriptFields->addScript('another script', new Script('another script'));
 
         $anotherQuery = new Query();
         $anotherQuery->setScriptFields($scriptFields);

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Connection;
@@ -28,10 +29,11 @@ class RequestTest extends BaseTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testInvalidConnection()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $request = new Request('', Request::GET);
         $request->send();
     }

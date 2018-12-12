@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Document;
@@ -92,10 +93,11 @@ class ResultSetTest extends BaseTest
 
     /**
      * @group functional
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testInvalidOffsetCreation()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $index = $this->_createIndex();
         $type = $index->getType('_doc');
 
@@ -111,10 +113,11 @@ class ResultSetTest extends BaseTest
 
     /**
      * @group functional
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testInvalidOffsetGet()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $index = $this->_createIndex();
         $type = $index->getType('_doc');
 

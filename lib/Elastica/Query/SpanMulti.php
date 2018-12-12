@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
@@ -9,7 +10,7 @@ use Elastica\Exception\InvalidException;
  * @author Marek Hernik <marek.hernik@gmail.com>
  * @author Alessandro Chitolina <alekitto@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-multi-term-query.html
  */
 class SpanMulti extends AbstractSpanQuery
 {

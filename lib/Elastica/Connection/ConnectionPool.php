@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Connection;
 
 use Elastica\Client;

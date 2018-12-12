@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 /**
@@ -7,7 +8,7 @@ namespace Elastica\Query;
  * @author Alessandro Chitolina <alekitto@gmail.com>
  * @author Marek Hernik <marek.hernik@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-term-query.html
  */
 class SpanTerm extends AbstractSpanQuery
 {

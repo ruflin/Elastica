@@ -79,7 +79,7 @@ doc:
 # Uses the preconfigured standards in .php_cs
 .PHONY: lint
 lint:
-	${RUN_ENV} php-cs-fixer fix
+	${RUN_ENV} php-cs-fixer fix --allow-risky=yes
 
 .PHONY: loc
 loc:
@@ -140,7 +140,7 @@ gource:
 
 ## DOCKER IMAGES
 
-.PHONY: elastica-image
+	.PHONY: elastica-image
 elastica-image:
 	docker build -t ruflin/elastica-dev-base -f env/elastica/Docker${TARGET} env/elastica/
 	docker build -t ruflin/elastica .

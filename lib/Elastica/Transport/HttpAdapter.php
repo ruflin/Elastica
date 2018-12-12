@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Transport;
 
 use Elastica\Connection;
@@ -109,11 +110,11 @@ class HttpAdapter extends AbstractTransport
         $method = $elasticaRequest->getMethod();
         $headers = $connection->hasConfig('headers') ?: [];
         if (!empty($data) || '0' === $data) {
-            if ($method == ElasticaRequest::GET) {
+            if (ElasticaRequest::GET == $method) {
                 $method = ElasticaRequest::POST;
             }
 
-            if ($this->hasParam('postWithRequestBody') && $this->getParam('postWithRequestBody') == true) {
+            if ($this->hasParam('postWithRequestBody') && true == $this->getParam('postWithRequestBody')) {
                 $elasticaRequest->setMethod(ElasticaRequest::POST);
                 $method = ElasticaRequest::POST;
             }
