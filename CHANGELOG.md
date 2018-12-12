@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 * \Elastica\AbstractUpdateAction::getOptions( $fields ) no longer supports the $underscore parameter, option names must match what elasticsearch expects.
 * Removed no longer supported \Elastica\Query\QueryString::setAutoGeneratePhraseQueries( $bool ) [#1622](https://github.com/ruflin/Elastica/pull/1622)
+* Replaced [params._agg](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_replaced_literal_params__agg_literal_with_literal_state_literal_context_variable_in_scripted_metric_aggregations) with state context variable in scripted metric aggregations 
 
 ### Bugfixes
 * Always set the Guzzle `base_uri` to support connecting to multiple ES hosts. [#1618](https://github.com/ruflin/Elastica/pull/1618)

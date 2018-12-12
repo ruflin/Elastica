@@ -38,9 +38,10 @@ class ScriptedMetricTest extends BaseAggregationTest
     {
         $agg = new ScriptedMetric(
             'scripted',
-            'params._agg.durations = []',
-            'params._agg.durations.add(doc.end.value - doc.start.value)',
-            'return params._agg.durations'
+            'state.durations = []',
+            'state.durations.add(doc.end.value - doc.start.value)',
+            'return state.durations',
+            'return states'
         );
 
         $query = new Query();
