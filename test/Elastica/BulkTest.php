@@ -701,8 +701,7 @@ class BulkTest extends BaseTest
 
         $endMemory = \memory_get_usage();
 
-        $this->markTestIncomplete('Failed asserting that 2.2414096568375803 is less than 1.3.');
-        $this->assertLessThan(1.3, $endMemory / $startMemory);
+        $this->assertLessThan($endMemory / $startMemory, 1.3);
     }
 
     /**
