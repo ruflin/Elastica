@@ -42,7 +42,7 @@ class Derivative extends AbstractAggregation
      *
      * @return $this
      */
-    public function setGapPolicy($gapPolicy)
+    public function setGapPolicy($gapPolicy = 'skip')
     {
         return $this->setParam('gap_policy', $gapPolicy);
     }

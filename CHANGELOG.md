@@ -52,7 +52,6 @@ All notable changes to this project will be documented in this file based on the
       "number_of_significant_value_digits" : 3
     }
   ```
-* Never implemented the method *Missing* on [`Aggregation\Percentiles`](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-aggregations-metrics-percentile-aggregation.html)
 
 ### Bugfixes
 
