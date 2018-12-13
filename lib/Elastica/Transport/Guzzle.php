@@ -50,7 +50,7 @@ class Guzzle extends AbstractTransport
      *
      * @return \Elastica\Response Response object
      */
-    public function exec(Request $request, array $params)
+    public function exec(Request $request, array $params): Response
     {
         $connection = $this->getConnection();
 
@@ -156,7 +156,7 @@ class Guzzle extends AbstractTransport
      *
      * @return Client
      */
-    protected function _getGuzzleClient($baseUrl, $persistent = true, Request $request)
+    protected function _getGuzzleClient(string $baseUrl, bool $persistent = true, Request $request): Client
     {
         if (!$persistent || !self::$_guzzleClientConnection) {
             self::$_guzzleClientConnection = new Client([
@@ -173,11 +173,11 @@ class Guzzle extends AbstractTransport
     /**
      * Builds the base url for the guzzle connection.
      *
-     * @param \Elastica\Connection $connection
+     * @param Connection $connection
      *
      * @return string
      */
-    protected function _getBaseUrl(Connection $connection)
+    protected function _getBaseUrl(Connection $connection): string
     {
         // If url is set, url is taken. Otherwise port, host and path
         $url = $connection->hasConfig('url') ? $connection->getConfig('url') : '';
@@ -199,11 +199,11 @@ class Guzzle extends AbstractTransport
     /**
      * Builds the action path url for each request.
      *
-     * @param \Elastica\Request $request
+     * @param Request $request
      *
      * @return string
      */
-    protected function _getActionPath(Request $request)
+    protected function _getActionPath(Request $request): string
     {
         $action = $request->getPath();
         if ($action) {

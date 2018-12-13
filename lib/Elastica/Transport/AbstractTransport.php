@@ -6,6 +6,7 @@ use Elastica\Connection;
 use Elastica\Exception\InvalidException;
 use Elastica\Param;
 use Elastica\Request;
+use Elastica\Response;
 
 /**
  * Elastica Abstract Transport object.
@@ -15,14 +16,14 @@ use Elastica\Request;
 abstract class AbstractTransport extends Param
 {
     /**
-     * @var \Elastica\Connection
+     * @var Connection
      */
     protected $_connection;
 
     /**
      * Construct transport.
      *
-     * @param \Elastica\Connection $connection Connection object
+     * @param Connection $connection Connection object
      */
     public function __construct(Connection $connection = null)
     {
@@ -32,19 +33,19 @@ abstract class AbstractTransport extends Param
     }
 
     /**
-     * @return \Elastica\Connection Connection object
+     * @return Connection Connection object
      */
-    public function getConnection()
+    public function getConnection(): Connection
     {
         return $this->_connection;
     }
 
     /**
-     * @param \Elastica\Connection $connection Connection object
+     * @param Connection $connection Connection object
      *
      * @return $this
      */
-    public function setConnection(Connection $connection)
+    public function setConnection(Connection $connection): AbstractTransport
     {
         $this->_connection = $connection;
 
@@ -54,22 +55,22 @@ abstract class AbstractTransport extends Param
     /**
      * Executes the transport request.
      *
-     * @param \Elastica\Request $request Request object
-     * @param array             $params  Hostname, port, path, ...
+     * @param Request $request Request object
+     * @param array   $params  Hostname, port, path, ...
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    abstract public function exec(Request $request, array $params);
+    abstract public function exec(Request $request, array $params): Response;
 
     /**
      * BOOL values true|false should be sanityzed and passed to Elasticsearch
      * as string.
      *
-     * @param string $query
+     * @param array $query
      *
      * @return mixed
      */
-    public function sanityzeQueryStringBool($query)
+    public function sanityzeQueryStringBool(array $query)
     {
         foreach ($query as $key => $value) {
             if (is_bool($value)) {
@@ -90,15 +91,15 @@ abstract class AbstractTransport extends Param
      * * array: An array with a "type" key which must be set to one of the two options. All other
      *          keys in the array will be set as parameters in the transport instance
      *
-     * @param mixed                $transport  A transport definition
-     * @param \Elastica\Connection $connection A connection instance
-     * @param array                $params     Parameters for the transport class
+     * @param mixed      $transport  A transport definition
+     * @param Connection $connection A connection instance
+     * @param array      $params     Parameters for the transport class
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return AbstractTransport
      */
-    public static function create($transport, Connection $connection, array $params = [])
+    public static function create($transport, Connection $connection, array $params = []): AbstractTransport
     {
         if (is_array($transport) && isset($transport['type'])) {
             $transportParams = $transport;
