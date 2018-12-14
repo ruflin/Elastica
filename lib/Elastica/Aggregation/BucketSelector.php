@@ -14,7 +14,7 @@ class BucketSelector extends AbstractSimpleAggregation
      * @param array|null  $bucketsPath
      * @param string|null $script
      */
-    public function __construct($name, $bucketsPath = null, $script = null)
+    public function __construct(string $name, string $bucketsPath = null, string $script = null)
     {
         parent::__construct($name);
 
@@ -46,7 +46,7 @@ class BucketSelector extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setGapPolicy($gapPolicy = 'skip')
+    public function setGapPolicy(string $gapPolicy = 'skip')
     {
         return $this->setParam('gap_policy', $gapPolicy);
     }
