@@ -53,8 +53,6 @@ All notable changes to this project will be documented in this file based on the
     }
   ```
 
-### Bugfixes
-
 ### Added
 
 * Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
