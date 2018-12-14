@@ -13,10 +13,19 @@ class DirectGenerator extends AbstractCandidateGenerator
     const SUGGEST_MODE_POPULAR = 'popular';
     const SUGGEST_MODE_ALWAYS = 'always';
 
+    const DEFAULT_SIZE = 5;
+    const DEFAULT_SUGGEST_MODE = self::SUGGEST_MODE_MISSING;
+    const DEFAULT_MAX_EDITS = 2;
+    const DEFAULT_PREFIX_LENGTH = 1;
+    const DEFAULT_MIN_WORD_LENGTH = 4;
+    const DEFAULT_MAX_INSPECTIONS = 5;
+    const DEFAULT_MIN_DOC_FREQ = 0.0;
+    const DEFAULT_MAX_TERM_FREQ = 0.01;
+
     /**
      * @param string $field
      */
-    public function __construct($field)
+    public function __construct(string $field)
     {
         $this->setField($field);
     }
@@ -28,7 +37,7 @@ class DirectGenerator extends AbstractCandidateGenerator
      *
      * @return $this
      */
-    public function setField($field)
+    public function setField(string $field)
     {
         return $this->setParam('field', $field);
     }
@@ -40,7 +49,7 @@ class DirectGenerator extends AbstractCandidateGenerator
      *
      * @return $this
      */
-    public function setSize($size)
+    public function setSize(int $size)
     {
         return $this->setParam('size', $size);
     }
@@ -50,7 +59,7 @@ class DirectGenerator extends AbstractCandidateGenerator
      *
      * @return $this
      */
-    public function setSuggestMode($mode)
+    public function setSuggestMode(string $mode)
     {
         return $this->setParam('suggest_mode', $mode);
     }
@@ -60,7 +69,7 @@ class DirectGenerator extends AbstractCandidateGenerator
      *
      * @return $this
      */
-    public function setMaxEdits($max)
+    public function setMaxEdits(int $max)
     {
         return $this->setParam('max_edits', $max);
     }
@@ -70,7 +79,7 @@ class DirectGenerator extends AbstractCandidateGenerator
      *
      * @return $this
      */
-    public function setPrefixLength($length)
+    public function setPrefixLength(int $length)
     {
         return $this->setParam('prefix_length', $length);
     }
@@ -80,7 +89,7 @@ class DirectGenerator extends AbstractCandidateGenerator
      *
      * @return $this
      */
-    public function setMinWordLength($min)
+    public function setMinWordLength(int $min)
     {
         return $this->setParam('min_word_length', $min);
     }
@@ -90,7 +99,7 @@ class DirectGenerator extends AbstractCandidateGenerator
      *
      * @return $this
      */
-    public function setMaxInspections($max)
+    public function setMaxInspections(int $max)
     {
         return $this->setParam('max_inspections', $max);
     }
@@ -100,7 +109,7 @@ class DirectGenerator extends AbstractCandidateGenerator
      *
      * @return $this
      */
-    public function setMinDocFrequency($min)
+    public function setMinDocFrequency(float $min)
     {
         return $this->setParam('min_doc_freq', $min);
     }
@@ -110,7 +119,7 @@ class DirectGenerator extends AbstractCandidateGenerator
      *
      * @return $this
      */
-    public function setMaxTermFrequency($max)
+    public function setMaxTermFrequency(float $max)
     {
         return $this->setParam('max_term_freq', $max);
     }
@@ -122,7 +131,7 @@ class DirectGenerator extends AbstractCandidateGenerator
      *
      * @return $this
      */
-    public function setPreFilter($pre)
+    public function setPreFilter(string $pre)
     {
         return $this->setParam('pre_filter', $pre);
     }
@@ -134,7 +143,7 @@ class DirectGenerator extends AbstractCandidateGenerator
      *
      * @return $this
      */
-    public function setPostFilter($post)
+    public function setPostFilter(string $post)
     {
         return $this->setParam('post_filter', $post);
     }

@@ -11,12 +11,18 @@ use Elastica\Suggest\CandidateGenerator\AbstractCandidateGenerator;
  */
 class Phrase extends AbstractSuggest
 {
+    const DEFAULT_REAL_WORD_ERROR_LIKELIHOOD = 0.95;
+    const DEFAULT_CONFIDENCE = 1.0;
+    const DEFAULT_MAX_ERRORS = 1.0;
+    const DEFAULT_STUPID_BACKOFF_DISCOUNT = 0.4;
+    const DEFAULT_LAPLACE_SMOOTHING_ALPHA = 0.5;
+
     /**
      * @param string $analyzer
      *
      * @return $this
      */
-    public function setAnalyzer($analyzer)
+    public function setAnalyzer(string $analyzer): Phrase
     {
         return $this->setParam('analyzer', $analyzer);
     }
@@ -28,7 +34,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setGramSize($size)
+    public function setGramSize(int $size): Phrase
     {
         return $this->setParam('gram_size', $size);
     }
@@ -40,7 +46,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setRealWordErrorLikelihood($likelihood)
+    public function setRealWordErrorLikelihood(float $likelihood): Phrase
     {
         return $this->setParam('real_word_error_likelihood', $likelihood);
     }
@@ -53,7 +59,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setConfidence($confidence)
+    public function setConfidence(float $confidence): Phrase
     {
         return $this->setParam('confidence', $confidence);
     }
@@ -65,7 +71,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setMaxErrors($max)
+    public function setMaxErrors(float $max): Phrase
     {
         return $this->setParam('max_errors', $max);
     }
@@ -75,7 +81,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setSeparator($separator)
+    public function setSeparator(string $separator): Phrase
     {
         return $this->setParam('separator', $separator);
     }
@@ -88,7 +94,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setHighlight($preTag, $postTag)
+    public function setHighlight(string $preTag, string $postTag): Phrase
     {
         return $this->setParam('highlight', [
             'pre_tag' => $preTag,
@@ -101,7 +107,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setStupidBackoffSmoothing($discount = 0.4)
+    public function setStupidBackoffSmoothing(float $discount): Phrase
     {
         return $this->setSmoothingModel('stupid_backoff', [
             'discount' => $discount,
@@ -113,7 +119,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setLaplaceSmoothing($alpha = 0.5)
+    public function setLaplaceSmoothing(float $alpha): Phrase
     {
         return $this->setSmoothingModel('laplace', [
             'alpha' => $alpha,
@@ -127,7 +133,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setLinearInterpolationSmoothing($trigramLambda, $bigramLambda, $unigramLambda)
+    public function setLinearInterpolationSmoothing(float $trigramLambda, float $bigramLambda, float $unigramLambda): Phrase
     {
         return $this->setSmoothingModel('linear_interpolation', [
             'trigram_lambda' => $trigramLambda,
@@ -142,7 +148,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function setSmoothingModel($model, array $params)
+    public function setSmoothingModel(string $model, array $params): Phrase
     {
         return $this->setParam('smoothing', [
             $model => $params,
@@ -154,7 +160,7 @@ class Phrase extends AbstractSuggest
      *
      * @return $this
      */
-    public function addCandidateGenerator(AbstractCandidateGenerator $generator)
+    public function addCandidateGenerator(AbstractCandidateGenerator $generator): Phrase
     {
         return $this->setParam('candidate_generator', $generator);
     }
@@ -162,7 +168,7 @@ class Phrase extends AbstractSuggest
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = parent::toArray();
 
