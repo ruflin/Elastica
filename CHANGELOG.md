@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 
+* Added `DerivativeAggregation` [#1553](https://github.com/ruflin/Elastica/pull/1553)
+
 ### Improvements
 
 ### Deprecated
@@ -52,22 +54,6 @@ All notable changes to this project will be documented in this file based on the
       "number_of_significant_value_digits" : 3
     }
   ```
-
-### Added
-
-* Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
-* [Field](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random) param for `Elastica\Query\FunctionScore::addRandomScoreFunction`
-* [Index Recovery](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-recovery.html) : the indices recovery API provides insight into on-going index shard recoveries. It was never been implemented into Elastica. [#1537](https://github.com/ruflin/Elastica/pull/1537)
-* add parent_id (reference [#1518](https://github.com/ruflin/Elastica/issues/1518)) in QueryBuilder. [#1533]([#1518](https://github.com/ruflin/Elastica/issues/1533))
-* implemented ```string_distance``` option in Term Suggestion [#1543](https://github.com/ruflin/Elastica/pull/1543) 
-* Added `DerivativeAggregation` [#1553](https://github.com/ruflin/Elastica/pull/1553)
-
-### Improvements
-
-* Using `Elastica\Query\FunctionScore::addRandomScoreFunction` without `$field` parameter is deprecated since ES 6.0 and will fail since ES 7.0
-
-### Deprecated
-
 * Never implemented the method *Missing* on [`Aggregation\Percentiles`](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-aggregations-metrics-percentile-aggregation.html) [#1532](https://github.com/ruflin/Elastica/pull/1532)
 
 ## [6.0.2](https://github.com/ruflin/Elastica/compare/6.0.1...6.0.2)
