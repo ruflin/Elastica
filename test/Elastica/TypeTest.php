@@ -620,7 +620,7 @@ class TypeTest extends BaseTest
         $type->addDocument(new Document($id, ['name' => 'bruce wayne batman', 'counter' => 1]));
         $newName = 'batman';
 
-        $document = new Document();
+        $document = ['name' => 'bruce wayne batman', 'counter' => 1];
         $script = new Script(
             'ctx._source.name = params.name; ctx._source.counter += params.count',
             [
@@ -650,7 +650,7 @@ class TypeTest extends BaseTest
         $type->addDocument(new Document($id, ['name' => 'bruce wayne batman', 'counter' => 1]));
         $newName = 'batman';
 
-        $document = new Document();
+        $document = ['name' => 'bruce wayne batman', 'counter' => 1];
         $script = new Script(
             'ctx._source.name = params.name; ctx._source.counter += params.count',
             [

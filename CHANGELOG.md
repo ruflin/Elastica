@@ -43,6 +43,9 @@ All notable changes to this project will be documented in this file based on the
 
 * Reduced memory footprint of response by not keeping the raw JSON data when JSON after JSON has been parsed. [#1588](https://github.com/ruflin/Elastica/pull/1588)
 
+### Deprecated
+* Index templates use index_patterns instead of [template](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/breaking-changes-6.0.html#_index_templates_use_literal_index_patterns_literal_instead_of_literal_template_literal)
+
 ## [6.1.0](https://github.com/ruflin/Elastica/compare/6.0.2...6.1.0)
 
 ### Backward Compatibility Breaks

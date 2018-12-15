@@ -98,7 +98,7 @@ class IndexTemplateTest extends BaseTest
     public function testCreateTemplate()
     {
         $template = [
-            'template' => 'te*',
+            'index_patterns' => 'te*',
             'settings' => [
                 'number_of_shards' => 1,
             ],
@@ -117,7 +117,7 @@ class IndexTemplateTest extends BaseTest
     public function testCreateAlreadyExistsTemplateException()
     {
         $template = [
-            'template' => 'te*',
+            'index_patterns' => 'te*',
             'settings' => [
                 'number_of_shards' => 1,
             ],
