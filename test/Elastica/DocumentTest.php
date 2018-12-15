@@ -148,33 +148,35 @@ class DocumentTest extends BaseTest
         $document = new Document();
         $document->setIndex('index');
         $document->setOpType('create');
-        $document->setParent('2');
         $document->setId(1);
 
-        $options = $document->getOptions(['_index', '_type', '_id', 'parent']);
+        $options = $document->getOptions(['index', 'type', 'id', 'op_type']);
 
         $this->assertInternalType('array', $options);
         $this->assertCount(3, $options);
-        $this->assertArrayHasKey('_index', $options);
-        $this->assertArrayHasKey('_id', $options);
-        $this->assertArrayHasKey('parent', $options);
-        $this->assertEquals('index', $options['_index']);
-        $this->assertEquals(1, $options['_id']);
-        $this->assertEquals('2', $options['parent']);
-        $this->assertArrayNotHasKey('_type', $options);
-        $this->assertArrayNotHasKey('op_type', $options);
-        $this->assertArrayNotHasKey('index', $options);
-        $this->assertArrayNotHasKey('id', $options);
+        $this->assertArrayHasKey('index', $options);
+        $this->assertArrayHasKey('id', $options);
+        $this->assertArrayHasKey('op_type', $options);
+        $this->assertEquals('index', $options['index']);
+        $this->assertEquals(1, $options['id']);
+        $this->assertEquals('create', $options['op_type']);
+        $this->assertArrayNotHasKey('type', $options);
+        $this->assertArrayNotHasKey('parent', $options);
+        $this->assertArrayNotHasKey('_index', $options);
+        $this->assertArrayNotHasKey('_id', $options);
+        $this->assertArrayNotHasKey('_parent', $options);
 
-        $options = $document->getOptions(['parent', 'op_type', 'percolate']);
+        $options = $document->getOptions(['id', 'op_type', 'percolate'], true);
 
         $this->assertInternalType('array', $options);
         $this->assertCount(2, $options);
-        $this->assertArrayHasKey('parent', $options);
-        $this->assertArrayHasKey('op_type', $options);
-        $this->assertEquals('2', $options['parent']);
-        $this->assertEquals('create', $options['op_type']);
+        $this->assertArrayHasKey('_id', $options);
+        $this->assertArrayHasKey('_op_type', $options);
+        $this->assertEquals('1', $options['_id']);
+        $this->assertEquals('create', $options['_op_type']);
         $this->assertArrayNotHasKey('percolate', $options);
+        $this->assertArrayNotHasKey('op_type', $options);
+        $this->assertArrayNotHasKey('id', $options);
     }
 
     /**

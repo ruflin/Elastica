@@ -353,8 +353,6 @@ class ClientTest extends BaseTest
 
         $index = $this->_createIndex(null, true, 2);
 
-        // Create the index, deleting it first if it already exists
-        $index->create([], true);
         $type = $index->getType('_doc');
 
         // Adds 1 document to the index

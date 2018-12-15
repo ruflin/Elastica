@@ -125,7 +125,7 @@ class AttachmentTest extends BasePipelineTest
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline_attachment');
 
         $bulk->send();
-        $index->forcemerge();
+        $index->refresh();
 
         $resultSet = $type->search('xodoa');
         $this->assertEquals(1, $resultSet->count());
