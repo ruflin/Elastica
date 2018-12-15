@@ -398,7 +398,6 @@ class Client
                     'routing',
                     'percolate',
                     'parent',
-                    'fields',
                     'retry_on_conflict',
                     'consistency',
                     'replication',
@@ -407,13 +406,7 @@ class Client
                 ]
             );
             $options += $docOptions;
-            // set fields param to source only if options was not set before
-            if ($data instanceof Document && ($data->isAutoPopulate()
-                || $this->getConfigValue(['document', 'autoPopulate'], false))
-                && !isset($options['fields'])
-            ) {
-                $options['fields'] = '_source';
-            }
+
         } else {
             $requestData = $data;
         }
@@ -444,38 +437,9 @@ class Client
             if (isset($responseData['_version'])) {
                 $data->setVersion($responseData['_version']);
             }
-            if (isset($options['fields'])) {
-                $this->_populateDocumentFieldsFromResponse($response, $data, $options['fields']);
-            }
         }
 
         return $response;
-    }
-
-    /**
-     * @param \Elastica\Response $response
-     * @param \Elastica\Document $document
-     * @param string             $fields   Array of field names to be populated or '_source' if whole document data should be updated
-     */
-    protected function _populateDocumentFieldsFromResponse(Response $response, Document $document, $fields)
-    {
-        $responseData = $response->getData();
-        if ('_source' == $fields) {
-            if (isset($responseData['get']['_source']) && \is_array($responseData['get']['_source'])) {
-                $document->setData($responseData['get']['_source']);
-            }
-        } else {
-            $keys = \explode(',', $fields);
-            $data = $document->getData();
-            foreach ($keys as $key) {
-                if (isset($responseData['get']['fields'][$key])) {
-                    $data[$key] = $responseData['get']['fields'][$key];
-                } elseif (isset($data[$key])) {
-                    unset($data[$key]);
-                }
-            }
-            $document->setData($data);
-        }
     }
 
     /**

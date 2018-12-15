@@ -771,7 +771,7 @@ class ClientTest extends BaseTest
         $script->setUpsert(['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4']);
 
         // should use document fields because document does not exist, script is avoided
-        $client->updateDocument(1, $script, $index->getName(), $type->getName(), ['fields' => '_source']);
+        $client->updateDocument(1, $script, $index->getName(), $type->getName());
 
         $document = $type->getDocument(1);
 
@@ -787,7 +787,7 @@ class ClientTest extends BaseTest
         $this->assertEquals('value4', $data['field4']);
 
         // should use script because document exists, document values are ignored
-        $client->updateDocument(1, $script, $index->getName(), $type->getName(), ['fields' => '_source']);
+        $client->updateDocument(1, $script, $index->getName(), $type->getName());
 
         $document = $type->getDocument(1);
 
@@ -845,7 +845,7 @@ class ClientTest extends BaseTest
         $newDocument = new Document(1, ['field1' => 'value1updated', 'field2' => 'value2updated']);
         $upsert = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
         $newDocument->setUpsert($upsert);
-        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), ['fields' => '_source']);
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName());
 
         $document = $type->getDocument(1);
         $this->assertInstanceOf(Document::class, $document);
@@ -856,7 +856,7 @@ class ClientTest extends BaseTest
         $this->assertEquals('value2', $data['field2']);
 
         // should use update document because document exists, upsert document values are ignored
-        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), ['fields' => '_source']);
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName());
 
         $document = $type->getDocument(1);
         $this->assertInstanceOf(Document::class, $document);
@@ -886,7 +886,7 @@ class ClientTest extends BaseTest
 
         $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
         $newDocument->setDocAsUpsert(true);
-        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName(), ['fields' => '_source']);
+        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName());
 
         $document = $type->getDocument(1);
         $this->assertInstanceOf(Document::class, $document);
@@ -1046,8 +1046,7 @@ class ClientTest extends BaseTest
             1,
             $script,
             $index->getName(),
-            $type->getName(),
-            ['fields' => '_source']
+            $type->getName()
         );
 
         $data = $type->getDocument(1)->getData();
@@ -1068,8 +1067,7 @@ class ClientTest extends BaseTest
             1,
             $script,
             $index->getName(),
-            $type->getName(),
-            ['fields' => 'field2, field4']
+            $type->getName()
         );
 
         $document = $type->getDocument(1);
