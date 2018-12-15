@@ -27,7 +27,7 @@ class DisMaxTest extends BaseTest
         $idsQuery3->setIds(3);
 
         $boost = 1.2;
-        $tieBreaker = 2;
+        $tieBreaker = 0.7;
 
         $query->setBoost($boost);
         $query->setTieBreaker($tieBreaker);
@@ -71,7 +71,7 @@ class DisMaxTest extends BaseTest
         $queryString2 = new QueryString('Base*');
 
         $boost = 1.2;
-        $tieBreaker = 2;
+        $tieBreaker = 0.5;
 
         $query = new DisMax();
         $query->setBoost($boost);
@@ -111,7 +111,7 @@ class DisMaxTest extends BaseTest
         ];
 
         $boost = 1.2;
-        $tieBreaker = 2;
+        $tieBreaker = 0.5;
 
         $query = new DisMax();
         $query->setBoost($boost);
