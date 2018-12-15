@@ -418,12 +418,6 @@ class Client
             }
         }
 
-        if (!isset($options['retry_on_conflict'])) {
-            if ($retryOnConflict = $this->getConfig('retryOnConflict')) {
-                $options['retry_on_conflict'] = $retryOnConflict;
-            }
-        }
-
         $endpoint->setBody($requestData);
         $endpoint->setParams($options);
 
