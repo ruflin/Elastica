@@ -1,8 +1,6 @@
 <?php
 namespace Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
-
 /**
  * Class BucketSelector.
  * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-selector-aggregation.html

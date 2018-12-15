@@ -7,7 +7,7 @@ use Elastica\Aggregation\Max;
 use Elastica\Document;
 use Elastica\Query;
 
-class DerivativeTest extends BaseAggregationTest
+class BucketSelectorTest extends BaseAggregationTest
 {
     protected function _getIndexForTest()
     {
