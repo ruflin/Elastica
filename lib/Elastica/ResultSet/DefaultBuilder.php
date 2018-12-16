@@ -16,7 +16,7 @@ class DefaultBuilder implements BuilderInterface
      *
      * @return ResultSet
      */
-    public function buildResultSet(Response $response, Query $query)
+    public function buildResultSet(Response $response, Query $query): ResultSet
     {
         $results = $this->buildResults($response);
         $resultSet = new ResultSet($response, $query, $results);
@@ -31,7 +31,7 @@ class DefaultBuilder implements BuilderInterface
      *
      * @return Result[]
      */
-    private function buildResults(Response $response)
+    private function buildResults(Response $response): array
     {
         $data = $response->getData();
         $results = [];

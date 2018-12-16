@@ -15,5 +15,5 @@ interface BuilderInterface
      *
      * @return ResultSet
      */
-    public function buildResultSet(Response $response, Query $query);
+    public function buildResultSet(Response $response, Query $query): ResultSet;
 }

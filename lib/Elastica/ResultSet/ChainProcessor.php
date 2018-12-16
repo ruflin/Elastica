@@ -17,7 +17,7 @@ class ChainProcessor implements ProcessorInterface
     /**
      * @param ProcessorInterface[] $processors
      */
-    public function __construct($processors)
+    public function __construct(array $processors)
     {
         $this->processors = $processors;
     }
