@@ -23,7 +23,7 @@ class ScriptId extends AbstractScript
      * @param string|null $lang
      * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
      */
-    public function __construct($scriptId, array $params = null, $lang = null, $documentId = null)
+    public function __construct(string $scriptId, array $params = null, string $lang = null, string $documentId = null)
     {
         parent::__construct($params, $lang, $documentId);
 
@@ -35,7 +35,7 @@ class ScriptId extends AbstractScript
      *
      * @return $this
      */
-    public function setScriptId($scriptId)
+    public function setScriptId(string $scriptId): ScriptId
     {
         $this->_scriptId = $scriptId;
 
@@ -45,7 +45,7 @@ class ScriptId extends AbstractScript
     /**
      * @return string
      */
-    public function getScriptId()
+    public function getScriptId(): string
     {
         return $this->_scriptId;
     }
@@ -53,7 +53,7 @@ class ScriptId extends AbstractScript
     /**
      * {@inheritdoc}
      */
-    protected function getScriptTypeArray()
+    protected function getScriptTypeArray(): array
     {
         return ['id' => $this->_scriptId];
     }

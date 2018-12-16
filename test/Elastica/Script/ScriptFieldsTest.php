@@ -58,17 +58,6 @@ class ScriptFieldsTest extends BaseTest
     }
 
     /**
-     * @group unit
-     */
-    public function testNameException()
-    {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
-
-        $script = new Script('1 + 2');
-        $scriptFields = new ScriptFields([$script]);
-    }
-
-    /**
      * @group functional
      */
     public function testQuery()
