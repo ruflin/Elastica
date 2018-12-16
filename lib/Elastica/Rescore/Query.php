@@ -29,7 +29,7 @@ class Query extends AbstractRescore
      *
      * @return array Rescore array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $data = $this->getParams();
 
@@ -53,7 +53,7 @@ class Query extends AbstractRescore
      *
      * @return $this
      */
-    public function setRescoreQuery($rescoreQuery)
+    public function setRescoreQuery($rescoreQuery): Query
     {
         $rescoreQuery = BaseQuery::create($rescoreQuery);
 
@@ -70,7 +70,7 @@ class Query extends AbstractRescore
      *
      * @return $this
      */
-    public function setQueryWeight($weight)
+    public function setQueryWeight(float $weight): Query
     {
         $query = $this->getParam('query');
         $query['query_weight'] = $weight;
@@ -85,7 +85,7 @@ class Query extends AbstractRescore
      *
      * @return $this
      */
-    public function setRescoreQueryWeight($weight)
+    public function setRescoreQueryWeight(float $weight): Query
     {
         $query = $this->getParam('query');
         $query['rescore_query_weight'] = $weight;

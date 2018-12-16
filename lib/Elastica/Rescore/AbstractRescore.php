@@ -17,7 +17,7 @@ abstract class AbstractRescore extends Param
      *
      * @return string name
      */
-    protected function _getBaseName()
+    protected function _getBaseName(): string
     {
         return 'rescore';
     }
@@ -29,7 +29,7 @@ abstract class AbstractRescore extends Param
      *
      * @return $this
      */
-    public function setWindowSize($size)
+    public function setWindowSize(int $size): AbstractRescore
     {
         return $this->setParam('window_size', $size);
     }
