@@ -13,20 +13,20 @@ use Elastica\Response;
 class ResponseException extends \RuntimeException implements ExceptionInterface
 {
     /**
-     * @var \Elastica\Request Request object
+     * @var Request Request object
      */
     protected $_request;
 
     /**
-     * @var \Elastica\Response Response object
+     * @var Response Response object
      */
     protected $_response;
 
     /**
      * Construct Exception.
      *
-     * @param \Elastica\Request  $request
-     * @param \Elastica\Response $response
+     * @param Request  $request
+     * @param Response $response
      */
     public function __construct(Request $request, Response $response)
     {
@@ -38,9 +38,9 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     /**
      * Returns request object.
      *
-     * @return \Elastica\Request Request object
+     * @return Request Request object
      */
-    public function getRequest()
+    public function getRequest(): Request
     {
         return $this->_request;
     }
@@ -48,9 +48,9 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function getResponse()
+    public function getResponse(): Response
     {
         return $this->_response;
     }
@@ -60,7 +60,7 @@ class ResponseException extends \RuntimeException implements ExceptionInterface
      *
      * @return ElasticsearchException
      */
-    public function getElasticsearchException()
+    public function getElasticsearchException(): ElasticsearchException
     {
         $response = $this->getResponse();
 
