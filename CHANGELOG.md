@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 * Added `BucketSelector` aggregation [#1554](https://github.com/ruflin/Elastica/pull/1554)
+* Added `DerivativeAggregation` [#1553](https://github.com/ruflin/Elastica/pull/1553)
 
 ### Improvements
 
