@@ -6,6 +6,7 @@ use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index as BaseIndex;
 use Elastica\Request;
+use Elastica\Response;
 
 /**
  * Elastica index settings object.
@@ -30,7 +31,7 @@ class Settings
     /**
      * Response.
      *
-     * @var \Elastica\Response Response object
+     * @var Response Response object
      */
     protected $_response;
 
@@ -44,14 +45,14 @@ class Settings
     /**
      * Index.
      *
-     * @var \Elastica\Index Index object
+     * @var BaseIndex Index object
      */
     protected $_index;
 
     /**
      * Construct.
      *
-     * @param \Elastica\Index $index Index object
+     * @param BaseIndex $index Index object
      */
     public function __construct(BaseIndex $index)
     {
@@ -70,7 +71,7 @@ class Settings
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
      */
-    public function get($setting = '')
+    public function get(string $setting = '')
     {
         $requestData = $this->request()->getData();
         $data = reset($requestData);
@@ -89,6 +90,7 @@ class Settings
         if (isset($settings[$setting])) {
             return $settings[$setting];
         }
+
         if (false !== strpos($setting, '.')) {
             // translate old dot-notation settings to nested arrays
             $keys = explode('.', $setting);
@@ -96,14 +98,14 @@ class Settings
                 if (isset($settings[$key])) {
                     $settings = $settings[$key];
                 } else {
-                    return;
+                    return null;
                 }
             }
 
             return $settings;
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -118,7 +120,7 @@ class Settings
      *
      * @return bool
      */
-    public function getBool($setting)
+    public function getBool(string $setting): bool
     {
         $data = $this->get($setting);
 
@@ -130,11 +132,11 @@ class Settings
      *
      * @param int $replicas Number of replicas
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function setNumberOfReplicas($replicas)
+    public function setNumberOfReplicas(int $replicas): Response
     {
-        return $this->set(['number_of_replicas' => (int) $replicas]);
+        return $this->set(['number_of_replicas' => $replicas]);
     }
 
     /**
@@ -144,15 +146,9 @@ class Settings
      *
      * @return int The number of replicas
      */
-    public function getNumberOfReplicas()
+    public function getNumberOfReplicas(): int
     {
-        $replicas = $this->get('number_of_replicas');
-
-        if (null === $replicas) {
-            $replicas = self::DEFAULT_NUMBER_OF_REPLICAS;
-        }
-
-        return $replicas;
+        return $this->get('number_of_replicas') ?? self::DEFAULT_NUMBER_OF_REPLICAS;
     }
 
     /**
@@ -162,15 +158,9 @@ class Settings
      *
      * @return int The number of shards
      */
-    public function getNumberOfShards()
+    public function getNumberOfShards(): int
     {
-        $shards = $this->get('number_of_shards');
-
-        if (null === $shards) {
-            $shards = self::DEFAULT_NUMBER_OF_SHARDS;
-        }
-
-        return $shards;
+        return $this->get('number_of_shards') ?? self::DEFAULT_NUMBER_OF_SHARDS;
     }
 
     /**
@@ -178,9 +168,9 @@ class Settings
      *
      * @param bool $readOnly (default = true)
      *
-     * @return \Elastica\Response
+     * @return Response
      */
-    public function setReadOnly($readOnly = true)
+    public function setReadOnly(bool $readOnly = true): Response
     {
         return $this->set(['blocks.read_only' => $readOnly]);
     }
@@ -188,7 +178,7 @@ class Settings
     /**
      * @return bool
      */
-    public function getReadOnly()
+    public function getReadOnly(): bool
     {
         return $this->getBool('blocks.read_only');
     }
@@ -196,7 +186,7 @@ class Settings
     /**
      * @return bool
      */
-    public function getBlocksRead()
+    public function getBlocksRead(): bool
     {
         return $this->getBool('blocks.read');
     }
@@ -204,9 +194,9 @@ class Settings
     /**
      * @param bool $state OPTIONAL (default = true)
      *
-     * @return \Elastica\Response
+     * @return Response
      */
-    public function setBlocksRead($state = true)
+    public function setBlocksRead(bool $state = true): Response
     {
         return $this->set(['blocks.read' => $state]);
     }
@@ -214,7 +204,7 @@ class Settings
     /**
      * @return bool
      */
-    public function getBlocksWrite()
+    public function getBlocksWrite(): Bool
     {
         return $this->getBool('blocks.write');
     }
@@ -222,9 +212,9 @@ class Settings
     /**
      * @param bool $state OPTIONAL (default = true)
      *
-     * @return \Elastica\Response
+     * @return Response
      */
-    public function setBlocksWrite($state = true)
+    public function setBlocksWrite(bool $state = true): Response
     {
         return $this->set(['blocks.write' => $state]);
     }
@@ -232,7 +222,7 @@ class Settings
     /**
      * @return bool
      */
-    public function getBlocksMetadata()
+    public function getBlocksMetadata(): bool
     {
         // When blocks.metadata is enabled, reading the settings is not possible anymore.
         // So when a cluster_block_exception happened it must be enabled.
@@ -252,9 +242,9 @@ class Settings
      *
      * @param bool $state OPTIONAL (default = true)
      *
-     * @return \Elastica\Response
+     * @return Response
      */
-    public function setBlocksMetadata($state = true)
+    public function setBlocksMetadata(bool $state = true): Response
     {
         return $this->set(['blocks.metadata' => $state]);
     }
@@ -267,9 +257,9 @@ class Settings
      *
      * @param string $interval Duration of the refresh interval
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function setRefreshInterval($interval)
+    public function setRefreshInterval(string $interval): Response
     {
         return $this->set(['refresh_interval' => $interval]);
     }
@@ -281,15 +271,9 @@ class Settings
      *
      * @return string Refresh interval
      */
-    public function getRefreshInterval()
+    public function getRefreshInterval(): string
     {
-        $interval = $this->get('refresh_interval');
-
-        if (empty($interval)) {
-            $interval = self::DEFAULT_REFRESH_INTERVAL;
-        }
-
-        return $interval;
+        return $this->get('refresh_interval') ?? self::DEFAULT_REFRESH_INTERVAL;
     }
 
     /**
@@ -300,15 +284,15 @@ class Settings
      * @param string $key   Merge policy key (for ex. expunge_deletes_allowed)
      * @param string $value
      *
-     * @return \Elastica\Response
+     * @return Response
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
-    public function setMergePolicy($key, $value)
+    public function setMergePolicy(string $key, string $value): Response
     {
-        $this->getIndex()->close();
+        $this->_index->close();
         $response = $this->set(['merge.policy.'.$key => $value]);
-        $this->getIndex()->open();
+        $this->_index->open();
 
         return $response;
     }
@@ -322,14 +306,11 @@ class Settings
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
-    public function getMergePolicy($key)
+    public function getMergePolicy(string $key)
     {
         $settings = $this->get();
-        if (isset($settings['merge']['policy'][$key])) {
-            return $settings['merge']['policy'][$key];
-        }
 
-        return;
+        return $settings['merge']['policy'][$key] ?? null;
     }
 
     /**
@@ -337,9 +318,9 @@ class Settings
      *
      * @param array $data Arguments
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function set(array $data)
+    public function set(array $data): Response
     {
         return $this->request($data, Request::PUT);
     }
@@ -347,9 +328,9 @@ class Settings
     /**
      * Returns the index object.
      *
-     * @return \Elastica\Index Index object
+     * @return BaseIndex Index object
      */
-    public function getIndex()
+    public function getIndex(): BaseIndex
     {
         return $this->_index;
     }
@@ -370,9 +351,9 @@ class Settings
      * @param array  $data   OPTIONAL Data array
      * @param string $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function request(array $data = [], $method = Request::GET)
+    public function request(array $data = [], string $method = Request::GET): Response
     {
         $path = '_settings';
 
