@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 
+* Added `DerivativeAggregation` [#1553](https://github.com/ruflin/Elastica/pull/1553)
+
 ### Improvements
 
 ### Deprecated
