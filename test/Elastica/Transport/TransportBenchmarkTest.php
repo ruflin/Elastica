@@ -39,7 +39,7 @@ class TransportBenchmarkTest extends BaseTest
         $index = $client->getIndex('benchmark'.uniqid());
         $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
-        return $index->getType('benchmark');
+        return $index->getType('_doc');
     }
 
     /**
@@ -131,7 +131,7 @@ class TransportBenchmarkTest extends BaseTest
         $client = $this->_getClient($config);
         $index = $client->getIndex('benchmark');
         $index->create([], true);
-        $type = $index->getType('mappingTest');
+        $type = $index->getType('_doc');
 
         // Define mapping
         $mapping = new Mapping();

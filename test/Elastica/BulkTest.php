@@ -24,7 +24,7 @@ class BulkTest extends BaseTest
     {
         $index = $this->_createIndex();
         $indexName = $index->getName();
-        $type = $index->getType('bulk_test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument1 = $type->createDocument(1, ['name' => 'Mister Fantastic']);
@@ -66,24 +66,24 @@ class BulkTest extends BaseTest
         $data = $bulk->toArray();
 
         $expected = [
-            ['index' => ['_index' => $indexName, '_type' => 'bulk_test', '_id' => 1]],
+            ['index' => ['_index' => $indexName, '_type' => '_doc', '_id' => 1]],
             ['name' => 'Mister Fantastic'],
             ['index' => ['_id' => 2]],
             ['name' => 'Invisible Woman'],
-            ['create' => ['_index' => $indexName, '_type' => 'bulk_test', '_id' => 3]],
+            ['create' => ['_index' => $indexName, '_type' => '_doc', '_id' => 3]],
             ['name' => 'The Human Torch'],
-            ['index' => ['_index' => $indexName, '_type' => 'bulk_test']],
+            ['index' => ['_index' => $indexName, '_type' => '_doc']],
             ['name' => 'The Thing'],
         ];
         $this->assertEquals($expected, $data);
 
-        $expected = '{"index":{"_index":"'.$indexName.'","_type":"bulk_test","_id":1}}
+        $expected = '{"index":{"_index":"'.$indexName.'","_type":"_doc","_id":1}}
 {"name":"Mister Fantastic"}
 {"index":{"_id":2}}
 {"name":"Invisible Woman"}
-{"create":{"_index":"'.$indexName.'","_type":"bulk_test","_id":3}}
+{"create":{"_index":"'.$indexName.'","_type":"_doc","_id":3}}
 {"name":"The Human Torch"}
-{"index":{"_index":"'.$indexName.'","_type":"bulk_test"}}
+{"index":{"_index":"'.$indexName.'","_type":"_doc"}}
 {"name":"The Thing"}
 ';
 
@@ -114,7 +114,7 @@ class BulkTest extends BaseTest
         $data = $bulk->toArray();
 
         $expected = [
-            ['delete' => ['_index' => $indexName, '_type' => 'bulk_test', '_id' => 3]],
+            ['delete' => ['_index' => $indexName, '_type' => '_doc', '_id' => 3]],
         ];
         $this->assertEquals($expected, $data);
 
@@ -138,7 +138,7 @@ class BulkTest extends BaseTest
     public function testUnicodeBulkSend()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('bulk_test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument1 = $type->createDocument(1, ['name' => 'Сегодня, я вижу, особенно грустен твой взгляд,']);
@@ -169,10 +169,10 @@ class BulkTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('index');
-        $type = $index->getType('type');
+        $type = $index->getType('_doc');
 
         $index2 = $client->getIndex('index2');
-        $type2 = $index2->getType('type2');
+        $type2 = $index2->getType('_doc');
 
         $bulk = new Bulk($client);
 
@@ -188,19 +188,19 @@ class BulkTest extends BaseTest
         $this->assertTrue($bulk->hasIndex());
         $this->assertTrue($bulk->hasType());
         $this->assertEquals('index2', $bulk->getIndex());
-        $this->assertEquals('type2', $bulk->getType());
+        $this->assertEquals('_doc', $bulk->getType());
 
         $bulk->setType($type);
         $this->assertTrue($bulk->hasIndex());
         $this->assertTrue($bulk->hasType());
         $this->assertEquals('index', $bulk->getIndex());
-        $this->assertEquals('type', $bulk->getType());
+        $this->assertEquals('_doc', $bulk->getType());
 
         $bulk->setIndex($index2);
         $this->assertTrue($bulk->hasIndex());
         $this->assertTrue($bulk->hasType());
         $this->assertEquals('index2', $bulk->getIndex());
-        $this->assertEquals('type', $bulk->getType());
+        $this->assertEquals('_doc', $bulk->getType());
     }
 
     /**
@@ -347,7 +347,7 @@ class BulkTest extends BaseTest
     public function testErrorRequest()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('bulk_test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $documents = [
@@ -379,7 +379,7 @@ class BulkTest extends BaseTest
     public function testRawDocumentDataRequest()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('bulk_test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $documents = [
@@ -422,7 +422,7 @@ class BulkTest extends BaseTest
     public function testUpdate()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('bulk_test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $doc1 = $type->createDocument(1, ['name' => 'John']);
@@ -555,7 +555,7 @@ class BulkTest extends BaseTest
     public function testUpsert()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('bulk_test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $doc1 = $type->createDocument(1, ['name' => 'Pele']);
@@ -622,7 +622,7 @@ return $d;}, [$doc1, $doc2, $doc3, $doc4]);
     public function testRetry()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('bulk_test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $doc1 = $type->createDocument(1, ['name' => 'Mister Fantastic']);
@@ -672,7 +672,7 @@ return $d;}, [$doc1, $doc2, $doc3, $doc4]);
      */
     public function testMemoryUsage()
     {
-        $type = $this->_createIndex()->getType('test');
+        $type = $this->_createIndex()->getType('_doc');
 
         $data = [
             'text1' => 'Very long text for a string',

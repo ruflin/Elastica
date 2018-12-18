@@ -18,7 +18,7 @@ class ResponseTest extends BaseTest
     public function testResponse()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('helloworld');
+        $type = $index->getType('_doc');
 
         $mapping = new Mapping($type, [
             'name' => ['type' => 'text'],
@@ -54,7 +54,7 @@ class ResponseTest extends BaseTest
     public function testIsOk()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $doc = new Document(1, ['name' => 'ruflin']);
         $response = $type->addDocument($doc);
@@ -68,7 +68,7 @@ class ResponseTest extends BaseTest
     public function testIsOkMultiple()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $docs = [
             new Document(1, ['name' => 'ruflin']),

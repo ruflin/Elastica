@@ -123,7 +123,7 @@ class PercentilesTest extends BaseAggregationTest
     {
         // prepare
         $index = $this->_createIndex();
-        $type = $index->getType('offer');
+        $type = $index->getType('_doc');
         $type->addDocuments([
             new Document(1, ['price' => 100]),
             new Document(2, ['price' => 200]),
@@ -197,7 +197,7 @@ class PercentilesTest extends BaseAggregationTest
 
         // prepare
         $index = $this->_createIndex();
-        $type = $index->getType('offer');
+        $type = $index->getType('_doc');
         $type->addDocuments([
             new Document(1, ['price' => 100]),
             new Document(2, ['price' => 200]),

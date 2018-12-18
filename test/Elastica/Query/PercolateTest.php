@@ -99,7 +99,7 @@ class PercolateTest extends BaseTest
         $this->index->getSettings()->setNumberOfReplicas(0);
         //The doctype mapping is the mapping used to preprocess the document
         // defined in the percolator query before it gets indexed into a temporary index.
-        $this->documentType = $this->index->getType('doctype');
+        $this->documentType = $this->index->getType('_doc');
         //The queries mapping is the mapping used for indexing the query documents.
         $this->documentType->setMapping(['message' => ['type' => 'text'], 'query' => ['type' => 'percolator']]);
     }

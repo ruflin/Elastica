@@ -13,8 +13,8 @@ class ResultTest extends BaseTest
      */
     public function testGetters()
     {
-        // Creates a new index 'xodoa' and a type 'user' inside this index
-        $typeName = 'user';
+        // Creates a new index 'xodoa' and a type '_doc' inside this index
+        $typeName = '_doc';
 
         $index = $this->_createIndex();
         $type = $index->getType($typeName);
@@ -49,9 +49,9 @@ class ResultTest extends BaseTest
      */
     public function testGetIdNoSource()
     {
-        // Creates a new index 'xodoa' and a type 'user' inside this index
+        // Creates a new index 'xodoa' and a type '_doc' inside this index
         $indexName = 'xodoa';
-        $typeName = 'user';
+        $typeName = '_doc';
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
@@ -90,7 +90,7 @@ class ResultTest extends BaseTest
      */
     public function testGetTotalTimeReturnsExpectedResults()
     {
-        $typeName = 'user';
+        $typeName = '_doc';
         $index = $this->_createIndex();
         $type = $index->getType($typeName);
 

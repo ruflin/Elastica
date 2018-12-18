@@ -17,7 +17,7 @@ class IdsTest extends BaseTest
 
         $index = $this->_createIndex();
 
-        $type1 = $index->getType('helloworld1');
+        $type1 = $index->getType('_doc');
 
         $doc = new Document(1, ['name' => 'hello world']);
         $type1->addDocument($doc);

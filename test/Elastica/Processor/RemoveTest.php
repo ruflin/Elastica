@@ -52,7 +52,7 @@ class RemoveTest extends BasePipelineTest
         $pipeline->addProcessor($remove)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('bulk_test');
+        $type = $index->getType('_doc');
 
         // Add document to normal index
         $doc1 = new Document(null, ['name' => 'nicolas', 'es_version' => 6, 'package' => 'Elastica']);

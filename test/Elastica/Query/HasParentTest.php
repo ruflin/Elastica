@@ -64,7 +64,7 @@ class HasParentTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('testhasparentjoin');
         $index->create([], true);
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $mapping = new Mapping();
         $mapping->setType($type);
@@ -88,14 +88,14 @@ class HasParentTest extends BaseTest
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], 'test');
+        ], '_doc');
 
         $doc2 = new Document(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], 'test');
+        ], '_doc');
 
         $index->addDocuments([$doc1, $doc2]);
 
@@ -106,7 +106,7 @@ class HasParentTest extends BaseTest
                 'name' => 'answer',
                 'parent' => 1,
             ],
-        ], 'test', 'testhasparentjoin');
+        ], '_doc', 'testhasparentjoin');
 
         $doc4 = new Document(4, [
             'text' => 'this is an answer, the 2nd',
@@ -115,7 +115,7 @@ class HasParentTest extends BaseTest
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], 'test', 'testhasparentjoin');
+        ], '_doc', 'testhasparentjoin');
 
         $doc5 = new Document(5, [
             'text' => 'this is an answer, the 3rd',
@@ -124,7 +124,7 @@ class HasParentTest extends BaseTest
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], 'test', 'testhasparentjoin');
+        ], '_doc', 'testhasparentjoin');
 
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
         $index->refresh();

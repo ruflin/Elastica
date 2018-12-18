@@ -108,7 +108,7 @@ class TaskTest extends Base
     protected function _createIndexWithDocument(): \Elastica\Index
     {
         $index = $this->_createIndex();
-        $type1 = new Type($index, 'test');
+        $type1 = new Type($index, '_doc');
         $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
         $index->refresh();
 

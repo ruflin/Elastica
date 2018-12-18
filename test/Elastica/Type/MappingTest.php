@@ -19,7 +19,7 @@ class MappingTest extends BaseTest
         $index = $client->getIndex('test');
 
         $index->create([], true);
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $mapping = new Mapping($type,
             [
@@ -72,7 +72,7 @@ class MappingTest extends BaseTest
         $index = $client->getIndex('test');
 
         $index->create([], true);
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $mapping = new Mapping($type,
             [
@@ -118,7 +118,7 @@ class MappingTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('testjoinparentid');
         $index->create([], true);
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $mapping = new Mapping();
         $mapping->setType($type);
@@ -135,7 +135,7 @@ class MappingTest extends BaseTest
         ]);
 
         $expected = [
-            'test' => [
+            '_doc' => [
                 'properties' => [
                     'firstname' => ['type' => 'text', 'store' => true],
                     'lastname' => ['type' => 'text'],
@@ -157,14 +157,14 @@ class MappingTest extends BaseTest
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], 'test');
+        ], '_doc');
 
         $doc2 = new Document(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], 'test');
+        ], '_doc');
 
         $index->addDocuments([$doc1, $doc2]);
 
@@ -174,7 +174,7 @@ class MappingTest extends BaseTest
                 'name' => 'answer',
                 'parent' => 1,
             ],
-        ], 'test');
+        ], '_doc');
 
         $doc4 = new Document(4, [
             'text' => 'this is an answer, the 2nd',
@@ -182,7 +182,7 @@ class MappingTest extends BaseTest
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], 'test');
+        ], '_doc');
 
         $index->addDocuments([$doc3, $doc4]);
         $index->refresh();
@@ -201,7 +201,7 @@ class MappingTest extends BaseTest
     public function testMappingExample()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('notes');
+        $type = $index->getType('_doc');
 
         $mapping = new Mapping($type,
             [
@@ -247,7 +247,7 @@ class MappingTest extends BaseTest
     public function testDynamicTemplate()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('person');
+        $type = $index->getType('_doc');
 
         $mapping = new Mapping($type);
         $mapping->setParam('dynamic_templates', [
@@ -275,7 +275,7 @@ class MappingTest extends BaseTest
         $newMapping = $type->getMapping();
         $this->assertArraySubset(
             [
-                'person' => [
+                '_doc' => [
                     'properties' => [
                         'multiname' => [
                             'type' => 'text',
@@ -302,7 +302,7 @@ class MappingTest extends BaseTest
     public function testSetMeta()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $mapping = new Mapping($type, [
             'firstname' => ['type' => 'text', 'store' => true],
             'lastname' => ['type' => 'text'],
@@ -311,7 +311,7 @@ class MappingTest extends BaseTest
         $type->setMapping($mapping);
 
         $mappingData = $type->getMapping();
-        $this->assertEquals('test', $mappingData['test']['_meta']['class']);
+        $this->assertEquals('test', $mappingData['_doc']['_meta']['class']);
 
         $index->delete();
     }
@@ -322,7 +322,7 @@ class MappingTest extends BaseTest
     public function testGetters()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $properties = [
             'firstname' => ['type' => 'text', 'store' => true],
             'lastname' => ['type' => 'text'],

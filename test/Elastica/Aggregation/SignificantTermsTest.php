@@ -15,17 +15,17 @@ class SignificantTermsTest extends BaseAggregationTest
         $colors = ['blue', 'blue', 'red', 'red', 'green', 'yellow', 'white', 'cyan', 'magenta'];
         $temperatures = [1500, 1500, 1500, 1500, 2500, 3500, 4500, 5500, 6500, 7500, 7500, 8500, 9500];
 
-        $mapping = new Mapping($index->getType('test'), [
+        $mapping = new Mapping($index->getType('_doc'), [
             'color' => ['type' => 'keyword'],
             'temperature' => ['type' => 'keyword'],
         ]);
-        $index->getType('test')->setMapping($mapping);
+        $index->getType('_doc')->setMapping($mapping);
 
         $docs = [];
         for ($i = 0;$i < 250;++$i) {
             $docs[] = new Document($i, ['color' => $colors[$i % count($colors)], 'temperature' => $temperatures[$i % count($temperatures)]]);
         }
-        $index->getType('test')->addDocuments($docs);
+        $index->getType('_doc')->addDocuments($docs);
         $index->refresh();
 
         return $index;

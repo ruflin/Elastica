@@ -12,7 +12,7 @@ class DateRangeTest extends BaseAggregationTest
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $type->setMapping(new Mapping(null, [
             'created' => ['type' => 'date', 'format' => 'epoch_millis'],

@@ -70,7 +70,7 @@ class SettingsTest extends BaseTest
         $doc6 = new Document(null, ['hello' => 'world']);
 
         // Check that adding documents work
-        $index1->getType('test')->addDocument($doc1);
+        $index1->getType('_doc')->addDocument($doc1);
 
         $response = $settings->setReadOnly(true);
         $this->assertFalse($response->hasError());
@@ -79,7 +79,7 @@ class SettingsTest extends BaseTest
 
         // Make sure both index are read only
         try {
-            $index1->getType('test')->addDocument($doc3);
+            $index1->getType('_doc')->addDocument($doc3);
             $this->fail('should throw read only exception');
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();
@@ -93,7 +93,7 @@ class SettingsTest extends BaseTest
         $this->assertEquals('false', $setting);
 
         // Check that adding documents works again
-        $index1->getType('test')->addDocument($doc5);
+        $index1->getType('_doc')->addDocument($doc5);
 
         $index1->refresh();
 

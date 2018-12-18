@@ -16,7 +16,7 @@ class ExampleTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('ruflin');
-        $type = $index->getType('users');
+        $type = $index->getType('_doc');
 
         $id = 2;
         $data = ['firstname' => 'Nicolas', 'lastname' => 'Ruflin'];
@@ -35,7 +35,7 @@ class ExampleTest extends BaseTest
         $index = $client->getIndex('elastica_test');
         $index->create([], true);
 
-        $type = $index->getType('user');
+        $type = $index->getType('_doc');
 
         // Adds 1 document to the index
         $doc1 = new Document(1,

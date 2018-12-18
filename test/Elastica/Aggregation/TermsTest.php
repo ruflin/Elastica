@@ -12,12 +12,12 @@ class TermsTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $mapping = new Mapping($index->getType('test'), [
+        $mapping = new Mapping($index->getType('_doc'), [
             'color' => ['type' => 'keyword'],
         ]);
-        $index->getType('test')->setMapping($mapping);
+        $index->getType('_doc')->setMapping($mapping);
 
-        $index->getType('test')->addDocuments([
+        $index->getType('_doc')->addDocuments([
             new Document(1, ['color' => 'blue']),
             new Document(2, ['color' => 'blue']),
             new Document(3, ['color' => 'red']),

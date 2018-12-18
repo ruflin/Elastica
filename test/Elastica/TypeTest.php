@@ -24,7 +24,7 @@ class TypeTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $type = new Type($index, 'user');
+        $type = new Type($index, '_doc');
 
         // Adds 1 document to the index
         $doc1 = new Document(1,
@@ -63,7 +63,7 @@ class TypeTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = new Index($client, 'test_index');
-        $type = new Type($index, 'test_type');
+        $type = new Type($index, '_doc');
 
         $query = new QueryString('test');
         $options = [
@@ -88,10 +88,10 @@ class TypeTest extends BaseTest
         $this->assertTrue($search->hasIndex($index));
         $this->assertTrue($search->hasIndex('test_index'));
         $this->assertFalse($search->hasIndex('test'));
-        $this->assertEquals(['test_type'], $search->getTypes());
+        $this->assertEquals(['_doc'], $search->getTypes());
         $this->assertTrue($search->hasTypes());
         $this->assertTrue($search->hasType($type));
-        $this->assertTrue($search->hasType('test_type'));
+        $this->assertTrue($search->hasType('_doc'));
         $this->assertFalse($search->hasType('test_type2'));
     }
 
@@ -102,7 +102,7 @@ class TypeTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = new Index($client, 'test_index');
-        $type = new Type($index, 'test_type');
+        $type = new Type($index, '_doc');
 
         $query = [
             'query' => [
@@ -134,10 +134,10 @@ class TypeTest extends BaseTest
         $this->assertTrue($search->hasIndex($index));
         $this->assertTrue($search->hasIndex('test_index'));
         $this->assertFalse($search->hasIndex('test'));
-        $this->assertEquals(['test_type'], $search->getTypes());
+        $this->assertEquals(['_doc'], $search->getTypes());
         $this->assertTrue($search->hasTypes());
         $this->assertTrue($search->hasType($type));
-        $this->assertTrue($search->hasType('test_type'));
+        $this->assertTrue($search->hasType('_doc'));
         $this->assertFalse($search->hasType('test_type2'));
     }
 
@@ -148,7 +148,7 @@ class TypeTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $type = new Type($index, 'user');
+        $type = new Type($index, '_doc');
         $mapping = new Mapping($type, [
             'id' => ['type' => 'integer', 'store' => 'true'],
             'username' => ['type' => 'text'],
@@ -158,11 +158,11 @@ class TypeTest extends BaseTest
 
         $mapping = $type->getMapping();
 
-        $this->assertArrayHasKey('user', $mapping);
-        $this->assertArrayHasKey('properties', $mapping['user']);
-        $this->assertArrayHasKey('id', $mapping['user']['properties']);
-        $this->assertArrayHasKey('type', $mapping['user']['properties']['id']);
-        $this->assertEquals('integer', $mapping['user']['properties']['id']['type']);
+        $this->assertArrayHasKey('_doc', $mapping);
+        $this->assertArrayHasKey('properties', $mapping['_doc']);
+        $this->assertArrayHasKey('id', $mapping['_doc']['properties']);
+        $this->assertArrayHasKey('type', $mapping['_doc']['properties']['id']);
+        $this->assertEquals('integer', $mapping['_doc']['properties']['id']['type']);
 
         // Adds 1 document to the index
         $doc1 = new Document(1,
@@ -199,7 +199,7 @@ class TypeTest extends BaseTest
     public function testDeleteById()
     {
         $index = $this->_createIndex();
-        $type = new Type($index, 'user');
+        $type = new Type($index, '_doc');
 
         // Adds hans, john and rolf to the index
         $docs = [
@@ -300,7 +300,7 @@ class TypeTest extends BaseTest
     public function testDeleteDocument()
     {
         $index = $this->_createIndex();
-        $type = new Type($index, 'user');
+        $type = new Type($index, '_doc');
 
         // Adds hans, john and rolf to the index
         $docs = [
@@ -336,7 +336,7 @@ class TypeTest extends BaseTest
     public function testGetDocumentNotExist()
     {
         $index = $this->_createIndex();
-        $type = new Type($index, 'test');
+        $type = new Type($index, '_doc');
         $type->addDocument(new Document(1, ['name' => 'ruflin']));
         $index->refresh();
 
@@ -353,7 +353,7 @@ class TypeTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = new Index($client, 'index');
-        $type = new Type($index, 'type');
+        $type = new Type($index, '_doc');
 
         $type->getDocument(1);
     }
@@ -364,7 +364,7 @@ class TypeTest extends BaseTest
     public function testDeleteByQueryWithQueryString()
     {
         $index = $this->_createIndex();
-        $type = new Type($index, 'test');
+        $type = new Type($index, '_doc');
         $type->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
         $type->addDocument(new Document(2, ['name' => 'ruflin']));
         $index->refresh();
@@ -395,7 +395,7 @@ class TypeTest extends BaseTest
     public function testDeleteByQueryWithQuery()
     {
         $index = $this->_createIndex();
-        $type = new Type($index, 'test');
+        $type = new Type($index, '_doc');
         $type->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
         $type->addDocument(new Document(2, ['name' => 'ruflin']));
         $index->refresh();
@@ -426,7 +426,7 @@ class TypeTest extends BaseTest
     public function testDeleteByQueryWithArrayQuery()
     {
         $index = $this->_createIndex();
-        $type = new Type($index, 'test');
+        $type = new Type($index, '_doc');
         $type->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
         $type->addDocument(new Document(2, ['name' => 'ruflin']));
         $index->refresh();
@@ -456,7 +456,7 @@ class TypeTest extends BaseTest
     public function testDeleteByQueryWithQueryAndOptions()
     {
         $index = $this->_createIndex(null, true, 2);
-        $type = new Type($index, 'test');
+        $type = new Type($index, '_doc');
         $doc = new Document(1, ['name' => 'ruflin nicolas']);
         $doc->setRouting('first_routing');
         $type->addDocument($doc);
@@ -510,7 +510,7 @@ class TypeTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $type = new Type($index, 'test');
+        $type = new Type($index, '_doc');
         $mapping = new Mapping();
         $mapping->setProperties([
             'name' => [
@@ -562,7 +562,7 @@ class TypeTest extends BaseTest
         $docs[] = new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
         $docs[] = new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
 
-        $type = $index->getType('zeroType');
+        $type = $index->getType('_doc');
         $type->addDocuments($docs);
         $index->refresh();
 
@@ -582,7 +582,7 @@ class TypeTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_test');
-        $type = $index->getType('update_type');
+        $type = $index->getType('_doc');
         $id = 1;
         $type->addDocument(new Document($id, ['name' => 'bruce wayne batman', 'counter' => 1]));
         $newName = 'batman';
@@ -612,7 +612,7 @@ class TypeTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_test');
-        $type = $index->getType('update_type');
+        $type = $index->getType('_doc');
         $id = '/id/with/forward/slashes';
         $type->addDocument(new Document($id, ['name' => 'bruce wayne batman', 'counter' => 1]));
         $newName = 'batman';
@@ -642,7 +642,7 @@ class TypeTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_test');
-        $type = $index->getType('update_type');
+        $type = $index->getType('_doc');
         $id = 1;
         $type->addDocument(new Document($id, ['name' => 'bruce wayne batman', 'counter' => 1]));
         $newName = 'batman';
@@ -681,7 +681,7 @@ class TypeTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_test');
-        $type = $index->getType('update_type');
+        $type = $index->getType('_doc');
 
         $client->setConfigValue('document', ['autoPopulate' => true]);
 
@@ -731,7 +731,7 @@ class TypeTest extends BaseTest
     {
         $index = $this->_createIndex();
         $this->_waitForAllocation($index);
-        $type = $index->getType('elastica_type');
+        $type = $index->getType('_doc');
 
         $document = new Document();
 
@@ -744,7 +744,7 @@ class TypeTest extends BaseTest
     public function testUpdateDocumentWithoutSource()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('elastica_type');
+        $type = $index->getType('_doc');
 
         $mapping = new Mapping();
         $mapping->setProperties([
@@ -797,7 +797,7 @@ class TypeTest extends BaseTest
     public function testAddDocumentHashId()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test2');
+        $type = $index->getType('_doc');
 
         $hashId = '#1';
 
@@ -821,7 +821,7 @@ class TypeTest extends BaseTest
     public function testAddDocumentAutoGeneratedId()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('elastica_type');
+        $type = $index->getType('_doc');
 
         $document = new Document();
         $document->setAutoPopulate();
@@ -848,7 +848,7 @@ class TypeTest extends BaseTest
     public function testAddDocumentPipeline()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('elastica_type');
+        $type = $index->getType('_doc');
         $this->_createRenamePipeline();
 
         $document = new Document();
@@ -875,7 +875,7 @@ class TypeTest extends BaseTest
         $index = $this->_createIndex();
         $this->_waitForAllocation($index);
 
-        $type = new Type($index, 'user');
+        $type = new Type($index, '_doc');
 
         $type->addObject(new \stdClass());
     }
@@ -887,7 +887,7 @@ class TypeTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $type = new Type($index, 'user');
+        $type = new Type($index, '_doc');
         $type->setSerializer('get_object_vars');
 
         $userObject = new \stdClass();
@@ -913,7 +913,7 @@ class TypeTest extends BaseTest
     public function testSetSerializer()
     {
         $index = $this->_getClient()->getIndex('foo');
-        $type = $index->getType('user');
+        $type = $index->getType('_doc');
         $ret = $type->setSerializer('get_object_vars');
         $this->assertInstanceOf(Type::class, $ret);
     }
@@ -926,7 +926,7 @@ class TypeTest extends BaseTest
         $index = $this->_createIndex();
         $this->assertTrue($index->exists());
 
-        $type = new Type($index, 'user');
+        $type = new Type($index, '_doc');
         $this->assertFalse($type->exists());
 
         $type->addDocument(new Document(1, ['name' => 'test name']));
@@ -995,7 +995,7 @@ class TypeTest extends BaseTest
     public function testRequestEndpoint()
     {
         $index = $this->_createIndex();
-        $type = new Type($index, 'foo');
+        $type = new Type($index, '_doc');
 
         $mapping = new Mapping($type, $expect = [
             'id' => ['type' => 'integer', 'store' => true],
@@ -1011,7 +1011,7 @@ class TypeTest extends BaseTest
         $mapping = array_shift($data);
 
         $this->assertEquals(
-            ['foo' => ['properties' => $expect]],
+            ['_doc' => ['properties' => $expect]],
             $mapping['mappings']
         );
     }
@@ -1022,8 +1022,8 @@ class TypeTest extends BaseTest
     public function testExceptionWithTwoMappingType()
     {
         $index = $this->_createIndex();
-        $type1 = new Type($index, 'foo');
-        $type2 = new Type($index, 'bar');
+        $type1 = new Type($index, '_doc');
+        $type2 = new Type($index, '_doc');
 
         $mapping = new Mapping(null, $expect = [
             'text' => ['type' => 'text', 'analyzer' => 'standard'],

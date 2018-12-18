@@ -81,7 +81,7 @@ class ClientTest extends BaseTest
         $index = $client->getIndex('elastica_test1');
         $index->create([], true);
 
-        $type = $index->getType('user');
+        $type = $index->getType('_doc');
 
         // Adds 1 document to the index
         $doc1 = new Document(1,
@@ -118,7 +118,7 @@ class ClientTest extends BaseTest
         $index = $client->getIndex('elastica_test1');
         $index->create([], true);
 
-        $type = $index->getType('user');
+        $type = $index->getType('_doc');
 
         // Adds 1 document to the index
         $doc1 = new Document(1,
@@ -186,9 +186,9 @@ class ClientTest extends BaseTest
         $client = $this->_getClient();
 
         $params = [
-            ['index' => ['_index' => 'test', '_type' => 'user', '_id' => '1']],
+            ['index' => ['_index' => 'test', '_type' => '_doc', '_id' => '1']],
             ['user' => ['name' => 'hans']],
-            ['index' => ['_index' => 'test', '_type' => 'user', '_id' => '2']],
+            ['index' => ['_index' => 'test', '_type' => '_doc', '_id' => '2']],
             ['user' => ['name' => 'peter']],
         ];
 
@@ -225,28 +225,28 @@ class ClientTest extends BaseTest
     {
         $index = $this->_getClient()->getIndex('cryptocurrencies');
 
-        $anonCoin = new Document(1, ['name' => 'anoncoin'], 'altcoin');
-        $ixCoin = new Document(2, ['name' => 'ixcoin'], 'altcoin');
+        $anonCoin = new Document(1, ['name' => 'anoncoin'], '_doc');
+        $ixCoin = new Document(2, ['name' => 'ixcoin'], '_doc');
 
         $index->addDocuments([$anonCoin, $ixCoin]);
 
-        $this->assertEquals('anoncoin', $index->getType('altcoin')->getDocument(1)->get('name'));
-        $this->assertEquals('ixcoin', $index->getType('altcoin')->getDocument(2)->get('name'));
+        $this->assertEquals('anoncoin', $index->getType('_doc')->getDocument(1)->get('name'));
+        $this->assertEquals('ixcoin', $index->getType('_doc')->getDocument(2)->get('name'));
 
         $index->updateDocuments([
-            new Document(1, ['name' => 'AnonCoin'], 'altcoin'),
-            new Document(2, ['name' => 'iXcoin'], 'altcoin'),
+            new Document(1, ['name' => 'AnonCoin'], '_doc'),
+            new Document(2, ['name' => 'iXcoin'], '_doc'),
         ]);
 
-        $this->assertEquals('AnonCoin', $index->getType('altcoin')->getDocument(1)->get('name'));
-        $this->assertEquals('iXcoin', $index->getType('altcoin')->getDocument(2)->get('name'));
+        $this->assertEquals('AnonCoin', $index->getType('_doc')->getDocument(1)->get('name'));
+        $this->assertEquals('iXcoin', $index->getType('_doc')->getDocument(2)->get('name'));
 
         $ixCoin->setIndex(null);  // Make sure the index gets set properly if missing
         $index->deleteDocuments([$anonCoin, $ixCoin]);
 
         $this->expectException(NotFoundException::class);
-        $index->getType('altcoin')->getDocument(1);
-        $index->getType('altcoin')->getDocument(2);
+        $index->getType('_doc')->getDocument(1);
+        $index->getType('_doc')->getDocument(2);
     }
 
     /**
@@ -256,7 +256,7 @@ class ClientTest extends BaseTest
      */
     public function testBulkType()
     {
-        $type = $this->_getClient()->getIndex('cryptocurrencies')->getType('altcoin');
+        $type = $this->_getClient()->getIndex('cryptocurrencies')->getType('_doc');
 
         $liteCoin = new Document(1, ['name' => 'litecoin']);
         $nameCoin = new Document(2, ['name' => 'namecoin']);
@@ -288,7 +288,7 @@ class ClientTest extends BaseTest
     public function testUpdateDocuments()
     {
         $indexName = 'test';
-        $typeName = 'people';
+        $typeName = '_doc';
 
         $client = $this->_getClient();
         $type = $client->getIndex($indexName)->getType($typeName);
@@ -350,7 +350,7 @@ class ClientTest extends BaseTest
 
         // Create the index, deleting it first if it already exists
         $index->create([], true);
-        $type = $index->getType('user');
+        $type = $index->getType('_doc');
 
         // Adds 1 document to the index
         $doc = new Document(null, $data);
@@ -428,7 +428,7 @@ class ClientTest extends BaseTest
 
         // Create the index, deleting it first if it already exists
         $index->create([], true);
-        $type = $index->getType('user');
+        $type = $index->getType('_doc');
 
         // Adds 1 document to the index
         $doc = new Document(null, $data);
@@ -492,7 +492,7 @@ class ClientTest extends BaseTest
 
         // Create the index, deleting it first if it already exists
         $index->create([], true);
-        $type = $index->getType('user');
+        $type = $index->getType('_doc');
 
         // Adds 1 document to the index
         $doc = new Document(null, $data);
@@ -556,7 +556,7 @@ class ClientTest extends BaseTest
 
         // Create the index, deleting it first if it already exists
         $index->create([], true);
-        $type = $index->getType('user');
+        $type = $index->getType('_doc');
 
         // Adds 1 document to the index
         $doc = new Document(null, $data);
@@ -703,7 +703,7 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentByDocument()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
@@ -730,7 +730,7 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentByScript()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'should be changed']);
@@ -758,7 +758,7 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentByScriptWithUpsert()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $script = new Script('ctx._source.field2 += params.count; ctx._source.remove("field3"); ctx._source.field4 = "changed"', null, Script::LANG_PAINLESS);
@@ -803,7 +803,7 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentByRawData()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument = new Document(1, ['field1' => 'value1']);
@@ -834,7 +834,7 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentByDocumentWithUpsert()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument = new Document(1, ['field1' => 'value1updated', 'field2' => 'value2updated']);
@@ -868,7 +868,7 @@ class ClientTest extends BaseTest
     public function testDocAsUpsert()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         //Confirm document one does not exist
@@ -898,7 +898,7 @@ class ClientTest extends BaseTest
     public function testUpdateWithInvalidType()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         //Try to update using a stdClass object
@@ -918,7 +918,7 @@ class ClientTest extends BaseTest
     public function testDeleteDocuments()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $docs = [
@@ -963,7 +963,7 @@ class ClientTest extends BaseTest
     public function testDeleteDocumentsWithRequestParameters()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $docs = [
@@ -1026,7 +1026,7 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentPopulateFields()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4']);
@@ -1098,7 +1098,7 @@ class ClientTest extends BaseTest
         $client = $index->getClient();
         $client->setConfigValue('document', ['autoPopulate' => true]);
 
-        $type = $index->getType('pos');
+        $type = $index->getType('_doc');
         $type->addDocuments($docs);
 
         foreach ($docs as $doc) {
@@ -1124,7 +1124,7 @@ class ClientTest extends BaseTest
         $client = $index->getClient();
         $client->setConfigValue('document', ['autoPopulate' => true]);
 
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $type->addDocuments($docs, ['pipeline' => 'renaming']);
 
         foreach ($docs as $i => $doc) {
@@ -1174,7 +1174,7 @@ class ClientTest extends BaseTest
 
         $index = $client->getIndex('test');
         $index->create([], true);
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $type->addDocument(new Document(1, ['username' => 'ruflin']));
         $index->refresh();
 
@@ -1203,7 +1203,7 @@ class ClientTest extends BaseTest
 
         $index = $client->getIndex('test');
         $index->create([], true);
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $type->addDocument(new Document(1, ['username' => 'ruflin']));
         $index->refresh();
 
@@ -1373,7 +1373,7 @@ class ClientTest extends BaseTest
         // Also, index should exist (matches $staticIndex)
         $dynamicIndex->refresh();
 
-        $type = $dynamicIndex->getType('some_type');
+        $type = $dynamicIndex->getType('_doc');
         $doc1 = $type->createDocument(1, ['name' => 'one']);
         $doc2 = $type->createDocument(2, ['name' => 'two']);
 
@@ -1409,7 +1409,7 @@ class ClientTest extends BaseTest
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $doc = new Document(null, ['foo' => 'bar']);
         $doc->setRouting('first_routing');
         $type->addDocument($doc);
@@ -1425,7 +1425,7 @@ class ClientTest extends BaseTest
         $this->assertArrayHasKey('types', $response->getData()['indices'][$index->getName()]['total']['indexing']);
 
         $this->assertEquals(
-            ['test'],
+            ['_doc'],
             array_keys($response->getData()['indices'][$index->getName()]['total']['indexing']['types'])
         );
     }
@@ -1440,7 +1440,7 @@ class ClientTest extends BaseTest
 
         $index = $client->getIndex('test');
         $index->create([], true);
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $type->addDocument(new Document(1, ['username' => 'ruflin']));
         $index->refresh();
 

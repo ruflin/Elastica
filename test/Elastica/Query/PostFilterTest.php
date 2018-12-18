@@ -18,7 +18,7 @@ class PostFilterTest extends BaseTest
             new Document(3, ['color' => 'red', 'make' => 'ford']),
             new Document(4, ['color' => 'green', 'make' => 'renault']),
         ];
-        $index->getType('test')->addDocuments($docs);
+        $index->getType('_doc')->addDocuments($docs);
         $index->refresh();
 
         return $index;
