@@ -4,13 +4,12 @@ FROM php:5.6
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 RUN apt-get update && apt-get install -y \
-	cloc \
-	git \
-	graphviz \
-	nano \
-	php5-xsl \
-	zlib1g-dev
-	# XSL and Graphviz for PhpDocumentor
+        cloc \
+        git \
+        graphviz \
+        nano \
+        zlib1g-dev
+        # XSL and Graphviz for PhpDocumentor
 
 RUN docker-php-ext-install sockets zip
 
