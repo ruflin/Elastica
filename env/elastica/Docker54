@@ -4,14 +4,14 @@ FROM php:5.4
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 RUN apt-get update && apt-get install -y \
-	cloc \
-	git \
-	graphviz \
-	libxslt-dev \
-	nano \
-	php5-xsl \
-	wget
-	# XSL and Graphviz for PhpDocumentor
+        cloc \
+        git \
+        graphviz \
+        libxslt-dev \
+        nano \
+        php5-xsl \
+        wget
+        # XSL and Graphviz for PhpDocumentor
 
 RUN docker-php-ext-install sockets xsl
 
@@ -22,7 +22,7 @@ RUN pecl install xdebug-2.3.2
 
 ## PHP Configuration
 
-RUN echo "memory_limit=1024M" >> /usr/local/etc/php/conf.d/memory-limit.ini
+RUN echo "memory_limit=2048M" >> /usr/local/etc/php/conf.d/memory-limit.ini
 RUN echo "date.timezone=UTC" >> /usr/local/etc/php/conf.d/timezone.ini
 #RUN echo "extension=/usr/lib/php5/20131226/xsl.so" >> /usr/local/etc/php/conf.d/xsl.ini # TODO: Debian is putting the xsl extension in a different directory, should be in: /usr/local/lib/php/extensions/no-debug-non-zts-20131226
 RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so" >> /usr/local/etc/php/conf.d/xdebug.ini

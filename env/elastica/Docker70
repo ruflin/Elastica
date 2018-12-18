@@ -4,14 +4,13 @@ FROM php:7.0
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 RUN apt-get update && apt-get install -y \
-	cloc \
-	git \
-	graphviz \
-	libxslt-dev \
-	nano \
-	php5-xsl \
-	zip unzip
-	# XSL and Graphviz for PhpDocumentor
+        cloc \
+        git \
+        graphviz \
+        libxslt-dev \
+        nano \
+        zip unzip
+        # XSL and Graphviz for PhpDocumentor
 
 RUN docker-php-ext-install sockets xsl
 
