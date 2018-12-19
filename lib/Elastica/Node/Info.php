@@ -3,6 +3,7 @@
 namespace Elastica\Node;
 
 use Elastica\Node as BaseNode;
+use Elastica\Response;
 
 /**
  * Elastica cluster node object.
@@ -16,7 +17,7 @@ class Info
     /**
      * Response.
      *
-     * @var \Elastica\Response Response object
+     * @var Response Response object
      */
     protected $_response;
 
@@ -30,7 +31,7 @@ class Info
     /**
      * Node.
      *
-     * @var \Elastica\Node Node object
+     * @var BaseNode Node object
      */
     protected $_node;
 
@@ -51,8 +52,8 @@ class Info
     /**
      * Create new info object for node.
      *
-     * @param \Elastica\Node $node   Node object
-     * @param array          $params List of params to return. Can be: settings, os, process, jvm, thread_pool, network, transport, http
+     * @param BaseNode $node   Node object
+     * @param array    $params List of params to return. Can be: settings, os, process, jvm, thread_pool, network, transport, http
      */
     public function __construct(BaseNode $node, array $params = [])
     {
@@ -78,7 +79,7 @@ class Info
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {
-                return;
+                return null;
             }
         }
 
@@ -90,7 +91,7 @@ class Info
      *
      * @return string Returns Node port
      */
-    public function getPort()
+    public function getPort(): string
     {
         // Returns string in format: inet[/192.168.1.115:9201]
         $data = $this->get('http_address');
@@ -105,7 +106,7 @@ class Info
      *
      * @return string Returns Node ip address
      */
-    public function getIp()
+    public function getIp(): string
     {
         // Returns string in format: inet[/192.168.1.115:9201]
         $data = $this->get('http_address');
@@ -122,9 +123,9 @@ class Info
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      */
-    public function getPlugins()
+    public function getPlugins(): array
     {
-        if (!in_array('plugins', $this->_params)) {
+        if (!in_array('plugins', $this->_params, true)) {
             //Plugin data was not retrieved when refresh() was called last. Get it now.
             $this->_params[] = 'plugins';
             $this->refresh($this->_params);
@@ -140,10 +141,10 @@ class Info
      *
      * @return bool true if the plugin is installed, false otherwise
      */
-    public function hasPlugin($name)
+    public function hasPlugin($name): bool
     {
         foreach ($this->getPlugins() as $plugin) {
-            if ($plugin['name'] == $name) {
+            if ($plugin['name'] === $name) {
                 return true;
             }
         }
@@ -156,7 +157,7 @@ class Info
      *
      * @return array Data array
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->_data;
     }
@@ -164,9 +165,9 @@ class Info
     /**
      * Return node object.
      *
-     * @return \Elastica\Node Node object
+     * @return BaseNode Node object
      */
-    public function getNode()
+    public function getNode(): BaseNode
     {
         return $this->_node;
     }
@@ -174,7 +175,7 @@ class Info
     /**
      * @return string Unique node id
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->_id;
     }
@@ -182,7 +183,7 @@ class Info
     /**
      * @return string Node name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->_data['name'];
     }
@@ -190,9 +191,9 @@ class Info
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function getResponse()
+    public function getResponse(): Response
     {
         return $this->_response;
     }
@@ -202,9 +203,9 @@ class Info
      *
      * @param array $params Params to return (default none). Possible options: settings, os, process, jvm, thread_pool, network, transport, http, plugin
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function refresh(array $params = [])
+    public function refresh(array $params = []): Response
     {
         $this->_params = $params;
 
@@ -221,5 +222,7 @@ class Info
         $this->_data = reset($data['nodes']);
         $this->_id = key($data['nodes']);
         $this->getNode()->setId($this->getId());
+
+        return $this->_response;
     }
 }

@@ -3,6 +3,7 @@
 namespace Elastica\Node;
 
 use Elastica\Node as BaseNode;
+use Elastica\Response;
 
 /**
  * Elastica cluster node object.
@@ -16,7 +17,7 @@ class Stats
     /**
      * Response.
      *
-     * @var \Elastica\Response Response object
+     * @var Response Response object
      */
     protected $_response;
 
@@ -30,14 +31,14 @@ class Stats
     /**
      * Node.
      *
-     * @var \Elastica\Node Node object
+     * @var BaseNode Node object
      */
     protected $_node;
 
     /**
      * Create new stats for node.
      *
-     * @param \Elastica\Node $node Elastica node object
+     * @param BaseNode $node Elastica node object
      */
     public function __construct(BaseNode $node)
     {
@@ -61,7 +62,7 @@ class Stats
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {
-                return;
+                return null;
             }
         }
 
@@ -73,7 +74,7 @@ class Stats
      *
      * @return array Data array
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->_data;
     }
@@ -81,9 +82,9 @@ class Stats
     /**
      * Returns node object.
      *
-     * @return \Elastica\Node Node object
+     * @return BaseNode Node object
      */
-    public function getNode()
+    public function getNode(): BaseNode
     {
         return $this->_node;
     }
@@ -91,9 +92,9 @@ class Stats
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function getResponse()
+    public function getResponse(): Response
     {
         return $this->_response;
     }
@@ -101,9 +102,9 @@ class Stats
     /**
      * Reloads all nodes information. Has to be called if informations changed.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function refresh()
+    public function refresh(): Response
     {
         $endpoint = new \Elasticsearch\Endpoints\Cluster\Nodes\Stats();
         $endpoint->setNodeID($this->getNode()->getName());
@@ -111,5 +112,7 @@ class Stats
         $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
         $data = $this->getResponse()->getData();
         $this->_data = reset($data['nodes']);
+
+        return $this->_response;
     }
 }
