@@ -3,14 +3,19 @@
 namespace Elastica\Processor;
 
 /**
- * Elastica Rename Processor.
+ * Elastica DotExpander Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/dot-expand-processor.html
  */
 class DotExpander extends AbstractProcessor
 {
+    /**
+     * DotExpander constructor.
+     *
+     * @param string $field
+     */
     public function __construct(string $field)
     {
         $this->setField($field);
@@ -23,7 +28,7 @@ class DotExpander extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }

@@ -5,12 +5,14 @@ namespace Elastica\Processor;
 /**
  * Elastica Rename Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/rename-processor.html
  */
 class Rename extends AbstractProcessor
 {
+    const DEFAULT_IGNORE_MISSING_VALUE = false;
+
     /**
      * Rename constructor.
      *
@@ -30,7 +32,7 @@ class Rename extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -42,7 +44,7 @@ class Rename extends AbstractProcessor
      *
      * @return $this
      */
-    public function setTargetField(string $targetField)
+    public function setTargetField(string $targetField): self
     {
         return $this->setParam('target_field', $targetField);
     }
@@ -54,7 +56,7 @@ class Rename extends AbstractProcessor
      *
      * @return $this
      */
-    public function setIgnoreMissing(bool $ignoreMissing)
+    public function setIgnoreMissing(bool $ignoreMissing): self
     {
         return $this->setParam('ignore_missing', $ignoreMissing);
     }

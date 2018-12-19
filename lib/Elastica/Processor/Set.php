@@ -5,12 +5,14 @@ namespace Elastica\Processor;
 /**
  * Elastica Set Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ingest-processors.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/set-processor.html
  */
 class Set extends AbstractProcessor
 {
+    const DEFAULT_OVERRIDE_VALUE = true;
+
     /**
      * Set constructor.
      *
@@ -30,7 +32,7 @@ class Set extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -42,7 +44,7 @@ class Set extends AbstractProcessor
      *
      * @return $this
      */
-    public function setValue(string $value)
+    public function setValue(string $value): self
     {
         return $this->setParam('value', $value);
     }
@@ -54,7 +56,7 @@ class Set extends AbstractProcessor
      *
      * @return $this
      */
-    public function setOverride(bool $override)
+    public function setOverride(bool $override): self
     {
         return $this->setParam('override', $override);
     }

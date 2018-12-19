@@ -5,12 +5,17 @@ namespace Elastica\Processor;
 /**
  * Elastica DateIndexName Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/date-index-name-processor.html
  */
 class DateIndexName extends AbstractProcessor
 {
+    const DEFAULT_DATE_FORMATS_VALUE = ['ISO8601'];
+    const DEFAULT_INDEX_NAME_FORMAT_VALUE = 'yyyy-MM-dd';
+    const DEFAULT_TIMEZONE_VALUE = 'UTC';
+    const DEFAULT_LOCALE_VALUE = 'ENGLISH';
+
     /**
      * DateIndexName constructor.
      *
@@ -30,7 +35,7 @@ class DateIndexName extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -42,7 +47,7 @@ class DateIndexName extends AbstractProcessor
      *
      * @return $this
      */
-    public function setDateRounding(string $dateRounding)
+    public function setDateRounding(string $dateRounding): self
     {
         return $this->setParam('date_rounding', $dateRounding);
     }
@@ -54,7 +59,7 @@ class DateIndexName extends AbstractProcessor
      *
      * @return $this
      */
-    public function setDateFormats(array $formats)
+    public function setDateFormats(array $formats): self
     {
         return $this->setParam('date_formats', $formats);
     }
@@ -66,7 +71,7 @@ class DateIndexName extends AbstractProcessor
      *
      * @return $this
      */
-    public function setIndexNamePrefix(string $indexPrefixName)
+    public function setIndexNamePrefix(string $indexPrefixName): self
     {
         return $this->setParam('index_name_prefix', $indexPrefixName);
     }
@@ -78,7 +83,7 @@ class DateIndexName extends AbstractProcessor
      *
      * @return $this
      */
-    public function setIndexNameFormat(string $indexNameFormat)
+    public function setIndexNameFormat(string $indexNameFormat): self
     {
         return $this->setParam('index_name_format', $indexNameFormat);
     }
@@ -90,7 +95,7 @@ class DateIndexName extends AbstractProcessor
      *
      * @return $this
      */
-    public function setTimezone(string $timezone)
+    public function setTimezone(string $timezone): self
     {
         return $this->setParam('timezone', $timezone);
     }
@@ -102,7 +107,7 @@ class DateIndexName extends AbstractProcessor
      *
      * @return $this
      */
-    public function setLocale(string $locale)
+    public function setLocale(string $locale): self
     {
         return $this->setParam('locale', $locale);
     }

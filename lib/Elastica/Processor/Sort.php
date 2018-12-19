@@ -5,18 +5,20 @@ namespace Elastica\Processor;
 /**
  * Elastica Sort Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/sort-processor.html
  */
 class Sort extends AbstractProcessor
 {
+    const DEFAULT_ORDER_VALUE = 'asc';
+
     /**
-     * Split constructor.
+     * Sort constructor.
      *
      * @param $field
      */
-    public function __construct($field)
+    public function __construct(string $field)
     {
         $this->setField($field);
     }
@@ -28,7 +30,7 @@ class Sort extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -40,7 +42,7 @@ class Sort extends AbstractProcessor
      *
      * @return $this
      */
-    public function setOrder(string $order)
+    public function setOrder(string $order): self
     {
         return $this->setParam('order', $order);
     }

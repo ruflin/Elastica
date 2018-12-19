@@ -5,7 +5,7 @@ namespace Elastica\Processor;
 /**
  * Elastica Remove Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/remove-processor.html
  */
@@ -28,7 +28,7 @@ class Remove extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField($field)
+    public function setField($field): self
     {
         return $this->setParam('field', $field);
     }

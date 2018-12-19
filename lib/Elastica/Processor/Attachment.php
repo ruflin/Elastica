@@ -2,8 +2,19 @@
 
 namespace Elastica\Processor;
 
+/**
+ * Elastica Attachment Processor.
+ *
+ * @author Federico Panini <fpanini@gmail.com>
+ *
+ * @see https://www.elastic.co/guide/en/elasticsearch/plugins/current/ingest-attachment.html
+ */
 class Attachment extends AbstractProcessor
 {
+    const DEFAULT_TARGET_FIELD_VALUE = 'attachment';
+    const DEFAULT_INDEXED_CHARS_VALUE = 100000;
+    const DEFAULT_IGNORE_MISSING_VALUE = false;
+
     /**
      * Attachment constructor.
      *
@@ -21,7 +32,7 @@ class Attachment extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -33,7 +44,7 @@ class Attachment extends AbstractProcessor
      *
      * @return $this
      */
-    public function setTargetField(string $targetField)
+    public function setTargetField(string $targetField): self
     {
         return $this->setParam('target_field', $targetField);
     }
@@ -45,7 +56,7 @@ class Attachment extends AbstractProcessor
      *
      * @return $this
      */
-    public function setIndexedChars(int $indexedChars)
+    public function setIndexedChars(int $indexedChars): self
     {
         return $this->setParam('indexed_chars', $indexedChars);
     }
@@ -57,19 +68,19 @@ class Attachment extends AbstractProcessor
      *
      * @return $this
      */
-    public function setProperties(array $properties)
+    public function setProperties(array $properties): self
     {
         return $this->setParam('properties', $properties);
     }
 
     /**
-     * Set ignore_missing. Default false.
+     * Set ignore_missing. Default value false.
      *
      * @param bool $ignoreMissing
      *
      * @return $this
      */
-    public function setIgnoreMissing(bool $ignoreMissing)
+    public function setIgnoreMissing(bool $ignoreMissing): self
     {
         return $this->setParam('ignore_missing', $ignoreMissing);
     }
