@@ -7,7 +7,7 @@ use Elastica\Index;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
 use Psr\Log\LoggerInterface;
 
-class Base extends \PHPUnit_Framework_TestCase
+class Base extends \PHPUnit\Framework\TestCase
 {
     protected static function hideDeprecated()
     {
@@ -223,21 +223,21 @@ class Base extends \PHPUnit_Framework_TestCase
 
     protected function _isUnitGroup()
     {
-        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+        $groups = \PHPUnit\Util\Test::getGroups(get_class($this), $this->getName(false));
 
         return in_array('unit', $groups);
     }
 
     protected function _isFunctionalGroup()
     {
-        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+        $groups = \PHPUnit\Util\Test::getGroups(get_class($this), $this->getName(false));
 
         return in_array('functional', $groups);
     }
 
     protected function _isBenchmarkGroup()
     {
-        $groups = \PHPUnit_Util_Test::getGroups(get_class($this), $this->getName(false));
+        $groups = \PHPUnit\Util\Test::getGroups(get_class($this), $this->getName(false));
 
         return in_array('benchmark', $groups);
     }

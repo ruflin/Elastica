@@ -8,7 +8,7 @@ use Elastica\JSON;
  *
  * @author Oleg Andreyev <oleg.andreyev@intexsys.lv>
  */
-class JSONTest extends \PHPUnit_Framework_TestCase
+class JSONTest extends \PHPUnit\Framework\TestCase
 {
     public function testStringifyMustNotThrowExceptionOnValid()
     {
