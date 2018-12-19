@@ -13,5 +13,5 @@ interface MultiBuilderInterface
      *
      * @return ResultSet
      */
-    public function buildMultiResultSet(Response $response, $searches);
+    public function buildMultiResultSet(Response $response, array $searches): ResultSet;
 }

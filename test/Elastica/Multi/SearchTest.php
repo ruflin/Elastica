@@ -11,13 +11,14 @@ use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
+use Elastica\Type;
 
 class SearchTest extends BaseTest
 {
     /**
-     * @return \Elastica\Type
+     * @return Type
      */
-    protected function _createType()
+    protected function _createType(): Type
     {
         $client = $this->_getClient();
 

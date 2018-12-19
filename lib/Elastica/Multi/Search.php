@@ -19,15 +19,21 @@ class Search
     /**
      * @const string[] valid header options
      */
-    private static $HEADER_OPTIONS = ['index', 'types', 'search_type',
-                                      'routing', 'preference', ];
+    private static $HEADER_OPTIONS = [
+        'index',
+        'types',
+        'search_type',
+        'routing',
+        'preference',
+    ];
+
     /**
      * @var MultiBuilderInterface
      */
     private $_builder;
 
     /**
-     * @var \Elastica\Client
+     * @var Client
      */
     protected $_client;
 
@@ -37,26 +43,26 @@ class Search
     protected $_options = [];
 
     /**
-     * @var array|\Elastica\Search[]
+     * @var BaseSearch[]
      */
     protected $_searches = [];
 
     /**
      * Constructs search object.
      *
-     * @param \Elastica\Client      $client  Client object
+     * @param Client                $client
      * @param MultiBuilderInterface $builder
      */
     public function __construct(Client $client, MultiBuilderInterface $builder = null)
     {
-        $this->_builder = $builder ?: new MultiBuilder();
+        $this->_builder = $builder ?? new MultiBuilder();
         $this->_client = $client;
     }
 
     /**
-     * @return \Elastica\Client
+     * @return Client
      */
-    public function getClient()
+    public function getClient(): Client
     {
         return $this->_client;
     }
@@ -64,7 +70,7 @@ class Search
     /**
      * @return $this
      */
-    public function clearSearches()
+    public function clearSearches(): self
     {
         $this->_searches = [];
 
@@ -72,12 +78,12 @@ class Search
     }
 
     /**
-     * @param \Elastica\Search $search
-     * @param string           $key    Optional key
+     * @param BaseSearch $search
+     * @param string     $key
      *
      * @return $this
      */
-    public function addSearch(BaseSearch $search, $key = null)
+    public function addSearch(BaseSearch $search, string $key = null): self
     {
         if ($key) {
             $this->_searches[$key] = $search;
@@ -89,11 +95,11 @@ class Search
     }
 
     /**
-     * @param array|\Elastica\Search[] $searches
+     * @param BaseSearch[] $searches
      *
      * @return $this
      */
-    public function addSearches(array $searches)
+    public function addSearches(array $searches): self
     {
         foreach ($searches as $key => $search) {
             $this->addSearch($search, $key);
@@ -103,11 +109,11 @@ class Search
     }
 
     /**
-     * @param array|\Elastica\Search[] $searches
+     * @param BaseSearch[] $searches
      *
      * @return $this
      */
-    public function setSearches(array $searches)
+    public function setSearches(array $searches): self
     {
         $this->clearSearches();
         $this->addSearches($searches);
@@ -116,9 +122,9 @@ class Search
     }
 
     /**
-     * @return array|\Elastica\Search[]
+     * @return BaseSearch[]
      */
-    public function getSearches()
+    public function getSearches(): array
     {
         return $this->_searches;
     }
@@ -128,7 +134,7 @@ class Search
      *
      * @return $this
      */
-    public function setSearchType($searchType)
+    public function setSearchType(string $searchType): self
     {
         $this->_options[BaseSearch::OPTION_SEARCH_TYPE] = $searchType;
 
@@ -136,9 +142,9 @@ class Search
     }
 
     /**
-     * @return \Elastica\Multi\ResultSet
+     * @return ResultSet
      */
-    public function search()
+    public function search(): ResultSet
     {
         $data = $this->_getData();
 
@@ -156,7 +162,7 @@ class Search
     /**
      * @return string
      */
-    protected function _getData()
+    protected function _getData(): string
     {
         $data = '';
         foreach ($this->getSearches() as $search) {
@@ -167,11 +173,11 @@ class Search
     }
 
     /**
-     * @param \Elastica\Search $search
+     * @param BaseSearch $search
      *
      * @return string
      */
-    protected function _getSearchData(BaseSearch $search)
+    protected function _getSearchData(BaseSearch $search): string
     {
         $header = $this->_getSearchDataHeader($search);
 
@@ -188,11 +194,11 @@ class Search
     }
 
     /**
-     * @param \Elastica\Search $search
+     * @param BaseSearch $search
      *
      * @return array
      */
-    protected function _getSearchDataHeader(BaseSearch $search)
+    protected function _getSearchDataHeader(BaseSearch $search): array
     {
         $header = $search->getOptions();
 

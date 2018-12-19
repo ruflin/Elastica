@@ -3,6 +3,7 @@
 namespace Elastica\Multi;
 
 use Elastica\Response;
+use Elastica\ResultSet as BaseResultSet;
 use Elastica\Search as BaseSearch;
 
 class MultiBuilder implements MultiBuilderInterface
@@ -13,7 +14,7 @@ class MultiBuilder implements MultiBuilderInterface
      *
      * @return ResultSet
      */
-    public function buildMultiResultSet(Response $response, $searches)
+    public function buildMultiResultSet(Response $response, array $searches): ResultSet
     {
         $resultSets = $this->buildResultSets($response, $searches);
 
@@ -24,9 +25,9 @@ class MultiBuilder implements MultiBuilderInterface
      * @param Response   $childResponse
      * @param BaseSearch $search
      *
-     * @return \Elastica\ResultSet
+     * @return BaseResultSet
      */
-    private function buildResultSet(Response $childResponse, BaseSearch $search)
+    private function buildResultSet(Response $childResponse, BaseSearch $search): BaseResultSet
     {
         return $search->getResultSetBuilder()->buildResultSet($childResponse, $search->getQuery());
     }
@@ -35,9 +36,9 @@ class MultiBuilder implements MultiBuilderInterface
      * @param Response     $response
      * @param BaseSearch[] $searches
      *
-     * @return \Elastica\ResultSet[]
+     * @return BaseResultSet[]
      */
-    private function buildResultSets(Response $response, $searches)
+    private function buildResultSets(Response $response, $searches): array
     {
         $data = $response->getData();
         if (!isset($data['responses']) || !is_array($data['responses'])) {
