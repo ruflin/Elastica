@@ -11,11 +11,11 @@ class ErrorsCollector
     private $errors = [];
 
     /**
-     * @var \PHPUnit_Framework_TestCase
+     * @var \PHPUnit\Framework\TestCase
      */
     private $testCase;
 
-    public function __construct(\PHPUnit_Framework_TestCase $testCase = null)
+    public function __construct(\PHPUnit\Framework\TestCase $testCase = null)
     {
         $this->testCase = $testCase;
     }
