@@ -66,7 +66,7 @@ class SpanOrTest extends BaseTest
         $text3 = 'Vivamus vitae mi nec tortor iaculis pellentesque at nec ipsum.';
 
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $type->addDocuments([
             new Document(1, [$field => $text1]),

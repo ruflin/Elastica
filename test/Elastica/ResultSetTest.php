@@ -14,7 +14,7 @@ class ResultSetTest extends BaseTest
     public function testGetters()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $type->addDocuments([
             new Document(1, ['name' => 'elastica search']),
@@ -41,7 +41,7 @@ class ResultSetTest extends BaseTest
     public function testArrayAccess()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $type->addDocuments([
             new Document(1, ['name' => 'elastica search']),
@@ -66,7 +66,7 @@ class ResultSetTest extends BaseTest
     public function testDocumentsAccess()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $type->addDocuments([
             new Document(1, ['name' => 'elastica search']),
@@ -97,7 +97,7 @@ class ResultSetTest extends BaseTest
     public function testInvalidOffsetCreation()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $doc = new Document(1, ['name' => 'elastica search']);
         $type->addDocument($doc);
@@ -116,7 +116,7 @@ class ResultSetTest extends BaseTest
     public function testInvalidOffsetGet()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $doc = new Document(1, ['name' => 'elastica search']);
         $type->addDocument($doc);

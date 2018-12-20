@@ -55,7 +55,7 @@ class DisMaxTest extends BaseTest
     public function testQuery()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $type->addDocuments([
             new Document(1, ['name' => 'Basel-Stadt']),

@@ -13,7 +13,7 @@ class SerialDiffTest extends BaseAggregationTest
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $type->setMapping(Mapping::create([
             'value' => ['type' => 'long'],

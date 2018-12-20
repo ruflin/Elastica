@@ -43,7 +43,7 @@ class SimpleQueryStringTest extends Base
             new Document(4, ['make' => 'Gibson', 'model' => 'SG Faded']),
             new Document(5, ['make' => 'Fender', 'model' => 'Stratocaster']),
         ];
-        $index->getType('guitars')->addDocuments($docs);
+        $index->getType('_doc')->addDocuments($docs);
         $index->refresh();
 
         $query = new SimpleQueryString('gibson +sg +-faded', ['make', 'model']);
@@ -85,7 +85,7 @@ class SimpleQueryStringTest extends Base
         $this->_checkVersion('1.5');
 
         $index = $this->_createIndex();
-        $type = $index->getType('foobars');
+        $type = $index->getType('_doc');
         $type->addDocuments([
             new Document(1, ['body' => 'foo']),
             new Document(2, ['body' => 'bar']),

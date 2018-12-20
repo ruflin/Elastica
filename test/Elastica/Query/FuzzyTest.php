@@ -86,7 +86,7 @@ class FuzzyTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
         $index->create([], true);
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $type->addDocuments([
             new Document(1, ['name' => 'Basel-Stadt']),

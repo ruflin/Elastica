@@ -31,7 +31,7 @@ class ResponseExceptionTest extends AbstractExceptionTest
     public function testBadType()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $type->setMapping([
             'num' => [

@@ -54,7 +54,7 @@ class SortTest extends BasePipelineTest
         $pipeline->addProcessor($sort)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('bulk_test');
+        $type = $index->getType('_doc');
 
         // Add document to normal index
         $doc1 = new Document(null, ['name' => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]]);

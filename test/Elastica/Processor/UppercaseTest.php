@@ -36,7 +36,7 @@ class UppercaseTest extends BasePipelineTest
         $pipeline->addProcessor($ucase)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('bulk_test');
+        $type = $index->getType('_doc');
 
         // Add document to normal index
         $doc1 = new Document(null, ['name' => 'ruflin']);

@@ -17,7 +17,7 @@ class GeoShapePreIndexedTest extends BaseTest
     {
         $index = $this->_createIndex();
         $indexName = $index->getName();
-        $otherType = $index->getType('other_type');
+        $otherType = $index->getType('_doc');
 
         // create other type mapping
         $otherMapping = new Mapping($otherType, [
@@ -42,7 +42,7 @@ class GeoShapePreIndexedTest extends BaseTest
         $index->refresh();
 
         $gsp = new GeoShapePreIndexed(
-            'location', '2', 'other_type', $indexName, 'location'
+            'location', '2', '_doc', $indexName, 'location'
         );
 
         $query = new BoolQuery();

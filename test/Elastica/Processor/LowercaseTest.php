@@ -36,7 +36,7 @@ class LowercaseTest extends BasePipelineTest
         $pipeline->addProcessor($lcase)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('bulk_test');
+        $type = $index->getType('_doc');
 
         // Add document to normal index
         $doc1 = new Document(null, ['name' => 'RUFLIN']);

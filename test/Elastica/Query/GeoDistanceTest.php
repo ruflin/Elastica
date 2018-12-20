@@ -15,7 +15,7 @@ class GeoDistanceTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         // Set mapping
         $type->setMapping(['point' => ['type' => 'geo_point']]);

@@ -13,7 +13,7 @@ class AvgBucketTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('test')->addDocuments([
+        $index->getType('_doc')->addDocuments([
             Document::create(['page' => 1, 'likes' => 180]),
             Document::create(['page' => 1, 'likes' => 156]),
             Document::create(['page' => 2, 'likes' => 155]),

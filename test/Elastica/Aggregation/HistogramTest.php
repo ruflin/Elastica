@@ -11,7 +11,7 @@ class HistogramTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('test')->addDocuments([
+        $index->getType('_doc')->addDocuments([
             new Document(1, ['price' => 5, 'color' => 'blue']),
             new Document(2, ['price' => 8, 'color' => 'blue']),
             new Document(3, ['price' => 1, 'color' => 'red']),

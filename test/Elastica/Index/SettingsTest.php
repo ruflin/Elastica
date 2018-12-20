@@ -262,7 +262,7 @@ class SettingsTest extends BaseTest
         $doc2 = new Document(null, ['hello' => 'world']);
         $doc3 = new Document(null, ['hello' => 'world']);
 
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $type->addDocument($doc1);
         $this->assertFalse($index->getSettings()->getReadOnly());
 

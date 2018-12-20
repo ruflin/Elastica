@@ -43,7 +43,7 @@ class HttpTest extends BaseTest
         $index->create([], true);
         $this->_waitForAllocation($index);
 
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $type->addDocument(new Document(1, ['test' => 'test']));
 
         $index->refresh();
@@ -77,7 +77,7 @@ class HttpTest extends BaseTest
         $index->create([], true);
         $this->_waitForAllocation($index);
 
-        $type = $index->getType('item');
+        $type = $index->getType('_doc');
         // Force HEAD request to set CURLOPT_NOBODY = true
         $index->exists();
 
@@ -106,7 +106,7 @@ class HttpTest extends BaseTest
         $index->create([], true);
         $this->_waitForAllocation($index);
 
-        $type = $index->getType('item');
+        $type = $index->getType('_doc');
 
         // Force HEAD request to set CURLOPT_NOBODY = true
         $index->exists();
@@ -203,7 +203,7 @@ class HttpTest extends BaseTest
         $index->create([], true);
         $this->_waitForAllocation($index);
 
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
         $type->addDocument(new Document(1, ['test' => 'test']));
 
         $index->refresh();

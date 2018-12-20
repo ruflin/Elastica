@@ -14,7 +14,7 @@ class HighlightTest extends BaseTest
     public function testHightlightSearch()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('helloworld');
+        $type = $index->getType('_doc');
 
         $phrase = 'My name is ruflin';
 

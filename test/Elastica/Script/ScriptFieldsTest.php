@@ -73,7 +73,7 @@ class ScriptFieldsTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $doc = new Document(1, ['firstname' => 'guschti', 'lastname' => 'ruflin']);
         $type->addDocument($doc);
@@ -101,7 +101,7 @@ class ScriptFieldsTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('testscriptfieldwithjoin');
         $index->create([], true);
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $mapping = new Mapping();
         $mapping->setType($type);
@@ -125,14 +125,14 @@ class ScriptFieldsTest extends BaseTest
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], 'test');
+        ], '_doc');
 
         $doc2 = new Document(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], 'test');
+        ], '_doc');
 
         $index->addDocuments([$doc1, $doc2]);
 
@@ -143,7 +143,7 @@ class ScriptFieldsTest extends BaseTest
                 'name' => 'answer',
                 'parent' => 1,
             ],
-        ], 'test', 'testparentid');
+        ], '_doc', 'testparentid');
 
         $doc4 = new Document(4, [
             'text' => 'this is an answer, the 2nd',
@@ -152,7 +152,7 @@ class ScriptFieldsTest extends BaseTest
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], 'test', 'testparentid');
+        ], '_doc', 'testparentid');
 
         $doc5 = new Document(5, [
             'text' => 'this is an answer, the 3rd',
@@ -161,7 +161,7 @@ class ScriptFieldsTest extends BaseTest
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], 'test', 'testparentid');
+        ], '_doc', 'testparentid');
 
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
         $index->refresh();

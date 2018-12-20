@@ -15,7 +15,7 @@ class FunctionScoreTest extends BaseTest
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('test');
+        $type = $index->getType('_doc');
 
         $type->setMapping([
             'name' => ['type' => 'text', 'index' => 'false'],

@@ -114,7 +114,7 @@ class AbstractTransportTest extends BaseTest
         $index = $client->getIndex('elastica_testbooleanstringvalues');
 
         $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
-        $index->getType('test')->addDocument($doc);
+        $index->getType('_doc')->addDocument($doc);
         $index->refresh();
 
         $search = new Search($index->getClient());
