@@ -43,7 +43,7 @@ class Facade
      *
      * @return mixed
      */
-    public function __call($name, array $arguments)
+    public function __call(string $name, array $arguments)
     {
         // defined check
         if (false === method_exists($this->_dsl, $name)) {

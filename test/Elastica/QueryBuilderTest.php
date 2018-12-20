@@ -49,12 +49,12 @@ class QueryBuilderTest extends Base
 
 class CustomDSL implements QueryBuilder\DSL
 {
-    public function getType()
+    public function getType(): string
     {
         return 'custom';
     }
 
-    public function custom_method()
+    public function custom_method(): bool
     {
         return true;
     }

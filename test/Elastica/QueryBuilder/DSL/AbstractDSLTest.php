@@ -14,7 +14,7 @@ abstract class AbstractDSLTest extends BaseTest
      * @param string $className
      * @param array  $arguments
      */
-    protected function _assertImplemented(DSL $dsl, $methodName, $className, $arguments)
+    protected function _assertImplemented(DSL $dsl, string $methodName, string $className, array $arguments)
     {
         // Check method existence
         $this->assertTrue(method_exists($dsl, $methodName));
@@ -36,9 +36,10 @@ abstract class AbstractDSLTest extends BaseTest
 
     /**
      * @param DSL    $dsl
-     * @param string $name
+     * @param string $methodName
+     * @param array  $arguments
      */
-    protected function _assertNotImplemented(DSL $dsl, $methodName, $arguments)
+    protected function _assertNotImplemented(DSL $dsl, string $methodName, array $arguments)
     {
         try {
             call_user_func([$dsl, $methodName], $arguments);
@@ -52,11 +53,12 @@ abstract class AbstractDSLTest extends BaseTest
      * @param \ReflectionParameter[] $left
      * @param \ReflectionParameter[] $right
      */
-    protected function _assertParametersEquals($left, $right)
+    protected function _assertParametersEquals(array $left, array $right)
     {
-        $this->assertCount(count($left), $right, 'Parameters count mismatch');
+        $countLeft = count($left);
+        $this->assertCount($countLeft, $right, 'Parameters count mismatch');
 
-        for ($i = 0; $i < count($left); ++$i) {
+        for ($i = 0; $i < $countLeft; ++$i) {
             $this->assertEquals($left[$i]->getName(), $right[$i]->getName(), 'Parameters names mismatch');
             $this->assertEquals($left[$i]->isOptional(), $right[$i]->isOptional(), 'Parameters optionality mismatch');
             $this->assertEquals($this->_getHintName($left[$i]), $this->_getHintName($right[$i]), 'Parameters typehints mismatch');
@@ -74,6 +76,8 @@ abstract class AbstractDSLTest extends BaseTest
         if ($param->isOptional()) {
             return $param->getDefaultValue();
         }
+
+        return null;
     }
 
     /**
@@ -94,5 +98,7 @@ abstract class AbstractDSLTest extends BaseTest
         if ($class = $param->getClass()) {
             return $class->getName();
         }
+
+        return null;
     }
 }
