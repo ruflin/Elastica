@@ -81,6 +81,10 @@ doc:
 lint:
 	${RUN_ENV} php-cs-fixer fix --allow-risky=yes
 
+.PHONY: check-style
+check-style:
+	${RUN_ENV} php-cs-fixer fix --allow-risky=yes --dry-run
+
 .PHONY: loc
 loc:
 	${RUN_ENV} cloc --by-file --xml --exclude-dir=build -out=build/cloc.xml .

@@ -42,6 +42,7 @@ before_script:
 
 script:
   - make tests TARGET=$TARGET
+  - if [ "$TARGET" == "72" ] ; then make check-style ; fi
 
 after_script:
   - cat /var/log/elasticsearch/*.log

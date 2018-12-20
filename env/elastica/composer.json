@@ -13,7 +13,6 @@
     ],
     "require": {
         "php": "^7.0",
-        "friendsofphp/php-cs-fixer": "^2.0",
         "mayflower/php-codebrowser": "~1.1",
         "pdepend/pdepend": "^2.5",
         "phploc/phploc": "^4.0",
