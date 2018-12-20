@@ -23,9 +23,9 @@ class Type extends AbstractQuery
      *
      * @param string $type Type name
      */
-    public function __construct($type = null)
+    public function __construct(string $type = null)
     {
-        if ($type) {
+        if (null !== $type) {
             $this->setType($type);
         }
     }
@@ -37,7 +37,7 @@ class Type extends AbstractQuery
      *
      * @return $this
      */
-    public function setType($typeName)
+    public function setType(string $typeName): self
     {
         $this->_type = $typeName;
 
@@ -45,13 +45,9 @@ class Type extends AbstractQuery
     }
 
     /**
-     * Convert object to array.
-     *
-     * @see \Elastica\Query\AbstractQuery::toArray()
-     *
-     * @return array Query array
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'type' => ['value' => $this->_type],

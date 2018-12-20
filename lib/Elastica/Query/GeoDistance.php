@@ -23,7 +23,7 @@ class GeoDistance extends AbstractGeoDistance
      *
      * @throws \Elastica\Exception\InvalidException
      */
-    public function __construct($key, $location, $distance)
+    public function __construct(string $key, $location, string $distance)
     {
         parent::__construct($key, $location);
 
@@ -35,7 +35,7 @@ class GeoDistance extends AbstractGeoDistance
      *
      * @return $this
      */
-    public function setDistance($distance)
+    public function setDistance(string $distance): self
     {
         $this->setParam('distance', $distance);
 
@@ -49,7 +49,7 @@ class GeoDistance extends AbstractGeoDistance
      *
      * @return $this
      */
-    public function setDistanceType($distanceType)
+    public function setDistanceType(string $distanceType = self::DISTANCE_TYPE_ARC): self
     {
         $this->setParam('distance_type', $distanceType);
 

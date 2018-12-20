@@ -12,11 +12,11 @@ class ParentId extends AbstractQuery
     /**
      * ParentId constructor.
      *
-     * @param $type
-     * @param $id
-     * @param bool $ignoreUnmapped
+     * @param string     $type
+     * @param int|string $id
+     * @param bool       $ignoreUnmapped
      */
-    public function __construct($type, $id, $ignoreUnmapped = false)
+    public function __construct(string $type, $id, bool $ignoreUnmapped = false)
     {
         $this->setType($type);
         $this->setId($id);
@@ -32,7 +32,7 @@ class ParentId extends AbstractQuery
     }
 
     /**
-     * @param int $id
+     * @param int|string $id
      */
     private function setId($id)
     {
@@ -42,7 +42,7 @@ class ParentId extends AbstractQuery
     /**
      * @param bool $ignoreUnmapped
      */
-    private function setIgnoreUnmapped($ignoreUnmapped)
+    private function setIgnoreUnmapped(bool $ignoreUnmapped = false)
     {
         $this->setParam('ignore_unmapped', $ignoreUnmapped);
     }

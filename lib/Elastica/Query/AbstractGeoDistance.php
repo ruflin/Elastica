@@ -62,7 +62,7 @@ abstract class AbstractGeoDistance extends AbstractQuery
      *
      * @internal param string $distance Distance
      */
-    public function __construct($key, $location)
+    public function __construct(string $key, $location)
     {
         $this->setKey($key);
         $this->setLocation($location);
@@ -73,7 +73,7 @@ abstract class AbstractGeoDistance extends AbstractQuery
      *
      * @return $this
      */
-    public function setKey($key)
+    public function setKey(string $key): self
     {
         $this->_key = $key;
 
@@ -83,11 +83,11 @@ abstract class AbstractGeoDistance extends AbstractQuery
     /**
      * @param array|string $location
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return $this
      */
-    public function setLocation($location)
+    public function setLocation($location): self
     {
         // Location
         if (is_array($location)) { // Latitude/Longitude
@@ -118,9 +118,9 @@ abstract class AbstractGeoDistance extends AbstractQuery
      *
      * @return $this
      */
-    public function setLatitude($latitude)
+    public function setLatitude(float $latitude): self
     {
-        $this->_latitude = (float) $latitude;
+        $this->_latitude = $latitude;
         $this->_locationType = self::LOCATION_TYPE_LATLON;
 
         return $this;
@@ -131,9 +131,9 @@ abstract class AbstractGeoDistance extends AbstractQuery
      *
      * @return $this
      */
-    public function setLongitude($longitude)
+    public function setLongitude(float $longitude): self
     {
-        $this->_longitude = (float) $longitude;
+        $this->_longitude = $longitude;
         $this->_locationType = self::LOCATION_TYPE_LATLON;
 
         return $this;
@@ -144,7 +144,7 @@ abstract class AbstractGeoDistance extends AbstractQuery
      *
      * @return $this
      */
-    public function setGeohash($geohash)
+    public function setGeohash(string $geohash): self
     {
         $this->_geohash = $geohash;
         $this->_locationType = self::LOCATION_TYPE_GEOHASH;
@@ -153,7 +153,7 @@ abstract class AbstractGeoDistance extends AbstractQuery
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return array|string
      */
@@ -183,13 +183,9 @@ abstract class AbstractGeoDistance extends AbstractQuery
     }
 
     /**
-     * @see \Elastica\Param::toArray()
-     *
-     * @throws \Elastica\Exception\InvalidException
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $this->setParam($this->_key, $this->_getLocationData());
 

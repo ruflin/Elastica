@@ -24,8 +24,8 @@ class MatchPhrasePrefix extends MatchPhrase
      *
      * @return $this
      */
-    public function setFieldMaxExpansions($field, $maxExpansions = self::DEFAULT_MAX_EXPANSIONS)
+    public function setFieldMaxExpansions(string $field, int $maxExpansions = self::DEFAULT_MAX_EXPANSIONS): self
     {
-        return $this->setFieldParam($field, 'max_expansions', (int) $maxExpansions);
+        return $this->setFieldParam($field, 'max_expansions', $maxExpansions);
     }
 }

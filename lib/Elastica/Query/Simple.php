@@ -34,7 +34,7 @@ class Simple extends AbstractQuery
      *
      * @return $this
      */
-    public function setQuery(array $query)
+    public function setQuery(array $query): self
     {
         $this->_query = $query;
 
@@ -42,13 +42,9 @@ class Simple extends AbstractQuery
     }
 
     /**
-     * Converts query to array.
-     *
-     * @return array Query array
-     *
-     * @see \Elastica\Query\AbstractQuery::toArray()
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->_query;
     }

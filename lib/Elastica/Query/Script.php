@@ -2,7 +2,8 @@
 
 namespace Elastica\Query;
 
-use Elastica;
+use Elastica\Script\AbstractScript;
+use Elastica\Script\Script as BaseScript;
 
 /**
  * Script query.
@@ -16,11 +17,11 @@ class Script extends AbstractQuery
     /**
      * Construct script query.
      *
-     * @param array|string|\Elastica\Script\AbstractScript $script OPTIONAL Script
+     * @param array|string|AbstractScript $script Script
      */
     public function __construct($script = null)
     {
-        if ($script) {
+        if (null !== $script) {
             $this->setScript($script);
         }
     }
@@ -28,19 +29,19 @@ class Script extends AbstractQuery
     /**
      * Sets script object.
      *
-     * @param \Elastica\Script\Script|string|array $script
+     * @param BaseScript|string|array $script
      *
      * @return $this
      */
-    public function setScript($script)
+    public function setScript($script): self
     {
-        return $this->setParam('script', Elastica\Script\Script::create($script));
+        return $this->setParam('script', BaseScript::create($script));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = parent::toArray();
 

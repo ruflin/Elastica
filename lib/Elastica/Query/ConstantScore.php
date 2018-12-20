@@ -14,11 +14,11 @@ class ConstantScore extends AbstractQuery
     /**
      * Construct constant score query.
      *
-     * @param AbstractQuery|array|null $filter
+     * @param AbstractQuery|null $filter
      */
     public function __construct(AbstractQuery $filter = null)
     {
-        if (!is_null($filter)) {
+        if (null !== $filter) {
             $this->setFilter($filter);
         }
     }
@@ -26,11 +26,11 @@ class ConstantScore extends AbstractQuery
     /**
      * Set filter.
      *
-     * @param array|AbstractQuery $filter
+     * @param AbstractQuery $filter
      *
      * @return $this
      */
-    public function setFilter(AbstractQuery $filter)
+    public function setFilter(AbstractQuery $filter): self
     {
         return $this->setParam('filter', $filter);
     }
@@ -42,7 +42,7 @@ class ConstantScore extends AbstractQuery
      *
      * @return $this
      */
-    public function setBoost($boost)
+    public function setBoost(float $boost): self
     {
         return $this->setParam('boost', $boost);
     }

@@ -19,9 +19,9 @@ class Fuzzy extends AbstractQuery
      * @param string $fieldName Field name
      * @param string $value     String to search for
      */
-    public function __construct($fieldName = null, $value = null)
+    public function __construct(string $fieldName = null, string $value = null)
     {
-        if ($fieldName && $value) {
+        if (null !== $fieldName && null !== $value) {
             $this->setField($fieldName, $value);
         }
     }
@@ -34,7 +34,7 @@ class Fuzzy extends AbstractQuery
      *
      * @return $this
      */
-    public function setField($fieldName, $value)
+    public function setField(string $fieldName, string $value): self
     {
         if (!is_string($value) || !is_string($fieldName)) {
             throw new InvalidException('The field and value arguments must be of type string.');
@@ -54,7 +54,7 @@ class Fuzzy extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldOption($option, $value)
+    public function setFieldOption(string $option, $value): self
     {
         //Retrieve the single existing field for alteration.
         $params = $this->getParams();

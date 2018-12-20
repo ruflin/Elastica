@@ -18,7 +18,7 @@ class Nested extends AbstractQuery
      *
      * @return $this
      */
-    public function setPath($path)
+    public function setPath(string $path): self
     {
         return $this->setParam('path', $path);
     }
@@ -26,11 +26,11 @@ class Nested extends AbstractQuery
     /**
      * Sets nested query.
      *
-     * @param \Elastica\Query\AbstractQuery $query
+     * @param AbstractQuery $query
      *
      * @return $this
      */
-    public function setQuery(AbstractQuery $query)
+    public function setQuery(AbstractQuery $query): self
     {
         return $this->setParam('query', $query);
     }
@@ -42,7 +42,7 @@ class Nested extends AbstractQuery
      *
      * @return $this
      */
-    public function setScoreMode($scoreMode)
+    public function setScoreMode(string $scoreMode = 'avg'): self
     {
         return $this->setParam('score_mode', $scoreMode);
     }
@@ -54,7 +54,7 @@ class Nested extends AbstractQuery
      *
      * @return $this
      */
-    public function setInnerHits(InnerHits $innerHits)
+    public function setInnerHits(InnerHits $innerHits): self
     {
         return $this->setParam('inner_hits', $innerHits);
     }

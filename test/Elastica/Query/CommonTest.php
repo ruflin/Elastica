@@ -91,11 +91,11 @@ class CommonTest extends BaseTest
      */
     public function testSetAnalyzer()
     {
-        $value = 'standard';
+        $analyzer = 'standard';
         $query = new Common('body', 'test query', .001);
-        $query->setBoost($value);
-        $query->setAnalyzer('standard');
+        $query->setBoost(.02);
+        $query->setAnalyzer($analyzer);
 
-        $this->assertEquals($value, $query->toArray()['common']['body']['analyzer']);
+        $this->assertEquals($analyzer, $query->toArray()['common']['body']['analyzer']);
     }
 }

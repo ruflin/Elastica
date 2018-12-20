@@ -137,26 +137,4 @@ class FuzzyTest extends BaseTest
         $this->expectExceptionMessage('Fuzzy query can only support a single field.');
         $fuzzy->setField('name1', 'value1');
     }
-
-    /**
-     * @group unit
-     */
-    public function testFieldNameMustBeString()
-    {
-        $fuzzy = new Fuzzy();
-        $this->expectException(InvalidException::class);
-        $this->expectExceptionMessage('The field and value arguments must be of type string.');
-        $fuzzy->setField(['name'], 'value');
-    }
-
-    /**
-     * @group unit
-     */
-    public function testValueMustBeString()
-    {
-        $fuzzy = new Fuzzy();
-        $this->expectException(InvalidException::class);
-        $this->expectExceptionMessage('The field and value arguments must be of type string.');
-        $fuzzy->setField('name', ['value']);
-    }
 }

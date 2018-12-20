@@ -16,17 +16,17 @@ class SpanNear extends AbstractSpanQuery
     /**
      * Constructs a SpanNear query object.
      *
-     * @param AbstractSpanQuery[] $clauses OPTIONAL
-     * @param int                 $slop    OPTIONAL maximum proximity
-     * @param bool                $inOrder OPTIONAL true if order of searched clauses is important
+     * @param AbstractSpanQuery[] $clauses
+     * @param int                 $slop    maximum proximity
+     * @param bool                $inOrder true if order of searched clauses is important
      */
-    public function __construct($clauses = [], $slop = 1, $inOrder = false)
+    public function __construct(array $clauses = [], int $slop = 1, bool $inOrder = false)
     {
         if (!empty($clauses)) {
             foreach ($clauses as $clause) {
-                if (!is_subclass_of($clause, AbstractSpanQuery::class)) {
+                if (!$clause instanceof AbstractSpanQuery) {
                     throw new InvalidException(
-                        'Invalid parameter. Has to be array or instance of Elastica\Query\SpanQuery'
+                        'Invalid parameter. Has to be array or instance of '.AbstractSpanQuery::class
                     );
                 }
             }
@@ -41,7 +41,7 @@ class SpanNear extends AbstractSpanQuery
      *
      * @return $this
      */
-    public function setSlop($slop)
+    public function setSlop(int $slop): self
     {
         return $this->setParam('slop', $slop);
     }
@@ -51,7 +51,7 @@ class SpanNear extends AbstractSpanQuery
      *
      * @return $this
      */
-    public function setInOrder($inOrder)
+    public function setInOrder(bool $inOrder): self
     {
         return $this->setParam('in_order', $inOrder);
     }
@@ -61,16 +61,10 @@ class SpanNear extends AbstractSpanQuery
      *
      * @param AbstractSpanQuery $clause
      *
-     * @throws InvalidException If not valid query
-     *
      * @return $this
      */
-    public function addClause($clause)
+    public function addClause(AbstractSpanQuery $clause): self
     {
-        if (!is_subclass_of($clause, AbstractSpanQuery::class)) {
-            throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\SpanQuery');
-        }
-
         return $this->addParam('clauses', $clause);
     }
 }

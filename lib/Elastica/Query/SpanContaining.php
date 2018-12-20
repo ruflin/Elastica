@@ -33,7 +33,7 @@ class SpanContaining extends AbstractSpanQuery
      *
      * @return $this
      */
-    public function setLittle(AbstractSpanQuery $little)
+    public function setLittle(AbstractSpanQuery $little): self
     {
         return $this->setParam('little', $little);
     }
@@ -43,7 +43,7 @@ class SpanContaining extends AbstractSpanQuery
      *
      * @return $this
      */
-    public function setBig(AbstractSpanQuery $big)
+    public function setBig(AbstractSpanQuery $big): self
     {
         return $this->setParam('big', $big);
     }

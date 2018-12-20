@@ -20,7 +20,7 @@ class Boosting extends AbstractQuery
      *
      * @return $this
      */
-    public function setPositiveQuery(AbstractQuery $query)
+    public function setPositiveQuery(AbstractQuery $query): self
     {
         return $this->setParam('positive', $query);
     }
@@ -32,7 +32,7 @@ class Boosting extends AbstractQuery
      *
      * @return $this
      */
-    public function setNegativeQuery(AbstractQuery $query)
+    public function setNegativeQuery(AbstractQuery $query): self
     {
         return $this->setParam('negative', $query);
     }
@@ -44,8 +44,8 @@ class Boosting extends AbstractQuery
      *
      * @return $this
      */
-    public function setNegativeBoost($negativeBoost)
+    public function setNegativeBoost(float $negativeBoost): self
     {
-        return $this->setParam('negative_boost', (float) $negativeBoost);
+        return $this->setParam('negative_boost', $negativeBoost);
     }
 }

@@ -16,15 +16,15 @@ class SpanOr extends AbstractSpanQuery
     /**
      * Constructs a SpanOr query object.
      *
-     * @param AbstractSpanQuery[] $clauses OPTIONAL
+     * @param AbstractSpanQuery[] $clauses
      */
-    public function __construct($clauses = [])
+    public function __construct(array $clauses = [])
     {
         if (!empty($clauses)) {
             foreach ($clauses as $clause) {
-                if (!is_subclass_of($clause, AbstractSpanQuery::class)) {
+                if (!$clause instanceof AbstractSpanQuery) {
                     throw new InvalidException(
-                        'Invalid parameter. Has to be array or instance of Elastica\Query\SpanQuery'
+                        'Invalid parameter. Has to be array or instance of '.AbstractSpanQuery::class
                     );
                 }
             }
@@ -41,12 +41,8 @@ class SpanOr extends AbstractSpanQuery
      *
      * @return $this
      */
-    public function addClause($clause)
+    public function addClause(AbstractSpanQuery $clause): self
     {
-        if (!is_subclass_of($clause, AbstractSpanQuery::class)) {
-            throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\SpanQuery');
-        }
-
         return $this->addParam('clauses', $clause);
     }
 }

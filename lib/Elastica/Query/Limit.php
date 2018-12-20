@@ -16,7 +16,7 @@ class Limit extends AbstractQuery
      *
      * @param int $limit Limit
      */
-    public function __construct($limit)
+    public function __construct(int $limit)
     {
         $this->setLimit($limit);
     }
@@ -28,8 +28,8 @@ class Limit extends AbstractQuery
      *
      * @return $this
      */
-    public function setLimit($limit)
+    public function setLimit(int $limit): self
     {
-        return $this->setParam('value', (int) $limit);
+        return $this->setParam('value', $limit);
     }
 }

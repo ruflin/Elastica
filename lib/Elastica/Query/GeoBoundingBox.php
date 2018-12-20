@@ -19,7 +19,7 @@ class GeoBoundingBox extends AbstractQuery
      * @param string $key         Key
      * @param array  $coordinates Array with top left coordinate as first and bottom right coordinate as second element
      */
-    public function __construct($key, array $coordinates)
+    public function __construct(string $key, array $coordinates)
     {
         $this->addCoordinates($key, $coordinates);
     }
@@ -34,7 +34,7 @@ class GeoBoundingBox extends AbstractQuery
      *
      * @return $this
      */
-    public function addCoordinates($key, array $coordinates)
+    public function addCoordinates(string $key, array $coordinates): self
     {
         if (!isset($coordinates[0]) || !isset($coordinates[1])) {
             throw new InvalidException('expected $coordinates to be an array with two elements');

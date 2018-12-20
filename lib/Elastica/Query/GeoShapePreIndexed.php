@@ -50,8 +50,13 @@ class GeoShapePreIndexed extends AbstractGeoShape
      * @param string $indexedIndex Index of the pre-indexed shape
      * @param string $indexedPath  Path of the pre-indexed shape
      */
-    public function __construct($path, $indexedId, $indexedType, $indexedIndex, $indexedPath)
-    {
+    public function __construct(
+        string $path,
+        string $indexedId,
+        string $indexedType,
+        string $indexedIndex,
+        string $indexedPath
+    ) {
         $this->_path = $path;
         $this->_indexedId = $indexedId;
         $this->_indexedType = $indexedType;
@@ -60,13 +65,9 @@ class GeoShapePreIndexed extends AbstractGeoShape
     }
 
     /**
-     * Converts query to array.
-     *
-     * @see \Elastica\Query\AbstractQuery::toArray()
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'geo_shape' => [

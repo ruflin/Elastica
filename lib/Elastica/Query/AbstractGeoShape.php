@@ -44,7 +44,7 @@ abstract class AbstractGeoShape extends AbstractQuery
      *
      * @return $this
      */
-    public function setRelation($relation)
+    public function setRelation(string $relation): self
     {
         $this->_relation = $relation;
 
@@ -56,7 +56,7 @@ abstract class AbstractGeoShape extends AbstractQuery
      *
      * @return string
      */
-    public function getRelation()
+    public function getRelation(): string
     {
         return $this->_relation;
     }
