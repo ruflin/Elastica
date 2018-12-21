@@ -149,7 +149,7 @@ gource:
 
 ## DOCKER IMAGES
 
-	.PHONY: elastica-image
+.PHONY: elastica-image
 elastica-image:
 	docker build -t ruflin/elastica-dev-base -f env/elastica/Docker${TARGET} env/elastica/
 	docker build -t ruflin/elastica .
