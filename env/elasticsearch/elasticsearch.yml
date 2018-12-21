@@ -16,6 +16,9 @@ processors: 1
 # Details: https://github.com/elastic/elasticsearch/pull/17288
 discovery.zen.minimum_master_nodes: 2
 discovery.zen.ping.unicast.hosts: ["elasticsearch"]
+cluster.initial_master_nodes:
+  - 10.10.10.15
+  - 10.10.10.16
 
 # at the moment it's not possible to remove the x-pack plugin from the official ES docker image
 # https://github.com/elastic/elasticsearch-docker/issues/36
