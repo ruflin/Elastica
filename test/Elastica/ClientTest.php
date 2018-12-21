@@ -1192,7 +1192,7 @@ class ClientTest extends BaseTest
         $response = $client->request($path, Request::GET, $query);
         $responseArray = $response->getData();
 
-        $this->assertEquals(1, $responseArray['hits']['total']);
+        $this->assertEquals(1, $responseArray['hits']['total']['value']);
     }
 
     /**
@@ -1215,7 +1215,7 @@ class ClientTest extends BaseTest
         $response = $client->request($path, Request::GET, $query);
         $responseArray = $response->getData();
 
-        $this->assertEquals(1, $responseArray['hits']['total']);
+        $this->assertEquals(1, $responseArray['hits']['total']['value']);
     }
 
     /**
@@ -1462,7 +1462,7 @@ class ClientTest extends BaseTest
         $response = $client->requestEndpoint($endpoint);
         $responseArray = $response->getData();
 
-        $this->assertEquals($totalHits, $responseArray['hits']['total']);
+        $this->assertEquals($totalHits, $responseArray['hits']['total']['value']);
     }
 
     public function endpointQueryRequestDataProvider()

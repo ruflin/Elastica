@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file based on the
 * [Camel Case](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_camel_case_and_underscore_parameters_deprecated_in_6_x_have_been_removed) and underscore parameters deprecated in 6.x have been removed
 * The parameter [fields](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_the_parameter_literal_fields_literal_deprecated_in_6_x_has_been_removed_from_bulk_request) deprecated in 6.x has been removed from Bulk requestedit and Update request.
 * The [_parent](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html) field has been removed in favour of the join field.
+* hits.total is now an object in the search responseedit [hits.total](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_literal_hits_total_literal_is_now_an_object_in_the_search_response) 
 
 ### Bugfixes
 * Always set the Guzzle `base_uri` to support connecting to multiple ES hosts. [#1618](https://github.com/ruflin/Elastica/pull/1618)

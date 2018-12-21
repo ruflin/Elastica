@@ -10,6 +10,10 @@ processors: 1
 #script.allowed_types: inline, stored
 #script.allowed_contexts: search, update, aggs
 
+node.master: true
+node.data: true
+node.ingest: true
+node.ml: false
 
 # minimum_master_nodes need to be explicitly set when bound on a public IP
 # set to 1 to allow single node clusters

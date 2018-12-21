@@ -52,7 +52,7 @@ class NullTransportTest extends BaseTest
         $this->assertContains('_shards', $responseData);
         $this->assertContains('hits', $responseData);
         $this->assertContains('total', $responseData['hits']);
-        $this->assertEquals(0, $responseData['hits']['total']);
+        $this->assertEquals(0, $responseData['hits']['total']['value']);
         $this->assertContains('params', $responseData);
 
         $took = $response->getEngineTime();
