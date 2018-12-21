@@ -32,7 +32,5 @@ ENV PATH=/root/composer/vendor/bin:$PATH
 
 COPY composer.json /root/composer/
 
-RUN composer global require --no-update friendsofphp/php-cs-fixer:^2.0
-
 # Install development tools, prefer source removed as automatic fallback now
 RUN composer global install

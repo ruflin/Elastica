@@ -61,7 +61,7 @@ tests:
 	make start
 	mkdir -p build
 
-	docker run -e "ES_HOST=elasticsearch" --network=elastica_esnet elastica_elastica  make phpunit
+	docker run -e "ES_HOST=elasticsearch" --network=elastica_esnet elastica_elastica make phpunit
 	docker cp elastica:/elastica/build/coverage/ $(shell pwd)/build/coverage
 
 # Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
@@ -83,6 +83,11 @@ lint:
 
 .PHONY: check-style
 check-style:
+	docker build -t ruflin/elastica-dev-base -f env/elastica/${TARGET} env/elastica/
+	docker build -t ruflin/elastica .
+	make start
+	mkdir -p build
+
 	${RUN_ENV} php-cs-fixer fix --allow-risky=yes --dry-run
 
 .PHONY: loc
