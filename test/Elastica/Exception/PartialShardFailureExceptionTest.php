@@ -24,7 +24,7 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
                         'number_of_shards' => 5,
                         'number_of_replicas' => 0,
                         ],
-                    ]
+                    ],
            ], true);
 
         $type = $index->getType('_doc');

@@ -406,7 +406,6 @@ class Client
                 ]
             );
             $options += $docOptions;
-
         } else {
             $requestData = $data;
         }
@@ -712,23 +711,6 @@ class Client
         $this->_logger->debug('Elastica Request', [
             'message' => $context,
         ]);
-    }
-
-    /**
-     * Optimizes all search indices.
-     *
-     * @param array $args OPTIONAL Optional arguments
-     *
-     * @return \Elastica\Response Response object
-     *
-     * @deprecated Replaced by forcemergeAll
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
-     */
-    public function optimizeAll($args = [])
-    {
-        \trigger_error('Deprecated: Elastica\Client::optimizeAll() is deprecated and will be removed in further Elastica releases. Use Elastica\Client::forcemergeAll() instead.', E_USER_DEPRECATED);
-
-        return $this->forcemergeAll($args);
     }
 
     /**

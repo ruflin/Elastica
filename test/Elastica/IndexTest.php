@@ -726,7 +726,6 @@ class IndexTest extends BaseTest
         $stats = $index->getStats()->getData();
         $this->assertEquals(1, $stats['_all']['primaries']['docs']['count']);
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
-
     }
 
     /**

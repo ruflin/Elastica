@@ -199,7 +199,7 @@ class MultiMatchTest extends BaseTest
                         ],
                     ],
                 ],
-            ]
+            ],
         ], true);
 
         $type = $index->getType('_doc');

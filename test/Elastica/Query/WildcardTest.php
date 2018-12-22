@@ -60,7 +60,7 @@ class WildcardTest extends BaseTest
                         ],
                     ],
                 ],
-            ]
+            ],
         ];
 
         $index->create($indexParams, true);
