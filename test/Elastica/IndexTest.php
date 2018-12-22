@@ -701,7 +701,7 @@ class IndexTest extends BaseTest
      */
     public function testForcemerge()
     {
-        $index = $this->_createIndex();
+        $index = $this->_createIndex('testforcemerge_indextest', false, 3);
 
         $type = new Type($index, '_doc');
 
@@ -712,18 +712,21 @@ class IndexTest extends BaseTest
         $index->refresh();
 
         $stats = $index->getStats()->getData();
+        $this->assertEquals(2, $stats['_all']['primaries']['docs']['count']);
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
 
         $type->deleteById(1);
         $index->refresh();
 
         $stats = $index->getStats()->getData();
-        $this->assertEquals(1, $stats['_all']['primaries']['docs']['deleted']);
+        $this->assertEquals(1, $stats['_all']['primaries']['docs']['count']);
 
         $index->forcemerge(['max_num_segments' => 1]);
 
         $stats = $index->getStats()->getData();
+        $this->assertEquals(1, $stats['_all']['primaries']['docs']['count']);
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
+
     }
 
     /**
