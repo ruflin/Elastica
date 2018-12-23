@@ -82,4 +82,44 @@ class DisMaxTest extends BaseTest
 
         $this->assertEquals(3, $resultSet->count());
     }
+
+    /**
+     * @group functional
+     */
+    public function testQueryArray()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('_doc');
+
+        $type->addDocuments([
+            new Document(1, ['name' => 'Basel-Stadt']),
+            new Document(2, ['name' => 'New York']),
+            new Document(3, ['name' => 'Baden']),
+            new Document(4, ['name' => 'Baden Baden']),
+        ]);
+
+        $index->refresh();
+
+        $queryString1 = ['query_string' => [
+              'query' => 'Bade*'
+            ]
+        ];
+
+        $queryString2 = ['query_string' => [
+            'query' => 'Base*'
+        ]
+        ];
+
+        $boost = 1.2;
+        $tieBreaker = 2;
+
+        $query = new DisMax();
+        $query->setBoost($boost);
+        $query->setTieBreaker($tieBreaker);
+        $query->addQuery($queryString1);
+        $query->addQuery($queryString2);
+        $resultSet = $type->search($query);
+
+        $this->assertEquals(3, $resultSet->count());
+    }
 }
