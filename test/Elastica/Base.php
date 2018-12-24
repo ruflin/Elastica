@@ -1,13 +1,16 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Client;
 use Elastica\Connection;
 use Elastica\Index;
 use Elasticsearch\Endpoints\Ingest\Pipeline\Put;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Util\Test as TestUtil;
 use Psr\Log\LoggerInterface;
 
-class Base extends \PHPUnit\Framework\TestCase
+class Base extends TestCase
 {
     protected static function hideDeprecated()
     {
@@ -195,7 +198,7 @@ class Base extends \PHPUnit\Framework\TestCase
 
             $allocated = true;
             foreach ($indexState['shards'] as $shard) {
-                if ($shard[0]['state'] != 'STARTED') {
+                if ('STARTED' !== $shard[0]['state']) {
                     $allocated = false;
                 }
             }
@@ -223,21 +226,21 @@ class Base extends \PHPUnit\Framework\TestCase
 
     protected function _isUnitGroup()
     {
-        $groups = \PHPUnit\Util\Test::getGroups(get_class($this), $this->getName(false));
+        $groups = TestUtil::getGroups(get_class($this), $this->getName(false));
 
         return in_array('unit', $groups);
     }
 
     protected function _isFunctionalGroup()
     {
-        $groups = \PHPUnit\Util\Test::getGroups(get_class($this), $this->getName(false));
+        $groups = TestUtil::getGroups(get_class($this), $this->getName(false));
 
         return in_array('functional', $groups);
     }
 
     protected function _isBenchmarkGroup()
     {
-        $groups = \PHPUnit\Util\Test::getGroups(get_class($this), $this->getName(false));
+        $groups = TestUtil::getGroups(get_class($this), $this->getName(false));
 
         return in_array('benchmark', $groups);
     }

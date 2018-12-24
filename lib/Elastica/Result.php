@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 /**
@@ -264,6 +265,6 @@ class Result
     {
         $source = $this->getData();
 
-        return array_key_exists($key, $source) && $source[$key] !== null;
+        return array_key_exists($key, $source) && null !== $source[$key];
     }
 }

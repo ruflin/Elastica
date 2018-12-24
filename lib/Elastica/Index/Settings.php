@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Index;
 
 use Elastica\Exception\NotFoundException;
@@ -15,8 +16,8 @@ use Elastica\Request;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
  */
 class Settings
 {
@@ -67,7 +68,7 @@ class Settings
      *
      * @return array|string|null Settings data
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
      */
     public function get($setting = '')
     {
@@ -87,23 +88,22 @@ class Settings
 
         if (isset($settings[$setting])) {
             return $settings[$setting];
-        } else {
-            if (strpos($setting, '.') !== false) {
-                // translate old dot-notation settings to nested arrays
-                $keys = explode('.', $setting);
-                foreach ($keys as $key) {
-                    if (isset($settings[$key])) {
-                        $settings = $settings[$key];
-                    } else {
-                        return;
-                    }
+        }
+        if (false !== strpos($setting, '.')) {
+            // translate old dot-notation settings to nested arrays
+            $keys = explode('.', $setting);
+            foreach ($keys as $key) {
+                if (isset($settings[$key])) {
+                    $settings = $settings[$key];
+                } else {
+                    return;
                 }
-
-                return $settings;
             }
 
-            return;
+            return $settings;
         }
+
+        return;
     }
 
     /**
@@ -239,7 +239,7 @@ class Settings
         try {
             return $this->getBool('blocks.metadata');
         } catch (ResponseException $e) {
-            if ($e->getResponse()->getFullError()['type'] === 'cluster_block_exception') {
+            if ('cluster_block_exception' === $e->getResponse()->getFullError()['type']) {
                 return true;
             }
 
@@ -302,7 +302,7 @@ class Settings
      *
      * @return \Elastica\Response
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
     public function setMergePolicy($key, $value)
     {
@@ -320,7 +320,7 @@ class Settings
      *
      * @return string Refresh interval
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules-merge.html
      */
     public function getMergePolicy($key)
     {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 use Elastica\Script\AbstractScript;
@@ -9,7 +10,7 @@ use Elastica\Script\ScriptFields;
  *
  * @author Guillaume Affringue <wamania@yahoo.fr>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-inner-hits.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-inner-hits.html
  */
 class InnerHits extends AbstractQuery
 {

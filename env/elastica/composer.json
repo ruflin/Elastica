@@ -14,7 +14,6 @@
     "require": {
         "php": "^7.0",
         "phpdocumentor/phpdocumentor": "^2.9",
-        "fabpot/php-cs-fixer": "1.11.*",
         "mayflower/php-codebrowser": "~1.1",
         "pdepend/pdepend": "^2.5",
         "phploc/phploc": "^4.0",

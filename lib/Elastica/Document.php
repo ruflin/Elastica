@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Bulk\Action;
@@ -198,7 +199,7 @@ class Document extends AbstractUpdateAction
      * @param float  $latitude  Latitude value
      * @param float  $longitude Longitude value
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html
      *
      * @return $this
      */

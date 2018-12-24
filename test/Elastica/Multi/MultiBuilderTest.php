@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Multi;
 
 use Elastica\Multi\MultiBuilder;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Aggregation;
 
 use Elastica\Script\AbstractScript;
@@ -7,7 +8,7 @@ use Elastica\Script\ScriptFields;
 /**
  * Class TopHits.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html
  */
 class TopHits extends AbstractAggregation
 {

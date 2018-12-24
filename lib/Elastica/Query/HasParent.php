@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 use Elastica\Query as BaseQuery;
@@ -6,7 +7,7 @@ use Elastica\Query as BaseQuery;
 /**
  * Returns child documents having parent docs matching the query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-has-parent-query.html
  */
 class HasParent extends AbstractQuery
 {

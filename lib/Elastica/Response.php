@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Exception\JSONParseException;
@@ -212,7 +213,7 @@ class Response
      */
     public function getData()
     {
-        if ($this->_response == null) {
+        if (null == $this->_response) {
             $response = $this->_responseString;
 
             try {
@@ -242,7 +243,7 @@ class Response
     /**
      * Gets the transfer information.
      *
-     * @return array Information about the curl request.
+     * @return array information about the curl request
      */
     public function getTransferInfo()
     {
@@ -253,7 +254,7 @@ class Response
      * Sets the transfer info of the curl request. This function is called
      * from the \Elastica\Client::_callService .
      *
-     * @param array $transferInfo The curl transfer information.
+     * @param array $transferInfo the curl transfer information
      *
      * @return $this
      */

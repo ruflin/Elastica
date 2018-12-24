@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 /**
@@ -6,7 +7,7 @@ namespace Elastica\Query;
  *
  * @author Balazs Nadasdi <yitsushi@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-boosting-query.html
  */
 class Boosting extends AbstractQuery
 {

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -11,10 +12,11 @@ class SpanOrTest extends BaseTest
 {
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testConstructWrongTypeInvalid()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $term1 = new Term(['name' => 'marek']);
         $term2 = new Term(['name' => 'nicolas']);
         $spanOrQuery = new SpanOr([$term1, $term2]);
@@ -47,7 +49,6 @@ class SpanOrTest extends BaseTest
                             'name' => 'nicolas',
                         ],
                     ],
-
                 ],
             ],
         ];

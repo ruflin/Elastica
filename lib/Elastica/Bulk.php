@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Bulk\Action;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -61,7 +62,7 @@ class BoolQueryTest extends BaseTest
     /**
      * Test to resolve the following issue.
      *
-     * @link https://groups.google.com/forum/?fromgroups#!topic/elastica-php-client/zK_W_hClfvU
+     * @see https://groups.google.com/forum/?fromgroups#!topic/elastica-php-client/zK_W_hClfvU
      *
      * @group unit
      */

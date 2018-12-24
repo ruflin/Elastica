@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Client;
@@ -29,11 +30,12 @@ class IndexTemplateTest extends BaseTest
     }
 
     /**
-     * @expectedException \Elastica\Exception\InvalidException
      * @group unit
      */
     public function testIncorrectInstantiate()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $client = $this->_getClient();
         new IndexTemplate($client, null);
     }

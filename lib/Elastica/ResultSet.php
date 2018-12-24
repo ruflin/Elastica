@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
@@ -282,11 +283,11 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Whether a offset exists.
      *
-     * @link http://php.net/manual/en/arrayaccess.offsetexists.php
+     * @see http://php.net/manual/en/arrayaccess.offsetexists.php
      *
      * @param int $offset
      *
-     * @return bool true on success or false on failure.
+     * @return bool true on success or false on failure
      */
     public function offsetExists($offset)
     {
@@ -296,7 +297,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Offset to retrieve.
      *
-     * @link http://php.net/manual/en/arrayaccess.offsetget.php
+     * @see http://php.net/manual/en/arrayaccess.offsetget.php
      *
      * @param int $offset
      *
@@ -316,7 +317,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Offset to set.
      *
-     * @link http://php.net/manual/en/arrayaccess.offsetset.php
+     * @see http://php.net/manual/en/arrayaccess.offsetset.php
      *
      * @param int    $offset
      * @param Result $value
@@ -339,7 +340,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     /**
      * Offset to unset.
      *
-     * @link http://php.net/manual/en/arrayaccess.offsetunset.php
+     * @see http://php.net/manual/en/arrayaccess.offsetunset.php
      *
      * @param int $offset
      */

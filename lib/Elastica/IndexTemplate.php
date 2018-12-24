@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
@@ -8,7 +9,7 @@ use Elastica\Exception\InvalidException;
  *
  * @author Dmitry Balabka <dmitry.balabka@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html
  */
 class IndexTemplate
 {
@@ -59,7 +60,7 @@ class IndexTemplate
     /**
      * Creates a new index template with the given arguments.
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html
      *
      * @param array $args OPTIONAL Arguments to use
      *
@@ -79,7 +80,7 @@ class IndexTemplate
     {
         $response = $this->request(Request::HEAD);
 
-        return $response->getStatus() === 200;
+        return 200 === $response->getStatus();
     }
 
     /**

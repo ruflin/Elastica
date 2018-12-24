@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Aggregation;
 
 use Elastica\Query\AbstractQuery;
@@ -6,7 +7,7 @@ use Elastica\Query\AbstractQuery;
 /**
  * Class SignificantTerms.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html
  */
 class SignificantTerms extends AbstractTermsAggregation
 {

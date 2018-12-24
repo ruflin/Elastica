@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 /**
@@ -7,7 +8,7 @@ namespace Elastica\Query;
  * @author F21
  * @author WONG Wing Lun <luiges90@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
  */
 class Match extends AbstractQuery
 {
@@ -25,7 +26,7 @@ class Match extends AbstractQuery
      */
     public function __construct($field = null, $values = null)
     {
-        if ($field !== null && $values !== null) {
+        if (null !== $field && null !== $values) {
             $this->setParam($field, $values);
         }
     }
@@ -125,7 +126,7 @@ class Match extends AbstractQuery
      *
      * @return $this
      *
-     * @link Possible values for minimum_should_match https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
+     * @see Possible values for minimum_should_match https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
     public function setFieldMinimumShouldMatch($field, $minimumShouldMatch)
     {

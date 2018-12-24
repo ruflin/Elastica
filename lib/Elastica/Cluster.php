@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Cluster\Health;
@@ -11,7 +12,7 @@ use Elasticsearch\Endpoints\Cluster\State;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html
  */
 class Cluster
 {
@@ -81,7 +82,7 @@ class Cluster
      *
      * @return array State array
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-state.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-state.html
      */
     public function getState()
     {
@@ -134,7 +135,7 @@ class Cluster
     /**
      * Returns the cluster information (not implemented yet).
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
      *
      * @param array $args Additional arguments
      *
@@ -148,7 +149,7 @@ class Cluster
     /**
      * Return Cluster health.
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
      *
      * @return \Elastica\Cluster\Health
      */

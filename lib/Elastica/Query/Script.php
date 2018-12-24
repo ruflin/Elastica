@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 use Elastica;
@@ -8,7 +9,7 @@ use Elastica;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-script-query.html
  */
 class Script extends AbstractQuery
 {

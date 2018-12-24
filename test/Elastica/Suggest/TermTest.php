@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Suggest;
 
 use Elastica\Document;

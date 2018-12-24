@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 use Elastica\Exception\InvalidException;
@@ -9,7 +10,7 @@ use Elastica\Exception\InvalidException;
  * @author Nicolas Ruflin <spam@ruflin.com>
  * @author Roberto Nygaard <roberto@nygaard.es>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html
  */
 class Terms extends AbstractQuery
 {
@@ -42,7 +43,7 @@ class Terms extends AbstractQuery
      * Sets key and terms for the query.
      *
      * @param string $key   Terms key
-     * @param array  $terms Terms for the query.
+     * @param array  $terms terms for the query
      *
      * @return $this
      */
@@ -58,7 +59,7 @@ class Terms extends AbstractQuery
      * Sets key and terms lookup for the query.
      *
      * @param string $key         Terms key
-     * @param array  $termsLookup Terms lookup for the query.
+     * @param array  $termsLookup terms lookup for the query
      *
      * @return $this
      */

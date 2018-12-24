@@ -1,10 +1,11 @@
 <?php
+
 namespace Elastica\Suggest;
 
 /**
  * Class Term.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-term.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-term.html
  */
 class Term extends AbstractSuggest
 {
@@ -72,7 +73,7 @@ class Term extends AbstractSuggest
     /**
      * The number of minimum prefix characters that must match in order to be a suggestion candidate.
      *
-     * @param int $length Defaults to 1.
+     * @param int $length defaults to 1
      *
      * @return $this
      */
@@ -84,7 +85,7 @@ class Term extends AbstractSuggest
     /**
      * The minimum length a suggest text term must have in order to be included.
      *
-     * @param int $length Defaults to 4.
+     * @param int $length defaults to 4
      *
      * @return $this
      */
@@ -94,7 +95,7 @@ class Term extends AbstractSuggest
     }
 
     /**
-     * @param int $max Defaults to 5.
+     * @param int $max defaults to 5
      *
      * @return $this
      */

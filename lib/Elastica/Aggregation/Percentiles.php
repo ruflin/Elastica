@@ -1,10 +1,11 @@
 <?php
+
 namespace Elastica\Aggregation;
 
 /**
  * Class Percentiles.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentile-aggregation.html
  */
 class Percentiles extends AbstractSimpleAggregation
 {

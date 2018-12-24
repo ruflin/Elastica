@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Param;
@@ -83,10 +84,11 @@ class ParamTest extends BaseTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testGetParamInvalid()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $param = new Param();
 
         $param->getParam('notest');

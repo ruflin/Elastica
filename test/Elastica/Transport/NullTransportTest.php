@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Transport;
 
 use Elastica\Connection;
@@ -43,9 +44,9 @@ class NullTransportTest extends BaseTest
         $response = $resultSet->getResponse();
         $this->assertNotNull($response);
 
-         // Validate most of the expected fields in the response data.  Consumers of the response
-         // object have a reasonable expectation of finding "hits", "took", etc
-         $responseData = $response->getData();
+        // Validate most of the expected fields in the response data.  Consumers of the response
+        // object have a reasonable expectation of finding "hits", "took", etc
+        $responseData = $response->getData();
         $this->assertContains('took', $responseData);
         $this->assertEquals(0, $responseData['took']);
         $this->assertContains('_shards', $responseData);

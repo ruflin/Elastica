@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 /**
@@ -6,7 +7,7 @@ namespace Elastica\Query;
  *
  * @author Aurélien Le Grand <gnitg@yahoo.fr>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
  */
 class Regexp extends AbstractQuery
 {

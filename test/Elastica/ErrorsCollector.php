@@ -1,5 +1,8 @@
 <?php
+
 namespace Elastica\Test;
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * Errors collector for testing.
@@ -11,11 +14,11 @@ class ErrorsCollector
     private $errors = [];
 
     /**
-     * @var \PHPUnit\Framework\TestCase
+     * @var TestCase
      */
     private $testCase;
 
-    public function __construct(\PHPUnit\Framework\TestCase $testCase = null)
+    public function __construct(TestCase $testCase = null)
     {
         $this->testCase = $testCase;
     }

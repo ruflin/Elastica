@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 /**
@@ -6,7 +7,7 @@ namespace Elastica\Query;
  *
  * @author Oleg Cherniy <oleg.cherniy@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html
  */
 class Exists extends AbstractQuery
 {

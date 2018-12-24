@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\BulkAction;
 
 use Elastica\Bulk\Action\UpdateDocument;

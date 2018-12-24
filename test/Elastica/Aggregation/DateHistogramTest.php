@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\DateHistogram;
@@ -42,7 +43,7 @@ class DateHistogramTest extends BaseAggregationTest
         $docCount = 0;
         $nonDocCount = 0;
         foreach ($results['buckets'] as $bucket) {
-            if ($bucket['doc_count'] == 1) {
+            if (1 == $bucket['doc_count']) {
                 ++$docCount;
             } else {
                 ++$nonDocCount;

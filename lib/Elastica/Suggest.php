@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Exception\NotImplementedException;
@@ -7,7 +8,7 @@ use Elastica\Suggest\AbstractSuggest;
 /**
  * Class Suggest.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
  */
 class Suggest extends Param
 {

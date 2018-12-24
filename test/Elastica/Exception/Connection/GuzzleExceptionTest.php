@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Exception\Connection;
 
 use Elastica\Test\Exception\AbstractExceptionTest;

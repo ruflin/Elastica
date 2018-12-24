@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\QueryBuilder\DSL;
 
 use Elastica\Exception\NotImplementedException;

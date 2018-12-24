@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Exception\ResponseException;
@@ -10,7 +11,7 @@ use Elasticsearch\Endpoints\Indices\Stats;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-status.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-status.html
  */
 class Status
 {
@@ -113,7 +114,7 @@ class Status
             $response = $this->_client->requestEndpoint($endpoint);
         } catch (ResponseException $e) {
             // 404 means the index alias doesn't exist which means no indexes have it.
-            if ($e->getResponse()->getStatus() === 404) {
+            if (404 === $e->getResponse()->getStatus()) {
                 return [];
             }
             // If we don't have a 404 then this is still unexpected so rethrow the exception.

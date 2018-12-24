@@ -1,10 +1,11 @@
 <?php
+
 namespace Elastica\Aggregation;
 
 /**
  * Class DateHistogram.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html
  */
 class DateHistogram extends Histogram
 {
@@ -47,7 +48,7 @@ class DateHistogram extends Histogram
     /**
      * Set the format for returned bucket key_as_string values.
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern
      *
      * @param string $format see link for formatting options
      *
@@ -61,7 +62,7 @@ class DateHistogram extends Histogram
     /**
      * Set extended bounds option.
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html#search-aggregations-bucket-histogram-aggregation-extended-bounds
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html#search-aggregations-bucket-histogram-aggregation-extended-bounds
      *
      * @param string $min see link for formatting options
      * @param string $max see link for formatting options

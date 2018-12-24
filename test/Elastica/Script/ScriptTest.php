@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Script\Script;
@@ -7,6 +8,7 @@ use Elastica\Test\Base as BaseTest;
 class ScriptTest extends BaseTest
 {
     const SCRIPT = "_score * doc['my_numeric_field'].value";
+
     /**
      * @group unit
      */
@@ -110,10 +112,11 @@ class ScriptTest extends BaseTest
     /**
      * @group unit
      * @dataProvider dataProviderCreateInvalid
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testCreateInvalid($data)
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         Script::create($data);
     }
 

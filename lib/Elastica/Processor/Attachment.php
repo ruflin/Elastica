@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Processor;
 
 class Attachment extends AbstractProcessor

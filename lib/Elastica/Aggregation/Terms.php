@@ -1,10 +1,11 @@
 <?php
+
 namespace Elastica\Aggregation;
 
 /**
  * Class Terms.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html
  */
 class Terms extends AbstractTermsAggregation
 {
@@ -24,7 +25,7 @@ class Terms extends AbstractTermsAggregation
     /**
      * Sets a list of bucket sort orders.
      *
-     * @param array $orders A list of [<aggregationField>|"_count"|"_term" => <direction>] definitions.
+     * @param array $orders a list of [<aggregationField>|"_count"|"_term" => <direction>] definitions
      *
      * @return $this
      */

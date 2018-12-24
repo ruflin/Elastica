@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Cluster\Health;
 
 /**
@@ -6,23 +7,23 @@ namespace Elastica\Cluster\Health;
  *
  * @author Ray Ward <ray.ward@bigcommerce.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
  */
 class Shard
 {
     /**
-     * @var int The shard index/number.
+     * @var int the shard index/number
      */
     protected $_shardNumber;
 
     /**
-     * @var array The shard health data.
+     * @var array the shard health data
      */
     protected $_data;
 
     /**
-     * @param int   $shardNumber The shard index/number.
-     * @param array $data        The shard health data.
+     * @param int   $shardNumber the shard index/number
+     * @param array $data        the shard health data
      */
     public function __construct($shardNumber, $data)
     {
@@ -43,7 +44,7 @@ class Shard
     /**
      * Gets the status of this shard.
      *
-     * @return string green, yellow or red.
+     * @return string green, yellow or red
      */
     public function getStatus()
     {
@@ -67,7 +68,7 @@ class Shard
      */
     public function isActive()
     {
-        return $this->_data['active_shards'] == 1;
+        return 1 == $this->_data['active_shards'];
     }
 
     /**
@@ -77,7 +78,7 @@ class Shard
      */
     public function isRelocating()
     {
-        return $this->_data['relocating_shards'] == 1;
+        return 1 == $this->_data['relocating_shards'];
     }
 
     /**
@@ -87,7 +88,7 @@ class Shard
      */
     public function isInitialized()
     {
-        return $this->_data['initializing_shards'] == 1;
+        return 1 == $this->_data['initializing_shards'];
     }
 
     /**
@@ -97,6 +98,6 @@ class Shard
      */
     public function isUnassigned()
     {
-        return $this->_data['unassigned_shards'] == 1;
+        return 1 == $this->_data['unassigned_shards'];
     }
 }

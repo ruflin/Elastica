@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
@@ -134,10 +135,11 @@ class TermsTest extends BaseTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testInvalidParams()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $query = new Terms();
 
         $query->toArray();

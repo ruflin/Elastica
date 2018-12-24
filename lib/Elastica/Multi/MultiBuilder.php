@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Multi;
 
 use Elastica\Response;

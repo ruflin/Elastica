@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\DateHistogram;
@@ -75,7 +76,7 @@ class DerivativeTest extends BaseAggregationTest
 
         $dateHistogramAggResult = $index->search($query)->getAggregation('histogram_agg')['buckets'];
 
-        $this->assertFalse(array_key_exists('derivative_agg', $dateHistogramAggResult[0]));
+        $this->assertArrayNotHasKey('derivative_agg', $dateHistogramAggResult[0]);
         $this->assertEquals(1, $dateHistogramAggResult[1]['derivative_agg']['value']);
         $this->assertEquals(0, $dateHistogramAggResult[2]['derivative_agg']['value']);
         $this->assertEquals(2, $dateHistogramAggResult[3]['derivative_agg']['value']);

@@ -20,6 +20,7 @@ env:
     - TARGET="71"
     - TARGET="72"
     - TARGET="73"
+    - TARGET="Lint"
 
 before_install:
   # check running "docker engine" and "docker-compose" version on travis
@@ -41,7 +42,8 @@ before_script:
   - sudo sysctl -w vm.max_map_count=262144
 
 script:
-  - make tests TARGET=$TARGET
+  - if [ "$TARGET" != "Lint" ] ; then make tests TARGET=$TARGET ; fi
+  - if [ "$TARGET" == "Lint" ] ; then make check-style ; fi
 
 after_script:
   - cat /var/log/elasticsearch/*.log

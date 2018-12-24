@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Document;
@@ -79,10 +80,11 @@ class IndexTest extends BaseTest
 
     /**
      * @group functional
-     * @expectedException \Elastica\Exception\ResponseException
      */
     public function testAddRemoveAlias()
     {
+        $this->expectException(\Elastica\Exception\ResponseException::class);
+
         $client = $this->_getClient();
 
         $indexName1 = 'test1';
@@ -614,12 +616,12 @@ class IndexTest extends BaseTest
     }
 
     /**
-     * @expectedException \Elastica\Exception\InvalidException
-     *
      * @group unit
      */
     public function testCreateWithInvalidOption()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $client = $this->_getClient();
         $indexName = 'test';
         $index = $client->getIndex($indexName);
@@ -785,10 +787,11 @@ class IndexTest extends BaseTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testThrowExceptionIfNotScalar()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $client = $this->_getClient();
         $client->getIndex(new \stdClass());
     }

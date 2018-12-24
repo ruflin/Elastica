@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Sum;
@@ -76,10 +77,11 @@ class SumBucketTest extends BaseAggregationTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testToArrayInvalidBucketsPath()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $serialDiffAgg = new SumBucket('sum_bucket');
         $serialDiffAgg->toArray();
     }

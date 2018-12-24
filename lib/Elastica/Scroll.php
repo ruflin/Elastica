@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 /**
@@ -6,7 +7,7 @@ namespace Elastica;
  *
  * @author Manuel Andreo Garcia <andreo.garcia@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html
  */
 class Scroll implements \Iterator
 {
@@ -56,7 +57,7 @@ class Scroll implements \Iterator
     /**
      * Returns current result set.
      *
-     * @link http://php.net/manual/en/iterator.current.php
+     * @see http://php.net/manual/en/iterator.current.php
      *
      * @return ResultSet
      */
@@ -68,7 +69,7 @@ class Scroll implements \Iterator
     /**
      * Next scroll search.
      *
-     * @link http://php.net/manual/en/iterator.next.php
+     * @see http://php.net/manual/en/iterator.next.php
      */
     public function next()
     {
@@ -90,7 +91,7 @@ class Scroll implements \Iterator
     /**
      * Returns scroll id.
      *
-     * @link http://php.net/manual/en/iterator.key.php
+     * @see http://php.net/manual/en/iterator.key.php
      *
      * @return string
      */
@@ -102,19 +103,19 @@ class Scroll implements \Iterator
     /**
      * Returns true if current result set contains at least one hit.
      *
-     * @link http://php.net/manual/en/iterator.valid.php
+     * @see http://php.net/manual/en/iterator.valid.php
      *
      * @return bool
      */
     public function valid()
     {
-        return $this->_nextScrollId !== null;
+        return null !== $this->_nextScrollId;
     }
 
     /**
      * Initial scroll search.
      *
-     * @link http://php.net/manual/en/iterator.rewind.php
+     * @see http://php.net/manual/en/iterator.rewind.php
      */
     public function rewind()
     {
@@ -157,7 +158,7 @@ class Scroll implements \Iterator
      */
     protected function _setScrollId(ResultSet $resultSet)
     {
-        if ($this->currentPage === 0) {
+        if (0 === $this->currentPage) {
             $this->totalPages = $resultSet->count() > 0 ? ceil($resultSet->getTotalHits() / $resultSet->count()) : 0;
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Cluster;
 
 use Elastica\Cluster\Health;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 /**
@@ -7,7 +8,7 @@ namespace Elastica\Query;
  * @author Jacques Moati <jacques@moati.net>
  * @author Tobias Schultze <http://tobion.de>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query-phrase-prefix.html
  */
 class MatchPhrasePrefix extends MatchPhrase
 {

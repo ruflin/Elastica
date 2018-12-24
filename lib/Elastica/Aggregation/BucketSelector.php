@@ -1,9 +1,11 @@
 <?php
+
 namespace Elastica\Aggregation;
 
 /**
  * Class BucketSelector.
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-selector-aggregation.html
+ *
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-pipeline-bucket-selector-aggregation.html
  */
 class BucketSelector extends AbstractSimpleAggregation
 {
@@ -16,11 +18,11 @@ class BucketSelector extends AbstractSimpleAggregation
     {
         parent::__construct($name);
 
-        if ($bucketsPath !== null) {
+        if (null !== $bucketsPath) {
             $this->setBucketsPath($bucketsPath);
         }
 
-        if ($script !== null) {
+        if (null !== $script) {
             $this->setScript($script);
         }
     }
@@ -49,4 +51,3 @@ class BucketSelector extends AbstractSimpleAggregation
         return $this->setParam('gap_policy', $gapPolicy);
     }
 }
-

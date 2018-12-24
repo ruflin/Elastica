@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Index;
 
 use Elastica\Index as BaseIndex;
@@ -8,7 +9,7 @@ use Elastica\Index as BaseIndex;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-stats.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-stats.html
  */
 class Stats
 {

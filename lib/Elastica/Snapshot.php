@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Exception\NotFoundException;
@@ -8,7 +9,7 @@ use Elasticsearch\Endpoints\Snapshot\Restore;
 /**
  * Class Snapshot.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html
  */
 class Snapshot
 {
@@ -59,7 +60,7 @@ class Snapshot
         try {
             $response = $this->request($name);
         } catch (ResponseException $e) {
-            if ($e->getResponse()->getStatus() == 404) {
+            if (404 == $e->getResponse()->getStatus()) {
                 throw new NotFoundException("Repository '".$name."' does not exist.");
             }
             throw $e;
@@ -110,7 +111,7 @@ class Snapshot
         try {
             $response = $this->request($repository.'/'.$name);
         } catch (ResponseException $e) {
-            if ($e->getResponse()->getStatus() == 404) {
+            if (404 == $e->getResponse()->getStatus()) {
                 throw new NotFoundException("Snapshot '".$name."' does not exist in repository '".$repository."'.");
             }
             throw $e;

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\SignificantTerms;
@@ -22,7 +23,7 @@ class SignificantTermsTest extends BaseAggregationTest
         $index->getType('_doc')->setMapping($mapping);
 
         $docs = [];
-        for ($i = 0;$i < 250;++$i) {
+        for ($i = 0; $i < 250; ++$i) {
             $docs[] = new Document($i, ['color' => $colors[$i % count($colors)], 'temperature' => $temperatures[$i % count($temperatures)]]);
         }
         $index->getType('_doc')->addDocuments($docs);

@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Bulk;
@@ -33,30 +34,33 @@ class ClientTest extends BaseTest
 
     /**
      * @group functional
-     * @expectedException Elastica\Exception\Connection\HttpException
      */
     public function testConnectionErrors()
     {
+        $this->expectException(\Elastica\Exception\Connection\HttpException::class);
+
         $client = $this->_getClient(['host' => 'foo.bar', 'port' => '9201']);
         $client->getVersion();
     }
 
     /**
      * @group functional
-     * @expectedException Elastica\Exception\Connection\HttpException
      */
     public function testClientBadHost()
     {
+        $this->expectException(\Elastica\Exception\Connection\HttpException::class);
+
         $client = $this->_getClient(['host' => 'localhost', 'port' => '9201']);
         $client->getVersion();
     }
 
     /**
      * @group functional
-     * @expectedException Elastica\Exception\Connection\HttpException
      */
     public function testClientBadHostWithtimeout()
     {
+        $this->expectException(\Elastica\Exception\Connection\HttpException::class);
+
         $client = $this->_getClient(['host' => 'foo.bar', 'timeout' => 10]);
         $client->getVersion();
     }
@@ -208,10 +212,11 @@ class ClientTest extends BaseTest
 
     /**
      * @group unit
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testAddDocumentsEmpty()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $client = $this->_getClient();
         $client->addDocuments([]);
     }
@@ -612,7 +617,7 @@ class ClientTest extends BaseTest
         $this->assertCount(2, $connections);
 
         // One connection has to be disabled
-        $this->assertTrue($connections[0]->isEnabled() == false || $connections[1]->isEnabled() == false);
+        $this->assertTrue(false == $connections[0]->isEnabled() || false == $connections[1]->isEnabled());
     }
 
     /**
@@ -640,7 +645,7 @@ class ClientTest extends BaseTest
         $this->assertCount(2, $connections);
 
         // One connection has to be disabled
-        $this->assertTrue($connections[0]->isEnabled() == false || $connections[1]->isEnabled() == false);
+        $this->assertTrue(false == $connections[0]->isEnabled() || false == $connections[1]->isEnabled());
     }
 
     /**
@@ -1329,11 +1334,12 @@ class ClientTest extends BaseTest
     }
 
     /**
-     * @expectedException \Elastica\Exception\Connection\HttpException
      * @group functional
      */
     public function testLoggerOnFailure()
     {
+        $this->expectException(\Elastica\Exception\Connection\HttpException::class);
+
         $logger = $this->createMock('Psr\\Log\\LoggerInterface');
         $client = $this->_getClient(['connections' => [
             ['host' => $this->_getHost(), 'port' => 9201],

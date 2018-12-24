@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 use Elastica\Document;
@@ -8,7 +9,7 @@ use Elastica\Document;
  *
  * @author Raul Martinez, Jr <juneym@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-mlt-query.html
  */
 class MoreLikeThis extends AbstractQuery
 {

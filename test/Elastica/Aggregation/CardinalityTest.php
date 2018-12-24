@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Cardinality;
@@ -48,13 +49,14 @@ class CardinalityTest extends BaseAggregationTest
 
     /**
      * @dataProvider invalidPrecisionThresholdProvider
-     * @expectedException \InvalidArgumentException
      * @group unit
      *
      * @param $threshold
      */
     public function testInvalidPrecisionThreshold($threshold)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $agg = new Cardinality('threshold');
         $agg->setPrecisionThreshold($threshold);
     }
@@ -112,13 +114,14 @@ class CardinalityTest extends BaseAggregationTest
 
     /**
      * @dataProvider invalidRehashProvider
-     * @expectedException \InvalidArgumentException
      * @group unit
      *
      * @param mixed $rehash
      */
     public function testInvalidRehash($rehash)
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $agg = new Cardinality('rehash');
         $agg->setRehash($rehash);
     }

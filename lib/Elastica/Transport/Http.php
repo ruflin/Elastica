@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Transport;
 
 use Elastica\Exception\Connection\HttpException;
@@ -125,7 +126,7 @@ class Http extends AbstractTransport
         $httpMethod = $request->getMethod();
 
         if (!empty($data) || '0' === $data) {
-            if ($this->hasParam('postWithRequestBody') && $this->getParam('postWithRequestBody') == true) {
+            if ($this->hasParam('postWithRequestBody') && true == $this->getParam('postWithRequestBody')) {
                 $httpMethod = Request::POST;
             }
 
@@ -154,7 +155,7 @@ class Http extends AbstractTransport
 
         curl_setopt($conn, CURLOPT_HTTPHEADER, $headers);
 
-        curl_setopt($conn, CURLOPT_NOBODY, $httpMethod == 'HEAD');
+        curl_setopt($conn, CURLOPT_NOBODY, 'HEAD' == $httpMethod);
 
         curl_setopt($conn, CURLOPT_CUSTOMREQUEST, $httpMethod);
 

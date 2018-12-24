@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Document;
@@ -331,10 +332,11 @@ class TypeTest extends BaseTest
 
     /**
      * @group functional
-     * @expectedException \Elastica\Exception\NotFoundException
      */
     public function testGetDocumentNotExist()
     {
+        $this->expectException(\Elastica\Exception\NotFoundException::class);
+
         $index = $this->_createIndex();
         $type = new Type($index, '_doc');
         $type->addDocument(new Document(1, ['name' => 'ruflin']));
@@ -347,10 +349,11 @@ class TypeTest extends BaseTest
 
     /**
      * @group functional
-     * @expectedException \Elastica\Exception\ResponseException
      */
     public function testGetDocumentNotExistingIndex()
     {
+        $this->expectException(\Elastica\Exception\ResponseException::class);
+
         $client = $this->_getClient();
         $index = new Index($client, 'index');
         $type = new Type($index, '_doc');
@@ -725,10 +728,11 @@ class TypeTest extends BaseTest
 
     /**
      * @group functional
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testUpdateDocumentWithoutId()
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $index = $this->_createIndex();
         $this->_waitForAllocation($index);
         $type = $index->getType('_doc');
@@ -868,10 +872,11 @@ class TypeTest extends BaseTest
 
     /**
      * @group functional
-     * @expectedException \Elastica\Exception\RuntimeException
      */
     public function testAddDocumentWithoutSerializer()
     {
+        $this->expectException(\Elastica\Exception\RuntimeException::class);
+
         $index = $this->_createIndex();
         $this->_waitForAllocation($index);
 

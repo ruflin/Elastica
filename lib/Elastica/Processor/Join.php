@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Processor;
 
 /**
@@ -6,7 +7,7 @@ namespace Elastica\Processor;
  *
  * @author   Federico Panini <fpanini@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/join-processor.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/join-processor.html
  */
 class Join extends AbstractProcessor
 {

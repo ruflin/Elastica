@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Aggregation;
 
 /**
@@ -61,7 +62,7 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
     /**
      * Sets the amount of terms to be returned.
      *
-     * @param int $size The amount of terms to be returned.
+     * @param int $size the amount of terms to be returned
      *
      * @return $this
      */
@@ -73,7 +74,7 @@ abstract class AbstractTermsAggregation extends AbstractSimpleAggregation
     /**
      * Sets how many terms the coordinating node will request from each shard.
      *
-     * @param int $shard_size The amount of terms to be returned.
+     * @param int $shard_size the amount of terms to be returned
      *
      * @return $this
      */

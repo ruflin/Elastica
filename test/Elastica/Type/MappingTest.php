@@ -1,11 +1,11 @@
 <?php
+
 namespace Elastica\Test\Type;
 
 use Elastica\Document;
 use Elastica\Query;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 use Elastica\Type\Mapping;
 
 class MappingTest extends BaseTest
@@ -242,7 +242,7 @@ class MappingTest extends BaseTest
      * Test setting a dynamic template and validate whether the right mapping is applied after adding a document which
      * should match the dynamic template.
      *
-     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic-templates.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic-templates.html
      */
     public function testDynamicTemplate()
     {

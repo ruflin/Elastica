@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Transport;
 
 use Elastica\Connection;
@@ -127,11 +128,11 @@ class Guzzle extends AbstractTransport
 
         $data = $request->getData();
         if (!empty($data) || '0' === $data) {
-            if ($req->getMethod() == Request::GET) {
+            if (Request::GET == $req->getMethod()) {
                 $req = $req->withMethod(Request::POST);
             }
 
-            if ($this->hasParam('postWithRequestBody') && $this->getParam('postWithRequestBody') == true) {
+            if ($this->hasParam('postWithRequestBody') && true == $this->getParam('postWithRequestBody')) {
                 $request->setMethod(Request::POST);
                 $req = $req->withMethod(Request::POST);
             }

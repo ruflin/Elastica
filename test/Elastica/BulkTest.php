@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test;
 
 use Elastica\Bulk;
@@ -290,10 +291,11 @@ class BulkTest extends BaseTest
     /**
      * @group unit
      * @dataProvider invalidRawDataProvider
-     * @expectedException \Elastica\Exception\InvalidException
      */
     public function testInvalidRawData($rawData, $failMessage)
     {
+        $this->expectException(\Elastica\Exception\InvalidException::class);
+
         $bulk = new Bulk($this->_getClient());
 
         $bulk->addRawData($rawData);
@@ -562,9 +564,11 @@ class BulkTest extends BaseTest
         $doc2 = $type->createDocument(2, ['name' => 'Beckenbauer']);
         $doc3 = $type->createDocument(3, ['name' => 'Baggio']);
         $doc4 = $type->createDocument(4, ['name' => 'Cruyff']);
-        $documents = array_map(function ($d) { $d->setDocAsUpsert(true);
+        $documents = array_map(function ($d) {
+            $d->setDocAsUpsert(true);
 
-return $d;}, [$doc1, $doc2, $doc3, $doc4]);
+            return $d;
+        }, [$doc1, $doc2, $doc3, $doc4]);
 
         //index some documents
         $bulk = new Bulk($client);
@@ -635,7 +639,7 @@ return $d;}, [$doc1, $doc2, $doc3, $doc4]);
         $actions = $bulk->getActions();
 
         $metadata = $actions[0]->getMetadata();
-        $this->assertEquals(5, $metadata[ '_retry_on_conflict' ]);
+        $this->assertEquals(5, $metadata['_retry_on_conflict']);
 
         $script = new Script('');
         $script->setRetryOnConflict(5);
@@ -646,7 +650,7 @@ return $d;}, [$doc1, $doc2, $doc3, $doc4]);
         $actions = $bulk->getActions();
 
         $metadata = $actions[0]->getMetadata();
-        $this->assertEquals(5, $metadata[ '_retry_on_conflict' ]);
+        $this->assertEquals(5, $metadata['_retry_on_conflict']);
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
+
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Query;
 use Elastica\Query\HasChild;
 use Elastica\Query\MatchAll;
 use Elastica\Search;

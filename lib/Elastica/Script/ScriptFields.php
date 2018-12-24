@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Script;
 
 use Elastica\Exception\InvalidException;
@@ -9,7 +10,7 @@ use Elastica\Param;
  *
  * @author Sebastien Lavoie <github@lavoie.sl>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
  */
 class ScriptFields extends Param
 {

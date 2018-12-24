@@ -1,10 +1,11 @@
 <?php
+
 namespace Elastica\Query;
 
 /**
  * ParentId query.
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-parent-id-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-parent-id-query.html
  */
 class ParentId extends AbstractQuery
 {

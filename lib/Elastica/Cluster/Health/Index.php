@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Cluster\Health;
 
 /**
@@ -6,23 +7,23 @@ namespace Elastica\Cluster\Health;
  *
  * @author Ray Ward <ray.ward@bigcommerce.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
  */
 class Index
 {
     /**
-     * @var string The name of the index.
+     * @var string the name of the index
      */
     protected $_name;
 
     /**
-     * @var array The index health data.
+     * @var array the index health data
      */
     protected $_data;
 
     /**
-     * @param string $name The name of the index.
-     * @param array  $data The index health data.
+     * @param string $name the name of the index
+     * @param array  $data the index health data
      */
     public function __construct($name, $data)
     {
@@ -43,7 +44,7 @@ class Index
     /**
      * Gets the status of the index.
      *
-     * @return string green, yellow or red.
+     * @return string green, yellow or red
      */
     public function getStatus()
     {

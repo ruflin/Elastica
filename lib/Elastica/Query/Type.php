@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Query;
 
 /**
@@ -6,7 +7,7 @@ namespace Elastica\Query;
  *
  * @author James Wilson <jwilson556@gmail.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-query.html
  */
 class Type extends AbstractQuery
 {

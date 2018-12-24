@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\Connection\Strategy;
 
 use Elastica\Connection;
@@ -33,10 +34,11 @@ class SimpleTest extends Base
 
     /**
      * @group functional
-     * @expectedException \Elastica\Exception\ConnectionException
      */
     public function testFailConnection()
     {
+        $this->expectException(\Elastica\Exception\ConnectionException::class);
+
         $config = ['host' => '255.255.255.0', 'timeout' => $this->_timeout];
         $client = $this->_getClient($config);
 

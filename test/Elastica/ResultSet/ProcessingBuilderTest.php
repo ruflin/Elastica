@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Test\ResultSet;
 
 use Elastica\Query;

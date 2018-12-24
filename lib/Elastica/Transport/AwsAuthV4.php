@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Transport;
 
 use Aws\Credentials\CredentialProvider;

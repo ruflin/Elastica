@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica;
 
 use Elastica\Query\AbstractQuery;

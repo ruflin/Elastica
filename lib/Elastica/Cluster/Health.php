@@ -1,4 +1,5 @@
 <?php
+
 namespace Elastica\Cluster;
 
 use Elastica\Client;
@@ -9,22 +10,22 @@ use Elastica\Cluster\Health\Index;
  *
  * @author Ray Ward <ray.ward@bigcommerce.com>
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
  */
 class Health
 {
     /**
-     * @var \Elastica\Client Client object.
+     * @var \Elastica\Client client object
      */
     protected $_client;
 
     /**
-     * @var array The cluster health data.
+     * @var array the cluster health data
      */
     protected $_data;
 
     /**
-     * @param \Elastica\Client $client The Elastica client.
+     * @param \Elastica\Client $client the Elastica client
      */
     public function __construct(Client $client)
     {
@@ -82,7 +83,7 @@ class Health
     /**
      * Gets the status of the cluster.
      *
-     * @return string green, yellow or red.
+     * @return string green, yellow or red
      */
     public function getStatus()
     {
