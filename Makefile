@@ -6,6 +6,7 @@ TARGET?=70
 # By default docker environment is used to run commands. To run without the predefined environment, set RUN_ENV=" " either as parameter or as environment variable
 ifndef RUN_ENV
 	RUN_ENV = docker run --workdir="/elastica" -v $(shell pwd):/elastica ruflin/elastica-dev-base
+	RUN_ENV_LINT = docker run --workdir="/elastica" -v $(shell pwd):/elastica ruflin/elastica-dev-base-linter
 endif
 
 .PHONY: clean
@@ -79,16 +80,13 @@ doc:
 # Uses the preconfigured standards in .php_cs
 .PHONY: lint
 lint:
-	${RUN_ENV} php-cs-fixer fix --allow-risky=yes
+	docker build -t ruflin/elastica-dev-base-linter -f env/elastica/Lint env/elastica/
+	${RUN_ENV_LINT} php-cs-fixer fix --allow-risky=yes
 
 .PHONY: check-style
 check-style:
-	docker build -t ruflin/elastica-dev-base -f env/elastica/${TARGET} env/elastica/
-	docker build -t ruflin/elastica .
-	make start
-	mkdir -p build
-
-	${RUN_ENV} php-cs-fixer fix --allow-risky=yes --dry-run
+	docker build -t ruflin/elastica-dev-base-linter -f env/elastica/Lint env/elastica/
+	${RUN_ENV_LINT} php-cs-fixer fix --allow-risky=yes --dry-run
 
 .PHONY: loc
 loc:

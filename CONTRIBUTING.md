@@ -31,20 +31,41 @@ To run all tests inside the docker environment, run the following command:
 make tests
 ```
 
-If you want to run just a specific test or a one specific file, run the following command by replacing your file with the existingpath:
+If you want to run just a specific test or a one specific file, run the following command by replacing your file with the existing path:
 
 ```
 make test TEST="test/lib/Elastica/Test/SearchTest.php"
 ```
 
 ## Check style of your code
-This command will call php-cs-fixer with the predefined settings for the elastica project. No local setup of the tools is needed as everything will happen directly in the container.
+This command will call php-cs-fixer (2.x) with the predefined settings for the elastica project.
+You need to execute it before open a Pull Request; Travis build will do check for style if they
+are not respected **build will fail**. 
+No local setup of the tools is needed as everything will happen directly in the container.
+
 ```
 make lint
 ```
 
+and
 
+```
+make check-style
+```
+will do a check executing php-cs-fixer in ```dry-run``` mode. It is usually executed during Travis build.
 
+  Exit codes
+  ----------
+
+  Exit code is built using following bit flags:
+
+  *  0 OK.
+  *  1 General error (or PHP minimal requirement not matched).
+  *  4 Some files have invalid syntax (only in dry-run mode).
+  *  8 Some files need fixing (only in dry-run mode).
+  * 16 Configuration error of the application.
+  * 32 Configuration error of a Fixer.
+  * 64 Exception raised within the application.
 
 Coding
 ------
