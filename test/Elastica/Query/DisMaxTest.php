@@ -101,13 +101,13 @@ class DisMaxTest extends BaseTest
         $index->refresh();
 
         $queryString1 = ['query_string' => [
-              'query' => 'Bade*'
-            ]
+              'query' => 'Bade*',
+            ],
         ];
 
         $queryString2 = ['query_string' => [
-            'query' => 'Base*'
-        ]
+            'query' => 'Base*',
+        ],
         ];
 
         $boost = 1.2;
