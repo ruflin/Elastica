@@ -10,7 +10,7 @@ use Elastica\Exception\InvalidException;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  */
-class Param implements ArrayableInterface
+class Param implements ArrayableInterface, \Countable
 {
     /**
      * Params.
@@ -183,5 +183,15 @@ class Param implements ArrayableInterface
     public function getParams()
     {
         return $this->_params;
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->_params);
     }
 }

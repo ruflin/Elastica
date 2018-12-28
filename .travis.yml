@@ -13,6 +13,7 @@ env:
   - TARGET="55"
   - TARGET="56"
   - TARGET="70"
+  - TARGET="72"
 
 before_install:
   # Docker-compose installation
