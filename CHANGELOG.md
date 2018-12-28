@@ -1290,3 +1290,5 @@ The changelog before version 2.0.0 was organised by date. All changes can be fou
 
 2018-12-17
 - In PHP 7.2 count() now raises a warning when an invalid parameter is passed. Only arrays and objects implementing the Countable interface should be passed. [#1378](https://github.com/ruflin/Elastica/pull/1378)
+2018-12-19
+- Added codecov configuration
