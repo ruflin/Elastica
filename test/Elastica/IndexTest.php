@@ -893,24 +893,51 @@ class IndexTest extends BaseTest
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
     }
 
+
+    public function analyzeDataProvider()
+    {
+        return [
+            'single-keyword' => [
+                'foo',
+                [[
+                    'token' => 'foo',
+                    'start_offset' => 0,
+                    'end_offset' => 3,
+                    'type' => '<ALPHANUM>',
+                    'position' => 0,
+                ]],
+            ],
+            'multi-keyword' => [
+                ['foo', 'bar'],
+                [
+                    [
+                        'token' => 'foo',
+                        'start_offset' => 0,
+                        'end_offset' => 3,
+                        'type' => '<ALPHANUM>',
+                        'position' => 0,
+                    ],                    [
+                        'token' => 'bar',
+                        'start_offset' => 4,
+                        'end_offset' => 7,
+                        'type' => '<ALPHANUM>',
+                        'position' => 101,
+                    ],
+                ],
+            ]
+        ];
+
+    }
+
     /**
      * @group functional
+     * @dataProvider analyzeDataProvider
      */
-    public function testAnalyze()
+    public function testAnalyze($text, $tokens)
     {
         $index = $this->_createIndex();
         $index->refresh();
-        $returnedTokens = $index->analyze('foo');
-
-        $tokens = [
-            [
-                'token' => 'foo',
-                'start_offset' => 0,
-                'end_offset' => 3,
-                'type' => '<ALPHANUM>',
-                'position' => 0,
-            ],
-        ];
+        $returnedTokens = $index->analyze($text);
 
         $this->assertEquals($tokens, $returnedTokens);
     }

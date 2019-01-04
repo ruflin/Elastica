@@ -563,12 +563,12 @@ class Index implements SearchableInterface
     }
 
     /**
-     * Analyzes a string.
+     * Analyzes a string, or a list of strings.
      *
      * Detailed arguments can be found here in the link
      *
-     * @param string $text String to be analyzed
-     * @param array  $args OPTIONAL Additional arguments
+     * @param string[]|string $text String or list of strings to be analyzed
+     * @param array           $args OPTIONAL Additional arguments
      *
      * @return array Server response
      *
