@@ -66,7 +66,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      *
      * @param string $error
      *
-     * @return null|string
+     * @return string|null
      */
     protected function _extractException($error)
     {

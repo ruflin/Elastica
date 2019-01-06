@@ -14,7 +14,7 @@ class ConstantScore extends AbstractQuery
     /**
      * Construct constant score query.
      *
-     * @param null|AbstractQuery|array $filter
+     * @param AbstractQuery|array|null $filter
      */
     public function __construct(AbstractQuery $filter = null)
     {

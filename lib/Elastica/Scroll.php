@@ -22,12 +22,12 @@ class Scroll implements \Iterator
     protected $_search;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $_nextScrollId;
 
     /**
-     * @var null|ResultSet
+     * @var ResultSet|null
      */
     protected $_currentResultSet;
 
