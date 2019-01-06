@@ -10,12 +10,10 @@ $config = PhpCsFixer\Config::create()
     ->setRules([
         '@PSR2' => true,
         '@Symfony' => true,
-        'psr0' => false,
         'single_blank_line_before_namespace' => false,
         'ordered_imports' => true,
         'array_syntax' => ['syntax' => 'short'],
         'phpdoc_order' => true,
-        'blank_line_after_namespace' => true,
         'ternary_to_null_coalescing' => true,
         'no_useless_else' => true,
         '@PHPUnit60Migration:risky' => true,
