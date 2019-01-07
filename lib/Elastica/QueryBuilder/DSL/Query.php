@@ -134,7 +134,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-constant-score-query.html
      *
-     * @param null|\Elastica\Query\AbstractQuery|array $filter
+     * @param \Elastica\Query\AbstractQuery|array|null $filter
      *
      * @return ConstantScore
      */

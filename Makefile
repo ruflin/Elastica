@@ -77,7 +77,7 @@ test:
 doc:
 	${RUN_ENV} phpdoc run -d lib/ -t build/docs --template=/root/composer/vendor/phpdocumentor/phpdocumentor/data/templates/clean
 
-# Uses the preconfigured standards in .php_cs
+# Uses the preconfigured standards in .php_cs.dist
 .PHONY: lint
 lint:
 	docker build -t ruflin/elastica-dev-base-linter -f env/elastica/Lint env/elastica/
