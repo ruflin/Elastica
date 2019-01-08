@@ -235,6 +235,7 @@ class Response
             }
 
             $this->_response = $response;
+            $this->_responseString = '';
         }
 
         return $this->_response;
