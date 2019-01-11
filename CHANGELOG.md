@@ -2,18 +2,24 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.1...HEAD)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/2.3.2...HEAD)
 
 ### Backward Compatibility Breaks
 
 ### Bugfixes
+- Fixed regression introduced by #1510; the fix was incompatible with PHP > 7 #1572
 
 ### Added
 
 ### Improvements
 
 ### Deprecated
-- In PHP 7.2 count() now raises a warning when an invalid parameter is passed. Only arrays and objects implementing the Countable interface should be passed. Backported from [#1378](https://github.com/ruflin/Elastica/pull/1378)
+
+
+## [2.3.2](https://github.com/ruflin/Elastica/releases/tag/2.3.2) - 2018-10-30
+
+### Improvements
+- In PHP 7.2 count() now raises a warning when an invalid parameter is passed. Only arrays and objects implementing the Countable interface should be passed. Backported from [#1378](https://github.com/ruflin/Elastica/pull/1378). See #1510
 
 
 ## [2.3.1](https://github.com/ruflin/Elastica/releases/tag/2.3.1) - 2015-10-17
