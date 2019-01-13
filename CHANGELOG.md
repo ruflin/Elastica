@@ -10,6 +10,9 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 
+* Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
+* [Field](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random) param for `Elastica\Query\FunctionScore::addRandomScoreFunction`
+
 ### Improvements
 
 - [Backported] Reduced memory footprint of response by not keeping the raw JSON data when JSON after JSON has been parsed. [#1588](https://github.com/ruflin/Elastica/pull/1588)

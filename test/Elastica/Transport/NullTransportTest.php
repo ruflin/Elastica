@@ -12,9 +12,20 @@ use Elastica\Transport\NullTransport;
  * Elastica Null Transport Test.
  *
  * @author James Boehmer <james.boehmer@jamesboehmer.com>
+ * @author Jan Domanski <jandom@gmail.com>
  */
 class NullTransportTest extends BaseTest
 {
+
+    /** @var NullTransport NullTransport */
+    protected $transport;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->transport = new NullTransport();
+    }
+
     /**
      * @group functional
      */
@@ -95,5 +106,30 @@ class NullTransportTest extends BaseTest
 
         $data = $response->getData();
         $this->assertEquals($params, $data['params']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testResponse()
+    {
+        $resposeString = '';
+        $response = new Response($resposeString);
+        $this->transport->setResponse($response);
+        $this->assertEquals($response, $this->transport->getResponse());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testGenerateDefaultResponse()
+    {
+        $params = [ 'blah' => 123 ];
+        $response = $this->transport->generateDefaultResponse($params);
+        $this->assertEquals([], $response->getTransferInfo());
+
+        $responseData = $response->getData();
+        $this->assertContains('params', $responseData);
+        $this->assertEquals($params, $responseData['params']);
     }
 }
