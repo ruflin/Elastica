@@ -11,7 +11,6 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 * Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
-* [Field](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random) param for `Elastica\Query\FunctionScore::addRandomScoreFunction`
 
 ### Improvements
 
