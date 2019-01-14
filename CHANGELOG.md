@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file based on the
 ### Added
 
 * Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
+[#1529](https://github.com/ruflin/Elastica/pull/1529)
+* [Backported] Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
+[#1592](https://github.com/ruflin/Elastica/pull/1592)
 
 ### Improvements
 
