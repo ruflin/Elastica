@@ -1,6 +1,6 @@
 # Change Log
-All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
-
+All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard.
+This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.3...master)
 
@@ -12,9 +12,14 @@ All notable changes to this project will be documented in this file based on the
 
 ### Improvements
 
+## [5.3.4](https://github.com/ruflin/Elastica/compare/5.3.3...5.3.4)
+
+### Improvements
+
 - [Backported] Reduced memory footprint of response by not keeping the raw JSON data when JSON after JSON has been parsed. [#1588](https://github.com/ruflin/Elastica/pull/1588)
 - Fix PHPDoc block for `ResultSet::current()` [#1591](https://github.com/ruflin/Elastica/pull/1591)
 - Fix PHPDoc block for `Index:analyze` [#1586](https://github.com/ruflin/Elastica/pull/1586)
+
 
 ## [5.3.3](https://github.com/ruflin/Elastica/compare/5.3.2...5.3.3)
 
