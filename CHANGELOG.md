@@ -10,6 +10,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+* Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
+[#1529](https://github.com/ruflin/Elastica/pull/1529)
+* [Backported] Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients
+[#1592](https://github.com/ruflin/Elastica/pull/1592)
+
 ### Improvements
 
 ## [5.3.4](https://github.com/ruflin/Elastica/compare/5.3.3...5.3.4)

@@ -12,18 +12,50 @@ use Elastica\Response;
  * host but still returns a valid response object
  *
  * @author James Boehmer <james.boehmer@jamesboehmer.com>
+ * @author Jan Domanski <jandom@gmail.com>
  */
 class NullTransport extends AbstractTransport
 {
     /**
-     * Null transport.
+     * Response you want to get from the transport
      *
-     * @param \Elastica\Request $request
+     * @var Response Response
+     */
+    protected $_response = null;
+
+    /**
+     * Set response object the transport returns
+     *
+     * @param \Elastica\Response $response
+     *
+     * @return $this
+     */
+    public function getResponse()
+    {
+        return $this->_response;
+    }
+
+    /**
+     * Set response object the transport returns
+     *
+     * @param \Elastica\Response $response
+     *
+     * @return $this
+     */
+    public function setResponse(Response $response)
+    {
+        $this->_response = $response;
+        return $this->_response;
+    }
+
+    /**
+     * Generate an example response object
+     *
      * @param array             $params  Hostname, port, path, ...
      *
-     * @return \Elastica\Response Response empty object
+     * @return \Elastica\Response $response
      */
-    public function exec(Request $request, array $params)
+    public function generateDefaultResponse(array $params)
     {
         $response = [
             'took' => 0,
@@ -40,7 +72,25 @@ class NullTransport extends AbstractTransport
             ],
             'params' => $params,
         ];
-
         return new Response(JSON::stringify($response));
+    }
+
+    /**
+     * Null transport.
+     *
+     * @param \Elastica\Request $request
+     * @param array             $params  Hostname, port, path, ...
+     *
+     * @return \Elastica\Response Response empty object
+     */
+    public function exec(Request $request, array $params)
+    {
+        $response = $this->getResponse();
+
+        if (!$response) {
+            $response = $this->generateDefaultResponse($params);
+        }
+
+        return $response;
     }
 }
