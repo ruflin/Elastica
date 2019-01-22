@@ -95,7 +95,6 @@ class Guzzle extends AbstractTransport
             [
                 'request_header' => $request->getMethod(),
                 'http_code' => $res->getStatusCode(),
-                'body' => $responseBody,
             ]
         );
 
