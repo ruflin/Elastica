@@ -31,7 +31,8 @@ This project tries to follow Elasticsearch in terms of [End of Life](https://www
 
 | Elastica                                                                                | ElasticSearch | elasticsearch-php | PHP      |
 | --------------------------------------------------------------------------------------- | ------------- | ----------------- | -------- |
-| [6.x](https://github.com/ruflin/Elastica/tree/master)                                   | 6.x           | ^6.0              | ^7.0     |
+| [7.x](https://github.com/ruflin/Elastica/tree/master)                                   | 7.x           | ^6.0              | ^7.0     |
+| [6.x](https://github.com/ruflin/Elastica/tree/6.x)                                      | 6.x           | ^6.0              | ^7.0     |
 | [5.x](https://github.com/ruflin/Elastica/tree/5.x)                                      | 5.x           | ^5.0              | \>=5.6   |
 | [3.2.3](https://github.com/ruflin/Elastica/tree/3.2.3) (unmaintained)                   | 2.4.0         | no                | \>=5.4   |
 | [2.x](https://github.com/ruflin/Elastica/tree/2.x) (unmaintained)                       | 1.7.2         | no                | \>=5.3.3 |
