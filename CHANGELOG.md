@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.3...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/5.3.5...master)
 
 ### Backward Compatibility Breaks
 
@@ -10,9 +10,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-* [Backported] Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients [#1592](https://github.com/ruflin/Elastica/pull/1592)
-
 ### Improvements
+
+
+## [5.3.5](https://github.com/ruflin/Elastica/compare/5.3.4...5.3.5)
+
+### Added
+
+* [Backported] Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in
+    inheriting clients [#1592](https://github.com/ruflin/Elastica/pull/1592)
+
 
 ## [5.3.4](https://github.com/ruflin/Elastica/compare/5.3.3...5.3.4)
 
