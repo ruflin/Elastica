@@ -1,11 +1,19 @@
 # Change Log
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.0...master)
+## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.1...master)
 
 ### Backward Compatibility Breaks
 
 ### Bugfixes
+
+### Added
+
+### Improvements
+
+### Deprecated
+
+## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.0...6.1.1)
 
 ### Added
 
@@ -17,8 +25,6 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 
 * Reduced memory footprint of response by not keeping the raw JSON data when JSON after JSON has been parsed. [#1588](https://github.com/ruflin/Elastica/pull/1588)
-
-### Deprecated
 
 ## [6.1.0](https://github.com/ruflin/Elastica/compare/6.0.2...6.1.0)
 
@@ -59,7 +65,7 @@ All notable changes to this project will be documented in this file based on the
       "number_of_significant_value_digits" : 3
     }
   ```
-  
+
 * Never implemented the method *Missing* on [`Aggregation\Percentiles`](https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-aggregations-metrics-percentile-aggregation.html) [#1532](https://github.com/ruflin/Elastica/pull/1532)
 
 ## [6.0.2](https://github.com/ruflin/Elastica/compare/6.0.1...6.0.2)
