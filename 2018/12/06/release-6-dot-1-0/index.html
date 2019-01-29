@@ -122,6 +122,24 @@
 <li><code>\Elastica\Multi\ResultSet::current</code> returns <code>\Elastica\ResultSet</code> instead of <code>\Elastica\ResultSet|false</code></li>
 </ul>
 </li>
+</ul>
+
+
+<h3>Added</h3>
+
+<ul>
+<li>Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random">Field</a> param for <code>Elastica\Query\FunctionScore::addRandomScoreFunction</code> <a href="https://github.com/ruflin/Elastica/pull/1529">#1529</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-recovery.html">Index Recovery</a> : the indices recovery API provides insight into on-going index shard recoveries. It was never been implemented into Elastica. <a href="https://github.com/ruflin/Elastica/pull/1537">#1537</a></li>
+<li>add parent_id (reference <a href="https://github.com/ruflin/Elastica/issues/1518">#1518</a>) in QueryBuilder. <a href="[#1518](https://github.com/ruflin/Elastica/issues/1533">#1533</a>)</li>
+<li>implemented <code>string_distance</code> option in Term Suggestion <a href="https://github.com/ruflin/Elastica/pull/1543">#1543</a></li>
+</ul>
+
+
+<h3>Improvements</h3>
+
+<ul>
+<li>Using <code>Elastica\Query\FunctionScore::addRandomScoreFunction</code> without <code>$field</code> parameter is deprecated since ES 6.0 and will fail since ES 7.0 <a href="https://github.com/ruflin/Elastica/pull/1522">#1522</a></li>
 <li><code>Aggreation\Percentiles</code> updated to a newer version of the Algorithm (T-Digest 3.2) and Percentiles results changed a bit Have a <a href="https://github.com/elastic/elasticsearch/pull/28305">look at here</a>, so updated tests in order not to fail. <a href="[#1352](https://github.com/ruflin/Elastica/pull/1531">#1531</a>)</li>
 <li><p><code>Aggregation\Percentiles</code> have been updated since <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.3/search-aggregations-metrics-percentile-aggregation.html">Elasticsearch 2.3</a>. In this version <code>compression, HDR histogram</code> changed their implementations. The <code>missing</code> field has never been implemented. <a href="https://github.com/ruflin/Elastica/pull/1532">#1532</a></p>
 
@@ -142,24 +160,6 @@
   }
 </code></p></li>
 <li>Never implemented the method <em>Missing</em> on <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/search-aggregations-metrics-percentile-aggregation.html"><code>Aggregation\Percentiles</code></a> <a href="https://github.com/ruflin/Elastica/pull/1532">#1532</a></li>
-</ul>
-
-
-<h3>Added</h3>
-
-<ul>
-<li>Added a transport class for mocking a HTTP 403 error codes, useful for testing response failures in inheriting clients</li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#function-random">Field</a> param for <code>Elastica\Query\FunctionScore::addRandomScoreFunction</code> <a href="https://github.com/ruflin/Elastica/pull/1529">#1529</a></li>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-recovery.html">Index Recovery</a> : the indices recovery API provides insight into on-going index shard recoveries. It was never been implemented into Elastica. <a href="https://github.com/ruflin/Elastica/pull/1537">#1537</a></li>
-<li>add parent_id (reference <a href="https://github.com/ruflin/Elastica/issues/1518">#1518</a>) in QueryBuilder. <a href="[#1518](https://github.com/ruflin/Elastica/issues/1533">#1533</a>)</li>
-<li>implemented <code>string_distance</code> option in Term Suggestion <a href="https://github.com/ruflin/Elastica/pull/1543">#1543</a></li>
-</ul>
-
-
-<h3>Improvements</h3>
-
-<ul>
-<li>Using <code>Elastica\Query\FunctionScore::addRandomScoreFunction</code> without <code>$field</code> parameter is deprecated since ES 6.0 and will fail since ES 7.0 <a href="https://github.com/ruflin/Elastica/pull/1522">#1522</a></li>
 </ul>
 
 </div>
@@ -204,6 +204,8 @@
         <a class="basic-alignment left" href="/2018/05/29/release-6-dot-0-2/" title="Previous Post: Release 6.0.2">&laquo; Release 6.0.2</a>
       
       
+        <a class="basic-alignment right" href="/2019/01/29/release-6-dot-1-1/" title="Next Post: Release 6.1.1">Release 6.1.1 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -215,6 +217,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2019/01/29/release-6-dot-1-1/">Release 6.1.1</a>
+      </li>
     
       <li class="post">
         <a href="/2018/12/06/release-6-dot-1-0/">Release 6.1.0</a>
@@ -230,10 +236,6 @@
     
       <li class="post">
         <a href="/2018/02/18/release-5-dot-3-1/">Release 5.3.1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2017/11/15/release-6-dot-0-0/">Release 6.0.0</a>
       </li>
     
   </ul>
@@ -259,7 +261,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2018 - ruflin -
+  Copyright &copy; 2019 - ruflin -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

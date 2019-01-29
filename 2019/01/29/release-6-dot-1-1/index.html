@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Release 5.2.1 - Elastica</title>
+  <title>Release 6.1.1 - Elastica</title>
   <meta name="author" content="ruflin">
 
   
-  <meta name="description" content="Elastica 5.2.1 (download). This release is compatible with Elasticsearch 5.x and was tested with elasticsearch 5.2.2. Bugfixes Fix elastic 5.3.x &hellip;">
+  <meta name="description" content="Elastica 6.1.1 (download). This release is compatible with Elasticsearch 6.x and was tested with elasticsearch 6.5.2. Added Added BucketSelector &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Elastica.io/2017/06/07/release-5-dot-2-1">
+  <link rel="canonical" href="http://Elastica.io/2019/01/29/release-6-dot-1-1">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
@@ -84,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">Release 5.2.1</h1>
+      <h1 class="entry-title">Release 6.1.1</h1>
     
     
       <p class="meta">
@@ -100,48 +100,31 @@
   
 
 
-<time datetime="2017-06-07T14:59:05+02:00" pubdate data-updated="true"></time>
+<time datetime="2019-01-29T10:41:12+01:00" pubdate data-updated="true"></time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="https://github.com/ruflin/Elastica/tree/5.2.1">Elastica 5.2.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/5.2.1">download</a>).</p>
+<div class="entry-content"><p><a href="https://github.com/ruflin/Elastica/tree/6.1.1">Elastica 6.1.1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/6.1.1">download</a>).</p>
 
-<p>This release is compatible with Elasticsearch 5.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.2/release-notes-5.2.2.html">elasticsearch 5.2.2</a>.</p>
+<p>This release is compatible with Elasticsearch 6.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/release-notes-6.5.2.html">elasticsearch 6.5.2</a>.</p>
 
-<h2>Bugfixes</h2>
+<h3>Added</h3>
 
 <ul>
-<li>Fix elastic 5.3.x deprecation warning related to Content-Type not being set.</li>
-<li>Fix updating settings of an index. <a href="https://github.com/ruflin/Elastica/pull/1296">#1296</a></li>
-<li>Fix bad parameter value to refresh document <a href="https://github.com/rufli/Elastica/pull/1318">#1318</a></li>
+<li>Added <code>BucketSelector</code> aggregation <a href="https://github.com/ruflin/Elastica/pull/1554">#1554</a></li>
+<li>Added <code>DerivativeAggregation</code> <a href="https://github.com/ruflin/Elastica/pull/1553">#1553</a></li>
+<li>The preferred type name is <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/removal-of-types.html">_doc</a>, so that index APIs have the same path as they will have in 7.0</li>
+<li>Introduced new version of PHP-CS-Fixer and new Lint travis step. <a href="https://github.com/ruflin/Elastica/pull/1555">#1555</a></li>
 </ul>
 
 
-<h2>Added</h2>
+<h3>Improvements</h3>
 
 <ul>
-<li>Parameter <code>filter_path</code> for response filtering (e.g. <code>$index-&gt;search($query, ['filter_path' =&gt; 'hits.hits._source'])</code>)</li>
-<li>Add support for Health parameters for Cluster\Health endpoint (new prop : delayed_unassigned_shards, number_of_pending_tasks, number_of_in_flight_fetch, task_max_waiting_in_queue_millis, active_shards_percent_as_number)</li>
-<li>Add support for querystring in Type. this allow to use <code>update_all_types</code> in type mapping in order to resolve conflicts between fields in different types. <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-put-mapping.html#merging-conflicts">Conflicts between fields in different types</a></li>
-<li>Added <code>\Elastica\Query\ParentId</code> to avoid join with parent documents <a href="https://github.com/ruflin/Elastica/issues/1287">#1287</a></li>
-<li>Added <code>\Elastica\Reindex</code> for reindexing between indices <a href="https://github.com/ruflin/Elastica/issues/1311">#1311</a></li>
-</ul>
-
-
-<h2>Improvements</h2>
-
-<ul>
-<li>Added support for <code>other_bucket</code> and <code>other_bucket_key</code> paramters on <code>Elastica\Aggregation\Filters</code></li>
-</ul>
-
-
-<h2>Deprecated</h2>
-
-<ul>
-<li>Deprecated <code>Tool\CrossIndex</code> use <code>\Elastica\Reindex</code> instead <a href="https://github.com/ruflin/Elastica/issues/1311">#1311</a></li>
+<li>Reduced memory footprint of response by not keeping the raw JSON data when JSON after JSON has been parsed. <a href="https://github.com/ruflin/Elastica/pull/1588">#1588</a></li>
 </ul>
 
 </div>
@@ -166,7 +149,7 @@
   
 
 
-<time datetime="2017-06-07T14:59:05+02:00" pubdate data-updated="true"></time>
+<time datetime="2019-01-29T10:41:12+01:00" pubdate data-updated="true"></time>
       
 
 
@@ -174,7 +157,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/2017/06/07/release-5-dot-2-1/" data-via="" data-counturl="http://Elastica.io/2017/06/07/release-5-dot-2-1/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/2019/01/29/release-6-dot-1-1/" data-via="" data-counturl="http://Elastica.io/2019/01/29/release-6-dot-1-1/" >Tweet</a>
   
   
   
@@ -183,10 +166,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2017/04/13/release-5-dot-2-0/" title="Previous Post: Release 5.2.0">&laquo; Release 5.2.0</a>
+        <a class="basic-alignment left" href="/2018/12/06/release-6-dot-1-0/" title="Previous Post: Release 6.1.0">&laquo; Release 6.1.0</a>
       
-      
-        <a class="basic-alignment right" href="/2017/07/26/release-5-dot-3-0/" title="Next Post: Release 5.3.0">Release 5.3.0 &raquo;</a>
       
     </p>
   </footer>
