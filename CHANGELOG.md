@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file based on the
 * Added `DerivativeAggregation` [#1553](https://github.com/ruflin/Elastica/pull/1553)
 * The preferred type name is [_doc](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/removal-of-types.html), so that index APIs have the same path as they will have in 7.0
 * Introduced new version of PHP-CS-Fixer and new Lint travis step. [#1555](https://github.com/ruflin/Elastica/pull/1555)
+* Added `typed_keys` support for Search queries [#1603](https://github.com/ruflin/Elastica/pull/1603)
 
 ### Improvements
 
