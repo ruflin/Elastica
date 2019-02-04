@@ -2,6 +2,7 @@
 
 namespace Elastica\Test;
 
+use Elastica\Aggregation\Cardinality;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
@@ -395,6 +396,11 @@ class SearchTest extends BaseTest
         $filteredData = $resultSet->getResponse()->getData();
         $this->assertArrayNotHasKey('took', $filteredData);
         $this->assertArrayNotHasKey('max_score', $filteredData['hits']);
+
+        //test with typed_keys
+        $countIds = (new Cardinality('count_ids'))->setField('id');
+        $resultSet = $search->search((new Query())->addAggregation($countIds), [Search::OPTION_TYPED_KEYS => true]);
+        $this->assertNotEmpty($resultSet->getAggregation('cardinality#count_ids'));
 
         //Timeout - this one is a bit more tricky to test
         $mockResponse = new Response(json_encode(['timed_out' => true]));
