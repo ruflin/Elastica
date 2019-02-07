@@ -3,6 +3,7 @@
 namespace Elastica\Type;
 
 use Elastica\Exception\InvalidException;
+use Elastica\Response;
 use Elastica\Type;
 use Elasticsearch\Endpoints\Indices\Mapping\Put;
 
@@ -32,8 +33,8 @@ class Mapping
     /**
      * Construct Mapping.
      *
-     * @param \Elastica\Type $type       OPTIONAL Type object
-     * @param array          $properties OPTIONAL Properties
+     * @param Type  $type       OPTIONAL Type object
+     * @param array $properties OPTIONAL Properties
      */
     public function __construct(Type $type = null, array $properties = [])
     {
@@ -50,11 +51,11 @@ class Mapping
      * Sets the mapping type
      * Enter description here ...
      *
-     * @param \Elastica\Type $type Type object
+     * @param Type $type Type object
      *
      * @return $this
      */
-    public function setType(Type $type)
+    public function setType(Type $type): Mapping
     {
         $this->_type = $type;
 
@@ -68,7 +69,7 @@ class Mapping
      *
      * @return $this
      */
-    public function setProperties(array $properties)
+    public function setProperties(array $properties): Mapping
     {
         return $this->setParam('properties', $properties);
     }
@@ -78,7 +79,7 @@ class Mapping
      *
      * @return array $properties Properties
      */
-    public function getProperties()
+    public function getProperties(): array
     {
         return $this->getParam('properties');
     }
@@ -92,7 +93,7 @@ class Mapping
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-meta.html
      */
-    public function setMeta(array $meta)
+    public function setMeta(array $meta): Mapping
     {
         return $this->setParam('_meta', $meta);
     }
@@ -100,9 +101,9 @@ class Mapping
     /**
      * Returns mapping type.
      *
-     * @return \Elastica\Type Type
+     * @return Type Type
      */
-    public function getType()
+    public function getType(): Type
     {
         return $this->_type;
     }
@@ -119,7 +120,7 @@ class Mapping
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-source-field.html
      */
-    public function setSource(array $source)
+    public function setSource(array $source): Mapping
     {
         return $this->setParam('_source', $source);
     }
@@ -133,7 +134,7 @@ class Mapping
      *
      * @return $this
      */
-    public function disableSource($enabled = false)
+    public function disableSource(bool $enabled = false): Mapping
     {
         return $this->setSource(['enabled' => $enabled]);
     }
@@ -158,7 +159,7 @@ class Mapping
      *
      * @return $this
      */
-    public function setParam($key, $value)
+    public function setParam(string $key, $value): Mapping
     {
         $this->_mapping[$key] = $value;
 
@@ -174,7 +175,7 @@ class Mapping
      *
      * @return mixed $value Key value
      */
-    public function getParam($key)
+    public function getParam(string $key)
     {
         return $this->_mapping[$key] ?? null;
     }
@@ -182,11 +183,11 @@ class Mapping
     /**
      * Converts the mapping to an array.
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return array Mapping as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $type = $this->getType();
 
@@ -202,9 +203,9 @@ class Mapping
      *
      * @param array $query Query string parameters to send with mapping
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function send(array $query = [])
+    public function send(array $query = []): Response
     {
         $endpoint = new Put();
         $endpoint->setBody($this->toArray());
@@ -216,13 +217,13 @@ class Mapping
     /**
      * Creates a mapping object.
      *
-     * @param array|\Elastica\Type\Mapping $mapping Mapping object or properties array
+     * @param array|Mapping $mapping Mapping object or properties array
      *
-     * @throws \Elastica\Exception\InvalidException If invalid type
+     * @throws InvalidException If invalid type
      *
      * @return self
      */
-    public static function create($mapping)
+    public static function create($mapping): Mapping
     {
         if (is_array($mapping)) {
             $mappingObject = new self();

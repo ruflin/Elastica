@@ -5,8 +5,12 @@ namespace Elastica\Type;
 use Elastica\Client;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
+use Elastica\Query;
+use Elastica\ResultSet;
+use Elastica\Search;
 use Elastica\SearchableInterface;
 use Elastica\Type as BaseType;
+use Elastica\Type;
 use Elastica\Util;
 
 /**
@@ -93,9 +97,9 @@ abstract class AbstractType implements SearchableInterface
      * Reads index and type name from protected vars _indexName and _typeName.
      * Has to be set in child class
      *
-     * @param \Elastica\Client $client OPTIONAL Client object
+     * @param Client $client OPTIONAL Client object
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      */
     public function __construct(Client $client = null)
     {
@@ -121,7 +125,7 @@ abstract class AbstractType implements SearchableInterface
      *
      * @param bool $recreate OPTIONAL Recreates the index if true (default = false)
      */
-    public function create($recreate = false)
+    public function create(bool $recreate = false)
     {
         $this->getIndex()->create($this->_indexParams, $recreate);
 
@@ -132,12 +136,12 @@ abstract class AbstractType implements SearchableInterface
     }
 
     /**
-     * @param string|\Elastica\Query $query
-     * @param array|int              $options
+     * @param string|Query $query
+     * @param array|int    $options
      *
-     * @return \Elastica\Search
+     * @return Search
      */
-    public function createSearch($query = '', $options = null)
+    public function createSearch($query = '', $options = null): Search
     {
         return $this->getType()->createSearch($query, $options);
     }
@@ -145,14 +149,14 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Search on the type.
      *
-     * @param string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
-     * @param null                         $options
+     * @param string|array|Query $query   Array with all query data inside or a Elastica\Query object
+     * @param int|array          $options
      *
-     * @return \Elastica\ResultSet with all results inside
+     * @return ResultSet with all results inside
      *
      * @see \Elastica\SearchableInterface::search
      */
-    public function search($query = '', $options = null)
+    public function search($query = '', $options = null): ResultSet
     {
         return $this->getType()->search($query, $options = null);
     }
@@ -160,13 +164,13 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Count docs in the type based on query.
      *
-     * @param string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
+     * @param string|array|Query $query Array with all query data inside or a Elastica\Query object
      *
      * @return int number of documents matching the query
      *
      * @see \Elastica\SearchableInterface::count
      */
-    public function count($query = '')
+    public function count($query = ''): int
     {
         return $this->getType()->count($query);
     }
@@ -174,9 +178,9 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Returns the search index.
      *
-     * @return \Elastica\Index Index object
+     * @return Index Index object
      */
-    public function getIndex()
+    public function getIndex(): Index
     {
         return $this->_index;
     }
@@ -184,9 +188,9 @@ abstract class AbstractType implements SearchableInterface
     /**
      * Returns type object.
      *
-     * @return \Elastica\Type Type object
+     * @return Type Type object
      */
-    public function getType()
+    public function getType(): Type
     {
         return $this->_type;
     }
@@ -200,7 +204,7 @@ abstract class AbstractType implements SearchableInterface
      *
      * @return string Converted date string
      */
-    public function convertDate($date)
+    public function convertDate(int $date): string
     {
         return Util::convertDate($date);
     }
