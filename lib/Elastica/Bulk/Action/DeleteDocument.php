@@ -12,13 +12,11 @@ class DeleteDocument extends AbstractDocument
     protected $_opType = self::OP_TYPE_DELETE;
 
     /**
-     * @param \Elastica\AbstractUpdateAction $action
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    protected function _getMetadata(AbstractUpdateAction $action)
+    protected function _getMetadata(AbstractUpdateAction $action): array
     {
-        $params = [
+        return $action->getOptions([
             'index',
             'type',
             'id',
@@ -26,9 +24,6 @@ class DeleteDocument extends AbstractDocument
             'version_type',
             'routing',
             'parent',
-        ];
-        $metadata = $action->getOptions($params, true);
-
-        return $metadata;
+        ], true);
     }
 }

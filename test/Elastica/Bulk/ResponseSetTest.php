@@ -17,7 +17,7 @@ class ResponseSetTest extends BaseTest
      * @group unit
      * @dataProvider isOkDataProvider
      */
-    public function testIsOk($responseData, $actions, $expected)
+    public function testIsOk(array $responseData, array $actions, bool $expected)
     {
         $responseSet = $this->_createResponseSet($responseData, $actions);
         $this->assertEquals($expected, $responseSet->isOk());
@@ -115,7 +115,7 @@ class ResponseSetTest extends BaseTest
         $this->assertInstanceOf(Bulk\Response::class, $responseSet->current());
     }
 
-    public function isOkDataProvider()
+    public function isOkDataProvider(): \Generator
     {
         list($responseData, $actions) = $this->_getFixture();
 
@@ -131,7 +131,8 @@ class ResponseSetTest extends BaseTest
         $client->expects($this->once())
             ->method('request')
             ->withAnyParameters()
-            ->will($this->returnValue(new Response($responseData)));
+            ->willReturn(new Response($responseData))
+        ;
 
         $bulk = new Bulk($client);
         $bulk->addActions($actions);

@@ -7,7 +7,7 @@ use Elastica\Response as BaseResponse;
 class ResponseSet extends BaseResponse implements \Iterator, \Countable
 {
     /**
-     * @var \Elastica\Bulk\Response[]
+     * @var Response[]
      */
     protected $_bulkResponses = [];
 
@@ -17,8 +17,8 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     protected $_position = 0;
 
     /**
-     * @param \Elastica\Response        $response
-     * @param \Elastica\Bulk\Response[] $bulkResponses
+     * @param BaseResponse $response
+     * @param Response[]   $bulkResponses
      */
     public function __construct(BaseResponse $response, array $bulkResponses)
     {
@@ -28,9 +28,9 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     }
 
     /**
-     * @return \Elastica\Bulk\Response[]
+     * @return Response[]
      */
-    public function getBulkResponses()
+    public function getBulkResponses(): array
     {
         return $this->_bulkResponses;
     }
@@ -40,7 +40,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
      *
      * @return string
      */
-    public function getError()
+    public function getError(): string
     {
         foreach ($this->getBulkResponses() as $bulkResponse) {
             if ($bulkResponse->hasError()) {
@@ -70,7 +70,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return bool
      */
-    public function isOk()
+    public function isOk(): bool
     {
         foreach ($this->getBulkResponses() as $bulkResponse) {
             if (!$bulkResponse->isOk()) {
@@ -84,7 +84,7 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     /**
      * @return bool
      */
-    public function hasError()
+    public function hasError(): bool
     {
         foreach ($this->getBulkResponses() as $bulkResponse) {
             if ($bulkResponse->hasError()) {
@@ -96,43 +96,49 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
     }
 
     /**
-     * @return \Elastica\Bulk\Response
+     * @return Response
      */
-    public function current()
+    public function current(): Response
     {
         return $this->_bulkResponses[$this->key()];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next()
     {
         ++$this->_position;
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
-    public function key()
+    public function key(): int
     {
         return $this->_position;
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->_bulkResponses[$this->key()]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind()
     {
         $this->_position = 0;
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return count($this->_bulkResponses);
     }

@@ -13,11 +13,9 @@ class IndexDocument extends AbstractDocument
     protected $_opType = self::OP_TYPE_INDEX;
 
     /**
-     * @param \Elastica\Document $document
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setDocument(Document $document)
+    public function setDocument(Document $document): AbstractDocument
     {
         parent::setDocument($document);
 
@@ -27,13 +25,11 @@ class IndexDocument extends AbstractDocument
     }
 
     /**
-     * @param \Elastica\AbstractUpdateAction $action
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    protected function _getMetadata(AbstractUpdateAction $action)
+    protected function _getMetadata(AbstractUpdateAction $action): array
     {
-        $params = [
+        return $action->getOptions([
             'index',
             'type',
             'id',
@@ -42,10 +38,6 @@ class IndexDocument extends AbstractDocument
             'routing',
             'parent',
             'retry_on_conflict',
-        ];
-
-        $metadata = $action->getOptions($params, true);
-
-        return $metadata;
+        ], true);
     }
 }

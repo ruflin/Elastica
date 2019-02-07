@@ -17,11 +17,11 @@ class Response extends BaseResponse
     protected $_opType;
 
     /**
-     * @param array|string          $responseData
-     * @param \Elastica\Bulk\Action $action
-     * @param string                $opType
+     * @param array|string $responseData
+     * @param Action       $action
+     * @param string       $opType
      */
-    public function __construct($responseData, Action $action, $opType)
+    public function __construct($responseData, Action $action, string $opType)
     {
         parent::__construct($responseData);
 
@@ -30,9 +30,9 @@ class Response extends BaseResponse
     }
 
     /**
-     * @return \Elastica\Bulk\Action
+     * @return Action
      */
-    public function getAction()
+    public function getAction(): Action
     {
         return $this->_action;
     }
@@ -40,7 +40,7 @@ class Response extends BaseResponse
     /**
      * @return string
      */
-    public function getOpType()
+    public function getOpType(): string
     {
         return $this->_opType;
     }

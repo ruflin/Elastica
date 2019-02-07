@@ -18,7 +18,7 @@ class AbstractUpdateAction extends Param
     /**
      * Sets the id of the document.
      *
-     * @param string $id
+     * @param string|int $id
      *
      * @return $this
      */
@@ -34,7 +34,7 @@ class AbstractUpdateAction extends Param
      */
     public function getId()
     {
-        return ($this->hasParam('_id')) ? $this->getParam('_id') : null;
+        return $this->hasParam('_id') ? $this->getParam('_id') : null;
     }
 
     /**

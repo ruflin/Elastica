@@ -13,13 +13,9 @@ class UpdateDocument extends IndexDocument
     protected $_opType = self::OP_TYPE_UPDATE;
 
     /**
-     * Set the document for this bulk update action.
-     *
-     * @param \Elastica\Document $document
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setDocument(Document $document)
+    public function setDocument(Document $document): AbstractDocument
     {
         parent::setDocument($document);
 
@@ -41,11 +37,9 @@ class UpdateDocument extends IndexDocument
     }
 
     /**
-     * @param \Elastica\Script\AbstractScript $script
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setScript(AbstractScript $script)
+    public function setScript(AbstractScript $script): AbstractDocument
     {
         parent::setScript($script);
 
