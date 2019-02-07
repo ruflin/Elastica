@@ -34,7 +34,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      * @param int    $code  Error code
      * @param string $error Error message from elasticsearch
      */
-    public function __construct($code, $error)
+    public function __construct(int $code, string $error)
     {
         $this->_parseError($error);
         parent::__construct($error, $code);
@@ -45,14 +45,14 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      *
      * @param string $error Error message
      */
-    protected function _parseError($error)
+    protected function _parseError(string $error)
     {
         $errors = explode(']; nested: ', $error);
 
-        if (1 == count($errors)) {
+        if (1 === count($errors)) {
             $this->_exception = $this->_extractException($errors[0]);
         } else {
-            if (self::REMOTE_TRANSPORT_EXCEPTION == $this->_extractException($errors[0])) {
+            if (self::REMOTE_TRANSPORT_EXCEPTION === $this->_extractException($errors[0])) {
                 $this->_isRemote = true;
                 $this->_exception = $this->_extractException($errors[1]);
             } else {
@@ -68,13 +68,13 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      *
      * @return string|null
      */
-    protected function _extractException($error)
+    protected function _extractException(string $error)
     {
         if (preg_match('/^(\w+)\[.*\]/', $error, $matches)) {
             return $matches[1];
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -92,7 +92,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      *
      * @return bool
      */
-    public function isRemoteTransportException()
+    public function isRemoteTransportException(): bool
     {
         return $this->_isRemote;
     }
@@ -100,7 +100,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
     /**
      * @return array Error array
      */
-    public function getError()
+    public function getError(): array
     {
         return $this->_error;
     }

@@ -16,8 +16,8 @@ class PartialShardFailureException extends ResponseException
     /**
      * Construct Exception.
      *
-     * @param \Elastica\Request  $request
-     * @param \Elastica\Response $response
+     * @param Request  $request
+     * @param Response $response
      */
     public function __construct(Request $request, Response $response)
     {

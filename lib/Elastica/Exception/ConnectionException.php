@@ -13,23 +13,23 @@ use Elastica\Response;
 class ConnectionException extends \RuntimeException implements ExceptionInterface
 {
     /**
-     * @var \Elastica\Request Request object
+     * @var Request|null Request object
      */
     protected $_request;
 
     /**
-     * @var \Elastica\Response Response object
+     * @var Response|null Response object
      */
     protected $_response;
 
     /**
      * Construct Exception.
      *
-     * @param string             $message  Message
-     * @param \Elastica\Request  $request
-     * @param \Elastica\Response $response
+     * @param string        $message
+     * @param Request|null  $request
+     * @param Response|null $response
      */
-    public function __construct($message, Request $request = null, Response $response = null)
+    public function __construct(string $message, Request $request = null, Response $response = null)
     {
         $this->_request = $request;
         $this->_response = $response;
@@ -40,7 +40,7 @@ class ConnectionException extends \RuntimeException implements ExceptionInterfac
     /**
      * Returns request object.
      *
-     * @return \Elastica\Request Request object
+     * @return Request|null Request object
      */
     public function getRequest()
     {
@@ -50,7 +50,7 @@ class ConnectionException extends \RuntimeException implements ExceptionInterfac
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return Response|null Response object
      */
     public function getResponse()
     {
