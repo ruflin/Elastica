@@ -9,8 +9,8 @@ use Elastica\Query;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\SearchableInterface;
-use Elastica\Type as BaseType;
 use Elastica\Type;
+use Elastica\Type as BaseType;
 use Elastica\Util;
 
 /**
