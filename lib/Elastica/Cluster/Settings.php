@@ -4,6 +4,7 @@ namespace Elastica\Cluster;
 
 use Elastica\Client;
 use Elastica\Request;
+use Elastica\Response;
 
 /**
  * Cluster settings.
@@ -15,14 +16,14 @@ use Elastica\Request;
 class Settings
 {
     /**
-     * @var \Elastica\Client Client object
+     * @var Client Client object
      */
-    protected $_client = null;
+    protected $_client;
 
     /**
      * Creates a cluster object.
      *
-     * @param \Elastica\Client $client Connection client object
+     * @param Client $client Connection client object
      */
     public function __construct(Client $client)
     {
@@ -34,7 +35,7 @@ class Settings
      *
      * @return array Settings data (persistent and transient)
      */
-    public function get()
+    public function get(): array
     {
         return $this->request()->getData();
     }
@@ -48,17 +49,13 @@ class Settings
      *
      * @return array|string|null Settings data
      */
-    public function getPersistent($setting = '')
+    public function getPersistent(string $setting = '')
     {
         $data = $this->get();
         $settings = $data['persistent'];
 
-        if (!empty($setting)) {
-            if (isset($settings[$setting])) {
-                return $settings[$setting];
-            }
-
-            return;
+        if ('' !== $setting) {
+            return $settings[$setting] ?? null;
         }
 
         return $settings;
@@ -73,12 +70,12 @@ class Settings
      *
      * @return array|string|null Settings data
      */
-    public function getTransient($setting = '')
+    public function getTransient(string $setting = '')
     {
         $data = $this->get();
         $settings = $data['transient'];
 
-        if (!empty($setting)) {
+        if ('' !== $setting) {
             if (isset($settings[$setting])) {
                 return $settings[$setting];
             }
@@ -90,14 +87,14 @@ class Settings
                     if (isset($settings[$key])) {
                         $settings = $settings[$key];
                     } else {
-                        return;
+                        return null;
                     }
                 }
 
                 return $settings;
             }
 
-            return;
+            return null;
         }
 
         return $settings;
@@ -107,11 +104,11 @@ class Settings
      * Sets persistent setting.
      *
      * @param string $key
-     * @param string $value
+     * @param mixed  $value
      *
-     * @return \Elastica\Response
+     * @return Response
      */
-    public function setPersistent($key, $value)
+    public function setPersistent(string $key, $value): Response
     {
         return $this->set(
             [
@@ -126,11 +123,11 @@ class Settings
      * Sets transient settings.
      *
      * @param string $key
-     * @param string $value
+     * @param mixed  $value
      *
-     * @return \Elastica\Response
+     * @return Response
      */
-    public function setTransient($key, $value)
+    public function setTransient(string $key, $value): Response
     {
         return $this->set(
             [
@@ -149,15 +146,17 @@ class Settings
      * @param bool $readOnly
      * @param bool $persistent
      *
-     * @return \Elastica\Response $response
+     * @return Response $response
      */
-    public function setReadOnly($readOnly = true, $persistent = false)
+    public function setReadOnly(bool $readOnly = true, bool $persistent = false): Response
     {
         $key = 'cluster.blocks.read_only';
 
-        return $persistent
-            ? $this->setPersistent($key, $readOnly)
-            : $this->setTransient($key, $readOnly);
+        if ($persistent) {
+            return $this->setPersistent($key, $readOnly);
+        }
+
+        return $this->setTransient($key, $readOnly);
     }
 
     /**
@@ -165,9 +164,9 @@ class Settings
      *
      * @param array $settings Raw settings (including persistent or transient)
      *
-     * @return \Elastica\Response
+     * @return Response
      */
-    public function set(array $settings)
+    public function set(array $settings): Response
     {
         return $this->request($settings, Request::PUT);
     }
@@ -175,9 +174,9 @@ class Settings
     /**
      * Get the client.
      *
-     * @return \Elastica\Client
+     * @return Client
      */
-    public function getClient()
+    public function getClient(): Client
     {
         return $this->_client;
     }
@@ -188,9 +187,9 @@ class Settings
      * @param array  $data   OPTIONAL Data array
      * @param string $method OPTIONAL Transfer method (default = \Elastica\Request::GET)
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function request(array $data = [], $method = Request::GET)
+    public function request(array $data = [], string $method = Request::GET): Response
     {
         $path = '_cluster/settings';
 

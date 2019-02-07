@@ -25,7 +25,7 @@ class Shard
      * @param int   $shardNumber the shard index/number
      * @param array $data        the shard health data
      */
-    public function __construct($shardNumber, $data)
+    public function __construct(int $shardNumber, array $data)
     {
         $this->_shardNumber = $shardNumber;
         $this->_data = $data;
@@ -36,7 +36,7 @@ class Shard
      *
      * @return int
      */
-    public function getShardNumber()
+    public function getShardNumber(): int
     {
         return $this->_shardNumber;
     }
@@ -46,7 +46,7 @@ class Shard
      *
      * @return string green, yellow or red
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->_data['status'];
     }
@@ -56,7 +56,7 @@ class Shard
      *
      * @return bool
      */
-    public function isPrimaryActive()
+    public function isPrimaryActive(): bool
     {
         return $this->_data['primary_active'];
     }
@@ -66,9 +66,9 @@ class Shard
      *
      * @return bool
      */
-    public function isActive()
+    public function isActive(): bool
     {
-        return 1 == $this->_data['active_shards'];
+        return 1 === $this->_data['active_shards'];
     }
 
     /**
@@ -76,9 +76,9 @@ class Shard
      *
      * @return bool
      */
-    public function isRelocating()
+    public function isRelocating(): bool
     {
-        return 1 == $this->_data['relocating_shards'];
+        return 1 === $this->_data['relocating_shards'];
     }
 
     /**
@@ -86,9 +86,9 @@ class Shard
      *
      * @return bool
      */
-    public function isInitialized()
+    public function isInitialized(): bool
     {
-        return 1 == $this->_data['initializing_shards'];
+        return 1 === $this->_data['initializing_shards'];
     }
 
     /**
@@ -96,8 +96,8 @@ class Shard
      *
      * @return bool
      */
-    public function isUnassigned()
+    public function isUnassigned(): bool
     {
-        return 1 == $this->_data['unassigned_shards'];
+        return 1 === $this->_data['unassigned_shards'];
     }
 }
