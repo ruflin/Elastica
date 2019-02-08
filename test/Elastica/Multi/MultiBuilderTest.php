@@ -30,7 +30,7 @@ class MultiBuilderTest extends BaseTest
         parent::setUp();
 
         $this->builder = $this->createMock(BuilderInterface::class);
-        $this->multiBuilder = new MultiBuilder($this->builder);
+        $this->multiBuilder = new MultiBuilder();
     }
 
     public function testBuildEmptyMultiResultSet()

@@ -3,6 +3,7 @@
 namespace Elastica\Multi;
 
 use Elastica\Response;
+use Elastica\ResultSet as BaseResultSet;
 
 /**
  * Elastica multi search result set
@@ -15,7 +16,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * Result Sets.
      *
-     * @var array|\Elastica\ResultSet[] Result Sets
+     * @var array|BaseResultSet[] Result Sets
      */
     protected $_resultSets = [];
 
@@ -36,19 +37,19 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * Constructs ResultSet object.
      *
-     * @param \Elastica\Response    $response
-     * @param \Elastica\ResultSet[] $resultSets
+     * @param Response        $response
+     * @param BaseResultSet[] $resultSets
      */
-    public function __construct(Response $response, $resultSets)
+    public function __construct(Response $response, array $resultSets)
     {
         $this->_response = $response;
         $this->_resultSets = $resultSets;
     }
 
     /**
-     * @return array|\Elastica\ResultSet[]
+     * @return BaseResultSet[]
      */
-    public function getResultSets()
+    public function getResultSets(): array
     {
         return $this->_resultSets;
     }
@@ -56,9 +57,9 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function getResponse()
+    public function getResponse(): Response
     {
         return $this->_response;
     }
@@ -68,7 +69,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
      *
      * @return bool
      */
-    public function hasError()
+    public function hasError(): bool
     {
         foreach ($this->getResultSets() as $resultSet) {
             if ($resultSet->getResponse()->hasError()) {
@@ -80,61 +81,63 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @return \Elastica\ResultSet
+     * {@inheritdoc}
      */
     public function current()
     {
         return $this->_resultSets[$this->key()];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function next()
     {
         ++$this->_position;
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
-    public function key()
+    public function key(): int
     {
         return $this->_position;
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
-    public function valid()
+    public function valid(): bool
     {
         return isset($this->_resultSets[$this->key()]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rewind()
     {
         $this->_position = 0;
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
-    public function count()
+    public function count(): int
     {
         return count($this->_resultSets);
     }
 
     /**
-     * @param string|int $offset
-     *
-     * @return bool true on success or false on failure
+     * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->_resultSets[$offset]);
     }
 
     /**
-     * @param mixed $offset
-     *
-     * @return mixed can return all value types
+     * {@inheritdoc}
      */
     public function offsetGet($offset)
     {
@@ -142,12 +145,11 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param mixed $offset
-     * @param mixed $value
+     * {@inheritdoc}
      */
     public function offsetSet($offset, $value)
     {
-        if (is_null($offset)) {
+        if (null === $offset) {
             $this->_resultSets[] = $value;
         } else {
             $this->_resultSets[$offset] = $value;
@@ -155,7 +157,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
     }
 
     /**
-     * @param mixed $offset
+     * {@inheritdoc}
      */
     public function offsetUnset($offset)
     {
