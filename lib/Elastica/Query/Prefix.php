@@ -27,7 +27,7 @@ class Prefix extends AbstractQuery
      *
      * @return $this
      */
-    public function setRawPrefix(array $prefix)
+    public function setRawPrefix(array $prefix): self
     {
         return $this->setParams($prefix);
     }
@@ -41,7 +41,7 @@ class Prefix extends AbstractQuery
      *
      * @return $this
      */
-    public function setPrefix($key, $value, $boost = 1.0)
+    public function setPrefix(string $key, $value, float $boost = 1.0): self
     {
         return $this->setRawPrefix([$key => ['value' => $value, 'boost' => $boost]]);
     }

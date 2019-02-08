@@ -16,11 +16,11 @@ class BoolQuery extends AbstractQuery
     /**
      * Add should part to query.
      *
-     * @param \Elastica\Query\AbstractQuery|array $args Should query
+     * @param AbstractQuery|array $args Should query
      *
      * @return $this
      */
-    public function addShould($args)
+    public function addShould($args): self
     {
         return $this->_addQuery('should', $args);
     }
@@ -28,11 +28,11 @@ class BoolQuery extends AbstractQuery
     /**
      * Add must part to query.
      *
-     * @param \Elastica\Query\AbstractQuery|array $args Must query
+     * @param AbstractQuery|array $args Must query
      *
      * @return $this
      */
-    public function addMust($args)
+    public function addMust($args): self
     {
         return $this->_addQuery('must', $args);
     }
@@ -40,11 +40,11 @@ class BoolQuery extends AbstractQuery
     /**
      * Add must not part to query.
      *
-     * @param \Elastica\Query\AbstractQuery|array $args Must not query
+     * @param AbstractQuery|array $args Must not query
      *
      * @return $this
      */
-    public function addMustNot($args)
+    public function addMustNot($args): self
     {
         return $this->_addQuery('must_not', $args);
     }
@@ -52,11 +52,11 @@ class BoolQuery extends AbstractQuery
     /**
      * Sets the filter.
      *
-     * @param \Elastica\Query\AbstractQuery $filter Filter object
+     * @param AbstractQuery $filter Filter object
      *
      * @return $this
      */
-    public function addFilter(AbstractQuery $filter)
+    public function addFilter(AbstractQuery $filter): self
     {
         return $this->addParam('filter', $filter);
     }
@@ -64,14 +64,14 @@ class BoolQuery extends AbstractQuery
     /**
      * Adds a query to the current object.
      *
-     * @param string                              $type Query type
-     * @param \Elastica\Query\AbstractQuery|array $args Query
+     * @param string              $type Query type
+     * @param AbstractQuery|array $args Query
      *
-     * @throws \Elastica\Exception\InvalidException If not valid query
+     * @throws InvalidException If not valid query
      *
      * @return $this
      */
-    protected function _addQuery($type, $args)
+    protected function _addQuery(string $type, $args): self
     {
         if (!is_array($args) && !($args instanceof AbstractQuery)) {
             throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
@@ -87,7 +87,7 @@ class BoolQuery extends AbstractQuery
      *
      * @return $this
      */
-    public function setBoost($boost)
+    public function setBoost(float $boost): self
     {
         return $this->setParam('boost', $boost);
     }
@@ -99,17 +99,15 @@ class BoolQuery extends AbstractQuery
      *
      * @return $this
      */
-    public function setMinimumShouldMatch($minimum)
+    public function setMinimumShouldMatch($minimum): self
     {
         return $this->setParam('minimum_should_match', $minimum);
     }
 
     /**
-     * Converts array to an object in case no queries are added.
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         if (empty($this->_params)) {
             $this->_params = new \stdClass();

@@ -2,8 +2,6 @@
 
 namespace Elastica\Query;
 
-use Elastica\Exception\InvalidException;
-
 /**
  * QueryString query.
  *
@@ -25,7 +23,7 @@ class QueryString extends AbstractQuery
      *
      * @param string $queryString OPTIONAL Query string for object
      */
-    public function __construct($queryString = '')
+    public function __construct(string $queryString = '')
     {
         $this->setQuery($queryString);
     }
@@ -35,16 +33,10 @@ class QueryString extends AbstractQuery
      *
      * @param string $query Query string
      *
-     * @throws \Elastica\Exception\InvalidException If given parameter is not a string
-     *
      * @return $this
      */
-    public function setQuery($query = '')
+    public function setQuery(string $query = ''): self
     {
-        if (!is_string($query)) {
-            throw new InvalidException('Parameter has to be a string');
-        }
-
         return $this->setParam('query', $query);
     }
 
@@ -58,7 +50,7 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setDefaultField($field)
+    public function setDefaultField(string $field): self
     {
         return $this->setParam('default_field', $field);
     }
@@ -72,7 +64,7 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setDefaultOperator($operator)
+    public function setDefaultOperator(string $operator = 'or'): self
     {
         return $this->setParam('default_operator', $operator);
     }
@@ -84,7 +76,7 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setAnalyzer($analyzer)
+    public function setAnalyzer(string $analyzer): self
     {
         return $this->setParam('analyzer', $analyzer);
     }
@@ -98,9 +90,9 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setAllowLeadingWildcard($allow = true)
+    public function setAllowLeadingWildcard(bool $allow = true): self
     {
-        return $this->setParam('allow_leading_wildcard', (bool) $allow);
+        return $this->setParam('allow_leading_wildcard', $allow);
     }
 
     /**
@@ -112,9 +104,9 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setEnablePositionIncrements($enabled = true)
+    public function setEnablePositionIncrements(bool $enabled = true): self
     {
-        return $this->setParam('enable_position_increments', (bool) $enabled);
+        return $this->setParam('enable_position_increments', $enabled);
     }
 
     /**
@@ -126,9 +118,9 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setFuzzyPrefixLength($length = 0)
+    public function setFuzzyPrefixLength(int $length = 0): self
     {
-        return $this->setParam('fuzzy_prefix_length', (int) $length);
+        return $this->setParam('fuzzy_prefix_length', $length);
     }
 
     /**
@@ -140,9 +132,9 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setFuzzyMinSim($minSim = 0.5)
+    public function setFuzzyMinSim(float $minSim = 0.5): self
     {
-        return $this->setParam('fuzzy_min_sim', (float) $minSim);
+        return $this->setParam('fuzzy_min_sim', $minSim);
     }
 
     /**
@@ -155,9 +147,9 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setPhraseSlop($phraseSlop = 0)
+    public function setPhraseSlop(int $phraseSlop = 0): self
     {
-        return $this->setParam('phrase_slop', (int) $phraseSlop);
+        return $this->setParam('phrase_slop', $phraseSlop);
     }
 
     /**
@@ -169,9 +161,9 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setBoost($boost = 1.0)
+    public function setBoost(float $boost = 1.0): self
     {
-        return $this->setParam('boost', (float) $boost);
+        return $this->setParam('boost', $boost);
     }
 
     /**
@@ -183,9 +175,9 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setAnalyzeWildcard($analyze = true)
+    public function setAnalyzeWildcard(bool $analyze = true): self
     {
-        return $this->setParam('analyze_wildcard', (bool) $analyze);
+        return $this->setParam('analyze_wildcard', $analyze);
     }
 
     /**
@@ -197,9 +189,9 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setAutoGeneratePhraseQueries($autoGenerate = true)
+    public function setAutoGeneratePhraseQueries(bool $autoGenerate = true): self
     {
-        return $this->setParam('auto_generate_phrase_queries', (bool) $autoGenerate);
+        return $this->setParam('auto_generate_phrase_queries', $autoGenerate);
     }
 
     /**
@@ -208,16 +200,10 @@ class QueryString extends AbstractQuery
      *
      * @param array $fields Fields
      *
-     * @throws \Elastica\Exception\InvalidException If given parameter is not an array
-     *
      * @return $this
      */
-    public function setFields(array $fields)
+    public function setFields(array $fields): self
     {
-        if (!is_array($fields)) {
-            throw new InvalidException('Parameter has to be an array');
-        }
-
         return $this->setParam('fields', $fields);
     }
 
@@ -228,23 +214,23 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setUseDisMax($value = true)
+    public function setUseDisMax(bool $value = true): self
     {
-        return $this->setParam('use_dis_max', (bool) $value);
+        return $this->setParam('use_dis_max', $value);
     }
 
     /**
      * When using dis_max, the disjunction max tie breaker.
      *
-     * If not set, defaults to 0.
+     * If not set, defaults to 0.0.
      *
-     * @param int $tieBreaker
+     * @param float $tieBreaker
      *
      * @return $this
      */
-    public function setTieBreaker($tieBreaker = 0)
+    public function setTieBreaker(float $tieBreaker = 0.0): self
     {
-        return $this->setParam('tie_breaker', (float) $tieBreaker);
+        return $this->setParam('tie_breaker', $tieBreaker);
     }
 
     /**
@@ -254,7 +240,7 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setRewrite($rewrite = '')
+    public function setRewrite(string $rewrite = ''): self
     {
         return $this->setParam('rewrite', $rewrite);
     }
@@ -266,19 +252,15 @@ class QueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setTimezone($timezone)
+    public function setTimezone(string $timezone): self
     {
         return $this->setParam('time_zone', $timezone);
     }
 
     /**
-     * Converts query to array.
-     *
-     * @see \Elastica\Query\AbstractQuery::toArray()
-     *
-     * @return array Query array
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return ['query_string' => array_merge(['query' => $this->_queryString], $this->getParams())];
     }

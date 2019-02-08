@@ -18,7 +18,7 @@ class Regexp extends AbstractQuery
      * @param string $value OPTIONAL Regexp value
      * @param float  $boost OPTIONAL Boost value (default = 1)
      */
-    public function __construct($key = '', $value = null, $boost = 1.0)
+    public function __construct(string $key = '', string $value = null, float $boost = 1.0)
     {
         if (!empty($key)) {
             $this->setValue($key, $value, $boost);
@@ -34,7 +34,7 @@ class Regexp extends AbstractQuery
      *
      * @return $this
      */
-    public function setValue($key, $value, $boost = 1.0)
+    public function setValue(string $key, string $value = null, float $boost = 1.0)
     {
         return $this->setParam($key, ['value' => $value, 'boost' => $boost]);
     }

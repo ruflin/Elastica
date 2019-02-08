@@ -16,7 +16,7 @@ class MatchPhrase extends AbstractQuery
      * @param string $field
      * @param mixed  $values
      */
-    public function __construct($field = null, $values = null)
+    public function __construct(string $field = null, $values = null)
     {
         if (null !== $field && null !== $values) {
             $this->setParam($field, $values);
@@ -31,7 +31,7 @@ class MatchPhrase extends AbstractQuery
      *
      * @return $this
      */
-    public function setField($field, $values)
+    public function setField(string $field, $values): self
     {
         return $this->setParam($field, $values);
     }
@@ -45,7 +45,7 @@ class MatchPhrase extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldParam($field, $key, $value)
+    public function setFieldParam(string $field, string $key, string $value): self
     {
         if (!isset($this->_params[$field])) {
             $this->_params[$field] = [];
@@ -64,7 +64,7 @@ class MatchPhrase extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldQuery($field, $query)
+    public function setFieldQuery(string $field, string $query): self
     {
         return $this->setFieldParam($field, 'query', $query);
     }
@@ -77,7 +77,7 @@ class MatchPhrase extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldAnalyzer($field, $analyzer)
+    public function setFieldAnalyzer(string $field, string $analyzer): self
     {
         return $this->setFieldParam($field, 'analyzer', $analyzer);
     }
@@ -92,8 +92,8 @@ class MatchPhrase extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldBoost($field, $boost = 1.0)
+    public function setFieldBoost(string $field, float $boost = 1.0): self
     {
-        return $this->setFieldParam($field, 'boost', (float) $boost);
+        return $this->setFieldParam($field, 'boost', $boost);
     }
 }

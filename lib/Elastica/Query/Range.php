@@ -17,7 +17,7 @@ class Range extends AbstractQuery
      * @param string $fieldName Field name
      * @param array  $args      Field arguments
      */
-    public function __construct($fieldName = null, array $args = [])
+    public function __construct(string $fieldName = null, array $args = [])
     {
         if ($fieldName) {
             $this->addField($fieldName, $args);
@@ -32,7 +32,7 @@ class Range extends AbstractQuery
      *
      * @return $this
      */
-    public function addField($fieldName, array $args)
+    public function addField(string $fieldName, array $args): self
     {
         return $this->setParam($fieldName, $args);
     }

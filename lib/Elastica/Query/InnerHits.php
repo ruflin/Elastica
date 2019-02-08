@@ -15,7 +15,7 @@ use Elastica\Script\ScriptFields;
 class InnerHits extends AbstractQuery
 {
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function toArray()
     {
@@ -38,7 +38,7 @@ class InnerHits extends AbstractQuery
      *
      * @return $this
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         return $this->setParam('name', $name);
     }
@@ -50,9 +50,9 @@ class InnerHits extends AbstractQuery
      *
      * @return $this
      */
-    public function setSize($size)
+    public function setSize(int $size = 3): self
     {
-        return $this->setParam('size', (int) $size);
+        return $this->setParam('size', $size);
     }
 
     /**
@@ -62,9 +62,9 @@ class InnerHits extends AbstractQuery
      *
      * @return $this
      */
-    public function setFrom($from)
+    public function setFrom(int $from)
     {
-        return $this->setParam('from', (int) $from);
+        return $this->setParam('from', $from);
     }
 
     /**
@@ -74,7 +74,7 @@ class InnerHits extends AbstractQuery
      *
      * @return $this
      */
-    public function setSort(array $sortArgs)
+    public function setSort(array $sortArgs): self
     {
         return $this->setParam('sort', $sortArgs);
     }
@@ -86,7 +86,7 @@ class InnerHits extends AbstractQuery
      *
      * @return $this
      */
-    public function setSource($params)
+    public function setSource($params): self
     {
         return $this->setParam('_source', $params);
     }
@@ -98,9 +98,9 @@ class InnerHits extends AbstractQuery
      *
      * @return $this
      */
-    public function setVersion($version)
+    public function setVersion(bool $version): self
     {
-        return $this->setParam('version', (bool) $version);
+        return $this->setParam('version', $version);
     }
 
     /**
@@ -110,19 +110,19 @@ class InnerHits extends AbstractQuery
      *
      * @return $this
      */
-    public function setExplain($explain)
+    public function setExplain(bool $explain): self
     {
-        return $this->setParam('explain', (bool) $explain);
+        return $this->setParam('explain', $explain);
     }
 
     /**
      * Set script fields.
      *
-     * @param \Elastica\Script\ScriptFields $scriptFields
+     * @param ScriptFields $scriptFields
      *
      * @return $this
      */
-    public function setScriptFields(ScriptFields $scriptFields)
+    public function setScriptFields(ScriptFields $scriptFields): self
     {
         return $this->setParam('script_fields', $scriptFields);
     }
@@ -130,12 +130,12 @@ class InnerHits extends AbstractQuery
     /**
      * Adds a Script to the aggregation.
      *
-     * @param string                          $name
-     * @param \Elastica\Script\AbstractScript $script
+     * @param string         $name
+     * @param AbstractScript $script
      *
      * @return $this
      */
-    public function addScriptField($name, AbstractScript $script)
+    public function addScriptField(string $name, AbstractScript $script): self
     {
         if (!isset($this->_params['script_fields'])) {
             $this->_params['script_fields'] = new ScriptFields();
@@ -153,7 +153,7 @@ class InnerHits extends AbstractQuery
      *
      * @return $this
      */
-    public function setHighlight(array $highlightArgs)
+    public function setHighlight(array $highlightArgs): self
     {
         return $this->setParam('highlight', $highlightArgs);
     }
@@ -165,7 +165,7 @@ class InnerHits extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldDataFields(array $fields)
+    public function setFieldDataFields(array $fields): self
     {
         return $this->setParam('docvalue_fields', $fields);
     }

@@ -30,7 +30,7 @@ class Ids extends AbstractQuery
      *
      * @return $this
      */
-    public function addId($id)
+    public function addId(string $id): self
     {
         $this->_params['values'][] = $id;
 
@@ -44,7 +44,7 @@ class Ids extends AbstractQuery
      *
      * @return $this
      */
-    public function setIds($ids)
+    public function setIds($ids): self
     {
         if (is_array($ids)) {
             $this->_params['values'] = $ids;
@@ -56,13 +56,9 @@ class Ids extends AbstractQuery
     }
 
     /**
-     * Converts filter to array.
-     *
-     * @see \Elastica\Query\AbstractQuery::toArray()
-     *
-     * @return array Query array
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return ['ids' => $this->_params];
     }

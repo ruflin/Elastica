@@ -16,10 +16,10 @@ class SimpleQueryString extends AbstractQuery
      * @param string $query
      * @param array  $fields
      */
-    public function __construct($query, array $fields = [])
+    public function __construct(string $query, array $fields = [])
     {
         $this->setQuery($query);
-        if (count($fields)) {
+        if (0 < count($fields)) {
             $this->setFields($fields);
         }
     }
@@ -31,7 +31,7 @@ class SimpleQueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setQuery($query)
+    public function setQuery(string $query): self
     {
         return $this->setParam('query', $query);
     }
@@ -41,7 +41,7 @@ class SimpleQueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setFields(array $fields)
+    public function setFields(array $fields): self
     {
         return $this->setParam('fields', $fields);
     }
@@ -53,7 +53,7 @@ class SimpleQueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setDefaultOperator($operator)
+    public function setDefaultOperator(string $operator = self::OPERATOR_OR): self
     {
         return $this->setParam('default_operator', $operator);
     }
@@ -65,7 +65,7 @@ class SimpleQueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setAnalyzer($analyzer)
+    public function setAnalyzer(string $analyzer): self
     {
         return $this->setParam('analyzer', $analyzer);
     }
@@ -77,7 +77,7 @@ class SimpleQueryString extends AbstractQuery
      *
      * @return $this
      */
-    public function setMinimumShouldMatch($minimumShouldMatch)
+    public function setMinimumShouldMatch($minimumShouldMatch): self
     {
         return $this->setParam('minimum_should_match', $minimumShouldMatch);
     }

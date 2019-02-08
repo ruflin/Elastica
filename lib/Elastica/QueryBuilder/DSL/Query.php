@@ -74,7 +74,7 @@ class Query implements DSL
      *
      * @return Match
      */
-    public function match($field = null, $values = null): Match
+    public function match(string $field = null, $values = null): Match
     {
         return new Match($field, $values);
     }
@@ -126,7 +126,7 @@ class Query implements DSL
      *
      * @return Common
      */
-    public function common_terms($field, $query, $cutoffFrequency): Common
+    public function common_terms(string $field, string $query, float $cutoffFrequency): Common
     {
         return new Common($field, $query, $cutoffFrequency);
     }
@@ -140,7 +140,7 @@ class Query implements DSL
      *
      * @return ConstantScore
      */
-    public function constant_score($filter = null): ConstantScore
+    public function constant_score(AbstractQuery $filter = null): ConstantScore
     {
         return new ConstantScore($filter);
     }
@@ -179,7 +179,7 @@ class Query implements DSL
      *
      * @return Fuzzy
      */
-    public function fuzzy($fieldName = null, $value = null): Fuzzy
+    public function fuzzy(string $fieldName = null, string $value = null): Fuzzy
     {
         return new Fuzzy($fieldName, $value);
     }
@@ -204,7 +204,7 @@ class Query implements DSL
      *
      * @return HasChild
      */
-    public function has_child($query, $type = null): HasChild
+    public function has_child($query, string $type = null): HasChild
     {
         return new HasChild($query, $type);
     }
@@ -219,7 +219,7 @@ class Query implements DSL
      *
      * @return HasParent
      */
-    public function has_parent($query, $type): HasParent
+    public function has_parent($query, string $type): HasParent
     {
         return new HasParent($query, $type);
     }
@@ -287,13 +287,13 @@ class Query implements DSL
     }
 
     /**
-     * @param $type
-     * @param $id
-     * @param $ignoreUnmapped
+     * @param string     $type
+     * @param int|string $id
+     * @param bool       $ignoreUnmapped
      *
      * @return ParentId ParentId
      */
-    public function parent_id($type, $id, $ignoreUnmapped = false): ParentId
+    public function parent_id(string $type, $id, bool $ignoreUnmapped = false): ParentId
     {
         return new ParentId($type, $id, $ignoreUnmapped);
     }
@@ -321,7 +321,7 @@ class Query implements DSL
      *
      * @return QueryString
      */
-    public function query_string($queryString = ''): QueryString
+    public function query_string(string $queryString = ''): QueryString
     {
         return new QueryString($queryString);
     }
@@ -336,7 +336,7 @@ class Query implements DSL
      *
      * @return SimpleQueryString
      */
-    public function simple_query_string($query, array $fields = []): SimpleQueryString
+    public function simple_query_string(string $query, array $fields = []): SimpleQueryString
     {
         return new SimpleQueryString($query, $fields);
     }
@@ -351,7 +351,7 @@ class Query implements DSL
      *
      * @return Range
      */
-    public function range($fieldName = null, array $args = []): Range
+    public function range(string $fieldName = null, array $args = []): Range
     {
         return new Range($fieldName, $args);
     }
@@ -367,7 +367,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html
      */
-    public function regexp($key = '', $value = null, $boost = 1.0): Regexp
+    public function regexp(string $key = '', string $value = null, float $boost = 1.0): Regexp
     {
         return new Regexp($key, $value, $boost);
     }
@@ -375,14 +375,14 @@ class Query implements DSL
     /**
      * span first query.
      *
-     * @param \Elastica\Query\AbstractQuery|array $match
-     * @param int                                 $end
+     * @param AbstractQuery|array $match
+     * @param int                 $end
      *
      * @return SpanFirst
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-first-query.html
      */
-    public function span_first($match = null, $end = null): SpanFirst
+    public function span_first($match = null, int $end = null): SpanFirst
     {
         return new SpanFirst($match, $end);
     }
@@ -390,7 +390,7 @@ class Query implements DSL
     /**
      * span multi term query.
      *
-     * @param \Elastica\Query\AbstractQuery|array $match
+     * @param AbstractQuery|array $match
      *
      * @return SpanMulti
      *
@@ -412,7 +412,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-near-query.html
      */
-    public function span_near($clauses = [], $slop = 1, $inOrder = false): SpanNear
+    public function span_near(array $clauses = [], int $slop = 1, bool $inOrder = false): SpanNear
     {
         return new SpanNear($clauses, $slop, $inOrder);
     }
@@ -441,7 +441,7 @@ class Query implements DSL
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-span-or-query.html
      */
-    public function span_or($clauses = []): SpanOr
+    public function span_or(array $clauses = []): SpanOr
     {
         return new SpanOr($clauses);
     }
@@ -514,7 +514,7 @@ class Query implements DSL
      *
      * @return Terms
      */
-    public function terms($key = '', array $terms = []): Terms
+    public function terms(string $key = '', array $terms = []): Terms
     {
         return new Terms($key, $terms);
     }
@@ -530,7 +530,7 @@ class Query implements DSL
      *
      * @return Wildcard
      */
-    public function wildcard($key = '', $value = null, $boost = 1.0): Wildcard
+    public function wildcard(string $key = '', string $value = null, float $boost = 1.0): Wildcard
     {
         return new Wildcard($key, $value, $boost);
     }
@@ -546,7 +546,7 @@ class Query implements DSL
      *
      * @return GeoDistance
      */
-    public function geo_distance($key, $location, $distance): GeoDistance
+    public function geo_distance(string $key, $location, string $distance): GeoDistance
     {
         return new GeoDistance($key, $location, $distance);
     }
@@ -560,7 +560,7 @@ class Query implements DSL
      *
      * @return Exists
      */
-    public function exists($field): Exists
+    public function exists(string $field): Exists
     {
         return new Exists($field);
     }
@@ -574,7 +574,7 @@ class Query implements DSL
      *
      * @return Type
      */
-    public function type($type = null): Type
+    public function type(string $type = null): Type
     {
         return new Type($type);
     }

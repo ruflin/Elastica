@@ -43,7 +43,7 @@ class GeoShapeProvided extends AbstractGeoShape
      *                            point, envelope, linestring, polygon,
      *                            multipoint or multipolygon
      */
-    public function __construct($path, array $coordinates, $shapeType = self::TYPE_ENVELOPE)
+    public function __construct(string $path, array $coordinates, string $shapeType = self::TYPE_ENVELOPE)
     {
         $this->_path = $path;
         $this->_shapeType = $shapeType;
@@ -51,13 +51,9 @@ class GeoShapeProvided extends AbstractGeoShape
     }
 
     /**
-     * Converts query to array.
-     *
-     * @see \Elastica\Query\AbstractQuery::toArray()
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'geo_shape' => [

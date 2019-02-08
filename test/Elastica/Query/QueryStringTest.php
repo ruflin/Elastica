@@ -257,17 +257,6 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetQueryInvalid()
-    {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
-
-        $query = new QueryString();
-        $query->setQuery([]);
-    }
-
-    /**
-     * @group unit
-     */
     public function testSetTimezone()
     {
         $timezone = 'Europe/Paris';

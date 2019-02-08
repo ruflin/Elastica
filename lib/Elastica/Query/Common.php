@@ -27,7 +27,7 @@ class Common extends AbstractQuery
      * @param string $query           the query string
      * @param float  $cutoffFrequency percentage in decimal form (.001 == 0.1%)
      */
-    public function __construct($field, $query, $cutoffFrequency)
+    public function __construct(string $field, string $query, float $cutoffFrequency)
     {
         $this->setField($field);
         $this->setQuery($query);
@@ -41,7 +41,7 @@ class Common extends AbstractQuery
      *
      * @return $this
      */
-    public function setField($field)
+    public function setField(string $field): self
     {
         $this->_field = $field;
 
@@ -55,7 +55,7 @@ class Common extends AbstractQuery
      *
      * @return $this
      */
-    public function setQuery($query)
+    public function setQuery(string $query): self
     {
         return $this->setQueryParam('query', $query);
     }
@@ -67,9 +67,9 @@ class Common extends AbstractQuery
      *
      * @return $this
      */
-    public function setCutoffFrequency($frequency)
+    public function setCutoffFrequency(float $frequency): self
     {
-        return $this->setQueryParam('cutoff_frequency', (float) $frequency);
+        return $this->setQueryParam('cutoff_frequency', $frequency);
     }
 
     /**
@@ -79,7 +79,7 @@ class Common extends AbstractQuery
      *
      * @return $this
      */
-    public function setLowFrequencyOperator($operator)
+    public function setLowFrequencyOperator(string $operator = self::OPERATOR_OR): self
     {
         return $this->setQueryParam('low_freq_operator', $operator);
     }
@@ -91,7 +91,7 @@ class Common extends AbstractQuery
      *
      * @return $this
      */
-    public function setHighFrequencyOperator($operator)
+    public function setHighFrequencyOperator(string $operator = self::OPERATOR_OR): self
     {
         return $this->setQueryParam('high_frequency_operator', $operator);
     }
@@ -105,7 +105,7 @@ class Common extends AbstractQuery
      *
      * @see Possible values for minimum_should_match https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
-    public function setMinimumShouldMatch($minimum)
+    public function setMinimumShouldMatch($minimum): self
     {
         return $this->setQueryParam('minimum_should_match', $minimum);
     }
@@ -117,9 +117,9 @@ class Common extends AbstractQuery
      *
      * @return $this
      */
-    public function setBoost($boost)
+    public function setBoost(float $boost): self
     {
-        return $this->setQueryParam('boost', (float) $boost);
+        return $this->setQueryParam('boost', $boost);
     }
 
     /**
@@ -129,7 +129,7 @@ class Common extends AbstractQuery
      *
      * @return $this
      */
-    public function setAnalyzer($analyzer)
+    public function setAnalyzer(string $analyzer): self
     {
         return $this->setQueryParam('analyzer', $analyzer);
     }
@@ -142,7 +142,7 @@ class Common extends AbstractQuery
      *
      * @return $this
      */
-    public function setQueryParam($key, $value)
+    public function setQueryParam(string $key, $value): self
     {
         $this->_queryParams[$key] = $value;
 
@@ -150,9 +150,9 @@ class Common extends AbstractQuery
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $this->setParam($this->_field, $this->_queryParams);
 

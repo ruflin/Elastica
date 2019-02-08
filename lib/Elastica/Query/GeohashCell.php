@@ -17,7 +17,7 @@ class GeohashCell extends AbstractGeoDistance
      * @param string|int   $precision Integer length of geohash prefix or distance (3, or "50m")
      * @param bool         $neighbors if true, queries cells next to the given cell
      */
-    public function __construct($key, $location, $precision = -1, $neighbors = false)
+    public function __construct(string $key, $location, $precision = -1, bool $neighbors = false)
     {
         parent::__construct($key, $location);
         $this->setPrecision($precision);
@@ -31,20 +31,20 @@ class GeohashCell extends AbstractGeoDistance
      *
      * @return $this
      */
-    public function setPrecision($precision)
+    public function setPrecision($precision): self
     {
         return $this->setParam('precision', $precision);
     }
 
     /**
-     * Set the neighbors option for this query.
+     * Set the neighbours option for this query.
      *
-     * @param bool $neighbors if true, queries cells next to the given cell
+     * @param bool $neighbours if true, queries cells next to the given cell
      *
      * @return $this
      */
-    public function setNeighbors($neighbors)
+    public function setNeighbors(bool $neighbours): self
     {
-        return $this->setParam('neighbors', (bool) $neighbors);
+        return $this->setParam('neighbors', $neighbours);
     }
 }

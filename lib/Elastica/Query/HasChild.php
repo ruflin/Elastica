@@ -16,10 +16,10 @@ class HasChild extends AbstractQuery
     /**
      * Construct HasChild Query.
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
-     * @param string                                               $type  Parent document type
+     * @param string|BaseQuery|AbstractQuery $query
+     * @param string                         $type  Parent document type
      */
-    public function __construct($query, $type = null)
+    public function __construct($query, string $type = null)
     {
         $this->setType($type);
         $this->setQuery($query);
@@ -28,11 +28,11 @@ class HasChild extends AbstractQuery
     /**
      * Sets query object.
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|BaseQuery|AbstractQuery $query
      *
      * @return $this
      */
-    public function setQuery($query)
+    public function setQuery($query): self
     {
         return $this->setParam('query', BaseQuery::create($query));
     }
@@ -44,7 +44,7 @@ class HasChild extends AbstractQuery
      *
      * @return $this
      */
-    public function setType($type)
+    public function setType(string $type = null): self
     {
         return $this->setParam('type', $type);
     }
@@ -56,7 +56,7 @@ class HasChild extends AbstractQuery
      *
      * @return $this
      */
-    public function setScope($scope)
+    public function setScope(string $scope): self
     {
         return $this->setParam('_scope', $scope);
     }
@@ -68,7 +68,7 @@ class HasChild extends AbstractQuery
      *
      * @return $this
      */
-    public function setInnerHits(InnerHits $innerHits)
+    public function setInnerHits(InnerHits $innerHits): self
     {
         return $this->setParam('inner_hits', $innerHits);
     }
@@ -76,7 +76,7 @@ class HasChild extends AbstractQuery
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = parent::toArray();
 

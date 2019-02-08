@@ -2,8 +2,6 @@
 
 namespace Elastica\Query;
 
-use Elastica\Document;
-
 /**
  * More Like This query.
  *
@@ -18,9 +16,9 @@ class MoreLikeThis extends AbstractQuery
      *
      * @param array $fields Field names
      *
-     * @return \Elastica\Query\MoreLikeThis Current object
+     * @return $this
      */
-    public function setFields(array $fields)
+    public function setFields(array $fields): self
     {
         return $this->setParam('fields', $fields);
     }
@@ -28,11 +26,11 @@ class MoreLikeThis extends AbstractQuery
     /**
      * Set the "like" value.
      *
-     * @param string|Document $like
+     * @param string|self $like
      *
      * @return $this
      */
-    public function setLike($like)
+    public function setLike($like): self
     {
         return $this->setParam('like', $like);
     }
@@ -44,9 +42,9 @@ class MoreLikeThis extends AbstractQuery
      *
      * @return $this
      */
-    public function setBoost($boost)
+    public function setBoost(float $boost = 1.0): self
     {
-        return $this->setParam('boost', (float) $boost);
+        return $this->setParam('boost', $boost);
     }
 
     /**
@@ -56,9 +54,9 @@ class MoreLikeThis extends AbstractQuery
      *
      * @return $this
      */
-    public function setMaxQueryTerms($maxQueryTerms)
+    public function setMaxQueryTerms(int $maxQueryTerms = 25): self
     {
-        return $this->setParam('max_query_terms', (int) $maxQueryTerms);
+        return $this->setParam('max_query_terms', $maxQueryTerms);
     }
 
     /**
@@ -68,9 +66,9 @@ class MoreLikeThis extends AbstractQuery
      *
      * @return $this
      */
-    public function setMinTermFrequency($minTermFreq)
+    public function setMinTermFrequency(int $minTermFreq = 2): self
     {
-        return $this->setParam('min_term_freq', (int) $minTermFreq);
+        return $this->setParam('min_term_freq', $minTermFreq);
     }
 
     /**
@@ -80,9 +78,9 @@ class MoreLikeThis extends AbstractQuery
      *
      * @return $this
      */
-    public function setMinDocFrequency($minDocFreq)
+    public function setMinDocFrequency(int $minDocFreq = 5): self
     {
-        return $this->setParam('min_doc_freq', (int) $minDocFreq);
+        return $this->setParam('min_doc_freq', $minDocFreq);
     }
 
     /**
@@ -92,9 +90,9 @@ class MoreLikeThis extends AbstractQuery
      *
      * @return $this
      */
-    public function setMaxDocFrequency($maxDocFreq)
+    public function setMaxDocFrequency(int $maxDocFreq = 0): self
     {
-        return $this->setParam('max_doc_freq', (int) $maxDocFreq);
+        return $this->setParam('max_doc_freq', $maxDocFreq);
     }
 
     /**
@@ -104,9 +102,9 @@ class MoreLikeThis extends AbstractQuery
      *
      * @return $this
      */
-    public function setMinWordLength($minWordLength)
+    public function setMinWordLength(int $minWordLength = 0): self
     {
-        return $this->setParam('min_word_length', (int) $minWordLength);
+        return $this->setParam('min_word_length', $minWordLength);
     }
 
     /**
@@ -116,9 +114,9 @@ class MoreLikeThis extends AbstractQuery
      *
      * @return $this
      */
-    public function setMaxWordLength($maxWordLength)
+    public function setMaxWordLength(int $maxWordLength = 0): self
     {
-        return $this->setParam('max_word_length', (int) $maxWordLength);
+        return $this->setParam('max_word_length', $maxWordLength);
     }
 
     /**
@@ -128,9 +126,9 @@ class MoreLikeThis extends AbstractQuery
      *
      * @return $this
      */
-    public function setBoostTerms($boostTerms)
+    public function setBoostTerms(bool $boostTerms = false): self
     {
-        return $this->setParam('boost_terms', (bool) $boostTerms);
+        return $this->setParam('boost_terms', $boostTerms);
     }
 
     /**
@@ -140,7 +138,7 @@ class MoreLikeThis extends AbstractQuery
      *
      * @return $this
      */
-    public function setAnalyzer($analyzer)
+    public function setAnalyzer(string $analyzer): self
     {
         $analyzer = trim($analyzer);
 
@@ -154,7 +152,7 @@ class MoreLikeThis extends AbstractQuery
      *
      * @return $this
      */
-    public function setStopWords(array $stopWords)
+    public function setStopWords(array $stopWords): self
     {
         return $this->setParam('stop_words', $stopWords);
     }
@@ -166,12 +164,15 @@ class MoreLikeThis extends AbstractQuery
      *
      * @return $this
      */
-    public function setMinimumShouldMatch($minimumShouldMatch)
+    public function setMinimumShouldMatch($minimumShouldMatch = '30%'): self
     {
         return $this->setParam('minimum_should_match', $minimumShouldMatch);
     }
 
-    public function toArray()
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray(): array
     {
         $array = parent::toArray();
 

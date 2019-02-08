@@ -57,7 +57,7 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function setQuery(AbstractQuery $query)
+    public function setQuery(AbstractQuery $query): self
     {
         return $this->setParam('query', $query);
     }
@@ -65,20 +65,24 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a function to the function_score query.
      *
-     * @param string        $functionType   valid values are DECAY_* constants and script_score
-     * @param array|float   $functionParams the body of the function. See documentation for proper syntax.
-     * @param AbstractQuery $filter         optional filter to apply to the function
-     * @param float         $weight         function weight
+     * @param string                     $functionType   valid values are DECAY_* constants and script_score
+     * @param array|float|AbstractScript $functionParams the body of the function. See documentation for proper syntax.
+     * @param AbstractQuery              $filter         filter to apply to the function
+     * @param float                      $weight         function weight
      *
      * @return $this
      */
-    public function addFunction($functionType, $functionParams, AbstractQuery $filter = null, $weight = null)
-    {
+    public function addFunction(
+        string $functionType,
+        $functionParams,
+        AbstractQuery $filter = null,
+        float $weight = null
+    ): self {
         $function = [
             $functionType => $functionParams,
         ];
 
-        if (!is_null($filter)) {
+        if (null !== $filter) {
             $function['filter'] = $filter;
         }
 
@@ -94,13 +98,13 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a script_score function to the query.
      *
-     * @param \Elastica\Script\AbstractScript $script a Script object
-     * @param AbstractQuery                   $filter an optional filter to apply to the function
-     * @param float                           $weight the weight of the function
+     * @param AbstractScript $script a Script object
+     * @param AbstractQuery  $filter an optional filter to apply to the function
+     * @param float          $weight the weight of the function
      *
      * @return $this
      */
-    public function addScriptScoreFunction(AbstractScript $script, AbstractQuery $filter = null, $weight = null)
+    public function addScriptScoreFunction(AbstractScript $script, AbstractQuery $filter = null, float $weight = null)
     {
         return $this->addFunction('script_score', $script, $filter, $weight);
     }
@@ -121,15 +125,15 @@ class FunctionScore extends AbstractQuery
      * @return $this
      */
     public function addDecayFunction(
-        $function,
-        $field,
-        $origin,
-        $scale,
-        $offset = null,
-        $decay = null,
-        $weight = null,
+        string $function,
+        string $field,
+        string $origin,
+        string $scale,
+        string $offset = null,
+        float $decay = null,
+        float $weight = null,
         AbstractQuery $filter = null,
-        $multiValueMode = null
+        string $multiValueMode = null
     ) {
         $functionParams = [
             $field => [
@@ -137,11 +141,11 @@ class FunctionScore extends AbstractQuery
                 'scale' => $scale,
             ],
         ];
-        if (!is_null($offset)) {
+        if (null !== $offset) {
             $functionParams[$field]['offset'] = $offset;
         }
-        if (!is_null($decay)) {
-            $functionParams[$field]['decay'] = (float) $decay;
+        if (null !== $decay) {
+            $functionParams[$field]['decay'] = $decay;
         }
 
         if (null !== $multiValueMode) {
@@ -151,27 +155,37 @@ class FunctionScore extends AbstractQuery
         return $this->addFunction($function, $functionParams, $filter, $weight);
     }
 
+    /**
+     * @param string             $field
+     * @param float|null         $factor
+     * @param string|null        $modifier
+     * @param float|null         $missing
+     * @param float|null         $weight
+     * @param AbstractQuery|null $filter
+     *
+     * @return $this
+     */
     public function addFieldValueFactorFunction(
-        $field,
-        $factor = null,
-        $modifier = null,
-        $missing = null,
-        $weight = null,
+        string $field,
+        float $factor = null,
+        string $modifier = null,
+        float $missing = null,
+        float $weight = null,
         AbstractQuery $filter = null
-    ) {
+    ): self {
         $functionParams = [
             'field' => $field,
         ];
 
-        if (!is_null($factor)) {
+        if (null !== $factor) {
             $functionParams['factor'] = $factor;
         }
 
-        if (!is_null($modifier)) {
+        if (null !== $modifier) {
             $functionParams['modifier'] = $modifier;
         }
 
-        if (!is_null($missing)) {
+        if (null !== $missing) {
             $functionParams['missing'] = $missing;
         }
 
@@ -184,7 +198,7 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function addWeightFunction($weight, AbstractQuery $filter = null)
+    public function addWeightFunction(float $weight, AbstractQuery $filter = null): self
     {
         return $this->addFunction('weight', $weight, $filter);
     }
@@ -192,15 +206,19 @@ class FunctionScore extends AbstractQuery
     /**
      * Add a random_score function to the query.
      *
-     * @param number        $seed   the seed value
+     * @param int           $seed   the seed value
      * @param AbstractQuery $filter a filter associated with this function
      * @param float         $weight an optional boost value associated with this function
      * @param string        $field  the field to be used for random number generation
      *
      * @return $this
      */
-    public function addRandomScoreFunction($seed, AbstractQuery $filter = null, $weight = null, $field = null)
-    {
+    public function addRandomScoreFunction(
+        int $seed,
+        AbstractQuery $filter = null,
+        float $weight = null,
+        string $field = null
+    ): self {
         $functionParams = [
             'seed' => $seed,
         ];
@@ -219,9 +237,9 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function setBoost($boost)
+    public function setBoost(float $boost): self
     {
-        return $this->setParam('boost', (float) $boost);
+        return $this->setParam('boost', $boost);
     }
 
     /**
@@ -231,9 +249,9 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function setMaxBoost($maxBoost)
+    public function setMaxBoost(float $maxBoost): self
     {
-        return $this->setParam('max_boost', (float) $maxBoost);
+        return $this->setParam('max_boost', $maxBoost);
     }
 
     /**
@@ -243,7 +261,7 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function setBoostMode($mode)
+    public function setBoostMode(string $mode = self::BOOST_MODE_MULTIPLY): self
     {
         return $this->setParam('boost_mode', $mode);
     }
@@ -255,10 +273,10 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function setRandomScore($seed = null)
+    public function setRandomScore(int $seed = null): self
     {
         $seedParam = new \stdClass();
-        if (!is_null($seed)) {
+        if (null !== $seed) {
             $seedParam->seed = $seed;
         }
 
@@ -272,7 +290,7 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function setScoreMode($mode)
+    public function setScoreMode(string $mode = self::SCORE_MODE_MULTIPLY): self
     {
         return $this->setParam('score_mode', $mode);
     }
@@ -284,17 +302,17 @@ class FunctionScore extends AbstractQuery
      *
      * @return $this
      */
-    public function setMinScore($minScore)
+    public function setMinScore(float $minScore): self
     {
-        return $this->setParam('min_score', (float) $minScore);
+        return $this->setParam('min_score', $minScore);
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
-        if (sizeof($this->_functions)) {
+        if (0 < \count($this->_functions)) {
             $this->setParam('functions', $this->_functions);
         }
 

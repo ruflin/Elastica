@@ -16,13 +16,13 @@ class DisMax extends AbstractQuery
     /**
      * Adds a query to the current object.
      *
-     * @param \Elastica\Query\AbstractQuery|array $args Query
+     * @param AbstractQuery|array $args Query
      *
-     * @throws \Elastica\Exception\InvalidException If not valid query
+     * @throws InvalidException If not valid query
      *
      * @return $this
      */
-    public function addQuery($args)
+    public function addQuery($args): self
     {
         if (!is_array($args) && !($args instanceof AbstractQuery)) {
             throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');
@@ -38,7 +38,7 @@ class DisMax extends AbstractQuery
      *
      * @return $this
      */
-    public function setBoost($boost)
+    public function setBoost(float $boost): self
     {
         return $this->setParam('boost', $boost);
     }
@@ -52,7 +52,7 @@ class DisMax extends AbstractQuery
      *
      * @return $this
      */
-    public function setTieBreaker($tieBreaker = 0.0)
+    public function setTieBreaker(float $tieBreaker = 0.0): self
     {
         return $this->setParam('tie_breaker', $tieBreaker);
     }

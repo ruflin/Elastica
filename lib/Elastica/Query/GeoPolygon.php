@@ -31,20 +31,16 @@ class GeoPolygon extends AbstractQuery
      * @param string $key    Key
      * @param array  $points Points making up polygon
      */
-    public function __construct($key, array $points)
+    public function __construct(string $key, array $points)
     {
         $this->_key = $key;
         $this->_points = $points;
     }
 
     /**
-     * Converts query to array.
-     *
-     * @see \Elastica\Query\AbstractQuery::toArray()
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'geo_polygon' => [
@@ -57,10 +53,8 @@ class GeoPolygon extends AbstractQuery
 
     /**
      * {@inheritdoc}
-     *
-     * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->_key);
     }

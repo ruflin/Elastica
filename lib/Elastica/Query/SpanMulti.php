@@ -17,7 +17,7 @@ class SpanMulti extends AbstractSpanQuery
     /**
      * Constructs a SpanMulti query object.
      *
-     * @param \Elastica\Query\AbstractQuery|array $match OPTIONAL
+     * @param AbstractQuery|array $match
      */
     public function __construct($match = null)
     {
@@ -29,11 +29,11 @@ class SpanMulti extends AbstractSpanQuery
     /**
      * Set the query to be wrapped into the span multi query.
      *
-     * @param \Elastica\Query\AbstractQuery|array $args Matching query
+     * @param AbstractQuery|array $args Matching query
      *
      * @return $this
      */
-    public function setMatch($args)
+    public function setMatch($args): self
     {
         return $this->_setQuery('match', $args);
     }
@@ -41,14 +41,14 @@ class SpanMulti extends AbstractSpanQuery
     /**
      * Sets a query to the current object.
      *
-     * @param string                              $type Query type
-     * @param \Elastica\Query\AbstractQuery|array $args Query
+     * @param string              $type Query type
+     * @param AbstractQuery|array $args Query
      *
-     * @throws \Elastica\Exception\InvalidException If not valid query
+     * @throws InvalidException If not valid query
      *
      * @return $this
      */
-    protected function _setQuery($type, $args)
+    protected function _setQuery(string $type, $args): self
     {
         if (!is_array($args) && !($args instanceof AbstractQuery)) {
             throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractQuery');

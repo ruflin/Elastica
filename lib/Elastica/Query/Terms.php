@@ -31,10 +31,10 @@ class Terms extends AbstractQuery
     /**
      * Construct terms query.
      *
-     * @param string $key   OPTIONAL Terms key
-     * @param array  $terms OPTIONAL Terms list
+     * @param string $key   Terms key
+     * @param array  $terms Terms list
      */
-    public function __construct($key = '', array $terms = [])
+    public function __construct(string $key = '', array $terms = [])
     {
         $this->setTerms($key, $terms);
     }
@@ -42,12 +42,12 @@ class Terms extends AbstractQuery
     /**
      * Sets key and terms for the query.
      *
-     * @param string $key   Terms key
+     * @param string $key   terms key
      * @param array  $terms terms for the query
      *
      * @return $this
      */
-    public function setTerms($key, array $terms)
+    public function setTerms(string $key, array $terms): self
     {
         $this->_key = $key;
         $this->_terms = array_values($terms);
@@ -58,12 +58,12 @@ class Terms extends AbstractQuery
     /**
      * Sets key and terms lookup for the query.
      *
-     * @param string $key         Terms key
+     * @param string $key         terms key
      * @param array  $termsLookup terms lookup for the query
      *
      * @return $this
      */
-    public function setTermsLookup($key, array $termsLookup)
+    public function setTermsLookup(string $key, array $termsLookup): self
     {
         $this->_key = $key;
         $this->_terms = $termsLookup;
@@ -78,7 +78,7 @@ class Terms extends AbstractQuery
      *
      * @return $this
      */
-    public function addTerm($term)
+    public function addTerm(string $term): self
     {
         $this->_terms[] = $term;
 
@@ -92,21 +92,15 @@ class Terms extends AbstractQuery
      *
      * @return $this
      */
-    public function setMinimumMatch($minimum)
+    public function setMinimumMatch($minimum): self
     {
         return $this->setParam('minimum_match', $minimum);
     }
 
     /**
-     * Converts the terms object to an array.
-     *
-     * @see \Elastica\Query\AbstractQuery::toArray()
-     *
-     * @throws \Elastica\Exception\InvalidException If term key is empty
-     *
-     * @return array Query array
+     * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         if (empty($this->_key)) {
             throw new InvalidException('Terms key has to be set');

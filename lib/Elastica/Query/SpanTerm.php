@@ -15,7 +15,7 @@ class SpanTerm extends AbstractSpanQuery
     /**
      * Constructs the SpanTerm query object.
      *
-     * @param array $term OPTIONAL Calls setRawTerm with the given $term array
+     * @param array $term Calls setRawTerm with the given $term array
      */
     public function __construct(array $term = [])
     {
@@ -30,7 +30,7 @@ class SpanTerm extends AbstractSpanQuery
      *
      * @return $this
      */
-    public function setRawTerm(array $term)
+    public function setRawTerm(array $term): self
     {
         return $this->setParams($term);
     }
@@ -44,7 +44,7 @@ class SpanTerm extends AbstractSpanQuery
      *
      * @return $this
      */
-    public function setTerm($key, $value, $boost = 1.0)
+    public function setTerm(string $key, $value, float $boost = 1.0): self
     {
         return $this->setRawTerm([$key => ['value' => $value, 'boost' => $boost]]);
     }

@@ -14,8 +14,8 @@ class SpanWithin extends AbstractSpanQuery
     /**
      * Constructs a SpanWithin query object.
      *
-     * @param AbstractSpanQuery $little OPTIONAL
-     * @param AbstractSpanQuery $big    OPTIONAL
+     * @param AbstractSpanQuery $little
+     * @param AbstractSpanQuery $big
      */
     public function __construct(AbstractSpanQuery $little = null, AbstractSpanQuery $big = null)
     {
@@ -33,7 +33,7 @@ class SpanWithin extends AbstractSpanQuery
      *
      * @return $this
      */
-    public function setLittle(AbstractSpanQuery $little)
+    public function setLittle(AbstractSpanQuery $little): self
     {
         return $this->setParam('little', $little);
     }
@@ -43,7 +43,7 @@ class SpanWithin extends AbstractSpanQuery
      *
      * @return $this
      */
-    public function setBig(AbstractSpanQuery $big)
+    public function setBig(AbstractSpanQuery $big): self
     {
         return $this->setParam('big', $big);
     }

@@ -2,6 +2,8 @@
 
 namespace Elastica\Query;
 
+use Elastica\Document;
+
 /**
  * Percolate query.
  *
@@ -17,11 +19,11 @@ class Percolate extends AbstractQuery
     /**
      * The field of type percolator and that holds the indexed queries. This is a required parameter.
      *
-     * @param $field
+     * @param string $field
      *
      * @return $this
      */
-    public function setField($field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -29,11 +31,11 @@ class Percolate extends AbstractQuery
     /**
      * The source of the document being percolated.
      *
-     * @param $document
+     * @param Document|array $document
      *
      * @return $this
      */
-    public function setDocument($document)
+    public function setDocument($document): self
     {
         return $this->setParam('document', $document);
     }
@@ -41,11 +43,11 @@ class Percolate extends AbstractQuery
     /**
      * The index the document resides in.
      *
-     * @param $index
+     * @param string $index
      *
      * @return $this
      */
-    public function setDocumentIndex($index)
+    public function setDocumentIndex(string $index): self
     {
         return $this->setParam('index', $index);
     }
@@ -53,11 +55,11 @@ class Percolate extends AbstractQuery
     /**
      * The type of the document to fetch.
      *
-     * @param $type
+     * @param string $type
      *
      * @return $this
      */
-    public function setExistingDocumentType($type)
+    public function setExistingDocumentType(string $type): self
     {
         return $this->setParam('type', $type);
     }
@@ -65,11 +67,11 @@ class Percolate extends AbstractQuery
     /**
      * The id of the document to fetch.
      *
-     * @param $id
+     * @param int|string $id
      *
      * @return $this
      */
-    public function setDocumentId($id)
+    public function setDocumentId($id): self
     {
         return $this->setParam('id', $id);
     }
@@ -77,11 +79,11 @@ class Percolate extends AbstractQuery
     /**
      * Optionally, routing to be used to fetch document to percolate.
      *
-     * @param $routing
+     * @param string $routing
      *
      * @return $this
      */
-    public function setDocumentRouting($routing)
+    public function setDocumentRouting(string $routing): self
     {
         return $this->setParam('routing', $routing);
     }
@@ -89,11 +91,11 @@ class Percolate extends AbstractQuery
     /**
      * Optionally, preference to be used to fetch document to percolate.
      *
-     * @param $preference
+     * @param array $preference
      *
      * @return $this
      */
-    public function setDocumentPreference($preference)
+    public function setDocumentPreference(array $preference): self
     {
         return $this->setParam('preference', $preference);
     }
@@ -101,11 +103,11 @@ class Percolate extends AbstractQuery
     /**
      * Optionally, the expected version of the document to be fetched.
      *
-     * @param $version
+     * @param int $version
      *
      * @return $this
      */
-    public function setDocumentVersion($version)
+    public function setDocumentVersion(int $version): self
     {
         return $this->setParam('version', $version);
     }

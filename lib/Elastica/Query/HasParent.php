@@ -14,10 +14,10 @@ class HasParent extends AbstractQuery
     /**
      * Construct HasChild Query.
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
-     * @param string                                               $type  Parent document type
+     * @param string|BaseQuery|AbstractQuery $query
+     * @param string                         $type  Parent document type
      */
-    public function __construct($query, $type)
+    public function __construct($query, string $type)
     {
         $this->setQuery($query);
         $this->setType($type);
@@ -26,11 +26,11 @@ class HasParent extends AbstractQuery
     /**
      * Sets query object.
      *
-     * @param string|\Elastica\Query|\Elastica\Query\AbstractQuery $query
+     * @param string|BaseQuery|AbstractQuery $query
      *
      * @return $this
      */
-    public function setQuery($query)
+    public function setQuery($query): self
     {
         return $this->setParam('query', BaseQuery::create($query));
     }
@@ -42,7 +42,7 @@ class HasParent extends AbstractQuery
      *
      * @return $this
      */
-    public function setType($type)
+    public function setType(string $type): self
     {
         return $this->setParam('parent_type', $type);
     }
@@ -54,7 +54,7 @@ class HasParent extends AbstractQuery
      *
      * @return $this
      */
-    public function setScope($scope)
+    public function setScope(string $scope): self
     {
         return $this->setParam('_scope', $scope);
     }
@@ -62,7 +62,7 @@ class HasParent extends AbstractQuery
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = parent::toArray();
 

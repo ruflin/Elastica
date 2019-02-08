@@ -14,8 +14,8 @@ class SpanNot extends AbstractSpanQuery
     /**
      * Constructs a SpanWithin query object.
      *
-     * @param AbstractSpanQuery $include OPTIONAL
-     * @param AbstractSpanQuery $exclude OPTIONAL
+     * @param AbstractSpanQuery $include
+     * @param AbstractSpanQuery $exclude
      */
     public function __construct(AbstractSpanQuery $include = null, AbstractSpanQuery $exclude = null)
     {
@@ -33,7 +33,7 @@ class SpanNot extends AbstractSpanQuery
      *
      * @return $this
      */
-    public function setInclude(AbstractSpanQuery $include)
+    public function setInclude(AbstractSpanQuery $include): self
     {
         return $this->setParam('include', $include);
     }
@@ -43,7 +43,7 @@ class SpanNot extends AbstractSpanQuery
      *
      * @return $this
      */
-    public function setExclude(AbstractSpanQuery $exclude)
+    public function setExclude(AbstractSpanQuery $exclude): self
     {
         return $this->setParam('exclude', $exclude);
     }
