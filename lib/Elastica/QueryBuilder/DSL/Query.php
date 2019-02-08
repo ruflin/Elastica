@@ -10,6 +10,7 @@ use Elastica\Query\Boosting;
 use Elastica\Query\Common;
 use Elastica\Query\ConstantScore;
 use Elastica\Query\DisMax;
+use Elastica\Query\Exists;
 use Elastica\Query\Filtered;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\Fuzzy;
@@ -29,6 +30,7 @@ use Elastica\Query\Regexp;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
+use Elastica\Query\Type;
 use Elastica\Query\TopChildren;
 use Elastica\Query\Wildcard;
 use Elastica\QueryBuilder\DSL;
@@ -601,5 +603,33 @@ class Query implements DSL
     public function geo_distance($key, $location, $distance)
     {
         return new GeoDistance($key, $location, $distance);
+    }
+    
+    /**
+     * exists filter.
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-query.html
+     *
+     * @param string $field
+     *
+     * @return Exists
+     */
+    public function exists($field)
+    {
+        return new Exists($field);
+    }
+
+    /**
+     * type filter.
+     *
+     * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-query.html
+     *
+     * @param string $type
+     *
+     * @return Type
+     */
+    public function type($type = null)
+    {
+        return new Type($type);
     }
 }
