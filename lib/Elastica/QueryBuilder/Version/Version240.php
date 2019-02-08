@@ -57,6 +57,8 @@ class Version240 extends Version
         'minimum_should_match',
         'template',
         'geo_distance',
+        'exists',
+        'type',
     ];
 
     protected $filters = [
