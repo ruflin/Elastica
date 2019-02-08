@@ -13,7 +13,7 @@ class ReverseNested extends AbstractAggregation
      * @param string $name The name of this aggregation
      * @param string $path Optional path to the nested object for this aggregation. Defaults to the root of the main document.
      */
-    public function __construct($name, $path = null)
+    public function __construct(string $name, string $path = null)
     {
         parent::__construct($name);
 
@@ -29,7 +29,7 @@ class ReverseNested extends AbstractAggregation
      *
      * @return $this
      */
-    public function setPath($path)
+    public function setPath(string $path)
     {
         return $this->setParam('path', $path);
     }
@@ -37,7 +37,7 @@ class ReverseNested extends AbstractAggregation
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = parent::toArray();
 

@@ -17,7 +17,7 @@ class Terms extends AbstractTermsAggregation
      *
      * @return $this
      */
-    public function setOrder($order, $direction)
+    public function setOrder(string $order, string $direction): self
     {
         return $this->setParam('order', [$order => $direction]);
     }
@@ -29,7 +29,7 @@ class Terms extends AbstractTermsAggregation
      *
      * @return $this
      */
-    public function setOrders(array $orders)
+    public function setOrders(array $orders): self
     {
         return $this->setParam('order', $orders);
     }

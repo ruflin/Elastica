@@ -16,7 +16,7 @@ class Children extends AbstractAggregation
      *
      * @return $this
      */
-    public function setType($type)
+    public function setType(string $type): self
     {
         return $this->setParam('type', $type);
     }

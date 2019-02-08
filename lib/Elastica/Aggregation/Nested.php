@@ -13,7 +13,7 @@ class Nested extends AbstractAggregation
      * @param string $name the name of this aggregation
      * @param string $path the nested path for this aggregation
      */
-    public function __construct($name, $path)
+    public function __construct(string $name, string $path)
     {
         parent::__construct($name);
         $this->setPath($path);
@@ -26,7 +26,7 @@ class Nested extends AbstractAggregation
      *
      * @return $this
      */
-    public function setPath($path)
+    public function setPath(string $path): self
     {
         return $this->setParam('path', $path);
     }

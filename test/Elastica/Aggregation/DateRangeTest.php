@@ -5,12 +5,13 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\DateRange;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Type\Mapping;
 
 class DateRangeTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
         $type = $index->getType('_doc');

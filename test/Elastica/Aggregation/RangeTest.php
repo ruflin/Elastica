@@ -4,11 +4,12 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Range;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 
 class RangeTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 

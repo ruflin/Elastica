@@ -16,8 +16,13 @@ class ScriptedMetric extends AbstractAggregation
      * @param string|null $combineScript Executed once on each shard after document collection is complete
      * @param string|null $reduceScript  Executed once on the coordinating node after all shards have returned their results
      */
-    public function __construct($name, $initScript = null, $mapScript = null, $combineScript = null, $reduceScript = null)
-    {
+    public function __construct(
+        string $name,
+        string $initScript = null,
+        string $mapScript = null,
+        string $combineScript = null,
+        string $reduceScript = null
+    ) {
         parent::__construct($name);
         if ($initScript) {
             $this->setInitScript($initScript);
@@ -43,7 +48,7 @@ class ScriptedMetric extends AbstractAggregation
      *
      * @return $this
      */
-    public function setCombineScript($script)
+    public function setCombineScript(string $script): self
     {
         return $this->setParam('combine_script', $script);
     }
@@ -57,7 +62,7 @@ class ScriptedMetric extends AbstractAggregation
      *
      * @return $this
      */
-    public function setInitScript($script)
+    public function setInitScript(string $script): self
     {
         return $this->setParam('init_script', $script);
     }
@@ -72,7 +77,7 @@ class ScriptedMetric extends AbstractAggregation
      *
      * @return $this
      */
-    public function setMapScript($script)
+    public function setMapScript(string $script): self
     {
         return $this->setParam('map_script', $script);
     }
@@ -87,7 +92,7 @@ class ScriptedMetric extends AbstractAggregation
      *
      * @return $this
      */
-    public function setReduceScript($script)
+    public function setReduceScript(string $script): self
     {
         return $this->setParam('reduce_script', $script);
     }

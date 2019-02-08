@@ -4,12 +4,13 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\GeoBounds;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Type\Mapping;
 
 class GeoBoundsTest extends BaseAggregationTest
 {
-    private function getIndexForTest()
+    private function getIndexForTest(): Index
     {
         $index = $this->_createIndex();
         $type = $index->getType('_doc');

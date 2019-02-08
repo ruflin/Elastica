@@ -4,12 +4,13 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Cardinality;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Type\Mapping;
 
 class CardinalityTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 
@@ -47,46 +48,6 @@ class CardinalityTest extends BaseAggregationTest
         $this->assertEquals(3, $results['value']);
     }
 
-    /**
-     * @dataProvider invalidPrecisionThresholdProvider
-     * @group unit
-     *
-     * @param $threshold
-     */
-    public function testInvalidPrecisionThreshold($threshold)
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $agg = new Cardinality('threshold');
-        $agg->setPrecisionThreshold($threshold);
-    }
-
-    /**
-     * @dataProvider validPrecisionThresholdProvider
-     * @group unit
-     *
-     * @param $threshold
-     */
-    public function testPrecisionThreshold($threshold)
-    {
-        $agg = new Cardinality('threshold');
-        $agg->setPrecisionThreshold($threshold);
-
-        $this->assertNotNull($agg->getParam('precision_threshold'));
-        $this->assertInternalType('int', $agg->getParam('precision_threshold'));
-    }
-
-    public function invalidPrecisionThresholdProvider()
-    {
-        return [
-            'string' => ['100'],
-            'float' => [7.8],
-            'boolean' => [true],
-            'array' => [[]],
-            'object' => [new \StdClass()],
-        ];
-    }
-
     public function validPrecisionThresholdProvider()
     {
         return [
@@ -95,6 +56,21 @@ class CardinalityTest extends BaseAggregationTest
             'positive-int' => [150],
             'more-than-max' => [40001],
         ];
+    }
+
+    /**
+     * @dataProvider validPrecisionThresholdProvider
+     * @group unit
+     *
+     * @param int $threshold
+     */
+    public function testPrecisionThreshold(int $threshold)
+    {
+        $agg = new Cardinality('threshold');
+        $agg->setPrecisionThreshold($threshold);
+
+        $this->assertNotNull($agg->getParam('precision_threshold'));
+        $this->assertInternalType('int', $agg->getParam('precision_threshold'));
     }
 
     /**
@@ -110,31 +86,6 @@ class CardinalityTest extends BaseAggregationTest
 
         $this->assertNotNull($agg->getParam('rehash'));
         $this->assertInternalType('boolean', $agg->getParam('rehash'));
-    }
-
-    /**
-     * @dataProvider invalidRehashProvider
-     * @group unit
-     *
-     * @param mixed $rehash
-     */
-    public function testInvalidRehash($rehash)
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        $agg = new Cardinality('rehash');
-        $agg->setRehash($rehash);
-    }
-
-    public function invalidRehashProvider()
-    {
-        return [
-            'string' => ['100'],
-            'int' => [100],
-            'float' => [7.8],
-            'array' => [[]],
-            'object' => [new \StdClass()],
-        ];
     }
 
     public function validRehashProvider()

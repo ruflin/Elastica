@@ -30,12 +30,8 @@ class Filters extends AbstractAggregation
      *
      * @return $this
      */
-    public function addFilter(AbstractQuery $filter, $name = null)
+    public function addFilter(AbstractQuery $filter, string $name = null): self
     {
-        if (null !== $name && !is_string($name)) {
-            throw new InvalidException('Name must be a string');
-        }
-
         $filterArray = [];
 
         $type = self::NAMED_TYPE;
@@ -64,12 +60,8 @@ class Filters extends AbstractAggregation
      *
      * @return $this
      */
-    public function setOtherBucket($otherBucket)
+    public function setOtherBucket(bool $otherBucket): self
     {
-        if (!is_bool($otherBucket)) {
-            throw new \InvalidArgumentException('other_bucket only supports boolean values');
-        }
-
         return $this->setParam('other_bucket', $otherBucket);
     }
 
@@ -78,7 +70,7 @@ class Filters extends AbstractAggregation
      *
      * @return $this
      */
-    public function setOtherBucketKey($otherBucketKey)
+    public function setOtherBucketKey(string $otherBucketKey): self
     {
         return $this->setParam('other_bucket_key', $otherBucketKey);
     }
@@ -86,7 +78,7 @@ class Filters extends AbstractAggregation
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [];
         $filters = $this->getParam('filters');

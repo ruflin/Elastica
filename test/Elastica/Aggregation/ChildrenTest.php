@@ -5,12 +5,13 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\Children;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Type\Mapping;
 
 class ChildrenTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testaggregationchildren');

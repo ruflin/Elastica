@@ -15,7 +15,7 @@ class IpRange extends AbstractAggregation
      * @param string $name  the name of this aggregation
      * @param string $field the field on which to perform this aggregation
      */
-    public function __construct($name, $field)
+    public function __construct(string $name, string $field)
     {
         parent::__construct($name);
         $this->setField($field);
@@ -28,7 +28,7 @@ class IpRange extends AbstractAggregation
      *
      * @return $this
      */
-    public function setField($field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -43,16 +43,18 @@ class IpRange extends AbstractAggregation
      *
      * @return $this
      */
-    public function addRange($fromValue = null, $toValue = null)
+    public function addRange(string $fromValue = null, string $toValue = null): self
     {
-        if (is_null($fromValue) && is_null($toValue)) {
+        if (null === $fromValue && null === $toValue) {
             throw new InvalidException('Either fromValue or toValue must be set. Both cannot be null.');
         }
+
         $range = [];
-        if (!is_null($fromValue)) {
+        if (null !== $fromValue) {
             $range['from'] = $fromValue;
         }
-        if (!is_null($toValue)) {
+
+        if (null !== $toValue) {
             $range['to'] = $toValue;
         }
 
@@ -66,7 +68,7 @@ class IpRange extends AbstractAggregation
      *
      * @return $this
      */
-    public function addMaskRange($mask)
+    public function addMaskRange(string $mask): self
     {
         return $this->addParam('ranges', ['mask' => $mask]);
     }

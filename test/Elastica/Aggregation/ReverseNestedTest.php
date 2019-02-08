@@ -6,12 +6,13 @@ use Elastica\Aggregation\Nested;
 use Elastica\Aggregation\ReverseNested;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 use Elastica\Type\Mapping;
 
 class ReverseNestedTest extends BaseAggregationTest
 {
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
         $mapping = new Mapping();

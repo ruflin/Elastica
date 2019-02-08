@@ -22,23 +22,23 @@ class Range extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function addRange($fromValue = null, $toValue = null, $key = null)
+    public function addRange($fromValue = null, $toValue = null, string $key = null)
     {
-        if (is_null($fromValue) && is_null($toValue)) {
+        if (null === $fromValue && null === $toValue) {
             throw new InvalidException('Either fromValue or toValue must be set. Both cannot be null.');
         }
 
         $range = [];
 
-        if (!is_null($fromValue)) {
+        if (null !== $fromValue) {
             $range['from'] = $fromValue;
         }
 
-        if (!is_null($toValue)) {
+        if (null !== $toValue) {
             $range['to'] = $toValue;
         }
 
-        if (!is_null($key)) {
+        if (null !== $key) {
             $range['key'] = $key;
         }
 
@@ -52,8 +52,8 @@ class Range extends AbstractSimpleAggregation
      *
      * @return $this
      */
-    public function setKeyedResponse($keyed = true)
+    public function setKeyedResponse(bool $keyed = true)
     {
-        return $this->setParam('keyed', (bool) $keyed);
+        return $this->setParam('keyed', $keyed);
     }
 }

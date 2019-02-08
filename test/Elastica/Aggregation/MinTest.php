@@ -4,13 +4,14 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Min;
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query;
 
 class MinTest extends BaseAggregationTest
 {
     const MIN_PRICE = 1;
 
-    protected function _getIndexForTest()
+    protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
 

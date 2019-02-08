@@ -21,7 +21,7 @@ class SignificantTerms extends AbstractTermsAggregation
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html#_custom_background_context
      */
-    public function setBackgroundFilter(AbstractQuery $filter)
+    public function setBackgroundFilter(AbstractQuery $filter): self
     {
         return $this->setParam('background_filter', $filter);
     }
