@@ -5,7 +5,7 @@ namespace Elastica\Processor;
 /**
  * Elastica Lowercase Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/lowercase-processor.html
  */
@@ -28,7 +28,7 @@ class Lowercase extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }

@@ -5,12 +5,16 @@ namespace Elastica\Processor;
 /**
  * Elastica Date Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/date-processor.html
  */
 class Date extends AbstractProcessor
 {
+    const DEFAULT_TARGET_FIELD_VALUE = '@timestamp';
+    const DEFAULT_TIMEZONE_VALUE = 'UTC';
+    const DEFAULT_LOCALE_VALUE = 'ENGLISH';
+
     /**
      * Date constructor.
      *
@@ -30,7 +34,7 @@ class Date extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -42,7 +46,7 @@ class Date extends AbstractProcessor
      *
      * @return $this
      */
-    public function setFormats(array $formats)
+    public function setFormats(array $formats): self
     {
         return $this->setParam('formats', $formats);
     }
@@ -54,7 +58,7 @@ class Date extends AbstractProcessor
      *
      * @return $this
      */
-    public function setTargetField(string $targetField)
+    public function setTargetField(string $targetField): self
     {
         return $this->setParam('target_field', $targetField);
     }
@@ -66,7 +70,7 @@ class Date extends AbstractProcessor
      *
      * @return $this
      */
-    public function setTimezone(string $timezone)
+    public function setTimezone(string $timezone): self
     {
         return $this->setParam('timezone', $timezone);
     }
@@ -78,7 +82,7 @@ class Date extends AbstractProcessor
      *
      * @return $this
      */
-    public function setLocale(string $locale)
+    public function setLocale(string $locale): self
     {
         return $this->setParam('locale', $locale);
     }

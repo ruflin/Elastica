@@ -5,13 +5,22 @@ namespace Elastica\Processor;
 /**
  * Elastica Convert Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/append-processor.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/convert-processor.html
  */
 class Convert extends AbstractProcessor
 {
-    public function __construct($field, $type)
+    const DEFAULT_TARGET_FIELD_VALUE = 'field';
+    const DEFAULT_IGNORE_MISSING_VALUE = false;
+
+    /**
+     * Convert constructor.
+     *
+     * @param string $field
+     * @param string $type
+     */
+    public function __construct(string $field, string $type)
     {
         $this->setField($field);
         $this->setType($type);
@@ -24,7 +33,7 @@ class Convert extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -36,7 +45,7 @@ class Convert extends AbstractProcessor
      *
      * @return $this
      */
-    public function setType(string $type)
+    public function setType(string $type): self
     {
         return $this->setParam('type', $type);
     }
@@ -48,7 +57,7 @@ class Convert extends AbstractProcessor
      *
      * @return $this
      */
-    public function setTargetField(string $targetField)
+    public function setTargetField(string $targetField): self
     {
         return $this->setParam('target_field', $targetField);
     }
@@ -60,7 +69,7 @@ class Convert extends AbstractProcessor
      *
      * @return $this
      */
-    public function setIgnoreMissing(bool $ignoreMissing)
+    public function setIgnoreMissing(bool $ignoreMissing): self
     {
         return $this->setParam('ignore_missing', $ignoreMissing);
     }

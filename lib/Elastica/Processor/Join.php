@@ -5,7 +5,7 @@ namespace Elastica\Processor;
 /**
  * Elastica Join Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/join-processor.html
  */
@@ -14,10 +14,10 @@ class Join extends AbstractProcessor
     /**
      * Join constructor.
      *
-     * @param $field
-     * @param $separator
+     * @param string $field
+     * @param string $separator
      */
-    public function __construct($field, $separator)
+    public function __construct(string $field, string $separator)
     {
         $this->setField($field);
         $this->setSeparator($separator);
@@ -30,7 +30,7 @@ class Join extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -42,7 +42,7 @@ class Join extends AbstractProcessor
      *
      * @return $this
      */
-    public function setSeparator(string $separator)
+    public function setSeparator(string $separator): self
     {
         return $this->setParam('separator', $separator);
     }

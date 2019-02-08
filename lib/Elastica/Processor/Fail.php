@@ -5,7 +5,7 @@ namespace Elastica\Processor;
 /**
  * Elastica Fail Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/fail-processor.html
  */
@@ -28,7 +28,7 @@ class Fail extends AbstractProcessor
      *
      * @return $this
      */
-    public function setMessage(string $message)
+    public function setMessage(string $message): self
     {
         return $this->setParam('message', $message);
     }

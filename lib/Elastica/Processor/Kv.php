@@ -5,12 +5,15 @@ namespace Elastica\Processor;
 /**
  * Elastica KV Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/kv-processor.html
  */
 class Kv extends AbstractProcessor
 {
+    const DEFAULT_TARGET_FIELD_VALUE = null;
+    const DEFAULT_IGNORE_MISSING_VALUE = false;
+
     /**
      * Kv constructor.
      *
@@ -32,7 +35,7 @@ class Kv extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -44,7 +47,7 @@ class Kv extends AbstractProcessor
      *
      * @return $this
      */
-    public function setFieldSplit(string $fieldSplit)
+    public function setFieldSplit(string $fieldSplit): self
     {
         return $this->setParam('field_split', $fieldSplit);
     }
@@ -56,19 +59,19 @@ class Kv extends AbstractProcessor
      *
      * @return $this
      */
-    public function setValueSplit(string $valueSplit)
+    public function setValueSplit(string $valueSplit): self
     {
         return $this->setParam('value_split', $valueSplit);
     }
 
     /**
-     * Set target_field. Default value @timestamp.
+     * Set target_field. Default value null.
      *
      * @param string $targetField
      *
      * @return $this
      */
-    public function setTargetField(string $targetField)
+    public function setTargetField(string $targetField): self
     {
         return $this->setParam('target_field', $targetField);
     }
@@ -80,7 +83,7 @@ class Kv extends AbstractProcessor
      *
      * @return $this
      */
-    public function setIncludeKeys(array $listOfKeys)
+    public function setIncludeKeys(array $listOfKeys): self
     {
         return $this->setParam('include_keys', $listOfKeys);
     }
@@ -92,7 +95,7 @@ class Kv extends AbstractProcessor
      *
      * @return $this
      */
-    public function setExcludeKeys(array $listOfKeys)
+    public function setExcludeKeys(array $listOfKeys): self
     {
         return $this->setParam('exclude_keys', $listOfKeys);
     }
@@ -104,7 +107,7 @@ class Kv extends AbstractProcessor
      *
      * @return $this
      */
-    public function setIgnoreMissing(bool $ignoreMissing)
+    public function setIgnoreMissing(bool $ignoreMissing): self
     {
         return $this->setParam('ignore_missing', $ignoreMissing);
     }

@@ -5,7 +5,7 @@ namespace Elastica\Processor;
 /**
  * Elastica Append Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/append-processor.html
  */
@@ -30,7 +30,7 @@ class Append extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
@@ -42,7 +42,7 @@ class Append extends AbstractProcessor
      *
      * @return $this
      */
-    public function setValue($value)
+    public function setValue($value): self
     {
         return $this->setParam('value', $value);
     }

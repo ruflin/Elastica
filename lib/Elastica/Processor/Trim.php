@@ -5,18 +5,18 @@ namespace Elastica\Processor;
 /**
  * Elastica Trim Processor.
  *
- * @author   Federico Panini <fpanini@gmail.com>
+ * @author Federico Panini <fpanini@gmail.com>
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/trim-processor.html
  */
 class Trim extends AbstractProcessor
 {
     /**
-     * Sort constructor.
+     * Trim constructor.
      *
-     * @param $field
+     * @param string $field
      */
-    public function __construct($field)
+    public function __construct(string $field)
     {
         $this->setField($field);
     }
@@ -28,7 +28,7 @@ class Trim extends AbstractProcessor
      *
      * @return $this
      */
-    public function setField(string $field)
+    public function setField(string $field): self
     {
         return $this->setParam('field', $field);
     }
