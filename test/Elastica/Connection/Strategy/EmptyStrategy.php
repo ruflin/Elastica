@@ -2,6 +2,7 @@
 
 namespace Elastica\Test\Connection\Strategy;
 
+use Elastica\Connection;
 use Elastica\Connection\Strategy\StrategyInterface;
 
 /**
@@ -11,8 +12,11 @@ use Elastica\Connection\Strategy\StrategyInterface;
  */
 class EmptyStrategy implements StrategyInterface
 {
-    public function getConnection($connections)
+    /**
+     * {@inheritdoc}
+     */
+    public function getConnection(array $connections): Connection
     {
-        return;
+        return new Connection();
     }
 }
