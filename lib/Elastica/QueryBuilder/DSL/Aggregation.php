@@ -9,7 +9,7 @@ use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\DateRange;
 use Elastica\Aggregation\ExtendedStats;
-use Elastica\Aggregation\Filter as FilterAggregation;
+use Elastica\Aggregation\Filter;
 use Elastica\Aggregation\Filters;
 use Elastica\Aggregation\GeoDistance;
 use Elastica\Aggregation\GeohashGrid;
@@ -50,7 +50,7 @@ class Aggregation implements DSL
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return DSL::TYPE_AGGREGATION;
     }
@@ -64,7 +64,7 @@ class Aggregation implements DSL
      *
      * @return Min
      */
-    public function min($name)
+    public function min($name): Min
     {
         return new Min($name);
     }
@@ -78,7 +78,7 @@ class Aggregation implements DSL
      *
      * @return Max
      */
-    public function max($name)
+    public function max($name): Max
     {
         return new Max($name);
     }
@@ -92,7 +92,7 @@ class Aggregation implements DSL
      *
      * @return Sum
      */
-    public function sum($name)
+    public function sum($name): Sum
     {
         return new Sum($name);
     }
@@ -107,7 +107,7 @@ class Aggregation implements DSL
      *
      * @return SumBucket
      */
-    public function sum_bucket($name, $bucketsPath = null)
+    public function sum_bucket($name, $bucketsPath = null): SumBucket
     {
         return new SumBucket($name, $bucketsPath);
     }
@@ -121,7 +121,7 @@ class Aggregation implements DSL
      *
      * @return Avg
      */
-    public function avg($name)
+    public function avg($name): Avg
     {
         return new Avg($name);
     }
@@ -136,7 +136,7 @@ class Aggregation implements DSL
      *
      * @return AvgBucket
      */
-    public function avg_bucket($name, $bucketsPath = null)
+    public function avg_bucket($name, $bucketsPath = null): AvgBucket
     {
         return new AvgBucket($name, $bucketsPath);
     }
@@ -150,7 +150,7 @@ class Aggregation implements DSL
      *
      * @return Stats
      */
-    public function stats($name)
+    public function stats($name): Stats
     {
         return new Stats($name);
     }
@@ -164,7 +164,7 @@ class Aggregation implements DSL
      *
      * @return ExtendedStats
      */
-    public function extended_stats($name)
+    public function extended_stats($name): ExtendedStats
     {
         return new ExtendedStats($name);
     }
@@ -179,7 +179,7 @@ class Aggregation implements DSL
      *
      * @return ValueCount
      */
-    public function value_count($name, $field)
+    public function value_count($name, $field): ValueCount
     {
         return new ValueCount($name, $field);
     }
@@ -194,7 +194,7 @@ class Aggregation implements DSL
      *
      * @return Percentiles
      */
-    public function percentiles($name, $field = null)
+    public function percentiles($name, $field = null): Percentiles
     {
         return new Percentiles($name, $field);
     }
@@ -220,7 +220,7 @@ class Aggregation implements DSL
      *
      * @return Cardinality
      */
-    public function cardinality($name)
+    public function cardinality($name): Cardinality
     {
         return new Cardinality($name);
     }
@@ -246,7 +246,7 @@ class Aggregation implements DSL
      *
      * @return TopHits
      */
-    public function top_hits($name)
+    public function top_hits($name): TopHits
     {
         return new TopHits($name);
     }
@@ -264,7 +264,7 @@ class Aggregation implements DSL
      *
      * @return ScriptedMetric
      */
-    public function scripted_metric($name, $initScript = null, $mapScript = null, $combineScript = null, $reduceScript = null)
+    public function scripted_metric($name, $initScript = null, $mapScript = null, $combineScript = null, $reduceScript = null): ScriptedMetric
     {
         return new ScriptedMetric($name, $initScript, $mapScript, $combineScript, $reduceScript);
     }
@@ -278,7 +278,7 @@ class Aggregation implements DSL
      *
      * @return GlobalAggregation
      */
-    public function global_agg($name)
+    public function global_agg($name): GlobalAggregation
     {
         return new GlobalAggregation($name);
     }
@@ -291,11 +291,11 @@ class Aggregation implements DSL
      * @param string        $name
      * @param AbstractQuery $filter
      *
-     * @return FilterAggregation
+     * @return Filter
      */
-    public function filter($name, AbstractQuery $filter = null)
+    public function filter($name, AbstractQuery $filter = null): Filter
     {
-        return new FilterAggregation($name, $filter);
+        return new Filter($name, $filter);
     }
 
     /**
@@ -307,7 +307,7 @@ class Aggregation implements DSL
      *
      * @return Filters
      */
-    public function filters($name)
+    public function filters($name): Filters
     {
         return new Filters($name);
     }
@@ -322,7 +322,7 @@ class Aggregation implements DSL
      *
      * @return Missing
      */
-    public function missing($name, $field)
+    public function missing($name, $field): Missing
     {
         return new Missing($name, $field);
     }
@@ -337,7 +337,7 @@ class Aggregation implements DSL
      *
      * @return Nested
      */
-    public function nested($name, $path)
+    public function nested($name, $path): Nested
     {
         return new Nested($name, $path);
     }
@@ -352,7 +352,7 @@ class Aggregation implements DSL
      *
      * @return ReverseNested
      */
-    public function reverse_nested($name, $path = null)
+    public function reverse_nested($name, $path = null): ReverseNested
     {
         return new ReverseNested($name);
     }
@@ -378,7 +378,7 @@ class Aggregation implements DSL
      *
      * @return Terms
      */
-    public function terms($name)
+    public function terms($name): Terms
     {
         return new Terms($name);
     }
@@ -392,7 +392,7 @@ class Aggregation implements DSL
      *
      * @return SignificantTerms
      */
-    public function significant_terms($name)
+    public function significant_terms($name): SignificantTerms
     {
         return new SignificantTerms($name);
     }
@@ -406,7 +406,7 @@ class Aggregation implements DSL
      *
      * @return Range
      */
-    public function range($name)
+    public function range($name): Range
     {
         return new Range($name);
     }
@@ -420,7 +420,7 @@ class Aggregation implements DSL
      *
      * @return DateRange
      */
-    public function date_range($name)
+    public function date_range($name): DateRange
     {
         return new DateRange($name);
     }
@@ -435,7 +435,7 @@ class Aggregation implements DSL
      *
      * @return IpRange
      */
-    public function ipv4_range($name, $field)
+    public function ipv4_range($name, $field): IpRange
     {
         return new IpRange($name, $field);
     }
@@ -451,7 +451,7 @@ class Aggregation implements DSL
      *
      * @return Histogram
      */
-    public function histogram($name, $field, $interval)
+    public function histogram($name, $field, $interval): Histogram
     {
         return new Histogram($name, $field, $interval);
     }
@@ -467,7 +467,7 @@ class Aggregation implements DSL
      *
      * @return DateHistogram
      */
-    public function date_histogram($name, $field, $interval)
+    public function date_histogram($name, $field, $interval): DateHistogram
     {
         return new DateHistogram($name, $field, $interval);
     }
@@ -483,7 +483,7 @@ class Aggregation implements DSL
      *
      * @return GeoDistance
      */
-    public function geo_distance($name, $field, $origin)
+    public function geo_distance($name, $field, $origin): GeoDistance
     {
         return new GeoDistance($name, $field, $origin);
     }
@@ -498,7 +498,7 @@ class Aggregation implements DSL
      *
      * @return GeohashGrid
      */
-    public function geohash_grid($name, $field)
+    public function geohash_grid($name, $field): GeohashGrid
     {
         return new GeohashGrid($name, $field);
     }
@@ -514,7 +514,7 @@ class Aggregation implements DSL
      *
      * @return BucketScript
      */
-    public function bucket_script($name, $bucketsPath = null, $script = null)
+    public function bucket_script($name, $bucketsPath = null, $script = null): BucketScript
     {
         return new BucketScript($name, $bucketsPath, $script);
     }
@@ -529,7 +529,7 @@ class Aggregation implements DSL
      *
      * @return SerialDiff
      */
-    public function serial_diff($name, $bucketsPath = null)
+    public function serial_diff($name, $bucketsPath = null): SerialDiff
     {
         return new SerialDiff($name, $bucketsPath);
     }

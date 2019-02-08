@@ -22,7 +22,7 @@ class Suggest implements DSL
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return self::TYPE_SUGGEST;
     }
@@ -37,7 +37,7 @@ class Suggest implements DSL
      *
      * @return Term
      */
-    public function term($name, $field)
+    public function term($name, $field): Term
     {
         return new Term($name, $field);
     }
@@ -52,7 +52,7 @@ class Suggest implements DSL
      *
      * @return Phrase
      */
-    public function phrase($name, $field)
+    public function phrase($name, $field): Phrase
     {
         return new Phrase($name, $field);
     }
@@ -67,7 +67,7 @@ class Suggest implements DSL
      *
      * @return Completion
      */
-    public function completion($name, $field)
+    public function completion($name, $field): Completion
     {
         return new Completion($name, $field);
     }

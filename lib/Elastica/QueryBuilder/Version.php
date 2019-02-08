@@ -41,19 +41,19 @@ abstract class Version
      * returns true if $name is supported, false otherwise.
      *
      * @param string $name
-     * @param $type
+     * @param string $type
      *
      * @return bool
      */
-    public function supports($name, $type)
+    public function supports(string $name, string $type): bool
     {
         switch ($type) {
             case DSL::TYPE_QUERY:
-                return in_array($name, $this->queries);
+                return in_array($name, $this->queries, true);
             case DSL::TYPE_AGGREGATION:
-                return in_array($name, $this->aggregations);
+                return in_array($name, $this->aggregations, true);
             case DSL::TYPE_SUGGEST:
-                return in_array($name, $this->suggesters);
+                return in_array($name, $this->suggesters, true);
         }
 
         // disables version check in Facade for custom DSL objects
@@ -63,7 +63,7 @@ abstract class Version
     /**
      * @return string[]
      */
-    public function getAggregations()
+    public function getAggregations(): array
     {
         return $this->aggregations;
     }
@@ -71,7 +71,7 @@ abstract class Version
     /**
      * @return string[]
      */
-    public function getQueries()
+    public function getQueries(): array
     {
         return $this->queries;
     }
@@ -79,7 +79,7 @@ abstract class Version
     /**
      * @return string[]
      */
-    public function getSuggesters()
+    public function getSuggesters(): array
     {
         return $this->suggesters;
     }
