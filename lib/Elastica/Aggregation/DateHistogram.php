@@ -77,7 +77,7 @@ class DateHistogram extends Histogram
         $bounds['min'] = $min;
         $bounds['max'] = $max;
         // switch if min is higher then max
-        if (strtotime($min) > strtotime($max)) {
+        if (\strtotime($min) > \strtotime($max)) {
             $bounds['min'] = $max;
             $bounds['max'] = $min;
         }

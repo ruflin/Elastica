@@ -44,7 +44,7 @@ class Filters extends AbstractAggregation
         }
 
         if ($this->hasParam('filters')
-            && count($this->getParam('filters'))
+            && \count($this->getParam('filters'))
             && $this->_type !== $type
         ) {
             throw new InvalidException('Mix named and anonymous keys are not allowed');
@@ -85,10 +85,10 @@ class Filters extends AbstractAggregation
 
         foreach ($filters as $filter) {
             if (self::NAMED_TYPE === $this->_type) {
-                $key = key($filter);
-                $array['filters']['filters'][$key] = current($filter)->toArray();
+                $key = \key($filter);
+                $array['filters']['filters'][$key] = \current($filter)->toArray();
             } else {
-                $array['filters']['filters'][] = current($filter)->toArray();
+                $array['filters']['filters'][] = \current($filter)->toArray();
             }
         }
 

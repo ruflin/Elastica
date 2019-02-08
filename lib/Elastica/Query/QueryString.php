@@ -262,6 +262,6 @@ class QueryString extends AbstractQuery
      */
     public function toArray(): array
     {
-        return ['query_string' => array_merge(['query' => $this->_queryString], $this->getParams())];
+        return ['query_string' => \array_merge(['query' => $this->_queryString], $this->getParams())];
     }
 }

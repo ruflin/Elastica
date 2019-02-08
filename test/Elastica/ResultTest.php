@@ -108,7 +108,7 @@ class ResultTest extends BaseTest
         $this->assertNotNull($resultSet->getTotalTime(), 'Get Total Time should never be a null value');
         $this->assertEquals(
             'integer',
-            gettype($resultSet->getTotalTime()),
+            \gettype($resultSet->getTotalTime()),
             'Total Time should be an integer'
          );
     }

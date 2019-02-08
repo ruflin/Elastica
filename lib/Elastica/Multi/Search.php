@@ -185,7 +185,7 @@ class Search
         $query = $search->getQuery();
 
         // Keep other query options as part of the search body
-        $queryOptions = array_diff_key($search->getOptions(), array_flip(self::$HEADER_OPTIONS));
+        $queryOptions = \array_diff_key($search->getOptions(), \array_flip(self::$HEADER_OPTIONS));
 
         $data = JSON::stringify($header)."\n";
         $data .= JSON::stringify($query->toArray() + $queryOptions)."\n";
@@ -211,6 +211,6 @@ class Search
         }
 
         // Filter options accepted in the "header"
-        return array_intersect_key($header, array_flip(self::$HEADER_OPTIONS));
+        return \array_intersect_key($header, \array_flip(self::$HEADER_OPTIONS));
     }
 }

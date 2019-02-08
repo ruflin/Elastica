@@ -407,7 +407,7 @@ class SearchTest extends BaseTest
         $this->assertNotEmpty($resultSet->getSuggests(), 'term#name_suggest');
 
         //Timeout - this one is a bit more tricky to test
-        $mockResponse = new Response(json_encode(['timed_out' => true]));
+        $mockResponse = new Response(\json_encode(['timed_out' => true]));
         $client = $this->createMock(Client::class);
         $client->method('request')
             ->will($this->returnValue($mockResponse));

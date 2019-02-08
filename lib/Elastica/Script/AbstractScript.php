@@ -42,12 +42,12 @@ abstract class AbstractScript extends AbstractUpdateAction
             return $data;
         }
 
-        if (is_array($data)) {
+        if (\is_array($data)) {
             return self::_createFromArray($data);
         }
 
-        if (is_string($data)) {
-            $class = self::class === get_called_class() ? Script::class : get_called_class();
+        if (\is_string($data)) {
+            $class = self::class === \get_called_class() ? Script::class : \get_called_class();
 
             return new $class($data);
         }
@@ -60,7 +60,7 @@ abstract class AbstractScript extends AbstractUpdateAction
         $params = $data['script']['params'] ?? [];
         $lang = $data['script']['lang'] ?? null;
 
-        if (!is_array($params)) {
+        if (!\is_array($params)) {
             throw new InvalidException('Script params must be an array');
         }
 

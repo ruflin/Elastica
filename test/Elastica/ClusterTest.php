@@ -28,7 +28,7 @@ class ClusterTest extends BaseTest
             $rawNodeNames[] = $rawNode['name'];
         }
 
-        $this->assertEquals(asort($rawNodeNames), asort($cluster->getNodeNames()));
+        $this->assertEquals(\asort($rawNodeNames), \asort($cluster->getNodeNames()));
     }
 
     /**
@@ -42,7 +42,7 @@ class ClusterTest extends BaseTest
         $nodes = $cluster->getNodes();
 
         $this->assertContainsOnlyInstancesOf(Node::class, $nodes);
-        $this->assertGreaterThan(0, count($nodes));
+        $this->assertGreaterThan(0, \count($nodes));
     }
 
     /**

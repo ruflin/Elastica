@@ -18,6 +18,7 @@ $config = PhpCsFixer\Config::create()
         'no_useless_else' => true,
         '@PHPUnit60Migration:risky' => true,
         'php_unit_dedicate_assert' => ['target' => 'newest'],
+        'native_function_invocation' => true,
     ])
 ;
 

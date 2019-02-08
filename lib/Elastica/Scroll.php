@@ -159,7 +159,7 @@ class Scroll implements \Iterator
     protected function _setScrollId(ResultSet $resultSet)
     {
         if (0 === $this->currentPage) {
-            $this->totalPages = $resultSet->count() > 0 ? ceil($resultSet->getTotalHits() / $resultSet->count()) : 0;
+            $this->totalPages = $resultSet->count() > 0 ? \ceil($resultSet->getTotalHits() / $resultSet->count()) : 0;
         }
 
         $this->_currentResultSet = $resultSet;

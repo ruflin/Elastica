@@ -315,7 +315,7 @@ class Connection extends Param
             return $config;
         }
 
-        if (!array_key_exists($key, $config)) {
+        if (!\array_key_exists($key, $config)) {
             throw new InvalidException('Config key is not set: '.$key);
         }
 
@@ -331,7 +331,7 @@ class Connection extends Param
      */
     public static function create($params = [])
     {
-        if (is_array($params)) {
+        if (\is_array($params)) {
             return new self($params);
         }
 

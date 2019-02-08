@@ -16,7 +16,7 @@ class SettingsTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        if (count($index->getClient()->getCluster()->getNodes()) < 2) {
+        if (\count($index->getClient()->getCluster()->getNodes()) < 2) {
             $this->markTestSkipped('At least two master nodes have to be running for this test');
         }
 
@@ -38,7 +38,7 @@ class SettingsTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        if (count($index->getClient()->getCluster()->getNodes()) < 2) {
+        if (\count($index->getClient()->getCluster()->getNodes()) < 2) {
             $this->markTestSkipped('At least two master nodes have to be running for this test');
         }
 

@@ -102,7 +102,7 @@ class Search
             $index = $index->getName();
         }
 
-        if (!is_scalar($index)) {
+        if (!\is_scalar($index)) {
             throw new InvalidException('Invalid param type');
         }
 
@@ -142,7 +142,7 @@ class Search
             $type = $type->getName();
         }
 
-        if (!is_string($type)) {
+        if (!\is_string($type)) {
             throw new InvalidException('Invalid type type');
         }
 
@@ -326,7 +326,7 @@ class Search
      */
     public function hasIndices()
     {
-        return count($this->_indices) > 0;
+        return \count($this->_indices) > 0;
     }
 
     /**
@@ -340,7 +340,7 @@ class Search
             $index = $index->getName();
         }
 
-        return in_array($index, $this->_indices);
+        return \in_array($index, $this->_indices);
     }
 
     /**
@@ -358,7 +358,7 @@ class Search
      */
     public function hasTypes()
     {
-        return count($this->_types) > 0;
+        return \count($this->_types) > 0;
     }
 
     /**
@@ -372,7 +372,7 @@ class Search
             $type = $type->getName();
         }
 
-        return in_array($type, $this->_types);
+        return \in_array($type, $this->_types);
     }
 
     /**
@@ -420,11 +420,11 @@ class Search
                 $path .= '_all';
             }
         } else {
-            $path .= implode(',', $indices);
+            $path .= \implode(',', $indices);
         }
 
         if (!empty($types)) {
-            $path .= '/'.implode(',', $types);
+            $path .= '/'.\implode(',', $types);
         }
 
         // Add full path based on indices and types -> could be all
@@ -506,9 +506,9 @@ class Search
             $this->setQuery($query);
         }
 
-        if (is_int($options)) {
+        if (\is_int($options)) {
             $this->getQuery()->setSize($options);
-        } elseif (is_array($options)) {
+        } elseif (\is_array($options)) {
             if (isset($options['limit'])) {
                 $this->getQuery()->setSize($options['limit']);
                 unset($options['limit']);

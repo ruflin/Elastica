@@ -45,9 +45,9 @@ class DateRangeTest extends BaseAggregationTest
         $results = $this->_getIndexForTest()->search($query)->getAggregation('date');
 
         foreach ($results['buckets'] as $bucket) {
-            if (array_key_exists('to', $bucket)) {
+            if (\array_key_exists('to', $bucket)) {
                 $this->assertEquals(1, $bucket['doc_count']);
-            } elseif (array_key_exists('from', $bucket)) {
+            } elseif (\array_key_exists('from', $bucket)) {
                 $this->assertEquals(2, $bucket['doc_count']);
             }
         }

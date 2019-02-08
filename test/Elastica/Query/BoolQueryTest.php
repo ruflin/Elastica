@@ -79,7 +79,7 @@ class BoolQueryTest extends BaseTest
         $boolQuery->addShould($term1)->addShould($term2);
 
         $jsonString = '{"bool":{"should":[{"term":{"interests":84}},{"term":{"interests":92}}]}}';
-        $this->assertEquals($jsonString, json_encode($boolQuery->toArray()));
+        $this->assertEquals($jsonString, \json_encode($boolQuery->toArray()));
     }
 
     /**

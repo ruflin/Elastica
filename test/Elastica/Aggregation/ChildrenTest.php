@@ -17,8 +17,8 @@ class ChildrenTest extends BaseAggregationTest
         $index = $client->getIndex('testaggregationchildren');
         $index->create(['index' => ['number_of_shards' => 2, 'number_of_replicas' => 1]], true);
 
-        $type = $index->getType(strtolower(
-            'typechildren'.uniqid()
+        $type = $index->getType(\strtolower(
+            'typechildren'.\uniqid()
         ));
 
         $mapping = new Mapping();

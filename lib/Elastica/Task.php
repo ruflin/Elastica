@@ -64,7 +64,7 @@ class Task extends Param
      */
     public function getData(): array
     {
-        if (is_null($this->_data)) {
+        if (\is_null($this->_data)) {
             $this->refresh();
         }
 
@@ -78,7 +78,7 @@ class Task extends Param
      */
     public function getResponse(): Response
     {
-        if (is_null($this->_response)) {
+        if (\is_null($this->_response)) {
             $this->refresh();
         }
 

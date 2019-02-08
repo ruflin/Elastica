@@ -30,7 +30,7 @@ class ErrorsCollector
 
     public function getCount()
     {
-        return count($this->errors);
+        return \count($this->errors);
     }
 
     public function assertOnlyOneDeprecatedError($deprecationMessage)
@@ -42,8 +42,8 @@ class ErrorsCollector
 
     public function assertOnlyDeprecatedErrors(array $deprecationMessages)
     {
-        $this->testCase->assertSame(count($deprecationMessages), $this->getCount());
-        $this->testCase->assertSame(count($deprecationMessages), $this->getDeprecatedCount());
+        $this->testCase->assertSame(\count($deprecationMessages), $this->getCount());
+        $this->testCase->assertSame(\count($deprecationMessages), $this->getDeprecatedCount());
 
         foreach ($deprecationMessages as $index => $message) {
             $this->testCase->assertSame($message, $this->getMessage($index));

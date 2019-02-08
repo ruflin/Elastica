@@ -32,9 +32,9 @@ class ScriptFields extends Param
      *
      * @return $this
      */
-    public function addScript(string $name, AbstractScript $script): ScriptFields
+    public function addScript(string $name, AbstractScript $script): self
     {
-        if (!strlen($name)) {
+        if (!\strlen($name)) {
             throw new InvalidException('The name of a Script is required and must be a string');
         }
         $this->setParam($name, $script);
@@ -47,7 +47,7 @@ class ScriptFields extends Param
      *
      * @return $this
      */
-    public function setScripts(array $scripts): ScriptFields
+    public function setScripts(array $scripts): self
     {
         $this->_params = [];
         foreach ($scripts as $name => $script) {

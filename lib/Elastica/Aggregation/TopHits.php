@@ -109,7 +109,7 @@ class TopHits extends AbstractAggregation
      */
     public function setScriptFields($scriptFields): self
     {
-        if (is_array($scriptFields)) {
+        if (\is_array($scriptFields)) {
             $scriptFields = new ScriptFields($scriptFields);
         }
 

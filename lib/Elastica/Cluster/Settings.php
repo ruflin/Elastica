@@ -80,9 +80,9 @@ class Settings
                 return $settings[$setting];
             }
 
-            if (false !== strpos($setting, '.')) {
+            if (false !== \strpos($setting, '.')) {
                 // convert dot notation to nested arrays
-                $keys = explode('.', $setting);
+                $keys = \explode('.', $setting);
                 foreach ($keys as $key) {
                     if (isset($settings[$key])) {
                         $settings = $settings[$key];

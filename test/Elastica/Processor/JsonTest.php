@@ -61,7 +61,7 @@ class JsonTest extends BasePipelineTest
         $type = $index->getType('_doc');
 
         // Add document to normal index
-        $doc1 = new Document(null, ['name' => json_encode(['foo' => 2000])]);
+        $doc1 = new Document(null, ['name' => \json_encode(['foo' => 2000])]);
 
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);

@@ -225,7 +225,7 @@ class Mapping
      */
     public static function create($mapping): Mapping
     {
-        if (is_array($mapping)) {
+        if (\is_array($mapping)) {
             $mappingObject = new self();
             $mappingObject->setProperties($mapping);
 

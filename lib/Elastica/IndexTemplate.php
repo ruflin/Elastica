@@ -39,7 +39,7 @@ class IndexTemplate
     {
         $this->_client = $client;
 
-        if (!is_scalar($name)) {
+        if (!\is_scalar($name)) {
             throw new InvalidException('Index template should be a scalar type');
         }
         $this->_name = (string) $name;

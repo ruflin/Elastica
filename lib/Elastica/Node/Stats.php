@@ -58,7 +58,7 @@ class Stats
     {
         $data = $this->getData();
 
-        foreach (func_get_args() as $arg) {
+        foreach (\func_get_args() as $arg) {
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {
@@ -111,7 +111,7 @@ class Stats
 
         $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
         $data = $this->getResponse()->getData();
-        $this->_data = reset($data['nodes']);
+        $this->_data = \reset($data['nodes']);
 
         return $this->_response;
     }

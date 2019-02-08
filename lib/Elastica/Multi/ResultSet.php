@@ -125,7 +125,7 @@ class ResultSet implements \Iterator, \ArrayAccess, \Countable
      */
     public function count(): int
     {
-        return count($this->_resultSets);
+        return \count($this->_resultSets);
     }
 
     /**

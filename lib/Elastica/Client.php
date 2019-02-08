@@ -160,7 +160,7 @@ class Client
         $params = [];
         $params['config'] = [];
         foreach ($config as $key => $value) {
-            if (in_array($key, ['bigintConversion', 'curl', 'headers', 'url'])) {
+            if (\in_array($key, ['bigintConversion', 'curl', 'headers', 'url'])) {
                 $params['config'][$key] = $value;
             } else {
                 $params[$key] = $value;
@@ -202,7 +202,7 @@ class Client
             return $this->_config;
         }
 
-        if (!array_key_exists($key, $this->_config)) {
+        if (!\array_key_exists($key, $this->_config)) {
             throw new InvalidException('Config key is not set: '.$key);
         }
 
@@ -266,7 +266,7 @@ class Client
      */
     public function addHeader($header, $headerValue)
     {
-        if (is_string($header) && is_string($headerValue)) {
+        if (\is_string($header) && \is_string($headerValue)) {
             $this->_config['headers'][$header] = $headerValue;
         } else {
             throw new InvalidException('Header must be a string');
@@ -286,8 +286,8 @@ class Client
      */
     public function removeHeader($header)
     {
-        if (is_string($header)) {
-            if (array_key_exists($header, $this->_config['headers'])) {
+        if (\is_string($header)) {
+            if (\array_key_exists($header, $this->_config['headers'])) {
                 unset($this->_config['headers'][$header]);
             }
         } else {
@@ -461,11 +461,11 @@ class Client
     {
         $responseData = $response->getData();
         if ('_source' == $fields) {
-            if (isset($responseData['get']['_source']) && is_array($responseData['get']['_source'])) {
+            if (isset($responseData['get']['_source']) && \is_array($responseData['get']['_source'])) {
                 $document->setData($responseData['get']['_source']);
             }
         } else {
-            $keys = explode(',', $fields);
+            $keys = \explode(',', $fields);
             $data = $document->getData();
             foreach ($keys as $key) {
                 if (isset($responseData['get']['fields'][$key])) {
@@ -715,7 +715,7 @@ class Client
     public function requestEndpoint(AbstractEndpoint $endpoint)
     {
         return $this->request(
-            ltrim($endpoint->getURI(), '/'),
+            \ltrim($endpoint->getURI(), '/'),
             $endpoint->getMethod(),
             null === $endpoint->getBody() ? [] : $endpoint->getBody(),
             $endpoint->getParams()
@@ -768,7 +768,7 @@ class Client
      */
     public function optimizeAll($args = [])
     {
-        trigger_error('Deprecated: Elastica\Client::optimizeAll() is deprecated and will be removed in further Elastica releases. Use Elastica\Client::forcemergeAll() instead.', E_USER_DEPRECATED);
+        \trigger_error('Deprecated: Elastica\Client::optimizeAll() is deprecated and will be removed in further Elastica releases. Use Elastica\Client::forcemergeAll() instead.', E_USER_DEPRECATED);
 
         return $this->forcemergeAll($args);
     }

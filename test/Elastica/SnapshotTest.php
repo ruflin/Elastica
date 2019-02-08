@@ -100,7 +100,7 @@ class SnapshotTest extends Base
 
         // ensure that the index has been restored
         $count = $this->_index->getType('_doc')->count();
-        $this->assertEquals(sizeof($this->_docs), $count);
+        $this->assertEquals(\sizeof($this->_docs), $count);
 
         // delete the snapshot
         $response = $this->_snapshot->deleteSnapshot($repositoryName, $snapshotName);

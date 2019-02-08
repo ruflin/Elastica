@@ -29,7 +29,7 @@ class TaskTest extends Base
         $data = $task->getData();
 
         $this->assertNotEmpty($task->getId());
-        $this->assertEquals($task->getId(), sprintf('%s:%s', $data['task']['node'], $data['task']['id']));
+        $this->assertEquals($task->getId(), \sprintf('%s:%s', $data['task']['node'], $data['task']['id']));
     }
 
     /**
@@ -43,7 +43,7 @@ class TaskTest extends Base
             if ($task->isCompleted()) {
                 break;
             }
-            sleep(1); // wait for task to complete
+            \sleep(1); // wait for task to complete
             $task->refresh();
         }
 

@@ -147,7 +147,7 @@ class Pipeline extends Param
             $this->_processors['processors'] = $processor->toArray();
             $this->_params['processors'] = [];
         } else {
-            $this->_processors['processors'] = array_merge($this->_processors['processors'], $processor->toArray());
+            $this->_processors['processors'] = \array_merge($this->_processors['processors'], $processor->toArray());
         }
 
         return $this;

@@ -88,8 +88,8 @@ class BulkTest extends BaseTest
 {"name":"The Thing"}
 ';
 
-        $expected = str_replace(PHP_EOL, "\n", $expected);
-        $this->assertEquals($expected, (string) str_replace(PHP_EOL, "\n", (string) $bulk));
+        $expected = \str_replace(PHP_EOL, "\n", $expected);
+        $this->assertEquals($expected, (string) \str_replace(PHP_EOL, "\n", (string) $bulk));
 
         $response = $bulk->send();
 
@@ -401,7 +401,7 @@ class BulkTest extends BaseTest
 {"index":{}}
 {"name":"The Human Torch"}
 ';
-        $expectedJson = str_replace(PHP_EOL, "\n", $expectedJson);
+        $expectedJson = \str_replace(PHP_EOL, "\n", $expectedJson);
         $this->assertEquals($expectedJson, $bulk->toString());
 
         $response = $bulk->send();
@@ -564,7 +564,7 @@ class BulkTest extends BaseTest
         $doc2 = $type->createDocument(2, ['name' => 'Beckenbauer']);
         $doc3 = $type->createDocument(3, ['name' => 'Baggio']);
         $doc4 = $type->createDocument(4, ['name' => 'Cruyff']);
-        $documents = array_map(function ($d) {
+        $documents = \array_map(function ($d) {
             $d->setDocAsUpsert(true);
 
             return $d;
@@ -684,13 +684,13 @@ class BulkTest extends BaseTest
             'text3' => 'random or not random?',
         ];
 
-        $startMemory = memory_get_usage();
+        $startMemory = \memory_get_usage();
 
         for ($n = 1; $n < 10; ++$n) {
             $docs = [];
 
             for ($i = 1; $i <= 3000; ++$i) {
-                $docs[] = new Document(uniqid(), $data);
+                $docs[] = new Document(\uniqid(), $data);
             }
 
             $type->addDocuments($docs);
@@ -699,7 +699,7 @@ class BulkTest extends BaseTest
 
         unset($docs);
 
-        $endMemory = memory_get_usage();
+        $endMemory = \memory_get_usage();
 
         $this->markTestIncomplete('Failed asserting that 2.2414096568375803 is less than 1.3.');
         $this->assertLessThan(1.3, $endMemory / $startMemory);

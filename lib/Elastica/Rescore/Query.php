@@ -35,7 +35,7 @@ class Query extends AbstractRescore
         $data = $this->getParams();
 
         if (!empty($this->_rawParams)) {
-            $data = array_merge($data, $this->_rawParams);
+            $data = \array_merge($data, $this->_rawParams);
         }
 
         $array = $this->_convertArrayable($data);

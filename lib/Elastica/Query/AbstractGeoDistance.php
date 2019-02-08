@@ -90,7 +90,7 @@ abstract class AbstractGeoDistance extends AbstractQuery
     public function setLocation($location): self
     {
         // Location
-        if (is_array($location)) { // Latitude/Longitude
+        if (\is_array($location)) { // Latitude/Longitude
             // Latitude
             if (isset($location['lat'])) {
                 $this->setLatitude($location['lat']);
@@ -104,7 +104,7 @@ abstract class AbstractGeoDistance extends AbstractQuery
             } else {
                 throw new InvalidException('$location[\'lon\'] has to be set');
             }
-        } elseif (is_string($location)) { // Geohash
+        } elseif (\is_string($location)) { // Geohash
             $this->setGeohash($location);
         } else { // Invalid location
             throw new InvalidException('$location has to be an array (latitude/longitude) or a string (geohash)');

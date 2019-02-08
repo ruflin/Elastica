@@ -85,7 +85,7 @@ class ResponseTest extends BaseTest
      */
     public function testIsOkBulkWithErrorsField()
     {
-        $response = new Response(json_encode([
+        $response = new Response(\json_encode([
             'took' => 213,
             'errors' => false,
             'items' => [
@@ -102,7 +102,7 @@ class ResponseTest extends BaseTest
      */
     public function testIsNotOkBulkWithErrorsField()
     {
-        $response = new Response(json_encode([
+        $response = new Response(\json_encode([
             'took' => 213,
             'errors' => true,
             'items' => [
@@ -119,7 +119,7 @@ class ResponseTest extends BaseTest
      */
     public function testIsOkBulkItemsWithOkField()
     {
-        $response = new Response(json_encode([
+        $response = new Response(\json_encode([
             'took' => 213,
             'items' => [
                 ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'ok' => true]],
@@ -135,7 +135,7 @@ class ResponseTest extends BaseTest
      */
     public function testStringErrorMessage()
     {
-        $response = new Response(json_encode([
+        $response = new Response(\json_encode([
             'error' => 'a',
         ]));
 
@@ -147,7 +147,7 @@ class ResponseTest extends BaseTest
      */
     public function testArrayErrorMessage()
     {
-        $response = new Response(json_encode([
+        $response = new Response(\json_encode([
             'error' => ['a', 'b'],
         ]));
 
@@ -159,7 +159,7 @@ class ResponseTest extends BaseTest
      */
     public function testIsNotOkBulkItemsWithOkField()
     {
-        $response = new Response(json_encode([
+        $response = new Response(\json_encode([
             'took' => 213,
             'items' => [
                 ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'ok' => true]],
@@ -175,7 +175,7 @@ class ResponseTest extends BaseTest
      */
     public function testIsOkBulkItemsWithStatusField()
     {
-        $response = new Response(json_encode([
+        $response = new Response(\json_encode([
             'took' => 213,
             'items' => [
                 ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200]],
@@ -191,7 +191,7 @@ class ResponseTest extends BaseTest
      */
     public function testIsNotOkBulkItemsWithStatusField()
     {
-        $response = new Response(json_encode([
+        $response = new Response(\json_encode([
             'took' => 213,
             'items' => [
                 ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200]],
@@ -207,7 +207,7 @@ class ResponseTest extends BaseTest
      */
     public function testDecodeResponseWithBigIntSetToTrue()
     {
-        $response = new Response(json_encode([
+        $response = new Response(\json_encode([
             'took' => 213,
             'items' => [
                 ['index' => ['_index' => 'rohlik', '_type' => 'grocery', '_id' => '707891', '_version' => 4, 'status' => 200]],

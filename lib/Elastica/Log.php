@@ -49,10 +49,10 @@ class Log extends AbstractLogger
         $context['error_message'] = $message;
         $this->_lastMessage = JSON::stringify($context);
 
-        if (!empty($this->_log) && is_string($this->_log)) {
-            error_log($this->_lastMessage.PHP_EOL, 3, $this->_log);
+        if (!empty($this->_log) && \is_string($this->_log)) {
+            \error_log($this->_lastMessage.PHP_EOL, 3, $this->_log);
         } else {
-            error_log($this->_lastMessage);
+            \error_log($this->_lastMessage);
         }
     }
 

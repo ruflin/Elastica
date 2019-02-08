@@ -87,7 +87,7 @@ class RoundRobinTest extends Base
 
         $this->_checkStrategy($client);
 
-        $this->assertLessThan(count($connections), $count);
+        $this->assertLessThan(\count($connections), $count);
     }
 
     /**
@@ -112,7 +112,7 @@ class RoundRobinTest extends Base
             $client->request('_aliases');
             $this->fail('Should throw exception as no connection valid');
         } catch (ConnectionException $e) {
-            $this->assertEquals(count($connections), $count);
+            $this->assertEquals(\count($connections), $count);
             $this->_checkStrategy($client);
         }
     }

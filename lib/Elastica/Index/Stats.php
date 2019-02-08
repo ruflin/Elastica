@@ -66,7 +66,7 @@ class Stats
     {
         $data = $this->getData();
 
-        foreach (func_get_args() as $arg) {
+        foreach (\func_get_args() as $arg) {
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {

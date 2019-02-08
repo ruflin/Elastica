@@ -75,7 +75,7 @@ class Info
     {
         $data = $this->getData();
 
-        foreach (func_get_args() as $arg) {
+        foreach (\func_get_args() as $arg) {
             if (isset($data[$arg])) {
                 $data = $data[$arg];
             } else {
@@ -95,8 +95,8 @@ class Info
     {
         // Returns string in format: inet[/192.168.1.115:9201]
         $data = $this->get('http_address');
-        $data = substr($data, 6, strlen($data) - 7);
-        $data = explode(':', $data);
+        $data = \substr($data, 6, \strlen($data) - 7);
+        $data = \explode(':', $data);
 
         return $data[1];
     }
@@ -110,8 +110,8 @@ class Info
     {
         // Returns string in format: inet[/192.168.1.115:9201]
         $data = $this->get('http_address');
-        $data = substr($data, 6, strlen($data) - 7);
-        $data = explode(':', $data);
+        $data = \substr($data, 6, \strlen($data) - 7);
+        $data = \explode(':', $data);
 
         return $data[0];
     }
@@ -125,7 +125,7 @@ class Info
      */
     public function getPlugins(): array
     {
-        if (!in_array('plugins', $this->_params, true)) {
+        if (!\in_array('plugins', $this->_params, true)) {
             //Plugin data was not retrieved when refresh() was called last. Get it now.
             $this->_params[] = 'plugins';
             $this->refresh($this->_params);
@@ -219,8 +219,8 @@ class Info
         $this->_response = $this->getNode()->getClient()->requestEndpoint($endpoint);
         $data = $this->getResponse()->getData();
 
-        $this->_data = reset($data['nodes']);
-        $this->_id = key($data['nodes']);
+        $this->_data = \reset($data['nodes']);
+        $this->_id = \key($data['nodes']);
         $this->getNode()->setId($this->getId());
 
         return $this->_response;

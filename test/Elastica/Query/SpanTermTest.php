@@ -48,7 +48,7 @@ class SpanTermTest extends BaseTest
         $query = new SpanTerm([$field => $value]);
         $resultSet = $type->search($query);
         $results = $resultSet->getResults();
-        $hitData = reset($results)->getData();
+        $hitData = \reset($results)->getData();
 
         $this->assertEquals($docHitData, $hitData);
     }

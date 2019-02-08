@@ -78,7 +78,7 @@ class ReindexTest extends Base
 
         $docs1 = $this->_addDocs($type1, 10);
 
-        $subDocs1 = array_splice($docs1, 0, 5);
+        $subDocs1 = \array_splice($docs1, 0, 5);
 
         $newIndex = $this->_createIndex('idx2', true, 2);
         $newIndex->addDocuments($subDocs1);

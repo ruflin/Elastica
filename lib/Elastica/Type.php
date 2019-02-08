@@ -125,7 +125,7 @@ class Type implements SearchableInterface
             throw new RuntimeException('No serializer defined');
         }
 
-        $data = call_user_func($this->_serializer, $object);
+        $data = \call_user_func($this->_serializer, $object);
         if (!$doc) {
             $doc = new Document();
         }
@@ -221,7 +221,7 @@ class Type implements SearchableInterface
 
         $docs = [];
         foreach ($objects as $object) {
-            $data = call_user_func($this->_serializer, $object);
+            $data = \call_user_func($this->_serializer, $object);
             $doc = new Document();
             $doc->setData($data);
             $doc->setType($this->getName());
@@ -319,7 +319,7 @@ class Type implements SearchableInterface
         $response = $this->requestEndpoint(new Get());
         $data = $response->getData();
 
-        $mapping = array_shift($data);
+        $mapping = \array_shift($data);
         if (isset($mapping['mappings'])) {
             return $mapping['mappings'];
         }
@@ -443,7 +443,7 @@ class Type implements SearchableInterface
      */
     public function deleteById($id, array $options = [])
     {
-        if (empty($id) || !trim($id)) {
+        if (empty($id) || !\trim($id)) {
             throw new \InvalidArgumentException();
         }
 

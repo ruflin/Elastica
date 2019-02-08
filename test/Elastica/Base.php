@@ -14,25 +14,25 @@ class Base extends TestCase
 {
     protected static function hideDeprecated()
     {
-        error_reporting(error_reporting() & ~E_USER_DEPRECATED);
+        \error_reporting(\error_reporting() & ~E_USER_DEPRECATED);
     }
 
     protected static function showDeprecated()
     {
-        error_reporting(error_reporting() | E_USER_DEPRECATED);
+        \error_reporting(\error_reporting() | E_USER_DEPRECATED);
     }
 
     protected function assertFileDeprecated($file, $deprecationMessage)
     {
-        $content = file_get_contents($file);
-        $content = preg_replace('/^(abstract class|class) ([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+)/m', '${1} ${2}'.uniqid(), $content);
-        $newFile = tempnam(sys_get_temp_dir(), 'elastica-test-');
-        file_put_contents($newFile, $content);
+        $content = \file_get_contents($file);
+        $content = \preg_replace('/^(abstract class|class) ([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+)/m', '${1} ${2}'.\uniqid(), $content);
+        $newFile = \tempnam(\sys_get_temp_dir(), 'elastica-test-');
+        \file_put_contents($newFile, $content);
 
         $errorsCollector = $this->startCollectErrors();
 
         require $newFile;
-        unlink($newFile);
+        \unlink($newFile);
 
         $this->finishCollectErrors();
         $errorsCollector->assertOnlyOneDeprecatedError($deprecationMessage);
@@ -45,8 +45,8 @@ class Base extends TestCase
     {
         $errorsCollector = new ErrorsCollector($this);
 
-        set_error_handler(function () use ($errorsCollector) {
-            $errorsCollector->add(func_get_args());
+        \set_error_handler(function () use ($errorsCollector) {
+            $errorsCollector->add(\func_get_args());
         });
 
         return $errorsCollector;
@@ -54,7 +54,7 @@ class Base extends TestCase
 
     protected function finishCollectErrors()
     {
-        restore_error_handler();
+        \restore_error_handler();
     }
 
     /**
@@ -71,7 +71,7 @@ class Base extends TestCase
             'port' => $this->_getPort(),
         ];
 
-        $config = array_merge($config, $params);
+        $config = \array_merge($config, $params);
 
         return new Client($config, $callback, $logger);
     }
@@ -81,7 +81,7 @@ class Base extends TestCase
      */
     protected function _getHost()
     {
-        return getenv('ES_HOST') ?: Connection::DEFAULT_HOST;
+        return \getenv('ES_HOST') ?: Connection::DEFAULT_HOST;
     }
 
     /**
@@ -89,7 +89,7 @@ class Base extends TestCase
      */
     protected function _getPort()
     {
-        return getenv('ES_PORT') ?: Connection::DEFAULT_PORT;
+        return \getenv('ES_PORT') ?: Connection::DEFAULT_PORT;
     }
 
     /**
@@ -97,7 +97,7 @@ class Base extends TestCase
      */
     protected function _getProxyUrl()
     {
-        $proxyHost = getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
+        $proxyHost = \getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
 
         return 'http://'.$proxyHost.':12345';
     }
@@ -107,7 +107,7 @@ class Base extends TestCase
      */
     protected function _getProxyUrl403()
     {
-        $proxyHost = getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
+        $proxyHost = \getenv('PROXY_HOST') ?: Connection::DEFAULT_HOST;
 
         return 'http://'.$proxyHost.':12346';
     }
@@ -121,14 +121,14 @@ class Base extends TestCase
      */
     protected function _createIndex($name = null, $delete = true, $shards = 1)
     {
-        if (is_null($name)) {
-            $name = preg_replace('/[^a-z]/i', '', strtolower(get_called_class()).uniqid());
+        if (\is_null($name)) {
+            $name = \preg_replace('/[^a-z]/i', '', \strtolower(\get_called_class()).\uniqid());
         }
 
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_'.$name);
 
-        if ('elasticsearch' === getenv('ES_HOST')) {
+        if ('elasticsearch' === \getenv('ES_HOST')) {
             $index->create(['index' => ['number_of_shards' => $shards, 'number_of_replicas' => 1]], $delete);
         }
 
@@ -168,7 +168,7 @@ class Base extends TestCase
     {
         $data = $this->_getClient()->request('/')->getData();
 
-        return substr($data['version']['number'], 0, 1);
+        return \substr($data['version']['number'], 0, 1);
     }
 
     protected function _checkVersion($version)
@@ -176,14 +176,14 @@ class Base extends TestCase
         $data = $this->_getClient()->request('/')->getData();
         $installedVersion = $data['version']['number'];
 
-        if (version_compare($installedVersion, $version) < 0) {
+        if (\version_compare($installedVersion, $version) < 0) {
             $this->markTestSkipped('Test require '.$version.'+ version of Elasticsearch');
         }
     }
 
     protected function _checkConnection($host, $port)
     {
-        $fp = @pfsockopen($host, $port);
+        $fp = @\pfsockopen($host, $port);
 
         if (!$fp) {
             $this->markTestSkipped('Connection to '.$host.':'.$port.' failed');
@@ -226,22 +226,22 @@ class Base extends TestCase
 
     protected function _isUnitGroup()
     {
-        $groups = TestUtil::getGroups(get_class($this), $this->getName(false));
+        $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
 
-        return in_array('unit', $groups);
+        return \in_array('unit', $groups);
     }
 
     protected function _isFunctionalGroup()
     {
-        $groups = TestUtil::getGroups(get_class($this), $this->getName(false));
+        $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
 
-        return in_array('functional', $groups);
+        return \in_array('functional', $groups);
     }
 
     protected function _isBenchmarkGroup()
     {
-        $groups = TestUtil::getGroups(get_class($this), $this->getName(false));
+        $groups = TestUtil::getGroups(\get_class($this), $this->getName(false));
 
-        return in_array('benchmark', $groups);
+        return \in_array('benchmark', $groups);
     }
 }

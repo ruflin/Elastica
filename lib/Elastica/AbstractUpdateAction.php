@@ -264,8 +264,8 @@ class AbstractUpdateAction extends Param
      */
     public function setFields($fields)
     {
-        if (is_array($fields)) {
-            $fields = implode(',', $fields);
+        if (\is_array($fields)) {
+            $fields = \implode(',', $fields);
         }
 
         return $this->setParam('_fields', (string) $fields);
@@ -465,7 +465,7 @@ class AbstractUpdateAction extends Param
         if (!empty($fields)) {
             $data = [];
             foreach ($fields as $field) {
-                $key = '_'.ltrim($field, '_');
+                $key = '_'.\ltrim($field, '_');
                 if ($this->hasParam($key) && '' !== (string) $this->getParam($key)) {
                     $data[$key] = $this->getParam($key);
                 }
@@ -475,7 +475,7 @@ class AbstractUpdateAction extends Param
         }
         if (!$withUnderscore) {
             foreach ($data as $key => $value) {
-                $data[ltrim($key, '_')] = $value;
+                $data[\ltrim($key, '_')] = $value;
                 unset($data[$key]);
             }
         }

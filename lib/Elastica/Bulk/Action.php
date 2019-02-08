@@ -203,9 +203,9 @@ class Action
         $string = JSON::stringify($this->getActionMetadata(), JSON_FORCE_OBJECT).Bulk::DELIMITER;
         if ($this->hasSource()) {
             $source = $this->getSource();
-            if (is_string($source)) {
+            if (\is_string($source)) {
                 $string .= $source;
-            } elseif (is_array($source) && array_key_exists('doc', $source) && is_string($source['doc'])) {
+            } elseif (\is_array($source) && \array_key_exists('doc', $source) && \is_string($source['doc'])) {
                 if (isset($source['doc_as_upsert'])) {
                     $docAsUpsert = ', "doc_as_upsert": '.($source['doc_as_upsert'] ? 'true' : 'false');
                 } else {
@@ -228,6 +228,6 @@ class Action
      */
     public static function isValidOpType(string $opType = null): bool
     {
-        return in_array($opType, self::$opTypes, true);
+        return \in_array($opType, self::$opTypes, true);
     }
 }

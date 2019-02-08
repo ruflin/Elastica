@@ -50,7 +50,7 @@ class Terms extends AbstractQuery
     public function setTerms(string $key, array $terms): self
     {
         $this->_key = $key;
-        $this->_terms = array_values($terms);
+        $this->_terms = \array_values($terms);
 
         return $this;
     }

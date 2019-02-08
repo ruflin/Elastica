@@ -343,7 +343,7 @@ class InnerHitsTest extends BaseTest
         $innerHits = new InnerHits();
 
         $results = $this->getNestedQuery($queryString, $innerHits);
-        $firstResult = current($results->getResults());
+        $firstResult = \current($results->getResults());
 
         $innerHitsResults = $firstResult->getInnerHits();
 
@@ -360,7 +360,7 @@ class InnerHitsTest extends BaseTest
         $innerHits = new InnerHits();
 
         $results = $this->getParentChildQuery($queryString, $innerHits);
-        $firstResult = current($results->getResults());
+        $firstResult = \current($results->getResults());
 
         $innerHits = $firstResult->getInnerHits();
 
@@ -406,13 +406,13 @@ class InnerHitsTest extends BaseTest
         $innerHits->setFrom(1);
 
         $results = $this->getParentChildQuery($queryString, $innerHits);
-        $firstResult = current($results->getResults());
+        $firstResult = \current($results->getResults());
 
         $innerHits = $firstResult->getInnerHits();
 
         $responses = $innerHits['answers']['hits']['hits'];
 
-        $this->assertEquals(count($responses), 1);
+        $this->assertEquals(\count($responses), 1);
         $this->assertEquals(7, $responses[0]['_id']);
     }
 
@@ -426,7 +426,7 @@ class InnerHitsTest extends BaseTest
         $innerHits->setSort(['answer' => 'asc']);
 
         $results = $this->getParentChildQuery($queryString, $innerHits);
-        $firstResult = current($results->getResults());
+        $firstResult = \current($results->getResults());
 
         $innerHits = $firstResult->getInnerHits();
 

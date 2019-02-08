@@ -37,7 +37,7 @@ class TransportBenchmarkTest extends BaseTest
     protected function getType(array $config)
     {
         $client = $this->_getClient($config);
-        $index = $client->getIndex('benchmark'.uniqid());
+        $index = $client->getIndex('benchmark'.\uniqid());
         $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
         return $index->getType('_doc');
@@ -84,7 +84,7 @@ class TransportBenchmarkTest extends BaseTest
 
         $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
-            $test = rand(1, $this->_max);
+            $test = \rand(1, $this->_max);
             $query = new Query();
             $query->setQuery(new MatchAll());
             $query->setPostFilter(new Term(['test' => $test]));
@@ -200,7 +200,7 @@ class TransportBenchmarkTest extends BaseTest
             'name' => [],
         ];
         for ($i = 0; $i < $this->_maxData; ++$i) {
-            $data['name'][] = uniqid();
+            $data['name'][] = \uniqid();
         }
 
         return $data;
@@ -214,16 +214,16 @@ class TransportBenchmarkTest extends BaseTest
     protected static function logResults($name, $transport, array $times)
     {
         self::$_results[$name][$transport] = [
-            'count' => count($times),
-            'max' => max($times) * 1000,
-            'min' => min($times) * 1000,
-            'mean' => (array_sum($times) / count($times)) * 1000,
+            'count' => \count($times),
+            'max' => \max($times) * 1000,
+            'min' => \min($times) * 1000,
+            'mean' => (\array_sum($times) / \count($times)) * 1000,
         ];
     }
 
     protected static function printResults()
     {
-        echo sprintf(
+        echo \sprintf(
             "\n%-12s | %-20s | %-12s | %-12s | %-12s | %-12s\n\n",
             'NAME',
             'TRANSPORT',
@@ -238,7 +238,7 @@ class TransportBenchmarkTest extends BaseTest
             foreach ($values as $times) {
                 $means[] = $times['mean'];
             }
-            $minMean = min($means);
+            $minMean = \min($means);
             foreach ($values as $transport => $times) {
                 $perc = 0;
 
@@ -246,7 +246,7 @@ class TransportBenchmarkTest extends BaseTest
                     $perc = (($times['mean'] - $minMean) / $minMean) * 100;
                 }
 
-                echo sprintf(
+                echo \sprintf(
                     "%-12s | %-20s | %-12d | %-12.2f | %-12.2f | %-12.2f | %+03.2f\n",
                     $name,
                     $transport,

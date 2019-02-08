@@ -66,20 +66,20 @@ class Guzzle extends AbstractTransport
         $proxy = $connection->getProxy();
 
         // See: https://github.com/facebook/hhvm/issues/4875
-        if (is_null($proxy) && defined('HHVM_VERSION')) {
-            $proxy = getenv('http_proxy') ?: null;
+        if (\is_null($proxy) && \defined('HHVM_VERSION')) {
+            $proxy = \getenv('http_proxy') ?: null;
         }
 
-        if (!is_null($proxy)) {
+        if (!\is_null($proxy)) {
             $options['proxy'] = $proxy;
         }
 
         $req = $this->_createPsr7Request($request, $connection);
 
         try {
-            $start = microtime(true);
+            $start = \microtime(true);
             $res = $client->send($req, $options);
-            $end = microtime(true);
+            $end = \microtime(true);
         } catch (TransferException $ex) {
             throw new GuzzleException($ex, $request, new Response($ex->getMessage()));
         }
@@ -120,7 +120,7 @@ class Guzzle extends AbstractTransport
         $req = new Psr7\Request(
             $request->getMethod(),
             $this->_getActionPath($request),
-            $connection->hasConfig('headers') && is_array($connection->getConfig('headers'))
+            $connection->hasConfig('headers') && \is_array($connection->getConfig('headers'))
                 ? $connection->getConfig('headers')
                 : []
         );
@@ -137,7 +137,7 @@ class Guzzle extends AbstractTransport
             }
 
             $req = $req->withBody(
-                Psr7\stream_for(is_array($data)
+                Psr7\stream_for(\is_array($data)
                     ? JSON::stringify($data, JSON_UNESCAPED_UNICODE)
                     : $data
                 )
@@ -189,11 +189,11 @@ class Guzzle extends AbstractTransport
                 'scheme' => $this->_scheme,
                 'host' => $connection->getHost(),
                 'port' => $connection->getPort(),
-                'path' => ltrim('/', $connection->getPath()),
+                'path' => \ltrim('/', $connection->getPath()),
             ]);
         }
 
-        return rtrim($baseUri, '/');
+        return \rtrim($baseUri, '/');
     }
 
     /**
@@ -207,7 +207,7 @@ class Guzzle extends AbstractTransport
     {
         $action = $request->getPath();
         if ($action) {
-            $action = '/'.ltrim($action, '/');
+            $action = '/'.\ltrim($action, '/');
         }
 
         if (!Util::isDateMathEscaped($action)) {
@@ -217,7 +217,7 @@ class Guzzle extends AbstractTransport
         $query = $request->getQuery();
 
         if (!empty($query)) {
-            $action .= '?'.http_build_query(
+            $action .= '?'.\http_build_query(
                 $this->sanityzeQueryStringBool($query)
                 );
         }

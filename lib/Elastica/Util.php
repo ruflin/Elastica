@@ -28,7 +28,7 @@ class Util
     public static function isDateMathEscaped($requestUri)
     {
         // In practice, the only symbol that really needs to be escaped in URI is '/' => '%2F'
-        return false !== strpos(strtoupper($requestUri), '%2F');
+        return false !== \strpos(\strtoupper($requestUri), '%2F');
     }
 
     /**
@@ -47,29 +47,29 @@ class Util
         }
 
         // Check if date math if used at all. Find last '>'. E.g. /<log-{now/d}>,log-2011.12.01/log/_refresh
-        $pos1 = strrpos($requestUri, '>');
+        $pos1 = \strrpos($requestUri, '>');
         if (false === $pos1) {
             return $requestUri;
         }
 
         // Find the position up to which we should escape.
         // Should be next slash '/' after last '>' E.g. /<log-{now/d}>,log-2011.12.01/log/_refresh
-        $pos2 = strpos($requestUri, '/', $pos1);
-        $pos2 = false !== $pos2 ? $pos2 : strlen($requestUri);
+        $pos2 = \strpos($requestUri, '/', $pos1);
+        $pos2 = false !== $pos2 ? $pos2 : \strlen($requestUri);
 
         // Cut out the bit we need to escape: /<log-{now/d}>,log-2011.12.01
-        $uriSegment = substr($requestUri, 0, $pos2);
+        $uriSegment = \substr($requestUri, 0, $pos2);
 
         // Escape using character map
-        $escapedUriSegment = str_replace(static::$dateMathSymbols, static::$escapedDateMathSymbols, $uriSegment);
+        $escapedUriSegment = \str_replace(static::$dateMathSymbols, static::$escapedDateMathSymbols, $uriSegment);
 
         // '\\{' and '\\}' should not be escaped
-        if (false !== strpos($uriSegment, '\\\\')) {
-            $escapedUriSegment = str_replace(['\\\\%7B', '\\\\%7D'], ['\\\\{', '\\\\}'], $escapedUriSegment);
+        if (false !== \strpos($uriSegment, '\\\\')) {
+            $escapedUriSegment = \str_replace(['\\\\%7B', '\\\\%7D'], ['\\\\{', '\\\\}'], $escapedUriSegment);
         }
 
         // Replace part of the string. E.g. /%3Clog-%7Bnow%2Fd%7D%3E%2Clog-2011.12.01/log/_refresh
-        return substr_replace($requestUri, $escapedUriSegment, 0, $pos2);
+        return \substr_replace($requestUri, $escapedUriSegment, 0, $pos2);
     }
 
     /**
@@ -110,7 +110,7 @@ class Util
         $escapableChars = ['\\', '+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '/'];
 
         foreach ($escapableChars as $char) {
-            $result = str_replace($char, '\\'.$char, $result);
+            $result = \str_replace($char, '\\'.$char, $result);
         }
 
         // < and > cannot be escaped, so they should be removed
@@ -118,7 +118,7 @@ class Util
         $nonEscapableChars = ['<', '>'];
 
         foreach ($nonEscapableChars as $char) {
-            $result = str_replace($char, '', $result);
+            $result = \str_replace($char, '', $result);
         }
 
         return $result;
@@ -137,7 +137,7 @@ class Util
     public static function replaceBooleanWords($term)
     {
         $replacementMap = [' AND ' => ' && ', ' OR ' => ' || ', ' NOT ' => ' !'];
-        $result = strtr($term, $replacementMap);
+        $result = \strtr($term, $replacementMap);
 
         return $result;
     }
@@ -153,7 +153,7 @@ class Util
      */
     public static function toCamelCase($string)
     {
-        return str_replace(' ', '', ucwords(str_replace('_', ' ', $string)));
+        return \str_replace(' ', '', \ucwords(\str_replace('_', ' ', $string)));
     }
 
     /**
@@ -167,9 +167,9 @@ class Util
      */
     public static function toSnakeCase($string)
     {
-        $string = preg_replace('/([A-Z])/', '_$1', $string);
+        $string = \preg_replace('/([A-Z])/', '_$1', $string);
 
-        return strtolower(substr($string, 1));
+        return \strtolower(\substr($string, 1));
     }
 
     /**
@@ -183,12 +183,12 @@ class Util
      */
     public static function convertDate($date)
     {
-        if (is_int($date)) {
+        if (\is_int($date)) {
             $timestamp = $date;
         } else {
-            $timestamp = strtotime($date);
+            $timestamp = \strtotime($date);
         }
-        $string = date('Y-m-d\TH:i:s\Z', $timestamp);
+        $string = \date('Y-m-d\TH:i:s\Z', $timestamp);
 
         return $string;
     }
@@ -221,13 +221,13 @@ class Util
      */
     public static function getParamName($class)
     {
-        if (is_object($class)) {
-            $class = get_class($class);
+        if (\is_object($class)) {
+            $class = \get_class($class);
         }
 
-        $parts = explode('\\', $class);
-        $last = array_pop($parts);
-        $last = preg_replace('/Query$/', '', $last); // for BoolQuery
+        $parts = \explode('\\', $class);
+        $last = \array_pop($parts);
+        $last = \preg_replace('/Query$/', '', $last); // for BoolQuery
 
         return self::toSnakeCase($last);
     }
@@ -241,13 +241,13 @@ class Util
      */
     public static function convertRequestToCurlCommand(Request $request)
     {
-        $message = 'curl -X'.strtoupper($request->getMethod()).' ';
+        $message = 'curl -X'.\strtoupper($request->getMethod()).' ';
         $message .= '\'http://'.$request->getConnection()->getHost().':'.$request->getConnection()->getPort().'/';
         $message .= $request->getPath();
 
         $query = $request->getQuery();
         if (!empty($query)) {
-            $message .= '?'.http_build_query($query);
+            $message .= '?'.\http_build_query($query);
         }
 
         $message .= '\'';

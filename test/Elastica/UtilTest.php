@@ -171,7 +171,7 @@ class UtilTest extends BaseTest
 
         $convertedString = Util::convertDateTimeObject($dateTimeObject);
 
-        $date = date('Y-m-d\TH:i:sP', $timestamp);
+        $date = \date('Y-m-d\TH:i:sP', $timestamp);
 
         $this->assertEquals($convertedString, $date);
     }
@@ -186,7 +186,7 @@ class UtilTest extends BaseTest
 
         $convertedString = Util::convertDateTimeObject($dateTimeObject, false);
 
-        $date = date('Y-m-d\TH:i:s\Z', $timestamp);
+        $date = \date('Y-m-d\TH:i:s\Z', $timestamp);
 
         $this->assertEquals($convertedString, $date);
     }
