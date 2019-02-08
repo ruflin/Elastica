@@ -71,18 +71,6 @@ class FiltersTest extends BaseAggregationTest
     /**
      * @group unit
      */
-    public function testWrongName()
-    {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
-        $this->expectExceptionMessage('Name must be a string');
-
-        $agg = new Filters('by_color');
-        $agg->addFilter(new Term(['color' => '0']), 0);
-    }
-
-    /**
-     * @group unit
-     */
     public function testMixNamedAndAnonymousFilters()
     {
         $this->expectException(\Elastica\Exception\InvalidException::class);
