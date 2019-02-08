@@ -3,6 +3,8 @@
 namespace Elastica\Index;
 
 use Elastica\Index as BaseIndex;
+use Elastica\Response;
+use Elasticsearch\Endpoints\Indices\Recovery as RecoveryEndpoint;
 
 /**
  * Elastica index recovery object.
@@ -16,7 +18,7 @@ class Recovery
     /**
      * Response.
      *
-     * @var \Elastica\Response Response object
+     * @var Response Response object
      */
     protected $_response;
 
@@ -30,14 +32,14 @@ class Recovery
     /**
      * Index.
      *
-     * @var \Elastica\Index Index object
+     * @var BaseIndex Index object
      */
     protected $_index;
 
     /**
      * Construct.
      *
-     * @param \Elastica\Index $index Index object
+     * @param BaseIndex $index Index object
      */
     public function __construct(BaseIndex $index)
     {
@@ -48,9 +50,9 @@ class Recovery
     /**
      * Returns the index object.
      *
-     * @return \Elastica\Index Index object
+     * @return BaseIndex Index object
      */
-    public function getIndex()
+    public function getIndex(): BaseIndex
     {
         return $this->_index;
     }
@@ -58,9 +60,9 @@ class Recovery
     /**
      * Returns response object.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function getResponse()
+    public function getResponse(): Response
     {
         return $this->_response;
     }
@@ -70,7 +72,7 @@ class Recovery
      *
      * @return array Recovery info
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->_data;
     }
@@ -80,7 +82,7 @@ class Recovery
      */
     protected function getRecoveryData()
     {
-        $endpoint = new \Elasticsearch\Endpoints\Indices\Recovery();
+        $endpoint = new RecoveryEndpoint();
 
         $this->_response = $this->getIndex()->requestEndpoint($endpoint);
 
@@ -92,7 +94,7 @@ class Recovery
      *
      * @return $this
      */
-    public function refresh()
+    public function refresh(): self
     {
         $this->_data = $this->getRecoveryData();
 
