@@ -20,7 +20,7 @@ class Completion extends AbstractSuggest
      *
      * @return $this
      */
-    public function setFuzzy(array $fuzzy)
+    public function setFuzzy(array $fuzzy): Completion
     {
         return $this->setParam('fuzzy', $fuzzy);
     }

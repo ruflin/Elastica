@@ -21,7 +21,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setAnalyzer($analyzer)
+    public function setAnalyzer(string $analyzer): Term
     {
         return $this->setParam('analyzer', $analyzer);
     }
@@ -31,7 +31,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setSort($sort)
+    public function setSort(string $sort): Term
     {
         return $this->setParam('sort', $sort);
     }
@@ -41,7 +41,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setSuggestMode($mode)
+    public function setSuggestMode(string $mode): Term
     {
         return $this->setParam('suggest_mode', $mode);
     }
@@ -53,7 +53,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setLowercaseTerms($lowercase = true)
+    public function setLowercaseTerms(bool $lowercase = true): Term
     {
         return $this->setParam('lowercase_terms', (bool) $lowercase);
     }
@@ -65,9 +65,9 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setMaxEdits($max)
+    public function setMaxEdits(int $max = 2): Term
     {
-        return $this->setParam('max_edits', (int) $max);
+        return $this->setParam('max_edits', $max);
     }
 
     /**
@@ -77,9 +77,9 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setPrefixLength($length)
+    public function setPrefixLength(int $length = 1): Term
     {
-        return $this->setParam('prefix_len', (int) $length);
+        return $this->setParam('prefix_len', $length);
     }
 
     /**
@@ -89,9 +89,9 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setMinWordLength($length)
+    public function setMinWordLength(int $length = 4): Term
     {
-        return $this->setParam('min_word_length', (int) $length);
+        return $this->setParam('min_word_length', $length);
     }
 
     /**
@@ -99,7 +99,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setMaxInspections($max)
+    public function setMaxInspections(int $max = 5): Term
     {
         return $this->setParam('max_inspections', $max);
     }
@@ -111,7 +111,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setMinDocFrequency($min)
+    public function setMinDocFrequency(float $min = 0): Term
     {
         return $this->setParam('min_doc_freq', $min);
     }
@@ -123,7 +123,7 @@ class Term extends AbstractSuggest
      *
      * @return $this
      */
-    public function setMaxTermFrequency($max)
+    public function setMaxTermFrequency(float $max = 0.01): Term
     {
         return $this->setParam('max_term_freq', $max);
     }
@@ -138,11 +138,11 @@ class Term extends AbstractSuggest
      * - jaro_winkler
      * - ngram
      *
-     * @param string $distanceAlgrorithm
+     * @param string $distanceAlgorithm
      *
      * @return $this
      */
-    public function setStringDistanceAlgorithm($distanceAlgorithm)
+    public function setStringDistanceAlgorithm(string $distanceAlgorithm): Term
     {
         return $this->setParam('string_distance', $distanceAlgorithm);
     }

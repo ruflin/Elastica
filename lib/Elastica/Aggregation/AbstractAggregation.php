@@ -33,7 +33,7 @@ abstract class AbstractAggregation extends Param implements NameableInterface
      *
      * @return $this
      */
-    public function setName($name): NameableInterface
+    public function setName(string $name): NameableInterface
     {
         $this->_name = $name;
 
