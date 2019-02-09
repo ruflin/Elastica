@@ -88,7 +88,7 @@ abstract class AbstractScript extends AbstractUpdateAction
      * @param string|null $lang       Script language, see constants
      * @param string|null $documentId Document ID the script action should be performed on (only relevant in update context)
      */
-    public function __construct(array $params = null, $lang = null, $documentId = null)
+    public function __construct(array $params = null, string $lang = null, string $documentId = null)
     {
         if ($params) {
             $this->setParams($params);
@@ -108,7 +108,7 @@ abstract class AbstractScript extends AbstractUpdateAction
      *
      * @return $this
      */
-    public function setLang($lang)
+    public function setLang(string $lang): AbstractScript
     {
         $this->_lang = $lang;
 
@@ -128,12 +128,12 @@ abstract class AbstractScript extends AbstractUpdateAction
      *
      * @return array
      */
-    abstract protected function getScriptTypeArray();
+    abstract protected function getScriptTypeArray(): array;
 
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = $this->getScriptTypeArray();
 

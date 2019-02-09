@@ -15,7 +15,7 @@ use Elastica\Param;
 class ScriptFields extends Param
 {
     /**
-     * @param \Elastica\Script\Script[]|array $scripts OPTIONAL
+     * @param Script[]|array $scripts OPTIONAL
      */
     public function __construct(array $scripts = [])
     {
@@ -25,16 +25,16 @@ class ScriptFields extends Param
     }
 
     /**
-     * @param string                          $name   Name of the Script field
-     * @param \Elastica\Script\AbstractScript $script
+     * @param string         $name   Name of the Script field
+     * @param AbstractScript $script
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return $this
      */
-    public function addScript($name, AbstractScript $script)
+    public function addScript(string $name, AbstractScript $script): ScriptFields
     {
-        if (!is_string($name) || !strlen($name)) {
+        if (!strlen($name)) {
             throw new InvalidException('The name of a Script is required and must be a string');
         }
         $this->setParam($name, $script);
@@ -43,11 +43,11 @@ class ScriptFields extends Param
     }
 
     /**
-     * @param \Elastica\Script\Script[]|array $scripts Associative array of string => Elastica\Script\Script
+     * @param Script[]|array $scripts Associative array of string => Elastica\Script\Script
      *
      * @return $this
      */
-    public function setScripts(array $scripts)
+    public function setScripts(array $scripts): ScriptFields
     {
         $this->_params = [];
         foreach ($scripts as $name => $script) {
@@ -60,7 +60,7 @@ class ScriptFields extends Param
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->_convertArrayable($this->_params);
     }
