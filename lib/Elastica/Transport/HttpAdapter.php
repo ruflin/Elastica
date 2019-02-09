@@ -7,6 +7,7 @@ use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
 use Elastica\JSON;
 use Elastica\Request as ElasticaRequest;
+use Elastica\Response;
 use Elastica\Response as ElasticaResponse;
 use Elastica\Util;
 use Ivory\HttpAdapter\HttpAdapterInterface;
@@ -43,8 +44,8 @@ class HttpAdapter extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param \Elastica\Request $elasticaRequest
-     * @param array             $params          Host, Port, ...
+     * @param ElasticaRequest $elasticaRequest
+     * @param array           $params          Host, Port, ...
      *
      * @throws \Elastica\Exception\ConnectionException
      * @throws \Elastica\Exception\ResponseException
@@ -52,7 +53,7 @@ class HttpAdapter extends AbstractTransport
      *
      * @return \Elastica\Response Response object
      */
-    public function exec(ElasticaRequest $elasticaRequest, array $params)
+    public function exec(ElasticaRequest $elasticaRequest, array $params): Response
     {
         $connection = $this->getConnection();
 
@@ -92,7 +93,7 @@ class HttpAdapter extends AbstractTransport
      *
      * @return ElasticaResponse
      */
-    protected function _createElasticaResponse(HttpAdapterResponse $httpAdapterResponse)
+    protected function _createElasticaResponse(HttpAdapterResponse $httpAdapterResponse): ElasticaResponse
     {
         return new ElasticaResponse((string) $httpAdapterResponse->getBody(), $httpAdapterResponse->getStatusCode());
     }
@@ -103,7 +104,7 @@ class HttpAdapter extends AbstractTransport
      *
      * @return HttpAdapterRequest
      */
-    protected function _createHttpAdapterRequest(ElasticaRequest $elasticaRequest, Connection $connection)
+    protected function _createHttpAdapterRequest(ElasticaRequest $elasticaRequest, Connection $connection): HttpAdapterRequest
     {
         $data = $elasticaRequest->getData();
         $body = null;
@@ -138,7 +139,7 @@ class HttpAdapter extends AbstractTransport
      *
      * @return string
      */
-    protected function _getUri(ElasticaRequest $request, Connection $connection)
+    protected function _getUri(ElasticaRequest $request, Connection $connection): string
     {
         $url = $connection->hasConfig('url') ? $connection->getConfig('url') : '';
 

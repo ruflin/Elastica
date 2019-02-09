@@ -15,7 +15,7 @@ use Psr\Http\Message\RequestInterface;
 
 class AwsAuthV4 extends Guzzle
 {
-    protected function _getGuzzleClient($baseUrl, $persistent = true, Request $request)
+    protected function _getGuzzleClient(string $baseUrl, bool $persistent = true, Request $request): Client
     {
         if (!$persistent || !self::$_guzzleClientConnection) {
             $stack = HandlerStack::create(GuzzleHttp\choose_handler());
@@ -33,7 +33,7 @@ class AwsAuthV4 extends Guzzle
         return self::$_guzzleClientConnection;
     }
 
-    protected function _getBaseUrl(Connection $connection)
+    protected function _getBaseUrl(Connection $connection): string
     {
         $this->initializePortAndScheme();
 
@@ -90,7 +90,7 @@ class AwsAuthV4 extends Guzzle
      *
      * @return bool
      */
-    private function isSslRequired(Connection $conn, $default = false)
+    private function isSslRequired(Connection $conn, bool $default = false): bool
     {
         return $conn->hasParam('ssl')
             ? (bool) $conn->getParam('ssl')

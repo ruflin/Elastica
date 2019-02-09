@@ -27,13 +27,13 @@ class NullTransport extends AbstractTransport
     /**
      * Set response object the transport returns.
      *
-     * @param \Elastica\Response $response
+     * @param array $params Hostname, port, path, ...
      *
-     * @return $this
+     * @return Response
      */
-    public function getResponse()
+    public function getResponse(array $params = []): Response
     {
-        return $this->_response;
+        return $this->_response ?? $this->generateDefaultResponse($params);
     }
 
     /**
@@ -43,11 +43,11 @@ class NullTransport extends AbstractTransport
      *
      * @return $this
      */
-    public function setResponse(Response $response)
+    public function setResponse(Response $response): NullTransport
     {
         $this->_response = $response;
 
-        return $this->_response;
+        return $this;
     }
 
     /**
@@ -55,9 +55,9 @@ class NullTransport extends AbstractTransport
      *
      * @param array $params Hostname, port, path, ...
      *
-     * @return \Elastica\Response $response
+     * @return Response $response
      */
-    public function generateDefaultResponse(array $params)
+    public function generateDefaultResponse(array $params): Response
     {
         $response = [
             'took' => 0,
@@ -81,19 +81,13 @@ class NullTransport extends AbstractTransport
     /**
      * Null transport.
      *
-     * @param \Elastica\Request $request
-     * @param array             $params  Hostname, port, path, ...
+     * @param Request $request
+     * @param array   $params  Hostname, port, path, ...
      *
-     * @return \Elastica\Response Response empty object
+     * @return Response Response empty object
      */
-    public function exec(Request $request, array $params)
+    public function exec(Request $request, array $params): Response
     {
-        $response = $this->getResponse();
-
-        if (!$response) {
-            $response = $this->generateDefaultResponse($params);
-        }
-
-        return $response;
+        return $this->getResponse($params);
     }
 }

@@ -3,6 +3,7 @@
 namespace Elastica\Transport;
 
 use Elastica\Exception\Connection\HttpException;
+use Elastica\Exception\ConnectionException;
 use Elastica\Exception\PartialShardFailureException;
 use Elastica\Exception\ResponseException;
 use Elastica\JSON;
@@ -36,16 +37,16 @@ class Http extends AbstractTransport
      *
      * All calls that are made to the server are done through this function
      *
-     * @param \Elastica\Request $request
-     * @param array             $params  Host, Port, ...
+     * @param Request $request
+     * @param array   $params  Host, Port, ...
      *
-     * @throws \Elastica\Exception\ConnectionException
-     * @throws \Elastica\Exception\ResponseException
-     * @throws \Elastica\Exception\Connection\HttpException
+     * @throws ConnectionException
+     * @throws ResponseException
+     * @throws HttpException
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
-    public function exec(Request $request, array $params)
+    public function exec(Request $request, array $params): Response
     {
         $connection = $this->getConnection();
 
@@ -214,7 +215,7 @@ class Http extends AbstractTransport
      *
      * @return resource Connection resource
      */
-    protected function _getConnection($persistent = true)
+    protected function _getConnection(bool $persistent = true)
     {
         if (!$persistent || !self::$_curlConnection) {
             self::$_curlConnection = curl_init();
