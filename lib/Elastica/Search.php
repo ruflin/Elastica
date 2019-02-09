@@ -29,6 +29,7 @@ class Search
     const OPTION_TERMINATE_AFTER = 'terminate_after';
     const OPTION_SHARD_REQUEST_CACHE = 'request_cache';
     const OPTION_FILTER_PATH = 'filter_path';
+    const OPTION_TYPED_KEYS = 'typed_keys';
 
     /*
      * Search types
@@ -293,6 +294,7 @@ class Search
             case self::OPTION_TERMINATE_AFTER:
             case self::OPTION_SHARD_REQUEST_CACHE:
             case self::OPTION_FILTER_PATH:
+            case self::OPTION_TYPED_KEYS:
                 return true;
         }
 

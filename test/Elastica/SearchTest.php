@@ -2,10 +2,10 @@
 
 namespace Elastica\Test;
 
+use Elastica\Aggregation\Cardinality;
 use Elastica\Client;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
-use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
@@ -14,8 +14,8 @@ use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Script\Script;
 use Elastica\Search;
+use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 
 class SearchTest extends BaseTest
 {
@@ -395,6 +395,16 @@ class SearchTest extends BaseTest
         $filteredData = $resultSet->getResponse()->getData();
         $this->assertArrayNotHasKey('took', $filteredData);
         $this->assertArrayNotHasKey('max_score', $filteredData['hits']);
+
+        //test with typed_keys
+        $countIds = (new Cardinality('count_ids'))->setField('id');
+        $suggestName = new Suggest((new Suggest\Term('name_suggest', 'username'))->setText('tes'));
+        $typedKeysQuery = (new Query())
+            ->addAggregation($countIds)
+            ->setSuggest($suggestName);
+        $resultSet = $search->search($typedKeysQuery, [Search::OPTION_TYPED_KEYS => true]);
+        $this->assertNotEmpty($resultSet->getAggregation('cardinality#count_ids'));
+        $this->assertNotEmpty($resultSet->getSuggests(), 'term#name_suggest');
 
         //Timeout - this one is a bit more tricky to test
         $mockResponse = new Response(json_encode(['timed_out' => true]));
