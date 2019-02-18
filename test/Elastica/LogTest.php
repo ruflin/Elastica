@@ -13,7 +13,7 @@ class LogTest extends BaseTest
 
     public static function setUpBeforeClass()
     {
-        if (!class_exists('Psr\Log\AbstractLogger')) {
+        if (!\class_exists('Psr\Log\AbstractLogger')) {
             self::markTestSkipped('The Psr extension is not available.');
         }
     }
@@ -75,7 +75,7 @@ class LogTest extends BaseTest
         $log->log(LogLevel::DEBUG, $this->_message, $this->_context);
 
         $this->_context['error_message'] = $this->_message;
-        $message = json_encode($this->_context);
+        $message = \json_encode($this->_context);
 
         $this->assertEquals($message, $log->getLastMessage());
     }
@@ -89,14 +89,14 @@ class LogTest extends BaseTest
         $log = new Log($client);
 
         // Set log path temp path as otherwise test fails with output
-        $errorLog = ini_get('error_log');
-        ini_set('error_log', sys_get_temp_dir().DIRECTORY_SEPARATOR.'php.log');
+        $errorLog = \ini_get('error_log');
+        \ini_set('error_log', \sys_get_temp_dir().DIRECTORY_SEPARATOR.'php.log');
 
         $this->_context['error_message'] = $this->_message;
-        $message = json_encode($this->_context);
+        $message = \json_encode($this->_context);
 
         $log->log(LogLevel::DEBUG, $this->_message, $this->_context);
-        ini_set('error_log', $errorLog);
+        \ini_set('error_log', $errorLog);
 
         $this->assertEquals($message, $log->getLastMessage());
     }
@@ -192,6 +192,6 @@ class LogTest extends BaseTest
     {
         $this->_context['error_message'] = $this->_message;
 
-        return json_encode($this->_context);
+        return \json_encode($this->_context);
     }
 }

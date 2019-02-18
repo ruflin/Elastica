@@ -12,10 +12,10 @@ abstract class AbstractExceptionTest extends BaseTest
         $reflection = new \ReflectionObject($this);
 
         // Elastica\Test\Exception\RuntimeExceptionTest => Elastica\Exception\RuntimeExceptionTest
-        $name = preg_replace('/^Elastica\\\\Test/', 'Elastica', $reflection->getName());
+        $name = \preg_replace('/^Elastica\\\\Test/', 'Elastica', $reflection->getName());
 
         // Elastica\Exception\RuntimeExceptionTest => Elastica\Exception\RuntimeException
-        $name = preg_replace('/Test$/', '', $name);
+        $name = \preg_replace('/Test$/', '', $name);
 
         return $name;
     }

@@ -55,7 +55,7 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
 
             $message = JSON::parse($e->getMessage());
             $this->assertArrayHasKey('failures', $message, 'Failures are absent');
-            $this->assertGreaterThan(0, count($message['failures']), 'Failures are empty');
+            $this->assertGreaterThan(0, \count($message['failures']), 'Failures are empty');
         }
     }
 }

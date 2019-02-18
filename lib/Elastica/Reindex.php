@@ -54,7 +54,7 @@ class Reindex
 
     protected function _getBody($oldIndex, $newIndex, $options)
     {
-        $body = array_merge([
+        $body = \array_merge([
             'source' => $this->_getSourcePartBody($oldIndex, $options),
             'dest' => $this->_getDestPartBody($newIndex, $options),
         ], $this->_resolveBodyOptions($options));
@@ -64,7 +64,7 @@ class Reindex
 
     protected function _getSourcePartBody(Index $index, array $options)
     {
-        $sourceBody = array_merge([
+        $sourceBody = \array_merge([
             'index' => $index->getName(),
         ], $this->_resolveSourceOptions($options));
 
@@ -76,14 +76,14 @@ class Reindex
 
     protected function _getDestPartBody(Index $index, array $options)
     {
-        return array_merge([
+        return \array_merge([
             'index' => $index->getName(),
         ], $this->_resolveDestOptions($options));
     }
 
     private function _resolveSourceOptions(array $options)
     {
-        return array_intersect_key($options, [
+        return \array_intersect_key($options, [
             self::TYPE => null,
             self::QUERY => null,
         ]);
@@ -91,7 +91,7 @@ class Reindex
 
     private function _resolveDestOptions(array $options)
     {
-        return array_intersect_key($options, [
+        return \array_intersect_key($options, [
             self::VERSION_TYPE => null,
             self::OPERATION_TYPE => null,
         ]);
@@ -99,7 +99,7 @@ class Reindex
 
     private function _resolveBodyOptions(array $options)
     {
-        return array_intersect_key($options, [
+        return \array_intersect_key($options, [
             self::SIZE => null,
             self::CONFLICTS => null,
         ]);
@@ -126,7 +126,7 @@ class Reindex
      */
     private function _setSourceType(array $sourceBody)
     {
-        if (isset($sourceBody[self::TYPE]) && !is_array($sourceBody[self::TYPE])) {
+        if (isset($sourceBody[self::TYPE]) && !\is_array($sourceBody[self::TYPE])) {
             $sourceBody[self::TYPE] = [$sourceBody[self::TYPE]];
         }
         if (isset($sourceBody[self::TYPE])) {

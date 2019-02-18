@@ -228,7 +228,7 @@ class Bulk
      */
     public function addData($data, string $opType = null)
     {
-        if (!is_array($data)) {
+        if (!\is_array($data)) {
             $data = [$data];
         }
 
@@ -255,9 +255,9 @@ class Bulk
     public function addRawData(array $data): self
     {
         foreach ($data as $row) {
-            if (is_array($row)) {
-                $opType = key($row);
-                $metadata = reset($row);
+            if (\is_array($row)) {
+                $opType = \key($row);
+                $metadata = \reset($row);
                 if (Action::isValidOpType($opType)) {
                     // add previous action
                     if (isset($action)) {
@@ -377,7 +377,7 @@ class Bulk
 
         $bulkResponses = [];
 
-        if (isset($responseData['items']) && is_array($responseData['items'])) {
+        if (isset($responseData['items']) && \is_array($responseData['items'])) {
             foreach ($responseData['items'] as $key => $item) {
                 if (!isset($actions[$key])) {
                     throw new InvalidException('No response found for action #'.$key);
@@ -385,8 +385,8 @@ class Bulk
 
                 $action = $actions[$key];
 
-                $opType = key($item);
-                $bulkResponseData = reset($item);
+                $opType = \key($item);
+                $bulkResponseData = \reset($item);
 
                 if ($action instanceof AbstractDocumentAction) {
                     $data = $action->getData();

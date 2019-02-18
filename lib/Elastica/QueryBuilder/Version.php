@@ -49,11 +49,11 @@ abstract class Version
     {
         switch ($type) {
             case DSL::TYPE_QUERY:
-                return in_array($name, $this->queries, true);
+                return \in_array($name, $this->queries, true);
             case DSL::TYPE_AGGREGATION:
-                return in_array($name, $this->aggregations, true);
+                return \in_array($name, $this->aggregations, true);
             case DSL::TYPE_SUGGEST:
-                return in_array($name, $this->suggesters, true);
+                return \in_array($name, $this->suggesters, true);
         }
 
         // disables version check in Facade for custom DSL objects

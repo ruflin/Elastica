@@ -63,9 +63,9 @@ class HttpAdapter extends AbstractTransport
 
         $httpAdapterRequest = $this->_createHttpAdapterRequest($elasticaRequest, $connection);
 
-        $start = microtime(true);
+        $start = \microtime(true);
         $httpAdapterResponse = $this->httpAdapter->sendRequest($httpAdapterRequest);
-        $end = microtime(true);
+        $end = \microtime(true);
 
         $elasticaResponse = $this->_createElasticaResponse($httpAdapterResponse);
         $elasticaResponse->setQueryTime($end - $start);
@@ -120,7 +120,7 @@ class HttpAdapter extends AbstractTransport
                 $method = ElasticaRequest::POST;
             }
 
-            if (is_array($data)) {
+            if (\is_array($data)) {
                 $body = JSON::stringify($data, JSON_UNESCAPED_UNICODE);
             } else {
                 $body = $data;
@@ -159,7 +159,7 @@ class HttpAdapter extends AbstractTransport
         $query = $request->getQuery();
 
         if (!empty($query)) {
-            $baseUri .= '?'.http_build_query($query);
+            $baseUri .= '?'.\http_build_query($query);
         }
 
         return $baseUri;

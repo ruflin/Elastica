@@ -2,7 +2,7 @@
 
 namespace Elastica\Query;
 
-trigger_error('Elastica\Query\GeohashCell is deprecated.', E_USER_DEPRECATED);
+\trigger_error('Elastica\Query\GeohashCell is deprecated.', E_USER_DEPRECATED);
 
 /**
  * Class GeohashCell.

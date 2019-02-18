@@ -2,7 +2,7 @@
 
 namespace Elastica\Exception;
 
-trigger_error('Elastica\Exception\ElasticsearchException is deprecated. Use Elastica\Exception\ResponseException::getResponse::getFullError instead.', E_USER_DEPRECATED);
+\trigger_error('Elastica\Exception\ElasticsearchException is deprecated. Use Elastica\Exception\ResponseException::getResponse::getFullError instead.', E_USER_DEPRECATED);
 
 /**
  * Elasticsearch exception.
@@ -47,9 +47,9 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      */
     protected function _parseError(string $error)
     {
-        $errors = explode(']; nested: ', $error);
+        $errors = \explode(']; nested: ', $error);
 
-        if (1 === count($errors)) {
+        if (1 === \count($errors)) {
             $this->_exception = $this->_extractException($errors[0]);
         } else {
             if (self::REMOTE_TRANSPORT_EXCEPTION === $this->_extractException($errors[0])) {
@@ -70,7 +70,7 @@ class ElasticsearchException extends \Exception implements ExceptionInterface
      */
     protected function _extractException(string $error)
     {
-        if (preg_match('/^(\w+)\[.*\]/', $error, $matches)) {
+        if (\preg_match('/^(\w+)\[.*\]/', $error, $matches)) {
             return $matches[1];
         }
 

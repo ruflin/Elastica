@@ -36,7 +36,7 @@ class Query extends Param
      */
     public function __construct($query = null)
     {
-        if (is_array($query)) {
+        if (\is_array($query)) {
             $this->setRawQuery($query);
         } elseif ($query instanceof AbstractQuery) {
             $this->setQuery($query);
@@ -65,9 +65,9 @@ class Query extends Param
                 return new self($query);
             case empty($query):
                 return new self(new MatchAll());
-            case is_array($query):
+            case \is_array($query):
                 return new self($query);
-            case is_string($query):
+            case \is_string($query):
                 return new self(new QueryString($query));
             case $query instanceof AbstractSuggest:
                 return new self(new Suggest($query));
@@ -279,7 +279,7 @@ class Query extends Param
      */
     public function setScriptFields($scriptFields)
     {
-        if (is_array($scriptFields)) {
+        if (\is_array($scriptFields)) {
             $scriptFields = new ScriptFields($scriptFields);
         }
 
@@ -330,7 +330,7 @@ class Query extends Param
             $this->setQuery(new MatchAll());
         }
 
-        if (isset($this->_params['post_filter']) && 0 === count(($this->_params['post_filter'])->toArray())) {
+        if (isset($this->_params['post_filter']) && 0 === \count(($this->_params['post_filter'])->toArray())) {
             unset($this->_params['post_filter']);
         }
 
@@ -354,7 +354,7 @@ class Query extends Param
      */
     public function setMinScore($minScore)
     {
-        if (!is_numeric($minScore)) {
+        if (!\is_numeric($minScore)) {
             throw new InvalidException('has to be numeric param');
         }
 
@@ -386,7 +386,7 @@ class Query extends Param
      */
     public function setRescore($rescore)
     {
-        if (is_array($rescore)) {
+        if (\is_array($rescore)) {
             $buffer = [];
 
             foreach ($rescore as $rescoreQuery) {

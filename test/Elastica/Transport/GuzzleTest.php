@@ -11,7 +11,7 @@ class GuzzleTest extends BaseTest
 {
     public static function setUpBeforeClass()
     {
-        if (!class_exists('GuzzleHttp\\Client')) {
+        if (!\class_exists('GuzzleHttp\\Client')) {
             self::markTestSkipped('guzzlehttp/guzzle package should be installed to run guzzle transport tests');
         }
     }
@@ -76,7 +76,7 @@ class GuzzleTest extends BaseTest
     public function testWithEnvironmentalProxy()
     {
         $this->checkProxy($this->_getProxyUrl());
-        putenv('http_proxy='.$this->_getProxyUrl().'/');
+        \putenv('http_proxy='.$this->_getProxyUrl().'/');
 
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -86,7 +86,7 @@ class GuzzleTest extends BaseTest
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
 
-        putenv('http_proxy=');
+        \putenv('http_proxy=');
     }
 
     /**
@@ -95,7 +95,7 @@ class GuzzleTest extends BaseTest
     public function testWithEnabledEnvironmentalProxy()
     {
         $this->checkProxy($this->_getProxyUrl403());
-        putenv('http_proxy='.$this->_getProxyUrl403().'/');
+        \putenv('http_proxy='.$this->_getProxyUrl403().'/');
 
         $client = $this->_getClient(['transport' => 'Guzzle', 'persistent' => false]);
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
@@ -106,7 +106,7 @@ class GuzzleTest extends BaseTest
         $transferInfo = $client->request('/_nodes')->getTransferInfo();
         $this->assertEquals(200, $transferInfo['http_code']);
 
-        putenv('http_proxy=');
+        \putenv('http_proxy=');
     }
 
     /**
@@ -181,18 +181,18 @@ class GuzzleTest extends BaseTest
 
     protected function checkProxy($url)
     {
-        $url = parse_url($url);
+        $url = \parse_url($url);
         $this->_checkConnection($url['host'], $url['port']);
     }
 
     protected function setUp()
     {
-        putenv('http_proxy=');
+        \putenv('http_proxy=');
     }
 
     protected function tearDown()
     {
         parent::tearDown();
-        putenv('http_proxy=');
+        \putenv('http_proxy=');
     }
 }

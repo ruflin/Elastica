@@ -17,16 +17,16 @@ abstract class AbstractDSLTest extends BaseTest
     protected function _assertImplemented(DSL $dsl, string $methodName, string $className, array $arguments)
     {
         // Check method existence
-        $this->assertTrue(method_exists($dsl, $methodName));
+        $this->assertTrue(\method_exists($dsl, $methodName));
 
         // Check returned value
-        $return = call_user_func_array([$dsl, $methodName], $arguments);
-        $this->assertTrue(class_exists($className), 'Class not exists but NotImplementedException is not thrown');
+        $return = \call_user_func_array([$dsl, $methodName], $arguments);
+        $this->assertTrue(\class_exists($className), 'Class not exists but NotImplementedException is not thrown');
         $this->assertInstanceOf($className, $return);
 
         // Check method signature
         $class = new \ReflectionClass($className);
-        $method = new \ReflectionMethod(get_class($dsl), $methodName);
+        $method = new \ReflectionMethod(\get_class($dsl), $methodName);
         if (!$class->hasMethod('__construct')) {
             $this->assertEmpty($method->getParameters(), 'Constructor is not defined, but method has some parameters');
         } else {
@@ -42,7 +42,7 @@ abstract class AbstractDSLTest extends BaseTest
     protected function _assertNotImplemented(DSL $dsl, string $methodName, array $arguments)
     {
         try {
-            call_user_func([$dsl, $methodName], $arguments);
+            \call_user_func([$dsl, $methodName], $arguments);
             $this->fail('NotImplementedException is not thrown');
         } catch (NotImplementedException $ex) {
             // expected
@@ -55,7 +55,7 @@ abstract class AbstractDSLTest extends BaseTest
      */
     protected function _assertParametersEquals(array $left, array $right)
     {
-        $countLeft = count($left);
+        $countLeft = \count($left);
         $this->assertCount($countLeft, $right, 'Parameters count mismatch');
 
         for ($i = 0; $i < $countLeft; ++$i) {

@@ -47,7 +47,7 @@ class IpRangeTest extends BaseAggregationTest
         $results = $this->_getIndexForTest()->search($query)->getAggregation('ip');
 
         foreach ($results['buckets'] as $bucket) {
-            if (array_key_exists('key', $bucket) && $bucket['key'] == $cidrRange) {
+            if (\array_key_exists('key', $bucket) && $bucket['key'] == $cidrRange) {
                 // the CIDR mask
                 $this->assertEquals(3, $bucket['doc_count']);
             } else {

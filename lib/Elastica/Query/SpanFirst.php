@@ -70,7 +70,7 @@ class SpanFirst extends AbstractSpanQuery
      */
     protected function _setQuery(string $type, $args): self
     {
-        if (!is_array($args) && !($args instanceof AbstractSpanQuery)) {
+        if (!\is_array($args) && !($args instanceof AbstractSpanQuery)) {
             throw new InvalidException('Invalid parameter. Has to be array or instance of Elastica\Query\AbstractSpanQuery');
         }
 

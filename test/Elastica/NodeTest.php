@@ -16,7 +16,7 @@ class NodeTest extends BaseTest
     {
         $client = $this->_getClient();
         $names = $client->getCluster()->getNodeNames();
-        $name = reset($names);
+        $name = \reset($names);
 
         $node = new Node($name, $client);
         $this->assertInstanceOf(Node::class, $node);
@@ -29,7 +29,7 @@ class NodeTest extends BaseTest
     {
         $client = $this->_getClient();
         $names = $client->getCluster()->getNodeNames();
-        $name = reset($names);
+        $name = \reset($names);
 
         $node = new Node($name, $client);
 
@@ -45,7 +45,7 @@ class NodeTest extends BaseTest
     {
         $client = $this->_getClient();
         $names = $client->getCluster()->getNodeNames();
-        $name = reset($names);
+        $name = \reset($names);
 
         $node = new Node($name, $client);
 

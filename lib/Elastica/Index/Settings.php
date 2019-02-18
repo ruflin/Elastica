@@ -74,7 +74,7 @@ class Settings
     public function get(string $setting = '')
     {
         $requestData = $this->request()->getData();
-        $data = reset($requestData);
+        $data = \reset($requestData);
 
         if (empty($data['settings']) || empty($data['settings']['index'])) {
             // should not append, the request should throw a ResponseException
@@ -91,9 +91,9 @@ class Settings
             return $settings[$setting];
         }
 
-        if (false !== strpos($setting, '.')) {
+        if (false !== \strpos($setting, '.')) {
             // translate old dot-notation settings to nested arrays
-            $keys = explode('.', $setting);
+            $keys = \explode('.', $setting);
             foreach ($keys as $key) {
                 if (isset($settings[$key])) {
                     $settings = $settings[$key];

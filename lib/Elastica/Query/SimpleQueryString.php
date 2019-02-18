@@ -19,7 +19,7 @@ class SimpleQueryString extends AbstractQuery
     public function __construct(string $query, array $fields = [])
     {
         $this->setQuery($query);
-        if (0 < count($fields)) {
+        if (0 < \count($fields)) {
             $this->setFields($fields);
         }
     }

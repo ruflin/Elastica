@@ -61,7 +61,7 @@ class Index implements SearchableInterface
     {
         $this->_client = $client;
 
-        if (!is_scalar($name)) {
+        if (!\is_scalar($name)) {
             throw new InvalidException('Index name should be a scalar type');
         }
         $this->_name = (string) $name;
@@ -110,7 +110,7 @@ class Index implements SearchableInterface
         $data = $response->getData();
 
         // Get first entry as if index is an Alias, the name of the mapping is the real name and not alias name
-        $mapping = array_shift($data);
+        $mapping = \array_shift($data);
 
         if (isset($mapping['mappings'])) {
             return $mapping['mappings'];
@@ -164,7 +164,7 @@ class Index implements SearchableInterface
         $query = Query::create($query)->getQuery();
 
         $endpoint = new UpdateByQuery();
-        $body = ['query' => is_array($query)
+        $body = ['query' => \is_array($query)
             ? $query
             : $query->toArray(), ];
 
@@ -209,7 +209,7 @@ class Index implements SearchableInterface
         $query = Query::create($query)->getQuery();
 
         $endpoint = new DeleteByQuery();
-        $endpoint->setBody(['query' => is_array($query) ? $query : $query->toArray()]);
+        $endpoint->setBody(['query' => \is_array($query) ? $query : $query->toArray()]);
         $endpoint->setParams($options);
 
         return $this->requestEndpoint($endpoint);
@@ -291,13 +291,13 @@ class Index implements SearchableInterface
      */
     public function create(array $args = [], $options = null)
     {
-        if (is_bool($options) && $options) {
+        if (\is_bool($options) && $options) {
             try {
                 $this->delete();
             } catch (ResponseException $e) {
                 // Table can't be deleted, because doesn't exist
             }
-        } elseif (is_array($options)) {
+        } elseif (\is_array($options)) {
             foreach ($options as $key => $value) {
                 switch ($key) {
                     case 'recreate':
@@ -489,7 +489,7 @@ class Index implements SearchableInterface
 
         $data = $responseData[$this->getName()];
         if (!empty($data['aliases'])) {
-            return array_keys($data['aliases']);
+            return \array_keys($data['aliases']);
         }
 
         return [];
@@ -504,7 +504,7 @@ class Index implements SearchableInterface
      */
     public function hasAlias($name)
     {
-        return in_array($name, $this->getAliases());
+        return \in_array($name, $this->getAliases());
     }
 
     /**

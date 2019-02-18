@@ -44,7 +44,7 @@ class AwsAuthV4 extends Guzzle
     {
         $region = $this->getConnection()->hasParam('aws_region')
             ? $this->getConnection()->getParam('aws_region')
-            : getenv('AWS_REGION');
+            : \getenv('AWS_REGION');
         $signer = new SignatureV4('es', $region);
         $credProvider = $this->getCredentialProvider();
 

@@ -15,7 +15,7 @@ class InfoTest extends BaseTest
     {
         $client = $this->_getClient();
         $names = $client->getCluster()->getNodeNames();
-        $name = reset($names);
+        $name = \reset($names);
 
         $node = new Node($name, $client);
         $info = new NodeInfo($node);

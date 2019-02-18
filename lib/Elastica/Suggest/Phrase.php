@@ -178,8 +178,8 @@ class Phrase extends AbstractSuggest
             $generator = $array[$baseName]['candidate_generator'];
             unset($array[$baseName]['candidate_generator']);
 
-            $keys = array_keys($generator);
-            $values = array_values($generator);
+            $keys = \array_keys($generator);
+            $values = \array_values($generator);
 
             $array[$baseName][$keys[0]][] = $values[0];
         }

@@ -64,7 +64,7 @@ class Response
      */
     public function __construct($responseString, $responseStatus = null)
     {
-        if (is_array($responseString)) {
+        if (\is_array($responseString)) {
             $this->_response = $responseString;
         } else {
             $this->_responseString = $responseString;
@@ -85,7 +85,7 @@ class Response
             return '';
         }
 
-        if (is_string($error)) {
+        if (\is_string($error)) {
             return $error;
         }
 
@@ -155,7 +155,7 @@ class Response
             return false;
         }
 
-        return array_key_exists('failures', $shardsStatistics);
+        return \array_key_exists('failures', $shardsStatistics);
     }
 
     /**
@@ -230,7 +230,7 @@ class Response
                 $response = [];
             }
 
-            if (is_string($response)) {
+            if (\is_string($response)) {
                 $response = ['message' => $response];
             }
 

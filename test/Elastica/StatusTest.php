@@ -64,7 +64,7 @@ class StatusTest extends BaseTest
         $this->assertFalse($status->indexExists($indexName));
         $index->create();
 
-        usleep(10000);
+        \usleep(10000);
         $status->refresh();
         $this->assertTrue($status->indexExists($indexName));
     }
@@ -92,7 +92,7 @@ class StatusTest extends BaseTest
         $this->assertTrue($status->aliasExists($aliasName));
 
         $indicesWithAlias = $status->getIndicesWithAlias($aliasName);
-        $this->assertEquals([$indexName], array_map(
+        $this->assertEquals([$indexName], \array_map(
             function ($index) {
                 return $index->getName();
             }, $indicesWithAlias));

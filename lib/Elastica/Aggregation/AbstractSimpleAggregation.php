@@ -44,12 +44,12 @@ abstract class AbstractSimpleAggregation extends AbstractAggregation
 
         $baseName = $this->_getBaseName();
 
-        if (isset($array[$baseName]['script']) && is_array($array[$baseName]['script'])) {
+        if (isset($array[$baseName]['script']) && \is_array($array[$baseName]['script'])) {
             $script = $array[$baseName]['script'];
 
             unset($array[$baseName]['script']);
 
-            $array[$baseName] = array_merge($array[$baseName], $script);
+            $array[$baseName] = \array_merge($array[$baseName], $script);
         }
 
         return $array;

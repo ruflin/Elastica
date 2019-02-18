@@ -112,7 +112,7 @@ class Document extends AbstractUpdateAction
      */
     public function set($key, $value)
     {
-        if (!is_array($this->_data)) {
+        if (!\is_array($this->_data)) {
             throw new InvalidException('Document data is serialized data. Data creation is forbidden.');
         }
         $this->_data[$key] = $value;
@@ -127,7 +127,7 @@ class Document extends AbstractUpdateAction
      */
     public function has($key)
     {
-        return is_array($this->_data) && array_key_exists($key, $this->_data);
+        return \is_array($this->_data) && \array_key_exists($key, $this->_data);
     }
 
     /**
@@ -166,7 +166,7 @@ class Document extends AbstractUpdateAction
      */
     public function addFile($key, $filepath, $mimeType = '')
     {
-        $value = base64_encode(file_get_contents($filepath));
+        $value = \base64_encode(\file_get_contents($filepath));
 
         if (!empty($mimeType)) {
             $value = ['_content_type' => $mimeType, '_name' => $filepath, '_content' => $value];
@@ -187,7 +187,7 @@ class Document extends AbstractUpdateAction
      */
     public function addFileContent($key, $content)
     {
-        return $this->set($key, base64_encode($content));
+        return $this->set($key, \base64_encode($content));
     }
 
     /**
@@ -330,7 +330,7 @@ class Document extends AbstractUpdateAction
             return $data;
         }
 
-        if (is_array($data)) {
+        if (\is_array($data)) {
             return new self('', $data);
         }
 

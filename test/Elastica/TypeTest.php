@@ -938,7 +938,7 @@ class TypeTest extends BaseTest
         $index->forcemerge();
 
         // sleep a moment to be sure that all nodes in cluster has new type
-        sleep(5);
+        \sleep(5);
 
         //Test if type exists
         $this->assertTrue($type->exists());
@@ -1013,7 +1013,7 @@ class TypeTest extends BaseTest
 
         $response = $type->requestEndpoint($endpoint);
         $data = $response->getData();
-        $mapping = array_shift($data);
+        $mapping = \array_shift($data);
 
         $this->assertEquals(
             ['_doc' => ['properties' => $expect]],

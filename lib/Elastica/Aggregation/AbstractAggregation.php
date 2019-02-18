@@ -87,11 +87,11 @@ abstract class AbstractAggregation extends Param implements NameableInterface
     {
         $array = parent::toArray();
 
-        if (array_key_exists('global_aggregation', $array)) {
+        if (\array_key_exists('global_aggregation', $array)) {
             // compensate for class name GlobalAggregation
             $array = ['global' => new \stdClass()];
         }
-        if (sizeof($this->_aggs)) {
+        if (\sizeof($this->_aggs)) {
             $array['aggs'] = $this->_convertArrayable($this->_aggs);
         }
 

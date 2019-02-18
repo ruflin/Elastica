@@ -24,15 +24,15 @@ class JSON
     public static function parse($args/* inherit from json_decode */)
     {
         // extract arguments
-        $args = func_get_args();
+        $args = \func_get_args();
 
         // default to decoding into an assoc array
-        if (1 === count($args)) {
+        if (1 === \count($args)) {
             $args[] = true;
         }
 
         // run decode
-        $array = call_user_func_array('json_decode', $args);
+        $array = \call_user_func_array('json_decode', $args);
 
         // turn errors into exceptions for easier catching
         if ($error = self::getJsonLastErrorMsg()) {
@@ -58,10 +58,10 @@ class JSON
     public static function stringify($args/* inherit from json_encode */)
     {
         // extract arguments
-        $args = func_get_args();
+        $args = \func_get_args();
 
         // run encode and output
-        $string = call_user_func_array('json_encode', $args);
+        $string = \call_user_func_array('json_encode', $args);
 
         // turn errors into exceptions for easier catching
         if ($error = self::getJsonLastErrorMsg()) {
@@ -83,6 +83,6 @@ class JSON
      */
     private static function getJsonLastErrorMsg()
     {
-        return JSON_ERROR_NONE !== json_last_error() ? json_last_error_msg() : false;
+        return JSON_ERROR_NONE !== \json_last_error() ? \json_last_error_msg() : false;
     }
 }

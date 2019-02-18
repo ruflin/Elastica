@@ -41,17 +41,17 @@ class MultiBuilder implements MultiBuilderInterface
     private function buildResultSets(Response $response, $searches): array
     {
         $data = $response->getData();
-        if (!isset($data['responses']) || !is_array($data['responses'])) {
+        if (!isset($data['responses']) || !\is_array($data['responses'])) {
             return [];
         }
 
         $resultSets = [];
-        reset($searches);
+        \reset($searches);
 
         foreach ($data['responses'] as $responseData) {
-            $search = current($searches);
-            $key = key($searches);
-            next($searches);
+            $search = \current($searches);
+            $key = \key($searches);
+            \next($searches);
 
             $resultSets[$key] = $this->buildResultSet(new Response($responseData), $search);
         }

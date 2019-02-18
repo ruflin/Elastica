@@ -171,7 +171,7 @@ class Result
     {
         if (isset($this->_hit['fields'])) {
             return isset($this->_hit['_source'])
-                ? array_merge($this->getFields(), $this->getSource())
+                ? \array_merge($this->getFields(), $this->getSource())
                 : $this->getFields();
         }
 
@@ -251,7 +251,7 @@ class Result
     {
         $source = $this->getData();
 
-        return array_key_exists($key, $source) ? $source[$key] : null;
+        return \array_key_exists($key, $source) ? $source[$key] : null;
     }
 
     /**
@@ -265,6 +265,6 @@ class Result
     {
         $source = $this->getData();
 
-        return array_key_exists($key, $source) && null !== $source[$key];
+        return \array_key_exists($key, $source) && null !== $source[$key];
     }
 }

@@ -46,7 +46,7 @@ class Facade
     public function __call(string $name, array $arguments)
     {
         // defined check
-        if (false === method_exists($this->_dsl, $name)) {
+        if (false === \method_exists($this->_dsl, $name)) {
             throw new QueryBuilderException(
                 'undefined '.$this->_dsl->getType().' "'.$name.'"'
             );
@@ -60,6 +60,6 @@ class Facade
             );
         }
 
-        return call_user_func_array([$this->_dsl, $name], $arguments);
+        return \call_user_func_array([$this->_dsl, $name], $arguments);
     }
 }

@@ -73,7 +73,7 @@ abstract class AbstractTransport extends Param
     public function sanityzeQueryStringBool(array $query)
     {
         foreach ($query as $key => $value) {
-            if (is_bool($value)) {
+            if (\is_bool($value)) {
                 $query[$key] = ($value) ? 'true' : 'false';
             }
         }
@@ -101,28 +101,28 @@ abstract class AbstractTransport extends Param
      */
     public static function create($transport, Connection $connection, array $params = []): AbstractTransport
     {
-        if (is_array($transport) && isset($transport['type'])) {
+        if (\is_array($transport) && isset($transport['type'])) {
             $transportParams = $transport;
             unset($transportParams['type']);
 
-            $params = array_replace($params, $transportParams);
+            $params = \array_replace($params, $transportParams);
             $transport = $transport['type'];
         }
 
-        if (is_string($transport)) {
+        if (\is_string($transport)) {
             $specialTransports = [
                 'httpadapter' => 'HttpAdapter',
                 'nulltransport' => 'NullTransport',
             ];
 
-            if (isset($specialTransports[strtolower($transport)])) {
-                $transport = $specialTransports[strtolower($transport)];
+            if (isset($specialTransports[\strtolower($transport)])) {
+                $transport = $specialTransports[\strtolower($transport)];
             } else {
-                $transport = ucfirst($transport);
+                $transport = \ucfirst($transport);
             }
             $classNames = ["Elastica\\Transport\\$transport", $transport];
             foreach ($classNames as $className) {
-                if (class_exists($className)) {
+                if (\class_exists($className)) {
                     $transport = new $className();
                     break;
                 }

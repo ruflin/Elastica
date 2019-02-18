@@ -46,7 +46,7 @@ class Ids extends AbstractQuery
      */
     public function setIds($ids): self
     {
-        if (is_array($ids)) {
+        if (\is_array($ids)) {
             $this->_params['values'] = $ids;
         } else {
             $this->_params['values'] = [$ids];

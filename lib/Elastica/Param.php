@@ -39,7 +39,7 @@ class Param implements ArrayableInterface, \Countable
         $data = [$this->_getBaseName() => $this->getParams()];
 
         if (!empty($this->_rawParams)) {
-            $data = array_merge($data, $this->_rawParams);
+            $data = \array_merge($data, $this->_rawParams);
         }
 
         return $this->_convertArrayable($data);
@@ -59,7 +59,7 @@ class Param implements ArrayableInterface, \Countable
         foreach ($array as $key => $value) {
             if ($value instanceof ArrayableInterface) {
                 $arr[$value instanceof NameableInterface ? $value->getName() : $key] = $value->toArray();
-            } elseif (is_array($value)) {
+            } elseif (\is_array($value)) {
                 $arr[$key] = $this->_convertArrayable($value);
             } else {
                 $arr[$key] = $value;
@@ -189,6 +189,6 @@ class Param implements ArrayableInterface, \Countable
      */
     public function count()
     {
-        return count($this->_params);
+        return \count($this->_params);
     }
 }

@@ -140,6 +140,6 @@ class ResponseSet extends BaseResponse implements \Iterator, \Countable
      */
     public function count(): int
     {
-        return count($this->_bulkResponses);
+        return \count($this->_bulkResponses);
     }
 }

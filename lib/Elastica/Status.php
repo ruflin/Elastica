@@ -53,7 +53,7 @@ class Status
      */
     public function getData()
     {
-        if (is_null($this->_data)) {
+        if (\is_null($this->_data)) {
             $this->refresh();
         }
 
@@ -69,7 +69,7 @@ class Status
     {
         $data = $this->getData();
 
-        return array_keys($data['indices']);
+        return \array_keys($data['indices']);
     }
 
     /**
@@ -81,7 +81,7 @@ class Status
      */
     public function indexExists($name)
     {
-        return in_array($name, $this->getIndexNames());
+        return \in_array($name, $this->getIndexNames());
     }
 
     /**
@@ -93,7 +93,7 @@ class Status
      */
     public function aliasExists($name)
     {
-        return count($this->getIndicesWithAlias($name)) > 0;
+        return \count($this->getIndicesWithAlias($name)) > 0;
     }
 
     /**
@@ -135,7 +135,7 @@ class Status
      */
     public function getResponse()
     {
-        if (is_null($this->_response)) {
+        if (\is_null($this->_response)) {
             $this->refresh();
         }
 

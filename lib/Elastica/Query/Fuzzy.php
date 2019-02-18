@@ -36,10 +36,10 @@ class Fuzzy extends AbstractQuery
      */
     public function setField(string $fieldName, string $value): self
     {
-        if (!is_string($value) || !is_string($fieldName)) {
+        if (!\is_string($value) || !\is_string($fieldName)) {
             throw new InvalidException('The field and value arguments must be of type string.');
         }
-        if (count($this->getParams()) > 0 && key($this->getParams()) !== $fieldName) {
+        if (\count($this->getParams()) > 0 && \key($this->getParams()) !== $fieldName) {
             throw new InvalidException('Fuzzy query can only support a single field.');
         }
 
@@ -58,10 +58,10 @@ class Fuzzy extends AbstractQuery
     {
         //Retrieve the single existing field for alteration.
         $params = $this->getParams();
-        if (count($params) < 1) {
+        if (\count($params) < 1) {
             throw new InvalidException('No field has been set');
         }
-        $key = key($params);
+        $key = \key($params);
         $params[$key][$option] = $value;
 
         return $this->setParam($key, $params[$key]);

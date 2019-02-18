@@ -74,7 +74,7 @@ class Cluster
      */
     public function getIndexNames()
     {
-        return array_keys($this->_data['metadata']['indices']);
+        return \array_keys($this->_data['metadata']['indices']);
     }
 
     /**
