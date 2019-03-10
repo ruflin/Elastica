@@ -28,7 +28,7 @@ class Http extends AbstractTransport
     /**
      * Curl resource to reuse.
      *
-     * @var resource Curl resource to reuse
+     * @var resource[] Curl resource to reuse
      */
     protected static $_curlConnection;
 
@@ -50,8 +50,6 @@ class Http extends AbstractTransport
     {
         $connection = $this->getConnection();
 
-        $conn = $this->_getConnection($connection->isPersistent());
-
         // If url is set, url is taken. Otherwise port, host and path
         $url = $connection->hasConfig('url') ? $connection->getConfig('url') : '';
 
@@ -60,6 +58,8 @@ class Http extends AbstractTransport
         } else {
             $baseUri = $this->_scheme.'://'.$connection->getHost().':'.$connection->getPort().'/'.$connection->getPath();
         }
+
+        $conn = $this->_getConnection($baseUri, $connection->isPersistent());
 
         $requestPath = $request->getPath();
         if (!Util::isDateMathEscaped($requestPath)) {
@@ -211,16 +211,17 @@ class Http extends AbstractTransport
     /**
      * Return Curl resource.
      *
-     * @param bool $persistent False if not persistent connection
+     * @param string $baseUrl
+     * @param bool   $persistent False if not persistent connection
      *
      * @return resource Connection resource
      */
-    protected function _getConnection(bool $persistent = true)
+    protected function _getConnection(string $baseUrl, bool $persistent = true)
     {
-        if (!$persistent || !self::$_curlConnection) {
-            self::$_curlConnection = \curl_init();
+        if (!$persistent || !isset(self::$_curlConnection[$baseUrl])) {
+            self::$_curlConnection[$baseUrl] = \curl_init();
         }
 
-        return self::$_curlConnection;
+        return self::$_curlConnection[$baseUrl];
     }
 }

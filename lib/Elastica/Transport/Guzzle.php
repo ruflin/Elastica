@@ -32,7 +32,7 @@ class Guzzle extends AbstractTransport
     /**
      * Curl resource to reuse.
      *
-     * @var Client Guzzle client to reuse
+     * @var Client[] Guzzle client to reuse
      */
     protected static $_guzzleClientConnection;
 
@@ -54,9 +54,12 @@ class Guzzle extends AbstractTransport
     {
         $connection = $this->getConnection();
 
-        $client = $this->_getGuzzleClient($this->_getBaseUrl($connection), $connection->isPersistent(), $request);
+        $client = $this->_getGuzzleClient($this->_getBaseUrl($connection), $connection->isPersistent());
 
         $options = [
+            'headers' => [
+                'Content-Type' => $request->getContentType(),
+            ],
             'exceptions' => false, // 4xx and 5xx is expected and NOT an exceptions in this context
         ];
         if ($connection->getTimeout()) {
@@ -150,24 +153,20 @@ class Guzzle extends AbstractTransport
     /**
      * Return Guzzle resource.
      *
-     * @param string  $baseUrl
-     * @param bool    $persistent False if not persistent connection
-     * @param Request $request    Elastica Request Object
+     * @param string $baseUrl
+     * @param bool   $persistent False if not persistent connection
      *
      * @return Client
      */
-    protected function _getGuzzleClient(string $baseUrl, bool $persistent = true, Request $request): Client
+    protected function _getGuzzleClient(string $baseUrl, bool $persistent = true): Client
     {
-        if (!$persistent || !self::$_guzzleClientConnection) {
-            self::$_guzzleClientConnection = new Client([
+        if (!$persistent || !isset(self::$_guzzleClientConnection[$baseUrl])) {
+            self::$_guzzleClientConnection[$baseUrl] = new Client([
                 'base_uri' => $baseUrl,
-                'headers' => [
-                    'Content-Type' => $request->getContentType(),
-                ],
             ]);
         }
 
-        return self::$_guzzleClientConnection;
+        return self::$_guzzleClientConnection[$baseUrl];
     }
 
     /**

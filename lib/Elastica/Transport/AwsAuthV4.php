@@ -6,7 +6,6 @@ use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\Credentials;
 use Aws\Signature\SignatureV4;
 use Elastica\Connection;
-use Elastica\Request;
 use GuzzleHttp;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
@@ -15,22 +14,19 @@ use Psr\Http\Message\RequestInterface;
 
 class AwsAuthV4 extends Guzzle
 {
-    protected function _getGuzzleClient(string $baseUrl, bool $persistent = true, Request $request): Client
+    protected function _getGuzzleClient(string $baseUrl, bool $persistent = true): Client
     {
-        if (!$persistent || !self::$_guzzleClientConnection) {
+        if (!$persistent || !isset(self::$_guzzleClientConnection[$baseUrl])) {
             $stack = HandlerStack::create(GuzzleHttp\choose_handler());
             $stack->push($this->getSigningMiddleware(), 'sign');
 
-            self::$_guzzleClientConnection = new Client([
+            self::$_guzzleClientConnection[$baseUrl] = new Client([
                 'base_uri' => $baseUrl,
                 'handler' => $stack,
-                'headers' => [
-                    'Content-Type' => $request->getContentType(),
-                ],
             ]);
         }
 
-        return self::$_guzzleClientConnection;
+        return self::$_guzzleClientConnection[$baseUrl];
     }
 
     protected function _getBaseUrl(Connection $connection): string
