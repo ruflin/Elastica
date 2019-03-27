@@ -76,7 +76,7 @@ class UpdateDocumentTest extends BaseTest
         $this->assertEquals('update', $action->getOpType());
         $this->assertTrue($action->hasSource());
 
-        $expected = '{"update":{"_index":"index","_type":"_doc","_id":1}}'."\n"
+        $expected = '{"update":{"_id":1,"_type":"_doc","_index":"index"}}'."\n"
                 .'{"doc":{"foo":"bar"},"doc_as_upsert":true}'."\n";
         $this->assertEquals($expected, $action->toString());
 
@@ -86,7 +86,7 @@ class UpdateDocumentTest extends BaseTest
 
         $document->setDocAsUpsert(false);
         $action->setDocument($document);
-        $expected = '{"update":{"_index":"index","_type":"_doc","_id":1}}'."\n"
+        $expected = '{"update":{"_id":1,"_type":"_doc","_index":"index"}}'."\n"
                 .'{"doc":{"foo":"bar"}}'."\n";
         $this->assertEquals($expected, $action->toString());
 

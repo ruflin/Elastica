@@ -285,7 +285,7 @@ class Document extends AbstractUpdateAction
      */
     public function setPipeline($pipeline)
     {
-        return $this->setParam('_pipeline', $pipeline);
+        return $this->setParam('pipeline', $pipeline);
     }
 
     /**
@@ -293,7 +293,7 @@ class Document extends AbstractUpdateAction
      */
     public function getPipeline()
     {
-        return $this->getParam('_pipeline');
+        return $this->getParam('pipeline');
     }
 
     /**
@@ -301,7 +301,7 @@ class Document extends AbstractUpdateAction
      */
     public function hasPipeline()
     {
-        return $this->hasParam('_pipeline');
+        return $this->hasParam('pipeline');
     }
 
     /**

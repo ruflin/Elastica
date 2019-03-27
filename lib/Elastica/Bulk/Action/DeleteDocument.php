@@ -17,13 +17,13 @@ class DeleteDocument extends AbstractDocument
     protected function _getMetadata(AbstractUpdateAction $action): array
     {
         return $action->getOptions([
-            'index',
-            'type',
-            'id',
+            '_index',
+            '_type',
+            '_id',
             'version',
             'version_type',
             'routing',
             'parent',
-        ], true);
+        ]);
     }
 }
