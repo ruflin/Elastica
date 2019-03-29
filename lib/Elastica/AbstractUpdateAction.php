@@ -113,7 +113,7 @@ class AbstractUpdateAction extends Param
      */
     public function setVersion($version)
     {
-        return $this->setParam('_version', (int) $version);
+        return $this->setParam('version', (int) $version);
     }
 
     /**
@@ -123,7 +123,7 @@ class AbstractUpdateAction extends Param
      */
     public function getVersion()
     {
-        return $this->getParam('_version');
+        return $this->getParam('version');
     }
 
     /**
@@ -131,7 +131,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasVersion()
     {
-        return $this->hasParam('_version');
+        return $this->hasParam('version');
     }
 
     /**
@@ -144,7 +144,7 @@ class AbstractUpdateAction extends Param
      */
     public function setVersionType($versionType)
     {
-        return $this->setParam('_version_type', $versionType);
+        return $this->setParam('version_type', $versionType);
     }
 
     /**
@@ -154,7 +154,7 @@ class AbstractUpdateAction extends Param
      */
     public function getVersionType()
     {
-        return $this->getParam('_version_type');
+        return $this->getParam('version_type');
     }
 
     /**
@@ -162,7 +162,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasVersionType()
     {
-        return $this->hasParam('_version_type');
+        return $this->hasParam('version_type');
     }
 
     /**
@@ -176,7 +176,7 @@ class AbstractUpdateAction extends Param
      */
     public function setParent($parent)
     {
-        return $this->setParam('_parent', $parent);
+        return $this->setParam('parent', $parent);
     }
 
     /**
@@ -186,7 +186,7 @@ class AbstractUpdateAction extends Param
      */
     public function getParent()
     {
-        return $this->getParam('_parent');
+        return $this->getParam('parent');
     }
 
     /**
@@ -194,7 +194,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasParent()
     {
-        return $this->hasParam('_parent');
+        return $this->hasParam('parent');
     }
 
     /**
@@ -206,7 +206,7 @@ class AbstractUpdateAction extends Param
      */
     public function setOpType($opType)
     {
-        return $this->setParam('_op_type', $opType);
+        return $this->setParam('op_type', $opType);
     }
 
     /**
@@ -216,7 +216,7 @@ class AbstractUpdateAction extends Param
      */
     public function getOpType()
     {
-        return $this->getParam('_op_type');
+        return $this->getParam('op_type');
     }
 
     /**
@@ -224,7 +224,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasOpType()
     {
-        return $this->hasParam('_op_type');
+        return $this->hasParam('op_type');
     }
 
     /**
@@ -236,7 +236,7 @@ class AbstractUpdateAction extends Param
      */
     public function setRouting($value)
     {
-        return $this->setParam('_routing', $value);
+        return $this->setParam('routing', $value);
     }
 
     /**
@@ -246,7 +246,7 @@ class AbstractUpdateAction extends Param
      */
     public function getRouting()
     {
-        return $this->getParam('_routing');
+        return $this->getParam('routing');
     }
 
     /**
@@ -254,7 +254,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasRouting()
     {
-        return $this->hasParam('_routing');
+        return $this->hasParam('routing');
     }
 
     /**
@@ -268,7 +268,7 @@ class AbstractUpdateAction extends Param
             $fields = \implode(',', $fields);
         }
 
-        return $this->setParam('_fields', (string) $fields);
+        return $this->setParam('fields', (string) $fields);
     }
 
     /**
@@ -284,7 +284,7 @@ class AbstractUpdateAction extends Param
      */
     public function getFields()
     {
-        return $this->getParam('_fields');
+        return $this->getParam('fields');
     }
 
     /**
@@ -292,7 +292,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasFields()
     {
-        return $this->hasParam('_fields');
+        return $this->hasParam('fields');
     }
 
     /**
@@ -302,7 +302,7 @@ class AbstractUpdateAction extends Param
      */
     public function setRetryOnConflict($num)
     {
-        return $this->setParam('_retry_on_conflict', (int) $num);
+        return $this->setParam('retry_on_conflict', (int) $num);
     }
 
     /**
@@ -310,7 +310,7 @@ class AbstractUpdateAction extends Param
      */
     public function getRetryOnConflict()
     {
-        return $this->getParam('_retry_on_conflict');
+        return $this->getParam('retry_on_conflict');
     }
 
     /**
@@ -318,7 +318,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasRetryOnConflict()
     {
-        return $this->hasParam('_retry_on_conflict');
+        return $this->hasParam('retry_on_conflict');
     }
 
     /**
@@ -328,7 +328,7 @@ class AbstractUpdateAction extends Param
      */
     public function setRefresh($refresh = true)
     {
-        return $this->setParam('_refresh', (bool) $refresh ? 'true' : 'false');
+        return $this->setParam('refresh', (bool) $refresh ? 'true' : 'false');
     }
 
     /**
@@ -336,7 +336,7 @@ class AbstractUpdateAction extends Param
      */
     public function getRefresh()
     {
-        return 'true' === $this->getParam('_refresh');
+        return 'true' === $this->getParam('refresh');
     }
 
     /**
@@ -344,7 +344,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasRefresh()
     {
-        return $this->hasParam('_refresh');
+        return $this->hasParam('refresh');
     }
 
     /**
@@ -354,7 +354,7 @@ class AbstractUpdateAction extends Param
      */
     public function setTimeout($timeout)
     {
-        return $this->setParam('_timeout', $timeout);
+        return $this->setParam('timeout', $timeout);
     }
 
     /**
@@ -362,7 +362,7 @@ class AbstractUpdateAction extends Param
      */
     public function getTimeout()
     {
-        return $this->getParam('_timeout');
+        return $this->getParam('timeout');
     }
 
     /**
@@ -370,7 +370,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasTimeout()
     {
-        return $this->hasParam('_timeout');
+        return $this->hasParam('timeout');
     }
 
     /**
@@ -380,7 +380,7 @@ class AbstractUpdateAction extends Param
      */
     public function setConsistency($timeout)
     {
-        return $this->setParam('_consistency', $timeout);
+        return $this->setParam('consistency', $timeout);
     }
 
     /**
@@ -388,7 +388,7 @@ class AbstractUpdateAction extends Param
      */
     public function getConsistency()
     {
-        return $this->getParam('_consistency');
+        return $this->getParam('consistency');
     }
 
     /**
@@ -396,7 +396,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasConsistency()
     {
-        return $this->hasParam('_consistency');
+        return $this->hasParam('consistency');
     }
 
     /**
@@ -406,7 +406,7 @@ class AbstractUpdateAction extends Param
      */
     public function setReplication($timeout)
     {
-        return $this->setParam('_replication', $timeout);
+        return $this->setParam('replication', $timeout);
     }
 
     /**
@@ -414,7 +414,7 @@ class AbstractUpdateAction extends Param
      */
     public function getReplication()
     {
-        return $this->getParam('_replication');
+        return $this->getParam('replication');
     }
 
     /**
@@ -422,7 +422,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasReplication()
     {
-        return $this->hasParam('_replication');
+        return $this->hasParam('replication');
     }
 
     /**
@@ -455,31 +455,16 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param array $fields         if empty array all options will be returned, field names can be either with underscored either without, i.e. _percolate, routing
-     * @param bool  $withUnderscore should option keys contain underscore prefix
+     * @param array $fields if empty array all options will be returned
      *
      * @return array
      */
-    public function getOptions(array $fields = [], $withUnderscore = false)
+    public function getOptions(array $fields = [])
     {
         if (!empty($fields)) {
-            $data = [];
-            foreach ($fields as $field) {
-                $key = '_'.\ltrim($field, '_');
-                if ($this->hasParam($key) && '' !== (string) $this->getParam($key)) {
-                    $data[$key] = $this->getParam($key);
-                }
-            }
-        } else {
-            $data = $this->getParams();
-        }
-        if (!$withUnderscore) {
-            foreach ($data as $key => $value) {
-                $data[\ltrim($key, '_')] = $value;
-                unset($data[$key]);
-            }
+            return \array_filter(\array_intersect_key($this->getParams(), \array_flip($fields)));
         }
 
-        return $data;
+        return \array_filter($this->getParams());
     }
 }

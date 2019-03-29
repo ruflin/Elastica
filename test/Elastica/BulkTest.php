@@ -67,24 +67,24 @@ class BulkTest extends BaseTest
         $data = $bulk->toArray();
 
         $expected = [
-            ['index' => ['_index' => $indexName, '_type' => '_doc', '_id' => 1]],
+            ['index' => ['_id' => 1, '_type' => '_doc', '_index' => $indexName]],
             ['name' => 'Mister Fantastic'],
             ['index' => ['_id' => 2]],
             ['name' => 'Invisible Woman'],
-            ['create' => ['_index' => $indexName, '_type' => '_doc', '_id' => 3]],
+            ['create' => ['_id' => 3, '_type' => '_doc', '_index' => $indexName]],
             ['name' => 'The Human Torch'],
-            ['index' => ['_index' => $indexName, '_type' => '_doc']],
+            ['index' => ['_type' => '_doc', '_index' => $indexName]],
             ['name' => 'The Thing'],
         ];
         $this->assertEquals($expected, $data);
 
-        $expected = '{"index":{"_index":"'.$indexName.'","_type":"_doc","_id":1}}
+        $expected = '{"index":{"_id":1,"_type":"_doc","_index":"'.$indexName.'"}}
 {"name":"Mister Fantastic"}
 {"index":{"_id":2}}
 {"name":"Invisible Woman"}
-{"create":{"_index":"'.$indexName.'","_type":"_doc","_id":3}}
+{"create":{"_id":3,"_type":"_doc","_index":"'.$indexName.'"}}
 {"name":"The Human Torch"}
-{"index":{"_index":"'.$indexName.'","_type":"_doc"}}
+{"index":{"_type":"_doc","_index":"'.$indexName.'"}}
 {"name":"The Thing"}
 ';
 
@@ -639,7 +639,7 @@ class BulkTest extends BaseTest
         $actions = $bulk->getActions();
 
         $metadata = $actions[0]->getMetadata();
-        $this->assertEquals(5, $metadata['_retry_on_conflict']);
+        $this->assertEquals(5, $metadata['retry_on_conflict']);
 
         $script = new Script('');
         $script->setRetryOnConflict(5);
@@ -650,7 +650,7 @@ class BulkTest extends BaseTest
         $actions = $bulk->getActions();
 
         $metadata = $actions[0]->getMetadata();
-        $this->assertEquals(5, $metadata['_retry_on_conflict']);
+        $this->assertEquals(5, $metadata['retry_on_conflict']);
     }
 
     /**

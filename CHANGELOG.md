@@ -4,9 +4,11 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.1...master)
 
 ### Backward Compatibility Breaks
+* \Elastica\AbstractUpdateAction::getOptions( $fields ) no longer supports the $underscore parameter, option names must match what elasticsearch expects.
 
 ### Bugfixes
 * Always set the Guzzle `base_uri` to support connecting to multiple ES hosts. [#1618](https://github.com/ruflin/Elastica/pull/1618)
+* Properly handle underscore prefixes in options and bulk request metadata ([cf upstream](https://github.com/elastic/elasticsearch/issues/26886). [#1621](https://github.com/ruflin/Elastica/pull/1621)
 
 ### Added
 
