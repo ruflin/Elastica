@@ -219,18 +219,6 @@ class QueryStringTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetAutoGeneratePhraseQueries()
-    {
-        $value = true;
-        $query = new QueryString('test');
-        $query->setAutoGeneratePhraseQueries($value);
-
-        $this->assertEquals($value, $query->toArray()['query_string']['auto_generate_phrase_queries']);
-    }
-
-    /**
-     * @group unit
-     */
     public function testSetTieBreaker()
     {
         $value = 0.2;

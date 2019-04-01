@@ -181,20 +181,6 @@ class QueryString extends AbstractQuery
     }
 
     /**
-     * Sets the param to automatically generate phrase queries.
-     *
-     * If not set, defaults to true.
-     *
-     * @param bool $autoGenerate
-     *
-     * @return $this
-     */
-    public function setAutoGeneratePhraseQueries(bool $autoGenerate = true): self
-    {
-        return $this->setParam('auto_generate_phrase_queries', $autoGenerate);
-    }
-
-    /**
      * Sets the fields. If no fields are set, _all is chosen.
      * You cannot set fields and default_field.
      *
