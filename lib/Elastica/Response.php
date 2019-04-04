@@ -90,11 +90,20 @@ class Response
         }
 
         $rootError = $error;
+        $message = $rootError['reason'];
+
         if (isset($error['root_cause'][0])) {
             $rootError = $error['root_cause'][0];
+
+            if (isset($error['caused_by'])) {
+                $message .= sprintf(
+                    ' [%s:%s]',
+                    $error['caused_by']['caused_by']['type'],
+                    $error['caused_by']['caused_by']['reason']
+                );
+            }
         }
 
-        $message = $rootError['reason'];
         if (isset($rootError['index'])) {
             $message .= ' [index: '.$rootError['index'].']';
         }
