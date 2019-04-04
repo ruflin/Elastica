@@ -94,6 +94,7 @@ class Response
 
         if (isset($error['root_cause'][0])) {
             $rootError = $error['root_cause'][0];
+            $message = $rootError['reason'];
 
             if (isset($error['caused_by'])) {
                 $message .= sprintf(
