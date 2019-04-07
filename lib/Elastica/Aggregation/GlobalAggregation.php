@@ -2,6 +2,9 @@
 
 namespace Elastica\Aggregation;
 
+use Elastica\Exception\InvalidException;
+use Elastica\Query\AbstractQuery;
+
 /**
  * Class GlobalAggregation.
  *
@@ -9,4 +12,54 @@ namespace Elastica\Aggregation;
  */
 class GlobalAggregation extends AbstractAggregation
 {
+     /**
+     * @param string        $name
+     * @param AbstractQuery $filter
+     */
+    public function __construct($name, AbstractQuery $filter = null)
+    {
+        parent::__construct($name);
+
+        if ($filter !== null) {
+            $this->setFilter($filter);
+        }
+    }
+
+    /**
+     * Set the filter for this aggregation.
+     *
+     * @param AbstractQuery $filter
+     *
+     * @return $this
+     */
+    public function setFilter(AbstractQuery $filter)
+    {
+        return $this->setParam('filter', $filter);
+    }
+
+    /**
+     * @throws \Elastica\Exception\InvalidException If filter is not set
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        if (!$this->hasParam('filter')) {
+            throw new InvalidException('Filter is required');
+        }
+        
+        $array = [
+            'global' => new \stdClass(),
+            'aggs'=>[
+                'all'=>[
+                    'filter' => $this->getParam('filter')->toArray()
+                ]
+            ]
+        ];
+
+        if ($this->_aggs) {
+            $array['aggs'] = $this->_convertArrayable($this->_aggs);
+        }
+        return $array;
+    }
 }
