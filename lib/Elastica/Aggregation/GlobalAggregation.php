@@ -12,15 +12,14 @@ use Elastica\Query\AbstractQuery;
  */
 class GlobalAggregation extends AbstractAggregation
 {
-     /**
+    /**
      * @param string        $name
      * @param AbstractQuery $filter
      */
     public function __construct($name, AbstractQuery $filter = null)
     {
         parent::__construct($name);
-
-        if ($filter !== null) {
+        if (null !== $filter) {
             $this->setFilter($filter);
         }
     }
@@ -28,7 +27,6 @@ class GlobalAggregation extends AbstractAggregation
     /**
      * Set the filter for this aggregation.
      *
-     * @param AbstractQuery $filter
      *
      * @return $this
      */
@@ -47,19 +45,19 @@ class GlobalAggregation extends AbstractAggregation
         if (!$this->hasParam('filter')) {
             throw new InvalidException('Filter is required');
         }
-        
+
         $array = [
             'global' => new \stdClass(),
-            'aggs'=>[
-                'all'=>[
-                    'filter' => $this->getParam('filter')->toArray()
-                ]
-            ]
+            'aggs' => [
+                'all' => [
+                    'filter' => $this->getParam('filter')->toArray(),
+                ],
+            ],
         ];
-
         if ($this->_aggs) {
             $array['aggs'] = $this->_convertArrayable($this->_aggs);
         }
+
         return $array;
     }
 }
