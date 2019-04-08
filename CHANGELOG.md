@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 * Added `native_function_invocation` CS rule [#1606](https://github.com/ruflin/Elastica/pull/1606)
 * Elasticsearch test version changed from 6.5.2 to 6.6.1 [#1620](https://github.com/ruflin/Elastica/pull/1620)
+* Added `caused_by` to exception responses to clarify errors [#1623](https://github.com/ruflin/Elastica/pull/1623)
 
 ### Deprecated
 
