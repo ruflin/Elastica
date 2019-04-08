@@ -40,7 +40,7 @@ class GlobalAggregation extends AbstractAggregation
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         if (!$this->hasParam('filter')) {
             throw new InvalidException('Filter is required');
