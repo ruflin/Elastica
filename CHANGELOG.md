@@ -20,6 +20,9 @@ All notable changes to this project will be documented in this file based on the
 * Preserve zeros while doing float serialization to JSON. [#1635](https://github.com/ruflin/Elastica/pull/1635)
 * Add ```settings``` level on json to create an Index in all tests (it worked till 6.x but it shouldn't work)
 
+### Improvements
+* Added `filter` to `GlobalAggregation` [#1624](https://github.com/ruflin/Elastica/pull/1624)
+
 ### Added
 
 * Added `ParentAggregation` [#1616](https://github.com/ruflin/Elastica/pull/1616)
