@@ -2,7 +2,6 @@
 
 namespace Elastica\Aggregation;
 
-use Elastica\Exception\InvalidException;
 use Elastica\Query\AbstractQuery;
 
 /**
@@ -42,18 +41,16 @@ class GlobalAggregation extends AbstractAggregation
      */
     public function toArray(): array
     {
-        if (!$this->hasParam('filter')) {
-            throw new InvalidException('Filter is required');
+        $array = ['global' => new \stdClass()];
+        if ($this->hasParam('filter')) {
+            $array['aggs'] =
+                [
+                    'all' => [
+                        'filter' => $this->getParam('filter')->toArray(),
+                    ],
+                ];
         }
 
-        $array = [
-            'global' => new \stdClass(),
-            'aggs' => [
-                'all' => [
-                    'filter' => $this->getParam('filter')->toArray(),
-                ],
-            ],
-        ];
         if ($this->_aggs) {
             $array['aggs'] = $this->_convertArrayable($this->_aggs);
         }
