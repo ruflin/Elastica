@@ -35,7 +35,7 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'filters', Aggregation\Filters::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'geo_distance', Aggregation\GeoDistance::class, ['name', 'field', 'origin']);
         $this->_assertImplemented($aggregationDSL, 'geohash_grid', Aggregation\GeohashGrid::class, ['name', 'field']);
-        $this->_assertImplemented($aggregationDSL, 'global_agg', Aggregation\GlobalAggregation::class, ['name']);
+        $this->_assertImplemented($aggregationDSL, 'global_agg', Aggregation\GlobalAggregation::class, ['name',  new Exists('field')]);
         $this->_assertImplemented($aggregationDSL, 'histogram', Aggregation\Histogram::class, ['name', 'field', 1]);
         $this->_assertImplemented($aggregationDSL, 'ipv4_range', Aggregation\IpRange::class, ['name', 'field']);
         $this->_assertImplemented($aggregationDSL, 'max', Aggregation\Max::class, ['name']);

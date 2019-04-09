@@ -18,6 +18,7 @@ class GlobalAggregation extends AbstractAggregation
     public function __construct($name, AbstractQuery $filter = null)
     {
         parent::__construct($name);
+
         if (null !== $filter) {
             $this->setFilter($filter);
         }
@@ -27,6 +28,7 @@ class GlobalAggregation extends AbstractAggregation
      * Set the filter for this aggregation.
      *
      *
+     * @param AbstractQuery $filter
      * @return $this
      */
     public function setFilter(AbstractQuery $filter)
@@ -35,7 +37,6 @@ class GlobalAggregation extends AbstractAggregation
     }
 
     /**
-     * @throws \Elastica\Exception\InvalidException If filter is not set
      *
      * @return array
      */

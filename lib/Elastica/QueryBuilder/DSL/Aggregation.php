@@ -280,12 +280,13 @@ class Aggregation implements DSL
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html
      *
      * @param string $name
+     * @param AbstractQuery $filter
      *
      * @return GlobalAggregation
      */
-    public function global_agg(string $name): GlobalAggregation
+    public function global_agg(string $name, AbstractQuery $filter = null): GlobalAggregation
     {
-        return new GlobalAggregation($name);
+        return new GlobalAggregation($name, $filter);
     }
 
     /**
