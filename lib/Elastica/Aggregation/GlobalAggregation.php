@@ -29,6 +29,7 @@ class GlobalAggregation extends AbstractAggregation
      *
      *
      * @param AbstractQuery $filter
+     *
      * @return $this
      */
     public function setFilter(AbstractQuery $filter)
@@ -37,7 +38,6 @@ class GlobalAggregation extends AbstractAggregation
     }
 
     /**
-     *
      * @return array
      */
     public function toArray(): array
