@@ -12,6 +12,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Improvements
 
+### Improvements
+* Added `filter` to `GlobalAggregation`
+
 
 ## [5.3.5](https://github.com/ruflin/Elastica/compare/5.3.4...5.3.5)
 
