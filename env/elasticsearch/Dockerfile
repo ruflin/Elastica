@@ -1,6 +1,6 @@
 #https://www.docker.elastic.co/
 #FROM docker.elastic.co/elasticsearch/elasticsearch:7.0.0-alpha1-SNAPSHOT
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.0.0-rc2
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.0.0
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
 #RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch ingest-attachment
