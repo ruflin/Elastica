@@ -242,7 +242,7 @@ class Type implements SearchableInterface
      *
      * @return \Elastica\Document
      */
-    public function getDocument($id, $options = [])
+    public function getDocument($id, array $options = [])
     {
         $endpoint = new \Elasticsearch\Endpoints\Get();
         $endpoint->setID($id);
