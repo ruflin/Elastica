@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file based on the
 ### Bugfixes
 * Always set the Guzzle `base_uri` to support connecting to multiple ES hosts. [#1618](https://github.com/ruflin/Elastica/pull/1618)
 * Properly handle underscore prefixes in options and bulk request metadata ([cf upstream](https://github.com/elastic/elasticsearch/issues/26886). [#1621](https://github.com/ruflin/Elastica/pull/1621)
+* Preserve zeros while doing float serialization to JSON. [#1634] (https://github.com/ruflin/Elastica/pull/1635)
 
 ### Added
 
