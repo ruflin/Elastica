@@ -204,7 +204,7 @@ class Settings
     /**
      * @return bool
      */
-    public function getBlocksWrite(): Bool
+    public function getBlocksWrite(): bool
     {
         return $this->getBool('blocks.write');
     }

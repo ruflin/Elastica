@@ -60,6 +60,9 @@ class JSON
         // extract arguments
         $args = \func_get_args();
 
+        // set defaults
+        isset($args[1]) ? $args[1] |= JSON_PRESERVE_ZERO_FRACTION : $args[1] = JSON_PRESERVE_ZERO_FRACTION;
+
         // run encode and output
         $string = \call_user_func_array('json_encode', $args);
 
