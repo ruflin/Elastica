@@ -213,7 +213,7 @@ class Action
                 }
                 $string .= '{"doc": '.$source['doc'].$docAsUpsert.'}';
             } else {
-                $string .= JSON::stringify($source, JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION);
+                $string .= JSON::stringify($source, JSON_UNESCAPED_UNICODE);
             }
             $string .= Bulk::DELIMITER;
         }
