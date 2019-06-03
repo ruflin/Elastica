@@ -669,7 +669,7 @@ class TypeTest extends BaseTest
 
             $this->assertContains('action_request_validation_exception', $error['type']);
             $this->assertContains('can\'t provide version in upsert request', $error['reason']);
-            $this->assertContains('can\'t provide both upsert request and a version', $error['reason']);
+            $this->assertContains('Validation Failed: 1: can\'t provide version in upsert request;', $error['reason']);
         }
         $updatedDoc = $type->getDocument($id)->getData();
 
@@ -960,7 +960,7 @@ class TypeTest extends BaseTest
         $mapping = new Mapping($type, $expect = [
             'id' => ['type' => 'integer', 'store' => true],
         ]);
-        $type->setMapping($mapping);
+        $type->setMapping($mapping, ['include_type_name' => true]);
 
         $client = $index->getClient();
 
@@ -984,7 +984,7 @@ class TypeTest extends BaseTest
         $mapping = new Mapping($type, $expect = [
             'id' => ['type' => 'integer', 'store' => true],
         ]);
-        $type->setMapping($mapping);
+        $type->setMapping($mapping, ['include_type_name' => true]);
 
         $client = $index->getClient();
 
@@ -1005,13 +1005,13 @@ class TypeTest extends BaseTest
         $mapping = new Mapping($type, $expect = [
             'id' => ['type' => 'integer', 'store' => true],
         ]);
-        $type->setMapping($mapping);
+        $type->setMapping($mapping, ['include_type_name' => true]);
 
         $endpoint = new Get();
         $endpoint->setIndex('nonExistsIndex');
         $endpoint->setType('nonExistsType');
 
-        $response = $type->requestEndpoint($endpoint);
+        $response = $type->requestEndpoint($endpoint, true);
         $data = $response->getData();
         $mapping = \array_shift($data);
 

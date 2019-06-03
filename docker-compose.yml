@@ -10,7 +10,7 @@ services:
     networks:
       - esnet
 
-  elasticsearch6_1:
+  elasticsearch7_1:
     build: ./env/elasticsearch/
     container_name: elasticsearch
     privileged: true
@@ -34,7 +34,7 @@ services:
     networks:
       esnet:
         ipv4_address: 10.10.10.15
-  elasticsearch6_2:
+  elasticsearch7_2:
     build: ./env/elasticsearch/
     privileged: true
     environment:

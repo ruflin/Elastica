@@ -262,7 +262,7 @@ class MappingTest extends BaseTest
             ]],
         ]);
 
-        $mapping->send();
+        $mapping->send(['include_type_name' => true]);
 
         // when running the tests, the mapping sometimes isn't available yet. Force merge index to enforce reload mapping.
         $index->forcemerge();
@@ -308,7 +308,8 @@ class MappingTest extends BaseTest
             'lastname' => ['type' => 'text'],
         ]);
         $mapping->setMeta(['class' => 'test']);
-        $type->setMapping($mapping);
+
+        $type->setMapping($mapping, ['include_type_name' => true]);
 
         $mappingData = $type->getMapping();
         $this->assertEquals('test', $mappingData['_doc']['_meta']['class']);
@@ -333,6 +334,7 @@ class MappingTest extends BaseTest
            'store' => true,
         ];
         $mapping->setParam('_all', $all);
+
         $get_all = $mapping->getParam('_all');
 
         $this->assertEquals($get_all, $all);

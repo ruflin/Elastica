@@ -14,7 +14,7 @@ class ParentAggregationTest extends BaseAggregationTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testaggregationparent');
-        $index->create(['index' => ['number_of_shards' => 2, 'number_of_replicas' => 1]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 2, 'number_of_replicas' => 1]]], true);
 
         $type = $index->getType(\strtolower(
             'typeparent'.\uniqid()

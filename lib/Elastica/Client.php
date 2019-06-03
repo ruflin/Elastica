@@ -646,7 +646,6 @@ class Client
             $response = $this->_lastResponse = $request->send();
         } catch (ConnectionException $e) {
             $this->_connectionPool->onFail($connection, $e, $this);
-
             $this->_log($e);
 
             // In case there is no valid connection left, throw exception which caused the disabling of the connection.

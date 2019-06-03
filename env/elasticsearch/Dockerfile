@@ -1,10 +1,8 @@
 #https://www.docker.elastic.co/
-#FROM docker.elastic.co/elasticsearch/elasticsearch:7.0.0-alpha1-SNAPSHOT
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.0.0
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.1.0
 MAINTAINER Nicolas Ruflin <spam@ruflin.com>
 
-#RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch ingest-attachment
-RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch https://snapshots.elastic.co/downloads/elasticsearch-plugins/ingest-attachment/ingest-attachment-7.0.0-SNAPSHOT.zip
+RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install --batch ingest-attachment
 
 
 # Copy config files

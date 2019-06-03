@@ -204,7 +204,7 @@ class AbstractUpdateAction extends Param
      */
     public function setRouting($value)
     {
-        return $this->setParam('_routing', $value);
+        return $this->setParam('routing', $value);
     }
 
     /**

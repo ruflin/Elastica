@@ -581,7 +581,11 @@ class Index implements SearchableInterface
     public function requestEndpoint(AbstractEndpoint $endpoint)
     {
         $cloned = clone $endpoint;
+
         $cloned->setIndex($this->getName());
+        if ($endpoint instanceof Create || $endpoint instanceof \Elasticsearch\Endpoints\Indices\Mapping\Put) {
+            $cloned->setParams(['include_type_name' => true]);
+        }
 
         return $this->getClient()->requestEndpoint($cloned);
     }

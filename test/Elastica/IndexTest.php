@@ -37,11 +37,11 @@ class IndexTest extends BaseTest
 
         $storedMapping = $index->getMapping();
 
-        $this->assertEquals($storedMapping['_doc']['properties']['id']['type'], 'integer');
-        $this->assertEquals($storedMapping['_doc']['properties']['id']['store'], true);
-        $this->assertEquals($storedMapping['_doc']['properties']['email']['type'], 'text');
-        $this->assertEquals($storedMapping['_doc']['properties']['username']['type'], 'text');
-        $this->assertEquals($storedMapping['_doc']['properties']['test']['type'], 'integer');
+        $this->assertEquals($storedMapping['properties']['id']['type'], 'integer');
+        $this->assertEquals($storedMapping['properties']['id']['store'], true);
+        $this->assertEquals($storedMapping['properties']['email']['type'], 'text');
+        $this->assertEquals($storedMapping['properties']['username']['type'], 'text');
+        $this->assertEquals($storedMapping['properties']['test']['type'], 'integer');
 
         $result = $type->search('hanswurst');
     }
@@ -534,11 +534,11 @@ class IndexTest extends BaseTest
         $index->refresh();
         $indexMappings = $index->getMapping();
 
-        $this->assertEquals($indexMappings['_doc']['properties']['id']['type'], 'integer');
-        $this->assertEquals($indexMappings['_doc']['properties']['id']['store'], true);
-        $this->assertEquals($indexMappings['_doc']['properties']['email']['type'], 'text');
-        $this->assertEquals($indexMappings['_doc']['properties']['username']['type'], 'text');
-        $this->assertEquals($indexMappings['_doc']['properties']['test']['type'], 'integer');
+        $this->assertEquals($indexMappings['properties']['id']['type'], 'integer');
+        $this->assertEquals($indexMappings['properties']['id']['store'], true);
+        $this->assertEquals($indexMappings['properties']['email']['type'], 'text');
+        $this->assertEquals($indexMappings['properties']['username']['type'], 'text');
+        $this->assertEquals($indexMappings['properties']['test']['type'], 'integer');
     }
 
     /**
