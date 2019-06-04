@@ -398,7 +398,6 @@ class Client
                     'routing',
                     'percolate',
                     'parent',
-                    'fields',
                     'retry_on_conflict',
                     'consistency',
                     'replication',
@@ -407,13 +406,6 @@ class Client
                 ]
             );
             $options += $docOptions;
-            // set fields param to source only if options was not set before
-            if ($data instanceof Document && ($data->isAutoPopulate()
-                || $this->getConfigValue(['document', 'autoPopulate'], false))
-                && !isset($options['fields'])
-            ) {
-                $options['fields'] = '_source';
-            }
         } else {
             $requestData = $data;
         }
@@ -422,12 +414,6 @@ class Client
         if ($data instanceof AbstractScript || $data instanceof Document) {
             if ($data->hasUpsert()) {
                 $requestData['upsert'] = $data->getUpsert()->getData();
-            }
-        }
-
-        if (!isset($options['retry_on_conflict'])) {
-            if ($retryOnConflict = $this->getConfig('retryOnConflict')) {
-                $options['retry_on_conflict'] = $retryOnConflict;
             }
         }
 
@@ -444,38 +430,9 @@ class Client
             if (isset($responseData['_version'])) {
                 $data->setVersion($responseData['_version']);
             }
-            if (isset($options['fields'])) {
-                $this->_populateDocumentFieldsFromResponse($response, $data, $options['fields']);
-            }
         }
 
         return $response;
-    }
-
-    /**
-     * @param \Elastica\Response $response
-     * @param \Elastica\Document $document
-     * @param string             $fields   Array of field names to be populated or '_source' if whole document data should be updated
-     */
-    protected function _populateDocumentFieldsFromResponse(Response $response, Document $document, $fields)
-    {
-        $responseData = $response->getData();
-        if ('_source' == $fields) {
-            if (isset($responseData['get']['_source']) && \is_array($responseData['get']['_source'])) {
-                $document->setData($responseData['get']['_source']);
-            }
-        } else {
-            $keys = \explode(',', $fields);
-            $data = $document->getData();
-            foreach ($keys as $key) {
-                if (isset($responseData['get']['fields'][$key])) {
-                    $data[$key] = $responseData['get']['fields'][$key];
-                } elseif (isset($data[$key])) {
-                    unset($data[$key]);
-                }
-            }
-            $document->setData($data);
-        }
     }
 
     /**
@@ -689,7 +646,6 @@ class Client
             $response = $this->_lastResponse = $request->send();
         } catch (ConnectionException $e) {
             $this->_connectionPool->onFail($connection, $e, $this);
-
             $this->_log($e);
 
             // In case there is no valid connection left, throw exception which caused the disabling of the connection.
@@ -754,23 +710,6 @@ class Client
         $this->_logger->debug('Elastica Request', [
             'message' => $context,
         ]);
-    }
-
-    /**
-     * Optimizes all search indices.
-     *
-     * @param array $args OPTIONAL Optional arguments
-     *
-     * @return \Elastica\Response Response object
-     *
-     * @deprecated Replaced by forcemergeAll
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-optimize.html
-     */
-    public function optimizeAll($args = [])
-    {
-        \trigger_error('Deprecated: Elastica\Client::optimizeAll() is deprecated and will be removed in further Elastica releases. Use Elastica\Client::forcemergeAll() instead.', E_USER_DEPRECATED);
-
-        return $this->forcemergeAll($args);
     }
 
     /**

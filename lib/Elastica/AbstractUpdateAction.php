@@ -166,38 +166,6 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * Sets parent document id.
-     *
-     * @param string|int $parent Parent document id
-     *
-     * @return $this
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html
-     */
-    public function setParent($parent)
-    {
-        return $this->setParam('parent', $parent);
-    }
-
-    /**
-     * Returns the parent document id.
-     *
-     * @return string|int Parent document id
-     */
-    public function getParent()
-    {
-        return $this->getParam('parent');
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasParent()
-    {
-        return $this->hasParam('parent');
-    }
-
-    /**
      * Set operation type.
      *
      * @param string $opType Only accept create
@@ -246,7 +214,7 @@ class AbstractUpdateAction extends Param
      */
     public function getRouting()
     {
-        return $this->getParam('routing');
+        return $this->getParam('_routing');
     }
 
     /**
@@ -254,7 +222,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasRouting()
     {
-        return $this->hasParam('routing');
+        return $this->hasParam('_routing');
     }
 
     /**
@@ -318,7 +286,7 @@ class AbstractUpdateAction extends Param
      */
     public function hasRetryOnConflict()
     {
-        return $this->hasParam('retry_on_conflict');
+        return $this->hasParam('_retry_on_conflict');
     }
 
     /**

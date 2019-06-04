@@ -45,7 +45,7 @@ class AggregationTest extends AbstractDSLTest
         $this->_assertImplemented($aggregationDSL, 'percentiles', Aggregation\Percentiles::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'range', Aggregation\Range::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'reverse_nested', Aggregation\ReverseNested::class, ['name']);
-        $this->_assertImplemented($aggregationDSL, 'scripted_metric', Aggregation\ScriptedMetric::class, ['name']);
+        $this->_assertImplemented($aggregationDSL, 'scripted_metric', Aggregation\ScriptedMetric::class, ['name', null, null, 'return state.durations', 'return states']);
         $this->_assertImplemented($aggregationDSL, 'significant_terms', Aggregation\SignificantTerms::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'stats', Aggregation\Stats::class, ['name']);
         $this->_assertImplemented($aggregationDSL, 'sum', Aggregation\Sum::class, ['name']);

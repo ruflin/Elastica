@@ -5,17 +5,15 @@ cluster.name: "docker-cluster-elastica"
 # Without this, travis builds will be failed with OutOfMemory error
 processors: 1
 
-#network.host: 0.0.0.0
-
-#script.allowed_types: inline, stored
-#script.allowed_contexts: search, update, aggs
-
-
 # minimum_master_nodes need to be explicitly set when bound on a public IP
 # set to 1 to allow single node clusters
 # Details: https://github.com/elastic/elasticsearch/pull/17288
-discovery.zen.minimum_master_nodes: 2
-discovery.zen.ping.unicast.hosts: ["elasticsearch"]
+discovery.seed_hosts:
+  - 10.10.10.15
+  - 10.10.10.16
+
+cluster.initial_master_nodes:
+  - 10.10.10.15
 
 # at the moment it's not possible to remove the x-pack plugin from the official ES docker image
 # https://github.com/elastic/elasticsearch-docker/issues/36

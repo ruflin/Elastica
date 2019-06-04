@@ -304,7 +304,7 @@ class SearchTest extends BaseTest
         $search = new Search($client);
 
         $index = $client->getIndex('zero');
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
         $type = $index->getType('_doc');
         $type->addDocuments([
@@ -342,7 +342,7 @@ class SearchTest extends BaseTest
         $search = new Search($client);
 
         $index = $client->getIndex('zero');
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
         $docs = [];
         for ($i = 0; $i < 11; ++$i) {
@@ -465,7 +465,7 @@ class SearchTest extends BaseTest
         $search = new Search($client);
 
         $index = $client->getIndex('zero');
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
         $type = $index->getType('_doc');
         $type->addDocuments([
@@ -510,7 +510,7 @@ class SearchTest extends BaseTest
         $search = new Search($client);
 
         $index = $client->getIndex('zero');
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
         $type = $index->getType('_doc');
         $type->addDocuments([
             new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
@@ -589,7 +589,7 @@ class SearchTest extends BaseTest
             $error = $e->getResponse()->getFullError();
 
             $this->assertEquals('index_not_found_exception', $error['type']);
-            $this->assertEquals('no such index', $error['reason']);
+            $this->assertEquals('no such index [elastica_7086b4c2ee585bbb6740ece5ed7ece01]', $error['reason']);
         }
 
         $results = $search->search($query, [Search::OPTION_SEARCH_IGNORE_UNAVAILABLE => true]);

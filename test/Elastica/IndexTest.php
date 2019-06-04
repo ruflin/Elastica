@@ -37,11 +37,11 @@ class IndexTest extends BaseTest
 
         $storedMapping = $index->getMapping();
 
-        $this->assertEquals($storedMapping['_doc']['properties']['id']['type'], 'integer');
-        $this->assertEquals($storedMapping['_doc']['properties']['id']['store'], true);
-        $this->assertEquals($storedMapping['_doc']['properties']['email']['type'], 'text');
-        $this->assertEquals($storedMapping['_doc']['properties']['username']['type'], 'text');
-        $this->assertEquals($storedMapping['_doc']['properties']['test']['type'], 'integer');
+        $this->assertEquals($storedMapping['properties']['id']['type'], 'integer');
+        $this->assertEquals($storedMapping['properties']['id']['store'], true);
+        $this->assertEquals($storedMapping['properties']['email']['type'], 'text');
+        $this->assertEquals($storedMapping['properties']['username']['type'], 'text');
+        $this->assertEquals($storedMapping['properties']['test']['type'], 'integer');
 
         $result = $type->search('hanswurst');
     }
@@ -92,7 +92,7 @@ class IndexTest extends BaseTest
         $typeName = 'test';
 
         $index = $client->getIndex($indexName1);
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
         $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
 
@@ -534,11 +534,11 @@ class IndexTest extends BaseTest
         $index->refresh();
         $indexMappings = $index->getMapping();
 
-        $this->assertEquals($indexMappings['_doc']['properties']['id']['type'], 'integer');
-        $this->assertEquals($indexMappings['_doc']['properties']['id']['store'], true);
-        $this->assertEquals($indexMappings['_doc']['properties']['email']['type'], 'text');
-        $this->assertEquals($indexMappings['_doc']['properties']['username']['type'], 'text');
-        $this->assertEquals($indexMappings['_doc']['properties']['test']['type'], 'integer');
+        $this->assertEquals($indexMappings['properties']['id']['type'], 'integer');
+        $this->assertEquals($indexMappings['properties']['id']['store'], true);
+        $this->assertEquals($indexMappings['properties']['email']['type'], 'text');
+        $this->assertEquals($indexMappings['properties']['username']['type'], 'text');
+        $this->assertEquals($indexMappings['properties']['test']['type'], 'integer');
     }
 
     /**
@@ -563,7 +563,7 @@ class IndexTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('zero');
-        $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
         $docs = [];
 
@@ -701,7 +701,7 @@ class IndexTest extends BaseTest
      */
     public function testForcemerge()
     {
-        $index = $this->_createIndex();
+        $index = $this->_createIndex('testforcemerge_indextest', false, 3);
 
         $type = new Type($index, '_doc');
 
@@ -712,17 +712,19 @@ class IndexTest extends BaseTest
         $index->refresh();
 
         $stats = $index->getStats()->getData();
+        $this->assertEquals(2, $stats['_all']['primaries']['docs']['count']);
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
 
         $type->deleteById(1);
         $index->refresh();
 
         $stats = $index->getStats()->getData();
-        $this->assertEquals(1, $stats['_all']['primaries']['docs']['deleted']);
+        $this->assertEquals(1, $stats['_all']['primaries']['docs']['count']);
 
         $index->forcemerge(['max_num_segments' => 1]);
 
         $stats = $index->getStats()->getData();
+        $this->assertEquals(1, $stats['_all']['primaries']['docs']['count']);
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
     }
 

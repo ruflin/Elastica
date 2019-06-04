@@ -157,7 +157,7 @@ class ResultSet implements \Iterator, \Countable, \ArrayAccess
     {
         $data = $this->_response->getData();
 
-        return (int) ($data['hits']['total'] ?? 0);
+        return (int) ($data['hits']['total']['value'] ?? 0);
     }
 
     /**

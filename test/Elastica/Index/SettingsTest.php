@@ -132,7 +132,7 @@ class SettingsTest extends BaseTest
     public function testGetNumberOfShards()
     {
         $index = $this->_createIndex();
-        $index->create(['index' => ['number_of_shards' => 1]], true);
+        $index->create([], true);
 
         $settings = $index->getSettings();
 

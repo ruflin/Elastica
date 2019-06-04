@@ -50,12 +50,14 @@ class WildcardTest extends BaseTest
         $index = $client->getIndex('test');
 
         $indexParams = [
-            'analysis' => [
-                'analyzer' => [
-                    'lw' => [
-                        'type' => 'custom',
-                        'tokenizer' => 'keyword',
-                        'filter' => ['lowercase'],
+            'settings' => [
+                'analysis' => [
+                    'analyzer' => [
+                        'lw' => [
+                            'type' => 'custom',
+                            'tokenizer' => 'keyword',
+                            'filter' => ['lowercase'],
+                        ],
                     ],
                 ],
             ],

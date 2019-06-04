@@ -229,7 +229,9 @@ class ResponseTest extends BaseTest
         try {
             $response = $index->request(
                 'non-existent-type/_mapping',
-                Request::GET
+                Request::GET,
+                [],
+                ['include_type_name' => true]
             )->getData();
         } catch (ResponseException $e) {
             $error = $e->getResponse()->getFullError();

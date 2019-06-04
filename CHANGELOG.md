@@ -6,11 +6,17 @@ All notable changes to this project will be documented in this file based on the
 ### Backward Compatibility Breaks
 * \Elastica\AbstractUpdateAction::getOptions( $fields ) no longer supports the $underscore parameter, option names must match what elasticsearch expects.
 * Removed no longer supported \Elastica\Query\QueryString::setAutoGeneratePhraseQueries( $bool ) [#1622](https://github.com/ruflin/Elastica/pull/1622)
+* Replaced [params._agg](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_replaced_literal_params__agg_literal_with_literal_state_literal_context_variable_in_scripted_metric_aggregations) with state context variable in scripted metric aggregations 
+* [Camel Case](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_camel_case_and_underscore_parameters_deprecated_in_6_x_have_been_removed) and underscore parameters deprecated in 6.x have been removed
+* The parameter [fields](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_the_parameter_literal_fields_literal_deprecated_in_6_x_has_been_removed_from_bulk_request) deprecated in 6.x has been removed from Bulk requestedit and Update request.
+* The [_parent](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html) field has been removed in favour of the join field.
+* hits.total is now an object in the search response [hits.total](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_literal_hits_total_literal_is_now_an_object_in_the_search_response) 
 
 ### Bugfixes
 * Always set the Guzzle `base_uri` to support connecting to multiple ES hosts. [#1618](https://github.com/ruflin/Elastica/pull/1618)
 * Properly handle underscore prefixes in options and bulk request metadata ([cf upstream](https://github.com/elastic/elasticsearch/issues/26886). [#1621](https://github.com/ruflin/Elastica/pull/1621)
 * Preserve zeros while doing float serialization to JSON. [#1635](https://github.com/ruflin/Elastica/pull/1635)
+* Add ```settings``` level on json to create an Index in all tests (it worked till 6.x but it shouldn't work)
 
 ### Added
 
@@ -26,6 +32,7 @@ All notable changes to this project will be documented in this file based on the
 
 ### Added
 
+* The preferred type name is [_doc](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/removal-of-types.html), so that index APIs have the same path as they will have in 7.0
 * Added `BucketSelector` aggregation [#1554](https://github.com/ruflin/Elastica/pull/1554)
 * Added `DerivativeAggregation` [#1553](https://github.com/ruflin/Elastica/pull/1553)
 * The preferred type name is [_doc](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/removal-of-types.html), so that index APIs have the same path as they will have in 7.0
@@ -35,6 +42,9 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 
 * Reduced memory footprint of response by not keeping the raw JSON data when JSON after JSON has been parsed. [#1588](https://github.com/ruflin/Elastica/pull/1588)
+
+### Deprecated
+* Index templates use index_patterns instead of [template](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/breaking-changes-6.0.html#_index_templates_use_literal_index_patterns_literal_instead_of_literal_template_literal)
 
 ## [6.1.0](https://github.com/ruflin/Elastica/compare/6.0.2...6.1.0)
 

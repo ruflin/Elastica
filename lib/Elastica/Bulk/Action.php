@@ -177,7 +177,7 @@ class Action
      */
     public function setRouting($routing): self
     {
-        $this->_metadata['_routing'] = $routing;
+        $this->_metadata['routing'] = $routing;
 
         return $this;
     }

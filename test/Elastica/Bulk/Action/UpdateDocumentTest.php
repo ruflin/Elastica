@@ -43,7 +43,7 @@ class UpdateDocumentTest extends BaseTest
         $this->assertEquals($expected, $action->toString());
 
         $action->setRouting(1);
-        $expected = '{"update":{"_index":"index","_type":"_doc","_id":1,"_routing":1}}'."\n";
+        $expected = '{"update":{"_index":"index","_type":"_doc","_id":1,"routing":1}}'."\n";
         $expected .= $docExpected;
         $this->assertEquals($expected, $action->toString());
 
@@ -53,13 +53,13 @@ class UpdateDocumentTest extends BaseTest
 
         $action->setIndex($index);
 
-        $expected = '{"update":{"_index":"index2","_type":"_doc","_id":1,"_routing":1}}'."\n";
+        $expected = '{"update":{"_index":"index2","_type":"_doc","_id":1,"routing":1}}'."\n";
         $expected .= $docExpected;
         $this->assertEquals($expected, $action->toString());
 
         $action->setType($type);
 
-        $expected = '{"update":{"_index":"index2","_type":"_doc","_id":1,"_routing":1}}'."\n";
+        $expected = '{"update":{"_index":"index2","_type":"_doc","_id":1,"routing":1}}'."\n";
         $expected .= $docExpected;
         $this->assertEquals($expected, $action->toString());
     }

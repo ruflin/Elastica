@@ -17,12 +17,15 @@ class PartialShardFailureExceptionTest extends AbstractExceptionTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('elastica_partial_failure');
-        $index->create([
-            'index' => [
-                'number_of_shards' => 5,
-                'number_of_replicas' => 0,
-            ],
-        ], true);
+        $index->create(
+            [
+                'settings' => [
+                    'index' => [
+                        'number_of_shards' => 5,
+                        'number_of_replicas' => 0,
+                        ],
+                    ],
+           ], true);
 
         $type = $index->getType('_doc');
 

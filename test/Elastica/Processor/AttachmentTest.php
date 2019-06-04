@@ -125,7 +125,7 @@ class AttachmentTest extends BasePipelineTest
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline_attachment');
 
         $bulk->send();
-        $index->forcemerge();
+        $index->refresh();
 
         $resultSet = $type->search('xodoa');
         $this->assertEquals(1, $resultSet->count());
@@ -200,7 +200,7 @@ class AttachmentTest extends BasePipelineTest
         $indexMapping = ['data' => ['type' => 'text'], 'text' => ['type' => 'text', 'store' => true],
             'title' => ['type' => 'text', 'store' => true], ];
 
-        $indexParams = ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]];
+        $indexParams = ['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]];
 
         $index = $this->_createIndex();
         $type = new Type($index, '_doc');

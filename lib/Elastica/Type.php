@@ -314,9 +314,9 @@ class Type implements SearchableInterface
      *
      * @return array Current mapping
      */
-    public function getMapping()
+    public function getMapping($includeTypeName = true)
     {
-        $response = $this->requestEndpoint(new Get());
+        $response = $this->requestEndpoint(new Get(), $includeTypeName);
         $data = $response->getData();
 
         $mapping = \array_shift($data);
@@ -396,7 +396,7 @@ class Type implements SearchableInterface
     {
         $options = $document->getOptions(
             [
-                'version',
+                '_version',
                 'version_type',
                 'routing',
                 'parent',
@@ -520,10 +520,13 @@ class Type implements SearchableInterface
      *
      * @return Response
      */
-    public function requestEndpoint(AbstractEndpoint $endpoint)
+    public function requestEndpoint(AbstractEndpoint $endpoint, $includeTypeName = false)
     {
         $cloned = clone $endpoint;
         $cloned->setType($this->getName());
+        if ($includeTypeName) {
+            $cloned->setParams(['include_type_name' => true]);
+        }
 
         return $this->getIndex()->requestEndpoint($cloned);
     }
