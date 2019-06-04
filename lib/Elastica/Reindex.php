@@ -63,7 +63,7 @@ class Reindex extends Param
         $reindexEndpoint->setParams($params);
         $reindexEndpoint->setBody($body);
 
-        $this->lastResponse = $this->_oldIndex->getClient()->requestEndpoint($reindexEndpoint);
+        $this->_lastResponse = $this->_oldIndex->getClient()->requestEndpoint($reindexEndpoint);
         $this->_newIndex->refresh();
 
         return $this->_newIndex;
@@ -215,8 +215,8 @@ class Reindex extends Param
     public function getTaskId()
     {
         $taskId = null;
-        if ($this->lastResponse instanceof Response) {
-            $taskId = $this->lastResponse->getData()['task'] ?? null;
+        if ($this->_lastResponse instanceof Response) {
+            $taskId = $this->_lastResponse->getData()['task'] ? $this->_lastResponse->getData()['task'] : null;
         }
 
         return $taskId;
