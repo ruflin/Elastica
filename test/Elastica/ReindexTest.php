@@ -3,16 +3,16 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Query\Match;
 use Elastica\Reindex;
+use Elastica\Script\Script;
 use Elastica\Type;
 
 class ReindexTest extends Base
 {
     /**
-     * Test default reindex.
-     *
      * @group functional
      */
     public function testReindex()
@@ -27,28 +27,14 @@ class ReindexTest extends Base
             Index::class,
             $newIndex
         );
-        $newIndex = $reindex->run();
+        $response = $reindex->run();
+        $newIndex->refresh();
 
-        $this->assertEquals(10, $newIndex->count());
-
-        $oldResult = [];
-
-        foreach ($oldIndex->search()->getResults() as $result) {
-            $oldResult[] = $result->getData();
-        }
-
-        $newResult = [];
-
-        foreach ($newIndex->search()->getResults() as $result) {
-            $newResult[] = $result->getData();
-        }
-
-        $this->assertEquals($oldResult, $newResult);
+        $this->assertEquals($oldIndex->count(), $newIndex->count());
+        $this->assertEquals($oldIndex->count(), $response->getData()['created']);
     }
 
     /**
-     * Test reindex type option.
-     *
      * @group functional
      */
     public function testReindexTypeOption()
@@ -64,8 +50,9 @@ class ReindexTest extends Base
             Reindex::TYPE => '_doc',
         ]);
         $reindex->run();
+        $newIndex->refresh();
 
-        $this->assertEquals(10, $newIndex->count());
+        $this->assertEquals($oldIndex->count(), $newIndex->count());
     }
 
     /**
@@ -92,8 +79,37 @@ class ReindexTest extends Base
         ]);
 
         $reindex->run();
+        $newIndex->refresh();
 
-        $this->assertEquals(10, $newIndex->count());
+        $this->assertEquals($oldIndex->count(), $newIndex->count());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testReindexOpTypeOptionWithProceedSetOnConflictStop()
+    {
+        $oldIndex = $this->_createIndex('idx1', true, 2);
+        $type1 = $oldIndex->getType('_doc');
+
+        $docs1 = $this->_addDocs($type1, 10);
+
+        $subDocs1 = \array_splice($docs1, 0, 5);
+
+        $newIndex = $this->_createIndex('idx2', true, 2);
+        $newIndex->addDocuments($subDocs1);
+        $newIndex->refresh();
+
+        $this->assertEquals(5, $newIndex->count());
+
+        $reindex = new Reindex($oldIndex, $newIndex, [
+            Reindex::OPERATION_TYPE => Reindex::OPERATION_TYPE_CREATE,
+        ]);
+
+        $response = $reindex->run();
+        $newIndex->refresh();
+
+        $this->assertEquals(5, $response->getData()['version_conflicts']);
     }
 
     /**
@@ -113,6 +129,7 @@ class ReindexTest extends Base
             Reindex::QUERY => $query,
         ]);
         $reindex->run();
+        $newIndex->refresh();
 
         $results = $newIndex->search()->getResults();
         $this->assertEquals(1, $newIndex->count());
@@ -136,6 +153,7 @@ class ReindexTest extends Base
             Reindex::SIZE => 5,
         ]);
         $reindex->run();
+        $newIndex->refresh();
 
         $this->assertEquals(5, $newIndex->count());
     }
@@ -155,6 +173,59 @@ class ReindexTest extends Base
         $reindex->run();
 
         $this->assertNotEmpty($reindex->getTaskId());
+
+        $reindex = new Reindex($oldIndex, $newIndex);
+        $reindex->setWaitForCompletion(false);
+        $reindex->run();
+
+        $this->assertNotEmpty($reindex->getTaskId());
+    }
+
+    /**
+     * @group functional
+     */
+    public function testReindexWithScript()
+    {
+        $oldIndex = $this->_createIndex('idx1', true, 2);
+        $this->_addDocs($oldIndex->getType('reindexTest'), 10);
+
+        $newIndex = $this->_createIndex('idx2', true, 2);
+
+        $reindex = new Reindex($oldIndex, $newIndex);
+        $script = new Script('ctx._source.remove(\'id\')');
+
+        $reindex->setScript($script);
+
+        $reindex->run();
+        $newIndex->refresh();
+
+        $results = $newIndex->search()->getResults();
+        $this->assertEquals(10, $newIndex->count());
+
+        foreach ($results as $result) {
+            $this->assertArrayNotHasKey('id', $result->getData());
+        }
+    }
+
+    /**
+     * @group functional
+     */
+    public function testReindexWithRemote()
+    {
+        $oldIndex = $this->_createIndex('idx1', true, 1);
+        $newIndex = $this->_createIndex('idx2', true, 1);
+
+        $reindex = new Reindex($oldIndex, $newIndex);
+        $reindex->setParam(Reindex::REMOTE, [
+            'host' => 'http://otherhost:9200',
+        ]);
+
+        try {
+            $reindex->run();
+            $this->assertFalse(true, 'Elasticsearch should have thrown an Exception, maybe the remote option has not been sent.');
+        } catch (ResponseException $exception) {
+            $this->assertContains('reindex.remote.whitelist', $exception->getMessage());
+        }
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace Elastica;
 
 use Elastica\Query\AbstractQuery;
+use Elastica\Script\AbstractScript;
+use Elastica\Script\Script;
 
 class Reindex extends Param
 {
@@ -16,6 +18,11 @@ class Reindex extends Param
     const TYPE = 'type';
     const SIZE = 'size';
     const QUERY = 'query';
+    const SORT = 'sort';
+    const SCRIPT = 'script';
+    const SOURCE = '_source';
+    const REMOTE = 'remote';
+    const SLICE = 'slice';
     const REFRESH = 'refresh';
     const WAIT_FOR_COMPLETION = 'wait_for_completion';
     const WAIT_FOR_COMPLETION_FALSE = 'false';
@@ -44,96 +51,89 @@ class Reindex extends Param
      */
     protected $_lastResponse;
 
-    /**
-     * @param array $options - deprecated because not compatible with complete Reindex API
-     */
-    public function __construct(Index $oldIndex, Index $newIndex, array $options = [])
+    public function __construct(Index $oldIndex, Index $newIndex, array $params = [])
     {
         $this->_oldIndex = $oldIndex;
         $this->_newIndex = $newIndex;
-        $this->_params = $this->resolveOptions($options);
+
+        $this->setParams($params);
     }
 
     public function run()
     {
-        $params = $this->_getEndpointParams($this->_params);
-        $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->_params);
+        $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->getParams());
 
         $reindexEndpoint = new \Elasticsearch\Endpoints\Reindex();
+        $params = \array_intersect_key($this->getParams(), \array_fill_keys($reindexEndpoint->getParamWhitelist(), null));
         $reindexEndpoint->setParams($params);
         $reindexEndpoint->setBody($body);
 
         $this->_lastResponse = $this->_oldIndex->getClient()->requestEndpoint($reindexEndpoint);
-        $this->_newIndex->refresh();
 
-        return $this->_newIndex;
+        return $this->_lastResponse;
     }
 
     protected function _getBody($oldIndex, $newIndex, $params)
     {
-        $body = array_diff_key($params, $this->_getEndpointParams($params));
+        $body = \array_merge([
+            'source' => $this->_getSourcePartBody($oldIndex, $params),
+            'dest' => $this->_getDestPartBody($newIndex, $params),
+        ], $this->_resolveBodyOptions($params));
 
-        $body = array_merge_recursive($body, [
-            'source' => ['index' => $oldIndex->getName()],
-            'dest' => ['index' => $newIndex->getName()],
-        ]);
+        $body = $this->_setBodyScript($body);
 
         return $body;
     }
 
-    protected function resolveOptions(array $options)
+    protected function _getSourcePartBody(Index $index, array $params)
     {
-        $params = array_merge([
-            'source' => $this->_getSourcePartBody($options),
-            'dest' => $this->_getDestPartBody($options),
-        ], $this->_resolveBodyOptions($options));
+        $sourceBody = \array_merge([
+            'index' => $index->getName(),
+        ], $this->_resolveSourceOptions($params));
 
-        return $params;
-    }
-
-    protected function _getSourcePartBody($options)
-    {
-        $sourceBody = $this->_resolveSourceOptions($options);
         $sourceBody = $this->_setSourceQuery($sourceBody);
         $sourceBody = $this->_setSourceType($sourceBody);
 
         return $sourceBody;
     }
 
-    protected function _getDestPartBody(array $options)
+    protected function _getDestPartBody(Index $index, array $params)
     {
-        return $this->_resolveDestOptions($options);
+        $destBody = \array_merge([
+            'index' => $index->getName(),
+        ], $this->_resolveDestOptions($params));
+
+        return $destBody;
     }
 
-    private function _resolveSourceOptions(array $options)
+    private function _resolveSourceOptions(array $params)
     {
-        return \array_intersect_key($options, [
+        return \array_intersect_key($params, [
             self::TYPE => null,
             self::QUERY => null,
+            self::SORT => null,
+            self::SOURCE => null,
+            self::REMOTE => null,
+            self::SLICE => null,
         ]);
     }
 
-    private function _resolveDestOptions(array $options)
+    private function _resolveDestOptions(array $params)
     {
-        return \array_intersect_key($options, [
+        return \array_intersect_key($params, [
             self::VERSION_TYPE => null,
             self::OPERATION_TYPE => null,
         ]);
     }
 
-    private function _resolveBodyOptions(array $options)
+    private function _resolveBodyOptions(array $params)
     {
-        return \array_intersect_key($options, [
+        return \array_intersect_key($params, [
             self::SIZE => null,
             self::CONFLICTS => null,
         ]);
     }
 
-    /**
-     * @param array $sourceBody
-     *
-     * @return array
-     */
     private function _setSourceQuery(array $sourceBody)
     {
         if (isset($sourceBody[self::QUERY]) && $sourceBody[self::QUERY] instanceof AbstractQuery) {
@@ -143,11 +143,6 @@ class Reindex extends Param
         return $sourceBody;
     }
 
-    /**
-     * @param array $sourceBody
-     *
-     * @return array
-     */
     private function _setSourceType(array $sourceBody)
     {
         if (isset($sourceBody[self::TYPE]) && !\is_array($sourceBody[self::TYPE])) {
@@ -164,21 +159,27 @@ class Reindex extends Param
         return $sourceBody;
     }
 
-    private function _getEndpointParams(array $params)
+    private function _setBodyScript(array $body)
     {
-        return array_intersect_key($params, [
-            self::REFRESH => null,
-            self::WAIT_FOR_COMPLETION => null,
-            self::WAIT_FOR_ACTIVE_SHARDS => null,
-            self::TIMEOUT => null,
-            self::SCROLL => null,
-            self::REQUESTS_PER_SECOND => null,
-        ]);
+        if (!$this->hasParam(self::SCRIPT)) {
+            return $body;
+        }
+
+        $script = $this->getParam(self::SCRIPT);
+
+        if ($script instanceof AbstractScript) {
+            $body = \array_merge($body, $script->toArray());
+        } else {
+            $body[self::SCRIPT] = $script;
+        }
+
+        return $body;
     }
 
     public function setWaitForCompletion($value)
     {
-        is_bool($value) && $value = $value ? 'true' : 'false';
+        \is_bool($value) && $value = $value ? 'true' : 'false';
+
         $this->setParam(self::WAIT_FOR_COMPLETION, $value);
     }
 
@@ -202,14 +203,9 @@ class Reindex extends Param
         $this->setParam(self::REQUESTS_PER_SECOND, $value);
     }
 
-    public function setSourceParam(string $key, $value)
+    public function setScript(Script $script)
     {
-        $this->_params['source'][$key] = $value;
-    }
-
-    public function setDestParam(string $key, $value)
-    {
-        $this->_params['dest'][$key] = $value;
+        $this->setParam(self::SCRIPT, $script);
     }
 
     public function getTaskId()
