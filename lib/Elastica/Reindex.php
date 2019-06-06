@@ -59,7 +59,7 @@ class Reindex extends Param
         $this->setParams($params);
     }
 
-    public function run()
+    public function run(): Response
     {
         $body = $this->_getBody($this->_oldIndex, $this->_newIndex, $this->getParams());
 
@@ -73,7 +73,7 @@ class Reindex extends Param
         return $this->_lastResponse;
     }
 
-    protected function _getBody($oldIndex, $newIndex, $params)
+    protected function _getBody(Index $oldIndex, Index $newIndex, array $params): array
     {
         $body = \array_merge([
             'source' => $this->_getSourcePartBody($oldIndex, $params),
@@ -85,7 +85,7 @@ class Reindex extends Param
         return $body;
     }
 
-    protected function _getSourcePartBody(Index $index, array $params)
+    protected function _getSourcePartBody(Index $index, array $params): array
     {
         $sourceBody = \array_merge([
             'index' => $index->getName(),
@@ -97,7 +97,7 @@ class Reindex extends Param
         return $sourceBody;
     }
 
-    protected function _getDestPartBody(Index $index, array $params)
+    protected function _getDestPartBody(Index $index, array $params): array
     {
         $destBody = \array_merge([
             'index' => $index->getName(),
@@ -106,7 +106,7 @@ class Reindex extends Param
         return $destBody;
     }
 
-    private function _resolveSourceOptions(array $params)
+    private function _resolveSourceOptions(array $params): array
     {
         return \array_intersect_key($params, [
             self::TYPE => null,
@@ -118,7 +118,7 @@ class Reindex extends Param
         ]);
     }
 
-    private function _resolveDestOptions(array $params)
+    private function _resolveDestOptions(array $params): array
     {
         return \array_intersect_key($params, [
             self::VERSION_TYPE => null,
@@ -126,7 +126,7 @@ class Reindex extends Param
         ]);
     }
 
-    private function _resolveBodyOptions(array $params)
+    private function _resolveBodyOptions(array $params): array
     {
         return \array_intersect_key($params, [
             self::SIZE => null,
@@ -134,7 +134,7 @@ class Reindex extends Param
         ]);
     }
 
-    private function _setSourceQuery(array $sourceBody)
+    private function _setSourceQuery(array $sourceBody): array
     {
         if (isset($sourceBody[self::QUERY]) && $sourceBody[self::QUERY] instanceof AbstractQuery) {
             $sourceBody[self::QUERY] = $sourceBody[self::QUERY]->toArray();
@@ -143,7 +143,7 @@ class Reindex extends Param
         return $sourceBody;
     }
 
-    private function _setSourceType(array $sourceBody)
+    private function _setSourceType(array $sourceBody): array
     {
         if (isset($sourceBody[self::TYPE]) && !\is_array($sourceBody[self::TYPE])) {
             $sourceBody[self::TYPE] = [$sourceBody[self::TYPE]];
@@ -159,7 +159,7 @@ class Reindex extends Param
         return $sourceBody;
     }
 
-    private function _setBodyScript(array $body)
+    private function _setBodyScript(array $body): array
     {
         if (!$this->hasParam(self::SCRIPT)) {
             return $body;
