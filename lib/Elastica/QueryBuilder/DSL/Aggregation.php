@@ -2,6 +2,7 @@
 
 namespace Elastica\QueryBuilder\DSL;
 
+use Elastica\Aggregation\AdjacencyMatrix;
 use Elastica\Aggregation\Avg;
 use Elastica\Aggregation\AvgBucket;
 use Elastica\Aggregation\BucketScript;
@@ -537,5 +538,19 @@ class Aggregation implements DSL
     public function serial_diff(string $name, string $bucketsPath = null): SerialDiff
     {
         return new SerialDiff($name, $bucketsPath);
+    }
+
+    /**
+     * filters aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-adjacency-matrix-aggregation.html
+     *
+     * @param string $name
+     *
+     * @return AdjacencyMatrix
+     */
+    public function adjacency_matrix(string $name): AdjacencyMatrix
+    {
+        return new AdjacencyMatrix($name);
     }
 }
