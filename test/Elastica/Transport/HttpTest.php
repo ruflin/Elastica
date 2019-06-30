@@ -10,65 +10,6 @@ use Elastica\Test\Base as BaseTest;
 class HttpTest extends BaseTest
 {
     /**
-     * Return transport configuration and the expected HTTP method.
-     *
-     * @return array[]
-     */
-    public function getConfig()
-    {
-        return [
-            [
-                ['transport' => 'Http', 'curl' => [CURLINFO_HEADER_OUT => true]],
-                'GET',
-            ],
-            [
-                ['transport' => ['type' => 'Http', 'postWithRequestBody' => false, 'curl' => [CURLINFO_HEADER_OUT => true]]],
-                'GET',
-            ],
-            [
-                ['transport' => ['type' => 'Http', 'postWithRequestBody' => true, 'curl' => [CURLINFO_HEADER_OUT => true]]],
-                'POST',
-            ],
-        ];
-    }
-
-    /**
-     * @group functional
-     * @dataProvider getConfig
-     */
-    public function testDynamicHttpMethodBasedOnConfigParameter(array $config, $httpMethod)
-    {
-        $client = $this->_getClient($config);
-
-        $index = $client->getIndex('dynamic_http_method_test');
-        $index->create([], true);
-        $this->_waitForAllocation($index);
-
-        $type = $index->getType('_doc');
-        $type->addDocument(new Document(1, ['test' => 'test']));
-
-        $index->refresh();
-
-        $resultSet = $index->search('test');
-
-        $info = $resultSet->getResponse()->getTransferInfo();
-        $this->assertStringStartsWith($httpMethod, $info['request_header']);
-    }
-
-    /**
-     * @group functional
-     * @dataProvider getConfig
-     */
-    public function testDynamicHttpMethodOnlyAffectsRequestsWithBody(array $config, $httpMethod)
-    {
-        $client = $this->_getClient($config);
-
-        $status = $client->getStatus();
-        $info = $status->getResponse()->getTransferInfo();
-        $this->assertStringStartsWith('GET', $info['request_header']);
-    }
-
-    /**
      * @group functional
      */
     public function testCurlNobodyOptionIsResetAfterHeadRequest()

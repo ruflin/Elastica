@@ -6,6 +6,7 @@ use Elastica\Client;
 use Elastica\Exception\InvalidException;
 use Elastica\Index;
 use Elastica\Query;
+use Elastica\Request;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\SearchableInterface;
@@ -151,28 +152,30 @@ abstract class AbstractType implements SearchableInterface
      *
      * @param string|array|Query $query   Array with all query data inside or a Elastica\Query object
      * @param int|array          $options
+     * @param string             $method  OPTIONAL Request method (use const's) (default = Request::POST)
      *
      * @return ResultSet with all results inside
      *
      * @see \Elastica\SearchableInterface::search
      */
-    public function search($query = '', $options = null): ResultSet
+    public function search($query = '', $options = null, $method = Request::POST): ResultSet
     {
-        return $this->getType()->search($query, $options = null);
+        return $this->getType()->search($query, $options = null, $method);
     }
 
     /**
      * Count docs in the type based on query.
      *
-     * @param string|array|Query $query Array with all query data inside or a Elastica\Query object
+     * @param string|array|Query $query  Array with all query data inside or a Elastica\Query object
+     * @param string             $method OPTIONAL Request method (use const's) (default = Request::POST)
      *
      * @return int number of documents matching the query
      *
      * @see \Elastica\SearchableInterface::count
      */
-    public function count($query = ''): int
+    public function count($query = '', $method = Request::POST): int
     {
-        return $this->getType()->count($query);
+        return $this->getType()->count($query, $method);
     }
 
     /**

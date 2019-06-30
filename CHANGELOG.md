@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file based on the
 * hits.total is now an object in the search response [hits.total](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_literal_hits_total_literal_is_now_an_object_in_the_search_response) 
 * Elastica\Reindex does not return an Index anymore but a Response.
 * Elastica\Reindex->run() does not refresh the new Index after completion anymore. Use `$reindex->setParam(Reindex::REFRESH, 'wait_for')` instead.
+* `Elastica\Search->search()` and `Elastica\Search->count()` use request method `POST` by default. Same for `Elastica\Index`, `Elastica\Type\AbstractType`, `Elastica\Type`.
 
 ### Bugfixes
 * Always set the Guzzle `base_uri` to support connecting to multiple ES hosts. [#1618](https://github.com/ruflin/Elastica/pull/1618)
@@ -26,6 +27,7 @@ All notable changes to this project will be documented in this file based on the
 * Added `ParentAggregation` [#1616](https://github.com/ruflin/Elastica/pull/1616)
 * Elastica\Reindex missing options (script, remote, wait_for_completion, scroll...)
 * Added `AdjacencyMatrix` aggregation [#1642](https://github.com/ruflin/Elastica/pull/1642)
+* Added request method parameter to `Elastica\SearchableInterface->search()` and `Elastica\SearchableInterface->count()`. Same for `Elastica\Search`[#1441](https://github.com/ruflin/Elastica/issues/1441)
 
 ### Improvements
 * Added `native_function_invocation` CS rule [#1606](https://github.com/ruflin/Elastica/pull/1606)
