@@ -541,7 +541,7 @@ class Aggregation implements DSL
     }
 
     /**
-     * filters aggregation.
+     * adjacency matrix aggregation.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-adjacency-matrix-aggregation.html
      *
