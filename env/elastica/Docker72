@@ -18,7 +18,9 @@ RUN docker-php-ext-install sockets xsl
 RUN rm -r /var/lib/apt/lists/*
 
 # Xdebug for coverage report
-RUN pecl install xdebug-2.6.1
+RUN pecl install xdebug-2.7.2
+
+## PHP Configuration
 
 RUN echo "memory_limit=1024M" >> /usr/local/etc/php/conf.d/memory-limit.ini
 RUN echo "date.timezone=UTC" >> /usr/local/etc/php/conf.d/timezone.ini
