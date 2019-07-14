@@ -12,9 +12,9 @@
         }
     ],
     "require": {
-        "php": "^7.0",
+        "php": "^7.1",
         "psr/log": "~1.0",
-        "elasticsearch/elasticsearch": "dev-master"
+        "elasticsearch/elasticsearch": "^7.0"
     },
     "require-dev": {
         "aws/aws-sdk-php": "~3.0",

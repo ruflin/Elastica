@@ -1,7 +1,7 @@
 #/bin/bash
 
 SOURCE = "./lib"
-TARGET?=70
+TARGET?=71
 
 # By default docker environment is used to run commands. To run without the predefined environment, set RUN_ENV=" " either as parameter or as environment variable
 ifndef RUN_ENV

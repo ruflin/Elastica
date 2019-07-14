@@ -16,7 +16,6 @@ env:
     - DOCKER_VERSION=17.09.0
     - DOCKER_COMPOSE_VERSION=1.17.1
   matrix:
-    - TARGET="70"
     - TARGET="71"
     - TARGET="72"
     - TARGET="73"
