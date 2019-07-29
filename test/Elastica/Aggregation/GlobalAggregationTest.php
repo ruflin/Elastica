@@ -47,5 +47,4 @@ class GlobalAggregationTest extends BaseAggregationTest
 
         $this->assertEquals($expected, $agg->toArray());
     }
-
 }
