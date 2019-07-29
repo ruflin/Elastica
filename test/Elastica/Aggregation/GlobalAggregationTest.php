@@ -3,11 +3,8 @@
 namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Avg;
-use Elastica\Aggregation\Filter;
 use Elastica\Aggregation\GlobalAggregation;
 use Elastica\Query;
-use Elastica\QueryBuilder;
-use http\QueryString;
 
 class GlobalAggregationTest extends BaseAggregationTest
 {
@@ -29,6 +26,7 @@ class GlobalAggregationTest extends BaseAggregationTest
         $agg->addAggregation($avg);
         $this->assertEquals($expected, $agg->toArray());
     }
+
     /**
      * @group unit
      */
