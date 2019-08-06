@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Improvements
 
 - Update `elasticsearch-php` dependency to 5.4 [#1648](https://github.com/ruflin/Elastica/pull/1648)
+- Add testing on PHP 7.3 on Travis [#1647](https://github.com/ruflin/Elastica/pull/1647)
 
 
 ## [5.3.5](https://github.com/ruflin/Elastica/compare/5.3.4...5.3.5)
