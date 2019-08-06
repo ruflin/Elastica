@@ -27,6 +27,12 @@ Contributions are always welcome. For details on how to contribute, check the [C
 
 Dependencies
 ------------
-| Project | Version | Required |
-|---------|---------|----------|
-|[Elasticsearch](https://github.com/elasticsearch/elasticsearch/tree/5.3)|5.3|yes|
+
+| Elastica                                                                                | ElasticSearch | elasticsearch-php | PHP      |
+| --------------------------------------------------------------------------------------- | ------------- | ----------------- | -------- |
+| [5.x](https://github.com/ruflin/Elastica/tree/5.x)                                      | 5.x           | ^5.0              | \>=5.6   |
+| [3.2.3](https://github.com/ruflin/Elastica/tree/3.2.3) (unmaintained)                   | 2.4.0         | no                | \>=5.4   |
+| [2.x](https://github.com/ruflin/Elastica/tree/2.x) (unmaintained)                       | 1.7.2         | no                | \>=5.3.3 |
+
+------------
+
