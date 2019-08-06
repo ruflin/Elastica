@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file based on the
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.1...master)
 
 ### Backward Compatibility Breaks
+* Dropped support for PHP 7.0
 * \Elastica\AbstractUpdateAction::getOptions( $fields ) no longer supports the $underscore parameter, option names must match what elasticsearch expects.
 * Removed no longer supported \Elastica\Query\QueryString::setAutoGeneratePhraseQueries( $bool ) [#1622](https://github.com/ruflin/Elastica/pull/1622)
 * Replaced [params._agg](https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_replaced_literal_params__agg_literal_with_literal_state_literal_context_variable_in_scripted_metric_aggregations) with state context variable in scripted metric aggregations 
@@ -21,7 +22,7 @@ All notable changes to this project will be documented in this file based on the
 * Add ```settings``` level on json to create an Index in all tests (it worked till 6.x but it shouldn't work)
 
 ### Added
-
+* support for elasticsearch-php ^7.0
 * Added `ParentAggregation` [#1616](https://github.com/ruflin/Elastica/pull/1616)
 * Elastica\Reindex missing options (script, remote, wait_for_completion, scroll...)
 
