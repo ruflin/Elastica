@@ -25,6 +25,7 @@ All notable changes to this project will be documented in this file based on the
 * support for elasticsearch-php ^7.0
 * Added `ParentAggregation` [#1616](https://github.com/ruflin/Elastica/pull/1616)
 * Elastica\Reindex missing options (script, remote, wait_for_completion, scroll...)
+* Added `AdjacencyMatrix` aggregation [#1642](https://github.com/ruflin/Elastica/pull/1642)
 
 ### Improvements
 * Added `native_function_invocation` CS rule [#1606](https://github.com/ruflin/Elastica/pull/1606)
