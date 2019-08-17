@@ -21,31 +21,9 @@ use Psr\Log\NullLogger;
 class Client
 {
     /**
-     * Config with defaults.
-     *
-     * log: Set to true, to enable logging, set a string to log to a specific file
-     * retryOnConflict: Use in \Elastica\Client::updateDocument
-     * bigintConversion: Set to true to enable the JSON bigint to string conversion option (see issue #717)
-     *
-     * @var array
+     * @var ClientConfiguration
      */
-    protected $_config = [
-        'host' => null,
-        'port' => null,
-        'path' => null,
-        'url' => null,
-        'proxy' => null,
-        'transport' => null,
-        'persistent' => true,
-        'timeout' => null,
-        'connections' => [], // host, port, path, timeout, transport, compression, persistent, timeout, username, password, config -> (curl, headers, url)
-        'roundRobin' => false,
-        'log' => false,
-        'retryOnConflict' => 0,
-        'bigintConversion' => false,
-        'username' => null,
-        'password' => null,
-    ];
+    protected $_config;
 
     /**
      * @var callback
@@ -80,20 +58,30 @@ class Client
     /**
      * Creates a new Elastica client.
      *
-     * @param array           $config   OPTIONAL Additional config options
+     * @param array|string    $config   OPTIONAL Additional config or DSN of options
      * @param callback        $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      * @param LoggerInterface $logger
+     *
+     * @throws \Elastica\Exception\InvalidException
      */
-    public function __construct(array $config = [], $callback = null, LoggerInterface $logger = null)
+    public function __construct($config = [], $callback = null, LoggerInterface $logger = null)
     {
+        if (\is_string($config)) {
+            $configuration = ClientConfiguration::fromDsn($config);
+        } elseif (\is_array($config)) {
+            $configuration = ClientConfiguration::fromArray($config);
+        } else {
+            throw new InvalidException('Config parameter must be an array or a string.');
+        }
+
+        $this->_config = $configuration;
         $this->_callback = $callback;
 
-        if (!$logger && isset($config['log']) && $config['log']) {
-            $logger = new Log($config['log']);
+        if (!$logger && $configuration->get('log')) {
+            $logger = new Log($configuration->get('log'));
         }
         $this->_logger = $logger ?: new NullLogger();
 
-        $this->setConfig($config);
         $this->_initConnections();
     }
 
@@ -124,8 +112,9 @@ class Client
             $connections[] = Connection::create($this->_prepareConnectionParams($connection));
         }
 
-        if (isset($this->_config['servers'])) {
-            foreach ($this->getConfig('servers') as $server) {
+        if ($this->_config->has('servers')) {
+            $servers = $this->_config->get('servers');
+            foreach ($servers as $server) {
                 $connections[] = Connection::create($this->_prepareConnectionParams($server));
             }
         }
@@ -135,7 +124,7 @@ class Client
             $connections[] = Connection::create($this->_prepareConnectionParams($this->getConfig()));
         }
 
-        if (!isset($this->_config['connectionStrategy'])) {
+        if (!$this->_config->has('connectionStrategy')) {
             if (true === $this->getConfig('roundRobin')) {
                 $this->setConfigValue('connectionStrategy', 'RoundRobin');
             } else {
@@ -180,7 +169,7 @@ class Client
     public function setConfig(array $config)
     {
         foreach ($config as $key => $value) {
-            $this->_config[$key] = $value;
+            $this->_config->set($key, $value);
         }
 
         return $this;
@@ -198,15 +187,7 @@ class Client
      */
     public function getConfig($key = '')
     {
-        if (empty($key)) {
-            return $this->_config;
-        }
-
-        if (!\array_key_exists($key, $this->_config)) {
-            throw new InvalidException('Config key is not set: '.$key);
-        }
-
-        return $this->_config[$key];
+        return $this->_config->get($key);
     }
 
     /**
@@ -230,7 +211,7 @@ class Client
      */
     public function getConfigValue($keys, $default = null)
     {
-        $value = $this->_config;
+        $value = $this->_config->getAll();
         foreach ((array) $keys as $key) {
             if (isset($value[$key])) {
                 $value = $value[$key];
@@ -267,7 +248,13 @@ class Client
     public function addHeader($header, $headerValue)
     {
         if (\is_string($header) && \is_string($headerValue)) {
-            $this->_config['headers'][$header] = $headerValue;
+            if ($this->_config->has('headers')) {
+                $headers = $this->_config->get('headers');
+            } else {
+                $headers = [];
+            }
+            $headers[$header] = $headerValue;
+            $this->_config->set('headers', $headers);
         } else {
             throw new InvalidException('Header must be a string');
         }
@@ -287,8 +274,10 @@ class Client
     public function removeHeader($header)
     {
         if (\is_string($header)) {
-            if (\array_key_exists($header, $this->_config['headers'])) {
-                unset($this->_config['headers'][$header]);
+            if ($this->_config->has('headers')) {
+                $headers = $this->_config->get('headers');
+                unset($headers[$header]);
+                $this->_config->set('headers', $headers);
             }
         } else {
             throw new InvalidException('Header must be a string');

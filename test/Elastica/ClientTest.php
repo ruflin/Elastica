@@ -17,7 +17,6 @@ use Elastica\Response;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
-use Elasticsearch\Endpoints\Get;
 use Elasticsearch\Endpoints\Indices\Stats;
 use Elasticsearch\Endpoints\Search;
 
@@ -30,6 +29,36 @@ class ClientTest extends BaseTest
     {
         $client = $this->_getClient();
         $this->assertCount(1, $client->getConnections());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testConstructWithDsn()
+    {
+        $client = new Client('https://user:p4ss@foo.com:9200?persistent=false&retryOnConflict=2');
+        $this->assertCount(1, $client->getConnections());
+
+        $expected = [
+            'host' => 'foo.com',
+            'port' => '9200',
+            'path' => null,
+            'url' => null,
+            'proxy' => null,
+            'transport' => 'https',
+            'persistent' => false,
+            'timeout' => null,
+            'connections' => [],
+            'roundRobin' => false,
+            'log' => false,
+            'retryOnConflict' => 2,
+            'bigintConversion' => false,
+            'username' => 'user',
+            'password' => 'p4ss',
+            'connectionStrategy' => 'Simple',
+        ];
+
+        $this->assertEquals($expected, $client->getConfig());
     }
 
     /**
