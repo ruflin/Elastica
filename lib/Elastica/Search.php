@@ -436,12 +436,13 @@ class Search
      *
      * @param mixed     $query
      * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
+     * @param string    $method  OPTIONAL Request method (use const's) (default = Request::POST)
      *
      * @throws \Elastica\Exception\InvalidException
      *
      * @return \Elastica\ResultSet
      */
-    public function search($query = '', $options = null)
+    public function search($query = '', $options = null, $method = Request::POST)
     {
         $this->setOptionsAndQuery($options, $query);
 
@@ -460,7 +461,7 @@ class Search
 
         $response = $this->getClient()->request(
             $path,
-            Request::GET,
+            $method,
             $data,
             $params
         );
@@ -471,10 +472,11 @@ class Search
     /**
      * @param mixed $query
      * @param $fullResult (default = false) By default only the total hit count is returned. If set to true, the full ResultSet including aggregations is returned
+     * @param string $method OPTIONAL Request method (use const's) (default = Request::POST)
      *
      * @return int|ResultSet
      */
-    public function count($query = '', $fullResult = false)
+    public function count($query = '', $fullResult = false, $method = Request::POST)
     {
         $this->setOptionsAndQuery(null, $query);
 
@@ -485,7 +487,7 @@ class Search
 
         $response = $this->getClient()->request(
             $path,
-            Request::GET,
+            $method,
             $query->toArray(),
             [self::OPTION_SEARCH_TYPE => self::OPTION_SEARCH_TYPE_QUERY_THEN_FETCH]
         );

@@ -143,6 +143,33 @@ class IndexTest extends BaseTest
     /**
      * @group functional
      */
+    public function testCountGet()
+    {
+        $index = $this->_createIndex();
+
+        // Add document to normal index
+        $doc1 = new Document(null, ['name' => 'ruflin']);
+        $doc2 = new Document(null, ['name' => 'nicolas']);
+
+        $type = $index->getType('_doc');
+        $type->addDocument($doc1);
+        $type->addDocument($doc2);
+
+        $index->refresh();
+
+        $this->assertEquals(2, $index->count('', Request::GET));
+
+        $query = new Term();
+        $key = 'name';
+        $value = 'nicolas';
+        $query->setTerm($key, $value);
+
+        $this->assertEquals(1, $index->count($query, Request::GET));
+    }
+
+    /**
+     * @group functional
+     */
     public function testDeleteByQueryWithQueryString()
     {
         $index = $this->_createIndex();
@@ -694,6 +721,27 @@ class IndexTest extends BaseTest
 
         $count = $index->count();
         $this->assertEquals(3, $count);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testSearchGet()
+    {
+        $index = $this->_createIndex();
+
+        $type = new Type($index, '_doc');
+
+        $docs = [];
+        $docs[] = new Document(1, ['username' => 'hans']);
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $resultSet = $index->search('hans', null, Request::GET);
+        $this->assertEquals(1, $resultSet->count());
+
+        $count = $index->count('hans', Request::GET);
+        $this->assertEquals(1, $count);
     }
 
     /**

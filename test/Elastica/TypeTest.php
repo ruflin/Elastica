@@ -9,6 +9,7 @@ use Elastica\Index;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
 use Elastica\Query\SimpleQueryString;
+use Elastica\Request;
 use Elastica\Script\Script;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
@@ -48,6 +49,45 @@ class TypeTest extends BaseTest
         $this->assertEquals(1, $resultSet->count());
 
         $count = $type->count('rolf');
+        $this->assertEquals(1, $count);
+
+        // Test if source is returned
+        $result = $resultSet->current();
+        $this->assertEquals(3, $result->getId());
+        $data = $result->getData();
+        $this->assertEquals('rolf', $data['username']);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testSearchGet()
+    {
+        $index = $this->_createIndex();
+
+        $type = new Type($index, '_doc');
+
+        // Adds 1 document to the index
+        $doc1 = new Document(1,
+            ['username' => 'hans', 'test' => ['2', '3', '5']]
+        );
+        $type->addDocument($doc1);
+
+        // Adds a list of documents with _bulk upload to the index
+        $docs = [];
+        $docs[] = new Document(2,
+            ['username' => 'john', 'test' => ['1', '3', '6']]
+        );
+        $docs[] = new Document(3,
+            ['username' => 'rolf', 'test' => ['2', '3', '7']]
+        );
+        $type->addDocuments($docs);
+        $index->refresh();
+
+        $resultSet = $type->search('rolf', null, Request::GET);
+        $this->assertEquals(1, $resultSet->count());
+
+        $count = $type->count('rolf', Request::GET);
         $this->assertEquals(1, $count);
 
         // Test if source is returned

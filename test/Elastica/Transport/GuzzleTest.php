@@ -17,60 +17,6 @@ class GuzzleTest extends BaseTest
     }
 
     /**
-     * Return transport configuration and the expected HTTP method.
-     *
-     * @return array[]
-     */
-    public function getConfig()
-    {
-        return [
-            [
-                ['persistent' => false, 'transport' => 'Guzzle'],
-                'GET',
-            ],
-            [
-                ['persistent' => false, 'transport' => ['type' => 'Guzzle', 'postWithRequestBody' => false]],
-                'GET',
-            ],
-            [
-                ['persistent' => false, 'transport' => ['type' => 'Guzzle', 'postWithRequestBody' => true]],
-                'POST',
-            ],
-        ];
-    }
-
-    /**
-     * @group functional
-     * @dataProvider getConfig
-     */
-    public function testDynamicHttpMethodBasedOnConfigParameter(array $config, $httpMethod)
-    {
-        $client = $this->_getClient($config);
-
-        $index = $client->getIndex('dynamic_http_method_test');
-        $index->create([], true);
-        $type = $index->getType('_doc');
-        $type->addDocument(new Document(1, ['test' => 'test']));
-        $index->refresh();
-        $resultSet = $index->search('test');
-        $info = $resultSet->getResponse()->getTransferInfo();
-        $this->assertStringStartsWith($httpMethod, $info['request_header']);
-    }
-
-    /**
-     * @group functional
-     * @dataProvider getConfig
-     */
-    public function testDynamicHttpMethodOnlyAffectsRequestsWithBody(array $config, $httpMethod)
-    {
-        $client = $this->_getClient($config);
-
-        $status = $client->getStatus();
-        $info = $status->getResponse()->getTransferInfo();
-        $this->assertStringStartsWith('GET', $info['request_header']);
-    }
-
-    /**
      * @group functional
      */
     public function testWithEnvironmentalProxy()

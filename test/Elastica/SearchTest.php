@@ -10,6 +10,7 @@ use Elastica\Query;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
 use Elastica\Query\QueryString;
+use Elastica\Request;
 use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Script\Script;
@@ -459,6 +460,18 @@ class SearchTest extends BaseTest
     /**
      * @group functional
      */
+    public function testSearchGet()
+    {
+        $client = $this->_getClient();
+        $search1 = new Search($client);
+
+        $result = $search1->search([], [], 'GET');
+        $this->assertFalse($result->getResponse()->hasError());
+    }
+
+    /**
+     * @group functional
+     */
     public function testCountRequest()
     {
         $client = $this->_getClient();
@@ -498,6 +511,51 @@ class SearchTest extends BaseTest
         $this->assertEquals(11, $count);
 
         $count = $search->count('bunny');
+        $this->assertEquals(0, $count);
+    }
+
+    /**
+     * @group functional
+     */
+    public function testCountRequestGet()
+    {
+        $client = $this->_getClient();
+        $search = new Search($client);
+
+        $index = $client->getIndex('zero');
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
+
+        $type = $index->getType('_doc');
+        $type->addDocuments([
+            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+            new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'marley']),
+        ]);
+        $index->refresh();
+
+        $search->addIndex($index)->addType($type);
+
+        $count = $search->count('farrelley', false, Request::GET);
+        $this->assertEquals(5, $count);
+
+        $count = $search->count('marley', false, Request::GET);
+        $this->assertEquals(6, $count);
+
+        $count = $search->count('', false, Request::GET);
+        $this->assertEquals(6, $count, 'Uses previous query set');
+
+        $count = $search->count(new MatchAll(), false, Request::GET);
+        $this->assertEquals(11, $count);
+
+        $count = $search->count('bunny', false, Request::GET);
         $this->assertEquals(0, $count);
     }
 

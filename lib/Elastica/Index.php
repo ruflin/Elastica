@@ -353,32 +353,34 @@ class Index implements SearchableInterface
      *
      * @param string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
      * @param int|array                    $options OPTIONAL Limit or associative array of options (option=>value)
+     * @param string                       $method  OPTIONAL Request method (use const's) (default = Request::POST)
      *
      * @return \Elastica\ResultSet with all results inside
      *
      * @see \Elastica\SearchableInterface::search
      */
-    public function search($query = '', $options = null)
+    public function search($query = '', $options = null, $method = Request::POST)
     {
         $search = $this->createSearch($query, $options);
 
-        return $search->search();
+        return $search->search('', null, $method);
     }
 
     /**
      * Counts results of query.
      *
-     * @param string|array|\Elastica\Query $query Array with all query data inside or a Elastica\Query object
+     * @param string|array|\Elastica\Query $query  Array with all query data inside or a Elastica\Query object
+     * @param string                       $method OPTIONAL Request method (use const's) (default = Request::POST)
      *
      * @return int number of documents matching the query
      *
      * @see \Elastica\SearchableInterface::count
      */
-    public function count($query = '')
+    public function count($query = '', $method = Request::POST)
     {
         $search = $this->createSearch($query);
 
-        return $search->count();
+        return $search->count('', false, $method);
     }
 
     /**
