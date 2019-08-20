@@ -42,6 +42,8 @@ class Query extends Param
             $this->setQuery($query);
         } elseif ($query instanceof Suggest) {
             $this->setSuggest($query);
+        } elseif ($query instanceof Collapse) {
+            $this->setCollapse($query);
         }
     }
 
@@ -56,7 +58,7 @@ class Query extends Param
      *
      * @return self
      */
-    public static function create($query)
+    public static function create($query): self
     {
         switch (true) {
             case $query instanceof self:
@@ -74,6 +76,9 @@ class Query extends Param
 
             case $query instanceof Suggest:
                 return new self($query);
+
+            case $query instanceof Collapse:
+                return new self($query);
         }
 
         throw new InvalidException('Unexpected argument to create a query for.');
@@ -86,7 +91,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setRawQuery(array $query)
+    public function setRawQuery(array $query): self
     {
         $this->_params = $query;
 
@@ -100,7 +105,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setQuery(AbstractQuery $query)
+    public function setQuery(AbstractQuery $query): self
     {
         return $this->setParam('query', $query);
     }
@@ -108,7 +113,7 @@ class Query extends Param
     /**
      * Gets the query object.
      *
-     * @return \Elastica\Query\AbstractQuery
+     * @return array|\Elastica\Query\AbstractQuery
      **/
     public function getQuery()
     {
@@ -122,7 +127,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setFrom($from)
+    public function setFrom($from): self
     {
         return $this->setParam('from', $from);
     }
@@ -137,7 +142,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
-    public function setSort(array $sortArgs)
+    public function setSort(array $sortArgs): self
     {
         return $this->setParam('sort', $sortArgs);
     }
@@ -151,7 +156,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
-    public function addSort($sort)
+    public function addSort($sort): self
     {
         return $this->addParam('sort', $sort);
     }
@@ -165,7 +170,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html#_track_scores
      */
-    public function setTrackScores($trackScores = true)
+    public function setTrackScores($trackScores = true): self
     {
         return $this->setParam('track_scores', (bool) $trackScores);
     }
@@ -179,7 +184,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      */
-    public function setHighlight(array $highlightArgs)
+    public function setHighlight(array $highlightArgs): self
     {
         return $this->setParam('highlight', $highlightArgs);
     }
@@ -193,7 +198,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      */
-    public function addHighlight($highlight)
+    public function addHighlight($highlight): self
     {
         return $this->addParam('highlight', $highlight);
     }
@@ -205,7 +210,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setSize($size = 10)
+    public function setSize($size = 10): self
     {
         return $this->setParam('size', $size);
     }
@@ -219,7 +224,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-explain.html
      */
-    public function setExplain($explain = true)
+    public function setExplain($explain = true): self
     {
         return $this->setParam('explain', $explain);
     }
@@ -233,7 +238,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-version.html
      */
-    public function setVersion($version = true)
+    public function setVersion($version = true): self
     {
         return $this->setParam('version', $version);
     }
@@ -249,7 +254,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fields.html
      */
-    public function setStoredFields(array $fields)
+    public function setStoredFields(array $fields): self
     {
         return $this->setParam('stored_fields', $fields);
     }
@@ -263,7 +268,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fielddata-fields.html
      */
-    public function setFieldDataFields(array $fieldDataFields)
+    public function setFieldDataFields(array $fieldDataFields): self
     {
         return $this->setParam('docvalue_fields', $fieldDataFields);
     }
@@ -277,7 +282,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
      */
-    public function setScriptFields($scriptFields)
+    public function setScriptFields($scriptFields): self
     {
         if (\is_array($scriptFields)) {
             $scriptFields = new ScriptFields($scriptFields);
@@ -294,7 +299,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function addScriptField($name, AbstractScript $script)
+    public function addScriptField($name, AbstractScript $script): self
     {
         if (isset($this->_params['script_fields'])) {
             $this->_params['script_fields']->addScript($name, $script);
@@ -312,7 +317,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function addAggregation(AbstractAggregation $agg)
+    public function addAggregation(AbstractAggregation $agg): self
     {
         $this->_params['aggs'][] = $agg;
 
@@ -324,7 +329,7 @@ class Query extends Param
      *
      * @return array Query array
      */
-    public function toArray()
+    public function toArray(): array
     {
         if (!isset($this->_params['query']) && (0 == $this->_suggest)) {
             $this->setQuery(new MatchAll());
@@ -352,7 +357,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setMinScore($minScore)
+    public function setMinScore($minScore): self
     {
         if (!\is_numeric($minScore)) {
             throw new InvalidException('has to be numeric param');
@@ -368,7 +373,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setSuggest(Suggest $suggest)
+    public function setSuggest(Suggest $suggest): self
     {
         $this->setParam('suggest', $suggest);
 
@@ -384,7 +389,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setRescore($rescore)
+    public function setRescore($rescore): self
     {
         if (\is_array($rescore)) {
             $buffer = [];
@@ -408,7 +413,7 @@ class Query extends Param
      *
      * @see   https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
      */
-    public function setSource($params)
+    public function setSource($params): self
     {
         return $this->setParam('_source', $params);
     }
@@ -422,8 +427,18 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html
      */
-    public function setPostFilter(AbstractQuery $filter)
+    public function setPostFilter(AbstractQuery $filter): self
     {
         return $this->setParam('post_filter', $filter);
+    }
+
+    /**
+     * @param Collapse $collapse
+     *
+     * @return $this
+     */
+    public function setCollapse(Collapse $collapse): self
+    {
+        return $this->setParam('collapse', $collapse);
     }
 }
