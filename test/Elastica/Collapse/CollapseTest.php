@@ -3,9 +3,9 @@
 namespace Elastica\Test\Collapse;
 
 use Elastica\Collapse;
+use Elastica\Collapse\InnerHits;
 use Elastica\Document;
 use Elastica\Query;
-use Elastica\Collapse\InnerHits;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type\Mapping;
 
@@ -20,57 +20,57 @@ class CollapseTest extends BaseTest
         $mapping->setType($type);
 
         $mapping->setProperties([
-            'user'    => ['type' => 'keyword'],
+            'user' => ['type' => 'keyword'],
             'message' => ['type' => 'text'],
-            'date'    => ['type' => 'date'],
-            'likes'   => ['type' => 'integer'],
-            'zip'     => ['type' => 'keyword']
+            'date' => ['type' => 'date'],
+            'likes' => ['type' => 'integer'],
+            'zip' => ['type' => 'keyword'],
         ]);
 
         $mapping->send();
 
         $type->addDocuments([
             new Document(1, [
-                'user'    => 'Veronica',
+                'user' => 'Veronica',
                 'message' => 'Always keeping an eye on elasticsearch.',
-                'date'    => '2019-08-15',
-                'likes'   => 10,
-                'zip'     => '07'
+                'date' => '2019-08-15',
+                'likes' => 10,
+                'zip' => '07',
             ]),
             new Document(2, [
-                'user'    => 'Wallace',
+                'user' => 'Wallace',
                 'message' => 'Elasticsearch DevOps is awesome!',
-                'date'    => '2019-08-05',
-                'likes'   => 50,
-                'zip'     => '06'
+                'date' => '2019-08-05',
+                'likes' => 50,
+                'zip' => '06',
             ]),
             new Document(3, [
-                'user'    => 'Logan',
+                'user' => 'Logan',
                 'message' => 'Can I find my lost stuff on elasticsearch?',
-                'date'    => '2019-08-02',
-                'likes'   => 1,
-                'zip'     => '09'
+                'date' => '2019-08-02',
+                'likes' => 1,
+                'zip' => '09',
             ]),
             new Document(4, [
-                'user'    => 'Keith',
+                'user' => 'Keith',
                 'message' => 'Investigating again.',
-                'date'    => '2019-08-10',
-                'likes'   => 30,
-                'zip'     => '07'
+                'date' => '2019-08-10',
+                'likes' => 30,
+                'zip' => '07',
             ]),
             new Document(5, [
-                'user'    => 'Veronica',
+                'user' => 'Veronica',
                 'message' => 'Finding out new stuff.',
-                'date'    => '2019-08-01',
-                'likes'   => 20,
-                'zip'     => '07'
+                'date' => '2019-08-01',
+                'likes' => 20,
+                'zip' => '07',
             ]),
             new Document(6, [
-                'user'    => 'Wallace',
+                'user' => 'Wallace',
                 'message' => 'Baller.',
-                'date'    => '2019-08-15',
-                'likes'   => 20,
-                'zip'     => '06'
+                'date' => '2019-08-15',
+                'likes' => 20,
+                'zip' => '06',
             ]),
         ]);
 

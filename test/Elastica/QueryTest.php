@@ -486,18 +486,18 @@ class QueryTest extends BaseTest
         $query->setCollapse($collapse);
 
         $expected = [
-            'field'      => 'user',
+            'field' => 'user',
             'inner_hits' => [
                 'name' => 'last_tweets',
                 'size' => 5,
-                'sort' => ['date' => 'asc']
+                'sort' => ['date' => 'asc'],
             ],
-            'max_concurrent_group_searches' => 4
+            'max_concurrent_group_searches' => 4,
         ];
 
         $actual = $query->toArray();
 
-        $this->assertTrue(\array_key_exists('collapse', $actual));
+        $this->assertArrayHasKey('collapse', $actual);
         $this->assertEquals($expected, $actual['collapse']);
     }
 
@@ -526,21 +526,21 @@ class QueryTest extends BaseTest
         $query->setCollapse($collapse);
 
         $expected = [
-            'field'      => 'user',
+            'field' => 'user',
             'inner_hits' => [
                 'name' => 'last_tweets',
                 'size' => 5,
                 'sort' => ['date' => 'asc'],
                 'collapse' => [
-                    'field' => 'date'
-                ]
+                    'field' => 'date',
+                ],
             ],
-            'max_concurrent_group_searches' => 4
+            'max_concurrent_group_searches' => 4,
         ];
 
         $actual = $query->toArray();
 
-        $this->assertTrue(\array_key_exists('collapse', $actual));
+        $this->assertArrayHasKey('collapse', $actual);
         $this->assertEquals($expected, $actual['collapse']);
     }
 }

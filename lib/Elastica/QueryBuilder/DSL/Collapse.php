@@ -6,11 +6,8 @@ use Elastica\Query\InnerHits;
 use Elastica\QueryBuilder\DSL;
 
 /**
- * Class Collapse
+ * Class Collapse.
  *
- * @package Elastica\QueryBuilder\DSL
- *
- * Elasticsearch Collapse DSL
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/6.7/search-request-collapse.html
  */

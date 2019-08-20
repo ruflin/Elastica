@@ -6,7 +6,7 @@ use Elastica\Collapse;
 use Elastica\Query\InnerHits as BaseInnerHits;
 
 /**
- * Class InnerHits
+ * Class InnerHits.
  *
  * Basically identical to inner_hits on query level, but has support for a second level collapse as per
  * https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#_second_level_of_collapsing
@@ -16,8 +16,6 @@ use Elastica\Query\InnerHits as BaseInnerHits;
  *
  * On the other hand, collapse cannot be used on query level invocations of inner_hits, which is why it may not be part
  * of Query\InnerHits.
- *
- * @package Elastica\Collapse
  */
 class InnerHits extends BaseInnerHits
 {

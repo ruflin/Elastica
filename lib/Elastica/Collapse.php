@@ -5,18 +5,16 @@ namespace Elastica;
 use Elastica\Collapse\InnerHits;
 
 /**
- * Class Collapse
+ * Class Collapse.
  *
  * Implementation of Collapse
  *
  * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-collapse.html
- *
- * @package Elastica
  */
 class Collapse extends Param
 {
     /**
-     * Set field to collapse
+     * Set field to collapse.
      *
      * @param $fieldName
      *
@@ -77,7 +75,7 @@ class Collapse extends Param
         $data = $this->getParams();
 
         if (!empty($this->_rawParams)) {
-            $data = array_merge($data, $this->_rawParams);
+            $data = \array_merge($data, $this->_rawParams);
         }
 
         return $this->_convertArrayable($data);
