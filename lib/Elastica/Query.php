@@ -58,7 +58,7 @@ class Query extends Param
      *
      * @return self
      */
-    public static function create($query): self
+    public static function create($query)
     {
         switch (true) {
             case $query instanceof self:
@@ -91,7 +91,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setRawQuery(array $query): self
+    public function setRawQuery(array $query)
     {
         $this->_params = $query;
 
@@ -105,7 +105,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setQuery(AbstractQuery $query): self
+    public function setQuery(AbstractQuery $query)
     {
         return $this->setParam('query', $query);
     }
@@ -127,7 +127,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setFrom($from): self
+    public function setFrom($from)
     {
         return $this->setParam('from', $from);
     }
@@ -142,7 +142,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
-    public function setSort(array $sortArgs): self
+    public function setSort(array $sortArgs)
     {
         return $this->setParam('sort', $sortArgs);
     }
@@ -156,7 +156,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
      */
-    public function addSort($sort): self
+    public function addSort($sort)
     {
         return $this->addParam('sort', $sort);
     }
@@ -184,7 +184,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      */
-    public function setHighlight(array $highlightArgs): self
+    public function setHighlight(array $highlightArgs)
     {
         return $this->setParam('highlight', $highlightArgs);
     }
@@ -198,7 +198,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html
      */
-    public function addHighlight($highlight): self
+    public function addHighlight($highlight)
     {
         return $this->addParam('highlight', $highlight);
     }
@@ -210,7 +210,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setSize($size = 10): self
+    public function setSize($size = 10)
     {
         return $this->setParam('size', $size);
     }
@@ -224,7 +224,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-explain.html
      */
-    public function setExplain($explain = true): self
+    public function setExplain($explain = true)
     {
         return $this->setParam('explain', $explain);
     }
@@ -238,7 +238,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-version.html
      */
-    public function setVersion($version = true): self
+    public function setVersion($version = true)
     {
         return $this->setParam('version', $version);
     }
@@ -254,7 +254,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fields.html
      */
-    public function setStoredFields(array $fields): self
+    public function setStoredFields(array $fields)
     {
         return $this->setParam('stored_fields', $fields);
     }
@@ -268,7 +268,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-fielddata-fields.html
      */
-    public function setFieldDataFields(array $fieldDataFields): self
+    public function setFieldDataFields(array $fieldDataFields)
     {
         return $this->setParam('docvalue_fields', $fieldDataFields);
     }
@@ -282,7 +282,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html
      */
-    public function setScriptFields($scriptFields): self
+    public function setScriptFields($scriptFields)
     {
         if (\is_array($scriptFields)) {
             $scriptFields = new ScriptFields($scriptFields);
@@ -299,7 +299,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function addScriptField($name, AbstractScript $script): self
+    public function addScriptField($name, AbstractScript $script)
     {
         if (isset($this->_params['script_fields'])) {
             $this->_params['script_fields']->addScript($name, $script);
@@ -317,7 +317,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function addAggregation(AbstractAggregation $agg): self
+    public function addAggregation(AbstractAggregation $agg)
     {
         $this->_params['aggs'][] = $agg;
 
@@ -329,7 +329,7 @@ class Query extends Param
      *
      * @return array Query array
      */
-    public function toArray(): array
+    public function toArray()
     {
         if (!isset($this->_params['query']) && (0 == $this->_suggest)) {
             $this->setQuery(new MatchAll());
@@ -357,7 +357,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setMinScore($minScore): self
+    public function setMinScore($minScore)
     {
         if (!\is_numeric($minScore)) {
             throw new InvalidException('has to be numeric param');
@@ -373,7 +373,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setSuggest(Suggest $suggest): self
+    public function setSuggest(Suggest $suggest)
     {
         $this->setParam('suggest', $suggest);
 
@@ -389,7 +389,7 @@ class Query extends Param
      *
      * @return $this
      */
-    public function setRescore($rescore): self
+    public function setRescore($rescore)
     {
         if (\is_array($rescore)) {
             $buffer = [];
@@ -413,7 +413,7 @@ class Query extends Param
      *
      * @see   https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html
      */
-    public function setSource($params): self
+    public function setSource($params)
     {
         return $this->setParam('_source', $params);
     }
@@ -427,7 +427,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html
      */
-    public function setPostFilter(AbstractQuery $filter): self
+    public function setPostFilter(AbstractQuery $filter)
     {
         return $this->setParam('post_filter', $filter);
     }
