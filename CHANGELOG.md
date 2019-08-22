@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Bugfixes
 
+- Corrected Histogram aggregations to allow for string interval [#1655](https://github.com/ruflin/Elastica/pull/1655)
+
 ### Added
 
 ### Improvements
