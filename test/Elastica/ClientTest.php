@@ -218,9 +218,9 @@ class ClientTest extends BaseTest
         $client = $this->_getClient();
 
         $params = [
-            ['index' => ['_index' => 'test', '_type' => '_doc', '_id' => '1']],
+            ['index' => ['_index' => 'test', '_id' => '1']],
             ['user' => ['name' => 'hans']],
-            ['index' => ['_index' => 'test', '_type' => '_doc', '_id' => '2']],
+            ['index' => ['_index' => 'test', '_id' => '2']],
             ['user' => ['name' => 'peter']],
         ];
 

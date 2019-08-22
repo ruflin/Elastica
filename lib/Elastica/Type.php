@@ -21,6 +21,8 @@ use Elasticsearch\Endpoints\Indices\Type\Exists;
  * represents a type inside a context
  * The hierarchy is as following: client -> index -> type -> document
  *
+ * @deprecated types have been removed from ES 7.x, use the Index object instead!
+ *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  */
 class Type implements SearchableInterface

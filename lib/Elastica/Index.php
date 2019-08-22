@@ -3,6 +3,7 @@
 namespace Elastica;
 
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index\Recovery as IndexRecovery;
 use Elastica\Index\Settings as IndexSettings;
@@ -20,7 +21,8 @@ use Elasticsearch\Endpoints\Indices\Delete;
 use Elasticsearch\Endpoints\Indices\Exists;
 use Elasticsearch\Endpoints\Indices\Flush;
 use Elasticsearch\Endpoints\Indices\ForceMerge;
-use Elasticsearch\Endpoints\Indices\Mapping\Get;
+use Elasticsearch\Endpoints\Indices\Get;
+use Elasticsearch\Endpoints\Indices\Mapping\Get as MappingGet;
 use Elasticsearch\Endpoints\Indices\Open;
 use Elasticsearch\Endpoints\Indices\Refresh;
 use Elasticsearch\Endpoints\Indices\Settings\Put;
@@ -45,7 +47,7 @@ class Index implements SearchableInterface
     /**
      * Client object.
      *
-     * @var \Elastica\Client Client object
+     * @var Client Client object
      */
     protected $_client;
 
@@ -54,29 +56,13 @@ class Index implements SearchableInterface
      *
      * All the communication to and from an index goes of this object
      *
-     * @param \Elastica\Client $client Client object
-     * @param string           $name   Index name
+     * @param Client $client Client object
+     * @param string $name   Index name
      */
-    public function __construct(Client $client, $name)
+    public function __construct(Client $client, string $name)
     {
         $this->_client = $client;
-
-        if (!\is_scalar($name)) {
-            throw new InvalidException('Index name should be a scalar type');
-        }
-        $this->_name = (string) $name;
-    }
-
-    /**
-     * Returns a type object for the current index with the given name.
-     *
-     * @param string $type Type name
-     *
-     * @return \Elastica\Type Type object
-     */
-    public function getType($type)
-    {
-        return new Type($this, $type);
+        $this->_name = $name;
     }
 
     /**
@@ -100,23 +86,32 @@ class Index implements SearchableInterface
     }
 
     /**
-     * Gets all the type mappings for an index.
+     * Sets the mappings for the current index.
+     *
+     * @param Mapping $mapping MappingType object
+     * @param array   $query   querystring when put mapping (for example update_all_types)
+     *
+     * @return Response
+     */
+    public function setMapping(Mapping $mapping, array $query = []): Response
+    {
+        return $mapping->send($this, $query);
+    }
+
+    /**
+     * Gets all mappings for the current index.
      *
      * @return array
      */
-    public function getMapping()
+    public function getMapping(): array
     {
-        $response = $this->requestEndpoint(new Get());
+        $response = $this->requestEndpoint(new MappingGet());
         $data = $response->getData();
 
         // Get first entry as if index is an Alias, the name of the mapping is the real name and not alias name
         $mapping = \array_shift($data);
 
-        if (isset($mapping['mappings'])) {
-            return $mapping['mappings'];
-        }
-
-        return [];
+        return $mapping['mappings'] ?? [];
     }
 
     /**
@@ -192,6 +187,44 @@ class Index implements SearchableInterface
         }
 
         return $this->getClient()->addDocuments($docs, $options);
+    }
+
+    /**
+     * Get the document from search index.
+     *
+     * @param int|string $id      Document id
+     * @param array      $options options for the get request
+     *
+     * @throws \Elastica\Exception\NotFoundException
+     * @throws \Elastica\Exception\ResponseException
+     *
+     * @return Document
+     */
+    public function getDocument($id, array $options = []): Document
+    {
+        $endpoint = new Get();
+        $endpoint->setID($id);
+        $endpoint->setParams($options);
+
+        $response = $this->requestEndpoint($endpoint);
+        $result = $response->getData();
+
+        if (!isset($result['found']) || false === $result['found']) {
+            throw new NotFoundException('doc id '.$id.' not found');
+        }
+
+        if (isset($result['fields'])) {
+            $data = $result['fields'];
+        } elseif (isset($result['_source'])) {
+            $data = $result['_source'];
+        } else {
+            $data = [];
+        }
+
+        $document = new Document($id, $data, $this->getName());
+        $document->setVersion($result['_version']);
+
+        return $document;
     }
 
     /**
@@ -583,11 +616,7 @@ class Index implements SearchableInterface
     public function requestEndpoint(AbstractEndpoint $endpoint)
     {
         $cloned = clone $endpoint;
-
         $cloned->setIndex($this->getName());
-        if ($endpoint instanceof Create || $endpoint instanceof \Elasticsearch\Endpoints\Indices\Mapping\Put) {
-            $cloned->setParams(['include_type_name' => true]);
-        }
 
         return $this->getClient()->requestEndpoint($cloned);
     }

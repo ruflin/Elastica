@@ -1,10 +1,8 @@
 <?php
 
-namespace Elastica\Type;
+namespace Elastica;
 
 use Elastica\Exception\InvalidException;
-use Elastica\Response;
-use Elastica\Type;
 use Elasticsearch\Endpoints\Indices\Mapping\Put;
 
 /**
@@ -24,42 +22,15 @@ class Mapping
     protected $_mapping = [];
 
     /**
-     * Type.
-     *
-     * @var \Elastica\Type Type object
-     */
-    protected $_type;
-
-    /**
      * Construct Mapping.
      *
-     * @param Type  $type       OPTIONAL Type object
      * @param array $properties OPTIONAL Properties
      */
-    public function __construct(Type $type = null, array $properties = [])
+    public function __construct(array $properties = [])
     {
-        if ($type) {
-            $this->setType($type);
-        }
-
         if (!empty($properties)) {
             $this->setProperties($properties);
         }
-    }
-
-    /**
-     * Sets the mapping type
-     * Enter description here ...
-     *
-     * @param Type $type Type object
-     *
-     * @return $this
-     */
-    public function setType(Type $type): Mapping
-    {
-        $this->_type = $type;
-
-        return $this;
     }
 
     /**
@@ -96,16 +67,6 @@ class Mapping
     public function setMeta(array $meta): Mapping
     {
         return $this->setParam('_meta', $meta);
-    }
-
-    /**
-     * Returns mapping type.
-     *
-     * @return Type Type
-     */
-    public function getType(): Type
-    {
-        return $this->_type;
     }
 
     /**
@@ -189,29 +150,24 @@ class Mapping
      */
     public function toArray(): array
     {
-        $type = $this->getType();
-
-        if (empty($type)) {
-            throw new InvalidException('Type has to be set');
-        }
-
-        return [$type->getName() => $this->_mapping];
+        return $this->_mapping;
     }
 
     /**
      * Submits the mapping and sends it to the server.
      *
+     * @param Index $index the index to send the mappings to
      * @param array $query Query string parameters to send with mapping
      *
      * @return Response Response object
      */
-    public function send(array $query = []): Response
+    public function send(Index $index, array $query = []): Response
     {
         $endpoint = new Put();
         $endpoint->setBody($this->toArray());
         $endpoint->setParams($query);
 
-        return $this->getType()->requestEndpoint($endpoint);
+        return $index->requestEndpoint($endpoint);
     }
 
     /**
