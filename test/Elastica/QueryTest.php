@@ -3,6 +3,8 @@
 namespace Elastica\Test;
 
 use Elastica\Aggregation\Terms as TermsAggregation;
+use Elastica\Collapse;
+use Elastica\Collapse\InnerHits;
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
 use Elastica\Query;
@@ -442,5 +444,103 @@ class QueryTest extends BaseTest
         $result = $resultSet->current();
         $this->assertEquals(1, $result->getId());
         $this->assertNotEmpty($result->getData());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testSetCollapseToArrayCast()
+    {
+        $query = new Query();
+        $collapse = new Collapse();
+        $collapse->setFieldname('some_field');
+
+        $query->setCollapse($collapse);
+
+        $collapse->setFieldname('another_field');
+
+        $anotherQuery = new Query();
+        $anotherQuery->setCollapse($collapse);
+
+        $this->assertEquals($query->toArray(), $anotherQuery->toArray());
+    }
+
+    /**
+     * @group unit
+     */
+    public function testCollapseArrayStructure()
+    {
+        $query = new Query();
+        $collapse = new Collapse();
+        $collapse
+            ->setFieldname('user')
+            ->setInnerHits(
+                (new InnerHits())
+                    ->setName('last_tweets')
+                    ->setSize(5)
+                    ->setSort(['date' => 'asc'])
+            )
+            ->setMaxConcurrentGroupSearches(4)
+        ;
+
+        $query->setCollapse($collapse);
+
+        $expected = [
+            'field' => 'user',
+            'inner_hits' => [
+                'name' => 'last_tweets',
+                'size' => 5,
+                'sort' => ['date' => 'asc'],
+            ],
+            'max_concurrent_group_searches' => 4,
+        ];
+
+        $actual = $query->toArray();
+
+        $this->assertArrayHasKey('collapse', $actual);
+        $this->assertEquals($expected, $actual['collapse']);
+    }
+
+    /**
+     * @group unit
+     */
+    public function testCollapseSecondLevelArrayStructure()
+    {
+        $query = new Query();
+        $collapse = new Collapse();
+        $collapse
+            ->setFieldname('user')
+            ->setInnerHits(
+                (new InnerHits())
+                    ->setName('last_tweets')
+                    ->setSize(5)
+                    ->setSort(['date' => 'asc'])
+                    ->setCollapse(
+                        (new Collapse())
+                        ->setFieldname('date')
+                    )
+            )
+            ->setMaxConcurrentGroupSearches(4)
+        ;
+
+        $query->setCollapse($collapse);
+
+        $expected = [
+            'field' => 'user',
+            'inner_hits' => [
+                'name' => 'last_tweets',
+                'size' => 5,
+                'sort' => ['date' => 'asc'],
+                'collapse' => [
+                    'field' => 'date',
+                ],
+            ],
+            'max_concurrent_group_searches' => 4,
+        ];
+
+        $actual = $query->toArray();
+
+        $this->assertArrayHasKey('collapse', $actual);
+        $this->assertEquals($expected, $actual['collapse']);
     }
 }

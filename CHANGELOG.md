@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file based on the
 * Elastica\Reindex missing options (script, remote, wait_for_completion, scroll...)
 * Added `AdjacencyMatrix` aggregation [#1642](https://github.com/ruflin/Elastica/pull/1642)
 * Added request method parameter to `Elastica\SearchableInterface->search()` and `Elastica\SearchableInterface->count()`. Same for `Elastica\Search`[#1441](https://github.com/ruflin/Elastica/issues/1441)
+* Added support for Field Collapsing (Issue: [#1392](https://github.com/ruflin/Elastica/issues/1392); PR: [#1653](https://github.com/ruflin/Elastica/pull/1653))
 
 ### Improvements
 * Added `native_function_invocation` CS rule [#1606](https://github.com/ruflin/Elastica/pull/1606)

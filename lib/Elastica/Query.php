@@ -42,6 +42,8 @@ class Query extends Param
             $this->setQuery($query);
         } elseif ($query instanceof Suggest) {
             $this->setSuggest($query);
+        } elseif ($query instanceof Collapse) {
+            $this->setCollapse($query);
         }
     }
 
@@ -73,6 +75,9 @@ class Query extends Param
                 return new self(new Suggest($query));
 
             case $query instanceof Suggest:
+                return new self($query);
+
+            case $query instanceof Collapse:
                 return new self($query);
         }
 
@@ -108,7 +113,7 @@ class Query extends Param
     /**
      * Gets the query object.
      *
-     * @return \Elastica\Query\AbstractQuery
+     * @return array|\Elastica\Query\AbstractQuery
      **/
     public function getQuery()
     {
@@ -165,7 +170,7 @@ class Query extends Param
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html#_track_scores
      */
-    public function setTrackScores($trackScores = true)
+    public function setTrackScores($trackScores = true): self
     {
         return $this->setParam('track_scores', (bool) $trackScores);
     }
@@ -425,5 +430,15 @@ class Query extends Param
     public function setPostFilter(AbstractQuery $filter)
     {
         return $this->setParam('post_filter', $filter);
+    }
+
+    /**
+     * @param Collapse $collapse
+     *
+     * @return $this
+     */
+    public function setCollapse(Collapse $collapse): self
+    {
+        return $this->setParam('collapse', $collapse);
     }
 }

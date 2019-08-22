@@ -12,6 +12,7 @@ interface DSL
     const TYPE_QUERY = 'query';
     const TYPE_AGGREGATION = 'aggregation';
     const TYPE_SUGGEST = 'suggest';
+    const TYPE_COLLAPSE = 'collapse';
 
     /**
      * must return type for QueryBuilder usage.
