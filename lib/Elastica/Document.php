@@ -12,7 +12,8 @@ use Elastica\Exception\InvalidException;
  */
 class Document extends AbstractUpdateAction
 {
-    const OP_TYPE_CREATE = Action::OP_TYPE_CREATE;
+    public const OP_TYPE_CREATE = Action::OP_TYPE_CREATE;
+    public const DEFAULT_TYPE = '_doc';
 
     /**
      * Document data.
@@ -38,14 +39,13 @@ class Document extends AbstractUpdateAction
      *
      * @param int|string   $id    OPTIONAL $id Id is create if empty
      * @param array|string $data  OPTIONAL Data array
-     * @param Type|string  $type  OPTIONAL Type name
      * @param Index|string $index OPTIONAL Index name
      */
-    public function __construct($id = '', $data = [], $type = '', $index = '')
+    public function __construct($id = '', $data = [], $index = '')
     {
         $this->setId($id);
         $this->setData($data);
-        $this->setType($type);
+        $this->setType(self::DEFAULT_TYPE);
         $this->setIndex($index);
     }
 

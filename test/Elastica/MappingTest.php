@@ -1,12 +1,12 @@
 <?php
 
-namespace Elastica\Test\Type;
+namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class MappingTest extends BaseTest
 {
@@ -19,18 +19,15 @@ class MappingTest extends BaseTest
         $index = $client->getIndex('test');
 
         $index->create([], true);
-        $type = $index->getType('_doc');
 
-        $mapping = new Mapping($type,
-            [
-                'firstname' => ['type' => 'text', 'store' => true],
-                // default is store => no expected
-                'lastname' => ['type' => 'text'],
-            ]
-        );
+        $mapping = new Mapping([
+            'firstname' => ['type' => 'text', 'store' => true],
+            // default is store => no expected
+            'lastname' => ['type' => 'text'],
+        ]);
         $mapping->disableSource();
 
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
 
         $firstname = 'Nicolas';
         $doc = new Document(1,
@@ -40,14 +37,14 @@ class MappingTest extends BaseTest
             ]
         );
 
-        $type->addDocument($doc);
+        $index->addDocuments([$doc]);
 
         $index->refresh();
         $queryString = new QueryString('ruflin');
         $query = Query::create($queryString);
         $query->setStoredFields(['*']);
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $result = $resultSet->current();
         $fields = $result->getFields();
 
@@ -56,7 +53,7 @@ class MappingTest extends BaseTest
         $this->assertCount(1, $fields);
 
         $index->flush();
-        $document = $type->getDocument(1);
+        $document = $index->getDocument(1);
 
         $this->assertEmpty($document->getData());
 
@@ -72,25 +69,18 @@ class MappingTest extends BaseTest
         $index = $client->getIndex('test');
 
         $index->create([], true);
-        $type = $index->getType('_doc');
 
-        $mapping = new Mapping($type,
-            [
-                'test' => [
-                    'type' => 'object', 'properties' => [
-                        'user' => [
-                            'properties' => [
-                                'firstname' => ['type' => 'text', 'store' => true],
-                                'lastname' => ['type' => 'text', 'store' => true],
-                                'age' => ['type' => 'integer', 'store' => true],
-                            ],
-                        ],
-                    ],
+        $mapping = new Mapping([
+            'user' => [
+                'properties' => [
+                    'firstname' => ['type' => 'text', 'store' => true],
+                    'lastname' => ['type' => 'text', 'store' => true],
+                    'age' => ['type' => 'integer', 'store' => true],
                 ],
-            ]
-        );
+            ],
+        ]);
 
-        $response = $type->setMapping($mapping);
+        $response = $index->setMapping($mapping);
         $this->assertFalse($response->hasError());
 
         $doc = new Document(1, [
@@ -101,10 +91,10 @@ class MappingTest extends BaseTest
             ],
         ]);
 
-        $type->addDocument($doc);
+        $index->addDocuments([$doc]);
 
         $index->refresh();
-        $resultSet = $type->search('ruflin');
+        $resultSet = $index->search('ruflin');
         $this->assertEquals($resultSet->count(), 1);
 
         $index->delete();
@@ -118,12 +108,8 @@ class MappingTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('testjoinparentid');
         $index->create([], true);
-        $type = $index->getType('_doc');
 
-        $mapping = new Mapping();
-        $mapping->setType($type);
-
-        $mapping = new Mapping($type, [
+        $mapping = new Mapping([
             'firstname' => ['type' => 'text', 'store' => true],
             'lastname' => ['type' => 'text'],
             'my_join_field' => [
@@ -135,18 +121,16 @@ class MappingTest extends BaseTest
         ]);
 
         $expected = [
-            '_doc' => [
-                'properties' => [
-                    'firstname' => ['type' => 'text', 'store' => true],
-                    'lastname' => ['type' => 'text'],
-                    'my_join_field' => [
-                        'type' => 'join',
-                        'relations' => [
-                            'question' => 'answer',
-                        ],
-                    ],
-                ],
-            ],
+            'properties' => [
+                  'firstname' => ['type' => 'text', 'store' => true],
+                  'lastname' => ['type' => 'text'],
+                  'my_join_field' => [
+                      'type' => 'join',
+                      'relations' => [
+                          'question' => 'answer',
+                      ],
+                  ],
+              ],
         ];
 
         $this->assertEquals($expected, $mapping->toArray());
@@ -157,14 +141,14 @@ class MappingTest extends BaseTest
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], '_doc');
+        ]);
 
         $doc2 = new Document(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], '_doc');
+        ]);
 
         $index->addDocuments([$doc1, $doc2]);
 
@@ -174,7 +158,7 @@ class MappingTest extends BaseTest
                 'name' => 'answer',
                 'parent' => 1,
             ],
-        ], '_doc');
+        ]);
 
         $doc4 = new Document(4, [
             'text' => 'this is an answer, the 2nd',
@@ -182,7 +166,7 @@ class MappingTest extends BaseTest
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], '_doc');
+        ]);
 
         $index->addDocuments([$doc3, $doc4]);
         $index->refresh();
@@ -201,21 +185,18 @@ class MappingTest extends BaseTest
     public function testMappingExample()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
-        $mapping = new Mapping($type,
-            [
-                'note' => [
-                    'properties' => [
-                        'titulo' => ['type' => 'text', 'copy_to' => 'testall', 'boost' => 1.0],
-                        'contenido' => ['type' => 'text', 'copy_to' => 'testall', 'boost' => 1.0],
-                        'testall' => ['type' => 'text',  'boost' => 1.0],
-                    ],
+        $mapping = new Mapping([
+            'note' => [
+                'properties' => [
+                    'titulo' => ['type' => 'text', 'copy_to' => 'testall', 'boost' => 1.0],
+                    'contenido' => ['type' => 'text', 'copy_to' => 'testall', 'boost' => 1.0],
+                    'testall' => ['type' => 'text',  'boost' => 1.0],
                 ],
-            ]
-        );
+            ],
+        ]);
 
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
 
         $doc = new Document(1, [
                 'note' => [
@@ -231,7 +212,7 @@ class MappingTest extends BaseTest
             ]
         );
 
-        $type->addDocument($doc);
+        $index->addDocuments([$doc]);
 
         $index->delete();
     }
@@ -247,9 +228,8 @@ class MappingTest extends BaseTest
     public function testDynamicTemplate()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
-        $mapping = new Mapping($type);
+        $mapping = new Mapping();
         $mapping->setParam('dynamic_templates', [
             ['template_1' => [
                 'match' => 'multi*',
@@ -262,17 +242,17 @@ class MappingTest extends BaseTest
             ]],
         ]);
 
-        $mapping->send(['include_type_name' => true]);
+        $index->setMapping($mapping);
 
         // when running the tests, the mapping sometimes isn't available yet. Force merge index to enforce reload mapping.
         $index->forcemerge();
 
         // create a document which should create a mapping for the field: multiname.
-        $testDoc = new Document('person1', ['multiname' => 'Jasper van Wanrooy'], $type);
+        $testDoc = new Document('person1', ['multiname' => 'Jasper van Wanrooy']);
         $index->addDocuments([$testDoc]);
         $index->refresh();
 
-        $newMapping = $type->getMapping();
+        $newMapping = $index->getMapping();
         $this->assertArraySubset(
             [
                 '_doc' => [
@@ -302,16 +282,15 @@ class MappingTest extends BaseTest
     public function testSetMeta()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-        $mapping = new Mapping($type, [
+        $mapping = new Mapping([
             'firstname' => ['type' => 'text', 'store' => true],
             'lastname' => ['type' => 'text'],
         ]);
         $mapping->setMeta(['class' => 'test']);
 
-        $type->setMapping($mapping, ['include_type_name' => true]);
+        $index->setMapping($mapping);
 
-        $mappingData = $type->getMapping();
+        $mappingData = $index->getMapping();
         $this->assertEquals('test', $mappingData['_doc']['_meta']['class']);
 
         $index->delete();
@@ -322,27 +301,21 @@ class MappingTest extends BaseTest
      */
     public function testGetters()
     {
-        $index = $this->_createIndex();
-        $type = $index->getType('_doc');
         $properties = [
             'firstname' => ['type' => 'text', 'store' => true],
             'lastname' => ['type' => 'text'],
         ];
-        $mapping = new Mapping($type, $properties);
+        $mapping = new Mapping($properties);
         $all = [
-           'enabled' => true,
+            'enabled' => true,
            'store' => true,
         ];
         $mapping->setParam('_all', $all);
 
-        $get_all = $mapping->getParam('_all');
+        $getAll = $mapping->getParam('_all');
 
-        $this->assertEquals($get_all, $all);
-
+        $this->assertEquals($getAll, $all);
         $this->assertNull($mapping->getParam('_boost', $all));
-
         $this->assertEquals($properties, $mapping->getProperties());
-
-        $index->delete();
     }
 }
