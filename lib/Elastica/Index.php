@@ -593,11 +593,9 @@ class Index implements SearchableInterface
     }
 
     /**
-     * Analyzes a string.
+     * Run the analysis on the index.
      *
-     * Detailed arguments can be found here in the link
-     *
-     * @param array $body String to be analyzed
+     * @param array $body request body for the `_analyze` API, see API documentation for the requried properties
      * @param array $args OPTIONAL Additional arguments
      *
      * @return array Server response
