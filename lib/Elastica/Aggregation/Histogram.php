@@ -9,9 +9,9 @@ namespace Elastica\Aggregation;
 class Histogram extends AbstractSimpleAggregation
 {
     /**
-     * @param string $name     the name of this aggregation
-     * @param string $field    the name of the field on which to perform the aggregation
-     * @param int    $interval the interval by which documents will be bucketed
+     * @param string     $name     the name of this aggregation
+     * @param string     $field    the name of the field on which to perform the aggregation
+     * @param int|string $interval the interval by which documents will be bucketed
      */
     public function __construct($name, $field, $interval)
     {
@@ -23,7 +23,7 @@ class Histogram extends AbstractSimpleAggregation
     /**
      * Set the interval by which documents will be bucketed.
      *
-     * @param int $interval
+     * @param int|string $interval
      *
      * @return $this
      */
