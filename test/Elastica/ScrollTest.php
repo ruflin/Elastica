@@ -95,6 +95,8 @@ class ScrollTest extends Base
 
         $this->assertEquals(0, $scroll->current()->count());
         $this->assertFalse($scroll->valid());
+
+        $this->_assertOpenSearchContexts($search->getClient(), 0);
     }
 
     /**
