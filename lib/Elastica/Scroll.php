@@ -85,6 +85,7 @@ class Scroll implements \Iterator
         } else {
             // If there are no pages left, we do not need to query ES.
             $this->clear();
+            $this->_currentResultSet = null;
         }
     }
 
@@ -147,7 +148,6 @@ class Scroll implements \Iterator
 
             // Reset scroll ID so valid() returns false.
             $this->_nextScrollId = null;
-            $this->_currentResultSet = null;
         }
     }
 
@@ -164,7 +164,13 @@ class Scroll implements \Iterator
 
         $this->_currentResultSet = $resultSet;
         ++$this->currentPage;
-        $this->_nextScrollId = $resultSet->getResponse()->isOk() && $resultSet->count() > 0 ? $resultSet->getResponse()->getScrollId() : null;
+        $this->_nextScrollId = null;
+        if ($resultSet->getResponse()->isOk()) {
+            $this->_nextScrollId = $resultSet->getResponse()->getScrollId();
+            if (0 === $resultSet->count()) {
+                $this->clear();
+            }
+        }
     }
 
     /**

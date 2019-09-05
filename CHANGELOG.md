@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file based on the
 ### Improvements
 * Added `native_function_invocation` CS rule [#1606](https://github.com/ruflin/Elastica/pull/1606)
 * Elasticsearch test version changed from 6.5.2 to 6.6.1 [#1620](https://github.com/ruflin/Elastica/pull/1620)
+* Clear scroll context also when empty page was received [#1660](https://github.com/ruflin/Elastica/pull/1660)
 
 ### Deprecated
 
