@@ -59,12 +59,12 @@ class Client
      * Creates a new Elastica client.
      *
      * @param array|string    $config   OPTIONAL Additional config or DSN of options
-     * @param callback        $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
+     * @param callback|null   $callback OPTIONAL Callback function which can be used to be notified about errors (for example connection down)
      * @param LoggerInterface $logger
      *
      * @throws \Elastica\Exception\InvalidException
      */
-    public function __construct($config = [], $callback = null, LoggerInterface $logger = null)
+    public function __construct($config = [], callable $callback = null, LoggerInterface $logger = null)
     {
         if (\is_string($config)) {
             $configuration = ClientConfiguration::fromDsn($config);
