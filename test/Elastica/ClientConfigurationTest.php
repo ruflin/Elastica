@@ -24,7 +24,7 @@ class ClientConfigurationTest extends TestCase
 
         $expected = [
             'host' => '192.168.1.1',
-            'port' => '9201',
+            'port' => 9201,
             'path' => null,
             'url' => null,
             'proxy' => null,
@@ -33,7 +33,6 @@ class ClientConfigurationTest extends TestCase
             'timeout' => null,
             'connections' => [],
             'roundRobin' => false,
-            'log' => false,
             'retryOnConflict' => 0,
             'bigintConversion' => false,
             'username' => null,
@@ -45,7 +44,7 @@ class ClientConfigurationTest extends TestCase
 
     public function testFromDsnWithParameters()
     {
-        $configuration = ClientConfiguration::fromDsn('https://user:p4ss@foo.com:9201/my-path?proxy=https://proxy.com&persistent=false&timeout=45&roundRobin=true&log=true&retryOnConflict=2&bigintConversion=true&extra=abc');
+        $configuration = ClientConfiguration::fromDsn('https://user:p4ss@foo.com:9201/my-path?proxy=https://proxy.com&persistent=false&timeout=45&roundRobin=true&retryOnConflict=2&bigintConversion=true&extra=abc');
         $expected = [
             'host' => 'foo.com',
             'port' => '9201',
@@ -57,7 +56,6 @@ class ClientConfigurationTest extends TestCase
             'timeout' => 45,
             'connections' => [],
             'roundRobin' => true,
-            'log' => true,
             'retryOnConflict' => 2,
             'bigintConversion' => true,
             'username' => 'user',
@@ -83,7 +81,6 @@ class ClientConfigurationTest extends TestCase
             'timeout' => null,
             'connections' => [], // host, port, path, timeout, transport, compression, persistent, timeout, username, password, config -> (curl, headers, url)
             'roundRobin' => false,
-            'log' => false,
             'retryOnConflict' => 0,
             'bigintConversion' => false,
             'username' => null,
@@ -111,7 +108,6 @@ class ClientConfigurationTest extends TestCase
             'timeout' => null,
             'connections' => [], // host, port, path, timeout, transport, compression, persistent, timeout, username, password, config -> (curl, headers, url)
             'roundRobin' => false,
-            'log' => false,
             'retryOnConflict' => 0,
             'bigintConversion' => false,
             'username' => 'Jdoe',
@@ -145,7 +141,6 @@ class ClientConfigurationTest extends TestCase
             'timeout' => null,
             'connections' => [],
             'roundRobin' => false,
-            'log' => false,
             'retryOnConflict' => 0,
             'bigintConversion' => false,
             'username' => null,

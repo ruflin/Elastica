@@ -14,7 +14,6 @@ class ClientConfiguration
     /**
      * Config with defaults.
      *
-     * log: Set to true, to enable logging, set a string to log to a specific file
      * retryOnConflict: Use in \Elastica\Client::updateDocument
      * bigintConversion: Set to true to enable the JSON bigint to string conversion option (see issue #717)
      *
@@ -31,7 +30,6 @@ class ClientConfiguration
         'timeout' => null,
         'connections' => [], // host, port, path, timeout, transport, compression, persistent, timeout, username, password, config -> (curl, headers, url)
         'roundRobin' => false,
-        'log' => false,
         'retryOnConflict' => 0,
         'bigintConversion' => false,
         'username' => null,
