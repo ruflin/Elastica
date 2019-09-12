@@ -41,7 +41,7 @@ class ClientTest extends BaseTest
 
         $expected = [
             'host' => 'foo.com',
-            'port' => '9200',
+            'port' => 9200,
             'path' => null,
             'url' => null,
             'proxy' => null,
@@ -50,7 +50,6 @@ class ClientTest extends BaseTest
             'timeout' => null,
             'connections' => [],
             'roundRobin' => false,
-            'log' => false,
             'retryOnConflict' => 2,
             'bigintConversion' => false,
             'username' => 'user',

@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file based on the
 * Elastica\Reindex->run() does not refresh the new Index after completion anymore. Use `$reindex->setParam(Reindex::REFRESH, 'wait_for')` instead.
 * `Elastica\Search->search()` and `Elastica\Search->count()` use request method `POST` by default. Same for `Elastica\Index`, `Elastica\Type\AbstractType`, `Elastica\Type`.
 * Elastica\Client `$_config` field is now a `ClientConfiguration` instead of an array
+* Removed `\Elastica\Client::_log`, `\Elastica\Log` and the `log` configuration option. Use the `Psr\Log\LoggerInterface $logger` client argument to customize logging.
 
 ### Bugfixes
 * Always set the Guzzle `base_uri` to support connecting to multiple ES hosts. [#1618](https://github.com/ruflin/Elastica/pull/1618)

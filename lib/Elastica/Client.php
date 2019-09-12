@@ -76,10 +76,6 @@ class Client
 
         $this->_config = $configuration;
         $this->_callback = $callback;
-
-        if (!$logger && $configuration->get('log')) {
-            $logger = new Log($configuration->get('log'));
-        }
         $this->_logger = $logger ?: new NullLogger();
 
         $this->_initConnections();
@@ -635,7 +631,11 @@ class Client
             $response = $this->_lastResponse = $request->send();
         } catch (ConnectionException $e) {
             $this->_connectionPool->onFail($connection, $e, $this);
-            $this->_log($e);
+            $this->_logger->error('Elastica Request Failure', [
+                'exception' => $e,
+                'request' => $e->getRequest()->toArray(),
+                'retry' => $this->hasConnection(),
+            ]);
 
             // In case there is no valid connection left, throw exception which caused the disabling of the connection.
             if (!$this->hasConnection()) {
@@ -645,7 +645,11 @@ class Client
             return $this->request($path, $method, $data, $query);
         }
 
-        $this->_log($request);
+        $this->_logger->debug('Elastica Request', [
+            'request' => $request,
+            'response' => $this->_lastResponse ? $this->_lastResponse->getData() : null,
+            'responseStatus' => $this->_lastResponse ? $this->_lastResponse->getStatus() : null,
+        ]);
 
         return $response;
     }
@@ -665,40 +669,6 @@ class Client
             null === $endpoint->getBody() ? [] : $endpoint->getBody(),
             $endpoint->getParams()
         );
-    }
-
-    /**
-     * logging.
-     *
-     * @deprecated Overwriting Client->_log is deprecated. Handle logging functionality by using a custom LoggerInterface.
-     *
-     * @param mixed $context
-     */
-    protected function _log($context)
-    {
-        if ($context instanceof ConnectionException) {
-            $this->_logger->error('Elastica Request Failure', [
-                'exception' => $context,
-                'request' => $context->getRequest()->toArray(),
-                'retry' => $this->hasConnection(),
-            ]);
-
-            return;
-        }
-
-        if ($context instanceof Request) {
-            $this->_logger->debug('Elastica Request', [
-                'request' => $context->toArray(),
-                'response' => $this->_lastResponse ? $this->_lastResponse->getData() : null,
-                'responseStatus' => $this->_lastResponse ? $this->_lastResponse->getStatus() : null,
-            ]);
-
-            return;
-        }
-
-        $this->_logger->debug('Elastica Request', [
-            'message' => $context,
-        ]);
     }
 
     /**
