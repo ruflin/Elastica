@@ -45,7 +45,7 @@ class ClientConfiguration
      */
     public static function fromArray(array $config): self
     {
-        $clientConfiguration = new self();
+        $clientConfiguration = new static();
         foreach ($config as $key => $value) {
             $clientConfiguration->set($key, $value);
         }
@@ -66,7 +66,7 @@ class ClientConfiguration
             throw new InvalidException(\sprintf("DSN '%s' is invalid.", $dsn));
         }
 
-        $clientConfiguration = new self();
+        $clientConfiguration = new static();
 
         if (isset($parsedDsn['scheme'])) {
             $clientConfiguration->set('transport', $parsedDsn['scheme']);

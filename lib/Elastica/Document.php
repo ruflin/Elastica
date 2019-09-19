@@ -331,7 +331,7 @@ class Document extends AbstractUpdateAction
         }
 
         if (\is_array($data)) {
-            return new self('', $data);
+            return new static('', $data);
         }
 
         throw new InvalidException('Failed to create document. Invalid data passed.');
