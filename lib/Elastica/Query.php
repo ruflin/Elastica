@@ -64,21 +64,16 @@ class Query extends Param
             case $query instanceof self:
                 return $query;
             case $query instanceof AbstractQuery:
+            case \is_array($query):
+            case $query instanceof Suggest:
+            case $query instanceof Collapse:
                 return new static($query);
             case empty($query):
                 return new static(new MatchAll());
-            case \is_array($query):
-                return new static($query);
             case \is_string($query):
                 return new static(new QueryString($query));
             case $query instanceof AbstractSuggest:
                 return new static(new Suggest($query));
-
-            case $query instanceof Suggest:
-                return new static($query);
-
-            case $query instanceof Collapse:
-                return new static($query);
         }
 
         throw new InvalidException('Unexpected argument to create a query for.');
