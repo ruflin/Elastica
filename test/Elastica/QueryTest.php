@@ -543,4 +543,16 @@ class QueryTest extends BaseTest
         $this->assertArrayHasKey('collapse', $actual);
         $this->assertEquals($expected, $actual['collapse']);
     }
+
+    /**
+     * @group unit
+     */
+    public function testSetTrackTotalHits()
+    {
+        $query = new Query();
+        $param = false;
+        $query->setTrackTotalHits($param);
+
+        $this->assertEquals($param, $query->getParam('track_total_hits'));
+    }
 }
