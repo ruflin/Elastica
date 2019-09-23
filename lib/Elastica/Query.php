@@ -441,4 +441,18 @@ class Query extends Param
     {
         return $this->setParam('collapse', $collapse);
     }
+
+    /**
+     * Adds a track_total_hits argument.
+     *
+     * @param bool|int $trackTotalHits OPTIONAL Track total hits parameter (default = true)
+     *
+     * @return $this
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html#request-body-search-track-total-hits
+     */
+    public function setTrackTotalHits($trackTotalHits = true)
+    {
+        return $this->setParam('track_total_hits', $trackTotalHits);
+    }
 }

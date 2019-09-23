@@ -34,6 +34,7 @@ All notable changes to this project will be documented in this file based on the
 * Support string DSN in `\Elastica\Client` constructor for config argument [#1640](https://github.com/ruflin/Elastica/issues/1640)
 * Move Client configuration in a dedicated class
 * Added `callable` type hinting to `$callback` in `Client` constructor. [#1659](https://github.com/ruflin/Elastica/pull/1659)
+* Added `setTrackTotalHits` method to `Elastica\Query`[#1663](https://github.com/ruflin/Elastica/issues/1663)
 
 ### Improvements
 * Added `native_function_invocation` CS rule [#1606](https://github.com/ruflin/Elastica/pull/1606)
