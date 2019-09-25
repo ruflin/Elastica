@@ -547,12 +547,53 @@ class QueryTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetTrackTotalHits()
+    public function testSetTrackTotalHitsIsInParams()
     {
         $query = new Query();
         $param = false;
         $query->setTrackTotalHits($param);
 
         $this->assertEquals($param, $query->getParam('track_total_hits'));
+    }
+
+    /**
+     * @group functional
+     */
+    public function testSetTrackTotalHits()
+    {
+        $index = $this->_createIndex();
+        $type = $index->getType('_doc');
+
+        $mapping = new Mapping($type,
+            [
+                'firstname' => ['type' => 'text', 'fielddata' => true],
+            ]
+        );
+        $type->setMapping($mapping);
+
+        $documents = [];
+        for ($i = 0; $i < 50; ++$i) {
+            $documents[] = new Document($i, ['firstname' => 'antoine '.$i]);
+        }
+
+        $type->addDocuments($documents);
+
+        $queryTerm = new Term();
+        $queryTerm->setTerm('firstname', 'antoine');
+
+        $index->refresh();
+
+        $query = Query::create($queryTerm);
+
+        $resultSet = $type->search($query);
+        $this->assertEquals(50, $resultSet->getTotalHits());
+
+        $query->setTrackTotalHits(false);
+        $resultSet = $type->search($query);
+        $this->assertEquals(0, $resultSet->getTotalHits());
+
+        $query->setTrackTotalHits(25);
+        $resultSet = $type->search($query);
+        $this->assertEquals(25, $resultSet->getTotalHits());
     }
 }
