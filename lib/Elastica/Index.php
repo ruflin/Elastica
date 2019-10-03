@@ -195,8 +195,8 @@ class Index implements SearchableInterface
      * @param int|string $id      Document id
      * @param array      $options options for the get request
      *
-     * @throws \Elastica\Exception\NotFoundException
      * @throws \Elastica\Exception\ResponseException
+     * @throws NotFoundException
      *
      * @return Document
      */
@@ -225,6 +225,39 @@ class Index implements SearchableInterface
         $document->setVersion($result['_version']);
 
         return $document;
+    }
+
+    /**
+     * Deletes a document by its unique identifier.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
+     *
+     * @param int|string $id      Document id
+     * @param array      $options
+     *
+     * @throws NotFoundException
+     *
+     * @return Response Response object
+     */
+    public function deleteById(string $id, array $options = []): Response
+    {
+        if (!\trim($id)) {
+            throw new NotFoundException('Doc id "'.$id.'" not found and can not be deleted');
+        }
+
+        $endpoint = new \Elasticsearch\Endpoints\Delete();
+        $endpoint->setID(\trim($id));
+        $endpoint->setParams($options);
+
+        $response = $this->requestEndpoint($endpoint);
+
+        $responseData = $response->getData();
+
+        if (isset($responseData['result']) && 'not_found' == $responseData['result']) {
+            throw new NotFoundException('Doc id "'.$id.'" not found and can not be deleted');
+        }
+
+        return $response;
     }
 
     /**
