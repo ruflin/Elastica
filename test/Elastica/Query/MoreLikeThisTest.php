@@ -279,7 +279,7 @@ class MoreLikeThisTest extends BaseTest
     public function testToArrayForId()
     {
         $query = new MoreLikeThis();
-        $query->setLike(new Document(1, [], '_doc', 'index'));
+        $query->setLike(new Document(1, [], 'index'));
 
         $data = $query->toArray();
 
@@ -302,7 +302,7 @@ class MoreLikeThisTest extends BaseTest
     public function testToArrayForSource()
     {
         $query = new MoreLikeThis();
-        $query->setLike(new Document('', ['Foo' => 'Bar'], '_doc', 'index'));
+        $query->setLike(new Document('', ['Foo' => 'Bar'], 'index'));
 
         $data = $query->toArray();
 
