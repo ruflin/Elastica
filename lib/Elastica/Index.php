@@ -680,4 +680,12 @@ class Index implements SearchableInterface
 
         return $data['tokens'];
     }
+
+    /**
+     * @deprecated ES-7 deprecated the usage of Types
+     */
+    public function getType(string $string)
+    {
+        return new Type($this, Document::DEFAULT_TYPE);
+    }
 }
