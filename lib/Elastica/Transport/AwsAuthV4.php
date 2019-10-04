@@ -35,7 +35,7 @@ class AwsAuthV4 extends Guzzle
         return parent::_getBaseUrl($connection);
     }
 
-    private function getSigningMiddleware()
+    private function getSigningMiddleware(): callable
     {
         $region = $this->getConnection()->hasParam('aws_region')
             ? $this->getConnection()->getParam('aws_region')
@@ -51,9 +51,14 @@ class AwsAuthV4 extends Guzzle
         });
     }
 
-    private function getCredentialProvider()
+    private function getCredentialProvider(): callable
     {
         $connection = $this->getConnection();
+
+        if ($connection->hasParam('aws_credential_provider')) {
+            return $connection->getParam('aws_credential_provider');
+        }
+
         if ($connection->hasParam('aws_secret_access_key')) {
             return CredentialProvider::fromCredentials(new Credentials(
                 $connection->getParam('aws_access_key_id'),
