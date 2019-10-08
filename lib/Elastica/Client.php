@@ -285,9 +285,9 @@ class Client
     /**
      * Uses _bulk to send documents to the server.
      *
-     * Array of \Elastica\Document as input. Index and type has to be
-     * set inside the document, because for bulk settings documents,
-     * documents can belong to any type and index
+     * Array of \Elastica\Document as input. Index has to be set inside the
+     * document, because for bulk settings documents, documents can belong to
+     * any index
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
@@ -317,9 +317,9 @@ class Client
     /**
      * Uses _bulk to send documents to the server.
      *
-     * Array of \Elastica\Document as input. Index and type has to be
-     * set inside the document, because for bulk settings documents,
-     * documents can belong to any type and index
+     * Array of \Elastica\Document as input. Index has to be set inside the
+     * document, because for bulk settings documents, documents can belong to
+     * any index
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      *
@@ -353,19 +353,17 @@ class Client
      * @param int|string                                               $id      document id
      * @param array|\Elastica\Script\AbstractScript|\Elastica\Document $data    raw data for request body
      * @param string                                                   $index   index to update
-     * @param string                                                   $type    type of index to update
      * @param array                                                    $options array of query params to use for query. For possible options check es api
      *
      * @return \Elastica\Response
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
      */
-    public function updateDocument($id, $data, $index, $type, array $options = [])
+    public function updateDocument($id, $data, $index, array $options = [])
     {
         $endpoint = new Update();
         $endpoint->setID($id);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
 
         if ($data instanceof AbstractScript) {
             $requestData = $data->toArray();
@@ -541,14 +539,13 @@ class Client
      *
      * @param array                  $ids     Document ids
      * @param string|\Elastica\Index $index   Index name
-     * @param string|\Elastica\Type  $type    Type of documents
      * @param string|bool            $routing Optional routing key for all ids
      *
      * @throws \Elastica\Exception\InvalidException
      *
      * @return \Elastica\Bulk\ResponseSet Response  object
      */
-    public function deleteIds(array $ids, $index, $type, $routing = false)
+    public function deleteIds(array $ids, $index, $routing = false)
     {
         if (empty($ids)) {
             throw new InvalidException('Array has to consist of at least one id');
@@ -556,7 +553,6 @@ class Client
 
         $bulk = new Bulk($this);
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         foreach ($ids as $id) {
             $action = new Action(Action::OP_TYPE_DELETE);
@@ -579,9 +575,13 @@ class Client
      * of the bulk operation. An example param array would be:
      *
      * array(
-     *         array('index' => array('_index' => 'test', '_type' => 'user', '_id' => '1')),
-     *         array('user' => array('name' => 'hans')),
-     *         array('delete' => array('_index' => 'test', '_type' => 'user', '_id' => '2'))
+     *         array('index' => array('_index' => 'test', '_id' => '1')),
+     *         array('field1' => 'value1'),
+     *         array('delete' => array('_index' => 'test', '_id' => '2')),
+     *         array('create' => array('_index' => 'test', '_id' => '3')),
+     *         array('field1' => 'value3'),
+     *         array('update' => array('_id' => '1', '_index' => 'test')),
+     *         array('doc' => array('field2' => 'value2')),
      * );
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html

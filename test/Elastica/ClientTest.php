@@ -16,7 +16,6 @@ use Elastica\Request;
 use Elastica\Response;
 use Elastica\Script\Script;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 use Elasticsearch\Endpoints\Indices\Stats;
 use Elasticsearch\Endpoints\Search;
 
@@ -113,13 +112,11 @@ class ClientTest extends BaseTest
         $index = $client->getIndex('elastica_test1');
         $index->create([], true);
 
-        $type = $index->getType('_doc');
-
         // Adds 1 document to the index
         $doc1 = new Document(1,
             ['username' => 'hans', 'test' => ['2', '3', '5']]
         );
-        $type->addDocument($doc1);
+        $index->addDocument($doc1);
 
         // Adds a list of documents with _bulk upload to the index
         $docs = [];
@@ -129,12 +126,12 @@ class ClientTest extends BaseTest
         $docs[] = new Document(3,
             ['username' => 'rolf', 'test' => ['2', '3', '7']]
         );
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
 
         // Refresh index
         $index->refresh();
 
-        $resultSet = $type->search('rolf');
+        $resultSet = $index->search('rolf');
     }
 
     /**
@@ -150,13 +147,11 @@ class ClientTest extends BaseTest
         $index = $client->getIndex('elastica_test1');
         $index->create([], true);
 
-        $type = $index->getType('_doc');
-
         // Adds 1 document to the index
         $doc1 = new Document(1,
             ['username' => 'hans', 'test' => ['2', '3', '5']]
         );
-        $type->addDocument($doc1);
+        $index->addDocument($doc1);
 
         // Adds a list of documents with _bulk upload to the index
         $docs = [];
@@ -166,12 +161,12 @@ class ClientTest extends BaseTest
         $docs[] = new Document(3,
             ['username' => 'rolf', 'test' => ['2', '3', '7']]
         );
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
 
         // Refresh index
         $index->refresh();
 
-        $resultSet = $type->search('rolf');
+        $resultSet = $index->search('rolf');
     }
 
     /**
@@ -258,61 +253,28 @@ class ClientTest extends BaseTest
     {
         $index = $this->_getClient()->getIndex('cryptocurrencies');
 
-        $anonCoin = new Document(1, ['name' => 'anoncoin'], '_doc');
-        $ixCoin = new Document(2, ['name' => 'ixcoin'], '_doc');
+        $anonCoin = new Document(1, ['name' => 'anoncoin']);
+        $ixCoin = new Document(2, ['name' => 'ixcoin']);
 
         $index->addDocuments([$anonCoin, $ixCoin]);
 
-        $this->assertEquals('anoncoin', $index->getType('_doc')->getDocument(1)->get('name'));
-        $this->assertEquals('ixcoin', $index->getType('_doc')->getDocument(2)->get('name'));
+        $this->assertEquals('anoncoin', $index->getDocument(1)->get('name'));
+        $this->assertEquals('ixcoin', $index->getDocument(2)->get('name'));
 
         $index->updateDocuments([
             new Document(1, ['name' => 'AnonCoin'], '_doc'),
             new Document(2, ['name' => 'iXcoin'], '_doc'),
         ]);
 
-        $this->assertEquals('AnonCoin', $index->getType('_doc')->getDocument(1)->get('name'));
-        $this->assertEquals('iXcoin', $index->getType('_doc')->getDocument(2)->get('name'));
+        $this->assertEquals('AnonCoin', $index->getDocument(1)->get('name'));
+        $this->assertEquals('iXcoin', $index->getDocument(2)->get('name'));
 
         $ixCoin->setIndex(null);  // Make sure the index gets set properly if missing
         $index->deleteDocuments([$anonCoin, $ixCoin]);
 
         $this->expectException(NotFoundException::class);
-        $index->getType('_doc')->getDocument(1);
-        $index->getType('_doc')->getDocument(2);
-    }
-
-    /**
-     * Test bulk operations on Type.
-     *
-     * @group functional
-     */
-    public function testBulkType()
-    {
-        $type = $this->_getClient()->getIndex('cryptocurrencies')->getType('_doc');
-
-        $liteCoin = new Document(1, ['name' => 'litecoin']);
-        $nameCoin = new Document(2, ['name' => 'namecoin']);
-
-        $type->addDocuments([$liteCoin, $nameCoin]);
-
-        $this->assertEquals('litecoin', $type->getDocument(1)->get('name'));
-        $this->assertEquals('namecoin', $type->getDocument(2)->get('name'));
-
-        $type->updateDocuments([
-            new Document(1, ['name' => 'LiteCoin']),
-            new Document(2, ['name' => 'NameCoin']),
-        ]);
-
-        $this->assertEquals('LiteCoin', $type->getDocument(1)->get('name'));
-        $this->assertEquals('NameCoin', $type->getDocument(2)->get('name'));
-
-        $nameCoin->setType(null);  // Make sure the type gets set properly if missing
-        $type->deleteDocuments([$liteCoin, $nameCoin]);
-
-        $this->expectException(NotFoundException::class);
-        $type->getDocument(1);
-        $type->getDocument(2);
+        $index->getDocument(1);
+        $index->getDocument(2);
     }
 
     /**
@@ -321,10 +283,9 @@ class ClientTest extends BaseTest
     public function testUpdateDocuments()
     {
         $indexName = 'test';
-        $typeName = '_doc';
 
         $client = $this->_getClient();
-        $type = $client->getIndex($indexName)->getType($typeName);
+        $index = $client->getIndex($indexName);
 
         $initialValue = 28;
         $modifiedValue = 27;
@@ -332,13 +293,11 @@ class ClientTest extends BaseTest
         $doc1 = new Document(
             1,
             ['name' => 'hans', 'age' => $initialValue],
-            $typeName,
             $indexName
         );
         $doc2 = new Document(
             2,
             ['name' => 'anna', 'age' => $initialValue],
-            $typeName,
             $indexName
         );
         $data = [$doc1, $doc2];
@@ -349,86 +308,13 @@ class ClientTest extends BaseTest
         }
         $client->updateDocuments($data);
 
-        $docData1 = $type->getDocument(1)->getData();
-        $docData2 = $type->getDocument(2)->getData();
+        $index->refresh();
+
+        $docData1 = $index->getDocument(1)->getData();
+        $docData2 = $index->getDocument(2)->getData();
 
         $this->assertEquals($modifiedValue, $docData1['age']);
         $this->assertEquals($modifiedValue, $docData2['age']);
-    }
-
-    /**
-     * Test deleteIds method using string parameters.
-     *
-     * This test ensures that the deleteIds method of
-     * the \Elastica\Client can properly accept and use
-     * an $index parameter and $type parameter that are
-     * strings
-     *
-     * This test is a bit more verbose than just sending the
-     * values to deleteIds and checking for exceptions or
-     * warnings.
-     *
-     * It will add a document, search for it, then delete it
-     * using the parameter types we are interested in, and then
-     * re-search to verify that they have been deleted
-     *
-     * @group functional
-     */
-    public function testDeleteIdsIdxStringTypeString()
-    {
-        $data = ['username' => 'hans'];
-        $userSearch = 'username:hans';
-
-        $index = $this->_createIndex(null, true, 2);
-
-        $type = $index->getType('_doc');
-
-        // Adds 1 document to the index
-        $doc = new Document(null, $data);
-        $doc->setRouting('first_routing');
-        $result = $type->addDocument($doc);
-
-        // Refresh index
-        $index->refresh();
-
-        $resultData = $result->getData();
-        $ids = [$resultData['_id']];
-
-        // Check to make sure the document is in the index
-        $resultSet = $type->search($userSearch);
-        $totalHits = $resultSet->getTotalHits();
-        $this->assertEquals(1, $totalHits);
-
-        // And verify that the variables we are doing to send to
-        // deleteIds are the type we are testing for
-        $idxString = $index->getName();
-        $typeString = $type->getName();
-        $this->assertInternalType('string', $idxString);
-        $this->assertInternalType('string', $typeString);
-
-        // Try to delete doc with a routing value which hashes to
-        // a different shard then the id.
-        $resp = $index->getClient()->deleteIds($ids, $index, $type, 'second_routing');
-
-        // Refresh the index
-        $index->refresh();
-
-        // Research the index to verify that the items are still there
-        $resultSet = $type->search($userSearch);
-        $totalHits = $resultSet->getTotalHits();
-        $this->assertEquals(1, $totalHits);
-
-        // Using the existing $index and $type variables which
-        // are \Elastica\Index and \Elastica\Type objects respectively
-        $resp = $index->getClient()->deleteIds($ids, $index, $type, 'first_routing');
-
-        // Refresh the index to clear out deleted ID information
-        $index->refresh();
-
-        // Research the index to verify that the items have been deleted
-        $resultSet = $type->search($userSearch);
-        $totalHits = $resultSet->getTotalHits();
-        $this->assertEquals(0, $totalHits);
     }
 
     /**
@@ -437,8 +323,7 @@ class ClientTest extends BaseTest
      *
      * This test ensures that the deleteIds method of
      * the \Elastica\Client can properly accept and use
-     * an $index parameter that is a string and a $type
-     * parameter that is of type \Elastica\Type
+     * an $index parameter as string
      *
      * This test is a bit more verbose than just sending the
      * values to deleteIds and checking for exceptions or
@@ -450,7 +335,7 @@ class ClientTest extends BaseTest
      *
      * @group functional
      */
-    public function testDeleteIdsIdxStringTypeObject()
+    public function testDeleteIdsIdxString()
     {
         $data = ['username' => 'hans'];
         $userSearch = 'username:hans';
@@ -459,11 +344,10 @@ class ClientTest extends BaseTest
 
         // Create the index, deleting it first if it already exists
         $index->create([], true);
-        $type = $index->getType('_doc');
 
         // Adds 1 document to the index
         $doc = new Document(null, $data);
-        $result = $type->addDocument($doc);
+        $result = $index->addDocument($doc);
 
         // Refresh index
         $index->refresh();
@@ -472,7 +356,7 @@ class ClientTest extends BaseTest
         $ids = [$resultData['_id']];
 
         // Check to make sure the document is in the index
-        $resultSet = $type->search($userSearch);
+        $resultSet = $index->search($userSearch);
         $totalHits = $resultSet->getTotalHits();
         $this->assertEquals(1, $totalHits);
 
@@ -480,81 +364,15 @@ class ClientTest extends BaseTest
         // deleteIds are the type we are testing for
         $idxString = $index->getName();
         $this->assertInternalType('string', $idxString);
-        $this->assertInstanceOf(Type::class, $type);
 
-        // Using the existing $index and $type variables which
-        // are \Elastica\Index and \Elastica\Type objects respectively
-        $resp = $index->getClient()->deleteIds($ids, $index, $type);
+        // Using the existing $index variable that is a string
+        $resp = $index->getClient()->deleteIds($ids, $idxString);
 
         // Refresh the index to clear out deleted ID information
         $index->refresh();
 
         // Research the index to verify that the items have been deleted
-        $resultSet = $type->search($userSearch);
-        $totalHits = $resultSet->getTotalHits();
-        $this->assertEquals(0, $totalHits);
-    }
-
-    /**
-     * Test deleteIds method using object parameter for $index
-     * and string parameter for $type.
-     *
-     * This test ensures that the deleteIds method of
-     * the \Elastica\Client can properly accept and use
-     * an $index parameter that is  of type Elasitca_Index
-     * and a $type parameter that is a string
-     *
-     * This test is a bit more verbose than just sending the
-     * values to deleteIds and checking for exceptions or
-     * warnings.
-     *
-     * It will add a document, search for it, then delete it
-     * using the parameter types we are interested in, and then
-     * re-search to verify that they have been deleted
-     *
-     * @group functional
-     */
-    public function testDeleteIdsIdxObjectTypeString()
-    {
-        $data = ['username' => 'hans'];
-        $userSearch = 'username:hans';
-
-        $index = $this->_createIndex();
-
-        // Create the index, deleting it first if it already exists
-        $index->create([], true);
-        $type = $index->getType('_doc');
-
-        // Adds 1 document to the index
-        $doc = new Document(null, $data);
-        $result = $type->addDocument($doc);
-
-        // Refresh index
-        $index->refresh();
-
-        $resultData = $result->getData();
-        $ids = [$resultData['_id']];
-
-        // Check to make sure the document is in the index
-        $resultSet = $type->search($userSearch);
-        $totalHits = $resultSet->getTotalHits();
-        $this->assertEquals(1, $totalHits);
-
-        // And verify that the variables we are doing to send to
-        // deleteIds are the type we are testing for
-        $typeString = $type->getName();
-        $this->assertInstanceOf(Index::class, $index);
-        $this->assertInternalType('string', $typeString);
-
-        // Using the existing $index and $type variables which
-        // are \Elastica\Index and \Elastica\Type objects respectively
-        $resp = $index->getClient()->deleteIds($ids, $index, $type);
-
-        // Refresh the index to clear out deleted ID information
-        $index->refresh();
-
-        // Research the index to verify that the items have been deleted
-        $resultSet = $type->search($userSearch);
+        $resultSet = $index->search($userSearch);
         $totalHits = $resultSet->getTotalHits();
         $this->assertEquals(0, $totalHits);
     }
@@ -565,8 +383,7 @@ class ClientTest extends BaseTest
      *
      * This test ensures that the deleteIds method of
      * the \Elastica\Client can properly accept and use
-     * an $index parameter that is an object and a $type
-     * parameter that is of type \Elastica\Type
+     * an $index parameter that is an instance of \Elastica\Index
      *
      * This test is a bit more verbose than just sending the
      * values to deleteIds and checking for exceptions or
@@ -587,11 +404,10 @@ class ClientTest extends BaseTest
 
         // Create the index, deleting it first if it already exists
         $index->create([], true);
-        $type = $index->getType('_doc');
 
         // Adds 1 document to the index
         $doc = new Document(null, $data);
-        $result = $type->addDocument($doc);
+        $result = $index->addDocument($doc);
 
         // Refresh index
         $index->refresh();
@@ -600,24 +416,22 @@ class ClientTest extends BaseTest
         $ids = [$resultData['_id']];
 
         // Check to make sure the document is in the index
-        $resultSet = $type->search($userSearch);
+        $resultSet = $index->search($userSearch);
         $totalHits = $resultSet->getTotalHits();
         $this->assertEquals(1, $totalHits);
 
         // And verify that the variables we are doing to send to
         // deleteIds are the type we are testing for
         $this->assertInstanceOf(Index::class, $index);
-        $this->assertInstanceOf(Type::class, $type);
 
-        // Using the existing $index and $type variables which
-        // are \Elastica\Index and \Elastica\Type objects respectively
-        $resp = $index->getClient()->deleteIds($ids, $index, $type);
+        // Using the existing $index variable which is \Elastica\Index object
+        $resp = $index->getClient()->deleteIds($ids, $index);
 
         // Refresh the index to clear out deleted ID information
         $index->refresh();
 
         // Research the index to verify that the items have been deleted
-        $resultSet = $type->search($userSearch);
+        $resultSet = $index->search($userSearch);
         $totalHits = $resultSet->getTotalHits();
         $this->assertEquals(0, $totalHits);
     }
@@ -734,16 +548,15 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentByDocument()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
-        $type->addDocument($newDocument);
+        $index->addDocument($newDocument);
 
         $updateDocument = new Document(1, ['field2' => 'value2changed', 'field3' => 'value3added']);
-        $client->updateDocument(1, $updateDocument, $index->getName(), $type->getName());
+        $client->updateDocument(1, $updateDocument, $index->getName());
 
-        $document = $type->getDocument(1);
+        $document = $index->getDocument(1);
 
         $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
@@ -761,16 +574,15 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentByScript()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'should be changed']);
-        $type->addDocument($newDocument);
+        $index->addDocument($newDocument);
 
         $script = new Script('ctx._source.field2 += 5; ctx._source.remove("field3"); ctx._source.field4 = "changed"', null, Script::LANG_PAINLESS);
-        $client->updateDocument(1, $script, $index->getName(), $type->getName());
+        $client->updateDocument(1, $script, $index->getName());
 
-        $document = $type->getDocument(1);
+        $document = $index->getDocument(1);
 
         $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
@@ -789,7 +601,6 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentByScriptWithUpsert()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $script = new Script('ctx._source.field2 += params.count; ctx._source.remove("field3"); ctx._source.field4 = "changed"', null, Script::LANG_PAINLESS);
@@ -797,9 +608,9 @@ class ClientTest extends BaseTest
         $script->setUpsert(['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4']);
 
         // should use document fields because document does not exist, script is avoided
-        $client->updateDocument(1, $script, $index->getName(), $type->getName());
+        $client->updateDocument(1, $script, $index->getName());
 
-        $document = $type->getDocument(1);
+        $document = $index->getDocument(1);
 
         $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
@@ -813,9 +624,9 @@ class ClientTest extends BaseTest
         $this->assertEquals('value4', $data['field4']);
 
         // should use script because document exists, document values are ignored
-        $client->updateDocument(1, $script, $index->getName(), $type->getName());
+        $client->updateDocument(1, $script, $index->getName());
 
-        $document = $type->getDocument(1);
+        $document = $index->getDocument(1);
 
         $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
@@ -834,11 +645,10 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentByRawData()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument = new Document(1, ['field1' => 'value1']);
-        $type->addDocument($newDocument);
+        $index->addDocument($newDocument);
 
         $rawData = [
             'doc' => [
@@ -846,10 +656,10 @@ class ClientTest extends BaseTest
             ],
         ];
 
-        $response = $client->updateDocument(1, $rawData, $index->getName(), $type->getName(), ['retry_on_conflict' => 1]);
+        $response = $client->updateDocument(1, $rawData, $index->getName(), ['retry_on_conflict' => 1]);
         $this->assertTrue($response->isOk());
 
-        $document = $type->getDocument(1);
+        $document = $index->getDocument(1);
 
         $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
@@ -865,15 +675,14 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentByDocumentWithUpsert()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument = new Document(1, ['field1' => 'value1updated', 'field2' => 'value2updated']);
         $upsert = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
         $newDocument->setUpsert($upsert);
-        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName());
+        $client->updateDocument(1, $newDocument, $index->getName());
 
-        $document = $type->getDocument(1);
+        $document = $index->getDocument(1);
         $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
@@ -882,9 +691,9 @@ class ClientTest extends BaseTest
         $this->assertEquals('value2', $data['field2']);
 
         // should use update document because document exists, upsert document values are ignored
-        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName());
+        $client->updateDocument(1, $newDocument, $index->getName());
 
-        $document = $type->getDocument(1);
+        $document = $index->getDocument(1);
         $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
@@ -899,12 +708,11 @@ class ClientTest extends BaseTest
     public function testDocAsUpsert()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         //Confirm document one does not exist
         try {
-            $document = $type->getDocument(1);
+            $document = $index->getDocument(1);
             $this->fail('Exception was not thrown. Maybe the document exists?');
         } catch (\Exception $e) {
             //Ignore the exception because we expect the document to not exist.
@@ -912,9 +720,9 @@ class ClientTest extends BaseTest
 
         $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 'value2']);
         $newDocument->setDocAsUpsert(true);
-        $client->updateDocument(1, $newDocument, $index->getName(), $type->getName());
+        $client->updateDocument(1, $newDocument, $index->getName());
 
-        $document = $type->getDocument(1);
+        $document = $index->getDocument(1);
         $this->assertInstanceOf(Document::class, $document);
         $data = $document->getData();
         $this->assertArrayHasKey('field1', $data);
@@ -929,14 +737,13 @@ class ClientTest extends BaseTest
     public function testUpdateWithInvalidType()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         //Try to update using a stdClass object
         $badDocument = new \stdClass();
 
         try {
-            $client->updateDocument(1, $badDocument, $index->getName(), $type->getName());
+            $client->updateDocument(1, $badDocument, $index->getName());
             $this->fail('Tried to update using an object that is not a Document or a Script but no exception was thrown');
         } catch (\Exception $e) {
             //Good. An exception was thrown.
@@ -949,13 +756,12 @@ class ClientTest extends BaseTest
     public function testDeleteDocuments()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $docs = [
-            new Document(1, ['field' => 'value1'], $type, $index),
-            new Document(2, ['field' => 'value2'], $type, $index),
-            new Document(3, ['field' => 'value3'], $type, $index),
+            new Document(1, ['field' => 'value1'], $index),
+            new Document(2, ['field' => 'value2'], $index),
+            new Document(3, ['field' => 'value3'], $index),
         ];
 
         $response = $client->addDocuments($docs);
@@ -968,7 +774,7 @@ class ClientTest extends BaseTest
 
         $index->refresh();
 
-        $this->assertEquals(3, $type->count());
+        $this->assertEquals(3, $index->count());
 
         $deleteDocs = [
             $docs[0],
@@ -985,7 +791,7 @@ class ClientTest extends BaseTest
 
         $index->refresh();
 
-        $this->assertEquals(1, $type->count());
+        $this->assertEquals(1, $index->count());
     }
 
     /**
@@ -994,13 +800,12 @@ class ClientTest extends BaseTest
     public function testDeleteDocumentsWithRequestParameters()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $docs = [
-            new Document(1, ['field' => 'value1'], $type, $index),
-            new Document(2, ['field' => 'value2'], $type, $index),
-            new Document(3, ['field' => 'value3'], $type, $index),
+            new Document(1, ['field' => 'value1'], $index),
+            new Document(2, ['field' => 'value2'], $index),
+            new Document(3, ['field' => 'value3'], $index),
         ];
 
         $response = $client->addDocuments($docs);
@@ -1013,7 +818,7 @@ class ClientTest extends BaseTest
 
         $index->refresh();
 
-        $this->assertEquals(3, $type->count());
+        $this->assertEquals(3, $index->count());
 
         $deleteDocs = [
             $docs[0],
@@ -1028,7 +833,7 @@ class ClientTest extends BaseTest
         $this->assertFalse($response->hasError());
         $this->assertEquals('', $response->getError());
 
-        $this->assertEquals(1, $type->count());
+        $this->assertEquals(1, $index->count());
     }
 
     /**
@@ -1057,12 +862,11 @@ class ClientTest extends BaseTest
     public function testUpdateDocumentPopulateFields()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
         $client = $index->getClient();
 
         $newDocument = new Document(1, ['field1' => 'value1', 'field2' => 10, 'field3' => 'should be removed', 'field4' => 'value4']);
         $newDocument->setAutoPopulate();
-        $type->addDocument($newDocument);
+        $index->addDocument($newDocument);
 
         $script = new Script('ctx._source.field2 += params.count; ctx._source.remove("field3"); ctx._source.field4 = "changed"', null, Script::LANG_PAINLESS);
         $script->setParam('count', 5);
@@ -1071,11 +875,10 @@ class ClientTest extends BaseTest
         $client->updateDocument(
             1,
             $script,
-            $index->getName(),
-            $type->getName()
+            $index->getName()
         );
 
-        $data = $type->getDocument(1)->getData();
+        $data = $index->getDocument(1)->getData();
         $this->assertArrayHasKey('field1', $data);
         $this->assertEquals('value1', $data['field1']);
         $this->assertArrayHasKey('field2', $data);
@@ -1092,11 +895,10 @@ class ClientTest extends BaseTest
         $client->updateDocument(
             1,
             $script,
-            $index->getName(),
-            $type->getName()
+            $index->getName()
         );
 
-        $document = $type->getDocument(1);
+        $document = $index->getDocument(1);
 
         $data = $document->getData();
 
@@ -1127,8 +929,7 @@ class ClientTest extends BaseTest
         $client = $index->getClient();
         $client->setConfigValue('document', ['autoPopulate' => true]);
 
-        $type = $index->getType('_doc');
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
 
         foreach ($docs as $doc) {
             $this->assertTrue($doc->hasId());
@@ -1153,11 +954,10 @@ class ClientTest extends BaseTest
         $client = $index->getClient();
         $client->setConfigValue('document', ['autoPopulate' => true]);
 
-        $type = $index->getType('_doc');
-        $type->addDocuments($docs, ['pipeline' => 'renaming']);
+        $index->addDocuments($docs, ['pipeline' => 'renaming']);
 
         foreach ($docs as $i => $doc) {
-            $foundDoc = $type->getDocument($doc->getId());
+            $foundDoc = $index->getDocument($doc->getId());
             $this->assertInstanceOf(Document::class, $foundDoc);
             $data = $foundDoc->getData();
             $this->assertArrayHasKey('new', $data);
@@ -1203,8 +1003,7 @@ class ClientTest extends BaseTest
 
         $index = $client->getIndex('test');
         $index->create([], true);
-        $type = $index->getType('_doc');
-        $type->addDocument(new Document(1, ['username' => 'ruflin']));
+        $index->addDocument(new Document(1, ['username' => 'ruflin']));
         $index->refresh();
 
         $query = [
@@ -1215,7 +1014,7 @@ class ClientTest extends BaseTest
             ],
         ];
 
-        $path = $index->getName().'/'.$type->getName().'/_search';
+        $path = $index->getName().'/_search';
 
         $response = $client->request($path, Request::GET, $query);
         $responseArray = $response->getData();
@@ -1232,13 +1031,12 @@ class ClientTest extends BaseTest
 
         $index = $client->getIndex('test');
         $index->create([], true);
-        $type = $index->getType('_doc');
-        $type->addDocument(new Document(1, ['username' => 'ruflin']));
+        $index->addDocument(new Document(1, ['username' => 'ruflin']));
         $index->refresh();
 
         $query = '{"query":{"query_string":{"query":"ruflin"}}}';
 
-        $path = $index->getName().'/'.$type->getName().'/_search';
+        $path = $index->getName().'/_search';
 
         $response = $client->request($path, Request::GET, $query);
         $responseArray = $response->getData();
@@ -1403,13 +1201,12 @@ class ClientTest extends BaseTest
         // Also, index should exist (matches $staticIndex)
         $dynamicIndex->refresh();
 
-        $type = $dynamicIndex->getType('_doc');
-        $doc1 = $type->createDocument(1, ['name' => 'one']);
-        $doc2 = $type->createDocument(2, ['name' => 'two']);
+        $doc1 = $dynamicIndex->createDocument(1, ['name' => 'one']);
+        $doc2 = $dynamicIndex->createDocument(2, ['name' => 'two']);
 
         // Index name goes through JSON body, should remain unescaped
         $bulk = new Bulk($client);
-        $bulk->setType($type);
+        $bulk->setIndex($dynamicIndex);
         $bulk->addDocuments([$doc1, $doc2]);
         // Should be sent successfully without exceptions
         $bulk->send();
@@ -1439,24 +1236,22 @@ class ClientTest extends BaseTest
     {
         $index = $this->_createIndex();
         $client = $index->getClient();
-        $type = $index->getType('_doc');
         $doc = new Document(null, ['foo' => 'bar']);
         $doc->setRouting('first_routing');
-        $type->addDocument($doc);
+        $index->addDocument($doc);
 
         $index->refresh();
 
         $endpoint = new Stats();
         $endpoint->setIndex($index->getName());
         $endpoint->setMetric('indexing');
-        $endpoint->setParams(['types' => [$type->getName()]]);
         $response = $client->requestEndpoint($endpoint);
 
-        $this->assertArrayHasKey('types', $response->getData()['indices'][$index->getName()]['total']['indexing']);
+        $this->assertArrayHasKey('index_total', $response->getData()['indices'][$index->getName()]['total']['indexing']);
 
-        $this->assertEquals(
-            ['_doc'],
-            \array_keys($response->getData()['indices'][$index->getName()]['total']['indexing']['types'])
+        $this->assertSame(
+            1,
+            $response->getData()['indices'][$index->getName()]['total']['indexing']['index_total']
         );
     }
 
@@ -1470,8 +1265,7 @@ class ClientTest extends BaseTest
 
         $index = $client->getIndex('test');
         $index->create([], true);
-        $type = $index->getType('_doc');
-        $type->addDocument(new Document(1, ['username' => 'ruflin']));
+        $index->addDocument(new Document(1, ['username' => 'ruflin']));
         $index->refresh();
 
         $query = [
@@ -1484,7 +1278,6 @@ class ClientTest extends BaseTest
 
         $endpoint = new Search();
         $endpoint->setIndex($index->getName());
-        $endpoint->setType($type->getName());
         $endpoint->setBody($query);
 
         $response = $client->requestEndpoint($endpoint);
