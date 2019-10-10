@@ -291,7 +291,7 @@ class MappingTest extends BaseTest
         $index->setMapping($mapping);
 
         $mappingData = $index->getMapping();
-        $this->assertEquals('test', $mappingData['_doc']['_meta']['class']);
+        $this->assertEquals('test', $mappingData['_doc']['_meta']['class'], \json_encode($mappingData));
 
         $index->delete();
     }

@@ -15,7 +15,7 @@ class NestedTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->setMapping(new Mapping(null, [
+        $index->setMapping(new Mapping([
             'resellers' => [
                 'type' => 'nested',
                 'properties' => [

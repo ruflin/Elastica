@@ -136,20 +136,4 @@ class IdsTest extends BaseTest
         // ...therefore only 1 result should be returned
         $this->assertEquals(1, $resultSet->count());
     }
-
-    /**
-     * @group unit
-     */
-    public function testQueryTypeAndTypeCollision()
-    {
-        // This test ensures that Elastica\Type and Elastica\Query\Type
-        // do not collide when used together, which at one point
-        // happened because of a use statement in Elastica\Query\Ids
-        // Test goal is to make sure a Fatal Error is not triggered
-        //
-        // adapted fix for Elastica\Filter\Type
-        // see https://github.com/ruflin/Elastica/pull/438
-        $queryType = new Type();
-        $filter = new Ids();
-    }
 }

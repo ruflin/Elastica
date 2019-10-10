@@ -4,7 +4,6 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\ParentAggregation;
 use Elastica\Aggregation\Terms;
-use Elastica\Document;
 use Elastica\Mapping;
 use Elastica\Query;
 
@@ -14,16 +13,9 @@ class ParentAggregationTest extends BaseAggregationTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('testaggregationparent');
-        $index->create(['settings' => ['index' => ['number_of_shards' => 2, 'number_of_replicas' => 1]]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 2, 'number_of_replicas' => 1]]]);
 
-        $type = $index->getType(\strtolower(
-            'typeparent'.\uniqid()
-        ));
-
-        $mapping = new Mapping();
-        $mapping->setType($type);
-
-        $mapping = new Mapping($type, [
+        $mapping = new Mapping([
             'text' => ['type' => 'keyword'],
             'tags' => ['type' => 'keyword'],
             'owner' => ['type' => 'keyword'],
@@ -38,7 +30,7 @@ class ParentAggregationTest extends BaseAggregationTest
         $index->setMapping($mapping);
         $index->refresh();
 
-        $doc1 = new Document(1, [
+        $doc1 = $index->createDocument(1, [
             'text' => 'this is the 1st question',
             'tags' => [
                 'windows-server-2003',
@@ -48,9 +40,9 @@ class ParentAggregationTest extends BaseAggregationTest
             'join' => [
                 'name' => 'question',
             ],
-        ], $type->getName());
+        ]);
 
-        $doc2 = new Document(2, [
+        $doc2 = $index->createDocument(2, [
             'text' => 'this is the 2nd question',
             'tags' => [
                 'windows-server-2008',
@@ -59,36 +51,36 @@ class ParentAggregationTest extends BaseAggregationTest
             'join' => [
                 'name' => 'question',
             ],
-        ], $type->getName());
+        ]);
 
         $index->addDocuments([$doc1, $doc2]);
 
-        $doc3 = new Document(3, [
+        $doc3 = $index->createDocument(3, [
             'text' => 'this is an top answer, the 1st',
             'owner' => 'Sam',
             'join' => [
                 'name' => 'answer',
                 'parent' => 1,
             ],
-        ], $type->getName(), $index->getName());
+        ]);
 
-        $doc4 = new Document(4, [
+        $doc4 = $index->createDocument(4, [
             'text' => 'this is a top answer, the 2nd',
             'owner' => 'Sam',
             'join' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], $type->getName(), $index->getName());
+        ]);
 
-        $doc5 = new Document(5, [
+        $doc5 = $index->createDocument(5, [
             'text' => 'this is an answer, the 3rd',
             'owner' => 'Troll',
             'join' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], $type->getName(), $index->getName());
+        ]);
 
         $this->_getClient()->addDocuments([$doc3], ['routing' => 1]);
         $this->_getClient()->addDocuments([$doc4, $doc5], ['routing' => 2]);

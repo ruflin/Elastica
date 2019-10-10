@@ -202,7 +202,7 @@ class MultiMatchTest extends BaseTest
             ],
         ], true);
 
-        $mapping = new Mapping($type, [
+        $mapping = new Mapping([
             'name' => ['type' => 'text', 'analyzer' => 'noStops'],
             'last_name' => ['type' => 'text', 'analyzer' => 'noStops'],
             'full_name' => ['type' => 'text', 'analyzer' => 'noStops'],

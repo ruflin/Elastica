@@ -15,7 +15,7 @@ use Elastica\Test\Base as BaseTest;
 
 class SearchTest extends BaseTest
 {
-    protected function _createIndex(): Index
+    protected function _createIndex(string $name = null, bool $delete = true, int $shards = 1): Index
     {
         $client = $this->_getClient();
 

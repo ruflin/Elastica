@@ -2,7 +2,6 @@
 
 namespace Elastica\Query;
 
-use Elastica\Document;
 use Elastica\Mapping;
 use Elastica\QueryBuilder\DSL\Query;
 use Elastica\Search;
@@ -39,10 +38,7 @@ class ParentIdTest extends BaseTest
         $index = $client->getIndex('testparentid');
         $index->create([], true);
 
-        $mapping = new Mapping();
-        $mapping->setType($type);
-
-        $mapping = new Mapping($type, [
+        $mapping = new Mapping([
             'firstname' => ['type' => 'text', 'store' => true],
             'lastname' => ['type' => 'text'],
             'my_join_field' => [
@@ -56,15 +52,13 @@ class ParentIdTest extends BaseTest
         $index->setMapping($mapping);
 
         $expected = [
-            '_doc' => [
-                'properties' => [
-                    'firstname' => ['type' => 'text', 'store' => true],
-                    'lastname' => ['type' => 'text'],
-                    'my_join_field' => [
-                        'type' => 'join',
-                        'relations' => [
-                            'question' => 'answer',
-                        ],
+            'properties' => [
+                'firstname' => ['type' => 'text', 'store' => true],
+                'lastname' => ['type' => 'text'],
+                'my_join_field' => [
+                    'type' => 'join',
+                    'relations' => [
+                        'question' => 'answer',
                     ],
                 ],
             ],
@@ -73,46 +67,41 @@ class ParentIdTest extends BaseTest
         $this->assertEquals($expected, $mapping->toArray());
         $index->refresh();
 
-        $doc1 = new Document(1, [
+        $doc1 = $index->createDocument(1, [
             'text' => 'this is the 1st question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], '_doc');
-
-        $doc2 = new Document(2, [
+        ]);
+        $doc2 = $index->createDocument(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], '_doc');
-
+        ]);
         $index->addDocuments([$doc1, $doc2]);
 
-        $doc3 = new Document(3, [
+        $doc3 = $index->createDocument(3, [
             'text' => 'this is an answer, the 1st',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 1,
             ],
-        ], '_doc', 'testparentid');
-
-        $doc4 = new Document(4, [
+        ]);
+        $doc4 = $index->createDocument(4, [
             'text' => 'this is an answer, the 2nd',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], '_doc', 'testparentid');
-
-        $doc5 = new Document(5, [
+        ]);
+        $doc5 = $index->createDocument(5, [
             'text' => 'this is an answer, the 3rd',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], '_doc', 'testparentid');
-
+        ]);
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
         $index->refresh();
 
@@ -140,10 +129,7 @@ class ParentIdTest extends BaseTest
         $index = $client->getIndex('testparentid');
         $index->create([], true);
 
-        $mapping = new Mapping();
-        $mapping->setType($type);
-
-        $mapping = new Mapping($type, [
+        $mapping = new Mapping([
             'firstname' => ['type' => 'text', 'store' => true],
             'lastname' => ['type' => 'text'],
             'my_join_field' => [
@@ -157,50 +143,45 @@ class ParentIdTest extends BaseTest
         $index->setMapping($mapping);
         $index->refresh();
 
-        $doc1 = new Document(1, [
+        $doc1 = $index->createDocument(1, [
             'text' => 'this is the 1st question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], '_doc');
+        ]);
 
-        $doc2 = new Document(2, [
+        $doc2 = $index->createDocument(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], '_doc');
-
+        ]);
         $index->addDocuments([$doc1, $doc2]);
 
-        $doc3 = new Document(3, [
+        $doc3 = $index->createDocument(3, [
             'text' => 'this is an answer, the 1st',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 1,
             ],
-        ], '_doc', 'testparentid');
-
-        $doc4 = new Document(4, [
+        ]);
+        $doc4 = $index->createDocument(4, [
             'text' => 'this is an answer, the 2nd',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], '_doc', 'testparentid');
-
-        $doc5 = new Document(5, [
+        ]);
+        $doc5 = $index->createDocument(5, [
             'text' => 'this is an answer, the 3rd',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], '_doc', 'testparentid');
-
+        ]);
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
         $index->refresh();
 
-        /** @var var Query $queryDSL */
         $queryDSL = new Query();
         $parentId = $queryDSL->parent_id('answer', 1, true);
         $search = new Search($index->getClient());

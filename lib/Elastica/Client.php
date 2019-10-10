@@ -226,7 +226,7 @@ class Client
      *
      * @return \Elastica\Index Index for the given name
      */
-    public function getIndex($name)
+    public function getIndex(string $name)
     {
         return new Index($this, $name);
     }

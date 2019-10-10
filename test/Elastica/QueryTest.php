@@ -16,7 +16,6 @@ use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 
 class QueryTest extends BaseTest
 {
@@ -405,8 +404,6 @@ class QueryTest extends BaseTest
     public function testNoSource()
     {
         $index = $this->_createIndex();
-
-        $type = new Type($index, '_doc');
 
         // Adds 1 document to the index
         $doc1 = new Document(1,

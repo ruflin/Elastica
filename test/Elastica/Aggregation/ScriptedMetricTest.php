@@ -14,7 +14,7 @@ class ScriptedMetricTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->setMapping(new Mapping(null, [
+        $index->setMapping(new Mapping([
             'start' => ['type' => 'long'],
             'end' => ['type' => 'long'],
         ]));

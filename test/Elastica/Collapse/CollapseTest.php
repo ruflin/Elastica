@@ -14,19 +14,13 @@ class CollapseTest extends BaseTest
     private function _getIndexForCollapseTest()
     {
         $index = $this->_createIndex();
-
-        $mapping = new Mapping();
-        $mapping->setType($type);
-
-        $mapping->setProperties([
+        $index->setMapping(new Mapping([
             'user' => ['type' => 'keyword'],
             'message' => ['type' => 'text'],
             'date' => ['type' => 'date'],
             'likes' => ['type' => 'integer'],
             'zip' => ['type' => 'keyword'],
-        ]);
-
-        $mapping->send();
+        ]));
 
         $index->addDocuments([
             new Document(1, [
@@ -336,6 +330,6 @@ class CollapseTest extends BaseTest
      */
     private function search(Query $query)
     {
-        return $this->_getIndexForCollapseTest()->getType('_doc')->search($query);
+        return $this->_getIndexForCollapseTest()->search($query);
     }
 }
