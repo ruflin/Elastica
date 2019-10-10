@@ -148,7 +148,6 @@ class ResponseSetTest extends BaseTest
                 [
                     'index' => [
                         '_index' => 'index',
-                        '_type' => 'type',
                         '_id' => '1',
                         '_version' => 1,
                         'ok' => true,
@@ -157,7 +156,6 @@ class ResponseSetTest extends BaseTest
                 [
                     'index' => [
                         '_index' => 'index',
-                        '_type' => 'type',
                         '_id' => '2',
                         '_version' => 1,
                         'ok' => true,
@@ -166,7 +164,6 @@ class ResponseSetTest extends BaseTest
                 [
                     'index' => [
                         '_index' => 'index',
-                        '_type' => 'type',
                         '_id' => '3',
                         '_version' => 1,
                         'ok' => true,
