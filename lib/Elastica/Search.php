@@ -128,46 +128,6 @@ class Search
     }
 
     /**
-     * Adds a type to the current search.
-     *
-     * @param \Elastica\Type|string $type Type name or object
-     *
-     * @throws \Elastica\Exception\InvalidException
-     *
-     * @return $this
-     */
-    public function addType($type)
-    {
-        if ($type instanceof Type) {
-            $type = $type->getName();
-        }
-
-        if (!\is_string($type)) {
-            throw new InvalidException('Invalid type type');
-        }
-
-        $this->_types[] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Add array of types.
-     *
-     * @param array $types
-     *
-     * @return $this
-     */
-    public function addTypes(array $types = [])
-    {
-        foreach ($types as $type) {
-            $this->addType($type);
-        }
-
-        return $this;
-    }
-
-    /**
      * @param string|array|\Elastica\Query|\Elastica\Suggest|\Elastica\Query\AbstractQuery $query
      *
      * @return $this
@@ -344,38 +304,6 @@ class Search
     }
 
     /**
-     * Return array of types.
-     *
-     * @return array List of types
-     */
-    public function getTypes()
-    {
-        return $this->_types;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasTypes()
-    {
-        return \count($this->_types) > 0;
-    }
-
-    /**
-     * @param \Elastica\Type|string $type
-     *
-     * @return bool
-     */
-    public function hasType($type)
-    {
-        if ($type instanceof Type) {
-            $type = $type->getName();
-        }
-
-        return \in_array($type, $this->_types);
-    }
-
-    /**
      * @return \Elastica\Query
      */
     public function getQuery()
@@ -410,25 +338,7 @@ class Search
             return '_search/scroll';
         }
 
-        $indices = $this->getIndices();
-
-        $path = '';
-        $types = $this->getTypes();
-
-        if (empty($indices)) {
-            if (!empty($types)) {
-                $path .= '_all';
-            }
-        } else {
-            $path .= \implode(',', $indices);
-        }
-
-        if (!empty($types)) {
-            $path .= '/'.\implode(',', $types);
-        }
-
-        // Add full path based on indices and types -> could be all
-        return $path.'/_search';
+        return \implode(',', $this->getIndices()).'/_search';
     }
 
     /**

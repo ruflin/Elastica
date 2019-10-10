@@ -81,74 +81,6 @@ class SearchTest extends BaseTest
     }
 
     /**
-     * @group functional
-     */
-    public function testAddType()
-    {
-        $client = $this->_getClient();
-        $search = new Search($client);
-
-        $index = $this->_createIndex();
-
-        $type1 = $index->getType('_doc');
-        $type2 = $index->getType('_doc');
-
-        $this->assertEquals([], $search->getTypes());
-
-        $search->addType($type1);
-        $types = $search->getTypes();
-
-        $this->assertCount(1, $types);
-
-        $search->addType($type2);
-        $types = $search->getTypes();
-
-        $this->assertCount(2, $types);
-
-        $this->assertContains($type1->getName(), $types);
-        $this->assertContains($type2->getName(), $types);
-
-        // Add string
-        $search->addType('test3');
-        $types = $search->getTypes();
-
-        $this->assertCount(3, $types);
-        $this->assertContains('test3', $types);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testAddTypes()
-    {
-        $client = $this->_getClient();
-        $search = new Search($client);
-
-        $index = $client->getIndex('foo');
-
-        $types = [];
-        $types[] = $index->getType('_doc');
-        $types[] = $index->getType('_doc');
-
-        $search->addTypes($types);
-
-        $this->assertCount(2, $search->getTypes());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testAddTypeInvalid()
-    {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
-
-        $client = $this->_getClient();
-        $search = new Search($client);
-
-        $search->addType(new \stdClass());
-    }
-
-    /**
      * @group unit
      */
     public function testAddIndexInvalid()
@@ -181,36 +113,20 @@ class SearchTest extends BaseTest
     {
         $client = $this->_getClient();
         $search1 = new Search($client);
-        $search2 = new Search($client);
 
         $index1 = $this->_createIndex();
         $index2 = $this->_createIndex();
 
-        $type1 = $index1->getType('_doc');
-        $type2 = $index1->getType('_doc');
-
         // No index
         $this->assertEquals('/_search', $search1->getPath());
 
-        // Only index
+        // Single index
         $search1->addIndex($index1);
         $this->assertEquals($index1->getName().'/_search', $search1->getPath());
 
-        // MUltiple index, no types
+        // Multiple indices
         $search1->addIndex($index2);
         $this->assertEquals($index1->getName().','.$index2->getName().'/_search', $search1->getPath());
-
-        // Single type, no index
-        $search2->addType($type1);
-        $this->assertEquals('_all/'.$type1->getName().'/_search', $search2->getPath());
-
-        // Multiple types
-        $search2->addType($type2);
-        $this->assertEquals('_all/'.$type1->getName().','.$type2->getName().'/_search', $search2->getPath());
-
-        // Combine index and types
-        $search2->addIndex($index1);
-        $this->assertEquals($index1->getName().'/'.$type1->getName().','.$type2->getName().'/_search', $search2->getPath());
     }
 
     /**
@@ -221,7 +137,6 @@ class SearchTest extends BaseTest
         $client = $this->_getClient();
         $search1 = new Search($client);
         $index1 = $this->_createIndex();
-        $type1 = $index1->getType('_doc');
 
         $result = $search1->search([]);
         $this->assertFalse($result->getResponse()->hasError());
@@ -230,11 +145,6 @@ class SearchTest extends BaseTest
 
         $result = $search1->search([]);
         $this->assertFalse($result->getResponse()->hasError());
-
-        $result = $search1->search([]);
-        $this->assertFalse($result->getResponse()->hasError());
-
-        $search1->addType($type1);
 
         $result = $search1->search([]);
         $this->assertFalse($result->getResponse()->hasError());
@@ -248,18 +158,17 @@ class SearchTest extends BaseTest
         $client = $this->_getClient();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $docs = [];
         for ($x = 1; $x <= 10; ++$x) {
             $docs[] = new Document($x, ['id' => $x, 'testscroll' => 'jbafford']);
         }
 
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
         $search = new Search($client);
-        $search->addIndex($index)->addType($type);
+        $search->addIndex($index);
         $search->setOption('size', 0);
         $result = $search->search([], [
             Search::OPTION_SCROLL => '5m',
@@ -307,8 +216,7 @@ class SearchTest extends BaseTest
         $index = $client->getIndex('zero');
         $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
-        $type = $index->getType('_doc');
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
             new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
             new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
@@ -323,7 +231,7 @@ class SearchTest extends BaseTest
         ]);
         $index->refresh();
 
-        $search->addIndex($index)->addType($type);
+        $search->addIndex($index);
 
         // default limit results  (default limit is 10)
         $resultSet = $search->search('farrelley');
@@ -350,11 +258,10 @@ class SearchTest extends BaseTest
             $docs[] = new Document($i, ['id' => 1, 'email' => 'test@test.com', 'username' => 'test']);
         }
 
-        $type = $index->getType('_doc');
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
-        $search->addIndex($index)->addType($type);
+        $search->addIndex($index);
         //Backward compatibility, integer => limit
         // default limit results  (default limit is 10)
         $resultSet = $search->search('test');
@@ -440,7 +347,7 @@ class SearchTest extends BaseTest
     {
         $index = $this->_createIndex();
         $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
-        $index->getType('_doc')->addDocument($doc);
+        $index->addDocuments([$doc]);
         $index->refresh();
 
         $search = new Search($index->getClient());
@@ -480,8 +387,7 @@ class SearchTest extends BaseTest
         $index = $client->getIndex('zero');
         $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
-        $type = $index->getType('_doc');
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
             new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
             new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
@@ -496,7 +402,7 @@ class SearchTest extends BaseTest
         ]);
         $index->refresh();
 
-        $search->addIndex($index)->addType($type);
+        $search->addIndex($index);
 
         $count = $search->count('farrelley');
         $this->assertEquals(5, $count);
@@ -525,8 +431,7 @@ class SearchTest extends BaseTest
         $index = $client->getIndex('zero');
         $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
-        $type = $index->getType('_doc');
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
             new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
             new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
@@ -541,7 +446,7 @@ class SearchTest extends BaseTest
         ]);
         $index->refresh();
 
-        $search->addIndex($index)->addType($type);
+        $search->addIndex($index);
 
         $count = $search->count('farrelley', false, Request::GET);
         $this->assertEquals(5, $count);
@@ -569,8 +474,7 @@ class SearchTest extends BaseTest
 
         $index = $client->getIndex('zero');
         $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
-        $type = $index->getType('_doc');
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
             new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
             new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
@@ -585,7 +489,7 @@ class SearchTest extends BaseTest
         ]);
         $index->refresh();
 
-        $search->addIndex($index)->addType($type);
+        $search->addIndex($index);
         $resultSet = $search->search();
         $this->assertInstanceOf(ResultSet::class, $resultSet);
         $this->assertCount(10, $resultSet);
@@ -609,15 +513,13 @@ class SearchTest extends BaseTest
     {
         $index = $this->_createIndex();
         $search = new Search($index->getClient());
-        $type = $index->getType('_doc');
 
         $doc = new Document(1, ['id' => 1, 'username' => 'ruflin']);
 
-        $type->addDocument($doc);
+        $index->addDocuments([$doc]);
         $index->refresh();
 
         $search->addIndex($index);
-        $search->addType($type);
 
         $result1 = $search->count(new MatchAll());
         $this->assertEquals(1, $result1);
