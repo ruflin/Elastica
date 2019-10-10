@@ -35,19 +35,15 @@ class FailTest extends BasePipelineTest
         $json = new Json('name');
 
         $pipeline = $this->_createPipeline('my_custom_pipeline', 'pipeline for Fail');
-        $pipeline->addProcessor($json)
-            ->addProcessor($fail)
-            ->create();
+        $pipeline->addProcessor($json)->addProcessor($fail)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         // Add document to normal index
         $doc1 = new Document(null, ['name' => '']);
 
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         $bulk->addDocument($doc1);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');

@@ -58,16 +58,10 @@ class JsonTest extends BasePipelineTest
         $pipeline->addProcessor($json)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        // Add document to normal index
-        $doc1 = new Document(null, ['name' => \json_encode(['foo' => 2000])]);
-
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
-        $bulk->addDocument($doc1);
+        $bulk->addDocument(new Document(null, ['name' => \json_encode(['foo' => 2000])]));
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 
         $bulk->send();

@@ -4,9 +4,9 @@ namespace Elastica\Test\Processor;
 
 use Elastica\Bulk;
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Processor\Attachment;
 use Elastica\Test\BasePipeline as BasePipelineTest;
-use Elastica\Type;
 
 class AttachmentTest extends BasePipelineTest
 {
@@ -61,15 +61,12 @@ class AttachmentTest extends BasePipelineTest
         $pipeline->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         $doc1 = new Document(null);
         $doc1->addFile('data', BASE_PATH.'/data/test.pdf');
-
         $doc2 = new Document(2, ['data' => '', 'text' => 'test running in basel']);
 
         $bulk->addDocuments([
@@ -80,18 +77,18 @@ class AttachmentTest extends BasePipelineTest
         $bulk->send();
         $index->refresh();
 
-        $resultSet = $type->search('xodoa');
+        $resultSet = $index->search('xodoa');
         $this->assertEquals(1, $resultSet->count());
 
-        $resultSet = $type->search('test');
+        $resultSet = $index->search('test');
         $this->assertEquals(2, $resultSet->count());
 
         // Author is ruflin
-        $resultSet = $type->search('ruflin');
+        $resultSet = $index->search('ruflin');
         $this->assertEquals(1, $resultSet->count());
 
         // String does not exist in file
-        $resultSet = $type->search('guschti');
+        $resultSet = $index->search('guschti');
         $this->assertEquals(0, $resultSet->count());
     }
 
@@ -106,11 +103,9 @@ class AttachmentTest extends BasePipelineTest
         $pipeline->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         $doc1 = new Document(null);
         $doc1->addFile('data', BASE_PATH.'/data/test.pdf');
@@ -127,18 +122,18 @@ class AttachmentTest extends BasePipelineTest
         $bulk->send();
         $index->refresh();
 
-        $resultSet = $type->search('xodoa');
+        $resultSet = $index->search('xodoa');
         $this->assertEquals(1, $resultSet->count());
 
-        $resultSet = $type->search('basel');
+        $resultSet = $index->search('basel');
         $this->assertEquals(2, $resultSet->count());
 
         // Author is ruflin
-        $resultSet = $type->search('ruflin');
+        $resultSet = $index->search('ruflin');
         $this->assertEquals(1, $resultSet->count());
 
         // String does not exist in file
-        $resultSet = $type->search('guschti');
+        $resultSet = $index->search('guschti');
         $this->assertEquals(0, $resultSet->count());
     }
 
@@ -153,11 +148,9 @@ class AttachmentTest extends BasePipelineTest
         $pipeline->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         $doc1 = new Document(null);
         $doc1->addFile('data', BASE_PATH.'/data/test.docx');
@@ -173,17 +166,17 @@ class AttachmentTest extends BasePipelineTest
         $bulk->send();
         $index->refresh();
 
-        $resultSet = $type->search('basel');
+        $resultSet = $index->search('basel');
         $this->assertEquals(2, $resultSet->count());
 
-        $resultSet = $type->search('ruflin');
+        $resultSet = $index->search('ruflin');
         $this->assertEquals(0, $resultSet->count());
 
-        $resultSet = $type->search('Xodoa');
+        $resultSet = $index->search('Xodoa');
         $this->assertEquals(1, $resultSet->count());
 
         // String does not exist in file
-        $resultSet = $type->search('guschti');
+        $resultSet = $index->search('guschti');
         $this->assertEquals(0, $resultSet->count());
     }
 
@@ -196,22 +189,17 @@ class AttachmentTest extends BasePipelineTest
         $pipeline = $this->_createPipeline('my_custom_pipeline_attachment', 'pipeline for Attachment');
         $pipeline->addProcessor($attachment);
         $pipeline->create();
-
-        $indexMapping = ['data' => ['type' => 'text'], 'text' => ['type' => 'text', 'store' => true],
-            'title' => ['type' => 'text', 'store' => true], ];
-
-        $indexParams = ['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]];
-
         $index = $this->_createIndex();
-        $type = new Type($index, '_doc');
 
-        $mapping = Type\Mapping::create($indexMapping);
+        $mapping = new Mapping([
+            'data' => ['type' => 'text'],
+            'text' => ['type' => 'text', 'store' => true],
+            'title' => ['type' => 'text', 'store' => true],
+        ]);
         $mapping->setSource(['excludes' => ['data']]);
 
-        $mapping->setType($type);
-
-        $index->create($indexParams, true);
-        $type->setMapping($mapping);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]]);
+        $index->setMapping($mapping);
 
         $docId = 1;
         $text = 'Basel World';
@@ -224,18 +212,15 @@ class AttachmentTest extends BasePipelineTest
 
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
-        $bulk->addDocuments([
-            $doc1,
-        ]);
+        $bulk->addDocuments([$doc1]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline_attachment');
 
         // Optimization necessary, as otherwise source still in realtime get
         $bulk->send();
         $index->forcemerge();
 
-        $data = $type->getDocument($docId)->getData();
+        $data = $index->getDocument($docId)->getData();
         $this->assertEquals($data['title'], $title);
         $this->assertEquals($data['text'], $text);
         $this->assertArrayNotHasKey('file', $data);

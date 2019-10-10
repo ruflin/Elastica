@@ -55,16 +55,10 @@ class SortTest extends BasePipelineTest
         $pipeline->addProcessor($sort)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        // Add document to normal index
-        $doc1 = new Document(null, ['name' => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]]);
-
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
-        $bulk->addDocument($doc1);
+        $bulk->addDocument(new Document(null, ['name' => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]]));
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 
         $bulk->send();
