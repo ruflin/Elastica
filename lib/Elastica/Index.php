@@ -12,8 +12,8 @@ use Elastica\ResultSet\BuilderInterface;
 use Elastica\Script\AbstractScript;
 use Elasticsearch\Endpoints\AbstractEndpoint;
 use Elasticsearch\Endpoints\DeleteByQuery;
-use Elasticsearch\Endpoints\Get;
 use Elasticsearch\Endpoints\Index as IndexEndpoint;
+use Elasticsearch\Endpoints\Get as DocumentGet;
 use Elasticsearch\Endpoints\Indices\Aliases\Update;
 use Elasticsearch\Endpoints\Indices\Analyze;
 use Elasticsearch\Endpoints\Indices\Cache\Clear;
@@ -269,7 +269,7 @@ class Index implements SearchableInterface
      */
     public function getDocument($id, array $options = []): Document
     {
-        $endpoint = new Get();
+        $endpoint = new DocumentGet();
         $endpoint->setID($id);
         $endpoint->setParams($options);
 

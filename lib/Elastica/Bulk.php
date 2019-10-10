@@ -81,39 +81,6 @@ class Bulk
     }
 
     /**
-     * @param string|Type $type
-     *
-     * @return $this
-     */
-    public function setType($type): self
-    {
-        if ($type instanceof Type) {
-            $this->setIndex($type->getIndex()->getName());
-            $type = $type->getName();
-        }
-
-        $this->_type = (string) $type;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasType(): bool
-    {
-        return null !== $this->getType() && '' !== $this->getType();
-    }
-
-    /**
      * @return string
      */
     public function getPath(): string
@@ -121,9 +88,6 @@ class Bulk
         $path = '';
         if ($this->hasIndex()) {
             $path .= $this->getIndex().'/';
-            if ($this->hasType()) {
-                $path .= $this->getType().'/';
-            }
         }
         $path .= '_bulk';
 

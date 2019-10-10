@@ -5,7 +5,6 @@ namespace Elastica\Bulk;
 use Elastica\Bulk;
 use Elastica\Index;
 use Elastica\JSON;
-use Elastica\Type;
 
 class Action
 {
@@ -138,22 +137,6 @@ class Action
             $index = $index->getName();
         }
         $this->_metadata['_index'] = $index;
-
-        return $this;
-    }
-
-    /**
-     * @param string|Type $type
-     *
-     * @return $this
-     */
-    public function setType($type): self
-    {
-        if ($type instanceof Type) {
-            $this->setIndex($type->getIndex()->getName());
-            $type = $type->getName();
-        }
-        $this->_metadata['_type'] = $type;
 
         return $this;
     }
