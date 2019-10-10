@@ -35,18 +35,17 @@ class SpanTermTest extends BaseTest
         $value = 'match';
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $docMisData = [$field => 'mismatch', 'email' => 'test2@test.com'];
         $docHitData = [$field => $value, 'email' => 'test@test.com'];
 
         $doc1 = new Document(1, $docMisData);
         $doc2 = new Document(2, $docHitData);
-        $type->addDocuments([$doc1, $doc2]);
+        $index->addDocuments([$doc1, $doc2]);
         $index->refresh();
 
         $query = new SpanTerm([$field => $value]);
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $results = $resultSet->getResults();
         $hitData = \reset($results)->getData();
 

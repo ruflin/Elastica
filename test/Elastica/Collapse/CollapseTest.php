@@ -5,16 +5,15 @@ namespace Elastica\Test\Collapse;
 use Elastica\Collapse;
 use Elastica\Collapse\InnerHits;
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class CollapseTest extends BaseTest
 {
     private function _getIndexForCollapseTest()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $mapping = new Mapping();
         $mapping->setType($type);
@@ -29,7 +28,7 @@ class CollapseTest extends BaseTest
 
         $mapping->send();
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, [
                 'user' => 'Veronica',
                 'message' => 'Always keeping an eye on elasticsearch.',

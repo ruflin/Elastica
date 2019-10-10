@@ -7,6 +7,7 @@ use Elastica\Collapse;
 use Elastica\Collapse\InnerHits;
 use Elastica\Document;
 use Elastica\Exception\InvalidException;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
@@ -16,7 +17,6 @@ use Elastica\Script\ScriptFields;
 use Elastica\Suggest;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
-use Elastica\Type\Mapping;
 
 class QueryTest extends BaseTest
 {
@@ -92,32 +92,25 @@ class QueryTest extends BaseTest
     public function testSetSort()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
+        $index->setMapping(new Mapping([
+            'firstname' => ['type' => 'text', 'fielddata' => true],
+            'lastname' => ['type' => 'text', 'fielddata' => true],
+        ]));
 
-        $mapping = new Mapping($type,
-            [
-                'firstname' => ['type' => 'text', 'fielddata' => true],
-                'lastname' => ['type' => 'text', 'fielddata' => true],
-            ]
-        );
-        $type->setMapping($mapping);
-
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['name' => 'hello world']),
             new Document(2, ['firstname' => 'guschti', 'lastname' => 'ruflin']),
             new Document(3, ['firstname' => 'nicolas', 'lastname' => 'ruflin']),
         ]);
+        $index->refresh();
 
         $queryTerm = new Term();
         $queryTerm->setTerm('lastname', 'ruflin');
-
-        $index->refresh();
-
         $query = Query::create($queryTerm);
 
         // ASC order
         $query->setSort([['firstname' => ['order' => 'asc']]]);
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $this->assertEquals(2, $resultSet->count());
 
         $first = $resultSet->current()->getData();
@@ -129,7 +122,7 @@ class QueryTest extends BaseTest
 
         // DESC order
         $query->setSort(['firstname' => ['order' => 'desc']]);
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $this->assertEquals(2, $resultSet->count());
 
         $first = $resultSet->current()->getData();
@@ -419,18 +412,18 @@ class QueryTest extends BaseTest
         $doc1 = new Document(1,
             ['username' => 'ruflin', 'test' => ['2', '3', '5']]
         );
-        $type->addDocument($doc1);
+        $index->addDocument($doc1);
 
         // To update index
         $index->refresh();
 
         $query = Query::create('ruflin');
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
 
         // Disable source
         $query->setSource(false);
 
-        $resultSetNoSource = $type->search($query);
+        $resultSetNoSource = $index->search($query);
 
         $this->assertEquals(1, $resultSet->count());
         $this->assertEquals(1, $resultSetNoSource->count());
@@ -562,21 +555,16 @@ class QueryTest extends BaseTest
     public function testSetTrackTotalHits()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $mapping = new Mapping($type,
-            [
-                'firstname' => ['type' => 'text', 'fielddata' => true],
-            ]
-        );
-        $type->setMapping($mapping);
+        $index->setMapping(new Mapping([
+            'firstname' => ['type' => 'text', 'fielddata' => true],
+        ]));
 
         $documents = [];
         for ($i = 0; $i < 50; ++$i) {
             $documents[] = new Document($i, ['firstname' => 'antoine '.$i]);
         }
 
-        $type->addDocuments($documents);
+        $index->addDocuments($documents);
 
         $queryTerm = new Term();
         $queryTerm->setTerm('firstname', 'antoine');
@@ -585,15 +573,15 @@ class QueryTest extends BaseTest
 
         $query = Query::create($queryTerm);
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $this->assertEquals(50, $resultSet->getTotalHits());
 
         $query->setTrackTotalHits(false);
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $this->assertEquals(0, $resultSet->getTotalHits());
 
         $query->setTrackTotalHits(25);
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $this->assertEquals(25, $resultSet->getTotalHits());
     }
 }

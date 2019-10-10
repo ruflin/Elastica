@@ -7,8 +7,8 @@ use Elastica\Aggregation\ReverseNested;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
-use Elastica\Type\Mapping;
 
 class ReverseNestedTest extends BaseAggregationTest
 {
@@ -26,10 +26,10 @@ class ReverseNestedTest extends BaseAggregationTest
             ],
             'tags' => ['type' => 'keyword'],
         ]);
-        $type = $index->getType('_doc');
-        $type->setMapping($mapping);
 
-        $type->addDocuments([
+        $index->setMapping($mapping);
+
+        $index->addDocuments([
             new Document(1, [
                 'comments' => [
                     [

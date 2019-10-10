@@ -6,21 +6,19 @@ use Elastica\Aggregation\DateRange;
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
-use Elastica\Type\Mapping;
 
 class DateRangeTest extends BaseAggregationTest
 {
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $type->setMapping(new Mapping(null, [
+        $index->setMapping(new Mapping([
             'created' => ['type' => 'date', 'format' => 'epoch_millis'],
         ]));
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['created' => 1390962135000]),
             new Document(2, ['created' => 1390965735000]),
             new Document(3, ['created' => 1390954935000]),

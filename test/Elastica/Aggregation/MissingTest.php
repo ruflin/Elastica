@@ -5,22 +5,21 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\Missing;
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
-use Elastica\Type\Mapping;
 
 class MissingTest extends BaseAggregationTest
 {
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
-
-        $mapping = new Mapping($index->getType('_doc'), [
+        $mapping = new Mapping([
             'price' => ['type' => 'keyword'],
             'color' => ['type' => 'keyword'],
         ]);
-        $index->getType('_doc')->setMapping($mapping);
+        $index->setMapping($mapping);
 
-        $index->getType('_doc')->addDocuments([
+        $index->addDocuments([
             new Document(1, ['price' => 5, 'color' => 'blue']),
             new Document(2, ['price' => 8, 'color' => 'blue']),
             new Document(3, ['price' => 1]),

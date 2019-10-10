@@ -4,6 +4,7 @@ namespace Elastica\Test\Suggest;
 
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Suggest;
 use Elastica\Suggest\Completion;
@@ -17,18 +18,16 @@ class CompletionTest extends BaseTest
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $type->setMapping([
+        $index->setMapping(new Mapping([
             'fieldName' => [
                 'type' => 'completion',
             ],
             'fieldName2' => [
                 'type' => 'completion',
             ],
-        ]);
+        ]));
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, [
                 'fieldName' => [
                     'input' => ['Nevermind', 'Nirvana'],

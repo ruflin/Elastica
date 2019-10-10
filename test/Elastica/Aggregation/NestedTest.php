@@ -6,17 +6,16 @@ use Elastica\Aggregation\Min;
 use Elastica\Aggregation\Nested;
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
-use Elastica\Type\Mapping;
 
 class NestedTest extends BaseAggregationTest
 {
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
-        $type->setMapping(new Mapping(null, [
+        $index->setMapping(new Mapping(null, [
             'resellers' => [
                 'type' => 'nested',
                 'properties' => [
@@ -26,7 +25,7 @@ class NestedTest extends BaseAggregationTest
             ],
         ]));
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, [
                 'resellers' => [
                     'name' => 'spacely sprockets',

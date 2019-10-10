@@ -17,10 +17,8 @@ class GeoPolygonTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $type = $index->getType('_doc');
-
         // Set mapping
-        $type->setMapping(['location' => ['type' => 'geo_point']]);
+        $index->setMapping(['location' => ['type' => 'geo_point']]);
 
         // Add doc 1
         $doc1 = new Document(1,
@@ -30,7 +28,7 @@ class GeoPolygonTest extends BaseTest
         );
 
         $doc1->addGeoPoint('location', 17, 19);
-        $type->addDocument($doc1);
+        $index->addDocument($doc1);
 
         // Add doc 2
         $doc2 = new Document(2,
@@ -40,7 +38,7 @@ class GeoPolygonTest extends BaseTest
         );
 
         $doc2->addGeoPoint('location', 30, 40);
-        $type->addDocument($doc2);
+        $index->addDocument($doc2);
 
         $index->refresh();
 
@@ -50,7 +48,7 @@ class GeoPolygonTest extends BaseTest
 
         $query = new Query(new MatchAll());
         $query->setPostFilter($geoQuery);
-        $a = $type->search($query);
+        $a = $index->search($query);
         $this->assertEquals(1, $a->count());
 
         // Both points should be inside
@@ -61,6 +59,6 @@ class GeoPolygonTest extends BaseTest
         $query = new Query(new MatchAll());
         $query->setPostFilter($geoQuery);
 
-        $this->assertEquals(2, $type->search($query)->count());
+        $this->assertEquals(2, $index->search($query)->count());
     }
 }

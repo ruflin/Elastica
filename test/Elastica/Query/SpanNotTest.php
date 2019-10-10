@@ -66,11 +66,10 @@ class SpanNotTest extends BaseTest
         $value = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio lacus, aliquam nec nulla quis, aliquam eleifend eros.';
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $docHitData = [$field => $value];
         $doc = new Document(1, $docHitData);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
         $index->refresh();
 
         $spanTermQuery = new SpanTerm([$field => 'amet']);
@@ -79,12 +78,12 @@ class SpanNotTest extends BaseTest
         $spanNearQuery = new SpanNear([$spanTermQuery1, $spanTermQuery2], 0);
 
         $spanContainingQuery = new SpanNot($spanTermQuery, $spanNearQuery);
-        $resultSet = $type->search($spanContainingQuery);
+        $resultSet = $index->search($spanContainingQuery);
         $this->assertEquals(1, $resultSet->count());
 
         $spanNearQuery->setSlop(5);
         $spanContainingQuery = new SpanNot($spanTermQuery, $spanNearQuery);
-        $resultSet = $type->search($spanContainingQuery);
+        $resultSet = $index->search($spanContainingQuery);
         $this->assertEquals(0, $resultSet->count());
     }
 }

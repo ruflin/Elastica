@@ -16,20 +16,18 @@ class GeoDistanceTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $type = $index->getType('_doc');
-
         // Set mapping
-        $type->setMapping(['point' => ['type' => 'geo_point']]);
+        $index->setMapping(['point' => ['type' => 'geo_point']]);
 
         // Add doc 1
         $doc1 = new Document(1);
         $doc1->addGeoPoint('point', 17, 19);
-        $type->addDocument($doc1);
+        $index->addDocument($doc1);
 
         // Add doc 2
         $doc2 = new Document(2);
         $doc2->addGeoPoint('point', 30, 40);
-        $type->addDocument($doc2);
+        $index->addDocument($doc2);
 
         $index->forcemerge();
         $index->refresh();
@@ -39,14 +37,14 @@ class GeoDistanceTest extends BaseTest
         $query = new Query();
         $query->setPostFilter($geoQuery);
 
-        $this->assertEquals(1, $type->count($query));
+        $this->assertEquals(1, $index->count($query));
 
         // Both points should be inside
         $geoQuery = new GeoDistance('point', ['lat' => 30, 'lon' => 40], '40000km');
         $query = new Query();
         $query->setPostFilter($geoQuery);
 
-        $this->assertEquals(2, $type->count($query));
+        $this->assertEquals(2, $index->count($query));
     }
 
     /**

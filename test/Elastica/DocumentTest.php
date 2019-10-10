@@ -61,43 +61,19 @@ class DocumentTest extends BaseTest
     /**
      * @group unit
      */
-    public function testSetType()
-    {
-        $document = new Document();
-        $document->setType('_doc');
-
-        $this->assertEquals('_doc', $document->getType());
-
-        $index = new Index($this->_getClient(), 'index');
-        $type = $index->getType('_doc');
-
-        $document->setIndex('index2');
-        $this->assertEquals('index2', $document->getIndex());
-
-        $document->setType($type);
-
-        $this->assertEquals('index', $document->getIndex());
-        $this->assertEquals('_doc', $document->getType());
-    }
-
-    /**
-     * @group unit
-     */
     public function testSetIndex()
     {
         $document = new Document();
         $document->setIndex('index2');
-        $document->setType('_doc');
 
         $this->assertEquals('index2', $document->getIndex());
-        $this->assertEquals('_doc', $document->getType());
+        $this->assertEquals(Document::DEFAULT_TYPE, $document->getType());
 
         $index = new Index($this->_getClient(), 'index');
 
         $document->setIndex($index);
-
         $this->assertEquals('index', $document->getIndex());
-        $this->assertEquals('_doc', $document->getType());
+        $this->assertEquals(Document::DEFAULT_TYPE, $document->getType());
     }
 
     /**

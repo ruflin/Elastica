@@ -3,11 +3,11 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query\AbstractGeoShape;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\GeoShapeProvided;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class GeoShapeProvidedTest extends BaseTest
 {
@@ -17,7 +17,6 @@ class GeoShapeProvidedTest extends BaseTest
     public function testSearch()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         // create mapping
         $mapping = new Mapping($type, [
@@ -25,10 +24,10 @@ class GeoShapeProvidedTest extends BaseTest
                 'type' => 'geo_shape',
             ],
         ]);
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
 
         // add docs
-        $type->addDocument(new Document(1, [
+        $index->addDocument(new Document(1, [
             'location' => [
                 'type' => 'envelope',
                 'coordinates' => [
@@ -50,10 +49,10 @@ class GeoShapeProvidedTest extends BaseTest
         $query = new BoolQuery();
         $query->addFilter($gsp);
 
-        $this->assertEquals(1, $type->count($query));
+        $this->assertEquals(1, $index->count($query));
 
         $gsp->setRelation(AbstractGeoShape::RELATION_DISJOINT);
-        $this->assertEquals(0, $type->count($query), 'Changing the relation should take effect');
+        $this->assertEquals(0, $index->count($query), 'Changing the relation should take effect');
 
         $index->delete();
     }

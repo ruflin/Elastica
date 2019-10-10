@@ -15,7 +15,7 @@ class StatsBucketTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('_doc')->addDocuments([
+        $index->addDocuments([
             Document::create(['weight' => 60, 'height' => 180, 'age' => 25]),
             Document::create(['weight' => 70, 'height' => 156, 'age' => 32]),
             Document::create(['weight' => 50, 'height' => 155, 'age' => 45]),

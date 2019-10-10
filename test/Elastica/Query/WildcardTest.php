@@ -3,9 +3,9 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query\Wildcard;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class WildcardTest extends BaseTest
 {
@@ -64,15 +64,14 @@ class WildcardTest extends BaseTest
         ];
 
         $index->create($indexParams, true);
-        $type = $index->getType('_doc');
 
         $mapping = new Mapping($type, [
                 'name' => ['type' => 'text', 'analyzer' => 'lw'],
             ]
         );
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['name' => 'Basel-Stadt']),
             new Document(2, ['name' => 'New York']),
             new Document(3, ['name' => 'Baden']),

@@ -66,11 +66,10 @@ class SpanContainingTest extends BaseTest
         $value = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio lacus, aliquam nec nulla quis, aliquam eleifend eros.';
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $docHitData = [$field => $value];
         $doc = new Document(1, $docHitData);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
         $index->refresh();
 
         $spanTermQuery1 = new SpanTerm([$field => 'adipiscing']);
@@ -78,11 +77,11 @@ class SpanContainingTest extends BaseTest
         $spanNearQuery = new SpanNear([$spanTermQuery1, $spanTermQuery2], 5);
 
         $spanContainingQuery = new SpanContaining(new SpanTerm([$field => 'amet']), $spanNearQuery);
-        $resultSet = $type->search($spanContainingQuery);
+        $resultSet = $index->search($spanContainingQuery);
         $this->assertEquals(1, $resultSet->count());
 
         $spanContainingQuery = new SpanContaining(new SpanTerm([$field => 'not-matching']), $spanNearQuery);
-        $resultSet = $type->search($spanContainingQuery);
+        $resultSet = $index->search($spanContainingQuery);
         $this->assertEquals(0, $resultSet->count());
     }
 }

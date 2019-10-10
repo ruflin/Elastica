@@ -241,7 +241,7 @@ class ReindexTest extends Base
             $insert[] = new Document($i, ['id' => $i, 'key' => 'value']);
         }
 
-        $type->addDocuments($insert);
+        $index->addDocuments($insert);
         $type->getIndex()->refresh();
 
         return $insert;

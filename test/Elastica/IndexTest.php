@@ -79,7 +79,7 @@ class IndexTest extends BaseTest
      */
     public function testAddRemoveAlias()
     {
-        $this->expectException(\Elastica\Exception\ResponseException::class);
+        $this->expectException(ResponseException::class);
 
         $client = $this->_getClient();
 
@@ -89,15 +89,10 @@ class IndexTest extends BaseTest
 
         $index = $client->getIndex($indexName1);
         $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
-
-        $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
-
-        $type = $index->getType($typeName);
-        $type->addDocument($doc);
+        $index->addDocument(new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']));
         $index->refresh();
 
-        $resultSet = $type->search('ruflin');
-
+        $resultSet = $index->search('ruflin');
         $this->assertEquals(1, $resultSet->count());
 
         $data = $index->addAlias($aliasName, true)->getData();
@@ -106,7 +101,7 @@ class IndexTest extends BaseTest
         $response = $index->removeAlias($aliasName)->getData();
         $this->assertTrue($response['acknowledged']);
 
-        $client->getIndex($aliasName)->getType($typeName)->search('ruflin');
+        $client->getIndex($aliasName)->search('ruflin');
     }
 
     /**
@@ -120,9 +115,8 @@ class IndexTest extends BaseTest
         $doc1 = new Document(null, ['name' => 'ruflin']);
         $doc2 = new Document(null, ['name' => 'nicolas']);
 
-        $type = $index->getType('_doc');
-        $type->addDocument($doc1);
-        $type->addDocument($doc2);
+        $index->addDocument($doc1);
+        $index->addDocument($doc2);
 
         $index->refresh();
 
@@ -702,7 +696,7 @@ class IndexTest extends BaseTest
         $docs[] = new Document(1, ['username' => 'hans', 'test' => ['2', '3', '5']]);
         $docs[] = new Document(2, ['username' => 'john', 'test' => ['1', '3', '6']]);
         $docs[] = new Document(3, ['username' => 'rolf', 'test' => ['2', '3', '7']]);
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
         $resultSet = $index->search('rolf');
@@ -732,7 +726,7 @@ class IndexTest extends BaseTest
 
         $docs = [];
         $docs[] = new Document(1, ['username' => 'hans']);
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
         $resultSet = $index->search('hans', null, Request::GET);
@@ -754,14 +748,14 @@ class IndexTest extends BaseTest
         $docs = [];
         $docs[] = new Document(1, ['foo' => 'bar']);
         $docs[] = new Document(2, ['foo' => 'bar']);
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
         $stats = $index->getStats()->getData();
         $this->assertEquals(2, $stats['_all']['primaries']['docs']['count']);
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
 
-        $type->deleteById(1);
+        $index->deleteById(1);
         $index->refresh();
 
         $stats = $index->getStats()->getData();

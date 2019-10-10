@@ -16,9 +16,8 @@ class RangeTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
         $index->create([], true);
-        $type = $index->getType('_doc');
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['age' => 16, 'height' => 140]),
             new Document(2, ['age' => 21, 'height' => 155]),
             new Document(3, ['age' => 33, 'height' => 160]),
@@ -29,13 +28,13 @@ class RangeTest extends BaseTest
         $index->refresh();
 
         $query = new Range('age', ['from' => 10, 'to' => 20]);
-        $result = $type->search($query)->count();
+        $result = $index->search($query)->count();
         $this->assertEquals(1, $result);
 
         $query = new Range();
         $query->addField('height', ['gte' => 160]);
 
-        $result = $type->search($query)->count();
+        $result = $index->search($query)->count();
         $this->assertEquals(2, $result);
     }
 

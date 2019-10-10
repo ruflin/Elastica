@@ -5,8 +5,8 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\ParentAggregation;
 use Elastica\Aggregation\Terms;
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query;
-use Elastica\Type\Mapping;
 
 class ParentAggregationTest extends BaseAggregationTest
 {
@@ -35,7 +35,7 @@ class ParentAggregationTest extends BaseAggregationTest
             ],
         ]);
 
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
         $index->refresh();
 
         $doc1 = new Document(1, [

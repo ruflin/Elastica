@@ -67,11 +67,10 @@ class SpanNearTest extends BaseTest
         $value = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse odio lacus, aliquam nec nulla quis, aliquam eleifend eros.';
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $docHitData = [$field => $value];
         $doc = new Document(1, $docHitData);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
         $index->refresh();
 
         $spanTermQuery1 = new SpanTerm([$field => 'adipiscing']);
@@ -79,22 +78,22 @@ class SpanNearTest extends BaseTest
 
         //slop range 4 won't match
         $spanNearQuery = new SpanNear([$spanTermQuery1, $spanTermQuery2], 4);
-        $resultSet = $type->search($spanNearQuery);
+        $resultSet = $index->search($spanNearQuery);
         $this->assertEquals(0, $resultSet->count());
 
         //slop range 4 will match
         $spanNearQuery->setSlop(5);
-        $resultSet = $type->search($spanNearQuery);
+        $resultSet = $index->search($spanNearQuery);
         $this->assertEquals(1, $resultSet->count());
 
         //in_order set to true won't match
         $spanNearQuery->setInOrder(true);
-        $resultSet = $type->search($spanNearQuery);
+        $resultSet = $index->search($spanNearQuery);
         $this->assertEquals(0, $resultSet->count());
 
         $spanNearQuery->addClause(new SpanTerm([$field => 'consectetur']));
         $spanNearQuery->setInOrder(false);
-        $resultSet = $type->search($spanNearQuery);
+        $resultSet = $index->search($spanNearQuery);
         $this->assertEquals(1, $resultSet->count());
     }
 }

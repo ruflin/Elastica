@@ -14,9 +14,8 @@ class TermsTest extends BaseTest
     public function testFilteredSearch()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['name' => 'hello world']),
             new Document(2, ['name' => 'nicolas ruflin']),
             new Document(3, ['name' => 'ruflin']),
@@ -27,12 +26,12 @@ class TermsTest extends BaseTest
 
         $index->refresh();
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
 
         $query->addTerm('ruflin');
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
 
         $this->assertEquals(3, $resultSet->count());
     }
@@ -43,7 +42,6 @@ class TermsTest extends BaseTest
     public function testFilteredSearchWithLookup()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $lookupIndex = $this->_createIndex('lookup_index');
         $lookupType = $lookupIndex->getType('_doc');
@@ -52,7 +50,7 @@ class TermsTest extends BaseTest
             new Document(1, ['terms' => ['ruflin', 'nicolas']]),
         ]);
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['name' => 'hello world']),
             new Document(2, ['name' => 'nicolas ruflin']),
             new Document(3, ['name' => 'ruflin']),
@@ -69,7 +67,7 @@ class TermsTest extends BaseTest
         $index->refresh();
         $lookupIndex->refresh();
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
     }

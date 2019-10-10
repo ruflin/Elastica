@@ -111,19 +111,18 @@ class ScrollTest extends Base
     {
         $index = $this->_createIndex();
         $index->refresh();
-        $type = $index->getType('_doc');
 
         if ($indexSize > 0) {
             $docs = [];
             for ($x = 1; $x <= $indexSize; ++$x) {
                 $docs[] = new Document($x, ['id' => $x, 'key' => 'value']);
             }
-            $type->addDocuments($docs);
+            $index->addDocuments($docs);
             $index->refresh();
         }
 
         $search = new Search($this->_getClient());
-        $search->addIndex($index)->addType($type);
+        $search->addIndex($index);
         $search->getQuery()->setSize(5);
 
         return $search;

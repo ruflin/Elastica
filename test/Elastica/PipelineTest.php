@@ -89,7 +89,6 @@ class PipelineTest extends BasePipeline
         $this->assertContains('acknowledged', $result->getData());
 
         $index = $this->_createIndex('testpipelinecreation');
-        $type = $index->getType('_doc');
 
         // Add document to normal index
         $doc1 = new Document(null, ['name' => 'ruflin', 'type' => 'elastica', 'foo' => null]);
@@ -97,7 +96,6 @@ class PipelineTest extends BasePipeline
 
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         $bulk->addDocuments([
             $doc1, $doc2,

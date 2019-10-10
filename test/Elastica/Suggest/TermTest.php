@@ -16,8 +16,7 @@ class TermTest extends BaseTest
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['id' => 1, 'text' => 'GitHub']),
             new Document(2, ['id' => 1, 'text' => 'Elastic']),
             new Document(3, ['id' => 1, 'text' => 'Search']),

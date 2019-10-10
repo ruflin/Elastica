@@ -5,22 +5,21 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\ScriptedMetric;
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
-use Elastica\Type\Mapping;
 
 class ScriptedMetricTest extends BaseAggregationTest
 {
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
-        $type->setMapping(new Mapping(null, [
+        $index->setMapping(new Mapping(null, [
             'start' => ['type' => 'long'],
             'end' => ['type' => 'long'],
         ]));
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['start' => 100, 'end' => 200]),
             new Document(2, ['start' => 200, 'end' => 250]),
             new Document(3, ['start' => 300, 'end' => 450]),

@@ -90,8 +90,7 @@ class GuzzleTest extends BaseTest
         $index->create([], true);
         $this->_waitForAllocation($index);
 
-        $type = $index->getType('_doc');
-        $type->addDocument(new Document(1, ['test' => 'test']));
+        $index->addDocument(new Document(1, ['test' => 'test']));
 
         $index->refresh();
 
