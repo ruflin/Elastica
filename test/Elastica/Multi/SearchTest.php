@@ -3,6 +3,7 @@
 namespace Elastica\Test\Multi;
 
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Multi\ResultSet as MultiResultSet;
 use Elastica\Multi\Search as MultiSearch;
 use Elastica\Query;
@@ -11,14 +12,10 @@ use Elastica\Response;
 use Elastica\ResultSet;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 
 class SearchTest extends BaseTest
 {
-    /**
-     * @return Type
-     */
-    protected function _createType(): Type
+    protected function _createIndex(): Index
     {
         $client = $this->_getClient();
 
@@ -37,11 +34,10 @@ class SearchTest extends BaseTest
         $docs[] = new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
         $docs[] = new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
         $docs[] = new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'bunny']);
-        $type = $index->getType('_doc');
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
-        return $type;
+        return $index;
     }
 
     /**
@@ -124,14 +120,13 @@ class SearchTest extends BaseTest
      */
     public function testSearch()
     {
-        $type = $this->_createType();
-        $index = $type->getIndex();
+        $index = $this->_createIndex();
         $client = $index->getClient();
 
         $multiSearch = new MultiSearch($client);
 
         $search1 = new Search($client);
-        $search1->addIndex($index)->addType($type);
+        $search1->addIndex($index);
         $query1 = new Query();
         $termQuery1 = new Term();
         $termQuery1->setTerm('username', 'farrelley');
@@ -144,7 +139,7 @@ class SearchTest extends BaseTest
         $this->assertCount(1, $multiSearch->getSearches());
 
         $search2 = new Search($client);
-        $search2->addIndex($index)->addType($type);
+        $search2->addIndex($index);
         $query2 = new Query();
         $termQuery2 = new Term();
         $termQuery2->setTerm('username', 'bunny');
@@ -215,14 +210,13 @@ class SearchTest extends BaseTest
      */
     public function testSearchWithKeys()
     {
-        $type = $this->_createType();
-        $index = $type->getIndex();
+        $index = $this->_createIndex();
         $client = $index->getClient();
 
         $multiSearch = new MultiSearch($client);
 
         $search1 = new Search($client);
-        $search1->addIndex($index)->addType($type);
+        $search1->addIndex($index);
         $query1 = new Query();
         $termQuery1 = new Term();
         $termQuery1->setTerm('username', 'farrelley');
@@ -235,7 +229,7 @@ class SearchTest extends BaseTest
         $this->assertCount(1, $multiSearch->getSearches());
 
         $search2 = new Search($client);
-        $search2->addIndex($index)->addType($type);
+        $search2->addIndex($index);
         $query2 = new Query();
         $termQuery2 = new Term();
         $termQuery2->setTerm('username', 'bunny');
@@ -308,21 +302,20 @@ class SearchTest extends BaseTest
      */
     public function testSearchWithError()
     {
-        $type = $this->_createType();
-        $index = $type->getIndex();
+        $index = $this->_createIndex();
         $client = $index->getClient();
 
         $multiSearch = new MultiSearch($client);
 
         $searchGood = new Search($client);
         $searchGood->setQuery('bunny');
-        $searchGood->addIndex($index)->addType($type);
+        $searchGood->addIndex($index);
 
         $multiSearch->addSearch($searchGood);
 
         $searchBad = new Search($client);
         $searchBad->setOption(Search::OPTION_SIZE, -2);
-        $searchBad->addIndex($index)->addType($type);
+        $searchBad->addIndex($index);
 
         $multiSearch->addSearch($searchBad);
 
@@ -354,21 +347,20 @@ class SearchTest extends BaseTest
      */
     public function testSearchWithErrorWithKeys()
     {
-        $type = $this->_createType();
-        $index = $type->getIndex();
+        $index = $this->_createIndex();
         $client = $index->getClient();
 
         $multiSearch = new MultiSearch($client);
 
         $searchGood = new Search($client);
         $searchGood->setQuery('bunny');
-        $searchGood->addIndex($index)->addType($type);
+        $searchGood->addIndex($index);
 
         $multiSearch->addSearch($searchGood, 'search1');
 
         $searchBad = new Search($client);
         $searchBad->setOption(Search::OPTION_SIZE, -2);
-        $searchBad->addIndex($index)->addType($type);
+        $searchBad->addIndex($index);
 
         $multiSearch->addSearch($searchBad);
 
@@ -400,14 +392,13 @@ class SearchTest extends BaseTest
      */
     public function testGlobalSearchTypeSearch()
     {
-        $type = $this->_createType();
-        $index = $type->getIndex();
+        $index = $this->_createIndex();
         $client = $index->getClient();
 
         $multiSearch = new MultiSearch($client);
 
         $search1 = new Search($client);
-        $search1->addIndex($index)->addType($type);
+        $search1->addIndex($index);
         $query1 = new Query();
         $termQuery1 = new Term();
         $termQuery1->setTerm('username', 'farrelley');
@@ -420,7 +411,7 @@ class SearchTest extends BaseTest
         $this->assertCount(1, $multiSearch->getSearches());
 
         $search2 = new Search($client);
-        $search2->addIndex($index)->addType($type);
+        $search2->addIndex($index);
         $query2 = new Query();
         $termQuery2 = new Term();
         $termQuery2->setTerm('username', 'bunny');
@@ -484,14 +475,13 @@ class SearchTest extends BaseTest
      */
     public function testGlobalSearchTypeSearchWithKeys()
     {
-        $type = $this->_createType();
-        $index = $type->getIndex();
+        $index = $this->_createIndex();
         $client = $index->getClient();
 
         $multiSearch = new MultiSearch($client);
 
         $search1 = new Search($client);
-        $search1->addIndex($index)->addType($type);
+        $search1->addIndex($index);
         $query1 = new Query();
         $termQuery1 = new Term();
         $termQuery1->setTerm('username', 'farrelley');
@@ -504,7 +494,7 @@ class SearchTest extends BaseTest
         $this->assertCount(1, $multiSearch->getSearches());
 
         $search2 = new Search($client);
-        $search2->addIndex($index)->addType($type);
+        $search2->addIndex($index);
         $query2 = new Query();
         $termQuery2 = new Term();
         $termQuery2->setTerm('username', 'bunny');
@@ -569,14 +559,13 @@ class SearchTest extends BaseTest
      */
     public function testSearchWithSearchOptions()
     {
-        $type = $this->_createType();
-        $index = $type->getIndex();
+        $index = $this->_createIndex();
         $client = $index->getClient();
 
         $multiSearch = new MultiSearch($client);
 
         $search1 = new Search($client);
-        $search1->addIndex($index)->addType($type);
+        $search1->addIndex($index);
         $search1->setOption('terminate_after', '1');
         $query1 = new Query();
         $termQuery1 = new Term();
@@ -590,7 +579,7 @@ class SearchTest extends BaseTest
         $this->assertCount(1, $multiSearch->getSearches());
 
         $search2 = new Search($client);
-        $search2->addIndex($index)->addType($type);
+        $search2->addIndex($index);
         $query2 = new Query();
         $termQuery2 = new Term();
         $termQuery2->setTerm('username', 'bunny');

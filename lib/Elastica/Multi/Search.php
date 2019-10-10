@@ -206,10 +206,6 @@ class Search
             $header['index'] = $search->getIndices();
         }
 
-        if ($search->hasTypes()) {
-            $header['types'] = $search->getTypes();
-        }
-
         // Filter options accepted in the "header"
         return \array_intersect_key($header, \array_flip(self::$HEADER_OPTIONS));
     }
