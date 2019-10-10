@@ -311,11 +311,7 @@ class InnerHitsTest extends BaseTest
     {
         $child = (new HasChild($query, 'answers'))->setInnerHits($innerHits);
 
-        $ind = $this->_getIndexForParentChildrenTest();
-        $t = $ind->getType('_doc');
-        $r = $t->search($child);
-
-        return $this->_getIndexForParentChildrenTest()->getType('_doc')->search($child);
+        return $this->_getIndexForParentChildrenTest()->search($child);
     }
 
     /**

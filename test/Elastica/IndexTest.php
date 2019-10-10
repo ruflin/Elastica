@@ -3,6 +3,7 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
 use Elastica\Mapping;
@@ -639,7 +640,7 @@ class IndexTest extends BaseTest
      */
     public function testCreateWithInvalidOption()
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $client = $this->_getClient();
         $indexName = 'test';
@@ -675,12 +676,6 @@ class IndexTest extends BaseTest
         $this->assertTrue($search->hasIndices());
         $this->assertTrue($search->hasIndex('test'));
         $this->assertTrue($search->hasIndex($index));
-        $this->assertEquals([], $search->getTypes());
-        $this->assertFalse($search->hasTypes());
-        $this->assertFalse($search->hasType('_doc'));
-
-        $type = new Type($index, '_doc');
-        $this->assertFalse($search->hasType($type));
     }
 
     /**
@@ -689,8 +684,6 @@ class IndexTest extends BaseTest
     public function testSearch()
     {
         $index = $this->_createIndex();
-
-        $type = new Type($index, '_doc');
 
         $docs = [];
         $docs[] = new Document(1, ['username' => 'hans', 'test' => ['2', '3', '5']]);
@@ -721,9 +714,6 @@ class IndexTest extends BaseTest
     public function testSearchGet()
     {
         $index = $this->_createIndex();
-
-        $type = new Type($index, '_doc');
-
         $docs = [];
         $docs[] = new Document(1, ['username' => 'hans']);
         $index->addDocuments($docs);
@@ -742,8 +732,6 @@ class IndexTest extends BaseTest
     public function testForcemerge()
     {
         $index = $this->_createIndex('testforcemerge_indextest', false, 3);
-
-        $type = new Type($index, '_doc');
 
         $docs = [];
         $docs[] = new Document(1, ['foo' => 'bar']);
@@ -825,29 +813,6 @@ class IndexTest extends BaseTest
         $data = $index->analyze(['text' => 'foo', 'explain' => true], []);
 
         $this->assertArrayHasKey('custom_analyzer', $data);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testThrowExceptionIfNotScalar()
-    {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
-
-        $client = $this->_getClient();
-        $client->getIndex(new \stdClass());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testConvertScalarsToString()
-    {
-        $client = $this->_getClient();
-        $index = $client->getIndex(1);
-
-        $this->assertEquals('1', $index->getName());
-        $this->assertInternalType('string', $index->getName());
     }
 
     /**

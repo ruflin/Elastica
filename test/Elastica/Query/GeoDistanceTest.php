@@ -3,6 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\GeoDistance;
 use Elastica\Test\Base as BaseTest;
@@ -15,9 +16,7 @@ class GeoDistanceTest extends BaseTest
     public function testGeoPoint()
     {
         $index = $this->_createIndex();
-
-        // Set mapping
-        $index->setMapping(['point' => ['type' => 'geo_point']]);
+        $index->setMapping(new Mapping(['point' => ['type' => 'geo_point']]));
 
         // Add doc 1
         $doc1 = new Document(1);

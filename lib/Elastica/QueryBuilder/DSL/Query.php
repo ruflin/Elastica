@@ -41,7 +41,6 @@ use Elastica\Query\SpanTerm;
 use Elastica\Query\SpanWithin;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
-use Elastica\Query\Type;
 use Elastica\Query\Wildcard;
 use Elastica\QueryBuilder\DSL;
 
@@ -563,20 +562,6 @@ class Query implements DSL
     public function exists(string $field): Exists
     {
         return new Exists($field);
-    }
-
-    /**
-     * type query.
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-query.html
-     *
-     * @param string $type Type name
-     *
-     * @return Type
-     */
-    public function type(string $type = null): Type
-    {
-        return new Type($type);
     }
 
     /**

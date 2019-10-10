@@ -3,10 +3,8 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
-use Elastica\Index;
 use Elastica\Query\QueryString;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 use Elastica\Util;
 
 class EscapeStringTest extends BaseTest
@@ -18,8 +16,6 @@ class EscapeStringTest extends BaseTest
     {
         $index = $this->_createIndex();
         $index->getSettings()->setNumberOfReplicas(0);
-
-        $type = new Type($index, '_doc');
 
         $doc = new Document(1, [
             'email' => 'test@test.com', 'username' => 'test 7/6 123', 'test' => ['2', '3', '5'], ]

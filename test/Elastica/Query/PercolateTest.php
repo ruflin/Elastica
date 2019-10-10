@@ -3,6 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query\Percolate;
 use Elastica\Test\Base as BaseTest;
 
@@ -13,8 +14,6 @@ class PercolateTest extends BaseTest
      */
     private $index;
 
-    private $documentType;
-
     /**
      * @group functional
      */
@@ -24,7 +23,7 @@ class PercolateTest extends BaseTest
         //Register a query in the percolator:
         $queryDoc = new Document(1, ['query' => ['match' => ['message' => 'bonsai tree']]]);
         $doc = new Document(2, ['message' => 'A new bonsai tree in the office']);
-        $this->documentType->addDocument($queryDoc);
+        $this->index->addDocument($queryDoc);
         $this->index->refresh();
         //Match a document to the registered percolator queries:
         $percolateQuery = new Percolate();
@@ -36,7 +35,7 @@ class PercolateTest extends BaseTest
 
         //Register a new query in the percolator:
         $queryDoc = new Document(3, ['query' => ['match' => ['message' => 'i have nice bonsai tree']]]);
-        $this->documentType->addDocument($queryDoc);
+        $this->index->addDocument($queryDoc);
         $this->index->refresh();
         $resultSet = $this->index->search($percolateQuery);
 
@@ -62,32 +61,32 @@ class PercolateTest extends BaseTest
         //Register a query in the percolator:
         $queryDoc = new Document(1, ['query' => ['match' => ['message' => 'bonsai tree']]]);
         $doc = new Document(2, ['message' => 'A new bonsai tree in the office']);
-        $this->documentType->addDocument($doc);
-        $this->documentType->addDocument($queryDoc);
+        $this->index->addDocument($doc);
+        $this->index->addDocument($queryDoc);
         $this->index->refresh();
 
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
-            ->setExistingDocumentType($this->documentType->getName())
-            ->setDocumentIndex($this->documentType->getIndex()->getName())
+            ->setExistingDocumentType($this->index->getName())
+            ->setDocumentIndex($this->index->getIndex()->getName())
             ->setDocumentId($doc->getId());
         $resultSet = $this->index->search($percolateQuery);
 
         $this->assertEquals(1, $resultSet->count());
 
         $queryDoc = new Document(3, ['query' => ['match' => ['message' => 'i have nice bonsai tree']]]);
-        $this->documentType->addDocument($queryDoc);
+        $this->index->addDocument($queryDoc);
         $this->index->refresh();
         $resultSet = $this->index->search($percolateQuery);
 
         $this->assertEquals(2, $resultSet->count());
 
         $doc2 = new Document(4, ['message' => 'Just a simple text for test']);
-        $this->documentType->addDocument($doc2);
+        $this->index->addDocument($doc2);
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
-            ->setExistingDocumentType($this->documentType->getName())
-            ->setDocumentIndex($this->documentType->getIndex()->getName())
+            ->setExistingDocumentType($this->index->getName())
+            ->setDocumentIndex($this->index->getIndex()->getName())
             ->setDocumentId($doc2->getId());
         $resultSet = $this->index->search($percolateQuery);
 
@@ -100,9 +99,8 @@ class PercolateTest extends BaseTest
         $this->index->getSettings()->setNumberOfReplicas(0);
         //The doctype mapping is the mapping used to preprocess the document
         // defined in the percolator query before it gets indexed into a temporary index.
-        $this->documentType = $this->index->getType('_doc');
         //The queries mapping is the mapping used for indexing the query documents.
-        $this->documentType->setMapping(['message' => ['type' => 'text'], 'query' => ['type' => 'percolator']]);
+        $this->index->setMapping(new Mapping(['message' => ['type' => 'text'], 'query' => ['type' => 'percolator']]));
     }
 
     /**

@@ -112,16 +112,9 @@ class Base extends TestCase
         return 'http://'.$proxyHost.':12346';
     }
 
-    /**
-     * @param string $name   Index name
-     * @param bool   $delete Delete index if it exists
-     * @param int    $shards Number of shards to create
-     *
-     * @return Index
-     */
-    protected function _createIndex($name = null, $delete = true, $shards = 1)
+    protected function _createIndex(string $name = null, bool $delete = true, int $shards = 1): Index
     {
-        if (\is_null($name)) {
+        if (null === $name) {
             $name = \preg_replace('/[^a-z]/i', '', \strtolower(\get_called_class()).\uniqid());
         }
 

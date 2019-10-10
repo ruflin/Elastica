@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
 use Elastica\Mapping;
 use Elastica\Query\HasParent;
 use Elastica\Query\MatchAll;
@@ -65,11 +64,7 @@ class HasParentTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('testhasparentjoin');
         $index->create([], true);
-
-        $mapping = new Mapping();
-        $mapping->setType($type);
-
-        $mapping = new Mapping($type, [
+        $mapping = new Mapping([
             'text' => ['type' => 'keyword'],
             'name' => ['type' => 'keyword'],
             'my_join_field' => [
@@ -83,50 +78,46 @@ class HasParentTest extends BaseTest
         $index->setMapping($mapping);
         $index->refresh();
 
-        $doc1 = new Document(1, [
+        $doc1 = $index->createDocument(1, [
             'text' => 'this is the 1st question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], '_doc');
-
-        $doc2 = new Document(2, [
+        ]);
+        $doc2 = $index->createDocument(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], '_doc');
-
+        ]);
         $index->addDocuments([$doc1, $doc2]);
 
-        $doc3 = new Document(3, [
+        $doc3 = $index->createDocument(3, [
             'text' => 'this is an answer, the 1st',
             'name' => 'rico',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 1,
             ],
-        ], '_doc', 'testhasparentjoin');
-
-        $doc4 = new Document(4, [
+        ]);
+        $doc4 = $index->createDocument(4, [
             'text' => 'this is an answer, the 2nd',
             'name' => 'fede',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], '_doc', 'testhasparentjoin');
-
-        $doc5 = new Document(5, [
+        ]);
+        $doc5 = $index->createDocument(5, [
             'text' => 'this is an answer, the 3rd',
             'name' => 'fede',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], '_doc', 'testhasparentjoin');
+        ]);
 
-        $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
+        $index->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
         $index->refresh();
 
         $parentQuery = new HasParent(new MatchAll(), 'question');

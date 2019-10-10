@@ -8,7 +8,6 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\Ids;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 
 class BoolQueryTest extends BaseTest
 {
@@ -91,8 +90,6 @@ class BoolQueryTest extends BaseTest
         $index = new Index($client, 'test');
         $index->create([], true);
 
-        $type = new Type($index, '_doc');
-
         $doc = new Document(1, ['id' => 1, 'email' => 'hans@test.com', 'username' => 'hans', 'test' => ['2', '4', '5']]);
         $index->addDocument($doc);
         $doc = new Document(2, ['id' => 2, 'email' => 'emil@test.com', 'username' => 'emil', 'test' => ['1', '3', '6']]);
@@ -143,7 +140,6 @@ class BoolQueryTest extends BaseTest
     public function testEmptyBoolQuery()
     {
         $index = $this->_createIndex();
-        $type = new Type($index, '_doc');
 
         $docNumber = 3;
         for ($i = 0; $i < $docNumber; ++$i) {

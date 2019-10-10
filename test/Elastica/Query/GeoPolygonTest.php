@@ -3,6 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\GeoPolygon;
 use Elastica\Query\MatchAll;
@@ -18,7 +19,7 @@ class GeoPolygonTest extends BaseTest
         $index = $this->_createIndex();
 
         // Set mapping
-        $index->setMapping(['location' => ['type' => 'geo_point']]);
+        $index->setMapping(new Mapping(['location' => ['type' => 'geo_point']]));
 
         // Add doc 1
         $doc1 = new Document(1,

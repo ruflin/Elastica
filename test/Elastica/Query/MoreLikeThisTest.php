@@ -10,7 +10,6 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\MoreLikeThis;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
 
 class MoreLikeThisTest extends BaseTest
 {
@@ -23,10 +22,8 @@ class MoreLikeThisTest extends BaseTest
         $index = new Index($client, 'test');
         $index->create([], true);
         $index->getSettings()->setNumberOfReplicas(0);
-        //$index->getSettings()->setNumberOfShards(1);
 
-        $type = new Type($index, '_doc');
-        $mapping = new Mapping($type, [
+        $mapping = new Mapping([
             'email' => ['store' => true, 'type' => 'text', 'index' => true],
             'content' => ['store' => true, 'type' => 'text',  'index' => true],
         ]);
@@ -66,8 +63,6 @@ class MoreLikeThisTest extends BaseTest
         $client = $this->_getClient(['persistent' => false]);
         $index = $client->getIndex('elastica_test');
         $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
-
-        $type = new Type($index, '_doc');
 
         $index->addDocuments([
             new Document(1, ['visible' => true, 'name' => 'bruce wayne batman']),

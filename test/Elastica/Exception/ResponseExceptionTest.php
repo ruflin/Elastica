@@ -4,6 +4,7 @@ namespace Elastica\Test\Exception;
 
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
+use Elastica\Mapping;
 
 class ResponseExceptionTest extends AbstractExceptionTest
 {
@@ -33,11 +34,11 @@ class ResponseExceptionTest extends AbstractExceptionTest
     {
         $index = $this->_createIndex();
 
-        $index->setMapping([
+        $index->setMapping(new Mapping([
             'num' => [
                 'type' => 'long',
             ],
-        ]);
+        ]));
 
         try {
             $index->addDocument(new Document('', [
