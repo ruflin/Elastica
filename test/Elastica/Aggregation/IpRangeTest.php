@@ -5,21 +5,19 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\IpRange;
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
-use Elastica\Type\Mapping;
 
 class IpRangeTest extends BaseAggregationTest
 {
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $type->setMapping(new Mapping(null, [
+        $index->setMapping(new Mapping([
             'address' => ['type' => 'ip'],
         ]));
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['address' => '192.168.1.100']),
             new Document(2, ['address' => '192.168.1.150']),
             new Document(3, ['address' => '192.168.1.200']),

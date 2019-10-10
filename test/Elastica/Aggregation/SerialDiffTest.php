@@ -7,22 +7,21 @@ use Elastica\Aggregation\Max;
 use Elastica\Aggregation\SerialDiff;
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
-use Elastica\Type\Mapping;
 
 class SerialDiffTest extends BaseAggregationTest
 {
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
-        $type->setMapping(Mapping::create([
+        $index->setMapping(Mapping::create([
             'value' => ['type' => 'long'],
             'measured_at' => ['type' => 'date'],
         ]));
 
-        $type->addDocuments([
+        $index->addDocuments([
             Document::create(['value' => 100, 'measured_at' => '2016-08-23T15:00:00+0200']),
             Document::create(['value' => 266, 'measured_at' => '2016-08-23T16:00:00+0200']),
             Document::create(['value' => 350, 'measured_at' => '2016-08-23T17:00:00+0200']),

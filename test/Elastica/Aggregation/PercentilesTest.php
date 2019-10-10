@@ -122,8 +122,7 @@ class PercentilesTest extends BaseAggregationTest
     {
         // prepare
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['price' => 100]),
             new Document(2, ['price' => 200]),
             new Document(3, ['price' => 300]),
@@ -144,7 +143,7 @@ class PercentilesTest extends BaseAggregationTest
         $query = new Query();
         $query->addAggregation($aggr);
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $aggrResult = $resultSet->getAggregation('price_percentile');
 
         $this->assertEquals(100.0, $aggrResult['values']['1.0']);
@@ -196,8 +195,7 @@ class PercentilesTest extends BaseAggregationTest
 
         // prepare
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['price' => 100]),
             new Document(2, ['price' => 200]),
             new Document(3, ['price' => 300]),
@@ -219,7 +217,7 @@ class PercentilesTest extends BaseAggregationTest
         $query = new Query();
         $query->addAggregation($aggr);
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $aggrResult = $resultSet->getAggregation('price_percentile');
 
         $this->assertEquals($expected, $aggrResult);

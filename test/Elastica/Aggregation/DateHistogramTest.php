@@ -5,21 +5,19 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
-use Elastica\Type\Mapping;
 
 class DateHistogramTest extends BaseAggregationTest
 {
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $type->setMapping(new Mapping(null, [
+        $index->setMapping(new Mapping([
             'created' => ['type' => 'date'],
         ]));
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['created' => '2014-01-29T00:20:00']),
             new Document(2, ['created' => '2014-01-29T02:20:00']),
             new Document(3, ['created' => '2014-01-29T03:20:00']),

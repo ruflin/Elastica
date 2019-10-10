@@ -3,11 +3,11 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query\HasParent;
 use Elastica\Query\MatchAll;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class HasParentTest extends BaseTest
 {
@@ -65,7 +65,6 @@ class HasParentTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('testhasparentjoin');
         $index->create([], true);
-        $type = $index->getType('_doc');
 
         $mapping = new Mapping();
         $mapping->setType($type);
@@ -81,7 +80,7 @@ class HasParentTest extends BaseTest
             ],
         ]);
 
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
         $index->refresh();
 
         $doc1 = new Document(1, [

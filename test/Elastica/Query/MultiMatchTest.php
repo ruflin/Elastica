@@ -4,10 +4,10 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\MultiMatch;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class MultiMatchTest extends BaseTest
 {
@@ -202,18 +202,16 @@ class MultiMatchTest extends BaseTest
             ],
         ], true);
 
-        $type = $index->getType('_doc');
-
         $mapping = new Mapping($type, [
             'name' => ['type' => 'text', 'analyzer' => 'noStops'],
             'last_name' => ['type' => 'text', 'analyzer' => 'noStops'],
             'full_name' => ['type' => 'text', 'analyzer' => 'noStops'],
         ]);
 
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
 
         foreach (self::$data as $key => $docData) {
-            $type->addDocument(new Document($key, $docData));
+            $index->addDocument(new Document($key, $docData));
         }
 
         // Refresh index

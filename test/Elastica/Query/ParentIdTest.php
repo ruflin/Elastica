@@ -3,10 +3,10 @@
 namespace Elastica\Query;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\QueryBuilder\DSL\Query;
 use Elastica\Search;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class ParentIdTest extends BaseTest
 {
@@ -38,7 +38,6 @@ class ParentIdTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('testparentid');
         $index->create([], true);
-        $type = $index->getType('_doc');
 
         $mapping = new Mapping();
         $mapping->setType($type);
@@ -54,7 +53,7 @@ class ParentIdTest extends BaseTest
             ],
         ]);
 
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
 
         $expected = [
             '_doc' => [
@@ -140,7 +139,6 @@ class ParentIdTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('testparentid');
         $index->create([], true);
-        $type = $index->getType('_doc');
 
         $mapping = new Mapping();
         $mapping->setType($type);
@@ -156,7 +154,7 @@ class ParentIdTest extends BaseTest
             ],
         ]);
 
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
         $index->refresh();
 
         $doc1 = new Document(1, [

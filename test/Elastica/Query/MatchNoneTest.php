@@ -30,7 +30,7 @@ class MatchNoneTest extends BaseTest
         $client = $index->getClient();
 
         $doc = new Document(1, ['name' => 'ruflin']);
-        $index->getType('_doc')->addDocument($doc);
+        $index->addDocument($doc);
 
         $index->refresh();
 

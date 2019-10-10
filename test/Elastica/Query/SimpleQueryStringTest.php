@@ -44,7 +44,7 @@ class SimpleQueryStringTest extends Base
             new Document(4, ['make' => 'Gibson', 'model' => 'SG Faded']),
             new Document(5, ['make' => 'Fender', 'model' => 'Stratocaster']),
         ];
-        $index->getType('_doc')->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
         $query = new SimpleQueryString('gibson +sg +-faded', ['make', 'model']);
@@ -86,8 +86,8 @@ class SimpleQueryStringTest extends Base
         $this->_checkVersion('1.5');
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-        $type->addDocuments([
+
+        $index->addDocuments([
             new Document(1, ['body' => 'foo']),
             new Document(2, ['body' => 'bar']),
             new Document(3, ['body' => 'foo bar']),
@@ -97,7 +97,7 @@ class SimpleQueryStringTest extends Base
 
         $query = new SimpleQueryString('foo bar');
         $query->setMinimumShouldMatch(2);
-        $results = $type->search($query);
+        $results = $index->search($query);
 
         $this->assertCount(2, $results);
         $this->assertEquals(3, $results[0]->getId());

@@ -342,7 +342,7 @@ class Search
     }
 
     /**
-     * Search in the set indices, types.
+     * Search in the set indices.
      *
      * @param mixed     $query
      * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)

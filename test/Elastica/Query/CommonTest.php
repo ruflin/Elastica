@@ -35,7 +35,6 @@ class CommonTest extends BaseTest
     public function testQuery()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $docs = [
             new Document(1, ['body' => 'foo baz']),
@@ -46,17 +45,17 @@ class CommonTest extends BaseTest
         for ($i = 4; $i < 24; ++$i) {
             $docs[] = new Document($i, ['body' => 'foo bar']);
         }
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
         $query = new Common('body', 'foo bar baz bat', .5);
-        $results = $type->search($query)->getResults();
+        $results = $index->search($query)->getResults();
 
         //documents containing only common words should not be returned
         $this->assertCount(3, $results);
 
         $query->setMinimumShouldMatch(2);
-        $results = $type->search($query);
+        $results = $index->search($query);
 
         //only the document containing both low frequency terms should match
         $this->assertEquals(1, $results->count());

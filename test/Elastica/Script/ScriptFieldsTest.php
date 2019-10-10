@@ -3,11 +3,11 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class ScriptFieldsTest extends BaseTest
 {
@@ -64,10 +64,8 @@ class ScriptFieldsTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $type = $index->getType('_doc');
-
         $doc = new Document(1, ['firstname' => 'guschti', 'lastname' => 'ruflin']);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
         $index->refresh();
 
         $query = new Query();
@@ -77,7 +75,7 @@ class ScriptFieldsTest extends BaseTest
         ]);
         $query->setScriptFields($scriptFields);
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $first = $resultSet->current()->getData();
 
         // 1 + 2
@@ -92,7 +90,6 @@ class ScriptFieldsTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('testscriptfieldwithjoin');
         $index->create([], true);
-        $type = $index->getType('_doc');
 
         $mapping = new Mapping();
         $mapping->setType($type);
@@ -108,7 +105,7 @@ class ScriptFieldsTest extends BaseTest
             ],
         ]);
 
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
         $index->refresh();
 
         $doc1 = new Document(1, [

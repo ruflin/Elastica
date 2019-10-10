@@ -6,20 +6,19 @@ use Elastica\Aggregation\Terms;
 use Elastica\Aggregation\TopHits;
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
-use Elastica\Type\Mapping;
 
 class TopHitsTest extends BaseAggregationTest
 {
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
-
-        $mapping = new Mapping($index->getType('_doc'), [
+        $mapping = new Mapping([
             'tags' => ['type' => 'keyword'],
             'title' => ['type' => 'keyword'],
             'my_join_field' => [
@@ -29,9 +28,9 @@ class TopHitsTest extends BaseAggregationTest
                 ],
             ],
         ]);
-        $index->getType('questions')->setMapping($mapping);
+        $index->setMapping($mapping);
 
-        $index->getType('questions')->addDocuments([
+        $index->addDocuments([
             new Document(1, [
                 'tags' => ['linux'],
                 'last_activity_date' => '2015-01-05',

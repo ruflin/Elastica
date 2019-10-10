@@ -3,6 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\HasChild;
 use Elastica\Query\InnerHits;
@@ -12,20 +13,13 @@ use Elastica\Query\SimpleQueryString;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class InnerHitsTest extends BaseTest
 {
     private function _getIndexForNestedTest()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $mapping = new Mapping();
-        $mapping->setType($type);
-
-        // Set mapping
-        $mapping->setProperties([
+        $index->setMapping(new Mapping([
             'users' => [
                 'type' => 'nested',
                 'properties' => [
@@ -34,12 +28,9 @@ class InnerHitsTest extends BaseTest
             ],
             'title' => ['type' => 'text'],
             'last_activity_date' => ['type' => 'date'],
-        ]);
+        ]));
 
-        // Send mapping to type
-        $mapping->send();
-
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, [
                 'users' => [
                     ['name' => 'John Smith', 'last_activity_date' => '2015-01-05'],
@@ -92,13 +83,7 @@ class InnerHitsTest extends BaseTest
     private function _getIndexForParentChildrenTest()
     {
         $index = $this->_createIndex();
-        $questionType = $index->getType('_doc');
-
-        // Parent
         $mappingQuestion = new Mapping();
-        $mappingQuestion->setType($questionType);
-
-        // Set mapping
         $mappingQuestion->setProperties([
             'title' => ['type' => 'text'],
             'answer' => ['type' => 'text', 'fielddata' => true],
@@ -111,9 +96,8 @@ class InnerHitsTest extends BaseTest
             ],
         ]);
 
-        $mappingQuestion->send();
-
-        $questionType->addDocuments([
+        $index->setMapping($mappingQuestion);
+        $index->addDocuments([
             new Document(1, [
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about linux #1',
@@ -151,32 +135,32 @@ class InnerHitsTest extends BaseTest
             ], '_doc'),
         ]);
 
-        $documentResponse1 = new Document(6, [
+        $documentResponse1 = $index->createDocument(6, [
             'answer' => 'linux is cool',
             'last_activity_date' => '2016-01-05',
             'my_join_field' => [
                 'name' => 'answers',
                 'parent' => 1,
             ],
-        ], '_doc', $index->getName());
+        ]);
 
-        $documentResponse2 = new Document(7, [
+        $documentResponse2 = $index->createDocument(7, [
             'answer' => 'linux is bad',
             'last_activity_date' => '2005-01-05',
             'my_join_field' => [
                 'name' => 'answers',
                 'parent' => 1,
             ],
-        ], '_doc', $index->getName());
+        ]);
 
-        $documentResponse3 = new Document(8, [
+        $documentResponse3 = $index->createDocument(8, [
             'answer' => 'windows was cool',
             'last_activity_date' => '2005-01-05',
             'my_join_field' => [
                 'name' => 'answers',
                 'parent' => 2,
             ],
-        ], '_doc', $index->getName());
+        ]);
 
         $this->_getClient()->addDocuments([$documentResponse1, $documentResponse2, $documentResponse3], ['routing' => 1]);
 

@@ -4,13 +4,13 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\MoreLikeThis;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
 use Elastica\Type;
-use Elastica\Type\Mapping;
 
 class MoreLikeThisTest extends BaseTest
 {
@@ -32,13 +32,13 @@ class MoreLikeThisTest extends BaseTest
         ]);
 
         $mapping->setSource(['enabled' => false]);
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
 
         $doc = new Document(1000, ['email' => 'testemail@gmail.com', 'content' => 'This is a sample post. Hello World Fuzzy Like This!']);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
 
         $doc = new Document(1001, ['email' => 'nospam@gmail.com', 'content' => 'This is a fake nospam email address for gmail']);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
 
         // Refresh index
         $index->refresh();
@@ -53,7 +53,7 @@ class MoreLikeThisTest extends BaseTest
         $query = new Query();
         $query->setQuery($mltQuery);
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $resultSet->getResponse()->getData();
         $this->assertEquals(2, $resultSet->count());
     }
@@ -69,7 +69,7 @@ class MoreLikeThisTest extends BaseTest
 
         $type = new Type($index, '_doc');
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['visible' => true, 'name' => 'bruce wayne batman']),
             new Document(2, ['visible' => true, 'name' => 'bruce wayne']),
             new Document(3, ['visible' => false, 'name' => 'bruce wayne']),
@@ -81,7 +81,7 @@ class MoreLikeThisTest extends BaseTest
 
         $index->refresh();
 
-        $doc = $type->getDocument(1);
+        $doc = $index->getDocument(1);
 
         // Return all similar from id
         $mltQuery = new MoreLikeThis();
@@ -89,7 +89,7 @@ class MoreLikeThisTest extends BaseTest
         $mltQuery->setMinDocFrequency(1);
         $mltQuery->setLike($doc);
 
-        $this->assertEquals(4, $type->count($mltQuery));
+        $this->assertEquals(4, $index->count($mltQuery));
 
         $mltQuery = new MoreLikeThis();
         $mltQuery->setMinTermFrequency(1);
@@ -103,7 +103,7 @@ class MoreLikeThisTest extends BaseTest
         $filterTerm->setTerm('visible', true);
         $bool->addFilter($filterTerm);
 
-        $this->assertEquals(2, $type->count($bool));
+        $this->assertEquals(2, $index->count($bool));
 
         // Return all similar from source
         $mltQuery = new MoreLikeThis();
@@ -111,10 +111,10 @@ class MoreLikeThisTest extends BaseTest
         $mltQuery->setMinDocFrequency(1);
         $mltQuery->setMinimumShouldMatch('100%');
         $mltQuery->setLike(
-            $type->getDocument(1)->setId('')
+            $index->getDocument(1)->setId('')
         );
 
-        $this->assertEquals(1, $type->count($mltQuery));
+        $this->assertEquals(1, $index->count($mltQuery));
     }
 
     /**

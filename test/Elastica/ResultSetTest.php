@@ -3,6 +3,7 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Result;
 use Elastica\ResultSet;
 use Elastica\Test\Base as BaseTest;
@@ -15,16 +16,14 @@ class ResultSetTest extends BaseTest
     public function testGetters()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['name' => 'elastica search']),
             new Document(2, ['name' => 'elastica library']),
             new Document(3, ['name' => 'elastica test']),
         ]);
         $index->refresh();
 
-        $resultSet = $type->search('elastica search');
+        $resultSet = $index->search('elastica search');
 
         $this->assertInstanceOf(ResultSet::class, $resultSet);
         $this->assertEquals(3, $resultSet->getTotalHits());
@@ -42,16 +41,14 @@ class ResultSetTest extends BaseTest
     public function testArrayAccess()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['name' => 'elastica search']),
             new Document(2, ['name' => 'elastica library']),
             new Document(3, ['name' => 'elastica test']),
         ]);
         $index->refresh();
 
-        $resultSet = $type->search('elastica search');
+        $resultSet = $index->search('elastica search');
 
         $this->assertInstanceOf(ResultSet::class, $resultSet);
         $this->assertInstanceOf(Result::class, $resultSet[0]);
@@ -67,16 +64,14 @@ class ResultSetTest extends BaseTest
     public function testDocumentsAccess()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['name' => 'elastica search']),
             new Document(2, ['name' => 'elastica library']),
             new Document(3, ['name' => 'elastica test']),
         ]);
         $index->refresh();
 
-        $resultSet = $type->search('elastica search');
+        $resultSet = $index->search('elastica search');
 
         $this->assertInstanceOf(ResultSet::class, $resultSet);
 
@@ -96,16 +91,13 @@ class ResultSetTest extends BaseTest
      */
     public function testInvalidOffsetCreation()
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $doc = new Document(1, ['name' => 'elastica search']);
-        $type->addDocument($doc);
+        $index->addDocument(new Document(1, ['name' => 'elastica search']));
         $index->refresh();
 
-        $resultSet = $type->search('elastica search');
+        $resultSet = $index->search('elastica search');
 
         $result = new Result(['_id' => 'fakeresult']);
         $resultSet[1] = $result;
@@ -116,16 +108,15 @@ class ResultSetTest extends BaseTest
      */
     public function testInvalidOffsetGet()
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $doc = new Document(1, ['name' => 'elastica search']);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
         $index->refresh();
 
-        $resultSet = $type->search('elastica search');
+        $resultSet = $index->search('elastica search');
 
         return $resultSet[3];
     }

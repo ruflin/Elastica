@@ -19,7 +19,6 @@ class HttpTest extends BaseTest
         $index->create([], true);
         $this->_waitForAllocation($index);
 
-        $type = $index->getType('_doc');
         // Force HEAD request to set CURLOPT_NOBODY = true
         $index->exists();
 
@@ -27,11 +26,11 @@ class HttpTest extends BaseTest
         $data = ['id' => $id, 'name' => 'Item 1'];
         $doc = new Document($id, $data);
 
-        $type->addDocument($doc);
+        $index->addDocument($doc);
 
         $index->refresh();
 
-        $doc = $type->getDocument($id);
+        $doc = $index->getDocument($id);
 
         // Document should be retrieved correctly
         $this->assertSame($data, $doc->getData());
@@ -48,8 +47,6 @@ class HttpTest extends BaseTest
         $index->create([], true);
         $this->_waitForAllocation($index);
 
-        $type = $index->getType('_doc');
-
         // Force HEAD request to set CURLOPT_NOBODY = true
         $index->exists();
 
@@ -62,11 +59,11 @@ class HttpTest extends BaseTest
 
         $doc = new Document($id, $data);
 
-        $type->addDocument($doc);
+        $index->addDocument($doc);
 
         $index->refresh();
 
-        $doc = $type->getDocument($id);
+        $doc = $index->getDocument($id);
 
         // Document should be retrieved correctly
         $this->assertSame($data, $doc->getData());
@@ -145,8 +142,7 @@ class HttpTest extends BaseTest
         $index->create([], true);
         $this->_waitForAllocation($index);
 
-        $type = $index->getType('_doc');
-        $type->addDocument(new Document(1, ['test' => 'test']));
+        $index->addDocument(new Document(1, ['test' => 'test']));
 
         $index->refresh();
 

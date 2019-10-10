@@ -16,8 +16,7 @@ class AdjacencyMatrixTest extends BaseAggregationTest
     protected function _getIndexForTest(): Index
     {
         $index = $this->_createIndex();
-
-        $index->getType('_doc')->addDocuments([
+        $index->addDocuments([
             new Document(1, ['accounts' => ['hillary', 'sidney']]),
             new Document(2, ['accounts' => ['hillary', 'donald']]),
             new Document(3, ['accounts' => ['vladimir', 'donald']]),

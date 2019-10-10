@@ -66,9 +66,8 @@ class SpanMultiTest extends BaseTest
         $text5 = 'Nullam pharetra mi vitae sollicitudin fermentum. Proin sed enim consequat, consectetur eros vitae, egestas metus';
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, [$field => $text1]),
             new Document(2, [$field => $text2]),
             new Document(3, [$field => $text3]),
@@ -82,13 +81,13 @@ class SpanMultiTest extends BaseTest
         //multi with prefix will match 3
         $prefixQuery = new Prefix([$field => ['value' => 'conse']]);
         $spanMultiQuery->setMatch($prefixQuery);
-        $resultSet = $type->search($spanMultiQuery);
+        $resultSet = $index->search($spanMultiQuery);
         $this->assertEquals(3, $resultSet->count());
 
         //multi with wildcard will match 3
         $wildcardQuery = new Wildcard($field, '*ll*');
         $spanMultiQuery->setMatch($wildcardQuery);
-        $resultSet = $type->search($spanMultiQuery);
+        $resultSet = $index->search($spanMultiQuery);
         $this->assertEquals(3, $resultSet->count());
     }
 }

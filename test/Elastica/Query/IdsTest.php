@@ -3,36 +3,27 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Index;
 use Elastica\Query\Ids;
 use Elastica\Query\Type;
 use Elastica\Test\Base as BaseTest;
 
 class IdsTest extends BaseTest
 {
-    protected $_index;
-    protected $_type;
+    /** @var Index */
+    protected $index;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $index = $this->_createIndex();
+        $this->index = $this->_createIndex();
 
-        $type1 = $index->getType('_doc');
+        $this->index->addDocument(new Document(1, ['name' => 'hello world']));
+        $this->index->addDocument(new Document(2, ['name' => 'nicolas ruflin']));
+        $this->index->addDocument(new Document(3, ['name' => 'ruflin']));
 
-        $doc = new Document(1, ['name' => 'hello world']);
-        $type1->addDocument($doc);
-
-        $doc = new Document(2, ['name' => 'nicolas ruflin']);
-        $type1->addDocument($doc);
-
-        $doc = new Document(3, ['name' => 'ruflin']);
-        $type1->addDocument($doc);
-
-        $index->refresh();
-
-        $this->_type = $type1;
-        $this->_index = $index;
+        $this->index->refresh();
     }
 
     /**
@@ -43,7 +34,7 @@ class IdsTest extends BaseTest
         $query = new Ids();
         $query->setIds('1');
 
-        $resultSet = $this->_type->search($query);
+        $resultSet = $this->index->search($query);
 
         $this->assertEquals(1, $resultSet->count());
     }
@@ -56,7 +47,7 @@ class IdsTest extends BaseTest
         $query = new Ids();
         $query->setIds(['1', '2']);
 
-        $resultSet = $this->_type->search($query);
+        $resultSet = $this->index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
     }
@@ -69,7 +60,7 @@ class IdsTest extends BaseTest
         $query = new Ids();
         $query->addId('3');
 
-        $resultSet = $this->_type->search($query);
+        $resultSet = $this->index->search($query);
 
         $this->assertEquals(1, $resultSet->count());
     }
@@ -84,7 +75,7 @@ class IdsTest extends BaseTest
         $query->setIds(['1', '2']);
         $query->addId('3');
 
-        $resultSet = $this->_type->search($query);
+        $resultSet = $this->index->search($query);
 
         $this->assertEquals(3, $resultSet->count());
     }
@@ -95,10 +86,8 @@ class IdsTest extends BaseTest
     public function testSetTypeSingleSearchSingle()
     {
         $query = new Ids();
-
         $query->setIds('1');
-
-        $resultSet = $this->_index->search($query);
+        $resultSet = $this->index->search($query);
 
         $this->assertEquals(1, $resultSet->count());
     }
@@ -109,10 +98,9 @@ class IdsTest extends BaseTest
     public function testSetTypeSingleSearchArray()
     {
         $query = new Ids();
-
         $query->setIds(['1', '2']);
 
-        $resultSet = $this->_index->search($query);
+        $resultSet = $this->index->search($query);
 
         $this->assertEquals(2, $resultSet->count());
     }
@@ -127,7 +115,7 @@ class IdsTest extends BaseTest
         // Doc 4 is in the second type...
         $query->setIds('4');
 
-        $resultSet = $this->_index->search($query);
+        $resultSet = $this->index->search($query);
 
         // ...therefore 0 results should be returned
         $this->assertEquals(0, $resultSet->count());
@@ -143,7 +131,7 @@ class IdsTest extends BaseTest
         // Doc 4 is in the second type...
         $query->setIds(['1', '4']);
 
-        $resultSet = $this->_index->search($query);
+        $resultSet = $this->index->search($query);
 
         // ...therefore only 1 result should be returned
         $this->assertEquals(1, $resultSet->count());

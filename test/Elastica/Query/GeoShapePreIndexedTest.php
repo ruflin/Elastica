@@ -3,11 +3,11 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query\AbstractGeoShape;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\GeoShapePreIndexed;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class GeoShapePreIndexedTest extends BaseTest
 {
@@ -18,18 +18,15 @@ class GeoShapePreIndexedTest extends BaseTest
     {
         $index = $this->_createIndex();
         $indexName = $index->getName();
-        $otherType = $index->getType('_doc');
-
-        // create other type mapping
-        $otherMapping = new Mapping($otherType, [
+        $otherMapping = new Mapping([
             'location' => [
                 'type' => 'geo_shape',
             ],
         ]);
-        $otherType->setMapping($otherMapping);
+        $index->setMapping($otherMapping);
 
         // add other type docs
-        $otherType->addDocument(new Document('2', [
+        $index->addDocument(new Document('2', [
             'location' => [
                 'type' => 'envelope',
                 'coordinates' => [
