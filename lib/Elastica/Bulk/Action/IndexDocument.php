@@ -31,7 +31,6 @@ class IndexDocument extends AbstractDocument
     {
         return $action->getOptions([
             '_index',
-            '_type',
             '_id',
             'version',
             'version_type',
