@@ -68,7 +68,7 @@ class PercolateTest extends BaseTest
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
             ->setExistingDocumentType($this->index->getName())
-            ->setDocumentIndex($this->index->getIndex()->getName())
+            ->setDocumentIndex($this->index->getName())
             ->setDocumentId($doc->getId());
         $resultSet = $this->index->search($percolateQuery);
 
@@ -86,7 +86,7 @@ class PercolateTest extends BaseTest
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
             ->setExistingDocumentType($this->index->getName())
-            ->setDocumentIndex($this->index->getIndex()->getName())
+            ->setDocumentIndex($this->index->getName())
             ->setDocumentId($doc2->getId());
         $resultSet = $this->index->search($percolateQuery);
 

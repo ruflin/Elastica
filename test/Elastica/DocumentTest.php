@@ -67,13 +67,11 @@ class DocumentTest extends BaseTest
         $document->setIndex('index2');
 
         $this->assertEquals('index2', $document->getIndex());
-        $this->assertEquals(Document::DEFAULT_TYPE, $document->getType());
 
         $index = new Index($this->_getClient(), 'index');
 
         $document->setIndex($index);
         $this->assertEquals('index', $document->getIndex());
-        $this->assertEquals(Document::DEFAULT_TYPE, $document->getType());
     }
 
     /**

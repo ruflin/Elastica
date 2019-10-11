@@ -3,6 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Query\Terms;
 use Elastica\Test\Base as BaseTest;
 
@@ -44,9 +45,7 @@ class TermsTest extends BaseTest
         $index = $this->_createIndex();
 
         $lookupIndex = $this->_createIndex('lookup_index');
-        $lookupType = $lookupIndex->getType('_doc');
-
-        $lookupType->addDocuments([
+        $lookupIndex->addDocuments([
             new Document(1, ['terms' => ['ruflin', 'nicolas']]),
         ]);
 
@@ -60,7 +59,7 @@ class TermsTest extends BaseTest
 
         $query->setTermsLookup('name', [
             'index' => $lookupIndex->getName(),
-            'type' => $lookupType->getName(),
+            'type' => $lookupIndex->getName(),
             'id' => '1',
             'path' => 'terms',
         ]);
@@ -136,7 +135,7 @@ class TermsTest extends BaseTest
      */
     public function testInvalidParams()
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $query = new Terms();
 

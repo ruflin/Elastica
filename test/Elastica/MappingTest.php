@@ -291,7 +291,7 @@ class MappingTest extends BaseTest
         $index->setMapping($mapping);
 
         $mappingData = $index->getMapping();
-        $this->assertEquals('test', $mappingData['_doc']['_meta']['class'], \json_encode($mappingData));
+        $this->assertEquals('test', $mappingData['_meta']['class'], \json_encode($mappingData));
 
         $index->delete();
     }
@@ -315,7 +315,7 @@ class MappingTest extends BaseTest
         $getAll = $mapping->getParam('_all');
 
         $this->assertEquals($getAll, $all);
-        $this->assertNull($mapping->getParam('_boost', $all));
+        $this->assertNull($mapping->getParam('_boost'));
         $this->assertEquals($properties, $mapping->getProperties());
     }
 }
