@@ -198,7 +198,6 @@ class AttachmentTest extends BasePipelineTest
         ]);
         $mapping->setSource(['excludes' => ['data']]);
 
-        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]]);
         $index->setMapping($mapping);
 
         $docId = 1;
