@@ -17,11 +17,11 @@ class ParentAggregation extends AbstractAggregation
     /**
      * Set the child type for this aggregation.
      *
-     * @param string $field the child type that should be selected
+     * @param string $type the child type that should be selected
      *
      * @return $this
      */
-    public function setType($type)
+    public function setType($type): self
     {
         return $this->setParam('type', $type);
     }
