@@ -1,6 +1,6 @@
 <?php
 
-namespace Elastica\Test\BulkAction;
+namespace Elastica\Test\Bulk\Action;
 
 use Elastica\Bulk\Action\UpdateDocument;
 use Elastica\Document;
@@ -14,7 +14,7 @@ class UpdateDocumentTest extends BaseTest
      */
     public function testUpdateDocument()
     {
-        $document = new Document('', ['foo' => 'bar']);
+        $document = new Document(null, ['foo' => 'bar']);
         $action = new UpdateDocument($document);
         $this->assertEquals('update', $action->getOpType());
         $this->assertTrue($action->hasSource());
@@ -30,13 +30,13 @@ class UpdateDocumentTest extends BaseTest
         $expected .= $docExpected;
         $this->assertEquals($expected, $action->toString());
 
-        $action->setId(1);
-        $expected = '{"update":{"_index":"index","_id":1}}'."\n";
+        $action->setId('1');
+        $expected = '{"update":{"_index":"index","_id":"1"}}'."\n";
         $expected .= $docExpected;
         $this->assertEquals($expected, $action->toString());
 
         $action->setRouting(1);
-        $expected = '{"update":{"_index":"index","_id":1,"routing":1}}'."\n";
+        $expected = '{"update":{"_index":"index","_id":"1","routing":1}}'."\n";
         $expected .= $docExpected;
         $this->assertEquals($expected, $action->toString());
 
@@ -45,7 +45,7 @@ class UpdateDocumentTest extends BaseTest
 
         $action->setIndex($index);
 
-        $expected = '{"update":{"_index":"index2","_id":1,"routing":1}}'."\n";
+        $expected = '{"update":{"_index":"index2","_id":"1","routing":1}}'."\n";
         $expected .= $docExpected;
         $this->assertEquals($expected, $action->toString());
     }
@@ -55,14 +55,14 @@ class UpdateDocumentTest extends BaseTest
      */
     public function testUpdateDocumentAsUpsert()
     {
-        $document = new Document(1, ['foo' => 'bar'], 'index');
+        $document = new Document('1', ['foo' => 'bar'], 'index');
         $document->setDocAsUpsert(true);
         $action = new UpdateDocument($document);
 
         $this->assertEquals('update', $action->getOpType());
         $this->assertTrue($action->hasSource());
 
-        $expected = '{"update":{"_id":1,"_index":"index"}}'."\n"
+        $expected = '{"update":{"_id":"1","_index":"index"}}'."\n"
                 .'{"doc":{"foo":"bar"},"doc_as_upsert":true}'."\n";
         $this->assertEquals($expected, $action->toString());
 
@@ -72,7 +72,7 @@ class UpdateDocumentTest extends BaseTest
 
         $document->setDocAsUpsert(false);
         $action->setDocument($document);
-        $expected = '{"update":{"_id":1,"_index":"index"}}'."\n"
+        $expected = '{"update":{"_id":"1","_index":"index"}}'."\n"
                 .'{"doc":{"foo":"bar"}}'."\n";
         $this->assertEquals($expected, $action->toString());
 
