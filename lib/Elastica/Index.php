@@ -174,7 +174,7 @@ class Index implements SearchableInterface
         $q = Query::create($query)->getQuery();
         $body = [
             'query' => \is_array($q) ? $q : $q->toArray(),
-            'script' => $script->toArray()['script']
+            'script' => $script->toArray()['script'],
         ];
 
         $endpoint->setBody($body);
