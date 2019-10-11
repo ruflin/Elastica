@@ -77,11 +77,11 @@ class BulkTest extends BaseTest
         ];
         $this->assertEquals($expected, $data);
 
-        $expected = '{"index":{"_id":1,"_index":"'.$indexName.'"}}
+        $expected = '{"index":{"_id":"1","_index":"'.$indexName.'"}}
 {"name":"Mister Fantastic"}
-{"index":{"_id":2}}
+{"index":{"_id":"2"}}
 {"name":"Invisible Woman"}
-{"create":{"_id":3,"_index":"'.$indexName.'"}}
+{"create":{"_id":"3","_index":"'.$indexName.'"}}
 {"name":"The Human Torch"}
 {"index":{"_index":"'.$indexName.'"}}
 {"name":"The Thing"}
