@@ -33,25 +33,6 @@ class ReindexTest extends Base
     /**
      * @group functional
      */
-    public function testReindexTypeOption()
-    {
-        $oldIndex = $this->_createIndex('', true, 2);
-        $this->_addDocs($oldIndex, 10);
-
-        $newIndex = $this->_createIndex(null, true, 2);
-
-        $reindex = new Reindex($oldIndex, $newIndex, [
-            Reindex::TYPE => '_doc',
-        ]);
-        $reindex->run();
-        $newIndex->refresh();
-
-        $this->assertEquals($oldIndex->count(), $newIndex->count());
-    }
-
-    /**
-     * @group functional
-     */
     public function testReindexOpTypeOptionWithProceedSetOnConflicts()
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);

@@ -37,15 +37,14 @@ class Document extends AbstractUpdateAction
     /**
      * Creates a new document.
      *
-     * @param int|string   $id    OPTIONAL $id Id is create if empty
+     * @param string       $id    OPTIONAL $id Id is create if empty
      * @param array|string $data  OPTIONAL Data array
      * @param Index|string $index OPTIONAL Index name
      */
-    public function __construct($id = '', $data = [], $index = '')
+    public function __construct(string $id = '', $data = [], $index = '')
     {
         $this->setId($id);
         $this->setData($data);
-        $this->setType(self::DEFAULT_TYPE);
         $this->setIndex($index);
     }
 
