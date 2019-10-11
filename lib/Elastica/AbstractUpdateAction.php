@@ -11,7 +11,7 @@ namespace Elastica;
 class AbstractUpdateAction extends Param
 {
     /**
-     * @var \Elastica\Document
+     * @var Document
      */
     protected $_upsert;
 
@@ -43,35 +43,6 @@ class AbstractUpdateAction extends Param
     public function hasId()
     {
         return '' !== (string) $this->getId();
-    }
-
-    /**
-     * Sets the document type name.
-     *
-     * @param Type|string $type Type name
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        if ($type instanceof Type) {
-            $this->setIndex($type->getIndex());
-            $type = $type->getName();
-        }
-
-        return $this->setParam('_type', $type);
-    }
-
-    /**
-     * Return document type name.
-     *
-     * @throws \Elastica\Exception\InvalidException
-     *
-     * @return string Document type name
-     */
-    public function getType()
-    {
-        return $this->getParam('_type');
     }
 
     /**
@@ -394,7 +365,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param \Elastica\Document|array $data
+     * @param Document|array $data
      *
      * @return $this
      */
@@ -407,7 +378,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @return \Elastica\Document
+     * @return Document
      */
     public function getUpsert()
     {

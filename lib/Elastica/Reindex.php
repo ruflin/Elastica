@@ -15,7 +15,6 @@ class Reindex extends Param
     const OPERATION_TYPE_CREATE = 'create';
     const CONFLICTS = 'conflicts';
     const CONFLICTS_PROCEED = 'proceed';
-    const TYPE = 'type';
     const SIZE = 'size';
     const QUERY = 'query';
     const SORT = 'sort';
@@ -40,11 +39,6 @@ class Reindex extends Param
      * @var Index
      */
     protected $_newIndex;
-
-    /**
-     * @var array
-     */
-    protected $_options;
 
     /**
      * @var Response|null
@@ -92,7 +86,6 @@ class Reindex extends Param
         ], $this->_resolveSourceOptions($params));
 
         $sourceBody = $this->_setSourceQuery($sourceBody);
-        $sourceBody = $this->_setSourceType($sourceBody);
 
         return $sourceBody;
     }
@@ -109,7 +102,6 @@ class Reindex extends Param
     private function _resolveSourceOptions(array $params): array
     {
         return \array_intersect_key($params, [
-            self::TYPE => null,
             self::QUERY => null,
             self::SORT => null,
             self::SOURCE => null,
@@ -138,22 +130,6 @@ class Reindex extends Param
     {
         if (isset($sourceBody[self::QUERY]) && $sourceBody[self::QUERY] instanceof AbstractQuery) {
             $sourceBody[self::QUERY] = $sourceBody[self::QUERY]->toArray();
-        }
-
-        return $sourceBody;
-    }
-
-    private function _setSourceType(array $sourceBody): array
-    {
-        if (isset($sourceBody[self::TYPE]) && !\is_array($sourceBody[self::TYPE])) {
-            $sourceBody[self::TYPE] = [$sourceBody[self::TYPE]];
-        }
-        if (isset($sourceBody[self::TYPE])) {
-            foreach ($sourceBody[self::TYPE] as $key => $type) {
-                if ($type instanceof Type) {
-                    $sourceBody[self::TYPE][$key] = $type->getName();
-                }
-            }
         }
 
         return $sourceBody;
