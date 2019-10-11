@@ -59,7 +59,6 @@ class TermsTest extends BaseTest
 
         $query->setTermsLookup('name', [
             'index' => $lookupIndex->getName(),
-            'type' => $lookupIndex->getName(),
             'id' => '1',
             'path' => 'terms',
         ]);
