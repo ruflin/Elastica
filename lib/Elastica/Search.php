@@ -90,9 +90,9 @@ class Search
     /**
      * Adds a index to the list.
      *
-     * @param \Elastica\Index|string $index Index object or string
+     * @param Index|string $index Index object or string
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return $this
      */
@@ -128,7 +128,7 @@ class Search
     }
 
     /**
-     * @param string|array|\Elastica\Query|\Elastica\Suggest|\Elastica\Query\AbstractQuery $query
+     * @param string|array|Query|Suggest|Query\AbstractQuery $query
      *
      * @return $this
      */
@@ -208,7 +208,7 @@ class Search
     /**
      * @param string $key
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return mixed
      */
@@ -232,7 +232,7 @@ class Search
     /**
      * @param string $key
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      *
      * @return bool
      */
@@ -304,7 +304,7 @@ class Search
     }
 
     /**
-     * @return \Elastica\Query
+     * @return Query
      */
     public function getQuery()
     {
@@ -318,7 +318,7 @@ class Search
     /**
      * Creates new search object.
      *
-     * @param \Elastica\SearchableInterface $searchObject
+     * @param SearchableInterface $searchObject
      *
      * @return Search
      */
@@ -328,7 +328,7 @@ class Search
     }
 
     /**
-     * Combines indices and types to the search request path.
+     * Combines indices to the search request path.
      *
      * @return string Search path
      */
@@ -348,9 +348,9 @@ class Search
      * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
      * @param string    $method  OPTIONAL Request method (use const's) (default = Request::POST)
      *
-     * @throws \Elastica\Exception\InvalidException
+     *@throws InvalidException
      *
-     * @return \Elastica\ResultSet
+     * @return ResultSet
      */
     public function search($query = '', $options = null, $method = Request::POST)
     {
@@ -362,7 +362,7 @@ class Search
         $params = $this->getOptions();
 
         // Send scroll_id via raw HTTP body to handle cases of very large (> 4kb) ids.
-        if ('_search/scroll' == $path) {
+        if ('_search/scroll' === $path) {
             $data = [self::OPTION_SCROLL_ID => $params[self::OPTION_SCROLL_ID]];
             unset($params[self::OPTION_SCROLL_ID]);
         } else {
@@ -407,14 +407,14 @@ class Search
     }
 
     /**
-     * @param array|int                    $options
-     * @param string|array|\Elastica\Query $query
+     * @param array|int          $options
+     * @param string|array|Query $query
      *
      * @return $this
      */
     public function setOptionsAndQuery($options = null, $query = '')
     {
-        if ('' != $query) {
+        if ('' !== $query) {
             $this->setQuery($query);
         }
 
@@ -448,7 +448,7 @@ class Search
     /**
      * Returns the Scroll Iterator.
      *
-     * @see Elastica\Scroll
+     * @see Scroll
      *
      * @param string $expiryTime
      *

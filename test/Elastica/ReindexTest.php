@@ -8,7 +8,6 @@ use Elastica\Index;
 use Elastica\Query\Match;
 use Elastica\Reindex;
 use Elastica\Script\Script;
-use Elastica\Type;
 
 class ReindexTest extends Base
 {

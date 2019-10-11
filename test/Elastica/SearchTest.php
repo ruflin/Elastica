@@ -5,6 +5,7 @@ namespace Elastica\Test;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Query;
 use Elastica\Query\FunctionScore;
@@ -85,7 +86,7 @@ class SearchTest extends BaseTest
      */
     public function testAddIndexInvalid()
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $client = $this->_getClient();
         $search = new Search($client);
@@ -332,7 +333,7 @@ class SearchTest extends BaseTest
      */
     public function testInvalidConfigSearch()
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $client = $this->_getClient();
         $search = new Search($client);
