@@ -48,13 +48,18 @@ class DocumentTest extends BaseTest
      */
     public function testToArray()
     {
-        $id = 17;
+        $id = '17';
         $data = ['hello' => 'world'];
         $index = 'textindex';
 
         $doc = new Document($id, $data, $index);
 
-        $result = ['_index' => $index, '_type' => Document::DEFAULT_TYPE, '_id' => $id, '_source' => $data];
+        $result = [
+            '_index' => $index,
+            '_type' => Document::DEFAULT_TYPE,
+            '_id' => $id,
+            '_source' => $data,
+        ];
         $this->assertEquals($result, $doc->toArray());
     }
 

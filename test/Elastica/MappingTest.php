@@ -255,7 +255,7 @@ class MappingTest extends BaseTest
         $newMapping = $index->getMapping();
         $this->assertArraySubset(
             [
-                '_doc' => [
+                Document::DEFAULT_TYPE => [
                     'properties' => [
                         'multiname' => [
                             'type' => 'text',
