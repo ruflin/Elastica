@@ -56,7 +56,6 @@ class DocumentTest extends BaseTest
 
         $result = [
             '_index' => $index,
-            '_type' => Document::DEFAULT_TYPE,
             '_id' => $id,
             '_source' => $data,
         ];

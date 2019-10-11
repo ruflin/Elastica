@@ -21,34 +21,29 @@ class ActionTest extends BaseTest
         $this->assertEquals($expected, $action->toString());
 
         $action->setIndex('index');
-
         $expected = '{"index":{"_index":"index"}}'."\n";
         $this->assertEquals($expected, $action->toString());
 
         $action->setId(1);
-        $expected = '{"index":{"_index":"index","_id":1}}'."\n";
+        $expected = '{"index":{"_index":"index","_id":"1"}}'."\n";
         $this->assertEquals($expected, $action->toString());
 
         $action->setRouting(1);
-        $expected = '{"index":{"_index":"index","_id":1,"routing":1}}'."\n";
+        $expected = '{"index":{"_index":"index","_id":"1","routing":1}}'."\n";
         $this->assertEquals($expected, $action->toString());
 
         $client = $this->_getClient();
         $index = new Index($client, 'index2');
-
         $action->setIndex($index);
 
-        $expected = '{"index":{"_index":"index2","_id":1,"routing":1}}'."\n";
+        $expected = '{"index":{"_index":"index2","_id":"1","routing":1}}'."\n";
         $this->assertEquals($expected, $action->toString());
 
         $action->setSource(['user' => 'name']);
-
-        $expected = '{"index":{"_index":"index2","_id":1,"routing":1}}'."\n";
+        $expected = '{"index":{"_index":"index2","_id":"1","routing":1}}'."\n";
         $expected .= '{"user":"name"}'."\n";
-
         $this->assertEquals($expected, $action->toString());
         $this->assertTrue($action->hasSource());
-
         $this->assertFalse(Action::isValidOpType('foo'));
         $this->assertTrue(Action::isValidOpType('delete'));
     }

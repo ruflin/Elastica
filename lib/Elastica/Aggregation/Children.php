@@ -12,7 +12,7 @@ class Children extends AbstractAggregation
     /**
      * Set the type for this aggregation.
      *
-     * @param string $field the child type the buckets in the parent space should be mapped to
+     * @param string $type the child type the buckets in the parent space should be mapped to
      *
      * @return $this
      */

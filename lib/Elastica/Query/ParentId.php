@@ -32,7 +32,7 @@ class ParentId extends AbstractQuery
     }
 
     /**
-     * @param int|string $id
+     * @param string $id
      */
     private function setId(string $id)
     {

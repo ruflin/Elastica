@@ -142,11 +142,11 @@ class Action
     }
 
     /**
-     * @param string|int $id
+     * @param string $id
      *
      * @return $this
      */
-    public function setId($id): self
+    public function setId(string $id): self
     {
         $this->_metadata['_id'] = $id;
 
