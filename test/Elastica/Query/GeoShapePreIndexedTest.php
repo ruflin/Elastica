@@ -40,7 +40,7 @@ class GeoShapePreIndexedTest extends BaseTest
         $index->refresh();
 
         $gsp = new GeoShapePreIndexed(
-            'location', '2', '_doc', $indexName, 'location'
+            'location', '2', $indexName, 'location'
         );
 
         $query = new BoolQuery();
@@ -58,7 +58,7 @@ class GeoShapePreIndexedTest extends BaseTest
     public function testConstruct()
     {
         $gsp = new GeoShapePreIndexed(
-            'search_field', '1', 'type', 'index', 'indexed_field'
+            'search_field', '1', 'index', 'indexed_field'
         );
 
         $expected = [
@@ -66,7 +66,6 @@ class GeoShapePreIndexedTest extends BaseTest
                 'search_field' => [
                     'indexed_shape' => [
                         'id' => '1',
-                        'type' => 'type',
                         'index' => 'index',
                         'path' => 'indexed_field',
                     ],
@@ -83,7 +82,7 @@ class GeoShapePreIndexedTest extends BaseTest
      */
     public function testSetRelation()
     {
-        $gsp = new GeoShapePreIndexed('location', '1', 'type', 'indexName', 'location');
+        $gsp = new GeoShapePreIndexed('location', '1', 'indexName', 'location');
 
         $this->assertEquals(AbstractGeoShape::RELATION_INTERSECT, $gsp->getRelation());
         $this->assertSame($gsp, $gsp->setRelation(AbstractGeoShape::RELATION_DISJOINT));

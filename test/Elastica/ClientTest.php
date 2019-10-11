@@ -262,8 +262,8 @@ class ClientTest extends BaseTest
         $this->assertEquals('ixcoin', $index->getDocument(2)->get('name'));
 
         $index->updateDocuments([
-            new Document(1, ['name' => 'AnonCoin'], '_doc'),
-            new Document(2, ['name' => 'iXcoin'], '_doc'),
+            new Document(1, ['name' => 'AnonCoin']),
+            new Document(2, ['name' => 'iXcoin']),
         ]);
 
         $this->assertEquals('AnonCoin', $index->getDocument(1)->get('name'));

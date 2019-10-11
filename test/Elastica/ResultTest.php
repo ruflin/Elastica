@@ -14,7 +14,7 @@ class ResultTest extends BaseTest
      */
     public function testGetters()
     {
-        // Creates a new index 'xodoa' and a type '_doc' inside this index
+        // Creates a new index 'xodoa'
         $index = $this->_createIndex();
         $index->addDocument(new Document(3, ['username' => 'hans']));
         $index->refresh();
@@ -40,7 +40,7 @@ class ResultTest extends BaseTest
      */
     public function testGetIdNoSource()
     {
-        // Creates a new index 'xodoa' and a type '_doc' inside this index
+        // Creates a new index 'xodoa'
         $indexName = 'xodoa';
 
         $client = $this->_getClient();

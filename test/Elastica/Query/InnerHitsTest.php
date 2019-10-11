@@ -2,7 +2,6 @@
 
 namespace Elastica\Test\Query;
 
-use Elastica\Document;
 use Elastica\Mapping;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\HasChild;
@@ -31,7 +30,7 @@ class InnerHitsTest extends BaseTest
         ]));
 
         $index->addDocuments([
-            new Document(1, [
+            $index->createDocument(1, [
                 'users' => [
                     ['name' => 'John Smith', 'last_activity_date' => '2015-01-05'],
                     ['name' => 'Conan', 'last_activity_date' => '2015-01-05'],
@@ -39,7 +38,7 @@ class InnerHitsTest extends BaseTest
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about linux #1',
             ]),
-            new Document(2, [
+            $index->createDocument(2, [
                 'users' => [
                     ['name' => 'John Doe', 'last_activity_date' => '2015-01-05'],
                     ['name' => 'Simon', 'last_activity_date' => '2015-01-05'],
@@ -47,7 +46,7 @@ class InnerHitsTest extends BaseTest
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about linux #2',
             ]),
-            new Document(3, [
+            $index->createDocument(3, [
                 'users' => [
                     ['name' => 'Simon', 'last_activity_date' => '2015-01-05'],
                     ['name' => 'Garfunkel', 'last_activity_date' => '2015-01-05'],
@@ -55,7 +54,7 @@ class InnerHitsTest extends BaseTest
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about windows #1',
             ]),
-            new Document(4, [
+            $index->createDocument(4, [
                 'users' => [
                     ['name' => 'Einstein'],
                     ['name' => 'Newton'],
@@ -64,7 +63,7 @@ class InnerHitsTest extends BaseTest
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about windows #2',
             ]),
-            new Document(5, [
+            $index->createDocument(5, [
                 'users' => [
                     ['name' => 'Faraday'],
                     ['name' => 'Leibniz'],
@@ -98,44 +97,44 @@ class InnerHitsTest extends BaseTest
 
         $index->setMapping($mappingQuestion);
         $index->addDocuments([
-            new Document(1, [
+            $index->createDocument(1, [
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about linux #1',
                 'my_join_field' => [
                     'name' => 'questions',
                 ],
-            ], '_doc'),
-            new Document(2, [
+            ]),
+            $index->createDocument(2, [
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about linux #2',
                 'my_join_field' => [
                     'name' => 'questions',
                 ],
-            ], '_doc'),
-            new Document(3, [
+            ]),
+            $index->createDocument(3, [
                 'last_activity_date' => '2015-01-05',
                 'title' => 'Question about windows #1',
                 'my_join_field' => [
                     'name' => 'questions',
                 ],
-            ], '_doc'),
-            new Document(4, [
+            ]),
+            $index->createDocument(4, [
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about windows #2',
                 'my_join_field' => [
                     'name' => 'questions',
                 ],
-            ], '_doc'),
-            new Document(5, [
+            ]),
+            $index->createDocument(5, [
                 'last_activity_date' => '2014-12-23',
                 'title' => 'Question about osx',
                 'my_join_field' => [
                     'name' => 'questions',
                 ],
-            ], '_doc'),
+            ]),
         ]);
 
-        $documentResponse1 = $index->createDocument(6, [
+        $doc1 = $index->createDocument(6, [
             'answer' => 'linux is cool',
             'last_activity_date' => '2016-01-05',
             'my_join_field' => [
@@ -144,7 +143,7 @@ class InnerHitsTest extends BaseTest
             ],
         ]);
 
-        $documentResponse2 = $index->createDocument(7, [
+        $doc2 = $index->createDocument(7, [
             'answer' => 'linux is bad',
             'last_activity_date' => '2005-01-05',
             'my_join_field' => [
@@ -153,7 +152,7 @@ class InnerHitsTest extends BaseTest
             ],
         ]);
 
-        $documentResponse3 = $index->createDocument(8, [
+        $doc3 = $index->createDocument(8, [
             'answer' => 'windows was cool',
             'last_activity_date' => '2005-01-05',
             'my_join_field' => [
@@ -162,7 +161,7 @@ class InnerHitsTest extends BaseTest
             ],
         ]);
 
-        $this->_getClient()->addDocuments([$documentResponse1, $documentResponse2, $documentResponse3], ['routing' => 1]);
+        $this->_getClient()->addDocuments([$doc1, $doc2, $doc3], ['routing' => 1]);
 
         $index->refresh();
 

@@ -14,13 +14,10 @@ class ParentIdTest extends BaseTest
      */
     public function testToArray()
     {
-        $type = '_doc';
-
-        $query = new ParentId($type, 1);
-
+        $query = new ParentId('join', '1');
         $expectedArray = [
             'parent_id' => [
-                'type' => '_doc',
+                'type' => 'join',
                 'id' => 1,
                 'ignore_unmapped' => false,
             ],
@@ -67,13 +64,13 @@ class ParentIdTest extends BaseTest
         $this->assertEquals($expected, $mapping->toArray());
         $index->refresh();
 
-        $doc1 = $index->createDocument(1, [
+        $doc1 = $index->createDocument('1', [
             'text' => 'this is the 1st question',
             'my_join_field' => [
                 'name' => 'question',
             ],
         ]);
-        $doc2 = $index->createDocument(2, [
+        $doc2 = $index->createDocument('2', [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
@@ -81,25 +78,25 @@ class ParentIdTest extends BaseTest
         ]);
         $index->addDocuments([$doc1, $doc2]);
 
-        $doc3 = $index->createDocument(3, [
+        $doc3 = $index->createDocument('3', [
             'text' => 'this is an answer, the 1st',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 1,
             ],
         ]);
-        $doc4 = $index->createDocument(4, [
+        $doc4 = $index->createDocument('4', [
             'text' => 'this is an answer, the 2nd',
             'my_join_field' => [
                 'name' => 'answer',
-                'parent' => 2,
+                'parent' => '2',
             ],
         ]);
-        $doc5 = $index->createDocument(5, [
+        $doc5 = $index->createDocument('5', [
             'text' => 'this is an answer, the 3rd',
             'my_join_field' => [
                 'name' => 'answer',
-                'parent' => 2,
+                'parent' => '2',
             ],
         ]);
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
@@ -114,7 +111,7 @@ class ParentIdTest extends BaseTest
         $data = $result->getData();
         $this->assertEquals($data['text'], 'this is an answer, the 1st');
 
-        $parentQuery = new ParentId('answer', 2, true);
+        $parentQuery = new ParentId('answer', '2', true);
         $search = new Search($index->getClient());
         $results = $search->search($parentQuery);
         $this->assertEquals(2, $results->count());
@@ -143,14 +140,14 @@ class ParentIdTest extends BaseTest
         $index->setMapping($mapping);
         $index->refresh();
 
-        $doc1 = $index->createDocument(1, [
+        $doc1 = $index->createDocument('1', [
             'text' => 'this is the 1st question',
             'my_join_field' => [
                 'name' => 'question',
             ],
         ]);
 
-        $doc2 = $index->createDocument(2, [
+        $doc2 = $index->createDocument('2', [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
@@ -158,21 +155,21 @@ class ParentIdTest extends BaseTest
         ]);
         $index->addDocuments([$doc1, $doc2]);
 
-        $doc3 = $index->createDocument(3, [
+        $doc3 = $index->createDocument('3', [
             'text' => 'this is an answer, the 1st',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 1,
             ],
         ]);
-        $doc4 = $index->createDocument(4, [
+        $doc4 = $index->createDocument('4', [
             'text' => 'this is an answer, the 2nd',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
         ]);
-        $doc5 = $index->createDocument(5, [
+        $doc5 = $index->createDocument('5', [
             'text' => 'this is an answer, the 3rd',
             'my_join_field' => [
                 'name' => 'answer',

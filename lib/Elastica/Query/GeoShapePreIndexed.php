@@ -21,13 +21,6 @@ class GeoShapePreIndexed extends AbstractGeoShape
     protected $_indexedId;
 
     /**
-     * elasticsearch type of the pre-indexed shape.
-     *
-     * @var string
-     */
-    protected $_indexedType;
-
-    /**
      *  elasticsearch index of the pre-indexed shape.
      *
      * @var string
@@ -46,20 +39,17 @@ class GeoShapePreIndexed extends AbstractGeoShape
      *
      * @param string $path         The path/field of the shape searched
      * @param string $indexedId    Id of the pre-indexed shape
-     * @param string $indexedType  Type of the pre-indexed shape
      * @param string $indexedIndex Index of the pre-indexed shape
      * @param string $indexedPath  Path of the pre-indexed shape
      */
     public function __construct(
         string $path,
         string $indexedId,
-        string $indexedType,
         string $indexedIndex,
         string $indexedPath
     ) {
         $this->_path = $path;
         $this->_indexedId = $indexedId;
-        $this->_indexedType = $indexedType;
         $this->_indexedIndex = $indexedIndex;
         $this->_indexedPath = $indexedPath;
     }
@@ -74,7 +64,6 @@ class GeoShapePreIndexed extends AbstractGeoShape
                 $this->_path => [
                     'indexed_shape' => [
                         'id' => $this->_indexedId,
-                        'type' => $this->_indexedType,
                         'index' => $this->_indexedIndex,
                         'path' => $this->_indexedPath,
                     ],
