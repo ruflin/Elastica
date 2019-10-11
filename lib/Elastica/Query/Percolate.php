@@ -9,7 +9,7 @@ use Elastica\Document;
  *
  * @author Boris Popovschi <zyqsempai@mail.ru>
  *
- * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-percolate-query.html
+ * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-percolate-query.html
  */
 /**
  * Class Percolate.
@@ -50,18 +50,6 @@ class Percolate extends AbstractQuery
     public function setDocumentIndex(string $index): self
     {
         return $this->setParam('index', $index);
-    }
-
-    /**
-     * The type of the document to fetch.
-     *
-     * @param string $type
-     *
-     * @return $this
-     */
-    public function setExistingDocumentType(string $type): self
-    {
-        return $this->setParam('type', $type);
     }
 
     /**

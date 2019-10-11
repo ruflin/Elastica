@@ -67,7 +67,6 @@ class PercolateTest extends BaseTest
 
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
-            ->setExistingDocumentType($this->index->getName())
             ->setDocumentIndex($this->index->getName())
             ->setDocumentId($doc->getId());
         $resultSet = $this->index->search($percolateQuery);
@@ -85,7 +84,6 @@ class PercolateTest extends BaseTest
         $this->index->addDocument($doc2);
         $percolateQuery = new Percolate();
         $percolateQuery->setField('query')
-            ->setExistingDocumentType($this->index->getName())
             ->setDocumentIndex($this->index->getName())
             ->setDocumentId($doc2->getId());
         $resultSet = $this->index->search($percolateQuery);
@@ -143,20 +141,6 @@ class PercolateTest extends BaseTest
         $data = $query->toArray();
 
         $this->assertEquals($data['percolate']['index'], $index->getName());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testSetExistingDocumentType()
-    {
-        $type = 'newType';
-        $query = new Percolate();
-        $query->setExistingDocumentType($type);
-
-        $data = $query->toArray();
-
-        $this->assertEquals($data['percolate']['type'], $type);
     }
 
     /**
