@@ -214,7 +214,11 @@ follows Elasticsearch request structure, e.g.:</p>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Query</span><span class="p">(</span><span class="s1">&#39;search term&#39;</span><span class="p">);</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$term</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Query\Term</span><span class="p">([</span><span class="s1">&#39;_all&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;search term&#39;</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Elastica\Query</span><span class="p">(</span><span class="nv">$term</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'><span class="nv">$search</span><span class="o">-&gt;</span><span class="na">setQuery</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -343,12 +347,12 @@ follows Elasticsearch request structure, e.g.:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>scan and scroll <a href="http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/scan-scroll.html">API</a></strong></p>
+<p><strong>scroll <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll">API</a></strong></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$search</span><span class="o">-&gt;</span><span class="na">scanAndScroll</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$scrollId</span> <span class="o">=&gt;</span> <span class="nv">$resultSet</span><span class="p">)</span> <span class="p">{</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$search</span><span class="o">-&gt;</span><span class="na">scroll</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$scrollId</span> <span class="o">=&gt;</span> <span class="nv">$resultSet</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>    <span class="c1">// ... handle Elastica\ResultSet</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
