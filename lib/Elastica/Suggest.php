@@ -59,7 +59,7 @@ class Suggest extends Param
             case $suggestion instanceof self:
                 return $suggestion;
             case $suggestion instanceof AbstractSuggest:
-                return new self($suggestion);
+                return new static($suggestion);
         }
         throw new NotImplementedException();
     }

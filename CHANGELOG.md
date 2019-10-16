@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file based on the [Keep a Changelog](http://keepachangelog.com/) Standard. This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/ruflin/Elastica/compare/6.1.1...master)
+* Changed all factory methods to make use of [late static bindings](http://docs.php.net/manual/en/language.oop5.late-static-bindings.php) by using `static` instead of `self` keyword. This is to increase extendability for classes with factory methods.
 
 ### Backward Compatibility Breaks
 * Removed `\Elastica\Query\GeohashCell` query, use `\Elastica\Query\GeoBoundingBox` instead [#1672](https://github.com/ruflin/Elastica/pull/1672).

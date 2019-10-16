@@ -332,7 +332,7 @@ class Connection extends Param
     public static function create($params = [])
     {
         if (\is_array($params)) {
-            return new self($params);
+            return new static($params);
         }
 
         if ($params instanceof self) {
