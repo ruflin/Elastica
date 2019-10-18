@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file based on the
 * Move Client configuration in a dedicated class
 * Added `callable` type hinting to `$callback` in `Client` constructor. [#1659](https://github.com/ruflin/Elastica/pull/1659)
 * Added `setTrackTotalHits` method to `Elastica\Query`[#1663](https://github.com/ruflin/Elastica/issues/1663)
+* Allow metadata to be set on Aggregations (via `AbstractAggregation::setMeta(array)`). [#1677](https://github.com/ruflin/Elastica/issues/1677)
 
 ### Improvements
 * Added `native_function_invocation` CS rule [#1606](https://github.com/ruflin/Elastica/pull/1606)

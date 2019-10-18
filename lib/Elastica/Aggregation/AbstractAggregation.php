@@ -8,6 +8,8 @@ use Elastica\Param;
 
 abstract class AbstractAggregation extends Param implements NameableInterface
 {
+    protected const METADATA_KEY = 'meta';
+
     /**
      * @var string The name of this aggregation
      */
@@ -76,6 +78,58 @@ abstract class AbstractAggregation extends Param implements NameableInterface
         }
 
         $this->_aggs[] = $aggregation;
+
+        return $this;
+    }
+
+    /**
+     * Add metadata to the aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/agg-metadata.html
+     * @see \Elastica\Aggregation\AbstractAggregation::getMeta()
+     * @see \Elastica\Aggregation\AbstractAggregation::clearMeta()
+     *
+     * @param array $meta Metadata to be attached to the aggregation
+     *
+     * @return $this
+     */
+    public function setMeta(array $meta): self
+    {
+        if (empty($meta)) {
+            return $this->clearMeta();
+        }
+
+        $this->_setRawParam(self::METADATA_KEY, $meta);
+
+        return $this;
+    }
+
+    /**
+     * Retrieve the currently configured metadata for the aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/agg-metadata.html
+     * @see \Elastica\Aggregation\AbstractAggregation::setMeta()
+     * @see \Elastica\Aggregation\AbstractAggregation::clearMeta()
+     *
+     * @return array|null
+     */
+    public function getMeta(): ?array
+    {
+        return $this->_rawParams[self::METADATA_KEY] ?? null;
+    }
+
+    /**
+     * Clears any previously set metadata for this aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/agg-metadata.html
+     * @see \Elastica\Aggregation\AbstractAggregation::setMeta()
+     * @see \Elastica\Aggregation\AbstractAggregation::getMeta()
+     *
+     * @return $this
+     */
+    public function clearMeta(): self
+    {
+        unset($this->_rawParams[self::METADATA_KEY]);
 
         return $this;
     }
