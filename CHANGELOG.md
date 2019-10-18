@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file based on the
 * Always set the Guzzle `base_uri` to support connecting to multiple ES hosts. [#1618](https://github.com/ruflin/Elastica/pull/1618) [#1644](https://github.com/ruflin/Elastica/issues/1644)
 
 ### Added
+* Allow metadata to be set on Aggregations (via `AbstractAggregation::setMeta(array)`). [#1677](https://github.com/ruflin/Elastica/issues/1677)
 
 ### Improvements
 
