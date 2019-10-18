@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file based on the
 * Changed all factory methods to make use of [late static bindings](http://docs.php.net/manual/en/language.oop5.late-static-bindings.php) by using `static` instead of `self` keyword. This is to increase extendability for classes with factory methods.
 
 ### Backward Compatibility Breaks
+* The `\Elastica\Query::$_suggest` property has been renamed to `$hasSuggest` and is now private, it should not be used from extending classes [#1679](https://github.com/ruflin/Elastica/pull/1679)   
 * Removed `\Elastica\Query\GeohashCell` query, use `\Elastica\Query\GeoBoundingBox` instead [#1672](https://github.com/ruflin/Elastica/pull/1672).
 * Dropped support for PHP 7.0
 * \Elastica\AbstractUpdateAction::getOptions( $fields ) no longer supports the $underscore parameter, option names must match what elasticsearch expects.
