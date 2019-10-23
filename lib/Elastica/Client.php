@@ -641,7 +641,7 @@ class Client
         }
 
         $this->_logger->debug('Elastica Request', [
-            'request' => $request,
+            'request' => $request->toArray(),
             'response' => $this->_lastResponse ? $this->_lastResponse->getData() : null,
             'responseStatus' => $this->_lastResponse ? $this->_lastResponse->getStatus() : null,
         ]);
