@@ -75,7 +75,7 @@ class Result
      *
      * @return string Result type
      *
-     *@deprecated ES 7.x deprecated the use of types in the index
+     * @deprecated ES 7.x deprecated the use of types in the index
      */
     public function getType()
     {
