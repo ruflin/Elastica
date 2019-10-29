@@ -567,7 +567,7 @@ class Query implements DSL
     /**
      * type query.
      *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-percolate-query.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-percolate-query.html
      *
      * @return Percolate
      */

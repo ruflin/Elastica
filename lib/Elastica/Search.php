@@ -348,7 +348,7 @@ class Search
      * @param int|array $options OPTIONAL Limit or associative array of options (option=>value)
      * @param string    $method  OPTIONAL Request method (use const's) (default = Request::POST)
      *
-     *@throws InvalidException
+     * @throws InvalidException
      *
      * @return ResultSet
      */
