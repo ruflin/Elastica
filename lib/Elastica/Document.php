@@ -37,9 +37,9 @@ class Document extends AbstractUpdateAction
     /**
      * Creates a new document.
      *
-     * @param string       $id    OPTIONAL $id Id is create if empty
-     * @param array|string $data  OPTIONAL Data array
-     * @param Index|string $index OPTIONAL Index name
+     * @param string|null  $id    The document ID, if null it will be created
+     * @param array|string $data  Data array
+     * @param Index|string $index Index name
      */
     public function __construct(string $id = null, $data = [], $index = '')
     {
@@ -49,46 +49,35 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param string $key
-     *
      * @return mixed
      */
-    public function __get($key)
+    public function __get(string $key)
     {
         return $this->get($key);
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * @param mixed $value
      */
-    public function __set($key, $value)
+    public function __set(string $key, $value)
     {
         $this->set($key, $value);
     }
 
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
-    public function __isset($key)
+    public function __isset(string $key): bool
     {
         return $this->has($key) && null !== $this->get($key);
     }
 
-    /**
-     * @param string $key
-     */
-    public function __unset($key)
+    public function __unset(string $key)
     {
         $this->remove($key);
     }
 
     /**
-     * @param string $key
+     * Get the value of the given field.
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException If the given field does not exist
      *
      * @return mixed
      */
@@ -102,14 +91,13 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * Set the value of the given field.
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @param mixed $value
      *
-     * @return $this
+     * @throws InvalidException if the current document is a serialized data
      */
-    public function set($key, $value)
+    public function set(string $key, $value): self
     {
         if (!\is_array($this->_data)) {
             throw new InvalidException('Document data is serialized data. Data creation is forbidden.');
@@ -120,23 +108,19 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param string $key
-     *
-     * @return bool
+     * Returns if the current document has the given field.
      */
-    public function has($key)
+    public function has(string $key): bool
     {
         return \is_array($this->_data) && \array_key_exists($key, $this->_data);
     }
 
     /**
-     * @param string $key
+     * Removes a field from the document, by the given key.
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
-     * @return $this
+     * @throws InvalidException if the given field does not exist
      */
-    public function remove($key)
+    public function remove(string $key): self
     {
         if (!$this->has($key)) {
             throw new InvalidException("Field {$key} does not exist");
@@ -159,11 +143,9 @@ class Document extends AbstractUpdateAction
      *
      * @param string $key      Key to add the file to
      * @param string $filepath Path to add the file
-     * @param string $mimeType OPTIONAL Header mime type
-     *
-     * @return $this
+     * @param string $mimeType Header mime type
      */
-    public function addFile($key, $filepath, $mimeType = '')
+    public function addFile(string $key, string $filepath, string $mimeType = ''): self
     {
         $value = \base64_encode(\file_get_contents($filepath));
 
@@ -178,31 +160,20 @@ class Document extends AbstractUpdateAction
 
     /**
      * Add file content.
-     *
-     * @param string $key     Document key
-     * @param string $content Raw file content
-     *
-     * @return $this
      */
-    public function addFileContent($key, $content)
+    public function addFileContent(string $key, string $content): self
     {
         return $this->set($key, \base64_encode($content));
     }
 
     /**
-     * Adds a geopoint to the document.
+     * Adds a geopoint field to the document.
      *
-     * Geohashes are not yet supported
+     * @param string $key Field key
      *
-     * @param string $key       Field key
-     * @param float  $latitude  Latitude value
-     * @param float  $longitude Longitude value
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-geo-point-type.html
-     *
-     * @return $this
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html
      */
-    public function addGeoPoint($key, $latitude, $longitude)
+    public function addGeoPoint(string $key, float $latitude, float $longitude): self
     {
         $value = ['lat' => $latitude, 'lon' => $longitude];
 
@@ -215,10 +186,8 @@ class Document extends AbstractUpdateAction
      * Overwrites the current document data with the given data.
      *
      * @param array|string $data Data array
-     *
-     * @return $this
      */
-    public function setData($data)
+    public function setData($data): self
     {
         $this->_data = $data;
 
@@ -235,80 +204,49 @@ class Document extends AbstractUpdateAction
         return $this->_data;
     }
 
-    /**
-     * @param bool $value
-     *
-     * @return $this
-     */
-    public function setDocAsUpsert($value)
+    public function setDocAsUpsert(bool $value): self
     {
-        $this->_docAsUpsert = (bool) $value;
+        $this->_docAsUpsert = $value;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function getDocAsUpsert()
+    public function getDocAsUpsert(): bool
     {
         return $this->_docAsUpsert;
     }
 
-    /**
-     * @param bool $autoPopulate
-     *
-     * @return $this
-     */
-    public function setAutoPopulate($autoPopulate = true)
+    public function setAutoPopulate(bool $autoPopulate = true): self
     {
-        $this->_autoPopulate = (bool) $autoPopulate;
+        $this->_autoPopulate = $autoPopulate;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isAutoPopulate()
+    public function isAutoPopulate(): bool
     {
         return $this->_autoPopulate;
     }
 
-    /**
-     * Sets pipeline.
-     *
-     * @param string $pipeline
-     *
-     * @return $this
-     */
-    public function setPipeline($pipeline)
+    public function setPipeline(string $pipeline): self
     {
         return $this->setParam('pipeline', $pipeline);
     }
 
-    /**
-     * @return string
-     */
-    public function getPipeline()
+    public function getPipeline(): string
     {
         return $this->getParam('pipeline');
     }
 
-    /**
-     * @return bool
-     */
-    public function hasPipeline()
+    public function hasPipeline(): bool
     {
         return $this->hasParam('pipeline');
     }
 
     /**
      * Returns the document as an array.
-     *
-     * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $doc = $this->getParams();
         $doc['_source'] = $this->getData();
@@ -317,13 +255,11 @@ class Document extends AbstractUpdateAction
     }
 
     /**
-     * @param array|\Elastica\Document $data
+     * @param array|Document $data
      *
-     * @throws \Elastica\Exception\InvalidException
-     *
-     * @return self
+     * @throws InvalidException If invalid data has been provided
      */
-    public static function create($data)
+    public static function create($data): self
     {
         if ($data instanceof self) {
             return $data;

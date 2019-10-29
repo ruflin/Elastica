@@ -30,21 +30,13 @@ class ScriptId extends AbstractScript
         $this->setScriptId($scriptId);
     }
 
-    /**
-     * @param string $scriptId
-     *
-     * @return $this
-     */
-    public function setScriptId(string $scriptId): ScriptId
+    public function setScriptId(string $scriptId): self
     {
         $this->_scriptId = $scriptId;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getScriptId(): string
     {
         return $this->_scriptId;

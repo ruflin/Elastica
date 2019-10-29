@@ -17,12 +17,8 @@ class AbstractUpdateAction extends Param
 
     /**
      * Sets the id of the document.
-     *
-     * @param string|int $id
-     *
-     * @return $this
      */
-    public function setId($id)
+    public function setId(string $id = null): self
     {
         return $this->setParam('_id', $id);
     }
@@ -30,29 +26,24 @@ class AbstractUpdateAction extends Param
     /**
      * Returns document id.
      *
-     * @return string|int Document id
+     * @return string|null Document id
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->hasParam('_id') ? $this->getParam('_id') : null;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasId()
+    public function hasId(): bool
     {
-        return '' !== (string) $this->getId();
+        return null !== $this->getId();
     }
 
     /**
      * Sets the document index name.
      *
      * @param Index|string $index Index name
-     *
-     * @return $this
      */
-    public function setIndex($index)
+    public function setIndex($index): self
     {
         if ($index instanceof Index) {
             $index = $index->getName();

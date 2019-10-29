@@ -23,7 +23,7 @@ abstract class AbstractScript extends AbstractUpdateAction
     const LANG_PAINLESS = 'painless';
 
     /**
-     * @var string
+     * @var string|null
      */
     private $_lang;
 
@@ -103,22 +103,14 @@ abstract class AbstractScript extends AbstractUpdateAction
         }
     }
 
-    /**
-     * @param string $lang
-     *
-     * @return $this
-     */
-    public function setLang(string $lang): AbstractScript
+    public function setLang(string $lang): self
     {
         $this->_lang = $lang;
 
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getLang()
+    public function getLang(): ?string
     {
         return $this->_lang;
     }
