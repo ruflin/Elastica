@@ -306,7 +306,7 @@ class MappingTest extends BaseTest
         $mapping = new Mapping($properties);
         $all = [
             'enabled' => true,
-           'store' => true,
+            'store' => true,
         ];
         $mapping->setParam('_all', $all);
 

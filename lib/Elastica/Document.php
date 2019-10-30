@@ -13,7 +13,6 @@ use Elastica\Exception\InvalidException;
 class Document extends AbstractUpdateAction
 {
     public const OP_TYPE_CREATE = Action::OP_TYPE_CREATE;
-    public const DEFAULT_TYPE = '_doc';
 
     /**
      * Document data.
