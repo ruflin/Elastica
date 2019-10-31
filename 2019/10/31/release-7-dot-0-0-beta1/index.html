@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Release 7.0.0-beta1 - Elastica</title>
+  <meta name="author" content="ruflin">
+
+  
+  <meta name="description" content="Elastica 7.0.0-beta1 (download). This is our first release in the 7.x cycle. It is compatible with Elasticsearch 7.x. Please review the breaking &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Elastica.io/2019/10/31/release-7-dot-0-0-beta1">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Elastica" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-10160648-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Elastica</a></h1>
+  
+    <h2>A PHP client for elasticsearch.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Elastica.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/examples/">Examples</a></li>
+  <li><a href="/api/latest/">Api</a></li>
+  <li><a href="/projects/">Projects</a></li>
+  <li><a href="/faq/">FAQ</a></li>
+</ul>
+
+</nav>
+  <a href="https://github.com/ruflin/Elastica"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Release 7.0.0-beta1</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2019-10-31T10:30:38+01:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="https://github.com/ruflin/Elastica/tree/7.0.0-beta1">Elastica 7.0.0-beta1</a> (<a href="https://github.com/ruflin/Elastica/releases/tag/7.0.0-beta1">download</a>).</p>
+
+<p>This is our first release in the 7.x cycle. It is compatible with Elasticsearch 7.x. Please review the breaking changes carefully. Most of them are related to the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/removal-of-types.html">type removal in Elasticsearch</a>.</p>
+
+<p>This release is compatible with Elasticsearch 7.x and was tested with <a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.3/release-notes-7.3.0.html">elasticsearch 7.3.0</a>.</p>
+
+<h3>Backward Compatibility Breaks</h3>
+
+<ul>
+<li>The <code>\Elastica\Query::$_suggest</code> property has been renamed to <code>$hasSuggest</code> and is now private, it should not be used from extending classes <a href="https://github.com/ruflin/Elastica/pull/1679">#1679</a></li>
+<li><code>\Elastica\Document</code> expects a string as ID, not an int <a href="https://github.com/ruflin/Elastica/pull/1672">#1672</a>.</li>
+<li>Removed <code>\Elastica\Query\GeohashCell</code> query, use <code>\Elastica\Query\GeoBoundingBox</code> instead <a href="https://github.com/ruflin/Elastica/pull/1672">#1672</a>.</li>
+<li>Deprecated usage of <code>\Elastica\Type</code> class, <code>\Elastica\Index</code> class must be used instead <a href="https://github.com/ruflin/Elastica/pull/1666">#1666</a></li>
+<li>Removed <code>\Elastica\Type</code> class, <code>\Elastica\Index</code> class must be used instead <a href="https://github.com/ruflin/Elastica/pull/1666">#1666</a></li>
+<li>Forced index names to string in <code>\Elastica\Index::__construct()</code> <a href="https://github.com/ruflin/Elastica/pull/1666">#1666</a></li>
+<li>Removed Type query <code>\Elastica\Query\Type</code> <a href="https://github.com/ruflin/Elastica/pull/1666">#1666</a></li>
+<li>Removed <code>Elastica\Type</code> class, <code>Elastica\Index</code> class must be used instead <a href="https://github.com/ruflin/Elastica/pull/1666">#1666</a></li>
+<li>Removed <code>type</code> handling from <code>Elastica\Search</code> class <a href="https://github.com/ruflin/Elastica/pull/1666">#1666</a></li>
+<li>Removed <code>type</code> handling from <code>Elastica\Bulk</code> and <code>Elastica\Bulk\Action</code> classes <a href="https://github.com/ruflin/Elastica/pull/1666">#1666</a></li>
+<li>Forced index names to string in <code>Elastica\Index::__construct()</code> <a href="https://github.com/ruflin/Elastica/pull/1666">#1666</a></li>
+<li>Removed Type query <code>Elastica\Query\Type</code> <a href="https://github.com/ruflin/Elastica/pull/1666">#1666</a></li>
+<li>Dropped support for PHP 7.0</li>
+<li>\Elastica\AbstractUpdateAction::getOptions( $fields ) no longer supports the $underscore parameter, option names must match what elasticsearch expects.</li>
+<li>Removed no longer supported \Elastica\Query\QueryString::setAutoGeneratePhraseQueries( $bool ) <a href="https://github.com/ruflin/Elastica/pull/1622">#1622</a></li>
+<li>Replaced <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_replaced_literal_params__agg_literal_with_literal_state_literal_context_variable_in_scripted_metric_aggregations">params._agg</a> with state context variable in scripted metric aggregations</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_camel_case_and_underscore_parameters_deprecated_in_6_x_have_been_removed">Camel Case</a> and underscore parameters deprecated in 6.x have been removed</li>
+<li>The parameter <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_the_parameter_literal_fields_literal_deprecated_in_6_x_has_been_removed_from_bulk_request">fields</a> deprecated in 6.x has been removed from Bulk requestedit and Update request.</li>
+<li>The <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-parent-field.html">_parent</a> field has been removed in favour of the join field.</li>
+<li>hits.total is now an object in the search response <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/breaking-changes-7.0.html#_literal_hits_total_literal_is_now_an_object_in_the_search_response">hits.total</a></li>
+<li>Elastica\Reindex does not return an Index anymore but a Response.</li>
+<li>Elastica\Reindex->run() does not refresh the new Index after completion anymore. Use <code>$reindex-&gt;setParam(Reindex::REFRESH, 'wait_for')</code> instead.</li>
+<li><code>Elastica\Search-&gt;search()</code> and <code>Elastica\Search-&gt;count()</code> use request method <code>POST</code> by default. Same for <code>Elastica\Index</code>, <code>Elastica\Type\AbstractType</code>, <code>Elastica\Type</code>.</li>
+<li>Elastica\Client <code>$_config</code> field is now a <code>ClientConfiguration</code> instead of an array</li>
+<li>Removed <code>\Elastica\Client::_log</code>, <code>\Elastica\Log</code> and the <code>log</code> configuration option. Use the <code>Psr\Log\LoggerInterface $logger</code> client argument to customize logging.</li>
+<li>Changed all factory methods to make use of <a href="http://docs.php.net/manual/en/language.oop5.late-static-bindings.php">late static bindings</a> by using <code>static</code> instead of <code>self</code> keyword. This is to increase extendability for classes with factory methods.</li>
+</ul>
+
+
+<h3>Bugfixes</h3>
+
+<ul>
+<li>Always set the Guzzle <code>base_uri</code> to support connecting to multiple ES hosts. <a href="https://github.com/ruflin/Elastica/pull/1618">#1618</a></li>
+<li>Properly handle underscore prefixes in options and bulk request metadata (<a href="https://github.com/elastic/elasticsearch/issues/26886">cf upstream</a>. <a href="https://github.com/ruflin/Elastica/pull/1621">#1621</a></li>
+<li>Preserve zeros while doing float serialization to JSON. <a href="https://github.com/ruflin/Elastica/pull/1635">#1635</a></li>
+<li>Add <code>settings</code> level on json to create an Index in all tests (it worked till 6.x but it shouldn&rsquo;t work)</li>
+</ul>
+
+
+<h3>Added</h3>
+
+<ul>
+<li>support for elasticsearch-php ^7.0</li>
+<li>Added <code>ParentAggregation</code> <a href="https://github.com/ruflin/Elastica/pull/1616">#1616</a></li>
+<li>Elastica\Reindex missing options (script, remote, wait_for_completion, scroll&hellip;)</li>
+<li>Added <code>AdjacencyMatrix</code> aggregation <a href="https://github.com/ruflin/Elastica/pull/1642">#1642</a></li>
+<li>Added request method parameter to <code>Elastica\SearchableInterface-&gt;search()</code> and <code>Elastica\SearchableInterface-&gt;count()</code>. Same for <code>Elastica\Search</code><a href="https://github.com/ruflin/Elastica/issues/1441">#1441</a></li>
+<li>Added support for Field Collapsing (Issue: <a href="https://github.com/ruflin/Elastica/issues/1392">#1392</a>; PR: <a href="https://github.com/ruflin/Elastica/pull/1653">#1653</a>)</li>
+<li>Support string DSN in <code>\Elastica\Client</code> constructor for config argument <a href="https://github.com/ruflin/Elastica/issues/1640">#1640</a></li>
+<li>Move Client configuration in a dedicated class</li>
+<li>Added <code>callable</code> type hinting to <code>$callback</code> in <code>Client</code> constructor. <a href="https://github.com/ruflin/Elastica/pull/1659">#1659</a></li>
+<li>Added <code>setTrackTotalHits</code> method to <code>Elastica\Query</code><a href="https://github.com/ruflin/Elastica/issues/1663">#1663</a></li>
+<li>Allow metadata to be set on Aggregations (via <code>AbstractAggregation::setMeta(array)</code>). <a href="https://github.com/ruflin/Elastica/issues/1677">#1677</a></li>
+</ul>
+
+
+<h3>Improvements</h3>
+
+<ul>
+<li>Added <code>native_function_invocation</code> CS rule <a href="https://github.com/ruflin/Elastica/pull/1606">#1606</a></li>
+<li>Elasticsearch test version changed from 6.5.2 to 6.6.1 <a href="https://github.com/ruflin/Elastica/pull/1620">#1620</a></li>
+<li>Clear scroll context also when empty page was received <a href="https://github.com/ruflin/Elastica/pull/1660">#1660</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="http://github.com/ruflin">ruflin</a></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2019-10-31T10:30:38+01:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://Elastica.io/2019/10/31/release-7-dot-0-0-beta1/" data-via="" data-counturl="http://Elastica.io/2019/10/31/release-7-dot-0-0-beta1/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2019/01/29/release-6-dot-1-1/" title="Previous Post: Release 6.1.1">&laquo; Release 6.1.1</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2019/10/31/release-7-dot-0-0-beta1/">Release 7.0.0-beta1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2019/01/29/release-6-dot-1-1/">Release 6.1.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2018/12/06/release-6-dot-1-0/">Release 6.1.0</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2018/05/29/release-6-dot-0-2/">Release 6.0.2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2018/02/18/release-6-dot-0-1/">Release 6.0.1</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/116483615197289019288?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2019 - ruflin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
