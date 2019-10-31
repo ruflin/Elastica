@@ -85,7 +85,7 @@ class DocumentTest extends BaseTest
     {
         $document = new Document();
         $this->assertFalse($document->hasId());
-        $document->setId('');
+        $document->setId(null);
         $this->assertFalse($document->hasId());
         $document->setId(0);
         $this->assertTrue($document->hasId());
