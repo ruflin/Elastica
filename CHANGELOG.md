@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file based on the
 ### Bugfixes
 
 ### Added
+* Added `Sampler` aggregation [#1688](https://github.com/ruflin/Elastica/pull/1688)
 
 ### Improvements
 
