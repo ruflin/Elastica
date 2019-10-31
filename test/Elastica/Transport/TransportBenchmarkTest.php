@@ -3,12 +3,13 @@
 namespace Elastica\Test\Transport;
 
 use Elastica\Document;
+use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Query\Term;
 use Elastica\Request;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class TransportBenchmarkTest extends BaseTest
 {
@@ -32,15 +33,15 @@ class TransportBenchmarkTest extends BaseTest
     /**
      * @param array $config
      *
-     * @return \Elastica\Type
+     * @return Index
      */
-    protected function getType(array $config)
+    protected function getIndex(array $config)
     {
         $client = $this->_getClient($config);
         $index = $client->getIndex('benchmark'.\uniqid());
         $index->create(['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]], true);
 
-        return $index->getType('_doc');
+        return $index;
     }
 
     /**
@@ -50,16 +51,14 @@ class TransportBenchmarkTest extends BaseTest
     public function testAddDocument(array $config, $transport)
     {
         $this->_checkTransport($config, $transport);
-
-        $type = $this->getType($config);
-        $index = $type->getIndex();
+        $index = $this->getIndex($config);
         $index->create([], true);
 
         $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
             $data = $this->getData($i);
             $doc = new Document($i, $data);
-            $result = $type->addDocument($doc);
+            $result = $index->addDocument($doc);
             $times[] = $result->getQueryTime();
             $this->assertTrue($result->isOk());
         }
@@ -77,10 +76,8 @@ class TransportBenchmarkTest extends BaseTest
     public function testRandomRead(array $config, $transport)
     {
         $this->_checkTransport($config, $transport);
-
-        $type = $this->getType($config);
-
-        $type->search('test');
+        $index = $this->getIndex($config);
+        $index->search('test');
 
         $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
@@ -88,7 +85,7 @@ class TransportBenchmarkTest extends BaseTest
             $query = new Query();
             $query->setQuery(new MatchAll());
             $query->setPostFilter(new Term(['test' => $test]));
-            $result = $type->search($query);
+            $result = $index->search($query);
             $times[] = $result->getResponse()->getQueryTime();
         }
 
@@ -103,8 +100,7 @@ class TransportBenchmarkTest extends BaseTest
     public function testBulk(array $config, $transport)
     {
         $this->_checkTransport($config, $transport);
-
-        $type = $this->getType($config);
+        $index = $this->getIndex($config);
 
         $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
@@ -114,7 +110,7 @@ class TransportBenchmarkTest extends BaseTest
                 $docs[] = new Document($i, $data);
             }
 
-            $result = $type->addDocuments($docs);
+            $result = $index->addDocuments($docs);
             $times[] = $result->getQueryTime();
         }
 
@@ -132,7 +128,6 @@ class TransportBenchmarkTest extends BaseTest
         $client = $this->_getClient($config);
         $index = $client->getIndex('benchmark');
         $index->create([], true);
-        $type = $index->getType('_doc');
 
         // Define mapping
         $mapping = new Mapping();
@@ -153,12 +148,12 @@ class TransportBenchmarkTest extends BaseTest
             'allincluded' => ['type' => 'text'],
         ]);
 
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
         $index->refresh();
 
         $times = [];
         for ($i = 0; $i < $this->_max; ++$i) {
-            $response = $type->request('_mapping', Request::GET);
+            $response = $index->request('_mapping', Request::GET);
             $times[] = $response->getQueryTime();
         }
         self::logResults('get mapping', $transport, $times);

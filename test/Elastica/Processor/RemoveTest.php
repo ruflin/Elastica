@@ -53,19 +53,12 @@ class RemoveTest extends BasePipelineTest
         $pipeline->addProcessor($remove)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        // Add document to normal index
-        $doc1 = new Document(null, ['name' => 'nicolas', 'es_version' => 6, 'package' => 'Elastica']);
-        $doc2 = new Document(null, ['name' => 'ruflin', 'es_version' => 5, 'package' => 'Elastica_old']);
-
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1,
-            $doc2,
+            new Document(null, ['name' => 'nicolas', 'es_version' => 6, 'package' => 'Elastica']),
+            new Document(null, ['name' => 'ruflin', 'es_version' => 5, 'package' => 'Elastica_old']),
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 

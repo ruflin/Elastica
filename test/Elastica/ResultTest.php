@@ -3,9 +3,9 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Result;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class ResultTest extends BaseTest
 {
@@ -14,21 +14,12 @@ class ResultTest extends BaseTest
      */
     public function testGetters()
     {
-        // Creates a new index 'xodoa' and a type '_doc' inside this index
-        $typeName = '_doc';
-
+        // Creates a new index 'xodoa'
         $index = $this->_createIndex();
-        $type = $index->getType($typeName);
-
-        // Adds 1 document to the index
-        $docId = 3;
-        $doc1 = new Document($docId, ['username' => 'hans']);
-        $type->addDocument($doc1);
-
-        // Refreshes index
+        $index->addDocument(new Document(3, ['username' => 'hans']));
         $index->refresh();
 
-        $resultSet = $type->search('hans');
+        $resultSet = $index->search('hans');
 
         $this->assertEquals(1, $resultSet->count());
 
@@ -37,8 +28,7 @@ class ResultTest extends BaseTest
         $this->assertInstanceOf(Result::class, $result);
         $this->assertInstanceOf(Document::class, $result->getDocument());
         $this->assertEquals($index->getName(), $result->getIndex());
-        $this->assertEquals($typeName, $result->getType());
-        $this->assertEquals($docId, $result->getId());
+        $this->assertEquals(3, $result->getId());
         $this->assertGreaterThan(0, $result->getScore());
         $this->assertInternalType('array', $result->getData());
         $this->assertTrue(isset($result->username));
@@ -50,28 +40,26 @@ class ResultTest extends BaseTest
      */
     public function testGetIdNoSource()
     {
-        // Creates a new index 'xodoa' and a type '_doc' inside this index
+        // Creates a new index 'xodoa'
         $indexName = 'xodoa';
-        $typeName = '_doc';
 
         $client = $this->_getClient();
         $index = $client->getIndex($indexName);
         $index->create([], true);
-        $type = $index->getType($typeName);
 
-        $mapping = new Mapping($type);
+        $mapping = new Mapping();
         $mapping->disableSource();
-        $mapping->send();
+        $index->setMapping($mapping);
 
         // Adds 1 document to the index
         $docId = 3;
         $doc1 = new Document($docId, ['username' => 'hans']);
-        $type->addDocument($doc1);
+        $index->addDocument($doc1);
 
         // Refreshes index
         $index->refresh();
 
-        $resultSet = $type->search('hans');
+        $resultSet = $index->search('hans');
 
         $this->assertEquals(1, $resultSet->count());
 
@@ -80,7 +68,6 @@ class ResultTest extends BaseTest
         $this->assertEquals([], $result->getSource());
         $this->assertInstanceOf(Result::class, $result);
         $this->assertEquals($indexName, $result->getIndex());
-        $this->assertEquals($typeName, $result->getType());
         $this->assertEquals($docId, $result->getId());
         $this->assertGreaterThan(0, $result->getScore());
         $this->assertInternalType('array', $result->getData());
@@ -91,19 +78,17 @@ class ResultTest extends BaseTest
      */
     public function testGetTotalTimeReturnsExpectedResults()
     {
-        $typeName = '_doc';
         $index = $this->_createIndex();
-        $type = $index->getType($typeName);
 
         // Adds 1 document to the index
         $docId = 3;
         $doc1 = new Document($docId, ['username' => 'hans']);
-        $type->addDocument($doc1);
+        $index->addDocument($doc1);
 
         // Refreshes index
         $index->refresh();
 
-        $resultSet = $type->search('hans');
+        $resultSet = $index->search('hans');
 
         $this->assertNotNull($resultSet->getTotalTime(), 'Get Total Time should never be a null value');
         $this->assertEquals(

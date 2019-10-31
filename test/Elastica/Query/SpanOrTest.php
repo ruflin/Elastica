@@ -67,9 +67,8 @@ class SpanOrTest extends BaseTest
         $text3 = 'Vivamus vitae mi nec tortor iaculis pellentesque at nec ipsum.';
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, [$field => $text1]),
             new Document(2, [$field => $text2]),
             new Document(3, [$field => $text3]),
@@ -80,14 +79,14 @@ class SpanOrTest extends BaseTest
         $spanTermQuery1 = new SpanTerm([$field => 'lorem']);
         $spanTermQuery2 = new SpanTerm([$field => 'ipsum']);
         $spanOrQuery = new SpanOr([$spanTermQuery1, $spanTermQuery2]);
-        $resultSet = $type->search($spanOrQuery);
+        $resultSet = $index->search($spanOrQuery);
         $this->assertEquals(3, $resultSet->count());
 
         //only 1 match hit
         $spanTermQuery1 = new SpanTerm([$field => 'amet']);
         $spanTermQuery2 = new SpanTerm([$field => 'sit']);
         $spanOrQuery = new SpanOr([$spanTermQuery1, $spanTermQuery2]);
-        $resultSet = $type->search($spanOrQuery);
+        $resultSet = $index->search($spanOrQuery);
         $this->assertEquals(1, $resultSet->count());
     }
 }

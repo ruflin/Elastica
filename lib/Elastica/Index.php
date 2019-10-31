@@ -2,15 +2,20 @@
 
 namespace Elastica;
 
+use Elastica\Bulk\ResponseSet;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\NotFoundException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index\Recovery as IndexRecovery;
 use Elastica\Index\Settings as IndexSettings;
 use Elastica\Index\Stats as IndexStats;
+use Elastica\Query\AbstractQuery;
 use Elastica\ResultSet\BuilderInterface;
 use Elastica\Script\AbstractScript;
 use Elasticsearch\Endpoints\AbstractEndpoint;
 use Elasticsearch\Endpoints\DeleteByQuery;
+use Elasticsearch\Endpoints\Get as DocumentGet;
+use Elasticsearch\Endpoints\Index as IndexEndpoint;
 use Elasticsearch\Endpoints\Indices\Aliases\Update;
 use Elasticsearch\Endpoints\Indices\Analyze;
 use Elasticsearch\Endpoints\Indices\Cache\Clear;
@@ -20,7 +25,7 @@ use Elasticsearch\Endpoints\Indices\Delete;
 use Elasticsearch\Endpoints\Indices\Exists;
 use Elasticsearch\Endpoints\Indices\Flush;
 use Elasticsearch\Endpoints\Indices\ForceMerge;
-use Elasticsearch\Endpoints\Indices\Mapping\Get;
+use Elasticsearch\Endpoints\Indices\Mapping\Get as MappingGet;
 use Elasticsearch\Endpoints\Indices\Open;
 use Elasticsearch\Endpoints\Indices\Refresh;
 use Elasticsearch\Endpoints\Indices\Settings\Put;
@@ -45,7 +50,7 @@ class Index implements SearchableInterface
     /**
      * Client object.
      *
-     * @var \Elastica\Client Client object
+     * @var Client Client object
      */
     protected $_client;
 
@@ -54,29 +59,13 @@ class Index implements SearchableInterface
      *
      * All the communication to and from an index goes of this object
      *
-     * @param \Elastica\Client $client Client object
-     * @param string           $name   Index name
+     * @param Client $client Client object
+     * @param string $name   Index name
      */
-    public function __construct(Client $client, $name)
+    public function __construct(Client $client, string $name)
     {
         $this->_client = $client;
-
-        if (!\is_scalar($name)) {
-            throw new InvalidException('Index name should be a scalar type');
-        }
-        $this->_name = (string) $name;
-    }
-
-    /**
-     * Returns a type object for the current index with the given name.
-     *
-     * @param string $type Type name
-     *
-     * @return \Elastica\Type Type object
-     */
-    public function getType($type)
-    {
-        return new Type($this, $type);
+        $this->_name = $name;
     }
 
     /**
@@ -100,23 +89,32 @@ class Index implements SearchableInterface
     }
 
     /**
-     * Gets all the type mappings for an index.
+     * Sets the mappings for the current index.
+     *
+     * @param Mapping $mapping MappingType object
+     * @param array   $query   querystring when put mapping (for example update_all_types)
+     *
+     * @return Response
+     */
+    public function setMapping(Mapping $mapping, array $query = []): Response
+    {
+        return $mapping->send($this, $query);
+    }
+
+    /**
+     * Gets all mappings for the current index.
      *
      * @return array
      */
-    public function getMapping()
+    public function getMapping(): array
     {
-        $response = $this->requestEndpoint(new Get());
+        $response = $this->requestEndpoint(new MappingGet());
         $data = $response->getData();
 
         // Get first entry as if index is an Alias, the name of the mapping is the real name and not alias name
         $mapping = \array_shift($data);
 
-        if (isset($mapping['mappings'])) {
-            return $mapping['mappings'];
-        }
-
-        return [];
+        return $mapping['mappings'] ?? [];
     }
 
     /**
@@ -130,12 +128,23 @@ class Index implements SearchableInterface
     }
 
     /**
+     * @param string       $id
+     * @param array|string $data
+     *
+     * @return Document
+     */
+    public function createDocument(string $id = '', $data = [])
+    {
+        return new Document($id, $data, $this);
+    }
+
+    /**
      * Uses _bulk to send documents to the server.
      *
-     * @param array|\Elastica\Document[] $docs    Array of Elastica\Document
-     * @param array                      $options Array of query params to use for query. For possible options check es api
+     * @param Document[] $docs    Array of Elastica\Document
+     * @param array      $options Array of query params to use for query. For possible options check es api
      *
-     * @return \Elastica\Bulk\ResponseSet
+     * @return ResponseSet
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
@@ -151,24 +160,23 @@ class Index implements SearchableInterface
     /**
      * Update entries in the db based on a query.
      *
-     * @param \Elastica\Query|string|array $query   Query object or array
-     * @param AbstractScript               $script  Script
-     * @param array                        $options Optional params
+     * @param Query|string|array $query   Query object or array
+     * @param AbstractScript     $script  Script
+     * @param array              $options Optional params
      *
-     * @return \Elastica\Response
+     * @return Response
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
      */
     public function updateByQuery($query, AbstractScript $script, array $options = [])
     {
-        $query = Query::create($query)->getQuery();
-
         $endpoint = new UpdateByQuery();
-        $body = ['query' => \is_array($query)
-            ? $query
-            : $query->toArray(), ];
+        $q = Query::create($query)->getQuery();
+        $body = [
+            'query' => \is_array($q) ? $q : $q->toArray(),
+            'script' => $script->toArray()['script'],
+        ];
 
-        $body['script'] = $script->toArray()['script'];
         $endpoint->setBody($body);
         $endpoint->setParams($options);
 
@@ -176,12 +184,64 @@ class Index implements SearchableInterface
     }
 
     /**
+     * Adds the given document to the search index.
+     *
+     * @param Document $doc Document with data
+     *
+     * @return Response
+     */
+    public function addDocument(Document $doc)
+    {
+        $endpoint = new IndexEndpoint();
+
+        if (null !== $doc->getId() && '' !== $doc->getId()) {
+            $endpoint->setID($doc->getId());
+        }
+
+        $options = $doc->getOptions(
+            [
+                'version',
+                'version_type',
+                'routing',
+                'percolate',
+                'parent',
+                'op_type',
+                'consistency',
+                'replication',
+                'refresh',
+                'timeout',
+                'pipeline',
+            ]
+        );
+
+        $endpoint->setBody($doc->getData());
+        $endpoint->setParams($options);
+
+        $response = $this->requestEndpoint($endpoint);
+
+        $data = $response->getData();
+        // set autogenerated id to document
+        if ($response->isOk() && (
+            $doc->isAutoPopulate() || $this->getClient()->getConfigValue(['document', 'autoPopulate'], false)
+        )) {
+            if (isset($data['_id']) && !$doc->hasId()) {
+                $doc->setId($data['_id']);
+            }
+            if (isset($data['_version'])) {
+                $doc->setVersion($data['_version']);
+            }
+        }
+
+        return $response;
+    }
+
+    /**
      * Uses _bulk to send documents to the server.
      *
-     * @param array|\Elastica\Document[] $docs    Array of Elastica\Document
-     * @param array                      $options Array of query params to use for query. For possible options check es api
+     * @param array|Document[] $docs    Array of Elastica\Document
+     * @param array            $options Array of query params to use for query. For possible options check es api
      *
-     * @return \Elastica\Bulk\ResponseSet
+     * @return ResponseSet
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
@@ -195,12 +255,83 @@ class Index implements SearchableInterface
     }
 
     /**
+     * Get the document from search index.
+     *
+     * @param int|string $id      Document id
+     * @param array      $options options for the get request
+     *
+     * @throws \Elastica\Exception\ResponseException
+     * @throws NotFoundException
+     *
+     * @return Document
+     */
+    public function getDocument($id, array $options = []): Document
+    {
+        $endpoint = new DocumentGet();
+        $endpoint->setID($id);
+        $endpoint->setParams($options);
+
+        $response = $this->requestEndpoint($endpoint);
+        $result = $response->getData();
+
+        if (!isset($result['found']) || false === $result['found']) {
+            throw new NotFoundException('doc id '.$id.' not found');
+        }
+
+        if (isset($result['fields'])) {
+            $data = $result['fields'];
+        } elseif (isset($result['_source'])) {
+            $data = $result['_source'];
+        } else {
+            $data = [];
+        }
+
+        $document = new Document($id, $data, $this->getName());
+        $document->setVersion($result['_version']);
+
+        return $document;
+    }
+
+    /**
+     * Deletes a document by its unique identifier.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete.html
+     *
+     * @param string $id      Document id
+     * @param array  $options
+     *
+     * @throws NotFoundException
+     *
+     * @return Response Response object
+     */
+    public function deleteById(string $id, array $options = []): Response
+    {
+        if (!\trim($id)) {
+            throw new NotFoundException('Doc id "'.$id.'" not found and can not be deleted');
+        }
+
+        $endpoint = new \Elasticsearch\Endpoints\Delete();
+        $endpoint->setID(\trim($id));
+        $endpoint->setParams($options);
+
+        $response = $this->requestEndpoint($endpoint);
+
+        $responseData = $response->getData();
+
+        if (isset($responseData['result']) && 'not_found' === $responseData['result']) {
+            throw new NotFoundException('Doc id "'.$id.'" not found and can not be deleted');
+        }
+
+        return $response;
+    }
+
+    /**
      * Deletes entries in the db based on a query.
      *
-     * @param \Elastica\Query|\Elastica\Query\AbstractQuery|string|array $query   Query object or array
-     * @param array                                                      $options Optional params
+     * @param Query|AbstractQuery|string|array $query   Query object or array
+     * @param array                            $options Optional params
      *
-     * @return \Elastica\Response
+     * @return Response
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.0/docs-delete-by-query.html
      */
@@ -218,7 +349,7 @@ class Index implements SearchableInterface
     /**
      * Deletes the index.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
     public function delete()
     {
@@ -228,9 +359,9 @@ class Index implements SearchableInterface
     /**
      * Uses _bulk to delete documents from the server.
      *
-     * @param array|\Elastica\Document[] $docs Array of Elastica\Document
+     * @param array|Document[] $docs Array of Elastica\Document
      *
-     * @return \Elastica\Bulk\ResponseSet
+     * @return ResponseSet
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
      */
@@ -265,7 +396,7 @@ class Index implements SearchableInterface
     /**
      * Refreshes the index.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-refresh.html
      */
@@ -284,10 +415,10 @@ class Index implements SearchableInterface
      *                            bool=> Deletes index first if already exists (default = false).
      *                            array => Associative array of options (option=>value)
      *
-     * @throws \Elastica\Exception\InvalidException
+     * @throws InvalidException
      * @throws \Elastica\Exception\ResponseException
      *
-     * @return \Elastica\Response Server response
+     * @return Response Server response
      */
     public function create(array $args = [], $options = null)
     {
@@ -325,7 +456,7 @@ class Index implements SearchableInterface
      *
      * @return bool True if index exists
      */
-    public function exists()
+    public function exists(): bool
     {
         $response = $this->requestEndpoint(new Exists());
 
@@ -333,9 +464,9 @@ class Index implements SearchableInterface
     }
 
     /**
-     * @param string|array|\Elastica\Query $query
-     * @param int|array                    $options
-     * @param BuilderInterface             $builder
+     * @param string|array|Query $query
+     * @param int|array          $options
+     * @param BuilderInterface   $builder
      *
      * @return Search
      */
@@ -351,11 +482,11 @@ class Index implements SearchableInterface
     /**
      * Searches in this index.
      *
-     * @param string|array|\Elastica\Query $query   Array with all query data inside or a Elastica\Query object
-     * @param int|array                    $options OPTIONAL Limit or associative array of options (option=>value)
-     * @param string                       $method  OPTIONAL Request method (use const's) (default = Request::POST)
+     * @param string|array|Query $query   Array with all query data inside or a Elastica\Query object
+     * @param int|array          $options OPTIONAL Limit or associative array of options (option=>value)
+     * @param string             $method  OPTIONAL Request method (use const's) (default = Request::POST)
      *
-     * @return \Elastica\ResultSet with all results inside
+     * @return ResultSet with all results inside
      *
      * @see \Elastica\SearchableInterface::search
      */
@@ -369,8 +500,8 @@ class Index implements SearchableInterface
     /**
      * Counts results of query.
      *
-     * @param string|array|\Elastica\Query $query  Array with all query data inside or a Elastica\Query object
-     * @param string                       $method OPTIONAL Request method (use const's) (default = Request::POST)
+     * @param string|array|Query $query  Array with all query data inside or a Elastica\Query object
+     * @param string             $method OPTIONAL Request method (use const's) (default = Request::POST)
      *
      * @return int number of documents matching the query
      *
@@ -386,7 +517,7 @@ class Index implements SearchableInterface
     /**
      * Opens an index.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html
      */
@@ -398,7 +529,7 @@ class Index implements SearchableInterface
     /**
      * Closes the index.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html
      */
@@ -412,7 +543,7 @@ class Index implements SearchableInterface
      *
      * @return string Index name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->_name;
     }
@@ -433,7 +564,7 @@ class Index implements SearchableInterface
      * @param string $name    Alias name
      * @param bool   $replace OPTIONAL If set, an existing alias will be replaced
      *
-     * @return \Elastica\Response Response
+     * @return Response Response
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html
      */
@@ -461,7 +592,7 @@ class Index implements SearchableInterface
      *
      * @param string $name Alias name
      *
-     * @return \Elastica\Response Response
+     * @return Response Response
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html
      */
@@ -512,7 +643,7 @@ class Index implements SearchableInterface
     /**
      * Clears the cache of an index.
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-clearcache.html
      */
@@ -544,7 +675,7 @@ class Index implements SearchableInterface
      *
      * @param array $data Data array
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html
      */
@@ -564,7 +695,7 @@ class Index implements SearchableInterface
      * @param array|string $data   OPTIONAL Arguments as array or encoded string
      * @param array        $query  OPTIONAL Query params
      *
-     * @return \Elastica\Response Response object
+     * @return Response Response object
      */
     public function request($path, $method, $data = [], array $query = [])
     {
@@ -583,11 +714,7 @@ class Index implements SearchableInterface
     public function requestEndpoint(AbstractEndpoint $endpoint)
     {
         $cloned = clone $endpoint;
-
         $cloned->setIndex($this->getName());
-        if ($endpoint instanceof Create || $endpoint instanceof \Elasticsearch\Endpoints\Indices\Mapping\Put) {
-            $cloned->setParams(['include_type_name' => true]);
-        }
 
         return $this->getClient()->requestEndpoint($cloned);
     }
@@ -617,5 +744,30 @@ class Index implements SearchableInterface
         }
 
         return $data['tokens'];
+    }
+
+    /**
+     * Update document, using update script.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update.html
+     *
+     * @param Document|AbstractScript $data    Document or Script with update data
+     * @param array                   $options array of query params to use for query
+     *
+     * @throws InvalidException
+     *
+     * @return Response
+     */
+    public function updateDocument($data, array $options = [])
+    {
+        if (!($data instanceof Document) && !($data instanceof AbstractScript)) {
+            throw new \InvalidArgumentException('Data should be a Document or Script');
+        }
+
+        if (!$data->hasId()) {
+            throw new InvalidException('Document or Script id is not set');
+        }
+
+        return $this->getClient()->updateDocument($data->getId(), $data, $this->getName(), $options);
     }
 }

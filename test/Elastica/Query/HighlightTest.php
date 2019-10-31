@@ -15,11 +15,10 @@ class HighlightTest extends BaseTest
     public function testHightlightSearch()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $phrase = 'My name is ruflin';
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['id' => 1, 'phrase' => $phrase, 'username' => 'hanswurst', 'test' => ['2', '3', '5']]),
             new Document(2, ['id' => 2, 'phrase' => $phrase, 'username' => 'peter', 'test' => ['2', '3', '5']]),
         ]);
@@ -39,7 +38,7 @@ class HighlightTest extends BaseTest
 
         $index->refresh();
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
 
         foreach ($resultSet as $result) {
             $highlight = $result->getHighlights();

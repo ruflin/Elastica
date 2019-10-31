@@ -14,7 +14,7 @@ class BucketSelectorTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('_doc')->addDocuments([
+        $index->addDocuments([
             new Document(1, ['date' => '2018-12-01', 'value' => 1]),
             new Document(2, ['date' => '2018-12-02', 'value' => 2]),
             new Document(3, ['date' => '2018-12-03', 'value' => 5]),

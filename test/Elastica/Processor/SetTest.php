@@ -57,18 +57,12 @@ class SetTest extends BasePipelineTest
         $pipeline->addProcessor($set)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        // Add document to normal index
-        $doc1 = new Document(null, ['name' => 'nicolas', 'package' => 'Elastico']);
-        $doc2 = new Document(null, ['name' => 'ruflin']);
-
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1, $doc2,
+            new Document(null, ['name' => 'nicolas', 'package' => 'Elastico']),
+            new Document(null, ['name' => 'ruflin']),
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 

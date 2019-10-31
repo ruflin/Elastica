@@ -37,7 +37,7 @@ class SnapshotTest extends Base
             new Document('2', ['city' => 'San Luis Obispo']),
             new Document('3', ['city' => 'San Francisco']),
         ];
-        $this->_index->getType('_doc')->addDocuments($this->_docs);
+        $this->_index->addDocuments($this->_docs);
         $this->_index->refresh();
     }
 
@@ -99,8 +99,8 @@ class SnapshotTest extends Base
         $this->_index->forcemerge();
 
         // ensure that the index has been restored
-        $count = $this->_index->getType('_doc')->count();
-        $this->assertEquals(\sizeof($this->_docs), $count);
+        $count = $this->_index->count();
+        $this->assertEquals(\count($this->_docs), $count);
 
         // delete the snapshot
         $response = $this->_snapshot->deleteSnapshot($repositoryName, $snapshotName);

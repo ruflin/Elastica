@@ -4,13 +4,12 @@ namespace Elastica\Test\Query;
 
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\MoreLikeThis;
 use Elastica\Query\Term;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
-use Elastica\Type\Mapping;
 
 class MoreLikeThisTest extends BaseTest
 {
@@ -23,22 +22,20 @@ class MoreLikeThisTest extends BaseTest
         $index = new Index($client, 'test');
         $index->create([], true);
         $index->getSettings()->setNumberOfReplicas(0);
-        //$index->getSettings()->setNumberOfShards(1);
 
-        $type = new Type($index, '_doc');
-        $mapping = new Mapping($type, [
+        $mapping = new Mapping([
             'email' => ['store' => true, 'type' => 'text', 'index' => true],
             'content' => ['store' => true, 'type' => 'text',  'index' => true],
         ]);
 
         $mapping->setSource(['enabled' => false]);
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
 
         $doc = new Document(1000, ['email' => 'testemail@gmail.com', 'content' => 'This is a sample post. Hello World Fuzzy Like This!']);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
 
         $doc = new Document(1001, ['email' => 'nospam@gmail.com', 'content' => 'This is a fake nospam email address for gmail']);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
 
         // Refresh index
         $index->refresh();
@@ -53,7 +50,7 @@ class MoreLikeThisTest extends BaseTest
         $query = new Query();
         $query->setQuery($mltQuery);
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $resultSet->getResponse()->getData();
         $this->assertEquals(2, $resultSet->count());
     }
@@ -67,9 +64,7 @@ class MoreLikeThisTest extends BaseTest
         $index = $client->getIndex('elastica_test');
         $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
-        $type = new Type($index, '_doc');
-
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['visible' => true, 'name' => 'bruce wayne batman']),
             new Document(2, ['visible' => true, 'name' => 'bruce wayne']),
             new Document(3, ['visible' => false, 'name' => 'bruce wayne']),
@@ -81,7 +76,7 @@ class MoreLikeThisTest extends BaseTest
 
         $index->refresh();
 
-        $doc = $type->getDocument(1);
+        $doc = $index->getDocument(1);
 
         // Return all similar from id
         $mltQuery = new MoreLikeThis();
@@ -89,7 +84,7 @@ class MoreLikeThisTest extends BaseTest
         $mltQuery->setMinDocFrequency(1);
         $mltQuery->setLike($doc);
 
-        $this->assertEquals(4, $type->count($mltQuery));
+        $this->assertEquals(4, $index->count($mltQuery));
 
         $mltQuery = new MoreLikeThis();
         $mltQuery->setMinTermFrequency(1);
@@ -103,7 +98,7 @@ class MoreLikeThisTest extends BaseTest
         $filterTerm->setTerm('visible', true);
         $bool->addFilter($filterTerm);
 
-        $this->assertEquals(2, $type->count($bool));
+        $this->assertEquals(2, $index->count($bool));
 
         // Return all similar from source
         $mltQuery = new MoreLikeThis();
@@ -111,10 +106,10 @@ class MoreLikeThisTest extends BaseTest
         $mltQuery->setMinDocFrequency(1);
         $mltQuery->setMinimumShouldMatch('100%');
         $mltQuery->setLike(
-            $type->getDocument(1)->setId('')
+            $index->getDocument(1)->setId('')
         );
 
-        $this->assertEquals(1, $type->count($mltQuery));
+        $this->assertEquals(1, $index->count($mltQuery));
     }
 
     /**
@@ -279,15 +274,14 @@ class MoreLikeThisTest extends BaseTest
     public function testToArrayForId()
     {
         $query = new MoreLikeThis();
-        $query->setLike(new Document(1, [], '_doc', 'index'));
+        $query->setLike(new Document('1', [], 'index'));
 
         $data = $query->toArray();
 
         $this->assertEquals(
             ['more_like_this' => [
                 'like' => [
-                    '_id' => 1,
-                    '_type' => '_doc',
+                    '_id' => '1',
                     '_index' => 'index',
                 ],
             ],
@@ -302,14 +296,13 @@ class MoreLikeThisTest extends BaseTest
     public function testToArrayForSource()
     {
         $query = new MoreLikeThis();
-        $query->setLike(new Document('', ['Foo' => 'Bar'], '_doc', 'index'));
+        $query->setLike(new Document('', ['Foo' => 'Bar'], 'index'));
 
         $data = $query->toArray();
 
         $this->assertEquals(
             ['more_like_this' => [
                 'like' => [
-                    '_type' => '_doc',
                     '_index' => 'index',
                     'doc' => [
                         'Foo' => 'Bar',

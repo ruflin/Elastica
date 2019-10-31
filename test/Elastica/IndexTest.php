@@ -3,8 +3,10 @@
 namespace Elastica\Test;
 
 use Elastica\Document;
+use Elastica\Exception\InvalidException;
 use Elastica\Exception\ResponseException;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query\QueryString;
 use Elastica\Query\SimpleQueryString;
 use Elastica\Query\Term;
@@ -12,8 +14,6 @@ use Elastica\Request;
 use Elastica\Script\Script;
 use Elastica\Status;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type;
-use Elastica\Type\Mapping;
 use Elasticsearch\Endpoints\Indices\Analyze;
 
 class IndexTest extends BaseTest
@@ -24,15 +24,17 @@ class IndexTest extends BaseTest
     public function testMapping()
     {
         $index = $this->_createIndex();
-        $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => ['2', '3', '5']]);
 
-        $type = $index->getType('_doc');
-
-        $mapping = ['id' => ['type' => 'integer', 'store' => true], 'email' => ['type' => 'text'],
-            'username' => ['type' => 'text'], 'test' => ['type' => 'integer'], ];
-        $type->setMapping($mapping);
-
-        $type->addDocument($doc);
+        $mappings = new Mapping([
+            'id' => ['type' => 'integer', 'store' => true],
+            'email' => ['type' => 'text'],
+            'username' => ['type' => 'text'],
+            'test' => ['type' => 'integer'],
+        ]);
+        $index->setMapping($mappings);
+        $index->addDocument(
+            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'hanswurst', 'test' => ['2', '3', '5']])
+        );
         $index->forcemerge();
 
         $storedMapping = $index->getMapping();
@@ -42,8 +44,6 @@ class IndexTest extends BaseTest
         $this->assertEquals($storedMapping['properties']['email']['type'], 'text');
         $this->assertEquals($storedMapping['properties']['username']['type'], 'text');
         $this->assertEquals($storedMapping['properties']['test']['type'], 'integer');
-
-        $result = $type->search('hanswurst');
     }
 
     /**
@@ -57,11 +57,8 @@ class IndexTest extends BaseTest
         $aliasName = 'test-mapping-alias';
         $index->addAlias($aliasName);
 
-        $type = new Type($index, '_doc');
-        $mapping = new Mapping($type, [
-                'id' => ['type' => 'integer', 'store' => 'true'],
-            ]);
-        $type->setMapping($mapping);
+        $mapping = new Mapping(['id' => ['type' => 'integer', 'store' => 'true']]);
+        $index->setMapping($mapping);
 
         $client = $index->getClient();
 
@@ -83,7 +80,7 @@ class IndexTest extends BaseTest
      */
     public function testAddRemoveAlias()
     {
-        $this->expectException(\Elastica\Exception\ResponseException::class);
+        $this->expectException(ResponseException::class);
 
         $client = $this->_getClient();
 
@@ -93,15 +90,10 @@ class IndexTest extends BaseTest
 
         $index = $client->getIndex($indexName1);
         $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
-
-        $doc = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']);
-
-        $type = $index->getType($typeName);
-        $type->addDocument($doc);
+        $index->addDocument(new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'ruflin']));
         $index->refresh();
 
-        $resultSet = $type->search('ruflin');
-
+        $resultSet = $index->search('ruflin');
         $this->assertEquals(1, $resultSet->count());
 
         $data = $index->addAlias($aliasName, true)->getData();
@@ -110,7 +102,7 @@ class IndexTest extends BaseTest
         $response = $index->removeAlias($aliasName)->getData();
         $this->assertTrue($response['acknowledged']);
 
-        $client->getIndex($aliasName)->getType($typeName)->search('ruflin');
+        $client->getIndex($aliasName)->search('ruflin');
     }
 
     /**
@@ -124,9 +116,8 @@ class IndexTest extends BaseTest
         $doc1 = new Document(null, ['name' => 'ruflin']);
         $doc2 = new Document(null, ['name' => 'nicolas']);
 
-        $type = $index->getType('_doc');
-        $type->addDocument($doc1);
-        $type->addDocument($doc2);
+        $index->addDocument($doc1);
+        $index->addDocument($doc2);
 
         $index->refresh();
 
@@ -151,9 +142,8 @@ class IndexTest extends BaseTest
         $doc1 = new Document(null, ['name' => 'ruflin']);
         $doc2 = new Document(null, ['name' => 'nicolas']);
 
-        $type = $index->getType('_doc');
-        $type->addDocument($doc1);
-        $type->addDocument($doc2);
+        $index->addDocument($doc1);
+        $index->addDocument($doc2);
 
         $index->refresh();
 
@@ -173,9 +163,10 @@ class IndexTest extends BaseTest
     public function testDeleteByQueryWithQueryString()
     {
         $index = $this->_createIndex();
-        $type1 = new Type($index, '_doc');
-        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
-        $type1->addDocument(new Document(2, ['name' => 'ruflin']));
+        $index->addDocuments([
+            new Document(1, ['name' => 'ruflin nicolas']),
+            new Document(2, ['name' => 'ruflin']),
+        ]);
         $index->refresh();
 
         $response = $index->search('ruflin*');
@@ -204,9 +195,10 @@ class IndexTest extends BaseTest
     public function testDeleteByQueryWithQuery()
     {
         $index = $this->_createIndex();
-        $type1 = new Type($index, '_doc');
-        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
-        $type1->addDocument(new Document(2, ['name' => 'ruflin']));
+        $index->addDocuments([
+            new Document(1, ['name' => 'ruflin nicolas']),
+            new Document(2, ['name' => 'ruflin']),
+        ]);
         $index->refresh();
 
         $response = $index->search('ruflin*');
@@ -235,9 +227,10 @@ class IndexTest extends BaseTest
     public function testDeleteByQueryWithArrayQuery()
     {
         $index = $this->_createIndex();
-        $type1 = new Type($index, '_doc');
-        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
-        $type1->addDocument(new Document(2, ['name' => 'ruflin']));
+        $index->addDocuments([
+            new Document(1, ['name' => 'ruflin nicolas']),
+            new Document(2, ['name' => 'ruflin']),
+        ]);
         $index->refresh();
 
         $response = $index->search('ruflin*');
@@ -270,18 +263,17 @@ class IndexTest extends BaseTest
         $routing1 = 'first_routing';
         $routing2 = 'second_routing';
 
-        $type = new Type($index, '_doc');
         $doc = new Document(1, ['name' => 'ruflin nicolas']);
         $doc->setRouting($routing1);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
 
         $doc = new Document(2, ['name' => 'ruflin']);
         $doc->setRouting($routing1);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
 
         $doc = new Document(2, ['name' => 'ruflin']);
         $doc->setRouting($routing1);
-        $type->addDocument($doc);
+        $index->addDocument($doc);
 
         $index->refresh();
 
@@ -326,9 +318,10 @@ class IndexTest extends BaseTest
     public function testUpdateByQueryWithQueryString()
     {
         $index = $this->_createIndex();
-        $type1 = new Type($index, '_doc');
-        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
-        $type1->addDocument(new Document(2, ['name' => 'ruflin']));
+        $index->addDocuments([
+            new Document(1, ['name' => 'ruflin nicolas']),
+            new Document(2, ['name' => 'ruflin']),
+        ]);
         $index->refresh();
 
         $response = $index->search('ruflin*');
@@ -360,9 +353,10 @@ class IndexTest extends BaseTest
     public function testUpdateByQueryAll()
     {
         $index = $this->_createIndex();
-        $type1 = new Type($index, '_doc');
-        $type1->addDocument(new Document(1, ['name' => 'ruflin nicolas']));
-        $type1->addDocument(new Document(2, ['name' => 'ruflin']));
+        $index->addDocuments([
+            new Document(1, ['name' => 'ruflin nicolas']),
+            new Document(2, ['name' => 'ruflin']),
+        ]);
         $index->refresh();
 
         $response = $index->search('ruflin*');
@@ -471,16 +465,15 @@ class IndexTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('test');
         $index->create([], true);
-        $type = new Type($index, '_doc');
 
         $doc1 = new Document(1);
         $doc1->set('title', 'Hello world');
 
-        $return = $type->addDocument($doc1);
+        $return = $index->addDocument($doc1);
         $data = $return->getData();
         $this->assertEquals(1, $data['_version']);
 
-        $return = $type->addDocument($doc1);
+        $return = $index->addDocument($doc1);
         $data = $return->getData();
         $this->assertEquals(2, $data['_version']);
     }
@@ -552,12 +545,14 @@ class IndexTest extends BaseTest
     public function testIndexGetMapping()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
+        $mappings = new Mapping([
+            'id' => ['type' => 'integer', 'store' => true],
+            'email' => ['type' => 'text'],
+            'username' => ['type' => 'text'],
+            'test' => ['type' => 'integer'],
+        ]);
 
-        $mapping = ['id' => ['type' => 'integer', 'store' => true], 'email' => ['type' => 'text'],
-            'username' => ['type' => 'text'], 'test' => ['type' => 'integer'], ];
-
-        $type->setMapping($mapping);
+        $index->setMapping($mappings);
         $index->refresh();
         $indexMappings = $index->getMapping();
 
@@ -590,24 +585,22 @@ class IndexTest extends BaseTest
     {
         $client = $this->_getClient();
         $index = $client->getIndex('zero');
-        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
+        $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]]);
 
-        $docs = [];
-
-        $docs[] = new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-        $docs[] = new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']);
-
-        $type = $index->getType('_doc');
-        $type->addDocuments($docs);
+        $docs = [
+            new Document(1, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(2, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(3, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(4, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(5, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(6, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(7, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(8, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(9, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(10, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+            new Document(11, ['id' => 1, 'email' => 'test@test.com', 'username' => 'farrelley']),
+        ];
+        $index->addDocuments($docs);
         $index->refresh();
 
         // default limit results  (default limit is 10)
@@ -647,7 +640,7 @@ class IndexTest extends BaseTest
      */
     public function testCreateWithInvalidOption()
     {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
+        $this->expectException(InvalidException::class);
 
         $client = $this->_getClient();
         $indexName = 'test';
@@ -683,12 +676,6 @@ class IndexTest extends BaseTest
         $this->assertTrue($search->hasIndices());
         $this->assertTrue($search->hasIndex('test'));
         $this->assertTrue($search->hasIndex($index));
-        $this->assertEquals([], $search->getTypes());
-        $this->assertFalse($search->hasTypes());
-        $this->assertFalse($search->hasType('_doc'));
-
-        $type = new Type($index, '_doc');
-        $this->assertFalse($search->hasType($type));
     }
 
     /**
@@ -698,13 +685,11 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $type = new Type($index, '_doc');
-
         $docs = [];
         $docs[] = new Document(1, ['username' => 'hans', 'test' => ['2', '3', '5']]);
         $docs[] = new Document(2, ['username' => 'john', 'test' => ['1', '3', '6']]);
         $docs[] = new Document(3, ['username' => 'rolf', 'test' => ['2', '3', '7']]);
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
         $resultSet = $index->search('rolf');
@@ -729,12 +714,9 @@ class IndexTest extends BaseTest
     public function testSearchGet()
     {
         $index = $this->_createIndex();
-
-        $type = new Type($index, '_doc');
-
         $docs = [];
         $docs[] = new Document(1, ['username' => 'hans']);
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
         $resultSet = $index->search('hans', null, Request::GET);
@@ -751,19 +733,17 @@ class IndexTest extends BaseTest
     {
         $index = $this->_createIndex('testforcemerge_indextest', false, 3);
 
-        $type = new Type($index, '_doc');
-
         $docs = [];
         $docs[] = new Document(1, ['foo' => 'bar']);
         $docs[] = new Document(2, ['foo' => 'bar']);
-        $type->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
         $stats = $index->getStats()->getData();
         $this->assertEquals(2, $stats['_all']['primaries']['docs']['count']);
         $this->assertEquals(0, $stats['_all']['primaries']['docs']['deleted']);
 
-        $type->deleteById(1);
+        $index->deleteById(1);
         $index->refresh();
 
         $stats = $index->getStats()->getData();
@@ -833,29 +813,6 @@ class IndexTest extends BaseTest
         $data = $index->analyze(['text' => 'foo', 'explain' => true], []);
 
         $this->assertArrayHasKey('custom_analyzer', $data);
-    }
-
-    /**
-     * @group unit
-     */
-    public function testThrowExceptionIfNotScalar()
-    {
-        $this->expectException(\Elastica\Exception\InvalidException::class);
-
-        $client = $this->_getClient();
-        $client->getIndex(new \stdClass());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testConvertScalarsToString()
-    {
-        $client = $this->_getClient();
-        $index = $client->getIndex(1);
-
-        $this->assertEquals('1', $index->getName());
-        $this->assertInternalType('string', $index->getName());
     }
 
     /**

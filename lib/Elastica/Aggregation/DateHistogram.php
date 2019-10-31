@@ -50,7 +50,7 @@ class DateHistogram extends Histogram
     /**
      * Set the format for returned bucket key_as_string values.
      *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html#date-format-pattern
      *
      * @param string $format see link for formatting options
      *

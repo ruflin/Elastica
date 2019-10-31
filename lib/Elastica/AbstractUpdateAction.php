@@ -11,18 +11,14 @@ namespace Elastica;
 class AbstractUpdateAction extends Param
 {
     /**
-     * @var \Elastica\Document
+     * @var Document
      */
     protected $_upsert;
 
     /**
      * Sets the id of the document.
-     *
-     * @param string|int $id
-     *
-     * @return $this
      */
-    public function setId($id)
+    public function setId(string $id = null): self
     {
         return $this->setParam('_id', $id);
     }
@@ -30,58 +26,24 @@ class AbstractUpdateAction extends Param
     /**
      * Returns document id.
      *
-     * @return string|int Document id
+     * @return string|null Document id
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->hasParam('_id') ? $this->getParam('_id') : null;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasId()
+    public function hasId(): bool
     {
-        return '' !== (string) $this->getId();
-    }
-
-    /**
-     * Sets the document type name.
-     *
-     * @param Type|string $type Type name
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        if ($type instanceof Type) {
-            $this->setIndex($type->getIndex());
-            $type = $type->getName();
-        }
-
-        return $this->setParam('_type', $type);
-    }
-
-    /**
-     * Return document type name.
-     *
-     * @throws \Elastica\Exception\InvalidException
-     *
-     * @return string Document type name
-     */
-    public function getType()
-    {
-        return $this->getParam('_type');
+        return null !== $this->getId();
     }
 
     /**
      * Sets the document index name.
      *
      * @param Index|string $index Index name
-     *
-     * @return $this
      */
-    public function setIndex($index)
+    public function setIndex($index): self
     {
         if ($index instanceof Index) {
             $index = $index->getName();
@@ -394,7 +356,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @param \Elastica\Document|array $data
+     * @param Document|array $data
      *
      * @return $this
      */
@@ -407,7 +369,7 @@ class AbstractUpdateAction extends Param
     }
 
     /**
-     * @return \Elastica\Document
+     * @return Document
      */
     public function getUpsert()
     {

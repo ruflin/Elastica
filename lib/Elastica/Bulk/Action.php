@@ -5,7 +5,6 @@ namespace Elastica\Bulk;
 use Elastica\Bulk;
 use Elastica\Index;
 use Elastica\JSON;
-use Elastica\Type;
 
 class Action
 {
@@ -143,27 +142,11 @@ class Action
     }
 
     /**
-     * @param string|Type $type
+     * @param string $id
      *
      * @return $this
      */
-    public function setType($type): self
-    {
-        if ($type instanceof Type) {
-            $this->setIndex($type->getIndex()->getName());
-            $type = $type->getName();
-        }
-        $this->_metadata['_type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * @param string|int $id
-     *
-     * @return $this
-     */
-    public function setId($id): self
+    public function setId(string $id): self
     {
         $this->_metadata['_id'] = $id;
 

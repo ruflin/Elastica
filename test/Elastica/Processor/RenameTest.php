@@ -57,17 +57,11 @@ class RenameTest extends BasePipelineTest
         $pipeline->addProcessor($rename)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        // Add document to normal index
-        $doc1 = new Document(null, ['name' => 'nicolas', 'package' => 'Elastico']);
-
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1,
+            new Document(null, ['name' => 'nicolas', 'package' => 'Elastico']),
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 

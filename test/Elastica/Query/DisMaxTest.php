@@ -56,9 +56,8 @@ class DisMaxTest extends BaseTest
     public function testQuery()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['name' => 'Basel-Stadt']),
             new Document(2, ['name' => 'New York']),
             new Document(3, ['name' => 'Baden']),
@@ -78,7 +77,7 @@ class DisMaxTest extends BaseTest
         $query->setTieBreaker($tieBreaker);
         $query->addQuery($queryString1);
         $query->addQuery($queryString2);
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
 
         $this->assertEquals(3, $resultSet->count());
     }
@@ -89,9 +88,8 @@ class DisMaxTest extends BaseTest
     public function testQueryArray()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['name' => 'Basel-Stadt']),
             new Document(2, ['name' => 'New York']),
             new Document(3, ['name' => 'Baden']),
@@ -118,7 +116,7 @@ class DisMaxTest extends BaseTest
         $query->setTieBreaker($tieBreaker);
         $query->addQuery($queryString1);
         $query->addQuery($queryString2);
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
 
         $this->assertEquals(3, $resultSet->count());
     }

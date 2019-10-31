@@ -37,18 +37,12 @@ class LowercaseTest extends BasePipelineTest
         $pipeline->addProcessor($lcase)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        // Add document to normal index
-        $doc1 = new Document(null, ['name' => 'RUFLIN']);
-        $doc2 = new Document(null, ['name' => 'NICOLAS']);
-
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1, $doc2,
+            new Document(null, ['name' => 'RUFLIN']),
+            new Document(null, ['name' => 'NICOLAS']),
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 

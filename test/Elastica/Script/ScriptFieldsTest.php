@@ -2,12 +2,11 @@
 
 namespace Elastica\Test;
 
-use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Script\Script;
 use Elastica\Script\ScriptFields;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class ScriptFieldsTest extends BaseTest
 {
@@ -64,10 +63,8 @@ class ScriptFieldsTest extends BaseTest
     {
         $index = $this->_createIndex();
 
-        $type = $index->getType('_doc');
-
-        $doc = new Document(1, ['firstname' => 'guschti', 'lastname' => 'ruflin']);
-        $type->addDocument($doc);
+        $doc = $index->createDocument(1, ['firstname' => 'guschti', 'lastname' => 'ruflin']);
+        $index->addDocument($doc);
         $index->refresh();
 
         $query = new Query();
@@ -77,7 +74,7 @@ class ScriptFieldsTest extends BaseTest
         ]);
         $query->setScriptFields($scriptFields);
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
         $first = $resultSet->current()->getData();
 
         // 1 + 2
@@ -92,12 +89,8 @@ class ScriptFieldsTest extends BaseTest
         $client = $this->_getClient();
         $index = $client->getIndex('testscriptfieldwithjoin');
         $index->create([], true);
-        $type = $index->getType('_doc');
 
-        $mapping = new Mapping();
-        $mapping->setType($type);
-
-        $mapping = new Mapping($type, [
+        $mapping = new Mapping([
             'text' => ['type' => 'keyword'],
             'name' => ['type' => 'keyword'],
             'my_join_field' => [
@@ -108,51 +101,47 @@ class ScriptFieldsTest extends BaseTest
             ],
         ]);
 
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
         $index->refresh();
 
-        $doc1 = new Document(1, [
+        $doc1 = $index->createDocument(1, [
             'text' => 'this is the 1st question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], '_doc');
-
-        $doc2 = new Document(2, [
+        ]);
+        $doc2 = $index->createDocument(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], '_doc');
-
+        ]);
         $index->addDocuments([$doc1, $doc2]);
 
-        $doc3 = new Document(3, [
+        $doc3 = $index->createDocument(3, [
             'text' => 'this is an answer, the 1st',
             'name' => 'rico',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 1,
             ],
-        ], '_doc', 'testparentid');
-
-        $doc4 = new Document(4, [
+        ]);
+        $doc4 = $index->createDocument(4, [
             'text' => 'this is an answer, the 2nd',
             'name' => 'fede',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], '_doc', 'testparentid');
-
-        $doc5 = new Document(5, [
+        ]);
+        $doc5 = $index->createDocument(5, [
             'text' => 'this is an answer, the 3rd',
             'name' => 'fede',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], '_doc', 'testparentid');
+        ]);
 
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
         $index->refresh();

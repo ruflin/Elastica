@@ -3,11 +3,11 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query\AbstractGeoShape;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\GeoShapePreIndexed;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class GeoShapePreIndexedTest extends BaseTest
 {
@@ -18,18 +18,15 @@ class GeoShapePreIndexedTest extends BaseTest
     {
         $index = $this->_createIndex();
         $indexName = $index->getName();
-        $otherType = $index->getType('_doc');
-
-        // create other type mapping
-        $otherMapping = new Mapping($otherType, [
+        $mapping = new Mapping([
             'location' => [
                 'type' => 'geo_shape',
             ],
         ]);
-        $otherType->setMapping($otherMapping);
+        $index->setMapping($mapping);
 
         // add other type docs
-        $otherType->addDocument(new Document('2', [
+        $index->addDocument(new Document('2', [
             'location' => [
                 'type' => 'envelope',
                 'coordinates' => [
@@ -43,16 +40,16 @@ class GeoShapePreIndexedTest extends BaseTest
         $index->refresh();
 
         $gsp = new GeoShapePreIndexed(
-            'location', '2', '_doc', $indexName, 'location'
+            'location', '2', $indexName, 'location'
         );
 
         $query = new BoolQuery();
         $query->addFilter($gsp);
 
-        $this->assertEquals(1, $otherType->count($query));
+        $this->assertEquals(1, $index->count($query));
 
         $gsp->setRelation(AbstractGeoShape::RELATION_DISJOINT);
-        $this->assertEquals(0, $otherType->count($query), 'Changing the relation should take effect');
+        $this->assertEquals(0, $index->count($query), 'Changing the relation should take effect');
     }
 
     /**
@@ -61,7 +58,7 @@ class GeoShapePreIndexedTest extends BaseTest
     public function testConstruct()
     {
         $gsp = new GeoShapePreIndexed(
-            'search_field', '1', 'type', 'index', 'indexed_field'
+            'search_field', '1', 'index', 'indexed_field'
         );
 
         $expected = [
@@ -69,7 +66,6 @@ class GeoShapePreIndexedTest extends BaseTest
                 'search_field' => [
                     'indexed_shape' => [
                         'id' => '1',
-                        'type' => 'type',
                         'index' => 'index',
                         'path' => 'indexed_field',
                     ],
@@ -86,7 +82,7 @@ class GeoShapePreIndexedTest extends BaseTest
      */
     public function testSetRelation()
     {
-        $gsp = new GeoShapePreIndexed('location', '1', 'type', 'indexName', 'location');
+        $gsp = new GeoShapePreIndexed('location', '1', 'indexName', 'location');
 
         $this->assertEquals(AbstractGeoShape::RELATION_INTERSECT, $gsp->getRelation());
         $this->assertSame($gsp, $gsp->setRelation(AbstractGeoShape::RELATION_DISJOINT));

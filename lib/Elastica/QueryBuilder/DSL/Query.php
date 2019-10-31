@@ -41,7 +41,6 @@ use Elastica\Query\SpanTerm;
 use Elastica\Query\SpanWithin;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
-use Elastica\Query\Type;
 use Elastica\Query\Wildcard;
 use Elastica\QueryBuilder\DSL;
 
@@ -568,21 +567,7 @@ class Query implements DSL
     /**
      * type query.
      *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-type-query.html
-     *
-     * @param string $type Type name
-     *
-     * @return Type
-     */
-    public function type(string $type = null): Type
-    {
-        return new Type($type);
-    }
-
-    /**
-     * type query.
-     *
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-percolate-query.html
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-percolate-query.html
      *
      * @return Percolate
      */

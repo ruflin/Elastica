@@ -47,7 +47,6 @@ class Version240 extends Version
         'wildcard',
         'geo_distance',
         'exists',
-        'type',
         'percolate',
     ];
 

@@ -4,6 +4,7 @@ namespace Elastica\Test\Exception;
 
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
+use Elastica\Mapping;
 
 class ResponseExceptionTest extends AbstractExceptionTest
 {
@@ -32,16 +33,15 @@ class ResponseExceptionTest extends AbstractExceptionTest
     public function testBadType()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
-        $type->setMapping([
+        $index->setMapping(new Mapping([
             'num' => [
                 'type' => 'long',
             ],
-        ]);
+        ]));
 
         try {
-            $type->addDocument(new Document('', [
+            $index->addDocument(new Document('', [
                 'num' => 'not number at all',
             ]));
             $this->fail('Indexing with wrong type should fail');

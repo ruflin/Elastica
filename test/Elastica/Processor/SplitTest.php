@@ -57,17 +57,11 @@ class SplitTest extends BasePipelineTest
         $pipeline->addProcessor($split)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        // Add document to normal index
-        $doc1 = new Document(null, ['name' => 'nicolas&ruflin']);
-
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1,
+            new Document(null, ['name' => 'nicolas&ruflin']),
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 

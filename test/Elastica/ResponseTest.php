@@ -4,12 +4,12 @@ namespace Elastica\Test;
 
 use Elastica\Document;
 use Elastica\Exception\ResponseException;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\MatchAll;
 use Elastica\Request;
 use Elastica\Response;
 use Elastica\Test\Base as BaseTest;
-use Elastica\Type\Mapping;
 
 class ResponseTest extends BaseTest
 {
@@ -19,15 +19,12 @@ class ResponseTest extends BaseTest
     public function testResponse()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $mapping = new Mapping($type, [
+        $index->setMapping(new  Mapping([
             'name' => ['type' => 'text'],
             'dtmPosted' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
-        ]);
-        $type->setMapping($mapping);
+        ]));
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, ['name' => 'nicolas ruflin', 'dtmPosted' => '2011-06-23 21:53:00']),
             new Document(2, ['name' => 'raul martinez jr', 'dtmPosted' => '2011-06-23 09:53:00']),
             new Document(3, ['name' => 'rachelle clemente', 'dtmPosted' => '2011-07-08 08:53:00']),
@@ -38,7 +35,7 @@ class ResponseTest extends BaseTest
         $query->setQuery(new MatchAll());
         $index->refresh();
 
-        $resultSet = $type->search($query);
+        $resultSet = $index->search($query);
 
         $engineTime = $resultSet->getResponse()->getEngineTime();
         $shardsStats = $resultSet->getResponse()->getShardsStatistics();
@@ -55,10 +52,9 @@ class ResponseTest extends BaseTest
     public function testIsOk()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
 
         $doc = new Document(1, ['name' => 'ruflin']);
-        $response = $type->addDocument($doc);
+        $response = $index->addDocument($doc);
 
         $this->assertTrue($response->isOk());
     }
@@ -69,13 +65,11 @@ class ResponseTest extends BaseTest
     public function testIsOkMultiple()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
         $docs = [
             new Document(1, ['name' => 'ruflin']),
             new Document(2, ['name' => 'ruflin']),
         ];
-        $response = $type->addDocuments($docs);
+        $response = $index->addDocuments($docs);
 
         $this->assertTrue($response->isOk());
     }

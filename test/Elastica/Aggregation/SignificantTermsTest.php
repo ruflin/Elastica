@@ -5,9 +5,9 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\SignificantTerms;
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
 use Elastica\Query\Terms;
-use Elastica\Type\Mapping;
 
 class SignificantTermsTest extends BaseAggregationTest
 {
@@ -17,17 +17,17 @@ class SignificantTermsTest extends BaseAggregationTest
         $colors = ['blue', 'blue', 'red', 'red', 'green', 'yellow', 'white', 'cyan', 'magenta'];
         $temperatures = [1500, 1500, 1500, 1500, 2500, 3500, 4500, 5500, 6500, 7500, 7500, 8500, 9500];
 
-        $mapping = new Mapping($index->getType('_doc'), [
+        $mapping = new Mapping([
             'color' => ['type' => 'keyword'],
             'temperature' => ['type' => 'keyword'],
         ]);
-        $index->getType('_doc')->setMapping($mapping);
+        $index->setMapping($mapping);
 
         $docs = [];
         for ($i = 0; $i < 250; ++$i) {
             $docs[] = new Document($i, ['color' => $colors[$i % \count($colors)], 'temperature' => $temperatures[$i % \count($temperatures)]]);
         }
-        $index->getType('_doc')->addDocuments($docs);
+        $index->addDocuments($docs);
         $index->refresh();
 
         return $index;

@@ -12,13 +12,13 @@ class ParentId extends AbstractQuery
     /**
      * ParentId constructor.
      *
-     * @param string     $type
-     * @param int|string $id
-     * @param bool       $ignoreUnmapped
+     * @param string $type           Name of the child relationship mapped for the join field
+     * @param string $id             ID of the parent document. The query will return child documents of this parent document.
+     * @param bool   $ignoreUnmapped Indicates whether to ignore an unmapped type and not return any documents instead of an error. Defaults to false.
      */
-    public function __construct(string $type, $id, bool $ignoreUnmapped = false)
+    public function __construct(string $type, string $id, bool $ignoreUnmapped = false)
     {
-        $this->setType($type);
+        $this->setRelationshipType($type);
         $this->setId($id);
         $this->setIgnoreUnmapped($ignoreUnmapped);
     }
@@ -26,15 +26,15 @@ class ParentId extends AbstractQuery
     /**
      * @param string $type
      */
-    private function setType(string $type)
+    private function setRelationshipType(string $type)
     {
         $this->setParam('type', $type);
     }
 
     /**
-     * @param int|string $id
+     * @param string $id
      */
-    private function setId($id)
+    private function setId(string $id)
     {
         $this->setParam('id', $id);
     }

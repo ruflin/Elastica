@@ -5,8 +5,8 @@ namespace Elastica\Test\Aggregation;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
-use Elastica\Type\Mapping;
 
 class CardinalityTest extends BaseAggregationTest
 {
@@ -14,14 +14,12 @@ class CardinalityTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $mapping = new Mapping($index->getType('_doc'), [
-            'color' => [
-                'type' => 'keyword',
-            ],
+        $mapping = new Mapping([
+            'color' => ['type' => 'keyword'],
         ]);
-        $index->getType('_doc')->setMapping($mapping);
+        $index->setMapping($mapping);
 
-        $index->getType('_doc')->addDocuments([
+        $index->addDocuments([
             new Document(1, ['color' => 'blue']),
             new Document(2, ['color' => 'blue']),
             new Document(3, ['color' => 'red']),

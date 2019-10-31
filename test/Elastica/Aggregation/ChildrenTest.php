@@ -4,10 +4,9 @@ namespace Elastica\Test\Aggregation;
 
 use Elastica\Aggregation\Children;
 use Elastica\Aggregation\Terms;
-use Elastica\Document;
 use Elastica\Index;
+use Elastica\Mapping;
 use Elastica\Query;
-use Elastica\Type\Mapping;
 
 class ChildrenTest extends BaseAggregationTest
 {
@@ -17,14 +16,7 @@ class ChildrenTest extends BaseAggregationTest
         $index = $client->getIndex('testaggregationchildren');
         $index->create(['settings' => ['index' => ['number_of_shards' => 2, 'number_of_replicas' => 1]]], true);
 
-        $type = $index->getType(\strtolower(
-            'typechildren'.\uniqid()
-        ));
-
-        $mapping = new Mapping();
-        $mapping->setType($type);
-
-        $mapping = new Mapping($type, [
+        $mapping = new Mapping([
             'text' => ['type' => 'keyword'],
             'name' => ['type' => 'keyword'],
             'my_join_field' => [
@@ -35,51 +27,51 @@ class ChildrenTest extends BaseAggregationTest
             ],
         ]);
 
-        $type->setMapping($mapping);
+        $index->setMapping($mapping);
         $index->refresh();
 
-        $doc1 = new Document(1, [
+        $doc1 = $index->createDocument(1, [
             'text' => 'this is the 1st question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], $type->getName());
+        ]);
 
-        $doc2 = new Document(2, [
+        $doc2 = $index->createDocument(2, [
             'text' => 'this is the 2nd question',
             'my_join_field' => [
                 'name' => 'question',
             ],
-        ], $type->getName());
+        ]);
 
         $index->addDocuments([$doc1, $doc2]);
 
-        $doc3 = new Document(3, [
+        $doc3 = $index->createDocument(3, [
             'text' => 'this is an top answer, the 1st',
             'name' => 'rico',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 1,
             ],
-        ], $type->getName(), $index->getName());
+        ]);
 
-        $doc4 = new Document(4, [
+        $doc4 = $index->createDocument(4, [
             'text' => 'this is an top answer, the 2nd',
             'name' => 'fede',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], $type->getName(), $index->getName());
+        ]);
 
-        $doc5 = new Document(5, [
+        $doc5 = $index->createDocument(5, [
             'text' => 'this is an answer, the 3rd',
             'name' => 'fede',
             'my_join_field' => [
                 'name' => 'answer',
                 'parent' => 2,
             ],
-        ], $type->getName(), $index->getName());
+        ]);
 
         $this->_getClient()->addDocuments([$doc3, $doc4, $doc5], ['routing' => 1]);
         $index->refresh();

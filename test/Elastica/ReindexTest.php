@@ -8,7 +8,6 @@ use Elastica\Index;
 use Elastica\Query\Match;
 use Elastica\Reindex;
 use Elastica\Script\Script;
-use Elastica\Type;
 
 class ReindexTest extends Base
 {
@@ -18,15 +17,11 @@ class ReindexTest extends Base
     public function testReindex()
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
-        $this->_addDocs($oldIndex->getType('_doc'), 10);
+        $this->_addDocs($oldIndex, 10);
 
         $newIndex = $this->_createIndex('idx2', true, 2);
 
         $reindex = new Reindex($oldIndex, $newIndex);
-        $this->assertInstanceOf(
-            Index::class,
-            $newIndex
-        );
         $response = $reindex->run();
         $newIndex->refresh();
 
@@ -37,33 +32,10 @@ class ReindexTest extends Base
     /**
      * @group functional
      */
-    public function testReindexTypeOption()
-    {
-        $oldIndex = $this->_createIndex('', true, 2);
-        $type1 = $oldIndex->getType('_doc');
-
-        $this->_addDocs($type1, 10);
-
-        $newIndex = $this->_createIndex(null, true, 2);
-
-        $reindex = new Reindex($oldIndex, $newIndex, [
-            Reindex::TYPE => '_doc',
-        ]);
-        $reindex->run();
-        $newIndex->refresh();
-
-        $this->assertEquals($oldIndex->count(), $newIndex->count());
-    }
-
-    /**
-     * @group functional
-     */
     public function testReindexOpTypeOptionWithProceedSetOnConflicts()
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
-        $type1 = $oldIndex->getType('_doc');
-
-        $docs1 = $this->_addDocs($type1, 10);
+        $docs1 = $this->_addDocs($oldIndex, 10);
 
         $subDocs1 = \array_splice($docs1, 0, 5);
 
@@ -90,9 +62,7 @@ class ReindexTest extends Base
     public function testReindexOpTypeOptionWithProceedSetOnConflictStop()
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
-        $type1 = $oldIndex->getType('_doc');
-
-        $docs1 = $this->_addDocs($type1, 10);
+        $docs1 = $this->_addDocs($oldIndex, 10);
 
         $subDocs1 = \array_splice($docs1, 0, 5);
 
@@ -118,8 +88,7 @@ class ReindexTest extends Base
     public function testReindexWithQueryOption()
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
-        $type1 = $oldIndex->getType('_doc');
-        $docs1 = $this->_addDocs($type1, 10);
+        $docs1 = $this->_addDocs($oldIndex, 10);
 
         $newIndex = $this->_createIndex('idx2', true, 2);
 
@@ -144,8 +113,7 @@ class ReindexTest extends Base
     public function testReindexWithSizeOption()
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
-        $type1 = $oldIndex->getType('_doc');
-        $this->_addDocs($type1, 10);
+        $this->_addDocs($oldIndex, 10);
 
         $newIndex = $this->_createIndex('idx2', true, 2);
 
@@ -164,7 +132,7 @@ class ReindexTest extends Base
     public function testReindexWithFalseSetOnWaitForCompletion()
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
-        $this->_addDocs($oldIndex->getType('reindexTest'), 10);
+        $this->_addDocs($oldIndex, 10);
 
         $newIndex = $this->_createIndex('idx2', true, 2);
 
@@ -187,7 +155,7 @@ class ReindexTest extends Base
     public function testReindexWithScript()
     {
         $oldIndex = $this->_createIndex('idx1', true, 2);
-        $this->_addDocs($oldIndex->getType('reindexTest'), 10);
+        $this->_addDocs($oldIndex, 10);
 
         $newIndex = $this->_createIndex('idx2', true, 2);
 
@@ -228,21 +196,15 @@ class ReindexTest extends Base
         }
     }
 
-    /**
-     * @param Type $type
-     * @param int  $docs
-     *
-     * @return array
-     */
-    private function _addDocs(Type $type, $docs)
+    private function _addDocs(Index $index, int $docs): array
     {
         $insert = [];
         for ($i = 1; $i <= $docs; ++$i) {
             $insert[] = new Document($i, ['id' => $i, 'key' => 'value']);
         }
 
-        $type->addDocuments($insert);
-        $type->getIndex()->refresh();
+        $index->addDocuments($insert);
+        $index->refresh();
 
         return $insert;
     }

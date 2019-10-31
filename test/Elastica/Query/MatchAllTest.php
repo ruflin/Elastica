@@ -35,7 +35,7 @@ class MatchAllTest extends BaseTest
 
         $doc1 = new Document(1, ['name' => 'kimchy']);
         $doc2 = new Document(2, ['name' => 'ruflin']);
-        $index1->getType('_doc')->addDocuments([$doc1, $doc2]);
+        $index1->addDocuments([$doc1, $doc2]);
 
         $index1->refresh();
 

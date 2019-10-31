@@ -15,7 +15,7 @@ class SumBucketTest extends BaseAggregationTest
     {
         $index = $this->_createIndex();
 
-        $index->getType('_doc')->addDocuments([
+        $index->addDocuments([
             Document::create(['page' => 1, 'likes' => 180]),
             Document::create(['page' => 1, 'likes' => 156]),
             Document::create(['page' => 2, 'likes' => 155]),

@@ -3,6 +3,7 @@
 namespace Elastica\Test\Query;
 
 use Elastica\Document;
+use Elastica\Mapping;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\MatchAll;
 use Elastica\Query\Term;
@@ -16,16 +17,14 @@ class FunctionScoreTest extends BaseTest
     protected function _getIndexForTest()
     {
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        $type->setMapping([
+        $index->setMapping(new Mapping([
             'name' => ['type' => 'text', 'index' => 'false'],
             'location' => ['type' => 'geo_point'],
             'price' => ['type' => 'float'],
             'popularity' => ['type' => 'integer'],
-        ]);
+        ]));
 
-        $type->addDocuments([
+        $index->addDocuments([
             new Document(1, [
                 'name' => "Mr. Frostie's",
                 'location' => [['lat' => 32.799605, 'lon' => -117.243027], ['lat' => 32.792744, 'lon' => -117.2387341]],

@@ -48,37 +48,18 @@ class DocumentTest extends BaseTest
      */
     public function testToArray()
     {
-        $id = 17;
+        $id = '17';
         $data = ['hello' => 'world'];
-        $type = '_doc';
         $index = 'textindex';
 
-        $doc = new Document($id, $data, $type, $index);
+        $doc = new Document($id, $data, $index);
 
-        $result = ['_index' => $index, '_type' => $type, '_id' => $id, '_source' => $data];
+        $result = [
+            '_index' => $index,
+            '_id' => $id,
+            '_source' => $data,
+        ];
         $this->assertEquals($result, $doc->toArray());
-    }
-
-    /**
-     * @group unit
-     */
-    public function testSetType()
-    {
-        $document = new Document();
-        $document->setType('_doc');
-
-        $this->assertEquals('_doc', $document->getType());
-
-        $index = new Index($this->_getClient(), 'index');
-        $type = $index->getType('_doc');
-
-        $document->setIndex('index2');
-        $this->assertEquals('index2', $document->getIndex());
-
-        $document->setType($type);
-
-        $this->assertEquals('index', $document->getIndex());
-        $this->assertEquals('_doc', $document->getType());
     }
 
     /**
@@ -88,17 +69,13 @@ class DocumentTest extends BaseTest
     {
         $document = new Document();
         $document->setIndex('index2');
-        $document->setType('_doc');
 
         $this->assertEquals('index2', $document->getIndex());
-        $this->assertEquals('_doc', $document->getType());
 
         $index = new Index($this->_getClient(), 'index');
 
         $document->setIndex($index);
-
         $this->assertEquals('index', $document->getIndex());
-        $this->assertEquals('_doc', $document->getType());
     }
 
     /**

@@ -69,8 +69,6 @@ class QueryTest extends AbstractDSLTest
             ['key', ['lat' => 1, 'lon' => 0], 'distance']
         );
         $this->_assertImplemented($queryDSL, 'exists', Query\Exists::class, ['field']);
-        $this->_assertImplemented($queryDSL, 'type', Query\Type::class, []);
-        $this->_assertImplemented($queryDSL, 'type', Query\Type::class, ['type']);
         $this->_assertImplemented($queryDSL, 'span_term', Query\SpanTerm::class, []);
         $this->_assertImplemented($queryDSL, 'span_multi_term', Query\SpanMulti::class, []);
         $this->_assertImplemented($queryDSL, 'span_near', Query\SpanNear::class, []);

@@ -6,7 +6,17 @@ All notable changes to this project will be documented in this file based on the
 
 ### Backward Compatibility Breaks
 * The `\Elastica\Query::$_suggest` property has been renamed to `$hasSuggest` and is now private, it should not be used from extending classes [#1679](https://github.com/ruflin/Elastica/pull/1679)   
+* `\Elastica\Document` expects a string as ID, not an int [#1672](https://github.com/ruflin/Elastica/pull/1672).
 * Removed `\Elastica\Query\GeohashCell` query, use `\Elastica\Query\GeoBoundingBox` instead [#1672](https://github.com/ruflin/Elastica/pull/1672).
+* Deprecated usage of `\Elastica\Type` class, `\Elastica\Index` class must be used instead [#1666](https://github.com/ruflin/Elastica/pull/1666)
+* Removed `\Elastica\Type` class, `\Elastica\Index` class must be used instead [#1666](https://github.com/ruflin/Elastica/pull/1666)
+* Forced index names to string in `\Elastica\Index::__construct()` [#1666](https://github.com/ruflin/Elastica/pull/1666)
+* Removed Type query `\Elastica\Query\Type` [#1666](https://github.com/ruflin/Elastica/pull/1666)
+* Removed `Elastica\Type` class, `Elastica\Index` class must be used instead [#1666](https://github.com/ruflin/Elastica/pull/1666)
+* Removed `type` handling from `Elastica\Search` class [#1666](https://github.com/ruflin/Elastica/pull/1666)
+* Removed `type` handling from `Elastica\Bulk` and `Elastica\Bulk\Action` classes [#1666](https://github.com/ruflin/Elastica/pull/1666)
+* Forced index names to string in `Elastica\Index::__construct()` [#1666](https://github.com/ruflin/Elastica/pull/1666)
+* Removed Type query `Elastica\Query\Type` [#1666](https://github.com/ruflin/Elastica/pull/1666)
 * Dropped support for PHP 7.0
 * \Elastica\AbstractUpdateAction::getOptions( $fields ) no longer supports the $underscore parameter, option names must match what elasticsearch expects.
 * Removed no longer supported \Elastica\Query\QueryString::setAutoGeneratePhraseQueries( $bool ) [#1622](https://github.com/ruflin/Elastica/pull/1622)

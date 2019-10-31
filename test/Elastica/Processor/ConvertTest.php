@@ -70,18 +70,12 @@ class ConvertTest extends BasePipelineTest
         $pipeline->addProcessor($append)->create();
 
         $index = $this->_createIndex();
-        $type = $index->getType('_doc');
-
-        // Add document to normal index
-        $doc1 = new Document(null, ['name' => 'ruflin', 'type' => 'elastica', 'foo' => '5.290']);
-        $doc2 = new Document(null, ['name' => 'nicolas', 'type' => 'elastica', 'foo' => '6.908']);
-
         $bulk = new Bulk($index->getClient());
         $bulk->setIndex($index);
-        $bulk->setType($type);
 
         $bulk->addDocuments([
-            $doc1, $doc2,
+            new Document(null, ['name' => 'ruflin', 'type' => 'elastica', 'foo' => '5.290']),
+            new Document(null, ['name' => 'nicolas', 'type' => 'elastica', 'foo' => '6.908']),
         ]);
         $bulk->setRequestParam('pipeline', 'my_custom_pipeline');
 
