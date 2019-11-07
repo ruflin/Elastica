@@ -24,6 +24,7 @@ use Elastica\Aggregation\Nested;
 use Elastica\Aggregation\Percentiles;
 use Elastica\Aggregation\Range;
 use Elastica\Aggregation\ReverseNested;
+use Elastica\Aggregation\Sampler;
 use Elastica\Aggregation\ScriptedMetric;
 use Elastica\Aggregation\SerialDiff;
 use Elastica\Aggregation\SignificantTerms;
@@ -552,5 +553,18 @@ class Aggregation implements DSL
     public function adjacency_matrix(string $name): AdjacencyMatrix
     {
         return new AdjacencyMatrix($name);
+    }
+
+    /** sampler aggregation.
+     *
+     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-sampler-aggregation.html
+     *
+     * @param string $name
+     *
+     * @return Sampler
+     */
+    public function sampler($name): Sampler
+    {
+        return new Sampler($name);
     }
 }
