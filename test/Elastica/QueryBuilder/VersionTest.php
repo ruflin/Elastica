@@ -20,7 +20,7 @@ class VersionTest extends BaseTest
         ];
 
         $versions = [
-            new Version\Version240(),
+            new Version\Version700(),
             new Version\Latest(),
         ];
 
